@@ -19,6 +19,8 @@ needs:
   AA_cn4_region_roles: [D_zone_topology]        # role fronts need zone-graph regions
 
 effect_classes:
+  BV_m13_liveness: restraint
+  TF4_turtle_fallback_expiry: restraint
   D_zone_topology: capability
   E_engt_transport: capability
   H_influence_layers: capability
@@ -79,8 +81,22 @@ effect_classes:
   BU_harvester_logistics: restraint
   BT_expansion_prebuild: restraint
   BP_effective_unit_value: neutral    # learned arsenal weight feed into the unit builder (a3a4); sibling weight feeds AP_tier1_priors / I_derived_unit_weights are neutral
+  BP_squad_desire: restraint           # LEARN-P6 stance provider replaces the squad state machine and can pick Defend/Retreat/Regroup over Attack = a hold (M13: any hold part makes the group a restraint); merge gap from a55954c1
+  BY_crawl_safety: restraint           # refuses optional crawl links when unsafe; same class reasoning as BV_m13_liveness / TF4_turtle_fallback_expiry
+  BZ_production_scaling: capability
+  CB_frontier_observe: neutral         # P3a read-only stage-machine shadow; emits outpost_stage v2 rows on TELEMETRY-V2; moves no behaviour (same class as AI_radar_contacts / BK_squad_order_dedup)
+  BR_learn_fight: restraint            # learned engage/retreat thresholds can hold attacks (LEARN-FIGHT; renamed from BV_ — the prefix already belongs to BV_m13_liveness)
+  BX_context_providers: neutral        # P4 telemetry-only context vectors; anonymous rows on their own channel — same class as CB_frontier_observe / AI_radar_contacts
 
 groups:
+  BV_m13_liveness:
+    SquadManagerBotModuleCA:
+      AttackLivenessEnabled: true
+    UnitBuilderBotModuleCA:
+      BankSaturationCash: 1        # arm flag only; the cash bar is the tier's BotLimits.BankSaturationCash
+  TF4_turtle_fallback_expiry:       # Default-off bounded terminal-pressure fallback; no campaign adoption approval.
+    MasterAiBotModule:
+      UseTurtleFallbackExpiry: true
   # SHIPPED 2026-10-01 as master defaults after the INC-1+2+3 A/B (all 13-3, 81% vs ctrl 12-4, 75%): former groups
   # A_squad_tactics, B_ownership_engineers_missions, C_f1_frans_services (C on every genericbot tier, §19.1).
   # Still OFF on master, for the next increment A/B:
@@ -334,3 +350,21 @@ groups:
       Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
     SquadManagerBotModuleCA:
       UseSquadDesire: true
+  BY_crawl_safety:   # P3-0, arms CRAWL-SAFETY gates (parity floor, scout-first, contested-front cover/escort, loss-park) on the optional crawl link; default-off in ai.yaml; DESIGN_2026-10-12_protected_frontier s7.1
+    ExpansionPlannerBotModule:
+      UseCrawlSafety: true
+  BZ_production_scaling:         # PRODUCTION-SCALING + MULTI-MCV (maintainer task): banked cash held over the difficulty line while every unit queue is busy — or net income per producer over the line — queues another production building for the least-provisioned queue type (starved first; ProductionTypeLimit, the cash floor and pause votes unchanged); plus up to ScalingMcvMaxExtra extra construction MCVs while windowed income holds over the line, a far field is free and the army-parity floor admits. Also parks MCV site handouts whose deploy annulus holds no placeable cell (MCV-EXPAND-IDLE H1). genericbot-only via SwitchCondition / genericbot-gated instances; off = bit-identical
+    BaseBuilderBotModuleCA:
+      SwitchCondition: genericbot    # shared @generic instance serves classicbot too — the F2/BT pattern (classic stays the A/B reference)
+      UseProductionScaling: true
+    ExpansionPlannerBotModule:
+      UseProductionScaling: true
+  CB_frontier_observe:               # P3a — read-only shadow of the protected-frontier stage machine; emits outpost_stage events on the TELEMETRY-V2 channel. Changes no gameplay flag/claim/RNG/order. Draft.
+    ExpansionPlannerBotModule:
+      UseFrontierObservation: true
+  BR_learn_fight:                    # LEARN-FIGHT rows 1-3: arms frozen offline fight thresholds; genericbot only, classic has no provider
+    GrantConditionOnBotOwner@fightlearning:
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
+  BX_context_providers:              # CONTEXT-PROVIDERS (task 01a11190): arms ContextFeatureProviderBotModule - public-map + seen-side opponent feature vectors, anonymous schema-1 JSONL on cameo-ai-context.jsonl via AiLogFileAppender + writer election. Read-only provider: no orders, no RNG, no gameplay consumer, no own fog reader. Off = module never enabled = bit-identical
+    GrantConditionOnBotOwner@contextfeatures:
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech

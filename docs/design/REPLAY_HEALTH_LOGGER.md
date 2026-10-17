@@ -163,3 +163,116 @@ activation change, checker change or engine/source pin change is included. Actua
 tick0/callback/pulse/end ordering, capability/census/terminal coverage, mounted
 parity and CPU/allocation/disk cost, Coordinator dual-gate wiring and fresh
 reservation remain adoption gates. No runtime capture or launch was performed.
+
+2026-10-12 logger-gates closure (Devin-Integrator, on master ebea34c82 which
+already contains the reviewed restack 7ca7e9159 byte-identical):
+
+- Per-cancellation own-queue lookup is now amortized: the recorder caches a
+  canonical (producer, group) -> queue_id index built once per world tick on the
+  first proven cancellation (BuildCancellationQueueIndex over own configured
+  ProductionQueue traits, ResolveCancellationQueueId for O(1) binds). The index
+  is capped at MaximumQueues; duplicate producer/group ownership resolves null;
+  a queue created mid-tick after the index resolves null — all fail-closed,
+  canonical evidence semantics unchanged. Replaces the per-cancel world scan.
+- Coverage/order fixtures extended through the pinned consumer: an off-grid
+  terminal (pulse/cancel/pulse/end all landing at tick 137, not a 50 multiple)
+  returns OBSERVED_HEALTHY; a terminal end 87 ticks after the last pulse returns
+  UNKNOWN (terminal watermark uncovered); a first pulse at tick 37 returns
+  UNKNOWN (capture must start at tick zero). A same-tick double-observe state
+  test pins callback interleaving as complete; PulseDue(-1) is false.
+- Dual-gate campaign wiring landed in ab_campaign_analyzer.py: the new
+  --econ-health-dir loads economy_invariants reports as an independent family
+  (econ_games) alongside --health-dir (replay_health). Each armed family gets
+  its own per-seat verdict through family_view + health_verdict; verdicts
+  combine under worst_verdict (BLOCK > SCHEMA_MISMATCH > MISSING > UNKNOWN >
+  HEALTHY). A game pools only when every armed checker is HEALTHY for every
+  expected seat; foreign-policy reports in a family's view stay SCHEMA_MISMATCH.
+  The report gains econ_armed/econ_policy; invalidation reasons name the
+  failing checker family. Missing dirs keep the loud-warning opt-in posture.
+- Bounds unchanged: activation still deliberately incomplete; no YAML mount,
+  no runtime capture, no launch, no measured runtime cost. The dual gate is
+  analyzer-side tooling only — it does not mount the recorder or claim live
+  coverage.
+
+2026-10-13 QUEUE-REMOVAL-DISCRIMINATOR (01a13686, Devin-Developer; campaign
+blocker B; source+tests only, no build/run/push — awaiting exact-SHA review and
+DevOps admission):
+
+- Removed terminals carry a cause class resolved event-locally at the emit
+  tick (BaseBuilderQueueEvalCA.RemovalCauseClass, world-free): Elimination (seat
+  ended), Destruction (producer dead/disposed — kill, sell, demolish and
+  transform all ClearQueue and are not separable mod-side), Captured (producer
+  live but owned by another player — OnOwnerChanged -> ClearQueue is
+  unconditional), Unbuildable (item absent from its own live, owned,
+  still-observed queue's BuildableItems — the exact set CancelUnbuildableItems
+  diffs to evict), else None.
+- The evidence classifier admits Destruction/Elimination/Captured on a Removed
+  as proven cause -> Observation (benign, never MarkIncomplete); a Removed
+  with no resolved episode and any other class — None, or the diagnostic-only
+  Unbuildable — stays UNKNOWN, fail-closed. Canonical cancel records
+  (EconomyCancellationEvidence) are untouched: the classes only ever appear on
+  Removed-kind queue-observation rows, and Unbuildable maps to no canonical
+  string at all, so the pinned economy_invariants.py whitelist needs no change.
+- BotQueuePendingTerminal.MaxInFlightTicks 8 -> 24: the RCA measured
+  PlaceBuilding intent->removal wire latency of 12-19 ticks across the
+  ra1/m1/m2 sentinel episodes, so every placement pending expired before its
+  order applied and the proof window could never arm. The bound covers the
+  worst observed latency plus margin and still bounds pending retention; cancel
+  pendings still never confirm on disappearance.
+- queueSeen gates the Unbuildable rung: a stale watch (queue left observation)
+  on a live, owned producer carries no buildability evidence and stays UNKNOWN.
+- The "coincident-unbuildability residual" named at the 2026-10-13 review is
+  CLOSED by demotion, not waived. DISCRIMINATOR-REPAIR (01a13908) implements
+  Sol's adjudication (fleet receipt
+  ADJUDICATION_2026-10-14_removed_discriminator_6ccc0fad0_sol.md): absence
+  from the observed buildable set is not a receipt that CancelUnbuildableItems
+  evicted or migrated this item — the routine is cached-set gated
+  (unchanged set returns early) and prefers upgrade replacement, so an
+  uninstrumented removal plus prerequisite loss before the observer samples
+  produces the identical observation. Unbuildable remains serialized on the
+  raw queue-observation row as a diagnostic predicate; the evidence latch
+  classifies it UNKNOWN like None. A future event-local receipt — an
+  engine-side eviction signal, or a same-queue same-tick substitution tying
+  queue/item/episode to the exact upgraded successor — is the only path back
+  to admission.
+- Still unprovable without an engine-side seam (kept UNKNOWN, documented for
+  the admission gate): sold vs killed vs demolished vs transformed producers
+  (identical observable state — all Destruction); a transform's successor actor
+  (inferring it is banned correlation); buildability flicker that restores
+  before the next probe tick (item reads buildable -> UNKNOWN); name-only
+  pending intent bound to a same-name removal. ep53-class episodes (item
+  removed from a live, owned, observed queue while still buildable) remain
+  UNKNOWN by construction.
+
+2026-10-14 supported-profiles contract (Devin-Developer; task 01a13916 —
+option (c) of the coordinator's SITUATIONS-INSTRUMENTATION design. Maintainer
+ruling R1 adopted the sole-finding pre-registration; this entry records the
+stream coverage contract the ruling rests on):
+
+- cameo-ai-situations.jsonl is a genericbot-stack stream by design.
+  AiSituationLogWriter.BuildLog serializes MasterAiBotModule.PendingSituations
+  and skips any seat without the module; MasterAiBotModule carries
+  RequiresCondition: genericbot (mods/cameo/ai/ai.yaml), so classic-stack
+  seats deterministically produce no situation rows. replay_health reports
+  that absence as finding MISSING_SITUATIONS with status UNKNOWN — a
+  structural coverage gap, not corruption and not a pass.
+- cameo-ai-placements.jsonl, cameo-ai-matches.jsonl and the per-game
+  cameo-ai-players-<uid>.jsonl enumerate every IsLoggableBot seat
+  (player.IsBot && !NonCombatant; matches additionally covers takeover
+  seats) independent of module stack. MasterAi-sourced optional fields —
+  e.g. expansion telemetry on placement rows — are simply absent on
+  non-genericbot seats; row presence does not certify full field coverage.
+- Any future profile that lacks MasterAiBotModule re-triggers
+  MISSING_SITUATIONS by construction. Extending emission to such profiles
+  was rejected: a real row requires the genericbot brain's PendingSituations
+  producer (i.e. mutating that seat's module stack), and a fabricated or
+  marker-only row would be parsed by downstream tools as real data — worse
+  than absent.
+- Verdict-layer handling lives outside this document: under maintainer
+  ruling R1 (fleet RULINGS_2026-10-14_maintainer.md), a classic-seat
+  replay_health UNKNOWN whose sole finding is MISSING_SITUATIONS is a
+  recorded coverage diagnostic, non-blocking; any other finding on either
+  seat remains blocking. A sole-finding UNKNOWN does not certify the
+  placement/match semantics the checker skipped — the admission gate must
+  independently require match/roster/terminal/integrity and canonical
+  per-seat economy checks to pass.

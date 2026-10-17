@@ -3,8 +3,8 @@
 
 Runs two serial same-seed baseline-vs-baseline 1v1 cells, samples only the
 OpenRA process whose command line names that cell's support directory, and
-stops at 3 GiB by default. A bounded higher diagnostic stop may be explicitly
-selected up to 9.5 GiB when host RAM headroom is proven. It does not create an
+stops at the measured headless peak plus 3 GiB by default. The stop is
+constrained by the host hard reserve. It does not create an
 execution manifest or authorize campaign jobs.
 """
 from __future__ import annotations
@@ -23,17 +23,19 @@ import shutil
 import signal
 
 import campaign_runner as runner
+import ab_campaign_pilot as pilot
+import campaign_deployment_guard as deployment_guard
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 OUT = ROOT / "results" / "campaign-a5-memory-diagnostic-20261010-sol-advice"
-BASELINE = "964cdb630b1514e1c1a0baed55cbdbc427d5fc11"
+BASELINE = "68be89ca0650faaedde2cedd649aa0ac75aa17bf"
 MEMORY_FIX = "173038d7881fe45d012a05d2a37ebd7b17f85ffe"
-ENGINE = "6da7fce14da541180c6baddd6925118fbef65b94"
+ENGINE = "723f50f9b1f98e463b55219288fba7a843f84307"
 SEED = 1337
 CAP_TICK = 16000
 POLL = 0.25
 WALL = 900
-PROCESS_STOP = int(3.0 * 1024**3)
+PROCESS_STOP = int(8.24 * 1024**3)
 HOST_SOFT_STOP = int(7.0 * 1024**3)
 HOST_HARD_FLOOR = 3 * 1024**3
 HOST_LAUNCH_HEADROOM = 1 * 1024**3
@@ -48,6 +50,14 @@ TRACE_BUFFER_MB = 32
 TRACE_MAX_OUTPUT = 64 * 1024**2
 TRACE_DURATION = "00:00:00:10"
 TRACE_ENABLED = True
+ALLOW_STALE_BUILD = False
+
+
+def binary_hashes() -> dict[str, str]:
+	"""Record every campaign-pinned executable/DLL; missing evidence is fatal."""
+	return {str(path.relative_to(ROOT)): file_sha256(path) for path in (
+		ROOT / "engine/bin/OpenRA.exe", ROOT / "engine/bin/OpenRA.Game.dll",
+		ROOT / "engine/bin/OpenRA.Mods.Cameo.dll")}
 
 
 def admission_ok(available_physical: int, available_commit: int) -> bool:
@@ -184,7 +194,9 @@ def run_cell(index: int) -> dict:
 		str(OUT / "a5_fixed_tick_map"),
 		"--allow-temporary-template",
 		"--time-limit", "1", "--retries", "0", "--stall-timeout", "180",
-		"--keep-variants", "--render", "fast", "--support-dir", str(support)]
+		"--keep-variants", "--render", "headless", "--support-dir", str(support)]
+	if ALLOW_STALE_BUILD:
+		command.append("--allow-stale-build")
 	env = os.environ.copy()
 	env["CAMEO_DEV_SEED"] = str(SEED)
 	start = time.monotonic()
@@ -198,10 +210,27 @@ def run_cell(index: int) -> dict:
 	trace_files = {}
 	trace_errors = {}
 	stop_reason = None
+	valid_memory_sample_count = 0
+	deployment_reader = deployment_guard.MarkerReader()
+	deployment_deadline = deployment_guard.DeploymentDeadline(start, runner.DEPLOYMENT_WALL_TIMEOUT)
+	deployment = {"verified": False, "check_tick": None, "reported_seat_count": None,
+		"expected_seat_count": None, "seats": {}, "missing": []}
 	with stdout_path.open("w", encoding="utf-8") as stdout:
 		proc = subprocess.Popen(command, cwd=ROOT, env=env, stdout=stdout, stderr=subprocess.STDOUT)
 		while proc.poll() is None:
 			time.sleep(POLL)
+			chunk = deployment_reader.read(support / "Logs" / "lua.log")
+			deployment = deployment_guard.merge(deployment, deployment_guard.parse(chunk))
+			world_tick = deployment_guard.highest_world_tick(deployment, support / "Logs" / "debug.log")
+			if deployment_deadline.should_abort(deployment, ["BotA", "BotB"], world_tick, time.monotonic()):
+				stop_reason = "INVALID_NO_DEPLOY"
+			if stop_reason == "INVALID_NO_DEPLOY":
+				proc.terminate()
+				try: proc.wait(timeout=15)
+				except subprocess.TimeoutExpired: proc.kill(); proc.wait()
+				try: kill_cell_processes(process_rows(support), support)
+				except Exception as cleanup_error: stop_reason += ":CLEANUP_FAILED:" + str(cleanup_error)
+				break
 			try:
 				rows = process_rows(support)
 			except (OSError, RuntimeError, subprocess.SubprocessError, json.JSONDecodeError) as exc:
@@ -218,7 +247,24 @@ def run_cell(index: int) -> dict:
 				except Exception as cleanup_error:
 					stop_reason += ":CLEANUP_FAILED:" + str(cleanup_error)
 				break
-			host = host_memory_status()
+			try:
+				host = host_memory_status()
+			except (OSError, RuntimeError, ValueError):
+				# Host-RAM telemetry is required while a game is live. Recheck the
+				# cell-scoped process set to distinguish a genuine exit race from a
+				# missing sample on a running game; failed identity reads fail closed.
+				try:
+					still_running = bool(process_rows(support))
+				except (OSError, RuntimeError, subprocess.SubprocessError, json.JSONDecodeError):
+					still_running = True
+				if (not still_running and deployment_guard.sampling_failure_is_exit_race(
+							stop_reason, process_exited=True, valid_sample_count=valid_memory_sample_count)):
+					break
+				if stop_reason is None:
+					stop_reason = "MEMORY_SAMPLE_FAILED"
+				if rows:
+					kill_cell_processes(rows, support)
+				break
 			if not rows:
 				samples.append({"utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
 					"pid": None, **host, **log_snapshot(support)})
@@ -228,14 +274,22 @@ def run_cell(index: int) -> dict:
 					private = runner.private_bytes(pid)
 					working_set = process_working_set(pid)
 				except (OSError, RuntimeError):
-					# A naturally exited child can disappear between the CIM query and
-					# memory sample; a still-present one makes the probe fail closed.
-					if any(int(x["ProcessId"]) == pid for x in process_rows(support)):
+					# The game may exit between the process snapshot and memory query.
+					# Re-snapshot before classifying; a failed identity query is not
+					# evidence that the process exited.
+					try:
+						still_present = any(int(x["ProcessId"]) == pid for x in process_rows(support))
+					except (OSError, RuntimeError, subprocess.SubprocessError, json.JSONDecodeError):
+						still_present = True
+					if (not still_present and deployment_guard.sampling_failure_is_exit_race(
+							stop_reason, process_exited=True, valid_sample_count=valid_memory_sample_count)):
+						continue
+					if stop_reason is None:
 						stop_reason = "MEMORY_SAMPLE_FAILED"
-						kill_cell_processes(rows, support)
-						break
-					continue
+					kill_cell_processes(rows, support)
+					break
 				peak = max(peak, private)
+				valid_memory_sample_count += 1
 				if pid not in counters:
 					counter_path = support / f"System.Runtime-{pid}.csv"
 					stderr_path = support / f"System.Runtime-{pid}.stderr.log"
@@ -304,6 +358,9 @@ def run_cell(index: int) -> dict:
 				proc.kill(); proc.wait()
 		else:
 			proc.wait()
+	if valid_memory_sample_count == 0 and stop_reason is None:
+		# Host-only snapshots do not prove that the game itself was ever measured.
+		stop_reason = "MEMORY_SAMPLE_FAILED"
 	for pid, trace in traces.items():
 		try:
 			trace.wait(timeout=12)
@@ -350,6 +407,9 @@ def run_cell(index: int) -> dict:
 	replays = list((support / "Replays").rglob("*.orarep")) if (support / "Replays").is_dir() else []
 	log_text = server_log.read_text(encoding="utf-8", errors="replace") if server_log.is_file() else ""
 	lua_text = lua_log.read_text(encoding="utf-8", errors="replace") if lua_log.is_file() else ""
+	deployment = deployment_guard.merge(deployment, deployment_guard.parse(lua_text))
+	deployment["verified"] = deployment_guard.valid(deployment, ["BotA", "BotB"])
+	if not deployment["verified"] and stop_reason is None: stop_reason = "INVALID_NO_DEPLOY"
 	seed_pin_verified = f"CAMEO DEV SEED pinned - RandomSeed={SEED} (parity harness)" in log_text
 	records_verified = len(match_rows) == 2 and len({r.get("game_uid") for r in match_rows}) == 1 and all((r.get("player") or {}).get("outcome") in ("won", "lost") for r in match_rows)
 	duration_ticks = match_rows[0].get("duration_ticks") if records_verified else None
@@ -359,14 +419,15 @@ def run_cell(index: int) -> dict:
 	valid_game = (summary.get("matches") == 1 and summary.get("completed") == 1
 		and batch_result.get("status") == "ok" and batch_result.get("exit_code") == 0 and batch_result.get("attempts") == 1
 		and not summary.get("new_exceptions") and seed_pin_verified and records_verified
-		and censored_cap_verified and len(replays) == 1 and stop_reason is None and peak < PROCESS_STOP)
+		and censored_cap_verified and deployment["verified"] and len(replays) == 1 and stop_reason is None and peak < PROCESS_STOP)
 	if not valid_game and stop_reason is None:
 		stop_reason = "A5_RECEIPT_VALIDATION_FAILED"
 	return {"cell": cell, "seed": SEED, "source_head": subprocess.check_output(
 		["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
-		"baseline_parent": BASELINE, "engine_version": (ROOT / "engine/VERSION").read_text().strip(),
-		"binary_sha256": {str(p.relative_to(ROOT)): file_sha256(p) for p in (
-			ROOT / "engine/bin/OpenRA.exe", ROOT / "engine/bin/OpenRA.Mods.Cameo.dll") if p.is_file()},
+		"baseline_parent": BASELINE, "engine_version": pilot.read_engine_version(ROOT / "engine/VERSION"),
+		"binary_sha256": binary_hashes(),
+		"render_mode": command[command.index("--render") + 1],
+		"render_mode_derived_from": {"command_render_argument": command[command.index("--render") + 1]},
 		"exit_code": proc.returncode, "stop_reason": stop_reason or "PROCESS_EXIT",
 		"wall_seconds": round(time.monotonic() - start, 2), "peak_private_bytes": peak,
 		"stop_threshold_bytes": PROCESS_STOP, "host_soft_stop_bytes": HOST_SOFT_STOP,
@@ -382,18 +443,82 @@ def run_cell(index: int) -> dict:
 		"fingerprint_id": summary.get("fingerprint_id"), "seed_pin_verified": seed_pin_verified,
 		"records_verified": records_verified, "duration_ticks": duration_ticks,
 		"cap_tick": CAP_TICK, "observed_cap_tick": observed_cap_tick, "censored_cap_verified": censored_cap_verified,
-		"natural_below_cap": natural_below_cap, "replay_count": len(replays), "valid_game": valid_game}
+		"natural_below_cap": natural_below_cap, "deployment": deployment,
+		"replay_count": len(replays), "valid_game": valid_game}
+
+
+def aggregate_run_config(receipt: dict, runs: list[dict]) -> dict:
+	"""Derive guardrail fields from complete matching run records, never defaults."""
+	if len(runs) != 2: raise ValueError("re-aggregation requires exactly two run records")
+	configs = []
+	for run in runs:
+		for key in ("render_mode", "ceiling_bytes", "host_hard_floor_bytes", "stop_threshold_bytes", "allocation_trace_policy"):
+			if key not in run: raise ValueError(f"run record missing {key}")
+		policy = run["allocation_trace_policy"]
+		if not isinstance(policy, dict) or type(policy.get("enabled")) is not bool:
+			raise ValueError("run record missing allocation trace enabled flag")
+		if run["render_mode"] != "headless": raise ValueError("A5 run is not headless")
+		for key in ("ceiling_bytes", "host_hard_floor_bytes", "stop_threshold_bytes"):
+			if type(run[key]) is not int or run[key] <= 0: raise ValueError(f"invalid run {key}")
+		if run["stop_threshold_bytes"] > run["ceiling_bytes"]: raise ValueError("stop exceeds hard ceiling")
+		configs.append((run["render_mode"], run["ceiling_bytes"], run["host_hard_floor_bytes"], run["stop_threshold_bytes"], policy["enabled"]))
+	if configs[0] != configs[1]: raise ValueError("A5 run configurations disagree")
+	result = dict(receipt)
+	result.update(render_mode=configs[0][0], process_private_cap_bytes=configs[0][1],
+		host_emergency_floor_bytes=configs[0][2], process_stop_threshold_bytes=configs[0][3],
+		allocation_trace_enabled=configs[0][4], pair=runs)
+	return result
+
+
+def reaggregate(source: pathlib.Path, expected_sha256: str, destination: pathlib.Path) -> dict:
+	"""Offline reconstruction. Source receipts/logs are immutable hashed inputs."""
+	if destination.exists(): raise ValueError("re-aggregate output exists; preserve existing evidence")
+	if not re.fullmatch(r"[0-9a-fA-F]{64}", expected_sha256 or ""):
+		raise ValueError("source raw receipt SHA256 is required")
+	actual_sha = file_sha256(source)
+	if actual_sha != expected_sha256.lower(): raise ValueError("source raw receipt SHA256 mismatch")
+	raw = json.loads(source.read_text(encoding="utf-8-sig"))
+	if not isinstance(raw.get("pair"), list) or len(raw["pair"]) != 2:
+		raise ValueError("raw receipt lacks the two run records")
+	runs = []; inputs = []
+	for index, embedded in enumerate(raw["pair"], 1):
+		cell = f"run-{index:02d}"
+		path = source.parent / f"{cell}.receipt.json"
+		run = json.loads(path.read_text(encoding="utf-8-sig"))
+		if run != embedded or run.get("cell") != cell:
+			raise ValueError("raw aggregate and per-run receipt differ")
+		proof = {"run_receipt": str(path.resolve()), "sha256": file_sha256(path)}
+		# Legacy emitter lacked a renderer field. The actual engine graphics
+		# record is authoritative; never infer this from today's CLI defaults.
+		if "render_mode" not in run:
+			graphics = source.parent / cell / "Logs" / "graphics.log"
+			if not graphics.is_file() or "Null platform: headless window" not in graphics.read_text(encoding="utf-8", errors="strict"):
+				raise ValueError("run record lacks authoritative headless graphics evidence")
+			run = dict(run, render_mode="headless", render_mode_derived_from={"graphics_log_sha256": file_sha256(graphics)})
+			proof.update(graphics_record=str(graphics.resolve()), graphics_sha256=file_sha256(graphics))
+		runs.append(run); inputs.append(proof)
+	result = aggregate_run_config(raw, runs)
+	result["reaggregation"] = {"mode": "NO_LAUNCH_FROM_EXISTING_RECORDS", "source_raw_receipt_sha256": actual_sha,
+		"source_raw_receipt": str(source.resolve()), "input_records": inputs,
+		"emitter_sha256": file_sha256(pathlib.Path(__file__))}
+	destination.parent.mkdir(parents=True, exist_ok=True)
+	with destination.open("x", encoding="utf-8") as stream:
+		stream.write(json.dumps(result, indent=2) + "\n")
+	return result
 
 
 def main() -> int:
-	global OUT, PROCESS_STOP, HOST_SOFT_STOP, HOST_HARD_FLOOR, TRACE_ENABLED, CAP_TICK
+	global OUT, PROCESS_STOP, HOST_SOFT_STOP, HOST_HARD_FLOOR, TRACE_ENABLED, CAP_TICK, ALLOW_STALE_BUILD
 	parser = argparse.ArgumentParser(description=__doc__)
+	parser.add_argument("--reaggregate-source", type=pathlib.Path, help="existing raw aggregate; strictly offline, no launch")
+	parser.add_argument("--source-raw-sha256", help="required raw aggregate SHA256 for offline reconstruction")
+	parser.add_argument("--reaggregate-output", type=pathlib.Path, help="new output receipt; never overwrite source")
 	parser.add_argument("--execute-a5-diagnostic", action="store_true",
 		help="explicitly run two bounded A5 qualification cells; never campaign outcomes")
 	parser.add_argument("--output-dir", type=pathlib.Path, default=OUT,
 		help="new, non-existing artifact directory; existing evidence is never overwritten")
-	parser.add_argument("--process-stop-gib", type=float, default=3.0,
-		help="PID-scoped diagnostic stop threshold; maximum 9.5 GiB for current host headroom")
+	parser.add_argument("--process-stop-gib", type=float, default=8.24,
+		help="PID-scoped stop threshold: measured headless peak plus 3 GiB")
 	parser.add_argument("--host-soft-stop-gib", type=float, default=7.0,
 		help="stop before the hard free-RAM floor")
 	parser.add_argument("--host-hard-floor-gib", type=float, default=3.0,
@@ -402,18 +527,31 @@ def main() -> int:
 		help="disable gc-verbose profiler for parity runs; System.Runtime counters remain enabled")
 	parser.add_argument("--tick-cap", type=int, default=16000,
 		help="fixed world-tick cap for A5 parity; keeps the qualification below natural match end")
+	parser.add_argument("--allow-stale-build", action="store_true",
+		help="forward to the batch harness when this worktree's mod sources are "
+			"newer than the pinned engine/bin dlls only by checkout timestamp "
+			"(e.g. hardlink-materialized engine); receipt records binary sha256")
 	args = parser.parse_args()
+	if args.reaggregate_source is not None:
+		if args.execute_a5_diagnostic or args.reaggregate_output is None:
+			raise ValueError("re-aggregate requires new output and forbids execute mode")
+		reaggregate(args.reaggregate_source, args.source_raw_sha256, args.reaggregate_output)
+		print(json.dumps({"mode": "NO_LAUNCH_REAGGREGATE", "output": str(args.reaggregate_output)}))
+		return 0
+	if args.source_raw_sha256 or args.reaggregate_output:
+		raise ValueError("re-aggregate arguments require an existing source receipt")
 	if not 1000 <= args.tick_cap < 17000:
 		raise RuntimeError("A5 parity cap must be in [1000, 17000) to stay below observed natural end")
 	CAP_TICK = args.tick_cap
-	if not (3.0 <= args.process_stop_gib <= 9.5):
-		raise RuntimeError("process stop must be between 3 and 9.5 GiB pending larger host headroom")
+	if not (3.0 <= args.process_stop_gib <= 8.24):
+		raise RuntimeError("process stop must not exceed the measured headless peak plus 3 GiB")
 	if not (3.0 <= args.host_hard_floor_gib < args.host_soft_stop_gib):
 		raise RuntimeError("host hard floor must be >=3 GiB and strictly below host soft stop")
 	PROCESS_STOP = int(args.process_stop_gib * 1024**3)
 	HOST_HARD_FLOOR = int(args.host_hard_floor_gib * 1024**3)
 	HOST_SOFT_STOP = int(args.host_soft_stop_gib * 1024**3)
 	TRACE_ENABLED = not args.no_allocation_trace
+	ALLOW_STALE_BUILD = args.allow_stale_build
 	output_dir = args.output_dir if args.output_dir.is_absolute() else ROOT / args.output_dir
 	OUT = output_dir.resolve()
 	if not args.execute_a5_diagnostic:
@@ -429,7 +567,7 @@ def main() -> int:
 		raise RuntimeError("gameplay/tooling source is dirty; commit the exact probe before qualification")
 	if subprocess.run(["git", "merge-base", "--is-ancestor", BASELINE, "HEAD"], cwd=ROOT).returncode:
 		raise RuntimeError("pinned baseline is not an ancestor")
-	if (ROOT / "engine/VERSION").read_text().strip() != ENGINE:
+	if pilot.read_engine_version(ROOT / "engine/VERSION") != ENGINE:
 		raise RuntimeError("engine pin mismatch")
 	host = host_memory_status()
 	if not admission_ok(host["available_physical_bytes"], host["commit_available_bytes"]):
@@ -438,8 +576,7 @@ def main() -> int:
 		raise RuntimeError(f"System.Runtime counter tool missing: {COUNTERS_EXE}")
 	if not TRACE_EXE.is_file():
 		raise RuntimeError(f"gc-verbose trace tool missing: {TRACE_EXE}")
-	if not (ROOT / "engine/bin/OpenRA.exe").is_file() or not (ROOT / "engine/bin/OpenRA.Mods.Cameo.dll").is_file():
-		raise RuntimeError("engine executable or Cameo DLL missing")
+	binary_hashes()  # Validate all three binaries before any launch.
 	if process_rows(OUT):
 		raise RuntimeError("unexpected OpenRA process already names probe output")
 	if OUT.exists():
@@ -447,7 +584,6 @@ def main() -> int:
 	OUT.mkdir(parents=True)
 	map_dir = OUT / "a5_fixed_tick_map"
 	shutil.copytree(ROOT / "mods/cameo/maps/ai_duel_gate_20260928", map_dir)
-	import ab_campaign_pilot as pilot
 	map_monitor = pilot.install_campaign_monitor(map_dir, 2, cap_tick=CAP_TICK, sample_interval=2000,
 		rules_filename="rules.yaml", seat_names=["BotA", "BotB"])
 	results = []
@@ -482,14 +618,14 @@ def main() -> int:
 	receipt = {"purpose": "A5_FIXED_TICK_PARITY_QUALIFICATION_ONLY_NOT_CAMPAIGN_OUTCOME",
 		"cap_tick": CAP_TICK, "map_monitor": map_monitor,
 		"baseline_commit": BASELINE, "source_head": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
-		"binary_sha256": {str(p.relative_to(ROOT)): file_sha256(p) for p in (
-			ROOT / "engine/bin/OpenRA.exe", ROOT / "engine/bin/OpenRA.Mods.Cameo.dll")},
+		"binary_sha256": binary_hashes(),
 		"dotnet_counters_sha256": file_sha256(COUNTERS_EXE),
 		"engine_version": ENGINE, "seed": SEED, "pair": results,
 		"order_stream_verdict": order_verdict, "system_openra_process_count": processes_left.stdout.strip(),
 		"a5_diagnostic_passed": len(results) == 2 and all(r["valid_game"] for r in results) and
 			results[0].get("fingerprint_id") == results[1].get("fingerprint_id") and order_verdict in ("IDENTICAL", "IDENTICAL_TAIL_FLUSH"),
 		"campaign_gate_passed": False}
+	if len(results) == 2: receipt = aggregate_run_config(receipt, results)
 	(OUT / "A5_memory_probe_receipt.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
 	print(json.dumps({"output": str(OUT), "pair_count": len(results),
 		"order_stream_verdict": order_verdict, "campaign_gate_passed": receipt["campaign_gate_passed"]}, indent=2))

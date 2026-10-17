@@ -15,22 +15,28 @@ import json
 import os
 import pathlib
 import re
+import shutil
 import sqlite3
 import subprocess
 import sys
 import tempfile
 import time
+import zipfile
 from contextlib import contextmanager
 
 import ab_campaign_pilot as pilot
+import campaign_deployment_guard as deployment_guard
+import run_ai_match_batch as batch
 
 CAP_TICK = 45000
-PRIVATE_LIMIT = int(10.5 * 1024**3)     # decided cell ceiling (was 6.5 GiB; startup burst peaks ~9.5 GiB)
-FREE_RAM_FLOOR = int(15.5 * 1024**3)    # admission floor: cap + ~5 GiB host margin
+PRIVATE_LIMIT = pilot.PROCESS_CAP_BYTES
+FREE_RAM_FLOOR = pilot.RAM_FLOOR_BYTES
 FREE_RAM_HARD_FLOOR = 3 * 1024**3       # runtime stop: available RAM below this kills the cell
+DEPLOYMENT_WALL_TIMEOUT = 420           # missing-marker bound: a guarded game that still lacks
+                                        # verified tick-100 deployment evidence is killed here
 FREE_RAM_SOFT_FLOOR = 4 * 1024**3       # soft floor: telemetry threshold for low-RAM pressure
 ACTOR_SAMPLE_INTERVAL = 5000
-SLOT_PARALLEL_SMALL = 3
+SLOT_PARALLEL_SMALL = 2
 SMALL_TEAM_MAX = 2
 ACTOR_SAMPLE_RE = re.compile(r"AB_CAMPAIGN_ACTOR_SAMPLE tick=(\d+) actor_count=(\d+)")
 RECEIPT_SCHEMA = pathlib.Path(__file__).with_name("ab_campaign_receipt.schema.json")
@@ -44,12 +50,50 @@ def sha(path: pathlib.Path) -> str:
 	return h.hexdigest()
 
 
+def campaign_map_directory(game_support: pathlib.Path) -> pathlib.Path:
+	"""Resolve the UserMaps location declared by the batch launcher."""
+	return game_support / pathlib.Path(batch.USER_MAP_DIR)
+
+
 def parse_actor_samples(text: str) -> list[dict]:
 	return [{"world_tick": int(t), "actor_count": int(n)} for t, n in ACTOR_SAMPLE_RE.findall(text)]
 
 
+def link_mod_tree(src: pathlib.Path, dst: pathlib.Path, skip_top=()):
+	"""Clone a mod directory into dst using hardlinks: real files with no reparse
+	points, so this host's untrusted-mount-point policy cannot reject them.
+	Top-level names in skip_top are omitted (the dual-arm ai/ payload is written
+	separately). Falls back to a byte copy when a link is unavailable."""
+	for dirpath, dirnames, filenames in os.walk(src):
+		rel = pathlib.Path(dirpath).relative_to(src)
+		if not rel.parts:
+			dirnames[:] = [d for d in dirnames if d not in skip_top]
+		elif rel.parts[0] in skip_top:
+			dirnames[:] = []
+			continue
+		target = dst / rel
+		target.mkdir(parents=True, exist_ok=True)
+		for name in filenames:
+			s = pathlib.Path(dirpath) / name
+			d = target / name
+			if d.exists(): d.unlink()
+			try: os.link(s, d)
+			except OSError: shutil.copy2(s, d)
+
+
 def pid_alive(pid: int | None) -> bool:
 	if type(pid) is not int or pid <= 0: return False
+	if os.name == "nt":
+		# os.kill(pid, 0) is not a safe probe on Windows; ask the kernel instead.
+		handle = ctypes.windll.kernel32.OpenProcess(0x0400, False, pid)  # PROCESS_QUERY_LIMITED_INFORMATION
+		if not handle:
+			return False
+		try:
+			code = ctypes.c_ulong()
+			ok = ctypes.windll.kernel32.GetExitCodeProcess(handle, ctypes.byref(code))
+			return bool(ok) and code.value == 259  # STILL_ACTIVE
+		finally:
+			ctypes.windll.kernel32.CloseHandle(handle)
 	try:
 		os.kill(pid, 0); return True
 	except PermissionError:
@@ -60,11 +104,47 @@ def pid_alive(pid: int | None) -> bool:
 		return False
 
 
+def _path_variants(path: pathlib.Path) -> list[str]:
+	"""Canonical spellings of a path for command-line identity checks. Windows
+	process CommandLine entries may carry 8.3 short forms (e.g. AEDIST~1) on
+	ANY prefix of the path — %TEMP% resolves to C:\\Users\\AEDIST~1\\... while
+	tempfile appends the child dir in long form, producing a mixed
+	short-prefix + long-suffix spelling that matches neither the fully
+	resolved nor the fully-shortened path. Emit the resolved long form, every
+	short(ancestor prefix)+long suffix combination, and the full short form
+	so a literal case-insensitive containment check covers all of them. Missing
+	any spelling silently refuses the kill and leaves the orphan alive."""
+	resolved = pathlib.Path(path).resolve()
+	variants = [str(resolved)]
+	if os.name == "nt":
+		def _short(p: pathlib.Path):
+			try:
+				buf = ctypes.create_unicode_buffer(32768)
+				if ctypes.windll.kernel32.GetShortPathNameW(str(p), buf, 32768):
+					return buf.value or None
+			except (OSError, AttributeError, ValueError):
+				pass
+			return None
+		for prefix in resolved.parents:
+			short = _short(prefix)
+			if short:
+				rel = str(resolved.relative_to(prefix))
+				variants.append(short + ("\\" + rel if rel else ""))
+		short_full = _short(resolved)
+		if short_full:
+			variants.append(short_full)
+	return list(dict.fromkeys(variants))
+
+
 def kill_owned_pid(pid: int, expected_executable: pathlib.Path, expected_support: pathlib.Path) -> bool:
 	"""Terminate only an orphan whose process image is the pinned OpenRA executable."""
 	if os.name == "nt":
-		payload = base64.b64encode(json.dumps({"pid":pid,"exe":str(expected_executable.resolve()),"support":str(expected_support.resolve())}).encode("utf-16le")).decode("ascii")
-		script = "$v=[Text.Encoding]::Unicode.GetString([Convert]::FromBase64String('" + payload + "')) | ConvertFrom-Json; $p=Get-CimInstance Win32_Process -Filter ('ProcessId = ' + [int]$v.pid); if ($p -and $p.ExecutablePath -ieq $v.exe -and $p.CommandLine.Contains($v.support)) { Stop-Process -Id ([int]$p.ProcessId) -Force; exit 0 }; exit 1"
+		payload = base64.b64encode(json.dumps({"pid":pid,"exe":_path_variants(expected_executable),"support":_path_variants(expected_support)}).encode("utf-16le")).decode("ascii")
+		script = ("$v=[Text.Encoding]::Unicode.GetString([Convert]::FromBase64String('" + payload + "')) | ConvertFrom-Json;"
+			"$p=Get-CimInstance Win32_Process -Filter ('ProcessId = ' + [int]$v.pid);"
+			"$exeOk=$false; foreach ($e in @($v.exe)) { if ($p.ExecutablePath -ieq $e) { $exeOk=$true } };"
+			"$supOk=$false; foreach ($s in @($v.support)) { if ($p.CommandLine -and $p.CommandLine.IndexOf($s,[StringComparison]::OrdinalIgnoreCase) -ge 0) { $supOk=$true } };"
+			"if ($p -and $exeOk -and $supOk) { Stop-Process -Id ([int]$p.ProcessId) -Force; exit 0 }; exit 1")
 		try:
 			result = subprocess.run(["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", script], capture_output=True, timeout=15)
 			return result.returncode == 0
@@ -79,6 +159,53 @@ def kill_owned_pid(pid: int, expected_executable: pathlib.Path, expected_support
 		p.kill(); p.wait(timeout=10); return True
 	except Exception:
 		return False
+
+
+def resolve_game_pid(process, support_dir: pathlib.Path, timeout_seconds: float = 25.0) -> int:
+	"""Return the real game process id.
+
+	bin/OpenRA.exe is the Windows launcher: it spawns short-lived children
+	and then the actual game (a child OpenRA.exe whose command line carries
+	this cell's Engine.SupportDir). The Popen pid is only the launcher
+	(~25 MiB); memory caps and PID-scoped cleanup must target the real game.
+	Requires the same support-tagged child to survive two consecutive polls
+	so transient launcher children are not mistaken for the game. Falls back
+	to the launcher's pid when no stable child appears.
+	"""
+	if os.name != "nt":
+		return process.pid
+	tag = str(support_dir.resolve())
+	probe = (
+		"Get-CimInstance Win32_Process -Filter \"Name='OpenRA.exe'\" | "
+		"Where-Object { $_.CommandLine -and $_.CommandLine.Contains('" + tag.replace("'", "''") + "') } | "
+		"Select-Object ProcessId,ParentProcessId,CommandLine | ConvertTo-Json -Compress")
+	deadline = time.monotonic() + timeout_seconds
+	candidate = None
+	while time.monotonic() < deadline:
+		if process.poll() is not None:
+			return process.pid
+		try:
+			out = subprocess.run(
+				["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", probe],
+				capture_output=True, text=True, timeout=15).stdout
+			procs = json.loads(out) if out.strip() else []
+			if isinstance(procs, dict):
+				procs = [procs]
+			for proc in procs:
+				pid = int(proc.get("ProcessId") or 0)
+				if proc.get("ParentProcessId") != process.pid or pid <= 0:
+					continue
+				if "Engine.LaunchPath" not in (proc.get("CommandLine") or ""):
+					continue  # launcher-spawned transient, not the game re-exec
+				if not pid_alive(pid):
+					continue
+				if pid == candidate:
+					return pid  # stable across two polls: not a transient
+				candidate = pid
+		except (OSError, subprocess.SubprocessError, ValueError):
+			pass
+		time.sleep(1.5)
+	return candidate if candidate and pid_alive(candidate) else process.pid
 
 
 def available_ram_bytes() -> int:
@@ -205,6 +332,11 @@ class ResumeQueue:
 			cur = db.execute("UPDATE cells SET status=?,updated=?,receipt_path=? WHERE cell_id=? AND status='RUNNING'", (status, time.time(), str(receipt_path), cell_id))
 			if cur.rowcount != 1: raise ValueError("cell not owned by this queue runner")
 
+	def park_planned(self, reason: str):
+		if reason != "INVALID_NO_DEPLOY": raise ValueError("unsupported queue stop reason")
+		with self.connect() as db:
+			return db.execute("UPDATE cells SET status='PARKED_INVALID_NO_DEPLOY',updated=? WHERE status='PLANNED'", (time.time(),)).rowcount
+
 	def counts(self) -> dict[str, int]:
 		with self.connect() as db:
 			return dict(db.execute("SELECT status,count(*) FROM cells GROUP BY status").fetchall())
@@ -226,15 +358,54 @@ def atomic_receipt(path: pathlib.Path, receipt: dict):
 		if os.path.exists(temp_name): os.unlink(temp_name)
 
 
+def match_game_uid(match_rows: list) -> str | None:
+	"""Return the game_uid only when EVERY match row carries the same nonempty
+	string uid. A row missing the field (or carrying a non-string/empty value)
+	means the log cannot be attributed to this launch — treating the surviving
+	subset's uid as authoritative would credit rows that may belong to another
+	game — so the whole set is rejected."""
+	if not match_rows:
+		return None
+	uids = {row.get("game_uid") for row in match_rows if isinstance(row, dict)}
+	if len(uids) != 1:
+		return None
+	uid = next(iter(uids))
+	return uid if isinstance(uid, str) and uid else None
+
+
+def match_end_tick(match_rows: list) -> int | None:
+	"""Return the match's terminal world tick from duration_ticks, only when
+	EVERY match row carries the same nonnegative int. The record field is the
+	recorder's authoritative end-of-game tick; economy-timeline finals and
+	monitor samples are quantized and can underreport a natural early end."""
+	if not match_rows:
+		return None
+	ticks = {row.get("duration_ticks") for row in match_rows if isinstance(row, dict)}
+	if len(ticks) != 1:
+		return None
+	tick = next(iter(ticks))
+	return tick if type(tick) is int and tick >= 0 else None
+
+
+def completed_natural_tick(match_rows: list) -> int | None:
+	"""The authoritative pre-cap terminal tick for a completed game, or None.
+	A NATURAL classification needs it: missing, inconsistent, or cap-or-later
+	record durations can never be replaced by a quantized sample."""
+	tick = match_end_tick(match_rows)
+	return tick if tick is not None and tick < CAP_TICK else None
+
+
 def validate_receipt(receipt: dict) -> None:
 	"""Validate the producer's semantic invariants; JSON Schema is published alongside."""
 	if not isinstance(receipt, dict) or receipt.get("schema_version") != 1:
 		raise ValueError("receipt schema_version must be 1")
-	for key in ("campaign_id", "manifest_sha256", "baseline_commit", "engine_sha256", "switch", "setup_id", "pair_id", "seed", "seed_proof", "teams", "resolved_seats", "end_class", "end_reason", "winner_team", "world_tick", "cap", "memory", "runtime", "artifacts"):
+	for key in ("campaign_id", "manifest_sha256", "cell_id", "game_uid", "status", "seats", "seat_proof_source", "map_yaml_sha256", "control_side", "treatment_side", "arm_bot_types", "cap_marker", "cap_tick", "support_complete", "setup", "map_sha256", "pair", "game_in_pair", "duration_ticks", "peak_memory_bytes", "baseline_commit", "engine_sha256", "switch", "setup_id", "pair_id", "seed", "seed_proof", "teams", "resolved_seats", "end_class", "end_reason", "winner_team", "world_tick", "end_tick", "cap", "deployment", "memory", "runtime", "artifacts"):
 		if key not in receipt:
 			raise ValueError("receipt missing required field: " + key)
 	if receipt["end_class"] not in ("NATURAL", "CAP", "INCOMPLETE"):
 		raise ValueError("invalid end_class")
+	if receipt["end_class"] != "INCOMPLETE" and (not isinstance(receipt["game_uid"], str) or not receipt["game_uid"]):
+		raise ValueError("completed receipt requires nonempty game_uid")
 	if receipt["end_class"] != "NATURAL" and receipt["winner_team"] is not None:
 		raise ValueError("censored/incomplete receipt cannot name a winner")
 	if receipt["winner_team"] not in (None, "A", "B"):
@@ -245,16 +416,26 @@ def validate_receipt(receipt: dict) -> None:
 		raise ValueError("memory.samples must be a list")
 	if receipt["memory"].get("peak_private_bytes", 0) > PRIVATE_LIMIT and receipt["end_reason"] != "MEMORY_KILL":
 		raise ValueError("memory limit exceeded without MEMORY_KILL classification")
-	if receipt["end_class"] == "CAP" and not (receipt["cap"].get("marker_observed") is True and receipt["cap"].get("marker_tick") == CAP_TICK):
+	# The cap marker lands on the first game tick at/after the cap (45001 for
+	# cap 45000; A5 receipts observed the same +1 at cap 16000) — accept both.
+	if receipt["end_class"] == "CAP" and not (receipt["cap"].get("marker_observed") is True and receipt["cap"].get("marker_tick") in (CAP_TICK, CAP_TICK + 1)):
 		raise ValueError("CAP classification lacks valid cap evidence")
 	if receipt["end_class"] == "NATURAL" and (not isinstance(receipt["end_reason"], str) or receipt["winner_team"] is None):
 		raise ValueError("NATURAL classification lacks authoritative winner/end reason")
+	if receipt["end_class"] == "NATURAL" and not (type(receipt["end_tick"]) is int and receipt["end_tick"] < CAP_TICK):
+		raise ValueError("NATURAL classification lacks a pre-cap end_tick")
+	if receipt["end_class"] != "INCOMPLETE" and receipt["deployment"].get("verified") is not True:
+		raise ValueError("completed receipt lacks verified tick-100 deployment evidence")
 	if receipt["memory"].get("limit_private_bytes") != PRIVATE_LIMIT:
 		raise ValueError("receipt memory threshold differs from the frozen 10.5 GiB limit")
 	if receipt["memory"].get("peak_private_bytes", 0) >= PRIVATE_LIMIT and not (receipt["end_class"] == "INCOMPLETE" and receipt["end_reason"] == "MEMORY_KILL"):
 		raise ValueError("memory threshold reached without INCOMPLETE MEMORY_KILL")
 	if len(receipt["resolved_seats"]) != receipt["map"].get("required_seats"):
 		raise ValueError("resolved seat count differs from map proof")
+	seat_ids = [seat.get("seat_id") for seat in receipt["resolved_seats"] if isinstance(seat, dict)]
+	homes = [seat.get("home") for seat in receipt["resolved_seats"] if isinstance(seat, dict)]
+	if len(seat_ids) != len(set(seat_ids)) or len(homes) != len(set(homes)):
+		raise ValueError("resolved seats must be unique per seat_id/home")
 	for seat in receipt["resolved_seats"]:
 		if not isinstance(seat, dict) or any(k not in seat for k in ("seat_id", "team", "arm", "bot_type", "faction", "home", "spawn", "proof_source", "outcome", "metrics")):
 			raise ValueError("resolved seat is missing required proof/metric fields")
@@ -262,6 +443,34 @@ def validate_receipt(receipt: dict) -> None:
 			raise ValueError("resolved seat team/arm is invalid")
 		if not isinstance(seat["metrics"].get("timeline"), list):
 			raise ValueError("seat timeline must be a list")
+	deployment = receipt["deployment"]
+	if deployment.get("verified") is True and set(deployment.get("seats", {})) != set(homes):
+		raise ValueError("verified deployment seat set differs from resolved seats")
+	if len(set(deployment.get("missing", []))) != len(deployment.get("missing", [])):
+		raise ValueError("deployment missing-seat list must be unique")
+
+
+REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
+
+
+def verify_tools_only_ancestor(commit: str, source_commit: str) -> None:
+	"""Verify provenance in Git; receipt assertions cannot authorize a new baseline."""
+	if any(not isinstance(x, str) or not re.fullmatch(r"[0-9a-f]{40}", x) for x in (commit, source_commit)):
+		raise ValueError("A5 provenance requires exact commit SHA")
+	try:
+		ancestor = subprocess.run(["git", "merge-base", "--is-ancestor", commit, source_commit],
+			cwd=REPO_ROOT, capture_output=True, timeout=15)
+		if ancestor.returncode != 0: raise ValueError("A5 source/baseline is not an ancestor of manifest source")
+		diff = subprocess.run(["git", "diff", "--name-only", "-z", commit, source_commit, "--"],
+			cwd=REPO_ROOT, capture_output=True, timeout=15)
+		if diff.returncode != 0: raise ValueError("cannot verify A5 source diff")
+		paths = diff.stdout.decode("utf-8", errors="strict").split("\0")
+	except (OSError, subprocess.SubprocessError, UnicodeError) as error:
+		raise ValueError("cannot verify A5 provenance in Git") from error
+	for path in filter(None, paths):
+		if (not (path.startswith("tools/") or path.startswith("docs/") or path == "DEVELOPMENT_LOG.md")
+			or pathlib.PurePosixPath(path).suffix.lower() in (".cs", ".yaml", ".yml", ".lua", ".oramap")):
+			raise ValueError(f"A5 baseline differs in simulation/pin data: {path}")
 
 
 def execution_gate(manifest: dict, *, a5_receipt: dict | None, a5_receipt_sha256: str | None,
@@ -273,24 +482,73 @@ def execution_gate(manifest: dict, *, a5_receipt: dict | None, a5_receipt_sha256
 		raise ValueError("manifest source pin mismatch")
 	if manifest.get("pins", {}).get("engine_version") != engine_version:
 		raise ValueError("manifest engine pin mismatch")
-	if not isinstance(a5_receipt, dict) or a5_receipt.get("verdict") != "PASS" or a5_receipt.get("order_stream_verdict") not in ("IDENTICAL", "IDENTICAL_TAIL_FLUSH"):
+	if not isinstance(a5_receipt, dict) or a5_receipt.get("a5_diagnostic_passed") is not True or a5_receipt.get("order_stream_verdict") not in ("IDENTICAL", "IDENTICAL_TAIL_FLUSH"):
 		raise ValueError("exact-baseline A5 parity receipt required")
-	if a5_receipt.get("source_commit") != source_commit or a5_receipt.get("engine_version") != engine_version:
+	if a5_receipt.get("engine_version") != engine_version:
 		raise ValueError("A5 parity receipt pin mismatch")
+	for commit in {a5_receipt.get("source_head"), a5_receipt.get("baseline_commit")}:
+		verify_tools_only_ancestor(commit, source_commit)
 	if manifest.get("a5_parity_receipt_sha256") != a5_receipt_sha256:
 		raise ValueError("A5 parity receipt SHA mismatch")
-	if a5_receipt.get("seed_pin_verified") is not True or a5_receipt.get("run_count") != 2 or a5_receipt.get("cap_below_natural_end") is not True:
-		raise ValueError("A5 receipt lacks two pinned deterministic capped runs")
+	if a5_receipt.get("campaign_gate_passed") is not False or a5_receipt.get("render_mode") != "headless":
+		raise ValueError("A5 receipt is not qualification-only headless evidence")
+	if (a5_receipt.get("process_private_cap_bytes") != PRIVATE_LIMIT or
+		a5_receipt.get("host_emergency_floor_bytes") != FREE_RAM_HARD_FLOOR):
+		raise ValueError("A5 memory guardrails differ from the approved campaign policy")
+	pair = a5_receipt.get("pair")
+	if not isinstance(pair, list) or len(pair) != 2 or a5_receipt.get("seed") != manifest.get("seeds", [None])[0]:
+		raise ValueError("A5 receipt lacks the two planned same-seed runs")
+	if a5_receipt.get("system_openra_process_count") != "0":
+		raise ValueError("A5 receipt records a remaining OpenRA process")
+	binary_pins = manifest.get("binary_sha256", {})
+	receipt_binaries = {str(k).replace("\\", "/").removeprefix("engine/"): v
+		for k, v in a5_receipt.get("binary_sha256", {}).items()}
+	if receipt_binaries != binary_pins:
+		raise ValueError("A5 receipt binary SHA differs from the approved campaign pin")
+	for run in pair:
+		if (not isinstance(run, dict) or run.get("source_head") != a5_receipt.get("source_head") or
+			run.get("baseline_parent") != a5_receipt.get("baseline_commit") or run.get("engine_version") != engine_version or
+			run.get("exit_code") != 0 or run.get("stop_reason") != "PROCESS_EXIT" or
+			run.get("seed") != a5_receipt["seed"] or run.get("seed_pin_verified") is not True or
+			run.get("records_verified") is not True or run.get("valid_game") is not True or
+			run.get("censored_cap_verified") is not True or run.get("natural_below_cap") is not True or
+			run.get("cap_tick") != a5_receipt.get("cap_tick") or
+			run.get("observed_cap_tick") != a5_receipt.get("cap_tick", -1) + 1 or
+			run.get("replay_count") != 1 or not run.get("fingerprint_id") or
+			type(run.get("stop_threshold_bytes")) is not int or
+			not 0 < run["stop_threshold_bytes"] <= PRIVATE_LIMIT or run.get("ceiling_bytes") != PRIVATE_LIMIT or
+			not isinstance(run.get("allocation_trace_policy"), dict) or
+			run["allocation_trace_policy"].get("enabled") is not False or run.get("allocation_trace_files") != [] or
+			run.get("host_hard_floor_bytes") != FREE_RAM_HARD_FLOOR or
+			run.get("peak_private_bytes", PRIVATE_LIMIT) >= PRIVATE_LIMIT):
+			raise ValueError("A5 receipt contains an incomplete or unpinned capped run")
+		run_binaries = {str(k).replace("\\", "/").removeprefix("engine/"): v for k, v in run.get("binary_sha256", {}).items()}
+		if not run_binaries or run_binaries != binary_pins:
+			raise ValueError("A5 run binary SHA differs from the approved campaign pin")
+	if len({(run.get("seed"), run.get("fingerprint_id"), tuple(sorted(run.get("binary_sha256", {}).items()))) for run in pair}) != 1:
+		raise ValueError("A5 pair does not share an identical seed/fingerprint/binary")
 
 
 def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Path,
 				stall_log: pathlib.Path | None = None,
 				wall_timeout: int = 3000, stall_timeout: int = 180,
 				poll_seconds: float = 2.0, sample_callback=None,
+				watch_pid: int | None = None,
+				expected_executable: pathlib.Path | None = None,
+				expected_support: pathlib.Path | None = None,
+				required_seats=None, deployment_log: pathlib.Path | None = None,
 				clock=time.monotonic, sleep=time.sleep) -> dict:
-	"""Watch one owned process; any stop targets only the supplied Popen handle."""
+	"""Watch one owned process; any stop targets only the supplied Popen handle.
+
+	On Windows bin/OpenRA.exe is a launcher that spawns the real game as a
+	child; watch_pid lets the caller monitor/kill that child. Kill order is
+	scoped child first (identity-checked), then the launcher handle.
+	"""
 	if wall_timeout != 3000 or stall_timeout != 180 or poll_seconds <= 0:
 		raise ValueError("campaign watchdog bounds must remain 3000s/180s")
+	pid = watch_pid or process.pid
+	def alive() -> bool:
+		return pid_alive(pid) if watch_pid else process.poll() is None
 	start = clock(); deadline = start + wall_timeout
 	stall_log = stall_log or driver_log
 	last_log_mtime = stall_log.stat().st_mtime if stall_log.exists() else None
@@ -299,8 +557,11 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 	peak = 0
 	stop_reason = None
 	actor_offset = 0
+	deployment_reader = deployment_guard.MarkerReader()
+	deployment_deadline = deployment_guard.DeploymentDeadline(start, DEPLOYMENT_WALL_TIMEOUT)
 	last_actor = {"world_tick": None, "actor_count": None}
-	while process.poll() is None:
+	deployment = {"verified": False, "check_tick": None, "reported_seat_count": None, "expected_seat_count": None, "seats": {}, "missing": []}
+	while alive():
 		sleep(poll_seconds)
 		try:
 			mtime = stall_log.stat().st_mtime
@@ -310,15 +571,31 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 		except OSError:
 			pass
 		try:
-			private = private_bytes(process.pid)
+			private = private_bytes(pid)
 		except (OSError, RuntimeError):
-			stop_reason = "MEMORY_SAMPLE_FAILED"; break
+			# The PID may disappear after alive() and before private_bytes().
+			# A prior valid sample permits normal PROCESS_EXIT adjudication; with
+			# a live process or no prior sample, fail closed as before.
+			if deployment_guard.sampling_failure_is_exit_race(stop_reason,
+					process_exited=not alive(), valid_sample_count=len(private_samples)):
+				break
+			if stop_reason is None:
+				stop_reason = "MEMORY_SAMPLE_FAILED"
+			break
 		peak = max(peak, private)
 		if actor_log.exists():
 			with actor_log.open("r", encoding="utf-8", errors="replace") as actor_stream:
 				actor_stream.seek(actor_offset); chunk = actor_stream.read(); actor_offset = actor_stream.tell()
 				new_actors = parse_actor_samples(chunk)
 				if new_actors: last_actor = new_actors[-1]
+		if deployment_log is not None:
+			chunk = deployment_reader.read(pathlib.Path(deployment_log))
+			deployment = deployment_guard.merge(deployment, deployment_guard.parse(chunk))
+		if required_seats is not None:
+			world_tick_check = deployment_guard.highest_world_tick(deployment, stall_log,
+				extra_ticks=(last_actor["world_tick"],))
+			if deployment_deadline.should_abort(deployment, list(required_seats), world_tick_check, clock()):
+				stop_reason = "INVALID_NO_DEPLOY"
 		actor_count = last_actor["actor_count"]
 		world_tick = last_actor["world_tick"]
 		row = {"utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "world_tick": world_tick,
@@ -331,15 +608,35 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 				stop_reason = "MEMORY_SAMPLE_FAILED"; break
 			if requested_stop:
 				stop_reason = str(requested_stop); break
+		if stop_reason == "INVALID_NO_DEPLOY": break
 		if private >= PRIVATE_LIMIT: stop_reason = "MEMORY_KILL"; break
 		if clock() - last_activity > stall_timeout: stop_reason = "STALL"; break
 		if clock() >= deadline: stop_reason = "WALL_TIMEOUT"; break
-	if stop_reason is not None and process.poll() is None:
+	if not private_samples and stop_reason is None:
+		# A fast exit before the first memory read is not a measured execution.
+		stop_reason = "MEMORY_SAMPLE_FAILED"
+	# A normal process exit may flush the last Lua lines after the final poll.
+	# Never clear a safety stop or rehabilitate a cell killed by the deadline.
+	if deployment_log is not None and not alive():
+		deployment = deployment_guard.merge(deployment, deployment_guard.parse(deployment_reader.read(pathlib.Path(deployment_log))))
+		if required_seats is not None: deployment["verified"] = deployment_guard.valid(deployment, list(required_seats))
+	if required_seats is not None and not deployment["verified"] and stop_reason is None: stop_reason = "INVALID_NO_DEPLOY"
+	if watch_pid and alive():
+		if expected_executable is not None and expected_support is not None:
+			kill_owned_pid(pid, expected_executable, expected_support)
+		if process.poll() is None:
+			process.kill()
+	elif stop_reason is not None and process.poll() is None:
 		process.kill()  # Popen.kill terminates this process handle/PID only.
-		process.wait()
+	try:
+		process.wait(timeout=15)
+	except (subprocess.TimeoutExpired, TypeError):
+		pass
 	return {"end_reason": stop_reason or "PROCESS_EXIT", "exit_code": process.poll(),
 		"wall_seconds": max(0, clock() - start), "peak_private_bytes": peak,
-		"samples": private_samples, "pid_scoped_cleanup": process.poll() is not None}
+		"samples": private_samples,
+		"pid_scoped_cleanup": (not pid_alive(pid)) if watch_pid else (process.poll() is not None),
+		"watched_pid": pid, "deployment": deployment}
 
 
 def plan_summary(manifest: dict, manifest_sha: str, root: pathlib.Path, engine_root: pathlib.Path | None):
@@ -361,6 +658,104 @@ def _file_artifact(path: pathlib.Path | None, missing_reason: str | None = None)
 	return {"path": str(path), "sha256": sha(path), "missing_reason": None}
 
 
+def _bundle_provenance_doc(zipped: dict[str, pathlib.Path], cap_kind: str | None,
+						   cap_prov: dict | None, game_uid: str | None) -> dict | None:
+	"""Derived bundle-internal capture manifest (addendum §E). Binds every
+	zipped artifact by SHA-256 + the cell's game UID, carrying the covering
+	doc's capture kind and scoreable flag — a sentinel-bound cell's bundle
+	stays quarantined even after the zip is detached from the campaign leaf.
+	Provenance-named files never appear in the artifact table (self-ref rule).
+	Returns None when the cell is unbound (normal campaign state)."""
+	if cap_kind is None or not isinstance(cap_prov, dict):
+		return None
+	import capture_provenance
+	return {
+		"schema": capture_provenance.SCHEMA,
+		"capture_kind": cap_kind,
+		"scoreable": bool(cap_prov.get("scoreable")),
+		"game_uids": [game_uid] if isinstance(game_uid, str) else [],
+		"artifacts": {rel: sha(p) for rel, p in sorted(zipped.items())
+					  if not capture_provenance._is_provenance_name(
+						  pathlib.PurePosixPath(rel).name)},
+		"derived_by": "campaign_runner.support_bundle",
+	}
+
+
+def _is_support_artifact(game_root: pathlib.Path, path: pathlib.Path) -> bool:
+	"""Bundle predicate: cell evidence only — never the reproducible FullMods
+	tree (~33k links) and never an earlier support_bundle*.zip (a re-processed
+	cell must not self-bundle a stale archive)."""
+	try:
+		rel = path.relative_to(game_root)
+	except ValueError:
+		return False
+	return "FullMods" not in rel.parts and not path.name.startswith("support_bundle")
+
+
+def _cell_capture(game_root: pathlib.Path, game_support: pathlib.Path,
+				  support_root: pathlib.Path, match_log: pathlib.Path,
+				  game_uid: str | None) -> tuple[str | None, dict | None]:
+	"""Resolve this cell's capture provenance BEFORE the receipt is written.
+
+	Scans every resolvable provenance manifest (cell root, support dir, the
+	campaign support root, and any manifest nested under the cell's Support
+	tree) — never just the nearest. Returns (capture_kind, provenance_doc):
+	capture_kind is the bound kind ("sentinel_diagnostic", "match_batch") or
+	None when no manifest exists (a plain campaign cell never produced by the
+	batch driver); the doc is the bound manifest, embedded into the receipt.
+
+	Fail closed: a malformed manifest, a SHA mismatch on a bound artifact, or
+	two manifests disagreeing about this cell's quarantine state all raise —
+	the receipt is never written. A manifest counts as covering this cell when
+	it lists the game's UID or binds an artifact inside the cell tree.
+	"""
+	import capture_provenance
+
+	candidates = {game_root / capture_provenance.SIDECAR_NAME,
+				  game_support / capture_provenance.SIDECAR_NAME,
+				  support_root / capture_provenance.SIDECAR_NAME}
+	if game_support.is_dir():
+		candidates.update(game_support.rglob(capture_provenance.SIDECAR_NAME))
+	covering: list[tuple[pathlib.Path, dict, bool]] = []  # (path, doc, marked)
+	for manifest_path in sorted(candidates):
+		if not manifest_path.is_file():
+			continue
+		doc = capture_provenance._load_json(manifest_path)
+		if (doc is None or doc.get("capture_kind") not in capture_provenance.KNOWN_KINDS
+				or type(doc.get("scoreable")) is not bool
+				or not isinstance(doc.get("artifacts"), dict)):
+			raise ValueError(f"malformed capture provenance: {manifest_path}")
+		bound_uids = {u for u in (doc.get("game_uids") or []) if isinstance(u, str)}
+		covers = isinstance(game_uid, str) and game_uid in bound_uids
+		for rel, declared in doc["artifacts"].items():
+			if not isinstance(rel, str) or not isinstance(declared, str) or len(declared) != 64:
+				raise ValueError(f"malformed artifact entry in {manifest_path}: {rel!r}")
+			target = (manifest_path.parent / rel).resolve()
+			try:
+				inside_cell = target.is_relative_to(game_root.resolve())
+			except OSError:
+				inside_cell = False
+			if not inside_cell:
+				continue
+			covers = True
+			if target == match_log.resolve() and target.is_file():
+				if sha(target) != declared:
+					raise ValueError(f"capture provenance SHA mismatch for {match_log} in {manifest_path}")
+		if covers:
+			covering.append((manifest_path, doc,
+							 doc["capture_kind"] == capture_provenance.SENTINEL_KIND
+							 or doc["scoreable"] is False))
+	marked = [c for c in covering if c[2]]
+	if marked and len(marked) != len(covering):
+		raise ValueError(f"conflicting capture provenance for cell {game_root}: "
+						 + ", ".join(str(c[0]) for c in covering))
+	if marked:
+		return capture_provenance.SENTINEL_KIND, marked[0][1]
+	if covering:
+		return covering[0][1]["capture_kind"], covering[0][1]
+	return None, None
+
+
 def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 			engine_root: pathlib.Path, a5_receipt: dict, a5_receipt_sha256: str, support_root: pathlib.Path,
 			slot_db: pathlib.Path) -> dict:
@@ -370,7 +765,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	pilot.validate(manifest, root, engine_root, execution=True)
 	execution_gate(manifest, a5_receipt=a5_receipt, a5_receipt_sha256=a5_receipt_sha256,
 		source_commit=manifest["pins"]["source_commit"], engine_version=manifest["pins"]["engine_version"])
-	if available_ram_bytes() < FREE_RAM_FLOOR: raise ValueError("available RAM below 15.5 GiB admission floor")
+	if available_ram_bytes() < FREE_RAM_FLOOR: raise ValueError(f"available RAM below {FREE_RAM_FLOOR / 1024**3:.2f} GiB admission floor")
 	queue = ResumeQueue(support_root / "campaign_queue.sqlite", manifest_sha)
 	queue.install(pilot.make_jobs(manifest))
 	queue.recover_orphans(kill_game=lambda cell, pid: kill_owned_pid(pid, executable,
@@ -387,46 +782,85 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	game_root.mkdir(parents=True, exist_ok=False)
 	game_support = game_root / "Support"; game_support.mkdir()
 	logs = game_support / "Logs"; logs.mkdir()
-	maps = game_support / "UserMaps"; maps.mkdir()
-	overlay = game_root / "Overlay"; pilot.materialize_dual_arm_ai(root, overlay, job["switch"], manifest.get("ratchet_accepted_switches", []))
-	shutil.copyfile(root / "mods" / "cameo" / "mod.yaml", overlay / "mods" / "cameo" / "mod.yaml")
+	maps = game_support / "maps" / "cameo" / "{DEV_VERSION}"; maps.mkdir(parents=True)
+	# A thin Overlay/mods/cameo dir is rejected at the ContentPacks mount
+	# (mod.yaml:247) which drops every arm bot type; junctions are refused by
+	# this host. Materialize a full mod tree instead: arm ai/ payload first,
+	# then a hardlink clone of every other mods/cameo entry (same pattern
+	# map_engine_acceptance.py uses against the real mods/ tree).
+	full_mods = game_root / "FullMods"
+	pilot.materialize_dual_arm_ai(root, full_mods, job["switch"], manifest.get("ratchet_accepted_switches", []))
+	link_mod_tree(root / "mods" / "cameo", full_mods / "mods" / "cameo", skip_top=("ai",))
 	variant = maps / ("campaign_" + re.sub(r"[^A-Za-z0-9_.-]", "_", job["cell_id"]))
 	proof = pilot.prove_generated_map(job, root, variant)
 	map_yaml = variant / "map.yaml"; map_yaml_sha = sha(map_yaml)
 	match_log = logs / "cameo-ai-matches.jsonl"; before = match_log.stat().st_size if match_log.exists() else 0
 	server_log = logs / "server.log"; driver_log = game_root / "driver.log"
 	if not executable.is_file(): raise ValueError("pinned OpenRA executable missing")
+	# InstalledMods registers candidates in order and the LAST entry for a given
+	# mod id wins (ret[pair.Id] = mod), so FullMods must be the LAST search path
+	# or the stock repo mods/cameo silently overrides the materialized arm tree.
 	args = [str(executable), "Game.Mod=cameo", "Sound.Device=none", "Engine.EngineDir=..",
-		f"Engine.ModSearchPaths={overlay / 'mods'},{root / 'mods'},{engine_root / 'mods'}",
+		f"Engine.ModSearchPaths={root / 'mods'},{engine_root / 'mods'},{full_mods / 'mods'}",
 		f"Engine.SupportDir={game_support}", f"Launch.Map={variant.name}", "Launch.Benchmark=ai-duel-batch-",
 		"Graphics.VSync=False", "Graphics.Mode=Windowed", "Graphics.WindowedSize=640,480"]
 	env = os.environ.copy(); env["CAMEO_DEV_SEED"] = str(job["seed"])
 	with driver_log.open("w", encoding="utf-8") as output:
 		process = subprocess.Popen(args, cwd=engine_root, env=env, stdout=output, stderr=subprocess.STDOUT)
-	queue.set_game_pid(job["cell_id"], process.pid)
+	game_pid = resolve_game_pid(process, game_support)
+	queue.set_game_pid(job["cell_id"], game_pid)
 	def heartbeat(row):
 		if row["private_bytes"] < PRIVATE_LIMIT:
 			slot_counter.heartbeat(job["cell_id"], row["private_bytes"])
 		return "LOW_FREE_RAM" if available_ram_bytes() < FREE_RAM_HARD_FLOOR else None
-	monitor_result = monitor_process(process, driver_log=driver_log, actor_log=server_log, stall_log=logs / "debug.log",
-		sample_callback=heartbeat)
+	# AB_CAMPAIGN_CAP / AB_CAMPAIGN_ACTOR_SAMPLE are written by the batch driver
+	# to driver.log (verified on preserved attempts); server.log carries only
+	# the seed pin line. Deployment markers land in lua.log.
+	monitor_result = monitor_process(process, driver_log=driver_log, actor_log=driver_log, stall_log=logs / "debug.log",
+		sample_callback=heartbeat,
+		required_seats=[seat["home"] for seat in job["seat_assignments"]], deployment_log=logs / "lua.log",
+		watch_pid=game_pid if game_pid != process.pid else None,
+		expected_executable=executable, expected_support=game_support)
 	slot_counter.release(job["cell_id"])
 	finished = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 	log_text = server_log.read_text(encoding="utf-8", errors="replace") if server_log.exists() else ""
+	driver_text = driver_log.read_text(encoding="utf-8", errors="replace") if driver_log.exists() else ""
+	debug_log = logs / "debug.log"
+	debug_text = debug_log.read_text(encoding="utf-8", errors="replace") if debug_log.exists() else ""
+	# A thin overlay whose mod registration fails leaves "Invalid bot type" /
+	# "YamlException" in debug.log; the game then runs brainless seats and can
+	# still produce cap-censored rows — never classify that as a played cell.
+	mod_failed = "Invalid bot type" in debug_text or "YamlException" in debug_text
 	match_rows = batch.read_appended_records(match_log, before)
-	cap_match = re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", log_text)
+	# Every match row must carry the same game_uid: mixed or missing uids mean
+	# the match log can't be attributed to this launch — cap evidence is moot.
+	game_uid = match_game_uid(match_rows)
+	# The cap marker is emitted by the batch driver (verified in driver.log and
+	# lua.log on preserved attempts); check both plus server.log so a stream move
+	# can never silently turn a capped cell into a stall.
+	lua_log = logs / "lua.log"
+	lua_text = lua_log.read_text(encoding="utf-8", errors="replace") if lua_log.exists() else ""
+	cap_match = (re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", driver_text)
+		or re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", lua_text)
+		or re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", log_text))
 	seed_line = next((line for line in log_text.splitlines() if f"RandomSeed={job['seed']}" in line and "CAMEO DEV SEED pinned" in line), None)
 	map_yaml_text = map_yaml.read_text(encoding="utf-8")
 	resolved = proof["seats"]
-	known_incomplete = {"MEMORY_KILL", "MEMORY_SAMPLE_FAILED", "LOW_FREE_RAM", "STALL", "WALL_TIMEOUT"}
+	known_incomplete = {"MEMORY_KILL", "MEMORY_SAMPLE_FAILED", "LOW_FREE_RAM", "STALL", "WALL_TIMEOUT", "INVALID_NO_DEPLOY"}
 	internal_status = monitor_result["end_reason"] if monitor_result["end_reason"] in known_incomplete else "INCOMPLETE"
 	end_reason = monitor_result["end_reason"]
-	if monitor_result["end_reason"] == "PROCESS_EXIT" and monitor_result["exit_code"] == 0 and seed_line and len(match_rows) == job["required_seats"]:
+	natural_tick = completed_natural_tick(match_rows)
+	if monitor_result["end_reason"] == "PROCESS_EXIT" and monitor_result["exit_code"] == 0 and seed_line and len(match_rows) == job["required_seats"] and not mod_failed and game_uid:
 		if cap_match and int(cap_match.group(1)) >= CAP_TICK: internal_status="CENSORED_CAP"; end_reason="cap"
+		elif natural_tick is None: internal_status="INCOMPLETE"; end_reason="MISSING_AUTHORITATIVE_END_TICK"
 		else: internal_status="NATURAL_END"; end_reason="natural"
-	internal = {"cell_id":job["cell_id"], "manifest_sha256":manifest_sha, "switch":job["switch"], "setup":job["setup"], "map":job["map"], "map_sha256":job["map_sha256"], "seed":job["seed"], "pair":job["pair"], "game_in_pair":job["game_in_pair"], "control_side":job["control_side"], "treatment_side":job["treatment_side"], "arm_bot_types":job["arm_bot_types"], "status":internal_status, "end_reason":end_reason, "cap_marker":bool(cap_match), "cap_tick":int(cap_match.group(1)) if cap_match else None, "support_complete":len(match_rows)==job["required_seats"], "seat_proof_source":"generated_map.yaml", "map_yaml_sha256":map_yaml_sha, "seats":resolved, "peak_memory_bytes":monitor_result["peak_private_bytes"], "duration_ticks":int(cap_match.group(1)) if cap_match else None}
+	if mod_failed: internal_status="INCOMPLETE"; end_reason="INVALID_MOD_REGISTRATION"
+	internal = {"cell_id":job["cell_id"], "manifest_sha256":manifest_sha, "switch":job["switch"], "setup":job["setup"], "map":job["map"], "map_sha256":job["map_sha256"], "seed":job["seed"], "pair":job["pair"], "game_in_pair":job["game_in_pair"], "control_side":job["control_side"], "treatment_side":job["treatment_side"], "arm_bot_types":job["arm_bot_types"], "status":internal_status, "end_reason":end_reason, "cap_marker":bool(cap_match), "cap_tick":int(cap_match.group(1)) if cap_match else None, "support_complete":len(match_rows)==job["required_seats"], "seat_proof_source":"generated_map.yaml", "map_yaml_sha256":map_yaml_sha, "seats":resolved, "peak_memory_bytes":monitor_result["peak_private_bytes"], "duration_ticks":int(cap_match.group(1)) if cap_match else natural_tick}
 	classification = pilot.adjudicate(match_rows, internal, job, manifest_sha)
 	end_class = {"CENSORED_CAP":"CAP", "TREATMENT_WIN":"NATURAL", "CONTROL_WIN":"NATURAL"}.get(classification["verdict"], "INCOMPLETE")
+	if monitor_result["end_reason"] == "INVALID_NO_DEPLOY":
+		end_class = "INCOMPLETE"
+		classification = {"verdict":"INCOMPLETE_UNKNOWN", "reason":"INVALID_NO_DEPLOY", "winner_side":None}
 	if end_class == "INCOMPLETE": end_reason = classification.get("reason") or end_reason
 	match_by_home = {(r.get("player") or {}).get("home"): r for r in match_rows}
 	resolved_out = []
@@ -437,27 +871,64 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 		resolved_out.append({"seat_id": seat["home"], "team": seat["side"], "arm": seat["arm"], "bot_type": seat["bot_type"], "faction": seat["faction"], "home": seat["home"], "spawn": seat["spawn"], "proof_source":"generated map.yaml + cameo-ai-matches.jsonl", "outcome": pl.get("outcome", "unknown"), "metrics": metrics})
 	team_obj = {side:{"arm":"control" if side==job["control_side"] else "treatment", "bot_type":job["arm_bot_types"]["control" if side==job["control_side"] else "treatment"], "seat_ids":[s["home"] for s in resolved_out if s["team"]==side]} for side in ("A", "B")}
 	logs.mkdir(exist_ok=True)
-	artifact_paths = list(game_root.rglob("*"))
+	# Capture quarantine resolution runs BEFORE the bundle is zipped: the
+	# bundle itself must carry the binding (design addendum §E — a detached
+	# support_bundle.zip unzips with its own fail-closed provenance, not a
+	# bare evidence tree that CAT-1 consumers would have to guess at).
+	cap_kind, cap_prov = _cell_capture(game_root, game_support, support_root, match_log, game_uid)
+	# The support bundle is evidence, not a mod-tree backup: FullMods is ~33k
+	# hardlinked files (~1 GiB zipped per cell, 64x redundant) and is fully
+	# reproducible from the manifest pins + cell receipt. Exclude it, and any
+	# earlier support_bundle*.zip so a re-processed cell can't self-bundle.
+	artifact_paths = [p for p in game_root.rglob("*") if _is_support_artifact(game_root, p)]
 	bundle = game_root / "support_bundle.zip"
 	with zipfile.ZipFile(bundle, "w", compression=zipfile.ZIP_DEFLATED) as z:
+		zipped: dict[str, pathlib.Path] = {}
 		for file in artifact_paths:
-			if file.is_file() and file != bundle: z.write(file, file.relative_to(game_root))
+			if file.is_file() and file != bundle:
+				arcname = file.relative_to(game_root)
+				z.write(file, arcname)
+				zipped[arcname.as_posix()] = file
+		derived = _bundle_provenance_doc(zipped, cap_kind, cap_prov, game_uid)
+		if derived is not None and "capture_provenance.json" not in zipped:
+			z.writestr("capture_provenance.json",
+					   json.dumps(derived, indent=2, sort_keys=True) + "\n")
 	engine_digest = hashlib.sha256("".join(manifest["binary_sha256"][k] for k in sorted(manifest["binary_sha256"])).encode()).hexdigest()
-	receipt = {"schema_version":1,"campaign_id":manifest.get("campaign_id", "ab-campaign-2026-10-11-pilot"), "manifest_sha256":manifest_sha,
+	# The receipt carries the internal classification fields verbatim: analyze()
+	# re-adjudicates stored receipts and validate_receipt requires both layers.
+	end_tick=match_end_tick(match_rows)
+	if end_tick is None and internal_status != "NATURAL_END":
+		# CAP/INCOMPLETE tolerate a quantized approximation; a NATURAL receipt
+		# may only ever carry the authoritative match duration (gated above).
+		economy_ticks=sorted((s["economy"]["tick"] for s in classification.get("seats",[]) if isinstance(s.get("economy"),dict) and type(s["economy"].get("tick")) is int),reverse=True)
+		end_tick=economy_ticks[0] if economy_ticks else (monitor_result["samples"][-1]["world_tick"] if monitor_result["samples"] else None)
+	receipt = {**internal, "game_uid":game_uid,"schema_version":1,"campaign_id":manifest.get("campaign_id", "ab-campaign-2026-10-11-pilot"), "manifest_sha256":manifest_sha,
 		"baseline_commit":manifest["pins"]["source_commit"], "engine_sha256":engine_digest, "switch":job["switch"], "setup_id":job["setup"],
 		"map":{"name":job["map"],"path":job["map_path"],"sha256":job["map_sha256"],"generated_map_yaml_sha256":map_yaml_sha,"required_seats":job["required_seats"]},
 	"pair_id":f"{job['setup']}:{job['seed']}:{job['pair']}","pair_member":job["game_in_pair"],"seed":job["seed"],
 		"seed_proof":{"env_value":str(job["seed"]),"server_log_pin_line":seed_line,"server_log_sha256":sha(server_log) if server_log.is_file() else None},
-		"teams":team_obj,"resolved_seats":resolved_out,"end_class":end_class,"end_reason":end_reason,
+		"teams":team_obj,"resolved_seats":resolved_out,"end_class":end_class,"end_reason":end_reason,"deployment":monitor_result["deployment"],
 		"winner_team":classification.get("winner_side") if end_class=="NATURAL" else None,"world_tick":monitor_result["samples"][-1]["world_tick"] if monitor_result["samples"] else None,
+		"end_tick":end_tick,
 		"cap":{"world_tick_cap":CAP_TICK,"marker_observed":bool(cap_match),"marker_tick":int(cap_match.group(1)) if cap_match else None},
-		"memory":{"process_id":process.pid,"peak_private_bytes":monitor_result["peak_private_bytes"],"limit_private_bytes":PRIVATE_LIMIT,"samples":monitor_result["samples"]},
+		"memory":{"process_id":game_pid,"peak_private_bytes":monitor_result["peak_private_bytes"],"limit_private_bytes":PRIVATE_LIMIT,"samples":monitor_result["samples"]},
 		"runtime":{"started_utc":started,"finished_utc":finished,"exit_code":monitor_result["exit_code"],"wall_seconds":monitor_result["wall_seconds"],"stall_seconds":180,"pid_scoped_cleanup":monitor_result["pid_scoped_cleanup"]},
 		"artifacts":{"server_log":_file_artifact(server_log),"driver_log":_file_artifact(driver_log),"matches_jsonl":_file_artifact(match_log),"replay":_file_artifact(next(iter(game_root.rglob("*.orarep")), None)),"map_yaml":_file_artifact(map_yaml),"support_bundle":_file_artifact(bundle)}}
+	# Capture quarantine propagation (resolved before the bundle above): if
+	# this cell's evidence was produced under a capture manifest (sentinel
+	# run, or any bound batch), the receipt inherits the binding —
+	# capture_kind/scoreable markers plus the embedded provenance — before
+	# schema validation. A malformed or conflicting manifest raises in
+	# _cell_capture and neither the bundle nor the receipt is ever written.
+	if cap_kind is not None:
+		receipt["capture_kind"] = cap_kind
+		receipt["scoreable"] = bool(cap_prov["scoreable"])
+		receipt["capture_provenance"] = cap_prov
 	validate_receipt(receipt)
 	receipt_path = support_root / "receipts" / (re.sub(r"[^A-Za-z0-9_.-]", "_", job["cell_id"]) + ".json")
 	atomic_receipt(receipt_path, receipt)
 	queue.finish(job["cell_id"], end_class, receipt_path)
+	if monitor_result["end_reason"] == "INVALID_NO_DEPLOY": queue.park_planned("INVALID_NO_DEPLOY")
 	return receipt
 
 

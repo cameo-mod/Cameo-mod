@@ -2,7 +2,16 @@ using System;
 
 namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 {
-	public enum AttackLivenessPhaseCA { Ineligible, EligibleWaiting, DispatchDue, DispatchPending, VerifiedDispatch, Unsupported }
+	public enum AttackLivenessPhaseCA { Ineligible, EligibleWaiting, DispatchDue, DispatchPending, ObservedOffensiveActivity, Unsupported }
+	// A receipt exists only when a fresh offensive wave actually resets the interval.
+	// It describes public activity facts, never acceptance of the original dispatch order.
+	public readonly record struct AttackLivenessProgressCA(int Tick, long WaveId, int OffensiveMembers,
+		int ObservedCount, int PriorEligibleSinceTick, long PriorDeadlineTick);
+	// Transport only. A manager adapter must also restore wave/member provenance.
+	public sealed record AttackLivenessSnapshotCA(int Version, int LastTick, AttackLivenessPhaseCA Phase,
+		int EligibleSinceTick, long ValueFloor, long DeadlineTick, int DispatchLead,
+		int LastObservedOffensiveTick, int ObservedOffensiveCount, AttackSoftRestraintCA Restraints,
+		long PendingWave, long LastObservedWave, long LastIssuedWave);
 	[Flags]
 	public enum AttackSoftRestraintCA
 	{
@@ -12,29 +21,101 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 	}
 
 	// No target/reason/personality parameter can renew an already eligible interval.
-	// Dispatch intent is separate from reviewed outcome evidence; no game-world work here.
+	// Observed activity is not dispatch causality. No engine outcome or game-world work here.
 	public sealed class AttackLivenessEvalCA
 	{
 		public AttackLivenessPhaseCA Phase { get; private set; }
 		public int EligibleSinceTick { get; private set; } = -1;
 		public long ValueFloor { get; private set; }
 		public long DeadlineTick { get; private set; } = -1;
-		public int LastVerifiedLaunchTick { get; private set; } = -1;
-		public int VerifiedLaunchCount { get; private set; }
+		public int LastObservedOffensiveTick { get; private set; } = -1;
+		public int ObservedOffensiveCount { get; private set; }
 		public AttackSoftRestraintCA Restraints { get; private set; }
 		long pendingWave;
-		long lastVerifiedWave;
+		long lastObservedWave;
 		long lastIssuedWave;
 		int dispatchLead;
 		int lastTick = -1;
+		bool restoreAttempted;
+		bool restoreInvalid;
+
+		public AttackLivenessSnapshotCA Capture()
+		{
+			if (restoreInvalid)
+				throw new InvalidOperationException("Cannot capture an invalid restored liveness clock.");
+			return new(1, lastTick, Phase, EligibleSinceTick, ValueFloor, DeadlineTick, dispatchLead,
+				LastObservedOffensiveTick, ObservedOffensiveCount, Restraints,
+				pendingWave, lastObservedWave, lastIssuedWave);
+		}
+
+		// Restore once into a fresh clock. A malformed save cannot buy a new deadline.
+		public bool TryRestore(int tick, AttackLivenessSnapshotCA snapshot)
+		{
+			if (restoreAttempted || lastTick != -1)
+				return false;
+			restoreAttempted = true;
+			restoreInvalid = true;
+			Phase = AttackLivenessPhaseCA.Unsupported;
+			if (tick < 0 || snapshot == null || snapshot.Version != 1
+				|| snapshot.LastTick < -1 || snapshot.LastTick > tick || !Enum.IsDefined(snapshot.Phase)
+				|| ((int)snapshot.Restraints & ~2047) != 0 || snapshot.DispatchLead < 0
+				|| snapshot.PendingWave < 0 || snapshot.LastObservedWave < 0 || snapshot.LastIssuedWave < 0
+				|| snapshot.PendingWave > snapshot.LastIssuedWave || snapshot.ObservedOffensiveCount < 0
+				|| snapshot.ObservedOffensiveCount > snapshot.LastObservedWave
+				|| snapshot.LastObservedOffensiveTick < -1 || snapshot.LastObservedOffensiveTick > snapshot.LastTick
+				|| (snapshot.ObservedOffensiveCount == 0) != (snapshot.LastObservedWave == 0)
+				|| (snapshot.ObservedOffensiveCount == 0) != (snapshot.LastObservedOffensiveTick == -1))
+				return false;
+
+			if (snapshot.EligibleSinceTick >= 0)
+			{
+				var duration = snapshot.DeadlineTick - snapshot.EligibleSinceTick;
+				if (snapshot.EligibleSinceTick > snapshot.LastTick || snapshot.ValueFloor <= 0
+					|| snapshot.DeadlineTick <= snapshot.EligibleSinceTick
+					|| snapshot.DeadlineTick > (long)snapshot.EligibleSinceTick + int.MaxValue
+					|| snapshot.DispatchLead >= duration
+					|| snapshot.Phase == AttackLivenessPhaseCA.Ineligible
+					|| snapshot.Phase == AttackLivenessPhaseCA.ObservedOffensiveActivity
+					|| (snapshot.Phase != AttackLivenessPhaseCA.Unsupported
+						&& ((snapshot.Phase == AttackLivenessPhaseCA.DispatchPending) != (snapshot.PendingWave != 0)))
+					|| (snapshot.PendingWave != 0 && snapshot.PendingWave != snapshot.LastIssuedWave))
+					return false;
+			}
+			else if (snapshot.EligibleSinceTick != -1 || snapshot.ValueFloor != 0
+				|| snapshot.DeadlineTick != -1 || snapshot.PendingWave != 0
+				|| (snapshot.Phase != AttackLivenessPhaseCA.Ineligible
+					&& snapshot.Phase != AttackLivenessPhaseCA.ObservedOffensiveActivity
+					&& snapshot.Phase != AttackLivenessPhaseCA.Unsupported)
+				|| (snapshot.Phase == AttackLivenessPhaseCA.ObservedOffensiveActivity
+					&& snapshot.ObservedOffensiveCount == 0))
+				return false;
+
+			if (snapshot.LastTick == -1 && (snapshot.LastIssuedWave != 0
+				|| snapshot.ObservedOffensiveCount != 0 || snapshot.Phase != AttackLivenessPhaseCA.Ineligible))
+				return false;
+			EligibleSinceTick = snapshot.EligibleSinceTick;
+			ValueFloor = snapshot.ValueFloor;
+			DeadlineTick = snapshot.DeadlineTick;
+			dispatchLead = snapshot.DispatchLead;
+			LastObservedOffensiveTick = snapshot.LastObservedOffensiveTick;
+			ObservedOffensiveCount = snapshot.ObservedOffensiveCount;
+			Restraints = snapshot.Restraints;
+			pendingWave = snapshot.PendingWave;
+			lastObservedWave = snapshot.LastObservedWave;
+			lastIssuedWave = snapshot.LastIssuedWave;
+			Phase = snapshot.Phase;
+			lastTick = tick;
+			restoreInvalid = false;
+			return true;
+		}
 
 		public void Observe(int tick, bool evidenceComplete, bool active, bool legalTarget,
 			bool orderableRoster, long eligibleValue, long configuredFloor, int maxNoLaunchTicks,
-			int dispatchLeadTicks, AttackSoftRestraintCA restraints)
+			int dispatchLeadTicks, AttackSoftRestraintCA restraints, int firstWaveMaxTicks = 0)
 		{
 			CheckTick(tick);
 			Restraints = restraints;
-			if (!evidenceComplete || configuredFloor <= 0 || eligibleValue < 0
+			if (restoreInvalid || !evidenceComplete || configuredFloor <= 0 || eligibleValue < 0
 				|| maxNoLaunchTicks <= 0 || dispatchLeadTicks < 0 || dispatchLeadTicks >= maxNoLaunchTicks)
 			{
 				// Unsupported evidence cannot silently reset a previously established deadline.
@@ -52,7 +133,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			{
 				EligibleSinceTick = tick;
 				ValueFloor = configuredFloor;
-				DeadlineTick = (long)tick + maxNoLaunchTicks;
+				DeadlineTick = (long)tick + IntervalCap(maxNoLaunchTicks, firstWaveMaxTicks, ObservedOffensiveCount);
 				dispatchLead = dispatchLeadTicks;
 			}
 			Phase = pendingWave != 0 ? AttackLivenessPhaseCA.DispatchPending
@@ -84,20 +165,38 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			return true;
 		}
 
-		public bool ObserveDispatch(int tick, long waveId, int offensiveMembers,
+		// Conservative monotonic dedup: an older wave observed after a newer one cannot renew
+		// the deadline. No queued intent is needed or certified by these public activity facts.
+		public bool ObserveOffensiveActivity(int tick, long waveId, int offensiveMembers,
 			bool ownedOffensiveWave, bool actualOffensiveActivity, bool legalTarget, bool evidenceComplete)
+			=> ObserveOffensiveActivity(tick, waveId, offensiveMembers, ownedOffensiveWave,
+				actualOffensiveActivity, legalTarget, evidenceComplete, out _);
+
+		public bool ObserveOffensiveActivity(int tick, long waveId, int offensiveMembers,
+			bool ownedOffensiveWave, bool actualOffensiveActivity, bool legalTarget, bool evidenceComplete,
+			out AttackLivenessProgressCA progress)
 		{
+			progress = default;
 			CheckTick(tick);
-			if (!evidenceComplete || !ownedOffensiveWave || !actualOffensiveActivity || !legalTarget
-				|| offensiveMembers <= 0 || waveId == 0 || waveId != pendingWave || waveId <= lastVerifiedWave)
+			if (restoreInvalid || !evidenceComplete || !ownedOffensiveWave || !actualOffensiveActivity || !legalTarget
+				|| offensiveMembers <= 0 || waveId <= 0 || waveId <= lastObservedWave)
 				return false;
-			LastVerifiedLaunchTick = tick;
-			VerifiedLaunchCount++;
-			lastVerifiedWave = waveId;
+			LastObservedOffensiveTick = tick;
+			ObservedOffensiveCount++;
+			lastObservedWave = waveId;
+			progress = new(tick, waveId, offensiveMembers, ObservedOffensiveCount,
+				EligibleSinceTick, DeadlineTick);
 			ClearInterval();
-			Phase = AttackLivenessPhaseCA.VerifiedDispatch;
+			Phase = AttackLivenessPhaseCA.ObservedOffensiveActivity;
 			return true;
 		}
+
+		// First-wave arm (BV_m13_liveness): before this clock's first accepted wave the interval
+		// deadline is capped at the tier's first-wave max. It can only shorten — it never renews
+		// or extends an already created interval, and 0 disables it outright.
+		public static int IntervalCap(int maxNoLaunchTicks, int firstWaveMaxTicks, long observedOffensiveCount) =>
+			firstWaveMaxTicks > 0 && observedOffensiveCount == 0
+				? Math.Min(maxNoLaunchTicks, firstWaveMaxTicks) : maxNoLaunchTicks;
 
 		public static bool AbsoluteOverflow(int eligibleCount, int configuredMaxIdleUnits) =>
 			eligibleCount > 0 && configuredMaxIdleUnits > 0 && eligibleCount >= configuredMaxIdleUnits;

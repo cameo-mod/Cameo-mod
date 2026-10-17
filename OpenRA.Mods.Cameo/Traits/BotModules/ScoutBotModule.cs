@@ -68,6 +68,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Interest added to a region remembered as occupied by the current main target.")]
 		public readonly int TargetIntelBonus = 2000;
 
+		[Desc("CRAWL-SAFETY (S3): interest added to a region an IBotScoutInterestProvider published a cell in",
+			"(e.g. an unexplored crawl aim). Publishing grants no vision — a scout still has to fly there.")]
+		public readonly int ProviderInterestBonus = 4000;
+
 		[Desc("PL-2 (§12.14): extra scout cap added while the guerrilla lead trails, scaled by the",
 			"deficit — behind on map control means leaning on scouts, the lead's driver. Inert unless",
 			"UsePersonalityLeads is armed and the running personality is guerrilla.")]
@@ -101,6 +105,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		IBotMainTargetProvider mainTargetProvider;
 		IBotRequestUnitProduction[] unitBuilders;
 		IBotPersonalityLeadProvider[] leadProviders;
+		IBotScoutInterestProvider[] interestProviders;
 		int lastScoutRequestTick = -1;
 		// Null until the squad manager supplies its shared idle-unit pool.
 		List<UnitWposWrapper> idlePool;
@@ -122,6 +127,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			mainTargetProvider = self.TraitsImplementing<IBotMainTargetProvider>().FirstOrDefault();
 			unitBuilders = self.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
 			leadProviders = self.Owner.PlayerActor.TraitsImplementing<IBotPersonalityLeadProvider>().ToArray();
+			interestProviders = self.TraitsImplementing<IBotScoutInterestProvider>().ToArray();
 			scanTicks = BotRng.For(player, nameof(ScoutBotModule)).Next(0, Info.ScanInterval);
 		}
 
@@ -330,14 +336,49 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// layers, they are the interest/danger/staleness source — threat_ground answers
 			// the danger callback — instead of re-deriving per-index values from ByEnemy.
 			// The score formula and the ByEnemy derivation below stay the fallback.
+			// CRAWL-SAFETY: provider-published cells (an unexplored crawl aim) ride on top of either
+			// interest source — the boost only moves scouts; it grants no vision.
+			var interestRegions = ProviderInterestRegions(regions);
+
 			var influence = player.PlayerActor.TraitOrDefault<MasterAiBotModule>()?.Situation?.Influence;
 			if (LayersMatch(regions, influence))
 				return PickScoutRegion(regions, from, taken,
-					i => influence.Staleness[i], i => influence.Interest[i], i => influence.ThreatGround[i]);
+					i => influence.Staleness[i], i => influence.Interest[i] + ProviderInterest(interestRegions, i), i => influence.ThreatGround[i]);
 
 			return PickScoutRegion(regions, from, taken,
-				i => Staleness(regions, i, tick), i => Interest(regions, i), DangerAt);
+				i => Staleness(regions, i, tick), i => Interest(regions, i) + ProviderInterest(interestRegions, i), DangerAt);
 		}
+
+		/// <summary>
+		/// CRAWL-SAFETY: the region indices a scout-interest provider currently publishes — recomputed
+		/// per target pick so a moving aim drags scout attention with it.
+		/// </summary>
+		HashSet<int> ProviderInterestRegions(RegionMemory regions)
+		{
+			HashSet<int> set = null;
+			if (interestProviders != null)
+				foreach (var provider in interestProviders)
+				{
+					if (!provider.IsTraitEnabled())
+						continue;
+
+					var cells = provider.ScoutInterestCells;
+					if (cells == null)
+						continue;
+
+					foreach (var cell in cells)
+					{
+						var index = regions.IndexOf(cell);
+						if (index >= 0)
+							(set ??= new HashSet<int>()).Add(index);
+					}
+				}
+
+			return set;
+		}
+
+		int ProviderInterest(HashSet<int> interestRegions, int index) =>
+			interestRegions != null && interestRegions.Contains(index) ? Info.ProviderInterestBonus : 0;
 
 		// IM-1: the published layers answer in the same index space as this Regions only when
 		// the (ZoneBacked, Generation, CellCount) triples agree — they are built in the same

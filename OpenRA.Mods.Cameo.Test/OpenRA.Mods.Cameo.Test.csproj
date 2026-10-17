@@ -14,6 +14,35 @@
     <PackageReference Include="NUnit" Version="4.3.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="../OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerSlave.cs"
+          Link="source/SlaveMinerSpawnerSlave.cs"
+          CopyToOutputDirectory="Always" />
+    <None Include="../OpenRA.Mods.Cameo/Traits/SlaveMinerIdleRescue.cs"
+          Link="source/SlaveMinerIdleRescue.cs"
+          CopyToOutputDirectory="Always" />
+    <None Include="../OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs"
+          Link="source/SlaveMinerSpawnerMaster.cs"
+          CopyToOutputDirectory="Always" />
+    <!-- Every mod project's code, for the repo-wide "who queues a MoveToDock" audit pin. -->
+    <None Include="../OpenRA.Mods.Cameo/**/*.cs" Exclude="../OpenRA.Mods.Cameo/obj/**;../OpenRA.Mods.Cameo/bin/**"
+          Link="source/mods/Cameo/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../OpenRA.Mods.CA/**/*.cs" Exclude="../OpenRA.Mods.CA/obj/**;../OpenRA.Mods.CA/bin/**"
+          Link="source/mods/CA/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../OpenRA.Mods.Cameo.Unified/**/*.cs" Exclude="../OpenRA.Mods.Cameo.Unified/obj/**;../OpenRA.Mods.Cameo.Unified/bin/**"
+          Link="source/mods/Unified/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../OpenRA.Mods.Fransbot/**/*.cs" Exclude="../OpenRA.Mods.Fransbot/obj/**;../OpenRA.Mods.Fransbot/bin/**"
+          Link="source/mods/Fransbot/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../engine/OpenRA.Mods.Common/Traits/Harvester.cs"
+          Link="source/engine_Harvester.cs"
+          CopyToOutputDirectory="Always" />
+    <None Include="../engine/OpenRA.Mods.Common/Activities/FindAndDeliverResources.cs"
+          Link="source/engine_FindAndDeliverResources.cs"
+          CopyToOutputDirectory="Always" />
+    <None Include="../engine/OpenRA.Game/Actor.cs"
+          Link="source/engine_Actor.cs"
+          CopyToOutputDirectory="Always" />
+  </ItemGroup>
   <!-- CannonAP generated-heaviness fixtures, copied next to the test DLL and
        referenced via a relative output path (no absolute machine paths). -->
   <ItemGroup>

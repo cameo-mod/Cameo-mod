@@ -1,0 +1,4410 @@
+{
+ "tool": "map_engine_acceptance",
+ "tool_sha256": "d570cea1325a379d4f3227705b2602a76e3ba39123d87cba6cad8346ada260b0",
+ "manifest_sha256": "315adb74c97e4d0a5e7a577671c9996de05184bf20136416edb15f0ca10b2629",
+ "campaign_id": "ab-bu-pilot-2026-10-11",
+ "engine_version": "6da7fce14da541180c6baddd6925118fbef65b94",
+ "render": "headless",
+ "cap_tick": 1500,
+ "preflight_only_never_outcome_cells": true,
+ "cells": [
+  {
+   "cell_id": "1v1_nuclear_gdi|1337|0",
+   "setup": "1v1_nuclear_gdi",
+   "map": "nuclear_winter",
+   "map_sha256": "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a",
+   "team_size": 1,
+   "seed": 1337,
+   "game_in_pair": 0,
+   "map_yaml_sha256": "481316a131240585a2fdceab0f4d4289ab363f556f69babda3c7d65769bbdbd3",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "team_slot": 0,
+     "home_location": "11,45"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "team_slot": 0,
+     "home_location": "90,24"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "11,45",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [],
+     "opponents": [
+      "90,24"
+     ]
+    },
+    {
+     "home": "90,24",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [],
+     "opponents": [
+      "11,45"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 119.2,
+   "peak_rss_bytes": 5186650112,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "1v1_nuclear_gdi|1337|1",
+   "setup": "1v1_nuclear_gdi",
+   "map": "nuclear_winter",
+   "map_sha256": "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a",
+   "team_size": 1,
+   "seed": 1337,
+   "game_in_pair": 1,
+   "map_yaml_sha256": "d24fa205df35cff9a4aeb71aa31fc973f4fbf5a29c18d3ae79645555547c3a93",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "team_slot": 0,
+     "home_location": "11,45"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "team_slot": 0,
+     "home_location": "90,24"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "11,45",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [],
+     "opponents": [
+      "90,24"
+     ]
+    },
+    {
+     "home": "90,24",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [],
+     "opponents": [
+      "11,45"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 111.1,
+   "peak_rss_bytes": 5485228032,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "1v1_nuclear_nod|1337|0",
+   "setup": "1v1_nuclear_nod",
+   "map": "nuclear_winter",
+   "map_sha256": "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a",
+   "team_size": 1,
+   "seed": 1337,
+   "game_in_pair": 0,
+   "map_yaml_sha256": "c5856e08e841bdf6157966d25c7bd4ea631a56205e4d896571e7c6f8030fa296",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "team_slot": 0,
+     "home_location": "11,45"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "team_slot": 0,
+     "home_location": "90,24"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "11,45",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [],
+     "opponents": [
+      "90,24"
+     ]
+    },
+    {
+     "home": "90,24",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [],
+     "opponents": [
+      "11,45"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 106.1,
+   "peak_rss_bytes": 5623365632,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "1v1_nuclear_nod|1337|1",
+   "setup": "1v1_nuclear_nod",
+   "map": "nuclear_winter",
+   "map_sha256": "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a",
+   "team_size": 1,
+   "seed": 1337,
+   "game_in_pair": 1,
+   "map_yaml_sha256": "ec293d352c58b17267a55068b88636ed1eadace50b1c01932692c5613e3d8c8c",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "team_slot": 0,
+     "home_location": "11,45"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "team_slot": 0,
+     "home_location": "90,24"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "11,45",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [],
+     "opponents": [
+      "90,24"
+     ]
+    },
+    {
+     "home": "90,24",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [],
+     "opponents": [
+      "11,45"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 109.1,
+   "peak_rss_bytes": 5481803776,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "1v1_satans_allies|1337|0",
+   "setup": "1v1_satans_allies",
+   "map": "satans_clutch",
+   "map_sha256": "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb",
+   "team_size": 1,
+   "seed": 1337,
+   "game_in_pair": 0,
+   "map_yaml_sha256": "dcf04403aa2acd79ebe99b220d3bf67408b1574afaed0e2a0801010a2862baab",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "team_slot": 0,
+     "home_location": "49,20"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "team_slot": 0,
+     "home_location": "50,79"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "49,20",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [],
+     "opponents": [
+      "50,79"
+     ]
+    },
+    {
+     "home": "50,79",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [],
+     "opponents": [
+      "49,20"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 102.1,
+   "peak_rss_bytes": 5342535680,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "1v1_satans_allies|1337|1",
+   "setup": "1v1_satans_allies",
+   "map": "satans_clutch",
+   "map_sha256": "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb",
+   "team_size": 1,
+   "seed": 1337,
+   "game_in_pair": 1,
+   "map_yaml_sha256": "b90819d54f06707b4b5d388adda494738949428d03a4898b265bc9aff58e8f48",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "team_slot": 0,
+     "home_location": "49,20"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "team_slot": 0,
+     "home_location": "50,79"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "49,20",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [],
+     "opponents": [
+      "50,79"
+     ]
+    },
+    {
+     "home": "50,79",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [],
+     "opponents": [
+      "49,20"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 103.1,
+   "peak_rss_bytes": 5233516544,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "1v1_satans_soviets|1337|0",
+   "setup": "1v1_satans_soviets",
+   "map": "satans_clutch",
+   "map_sha256": "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb",
+   "team_size": 1,
+   "seed": 1337,
+   "game_in_pair": 0,
+   "map_yaml_sha256": "89af4a6308ccb505dd293029fc21d58a5cdbaaf73bf80266181d559dd76e9269",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "team_slot": 0,
+     "home_location": "49,20"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "team_slot": 0,
+     "home_location": "50,79"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "49,20",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [],
+     "opponents": [
+      "50,79"
+     ]
+    },
+    {
+     "home": "50,79",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [],
+     "opponents": [
+      "49,20"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 105.1,
+   "peak_rss_bytes": 5129236480,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "1v1_satans_soviets|1337|1",
+   "setup": "1v1_satans_soviets",
+   "map": "satans_clutch",
+   "map_sha256": "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb",
+   "team_size": 1,
+   "seed": 1337,
+   "game_in_pair": 1,
+   "map_yaml_sha256": "26a2187a524cae7bb0294a1ff0cae5a8b4f8d4bfc00f438a076dd1111e6aacc3",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "team_slot": 0,
+     "home_location": "49,20"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "team_slot": 0,
+     "home_location": "50,79"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "49,20",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [],
+     "opponents": [
+      "50,79"
+     ]
+    },
+    {
+     "home": "50,79",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [],
+     "opponents": [
+      "49,20"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 106.1,
+   "peak_rss_bytes": 5169164288,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "2v2_red_gdi_nod|1337|0",
+   "setup": "2v2_red_gdi_nod",
+   "map": "red_spice",
+   "map_sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a",
+   "team_size": 2,
+   "seed": 1337,
+   "game_in_pair": 0,
+   "map_yaml_sha256": "171cac45d2e032df0efc381e472bbe33f54037018dc38c4315cd59a8cf6afd28",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "team_slot": 0,
+     "home_location": "97,62"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "team_slot": 1,
+     "home_location": "104,44"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "team_slot": 0,
+     "home_location": "44,104"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "team_slot": 1,
+     "home_location": "62,97"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "97,62",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "104,44"
+     ],
+     "opponents": [
+      "44,104",
+      "62,97"
+     ]
+    },
+    {
+     "home": "104,44",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "97,62"
+     ],
+     "opponents": [
+      "44,104",
+      "62,97"
+     ]
+    },
+    {
+     "home": "44,104",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "62,97"
+     ],
+     "opponents": [
+      "104,44",
+      "97,62"
+     ]
+    },
+    {
+     "home": "62,97",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "44,104"
+     ],
+     "opponents": [
+      "104,44",
+      "97,62"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 110.1,
+   "peak_rss_bytes": 5218750464,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "2v2_red_gdi_nod|1337|1",
+   "setup": "2v2_red_gdi_nod",
+   "map": "red_spice",
+   "map_sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a",
+   "team_size": 2,
+   "seed": 1337,
+   "game_in_pair": 1,
+   "map_yaml_sha256": "b3e40d98b1332ef88200bc26e0ef2bd03db5d507e0cb9bca46c30a81f4fbe870",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "team_slot": 0,
+     "home_location": "97,62"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "team_slot": 1,
+     "home_location": "104,44"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "team_slot": 0,
+     "home_location": "44,104"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "team_slot": 1,
+     "home_location": "62,97"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "97,62",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "104,44"
+     ],
+     "opponents": [
+      "44,104",
+      "62,97"
+     ]
+    },
+    {
+     "home": "104,44",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "97,62"
+     ],
+     "opponents": [
+      "44,104",
+      "62,97"
+     ]
+    },
+    {
+     "home": "44,104",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "62,97"
+     ],
+     "opponents": [
+      "104,44",
+      "97,62"
+     ]
+    },
+    {
+     "home": "62,97",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "44,104"
+     ],
+     "opponents": [
+      "104,44",
+      "97,62"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 110.1,
+   "peak_rss_bytes": 5275607040,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "2v2_red_gdi_allies|1337|0",
+   "setup": "2v2_red_gdi_allies",
+   "map": "red_spice",
+   "map_sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a",
+   "team_size": 2,
+   "seed": 1337,
+   "game_in_pair": 0,
+   "map_yaml_sha256": "a9b67301f073fe8904ba1d76c8697197a111a480a77654cd4a227835f2087def",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "team_slot": 0,
+     "home_location": "97,62"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "team_slot": 1,
+     "home_location": "104,44"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "team_slot": 0,
+     "home_location": "44,104"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "team_slot": 1,
+     "home_location": "62,97"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "97,62",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "104,44"
+     ],
+     "opponents": [
+      "44,104",
+      "62,97"
+     ]
+    },
+    {
+     "home": "104,44",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "97,62"
+     ],
+     "opponents": [
+      "44,104",
+      "62,97"
+     ]
+    },
+    {
+     "home": "44,104",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "62,97"
+     ],
+     "opponents": [
+      "104,44",
+      "97,62"
+     ]
+    },
+    {
+     "home": "62,97",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "44,104"
+     ],
+     "opponents": [
+      "104,44",
+      "97,62"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 112.1,
+   "peak_rss_bytes": 5231927296,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "2v2_red_gdi_allies|1337|1",
+   "setup": "2v2_red_gdi_allies",
+   "map": "red_spice",
+   "map_sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a",
+   "team_size": 2,
+   "seed": 1337,
+   "game_in_pair": 1,
+   "map_yaml_sha256": "ed83d45cc915c389af54ae11ab71b5707d02e0b5d0724c97f994e63572308029",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "team_slot": 0,
+     "home_location": "97,62"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "team_slot": 1,
+     "home_location": "104,44"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "team_slot": 0,
+     "home_location": "44,104"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "team_slot": 1,
+     "home_location": "62,97"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "97,62",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "104,44"
+     ],
+     "opponents": [
+      "44,104",
+      "62,97"
+     ]
+    },
+    {
+     "home": "104,44",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "97,62"
+     ],
+     "opponents": [
+      "44,104",
+      "62,97"
+     ]
+    },
+    {
+     "home": "44,104",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "62,97"
+     ],
+     "opponents": [
+      "104,44",
+      "97,62"
+     ]
+    },
+    {
+     "home": "62,97",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "44,104"
+     ],
+     "opponents": [
+      "104,44",
+      "97,62"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 117.1,
+   "peak_rss_bytes": 5196935168,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "2v2_red_gdi_soviets|1337|0",
+   "setup": "2v2_red_gdi_soviets",
+   "map": "red_spice",
+   "map_sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a",
+   "team_size": 2,
+   "seed": 1337,
+   "game_in_pair": 0,
+   "map_yaml_sha256": "c7185010a0e58d04b79c02e028e0ec66d95ea3817bb4497146cb1ce008489a5f",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "team_slot": 0,
+     "home_location": "97,62"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "team_slot": 1,
+     "home_location": "104,44"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "team_slot": 0,
+     "home_location": "44,104"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "team_slot": 1,
+     "home_location": "62,97"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "97,62",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "104,44"
+     ],
+     "opponents": [
+      "44,104",
+      "62,97"
+     ]
+    },
+    {
+     "home": "104,44",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "97,62"
+     ],
+     "opponents": [
+      "44,104",
+      "62,97"
+     ]
+    },
+    {
+     "home": "44,104",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "62,97"
+     ],
+     "opponents": [
+      "104,44",
+      "97,62"
+     ]
+    },
+    {
+     "home": "62,97",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "44,104"
+     ],
+     "opponents": [
+      "104,44",
+      "97,62"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 112.1,
+   "peak_rss_bytes": 5248970752,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "2v2_red_gdi_soviets|1337|1",
+   "setup": "2v2_red_gdi_soviets",
+   "map": "red_spice",
+   "map_sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a",
+   "team_size": 2,
+   "seed": 1337,
+   "game_in_pair": 1,
+   "map_yaml_sha256": "cd37a2c0a01bd9cd70d635ecb757e9f999b66139be738158e95b1834ae914f14",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "team_slot": 0,
+     "home_location": "97,62"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "team_slot": 1,
+     "home_location": "104,44"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "team_slot": 0,
+     "home_location": "44,104"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "team_slot": 1,
+     "home_location": "62,97"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "97,62",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "104,44"
+     ],
+     "opponents": [
+      "44,104",
+      "62,97"
+     ]
+    },
+    {
+     "home": "104,44",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "97,62"
+     ],
+     "opponents": [
+      "44,104",
+      "62,97"
+     ]
+    },
+    {
+     "home": "44,104",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "62,97"
+     ],
+     "opponents": [
+      "104,44",
+      "97,62"
+     ]
+    },
+    {
+     "home": "62,97",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "44,104"
+     ],
+     "opponents": [
+      "104,44",
+      "97,62"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 113.1,
+   "peak_rss_bytes": 5333708800,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "2v2_terra_nod_allies|1337|0",
+   "setup": "2v2_terra_nod_allies",
+   "map": "terra_cotta",
+   "map_sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d",
+   "team_size": 2,
+   "seed": 1337,
+   "game_in_pair": 0,
+   "map_yaml_sha256": "a96b63b8939e244236b3d44d395636cae6f80911b99b8c4084a2a4d3ff3182c2",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "team_slot": 0,
+     "home_location": "32,84"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "team_slot": 1,
+     "home_location": "45,95"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "team_slot": 0,
+     "home_location": "89,39"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "team_slot": 1,
+     "home_location": "102,50"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "32,84",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "45,95"
+     ],
+     "opponents": [
+      "102,50",
+      "89,39"
+     ]
+    },
+    {
+     "home": "45,95",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "32,84"
+     ],
+     "opponents": [
+      "102,50",
+      "89,39"
+     ]
+    },
+    {
+     "home": "89,39",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "102,50"
+     ],
+     "opponents": [
+      "32,84",
+      "45,95"
+     ]
+    },
+    {
+     "home": "102,50",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "89,39"
+     ],
+     "opponents": [
+      "32,84",
+      "45,95"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 106.1,
+   "peak_rss_bytes": 5195513856,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "2v2_terra_nod_allies|1337|1",
+   "setup": "2v2_terra_nod_allies",
+   "map": "terra_cotta",
+   "map_sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d",
+   "team_size": 2,
+   "seed": 1337,
+   "game_in_pair": 1,
+   "map_yaml_sha256": "1b85ad493ae98bcabdf57f41d35b6cc88bdd1f2ff5931f5de191fd829e7d2090",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "team_slot": 0,
+     "home_location": "32,84"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "team_slot": 1,
+     "home_location": "45,95"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "team_slot": 0,
+     "home_location": "89,39"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "team_slot": 1,
+     "home_location": "102,50"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "32,84",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "45,95"
+     ],
+     "opponents": [
+      "102,50",
+      "89,39"
+     ]
+    },
+    {
+     "home": "45,95",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "32,84"
+     ],
+     "opponents": [
+      "102,50",
+      "89,39"
+     ]
+    },
+    {
+     "home": "89,39",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "102,50"
+     ],
+     "opponents": [
+      "32,84",
+      "45,95"
+     ]
+    },
+    {
+     "home": "102,50",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "89,39"
+     ],
+     "opponents": [
+      "32,84",
+      "45,95"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 107.1,
+   "peak_rss_bytes": 5551026176,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "2v2_terra_nod_soviets|1337|0",
+   "setup": "2v2_terra_nod_soviets",
+   "map": "terra_cotta",
+   "map_sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d",
+   "team_size": 2,
+   "seed": 1337,
+   "game_in_pair": 0,
+   "map_yaml_sha256": "08f23ec9ea3b55527d971f5fd16b38c338347ae52e0e47f0d7ff4db9b9531e32",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "team_slot": 0,
+     "home_location": "32,84"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "team_slot": 1,
+     "home_location": "45,95"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "team_slot": 0,
+     "home_location": "89,39"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "team_slot": 1,
+     "home_location": "102,50"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "32,84",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "45,95"
+     ],
+     "opponents": [
+      "102,50",
+      "89,39"
+     ]
+    },
+    {
+     "home": "45,95",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "32,84"
+     ],
+     "opponents": [
+      "102,50",
+      "89,39"
+     ]
+    },
+    {
+     "home": "89,39",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "102,50"
+     ],
+     "opponents": [
+      "32,84",
+      "45,95"
+     ]
+    },
+    {
+     "home": "102,50",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "89,39"
+     ],
+     "opponents": [
+      "32,84",
+      "45,95"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 107.1,
+   "peak_rss_bytes": 5192196096,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "2v2_terra_nod_soviets|1337|1",
+   "setup": "2v2_terra_nod_soviets",
+   "map": "terra_cotta",
+   "map_sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d",
+   "team_size": 2,
+   "seed": 1337,
+   "game_in_pair": 1,
+   "map_yaml_sha256": "a964cb55de38c30a18d40beeadd1a8655413a3b53b7cc0b123f8b8d91749f5a5",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "team_slot": 0,
+     "home_location": "32,84"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "team_slot": 1,
+     "home_location": "45,95"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "team_slot": 0,
+     "home_location": "89,39"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "team_slot": 1,
+     "home_location": "102,50"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "32,84",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "45,95"
+     ],
+     "opponents": [
+      "102,50",
+      "89,39"
+     ]
+    },
+    {
+     "home": "45,95",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "32,84"
+     ],
+     "opponents": [
+      "102,50",
+      "89,39"
+     ]
+    },
+    {
+     "home": "89,39",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "102,50"
+     ],
+     "opponents": [
+      "32,84",
+      "45,95"
+     ]
+    },
+    {
+     "home": "102,50",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "89,39"
+     ],
+     "opponents": [
+      "32,84",
+      "45,95"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 108.1,
+   "peak_rss_bytes": 5429665792,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "2v2_terra_allies_soviets|1337|0",
+   "setup": "2v2_terra_allies_soviets",
+   "map": "terra_cotta",
+   "map_sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d",
+   "team_size": 2,
+   "seed": 1337,
+   "game_in_pair": 0,
+   "map_yaml_sha256": "371c15eda86ceda2948b2a811cc6ae87646d4a6068d98c68cd5b5fc7d25bc53d",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "team_slot": 0,
+     "home_location": "32,84"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "team_slot": 1,
+     "home_location": "45,95"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "team_slot": 0,
+     "home_location": "89,39"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "team_slot": 1,
+     "home_location": "102,50"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "32,84",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "45,95"
+     ],
+     "opponents": [
+      "102,50",
+      "89,39"
+     ]
+    },
+    {
+     "home": "45,95",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "32,84"
+     ],
+     "opponents": [
+      "102,50",
+      "89,39"
+     ]
+    },
+    {
+     "home": "89,39",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "102,50"
+     ],
+     "opponents": [
+      "32,84",
+      "45,95"
+     ]
+    },
+    {
+     "home": "102,50",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "89,39"
+     ],
+     "opponents": [
+      "32,84",
+      "45,95"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 109.1,
+   "peak_rss_bytes": 5571493888,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "2v2_terra_allies_soviets|1337|1",
+   "setup": "2v2_terra_allies_soviets",
+   "map": "terra_cotta",
+   "map_sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d",
+   "team_size": 2,
+   "seed": 1337,
+   "game_in_pair": 1,
+   "map_yaml_sha256": "a999b7616c4a11ecc259186ffb6ae11fe4d624021309b031b1c71a522375f112",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "team_slot": 0,
+     "home_location": "32,84"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "team_slot": 1,
+     "home_location": "45,95"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "team_slot": 0,
+     "home_location": "89,39"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "team_slot": 1,
+     "home_location": "102,50"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "32,84",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "45,95"
+     ],
+     "opponents": [
+      "102,50",
+      "89,39"
+     ]
+    },
+    {
+     "home": "45,95",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "32,84"
+     ],
+     "opponents": [
+      "102,50",
+      "89,39"
+     ]
+    },
+    {
+     "home": "89,39",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "102,50"
+     ],
+     "opponents": [
+      "32,84",
+      "45,95"
+     ]
+    },
+    {
+     "home": "102,50",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "89,39"
+     ],
+     "opponents": [
+      "32,84",
+      "45,95"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 111.1,
+   "peak_rss_bytes": 5114314752,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "3v3_basics_gna|1337|0",
+   "setup": "3v3_basics_gna",
+   "map": "back_to_basics",
+   "map_sha256": "ddd071d131895ecb59be66b7d1924b023731c52a04ee01052fa9fc384dd15e6b",
+   "team_size": 3,
+   "seed": 1337,
+   "game_in_pair": 0,
+   "map_yaml_sha256": "1d0fbcf7a1d06e0fb8a790ae04f751e01edde81063413ce994813e5323f9a512",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "team_slot": 0,
+     "home_location": "31,12"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "team_slot": 1,
+     "home_location": "49,14"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "team_slot": 2,
+     "home_location": "67,12"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "team_slot": 0,
+     "home_location": "31,85"
+    },
+    {
+     "home": "Multi4",
+     "spawn": 4,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "team_slot": 1,
+     "home_location": "49,83"
+    },
+    {
+     "home": "Multi5",
+     "spawn": 5,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "team_slot": 2,
+     "home_location": "67,85"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "31,12",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "49,14",
+      "67,12"
+     ],
+     "opponents": [
+      "31,85",
+      "49,83",
+      "67,85"
+     ]
+    },
+    {
+     "home": "49,14",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "31,12",
+      "67,12"
+     ],
+     "opponents": [
+      "31,85",
+      "49,83",
+      "67,85"
+     ]
+    },
+    {
+     "home": "67,12",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "31,12",
+      "49,14"
+     ],
+     "opponents": [
+      "31,85",
+      "49,83",
+      "67,85"
+     ]
+    },
+    {
+     "home": "31,85",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "49,83",
+      "67,85"
+     ],
+     "opponents": [
+      "31,12",
+      "49,14",
+      "67,12"
+     ]
+    },
+    {
+     "home": "49,83",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "31,85",
+      "67,85"
+     ],
+     "opponents": [
+      "31,12",
+      "49,14",
+      "67,12"
+     ]
+    },
+    {
+     "home": "67,85",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "31,85",
+      "49,83"
+     ],
+     "opponents": [
+      "31,12",
+      "49,14",
+      "67,12"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 113.1,
+   "peak_rss_bytes": 5221576704,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "3v3_basics_gna|1337|1",
+   "setup": "3v3_basics_gna",
+   "map": "back_to_basics",
+   "map_sha256": "ddd071d131895ecb59be66b7d1924b023731c52a04ee01052fa9fc384dd15e6b",
+   "team_size": 3,
+   "seed": 1337,
+   "game_in_pair": 1,
+   "map_yaml_sha256": "9ea515ea725da8a09a5bde8d18ff41deb48905e8f028d3185eae62391fbe5283",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "team_slot": 0,
+     "home_location": "31,12"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "team_slot": 1,
+     "home_location": "49,14"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "team_slot": 2,
+     "home_location": "67,12"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "team_slot": 0,
+     "home_location": "31,85"
+    },
+    {
+     "home": "Multi4",
+     "spawn": 4,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "team_slot": 1,
+     "home_location": "49,83"
+    },
+    {
+     "home": "Multi5",
+     "spawn": 5,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "team_slot": 2,
+     "home_location": "67,85"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "31,12",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "49,14",
+      "67,12"
+     ],
+     "opponents": [
+      "31,85",
+      "49,83",
+      "67,85"
+     ]
+    },
+    {
+     "home": "49,14",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "31,12",
+      "67,12"
+     ],
+     "opponents": [
+      "31,85",
+      "49,83",
+      "67,85"
+     ]
+    },
+    {
+     "home": "67,12",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "31,12",
+      "49,14"
+     ],
+     "opponents": [
+      "31,85",
+      "49,83",
+      "67,85"
+     ]
+    },
+    {
+     "home": "31,85",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "49,83",
+      "67,85"
+     ],
+     "opponents": [
+      "31,12",
+      "49,14",
+      "67,12"
+     ]
+    },
+    {
+     "home": "49,83",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "31,85",
+      "67,85"
+     ],
+     "opponents": [
+      "31,12",
+      "49,14",
+      "67,12"
+     ]
+    },
+    {
+     "home": "67,85",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "31,85",
+      "49,83"
+     ],
+     "opponents": [
+      "31,12",
+      "49,14",
+      "67,12"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 115.1,
+   "peak_rss_bytes": 5222912000,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "3v3_basics_nas|1337|0",
+   "setup": "3v3_basics_nas",
+   "map": "back_to_basics",
+   "map_sha256": "ddd071d131895ecb59be66b7d1924b023731c52a04ee01052fa9fc384dd15e6b",
+   "team_size": 3,
+   "seed": 1337,
+   "game_in_pair": 0,
+   "map_yaml_sha256": "8e3b88632929f37cc50f878888aadf5384f28caa0e0146f5fc21c28a18e97e2b",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "team_slot": 0,
+     "home_location": "31,12"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "team_slot": 1,
+     "home_location": "49,14"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "team_slot": 2,
+     "home_location": "67,12"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "team_slot": 0,
+     "home_location": "31,85"
+    },
+    {
+     "home": "Multi4",
+     "spawn": 4,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "team_slot": 1,
+     "home_location": "49,83"
+    },
+    {
+     "home": "Multi5",
+     "spawn": 5,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "team_slot": 2,
+     "home_location": "67,85"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "31,12",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "49,14",
+      "67,12"
+     ],
+     "opponents": [
+      "31,85",
+      "49,83",
+      "67,85"
+     ]
+    },
+    {
+     "home": "49,14",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "31,12",
+      "67,12"
+     ],
+     "opponents": [
+      "31,85",
+      "49,83",
+      "67,85"
+     ]
+    },
+    {
+     "home": "67,12",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "31,12",
+      "49,14"
+     ],
+     "opponents": [
+      "31,85",
+      "49,83",
+      "67,85"
+     ]
+    },
+    {
+     "home": "31,85",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "49,83",
+      "67,85"
+     ],
+     "opponents": [
+      "31,12",
+      "49,14",
+      "67,12"
+     ]
+    },
+    {
+     "home": "49,83",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "31,85",
+      "67,85"
+     ],
+     "opponents": [
+      "31,12",
+      "49,14",
+      "67,12"
+     ]
+    },
+    {
+     "home": "67,85",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "31,85",
+      "49,83"
+     ],
+     "opponents": [
+      "31,12",
+      "49,14",
+      "67,12"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 112.1,
+   "peak_rss_bytes": 5591777280,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "3v3_basics_nas|1337|1",
+   "setup": "3v3_basics_nas",
+   "map": "back_to_basics",
+   "map_sha256": "ddd071d131895ecb59be66b7d1924b023731c52a04ee01052fa9fc384dd15e6b",
+   "team_size": 3,
+   "seed": 1337,
+   "game_in_pair": 1,
+   "map_yaml_sha256": "a8a6bbb289f4e57d9f5bb7f7334ccc0bd82a329431ee210c0b41318a5eeeedfb",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "team_slot": 0,
+     "home_location": "31,12"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "team_slot": 1,
+     "home_location": "49,14"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "team_slot": 2,
+     "home_location": "67,12"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "team_slot": 0,
+     "home_location": "31,85"
+    },
+    {
+     "home": "Multi4",
+     "spawn": 4,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "team_slot": 1,
+     "home_location": "49,83"
+    },
+    {
+     "home": "Multi5",
+     "spawn": 5,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "team_slot": 2,
+     "home_location": "67,85"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "31,12",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "49,14",
+      "67,12"
+     ],
+     "opponents": [
+      "31,85",
+      "49,83",
+      "67,85"
+     ]
+    },
+    {
+     "home": "49,14",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "31,12",
+      "67,12"
+     ],
+     "opponents": [
+      "31,85",
+      "49,83",
+      "67,85"
+     ]
+    },
+    {
+     "home": "67,12",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "31,12",
+      "49,14"
+     ],
+     "opponents": [
+      "31,85",
+      "49,83",
+      "67,85"
+     ]
+    },
+    {
+     "home": "31,85",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "49,83",
+      "67,85"
+     ],
+     "opponents": [
+      "31,12",
+      "49,14",
+      "67,12"
+     ]
+    },
+    {
+     "home": "49,83",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "31,85",
+      "67,85"
+     ],
+     "opponents": [
+      "31,12",
+      "49,14",
+      "67,12"
+     ]
+    },
+    {
+     "home": "67,85",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "31,85",
+      "49,83"
+     ],
+     "opponents": [
+      "31,12",
+      "49,14",
+      "67,12"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 113.1,
+   "peak_rss_bytes": 5213691904,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "3v3_winter_asg|1337|0",
+   "setup": "3v3_winter_asg",
+   "map": "winters_end_rich",
+   "map_sha256": "a29eea3fef3087d5544c428d2d07d59f4430806c0b23db7eeb605dde7013c94e",
+   "team_size": 3,
+   "seed": 1337,
+   "game_in_pair": 0,
+   "map_yaml_sha256": "67cb27410aa4e05166265570d30f154a9af1cc9cee20029a171a199eace368da",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "team_slot": 0,
+     "home_location": "6,34"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "team_slot": 1,
+     "home_location": "26,26"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "team_slot": 2,
+     "home_location": "34,6"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "team_slot": 0,
+     "home_location": "95,123"
+    },
+    {
+     "home": "Multi4",
+     "spawn": 4,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "team_slot": 1,
+     "home_location": "103,103"
+    },
+    {
+     "home": "Multi5",
+     "spawn": 5,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "team_slot": 2,
+     "home_location": "123,95"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "6,34",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "26,26",
+      "34,6"
+     ],
+     "opponents": [
+      "103,103",
+      "123,95",
+      "95,123"
+     ]
+    },
+    {
+     "home": "26,26",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "34,6",
+      "6,34"
+     ],
+     "opponents": [
+      "103,103",
+      "123,95",
+      "95,123"
+     ]
+    },
+    {
+     "home": "34,6",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "26,26",
+      "6,34"
+     ],
+     "opponents": [
+      "103,103",
+      "123,95",
+      "95,123"
+     ]
+    },
+    {
+     "home": "95,123",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "103,103",
+      "123,95"
+     ],
+     "opponents": [
+      "26,26",
+      "34,6",
+      "6,34"
+     ]
+    },
+    {
+     "home": "103,103",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "123,95",
+      "95,123"
+     ],
+     "opponents": [
+      "26,26",
+      "34,6",
+      "6,34"
+     ]
+    },
+    {
+     "home": "123,95",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "103,103",
+      "95,123"
+     ],
+     "opponents": [
+      "26,26",
+      "34,6",
+      "6,34"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 119.1,
+   "peak_rss_bytes": 5518598144,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "3v3_winter_asg|1337|1",
+   "setup": "3v3_winter_asg",
+   "map": "winters_end_rich",
+   "map_sha256": "a29eea3fef3087d5544c428d2d07d59f4430806c0b23db7eeb605dde7013c94e",
+   "team_size": 3,
+   "seed": 1337,
+   "game_in_pair": 1,
+   "map_yaml_sha256": "595021fe97202e4fd21e0bc0c4947f2dfbece8cef877c3c881247c5b0fcc4d4c",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "team_slot": 0,
+     "home_location": "6,34"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "team_slot": 1,
+     "home_location": "26,26"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "team_slot": 2,
+     "home_location": "34,6"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "team_slot": 0,
+     "home_location": "95,123"
+    },
+    {
+     "home": "Multi4",
+     "spawn": 4,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "team_slot": 1,
+     "home_location": "103,103"
+    },
+    {
+     "home": "Multi5",
+     "spawn": 5,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "team_slot": 2,
+     "home_location": "123,95"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "6,34",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "26,26",
+      "34,6"
+     ],
+     "opponents": [
+      "103,103",
+      "123,95",
+      "95,123"
+     ]
+    },
+    {
+     "home": "26,26",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "34,6",
+      "6,34"
+     ],
+     "opponents": [
+      "103,103",
+      "123,95",
+      "95,123"
+     ]
+    },
+    {
+     "home": "34,6",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "26,26",
+      "6,34"
+     ],
+     "opponents": [
+      "103,103",
+      "123,95",
+      "95,123"
+     ]
+    },
+    {
+     "home": "95,123",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "103,103",
+      "123,95"
+     ],
+     "opponents": [
+      "26,26",
+      "34,6",
+      "6,34"
+     ]
+    },
+    {
+     "home": "103,103",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "123,95",
+      "95,123"
+     ],
+     "opponents": [
+      "26,26",
+      "34,6",
+      "6,34"
+     ]
+    },
+    {
+     "home": "123,95",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "103,103",
+      "95,123"
+     ],
+     "opponents": [
+      "26,26",
+      "34,6",
+      "6,34"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 121.1,
+   "peak_rss_bytes": 5164638208,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "3v3_winter_sgn|1337|0",
+   "setup": "3v3_winter_sgn",
+   "map": "winters_end_rich",
+   "map_sha256": "a29eea3fef3087d5544c428d2d07d59f4430806c0b23db7eeb605dde7013c94e",
+   "team_size": 3,
+   "seed": 1337,
+   "game_in_pair": 0,
+   "map_yaml_sha256": "2cfa4d99d1bb547750d3a6642362a1a4ed202e6892769e1c189ffd74b4c00cfe",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "team_slot": 0,
+     "home_location": "6,34"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "team_slot": 1,
+     "home_location": "26,26"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "team_slot": 2,
+     "home_location": "34,6"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "team_slot": 0,
+     "home_location": "95,123"
+    },
+    {
+     "home": "Multi4",
+     "spawn": 4,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "team_slot": 1,
+     "home_location": "103,103"
+    },
+    {
+     "home": "Multi5",
+     "spawn": 5,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "team_slot": 2,
+     "home_location": "123,95"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "6,34",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "26,26",
+      "34,6"
+     ],
+     "opponents": [
+      "103,103",
+      "123,95",
+      "95,123"
+     ]
+    },
+    {
+     "home": "26,26",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "34,6",
+      "6,34"
+     ],
+     "opponents": [
+      "103,103",
+      "123,95",
+      "95,123"
+     ]
+    },
+    {
+     "home": "34,6",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "26,26",
+      "6,34"
+     ],
+     "opponents": [
+      "103,103",
+      "123,95",
+      "95,123"
+     ]
+    },
+    {
+     "home": "95,123",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "103,103",
+      "123,95"
+     ],
+     "opponents": [
+      "26,26",
+      "34,6",
+      "6,34"
+     ]
+    },
+    {
+     "home": "103,103",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "123,95",
+      "95,123"
+     ],
+     "opponents": [
+      "26,26",
+      "34,6",
+      "6,34"
+     ]
+    },
+    {
+     "home": "123,95",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "103,103",
+      "95,123"
+     ],
+     "opponents": [
+      "26,26",
+      "34,6",
+      "6,34"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 121.1,
+   "peak_rss_bytes": 5199282176,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "3v3_winter_sgn|1337|1",
+   "setup": "3v3_winter_sgn",
+   "map": "winters_end_rich",
+   "map_sha256": "a29eea3fef3087d5544c428d2d07d59f4430806c0b23db7eeb605dde7013c94e",
+   "team_size": 3,
+   "seed": 1337,
+   "game_in_pair": 1,
+   "map_yaml_sha256": "bc9461d52b7a8d8385cc1d59f3eabf38d77c6651220f37984be1570d41bf971e",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "team_slot": 0,
+     "home_location": "6,34"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "team_slot": 1,
+     "home_location": "26,26"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "team_slot": 2,
+     "home_location": "34,6"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "team_slot": 0,
+     "home_location": "95,123"
+    },
+    {
+     "home": "Multi4",
+     "spawn": 4,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "team_slot": 1,
+     "home_location": "103,103"
+    },
+    {
+     "home": "Multi5",
+     "spawn": 5,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "team_slot": 2,
+     "home_location": "123,95"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "6,34",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "26,26",
+      "34,6"
+     ],
+     "opponents": [
+      "103,103",
+      "123,95",
+      "95,123"
+     ]
+    },
+    {
+     "home": "26,26",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "34,6",
+      "6,34"
+     ],
+     "opponents": [
+      "103,103",
+      "123,95",
+      "95,123"
+     ]
+    },
+    {
+     "home": "34,6",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "26,26",
+      "6,34"
+     ],
+     "opponents": [
+      "103,103",
+      "123,95",
+      "95,123"
+     ]
+    },
+    {
+     "home": "95,123",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "103,103",
+      "123,95"
+     ],
+     "opponents": [
+      "26,26",
+      "34,6",
+      "6,34"
+     ]
+    },
+    {
+     "home": "103,103",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "123,95",
+      "95,123"
+     ],
+     "opponents": [
+      "26,26",
+      "34,6",
+      "6,34"
+     ]
+    },
+    {
+     "home": "123,95",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "103,103",
+      "95,123"
+     ],
+     "opponents": [
+      "26,26",
+      "34,6",
+      "6,34"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 119.1,
+   "peak_rss_bytes": 5230800896,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "4v4_sahara|1337|0",
+   "setup": "4v4_sahara",
+   "map": "great_sahara_2",
+   "map_sha256": "8b5c089c7cd2f8209819afa04436d6fa15849e125823ddc16bf5e996cd280ddc",
+   "team_size": 4,
+   "seed": 1337,
+   "game_in_pair": 0,
+   "map_yaml_sha256": "a97715dd8eae8e55b25ed13e3c94812b2d37394aed3179f02dcfe8137571466f",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "team_slot": 0,
+     "home_location": "11,32"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "team_slot": 1,
+     "home_location": "18,25"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "team_slot": 2,
+     "home_location": "25,18"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "team_slot": 3,
+     "home_location": "32,11"
+    },
+    {
+     "home": "Multi4",
+     "spawn": 4,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "team_slot": 0,
+     "home_location": "61,84"
+    },
+    {
+     "home": "Multi5",
+     "spawn": 5,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "team_slot": 1,
+     "home_location": "68,77"
+    },
+    {
+     "home": "Multi6",
+     "spawn": 6,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "team_slot": 2,
+     "home_location": "76,71"
+    },
+    {
+     "home": "Multi7",
+     "spawn": 7,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "team_slot": 3,
+     "home_location": "83,64"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "83,64",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "61,84",
+      "68,77",
+      "76,71"
+     ],
+     "opponents": [
+      "11,32",
+      "18,25",
+      "25,18",
+      "32,11"
+     ]
+    },
+    {
+     "home": "76,71",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "61,84",
+      "68,77",
+      "83,64"
+     ],
+     "opponents": [
+      "11,32",
+      "18,25",
+      "25,18",
+      "32,11"
+     ]
+    },
+    {
+     "home": "68,77",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "61,84",
+      "76,71",
+      "83,64"
+     ],
+     "opponents": [
+      "11,32",
+      "18,25",
+      "25,18",
+      "32,11"
+     ]
+    },
+    {
+     "home": "61,84",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "68,77",
+      "76,71",
+      "83,64"
+     ],
+     "opponents": [
+      "11,32",
+      "18,25",
+      "25,18",
+      "32,11"
+     ]
+    },
+    {
+     "home": "32,11",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "11,32",
+      "18,25",
+      "25,18"
+     ],
+     "opponents": [
+      "61,84",
+      "68,77",
+      "76,71",
+      "83,64"
+     ]
+    },
+    {
+     "home": "25,18",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "11,32",
+      "18,25",
+      "32,11"
+     ],
+     "opponents": [
+      "61,84",
+      "68,77",
+      "76,71",
+      "83,64"
+     ]
+    },
+    {
+     "home": "18,25",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "11,32",
+      "25,18",
+      "32,11"
+     ],
+     "opponents": [
+      "61,84",
+      "68,77",
+      "76,71",
+      "83,64"
+     ]
+    },
+    {
+     "home": "11,32",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "18,25",
+      "25,18",
+      "32,11"
+     ],
+     "opponents": [
+      "61,84",
+      "68,77",
+      "76,71",
+      "83,64"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 118.1,
+   "peak_rss_bytes": 5544087552,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "4v4_sahara|1337|1",
+   "setup": "4v4_sahara",
+   "map": "great_sahara_2",
+   "map_sha256": "8b5c089c7cd2f8209819afa04436d6fa15849e125823ddc16bf5e996cd280ddc",
+   "team_size": 4,
+   "seed": 1337,
+   "game_in_pair": 1,
+   "map_yaml_sha256": "5aadaef067f25186f1f41a5d651a94338bccb6602d49c1e6178e22a1b02d308b",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "team_slot": 0,
+     "home_location": "11,32"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "team_slot": 1,
+     "home_location": "18,25"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "team_slot": 2,
+     "home_location": "25,18"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "team_slot": 3,
+     "home_location": "32,11"
+    },
+    {
+     "home": "Multi4",
+     "spawn": 4,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "team_slot": 0,
+     "home_location": "61,84"
+    },
+    {
+     "home": "Multi5",
+     "spawn": 5,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "team_slot": 1,
+     "home_location": "68,77"
+    },
+    {
+     "home": "Multi6",
+     "spawn": 6,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "team_slot": 2,
+     "home_location": "76,71"
+    },
+    {
+     "home": "Multi7",
+     "spawn": 7,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "team_slot": 3,
+     "home_location": "83,64"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "83,64",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "61,84",
+      "68,77",
+      "76,71"
+     ],
+     "opponents": [
+      "11,32",
+      "18,25",
+      "25,18",
+      "32,11"
+     ]
+    },
+    {
+     "home": "76,71",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "61,84",
+      "68,77",
+      "83,64"
+     ],
+     "opponents": [
+      "11,32",
+      "18,25",
+      "25,18",
+      "32,11"
+     ]
+    },
+    {
+     "home": "68,77",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "61,84",
+      "76,71",
+      "83,64"
+     ],
+     "opponents": [
+      "11,32",
+      "18,25",
+      "25,18",
+      "32,11"
+     ]
+    },
+    {
+     "home": "61,84",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "68,77",
+      "76,71",
+      "83,64"
+     ],
+     "opponents": [
+      "11,32",
+      "18,25",
+      "25,18",
+      "32,11"
+     ]
+    },
+    {
+     "home": "32,11",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "11,32",
+      "18,25",
+      "25,18"
+     ],
+     "opponents": [
+      "61,84",
+      "68,77",
+      "76,71",
+      "83,64"
+     ]
+    },
+    {
+     "home": "25,18",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "11,32",
+      "18,25",
+      "32,11"
+     ],
+     "opponents": [
+      "61,84",
+      "68,77",
+      "76,71",
+      "83,64"
+     ]
+    },
+    {
+     "home": "18,25",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "11,32",
+      "25,18",
+      "32,11"
+     ],
+     "opponents": [
+      "61,84",
+      "68,77",
+      "76,71",
+      "83,64"
+     ]
+    },
+    {
+     "home": "11,32",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "18,25",
+      "25,18",
+      "32,11"
+     ],
+     "opponents": [
+      "61,84",
+      "68,77",
+      "76,71",
+      "83,64"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 119.1,
+   "peak_rss_bytes": 5305434112,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "4v4_ice|1337|0",
+   "setup": "4v4_ice",
+   "map": "ice_cold",
+   "map_sha256": "e097fcca4fa40f5878b4fb7d965529728dbbd34c2a14b8825e1bec0aea6da98b",
+   "team_size": 4,
+   "seed": 1337,
+   "game_in_pair": 0,
+   "map_yaml_sha256": "bd247b21f401581bc5d8b53aa67dd7997486685f9c1bcee2173594e680bdb59e",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "team_slot": 0,
+     "home_location": "84,17"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "team_slot": 1,
+     "home_location": "92,42"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "team_slot": 2,
+     "home_location": "107,18"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "team_slot": 3,
+     "home_location": "128,29"
+    },
+    {
+     "home": "Multi4",
+     "spawn": 4,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "team_slot": 0,
+     "home_location": "84,124"
+    },
+    {
+     "home": "Multi5",
+     "spawn": 5,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "team_slot": 1,
+     "home_location": "92,99"
+    },
+    {
+     "home": "Multi6",
+     "spawn": 6,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "team_slot": 2,
+     "home_location": "107,123"
+    },
+    {
+     "home": "Multi7",
+     "spawn": 7,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "team_slot": 3,
+     "home_location": "128,112"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "84,17",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "107,18",
+      "128,29",
+      "92,42"
+     ],
+     "opponents": [
+      "107,123",
+      "128,112",
+      "84,124",
+      "92,99"
+     ]
+    },
+    {
+     "home": "92,42",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "107,18",
+      "128,29",
+      "84,17"
+     ],
+     "opponents": [
+      "107,123",
+      "128,112",
+      "84,124",
+      "92,99"
+     ]
+    },
+    {
+     "home": "107,18",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "128,29",
+      "84,17",
+      "92,42"
+     ],
+     "opponents": [
+      "107,123",
+      "128,112",
+      "84,124",
+      "92,99"
+     ]
+    },
+    {
+     "home": "128,29",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "107,18",
+      "84,17",
+      "92,42"
+     ],
+     "opponents": [
+      "107,123",
+      "128,112",
+      "84,124",
+      "92,99"
+     ]
+    },
+    {
+     "home": "84,124",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "107,123",
+      "128,112",
+      "92,99"
+     ],
+     "opponents": [
+      "107,18",
+      "128,29",
+      "84,17",
+      "92,42"
+     ]
+    },
+    {
+     "home": "92,99",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "107,123",
+      "128,112",
+      "84,124"
+     ],
+     "opponents": [
+      "107,18",
+      "128,29",
+      "84,17",
+      "92,42"
+     ]
+    },
+    {
+     "home": "107,123",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "128,112",
+      "84,124",
+      "92,99"
+     ],
+     "opponents": [
+      "107,18",
+      "128,29",
+      "84,17",
+      "92,42"
+     ]
+    },
+    {
+     "home": "128,112",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "107,123",
+      "84,124",
+      "92,99"
+     ],
+     "opponents": [
+      "107,18",
+      "128,29",
+      "84,17",
+      "92,42"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 130.1,
+   "peak_rss_bytes": 5277884416,
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "cell_id": "4v4_ice|1337|1",
+   "setup": "4v4_ice",
+   "map": "ice_cold",
+   "map_sha256": "e097fcca4fa40f5878b4fb7d965529728dbbd34c2a14b8825e1bec0aea6da98b",
+   "team_size": 4,
+   "seed": 1337,
+   "game_in_pair": 1,
+   "map_yaml_sha256": "49e600123f9b35ef1231d4fd79350fe3529cb4331bf1929ae8a1797b001b99d2",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "d44e5ca4653aca5b28d63f83e759f90dc9f21cb4889801cf5e71eb10a23ccad3"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "team_slot": 0,
+     "home_location": "84,17"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "team_slot": 1,
+     "home_location": "92,42"
+    },
+    {
+     "home": "Multi2",
+     "spawn": 2,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "team_slot": 2,
+     "home_location": "107,18"
+    },
+    {
+     "home": "Multi3",
+     "spawn": 3,
+     "side": "A",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "team_slot": 3,
+     "home_location": "128,29"
+    },
+    {
+     "home": "Multi4",
+     "spawn": 4,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "team_slot": 0,
+     "home_location": "84,124"
+    },
+    {
+     "home": "Multi5",
+     "spawn": 5,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "team_slot": 1,
+     "home_location": "92,99"
+    },
+    {
+     "home": "Multi6",
+     "spawn": 6,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "team_slot": 2,
+     "home_location": "107,123"
+    },
+    {
+     "home": "Multi7",
+     "spawn": 7,
+     "side": "B",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "team_slot": 3,
+     "home_location": "128,112"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "84,17",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "107,18",
+      "128,29",
+      "92,42"
+     ],
+     "opponents": [
+      "107,123",
+      "128,112",
+      "84,124",
+      "92,99"
+     ]
+    },
+    {
+     "home": "92,42",
+     "bot_type": "hard_treatment",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "107,18",
+      "128,29",
+      "84,17"
+     ],
+     "opponents": [
+      "107,123",
+      "128,112",
+      "84,124",
+      "92,99"
+     ]
+    },
+    {
+     "home": "107,18",
+     "bot_type": "hard_treatment",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "128,29",
+      "84,17",
+      "92,42"
+     ],
+     "opponents": [
+      "107,123",
+      "128,112",
+      "84,124",
+      "92,99"
+     ]
+    },
+    {
+     "home": "128,29",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "107,18",
+      "84,17",
+      "92,42"
+     ],
+     "opponents": [
+      "107,123",
+      "128,112",
+      "84,124",
+      "92,99"
+     ]
+    },
+    {
+     "home": "84,124",
+     "bot_type": "hard_control",
+     "faction": "ra1_soviets",
+     "outcome": "lost",
+     "allies": [
+      "107,123",
+      "128,112",
+      "92,99"
+     ],
+     "opponents": [
+      "107,18",
+      "128,29",
+      "84,17",
+      "92,42"
+     ]
+    },
+    {
+     "home": "92,99",
+     "bot_type": "hard_control",
+     "faction": "ra1_allies",
+     "outcome": "lost",
+     "allies": [
+      "107,123",
+      "128,112",
+      "84,124"
+     ],
+     "opponents": [
+      "107,18",
+      "128,29",
+      "84,17",
+      "92,42"
+     ]
+    },
+    {
+     "home": "107,123",
+     "bot_type": "hard_control",
+     "faction": "td_nod",
+     "outcome": "lost",
+     "allies": [
+      "128,112",
+      "84,124",
+      "92,99"
+     ],
+     "opponents": [
+      "107,18",
+      "128,29",
+      "84,17",
+      "92,42"
+     ]
+    },
+    {
+     "home": "128,112",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [
+      "107,123",
+      "84,124",
+      "92,99"
+     ],
+     "opponents": [
+      "107,18",
+      "128,29",
+      "84,17",
+      "92,42"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 128.1,
+   "peak_rss_bytes": 5201625088,
+   "verdict": "ACCEPTED",
+   "problems": []
+  }
+ ],
+ "pairs": [
+  {
+   "setup": "1v1_nuclear_gdi",
+   "map": "nuclear_winter",
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "setup": "1v1_nuclear_nod",
+   "map": "nuclear_winter",
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "setup": "1v1_satans_allies",
+   "map": "satans_clutch",
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "setup": "1v1_satans_soviets",
+   "map": "satans_clutch",
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "setup": "2v2_red_gdi_nod",
+   "map": "red_spice",
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "setup": "2v2_red_gdi_allies",
+   "map": "red_spice",
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "setup": "2v2_red_gdi_soviets",
+   "map": "red_spice",
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "setup": "2v2_terra_nod_allies",
+   "map": "terra_cotta",
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "setup": "2v2_terra_nod_soviets",
+   "map": "terra_cotta",
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "setup": "2v2_terra_allies_soviets",
+   "map": "terra_cotta",
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "setup": "3v3_basics_gna",
+   "map": "back_to_basics",
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "setup": "3v3_basics_nas",
+   "map": "back_to_basics",
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "setup": "3v3_winter_asg",
+   "map": "winters_end_rich",
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "setup": "3v3_winter_sgn",
+   "map": "winters_end_rich",
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "setup": "4v4_sahara",
+   "map": "great_sahara_2",
+   "verdict": "ACCEPTED",
+   "problems": []
+  },
+  {
+   "setup": "4v4_ice",
+   "map": "ice_cold",
+   "verdict": "ACCEPTED",
+   "problems": []
+  }
+ ],
+ "accepted_maps": [
+  "back_to_basics",
+  "great_sahara_2",
+  "ice_cold",
+  "nuclear_winter",
+  "red_spice",
+  "satans_clutch",
+  "terra_cotta",
+  "winters_end_rich"
+ ],
+ "all_selected_accepted": true,
+ "host": "Linux cloud container (Claude Code), engine/bin = build of c07bef43 + this branch's mod changes"
+}

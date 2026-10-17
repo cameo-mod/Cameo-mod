@@ -192,9 +192,19 @@ namespace OpenRA.Mods.Cameo.Traits
 			return members.Length == 0 ? null : BotModules.BotOrderGroup.RebuildWithMembers(order, members);
 		}
 
+		// Actor-authored combat unloading is a local transport ability, not a squad hand-off.
+		// Only the existing external trigger manager may use this exception; movement and
+		// other modules' orders still require the normal lease verdict.
+		internal static bool IsTransportSelfUnload(string issuer, string order, bool hasCargo) =>
+			hasCargo && order == "Unload" && BotIssuer.TypeOf(issuer) == "ExternalBotOrdersManager";
+
 		bool PassesMember(Actor unit, Order order, string issuer, bool emergency, BotModules.BotUnitLeaseRegistry registry)
 		{
 			if (registry == null)
+				return true;
+
+			if (order.Subject == unit && order.GroupedActors == null
+				&& IsTransportSelfUnload(issuer, order.OrderString, unit.Info.HasTraitInfo<CargoInfo>()))
 				return true;
 
 			var leases = (IBotUnitLeases)registry;

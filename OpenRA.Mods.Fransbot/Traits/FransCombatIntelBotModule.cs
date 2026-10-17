@@ -98,7 +98,8 @@ namespace OpenRA.Mods.Common.Traits
 	}
 
 	public class FransCombatIntelBotModule : ConditionalTrait<FransCombatIntelBotModuleInfo>,
-		IBotTick, IFransCombatIntelService, OpenRA.Mods.CA.Traits.IBotEnemyCompositionProvider
+		IBotTick, IFransCombatIntelService, OpenRA.Mods.CA.Traits.IBotEnemyCompositionProvider,
+		OpenRA.Mods.CA.Traits.IAiMemoryTelemetryProbe
 	{
 		sealed class EnemyCombatMemory
 		{
@@ -178,6 +179,20 @@ namespace OpenRA.Mods.Common.Traits
 			}
 			valueByActorType = sample;
 			return true;
+		}
+
+		// FINDINGS S8 memory telemetry: the persistent-structure retention footprint of this
+		// module as flat counters — the suspected 8 GB growth channel measured directly.
+		IEnumerable<KeyValuePair<string, long>> OpenRA.Mods.CA.Traits.IAiMemoryTelemetryProbe.MemoryProbeCounts
+		{
+			get
+			{
+				yield return new KeyValuePair<string, long>("combat_memory_entries", enemyCombatMemory.Count);
+				yield return new KeyValuePair<string, long>("combat_contacts", enemyCombatContacts.Length);
+				yield return new KeyValuePair<string, long>("visible_actor_ids", visibleActorIds.Length);
+				yield return new KeyValuePair<string, long>("visible_enemy_ids", visibleEnemyActorIds.Length);
+				yield return new KeyValuePair<string, long>("owned_actor_ids", ownedActorIds.Length);
+			}
 		}
 
 		public IReadOnlyList<Actor> OwnedActors

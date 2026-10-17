@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <EngineRootPath>../engine</EngineRootPath>
+  </PropertyGroup>
+  <Import Project="../engine/Directory.Build.props" />
+  <ItemGroup>
+    <ProjectReference Include="$(EngineRootPath)/OpenRA.Game/OpenRA.Game.csproj">
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

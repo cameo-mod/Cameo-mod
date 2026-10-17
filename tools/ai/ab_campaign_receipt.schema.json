@@ -4,10 +4,28 @@
   "title": "Cameo A/B campaign per-game receipt",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "campaign_id", "manifest_sha256", "baseline_commit", "engine_sha256", "switch", "setup_id", "map", "pair_id", "pair_member", "seed", "seed_proof", "teams", "resolved_seats", "end_class", "end_reason", "winner_team", "world_tick", "cap", "memory", "runtime", "artifacts"],
+  "required": ["schema_version", "campaign_id", "manifest_sha256", "cell_id", "game_uid", "status", "seats", "seat_proof_source", "map_yaml_sha256", "control_side", "treatment_side", "arm_bot_types", "cap_marker", "cap_tick", "support_complete", "setup", "map_sha256", "pair", "game_in_pair", "duration_ticks", "peak_memory_bytes", "baseline_commit", "engine_sha256", "switch", "setup_id", "map", "pair_id", "pair_member", "seed", "seed_proof", "teams", "resolved_seats", "end_class", "end_reason", "winner_team", "world_tick", "end_tick", "cap", "deployment", "memory", "runtime", "artifacts"],
   "properties": {
     "schema_version": {"const": 1},
     "campaign_id": {"type": "string", "minLength": 1},
+    "cell_id": {"type": "string", "minLength": 1},
+    "game_uid": {"type": ["string", "null"], "minLength": 1},
+    "status": {"type": "string", "minLength": 1},
+    "seats": {"type": "array", "minItems": 2, "items": {"type": "object"}},
+    "seat_proof_source": {"type": "string"},
+    "map_yaml_sha256": {"$ref": "#/$defs/sha"},
+    "control_side": {"enum": ["A", "B"]},
+    "treatment_side": {"enum": ["A", "B"]},
+    "arm_bot_types": {"type": "object"},
+    "cap_marker": {"type": "boolean"},
+    "cap_tick": {"type": ["integer", "null"], "minimum": 0},
+    "support_complete": {"type": "boolean"},
+    "setup": {"type": "string", "minLength": 1},
+    "map_sha256": {"$ref": "#/$defs/sha"},
+    "pair": {"type": "integer", "minimum": 0},
+    "game_in_pair": {"type": "integer", "enum": [0, 1]},
+    "duration_ticks": {"type": ["integer", "null"], "minimum": 0},
+    "peak_memory_bytes": {"type": ["integer", "null"], "minimum": 0},
     "manifest_sha256": {"$ref": "#/$defs/sha"},
     "baseline_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
     "engine_sha256": {"$ref": "#/$defs/sha"},
@@ -24,10 +42,15 @@
     "end_reason": {"type": ["string", "null"]},
     "winner_team": {"enum": ["A", "B", null]},
     "world_tick": {"type": ["integer", "null"], "minimum": 0},
+    "end_tick": {"type": ["integer", "null"], "minimum": 0},
     "cap": {"type": "object", "additionalProperties": false, "required": ["world_tick_cap", "marker_observed", "marker_tick"], "properties": {"world_tick_cap": {"const": 45000}, "marker_observed": {"type": "boolean"}, "marker_tick": {"type": ["integer", "null"], "minimum": 0}}},
+    "deployment": {"type": "object", "additionalProperties": false, "required": ["verified", "check_tick", "reported_seat_count", "expected_seat_count", "seats", "missing"], "properties": {"verified": {"type": "boolean"}, "check_tick": {"type": ["integer", "null"], "minimum": 0}, "reported_seat_count": {"type": ["integer", "null"], "minimum": 0}, "expected_seat_count": {"type": ["integer", "null"], "minimum": 0}, "seats": {"type": "object", "additionalProperties": {"type": "object", "additionalProperties": false, "required": ["tick", "type"], "properties": {"tick": {"type": "integer", "minimum": 0, "maximum": 100}, "type": {"enum": ["td_gdi_constructionyard", "td_nod_constructionyard", "ra1_allies_constructionyard", "ra1_soviets_constructionyard"]}}}}, "missing": {"type": "array", "items": {"type": "string"}}}},
     "memory": {"type": "object", "additionalProperties": false, "required": ["process_id", "peak_private_bytes", "limit_private_bytes", "samples"], "properties": {"process_id": {"type": ["integer", "null"], "minimum": 1}, "peak_private_bytes": {"type": "integer", "minimum": 0}, "limit_private_bytes": {"const": 11274289152}, "samples": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["utc", "world_tick", "private_bytes", "actor_count"], "properties": {"utc": {"type": "string", "format": "date-time"}, "world_tick": {"type": ["integer", "null"], "minimum": 0}, "private_bytes": {"type": "integer", "minimum": 0}, "actor_count": {"type": ["integer", "null"], "minimum": 0}}}}}},
-    "runtime": {"type": "object", "additionalProperties": false, "required": ["started_utc", "finished_utc", "exit_code", "wall_seconds", "stall_seconds", "pid_scoped_cleanup"], "properties": {"started_utc": {"type": ["string", "null"], "format": "date-time"}, "finished_utc": {"type": ["string", "null"], "format": "date-time"}, "exit_code": {"type": ["integer", "null"]}, "wall_seconds": {"type": ["number", "null"], "minimum": 0}, "stall_seconds": {"const": 180}, "pid_scoped_cleanup": {"type": "boolean"}}},
-    "artifacts": {"type": "object", "additionalProperties": false, "required": ["server_log", "driver_log", "matches_jsonl", "replay", "map_yaml", "support_bundle"], "properties": {"server_log": {"$ref": "#/$defs/artifact"}, "driver_log": {"$ref": "#/$defs/artifact"}, "matches_jsonl": {"$ref": "#/$defs/artifact"}, "replay": {"$ref": "#/$defs/artifact"}, "map_yaml": {"$ref": "#/$defs/artifact"}, "support_bundle": {"$ref": "#/$defs/artifact"}}}
+    "runtime": {"type": "object", "additionalProperties": false, "required": ["started_utc", "finished_utc", "exit_code", "wall_seconds", "stall_seconds", "pid_scoped_cleanup"], "properties": {"started_utc": {"type": ["string", "null"], "format": "date-time"}, "finished_utc": {"type": ["string", "null"], "format": "date-time"}, "exit_code": {"type": ["integer", "null"]}, "wall_seconds": {"type": ["number", "null"], "minimum": 0}, "stall_seconds": {"const": 180}, "pid_scoped_cleanup": {"type": "boolean"}, "render": {"enum": ["fast", "headless"]}}},
+    "artifacts": {"type": "object", "additionalProperties": false, "required": ["server_log", "driver_log", "matches_jsonl", "replay", "map_yaml", "support_bundle"], "properties": {"server_log": {"$ref": "#/$defs/artifact"}, "driver_log": {"$ref": "#/$defs/artifact"}, "matches_jsonl": {"$ref": "#/$defs/artifact"}, "replay": {"$ref": "#/$defs/artifact"}, "map_yaml": {"$ref": "#/$defs/artifact"}, "support_bundle": {"$ref": "#/$defs/artifact"}}},
+    "capture_kind": {"enum": ["sentinel_diagnostic", "match_batch", "legacy_import"]},
+    "scoreable": {"type": "boolean"},
+    "capture_provenance": {"type": "object"}
   },
   "$defs": {
     "sha": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
@@ -62,6 +85,7 @@
     "artifact": {"type": "object", "additionalProperties": false, "required": ["path", "sha256", "missing_reason"], "properties": {"path": {"type": ["string", "null"]}, "sha256": {"anyOf": [{"$ref": "#/$defs/sha"}, {"type": "null"}]}, "missing_reason": {"type": ["string", "null"]}}}
   },
   "allOf": [
+    {"if": {"properties": {"end_class": {"enum": ["NATURAL", "CAP"]}}, "required": ["end_class"]}, "then": {"properties": {"game_uid": {"type": "string", "minLength": 1}}}},
     {"if": {"properties": {"end_class": {"const": "NATURAL"}}, "required": ["end_class"]}, "then": {"properties": {"end_reason": {"type": "string"}}}},
     {"if": {"properties": {"end_class": {"enum": ["CAP", "INCOMPLETE"]}}, "required": ["end_class"]}, "then": {"properties": {"winner_team": {"type": "null"}}}}
   ]

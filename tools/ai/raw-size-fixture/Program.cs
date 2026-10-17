@@ -29,17 +29,22 @@ var assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(dll);
 var schema = assembly.GetType("OpenRA.Mods.Cameo.Traits.AiEconomyHealthSchema", throwOnError: true)!;
 var flags = BindingFlags.Static | BindingFlags.NonPublic;
 var raw = schema.GetMethod("Raw", flags) ?? throw new InvalidOperationException("Raw serializer unavailable");
-var accepted = schema.GetMethod("AcceptedResourceEvidence", flags)
-    ?? throw new InvalidOperationException("Accepted-resource serializer unavailable");
+var aggregateType = assembly.GetType("OpenRA.Mods.Cameo.Traits.EconomyAcceptedTick", throwOnError: true)!;
+var instanceFlags = BindingFlags.Instance | BindingFlags.NonPublic;
+var add = aggregateType.GetMethod("Add", instanceFlags)!;
+var take = aggregateType.GetMethod("TryTakeBefore", instanceFlags)!;
 var results = new List<object>();
 foreach (var (label, perTick, stress) in new[]
 {
     ("two-player-one-delivery-per-tick", 1, false),
     ("two-player-escaped-identifiers", 1, true),
-    ("two-player-three-deliveries-per-tick", 3, false)
+    ("two-player-three-deliveries-per-tick", 3, false),
+    ("two-player-three-deliveries-escaped-identifiers", 3, true)
 })
 {
     var sequence = new int[2];
+    var aggregates = Enumerable.Range(0, 2).Select(_ => Activator.CreateInstance(aggregateType, nonPublic: true)!).ToArray();
+    long creditedTotal = 0;
     long bytes = 0;
     long records = 0;
     var maximumLine = 0;
@@ -52,9 +57,15 @@ foreach (var (label, perTick, stress) in new[]
             var playerName = "hard-" + player;
             for (var n = 0; n < perTick; n++)
             {
-                var evidence = accepted.Invoke(null, new object[] { (uint)(17 + player), token, 100, 100 })!;
-                Count("resource-accepted", evidence);
+                if (!(bool)add.Invoke(aggregates[player], new object[] { tick, (uint)(17 + player), token, 100, 100 })!)
+                    throw new InvalidOperationException("Aggregate rejected a delivery");
             }
+
+            // Drain after all callbacks for the synthetic tick, as terminal/advance does.
+            var takeArgs = new object?[] { tick + 1, false, 0, null };
+            if (!(bool)take.Invoke(aggregates[player], takeArgs)!)
+                throw new InvalidOperationException("Aggregate omitted a tick");
+            Count("resource-accepted-tick", takeArgs[3]!);
 
             if (tick % 50 == 0)
                 Count("queue-observation", new
@@ -72,6 +83,13 @@ foreach (var (label, perTick, stress) in new[]
                 using var parsed = JsonDocument.Parse(json);
                 if (parsed.RootElement.GetProperty("tick").GetInt32() != tick)
                     throw new InvalidOperationException("Serializer tick mismatch");
+                if (kind == "resource-accepted-tick")
+                {
+                    var rollup = parsed.RootElement.GetProperty("evidence");
+                    if (rollup.GetProperty("event_count").GetInt64() != perTick)
+                        throw new InvalidOperationException("Aggregate event count mismatch");
+                    creditedTotal = checked(creditedTotal + rollup.GetProperty("credited_value").GetInt64());
+                }
                 var lineBytes = checked(Encoding.UTF8.GetByteCount(json) + 1);
                 bytes = checked(bytes + lineBytes);
                 maximumLine = Math.Max(maximumLine, lineBytes);
@@ -80,12 +98,17 @@ foreach (var (label, perTick, stress) in new[]
         }
     }
 
-    var fits = bytes <= 128L * 1024 * 1024 && records <= 200000 && maximumLine <= 65536;
+    if (creditedTotal != 2L * 45001 * perTick * 100 || records != 91804)
+        throw new InvalidOperationException("Aggregate bound/total mismatch");
+    var fits = bytes <= 128L * 1024 * 1024 && records < 200000 && maximumLine <= 65536;
+    if (!fits)
+        throw new InvalidOperationException("Declared aggregate envelope exceeds writer bounds");
     results.Add(new
     {
         label, players = 2, ticks = 45001, accepted_events_per_player_tick = perTick,
         queue_events_per_player = 901, escaped_identifier_chars = stress ? 64 : 0,
-        raw_bytes = bytes, raw_records = records, raw_max_line_bytes_including_newline = maximumLine,
+        raw_bytes = bytes, raw_records = records, total_credited_value = creditedTotal,
+        raw_max_line_bytes_including_newline = maximumLine,
         declared_envelope_fits_writer_bounds = fits,
         overflow_capture_contract = "UNKNOWN; never silently drop or claim complete",
         health_bytes = (long?)null, summary_bytes = (long?)null, combined_campaign_bytes = (long?)null
@@ -97,7 +120,7 @@ if (!assemblyDigest.AsSpan().SequenceEqual(SHA256.HashData(File.ReadAllBytes(dll
 var receipt = new
 {
     schema = 1,
-    scope = "actual frozen compiled Raw/AcceptedResourceEvidence serializer; declared synthetic workloads only",
+    scope = "actual frozen compiled EconomyAcceptedTick accumulator and Raw serializer; declared synthetic workloads only",
     assembly_path = dll, assembly_sha256 = Convert.ToHexString(assemblyDigest).ToLowerInvariant(),
     runtime_cost_measured = false, disk_cost_measured = false, actual_event_coverage_measured = false,
     adoption_approved = false, results

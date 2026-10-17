@@ -17,6 +17,17 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/ai"))
 
 import ab_increment
+import capture_provenance
+
+
+def bind_dir(root):
+    """Scoreable test provenance: unbound fixtures fail closed at gated sinks."""
+    root = pathlib.Path(root)
+    uids = set()
+    for f in root.rglob("*.jsonl"):
+        uids |= capture_provenance.file_game_uids(f)
+    capture_provenance.write_provenance(
+        root, capture_kind="match_batch", scoreable=True, game_uids=sorted(uids))
 
 
 def plan_args(*extra):
@@ -41,6 +52,7 @@ class ShardCommandTests(unittest.TestCase):
         self.assertIn("8", argv)
         self.assertIn("hard", argv)
         self.assertIn("classic", argv)
+        self.assertIn("--require-economy-health", argv)
 
     def test_comma_faction_rejected(self):
         with self.assertRaises(SystemExit):
@@ -145,6 +157,7 @@ class EarlyStopTests(unittest.TestCase):
                     "".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8")
                 shards.append(ab_increment.Shard(
                     arm, faction, "full", 8, support, [], support, f"{arm}_{faction}"))
+            bind_dir(d)
             tally = ab_increment.arm_tally("ctrl", shards, "hard")
             self.assertEqual(tally, {"won": 3, "played": 5, "remaining": 11})
             # A finished shard can never play its leftovers.
@@ -167,6 +180,7 @@ class ShardRetryTests(unittest.TestCase):
         s.dirs = dirs
         s.attempt = len(dirs)
         s.done = True
+        bind_dir(base)
         return s
 
     def test_progress_pools_retry_dirs(self):
@@ -193,6 +207,7 @@ class ShardRetryTests(unittest.TestCase):
             # Drift between rounds still surfaces as two sightings.
             (s.dirs[1] / "batch_results.jsonl").write_text(
                 json.dumps({"fingerprint": "fp-b"}) + "\n", encoding="utf-8")
+            bind_dir(td)
             self.assertEqual(ab_increment.shard_fingerprints(s), ["fp-a", "fp-b"])
 
     def test_retry_predicate(self):
@@ -247,6 +262,7 @@ class SmokeVerificationTests(unittest.TestCase):
             "".join(json.dumps(r) + "\n" for r in records), encoding="utf-8")
         (support / "batch_results.jsonl").write_text(
             "".join(json.dumps(r) + "\n" for r in results_rows), encoding="utf-8")
+        bind_dir(support)
         return support
 
     def test_pass_needs_records_and_fingerprint(self):

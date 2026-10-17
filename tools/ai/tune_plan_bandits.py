@@ -185,6 +185,20 @@ def update(rows: list[dict], learned: dict, decay_factor: float = DECAY_FACTOR,
 
 # ---------------------------------------------------------------- report
 
+def load_engagement_rows(batch_dirs: list[pathlib.Path]) -> list[dict]:
+    """Engagement rows only, provenance-gated per file: sentinel captures never
+    fold into learned posteriors; unbound/malformed provenance hard-rejects
+    before any output. Same file set ai_log_common.load would read for the
+    engagements stream (missing files keep read_jsonl's [] tolerance)."""
+    import capture_provenance
+    rows: list[dict] = []
+    for d in batch_dirs:
+        p = c.logs_dir(d) / c.ENGAGEMENT_LOG
+        if p.is_file() and capture_provenance.gate_ingest(p):
+            rows += c.read_jsonl(p)
+    return rows
+
+
 def report(learned: dict) -> str:
     lines = ["bandit scope arm n mean m2".replace(" ", "\t")]
     for (bandit, scope), arms in sorted(learned["stats"].items()):
@@ -206,7 +220,7 @@ def main() -> int:
                          "'none' for unarmed-set records). Mismatched records stay unprocessed for other fits.")
     args = ap.parse_args()
 
-    rows = c.load(args.batch_dirs)["engagements"] if args.batch_dirs else []
+    rows = load_engagement_rows(args.batch_dirs) if args.batch_dirs else []
     learned = parse_learned(args.learned.read_text(encoding="utf-8")) if args.learned.exists() else empty_learned()
 
     result = update(rows, learned, args.decay, armed_only=args.armed_only)

@@ -12,6 +12,7 @@ using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 using OpenRA.Activities;
 using OpenRA.Mods.AS.Traits;
@@ -156,8 +157,40 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Try to build another production building if there is too much cash.")]
 		public readonly int NewProductionCashThreshold = 10000;
 
+		[Desc("BZ_production_scaling: queue another production building when banked cash holds above the",
+			"difficulty line for the persist window and every unit-production queue is busy, or when net",
+			"income per producer exceeds the difficulty line. Armed by the increment switch; false keeps",
+			"today's behaviour bit-identical.")]
+		public readonly bool UseProductionScaling = false;
+
+		[Desc("BZ: banked cash must exceed this to feed the persist counter (easiest pole; difficulty line via BotDifficultyLadder).")]
+		public readonly int ProductionScalingCashEasy = 6000;
+
+		[Desc("BZ: banked cash bar (hardest pole).")]
+		public readonly int ProductionScalingCashHard = 2500;
+
+		[Desc("BZ: ticks the cash bar must hold uninterrupted (easiest pole).")]
+		public readonly int ProductionScalingPersistEasy = 1500;
+
+		[Desc("BZ: persist window (hardest pole).")]
+		public readonly int ProductionScalingPersistHard = 500;
+
+		[Desc("BZ: net income per producer per tick that alone admits a new production building (easiest pole).")]
+		public readonly int ProductionScalingSpareEasy = 40;
+
+		[Desc("BZ: net income per producer per tick (hardest pole).")]
+		public readonly int ProductionScalingSpareHard = 15;
+
 		[Desc("Only queue construction of a new building when above this requirement.")]
 		public readonly int BuildingProductionMinCashRequirement = 1750;
+
+		[Desc("Cash-starvation escape: a building queue whose wanted item has been held by the",
+			"BuildingProductionMinCashRequirement floor this many ticks admits it at its own cost instead,",
+			"so unit production draining the bank below the floor cannot starve construction forever.",
+			"The item still needs cash >= its own cost; power, prerequisites and placement are unchanged.",
+			"300 ticks (12 s at 25 tps, roughly two building sweeps) ignores the brief dip after a unit buy",
+			"yet ends the observed 1500-tick idle spells quickly. 0 or less disables the escape (floor only).")]
+		public readonly int BuildingCashStarvationTicks = 300;
 
 		[Desc("Only queue construction of a new defense when above this requirement.")]
 		public readonly int DefenseProductionMinCashRequirement = 2250;
@@ -421,6 +454,33 @@ namespace OpenRA.Mods.CA.Traits
 		bool switchesActive;
 		public bool ExpansionPrebuildEnabled => Info.UseExpansionPrebuild && switchesActive;
 
+		// BZ_production_scaling: same switch-gate as ExpansionPrebuildEnabled — the shared @generic
+		// instance serves classic too, so the arm is inert there (bit-identical A/B reference).
+		public bool ProductionScalingEnabled => Info.UseProductionScaling && switchesActive;
+
+		public int ScalingCashBar => BotDifficultyLadder.Scale(Info.ProductionScalingCashEasy, Info.ProductionScalingCashHard, player, Info.ProductionScalingCashHard);
+		public int ScalingPersistBar => BotDifficultyLadder.Scale(Info.ProductionScalingPersistEasy, Info.ProductionScalingPersistHard, player, Info.ProductionScalingPersistHard);
+		public int ScalingSpareBar => BotDifficultyLadder.Scale(Info.ProductionScalingSpareEasy, Info.ProductionScalingSpareHard, player, Info.ProductionScalingSpareHard);
+
+		// BZ: ticks the bank has held above ScalingCashBar — fed by UpdateProductionScaling (BotTick).
+		int scalingCashHeldTicks;
+		public int ScalingCashHeldTicks => scalingCashHeldTicks;
+
+		// BZ: net income per tick (earned minus spent over the same window as projectedIncomePerTick).
+		public long ScalingNetIncomePerTick => projectedIncomePerTick - projectedSpentPerTick;
+
+		// BZ: the unit-production queue types this module's ProductionTypes buildings provide
+		// (derived from the ruleset, sorted for a deterministic starved pick).
+		string[] productionQueueTypes;
+		public IReadOnlyList<string> ProductionQueueTypes => productionQueueTypes ??= Info.ProductionTypes
+			.SelectMany(n => world.Map.Rules.Actors.TryGetValue(n, out var ai)
+				? ai.TraitInfos<ProductionQueueInfo>().Select(q => q.Type)
+				: Enumerable.Empty<string>())
+			.Where(t => t != null)
+			.Distinct()
+			.OrderBy(t => t, StringComparer.Ordinal)
+			.ToArray();
+
 		// ECON-A-FIX (R5): ticks an issued production order may take to land in the producer's queue —
 		// the same grace VerifyDemandBinding gives a bound item before it counts as never-queued.
 		const int OrderGraceTicks = 30;
@@ -509,6 +569,10 @@ namespace OpenRA.Mods.CA.Traits
 		int incomeWindowStartTick = -1;
 		int incomeWindowStartEarned;
 		int projectedIncomePerTick;
+
+		// BZ_production_scaling: the matching spend window for the net-surplus signal.
+		int incomeWindowStartSpent;
+		int projectedSpentPerTick;
 
 		readonly Stack<TraitPair<RallyPoint>> rallyPoints = [];
 		int assignRallyPointsTicks;
@@ -772,6 +836,16 @@ namespace OpenRA.Mods.CA.Traits
 				SweepExpansionDemands(bot);
 			}
 
+			if (ProductionScalingEnabled)
+			{
+				// BZ_production_scaling: the income window is shared with ECON-A — sample it even
+				// when only the scaling arm is on, then feed the banked-cash persist counter.
+				if (!ExpansionPrebuildEnabled)
+					SampleExpansionIncome();
+
+				UpdateProductionScaling();
+			}
+
 			builders[currentBuilderIndex].Tick(bot);
 
 			if (Info.SellRefineryInterval >= 0 && --sellRefineryTick <= 0)
@@ -823,8 +897,15 @@ namespace OpenRA.Mods.CA.Traits
 			botLimits = player.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
 			refineryLimit = botLimits?.Info.RefineryLimit ?? 0;
 
+			// PUSH-1: the overflow policy carrier is resolved once like BotLimits; the rung re-checks
+			// IsTraitEnabled() each evaluation so a mid-game condition flip disarms correctly.
+			var overflowPolicy = player.PlayerActor.TraitsImplementing<BotOverflowPolicy>().FirstOrDefault();
+
 			foreach (var builder in builders)
+			{
 				builder.SetBotLimits(botLimits);
+				builder.SetOverflowPolicy(overflowPolicy);
+			}
 		}
 
 		void IBotRespondToAttack.RespondToAttack(IBot bot, Actor self, AttackInfo e)
@@ -1644,6 +1725,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				incomeWindowStartTick = now;
 				incomeWindowStartEarned = playerResources.Earned;
+				incomeWindowStartSpent = playerResources.Spent;
 				return;
 			}
 
@@ -1652,8 +1734,60 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			projectedIncomePerTick = Math.Max(0, (playerResources.Earned - incomeWindowStartEarned) / elapsed);
+			projectedSpentPerTick = Math.Max(0, (playerResources.Spent - incomeWindowStartSpent) / elapsed);
 			incomeWindowStartTick = now;
 			incomeWindowStartEarned = playerResources.Earned;
+			incomeWindowStartSpent = playerResources.Spent;
+		}
+
+		/// <summary>BZ_production_scaling: the banked-cash persistence counter — an uninterrupted
+		/// run above the difficulty-line bar; any dip below resets it. Ticks only under the arm.</summary>
+		void UpdateProductionScaling()
+		{
+			if (playerResources.GetCashAndResources() > ScalingCashBar)
+				scalingCashHeldTicks++;
+			else
+				scalingCashHeldTicks = 0;
+		}
+
+		// S2 (FINDINGS_2026-10-12 §4): dedicated anti-air defences only after the bot has
+		// fog-honestly observed an enemy air capability — a remembered aircraft or a
+		// remembered aircraft-producing structure. No air-intel provider (classic) or a
+		// provider not observing through fog keeps the pre-gate behaviour. Cached per tick:
+		// one build evaluation may check several fraction entries.
+		int airIntelTick = -1;
+		bool airIntelOpen = true;
+		HashSet<string> gatedAirDefences;
+
+		internal bool DedicatedAntiAirAllowed
+		{
+			get
+			{
+				if (airIntelTick != world.WorldTick)
+				{
+					airIntelTick = world.WorldTick;
+					var provider = player.PlayerActor.TraitsImplementing<IBotEnemyAirIntelProvider>().FirstEnabledTraitOrDefault();
+					airIntelOpen = provider == null || !provider.TryGetEnemyAirIntel(out var observed) || observed;
+				}
+
+				return airIntelOpen;
+			}
+		}
+
+		/// <summary>The dedicated-AA members of <see cref="BaseBuilderBotModuleCAInfo.AntiAirTypes"/> — every
+		/// armament air-only. Dual-role air/ground defences stay ungated (FINDINGS S2: the FutureTech
+		/// multiturret is the ground defence too). Ruleset-derived once.</summary>
+		internal bool IsGatedAirDefence(string name)
+		{
+			if (gatedAirDefences == null)
+			{
+				gatedAirDefences = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+				foreach (var n in Info.AntiAirTypes)
+					if (world.Map.Rules.Actors.TryGetValue(n, out var ai) && BaseBuilderQueueEvalCA.IsDedicatedAntiAir(ai))
+						gatedAirDefences.Add(n);
+			}
+
+			return gatedAirDefences.Contains(name);
 		}
 
 		/// <summary>
@@ -1670,6 +1804,11 @@ namespace OpenRA.Mods.CA.Traits
 			var candidates = new List<(ActorInfo Info, int Strength, int Cost)>();
 			foreach (var name in Info.DefenseTypes)
 			{
+				// S2: dedicated anti-air waits for fog-fair enemy air intel — the demand's
+				// defence slot then takes the strongest anti-ground pick instead.
+				if (!BaseBuilderQueueEvalCA.AirDefenceAdmits(IsGatedAirDefence(name), DedicatedAntiAirAllowed))
+					continue;
+
 				if (!world.Map.Rules.Actors.TryGetValue(name, out var info) || !info.HasTraitInfo<AttackBaseInfo>())
 					continue;
 
@@ -1744,7 +1883,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (IsTraitDisabled)
 				return null;
 
-			return new List<MiniYamlNode>()
+			var data = new List<MiniYamlNode>()
 			{
 				new("InitialBaseCenter", FieldSaver.FormatValue(initialBaseCenter)),
 				new("DefenseCenter", FieldSaver.FormatValue(DefenseCenter)),
@@ -1758,12 +1897,46 @@ namespace OpenRA.Mods.CA.Traits
 				new("OpeningRefineryCostCommitted", FieldSaver.FormatValue(openingRefineryCostCommitted)),
 				new("OpeningDefenseCommittedCost", FieldSaver.FormatValue(openingDefenseCommittedCost))
 			};
+
+			var starvationManagers = builders.Select((builder, index) => (builder, index))
+				.Where(entry => entry.builder.TrackedCashStarvationRuns > 0)
+				.Select(entry => new MiniYamlNode("Manager", "", new List<MiniYamlNode>
+				{
+					new("Index", FieldSaver.FormatValue(entry.index)),
+					new("Category", FieldSaver.FormatValue(entry.builder.Category)),
+					new("Runs", "", entry.builder.SaveCashStarvationRuns())
+				})).ToList();
+			if (starvationManagers.Count > 0)
+				data.Add(new MiniYamlNode("CashStarvationClocks", "", starvationManagers));
+
+			return data;
 		}
 
 		void IGameSaveTraitData.ResolveTraitData(Actor self, MiniYaml data)
 		{
 			if (self.World.IsReplay)
 				return;
+
+			var starvationClocksNode = data.NodeWithKeyOrDefault("CashStarvationClocks");
+			if (starvationClocksNode != null)
+			{
+				foreach (var builder in builders)
+					builder.RestoreCashStarvationRuns(Enumerable.Empty<MiniYamlNode>());
+
+				var restoredManagers = new HashSet<int>();
+				foreach (var managerNode in starvationClocksNode.Value.Nodes)
+				{
+					var fields = managerNode.Value.ToDictionary();
+					var index = FieldLoader.GetValue<int>("Index", fields["Index"].Value);
+					var category = FieldLoader.GetValue<string>("Category", fields["Category"].Value);
+					if (index < 0 || index >= builders.Length || builders[index].Category != category || !restoredManagers.Add(index))
+						throw new InvalidDataException("Invalid or duplicate cash-starvation manager save state.");
+
+					var runsNode = managerNode.Value.NodeWithKeyOrDefault("Runs");
+					if (runsNode != null)
+						builders[index].RestoreCashStarvationRuns(runsNode.Value.Nodes);
+				}
+			}
 
 			var initialBaseCenterNode = data.NodeWithKeyOrDefault("InitialBaseCenter");
 			if (initialBaseCenterNode != null)

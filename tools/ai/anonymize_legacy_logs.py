@@ -281,6 +281,26 @@ def project(value, path):
 
 def migrate(support_dir: Path) -> dict:
     paths = [support_dir / name for name in LOG_NAMES if (support_dir / name).is_file()]
+
+    # CAT-3 marker-laundering guard: refuse sentinel-captured, marker-bearing or
+    # corrupt-provenance inputs BEFORE any file is rewritten. A scoreable-bound
+    # input gets derived SHA-bound provenance after the rewrite (a sibling
+    # record plus a re-bind of every covering doc) so its CAT-1 association
+    # survives; an unbound input leaves the output unbound
+    # (downstream ingest still fails closed until an operator binds it).
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import capture_provenance
+    bound_inputs: dict[Path, dict] = {}
+    for path in paths:
+        state = capture_provenance.provenance_state(path)
+        if state == "sentinel":
+            raise ValueError(f"{path.name}: sentinel-quarantined evidence cannot be anonymized; no files changed")
+        if state == "corrupt":
+            raise ValueError(f"{path.name}: corrupt capture provenance; no files changed")
+        if state == "bound":
+            bound_inputs[path] = {"game_uids": capture_provenance.file_game_uids(path),
+                                  "sha256": capture_provenance.sha256_file(path)}
+
     parsed: dict[Path, list[dict]] = {}
     legacy_counts: dict[Path, int] = {}
     for path in paths:
@@ -294,6 +314,8 @@ def migrate(support_dir: Path) -> dict:
                 raise ValueError(f"{path.name}:{line_no}: invalid JSON; no files changed") from exc
             if not isinstance(row, dict):
                 raise ValueError(f"{path.name}:{line_no}: record is not an object; no files changed")
+            if capture_provenance.record_marked(row):
+                raise ValueError(f"{path.name}:{line_no}: quarantine-marked record cannot be anonymized; no files changed")
             rows.append(row)
         parsed[path] = rows
         legacy_counts[path] = sum(is_legacy(path.name, row) for row in rows)
@@ -338,6 +360,22 @@ def migrate(support_dir: Path) -> dict:
         for temp, _ in temporaries:
             if temp.exists():
                 temp.unlink()
+    # Derived SHA-bound provenance for inputs that were positively bound
+    # before the rewrite: the new bytes are rebound under their rewritten
+    # game UIDs as a legacy_import so the file's CAT-1 association is preserved.
+    for path, info in bound_inputs.items():
+        if path in rewritten:
+            capture_provenance.write_file_sibling(
+                path,
+                game_uids=capture_provenance.file_game_uids(path),
+                capture_kind=capture_provenance.LEGACY_KIND,
+                scoreable=True,
+                extra={"derived_from_sha256": info["sha256"],
+                       "derived_by": "anonymize_legacy_logs"})
+            # The covering ancestor manifest still pins the pre-rewrite SHA;
+            # without a rebind it becomes a sha_mismatch conflict that outweighs
+            # the sibling. Quarantine docs are never rebound inside the call.
+            capture_provenance.rebind_artifact(path)
     return {
         "files_rewritten": len(rewritten),
         "records_rewritten": total,

@@ -4,6 +4,41 @@ Next: `C:/cameo-wt/codex-learn-p0-fix` / `codex/learn-p0-fix` (base229a2563b), s
 
 # Cameo — THE HANDOFF
 
+Current Boss pointer (2026-10-12): M13 tempo arms for `BV_m13_liveness` on `codex/m13-tempo-boss` (base c4766c189) - bank saturation, first-wave cap, min-wave floor; knobs/tier tables/non-bypassed gates in `docs/design/M13_TEMPO.md`. Default-off; classic untouched; no boot/runtime claim.
+
+## 2026-10-10 — Claude: the A/B blockers the local agents could not clear are fixed — continue from here
+
+`Agent: Claude (Opus) · branch ccr-c7f51935-i53fkj · cloud container · base c07bef43 · engine 6da7fce14` · boot gate:
+default platform and `Game.Platform=Null` both reach the menu, 0 exceptions.
+
+**Read:** `STATUS_2026-10-11_ab_campaign_tooling.md` (top entry: the next steps on the Windows host), LESSONS_LEARNED
+"Headless bot matches" and "A runner that never ran a cell", master doc Part IIIc (RR1 re-review of master, RR2
+blockers, RR3 memory, RR4 A/B results).
+
+**Fixed:**
+- **Memory:** a mod-side headless platform `OpenRA.Platforms.Null` (`--render headless`). Peak 8.62 → 5.19 GB, and
+  the sim is identical (same-seed sync hashes match on every shared frame).
+- **Campaign tooling, nine blockers:**
+  - the dual-arm bots never activated (overlay ignored by the engine);
+  - the pair never swapped the arms' spawns;
+  - missing imports;
+  - wrong map directory;
+  - markers read from the wrong log;
+  - CRLF-only pins;
+  - a map path with the wrong letter case;
+  - `BP_squad_desire` without a class, which blocked `apply_increment_switches.py`;
+  - stale-build launches.
+- **New tool:** `tools/ai/map_engine_acceptance.py`, a capped real-engine seat and pair-swap proof per map.
+- **Candidate manifest:** text pins regenerated (`126d57ec…`). Pilot and runner dry-runs are green on Linux.
+
+**Results:** map acceptance is 32/32 cells and 16/16 pairs on all 8 pilot maps (`docs/audit/MAP_ENGINE_ACCEPTANCE_2026-10-10.md`).
+A/B group (BU switch, 8 games): treatment won 2; 2 maps were spawn-decided; early income about 7 % lower (master doc RR4).
+No evidence for the switch; the 64-game pilot decides. `hard` vs `classic` on master: Terra Cotta 3 of 5, Winter's End 1 of 1.
+
+**Continue with:** (1) on the Windows host, STATUS steps 1–6 (build, tests, acceptance, a headless memory
+measurement, then the lead's memory-policy call, DevOps manifest sign-off, maintainer `execution_approved`); (3) PR
+to master when the maintainer asks.
+
 ## 2026-10-09 — Claude: AI architecture review + playtest regression — continue from here
 
 `Agent: Claude (Opus) · branch ccr-c7f51935-i53fkj · cloud container · base 5c8cfe04` · docs only.
@@ -5528,3 +5563,7 @@ Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Ins
 ### Sol � M13 helper R1 correction, 2026-10-10
 - C:/cameo-wt/sol-m13-liveness, codex/m13-liveness: Unsupported survives failed-intent callbacks; focused30/30.
 - Next: exact-tip helper re-review, then explicitly grounded claim/dispatch integration. Helpers remain unwired; no launches.
+
+## 2026-10-12 - NAXIS refinery slave idle fix (under review)
+
+Worktree `bug-naxis-slave-idle`, branch `codex/01a12ecb-naxis-slave-idle`, based on `origin/master` at `a5ab375ba`. Root cause: the slave reserved the refinery dock before `MoveToDock` began; `FindAndDeliverResources` treated the reservation as an active delivery and waited. The patch defers reservation, preserves a captured live-refinery binding, and restarts harvesting after master disposal. Three focused source-contract tests pass. No game launched during the active A/B reservation. Next: exact-SHA review, coordinator landing after approval, then maintainer playtest.

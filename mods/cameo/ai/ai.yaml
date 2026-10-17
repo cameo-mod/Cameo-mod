@@ -32,6 +32,12 @@
 	GrantConditionOnBotOwner@cameogod:
 		Condition: cameogodbot
 		Bots: cameogod
+	# PUSH-1 (bank overflow): scopes the BotOverflowPolicy carrier to exactly the hard profile —
+	# classic shares BotLimits@hard via hardbot, so a separate condition is the only seam that
+	# leaves the A/B control byte-identical (Sol/Luna ruling 2026-10-14).
+	GrantConditionOnBotOwner@bankoverflow:
+		Condition: bank_overflow
+		Bots: hard
 	# ENG-T (#694, DESIGN §22): arms Fransbot's capture-transport service as the genericbot
 	# IBotCaptureTransportProvider. Inert by itself — EngineerBotModule only requests a run when
 	# TransportChance > 0 (default 0). Classic is excluded: the A/B reference stays untouched.
@@ -134,6 +140,11 @@
 	GrantConditionOnBotOwner@tier1priors:
 		Condition: tier1_priors
 		Bots:
+	# LEARN-FIGHT threshold rows. The BK arm fills the genericbot list; empty keeps
+	# FightThresholdsBotModule disabled and all classic thresholds byte-identical.
+	GrantConditionOnBotOwner@fightlearning:
+		Condition: fightlearning
+		Bots:
 	# Tier-3 pooled bandits (fleet orders 2026-10-03): Thompson-samples a personality arm + an attack-plan overlay
 	# over the EL engagement posteriors in ai/learned/plan_bandits.yaml, with a safety floor. The arm sets Bots
 	# (switch group AO_tier3_bandits); empty by default - inert on master.
@@ -151,6 +162,12 @@
 	GrantConditionOnBotOwner@radarcontacts:
 		Condition: radar_contacts
 		Bots:
+	# Context feature vectors (task 01a11190, DESIGN_2026-10-15 v2): anonymous map + seen-side opponent
+	# feature rows on their own JSONL channel — provider only, no gameplay consumer, no orders, no RNG.
+	# The arm sets Bots (switch group BX_context_providers); empty by default - inert on master.
+	GrantConditionOnBotOwner@contextfeatures:
+		Condition: context_features
+		Bots:
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
@@ -165,10 +182,19 @@
 		UnitDelayModifier: 250
 		UnitIntervalModifier: 250
 		InitialAttackDelay: 6750
+		AttackLivenessMaxNoLaunchTicks: 9500
+		AttackLivenessFirstWaveMaxTicks: 4750
+		TempoMinWaveUnits: 4
+		TeamResponseMaxLeaseTicks: 1900
+		TeamResponseRearmCooldownTicks: 950
+		TeamResponseLeaseLimit: 1
 		PersonalityReactionDelay: 7500
 		NewProductionCashThreshold: 20000
 		MaximiseProductionCashRequirement: 9500
+		BankSaturationCash: 4200
 		AdaptiveCounterWeight: 0
+		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 2000
 		RetreatRatioPct: 10
 		RequiresCondition: easiestbot
 	BotLimits@veryeasy:
@@ -181,10 +207,19 @@
 		UnitDelayModifier: 225
 		UnitIntervalModifier: 225
 		InitialAttackDelay: 6000
+		AttackLivenessMaxNoLaunchTicks: 9000
+		AttackLivenessFirstWaveMaxTicks: 4500
+		TempoMinWaveUnits: 5
+		TeamResponseMaxLeaseTicks: 1800
+		TeamResponseRearmCooldownTicks: 900
+		TeamResponseLeaseLimit: 1
 		PersonalityReactionDelay: 6750
 		NewProductionCashThreshold: 18000
 		MaximiseProductionCashRequirement: 8500
+		BankSaturationCash: 3900
 		AdaptiveCounterWeight: 4
+		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 1800
 		RetreatRatioPct: 20
 		RequiresCondition: veryeasybot
 	BotLimits@easy:
@@ -197,10 +232,19 @@
 		UnitDelayModifier: 200
 		UnitIntervalModifier: 200
 		InitialAttackDelay: 5250
+		AttackLivenessMaxNoLaunchTicks: 8500
+		AttackLivenessFirstWaveMaxTicks: 4250
+		TempoMinWaveUnits: 6
+		TeamResponseMaxLeaseTicks: 1700
+		TeamResponseRearmCooldownTicks: 850
+		TeamResponseLeaseLimit: 1
 		PersonalityReactionDelay: 6000
 		NewProductionCashThreshold: 16000
 		MaximiseProductionCashRequirement: 7500
+		BankSaturationCash: 3600
 		AdaptiveCounterWeight: 9
+		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 1600
 		RetreatRatioPct: 30
 		RequiresCondition: easybot
 	BotLimits@medium:
@@ -213,10 +257,19 @@
 		UnitDelayModifier: 175
 		UnitIntervalModifier: 175
 		InitialAttackDelay: 4500
+		AttackLivenessMaxNoLaunchTicks: 8000
+		AttackLivenessFirstWaveMaxTicks: 4000
+		TempoMinWaveUnits: 7
+		TeamResponseMaxLeaseTicks: 1600
+		TeamResponseRearmCooldownTicks: 800
+		TeamResponseLeaseLimit: 1
 		PersonalityReactionDelay: 5250
 		NewProductionCashThreshold: 14000
 		MaximiseProductionCashRequirement: 6500
+		BankSaturationCash: 3300
 		AdaptiveCounterWeight: 13
+		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 1400
 		RetreatRatioPct: 40
 		RequiresCondition: mediumbot
 	BotLimits@hard:
@@ -229,11 +282,20 @@
 		UnitDelayModifier: 150
 		UnitIntervalModifier: 150
 		InitialAttackDelay: 3750
+		AttackLivenessMaxNoLaunchTicks: 7500
+		AttackLivenessFirstWaveMaxTicks: 3750
+		TempoMinWaveUnits: 8
+		TeamResponseMaxLeaseTicks: 1500
+		TeamResponseRearmCooldownTicks: 750
+		TeamResponseLeaseLimit: 1
 		PrioritizeBarracksBeforeRefinery: true
 		PersonalityReactionDelay: 4500
 		NewProductionCashThreshold: 12000
 		MaximiseProductionCashRequirement: 5500
+		BankSaturationCash: 3000
 		AdaptiveCounterWeight: 18
+		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 1200
 		RetreatRatioPct: 50
 		RequiresCondition: hardbot
 	BotLimits@veryhard:
@@ -246,11 +308,20 @@
 		UnitDelayModifier: 125
 		UnitIntervalModifier: 125
 		InitialAttackDelay: 3000
+		AttackLivenessMaxNoLaunchTicks: 7000
+		AttackLivenessFirstWaveMaxTicks: 3500
+		TempoMinWaveUnits: 9
+		TeamResponseMaxLeaseTicks: 1400
+		TeamResponseRearmCooldownTicks: 700
+		TeamResponseLeaseLimit: 1
 		PrioritizeBarracksBeforeRefinery: true
 		PersonalityReactionDelay: 3750
 		NewProductionCashThreshold: 10000
 		MaximiseProductionCashRequirement: 4500
+		BankSaturationCash: 2700
 		AdaptiveCounterWeight: 22
+		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 1000
 		RetreatRatioPct: 60
 		RequiresCondition: veryhardbot
 	BotLimits@brutal:
@@ -263,11 +334,20 @@
 		UnitDelayModifier: 100
 		UnitIntervalModifier: 100
 		InitialAttackDelay: 2250
+		AttackLivenessMaxNoLaunchTicks: 6500
+		AttackLivenessFirstWaveMaxTicks: 3250
+		TempoMinWaveUnits: 10
+		TeamResponseMaxLeaseTicks: 1300
+		TeamResponseRearmCooldownTicks: 650
+		TeamResponseLeaseLimit: 1
 		PrioritizeBarracksBeforeRefinery: true
 		PersonalityReactionDelay: 3000
 		NewProductionCashThreshold: 8000
 		MaximiseProductionCashRequirement: 3500
+		BankSaturationCash: 2400
 		AdaptiveCounterWeight: 27
+		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 800
 		RetreatRatioPct: 70
 		RequiresCondition: brutalbot
 	BotLimits@challenger:
@@ -280,11 +360,20 @@
 		UnitDelayModifier: 75
 		UnitIntervalModifier: 75
 		InitialAttackDelay: 1500
+		AttackLivenessMaxNoLaunchTicks: 6000
+		AttackLivenessFirstWaveMaxTicks: 3000
+		TempoMinWaveUnits: 11
+		TeamResponseMaxLeaseTicks: 1200
+		TeamResponseRearmCooldownTicks: 600
+		TeamResponseLeaseLimit: 1
 		PrioritizeBarracksBeforeRefinery: true
 		PersonalityReactionDelay: 2250
 		NewProductionCashThreshold: 6000
 		MaximiseProductionCashRequirement: 2500
+		BankSaturationCash: 2100
 		AdaptiveCounterWeight: 31
+		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 600
 		RetreatRatioPct: 80
 		RequiresCondition: challengerbot
 	BotLimits@unbeatable:
@@ -297,11 +386,20 @@
 		UnitDelayModifier: 50
 		UnitIntervalModifier: 50
 		InitialAttackDelay: 750
+		AttackLivenessMaxNoLaunchTicks: 5500
+		AttackLivenessFirstWaveMaxTicks: 2750
+		TempoMinWaveUnits: 12
+		TeamResponseMaxLeaseTicks: 1100
+		TeamResponseRearmCooldownTicks: 550
+		TeamResponseLeaseLimit: 1
 		PrioritizeBarracksBeforeRefinery: true
 		PersonalityReactionDelay: 1500
 		NewProductionCashThreshold: 4000
 		MaximiseProductionCashRequirement: 1500
+		BankSaturationCash: 1800
 		AdaptiveCounterWeight: 36
+		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 400
 		RetreatRatioPct: 90
 		RequiresCondition: unbeatablebot
 	BotLimits@god:
@@ -314,13 +412,31 @@
 		UnitDelayModifier: 25
 		UnitIntervalModifier: 25
 		InitialAttackDelay: 0
+		AttackLivenessMaxNoLaunchTicks: 5000
+		AttackLivenessFirstWaveMaxTicks: 2500
+		TempoMinWaveUnits: 13
+		TeamResponseMaxLeaseTicks: 1000
+		TeamResponseRearmCooldownTicks: 500
+		TeamResponseLeaseLimit: 1
 		PrioritizeBarracksBeforeRefinery: true
 		PersonalityReactionDelay: 750
 		NewProductionCashThreshold: 2000
 		MaximiseProductionCashRequirement: 500
+		BankSaturationCash: 1500
 		AdaptiveCounterWeight: 40
+		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 200
 		RetreatRatioPct: 100
 		RequiresCondition: cameogodbot
+
+	# PUSH-1 (bank overflow): while the bank sits above OverflowCash the armed base builder
+	# preempts the planner's front/link wants with a production pick (see
+	# BaseBuilderQueueManagerCA's overflow rung). hard only; classic never carries the grant.
+	# 8000 sits below the economy checker's 10000 band ceiling — candidate tuning, the
+	# sentinel evidence judges it.
+	BotOverflowPolicy@bankoverflow:
+		OverflowCash: 8000
+		RequiresCondition: bank_overflow
 
 Player:
 	# AI_ARCHITECTURE.md 2.8 (ruled 2026-09-27: roles on actors). Fills the modules' actor lists from ROLES
@@ -3781,6 +3897,13 @@ Player:
 		RequiresCondition: genericbot && radar_contacts
 		ContactsIntervalTicks: 25
 		TrackGraceTicks: 250
+	# CONTEXT-PROVIDERS (task 01a11190): anonymous map/opponent feature vectors — telemetry only,
+	# own JSONL channel, writer-election append. The opponent half reads the fog-honest seen
+	# buffer via the IAiSeenProfileSource seam on AiMatchLogWriter (seam ACK
+	# ACK_2026-10-16_context_opponent_seam_devin.md; write-only telemetry, no consumers).
+	# `genericbot && context_features`: off on master until the increment A/B arms it (switch group BX_context_providers).
+	ContextFeatureProviderBotModule:
+		RequiresCondition: genericbot && context_features
 	# `genericbot && build_order_knobs`: off on master until the increment A/B arms it (switch group AK_build_order_knobs).
 	BuildOrderKnobsBotModule:
 		RequiresCondition: genericbot && build_order_knobs
@@ -4083,6 +4206,11 @@ Player:
 	# Bookkeeping only; classicbot emits mission records too, so it runs on both stacks.
 	BotMissionAttemptTracker:
 		RequiresCondition: genericbot || classicbot
+	# REPLAY-HEALTH-LOGGER activation (2026-10-13): per-seat record-only queue/resource
+	# observer feeding AiEconomyHealthCapture; the seat gate is IsLoggableBot inside the
+	# capture controller (combatant bots only) — RequiresCondition would be a dead key
+	# on a plain TraitInfo. Never orders, zero cost outside bot matches.
+	AiEconomyHealthRecorder:
 	BotPersonalityController:
 		RequiresCondition: genericbot
 		# League exploiters hold one pole forever (AI_DEEP_RESEARCH §6.2);
@@ -4094,6 +4222,12 @@ Player:
 			exploit_expansion: expansion
 			exploit_steamroller: steamroller
 			exploit_tech: tech
+			# Campaign arms pin the aggressive pole (maintainer directive 2026-10-11:
+			# observed large-team games were too passive). Symmetric across arms, so
+			# the A/B contrast stays the switch alone; the draw itself is unchanged
+			# (AR-2: unconditional SharedRandom draw, pin overrides the result).
+			hard_control: rush
+			hard_treatment: rush
 	BotCounterDemandController:
 		RequiresCondition: genericbot
 	MasterAiBotModule:
@@ -4192,6 +4326,8 @@ Player:
 	ExpansionPlannerBotModule:
 		RequiresCondition: genericbot
 		DriveBaseCrawl: true
+		# Enabled for the maintainer's 2026-10-15 combined playtest (BY).
+		UseCrawlSafety: true
 		# EX-2: every field in reach gets a refinery, beyond the base builder's fixed optimum.
 		DriveRefineries: true
 		# EX-3: an MCV founds its base at the best far field (value x safety / distance); the MCV module decides when.
@@ -4221,6 +4357,15 @@ Player:
 		# REPAIR-B3 (SPEC_2026-10-09 §1): shared coverage — a usable own refinery serves every anchor inside an
 		# inclusive Euclidean radius-10 (the default 0 would fall back to ClaimRadiusCells = 8).
 		AnchorServeRadiusCells: 10
+		# BZ_production_scaling: up to ScalingMcvMaxExtra extra construction MCVs while windowed income
+		# holds over the difficulty line, a far field is free and army parity admits; also parks MCV
+		# site handouts whose deploy annulus holds no placeable cell (MCV-EXPAND-IDLE H1).
+		# Enabled for the maintainer's 2026-10-15 combined playtest (BZ).
+		UseProductionScaling: true
+		# CB_frontier_observe (P3a, DESIGN_2026-10-12_protected_frontier s7.1): read-only shadow of the
+		# protected-frontier stage machine; emits outpost_stage v2 rows on the player-telemetry channel.
+		# Records only - moves no flag/claim/RNG/order. Enabled for the 2026-10-15 playtest (CB).
+		UseFrontierObservation: true
 	# Whole-base defence cover: each defence goes where its range covers the most uncovered base, outer edge and
 	# enemy side first (genericbot only; classic, sharing BaseBuilderBotModuleCA@generic, gets no advisor). Off until Enabled.
 	DefenseCoveragePlanner:
@@ -4282,7 +4427,15 @@ Player:
 		CaptureTargetTries: 3
 		CaptureFailuresBeforeDormant: 2
 		CaptureRetreatsBeforeDormant: 4
+		# S1 (FINDINGS_2026-10-12 §3): the flat 3000-tick shelf produced 42 sorties / 6 captures —
+		# a target that keeps repelling engineers now backs off 3000 -> 6000 -> 9000 -> 12000.
+		CaptureDormantEscalationMax: 4
 		MaxEngineersPerTarget: 1
+		# S1: generic's priority list (its non-empty set overrides the classic list above —
+		# PriorityCapturableActorTypes falls back to shared only when empty). ConYards,
+		# unit production and tech structures outrank the civilian buildings the classic
+		# list already had; they also become escort-eligible.
+		PriorityCapturableActorTypes: v19, hosp, fcom, miss, ramiss, rabio, oilb, v19.husk, hosp.husk, bio.husk, miss.husk, fcom.husk, oilb.husk, td_gdi_constructionyard, td_nod_constructionyard, td_gdi_weaponsfactory, td_nod_airstrip, ts_nod_techcenter, ts_gdi_techcenter, cabal_techcenter, tsnttmpl, cabal_core, td_nod_templeofnod, td_nod_templeprime, ra1_allies_constructionyard, ra1_soviets_constructionyard, japan_japaneseconstructionyard, ra1_soviets_warfactory, ra1_soviets_largefactory, ra1_allies_warfactory, japan_japanesewarfactory, ra1_soviets_airfield, ra1_soviets_largesovietairfield, japan_japaneseairfield, ra1_allies_techcenter, ra1_soviets_techcenter, japan_japanesetechcenter, ra2_soviets_constructionyard, ra2_allies_constructionyard, yuri_constructionyard, ra2_soviets_warfactory, ra2_allies_warfactory, yuri_warfactory, ra2_allies_airforcecommandhq, ra2_allies_battlelab, ra2_soviets_battlelab, yuri_battlelab, yuri_lunarcommandcenter, asianalliance_constructionyard, asianalliance_warfactory, asianalliance_battlelab, ixian_constructionyard, ixian_advancedheavyfactory, ixian_ixresearchcenter, ixian_starport, latinsyndicate_syndicateconstructionyard, latinsyndicate_syndicatefactory, naxis_constructionyard, naxis_warfactory, naxis_academy, naxis_techcenter, schwarzermond_constructionyard, schwarzermond_warfactory, schwarzermond_techcenter, futuretech_constructionyard, futuretech_warpgate, futuretech_transmissioncenter, futuretech_battlelab, terran_commandcenter, terran_weaponsfactory, terran_academy, tkm_constructionyard, atreides_constructionyard, corrino_constructionyard, harkonnen_constructionyard, atreides_lightfactory, corrino_lightfactory, harkonnen_lightfactory, atreides_heavyfactory, corrino_heavyfactory, harkonnen_heavyfactory, atreides_hightechfactory, corrino_hightechfactory, harkonnen_hightechfactory, atreides_ixresearchcenter, corrino_ixresearchcenter, harkonnen_ixresearchcenter, atreides_starport, corrino_starport, harkonnen_starport, eden_factory_structure, eden_factory_vehicle, eden_factory_consumer, plymouth_structure_factory, plymouth_factory_vehicle, plymouth_factory_arachnid
 		# FB2: Frans SpecOps demand-capturers — safe targets justify building a specialist (switch T).
 		UseDemandCapturers: false
 		# TC-2e: yield a capture target to the outranking ally's published claim (switch group BF).
@@ -4344,7 +4497,7 @@ Player:
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
-		UseFormationHysteresis: false
+		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-rush
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
@@ -4437,7 +4590,7 @@ Player:
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
-		UseFormationHysteresis: false
+		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-turtle
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
@@ -4529,7 +4682,7 @@ Player:
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
-		UseFormationHysteresis: false
+		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-tech
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
@@ -4623,7 +4776,7 @@ Player:
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
-		UseFormationHysteresis: false
+		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-expansion
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
@@ -4716,7 +4869,7 @@ Player:
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
-		UseFormationHysteresis: false
+		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-steamroller
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
@@ -4807,7 +4960,7 @@ Player:
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
-		UseFormationHysteresis: false
+		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-guerrilla
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
@@ -4996,6 +5149,7 @@ Player:
 		EnemyBaseBuildingTypes: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_constructionyard, ra1_soviets_constructionyard, japan_japaneseconstructionyard, ra2_soviets_constructionyard, ra2_allies_constructionyard, yuri_constructionyard, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, terran_commandcenter, protoss_nexus, zerg_hatchery, zerg_lair, zerg_hive, glcommand, chcommand, usacommand, ixian_constructionyard, ordos_constructionyard, ordos_laserturret, ordos_chemturret, wc2_humans_townhall, wc2_orcs_greathall, asianalliance_constructionyard, steelconsortium_consortiumconstructionyard, latinsyndicate_syndicateconstructionyard, naxis_constructionyard, schwarzermond_constructionyard, futuretech_constructionyard, tkm_constructionyard, td_gdi_guardtower, td_gdi_advancedguardtower, td_nod_gunturret, td_nod_laserturret, td_nod_obeliskoflight, ra1_allies_pillbox, ra1_allies_camopillbox, ra1_allies_gunturret, ra1_allies_gapgenerator, ra1_allies_bastionartillerybunker, ra1_soviets_flametower, ra1_soviets_teslacoil, japan_waveforceturret, ra2_allies_pillbox, ra2_allies_prismtower, ra2_allies_grandcannon, ra2_soviets_battlebunker, ra2_soviets_sentrygun, ra2_soviets_flakcannon, ra2_soviets_teslacoil, yuri_gatlingcannon, yuri_tankbunker, asianalliance_sentryflamer, asianalliance_cgpnch, asianalliance_railtower, asianalliance_chaostower, asianalliance_plasmacannon, ixian_machinegunturret, ixian_gunturret, ixian_rocketturret, ixian_stormlasher, steelconsortium_consortiumsentryturret, steelconsortium_quantumcannon, steelconsortium_bfg10000, latinsyndicate_latinsentrygun, latinsyndicate_bunkertower, latinsyndicate_defensebureau, latinsyndicate_smlturret, naxis_rifletower, naxis_flak88, schwarzermond_lasertower, schwarzermond_sturmcannon, futuretech_multiturretsystem, futuretech_frostbiteturret, terran_bunker, zerg_creepcolony, zerg_creepcolony_defense, protoss_photoncannon, wc2_humans_humanscouttower, wc2_humans_sunwell, wc2_orcs_orcwatchtower, tkm_bunker, tkm_tankturretbunker, td_gdi_barracks, td_nod_handofnod, ra1_allies_barracks, ra1_soviets_barracks, ra2_allies_barracks, ra2_soviets_barracks, yuri_barracks, terran_barracks, protoss_gateway, zerg_spawningpool, ts_gdi_barracks, forgotten_barracks, ts_nod_handof, cabal_cyborgfactory, glbarracks, chbarracks, usabarracks, d2k_barracks, ixian_barracks, wc2_humans_barracks, wc2_orcs_barracks, asianalliance_barracks, steelconsortium_steelbarracks, latinsyndicate_combatbarracks, naxis_barracks, schwarzermond_barracks, futuretech_troopgate, td_gdi_weaponsfactory, td_nod_airstrip, ra1_allies_warfactory, ra1_soviets_warfactory, ra1_soviets_largefactory, ra2_allies_warfactory, ra2_soviets_warfactory, yuri_warfactory, terran_weaponsfactory, protoss_roboticsfacility, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_warfactory, forgotten_warfactory, ts_nod_warfactory, cabal_mechfactory, glweap, chweap, usaweap, ixian_advancedheavyfactory, ixian_starport, wc2_humans_gnomishinventor, wc2_orcs_golbinalchemist, asianalliance_warfactory, steelconsortium_consortiumwarfactory, latinsyndicate_syndicatefactory, naxis_warfactory, schwarzermond_warfactory, futuretech_warpgate, td_gdi_helipad, ts_nod_helipad, ts_nod_helipad, forgotten_helipad, ts_gdi_helipad, td_nod_helipad, ra1_allies_helipad, ra1_soviets_airfield, ra1_soviets_largesovietairfield, japan_japaneseairfield, ra2_allies_airforcecommandhq, ra2_soviets_airfield, ixian_hightechfactory, asianalliance_airforcecommand, latinsyndicate_airstation, naxis_airfield, schwarzermond_airfield, futuretech_launchpad, ordos_heavyfactory, ordos_starport, ordos_lightfactory, ordos_barracks, ordos_barracks, tkm_barracks, tkm_warfactory, tkm_airpad, atreides_constructionyard, corrino_constructionyard, harkonnen_constructionyard, atreides_barracks, corrino_barracks, harkonnen_barracks, atreides_lightfactory, corrino_lightfactory, harkonnen_lightfactory, atreides_heavyfactory, corrino_heavyfactory, harkonnen_heavyfactory, atreides_refinery, corrino_refinery, harkonnen_refinery, atreides_outpost, corrino_outpost, harkonnen_outpost, eden_factory_structure, eden_factory_vehicle, eden_factory_consumer, eden_smelter_common, eden_smelter_rare, plymouth_structure_factory, plymouth_factory_vehicle, plymouth_factory_arachnid, plymouth_smelter_common, plymouth_smelter_rare
 	BaseBuilderBotModuleCA@generic:
 		RequiresCondition: genericbot || classicbot
+		SwitchCondition: genericbot
 		InititalMinimumRefineryCount: 1
 		AdditionalMinimumRefineryCount: 2
 		RefineriesPerBase: 3
@@ -5015,6 +5169,11 @@ Player:
 		MaximumDefenseRadius: 50
 		MaxResourceCellsToCheck: 5
 		NewProductionCashThreshold: 0
+		# BZ_production_scaling: banked cash held over the difficulty line while every unit queue is busy
+		# (or net income per producer over the line) queues another production building for the
+		# least-provisioned queue type. SwitchCondition-gated — classic keeps today's behaviour.
+		# Enabled for the maintainer's 2026-10-15 combined playtest (BZ).
+		UseProductionScaling: true
 		BuildingProductionMinCashRequirement: 1000
 		DefenseProductionMinCashRequirement: 1500
 		BuildingQueues: Building, RABuilding, BuildingAddons
@@ -5165,10 +5324,29 @@ Player:
 		# consuming the whole budget. Only pauses unit production; base construction is unaffected.
 		# Resource collectors (Harvester trait) are excluded by IgnoreHarvesters (default true), so the
 		# economy is never starved by a lower budget; buildings/walls were never counted (mobile units only).
-		GlobalUnitBudget: 600
-		MaxUnitsPerBot: 150
+		# Maintainer 2026-10-11: observed large-team games starved units (4v4 =
+		# 75/bot at budget 600). 900 -> 112/bot in 4v4; MaxUnitsPerBot 200 lifts
+		# the small-game ceiling too. Still bounds the single-thread sim tick.
+		GlobalUnitBudget: 900
+		MaxUnitsPerBot: 200
 	UnitBuilderBotModuleCA@generic:
 		RequiresCondition: genericbot || classicbot
+		# S1 (FINDINGS_2026-10-12 §3): the switch gate also arms the capturer ratio — classic
+		# (the A/B control) never sees genericbot, so its engineer spam is untouched there.
+		# S1b (ENGINEER-CAP-10PCT, maintainer 2026-10-12): the line is flat 10 on every tier —
+		# CapturerLimitPctCeiling clamps anything higher; the +allowance comes from the
+		# engineer owner's fog-fair KNOWN-target count (IBotCapturerTargetAllowance), and
+		# EngineerCompletionIntervalTicks paces completions on the difficulty line.
+		# CapturerInfantryLimitPct lives on the BotLimits difficulty line; 10 is only the
+		# fallback for a ruleset that ships no BotLimits.
+		# High-cash production fallback enabled for maintainer playtesting, 2026-10-15.
+		# 1 arms the fallback; BotLimits supplies the per-difficulty cash threshold.
+		# Generic-only: classic retains its existing production rules.
+		SwitchCondition: genericbot
+		BankSaturationCash: 1
+		CapturerInfantryLimitPct: 10
+		CapturerMinimumUnits: 2
+		CapturerAllowanceMax: 4
 		UseCompositions: true
 		# UW-1 (AI_ARCHITECTURE §2.8b item 3): derive the UnitsToBuild weights from the enabled
 		# personality's RoleMix x each unit's Versus-weighted strength. Off until the next increment
@@ -5319,6 +5497,11 @@ Player:
 	# separately from the veto so the pure-predictor A/B can run without fitted priors.
 	EngagementPriorsBotModule:
 		RequiresCondition: genericbot && tier1_priors
+	# LEARN-FIGHT: frozen threshold rows fitted offline from anonymous engagements.  The existing
+	# EngagementPriors provider remains the sole delivery x armour calibration consumer; this provider
+	# supplies only squad/veto hysteresis thresholds and is absent unless BR_learn_fight is armed.
+	FightThresholdsBotModule:
+		RequiresCondition: genericbot && fightlearning
 
 World:
 	BeaconTracker:

@@ -8,6 +8,7 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using OpenRA.Mods.Cameo.Traits.BotModules;
@@ -360,6 +361,386 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(scores[0].Index, Is.EqualTo(1));
 			Assert.That(scores[1].Index, Is.EqualTo(3));
 			Assert.That(scores[2].Index, Is.EqualTo(7));
+		}
+
+		// TF-1 (FINDINGS_2026-10-11_turtle_regression increment 1): the optional crawl-link episode —
+		// a queue's StartProduction intent is a pending claim that becomes paid only when the item is
+		// seen in its production queue, admission is atomic per owner, the route lives only while the
+		// frontier keeps closing on the aim, and a changed target opens a fresh episode.
+
+		static ExpansionPlannerBotModule.CrawlLinkAllowance Episode(CPos target, CPos aim, int distSq, int maxNonprogress = 4)
+		{
+			var ep = new ExpansionPlannerBotModule.CrawlLinkAllowance();
+			ep.ForTarget(target);
+			ep.NoteDistance(distSq, aim, maxNonprogress);
+			return ep;
+		}
+
+		static Dictionary<object, HashSet<string>> InProduction(object owner, string item) =>
+			new() { { owner, new HashSet<string> { item } } };
+
+		/// <summary>The real admission path: the queue claims, then its queue shows the item in production.</summary>
+		static void AdmitPaid(ExpansionPlannerBotModule.CrawlLinkAllowance ep, object owner, int cost, string item = "link")
+		{
+			Assert.That(ep.TryClaim(owner, item, cost, false, 0, 0), Is.True, "the admission gate claims the link");
+			ep.Reconcile(InProduction(owner, item), 2);
+		}
+
+		[Test]
+		public void ATruePowerDeficitAdmitsALinkTheAllowanceWouldRefuse()
+		{
+			// Case 1: the episode's cost headroom is spent, but mandatory power skips the allowance.
+			var owner = new object();
+			var target = new CPos(40, 10);
+			var aim = new CPos(40, 10);
+			var ep = Episode(target, aim, 400);
+			AdmitPaid(ep, owner, 600);
+			ep.NoteDistance(300, aim, 4); // the paid link advanced the frontier — the claim settles
+			AdmitPaid(ep, owner, 400);
+			ep.NoteDistance(200, aim, 4); // advanced again: only the paid-cost bound can refuse now
+
+			Assert.That(ep.OptionalLinkAdmissible(200, 1000, 4, 200), Is.False,
+				"paid cost at the allowance refuses the OPTIONAL link");
+			Assert.That(ExpansionPlannerBotModule.OptionalLinkAdmitted(false, false), Is.False);
+			Assert.That(ExpansionPlannerBotModule.OptionalLinkAdmitted(true, false), Is.True,
+				"a real power deficit admits anyway — mandatory power never consults the allowance");
+		}
+
+		[Test]
+		public void AnAdvancingAffordableLinkIsAdmittedSerially()
+		{
+			// Case 2: supply flows one outstanding claim at a time, each progress step re-arms it.
+			var owner = new object();
+			var aim = new CPos(40, 10);
+			var ep = Episode(new CPos(40, 10), aim, 400);
+
+			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, 400), Is.True,
+				"a measured frontier and headroom admit the first link");
+			Assert.That(ep.TryClaim(owner, "link", 500, false, 6000, 4), Is.True);
+			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, 400), Is.False,
+				"the outstanding claim must advance before the next is supplied");
+			ep.Reconcile(InProduction(owner, "link"), 2); // accepted — now PAID, still outstanding
+			Assert.That(ep.PaidCost, Is.EqualTo(500));
+			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, 400), Is.False,
+				"the accepted-but-unadvanced link still holds the window");
+
+			ep.NoteDistance(300, aim, 4); // the link landed forward — progress
+			Assert.That(ep.AwaitingProgress, Is.EqualTo(0));
+			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, 300), Is.True,
+				"progress re-arms the supply for the same episode");
+		}
+
+		[Test]
+		public void ANonadvancingRouteParksAndThePaidCountBoundRefuses()
+		{
+			// Case 3: a link that never advances the frontier counts stalled re-plans to the park.
+			var owner = new object();
+			var aim = new CPos(40, 10);
+			var ep = Episode(new CPos(40, 10), aim, 400);
+			AdmitPaid(ep, owner, 500);
+			for (var i = 0; i < 4; i++)
+				ep.NoteDistance(400, aim, 4);
+			Assert.That(ep.Parked, Is.True, "four measured re-plans without progress park the route");
+			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, 400), Is.False);
+
+			// The paid-count bound: progressing links still exhaust the episode's allowance.
+			var ep2 = Episode(new CPos(40, 10), aim, 400);
+			for (var i = 0; i < 4; i++)
+			{
+				Assert.That(ep2.OptionalLinkAdmissible(500, 6000, 4, 400 - 100 * i), Is.True);
+				AdmitPaid(ep2, owner, 500);
+				ep2.NoteDistance(300 - 100 * i, aim, 4); // each link advances — progress, not stalls
+			}
+
+			Assert.That(ep2.PaidCount, Is.EqualTo(4));
+			Assert.That(ep2.Parked, Is.False);
+			Assert.That(ep2.OptionalLinkAdmissible(500, 6000, 4, 100), Is.False,
+				"the fourth paid link spent the count allowance even with steady progress");
+		}
+
+		[Test]
+		public void AChangedTargetOpensAFreshEpisode()
+		{
+			// Case 4: the parked route retires — a new target field gets a clean ledger.
+			var owner = new object();
+			var aim = new CPos(40, 10);
+			var ep = Episode(new CPos(40, 10), aim, 400);
+			AdmitPaid(ep, owner, 500);
+			for (var i = 0; i < 4; i++)
+				ep.NoteDistance(400, aim, 4);
+			Assert.That(ep.Parked, Is.True);
+
+			Assert.That(ep.ForTarget(new CPos(10, 40)), Is.True, "a different field resets the episode");
+			Assert.That(ep.Parked, Is.False);
+			Assert.That(ep.PaidCount, Is.EqualTo(0));
+			Assert.That(ep.ForTarget(new CPos(10, 40)), Is.False, "the same target keeps the episode");
+
+			ep.NoteDistance(500, new CPos(10, 40), 4);
+			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, 500), Is.True,
+				"the new episode supplies once its own frontier is measured");
+		}
+
+		[Test]
+		public void MissingProgressEvidenceRefusesAnOptionalLink()
+		{
+			// Case 5: no measured frontier distance — the want may not be supplied at all.
+			var ep = new ExpansionPlannerBotModule.CrawlLinkAllowance();
+			ep.ForTarget(new CPos(40, 10));
+			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, -1), Is.False,
+				"an unmeasurable frontier is missing evidence, not a free pass");
+
+			ep.NoteDistance(-1, null, 4); // a replan that could not measure counts nothing
+			Assert.That(ep.NonprogressReplans, Is.EqualTo(0));
+			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, -1), Is.False);
+		}
+
+		[Test]
+		public void TheFrontierAnchorIsTheBuildingCellNearestTheAim()
+		{
+			var aim = new CPos(40, 10);
+			var frontier = new List<CPos> { new CPos(10, 10), new CPos(30, 12), new CPos(20, 30) };
+			Assert.That(ExpansionPlannerBotModule.FrontierAnchor(frontier, aim), Is.EqualTo(new CPos(30, 12)),
+				"the bounded search centres on the frontier cell nearest the aim, not the yard");
+
+			Assert.That(ExpansionPlannerBotModule.FrontierAnchor(frontier, null), Is.Null);
+			Assert.That(ExpansionPlannerBotModule.FrontierAnchor(new List<CPos>(), aim), Is.Null);
+		}
+
+		// TF-1 repair (Sol review of 5bedabace): admission is an atomic CLAIM at the queue's order,
+		// not a published want; a claim charges only once its item is observed in production.
+
+		[Test]
+		public void TwoQueuesCompetingForTheWantOnlyOneClaimsIt()
+		{
+			// Both queues see the published want in the same window: the first TryClaim wins, the
+			// second is refused — the want alone admitted nothing to anyone.
+			var queueA = new object();
+			var queueB = new object();
+			var ep = Episode(new CPos(40, 10), new CPos(40, 10), 400);
+
+			Assert.That(ep.TryClaim(queueA, "link", 500, false, 6000, 4), Is.True);
+			Assert.That(ep.TryClaim(queueB, "link", 500, false, 6000, 4), Is.False,
+				"a second queue in the same window is refused — no double admission");
+			Assert.That(ep.TryClaim(queueB, "link", 500, false, 6000, 4), Is.False,
+				"and it stays refused while the first claim is outstanding");
+			Assert.That(ep.PaidCount, Is.EqualTo(0), "intents charged nothing");
+
+			ep.Reconcile(InProduction(queueA, "link"), 2); // queue A's item accepted
+			Assert.That(ep.PaidCount, Is.EqualTo(1));
+			Assert.That(ep.TryClaim(queueB, "link", 500, false, 6000, 4), Is.False,
+				"queue B stays refused while queue A's paid link awaits progress");
+
+			ep.NoteDistance(300, new CPos(40, 10), 4); // the paid link advanced — claims settle
+			Assert.That(ep.TryClaim(queueB, "link", 500, false, 6000, 4), Is.True,
+				"progress re-opens the supply for the next claimant");
+		}
+
+		[Test]
+		public void ARejectedIntentDropsUnchargedAndReopensSupply()
+		{
+			// The queue's order never makes it into production: the pending claim ages out, the
+			// episode spends nothing, and the window re-opens for a fresh claimant.
+			var owner = new object();
+			var ep = Episode(new CPos(40, 10), new CPos(40, 10), 400);
+
+			Assert.That(ep.TryClaim(owner, "link", 500, false, 6000, 4), Is.True);
+			Assert.That(ep.AwaitingProgress, Is.EqualTo(1));
+			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, 400), Is.False,
+				"the pending intent serializes the supply while it may still land");
+
+			var nothing = new Dictionary<object, HashSet<string>>();
+			ep.Reconcile(nothing, 2); // first unseen re-plan: still pending
+			Assert.That(ep.AwaitingProgress, Is.EqualTo(1));
+			ep.Reconcile(nothing, 2); // aged out: dropped
+			Assert.That(ep.AwaitingProgress, Is.EqualTo(0));
+			Assert.That(ep.PaidCost, Is.EqualTo(0));
+			Assert.That(ep.PaidCount, Is.EqualTo(0),
+				"a rejected intent never charges the episode");
+			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, 400), Is.True);
+		}
+
+		[Test]
+		public void AnAcceptedLinkThatLeavesProductionKeepsItsCharge()
+		{
+			// A paid item that leaves the queue — completed or cancelled — consumed its spend
+			// window: the charge stands and the claim clears for the next admission.
+			var owner = new object();
+			var ep = Episode(new CPos(40, 10), new CPos(40, 10), 400);
+			AdmitPaid(ep, owner, 500);
+			Assert.That(ep.PaidCost, Is.EqualTo(500));
+
+			ep.Reconcile(new Dictionary<object, HashSet<string>>(), 2); // it left production
+			Assert.That(ep.AwaitingProgress, Is.EqualTo(0));
+			Assert.That(ep.PaidCost, Is.EqualTo(500), "accepted spend stays charged");
+			Assert.That(ep.PaidCount, Is.EqualTo(1));
+			Assert.That(ep.TryClaim(owner, "link", 500, false, 6000, 4), Is.True,
+				"the cleared window admits the next link — the count bound is the real cap");
+		}
+
+		[Test]
+		public void AMandatoryClaimBypassesEveryBound()
+		{
+			// Mandatory power outranks a spent allowance and even an outstanding optional claim.
+			var queueA = new object();
+			var queueB = new object();
+			var ep = Episode(new CPos(40, 10), new CPos(40, 10), 400);
+			Assert.That(ep.TryClaim(queueA, "link", 500, false, 6000, 4), Is.True);
+
+			Assert.That(ep.TryClaim(queueB, "link", 500, true, 6000, 4), Is.True,
+				"a real deficit claims even while an optional claim is outstanding");
+
+			var ep2 = Episode(new CPos(40, 10), new CPos(40, 10), 400);
+			Assert.That(ep2.TryClaim(queueA, "link", 500, false, 6000, 4), Is.True);
+			for (var i = 0; i < 4; i++)
+				ep2.NoteDistance(400, new CPos(40, 10), 4);
+			Assert.That(ep2.Parked, Is.True);
+			Assert.That(ep2.TryClaim(queueB, "link", 500, false, 6000, 4), Is.False);
+			Assert.That(ep2.TryClaim(queueB, "link", 500, true, 6000, 4), Is.True,
+				"mandatory power claims on a parked route");
+		}
+
+		[Test]
+		public void PaidCountersSaturateInsteadOfWrapping()
+		{
+			var owner = new object();
+			var ep = Episode(new CPos(40, 10), new CPos(40, 10), 400);
+			AdmitPaid(ep, owner, int.MaxValue - 10);
+			ep.NoteDistance(300, new CPos(40, 10), 4);
+			AdmitPaid(ep, owner, int.MaxValue - 10);
+			Assert.That(ep.PaidCost, Is.EqualTo(int.MaxValue), "the bound saturates, never wraps negative");
+			Assert.That(ep.PaidCount, Is.EqualTo(2));
+		}
+
+		// CRAWL-SAFETY (FINDINGS_2026-10-12 S3): the front ledger — the corridor watch diffs own
+		// building cells re-plan to re-plan, lost cells pool their counts within the merge radius
+		// (a link rebuilt on the same farmed spot), the scout hold bounds an unexplored aim, and a
+		// dead corridor diffs from nothing so it can never phantom-loss.
+
+		[Test]
+		public void TheCorridorDistanceIsToTheSegmentNotItsEnds()
+		{
+			var a = new CPos(10, 10);
+			var b = new CPos(30, 10);
+			Assert.That(ExpansionPlannerBotModule.CrawlFrontSafety.PointToSegmentDistanceSq(new CPos(20, 13), a, b),
+				Is.EqualTo(9L), "a point three cells off the route measures three");
+			Assert.That(ExpansionPlannerBotModule.CrawlFrontSafety.PointToSegmentDistanceSq(new CPos(22, 10), a, b),
+				Is.EqualTo(0L), "a point on the route measures zero");
+			Assert.That(ExpansionPlannerBotModule.CrawlFrontSafety.PointToSegmentDistanceSq(new CPos(40, 10), a, b),
+				Is.EqualTo(100L), "beyond the far end it clamps to the endpoint");
+			Assert.That(ExpansionPlannerBotModule.CrawlFrontSafety.PointToSegmentDistanceSq(new CPos(5, 5), a, b),
+				Is.EqualTo(50L), "behind the frontier it clamps to the near endpoint");
+		}
+
+		[Test]
+		public void TheFirstWatchIsABaselineAndLostCellsCount()
+		{
+			var safety = new ExpansionPlannerBotModule.CrawlFrontSafety();
+			var cell = new CPos(20, 10);
+			var watch = new List<CPos> { cell, new CPos(24, 10) };
+
+			Assert.That(safety.NoteWatch(watch, 4, out _), Is.EqualTo(0),
+				"the first set establishes the baseline — nothing is a loss yet");
+
+			watch.RemoveAt(0);
+			Assert.That(safety.NoteWatch(watch, 4, out var hottest), Is.EqualTo(1),
+				"the vanished cell counts its first loss");
+			Assert.That(hottest, Is.EqualTo(cell));
+			Assert.That(safety.TotalLosses, Is.EqualTo(1));
+		}
+
+		[Test]
+		public void LostCellsInsideTheMergeRadiusPoolTheirCounts()
+		{
+			// The S3 farm: the same ground rebuilt and lost again and again — losses at cells
+			// within the merge radius sum into one farmed-cell count that trips the park bound.
+			var safety = new ExpansionPlannerBotModule.CrawlFrontSafety();
+			var first = new List<CPos> { new CPos(20, 10) };
+			var second = new List<CPos> { new CPos(21, 11) };
+			var third = new List<CPos> { new CPos(19, 12) };
+
+			safety.NoteWatch(first, 4, out _);          // baseline
+			safety.NoteWatch(second, 4, out _);          // (20,10) lost
+			safety.NoteWatch(third, 4, out _);           // (21,11) lost
+			var worst = safety.NoteWatch(new List<CPos>(), 4, out var hottest); // (19,12) lost
+
+			Assert.That(worst, Is.EqualTo(3), "three same-spot losses pool through the merge radius");
+			Assert.That(hottest, Is.EqualTo(new CPos(19, 12)));
+			Assert.That(safety.LossesNear(new CPos(20, 10), 4), Is.EqualTo(3));
+			Assert.That(safety.LossesNear(new CPos(50, 50), 4), Is.EqualTo(0),
+				"a far cell sees none of the farm");
+		}
+
+		[Test]
+		public void ACellSlidOutOfTheCorridorIsNotALoss()
+		{
+			// The frontier advancing past a watched building must not count it lost — only a cell
+			// that is still inside the corridor when it disappears is a real loss.
+			var safety = new ExpansionPlannerBotModule.CrawlFrontSafety();
+			Predicate<CPos> nearFront = c => c.X >= 15; // the corridor's leading edge moved forward
+			safety.NoteWatch(new List<CPos> { new CPos(20, 10), new CPos(8, 10) }, 4, out _, nearFront);
+
+			Assert.That(safety.NoteWatch(new List<CPos> { new CPos(20, 10) }, 4, out _, nearFront),
+				Is.EqualTo(0), "the cell left behind by the advance slid out — not lost");
+			Assert.That(safety.TotalLosses, Is.EqualTo(0));
+
+			Assert.That(safety.NoteWatch(new List<CPos>(), 4, out _, nearFront), Is.EqualTo(1),
+				"the cell still inside the corridor that vanished counts");
+		}
+
+		[Test]
+		public void ADeadCorridorCannotPhantomLoss()
+		{
+			var safety = new ExpansionPlannerBotModule.CrawlFrontSafety();
+			safety.NoteWatch(new List<CPos> { new CPos(20, 10) }, 4, out _);
+			safety.ResetCorridor(); // the want or frontier blinked off — the watch is void
+
+			Assert.That(safety.NoteWatch(new List<CPos>(), 4, out _), Is.EqualTo(0),
+				"the next watch re-baselines instead of counting the old cells as lost");
+			Assert.That(safety.TotalLosses, Is.EqualTo(0));
+		}
+
+		[Test]
+		public void TheScoutWaitBoundsAnUnexploredAim()
+		{
+			var safety = new ExpansionPlannerBotModule.CrawlFrontSafety();
+			Assert.That(safety.ScoutHolds(3), Is.True, "the first unexplored re-plans hold");
+			Assert.That(safety.ScoutHolds(3), Is.True);
+			Assert.That(safety.ScoutHolds(3), Is.False,
+				"the bound spent — a stubbornly unscouted aim must not freeze the crawl");
+
+			safety.ResetScoutWait();
+			Assert.That(safety.ScoutHolds(3), Is.True, "explored ground reset the wait");
+
+			var unbounded = new ExpansionPlannerBotModule.CrawlFrontSafety();
+			for (var i = 0; i < 20; i++)
+				Assert.That(unbounded.ScoutHolds(0), Is.True, "a 0 bound holds until explored, forever");
+		}
+
+		[Test]
+		public void TheParityGateAdmitsOnlyAtOrAboveTheFloor()
+		{
+			Assert.That(ExpansionPlannerBotModule.ArmyParityAdmits(30, 60), Is.False,
+				"well below the remembered enemy — the crawl starves the army it needs");
+			Assert.That(ExpansionPlannerBotModule.ArmyParityAdmits(60, 60), Is.True, "at parity the gate opens");
+			Assert.That(ExpansionPlannerBotModule.ArmyParityAdmits(10000, 60), Is.True,
+				"an unobserved enemy scores MaxRatio — no unseen army ever blocks");
+			Assert.That(ExpansionPlannerBotModule.ArmyParityAdmits(0, 0), Is.True,
+				"a disabled floor never gates");
+		}
+
+		[Test]
+		public void TheEscortGateStillCrawlsIntoAContestedFrontWhenStronger()
+		{
+			// The maintainer's constraint: a contested crawl proceeds when the local force is
+			// stronger — the gate refuses only an UNDERpowered escort, never the march itself.
+			Assert.That(ExpansionPlannerBotModule.FrontGuardAdmits(2200, 2000, 110), Is.True,
+				"guard at 110% of the remembered threat — the escorted crawl goes");
+			Assert.That(ExpansionPlannerBotModule.FrontGuardAdmits(1000, 2000, 110), Is.False,
+				"half the threat — the link waits for defenders instead");
+			Assert.That(ExpansionPlannerBotModule.FrontGuardAdmits(0, 0, 110), Is.True,
+				"an uncontested front never needs an escort");
+			Assert.That(ExpansionPlannerBotModule.FrontGuardAdmits(0, 2000, 110), Is.False,
+				"a bare frontier into a remembered army holds");
 		}
 	}
 }

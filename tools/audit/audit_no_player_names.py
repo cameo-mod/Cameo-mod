@@ -19,6 +19,7 @@ SHAPES = json.loads(Path(__file__).with_name('anonymous_log_shapes.json').read_t
 TYPES = json.loads(Path(__file__).with_name('anonymous_log_types.json').read_text())
 FEATURES = ('army_value', 'infantry_value', 'vehicle_value', 'air_value', 'naval_value',
             'defence_value', 'building_count', 'harvester_count', 'known_regions')
+CONTEXT_RECORDS = ('map_features', 'opponent_features')
 SEAT = re.compile(r'seat_[1-9][0-9]*\Z')
 UID = re.compile(r'(?:[a-fA-F0-9]{32}|[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}|legacy-[a-f0-9]{16})\Z')
 CELL = re.compile(r'-?[0-9]+,-?[0-9]+\Z')
@@ -168,14 +169,25 @@ match_ok=record_ok
 
 def validate_logs(paths):
     errors=[]
+    context_validate=None
     for path in paths:
         if not path.is_file():
             errors.append(f'{path}: missing log input'); continue
         for n,line in enumerate(path.read_text(encoding='utf-8-sig').splitlines(),1):
             if not line.strip(): continue
-            try: ok=record_ok(json.loads(line))
-            except (ValueError,TypeError): ok=False
-            if not ok: errors.append(f'{path}:{n}: record does not conform to anonymous-seat schema')
+            try: row=json.loads(line)
+            except (ValueError,TypeError): row=None
+            if isinstance(row,dict) and row.get('record') in CONTEXT_RECORDS:
+                # Closed-schema context vectors (task 01a11190): the anonymous-seat
+                # grammar cannot describe them, so the dedicated validator decides.
+                if context_validate is None:
+                    sys.path.insert(0,str(ROOT/'tools'/'ai'))
+                    from audit_context_features import validate_line as context_validate
+                try:
+                    context_validate(line); continue
+                except (ValueError,TypeError) as exc:
+                    errors.append(f'{path}:{n}: context record rejected ({exc})'); continue
+            if not record_ok(row): errors.append(f'{path}:{n}: record does not conform to anonymous-seat schema')
     return errors
 
 def learned_paths(root):
@@ -183,7 +195,8 @@ def learned_paths(root):
 
 def validate_learned(paths):
     errors=[]
-    roots={'arsenal_priors.yaml':'BotArsenalPriors:', 'build_order_knobs.yaml':'BotBuildOrderKnobs:', 'plan_bandits.yaml':'BotPlanBandits:'}
+    roots={'arsenal_priors.yaml':'BotArsenalPriors:', 'build_order_knobs.yaml':'BotBuildOrderKnobs:',
+           'plan_bandits.yaml':'BotPlanBandits:', 'fight_learning.yaml':'BotFightLearning:'}
     for path in paths:
         lines=[x for x in path.read_text(encoding='utf-8-sig').splitlines() if x.strip() and not x.lstrip().startswith('#')]
         ok=bool(lines)
@@ -201,6 +214,13 @@ def validate_learned(paths):
                         if key=='VisibilityPercentByPhase': ok=bool(re.fullmatch(r'[0-9, ]*',val))
                         else:
                             scope=key.removeprefix('TradePercent@');ok=key.startswith('TradePercent@') and scope_ok(scope) and not val;parent='actor'
+                    elif path.name=='fight_learning.yaml':
+                        if key in {'Schema','CalibrationMinimumSamples','ThresholdMinimumSamples','EffectiveValueMinimumSamples'}:
+                            ok=bool(re.fullmatch(r'-?[0-9]+',val))
+                        else:
+                            head,sep,scope=key.partition('@')
+                            ok=(head in {'Evidence','RetreatRatioPct','EngageMarginPct','CalibrationMilli','EffectiveValueMilli'}
+                                and bool(sep) and scope_ok(scope) and bool(re.fullmatch(r'-?[0-9]+',val)))
                     elif path.name=='build_order_knobs.yaml':
                         head,sep,scope=key.partition('@');pers,sep2,scope=scope.partition('__');ok=head in {'Knobs','Openings'} and bool(sep and sep2) and pers in PERSONALITIES and scope_ok(scope) and not val;parent=head
                     else:

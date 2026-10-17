@@ -19,6 +19,43 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits.BotModules
 {
+	// Record-only lifecycle of this provider's published defence request. An observed
+	// false -> true admission mints once; pulses never renew identity. No target/tick input.
+	internal sealed class BotDefenceClaimEpisodes
+	{
+		readonly BotClaimEpisodeCounter counter;
+		bool active;
+		BotClaimEpisode episode;
+
+		public BotDefenceClaimEpisodes(string participantId, int providerInstance)
+		{
+			counter = new BotClaimEpisodeCounter(participantId, nameof(MasterAiBotModule), providerInstance);
+		}
+
+		public BotClaimEpisode Observe(bool requestsDefence)
+		{
+			if (!requestsDefence)
+			{
+				active = false;
+				episode = default;
+			}
+			else if (!active)
+			{
+				active = true;
+				episode = counter.Admit();
+			}
+
+			return episode;
+		}
+
+		public void Invalidate()
+		{
+			counter.Invalidate();
+			active = false;
+			episode = default;
+		}
+	}
+
 	public enum BotUrgency { Normal, Pressured, Emergency }
 
 	public sealed class EnemyProfile
@@ -218,6 +255,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly BitSet<TargetableType> NavalTargetTypes = new("Water", "Ship");
 		public readonly BitSet<TargetableType> DefenceTargetTypes = new("Defense");
 
+		// S2 (FINDINGS_2026-10-12): production-queue names that yield aircraft in this
+		// ruleset — every Buildable queue an AircraftInfo actor declares. Derived at
+		// RulesetLoaded, never yaml, and read by BotFogMemory.Classify for the
+		// ProducesAircraft flag behind IBotEnemyAirIntelProvider.
+		internal readonly HashSet<string> AircraftQueueNames = new(StringComparer.OrdinalIgnoreCase);
+
 		[Desc("Value per unit of garrison weight of an enemy-held garrisonable building that has no Valued cost",
 			"(the civilian houses), so fog memory prices the garrison, not the house (AI_ARCHITECTURE §12.12).",
 			"0 keeps the house's own cost, which is none.")]
@@ -247,6 +290,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"no forced turtle at the transition and no turtle candidate just because urgency is Emergency; " +
 			"candidates proceed as under Pressured. False keeps the legacy emergency-turtle override.")]
 		public readonly bool EmergencyKeepsPersonality = false;
+
+		[Desc("Default-off terminal turtle fallback hold: outside visible base danger, keep a legal " +
+			"offensive incumbent for twice the tier personality reaction delay. Pressure cannot renew expiry.")]
+		public readonly bool UseTurtleFallbackExpiry = false;
 		public readonly int PressuredArmyRatio = 60;
 		public readonly int EmergencyCheckInterval = 25;
 		public readonly int SnapshotInterval = 150;
@@ -483,6 +530,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
 			base.RulesetLoaded(rules, ai);
+			AircraftQueueNames.Clear();
+			if (rules != null)
+				foreach (var actor in rules.Actors.Values)
+					if (actor.HasTraitInfo<AircraftInfo>())
+						foreach (var queue in actor.TraitInfos<BuildableInfo>().SelectMany(b => b.Queue))
+							AircraftQueueNames.Add(queue);
+
 			ValidateDemandThreshold("AntiAir", AntiAirDemandOn, AntiAirDemandOff);
 			ValidateDemandThreshold("AntiArmour", AntiArmourDemandOn, AntiArmourDemandOff);
 			ValidateDemandThreshold("AntiInfantry", AntiInfantryDemandOn, AntiInfantryDemandOff);
@@ -536,12 +590,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory, IBotPersonalityLeadProvider, IBotUtilityAxes, IBotDirector, IBotTeamMember, IBotCoalition
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotEnemyAirIntelProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory, IBotPersonalityLeadProvider, IBotUtilityAxes, IBotDirector, IBotTeamMember, IBotCoalition
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
 		readonly OpenRA.Player player;
 		readonly BotFogMemory fogMemory;
+
+		// E1 (lead ruling 2026-10-12): the sticky air-intel latch — enemy InternalNames whose
+		// air capability was fog-fairly seen this match. Deliberately not in MasterAiBotSavedState:
+		// only a world load resets it, and a save/load re-derives it from fog memory on first query.
+		readonly HashSet<string> airIntelLatchedEnemies = new(StringComparer.Ordinal);
 
 		// IM-1: the persistent layers object — its EMA history lives across snapshots, so it is
 		// constructed once and republished in place (Situation.Influence hands out the live read).
@@ -576,6 +635,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		bool costCountersInitialized;
 		BotUrgency currentUrgency;
 		int lastPersonalitySwitchTick;
+		readonly TurtleFallbackPolicy turtleFallback = new();
+		TurtleFallbackDecision lastTurtleFallbackDecision;
 		int lastBanditPinOrderTick = -25;
 		int personalityCandidateSince;
 		string sustainedCandidate = "";
@@ -597,6 +658,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// same per-snapshot point as the Director fold and published through
 		// IBotTeamMember; a disabled or never-snapshotted master reads Empty instead.
 		TeamBroadcast broadcast = TeamBroadcast.Empty;
+		readonly BotDefenceClaimEpisodes defenceClaimEpisodes;
 
 		// TC-3 (AI_ARCHITECTURE §12.18): the coalition directive folded from own +
 		// allied broadcasts at the same snapshot cadence and published through
@@ -911,10 +973,66 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return true;
 		}
 
+		// S2 (FINDINGS_2026-10-12): the enemy air capability as SEEN — a remembered enemy
+		// aircraft or a remembered enemy aircraft-producing structure. Same fog contract as
+		// the composition feed: false means "not observing through fog" and keeps the
+		// caller's ungated behaviour (what classic runs).
+		//
+		// E1 (lead ruling 2026-10-12): the observation LATCHES per enemy player — once seen,
+		// the gate stays open against that enemy for the rest of the match even after the
+		// sighting expires; only a world load resets. The fog scan stays lazy: it is skipped
+		// for an already-latched enemy.
+		public static bool NoteEnemyAirSighting(HashSet<string> latchedEnemies, string enemyInternalName, Func<bool> airSighted) =>
+			latchedEnemies.Contains(enemyInternalName) || (airSighted() && latchedEnemies.Add(enemyInternalName));
+
+		bool FogShowsEnemyAir(OpenRA.Player enemy)
+		{
+			foreach (var seen in fogMemory.Remembered(enemy))
+				if (seen.Aircraft || seen.ProducesAircraft)
+					return true;
+
+			return false;
+		}
+
+		bool IBotEnemyAirIntelProvider.TryGetEnemyAirIntel(out bool airThreatObserved)
+		{
+			airThreatObserved = false;
+			if (!((IBotFoggedEnemyProvider)this).FoggedObservation)
+				return false;
+
+			foreach (var enemy in player.World.Players)
+			{
+				if (enemy == player || enemy.NonCombatant || player.RelationshipWith(enemy) != PlayerRelationship.Enemy)
+					continue;
+
+				if (NoteEnemyAirSighting(airIntelLatchedEnemies, enemy.InternalName, () => FogShowsEnemyAir(enemy)))
+				{
+					airThreatObserved = true;
+					return true;
+				}
+			}
+
+			return true;
+		}
+
+		bool IBotEnemyAirIntelProvider.TryGetEnemyAirIntel(OpenRA.Player enemy, out bool airThreatObserved)
+		{
+			airThreatObserved = false;
+			if (!((IBotFoggedEnemyProvider)this).FoggedObservation)
+				return false;
+			if (enemy == null || enemy == player || enemy.NonCombatant || player.RelationshipWith(enemy) != PlayerRelationship.Enemy)
+				return true;
+
+			airThreatObserved = NoteEnemyAirSighting(airIntelLatchedEnemies, enemy.InternalName, () => FogShowsEnemyAir(enemy));
+			return true;
+		}
+
 		public MasterAiBotModule(Actor self, MasterAiBotModuleInfo info)
 			: base(info)
 		{
 			player = self.Owner;
+			defenceClaimEpisodes = new BotDefenceClaimEpisodes(player.InternalName,
+				self.Info.TraitInfos<MasterAiBotModuleInfo>().ToList().IndexOf(info));
 			fogMemory = new BotFogMemory(player, info);
 			influenceLayers = new BotInfluenceLayers(info);
 			costCountersInitialized = !player.World.IsLoadingGameSave;
@@ -1162,6 +1280,35 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var availablePersonalities = AvailablePersonalities();
 			var candidatePersonality = CandidatePersonality(urgency, targetProfile, ownArmy,
 				profiles.Values, currentPersonality, availablePersonalities, Info);
+			if (Info.UseTurtleFallbackExpiry)
+			{
+				var choice = CandidatePersonalityChoice(urgency, targetProfile, ownArmy,
+					profiles.Values, currentPersonality, availablePersonalities, Info);
+				var bases = ownBuildings.Where(a => a.OccupiesSpace != null
+					&& a.Info.HasTraitInfo<BaseBuildingInfo>()).ToArray();
+				// Visibility precedes enemy location access. Remote losses and remembered
+				// pressure do not establish a current breach of the construction-yard base.
+				var danger = bases.Length == 0 || actors.Any(a => a.Owner != player
+					&& player.RelationshipWith(a.Owner) == PlayerRelationship.Enemy
+					&& a.OccupiesSpace != null && a.CanBeViewedByPlayer(player) && IsCombatUnit(a)
+					&& bases.Any(b => (a.Location - b.Location).Length <= Info.PressureRadius));
+				var offensive = currentPersonality == "rush" || currentPersonality == "steamroller"
+					|| currentPersonality == "guerrilla";
+				var legal = offensive && ownArmy > 0 && targetProfile != null
+					&& targetProfile.Alive && targetProfile.NearestCells >= 0
+					&& availablePersonalities.Contains(currentPersonality);
+				var delay = player.PlayerActor.TraitsImplementing<BotLimits>()
+					.FirstEnabledTraitOrDefault()?.Info.PersonalityReactionDelay ?? Info.DefaultPersonalityReactionDelay;
+				var holdTicks = delay <= 0 ? 0 : (int)Math.Min(int.MaxValue, 2L * delay);
+				var selected = turtleFallback.Select(tick, true, choice, currentPersonality, legal, danger, holdTicks);
+				candidatePersonality = selected.Personality;
+				if (selected != lastTurtleFallbackDecision)
+				{
+					Log.Write("bot-situation", $"TURTLE_FALLBACK seat={player.InternalName} tick={tick} " +
+						$"reason={selected.Reason} candidate={choice.Personality} selected={selected.Personality} expiry={selected.ExpiresTick}");
+					lastTurtleFallbackDecision = selected;
+				}
+			}
 			incumbentPersonality = candidatePersonality;
 			personalityCandidateSince = SustainedCandidateSince(candidatePersonality, sustainedCandidate,
 				personalityCandidateSince, tick);
@@ -1344,7 +1491,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				player.ClientIndex,
 				expansionClaim.HasValue ? player.World.Map.CenterOfCell(expansionClaim.Value) : WPos.Zero,
 				armyCentroid: armyCentroid, expansionAssist: expansionAssist, spawnPoint: spawnPoint,
-				captureClaims: captureClaims, participantId: player.InternalName);
+				captureClaims: captureClaims, participantId: player.InternalName,
+				defenceEpisode: defenceClaimEpisodes.Observe(requestsDefence));
+			// ExpansionAssistTarget has no owner-produced admission episode API. Its
+			// metadata remains UNKNOWN; a snapshot/location cannot manufacture one.
 
 			// TC-3 (§12.18): fold own + allied broadcasts into the coalition directive —
 			// every member runs the identical function over the identical set, so all
@@ -2088,43 +2238,50 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal static string CandidatePersonality(BotUrgency urgency, EnemyProfile target, int ownArmy,
 			IEnumerable<EnemyProfile> enemies, string incumbent, IEnumerable<string> availablePersonalities,
 			MasterAiBotModuleInfo info)
+			=> CandidatePersonalityChoice(urgency, target, ownArmy, enemies, incumbent, availablePersonalities, info).Personality;
+
+		internal static PersonalityChoice CandidatePersonalityChoice(BotUrgency urgency, EnemyProfile target, int ownArmy,
+			IEnumerable<EnemyProfile> enemies, string incumbent, IEnumerable<string> availablePersonalities,
+			MasterAiBotModuleInfo info)
 		{
 			var available = availablePersonalities.ToHashSet(StringComparer.Ordinal);
 			foreach (var candidate in PersonalityCandidates(urgency, target, ownArmy, enemies, info))
-				if (available.Contains(candidate))
+				if (available.Contains(candidate.Personality))
 					return candidate;
 
-			return incumbent != null && available.Contains(incumbent) ? incumbent : "";
+			return new(incumbent != null && available.Contains(incumbent) ? incumbent : "", PersonalityCandidateReason.Candidate);
 		}
 
 		internal static string UnfilteredCandidatePersonality(BotUrgency urgency, EnemyProfile target, int ownArmy,
 			IEnumerable<EnemyProfile> enemies, string incumbent, MasterAiBotModuleInfo info)
 		{
-			return PersonalityCandidates(urgency, target, ownArmy, enemies, info).FirstOrDefault() ?? incumbent ?? "";
+			return PersonalityCandidates(urgency, target, ownArmy, enemies, info).FirstOrDefault().Personality ?? incumbent ?? "";
 		}
 
-		static IEnumerable<string> PersonalityCandidates(BotUrgency urgency, EnemyProfile target, int ownArmy,
+		static IEnumerable<PersonalityChoice> PersonalityCandidates(BotUrgency urgency, EnemyProfile target, int ownArmy,
 			IEnumerable<EnemyProfile> enemies, MasterAiBotModuleInfo info)
 		{
 			if (urgency == BotUrgency.Emergency && !info.EmergencyKeepsPersonality)
-				yield return "turtle";
+				yield return new("turtle", PersonalityCandidateReason.LegacyEmergency);
 			if (target != null && target.DefenceCount >= info.FortifiedDefenceCount && ownArmy >= info.SteamrollerMinArmyValue)
-				yield return "steamroller";
+				yield return new("steamroller", PersonalityCandidateReason.Candidate);
 			if (target != null && target.ExpansionClusters >= info.GuerrillaMinClusters)
-				yield return "guerrilla";
+				yield return new("guerrilla", PersonalityCandidateReason.Candidate);
 			if (target != null && target.TechBuildings >= info.TechEnemyTechBuildings &&
 				target.ArmyValue < info.RushMaxEnemyArmyValue * 2)
-				yield return "tech";
+				yield return new("tech", PersonalityCandidateReason.Candidate);
 			if (target != null && target.ArmyValue <= info.RushMaxEnemyArmyValue &&
 				target.DefenceCount <= info.RushMaxEnemyDefenceCount)
-				yield return "rush";
+				yield return new("rush", PersonalityCandidateReason.Candidate);
 			if (!enemies.Any(e => e.Alive && e.NearestCells >= 0))
-				yield return "expansion";
+				yield return new("expansion", PersonalityCandidateReason.Candidate);
 
 			// Terminal posture so a thin fogged enemy profile cannot latch the
 			// incumbent forever: under pressure consolidate defensively, when
 			// calm keep spreading out.
-			yield return urgency >= BotUrgency.Pressured ? "turtle" : "expansion";
+			yield return urgency >= BotUrgency.Pressured
+				? new("turtle", PersonalityCandidateReason.TerminalPressure)
+				: new("expansion", PersonalityCandidateReason.Candidate);
 		}
 
 		static CounterDemand BuildDemand(IEnumerable<EnemyProfile> enemies, EnemyProfile target, int totalArmy)
@@ -2249,6 +2406,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IGameSaveTraitData.ResolveTraitData(Actor self, MiniYaml data)
 		{
+			// Legacy saved state has no defence admission history. Preserve save/gameplay
+			// behavior, but never recycle a known identity after restoration.
+			defenceClaimEpisodes.Invalidate();
+			// This increment does not restore hold provenance; never mint a fresh hold on load.
+			if (Info.UseTurtleFallbackExpiry)
+				turtleFallback.Invalidate();
 			if (self.World.IsReplay)
 				return;
 

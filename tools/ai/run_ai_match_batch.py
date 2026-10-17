@@ -64,9 +64,12 @@ to <support>/batch_results.jsonl as they land, so a batch whose driver is
 itself swept still leaves usable evidence.
 
 The batch fingerprints its arms once at start (LC7): the mod commit and its
-dirty state, the engine VERSION, a sha256 over engine/bin/OpenRA*.dll, a
-sha256 over the resolved AI yaml set (mods/**/ai.yaml + mods/**/ai/*.yaml),
-the map source, and the batch spec. The fingerprint is recomputed before
+dirty state, configured engine pin and matching clean engine Git HEAD, the
+resolved OpenRA.exe path and pre-launch SHA256, engine VERSION bytes, a SHA256
+over engine/bin/OpenRA*.dll, a SHA256 over the resolved AI yaml set
+(mods/**/ai.yaml + mods/**/ai/*.yaml), the map source, and the batch spec. The
+executable is hashed again after each match; any change invalidates that attempt.
+The fingerprint is recomputed before
 every match attempt and any drift aborts the batch — a mid-batch checkout or
 rebuild (the auto-sync service landing new yaml under stale DLLs killed
 league-3 this way) silently changes the A/B arms otherwise.
@@ -98,6 +101,7 @@ Exit codes: 0 = batch complete, 2 = no usable records collected, 1 = failure.
 from __future__ import annotations
 
 import argparse
+import base64
 import hashlib
 import itertools
 import json
@@ -136,6 +140,12 @@ DEFAULT_TEAM_MAP = REPO_ROOT / "mods" / "cameo" / "maps" / "_ra_doubles.oramap"
 MATCH_LOG = "cameo-ai-matches.jsonl"
 CONFIG_KEYS = {"MOD_ID", "ENGINE_DIRECTORY"}
 BENCHMARK_PREFIX = "ai-duel-batch-"
+
+# --render headless: the mod-built OpenRA.Platforms.Null.dll (Game.Platform=Null). The
+# engine silently falls back to the Default platform when the dll is missing or fails, so the
+# batch checks the dll before launching and the platform's graphics.log line after each match.
+HEADLESS_PLATFORM = "Null"
+HEADLESS_LOG_MARKER = "Null platform: headless window"
 
 # The mod.yaml MapFolders entry for user maps resolves through this literal
 # directory name inside the support dir.
@@ -643,7 +653,7 @@ def write_variant_from_oramap(oramap: pathlib.Path, dest: pathlib.Path, matchup:
     rules_yaml.write_text(patched, encoding="utf-8")
 
 
-def write_variant(template: Path, dest: pathlib.Path, matchup: dict, time_limit: int) -> None:
+def write_variant(template: pathlib.Path, dest: pathlib.Path, matchup: dict, time_limit: int) -> None:
     if template.suffix == ".oramap":
         write_variant_from_oramap(template, dest, matchup, time_limit)
         return
@@ -817,7 +827,344 @@ def read_appended_records(log_path: pathlib.Path, before_length: int) -> list[di
     return records
 
 
+def prepare_match_support(support: pathlib.Path, variants_root: pathlib.Path, variant: str,
+                          run: int, repeat: int, attempt: int, batch_id: str) -> pathlib.Path:
+    """Create a new OpenRA SupportDir for exactly one game attempt.
+
+    Engine log producers intentionally use FileMode.CreateNew for canonical
+    telemetry filenames. Giving each game attempt a fresh SupportDir keeps
+    those names collision-free while retaining a batch-level aggregate log.
+    Retries receive distinct leaves too, so failed-attempt evidence is kept.
+    """
+    leaf = support / "games" / batch_id / f"match-{run:04d}-repeat-{repeat:02d}-attempt-{attempt:02d}"
+    if leaf.exists():
+        raise FileExistsError(f"refusing to reuse per-game SupportDir: {leaf}")
+    source_map = variants_root / variant
+    if not source_map.is_dir():
+        raise FileNotFoundError(f"generated map variant is missing: {source_map}")
+    map_dir = leaf / USER_MAP_DIR / variant
+    map_dir.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(source_map, map_dir)
+    (leaf / "Logs").mkdir(parents=True, exist_ok=True)
+    return leaf
+
+
+def planned_economy_roster(variant_map: pathlib.Path, matchup: dict) -> list[tuple[str, str, str, str]]:
+    """Return configured combat bots by engine-visible identity, not seat index.
+
+    Player creation groups non-playable map references before lobby slots, so
+    raw YAML order cannot predict seat_N. The match log has bot/faction/home;
+    the economy log has InternalName/bot/faction. Joining each stream to this
+    configured roster avoids guessing engine indexes and excludes inert refs.
+    """
+    text = variant_map.read_text(encoding="utf-8")
+    refs = list(re.finditer(r"(?m)^\tPlayerReference@([^:]+):\s*$", text))
+    roster = []
+    for index, ref in enumerate(refs):
+        next_ref = refs[index + 1].start() if index + 1 < len(refs) else len(text)
+        block = text[ref.start():next_ref]
+        if re.search(r"(?m)^\t\tNonCombatant:\s*True\s*$", block, re.IGNORECASE):
+            continue
+        bot = re.search(r"(?m)^\t\tBot:\s*(\S+)\s*$", block)
+        if bot:
+            faction = re.search(r"(?m)^\t\tFaction:\s*(\S+)\s*$", block)
+            name = re.search(r"(?m)^\t\tName:\s*(.+?)\s*$", block)
+            home = re.search(r"(?m)^\t\tHomeLocation:\s*(-?\d+,-?\d+)\s*$", block)
+            if faction is None or home is None:
+                raise ValueError(f"generated bot PlayerReference@{ref.group(1)} lacks faction or HomeLocation")
+            roster.append((name.group(1) if name else ref.group(1), faction.group(1),
+                           bot.group(1), home.group(1)))
+
+    if "team_a" in matchup:
+        configured = [(seat["bot"], seat["faction"])
+                      for seat in matchup["team_a"] + matchup["team_b"]]
+    else:
+        configured = [(matchup[side]["bot"], matchup[side]["faction"]) for side in ("side_a", "side_b")]
+    if sorted((bot, faction) for _name, faction, bot, _home in roster) != sorted(configured):
+        raise ValueError("generated variant bot seats do not match the planned matchup")
+    if len({(name, home) for name, _faction, _bot, home in roster}) != len(roster):
+        raise ValueError("generated variant has ambiguous bot identity or HomeLocation")
+    return roster
+
+
+def economy_health_file_status(
+    support: pathlib.Path,
+    match_records: list[dict],
+    expected_roster: list[tuple[str, str, str, str]],
+) -> tuple[str, str | None]:
+    """Require complete, per-seat economy evidence for one successful match.
+
+    File presence is not evidence completeness: a partial JSONL, a foreign UID,
+    a missing bot seat, or a stream without a valid terminal record must not
+    leave a successful match eligible for scoring.
+    """
+    health_path = support / "Logs" / "cameo-ai-economy-health.jsonl"
+    try:
+        if not health_path.is_file():
+            return "UNKNOWN", f"missing expected economy-health file: {health_path}"
+        data = health_path.read_bytes()
+        if not data:
+            return "UNKNOWN", f"empty expected economy-health file: {health_path}"
+        if not data.endswith(b"\n"):
+            return "UNKNOWN", f"unterminated economy-health JSONL: {health_path}"
+        from replay_health import read_jsonl
+        from economy_invariants import analyze as analyze_economy
+
+        rows, _receipt = read_jsonl(health_path)
+        if not rows:
+            return "UNKNOWN", f"no economy-health rows: {health_path}"
+        expected_seats_by_uid: dict[str, list[tuple[str, str, str, str]]] = {}
+        record_ids: set[str] = set()
+        for record in match_records:
+            if not isinstance(record, dict):
+                return "UNKNOWN", "invalid match record while validating economy health"
+            record_id = record.get("record_id")
+            uid = record.get("game_uid")
+            player = record.get("player")
+            seat = player.get("seat") if isinstance(player, dict) else None
+            faction = player.get("faction") if isinstance(player, dict) else None
+            bot_type = player.get("bot_type") if isinstance(player, dict) else None
+            home = player.get("home") if isinstance(player, dict) else None
+            seat_match = re.fullmatch(r"seat_(\d+)", seat) if isinstance(seat, str) else None
+            if (not isinstance(record_id, str) or not isinstance(uid, str) or not uid
+                    or record_id != f"{uid}|{seat}" or seat_match is None
+                    or not isinstance(faction, str) or not faction
+                    or not isinstance(bot_type, str) or not bot_type
+                    or not isinstance(home, str) or not re.fullmatch(r"-?\d+,-?\d+", home)):
+                return "UNKNOWN", "match records lack canonical game/seat/bot/faction/home identity"
+            if record_id in record_ids:
+                return "UNKNOWN", "duplicate match record/seat identity"
+            record_ids.add(record_id)
+            expected_seats_by_uid.setdefault(uid, []).append((bot_type, faction, home, seat))
+        if len(expected_seats_by_uid) != 1 or not match_records:
+            return "UNKNOWN", "per-game support leaf must contain exactly one match UID"
+        game_uid, logged_seats = next(iter(expected_seats_by_uid.items()))
+        logged_ids = [seat for _bot, _faction, _home, seat in logged_seats]
+        if (len(expected_roster) != len({(name, home) for name, _faction, _bot, home in expected_roster})
+                or len(match_records) != len(expected_roster)
+                or len(set(logged_ids)) != len(logged_ids)
+                or sorted((bot, faction, home) for bot, faction, home, _seat in logged_seats)
+                != sorted((bot, faction, home) for _name, faction, bot, home in expected_roster)):
+            return "UNKNOWN", "match record roster differs from the configured variant roster"
+        if any(not isinstance(row, dict) or row.get("game_uid") != game_uid for row in rows):
+            return "UNKNOWN", "economy-health stream contains malformed or foreign game UID rows"
+        players: list[str] = []
+        seen_players: set[str] = set()
+        for row in rows:
+            player_name = row.get("player")
+            if isinstance(player_name, str) and player_name not in seen_players:
+                seen_players.add(player_name)
+                players.append(player_name)
+        if len(players) != len(expected_roster):
+            return "UNKNOWN", (f"economy-health seat coverage mismatch: {len(players)} player(s) "
+                                f"for {len(expected_roster)} configured bot(s)")
+        actual_roster = []
+        for player_name in players:
+            player_rows = [row for row in rows if row.get("player") == player_name]
+            report = analyze_economy(rows, game_uid, player_name)
+            if report.get("status") == "BLOCK":
+                return "BLOCK", f"economy invariant BLOCK for a recorded seat ({player_name})"
+            if report.get("status") != "OBSERVED_HEALTHY":
+                return "UNKNOWN", (f"incomplete economy evidence for a recorded seat ({player_name}): "
+                                    f"{report.get('error', 'terminal/integrity validation failed')}")
+            factions = {row.get("faction") for row in player_rows}
+            bot_types = {row.get("bot_type") for row in player_rows}
+            if (len(factions) != 1 or not all(isinstance(value, str) and value for value in factions)
+                    or len(bot_types) != 1 or not all(isinstance(value, str) and value for value in bot_types)):
+                return "UNKNOWN", f"economy-health player/bot/faction identity is missing or inconsistent ({player_name})"
+            actual_roster.append((player_name, next(iter(factions)), next(iter(bot_types))))
+        planned_health_roster = [(name, faction, bot) for name, faction, bot, _home in expected_roster]
+        if sorted(actual_roster) != sorted(planned_health_roster):
+            return "UNKNOWN", "economy-health player identities differ from the configured variant roster"
+    except (OSError, ValueError, TypeError, KeyError, ImportError) as exc:
+        return "UNKNOWN", f"cannot inspect expected economy-health file {health_path}: {exc}"
+    return "OBSERVED_HEALTHY", None
+
+
+def apply_economy_health_requirement(status: str, health_status: str, required: bool) -> str:
+    """Make required unhealthy evidence unscoreable while preserving optional runs."""
+    if required and status in ("ok", "norecord") and health_status != "OBSERVED_HEALTHY":
+        return "UNKNOWN"
+    return status
+
+
+def sentinel_economy_collect(
+    support: pathlib.Path,
+    match_records: list[dict],
+    expected_roster: list[tuple[str, str, str, str]],
+) -> tuple[str, str | None, list[dict], list[str]]:
+    """Sentinel-mode collector: the economy_health_file_status checks, but no
+    early return — every structural failure is recorded with its
+    evaluation-order position and every seat's analyze_economy report is
+    collected. The legacy function above is untouched and never runs under
+    --sentinel-diagnostic (the call site dispatches).
+
+    Returns (raw_status, first_failure_detail, seat_reports, structural_failures).
+    raw_status: UNKNOWN if any structural failure OR any seat status outside
+    {OBSERVED_HEALTHY, BLOCK}; else BLOCK if any seat BLOCK; else
+    OBSERVED_HEALTHY. BLOCK is produced only by seat-economy BLOCK.
+    """
+    seat_reports: list[dict] = []
+    failures: list[str] = []
+    health_path = support / "Logs" / "cameo-ai-economy-health.jsonl"
+    try:
+        if not health_path.is_file():
+            failures.append(f"integrity: missing expected economy-health file: {health_path}")
+            return "UNKNOWN", failures[0], seat_reports, failures
+        data = health_path.read_bytes()
+        if not data:
+            failures.append(f"integrity: empty expected economy-health file: {health_path}")
+            return "UNKNOWN", failures[0], seat_reports, failures
+        if not data.endswith(b"\n"):
+            failures.append(f"integrity: unterminated economy-health JSONL: {health_path}")
+            return "UNKNOWN", failures[0], seat_reports, failures
+        from replay_health import read_jsonl
+        from economy_invariants import analyze as analyze_economy
+
+        rows, _receipt = read_jsonl(health_path)
+        if not rows:
+            failures.append("integrity: no economy-health rows")
+            return "UNKNOWN", failures[0], seat_reports, failures
+
+        expected_seats_by_uid: dict[str, list[tuple[str, str, str, str]]] = {}
+        record_ids: set[str] = set()
+        for record in match_records:
+            if not isinstance(record, dict):
+                failures.append("identity: invalid match record while validating economy health")
+                continue
+            record_id = record.get("record_id")
+            uid = record.get("game_uid")
+            player = record.get("player")
+            seat = player.get("seat") if isinstance(player, dict) else None
+            faction = player.get("faction") if isinstance(player, dict) else None
+            bot_type = player.get("bot_type") if isinstance(player, dict) else None
+            home = player.get("home") if isinstance(player, dict) else None
+            seat_match = re.fullmatch(r"seat_(\d+)", seat) if isinstance(seat, str) else None
+            if (not isinstance(record_id, str) or not isinstance(uid, str) or not uid
+                    or record_id != f"{uid}|{seat}" or seat_match is None
+                    or not isinstance(faction, str) or not faction
+                    or not isinstance(bot_type, str) or not bot_type
+                    or not isinstance(home, str) or not re.fullmatch(r"-?\d+,-?\d+", home)):
+                failures.append("identity: match records lack canonical game/seat/bot/faction/home identity")
+                continue
+            if record_id in record_ids:
+                failures.append("identity: duplicate match record/seat identity")
+                continue
+            record_ids.add(record_id)
+            expected_seats_by_uid.setdefault(uid, []).append((bot_type, faction, home, seat))
+        game_uid = None
+        logged_seats: list[tuple[str, str, str, str]] = []
+        if len(expected_seats_by_uid) != 1 or not match_records:
+            failures.append("identity: per-game support leaf must contain exactly one match UID")
+        else:
+            game_uid, logged_seats = next(iter(expected_seats_by_uid.items()))
+            logged_ids = [seat for _bot, _faction, _home, seat in logged_seats]
+            if (len(expected_roster) != len({(name, home) for name, _faction, _bot, home in expected_roster})
+                    or len(match_records) != len(expected_roster)
+                    or len(set(logged_ids)) != len(logged_ids)
+                    or sorted((bot, faction, home) for bot, faction, home, _seat in logged_seats)
+                    != sorted((bot, faction, home) for _name, faction, bot, home in expected_roster)):
+                failures.append("roster: match record roster differs from the configured variant roster")
+            if any(not isinstance(row, dict) or row.get("game_uid") != game_uid for row in rows):
+                failures.append("integrity: economy-health stream contains malformed or foreign game UID rows")
+            players: list[str] = []
+            seen_players: set[str] = set()
+            for row in rows:
+                player_name = row.get("player")
+                if isinstance(player_name, str) and player_name not in seen_players:
+                    seen_players.add(player_name)
+                    players.append(player_name)
+            if len(players) != len(expected_roster):
+                failures.append(f"coverage: economy-health seat coverage mismatch: {len(players)} player(s) "
+                                f"for {len(expected_roster)} configured bot(s)")
+            actual_roster = []
+            for player_name in players:
+                player_rows = [row for row in rows if row.get("player") == player_name]
+                report = analyze_economy(rows, game_uid, player_name)
+                seat_reports.append({
+                    "player": player_name,
+                    "status": report.get("status"),
+                    "findings": report.get("findings") or [],
+                    "error": report.get("error"),
+                })
+                # Legacy skips identity checks on a BLOCK seat (early return);
+                # the collector still verifies them for every seat — a BLOCK
+                # seat with consistent identity still feeds the roster check.
+                factions = {row.get("faction") for row in player_rows}
+                bot_types = {row.get("bot_type") for row in player_rows}
+                if (len(factions) != 1 or not all(isinstance(v, str) and v for v in factions)
+                        or len(bot_types) != 1 or not all(isinstance(v, str) and v for v in bot_types)):
+                    failures.append("identity: economy-health player/bot/faction identity is missing "
+                                    f"or inconsistent ({player_name})")
+                else:
+                    actual_roster.append((player_name, next(iter(factions)), next(iter(bot_types))))
+            planned_health_roster = [(name, faction, bot) for name, faction, bot, _home in expected_roster]
+            if sorted(actual_roster) != sorted(planned_health_roster):
+                failures.append("roster: economy-health player identities differ from the configured variant roster")
+    except (OSError, ValueError, TypeError, KeyError, ImportError) as exc:
+        failures.append(f"integrity: cannot inspect expected economy-health file {health_path}: {exc}")
+
+    non_clean = [r for r in seat_reports if r.get("status") not in ("OBSERVED_HEALTHY", "BLOCK")]
+    if failures or non_clean:
+        raw_status = "UNKNOWN"
+    elif any(r.get("status") == "BLOCK" for r in seat_reports):
+        raw_status = "BLOCK"
+    else:
+        raw_status = "OBSERVED_HEALTHY"
+    return raw_status, (failures[0] if failures else None), seat_reports, failures
+
+
+PER_GAME_LOGS = {
+    "cameo-ai-economy-health.jsonl",
+    "cameo-ai-economy-raw.jsonl",
+    "cameo-ai-mcv-health.jsonl",
+}
+
+
+def promote_unique_match_logs(match_support: pathlib.Path, batch_logs: pathlib.Path,
+                              capture_uid: str | None = None) -> None:
+    """Aggregate AI JSONL telemetry except canonical health streams.
+
+    Other fixed-name AI streams are append-oriented and carry game_uid. The
+    three CreateNew health streams remain isolated in each game leaf.
+    MATCH_LOG itself is never promoted (S3): its canonical copy stays in the
+    per-game leaf and its batch copy is bound by the batch-root manifest.
+
+    capture_uid (sentinel mode only): after each aggregate write lands, emit a
+    file-adjacent capture_provenance sibling binding the FINAL destination
+    bytes to this game UID — copied/promoted artifacts must not rebind to
+    their source sidecar.
+    """
+    source_logs = match_support / "Logs"
+    for source in source_logs.iterdir():
+        if (not source.is_file() or source.suffix != ".jsonl"
+                or not source.name.startswith("cameo-ai-")
+                or source.name in PER_GAME_LOGS or source.name == MATCH_LOG):
+            continue
+        destination = batch_logs / source.name
+        if destination.exists():
+            with destination.open("ab") as aggregate, source.open("rb") as game_log:
+                shutil.copyfileobj(game_log, aggregate, length=1024 * 1024)
+        else:
+            shutil.copy2(source, destination)
+        if capture_uid:
+            import capture_provenance
+            capture_provenance.write_promoted_sibling(destination, game_uid=capture_uid)
+
+
 SPAWN_INDEX_BY_SLOT = {"Multi0": 0, "Multi1": 1, "Multi2": 2, "Multi3": 3, "BotA": 0, "BotB": 1}
+
+
+def runtime_engine_result_valid(result: dict) -> bool:
+    """Reject a match from scoreboards if any launched attempt changed binaries."""
+    if result.get("status") == "executable_changed":
+        return False
+    attempts = result.get("runtime_engine_attempts") or []
+    if any(item.get("runtime_engine", {}).get("executable_hash_unchanged") is False
+           for item in attempts):
+        return False
+    runtime_engine = result.get("runtime_engine") or {}
+    return runtime_engine.get("executable_hash_unchanged") is not False
 
 
 def ab_scoreboard(results: list[dict]) -> dict:
@@ -828,9 +1175,16 @@ def ab_scoreboard(results: list[dict]) -> dict:
     record_id) are skipped. Values are {"won", "lost", "spawn"} - the spawn
     axis keeps the A/B honest about start-position asymmetry.
     """
+    import capture_provenance
+
     seen_records: set[str] = set()
     board: dict[tuple[str, str], dict] = {}
     for result in results:
+        if (capture_provenance.record_marked(result)
+                or result.get("health_status") in ("UNKNOWN", "BLOCK")
+                or result.get("status") == "UNKNOWN"
+                or not runtime_engine_result_valid(result)):
+            continue
         for record in result.get("bot_outcomes") or []:
             record_id = str(record.get("record_id") or "")
             if not record_id or record_id in seen_records:
@@ -864,9 +1218,16 @@ def team_scoreboard(results: list[dict]) -> dict:
     ab_scoreboard — and the spawn sub-table keys the team's sorted
     member-spawn pair ("0,1").
     """
+    import capture_provenance
+
     seen_records: set[str] = set()
     matches: dict[str, list[dict]] = {}
     for result in results:
+        if (capture_provenance.record_marked(result)
+                or result.get("health_status") in ("UNKNOWN", "BLOCK")
+                or result.get("status") == "UNKNOWN"
+                or not runtime_engine_result_valid(result)):
+            continue
         for record in result.get("bot_outcomes") or []:
             record_id = str(record.get("record_id") or "")
             if not record_id or record_id in seen_records:
@@ -947,6 +1308,181 @@ def _git(repo_root: pathlib.Path, *args: str) -> str | None:
     return proc.stdout if proc.returncode == 0 else None
 
 
+def _sha256_file(path: pathlib.Path) -> str:
+    """Hash one required runtime artifact; missing/unreadable files fail closed."""
+    if not path.is_file():
+        raise ValueError(f"required runtime file is missing: {path}")
+    try:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+    except OSError as exc:
+        raise ValueError(f"cannot hash required runtime file {path}: {exc}") from exc
+
+
+def engine_runtime_provenance(repo_root: pathlib.Path, engine: pathlib.Path) -> dict:
+    """Validate and identify the exact engine checkout and executable to launch.
+
+    The configured pin is read only from mod.config. ENGINE_VERSION must name the
+    HEAD of a clean, separate Git checkout at ENGINE_DIRECTORY; a VERSION file or
+    DLL digest alone cannot stand in for source identity.
+    """
+    mod_config = repo_root / "mod.config"
+    if not mod_config.is_file():
+        raise ValueError(f"mod.config is missing: {mod_config}")
+    assignments = {}
+    assignment = re.compile(r"^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*?)\s*$")
+    try:
+        config_text = mod_config.read_text(encoding="utf-8")
+    except OSError as exc:
+        raise ValueError(f"cannot read {mod_config}: {exc}") from exc
+    for line in config_text.splitlines():
+        match = assignment.match(line)
+        if match and match.group(1) == "ENGINE_VERSION":
+            value = match.group(2)
+            if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'":
+                value = value[1:-1]
+            assignments[match.group(1)] = value
+    engine_pin = assignments.get("ENGINE_VERSION")
+    if not engine_pin or not re.fullmatch(r"[0-9a-fA-F]{40}", engine_pin):
+        raise ValueError("mod.config ENGINE_VERSION must be a 40-character Git SHA")
+    configured_values: dict[str, str] = {}
+    read_config(mod_config, configured_values)
+    read_config(repo_root / "user.config", configured_values)
+    configured_directory = configured_values.get("ENGINE_DIRECTORY")
+    if not configured_directory:
+        raise ValueError("mod.config/user.config did not define ENGINE_DIRECTORY")
+    configured_engine = pathlib.Path(configured_directory)
+    if not configured_engine.is_absolute():
+        configured_engine = repo_root / configured_engine
+
+    try:
+        configured_engine = configured_engine.resolve(strict=True)
+        engine_root = engine.resolve(strict=True)
+    except OSError as exc:
+        raise ValueError(f"engine checkout path is unavailable: {exc}") from exc
+    if configured_engine != engine_root:
+        raise ValueError(f"resolved engine path mismatch: configured {configured_engine}, using {engine_root}")
+    try:
+        executable = (engine_root / "bin" / "OpenRA.exe").resolve(strict=True)
+        bin_root = (engine_root / "bin").resolve(strict=True)
+    except OSError as exc:
+        raise ValueError(f"engine checkout or executable path is unavailable: {exc}") from exc
+    if not engine_root.is_dir() or not executable.is_file():
+        raise ValueError("configured engine checkout or OpenRA.exe is not a directory/file")
+    if executable.parent != bin_root or executable.name.casefold() != "openra.exe":
+        raise ValueError("resolved OpenRA.exe path escapes the configured engine/bin directory")
+
+    git_root_text = _git(engine_root, "rev-parse", "--show-toplevel")
+    engine_head = (_git(engine_root, "rev-parse", "HEAD") or "").strip()
+    engine_status = _git(engine_root, "status", "--porcelain", "--untracked-files=all")
+    if git_root_text is None or engine_head == "" or engine_status is None:
+        raise ValueError("engine directory is not a readable Git checkout")
+    git_root = pathlib.Path(git_root_text.strip()).resolve()
+    if git_root != engine_root:
+        raise ValueError(f"engine Git root mismatch: expected {engine_root}, found {git_root}")
+    if engine_head.casefold() != engine_pin.casefold():
+        raise ValueError(f"engine HEAD {engine_head} does not match configured ENGINE_VERSION {engine_pin}")
+    if engine_status.strip():
+        raise ValueError("engine checkout is dirty or has untracked files")
+
+    version_file = engine_root / "VERSION"
+    version_raw = version_file.read_bytes() if version_file.is_file() else None
+    version_text = None
+    if version_raw is not None:
+        if version_raw.startswith((b"\xff\xfe", b"\xfe\xff")):
+            version_text = version_raw.decode("utf-16", errors="replace").strip() or None
+        else:
+            version_text = version_raw.decode("utf-8", errors="replace").strip() or None
+
+    return {
+        "engine_config_version": engine_pin,
+        "engine_checkout_path": str(engine_root),
+        "engine_checkout_head": engine_head,
+        "engine_checkout_clean": True,
+        "launched_executable_path": str(executable),
+        "executable_sha256_before": _sha256_file(executable),
+        "engine_version": version_text,
+        "engine_version_file_path": str(version_file.resolve()) if version_raw is not None else None,
+        "engine_version_file_raw_base64": base64.b64encode(version_raw).decode("ascii") if version_raw is not None else None,
+        "engine_version_file_sha256": hashlib.sha256(version_raw).hexdigest() if version_raw is not None else None,
+    }
+
+
+def check_executable_after(provenance: dict) -> dict:
+    """Capture post-match executable bytes; a missing/changed file invalidates the attempt."""
+    path = pathlib.Path(provenance["launched_executable_path"])
+    try:
+        after = _sha256_file(path)
+        error = None
+    except ValueError as exc:
+        after = None
+        error = str(exc)
+    before = provenance.get("executable_sha256_before")
+    unchanged = bool(before and after and before == after)
+    return {
+        "executable_sha256_before": before,
+        "executable_sha256_after": after,
+        "executable_hash_unchanged": unchanged,
+        "executable_hash_error": error,
+    }
+
+
+def trusted_attempt_records(records: list[dict], executable_hash_unchanged: bool) -> tuple[list[dict], int]:
+    """Exclude match rows when the launched executable cannot be verified unchanged."""
+    if executable_hash_unchanged:
+        return records, 0
+    return [], len(records)
+
+
+def append_attempt_provenance(path: pathlib.Path, records: list[dict], record: dict) -> None:
+    """Retain and durably record each launched attempt, including retries."""
+    records.append(record)
+    with path.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(record, sort_keys=True) + "\n")
+
+
+def all_attempt_provenance(results: list[dict]) -> list[dict]:
+    """Flatten per-match attempt records for batch provenance summaries."""
+    return [attempt for result in results for attempt in result.get("runtime_engine_attempts", [])]
+
+
+def stamp_sentinel_result(result: dict, health_policy: dict | None) -> dict:
+    """Score quarantine — either field alone is already enough for a consumer
+    to reject this record; both are always written together. Default mode
+    (health_policy None) is the identity: no marker keys are added."""
+    if health_policy is None:
+        return result
+    result["capture_kind"] = "sentinel_diagnostic"
+    result["scoreable"] = False
+    result["health_policy"] = health_policy
+    return result
+
+
+def stamp_sentinel_summary(summary: dict, sentinel_uids: list[str] | None) -> dict:
+    """Batch-level markers: a sentinel-marked summary quarantines every
+    descendant artifact at ingest even before the manifest is read. Default
+    mode (sentinel_uids None) is the identity."""
+    if sentinel_uids is None:
+        return summary
+    summary["capture_kind"] = "sentinel_diagnostic"
+    summary["scoreable"] = False
+    summary["sentinel_uids"] = sentinel_uids
+    return summary
+
+
+def fingerprint_drift_result(variant: str, fingerprint: dict, drift: dict,
+                             attempt: int, runtime_engine_attempts: list[dict]) -> dict:
+    """Build a drift result without discarding provenance from earlier retries."""
+    return {
+        "variant": variant,
+        "status": "fingerprint_drift",
+        "fingerprint": fingerprint_id(fingerprint),
+        "fingerprint_drift": drift,
+        "attempts": attempt - 1,
+        "records": 0,
+        "runtime_engine_attempts": runtime_engine_attempts,
+    }
+
+
 def _hash_files(base: pathlib.Path, files: list[pathlib.Path]) -> str:
     """One sha256 over (relative name, bytes) per file in sorted order — set
     membership and contents both move the digest; an empty set hashes clean."""
@@ -957,6 +1493,32 @@ def _hash_files(base: pathlib.Path, files: list[pathlib.Path]) -> str:
         digest.update(path.read_bytes())
         digest.update(b"\0")
     return digest.hexdigest()
+
+
+# Mod C# projects whose assembly the batch loads from engine/bin (CameoMod.sln, mod side).
+MOD_ASSEMBLY_PROJECTS = ("OpenRA.Mods.Cameo", "OpenRA.Mods.CA", "OpenRA.Mods.Fransbot",
+                         "OpenRA.Mods.Cameo.Contracts", "OpenRA.Mods.Cameo.Unified", "OpenRA.Platforms.Null")
+
+
+def stale_mod_assemblies(engine: pathlib.Path) -> list[str]:
+    """Mod projects whose newest .cs is newer than engine/bin/<project>.dll. A stale build
+    plays the OLD bot code against the NEW yaml: the 2026-10-10 A5 run-a failed with
+    `Cannot locate type: SquadDesireBotModuleInfo` from a copied stale OpenRA.Mods.Cameo.dll.
+    A checkout or branch switch also touches the sources, which is the CLAUDE.md rule 7
+    'rebuild after every branch switch' case. A project with no dll yet is not reported."""
+    stale = []
+    for name in MOD_ASSEMBLY_PROJECTS:
+        dll = engine / "bin" / f"{name}.dll"
+        project = REPO_ROOT / name
+        if not dll.is_file() or not project.is_dir():
+            continue
+        built = dll.stat().st_mtime
+        newest = max((p.stat().st_mtime for p in project.rglob("*.cs")
+                      if "obj" not in p.relative_to(project).parts and "bin" not in p.relative_to(project).parts),
+                     default=0.0)
+        if newest > built:
+            stale.append(name)
+    return stale
 
 
 def _mod_dlls_sha256(engine: pathlib.Path) -> str | None:
@@ -1008,8 +1570,8 @@ def compute_fingerprint(
     config: dict,
     repo_root: pathlib.Path = REPO_ROOT,
 ) -> dict:
-    """The batch's arms as one dict. Null-tolerant: a component that cannot be
-    read (no git, no engine, no map) records None rather than failing."""
+    """The batch's arms as one dict; engine identity is required and fail-closed."""
+    engine_provenance = engine_runtime_provenance(repo_root, engine)
     commit = (_git(repo_root, "rev-parse", "HEAD") or "").strip() or None
     status = _git(repo_root, "status", "--porcelain", "--", *FINGERPRINT_GIT_PATHS)
     version_file = engine / "VERSION"
@@ -1029,6 +1591,7 @@ def compute_fingerprint(
         "mod_dirty": None if status is None else bool(status.strip()),
         "engine_version": engine_version,
         "mod_dlls_sha256": _mod_dlls_sha256(engine),
+        "runtime_engine": engine_provenance,
         "ai_yaml_sha256": ai_sha,
         "ai_yaml_files": ai_count,
         "mod_yaml_sha256": mod_sha,
@@ -1096,6 +1659,14 @@ def main() -> int:
                              "the A/B acceptance requires both spawns covered")
     parser.add_argument("--time-limit", type=int, default=3, choices=sorted(VALID_TIME_LIMITS))
     parser.add_argument("--support-dir", type=pathlib.Path, default=None)
+    parser.add_argument("--require-economy-health", action="store_true",
+                        help="mark a successful game UNKNOWN if its canonical economy-health JSONL is missing or empty")
+    parser.add_argument("--sentinel-diagnostic", action="store_true",
+                        help="opt-in sentinel diagnostic capture: implies economy-health semantics with the "
+                             "all-seat collector + classic-baseline exemption policy; stamps "
+                             "capture_kind/scoreable markers and capture_provenance sidecars so the output "
+                             "can never enter scoring. Requires exactly one faction, --team-size 1, "
+                             "--repeats 1, --retries 0 — anything else (including defaults) is refused")
     parser.add_argument("--template", type=pathlib.Path, default=TEMPLATE_MAP,
                         help="template map dir (default: the A Nuclear Winter duel fixture)")
     parser.add_argument("--retries", type=int, default=1,
@@ -1111,15 +1682,20 @@ def main() -> int:
                         help="log arm drift between attempts and keep running "
                              "(default: abort the batch — a changed arm voids the A/B)")
     parser.add_argument("--keep-variants", action="store_true", help="do not delete variant map dirs on success")
+    parser.add_argument("--allow-stale-build", action="store_true",
+                        help="launch even when a mod project's .cs is newer than its engine/bin dll (default: refuse)")
     parser.add_argument("--round-trip", action="store_true",
                         help="after the batch, run round_trip_check.py on this support dir; "
                              "any FAIL layer fails the batch (the learning-loop audit in the run, "
                              "not an afterthought)")
-    parser.add_argument("--render", choices=("fast", "default"), default="fast",
+    parser.add_argument("--render", choices=("fast", "default", "headless"), default="fast",
                         help="fast (default): VSync off + a 640x480 window. The engine renders once after EVERY logic tick, "
                              "so with VSync on a match is held to the monitor refresh (~50 ticks/s measured 2026-10-01). "
                              "Rendering never touches the simulation (bot logic is tick-based), so results are unchanged; "
-                             "'default' keeps the player's settings")
+                             "'default' keeps the player's settings; "
+                             "'headless': Game.Platform=Null (OpenRA.Platforms.Null.dll) - no window, no GPU textures, "
+                             "no RenderTick; same sim (same-seed sync hashes match the 'fast' run), far less memory, "
+                             "no display/Xvfb needed (LESSONS_LEARNED 'Headless bot matches')")
     args = parser.parse_args()
 
     factions = [f.strip() for f in args.factions.split(",") if f.strip()]
@@ -1127,6 +1703,27 @@ def main() -> int:
         fail("--factions needs at least one faction id")
     if args.repeats < 1:
         fail("--repeats must be >= 1")
+    if args.sentinel_diagnostic:
+        # One faction, one match, one attempt — nothing may combine or retry
+        # into extra games. Non-conforming values (including the argparse
+        # defaults) are refused, never coerced (S6).
+        sentinel_bad = []
+        if len(factions) != 1:
+            sentinel_bad.append(f"exactly one faction (got {args.factions!r})")
+        if args.team_size != 1:
+            sentinel_bad.append(f"--team-size 1 (got {args.team_size})")
+        if args.repeats != 1:
+            sentinel_bad.append(f"--repeats 1 (got {args.repeats})")
+        if args.retries != 0:
+            sentinel_bad.append(f"--retries 0 (got {args.retries})")
+        if args.require_economy_health:
+            # The sentinel policy owns the health verdict layer: combining the
+            # flag would convert every baseline_exempted BLOCK to UNKNOWN,
+            # silently defeating the granted exemption. Refuse, never coerce.
+            sentinel_bad.append("incompatible with --require-economy-health "
+                                "(the disposition policy already gates health)")
+        if sentinel_bad:
+            fail("--sentinel-diagnostic requires " + "; ".join(sentinel_bad))
 
     def parse_team(raw: str, flag: str) -> list[str]:
         bots = [b.strip() for b in raw.split(",") if b.strip()]
@@ -1151,9 +1748,15 @@ def main() -> int:
         fail(template_error)
 
     mod_id, engine = load_config()
-    executable = engine / "bin" / "OpenRA.exe"
+    executable = (engine / "bin" / "OpenRA.exe").resolve()
     if not executable.is_file():
         fail(f"OpenRA executable is missing: {executable}; run make.cmd all first")
+    if args.render == "headless" and not (engine / "bin" / f"OpenRA.Platforms.{HEADLESS_PLATFORM}.dll").is_file():
+        fail(f"--render headless needs engine/bin/OpenRA.Platforms.{HEADLESS_PLATFORM}.dll; run make.cmd all first")
+    stale = stale_mod_assemblies(engine)
+    if stale and not args.allow_stale_build:
+        fail(f"C# sources are newer than their engine/bin dll for {', '.join(stale)} - rebuild "
+             "(make.cmd all, or DOTNET_ROLL_FORWARD=LatestMajor dotnet build -c Release) or pass --allow-stale-build")
 
     support = args.support_dir or pathlib.Path(tempfile.gettempdir()) / f"ai-match-batch-{int(time.time())}"
     support = support.resolve()
@@ -1179,7 +1782,10 @@ def main() -> int:
         "swap_bots": args.swap_bots,
         "time_limit": args.time_limit,
     }
-    batch_fingerprint = compute_fingerprint(map_source, engine, batch_config)
+    try:
+        batch_fingerprint = compute_fingerprint(map_source, engine, batch_config)
+    except (OSError, ValueError) as exc:
+        fail(f"engine runtime provenance invalid before launch: {exc}")
     batch_fp_id = fingerprint_id(batch_fingerprint)
 
     # One variant dir per distinct matchup (repeats reuse it).
@@ -1229,8 +1835,6 @@ def main() -> int:
         else:
             write_variant(map_source, variants_root / name, {"side_a": v["a"], "side_b": v["b"]}, args.time_limit)
 
-    exceptions_before = {p.name for p in logs_dir.glob("exception-*.log")} if logs_dir.is_dir() else set()
-
     # The fixture locks gamespeed to maximum (1 ms timestep) and scales its minute
     # options so the engine cap equals the insane-era depth (3 min = 180,000 ticks):
     # the engine ends a stalemate and records it. The wall bound allows that
@@ -1241,26 +1845,14 @@ def main() -> int:
 
     results = []
     progress_path = support / "batch_results.jsonl"
+    attempt_provenance_path = support / "attempt_provenance.jsonl"
+    batch_id = f"{time.time_ns()}-{os.getpid()}"
     drift_aborted = None
     for run, m in enumerate(matchups, 1):
-        before = log_path.stat().st_size if log_path.is_file() else 0
-        launch_args = [
-            f"Game.Mod={mod_id}",
-            "Sound.Device=none",
-            "Engine.EngineDir=..",
-            f"Engine.ModSearchPaths={REPO_ROOT / 'mods'},{engine / 'mods'}",
-            f"Engine.SupportDir={support}",
-            f"Launch.Map={m['variant']}",
-            f"Launch.Benchmark={BENCHMARK_PREFIX}",
-        ]
-        # Opt-in verbose squad/formation telemetry (CAMEO_BOT_DEBUG=1); default
-        # off so support-dir logs stay identical to the reference batches.
-        if os.environ.get("CAMEO_BOT_DEBUG"):
-            launch_args.append("Debug.BotDebug=true")
-        if getattr(args, "render", "fast") == "fast":
-            launch_args += ["Graphics.VSync=False", "Graphics.Mode=Windowed", "Graphics.WindowedSize=640,480"]
+        render = getattr(args, "render", "fast")
 
         attempt = 0
+        runtime_engine_attempts = []
         drift = None
         current_fingerprint = batch_fingerprint
         while True:
@@ -1268,24 +1860,80 @@ def main() -> int:
             # LC7: re-fingerprint before EVERY attempt — a rebuild or sync
             # landing mid-retry is still drift. Any changed component aborts
             # the batch rather than launching under different arms.
-            current_fingerprint = compute_fingerprint(map_source, engine, batch_config)
+            try:
+                current_fingerprint = compute_fingerprint(map_source, engine, batch_config)
+            except (OSError, ValueError) as exc:
+                fail(f"engine runtime provenance invalid before launch: {exc}")
             drift = fingerprint_drift(batch_fingerprint, current_fingerprint)
             if drift:
                 if not args.allow_fingerprint_drift:
                     break
                 print(f"    fingerprint drift ({', '.join(drift)}) — continuing per --allow-fingerprint-drift",
                       flush=True)
-            exc_before = {p.name for p in logs_dir.glob("exception-*.log")}
+            match_support = prepare_match_support(
+                support, variants_root, m["variant"], run, m["repeat"], attempt, batch_id)
+            match_logs_dir = match_support / "Logs"
+            match_log_path = match_logs_dir / MATCH_LOG
+            launch_args = [
+                f"Game.Mod={mod_id}",
+                "Sound.Device=none",
+                "Engine.EngineDir=..",
+                f"Engine.ModSearchPaths={REPO_ROOT / 'mods'},{engine / 'mods'}",
+                f"Engine.SupportDir={match_support}",
+                f"Launch.Map={m['variant']}",
+                f"Launch.Benchmark={BENCHMARK_PREFIX}",
+            ]
+            # Opt-in verbose squad/formation telemetry (CAMEO_BOT_DEBUG=1); default
+            # off so support-dir logs stay identical to the reference batches.
+            if os.environ.get("CAMEO_BOT_DEBUG"):
+                launch_args.append("Debug.BotDebug=true")
+            if render in ("fast", "headless"):
+                launch_args += ["Graphics.VSync=False", "Graphics.Mode=Windowed", "Graphics.WindowedSize=640,480"]
+            if render == "headless":
+                launch_args.append(f"Game.Platform={HEADLESS_PLATFORM}")
+            exc_before = {p.name for p in match_logs_dir.glob("exception-*.log")}
             print(f"[{run}/{len(matchups)}] {m['variant']} (repeat {m['repeat']}, attempt {attempt}) ...", flush=True)
             started = time.time()
             exit_code, output, status = run_match(
                 executable, engine, launch_args, timeout,
-                stall_log=logs_dir / "debug.log",
+                stall_log=match_logs_dir / "debug.log",
                 stall_timeout=args.stall_timeout,
             )
+            executable_provenance = check_executable_after(current_fingerprint["runtime_engine"])
+            executable_changed = not executable_provenance["executable_hash_unchanged"]
+            if executable_changed:
+                status = "executable_changed"
+                output += (
+                    "\nFAIL: launched OpenRA.exe changed or became unavailable during match: "
+                    + str(executable_provenance.get("executable_hash_error") or "SHA256 mismatch")
+                )
+            attempt_record = {
+                "variant": m["variant"],
+                "repeat": m["repeat"],
+                "attempt": attempt,
+                "status": status,
+                "exit_code": exit_code,
+                "runtime_engine": {
+                    **current_fingerprint["runtime_engine"],
+                    **executable_provenance,
+                },
+            }
+            append_attempt_provenance(attempt_provenance_path, runtime_engine_attempts, attempt_record)
             elapsed = int(time.time() - started)
-            records = read_appended_records(log_path, before)
-            new_exc = sorted(p.name for p in logs_dir.glob("exception-*.log") if p.name not in exc_before)
+            records = read_appended_records(match_log_path, 0)
+            records, discarded_records = trusted_attempt_records(
+                records, executable_provenance["executable_hash_unchanged"])
+            if discarded_records:
+                # The bytes under the launched path no longer prove which engine
+                # produced these rows, so preserve raw logs but exclude them from
+                # summaries and scoreboards.
+                records = []
+            new_exc = sorted(p.name for p in match_logs_dir.glob("exception-*.log") if p.name not in exc_before)
+            if render == "headless":
+                graphics_log = match_logs_dir / "graphics.log"
+                if HEADLESS_LOG_MARKER not in (graphics_log.read_text(errors="replace") if graphics_log.is_file() else ""):
+                    fail(f"--render headless: {graphics_log} has no '{HEADLESS_LOG_MARKER}' line - the engine fell back "
+                         "to the Default platform (see the exception in graphics.log); results would not be headless")
 
             # A nonzero exit with no exception log and no appended records is
             # the external-kill signature (TerminateProcess → exit 1; the
@@ -1307,7 +1955,7 @@ def main() -> int:
             # a host-level event drops the loopback socket mid-match, e.g.
             # "An established connection was aborted by the software in your
             # host machine".
-            client_log = logs_dir / "client.log"
+            client_log = match_logs_dir / "client.log"
             if client_log.is_file():
                 tail = client_log.read_text(encoding="utf-8", errors="replace")[-2000:].strip()
                 if tail:
@@ -1322,14 +1970,8 @@ def main() -> int:
             for key, change in drift.items():
                 print(f"    {key}: {json.dumps(change['was'], sort_keys=True)} -> "
                       f"{json.dumps(change['now'], sort_keys=True)}", flush=True)
-            result = {
-                "variant": m["variant"],
-                "status": "fingerprint_drift",
-                "fingerprint": fingerprint_id(current_fingerprint),
-                "fingerprint_drift": drift,
-                "attempts": attempt - 1,
-                "records": 0,
-            }
+            result = fingerprint_drift_result(
+                m["variant"], current_fingerprint, drift, attempt, runtime_engine_attempts)
             results.append(result)
             with progress_path.open("a", encoding="utf-8") as f:
                 f.write(json.dumps(result) + "\n")
@@ -1339,8 +1981,59 @@ def main() -> int:
         # A no-data run that exhausted its retries is still not a datapoint:
         # count it separately so a deterministic abort is visible in
         # batch_summary.json / run_league instead of reading as clean.
+        sentinel_health_policy = None
+        if args.sentinel_diagnostic:
+            try:
+                expected_health_roster = planned_economy_roster(
+                    variants_root / m["variant"] / "map.yaml", m)
+            except (OSError, ValueError, KeyError, TypeError) as exc:
+                expected_health_roster = []
+                roster_error = f"cannot derive planned health seats: {exc}"
+            else:
+                roster_error = None
+            try:
+                (economy_health_status, economy_health_error,
+                 seat_reports, structural_failures) = sentinel_economy_collect(
+                    match_support, records, expected_health_roster)
+            except (OSError, ValueError, KeyError, TypeError, ImportError) as exc:
+                (economy_health_status, economy_health_error,
+                 seat_reports, structural_failures) = (
+                    "UNKNOWN", f"sentinel collector failed: {exc}", [],
+                    [f"collector exception: {exc}"])
+            if roster_error:
+                structural_failures = [roster_error] + structural_failures
+                economy_health_status = "UNKNOWN"
+                if economy_health_error is None:
+                    economy_health_error = roster_error
+            import sentinel_policy
+            sentinel_health_policy = {
+                "mode": "sentinel_diagnostic",
+                **sentinel_policy.economy_disposition(
+                    economy_health_status, seat_reports, structural_failures,
+                    expected_health_roster),
+                # Raw evidence kept verbatim: per-seat analyze_economy reports
+                # (status/findings/error) and the ordered structural failures.
+                "seat_reports": seat_reports,
+                "structural_failures": structural_failures,
+            }
+        elif args.require_economy_health:
+            try:
+                expected_health_roster = planned_economy_roster(variants_root / m["variant"] / "map.yaml", m)
+                economy_health_status, economy_health_error = economy_health_file_status(
+                    match_support, records, expected_health_roster)
+            except (OSError, ValueError, KeyError, TypeError) as exc:
+                economy_health_status, economy_health_error = "UNKNOWN", f"cannot derive planned health seats: {exc}"
+        else:
+            economy_health_status, economy_health_error = "NOT_REQUIRED", None
         if status == "ok" and not records:
             status = "norecord"
+        # Sentinel blocks through the same required-semantics converter, but
+        # only when the policy disposition is blocking — baseline-exempted and
+        # clean_diagnostic keep status (the raw BLOCK stays in health_status).
+        status = apply_economy_health_requirement(
+            status, economy_health_status,
+            args.require_economy_health
+            or (sentinel_health_policy or {}).get("disposition") == "blocking")
 
         outcome = sorted(
             (r.get("player", {}).get("faction"), r.get("player", {}).get("outcome"))
@@ -1349,11 +2042,20 @@ def main() -> int:
         result = {
             "variant": m["variant"],
             "status": status,
+            "health_status": economy_health_status,
+            "economy_health_file": str(match_support / "Logs" / "cameo-ai-economy-health.jsonl"),
+            "support_dir": str(match_support),
             "fingerprint": fingerprint_id(current_fingerprint),
+            "runtime_engine": {
+                **current_fingerprint["runtime_engine"],
+                **executable_provenance,
+            },
+            "runtime_engine_attempts": runtime_engine_attempts,
             "exit_code": exit_code,
             "attempts": attempt,
             "wall_seconds": elapsed,
             "records": len(records),
+            "discarded_records_binary_changed": discarded_records,
             "outcomes": outcome,
             "bot_outcomes": [
                 {
@@ -1380,6 +2082,31 @@ def main() -> int:
         }
         if new_exc:
             result["new_exceptions"] = new_exc
+        if economy_health_error:
+            result["health_error"] = economy_health_error
+        result = stamp_sentinel_result(result, sentinel_health_policy)
+        if records:
+            with log_path.open("a", encoding="utf-8") as aggregate_log:
+                for record in records:
+                    aggregate_log.write(json.dumps(record, separators=(",", ":")) + "\n")
+        sentinel_uids = sorted({
+            str(r.get("game_uid")) for r in records
+            if isinstance(r, dict) and r.get("game_uid")
+        }) if args.sentinel_diagnostic else []
+        promote_unique_match_logs(
+            match_support, logs_dir,
+            capture_uid=sentinel_uids[0] if args.sentinel_diagnostic and len(sentinel_uids) == 1 else None)
+        if args.sentinel_diagnostic:
+            # Per-game quarantine sidecar at the support root binds every
+            # artifact the leaf produced (incl. the canonical MATCH_LOG, which
+            # promotion deliberately skips) to this capture's game UID(s).
+            import capture_provenance
+            capture_provenance.write_provenance(
+                match_support,
+                capture_kind="sentinel_diagnostic",
+                scoreable=False,
+                game_uids=sentinel_uids,
+                extra={"match_label": match_support.name})
         results.append(result)
         # Durable per-match progress: a batch killed mid-run (the batch
         # process itself is as sweepable as the matches) still leaves this
@@ -1390,12 +2117,43 @@ def main() -> int:
         if status != "ok":
             print(f"    OpenRA output tail:\n{output_tail(output)}")
 
-    new_exceptions = sorted(p.name for p in logs_dir.glob("exception-*.log") if p.name not in exceptions_before)
+    new_exceptions = sorted({name for result in results for name in result.get("new_exceptions", [])})
     scoreboard = ab_scoreboard(results)
     team_board = team_scoreboard(results) if args.team_size > 1 else None
+    attempt_provenance = all_attempt_provenance(results)
+    runtime_engine_batch = dict(batch_fingerprint["runtime_engine"])
+    runtime_engine_batch["executable_sha256_after"] = None
+    runtime_engine_batch["executable_hash_unchanged"] = False
+    runtime_engine_batch["executable_hash_error"] = "no completed match attempt"
+    if attempt_provenance:
+        runtime_engine_batch["executable_sha256_after"] = attempt_provenance[-1]["runtime_engine"].get(
+            "executable_sha256_after")
+        runtime_engine_batch["executable_hash_unchanged"] = all(
+            item["runtime_engine"].get("executable_hash_unchanged") is True for item in attempt_provenance
+        )
+        runtime_engine_batch["executable_hash_error"] = next(
+            (item["runtime_engine"].get("executable_hash_error") for item in attempt_provenance
+             if not item["runtime_engine"].get("executable_hash_unchanged")),
+            None,
+        )
+        runtime_engine_batch["match_attempts"] = [
+            {
+                "variant": item["variant"],
+                "repeat": item["repeat"],
+                "attempt": item["attempt"],
+                "status": item["status"],
+                "exit_code": item["exit_code"],
+                "executable_sha256_before": item["runtime_engine"].get("executable_sha256_before"),
+                "executable_sha256_after": item["runtime_engine"].get("executable_sha256_after"),
+                "executable_hash_unchanged": item["runtime_engine"].get("executable_hash_unchanged"),
+                "executable_hash_error": item["runtime_engine"].get("executable_hash_error"),
+            }
+            for item in attempt_provenance
+        ]
     summary = {
         "support_dir": str(support),
         "fingerprint": batch_fingerprint,
+        "runtime_engine": runtime_engine_batch,
         "fingerprint_id": batch_fp_id,
         "matches": len(matchups),
         "completed": sum(1 for r in results if r["status"] == "ok"),
@@ -1403,6 +2161,7 @@ def main() -> int:
         "stalled": sum(1 for r in results if r["status"] == "stalled"),
         "died": sum(1 for r in results if r["status"].startswith("exit=")),
         "norecord": sum(1 for r in results if r["status"] == "norecord"),
+        "unknown": sum(1 for r in results if r["status"] == "UNKNOWN"),
         "retried": sum(1 for r in results if r["attempts"] > 1),
         "new_exceptions": new_exceptions,
         "scoreboard": scoreboard,
@@ -1413,6 +2172,14 @@ def main() -> int:
     if drift_aborted is not None:
         summary["aborted"] = "fingerprint_drift"
         summary["fingerprint_drift"] = drift_aborted
+    batch_uids = sorted({
+        str(o.get("record_id") or "").rsplit("|", 1)[0]
+        for r in results
+        for o in (r.get("bot_outcomes") or [])
+        if "|" in str(o.get("record_id") or "")
+    })
+    summary = stamp_sentinel_summary(
+        summary, batch_uids if args.sentinel_diagnostic else None)
     (support / "batch_summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
 
     print(
@@ -1445,6 +2212,20 @@ def main() -> int:
             shutil.rmtree(variants_root / name, ignore_errors=True)
 
     round_trip_failed = args.round_trip and run_round_trip(support, summary) != 0
+
+    # Batch-root provenance manifest — written in BOTH modes (Sol binding:
+    # positive binding needs actual artifact SHA + complete UID membership,
+    # ancestry alone never proves eligibility). Additive file only; no
+    # serialized output is touched. Written last so it covers the summary and
+    # round-trip report; variant dirs are already cleaned unless kept.
+    import capture_provenance
+    capture_provenance.write_provenance(
+        support,
+        capture_kind="sentinel_diagnostic" if args.sentinel_diagnostic else "match_batch",
+        scoreable=not args.sentinel_diagnostic,
+        game_uids=batch_uids,
+        extra={"fingerprint_id": batch_fp_id},
+    )
 
     if drift_aborted is not None:
         return 1

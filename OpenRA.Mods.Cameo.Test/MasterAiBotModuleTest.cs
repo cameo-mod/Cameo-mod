@@ -466,6 +466,31 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void SimilarPressureCanConvergeToTurtleWithoutSharingCandidateState()
+		{
+			var info = EmergencyInfo(25, true);
+			var available = new[] { "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" };
+			var left = new EnemyProfile { Alive = true, NearestCells = 10, ArmyValue = 5000, DefenceCount = 5 };
+			var right = new EnemyProfile { Alive = true, NearestCells = 10, ArmyValue = 5000, DefenceCount = 5 };
+			string Candidate(EnemyProfile profile) => MasterAiBotModule.CandidatePersonality(
+				BotUrgency.Emergency, profile, 0, new[] { profile }, "rush", available, info);
+
+			Assert.That(Candidate(left), Is.EqualTo("turtle"));
+			Assert.That(Candidate(right), Is.EqualTo("turtle"));
+			// Changing one seat's evidence changes only that seat's pure decision.
+			left.ArmyValue = 0;
+			left.DefenceCount = 0;
+			Assert.That(Candidate(left), Is.EqualTo("rush"));
+			Assert.That(Candidate(right), Is.EqualTo("turtle"));
+			Assert.That(right.ArmyValue, Is.EqualTo(5000));
+			Assert.That(info.EmergencyKeepsPersonality, Is.True);
+			Assert.That(MasterAiBotModule.ShouldSwitchPersonality("rush", Candidate(right), 0,
+				749, false, 750, 0, info), Is.False);
+			Assert.That(MasterAiBotModule.ShouldSwitchPersonality("rush", Candidate(right), 0,
+				750, false, 750, 0, info), Is.True);
+		}
+
+		[Test]
 		public void CandidatePersonalityRulesAreOrdered()
 		{
 			var info = new MasterAiBotModuleInfo();

@@ -1,20 +1,123 @@
 #!/usr/bin/env python3
-"""Mandatory economy defect checks over complete schema-2 health telemetry.
+"""Mandatory economy checks with complete-tail validation and fixture attribution.
 
-No game launches or source repairs. Exit 0: observed checks passed; 20: defect
-review hold; 21: unsupported/incomplete evidence. Cash thresholds provisional.
+Only economic findings before the first terminal seat state are scored. Every
+record, including the terminal tail, must still pass schema/census validation.
+Fixture termination is an informational label, bound to the map hash in this
+capture's receipts and a terminal tick at/after the scheduled CapTick. Exit 0: observed healthy;
+20: hard block; 21: unknown/incomplete evidence.
 """
 import argparse
 from collections import deque
+import hashlib
 import json
+import os
 from pathlib import Path
+import re
 
 from replay_health import EvidenceError, atomic_report, identity, integer, read_jsonl
 
 POLICY = "economy-invariants-v2"
 
 
-def analyze(rows, game_uid, player):
+def _map_tree_sha256(root):
+    """Match run_ai_match_batch._map_sha256 for directory maps."""
+    digest = hashlib.sha256()
+    files = [p for p in root.rglob("*") if p.is_file()]
+    for path in sorted(files, key=lambda p: p.relative_to(root).as_posix()):
+        digest.update(path.relative_to(root).as_posix().encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(path.read_bytes())
+        digest.update(b"\0")
+    return digest.hexdigest()
+
+
+def read_fixture_evidence(script_path, expected_sha256, support_dir, game_uid, player):
+    """Return fixture attribution only when receipts bind this exact capture/map."""
+    try:
+        script = Path(script_path).resolve()
+        support = Path(support_dir).resolve()
+        if not re.fullmatch(r"[0-9a-fA-F]{64}", str(expected_sha256 or "")):
+            return None
+        data = script.read_bytes()
+        source_sha = hashlib.sha256(data).hexdigest()
+        if source_sha.lower() != expected_sha256.lower():
+            return None
+        text = data.decode("utf-8-sig")
+
+        # The support folder's cap status records the runner's exact --map and
+        # --support-dir. The batch fingerprint binds every map byte in that path.
+        cap_status = json.loads((support / "cap_status.json").read_text(encoding="utf-8"))
+        summary = json.loads((support / "batch_summary.json").read_text(encoding="utf-8"))
+        command = cap_status.get("command")
+        if (cap_status.get("status") != "COMPLETED" or cap_status.get("exit_code") != 0
+                or not isinstance(command, list)):
+            return None
+
+        def flag_value(flag):
+            try:
+                return command[command.index(flag) + 1]
+            except (ValueError, IndexError):
+                return None
+
+        map_arg, support_arg = flag_value("--map"), flag_value("--support-dir")
+        if not map_arg or not support_arg or Path(support_arg).resolve() != support:
+            return None
+        map_root = Path(map_arg).resolve()
+        if not map_root.is_dir():
+            return None
+        try:
+            script.relative_to(map_root)
+        except ValueError:
+            return None
+        fingerprint = summary.get("fingerprint")
+        recorded_map_sha = fingerprint.get("map_sha256") if isinstance(fingerprint, dict) else None
+        if (summary.get("support_dir") and Path(summary["support_dir"]).resolve() != support
+                or not isinstance(recorded_map_sha, str)
+                or _map_tree_sha256(map_root) != recorded_map_sha):
+            return None
+
+        # Tie the receipt to the game UID and the Lua to the seat-specific name.
+        result_path = support / "batch_results.jsonl"
+        matched_uid = False
+        for line in result_path.read_text(encoding="utf-8").splitlines():
+            result = json.loads(line)
+            for outcome in result.get("bot_outcomes", []):
+                record_id = outcome.get("record_id", "")
+                if isinstance(record_id, str) and record_id.partition("|")[0] == game_uid:
+                    matched_uid = True
+        if not matched_uid:
+            return None
+
+        # Require executable-shaped cap code after stripping Lua comments; exact
+        # map-hash binding prevents a lookalike foreign script from being trusted.
+        text = re.sub(r"--\[\[.*?\]\]", "", text, flags=re.DOTALL)
+        text = re.sub(r"(?m)--.*$", "", text)
+        cap = re.search(r"(?m)^\s*local\s+CapTick\s*=\s*(\d+)\s*$", text)
+        seat_list = re.search(r"(?m)^\s*local\s+CampaignSeatNames\s*=\s*\{([^}]*)\}", text)
+        fail = re.search(r"(?s)local\s+function\s+FailPrimaryObjectives\s*\(player\)(.*?)\nend", text)
+        callback = re.search(
+            r"Trigger\.AfterDelay\s*\(\s*CapTick\s*,\s*function\s*\(\s*\)(.*?)\n\s*end\s*\)",
+            text, re.DOTALL)
+        seat_names = set(re.findall(r"[\"']([^\"']+)[\"']", seat_list.group(1))) if seat_list else set()
+        if (cap is None or seat_list is None or player not in seat_names or fail is None
+                or not re.search(r"player\.MarkFailedObjective\s*\(", fail.group(1))
+                or callback is None
+                or not re.search(r"AB_CAMPAIGN_CAP", callback.group(1))
+                or not re.search(r"Player\.GetPlayer\s*\(\s*name\s*\)", callback.group(1))
+                or not re.search(r"FailPrimaryObjectives\s*\(\s*p\s*\)", callback.group(1))):
+            return None
+        expected_tick = int(cap.group(1))
+        if expected_tick <= 0:
+            return None
+        return {"verified": True, "expected_tick": expected_tick,
+                "source_path": str(script), "source_sha256": source_sha,
+                "map_sha256": recorded_map_sha, "capture_game_uid": game_uid}
+    except (OSError, UnicodeError, ValueError, TypeError, KeyError, AttributeError, json.JSONDecodeError):
+        return None
+
+
+def analyze(rows, game_uid, player, *, fixture_evidence=None):
     identity(game_uid)
     identity(player)
     selected = [r for r in rows if r.get("game_uid") == game_uid and r.get("player") == player]
@@ -22,16 +125,19 @@ def analyze(rows, game_uid, player):
               "findings": [], "diagnostics": [], "cash_band": {"low": 1000, "high": 10000,
               "band_ticks": 1500, "near_empty_max": 100, "near_empty_ticks": 250,
               "full_storage_ticks": 250},
-              "scope": "economy defects; reasons are diagnostic, not causal proof"}
+              "scope": "economic findings are pre-terminal only; schema integrity covers the full stream"}
     if not selected:
         report["error"] = "Missing schema-2 economy health telemetry"
         return report
+
     seen = set()
+
     def defect(code, tick, details):
         key = (code, details.get("queue_id"), details.get("item"))
         if key not in seen:
             seen.add(key)
             report["findings"].append({"code": code, "severity": "DEFECT", "tick": tick, **details})
+
     sequence, previous_tick, last_pulse = 0, -1, None
     identity_tuple = None
     cancel_windows = {}
@@ -40,10 +146,16 @@ def analyze(rows, game_uid, player):
     pulses = 0
     float_diagnostic = False
     ended = False
+    terminal = None
+    previous_seat_state = None
+    dropped_seen = False
+
     try:
         for row in selected:
             if ended:
-                raise EvidenceError("record after terminal health event")
+                raise EvidenceError("record after terminal end record")
+            if not isinstance(row, dict):
+                raise EvidenceError("invalid health row")
             if type(row.get("schema")) is not int or row["schema"] != 2:
                 raise EvidenceError("unsupported health schema")
             if integer(row.get("seq")) != sequence:
@@ -57,10 +169,19 @@ def analyze(rows, game_uid, player):
             if identity_tuple is not None and identity_tuple != key:
                 raise EvidenceError("health identity drift")
             identity_tuple = key
-            if row.get("profile_supported") is not True or integer(row.get("dropped")) != 0:
-                raise EvidenceError("unsupported profile or dropped telemetry")
+            if row.get("profile_supported") is not True:
+                raise EvidenceError("unsupported profile")
+            dropped = integer(row.get("dropped"))
+            if dropped < 0:
+                raise EvidenceError("invalid dropped telemetry count")
+            if dropped > 0:
+                dropped_seen = True
+                defect("DROPPED_TELEMETRY", tick, {"dropped": dropped})
+
             kind = row.get("kind")
             if kind == "cancel":
+                # Validate cancellation evidence even after terminal; only its
+                # economic-window contribution is disabled there.
                 queue = identity(row.get("queue_id"))
                 item = identity(row.get("item"))
                 item_id = identity(row.get("item_id"))
@@ -75,6 +196,8 @@ def analyze(rows, game_uid, player):
                     raise EvidenceError("missing cancellation activity/liveness evidence")
                 if cancellation_class not in ("production", "destruction", "elimination"):
                     raise EvidenceError("missing/invalid cancellation class")
+                if terminal is not None:
+                    continue
                 # Event-local evidence is authoritative; a pulse may precede elimination.
                 if not active or cancellation_class == "elimination":
                     cancel_windows.clear()
@@ -90,29 +213,54 @@ def analyze(rows, game_uid, player):
                            {"queue_id": queue, "item": item, "count": len(window),
                             "window_ticks": 1500, "last_reason": reason})
                 continue
+
             if kind == "end":
                 if row.get("complete") is not True:
                     raise EvidenceError("incomplete terminal health record")
                 if last_pulse is None or tick - last_pulse > 50:
                     raise EvidenceError("terminal health watermark not covered by pulse")
+                end_state = row.get("seat_state")
+                if end_state not in ("won", "lost"):
+                    raise EvidenceError("missing terminal seat state")
+                if previous_seat_state not in (None, "active", end_state):
+                    raise EvidenceError("terminal seat state disagrees with pulse evidence")
+                if terminal is None:
+                    terminal = {"tick": tick, "seat_state": end_state}
+                elif end_state != terminal["seat_state"]:
+                    raise EvidenceError("terminal seat state disagrees with pulse evidence")
                 ended = True
                 continue
+
             if kind != "pulse":
                 raise EvidenceError("unknown health record kind")
             if last_pulse is None and tick != 0:
                 raise EvidenceError("missing capture-start pulse at world tick zero")
             if last_pulse is not None and (tick <= last_pulse or tick - last_pulse > 50):
                 raise EvidenceError("pulse coverage gap/duplicate")
-            last_pulse, pulses = tick, pulses + 1
+            last_pulse = tick
+            active = row.get("player_active")
+            if type(active) is not bool:
+                raise EvidenceError("missing player active state")
+            seat_state = row.get("seat_state")
+            if seat_state not in ("active", "won", "lost"):
+                raise EvidenceError("missing/invalid seat state")
+            if (seat_state == "active") != active:
+                raise EvidenceError("player_active/seat_state disagreement")
+            if previous_seat_state not in (None, "active") and seat_state != previous_seat_state:
+                raise EvidenceError("seat state mutated after terminal")
+            previous_seat_state = seat_state
+
+            preterminal = terminal is None and seat_state == "active"
+            if not preterminal and terminal is None:
+                terminal = {"tick": tick, "seat_state": seat_state}
+                cancel_windows.clear()
+
+            # Full structural/census validation applies to every pulse, including
+            # post-terminal pulses. Only the finding accumulation is windowed.
             queues = row.get("queues")
             if not isinstance(queues, list) or row.get("queues_complete") is not True:
                 raise EvidenceError("incomplete building queue census")
             queue_ids = set()
-            active = row.get("player_active")
-            if type(active) is not bool:
-                raise EvidenceError("missing player active state")
-            if not active:
-                cancel_windows.clear()
             for queue in queues:
                 if not isinstance(queue, dict):
                     raise EvidenceError("invalid queue state")
@@ -120,7 +268,8 @@ def analyze(rows, game_uid, player):
                 if queue_id in queue_ids:
                     raise EvidenceError("duplicate queue in pulse")
                 queue_ids.add(queue_id)
-                if type(queue.get("producer_live")) is not bool:
+                producer_live = queue.get("producer_live")
+                if type(producer_live) is not bool:
                     raise EvidenceError("missing live producer state")
                 state = queue.get("state")
                 if state not in ("ready", "idle", "producing", "paused"):
@@ -130,16 +279,16 @@ def analyze(rows, game_uid, player):
                     raise EvidenceError("queue state starts in future")
                 reason = identity(queue.get("reason"))
                 if state == "ready":
-                    identity(queue.get("item"))
+                    item = identity(queue.get("item"))
                     identity(queue.get("item_id"))
-                    if active and queue["producer_live"] and tick - since >= 250:
+                    if preterminal and active and producer_live and tick - since >= 250:
                         defect("READY_BUILDING_UNPLACED", tick, {"queue_id": queue_id,
-                               "item": queue["item"], "age_ticks": tick-since, "reason": reason})
-                if state == "idle" and active and queue["producer_live"] and tick - since >= 1500:
+                               "item": item, "age_ticks": tick - since, "reason": reason})
+                if state == "idle" and preterminal and active and producer_live and tick - since >= 1500:
                     defect("BUILDING_QUEUE_IDLE", tick, {"queue_id": queue_id,
-                           "age_ticks": tick-since, "reason": reason})
-            cash, resources, capacity = (integer(row.get(k)) for k in
-                                         ("cash", "resources", "capacity"))
+                           "age_ticks": tick - since, "reason": reason})
+
+            cash, resources, capacity = (integer(row.get(k)) for k in ("cash", "resources", "capacity"))
             net_spent = row.get("net_spent")
             if type(net_spent) is not int:
                 raise EvidenceError("missing/invalid signed net spend")
@@ -150,6 +299,10 @@ def analyze(rows, game_uid, player):
                 raise EvidenceError("invalid storage")
             report["spending"] = {"net_spent": net_spent, "gross_spent": None,
                                   "gross_spend_complete": False, "tick": tick}
+            if not preterminal:
+                continue
+
+            pulses += 1
             funds = cash + resources
             flags = {"low": active and funds < 1000, "high": active and funds > 10000,
                      "near_empty": active and funds <= 100,
@@ -173,14 +326,38 @@ def analyze(rows, game_uid, player):
                             "severity": "DIAGNOSTIC", "tick": tick,
                             "duration_ticks": duration, "gross_spent": None,
                             "reason": "net spend can decrease on refunds; low spending not established"})
+
         if not ended:
             raise EvidenceError("no complete terminal health record; live use requires shared watermark")
+        if terminal is None:
+            raise EvidenceError("no terminal seat-state evidence")
         if not pulses:
-            raise EvidenceError("no pulse observations")
+            raise EvidenceError("no pre-terminal pulse observations")
+        fixture_bound = (
+            isinstance(fixture_evidence, dict)
+            and fixture_evidence.get("verified") is True
+            and fixture_evidence.get("capture_game_uid") == game_uid
+            and type(fixture_evidence.get("expected_tick")) is int
+            and fixture_evidence["expected_tick"] > 0
+            and re.fullmatch(r"[0-9a-f]{64}", str(fixture_evidence.get("source_sha256", "")))
+            and re.fullmatch(r"[0-9a-f]{64}", str(fixture_evidence.get("map_sha256", "")))
+            and terminal["tick"] >= fixture_evidence["expected_tick"]
+        )
+        report["terminal"] = {"kind": "FIXTURE_TERMINAL" if fixture_bound else "GAME_TERMINAL",
+                              **terminal}
+        if fixture_bound:
+            report["terminal"].update({
+                "fixture_expected_tick": fixture_evidence["expected_tick"],
+                "fixture_source_sha256": fixture_evidence["source_sha256"],
+                "fixture_map_sha256": fixture_evidence["map_sha256"],
+                "fixture_source_path": fixture_evidence.get("source_path")})
+        report["defeated"] = terminal["seat_state"] == "lost"
         report["status"] = "BLOCK" if report["findings"] else "OBSERVED_HEALTHY"
         report["pulses"] = pulses
     except (EvidenceError, TypeError, KeyError) as error:
         report["error"] = str(error)
+        if dropped_seen:
+            report["status"] = "BLOCK"
     return report
 
 
@@ -190,10 +367,19 @@ def main():
     parser.add_argument("--game-uid", required=True)
     parser.add_argument("--player", required=True)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--fixture-script", type=Path,
+                        help="map Lua source containing the pre-registered objective terminal")
+    parser.add_argument("--fixture-script-sha256",
+                        help="pre-registered exact SHA-256 of --fixture-script")
     args = parser.parse_args()
     try:
         rows, receipt = read_jsonl(args.support / "Logs/cameo-ai-economy-health.jsonl")
-        report = analyze(rows, args.game_uid, args.player)
+        evidence = None
+        if args.fixture_script is not None or args.fixture_script_sha256 is not None:
+            if args.fixture_script is not None and args.fixture_script_sha256 is not None:
+                evidence = read_fixture_evidence(args.fixture_script, args.fixture_script_sha256,
+                                                 args.support, args.game_uid, args.player)
+        report = analyze(rows, args.game_uid, args.player, fixture_evidence=evidence)
         report["input"] = receipt
     except (EvidenceError, OSError, ValueError, TypeError) as error:
         report = {"policy": POLICY, "status": "UNKNOWN", "error": str(error)}
@@ -203,7 +389,7 @@ def main():
         except (EvidenceError, OSError, ValueError, TypeError) as error:
             report = {"policy": POLICY, "status": "UNKNOWN", "error": str(error)}
     print(json.dumps(report, allow_nan=False, indent=2))
-    return {"BLOCK": 20, "UNKNOWN": 21}.get(report["status"], 0)
+    return {"BLOCK": 20, "UNKNOWN": 21, "OBSERVED_HEALTHY": 0}.get(report["status"], 21)
 
 
 if __name__ == "__main__":

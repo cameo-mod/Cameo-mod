@@ -30,10 +30,13 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("World ticks between two stats_timeline samples (earned, spent, army, assets, kills/deaths cost). 0 disables it.")]
 		public readonly int SampleIntervalTicks = 750;
 
+		[Desc("Per (observer, enemy) opponent-signature history cap; oldest samples drop once exceeded. 0 keeps the full history for the match record.")]
+		public readonly int SignatureHistoryCapPerPair = 0;
+
 		public override object Create(ActorInitializer init) { return new AiMatchLogWriter(this); }
 	}
 
-	public class AiMatchLogWriter : IWorldLoaded, IGameOver, ITick
+	public class AiMatchLogWriter : IWorldLoaded, IGameOver, ITick, BotModules.IAiSeenProfileSource
 	{
 		readonly AiMatchLogWriterInfo info;
 
@@ -454,8 +457,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				// so the home cell is what tells the two sides of a duel apart.
 				AppendString(lines, "home", $"{player.HomeLocation.X},{player.HomeLocation.Y}");
 				AppendString(lines, "outcome", Outcome(player.WinState));
-				AppendString(lines, "personality", recorder?.CurrentPersonality ?? "");
-				AppendNumber(lines, "personality_switches", recorder?.PersonalitySwitches ?? 0);
+				AppendPersonalitySummary(lines, recorder);
 				var priorsStates = player.PlayerActor.TraitsImplementing<OpenRA.Mods.CA.Traits.BotModuleLogic.IBotEngagementPriors>()
 					.Select(p => p.PriorsState).Where(s => s != null).ToArray();
 				if (priorsStates.Length > 0)
@@ -537,6 +539,8 @@ namespace OpenRA.Mods.Cameo.Traits
 					var truth = ProfileOf(owned.Select(a => BotModules.BotFogMemory.Classify(a.Info,
 						a.ActorID, a.Location, a.GetEnabledTargetTypes(), world.WorldTick, signatureInfo)));
 					history.Add(new SignatureSample { Tick = world.WorldTick, Seen = seen, Truth = truth });
+					if (info.SignatureHistoryCapPerPair > 0 && history.Count > info.SignatureHistoryCapPerPair)
+						history.RemoveRange(0, history.Count - info.SignatureHistoryCapPerPair);
 				}
 			}
 		}
@@ -546,6 +550,12 @@ namespace OpenRA.Mods.Cameo.Traits
 			a.VehicleValue != b.VehicleValue || a.AirValue != b.AirValue || a.NavalValue != b.NavalValue ||
 			a.DefenceValue != b.DefenceValue || a.BuildingCount != b.BuildingCount ||
 			a.HarvesterCount != b.HarvesterCount || a.KnownRegions != b.KnownRegions;
+
+		// Read-only seam into the same fog-honest seen buffer ProfileOf consumes
+		// (seam ACK ACK_2026-10-16_context_opponent_seam_devin.md, bound shape).
+		IReadOnlyCollection<BotModules.ObservedActor> BotModules.IAiSeenProfileSource.SeenActorsOf(
+			OpenRA.Player observer, OpenRA.Player enemy) =>
+			signatureMemory.TryGetValue(observer, out var memory) ? memory.Remembered(enemy) : null;
 
 		internal static BotModules.EnemyProfile ProfileOf(IEnumerable<BotModules.ObservedActor> actors)
 		{
@@ -685,6 +695,12 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 
 			builder.Append(']');
+		}
+
+		internal static void AppendPersonalitySummary(StringBuilder builder, AiMatchLogRecorder recorder)
+		{
+			AppendString(builder, "personality", recorder?.LastObservedPersonality ?? "");
+			AppendNumber(builder, "personality_switches", recorder?.PersonalitySwitches ?? 0);
 		}
 
 		internal static void AppendTimeline(StringBuilder builder, IReadOnlyList<AiMatchLogPersonalityTransition> timeline, bool first = false)

@@ -9,13 +9,18 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using NUnit.Framework;
+using OpenRA.GameRules;
 using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Primitives;
+using OpenRA.Support;
+using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Test
 {
@@ -48,6 +53,209 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			Assert.That(BaseBuilderQueueEvalCA.BlockedByCash(50, 100, false, true, 50, false), Is.False);
 			Assert.That(BaseBuilderQueueEvalCA.BlockedByCash(49, 100, false, true, 50, false), Is.True);
+		}
+
+		// Cash-starvation escape: units draining the bank under the building floor cannot hold construction out forever.
+
+		[Test]
+		public void StarvedQueueRidesAtItsOwnCost()
+		{
+			// 625 cash under a 1000 floor: blocked until starved, then admitted at cost 300 but not at cost 700.
+			Assert.That(BaseBuilderQueueEvalCA.BlockedByCash(625, 1000, false, false, 300, false, false), Is.True);
+			Assert.That(BaseBuilderQueueEvalCA.BlockedByCash(625, 1000, false, false, 300, false, true), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.BlockedByCash(625, 1000, false, false, 700, false, true), Is.True);
+		}
+
+		[Test]
+		public void StarvedEscapeNeverOverridesTheSameTickQueueBlock()
+			=> Assert.That(BaseBuilderQueueEvalCA.BlockedByCash(5000, 1000, false, false, 300, true, true), Is.True);
+
+		[Test]
+		public void CashStarvedNeedsAnUninterruptedRunAtTheThreshold()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.CashStarved(-1, 5000, 300), Is.False, "never blocked");
+			Assert.That(BaseBuilderQueueEvalCA.CashStarved(1000, 1299, 300), Is.False, "one tick short");
+			Assert.That(BaseBuilderQueueEvalCA.CashStarved(1000, 1300, 300), Is.True, "exactly at the threshold");
+			Assert.That(BaseBuilderQueueEvalCA.CashStarved(0, 5000, 0), Is.False, "zero disables the escape");
+			Assert.That(BaseBuilderQueueEvalCA.CashStarved(0, 5000, -1), Is.False, "negative disables the escape");
+		}
+
+		[Test]
+		public void FloorBlocksIsTheFloorTermOfBlockedByCash()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.FloorBlocks(625, 1000, false, false, 300), Is.True);
+			Assert.That(BaseBuilderQueueEvalCA.FloorBlocks(1000, 1000, false, false, 300), Is.False, "at the floor");
+			Assert.That(BaseBuilderQueueEvalCA.FloorBlocks(625, 1000, true, false, 700), Is.False, "refinery rides past");
+			Assert.That(BaseBuilderQueueEvalCA.FloorBlocks(625, 1000, false, true, 300), Is.False, "affordable planner want");
+			Assert.That(BaseBuilderQueueEvalCA.FloorBlocks(625, 1000, false, true, 700), Is.True, "unaffordable planner want");
+		}
+
+		[Test]
+		public void StarvationClockRequiresFloorOnlyVetoAndAffordableItem()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.StarvationEligible(true, true, false, false), Is.True);
+			Assert.That(BaseBuilderQueueEvalCA.StarvationEligible(false, true, false, false), Is.False, "cash recovery or floor exception clears");
+			Assert.That(BaseBuilderQueueEvalCA.StarvationEligible(true, false, false, false), Is.False, "cash below own cost clears");
+			Assert.That(BaseBuilderQueueEvalCA.StarvationEligible(true, true, true, false), Is.False, "same-tick sibling admission clears");
+			Assert.That(BaseBuilderQueueEvalCA.StarvationEligible(true, true, false, true), Is.False, "any non-cash veto clears");
+		}
+
+		// CashStarvationClock lifecycle: an uninterrupted run is keyed by producer and wanted item.
+
+		const uint P = 7;
+		const uint Q = 9;
+
+		[Test]
+		public void ClockDoesNotAdmitAt299AndAdmitsAt300()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(P, "PROC", true, 100);
+			Assert.That(clock.Starved(P, "PROC", 399, 300), Is.False);
+			Assert.That(clock.Starved(P, "PROC", 400, 300), Is.True);
+		}
+
+		[Test]
+		public void ClockRoundTripPreservesQualifyingElapsedTicks()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(Q, "TANK", true, 125);
+			clock.Observe(P, "PROC", true, 100);
+			var serialized = new List<MiniYamlNode> { new("CashStarvationClock", "", clock.SaveState()) }.WriteToString();
+			var restored = new CashStarvationClock();
+			restored.RestoreState(MiniYaml.FromString(serialized, "cash-starvation-clock-test").Single().Value.Nodes);
+
+			// Resume at tick 300: the original run began at 100, so it reaches the 300-tick boundary at 400,
+			// rather than restarting and delaying admission until tick 600.
+			restored.Observe(P, "PROC", true, 300);
+			Assert.That(restored.Starved(P, "PROC", 399, 300), Is.False);
+			Assert.That(restored.Starved(P, "PROC", 400, 300), Is.True);
+			Assert.That(restored.Starved(Q, "TANK", 424, 300), Is.False);
+			Assert.That(restored.Starved(Q, "TANK", 425, 300), Is.True);
+			Assert.That(restored.Starved(P, "TANK", 400, 300), Is.False, "another item's age is not inherited");
+			Assert.That(restored.Tracked, Is.EqualTo(2));
+		}
+
+		[Test]
+		public void ClockRestartsWhenTheFloorRecoversBetweenBlockedSweeps()
+		{
+			// Sol's sequence: blocked at 100 (cash 625/floor 1000); at 200 another producer took the sweep while
+			// the bank was >= 1000, so the floor no longer blocks; at 400 the bank is 625 again.
+			var clock = new CashStarvationClock();
+			clock.Observe(P, "PROC", true, 100);
+			clock.Observe(P, "PROC", false, 200);
+			clock.Observe(P, "PROC", true, 400);
+			Assert.That(clock.Starved(P, "PROC", 400, 300), Is.False, "the stale tick-100 run must not count");
+			Assert.That(clock.Starved(P, "PROC", 699, 300), Is.False);
+			Assert.That(clock.Starved(P, "PROC", 700, 300), Is.True, "a fresh run from tick 400 starves at 700");
+		}
+
+		[Test]
+		public void ClockResetsWhenTheProducerIsBusyHeldOrHasNothingWanted()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(P, "PROC", true, 100);
+			clock.Reset(P);
+			Assert.That(clock.Starved(P, "PROC", 1000, 300), Is.False);
+			Assert.That(clock.Tracked, Is.EqualTo(0));
+
+			// Back to floor-blocked afterwards: restarts at the new tick.
+			clock.Observe(P, "PROC", true, 900);
+			Assert.That(clock.Starved(P, "PROC", 1000, 300), Is.False);
+			Assert.That(clock.Starved(P, "PROC", 1200, 300), Is.True);
+		}
+
+		[Test]
+		public void ClockDropsProducersThatLeftTheLiveSet()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(P, "PROC", true, 100);
+			clock.Observe(Q, "PROC", true, 100);
+			clock.Retain(new HashSet<uint> { Q });
+			Assert.That(clock.Starved(P, "PROC", 1000, 300), Is.False, "the disabled producer's run is gone");
+			Assert.That(clock.Starved(Q, "PROC", 1000, 300), Is.True, "the live producer keeps its run");
+			Assert.That(clock.Tracked, Is.EqualTo(1));
+		}
+
+		[Test]
+		public void ClockProducersAreIndependent()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(P, "PROC", true, 100);
+			clock.Observe(Q, "PROC", true, 350);
+			Assert.That(clock.Starved(P, "PROC", 400, 300), Is.True);
+			Assert.That(clock.Starved(Q, "PROC", 400, 300), Is.False);
+			clock.Observe(P, "PROC", false, 401);
+			Assert.That(clock.Starved(P, "PROC", 401, 300), Is.False);
+			Assert.That(clock.Starved(Q, "PROC", 650, 300), Is.True);
+		}
+
+		[Test]
+		public void ClockWithAZeroThresholdNeverStarves()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(P, "PROC", true, 0);
+			Assert.That(clock.Starved(P, "PROC", 100000, 0), Is.False);
+		}
+
+		[Test]
+		public void ClockClearsWhenWantedItemChanges()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(P, "PROC", true, 100);
+			clock.Observe(P, "HARRIER", true, 200);
+			Assert.That(clock.Starved(P, "HARRIER", 499, 300), Is.False);
+			Assert.That(clock.Starved(P, "HARRIER", 500, 300), Is.True);
+			Assert.That(clock.Starved(P, "PROC", 500, 300), Is.False);
+		}
+
+		[TestCase("cash recovery", false, true, false, false)]
+		[TestCase("below item cost", true, false, false, false)]
+		[TestCase("same-tick sibling queue", true, true, true, false)]
+		[TestCase("power/prerequisite/placement veto", true, true, false, true)]
+		[TestCase("reserve or army-first veto", true, true, false, true)]
+		public void AnyVetoClearsTheUninterruptedRun(string reason, bool floorBlocks, bool affordable,
+			bool queuedThisTick, bool nonCashVeto)
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(P, "PROC", true, 100);
+			clock.Observe(P, "PROC", BaseBuilderQueueEvalCA.StarvationEligible(
+				floorBlocks, affordable, queuedThisTick, nonCashVeto), 200);
+			Assert.That(clock.Starved(P, "PROC", 500, 300), Is.False, reason);
+			clock.Observe(P, "PROC", true, 600);
+			Assert.That(clock.Starved(P, "PROC", 899, 300), Is.False, reason + " must restart the run");
+			Assert.That(clock.Starved(P, "PROC", 900, 300), Is.True, reason + " starts a fresh 300 tick run");
+		}
+
+		[Test]
+		public void ClockClearsOnGlobalPlacementLatchAndAdmission()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(P, "PROC", true, 100);
+			clock.ResetAll();
+			Assert.That(clock.Starved(P, "PROC", 1000, 300), Is.False, "global latch clears every producer");
+			clock.Observe(P, "PROC", true, 1100);
+			clock.Reset(P);
+			Assert.That(clock.Starved(P, "PROC", 2000, 300), Is.False, "admission clears this producer");
+		}
+
+		// MobileSpendBlocks (TF-2): optional spend may not dip under the unit side's reserved share.
+
+		[Test]
+		public void OptionalSpendUnderTheReserveBlocks()
+		{
+			// cash 3000, item 2500 leaves 500 < the 1000 floor — refused.
+			Assert.That(BaseBuilderQueueEvalCA.MobileSpendBlocks(3000, 2500, 1000, false), Is.True);
+			// cash 3000, item 2000 leaves exactly 1000 — admitted at the boundary.
+			Assert.That(BaseBuilderQueueEvalCA.MobileSpendBlocks(3000, 2000, 1000, false), Is.False);
+		}
+
+		[Test]
+		public void EssentialsIgnoreTheReserveAndNoFloorBlocksNothing()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.MobileSpendBlocks(1100, 1000, 2000, true), Is.False,
+				"yard/refinery/power/first-factory picks ride their own exemption");
+			Assert.That(BaseBuilderQueueEvalCA.MobileSpendBlocks(100, 90, 0, false), Is.False,
+				"floor 0 — classic and switch-off — admits everything the other gates did");
 		}
 
 		// ClassifyPlacement
@@ -1450,8 +1658,8 @@ namespace OpenRA.Mods.Cameo.Test
 			// Requests and confirmed lifecycle stay separate: a pending older than the bound
 			// whose item is still queued is a rejected/lost order, dropped before reconcile.
 			var pending = new BotQueuePendingTerminal { IssuedTick = 100 };
-			Assert.That(pending.Stale(108), Is.False, "inside the bound the request may still resolve");
-			Assert.That(pending.Stale(109), Is.True, "past MaxInFlightTicks it never resolved");
+			Assert.That(pending.Stale(124), Is.False, "inside the bound the request may still resolve");
+			Assert.That(pending.Stale(125), Is.True, "past MaxInFlightTicks it never resolved");
 		}
 
 		[Test]
@@ -1534,7 +1742,7 @@ namespace OpenRA.Mods.Cameo.Test
 				Item = new object(), ItemName = "proc", Kind = BotQueueTransitionKind.Placed,
 				IssuedTick = 100, Site = new CPos(3, 4)
 			};
-			Assert.That(pending.ResolveOnRemoval(109, queueSeen: true, placementProven: false),
+			Assert.That(pending.ResolveOnRemoval(125, queueSeen: true, placementProven: false),
 				Is.EqualTo(BotQueuePendingResolution.EmitRemoved),
 				"a request older than the bound is a lost order — Removed, never the proof window");
 		}
@@ -1593,9 +1801,9 @@ namespace OpenRA.Mods.Cameo.Test
 
 			pending.AwaitingProof = true;
 			pending.IssuedTick = 101;
-			Assert.That(pending.ResolveWhileAwaiting(104, placementProven: false, playerEliminated: false),
-				Is.EqualTo(BotQueuePendingResolution.Unresolved), "inside the window — no record yet");
 			Assert.That(pending.ResolveWhileAwaiting(110, placementProven: false, playerEliminated: false),
+				Is.EqualTo(BotQueuePendingResolution.Unresolved), "inside the window — no record yet");
+			Assert.That(pending.ResolveWhileAwaiting(126, placementProven: false, playerEliminated: false),
 				Is.EqualTo(BotQueuePendingResolution.EmitRemoved),
 				"window expired without the actor -> Removed + intent reason");
 		}
@@ -1710,6 +1918,105 @@ namespace OpenRA.Mods.Cameo.Test
 				"a landed building still proves — elimination changes classification, not fact");
 		}
 
+		// QUEUE-REMOVAL-DISCRIMINATOR (01a13686): the RCA's two hard blockers — a wire
+		// latency longer than the old 8-tick bound, and removal causes the flat
+		// Removed record could not carry. The wire-latency test drives the pending
+		// state machine at the observed 19-tick lag; the cause ladder enumerates the
+		// emit-side classes event-local state can prove.
+
+		[Test]
+		public void DelayedWirePlacementInsideBoundStillArmsAndProves()
+		{
+			// RCA 2026-10-13: PlaceBuilding intent→removal ran 12–19 ticks in the
+			// sentinel episodes — past the old 8-tick bound, so every pending expired
+			// before its wire applied and the proof window never armed. Inside the
+			// 24-tick bound the request must still be fresh at removal.
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "proc", Kind = BotQueueTransitionKind.Placed,
+				IssuedTick = 100, Site = new CPos(3, 4)
+			};
+			Assert.That(pending.Stale(119), Is.False, "the observed worst-case 19-tick lag stays inside the bound");
+			Assert.That(pending.ResolveOnRemoval(119, queueSeen: true, placementProven: false),
+				Is.EqualTo(BotQueuePendingResolution.KeepAwaitingProof),
+				"a delayed-wire removal arms the proof window instead of ending UNKNOWN");
+
+			// The probe arms the entry and restarts the window at the removal tick.
+			pending.AwaitingProof = true;
+			pending.IssuedTick = 119;
+			Assert.That(pending.ResolveWhileAwaiting(120, placementProven: true, playerEliminated: false),
+				Is.EqualTo(BotQueuePendingResolution.EmitRequested), "the actor lands -> Placed");
+		}
+
+		[Test]
+		public void RemovalCauseClassLadderEnumeratesProvenCauses()
+		{
+			// Elimination beats every other fact — a lost seat explains any removal.
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(true, false, false, false, false),
+				Is.EqualTo(BotQueueCancellationClass.Elimination));
+
+			// A dead/disposed producer clears its queue on every lifecycle path —
+			// kill, sell, demolish and transform are not separable mod-side, so all
+			// land on Destruction (INotifyKilled/Selling/BeforeTransform all ClearQueue).
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, false, true, true, true),
+				Is.EqualTo(BotQueueCancellationClass.Destruction));
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, false, false, false, false),
+				Is.EqualTo(BotQueueCancellationClass.Destruction),
+				"owner is unreadable on a dead actor — liveness is the stronger fact");
+
+			// A live producer owned by another player: the ownership change cleared
+			// its queue (OnOwnerChanged -> ClearQueue). Proven capture.
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, false, false, false),
+				Is.EqualTo(BotQueueCancellationClass.Captured));
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, false, false, true),
+				Is.EqualTo(BotQueueCancellationClass.Captured),
+				"an owner change outranks the buildable probe — capture explains the removal");
+
+			// Live, owned, still-observed queue whose item is absent from its own
+			// BuildableItems emits Unbuildable — CancelUnbuildableItems' own
+			// predicate — as a DIAGNOSTIC class (Sol adjudication 2026-10-14): the
+			// engine's eviction is cached-set gated and prefers migration, so
+			// observed absence is not a receipt the routine ran. The evidence seam
+			// classifies it UNKNOWN like None.
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, true, true, false),
+				Is.EqualTo(BotQueueCancellationClass.Unbuildable));
+		}
+
+		[Test]
+		public void RemovalCauseClassFailClosedRungs()
+		{
+			// A stale watch on a live, owned producer carries no buildability
+			// evidence — the queue left observation, so nothing is provable.
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, true, false, false),
+				Is.EqualTo(BotQueueCancellationClass.None),
+				"queueSeen gates the buildable rung — an unobserved queue cannot prove rules churn");
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, true, false, true),
+				Is.EqualTo(BotQueueCancellationClass.None));
+
+			// ep53-like ambiguity (RCA 2026-10-13): the item left a live, owned,
+			// observed queue while still in its buildable set — no provider loss
+			// provable at the emit tick. It must stay None = UNKNOWN forever.
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, true, true, true),
+				Is.EqualTo(BotQueueCancellationClass.None),
+				"buildable at probe -> the removal is genuinely unproven");
+		}
+
+		[Test]
+		public void CancelRemovalStillNeverConfirmsInsideNewBound()
+		{
+			// The widened bound does not promote cancels: a pending cancel at wire-
+			// latency age still resolves Removed — disappearance is never proof.
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "proc", Kind = BotQueueTransitionKind.Cancelled,
+				Reason = BotQueueTransitionReason.DemandCancel, Class = BotQueueCancellationClass.Production,
+				IssuedTick = 100
+			};
+			Assert.That(pending.ResolveOnRemoval(120, queueSeen: true, placementProven: false),
+				Is.EqualTo(BotQueuePendingResolution.EmitRemoved),
+				"a 20-tick-old cancel intent on a removal is still correlation, not proof");
+		}
+
 		// VP re-review of ae259554d: !AcceptsPlug is not install proof — the engine's
 		// AcceptsPlug is false for unknown types and failed dynamic Requirements too.
 		// These drive the real predicate the manager wires from the Pluggable trait.
@@ -1755,7 +2062,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var requirementFlipped = BaseBuilderQueueEvalCA.PlugInstallProven(
 				slotDefinesType: true, requirementKeyed: true, acceptsNow: false);
-			Assert.That(pending.ResolveWhileAwaiting(110, placementProven: requirementFlipped, playerEliminated: false),
+			Assert.That(pending.ResolveWhileAwaiting(125, placementProven: requirementFlipped, playerEliminated: false),
 				Is.EqualTo(BotQueuePendingResolution.EmitRemoved),
 				"requirement flip -> no install -> expires Removed, never Placed");
 		}
@@ -1776,6 +2083,278 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(pending.ResolveWhileAwaiting(104, placementProven: installed, playerEliminated: false),
 				Is.EqualTo(BotQueuePendingResolution.EmitRequested),
 				"slot occupied by EnablePlug -> Placed");
+		}
+
+		// S2 (FINDINGS_2026-10-12 §4): dedicated-AA classification + the intel gate.
+
+		static ArmamentInfo Armament(params string[] validTargets)
+		{
+			var weapon = new WeaponInfo();
+			typeof(WeaponInfo).GetField("ValidTargets").SetValue(weapon, new BitSet<TargetableType>(validTargets));
+			var armament = new ArmamentInfo();
+			typeof(ArmamentInfo).GetField("<WeaponInfo>k__BackingField", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)
+				.SetValue(armament, weapon);
+			return armament;
+		}
+
+		[Test]
+		public void AirOnlyArmamentIsDedicatedAntiAir()
+		{
+			// The samsite shape: one armament whose ValidTargets is exactly Air.
+			var samsite = new ActorInfo("samsite", new BuildingInfo(), Armament("Air"));
+			Assert.That(BaseBuilderQueueEvalCA.IsDedicatedAntiAir(samsite), Is.True);
+		}
+
+		[Test]
+		public void DualRoleArmamentIsNotDedicatedAntiAir()
+		{
+			// FINDINGS S2's guard: Future_MultiMissile (Ground, Water, Air) is the
+			// FutureTech multiturret's ground defence too — it must stay ungated.
+			var multiturret = new ActorInfo("multi", new BuildingInfo(), Armament("Ground", "Water", "Air"));
+			Assert.That(BaseBuilderQueueEvalCA.IsDedicatedAntiAir(multiturret), Is.False);
+		}
+
+		[Test]
+		public void GroundOnlyAndUnarmedAreNotDedicatedAntiAir()
+		{
+			var gun = new ActorInfo("gun", new BuildingInfo(), Armament("Ground"));
+			Assert.That(BaseBuilderQueueEvalCA.IsDedicatedAntiAir(gun), Is.False);
+
+			var empty = new ActorInfo("empty", new BuildingInfo());
+			Assert.That(BaseBuilderQueueEvalCA.IsDedicatedAntiAir(empty), Is.False);
+		}
+
+		[Test]
+		public void MixedArmamentsAreNotDedicatedAntiAir()
+		{
+			// One air armament beside a ground gun = a ground-role turret that also
+			// swats air; gating it would strip the ground defence.
+			var mixed = new ActorInfo("mixed", new BuildingInfo(), Armament("Air"), Armament("Ground", "Water"));
+			Assert.That(BaseBuilderQueueEvalCA.IsDedicatedAntiAir(mixed), Is.False);
+		}
+
+		[Test]
+		public void DedicatedAntiAirWaitsForAirIntel()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.AirDefenceAdmits(true, false), Is.False, "dedicated AA stays queued while no air was seen");
+			Assert.That(BaseBuilderQueueEvalCA.AirDefenceAdmits(true, true), Is.True, "first air sighting opens it");
+			Assert.That(BaseBuilderQueueEvalCA.AirDefenceAdmits(false, false), Is.True, "non-AA picks never gate");
+		}
+
+		// E1 bypass fix (lead ruling 2026-10-12): the crawl-safety front defence rides the same
+		// gate — ExpansionPlannerBotModule's pick calls AirDefenceAdmits(IsDedicatedAntiAir(item),
+		// gateOpen) exactly like this; a closed gate must skip the SAM and keep the ground turret.
+
+		[Test]
+		public void FrontDefencePickSkipsSamsWhileTheIntelGateIsClosed()
+		{
+			var samsite = new ActorInfo("samsite", new BuildingInfo(), Armament("Air"));
+			var gun = new ActorInfo("gun", new BuildingInfo(), Armament("Ground"));
+
+			Assert.That(
+				BaseBuilderQueueEvalCA.AirDefenceAdmits(BaseBuilderQueueEvalCA.IsDedicatedAntiAir(samsite), false),
+				Is.False, "dedicated-AA structure is not an eligible front defence while no air was seen");
+			Assert.That(
+				BaseBuilderQueueEvalCA.AirDefenceAdmits(BaseBuilderQueueEvalCA.IsDedicatedAntiAir(gun), false),
+				Is.True, "the cheapest anti-ground defence stays eligible — it is the pick instead");
+		}
+
+		[Test]
+		public void FrontDefencePickAdmitsSamsOnceTheGateIsOpen()
+		{
+			var samsite = new ActorInfo("samsite", new BuildingInfo(), Armament("Air"));
+			Assert.That(
+				BaseBuilderQueueEvalCA.AirDefenceAdmits(BaseBuilderQueueEvalCA.IsDedicatedAntiAir(samsite), true),
+				Is.True, "a seen enemy air capability ungates the dedicated-AA front defence");
+		}
+
+		// PLACEMENT-PROOF-LOCATION-FIX (01a131ba): '_' top-left footprints (every
+		// ^TDPROC refinery, td_gdi_repairfacility) never influence their own Location
+		// cell — BuildingInfo.Tiles() skips '_' — so the ActorMap occupancy probe at the
+		// ordered site can never see them and their Placed request always expired
+		// Removed -> UNKNOWN, OBSERVED_HEALTHY unreachable. The proof is now a union:
+		// the occupied-cell path (unchanged) OR an own live name-matching actor whose
+		// Location equals the ordered site.
+
+		[Test]
+		public void LocationFallbackProvesUnderscoreTopLeftFootprint()
+		{
+			// The refinery shape end to end: site scan finds nothing (the building does
+			// not influence its own top-left), but its Location IS the ordered site.
+			Assert.That(BaseBuilderQueueEvalCA.LocationSiteProven(
+					live: true, own: true, nameMatches: true, locationEqualsSite: true),
+				Is.True, "own live matching actor at Location == site proves the '_' top-left placement");
+
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "proc", Kind = BotQueueTransitionKind.Placed,
+				IssuedTick = 100, Site = new CPos(3, 4), AwaitingProof = true
+			};
+			var fallbackProven = BaseBuilderQueueEvalCA.LocationSiteProven(
+				live: true, own: true, nameMatches: true, locationEqualsSite: true);
+			Assert.That(pending.ResolveWhileAwaiting(104, placementProven: fallbackProven, playerEliminated: false),
+				Is.EqualTo(BotQueuePendingResolution.EmitRequested),
+				"the armed refinery request resolves Placed through the location fallback");
+		}
+
+		[Test]
+		public void LocationFallbackRejectsWrongNameOwnerOrSite()
+		{
+			// Every leg must hold: a wrong-named neighbour, an enemy building, a dead
+			// husk, or a same-name building one cell over is never proof.
+			Assert.That(BaseBuilderQueueEvalCA.LocationSiteProven(true, true, nameMatches: false, true),
+				Is.False, "a different building at the site cell does not prove this request");
+			Assert.That(BaseBuilderQueueEvalCA.LocationSiteProven(true, own: false, true, true),
+				Is.False, "an enemy's same-name building at the cell is not our placement");
+			Assert.That(BaseBuilderQueueEvalCA.LocationSiteProven(live: false, true, true, true),
+				Is.False, "a dead/sold actor at the site is residue, not proof");
+			Assert.That(BaseBuilderQueueEvalCA.LocationSiteProven(true, true, true, locationEqualsSite: false),
+				Is.False, "a same-name building at a different top-left cannot satisfy the ordered site");
+		}
+
+		[Test]
+		public void OccupiedCellPathStillProvesPlacement()
+		{
+			// The original evidence is untouched: an own live name-matching actor that
+			// INFLUENCES the ordered cell (every ordinary-x' top-left footprint) still
+			// proves — the fallback adds a leg, it does not replace this one.
+			Assert.That(BaseBuilderQueueEvalCA.OccupiedSiteProven(live: true, own: true, nameMatches: true),
+				Is.True, "building occupying the site cell proves, as before");
+			Assert.That(BaseBuilderQueueEvalCA.OccupiedSiteProven(live: false, own: true, nameMatches: true),
+				Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.OccupiedSiteProven(true, own: false, true), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.OccupiedSiteProven(true, true, nameMatches: false), Is.False);
+
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "powr", Kind = BotQueueTransitionKind.Placed,
+				IssuedTick = 100, Site = new CPos(7, 8)
+			};
+			var occupiedProven = BaseBuilderQueueEvalCA.OccupiedSiteProven(true, true, true);
+			Assert.That(pending.ResolveOnRemoval(101, queueSeen: true, placementProven: occupiedProven),
+				Is.EqualTo(BotQueuePendingResolution.EmitRequested),
+				"occupied-cell evidence still resolves Placed at removal");
+		}
+
+		[Test]
+		public void UnprovenPendingStillExpiresToRemoved()
+		{
+			// Neither leg proving leaves the armed request honestly UNKNOWN: it expires
+			// Removed carrying the intent reason, never a guessed Placed.
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "proc", Kind = BotQueueTransitionKind.Placed,
+				IssuedTick = 100, Site = new CPos(3, 4), AwaitingProof = true
+			};
+			var neitherLeg = BaseBuilderQueueEvalCA.OccupiedSiteProven(true, true, false)
+				|| BaseBuilderQueueEvalCA.LocationSiteProven(true, true, true, false);
+			Assert.That(neitherLeg, Is.False, "neither occupancy nor location evidence exists");
+			Assert.That(pending.ResolveWhileAwaiting(125, placementProven: neitherLeg, playerEliminated: false),
+				Is.EqualTo(BotQueuePendingResolution.EmitRemoved),
+				"unproven placement still expires Removed -> schema-2 UNKNOWN");
+		}
+
+		// PUSH-1 bank overflow (Sol exact-SHA contracts): the rung arms only on an enabled policy
+		// over its line, the type cap counts standing+variants+in-flight like the fraction path,
+		// and the pick's RNG stream is untouched when the rung is absent or declines.
+
+		[Test]
+		public void OverflowArmsOnlyOnAnEnabledPolicyOverItsLine()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.OverflowArmed(true, 8001, 8000), Is.True);
+			Assert.That(BaseBuilderQueueEvalCA.OverflowArmed(true, 8000, 8000), Is.False,
+				"at the line is not over it");
+			Assert.That(BaseBuilderQueueEvalCA.OverflowArmed(false, 999999, 8000), Is.False,
+				"disabled policy never arms — the classic path stays byte-identical");
+			Assert.That(BaseBuilderQueueEvalCA.OverflowArmed(true, 999999, 0), Is.False,
+				"zero threshold disarms");
+			Assert.That(BaseBuilderQueueEvalCA.OverflowArmed(true, 999999, -1), Is.False,
+				"negative threshold disarms");
+		}
+
+		[Test]
+		public void OverflowTypeCapCountsStandingVariantsAndInFlight()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.OverflowTypeAdmits(3, 1, 4), Is.False,
+				"3 standing-or-variant plus 1 in-flight reaches the cap of 4");
+			Assert.That(BaseBuilderQueueEvalCA.OverflowTypeAdmits(2, 1, 4), Is.True);
+			Assert.That(BaseBuilderQueueEvalCA.OverflowTypeAdmits(4, 0, 4), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.OverflowTypeAdmits(9, 9, 0), Is.True, "limit 0 is uncapped");
+			Assert.That(BaseBuilderQueueEvalCA.OverflowTypeAdmits(9, 9, -1), Is.True, "negative is uncapped");
+		}
+
+		[Test]
+		public void OverflowDeclineConsumesNoDraw()
+		{
+			var untouched = new MersenneTwister(42);
+			var declined = new MersenneTwister(42);
+			Assert.That(BaseBuilderQueueEvalCA.DrawOverflowPick<object>(Array.Empty<object>(), declined), Is.Null);
+			Assert.That(declined.TotalCount, Is.EqualTo(untouched.TotalCount),
+				"an empty candidate set must consume zero draws — the stream stays identical");
+			Assert.That(declined.Next(), Is.EqualTo(untouched.Next()),
+				"the next draw after a decline matches the un-consumed stream");
+		}
+
+		[Test]
+		public void OverflowCommitConsumesExactlyOneDraw()
+		{
+			var control = new MersenneTwister(42);
+			var committed = new MersenneTwister(42);
+			var pick = BaseBuilderQueueEvalCA.DrawOverflowPick(new[] { new object(), new object() }, committed);
+			Assert.That(pick, Is.Not.Null);
+			Assert.That(committed.TotalCount, Is.EqualTo(control.TotalCount + 1),
+				"a committed pick consumes exactly one draw");
+			control.Next();
+			Assert.That(committed.Next(), Is.EqualTo(control.Next()),
+				"after the consumed draw both streams continue identically");
+		}
+
+		[Test]
+		public void OverflowInfeasibleSetDeclinesBeforeAnyDraw()
+		{
+			// Sol exact-review HOLD fix: candidates resolve through PickOrPower BEFORE the
+			// draw, so a nonempty set of power-infeasible candidates with no fallback
+			// resolves empty — the decline consumes zero draws and the stream is unchanged.
+			var control = new MersenneTwister(7);
+			var rng = new MersenneTwister(7);
+			var resolved = new List<object>();
+			foreach (var candidate in new object[] { new(), new() })
+			{
+				var pick = BaseBuilderQueueEvalCA.PickOrPower(candidate, null, _ => false);
+				if (pick != null)
+					resolved.Add(pick);
+			}
+
+			Assert.That(resolved, Is.Empty, "all candidates infeasible and no power fallback exists");
+			Assert.That(BaseBuilderQueueEvalCA.DrawOverflowPick(resolved, rng), Is.Null);
+			Assert.That(rng.TotalCount, Is.EqualTo(control.TotalCount),
+				"a nonempty-but-infeasible decline consumes zero draws");
+			Assert.That(rng.Next(), Is.EqualTo(control.Next()),
+				"the next draw matches the un-consumed stream — orders downstream stay parity-locked");
+		}
+
+		[Test]
+		public void OverflowPowerFallbackEntersTheResolvedSet()
+		{
+			// An infeasible candidate contributes the power fallback to the draw — the same
+			// outcome draw-then-substitute produced, with the draw still costing exactly one.
+			var powerFallback = new object();
+			var feasible = new object();
+			var resolved = new List<object>();
+			foreach (var candidate in new[] { new object(), feasible })
+			{
+				var pick = BaseBuilderQueueEvalCA.PickOrPower(candidate, powerFallback,
+					c => ReferenceEquals(c, feasible));
+				if (pick != null)
+					resolved.Add(pick);
+			}
+
+			Assert.That(resolved, Is.EquivalentTo(new object[] { powerFallback, feasible }),
+				"infeasible candidate resolves to the power fallback; feasible stays itself");
+
+			var rng = new MersenneTwister(9);
+			Assert.That(BaseBuilderQueueEvalCA.DrawOverflowPick(resolved, rng), Is.Not.Null);
+			Assert.That(rng.TotalCount, Is.EqualTo(1), "a committed resolved pick consumes exactly one draw");
 		}
 	}
 }

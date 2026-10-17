@@ -33,13 +33,22 @@ namespace OpenRA.Mods.Cameo.Traits
 		AiEconomyHealthLogWriter health;
 		AiEconomyHealthLogWriter raw;
 		HashSet<string> groups;
+		HashSet<uint> resolvedEpisodes;
 		List<EconomyQueueObservation> observations;
 		List<EconomyQueueSnapshot> snapshots;
 		string gameUid;
 		int sequence;
 		int rawSequence;
 		int lastPulse = -1;
+		int queueIndexTick = -1;
 		bool finished;
+		readonly EconomyAcceptedTick accepted = new();
+
+		// Own-queue canonical index, rebuilt at most once per world tick on the first proven
+		// cancellation: one enumeration of world production queues amortizes every cancel in
+		// that tick instead of scanning per event. A queue created mid-tick after the index was
+		// built resolves to null — fail-closed UNKNOWN, never a wrong binding.
+		IReadOnlyDictionary<(uint Producer, string Group), string> queueIndex;
 
 		public AiEconomyHealthRecorder(Actor self) { this.self = self; }
 
@@ -49,11 +58,12 @@ namespace OpenRA.Mods.Cameo.Traits
 			health = healthWriter;
 			raw = rawWriter;
 			state = new AiEconomyHealthState();
-			// Outcome mapping is supported, but actual activation/census/terminal ordering
-			// and runtime coverage have not been validated. Keep adoption fail-closed.
-			state.MarkIncomplete();
+			// Activation/census/pulse/terminal ordering validated by admitted run C
+			// (game uid 25060589-136e-46b8-9d78-4c4ad7828688, 2026-10-12). 'complete'
+			// stays a one-way latch: every runtime failure path below still marks it.
 			observations = new List<EconomyQueueObservation>(AiEconomyHealthState.MaximumQueues);
 			snapshots = new List<EconomyQueueSnapshot>(AiEconomyHealthState.MaximumQueues);
+			resolvedEpisodes = new HashSet<uint>();
 			groups = self.Info.TraitInfos<BaseBuilderBotModuleCAInfo>()
 				.SelectMany(i => i.BuildingQueues).ToHashSet(StringComparer.Ordinal);
 			if (groups.Count == 0 || string.IsNullOrEmpty(uid))
@@ -64,6 +74,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		{
 			if (state == null || finished)
 				return;
+			FlushAccepted(tick, terminal);
 			observations.Clear();
 			foreach (var pair in self.World.ActorsWithTrait<ProductionQueue>())
 			{
@@ -84,15 +95,24 @@ namespace OpenRA.Mods.Cameo.Traits
 					queue.Enabled ? "observed" : "producer-disabled"));
 			}
 			state.Observe(tick, observations);
+			// Scheduled pulses are %50-only; a terminal observe may add one off-boundary
+			// pulse before the end record. The consumer's <=50-tick watermark allows it.
 			if ((AiEconomyHealthState.PulseDue(tick) || terminal) && tick != lastPulse)
 				Pulse(tick);
 			if (terminal)
 			{
 				WriteHealth(AiEconomyHealthSchema.End(Identity(tick, "end"),
-					state.Complete && health.Complete && raw.Complete));
+					state.Complete && health.Complete && raw.Complete, SeatState()));
 				finished = true;
 			}
 		}
+
+		string SeatState() => self.Owner.WinState switch
+		{
+			WinState.Won => "won",
+			WinState.Lost => "lost",
+			_ => "active",
+		};
 
 		void Pulse(int tick)
 		{
@@ -103,7 +123,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			WriteHealth(AiEconomyHealthSchema.Pulse(Identity(tick, "pulse"),
 				self.Owner.WinState == WinState.Undefined, state.Complete, snapshots,
 				resources?.Cash ?? 0, resources?.Resources ?? 0, resources?.ResourceCapacity ?? 0,
-				resources?.Spent ?? 0));
+				resources?.Spent ?? 0, SeatState()));
 			lastPulse = tick;
 		}
 
@@ -125,10 +145,17 @@ namespace OpenRA.Mods.Cameo.Traits
 				state.MarkIncomplete();
 		}
 
+		void FlushAccepted(int tick, bool terminal = false)
+		{
+			if (accepted.TryTakeBefore(tick, terminal, out var acceptedTick, out var evidence))
+				WriteRaw("resource-accepted-tick", acceptedTick, evidence);
+		}
+
 		void IBotBuildQueueObserver.OnQueueTransition(in BotQueueTransition transition)
 		{
 			if (state == null || finished)
 				return;
+			FlushAccepted(transition.Tick);
 			WriteRaw("queue-observation", transition.Tick, new
 			{
 				item = transition.ItemId, queue = transition.Queue, producer = transition.ProducerActorId,
@@ -136,7 +163,8 @@ namespace OpenRA.Mods.Cameo.Traits
 				player_active = transition.PlayerActive, producer_live = transition.ProducerLive,
 				cancellation_class = transition.CancellationClass.ToString(), category = transition.Category.ToString()
 			});
-			var evidence = AiEconomyQueueEvidence.Classify(in transition);
+			var evidence = AiEconomyQueueEvidence.Classify(in transition,
+				resolvedEpisodes.Contains(transition.EpisodeId));
 			if (evidence == EconomyQueueEvidenceKind.Unknown)
 				state.MarkIncomplete();
 			else if (evidence == EconomyQueueEvidenceKind.ProvenCancellation)
@@ -144,40 +172,125 @@ namespace OpenRA.Mods.Cameo.Traits
 				var queueId = CancellationQueueId(in transition);
 				if (AiEconomyQueueEvidence.TryCancellation(in transition, queueId, out var cancellation))
 					WriteHealth(AiEconomyHealthSchema.Cancel(Identity(transition.Tick, "cancel"), cancellation));
-				else
+				else if (transition.CancellationClass is not (BotQueueCancellationClass.Destruction
+					or BotQueueCancellationClass.Elimination))
 					state.MarkIncomplete();
 			}
+
+			// Episode resolution bookkeeping for Removed classification: cancel intent,
+			// proven cancellation and proven placement resolve an episode — a later Removed
+			// is the dequeue of an outcome already on record. PlacementOrdered does NOT
+			// resolve: its proof window is still armed, so that Removed stays UNKNOWN.
+			// Bounded like every other recorder set; overflow fails closed.
+			if (transition.EpisodeId != 0)
+			{
+				if (transition.Kind == BotQueueTransitionKind.Removed)
+					resolvedEpisodes.Remove(transition.EpisodeId);
+				else if ((transition.Kind is BotQueueTransitionKind.CancelOrdered
+						or BotQueueTransitionKind.Cancelled or BotQueueTransitionKind.Placed)
+					&& !resolvedEpisodes.Contains(transition.EpisodeId))
+				{
+					if (resolvedEpisodes.Count >= AiEconomyHealthState.MaximumQueues)
+						state.MarkIncomplete();
+					else
+						resolvedEpisodes.Add(transition.EpisodeId);
+				}
+			}
+
 			// Proven Placed remains raw outcome evidence. The pinned economy consumer
 			// accepts pulse/cancel/end only; queue census observes the new state separately.
 		}
 
 		string CancellationQueueId(in BotQueueTransition transition)
 		{
-			string id = null;
-			var count = 0;
+			if (queueIndexTick != transition.Tick)
+			{
+				queueIndexTick = transition.Tick;
+				queueIndex = AiEconomyQueueEvidence.BuildCancellationQueueIndex(
+					OwnConfiguredQueues(), AiEconomyHealthState.MaximumQueues);
+			}
+			return AiEconomyQueueEvidence.ResolveCancellationQueueId(
+				queueIndex, transition.ProducerActorId, transition.Queue);
+		}
+
+		IEnumerable<(uint Producer, string QueueType, string Group)> OwnConfiguredQueues()
+		{
 			foreach (var pair in self.World.ActorsWithTrait<ProductionQueue>())
 			{
 				var queue = pair.Trait;
-				if (pair.Actor.Owner != self.Owner || !groups.Contains(queue.Info.Group))
-					continue;
-				if (++count > AiEconomyHealthState.MaximumQueues)
-					return null;
-				if (pair.Actor.ActorID != transition.ProducerActorId || queue.Info.Group != transition.Queue)
-					continue;
-				// The seam names the group, not the queue trait instance. Ambiguity is UNKNOWN.
-				if (id != null)
-					return null;
-				id = $"{pair.Actor.ActorID}:{queue.Info.Type}:{queue.Info.Group}";
+				if (pair.Actor.Owner == self.Owner && groups.Contains(queue.Info.Group))
+					yield return (pair.Actor.ActorID, queue.Info.Type, queue.Info.Group);
 			}
-			return id;
 		}
 
 		void INotifyResourceAccepted.OnResourceAccepted(Actor actor, Actor refinery, string resourceType, int count, int value)
 		{
 			if (state == null || finished || refinery.Owner != self.Owner)
 				return;
-			WriteRaw("resource-accepted", self.World.WorldTick,
-				AiEconomyHealthSchema.AcceptedResourceEvidence(refinery.ActorID, resourceType, count, value));
+			var tick = self.World.WorldTick;
+			FlushAccepted(tick);
+			if (!accepted.Add(tick, refinery.ActorID, resourceType, count, value))
+				state.MarkIncomplete();
+		}
+	}
+
+	// Record-only rollup: callback rate cannot increase the number of emitted records.
+	// Observe may precede deliveries in a tick, so only advance/terminal drains that tick.
+	internal sealed class EconomyAcceptedTick
+	{
+		internal const int MaximumSamples = 1;
+		internal const int MaximumTypeCharacters = 64;
+		readonly List<object> samples = new(MaximumSamples);
+		int tick = -1;
+		long events, count, value, creditedValue, creditedEvents;
+		bool textTruncated;
+
+		internal bool Add(int atTick, uint refinery, string type, int units, int credited)
+		{
+			if (tick != -1 && tick != atTick)
+				return false;
+			try
+			{
+				// Compute first: an overflow must not publish plausible partial totals.
+				var nextEvents = checked(events + 1);
+				var nextCount = checked(count + units);
+				var nextValue = checked(value + credited);
+				var nextCredit = checked(creditedValue + (AiEconomyHealthState.AcceptedDelivery(credited) ? credited : 0));
+				var nextCreditEvents = checked(creditedEvents + (AiEconomyHealthState.AcceptedDelivery(credited) ? 1 : 0));
+				events = nextEvents;
+				count = nextCount;
+				value = nextValue;
+				creditedValue = nextCredit;
+				creditedEvents = nextCreditEvents;
+				tick = atTick;
+				if (samples.Count < MaximumSamples)
+				{
+					var truncated = type != null && type.Length > MaximumTypeCharacters;
+					textTruncated |= truncated;
+					samples.Add(new { refinery, resource_type = truncated ? type[..MaximumTypeCharacters] : type,
+						resource_type_truncated = truncated, count = units, value = credited,
+						accepted_credit = AiEconomyHealthState.AcceptedDelivery(credited), harvester = (uint?)null });
+				}
+				return true;
+			}
+			catch (OverflowException) { return false; }
+		}
+
+		internal bool TryTakeBefore(int atTick, bool terminal, out int emittedTick, out object evidence)
+		{
+			emittedTick = tick;
+			evidence = null;
+			if (tick == -1 || (!terminal && tick >= atTick))
+				return false;
+			evidence = new { event_count = events, count, value, credited_value = creditedValue,
+				accepted_event_count = creditedEvents, accepted_credit = creditedEvents > 0,
+				harvester = (uint?)null, detail_truncated = textTruncated || events > samples.Count,
+				sample_count = samples.Count, samples = samples.ToArray() };
+			tick = -1;
+			events = count = value = creditedValue = creditedEvents = 0;
+			textTruncated = false;
+			samples.Clear();
+			return true;
 		}
 	}
 	internal readonly record struct EconomyHealthIdentity(int Sequence, int Tick, string Kind,
@@ -204,10 +317,12 @@ namespace OpenRA.Mods.Cameo.Traits
 		};
 
 		internal static string Pulse(EconomyHealthIdentity id, bool active, bool queuesComplete,
-			IReadOnlyList<EconomyQueueSnapshot> queues, int cash, int resources, int capacity, int netSpent)
+			IReadOnlyList<EconomyQueueSnapshot> queues, int cash, int resources, int capacity,
+			int netSpent, string seatState = "active")
 		{
 			var record = Common(id);
 			record.Add("player_active", active);
+			record.Add("seat_state", seatState);
 			record.Add("queues_complete", queuesComplete);
 			record.Add("queues", queues.Select(q => new { queue_id = q.QueueId, item_id = q.ItemId,
 				item = q.Item, state = q.State, state_since_tick = q.StateSinceTick,
@@ -221,9 +336,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			return JsonSerializer.Serialize(record);
 		}
 
-		internal static string End(EconomyHealthIdentity id, bool complete)
+		internal static string End(EconomyHealthIdentity id, bool complete, string seatState = "active")
 		{
 			var record = Common(id);
+			record.Add("seat_state", seatState);
 			record.Add("complete", complete);
 			return JsonSerializer.Serialize(record);
 		}

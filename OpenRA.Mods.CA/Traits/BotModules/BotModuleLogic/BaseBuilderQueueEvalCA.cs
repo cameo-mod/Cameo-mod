@@ -11,9 +11,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Common.Warheads;
+using OpenRA.Primitives;
+using OpenRA.Support;
+using OpenRA.Traits;
 
 namespace OpenRA.Mods.CA.Traits
 {
@@ -32,8 +36,41 @@ namespace OpenRA.Mods.CA.Traits
 		/// due MCV's prerequisite), which ride at their own cost floor under the law (REF-1 B1/B2).
 		/// </summary>
 		public static bool BlockedByCash(int cash, int minCashRequirement, bool isRefinery,
-			bool plannerWant, int productionCost, bool queuedThisTick) =>
-			queuedThisTick || (cash < minCashRequirement && !isRefinery && !(plannerWant && cash >= productionCost));
+			bool plannerWant, int productionCost, bool queuedThisTick, bool starved = false) =>
+			queuedThisTick || (cash < minCashRequirement && !isRefinery && !((plannerWant || starved) && cash >= productionCost));
+
+		/// <summary>
+		/// Cash-starvation escape: a queue whose wanted item has sat under the cash floor since
+		/// <paramref name="blockedSince"/> (-1 = not blocked) for at least <paramref name="starveTicks"/>
+		/// rides at its own cost, like the planner's wants. Units spending the bank back under the
+		/// floor every sweep would otherwise hold the floor out of reach forever. Pure, integer-only.
+		/// </summary>
+		public static bool CashStarved(int blockedSince, int now, int starveTicks) =>
+			starveTicks > 0 && blockedSince >= 0 && now - blockedSince >= starveTicks;
+
+		/// <summary>
+		/// True when the cash floor itself is what holds a wanted item back — the exact floor term of
+		/// <see cref="BlockedByCash"/> (refineries and the planner's affordable wants ride past it).
+		/// The starvation clock runs only while this holds, so a same-tick queue block or a recovered
+		/// bank never counts toward starvation. Pure.
+		/// </summary>
+		public static bool FloorBlocks(int cash, int minCashRequirement, bool isRefinery, bool plannerWant, int productionCost) =>
+			cash < minCashRequirement && !isRefinery && !(plannerWant && cash >= productionCost);
+
+		/// <summary>
+		/// A sweep counts toward starvation only when the cash floor is the ONLY veto: it blocks, no sibling queue
+		/// already took this tick, and no other (pause / mobile-reserve) veto applies. Pure.
+		/// </summary>
+		public static bool StarvationEligible(bool floorBlocks, bool ownCostAffordable, bool queuedThisTick, bool nonCashVeto) =>
+			floorBlocks && ownCostAffordable && !queuedThisTick && !nonCashVeto;
+
+		/// <summary>
+		/// TF-2: the unit side's mobile-production reservation — optional spend (optional defences
+		/// and crawl links included) may not push cash below the reserved floor; army-first
+		/// essentials ride their own exemption. Pure, for the tests.
+		/// </summary>
+		public static bool MobileSpendBlocks(int cash, int productionCost, int reserveFloor, bool essential) =>
+			!essential && reserveFloor > 0 && cash - productionCost < reserveFloor;
 
 		/// <summary>
 		/// TQ3: the placement-type ladder — the planner's crawl want and refinery/fragile rules
@@ -95,9 +132,63 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>Standing + in-flight count has reached a per-building or production-type cap.</summary>
 		public static bool LimitReached(int count, int limit) => count >= limit;
 
+		// S2 (FINDINGS_2026-10-12 §4): the air-target probe, matching BotFogMemory's.
+		static readonly BitSet<TargetableType> AirTargetTypes = new("Air");
+
+		/// <summary>
+		/// S2: a dedicated anti-air structure — every enabled armament can hit air and
+		/// none can hit anything else. A dual-role air/ground turret keeps its ground
+		/// defence role and stays ungated (the FutureTech multiturret is the ground
+		/// defence too); an unarmed building is no defence at all.
+		/// </summary>
+		public static bool IsDedicatedAntiAir(ActorInfo info)
+		{
+			var airArmament = false;
+			foreach (var armament in info.TraitInfos<ArmamentInfo>())
+			{
+				var weapon = armament.WeaponInfo;
+				if (weapon == null || !weapon.IsValidTarget(AirTargetTypes) ||
+					weapon.ValidTargets.Any(t => t.ToString() != "Air"))
+					return false;
+
+				airArmament = true;
+			}
+
+			return airArmament;
+		}
+
+		/// <summary>S2: a dedicated-AA pick waits for observed enemy air capability;
+		/// every other pick is unchanged.</summary>
+		public static bool AirDefenceAdmits(bool dedicatedAntiAir, bool airThreatObserved) =>
+			!dedicatedAntiAir || airThreatObserved;
+
 		/// <summary>GetProducibleBuilding's admit test: no limit configured, or standing plus producing under it.</summary>
 		public static bool LimitAdmits(bool hasLimit, int limit, int standing, int producing) =>
 			!hasLimit || standing + producing < limit;
+
+		/// <summary>
+		/// PUSH-1 (bank overflow): the conditioned overflow rung is armed only while a
+		/// BotOverflowPolicy is enabled and the bank exceeds its line — an absent or disabled
+		/// policy leaves the legacy ladder bit-identical and consumes no RNG.
+		/// </summary>
+		public static bool OverflowArmed(bool policyEnabled, int cash, int overflowCash) =>
+			policyEnabled && overflowCash > 0 && cash > overflowCash;
+
+		/// <summary>
+		/// PUSH-1: an overflow candidate survives the production-type cap only while the fraction
+		/// path's count — standing buildings of the name or its PlaceBuildingVariants, plus the
+		/// name's in-flight production — is under the per-type limit. typeLimit &lt;= 0 = uncapped.
+		/// </summary>
+		public static bool OverflowTypeAdmits(int standingOrVariants, int producing, int typeLimit) =>
+			typeLimit <= 0 || !LimitReached(standingOrVariants + producing, typeLimit);
+
+		/// <summary>
+		/// PUSH-1: the overflow pick draws only over a non-empty candidate set — a decline consumes
+		/// zero draws, so an armed rung that cannot convert never shifts the bot's RNG stream.
+		/// </summary>
+		public static T DrawOverflowPick<T>(IReadOnlyList<T> candidates, MersenneTwister rng)
+			where T : class =>
+			candidates.Count == 0 ? null : candidates.RandomOrDefault(rng);
 
 		/// <summary>CB10: a naval structure needs water inside the base perimeter and a nearby buildable edge —
 		/// the area scan stays lazy: it is consulted only when the other clauses demand it.</summary>
@@ -495,6 +586,53 @@ namespace OpenRA.Mods.CA.Traits
 		public static bool PlugInstallProven(bool slotDefinesType, bool requirementKeyed, bool acceptsNow)
 			=> slotDefinesType && !requirementKeyed && !acceptsNow;
 
+		/// <summary>PLACEMENT-PROOF-LOCATION-FIX (01a131ba): the occupied-cell proof —
+		/// an own, live, name-matching actor occupies the ordered site cell itself. The
+		/// ActorMap hit at `site` carries only actors that INFLUENCE that cell; a building
+		/// whose footprint marks its top-left '_' never does, so its Location cell is
+		/// provably absent. Proven when such an actor is found at the site cell.</summary>
+		public static bool OccupiedSiteProven(bool live, bool own, bool nameMatches)
+			=> live && own && nameMatches;
+
+		/// <summary>PLACEMENT-PROOF-LOCATION-FIX (01a131ba): the location fallback —
+		/// `Tiles(location)` skips '_' cells, so a '_'-top-left footprint (every
+		/// ^TDPROC refinery, td_gdi_repairfacility) never occupies its own Location in
+		/// BuildingInfluence and the occupied-cell proof can never find it at `site`.
+		/// Its own Location IS still `site` (the order's top-left), so an own, live,
+		/// name-matching actor whose Location equals the ordered site proves placement:
+		/// name+owner+liveness already bind the candidate, and a matching actor standing
+		/// at the order's top-left is exactly the evidence the request asked for.</summary>
+		public static bool LocationSiteProven(bool live, bool own, bool nameMatches, bool locationEqualsSite)
+			=> live && own && nameMatches && locationEqualsSite;
+
+		/// <summary>QUEUE-REMOVAL-DISCRIMINATOR (01a13686): the removal-cause ladder for an
+		/// item that left its queue — every rung is event-local state resolved at the emit
+		/// tick, never intent or correlation. Elimination trumps all (the seat ended); a
+		/// dead or disposed producer clears its queue on every lifecycle path (kill, sell,
+		/// demolish, transform — INotifyKilled/Selling/BeforeTransform all ClearQueue); a
+		/// live producer owned by someone else was captured (OnOwnerChanged → ClearQueue
+		/// is unconditional). DISCRIMINATOR-REPAIR (01a13908, Sol adjudication
+		/// 2026-10-14): the buildable-absence rung emits Unbuildable as a DIAGNOSTIC
+		/// predicate only — CancelUnbuildableItems is cached-set gated and prefers
+		/// migration, so observed absence is not a receipt that the engine evicted this
+		/// item (an uninstrumented removal plus prerequisite loss before the next probe
+		/// reads identically). Evidence classifies Unbuildable UNKNOWN like None;
+		/// queueSeen still gates the probe because a stale watch on a live, owned queue
+		/// is not even diagnostic buildability evidence.</summary>
+		public static BotQueueCancellationClass RemovalCauseClass(
+			bool playerEliminated, bool producerLive, bool producerOwned, bool queueSeen, bool itemBuildable)
+		{
+			if (playerEliminated)
+				return BotQueueCancellationClass.Elimination;
+			if (!producerLive)
+				return BotQueueCancellationClass.Destruction;
+			if (!producerOwned)
+				return BotQueueCancellationClass.Captured;
+			if (queueSeen && !itemBuildable)
+				return BotQueueCancellationClass.Unbuildable;
+			return BotQueueCancellationClass.None;
+		}
+
 		/// <summary>
 		/// REPAIR-B3 (SPEC_2026-10-09 §3): the admission gate — reserve the claim's WHOLE covered
 		/// set atomically under the provider's current coverage-model version. False = refuse
@@ -561,6 +699,80 @@ namespace OpenRA.Mods.CA.Traits
 			law?.ReleaseRefineryAnchors(owner) ?? 0;
 	}
 
+	/// <summary>
+	/// Per-producer lifecycle of the cash-starvation clock. A run is (producer, wanted item) and counts only
+	/// sweeps that are ELIGIBLE: queue idle, producer available, the cash floor the only veto. Any ineligible
+	/// sweep, a different wanted item, an admission, or a producer leaving the live set drops the run, so a
+	/// later floor block always restarts from zero and no item inherits another's age. Pure state, integer
+	/// ticks, no RNG; runs persist through game-save data (StartTick survives save/load) while all other
+	/// manager sweep state stays transient.
+	/// </summary>
+	public sealed class CashStarvationClock
+	{
+		readonly Dictionary<uint, (string Item, int Since)> runs = new Dictionary<uint, (string Item, int Since)>();
+
+		/// <summary>Save eligible starvation runs in producer order for deterministic game-save data.</summary>
+		public List<MiniYamlNode> SaveState() => runs.OrderBy(kv => kv.Key)
+			.Select(kv => new MiniYamlNode("Run", "", new List<MiniYamlNode>
+			{
+				new("Producer", FieldSaver.FormatValue(kv.Key)),
+				new("Item", FieldSaver.FormatValue(kv.Value.Item)),
+				new("Since", FieldSaver.FormatValue(kv.Value.Since))
+			})).ToList();
+
+		/// <summary>Restore the exact qualifying start tick; a missing run keeps its normal fresh-start behavior.</summary>
+		public void RestoreState(IEnumerable<MiniYamlNode> savedRuns)
+		{
+			runs.Clear();
+			foreach (var savedRun in savedRuns ?? Enumerable.Empty<MiniYamlNode>())
+			{
+				var fields = savedRun.Value.ToDictionary();
+				var producer = FieldLoader.GetValue<uint>("Producer", fields["Producer"].Value);
+				var item = FieldLoader.GetValue<string>("Item", fields["Item"].Value);
+				var since = FieldLoader.GetValue<int>("Since", fields["Since"].Value);
+				if (producer == 0 || string.IsNullOrEmpty(item) || since < 0 || !runs.TryAdd(producer, (item, since)))
+					throw new InvalidDataException("Invalid or duplicate cash-starvation clock save state.");
+			}
+		}
+
+		/// <summary>Feed one sweep: an eligible sweep starts (or continues) the run for this item; anything else ends it.</summary>
+		public void Observe(uint producer, string item, bool eligible, int now)
+		{
+			if (!eligible)
+			{
+				runs.Remove(producer);
+				return;
+			}
+
+			if (!runs.TryGetValue(producer, out var run) || run.Item != item)
+				runs[producer] = (item, now);
+		}
+
+		/// <summary>The producer cannot take a new item this sweep (busy, held, relocation-held, latched, nothing wanted) or just admitted one.</summary>
+		public void Reset(uint producer) => runs.Remove(producer);
+
+		/// <summary>A global placement latch prevents every producer from progressing.</summary>
+		public void ResetAll() => runs.Clear();
+
+		/// <summary>Drop every producer not seen this sweep (disabled or destroyed queues).</summary>
+		public void Retain(ISet<uint> live)
+		{
+			List<uint> gone = null;
+			foreach (var producer in runs.Keys)
+				if (!live.Contains(producer))
+					(gone ??= new List<uint>()).Add(producer);
+
+			if (gone != null)
+				foreach (var producer in gone)
+					runs.Remove(producer);
+		}
+
+		public bool Starved(uint producer, string item, int now, int starveTicks) =>
+			runs.TryGetValue(producer, out var run) && run.Item == item && BaseBuilderQueueEvalCA.CashStarved(run.Since, now, starveTicks);
+
+		public int Tracked => runs.Count;
+	}
+
 	// REPLAY-HEALTH-LOGGER (ACK-2, task 01a12023): record-only queue transitions for the
 	// bounded runtime logger. Observers live on the bot's PlayerActor, are resolved once, and
 	// must not issue orders, mutate world state, or consume RNG. Schema-2 contract: Cancelled
@@ -595,7 +807,28 @@ namespace OpenRA.Mods.CA.Traits
 
 	public enum BotQueueTransitionReason { None, LimitReached, NoRefinerySite, SaturationLatch, RelocationLatch, DemandHold, CrawlHold, FrontBackHold, DemandCancel }
 
-	public enum BotQueueCancellationClass { None, Production, Destruction, Elimination }
+	public enum BotQueueCancellationClass
+	{
+		None,
+		Production,
+		Destruction,
+		Elimination,
+
+		/// <summary>QUEUE-REMOVAL-DISCRIMINATOR (01a13686): the producer actor is alive
+		/// but owned by another player at the emit tick — an ownership change cleared
+		/// the queue (INotifyOwnerChanged → ClearQueue). A proven capture, not an
+		/// unproven drop.</summary>
+		Captured,
+
+		/// <summary>QUEUE-REMOVAL-DISCRIMINATOR (01a13686): the item left a live, owned,
+		/// still-observed queue while absent from that queue's own BuildableItems set —
+		/// the exact set CancelUnbuildableItems diffs to evict. DISCRIMINATOR-REPAIR
+		/// (01a13908, Sol adjudication 2026-10-14): diagnostic-only, NEVER
+		/// evidence-admitted — the engine's eviction is cached-set gated and prefers
+		/// migration, so absence is not a receipt the routine ran. Serialized on the
+		/// raw row for diagnosis; the capture latches UNKNOWN like None.</summary>
+		Unbuildable
+	}
 
 	public readonly struct BotQueueTransition
 	{
@@ -715,8 +948,13 @@ namespace OpenRA.Mods.CA.Traits
 	/// cleanup or cancellation can remove the same item within the window.</summary>
 	public sealed class BotQueuePendingTerminal
 	{
-		/// <summary>QueueOrder latency is ~1-2 ticks; a request older than this never resolved.</summary>
-		public const int MaxInFlightTicks = 8;
+		/// <summary>QueueOrder latency is ~1-2 ticks on an idle wire, but the observed
+		/// PlaceBuilding intent→removal lag reaches ~19 ticks under load
+		/// (RCA_2026-10-13_placement_order_never_lands_devin.md: 12–19 ticks across the
+		/// ra1/m1/m2 sentinel episodes). A request older than this never resolved; the
+		/// bound covers the worst observed order latency plus margin so a delayed-wire
+		/// placement can still arm its proof window instead of expiring Removed.</summary>
+		public const int MaxInFlightTicks = 24;
 
 		public object Item;
 		public string ItemName;

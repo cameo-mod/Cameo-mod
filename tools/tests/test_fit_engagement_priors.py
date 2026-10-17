@@ -1,11 +1,14 @@
 """Tier-1 fitter tests (TIER1_FITTER_SPEC §9.1): cell math, shrinkage, sparse fallback, bounds,
 determinism, seen-vs-truth separation, ledger hashing, timing/response tables, yaml shape."""
+import json
 import pathlib
 import sys
+from unittest import mock
 
 import pytest
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "ai"))
+import capture_provenance  # noqa: E402
 import fit_engagement_priors as fp  # noqa: E402
 
 PROFILES = {
@@ -547,3 +550,42 @@ def test_global_scale_milli_key_emitted_and_clamped():
     cold["seen"]["start"]["predicted_enemy_surviving_permille"] = 0
     res3 = _fit([cold] * 20)
     assert res3["global_scale_milli"] == fp.MIN_MILLI
+
+
+def _gate_run(d):
+    """fp.main() against one batch dir; returns (exit_code, captured-fit-data)."""
+    captured = {}
+    def fake_fit(data, profiles, priors, prev=None, ledger_hash=None):
+        captured.update(data)
+        return {}
+    with mock.patch.object(sys, "argv", ["prog", str(d)]), \
+            mock.patch.object(fp, "load_profiles", return_value=({}, {}, "h")), \
+            mock.patch.object(fp, "versus_priors", return_value=({}, [])), \
+            mock.patch.object(fp, "report", return_value=""), \
+            mock.patch.object(fp, "fit", side_effect=fake_fit):
+        return fp.main(), captured
+
+
+def _gate_batch(root, marked=None):
+    """Batch dir with one engagement row in Logs; marked None leaves it
+    unbound (gate rejects), True sentinel-binds (skips), False scoreable-binds."""
+    logs = root / "Logs"
+    logs.mkdir(parents=True)
+    (logs / "cameo-ai-engagements.jsonl").write_text(
+        json.dumps(_rec()) + "\n", encoding="utf-8")
+    if marked is not None:
+        capture_provenance.write_provenance(
+            root, capture_kind="sentinel_diagnostic" if marked else "match_batch",
+            scoreable=not marked, game_uids=["g1"])
+    return root
+
+
+def test_main_gate_sentinel_skips_unbound_rejects_bound_loads(tmp_path):
+    # main()'s per-dir stream gate: sentinel engagements never reach fit(),
+    # unbound evidence rejects, bound evidence loads.
+    code, cap = _gate_run(_gate_batch(tmp_path / "sentinel", marked=True))
+    assert code == 0 and cap["engagements"] == []
+    with pytest.raises(ValueError):
+        _gate_run(_gate_batch(tmp_path / "unbound"))
+    code, cap = _gate_run(_gate_batch(tmp_path / "bound", marked=False))
+    assert code == 0 and cap["engagements"] == [_rec()]

@@ -15,13 +15,24 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/ai"))
 
 import run_league
+import capture_provenance
 
 
-def write_cell(cell_dir: pathlib.Path, rows: list[dict], completed: int = 1) -> None:
+def bind_cell(cell_dir: pathlib.Path) -> None:
+    """Scoreable test provenance: unbound fixtures fail closed at gated sinks."""
+    uids = set()
+    for f in cell_dir.rglob("*.jsonl"):
+        uids |= capture_provenance.file_game_uids(f)
+    capture_provenance.write_provenance(
+        cell_dir, capture_kind="match_batch", scoreable=True, game_uids=sorted(uids))
+
+
+def write_cell(cell_dir: pathlib.Path, rows: list[dict], completed: int = 1,
+               match_status: str | None = None) -> None:
     cell_dir.mkdir(parents=True, exist_ok=True)
     (cell_dir / "batch_summary.json").write_text(json.dumps({
         "completed": completed, "stalled": 0, "timed_out": 0, "died": 0,
-        "new_exceptions": [],
+        "new_exceptions": [], "unknown": int(match_status == "UNKNOWN"),
     }), encoding="utf-8")
     matches = {}
     for row in rows:
@@ -38,7 +49,11 @@ def write_cell(cell_dir: pathlib.Path, rows: list[dict], completed: int = 1) -> 
                 }
                 for r in game_rows
             ]
-            fh.write(json.dumps({"name": game, "bot_outcomes": outcomes}) + "\n")
+            row = {"name": game, "bot_outcomes": outcomes}
+            row.update(status=match_status or "ok",
+                       health_status=match_status or "OBSERVED_HEALTHY")
+            fh.write(json.dumps(row) + "\n")
+    bind_cell(cell_dir)
 
 
 def candidate_won(game, slot, spawn, member, opp_slot, opp_spawn):
@@ -93,6 +108,18 @@ class SpecTests(unittest.TestCase):
 
 
 class AggregateTests(unittest.TestCase):
+    def test_unknown_economy_health_is_not_scored(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = pathlib.Path(td)
+            cell = root / "hard_vs_classic__td_gdi__m1"
+            write_cell(cell, candidate_won("g1", 0, 0, "classic", 1, 1),
+                       completed=0, match_status="UNKNOWN")
+            spec = {"candidate": "hard", "members": ["classic"],
+                    "maps": ["m1"], "factions": ["td_gdi"]}
+            summary = run_league.aggregate(root, spec)
+            self.assertEqual(summary["decided_matches"], 0)
+            self.assertEqual(summary["unknown"], 1)
+
     def test_candidate_perspective_only_no_double_count(self):
         with tempfile.TemporaryDirectory() as td:
             root = pathlib.Path(td)

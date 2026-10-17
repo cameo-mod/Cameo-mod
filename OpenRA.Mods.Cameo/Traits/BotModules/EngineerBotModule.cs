@@ -168,6 +168,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Ticks a dormant capture mission rests before its target may be tried again.")]
 		public readonly int CaptureDormantTicks = 3000;
 
+		[Desc("S1 (FINDINGS_2026-10-12 §3): how many dormant episodes may stack on one mission — each shelve",
+			"costs the next episode one more CaptureDormantTicks (episode N rests N ticks of shelf), so a target",
+			"that keeps killing or repelling engineers backs off instead of churning on the flat shelf. 1 = flat;",
+			"caps the multiplier, never the date — a far-future shelf still expires.")]
+		public readonly int CaptureDormantEscalationMax = 1;
+
 		[Desc("Consecutive released/outmatched retreats on the same capture mission that shelve it for",
 			"CaptureDormantTicks. The death streak (CaptureFailuresBeforeDormant) is unchanged — a voluntary",
 			"retreat is still not a failure — but a target whose route stays hot through every recheck produces",
@@ -223,7 +229,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	public enum EngineerCheck { Working, Done, Stuck, Gone }
 
 	public class EngineerBotModule : ConditionalTrait<EngineerBotModuleInfo>, IBotTick, IBotPositionsUpdated, IGameSaveTraitData,
-		IBotProtectionRequestProvider, IBotCaptureClaimSource
+		IBotProtectionRequestProvider, IBotCaptureClaimSource, IBotCapturerTargetAllowance
 	{
 		const string LeaseOwner = nameof(EngineerBotModule);
 
@@ -254,10 +260,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly Dictionary<string, int> missionFailStreak = [];
 		readonly Dictionary<string, int> missionRetreatStreak = [];
 		readonly Dictionary<string, int> dormantUntil = [];
+		readonly Dictionary<string, int> dormantEpisodes = [];
 
 		// The one escorted capture in progress: the mission waits (no attempt) until the escort holds the target area.
 		sealed class EscortPlan
 		{
+			public BotClaimEpisode Episode;
 			public Actor Target;
 			public string MissionId;
 			public int SinceTick;
@@ -267,6 +275,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		EscortPlan escort;
+		readonly BotClaimEpisodeCounter escortEpisodes;
 
 		// The squad manager serves a protection request only at or above its PrepositionMinThreatValue: a request valued at
 		// a few riflemen (the first flag-on match published 440-1000) is dropped in silence. Read the bar from the squad
@@ -330,11 +339,59 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 		}
 
+		// ENGINEER-CAP-10PCT (maintainer 2026-10-12): +1 per KNOWN capturable target this bot has
+		// fog-fairly seen and not captured — neutral tech buildings plus priority-listed enemy
+		// structures. Reported raw; the unit builder clamps it into the capturer cap. §19.5's fog
+		// exception does NOT apply here: the allowance only counts honestly-visible targets.
+		int capturerAllowanceTick = -1, capturerAllowanceCached;
+
+		public int CapturerTargetAllowance
+		{
+			get
+			{
+				if (IsTraitDisabled)
+					return 0;
+
+				if (capturerAllowanceTick == world.WorldTick)
+					return capturerAllowanceCached;
+
+				capturerAllowanceTick = world.WorldTick;
+				var count = 0;
+				foreach (var a in world.Actors)
+				{
+					if (a.IsDead || !a.IsInWorld || a.Owner == player)
+						continue;
+
+					if (a.TraitOrDefault<CaptureManager>() == null || !a.CanBeViewedByPlayer(player))
+						continue;
+
+					var name = a.Info.Name.ToLowerInvariant();
+					var relationship = player.RelationshipWith(a.Owner);
+					if (!CountsTowardCapturerAllowance(
+							relationship == PlayerRelationship.Neutral,
+							relationship == PlayerRelationship.Enemy && priorityCapturableTypes.Contains(name),
+							capturableTypes.Count == 0 || capturableTypes.Contains(name)))
+						continue;
+
+					count++;
+				}
+
+				return capturerAllowanceCached = count;
+			}
+		}
+
+		/// <summary>Pure seam: a target feeds the engineer allowance only as a neutral tech building
+		/// or a priority-listed enemy structure, inside the capturable whitelist when one exists.</summary>
+		public static bool CountsTowardCapturerAllowance(bool neutralOwned, bool enemyPriorityListed, bool capturableWhitelistOk)
+			=> capturableWhitelistOk && (neutralOwned || enemyPriorityListed);
+
 		public EngineerBotModule(Actor self, EngineerBotModuleInfo info)
 			: base(info)
 		{
 			world = self.World;
 			player = self.Owner;
+			escortEpisodes = new BotClaimEpisodeCounter(player.InternalName, nameof(EngineerBotModule),
+				self.Info.TraitInfos<EngineerBotModuleInfo>().ToList().IndexOf(info));
 			maximumCaptureTargetOptions = Math.Max(1, info.MaximumCaptureTargetOptions);
 
 			var shared = self.Info.TraitInfos<CaptureManagerBotModuleCAInfo>().FirstOrDefault();
@@ -1264,6 +1321,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				escort = new EscortPlan
 				{
+					Episode = escortEpisodes.Admit(),
 					Target = t, MissionId = CaptureMissionId(t.Info.Name, t.ActorID), SinceTick = world.WorldTick, DefenceValue = defence,
 					InitialDefenceValue = defence
 				};
@@ -1304,7 +1362,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				Player = player, MissionId = escort.MissionId, Event = BotMissionEvent.Denied, Reason = BotMissionReasons.NoUnits,
 				Executor = "Engineers", MissionType = "capture", TargetCell = t.Location, Value = escort.DefenceValue
 			});
-			dormantUntil[escort.MissionId] = tick + Info.CaptureDormantTicks;
+			Shelve(escort.MissionId, tick);
 			BotMissionLog.Write(new BotMissionRecord
 			{
 				Player = player, MissionId = escort.MissionId, Event = BotMissionEvent.Dormant, Reason = BotMissionReasons.NoUnits,
@@ -1317,7 +1375,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		IReadOnlyList<BotProtectionRequest> IBotProtectionRequestProvider.ProtectionRequests =>
 			escort == null || escort.Target.IsDead || !escort.Target.IsInWorld
 				? []
-				: [new BotProtectionRequest(escort.Target.Location, EscortRequestValue(escort.DefenceValue, EscortRequestFloor()), world.WorldTick + Info.EscortRequestTicks)];
+				: [new BotProtectionRequest(escort.Target.Location, EscortRequestValue(escort.DefenceValue, EscortRequestFloor()), world.WorldTick + Info.EscortRequestTicks, escort.Episode)];
 
 		/// <summary>A target already carrying `max` live capture attempts takes no more (max ≤ 0: no limit).</summary>
 		public static bool TargetFull(int liveAttempts, int max) => max > 0 && liveAttempts >= max;
@@ -1331,6 +1389,26 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		/// <summary>The dormant shelf's trigger, free of world state so it can be tested.</summary>
 		public static bool GoesDormant(int failStreak, int threshold) => threshold > 0 && failStreak >= threshold;
+
+		/// <summary>S1: the escalating shelf. Episode 1 rests CaptureDormantTicks; every further shelve of the
+		/// same mission adds another, capped at CaptureDormantEscalationMax × base. Free of world state.</summary>
+		public static int DormantWindowTicks(int baseTicks, int episode, int escalationMax)
+		{
+			if (baseTicks <= 0)
+				return 0;
+			var multiplier = Math.Clamp(episode, 1, Math.Max(1, escalationMax));
+			return (int)Math.Min(int.MaxValue, (long)baseTicks * multiplier);
+		}
+
+		/// <summary>Parks a mission on the dormant shelf for this episode's escalated window.</summary>
+		int Shelve(string missionId, int tick)
+		{
+			var episode = dormantEpisodes.GetValueOrDefault(missionId) + 1;
+			dormantEpisodes[missionId] = episode;
+			var until = tick + DormantWindowTicks(Info.CaptureDormantTicks, episode, Info.CaptureDormantEscalationMax);
+			dormantUntil[missionId] = until;
+			return until;
+		}
 
 		bool Dormant(Actor target) =>
 			dormantUntil.TryGetValue(CaptureMissionId(target.Info.Name, target.ActorID), out var until) && world.WorldTick < until;
@@ -1423,7 +1501,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (GoesDormant(streak, Info.CaptureFailuresBeforeDormant))
 				{
 					missionFailStreak.Remove(job.MissionId);
-					dormantUntil[job.MissionId] = world.WorldTick + Info.CaptureDormantTicks;
+					Shelve(job.MissionId, world.WorldTick);
 					BotMissionLog.Write(new BotMissionRecord
 					{
 						Player = player, MissionId = job.MissionId, Event = BotMissionEvent.Dormant, Reason = BotMissionReasons.Outmatched,
@@ -1438,7 +1516,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (GoesDormant(retreats, Info.CaptureRetreatsBeforeDormant))
 				{
 					missionRetreatStreak.Remove(job.MissionId);
-					dormantUntil[job.MissionId] = world.WorldTick + Info.CaptureDormantTicks;
+					Shelve(job.MissionId, world.WorldTick);
 					BotMissionLog.Write(new BotMissionRecord
 					{
 						Player = player, MissionId = job.MissionId, Event = BotMissionEvent.Dormant, Reason = BotMissionReasons.Outmatched,
@@ -1458,6 +1536,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IGameSaveTraitData.ResolveTraitData(Actor self, MiniYaml data)
 		{
+			// Existing saves contain no escort admission history. Identity remains UNKNOWN after load;
+			// do not change legacy save fields, orders or restore behavior to manufacture provenance.
+			escortEpisodes.Invalidate();
+			if (escort != null)
+				escort.Episode = default;
 			if (self.World.IsReplay)
 				return;
 

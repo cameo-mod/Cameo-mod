@@ -29,6 +29,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			return poolCount >= maxIdleUnits || (idleUnitsValue >= requiredValue && countGateMet);
 		}
 
+		/// <summary>M13 tempo min-wave floor (BV_m13_liveness): raises only the count bar of the
+		/// ordinary gate; 0/off is byte-identical. MaxIdleUnits overflow, the value arm and the
+		/// M13 urgent/deadline path never see this floor.</summary>
+		public static int RequiredSize(int requiredSize, int tempoMinWaveUnits) =>
+			System.Math.Max(requiredSize, tempoMinWaveUnits);
+
 		/// <summary>A Defend mission holds the pool while its hold window is unexpired;
 		/// the clock resets when a different region re-publishes (checked by the caller).</summary>
 		public static bool DefendHoldActive(int heldTicks, int holdTicks)

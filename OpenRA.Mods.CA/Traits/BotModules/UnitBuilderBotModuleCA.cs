@@ -11,8 +11,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.AS.Traits;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Primitives;
 using OpenRA.Support;
 using OpenRA.Traits;
 
@@ -45,6 +47,24 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Minimum duration between building a specific unit.")]
 		public readonly Dictionary<string, int> UnitIntervals = null;
 
+		[Desc("S1 (FINDINGS_2026-10-12 §3): live capturer units (engineers and kin) at most this percent",
+			"of live armed infantry — the engineer:combat-infantry ratio. 0 disables. BotLimits",
+			".CapturerInfantryLimitPct overrides per difficulty; the switch gate keeps it off classic.")]
+		public readonly int CapturerInfantryLimitPct = 0;
+
+		[Desc("S1: live capturers below this floor are always admitted — the capture capability",
+			"survives even before the infantry army exists.")]
+		public readonly int CapturerMinimumUnits = 2;
+
+		[Desc("S1b (ENGINEER-CAP-10PCT, maintainer 2026-10-12): most extra capturers admitted on top",
+			"of the ratio cap while KNOWN uncaptured capturable targets remain (+1 per fog-fair target",
+			"the engineer owner reports through IBotCapturerTargetAllowance). 0 = no allowance.")]
+		public readonly int CapturerAllowanceMax = 4;
+
+		[Desc("S1b: fallback for BotLimits.EngineerCompletionIntervalTicks on a ruleset without the",
+			"difficulty line — minimum ticks between capturer completions. 0 = off.")]
+		public readonly int EngineerCompletionIntervalTicks = 0;
+
 		[Desc("How often should the unit builder check to build more units")]
 		public readonly int UnitBuilderInterval = 0;
 
@@ -54,6 +74,11 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Only queue construction of a new unit when above this requirement.",
 			"BotLimits.MaximiseProductionCashRequirement overrides this per difficulty (DESIGN §19.1).")]
 		public readonly int MaximiseProductionCashRequirement = 10000;
+
+		[Desc("M13 tempo (BV_m13_liveness): non-zero arms the bank-saturation override on this instance.",
+			"The cash bar itself is the tier's BotLimits.BankSaturationCash; SwitchCondition must exclude",
+			"classic on this shared @generic instance. 0 = off, bit-identical.")]
+		public readonly int BankSaturationCash = 0;
 
 		[Desc("Ticks between samples of the enemy army for adaptive counter-production (BotLimits.AdaptiveCounterWeight).")]
 		public readonly int AdaptiveObservationInterval = 250;
@@ -113,6 +138,15 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Maximum ticks before selecting a new composition.")]
 		public readonly int MaxCompositionSelectInterval = 7500;
 
+		[Desc("TF-2 (turtle regression increment 2): percentage of spendable cash held for mobile",
+			"production while the offensive pool needs replenishment — optional buildings must leave",
+			"it unspent. 0 = off; essential items (yard/refinery/power/first factory) are exempt.")]
+		public readonly int ReserveMobileProductionShare = 0;
+
+		[Desc("TF-2: alive offensive-role units below which the pool counts as needing replenishment.",
+			"The reserve holds only while the pool is under this floor.")]
+		public readonly int ReserveArmyFloor = 8;
+
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
 			base.RulesetLoaded(rules, ai);
@@ -131,9 +165,13 @@ namespace OpenRA.Mods.CA.Traits
 		public override object Create(ActorInitializer init) { return new UnitBuilderBotModuleCA(init.Self, this); }
 	}
 
-	public class UnitBuilderBotModuleCA : ConditionalTrait<UnitBuilderBotModuleCAInfo>, IBotTick, IBotNotifyIdleBaseUnits, IBotRequestUnitProduction, IGameSaveTraitData, IBotAircraftBuilder, INotifyActorDisposing
+	public class UnitBuilderBotModuleCA : ConditionalTrait<UnitBuilderBotModuleCAInfo>, IBotTick, IBotNotifyIdleBaseUnits, IBotRequestUnitProduction, IGameSaveTraitData, IBotAircraftBuilder, INotifyActorDisposing, IBotUnitProductionGateInfo, IBotMobileSpendReserve
 	{
 		public const int FeedbackTime = 30; // ticks; = a bit over 1s. must be >= netlag.
+
+		// S1b (maintainer 2026-10-12): the flat capturer-ratio ceiling — a difficulty line may only
+		// go LOWER, never higher. Clamped inside CapturerCapAdmits so the invariant is testable.
+		public const int CapturerLimitPctCeiling = 10;
 
 		readonly World world;
 		readonly Player player;
@@ -163,11 +201,26 @@ namespace OpenRA.Mods.CA.Traits
 		TechTree techTree;
 
 		IBotRequestPauseUnitProduction[] requestPause;
+		IBotUnitProductionObserver[] unitObservers;
 		int idleUnitCount;
 		int currentQueueIndex = 0;
 		PlayerResources playerResources;
 		BotLimits botLimits;
 		BaseBuilderBotModuleCA baseBuilder;
+
+		// TF-2: the mobile-production reservation ledger (world-free) and the offensive-pool
+		// replenish check — recomputed at the module's own cadence, so the standing share can
+		// flap off the moment the pool is full while in-flight items stay tracked per sweep.
+		readonly UnitSpendReservation mobileReserve = new();
+		int nextPoolCheckTick;
+		bool poolNeedsReplenish;
+
+		static readonly HashSet<string> OffensiveRoles = new(StringComparer.Ordinal)
+		{
+			BotUnitRole.Frontline, BotUnitRole.Skirmisher, BotUnitRole.AntiInfantry,
+			BotUnitRole.AntiArmour, BotUnitRole.Artillery, BotUnitRole.AntiAir,
+			BotUnitRole.Gunship, BotUnitRole.Fighter, BotUnitRole.Bomber
+		};
 
 		int ticks;
 		int openingDefenseTicks;
@@ -189,6 +242,147 @@ namespace OpenRA.Mods.CA.Traits
 
 		int MaximiseProductionCash => botLimits != null && botLimits.Info.MaximiseProductionCashRequirement >= 0
 			? botLimits.Info.MaximiseProductionCashRequirement : Info.MaximiseProductionCashRequirement;
+
+		// S1 (FINDINGS_2026-10-12 §3): engineer:combat-infantry ratio cap — OFF for classic
+		// (switchesActive is only ever true under genericbot), so a bot's share of the
+		// unit mix can never stack capturers past the difficulty-scaled portion of its
+		// infantry. Difficulty ladder wins over the module default, like every BotLimits override.
+		int CapturerLimitPct
+		{
+			get
+			{
+				if (!switchesActive)
+					return 0;
+				if (botLimits != null && botLimits.Info.CapturerInfantryLimitPct >= 0)
+					return botLimits.Info.CapturerInfantryLimitPct;
+				return Info.CapturerInfantryLimitPct;
+			}
+		}
+
+		// S1 pure seam: cap = floor(armed infantry * pct / 100) + the capturable-target allowance,
+		// floored at capturerMinimumUnits so capture capability survives an empty infantry count.
+		// S1b tightens it (ENGINEER-CAP-10PCT): pct never exceeds CapturerLimitPctCeiling (a
+		// difficulty may only go lower), at most one capturer sits in production, and completions
+		// keep a minimum interval while no known target justifies the allowance. Self-correcting:
+		// over-cap engineers die back or succeed before more queue.
+		public static bool CapturerCapAdmits(int capturerLimitPct, int capturerUnits, int armedInfantryUnits,
+			int capturerMinimumUnits, int capturerAllowanceMax, int knownCapturableTargets,
+			int queuedCapturers, int ticksSinceLastCompletion, int completionIntervalTicks)
+		{
+			var pct = Math.Min(CapturerLimitPctCeiling, Math.Max(0, capturerLimitPct));
+			if (pct <= 0)
+				return true;
+
+			// One capturer in production at a time: a queued or building one blocks the next.
+			if (queuedCapturers >= 1)
+				return false;
+
+			var allowance = Math.Min(Math.Max(0, capturerAllowanceMax), Math.Max(0, knownCapturableTargets));
+
+			// Minimum interval between completions — skipped while free targets remain.
+			if (allowance <= 0 && completionIntervalTicks > 0 && ticksSinceLastCompletion >= 0 &&
+				ticksSinceLastCompletion < completionIntervalTicks)
+				return false;
+
+			var cap = Math.Max(capturerMinimumUnits, (int)Math.Floor(armedInfantryUnits * (long)pct / 100.0)) + allowance;
+			return capturerUnits < cap;
+		}
+
+		// F1 (lead ruling 2026-10-12): the cap is armed only above 0 — hoisted ahead of
+		// the world scan so an off cap (classic, where CapturerLimitPct reads 0) never
+		// pays the army walk. CapturerCapAdmits keeps its own <=0 admit as the invariant.
+		public static bool CapturerCapActive(int capturerLimitPct) => capturerLimitPct > 0;
+
+		// "Combat infantry" for the ratio: an actor the enemy would target as Infantry
+		// (the Infantry targetable type, the same marker squads use) that actually carries
+		// a weapon. Capture bodies, unarmed medics/mechanics and slaved units never count.
+		static readonly BitSet<TargetableType> InfantryTargetTypes = new("Infantry");
+
+		static bool IsArmedInfantry(ActorInfo info) =>
+			info.GetAllTargetTypes().Overlaps(InfantryTargetTypes) &&
+			!info.HasTraitInfo<CapturesInfo>() &&
+			!info.HasTraitInfo<CarrierSlaveInfo>() &&
+			info.TraitInfos<ArmamentInfo>().Any(arm => arm.WeaponInfo != null);
+
+		// Counts are world-state per tick; ShouldBuild may see several capturer
+		// candidates in one queue pass, so scan once and cache.
+		int capturerCountsTick = -1, capturerUnitsCached, armedInfantryCached;
+		int capturerUnitsLastSample, lastCapturerCompletionTick = -1;
+
+		void CapturerArmyCounts(out int capturerUnits, out int armedInfantryUnits)
+		{
+			if (capturerCountsTick == world.WorldTick)
+			{
+				capturerUnits = capturerUnitsCached;
+				armedInfantryUnits = armedInfantryCached;
+				return;
+			}
+
+			capturerCountsTick = world.WorldTick;
+			capturerUnitsCached = 0;
+			armedInfantryCached = 0;
+			foreach (var actor in world.Actors.Where(actor => actor.Owner == player && !actor.IsDead && actor.IsInWorld))
+			{
+				var info = actor.Info;
+				if (info.HasTraitInfo<CapturesInfo>())
+					capturerUnitsCached++;
+				else if (IsArmedInfantry(info))
+					armedInfantryCached++;
+			}
+
+			// S1b: a rising capturer count is a completion (or any gain): stamp it so the pacing
+			// interval measures from the last capturer that actually finished.
+			if (capturerUnitsCached > capturerUnitsLastSample)
+				lastCapturerCompletionTick = capturerCountsTick;
+			capturerUnitsLastSample = capturerUnitsCached;
+
+			capturerUnits = capturerUnitsCached;
+			armedInfantryUnits = armedInfantryCached;
+		}
+
+		// S1b: KNOWN uncaptured capturable targets, reported by the engineer owner (none = 0).
+		// Resolved lazily — the provider's own conditions settle after Created; per-tick cached.
+		IBotCapturerTargetAllowance capturerAllowanceProvider;
+		int capturerAllowanceTick = -1, capturerAllowanceCached;
+
+		int CapturerAllowance()
+		{
+			if (capturerAllowanceTick == world.WorldTick)
+				return capturerAllowanceCached;
+
+			capturerAllowanceTick = world.WorldTick;
+			capturerAllowanceProvider ??= player.PlayerActor
+				.TraitsImplementing<IBotCapturerTargetAllowance>().FirstEnabledTraitOrDefault();
+			return capturerAllowanceCached = capturerAllowanceProvider?.CapturerTargetAllowance ?? 0;
+		}
+
+		// S1b: capturers sitting in our own production queues — one in production at a time.
+		int QueuedCapturers()
+		{
+			var count = 0;
+			foreach (var group in OpenRA.Mods.Common.AIUtils.FindQueuesByCategory(player))
+				foreach (var q in group)
+					foreach (var item in q.AllQueued())
+						if (world.Map.Rules.Actors.TryGetValue(item.Item, out var queued) && queued.HasTraitInfo<CapturesInfo>())
+							count++;
+
+			return count;
+		}
+
+		// S1b: the difficulty-line pacing interval (BotLimits value; 0 = off) and the ticks since
+		// the last detected capturer completion (-1 until the first one finishes).
+		int EngineerCompletionInterval =>
+			botLimits != null && botLimits.Info.EngineerCompletionIntervalTicks >= 0
+				? botLimits.Info.EngineerCompletionIntervalTicks : Info.EngineerCompletionIntervalTicks;
+
+		int TicksSinceLastCapturerCompletion() =>
+			lastCapturerCompletionTick < 0 ? -1 : world.WorldTick - lastCapturerCompletionTick;
+
+		// BV_m13_liveness arm: the module field is only a flag, the cash bar is the tier's
+		// BotLimits value. Classic shares this instance but never carries genericbot, so
+		// SwitchCondition keeps the whole override inert there.
+		int BankSaturationThreshold => switchesActive && Info.BankSaturationCash > 0 && botLimits != null
+			? Math.Max(0, botLimits.Info.BankSaturationCash) : 0;
 
 		public UnitBuilderBotModuleCA(Actor self, UnitBuilderBotModuleCAInfo info)
 			: base(info)
@@ -273,6 +467,10 @@ namespace OpenRA.Mods.CA.Traits
 				firstTick = false;
 			}
 
+			// TF-2: keep the reservation live even while unit production is paused — the floor
+			// must decay the moment its conditions stop holding, not linger until the next build.
+			UpdateMobileReserve();
+
 			if (CounterWeight > 0)
 				counters.Observe(Info.AdaptiveObservationInterval, compositionProvider);
 
@@ -327,11 +525,17 @@ namespace OpenRA.Mods.CA.Traits
 
 					if (AIUtils.FindQueues(player, Info.UnitQueues[currentQueueIndex]).Any())
 					{
+						// BV_m13_liveness: re-evaluated per category with the same cash accounting —
+						// while the bank stays at/above the tier bar the MaximiseProductionCash break is skipped.
+						var saturated = ProductionSaturationCA.Saturated(
+							playerResources.Cash + playerResources.Resources, BankSaturationThreshold);
+
 						// PERF: We tick only one type of valid queue at a time
 						// if AI gets enough cash, it can fill all of its queues with enough ticks
-						BuildUnit(bot, Info.UnitQueues[currentQueueIndex], idleUnitCount < Info.IdleBaseUnitsMaximum, false);
+						BuildUnit(bot, Info.UnitQueues[currentQueueIndex], idleUnitCount < Info.IdleBaseUnitsMaximum, false, saturated);
 
-						if (playerResources.Cash + playerResources.Resources < BotPersonalityLeads.Scaled(MaximiseProductionCash, cashLean))
+						if (ProductionSaturationCA.StopCategorySweep(saturated, playerResources.Cash + playerResources.Resources,
+							BotPersonalityLeads.Scaled(MaximiseProductionCash, cashLean)))
 							break;
 					}
 				}
@@ -359,13 +563,49 @@ namespace OpenRA.Mods.CA.Traits
 
 				SetUnitInterval(unit.Name);
 				bot.QueueOrder(Order.StartProduction(queue.Actor, unit.Name, 1));
+				NotifyStarted(unit.Name, queue.Info.Type);
 				AIUtils.BotDebug("AI: {0} decided to build {1} from the opening defense budget.", player, unit.Name);
 				return;
 			}
 		}
 
+		// Record-only diagnostics seam (WBL-P1): resolved lazily from the world actor like the
+		// placement observer — absent observers keep the production path allocation-free.
+		IBotUnitProductionObserver[] UnitObservers =>
+			unitObservers ??= world.WorldActor.TraitsImplementing<IBotUnitProductionObserver>().ToArray();
+
+		void NotifyStarted(string name, string queueType)
+		{
+			foreach (var observer in UnitObservers)
+				observer.UnitProductionStarted(player, world.WorldTick, name, queueType);
+		}
+
+		// Record-only gate view (WBL-P1): the poll reads enforced truth from the same
+		// fields this module's own gates consult, so it never approximates internals.
+		// baseBuilder's pause vote DOES starve every ordinary unit queue (the module
+		// only exempts its opening-defense path inside BotTick), so it stays a voter.
+		int IBotUnitProductionGateInfo.UnitProductionCashFloor =>
+			BotPersonalityLeads.Scaled(Info.ProductionMinCashRequirement,
+				BotPersonalityLeads.Lean(leadProviders, "steamroller"));
+
+		int IBotUnitProductionGateInfo.UnitProductionSaturationCash => BankSaturationThreshold;
+
+		string[] IBotUnitProductionGateInfo.UnitProductionReservedBy =>
+			requestPause == null
+				? []
+				: requestPause
+					.Where(rp => rp.IsTraitEnabled() && rp.PauseUnitProduction)
+					.Select(rp => rp.GetType().Name)
+					.OrderBy(n => n, StringComparer.Ordinal)
+					.ToArray();
+
+		bool IBotUnitProductionGateInfo.UnitProductionLimited(string actor, int owned, int queued) =>
+			Info.UnitLimits != null && Info.UnitLimits.TryGetValue(actor, out var limit) && owned >= limit;
+
 		void IBotRequestUnitProduction.RequestUnitProduction(IBot bot, string requestedActor)
 		{
+			foreach (var observer in UnitObservers)
+				observer.UnitProductionRequested(player, world.WorldTick, requestedActor);
 			queuedBuildRequests.Add(requestedActor);
 		}
 
@@ -374,7 +614,7 @@ namespace OpenRA.Mods.CA.Traits
 			return queuedBuildRequests.Count(r => r == requestedActor);
 		}
 
-		void BuildUnit(IBot bot, string category, bool buildRandom, bool excludeLimited)
+		void BuildUnit(IBot bot, string category, bool buildRandom, bool excludeLimited, bool saturated = false)
 		{
 			// For queues that support parallel production (e.g. Zerg hatchery), find one with a free slot.
 			// For standard queues, require the queue to be completely empty.
@@ -382,7 +622,7 @@ namespace OpenRA.Mods.CA.Traits
 			// cap — three war factories produce in parallel instead of feeding one and idling the rest.
 			// No provider = first free queue only, byte-identical to upstream; classic mounts none.
 			productionWidth ??= player.PlayerActor.TraitsImplementing<IBotProductionWidth>().FirstEnabledTraitOrDefault();
-			var maxQueues = productionWidth?.MaxQueuesPerCategory ?? 1;
+			var maxQueues = ProductionSaturationCA.QueuesPerCategory(saturated, productionWidth?.MaxQueuesPerCategory ?? 0);
 			var queues = AIUtils.FindQueues(player, category)
 				.Where(q =>
 				{
@@ -390,7 +630,7 @@ namespace OpenRA.Mods.CA.Traits
 						return p.AvailableSlots > 0;
 					return !q.AllQueued().Any();
 				})
-				.Take(Math.Max(1, maxQueues));
+				.Take(maxQueues);
 
 			foreach (var queue in queues)
 			{
@@ -401,9 +641,14 @@ namespace OpenRA.Mods.CA.Traits
 
 				for (var slot = 0; slot < slotsToFill; slot++)
 				{
+					// Saturation lapses mid-fill: stop slotting the moment the bank drops below the bar.
+					if (saturated && !ProductionSaturationCA.Saturated(
+						playerResources.Cash + playerResources.Resources, BankSaturationThreshold))
+						break;
+
 					var unit = buildRandom ?
 						ChooseRandomUnitToBuild(queue, excludeLimited) :
-						ChooseUnitToBuild(queue, excludeLimited);
+						ChooseUnitToBuild(queue, excludeLimited, saturated);
 
 					if (unit == null)
 					{
@@ -419,7 +664,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						if (!excludeLimited)
 						{
-							BuildUnit(bot, category, buildRandom, true);
+							BuildUnit(bot, category, buildRandom, true, saturated);
 							return;
 						}
 
@@ -428,6 +673,7 @@ namespace OpenRA.Mods.CA.Traits
 
 					SetUnitInterval(name);
 					bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
+					NotifyStarted(name, queue.Info.Type);
 					counters.Record(unit);
 					if (activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
 						AddToActiveCompositionProducedValue(unit);
@@ -448,7 +694,11 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var buildableInfo in actorInfo.TraitInfos<BuildableInfo>())
 			{
 				if (!ShouldBuild(name, true))
+				{
+					foreach (var observer in UnitObservers)
+						observer.UnitProductionSkipped(player, world.WorldTick, name, "should_build");
 					return;
+				}
 
 				ProductionQueue queue = null;
 				foreach (var pq in buildableInfo.Queue)
@@ -462,10 +712,14 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					SetUnitInterval(name);
 					bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
+					NotifyStarted(name, queue.Info.Type);
 					AIUtils.BotDebug("AI: {0} decided to build {1} (external request)", queue.Actor.Owner, name);
 					return;
 				}
 			}
+
+			foreach (var observer in UnitObservers)
+				observer.UnitProductionSkipped(player, world.WorldTick, name, "no_queue");
 		}
 
 		void SetUnitInterval(string name)
@@ -475,6 +729,78 @@ namespace OpenRA.Mods.CA.Traits
 
 			activeUnitIntervals[name] = Info.UnitIntervals[name] * unitIntervalModifier / 100;
 		}
+
+		// TF-2: the reservation's per-tick upkeep — reconcile every producer's in-flight items so a
+		// refund/cancel/elimination settles promptly, refresh the standing share's conditions at the
+		// module cadence (the actor scan is the only expensive part, so it does not run per tick).
+		void UpdateMobileReserve()
+		{
+			if (Info.ReserveMobileProductionShare <= 0)
+				return;
+
+			var queues = Info.UnitQueues.SelectMany(c => AIUtils.FindQueues(player, c)).Distinct().ToList();
+			var feasible = queues.Any(q => q.Enabled);
+			var capacity = queues.Any(q => q is IHasParallelQueueSlots p ? p.AvailableSlots > 0 : !q.AllQueued().Any());
+			if (world.WorldTick >= nextPoolCheckTick)
+			{
+				nextPoolCheckTick = world.WorldTick + FeedbackTime;
+				poolNeedsReplenish = OffensivePoolNeedsReplenish();
+			}
+
+			mobileReserve.SetStanding(feasible, capacity, poolNeedsReplenish,
+				Info.ReserveMobileProductionShare, playerResources.GetCashAndResources());
+
+			// TF-2 F1: feed a LIST — same-name queued units must count per instance, a
+			// name-keyed dict would collapse them. F2: after the sweep, producers this
+			// enumeration can no longer see (destroyed or disabled) flush their tracked
+			// items — a dead producer can never reconcile itself.
+			var liveOwners = new HashSet<object>();
+			foreach (var queue in queues)
+			{
+				liveOwners.Add(queue.Actor);
+				var items = new List<(string Item, int Total, int Remaining)>();
+				foreach (var i in queue.AllQueued())
+					items.Add((i.Item, i.TotalCost, i.RemainingCost));
+				mobileReserve.ReconcileUnits(queue.Actor, items);
+			}
+
+			mobileReserve.FlushUnseenUnits(liveOwners);
+		}
+
+		// TF-2: the eligible offensive pool is the alive combat-role mass — under the configured
+		// floor it needs replenishment. No roles provider means no eligible pool at all, which is
+		// the conservative "needs replenishment" answer (the flag itself is opt-in).
+		bool OffensivePoolNeedsReplenish()
+		{
+			unitRoles ??= player.PlayerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
+			if (unitRoles == null)
+				return true;
+
+			var alive = 0;
+			foreach (var a in world.Actors)
+				if (!a.IsDead && a.Owner == player && OffensiveRoles.Contains(unitRoles.PrimaryRoleOf(a.Info.Name) ?? ""))
+					alive++;
+
+			return alive < Info.ReserveArmyFloor;
+		}
+
+		int IBotMobileSpendReserve.MobileSpendFloor =>
+			Info.ReserveMobileProductionShare > 0 && playerResources != null
+				? mobileReserve.Floor(playerResources.GetCashAndResources()) : 0;
+
+		int IBotMobileSpendReserve.PaidUnitSharePct => mobileReserve.PaidSharePct();
+
+		void IBotMobileSpendReserve.ReconcileUnitSpend(object owner, IReadOnlyList<(string Item, int Total, int Remaining)> items) =>
+			mobileReserve.ReconcileUnits(owner, items);
+
+		void IBotMobileSpendReserve.ReconcileBuildingSpend(object owner, IReadOnlyList<(string Item, int Total, int Remaining, bool Essential)> items) =>
+			mobileReserve.ReconcileBuildings(owner, items);
+
+		void IBotMobileSpendReserve.FlushUnitSpendOwners(IReadOnlyCollection<object> liveOwners) =>
+			mobileReserve.FlushUnseenUnits(liveOwners);
+
+		void IBotMobileSpendReserve.FlushBuildingSpendOwners(IReadOnlyCollection<object> liveOwners) =>
+			mobileReserve.FlushUnseenBuildings(liveOwners);
 
 		bool ShouldBuild(string name, bool ignoreUnitsToBuild, string queueCategory = null)
 		{
@@ -496,6 +822,20 @@ namespace OpenRA.Mods.CA.Traits
 				Info.UnitLimits.ContainsKey(name) &&
 				world.Actors.Count(a => !a.IsDead && a.Owner == player && a.Info.Name == name) >= Info.UnitLimits[name])
 				return false;
+
+			// S1/F1: the capturer ratio — counts only while the cap is on AND the candidate
+			// IS a capturer; the off cap (classic: CapturerLimitPct reads 0) short-circuits
+			// before both the ruleset lookup and the army scan — no wasted work.
+			if (CapturerCapActive(CapturerLimitPct) &&
+				world.Map.Rules.Actors.TryGetValue(name, out var candidate) &&
+				candidate.HasTraitInfo<CapturesInfo>())
+			{
+				CapturerArmyCounts(out var capturerUnits, out var armedInfantryUnits);
+				if (!CapturerCapAdmits(CapturerLimitPct, capturerUnits, armedInfantryUnits, Info.CapturerMinimumUnits,
+						Info.CapturerAllowanceMax, CapturerAllowance(), QueuedCapturers(),
+						TicksSinceLastCapturerCompletion(), EngineerCompletionInterval))
+					return false;
+			}
 
 			return true;
 		}
@@ -558,7 +898,7 @@ namespace OpenRA.Mods.CA.Traits
 			return candidates[^1];
 		}
 
-		ActorInfo ChooseUnitToBuild(ProductionQueue queue, bool excludeLimited)
+		ActorInfo ChooseUnitToBuild(ProductionQueue queue, bool excludeLimited, bool saturated = false)
 		{
 			var buildableThings = queue.BuildableItems();
 			if (!buildableThings.Any())
@@ -588,6 +928,21 @@ namespace OpenRA.Mods.CA.Traits
 						if (myUnits.Count(a => a == unit.Key) * 100 < ShareFor(unit.Key, unit.Value) * myUnits.Count)
 							if (CanBuildMoreOfAircraft(world.Map.Rules.Actors[unit.Key]))
 								return world.Map.Rules.Actors[unit.Key];
+
+			// BV_m13_liveness: with a saturated bank the share test alone must not idle the queue —
+			// one deterministic (no extra RNG) retry that skips only the proportional-share check.
+			if (saturated)
+			{
+				var fallback = ProductionSaturationCA.PickExcludingShare(
+					unitsToBuildShares.OrderBy(kv => kv.Key).Select(kv => kv.Key),
+					name => buildableThings.Any(b => b.Name == name),
+					name => (!excludeLimited || Info.UnitLimits == null || !Info.UnitLimits.ContainsKey(name))
+						&& ShouldBuild(name, false, queue.Info.Type)
+						&& CanBuildMoreOfAircraft(world.Map.Rules.Actors[name]));
+
+				if (fallback != null)
+					return world.Map.Rules.Actors[fallback];
+			}
 
 			return null;
 		}
@@ -991,6 +1346,9 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				new("QueuedBuildRequests", FieldSaver.FormatValue(queuedBuildRequests.ToArray())),
 				new("IdleUnitCount", FieldSaver.FormatValue(idleUnitCount)),
+				new("ReservePaidUnitCost", FieldSaver.FormatValue(mobileReserve.PaidUnitCost)),
+				new("ReservePaidOptionalCost", FieldSaver.FormatValue(mobileReserve.PaidOptionalCost)),
+				new("ReservePaidEssentialCost", FieldSaver.FormatValue(mobileReserve.PaidEssentialCost)),
 				new("CompositionLastUsed", "", compositionLastUsedTickById
 					.Select(kvp => new MiniYamlNode(kvp.Key, FieldSaver.FormatValue(kvp.Value)))
 					.ToList())
@@ -1013,6 +1371,13 @@ namespace OpenRA.Mods.CA.Traits
 			if (idleUnitCountNode != null)
 				idleUnitCount = FieldLoader.GetValue<int>("IdleUnitCount", idleUnitCountNode.Value.Value);
 
+			// TF-2: the settled paid counters persist across saves; in-flight items re-track
+			// themselves on the next reconcile from live queue state.
+			mobileReserve.RestoreSettled(
+				ReadSaveInt(data, "ReservePaidUnitCost"),
+				ReadSaveInt(data, "ReservePaidOptionalCost"),
+				ReadSaveInt(data, "ReservePaidEssentialCost"));
+
 			var compositionLastUsedNode = data.NodeWithKeyOrDefault("CompositionLastUsed");
 			if (compositionLastUsedNode != null)
 			{
@@ -1022,6 +1387,12 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			counters.Load(data);
+		}
+
+		static int ReadSaveInt(MiniYaml data, string key)
+		{
+			var node = data.NodeWithKeyOrDefault(key);
+			return node != null ? FieldLoader.GetValue<int>(key, node.Value.Value) : 0;
 		}
 
 		void INotifyActorDisposing.Disposing(Actor self)

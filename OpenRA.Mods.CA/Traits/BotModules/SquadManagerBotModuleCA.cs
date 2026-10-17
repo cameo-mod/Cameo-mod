@@ -10,7 +10,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using OpenRA.Mods.CA.Traits.BotModules;
 using OpenRA.Mods.CA.Traits.BotModules.Squads;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Activities;
@@ -67,6 +69,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("Maximum number of units AI can have idle.")]
 		public readonly int MaxIdleUnits = 36;
+
+		[Desc("M13 bounded team-response and attack-liveness consumer. Default off; classic excluded by the increment applier.")]
+		public readonly bool AttackLivenessEnabled = false;
 
 		[ActorReference]
 		[Desc("Units that form a guerrilla squad.")]
@@ -727,6 +732,28 @@ namespace OpenRA.Mods.CA.Traits
 
 		// §12.14 PL: attacks-launched telemetry (record-only).
 		public int OffensiveSquadsLaunched;
+
+		// Default-off observed-only evidence; construction/admission is not a launch.
+		readonly M13PlayerStateCA m13State = new();
+		SquadManagerBotModuleCA m13CachedStateOwner;
+		SquadManagerBotModuleCA M13StateOwner => m13CachedStateOwner ??= Player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>()
+			.FirstOrDefault(m => m.Info.AttackLivenessEnabled) ?? this;
+		internal AttackLivenessEvalCA AttackLiveness => Info.AttackLivenessEnabled
+			? M13StateOwner.m13State.Liveness : m13State.Liveness;
+		readonly Dictionary<Actor, OffensiveActivityObservationCA> livenessActivities = new();
+		Actor m13CandidateTarget;
+
+		// M13 bookkeeping lives on the squad records themselves (M13WaveId,
+		// M13IntentTick/Wave, M13Response, M13ObservedProgress) so it serializes with
+		// the squad. The intent's subject outlives squad removal: keep the reference.
+		SquadCA m13IntentSquad;
+		SquadCA m13ResponseSquad;
+		BotProtectionRequest m13ResponseRequest;
+		PrepositionChannelCA m13ResponseChannel;
+		bool m13MembershipPending;
+		string M13ManagerIdentity => "m13:" + Array.IndexOf(
+			Player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().ToArray(), this);
+
 		readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> constructionYardBuildings;
 
 		IBot bot;
@@ -742,6 +769,7 @@ namespace OpenRA.Mods.CA.Traits
 		IBotMissionOutcomeSink[] missionOutcomeSinks;
 		IBotSiegeAdvisor[] siegeAdvisors;
 		IBotCombatVeto[] combatVetoes;
+		IBotFightThresholds[] fightThresholds;
 		IBotUnitRoles unitRoles;
 
 		// The merged roles provider (§12.4, Cameo assembly) is a genericbot-gated
@@ -1548,6 +1576,7 @@ namespace OpenRA.Mods.CA.Traits
 			missionOutcomeSinks = self.Owner.PlayerActor.TraitsImplementing<IBotMissionOutcomeSink>().ToArray();
 			siegeAdvisors = self.Owner.PlayerActor.TraitsImplementing<IBotSiegeAdvisor>().ToArray();
 			combatVetoes = self.Owner.PlayerActor.TraitsImplementing<IBotCombatVeto>().ToArray();
+			fightThresholds = self.Owner.PlayerActor.TraitsImplementing<IBotFightThresholds>().ToArray();
 			utilityAxesProviders = self.Owner.PlayerActor.TraitsImplementing<IBotUtilityAxes>().ToArray();
 			scaleTargetProviders = self.Owner.PlayerActor.TraitsImplementing<IBotScaleTargets>().ToArray();
 			stealthDoctrines = self.Owner.PlayerActor.TraitsImplementing<IBotStealthDoctrine>().ToArray();
@@ -1579,6 +1608,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		protected override void TraitDisabled(Actor self)
 		{
+			if (Info.AttackLivenessEnabled && m13ResponseSquad != null)
+				ReleaseM13Response(bot, TeamResponseReleaseCA.Stale);
 			heldDefendMission = null;
 			defendMissionHeldSince = -1;
 			defendMissionExhaustedRegions.Clear();
@@ -2010,8 +2041,10 @@ namespace OpenRA.Mods.CA.Traits
 									|| (elected.RequesterId == null && b.ClientIndex == elected.RequesterClientIndex)));
 							var armyValue = answered?.OwnArmyValue
 								?? broadcasts.Where(b => b != null).Select(b => b.OwnArmyValue).DefaultIfEmpty().Max();
-							request = new BotProtectionRequest(rallyCell,
-								armyValue, World.WorldTick + Info.ProtectInterval * 10);
+							request = M13ResponseClaimCA.Synthesize(rallyCell,
+								armyValue, World.WorldTick + Info.ProtectInterval * 10,
+								answered == null ? null : CoalitionFold.ParticipantKey(answered),
+								answered?.DefenceEpisode ?? default, elected.Episode, electionRequired: true);
 						}
 					}
 				}
@@ -2022,8 +2055,9 @@ namespace OpenRA.Mods.CA.Traits
 							|| !AnswerOnCooldown("defend_answer", CoalitionFold.ParticipantKey(b),
 								World.Map.CellContaining(b.DefendPosition))));
 					if (answered != null)
-						request = new BotProtectionRequest(World.Map.CellContaining(answered.DefendPosition),
-							answered.OwnArmyValue, World.WorldTick + Info.ProtectInterval * 10);
+						request = M13ResponseClaimCA.Synthesize(World.Map.CellContaining(answered.DefendPosition),
+							answered.OwnArmyValue, World.WorldTick + Info.ProtectInterval * 10,
+							CoalitionFold.ParticipantKey(answered), answered.DefenceEpisode);
 				}
 
 				allyDefendAnswer = answered;
@@ -2060,8 +2094,10 @@ namespace OpenRA.Mods.CA.Traits
 									|| (elected.RequesterId == null && b.ClientIndex == elected.RequesterClientIndex)));
 							var armyValue = requester?.OwnArmyValue
 								?? broadcasts.Where(b => b != null).Select(b => b.OwnArmyValue).DefaultIfEmpty().Max();
-							request = new BotProtectionRequest(rallyCell,
-								armyValue, World.WorldTick + Info.ProtectInterval * 10);
+							request = M13ResponseClaimCA.Synthesize(rallyCell,
+								armyValue, World.WorldTick + Info.ProtectInterval * 10,
+								requester == null ? null : CoalitionFold.ParticipantKey(requester),
+								requester?.ExpansionAssistEpisode ?? default, elected.Episode, electionRequired: true);
 							allyAssistAssignment = elected;
 							allyAssistAnswer = requester;
 						}
@@ -2095,7 +2131,8 @@ namespace OpenRA.Mods.CA.Traits
 
 			var rally = PrepositionDecisionEvalCA.RallyFor(request, nearestOrTarget);
 
-			var protectSq = GetSquadOfType(SquadCAType.Protection) ?? RegisterNewSquad(bot, SquadCAType.Protection);
+			var protectSq = Info.AttackLivenessEnabled ? GetSquadOfType(SquadCAType.Protection)
+				: GetSquadOfType(SquadCAType.Protection) ?? RegisterNewSquad(bot, SquadCAType.Protection);
 			var leases = answerLeases ?? BotUnitLeases.Of(Player);
 			var draftable = answerDraftable ?? unitsHangingAroundTheBase.Where(u => IsDefenderDraftable(u, leases)).ToList();
 
@@ -2103,7 +2140,52 @@ namespace OpenRA.Mods.CA.Traits
 			// radius is the donor's non-emergency case; a rally inside it means the
 			// threat is at the doorstep and gets the full pool.
 			var emergency = PrepositionDecisionEvalCA.IsEmergencyRally(rally, initialBaseCenter, Info.MaxBaseRadius);
+			if (Info.AttackLivenessEnabled && !request.HasValue && m13ResponseSquad != null)
+				ReleaseM13Response(bot, emergency ? TeamResponseReleaseCA.Emergency : TeamResponseReleaseCA.Stale);
 			var toDraft = DefendDraftLimit(draftable.Count, emergency, Info, utilityAxesProviders);
+			if (Info.AttackLivenessEnabled && !request.HasValue && !emergency)
+			{
+				draftable = draftable.Where(u => IsM13AssaultDraftable(u, leases)).OrderBy(u => u.Actor.ActorID).ToList();
+				toDraft = Math.Min(toDraft, draftable.Count);
+				while (toDraft > 0 && !M13ReserveIntact(draftable.Take(toDraft).Select(u => u.Actor).ToHashSet()))
+					toDraft--;
+			}
+			if (Info.AttackLivenessEnabled && request.HasValue)
+			{
+				var participant = request.Value.Episode.ParticipantId;
+				if (!M13StateOwner.m13State.EvidenceComplete || botLimits?.Info.TeamResponseLeaseLimit != 1
+					|| !M13ResponseClaimCA.TryKey(channel, request.Value, participant, out var key))
+					return;
+				var budget = M13StateOwner.m13State.Responses;
+				if (budget.ActiveKey != null)
+				{
+					if (budget.Owner != M13ManagerIdentity || budget.ActiveKey != key || m13ResponseSquad == null)
+						return;
+					// Refresh evidence and destination, never expiry or membership.
+					m13ResponseRequest = request.Value;
+					toDraft = 0;
+				}
+				else
+				{
+					if (protectSq?.IsValid == true || !M13ResponseFresh(channel, request.Value)
+						|| !M13ResponseContested(request.Value))
+						return;
+					draftable = draftable.Where(u => IsM13AssaultDraftable(u, leases)).OrderBy(u => u.Actor.ActorID).ToList();
+					toDraft = Math.Min(toDraft, draftable.Count);
+					while (toDraft > 0 && !M13ReserveIntact(draftable.Take(toDraft).Select(u => u.Actor).ToHashSet()))
+						toDraft--;
+					if (toDraft == 0 || !budget.TryAcquire(World.WorldTick, M13ManagerIdentity, key,
+						botLimits.Info.TeamResponseMaxLeaseTicks, true))
+						return;
+					m13ResponseRequest = request.Value;
+					m13ResponseChannel = channel;
+					m13ResponseSquad = protectSq ??= RegisterNewSquad(bot, SquadCAType.Protection);
+					m13ResponseSquad.M13Response = true;
+					AIUtils.BotDebug("M13_RESPONSE_ADMIT seat={0} owner={1} claim={2} start={3} expiry={4} drafted={5}",
+						Player.InternalName, M13ManagerIdentity, key, budget.StartedTick, budget.ExpiresTick, toDraft);
+				}
+			}
+			protectSq ??= RegisterNewSquad(bot, SquadCAType.Protection);
 			for (var i = 0; i < toDraft; i++)
 			{
 				var u = draftable[i];
@@ -2121,6 +2203,8 @@ namespace OpenRA.Mods.CA.Traits
 			// rolling window - a retracted request lets the escort release within one
 			// interval, and ExpiresTick is the failsafe bound for a dead publisher.
 			protectionHoldUntilTick = PrepositionDecisionEvalCA.HoldUntilTick(request, threat, World.WorldTick, Info.ProtectInterval);
+			if (Info.AttackLivenessEnabled && m13ResponseSquad == protectSq)
+				protectionHoldUntilTick = (int)Math.Min(protectionHoldUntilTick, M13StateOwner.m13State.Responses.ExpiresTick);
 			if (Info.UseProtectionRallyDedup)
 			{
 				// AR-S2: the every-interval re-push cancels each defender's in-flight order —
@@ -2350,6 +2434,11 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		internal void ReleaseDefenders(IBot bot, SquadCA protectSq)
 		{
+			if (Info.AttackLivenessEnabled && protectSq == m13ResponseSquad)
+			{
+				ReleaseM13Response(bot, TeamResponseReleaseCA.Cleared);
+				return;
+			}
 			foreach (var u in protectSq.Units.ToList())
 			{
 				if (unitCannotBeOrdered(u.Actor))
@@ -2744,7 +2833,11 @@ namespace OpenRA.Mods.CA.Traits
 			if (type is SquadCAType.Rush or SquadCAType.Harass or SquadCAType.Guerrilla
 				or SquadCAType.Air or SquadCAType.Naval or SquadCAType.Fighter
 				or SquadCAType.Gunship or SquadCAType.Bomber or SquadCAType.Stealth)
+			{
 				OffensiveSquadsLaunched++;
+				if (Info.AttackLivenessEnabled)
+					ret.M13WaveId = M13StateOwner.m13State.AllocateWave();
+			}
 			return ret;
 		}
 
@@ -2825,6 +2918,14 @@ namespace OpenRA.Mods.CA.Traits
 
 		void AssignRolesToIdleUnits(IBot bot)
 		{
+			// Restored M13 membership must validate before any armed liveness use.
+			if (m13MembershipPending)
+			{
+				m13MembershipPending = false;
+				if (Info.AttackLivenessEnabled)
+					ValidateM13RestoredMembership();
+			}
+
 			// Telemetry only: a snapshot every role pass is fresh enough for a death's position.
 			if (World.WorldTick % Math.Max(1, Info.AssignRolesInterval) == 0)
 				TrackRoleLosses();
@@ -2842,6 +2943,9 @@ namespace OpenRA.Mods.CA.Traits
 				attackForceTicks = Info.AttackForceInterval;
 				foreach (var s in Squads)
 					s.Units.RemoveAll(u => unitCannotBeOrdered(u.Actor));
+
+				if (Info.AttackLivenessEnabled)
+					ObserveOffensiveWaveActivity();
 
 				// H1: squads consult the attention budget before acting. The cursor
 				// rotates the pass order so a spent budget staggers squads instead of
@@ -2876,7 +2980,22 @@ namespace OpenRA.Mods.CA.Traits
 				FindNewUnits(bot);
 			}
 
-			if (--minAttackForceDelayTicks <= 0)
+			if (Info.AttackLivenessEnabled)
+			{
+				MaintainM13Response(bot);
+				if (m13IntentSquad != null && (m13IntentSquad.M13ObservedProgress
+					|| !Squads.Contains(m13IntentSquad)
+					|| (long)World.WorldTick - m13IntentSquad.M13IntentTick >= Math.Max(150L, 2L * Info.AttackForceInterval + 1)))
+				{
+					// Failure/timeout does not renew eligibility. This reports no
+					// resolved-order fact and never interrupts a live offensive activity.
+					AttackLiveness.NoteDispatchFailed(m13IntentSquad.M13IntentWave);
+					m13IntentSquad.M13IntentTick = -1;
+					m13IntentSquad = null;
+				}
+			}
+			var urgentDispatched = Info.AttackLivenessEnabled && TryM13UrgentAttack(bot);
+			if (!urgentDispatched && --minAttackForceDelayTicks <= 0)
 			{
 				// §12.14 PL-1 lead lean composed with the UT-1 TurtleRush axis scale —
 				// two independent multipliers on the same reset; each is neutral (x1.0)
@@ -2898,6 +3017,254 @@ namespace OpenRA.Mods.CA.Traits
 			// A/B `all` arm sampled as double_owner=1). The per-path claim above renews holds;
 			// this pass picks up everyone FindNewUnits/CreateAttackForce/drafts just admitted.
 			ReconcileSquadLeases();
+		}
+
+		internal static bool IsRetreatingForLiveness(SquadCA squad) =>
+			squad.FuzzyStateMachine?.CurrentState is GroundUnitsFleeStateCA or NavyUnitsFleeStateCA
+				or AirFleeStateCA or StealthFleeStateCA or UnitsForProtectionFleeState;
+
+		bool IsM13AssaultDraftable(UnitWposWrapper u, IBotUnitLeases leases) =>
+			!unitCannotBeOrdered(u.Actor) && IsDefenderDraftable(u, leases)
+			&& !IsArtilleryUnit(u.Actor) && !Info.FireSupportTypes.Contains(u.Actor.Info.Name)
+			&& !u.Actor.Info.HasTraitInfo<CargoInfo>() && u.Actor.TraitsImplementing<IMove>().Any();
+
+		bool M13LegalTarget(Actor target) => target != null && !target.IsDead && target.IsInWorld
+			&& target.CanBeViewedByPlayer(Player) && IsPreferredEnemyUnit(target);
+
+		List<UnitWposWrapper> M13EligibilityRoster(IBotUnitLeases leases)
+		{
+			var managers = Player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().ToArray();
+			var managed = managers.SelectMany(m => m.activeUnits).ToHashSet();
+			// A soft role diversion or a registration with no observed progress cannot
+			// end an interval. Genuine casualties/orderability/foreign leases still can.
+			return managers.SelectMany(m => m.unitsHangingAroundTheBase
+				.Concat(m.m13ResponseSquad?.Units ?? [])
+				.Concat(m.Squads.Where(s => s.M13WaveId > 0 && !s.M13ObservedProgress).SelectMany(s => s.Units)))
+				.Concat(World.ActorsHavingTrait<IPositionable>().Where(a => a.Owner == Player && !managed.Contains(a))
+					.Select(a => new UnitWposWrapper(a)))
+				.Where(u => IsM13AssaultDraftable(u, leases)).GroupBy(u => u.Actor.ActorID)
+				.Select(g => g.First()).OrderBy(u => u.Actor.ActorID).ToList();
+		}
+
+		bool M13ResponseFresh(PrepositionChannelCA channel, BotProtectionRequest request)
+		{
+			if (Player.WinState != WinState.Undefined)
+				return false;
+			var requester = World.Players.FirstOrDefault(p => p.InternalName == request.Episode.ParticipantId);
+			if (requester == null || requester.WinState != WinState.Undefined || request.ExpiresTick < World.WorldTick)
+				return false;
+			if (channel == PrepositionChannelCA.Request)
+				return requester == Player && (protectionRequestProviders ?? [])
+					.SelectMany(p => p.ProtectionRequests ?? []).Any(r => r.Episode == request.Episode && r.ExpiresTick >= World.WorldTick);
+			if (channel == PrepositionChannelCA.DefendAnswer)
+				return TeamBlackboard.CollectBroadcasts(Player).Any(b => b != null
+					&& b.DefenceEpisode == request.Episode && b.DefendPosition != WPos.Zero);
+			// Expansion assist provenance remains explicitly UNKNOWN, never invented.
+			return false;
+		}
+
+		bool M13ResponseContested(BotProtectionRequest request) => VisibleEnemiesNear(
+			World.Map.CenterOfCell(request.Location), WDist.FromCells(Info.PrepositionDefenceSearchCells)).Count > 0;
+
+		bool M13ReserveIntact(HashSet<Actor> draft)
+		{
+			var leases = BotUnitLeases.Of(Player);
+			var pool = unitsHangingAroundTheBase.Where(u => IsM13AssaultDraftable(u, leases) && !draft.Contains(u.Actor)).ToList();
+			var desiredValue = desiredAttackForceValue;
+			if (Info.SquadValue > 0 && scaleTargetProviders.TryArmyValue(Info.SquadValue, out var armyTarget))
+				desiredValue = armyTarget;
+			var scale = 100;
+			if (Info.UseDirectorPacing && Player.PlayerActor.TraitsImplementing<IBotDirector>().FirstOrDefault() is { } director)
+				scale = DirectorForceScalePercent(director.DirectorPhase, Info);
+			if (Info.UseTeamSyncAttacks && TeamBlackboard.Collect(Player).AnyClimax)
+				scale = TeamSyncForceScale(scale, true, Info.DirectorClimaxForceScalePercent);
+			var requiredSize = Info.ValueOnlyAttackLaunch && Info.SquadValue > 0 ? 0 : ApplyForceScale(desiredAttackForceSize, scale);
+			if (pool.Count < requiredSize || pool.Sum(u => (long)UnitValue(u.Actor)) < ApplyForceScale(desiredValue, scale))
+				return false;
+			if (Info.StageCompositionTicks <= 0 || Info.StageRequiredRoles.Count == 0)
+				return true;
+			var roles = UnitRoles;
+			if (roles == null)
+				return false;
+			var needed = new HashSet<string>(Info.StageRequiredRoles);
+			foreach (var u in pool)
+				if (roles.ActorRoles.TryGetValue(u.Actor.Info.Name, out var actorRoles))
+					needed.ExceptWith(actorRoles);
+			return needed.Count == 0;
+		}
+
+		void MaintainM13Response(IBot bot)
+		{
+			if (m13ResponseSquad == null)
+				return;
+			var budget = M13StateOwner.m13State.Responses;
+			var requester = World.Players.FirstOrDefault(p => p.InternalName == m13ResponseRequest.Episode.ParticipantId);
+			var reason = budget.Evaluate(World.WorldTick,
+				M13StateOwner.m13State.EvidenceComplete && M13ResponseFresh(m13ResponseChannel, m13ResponseRequest),
+				M13ResponseContested(m13ResponseRequest), requester?.WinState == WinState.Undefined,
+				M13ReserveIntact([]), World.WorldTick <= M13StateOwner.m13State.BaseDangerUntilTick);
+			if (reason != TeamResponseReleaseCA.None || !m13ResponseSquad.IsValid)
+				ReleaseM13Response(bot, reason == TeamResponseReleaseCA.None ? TeamResponseReleaseCA.Cleared : reason);
+		}
+
+		void ReleaseM13Response(IBot bot, TeamResponseReleaseCA reason)
+		{
+			if (m13ResponseSquad == null)
+				return;
+			var leases = BotUnitLeases.Of(Player);
+			foreach (var u in m13ResponseSquad.Units.Where(u => u.Actor != null).OrderBy(u => u.Actor.ActorID).ToArray())
+			{
+				if (!unitCannotBeOrdered(u.Actor) && !BotUnitLeases.IsClaimedByOther(leases, u.Actor, LeaseOwner))
+				{
+					bot?.QueueOrder(new Order("Stop", u.Actor, false));
+					if (!unitsHangingAroundTheBase.Any(p => p.Actor == u.Actor))
+						unitsHangingAroundTheBase.Add(u);
+				}
+				leases?.Release(u.Actor, LeaseOwner);
+				claimedBySquads.Remove(u.Actor);
+			}
+			m13ResponseSquad.Units.Clear();
+			m13ResponseSquad.M13Response = false;
+			M13StateOwner.m13State.Responses.Release(World.WorldTick, M13ManagerIdentity,
+				botLimits?.Info.TeamResponseRearmCooldownTicks ?? 0);
+			m13ResponseSquad = null;
+			protectionRally = null;
+			protectionHoldUntilTick = -1;
+			protectionRallyDedup.Reset();
+			CloseAllyDefend(BotMissionAttemptState.Released, BotMissionReasons.Superseded);
+			CloseAllyAssist(BotMissionAttemptState.Released, BotMissionReasons.Superseded);
+			foreach (var n in notifyIdleBaseUnits)
+				n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
+			AIUtils.BotDebug("M13_RESPONSE_RELEASE seat={0} reason={1}", Player.InternalName, reason);
+		}
+
+		// Separate urgent admission: none of the normal force/value/composition/mission
+		// holds owns this path. Live combat/retreat safety remains in the ordinary FSM.
+		bool TryM13UrgentAttack(IBot bot)
+		{
+			var leases = BotUnitLeases.Of(Player);
+			var eligibility = M13EligibilityRoster(leases);
+			var roster = unitsHangingAroundTheBase.Where(u => IsM13AssaultDraftable(u, leases))
+				.GroupBy(u => u.Actor.ActorID).Select(g => g.First()).OrderBy(u => u.Actor.ActorID).ToList();
+			var value = roster.Sum(u => (long)UnitValue(u.Actor));
+			if (!M13LegalTarget(m13CandidateTarget) || !eligibility.Any(u => u.Actor.TraitsImplementing<AttackBase>()
+				.Any(a => !a.IsTraitDisabled && a.HasAnyValidWeapons(Target.FromActor(m13CandidateTarget)))))
+				m13CandidateTarget = null;
+			if (eligibility.Count > 0 && m13CandidateTarget == null)
+			{
+				var source = eligibility[0].Actor.CenterPosition;
+				m13CandidateTarget = World.Actors.Where(M13LegalTarget)
+					.OrderBy(a => (a.CenterPosition - source).LengthSquared).ThenBy(a => a.ActorID)
+					.FirstOrDefault(a => eligibility.Any(u => u.Actor.TraitsImplementing<AttackBase>()
+						.Any(attack => !attack.IsTraitDisabled && attack.HasAnyValidWeapons(Target.FromActor(a)))));
+			}
+			var legal = M13LegalTarget(m13CandidateTarget);
+			// Frozen memory is a legal knowledge source, but this visible-only
+			// progress producer cannot certify it. Preserve the original interval
+			// as Unsupported instead of pretending visibility loss removes all targets.
+			var frozenOnly = !legal && eligibility.Count > 0 && FoggedScans
+				&& FindFrozenEnemyTarget(eligibility[0].Actor.CenterPosition, -1) != null;
+			var target = legal ? Target.FromActor(m13CandidateTarget) : Target.Invalid;
+			if (legal)
+			{
+				roster.RemoveAll(u => !target.IsValidFor(u.Actor)
+					|| !u.Actor.TraitsImplementing<AttackBase>().Any(a => !a.IsTraitDisabled && a.HasAnyValidWeapons(target)));
+				eligibility.RemoveAll(u => !target.IsValidFor(u.Actor)
+					|| !u.Actor.TraitsImplementing<AttackBase>().Any(a => !a.IsTraitDisabled && a.HasAnyValidWeapons(target)));
+			}
+			value = eligibility.Sum(u => (long)UnitValue(u.Actor));
+			AttackLiveness.Observe(World.WorldTick, M13StateOwner.m13State.EvidenceComplete && !frozenOnly, Player.WinState == WinState.Undefined,
+				legal, eligibility.Count > 0, value, Info.SquadValue,
+				botLimits?.Info.AttackLivenessMaxNoLaunchTicks ?? 0,
+				(int)Math.Min(int.MaxValue, Math.Max(150L, 2L * Info.AttackForceInterval + 1)), AttackSoftRestraintCA.None,
+				botLimits?.Info.AttackLivenessFirstWaveMaxTicks ?? 0);
+			if (Player.WinState != WinState.Undefined || World.WorldTick <= M13StateOwner.m13State.BaseDangerUntilTick
+				|| !M13LaunchPolicyCA.Urgent(true, roster.Count,
+				Info.MaxIdleUnits, legal, AttackLiveness.Phase))
+				return false;
+
+			// A target can be visible yet not attackable by this roster. Keep capability,
+			// path and lease checks hard; an unsupported draft creates no empty squad.
+			var targetCell = m13CandidateTarget.OccupiesSpace != null ? m13CandidateTarget.Location
+				: World.Map.CellContaining(m13CandidateTarget.CenterPosition);
+			roster.RemoveAll(u => !AIUtils.PathExist(u.Actor, targetCell,
+				m13CandidateTarget, BlockedByActor.Immovable));
+			return M13LaunchPolicyCA.TryCommit(true, roster.Count, roster.Sum(u => (long)UnitValue(u.Actor)),
+				Info.MaxIdleUnits, legal, AttackLiveness, () =>
+				{
+					var wave = RegisterNewSquad(bot, SquadCAType.Rush, m13CandidateTarget);
+					wave.Units.AddRange(roster);
+					foreach (var u in roster)
+						unitsHangingAroundTheBase.Remove(u);
+					wave.FuzzyStateMachine.ChangeState(wave, new GroundUnitsAttackMoveStateCA(), false);
+					if (M13LaunchPolicyCA.TryMarkDispatchIntent(AttackLiveness, wave.M13WaveId))
+					{
+						m13IntentSquad = wave;
+						wave.M13IntentTick = World.WorldTick;
+						wave.M13IntentWave = wave.M13WaveId;
+						AIUtils.BotDebug("M13_INTENT seat={0} wave={1} members={2} deadline={3} dispatch_causality=UNKNOWN",
+							Player.InternalName, wave.M13WaveId, roster.Count, AttackLiveness.DeadlineTick);
+					}
+
+					bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, targetCell), false,
+						groupedActors: roster.Select(u => u.Actor).ToArray()));
+					foreach (var n in notifyIdleBaseUnits)
+						n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
+				});
+		}
+
+		void ObserveOffensiveWaveActivity()
+		{
+			var tick = World.WorldTick;
+			var retained = new HashSet<Actor>();
+			var leases = BotUnitLeases.Of(Player);
+			foreach (var squad in Squads.Where(s => s.M13WaveId > 0).ToArray())
+			{
+				if (!squad.IsValid)
+				{
+					// A dead wave can no longer prove progress; its observed flag is
+					// banked in the clock. The intent's own reference still resolves.
+					squad.M13WaveId = 0;
+					squad.M13ObservedProgress = false;
+					continue;
+				}
+				if (IsRetreatingForLiveness(squad))
+					continue;
+				var enemy = squad.Target.Actor;
+				// No hidden position read: visibility precedes position or target matching.
+				if (enemy == null || enemy.IsDead || !enemy.IsInWorld
+					|| !enemy.CanBeViewedByPlayer(Player) || Player.RelationshipWith(enemy.Owner) != PlayerRelationship.Enemy)
+					continue;
+				var members = 0;
+				foreach (var unit in squad.Units)
+				{
+					var actor = unit.Actor;
+					if (unitCannotBeOrdered(actor) || leases?.IsClaimedByOther(actor, LeaseOwner) == true
+						|| !squad.Target.IsValidFor(actor))
+						continue;
+					retained.Add(actor);
+					if (!livenessActivities.TryGetValue(actor, out var observation))
+						livenessActivities.Add(actor, observation = new());
+					if (observation.Observe(tick, actor.CurrentActivity, actor, actor.CenterPosition,
+						true, actor.IsIdle, target => target.Type == TargetType.Actor
+							? target.Actor == enemy && target.IsValidFor(actor)
+							: target.Type == TargetType.Terrain
+								&& World.Map.CellContaining(target.CenterPosition) == enemy.Location))
+						members++;
+				}
+				if (AttackLiveness.ObserveOffensiveActivity(tick, squad.M13WaveId, members, true, members > 0, true,
+					M13StateOwner.m13State.EvidenceComplete,
+					out var progress))
+				{
+					squad.M13ObservedProgress = true;
+					AIUtils.BotDebug("M13_PROGRESS seat={0} manager={1} tick={2} wave={3} offensive_members={4} observed_count={5} prior_eligible_since={6} prior_deadline={7} dispatch_causality=UNKNOWN",
+						Player.InternalName, Array.IndexOf(Player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().ToArray(), this),
+						progress.Tick, progress.WaveId, progress.OffensiveMembers, progress.ObservedCount,
+						progress.PriorEligibleSinceTick, progress.PriorDeadlineTick);
+				}
+			}
+			foreach (var stale in livenessActivities.Keys.Where(a => !retained.Contains(a)).ToArray())
+				livenessActivities.Remove(stale);
 		}
 
 		public void SetAirStrikeTarget(Actor target)
@@ -3002,13 +3369,39 @@ namespace OpenRA.Mods.CA.Traits
 			return BotCombatPredictor.Predict(own, foes, eff).Ratio;
 		}
 
-		int RetreatRatioPct => Math.Max(0, (botLimits?.Info.RetreatRatioPct ?? Info.DefaultRetreatRatioPct) + (InMatchAdaptation?.RetreatRatioDeltaPct ?? 0));
+		// This shared CA assembly cannot determine a lobby-public faction without
+		// depending on Cameo policy. Passing an empty enemy scope keeps random and
+		// unseen opponents at the own/family/global prior instead of reading their
+		// private resolved Faction value. Cameo consumers use BotFactionView.
+		string EnemyFaction(IEnumerable<Actor> enemies) => "";
+
+		int RetreatRatioPct(IEnumerable<Actor> enemies)
+		{
+			var fallback = Math.Max(0, (botLimits?.Info.RetreatRatioPct ?? Info.DefaultRetreatRatioPct) + (InMatchAdaptation?.RetreatRatioDeltaPct ?? 0));
+			var provider = fightThresholds?.FirstEnabledTraitOrDefault();
+			return provider == null ? fallback : provider.RetreatRatioPct(Player.Faction.InternalName, EnemyFaction(enemies), fallback);
+		}
+
+		int EngageMarginPct(IEnumerable<Actor> enemies)
+		{
+			var provider = fightThresholds?.FirstEnabledTraitOrDefault();
+			return provider == null ? Info.EngageMarginPct : provider.EngageMarginPct(Player.Faction.InternalName, EnemyFaction(enemies), Info.EngageMarginPct);
+		}
 
 		internal bool PredictsLoss(SquadCA squad, IEnumerable<Actor> enemies) =>
-			PredictedRatio(squad, enemies) * 100 < RetreatRatioPct;
+			PredictedRatio(squad, enemies) * 100 < RetreatRatioPct(enemies);
 
-		internal bool PredictsWin(SquadCA squad, IEnumerable<Actor> enemies) =>
-			PredictedRatio(squad, enemies) * 100 >= (double)RetreatRatioPct * Info.EngageMarginPct / 100;
+		internal bool PredictsWin(SquadCA squad, IEnumerable<Actor> enemies)
+		{
+			var provider = fightThresholds?.FirstEnabledTraitOrDefault();
+			if (provider != null)
+				return SquadDesireOrders.CanEngage(DesireRatioMilli(squad, enemies), RetreatRatioPct(enemies), EngageMarginPct(enemies));
+
+			// Preserve the legacy floating point predictor and expression exactly for
+			// switch-off order-stream compatibility. The armed learning path above is
+			// integer-only and shares its thresholds with squad-desire.
+			return PredictedRatio(squad, enemies) * 100 >= (double)RetreatRatioPct(enemies) * Info.EngageMarginPct / 100;
+		}
 
 		internal CPos DesireHome => initialBaseCenter;
 		List<Actor> desireEnemies;
@@ -3045,7 +3438,7 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		internal bool DesireCanEngage(SquadCA squad, IEnumerable<Actor> enemies) =>
-			SquadDesireOrders.CanEngage(DesireRatioMilli(squad, enemies), RetreatRatioPct, Info.EngageMarginPct);
+			SquadDesireOrders.CanEngage(DesireRatioMilli(squad, enemies), RetreatRatioPct(enemies), EngageMarginPct(enemies));
 
 		// LEARN-P6 (SPEC §11): the scatter normaliser — a member this far from the squad centre
 		// counts as fully scattered (ScatterMilli = mean member distance vs this, clamped to 1000).
@@ -3298,11 +3691,14 @@ namespace OpenRA.Mods.CA.Traits
 			if (Info.SquadValue > 0 && scaleTargetProviders.TryArmyValue(Info.SquadValue, out var armyTarget))
 			{
 				desiredValue = armyTarget;
-				maxIdleUnits = Math.Max(1, (int)((long)Info.MaxIdleUnits * armyTarget / Info.SquadValue));
+				maxIdleUnits = M13LaunchPolicyCA.MaxIdleUnits(Info.AttackLivenessEnabled, Info.MaxIdleUnits,
+					Info.SquadValue, armyTarget);
 			}
 
 			var requiredValue = ApplyForceScale(desiredValue, forceScale);
 			var requiredSize = ApplyForceScale(desiredAttackForceSize, forceScale);
+			if (Info.AttackLivenessEnabled)
+				requiredSize = AttackForceEvalCA.RequiredSize(requiredSize, botLimits?.Info.TempoMinWaveUnits ?? 0);
 
 			// CA F2p2 (A5-2): ValueOnlyAttackLaunch drops the unit-count gate when a squad value threshold is configured; MaxIdleUnits still applies.
 			if (AttackForceEvalCA.ShouldLaunch(unitsHangingAroundTheBase.Count, maxIdleUnits,
@@ -3712,6 +4108,10 @@ namespace OpenRA.Mods.CA.Traits
 
 		void IBotRespondToAttack.RespondToAttack(IBot bot, Actor self, AttackInfo e)
 		{
+			if (Info.AttackLivenessEnabled && self.Owner == Player && self.OccupiesSpace != null && e.Attacker != null
+				&& Player.RelationshipWith(e.Attacker.Owner) == PlayerRelationship.Enemy && e.Damage.Value > 0
+				&& (self.Location - initialBaseCenter).LengthSquared <= (long)Info.MaxBaseRadius * Info.MaxBaseRadius)
+				M13StateOwner.m13State.NoteBaseDamage(World.WorldTick, Math.Max(1, Info.ProtectInterval));
 			if (!IsPreferredEnemyUnit(e.Attacker))
 				return;
 
@@ -3731,7 +4131,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (IsTraitDisabled)
 				return null;
 
-			return new List<MiniYamlNode>()
+			var data = new List<MiniYamlNode>()
 			{
 				new("Squads", "", Squads.ConvertAll(s => new MiniYamlNode("Squad", s.Serialize()))),
 				new("InitialBaseCenter", FieldSaver.FormatValue(initialBaseCenter)),
@@ -3749,6 +4149,29 @@ namespace OpenRA.Mods.CA.Traits
 				new("AttackForceTicks", FieldSaver.FormatValue(attackForceTicks)),
 				new("MinAttackForceDelayTicks", FieldSaver.FormatValue(minAttackForceDelayTicks)),
 			};
+
+			if (Info.AttackLivenessEnabled)
+			{
+				// The flagged protection squad's binding must reproduce the budget's
+				// claim key after load; nothing may be synthesized from a tick or rally.
+				if (m13ResponseSquad != null && m13ResponseSquad.IsValid && Squads.Contains(m13ResponseSquad))
+				{
+					var ep = m13ResponseRequest.Episode;
+					data.Add(new MiniYamlNode("M13ResponseChannel", FieldSaver.FormatValue((int)m13ResponseChannel)));
+					data.Add(new MiniYamlNode("M13ResponseRally", FieldSaver.FormatValue(m13ResponseRequest.Location)));
+					data.Add(new MiniYamlNode("M13ResponseValue", FieldSaver.FormatValue(m13ResponseRequest.Value)));
+					data.Add(new MiniYamlNode("M13ResponseExpires", FieldSaver.FormatValue(m13ResponseRequest.ExpiresTick)));
+					data.Add(new MiniYamlNode("M13EpisodeParticipant", FieldSaver.FormatValue(ep.ParticipantId ?? string.Empty)));
+					data.Add(new MiniYamlNode("M13EpisodeProvider", FieldSaver.FormatValue(ep.ProviderId ?? string.Empty)));
+					data.Add(new MiniYamlNode("M13EpisodeInstance", FieldSaver.FormatValue(ep.ProviderInstance)));
+					data.Add(new MiniYamlNode("M13EpisodeSequence", FieldSaver.FormatValue(ep.Sequence)));
+				}
+
+				if (this == M13StateOwner && m13State.EvidenceComplete)
+					data.Add(new MiniYamlNode("M13Player", "", M13PlayerSnapshotNodes()));
+			}
+
+			return data;
 		}
 
 		void IGameSaveTraitData.ResolveTraitData(Actor self, MiniYaml data)
@@ -3802,12 +4225,271 @@ namespace OpenRA.Mods.CA.Traits
 					Squads.Add(SquadCA.Deserialize(bot, this, n.Value));
 			}
 
+			// M13 restore: rebuild manager-local bindings from the squad records, then
+			// let the state owner replay the shared snapshot. Cross-manager membership
+			// can only be checked once every manager has resolved — the first armed
+			// tick runs ValidateM13RestoredMembership and anything unresolved or
+			// inconsistent leaves the player's evidence UNKNOWN.
+			if (Info.AttackLivenessEnabled)
+			{
+				m13IntentSquad = Squads.FirstOrDefault(s => s.M13IntentTick >= 0);
+				m13ResponseSquad = Squads.FirstOrDefault(s => s.M13Response && s.IsValid);
+				if (m13ResponseSquad != null)
+					RestoreM13ResponseBinding(nodes);
+
+				if (this == M13StateOwner)
+				{
+					if (nodes.TryGetValue("M13Player", out var playerNode))
+						m13State.TryRestore(World.WorldTick, Player.InternalName,
+							ParseM13PlayerSnapshot(playerNode), Math.Max(1, Info.ProtectInterval));
+					else
+						m13State.Invalidate();
+				}
+
+				m13MembershipPending = true;
+			}
+			else
+			{
+				// An unarmed manager cannot validate or act on M13 flags arriving in a
+				// save; scrub them so stale membership cannot ride a future save.
+				ClearM13RestoredState();
+			}
+
 			// Reconcile stranded units: an actor restored into activeUnits that belongs to
 			// no squad and no idle pool would never be managed again — park it in the pool.
 			var inSquads = Squads.SelectMany(s => s.Units.Select(u => u.Actor)).ToHashSet();
 			var inPool = unitsHangingAroundTheBase.Select(u => u.Actor).ToHashSet();
 			foreach (var a in activeUnits.Where(a => !inSquads.Contains(a) && !inPool.Contains(a) && !unitCannotBeOrdered(a)))
 				unitsHangingAroundTheBase.Add(new UnitWposWrapper(a));
+		}
+
+		List<MiniYamlNode> M13PlayerSnapshotNodes()
+		{
+			var liveness = m13State.Liveness.Capture();
+			var budget = m13State.Responses.Capture(Player.InternalName);
+			return new List<MiniYamlNode>
+			{
+				new("Version", FieldSaver.FormatValue(1)),
+				new("PlayerIdentity", FieldSaver.FormatValue(Player.InternalName)),
+				new("LastWaveId", FieldSaver.FormatValue(m13State.LastWaveId)),
+				new("BaseDangerUntilTick", FieldSaver.FormatValue(m13State.BaseDangerUntilTick)),
+				new("L_Version", FieldSaver.FormatValue(liveness.Version)),
+				new("L_LastTick", FieldSaver.FormatValue(liveness.LastTick)),
+				new("L_Phase", FieldSaver.FormatValue((int)liveness.Phase)),
+				new("L_EligibleSinceTick", FieldSaver.FormatValue(liveness.EligibleSinceTick)),
+				new("L_ValueFloor", FieldSaver.FormatValue(liveness.ValueFloor)),
+				new("L_DeadlineTick", FieldSaver.FormatValue(liveness.DeadlineTick)),
+				new("L_DispatchLead", FieldSaver.FormatValue(liveness.DispatchLead)),
+				new("L_LastObservedOffensiveTick", FieldSaver.FormatValue(liveness.LastObservedOffensiveTick)),
+				new("L_ObservedOffensiveCount", FieldSaver.FormatValue(liveness.ObservedOffensiveCount)),
+				new("L_Restraints", FieldSaver.FormatValue((int)liveness.Restraints)),
+				new("L_PendingWave", FieldSaver.FormatValue(liveness.PendingWave)),
+				new("L_LastObservedWave", FieldSaver.FormatValue(liveness.LastObservedWave)),
+				new("L_LastIssuedWave", FieldSaver.FormatValue(liveness.LastIssuedWave)),
+				new("R_Version", FieldSaver.FormatValue(budget.Version)),
+				new("R_LastTick", FieldSaver.FormatValue(budget.LastTick)),
+				new("R_ActiveKey", FieldSaver.FormatValue(budget.ActiveKey ?? string.Empty)),
+				new("R_Owner", FieldSaver.FormatValue(budget.Owner ?? string.Empty)),
+				new("R_StartedTick", FieldSaver.FormatValue(budget.StartedTick)),
+				new("R_ExpiresTick", FieldSaver.FormatValue(budget.ExpiresTick)),
+				new("M13Cooldowns", "", budget.Cooldowns.Select(kv => new MiniYamlNode("E",
+					kv.Key + " " + kv.Value.ToString(CultureInfo.InvariantCulture))).ToList()),
+			};
+		}
+
+		M13PlayerSnapshotCA ParseM13PlayerSnapshot(MiniYaml yaml)
+		{
+			try
+			{
+				var nodes = yaml.ToDictionary();
+				string Required(string key) => nodes.TryGetValue(key, out var n)
+					? n.Value : throw new YamlException("missing M13 field " + key);
+
+				var cooldowns = new List<KeyValuePair<string, long>>();
+				if (nodes.TryGetValue("M13Cooldowns", out var cooldownsNode))
+					foreach (var e in cooldownsNode.Nodes)
+					{
+						var parts = e.Value?.Value?.Split(' ');
+						if (parts is not { Length: 2 } || !long.TryParse(parts[1],
+							NumberStyles.Integer, CultureInfo.InvariantCulture, out var until))
+							throw new YamlException("malformed M13 cooldown entry");
+						cooldowns.Add(new KeyValuePair<string, long>(parts[0], until));
+					}
+
+				var identity = FieldLoader.GetValue<string>("PlayerIdentity", Required("PlayerIdentity"));
+				var liveness = new AttackLivenessSnapshotCA(
+					FieldLoader.GetValue<int>("Version", Required("L_Version")),
+					FieldLoader.GetValue<int>("LastTick", Required("L_LastTick")),
+					FieldLoader.GetValue<AttackLivenessPhaseCA>("Phase", Required("L_Phase")),
+					FieldLoader.GetValue<int>("EligibleSinceTick", Required("L_EligibleSinceTick")),
+					FieldLoader.GetValue<long>("ValueFloor", Required("L_ValueFloor")),
+					FieldLoader.GetValue<long>("DeadlineTick", Required("L_DeadlineTick")),
+					FieldLoader.GetValue<int>("DispatchLead", Required("L_DispatchLead")),
+					FieldLoader.GetValue<int>("LastObservedOffensiveTick", Required("L_LastObservedOffensiveTick")),
+					FieldLoader.GetValue<int>("ObservedOffensiveCount", Required("L_ObservedOffensiveCount")),
+					FieldLoader.GetValue<AttackSoftRestraintCA>("Restraints", Required("L_Restraints")),
+					FieldLoader.GetValue<long>("PendingWave", Required("L_PendingWave")),
+					FieldLoader.GetValue<long>("LastObservedWave", Required("L_LastObservedWave")),
+					FieldLoader.GetValue<long>("LastIssuedWave", Required("L_LastIssuedWave")));
+				var activeKey = Required("R_ActiveKey");
+				var owner = Required("R_Owner");
+				var budget = new TeamResponseBudgetSnapshotCA(
+					FieldLoader.GetValue<int>("Version", Required("R_Version")),
+					identity,
+					FieldLoader.GetValue<int>("LastTick", Required("R_LastTick")),
+					string.IsNullOrEmpty(activeKey) ? null : activeKey,
+					string.IsNullOrEmpty(owner) ? null : owner,
+					FieldLoader.GetValue<int>("StartedTick", Required("R_StartedTick")),
+					FieldLoader.GetValue<long>("ExpiresTick", Required("R_ExpiresTick")),
+					cooldowns);
+				return new M13PlayerSnapshotCA(
+					FieldLoader.GetValue<int>("Version", Required("Version")),
+					identity,
+					FieldLoader.GetValue<long>("LastWaveId", Required("LastWaveId")),
+					FieldLoader.GetValue<long>("BaseDangerUntilTick", Required("BaseDangerUntilTick")),
+					liveness, budget);
+			}
+			catch (Exception e) when (e is YamlException or FormatException or InvalidCastException or OverflowException or ArgumentException)
+			{
+				return null;
+			}
+		}
+
+		void RestoreM13ResponseBinding(IReadOnlyDictionary<string, MiniYaml> nodes)
+		{
+			if (!nodes.TryGetValue("M13ResponseChannel", out var channelNode)
+				|| !nodes.TryGetValue("M13ResponseRally", out var rallyNode)
+				|| !nodes.TryGetValue("M13ResponseValue", out var valueNode)
+				|| !nodes.TryGetValue("M13ResponseExpires", out var expiresNode)
+				|| !nodes.TryGetValue("M13EpisodeParticipant", out var participantNode)
+				|| !nodes.TryGetValue("M13EpisodeProvider", out var providerNode)
+				|| !nodes.TryGetValue("M13EpisodeInstance", out var instanceNode)
+				|| !nodes.TryGetValue("M13EpisodeSequence", out var sequenceNode))
+				return;
+
+			try
+			{
+				var channel = (PrepositionChannelCA)FieldLoader.GetValue<int>(
+					"M13ResponseChannel", channelNode.Value);
+				var request = new BotProtectionRequest(
+					FieldLoader.GetValue<CPos>("M13ResponseRally", rallyNode.Value),
+					FieldLoader.GetValue<int>("M13ResponseValue", valueNode.Value),
+					FieldLoader.GetValue<int>("M13ResponseExpires", expiresNode.Value),
+					new BotClaimEpisode(
+						FieldLoader.GetValue<string>("M13EpisodeParticipant", participantNode.Value),
+						FieldLoader.GetValue<string>("M13EpisodeProvider", providerNode.Value),
+						FieldLoader.GetValue<int>("M13EpisodeInstance", instanceNode.Value),
+						FieldLoader.GetValue<long>("M13EpisodeSequence", sequenceNode.Value)));
+				m13ResponseChannel = channel;
+				m13ResponseRequest = request;
+			}
+			catch (Exception e) when (e is YamlException or FormatException or InvalidCastException or OverflowException or ArgumentException)
+			{
+				// A malformed binding cannot reproduce the claim key; the membership
+				// validation below fails closed instead of inventing an episode.
+			}
+		}
+
+		void ValidateM13RestoredMembership()
+		{
+			var state = M13StateOwner.m13State;
+			var armed = Player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>()
+				.Where(m => m.Info.AttackLivenessEnabled).ToArray();
+			if (!state.RestoreSeen || !state.EvidenceComplete)
+			{
+				// Legacy save, missing record or a rejected snapshot: evidence is UNKNOWN.
+				state.Invalidate();
+				foreach (var m in armed)
+					m.ClearM13RestoredState();
+				return;
+			}
+
+			long maxSquadWave = 0, intentWave = 0;
+			var intentFlags = 0;
+			var responseFlags = 0;
+			var responseSquads = 0;
+			var observedNoWave = 0;
+			var corrupt = 0;
+			SquadManagerBotModuleCA claimant = null;
+			foreach (var m in armed)
+			{
+				foreach (var s in m.Squads)
+				{
+					if (s.M13Corrupt)
+						corrupt++;
+					if (s.M13WaveId > maxSquadWave)
+						maxSquadWave = s.M13WaveId;
+					if (s.M13IntentTick >= 0)
+					{
+						intentFlags++;
+						intentWave = s.M13IntentWave;
+					}
+
+					if (s.M13ObservedProgress && s.M13WaveId <= 0)
+						observedNoWave++;
+					if (s.M13Response)
+						responseFlags++;
+				}
+
+				if (m.m13ResponseSquad is { IsValid: true, M13Response: true })
+				{
+					responseSquads++;
+					claimant = m;
+				}
+			}
+
+			var clock = state.Liveness.Capture();
+			string responseKey = null;
+			if (claimant != null)
+				M13ResponseClaimCA.TryKey(claimant.m13ResponseChannel, claimant.m13ResponseRequest,
+					claimant.m13ResponseRequest.Episode.ParticipantId, out responseKey);
+
+			var verdict = M13RestoreMembershipCA.Evaluate(new M13MembershipSnapshotCA(
+				maxSquadWave, intentFlags, intentWave, clock.PendingWave, clock.LastIssuedWave,
+				state.LastWaveId, observedNoWave, corrupt, responseFlags, responseSquads,
+				state.Responses.ActiveKey, state.Responses.Owner,
+				claimant?.M13ManagerIdentity, responseKey));
+
+			if (verdict == M13MembershipVerdictCA.DeadPendingIntent)
+			{
+				// The pending wave's intent squad did not survive the save; resolve it as
+				// a dispatch failure — no eligibility renewal, no invented membership.
+				state.Liveness.NoteDispatchFailed(clock.PendingWave);
+				foreach (var m in armed)
+					if (m.m13IntentSquad != null)
+					{
+						m.m13IntentSquad.M13IntentTick = -1;
+						m.m13IntentSquad = null;
+					}
+
+				return;
+			}
+
+			if (verdict != M13MembershipVerdictCA.Consistent)
+			{
+				state.Invalidate();
+				foreach (var m in armed)
+					m.ClearM13RestoredState();
+			}
+		}
+
+		void ClearM13RestoredState()
+		{
+			m13IntentSquad = null;
+			if (m13ResponseSquad != null)
+			{
+				m13ResponseSquad.M13Response = false;
+				m13ResponseSquad = null;
+			}
+
+			foreach (var s in Squads)
+			{
+				s.M13WaveId = 0;
+				s.M13IntentTick = -1;
+				s.M13IntentWave = 0;
+				s.M13ObservedProgress = false;
+				s.M13Response = false;
+			}
 		}
 
 		public bool CanBuildMoreOfAircraft(ActorInfo actorInfo)

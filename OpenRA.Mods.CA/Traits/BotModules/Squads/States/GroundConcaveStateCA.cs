@@ -279,6 +279,13 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				planAnchor = anchor;
 			}
 
+			// A member destroyed after its slot was planned keeps its entry until here: drop it
+			// before the commit checks read its traits (TraitOrDefault throws on a destroyed
+			// actor) or count its stale slot in the formed/straggler metrics. The survivors keep
+			// their slots — no replan churn under fire — and a wiped plan degrades to the
+			// commit-now path the objective shape already relies on.
+			placed.RemoveAll(p => owner.SquadManager.unitCannotBeOrdered(p.Actor));
+
 			var reason = ShouldCommit(owner, tick, enemies, members);
 			if (reason != CommitReason.None)
 			{

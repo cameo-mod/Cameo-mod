@@ -75,7 +75,14 @@ class Skips:
 
 
 def load_records(paths: list[Path], skips: Skips) -> list[dict]:
-    """Parse JSONL, dropping malformed lines and duplicate record_ids."""
+    """Parse JSONL, dropping malformed lines and duplicate record_ids.
+
+    Ingest is provenance-gated: a sentinel-bound file contributes nothing,
+    and missing/malformed/conflicting provenance is a hard error — a bare
+    detached file is never treated as historical scoreable input.
+    """
+    import capture_provenance
+
     records: list[dict] = []
     seen: set[str] = set()
     for path in paths:
@@ -87,6 +94,12 @@ def load_records(paths: list[Path], skips: Skips) -> list[dict]:
         except OSError as e:
             skips.add(f"unreadable file {path}: {e}")
             continue
+        verdict, why = capture_provenance.assess_file(path)
+        if verdict == capture_provenance.SENTINEL:
+            skips.add(f"sentinel-quarantined file {path}")
+            continue
+        if verdict == capture_provenance.REJECT:
+            raise ValueError(f"unbound provenance for {path}: {why}")
 
         for line_number, line in enumerate(text.splitlines(), start=1):
             line = line.strip()

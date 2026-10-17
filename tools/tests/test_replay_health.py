@@ -33,6 +33,48 @@ def terminal(faction="ra1_allies"):
 
 
 class HealthTests(unittest.TestCase):
+    def test_real_attempt3_schema3_receipt_is_accepted(self):
+        support = Path(__file__).parent / "fixtures" / "replay_health_schema3_attempt3"
+        provenance = json.loads((support / "fixture_provenance.json").read_text(encoding="utf-8"))
+        uid = provenance["selection"]["game_uid"]
+        report = health.inspect(support, uid, "seat_3")
+        self.assertEqual(report["status"], "OBSERVED_HEALTHY")
+        self.assertEqual(report["metrics"]["bot_type"], "hard_control")
+        self.assertEqual(report["metrics"]["first_refinery_placement_tick"], 1360)
+        self.assertEqual([item["rows"] for item in report["inputs"]], [3, 1, 1])
+
+    def test_unknown_schema3_verdict_fields_fail_closed(self):
+        support = Path(__file__).parent / "fixtures" / "replay_health_schema3_attempt3" / "Logs"
+        situations = [health.strict_json(line) for line in (support / "cameo-ai-situations.jsonl").read_text(encoding="utf-8").splitlines()]
+        placements = [health.strict_json(line) for line in (support / "cameo-ai-placements.jsonl").read_text(encoding="utf-8").splitlines()]
+        matches = [health.strict_json(line) for line in (support / "cameo-ai-matches.jsonl").read_text(encoding="utf-8").splitlines()]
+        mutations = (
+            (lambda s, p, m: s[0]["own"].update(new_harvester_state=1), "own-state"),
+            (lambda s, p, m: s[0]["expansion"].update(new_refinery_state=1), "expansion"),
+            (lambda s, p, m: s[0].update(new_verdict_input=1), "situation"),
+            (lambda s, p, m: p[0].update(new_placement_state=1), "placement"),
+            (lambda s, p, m: m[0]["stats"].update(new_economy_metric=1), "match stats"),
+        )
+        uid = "27198fe4-be54-4d14-b304-d74d3923a674"
+        for mutate, message in mutations:
+            with self.subTest(message=message):
+                changed_situations = json.loads(json.dumps(situations))
+                changed_placements = json.loads(json.dumps(placements))
+                changed_matches = json.loads(json.dumps(matches))
+                mutate(changed_situations, changed_placements, changed_matches)
+                with self.assertRaisesRegex(health.EvidenceError, "unsupported"):
+                    health.analyze(changed_situations, changed_placements, changed_matches, uid, "seat_3")
+
+    def test_known_conditional_schema3_own_providers_are_accepted(self):
+        support = Path(__file__).parent / "fixtures" / "replay_health_schema3_attempt3" / "Logs"
+        situations = [health.strict_json(line) for line in (support / "cameo-ai-situations.jsonl").read_text(encoding="utf-8").splitlines()]
+        placements = [health.strict_json(line) for line in (support / "cameo-ai-placements.jsonl").read_text(encoding="utf-8").splitlines()]
+        matches = [health.strict_json(line) for line in (support / "cameo-ai-matches.jsonl").read_text(encoding="utf-8").splitlines()]
+        situations[0]["own"].update({"scale_targets": {}, "build_order": {}, "bandit": {}, "contacts": {}})
+        report = health.analyze(situations, placements, matches,
+                                "27198fe4-be54-4d14-b304-d74d3923a674", "seat_3")
+        self.assertEqual(report["status"], "OBSERVED_HEALTHY")
+
     def test_duplicate_keys_and_nonfinite_constants_rejected(self):
         for raw in ('{"schema":1,"schema":2}', '{"own":{"x":1,"x":2}}', '{"tick":NaN}'):
             with self.assertRaises(health.EvidenceError):
@@ -250,6 +292,82 @@ class HealthTests(unittest.TestCase):
         self.assertEqual(seated["metrics"]["first_refinery_placement_tick"],
                           legacy["metrics"]["first_refinery_placement_tick"])
         self.assertNotIn("MISSING_SITUATIONS", [f["code"] for f in seated["findings"]])
+
+
+class PlayerEventVersionTests(unittest.TestCase):
+    """CB_frontier_observe (P3a): cameo-player-event rows dispatch on the row's own
+    version — v1 stays byte-valid, outpost_stage is admitted only at version 2."""
+
+    def _channel(self, rows):
+        import hashlib
+        uid = "g"
+        name = "cameo-ai-players-{}.jsonl".format(
+            hashlib.sha256(uid.encode("utf-8")).hexdigest())
+        temp = tempfile.TemporaryDirectory()
+        logs = Path(temp.name) / "Logs"
+        logs.mkdir()
+        (logs / name).write_text(
+            "\n".join(json.dumps(r) for r in rows) + "\n", encoding="utf-8")
+        return temp, logs
+
+    @staticmethod
+    def _event(version=1, kind="building_placed", **extra):
+        return {"schema": "cameo-player-event", "version": version,
+                "game_uid": "g", "record_id": "g|seat_3|{}|10|1".format(kind),
+                "tick": 10, "seat": "seat_3", "kind": kind, "seq": 1, **extra}
+
+    def _stage_row(self, **extra):
+        fields = dict(version=2, kind="outpost_stage",
+                      cell="42,17", stage="cover", cover_value=600,
+                      at_risk_value=900, reason="cover_completed",
+                      episode=0, escort_seq=0)
+        fields.update(extra)
+        return self._event(**fields)
+
+    def test_v1_rows_still_validate(self):
+        temp, logs = self._channel([self._event(), self._event(units=3)])
+        with temp:
+            _, metrics = health.players_channel(logs, "g", "seat_3")
+        self.assertEqual(metrics["player_channel_events"], {"building_placed": 2})
+
+    def test_v2_outpost_stage_is_accepted(self):
+        temp, logs = self._channel([self._stage_row()])
+        with temp:
+            _, metrics = health.players_channel(logs, "g", "seat_3")
+        self.assertEqual(metrics["player_channel_events"], {"outpost_stage": 1})
+
+    def test_outpost_stage_rejected_at_version_1(self):
+        # version 1 + the v2-only kind, no v2 fields: the field check passes and the
+        # kind check does the rejecting.
+        row = self._event(version=1, kind="outpost_stage")
+        temp, logs = self._channel([row])
+        with temp:
+            with self.assertRaisesRegex(health.EvidenceError, "unsupported player-event kind"):
+                health.players_channel(logs, "g", "seat_3")
+
+    def test_unknown_field_on_v2_row_rejects(self):
+        temp, logs = self._channel([self._stage_row(future_knob=1)])
+        with temp:
+            with self.assertRaisesRegex(health.EvidenceError, "unsupported player-event v2 field"):
+                health.players_channel(logs, "g", "seat_3")
+
+    def test_v1_row_with_stage_field_rejects(self):
+        temp, logs = self._channel([self._event(stage="cover")])
+        with temp:
+            with self.assertRaisesRegex(health.EvidenceError, "unsupported player-event v1 field"):
+                health.players_channel(logs, "g", "seat_3")
+
+    def test_unknown_kind_on_v2_row_rejects(self):
+        temp, logs = self._channel([self._stage_row(kind="future_event")])
+        with temp:
+            with self.assertRaisesRegex(health.EvidenceError, "unsupported player-event kind"):
+                health.players_channel(logs, "g", "seat_3")
+
+    def test_v2_numeric_fields_must_be_integers(self):
+        temp, logs = self._channel([self._stage_row(cover_value="lots")])
+        with temp:
+            with self.assertRaises(health.EvidenceError):
+                health.players_channel(logs, "g", "seat_3")
 
 
 if __name__ == "__main__":

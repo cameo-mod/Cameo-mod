@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Globalization;
 using OpenRA.Mods.CA.Traits;
 
@@ -10,10 +11,29 @@ namespace OpenRA.Mods.Cameo.Traits
 	// Consumes the independently accepted terminal seam; never promotes order intent or disappearance.
 	internal static class AiEconomyQueueEvidence
 	{
-		internal static EconomyQueueEvidenceKind Classify(in BotQueueTransition transition)
+		internal static EconomyQueueEvidenceKind Classify(in BotQueueTransition transition,
+			bool terminalEpisodeResolved = false)
 		{
 			if (transition.Kind == BotQueueTransitionKind.Removed)
-				return EconomyQueueEvidenceKind.Unknown;
+				// A Removed behind the episode's recorded resolution (cancel intent, proven
+				// cancellation, proven placement) is the dequeue of an outcome already on
+				// record, and an event-local proven removal cause — Destruction,
+				// Elimination, Captured (owner changed on a live producer; OnOwnerChanged
+				// -> ClearQueue is unconditional) — is accounted evidence, not missing
+				// data. Unbuildable is deliberately NOT admitted (Sol adjudication
+				// 2026-10-14): absence from the observed BuildableItems set is a
+				// diagnostic predicate, not an eviction receipt — CancelUnbuildableItems
+				// is cached-set gated and prefers migration, so an uninstrumented
+				// removal plus prerequisite loss produces the identical observation.
+				// The class still serializes for diagnosis; the unresolved removal
+				// latches UNKNOWN. Only an unresolved Removed with no proven cause is an
+				// unproven disappearance and stays UNKNOWN.
+				return terminalEpisodeResolved
+					|| transition.CancellationClass is BotQueueCancellationClass.Destruction
+						or BotQueueCancellationClass.Elimination
+						or BotQueueCancellationClass.Captured
+					? EconomyQueueEvidenceKind.Observation
+					: EconomyQueueEvidenceKind.Unknown;
 			if (transition.Kind is not (BotQueueTransitionKind.Placed or BotQueueTransitionKind.Cancelled))
 				return EconomyQueueEvidenceKind.Observation;
 			if (transition.ProducerActorId == 0 || transition.EpisodeId == 0 || transition.ProducerLive == null
@@ -43,7 +63,35 @@ namespace OpenRA.Mods.Cameo.Traits
 			BotQueueCancellationClass.Production => "production",
 			BotQueueCancellationClass.Destruction => "destruction",
 			BotQueueCancellationClass.Elimination => "elimination",
+			BotQueueCancellationClass.Captured => "captured",
+
+			// Unbuildable is diagnostic-only (Sol adjudication 2026-10-14) and can never
+			// enter canonical cancel evidence — a Cancelled row carrying it maps to null
+			// and stays UNKNOWN rather than asserting the unproven eviction.
 			_ => null
 		};
+
+		// Amortized canonical queue resolution: one bounded own-queue enumeration per world
+		// tick instead of one scan per proven cancellation. The fail-closed contract is
+		// unchanged — more than maximumQueues own queues poisons the index (null), and a
+		// missing or ambiguous (producer, group) pair resolves to null.
+		internal static Dictionary<(uint Producer, string Group), string> BuildCancellationQueueIndex(
+			IEnumerable<(uint Producer, string QueueType, string Group)> ownQueues, int maximumQueues)
+		{
+			var index = new Dictionary<(uint, string), string>();
+			var count = 0;
+			foreach (var (producer, queueType, group) in ownQueues)
+			{
+				if (++count > maximumQueues)
+					return null;
+				var key = (producer, group);
+				index[key] = index.ContainsKey(key) ? null : $"{producer}:{queueType}:{group}";
+			}
+			return index;
+		}
+
+		internal static string ResolveCancellationQueueId(
+			IReadOnlyDictionary<(uint Producer, string Group), string> index, uint producer, string group) =>
+			index != null && index.TryGetValue((producer, group), out var id) ? id : null;
 	}
 }

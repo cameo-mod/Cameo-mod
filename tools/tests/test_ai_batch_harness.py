@@ -5,9 +5,11 @@ match-log corpus the aggregator learns from, so the pure pieces (matrix,
 map patching, record slicing) get unit tests; the engine launch itself is
 smoke-tested separately with a real match.
 """
+import json
 import pathlib
 import re
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -295,6 +297,123 @@ class RecordSliceTests(unittest.TestCase):
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
 
+    def test_repeated_games_get_distinct_support_leaves_and_missing_health_is_unknown(self):
+        with tempfile.TemporaryDirectory(prefix="ai_repeat_support_test_") as tmp_dir:
+            tmp = pathlib.Path(tmp_dir)
+            support = tmp / "batch"
+            variants = support / batch.USER_MAP_DIR
+            source_variant = variants / "variant-a"
+            source_variant.mkdir(parents=True)
+            (source_variant / "map.yaml").write_text("MapFormat: 12\n", encoding="utf-8")
+            matchups = batch.build_matchups(["td_gdi"], ["hard"], ["hard"], repeats=2)
+            self.assertEqual(len(matchups), 2)
+            leaves = [
+                batch.prepare_match_support(support, variants, "variant-a", index,
+                                            matchup["repeat"], 1, "test-batch")
+                for index, matchup in enumerate(matchups, 1)
+            ]
+            self.assertNotEqual(leaves[0], leaves[1])
+            self.assertTrue(all((leaf / batch.USER_MAP_DIR / "variant-a" / "map.yaml").is_file()
+                                for leaf in leaves))
+            match_records = [{"game_uid": "g", "record_id": "g|seat_3",
+                              "player": {"seat": "seat_3", "faction": "td_gdi", "bot_type": "hard",
+                                         "home": "22,16"}}]
+            planned = [("BotA", "td_gdi", "hard", "22,16")]
+            self.assertEqual(batch.economy_health_file_status(leaves[0], match_records, planned)[0], "UNKNOWN")
+            health = leaves[0] / "Logs" / "cameo-ai-economy-health.jsonl"
+            health.touch()
+            self.assertEqual(batch.economy_health_file_status(leaves[0], match_records, planned)[0], "UNKNOWN")
+            health.write_text('{"schema":2}\n', encoding="utf-8")
+            self.assertEqual(batch.economy_health_file_status(leaves[0], match_records, planned)[0], "UNKNOWN")
+
+    def test_complete_health_evidence_requires_all_seats_and_terminal_rows(self):
+        with tempfile.TemporaryDirectory(prefix="ai_complete_health_test_") as tmp_dir:
+            support = pathlib.Path(tmp_dir)
+            logs = support / "Logs"
+            logs.mkdir()
+            records = [
+                {"game_uid": "g", "record_id": "g|seat_3",
+                 "player": {"seat": "seat_3", "faction": "td_gdi", "bot_type": "hard", "home": "22,16"}},
+                {"game_uid": "g", "record_id": "g|seat_4",
+                 "player": {"seat": "seat_4", "faction": "td_nod", "bot_type": "classic", "home": "49,55"}},
+            ]
+
+            def pulse(player, seq, tick, kind="pulse", terminal=False):
+                return {"schema": 2, "game_uid": "g", "player": player,
+                        "map_uid": "map", "faction": "td_gdi" if player == "Multi0" else "td_nod",
+                        "bot_type": "hard" if player == "Multi0" else "classic",
+                        "profile": "conventional",
+                        "profile_supported": True, "dropped": 0, "kind": kind,
+                        "tick": tick, "seq": seq, "queues_complete": True,
+                        "player_active": not terminal, "seat_state": "lost" if terminal else "active",
+                        "cash": 5000, "resources": 0, "capacity": 10000,
+                        "net_spent": tick, "gross_spent": None, "gross_spend_complete": False,
+                        "queues": [], **({"complete": True} if kind == "end" else {})}
+
+            path = logs / "cameo-ai-economy-health.jsonl"
+            rows = []
+            for player in ("Multi0", "Multi1"):
+                rows.extend([pulse(player, 0, 0), pulse(player, 1, 50),
+                             pulse(player, 2, 100, terminal=True),
+                             pulse(player, 3, 100, kind="end", terminal=True)])
+            path.write_text("".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8")
+            planned = [("Multi0", "td_gdi", "hard", "22,16"),
+                       ("Multi1", "td_nod", "classic", "49,55")]
+            self.assertEqual(batch.economy_health_file_status(support, records, planned), ("OBSERVED_HEALTHY", None))
+
+            reversed_seats = [row for player in ("Multi1", "Multi0") for row in rows if row["player"] == player]
+            path.write_text("".join(json.dumps(row) + "\n" for row in reversed_seats), encoding="utf-8")
+            self.assertEqual(batch.economy_health_file_status(support, records, planned), ("OBSERVED_HEALTHY", None))
+
+            path.write_text("".join(json.dumps(row) + "\n" for row in rows[:-1]), encoding="utf-8")
+            self.assertEqual(batch.economy_health_file_status(support, records, planned)[0], "UNKNOWN")
+
+            path.write_text("".join(json.dumps(row) + "\n" for row in rows) + "{malformed\n",
+                            encoding="utf-8")
+            self.assertEqual(batch.economy_health_file_status(support, records, planned)[0], "UNKNOWN")
+
+            path.write_text("".join(json.dumps(row) + "\n" for row in rows if row["player"] != "Multi1"),
+                            encoding="utf-8")
+            self.assertEqual(batch.economy_health_file_status(support, records, planned)[0], "UNKNOWN")
+
+            # Removing the same seat from both match and health logs still
+            # fails because the variant contract requires both planned seats.
+            path.write_text("".join(json.dumps(row) + "\n" for row in rows if row["player"] == "Multi0"),
+                            encoding="utf-8")
+            self.assertEqual(batch.economy_health_file_status(support, records[:1], planned)[0], "UNKNOWN")
+
+    def test_planned_roster_uses_real_duel_template_identity_not_raw_player_order(self):
+        # The referee is a Playable: True NonCombatant before the map-side bots.
+        # Map YAML order therefore is not World.Players seat order, but the
+        # configured combat roster remains BotA/B by name + faction + bot + home.
+        matchup = {"side_a": {"faction": "td_gdi", "bot": "hard"},
+                   "side_b": {"faction": "td_nod", "bot": "hard"}}
+        planned = batch.planned_economy_roster(batch.TEMPLATE_MAP / "map.yaml", matchup)
+        self.assertEqual(planned, [
+            ("BotA", "td_gdi", "hard", "22,16"),
+            ("BotB", "td_nod", "hard", "49,55"),
+        ])
+
+    def test_optional_economy_health_does_not_change_success_status(self):
+        self.assertEqual(batch.apply_economy_health_requirement("ok", "NOT_REQUIRED", False), "ok")
+        self.assertEqual(batch.apply_economy_health_requirement("ok", "UNKNOWN", True), "UNKNOWN")
+
+    def test_batch_promotes_other_ai_streams_but_keeps_fixed_health_per_game(self):
+        with tempfile.TemporaryDirectory(prefix="ai_log_promotion_test_") as tmp_dir:
+            tmp = pathlib.Path(tmp_dir)
+            batch_logs = tmp / "batch" / "Logs"
+            batch_logs.mkdir(parents=True)
+            for name, row in (("g1", "one"), ("g2", "two")):
+                game_logs = tmp / name / "Logs"
+                game_logs.mkdir(parents=True)
+                (game_logs / "cameo-ai-missions.jsonl").write_text(row + "\n", encoding="utf-8")
+                (game_logs / "cameo-ai-economy-health.jsonl").write_text(row + "\n", encoding="utf-8")
+                batch.promote_unique_match_logs(tmp / name, batch_logs)
+            self.assertEqual((batch_logs / "cameo-ai-missions.jsonl").read_text(encoding="utf-8"),
+                             "one\ntwo\n")
+            self.assertFalse((batch_logs / "cameo-ai-economy-health.jsonl").exists())
+            self.assertTrue((tmp / "g1" / "Logs" / "cameo-ai-economy-health.jsonl").is_file())
+
 
 class ScoreboardTests(unittest.TestCase):
     def _record(self, game_uid, slot, bot, outcome, enemy, spawn):
@@ -321,9 +440,21 @@ class ScoreboardTests(unittest.TestCase):
         results = [{"bot_outcomes": [self._record("g1", "Multi0", "fransbot", "undecided", "classic", 0)]}]
         self.assertEqual(batch.ab_scoreboard(results), {})
 
+    def test_scoreboard_skips_unknown_economy_health(self):
+        results = [{"status": "UNKNOWN", "health_status": "UNKNOWN", "bot_outcomes": [
+            self._record("g1", "Multi0", "fransbot", "won", "classic", 0)]}]
+        self.assertEqual(batch.ab_scoreboard(results), {})
+        self.assertEqual(batch.team_scoreboard(results), {})
+        blocked = [{"status": "UNKNOWN", "health_status": "BLOCK", "bot_outcomes": [
+            self._record("g2", "Multi0", "fransbot", "won", "classic", 0)]}]
+        self.assertEqual(batch.ab_scoreboard(blocked), {})
+        self.assertEqual(batch.team_scoreboard(blocked), {})
 
-if __name__ == "__main__":
-    unittest.main()
+    def test_scoreboard_still_scores_successful_optional_health_run(self):
+        results = [{"status": "ok", "health_status": "NOT_REQUIRED", "bot_outcomes": [
+            self._record("g3", "Multi0", "fransbot", "won", "classic", 0)]}]
+        self.assertEqual(batch.ab_scoreboard(results)["fransbot vs classic"]["won"], 1)
+
 
 
 class FingerprintTests(unittest.TestCase):
@@ -335,10 +466,26 @@ class FingerprintTests(unittest.TestCase):
         (tmp / "mods" / "cameo" / "ai").mkdir(parents=True)
         (tmp / "mods" / "cameo" / "ai" / "ai.yaml").write_text("players: {}\n", encoding="utf-8")
         (tmp / "engine" / "bin").mkdir(parents=True)
+        engine = tmp / "engine"
+        (engine / ".gitignore").write_text("/bin/\n", encoding="utf-8")
         (tmp / "engine" / "bin" / "OpenRA.Game.dll").write_bytes(b"fake-dll-a")
         (tmp / "engine" / "bin" / "OpenRA.Mods.Cameo.dll").write_bytes(b"fake-dll-b")
+        (tmp / "engine" / "bin" / "OpenRA.exe").write_bytes(b"fake-openra-exe")
         (tmp / "engine" / "VERSION").write_text("abc123\n", encoding="utf-8")
         (tmp / "map.oramap").write_bytes(b"map-bytes")
+        subprocess.run(["git", "-C", str(engine), "init", "-q"], check=True, capture_output=True)
+        subprocess.run(["git", "-C", str(engine), "config", "user.name", "Fingerprint Test"],
+                       check=True, capture_output=True)
+        subprocess.run(["git", "-C", str(engine), "config", "user.email", "fingerprint@example.invalid"],
+                       check=True, capture_output=True)
+        subprocess.run(["git", "-C", str(engine), "add", ".gitignore", "VERSION"],
+                       check=True, capture_output=True)
+        subprocess.run(["git", "-C", str(engine), "commit", "-qm", "fixture engine pin"],
+                       check=True, capture_output=True)
+        engine_pin = subprocess.run(["git", "-C", str(engine), "rev-parse", "HEAD"],
+                                    check=True, capture_output=True, text=True).stdout.strip()
+        (tmp / "mod.config").write_text(
+            f'ENGINE_VERSION="{engine_pin}"\nENGINE_DIRECTORY="engine"\n', encoding="utf-8")
         return tmp
 
     def _fingerprint(self, tmp, config=None):
@@ -363,6 +510,165 @@ class FingerprintTests(unittest.TestCase):
             self.assertIsNone(fp["mod_commit"])
             self.assertIsNone(fp["mod_dirty"])
             self.assertEqual(fp["engine_version"], "abc123")
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_engine_provenance_binds_configured_pin_path_and_raw_version(self):
+        import base64
+        tmp = self._tree()
+        try:
+            provenance = batch.engine_runtime_provenance(tmp, tmp / "engine")
+            self.assertEqual(provenance["engine_config_version"], provenance["engine_checkout_head"])
+            self.assertTrue(provenance["engine_checkout_clean"])
+            self.assertEqual(provenance["launched_executable_path"], str((tmp / "engine/bin/OpenRA.exe").resolve()))
+            self.assertEqual(
+                base64.b64decode(provenance["engine_version_file_raw_base64"]),
+                (tmp / "engine/VERSION").read_bytes(),
+            )
+            self.assertRegex(provenance["engine_version_file_sha256"], r"^[0-9a-f]{64}$")
+            self.assertRegex(provenance["executable_sha256_before"], r"^[0-9a-f]{64}$")
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_missing_engine_pin_fails_closed(self):
+        tmp = self._tree()
+        try:
+            (tmp / "mod.config").write_text('ENGINE_DIRECTORY="engine"\n', encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "ENGINE_VERSION must be a 40-character Git SHA"):
+                batch.engine_runtime_provenance(tmp, tmp / "engine")
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_engine_head_mismatch_fails_closed(self):
+        tmp = self._tree()
+        try:
+            wrong_pin = "0" * 40
+            (tmp / "mod.config").write_text(
+                f'ENGINE_VERSION="{wrong_pin}"\nENGINE_DIRECTORY="engine"\n', encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "does not match configured ENGINE_VERSION"):
+                batch.engine_runtime_provenance(tmp, tmp / "engine")
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_dirty_engine_checkout_fails_closed(self):
+        tmp = self._tree()
+        try:
+            (tmp / "engine" / "untracked.txt").write_text("unexpected\n", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "dirty or has untracked files"):
+                batch.engine_runtime_provenance(tmp, tmp / "engine")
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_executable_change_after_launch_invalidates_attempt(self):
+        tmp = self._tree()
+        try:
+            provenance = batch.engine_runtime_provenance(tmp, tmp / "engine")
+            exe = pathlib.Path(provenance["launched_executable_path"])
+            exe.write_bytes(b"changed while match ran")
+            after = batch.check_executable_after(provenance)
+            self.assertFalse(after["executable_hash_unchanged"])
+            self.assertNotEqual(after["executable_sha256_before"], after["executable_sha256_after"])
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_executable_unchanged_after_launch_is_recorded(self):
+        tmp = self._tree()
+        try:
+            provenance = batch.engine_runtime_provenance(tmp, tmp / "engine")
+            after = batch.check_executable_after(provenance)
+            self.assertTrue(after["executable_hash_unchanged"])
+            self.assertEqual(after["executable_sha256_before"], after["executable_sha256_after"])
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_changed_executable_discards_match_records_before_scoring(self):
+        rows = [{"record_id": "seat-1"}, {"record_id": "seat-2"}]
+        trusted, discarded = batch.trusted_attempt_records(rows, executable_hash_unchanged=False)
+        self.assertEqual(trusted, [])
+        self.assertEqual(discarded, 2)
+        # Even if an upstream caller accidentally leaves outcome rows attached,
+        # a changed attempt cannot enter the A/B scoreboard.
+        board = batch.ab_scoreboard([{
+            "status": "executable_changed",
+            "runtime_engine_attempts": [{
+                "runtime_engine": {"executable_hash_unchanged": False},
+            }],
+            "bot_outcomes": [{
+                "record_id": "untrusted|seat-1",
+                "bot_type": "hard",
+                "opponent": {"bot_type": "easy"},
+                "outcome": "won",
+                "spawn": 0,
+            }],
+        }])
+        self.assertEqual(board, {})
+
+    def test_each_retry_attempt_is_persisted_and_included_in_batch(self):
+        tmp = pathlib.Path(tempfile.mkdtemp(prefix="attempt-provenance-"))
+        try:
+            path = tmp / "attempt_provenance.jsonl"
+            attempts = []
+            for number, digest in ((1, "a" * 64), (2, "b" * 64)):
+                batch.append_attempt_provenance(path, attempts, {
+                    "variant": "cell-a",
+                    "repeat": 1,
+                    "attempt": number,
+                    "status": "exit=1" if number == 1 else "ok",
+                    "exit_code": 1 if number == 1 else 0,
+                    "runtime_engine": {
+                        "executable_sha256_before": digest,
+                        "executable_sha256_after": digest,
+                        "executable_hash_unchanged": True,
+                    },
+                })
+
+            batch_attempts = batch.all_attempt_provenance([{
+                "runtime_engine_attempts": attempts,
+            }])
+            persisted_attempts = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
+            self.assertEqual([item["attempt"] for item in batch_attempts], [1, 2])
+            self.assertEqual(
+                [item["runtime_engine"]["executable_sha256_before"] for item in batch_attempts],
+                ["a" * 64, "b" * 64],
+            )
+            self.assertEqual([item["attempt"] for item in persisted_attempts], [1, 2])
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_prelaunch_drift_result_retains_prior_launched_retry_provenance(self):
+        first_attempt = {
+            "variant": "cell-a",
+            "repeat": 1,
+            "attempt": 1,
+            "status": "exit=1",
+            "exit_code": 1,
+            "runtime_engine": {
+                "executable_sha256_before": "a" * 64,
+                "executable_sha256_after": "a" * 64,
+                "executable_hash_unchanged": True,
+            },
+        }
+        result = batch.fingerprint_drift_result(
+            "cell-a", {"engine": "pin"}, {"engine": {"was": "pin", "now": "other"}},
+            attempt=2, runtime_engine_attempts=[first_attempt])
+        batch_attempts = batch.all_attempt_provenance([result])
+        self.assertEqual(result["attempts"], 1)
+        self.assertEqual(batch_attempts, [first_attempt])
+
+    def test_missing_executable_fails_closed(self):
+        tmp = self._tree()
+        try:
+            (tmp / "engine" / "bin" / "OpenRA.exe").unlink()
+            with self.assertRaisesRegex(ValueError, "engine checkout or executable path is unavailable"):
+                batch.engine_runtime_provenance(tmp, tmp / "engine")
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_resolved_engine_path_mismatch_fails_closed(self):
+        tmp = self._tree()
+        try:
+            with self.assertRaisesRegex(ValueError, "resolved engine path mismatch"):
+                batch.engine_runtime_provenance(tmp, tmp / "engine" / "bin")
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
 
@@ -450,6 +756,14 @@ class ArmFingerprintSummaryTests(unittest.TestCase):
         import io
         sys.path.insert(0, str(ROOT / "tools" / "ai"))
         import ab_summary
+        import capture_provenance
+        # Scoreable test provenance: unbound fixtures fail closed at gated sinks.
+        uids = set()
+        for f in pathlib.Path(td).rglob("*.jsonl"):
+            uids |= capture_provenance.file_game_uids(f)
+        capture_provenance.write_provenance(
+            pathlib.Path(td), capture_kind="match_batch", scoreable=True,
+            game_uids=sorted(uids))
         out = io.StringIO()
         with contextlib.redirect_stdout(out):
             rc = ab_summary.main([td])
@@ -540,3 +854,44 @@ class RoundTripGateTests(unittest.TestCase):
             round_trip_check.main = orig
         self.assertEqual(rc, 0)
         self.assertEqual(data["round_trip"]["exit"], 0)
+
+
+class StaleBuildAndHeadlessTests(unittest.TestCase):
+    def test_stale_mod_assembly_is_reported_and_fresh_or_unbuilt_is_not(self):
+        import os
+        with tempfile.TemporaryDirectory() as d:
+            root = pathlib.Path(d)
+            engine = root / "engine"
+            (engine / "bin").mkdir(parents=True)
+            project = root / "OpenRA.Mods.Cameo"
+            (project / "obj").mkdir(parents=True)
+            source = project / "Bot.cs"
+            source.write_text("class A {}", encoding="utf-8")
+            dll = engine / "bin" / "OpenRA.Mods.Cameo.dll"
+            dll.write_bytes(b"x")
+            os.utime(source, (1000, 1000))
+            os.utime(dll, (2000, 2000))
+            orig = batch.REPO_ROOT
+            batch.REPO_ROOT = root
+            try:
+                self.assertEqual([], batch.stale_mod_assemblies(engine))
+                generated = project / "obj" / "Gen.cs"
+                generated.write_text("class G {}", encoding="utf-8")
+                os.utime(generated, (3000, 3000))
+                self.assertEqual([], batch.stale_mod_assemblies(engine), "obj/ output is not a source")
+                os.utime(source, (3000, 3000))
+                self.assertEqual(["OpenRA.Mods.Cameo"], batch.stale_mod_assemblies(engine))
+                dll.unlink()
+                self.assertEqual([], batch.stale_mod_assemblies(engine), "an unbuilt project is not stale")
+            finally:
+                batch.REPO_ROOT = orig
+
+    def test_headless_platform_name_matches_the_mod_project(self):
+        self.assertTrue((batch.REPO_ROOT / f"OpenRA.Platforms.{batch.HEADLESS_PLATFORM}"
+                         / f"OpenRA.Platforms.{batch.HEADLESS_PLATFORM}.csproj").is_file())
+        source = (batch.REPO_ROOT / "OpenRA.Platforms.Null" / "NullPlatform.cs").read_text(encoding="utf-8")
+        self.assertIn(batch.HEADLESS_LOG_MARKER, source)
+
+
+if __name__ == "__main__":
+    unittest.main()

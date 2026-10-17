@@ -112,6 +112,7 @@ def cell_summary(cell_dir: pathlib.Path) -> dict | None:
         "timed_out": summary.get("timed_out", 0),
         "died": summary.get("died", 0),
         "norecord": summary.get("norecord", 0),
+        "unknown": summary.get("unknown", 0),
         "new_exceptions": summary.get("new_exceptions") or [],
         # LC7: a batch that aborted on fingerprint drift says so here, so the
         # league aggregate surfaces "arms changed mid-cell" instead of the
@@ -136,16 +137,28 @@ def merge_cell(cell_dir: pathlib.Path, cell: dict, candidate: str, member: str, 
     early-dead teammate still records "lost"), and the spawn axis is the
     team's sorted member-spawn pair ("0,1").
     """
+    import capture_provenance
+
     data = cell_summary(cell_dir)
     if data is None:
         acc["cells_missing"].append(cell["name"])
         return
+    if capture_provenance.record_marked(data):
+        # Sentinel-marked summary — the entire cell is quarantined evidence.
+        return
+    summary_path = cell_dir / "batch_summary.json"
+    verdict, why = capture_provenance.assess_file(summary_path)
+    if verdict == capture_provenance.SENTINEL:
+        return
+    if verdict == capture_provenance.REJECT:
+        raise ValueError(f"unbound provenance for {summary_path}: {why}")
 
     acc["completed"] += data["completed"]
     acc["stalled"] += data["stalled"]
     acc["timed_out"] += data["timed_out"]
     acc["died"] += data["died"]
     acc["norecord"] += data["norecord"]
+    acc["unknown"] += data["unknown"]
     acc["exceptions"] += data["new_exceptions"]
     if data["aborted"]:
         acc["cells_aborted"].append(f"{cell['name']} ({data['aborted']})")
@@ -154,6 +167,11 @@ def merge_cell(cell_dir: pathlib.Path, cell: dict, candidate: str, member: str, 
     if not results_path.is_file():
         acc["cells_missing"].append(cell["name"] + " (no batch_results.jsonl)")
         return
+    verdict, why = capture_provenance.assess_file(results_path)
+    if verdict == capture_provenance.SENTINEL:
+        return
+    if verdict == capture_provenance.REJECT:
+        raise ValueError(f"unbound provenance for {results_path}: {why}")
 
     if team_size >= 2:
         # One datapoint per match uid: collect the candidate-side rows of each
@@ -164,6 +182,10 @@ def merge_cell(cell_dir: pathlib.Path, cell: dict, candidate: str, member: str, 
             if not line.strip():
                 continue
             match = json.loads(line)
+            if (capture_provenance.record_marked(match)
+                    or match.get("status") == "UNKNOWN"
+                    or match.get("health_status") != "OBSERVED_HEALTHY"):
+                continue
             for row in match.get("bot_outcomes") or []:
                 if row.get("bot_type") != candidate:
                     continue
@@ -189,6 +211,10 @@ def merge_cell(cell_dir: pathlib.Path, cell: dict, candidate: str, member: str, 
         if not line.strip():
             continue
         match = json.loads(line)
+        if (capture_provenance.record_marked(match)
+                or match.get("status") == "UNKNOWN"
+                or match.get("health_status") != "OBSERVED_HEALTHY"):
+            continue
         for row in match.get("bot_outcomes") or []:
             if row.get("bot_type") != candidate or (row.get("opponent") or {}).get("bot_type") != member:
                 continue
@@ -218,6 +244,7 @@ def aggregate(league_dir: pathlib.Path, spec: dict) -> dict:
         "timed_out": 0,
         "died": 0,
         "norecord": 0,
+        "unknown": 0,
         "exceptions": [],
         "cells_missing": [],
         "cells_aborted": [],
@@ -256,6 +283,7 @@ def aggregate(league_dir: pathlib.Path, spec: dict) -> dict:
         "timed_out": acc["timed_out"],
         "died": acc["died"],
         "norecord": acc["norecord"],
+        "unknown": acc["unknown"],
         "exceptions": acc["exceptions"],
         "cells_missing": acc["cells_missing"],
         "cells_aborted": acc["cells_aborted"],
@@ -276,7 +304,7 @@ def print_summary(summary: dict) -> None:
         print(f"  MISSING CELLS: {summary['cells_missing']}")
     if summary["cells_aborted"]:
         print(f"  ABORTED CELLS: {summary['cells_aborted']}")
-    bad = {k: summary[k] for k in ("stalled", "timed_out", "died", "norecord") if summary[k]}
+    bad = {k: summary[k] for k in ("stalled", "timed_out", "died", "norecord", "unknown") if summary[k]}
     if bad or summary["exceptions"]:
         print(f"  anomalies: {bad or '{}'} exceptions={summary['exceptions'] or 'none'}")
 
@@ -348,6 +376,7 @@ def main() -> int:
             "--time-limit", str(spec["time_limit"]),
             "--support-dir", str(cell_dir),
             "--stall-timeout", str(args.stall_timeout),
+            "--require-economy-health",
         ]
         if team_size >= 2:
             cmd += ["--team-size", str(team_size)]

@@ -33,7 +33,7 @@ and every other agent can see the same picture without asking. If your row is st
 
 | Agent | Model / host | Branch | File-set it owns | Status |
 |---|---|---|---|---|
-| **Codex Sol (team slot 01a11068)** | GPT-6.1 Sol / AionUi | `codex/learn-p6-fix` | P6 provider, ground stance controller, integer predictor, regression tests, scoped docs | leader-authorized 2026-10-06; review handoff; independent review and replay gates pending |
+| **Codex Sol (team slot 01a11068)** | GPT-6.1 Sol / AionUi | `codex/session-clean-start` | User-authorized sole master integration: reviewed M13/turtle/docs deltas; paused Integrator takeover | 2026-10-11; default-off; runtime/campaign gates remain open |
 | **Claude-Local** | Opus 5, local CLI | `claude/weapon_inherit_audit_and_map` | the REFERENCE pipeline: `tools/balance/{assign_references,reference_targets,reference_distribution,reference_coverage,build_reference_report,faction_routes}.py`, `tools/reference/variant_pool.py` | ACTIVE 2026-09-13 |
 | **Codex (Astra)** | GPT-6, Blackrobe's host | `codex/recovery-pr345-merge-20260912`, `codex/overnight-integration-20260910` | INI/DTA extraction, evidence gates, the four-faction review pipeline, `tools/tests/` | ACTIVE 2026-09-13 |
 | Devin — Aurora | Devin AI | `devin/aurora/lane*` | AA range/audit lanes, extractor cargo | idle since 2026-09-08 |
@@ -41,6 +41,7 @@ and every other agent can see the same picture without asking. If your row is st
 | Devin — Nova | Devin AI | `devin/nova/*` | naming sweeps, AreaDamage class-2d, dead-field scales | idle since 2026-09-06 |
 | **OMP Astra** | GPT-6 Astra, Blackrobe's host | `omp/ready_deployment_20260928` | scout ownership follow-up, classic-four regression callers, reference/AI status corrections; scoped PR deployment | VERIFIED 2026-09-28; engine rollout remains gated on the human click-test |
 | **Codex (gpt-6-luna)** | GPT-6 Luna, Cameo Dev Team | `codex/garrison-p3-fix` (engine); `codex/garrison-p3-fix` (mod) | Garrison F1–F5: disabled capability, allocation-free reconcile, visible alias guidance, stance docs, deterministic scan phase | ACTIVE 2026-10-07; engine @ `2db0db2`; required suites and BOOT_GATE pass; no merge |
+| **Claude Sonnet 5.5 (team slot 01a12104)** | Claude Sonnet 5, Cameo Dev Team | `claude/context-providers-restack` | context schemas, pure public-map graph/window/encoder, context audit and focused tests; reassigned from gpt-6.1-sol 2026-10-11 (lead out of tokens); restacking pure core onto master, then BX telemetry adapter + AiMatchLogWriter seen-side signature reuse | ACTIVE 2026-10-11; restack in progress, runtime gates pending |
 
 **Signing rule (restating `CLAUDE.md` rule 10 because it keeps being got wrong):** sign with your
 OWN identity and your REAL model name. Claude Opus 5 signs `Co-Authored-By: Claude Opus 5

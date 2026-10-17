@@ -17,6 +17,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/ai"))
 
 import ab_summary
+import capture_provenance
 
 
 def record(uid, bot, outcome, home=None, name="Bot", ticks=1000, timestep=1):
@@ -24,6 +25,16 @@ def record(uid, bot, outcome, home=None, name="Bot", ticks=1000, timestep=1):
     if home is not None:
         player["home"] = home
     return {"game_uid": uid, "player": player, "duration_ticks": ticks, "timestep": timestep}
+
+
+def bind_dir(root):
+    """Scoreable test provenance: unbound fixtures fail closed at gated sinks."""
+    root = pathlib.Path(root)
+    uids = set()
+    for f in root.rglob("*.jsonl"):
+        uids |= capture_provenance.file_game_uids(f)
+    capture_provenance.write_provenance(
+        root, capture_kind="match_batch", scoreable=True, game_uids=sorted(uids))
 
 
 def run_summary(records):
@@ -34,6 +45,7 @@ def run_summary(records):
         with open(p / "cameo-ai-matches.jsonl", "w", encoding="utf-8") as f:
             for r in records:
                 f.write(json.dumps(r) + "\n")
+        bind_dir(td)
         out = io.StringIO()
         with contextlib.redirect_stdout(out):
             rc = ab_summary.main([td])

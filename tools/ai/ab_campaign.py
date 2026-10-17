@@ -22,7 +22,7 @@ SWITCHES = ("BU_harvester_logistics", "U_ut4_expansion_appetite", "AF_harvester_
 MAPS = {
     "small_gate": ("mods/cameo/maps/_ra_pitfight.oramap", "f50f2399a38346c501f1b1ff91614f7eb9c73b9d0b8eadeffaa067a5bcf4c4d8"),
     "open_economy": ("mods/cameo/maps/_ra_ore-gardens.oramap", "e74bfaacaf0accfbaf34624e10e0708e61468867c1164aa24927c4f24a750842"),
-    "chokepoint": ("mods/cameo/maps/_ra_siberian-pass.oramap", "dd1143299340094a604a5e2a02474dd095916f4f0dd75e9de0a1be23910bdd75"),
+    "chokepoint": ("mods/cameo/maps/_ra_Siberian-Pass.oramap", "dd1143299340094a604a5e2a02474dd095916f4f0dd75e9de0a1be23910bdd75"),
 }
 MAX_MANIFEST = 128 * 1024
 MAX_INPUT = 512 * 1024 * 1024
@@ -54,6 +54,19 @@ def sha256(path: pathlib.Path) -> str:
     return h.hexdigest()
 
 
+def read_engine_pin(path: pathlib.Path) -> str:
+    """Read VERSION across Windows UTF-16 and Unix UTF-8 engine packages."""
+    raw = path.read_bytes()
+    if raw.startswith((b"\xff\xfe", b"\xfe\xff")):
+        text = raw.decode("utf-16")
+    elif raw.startswith(b"\xef\xbb\xbf"):
+        text = raw.decode("utf-8-sig")
+    else:
+        text = raw.decode("ascii")
+    value = text.strip()
+    return value[4:] if value.startswith("git-") else value
+
+
 def require(condition: bool, message: str):
     if not condition:
         raise ValueError(message)
@@ -77,7 +90,7 @@ def validate_manifest(m: dict[str, Any], root: pathlib.Path, *, executable=False
     require(pinned.returncode == 0, "frozen source commit is absent from this repository")
     engine_version = root / "engine" / "VERSION"
     if engine_version.exists():
-        require(engine_version.read_text(encoding="ascii").strip().lower() == pins["engine_version"].lower(),
+        require(read_engine_pin(engine_version).lower() == pins["engine_version"].lower(),
                 "engine VERSION differs from frozen pin")
     require(type(m.get("world_tick_cap")) is int and m["world_tick_cap"] == 45000, "world cap must be 45000")
     require(type(m.get("wall_timeout_s")) is int and m["wall_timeout_s"] == 3000, "wall timeout must be 3000")
@@ -121,6 +134,8 @@ def make_jobs(m: dict[str, Any]):
 
 
 def _load_jsonl(paths):
+    import capture_provenance
+
     rows = []
     total = 0
     for path in paths:
@@ -129,6 +144,11 @@ def _load_jsonl(paths):
         for f in files:
             if not f.is_file():
                 continue
+            verdict, why = capture_provenance.assess_file(f)
+            if verdict == capture_provenance.SENTINEL:
+                continue
+            if verdict == capture_provenance.REJECT:
+                raise ValueError(f"unbound provenance for {f}: {why}")
             total += f.stat().st_size
             if total > MAX_INPUT:
                 raise ValueError("input size cap exceeded")
@@ -145,9 +165,28 @@ def _load_jsonl(paths):
 
 def classify_game(records, receipt):
     """Classify one game only when receipt and seat evidence agree."""
+    import capture_provenance
+
+    if capture_provenance.record_marked(receipt):
+        return "INVALID_UNKNOWN", "sentinel-captured evidence"
     uid_set = {r.get("game_uid") for r in records}
     if len(uid_set) != 1 or None in uid_set or not isinstance(receipt, dict):
         return "INVALID_UNKNOWN", "game_uid/receipt missing"
+    prov = receipt.get("capture_provenance")
+    if prov is not None:
+        # Embedded binding must re-prove this game's UID membership (the
+        # records' uid AND the receipt's own) and reconcile every consumed
+        # artifact record against the binding's declared digests for the
+        # same resolved identity; sentinel-marked or mismatched provenance
+        # rejects the game. Metadata-only — bytes are attested at ingress.
+        uid = next(iter(uid_set))
+        if (not isinstance(prov, dict)
+                or not isinstance(prov.get("game_uids"), list)
+                or uid not in prov["game_uids"]):
+            return "INVALID_UNKNOWN", "capture provenance rejected"
+        ok, why = capture_provenance.reconcile_embedded_provenance(receipt)
+        if not ok:
+            return "INVALID_UNKNOWN", f"capture provenance rejected: {why}"
     seats = receipt.get("seats")
     if not isinstance(seats, list) or not seats:
         return "INVALID_UNKNOWN", "resolved seat proof missing"
@@ -317,12 +356,26 @@ def summarize(rows, receipts):
 
 
 def load_receipts(paths):
+    import capture_provenance
+
     out = {}
     for path in paths:
         p = pathlib.Path(path)
         files = [p] if p.is_file() else sorted(p.rglob("cell_receipt.json"))
         for f in files:
+            verdict, why = capture_provenance.assess_file(f)
+            if verdict == capture_provenance.SENTINEL:
+                continue
+            if verdict == capture_provenance.REJECT:
+                raise ValueError(f"unbound provenance for {f}: {why}")
             r = read_json(f, MAX_LINE)
+            if capture_provenance.record_marked(r):
+                # Keep the receipt so classify_game rejects the game with an
+                # explicit reason rather than "receipt missing".
+                uid = r.get("game_uid")
+                if isinstance(uid, str):
+                    out.setdefault(uid, r)
+                continue
             uid = r.get("game_uid")
             if not isinstance(uid, str) or uid in out:
                 raise ValueError("missing/duplicate receipt game_uid")

@@ -117,8 +117,12 @@ def load_engagement_means(batch_dirs: list[pathlib.Path]) -> dict[tuple[str, str
     `score.total_milli` is the per-fight verdict clamped to +-1000 (AI_MATCH_LOG.md); skirmish records carry
     no decision signal and are skipped."""
     means: dict[tuple[str, str], list] = {}
+    import capture_provenance
     for d in batch_dirs:
-        for r in read_jsonl(d / "Logs" / "cameo-ai-engagements.jsonl"):
+        f = d / "Logs" / "cameo-ai-engagements.jsonl"
+        if f.is_file() and not capture_provenance.gate_ingest(f):
+            continue
+        for r in read_jsonl(f):
             score = r.get("score") or {}
             total = score.get("total_milli")
             if total is None or r.get("skirmish"):
@@ -135,8 +139,12 @@ def load_engagement_coverage(batch_dirs: list[pathlib.Path]) -> dict[tuple[str, 
     `total` is every record for the pair (usable + skirmish + in-flight telemetry). The arm scopes the key so
     the same (game, player) id in two batch dirs can never merge its EL evidence."""
     census: dict[tuple[str, str, str], list] = {}
+    import capture_provenance
     for d in batch_dirs:
-        for r in read_jsonl(d / "Logs" / "cameo-ai-engagements.jsonl"):
+        f = d / "Logs" / "cameo-ai-engagements.jsonl"
+        if f.is_file() and not capture_provenance.gate_ingest(f):
+            continue
+        for r in read_jsonl(f):
             c = census.setdefault((arm_of(d), r.get("game_uid", ""), r.get("seat", "")), [0, 0, 0])
             c[2] += 1
             score = r.get("score") or {}
@@ -177,9 +185,15 @@ def load_matches_detailed(batch_dirs: list[pathlib.Path]) -> tuple[list[dict], d
                               {"seen": 0, "scored": 0, **{f"drop_{k}": 0 for k in DROP_REASONS},
                                **{k: 0 for k in EL_BUCKETS}})
 
+    import capture_provenance
     for d in batch_dirs:
-        records = read_jsonl(d / "Logs" / "cameo-ai-matches.jsonl")
-        situations = read_jsonl(d / "Logs" / "cameo-ai-situations.jsonl")
+        matches_path = d / "Logs" / "cameo-ai-matches.jsonl"
+        situations_path = d / "Logs" / "cameo-ai-situations.jsonl"
+        if (matches_path.is_file() and not capture_provenance.gate_ingest(matches_path)) or (
+                situations_path.is_file() and not capture_provenance.gate_ingest(situations_path)):
+            continue
+        records = read_jsonl(matches_path)
+        situations = read_jsonl(situations_path)
         arm = arm_of(d)
 
         first_bo: dict[tuple[str, str], dict] = {}

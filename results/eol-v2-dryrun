@@ -1,0 +1,4261 @@
+{
+  "manifest_sha256": "929e2aeaecab44b7e3ad7e9b7aea72a6bc83733c4a2e4559bc454e21592721f1",
+  "source_commit": "964cdb630b1514e1c1a0baed55cbdbc427d5fc11",
+  "planned_games": 64,
+  "pilot_games": 64,
+  "setup_count": 16,
+  "small_game_workers_max": 1,
+  "large_games_exclusive": true,
+  "process_private_limit_bytes": 11274289152,
+  "free_ram_floor_bytes": 16642998272,
+  "free_ram_hard_floor_bytes": 3221225472,
+  "free_ram_soft_floor_bytes": 4294967296,
+  "cap_tick": 45000,
+  "actor_sample_interval_ticks": 5000,
+  "queue_mode": "RESUME_SAFE_CLAIM_ONCE",
+  "launches": 0,
+  "engine_load_test": "PENDING_A5_PARITY_AND_MAP_ENGINE_ACCEPTANCE",
+  "jobs": [
+    {
+      "cell_id": "1v1_nuclear_gdi|1337|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "1v1_nuclear_gdi",
+      "team_size": 1,
+      "map": "nuclear_winter",
+      "map_path": "mods/cameo/maps/_ra_a-nuclear-winter.oramap",
+      "map_sha256": "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_gdi"
+      ],
+      "required_seats": 2,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        }
+      ]
+    },
+    {
+      "cell_id": "1v1_nuclear_gdi|1337|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "1v1_nuclear_gdi",
+      "team_size": 1,
+      "map": "nuclear_winter",
+      "map_path": "mods/cameo/maps/_ra_a-nuclear-winter.oramap",
+      "map_sha256": "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_gdi"
+      ],
+      "required_seats": 2,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        }
+      ]
+    },
+    {
+      "cell_id": "1v1_nuclear_gdi|2026|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "1v1_nuclear_gdi",
+      "team_size": 1,
+      "map": "nuclear_winter",
+      "map_path": "mods/cameo/maps/_ra_a-nuclear-winter.oramap",
+      "map_sha256": "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_gdi"
+      ],
+      "required_seats": 2,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        }
+      ]
+    },
+    {
+      "cell_id": "1v1_nuclear_gdi|2026|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "1v1_nuclear_gdi",
+      "team_size": 1,
+      "map": "nuclear_winter",
+      "map_path": "mods/cameo/maps/_ra_a-nuclear-winter.oramap",
+      "map_sha256": "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_gdi"
+      ],
+      "required_seats": 2,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        }
+      ]
+    },
+    {
+      "cell_id": "1v1_nuclear_nod|1337|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "1v1_nuclear_nod",
+      "team_size": 1,
+      "map": "nuclear_winter",
+      "map_path": "mods/cameo/maps/_ra_a-nuclear-winter.oramap",
+      "map_sha256": "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_nod"
+      ],
+      "required_seats": 2,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        }
+      ]
+    },
+    {
+      "cell_id": "1v1_nuclear_nod|1337|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "1v1_nuclear_nod",
+      "team_size": 1,
+      "map": "nuclear_winter",
+      "map_path": "mods/cameo/maps/_ra_a-nuclear-winter.oramap",
+      "map_sha256": "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_nod"
+      ],
+      "required_seats": 2,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        }
+      ]
+    },
+    {
+      "cell_id": "1v1_nuclear_nod|2026|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "1v1_nuclear_nod",
+      "team_size": 1,
+      "map": "nuclear_winter",
+      "map_path": "mods/cameo/maps/_ra_a-nuclear-winter.oramap",
+      "map_sha256": "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_nod"
+      ],
+      "required_seats": 2,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        }
+      ]
+    },
+    {
+      "cell_id": "1v1_nuclear_nod|2026|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "1v1_nuclear_nod",
+      "team_size": 1,
+      "map": "nuclear_winter",
+      "map_path": "mods/cameo/maps/_ra_a-nuclear-winter.oramap",
+      "map_sha256": "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_nod"
+      ],
+      "required_seats": 2,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        }
+      ]
+    },
+    {
+      "cell_id": "1v1_satans_allies|1337|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "1v1_satans_allies",
+      "team_size": 1,
+      "map": "satans_clutch",
+      "map_path": "mods/cameo/maps/SatansClutch.oramap",
+      "map_sha256": "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "ra1_allies"
+      ],
+      "required_seats": 2,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        }
+      ]
+    },
+    {
+      "cell_id": "1v1_satans_allies|1337|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "1v1_satans_allies",
+      "team_size": 1,
+      "map": "satans_clutch",
+      "map_path": "mods/cameo/maps/SatansClutch.oramap",
+      "map_sha256": "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "ra1_allies"
+      ],
+      "required_seats": 2,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        }
+      ]
+    },
+    {
+      "cell_id": "1v1_satans_allies|2026|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "1v1_satans_allies",
+      "team_size": 1,
+      "map": "satans_clutch",
+      "map_path": "mods/cameo/maps/SatansClutch.oramap",
+      "map_sha256": "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "ra1_allies"
+      ],
+      "required_seats": 2,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        }
+      ]
+    },
+    {
+      "cell_id": "1v1_satans_allies|2026|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "1v1_satans_allies",
+      "team_size": 1,
+      "map": "satans_clutch",
+      "map_path": "mods/cameo/maps/SatansClutch.oramap",
+      "map_sha256": "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "ra1_allies"
+      ],
+      "required_seats": 2,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        }
+      ]
+    },
+    {
+      "cell_id": "1v1_satans_soviets|1337|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "1v1_satans_soviets",
+      "team_size": 1,
+      "map": "satans_clutch",
+      "map_path": "mods/cameo/maps/SatansClutch.oramap",
+      "map_sha256": "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "ra1_soviets"
+      ],
+      "required_seats": 2,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        }
+      ]
+    },
+    {
+      "cell_id": "1v1_satans_soviets|1337|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "1v1_satans_soviets",
+      "team_size": 1,
+      "map": "satans_clutch",
+      "map_path": "mods/cameo/maps/SatansClutch.oramap",
+      "map_sha256": "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "ra1_soviets"
+      ],
+      "required_seats": 2,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        }
+      ]
+    },
+    {
+      "cell_id": "1v1_satans_soviets|2026|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "1v1_satans_soviets",
+      "team_size": 1,
+      "map": "satans_clutch",
+      "map_path": "mods/cameo/maps/SatansClutch.oramap",
+      "map_sha256": "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "ra1_soviets"
+      ],
+      "required_seats": 2,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        }
+      ]
+    },
+    {
+      "cell_id": "1v1_satans_soviets|2026|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "1v1_satans_soviets",
+      "team_size": 1,
+      "map": "satans_clutch",
+      "map_path": "mods/cameo/maps/SatansClutch.oramap",
+      "map_sha256": "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "ra1_soviets"
+      ],
+      "required_seats": 2,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_red_gdi_nod|1337|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_red_gdi_nod",
+      "team_size": 2,
+      "map": "red_spice",
+      "map_path": "mods/cameo/maps/Red_Spice_2v2_BI-4.4.oramap",
+      "map_sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_gdi",
+        "td_nod"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_red_gdi_nod|1337|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_red_gdi_nod",
+      "team_size": 2,
+      "map": "red_spice",
+      "map_path": "mods/cameo/maps/Red_Spice_2v2_BI-4.4.oramap",
+      "map_sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_gdi",
+        "td_nod"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_red_gdi_nod|2026|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_red_gdi_nod",
+      "team_size": 2,
+      "map": "red_spice",
+      "map_path": "mods/cameo/maps/Red_Spice_2v2_BI-4.4.oramap",
+      "map_sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_gdi",
+        "td_nod"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_red_gdi_nod|2026|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_red_gdi_nod",
+      "team_size": 2,
+      "map": "red_spice",
+      "map_path": "mods/cameo/maps/Red_Spice_2v2_BI-4.4.oramap",
+      "map_sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_gdi",
+        "td_nod"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_red_gdi_allies|1337|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_red_gdi_allies",
+      "team_size": 2,
+      "map": "red_spice",
+      "map_path": "mods/cameo/maps/Red_Spice_2v2_BI-4.4.oramap",
+      "map_sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_gdi",
+        "ra1_allies"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_red_gdi_allies|1337|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_red_gdi_allies",
+      "team_size": 2,
+      "map": "red_spice",
+      "map_path": "mods/cameo/maps/Red_Spice_2v2_BI-4.4.oramap",
+      "map_sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_gdi",
+        "ra1_allies"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_red_gdi_allies|2026|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_red_gdi_allies",
+      "team_size": 2,
+      "map": "red_spice",
+      "map_path": "mods/cameo/maps/Red_Spice_2v2_BI-4.4.oramap",
+      "map_sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_gdi",
+        "ra1_allies"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_red_gdi_allies|2026|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_red_gdi_allies",
+      "team_size": 2,
+      "map": "red_spice",
+      "map_path": "mods/cameo/maps/Red_Spice_2v2_BI-4.4.oramap",
+      "map_sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_gdi",
+        "ra1_allies"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_red_gdi_soviets|1337|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_red_gdi_soviets",
+      "team_size": 2,
+      "map": "red_spice",
+      "map_path": "mods/cameo/maps/Red_Spice_2v2_BI-4.4.oramap",
+      "map_sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_gdi",
+        "ra1_soviets"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_red_gdi_soviets|1337|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_red_gdi_soviets",
+      "team_size": 2,
+      "map": "red_spice",
+      "map_path": "mods/cameo/maps/Red_Spice_2v2_BI-4.4.oramap",
+      "map_sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_gdi",
+        "ra1_soviets"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_red_gdi_soviets|2026|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_red_gdi_soviets",
+      "team_size": 2,
+      "map": "red_spice",
+      "map_path": "mods/cameo/maps/Red_Spice_2v2_BI-4.4.oramap",
+      "map_sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_gdi",
+        "ra1_soviets"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_red_gdi_soviets|2026|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_red_gdi_soviets",
+      "team_size": 2,
+      "map": "red_spice",
+      "map_path": "mods/cameo/maps/Red_Spice_2v2_BI-4.4.oramap",
+      "map_sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_gdi",
+        "ra1_soviets"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_terra_nod_allies|1337|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_terra_nod_allies",
+      "team_size": 2,
+      "map": "terra_cotta",
+      "map_path": "mods/cameo/maps/Terracotta-ratls2.oramap",
+      "map_sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_nod",
+        "ra1_allies"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_terra_nod_allies|1337|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_terra_nod_allies",
+      "team_size": 2,
+      "map": "terra_cotta",
+      "map_path": "mods/cameo/maps/Terracotta-ratls2.oramap",
+      "map_sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_nod",
+        "ra1_allies"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_terra_nod_allies|2026|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_terra_nod_allies",
+      "team_size": 2,
+      "map": "terra_cotta",
+      "map_path": "mods/cameo/maps/Terracotta-ratls2.oramap",
+      "map_sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_nod",
+        "ra1_allies"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_terra_nod_allies|2026|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_terra_nod_allies",
+      "team_size": 2,
+      "map": "terra_cotta",
+      "map_path": "mods/cameo/maps/Terracotta-ratls2.oramap",
+      "map_sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_nod",
+        "ra1_allies"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_terra_nod_soviets|1337|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_terra_nod_soviets",
+      "team_size": 2,
+      "map": "terra_cotta",
+      "map_path": "mods/cameo/maps/Terracotta-ratls2.oramap",
+      "map_sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_nod",
+        "ra1_soviets"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_terra_nod_soviets|1337|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_terra_nod_soviets",
+      "team_size": 2,
+      "map": "terra_cotta",
+      "map_path": "mods/cameo/maps/Terracotta-ratls2.oramap",
+      "map_sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_nod",
+        "ra1_soviets"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_terra_nod_soviets|2026|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_terra_nod_soviets",
+      "team_size": 2,
+      "map": "terra_cotta",
+      "map_path": "mods/cameo/maps/Terracotta-ratls2.oramap",
+      "map_sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_nod",
+        "ra1_soviets"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_terra_nod_soviets|2026|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_terra_nod_soviets",
+      "team_size": 2,
+      "map": "terra_cotta",
+      "map_path": "mods/cameo/maps/Terracotta-ratls2.oramap",
+      "map_sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_nod",
+        "ra1_soviets"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_terra_allies_soviets|1337|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_terra_allies_soviets",
+      "team_size": 2,
+      "map": "terra_cotta",
+      "map_path": "mods/cameo/maps/Terracotta-ratls2.oramap",
+      "map_sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "ra1_allies",
+        "ra1_soviets"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_terra_allies_soviets|1337|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_terra_allies_soviets",
+      "team_size": 2,
+      "map": "terra_cotta",
+      "map_path": "mods/cameo/maps/Terracotta-ratls2.oramap",
+      "map_sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "ra1_allies",
+        "ra1_soviets"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_terra_allies_soviets|2026|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_terra_allies_soviets",
+      "team_size": 2,
+      "map": "terra_cotta",
+      "map_path": "mods/cameo/maps/Terracotta-ratls2.oramap",
+      "map_sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "ra1_allies",
+        "ra1_soviets"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "2v2_terra_allies_soviets|2026|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "2v2_terra_allies_soviets",
+      "team_size": 2,
+      "map": "terra_cotta",
+      "map_path": "mods/cameo/maps/Terracotta-ratls2.oramap",
+      "map_sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "ra1_allies",
+        "ra1_soviets"
+      ],
+      "required_seats": 4,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        }
+      ]
+    },
+    {
+      "cell_id": "3v3_basics_gna|1337|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "3v3_basics_gna",
+      "team_size": 3,
+      "map": "back_to_basics",
+      "map_path": "mods/cameo/maps/back-to-basics.oramap",
+      "map_sha256": "ddd071d131895ecb59be66b7d1924b023731c52a04ee01052fa9fc384dd15e6b",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_gdi",
+        "td_nod",
+        "ra1_allies"
+      ],
+      "required_seats": 6,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        }
+      ]
+    },
+    {
+      "cell_id": "3v3_basics_gna|1337|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "3v3_basics_gna",
+      "team_size": 3,
+      "map": "back_to_basics",
+      "map_path": "mods/cameo/maps/back-to-basics.oramap",
+      "map_sha256": "ddd071d131895ecb59be66b7d1924b023731c52a04ee01052fa9fc384dd15e6b",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_gdi",
+        "td_nod",
+        "ra1_allies"
+      ],
+      "required_seats": 6,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 2
+        }
+      ]
+    },
+    {
+      "cell_id": "3v3_basics_gna|2026|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "3v3_basics_gna",
+      "team_size": 3,
+      "map": "back_to_basics",
+      "map_path": "mods/cameo/maps/back-to-basics.oramap",
+      "map_sha256": "ddd071d131895ecb59be66b7d1924b023731c52a04ee01052fa9fc384dd15e6b",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_gdi",
+        "td_nod",
+        "ra1_allies"
+      ],
+      "required_seats": 6,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        }
+      ]
+    },
+    {
+      "cell_id": "3v3_basics_gna|2026|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "3v3_basics_gna",
+      "team_size": 3,
+      "map": "back_to_basics",
+      "map_path": "mods/cameo/maps/back-to-basics.oramap",
+      "map_sha256": "ddd071d131895ecb59be66b7d1924b023731c52a04ee01052fa9fc384dd15e6b",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_gdi",
+        "td_nod",
+        "ra1_allies"
+      ],
+      "required_seats": 6,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 2
+        }
+      ]
+    },
+    {
+      "cell_id": "3v3_basics_nas|1337|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "3v3_basics_nas",
+      "team_size": 3,
+      "map": "back_to_basics",
+      "map_path": "mods/cameo/maps/back-to-basics.oramap",
+      "map_sha256": "ddd071d131895ecb59be66b7d1924b023731c52a04ee01052fa9fc384dd15e6b",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_nod",
+        "ra1_allies",
+        "ra1_soviets"
+      ],
+      "required_seats": 6,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 2
+        }
+      ]
+    },
+    {
+      "cell_id": "3v3_basics_nas|1337|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "3v3_basics_nas",
+      "team_size": 3,
+      "map": "back_to_basics",
+      "map_path": "mods/cameo/maps/back-to-basics.oramap",
+      "map_sha256": "ddd071d131895ecb59be66b7d1924b023731c52a04ee01052fa9fc384dd15e6b",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_nod",
+        "ra1_allies",
+        "ra1_soviets"
+      ],
+      "required_seats": 6,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 2
+        }
+      ]
+    },
+    {
+      "cell_id": "3v3_basics_nas|2026|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "3v3_basics_nas",
+      "team_size": 3,
+      "map": "back_to_basics",
+      "map_path": "mods/cameo/maps/back-to-basics.oramap",
+      "map_sha256": "ddd071d131895ecb59be66b7d1924b023731c52a04ee01052fa9fc384dd15e6b",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_nod",
+        "ra1_allies",
+        "ra1_soviets"
+      ],
+      "required_seats": 6,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 2
+        }
+      ]
+    },
+    {
+      "cell_id": "3v3_basics_nas|2026|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "3v3_basics_nas",
+      "team_size": 3,
+      "map": "back_to_basics",
+      "map_path": "mods/cameo/maps/back-to-basics.oramap",
+      "map_sha256": "ddd071d131895ecb59be66b7d1924b023731c52a04ee01052fa9fc384dd15e6b",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_nod",
+        "ra1_allies",
+        "ra1_soviets"
+      ],
+      "required_seats": 6,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 2
+        }
+      ]
+    },
+    {
+      "cell_id": "3v3_winter_asg|1337|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "3v3_winter_asg",
+      "team_size": 3,
+      "map": "winters_end_rich",
+      "map_path": "mods/cameo/maps/winters-end-rich.oramap",
+      "map_sha256": "a29eea3fef3087d5544c428d2d07d59f4430806c0b23db7eeb605dde7013c94e",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "ra1_allies",
+        "ra1_soviets",
+        "td_gdi"
+      ],
+      "required_seats": 6,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 2
+        }
+      ]
+    },
+    {
+      "cell_id": "3v3_winter_asg|1337|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "3v3_winter_asg",
+      "team_size": 3,
+      "map": "winters_end_rich",
+      "map_path": "mods/cameo/maps/winters-end-rich.oramap",
+      "map_sha256": "a29eea3fef3087d5544c428d2d07d59f4430806c0b23db7eeb605dde7013c94e",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "ra1_allies",
+        "ra1_soviets",
+        "td_gdi"
+      ],
+      "required_seats": 6,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        }
+      ]
+    },
+    {
+      "cell_id": "3v3_winter_asg|2026|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "3v3_winter_asg",
+      "team_size": 3,
+      "map": "winters_end_rich",
+      "map_path": "mods/cameo/maps/winters-end-rich.oramap",
+      "map_sha256": "a29eea3fef3087d5544c428d2d07d59f4430806c0b23db7eeb605dde7013c94e",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "ra1_allies",
+        "ra1_soviets",
+        "td_gdi"
+      ],
+      "required_seats": 6,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 2
+        }
+      ]
+    },
+    {
+      "cell_id": "3v3_winter_asg|2026|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "3v3_winter_asg",
+      "team_size": 3,
+      "map": "winters_end_rich",
+      "map_path": "mods/cameo/maps/winters-end-rich.oramap",
+      "map_sha256": "a29eea3fef3087d5544c428d2d07d59f4430806c0b23db7eeb605dde7013c94e",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "ra1_allies",
+        "ra1_soviets",
+        "td_gdi"
+      ],
+      "required_seats": 6,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        }
+      ]
+    },
+    {
+      "cell_id": "3v3_winter_sgn|1337|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "3v3_winter_sgn",
+      "team_size": 3,
+      "map": "winters_end_rich",
+      "map_path": "mods/cameo/maps/winters-end-rich.oramap",
+      "map_sha256": "a29eea3fef3087d5544c428d2d07d59f4430806c0b23db7eeb605dde7013c94e",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "ra1_soviets",
+        "td_gdi",
+        "td_nod"
+      ],
+      "required_seats": 6,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 2
+        }
+      ]
+    },
+    {
+      "cell_id": "3v3_winter_sgn|1337|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "3v3_winter_sgn",
+      "team_size": 3,
+      "map": "winters_end_rich",
+      "map_path": "mods/cameo/maps/winters-end-rich.oramap",
+      "map_sha256": "a29eea3fef3087d5544c428d2d07d59f4430806c0b23db7eeb605dde7013c94e",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "ra1_soviets",
+        "td_gdi",
+        "td_nod"
+      ],
+      "required_seats": 6,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 2
+        }
+      ]
+    },
+    {
+      "cell_id": "3v3_winter_sgn|2026|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "3v3_winter_sgn",
+      "team_size": 3,
+      "map": "winters_end_rich",
+      "map_path": "mods/cameo/maps/winters-end-rich.oramap",
+      "map_sha256": "a29eea3fef3087d5544c428d2d07d59f4430806c0b23db7eeb605dde7013c94e",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "ra1_soviets",
+        "td_gdi",
+        "td_nod"
+      ],
+      "required_seats": 6,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 2
+        }
+      ]
+    },
+    {
+      "cell_id": "3v3_winter_sgn|2026|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "3v3_winter_sgn",
+      "team_size": 3,
+      "map": "winters_end_rich",
+      "map_path": "mods/cameo/maps/winters-end-rich.oramap",
+      "map_sha256": "a29eea3fef3087d5544c428d2d07d59f4430806c0b23db7eeb605dde7013c94e",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "ra1_soviets",
+        "td_gdi",
+        "td_nod"
+      ],
+      "required_seats": 6,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 2
+        }
+      ]
+    },
+    {
+      "cell_id": "4v4_sahara|1337|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "4v4_sahara",
+      "team_size": 4,
+      "map": "great_sahara_2",
+      "map_path": "mods/cameo/maps/Great_Sahara_3.oramap",
+      "map_sha256": "8b5c089c7cd2f8209819afa04436d6fa15849e125823ddc16bf5e996cd280ddc",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_gdi",
+        "td_nod",
+        "ra1_allies",
+        "ra1_soviets"
+      ],
+      "required_seats": 8,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 3
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi6",
+          "spawn": 6,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi7",
+          "spawn": 7,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 3
+        }
+      ]
+    },
+    {
+      "cell_id": "4v4_sahara|1337|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "4v4_sahara",
+      "team_size": 4,
+      "map": "great_sahara_2",
+      "map_path": "mods/cameo/maps/Great_Sahara_3.oramap",
+      "map_sha256": "8b5c089c7cd2f8209819afa04436d6fa15849e125823ddc16bf5e996cd280ddc",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_gdi",
+        "td_nod",
+        "ra1_allies",
+        "ra1_soviets"
+      ],
+      "required_seats": 8,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi6",
+          "spawn": 6,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi7",
+          "spawn": 7,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 3
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 3
+        }
+      ]
+    },
+    {
+      "cell_id": "4v4_sahara|2026|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "4v4_sahara",
+      "team_size": 4,
+      "map": "great_sahara_2",
+      "map_path": "mods/cameo/maps/Great_Sahara_3.oramap",
+      "map_sha256": "8b5c089c7cd2f8209819afa04436d6fa15849e125823ddc16bf5e996cd280ddc",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_gdi",
+        "td_nod",
+        "ra1_allies",
+        "ra1_soviets"
+      ],
+      "required_seats": 8,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 3
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi6",
+          "spawn": 6,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi7",
+          "spawn": 7,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 3
+        }
+      ]
+    },
+    {
+      "cell_id": "4v4_sahara|2026|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "4v4_sahara",
+      "team_size": 4,
+      "map": "great_sahara_2",
+      "map_path": "mods/cameo/maps/Great_Sahara_3.oramap",
+      "map_sha256": "8b5c089c7cd2f8209819afa04436d6fa15849e125823ddc16bf5e996cd280ddc",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_gdi",
+        "td_nod",
+        "ra1_allies",
+        "ra1_soviets"
+      ],
+      "required_seats": 8,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi6",
+          "spawn": 6,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi7",
+          "spawn": 7,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 3
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 3
+        }
+      ]
+    },
+    {
+      "cell_id": "4v4_ice|1337|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "4v4_ice",
+      "team_size": 4,
+      "map": "ice_cold",
+      "map_path": "mods/cameo/maps/ice_cold.oramap",
+      "map_sha256": "e097fcca4fa40f5878b4fb7d965529728dbbd34c2a14b8825e1bec0aea6da98b",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_gdi",
+        "td_nod",
+        "ra1_allies",
+        "ra1_soviets"
+      ],
+      "required_seats": 8,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 3
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi6",
+          "spawn": 6,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi7",
+          "spawn": 7,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 3
+        }
+      ]
+    },
+    {
+      "cell_id": "4v4_ice|1337|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "4v4_ice",
+      "team_size": 4,
+      "map": "ice_cold",
+      "map_path": "mods/cameo/maps/ice_cold.oramap",
+      "map_sha256": "e097fcca4fa40f5878b4fb7d965529728dbbd34c2a14b8825e1bec0aea6da98b",
+      "seed": 1337,
+      "pair": 0,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_gdi",
+        "td_nod",
+        "ra1_allies",
+        "ra1_soviets"
+      ],
+      "required_seats": 8,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi6",
+          "spawn": 6,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi7",
+          "spawn": 7,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 3
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 3
+        }
+      ]
+    },
+    {
+      "cell_id": "4v4_ice|2026|0",
+      "switch": "BU_harvester_logistics",
+      "setup": "4v4_ice",
+      "team_size": 4,
+      "map": "ice_cold",
+      "map_path": "mods/cameo/maps/ice_cold.oramap",
+      "map_sha256": "e097fcca4fa40f5878b4fb7d965529728dbbd34c2a14b8825e1bec0aea6da98b",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 0,
+      "control_side": "A",
+      "treatment_side": "B",
+      "team_factions": [
+        "td_gdi",
+        "td_nod",
+        "ra1_allies",
+        "ra1_soviets"
+      ],
+      "required_seats": 8,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 3
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi6",
+          "spawn": 6,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi7",
+          "spawn": 7,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 3
+        }
+      ]
+    },
+    {
+      "cell_id": "4v4_ice|2026|1",
+      "switch": "BU_harvester_logistics",
+      "setup": "4v4_ice",
+      "team_size": 4,
+      "map": "ice_cold",
+      "map_path": "mods/cameo/maps/ice_cold.oramap",
+      "map_sha256": "e097fcca4fa40f5878b4fb7d965529728dbbd34c2a14b8825e1bec0aea6da98b",
+      "seed": 2026,
+      "pair": 1,
+      "game_in_pair": 1,
+      "control_side": "B",
+      "treatment_side": "A",
+      "team_factions": [
+        "td_gdi",
+        "td_nod",
+        "ra1_allies",
+        "ra1_soviets"
+      ],
+      "required_seats": 8,
+      "arm_bot_types": {
+        "control": "hard_control",
+        "treatment": "hard_treatment"
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi6",
+          "spawn": 6,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi7",
+          "spawn": 7,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 3
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 3
+        }
+      ]
+    }
+  ],
+  "generated_variant_count": 32,
+  "proved_seats": 144,
+  "runtime_arm_preflight": {
+    "switch": "BU_harvester_logistics",
+    "accepted_switches": [],
+    "ai_yaml_sha256": "b96ea938014d215110de87b84e2d1c84cd5d6a1220b29766c9e464ebac7c8fb4",
+    "runtime_files": [
+      "ai.yaml",
+      "fransbot.yaml",
+      "fransbot_lists.yaml"
+    ],
+    "runnable": false,
+    "arm_types": {
+      "control": "hard_control",
+      "treatment": "hard_treatment"
+    }
+  },
+  "estimated_worker_hours": 11.07,
+  "estimated_slot_wall_hours": 11.07,
+  "slot_wall_range_hours": [
+    7.33,
+    14.8
+  ],
+  "serial_wall_range_hours": [
+    7.33,
+    14.8
+  ],
+  "missing_campaign_gates": [
+    "lead-approved executable manifest and exact-baseline A5 parity receipt",
+    "engine acceptance plus symmetric spawn proof for all eight maps",
+    "fixture/negative-control acceptance for the downstream paired analyzer"
+  ],
+  "map_engine_acceptance_and_symmetric_spawn_proof": "PENDING_ENGINE_PREFLIGHT"
+}
