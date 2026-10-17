@@ -64,7 +64,7 @@ import sys
 import time
 
 HELPERS = pathlib.Path(__file__).parent
-REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
+REPO_ROOT = pathlib.Path(__file__).resolve().parents[3]
 MONITOR = REPO_ROOT / "tools" / "ai" / "run_qualification_monitored.py"
 RUN_CAPPED = REPO_ROOT / "tools" / "ai" / "run_capped.py"
 DRIVER_SHA = hashlib.sha256(pathlib.Path(__file__).read_bytes()).hexdigest()
