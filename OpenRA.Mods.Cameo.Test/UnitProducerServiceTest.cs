@@ -10,6 +10,7 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
 
@@ -123,6 +124,104 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(UnitProducerServiceCA.OfferBudget(3, 0), Is.EqualTo(1),
 				"a zero width cannot silently starve a category");
 			Assert.That(UnitProducerServiceCA.OfferBudget(5, 2), Is.EqualTo(2));
+		}
+
+		// Sol F1 regression: the batch is the REAL seam the external-request scan and the
+		// category visits share — these tests drive the used object across simulated call
+		// sites rather than re-deriving the arithmetic.
+
+		[Test]
+		public void OneBatchSharesReservationsAcrossCallSites()
+		{
+			var batch = new ProducerServiceBatch(5000);
+			var producer = new object(); // stands in for a ProductionQueue instance
+
+			// "External request" call site emits first: spends a slot and 1200 cash.
+			Assert.That(batch.SlotsFree(producer, 1), Is.EqualTo(1));
+			batch.Reserve(producer, 1200);
+
+			// "Category visit" call site later in the same pass must see both spends —
+			// oversubscription across call sites was the F1 defect.
+			Assert.That(batch.SlotsFree(producer, 1), Is.EqualTo(0),
+				"the emitted order consumed the only slot before AllQueued could show it");
+			Assert.That(batch.BankLeft, Is.EqualTo(3800));
+			Assert.That(batch.Affords(3800), Is.True);
+			Assert.That(batch.Affords(3801), Is.False,
+				"a request costing more than the reserved bank is not a second invisible order");
+		}
+
+		[Test]
+		public void SiblingProducersReserveIndependently()
+		{
+			var batch = new ProducerServiceBatch(5000);
+			var first = new object();
+			var sibling = new object(); // same actor, same queue type — distinct trait
+
+			batch.Reserve(first, 900);
+			Assert.That(batch.SlotsFree(sibling, 1), Is.EqualTo(1),
+				"keyed by queue instance: the sibling's slot is not spent by the first");
+			Assert.That(batch.BankLeft, Is.EqualTo(4100), "cash is shared — slots are not");
+		}
+
+		[Test]
+		public void BatchReservationsAreEphemeralPerPass()
+		{
+			var producer = new object();
+			var first = new ProducerServiceBatch(1000);
+			first.Reserve(producer, 600);
+			first.PendingArmedInfantry = 2;
+			first.LimitHeadroom["infantry"] = 1;
+
+			// The next decision pass builds a new batch: nothing leaks — no durable
+			// pending/retry/ack state before the U2 checkpoint.
+			var next = new ProducerServiceBatch(1000);
+			Assert.That(next.BankLeft, Is.EqualTo(1000));
+			Assert.That(next.SlotsFree(producer, 1), Is.EqualTo(1));
+			Assert.That(next.PendingArmedInfantry, Is.EqualTo(0));
+			Assert.That(next.LimitHeadroom, Is.Empty);
+		}
+
+		[Test]
+		public void LimitHeadroomMapIsSharedAcrossCallSites()
+		{
+			var batch = new ProducerServiceBatch(5000);
+			batch.LimitHeadroom["officer"] = 1; // computed once: limit 2, one alive
+			Assert.That(batch.LimitHeadroom["officer"], Is.EqualTo(1));
+
+			batch.LimitHeadroom["officer"]--; // "external" spend
+			Assert.That(batch.LimitHeadroom["officer"], Is.EqualTo(0),
+				"the category visit sees the external request's headroom spend");
+		}
+
+		[Test]
+		public void CombatFloorPickIsHighestValuePerCostThenName()
+		{
+			// P4: the floor pick is combat value per cost — a stronger cheap rifle beats
+			// a stronger expensive one when the ratio wins; equal ratios tie on the name.
+			var order = UnitProducerServiceCA.CombatValueOrder(new[]
+			{
+				("medic", 1.0, 100),      // ratio .010 — support units never reach the pick anyway
+				("rifle", 9.0, 300),      // ratio .030
+				("rocket", 8.0, 200),     // ratio .040 — best value per cost
+				("gunner", 6.0, 200),     // ratio .030 — ties rifle, ordinal name wins
+			}).ToList();
+
+			Assert.That(order[0], Is.EqualTo("rocket"));
+			Assert.That(order[1], Is.EqualTo("gunner"), "equal ratios — ordinal name tiebreak");
+			Assert.That(order[2], Is.EqualTo("rifle"));
+			Assert.That(order[3], Is.EqualTo("medic"));
+		}
+
+		[Test]
+		public void CombatFloorOrderIsTotalAndDeterministic()
+		{
+			var candidates = new[] { ("b", 5.0, 100), ("a", 5.0, 100), ("c", 0.0, 0) };
+			var first = UnitProducerServiceCA.CombatValueOrder(candidates).ToList();
+			var second = UnitProducerServiceCA.CombatValueOrder(candidates.Reverse()).ToList();
+			Assert.That(first, Is.EqualTo(second),
+				"input order never changes the pick — identical on every client");
+			Assert.That(first[0], Is.EqualTo("a"), "equal ratios tie on the ordinal name");
+			Assert.That(first[2], Is.EqualTo("c"), "a zero cost clamps to 1 — no NaN");
 		}
 	}
 }
