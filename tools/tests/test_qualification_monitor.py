@@ -658,6 +658,68 @@ class QualMonitorDeterministicTests(unittest.TestCase):
 			monitor._disposition({"status": "COMPLETED", "exit_code": 0}, True),
 			"HOLD")
 
+	def test_d4_late_exit_notification_after_reconcile_is_benign(self):
+		"""r5 halt-5 regression: reconcile verifies the exit via the retained
+		handle; the queued port EXIT_PROCESS packet drains AFTER — it must be a
+		benign duplicate_exit_notification, NOT an identity gap."""
+		fake, clock = FakeAdapter(), FakeClock()
+		monitor = prep_state(build(self.tmp, fake, clock), fake, self.tmp)
+		h, _t, pid = fake.launch_suspended_in_job("x", monitor.job, None, (1, 2, 3))
+		root_key = (pid, ROOT_CREATION_BASE + pid)
+		monitor._register_member(pid, "launch", None, is_root=True,
+								 handle=h, creation=root_key[1])
+		fake.mark_exited(root_key, code=0, notify=False)
+		monitor._reconcile_exits()          # handle path verifies the exit first
+		entry = monitor.ledger[f"{root_key[0]}:{root_key[1]}"]
+		self.assertTrue(entry.exit_verified)
+		monitor.queue_exit(root_key[0])     # late port packet drains after
+		monitor._drain_notifications()
+		self.assertFalse(monitor.identity_gaps)
+		ledger = read_jsonl(monitor.writers["ledger"].path)
+		self.assertTrue(any(r.get("kind") == "duplicate_exit_notification"
+							for r in ledger))
+		self.assertTrue(monitor.root_exited)
+
+	def test_d4_exit_notification_for_never_registered_pid_is_gap(self):
+		"""Fail-closed floor: an EXIT_PROCESS for a pid with NO ledger entry
+		is still an identity gap (never observed = cannot certify)."""
+		fake, clock = FakeAdapter(), FakeClock()
+		monitor = prep_state(build(self.tmp, fake, clock), fake, self.tmp)
+		h, _t, pid = fake.launch_suspended_in_job("x", monitor.job, None, (1, 2, 3))
+		root_key = (pid, ROOT_CREATION_BASE + pid)
+		monitor._register_member(pid, "launch", None, is_root=True,
+								 handle=h, creation=root_key[1])
+		monitor.queue_exit(9_999_999)       # never registered
+		monitor._drain_notifications()
+		self.assertTrue(any(g.get("reason") ==
+							"exit notification for unregistered member"
+							for g in monitor.identity_gaps))
+
+	def test_d4_late_join_notification_after_exit_is_benign(self):
+		"""Symmetric join-side ordering: census registers a member that exits
+		before its queued NEW_PROCESS packet drains; open_process then fails —
+		must be a benign late_join_notification, not an identity gap."""
+		fake, clock = FakeAdapter(), FakeClock()
+		monitor = prep_state(build(self.tmp, fake, clock), fake, self.tmp)
+		h, _t, pid = fake.launch_suspended_in_job("x", monitor.job, None, (1, 2, 3))
+		root_key = (pid, ROOT_CREATION_BASE + pid)
+		monitor._register_member(pid, "launch", None, is_root=True,
+								 handle=h, creation=root_key[1])
+		child_key = fake.spawn_member(root_key, notify=False)  # census path
+		monitor._reconcile_membership()
+		fake.mark_exited(child_key, code=0, notify=False)
+		monitor._reconcile_exits()
+		entry = monitor.ledger[f"{child_key[0]}:{child_key[1]}"]
+		self.assertTrue(entry.exited)
+		with monitor._notify_lock:
+			monitor._notify_queue.append(
+				(rqm.JOB_OBJECT_MSG_NEW_PROCESS, child_key[0]))  # late packet
+		monitor._drain_notifications()
+		self.assertFalse(monitor.identity_gaps)
+		ledger = read_jsonl(monitor.writers["ledger"].path)
+		self.assertTrue(any(r.get("kind") == "late_join_notification"
+							for r in ledger))
+
 	# ---- D5 query/assignment failure ------------------------------------------------------
 
 	def test_d5_assignment_failure_prevents_launch(self):

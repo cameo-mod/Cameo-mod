@@ -807,6 +807,15 @@ class Monitor:
         if handle is None:
             handle = self.win32.open_process(pid)
         if handle is None:
+            known = next((e for e in self.ledger.values() if e.pid == pid), None)
+            if known is not None:
+                # Dual-signal ordering on the join side: this pid was already
+                # registered and has since exited — the queued NEW_PROCESS
+                # packet drained late. The member is fully accounted; this is
+                # a benign late join record, not an identity gap.
+                self._record("ledger", {"kind": "late_join_notification",
+                                        "pid": pid, "utc": utc_now()})
+                return known
             gap = {"pid": pid, "source": source, "utc": utc_now(),
                    "reason": "exited or inaccessible before creation-time/handle capture"}
             self.identity_gaps.append(gap)
@@ -861,8 +870,11 @@ class Monitor:
                 entry.exit_utc = utc_now()
             # persist exit evidence BEFORE releasing the handle; if the write
             # fails the handle is retained and the exit stays unverified (§4).
+            # The field is stamped True in the record because the record only
+            # exists when the write succeeded.
             entry.exit_verified = self._record(
-                "ledger", {"kind": "member_exit_verified", **entry.to_record()})
+                "ledger", {"kind": "member_exit_verified",
+                           **{**entry.to_record(), "exit_verified": True}})
             if entry.exit_verified:
                 self.win32.close_handle(handle)
                 self.handles.pop(entry.key(), None)
@@ -870,9 +882,16 @@ class Monitor:
     def _on_exit_notification(self, pid: int) -> None:
         entries = self._live_entries_for_pid(pid)
         if not entries:
+            if any(e.pid == pid for e in self.ledger.values()):
+                # Dual-signal ordering: _reconcile_exits (or an earlier drain)
+                # already verified this registered member's exit — the queued
+                # port packet is a benign late duplicate, not an identity gap.
+                self._record("ledger", {"kind": "duplicate_exit_notification",
+                                        "pid": pid, "utc": utc_now()})
+                return
             self.identity_gaps.append({
                 "pid": pid, "utc": utc_now(),
-                "reason": "exit notification for unregistered or already-exited member"})
+                "reason": "exit notification for unregistered member"})
             self._record("ledger", {"kind": "identity_gap",
                                     "pid": pid, "utc": utc_now(),
                                     "reason": "unregistered exit notification"})
@@ -1056,7 +1075,7 @@ class Monitor:
                     entry.exit_verified = self._record(
                         "ledger", {"kind": "member_exit_verified",
                                    "verified_via": "job_absence",
-                                   **entry.to_record()})
+                                   **{**entry.to_record(), "exit_verified": True}})
         for entry in live:
             if entry.is_root and entry.exited:
                 self.root_exited = True
