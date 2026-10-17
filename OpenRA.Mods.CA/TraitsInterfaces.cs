@@ -87,4 +87,35 @@ namespace OpenRA.Mods.CA.Traits
 
 	[RequireExplicitImplementation]
 	public interface INotifyAttachedTo { void Attached(Actor self, Actor attachedActor, Attachable attachable); void Detached(Actor self, Actor detachedActor, Attachable attachable); }
+
+	// U2 (service-contract §5, Sol dispositions 0CB8EF18/6919D6E4): the local routing
+	// fate of a single order inside the bot's own FIFO. IssuedToWorld means the bot
+	// released the order to world.IssueOrder — it is NOT engine acceptance, queue
+	// insertion or production completion. LocallyQueued/Deferred are routing notes
+	// only; RefusedLocally and IssuedToWorld are terminal for that order instance.
+	public enum BotOrderOutcome { LocallyQueued, Deferred, RefusedLocally, IssuedToWorld }
+
+	/// <summary>
+	/// Record-only sink for a tracked order's local routing disposition. Called
+	/// synchronously on the bot's own thread wherever the event happens — inside
+	/// QueueOrderTracked for LocallyQueued, inside the drain for the rest. Must
+	/// never issue orders or mutate world state.
+	/// </summary>
+	[RequireExplicitImplementation]
+	public interface IBotOrderDisposition { void OrderDisposition(Order order, BotOrderOutcome outcome); }
+
+	/// <summary>
+	/// Implemented by a bot that can report the local routing fate of a single
+	/// order. QueueOrderTracked binds the observer to the exact Order instance
+	/// BEFORE the FIFO can evict anything; grouped orders are refused (the gate
+	/// may rebuild them into a different instance, breaking identity). Returns
+	/// false where tracking is impossible — callers fall back to plain
+	/// QueueOrder and keep the intent honestly pending instead of claiming an
+	/// observable disposition.
+	/// </summary>
+	[RequireExplicitImplementation]
+	public interface IBotOrderTracking
+	{
+		bool QueueOrderTracked(Order order, IBotOrderDisposition observer);
+	}
 }

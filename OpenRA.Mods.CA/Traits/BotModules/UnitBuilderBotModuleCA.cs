@@ -180,7 +180,113 @@ namespace OpenRA.Mods.CA.Traits
 		public override object Create(ActorInitializer init) { return new UnitBuilderBotModuleCA(init.Self, this); }
 	}
 
-	public class UnitBuilderBotModuleCA : ConditionalTrait<UnitBuilderBotModuleCAInfo>, IBotTick, IBotNotifyIdleBaseUnits, IBotRequestUnitProduction, IGameSaveTraitData, IBotAircraftBuilder, INotifyActorDisposing, IBotUnitProductionGateInfo, IBotMobileSpendReserve
+	// U2 (service-contract §5, Sol dispositions 0CB8EF18/6919D6E4): one external
+	// request is an intent — Waiting until emitted, EmittedPending while its local
+	// routing is unproven (and forever after IssuedToWorld: routing released it,
+	// which is not delivery), Unresolved after a save boundary. Every state counts
+	// once toward RequestedProductionCount so a caller can never duplicate an
+	// in-flight commitment; a replayed StartProduction post-load is exactly why
+	// pending coverage is never released on assumed loss.
+	public enum BuildIntentState { Waiting, EmittedPending, Unresolved }
+
+	public sealed class BuildIntent
+	{
+		public readonly string Name;
+		public BuildIntentState State;
+		public BotOrderOutcome LastDisposition;
+
+		public BuildIntent(string name, BuildIntentState state)
+		{
+			Name = name;
+			State = state;
+			LastDisposition = BotOrderOutcome.LocallyQueued;
+		}
+
+		// Record-only: a refusal moves the intent back to Waiting — that order
+		// instance never issues, so retry is legal. LocallyQueued/Deferred/
+		// IssuedToWorld only annotate; the intent stays pending.
+		public void NoteDisposition(BotOrderOutcome outcome)
+		{
+			LastDisposition = outcome;
+			if (outcome == BotOrderOutcome.RefusedLocally)
+				State = BuildIntentState.Waiting;
+		}
+	}
+
+	public sealed class BuildIntentLedger
+	{
+		readonly List<BuildIntent> intents = new List<BuildIntent>();
+
+		public IEnumerable<BuildIntent> Entries => intents;
+		public bool HasWaiting => intents.Any(i => i.State == BuildIntentState.Waiting);
+
+		// Coverage counts every state once — withheld rather than risk a duplicate.
+		public int Count(string name) { return intents.Count(i => i.Name == name); }
+
+		public BuildIntent Request(string name)
+		{
+			var intent = new BuildIntent(name, BuildIntentState.Waiting);
+			intents.Add(intent);
+			return intent;
+		}
+
+		public BuildIntent NextWaiting() { return intents.FirstOrDefault(i => i.State == BuildIntentState.Waiting); }
+		public List<BuildIntent> WaitingSnapshot() { return intents.Where(i => i.State == BuildIntentState.Waiting).ToList(); }
+		public bool Remove(BuildIntent intent) { return intents.Remove(intent); }
+		public void Clear() { intents.Clear(); }
+
+		public string[] WaitingNames()
+		{
+			return intents.Where(i => i.State == BuildIntentState.Waiting).Select(i => i.Name).ToArray();
+		}
+
+		public string[] PendingNames()
+		{
+			return intents.Where(i => i.State != BuildIntentState.Waiting).Select(i => i.Name).ToArray();
+		}
+
+		// Legacy QueuedBuildRequests strings are consumed into Waiting intents —
+		// the ledger replaces the old list, so nothing counts twice.
+		public void MigrateWaiting(IEnumerable<string> names)
+		{
+			foreach (var name in names)
+				intents.Add(new BuildIntent(name, BuildIntentState.Waiting));
+		}
+
+		// Anything emitted at save loads Unresolved (Sol 6919D6E4): order replay
+		// may reconstruct the commitment, so loss is never assumed and the intent
+		// never re-requests — coverage stays withheld.
+		public void LoadPending(IEnumerable<string> names)
+		{
+			foreach (var name in names)
+				intents.Add(new BuildIntent(name, BuildIntentState.Unresolved));
+		}
+	}
+
+	// U2: the runtime order→intent binding map — reference-keyed (Order has no
+	// Equals override), bound before a tracked enqueue so a synchronous
+	// LocallyQueued disposition resolves, and consumed by terminal outcomes.
+	public sealed class BuildIntentOrderBindings
+	{
+		readonly Dictionary<Order, BuildIntent> byOrder = new Dictionary<Order, BuildIntent>();
+
+		public void Bind(Order order, BuildIntent intent) { byOrder[order] = intent; }
+		public void Unbind(Order order) { byOrder.Remove(order); }
+		public void Clear() { byOrder.Clear(); }
+
+		public void NoteDisposition(Order order, BotOrderOutcome outcome)
+		{
+			if (order == null || !byOrder.TryGetValue(order, out var intent))
+				return;
+
+			if (outcome == BotOrderOutcome.RefusedLocally || outcome == BotOrderOutcome.IssuedToWorld)
+				byOrder.Remove(order);
+
+			intent.NoteDisposition(outcome);
+		}
+	}
+
+	public class UnitBuilderBotModuleCA : ConditionalTrait<UnitBuilderBotModuleCAInfo>, IBotTick, IBotNotifyIdleBaseUnits, IBotRequestUnitProduction, IGameSaveTraitData, IBotAircraftBuilder, INotifyActorDisposing, IBotUnitProductionGateInfo, IBotMobileSpendReserve, IBotOrderDisposition
 	{
 		public const int FeedbackTime = 30; // ticks; = a bit over 1s. must be >= netlag.
 
@@ -207,7 +313,11 @@ namespace OpenRA.Mods.CA.Traits
 		public event Action<int, string> ActiveCompositionChanged;
 		readonly Dictionary<string, int> compositionLastUsedTickById = new Dictionary<string, int>();
 
-		readonly List<string> queuedBuildRequests = new List<string>();
+		// U2: the intent ledger replaces the bare request-name list — see the type
+		// block above. intentBindings ties an emitted Order instance to its intent
+		// until the local routing disposition arrives.
+		readonly BuildIntentLedger buildIntents = new BuildIntentLedger();
+		readonly BuildIntentOrderBindings intentBindings = new BuildIntentOrderBindings();
 		ActorIndex.OwnerAndNames unitsToBuild;
 		readonly Dictionary<string, int> activeUnitIntervals = new Dictionary<string, int>();
 
@@ -529,24 +639,33 @@ namespace OpenRA.Mods.CA.Traits
 				// Discarded when the pass ends; nothing durable. Flag off never allocates.
 				var batch = FairService ? new ProducerServiceBatch(playerResources.GetCashAndResources()) : null;
 
-				if (FairService && queuedBuildRequests.Count > 0)
+				if (FairService && buildIntents.HasWaiting)
 				{
 					// U1 (service-contract §4): every pending external request is examined
 					// once per visit in request order — an emitted or permanently-invalid
-					// request leaves the list, a temporarily blocked one survives for the
-					// next visit. An impossible head request cannot hide a legal later one,
-					// and a deferred order is never duplicated.
-					foreach (var buildRequest in queuedBuildRequests.ToList())
-						if (BuildUnit(bot, buildRequest, batch) || PermanentlyInvalidBuildRequest(buildRequest))
-							queuedBuildRequests.Remove(buildRequest);
+					// request leaves the waiting set, a temporarily blocked one survives
+					// for the next visit. An impossible head request cannot hide a legal
+					// later one, and a deferred order is never duplicated.
+					// U2: an emitted request is not removed — the intent stays in the
+					// ledger as EmittedPending coverage so the requester cannot emit a
+					// second order while the first is unproven.
+					foreach (var intent in buildIntents.WaitingSnapshot())
+					{
+						if (BuildUnit(bot, intent, batch))
+							continue;
+						if (PermanentlyInvalidBuildRequest(intent.Name))
+							buildIntents.Remove(intent);
+					}
 				}
 				else
 				{
-					var buildRequest = queuedBuildRequests.FirstOrDefault();
-					if (buildRequest != null)
+					var intent = buildIntents.NextWaiting();
+					if (intent != null)
 					{
-						BuildUnit(bot, buildRequest);
-						queuedBuildRequests.Remove(buildRequest);
+						// Legacy semantics: a failed attempt drops the request; an
+						// emitted one now stays in the ledger as pending coverage (U2).
+						if (!BuildUnit(bot, intent))
+							buildIntents.Remove(intent);
 					}
 				}
 
@@ -647,12 +766,12 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			foreach (var observer in UnitObservers)
 				observer.UnitProductionRequested(player, world.WorldTick, requestedActor);
-			queuedBuildRequests.Add(requestedActor);
+			buildIntents.Request(requestedActor);
 		}
 
 		int IBotRequestUnitProduction.RequestedProductionCount(IBot bot, string requestedActor)
 		{
-			return queuedBuildRequests.Count(r => r == requestedActor);
+			return buildIntents.Count(requestedActor);
 		}
 
 		void BuildUnit(IBot bot, string category, bool buildRandom, bool excludeLimited, bool saturated = false,
@@ -981,8 +1100,10 @@ namespace OpenRA.Mods.CA.Traits
 		// caller keeps a blocked request queued; legacy callers ignore the result. The
 		// batch is the shared ephemeral reservation ledger (Sol F1): slot, cash and
 		// headroom accounting join the category visits of the same decision pass.
-		bool BuildUnit(IBot bot, string name, ProducerServiceBatch batch = null)
+		bool BuildUnit(IBot bot, BuildIntent intent, ProducerServiceBatch batch = null)
 		{
+			var name = intent.Name;
+
 			// Actors[] throws KeyNotFoundException for names absent from the ruleset —
 			// reachable when a queued request survives a save whose version renamed the actor.
 			if (!world.Map.Rules.Actors.TryGetValue(name, out var actorInfo))
@@ -1040,7 +1161,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (admit)
 				{
 					SetUnitInterval(name);
-					bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
+					EmitIntentProduction(bot, queue.Actor, intent);
 					NotifyStarted(name, queue.Info.Type);
 					AIUtils.BotDebug("AI: {0} decided to build {1} (external request)", queue.Actor.Owner, name);
 					if (FairService)
@@ -1078,6 +1199,31 @@ namespace OpenRA.Mods.CA.Traits
 
 			return !actorInfo.TraitInfos<BuildableInfo>().Any(b =>
 				b.Queue != null && b.Queue.Any(pq => Info.UnitQueues.Contains(pq)));
+		}
+
+		// U2: the intent goes EmittedPending BEFORE the tracked enqueue so a
+		// synchronous LocallyQueued disposition during QueueOrderTracked already
+		// sees the emitted state. The order→intent binding is registered first and
+		// dropped only when tracking refuses — the fallback is plain QueueOrder:
+		// the order still routes and the intent stays honestly pending instead of
+		// claiming an observable disposition (Sol 0CB8EF18 §1 fallback).
+		void EmitIntentProduction(IBot bot, Actor producer, BuildIntent intent)
+		{
+			var order = Order.StartProduction(producer, intent.Name, 1);
+			intent.State = BuildIntentState.EmittedPending;
+			intentBindings.Bind(order, intent);
+			if (!(bot is IBotOrderTracking tracking) || !tracking.QueueOrderTracked(order, this))
+			{
+				intentBindings.Unbind(order);
+				bot.QueueOrder(order);
+			}
+		}
+
+		// Record-only sink for the tracked order's local routing fate — see
+		// BuildIntentOrderBindings/BuildIntent.NoteDisposition for the transition.
+		void IBotOrderDisposition.OrderDisposition(Order order, BotOrderOutcome outcome)
+		{
+			intentBindings.NoteDisposition(order, outcome);
 		}
 
 		void SetUnitInterval(string name)
@@ -1714,7 +1860,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			var nodes = new List<MiniYamlNode>()
 			{
-				new("QueuedBuildRequests", FieldSaver.FormatValue(queuedBuildRequests.ToArray())),
+				new("QueuedBuildRequests", FieldSaver.FormatValue(buildIntents.WaitingNames())),
 				new("IdleUnitCount", FieldSaver.FormatValue(idleUnitCount)),
 				new("ReservePaidUnitCost", FieldSaver.FormatValue(mobileReserve.PaidUnitCost)),
 				new("ReservePaidOptionalCost", FieldSaver.FormatValue(mobileReserve.PaidOptionalCost)),
@@ -1732,6 +1878,14 @@ namespace OpenRA.Mods.CA.Traits
 					.Select(kvp => new MiniYamlNode(kvp.Key, kvp.Value))
 					.ToList()));
 
+			// U2 (Sol 6919D6E4): emitted-but-unproven intents persist by NAME so a
+			// loaded game keeps their coverage withheld — a replayed StartProduction
+			// may still deliver, and a re-request would duplicate it. Emitted only
+			// when non-empty: a save with nothing in flight stays byte-identical.
+			var pendingNames = buildIntents.PendingNames();
+			if (pendingNames.Length > 0)
+				nodes.Add(new MiniYamlNode("PendingBuildIntents", FieldSaver.FormatValue(pendingNames)));
+
 			return nodes.Concat(counters.SaveNodes()).ToList();
 		}
 
@@ -1740,12 +1894,21 @@ namespace OpenRA.Mods.CA.Traits
 			if (self.World.IsReplay)
 				return;
 
+			// U2: trait data is authoritative — stale intents and runtime order
+			// bindings never survive a load (replayed orders are new instances).
+			buildIntents.Clear();
+			intentBindings.Clear();
+
 			var queuedBuildRequestsNode = data.NodeWithKeyOrDefault("QueuedBuildRequests");
 			if (queuedBuildRequestsNode != null)
-			{
-				queuedBuildRequests.Clear();
-				queuedBuildRequests.AddRange(FieldLoader.GetValue<string[]>("QueuedBuildRequests", queuedBuildRequestsNode.Value.Value));
-			}
+				buildIntents.MigrateWaiting(FieldLoader.GetValue<string[]>("QueuedBuildRequests", queuedBuildRequestsNode.Value.Value));
+
+			// U2: anything emitted at save is Unresolved — coverage withheld, never
+			// auto-reissued (Sol 6919D6E4). Order→intent bindings are runtime-only:
+			// replayed orders are new instances and are never identity-matched.
+			var pendingBuildIntentsNode = data.NodeWithKeyOrDefault("PendingBuildIntents");
+			if (pendingBuildIntentsNode != null)
+				buildIntents.LoadPending(FieldLoader.GetValue<string[]>("PendingBuildIntents", pendingBuildIntentsNode.Value.Value));
 
 			var idleUnitCountNode = data.NodeWithKeyOrDefault("IdleUnitCount");
 			if (idleUnitCountNode != null)
