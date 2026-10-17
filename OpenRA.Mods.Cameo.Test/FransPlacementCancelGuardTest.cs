@@ -837,5 +837,78 @@ namespace OpenRA.Mods.Cameo.Test
 					"exact-item retention: a same-name tail is NOT demoted — demotion cannot widen to an unrelated item");
 			});
 		}
+
+		// ----------------------------------------------------------------
+		// Option-B consumption seams (task 01a14676, spec
+		// SPEC_2026-10-17_frans_world_harness_devin): the two sites that were
+		// tracker-only now resolve through verbatim FransPlacementCancelGuard
+		// predicates — the park-gate bypass in the completed-item sweep and
+		// the routing decision inside ChooseBuildLocation. These fixtures
+		// drive the exact methods the call sites invoke, covering the full
+		// decision matrix the inline code encoded.
+		// ----------------------------------------------------------------
+
+		[Test]
+		public void ExpansionParkGateHolds_DecisionMatrix_OnlyParksNonDemotedWithoutFact()
+		{
+			Assert.Multiple(() =>
+			{
+				Assert.That(FransPlacementCancelGuard.ExpansionParkGateHolds(true, false, true), Is.False,
+					"demoted + no FACT: admitted past the park gate");
+				Assert.That(FransPlacementCancelGuard.ExpansionParkGateHolds(true, false, false), Is.True,
+					"non-demoted + no FACT: gate holds — the park outcome");
+				Assert.That(FransPlacementCancelGuard.ExpansionParkGateHolds(true, true, true), Is.False,
+					"demoted + live FACT: gate irrelevant");
+				Assert.That(FransPlacementCancelGuard.ExpansionParkGateHolds(true, true, false), Is.False,
+					"non-demoted + live FACT: expansion routing applies, gate never parks");
+				Assert.That(FransPlacementCancelGuard.ExpansionParkGateHolds(false, false, true), Is.False,
+					"non-expansion item: gate never holds");
+				Assert.That(FransPlacementCancelGuard.ExpansionParkGateHolds(false, true, false), Is.False);
+			});
+		}
+
+		[Test]
+		public void ExpansionRouting_DecisionMatrix_DemotedFallsThroughOnlyWithoutFact()
+		{
+			Assert.Multiple(() =>
+			{
+				Assert.That(FransPlacementCancelGuard.ExpansionRouting(false, false, false),
+					Is.EqualTo(FransPlacementCancelGuard.FransExpansionRouting.Fallthrough),
+					"ordinary item always falls through to base placement");
+				Assert.That(FransPlacementCancelGuard.ExpansionRouting(false, true, true),
+					Is.EqualTo(FransPlacementCancelGuard.FransExpansionRouting.Fallthrough),
+					"non-expansion item ignores both FACT presence and demotion");
+				Assert.That(FransPlacementCancelGuard.ExpansionRouting(true, true, false),
+					Is.EqualTo(FransPlacementCancelGuard.FransExpansionRouting.Expansion),
+					"expansion-routed item with a live FACT routes to it");
+				Assert.That(FransPlacementCancelGuard.ExpansionRouting(true, true, true),
+					Is.EqualTo(FransPlacementCancelGuard.FransExpansionRouting.Expansion),
+					"demotion is fallback-only: a live FACT still routes to expansion");
+				Assert.That(FransPlacementCancelGuard.ExpansionRouting(true, false, true),
+					Is.EqualTo(FransPlacementCancelGuard.FransExpansionRouting.Fallthrough),
+					"demoted + no FACT: the legal base-placement fallback");
+				Assert.That(FransPlacementCancelGuard.ExpansionRouting(true, false, false),
+					Is.EqualTo(FransPlacementCancelGuard.FransExpansionRouting.Hold),
+					"non-demoted + no FACT: the parked item stays held");
+			});
+		}
+
+		[Test]
+		public void ExpansionGateAndRouting_DemotedTransition_AgreeOnAdmission()
+		{
+			// The two consumption predicates consult the same demotion token —
+			// an item the park gate admits (holds==false) must never resolve to
+			// Hold downstream; a gate-held non-demoted item stays consistently
+			// held at routing too. One park decision, two consults, no drift.
+			Assert.Multiple(() =>
+			{
+				Assert.That(FransPlacementCancelGuard.ExpansionRouting(true, false, true),
+					Is.Not.EqualTo(FransPlacementCancelGuard.FransExpansionRouting.Hold),
+					"gate-admitted demoted item cannot resolve to Hold downstream");
+				Assert.That(FransPlacementCancelGuard.ExpansionRouting(true, false, false),
+					Is.EqualTo(FransPlacementCancelGuard.FransExpansionRouting.Hold),
+					"gate-held non-demoted item stays held at routing — consistent park");
+			});
+		}
 	}
 }

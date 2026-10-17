@@ -3043,8 +3043,11 @@ namespace OpenRA.Mods.Common.Traits
 					// timeout hold) are admitted past this gate — the reservation
 					// that justified expansion routing is dead, so the retained item
 					// must reach a real legal placement (review: no park-forever).
-					if (!secureProductionReservation && !remoteProductionReservation && baseBuilder.RequiresExpansionProductionPlacement(current.Item) &&
-						!baseBuilder.TryGetExpansionProductionCenter(out _) && !heldQueueCancels.IsDeadFactDemoted(current))
+					var requiresExpansionPlacement = baseBuilder.RequiresExpansionProductionPlacement(current.Item);
+					if (!secureProductionReservation && !remoteProductionReservation &&
+						FransPlacementCancelGuard.ExpansionParkGateHolds(requiresExpansionPlacement,
+							requiresExpansionPlacement && baseBuilder.TryGetExpansionProductionCenter(out _),
+							heldQueueCancels.IsDeadFactDemoted(current)))
 					{
 						if (observedTimingDoneTick >= 0 &&
 							world.WorldTick - observedTimingDoneTick >= baseBuilder.Info.ExpansionPlacementCompletedHoldTimeoutTicks)
@@ -3896,36 +3899,38 @@ namespace OpenRA.Mods.Common.Traits
 					return localPlacement;
 				}
 
-				if (type == FransBuildingType.Building && baseBuilder.RequiresExpansionProductionPlacement(actorType))
+				// The verbatim option-B seam: expansion routing is decided by the
+				// guard's pure predicate — TryGetExpansionProductionCenter stays
+				// short-circuit-lazy behind requiresExpansionRouting, exactly as
+				// before; a demoted item with no live FACT falls through to the
+				// ordinary base placement below instead of returning null.
+				var requiresExpansionRouting = type == FransBuildingType.Building &&
+					baseBuilder.RequiresExpansionProductionPlacement(actorType);
+				CPos expansionCenter = default;
+				var routing = FransPlacementCancelGuard.ExpansionRouting(requiresExpansionRouting,
+					requiresExpansionRouting && baseBuilder.TryGetExpansionProductionCenter(out expansionCenter),
+					deadFactDemoted);
+				if (routing == FransPlacementCancelGuard.FransExpansionRouting.Hold)
+					return (null, null, 0);
+				if (routing == FransPlacementCancelGuard.FransExpansionRouting.Expansion)
 				{
-					if (!baseBuilder.TryGetExpansionProductionCenter(out var expansionCenter))
-					{
-						// A dead-FACT demoted item is exempt from the null return:
-						// its expansion reservation is gone, so it falls through to
-						// the ordinary base placement below — a real legal site is
-						// attempted rather than parking the retained item forever.
-						if (!deadFactDemoted)
-							return (null, null, 0);
+					var expansionTarget = expansionCenter;
+					var expansionWeight = baseBuilder.ProductionDirectionWeight(actorType);
+					if (expansionWeight > 0 && baseBuilder.TryGetEnemyBaseDirectionTarget(out var knownEnemyBase, out _))
+						expansionTarget = knownEnemyBase;
+					var expansionPlacement = FindPos(expansionCenter, expansionTarget,
+						baseBuilder.Info.ExpansionProductionPlacementMinRadius,
+						baseBuilder.Info.ExpansionProductionPlacementMaxRadius, null, expansionWeight);
+					if (expansionPlacement.Location.HasValue)
 						FransBotLog.BotDebug(world,
-							"{0}: dead-FACT demoted {1} has no live expansion FACT; attempting ordinary base placement as the legal fallback.",
-							player, actorType);
-					}
-					else
-					{
-						var expansionTarget = expansionCenter;
-						var expansionWeight = baseBuilder.ProductionDirectionWeight(actorType);
-						if (expansionWeight > 0 && baseBuilder.TryGetEnemyBaseDirectionTarget(out var knownEnemyBase, out _))
-							expansionTarget = knownEnemyBase;
-						var expansionPlacement = FindPos(expansionCenter, expansionTarget,
-							baseBuilder.Info.ExpansionProductionPlacementMinRadius,
-							baseBuilder.Info.ExpansionProductionPlacementMaxRadius, null, expansionWeight);
-						if (expansionPlacement.Location.HasValue)
-							FransBotLog.BotDebug(world,
-								"{0}: main-base production cap routes {1} to expansion FACT area {2}; placement {3}.",
-								player, actorType, expansionCenter, expansionPlacement.Location.Value);
-						return expansionPlacement;
-					}
+							"{0}: main-base production cap routes {1} to expansion FACT area {2}; placement {3}.",
+							player, actorType, expansionCenter, expansionPlacement.Location.Value);
+					return expansionPlacement;
 				}
+				if (requiresExpansionRouting && deadFactDemoted)
+					FransBotLog.BotDebug(world,
+						"{0}: dead-FACT demoted {1} has no live expansion FACT; attempting ordinary base placement as the legal fallback.",
+						player, actorType);
 
 				var baseCenter = baseBuilder.GetBaseCenter();
 				switch (type)
@@ -4190,6 +4195,37 @@ namespace OpenRA.Mods.Common.Traits
 			/// the retained item on the expansion-only gate.</summary>
 			public bool IsDeadFactDemoted(ProductionItem item) =>
 				item != null && Entries.Any(e => e.DeadFactDemoted && ReferenceEquals(e.Item, item));
+		}
+
+		public enum FransExpansionRouting { Fallthrough, Expansion, Hold }
+
+		/// <summary>
+		/// The expansion-only park gate as one pure predicate — the consumption
+		/// point the completed-item sweep consults verbatim (option-B seam, spec
+		/// SPEC_2026-10-17_frans_world_harness_devin). Holds only when the item
+		/// requires expansion production placement AND no live expansion FACT
+		/// exists AND the item is not a dead-FACT demoted held entry.
+		/// </summary>
+		public static bool ExpansionParkGateHolds(bool requiresExpansionPlacement,
+			bool expansionFactPresent, bool isDeadFactDemoted) =>
+			requiresExpansionPlacement && !expansionFactPresent && !isDeadFactDemoted;
+
+		/// <summary>
+		/// The ChooseBuildLocation routing decision as one pure predicate (same
+		/// option-B seam). Expansion routes to the expansion FACT area; Hold is
+		/// the park outcome — no legal site this sweep; Fallthrough continues into
+		/// ordinary base placement — always for non-expansion items, and for a
+		/// dead-FACT demoted item with no live expansion FACT it is the legal
+		/// fallback the review requires instead of parking.
+		/// </summary>
+		public static FransExpansionRouting ExpansionRouting(bool requiresExpansion,
+			bool expansionFactPresent, bool isDeadFactDemoted)
+		{
+			if (!requiresExpansion)
+				return FransExpansionRouting.Fallthrough;
+			if (expansionFactPresent)
+				return FransExpansionRouting.Expansion;
+			return isDeadFactDemoted ? FransExpansionRouting.Fallthrough : FransExpansionRouting.Hold;
 		}
 
 		/// <summary>
