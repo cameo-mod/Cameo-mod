@@ -1,0 +1,296 @@
+army_helicopter:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@eject: ^AircraftEjectOnDeath
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~army_garage_lvl2
+		Queue: Aircraft, RAAircraft, Vehicle, RAVehicle
+		Description: actor_mh60.description
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Chopper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament@PRIMARY:
+		Weapon: armymen_chopper_chaingun
+		LocalOffset: 85,-213,-85, 85,213,-85
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: armymen_chopper_chaingun
+		LocalOffset: 85,213,-85, 85,-213,-85
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+	# FirepowerMultiplier@DualWeapon:
+		# Modifier: 25
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	Aircraft:
+		TurnSpeed: 26
+		Speed: 130
+	WithIdleOverlay@ROTORAIR:
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTORGROUND:
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	SelectionDecorations:
+	WithMuzzleOverlay:
+	SpawnActorOnDeath:
+		Actor: army_helicopter.Husk
+	EjectOnDeath:
+		PilotActor: army_grunt
+	LeavesTrails:
+		Offsets: -427,0,0
+		Image: smokey
+		MovingInterval: 3
+		StationaryInterval: 3
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	Selectable:
+		DecorationBounds: 1440, 1440
+	Voiced:
+		VoiceSet: Armymen_Chopper
+	Parachutable:
+		FallRate: 20
+		KilledOnImpassableTerrain: true
+		GroundCorpseSequence:
+		GroundCorpsePalette:
+		WaterImpactSound: splash9.aud
+		WaterCorpseSequence: small_splash
+		ParachutingCondition: parachute
+	WithParachute:
+		ShadowImage: parach_shadow
+		ShadowSequence: idle
+		Image: parach
+		Sequence: idle
+		OpeningSequence: open
+		Offset: 0,0,427
+		RequiresCondition: parachute
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	AmmoPool:
+		Ammo: 6
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 6
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
+	RenderSprites:
+		PlayerPalette: player_rgba
+army_helicopter.Husk:
+	Inherits: ^LargeHelicopterHusk
+	Tooltip:
+		Name: Chopper
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 140
+	RenderSprites:
+		Image: army_helicopter
+		PlayerPalette: player_rgba
+army_plane:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^FighterTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@eject: ^AircraftEjectOnDeath
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 30
+		Prerequisites: ~army_airfield
+		Description: actor_yak.description
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Attack Plane
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 48000
+	Repairable:
+		HpPerStep: 1600
+	ChangesHealth@SelfHealing:
+		Step: 32
+	Armament@BOMBS:
+		Weapon: ra1_soviets_yakscoutplane_napalm_bomb
+		LocalOffset: 0,-256,-32, 0,256,-32
+		AmmoUsage: 4
+		PauseOnCondition: ammo < 4
+	Armament@PRIMARY:
+		Weapon: armymen_chopper_chaingun
+		LocalOffset: 256,-213,0
+		MuzzleSequence: muzzle
+		PauseOnCondition: ammo < 4
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: armymen_chopper_chaingun
+		LocalOffset: 256,213,0
+		MuzzleSequence: muzzle
+		PauseOnCondition: ammo < 4
+	# FirepowerMultiplier@DualWeapon:
+		# Modifier: 25
+	AttackAircraft:
+		FacingTolerance: 100
+	Aircraft:
+		TurnSpeed: 11
+		Speed: 170
+	SelectionDecorations:
+	WithMuzzleOverlay:
+	Contrail:
+		Offset: -853,0,0
+	SpawnActorOnDeath:
+		Actor: army_plane_husk
+	EjectOnDeath:
+		PilotActor: army_grenadier
+	LeavesTrails:
+		Offsets: -853,0,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	Selectable:
+		DecorationBounds: 1280, 1280, 0, 128
+	Voiced:
+		VoiceSet: Armymen_Chopper
+	AmmoPool:
+		Ammo: 72
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 8
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 8
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+army_plane_husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Attack Plane
+	Contrail:
+		Offset: -853,0,0
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 150
+	LeavesTrails:
+		Offsets: -853,0,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: army_plane
+		PlayerPalette: player_rgba
+
+army_transport:
+	Inherits: ^Helicopter
+	Inherits@Template: ^UnarmedTransportHelicopterTemplate
+	Inherits@cargo: ^CargoAircraft
+	Inherits@bot: ^BotAutoDeployUnarmedAirTransport
+	Inherits@CM: ^CountermeasuresUpgrade
+	Inherits@eject: ^AircraftEjectOnDeath
+	Tooltip:
+		Name: Army Men Helicopter Transport
+	Valued:
+		Cost: 4300
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		Prerequisites: ~army_airfield
+		BuildPaletteOrder: 10
+		Description: actor_tran.description
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+		OverrideActor: army_transport
+	Aircraft:
+		TurnSpeed: 24
+		Speed: 120
+	Health:
+		HP: 88000
+	Repairable:
+		HpPerStep: 4400
+	ChangesHealth@SelfHealing:
+		Step: 35
+	WithIdleOverlay@ROTOR1AIR:
+		Offset: 597,0,213
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTOR1GROUND:
+		Offset: 597,0,213
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTOR2AIR:
+		Offset: -597,0,341
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTOR2GROUND:
+		Offset: -597,0,341
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	Cargo:
+		InitialUnits: army_grunt, army_bazooka, army_sniper, army_grenadier, army_machinegunner, army_grunt, army_bazooka, army_sniper, army_grenadier, army_machinegunner
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 10
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 10
+	SpawnActorOnDeath:
+		Actor: army_transport_husk
+	EjectOnDeath:
+		PilotActor: army_grunt
+	SelectionDecorations:
+	Selectable:
+		Class: army_transport
+		DecorationBounds: 1920, 1920
+	Voiced:
+		VoiceSet: Armymen_Chopper
+	RenderSprites:
+		Image: army_transport
+		PlayerPalette: player_rgba
+	FireWarheadsOnDeath:
+		Weapon: LargeHeliExplode
+
+army_transport_husk:
+	Inherits: ^LargeHelicopterHusk
+	Tooltip:
+		Name: Chopper
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 140
+	RenderSprites:
+		Image: army_transport
+		PlayerPalette: player_rgba

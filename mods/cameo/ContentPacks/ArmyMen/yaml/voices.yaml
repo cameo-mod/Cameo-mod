@@ -4,8 +4,7 @@
 Armymen_Bulldozer:
     DefaultVariant: .wav
 	Voices:
-		Select: armymen_bulldozer_what_1, armymen_bulldozer_what_2, armymen_bulldozer_what_3, armymen_bulldozer_what_4, armymen_bulldozer_what_5
-		Attack: armymen_bulldozer_yes_1, armymen_bulldozer_yes_2, armymen_bulldozer_yes_3, armymen_bulldozer_yes_4, armymen_bulldozer_yes_5, armymen_bulldozer_yes_6
+		Select: armymen_bulldozer_what_3, armymen_bulldozer_what_4
 		Action: armymen_bulldozer_yes_1, armymen_bulldozer_yes_2, armymen_bulldozer_yes_3, armymen_bulldozer_yes_4, armymen_bulldozer_yes_5, armymen_bulldozer_yes_6
 		Move: armymen_bulldozer_yes_1, armymen_bulldozer_yes_2, armymen_bulldozer_yes_3, armymen_bulldozer_yes_4, armymen_bulldozer_yes_5, armymen_bulldozer_yes_6
 		Die: armymen_bulldozer_yes_1
@@ -13,6 +12,8 @@ Armymen_Bulldozer:
 		Burned: armymen_bulldozer_yes_1
 		Zapped: armymen_bulldozer_yes_1
 		Poisoned: armymen_bulldozer_yes_1
+		Attack: armymen_bulldozer_what_5
+		Feedback: armymen_bulldozer_what_1, armymen_bulldozer_what_2
 
 Armymen_Bullseye:
     DefaultVariant: .wav
@@ -30,8 +31,7 @@ Armymen_Bullseye:
 Armymen_Chopper:
     DefaultVariant: .wav
 	Voices:
-		Select: armymen_chopper_what_1, armymen_chopper_what_2, armymen_chopper_what_3, armymen_chopper_what_4, armymen_chopper_what_5, armymen_chopper_what_6
-		Attack: armymen_chopper_yes_1, armymen_chopper_yes_2, armymen_chopper_yes_3, armymen_chopper_yes_4, armymen_chopper_yes_5
+		Select: armymen_chopper_what_1, armymen_chopper_what_4, armymen_chopper_what_5
 		Action: armymen_chopper_yes_1, armymen_chopper_yes_2, armymen_chopper_yes_3, armymen_chopper_yes_4, armymen_chopper_yes_5
 		Move: armymen_chopper_yes_1, armymen_chopper_yes_2, armymen_chopper_yes_3, armymen_chopper_yes_4, armymen_chopper_yes_5
 		Die: armymen_chopper_yes_1
@@ -39,25 +39,28 @@ Armymen_Chopper:
 		Burned: armymen_chopper_yes_1
 		Zapped: armymen_chopper_yes_1
 		Poisoned: armymen_chopper_yes_1
+		Attack: armymen_chopper_what_6
+		Feedback: armymen_chopper_what_2, armymen_chopper_what_3
 
 Armymen_Dumptruck:
     DefaultVariant: .wav
 	Voices:
-		Select: armymen_dumptruck_what_1, armymen_dumptruck_what_2, armymen_dumptruck_what_3, armymen_dumptruck_what_4
-		Attack: armymen_dumptruck_yes_1, armymen_dumptruck_yes_2, armymen_dumptruck_yes_3, armymen_dumptruck_yes_4, armymen_dumptruck_yes_5, armymen_dumptruck_yes_6
+		Select: armymen_dumptruck_what_2, armymen_dumptruck_what_3
 		Action: armymen_dumptruck_yes_1, armymen_dumptruck_yes_2, armymen_dumptruck_yes_3, armymen_dumptruck_yes_4, armymen_dumptruck_yes_5, armymen_dumptruck_yes_6
+		Harvest: armymen_dumptruck_yes_1, armymen_dumptruck_yes_2, armymen_dumptruck_yes_3, armymen_dumptruck_yes_4, armymen_dumptruck_yes_5, armymen_dumptruck_yes_6
 		Move: armymen_dumptruck_yes_1, armymen_dumptruck_yes_2, armymen_dumptruck_yes_3, armymen_dumptruck_yes_4, armymen_dumptruck_yes_5, armymen_dumptruck_yes_6
 		Die: armymen_dumptruck_yes_1
 		Build: armymen_dumptruck_yes_1
 		Burned: armymen_dumptruck_yes_1
 		Zapped: armymen_dumptruck_yes_1
 		Poisoned: armymen_dumptruck_yes_1
+		Attack: armymen_chopper_what_4
+		Feedback: armymen_dumptruck_what_1
 
 Armymen_Grunt:
     DefaultVariant: .wav
 	Voices:
-		Select: armymen_grunt_what_1, armymen_grunt_what_2, armymen_grunt_what_3, armymen_grunt_what_4, armymen_grunt_what_5, armymen_grunt_what_6, armymen_grunt_what_7, armymen_grunt_what_8, armymen_grunt_what_9, armymen_grunt_what_10, armymen_grunt_what_11
-		Attack: armymen_grunt_yes_1, armymen_grunt_yes_2, armymen_grunt_yes_3, armymen_grunt_yes_4, armymen_grunt_yes_5, armymen_grunt_yes_6, armymen_grunt_yes_7, armymen_grunt_yes_8, armymen_grunt_yes_9, armymen_grunt_yes_10, armymen_grunt_yes_11, armymen_grunt_yes_12, armymen_grunt_yes_13, armymen_grunt_yes_14
+		Select: armymen_grunt_what_1, armymen_grunt_what_5, armymen_grunt_what_6, armymen_grunt_what_7, armymen_grunt_what_8, armymen_grunt_what_9, armymen_grunt_what_10, armymen_grunt_what_11
 		Action: armymen_grunt_yes_1, armymen_grunt_yes_2, armymen_grunt_yes_3, armymen_grunt_yes_4, armymen_grunt_yes_5, armymen_grunt_yes_6, armymen_grunt_yes_7, armymen_grunt_yes_8, armymen_grunt_yes_9, armymen_grunt_yes_10, armymen_grunt_yes_11, armymen_grunt_yes_12, armymen_grunt_yes_13, armymen_grunt_yes_14
 		Move: armymen_grunt_yes_1, armymen_grunt_yes_2, armymen_grunt_yes_3, armymen_grunt_yes_4, armymen_grunt_yes_5, armymen_grunt_yes_6, armymen_grunt_yes_7, armymen_grunt_yes_8, armymen_grunt_yes_9, armymen_grunt_yes_10, armymen_grunt_yes_11, armymen_grunt_yes_12, armymen_grunt_yes_13, armymen_grunt_yes_14
 		Die: armymen_grunt_yes_1
@@ -65,12 +68,13 @@ Armymen_Grunt:
 		Burned: armymen_grunt_yes_1
 		Zapped: armymen_grunt_yes_1
 		Poisoned: armymen_grunt_yes_1
+		Attack: armymen_grunt_what_2
+		Feedback: armymen_grunt_what_3, armymen_grunt_what_4
 
 Armymen_HeavyGrunt:
     DefaultVariant: .wav
 	Voices:
-		Select: armymen_heavygrunt_what_1, armymen_heavygrunt_what_2, armymen_heavygrunt_what_3, armymen_heavygrunt_what_4, armymen_heavygrunt_what_5, armymen_heavygrunt_what_6, armymen_heavygrunt_what_7, armymen_heavygrunt_what_8
-		Attack: armymen_heavygrunt_yes_1, armymen_heavygrunt_yes_2, armymen_heavygrunt_yes_3, armymen_heavygrunt_yes_4, armymen_heavygrunt_yes_5, armymen_heavygrunt_yes_6, armymen_heavygrunt_yes_7, armymen_heavygrunt_yes_8, armymen_heavygrunt_yes_9
+		Select: armymen_heavygrunt_what_3, armymen_heavygrunt_what_4, armymen_heavygrunt_what_5, armymen_heavygrunt_what_6, armymen_heavygrunt_what_7
 		Action: armymen_heavygrunt_yes_1, armymen_heavygrunt_yes_2, armymen_heavygrunt_yes_3, armymen_heavygrunt_yes_4, armymen_heavygrunt_yes_5, armymen_heavygrunt_yes_6, armymen_heavygrunt_yes_7, armymen_heavygrunt_yes_8, armymen_heavygrunt_yes_9
 		Move: armymen_heavygrunt_yes_1, armymen_heavygrunt_yes_2, armymen_heavygrunt_yes_3, armymen_heavygrunt_yes_4, armymen_heavygrunt_yes_5, armymen_heavygrunt_yes_6, armymen_heavygrunt_yes_7, armymen_heavygrunt_yes_8, armymen_heavygrunt_yes_9
 		Die: armymen_heavygrunt_yes_1
@@ -78,12 +82,13 @@ Armymen_HeavyGrunt:
 		Burned: armymen_heavygrunt_yes_1
 		Zapped: armymen_heavygrunt_yes_1
 		Poisoned: armymen_heavygrunt_yes_1
+		Attack: armymen_heavygrunt_what_8
+		Feedback: armymen_heavygrunt_what_1, armymen_heavygrunt_what_2
 
 Armymen_Half_Track:
     DefaultVariant: .wav
 	Voices:
-		Select: armymen_half_track_what_1, armymen_half_track_what_2, armymen_half_track_what_3, armymen_half_track_what_4, armymen_half_track_what_5, armymen_half_track_what_6
-		Attack: armymen_half_track_yes_1, armymen_half_track_yes_2, armymen_half_track_yes_3, armymen_half_track_yes_4, armymen_half_track_yes_5
+		Select: armymen_half_track_what_3, armymen_half_track_what_4, armymen_half_track_what_5
 		Action: armymen_half_track_yes_1, armymen_half_track_yes_2, armymen_half_track_yes_3, armymen_half_track_yes_4, armymen_half_track_yes_5
 		Move: armymen_half_track_yes_1, armymen_half_track_yes_2, armymen_half_track_yes_3, armymen_half_track_yes_4, armymen_half_track_yes_5
 		Die: armymen_half_track_yes_1
@@ -91,6 +96,8 @@ Armymen_Half_Track:
 		Burned: armymen_half_track_yes_1
 		Zapped: armymen_half_track_yes_1
 		Poisoned: armymen_half_track_yes_1
+		Attack: armymen_half_track_what_6
+		Feedback: armymen_half_track_what_1, armymen_half_track_what_2
 
 Armymen_Hoover:
     DefaultVariant: .wav
@@ -108,8 +115,7 @@ Armymen_Hoover:
 Armymen_Medic:
     DefaultVariant: .wav
 	Voices:
-		Select: armymen_medic_what_1, armymen_medic_what_2, armymen_medic_what_3, armymen_medic_what_4, armymen_medic_what_5, armymen_medic_what_6
-		Attack: armymen_medic_yes_1, armymen_medic_yes_2, armymen_medic_yes_3, armymen_medic_yes_4
+		Select: armymen_medic_what_3, armymen_medic_what_4, armymen_medic_what_5
 		Action: armymen_medic_yes_1, armymen_medic_yes_2, armymen_medic_yes_3, armymen_medic_yes_4
 		Move: armymen_medic_yes_1, armymen_medic_yes_2, armymen_medic_yes_3, armymen_medic_yes_4
 		Die: armymen_medic_yes_1
@@ -117,12 +123,13 @@ Armymen_Medic:
 		Burned: armymen_medic_yes_1
 		Zapped: armymen_medic_yes_1
 		Poisoned: armymen_medic_yes_1
+		Attack: armymen_medic_what_6
+		Feedback: armymen_medic_what_1, armymen_medic_what_2
 
 Armymen_Minelayer:
     DefaultVariant: .wav
 	Voices:
-		Select: armymen_minelayer_what_1, armymen_minelayer_what_2, armymen_minelayer_what_3, armymen_minelayer_what_4, armymen_minelayer_what_5
-		Attack: armymen_minelayer_yes_1, armymen_minelayer_yes_2, armymen_minelayer_yes_3, armymen_minelayer_yes_4, armymen_minelayer_yes_5
+		Select: armymen_minelayer_what_3, armymen_minelayer_what_4
 		Action: armymen_minelayer_yes_1, armymen_minelayer_yes_2, armymen_minelayer_yes_3, armymen_minelayer_yes_4, armymen_minelayer_yes_5
 		Move: armymen_minelayer_yes_1, armymen_minelayer_yes_2, armymen_minelayer_yes_3, armymen_minelayer_yes_4, armymen_minelayer_yes_5
 		Die: armymen_minelayer_yes_1
@@ -130,12 +137,13 @@ Armymen_Minelayer:
 		Burned: armymen_minelayer_yes_1
 		Zapped: armymen_minelayer_yes_1
 		Poisoned: armymen_minelayer_yes_1
+		Attack: armymen_minelayer_what_5
+		Feedback: armymen_minelayer_what_1, armymen_minelayer_what_2
 
 Armymen_Radio_Operator:
     DefaultVariant: .wav
 	Voices:
-		Select: armymen_radio_operator_what_1, armymen_radio_operator_what_2, armymen_radio_operator_what_3, armymen_radio_operator_what_4, armymen_radio_operator_what_5, armymen_radio_operator_what_6, armymen_radio_operator_what_7
-		Attack: armymen_radio_operator_yes_1, armymen_radio_operator_yes_2, armymen_radio_operator_yes_3
+		Select: armymen_radio_operator_what_1, armymen_radio_operator_what_4, armymen_radio_operator_what_5, armymen_radio_operator_what_6
 		Action: armymen_radio_operator_yes_1, armymen_radio_operator_yes_2, armymen_radio_operator_yes_3
 		Move: armymen_radio_operator_yes_1, armymen_radio_operator_yes_2, armymen_radio_operator_yes_3
 		Die: armymen_radio_operator_yes_1
@@ -143,6 +151,8 @@ Armymen_Radio_Operator:
 		Burned: armymen_radio_operator_yes_1
 		Zapped: armymen_radio_operator_yes_1
 		Poisoned: armymen_radio_operator_yes_1
+		Attack: armymen_radio_operator_what_7
+		Feedback: armymen_radio_operator_what_2, armymen_radio_operator_what_3
 
 Armymen_Riff:
     DefaultVariant: .wav
@@ -240,6 +250,7 @@ Armymen_Dumdum:
 	Voices:
 		Select: armymen_dumdum_1, armymen_dumdum_2, armymen_dumdum_3
 		Action: armymen_dumdum_1, armymen_dumdum_2, armymen_dumdum_3
+		Move: armymen_dumdum_1, armymen_dumdum_2, armymen_dumdum_3
 
 Armymen_Garage:
     DefaultVariant: .wav

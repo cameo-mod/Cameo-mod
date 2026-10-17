@@ -286,3 +286,144 @@ armymen_halftrack_cannon_AA:
 		PercentageDenominator: 400
 		ValidTargets: Air
 	Warhead@EffectWater:
+armymen_mortar:
+	Inherits: ^Warhead_Thermobaric_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	ReloadDelay: 88
+	Range: 10830
+	MinRange: 2165
+	Report: army_men_sounds|armymen_mortar_fire.wav
+	TargetActorCenter: true
+	Projectile: Bullet
+		Speed: 175
+		Inaccuracy: 750
+		LaunchAngle: 125
+		ContrailLength: 30
+		ContrailStartWidth: 60
+		ContrailEndWidth: 15
+		ContrailStartColor: FEDCBA98
+		ContrailEndColor: 87654321
+	Warhead@Thermobaric_Medium:
+		Damage: 24000
+		PercentageScale: 10000
+		PercentageDenominator: 10000
+	Warhead@2Eff: CreateEffect
+		ImpactSounds: kaboom22.aud
+armymen_chopper_chaingun:
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 6
+	Range: 3375
+	Report: army_men_sounds|armymen_chopper_fire.wav
+	Warhead@Bullet_Medium:
+		PercentageDenominator: 10000
+		PercentageScale: 10000
+		Damage: 2000
+	Warhead@Effect: CreateEffect
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ValidTargets: Air
+		ImpactSounds: xplos.aud
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piffs
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+armymen_bazooka:
+	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_MissileHE_Light
+	ReloadDelay: 50
+	Range: 6910
+	Report: army_men_sounds|armymen_bazooka_fire.wav
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAP_Medium_Flat: AreaDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 13216
+		PercentageScale: 9995
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Spread: 64
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 145
+			Superheavy: 200
+			Heavy: 177
+			Medium: 161
+			Light: 146
+			Spaceship: 124
+			Helicopter: 123
+			Scout: 114
+			Bomber: 112
+			Concrete: 82
+			Fighter: 75
+			Plate: 64
+			Steel: 55
+			Wood: 53
+			Flak: 44
+			Heroic: 37
+			None: 33
+			FlyingInfantry: 85
+			CyborgLight: 69
+			CyborgMedium: 84
+			CyborgHeavy: 106
+			CyborgHeroic: 86
+			AntiAirInfantry: 38
+			AntiAirVehicle: 153
+			AntiAirBuilding: 67
+			ShipLight: 88
+			ShipMedium: 115
+			ShipHeavy: 99
+			ShipSuperheavy: 105
+			AntiAirShip: 101
+			SubmarineLight: 143
+			SubmarineHeavy: 141
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 25
+			Superheavy: 20
+			Heavy: 19
+			Medium: 18
+			Light: 17
+			Scout: 16
+			Spaceship: 15
+			Helicopter: 14
+			Bomber: 13
+			Fighter: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
+			FlyingInfantry: 11
+			CyborgLight: 9
+			CyborgMedium: 10
+			CyborgHeavy: 12
+			CyborgHeroic: 13
+			AntiAirInfantry: 5
+			AntiAirVehicle: 17
+			AntiAirBuilding: 10
+			ShipLight: 12
+			ShipMedium: 14
+			ShipHeavy: 14
+			ShipSuperheavy: 14
+			AntiAirShip: 13
+			SubmarineLight: 16
+			SubmarineHeavy: 17
+	Projectile: Missile
+		VerticalRateOfTurn: 20

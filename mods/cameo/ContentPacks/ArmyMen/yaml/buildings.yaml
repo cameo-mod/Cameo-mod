@@ -1,0 +1,458 @@
+^ArmymenBuilding:
+	Inherits@BB: ^BaseBuilding
+	RenderSprites:
+		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	Building:
+		BuildSounds: uplace.wav
+		UndeploySounds: uselbuil.wav
+	SoundOnDamageTransition:
+		DamagedSounds: gdamag1a.wav, gdamag1b.wav, gdamag1c.wav, gdamag1d.wav, gdamag1e.wav
+		DestroyedSounds: bgendiea.wav, bgendieb.wav, bgendiec.wav, bgendied.wav, bgendiee.wav, bgendief.wav
+
+
+army_hq:
+	Inherits: ^ArmymenBuilding
+	Inherits@conyard: ^Conyard
+	Inherits@shape: ^4x3Shape
+	Inherits@plug: ^BuildingPlugProducer
+	Tooltip:
+		Name: Army Men Headquarters
+	Building:
+		Footprint: xxxx xxxx xxxx
+		Dimensions: 4,3
+	Transforms:
+		IntoActor: army_dozer
+		Offset: 1,1
+		Facing: 432
+	WithIdleOverlay@lvl2:
+		Sequence: idle-lvl2
+		RequiresCondition: army_hq_upgrade_lvl2 && !army_hq_upgrade_lvl3
+	WithIdleOverlay@lvl3:
+		Sequence: idle-lvl3
+		RequiresCondition: army_hq_upgrade_lvl3
+	Exit@1:
+		SpawnOffset: 213,-128,0
+		ExitCell: 1,2
+	ProvidesPrerequisite@lvl2:
+		Prerequisite: army_hq_upgrade_lvl2_available
+		RequiresCondition: !army_hq_upgrade_lvl2 || !army_hq_upgrade_lvl3
+	ProvidesPrerequisite@lvl3:
+		Prerequisite: army_hq_upgrade_lvl3_available
+		RequiresCondition: army_hq_upgrade_lvl2 && !army_hq_upgrade_lvl3
+	ProvidesPrerequisite@army_hq_lvl2:
+		Prerequisite: army_hq_lvl2
+		RequiresCondition: army_hq_upgrade_lvl2
+	ProvidesPrerequisite@army_hq_lvl2_3:
+		Prerequisite: army_hq_lvl2
+		RequiresCondition: army_hq_upgrade_lvl3
+	ProvidesPrerequisite@army_hq_lvl3:
+		Prerequisite: army_hq_lvl3
+		RequiresCondition: army_hq_upgrade_lvl3
+	Pluggable:
+		Offset: 0,0
+		Conditions:
+			army_hq_upgrade_lvl2: army_hq_upgrade_lvl2
+			army_hq_upgrade_lvl3: army_hq_upgrade_lvl3
+		Requirements:
+			army_hq_upgrade_lvl2: !build-incomplete && !army_hq_upgrade_lvl2
+			army_hq_upgrade_lvl3: !build-incomplete && !army_hq_upgrade_lvl3 && army_hq_upgrade_lvl2
+	Power:
+		Amount: 100
+	Voiced:
+		VoiceSet: Armymen_HQ
+army_hq_upgrade_lvl2:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: HQ Lvl2
+	Valued:
+		Cost: 1000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: BuildingAddons
+		Prerequisites: ~army_hq, army_barracks, army_garage
+		Description: Unlocks Tier 2 Buildings
+	Plug:
+		Type: army_hq_upgrade_lvl2
+	RenderSprites:
+		Image: army_hq_lvl2
+
+army_hq_upgrade_lvl3:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: HQ Lvl3
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: BuildingAddons
+		Prerequisites: ~army_hq, army_hq_upgrade_lvl3_available, army_barracks_lvl2, army_garage_lvl2
+		Description: Unlocks Advanced Tech
+	Plug:
+		Type: army_hq_upgrade_lvl3
+	RenderSprites:
+		Image: army_hq_lvl3
+
+
+army_refinery:
+	Inherits: ^ArmymenBuilding
+	Inherits@ref: ^Refinery
+	Inherits@shape: ^3x3Shape
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 853
+	HitShape@TOP:
+		Type: Rectangle
+			TopLeft: -512, -1450
+			BottomRight: 896, -512
+	Tooltip:
+		Name: Army Men Plastic Refinery
+	Buildable:
+		Prerequisites: ~army_hq
+		Description: Processes ore into credits.
+	Building:
+		Footprint: _x_ xxx === ===
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	Refinery:
+	DockHost:
+		DockAngle: 448
+		DockOffset: -1c0, 1c0, 0
+		IsDragRequired: True
+		DragOffset: -554,512,0
+		DragLength: 12
+	ProvidesPrerequisite@buildingname:
+	SelectionDecorations:
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	FreeActor@Normal:
+		Actor: army_harv
+		SpawnOffset: 1,2
+		Facing: 256
+	Power:
+		Amount: 0
+
+army_barracks:
+	Inherits: ^ArmymenBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@ra1_soviets_barracks: ^IsBarrack
+	Inherits@plug: ^BuildingPlugProducer
+	Tooltip:
+		Name: Soldier Mold Facility
+	Buildable:
+		Prerequisites: ~army_hq
+		Description: Trains infantry units.
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -700,800,0
+		ExitCell: 0,2
+	Exit@2:
+		SpawnOffset: 100,1200,0
+		ExitCell: 1,3
+	SelectionDecorations:
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
+	Power:
+		Amount: 0
+	WithIdleOverlay@upgraded:
+		Sequence: idle-upgraded
+		RequiresCondition: upgraded
+	WithProductionDoorOverlay:
+		RequiresCondition: !upgraded && !build-incomplete
+		Sequence: build-door
+	WithProductionDoorOverlay@upgraded:
+		RequiresCondition: upgraded
+		Sequence: build-door-upgraded
+	Pluggable:
+		Offset: 0,0
+		Conditions:
+			army_barracks_upgrade_lvl2: upgraded
+		Requirements:
+			army_barracks_upgrade_lvl2: !build-incomplete && !army_barracks_upgrade_lvl2
+	ProvidesPrerequisite@lvl2:
+		Prerequisite: army_barracks_upgrade_lvl2_available
+		RequiresCondition: !upgraded
+	ProvidesPrerequisite@army_barracks_lvl2:
+		Prerequisite: army_barracks_lvl2
+		RequiresCondition: upgraded
+
+
+army_barracks_upgrade_lvl2:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Barracks Lvl2
+	Valued:
+		Cost: 500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: BuildingAddons
+		Prerequisites: ~army_hq, army_hq_lvl2, army_barracks_upgrade_lvl2_available
+		Description: Unlocks Advanced Infantry
+	Plug:
+		Type: army_barracks_upgrade_lvl2
+	RenderSprites:
+		Image: army_barracks_lvl2
+army_garage:
+	Inherits: ^ArmymenBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@shape: ^3x3Shape
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
+	Inherits@plug: ^BuildingPlugProducer
+	# HitShape:
+	# 	TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
+	# 	Type: Rectangle
+	# 		TopLeft: -1536, -1024
+	# 		BottomRight: 1536, 512
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Army Men Garage
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~army_hq, army_refinery
+		Queue: Building, RABuilding
+		Description: template_factory.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	# Selectable:
+	# 	Bounds: 3072, 2048
+	# 	DecorationBounds: 3072, 2048
+	SelectionDecorations:
+	RallyPoint:
+		Path: 5,3
+	Exit@1:
+		# SpawnOffset: -512,-512,0
+		SpawnOffset: 0,0,0
+		ExitCell: 2,2
+		ExitDelay: 3
+	ProductionQueue@VEHICLE:
+	Power:
+		Amount: 0
+	WithProductionDoorOverlay@DOOR:
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@upgraded:
+		RequiresCondition: upgraded
+		Sequence: idle-upgraded
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
+	Pluggable:
+		Offset: 0,0
+		Conditions:
+			army_garage_upgrade_lvl2: upgraded
+		Requirements:
+			army_garage_upgrade_lvl2: !build-incomplete && !army_garage_upgrade_lvl2
+	ProvidesPrerequisite@lvl2:
+		Prerequisite: army_garage_upgrade_lvl2_available
+		RequiresCondition: !upgraded
+	ProvidesPrerequisite@army_garage_lvl2:
+		Prerequisite: army_garage_lvl2
+		RequiresCondition: upgraded
+	Voiced:
+		VoiceSet: Armymen_Garage
+
+army_garage_upgrade_lvl2:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Garage Lvl2
+	Valued:
+		Cost: 1000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: BuildingAddons
+		Prerequisites: ~army_hq, army_hq_lvl2, army_garage_upgrade_lvl2_available
+		Description: Unlocks Advanced Vehicles and Aircraft
+	Plug:
+		Type: army_garage_upgrade_lvl2
+	RenderSprites:
+		Image: army_garage_lvl2
+army_airfield:
+	Inherits: ^ArmymenBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@hpad: ^IsAircraftFactory
+	Buildable:
+		Prerequisites: ~army_hq, army_garage_lvl2
+		Description: actor_raafld.description
+	Tooltip:
+		Name: Army Men Airfield
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	Exit@1:
+		ExitCell: 1,1
+		Facing: 768
+	Reservable:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	Power:
+		Amount: 0
+army_gun_tower:
+	Inherits: ^TDDefense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@muzzleglow: ^MuzzleGlowCannon
+	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@shape: ^1x1Shape
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Inherits@ArmorPiercingBullets: ^ArmorPiercingBullets
+	Inherits@CuttingEdge: ^CuttingEdgeEquipment
+	Inherits@decoration: ^GDIRankDecoration
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Machinegun Tower
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~army_hq, army_barracks
+		Queue: Defence, RADefence
+		Description: template_anti_infantry_defense.description
+	Building:
+	Health:
+		HP: 60000
+	Armament:
+		Weapon: armymen_halftrack_cannon_AA
+		LocalOffset: 256,0,256
+		MuzzleSequence: muzzle
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 128,0,256
+		CasingTargetOffset: 0,-600,0
+	Armament@AA:
+		Weapon: armymen_halftrack_cannon
+		LocalOffset: 256,0,256
+		MuzzleSequence: muzzle
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 128,0,256
+		CasingTargetOffset: 0,-600,0
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	BodyOrientation:
+		QuantizedFacings: 8
+	WithMuzzleOverlay:
+	Turreted:
+		TurnSpeed: 1023
+	Power:
+		Amount: 0
+	RevealsShroud:
+		Range: 6720
+	ActorStatValues:
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_armorpiercingbullets, td_gdi_upgrade_cuttingedgeequipment
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+army_pillbox:
+	Inherits: ^Defense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@cargo: ^ClearableGarrison
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Tooltip:
+		Name: Pillbox
+	Building:
+		BuildSounds: placbldg.aud, build5.aud
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 40
+		Prerequisites: ~army_hq, army_barracks_lvl2
+		Description: actor_pbox.description
+	Valued:
+		Cost: 900
+	Health:
+		HP: 180000
+	Turreted:
+		TurnSpeed: 1023
+		RealignDelay: -1
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 8
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 4
+		InitialUnits: army_machinegunner, army_machinegunner, army_grenadier, army_bazooka
+	AttackGarrisoned:
+		RequiresCondition: !build-incomplete
+		Armaments: garrisoned
+		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
+		PortYaws: 0, 176, 341, 512, 682, 853
+		PortCones: 88, 88, 88, 88, 88, 88
+		PauseOnCondition: disabled
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	RenderSprites:
+		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	Power:
+		Amount: 0
+	RevealsShroud:
+		Range: 6570
+	ActorStatValues:
+		Damage: 200
+		ReloadDelay: 48
+		Range: 6570
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_reinforcedstructures, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_gpssatellitesupport
+army_aa_turret:
+	Inherits: ^Defense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	Inherits@AntiAir: ^PrioritizeAir
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 90
+		Prerequisites: ~army_hq, army_garage
+		Description: actor_agun.description
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Army Men AA Gun
+	Selectable:
+		Bounds: 1024, 1440, 0, -240
+	SelectionDecorations:
+	Health:
+		HP: 62500
+	Turreted:
+		TurnSpeed: 30
+		InitialFacing: 896
+		RealignDelay: -1
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: ra1_allies_alliedaagun_flak
+		LocalOffset: 520,150,450, 520,-150,450
+		MuzzleSequence: muzzle
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 260,150,450, 260,-150,450
+		CasingTargetOffset: 0,750,0, 0,-750,0
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: lowpower || disabled
+	WithMuzzleOverlay:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	Power:
+		Amount: 0
+	RevealsShroud:
+		Range: 11412
+	DetectCloaked:
+		Range: 5706

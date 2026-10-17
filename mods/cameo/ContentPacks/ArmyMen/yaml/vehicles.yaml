@@ -1,47 +1,13 @@
-army_grunt:
-	Inherits: ^Soldier
-	Inherits@Template: ^SpecialForcesInfantryTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceRA2
-	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
-	Inherits@anim: ^RA2Infantry
-	Valued:
-		Cost: 100
-	Tooltip:
-		Name: Grunt
-	Buildable:
-		BuildPaletteOrder: 10
-		Prerequisites: ~army_barracks
-		Queue: Infantry, RAInfantry
-		Description: template_scout_infantry.description
-	Mobile:
-		Speed: 50
-	Health:
-		HP: 30000
-	ChangesHealth@SelfHealing:
-		Step: 30
-	Armament@PRIMARY:
-		Weapon: armymen_grunt_carbine
-		LocalOffset: 500,0,400
-	Armament@GARRISONED:
-		Name: garrisoned
-		Weapon: armymen_grunt_carbine
-	AttackFrontal:
-		FacingTolerance: 0
-	Voiced:
-		VoiceSet: Armymen_Grunt
-	RenderSprites:
-		PlayerPalette: player_rgba
 #Dozer now is a MCV
 army_dozer:
 	Inherits: ^RAMCV
 	Tooltip:
 		Name: Army Men Construction Dozer
 	Buildable:
-		Prerequisites: ~armymen_weap
+		Prerequisites: army_hq, ~army_hq_lvl3
 		Description: Deploys into a Construction Yard.\n  Unarmed
 	Transforms:
-		IntoActor: ra1_allies_constructionyard
+		IntoActor: army_hq
 	Voiced:
 		VoiceSet: Armymen_Bulldozer
 	ChangesHealth@SelfHealing:
@@ -63,9 +29,10 @@ army_tank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~armymen_weap
+		Prerequisites: ~army_garage
 		BuildPaletteOrder: 110
 		Description: template_mbt.description
 	Valued:
@@ -116,7 +83,7 @@ army_minelayer:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 310
-		Prerequisites: ~armymen_weap
+		Prerequisites: ~army_garage
 		Description: actor_mnly.description
 	Valued:
 		Cost: 800
@@ -164,7 +131,7 @@ army_medic:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 30
-		Prerequisites: ~armymen_weap
+		Prerequisites: ~army_garage, army_barracks
 		Description: actor_jeep.description
 	Armor:
 		Type: Light
@@ -212,7 +179,7 @@ army_harv:
 	Tooltip:
 		Name: Dump Truck
 	Buildable:
-		Prerequisites: ~armymen_weap
+		Prerequisites: ~army_hq, ~army_refinery
 		Queue: Vehicle, RAVehicle
 		Description: template_harvester.description
 	Mobile:
@@ -258,7 +225,7 @@ army_halftrack:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 60
-		Prerequisites: ~armymen_weap
+		Prerequisites: ~army_garage
 		Description: actor_ftrk.description
 	Valued:
 		Cost: 980
@@ -297,7 +264,7 @@ army_halftrack:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 4
-		InitialUnits: army_grunt, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower
+		InitialUnits: army_grunt, army_grunt, army_bazooka, army_grenadier
 	SelectionDecorations:
 	Selectable:
 		Class: ra1_soviets_flaktruck
@@ -306,5 +273,139 @@ army_halftrack:
 		VoiceSet: Armymen_Half_Track
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeSmall
+	RenderSprites:
+		PlayerPalette: player_rgba
+army_dundun:
+	Inherits: ^Vehicle
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AntiDef: ^PrioritizeDefence
+	Inherits@EMP: ^FrontalEMP
+	BotRoles:
+		Roles: guerrilla
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		BuildPaletteOrder: 160
+		Prerequisites: ~army_garage_lvl2
+		Description: actor_dtrk.description
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Dum Dum
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 20000
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 100
+	RevealsShroud:
+		Range: 5c0
+	FireWarheadsOnDeathCA@bomb:
+		Weapon: MiniNuke
+		DamageSource: Killer
+		RequiresCondition: !disabled
+	AttackFrontal:
+		FacingTolerance: 512
+	Armament@PRIMARY:
+		Weapon: DemoTruckTargeting
+	AutoTarget:
+		DynamicWeaponPriority: true
+		InitialStance: Defend
+		InitialStanceAI: AttackAnything
+		ScanRadius: 10
+	GrantConditionOnAttack:
+		Condition: triggered
+	GrantConditionOnDeploy:
+		DeployedCondition: triggered
+		PauseOnCondition: disabled
+		ExclusiveDeploy: true
+		DeployType: Detonate
+	Voiced:
+		VoiceSet: Armymen_Dumdum
+	KillsSelf:
+		RequiresCondition: !disabled && triggered
+	RenderSprites:
+		PlayerPalette: player_rgba
+	GrantConditionOnAttack@attack-animation:
+		Condition: attack-animation
+		MaximumInstances: 1
+		RevokeDelay: 18
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		MinIdleDelay: 90
+		MaxIdleDelay: 270
+		RequiresCondition: !attack-animation
+	WithFacingSpriteBody@attack-animation:
+		Sequence: shoot
+		RequiresCondition: attack-animation
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+
+army_action_figure:
+	Inherits: ^Walker
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@EMP: ^FrontalEMP
+	Tooltip:
+		Name: Cyborized Action Figure
+	Valued:
+		Cost: 2600
+	Selectable:
+		Bounds: 1440, 1440, 0, -144
+	Buildable:
+		BuildPaletteOrder: 560
+		Prerequisites: ~army_garage_lvl2
+		Queue: Vehicle, RAVehicle
+		Description: actor_future_mech_plasma.description
+	Mobile:
+		Speed: 40
+		TurnSpeed: 16
+		Locomotor: tracked
+	Health:
+		HP: 240000
+	Repairable:
+		HpPerStep: 12000
+	ChangesHealth@SelfHealing:
+		Step: 96
+	Armament@PRIMARY:
+		Weapon: FutureMechPlasma
+		LocalOffset: 100,-190,800
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: FutureMechPlasma_elite
+		LocalOffset: 100,-190,800
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 20
+		PauseOnCondition: !robotcontrol || disabled
+	GrantConditionOnAttack@attack-animation:
+		Condition: attack-animation
+		MaximumInstances: 1
+		RevokeDelay: 18
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		MinIdleDelay: 90
+		MaxIdleDelay: 270
+		RequiresCondition: !attack-animation
+	WithFacingSpriteBody@attack-animation:
+		Sequence: shoot
+		RequiresCondition: attack-animation
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+	Passenger:
+	Voiced:
+		VoiceSet: Armymen_Dumdum
 	RenderSprites:
 		PlayerPalette: player_rgba

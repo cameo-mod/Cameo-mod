@@ -1,0 +1,211 @@
+army_grunt:
+	Inherits: ^Soldier
+	Inherits@Template: ^SpecialForcesInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Valued:
+		Cost: 100
+	Tooltip:
+		Name: Grunt
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~army_barracks
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@PRIMARY:
+		Weapon: armymen_grunt_carbine
+		LocalOffset: 500,0,400
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: armymen_grunt_carbine
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: Armymen_Grunt
+	RenderSprites:
+		PlayerPalette: player_rgba
+army_bazooka:
+	Inherits: ^Soldier
+	Inherits@Template: ^SpecialForcesInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Valued:
+		Cost: 440
+	Tooltip:
+		Name: Bazooka
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~army_barracks
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@PRIMARY:
+		Weapon: armymen_bazooka
+		LocalOffset: 500,0,400
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: armymen_bazooka
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: Armymen_Grunt
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+army_mortar:
+	Inherits: ^Soldier
+	Inherits@Template: ^SpecialForcesInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Mortar
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~army_barracks, army_barracks_lvl2
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@PRIMARY:
+		Weapon: armymen_mortar
+		LocalOffset: 500,0,400
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: armymen_mortar
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: Armymen_Grunt
+	RenderSprites:
+		PlayerPalette: player_rgba
+army_grenadier:
+	Inherits: ^Soldier
+	Inherits@Template: ^GrenadierInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@anim: ^RA2Infantry
+	Valued:
+		Cost: 230
+	Tooltip:
+		Name: Grenadier
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~army_barracks
+		Queue: Infantry, RAInfantry
+		Description: actor_e2.description
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@PRIMARY:
+		Weapon: ra1_soviets_grenadier_grenade
+		LocalOffset: 500,0,400
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: ra1_soviets_grenadier_grenade
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: Armymen_Grunt
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+army_sniper:
+	Inherits: ^Soldier
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@cloak: ^CloakedVehicle
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Sniper
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~army_barracks, army_barracks_lvl2
+		Queue: Infantry, RAInfantry
+		Description: actor_rasniper.description
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@PRIMARY:
+		Weapon: ra1_allies_alliedsniper_lightsniper
+		LocalOffset: 500,0,400
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: ra1_allies_alliedsniper_lightsniper
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: Armymen_Grunt
+	RenderSprites:
+		PlayerPalette: player_rgba
+	Cloak:
+army_machinegunner:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Valued:
+		Cost: 560
+	Tooltip:
+		Name: Machinegunner
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~army_barracks, army_barracks_lvl2
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+	Mobile:
+		Speed: 49
+	Health:
+		HP: 19000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@PRIMARY:
+		Weapon: ra1_allies_machinegunner_machinegun
+		LocalOffset: 500,0,400
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: ra1_allies_machinegunner_machinegun
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: Armymen_Grunt
+	RenderSprites:
+		PlayerPalette: player_rgba

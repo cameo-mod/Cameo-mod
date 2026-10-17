@@ -1,0 +1,34 @@
+World:
+	FactionCA@armymen:
+		Name: Army Men RTS #faction_ra_allies.name
+		InternalName: armymen
+		Game: Army Men RTS
+		Side: Army Men RTS
+		Description: faction_ra_allies.description
+
+	####################################################################################################
+	#		ARMYMEN
+	####################################################################################################
+
+	StartingUnits@mcvonlyarmymen:
+		Class: none
+		ClassName: MCV Only
+		Factions: armymen
+		BaseActor: army_dozer
+	StartingUnits@defaultarmymen:
+		Class: light
+		ClassName: Light Support
+		Factions: armymen
+		BaseActor: army_dozer
+		SupportActors: army_grunt,army_grunt,army_grunt,army_bazooka,army_bazooka,army_halftrack,army_tank
+	StartingUnits@heavyarmymen:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: armymen
+		BaseActor: army_dozer
+		SupportActors: army_grunt,army_grunt,army_grunt,army_bazooka,army_bazooka,army_halftrack,army_tank,army_tank,army_tank,army_tank
+
+####################################################################################################
+#		Experience
+####################################################################################################
+

@@ -36,6 +36,194 @@ army_grunt:
 	icon:
 		Filename: army_men_icons|army_grunt_icon.png
 
+army_grenadier:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: army_men_sprites|army_grenadier.png
+	run:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+	idle1:
+		Start: 88
+	idle2:
+		Start: 103
+	prone-stand:
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Start: 118
+	die1:
+		Start: 166
+	die2:
+		Start: 181
+	shoot:
+		Start: 196
+	prone-shoot:
+		Start: 244
+	paradrop:
+		Start: 324
+	icon:
+		Filename: army_men_icons|army_grenadier_icon.png
+
+army_sniper:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: army_men_sprites|army_sniper.png
+	run:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+	idle1:
+		Start: 88
+	idle2:
+		Start: 103
+	prone-stand:
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Start: 118
+	die1:
+		Start: 166
+	die2:
+		Start: 181
+	shoot:
+		Start: 196
+	prone-shoot:
+		Start: 244
+	paradrop:
+		Start: 324
+	icon:
+		Filename: army_men_icons|army_sniper_icon.png
+army_machinegunner:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: army_men_sprites|army_machinegunner.png
+	run:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+	idle1:
+		Start: 88
+	idle2:
+		Start: 103
+	prone-stand:
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Start: 118
+	die1:
+		Start: 166
+	die2:
+		Start: 181
+	shoot:
+		Start: 196
+	prone-shoot:
+		Start: 244
+	paradrop:
+		Start: 324
+	icon:
+		Filename: army_men_icons|army_machinegunner_icon.png
+
+army_bazooka:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: army_men_sprites|army_bazooka.png
+	run:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+	idle1:
+		Start: 88
+	idle2:
+		Start: 103
+	prone-stand:
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Start: 118
+	die1:
+		Start: 166
+	die2:
+		Start: 181
+	shoot:
+		Start: 196
+	prone-shoot:
+		Start: 244
+	paradrop:
+		Start: 324
+	icon:
+		Filename: army_men_icons|army_bazooka_icon.png
+army_mortar:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: army_men_sprites|army_mortar.png
+	run:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+	idle1:
+		Start: 88
+	idle2:
+		Start: 103
+	prone-stand:
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Start: 118
+	die1:
+		Start: 166
+	die2:
+		Start: 181
+	shoot:
+		Start: 196
+	prone-shoot:
+		Start: 244
+	paradrop:
+		Start: 324
+	icon:
+		Filename: army_men_icons|army_mortar_icon.png
+
 
 
 army_tank:
@@ -96,6 +284,16 @@ army_dozer:
 		Facings: 64
 	icon:
 		Filename: army_men_icons|army_dozer_icon.png
+army_plane:
+	idle:
+		Filename: army_men_sprites|army_plane.png
+		Facings: 64
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: army_men_icons|army_plane_icon.png
 army_medic:
 	idle:
 		Filename: army_men_sprites|army_medic.png
@@ -117,7 +315,7 @@ army_helicopter:
 	rotor:
 		Filename: army_men_sprites|army_helicopter.png
 		Length: 64
-		Tick: 128
+		Tick: 16
 	slow-rotor:
 		Filename: army_men_sprites|army_helicopter.png
 		Length: 64
@@ -128,3 +326,319 @@ army_helicopter:
 		Facings: 8
 	icon:
 		Filename: army_men_icons|army_helicopter_icon.png
+army_transport:
+	Defaults:
+		Filename: army_men_sprites|army_transport.png
+	idle:
+		Facings: 64
+		Start: 64
+	rotor:
+		Filename: army_men_sprites|army_transport.png
+		Length: 64
+		Tick: 16
+	slow-rotor:
+		Filename: army_men_sprites|army_transport.png
+		Length: 64
+		Tick: 64
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: army_men_icons|army_transport_icon.png
+
+army_dundun:
+	Defaults:
+		Filename: army_men_sprites|army_dundun.png
+		Scale: 0.8
+	idle1:
+		Facings: 32
+	idle2:
+		Facings: 32
+	idle:
+		Facings: 32
+	stand:
+		Facings: 32
+	run:
+		Start: 33
+		Length: 8
+		Facings: 8
+		Tick: 110
+	shoot:
+		Start: 33
+		Length: 8
+		Facings: 8
+		Tick: 110
+	icon:
+		Filename: army_men_icons|army_dum_dum_icon.png
+		Offset: 0,0
+army_action_figure:
+	Defaults:
+		Filename: army_men_sprites|army_action_figure.png
+		Scale: 0.8
+	idle1:
+		Facings: 32
+	idle2:
+		Facings: 32
+	stand:
+		Facings: 32
+	run:
+		Start: 33
+		Length: 8
+		Facings: 8
+		Tick: 110
+	shoot:
+		Start: 97
+		Length: 8
+		Facings: 8
+		Tick: 80
+	icon:
+		Filename: army_men_icons|army_action_figure_icon.png
+		Offset: 0,0
+army_hq:
+	Defaults:
+		Offset: 2,-26
+	idle:
+		Filename: army_men_sprites|army_hq.png
+		Start: 32
+	make:
+		Filename: army_men_sprites|army_hq.png
+		Length: 32
+	dead:
+		Filename: invisibleitem.shp
+	build:
+		Filename: invisibleitem.shp
+	crane-overlay:
+		Filename: invisibleitem.shp
+	damaged-crane-overlay:
+		Filename: invisibleitem.shp
+	damaged-idle:
+		Filename: army_men_sprites|army_hq.png
+		Start: 32
+	idle-lvl2:
+		Filename: army_men_sprites|army_hq.png
+		Start: 35
+		Length: 10
+	damaged-idle-lvl2:
+		Filename: army_men_sprites|army_hq.png
+		Start: 35
+		Length: 10
+	idle-lvl3:
+		Filename: army_men_sprites|army_hq.png
+		Start: 45
+		Length: 10
+	damaged-idle-lvl3:
+		Filename: army_men_sprites|army_hq.png
+		Start: 45
+		Length: 10
+	icon:
+		Filename: army_men_icons|army_hq_icon.png
+		Offset: 0,0
+
+army_hq_lvl2:
+	icon:
+		Filename: army_men_icons|army_hq2_icon.png
+		Offset: 0,0
+
+army_hq_lvl3:
+	icon:
+		Filename: army_men_icons|army_hq3_icon.png
+		Offset: 0,0
+army_barracks:
+	Defaults:
+		Offset: -15,10
+	build:
+		Filename: invisibleitem.shp
+	idle:
+		Filename: army_men_sprites|army_barracks.png
+		Start: 32
+	damaged-idle:
+		Filename: army_men_sprites|army_barracks.png
+		Start: 32
+	idle-upgraded:
+		Filename: army_men_sprites|army_barracks.png
+		Start: 33
+	damaged-idle-upgraded:
+		Filename: army_men_sprites|army_barracks.png
+		Start: 33
+	make:
+		Filename: army_men_sprites|army_barracks.png
+		Length: 32
+	dead:
+		Filename: invisibleitem.shp
+	build-door:
+		Filename: army_men_sprites|army_barracks.png
+		Start: 34
+		Length: 5
+	damaged-build-door:
+		Filename: army_men_sprites|army_barracks.png
+		Start: 34
+		Length: 5
+	build-door-upgraded:
+		Filename: army_men_sprites|army_barracks.png
+		Start: 44
+		Length: 5
+	damaged-build-door-upgraded:
+		Filename: army_men_sprites|army_barracks.png
+		Start: 44
+		Length: 5
+	icon:
+		Filename: army_men_icons|army_barracks_icon.png
+		Offset: 0,0
+
+army_barracks_lvl2:
+	icon:
+		Filename: army_men_icons|army_barracks2_icon.png
+		Offset: 0,0
+
+army_garage:
+	Defaults:
+		Filename: army_men_sprites|army_garage.png
+		Offset: -4, -21, 22
+	idle:
+		Filename: army_men_sprites|army_garage.png
+		Start: 32
+	damaged-idle:
+		Filename: army_men_sprites|army_garage.png
+		Start: 32
+	dead:
+		Filename: invisibleitem.shp
+	idle-upgraded:
+		Filename: army_men_sprites|army_garage.png
+		Start: 33
+	damaged-idle-upgraded:
+		Filename: army_men_sprites|army_garage.png
+		Start: 33
+	build-door:
+		Filename: army_men_sprites|army_garage.png
+		Start: 34
+		Length: 5
+	damaged-build-door:
+		Filename: army_men_sprites|army_garage.png
+		Start: 34
+		Length: 5
+	make:
+		Filename: army_men_sprites|army_garage.png
+		Length: 32
+	icon:
+		Filename: army_men_icons|army_weap_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+army_garage_lvl2:
+	icon:
+		Filename: army_men_icons|army_weap2_icon.png
+		Offset: 0,0
+
+army_refinery:
+	Defaults:
+		Filename: army_men_sprites|army_refinery.png
+	idle:
+		Filename: army_men_sprites|army_refinery.png
+		Start: 31
+	damaged-idle:
+		Filename: army_men_sprites|army_refinery.png
+		Start: 31
+	dead:
+		Filename: invisibleitem.shp
+	make:
+		Filename: army_men_sprites|army_refinery.png
+		Length: 32
+	icon:
+		Filename: army_men_icons|army_refinery_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+army_airfield:
+	Defaults:
+		Filename: army_men_sprites|army_airfield.png
+	idle:
+		Filename: army_men_sprites|army_airfield.png
+		Start: 31
+	damaged-idle:
+		Filename: army_men_sprites|army_airfield.png
+		Start: 31
+	dead:
+		Filename: invisibleitem.shp
+	make:
+		Filename: army_men_sprites|army_airfield.png
+		Length: 32
+	icon:
+		Filename: army_men_icons|army_airfield_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+army_gun_tower:
+	Defaults:
+		Filename: army_men_sprites|army_gun_tower.png
+	idle:
+		Filename: army_men_sprites|army_gun_tower.png
+		Start: 31
+	damaged-idle:
+		Filename: army_men_sprites|army_gun_tower.png
+		Start: 31
+	dead:
+		Filename: invisibleitem.shp
+	make:
+		Filename: army_men_sprites|army_gun_tower.png
+		Length: 32
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: army_men_icons|army_twr_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+army_pillbox:
+	Defaults:
+		Filename: army_men_sprites|army_pillbox.png
+	idle:
+		Filename: army_men_sprites|army_pillbox.png
+		Start: 31
+	damaged-idle:
+		Filename: army_men_sprites|army_pillbox.png
+		Start: 31
+	dead:
+		Filename: invisibleitem.shp
+	make:
+		Filename: army_men_sprites|army_pillbox.png
+		Length: 32
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: army_men_icons|army_pillbox_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+army_aa_turret:
+	Inherits: ^WithBuildingBibGun
+	Defaults:
+		Filename: army_men_sprites|army_aa_turret.png
+		Offset: 0,0
+	idle:
+		Facings: 64
+	recoil:
+		Facings: 64
+	make:
+		Filename: army_men_sprites|army_aa_turret.png
+		Length: 32
+		Start: 64
+	damaged-idle:
+		Facings: 64
+	damaged-recoil:
+		Facings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Start: 1
+		Length: 4
+		Offset: 0,-4
+	dead:
+	bib:
+		Offset: 0,0
+	icon:
+		Filename: army_men_icons|army_aa_icon.png
+		Offset: 0,0
