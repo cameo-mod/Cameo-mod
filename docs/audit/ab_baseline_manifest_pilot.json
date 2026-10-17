@@ -2,22 +2,21 @@
   "schema": 1,
   "purpose": "ratchet baseline for the 64-game BU pilot \u2014 zero accepted switches",
   "accepted_switches": [],
-  "control_groups": [],
-  "source_commit": "e34395431fc6bebd467b55606857c138ff72ee78",
-  "engine_version": "723f50f9b1f98e463b55219288fba7a843f84307",
-  "note": "control arm materializes the hard AI payload with the playtest enables ON (see playtest_components); each ratchet stage adds accepted groups to both arms",
-  "playtest_components": [
+  "baseline_components": [
     {
       "id": "BankSaturationCash",
       "state": "ON",
-      "ai_yaml": "mods/cameo/ai/ai.yaml:5346",
-      "detail": "UnitBuilderBotModuleCA@generic BankSaturationCash: 1 (SwitchCondition genericbot); per-tier thresholds at 194-425"
+      "ai_yaml": [
+        "mods/cameo/ai/ai.yaml:5346",
+        "mods/cameo/ai/ai.yaml:194-425"
+      ],
+      "detail": "UnitBuilderBotModuleCA@generic BankSaturationCash: 1 (SwitchCondition genericbot); per-tier BotLimits thresholds at 194-425"
     },
     {
       "id": "BY",
       "state": "ON",
       "ai_yaml": "mods/cameo/ai/ai.yaml:4330",
-      "detail": "ExpansionPlannerBotModule UseCrawlSafety: true (DriveBaseCrawl at 4328)"
+      "detail": "ExpansionPlannerBotModule UseCrawlSafety: true"
     },
     {
       "id": "BZ",
@@ -45,29 +44,44 @@
         "mods/cameo/ai/ai.yaml:4872",
         "mods/cameo/ai/ai.yaml:4963"
       ],
-      "detail": "UseFormationHysteresis: true in SquadManagerBotModuleCA@rush/turtle/tech/expansion/steamroller/guerrilla"
+      "detail": "UseFormationHysteresis: true in SquadManagerBotModuleCA@rush/turtle/tech/expansion/steamroller/guerrilla; classic (ai.yaml:5026) not set"
     },
     {
       "id": "bank_overflow",
       "state": "ON",
       "scope": "hard only",
       "ai_yaml": [
-        "mods/cameo/ai/ai.yaml:38-40",
-        "mods/cameo/ai/ai.yaml:437-439"
+        "mods/cameo/ai/ai.yaml:38",
+        "mods/cameo/ai/ai.yaml:437"
       ],
-      "detail": "GrantConditionOnBotOwner@bankoverflow Bots: hard; BotOverflowPolicy@bankoverflow OverflowCash: 8000"
+      "detail": "GrantConditionOnBotOwner@bankoverflow Bots: hard (:38); BotOverflowPolicy@bankoverflow OverflowCash: 8000 (:437)"
     },
     {
       "id": "inc3f1",
       "state": "ON",
-      "ai_yaml": "mods/cameo/ai/ai.yaml:55-57",
-      "detail": "GrantConditionOnBotOwner@inc3f1 Condition inc3_frans_services; Bots list at 57 (genericbot tiers + exploit pins)"
+      "ai_yaml": "mods/cameo/ai/ai.yaml:55",
+      "detail": "GrantConditionOnBotOwner@inc3f1 Condition inc3_frans_services; Bots list (genericbot tiers + exploit pins)"
     },
     {
       "id": "context_features",
       "state": "OFF",
-      "ai_yaml": "mods/cameo/ai/ai.yaml:168-170",
+      "ai_yaml": "mods/cameo/ai/ai.yaml:168",
       "detail": "GrantConditionOnBotOwner@contextfeatures Condition context_features; Bots empty"
+    },
+    {
+      "id": "fog_exemptions",
+      "state": "false (visibility checks disabled)",
+      "ai_yaml": [
+        "mods/cameo/ai/ai.yaml:4409",
+        "mods/cameo/ai/ai.yaml:4449",
+        "mods/cameo/ai/ai.yaml:4454",
+        "mods/cameo/ai/ai.yaml:4460"
+      ],
+      "detail": "CheckCaptureTargetsForVisibility false (CaptureManagerBotModuleCA :4409, EngineerBotModule :4449), CheckRepairTargetsForVisibility false (EngineerBotModule :4454), CheckTargetsForVisibility false (CratePickupBotModule :4460)"
     }
-  ]
+  ],
+  "control_groups": [],
+  "source_commit": "e34395431fc6bebd467b55606857c138ff72ee78",
+  "engine_version": "723f50f9b1f98e463b55219288fba7a843f84307",
+  "note": "control arm materializes master as-is with the playtest enables ON (see baseline_components); each ratchet stage adds accepted groups to both arms"
 }
