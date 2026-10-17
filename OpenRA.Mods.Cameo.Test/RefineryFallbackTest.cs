@@ -886,6 +886,35 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void CancelBindTargetResolvesTheLastSameNameEntry()
+		{
+			// Master binding parity (Sonnet 607743672 default-off identity item):
+			// CancelProduction removes the LAST same-name item in queue order —
+			// two same-name twins must bind the tail instance, not the head, or
+			// the recorded telemetry diverges from master under the law-off path.
+			var head = new object();
+			var middle = new object();
+			var tail = new object();
+			var queued = new[]
+			{
+				Tuple.Create(head, "proc"), Tuple.Create(middle, "weap"),
+				Tuple.Create(tail, "proc"),
+			};
+
+			var bound = BaseBuilderQueueEvalCA.CancelBindTarget(queued, e => e.Item2, "proc", head);
+			Assert.That(bound, Is.SameAs(tail),
+				"two same-name entries: the LAST in queue order resolves, not the head");
+
+			var unmatched = BaseBuilderQueueEvalCA.CancelBindTarget(queued, e => e.Item2, "fact", head);
+			Assert.That(unmatched, Is.SameAs(head),
+				"no same-name entry: falls back to the head item, as master's ?? currentBuilding");
+
+			var single = new[] { Tuple.Create(head, "proc") };
+			Assert.That(BaseBuilderQueueEvalCA.CancelBindTarget(single, e => e.Item2, "proc", head),
+				Is.SameAs(head), "single entry: head IS the last — cert path equality case");
+		}
+
+		[Test]
 		public void DemandCancelDispositionTable()
 		{
 			// F2 (Sol adjudication of 9d997eb58): the demand-unwind cancel seam —

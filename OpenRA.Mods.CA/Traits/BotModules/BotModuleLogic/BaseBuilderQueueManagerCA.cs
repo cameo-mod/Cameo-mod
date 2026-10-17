@@ -1010,10 +1010,14 @@ namespace OpenRA.Mods.CA.Traits
 						if (!ProtectionApplies(currentBuilding.Item)
 							|| CertificateAuthorizes(queue, currentBuilding.Item, currentBuilding))
 						{
-							// A966ED70 (E3): the order settles currentBuilding only when it is
-							// the unique enabled same-name entry — a head/tail twin or enabled
-							// sibling-queue entry holds instead of settling the wrong instance.
-							NotePendingTerminal(queue, currentBuilding, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
+							// Master-identical binding (A966ED70 E3 + default-off identity):
+							// CancelProduction removes the LAST same-name item — record that
+							// instance, not the head. Under the cert the resolved last IS
+							// currentBuilding (unique enabled same-name); on the unconditional
+							// path twins resolve exactly as master.
+							var cancelTarget = BaseBuilderQueueEvalCA.CancelBindTarget(
+								queue.AllQueued(), i => i.Item, currentBuilding.Item, currentBuilding);
+							NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
 								BotQueueTransitionReason.LimitReached, BotQueueCancellationClass.Production);
 							bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
 						}
@@ -1184,7 +1188,9 @@ namespace OpenRA.Mods.CA.Traits
 							if (CertificateAuthorizes(queue, currentBuilding.Item, currentBuilding))
 							{
 								AIUtils.BotDebug($"{player} cancels {currentBuilding.Item}: refinery domain exhausted at tick {world.WorldTick}");
-								NotePendingTerminal(queue, currentBuilding, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
+								var cancelTarget = BaseBuilderQueueEvalCA.CancelBindTarget(
+									queue.AllQueued(), i => i.Item, currentBuilding.Item, currentBuilding);
+								NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
 									BotQueueTransitionReason.RefineryDomainExhausted, BotQueueCancellationClass.Production);
 								bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
 								EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
@@ -1224,7 +1230,13 @@ namespace OpenRA.Mods.CA.Traits
 						if (!ProtectionApplies(currentBuilding.Item)
 							|| CertificateAuthorizes(queue, currentBuilding.Item, currentBuilding))
 						{
-							NotePendingTerminal(queue, currentBuilding, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
+							// Master-identical binding: CancelProduction removes the LAST
+							// same-name item — record that instance (equal to
+							// currentBuilding under the cert; the twin case resolves
+							// exactly as master on the unconditional path).
+							var cancelTarget = BaseBuilderQueueEvalCA.CancelBindTarget(
+								queue.AllQueued(), i => i.Item, currentBuilding.Item, currentBuilding);
+							NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
 								BotQueueTransitionReason.SaturationLatch, BotQueueCancellationClass.Production);
 							bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
 							EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),

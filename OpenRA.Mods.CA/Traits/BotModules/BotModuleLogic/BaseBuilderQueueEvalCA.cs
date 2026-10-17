@@ -417,6 +417,19 @@ namespace OpenRA.Mods.CA.Traits
 			lawActive && protectedClassMember;
 
 		/// <summary>
+		/// Master-identical terminal binding for a cancel: CancelProduction removes the
+		/// LAST same-name item in queue order, so the recorded target is that instance
+		/// (fallback: the head item when no same-name entry resolves). Under a live
+		/// certificate the resolved last IS the intended item by construction (unique
+		/// enabled same-name + resolved == intended), so the same binding is exact on
+		/// both the unconditional and cert paths — twins or not, telemetry matches
+		/// master byte-for-byte.
+		/// </summary>
+		public static T CancelBindTarget<T>(IEnumerable<T> queued, Func<T, string> itemNameOf,
+			string itemName, T fallback) =>
+			queued.LastOrDefault(i => itemNameOf(i) == itemName) ?? fallback;
+
+		/// <summary>
 		/// HIGH-VALUE cancel protection (E91BA74C; shared seam per
 		/// API_PROPOSAL_2026-10-16_placement_cancel_protection E1283A6D — the Frans guard lane
 		/// 01a14475 binds this exact signature): adjudicates whether an automatic placement
