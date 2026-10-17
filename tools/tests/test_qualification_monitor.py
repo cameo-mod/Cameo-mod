@@ -590,6 +590,56 @@ class QualMonitorDeterministicTests(unittest.TestCase):
 		self.assertEqual(entry.linkage, "defended")
 		self.assertFalse(monitor.identity_gaps)
 
+	def test_d4_dropped_exit_notification_reconciles_via_handle(self):
+		"""Dropped/absent EXIT_PROCESS must never stall the loop: retained
+		handles verify via GetExitCodeProcess, handle-less gap entries via
+		job-absence (VJIT-02 r4 halt: wrong JOB_OBJECT_MSG_* ids discarded
+		every real event — pin the winnt.h values so drift is caught)."""
+		self.assertEqual(rqm.JOB_OBJECT_MSG_NEW_PROCESS, 6)
+		self.assertEqual(rqm.JOB_OBJECT_MSG_EXIT_PROCESS, 7)
+		self.assertEqual(rqm.JOB_OBJECT_MSG_ABNORMAL_EXIT_PROCESS, 8)
+		self.assertEqual(rqm.JOB_OBJECT_MSG_ACTIVE_PROCESS_ZERO, 4)
+		fake, clock = FakeAdapter(), FakeClock()
+		monitor = prep_state(build(self.tmp, fake, clock), fake, self.tmp)
+		h, _t, pid = fake.launch_suspended_in_job("x", monitor.job, None, (1, 2, 3))
+		root_key = (pid, ROOT_CREATION_BASE + pid)
+		monitor._register_member(pid, "launch", None, is_root=True,
+								 handle=h, creation=root_key[1])
+		child_key = fake.spawn_member(root_key, notify=False)   # dropped join
+		monitor._reconcile_membership()
+		fake.mark_exited(child_key, code=0, notify=False)        # dropped exit
+		fake.mark_exited(root_key, code=0, notify=False)         # dropped exit
+		monitor._reconcile_exits()
+		for key in (root_key, child_key):
+			entry = monitor.ledger[f"{key[0]}:{key[1]}"]
+			self.assertTrue(entry.exited)
+			self.assertTrue(entry.exit_verified)
+			self.assertEqual(entry.exit_code, 0)
+		self.assertTrue(monitor.root_exited)
+		self.assertEqual(monitor.root_exit_code, 0)
+
+	def test_d4_gap_member_exit_reconciles_via_job_absence(self):
+		"""Handle-less entry (creation-time query failed) cannot verify via
+		GetExitCodeProcess; absence from the job id list proves termination."""
+		fake, clock = FakeAdapter(), FakeClock()
+		monitor = prep_state(build(self.tmp, fake, clock), fake, self.tmp)
+		h, _t, pid = fake.launch_suspended_in_job("x", monitor.job, None, (1, 2, 3))
+		root_key = (pid, ROOT_CREATION_BASE + pid)
+		monitor._register_member(pid, "launch", None, is_root=True,
+								 handle=h, creation=root_key[1])
+		orphan = fake.spawn_member(root_key, notify=False)
+		fake.fail_on["process_creation_time"] = True
+		monitor._reconcile_membership()
+		fake.fail_on["process_creation_time"] = False
+		gap = monitor.ledger[f"{orphan[0]}:gap"]
+		self.assertIsNone(gap.creation)
+		self.assertFalse(gap.exited)
+		fake.mark_exited(orphan, code=0, notify=False)
+		monitor._reconcile_exits()
+		self.assertTrue(gap.exited)
+		self.assertTrue(gap.exit_verified)
+		self.assertIsNone(gap.exit_code)
+
 	def test_d4_missing_short_lived_identity_is_hold(self):
 		"""TotalProcesses > known identities with no openable member → gap → HOLD."""
 		fake, clock = FakeAdapter(), FakeClock()

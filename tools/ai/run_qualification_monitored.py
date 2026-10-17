@@ -92,10 +92,10 @@ JobObjectBasicProcessIdList = 3
 JobObjectAssociateCompletionPortInformation = 7
 JobObjectExtendedLimitInformation = 9
 
-JOB_OBJECT_MSG_NEW_PROCESS = 1
-JOB_OBJECT_MSG_EXIT_PROCESS = 2
-JOB_OBJECT_MSG_ABNORMAL_EXIT_PROCESS = 3
-JOB_OBJECT_MSG_ACTIVE_PROCESS_ZERO = 9
+JOB_OBJECT_MSG_NEW_PROCESS = 6
+JOB_OBJECT_MSG_EXIT_PROCESS = 7
+JOB_OBJECT_MSG_ABNORMAL_EXIT_PROCESS = 8
+JOB_OBJECT_MSG_ACTIVE_PROCESS_ZERO = 4
 
 PROC_THREAD_ATTRIBUTE_INPUT = 0x00020000
 PROC_THREAD_ATTRIBUTE_ADDITIVE = 0x00040000
@@ -1031,6 +1031,37 @@ class Monitor:
             self.identity_gaps.append(gap_record)
             self._record("ledger", gap_record)
 
+    def _reconcile_exits(self) -> None:
+        """Port-independent exit reconciliation (§4): a retained handle's
+        exit state is authoritative, and a member absent from the job id
+        list has terminated — processes cannot leave a job while alive.
+        Covers dropped or undelivered EXIT_PROCESS notifications so the
+        wait loop can never sample an already-empty job forever."""
+        assert self.job is not None
+        live = [e for e in self.ledger.values() if not e.exited]
+        if not live:
+            return
+        for entry in live:
+            if self.handles.get(entry.key()) is not None:
+                self._verify_exit(entry)
+        missing = [e for e in live
+                   if not e.exited and e.key() not in self.handles]
+        if missing:
+            ids = set(self.win32.job_process_ids(self.job))
+            for entry in missing:
+                if entry.pid not in ids:
+                    entry.exited = True
+                    if entry.exit_utc is None:
+                        entry.exit_utc = utc_now()
+                    entry.exit_verified = self._record(
+                        "ledger", {"kind": "member_exit_verified",
+                                   "verified_via": "job_absence",
+                                   **entry.to_record()})
+        for entry in live:
+            if entry.is_root and entry.exited:
+                self.root_exited = True
+                self.root_exit_code = entry.exit_code
+
     def _drain_notifications(self, budget: int = 64) -> None:
         with self._notify_lock:
             pending, self._notify_queue = self._notify_queue, []
@@ -1044,6 +1075,14 @@ class Monitor:
                     self._register_member(pid, "job_notification", census)
             elif message in (JOB_OBJECT_MSG_EXIT_PROCESS, JOB_OBJECT_MSG_ABNORMAL_EXIT_PROCESS):
                 self._on_exit_notification(pid)
+            elif message == JOB_OBJECT_MSG_ACTIVE_PROCESS_ZERO:
+                self._record("ledger", {"kind": "job_empty_notification",
+                                        "utc": utc_now()})
+                self._reconcile_exits()
+            else:
+                self._record("ledger", {"kind": "unrecognized_notification",
+                                        "message": message, "pid": pid,
+                                        "utc": utc_now()})
         if len(pending) > budget:
             with self._notify_lock:
                 self._notify_queue = pending[budget:] + self._notify_queue
@@ -1448,6 +1487,7 @@ class Monitor:
                 self._drain_notifications()
                 self._reconcile_membership()
                 self._reconcile_accounting()
+                self._reconcile_exits()
             except AdapterError as error:
                 self._trigger_stop(f"membership/accounting query failed: {error}")
                 return
@@ -1471,6 +1511,7 @@ class Monitor:
                 drain_until = now + ROOT_EXIT_DRAIN_SECONDS
                 while self.mono() < drain_until:
                     self._drain_notifications()
+                    self._reconcile_exits()
                     remaining = [e for e in self.ledger.values()
                                  if not e.exited and not e.is_root]
                     if not remaining:
