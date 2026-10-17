@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using OpenRA.FileSystem;
 using OpenRA.Mods.CA.Traits.BotModules;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Support;
@@ -121,18 +122,26 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (loaded)
 				return;
 			loaded = true;
-			var fs = Game.ModData.DefaultFileSystem;
-			if (!fs.Exists(Info.LearnedFile))
-				return;
+			thresholds = Load(Game.ModData.DefaultFileSystem, Info.LearnedFile);
+		}
+
+		// M9: the learned file lives nested inside the cameo package — the bare mod-relative path can
+		// never hit the top-level-only file index, so Exists/Open (and the parser diagnostic source)
+		// go through the one resolution point. A package-qualified override passes through unchanged.
+		internal static BotFightThresholds Load(IReadOnlyFileSystem fs, string file)
+		{
+			var resolved = LearnedFilePath.Resolve(file);
+			if (!fs.Exists(resolved))
+				return new BotFightThresholds();
 			try
 			{
-				using var stream = fs.Open(Info.LearnedFile);
-				thresholds = BotFightThresholds.Parse(MiniYaml.FromStream(stream, Info.LearnedFile));
+				using var stream = fs.Open(resolved);
+				return BotFightThresholds.Parse(MiniYaml.FromStream(stream, resolved));
 			}
 			catch (Exception)
 			{
-				thresholds = new BotFightThresholds();
 				Log.Write("debug", "Fight learning ignored invalid artifact.");
+				return new BotFightThresholds();
 			}
 		}
 
