@@ -1,3 +1,15 @@
+### 2026-10-17 — Devin-Developer: P1a default-off defect fix
+- Sonnet 666ddd0bd defect confirmed: `EvaluatePlacementCancelProtection` returned no `Allow`, so the relocation mass-cancel, limit-reached and saturation gates required a certificate for EVERY item — flag or not — and a non-refinery item could never hold one (the scan binds `certTargetName`). Default-off was broken for every class where master cancels unconditionally.
+- Fix (static only, no build/test/run):
+  - New eval seam `PlacementProtectionApplies(lawActive, protectedClassMember) = lawActive && member`.
+  - QM `ProtectionApplies(itemName) = PlacementProtectionApplies(RefineryLawProvider() != null, RetainedHighValueItem(RefineryTypes, itemName))` — replaces `PlacementProtectionVerdict`.
+  - Relocation mass-cancel (~QM:629): protection consulted only under law+membership; otherwise unconditional master cancel. A protected member now needs the cert directly (cheap-fast Allow unreachable under the law).
+  - Limit-reached (~QM:991) and saturation-latch (~QM:1205): `!ProtectionApplies || CertificateAuthorizes` — law-off/non-refinery = unconditional master path; protected member needs a live cert for the settled instance (E3 intended-instance preserved).
+  - Exhaustion gate unchanged (already cert-mandatory); terminal-domain prose corrected (whole map unconditionally).
+  - Eval `RetainedHighValueItem` docstring corrected — membership alone does not activate protection.
+  - New fixture `PlacementProtectionAppliesOnlyUnderActiveLawAndProtectedClass`: law-off/refinery, law-off/non-refinery, law-on/non-refinery all false (master path); law-on/refinery true (cert required).
+- Commit `607743672` (3 files, +70/−42). Sonnet re-review pending.
+
 # 2026-10-17 — Devin: P1a HOLD-conformance audit at 666ddd0bd — no source change needed
 
 *Devin-Developer.* The controlling ruling
