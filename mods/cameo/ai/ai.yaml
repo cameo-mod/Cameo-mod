@@ -162,6 +162,12 @@
 	GrantConditionOnBotOwner@radarcontacts:
 		Condition: radar_contacts
 		Bots:
+	# Context feature vectors (task 01a11190, DESIGN_2026-10-15 v2): anonymous map + seen-side opponent
+	# feature rows on their own JSONL channel — provider only, no gameplay consumer, no orders, no RNG.
+	# The arm sets Bots (switch group BX_context_providers); empty by default - inert on master.
+	GrantConditionOnBotOwner@contextfeatures:
+		Condition: context_features
+		Bots:
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
@@ -3891,6 +3897,13 @@ Player:
 		RequiresCondition: genericbot && radar_contacts
 		ContactsIntervalTicks: 25
 		TrackGraceTicks: 250
+	# CONTEXT-PROVIDERS (task 01a11190): anonymous map/opponent feature vectors — telemetry only,
+	# own JSONL channel, writer-election append. The opponent half reads the fog-honest seen
+	# buffer via the IAiSeenProfileSource seam on AiMatchLogWriter (seam ACK
+	# ACK_2026-10-16_context_opponent_seam_devin.md; write-only telemetry, no consumers).
+	# `genericbot && context_features`: off on master until the increment A/B arms it (switch group BX_context_providers).
+	ContextFeatureProviderBotModule:
+		RequiresCondition: genericbot && context_features
 	# `genericbot && build_order_knobs`: off on master until the increment A/B arms it (switch group AK_build_order_knobs).
 	BuildOrderKnobsBotModule:
 		RequiresCondition: genericbot && build_order_knobs
@@ -5348,6 +5361,10 @@ Player:
 		MaxAircraft: 25
 		MaintainAirSuperiority: true
 		MaxAirSuperiority: 25
+		# A3 (REVIEW_2026-10-17): count enemy air threats from the observed enemy composition
+		# for genericbot — AA sizing stops reading hidden aircraft. Armed by switch group
+		# BW_observed_air_threats; SwitchCondition keeps the shared instance off classic.
+		#ObservedAirThreats: false
 		AirToAirUnits: td_nod_apacheattackhelicopter, td_gdi_orca, td_nod_venom, td_gdi_firehawk, ra1_soviets_yakscoutplane, ra1_soviets_teslayak, ra1_soviets_armoredyak, ra1_soviets_nuclearyak, ra1_soviets_migattackbomber, ra1_soviets_su57attackbomber, ra1_allies_longbow, ra1_allies_rapierjumpjet, japan_zerofighter, ra2_allies_harrier, ra2_soviets_siegechopper, ra2_soviets_migbomber, latinsyndicate_hindtransport, yuri_floatingdisk, ra2_allies_nighthawk, asianalliance_phoenix, asianalliance_pelican, ixian_airdrone, ixian_farasha, steelconsortium_twister, steelconsortium_skyhammer, steelconsortium_cloudbreaker, latinsyndicate_yakovlev, latinsyndicate_mig21, schwarzermond_haunebuii, schwarzermond_haunebuiii, naxis_me262, naxis_bf109, schwarzermond_corruptorpiercer, schwarzermond_haunebuii, schwarzermond_haunebuiii, naxis_me262, schwarzermond_corruptorpiercer, schwarzermond_dieglocke, naxis_bf109, futuretech_twister, futuretech_cryocopter, futuretech_harbingergunship, terran_wraith, terran_sundog, terran_battlecruiser, terran_valkyrie, terran_wyvern, protoss_scout, protoss_epigraph, protoss_carrier, protoss_gladius, protoss_voidray, zerg_mutalisk, zerg_devourer, terran_pythean, terran_phobos, zerg_behemoth, protoss_starshipsovereign, wc2_humans_gryphonrider, wc2_orcs_dragon, atreides_ornithopter, harkonnen_gunship, corrino_gunship
 		AirThreatUnits: td_nod_apacheattackhelicopter, td_gdi_orca, td_nod_venom, td_gdi_firehawk, td_gdi_chinooktransport, td_nod_chinooktransport, ra1_soviets_yakscoutplane, ra1_soviets_teslayak, ra1_soviets_armoredyak, ra1_soviets_nuclearyak, ra1_soviets_migattackbomber, ra1_soviets_su57attackbomber, ra1_soviets_supersonicnuclearbomber, ra1_soviets_hindattackhelicopter, ra1_allies_longbow, ra1_allies_blackhawk, ra1_allies_rapierjumpjet, japan_zerofighter, japan_japanesebomber, ra1_soviets_hiptransport, ra1_allies_chinooktransport, ra2_allies_harrier, ra2_allies_blackeagle, ra2_soviets_siegechopper, ra2_soviets_migbomber, latinsyndicate_hindtransport, ra2_soviets_kirovairship, yuri_floatingdisk, ra2_allies_nighthawk, asianalliance_phoenix, asianalliance_pelican, ixian_airdrone, ixian_farasha, steelconsortium_empressstation, steelconsortium_twister, steelconsortium_skyhammer, steelconsortium_cargoship, steelconsortium_cloudbreaker, latinsyndicate_yakovlev, latinsyndicate_mig21, naxis_transportzeppelin, schwarzermond_spacezeppelin, schwarzermond_haunebuii, schwarzermond_haunebuiii, naxis_me262, naxis_bf109, schwarzermond_corruptorpiercer, schwarzermond_dieglocke, futuretech_twister, futuretech_cryocopter, futuretech_harbingergunship, terran_wraith, terran_sundog, terran_battlecruiser, terran_valkyrie, terran_wyvern, protoss_scout, protoss_epigraph, protoss_carrier, protoss_gladius, protoss_voidray, zerg_mutalisk, zerg_devourer, terran_pythean, terran_phobos, zerg_behemoth, protoss_starshipsovereign, wc2_humans_gryphonrider, wc2_orc_dragonwc2_orc_dragon, atreides_ornithopter, atreides_airdrone, atreides_advancedcarryall, harkonnen_carryall, harkonnen_gunship, harkonnen_advancedcarryall, corrino_carryall, corrino_gunship, corrino_advancedcarryall
 		#UnitBuilderMinCredits: 0

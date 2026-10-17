@@ -36,7 +36,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		public override object Create(ActorInitializer init) { return new AiMatchLogWriter(this); }
 	}
 
-	public class AiMatchLogWriter : IWorldLoaded, IGameOver, ITick
+	public class AiMatchLogWriter : IWorldLoaded, IGameOver, ITick, BotModules.IAiSeenProfileSource
 	{
 		readonly AiMatchLogWriterInfo info;
 
@@ -550,6 +550,12 @@ namespace OpenRA.Mods.Cameo.Traits
 			a.VehicleValue != b.VehicleValue || a.AirValue != b.AirValue || a.NavalValue != b.NavalValue ||
 			a.DefenceValue != b.DefenceValue || a.BuildingCount != b.BuildingCount ||
 			a.HarvesterCount != b.HarvesterCount || a.KnownRegions != b.KnownRegions;
+
+		// Read-only seam into the same fog-honest seen buffer ProfileOf consumes
+		// (seam ACK ACK_2026-10-16_context_opponent_seam_devin.md, bound shape).
+		IReadOnlyCollection<BotModules.ObservedActor> BotModules.IAiSeenProfileSource.SeenActorsOf(
+			OpenRA.Player observer, OpenRA.Player enemy) =>
+			signatureMemory.TryGetValue(observer, out var memory) ? memory.Remembered(enemy) : null;
 
 		internal static BotModules.EnemyProfile ProfileOf(IEnumerable<BotModules.ObservedActor> actors)
 		{

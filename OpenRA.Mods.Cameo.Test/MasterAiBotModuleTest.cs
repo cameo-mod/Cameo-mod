@@ -675,6 +675,72 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(SquadManagerBotModuleCA.PreferOwned(candidates, candidate => true), Is.SameAs(candidates));
 		}
 
+		// A2 (REVIEW_2026-10-17): under fogged scans FindClosestEnemy filters hidden units
+		// BEFORE prefer-narrowing. These tests compose the same static seams in the same
+		// order the three fixed overloads now use.
+
+		[Test]
+		public void FilterHiddenUnderFogOffPathPassesCandidatesThrough()
+		{
+			var candidates = new List<string> { "hidden", "visible" };
+			Assert.That(SquadManagerBotModuleCA.FilterHiddenUnderFog(candidates, false, candidate => true),
+				Is.SameAs(candidates));
+		}
+
+		[Test]
+		public void HiddenMainTargetUnitCannotSuppressAVisiblePick()
+		{
+			// Master order: PreferOwned over the omniscient list narrows to [hiddenOwned];
+			// the later visibility filter empties it and the squad gets no target although a
+			// visible enemy exists. Fog-first order keeps the visible pick.
+			var candidates = new List<(string Name, bool Visible, bool Owned)>
+			{
+				("hiddenMainTargetUnit", false, true),
+				("visibleEnemy", true, false),
+			};
+
+			var leaked = SquadManagerBotModuleCA.PreferOwned(candidates, c => c.Owned).Where(c => c.Visible).ToList();
+			Assert.That(leaked, Is.Empty, "control: master order does suppress — the regression exists");
+
+			var fogged = SquadManagerBotModuleCA.FilterHiddenUnderFog(candidates, true, c => c.Visible);
+			var picked = SquadManagerBotModuleCA.PreferOwned(fogged, c => c.Owned).Where(c => c.Visible).ToList();
+			Assert.That(picked.Select(c => c.Name), Is.EqualTo(new[] { "visibleEnemy" }));
+		}
+
+		[Test]
+		public void HiddenMainTargetUnitCannotAlterAVisiblePick()
+		{
+			// A hidden owned unit alongside a visible owned one: the visible pick must win.
+			var candidates = new List<(string Name, bool Visible, bool Owned)>
+			{
+				("hiddenOwned", false, true),
+				("visibleOwned", true, true),
+				("visibleOther", true, false),
+			};
+
+			var fogged = SquadManagerBotModuleCA.FilterHiddenUnderFog(candidates, true, c => c.Visible);
+			var picked = SquadManagerBotModuleCA.PreferOwned(fogged, c => c.Owned).Where(c => c.Visible).ToList();
+			Assert.That(picked.Select(c => c.Name), Is.EqualTo(new[] { "visibleOwned" }));
+		}
+
+		[Test]
+		public void HiddenTagMatchStaysOutOfTheVisibleOrder()
+		{
+			// CPos overload order: FilterHiddenUnderFog -> PreferTagged (PreferSquadTargets
+			// with an owner). The hidden tag match can never reach the front of the pick list.
+			var candidates = new List<(string Name, bool Visible, HashSet<string> Tags)>
+			{
+				("hiddenTagged", false, ["artillery"]),
+				("visibleA", true, ["infantry"]),
+				("visibleB", true, ["vehicle"]),
+			};
+
+			var fogged = SquadManagerBotModuleCA.FilterHiddenUnderFog(candidates, true, c => c.Visible);
+			var ordered = BotTargetTags.PreferTagged(fogged, new HashSet<string> { "artillery" }, c => c.Tags);
+			Assert.That(ordered.All(c => c.Visible), Is.True);
+			Assert.That(ordered.Select(c => c.Name), Is.EqualTo(new[] { "visibleA", "visibleB" }));
+		}
+
 		[Test]
 		public void PersonalityControllerMapsKnownConditionsAndIgnoresUnknownNames()
 		{
