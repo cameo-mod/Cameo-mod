@@ -22256,3 +22256,20 @@ pre-ledger refusal). Focused+adjacent 217/217 green; Release 0 warnings/0 errors
 on touched projects. No merge/push/runtime; U1 stays unlanded pending runtime
 receipt; U2 stays held; E2 v1.2 / P2P7 v1.1 stay on hold pending reviewer
 corrections.
+
+### 2026-10-17 - U1 review F1/F2 fix-forward a754df85f (Devin-Developer)
+
+Static-only fixes per lead's U1 review (ACCEPT WITH FINDINGS, DO NOT MERGE -
+no runtime receipt). No build or test run per instruction.
+
+- F1 (medium): BuildUnitFairService `unit == null` - baseline-shares fallback
+  and RevertToBaselineComposition now require skip.Count == 0. Rejected
+  candidates break with no revert; only a genuinely empty pick falls back.
+- F2 (low/medium): never-servable external requests stayed queued and logged
+  every sweep. PermanentlyInvalidBuildRequest += UnitLimits[name] <= 0 (exact:
+  owned count is always >= the cap); plus a Waiting intent drops after
+  RequestDropFailedSweeps = 250 consecutive failed service visits (~7500t at
+  FeedbackTime spacing - beyond every transient gate), the bounded fair-service
+  form of legacy's drop-on-failure. Refusal-restored intents reset the budget.
+- Noted: FairProducerService/CombatInfantryFloor wired in no YAML - inert until
+  increment time.
