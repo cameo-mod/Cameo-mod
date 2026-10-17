@@ -1,3 +1,49 @@
+# 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U1 fix-forward + P4 combat-demand floor
+
+*Devin-Developer.* Fix-forward on `devin/01a14504-u1-fair-service` answering Sol's
+static HOLD `82530D80` on `1db49c059`, plus the paired P4 combat-demand piece.
+Same claim, same worktree, no merge/push/runtime.
+
+**Sol F1 — one ephemeral batch.** `ProducerServiceBatch` (new, in
+`BotModuleLogic/UnitProducerServiceCA.cs`) is created at the top of each
+`BotTick` decision pass and shared by the external-request scan and every
+category visit: producer slots (keyed by queue *instance*), the reserved bank,
+per-name `UnitLimits` headroom, aircraft/air-to-air and capturer pending counts.
+The external path now requires capability AND a batch-free slot AND a
+batch-affordable cost together — the batch is discarded per pass, so nothing
+durable pre-empts the U2 ledger.
+
+**Sol F2 — affordability retries.** An unaffordable pick is rejected into the
+per-queue skip set so the bounded search tries cheaper feasible candidates
+instead of ending the fill.
+
+**Sol F3 — byte-identical-off + sibling identity.** `ServiceCursors` is emitted
+only when the armed path actually examined a producer — flag-off saves carry no
+new node. Same-actor/same-type sibling queues get an ordinal key suffix
+(`actorID|type|N`) so service is keyed per queue instance; a stale cursor still
+resumes at the documented first key.
+
+**P4 combat-infantry floor.** New `CombatInfantryFloor` field (default 0,
+requires fair service): while alive armed infantry are below the floor an
+infantry-capable queue prefers the armed-infantry candidate with the best
+combat value per cost (DerivedUnitStrength / GetProductionCost, ordinal-name
+tiebreak) — engineers/capturers/support/slaved units are excluded by the
+`IsArmedInfantry` census definition, in-pass emissions count toward the floor,
+all ordinary gates still apply after the preference, and floor rejections are
+observable as `"combat_floor"`. External infantry emissions count toward the
+same batch.
+
+**Tests — real seam, not arithmetic.** The new fixture tests drive
+`ProducerServiceBatch` across simulated call sites (external-then-category
+visibility, per-instance sibling slots, per-pass ephemerality, shared headroom
+map) — the used object itself. 66/66 (60 prior + floor/batch additions);
+Release build 0/0.
+
+**Open.** Await reviewer disposition on the fix-forward chain. Feature stays
+default-off and unqualified — no "included" claim. U2 lifecycle, runtime
+launch, merge and A/B remain unauthorized.
+
+
 # 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U1 fair producer service, first slice
 
 *Devin-Developer.* Controlled claim handoff executed after Reviewer `6576989D`
