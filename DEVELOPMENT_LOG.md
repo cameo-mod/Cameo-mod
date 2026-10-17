@@ -1,3 +1,52 @@
+# 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U2 EB513352 fix-forward `229cfc8c2`
+
+*Devin-Developer.* Sol static HOLD `EB513352` on `645543846`, blocking F1: the
+intent ledger's coverage-retaining semantics ran unconditionally — under
+`FairProducerService=false` a successful external emission left `EmittedPending`
+counted forever, so `HarvesterBotModuleCA`'s `RequestedProductionCount == 0`
+gate suppressed replacement after the produced harvester died (Engineer, Scout,
+ExpansionPlanner MCV and bridge-repair requesters share the gate). The accepted
+conservative partial-U2 direction never authorized global activation.
+
+**Fix-forward `229cfc8c2`** (same approved four-file fileset, stacked on
+`429a05cc6`):
+
+- **Distinct default-off control** — `UnitBuilderBotModuleCAInfo.BuildIntentTracking`
+  (SwitchCondition-gated, default `false`), exposed as `IntentTracking` —
+  separate from `FairProducerService`. OFF reproduces the pre-U2 module
+  byte-identically: `BuildIntentLedger` remains the single store but a
+  successful emission calls `NoteEmitted(intent, retainCoverage: false)` → the
+  intent is removed and the order routes plain `QueueOrder` — request removal,
+  `RequestedProductionCount` (live Waiting names only) and the
+  `QueuedBuildRequests` save node are exactly the legacy shape, under either
+  fair-service branch. No bindings, no tracked enqueue, no `PendingBuildIntents`
+  node from live traffic.
+- **Armed-save → off-load policy, explicit** — `PendingBuildIntents` loads
+  `Unresolved` in EITHER mode: counts once (a possibly-reconstructed commitment
+  is never re-requested), never becomes Waiting (no silent reissue), and is
+  re-saved as `PendingBuildIntents` rather than migrated into the legacy node.
+  No post-armed parity claimed.
+- **Enabled-mode liveness limitation, explicit** — `Info` desc + ledger type
+  block state it: no produced/death settlement exists in this slice, so a
+  delivered unit that later dies leaves its intent counted and replacement
+  re-request may stay suppressed — the accepted bound of the experimental
+  slice, NOT repaired harvester/MCV recovery and NOT complete U2. No timeout,
+  no issued=delivered shortcut.
+- **StartProduction-only tracking** (nonblocking bound) —
+  `BotOrderDispositionTracker.Register` refuses any `OrderString !=
+  TrackedOrderString` ("StartProduction"); `IBotOrderTracking` doc narrows the
+  supported contract to the accepted first scope. Refused kinds fall back to
+  plain `QueueOrder`.
+
+**Receipts.** Release build 0 warnings/0 errors; focused+adjacent 132/132
+(`BuildIntentLedgerTest` 23 incl. 6 new mode-boundary cases driving
+`NoteEmitted` — off-emit consume/count boundary, re-request cycle, on-emit
+retention, armed-save→off-load Unresolved, legacy-node load-then-consume,
+non-StartProduction refusal — plus `UnitProducerServiceTest`,
+`HarvesterLogisticsTest`, `EngineerBotModuleTest`,
+`ExpansionPlannerBotModuleTest`, `BridgeRepairBotModuleTest`, `BotOrderGateTest`,
+`CapturerLimitTest`). No runtime/merge/push/qualification/JIT/A/B.
+
 # 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U2 local disposition seam `645543846`
 
 *Devin-Developer.* First U2 slice under Coordinator fileset claim `01a148b8`,
