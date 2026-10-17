@@ -1,3 +1,6 @@
+> **ARCHIVED 2026-10-17 — dated review of master `192ed5701`. Its findings and their current state are tracked in the MASTER synthesis §6 ([`../AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md`](../AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md)). Counts below are of that date.**
+> Moved here by the AI-docs consolidation; never overrides anything current (see [`../README.md`](../README.md)).
+
 # Cameo AI Architecture Review — Current Master `192ed5701`, 2026-10-02
 
 **Reviewed repository:** `cameo-mod/Cameo-mod`  

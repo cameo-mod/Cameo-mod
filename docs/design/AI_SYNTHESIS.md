@@ -1,4 +1,5 @@
 # AI synthesis: RV × CA × Cameo × CN × Fransbot, and a more human-like bot
+> **Status banner, 2026-10-17 — dated snapshot, not the queue.** Written 2026-09-27. Its §0 ranked list is historical; the work queue of record is [`AI_MASTER_PLAN.md`](AI_MASTER_PLAN.md) §3, and the maintained synthesis is [`../AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md`](../AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md) (Part IV feeds the queue). Counts quoted here (types, lines, CN totals) are of that date.
 
 _Written 2026-09-27 by Claude-Local (coordinator), from measurements taken the same day. It is
 the plan for **combining** the five sources of Cameo's bot code. The binding design stays in
@@ -489,6 +490,7 @@ and merging where possible**. Measured on master `fd852d2fe` + the A/B rounds 2�
 5. **The module map is blind to Fransbot.** `ai_module_map.py` lists 34 loaded types but none
    of the Fransbot assembly, and the committed map is stale (`--check` fails on master).
    Owner: Devin Cloud (tooling), with the CA-1b work.
+   _Status 2026-10-17: historical. The generated map now covers the Fransbot assembly and is current; see [`AI_MODULE_MAP.md`](AI_MODULE_MAP.md) (the freshness audit is `../audit/latest/ai_arch_freshness.md`)._
 6. **Stale plan facts.** §1's table says CN/Fransbot "not yet" and names Fransbot branch
    `V1.29.19-RC`; §6's order of work predates 6a–6g, #605 and the A/B standard. §7 supersedes
    §6 for ordering; §12 of `AI_ARCHITECTURE.md` owns the combined-arms phases.

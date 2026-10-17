@@ -189,7 +189,7 @@ before that switch is armed.
 
 ## 6. The 2026-10-02 review: what is fixed
 
-Source: [`design/CAMEO_AI_ARCHITECTURE_REVIEW_2026-10-02_POST_MERGE.md`](design/CAMEO_AI_ARCHITECTURE_REVIEW_2026-10-02_POST_MERGE.md).
+Source: [`history/CAMEO_AI_ARCHITECTURE_REVIEW_2026-10-02_POST_MERGE.md`](history/CAMEO_AI_ARCHITECTURE_REVIEW_2026-10-02_POST_MERGE.md).
 
 | # | Finding | State on `5c8cfe04` | Evidence |
 |---|---|---|---|
@@ -339,10 +339,11 @@ own default-off increment switch, prove the order stream is identical with it of
    repeated parenthesis is now one definition (Appendix B header).
 3. **Conditions from bot code:** Appendix G said bot logic affects the world through "orders/conditions". DESIGN §19.8
    allows orders only. Fixed.
-4. **Missing sources:** the external reports (`deep-research-report*.md`) and the fleet research files
-   (`RESEARCH_2026-10-05_rts_ai_learning.md`, `LEARN_CATALOG_2026-10-06.md`, `MAP_FEATURES_2026-10-06.md`,
-   `OPPONENT_FEATURES_2026-10-06.md`, `AI_ARCHITECTURE_RESEARCH_SYNTHESIS_2026-10-06.md`) are **not in the repository**.
-   §12 marks them so; commit them under `docs/research/` if they are to stay citable.
+4. **Missing sources:** the external reports (`deep-research-report*.md`) are **not in the repository**. The fleet research
+   files (`RESEARCH_2026-10-05_rts_ai_learning.md`, `LEARN_CATALOG_2026-10-06.md`, `MAP_FEATURES_2026-10-06.md`,
+   `OPPONENT_FEATURES_2026-10-06.md`) were committed under `docs/research/` afterwards, and the earlier 273-line synthesis
+   (`AI_ARCHITECTURE_RESEARCH_SYNTHESIS_2026-10-06.md`) is archived under `docs/history/` (superseded by this document;
+   every section of it is carried here). §12 lists the current locations.
 5. **Registry described as missing:** the action plan asked for a registry that already existed on 2026-10-07. It is
    now listed as shipped, with its gaps (F9, F10).
 6. **Heading numbering:** the annex carried the source report's numbers (`## 5.1`, `## 8.19 B.`, a stray H1 inside
@@ -364,6 +365,8 @@ is measured on master `5c8cfe04` plus the evidence named in each row. "Fixed tod
 `5c8cfe04`, not that it was proven in a match._
 
 ## PT1. What changed between the strong bots and the weak ones
+
+_Historical table (2026-10-08 playtest build), status 2026-10-17: `746ad5dd6` (10-10) reverted the playtest arm commit, so the "after" column is no longer the shipped state. The "before" column is also dated: `inc3f1` is now granted to every difficulty tier plus the exploit bots (`mods/cameo/ai/ai.yaml`), not only to `hard`. Whether `37d9fc6a` is that exact reverted commit was not verified._
 
 | | Before (strong bots) | Playtest build (weak bots) |
 |---|---|---|
@@ -858,13 +861,14 @@ In the repository: `docs/DESIGN.md` §19 (§19.1, §19.2, §19.3, §19.5, §19.6
 `docs/design/AI_ARCHITECTURE.md` (§10.5c, §12.22), `tools/ai/ai_arch_audit.py` (R8),
 `docs/design/AI_MASTER_PLAN.md`, `docs/design/AI_SYNTHESIS.md`, `docs/design/AI_DEEP_RESEARCH.md`,
 `docs/design/AI_LEARNING_RESEARCH_2026-10-03.md`, `docs/design/TIER4_SPSA_SPEC.md`,
-`docs/design/CAMEO_AI_ARCHITECTURE_REVIEW_2026-10-02_POST_MERGE.md`, `docs/design/AI_MODULE_MAP.md`,
+`docs/history/CAMEO_AI_ARCHITECTURE_REVIEW_2026-10-02_POST_MERGE.md`, `docs/design/AI_MODULE_MAP.md`,
 `tools/ai/learnables.yaml`, `mods/cameo/ai/`, the C# under `OpenRA.Mods.CA/Traits/BotModules/`,
 `OpenRA.Mods.Cameo/Traits/BotModules/` and `OpenRA.Mods.Fransbot/Traits/`.
 
-**Not in the repository** (cited by the first version, provenance only until committed): `deep-research-report.md`,
-`deep-research-report-2.md`, `RESEARCH_2026-10-05_rts_ai_learning.md`, `LEARN_CATALOG_2026-10-06.md`,
-`MAP_FEATURES_2026-10-06.md`, `OPPONENT_FEATURES_2026-10-06.md`, `AI_ARCHITECTURE_RESEARCH_SYNTHESIS_2026-10-06.md`.
+**In `docs/research/`** (committed after the first version): `RESEARCH_2026-10-05_rts_ai_learning.md`,
+`LEARN_CATALOG_2026-10-06.md`, `MAP_FEATURES_2026-10-06.md`, `OPPONENT_FEATURES_2026-10-06.md`.
+**In `docs/history/`** (archived, superseded by this document): `AI_ARCHITECTURE_RESEARCH_SYNTHESIS_2026-10-06.md`.
+**Not in the repository** (provenance only): `deep-research-report.md`, `deep-research-report-2.md`.
 
 ---
 

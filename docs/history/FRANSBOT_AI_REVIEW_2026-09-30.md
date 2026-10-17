@@ -1,3 +1,6 @@
+> **ARCHIVED 2026-10-17 — raw source review by the Fransbot author, kept verbatim for history. The verified findings, response and plan are in [`../design/AI_REVIEW_FRANSOTTO_2026-09-30.md`](../design/AI_REVIEW_FRANSOTTO_2026-09-30.md).**
+> Moved here by the AI-docs consolidation; never overrides anything current (see [`../README.md`](../README.md)).
+
 # Cameo AI review — Fransbot perspective
 
 _Date: 2026-09-30_

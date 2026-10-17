@@ -176,6 +176,13 @@ claim before you write the new one, and strike it everywhere it appears.**
 - **Commit hashes older than 2026-08-10** do not resolve in a shallow checkout (cloud/CI). Run `git fetch --unshallow`, or verify against the artifact instead.
 - **`engine/`** is `.gitignore`d and not part of this repository. See [`HANDOFF.md`](HANDOFF.md) §5.
 
+## AI documentation — reading order
+
+1. [`design/AI_ARCHITECTURE.md`](design/AI_ARCHITECTURE.md) — binding contracts and specs (a design document; see its status note).
+2. [`design/AI_MODULE_MAP.md`](design/AI_MODULE_MAP.md) and [`design/AI_ARCH_COVERAGE.md`](design/AI_ARCH_COVERAGE.md) — generated, never hand-edit: the per-type module list of record, and the layered dataflow, seams, tick order and findings. [`design/AI_DATAFLOW.md`](design/AI_DATAFLOW.md) is the hand-written narrative.
+3. [`AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md`](AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md) — the maintained research synthesis (Part IV feeds the queue).
+4. [`design/AI_MASTER_PLAN.md`](design/AI_MASTER_PLAN.md) §3 — the work queue of record. The ranked lists in `AI_SYNTHESIS.md` and `AI_DEEP_RESEARCH.md` are dated snapshots.
+
 ## `history/` — archived, non-authoritative
 
 Dated session logs, superseded handoffs, closed roadmap sections, finished programmes and
