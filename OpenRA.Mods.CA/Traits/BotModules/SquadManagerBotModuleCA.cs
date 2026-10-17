@@ -1728,6 +1728,8 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			var units = World.Actors.Where(IsPreferredEnemyUnit).ToList();
 			var mainTarget = EffectiveMainTarget();
+
+			units = FilterHiddenUnderFog(units, FoggedScans, IsNotHiddenUnit);
 			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
 			units = PreferSquadTargets(units, owner, TagsOf);
 			var visible = units.Where(IsNotHiddenUnit).ToList();
@@ -1757,6 +1759,8 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			var units = World.Actors.Where(IsPreferredEnemyUnit).ToList();
 			var mainTarget = EffectiveMainTarget();
+
+			units = FilterHiddenUnderFog(units, FoggedScans, IsNotHiddenUnit);
 			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
 			units = PreferSquadTargets(units, owner, TagsOf);
 			units.RemoveAll(u => !PassesRiskGate(u.Location, attackerValue));
@@ -1781,6 +1785,8 @@ namespace OpenRA.Mods.CA.Traits
 			var units = World.Actors
 				.Where(a => a.Owner == targetPlayer && IsPreferredEnemyUnit(a))
 				.ToList();
+
+			units = FilterHiddenUnderFog(units, FoggedScans, IsNotHiddenUnit);
 			units = PreferSquadTargets(units, owner, TagsOf);
 			units.RemoveAll(u => !PassesRiskGate(u.Location, attackerValue));
 			var visible = units.Where(IsNotHiddenUnit).ToList();
@@ -2569,6 +2575,15 @@ namespace OpenRA.Mods.CA.Traits
 
 			var preferred = candidates.Where(ownedByMainTarget).ToList();
 			return preferred.Count > 0 ? preferred : candidates;
+		}
+
+		// A2 (REVIEW_2026-10-17_ai_architecture_opus): under fogged scans the visibility
+		// filter runs BEFORE PreferOwned/PreferSquadTargets — a hidden main-target-owned
+		// or tag-matching unit can never suppress or reorder the visible set. With
+		// FoggedScans off the list passes through unchanged (master order preserved).
+		public static List<T> FilterHiddenUnderFog<T>(List<T> candidates, bool foggedScans, Func<T, bool> isVisible)
+		{
+			return foggedScans ? candidates.Where(isVisible).ToList() : candidates;
 		}
 
 		// The declared multi-provider merge (AR-7; ai_arch_audit R7): every enabled
