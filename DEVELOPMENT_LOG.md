@@ -1,3 +1,31 @@
+# 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U1 ECAFF220 successor `988e84cb5`
+
+*Devin-Developer.* Successor fix-forward answering Sol's `ECAFF220` HOLD on
+`388964c41` (closed: shared batch + affordability retry).
+
+**Residual fixed.** The fair external `BuildUnit` path now passes the SAME
+ordinary aircraft admission before emit — `ShouldBuild` does not air-check,
+so a capped external aircraft (or two external names sharing one headroom
+unit) could still emit. `UnitProducerServiceCA.PendingAircraftDelta` is the
+single class-delta seam: air-to-air vs other-aircraft under
+`MaintainAirSuperiority`, shared by the external gate and the category fill
+— emission increments remain after-admission only.
+
+**Scope notes recorded per Sol.** `LimitHeadroomAdmits` preserves the legacy
+owned-alive census — pre-existing queued items are NOT counted (no committed-
+ceiling claim; a total live+queued+pending ceiling is a different cap
+definition). Conditional `ServiceCursors` gives off-from-clean-start byte
+identity, not unconditional equality after an armed save loads. Sibling
+ordinal keys distinguish current enumeration; they do not prove
+capture/replacement continuity. `CombatInfantryFloor` remains default-0
+unaccepted policy — explicitly no P4-completion claim.
+
+**Receipts.** Focused+adjacent 70/70 (4 new aircraft-delta tests driving the
+same method both call sites use); Release build clean on mod sources — the 9
+warnings are pre-existing engine StyleCop in upstream files. No merge/push/
+runtime.
+
+
 # 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U1 fix-forward + P4 combat-demand floor
 
 *Devin-Developer.* Fix-forward on `devin/01a14504-u1-fair-service` answering Sol's
