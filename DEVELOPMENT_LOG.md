@@ -22220,3 +22220,39 @@ directions (sentinel stays SENTINEL, match_batch stays ALLOW).
 
 Status: py_compile clean; no tests/builds/games/qualification run - serial
 gate. Exact-SHA review target supersedes 43a51eb6b.
+
+### 2026-10-17 - CORE-PRODUCTION-ECONOMY E1: storage admission observational slice f2673f812 (Devin-Developer)
+
+Lead-accepted observational slice over impl-map v4.1 (fleet doc SHA
+7AC0FD35...). Records storage-capacity commitments (P = P_queued + P_pending)
+and emits would-be verdicts via AIUtils.BotDebug; NEVER gates any admission -
+behaviour, orders, RNG and save output unchanged either flag-state;
+classic/all-off byte-identical behind switch-gated StorageAdmissionObservational
+on BaseBuilderBotModuleCAInfo.
+
+- StorageAdmissionObservation (new, BotModuleLogic): per-player ledger; P_queued
+  enumerates every owned ProductionQueue trait incl. disabled/paused
+  (TraitDictionary.All() has no enabled filter; deliberately NOT
+  BuildingsBeingProduced); capacity resolved from ruleset ActorInfo (frozen at
+  match start).
+- Reservations bind the exact Order instance via U2
+  IBotOrderTracking.QueueOrderTracked (Cameo ModularBot); engine
+  classic/fransbot bots lack the interface so the reservation stays pending
+  untracked - conservative either way.
+- Settlement positive-evidence only: exact-instance RefusedLocally, or producer
+  dead/removed/owner-changed at per-sweep reconcile. PERMANENT DOUBLE-COUNT
+  documented: IssuedToWorld keeps the reservation pending - once the item lands
+  in the queue the same capacity counts in BOTH P_queued and P_pending for its
+  lifetime (conservative overcount; can overstate would-be refusals, cannot
+  affect actual behaviour). Issued is not queue arrival.
+- Would-be verdicts: Ctarget = min(ceiling, max(base, S+hysteresis)), strict <
+  target (Sol C4198CC4), <= ceiling, cooldown term observed. 0-default fields =
+  unset sentinels; no policy numbers invented. In-memory only; resets on
+  save/load.
+
+Tests: 7 new cases in StorageAdmissionObservationTest (target resolution,
+strict/ceiling bounds, once-only ledgering, exact refusal, issued-keeps-pending,
+pre-ledger refusal). Focused+adjacent 217/217 green; Release 0 warnings/0 errors
+on touched projects. No merge/push/runtime; U1 stays unlanded pending runtime
+receipt; U2 stays held; E2 v1.2 / P2P7 v1.1 stay on hold pending reviewer
+corrections.
