@@ -533,18 +533,14 @@ namespace OpenRA.Mods.CA.Traits
 			return BuildingType.Building;
 		}
 
-		// E91BA74C/D831BBCB: mounted role evidence for the shared verdict — RefineryTypes is
-		// the adjudicated protected class; mounted PowerTypes/BarracksTypes is the cheap-fast
-		// class ("cheap fast items like power/barracks" of the pre-seam rule); everything else
-		// is Unresolvable, which every call site here treats as RequireCertificate (fail closed).
-		PlacementCancelVerdict PlacementProtectionVerdict(string itemName)
-		{
-			world.Map.Rules.Actors.TryGetValue(itemName, out var itemInfo);
-			return BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection(itemInfo,
-				baseBuilder.Info.RefineryTypes.Contains(itemName),
-				baseBuilder.Info.PowerTypes.Contains(itemName) || baseBuilder.Info.BarracksTypes.Contains(itemName),
-				null, null, null, null);
-		}
+		// Sonnet adjudication of 666ddd0bd (default-off defect): the protection regime —
+		// and therefore the certificate requirement — exists ONLY under the active refinery
+		// law AND only for the protected (refinery) class. With no law provider, or for any
+		// non-member item, the automatic cancel paths run exactly like master.
+		bool ProtectionApplies(string itemName) =>
+			BaseBuilderQueueEvalCA.PlacementProtectionApplies(
+				baseBuilder.RefineryLawProvider() != null,
+				BaseBuilderQueueEvalCA.RetainedHighValueItem(baseBuilder.Info.RefineryTypes, itemName));
 
 		// 6722A484/BF5B8247(c)/A966ED70(E3): a protected cancel proceeds only when the live
 		// queue state proves the order will settle the caller-intended instance AND the
@@ -624,22 +620,17 @@ namespace OpenRA.Mods.CA.Traits
 								var latchSnapshot = queue.AllQueued().ToArray();
 								foreach (var item in latchSnapshot)
 								{
-									// E91BA74C/D831BBCB/6722A484: the mass-cancel gates on the shared
-									// protection verdict — a proven cheap-fast member (mounted
-									// PowerTypes/BarracksTypes) cancels as before; a protected or
-									// unclassifiable item — in-progress or completed alike (E1) — stays
+									// E91BA74C/D831BBCB/6722A484 + Sonnet 666ddd0bd default-off fix:
+									// the mass-cancel consults protection ONLY while the law is
+									// active AND the item is a protected (refinery) member — every
+									// other item cancels unconditionally exactly like master. A
+									// protected item — in-progress or completed alike (E1) — stays
 									// queued unless a live exhaustion certificate authorizes the settle.
-									if (PlacementProtectionVerdict(item.Item) != PlacementCancelVerdict.Allow)
+									if (ProtectionApplies(item.Item) && !CertificateAuthorizes(queue, item.Item, item))
 									{
-										// A966ED70 (E3): the order resolves the LAST same-name on
-										// every enabled queue — only a unique enabled entry whose
-										// live resolution is this snapshot instance may settle.
-										if (!CertificateAuthorizes(queue, item.Item, item))
-										{
-											EmitQueueTransition(queue, stuckConyard, item, item.Item, QueueCategoryOf(item.Item),
-												BotQueueTransitionKind.Held, BotQueueTransitionReason.ProtectionHold);
-											continue;
-										}
+										EmitQueueTransition(queue, stuckConyard, item, item.Item, QueueCategoryOf(item.Item),
+											BotQueueTransitionKind.Held, BotQueueTransitionReason.ProtectionHold);
+										continue;
 									}
 
 									// The record resolves on the tick the item actually
@@ -1010,11 +1001,13 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						AIUtils.BotDebug($"{player} has already has enough {currentBuilding.Item}; cancelling production");
 
-						// E91BA74C/D831BBCB: the limit cancel gates on the shared verdict —
-						// proven cheap-fast proceeds; protected/unclassifiable items need a
-						// live certificate for the settled instance (E3) or they hold and
-						// keep trying to place.
-						if (PlacementProtectionVerdict(currentBuilding.Item) == PlacementCancelVerdict.Allow
+						// E91BA74C/D831BBCB + Sonnet 666ddd0bd default-off fix: the limit
+						// cancel consults protection ONLY while the law is active AND the
+						// item is a protected (refinery) member — every other item cancels
+						// unconditionally exactly like master. A protected item needs a live
+						// certificate for the settled instance (E3) or it holds and keeps
+						// trying to place.
+						if (!ProtectionApplies(currentBuilding.Item)
 							|| CertificateAuthorizes(queue, currentBuilding.Item, currentBuilding))
 						{
 							// A966ED70 (E3): the order settles currentBuilding only when it is
@@ -1177,11 +1170,11 @@ namespace OpenRA.Mods.CA.Traits
 					if (refineryDefers)
 					{
 						// Maintainer ruling 2026-10-16: cancellation is permitted ONLY on a
-						// proven total-domain exhaustion — the tiered fallback enumerated every
-						// cell of the declared domain (provider squares under the distance law,
-						// or the whole map when no base-distance rejection applies) at the
-						// unrestricted tier and found none legal. Same cancel machinery as a
-						// saturation cancel, but never on a budget — only on that proof.
+						// proven total-domain exhaustion — the tiered fallback's TERMINAL
+						// pass enumerated the whole map unconditionally (provider squares
+						// serve the bounded tiers only, never the certificate) under the
+						// fully-relaxed bound and found no legal cell. Same cancel machinery
+						// as a saturation cancel, but never on a budget — only on that proof.
 						if (refineryExhausted)
 						{
 							// BF5B8247(c)/6722A484: the verdict alone is stale evidence — the
@@ -1222,11 +1215,13 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						AIUtils.BotDebug($"{player} has nowhere to place {currentBuilding.Item}");
 
-						// E91BA74C/D831BBCB: the saturation cancel gates on the shared verdict —
-						// proven cheap-fast proceeds; a protected or unclassifiable item needs a
-						// live exhaustion certificate or it holds (the latch snapshot and retry
-						// timer still arm, so recovery probes keep running while it waits).
-						if (PlacementProtectionVerdict(currentBuilding.Item) == PlacementCancelVerdict.Allow
+						// E91BA74C/D831BBCB + Sonnet 666ddd0bd default-off fix: the
+						// saturation cancel consults protection ONLY while the law is active
+						// AND the item is a protected (refinery) member — every other item
+						// cancels unconditionally exactly like master. A protected item needs
+						// a live exhaustion certificate or it holds (the latch snapshot and
+						// retry timer still arm, so recovery probes keep running while it waits).
+						if (!ProtectionApplies(currentBuilding.Item)
 							|| CertificateAuthorizes(queue, currentBuilding.Item, currentBuilding))
 						{
 							NotePendingTerminal(queue, currentBuilding, currentBuilding.Item, BotQueueTransitionKind.Cancelled,

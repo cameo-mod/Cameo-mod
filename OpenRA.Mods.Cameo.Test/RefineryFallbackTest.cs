@@ -868,6 +868,24 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void PlacementProtectionAppliesOnlyUnderActiveLawAndProtectedClass()
+		{
+			// Sonnet default-off defect (666ddd0bd): with EvaluatePlacementCancelProtection
+			// returning no Allow, an unconditional protection consult would need a certificate
+			// for EVERY item, flag or not — disabling relocation mass-cancel, limit-reached and
+			// saturation cancels for every class where master cancels unconditionally. The gate
+			// must be law-scoped AND class-scoped.
+			Assert.That(BaseBuilderQueueEvalCA.PlacementProtectionApplies(false, true), Is.False,
+				"law off + refinery member → master path (no certificate required)");
+			Assert.That(BaseBuilderQueueEvalCA.PlacementProtectionApplies(false, false), Is.False,
+				"law off + non-refinery → master path");
+			Assert.That(BaseBuilderQueueEvalCA.PlacementProtectionApplies(true, false), Is.False,
+				"law on + non-refinery → master path (no scan can ever certify it)");
+			Assert.That(BaseBuilderQueueEvalCA.PlacementProtectionApplies(true, true), Is.True,
+				"law on + refinery member → the exhaustion certificate is required");
+		}
+
+		[Test]
 		public void DemandCancelDispositionTable()
 		{
 			// F2 (Sol adjudication of 9d997eb58): the demand-unwind cancel seam —

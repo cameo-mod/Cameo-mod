@@ -396,10 +396,25 @@ namespace OpenRA.Mods.CA.Traits
 		/// REF-2 P1a (maintainer no-cancel class, 2026-10-16): the completed high-value items a
 		/// placement failure may never mass- or saturation-cancel without a proven total-domain
 		/// exhaustion — today the refinery class (the G3 ruling on radar/tech/war-factory scope
-		/// is pending Sol; cheap fast items like power/barracks still cancel as before).
+		/// is pending Sol). Membership alone does NOT gate anything: under
+		/// <see cref="PlacementProtectionApplies"/> the protection regime exists only while the
+		/// refinery law is active — every other item (law off, or a non-member) takes the
+		/// unconditional master cancel path.
 		/// </summary>
 		public static bool RetainedHighValueItem(IReadOnlyCollection<string> refineryTypes, string item) =>
 			refineryTypes.Contains(item);
+
+		/// <summary>
+		/// Sonnet adjudication of 666ddd0bd (default-off defect): the certificate requirement is
+		/// bounded by the refinery law — protection applies ONLY when the law is active AND the
+		/// item is a protected-class member. With the law off (or for a non-refinery item) the
+		/// relocation mass-cancel, limit-reached and saturation paths must behave exactly like
+		/// master, where those cancels are unconditional. World-free: the caller supplies the
+		/// law-active state (<c>RefineryLawProvider() != null</c>) and class membership
+		/// (<see cref="RetainedHighValueItem"/>).
+		/// </summary>
+		public static bool PlacementProtectionApplies(bool lawActive, bool protectedClassMember) =>
+			lawActive && protectedClassMember;
 
 		/// <summary>
 		/// HIGH-VALUE cancel protection (E91BA74C; shared seam per
