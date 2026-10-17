@@ -116,7 +116,7 @@ class FakeAdapter:
 		self.disk_free = 500 * GIB
 		self.fail_on: dict[str, bool] = {}
 		self.in_job_override: bool | None = None
-		self.id_series: deque[list[int]] | None = None
+		self.id_series: deque[list[tuple[int, int]]] | None = None
 		self.on_launch = None
 		self.private_calls: list[tuple[int, int]] = []
 		self.launched = False
@@ -640,7 +640,7 @@ class QualMonitorDeterministicTests(unittest.TestCase):
 		fake.fail_on["job_process_ids"] = True
 		code = monitor.run()
 		self.assertEqual(code, rqm.EXIT_HOLD)
-		self.assertTrue(monitor.job_terminated)
+		self.assertTrue(fake.job_terminated)
 
 	def test_d5_member_records_parent_and_creation(self):
 		"""D5 identity completeness: a discovered member must record BOTH its
@@ -803,7 +803,7 @@ class QualMonitorDeterministicTests(unittest.TestCase):
 						inner={"status": "COMPLETED", "exit_code": 0})
 		fake.on_launch = monitor.exit_root_on_launch(fake, 0)
 		# pop order: monitor-loop reconcile, clearance snap0, clearance snap1
-		fake.id_series = deque([[], [], [999_888]])
+		fake.id_series = deque([[], [], [(999_888, ROOT_CREATION_BASE + 999_888)]])
 		code = monitor.run()
 		receipt = json.loads(
 			(pathlib.Path(monitor.args.evidence_dir) / "monitor_status.json").read_text())

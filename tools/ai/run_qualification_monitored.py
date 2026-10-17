@@ -9,8 +9,9 @@ ledger, samples owned resources and host memory on a bounded cadence, writes
 append-only evidence, and proves member clearance with two spaced snapshots.
 It grants no authority: the grant file is operator-supplied intent, and
 ``execution_approved``-style fields are never emitted true. Windows 10+ only
-(PROC_THREAD_ATTRIBUTE_JOB_LIST requirement). run_capped.py itself is
-unchanged — this supervisor wraps it without modification.
+(job-object containment via suspended spawn + AssignProcessToJobObject).
+run_capped.py itself is unchanged — this supervisor wraps it without
+modification.
 
 Exit codes: 0 inner COMPLETED/0 + evidence complete + clearance proved;
 2 preflight refusal (incl. containment-launch failure before resume);
@@ -291,6 +292,8 @@ class Win32Adapter:
             wintypes.BOOL, wintypes.DWORD, ctypes.c_void_p, wintypes.LPCWSTR,
             ctypes.POINTER(_STARTUPINFOEXW), ctypes.POINTER(_PROCESS_INFORMATION)]
         k.CreateProcessW.restype = wintypes.BOOL
+        k.AssignProcessToJobObject.argtypes = [_HANDLE, _HANDLE]
+        k.AssignProcessToJobObject.restype = wintypes.BOOL
         k.InitializeProcThreadAttributeList.argtypes = [
             ctypes.c_void_p, wintypes.DWORD, wintypes.DWORD, ctypes.POINTER(ctypes.c_size_t)]
         k.InitializeProcThreadAttributeList.restype = wintypes.BOOL
@@ -408,23 +411,21 @@ class Win32Adapter:
         self, cmdline: str, job: _HANDLE, cwd: str | None,
         std_handles: tuple[_HANDLE, _HANDLE, _HANDLE],
     ) -> tuple[_HANDLE, _HANDLE, int]:
-        """CreateProcessW suspended with the job pre-assigned atomically (§3)."""
+        """CreateProcessW suspended, then AssignProcessToJobObject while the main
+        thread is still suspended: the child executes no user code before the
+        assignment, so the containment guarantee matches the §3 job-list design.
+        The JOB_LIST startup attribute is dropped because this host rejects
+        PROC_THREAD_ATTRIBUTE_JOB_LIST with win32 error 50 in both contexts."""
         size = ctypes.c_size_t(0)
-        self.kernel32.InitializeProcThreadAttributeList(None, 2, 0, ctypes.byref(size))
+        self.kernel32.InitializeProcThreadAttributeList(None, 1, 0, ctypes.byref(size))
         if size.value == 0:
             raise AdapterError("InitializeProcThreadAttributeList reported zero size")
         attr_buf = ctypes.create_string_buffer(size.value)
         try:
             self._check(
                 self.kernel32.InitializeProcThreadAttributeList(
-                    attr_buf, 2, 0, ctypes.byref(size)),
+                    attr_buf, 1, 0, ctypes.byref(size)),
                 "InitializeProcThreadAttributeList")
-            job_value = ctypes.c_void_p(job)
-            self._check(
-                self.kernel32.UpdateProcThreadAttribute(
-                    attr_buf, 0, PROC_THREAD_ATTRIBUTE_JOB_LIST,
-                    ctypes.byref(job_value), ctypes.sizeof(job_value), None, None),
-                "UpdateProcThreadAttribute(JOB_LIST)")
             handle_array = (_HANDLE * 3)(*std_handles)
             self._check(
                 self.kernel32.UpdateProcThreadAttribute(
@@ -444,10 +445,19 @@ class Win32Adapter:
                     None, mutable_cmdline, None, None, True,
                     CREATE_SUSPENDED | EXTENDED_STARTUPINFO_PRESENT,
                     None, cwd, ctypes.byref(si), ctypes.byref(pi)),
-                "CreateProcessW(job-list)")
-            return pi.hProcess, pi.hThread, int(pi.dwProcessId)
+                "CreateProcessW(suspended)")
         finally:
             self.kernel32.DeleteProcThreadAttributeList(attr_buf)
+        try:
+            self._check(
+                self.kernel32.AssignProcessToJobObject(job, pi.hProcess),
+                "AssignProcessToJobObject(root)")
+        except AdapterError:
+            self.kernel32.TerminateProcess(pi.hProcess, 1)
+            self.kernel32.CloseHandle(pi.hThread)
+            self.kernel32.CloseHandle(pi.hProcess)
+            raise
+        return pi.hProcess, pi.hThread, int(pi.dwProcessId)
 
     def resume_thread(self, thread: _HANDLE) -> None:
         if self.kernel32.ResumeThread(thread) == 0xFFFFFFFF:
@@ -878,7 +888,7 @@ class Monitor:
 
     def _create_containment(self) -> None:
         if not hasattr(sys, "getwindowsversion") or sys.getwindowsversion().major < 10:
-            raise AdapterError("job-list attribute requires Windows 10 or later")
+            raise AdapterError("job-object containment requires Windows 10 or later")
         (self._supervisor_pid, self._supervisor_creation,
          self._supervisor_in_job) = self.win32.supervisor_identity()
         jit = self.args.jit_id.replace("/", "_").replace("\\", "_")
@@ -1554,7 +1564,8 @@ class Monitor:
         """Write the atomic receipt and return the FINAL disposition — callers
         must derive the exit code from the returned value, since post-run
         checks here (tool-hash drift) can downgrade a computed COMPLETED."""
-        for name, path in ((n, Path(n) if os.path.isabs(n) else repo_root / n)
+        for name, path in ((n, Path(__file__).resolve() if n == "__self__"
+                             else Path(n) if os.path.isabs(n) else repo_root / n)
                            for n in self.tool_hashes_pre):
             try:
                 self.tool_hashes_post[name] = sha256_file(path)
