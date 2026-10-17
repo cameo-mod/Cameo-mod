@@ -704,6 +704,10 @@ namespace OpenRA.Mods.CA.Traits
 			// A producer that left FindQueues (disabled or destroyed) must not keep a stale starvation run.
 			cashClock.Retain(sweptProducers);
 
+			// E1 observational slice: drop reservations whose producer died/left/changed owner.
+			// Observational only — releases ledger entries, never world state (flag-gated inside).
+			baseBuilder.StorageObservationReconcile();
+
 			// TF-2 F2: the sweep-end flush — a producer that left FindQueues (destroyed or
 			// disabled) can never reconcile, so its tracked items settle here once instead of
 			// holding the floor forever. The live set spans EVERY building+defense category:
@@ -880,7 +884,22 @@ namespace OpenRA.Mods.CA.Traits
 
 				baseBuilder.RecordOpeningStructureQueued(queue, item);
 				baseBuilder.BuildOrderKnobs?.NotifyQueued(item.Name);
-				bot.QueueOrder(Order.StartProduction(queue.Actor, item.Name, 1));
+
+				// E1 observational slice (lead-accepted, observational ONLY): for storage-capable
+				// items record the commitment and emit the would-be verdict — a refused-looking
+				// verdict still emits identically; nothing here gates the order. The reservation
+				// binds to the exact order instance via IBotOrderTracking when the bot offers it
+				// (Cameo ModularBot); otherwise it stays pending untracked — conservative either
+				// way, see StorageAdmissionObservation for the permanent double-count contract.
+				var storageReservation = baseBuilder.StorageAdmissionObserving
+					? baseBuilder.StorageObservation.ObserveEmitting(world, playerResources, queue, item.Name, cost, baseBuilder.Info)
+					: null;
+				var produceOrder = Order.StartProduction(queue.Actor, item.Name, 1);
+				if (storageReservation == null || !(bot is IBotOrderTracking tracking && tracking.QueueOrderTracked(produceOrder, storageReservation)))
+					bot.QueueOrder(produceOrder);
+
+				if (storageReservation != null)
+					baseBuilder.StorageObservation.NoteEmitted(storageReservation, world.WorldTick);
 
 				queuedAt[queue.Actor.ActorID] = (item.Name, world.WorldTick);
 				if (demandPick.Demand != null)
