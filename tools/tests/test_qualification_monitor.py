@@ -36,6 +36,7 @@ import json
 import pathlib
 import sys
 import tempfile
+import threading
 import time
 import unittest
 import unittest.mock
@@ -83,6 +84,24 @@ class FakeEvent:
 
 	def is_set(self) -> bool:
 		return self._set
+
+
+class NoopEvent:
+	"""Broken spacing timer: wait() returns without advancing the clock.
+	Used to prove the realized-gap check fails closed when no real time
+	passage is possible."""
+
+	def wait(self, seconds: float) -> bool:
+		return False
+
+	def set(self) -> None:
+		pass
+
+	def clear(self) -> None:
+		pass
+
+	def is_set(self) -> bool:
+		return False
 
 
 class FakeProcess:
@@ -439,6 +458,7 @@ def build(tmp: pathlib.Path, fake: FakeAdapter, clock: FakeClock,
 	monitor.inner_override = inner
 	monitor.fail_writer_after = fail_writer_after
 	monitor._pace = FakeEvent(clock, advance_min=pace_min)
+	monitor._spacing = FakeEvent(clock)
 	return monitor
 
 
@@ -942,6 +962,106 @@ class QualMonitorDeterministicTests(unittest.TestCase):
 		self.assertGreaterEqual(
 			clearance[1]["mono"] - clearance[0]["mono"],
 			rqm.MIN_CLEARANCE_SPACING_SECONDS)
+
+	def test_d7_clearance_spacing_survives_notification_storm_real_timer(self):
+		"""Real clock + real events: a notification storm on the shared _pace
+		must not shorten the realized clearance gap — the spacing wait rides
+		a dedicated event nothing else sets."""
+		fake = FakeAdapter()
+		monitor = prep_state(
+			TestMonitor(make_args(self.tmp), adapter=fake), fake, self.tmp)
+		monitor._pace = threading.Event()
+		monitor._spacing = threading.Event()
+		monitor._pace.set()  # pre-set, as terminal job packets leave it
+		stop = threading.Event()
+
+		def storm():
+			while not stop.is_set():
+				monitor._pace.set()
+				time.sleep(0.005)
+
+		thread = threading.Thread(target=storm, daemon=True)
+		thread.start()
+		try:
+			wall_start = time.monotonic()
+			with unittest.mock.patch.object(
+					rqm, "MIN_CLEARANCE_SPACING_SECONDS", 0.4):
+				result = monitor._clearance(0.4, 30)
+			wall_delta = time.monotonic() - wall_start
+		finally:
+			stop.set()
+			thread.join()
+		self.assertTrue(result)
+		self.assertGreaterEqual(wall_delta, 0.4)
+		snaps = [r for r in read_jsonl(
+			self.tmp / "evidence_method" / "clearance_censuses.jsonl")
+			if r.get("kind") == "clearance"]
+		self.assertEqual(len(snaps), 2)
+		self.assertGreaterEqual(snaps[1]["mono"] - snaps[0]["mono"], 0.4)
+
+	def test_d7_clearance_spacing_floor_real_5s_timer(self):
+		"""Real timer at the production floor: under a _pace notification
+		storm the realized gap still honors MIN_CLEARANCE_SPACING_SECONDS."""
+		fake = FakeAdapter()
+		monitor = prep_state(
+			TestMonitor(make_args(self.tmp), adapter=fake), fake, self.tmp)
+		monitor._pace = threading.Event()
+		monitor._spacing = threading.Event()
+		monitor._pace.set()
+		stop = threading.Event()
+
+		def storm():
+			while not stop.is_set():
+				monitor._pace.set()
+				time.sleep(0.005)
+
+		thread = threading.Thread(target=storm, daemon=True)
+		thread.start()
+		try:
+			wall_start = time.monotonic()
+			result = monitor._clearance(1, 60)
+			wall_delta = time.monotonic() - wall_start
+		finally:
+			stop.set()
+			thread.join()
+		self.assertTrue(result)
+		self.assertGreaterEqual(wall_delta, rqm.MIN_CLEARANCE_SPACING_SECONDS)
+		snaps = [r for r in read_jsonl(
+			self.tmp / "evidence_method" / "clearance_censuses.jsonl")
+			if r.get("kind") == "clearance"]
+		self.assertEqual(len(snaps), 2)
+		self.assertGreaterEqual(
+			snaps[1]["mono"] - snaps[0]["mono"],
+			rqm.MIN_CLEARANCE_SPACING_SECONDS)
+
+	def test_d7_clearance_fails_closed_when_realized_gap_short(self):
+		"""A spacing timer that cannot advance time must fail closed: the
+		realized-gap check HOLDs even when both censuses are clean —
+		asserted at _clearance level and on the full run() path."""
+		fake, clock = FakeAdapter(), FakeClock()
+		monitor = prep_state(build(self.tmp, fake, clock), fake, self.tmp)
+		monitor._spacing = NoopEvent()
+		self.assertFalse(monitor._clearance(5, 60))
+		self.assertTrue(any(
+			reason.startswith("clearance spacing")
+			for reason in monitor.hold_reasons))
+		snaps = [r for r in read_jsonl(
+			self.tmp / "evidence_method" / "clearance_censuses.jsonl")
+			if r.get("kind") == "clearance"]
+		self.assertEqual(len(snaps), 2)
+		self.assertTrue(all(r["clear"] for r in snaps))
+
+		fake2, clock2 = FakeAdapter(), FakeClock()
+		monitor2 = build(self.tmp, fake2, clock2,
+						 inner={"status": "COMPLETED", "exit_code": 0})
+		monitor2._spacing = NoopEvent()
+		fake2.on_launch = monitor2.exit_root_on_launch(fake2, 0)
+		code = monitor2.run()
+		receipt = json.loads(
+			(pathlib.Path(monitor2.args.evidence_dir)
+			 / "monitor_status.json").read_text())
+		self.assertEqual(receipt["disposition"], "HOLD")
+		self.assertEqual(code, rqm.EXIT_HOLD)
 
 	def test_d7_unknown_live_job_member_defeats_clearance(self):
 		"""A job member the ledger never saw must defeat certification —

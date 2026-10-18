@@ -726,6 +726,8 @@ class Monitor:
         self._notify_lock = threading.Lock()
         self._event_stop = threading.Event()
         self._pace = threading.Event()
+        # Dedicated clearance-spacing timer; nothing may ever set() it.
+        self._spacing = threading.Event()
         self.tool_hashes_pre: dict[str, str] = {}
         self.tool_hashes_post: dict[str, str] = {}
         self._child_handles: list[_HANDLE] = []
@@ -1191,6 +1193,15 @@ class Monitor:
                 "utc": utc_now()})
         return snap
 
+    def _wait_spacing(self, target_mono: float) -> None:
+        # Bounded retries on purpose: a broken wait must not hang; the
+        # realized-gap check in _clearance fails closed instead.
+        for _ in range(3):
+            remaining = target_mono - self.mono()
+            if remaining <= 0:
+                return
+            self._spacing.wait(remaining)
+
     def _clearance(self, spacing_seconds: float, timeout_seconds: float) -> bool:
         """Two owned snapshots ≥ spacing apart, both clear (design §5)."""
         self.job_sealed = True
@@ -1199,14 +1210,17 @@ class Monitor:
         snapshots = []
         for index in (0, 1):
             if index == 1:
-                wait = spacing - (self.mono() - snapshots[0]["mono"])
-                if wait > 0:
-                    self._pace.wait(wait)
-                    self._pace.clear()
+                self._wait_spacing(snapshots[0]["mono"] + spacing)
             if self.mono() > deadline:
                 self.hold_reasons.append("clearance timeout exceeded")
                 return False
             snapshots.append(self._clearance_snapshot(index))
+        if snapshots[1]["mono"] < snapshots[0]["mono"] + spacing:
+            self.hold_reasons.append(
+                f"clearance spacing "
+                f"{snapshots[1]['mono'] - snapshots[0]['mono']:.3f}s "
+                f"below required {spacing:.3f}s")
+            return False
         if not all(s["clear"] for s in snapshots):
             self.hold_reasons.append("clearance snapshot(s) not clear")
             return False
