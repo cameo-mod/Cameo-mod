@@ -1,0 +1,181 @@
+World:
+	LuaScript:
+		Scripts: test.lua
+	-CrateSpawner:
+	-SpawnStartingUnits:
+	-MapStartingLocations:
+	MapOptions:
+		ShortGameEnabled: False
+
+Player:
+	-ConquestVictoryConditions:
+Shroud:
+	FogCheckboxEnabled: False
+	ExploredMapCheckboxEnabled: True
+PlayerResources:
+	DefaultCash: 0
+
+# Occupants. Both stance fields are pinned because non-playable owners take
+# InitialStanceAI, which defaults to AttackAnything.
+fixture_rifle_defend:
+	Inherits: naxis_naxiriflesoldier
+	Tooltip:
+		Name: Fixture Rifle (Defend)
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: Defend
+
+fixture_rifle_holdfire:
+	Inherits: naxis_naxiriflesoldier
+	Tooltip:
+		Name: Fixture Rifle (HoldFire)
+	AutoTarget:
+		InitialStance: HoldFire
+		InitialStanceAI: HoldFire
+
+# C1/C2 host: civilian Garrisonable-route host (IFirePortOccupantProvider roster).
+fixture_civ_defend:
+	Inherits: V20
+	Tooltip:
+		Name: Fixture Garrison (Defend)
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: Defend
+	Garrisonable:
+		InitialUnits: fixture_rifle_defend, fixture_rifle_defend
+	AttackGarrisoned:
+		LogFireDiagnostics: true
+
+# CTL host: identical route, HoldFire occupants must stay silent.
+fixture_civ_holdfire:
+	Inherits: V20
+	Tooltip:
+		Name: Fixture Garrison (HoldFire)
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: Defend
+	Garrisonable:
+		InitialUnits: fixture_rifle_holdfire, fixture_rifle_holdfire
+	AttackGarrisoned:
+		LogFireDiagnostics: true
+
+# C3 host: Cargo-route bunker host (Cargo.Passengers roster) that also carries a
+# second AttackBase (AttackTurreted) with no active armaments.
+fixture_bunker_defend:
+	Inherits: naxis_naxibunker
+	Tooltip:
+		Name: Fixture Bunker (Defend)
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: Defend
+	Cargo:
+		InitialUnits: fixture_rifle_defend, fixture_rifle_defend
+	AttackGarrisoned:
+		LogFireDiagnostics: true
+
+# Panzerfaust occupant (anti-vehicle armament) for the ranged-AT coverage cell.
+fixture_panzer_defend:
+	Inherits: naxis_panzerfausttrooper
+	Tooltip:
+		Name: Fixture Panzerfaust (Defend)
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: Defend
+
+# Occupant AutoTarget present but condition-disabled: the host AutoTarget must
+# drive scanning and the shot must still fire (disabled-AT fallback, positive).
+fixture_rifle_noat:
+	Inherits: naxis_naxiriflesoldier
+	Tooltip:
+		Name: Fixture Rifle (Occupant AT disabled)
+	AutoTarget:
+		RequiresCondition: never
+		InitialStance: Defend
+		InitialStanceAI: Defend
+
+# Melee slave: occupant AutoTarget is freed-gated (disabled while unfreed) and
+# its garrisoned armament is RA2Shovel (range 1500). Both the disabled-AT scan
+# fallback and the no-fire control are exercised by the same cell.
+fixture_slave:
+	Inherits: naxis_slave
+	Tooltip:
+		Name: Fixture Slave (melee, AT disabled)
+
+# C4 host: panzerfaust occupants on the Garrisonable route.
+fixture_civ_panzer:
+	Inherits: V20
+	Tooltip:
+		Name: Fixture Garrison (Panzerfaust)
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: Defend
+	Garrisonable:
+		InitialUnits: fixture_panzer_defend, fixture_panzer_defend
+	AttackGarrisoned:
+		LogFireDiagnostics: true
+
+# C5 host: disabled occupant AT must fall back to the host scan and still fire.
+fixture_civ_noat:
+	Inherits: V20
+	Tooltip:
+		Name: Fixture Garrison (Occupant AT disabled)
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: Defend
+	Garrisonable:
+		InitialUnits: fixture_rifle_noat, fixture_rifle_noat
+	AttackGarrisoned:
+		LogFireDiagnostics: true
+
+# C6 host: slave occupants; fallback scan may run but melee arms can never be
+# eligible at range, so zero fire is the pass condition.
+fixture_civ_slave:
+	Inherits: V20
+	Tooltip:
+		Name: Fixture Garrison (Slave melee)
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: Defend
+	Garrisonable:
+		InitialUnits: fixture_slave, fixture_slave
+	AttackGarrisoned:
+		LogFireDiagnostics: true
+
+# C7 host: spawns empty; Lua LoadGarrisoner boards rifle occupants mid-game so
+# the live-bind (INotifyPassengerEntered) path is observed rather than only
+# the load-time InitialUnits path.
+fixture_civ_empty:
+	Inherits: V20
+	Tooltip:
+		Name: Fixture Garrison (Live board)
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: Defend
+	AttackGarrisoned:
+		LogFireDiagnostics: true
+
+# Autonomous-eligible target: Vehicle is in the ^AutoTargetAll Defend priority
+# set and Ground satisfies the rifle weapon's ValidTargets.
+fixture_target:
+	Immobile:
+	HiddenUnderShroud:
+		AlwaysVisibleRelationships: Ally, Neutral, Enemy
+	BodyOrientation:
+		QuantizedFacings: 0
+	ScriptTriggers:
+	Health:
+		HP: 1000000
+	Armor:
+		Type: Medium
+	Targetable:
+		TargetTypes: Ground, Vehicle
+	HitShape:
+		Type: Circle
+			Radius: 1
+
+# Order-only target: Structure is absent from the Defend priority set, so
+# autonomous scans can never select it; only a requested target can fire on it.
+fixture_target_structure:
+	Inherits: fixture_target
+	Targetable:
+		TargetTypes: Ground, Structure
