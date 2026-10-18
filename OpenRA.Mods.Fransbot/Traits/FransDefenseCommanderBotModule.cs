@@ -54,6 +54,21 @@ namespace OpenRA.Mods.Common.Traits
 		public readonly FrozenSet<string> WallKeepClearBuildingTypes =
 			FrozenSet<string>.Empty;
 
+		// Mounted role evidence for FransPlacementCancelGuard. Evidence only — the
+		// protected-vs-cheap-fast policy decision lives in the shared CA helper
+		// BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection (Developer-owned).
+		// WallKeepClearBuildingTypes already names the traffic-sensitive protected
+		// class (factories/refineries/naval) for this surface; the commander's own
+		// defense/wall productions are the cheap-fast role evidence.
+		FrozenSet<string> protectedCancelRoleTypes;
+		FrozenSet<string> cheapFastCancelRoleTypes;
+
+		public IReadOnlyCollection<string> ProtectedCancelRoleTypes => protectedCancelRoleTypes ??=
+			ConstructionYardTypes.Union(WallKeepClearBuildingTypes).ToFrozenSet();
+
+		public IReadOnlyCollection<string> CheapFastCancelRoleTypes => cheapFastCancelRoleTypes ??=
+			DefenseTypes.Union(GroundDefenseTypes).Union(AntiAirDefenseTypes).Union(WallTypes).ToFrozenSet();
+
 		[Desc("RA production queue categories exclusively used by this commander for static defense/wall items. Covers US/UK spellings and per-faction defense queues (e.g. RADefence) so the list survives mods that split queues per faction.")]
 		public readonly FrozenSet<string> DefenseQueueCategories = new HashSet<string> { "Defense", "Defence", "RADefence" }.ToFrozenSet();
 
@@ -921,10 +936,25 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			if (pendingCancelIssued)
 				return;
+
+			// The owned pending item binds FIRST-by-name; the engine removes the LAST
+			// same-name entry. Issue only when they coincide and the shared protection
+			// policy permits; on hold the pending record stays so the cancel is retried.
+			var intended = queue?.AllQueued().FirstOrDefault(item => item.Item == pendingDefenseType);
+			if (!FransPlacementCancelGuard.TryIssue(bot, queue, pendingDefenseType, intended,
+					FransPlacementCancelGuard.CancelPermitted(world, queue, pendingDefenseType,
+						Info.ProtectedCancelRoleTypes, Info.CheapFastCancelRoleTypes),
+					out var hold) && hold != FransPlacementCancelGuard.FransCancelHold.None)
+			{
+				FransBotLog.BotDebug(world,
+					"{0}: DefenseCommander pending cancel of {1} held by placement-cancel guard ({2}): {3}.",
+					player, pendingDefenseType, hold, reason);
+				return;
+			}
+
 			pendingCancelIssued = true;
 			FransBotLog.BotDebug(world,
 				"{0}: DefenseCommander cancels only its owned {1}: {2}.", player, pendingDefenseType, reason);
-			bot.QueueOrder(Order.CancelProduction(queue.Actor, pendingDefenseType, 1));
 		}
 
 		void ClearPendingDefense()
