@@ -35,6 +35,8 @@ namespace OpenRA.Mods.CA.Traits.Render
 		public WithActivateAnimation(Actor self, WithActivateAnimationInfo info)
 			: base(info)
 		{
+			// Conditions aren't applied yet during construction: IsTraitDisabled reads
+			// "has RequiresCondition", so this prefers an unconditional instance.
 			wsb = self.TraitsImplementing<WithSpriteBody>().FirstOrDefault(w => !w.IsTraitDisabled && w.Info.Name == Info.Body)
 				?? self.TraitsImplementing<WithSpriteBody>().First(w => w.Info.Name == Info.Body);
 		}

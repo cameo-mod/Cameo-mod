@@ -1,3 +1,45 @@
+# 2026-10-13 — Devin: P4-CLASSRE-RELAND (01a136a5) — nesting-aware CLASS_RE on current master
+
+*Devin.* Reland of the preserved `devin/t2verify/sweep-p4` dirty-state payload
+(queued P4 from the multi-TraitInfo sweep re-review APPROVE) on
+`devin/01a136a5-classre-reland` off `f69ad731a`. ref1 worktree untouched —
+payload recreated from its preserved diffs; claim re-verified at head
+(engine pin `ad061ebf7`).
+
+- **`CLASS_RE` generic-params group** was greedy through the LAST `>`: for a
+  class whose base list itself has generics, e.g.
+  `PausableConditionalTrait<InfoType> : ConditionalTrait<InfoType>`, the
+  "parameters" group swallowed `InfoType> : ConditionalTrait<InfoType` and the
+  match completed with no base capture — the `supers` graph silently lost the
+  edge, so `Trait<ConditionalTrait>`-style closures under-counted
+  PausableConditionalTrait instances. The group now accepts one level of
+  `<...>` nesting (`<[^<>{};]*(?:<[^<>{};]*>[^<>{};]*)*>`), closing at the
+  FIRST balanced `>` — chosen over the flat `[^<>{};]` variant because
+  attribute-style generic arguments in the parameter list stay parseable.
+- **Differential parse re-run at head** (old vs nesting-aware on the full
+  engine+mod C# tree): **10 engine declarations recover their bases**
+  (draft claimed 9 on `inc/2026_10_05`; the +1 is source churn —
+  PausableConditionalTrait → ConditionalTrait in OpenRA.Mods.Common plus
+  CellLayer/ProjectedCellLayer → CellLayerBase, CellLayerBase → IEnumerable,
+  Cache/ConcurrentCache → IReadOnlyDictionary, ObservableSortedDictionary →
+  ObservableDictionary, PriorityQueue → IPriorityQueue, RingBuffer →
+  ICollection+IEnumerable, SpatiallyPartitioned → IDictionary in OpenRA.Game).
+  The flat `[^<>{};]` and nesting variants produce an identical type model on
+  today's tree — the nesting headroom is for future declarations only.
+  Full audit: **1014 single-instance lookups scanned, 0 dangerous — PASS**
+  (was 983/0 at draft time; the +31 sites are mod source growth, all still
+  safe). The recovered edges land in already-multi-capable families.
+- **ctor/Created-site comments:** at trait-construction and `INotifyCreated`
+  time conditions are not applied yet (`ConditionalTrait` ctor sets
+  `IsTraitDisabled = RequiresCondition != null`; `ConditionConsumers` runs
+  after INotifyCreated), so the enabled-first filter reads "has no
+  RequiresCondition". Comments at the three `With*Animation` ctors and
+  `AttachableTo.Created` now say the filter "prefers an unconditional
+  instance". Runtime sites keep the true disabled semantic and need no note.
+- Known parse artifact (pre-existing, unchanged): base lists containing
+  multi-argument generics split on the inner comma, so a few recovered edges
+  carry a `U>`/`TValue>`/`Rectangle>` tail token — harmless, no declared type
+  matches such a name; both regex variants produce identical noise.
 # 2026-10-14 — Devin: SENTINEL-RUNNER-POLICY (01a13a15) — post-freeze defect repair, fixture binding
 
 *Devin-Developer.* Self-inflicted defect found while preparing the qualification
