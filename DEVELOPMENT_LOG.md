@@ -40,6 +40,226 @@ payload recreated from its preserved diffs; claim re-verified at head
   multi-argument generics split on the inner comma, so a few recovered edges
   carry a `U>`/`TValue>`/`Rectangle>` tail token — harmless, no declared type
   matches such a name; both regex variants produce identical noise.
+# 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U2 EB513352 fix-forward `229cfc8c2`
+
+*Devin-Developer.* Sol static HOLD `EB513352` on `645543846`, blocking F1: the
+intent ledger's coverage-retaining semantics ran unconditionally — under
+`FairProducerService=false` a successful external emission left `EmittedPending`
+counted forever, so `HarvesterBotModuleCA`'s `RequestedProductionCount == 0`
+gate suppressed replacement after the produced harvester died (Engineer, Scout,
+ExpansionPlanner MCV and bridge-repair requesters share the gate). The accepted
+conservative partial-U2 direction never authorized global activation.
+
+**Fix-forward `229cfc8c2`** (same approved four-file fileset, stacked on
+`429a05cc6`):
+
+- **Distinct default-off control** — `UnitBuilderBotModuleCAInfo.BuildIntentTracking`
+  (SwitchCondition-gated, default `false`), exposed as `IntentTracking` —
+  separate from `FairProducerService`. OFF reproduces the pre-U2 module
+  byte-identically: `BuildIntentLedger` remains the single store but a
+  successful emission calls `NoteEmitted(intent, retainCoverage: false)` → the
+  intent is removed and the order routes plain `QueueOrder` — request removal,
+  `RequestedProductionCount` (live Waiting names only) and the
+  `QueuedBuildRequests` save node are exactly the legacy shape, under either
+  fair-service branch. No bindings, no tracked enqueue, no `PendingBuildIntents`
+  node from live traffic.
+- **Armed-save → off-load policy, explicit** — `PendingBuildIntents` loads
+  `Unresolved` in EITHER mode: counts once (a possibly-reconstructed commitment
+  is never re-requested), never becomes Waiting (no silent reissue), and is
+  re-saved as `PendingBuildIntents` rather than migrated into the legacy node.
+  No post-armed parity claimed.
+- **Enabled-mode liveness limitation, explicit** — `Info` desc + ledger type
+  block state it: no produced/death settlement exists in this slice, so a
+  delivered unit that later dies leaves its intent counted and replacement
+  re-request may stay suppressed — the accepted bound of the experimental
+  slice, NOT repaired harvester/MCV recovery and NOT complete U2. No timeout,
+  no issued=delivered shortcut.
+- **StartProduction-only tracking** (nonblocking bound) —
+  `BotOrderDispositionTracker.Register` refuses any `OrderString !=
+  TrackedOrderString` ("StartProduction"); `IBotOrderTracking` doc narrows the
+  supported contract to the accepted first scope. Refused kinds fall back to
+  plain `QueueOrder`.
+
+**Receipts.** Release build 0 warnings/0 errors; focused+adjacent 132/132
+(`BuildIntentLedgerTest` 23 incl. 6 new mode-boundary cases driving
+`NoteEmitted` — off-emit consume/count boundary, re-request cycle, on-emit
+retention, armed-save→off-load Unresolved, legacy-node load-then-consume,
+non-StartProduction refusal — plus `UnitProducerServiceTest`,
+`HarvesterLogisticsTest`, `EngineerBotModuleTest`,
+`ExpansionPlannerBotModuleTest`, `BridgeRepairBotModuleTest`, `BotOrderGateTest`,
+`CapturerLimitTest`). No runtime/merge/push/qualification/JIT/A/B.
+
+# 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U2 local disposition seam `645543846`
+
+*Devin-Developer.* First U2 slice under Coordinator fileset claim `01a148b8`,
+stacked on `988e84cb5`: the narrow local order-disposition routing + the
+request-intent ledger — scoped to what Sol `0CB8EF18` accepted and `6919D6E4`
+corrected. NO `DeadLoadLoss`: engine `723f50f9` is an order-reconstruction
+save system (recorded `StartProduction` packets replay before supplementary
+trait data), so uncertain issued intents stay `Unresolved` with coverage
+withheld forever — never released on assumed loss, never re-requested.
+
+**`TraitsInterfaces.cs`** — `BotOrderOutcome` (LocallyQueued/Deferred/
+RefusedLocally/IssuedToWorld; IssuedToWorld is routing release, NOT
+acceptance/insertion/completion), `IBotOrderDisposition` (record-only sink),
+`IBotOrderTracking` (register-before-evict, grouped orders refused).
+
+**`ModularBot.cs`** — `BotOrderDispositionTracker` world-free seam (reference
+identity — `Order` has no `Equals` override; `TryAdd` refuses observer
+overwrite) + the four verified seams: overflow drop → `RefusedLocally`,
+enqueue → `LocallyQueued`, gate refusal → `RefusedLocally`, budget deferral →
+`Deferred`, `world.IssueOrder` → `IssuedToWorld`. Terminal outcomes consume
+the registration. Unregistered traffic byte-identical.
+
+**`UnitBuilderBotModuleCA.cs`** — `queuedBuildRequests` replaced by
+`BuildIntentLedger` (Waiting/EmittedPending/Unresolved — every state counts
+once in `RequestedProductionCount`). Emitted intents keep coverage instead of
+vanishing at emit; `RefusedLocally` returns to Waiting; `PendingBuildIntents`
+save node (only when non-empty) loads everything as `Unresolved`; legacy
+`QueuedBuildRequests` strings migrate into Waiting once. A non-tracking bot
+falls back to plain `QueueOrder` — intent stays honestly pending.
+
+**Receipts.** Release build 0/0; focused+adjacent 89/89 (17 new tests driving
+the used ledger/bindings/tracker objects in production call order — FIFO/gate
+mechanics remain static call-site evidence). No runtime/merge/qualification.
+
+# 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U1 static PASS `700E3B45`
+
+*Devin-Developer.* Sol issued targeted static PASS `700E3B45` on
+`988e84cb5` (`DISPOSITION_2026-10-17_u1_988e84cb5_sol.md` in the fleet
+drop); Reviewer `ABAA42AC` independently closed the aircraft gate. All Sol
+code-review blockers for the bounded fair-service substage are closed —
+this is source-stage acceptance only: no merge/push, activation, default
+change, games/JIT, or runtime qualification authority was granted.
+
+**Nonblocking notes** (opportunistic, no amendment cycle required): the
+fixture exercises the used `PendingAircraftDelta` seam rather than the
+module's complete external transition, and the cap-minus-one assertion
+uses a constant expression. Residual bounds stand as recorded below —
+owned-alive headroom only, never-armed-save byte identity, ordinals ≠
+capture continuity, `CombatInfantryFloor` unaccepted.
+
+# 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U1 ECAFF220 successor `988e84cb5`
+
+*Devin-Developer.* Successor fix-forward answering Sol's `ECAFF220` HOLD on
+`388964c41` (closed: shared batch + affordability retry).
+
+**Residual fixed.** The fair external `BuildUnit` path now passes the SAME
+ordinary aircraft admission before emit — `ShouldBuild` does not air-check,
+so a capped external aircraft (or two external names sharing one headroom
+unit) could still emit. `UnitProducerServiceCA.PendingAircraftDelta` is the
+single class-delta seam: air-to-air vs other-aircraft under
+`MaintainAirSuperiority`, shared by the external gate and the category fill
+— emission increments remain after-admission only.
+
+**Scope notes recorded per Sol.** `LimitHeadroomAdmits` preserves the legacy
+owned-alive census — pre-existing queued items are NOT counted (no committed-
+ceiling claim; a total live+queued+pending ceiling is a different cap
+definition). Conditional `ServiceCursors` gives off-from-clean-start byte
+identity, not unconditional equality after an armed save loads. Sibling
+ordinal keys distinguish current enumeration; they do not prove
+capture/replacement continuity. `CombatInfantryFloor` remains default-0
+unaccepted policy — explicitly no P4-completion claim.
+
+**Receipts.** Focused+adjacent 70/70 (4 new aircraft-delta tests driving the
+same method both call sites use); Release build clean on mod sources — the 9
+warnings are pre-existing engine StyleCop in upstream files. No merge/push/
+runtime.
+
+
+# 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U1 fix-forward + P4 combat-demand floor
+
+*Devin-Developer.* Fix-forward on `devin/01a14504-u1-fair-service` answering Sol's
+static HOLD `82530D80` on `1db49c059`, plus the paired P4 combat-demand piece.
+Same claim, same worktree, no merge/push/runtime.
+
+**Sol F1 — one ephemeral batch.** `ProducerServiceBatch` (new, in
+`BotModuleLogic/UnitProducerServiceCA.cs`) is created at the top of each
+`BotTick` decision pass and shared by the external-request scan and every
+category visit: producer slots (keyed by queue *instance*), the reserved bank,
+per-name `UnitLimits` headroom, aircraft/air-to-air and capturer pending counts.
+The external path now requires capability AND a batch-free slot AND a
+batch-affordable cost together — the batch is discarded per pass, so nothing
+durable pre-empts the U2 ledger.
+
+**Sol F2 — affordability retries.** An unaffordable pick is rejected into the
+per-queue skip set so the bounded search tries cheaper feasible candidates
+instead of ending the fill.
+
+**Sol F3 — byte-identical-off + sibling identity.** `ServiceCursors` is emitted
+only when the armed path actually examined a producer — flag-off saves carry no
+new node. Same-actor/same-type sibling queues get an ordinal key suffix
+(`actorID|type|N`) so service is keyed per queue instance; a stale cursor still
+resumes at the documented first key.
+
+**P4 combat-infantry floor.** New `CombatInfantryFloor` field (default 0,
+requires fair service): while alive armed infantry are below the floor an
+infantry-capable queue prefers the armed-infantry candidate with the best
+combat value per cost (DerivedUnitStrength / GetProductionCost, ordinal-name
+tiebreak) — engineers/capturers/support/slaved units are excluded by the
+`IsArmedInfantry` census definition, in-pass emissions count toward the floor,
+all ordinary gates still apply after the preference, and floor rejections are
+observable as `"combat_floor"`. External infantry emissions count toward the
+same batch.
+
+**Tests — real seam, not arithmetic.** The new fixture tests drive
+`ProducerServiceBatch` across simulated call sites (external-then-category
+visibility, per-instance sibling slots, per-pass ephemerality, shared headroom
+map) — the used object itself. 66/66 (60 prior + floor/batch additions);
+Release build 0/0.
+
+**Open.** Await reviewer disposition on the fix-forward chain. Feature stays
+default-off and unqualified — no "included" claim. U2 lifecycle, runtime
+launch, merge and A/B remain unauthorized.
+
+
+# 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U1 fair producer service, first slice
+
+*Devin-Developer.* Controlled claim handoff executed after Reviewer `6576989D`
+confirmed the P1a chain (`ec7354237`) had no blocker. Isolated worktree
+`C:\cameo-wt\devin-econ-u1`, branch `devin/01a14504-u1-fair-service`, base
+`a5513de90` (verified: no commit between base and master `514138b27` touched
+`BotModules/` or the test project — zero fileset conflict). Engine pin
+`723f50f9b`. Fleet claim record:
+`CLAIM_2026-10-17_econ_u1_fair_service_devin.md`.
+
+**Scope.** Finite U1 feasible/fair producer service behind a new
+`FairProducerService` field — default off, `SwitchCondition`-gated; flag off
+keeps the legacy paths byte-identical (same first-free-queue pick, same
+head-pop of external requests, same pick/exclude semantics).
+
+**What the armed path changes.** (1) Producer service rotates over stable
+`actorID|queueType` keys resuming after the last *examined* producer — a
+producer the offer budget never reached stays in rotation, and a destroyed or
+save-rebound cursor key resumes at the documented first key instead of
+starving later producers. (2) A slot fills only from candidates admissible
+before the pick; a rejected name leaves the retry set alone (the legacy
+exclude-everything-limited retry is gone under the flag), and an active
+composition with no feasible unit falls back to the declared baseline shares
+once per queue before reverting — §3.3/P4. (3) Ephemeral in-pass reservations:
+emitted orders count against free slots, the reserved bank (including the
+mid-fill saturation re-check), `UnitLimits` headroom and the aircraft cap —
+live counts cannot see an order until it lands, so one unit of headroom no
+longer admits several invisible orders. (4) External requests: capability and
+a free slot are matched together, every pending request is examined once per
+visit in order, emitted or permanently-invalid requests leave, and blocked
+ones survive — the bounded §4 subset; durable U2 lifecycle state remains out
+of scope.
+
+**Files.** `UnitBuilderBotModuleCA.cs` (+290); new world-free helper
+`BotModuleLogic/UnitProducerServiceCA.cs`; new fixture
+`OpenRA.Mods.Cameo.Test/UnitProducerServiceTest.cs` (8 tests: rotation resume,
+destroyed/rebound cursor, slot/bank reservation, offer budget). Landed as
+`1db49c059`.
+
+**Receipts.** Build `OpenRA.Mods.CA` Release clean (0/0). Focused 8/8;
+adjacent `ProductionSaturationTest|DerivedUnitWeightsTest|
+UnitSpendReservationTest|CapturerLimitTest|BotRngTest|AirLimitsTest` 52/52 —
+60 total. No runtime/launch (no DevOps grant; SAC blocks local binaries), no
+merge/push. P4 remainder (combat-infantry floor/replenishment beyond the
+baseline fallback) and U2 lifecycle are separate increments.
+
+
 # 2026-10-14 — Devin: SENTINEL-RUNNER-POLICY (01a13a15) — post-freeze defect repair, fixture binding
 
 *Devin-Developer.* Self-inflicted defect found while preparing the qualification
@@ -22043,6 +22263,58 @@ directions (sentinel stays SENTINEL, match_batch stays ALLOW).
 Status: py_compile clean; no tests/builds/games/qualification run - serial
 gate. Exact-SHA review target supersedes 43a51eb6b.
 
+### 2026-10-17 - CORE-PRODUCTION-ECONOMY E1: storage admission observational slice f2673f812 (Devin-Developer)
+
+Lead-accepted observational slice over impl-map v4.1 (fleet doc SHA
+7AC0FD35...). Records storage-capacity commitments (P = P_queued + P_pending)
+and emits would-be verdicts via AIUtils.BotDebug; NEVER gates any admission -
+behaviour, orders, RNG and save output unchanged either flag-state;
+classic/all-off byte-identical behind switch-gated StorageAdmissionObservational
+on BaseBuilderBotModuleCAInfo.
+
+- StorageAdmissionObservation (new, BotModuleLogic): per-player ledger; P_queued
+  enumerates every owned ProductionQueue trait incl. disabled/paused
+  (TraitDictionary.All() has no enabled filter; deliberately NOT
+  BuildingsBeingProduced); capacity resolved from ruleset ActorInfo (frozen at
+  match start).
+- Reservations bind the exact Order instance via U2
+  IBotOrderTracking.QueueOrderTracked (Cameo ModularBot); engine
+  classic/fransbot bots lack the interface so the reservation stays pending
+  untracked - conservative either way.
+- Settlement positive-evidence only: exact-instance RefusedLocally, or producer
+  dead/removed/owner-changed at per-sweep reconcile. PERMANENT DOUBLE-COUNT
+  documented: IssuedToWorld keeps the reservation pending - once the item lands
+  in the queue the same capacity counts in BOTH P_queued and P_pending for its
+  lifetime (conservative overcount; can overstate would-be refusals, cannot
+  affect actual behaviour). Issued is not queue arrival.
+- Would-be verdicts: Ctarget = min(ceiling, max(base, S+hysteresis)), strict <
+  target (Sol C4198CC4), <= ceiling, cooldown term observed. 0-default fields =
+  unset sentinels; no policy numbers invented. In-memory only; resets on
+  save/load.
+
+Tests: 7 new cases in StorageAdmissionObservationTest (target resolution,
+strict/ceiling bounds, once-only ledgering, exact refusal, issued-keeps-pending,
+pre-ledger refusal). Focused+adjacent 217/217 green; Release 0 warnings/0 errors
+on touched projects. No merge/push/runtime; U1 stays unlanded pending runtime
+receipt; U2 stays held; E2 v1.2 / P2P7 v1.1 stay on hold pending reviewer
+corrections.
+
+### 2026-10-17 - U1 review F1/F2 fix-forward a754df85f (Devin-Developer)
+
+Static-only fixes per lead's U1 review (ACCEPT WITH FINDINGS, DO NOT MERGE -
+no runtime receipt). No build or test run per instruction.
+
+- F1 (medium): BuildUnitFairService `unit == null` - baseline-shares fallback
+  and RevertToBaselineComposition now require skip.Count == 0. Rejected
+  candidates break with no revert; only a genuinely empty pick falls back.
+- F2 (low/medium): never-servable external requests stayed queued and logged
+  every sweep. PermanentlyInvalidBuildRequest += UnitLimits[name] <= 0 (exact:
+  owned count is always >= the cap); plus a Waiting intent drops after
+  RequestDropFailedSweeps = 250 consecutive failed service visits (~7500t at
+  FeedbackTime spacing - beyond every transient gate), the bounded fair-service
+  form of legacy's drop-on-failure. Refusal-restored intents reset the budget.
+- Noted: FairProducerService/CombatInfantryFloor wired in no YAML - inert until
+  increment time.
 # 2026-10-17 — Devin-Integrator: CONTEXT-PROVIDERS opponent-seam enable (01a11190 follow-up)
 
 *Devin-Integrator.* Coordinator seam ACK `ACK_2026-10-16_context_opponent_seam_devin.md`

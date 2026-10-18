@@ -285,6 +285,32 @@ namespace OpenRA.Mods.CA.Traits
 			"last window of this many ticks (Earned delta / window length, integers only).")]
 		public readonly int ExpansionIncomeWindowTicks = 500;
 
+		[Desc("E1 observational slice (lead-accepted 2026-10-17; SwitchCondition-gated like the other",
+			"increment arms): record storage-capacity commitments (P = P_queued + P_pending) and emit",
+			"would-be admission verdicts to the bot debug log. NEVER gates any admission — behaviour,",
+			"orders, RNG and save output are unchanged either flag-state. PERMANENT DOUBLE-COUNT: a",
+			"successfully emitted reservation never settles on queue-item arrival (no proven order-item",
+			"correlation seam exists), so once its item lands the capacity counts TWICE — in P_queued",
+			"and in P_pending — for the reservation's lifetime; conservative overcounting that can",
+			"overstate would-be refusals but cannot affect actual behavior. In-memory only; resets on load.")]
+		public readonly bool StorageAdmissionObservational = false;
+
+		[Desc("E1 observational: base storage-capacity target term for the would-be verdict",
+			"(Ctarget = min(ceiling, max(this, S + hysteresis)); admission uses strict <).",
+			"0 = unset — terms-only lines, no verdict.")]
+		public readonly int StorageAdmissionTarget = 0;
+
+		[Desc("E1 observational: hard capacity ceiling term (admission at the bound is allowed, <=).",
+			"0 = unset.")]
+		public readonly int StorageAdmissionCeiling = 0;
+
+		[Desc("E1 observational: hysteresis margin folded into Ctarget (max(base, S + this)). 0 = none.")]
+		public readonly int StorageAdmissionHysteresis = 0;
+
+		[Desc("E1 observational: cooldown term — the emitted verdict additionally requires the gap since",
+			"the previous storage emit be >= this. Observed only; 0 = unset.")]
+		public readonly int StorageAdmissionCooldownTicks = 0;
+
 		public override object Create(ActorInitializer init) { return new BaseBuilderBotModuleCA(init.Self, this); }
 	}
 
@@ -457,6 +483,20 @@ namespace OpenRA.Mods.CA.Traits
 		// BZ_production_scaling: same switch-gate as ExpansionPrebuildEnabled — the shared @generic
 		// instance serves classic too, so the arm is inert there (bit-identical A/B reference).
 		public bool ProductionScalingEnabled => Info.UseProductionScaling && switchesActive;
+
+		// E1 observational slice (lead-accepted, observational ONLY): the switch-gated commitment
+		// ledger. Never read by any admission decision — recording and verdict logging only.
+		// Null until the first pass while observing; the lazy holder keeps off-state allocation-free.
+		StorageAdmissionObservation storageObservation;
+		internal bool StorageAdmissionObserving => Info.StorageAdmissionObservational && switchesActive;
+		internal StorageAdmissionObservation StorageObservation => storageObservation ??= new StorageAdmissionObservation(player);
+
+		// Per-sweep reconcile — flag-gated on the module so the call site stays unconditional-cheap.
+		internal void StorageObservationReconcile()
+		{
+			if (StorageAdmissionObserving)
+				storageObservation?.ReconcilePass();
+		}
 
 		public int ScalingCashBar => BotDifficultyLadder.Scale(Info.ProductionScalingCashEasy, Info.ProductionScalingCashHard, player, Info.ProductionScalingCashHard);
 		public int ScalingPersistBar => BotDifficultyLadder.Scale(Info.ProductionScalingPersistEasy, Info.ProductionScalingPersistHard, player, Info.ProductionScalingPersistHard);
