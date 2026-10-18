@@ -892,14 +892,10 @@ namespace OpenRA.Mods.Cameo.Test
 			// CancelProduction removes the LAST same-name item in queue order —
 			// two same-name twins must bind the tail instance, not the head, or
 			// the recorded telemetry diverges from master under the law-off path.
-			var head = new object();
-			var middle = new object();
-			var tail = new object();
-			var queued = new[]
-			{
-				Tuple.Create(head, "proc"), Tuple.Create(middle, "weap"),
-				Tuple.Create(tail, "proc"),
-			};
+			var head = Tuple.Create(new object(), "proc");
+			var middle = Tuple.Create(new object(), "weap");
+			var tail = Tuple.Create(new object(), "proc");
+			var queued = new[] { head, middle, tail };
 
 			var bound = BaseBuilderQueueEvalCA.CancelBindTarget(queued, e => e.Item2, "proc", head);
 			Assert.That(bound, Is.SameAs(tail),
@@ -909,7 +905,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(unmatched, Is.SameAs(head),
 				"no same-name entry: falls back to the head item, as master's ?? currentBuilding");
 
-			var single = new[] { Tuple.Create(head, "proc") };
+			var single = new[] { head };
 			Assert.That(BaseBuilderQueueEvalCA.CancelBindTarget(single, e => e.Item2, "proc", head),
 				Is.SameAs(head), "single entry: head IS the last — cert path equality case");
 		}
