@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cameo.invalid/schema/exploratory-switch-screen-v1.json",
+  "title": "Cameo exploratory switch screen planning record",
+  "description": "Planning-only schema. Any consumer must also call validate_plan_record(record) in tools.ai.exploratory_switch_screen after schema validation; this schema alone cannot prove ordered whole-inventory relations.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "screen_id",
+    "purpose",
+    "candidate_switches",
+    "common_groups",
+    "bank_saturation_cash",
+    "seed_by_map",
+    "cells",
+    "source_commit",
+    "engine_version",
+    "package_sha256",
+    "tool_sha256",
+    "map_hashes",
+    "bj_disposition_sha256",
+    "caps",
+    "execution_authorized",
+    "runtime_inheritance_resolution",
+    "effective_runtime_config_proven"
+  ],
+  "properties": {
+    "schema": { "const": 1 },
+    "screen_id": { "const": "exploratory-switch-screen-2026-10-16" },
+    "purpose": { "const": "descriptive-exploratory-screen-only" },
+    "candidate_switches": {
+      "const": ["BY_crawl_safety", "BZ_production_scaling", "BJ_squad_hysteresis"]
+    },
+    "common_groups": { "const": { "CB_frontier_observe": true } },
+    "bank_saturation_cash": { "const": 1 },
+    "seed_by_map": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nuclear_winter", "satans_clutch", "red_spice", "terra_cotta", "back_to_basics", "winters_end_rich", "great_sahara_2", "ice_cold"],
+      "properties": {
+        "nuclear_winter": { "const": 2026101601 },
+        "satans_clutch": { "const": 2026101602 },
+        "red_spice": { "const": 2026101603 },
+        "terra_cotta": { "const": 2026101604 },
+        "back_to_basics": { "const": 2026101605 },
+        "winters_end_rich": { "const": 2026101606 },
+        "great_sahara_2": { "const": 2026101607 },
+        "ice_cold": { "const": 2026101608 }
+      }
+    },
+    "cells": {
+      "description": "Every cell array must also pass validate_plan_cells(cells, seed_by_map, map_hashes) from tools.ai.exploratory_switch_screen; schema validation alone does not prove cross-row uniqueness/order or key-to-seed joins.",
+      "type": "array",
+      "minItems": 24,
+      "maxItems": 24,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["cell_id", "candidate", "map_key", "setup", "team_size", "factions_per_team", "map_path", "declared_map_sha256", "seed", "candidate_order_on_map", "treatment_side", "control_side", "actual_seats", "caps", "execution_authorized", "runtime_inheritance_resolution", "effective_runtime_config_proven"],
+        "properties": {
+          "cell_id": { "type": "string", "pattern": "^(BY_crawl_safety|BZ_production_scaling|BJ_squad_hysteresis)\\|[a-z0-9_]+$" },
+          "candidate": { "enum": ["BY_crawl_safety", "BZ_production_scaling", "BJ_squad_hysteresis"] },
+          "map_key": { "enum": ["nuclear_winter", "satans_clutch", "red_spice", "terra_cotta", "back_to_basics", "winters_end_rich", "great_sahara_2", "ice_cold"] },
+          "setup": { "type": "string", "minLength": 1 },
+          "team_size": { "type": "integer", "minimum": 1, "maximum": 4 },
+          "factions_per_team": { "type": "array", "minItems": 1, "maxItems": 4, "items": { "type": "string", "minLength": 1 } },
+          "map_path": { "type": "string", "pattern": "^mods/cameo/maps/[^/]+\\.oramap$" },
+          "declared_map_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "seed": { "type": "integer", "minimum": 0, "maximum": 2147483647 },
+          "candidate_order_on_map": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "enum": ["BY_crawl_safety", "BZ_production_scaling", "BJ_squad_hysteresis"] }, "uniqueItems": true },
+          "treatment_side": { "enum": ["A", "B"] },
+          "control_side": { "enum": ["A", "B"] },
+          "actual_seats": { "const": null },
+          "caps": { "const": null },
+          "execution_authorized": { "const": false },
+          "runtime_inheritance_resolution": { "const": "UNRESOLVED_PRECONDITION" },
+          "effective_runtime_config_proven": { "const": false }
+        },
+        "allOf": [
+          { "if": { "properties": { "map_key": { "const": "nuclear_winter" } } }, "then": { "properties": { "setup": { "const": "1v1_nuclear_gdi" }, "team_size": { "const": 1 }, "factions_per_team": { "const": ["td_gdi"] }, "map_path": { "const": "mods/cameo/maps/_ra_a-nuclear-winter.oramap" }, "declared_map_sha256": { "const": "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a" }, "candidate_order_on_map": { "const": ["BY_crawl_safety", "BZ_production_scaling", "BJ_squad_hysteresis"] }, "treatment_side": { "const": "B" }, "control_side": { "const": "A" }, "seed": { "const": 2026101601 } } } },
+          { "if": { "properties": { "map_key": { "const": "satans_clutch" } } }, "then": { "properties": { "setup": { "const": "1v1_satans_allies" }, "team_size": { "const": 1 }, "factions_per_team": { "const": ["ra1_allies"] }, "map_path": { "const": "mods/cameo/maps/SatansClutch.oramap" }, "declared_map_sha256": { "const": "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb" }, "candidate_order_on_map": { "const": ["BZ_production_scaling", "BJ_squad_hysteresis", "BY_crawl_safety"] }, "treatment_side": { "const": "A" }, "control_side": { "const": "B" }, "seed": { "const": 2026101602 } } } },
+          { "if": { "properties": { "map_key": { "const": "red_spice" } } }, "then": { "properties": { "setup": { "const": "2v2_red_gdi_nod" }, "team_size": { "const": 2 }, "factions_per_team": { "const": ["td_gdi", "td_nod"] }, "map_path": { "const": "mods/cameo/maps/Red_Spice_2v2_BI-4.4.oramap" }, "declared_map_sha256": { "const": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a" }, "candidate_order_on_map": { "const": ["BJ_squad_hysteresis", "BY_crawl_safety", "BZ_production_scaling"] }, "treatment_side": { "const": "B" }, "control_side": { "const": "A" }, "seed": { "const": 2026101603 } } } },
+          { "if": { "properties": { "map_key": { "const": "terra_cotta" } } }, "then": { "properties": { "setup": { "const": "2v2_terra_nod_allies" }, "team_size": { "const": 2 }, "factions_per_team": { "const": ["td_nod", "ra1_allies"] }, "map_path": { "const": "mods/cameo/maps/Terracotta-ratls2.oramap" }, "declared_map_sha256": { "const": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d" }, "candidate_order_on_map": { "const": ["BY_crawl_safety", "BZ_production_scaling", "BJ_squad_hysteresis"] }, "treatment_side": { "const": "A" }, "control_side": { "const": "B" }, "seed": { "const": 2026101604 } } } },
+          { "if": { "properties": { "map_key": { "const": "back_to_basics" } } }, "then": { "properties": { "setup": { "const": "3v3_basics_gna" }, "team_size": { "const": 3 }, "factions_per_team": { "const": ["td_gdi", "td_nod", "ra1_allies"] }, "map_path": { "const": "mods/cameo/maps/back-to-basics.oramap" }, "declared_map_sha256": { "const": "ddd071d131895ecb59be66b7d1924b023731c52a04ee01052fa9fc384dd15e6b" }, "candidate_order_on_map": { "const": ["BZ_production_scaling", "BJ_squad_hysteresis", "BY_crawl_safety"] }, "treatment_side": { "const": "B" }, "control_side": { "const": "A" }, "seed": { "const": 2026101605 } } } },
+          { "if": { "properties": { "map_key": { "const": "winters_end_rich" } } }, "then": { "properties": { "setup": { "const": "3v3_winter_asg" }, "team_size": { "const": 3 }, "factions_per_team": { "const": ["ra1_allies", "ra1_soviets", "td_gdi"] }, "map_path": { "const": "mods/cameo/maps/winters-end-rich.oramap" }, "declared_map_sha256": { "const": "a29eea3fef3087d5544c428d2d07d59f4430806c0b23db7eeb605dde7013c94e" }, "candidate_order_on_map": { "const": ["BJ_squad_hysteresis", "BY_crawl_safety", "BZ_production_scaling"] }, "treatment_side": { "const": "A" }, "control_side": { "const": "B" }, "seed": { "const": 2026101606 } } } },
+          { "if": { "properties": { "map_key": { "const": "great_sahara_2" } } }, "then": { "properties": { "setup": { "const": "4v4_sahara" }, "team_size": { "const": 4 }, "factions_per_team": { "const": ["td_gdi", "td_nod", "ra1_allies", "ra1_soviets"] }, "map_path": { "const": "mods/cameo/maps/Great_Sahara_3.oramap" }, "declared_map_sha256": { "const": "8b5c089c7cd2f8209819afa04436d6fa15849e125823ddc16bf5e996cd280ddc" }, "candidate_order_on_map": { "const": ["BY_crawl_safety", "BZ_production_scaling", "BJ_squad_hysteresis"] }, "treatment_side": { "const": "B" }, "control_side": { "const": "A" }, "seed": { "const": 2026101607 } } } },
+          { "if": { "properties": { "map_key": { "const": "ice_cold" } } }, "then": { "properties": { "setup": { "const": "4v4_ice" }, "team_size": { "const": 4 }, "factions_per_team": { "const": ["td_gdi", "td_nod", "ra1_allies", "ra1_soviets"] }, "map_path": { "const": "mods/cameo/maps/ice_cold.oramap" }, "declared_map_sha256": { "const": "e097fcca4fa40f5878b4fb7d965529728dbbd34c2a14b8825e1bec0aea6da98b" }, "candidate_order_on_map": { "const": ["BZ_production_scaling", "BJ_squad_hysteresis", "BY_crawl_safety"] }, "treatment_side": { "const": "A" }, "control_side": { "const": "B" }, "seed": { "const": 2026101608 } } } }
+        ]
+      }
+    },
+    "source_commit": { "const": "UNBOUND_AFTER_REFINERY_REPAIR" },
+    "engine_version": { "const": "UNBOUND_AFTER_PACKAGE_REBUILD" },
+    "package_sha256": { "const": "UNBOUND" },
+    "tool_sha256": { "type": "object", "additionalProperties": { "const": "UNBOUND" } },
+    "map_hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nuclear_winter", "satans_clutch", "red_spice", "terra_cotta", "back_to_basics", "winters_end_rich", "great_sahara_2", "ice_cold"],
+      "properties": {
+        "nuclear_winter": { "const": "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a" },
+        "satans_clutch": { "const": "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb" },
+        "red_spice": { "const": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a" },
+        "terra_cotta": { "const": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d" },
+        "back_to_basics": { "const": "ddd071d131895ecb59be66b7d1924b023731c52a04ee01052fa9fc384dd15e6b" },
+        "winters_end_rich": { "const": "a29eea3fef3087d5544c428d2d07d59f4430806c0b23db7eeb605dde7013c94e" },
+        "great_sahara_2": { "const": "8b5c089c7cd2f8209819afa04436d6fa15849e125823ddc16bf5e996cd280ddc" },
+        "ice_cold": { "const": "e097fcca4fa40f5878b4fb7d965529728dbbd34c2a14b8825e1bec0aea6da98b" }
+      }
+    },
+    "bj_disposition_sha256": { "const": "4feb6f4ef2238da33023da1e12401b89a3a2d40becf36e5acacd7103ddfff681" },
+    "caps": { "const": "UNBOUND_PENDING_SCREEN_QUALIFICATION" },
+    "execution_authorized": { "const": false },
+    "runtime_inheritance_resolution": { "const": "UNRESOLVED_PRECONDITION" },
+    "effective_runtime_config_proven": { "const": false }
+  }
+}
