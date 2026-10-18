@@ -1,4 +1,4 @@
-﻿"""Focused fixture tests for the k-linearity L0 shared-mode inventory correction."""
+"""Focused fixture tests for the k-linearity L0 shared-mode inventory correction."""
 
 from __future__ import annotations
 
