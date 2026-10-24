@@ -1,3 +1,6 @@
+> **ARCHIVED 2026-10-17 — briefs that were never sent; no replies claimed. Current research state: [`../design/AI_MASTER_PLAN.md`](../design/AI_MASTER_PLAN.md) §3 and the MASTER synthesis.**
+> Moved here by the AI-docs consolidation; never overrides anything current (see [`../README.md`](../README.md)).
+
 # AI research round two — differentiated briefs
 
 Owner: `AI_ARCHITECTURE.md` §11. These are the five follow-up requests specified in

@@ -1,5 +1,7 @@
 # AI dataflow — the whole stack, end to end
 
+> **See also (generated):** [`AI_MODULE_MAP.md`](AI_MODULE_MAP.md) (flat per-type table of record) and [`AI_ARCH_COVERAGE.md`](AI_ARCH_COVERAGE.md) (generated dataflow, seams, tick order and R-findings; its H1 is also "AI dataflow"). This file is the hand-written narrative.
+
 2026-10-02. The one-page map of every bot module, who publishes, who consumes,
 who decides, who orders. Pairs with `AI_MODULE_MAP.md` (which list the files);
 this doc is about the *flow* — the round trip from observation to order to

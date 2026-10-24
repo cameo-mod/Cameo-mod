@@ -61,7 +61,42 @@ namespace OpenRA.Mods.Cameo.Traits
 		public override object Create(ActorInitializer init) { return new ModularBot(this, init); }
 	}
 
-	public sealed class ModularBot : ITick, IBot, INotifyDamage
+	// U2 (Sol dispositions 0CB8EF18/6919D6E4/EB513352): the world-free registration
+	// seam behind IBotOrderTracking — bound to the exact Order instance (Order uses
+	// reference equality), refusing grouped orders whose gate rebuild would break
+	// identity. Register BEFORE the FIFO can evict; terminal outcomes deliver once
+	// and remove the registration — no leaks, no observer overwrite.
+	// The accepted first scope is StartProduction only (Sol EB513352): other order
+	// kinds are refused so callers fall back to plain QueueOrder and stay honest
+	// rather than implying broader tracked-order coverage.
+	public sealed class BotOrderDispositionTracker
+	{
+		public const string TrackedOrderString = "StartProduction";
+
+		readonly Dictionary<Order, IBotOrderDisposition> byOrder = new();
+
+		public bool Register(Order order, IBotOrderDisposition observer)
+		{
+			return order != null && observer != null && order.OrderString == TrackedOrderString &&
+				order.GroupedActors == null && byOrder.TryAdd(order, observer);
+		}
+
+		// Non-terminal routing note — the order stays tracked.
+		public void NotifyResident(Order order, BotOrderOutcome outcome)
+		{
+			if (order != null && byOrder.TryGetValue(order, out var observer))
+				observer.OrderDisposition(order, outcome);
+		}
+
+		// Terminal outcome — delivers once and consumes the registration.
+		public void NotifyTerminal(Order order, BotOrderOutcome outcome)
+		{
+			if (order != null && byOrder.Remove(order, out var observer))
+				observer.OrderDisposition(order, outcome);
+		}
+	}
+
+	public sealed class ModularBot : ITick, IBot, INotifyDamage, IBotOrderTracking
 	{
 		public bool IsEnabled;
 
@@ -80,6 +115,9 @@ namespace OpenRA.Mods.Cameo.Traits
 		IBotRespondToAttack[] attackResponseModules;
 
 		readonly Dictionary<IBotTick, (long Ticks, long Count)> moduleTiming = [];
+
+		// U2: orders whose local routing is observed — see BotOrderDispositionTracker.
+		readonly BotOrderDispositionTracker trackedOrders = new();
 
 		// DESIGN §19.6, the order gate: every module's orders pass through QueueOrder, and ModularBot is the one that calls
 		// each module, so it knows who is ordering. `issuer` is the instanced identity (`Type@N`) of the module running
@@ -133,16 +171,35 @@ namespace OpenRA.Mods.Cameo.Traits
 			// The ambient scope wins: a provider emitting inside another module's call charges itself
 			// (BotIssuer.IssueAs), otherwise the module ticking now is the issuer. `emergency` rides along —
 			// it describes the emission context, not the world state at issue.
-			var item = (Order: order, Issuer: BotIssuer.Current ?? issuer, Emergency: emergency);
+			Enqueue((Order: order, Issuer: BotIssuer.Current ?? issuer, Emergency: emergency));
+		}
+
+		// U2: identical routing to QueueOrder plus a disposition registration bound to the
+		// exact Order instance before the FIFO can evict anything. A failed registration
+		// (null args, grouped order, already-tracked instance) queues nothing extra —
+		// callers fall back to plain QueueOrder and stay honest about observability.
+		bool IBotOrderTracking.QueueOrderTracked(Order order, IBotOrderDisposition observer)
+		{
+			if (!trackedOrders.Register(order, observer))
+				return false;
+
+			Enqueue((Order: order, Issuer: BotIssuer.Current ?? issuer, Emergency: emergency));
+			return true;
+		}
+
+		void Enqueue((Order Order, string Issuer, bool Emergency) item)
+		{
 			while (orders.Count >= info.MaxQueuedOrders)
 			{
 				var dropped = orders.First.Value;
 				orders.RemoveFirst();
 				DroppedOrders++;
+				trackedOrders.NotifyTerminal(dropped.Order, BotOrderOutcome.RefusedLocally);
 				Log.Write("debug", $"AI {player.InternalName}: ORDERGATE DROPPED {dropped.Issuer ?? "?"} queued {dropped.Order.OrderString} (queue full {info.MaxQueuedOrders}; tick {world.WorldTick})");
 			}
 
 			orders.AddLast(item);
+			trackedOrders.NotifyResident(item.Order, BotOrderOutcome.LocallyQueued);
 		}
 
 		/// <summary>
@@ -284,17 +341,27 @@ namespace OpenRA.Mods.Cameo.Traits
 				// AR-8: the gate runs here, when the order would act — a refused order costs no action.
 				var gated = GateOrder(item.Issuer, item.Emergency, item.Order);
 				if (gated == null)
+				{
+					// Tracked orders are never grouped, so a null gate result means the
+					// exact registered instance died here — terminal RefusedLocally.
+					trackedOrders.NotifyTerminal(item.Order, BotOrderOutcome.RefusedLocally);
 					continue;
+				}
 
 				if (actionBudget != null && !actionBudget.TryConsumeActions())
 				{
 					// The budget, not the gate, stopped it: it goes back to the front for next tick
 					// instead of vanishing the way a dequeued-then-abandoned order used to.
 					orders.AddFirst(item);
+					trackedOrders.NotifyResident(item.Order, BotOrderOutcome.Deferred);
 					break;
 				}
 
 				world.IssueOrder(gated);
+
+				// Routing released it — terminal for tracking. NOT engine acceptance,
+				// queue insertion or production completion (Sol 0CB8EF18 §1).
+				trackedOrders.NotifyTerminal(item.Order, BotOrderOutcome.IssuedToWorld);
 			}
 		}
 

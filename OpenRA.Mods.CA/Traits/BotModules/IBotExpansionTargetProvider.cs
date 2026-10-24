@@ -408,7 +408,58 @@ namespace OpenRA.Mods.CA.Traits
 		/// committed anchor's hold is cleared by <see cref="RefineryClaimCommitted"/> instead.
 		/// </summary>
 		void ReleaseRefineryAnchor(CPos anchor, object owner) { }
+
+		/// <summary>
+		/// REF-2 P1a (retained-refinery fallback, Sol disposition 5FB81294): poll the per-(producer, item)
+		/// widened-site episode — the Stage-2 fallback that runs after every preferred
+		/// <see cref="NextRefineryClaim"/> offer fails. The provider owns the scan state; each call resumes
+		/// the episode under its frozen pass snapshot and may consume up to the provider's per-sweep cell
+		/// budget. A <see cref="RefineryFallbackOutcome.Site"/> verdict's ordering is globally established
+		/// before it is returned — never an approximate early-pop. Default NoUniverse: the provider offers
+		/// no widened domain.
+		/// </summary>
+		RefineryFallbackOutcome PollRefineryFallbackSite(Actor producer, string item, bool distanceToBaseIsImportant, out CPos? site)
+		{
+			site = null;
+			return RefineryFallbackOutcome.NoUniverse;
+		}
+
+		/// <summary>
+		/// REF-2 P1a (BF5B8247(c)/6722A484): the cancel arm's live re-verification — true only
+		/// while an issued <see cref="RefineryFallbackOutcome.Exhausted"/> certificate still
+		/// matches the live world (stamped coherence atoms pairwise-equal AND no covered event
+		/// since issue). An Exhausted outcome may NEVER drive a cancellation without this
+		/// returning true at the cancellation point. Default false — no certificate, never
+		/// authorized — fails closed.
+		/// </summary>
+		bool RefineryFallbackCertificateCurrent(Actor producer, string item) => false;
+
+		/// <summary>
+		/// REF-2 P1a: a produced refinery committed at <paramref name="site"/> picked by the widened
+		/// fallback — the provider publishes pending coverage for exactly the anchors that site's serve
+		/// radius covers (the same site-coverage law as <see cref="RefineryClaimCommitted(CPos, CPos)"/>);
+		/// no offered anchor exists, so nothing else is pending-marked or released. Default no-op.
+		/// </summary>
+		void RefinerySiteCommitted(CPos site) { }
 	}
+
+	/// <summary>
+	/// REF-2 P1a (retained-refinery fallback, amended per BF5B8247(c)/6722A484): the widened
+	/// Stage-2 verdict for a held (producer, item) pair. Site = the episode's globally nearest
+	/// still-legal cell under its declared snapshot, safe to commit site-only via
+	/// <see cref="IBotExpansionTargetProvider.RefinerySiteCommitted"/>; Deferred = the bounded
+	/// enumeration or pick revalidation is still mid-pass, the relaxation ladder advanced a
+	/// tier, or a drained terminal pass holds for its re-list epoch (resume next sweep);
+	/// NoSite = the pass drained and every candidate failed pick-time revalidation — a
+	/// drained-scan verdict, not a live-emptiness proof; NoUniverse = the declared reach
+	/// domain enumerated no cells — an empty provider domain is NEVER an exhaustion proof;
+	/// Exhausted = a terminal-tier whole-map pass drained coherently under a declared
+	/// provider domain with no legal cell — the ONLY outcome carrying a cancellation
+	/// certificate, and even then cancellation requires
+	/// <see cref="IBotExpansionTargetProvider.RefineryFallbackCertificateCurrent"/> to still
+	/// hold at the cancel point. A no-provider pass can NEVER produce Exhausted.
+	/// </summary>
+	public enum RefineryFallbackOutcome { Site, Deferred, NoSite, NoUniverse, Exhausted }
 
 	/// <summary>
 	/// REF-1 B4: the expansion nudge. Under the refinery law the old raw refinery total

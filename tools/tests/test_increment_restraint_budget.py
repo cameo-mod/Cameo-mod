@@ -18,7 +18,7 @@ class RestraintBudgetTests(unittest.TestCase):
     def test_reviewed_catalogue_covers_every_group(self):
         _, groups, _ = switches.load_spec(switches.SPEC)
         classes = switches.load_effect_classes(switches.SPEC, groups)
-        self.assertEqual(Counter(classes.values()), {"restraint": 31, "capability": 25, "neutral": 11})
+        self.assertEqual(Counter(classes.values()), {"restraint": 32, "capability": 25, "neutral": 12})
         self.assertEqual(classes["TF4_turtle_fallback_expiry"], "restraint")
         self.assertEqual(classes["BP_squad_desire"], "restraint")
         self.assertEqual(classes["AE_army_first"], "restraint")

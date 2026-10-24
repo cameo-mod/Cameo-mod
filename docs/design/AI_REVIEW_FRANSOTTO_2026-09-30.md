@@ -8,7 +8,7 @@ hit most.
 
 **Where it went:** every finding is in `AI_MASTER_PLAN.md` §3 under **"Lifecycle hardening (LC)"** with an id, an
 owner and an estimate, and the plan's waves now put LC before further harvesting (the review's suggested order).
-The review text itself is the author's own file, [`../FRANSBOT_AI_REVIEW_2026-09-30.md`](../FRANSBOT_AI_REVIEW_2026-09-30.md)
+The review text itself is the author's own file, [`../history/FRANSBOT_AI_REVIEW_2026-09-30.md`](../history/FRANSBOT_AI_REVIEW_2026-09-30.md)
 (cameo-mod#665, committed by fransotto) — the single copy; this document holds only our verification, reply and plan.
 
 ---
@@ -75,7 +75,7 @@ a far field; BevManager's job is to deploy such base-building vehicles next to t
 
 ## 3. The review text
 
-The author's committed version lives at [`../FRANSBOT_AI_REVIEW_2026-09-30.md`](../FRANSBOT_AI_REVIEW_2026-09-30.md)
+The author's committed version lives at [`../history/FRANSBOT_AI_REVIEW_2026-09-30.md`](../history/FRANSBOT_AI_REVIEW_2026-09-30.md)
 (cameo-mod#665). It differs from the draft first relayed on 2026-09-30 in two places: the heading "Things Cameo is
 doing very well", and a "Main takeaway" section whose list of boundary bugs adds *"whether a failed execution
 writes its outcome back to the strategic layer"* (→ LC8). Read that file for the review; do not copy it here again.

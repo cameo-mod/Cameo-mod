@@ -82,6 +82,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		void INotifyCreated.Created(Actor self)
 		{
+			// Created runs before ConditionConsumers, so IsTraitDisabled still reads
+			// "has RequiresCondition" — this prefers an unconditional instance.
 			Carryable = self.TraitsImplementing<Carryable>().FirstOrDefault(t => !t.IsTraitDisabled) ?? self.TraitsImplementing<Carryable>().FirstOrDefault();
 			notifyAttached = self.TraitsImplementing<INotifyAttachedTo>().ToArray();
 		}

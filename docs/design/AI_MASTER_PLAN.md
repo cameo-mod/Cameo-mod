@@ -226,7 +226,7 @@ agent leaves.
 
 **Lifecycle hardening (the Fransbot author's review, [`AI_REVIEW_FRANSOTTO_2026-09-30.md`](AI_REVIEW_FRANSOTTO_2026-09-30.md))**,
 expected 85 h. Every finding was verified in the code first (that document's §1); the review itself is the
-author's own file, [`../FRANSBOT_AI_REVIEW_2026-09-30.md`](../FRANSBOT_AI_REVIEW_2026-09-30.md). **LC1 and LC5 gate the harvest
+author's own file, [`../history/FRANSBOT_AI_REVIEW_2026-09-30.md`](../history/FRANSBOT_AI_REVIEW_2026-09-30.md). **LC1 and LC5 gate the harvest
 items** (CA-5's air commander, FB1–FB4, CN1–CN3): no more brains until ownership is a contract.
 
 | id | work | owner | needs | O | M | P | E |

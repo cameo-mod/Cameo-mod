@@ -312,6 +312,59 @@ namespace OpenRA.Mods.CA.Traits
 				.Select(kv => topLeft + kv.Key);
 
 		/// <summary>
+		/// REF-2 P1a (promoted from <c>BaseBuilderQueueManagerCA</c> so the widened fallback reuses the
+		/// identical rule): the harvester dock cell must not sit on valuable resources, and needs at
+		/// least one on-map neighbour outside the blocking footprint so the dock stays reachable — a
+		/// refinery walled off the field is useless. The footprint means the impassable cells:
+		/// <see cref="DockBlockingFootprint"/>, not the bib or transit cells.
+		/// </summary>
+		public enum DockAccess { Clear, OnResource, NoExit }
+
+		/// <summary>
+		/// REF-2 P1a: one dock offset's access at <paramref name="topLeft"/> — on-resource first so a
+		/// dock blocked both ways still reports the resource signature for the rejection tally.
+		/// </summary>
+		public static DockAccess CheckDockAccess(World world, IResourceLayer resourceLayer, ActorInfo actorInfo,
+			BuildingInfo bi, CPos topLeft, WVec dockOffset, IReadOnlySet<string> valuable)
+		{
+			var dock = world.Map.CellContaining(world.Map.CenterOfCell(topLeft) + bi.CenterOffset(world) + dockOffset);
+			if (valuable != null && resourceLayer != null && valuable.Contains(resourceLayer.GetResource(dock).Type))
+				return DockAccess.OnResource;
+
+			var footprint = new HashSet<CPos>(DockBlockingFootprint(bi.Footprint, topLeft));
+			return DockHasExit(dock, footprint, world.Map.Contains) ? DockAccess.Clear : DockAccess.NoExit;
+		}
+
+		/// <summary>
+		/// REF-2 P1a AMEND-B: the ∃-dock rule — LawRefineryPlacement accepts a cell when AT LEAST
+		/// ONE dock offset is Clear; a cell fails only when every dock is blocked. The lazy input
+		/// stops evaluating dock checks at the first clear. (The first revision required ALL
+		/// docks clear, which silently narrowed the declared domain on multi-DockHost items.)
+		/// </summary>
+		public static bool AnyDockClear(IEnumerable<DockAccess> checks)
+		{
+			foreach (var c in checks)
+				if (c == DockAccess.Clear)
+					return true;
+
+			return false;
+		}
+
+		/// <summary>
+		/// REF-2 P1a: the hold reason a widened verdict maps to — Deferred stays a scanning hold,
+		/// an empty domain with no preferred claim offered is the claim absence, everything else is
+		/// the drained-scan "no site under this pass" (mixed-time evidence, never an emptiness proof).
+		/// </summary>
+		public static BotQueueTransitionReason RefineryFallbackHoldReason(RefineryFallbackOutcome outcome, bool claimOffered) =>
+			outcome switch
+			{
+				RefineryFallbackOutcome.Deferred => BotQueueTransitionReason.RefineryScanDeferred,
+				RefineryFallbackOutcome.Exhausted => BotQueueTransitionReason.RefineryDomainExhausted,
+				RefineryFallbackOutcome.NoUniverse when !claimOffered => BotQueueTransitionReason.NoRefineryClaim,
+				_ => BotQueueTransitionReason.NoRefinerySite,
+			};
+
+		/// <summary>
 		/// Deterministic dictionary pick (F-CBL1/F4): lowest tie-break key wins.
 		/// `Dictionary.Keys.First()` order is unspecified and could diverge across runtimes; an
 		/// explicit order keeps every peer's pick identical. Null/empty yields the default.
@@ -327,15 +380,130 @@ namespace OpenRA.Mods.CA.Traits
 			FirstByOrder(requests, a => a.ActorID);
 
 		/// <summary>
-		/// FIX-RA-REFINERY: under the refinery law a refinery that found no legal site defers — the
-		/// produced item is cancelled for the refund and the standing request re-queues it on a
-		/// later sweep (the law's own contract: a failed claim retries later). It must not spend
-		/// the shared failCount budget: a siteless field would otherwise saturate the latch and
-		/// stop every other structure placing. Non-refinery and law-less placements keep the
-		/// ordinary failure path.
+		/// FIX-RA-REFINERY / REF-2 P1a: under the refinery law a produced refinery that found no
+		/// legal site holds — the completed item stays queued and is retried, never cancelled for
+		/// being unplaceable (P1a retention: cancellation was the defect — it ate anchors and
+		/// refunds through the re-queue loop). It must not spend the shared failCount budget: a
+		/// siteless field would otherwise saturate the latch and stop every other structure
+		/// placing. Non-refinery and law-less placements keep the ordinary failure path — the
+		/// G2 no-law retention (maintainer ruling 2026-10-16) is decided at the call site via the
+		/// raw <c>type == BuildingType.Refinery</c> check; this helper stays the law-scoped query.
 		/// </summary>
 		public static bool RefineryDefers(bool lawActive, BuildingType type) =>
 			lawActive && type == BuildingType.Refinery;
+
+		/// <summary>
+		/// REF-2 P1a (maintainer no-cancel class, 2026-10-16): the completed high-value items a
+		/// placement failure may never mass- or saturation-cancel without a proven total-domain
+		/// exhaustion — today the refinery class (the G3 ruling on radar/tech/war-factory scope
+		/// is pending Sol). Membership alone does NOT gate anything: under
+		/// <see cref="PlacementProtectionApplies"/> the protection regime exists only while the
+		/// refinery law is active — every other item (law off, or a non-member) takes the
+		/// unconditional master cancel path.
+		/// </summary>
+		public static bool RetainedHighValueItem(IReadOnlyCollection<string> refineryTypes, string item) =>
+			refineryTypes.Contains(item);
+
+		/// <summary>
+		/// Sonnet adjudication of 666ddd0bd (default-off defect): the certificate requirement is
+		/// bounded by the refinery law — protection applies ONLY when the law is active AND the
+		/// item is a protected-class member. With the law off (or for a non-refinery item) the
+		/// relocation mass-cancel, limit-reached and saturation paths must behave exactly like
+		/// master, where those cancels are unconditional. World-free: the caller supplies the
+		/// law-active state (<c>RefineryLawProvider() != null</c>) and class membership
+		/// (<see cref="RetainedHighValueItem"/>).
+		/// </summary>
+		public static bool PlacementProtectionApplies(bool lawActive, bool protectedClassMember) =>
+			lawActive && protectedClassMember;
+
+		/// <summary>
+		/// Master-identical terminal binding for a cancel: CancelProduction removes the
+		/// LAST same-name item in queue order, so the recorded target is that instance
+		/// (fallback: the head item when no same-name entry resolves). Under a live
+		/// certificate the resolved last IS the intended item by construction (unique
+		/// enabled same-name + resolved == intended), so the same binding is exact on
+		/// both the unconditional and cert paths — twins or not, telemetry matches
+		/// master byte-for-byte.
+		/// </summary>
+		public static T CancelBindTarget<T>(IEnumerable<T> queued, Func<T, string> itemNameOf,
+			string itemName, T fallback) =>
+			queued.LastOrDefault(i => itemNameOf(i) == itemName) ?? fallback;
+
+		/// <summary>
+		/// HIGH-VALUE cancel protection (E91BA74C; shared seam per
+		/// API_PROPOSAL_2026-10-16_placement_cancel_protection E1283A6D — the Frans guard lane
+		/// 01a14475 binds this exact signature): adjudicates whether an automatic placement
+		/// cancellation may proceed. The caller supplies EVIDENCE only — this helper owns the
+		/// verdict.
+		///
+		/// Decision table (Sol adjudication of 9d997eb58, F0): role membership is a hint,
+		/// not positive cheap+fast evidence — this iteration carries NO Allow verdict.
+		/// Ordinary failure triggers never authorize discarding protected value; a future
+		/// Allow requires a reviewed concrete policy plus positively resolved cost AND
+		/// production-duration evidence with explicit protected-role precedence (category
+		/// OR evidence alone is insufficient). <paramref name="cheapFastRoleMember"/>,
+		/// <paramref name="resolvedCost"/>, <paramref name="resolvedBuildTicks"/> and the
+		/// floor parameters are accepted for seam compatibility and intentionally unused.
+		/// - proven protected-role member → RequireCertificate (cancel only under a live
+		///   domain-exhaustion certificate);
+		/// - anything else → Unresolvable (unknown/unclassified/cheap-fast-hinted items all
+		///   hold; absence of proof never reads as cheap).
+		/// Unresolvable and RequireCertificate both require a certificate to proceed at CA
+		/// call sites; the distinction is diagnostic.
+		/// </summary>
+		public static PlacementCancelVerdict EvaluatePlacementCancelProtection(
+			ActorInfo info, bool protectedRoleMember, bool cheapFastRoleMember,
+			int? resolvedCost, int? resolvedBuildTicks, int? protectedFloorCost, int? protectedFloorTicks)
+		{
+			if (protectedRoleMember)
+				return PlacementCancelVerdict.RequireCertificate;
+
+			return PlacementCancelVerdict.Unresolvable;
+		}
+
+		/// <summary>
+		/// Sol adjudication of 9d997eb58, F2: a demand binds by NAME only — that does not
+		/// prove the intended <c>ProductionItem</c> instance. Engine law for
+		/// Order.CancelProduction runs on EVERY enabled ProductionQueue trait of the
+		/// producer and removes the LAST same-name entry on each
+		/// (ProductionQueue.CancelProductionInner), so with more than one same-name entry
+		/// the order settles a sibling or removes several items at once; an exhaustion
+		/// certificate cannot establish request identity either. The only provable intent
+		/// is exactly one same-name entry across the producer's queues, located on an
+		/// enabled queue — anything else fails closed. World-free: the caller counts.
+		/// EE3B6358: accepted this iteration as cert-mandatory NAME-CLASS disposal while
+		/// Allow is unreachable — issuance requires a live certificate regardless of the
+		/// verdict (which stays diagnostic-only); if Allow ever returns, the certificate
+		/// requirement stands until an instance-proving mechanism is ratified.
+		/// </summary>
+		public static DemandCancelDisposition DemandCancelVerdict(
+			int sameNameOnProducer, int sameNameOnEnabledQueues,
+			PlacementCancelVerdict verdict, bool certificateCurrent)
+		{
+			if (sameNameOnProducer == 0)
+				return DemandCancelDisposition.Absent;
+
+			if (sameNameOnProducer != 1 || sameNameOnEnabledQueues != 1)
+				return DemandCancelDisposition.AmbiguousHold;
+
+			if (!certificateCurrent)
+				return DemandCancelDisposition.ProtectionHold;
+
+			return DemandCancelDisposition.Issued;
+		}
+
+		/// <summary>
+		/// A966ED70 (E3): an actor-level CancelProduction order dispatches to EVERY enabled
+		/// ProductionQueue trait on the producer and removes the last same-name entry on
+		/// each — so the order provably settles the caller-intended instance only when the
+		/// producer's enabled queues hold exactly one same-name entry AND the live
+		/// last-same-name resolution on the issuing queue is that instance
+		/// (<paramref name="engineResolvesToIntended"/>). A head-A/tail-B same-name pair or
+		/// a sibling entry on another enabled queue fails closed — the order would settle a
+		/// different instance than intended. World-free: the caller counts and resolves.
+		/// </summary>
+		public static bool CancelOrderTargetsIntended(int sameNameOnEnabledQueues, bool engineResolvesToIntended) =>
+			sameNameOnEnabledQueues == 1 && engineResolvesToIntended;
 
 		/// <summary>
 		/// FIX-RA-REFINERY: the saturated-placement recovery arm owns a tick whenever the
@@ -803,9 +971,60 @@ namespace OpenRA.Mods.CA.Traits
 	// - All probe/tracker state is lazy: with no observer trait registered the emit path is
 	//   one null check and nothing is allocated.
 
+	/// <summary>
+	/// HIGH-VALUE cancel protection (E91BA74C / API_PROPOSAL_2026-10-16 E1283A6D): the
+	/// verdict of <c>BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection</c>. Allow =
+	/// proceed — unreachable this iteration (Sol adjudication of 9d997eb58, F0: role
+	/// membership is a hint, not positive cheap+fast evidence; no-Allow/fail-closed until a
+	/// ratified policy plus positively resolved cost AND duration evidence exists);
+	/// RequireCertificate = a proven protected item, cancel only under a live
+	/// domain-exhaustion certificate; Unresolvable = the caller could not prove a class —
+	/// fails closed (protected) until a certificate authorizes.
+	/// </summary>
+	public enum PlacementCancelVerdict { Allow, RequireCertificate, Unresolvable }
+
+	/// <summary>
+	/// F2 (Sol adjudication of 9d997eb58): the disposition of a demand-unwind cancel —
+	/// distinguishes held from issued/settled. Absent = nothing same-name queued (the
+	/// order would no-op). AmbiguousHold = same-name entries beyond the bound one (or the
+	/// only one sits on a disabled queue) — name-only intent unprovable, never cancel.
+	/// ProtectionHold = unique intent but no Allow verdict and no live certificate.
+	/// Issued = the order was queued; the queue entry is being settled by the engine.
+	/// </summary>
+	public enum DemandCancelDisposition { Absent, AmbiguousHold, ProtectionHold, Issued }
+
 	public enum BotQueueTransitionKind { Queued, Ready, Placed, Cancelled, Held, Resumed, Removed, PlacementOrdered, CancelOrdered }
 
-	public enum BotQueueTransitionReason { None, LimitReached, NoRefinerySite, SaturationLatch, RelocationLatch, DemandHold, CrawlHold, FrontBackHold, DemandCancel }
+	public enum BotQueueTransitionReason
+	{
+		None,
+		LimitReached,
+		NoRefinerySite,
+		SaturationLatch,
+		RelocationLatch,
+		DemandHold,
+		CrawlHold,
+		FrontBackHold,
+		DemandCancel,
+
+		/// <summary>REF-2 P1a: a held law refinery with no claimable anchor offered AND an empty
+		/// widened reach domain — distinct from <see cref="NoRefinerySite"/> (a drained pass).</summary>
+		NoRefineryClaim,
+
+		/// <summary>REF-2 P1a: a held law refinery whose widened fallback scan is still
+		/// materializing or revalidating under its cell budget — the scanning hold.</summary>
+		RefineryScanDeferred,
+
+		/// <summary>REF-2 P1a (maintainer ruling 2026-10-16): the fallback pass enumerated the
+		/// total domain at the unrestricted relaxation tier and found no legal cell — the
+		/// proven exhaustion that is the ONLY permitted cancel of a completed refinery.</summary>
+		RefineryDomainExhausted,
+
+		/// <summary>E91BA74C/D831BBCB: an automatic cancel was refused by
+		/// <see cref="PlacementCancelVerdict"/> — the item is protected or unclassifiable
+		/// and no live exhaustion certificate authorized the settle. Held, not removed.</summary>
+		ProtectionHold,
+	}
 
 	public enum BotQueueCancellationClass
 	{

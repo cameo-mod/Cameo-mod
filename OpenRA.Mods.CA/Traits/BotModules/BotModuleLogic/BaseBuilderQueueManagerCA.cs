@@ -533,6 +533,35 @@ namespace OpenRA.Mods.CA.Traits
 			return BuildingType.Building;
 		}
 
+		// Sonnet adjudication of 666ddd0bd (default-off defect): the protection regime —
+		// and therefore the certificate requirement — exists ONLY under the active refinery
+		// law AND only for the protected (refinery) class. With no law provider, or for any
+		// non-member item, the automatic cancel paths run exactly like master.
+		bool ProtectionApplies(string itemName) =>
+			BaseBuilderQueueEvalCA.PlacementProtectionApplies(
+				baseBuilder.RefineryLawProvider() != null,
+				BaseBuilderQueueEvalCA.RetainedHighValueItem(baseBuilder.Info.RefineryTypes, itemName));
+
+		// 6722A484/BF5B8247(c)/A966ED70(E3): a protected cancel proceeds only when the live
+		// queue state proves the order will settle the caller-intended instance AND the
+		// certificate re-verifies against the live world at the cancel point. The order
+		// dispatches to EVERY enabled queue on the producer and removes the LAST same-name
+		// on each, so intent requires a unique same-name entry across enabled queues whose
+		// live resolution is `intended` — a head-A/tail-B pair or enabled sibling-queue
+		// entry holds without settlement.
+		bool CertificateAuthorizes(ProductionQueue queue, string itemName, ProductionItem intended)
+		{
+			var enabledSameName = queue.Actor.TraitsImplementing<ProductionQueue>()
+				.Where(q => q.Enabled)
+				.Sum(q => q.AllQueued().Count(i => i.Item == itemName));
+			var resolved = queue.AllQueued().LastOrDefault(i => i.Item == itemName);
+			if (!BaseBuilderQueueEvalCA.CancelOrderTargetsIntended(enabledSameName, ReferenceEquals(resolved, intended)))
+				return false;
+
+			var law = baseBuilder.RefineryLawProvider();
+			return law != null && law.RefineryFallbackCertificateCurrent(queue.Actor, itemName);
+		}
+
 		// Scale targets (DESIGN 19.10): an enabled provider's production target replaces BotLimits.ProductionTypeLimit
 		// (0 stays "no limit" when there are no BotLimits at all).
 		int ProductionTypeLimit => productionTypeLimit > 0 && baseBuilder.TryGetScaleTarget("production", out var scaled)
@@ -588,8 +617,22 @@ namespace OpenRA.Mods.CA.Traits
 							baseBuilder.RelocationHoldConyard = stuckConyard;
 							foreach (var queue in stuckConyard.TraitsImplementing<ProductionQueue>())
 							{
-								foreach (var item in queue.AllQueued().ToArray())
+								var latchSnapshot = queue.AllQueued().ToArray();
+								foreach (var item in latchSnapshot)
 								{
+									// E91BA74C/D831BBCB/6722A484 + Sonnet 666ddd0bd default-off fix:
+									// the mass-cancel consults protection ONLY while the law is
+									// active AND the item is a protected (refinery) member — every
+									// other item cancels unconditionally exactly like master. A
+									// protected item — in-progress or completed alike (E1) — stays
+									// queued unless a live exhaustion certificate authorizes the settle.
+									if (ProtectionApplies(item.Item) && !CertificateAuthorizes(queue, item.Item, item))
+									{
+										EmitQueueTransition(queue, stuckConyard, item, item.Item, QueueCategoryOf(item.Item),
+											BotQueueTransitionKind.Held, BotQueueTransitionReason.ProtectionHold);
+										continue;
+									}
+
 									// The record resolves on the tick the item actually
 									// leaves the queue (F2); queues outside this manager's
 									// category surface as Removed on their own manager.
@@ -703,6 +746,10 @@ namespace OpenRA.Mods.CA.Traits
 
 			// A producer that left FindQueues (disabled or destroyed) must not keep a stale starvation run.
 			cashClock.Retain(sweptProducers);
+
+			// E1 observational slice: drop reservations whose producer died/left/changed owner.
+			// Observational only — releases ledger entries, never world state (flag-gated inside).
+			baseBuilder.StorageObservationReconcile();
 
 			// TF-2 F2: the sweep-end flush — a producer that left FindQueues (destroyed or
 			// disabled) can never reconcile, so its tracked items settle here once instead of
@@ -880,7 +927,22 @@ namespace OpenRA.Mods.CA.Traits
 
 				baseBuilder.RecordOpeningStructureQueued(queue, item);
 				baseBuilder.BuildOrderKnobs?.NotifyQueued(item.Name);
-				bot.QueueOrder(Order.StartProduction(queue.Actor, item.Name, 1));
+
+				// E1 observational slice (lead-accepted, observational ONLY): for storage-capable
+				// items record the commitment and emit the would-be verdict — a refused-looking
+				// verdict still emits identically; nothing here gates the order. The reservation
+				// binds to the exact order instance via IBotOrderTracking when the bot offers it
+				// (Cameo ModularBot); otherwise it stays pending untracked — conservative either
+				// way, see StorageAdmissionObservation for the permanent double-count contract.
+				var storageReservation = baseBuilder.StorageAdmissionObserving
+					? baseBuilder.StorageObservation.ObserveEmitting(world, playerResources, queue, item.Name, cost, baseBuilder.Info)
+					: null;
+				var produceOrder = Order.StartProduction(queue.Actor, item.Name, 1);
+				if (storageReservation == null || !(bot is IBotOrderTracking tracking && tracking.QueueOrderTracked(produceOrder, storageReservation)))
+					bot.QueueOrder(produceOrder);
+
+				if (storageReservation != null)
+					baseBuilder.StorageObservation.NoteEmitted(storageReservation, world.WorldTick);
 
 				queuedAt[queue.Actor.ActorID] = (item.Name, world.WorldTick);
 				if (demandPick.Demand != null)
@@ -939,12 +1001,31 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						AIUtils.BotDebug($"{player} has already has enough {currentBuilding.Item}; cancelling production");
 
-						// CancelProduction removes the LAST same-name item — bind that
-						// instance, not the head, so the removal resolves to this request.
-						var cancelTarget = queue.AllQueued().LastOrDefault(i => i.Item == currentBuilding.Item) ?? currentBuilding;
-						NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
-							BotQueueTransitionReason.LimitReached, BotQueueCancellationClass.Production);
-						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
+						// E91BA74C/D831BBCB + Sonnet 666ddd0bd default-off fix: the limit
+						// cancel consults protection ONLY while the law is active AND the
+						// item is a protected (refinery) member — every other item cancels
+						// unconditionally exactly like master. A protected item needs a live
+						// certificate for the settled instance (E3) or it holds and keeps
+						// trying to place.
+						if (!ProtectionApplies(currentBuilding.Item)
+							|| CertificateAuthorizes(queue, currentBuilding.Item, currentBuilding))
+						{
+							// Master-identical binding (A966ED70 E3 + default-off identity):
+							// CancelProduction removes the LAST same-name item — record that
+							// instance, not the head. Under the cert the resolved last IS
+							// currentBuilding (unique enabled same-name); on the unconditional
+							// path twins resolve exactly as master.
+							var cancelTarget = BaseBuilderQueueEvalCA.CancelBindTarget(
+								queue.AllQueued(), i => i.Item, currentBuilding.Item, currentBuilding);
+							NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
+								BotQueueTransitionReason.LimitReached, BotQueueCancellationClass.Production);
+							bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
+						}
+						else
+						{
+							EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
+								BotQueueTransitionKind.Held, BotQueueTransitionReason.ProtectionHold);
+						}
 					}
 				}
 
@@ -956,6 +1037,8 @@ namespace OpenRA.Mods.CA.Traits
 				CPos? advisedDefense = null;
 				var refineryDefers = false;
 				refineryClaimed = false;
+				refineryExhausted = false;
+				refineryHoldReason = BotQueueTransitionReason.NoRefinerySite;
 				lastFrontBackPick = null;
 				frontBackHold = false;
 				demandAdvisedDefense = false;
@@ -1044,9 +1127,14 @@ namespace OpenRA.Mods.CA.Traits
 							: BaseBuilderQueueEvalCA.ClassifyPlacement(lawLink, isRefinery, isFragile, hasAttackBase, defenseRoll, organicCrawlRoll);
 					}
 
-					// FIX-RA-REFINERY: decided here so the null-location branch below can tell a
-					// law refinery's "retry later" from an ordinary placement failure.
-					refineryDefers = BaseBuilderQueueEvalCA.RefineryDefers(law != null, type);
+					// FIX-RA-REFINERY / G2 (maintainer ruling 2026-10-16): decided here so the
+					// null-location branch below can tell a refinery's "retry later" from an
+					// ordinary placement failure. A refinery retains WITHOUT the law too — a
+					// law-less refinery has no exhaustion proof available, so it may never take
+					// the saturation cancel; it re-probes generic placement every sweep instead.
+					// (Covers the law claim paths and the classic/demand refinery alike:
+					// classification maps RefineryTypes items to BuildingType.Refinery.)
+					refineryDefers = type == BuildingType.Refinery;
 
 					// REF-1 B1 (crawl-trace §8): under the law a crawl placement with no aim holds — returning
 					// keeps the produced building queued (and spends no failure budget) instead of wasting the
@@ -1078,29 +1166,87 @@ namespace OpenRA.Mods.CA.Traits
 
 				if (location == null)
 				{
-					// FIX-RA-REFINERY: under the law a siteless refinery defers — cancelled for its
-					// refund while the standing request re-queues it on a later sweep. Spending
-					// shared failure budget here let one unreachable field saturate the latch and
-					// starve every other structure indefinitely.
+					// FIX-RA-REFINERY: under the law a siteless refinery defers — it must not spend
+					// shared failure budget here, or one unreachable field would saturate the latch
+					// and starve every other structure indefinitely. REF-2 P1a: the defer is now a
+					// hold (the completed item is retained); the old cancel ate anchors and refunds
+					// through the re-queue loop while no site existed.
 					if (refineryDefers)
 					{
-						AIUtils.BotDebug($"{player} defers {currentBuilding.Item}: no legal refinery site this sweep");
-						var cancelTarget = queue.AllQueued().LastOrDefault(i => i.Item == currentBuilding.Item) ?? currentBuilding;
-						NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
-							BotQueueTransitionReason.NoRefinerySite, BotQueueCancellationClass.Production);
-						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
+						// Maintainer ruling 2026-10-16: cancellation is permitted ONLY on a
+						// proven total-domain exhaustion — the tiered fallback's TERMINAL
+						// pass enumerated the whole map unconditionally (provider squares
+						// serve the bounded tiers only, never the certificate) under the
+						// fully-relaxed bound and found no legal cell. Same cancel machinery
+						// as a saturation cancel, but never on a budget — only on that proof.
+						if (refineryExhausted)
+						{
+							// BF5B8247(c)/6722A484: the verdict alone is stale evidence — the
+							// certificate re-verifies the exact atom sequence against the live
+							// world at the cancel point; any drift (or a no-provider scan that
+							// could never certify) fails closed to the deferred hold.
+							if (CertificateAuthorizes(queue, currentBuilding.Item, currentBuilding))
+							{
+								AIUtils.BotDebug($"{player} cancels {currentBuilding.Item}: refinery domain exhausted at tick {world.WorldTick}");
+								var cancelTarget = BaseBuilderQueueEvalCA.CancelBindTarget(
+									queue.AllQueued(), i => i.Item, currentBuilding.Item, currentBuilding);
+								NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
+									BotQueueTransitionReason.RefineryDomainExhausted, BotQueueCancellationClass.Production);
+								bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
+								EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
+									BotQueueTransitionKind.Held, BotQueueTransitionReason.RefineryDomainExhausted);
+								return false;
+							}
+
+							AIUtils.BotDebug($"{player} holds {currentBuilding.Item}: exhaustion certificate stale at tick {world.WorldTick}");
+							EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
+								BotQueueTransitionKind.Held, BotQueueTransitionReason.ProtectionHold);
+							return false;
+						}
+
+						// REF-2 P1a (retained-refinery): a completed refinery is NEVER cancelled
+						// for being unplaceable while any tier of the ladder remains — it holds
+						// at the head and every later sweep re-probes preferred claims then the
+						// tiered widened fallback. The reason distinguishes no-claim-offered,
+						// still-scanning and drained-pass holds; EmitGate emits once per reason
+						// transition, no failure budget is spent.
+						AIUtils.BotDebug($"{player} defers {currentBuilding.Item}: {refineryHoldReason} at tick {world.WorldTick}");
+						EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, type,
+							BotQueueTransitionKind.Held, refineryHoldReason);
+						return false;
 					}
 
 					// If we just reached the maximum fail count, cache the number of current structures
 					else if (++failCount >= baseBuilder.Info.MaximumFailedPlacementAttempts)
 					{
 						AIUtils.BotDebug($"{player} has nowhere to place {currentBuilding.Item}");
-						var cancelTarget = queue.AllQueued().LastOrDefault(i => i.Item == currentBuilding.Item) ?? currentBuilding;
-						NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
-							BotQueueTransitionReason.SaturationLatch, BotQueueCancellationClass.Production);
-						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
-						EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
-							BotQueueTransitionKind.Held, BotQueueTransitionReason.SaturationLatch);
+
+						// E91BA74C/D831BBCB + Sonnet 666ddd0bd default-off fix: the
+						// saturation cancel consults protection ONLY while the law is active
+						// AND the item is a protected (refinery) member — every other item
+						// cancels unconditionally exactly like master. A protected item needs
+						// a live exhaustion certificate or it holds (the latch snapshot and
+						// retry timer still arm, so recovery probes keep running while it waits).
+						if (!ProtectionApplies(currentBuilding.Item)
+							|| CertificateAuthorizes(queue, currentBuilding.Item, currentBuilding))
+						{
+							// Master-identical binding: CancelProduction removes the LAST
+							// same-name item — record that instance (equal to
+							// currentBuilding under the cert; the twin case resolves
+							// exactly as master on the unconditional path).
+							var cancelTarget = BaseBuilderQueueEvalCA.CancelBindTarget(
+								queue.AllQueued(), i => i.Item, currentBuilding.Item, currentBuilding);
+							NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
+								BotQueueTransitionReason.SaturationLatch, BotQueueCancellationClass.Production);
+							bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
+							EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
+								BotQueueTransitionKind.Held, BotQueueTransitionReason.SaturationLatch);
+						}
+						else
+						{
+							EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
+								BotQueueTransitionKind.Held, BotQueueTransitionReason.ProtectionHold);
+						}
 						lastFailedBuilding = currentBuilding.Item;
 
 						// FIX-RA-REFINERY R1: the latch snapshot is taken at every saturation —
@@ -1177,6 +1323,21 @@ namespace OpenRA.Mods.CA.Traits
 		// NotifyPlacement only; nothing here feeds a decision.
 		readonly Dictionary<uint, (string Item, int Tick)> queuedAt = new();
 		bool refineryClaimed;
+
+		// REF-2 P1a (retained-refinery): the reason a refinery holds at the head —
+		// NoRefineryClaim (no offer and an empty widened domain), RefineryScanDeferred (the
+		// fallback scan is still materializing under its cell budget), NoRefinerySite (a
+		// drained pass / failed claims — also the law-less refinery's generic-retry hold),
+		// or RefineryDomainExhausted (the proven-exhaustion hold preceding the only
+		// permitted cancel). Set inside ChooseBuildLocation's law branch before the
+		// null-location defer emits it; reset beside refineryClaimed each placement run.
+		BotQueueTransitionReason refineryHoldReason = BotQueueTransitionReason.NoRefinerySite;
+
+		// REF-2 P1a (maintainer ruling 2026-10-16): the fallback pass proved total-domain
+		// exhaustion — the unrestricted tier (or an empty domain) enumerated every cell of the
+		// declared domain with no legal site. The ONLY flag under which a completed refinery
+		// may take the cancel path; reset beside refineryClaimed each placement run.
+		bool refineryExhausted;
 		IBotPlacementObserver[] placementObservers;
 
 		// BP-2 (§19.15): the front/back advisor seam. The trait array is cached once; IsActive is
@@ -1987,17 +2148,8 @@ namespace OpenRA.Mods.CA.Traits
 		// FIX-RA-REFINERY: "the footprint" here means the impassable cells — BuildingInfo.Tiles also
 		// yields the passable '=' bib, which walled the RA proc's dock inside its own footprint and
 		// failed the exit check at every legal site.
-		enum DockAccess { Clear, OnResource, NoExit }
-
-		DockAccess CheckDockAccess(ActorInfo actorInfo, BuildingInfo bi, CPos topLeft, WVec dockOffset, IReadOnlySet<string> valuable)
-		{
-			var dock = world.Map.CellContaining(world.Map.CenterOfCell(topLeft) + bi.CenterOffset(world) + dockOffset);
-			if (valuable != null && resourceLayer != null && valuable.Contains(resourceLayer.GetResource(dock).Type))
-				return DockAccess.OnResource;
-
-			var footprint = new HashSet<CPos>(BaseBuilderQueueEvalCA.DockBlockingFootprint(bi.Footprint, topLeft));
-			return BaseBuilderQueueEvalCA.DockHasExit(dock, footprint, world.Map.Contains) ? DockAccess.Clear : DockAccess.NoExit;
-		}
+		// REF-2 P1a: the check itself is promoted to BaseBuilderQueueEvalCA.CheckDockAccess so the
+		// widened fallback reuses the identical dock rule instead of a diverging copy.
 
 		// REF-1 (§12.24 v2): the placeable cell NEAREST the anchor whose footprint sits flush on the claim's resource
 		// cells — gap 0 (a footprint cell on or 8-adjacent to a resource cell), gap 1 only when no gap-0 cell is
@@ -2060,14 +2212,14 @@ namespace OpenRA.Mods.CA.Traits
 				var dockAllResource = true;
 				foreach (var off in dockOffsets)
 				{
-					var access = CheckDockAccess(actorInfo, bi, cell, off, valuable);
-					if (access == DockAccess.Clear)
+					var access = BaseBuilderQueueEvalCA.CheckDockAccess(world, resourceLayer, actorInfo, bi, cell, off, valuable);
+					if (access == BaseBuilderQueueEvalCA.DockAccess.Clear)
 					{
 						dockOk = true;
 						break;
 					}
 
-					if (access != DockAccess.OnResource)
+					if (access != BaseBuilderQueueEvalCA.DockAccess.OnResource)
 						dockAllResource = false;
 				}
 
@@ -2422,14 +2574,22 @@ namespace OpenRA.Mods.CA.Traits
 						// queue admission — held out of every other claim in between. A lost or stale
 						// hold takes whatever the law offers now; the law's claim order stands either way.
 						RefineryAnchorClaim? claim = null;
+						var claimsOffered = false;
 						if (demand?.ReservedClaim is { } reserved
 							&& law.RefineryAnchorReserved(reserved.Anchor, demand))
 							claim = reserved;
-						else
-							claim = law.NextRefineryClaim(near);
 
-						if (claim is { } c)
+						// REF-2 P1a: the preferred stage is a bounded offer ladder per sweep — each
+						// failed offer commits-or-parks (the park is the only retry bound) and the
+						// next offer in the claim order is tried; parked anchors simply leave the
+						// order until their cooldown ends.
+						for (var attempt = 0; attempt < baseBuilder.Info.RefineryClaimAttemptsPerSweep; attempt++)
 						{
+							claim ??= law.NextRefineryClaim(near);
+							if (claim is not { } c)
+								break;
+
+							claimsOffered = true;
 							var placed = LawRefineryPlacement(actorType, distanceToBaseIsImportant, producer,
 								c.Anchor, c.ResourceCells, law.ExpansionTargetClaimRadius);
 
@@ -2446,14 +2606,41 @@ namespace OpenRA.Mods.CA.Traits
 									baseBuilder.RequestedRefineries.Remove(requestRef);
 								return (placed.Location, c.Anchor, placed.Variant);
 							}
+
+							claim = null;
 						}
-						else
+
+						// REF-2 P1a: preferred offers exhausted — the widened Stage-2 scans the engine's
+						// reach domain under a per-sweep cell budget; a Site verdict carries an
+						// established global (nearest-resource, X, Y) ordering and commits coverage for
+						// exactly the anchors that site's serve radius covers — never an offered anchor.
+						var fallback = law.PollRefineryFallbackSite(producer, actorType, distanceToBaseIsImportant, out var fallbackSite);
+						if (fallback == RefineryFallbackOutcome.Site)
+						{
+							law.RefinerySiteCommitted(fallbackSite.Value);
+							Log.Write("debug", $"AI ({player.ClientIndex}): REF-2 P1a refinery {actorType} at widened site {fallbackSite.Value} at tick {world.WorldTick}");
+							refineryClaimed = true;
+							if (requestRef != null)
+								baseBuilder.RequestedRefineries.Remove(requestRef);
+							return (fallbackSite, fallbackSite, 0);
+						}
+
+						// Maintainer ruling 2026-10-16: the ONLY permitted cancel of a completed
+						// refinery rides this flag — the fallback pass provably enumerated the
+						// total domain (every provider square, or the whole map when no
+						// base-distance rejection applies) at the unrestricted tier and found
+						// no legal cell. Every other verdict keeps the item held and retrying.
+						if (fallback == RefineryFallbackOutcome.Exhausted)
+							refineryExhausted = true;
+
+						if (!claimsOffered && fallback != RefineryFallbackOutcome.Deferred)
 						{
 							// FIX-RA-REFINERY diagnostics: the other law-null reason — nothing claimed
 							// this sweep. Bounded: one line per failed placement attempt.
 							AIUtils.BotDebug($"{player} law refinery {actorType}: no claim available at tick {world.WorldTick}");
 						}
 
+						refineryHoldReason = BaseBuilderQueueEvalCA.RefineryFallbackHoldReason(fallback, claimsOffered);
 						return (null, null, 0);
 					}
 

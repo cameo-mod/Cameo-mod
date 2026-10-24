@@ -1,3 +1,555 @@
+### 2026-10-17 — Devin-Developer: P1a master-identical cancel binding (Sonnet 607743672 item)
+- Sonnet accepted `607743672` statically; lead made its one non-blocking item blocking for default-off identity: the unconditional branches bound `currentBuilding` into `NotePendingTerminal`, but master binds `AllQueued().LastOrDefault(i => i.Item == name) ?? currentBuilding` — same-name twins would emit different telemetry than master.
+- Fix (static only): new eval seam `BaseBuilderQueueEvalCA.CancelBindTarget<T>(queued, itemNameOf, itemName, fallback)` = master's `LastOrDefault ?? fallback` verbatim; used at the limit (~QM:999), exhaustion (~QM:1172) and saturation (~QM:1218) cancel sites. Under a live cert the resolved last IS currentBuilding (unique enabled same-name + resolved==intended) — identical on both paths. Relocation mass-cancel already bound `item` per master (it iterates the enumerable directly); demand path is name-bound via NoteExternalCancel — no divergence.
+- Fixture `CancelBindTargetResolvesTheLastSameNameEntry`: two same-name items bind the tail; no-match falls back to head; single-entry = the cert-equality case.
+- Commit `39f875fa2` (3 files, +60/−6). Sonnet re-review pending.
+
+### 2026-10-17 — Devin-Developer: P1a default-off defect fix
+- Sonnet 666ddd0bd defect confirmed: `EvaluatePlacementCancelProtection` returned no `Allow`, so the relocation mass-cancel, limit-reached and saturation gates required a certificate for EVERY item — flag or not — and a non-refinery item could never hold one (the scan binds `certTargetName`). Default-off was broken for every class where master cancels unconditionally.
+- Fix (static only, no build/test/run):
+  - New eval seam `PlacementProtectionApplies(lawActive, protectedClassMember) = lawActive && member`.
+  - QM `ProtectionApplies(itemName) = PlacementProtectionApplies(RefineryLawProvider() != null, RetainedHighValueItem(RefineryTypes, itemName))` — replaces `PlacementProtectionVerdict`.
+  - Relocation mass-cancel (~QM:629): protection consulted only under law+membership; otherwise unconditional master cancel. A protected member now needs the cert directly (cheap-fast Allow unreachable under the law).
+  - Limit-reached (~QM:991) and saturation-latch (~QM:1205): `!ProtectionApplies || CertificateAuthorizes` — law-off/non-refinery = unconditional master path; protected member needs a live cert for the settled instance (E3 intended-instance preserved).
+  - Exhaustion gate unchanged (already cert-mandatory); terminal-domain prose corrected (whole map unconditionally).
+  - Eval `RetainedHighValueItem` docstring corrected — membership alone does not activate protection.
+  - New fixture `PlacementProtectionAppliesOnlyUnderActiveLawAndProtectedClass`: law-off/refinery, law-off/non-refinery, law-on/non-refinery all false (master path); law-on/refinery true (cert required).
+- Commit `607743672` (3 files, +70/−42). Sonnet re-review pending.
+
+# 2026-10-17 — Devin: P1a HOLD-conformance audit at 666ddd0bd — no source change needed
+
+*Devin-Developer.* The controlling ruling
+(`RULING_2026-10-16_high_value_placement_refinement_sol`, task `01a14054`) held
+`aec00d3b1` on cancellation freshness/completeness and authorized amending the
+same seven-file claim for "a fresh exhaustive certificate or fail-closed hold."
+Static audit of tip `666ddd0bd` finds every residual clause already resolved by
+post-`aec00d3b1` commits — no amendment needed, no build/test/run executed:
+
+- **Mixed-time evidence**: terminal-tier polls re-collect the injected coherence
+  atoms in one same-tick sweep and compare pairwise to the pass-stamped sequence
+  (exact values + reference identity, never a fold); drift aborts to a Deferred
+  epoch re-list. Evented cell inputs mark read-radius topLeft indices in the
+  `stale` set (cap 4096, overflow aborts); marks during Rank/Pick abort; marks
+  during Enumerate are repaired one-per-step and the drain gate refuses to
+  certify while the set is non-empty.
+- **No-provider/NoUniverse never certifies**: `Exhausted` requires
+  `legalCells == 0 && providers.Count > 0 && domainCells > 0`; every other
+  drained state reports NoSite/NoUniverse and fails closed.
+- **No K-epoch shortcut**: `Epochs` is observational only; no attempt-count or
+  epoch-count path authorizes a cancel.
+- **Cancel-time freshness**: `CertificateCurrent()` re-verifies issued-state +
+  `dirtyEpoch` unmoved + `LiveAtoms` pairwise-equal live before any cancel arm
+  proceeds; a stale replay, drift, or covered event fails closed.
+- **Intended instance**: `CertificateAuthorizes` requires a unique enabled
+  same-name entry across all the producer's ProductionQueue traits whose live
+  `LastOrDefault` resolves to the exact `ProductionItem` (39c3de60c/A966ED70).
+- **All automatic cancel paths gated**: relocation mass-cancel (:637),
+  limit-reached (:998 cheap-fast `Allow` or cert), refinery-domain-exhausted
+  (:1172 cert mandatory), saturation-latch (:1210 cheap-fast or cert),
+  demand-unwind (:1561 cert mandatory per ec7354237/EE3B6358).
+- **Domain**: terminal tier enumerates `world.Map.AllCells` unconditionally at
+  `int.MaxValue` bound; provider squares serve bounded tiers only.
+- **Event coverage**: `WireFallbackEvents` = ActorMap.CellUpdated +
+  IResourceLayer.CellChanged + CustomTerrain.CellEntryChanged → `MarkDirtyCell`
+  (unconditional `dirtyEpoch++` so no cert outlives a covered event);
+  actor/trait/flag inputs ride the atom sweep.
+
+Out of scope per the ruling itself: Fransbot-family cancel sites and the
+class-wide G3/G4 cancellation inventory (separate linked source-read task), and
+runtime proof (not claimed). Fleet conformance note
+`REPORT_2026-10-17_p1a_hold_conformance_devin.md` filed; exact-SHA adjudication
+requested of Sonnet `01a12104` with Devin-Reviewer byte-verify. Nothing merges;
+U1/U2/P1a landing holds stand.
+
+# 2026-10-16 — Devin: P1a cert-mandatory coupling (ec7354237) — EE3B6358 clarification
+
+*Devin-Developer.* Sol's bounded clarification `EE3B6358` (supersedes `A966ED70`
+on the demand leg): the unique-name demand path is accepted this iteration as
+cert-mandatory NAME-CLASS disposal while Allow is unreachable — no provenance
+ledger needed, demand re-adoption confirmed — provided the coupling is
+explicit: if Allow ever returns, the certificate requirement stands until an
+instance-proving mechanism is ratified. `DemandCancelVerdict` now issues only
+with a live certificate (verdict diagnostic-only); fixture pins
+Allow-without-cert → ProtectionHold. Build clean; 34/34 focused. The manager
+E3 correction (`39c3de60c`: LAST-to-LAST tautology + cross-queue gate + real
+caller fixture) remains required and already landed — no scope change.
+
+# 2026-10-16 — Devin: P1a E3 fix (39c3de60c) — cancel order must settle the intended instance, 34/34
+
+*Devin-Developer.* Sol's final review of `2184ec930` (HOLD `A966ED70`) accepted
+F0/atoms but found the three manager cancel arms tautological: they computed
+`cancelTarget = queue.LastOrDefault(name)` and `CertificateAuthorizes` compared
+it to a recomputed `LastOrDefault` — always true, so a head-A/tail-B pair would
+settle B while intending A, and enabled sibling queues (which also resolve the
+actor-level order) were ignored.
+
+Fixed in `39c3de60c`: new world-free `BaseBuilderQueueEvalCA.CancelOrderTargetsIntended(sameNameOnEnabledQueues,
+engineResolvesToIntended)`; `CertificateAuthorizes` now counts same-name across
+ALL enabled `ProductionQueue` traits on the actor, resolves the live last, and
+only then re-verifies the exhaustion certificate. All three arms pass
+`currentBuilding` as intent (tautological `cancelTarget` dropped);
+`NotePendingTerminal` binds the intended instance. New fixture
+`CancelOrderTargetsOnlyTheIntendedInstance` covers head-A/tail-B, enabled
+sibling-queue, foreign-sole-entry, and absent cases. Build clean; focused tests
+**34/34**. No launch, no merge/push.
+
+# 2026-10-16 — Devin: P1a successor freeze (2184ec930) — Sol adjudication F0/F2 resolved, 33/33
+
+*Devin-Developer.* Sol's focused disposition on `9d997eb58` returned HOLD for
+findings F0 and F2 (fleet `DISPOSITION_2026-10-16_refinery_9d997eb58_sol.md`)
+with the same seven-file isolated claim retained for the narrow correction.
+Successor `2184ec930` on `devin/01a14054-refinery-p1a` resolves them:
+
+- **F0** — `EvaluatePlacementCancelProtection` no longer returns `Allow`:
+  role membership is a hint, not positive cheap+fast evidence. Protected →
+  `RequireCertificate`; everything else → `Unresolvable`. Evidence params kept
+  for seam compatibility, unused this iteration.
+- **F2** — demand-unwind cancellation now proves identity: engine
+  `CancelProduction` removes the last same-name entry on *every enabled queue*
+  of the producer, so `CancelDemandItem` fails closed (`AmbiguousHold`) unless
+  exactly one same-name entry exists on an enabled queue. New seam
+  `DemandCancelVerdict` → `DemandCancelDisposition` {Absent, AmbiguousHold,
+  ProtectionHold, Issued}; `ExpireExpansionDemand` logs held cancels and does
+  not treat held items as settled (queue sweep re-adopts them).
+- **F1/F5** — `RefineryFallbackScan.MarkDirtyCell` docs now state cell-level
+  marking covers occupancy/resource/terrain reads only (provider-influence and
+  actor-set changes ride the per-poll coherence atom sweep) and record the
+  carried `O(readRadius²)` event-time cost with fail-closed starvation.
+- **Addendum C** — verified compliant without changes: bounded tiers enumerate
+  raw Chebyshev coordinate squares (no `FindTilesInAnnulus`/`MaximumTileSearchRange`
+  clamp); reach is a superset of `ep+A+f−2`; the terminal tier is the whole map.
+
+Validation: `dotnet build OpenRA.Mods.Cameo.Test -c Release` clean (0 warnings,
+0 errors); `dotnet test --filter FullyQualifiedName~RefineryFallbackTest`
+**33/33 pass** including new `DemandCancelDispositionTable` (twin-same-name,
+cross-queue sibling, disabled-queue, protection-hold, issued, recovery).
+No launch, no merge, no push. Source frozen pending reviewer inspection.
+
+# 2026-10-16 — Devin: P1a compile+test fix-forward (a0a343a41) — 32/32 focused tests pass
+
+*Devin-Developer.* Leader-authorized focused-test cycle (focused tests only,
+no launch): copied the pinned engine (`723f50f9b`, matching `mod.config`
+ENGINE_VERSION) into the worktree per `copy_engine.cmd` convention, built
+`OpenRA.Mods.Cameo.Test -c Release` clean, ran
+`dotnet test --filter FullyQualifiedName~RefineryFallbackTest` — **32/32 pass**.
+The cycle caught three defects, fixed in `a0a343a41`: `Player.InternalID` →
+`Player.ClientIndex` (compile error — InternalID does not exist); two NUnit-4
+`Assert.That` params-message overloads replaced with interpolated strings;
+`OverlappingProviderSquaresDeduplicate` assert corrected to account for the
+mandatory pick-time `Legal` revalidation of the winner (domain cells evaluated
+once; the single second call is the winner's revalidation). No launch (no
+DevOps grant), no merge/push. Sol's routed freeze concern (cheap-fast evidence)
+is staged un-applied in fleet `ANALYSIS_2026-10-16_cheapfast_evidence_concern_devin.md`;
+source stays frozen for reviewer consolidated findings.
+
+# 2026-10-16 — Devin: PLAYTEST-AI-STALL (01a14054) — coherent-current certificate + cancel gating (9d997eb58)
+
+*Devin-Developer.* Implemented Sol's coherent-current certificate choice
+(BF5B8247 option (c)) under decisions 6722A484 + D831BBCB + AAEA45F7 on the
+existing seven-file claim; committed as `9d997eb58` on
+`devin/01a14054-refinery-p1a` (base `a5513de90`). **Not compiled or
+runtime-tested** — no execution authority on this lane; boot-gate SAC-blocked
+(recorded, not claimed). Fleet docs:
+`FREEZE_2026-10-16_refinery_p1a_9d997eb58_devin.md`,
+`RESPONSE_2026-10-16_placement_cancel_protection_api_devin.md`.
+
+**Certificate scan.** The terminal tier is now unconditionally the whole-map
+stream (`Map.AllCells`), the only tier that may certify exhaustion — and only
+on a coherent drain: `legalCells==0 && providers>0 && domainCells>0`.
+Every terminal poll first completes a same-tick coherence sweep over the exact
+atom sequence — scalar flags (distance-law, `BuildAnywhere`, map-radius flags,
+`DeveloperMode.FastBuild`), `coverageVersion`, anchor/field list identity,
+per-actor owner/alliance/in-world/dead plus `GivesBuildableArea` /
+`BaseProvider.Ready()` / `Replaceable` trait atoms, and rank cells. First sweep
+stamps `passAtoms`; every later sweep must equal it pairwise (no hash folds —
+6722A484). `CertificateCurrent()` re-verifies live: issued cert + unchanged
+dirty epoch + pairwise-equal live atom enumeration; a torn enumeration fails
+closed. Dirty events (ActorMap.CellUpdated, IResourceLayer.CellChanged,
+CustomTerrain.CellEntryChanged) bump the epoch and mark already-enumerated
+cells within the declared read radius for paged selective repair; marks that
+arrive after enumeration drain abort the pass to Deferred. `Exhausted` verdict
+keeps the scan alive so the cancel arm can re-verify.
+
+**Ranking corrected** — candidate rank is the minimum Chebyshev distance from
+ANY footprint tile to any declared resource cell (footprint-gap semantics
+80646D1B), never the raw top-left distance; tier bound at `RefineryFallbackTierMaxDist`
+returns `int.MaxValue` (constraint fully removed), else `tier+1`.
+
+**Cancel gating (G1–G4/C1–C5).** Shared seam
+`BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection` (E1283A6D signature,
+floors accepted-but-unused per D831BBCB) returns `PlacementCancelVerdict`:
+cheap-fast (`PowerTypes ∪ BarracksTypes`) → Allow; protected (`RefineryTypes`)
+→ RequireCertificate; everything else → Unresolvable → hold (absence of
+evidence never reads cheap). All five `Order.CancelProduction` sites gated:
+relocation latch, limit, exhaustion (cert re-verified immediately before
+queueing), saturation (manager), demand expiry (`CancelDemandItem`, law
+re-adopt exemption kept). Protected settles additionally require the engine's
+last-same-name target to `ReferenceEquals` the intended `ProductionItem` (E3 —
+`CancelProduction` removes the LAST same-name entry). Refusals emit
+`Held/ProtectionHold` (new reason). **Correction:** `FragileTypes` is the
+high-value fragile set (tech centers/battlelabs/superweapons) — NOT cheap-fast;
+an earlier draft had it inverted.
+
+**Interface.** `IBotExpansionTargetProvider.RefineryFallbackCertificateCurrent(Actor, string) => false`
+— default fails closed; `ExpansionPlannerBotModule` implements it via the
+scan's `CertificateCurrent()`.
+
+**Divergence recorded (AAEA45F7).** `CustomTerrain` IS evented — it is a
+`CellLayer<byte>` whose indexer fires `CellEntryChanged`; every inspected
+mutator (BuildableTerrainLayer :72/:98, ResourceLayer, GroundLevelBridge,
+ChangesTerrain, CliffBackImpassabilityLayer) writes through it, and
+SmudgeLayer/Locomotor/BuildableTerrainOverlay already subscribe. The scan
+subscribes the same channel — terrain coverage is real, not assumed. Residual
+hazard flagged: `CellLayer.Clear`/`CopyValues` bypass the event (and throw
+with listeners attached); no such call on `CustomTerrain` exists today.
+
+**Tests authored (not executed).** Helpers re-taught for the 12-arg snapshot +
+terminal semantics; cases: cert issue/stale, pairwise atom drift, no-provider
+hold, dirty repair, post-enumerate abort, footprint-gap + XY tie-break,
+`PlacementCancelVerdict` table.
+
+**Open:** compile/test still unexecuted; Integrator 01a14475 can bind the seam
+verbatim; reviewer F1/F2 (7CE00E73 active retry + outcome propagation) are the
+next-round items.
+
+---
+
+# 2026-10-16 — Devin: PLAYTEST-AI-STALL (01a14054) — REF-2 P1a amendment successor
+
+*Devin-Developer.* Amended the isolated `devin/01a14054-refinery-p1a` worktree
+(base `a5513de90`) in place per Sol's CE13F2BA amend-disposition and domain
+addendum 66578711, plus the maintainer refinement (held-while-scanning licensed,
+progressive relaxation ladder, cancel only on provable total-domain exhaustion,
+G1/G2 relocation-latch and law-null saturation defects in scope, G3/G4 pending).
+
+**AMEND-A — pre-charged paged phase machine.** `RefineryFallbackScan` was fully
+rewritten: the snapshot now carries enumeration factories, not materialized
+lists. Phases — CollectProviders → CollectRankCells → SortRankCells → Enumerate
+→ Rank → Pick — each charge one budget unit BEFORE one bounded micro-op: one
+actor/cell/comparison-write/copy-back per step. Sorting is a resumable
+bottom-up `PagedMerge` (one charged scratch alloc per pass). Nearest-resource
+ranking is a resumable two-sided scan (one binary-search halving or one
+evaluation per step). The pick is a resumable argmin over the exact global
+(rank, X, Y) order — no selection before ordering is established. Live world
+enumerations restart bounded (8/pass) on `InvalidOperationException`; beyond
+that the pass defers one epoch. `LastPollWork` exposes per-poll charged work.
+
+**AMEND-C + addendum — complete paged domain.** Provider domain is the
+Chebyshev square around each overlapping-GivesBuildableArea provider with reach
+`ProviderCellExtent + rba.Adjacent + FootprintExtent` (a strict superset of the
+`IsCloseEnoughToBase` legal region — covers both Chebyshev and IsCircular
+adjacency since |d|inf ≤ |d|₂); cells are clipped through `Map.Contains` before
+legality. The annulus/`MaximumTileSearchRange-1` path is gone — a radius-49
+disk misses reach corners and large-map cells (both proven by test cases).
+When legality cannot reject on base distance — `distanceToBaseIsImportant`
+false, no `RequiresBuildableArea` (engine early-return at Building.cs), or
+`DeveloperMode.BuildAnywhere` — the domain is the whole streamed map.
+
+**AMEND-B — ∃-dock legality.** `AnyDockClear` folds dock checks lazily: one
+Clear suffices (the law's rule); the prior ALL-clear over-required.
+
+**AMEND-D — ordinal eviction.** `PruneFallbackScans` now breaks ties with
+`StringComparer.Ordinal` on the item after `ProducerId` — the tuple member
+compare routed through culture-sensitive string ordering.
+
+**Relaxation ladder (maintainer 2026-10-16).** `RefineryFallbackTierMaxDist=16`:
+tier t admits candidates within (t+1) cells of a declared resource cell; the
+tier at max is unrestricted (any legal cell, rankless included). A drained
+bounded tier calls `AdvanceTier` — immediate re-pass, no epoch wait.
+`NoSite`-at-unrestricted-tier and `NoUniverse` map to the new
+`RefineryFallbackOutcome.Exhausted`; every earlier verdict keeps the item held.
+
+**G1/G2 — the two cancel defects.** The RelocationLatch mass-cancel now skips
+completed `RetainedHighValueItem`s (refinery class today; G3/G4 pending Sol) —
+it emits Held/RelocationLatch and continues. The null-location branch classifies
+with `type == BuildingType.Refinery` so a law-less refinery also retains (no
+exhaustion proof exists on the classic path); cancellation fires ONLY when
+`refineryExhausted` — set solely from the `Exhausted` verdict — carrying the
+new `RefineryDomainExhausted` reason. `RefineryDefers(bool, BuildingType)`
+keeps its law-scoped signature for callsite/test compatibility.
+
+**Post-freeze self-review (two real defects caught before review).**
+`5368bd2bf` + `37b2c9b29` supersede `ef1a8b390`: (1) a zero-budget `Poll` on a
+fresh scan replayed the initial `NoUniverse` placeholder — mapped to `Exhausted`
+it would have permitted a cancel with zero cells enumerated; the replay path
+now requires a real consumed/aborted verdict (`relistAt` set) and the
+placeholder defaults to `Deferred`. (2) `PickResult.Picked` left the phase at
+`Pick` — later polls would drain stale leftover candidates and a replayed
+`Site` carried a null cell; the pick now consumes the pass and `Site` replays
+with its cell. Regression tests authored for both.
+
+**Not executed.** Per the amendment grant: focused tests were AUTHORED only
+(`RefineryFallbackTest` — per-poll work accounting, Chebyshev corners and
+beyond-annulus cells, map-edge clipping, overlap dedup, whole-map domain,
+global ordering, pick-time revalidation, tier ladder, rankless-at-unrestricted,
+exhaustion, ∃-dock laziness, restart bounds, budget-equivalence, verdict-replay
+integrity). No build, test, boot, qualification, merge or push ran — the
+standing boot-gate rule conflicts with the lane's no-execution grant and is
+recorded, not waived. Awaiting Sol/Reviewer delta review of the frozen
+successor `37b2c9b29`.
+
+# 2026-10-13 — Devin: P4-CLASSRE-RELAND (01a136a5) — nesting-aware CLASS_RE on current master
+
+*Devin.* Reland of the preserved `devin/t2verify/sweep-p4` dirty-state payload
+(queued P4 from the multi-TraitInfo sweep re-review APPROVE) on
+`devin/01a136a5-classre-reland` off `f69ad731a`. ref1 worktree untouched —
+payload recreated from its preserved diffs; claim re-verified at head
+(engine pin `ad061ebf7`).
+
+- **`CLASS_RE` generic-params group** was greedy through the LAST `>`: for a
+  class whose base list itself has generics, e.g.
+  `PausableConditionalTrait<InfoType> : ConditionalTrait<InfoType>`, the
+  "parameters" group swallowed `InfoType> : ConditionalTrait<InfoType` and the
+  match completed with no base capture — the `supers` graph silently lost the
+  edge, so `Trait<ConditionalTrait>`-style closures under-counted
+  PausableConditionalTrait instances. The group now accepts one level of
+  `<...>` nesting (`<[^<>{};]*(?:<[^<>{};]*>[^<>{};]*)*>`), closing at the
+  FIRST balanced `>` — chosen over the flat `[^<>{};]` variant because
+  attribute-style generic arguments in the parameter list stay parseable.
+- **Differential parse re-run at head** (old vs nesting-aware on the full
+  engine+mod C# tree): **10 engine declarations recover their bases**
+  (draft claimed 9 on `inc/2026_10_05`; the +1 is source churn —
+  PausableConditionalTrait → ConditionalTrait in OpenRA.Mods.Common plus
+  CellLayer/ProjectedCellLayer → CellLayerBase, CellLayerBase → IEnumerable,
+  Cache/ConcurrentCache → IReadOnlyDictionary, ObservableSortedDictionary →
+  ObservableDictionary, PriorityQueue → IPriorityQueue, RingBuffer →
+  ICollection+IEnumerable, SpatiallyPartitioned → IDictionary in OpenRA.Game).
+  The flat `[^<>{};]` and nesting variants produce an identical type model on
+  today's tree — the nesting headroom is for future declarations only.
+  Full audit: **1014 single-instance lookups scanned, 0 dangerous — PASS**
+  (was 983/0 at draft time; the +31 sites are mod source growth, all still
+  safe). The recovered edges land in already-multi-capable families.
+- **ctor/Created-site comments:** at trait-construction and `INotifyCreated`
+  time conditions are not applied yet (`ConditionalTrait` ctor sets
+  `IsTraitDisabled = RequiresCondition != null`; `ConditionConsumers` runs
+  after INotifyCreated), so the enabled-first filter reads "has no
+  RequiresCondition". Comments at the three `With*Animation` ctors and
+  `AttachableTo.Created` now say the filter "prefers an unconditional
+  instance". Runtime sites keep the true disabled semantic and need no note.
+- Known parse artifact (pre-existing, unchanged): base lists containing
+  multi-argument generics split on the inner comma, so a few recovered edges
+  carry a `U>`/`TValue>`/`Rectangle>` tail token — harmless, no declared type
+  matches such a name; both regex variants produce identical noise.
+# 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U2 EB513352 fix-forward `229cfc8c2`
+
+*Devin-Developer.* Sol static HOLD `EB513352` on `645543846`, blocking F1: the
+intent ledger's coverage-retaining semantics ran unconditionally — under
+`FairProducerService=false` a successful external emission left `EmittedPending`
+counted forever, so `HarvesterBotModuleCA`'s `RequestedProductionCount == 0`
+gate suppressed replacement after the produced harvester died (Engineer, Scout,
+ExpansionPlanner MCV and bridge-repair requesters share the gate). The accepted
+conservative partial-U2 direction never authorized global activation.
+
+**Fix-forward `229cfc8c2`** (same approved four-file fileset, stacked on
+`429a05cc6`):
+
+- **Distinct default-off control** — `UnitBuilderBotModuleCAInfo.BuildIntentTracking`
+  (SwitchCondition-gated, default `false`), exposed as `IntentTracking` —
+  separate from `FairProducerService`. OFF reproduces the pre-U2 module
+  byte-identically: `BuildIntentLedger` remains the single store but a
+  successful emission calls `NoteEmitted(intent, retainCoverage: false)` → the
+  intent is removed and the order routes plain `QueueOrder` — request removal,
+  `RequestedProductionCount` (live Waiting names only) and the
+  `QueuedBuildRequests` save node are exactly the legacy shape, under either
+  fair-service branch. No bindings, no tracked enqueue, no `PendingBuildIntents`
+  node from live traffic.
+- **Armed-save → off-load policy, explicit** — `PendingBuildIntents` loads
+  `Unresolved` in EITHER mode: counts once (a possibly-reconstructed commitment
+  is never re-requested), never becomes Waiting (no silent reissue), and is
+  re-saved as `PendingBuildIntents` rather than migrated into the legacy node.
+  No post-armed parity claimed.
+- **Enabled-mode liveness limitation, explicit** — `Info` desc + ledger type
+  block state it: no produced/death settlement exists in this slice, so a
+  delivered unit that later dies leaves its intent counted and replacement
+  re-request may stay suppressed — the accepted bound of the experimental
+  slice, NOT repaired harvester/MCV recovery and NOT complete U2. No timeout,
+  no issued=delivered shortcut.
+- **StartProduction-only tracking** (nonblocking bound) —
+  `BotOrderDispositionTracker.Register` refuses any `OrderString !=
+  TrackedOrderString` ("StartProduction"); `IBotOrderTracking` doc narrows the
+  supported contract to the accepted first scope. Refused kinds fall back to
+  plain `QueueOrder`.
+
+**Receipts.** Release build 0 warnings/0 errors; focused+adjacent 132/132
+(`BuildIntentLedgerTest` 23 incl. 6 new mode-boundary cases driving
+`NoteEmitted` — off-emit consume/count boundary, re-request cycle, on-emit
+retention, armed-save→off-load Unresolved, legacy-node load-then-consume,
+non-StartProduction refusal — plus `UnitProducerServiceTest`,
+`HarvesterLogisticsTest`, `EngineerBotModuleTest`,
+`ExpansionPlannerBotModuleTest`, `BridgeRepairBotModuleTest`, `BotOrderGateTest`,
+`CapturerLimitTest`). No runtime/merge/push/qualification/JIT/A/B.
+
+# 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U2 local disposition seam `645543846`
+
+*Devin-Developer.* First U2 slice under Coordinator fileset claim `01a148b8`,
+stacked on `988e84cb5`: the narrow local order-disposition routing + the
+request-intent ledger — scoped to what Sol `0CB8EF18` accepted and `6919D6E4`
+corrected. NO `DeadLoadLoss`: engine `723f50f9` is an order-reconstruction
+save system (recorded `StartProduction` packets replay before supplementary
+trait data), so uncertain issued intents stay `Unresolved` with coverage
+withheld forever — never released on assumed loss, never re-requested.
+
+**`TraitsInterfaces.cs`** — `BotOrderOutcome` (LocallyQueued/Deferred/
+RefusedLocally/IssuedToWorld; IssuedToWorld is routing release, NOT
+acceptance/insertion/completion), `IBotOrderDisposition` (record-only sink),
+`IBotOrderTracking` (register-before-evict, grouped orders refused).
+
+**`ModularBot.cs`** — `BotOrderDispositionTracker` world-free seam (reference
+identity — `Order` has no `Equals` override; `TryAdd` refuses observer
+overwrite) + the four verified seams: overflow drop → `RefusedLocally`,
+enqueue → `LocallyQueued`, gate refusal → `RefusedLocally`, budget deferral →
+`Deferred`, `world.IssueOrder` → `IssuedToWorld`. Terminal outcomes consume
+the registration. Unregistered traffic byte-identical.
+
+**`UnitBuilderBotModuleCA.cs`** — `queuedBuildRequests` replaced by
+`BuildIntentLedger` (Waiting/EmittedPending/Unresolved — every state counts
+once in `RequestedProductionCount`). Emitted intents keep coverage instead of
+vanishing at emit; `RefusedLocally` returns to Waiting; `PendingBuildIntents`
+save node (only when non-empty) loads everything as `Unresolved`; legacy
+`QueuedBuildRequests` strings migrate into Waiting once. A non-tracking bot
+falls back to plain `QueueOrder` — intent stays honestly pending.
+
+**Receipts.** Release build 0/0; focused+adjacent 89/89 (17 new tests driving
+the used ledger/bindings/tracker objects in production call order — FIFO/gate
+mechanics remain static call-site evidence). No runtime/merge/qualification.
+
+# 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U1 static PASS `700E3B45`
+
+*Devin-Developer.* Sol issued targeted static PASS `700E3B45` on
+`988e84cb5` (`DISPOSITION_2026-10-17_u1_988e84cb5_sol.md` in the fleet
+drop); Reviewer `ABAA42AC` independently closed the aircraft gate. All Sol
+code-review blockers for the bounded fair-service substage are closed —
+this is source-stage acceptance only: no merge/push, activation, default
+change, games/JIT, or runtime qualification authority was granted.
+
+**Nonblocking notes** (opportunistic, no amendment cycle required): the
+fixture exercises the used `PendingAircraftDelta` seam rather than the
+module's complete external transition, and the cap-minus-one assertion
+uses a constant expression. Residual bounds stand as recorded below —
+owned-alive headroom only, never-armed-save byte identity, ordinals ≠
+capture continuity, `CombatInfantryFloor` unaccepted.
+
+# 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U1 ECAFF220 successor `988e84cb5`
+
+*Devin-Developer.* Successor fix-forward answering Sol's `ECAFF220` HOLD on
+`388964c41` (closed: shared batch + affordability retry).
+
+**Residual fixed.** The fair external `BuildUnit` path now passes the SAME
+ordinary aircraft admission before emit — `ShouldBuild` does not air-check,
+so a capped external aircraft (or two external names sharing one headroom
+unit) could still emit. `UnitProducerServiceCA.PendingAircraftDelta` is the
+single class-delta seam: air-to-air vs other-aircraft under
+`MaintainAirSuperiority`, shared by the external gate and the category fill
+— emission increments remain after-admission only.
+
+**Scope notes recorded per Sol.** `LimitHeadroomAdmits` preserves the legacy
+owned-alive census — pre-existing queued items are NOT counted (no committed-
+ceiling claim; a total live+queued+pending ceiling is a different cap
+definition). Conditional `ServiceCursors` gives off-from-clean-start byte
+identity, not unconditional equality after an armed save loads. Sibling
+ordinal keys distinguish current enumeration; they do not prove
+capture/replacement continuity. `CombatInfantryFloor` remains default-0
+unaccepted policy — explicitly no P4-completion claim.
+
+**Receipts.** Focused+adjacent 70/70 (4 new aircraft-delta tests driving the
+same method both call sites use); Release build clean on mod sources — the 9
+warnings are pre-existing engine StyleCop in upstream files. No merge/push/
+runtime.
+
+
+# 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U1 fix-forward + P4 combat-demand floor
+
+*Devin-Developer.* Fix-forward on `devin/01a14504-u1-fair-service` answering Sol's
+static HOLD `82530D80` on `1db49c059`, plus the paired P4 combat-demand piece.
+Same claim, same worktree, no merge/push/runtime.
+
+**Sol F1 — one ephemeral batch.** `ProducerServiceBatch` (new, in
+`BotModuleLogic/UnitProducerServiceCA.cs`) is created at the top of each
+`BotTick` decision pass and shared by the external-request scan and every
+category visit: producer slots (keyed by queue *instance*), the reserved bank,
+per-name `UnitLimits` headroom, aircraft/air-to-air and capturer pending counts.
+The external path now requires capability AND a batch-free slot AND a
+batch-affordable cost together — the batch is discarded per pass, so nothing
+durable pre-empts the U2 ledger.
+
+**Sol F2 — affordability retries.** An unaffordable pick is rejected into the
+per-queue skip set so the bounded search tries cheaper feasible candidates
+instead of ending the fill.
+
+**Sol F3 — byte-identical-off + sibling identity.** `ServiceCursors` is emitted
+only when the armed path actually examined a producer — flag-off saves carry no
+new node. Same-actor/same-type sibling queues get an ordinal key suffix
+(`actorID|type|N`) so service is keyed per queue instance; a stale cursor still
+resumes at the documented first key.
+
+**P4 combat-infantry floor.** New `CombatInfantryFloor` field (default 0,
+requires fair service): while alive armed infantry are below the floor an
+infantry-capable queue prefers the armed-infantry candidate with the best
+combat value per cost (DerivedUnitStrength / GetProductionCost, ordinal-name
+tiebreak) — engineers/capturers/support/slaved units are excluded by the
+`IsArmedInfantry` census definition, in-pass emissions count toward the floor,
+all ordinary gates still apply after the preference, and floor rejections are
+observable as `"combat_floor"`. External infantry emissions count toward the
+same batch.
+
+**Tests — real seam, not arithmetic.** The new fixture tests drive
+`ProducerServiceBatch` across simulated call sites (external-then-category
+visibility, per-instance sibling slots, per-pass ephemerality, shared headroom
+map) — the used object itself. 66/66 (60 prior + floor/batch additions);
+Release build 0/0.
+
+**Open.** Await reviewer disposition on the fix-forward chain. Feature stays
+default-off and unqualified — no "included" claim. U2 lifecycle, runtime
+launch, merge and A/B remain unauthorized.
+
+
+# 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U1 fair producer service, first slice
+
+*Devin-Developer.* Controlled claim handoff executed after Reviewer `6576989D`
+confirmed the P1a chain (`ec7354237`) had no blocker. Isolated worktree
+`C:\cameo-wt\devin-econ-u1`, branch `devin/01a14504-u1-fair-service`, base
+`a5513de90` (verified: no commit between base and master `514138b27` touched
+`BotModules/` or the test project — zero fileset conflict). Engine pin
+`723f50f9b`. Fleet claim record:
+`CLAIM_2026-10-17_econ_u1_fair_service_devin.md`.
+
+**Scope.** Finite U1 feasible/fair producer service behind a new
+`FairProducerService` field — default off, `SwitchCondition`-gated; flag off
+keeps the legacy paths byte-identical (same first-free-queue pick, same
+head-pop of external requests, same pick/exclude semantics).
+
+**What the armed path changes.** (1) Producer service rotates over stable
+`actorID|queueType` keys resuming after the last *examined* producer — a
+producer the offer budget never reached stays in rotation, and a destroyed or
+save-rebound cursor key resumes at the documented first key instead of
+starving later producers. (2) A slot fills only from candidates admissible
+before the pick; a rejected name leaves the retry set alone (the legacy
+exclude-everything-limited retry is gone under the flag), and an active
+composition with no feasible unit falls back to the declared baseline shares
+once per queue before reverting — §3.3/P4. (3) Ephemeral in-pass reservations:
+emitted orders count against free slots, the reserved bank (including the
+mid-fill saturation re-check), `UnitLimits` headroom and the aircraft cap —
+live counts cannot see an order until it lands, so one unit of headroom no
+longer admits several invisible orders. (4) External requests: capability and
+a free slot are matched together, every pending request is examined once per
+visit in order, emitted or permanently-invalid requests leave, and blocked
+ones survive — the bounded §4 subset; durable U2 lifecycle state remains out
+of scope.
+
+**Files.** `UnitBuilderBotModuleCA.cs` (+290); new world-free helper
+`BotModuleLogic/UnitProducerServiceCA.cs`; new fixture
+`OpenRA.Mods.Cameo.Test/UnitProducerServiceTest.cs` (8 tests: rotation resume,
+destroyed/rebound cursor, slot/bank reservation, offer budget). Landed as
+`1db49c059`.
+
+**Receipts.** Build `OpenRA.Mods.CA` Release clean (0/0). Focused 8/8;
+adjacent `ProductionSaturationTest|DerivedUnitWeightsTest|
+UnitSpendReservationTest|CapturerLimitTest|BotRngTest|AirLimitsTest` 52/52 —
+60 total. No runtime/launch (no DevOps grant; SAC blocks local binaries), no
+merge/push. P4 remainder (combat-infantry floor/replenishment beyond the
+baseline fallback) and U2 lifecycle are separate increments.
+
+
 # 2026-10-14 — Devin: SENTINEL-RUNNER-POLICY (01a13a15) — post-freeze defect repair, fixture binding
 
 *Devin-Developer.* Self-inflicted defect found while preparing the qualification
@@ -22001,6 +22553,58 @@ directions (sentinel stays SENTINEL, match_batch stays ALLOW).
 Status: py_compile clean; no tests/builds/games/qualification run - serial
 gate. Exact-SHA review target supersedes 43a51eb6b.
 
+### 2026-10-17 - CORE-PRODUCTION-ECONOMY E1: storage admission observational slice f2673f812 (Devin-Developer)
+
+Lead-accepted observational slice over impl-map v4.1 (fleet doc SHA
+7AC0FD35...). Records storage-capacity commitments (P = P_queued + P_pending)
+and emits would-be verdicts via AIUtils.BotDebug; NEVER gates any admission -
+behaviour, orders, RNG and save output unchanged either flag-state;
+classic/all-off byte-identical behind switch-gated StorageAdmissionObservational
+on BaseBuilderBotModuleCAInfo.
+
+- StorageAdmissionObservation (new, BotModuleLogic): per-player ledger; P_queued
+  enumerates every owned ProductionQueue trait incl. disabled/paused
+  (TraitDictionary.All() has no enabled filter; deliberately NOT
+  BuildingsBeingProduced); capacity resolved from ruleset ActorInfo (frozen at
+  match start).
+- Reservations bind the exact Order instance via U2
+  IBotOrderTracking.QueueOrderTracked (Cameo ModularBot); engine
+  classic/fransbot bots lack the interface so the reservation stays pending
+  untracked - conservative either way.
+- Settlement positive-evidence only: exact-instance RefusedLocally, or producer
+  dead/removed/owner-changed at per-sweep reconcile. PERMANENT DOUBLE-COUNT
+  documented: IssuedToWorld keeps the reservation pending - once the item lands
+  in the queue the same capacity counts in BOTH P_queued and P_pending for its
+  lifetime (conservative overcount; can overstate would-be refusals, cannot
+  affect actual behaviour). Issued is not queue arrival.
+- Would-be verdicts: Ctarget = min(ceiling, max(base, S+hysteresis)), strict <
+  target (Sol C4198CC4), <= ceiling, cooldown term observed. 0-default fields =
+  unset sentinels; no policy numbers invented. In-memory only; resets on
+  save/load.
+
+Tests: 7 new cases in StorageAdmissionObservationTest (target resolution,
+strict/ceiling bounds, once-only ledgering, exact refusal, issued-keeps-pending,
+pre-ledger refusal). Focused+adjacent 217/217 green; Release 0 warnings/0 errors
+on touched projects. No merge/push/runtime; U1 stays unlanded pending runtime
+receipt; U2 stays held; E2 v1.2 / P2P7 v1.1 stay on hold pending reviewer
+corrections.
+
+### 2026-10-17 - U1 review F1/F2 fix-forward a754df85f (Devin-Developer)
+
+Static-only fixes per lead's U1 review (ACCEPT WITH FINDINGS, DO NOT MERGE -
+no runtime receipt). No build or test run per instruction.
+
+- F1 (medium): BuildUnitFairService `unit == null` - baseline-shares fallback
+  and RevertToBaselineComposition now require skip.Count == 0. Rejected
+  candidates break with no revert; only a genuinely empty pick falls back.
+- F2 (low/medium): never-servable external requests stayed queued and logged
+  every sweep. PermanentlyInvalidBuildRequest += UnitLimits[name] <= 0 (exact:
+  owned count is always >= the cap); plus a Waiting intent drops after
+  RequestDropFailedSweeps = 250 consecutive failed service visits (~7500t at
+  FeedbackTime spacing - beyond every transient gate), the bounded fair-service
+  form of legacy's drop-on-failure. Refusal-restored intents reset the budget.
+- Noted: FairProducerService/CombatInfantryFloor wired in no YAML - inert until
+  increment time.
 # 2026-10-17 — Devin-Integrator: CONTEXT-PROVIDERS opponent-seam enable (01a11190 follow-up)
 
 *Devin-Integrator.* Coordinator seam ACK `ACK_2026-10-16_context_opponent_seam_devin.md`

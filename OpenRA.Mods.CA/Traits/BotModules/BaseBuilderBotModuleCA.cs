@@ -119,6 +119,11 @@ namespace OpenRA.Mods.CA.Traits
 			"for StructureProductionResumeDelay before retrying.")]
 		public readonly int MaximumFailedPlacementAttempts = 3;
 
+		[Desc("REF-2 P1a (retained-refinery): preferred anchor offers a law-path refinery tries per",
+			"placement sweep before the widened fallback takes over — each failed offer commits-or-parks,",
+			"so the bound is the only knob on per-sweep claim churn.")]
+		public readonly int RefineryClaimAttemptsPerSweep = 4;
+
 		[Desc("How many randomly chosen cells with resources to check when deciding refinery placement.")]
 		public readonly int MaxResourceCellsToCheck = 3;
 
@@ -284,6 +289,32 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("ECON-A: projected income for the defence pick's affordability check is measured over the",
 			"last window of this many ticks (Earned delta / window length, integers only).")]
 		public readonly int ExpansionIncomeWindowTicks = 500;
+
+		[Desc("E1 observational slice (lead-accepted 2026-10-17; SwitchCondition-gated like the other",
+			"increment arms): record storage-capacity commitments (P = P_queued + P_pending) and emit",
+			"would-be admission verdicts to the bot debug log. NEVER gates any admission — behaviour,",
+			"orders, RNG and save output are unchanged either flag-state. PERMANENT DOUBLE-COUNT: a",
+			"successfully emitted reservation never settles on queue-item arrival (no proven order-item",
+			"correlation seam exists), so once its item lands the capacity counts TWICE — in P_queued",
+			"and in P_pending — for the reservation's lifetime; conservative overcounting that can",
+			"overstate would-be refusals but cannot affect actual behavior. In-memory only; resets on load.")]
+		public readonly bool StorageAdmissionObservational = false;
+
+		[Desc("E1 observational: base storage-capacity target term for the would-be verdict",
+			"(Ctarget = min(ceiling, max(this, S + hysteresis)); admission uses strict <).",
+			"0 = unset — terms-only lines, no verdict.")]
+		public readonly int StorageAdmissionTarget = 0;
+
+		[Desc("E1 observational: hard capacity ceiling term (admission at the bound is allowed, <=).",
+			"0 = unset.")]
+		public readonly int StorageAdmissionCeiling = 0;
+
+		[Desc("E1 observational: hysteresis margin folded into Ctarget (max(base, S + this)). 0 = none.")]
+		public readonly int StorageAdmissionHysteresis = 0;
+
+		[Desc("E1 observational: cooldown term — the emitted verdict additionally requires the gap since",
+			"the previous storage emit be >= this. Observed only; 0 = unset.")]
+		public readonly int StorageAdmissionCooldownTicks = 0;
 
 		public override object Create(ActorInitializer init) { return new BaseBuilderBotModuleCA(init.Self, this); }
 	}
@@ -457,6 +488,20 @@ namespace OpenRA.Mods.CA.Traits
 		// BZ_production_scaling: same switch-gate as ExpansionPrebuildEnabled — the shared @generic
 		// instance serves classic too, so the arm is inert there (bit-identical A/B reference).
 		public bool ProductionScalingEnabled => Info.UseProductionScaling && switchesActive;
+
+		// E1 observational slice (lead-accepted, observational ONLY): the switch-gated commitment
+		// ledger. Never read by any admission decision — recording and verdict logging only.
+		// Null until the first pass while observing; the lazy holder keeps off-state allocation-free.
+		StorageAdmissionObservation storageObservation;
+		internal bool StorageAdmissionObserving => Info.StorageAdmissionObservational && switchesActive;
+		internal StorageAdmissionObservation StorageObservation => storageObservation ??= new StorageAdmissionObservation(player);
+
+		// Per-sweep reconcile — flag-gated on the module so the call site stays unconditional-cheap.
+		internal void StorageObservationReconcile()
+		{
+			if (StorageAdmissionObserving)
+				storageObservation?.ReconcilePass();
+		}
 
 		public int ScalingCashBar => BotDifficultyLadder.Scale(Info.ProductionScalingCashEasy, Info.ProductionScalingCashHard, player, Info.ProductionScalingCashHard);
 		public int ScalingPersistBar => BotDifficultyLadder.Scale(Info.ProductionScalingPersistEasy, Info.ProductionScalingPersistHard, player, Info.ProductionScalingPersistHard);
@@ -1476,18 +1521,36 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (demand.RefineryItem != null)
 			{
+				// REF-2 P1a (retained-refinery): a completed law-path refinery is never cancelled on
+				// expiry — it converts to a normal queued refinery outright, and its own placement
+				// sweeps retry preferred claims then the widened fallback forever. The old extra
+				// clause `law.NextRefineryClaim(null) != null` gated retention on a claim existing
+				// this instant AND silently spent that anchor's offer streak — both dropped.
 				var readopted = law != null
-					&& ItemDone(demand.RefineryProducer, demand.RefineryItem)
-					&& law.NextRefineryClaim(null) != null;
+					&& ItemDone(demand.RefineryProducer, demand.RefineryItem);
 				if (!readopted)
-					CancelDemandItem(bot, demand.RefineryProducer, demand.RefineryItem);
+				{
+					// F2: held is not settled. A held cancel leaves the entry queued — the
+					// demand retires and the queue layer's sweeps own the retained item's
+					// placement retry (its protection gate keeps it queued; the placement
+					// sweeps place it) — the same re-adoption route a readopted refinery
+					// takes. Only Issued/Absent means the queue entry is gone.
+					var disposition = CancelDemandItem(bot, demand.RefineryProducer, demand.RefineryItem);
+					if (disposition is DemandCancelDisposition.AmbiguousHold or DemandCancelDisposition.ProtectionHold)
+						AIUtils.BotDebug("AI ({0}): demand-unwind cancel of {1} on {2} held ({3}); the item stays queued and is re-adopted by the queue layer's placement sweep.",
+							player.ClientIndex, demand.RefineryItem, demand.RefineryProducer, disposition);
+				}
 
 				demand.UnbindRefinery();
 			}
 
 			if (demand.DefenceItem != null)
 			{
-				CancelDemandItem(bot, demand.DefenceProducer, demand.DefenceItem);
+				var disposition = CancelDemandItem(bot, demand.DefenceProducer, demand.DefenceItem);
+				if (disposition is DemandCancelDisposition.AmbiguousHold or DemandCancelDisposition.ProtectionHold)
+					AIUtils.BotDebug("AI ({0}): demand-unwind cancel of {1} on {2} held ({3}); the item stays queued and is re-adopted by the queue layer's placement sweep.",
+						player.ClientIndex, demand.DefenceItem, demand.DefenceProducer, disposition);
+
 				demand.UnbindDefence();
 			}
 
@@ -1504,10 +1567,40 @@ namespace OpenRA.Mods.CA.Traits
 				.Any(q => q.AllQueued().Any(i => i.Item == item && i.Done));
 		}
 
-		void CancelDemandItem(IBot bot, Actor producer, string item)
+		/// <summary>
+		/// F2 (Sol adjudication of 9d997eb58): the demand-unwind cancel is name-bound — the
+		/// intended ProductionItem is provable ONLY when exactly one same-name entry exists
+		/// across the producer's queues on an enabled queue (engine CancelProduction runs on
+		/// every enabled ProductionQueue trait and removes the last same-name entry on each,
+		/// so anything beyond unique either settles a sibling or removes several entries).
+		/// A certificate alone never establishes request identity. Held ≠ settled: a held
+		/// item stays queued and the queue layer's sweeps own its placement retry — the
+		/// same re-adoption route a retained refinery takes when the demand retires.
+		/// </summary>
+		DemandCancelDisposition CancelDemandItem(IBot bot, Actor producer, string item)
 		{
 			if (producer == null || producer.Disposed || producer.IsDead)
-				return;
+				return DemandCancelDisposition.Absent;
+
+			var sameName = 0;
+			var onEnabledQueue = 0;
+			foreach (var q in producer.TraitsImplementing<ProductionQueue>())
+			{
+				var n = q.AllQueued().Count(i => i.Item == item);
+				sameName += n;
+				if (q.Enabled)
+					onEnabledQueue += n;
+			}
+
+			world.Map.Rules.Actors.TryGetValue(item, out var cancelInfo);
+			var disposition = BaseBuilderQueueEvalCA.DemandCancelVerdict(sameName, onEnabledQueue,
+				BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection(cancelInfo,
+					Info.RefineryTypes.Contains(item),
+					Info.PowerTypes.Contains(item) || Info.BarracksTypes.Contains(item),
+					null, null, null, null),
+				RefineryLawProvider()?.RefineryFallbackCertificateCurrent(producer, item) ?? false);
+			if (disposition != DemandCancelDisposition.Issued)
+				return disposition;
 
 			// REPLAY-HEALTH-LOGGER (F4): register the demand cancel so the owning manager's
 			// probe resolves it as Cancelled/DemandCancel instead of an UNKNOWN removal.
@@ -1516,6 +1609,7 @@ namespace OpenRA.Mods.CA.Traits
 					b?.NoteExternalCancel(producer, item);
 
 			bot.QueueOrder(Order.CancelProduction(producer, item, 1));
+			return DemandCancelDisposition.Issued;
 		}
 
 		/// <summary>

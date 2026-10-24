@@ -5,6 +5,8 @@ _Written 2026-08-31. Owner document for everything about how Cameo's bots decide
 systems that already ship; this file is the forward design and the research behind it.
 Task queue: [`ROADMAP.md`](ROADMAP.md) section "AI ARCHITECTURE"._
 
+> **Status note, 2026-10-17.** The banner below ("remains a design") is from 2026-08-31 and has not been re-audited per section. Treat sections as shipped only where the generated [`AI_MODULE_MAP.md`](AI_MODULE_MAP.md), [`AI_ARCH_COVERAGE.md`](AI_ARCH_COVERAGE.md) and the queue in [`AI_MASTER_PLAN.md`](AI_MASTER_PLAN.md) §3 say so. The synthesis of the research and its verified state is [`../AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md`](../AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md).
+
 **Most of this document remains a design, not a shipped adaptive system.** Section 1 is verified
 fact with source evidence. Sections 2–7 are proposals except the record-only implementation in
 §6.2a, delivered on the follow-up branch for coordinator review. Section 8 is outside research. Section 9 records what is
@@ -1069,7 +1071,7 @@ batch-harness proposal authorizes skipping the observe-only and behavior-review 
 **Ruled:** every bot number is learnable, and today's values are only the starting point. That
 includes per-faction building timers and limits: identical templates, different play styles.
 
-**The inventory (measured 2026-09-29):**
+**The inventory (measured 2026-09-29; a dated snapshot, not maintained — re-measure before quoting):**
 * 101 distinct numeric settings in 15 bot modules, 404 values over all instances;
 * 2,612 per-actor numbers (building tables, unit weights);
 * derived factors (combat-predictor strengths, unit priors).
@@ -1352,11 +1354,13 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 ### 10.2 What Cameo loads today
 
 > **The authoritative list is generated:** [`AI_MODULE_MAP.md`](AI_MODULE_MAP.md), built by
-> `python tools/ai/ai_module_map.py --write` from the resolved `Player`/`World` and the C#. On
-> 2026-09-27 it lists **32 loaded bot types, 67 instances**, the interface provider → consumer
+> `python tools/ai/ai_module_map.py --write` from the resolved `Player`/`World` and the C#.
+> Its header carries the current loaded-type and instance counts (deliberately not repeated here, so they cannot go stale), plus the interface provider → consumer
 > graph, and four checks (consumer without provider, producer without consumer, unloaded code,
 > shadowing). The table below is the annotated narrative; where they disagree, the map wins.
 > Run `--check` before citing a count.
+
+**Counts in this paragraph are dated snapshots and are not maintained.** For the current loaded-type and instance counts use [`AI_MODULE_MAP.md`](AI_MODULE_MAP.md) (generated; it wins). The per-increment tallies below are history; the running log of those increments is in `DEVELOPMENT_LOG.md`.
 
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,

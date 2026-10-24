@@ -14,6 +14,7 @@ using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using OpenRA.Mods.CA;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Pathfinder;
@@ -259,6 +260,20 @@ namespace OpenRA.Mods.Common.Traits
 		[Desc("Faction tech structures that unlock capital naval bombardment ships (ATEK for Cruiser, STEK for Missile Submarine).")]
 		public readonly FrozenSet<string> NavalCapitalTechTypes = FrozenSet<string>.Empty;
 
+		// Mounted role evidence for FransPlacementCancelGuard. Evidence only — the
+		// protected-vs-cheap-fast policy decision lives in the shared CA helper
+		// BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection (Developer-owned).
+		FrozenSet<string> protectedCancelRoleTypes;
+		FrozenSet<string> cheapFastCancelRoleTypes;
+
+		public IReadOnlyCollection<string> ProtectedCancelRoleTypes => protectedCancelRoleTypes ??=
+			RefineryTypes.Union(TechTypes).Union(RadarTypes).Union(WarFactoryTypes)
+				.Union(NavalProductionTypes).Union(ConstructionYardTypes)
+				.Union(AdvancedTechCenterTypes).Union(StrategicSuperweaponTypes)
+				.Union(SurplusAirProductionTypes).ToFrozenSet();
+
+		public IReadOnlyCollection<string> CheapFastCancelRoleTypes => cheapFastCancelRoleTypes ??=
+			PowerTypes.Union(SiloTypes).Union(BarracksTypes).Union(ForwardStructureTypes).ToFrozenSet();
 
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
@@ -1729,6 +1744,13 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			if (builders.Length == 0)
 				return;
+
+			// Held queue cancels are serviced for EVERY builder each sweep — the retry
+			// tracker must not depend on the round-robin pick or on the queue category
+			// still having native items (a held entry outlives both).
+			foreach (var b in builders)
+				FransPlacementCancelGuard.ServiceHeldQueueCancels(world, bot, player, b.heldQueueCancels,
+					Info.ProtectedCancelRoleTypes, Info.CheapFastCancelRoleTypes);
 			var queuesByCategory = AIUtils.FindQueuesByCategory(player);
 			if (world.WorldTick - lastQueueDiagTick >= 250)
 			{
@@ -2145,6 +2167,10 @@ namespace OpenRA.Mods.Common.Traits
 			uint remoteProductionFactActorId;
 			CPos remoteProductionCenter;
 			string remoteProductionItem;
+			// Serviced fallback owner for queue cancels the guard held (dead secure/remote
+			// FACT reservations transfer their exact item here); swept every module tick,
+			// independent of which queue builder is round-robin active.
+			internal readonly FransPlacementCancelGuard.HeldQueueCancelTracker heldQueueCancels = new();
 			FransWaterCheck waterState = FransWaterCheck.NotChecked;
 
 			public FransBaseBuilderQueueManager(FransBaseBuilderBotModule parent, string category, Player p, PowerManager pm, PlayerResources pr, IResourceLayer rl)
@@ -2509,6 +2535,14 @@ namespace OpenRA.Mods.Common.Traits
 				}
 			}
 
+			void MarkTrackedCancellationHeld(ProductionQueue queue, ProductionItem item, string reason,
+				FransPlacementCancelGuard.FransCancelHold hold)
+			{
+				foreach (var lifecycle in expansionLockLifecycleDiagnostics.Where(candidate => candidate.QueueActorId == queue.Actor.ActorID &&
+					(candidate.NativeItem == null ? candidate.Item == item.Item : ReferenceEquals(candidate.NativeItem, item))))
+					LogExpansionLockLifecycleTransition(lifecycle, queue, "CancellationHeld", $"{reason}/{hold}");
+			}
+
 			void MarkTrackedPlacementIssued(ProductionQueue queue, ProductionItem item, CPos location)
 			{
 				foreach (var lifecycle in expansionLockLifecycleDiagnostics.Where(candidate => candidate.QueueActorId == queue.Actor.ActorID &&
@@ -2870,8 +2904,21 @@ namespace OpenRA.Mods.Common.Traits
 					if (baseBuilder.Info.RefineryTypes.Contains(current.Item) &&
 						baseBuilder.expansionStateService?.FirstExpansionRefinerySuspendedForInfrastructure == true)
 					{
-						MarkTrackedCancellationIssued(queue, current, "FirstExpansionRefinerySuspendedForInfrastructure");
-						bot.QueueOrder(Order.CancelProduction(queue.Actor, current.Item, 1));
+						if (FransPlacementCancelGuard.TryIssue(bot, queue, current.Item, current,
+								FransPlacementCancelGuard.CancelPermitted(world, queue, current.Item,
+									baseBuilder.Info.ProtectedCancelRoleTypes, baseBuilder.Info.CheapFastCancelRoleTypes),
+								out var hold))
+						{
+							MarkTrackedCancellationIssued(queue, current, "FirstExpansionRefinerySuspendedForInfrastructure");
+						}
+						else if (hold != FransPlacementCancelGuard.FransCancelHold.None)
+						{
+							MarkTrackedCancellationHeld(queue, current, "FirstExpansionRefinerySuspendedForInfrastructure", hold);
+							FransBotLog.BotDebug(world,
+								"{0}: cancellation of suspended first-expansion refinery {1} held by placement-cancel guard ({2}).",
+								player, current.Item, hold);
+						}
+
 						return true;
 					}
 
@@ -2896,14 +2943,43 @@ namespace OpenRA.Mods.Common.Traits
 							// that requested it still exists. No travelling-MCV reservation remains.
 							if (!baseBuilder.TryGetSecureFootholdFact(secureProductionCenter, out secureProductionFact))
 							{
+								var lostSecureTargetId = secureProductionTargetId;
 								FransBotLog.BotDebug(world,
 									"{0}: SECURE producer reservation {1} for target {2} lost its physical FACT; cancelling the stale queue item so Building production cannot deadlock.",
-									player, current.Item, secureProductionTargetId);
-								MarkTrackedCancellationIssued(queue, current, "SecureProducerFactLost");
-								bot.QueueOrder(Order.CancelProduction(queue.Actor, current.Item, 1));
+									player, current.Item, lostSecureTargetId);
+								var cancelIssued = FransPlacementCancelGuard.TryIssue(bot, queue, current.Item, current,
+									FransPlacementCancelGuard.CancelPermitted(world, queue, current.Item,
+										baseBuilder.Info.ProtectedCancelRoleTypes, baseBuilder.Info.CheapFastCancelRoleTypes),
+									out var hold);
+								if (cancelIssued || hold == FransPlacementCancelGuard.FransCancelHold.None)
+								{
+									// Issued: record the transition. Absent: the item already left
+									// the queue by other means — settle the dead reservation honestly
+									// WITHOUT a CancellationIssued record (review R1).
+									if (cancelIssued)
+										MarkTrackedCancellationIssued(queue, current, "SecureProducerFactLost");
+									else
+										FransBotLog.BotDebug(world,
+											"{0}: stale SECURE producer item {1} already absent or already cancelled this tick; dead-FACT reservation {2} settled without a duplicate cancellation record.",
+											player, current.Item, lostSecureTargetId);
+									secureProductionTargetId = 0;
+									secureProductionItem = null;
+									return true;
+								}
+
+								// Held (review F2): hand the exact queued item to the serviced
+								// held-cancel retry tracker, release the dead-FACT reservation — its
+								// referent is gone — and let the item rejoin the ordinary placement
+								// path this same sweep instead of parking ahead of it forever.
+								MarkTrackedCancellationHeld(queue, current, "SecureProducerFactLost", hold);
+								heldQueueCancels.Track(queue, current.Item, current,
+									"SecureProducerFactLost", world.WorldTick).DeadFactDemoted = true;
 								secureProductionTargetId = 0;
 								secureProductionItem = null;
-								return true;
+								secureProductionReservation = false;
+								FransBotLog.BotDebug(world,
+									"{0}: cancellation of stale SECURE producer reservation {1} held by placement-cancel guard ({2}); exact item moved to the held-cancel retry tracker and the dead-FACT reservation released so placement can proceed.",
+									player, current.Item, hold);
 							}
 						}
 					}
@@ -2917,16 +2993,45 @@ namespace OpenRA.Mods.Common.Traits
 							.FirstOrDefault();
 						if (remoteProductionFact == null)
 						{
+							var lostRemoteFactId = remoteProductionFactActorId;
 							FransBotLog.BotDebug(world,
 								"{0}: REMOTE BASE producer reservation {1} lost FACT {2}; cancelling stale queue item rather than placing it back at the main base.",
-								player, current.Item, remoteProductionFactActorId);
-							MarkTrackedCancellationIssued(queue, current, "RemoteProducerFactLost");
-							bot.QueueOrder(Order.CancelProduction(queue.Actor, current.Item, 1));
+								player, current.Item, lostRemoteFactId);
+							var cancelIssued = FransPlacementCancelGuard.TryIssue(bot, queue, current.Item, current,
+								FransPlacementCancelGuard.CancelPermitted(world, queue, current.Item,
+									baseBuilder.Info.ProtectedCancelRoleTypes, baseBuilder.Info.CheapFastCancelRoleTypes),
+								out var hold);
+							if (cancelIssued || hold == FransPlacementCancelGuard.FransCancelHold.None)
+							{
+								// Issued: record the transition. Absent: the item already left the
+								// queue by other means — settle the dead-FACT reservation honestly
+								// WITHOUT a CancellationIssued record (review R1).
+								if (cancelIssued)
+									MarkTrackedCancellationIssued(queue, current, "RemoteProducerFactLost");
+								else
+									FransBotLog.BotDebug(world,
+										"{0}: stale REMOTE BASE producer item {1} already absent or already cancelled this tick; dead-FACT reservation {2} settled without a duplicate cancellation record.",
+										player, current.Item, lostRemoteFactId);
+								remoteProductionFactActorId = 0;
+								remoteProductionItem = null;
+								return true;
+							}
+
+							// Held (review F2): hand the exact queued item to the serviced
+							// held-cancel retry tracker, release the dead-FACT reservation — its
+							// referent is gone — and let the item rejoin the ordinary placement
+							// path this same sweep instead of parking ahead of it forever.
+							MarkTrackedCancellationHeld(queue, current, "RemoteProducerFactLost", hold);
+							heldQueueCancels.Track(queue, current.Item, current,
+								"RemoteProducerFactLost", world.WorldTick).DeadFactDemoted = true;
 							remoteProductionFactActorId = 0;
 							remoteProductionItem = null;
-							return true;
+							FransBotLog.BotDebug(world,
+								"{0}: cancellation of stale REMOTE BASE producer reservation {1} held by placement-cancel guard ({2}); exact item moved to the held-cancel retry tracker and the dead-FACT reservation released so placement can proceed.",
+								player, current.Item, hold);
 						}
-						remoteProductionCenter = remoteProductionFact.Location;
+						if (remoteProductionFact != null)
+							remoteProductionCenter = remoteProductionFact.Location;
 					}
 
 					// Never violate the main-base producer caps because an expansion FACT repacked
@@ -2934,8 +3039,15 @@ namespace OpenRA.Mods.Common.Traits
 					// once the FACT has been absent long enough, cancel the stale completed item.
 					// CanQueueProductionAtCurrentBaseState prevents a new copy from being queued until
 					// a valid expansion FACT exists again.
-					if (!secureProductionReservation && !remoteProductionReservation && baseBuilder.RequiresExpansionProductionPlacement(current.Item) &&
-						!baseBuilder.TryGetExpansionProductionCenter(out _))
+					// Demoted held items (lost secure/remote FACT or this gate's own
+					// timeout hold) are admitted past this gate — the reservation
+					// that justified expansion routing is dead, so the retained item
+					// must reach a real legal placement (review: no park-forever).
+					var requiresExpansionPlacement = baseBuilder.RequiresExpansionProductionPlacement(current.Item);
+					if (!secureProductionReservation && !remoteProductionReservation &&
+						FransPlacementCancelGuard.ExpansionParkGateHolds(requiresExpansionPlacement,
+							requiresExpansionPlacement && baseBuilder.TryGetExpansionProductionCenter(out _),
+							heldQueueCancels.IsDeadFactDemoted(current)))
 					{
 						if (observedTimingDoneTick >= 0 &&
 							world.WorldTick - observedTimingDoneTick >= baseBuilder.Info.ExpansionPlacementCompletedHoldTimeoutTicks)
@@ -2943,8 +3055,25 @@ namespace OpenRA.Mods.Common.Traits
 							FransBotLog.BotDebug(world,
 								"{0}: expansion-routed completed {1} lost every valid expansion FACT for {2} WT; cancelling the stale Building-queue item instead of deadlocking production.",
 								player, current.Item, baseBuilder.Info.ExpansionPlacementCompletedHoldTimeoutTicks);
-							MarkTrackedCancellationIssued(queue, current, "ExpansionPlacementFactUnavailable");
-							bot.QueueOrder(Order.CancelProduction(queue.Actor, current.Item, 1));
+							if (FransPlacementCancelGuard.TryIssue(bot, queue, current.Item, current,
+									FransPlacementCancelGuard.CancelPermitted(world, queue, current.Item,
+										baseBuilder.Info.ProtectedCancelRoleTypes, baseBuilder.Info.CheapFastCancelRoleTypes),
+									out var hold))
+							{
+								MarkTrackedCancellationIssued(queue, current, "ExpansionPlacementFactUnavailable");
+							}
+							else if (hold != FransPlacementCancelGuard.FransCancelHold.None)
+							{
+								// Same park-forever class as the dead-FACT transfers:
+								// tracker handoff + demotion so next sweep the item
+								// enters the ordinary base-placement path.
+								MarkTrackedCancellationHeld(queue, current, "ExpansionPlacementFactUnavailable", hold);
+								heldQueueCancels.Track(queue, current.Item, current,
+									"ExpansionPlacementFactUnavailable", world.WorldTick).DeadFactDemoted = true;
+								FransBotLog.BotDebug(world,
+									"{0}: cancellation of expansion-routed completed {1} held by placement-cancel guard ({2}); exact item moved to the held-cancel retry tracker and demoted to ordinary base placement.",
+									player, current.Item, hold);
+							}
 						}
 						return true;
 					}
@@ -2962,27 +3091,60 @@ namespace OpenRA.Mods.Common.Traits
 						if (pendingAge < confirmationTimeout)
 							return true;
 
-						placementPendingConfirmationRetries++;
+						// Bounded at max (review F1): once the threshold is reached the
+							// counter stays pegged so each later timeout re-asks the guard
+							// exactly once per cycle without unbounded growth/overflow.
+							placementPendingConfirmationRetries = Math.Min(placementPendingConfirmationRetries + 1,
+								baseBuilder.Info.CompletedPlacementConfirmationMaximumRetries);
 							if (placementPendingConfirmationRetries >= baseBuilder.Info.CompletedPlacementConfirmationMaximumRetries)
 							{
 								FransBotLog.BotDebug(world,
 									"{0}: completed Building-queue item {1} on actor {2} remained READY after {3} unconfirmed native placement attempts; cancelling the stale item so the shared Building queue cannot deadlock.",
 									player, current.Item, queue.Actor.ActorID, placementPendingConfirmationRetries);
-								MarkTrackedCancellationIssued(queue, current, "PlacementConfirmationRetriesExhausted");
-								bot.QueueOrder(Order.CancelProduction(queue.Actor, current.Item, 1));
-								placementPendingItem = null;
-								placementPendingQueueActorId = 0;
-								placementPendingIssuedTick = -1;
-								placementPendingConfirmationRetries = 0;
-								lastFailedBuilding = current.Item;
-								baseBuilder.NotifyOpeningBuildingFailed(current.Item);
-								if (baseBuilder.Info.NavalProductionTypes.Contains(current.Item))
+								var retryCancelIssued = FransPlacementCancelGuard.TryIssue(bot, queue, current.Item, current,
+									FransPlacementCancelGuard.CancelPermitted(world, queue, current.Item,
+										baseBuilder.Info.ProtectedCancelRoleTypes, baseBuilder.Info.CheapFastCancelRoleTypes),
+									out var hold);
+								if (retryCancelIssued || hold == FransPlacementCancelGuard.FransCancelHold.None)
 								{
-									var retryTicks = Math.Max(1, baseBuilder.Info.StructureProductionResumeDelay);
-									navalPlacementBlockedUntilTick[current.Item] = world.WorldTick + retryTicks;
-									navalPlacementPrecheckRetryTick.Remove(current.Item);
+									// Issued: record the transition. Absent: the engine cancellation
+									// target is gone — the item already left the queue by other means,
+									// so settle the pending record WITHOUT a CancellationIssued marker
+									// (review R1). Settling actions are identical either way.
+									if (retryCancelIssued)
+										MarkTrackedCancellationIssued(queue, current, "PlacementConfirmationRetriesExhausted");
+									else
+										FransBotLog.BotDebug(world,
+											"{0}: completed Building-queue item {1} on actor {2} already absent or already cancelled this tick at confirmation-retry exhaustion; pending-placement record settled without a duplicate cancellation record.",
+											player, current.Item, queue.Actor.ActorID);
+									placementPendingItem = null;
+									placementPendingQueueActorId = 0;
+									placementPendingIssuedTick = -1;
+									placementPendingConfirmationRetries = 0;
+									lastFailedBuilding = current.Item;
+									baseBuilder.NotifyOpeningBuildingFailed(current.Item);
+									if (baseBuilder.Info.NavalProductionTypes.Contains(current.Item))
+									{
+										var retryTicks = Math.Max(1, baseBuilder.Info.StructureProductionResumeDelay);
+										navalPlacementBlockedUntilTick[current.Item] = world.WorldTick + retryTicks;
+										navalPlacementPrecheckRetryTick.Remove(current.Item);
+									}
+									return true;
 								}
-								return true;
+
+								// Guard held the cancel. Do NOT preserve the pending-placement sweep
+								// record: a preserved placementPendingIssuedTick re-enters
+								// samePendingPlacement on every later sweep and parks the item ahead of
+								// ChooseBuildLocation even after space opens (review F1). Take the
+								// ordinary unconfirmed-attempt retry instead: the confirmation counter
+								// stays attached to this exact queue item (it is only reset when the
+								// item physically disappears or is cancelled), the sweep below retries
+								// placement at a fresh location/BuildingInfluence snapshot, and the
+								// guard is re-asked after the next exhaustion.
+								MarkTrackedCancellationHeld(queue, current, "PlacementConfirmationRetriesExhausted", hold);
+								FransBotLog.BotDebug(world,
+									"{0}: cancellation of stale READY item {1} held by placement-cancel guard ({2}); item stays queued and rejoins the placement retry path.",
+									player, current.Item, hold);
 							}
 
 						// Retry from a fresh location/BuildingInfluence snapshot. The retry counter stays
@@ -3030,7 +3192,8 @@ namespace OpenRA.Mods.Common.Traits
 								baseCenterKeepsFailing = baseBuilder.GetBaseCenter();
 							}
 							else
-								(location, baseCenterKeepsFailing, variant) = ChooseBuildLocation(current.Item, true, type);
+								(location, baseCenterKeepsFailing, variant) = ChooseBuildLocation(current.Item, true, type,
+									deadFactDemoted: heldQueueCancels.IsDeadFactDemoted(current));
 						}
 					}
 					if (location == null)
@@ -3038,8 +3201,20 @@ namespace OpenRA.Mods.Common.Traits
 						if (++failCount >= baseBuilder.Info.MaximumFailedPlacementAttempts)
 						{
 							FransBotLog.BotDebug(world, "{0}: FransBaseBuilder has nowhere to place {1}.", player, current.Item);
+							var cancelIssued = FransPlacementCancelGuard.TryIssue(bot, queue, current.Item, current,
+								FransPlacementCancelGuard.CancelPermitted(world, queue, current.Item,
+									baseBuilder.Info.ProtectedCancelRoleTypes, baseBuilder.Info.CheapFastCancelRoleTypes),
+								out var hold);
+							if (!cancelIssued && hold != FransPlacementCancelGuard.FransCancelHold.None)
+							{
+								MarkTrackedCancellationHeld(queue, current, "MaximumPlacementFailuresReached", hold);
+								FransBotLog.BotDebug(world,
+									"{0}: cancellation of unplaceable {1} held by placement-cancel guard ({2}); item stays head-of-queue for a later pass.",
+									player, current.Item, hold);
+								return true;
+							}
+
 							MarkTrackedCancellationIssued(queue, current, "MaximumPlacementFailuresReached");
-							bot.QueueOrder(Order.CancelProduction(queue.Actor, current.Item, 1));
 							lastFailedBuilding = current.Item;
 
 							if (baseBuilder.Info.NavalProductionTypes.Contains(current.Item))
@@ -3521,7 +3696,7 @@ namespace OpenRA.Mods.Common.Traits
 				return playerBuildings.Count(a => a.Info.Name == name || variants.Contains(a.Info.Name)) + (baseBuilder.BuildingsBeingProduced.TryGetValue(name, out var n) ? n : 0);
 			}
 
-			(CPos? Location, CPos? BaseCenter, int Variant) ChooseBuildLocation(string actorType, bool distanceToBaseIsImportant, FransBuildingType type, CPos? localProductionFactCenter = null)
+			(CPos? Location, CPos? BaseCenter, int Variant) ChooseBuildLocation(string actorType, bool distanceToBaseIsImportant, FransBuildingType type, CPos? localProductionFactCenter = null, bool deadFactDemoted = false)
 			{
 				var actorInfo = world.Map.Rules.Actors[actorType];
 				var bi = actorInfo.TraitInfoOrDefault<BuildingInfo>();
@@ -3724,11 +3899,21 @@ namespace OpenRA.Mods.Common.Traits
 					return localPlacement;
 				}
 
-				if (type == FransBuildingType.Building && baseBuilder.RequiresExpansionProductionPlacement(actorType))
+				// The verbatim option-B seam: expansion routing is decided by the
+				// guard's pure predicate — TryGetExpansionProductionCenter stays
+				// short-circuit-lazy behind requiresExpansionRouting, exactly as
+				// before; a demoted item with no live FACT falls through to the
+				// ordinary base placement below instead of returning null.
+				var requiresExpansionRouting = type == FransBuildingType.Building &&
+					baseBuilder.RequiresExpansionProductionPlacement(actorType);
+				CPos expansionCenter = default;
+				var routing = FransPlacementCancelGuard.ExpansionRouting(requiresExpansionRouting,
+					requiresExpansionRouting && baseBuilder.TryGetExpansionProductionCenter(out expansionCenter),
+					deadFactDemoted);
+				if (routing == FransPlacementCancelGuard.FransExpansionRouting.Hold)
+					return (null, null, 0);
+				if (routing == FransPlacementCancelGuard.FransExpansionRouting.Expansion)
 				{
-					if (!baseBuilder.TryGetExpansionProductionCenter(out var expansionCenter))
-						return (null, null, 0);
-
 					var expansionTarget = expansionCenter;
 					var expansionWeight = baseBuilder.ProductionDirectionWeight(actorType);
 					if (expansionWeight > 0 && baseBuilder.TryGetEnemyBaseDirectionTarget(out var knownEnemyBase, out _))
@@ -3742,6 +3927,10 @@ namespace OpenRA.Mods.Common.Traits
 							player, actorType, expansionCenter, expansionPlacement.Location.Value);
 					return expansionPlacement;
 				}
+				if (requiresExpansionRouting && deadFactDemoted)
+					FransBotLog.BotDebug(world,
+						"{0}: dead-FACT demoted {1} has no live expansion FACT; attempting ordinary base placement as the legal fallback.",
+						player, actorType);
 
 				var baseCenter = baseBuilder.GetBaseCenter();
 				switch (type)
@@ -3846,5 +4035,330 @@ namespace OpenRA.Mods.Common.Traits
 				}
 			}
 		}
+	}
+
+	/// <summary>
+	/// Shared fail-closed guard for every Frans automatic building-queue cancellation.
+	/// Two independent checks, both derived from the maintainer refinement ruling
+	/// (RULING_2026-10-16_high_value_placement_refinement_sol.md, SHA A399083F):
+	///   1) Intended-vs-engine-target: Order.CancelProduction is name-only and removes the
+	///      LAST same-name queue entry. If the caller intended a different entry (e.g. a
+	///      reserved/handoff FIRST), the order is never issued and no reservation state is
+	///      released — hold-on-mismatch, never redirected intent.
+	///   2) Protection: the cancel proceeds only when the shared CA policy helper returns
+	///      Allow (provably cheap-fast). Frans carries no exhaustion-certificate machinery,
+	///      so protected and unresolvable items both hold here.
+	/// DEPENDENCY (recorded): the verdict call delegates to
+	/// BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection — the Developer-owned
+	/// shared policy helper whose API is proposed in
+	/// API_PROPOSAL_2026-10-16_placement_cancel_protection.md (fleet repo). If the agreed
+	/// signature differs, only this one call site adapts. Frans cannot self-classify:
+	/// doing so would duplicate the policy helper, which the task forbids.
+	/// </summary>
+	public static class FransPlacementCancelGuard
+	{
+		public enum FransCancelHold { None, AmbiguousTarget, Protected }
+
+		/// <summary>Mirrors engine law: ProductionQueue.CancelProductionInner removes
+		/// Queue.LastOrDefault(i => i.Item == name) — name-only, tail-first.</summary>
+		public static ProductionItem EngineCancelTarget(ProductionQueue queue, string itemName) =>
+			queue?.AllQueued().LastOrDefault(item => item.Item == itemName);
+
+		/// <summary>
+		/// Gathers mounted role-membership and resolved cost/build-time evidence, then asks
+		/// the shared policy seam whether this cancel is permitted. Returns true only
+		/// on PlacementCancelVerdict.Allow; protected and unresolvable both return false.
+		/// Per the explicit no-Allow decision recorded in consolidated plan 4AD696C8
+		/// NOT ratified this iteration — no caller-side floor reference is computed here;
+		/// the seam stays no-Allow/fail-closed regardless. Only POSITIVE resolved evidence
+		/// is meaningful (E2): engine-resolved GetProductionCost/GetBuildTime values; a
+		/// missing ValuedInfo resolves to 0 and zero/negative is never cheap-fast proof.
+		/// </summary>
+		public static bool CancelPermitted(World world, ProductionQueue queue, string itemName,
+			IReadOnlyCollection<string> protectedRoleTypes, IReadOnlyCollection<string> cheapFastRoleTypes)
+		{
+			if (queue == null || itemName == null)
+				return false;
+
+			world.Map.Rules.Actors.TryGetValue(itemName, out var info);
+			var buildable = info == null ? null : BuildableInfo.GetTraitForQueue(info, queue.Info.Type);
+			int? resolvedCost = info?.TraitInfoOrDefault<ValuedInfo>() == null ? (int?)null : queue.GetProductionCost(info);
+			int? resolvedTicks = info != null && buildable != null ? queue.GetBuildTime(info, buildable) : (int?)null;
+			if (resolvedCost <= 0)
+				resolvedCost = null;
+			if (resolvedTicks <= 0)
+				resolvedTicks = null;
+
+			return SharedPolicySeam(info,
+				protectedRoleTypes != null && protectedRoleTypes.Contains(itemName),
+				cheapFastRoleTypes != null && cheapFastRoleTypes.Contains(itemName),
+				resolvedCost, resolvedTicks);
+		}
+
+		/// <summary>
+		/// BLOCKED SEAM (recorded dependency — see API_PROPOSAL_2026-10-16_placement_cancel_protection.md
+		/// in the fleet repo and the claim doc): the shared policy helper
+		/// BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection plus its
+		/// PlacementCancelVerdict enum is Developer-owned inside the live CA claim.
+		/// Consolidated plan 4AD696C8 declined the floor-comparison Allow criterion for this
+		/// iteration, so the current agreed scope is no-Allow/fail-closed — this seam
+		/// returns false and every Frans placement cancel holds rather than risk a
+		/// protected or unresolvable item. When a reviewed helper signature lands, this
+		/// body becomes the delegation; the evidence gathered in CancelPermitted already
+		/// matches the proposal minus the unratified floor parameters.
+		/// NB (per review 7CE00E73): the TryIssue intended-vs-engine-LAST reference check
+		/// is an enqueue-time check, not dispatch-time identity proof — a same-name item
+		/// appended after this check in the same order batch can still become the engine's
+		/// dispatch target. The guard narrows the unsafe window; it cannot eliminate it
+		/// without a dispatch-time engine contract (outside this lane's scope).
+		/// </summary>
+		static bool SharedPolicySeam(ActorInfo info, bool isProtectedRole, bool isCheapFastRole,
+			int? resolvedCost, int? resolvedTicks)
+		{
+			return false;
+		}
+
+		/// <summary>
+		/// One exact queue item whose cancel the guard held, now owned by the retry
+		/// tracker instead of the caller's task bookkeeping. Carries the queue, the
+		/// item name, and the enqueue-time ProductionItem reference so a later sweep
+		/// can re-ask the guard against the same exact item and can notice when the
+		/// item leaves the queue by other means (placed or externally handled).
+		/// </summary>
+		public sealed class HeldQueueCancelEntry
+		{
+			public ProductionQueue Queue;
+			public string ItemName;
+			public ProductionItem Item;
+			public string Reason;
+			public int HeldSinceTick;
+			public int NextReaskTick;
+			public int ReaskCount;
+			public bool HardBlockerLogged;
+
+			/// <summary>
+			/// Set when the held item's expansion reservation died (lost secure/remote
+			/// FACT or the expansion-FACT timeout). A demoted item keeps its cancel
+			/// intent but is admitted to the ordinary base-placement path — the
+			/// expansion-only park gate and ChooseBuildLocation's no-expansion-FACT
+			/// null return both consult this flag. It ends with the entry: placed,
+			/// cancelled, or settled items leave the demotion with the queue.
+			/// </summary>
+			public bool DeadFactDemoted;
+		}
+
+		/// <summary>
+		/// Serviced fallback owner for held queue cancels (review F2). Entries are
+		/// appended ONLY at a real held-cancel point; removals happen only inside
+		/// ServiceHeldQueueCancels, so no other writer can silently displace a held
+		/// item's tracking (the single-slot routine-ownership overwrite problem).
+		/// Re-asks are interval-bounded; after HardBlockerReaskLimit consecutive holds
+		/// the entry stays tracked but logs one hard-blocker record.
+		/// </summary>
+		public sealed class HeldQueueCancelTracker
+		{
+			public const int DefaultReaskIntervalTicks = 25;
+			public const int HardBlockerReaskLimit = 40;
+			public readonly List<HeldQueueCancelEntry> Entries = new();
+
+			/// <summary>
+			/// Registers a held cancel for an exact item. If the same (queue, item)
+			/// intent is already tracked — e.g. two teardown paths transferred it in
+			/// overlapping sweeps — the existing entry is returned unchanged so the
+			/// tracker cannot grow duplicate re-asks for one item.
+			/// </summary>
+			public HeldQueueCancelEntry Track(ProductionQueue queue, string itemName,
+				ProductionItem item, string reason, int worldTick)
+			{
+				var existing = Entries.FirstOrDefault(e => e.Queue == queue &&
+					(item != null
+						? ReferenceEquals(e.Item, item)
+						: e.Item == null && e.ItemName == itemName));
+				if (existing != null)
+					return existing;
+
+				var entry = new HeldQueueCancelEntry
+				{
+					Queue = queue,
+					ItemName = itemName,
+					Item = item,
+					Reason = reason,
+					HeldSinceTick = worldTick,
+					NextReaskTick = worldTick + DefaultReaskIntervalTicks
+				};
+				Entries.Add(entry);
+				return entry;
+			}
+
+			/// <summary>True while the exact item is tracked AND marked demoted —
+			/// the admission token the placement sweep consults instead of parking
+			/// the retained item on the expansion-only gate.</summary>
+			public bool IsDeadFactDemoted(ProductionItem item) =>
+				item != null && Entries.Any(e => e.DeadFactDemoted && ReferenceEquals(e.Item, item));
+		}
+
+		public enum FransExpansionRouting { Fallthrough, Expansion, Hold }
+
+		/// <summary>
+		/// The expansion-only park gate as one pure predicate — the consumption
+		/// point the completed-item sweep consults verbatim (option-B seam, spec
+		/// SPEC_2026-10-17_frans_world_harness_devin). Holds only when the item
+		/// requires expansion production placement AND no live expansion FACT
+		/// exists AND the item is not a dead-FACT demoted held entry.
+		/// </summary>
+		public static bool ExpansionParkGateHolds(bool requiresExpansionPlacement,
+			bool expansionFactPresent, bool isDeadFactDemoted) =>
+			requiresExpansionPlacement && !expansionFactPresent && !isDeadFactDemoted;
+
+		/// <summary>
+		/// The ChooseBuildLocation routing decision as one pure predicate (same
+		/// option-B seam). Expansion routes to the expansion FACT area; Hold is
+		/// the park outcome — no legal site this sweep; Fallthrough continues into
+		/// ordinary base placement — always for non-expansion items, and for a
+		/// dead-FACT demoted item with no live expansion FACT it is the legal
+		/// fallback the review requires instead of parking.
+		/// </summary>
+		public static FransExpansionRouting ExpansionRouting(bool requiresExpansion,
+			bool expansionFactPresent, bool isDeadFactDemoted)
+		{
+			if (!requiresExpansion)
+				return FransExpansionRouting.Fallthrough;
+			if (expansionFactPresent)
+				return FransExpansionRouting.Expansion;
+			return isDeadFactDemoted ? FransExpansionRouting.Fallthrough : FransExpansionRouting.Hold;
+		}
+
+		/// <summary>
+		/// Live retry service for held cancels — the real receiver callers hand a
+		/// retained item to before tearing down its task context. Each sweep every
+		/// due entry is re-asked against the exact intended item: a successful ask
+		/// issues the cancel, a departed item or dead queue settles the entry
+		/// honestly, and a persistent hold keeps the entry for the next interval.
+		/// </summary>
+		public static void ServiceHeldQueueCancels(World world, IBot bot, Player player,
+			HeldQueueCancelTracker tracker, IReadOnlyCollection<string> protectedRoleTypes,
+			IReadOnlyCollection<string> cheapFastRoleTypes)
+		{
+			if (tracker == null || tracker.Entries.Count == 0 || world == null || bot == null)
+				return;
+
+			foreach (var entry in tracker.Entries.ToArray())
+			{
+				var queue = entry.Queue;
+				var queueAlive = queue != null && queue.Actor != null &&
+					queue.Actor.IsInWorld && !queue.Actor.IsDead && !queue.Actor.Disposed;
+				if (!queueAlive)
+				{
+					tracker.Entries.Remove(entry);
+					FransBotLog.BotDebug(world,
+						"{0}: held queue-cancel for {1} resolved — its queue actor is gone; the item cannot outlive the queue. No cancellation recorded.",
+						player, entry.ItemName);
+					continue;
+				}
+
+				var present = entry.Item != null
+					? queue.AllQueued().Contains(entry.Item)
+					: queue.AllQueued().Any(i => i.Item == entry.ItemName);
+				if (!present)
+				{
+					tracker.Entries.Remove(entry);
+					FransBotLog.BotDebug(world,
+						"{0}: held queue-cancel for {1} settled without an order — the exact item left the queue by other means (placed or externally handled) after {2} held ticks.",
+						player, entry.ItemName, world.WorldTick - entry.HeldSinceTick);
+					continue;
+				}
+
+				if (world.WorldTick < entry.NextReaskTick)
+					continue;
+
+				var issued = TryIssue(bot, queue, entry.ItemName, entry.Item,
+					CancelPermitted(world, queue, entry.ItemName, protectedRoleTypes, cheapFastRoleTypes),
+					out var hold);
+				entry.NextReaskTick = world.WorldTick + HeldQueueCancelTracker.DefaultReaskIntervalTicks;
+				if (issued)
+				{
+					tracker.Entries.Remove(entry);
+					FransBotLog.BotDebug(world,
+						"{0}: held queue-cancel for {1} ISSUED on retry after {2} held ticks (reason: {3}).",
+						player, entry.ItemName, world.WorldTick - entry.HeldSinceTick, entry.Reason);
+				}
+				else if (hold == FransCancelHold.None)
+				{
+					tracker.Entries.Remove(entry);
+					FransBotLog.BotDebug(world,
+						"{0}: held queue-cancel for {1} resolved at retry — engine target absent or the cancel was already ordered this tick; nothing left to do.",
+						player, entry.ItemName);
+				}
+				else
+				{
+					entry.ReaskCount++;
+					if (entry.ReaskCount >= HeldQueueCancelTracker.HardBlockerReaskLimit && !entry.HardBlockerLogged)
+					{
+						entry.HardBlockerLogged = true;
+						FransBotLog.BotDebug(world,
+							"{0}: HARD BLOCKER — queue-cancel for {1} still held ({2}) after {3} re-asks; item remains queued and reachable by the owning queue's normal placement sweep. Reason: {4}.",
+							player, entry.ItemName, hold, entry.ReaskCount, entry.Reason);
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// Issues Order.CancelProduction only when the intended entry IS the engine's
+		/// last-same-name target AND the shared policy allows the cancel. Returns false
+		/// with hold == None when the item is already absent (a no-op, same as the old
+		/// unconditional issue); false with a hold reason when the guard refuses.
+		/// </summary>
+		public static bool TryIssue(IBot bot, ProductionQueue queue, string itemName,
+			ProductionItem intended, bool cancelPermitted, out FransCancelHold hold)
+		{
+			var engineTarget = EngineCancelTarget(queue, itemName);
+			if (engineTarget == null)
+			{
+				hold = FransCancelHold.None;
+				return false;
+			}
+
+			if (intended != null && !ReferenceEquals(engineTarget, intended))
+			{
+				hold = FransCancelHold.AmbiguousTarget;
+				return false;
+			}
+
+			if (!cancelPermitted)
+			{
+				hold = FransCancelHold.Protected;
+				return false;
+			}
+
+			// Same-tick dedupe: Order.CancelProduction removes the LAST same-name
+			// entry. A second order for the same queue+name issued while the first
+			// is still pending dispatch would cancel the NEXT same-name item — the
+			// wrong item — so a duplicate ask in the same world tick reports the
+			// settle outcome (hold == None) instead of emitting a second order.
+			var worldTick = queue.Actor.World?.WorldTick ?? 0;
+			var issued = IssuedCancels.GetOrCreateValue(queue);
+			if (issued.Ticks.TryGetValue(itemName, out var issuedTick) && issuedTick == worldTick)
+			{
+				hold = FransCancelHold.None;
+				return false;
+			}
+
+			bot.QueueOrder(Order.CancelProduction(queue.Actor, itemName, 1));
+			issued.Ticks[itemName] = worldTick;
+			hold = FransCancelHold.None;
+			return true;
+		}
+
+		// Weak-keyed per-queue record of cancel orders issued this world tick — the
+		// dedupe above prevents a queued order from silently becoming a second
+		// CancelProduction on the wrong same-name tail when two owners (a caller
+		// path and the serviced held-cancel tracker) ask in the same sweep.
+		sealed class IssuedCancelRecord
+		{
+			public readonly Dictionary<string, int> Ticks = new();
+		}
+
+		static readonly ConditionalWeakTable<ProductionQueue, IssuedCancelRecord> IssuedCancels = new();
 	}
 }

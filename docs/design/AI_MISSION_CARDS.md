@@ -2,7 +2,7 @@
 
 **Status:** design, 2026-09-30. Plan rows **MC1–MC3** (AI_MASTER_PLAN §3), built on **LC8** (failure write-back)
 and **LC1** (unit leases). **Source:** fransotto (Fransbot's author), in conversation with the maintainer on
-2026-09-30, after his review ([`../FRANSBOT_AI_REVIEW_2026-09-30.md`](../FRANSBOT_AI_REVIEW_2026-09-30.md)): Fransbot is
+2026-09-30, after his review ([`../history/FRANSBOT_AI_REVIEW_2026-09-30.md`](../history/FRANSBOT_AI_REVIEW_2026-09-30.md)): Fransbot is
 moving from a bid system to *mission cards* (`MatchId → MissionId → AttemptId`), so that the General gets feedback
 on its own decisions. He proposed that Cameo and Fransbot share the **neutral infrastructure** (id format, states,
 serialisation, archive, replay correlation) while keeping different decision systems. This document is Cameo's side

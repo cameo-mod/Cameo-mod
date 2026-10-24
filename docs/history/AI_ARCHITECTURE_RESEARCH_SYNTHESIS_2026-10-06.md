@@ -1,3 +1,6 @@
+> **ARCHIVED 2026-10-17 — superseded by [`../AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md`](../AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md), which carries every section of this earlier 273-line reading (checked section by section).**
+> Moved here by the AI-docs consolidation; never overrides anything current (see [`../README.md`](../README.md)).
+
 # Cameo AI architecture and external-research synthesis — 2026-10-06
 
 ## Purpose and authority
