@@ -37,7 +37,7 @@ army_hq:
 		ExitCell: 1,2
 	ProvidesPrerequisite@lvl2:
 		Prerequisite: army_hq_upgrade_lvl2_available
-		RequiresCondition: !army_hq_upgrade_lvl2 || !army_hq_upgrade_lvl3
+		RequiresCondition: !army_hq_upgrade_lvl2
 	ProvidesPrerequisite@lvl3:
 		Prerequisite: army_hq_upgrade_lvl3_available
 		RequiresCondition: army_hq_upgrade_lvl2 && !army_hq_upgrade_lvl3
@@ -436,7 +436,7 @@ army_aa_turret:
 	-WithSpriteBody:
 	WithEmbeddedTurretSpriteBody:
 	Armament:
-		Weapon: ra1_allies_alliedaagun_flak
+		Weapon: armymen_aagun_flak
 		LocalOffset: 520,150,450, 520,-150,450
 		MuzzleSequence: muzzle
 		CasingWeapon: generic_bullet_casing

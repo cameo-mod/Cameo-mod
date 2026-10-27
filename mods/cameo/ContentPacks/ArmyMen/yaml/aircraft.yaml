@@ -109,6 +109,105 @@ army_helicopter.Husk:
 	RenderSprites:
 		Image: army_helicopter
 		PlayerPalette: player_rgba
+army_biplane:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^FighterTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@eject: ^AircraftEjectOnDeath
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 30
+		Prerequisites: ~army_airfield
+		Description: actor_yak.description
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: Biplane
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 48000
+	Repairable:
+		HpPerStep: 1600
+	ChangesHealth@SelfHealing:
+		Step: 32
+	Armament@PRIMARY:
+		Weapon: armymen_chopper_chaingun
+		LocalOffset: 256,-213,0
+		MuzzleSequence: muzzle
+		PauseOnCondition: ammo < 4
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: armymen_chopper_chaingun
+		LocalOffset: 256,213,0
+		MuzzleSequence: muzzle
+		PauseOnCondition: ammo < 4
+	# FirepowerMultiplier@DualWeapon:
+		# Modifier: 25
+	AttackAircraft:
+		FacingTolerance: 100
+	Aircraft:
+		TurnSpeed: 9
+		Speed: 150
+	SelectionDecorations:
+	WithMuzzleOverlay:
+	Contrail:
+		Offset: -853,0,0
+	SpawnActorOnDeath:
+		Actor: army_biplane_husk
+	EjectOnDeath:
+		PilotActor: army_grenadier
+	LeavesTrails:
+		Offsets: -853,0,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	Selectable:
+		DecorationBounds: 1280, 1280, 0, 128
+	Voiced:
+		VoiceSet: Armymen_Chopper
+	AmmoPool:
+		Ammo: 64
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 8
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 8
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+army_biplane_husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Biplane
+	Contrail:
+		Offset: -853,0,0
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 150
+	LeavesTrails:
+		Offsets: -853,0,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: army_plane
+		PlayerPalette: player_rgba
+
 army_plane:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
@@ -293,4 +392,88 @@ army_transport_husk:
 		Speed: 140
 	RenderSprites:
 		Image: army_transport
+		PlayerPalette: player_rgba
+army_large_plane:
+	Inherits: ^AirstrikePlane
+	ParaDrop:
+		DropRange: 5c0
+		ChuteSound: chute1.aud
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Health:
+		HP: 150000
+	Armor:
+		Type: Bomber
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 20
+		Speed: 175
+		Repulsable: False
+		MaximumPitch: 56
+	Cargo:
+		MaxWeight: 10
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: Large Plane
+	Contrail@1:
+		Offset: -432,560,0
+	Contrail@2:
+		Offset: -432,-560,0
+	SpawnActorOnDeath:
+		Actor: army_large_plane_husk
+	LeavesTrails@0:
+		Offsets: -432,560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	LeavesTrails@1:
+		Offsets: -432,-560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	RejectsOrders:
+	GivesExperience:
+	DynamicSpeedMultiplier:
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+
+army_large_plane_bomber:
+	Inherits: army_large_plane
+	AttackBomber:
+		FacingTolerance: 32
+	Armament:
+		Weapon: ParaBomb
+	RenderSprites:
+		Image: army_large_plane
+army_large_plane_husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Large Plane
+	Contrail:
+		Offset: -853,0,0
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 150
+	LeavesTrails:
+		Offsets: -853,0,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: army_large_plane
 		PlayerPalette: player_rgba

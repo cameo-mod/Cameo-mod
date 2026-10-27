@@ -226,6 +226,44 @@ army_mortar:
 
 
 
+army_radio:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: army_men_sprites|army_radio.png
+	run:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+	idle1:
+		Start: 88
+	idle2:
+		Start: 103
+	prone-stand:
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Start: 118
+	die1:
+		Start: 166
+	die2:
+		Start: 181
+	shoot:
+		Start: 196
+	prone-shoot:
+		Start: 244
+	paradrop:
+		Start: 324
+	icon:
+		Filename: army_men_icons|army_radio_icon.png
+
 army_tank:
 	idle:
 		Filename: army_men_sprites|army_tank.png
@@ -236,6 +274,34 @@ army_tank:
 		Facings: 64
 	icon:
 		Filename: army_men_icons|army_tank_icon.png
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+army_skateboard:
+	idle:
+		Filename: army_men_sprites|army_skateboard.png
+		Facings: 64
+	icon:
+		Filename: army_men_icons|army_skateboard_icon.png
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+army_lunar_buggy:
+	idle:
+		Filename: army_men_sprites|army_lunar_buggy.png
+		Facings: 64
+		Scale: 0.75
+	icon:
+		Filename: army_men_icons|army_lunar_buggy_icon.png
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+army_toaster_artillery:
+	idle:
+		Filename: army_men_sprites|army_toaster_artillery.png
+		Facings: 64
+	icon:
+		Filename: army_men_icons|army_toaster_artillery_icon.png
 	muzzle:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
@@ -294,6 +360,27 @@ army_plane:
 		Facings: 8
 	icon:
 		Filename: army_men_icons|army_plane_icon.png
+army_large_plane:
+	idle:
+		Filename: army_men_sprites|army_large_plane.png
+		Facings: 64
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: army_men_icons|army_plane_icon.png
+army_biplane:
+	idle:
+		Filename: army_men_sprites|army_biplane.png
+		Facings: 64
+		Scale: 0.75
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: army_men_icons|army_biplane_icon.png
 army_medic:
 	idle:
 		Filename: army_men_sprites|army_medic.png

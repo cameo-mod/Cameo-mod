@@ -198,14 +198,142 @@ army_machinegunner:
 	ChangesHealth@SelfHealing:
 		Step: 30
 	Armament@PRIMARY:
-		Weapon: ra1_allies_machinegunner_machinegun
+		Weapon: armymen_machinegunner_machinegun
 		LocalOffset: 500,0,400
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: ra1_allies_machinegunner_machinegun
+		Weapon: armymen_machinegunner_machinegun
 	AttackFrontal:
 		FacingTolerance: 0
 	Voiced:
 		VoiceSet: Armymen_Grunt
 	RenderSprites:
 		PlayerPalette: player_rgba
+
+army_radio:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@anim: ^RA2Infantry
+	Inherits@MC: ^MCImmune
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Valued:
+		Cost: 5000
+	Tooltip:
+		Name: Radio Operator
+	Buildable:
+		BuildPaletteOrder: 200
+		Prerequisites: ~army_barracks, army_hq_lvl2
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 120000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@PRIMARY:
+		Weapon: armymen_radio_operator_dummy
+		LocalOffset: 500,0,400
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: armymen_radio_operator_dummy
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: Armymen_Grunt
+	RenderSprites:
+		PlayerPalette: player_rgba
+	SupportPowerChargeBar:
+	AirstrikePower@parabombs:
+		OrderName: Parabombs
+		ChargeInterval: 7500
+		Prerequisites:
+			1: army_hq_lvl2
+		Icons:
+			1: airstrike
+		Names:
+			1: Parabombs
+		Descriptions:
+			1: power_parabombs.description
+		SelectTargetSpeechNotification: SelectTarget
+		CameraActor: camera
+		CameraRemoveDelay: 150
+		UnitTypes:
+			1: army_large_plane_bomber
+		QuantizedFacings: 32
+		DisplayBeacon: true
+		BeaconPosters:
+			1: airstrike
+		SquadSizes:
+			1: 3
+		SquadOffset: 1792,1792,0
+		ArrowSequence: arrow
+		ClockSequence: clock
+		CircleSequence: circles
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: airstrikedirection
+		SupportPowerPaletteOrder: 40
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+	ParatroopersPower@paratroopers:
+		OrderName: ArmymenRTSParatroopers
+		ChargeInterval: 9000
+		Prerequisites:
+			1: army_hq_lvl2
+		Icons:
+			1: paratroopers
+		Names:
+			1: Paratroopers
+		Descriptions:
+			1: power_paratroopers.description
+		DropItems:
+			1: army_grunt, army_grunt, army_grunt, army_grunt, army_grunt, army_grunt, army_grenadier, army_grenadier, army_grenadier, army_bazooka, army_bazooka, army_bazooka, army_machinegunner, army_machinegunner, army_machinegunner, army_machinegunner, army_machinegunner, army_machinegunner
+		SelectTargetSpeechNotification: SelectTarget
+		AllowImpassableCells: false
+		QuantizedFacings: 32
+		CameraActor: camera.paradrop
+		DisplayBeacon: true
+		BeaconPosters:
+			1: pinficon
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		CircleSequence: circles
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: airstrikedirection
+		UnitTypes:
+			1: army_large_plane
+		SquadSizes:
+			1: 3
+		SquadOffset: 1792,1792,0
+	IonCannonPower:
+		AllowMultiple: True
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ~techlevel.superweapons, army_hq_lvl3
+		Icons:
+			1: ioncannon
+		Cursor: ioncannon
+		ChargeInterval: 6000
+		WeaponDelay: 0
+		Weapon: TDIonCannon
+		Effect: tsioncannon
+		EffectSequence: targeting
+		EffectPalette: ra2effect
+		Names:
+			1: power_ioncannon.name
+		Descriptions:
+			1: power_ioncannon.description
+		BeginChargeSpeechNotification: IonCannonCharging
+		EndChargeSpeechNotification: IonCannonReady
+		EndChargeTextNotification: Ion Cannon ready.
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		DisplayRadarPing: True
+		CameraRange: 6000
+		CameraRemoveDelay: 125
+		CameraActor: CAMERA.small
+		SupportPowerPaletteOrder: 20

@@ -275,6 +275,46 @@ army_halftrack:
 		Weapon: UnitExplodeSmall
 	RenderSprites:
 		PlayerPalette: player_rgba
+army_lunar_buggy:
+	Inherits: ^Vehicle
+	Inherits@Template: ^MissileVehicleTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
+	Tooltip:
+		Name: Lunar Buggy
+	Valued:
+		Cost: 1000
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~army_garage
+		Queue: Vehicle, RAVehicle
+		Description: actor_bike.description
+	Mobile:
+		Speed: 184
+		TurnSpeed: 40
+	Health:
+		HP: 35000
+	Repairable:
+		HpPerStep: 1750
+	ChangesHealth@SelfHealing:
+		Step: 14
+	Armament:
+		Weapon: td_nod_reconbike_rocket
+		LocalOffset: -225, 175, 175, -225, 175, 175
+		LocalYaw: 100, -100
+		MuzzleSequence: muzzle
+	AttackFollow:
+		FacingTolerance: 512
+		PauseOnCondition: disabled
+	WithMuzzleOverlay:
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeSmall
+	RenderSprites:
+		PlayerPalette: player_rgba
+
 army_dundun:
 	Inherits: ^Vehicle
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -379,7 +419,6 @@ army_action_figure:
 		LocalOffset: 100,-190,800
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite
 	Armament@ELITE:
 		Weapon: FutureMechPlasma_elite
 		LocalOffset: 100,-190,800
@@ -388,7 +427,6 @@ army_action_figure:
 		RequiresCondition: rank-elite
 	AttackFrontal:
 		FacingTolerance: 20
-		PauseOnCondition: !robotcontrol || disabled
 	GrantConditionOnAttack@attack-animation:
 		Condition: attack-animation
 		MaximumInstances: 1
@@ -407,5 +445,109 @@ army_action_figure:
 	Passenger:
 	Voiced:
 		VoiceSet: Armymen_Dumdum
+	RenderSprites:
+		PlayerPalette: player_rgba
+army_toaster_artillery:
+	Inherits: ^Tank
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~army_garage_lvl2
+		BuildPaletteOrder: 70
+		Description: actor_arty.description
+	Valued:
+		Cost: 2400
+	Tooltip:
+		Name: Toaster Artillery
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 60000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Mobile:
+		Speed: 58
+		TurnSpeed: 24
+		Locomotor: lighttracked
+	Armament@1:
+		Weapon: armymen_mortar
+		LocalOffset: -624,208,208, -624,-208,208
+		MuzzleSequence: muzzle
+	Armament@2:
+		Weapon: armymen_mortar
+		LocalOffset: -644,208,248, -644,-208,248
+		MuzzleSequence: muzzle
+	Armament@3:
+		Weapon: armymen_mortar
+		LocalOffset: -664,208,288, -664,-208,288
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	FireWarheadsOnDeath:
+		Weapon: ArtilleryExplode
+	Voiced:
+		VoiceSet: Armymen_Tank
+	RenderSprites:
+		PlayerPalette: player_rgba
+army_skateboard:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~army_garage
+		BuildPaletteOrder: 110
+		Description: template_mbt.description
+	Valued:
+		Cost: 3840
+	Tooltip:
+		Name: Skateboard Crawler
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 381000
+	Repairable:
+		HpPerStep: 6350
+	ChangesHealth@SelfHealing:
+		Step: 51
+	Mobile:
+		Speed: 52
+		TurnSpeed: 15
+	Armament@LASER:
+		Weapon: armymen_glass_laser
+		RecoilRecovery: 38
+		LocalOffset: 720,0,120
+		MuzzleSequence: muzzle
+	Armament@AAFLAK:
+		Weapon: armymen_aagun_flak
+		RecoilRecovery: 38
+		LocalOffset: -720,-50,120, -720,50,120
+		MuzzleSequence: muzzle
+	Armament@AAFLAK2:
+		Weapon: armymen_aagun_flak
+		RecoilRecovery: 38
+		LocalOffset: -200,50,120, -200,-50,120
+		MuzzleSequence: muzzle
+	AttackFrontal:
+	WithMuzzleOverlay:
+	WithMuzzleSmoke:
+		Weapons: ra1_allies_alliedmediumtank_cannon
+	FireWarheadsOnDeath:
+		Weapon: UnitExplode
+	#SpawnActorOnDeath:
+	#	Actor: 2TNK.Husk
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: Armymen_Tank
 	RenderSprites:
 		PlayerPalette: player_rgba

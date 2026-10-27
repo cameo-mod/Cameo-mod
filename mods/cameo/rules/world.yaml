@@ -1137,7 +1137,6 @@ World:
 		# Unlimited stays selectable via the same techlevel dropdown (player.yaml
 		# ProvidesTechPrerequisite@unlimited-sw). Limited adds global-swlimit, which
 		# engages SuperweaponPlugLimit admission counting on SW plug production.
-		TechLevel: superweapons
 	CreateMapPlayers:
 	CashTransferToAllies:
 		CheckboxEnabled: true
