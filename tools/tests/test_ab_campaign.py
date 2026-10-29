@@ -89,6 +89,25 @@ class CampaignTests(unittest.TestCase):
         rows = records(); rows[0]["player"]["faction"] = "td_nod"
         self.assertEqual("INVALID_UNKNOWN", ab.classify_game(rows, receipt())[0])
 
+    def test_non_object_match_rows_are_reported_and_make_batch_non_accepting(self):
+        result = ab.summarize([[], "not-an-object", None, *records()], {"g-1": receipt()})
+        self.assertEqual(
+            [
+                {"index": 0, "reason": "match row must be a JSON object"},
+                {"index": 1, "reason": "match row must be a JSON object"},
+                {"index": 2, "reason": "match row must be a JSON object"},
+            ],
+            result["rejected_rows"],
+        )
+        self.assertFalse(result["batch_accepting"])
+        self.assertEqual(1, len(result["games"]))
+
+    def test_missing_game_uid_remains_invalid_unknown(self):
+        result = ab.summarize([{"player": {"home": "2,2"}}], {})
+        self.assertEqual([], result["rejected_rows"])
+        self.assertEqual("INVALID_UNKNOWN", result["games"][0]["verdict"])
+        self.assertFalse(result["batch_accepting"])
+
     def test_cap_requires_marker_support_and_replay(self):
         self.assertEqual("CENSORED_CAP", ab.classify_game(records(), receipt("CENSORED_CAP", True))[0])
         r = receipt("CENSORED_CAP", True); r["replay_complete"] = False

@@ -123,13 +123,92 @@ class PilotPlanTests(unittest.TestCase):
    for seat in job["seat_assignments"]:
     won=(seat["side"]==job["treatment_side"])==treatment_wins
     rows.append({"game_uid":uid,"player":{"home":f"{20+seat['spawn']},16","bot_type":seat["bot_type"],"faction":seat["faction"],"outcome":"won" if won else "lost"},"stats":{"stats_timeline_fields":"tick,earned,spent,banked","stats_timeline":[[5000,10,4,6],[45000,90,40,50]]},"campaign_events":[{"kind":"refinery_placed","tick":7000}]})
-  result=pilot.analyze(m,"a"*64,receipts,rows)
+  health={r["game_uid"]:{"verdict":"PASS","sha256":"d"*64} for r in receipts}
+  result=pilot.analyze(m,"a"*64,receipts,rows,health)
   setup=next(x for x in result["setups"] if x["setup"]==jobs[0]["setup"])
   self.assertEqual(2,setup["complete_natural_pairs"],result["games"])
   self.assertEqual([1.0,-1.0],setup["paired_win_differences"])
   self.assertEqual(0.0,setup["paired_win_effect"])
   self.assertEqual(4,setup["fixed_interval_team_economy"]["treatment"]["5000"]["seat_samples"])
   self.assertEqual(4,setup["campaign_event_metrics"]["treatment"]["counts"]["refinery_placed"])
+
+ def readiness_case(self):
+  m=manifest(); jobs=[j for j in pilot.make_jobs(m) if j["pair"]==0]
+  receipts=[{"cell_id":j["cell_id"],"game_uid":"uid:"+j["cell_id"],"end_class":"NATURAL"} for j in jobs]
+  rows=[{"game_uid":r["game_uid"]} for r in receipts]
+  health={r["game_uid"]:{"verdict":"PASS","sha256":"e"*64} for r in receipts}
+  negative={"fixture_sha256":"f"*64,"expected_verdict":"INVALID_UNKNOWN","observed_verdict":"INVALID_UNKNOWN"}
+  return m,jobs,receipts,rows,health,negative
+
+ def readiness(self, case, **changes):
+  m,jobs,receipts,rows,health,negative=case
+  args={"checkpoint_stage":16,"producer_slot_id":"01a10d0f-1530-74b1-b45a-d64c9b3ac15a",
+        "negative_control":negative,"pins_match":True,"evidence_integrity":"PASS",
+        "measured_utc":"2026-10-29T12:00:00Z","run_kind":"pilot"}
+  args.update(changes)
+  return pilot.build_analyzer_readiness(m,"a"*64,receipts,rows,health,**args)
+
+ def test_readiness_passes_exact_stage_and_scores_only_healthy_natural_pairs(self):
+  case=self.readiness_case(); result=self.readiness(case)
+  self.assertEqual("PASS_REVIEW_ONLY",result["readiness"])
+  self.assertFalse(result["execution_authorized"])
+  self.assertEqual(16,len(result["side_swap_pairs"]))
+  self.assertEqual(16,result["scoring_round_count"])
+  self.assertEqual(0,result["non_scoring_round_count"])
+  self.assertTrue(all(len(p["cell_ids"])==2 and p["scores"] for p in result["side_swap_pairs"]))
+  self.assertIn("measured_utc",result);self.assertIn("producer_slot_id",result)
+
+ def test_pilot_stage_32_is_valid_and_no_deploy_evidence_holds(self):
+  m=manifest(); jobs=pilot.make_jobs(m)
+  receipts=[{"cell_id":j["cell_id"],"game_uid":"uid:"+j["cell_id"],"end_class":"NATURAL"} for j in jobs]
+  rows=[{"game_uid":r["game_uid"]} for r in receipts]
+  health={r["game_uid"]:{"verdict":"PASS","sha256":"e"*64} for r in receipts}
+  case=(m,jobs,receipts,rows,health,{"fixture_sha256":"f"*64,"expected_verdict":"INVALID_UNKNOWN","observed_verdict":"INVALID_UNKNOWN"})
+  result=self.readiness(case,checkpoint_stage=32)
+  self.assertEqual("PASS_REVIEW_ONLY",result["readiness"])
+  self.assertEqual(32,result["scoring_round_count"])
+  receipts[0]["end_class"]="NO_DEPLOY"
+  result=self.readiness(case,checkpoint_stage=32)
+  self.assertEqual("HOLD",result["readiness"])
+  self.assertEqual(1,result["invalid_no_deploy_count"])
+
+ def test_readiness_holds_for_each_closed_world_integrity_failure(self):
+  cases=[]
+  case=self.readiness_case(); case[3].append([]); cases.append(("rejected_rows",case,{}))
+  case=self.readiness_case(); case[2].append(dict(case[2][0])); cases.append(("duplicate_cell_ids",case,{}))
+  case=self.readiness_case(); case[2].append({"cell_id":"unplanned","game_uid":"foreign","end_class":"NATURAL"}); cases.append(("unexpected_cell_ids",case,{}))
+  case=self.readiness_case(); case[2].pop(); cases.append(("missing_cell_ids",case,{}))
+  case=self.readiness_case(); case[3].append({"game_uid":"unmatched"}); cases.append(("unmatched_uids",case,{}))
+  case=self.readiness_case(); case[2][1]["game_uid"]=case[2][0]["game_uid"]; case[3][1]["game_uid"]=case[3][0]["game_uid"]; cases.append(("duplicate_receipt_uid",case,{}))
+  case=self.readiness_case(); cases.append(("pins_match",case,{"pins_match":False}))
+  case=self.readiness_case(); case[5]["observed_verdict"]="PASS"; cases.append(("negative_control",case,{}))
+  case=self.readiness_case(); cases.append(("evidence_integrity",case,{"evidence_integrity":"HOLD"}))
+  case=self.readiness_case(); case[4].pop(next(iter(case[4]))); cases.append(("replay_health",case,{}))
+  for field,case,changes in cases:
+   with self.subTest(field=field):
+    self.assertEqual("HOLD",self.readiness(case,**changes)["readiness"])
+
+ def test_readiness_counts_incomplete_or_censored_rounds_without_scoring(self):
+  case=self.readiness_case(); case[2][0]["end_class"]="CAP"
+  result=self.readiness(case)
+  self.assertEqual(15,result["scoring_round_count"])
+  self.assertEqual(1,result["non_scoring_round_count"])
+  self.assertTrue(all(p["counted"] for p in result["side_swap_pairs"]))
+
+ def test_readiness_rejects_failing_health_and_bad_stage(self):
+  case=self.readiness_case(); next(iter(case[4].values()))["verdict"]="UNKNOWN"
+  result=self.readiness(case,checkpoint_stage=16)
+  self.assertEqual("HOLD",result["readiness"])
+  self.assertEqual(15,result["scoring_round_count"])
+  result=self.readiness(self.readiness_case(),checkpoint_stage=48)
+  self.assertEqual("HOLD",result["readiness"])
+
+ def test_run_kind_controls_checkpoint_stages_and_schedule_coverage(self):
+  self.assertEqual("PASS_REVIEW_ONLY",self.readiness(self.readiness_case(),run_kind="campaign")["readiness"])
+  result=self.readiness(self.readiness_case(),run_kind="campaign",checkpoint_stage=48)
+  self.assertEqual("HOLD",result["readiness"])
+  self.assertTrue(any("schedule does not cover" in reason for reason in result["blocking_reasons"]))
+  self.assertEqual("HOLD",self.readiness(self.readiness_case(),run_kind="other")["readiness"])
 
  def test_ratchet_acceptance_regression_and_slot_rules(self):
   self.assertEqual({"control_groups":["BU_harvester_logistics"],"treatment_groups":["BU_harvester_logistics","U_ut4_expansion_appetite"]},pilot.treatment_baseline(["BU_harvester_logistics"],"U_ut4_expansion_appetite"))

@@ -4,7 +4,7 @@
 This revision plans and audits evidence only. It never starts OpenRA.
 """
 from __future__ import annotations
-import argparse, hashlib, json, os, pathlib, random, re, shutil, sqlite3, subprocess, sys, tempfile, time, zipfile
+import argparse, datetime, hashlib, json, os, pathlib, random, re, shutil, sqlite3, subprocess, sys, tempfile, time, zipfile
 from contextlib import contextmanager
 from threading import Lock
 import apply_increment_switches as increment
@@ -552,19 +552,30 @@ def adapt_schema1_receipt(receipt, job, manifest_sha, manifest):
  status={"NATURAL":"NATURAL_END","CAP":"CENSORED_CAP","INCOMPLETE":"INCOMPLETE"}[end_class]
  return {"cell_id":receipt["cell_id"],"manifest_sha256":receipt["manifest_sha256"],"switch":receipt["switch"],"setup":receipt["setup_id"],"map":job["map"],"map_sha256":job["map_sha256"],"seed":receipt["seed"],"pair":job["pair"],"game_in_pair":receipt["pair_member"],"control_side":job["control_side"],"treatment_side":job["treatment_side"],"arm_bot_types":job["arm_bot_types"],"status":status,"end_reason":"natural" if end_class=="NATURAL" else ("cap" if end_class=="CAP" else receipt["end_reason"] or "INCOMPLETE"),"cap_marker":cap.get("marker_observed") is True,"cap_tick":cap.get("marker_tick"),"support_complete":len(raw_seats)==job["required_seats"],"seat_proof_source":"generated_map.yaml","map_yaml_sha256":map_proof["generated_map_yaml_sha256"],"seats":seats,"peak_memory_bytes":receipt["memory"].get("peak_private_bytes"),"duration_ticks":receipt["world_tick"]}
 
-def analyze(m, manifest_sha, receipts, rows):
- jobs={j["cell_id"]:j for j in make_jobs(m)}; by_cell={}; uid_receipts={}; adaptation_errors={}
+def analyze(m, manifest_sha, receipts, rows, replay_health_by_uid=None):
+ replay_health_by_uid = replay_health_by_uid if isinstance(replay_health_by_uid, dict) else {}
+ jobs={j["cell_id"]:j for j in make_jobs(m)}; by_cell={}; uid_receipts={}; adaptation_errors={}; duplicate_cells=[]; duplicate_uids=[]
  for r in receipts:
   require(isinstance(r,dict) and isinstance(r.get("cell_id"),str),"receipt requires cell_id")
-  require(r["cell_id"] not in by_cell,"duplicate cell receipt")
+  if r["cell_id"] in by_cell:
+   duplicate_cells.append(r["cell_id"])
+   continue
   by_cell[r["cell_id"]]=r
   if isinstance(r.get("game_uid"),str) and r["game_uid"]:
-   require(r["game_uid"] not in uid_receipts,"duplicate receipt game_uid")
-   uid_receipts[r["game_uid"]]=r
+   if r["game_uid"] in uid_receipts:
+    duplicate_uids.append(r["game_uid"])
+   else:
+    uid_receipts[r["game_uid"]]=r
   elif r.get("end_class")!="INCOMPLETE": adaptation_errors[r["cell_id"]]="completed/censored receipt has empty game_uid"
- grouped={}
- for r in rows:
-  uid=r.get("game_uid");require(isinstance(uid,str),"match row missing game_uid")
+ grouped={}; rejected_rows=[]; missing_uid_rows=[]
+ for index,r in enumerate(rows):
+  if not isinstance(r,dict):
+   rejected_rows.append({"index":index,"reason":"match row must be a JSON object"})
+   continue
+  uid=r.get("game_uid")
+  if not isinstance(uid,str) or not uid:
+   missing_uid_rows.append(index)
+   continue
   grouped.setdefault(uid,[]).append(r)
  result=[]
  for cell,job in jobs.items():
@@ -578,7 +589,12 @@ def analyze(m, manifest_sha, receipts, rows):
     verdict=adjudicate(grouped.get(receipt["game_uid"],[]),adapted,job,manifest_sha)
     if receipt["end_class"]=="NATURAL" and verdict.get("winner_side")!=receipt["winner_team"]:
      verdict={"verdict":"INVALID_UNKNOWN","reason":"receipt winner differs from match-record outcomes"}
-  result.append({"cell_id":cell,"setup":job["setup"],"team_size":job["team_size"],"map":job["map"],"seed":job["seed"],"pair":job["pair"],"game_in_pair":job["game_in_pair"],"duration_ticks":receipt.get("duration_ticks") if receipt else None,"peak_memory_bytes":receipt.get("peak_memory_bytes") if receipt else None,**verdict})
+  uid=receipt.get("game_uid") if receipt else None
+  health=replay_health_by_uid.get(uid) if isinstance(uid,str) else None
+  health_verdict=health.get("verdict") if isinstance(health,dict) else "MISSING"
+  health_sha=health.get("sha256") if isinstance(health,dict) else None
+  health_sha_ok=isinstance(health_sha,str) and re.fullmatch(r"[0-9a-fA-F]{64}",health_sha) is not None
+  result.append({"cell_id":cell,"setup":job["setup"],"team_size":job["team_size"],"map":job["map"],"seed":job["seed"],"pair":job["pair"],"game_in_pair":job["game_in_pair"],"duration_ticks":receipt.get("duration_ticks") if receipt else None,"peak_memory_bytes":receipt.get("peak_memory_bytes") if receipt else None,"end_class":receipt.get("end_class") if receipt else "NO_DEPLOY","replay_health":{"verdict":health_verdict,"sha256":health_sha if health_sha_ok else None},**verdict})
  extra=sorted(set(by_cell)-set(jobs))
  extra_uids=sorted(set(grouped)-set(uid_receipts))
  setups=[]
@@ -587,7 +603,7 @@ def analyze(m, manifest_sha, receipts, rows):
   pairs=[]
   for pair in (0,1):
    pg=[r for r in group if r["pair"]==pair]
-   if len(pg)==2 and {r["game_in_pair"] for r in pg}=={0,1} and all(r["verdict"] in ("TREATMENT_WIN","CONTROL_WIN") for r in pg):
+   if len(pg)==2 and {r["game_in_pair"] for r in pg}=={0,1} and all(r.get("end_class")=="NATURAL" and r["verdict"] in ("TREATMENT_WIN","CONTROL_WIN") and r["replay_health"]["verdict"]=="PASS" and isinstance(r["replay_health"]["sha256"],str) for r in pg):
     t=sum(r["verdict"]=="TREATMENT_WIN" for r in pg); pairs.append((t-(2-t))/2)
   totals={arm:{metric:sum((r.get("team_totals") or {}).get(arm,{}).get(metric,0) for r in group if r.get("team_totals")) for metric in ("earned","spent","banked")} for arm in ("control","treatment")}
   for arm in totals:
@@ -616,12 +632,161 @@ def analyze(m, manifest_sha, receipts, rows):
                  "invalid_games":sum(r["verdict"]=="INVALID_UNKNOWN" for r in group),
                  "team_economy_totals":totals,"fixed_interval_team_economy":interval_metrics,"campaign_event_metrics":event_metrics,
                  "synergy":"NOT_IDENTIFIABLE_FROM_PILOT (team-size strata lack matched individual counterfactuals)"})
- return {"schema":1,"switch":SWITCH,"games":result,"setups":setups,"unplanned_receipt_cells":extra,"unplanned_game_uids":extra_uids,"telemetry_intervals_ticks":list(ECONOMY_INTERVAL_TICKS),"note":"One game is one observation; seats are clustered. Natural win effect and paired bootstrap interval require complete side-swapped pairs. Synergy is not estimated because individual and team setups differ in map/roster context."}
+ return {"schema":1,"switch":SWITCH,"games":result,"setups":setups,"unplanned_receipt_cells":extra,"duplicate_receipt_cells":duplicate_cells,"duplicate_receipt_uids":sorted(set(duplicate_uids)),"unplanned_game_uids":extra_uids,"rejected_rows":rejected_rows,"missing_uid_rows":missing_uid_rows,"telemetry_intervals_ticks":list(ECONOMY_INTERVAL_TICKS),"note":"One game is one observation; seats are clustered. Natural win effect and paired bootstrap interval require complete side-swapped pairs. Synergy is not estimated because individual and team setups differ in map/roster context."}
+
+def build_analyzer_readiness(m, manifest_sha, receipts, rows, replay_health_by_uid=None,
+                             checkpoint_stage=None, producer_slot_id=None,
+                             negative_control=None, pins_match=False,
+                             evidence_integrity="HOLD", measured_utc=None,
+                             run_kind=None):
+ """Return a conservative, non-authorizing readiness record for a BU checkpoint."""
+ measured_utc = measured_utc or datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+ jobs = make_jobs(m)
+ blockers = []
+ allowed_stages = {"pilot": (16, 32), "campaign": (16, 32, 48, 64)}
+ valid_run_kind = isinstance(run_kind, str) and run_kind in allowed_stages
+ if not valid_run_kind:
+  blockers.append("run_kind must be pilot or campaign")
+ permitted_stages = allowed_stages.get(run_kind, ()) if isinstance(run_kind, str) else ()
+ if type(checkpoint_stage) is not int or not valid_run_kind or checkpoint_stage not in permitted_stages:
+  blockers.append("checkpoint_stage is not allowed for this run_kind")
+  stage_valid = False
+ else:
+  stage_valid = True
+ if not isinstance(producer_slot_id, str) or not producer_slot_id.strip():
+  blockers.append("producer_slot_id is missing")
+ if not isinstance(manifest_sha, str) or not re.fullmatch(r"[0-9a-fA-F]{64}", manifest_sha):
+  blockers.append("manifest SHA is missing or malformed")
+ if pins_match is not True:
+  blockers.append("one or more manifest/analyzer/schema pins mismatch")
+ if evidence_integrity != "PASS":
+  blockers.append("evidence_integrity is not PASS")
+
+ stage_jobs = [j for j in jobs if stage_valid and j["pair"] < checkpoint_stage // 16]
+ expected_cells = {j["cell_id"] for j in stage_jobs}
+ receipt_by_cell = {}
+ duplicate_cells = []
+ unexpected_cells = []
+ for receipt in receipts:
+  if not isinstance(receipt, dict) or not isinstance(receipt.get("cell_id"), str):
+   unexpected_cells.append("<receipt-without-cell-id>")
+   continue
+  cell = receipt["cell_id"]
+  if cell in receipt_by_cell:
+   duplicate_cells.append(cell)
+   continue
+  receipt_by_cell[cell] = receipt
+  if cell not in expected_cells:
+   unexpected_cells.append(cell)
+ missing_cells = sorted(expected_cells - set(receipt_by_cell))
+ duplicate_cells = sorted(set(duplicate_cells))
+ unexpected_cells = sorted(set(unexpected_cells))
+ if duplicate_cells:
+  blockers.append("duplicate cells are present")
+ if unexpected_cells:
+  blockers.append("unexpected cells are present")
+ if missing_cells:
+  blockers.append("expected cells are missing")
+
+ uid_counts = {}
+ for receipt in receipt_by_cell.values():
+  uid = receipt.get("game_uid")
+  if isinstance(uid, str) and uid:
+   uid_counts[uid] = uid_counts.get(uid, 0) + 1
+ receipt_uids = set(uid_counts)
+ duplicate_uids = sorted(uid for uid, count in uid_counts.items() if count > 1)
+ row_uids = set()
+ rejected_rows = []
+ missing_uid_rows = []
+ for index, row in enumerate(rows):
+  if not isinstance(row, dict):
+   rejected_rows.append({"index": index, "reason": "match row must be a JSON object"})
+  elif not isinstance(row.get("game_uid"), str) or not row.get("game_uid"):
+   missing_uid_rows.append(index)
+  else:
+   row_uids.add(row["game_uid"])
+ unmatched_uids = sorted(row_uids - receipt_uids)
+ unmatched_receipts = sorted(receipt_uids - row_uids)
+ unmatched_uid_details = ([{"source": "match_row", "game_uid": uid} for uid in unmatched_uids] +
+                          [{"source": "receipt", "game_uid": uid} for uid in unmatched_receipts] +
+                          [{"source": "match_row", "row_index": index, "game_uid": None} for index in missing_uid_rows])
+ unmatched_uid_details.extend({"source": "receipt", "game_uid": uid, "reason": "duplicate receipt UID"}
+                              for uid in duplicate_uids)
+ if unmatched_uid_details:
+  blockers.append("one or more game UIDs do not match between receipts and match rows")
+ if rejected_rows:
+  blockers.append("rejected_rows is not empty")
+
+ replay_health_by_uid = replay_health_by_uid if isinstance(replay_health_by_uid, dict) else {}
+ replay_health = []
+ health_by_cell = {}
+ for job in stage_jobs:
+  receipt = receipt_by_cell.get(job["cell_id"])
+  uid = receipt.get("game_uid") if isinstance(receipt, dict) else None
+  health = replay_health_by_uid.get(uid) if isinstance(uid, str) else None
+  verdict = health.get("verdict") if isinstance(health, dict) else "MISSING"
+  digest = health.get("sha256") if isinstance(health, dict) else None
+  sha_ok = isinstance(digest, str) and re.fullmatch(r"[0-9a-fA-F]{64}", digest) is not None
+  replay_health.append({"cell_id": job["cell_id"], "game_uid": uid,
+                        "verdict": verdict if isinstance(verdict, str) else "INVALID",
+                        "sha256": digest if sha_ok else None})
+  health_by_cell[job["cell_id"]] = verdict == "PASS" and sha_ok
+  if verdict != "PASS" or not sha_ok:
+   blockers.append("replay_health is missing, failing, or unpinned for " + job["cell_id"])
+
+ pair_jobs = {}
+ for job in stage_jobs:
+  pair_jobs.setdefault((job["setup"], job["seed"], job["pair"]), []).append(job)
+ side_swap_pairs = []
+ for (setup, seed, pair), members in sorted(pair_jobs.items()):
+  members = sorted(members, key=lambda j: j["game_in_pair"])
+  cells = []
+  for job in members:
+   receipt = receipt_by_cell.get(job["cell_id"])
+   status = receipt.get("end_class") if isinstance(receipt, dict) else "NO_DEPLOY"
+   cells.append({"cell_id": job["cell_id"], "status": status or "UNKNOWN",
+                 "replay_health_pass": health_by_cell.get(job["cell_id"], False)})
+  scores = len(cells) == 2 and all(c["status"] == "NATURAL" and c["replay_health_pass"] for c in cells)
+  side_swap_pairs.append({"setup": setup, "seed": seed, "pair": pair,
+                          "cell_ids": [c["cell_id"] for c in cells], "games": cells,
+                          "counted": True, "scores": scores})
+
+ negative_control = negative_control if isinstance(negative_control, dict) else {}
+ negative_sha = negative_control.get("fixture_sha256")
+ negative_control_pass = (isinstance(negative_sha, str) and
+                          re.fullmatch(r"[0-9a-fA-F]{64}", negative_sha) is not None and
+                          negative_control.get("expected_verdict") == "INVALID_UNKNOWN" and
+                          negative_control.get("observed_verdict") == "INVALID_UNKNOWN")
+ if not negative_control_pass:
+  blockers.append("negative-control fixture failed or is unpinned")
+ invalid_no_deploy_count = len(missing_cells) + sum(
+     1 for r in receipt_by_cell.values() if r.get("end_class") == "NO_DEPLOY")
+ if invalid_no_deploy_count:
+  blockers.append("one or more expected cells have no deployment evidence")
+ if checkpoint_stage is not None and stage_valid and len(side_swap_pairs) < checkpoint_stage:
+  blockers.append("manifest schedule does not cover the requested cumulative checkpoint")
+ return {"schema": 1, "campaign_id": m.get("campaign_id"), "manifest_sha256": manifest_sha,
+         "measured_utc": measured_utc, "producer_slot_id": producer_slot_id,
+         "run_kind": run_kind, "checkpoint_stage": checkpoint_stage, "expected_cell_ids": sorted(expected_cells),
+         "duplicate_cell_ids": duplicate_cells, "unexpected_cell_ids": unexpected_cells,
+         "missing_cell_ids": missing_cells, "unmatched_uids": unmatched_uid_details,
+         "rejected_rows": rejected_rows, "invalid_no_deploy_count": invalid_no_deploy_count,
+         "replay_health": replay_health, "side_swap_pairs": side_swap_pairs,
+         "scoring_round_count": sum(p["scores"] for p in side_swap_pairs),
+         "non_scoring_round_count": sum(not p["scores"] for p in side_swap_pairs),
+         "negative_control": {"fixture_sha256": negative_sha,
+                              "expected_verdict": negative_control.get("expected_verdict"),
+                              "observed_verdict": negative_control.get("observed_verdict"),
+                              "pass": negative_control_pass},
+         "pins_match": pins_match is True, "evidence_integrity": evidence_integrity,
+         "blocking_reasons": sorted(set(blockers)),
+         "readiness": "PASS_REVIEW_ONLY" if not blockers else "HOLD",
+         "execution_authorized": False}
 
 def main(argv=None):
  p=argparse.ArgumentParser(description=__doc__); s=p.add_subparsers(dest="cmd",required=True)
  d=s.add_parser("dry-run");d.add_argument("--manifest",type=pathlib.Path,required=True);d.add_argument("--manifest-sha256",required=True);d.add_argument("--repo-root",type=pathlib.Path,required=True);d.add_argument("--engine-root",type=pathlib.Path);d.add_argument("--output",type=pathlib.Path,required=True);d.add_argument("--minutes-per-game",type=float,default=8.5);d.add_argument("--setup-hours",type=float,default=2.0)
- a=s.add_parser("analyze");a.add_argument("--manifest",type=pathlib.Path,required=True);a.add_argument("--manifest-sha256",required=True);a.add_argument("--matches",type=pathlib.Path,required=True);a.add_argument("--receipts",type=pathlib.Path,required=True);a.add_argument("--repo-root",type=pathlib.Path,required=True);a.add_argument("--output",type=pathlib.Path,required=True)
+ a=s.add_parser("analyze");a.add_argument("--manifest",type=pathlib.Path,required=True);a.add_argument("--manifest-sha256",required=True);a.add_argument("--matches",type=pathlib.Path,required=True);a.add_argument("--receipts",type=pathlib.Path,required=True);a.add_argument("--repo-root",type=pathlib.Path,required=True);a.add_argument("--readiness-evidence",type=pathlib.Path);a.add_argument("--output",type=pathlib.Path,required=True)
  a=p.parse_args(argv)
  try:
   m=json.loads(a.manifest.read_text(encoding="utf-8"))
@@ -636,6 +801,23 @@ def main(argv=None):
    out["manifest_sha256"]=actual;a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,indent=2)+"\n",encoding="utf-8");print(f"NO_LAUNCH games={out['games']} generated_maps={len(out['generated_map_preflight'])} treatment_changes={out['arm_payload_preflight'][1]['changed_fields']} worker_hours={out['worker_hours_estimate_at_8_5m_each']} slot_wall_hours={out['parallel_slot_wall_estimate_hours_at_8_5m_each']} launches=0");return 0
   validate(m,a.repo_root); raw=a.manifest.read_bytes(); actual=hashlib.sha256(raw).hexdigest();require(actual==a.manifest_sha256,"manifest SHA mismatch")
   def jsonl(path): return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
-  out=analyze(m,actual,json.loads(a.receipts.read_text(encoding="utf-8")),jsonl(a.matches));a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,indent=2)+"\n",encoding="utf-8");print(f"ANALYZED games={len(out['games'])} unplanned_receipts={len(out['unplanned_receipt_cells'])}");return 2 if out["unplanned_receipt_cells"] or out["unplanned_game_uids"] or any(g["verdict"]=="INVALID_UNKNOWN" for g in out["games"]) else 0
+  evidence=json.loads(a.readiness_evidence.read_text(encoding="utf-8")) if a.readiness_evidence else {}
+  require(isinstance(evidence,dict),"readiness evidence must be a JSON object")
+  health=evidence.get("replay_health_by_uid",{})
+  receipts=json.loads(a.receipts.read_text(encoding="utf-8")); match_rows=jsonl(a.matches)
+  out=analyze(m,actual,receipts,match_rows,health)
+  evidence_pins=evidence.get("pins",{})
+  pins_match=(isinstance(evidence_pins,dict) and
+              evidence_pins.get("manifest_sha256")==actual and
+              evidence_pins.get("analyzer_sha256")==sha(pathlib.Path(__file__)) and
+              evidence_pins.get("receipt_schema_sha256")==sha(a.repo_root/"tools"/"ai"/"ab_campaign_receipt.schema.json"))
+  out["readiness"]=build_analyzer_readiness(m,actual,receipts,match_rows,health,
+      checkpoint_stage=evidence.get("checkpoint_stage"),producer_slot_id=evidence.get("producer_slot_id"),
+      negative_control=evidence.get("negative_control"),pins_match=pins_match,
+      evidence_integrity=evidence.get("evidence_integrity","HOLD"),
+      run_kind=evidence.get("run_kind"))
+  a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,indent=2)+"\n",encoding="utf-8")
+  print(f"ANALYZED games={len(out['games'])} readiness={out['readiness']['readiness']}")
+  return 2 if out["readiness"]["readiness"]!="PASS_REVIEW_ONLY" or out["unplanned_receipt_cells"] or out["unplanned_game_uids"] or any(g["verdict"]=="INVALID_UNKNOWN" for g in out["games"]) else 0
  except (OSError,ValueError,KeyError,TypeError) as e: print(f"error: {e}",file=sys.stderr);return 2
 if __name__=="__main__": raise SystemExit(main())

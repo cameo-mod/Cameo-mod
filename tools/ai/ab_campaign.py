@@ -145,9 +145,14 @@ def _load_jsonl(paths):
 
 def classify_game(records, receipt):
     """Classify one game only when receipt and seat evidence agree."""
-    uid_set = {r.get("game_uid") for r in records}
-    if len(uid_set) != 1 or None in uid_set or not isinstance(receipt, dict):
+    if any(not isinstance(r, dict) for r in records):
+        return "INVALID_UNKNOWN", "match row is not an object"
+    uids = [r.get("game_uid") for r in records]
+    if (any(not isinstance(uid, str) or not uid for uid in uids) or
+            len(set(uids)) != 1 or not isinstance(receipt, dict)):
         return "INVALID_UNKNOWN", "game_uid/receipt missing"
+    if any(not isinstance(r.get("player"), dict) for r in records):
+        return "INVALID_UNKNOWN", "player record is not an object"
     seats = receipt.get("seats")
     if not isinstance(seats, list) or not seats:
         return "INVALID_UNKNOWN", "resolved seat proof missing"
@@ -219,19 +224,33 @@ def economy(record):
 
 def summarize(rows, receipts):
     by_game = collections.defaultdict(list)
-    for r in rows:
-        by_game[r.get("game_uid")].append(r)
+    rejected_rows = []
+    for index, r in enumerate(rows):
+        if not isinstance(r, dict):
+            rejected_rows.append({"index": index, "reason": "match row must be a JSON object"})
+            continue
+        uid = r.get("game_uid")
+        # Invalid/missing UIDs stay separate so unrelated malformed rows cannot be
+        # merged into one apparent game. classify_game will retain INVALID_UNKNOWN.
+        key = uid if isinstance(uid, str) and uid else ("invalid_game_uid_row", index)
+        by_game[key].append(r)
     games = []
-    for uid, recs in sorted(by_game.items(), key=lambda x: str(x[0])):
+    for key, recs in sorted(by_game.items(), key=lambda x: str(x[0])):
+        uid = key if isinstance(key, str) else None
         receipt = receipts.get(uid)
         verdict, why = classify_game(recs, receipt)
+        seat_rows = []
+        for r in recs:
+            player = r.get("player") if isinstance(r.get("player"), dict) else {}
+            seat = next((s for s in (receipt or {}).get("seats", [])
+                         if isinstance(s, dict) and s.get("home") == player.get("home")), None)
+            seat_rows.append({"home": player.get("home"),
+                              "arm": seat.get("arm") if seat else None,
+                              "faction": player.get("faction"),
+                              "outcome": player.get("outcome"),
+                              "economy": economy(r)})
         games.append({"game_uid": uid, "verdict": verdict, "evidence": why,
-                      "seats": [{"home": (r.get("player") or {}).get("home"),
-                                 "arm": next((s.get("arm") for s in (receipt or {}).get("seats", [])
-                                              if s.get("home") == (r.get("player") or {}).get("home")), None),
-                                 "faction": (r.get("player") or {}).get("faction"),
-                                 "outcome": (r.get("player") or {}).get("outcome"),
-                                 "economy": economy(r)} for r in recs]})
+                      "seats": seat_rows})
     pairs = collections.defaultdict(dict)
     for g in games:
         r = receipts.get(g["game_uid"], {})
@@ -313,6 +332,8 @@ def summarize(rows, receipts):
             inc[f"{arm}_earned_spent_ratio"] = inc[f"{arm}_earned"] / spent if spent else None
         out.append({"switch": switch, "map": map_name, **s})
     return {"schema": 1, "games": games, "strata": out,
+            "rejected_rows": rejected_rows,
+            "batch_accepting": not rejected_rows and all(g["verdict"] != "INVALID_UNKNOWN" for g in games),
             "note": "Only natural end pairs enter win effect; cap/incomplete/unknown remain separately counted. Seats are clustered within games."}
 
 
@@ -368,7 +389,7 @@ def analyze(args):
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(f"games={len(result['games'])} strata={len(result['strata'])} unknown={sum(s['unknown_games'] for s in result['strata'])}")
-    return 0 if all(g["verdict"] != "INVALID_UNKNOWN" for g in result["games"]) else 2
+    return 0 if result["batch_accepting"] else 2
 
 
 def execute(args):
