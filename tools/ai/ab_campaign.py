@@ -240,9 +240,14 @@ def summarize(rows, receipts):
         receipt = receipts.get(uid)
         verdict, why = classify_game(recs, receipt)
         seat_rows = []
+        # A receipt whose "seats" is null (or a receipt that is not an object) is already
+        # INVALID_UNKNOWN in classify_game; it must not crash the seat lookup.
+        resolved_seats = receipt.get("seats") if isinstance(receipt, dict) else None
+        if not isinstance(resolved_seats, list):
+            resolved_seats = []
         for r in recs:
             player = r.get("player") if isinstance(r.get("player"), dict) else {}
-            seat = next((s for s in (receipt or {}).get("seats", [])
+            seat = next((s for s in resolved_seats
                          if isinstance(s, dict) and s.get("home") == player.get("home")), None)
             seat_rows.append({"home": player.get("home"),
                               "arm": seat.get("arm") if seat else None,
@@ -253,7 +258,8 @@ def summarize(rows, receipts):
                       "seats": seat_rows})
     pairs = collections.defaultdict(dict)
     for g in games:
-        r = receipts.get(g["game_uid"], {})
+        r = receipts.get(g["game_uid"])
+        r = r if isinstance(r, dict) else {}
         key = (r.get("switch"), r.get("map"), r.get("seed"), r.get("pair"))
         if all(v is not None for v in key):
             pairs[key][r.get("game_in_pair")] = g

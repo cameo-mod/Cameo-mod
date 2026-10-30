@@ -172,6 +172,28 @@ class CampaignTests(unittest.TestCase):
             self.assertEqual("fixture_only_not_campaign_executable", result["manifest_state"])
             self.assertEqual(3, len(result["blocking_gates"]))
 
+    def test_receipt_with_null_seats_is_invalid_unknown_not_a_crash(self):
+        bad = receipt()
+        bad["seats"] = None
+        result = ab.summarize(records(), {"g-1": bad})
+        self.assertEqual(["INVALID_UNKNOWN"], [g["verdict"] for g in result["games"]])
+        self.assertEqual("resolved seat proof missing", result["games"][0]["evidence"])
+        self.assertEqual([None, None], [s["arm"] for s in result["games"][0]["seats"]])
+        self.assertFalse(result["batch_accepting"])
+
+    def test_non_object_receipt_values_are_invalid_unknown_not_a_crash(self):
+        for bad in (None, [], "text", 5):
+            with self.subTest(receipt=bad):
+                result = ab.summarize(records(), {"g-1": bad})
+                self.assertEqual(["INVALID_UNKNOWN"], [g["verdict"] for g in result["games"]])
+                self.assertFalse(result["batch_accepting"])
+
+    def test_valid_receipt_still_resolves_arms_after_the_seat_guard(self):
+        result = ab.summarize(records(), {"g-1": receipt()})
+        self.assertEqual(["treatment", "control"], [s["arm"] for s in result["games"][0]["seats"]])
+        self.assertEqual("TREATMENT_WIN", result["games"][0]["verdict"])
+        self.assertTrue(result["batch_accepting"])
+
 
 if __name__ == "__main__":
     unittest.main()
