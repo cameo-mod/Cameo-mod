@@ -9,6 +9,11 @@ campaign_runner_sha256, batch_runner_sha256, switch_applier_sha256, receipt_sche
 (matches_sha256, receipts_sha256) and replay_health_report {path, sha256}, which names a JSON file
 {"replay_health_by_uid": {uid: {"verdict", "sha256"}}}. The analyzer re-hashes every named file itself; an
 "evidence_integrity" string in the evidence is ignored. The result's "accepting" is true only with no HOLD reason.
+
+The running analyzer's own bytes are bound to the manifest by validate() (tool_sha256.driver_analyzer is the hash of this
+file), so a modified copy run from anywhere exits 2 before it measures anything. Residuals: the per-game replay_health
+sha256 is only shape-checked (the report file that carries it is hashed, the replay file it names is not re-read), and
+"accepting" holds for the stated run_kind/checkpoint_stage; the consumer compares that stage with the run plan.
 """
 from __future__ import annotations
 import argparse, datetime, hashlib, json, os, pathlib, random, re, shutil, sqlite3, subprocess, sys, tempfile, time, zipfile
@@ -516,7 +521,7 @@ def adjudicate(records, receipt, job, manifest_sha):
    return {"verdict":"INVALID_UNKNOWN","reason":"resolved map.yaml seats differ from planned side/spawn/faction assignment"}
  side_outcomes={"A":[],"B":[]}; arm_totals={"control":{"earned":0,"spent":0,"banked":0},"treatment":{"earned":0,"spent":0,"banked":0}}; seat_rows=[]; seen_homes=set()
  for r in records:
-  pl=r.get("player") or {}; home=pl.get("home"); seat=bylocation.get(home)
+  pl=r.get("player"); pl=pl if isinstance(pl,dict) else {}; home=pl.get("home"); seat=bylocation.get(home)
   if seat is None or home in seen_homes or pl.get("faction")!=seat.get("faction") or pl.get("bot_type")!=seat.get("bot_type"):
    return {"verdict":"INVALID_UNKNOWN","reason":"record differs from resolved seat proof"}
   seen_homes.add(home)
@@ -663,12 +668,12 @@ def analyze(m, manifest_sha, receipts, rows, replay_health_by_uid=None, checkpoi
   if receipt is None: verdict={"verdict":"INCOMPLETE_UNKNOWN","reason":"planned cell has no receipt"}
   elif cell in adaptation_errors: verdict={"verdict":"INVALID_UNKNOWN","reason":adaptation_errors[cell]}
   else:
-   try: adapted=adapt_schema1_receipt(receipt,job,manifest_sha,m)
-   except (KeyError,TypeError,ValueError,AttributeError) as exc: verdict={"verdict":"INVALID_UNKNOWN","reason":str(exc)}
-   else:
+   try:
+    adapted=adapt_schema1_receipt(receipt,job,manifest_sha,m)
     verdict=adjudicate(grouped.get(receipt["game_uid"],[]),adapted,job,manifest_sha)
     if receipt["end_class"]=="NATURAL" and verdict.get("winner_side")!=receipt["winner_team"]:
      verdict={"verdict":"INVALID_UNKNOWN","reason":"receipt winner differs from match-record outcomes"}
+   except (KeyError,TypeError,ValueError,AttributeError) as exc: verdict={"verdict":"INVALID_UNKNOWN","reason":str(exc)}
   uid=receipt.get("game_uid") if receipt else None
   health=replay_health_by_uid.get(uid) if isinstance(uid,str) else None
   health_verdict=health.get("verdict") if isinstance(health,dict) else "MISSING"
@@ -929,5 +934,5 @@ def main(argv=None):
   a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,indent=2)+"\n",encoding="utf-8")
   print(f"ANALYZED games={len(out['games'])} readiness={out['readiness']['readiness']} accepting={out['accepting']}")
   return 0 if out["accepting"] else 2
- except (OSError,ValueError,KeyError,TypeError) as e: print(f"error: {e}",file=sys.stderr);return 2
+ except (OSError,ValueError,KeyError,TypeError,AttributeError) as e: print(f"error: {e}",file=sys.stderr);return 2
 if __name__=="__main__": raise SystemExit(main())

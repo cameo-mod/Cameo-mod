@@ -1,4 +1,5 @@
-import contextlib, copy, hashlib, io, json, pathlib, re, sys, tempfile, unittest
+import contextlib, copy, hashlib, importlib.util, io, json, pathlib, re, shutil, sys, tempfile, unittest
+from unittest import mock
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/"tools"/"ai"))
 import ab_campaign_pilot as pilot
@@ -410,7 +411,7 @@ class AnalyzerGateTests(unittest.TestCase):
     self.assertEqual(["readiness evidence file is not pinned by a matching sha256"],pilot.check_integrity(good,measured,claimed,[]))
   self.assertEqual(["replay_health_report cannot be read"],pilot.check_integrity(good,measured,sha_of(b"e"),["replay_health_report cannot be read"]))
 
- def cli(self,data=None,after=None,evidence_sha=True,with_evidence=True):
+ def cli(self,data=None,after=None,evidence_sha=True,with_evidence=True,module=None):
   """Write a clean stage-16 case, optionally spoil it, run the real CLI and return (exit code, output or None).
   `data` changes receipts/rows/health before anything is pinned; `after` changes serialized files/evidence after pinning."""
   with tempfile.TemporaryDirectory() as temp:
@@ -431,7 +432,9 @@ class AnalyzerGateTests(unittest.TestCase):
          "--receipts",str(base/"receipts.json"),"--repo-root",str(ROOT),"--output",str(base/"out.json")]
    if with_evidence: argv+=["--readiness-evidence",str(base/"evidence.json")]
    if with_evidence and evidence_sha: argv+=["--readiness-evidence-sha256",sha_of(files["evidence.json"])]
-   with contextlib.redirect_stdout(io.StringIO()),contextlib.redirect_stderr(io.StringIO()): code=pilot.main(argv)
+   err=io.StringIO()
+   with contextlib.redirect_stdout(io.StringIO()),contextlib.redirect_stderr(err): code=(module or pilot).main(argv)
+   self.stderr=err.getvalue()
    return code,(json.loads((base/"out.json").read_text(encoding="utf-8")) if (base/"out.json").exists() else None)
 
  def test_cli_clean_case_exits_0_with_every_input_measured_by_the_analyzer(self):
@@ -495,5 +498,35 @@ class AnalyzerGateTests(unittest.TestCase):
   code,out=self.cli(data=cap_one)
   self.assertEqual(0,code,out and out["hold_reasons"]);self.assertTrue(out["accepting"])
   self.assertEqual((1,31),(out["recount"]["censored_games"],out["recount"]["natural_games"]))
+
+ def test_match_row_whose_player_is_not_an_object_is_a_recorded_invalid_not_a_crash(self):
+  for player in ("x",[1],5,True):
+   with self.subTest(player=player):
+    receipts,rows,health=self.stage(); rows[0]["player"]=player
+    out=self.analyze(receipts,rows,health)
+    self.assertFalse(out["accepting"]);self.assertEqual(1,out["recount"]["invalid_games"])
+    self.assertTrue(any(x.startswith("INVALID_UNKNOWN game: ") for x in out["hold_reasons"]))
+    code,cli_out=self.cli(data=lambda r,w,h,player=player:w[0].update(player=player))
+    self.assertEqual(2,code);self.assertIsNotNone(cli_out);self.assertFalse(cli_out["accepting"])
+
+ def test_an_attribute_error_inside_adjudication_is_a_recorded_invalid_and_the_cli_never_traces_back(self):
+  receipts,rows,health=self.stage()
+  with mock.patch.object(pilot,"adjudicate",side_effect=AttributeError("boom")):
+   out=self.analyze(receipts,rows,health)
+  self.assertFalse(out["accepting"]);self.assertEqual(32,out["recount"]["invalid_games"]);self.assertTrue(all(x["reason"]=="boom" for x in out["games"] if x["verdict"]=="INVALID_UNKNOWN"))
+  with mock.patch.object(pilot,"analyze",side_effect=AttributeError("boom")):
+   code,out=self.cli()
+  self.assertEqual(2,code);self.assertIsNone(out);self.assertIn("error: boom",self.stderr)
+
+ def test_cli_modified_analyzer_run_from_outside_the_repo_is_refused_even_when_its_own_hash_is_pinned(self):
+  with tempfile.TemporaryDirectory() as temp:
+   outside=pathlib.Path(temp); shutil.copy(ROOT/"tools/ai/increment_switches.yaml",outside/"increment_switches.yaml")
+   raw=(ROOT/"tools/ai/ab_campaign_pilot.py").read_bytes()+b"\n# modified copy\n"; (outside/"ab_campaign_pilot.py").write_bytes(raw)
+   spec=importlib.util.spec_from_file_location("ab_campaign_pilot_outside",outside/"ab_campaign_pilot.py")
+   copy_module=importlib.util.module_from_spec(spec); spec.loader.exec_module(copy_module)
+   code,out=self.cli(module=copy_module,after=lambda files,evidence:evidence["pins"].update({"analyzer_sha256":sha_of(raw)}))
+   self.assertEqual(2,code);self.assertIsNone(out);self.assertIn("tool SHA pins mismatch",self.stderr)
+  code,out=self.cli()
+  self.assertEqual(0,code,out and out["hold_reasons"])
 
 if __name__=="__main__": unittest.main()
