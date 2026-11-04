@@ -766,3 +766,30 @@ TechConscriptVoice:
 		Attack: techconsatk3, techconsatk2, techconsatk1
 		Feedback: techconsfeed1, techconsfeed2, techconsfeed3, techconsfeed4
 		Die: techconsdie1, techconsdie2, techconsdie3
+BearVoice:
+	DefaultVariant: .wav
+	Voices:
+		Select: gbeasela, gbeaselb
+		Move: gbeamova, gbeamovb, gbeamovc
+		Attack: gbeaatta, gbeaattb
+		Feedback: gbeafeaa, gbeafeab
+		Die: gbeadiea, gbeadieb
+CowVoice:
+	DefaultVariant: .wav
+	Voices:
+		Select: gcowsela, gcowselb, gcowselc
+		Move: gcowmova, gcowmovb
+		Feedback: gcowsela, gcowselb, gcowselc
+		Die: gcowdiea
+MummyVoice:
+	DefaultVariant: .wav
+	Voices:
+		Select: gmumsela, gmumselb, gmumselc
+		Move: gmummova, gmummovd
+		Attack: gmumatta, gmumattb, gmumattc
+		Die: gmumdiea, gmumdieb, gmumdiec, gmumdied
+		Zapped: igenzapa
+		Burned: ienadia
+		Melted: igenmela, igenmelb, igenmelc
+	
+        
