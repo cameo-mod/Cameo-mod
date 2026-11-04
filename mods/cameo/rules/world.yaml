@@ -1048,6 +1048,26 @@ World:
 		#SmokeSequences: idle
 		SmokeImage: scorch_flames
 		SmokeSequences: large_flame, medium_flame, small_flame
+	SmudgeLayer@SCORCH_DESERT:
+		Type: Scorch_Desert
+		Sequence: scorches_des
+		SmokeChance: 50
+		MaxSmokeOffsetDistance: 341
+		#SmokeImage: smoke_m
+		#SmokeSequences: idle
+		SmokeImage: scorch_flames
+		SmokeSequences: large_flame, medium_flame, small_flame
+		Palette: td_desert
+	SmudgeLayer@SCORCH_SNOW:
+		Type: Scorch_Snow
+		Sequence: scorches_snow
+		SmokeChance: 50
+		MaxSmokeOffsetDistance: 341
+		#SmokeImage: smoke_m
+		#SmokeSequences: idle
+		SmokeImage: scorch_flames
+		SmokeSequences: large_flame, medium_flame, small_flame
+		Palette: ra_snow
 	SmudgeLayer@CRATER:
 		Type: Crater
 		Sequence: craters
@@ -1055,6 +1075,22 @@ World:
 		MaxSmokeOffsetDistance: 341
 		SmokeImage: smoke_m
 		SmokeSequences: idle
+	SmudgeLayer@CRATER_DESERT:
+		Type: Crater_Desert
+		Sequence: craters_des
+		SmokeChance: 25
+		MaxSmokeOffsetDistance: 341
+		SmokeImage: smoke_m
+		SmokeSequences: idle
+		Palette: td_desert
+	SmudgeLayer@CRATER_SNOW:
+		Type: Crater_Snow
+		Sequence: craters_snow
+		SmokeChance: 25
+		MaxSmokeOffsetDistance: 341
+		SmokeImage: smoke_m
+		SmokeSequences: idle
+		Palette: ra_snow
 	SmudgeLayer@Rock:
 		Type: RockCrater
 		Sequence: rockcraters

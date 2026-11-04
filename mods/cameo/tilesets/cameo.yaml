@@ -34,13 +34,13 @@ Terrain:
 	TerrainType@ClearSnow:
 		Type: ClearSnow
 		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: Crater_Snow, Scorch_Snow
 		Color: C4C4C4
 		RestrictPlayerColor: false
 	TerrainType@ClearDesert:
 		Type: ClearDesert
 		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: Crater_Desert, Scorch_Desert
 		Color: 865F45
 		RestrictPlayerColor: false
 	TerrainType@ClearInterior:
@@ -178,6 +178,45 @@ Terrain:
 		TargetTypes: Ground
 		AcceptsSmudgeType: Crater, Scorch
 		Color: 685062
+	TerrainType@Sand:
+		Type: Sand
+		TargetTypes: Ground
+		AcceptsSmudgeType: SandCrater
+		Color: D0C0A0
+		RestrictPlayerColor: true
+	TerrainType@Ice:
+		Type: Ice
+		TargetTypes: Ground
+		Color: FFFFFF
+	TerrainType@RoughDune:
+		Type: RoughDune
+		TargetTypes: Ground
+		Color: 587474
+		CustomCursor: move-rough
+	TerrainType@Transition:
+		Type: Transition
+		TargetTypes: Ground
+		Color: CFA664
+	TerrainType@SpiceSand:
+		Type: SpiceSand
+		TargetTypes: Ground
+		AcceptsSmudgeType: SandCrater
+		Color: D0C0A0
+	TerrainType@ClearDune:
+		Type: ClearDune
+		TargetTypes: Ground
+		AcceptsSmudgeType: RockCrater
+		Color: CE8C42
+		RestrictPlayerColor: true
+	TerrainType@Dune:
+		Type: Dune
+		TargetTypes: Ground
+		Color: EFDE8C
+	TerrainType@Cliff:
+		Type: Cliff
+		TargetTypes: Ground
+		Color: 4A2910
+
 Templates:
 	##################################################
 	#	Terrain
@@ -19180,4 +19219,7135 @@ Templates:
 	# 	Categories: Road
 	# 	Tiles:
 	# 		0: ClearDesert
-
+	Template@60000:
+		Id: 60000
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 0, 8, 9, 48, 49, 50, 51, 52, 68, 69, 70, 71, 72
+		Size: 1,1
+		PickAny: True
+		Categories: Terrain
+		Tiles:
+			0: SpiceSand
+			1: SpiceSand
+			2: SpiceSand
+			3: SpiceSand
+			4: SpiceSand
+			5: SpiceSand
+			6: SpiceSand
+			7: SpiceSand
+			8: SpiceSand
+			9: SpiceSand
+			10: SpiceSand
+			11: SpiceSand
+			12: SpiceSand
+	Template@60001:
+		Id: 60001
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 10, 11, 30, 31
+		Size: 2,2
+		Categories: Dune
+		Tiles:
+			0: Sand
+			1: Dune
+			2: Dune
+			3: Dune
+	Template@60002:
+		Id: 60002
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 12, 13, 32, 33
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60003:
+		Id: 60003
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 14, 15, 34, 35
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60004:
+		Id: 60004
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 16, 17, 36, 37
+		Size: 2,2
+		Categories: Dune
+		Tiles:
+			0: Sand
+			1: Dune
+			2: Dune
+			3: Dune
+	Template@60005:
+		Id: 60005
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 18, 19, 38, 39
+		Size: 2,2
+		Categories: Dune
+		Tiles:
+			0: Dune
+			1: Sand
+			2: Dune
+			3: Dune
+	Template@60006:
+		Id: 60006
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 58, 59, 78, 79
+		Size: 2,2
+		Categories: Dune
+		Tiles:
+			0: Dune
+			1: Dune
+			2: Dune
+			3: Sand
+	Template@60007:
+		Id: 60007
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 56, 57, 76, 77
+		Size: 2,2
+		Categories: Dune
+		Tiles:
+			0: Dune
+			1: Dune
+			2: Sand
+			3: Dune
+	Template@60008:
+		Id: 60008
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 54, 55, 74, 75
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60009:
+		Id: 60009
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 53, 73
+		Size: 1,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Transition
+			1: Transition
+	Template@60010:
+		Id: 60010
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 98, 99, 118, 119
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60011:
+		Id: 60011
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 138, 139, 158, 159
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60012:
+		Id: 60012
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 136, 137, 156, 157
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60013:
+		Id: 60013
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 134, 135, 154, 155
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60014:
+		Id: 60014
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 132, 133, 152, 153
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Sand
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60015:
+		Id: 60015
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 130, 131, 150, 151
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Sand
+			2: Cliff
+			3: Cliff
+	Template@60016:
+		Id: 60016
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 128, 129, 148, 149
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60017:
+		Id: 60017
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 126, 127, 146, 147
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Sand
+	Template@60018:
+		Id: 60018
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 124, 125, 144, 145
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Sand
+	Template@60019:
+		Id: 60019
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 122, 123, 142, 143
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60020:
+		Id: 60020
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 120, 121, 140, 141
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60021:
+		Id: 60021
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 178, 179, 198, 199
+		Size: 2,2
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+			1: Transition
+			2: Transition
+			3: Transition
+	Template@60022:
+		Id: 60022
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 176, 177, 196, 197
+		Size: 2,2
+		Categories: Cliff-Ends
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60023:
+		Id: 60023
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 174, 175, 194, 195
+		Size: 2,2
+		Categories: Cliff-Ends
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60024:
+		Id: 60024
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 172, 173, 192, 193
+		Size: 2,2
+		Categories: Cliff-Ends
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60025:
+		Id: 60025
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 170, 171, 190, 191
+		Size: 2,2
+		Categories: Cliff-Ends
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60026:
+		Id: 60026
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 168, 169, 188, 189
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60027:
+		Id: 60027
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 166, 167, 186, 187
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60028:
+		Id: 60028
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 164, 165, 184, 185
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+	Template@60029:
+		Id: 60029
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 162, 163, 182, 183
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Sand
+			3: Sand
+	Template@60030:
+		Id: 60030
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 160, 161, 180, 181
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Sand
+			3: Sand
+	Template@60031:
+		Id: 60031
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 202, 203, 222, 223, 242, 243
+		Size: 2,3
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60032:
+		Id: 60032
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 260, 261, 280, 281
+		Size: 2,2
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+			1: Transition
+			2: Transition
+			3: Transition
+	Template@60033:
+		Id: 60033
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 200, 201, 220, 221, 240, 241
+		Size: 2,3
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Sand
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60034:
+		Id: 60034
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 204, 205, 224, 225, 244, 245
+		Size: 2,3
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Sand
+			2: Cliff
+			3: Cliff
+			4: Sand
+			5: Sand
+	Template@60035:
+		Id: 60035
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 206, 207, 226, 227, 246, 247
+		Size: 2,3
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Sand
+			5: Cliff
+	Template@60036:
+		Id: 60036
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 262, 263, 282, 283
+		Size: 2,2
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+			1: Transition
+			2: Transition
+			3: Transition
+	Template@60037:
+		Id: 60037
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 264, 265, 284, 285
+		Size: 2,2
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+			1: Transition
+			2: Sand
+			3: Transition
+	Template@60038:
+		Id: 60038
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 85, 86, 105, 106
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Sand
+	Template@60039:
+		Id: 60039
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 87, 88, 107, 108
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Sand
+			3: Sand
+	Template@60040:
+		Id: 60040
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 89, 90, 109, 110
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Sand
+			3: Cliff
+	Template@60041:
+		Id: 60041
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 91, 92, 111, 112
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60042:
+		Id: 60042
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 93, 94, 113, 114
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60043:
+		Id: 60043
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 95, 96, 115, 116
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60044:
+		Id: 60044
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 218, 219, 238, 239
+		Size: 2,2
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+			1: Transition
+			2: Transition
+			3: Sand
+	Template@60045:
+		Id: 60045
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 258, 259, 278, 279
+		Size: 2,2
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Sand
+			1: Transition
+			2: Transition
+			3: Transition
+	Template@60046:
+		Id: 60046
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 256, 257, 276, 277
+		Size: 2,2
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+			1: Transition
+			2: Transition
+			3: Transition
+	Template@60047:
+		Id: 60047
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 216, 217, 236, 237
+		Size: 2,2
+		Categories: Cliff-Ends
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60048:
+		Id: 60048
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 214, 215, 234, 235
+		Size: 2,2
+		Categories: Cliff-Ends
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60049:
+		Id: 60049
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 211, 212, 213, 231, 232, 233
+		Size: 3,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Sand
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60050:
+		Id: 60050
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 251, 252, 253, 271, 272, 273
+		Size: 3,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Sand
+			1: Cliff
+			2: Cliff
+			3: Sand
+			4: Cliff
+			5: Cliff
+	Template@60051:
+		Id: 60051
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 248, 249, 250, 268, 269, 270
+		Size: 3,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Sand
+	Template@60052:
+		Id: 60052
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 208, 209, 210, 228, 229, 230
+		Size: 3,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60053:
+		Id: 60053
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 266, 267, 286, 287
+		Size: 2,2
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Sand
+			1: Transition
+			2: Transition
+			3: Transition
+	Template@60058:
+		Id: 60058
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 322
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@60059:
+		Id: 60059
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 302
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+	Template@60060:
+		Id: 60060
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 288
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Sand
+	Template@60061:
+		Id: 60061
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 308
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+	Template@60062:
+		Id: 60062
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 328
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+	Template@60063:
+		Id: 60063
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 329
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+	Template@60064:
+		Id: 60064
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 330
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+	Template@60065:
+		Id: 60065
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 289, 290, 309, 310
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+	Template@60066:
+		Id: 60066
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 331
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+	Template@60067:
+		Id: 60067
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 332
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+	Template@60068:
+		Id: 60068
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 298, 299
+		Size: 2,1
+		Categories: Cliff-Ends
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60069:
+		Id: 60069
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 317, 318
+		Size: 2,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+			1: Transition
+	Template@60070:
+		Id: 60070
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 338, 339, 358, 359
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+	Template@60071:
+		Id: 60071
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 337
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+	Template@60072:
+		Id: 60072
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 336
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+	Template@60073:
+		Id: 60073
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 335
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+	Template@60074:
+		Id: 60074
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 313, 333
+		Size: 1,2
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+			1: Transition
+	Template@60075:
+		Id: 60075
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 314, 334
+		Size: 1,2
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+			1: Transition
+	Template@60076:
+		Id: 60076
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 315
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+	Template@60077:
+		Id: 60077
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 291, 292
+		Size: 2,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+			1: Transition
+	Template@60078:
+		Id: 60078
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 293, 294
+		Size: 2,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+			1: Transition
+	Template@60079:
+		Id: 60079
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 295, 296
+		Size: 2,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+			1: Transition
+	Template@60080:
+		Id: 60080
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 719
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Cliff
+	Template@60081:
+		Id: 60081
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 718
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Cliff
+	Template@60082:
+		Id: 60082
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 738
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+	Template@60083:
+		Id: 60083
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 739
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+	Template@60084:
+		Id: 60084
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 737
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+	Template@60085:
+		Id: 60085
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 717
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+	Template@60086:
+		Id: 60086
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 716
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+	Template@60087:
+		Id: 60087
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 736
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+	Template@60088:
+		Id: 60088
+		Images: d2kconcrete.shp
+		Frames: 0, 1, 2, 3, 4, 14
+		Size: 1,1
+		PickAny: True
+		Categories: Road
+		Tiles:
+			0: Concrete
+			1: Concrete
+			2: Concrete
+			3: Concrete
+			4: Concrete
+			5: Concrete
+	Template@60092:
+		Id: 60092
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 685
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+	Template@60094:
+		Id: 60094
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 661, 662, 681, 682
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: ClearDune
+			2: RoughDune
+			3: RoughDune
+	Template@60095:
+		Id: 60095
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 660, 680
+		Size: 1,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: ClearDune
+	Template@60098:
+		Id: 60098
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 619, 639
+		Size: 1,2
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+	Template@60099:
+		Id: 60099
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 538
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+	Template@60100:
+		Id: 60100
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 539
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+	Template@60101:
+		Id: 60101
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 557, 558, 559, 577, 578, 579, 597, 598, 599
+		Size: 3,3
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+			4: RoughDune
+			5: RoughDune
+			6: RoughDune
+			7: RoughDune
+			8: RoughDune
+	Template@60103:
+		Id: 60103
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 652, 653, 672, 673
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60104:
+		Id: 60104
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 692, 693
+		Size: 2,1
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Sand
+	Template@60105:
+		Id: 60105
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 689, 690
+		Size: 2,1
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60106:
+		Id: 60106
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 674, 694
+		Size: 1,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60107:
+		Id: 60107
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 675, 695
+		Size: 1,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Sand
+	Template@60108:
+		Id: 60108
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 677, 697
+		Size: 1,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: ClearDune
+	Template@60109:
+		Id: 60109
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 697
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+	Template@60110:
+		Id: 60110
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 678, 679
+		Size: 2,1
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60111:
+		Id: 60111
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 698, 699
+		Size: 2,1
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60112:
+		Id: 60112
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 715, 735
+		Size: 1,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@60113:
+		Id: 60113
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 711, 712, 713, 714, 731, 732, 733, 734
+		Size: 4,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: ClearDune
+			2: RoughDune
+			3: RoughDune
+			4: RoughDune
+			5: RoughDune
+			6: RoughDune
+			7: RoughDune
+	Template@60114:
+		Id: 60114
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 709, 710, 729, 730
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+	Template@60115:
+		Id: 60115
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 708
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+	Template@60116:
+		Id: 60116
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 728
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@60117:
+		Id: 60117
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 706, 707, 726, 727
+		Size: 2,2
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: Sand
+			2: RoughDune
+			3: RoughDune
+	Template@60118:
+		Id: 60118
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 700, 701, 702, 720, 721, 722
+		Size: 3,2
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+			4: RoughDune
+			5: RoughDune
+	Template@60119:
+		Id: 60119
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 703, 704, 723, 724
+		Size: 2,2
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+	Template@60120:
+		Id: 60120
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 705, 725
+		Size: 1,2
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@60121:
+		Id: 60121
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 746, 747
+		Size: 2,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@60122:
+		Id: 60122
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 744, 745
+		Size: 2,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@60123:
+		Id: 60123
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 743
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@60124:
+		Id: 60124
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 742
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@60125:
+		Id: 60125
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 740, 741
+		Size: 2,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@60176:
+		Id: 60176
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 600, 601, 602, 620, 621, 622, 640, 641, 642
+		Size: 3,3
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+			2: ClearDune
+			3: Cliff
+			4: RoughDune
+			5: Cliff
+			6: Cliff
+			7: RoughDune
+			8: Cliff
+	Template@60177:
+		Id: 60177
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 603, 604, 623, 624
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60178:
+		Id: 60178
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 605, 606, 625, 626
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60179:
+		Id: 60179
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 564, 565, 584, 585
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60180:
+		Id: 60180
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 566, 567, 586, 587
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60181:
+		Id: 60181
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 562, 563, 582, 583
+		Size: 2,2
+		Categories: Cliff-Ends
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: ClearDune
+			3: Transition
+	Template@60182:
+		Id: 60182
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 560, 561, 580, 581
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: ClearDune
+			3: ClearDune
+	Template@60183:
+		Id: 60183
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 607, 608, 627, 628
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60184:
+		Id: 60184
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 609, 610, 629, 630
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: Cliff
+			1: ClearDune
+			2: Cliff
+			3: Cliff
+	Template@60185:
+		Id: 60185
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 568, 569, 588, 589
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60186:
+		Id: 60186
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 570, 571, 590, 591
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60187:
+		Id: 60187
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 529, 530, 549, 550
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: ClearDune
+			3: ClearDune
+	Template@60188:
+		Id: 60188
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 527, 528, 547, 548
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: ClearDune
+			3: ClearDune
+	Template@60189:
+		Id: 60189
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 525, 526, 545, 546
+		Size: 2,2
+		Categories: Cliff-Ends
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: ClearDune
+			3: ClearDune
+	Template@60190:
+		Id: 60190
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 523, 524, 543, 544
+		Size: 2,2
+		Categories: Cliff-Ends
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60191:
+		Id: 60191
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 520, 521, 522, 540, 541, 542
+		Size: 3,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Sand
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60192:
+		Id: 60192
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 480, 481, 482, 500, 501, 502
+		Size: 3,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Sand
+			4: Cliff
+			5: Cliff
+	Template@60193:
+		Id: 60193
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 440, 441, 460, 461
+		Size: 2,2
+		Categories: Cliff-Ends
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: ClearDune
+	Template@60194:
+		Id: 60194
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 402, 403, 422, 423, 442, 443
+		Size: 2,3
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60195:
+		Id: 60195
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 400, 401, 420, 421
+		Size: 2,2
+		Categories: Cliff-Ends
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60196:
+		Id: 60196
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 408, 409, 428, 429
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60197:
+		Id: 60197
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 410, 411, 430, 431, 450, 451
+		Size: 2,3
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60198:
+		Id: 60198
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 412, 413, 432, 433
+		Size: 2,2
+		Categories: Cliff-Ends
+		Tiles:
+			0: Cliff
+			1: Transition
+			2: Cliff
+			3: Cliff
+	Template@60199:
+		Id: 60199
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 452, 453
+		Size: 2,1
+		Categories: Cliff-Ends
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60200:
+		Id: 60200
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 454, 455, 474, 475, 494, 495
+		Size: 2,3
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: ClearDune
+			5: ClearDune
+	Template@60201:
+		Id: 60201
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 489, 490, 509, 510
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60202:
+		Id: 60202
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 448, 449, 468, 469
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60203:
+		Id: 60203
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 487, 488, 507, 508
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60204:
+		Id: 60204
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 446, 447, 466, 467
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60205:
+		Id: 60205
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 444, 445, 464, 465
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: ClearDune
+			2: Cliff
+			3: ClearDune
+	Template@60206:
+		Id: 60206
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 456, 457, 476, 477, 496, 497
+		Size: 2,3
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: ClearDune
+			5: ClearDune
+	Template@60207:
+		Id: 60207
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 498, 499, 518, 519
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Transition
+			3: Sand
+	Template@60208:
+		Id: 60208
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 458, 459, 478, 479
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Sand
+			3: ClearDune
+	Template@60209:
+		Id: 60209
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 418, 419, 438, 439
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60210:
+		Id: 60210
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 378, 379, 398, 399
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60211:
+		Id: 60211
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 416, 417, 436, 437
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60212:
+		Id: 60212
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 376, 377, 396, 397
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60213:
+		Id: 60213
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 414, 415, 434, 435
+		Size: 2,2
+		Categories: Sand-Detail
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60214:
+		Id: 60214
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 354, 355, 374, 375, 394, 395
+		Size: 2,3
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+			4: RoughDune
+			5: RoughDune
+	Template@60215:
+		Id: 60215
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 356
+		Size: 1,1
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+	Template@60216:
+		Id: 60216
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 347, 348, 367, 368, 387, 388
+		Size: 2,3
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+			1: Sand
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60217:
+		Id: 60217
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 386
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Cliff
+	Template@60218:
+		Id: 60218
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 345, 346, 365, 366
+		Size: 2,2
+		Categories: Rotten-Base
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60219:
+		Id: 60219
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 343, 344, 363, 364
+		Size: 2,2
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+			1: Sand
+			2: Cliff
+			3: Cliff
+	Template@60220:
+		Id: 60220
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 340, 341, 342, 360, 361, 362
+		Size: 3,2
+		Categories: Rotten-Base
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Sand
+			4: Cliff
+			5: Cliff
+	Template@60221:
+		Id: 60221
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 380, 381, 382
+		Size: 3,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Sand
+	Template@60222:
+		Id: 60222
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 483, 484, 503, 504
+		Size: 2,2
+		Categories: Cliff-Ends
+		Tiles:
+			0: Cliff
+			1: Transition
+			2: Transition
+			3: Transition
+	Template@60223:
+		Id: 60223
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 485, 486, 505, 506
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60224:
+		Id: 60224
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 83, 84, 103, 104
+		Size: 2,2
+		Categories: Dune
+		Tiles:
+			0: Dune
+			1: Dune
+			2: Dune
+			3: Dune
+	Template@60225:
+		Id: 60225
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 28
+		Size: 1,1
+		Categories: Dune
+		Tiles:
+			0: Dune
+	Template@60229:
+		Id: 60229
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 26, 27, 46, 47
+		Size: 2,2
+		Categories: Dune
+		Tiles:
+			0: Dune
+			1: Sand
+			2: Dune
+			3: Dune
+	Template@60230:
+		Id: 60230
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 65, 66
+		Size: 2,1
+		Categories: Dune
+		Tiles:
+			0: Dune
+			1: Dune
+	Template@60231:
+		Id: 60231
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 63, 64
+		Size: 2,1
+		Categories: Dune
+		Tiles:
+			0: Dune
+			1: Dune
+	Template@60232:
+		Id: 60232
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 22, 23, 42, 43
+		Size: 2,2
+		Categories: Dune
+		Tiles:
+			0: Dune
+			1: Dune
+			2: Dune
+			3: Sand
+	Template@60233:
+		Id: 60233
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 60
+		Size: 1,1
+		Categories: Dune
+		Tiles:
+			0: Dune
+	Template@60234:
+		Id: 60234
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 61
+		Size: 1,1
+		Categories: Dune
+		Tiles:
+			0: Dune
+	Template@60235:
+		Id: 60235
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 62
+		Size: 1,1
+		Categories: Dune
+		Tiles:
+			0: Dune
+	Template@60236:
+		Id: 60236
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 82
+		Size: 1,1
+		Categories: Dune
+		Tiles:
+			0: Dune
+	Template@60237:
+		Id: 60237
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 102
+		Size: 1,1
+		Categories: Dune
+		Tiles:
+			0: Dune
+	Template@60238:
+		Id: 60238
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 101
+		Size: 1,1
+		Categories: Dune
+		Tiles:
+			0: Dune
+	Template@60239:
+		Id: 60239
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 100
+		Size: 1,1
+		Categories: Dune
+		Tiles:
+			0: Dune
+	Template@60240:
+		Id: 60240
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 80
+		Size: 1,1
+		Categories: Dune
+		Tiles:
+			0: Dune
+	Template@60241:
+		Id: 60241
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 81
+		Size: 1,1
+		Categories: Dune
+		Tiles:
+			0: Dune
+	Template@60242:
+		Id: 60242
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 21
+		Size: 1,1
+		Categories: Dune
+		Tiles:
+			0: Dune
+	Template@60243:
+		Id: 60243
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 41
+		Size: 1,1
+		Categories: Dune
+		Tiles:
+			0: Dune
+	Template@60244:
+		Id: 60244
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 40
+		Size: 1,1
+		Categories: Dune
+		Tiles:
+			0: Dune
+	Template@60245:
+		Id: 60245
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 20
+		Size: 1,1
+		Categories: Dune
+		Tiles:
+			0: Dune
+	Template@60246:
+		Id: 60246
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 24, 25, 44, 45
+		Size: 2,2
+		Categories: Dune
+		Tiles:
+			0: Dune
+			1: Dune
+			2: Sand
+			3: Dune
+	Template@60247:
+		Id: 60247
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 352, 353, 372, 373
+		Size: 2,2
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+			1: Sand
+			2: Sand
+			3: Sand
+	Template@60248:
+		Id: 60248
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 392, 393
+		Size: 2,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60249:
+		Id: 60249
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 390
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@60250:
+		Id: 60250
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 389
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Cliff
+	Template@60251:
+		Id: 60251
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 349, 350, 369, 370
+		Size: 2,2
+		Categories: Rotten-Base
+		Tiles:
+			0: RoughDune
+			1: Cliff
+			2: RoughDune
+			3: RoughDune
+	Template@60252:
+		Id: 60252
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 254, 255, 274, 275
+		Size: 2,2
+		Categories: Cliff-Ends
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60253:
+		Id: 60253
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 514, 515, 534, 535
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60254:
+		Id: 60254
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 516, 517, 536, 537
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60255:
+		Id: 60255
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 404, 405, 424, 425
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60256:
+		Id: 60256
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 406, 407, 426, 427
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60258:
+		Id: 60258
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 676, 696
+		Size: 1,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60259:
+		Id: 60259
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 303
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+	Template@60260:
+		Id: 60260
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 304
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+	Template@60261:
+		Id: 60261
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 324
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+	Template@60262:
+		Id: 60262
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 323
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+	Template@60263:
+		Id: 60263
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 511, 512, 513, 531, 532, 533
+		Size: 3,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Sand
+	Template@60264:
+		Id: 60264
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 471, 472, 473, 491, 492, 493
+		Size: 3,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Sand
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60266:
+		Id: 60266
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 306, 307, 552, 553, 554, 555, 556, 572, 573, 574, 575, 576, 592, 593, 594, 595, 596
+		Size: 1,1
+		PickAny: True
+		Categories: Terrain
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+			2: ClearDune
+			3: ClearDune
+			4: ClearDune
+			5: ClearDune
+			6: ClearDune
+			7: ClearDune
+			8: ClearDune
+			9: ClearDune
+			10: ClearDune
+			11: ClearDune
+			12: ClearDune
+			13: ClearDune
+			14: ClearDune
+			15: ClearDune
+			16: ClearDune
+	Template@60269:
+		Id: 60269
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 326, 327
+		Size: 2,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+			1: Transition
+	Template@60271:
+		Id: 60271
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 1
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: Cliff
+	Template@60272:
+		Id: 60272
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 2
+		Size: 1,1
+		Categories: Ice-Detail
+		Tiles:
+			0: Cliff
+	Template@60273:
+		Id: 60273
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 3
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Cliff
+	Template@60274:
+		Id: 60274
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 4
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@60275:
+		Id: 60275
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 5
+		Size: 1,1
+		Categories: Ice-Detail
+		Tiles:
+			0: RoughDune
+	Template@60276:
+		Id: 60276
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 6
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Cliff
+	Template@60277:
+		Id: 60277
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 322
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Cliff
+	Template@60278:
+		Id: 60278
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 165
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+	Template@60279:
+		Id: 60279
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 164
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+	Template@60280:
+		Id: 60280
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 184
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+	Template@60281:
+		Id: 60281
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 305
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+	Template@60282:
+		Id: 60282
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 325
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+	Template@60283:
+		Id: 60283
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 289, 290, 309, 310
+		Size: 2,2
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+	Template@60284:
+		Id: 60284
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 316
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@60285:
+		Id: 60285
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 297
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@60286:
+		Id: 60286
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 338, 339, 358, 359
+		Size: 2,2
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+			1: Sand
+			2: Sand
+			3: Sand
+	Template@60287:
+		Id: 60287
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 340, 341, 360, 361, 380, 381
+		Size: 2,3
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+			4: RoughDune
+			5: RoughDune
+	Template@60288:
+		Id: 60288
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 342, 343, 362, 363, 382, 383
+		Size: 2,3
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+			4: RoughDune
+			5: RoughDune
+	Template@60289:
+		Id: 60289
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 344, 345, 364, 365, 384, 385
+		Size: 2,3
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+			4: RoughDune
+			5: RoughDune
+	Template@60290:
+		Id: 60290
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 349, 350, 369, 370, 389, 390
+		Size: 2,3
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: Sand
+			2: RoughDune
+			3: RoughDune
+			4: RoughDune
+			5: RoughDune
+	Template@60291:
+		Id: 60291
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 351, 371
+		Size: 1,2
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+			1: Sand
+	Template@60292:
+		Id: 60292
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 391
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@60293:
+		Id: 60293
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 392
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@60294:
+		Id: 60294
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 393
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@60295:
+		Id: 60295
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 352, 372
+		Size: 1,2
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+			1: Sand
+	Template@60296:
+		Id: 60296
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 353
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@60297:
+		Id: 60297
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 354
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@60298:
+		Id: 60298
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 374
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@60299:
+		Id: 60299
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 373
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@60300:
+		Id: 60300
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 394, 395, 414, 415
+		Size: 2,2
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+			1: Sand
+			2: Sand
+			3: Sand
+	Template@60301:
+		Id: 60301
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 434, 435
+		Size: 2,1
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@60302:
+		Id: 60302
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 355, 375
+		Size: 1,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@60303:
+		Id: 60303
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 356, 357
+		Size: 2,1
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@60304:
+		Id: 60304
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 462, 463
+		Size: 2,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60305:
+		Id: 60305
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 551
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Cliff
+	Template@60306:
+		Id: 60306
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 607, 608, 627, 628
+		Size: 2,2
+		Categories: Rotten-Base
+		Tiles:
+			0: RoughDune
+			1: Cliff
+			2: RoughDune
+			3: RoughDune
+	Template@60307:
+		Id: 60307
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 609, 610, 629, 630
+		Size: 2,2
+		Categories: Dead-Worm
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Sand
+			3: Cliff
+	Template@60308:
+		Id: 60308
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 652, 653, 672, 673
+		Size: 2,2
+		Categories: Rotten-Base
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60309:
+		Id: 60309
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 713, 714, 715, 733, 734, 735
+		Size: 3,2
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60310:
+		Id: 60310
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 709, 710, 711, 712, 729, 730, 731, 732
+		Size: 4,2
+		Categories: Rotten-Base
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Sand
+			4: Transition
+			5: Cliff
+			6: Transition
+			7: Transition
+	Template@60311:
+		Id: 60311
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 661, 662, 681, 682
+		Size: 2,2
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+			1: Sand
+			2: Sand
+			3: Sand
+	Template@60312:
+		Id: 60312
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 683
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+	Template@60313:
+		Id: 60313
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 684
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Cliff
+	Template@60314:
+		Id: 60314
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 703
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+	Template@60315:
+		Id: 60315
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 723
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+	Template@60316:
+		Id: 60316
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 722
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@60317:
+		Id: 60317
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 721
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@60318:
+		Id: 60318
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 720
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+	Template@60319:
+		Id: 60319
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 700
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+	Template@60320:
+		Id: 60320
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 701, 702
+		Size: 2,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+			1: Sand
+	Template@60321:
+		Id: 60321
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 741
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@60322:
+		Id: 60322
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 742
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@60323:
+		Id: 60323
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 743
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@60324:
+		Id: 60324
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 744
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@60325:
+		Id: 60325
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 745, 746
+		Size: 2,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60326:
+		Id: 60326
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 747
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@60327:
+		Id: 60327
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 728
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@60328:
+		Id: 60328
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 708
+		Size: 1,1
+		Categories: Dead-Worm
+		Tiles:
+			0: Sand
+	Template@60329:
+		Id: 60329
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 716, 717, 736, 737
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60330:
+		Id: 60330
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 538, 539, 558, 559
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+	Template@60331:
+		Id: 60331
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 578, 579, 598, 599
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+	Template@60332:
+		Id: 60332
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 718, 719, 738, 739, 758, 759
+		Size: 2,3
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+			4: RoughDune
+			5: RoughDune
+	Template@60333:
+		Id: 60333
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 704, 705, 724, 725
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+			2: ClearDune
+			3: ClearDune
+	Template@60334:
+		Id: 60334
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 706, 707, 726, 727
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+			2: ClearDune
+			3: ClearDune
+	Template@60335:
+		Id: 60335
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 660, 680
+		Size: 1,2
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+			1: Sand
+	Template@60336:
+		Id: 60336
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 388
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@60337:
+		Id: 60337
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 346, 347, 348, 366, 367, 368
+		Size: 3,2
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+			4: RoughDune
+			5: RoughDune
+	Template@60338:
+		Id: 60338
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 386, 387
+		Size: 2,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@60339:
+		Id: 60339
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 164, 165, 184, 185
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+	Template@60340:
+		Id: 60340
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 289, 290, 309, 310
+		Size: 2,2
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+			1: Sand
+			2: Sand
+			3: Sand
+	Template@60341:
+		Id: 60341
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 338, 339, 358, 359
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+	Template@60342:
+		Id: 60342
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 349, 350, 351, 352, 353, 354, 369, 370, 371, 372, 373, 374, 389, 390, 391, 392, 393, 394
+		Size: 6,3
+		Categories: Bridge
+		Tiles:
+			0: ClearDune
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: ClearDune
+			6: ClearDune
+			7: Transition
+			8: Transition
+			9: Transition
+			10: Transition
+			11: ClearDune
+			12: ClearDune
+			13: Cliff
+			14: Cliff
+			15: Cliff
+			16: Cliff
+			17: ClearDune
+	Template@60343:
+		Id: 60343
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 340, 341, 342, 360, 361, 362, 380, 381, 382
+		Size: 3,3
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+			2: ClearDune
+			3: Cliff
+			4: RoughDune
+			5: Cliff
+			6: Cliff
+			7: RoughDune
+			8: Cliff
+	Template@60344:
+		Id: 60344
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 363, 364, 383, 384
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+			2: ClearDune
+			3: ClearDune
+	Template@60345:
+		Id: 60345
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 343, 344
+		Size: 2,1
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+	Template@60346:
+		Id: 60346
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 345, 346
+		Size: 2,1
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+	Template@60347:
+		Id: 60347
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 365, 366, 367, 368, 385, 386, 387, 388
+		Size: 4,2
+		Categories: Rock-Detail
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+			6: Cliff
+			7: ClearDune
+	Template@60348:
+		Id: 60348
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 414, 415, 434, 435
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: ClearDune
+			2: RoughDune
+			3: RoughDune
+	Template@60349:
+		Id: 60349
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 607, 608, 609, 627, 628, 629
+		Size: 3,2
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+			1: Sand
+			2: Sand
+			3: Sand
+			4: Sand
+			5: Sand
+	Template@60350:
+		Id: 60350
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 610
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+	Template@60351:
+		Id: 60351
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 652, 653, 672, 673
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+	Template@60352:
+		Id: 60352
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 700
+		Size: 1,1
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+	Template@60353:
+		Id: 60353
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 720
+		Size: 1,1
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+	Template@60354:
+		Id: 60354
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 701, 702, 703, 721, 722, 723, 741, 742, 743
+		Size: 3,3
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+			4: RoughDune
+			5: RoughDune
+			6: RoughDune
+			7: RoughDune
+			8: RoughDune
+	Template@60355:
+		Id: 60355
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 724, 725, 744, 745
+		Size: 2,2
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+	Template@60356:
+		Id: 60356
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 726, 727, 746, 747
+		Size: 2,2
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+	Template@60357:
+		Id: 60357
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 734, 735
+		Size: 2,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@60358:
+		Id: 60358
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 716, 717, 736, 737
+		Size: 2,2
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+	Template@60359:
+		Id: 60359
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 718, 719, 738, 739
+		Size: 2,2
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: Sand
+			2: RoughDune
+			3: RoughDune
+	Template@60360:
+		Id: 60360
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 758, 759
+		Size: 2,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@60363:
+		Id: 60363
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 97, 117
+		Size: 1,2
+		Categories: Sand-Ice-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60364:
+		Id: 60364
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 164, 165, 184, 185
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60365:
+		Id: 60365
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 289, 290
+		Size: 2,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+			1: Sand
+	Template@60366:
+		Id: 60366
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 309, 310, 311, 312, 355, 356, 357, 358, 1, 2, 3, 4, 5, 6, 7, 8
+		Size: 4,4
+		Categories: Ice-Detail
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Sand
+			4: Cliff
+			5: Cliff
+			6: Cliff
+			7: Cliff
+			8: Cliff
+			9: Cliff
+			10: Cliff
+			11: Cliff
+			12: Sand
+			13: Cliff
+			14: Cliff
+			15: Sand
+	Template@60367:
+		Id: 60367
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 322
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+	Template@60368:
+		Id: 60368
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 325
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@60369:
+		Id: 60369
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 305
+		Size: 1,1
+		Categories: Dead-Worm
+		Tiles:
+			0: Sand
+	Template@60370:
+		Id: 60370
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 297
+		Size: 1,1
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+	Template@60371:
+		Id: 60371
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 375, 395, 415, 435
+		Size: 1,4
+		Categories: Ice-Detail
+		Tiles:
+			0: Cliff
+			1: Sand
+			2: Sand
+			3: Sand
+	Template@60372:
+		Id: 60372
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 414, 434
+		Size: 1,2
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+			1: Sand
+	Template@60373:
+		Id: 60373
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 340, 341, 342, 343, 344, 345, 360, 361, 362, 363, 364, 365, 380, 381, 382, 383, 384, 385
+		Size: 6,3
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+			1: Sand
+			2: Sand
+			3: Sand
+			4: Sand
+			5: Sand
+			6: Sand
+			7: Sand
+			8: Sand
+			9: Sand
+			10: Sand
+			11: Sand
+			12: Sand
+			13: Sand
+			14: Sand
+			15: Sand
+			16: Sand
+			17: Sand
+	Template@60374:
+		Id: 60374
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 366, 367, 368, 386, 387, 388
+		Size: 3,2
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+			1: Sand
+			2: Sand
+			3: Sand
+			4: Sand
+			5: Sand
+	Template@60375:
+		Id: 60375
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 346
+		Size: 1,1
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+	Template@60376:
+		Id: 60376
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 349, 350, 351, 352, 369, 370, 371, 372, 389, 390, 391, 392
+		Size: 4,3
+		Categories: Sand-Ice-Cliff
+		Tiles:
+			0: Cliff
+			1: Ice
+			2: Ice
+			3: Cliff
+			4: Cliff
+			5: Cliff
+			6: Cliff
+			7: Cliff
+			8: Cliff
+			9: Cliff
+			10: Cliff
+			11: Sand
+	Template@60378:
+		Id: 60378
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 353, 354, 373, 374, 393, 394
+		Size: 2,3
+		Categories: Sand-Detail
+		Tiles:
+			0: Transition
+			1: Transition
+			2: Transition
+			3: Transition
+			4: Transition
+			5: Transition
+	Template@60379:
+		Id: 60379
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 462
+		Size: 1,1
+		Categories: Ice-Detail
+		Tiles:
+			0: Cliff
+	Template@60380:
+		Id: 60380
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 463
+		Size: 1,1
+		Categories: Ice-Detail
+		Tiles:
+			0: RoughDune
+	Template@60381:
+		Id: 60381
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 551
+		Size: 1,1
+		Categories: Unidentified
+		Tiles:
+			0: Sand
+	Template@60383:
+		Id: 60383
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 539, 559
+		Size: 1,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60384:
+		Id: 60384
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 557, 558, 577, 578, 597, 598
+		Size: 2,3
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+			4: Sand
+			5: Sand
+	Template@60385:
+		Id: 60385
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 607, 608, 627, 628
+		Size: 2,2
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+	Template@60386:
+		Id: 60386
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 609, 610, 629, 630
+		Size: 2,2
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: Sand
+			2: RoughDune
+			3: RoughDune
+	Template@60387:
+		Id: 60387
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 700, 701, 720, 721, 740, 741
+		Size: 2,3
+		Categories: Sand-Ice-Cliff
+		Tiles:
+			0: Ice
+			1: Cliff
+			2: Ice
+			3: Cliff
+			4: Ice
+			5: Cliff
+	Template@60388:
+		Id: 60388
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 702, 703, 722, 723
+		Size: 2,2
+		Categories: Sand-Ice-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60389:
+		Id: 60389
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 742
+		Size: 1,1
+		Categories: Ice-Detail
+		Tiles:
+			0: Cliff
+	Template@60390:
+		Id: 60390
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 743
+		Size: 1,1
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+	Template@60391:
+		Id: 60391
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 744
+		Size: 1,1
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+	Template@60392:
+		Id: 60392
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 745
+		Size: 1,1
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+	Template@60393:
+		Id: 60393
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 704, 705, 724, 725
+		Size: 2,2
+		Categories: Sand-Ice-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60394:
+		Id: 60394
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 706, 707, 726, 727, 746, 747
+		Size: 2,3
+		Categories: Sand-Ice-Cliff
+		Tiles:
+			0: Cliff
+			1: Ice
+			2: Cliff
+			3: Ice
+			4: Cliff
+			5: Cliff
+	Template@60395:
+		Id: 60395
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 708, 709, 728, 729
+		Size: 2,2
+		Categories: Sand-Ice-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60396:
+		Id: 60396
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 710, 711, 730, 731
+		Size: 2,2
+		Categories: Sand-Ice-Cliff
+		Tiles:
+			0: Ice
+			1: Ice
+			2: Ice
+			3: Ice
+	Template@60397:
+		Id: 60397
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 712, 713, 732, 733
+		Size: 2,2
+		Categories: Sand-Ice-Cliff
+		Tiles:
+			0: Ice
+			1: Cliff
+			2: Ice
+			3: Cliff
+	Template@60398:
+		Id: 60398
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 714, 715, 734, 735
+		Size: 2,2
+		Categories: Sand-Ice-Cliff
+		Tiles:
+			0: Ice
+			1: Ice
+			2: Cliff
+			3: Ice
+	Template@60399:
+		Id: 60399
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 716, 717
+		Size: 2,1
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+			1: Sand
+	Template@60400:
+		Id: 60400
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 736, 737
+		Size: 2,1
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+			1: Sand
+	Template@60401:
+		Id: 60401
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 718, 719, 738, 739, 758, 759
+		Size: 2,3
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+			4: RoughDune
+			5: RoughDune
+	Template@60402:
+		Id: 60402
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 660, 661, 662
+		Size: 3,1
+		Categories: Unidentified
+		Tiles:
+			0: RoughDune
+			1: Sand
+			2: RoughDune
+	Template@60403:
+		Id: 60403
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 680, 681
+		Size: 2,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@60404:
+		Id: 60404
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 682, 683
+		Size: 2,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@60405:
+		Id: 60405
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 684, 685
+		Size: 2,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@60406:
+		Id: 60406
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 652, 653
+		Size: 2,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@60407:
+		Id: 60407
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 672, 673
+		Size: 2,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@60408:
+		Id: 60408
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 6
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@60409:
+		Id: 60409
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 7
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@60410:
+		Id: 60410
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 67
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+	Template@60411:
+		Id: 60411
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 97, 117
+		Size: 1,2
+		Categories: Sand-Detail
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60412:
+		Id: 60412
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 340, 341, 360, 361
+		Size: 2,2
+		Categories: Rotten-Base
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60413:
+		Id: 60413
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 342, 343, 344, 362, 363, 364
+		Size: 3,2
+		Categories: Rotten-Base
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60414:
+		Id: 60414
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 1, 2, 3, 4, 5
+		Size: 5,1
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+			2: ClearDune
+			3: ClearDune
+			4: ClearDune
+	Template@60415:
+		Id: 60415
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 305, 325
+		Size: 1,2
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+			1: Sand
+	Template@60416:
+		Id: 60416
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 289, 290, 309, 310
+		Size: 2,2
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+			1: Sand
+			2: Sand
+			3: Sand
+	Template@60417:
+		Id: 60417
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 311, 312
+		Size: 2,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Transition
+			1: Transition
+	Template@60418:
+		Id: 60418
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 316
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+	Template@60419:
+		Id: 60419
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 297
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+	Template@60420:
+		Id: 60420
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 319
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+	Template@60421:
+		Id: 60421
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 338, 339, 358, 359
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60422:
+		Id: 60422
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 374, 375, 394, 395
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+			2: ClearDune
+			3: ClearDune
+	Template@60423:
+		Id: 60423
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 414, 415, 434, 435
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+			2: ClearDune
+			3: ClearDune
+	Template@60424:
+		Id: 60424
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 349, 350, 351, 352, 353, 354
+		Size: 6,1
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+			2: ClearDune
+			3: ClearDune
+			4: ClearDune
+			5: ClearDune
+	Template@60425:
+		Id: 60425
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 355, 356, 357
+		Size: 3,1
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+			2: ClearDune
+	Template@60426:
+		Id: 60426
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 462, 463
+		Size: 2,1
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+	Template@60427:
+		Id: 60427
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 538, 539, 558, 559
+		Size: 2,2
+		Categories: Sand-Sand-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60428:
+		Id: 60428
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 578, 579, 598, 599
+		Size: 2,2
+		Categories: Ice-Detail
+		Tiles:
+			0: Transition
+			1: Transition
+			2: Transition
+			3: Transition
+	Template@60429:
+		Id: 60429
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 700, 701, 702, 720, 721, 722, 740, 741, 742
+		Size: 3,3
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+			4: RoughDune
+			5: RoughDune
+			6: RoughDune
+			7: RoughDune
+			8: RoughDune
+	Template@60430:
+		Id: 60430
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 747
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@60431:
+		Id: 60431
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 707, 708, 727, 728
+		Size: 2,2
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+	Template@60432:
+		Id: 60432
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 709
+		Size: 1,1
+		Categories: Dead-Worm
+		Tiles:
+			0: Sand
+	Template@60433:
+		Id: 60433
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 729
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Cliff
+	Template@60434:
+		Id: 60434
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 730, 731
+		Size: 2,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@60435:
+		Id: 60435
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 710, 711, 712
+		Size: 3,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Cliff
+			1: RoughDune
+			2: Cliff
+	Template@60436:
+		Id: 60436
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 718, 719, 738, 739, 758, 759
+		Size: 2,3
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+			4: RoughDune
+			5: RoughDune
+	Template@60437:
+		Id: 60437
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 732
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+	Template@60438:
+		Id: 60438
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 713, 714, 733, 734
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+			2: ClearDune
+			3: ClearDune
+	Template@60439:
+		Id: 60439
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 715, 716, 717, 735, 736, 737
+		Size: 3,2
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+			2: ClearDune
+			3: ClearDune
+			4: ClearDune
+			5: ClearDune
+	Template@60440:
+		Id: 60440
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 652, 653, 672, 673
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+			2: ClearDune
+			3: ClearDune
+	Template@60441:
+		Id: 60441
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 610
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+	Template@60442:
+		Id: 60442
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 630
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+	Template@60443:
+		Id: 60443
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 607, 608, 609, 627, 628, 629
+		Size: 3,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: ClearDune
+			1: RoughDune
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: RoughDune
+	Template@60444:
+		Id: 60444
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 551
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+	Template@60445:
+		Id: 60445
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 700, 701, 702, 703, 704, 705, 720, 721, 722, 723, 724, 725, 740, 741, 742, 743, 744, 745
+		Size: 6,3
+		Categories: Ice-Detail
+		Tiles:
+			0: SpiceSand
+			1: Sand
+			2: Sand
+			3: Sand
+			4: Sand
+			5: Sand
+			6: Sand
+			7: Sand
+			8: Sand
+			9: Sand
+			10: Sand
+			11: Sand
+			12: Sand
+			13: Sand
+			14: Sand
+			15: Sand
+			16: SpiceSand
+			17: SpiceSand
+	Template@60446:
+		Id: 60446
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 683, 684, 685
+		Size: 3,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Dune
+			1: Dune
+			2: Dune
+	Template@60447:
+		Id: 60447
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 746, 747
+		Size: 2,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+			1: Dune
+	Template@60448:
+		Id: 60448
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 708, 709, 728, 729
+		Size: 2,2
+		Categories: Sand-Detail
+		Tiles:
+			0: Dune
+			1: Dune
+			2: Dune
+			3: Dune
+	Template@60449:
+		Id: 60449
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 710, 711
+		Size: 2,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+			1: Dune
+	Template@60450:
+		Id: 60450
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 730, 731
+		Size: 2,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+			1: Sand
+	Template@60451:
+		Id: 60451
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 712
+		Size: 1,1
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+	Template@60452:
+		Id: 60452
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 732
+		Size: 1,1
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+	Template@60453:
+		Id: 60453
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 713, 733
+		Size: 1,2
+		Categories: Ice-Detail
+		Tiles:
+			0: Dune
+			1: Dune
+	Template@60454:
+		Id: 60454
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 734, 735
+		Size: 2,1
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+			1: Sand
+	Template@60455:
+		Id: 60455
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 714, 715
+		Size: 2,1
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+			1: Sand
+	Template@60456:
+		Id: 60456
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 716, 717, 718, 736, 737, 738
+		Size: 3,2
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+			1: Sand
+			2: Sand
+			3: Sand
+			4: Sand
+			5: Sand
+	Template@60457:
+		Id: 60457
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 739
+		Size: 1,1
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+	Template@60458:
+		Id: 60458
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 758, 759
+		Size: 2,1
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+			1: Sand
+	Template@60459:
+		Id: 60459
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 652, 653, 672, 673
+		Size: 2,2
+		Categories: Ice-Detail
+		Tiles:
+			0: Sand
+			1: Sand
+			2: Sand
+			3: Sand
+	Template@60460:
+		Id: 60460
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 345, 346, 365, 366
+		Size: 2,2
+		Categories: Dead-Worm
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60462:
+		Id: 60462
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 355, 356, 357, 358, 359, 373, 374, 375, 338, 339
+		Size: 5,2
+		Categories: Rotten-Base
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+			6: Cliff
+			7: Cliff
+			8: Cliff
+			9: Cliff
+	Template@60464:
+		Id: 60464
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 97, 117
+		Size: 1,2
+		Categories: Dead-Worm
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60465:
+		Id: 60465
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 67
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@60466:
+		Id: 60466
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 1
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@60467:
+		Id: 60467
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 2, 3
+		Size: 2,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Cliff
+			1: Sand
+	Template@60468:
+		Id: 60468
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 4
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Cliff
+	Template@60469:
+		Id: 60469
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 5
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Cliff
+	Template@60470:
+		Id: 60470
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 6, 7
+		Size: 2,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60471:
+		Id: 60471
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 312
+		Size: 1,1
+		Categories: Dead-Worm
+		Tiles:
+			0: Sand
+	Template@60472:
+		Id: 60472
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 310, 311
+		Size: 2,1
+		Categories: Dead-Worm
+		Tiles:
+			0: Sand
+			1: Sand
+	Template@60473:
+		Id: 60473
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 309
+		Size: 1,1
+		Categories: Dead-Worm
+		Tiles:
+			0: Sand
+	Template@60474:
+		Id: 60474
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 349, 350, 351, 352, 369, 370, 371, 372, 389, 390, 391, 392, 385, 386, 387, 388
+		Size: 4,4
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+			1: Cliff
+			2: Cliff
+			3: Sand
+			4: Cliff
+			5: Cliff
+			6: Cliff
+			7: Cliff
+			8: Cliff
+			9: Cliff
+			10: Cliff
+			11: Cliff
+			12: Sand
+			13: Cliff
+			14: Cliff
+			15: Cliff
+	Template@60475:
+		Id: 60475
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 706, 707, 726, 727
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60476:
+		Id: 60476
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 557, 558, 559, 577, 578, 579
+		Size: 3,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: RoughDune
+			3: Sand
+			4: RoughDune
+			5: Cliff
+	Template@60477:
+		Id: 60477
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 619, 639
+		Size: 1,2
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@60478:
+		Id: 60478
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 305
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+	Template@60479:
+		Id: 60479
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 325
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+	Template@60481:
+		Id: 60481
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 414, 415, 434, 435
+		Size: 2,2
+		Categories: Sand-Rock-Cliff
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: ClearDune
+			3: Cliff
+	Template@60482:
+		Id: 60482
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 538, 539
+		Size: 2,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@60500:
+		Id: 60500
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 305
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: RoughDune
+	Template@60501:
+		Id: 60501
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 325
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@60502:
+		Id: 60502
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 311
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: RoughDune
+	Template@60503:
+		Id: 60503
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 312
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: RoughDune
+	Template@60504:
+		Id: 60504
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 330
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: RoughDune
+	Template@60505:
+		Id: 60505
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 316
+		Size: 1,1
+		Categories: Bridge
+		Tiles:
+			0: RoughDune
+	Template@60506:
+		Id: 60506
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 297
+		Size: 1,1
+		Categories: Bridge
+		Tiles:
+			0: RoughDune
+	Template@60507:
+		Id: 60507
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 356, 357
+		Size: 2,1
+		Categories: Rotten-Base
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@60508:
+		Id: 60508
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 355
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: RoughDune
+	Template@60509:
+		Id: 60509
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 375
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: RoughDune
+	Template@60510:
+		Id: 60510
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 395
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: RoughDune
+	Template@60511:
+		Id: 60511
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 414, 415, 434, 435
+		Size: 2,2
+		Categories: Rotten-Base
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+	Template@60512:
+		Id: 60512
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 353, 354, 373, 374, 393, 394
+		Size: 2,3
+		Categories: Bridge
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+			4: RoughDune
+			5: RoughDune
+	Template@60513:
+		Id: 60513
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 350, 351, 352, 370, 371, 372, 390, 391, 392
+		Size: 3,3
+		Categories: Bridge
+		Tiles:
+			0: Cliff
+			1: ClearDune
+			2: Cliff
+			3: Cliff
+			4: Transition
+			5: Cliff
+			6: RoughDune
+			7: RoughDune
+			8: RoughDune
+	Template@60514:
+		Id: 60514
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 347, 348, 349, 367, 368, 369, 387, 388, 389
+		Size: 3,3
+		Categories: Bridge
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: Cliff
+			4: Transition
+			5: Cliff
+			6: ClearDune
+			7: ClearDune
+			8: ClearDune
+	Template@60515:
+		Id: 60515
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 340, 341, 342, 343, 360, 361, 362, 363, 380, 381, 382, 383
+		Size: 4,3
+		Categories: Bridge
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Transition
+			5: Transition
+			6: Transition
+			7: Transition
+			8: Cliff
+			9: Cliff
+			10: Cliff
+			11: Cliff
+	Template@60516:
+		Id: 60516
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 717
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Cliff
+	Template@60517:
+		Id: 60517
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 718
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: RoughDune
+	Template@60518:
+		Id: 60518
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 737
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Cliff
+	Template@60519:
+		Id: 60519
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 738, 739, 758, 759
+		Size: 2,2
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+			1: Sand
+			2: Cliff
+			3: RoughDune
+	Template@60520:
+		Id: 60520
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 652, 653, 672, 673
+		Size: 2,2
+		Categories: Rotten-Base
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Sand
+	Template@60600:
+		Id: 60600
+		Images: bloxcustom.shp
+		Frames: 0, 1, 2, 3
+		Size: 2,2
+		Categories: Rock-Rock-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60601:
+		Id: 60601
+		Images: bloxcustom.shp
+		Frames: 4, 5, 6, 7
+		Size: 2,2
+		Categories: Rock-Rock-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60602:
+		Id: 60602
+		Images: bloxcustom.shp
+		Frames: 8, 9, 10, 11
+		Size: 2,2
+		Categories: Rock-Rock-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60603:
+		Id: 60603
+		Images: bloxcustom.shp
+		Size: 2,2
+		Categories: Rock-Rock-Cliff
+		Frames: 12, 13, 14, 15
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60604:
+		Id: 60604
+		Images: bloxcustom.shp
+		Size: 2,3
+		Categories: Rock-Rock-Cliff
+		Frames: 16, 17, 18, 19, 20, 21
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60605:
+		Id: 60605
+		Images: bloxcustom.shp
+		Size: 2,3
+		Categories: Rock-Rock-Cliff
+		Frames: 22, 23, 24, 25, 26, 27
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60606:
+		Id: 60606
+		Images: bloxcustom.shp
+		Size: 2,1
+		Categories: Rock-Rock-Cliff
+		Frames: 28, 29
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60607:
+		Id: 60607
+		Images: bloxcustom.shp
+		Frames: 30, 31
+		Size: 2,1
+		Categories: Rock-Rock-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60608:
+		Id: 60608
+		Images: bloxcustom.shp
+		Size: 1,2
+		Categories: Rock-Rock-Cliff
+		Frames: 32, 33
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60609:
+		Id: 60609
+		Images: bloxcustom.shp
+		Size: 1,2
+		Categories: Rock-Rock-Cliff
+		Frames: 34, 35
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60610:
+		Id: 60610
+		Images: bloxcustom.shp
+		Size: 2,2
+		Categories: Cliff-Ends
+		Frames: 36, 37, 38, 39
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60611:
+		Id: 60611
+		Images: bloxcustom.shp
+		Size: 2,1
+		Categories: Cliff-Ends
+		Frames: 40, 41
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60612:
+		Id: 60612
+		Images: bloxcustom.shp
+		Size: 3,3
+		Categories: Rock-Rock-Cliff
+		Frames: 42, 43, 44, 45, 46, 47, 48, 49, 50
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+			2: ClearDune
+			3: Cliff
+			4: Rough
+			5: Cliff
+			6: Cliff
+			7: Rough
+			8: Cliff
+	Template@60613:
+		Id: 60613
+		Images: bloxcustom.shp
+		Size: 2,2
+		Categories: Rock-Rock-Cliff
+		Frames: 51, 52, 53, 54
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60614:
+		Id: 60614
+		Images: bloxcustom.shp
+		Size: 2,2
+		Categories: Rock-Rock-Cliff
+		Frames: 55, 56, 57, 58
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60615:
+		Id: 60615
+		Images: bloxcustom.shp
+		Size: 2,2
+		Categories: Rock-Rock-Cliff
+		Frames: 59, 60, 61, 62
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60616:
+		Id: 60616
+		Images: bloxcustom.shp
+		Size: 2,2
+		Categories: Rock-Rock-Cliff
+		Frames: 63, 64, 65, 66
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60617:
+		Id: 60617
+		Images: bloxcustom.shp
+		Size: 2,2
+		Categories: Rock-Rock-Cliff
+		Frames: 67, 68, 69, 70
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60618:
+		Id: 60618
+		Images: bloxcustom.shp
+		Size: 2,2
+		Categories: Rock-Rock-Cliff
+		Frames: 71, 72, 73, 74
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60619:
+		Id: 60619
+		Images: bloxcustom.shp
+		Size: 2,2
+		Categories: Rock-Rock-Cliff
+		Frames: 75, 76, 77, 78
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60620:
+		Id: 60620
+		Images: bloxcustom.shp
+		Frames: 79, 80, 81, 82
+		Size: 2,2
+		Categories: Rock-Rock-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60621:
+		Id: 60621
+		Images: bloxcustom.shp
+		Frames: 83, 84, 85, 86
+		Size: 2,2
+		Categories: Rock-Rock-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60622:
+		Id: 60622
+		Images: bloxcustom.shp
+		Frames: 87, 88, 89, 90
+		Size: 2,2
+		Categories: Rock-Rock-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60623:
+		Id: 60623
+		Images: bloxcustom.shp
+		Frames: 91, 92, 93, 94
+		Size: 2,2
+		Categories: Rock-Rock-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60624:
+		Id: 60624
+		Images: bloxcustom.shp
+		Frames: 95, 96, 97, 98
+		Size: 2,2
+		Categories: Rock-Rock-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60625:
+		Id: 60625
+		Images: bloxcustom.shp
+		Frames: 99, 100, 101, 102
+		Size: 2,2
+		Categories: Rock-Rock-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60626:
+		Id: 60626
+		Images: bloxcustom.shp
+		Frames: 103, 104, 105, 106
+		Size: 2,2
+		Categories: Rock-Rock-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60627:
+		Id: 60627
+		Images: bloxcustom.shp
+		Size: 2,2
+		Categories: Rock-Rock-Cliff
+		Frames: 107, 108, 109, 110
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60628:
+		Id: 60628
+		Images: bloxcustom.shp
+		Frames: 111, 112, 113, 114
+		Size: 2,2
+		Categories: Rock-Rock-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60629:
+		Id: 60629
+		Images: bloxcustom.shp
+		Frames: 115, 116, 117, 118, 119, 120
+		Size: 2,3
+		Categories: Rock-Rock-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60630:
+		Id: 60630
+		Images: bloxcustom.shp
+		Frames: 121, 122, 123, 124, 125, 126
+		Size: 2,3
+		Categories: Rock-Rock-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60631:
+		Id: 60631
+		Images: bloxcustom.shp
+		Frames: 127, 128, 129, 130, 131, 132
+		Size: 3,2
+		Categories: Rock-Rock-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60632:
+		Id: 60632
+		Images: bloxcustom.shp
+		Frames: 133, 134, 135, 136, 137, 138
+		Size: 3,2
+		Categories: Rock-Rock-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60633:
+		Id: 60633
+		Images: bloxcustom.shp
+		Size: 3,2
+		Categories: Rock-Rock-Cliff
+		Frames: 139, 140, 141, 142, 143, 144
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60634:
+		Id: 60634
+		Images: bloxcustom.shp
+		Frames: 145, 146, 147, 148, 149, 150
+		Size: 3,2
+		Categories: Rock-Rock-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60635:
+		Id: 60635
+		Images: bloxcustom.shp
+		Size: 2,2
+		Categories: Cliff-Ends
+		Frames: 151, 152, 153, 154
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60636:
+		Id: 60636
+		Images: bloxcustom.shp
+		Size: 2,2
+		Categories: Cliff-Ends
+		Frames: 155, 156, 157, 158
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60637:
+		Id: 60637
+		Images: bloxcustom.shp
+		Frames: 159, 160, 161, 162
+		Size: 2,2
+		Categories: Cliff-Ends
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60638:
+		Id: 60638
+		Images: bloxcustom.shp
+		Size: 2,2
+		Categories: Cliff-Ends
+		Frames: 163, 164, 165, 166
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60639:
+		Id: 60639
+		Images: bloxcustom.shp
+		Size: 2,2
+		Categories: Cliff-Ends
+		Frames: 167, 168, 169, 170
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60640:
+		Id: 60640
+		Images: bloxcustom.shp
+		Size: 2,2
+		Frames: 171, 172, 173, 174
+		Categories: Cliff-Ends
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60800:
+		Id: 60800
+		Images: bloxcustom.shp
+		Size: 2,2
+		Frames: 175, 176, 177, 178
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60801:
+		Id: 60801
+		Images: bloxcustom.shp
+		Size: 2,2
+		Frames: 179, 180, 181, 182
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60802:
+		Id: 60802
+		Images: bloxcustom.shp
+		Size: 2,2
+		Frames: 183, 184, 185, 186
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60803:
+		Id: 60803
+		Images: bloxcustom.shp
+		Size: 2,2
+		Frames: 187, 188, 189, 190
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60804:
+		Id: 60804
+		Images: bloxcustom.shp
+		Frames: 191, 192, 193, 194
+		Size: 2,2
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60805:
+		Id: 60805
+		Images: bloxcustom.shp
+		Size: 2,2
+		Frames: 195, 196, 197, 198
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60806:
+		Id: 60806
+		Images: bloxcustom.shp
+		Frames: 199, 200, 201, 202
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60807:
+		Id: 60807
+		Images: bloxcustom.shp
+		Frames: 203, 204, 205, 206
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60808:
+		Id: 60808
+		Images: bloxcustom.shp
+		Frames: 207, 208, 209, 210
+		Size: 2,2
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60809:
+		Id: 60809
+		Images: bloxcustom.shp
+		Frames: 211, 212, 213, 214
+		Size: 2,2
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60810:
+		Id: 60810
+		Images: bloxcustom.shp
+		Frames: 215, 216, 217, 218
+		Size: 2,2
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60811:
+		Id: 60811
+		Images: bloxcustom.shp
+		Frames: 219, 220, 221, 222
+		Size: 2,2
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60812:
+		Id: 60812
+		Images: bloxcustom.shp
+		Size: 2,2
+		Categories: Rock-Sand-Cliff
+		Frames: 223, 224, 225, 226
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60813:
+		Id: 60813
+		Images: bloxcustom.shp
+		Size: 2,2
+		Frames: 227, 228, 229, 230
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60814:
+		Id: 60814
+		Images: bloxcustom.shp
+		Size: 2,2
+		Frames: 231, 232, 233, 234
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60815:
+		Id: 60815
+		Images: bloxcustom.shp
+		Frames: 235, 236, 237, 238
+		Size: 2,2
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Transition
+			3: Cliff
+	Template@60816:
+		Id: 60816
+		Images: bloxcustom.shp
+		Frames: 239, 240, 241, 242
+		Size: 2,2
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60817:
+		Id: 60817
+		Images: bloxcustom.shp
+		Size: 2,2
+		Categories: Rock-Sand-Cliff
+		Frames: 243, 244, 245, 246
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60818:
+		Id: 60818
+		Images: bloxcustom.shp
+		Size: 2,1
+		Categories: Rock-Sand-Cliff
+		Frames: 247, 248
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60819:
+		Id: 60819
+		Images: bloxcustom.shp
+		Frames: 249, 250
+		Size: 2,1
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60820:
+		Id: 60820
+		Images: bloxcustom.shp
+		Frames: 251, 252
+		Size: 1,2
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60821:
+		Id: 60821
+		Images: bloxcustom.shp
+		Frames: 253, 254
+		Size: 1,2
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+	Template@60822:
+		Id: 60822
+		Images: bloxcustom.shp
+		Size: 2,2
+		Frames: 255, 256, 257, 258
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60823:
+		Id: 60823
+		Images: bloxcustom.shp
+		Frames: 259, 260, 261, 262
+		Size: 2,2
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60824:
+		Id: 60824
+		Images: bloxcustom.shp
+		Size: 2,2
+		Frames: 263, 264, 265, 266
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60825:
+		Id: 60825
+		Images: bloxcustom.shp
+		Size: 2,2
+		Frames: 267, 268, 269, 270
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60826:
+		Id: 60826
+		Images: bloxcustom.shp
+		Frames: 271, 272, 273, 274, 275, 276
+		Size: 2,3
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60827:
+		Id: 60827
+		Images: bloxcustom.shp
+		Frames: 277, 278, 279, 280, 282
+		Size: 2,3
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			5: Cliff
+	Template@60828:
+		Id: 60828
+		Images: bloxcustom.shp
+		Frames: 283, 284, 285, 286, 287, 288
+		Size: 2,3
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Transition
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60829:
+		Id: 60829
+		Images: bloxcustom.shp
+		Frames: 289, 290, 291, 292, 293, 294
+		Size: 2,3
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60830:
+		Id: 60830
+		Images: bloxcustom.shp
+		Frames: 295, 296, 297, 298
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60831:
+		Id: 60831
+		Images: bloxcustom.shp
+		Frames: 299, 300, 301, 302
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60832:
+		Id: 60832
+		Images: bloxcustom.shp
+		Frames: 303, 304, 305, 306
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60833:
+		Id: 60833
+		Images: bloxcustom.shp
+		Frames: 307, 308, 309, 310
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60834:
+		Id: 60834
+		Images: bloxcustom.shp
+		Frames: 311, 312, 313, 314
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60835:
+		Id: 60835
+		Images: bloxcustom.shp
+		Frames: 315, 316, 317, 318
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60836:
+		Id: 60836
+		Images: bloxcustom.shp
+		Frames: 319, 320, 321, 322
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60837:
+		Id: 60837
+		Images: bloxcustom.shp
+		Frames: 323, 324, 325, 326
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60838:
+		Id: 60838
+		Images: bloxcustom.shp
+		Frames: 327, 328, 329, 330, 331, 332
+		Size: 3,2
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60839:
+		Id: 60839
+		Images: bloxcustom.shp
+		Size: 3,2
+		Frames: 333, 334, 335, 336, 337, 338
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60840:
+		Id: 60840
+		Images: bloxcustom.shp
+		Frames: 339, 340, 341, 342, 343, 344
+		Size: 3,2
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60841:
+		Id: 60841
+		Images: bloxcustom.shp
+		Frames: 345, 346, 347, 348, 349, 350
+		Size: 3,2
+		Categories: Rock-Sand-Cliff
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+			4: Cliff
+			5: Cliff
+	Template@60842:
+		Id: 60842
+		Images: bloxcustom.shp
+		Frames: 351, 352, 353, 354
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60843:
+		Id: 60843
+		Images: bloxcustom.shp
+		Frames: 355, 356, 357, 358
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60844:
+		Id: 60844
+		Images: bloxcustom.shp
+		Frames: 359, 360, 361, 362
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60845:
+		Id: 60845
+		Images: bloxcustom.shp
+		Size: 2,2
+		Frames: 363, 364, 365, 366
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60846:
+		Id: 60846
+		Images: bloxcustom.shp
+		Size: 2,2
+		Frames: 367, 368, 369, 370
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60847:
+		Id: 60847
+		Images: bloxcustom.shp
+		Frames: 371, 372, 373, 374
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60848:
+		Id: 60848
+		Images: bloxcustom.shp
+		Frames: 375, 376, 377, 378
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60849:
+		Id: 60849
+		Images: bloxcustom.shp
+		Frames: 379, 380, 381, 382
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60850:
+		Id: 60850
+		Images: bloxcustom.shp
+		Frames: 383, 384, 385, 386
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60851:
+		Id: 60851
+		Images: bloxcustom.shp
+		Frames: 387, 388, 389, 390
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60852:
+		Id: 60852
+		Images: bloxcustom.shp
+		Frames: 391, 392, 393, 394
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60853:
+		Id: 60853
+		Images: bloxcustom.shp
+		Frames: 395, 396, 397, 398
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60854:
+		Id: 60854
+		Images: bloxcustom.shp
+		Frames: 399, 400, 401, 402
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@60855:
+		Id: 60855
+		Images: bloxcustom.shp
+		Frames: 403, 404, 405, 406
+		Size: 2,2
+		Categories: Cliff-Type-Changer
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Cliff
+			3: Cliff
+	Template@61000:
+		Id: 61000
+		Images: bloxcustom.shp
+		Frames: 407
+		Size: 1,1
+		Categories: Sand-Platform
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+	Template@61001:
+		Id: 61001
+		Images: bloxcustom.shp
+		Frames: 408
+		Size: 1,1
+		Categories: Sand-Platform
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+	Template@61002:
+		Id: 61002
+		Images: bloxcustom.shp
+		Frames: 409
+		Size: 1,1
+		Categories: Sand-Platform
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+	Template@61003:
+		Id: 61003
+		Images: bloxcustom.shp
+		Frames: 410
+		Size: 1,1
+		Categories: Sand-Platform
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+	Template@61004:
+		Id: 61004
+		Images: bloxcustom.shp
+		Frames: 411
+		Size: 1,1
+		Categories: Sand-Platform
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+	Template@61005:
+		Id: 61005
+		Images: bloxcustom.shp
+		Frames: 412
+		Size: 1,1
+		Categories: Sand-Platform
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+	Template@61006:
+		Id: 61006
+		Images: bloxcustom.shp
+		Frames: 413
+		Size: 1,1
+		Categories: Sand-Platform
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+	Template@61007:
+		Id: 61007
+		Images: bloxcustom.shp
+		Frames: 414
+		Size: 1,1
+		Categories: Sand-Platform
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+	Template@61008:
+		Id: 61008
+		Images: bloxcustom.shp
+		Frames: 415
+		Size: 1,1
+		Categories: Sand-Platform
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+	Template@61009:
+		Id: 61009
+		Images: bloxcustom.shp
+		Frames: 416
+		Size: 1,1
+		Categories: Sand-Platform
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+	Template@61010:
+		Id: 61010
+		Images: bloxcustom.shp
+		Frames: 417
+		Size: 1,1
+		Categories: Sand-Platform
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+	Template@61011:
+		Id: 61011
+		Images: bloxcustom.shp
+		Frames: 418
+		Size: 1,1
+		Categories: Sand-Platform
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+	Template@61012:
+		Id: 61012
+		Images: bloxcustom.shp
+		Frames: 419
+		Size: 1,1
+		Categories: Sand-Platform
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+	Template@61013:
+		Id: 61013
+		Images: bloxcustom.shp
+		Frames: 420
+		Size: 1,1
+		Categories: Sand-Platform
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+	Template@61014:
+		Id: 61014
+		Images: bloxcustom.shp
+		Frames: 421
+		Size: 1,1
+		Categories: Sand-Platform
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+	Template@61015:
+		Id: 61015
+		Images: bloxcustom.shp
+		Frames: 422
+		Size: 1,1
+		Categories: Sand-Platform
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: Cliff
+	Template@61016:
+		Id: 61016
+		Images: bloxcustom.shp
+		Frames: 423, 424
+		Size: 2,1
+		Categories: Sand-Platform
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+	Template@61017:
+		Id: 61017
+		Images: bloxcustom.shp
+		Frames: 425
+		Size: 1,1
+		Categories: Sand-Platform
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: ClearDune
+	Template@61018:
+		Id: 61018
+		Images: bloxcustom.shp
+		Frames: 426
+		Size: 1,1
+		Categories: Sand-Platform
+		Palette: staticterrain_dune2k
+		Tiles:
+			0: ClearDune
+	Template@61019:
+		Id: 61019
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 29
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+	Template@61020:
+		Id: 61020
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 617, 618, 637, 638
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+			2: ClearDune
+			3: ClearDune
+	Template@61021:
+		Id: 61021
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 345
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61022:
+		Id: 61022
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 393, 394, 470, 395
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			3: RoughDune
+	Template@61023:
+		Id: 61023
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 353, 354
+		Size: 1,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@61024:
+		Id: 61024
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 373
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61025:
+		Id: 61025
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 367, 368, 387, 388
+		Size: 2, 2
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+	Template@61026:
+		Id: 61026
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 371
+		Size: 1, 1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61027:
+		Id: 61027
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 383, 384
+		Size: 2, 1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@61028:
+		Id: 61028
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 391
+		Size: 1, 1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61029:
+		Id: 61029
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 372
+		Size: 1, 1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61030:
+		Id: 61030
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 385
+		Size: 1, 1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61031:
+		Id: 61031
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 710, 711, 730, 630
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+	Template@61032:
+		Id: 61032
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 709, 729
+		Size: 1,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@61033:
+		Id: 61033
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 714, 715
+		Size: 2,1
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@61034:
+		Id: 61034
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 611, 612, 613, 631, 632, 633
+		Size: 3,2
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+			2: ClearDune
+			3: ClearDune
+			4: ClearDune
+			5: ClearDune
+	Template@61035:
+		Id: 61035
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 614, 615, 616, 634, 635, 636, 654, 655, 656
+		Size: 3,3
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+			1: ClearDune
+			2: ClearDune
+			3: ClearDune
+			4: ClearDune
+			5: ClearDune
+			6: ClearDune
+			7: ClearDune
+			8: ClearDune
+	Template@61036:
+		Id: 61036
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 684, 685, 704, 705
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+	Template@61037:
+		Id: 61037
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 662, 630, 682, 683
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			2: RoughDune
+			3: RoughDune
+	Template@61040:
+		Id: 61040
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 359
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: Cliff
+	Template@61041:
+		Id: 61041
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 339
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: Cliff
+	Template@61042:
+		Id: 61042
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 319
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: Cliff
+	Template@61043:
+		Id: 61043
+		Images: bloxice.shp
+		Palette: staticterrain_dune2k
+		Frames: 538
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+	Template@61046:
+		Id: 61046
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 700
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61047:
+		Id: 61047
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 681
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61048:
+		Id: 61048
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 661
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61049:
+		Id: 61049
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 680
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61050:
+		Id: 61050
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 392
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61051:
+		Id: 61051
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 393
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61052:
+		Id: 61052
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 346, 366
+		Size: 1,2
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@61053:
+		Id: 61053
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 365
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61054:
+		Id: 61054
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 386
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61055:
+		Id: 61055
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 639
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+	Template@61057:
+		Id: 61057
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 382
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: Cliff
+	Template@61058:
+		Id: 61058
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 393, 394, 470, 395
+		Size: 2,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			3: RoughDune
+	Template@61059:
+		Id: 61059
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 660
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61060:
+		Id: 61060
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 164, 165, 184, 185
+		Size: 2,2
+		Categories: Dead-Worm
+		Tiles:
+			0: Cliff
+			1: Cliff
+			2: Sand
+			3: Cliff
+	Template@61061:
+		Id: 61061
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 382
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61062:
+		Id: 61062
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 368
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61063:
+		Id: 61063
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 380
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61064:
+		Id: 61064
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 290
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61068:
+		Id: 61068
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 367
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+	Template@61069:
+		Id: 61069
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 381
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61070:
+		Id: 61070
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 343
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61074:
+		Id: 61074
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 289
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+	Template@61075:
+		Id: 61075
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 344
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: Sand
+	Template@61076:
+		Id: 61076
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 362, 363, 364
+		Size: 3,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Cliff
+			1: RoughDune
+			2: Cliff
+	Template@61077:
+		Id: 61077
+		Images: bloxwast.shp
+		Palette: staticterrain_dune2k
+		Frames: 607
+		Size: 1,1
+		Categories: Rotten-Base
+		Tiles:
+			0: Sand
+	Template@61078:
+		Id: 61078
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 311, 312
+		Size: 2,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@61079:
+		Id: 61079
+		Images: bloxbat.shp
+		Palette: staticterrain_dune2k
+		Frames: 185
+		Size: 1,1
+		Categories: Sand-Detail
+		Tiles:
+			0: RoughDune
+	Template@61080:
+		Id: 61080
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 713, 733
+		Size: 1,2
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@61081:
+		Id: 61081
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 712
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+	Template@61082:
+		Id: 61082
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 728
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+	Template@61083:
+		Id: 61083
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 707, 708
+		Size: 2,1
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@61084:
+		Id: 61084
+		Images: bloxbgbs.shp
+		Palette: staticterrain_dune2k
+		Frames: 731, 732
+		Size: 2,1
+		Categories: Rock-Detail
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@61085:
+		Id: 61085
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 344, 345
+		Size: 2,1
+		Categories: Bridge
+		Tiles:
+			0: Cliff
+			1: Transition
+	Template@61086:
+		Id: 61086
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 345, 346
+		Size: 2,1
+		Categories: Bridge
+		Tiles:
+			0: Transition
+			1: Cliff
+	Template@61087:
+		Id: 61087
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 364, 365
+		Size: 2,1
+		Categories: Bridge
+		Tiles:
+			0: Cliff
+			1: Transition
+	Template@61088:
+		Id: 61088
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 365, 366
+		Size: 2,1
+		Categories: Bridge
+		Tiles:
+			0: Transition
+			1: Cliff
+	Template@61089:
+		Id: 61089
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 384, 385
+		Size: 2,1
+		Categories: Bridge
+		Tiles:
+			0: Cliff
+			1: Transition
+	Template@61090:
+		Id: 61090
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 385, 386
+		Size: 2,1
+		Categories: Bridge
+		Tiles:
+			0: Transition
+			1: Cliff
+	Template@61091:
+		Id: 61091
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 1, 340, 2, 360
+		Size: 2,2
+		Categories: Bridge
+		Tiles:
+			0: ClearDune
+			1: Cliff
+			2: ClearDune
+			3: Transition
+	Template@61092:
+		Id: 61092
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 343, 4, 363, 5
+		Size: 2,2
+		Categories: Bridge
+		Tiles:
+			0: Cliff
+			1: ClearDune
+			2: Transition
+			3: ClearDune
+	Template@61093:
+		Id: 61093
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 2, 360, 3, 380
+		Size: 2,2
+		Categories: Bridge
+		Tiles:
+			0: ClearDune
+			1: Transition
+			2: ClearDune
+			3: Cliff
+	Template@61094:
+		Id: 61094
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 363, 5, 383, 6
+		Size: 2,2
+		Categories: Bridge
+		Tiles:
+			0: Transition
+			1: ClearDune
+			2: Cliff
+			3: ClearDune
+	Template@61095:
+		Id: 61095
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 350, 351, 370, 371
+		Size: 2,2
+		Categories: Bridge
+		Tiles:
+			0: Cliff
+			1: ClearDune
+			2: Cliff
+			3: Transition
+	Template@61096:
+		Id: 61096
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 351, 352, 371, 372
+		Size: 2,2
+		Categories: Bridge
+		Tiles:
+			0: ClearDune
+			1: Cliff
+			2: Transition
+			3: Cliff
+	Template@61097:
+		Id: 61097
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 367, 368, 387, 388
+		Size: 2,2
+		Categories: Bridge
+		Tiles:
+			0: Cliff
+			1: Transition
+			2: ClearDune
+			3: ClearDune
+	Template@61098:
+		Id: 61098
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 368, 369, 388, 389
+		Size: 2,2
+		Categories: Bridge
+		Tiles:
+			0: Transition
+			1: Cliff
+			2: ClearDune
+			3: ClearDune
+	Template@61099:
+		Id: 61099
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 341, 361
+		Size: 1,2
+		Categories: Bridge
+		Tiles:
+			0: Cliff
+			1: Transition
+	Template@61100:
+		Id: 61100
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 342, 362
+		Size: 1,2
+		Categories: Bridge
+		Tiles:
+			0: Cliff
+			1: Transition
+	Template@61101:
+		Id: 61101
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 353, 373
+		Size: 1,2
+		Categories: Bridge
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@61102:
+		Id: 61102
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 354, 374
+		Size: 1,2
+		Categories: Bridge
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@61103:
+		Id: 61103
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 361, 381
+		Size: 1,2
+		Categories: Bridge
+		Tiles:
+			0: Transition
+			1: Cliff
+	Template@61104:
+		Id: 61104
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 362, 382
+		Size: 1,2
+		Categories: Bridge
+		Tiles:
+			0: Transition
+			1: Cliff
+	Template@61105:
+		Id: 61105
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 297, 393
+		Size: 1,2
+		Categories: Bridge
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@61106:
+		Id: 61106
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 316, 394
+		Size: 1,2
+		Categories: Bridge
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@61107:
+		Id: 61107
+		Images: bloxtree.shp
+		Palette: staticterrain_dune2k
+		Frames: 381
+		Size: 1,1
+		Categories: Rock-Detail
+		Tiles:
+			0: ClearDune
+	Template@61108:
+		Id: 61108
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 289, 290, 309, 310
+		Size: 2,2
+		Categories: Rotten-Base
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+			2: RoughDune
+			3: RoughDune
+	Template@61109:
+		Id: 61109
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 347, 348
+		Size: 2,1
+		Categories: Bridge
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@61110:
+		Id: 61110
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 348, 349
+		Size: 2,1
+		Categories: Bridge
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@61111:
+		Id: 61111
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 390, 391
+		Size: 2,1
+		Categories: Bridge
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@61112:
+		Id: 61112
+		Images: bloxxmas.shp
+		Palette: staticterrain_dune2k
+		Frames: 391, 392
+		Size: 2,1
+		Categories: Bridge
+		Tiles:
+			0: RoughDune
+			1: RoughDune
+	Template@60856:
+		Id: 60856
+		Images: d2kconcrete.png
+		Palette: greyscale
+		Frames: 0, 1, 2, 3, 4, 14
+		Size: 1,1
+		PickAny: True
+		Categories: Road
+		Tiles:
+			0: Concrete
+			1: Concrete
+			2: Concrete
+			3: Concrete
+			4: Concrete
+			5: Concrete
+	Template@60857:
+		Id: 60857
+		Images: dune2tile.shp
+		Frames: 0
+		Size: 1,1
+		PickAny: True
+		Categories: Road
+		Tiles:
+			0: Concrete
+	Template@60858:
+		Id: 60858
+		Images: sczergsoil.shp
+		Frames: 0
+		Size: 1,1
+		PickAny: True
+		Categories: Road
+		Tiles:
+			0: ZergSoil
+	Template@60859:
+		Id: 60859
+		Images: sczergsoildead.shp
+		Frames: 0
+		Size: 1,1
+		PickAny: True
+		Categories: Road
+		Tiles:
+			0: ClearDune
+	Template@61143:
+		Id: 61143
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 317
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+	Template@61144:
+		Id: 61144
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 318
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+	Template@61145:
+		Id: 61145
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 295
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+	Template@61146:
+		Id: 61146
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 296
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+	Template@61147:
+		Id: 61147
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 313
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+	Template@61148:
+		Id: 61148
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 333
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+	Template@61149:
+		Id: 61149
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 326
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+	Template@61150:
+		Id: 61150
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 327
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+	Template@61151:
+		Id: 61151
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 291
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition
+	Template@61152:
+		Id: 61152
+		Images: bloxbase.shp
+		Palette: staticterrain_dune2k
+		Frames: 292
+		Size: 1,1
+		Categories: Rock-Sand-Smooth
+		Tiles:
+			0: Transition

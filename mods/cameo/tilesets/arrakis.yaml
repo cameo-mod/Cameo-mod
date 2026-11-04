@@ -40,6 +40,11 @@ Terrain:
 		TargetTypes: Ground
 		Color: 587474
 		CustomCursor: move-rough
+	TerrainType@Rough:
+		Type: Rough
+		TargetTypes: Ground
+		Color: 587474
+		CustomCursor: move-rough
 	TerrainType@Sand:
 		Type: Sand
 		TargetTypes: Ground
@@ -5081,10 +5086,10 @@ Templates:
 			1: ClearDune
 			2: ClearDune
 			3: Cliff
-			4: RoughDune
+			4: Rough
 			5: Cliff
 			6: Cliff
-			7: RoughDune
+			7: Rough
 			8: Cliff
 	Template@613:
 		Id: 613

@@ -4066,6 +4066,73 @@
 		RequiresCondition: BorisFlare
 		Color: FF0000AA
 
+^Animal:
+	Inherits: ^DefaultInfantry
+	Health:
+		HP: 10000
+	Armor:
+		Type: None
+	Valued:
+		Cost: 100
+	Tooltip:
+		Name: Animal
+	RevealsShroud:
+		Range: 6c0
+	RevealOnFire:
+	RevealOnDeath:
+	Mobile:
+		Speed: 75
+		Voice: Move
+	Targetable:
+		RequiresCondition: !parachute && !chronobeamed
+		TargetTypes: Ground, Infantry, Creep
+	Targetable@ParachuteAir:
+		RequiresCondition: parachute
+		TargetTypes: Air
+	DamageMultiplier@parachute:
+		Modifier: 75
+		RequiresCondition: parachute
+	HiddenUnderFog:
+	RenderSprites:
+	WithDeathAnimation:
+		UseDeathTypeSuffix: false
+	WithInfantryBody:
+		DefaultAttackSequence: idle
+	DeathSounds:
+	Voiced:
+		VoiceSet: DinoVoice
+	HitShape:
+		Type: Circle
+			Radius: 128
+	Passenger:
+		CargoType: Infantry
+	MapEditorData:
+		Categories: Animal
+	GpsDot:
+		String: Infantry
+	Wanders:
+		MinMoveDelay: 150
+		MaxMoveDelay: 750
+
+^AgressiveAnimal:
+	Inherits: ^Animal
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	AutoTarget:
+		DynamicWeaponPriority: true
+		ScanRadius: 4
+	AttackMove:
+		Voice: Attack
+	AttackFrontal:
+		Voice: Attack
+		PauseOnCondition: disabled || blinded
+		FacingTolerance: 0
+	Guard:
+		Voice: Move
+	DeathSounds:
+	Voiced:
+		VoiceSet: DinoVoice
+
 ^BotProductionBehavior:
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): Hard is the fair 100% tier; time 140 -> 50 in
 	# steps of 10, cost 120 -> 75 in steps of 5. Guarded by tools/audit/audit_ai_personalities.py (difficulty_scale_failures).

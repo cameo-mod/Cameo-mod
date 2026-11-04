@@ -5489,7 +5489,98 @@ ra2_civbfm:
 
 ra2_civbbp:
 	Inherits: ^RA2CivInfantry
-# RA2 New Promotions
+
+
+
+# ra2_vladimir_inf:
+	# Inherits: ^RA2CivInfantry
+	# Inherits@armed: ^ArmedCivilian
+	# Tooltip:
+		# Name: Vladimir
+
+# ra2_pentgen:
+	# Inherits: ^RA2CivInfantry
+	# Inherits@armed: ^ArmedCivilian
+	# Tooltip:
+		# Name: General
+
+# ra2_pres:
+	# Inherits: ^RA2CivInfantry
+	# Tooltip:
+		# Name: President
+# ra2_ssrv:
+	# Inherits: ^RA2CivInfantry
+	# Inherits@armed: ^ArmedCivilian
+	# Tooltip:
+		# Name: Secret Service Agent
+
+# ra2_eins:
+	# Inherits: ^RA2CivInfantry
+	# Tooltip:
+		# Name: Albert Einstein
+
+ra2_cow:
+	Inherits: ^Animal
+	Tooltip:
+		Name: Cow
+	RenderSprites:
+		PlayerPalette: ra2infantry
+	WithDeathAnimation:
+		DeathSequencePalette: ra2infantry
+	Voiced:
+		VoiceSet: CowVoice
+ra2_mumy:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Mummy
+	RenderSprites:
+		PlayerPalette: ra2infantry
+	WithDeathAnimation:
+		DeathSequencePalette: ra2infantry
+	Voiced:
+		VoiceSet: MummyVoice
+ra2_caml:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Camel
+	RenderSprites:
+		PlayerPalette: ra2infantry
+	WithDeathAnimation:
+		DeathSequencePalette: ra2infantry
+	Voiced:
+		VoiceSet: CowVoice
+ra2_all:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Alligator
+	RenderSprites:
+		PlayerPalette: ra2infantry
+	WithDeathAnimation:
+		DeathSequencePalette: ra2infantry
+	Voiced:
+		VoiceSet: AsianCrocVoice
+ra2_polarb:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Polar Bear
+	RenderSprites:
+		PlayerPalette: ra2infantry
+	WithDeathAnimation:
+		DeathSequencePalette: ra2infantry
+	Voiced:
+		VoiceSet: BearVoice
+ra2_josh:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Monkey
+	RenderSprites:
+		PlayerPalette: ra2infantry
+	WithDeathAnimation:
+		DeathSequencePalette: ra2infantry
+	Voiced:
+		VoiceSet: LatinMonkeyDie
+
+# RA2 Custom Civilian/Animal Stuff
 
 # RA2UNIONTANK:
 # 	Inherits: ^Tank

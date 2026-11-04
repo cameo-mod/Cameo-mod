@@ -3902,6 +3902,38 @@ scorches:
 			RA_DESERT: sc6.des
 			ARRAKIS: sc6.des
 
+scorches_des:
+	Defaults:
+		Length: *
+		Filename: sc1.des
+	sc1:
+		Filename: sc1.des
+	sc2:
+		Filename: sc2.des
+	sc3:
+		Filename: sc3.des
+	sc4:
+		Filename: sc4.des
+	sc5:
+		Filename: sc5.des
+	sc6:
+		Filename: sc6.des
+scorches_snow:
+	Defaults:
+		Length: *
+		Filename: sc1.sno
+	sc1:
+		Filename: sc1.sno
+	sc2:
+		Filename: sc2.sno
+	sc3:
+		Filename: sc3.sno
+	sc4:
+		Filename: sc4.sno
+	sc5:
+		Filename: sc5.sno
+	sc6:
+		Filename: sc6.sno
 rockcraters:
 	Defaults:
 		Scale: 1.4
@@ -3990,6 +4022,38 @@ craters:
 			BARREN: cr6.bar
 			RA_DESERT: cr6.des
 			RA_SNOW: cr6.sno
+craters_des:
+	Defaults:
+		Length: *
+		Filename: cr1.des
+	cr1:
+		Filename: cr1.des
+	cr2:
+		Filename: cr2.des
+	cr3:
+		Filename: cr3.des
+	cr4:
+		Filename: cr4.des
+	cr5:
+		Filename: cr5.des
+	cr6:
+		Filename: cr6.des
+craters_snow:
+	Defaults:
+		Length: *
+		Filename: cr1.sno
+	cr1:
+		Filename: cr1.sno
+	cr2:
+		Filename: cr2.sno
+	cr3:
+		Filename: cr3.sno
+	cr4:
+		Filename: cr4.sno
+	cr5:
+		Filename: cr5.sno
+	cr6:
+		Filename: cr6.sno
 ra2craters:
 	Defaults:
 		Filename: cr1.tem

@@ -5175,3 +5175,464 @@ ra2_civbbp:
 		Filename: ra2_shared_sprites|ra2_civbbp.shp
 	icon:
 		Filename: invisibleitem.shp
+
+# ra2_vladimir:
+	# Inherits: ^RA2ArmedCivilian
+	# Inherits@2: ^RA2MachineGunMuzzle
+	# Defaults:
+		# Filename: ra2_vladimir.shp
+		# Offset: 0, 0
+	# stand:
+		# Facings: 8
+	# run:
+		# Start: 8
+		# Length: 6
+		# Facings: 8
+	# prone-stand:
+		# Start: 86
+		# Facings: 8
+	# prone-run:
+		# Start: 86
+		# Length: 6
+		# Facings: 8
+	# prone-shoot:
+		# Start: 212
+		# Length: 6
+		# Facings: 8
+	# shoot:
+		# Start: 164
+		# Length: 6
+		# Facings: 8
+	# idle1:
+		# Start: 56
+		# Length: 15
+	# idle2:
+		# Start: 71
+		# Length: 14
+	# die1:
+		# Start: 134
+		# Length: 15
+		# Facings: 8
+	# die2:
+		# Start: 149
+		# Length: 15
+		# Facings: 8
+	# cheer:
+		# Start: 56
+		# Length: 15
+	# panic-stand:
+		# Start: 8
+		# Length: 6
+		# Facings: 8
+	# panic-run:
+		# Start: 8
+		# Length: 6
+		# Facings: 8
+	# icon:
+		# Filename: invisibleitem.shp
+# ra2_pentgen:
+	# Inherits: ^RA2ArmedCivilian
+	# Inherits@2: ^RA2MachineGunMuzzle
+	# stand:
+		# Facings: 8
+	# run:
+		# Start: 8
+		# Length: 6
+		# Facings: 8
+	# prone-stand:
+		# Start: 134
+		# Facings: 8
+	# prone-run:
+		# Start: 134
+		# Length: 6
+		# Facings: 8
+	# prone-shoot:
+		# Start: 214
+		# Length: 6
+		# Facings: 8
+	# shoot:
+		# Start: 86
+		# Length: 6
+		# Facings: 8
+	# idle1:
+		# Start: 56
+		# Length: 15
+	# die1:
+		# Start: 71
+		# Length: 15
+	# die2:
+		# Length: 8
+	# cheer:
+		# Start: 56
+		# Length: 15
+	# panic-stand:
+		# Start: 8
+		# Length: 6
+		# Facings: 8
+	# panic-run:
+		# Start: 8
+		# Length: 6
+		# Facings: 8
+	# icon:
+		# Filename: invisibleitem.shp
+# ra2_pres:
+	# Inherits: ^RA2UnArmedCivilian
+	# stand:
+		# Facings: 8
+	# run:
+		# Start: 8
+		# Length: 6
+		# Facings: 8
+	# prone-stand:
+		# Start: 134
+		# Facings: 8
+	# prone-run:
+		# Start: 134
+		# Length: 6
+		# Facings: 8
+	# prone-shoot:
+		# Facings: 8
+	# shoot:
+		# Facings: 8
+	# idle1:
+		# Start: 56
+		# Length: 15
+	# die1:
+		# Start: 71
+		# Length: 15
+	# die2:
+		# Length: 8
+	# cheer:
+		# Start: 56
+		# Length: 15
+	# panic-stand:
+		# Start: 86
+		# Length: 6
+		# Facings: 8
+	# panic-run:
+		# Start: 86
+		# Length: 6
+		# Facings: 8
+	# icon:
+		# Filename: invisibleitem.shp
+# ra2_ssrv:
+	# Inherits: ^RA2ArmedCivilian
+	# Inherits@2: ^RA2MachineGunMuzzle
+	# stand:
+		# Facings: 8
+	# run:
+		# Start: 8
+		# Length: 6
+		# Facings: 8
+	# prone-stand:
+		# Start: 182
+		# Facings: 8
+	# prone-run:
+		# Start: 182
+		# Length: 6
+		# Facings: 8
+	# prone-shoot:
+		# Start: 86
+		# Length: 6
+		# Facings: 8
+	# shoot:
+		# Start: 86
+		# Length: 6
+		# Facings: 8
+	# idle1:
+		# Start: 56
+		# Length: 15
+	# die1:
+		# Start: 71
+		# Length: 15
+	# die2:
+		# Length: 8
+	# cheer:
+		# Start: 56
+		# Length: 15
+	# panic-stand:
+		# Start: 134
+		# Length: 6
+		# Facings: 8
+	# panic-run:
+		# Start: 134
+		# Length: 6
+		# Facings: 8
+	# icon:
+		# Filename: invisibleitem.shp
+
+^RA2Animal:
+	Defaults:
+		Filename: ra2_mumy.shp
+		Offset: 0, 0
+	die:
+		Start: 86
+		Length: 15
+	die4:
+		Start: 86
+		Length: 15
+	die5:
+		Start: 86
+		Length: 15
+	die6:
+		Start: 86
+		Length: 15
+	die7:
+		Start: 86
+		Length: 15
+	die8:
+		Start: 86
+		Length: 15
+	die9:
+		Start: 86
+		Length: 15
+
+ra2_mumy:
+	Inherits: ^RA2Animal
+	Defaults:
+		Filename: ra2_mumy.shp
+		Offset: 0, 0
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+	shoot:
+		Start: 116
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 56
+		Length: 15
+	idle2:
+		Start: 71
+		Length: 15
+	die1:
+		Start: 86
+		Length: 15
+	die2:
+		Start: 101
+		Length: 15
+	cheer:
+		Start: 56
+		Length: 15
+	panic-stand:
+		Start: 8
+		Length: 6
+		Facings: 8
+	panic-run:
+		Start: 8
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: invisibleitem.shp
+ra2_eins:
+	Inherits: ^RA2UnArmedCivilian
+	stand:
+		Facings: 8
+	run:
+		Start: 133
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 56
+		Length: 15
+	die1:
+		Start: 118
+		Length: 15
+	die2:
+		Start: 118
+		Length: 15
+	cheer:
+		Start: 56
+		Length: 15
+	panic-stand:
+		Start: 8
+		Length: 6
+		Facings: 8
+	panic-run:
+		Start: 8
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: invisibleitem.shp
+ra2_cow:
+	Inherits: ^RA2Animal
+	Defaults:
+		Filename: ra2_cow.shp
+		Offset: 0, 0
+	stand:
+		Facings: 8
+		ShadowStart: 116
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		ShadowStart: 124
+		Tick: 120
+	idle1:
+		Start: 56
+		Length: 15
+		ShadowStart: 172
+		Tick: 100
+	idle2:
+		Start: 71
+		Length: 15
+		ShadowStart: 187
+		Tick: 100
+	die1:
+		Start: 86
+		Length: 15
+		ShadowStart: 202
+	die2:
+		Start: 101
+		Length: 15
+		ShadowStart: 217
+	icon:
+		Filename: invisibleitem.shp
+ra2_caml:
+	Inherits: ^RA2Animal
+	Defaults:
+		Filename: ra2_caml.shp
+		Offset: 0, 0
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+	shoot:
+		Start: 116
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 56
+		Length: 15
+	idle2:
+		Start: 71
+		Length: 15
+	die1:
+		Start: 86
+		Length: 15
+	die2:
+		Start: 101
+		Length: 15
+	cheer:
+		Start: 56
+		Length: 15
+	panic-stand:
+		Start: 8
+		Length: 6
+		Facings: 8
+	panic-run:
+		Start: 8
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: invisibleitem.shp
+ra2_all:
+	Inherits: ^RA2Animal
+	Defaults:
+		Filename: ra2_all.shp
+		Offset: 0, 0
+	stand:
+		Facings: 8
+		ShadowStart: 164
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		ShadowStart: 172
+		Tick: 120
+	shoot:
+		Start: 116
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 56
+		Length: 15
+	idle2:
+		Start: 71
+		Length: 15
+	die1:
+		Start: 86
+		Length: 15
+		ShadowStart: 202
+	die2:
+		Start: 101
+		Length: 15
+		ShadowStart: 217
+	icon:
+		Filename: invisibleitem.shp
+
+ra2_polarb:
+	Inherits: ^RA2Animal
+	Defaults:
+		Filename: ra2_polarb.shp
+		Offset: 0, 0
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		Tick: 120
+	shoot:
+		Start: 116
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 56
+		Length: 15
+	idle2:
+		Start: 71
+		Length: 15
+	die1:
+		Start: 86
+		Length: 15
+	die2:
+		Start: 101
+		Length: 15
+	icon:
+		Filename: invisibleitem.shp
+
+ra2_josh:
+	Inherits: ^RA2Animal
+	Defaults:
+		Filename: ra2_josh.shp
+		Offset: 0, 0
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		Tick: 120
+	shoot:
+		Start: 116
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 56
+		Length: 15
+	idle2:
+		Start: 71
+		Length: 15
+	die1:
+		Start: 86
+		Length: 15
+	die2:
+		Start: 101
+		Length: 15
+	die4: nukedie
+		Length: *
+		Tick: 50
+	die5: yuridie
+		Length: *
+		Tick: 80
+	die6: electro
+		Length: *
+		Tick: 80
+	icon:
+		Filename: invisibleitem.shp
