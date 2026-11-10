@@ -197,6 +197,16 @@ def integer(value):
     return value
 
 
+def signed_integer(value):
+    """Signed 64-bit integer for fields that can legitimately go negative.
+    PLAYTEST-PORT FIX-5: bot-queue spent_delta is spent - last_spent, and the engine
+    lowers PlayerResources.Spent on refunds (RefundCash/RefundResources), so a refund
+    larger than the spending in one sample interval gives a negative delta."""
+    if isinstance(value, bool) or not isinstance(value, int) or not -(2 ** 63) <= value < 2 ** 63:
+        raise EvidenceError("expected signed 64-bit integer")
+    return value
+
+
 def read_jsonl(path, live=False):
     """Ignore only an unterminated final line in live mode, never a malformed row."""
     if not path.exists():
@@ -441,7 +451,7 @@ def validate_bot_queue_row(row):
         raise EvidenceError("unsupported bot-queue version")
     integer(row.get("tick"))
     integer(row.get("banked"))
-    integer(row.get("spent_delta"))
+    signed_integer(row.get("spent_delta"))  # FIX-5: refunds make it negative
     for key in ("requested", "accepted", "completed", "spend"):
         values = row.get(key)
         if not isinstance(values, dict):

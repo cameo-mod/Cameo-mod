@@ -14,7 +14,11 @@ import json
 import os
 from pathlib import Path
 import re
+import sys
 
+# FIX-5: `python -I` drops the script directory from sys.path, so the sibling import
+# below failed with ModuleNotFoundError when run as `python -I -B tools/ai/economy_invariants.py`.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from replay_health import EvidenceError, atomic_report, identity, integer, read_jsonl
 
 POLICY = "economy-invariants-v2"

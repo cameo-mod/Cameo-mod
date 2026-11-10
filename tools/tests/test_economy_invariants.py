@@ -459,6 +459,17 @@ class InvariantTests(unittest.TestCase):
         self.assertEqual(report["status"], "OBSERVED_HEALTHY")
         self.assertEqual(report["terminal"]["kind"], "GAME_TERMINAL")
 
+    def test_cli_imports_under_isolated_mode(self):
+        # PLAYTEST-PORT FIX-5: `python -I` drops the script dir from sys.path; the
+        # runner invokes the verifier that way, and the sibling replay_health import
+        # used to raise ModuleNotFoundError.
+        result = subprocess.run(
+            [sys.executable, "-I", "-B", verifier.__file__, "--help"],
+            capture_output=True, text=True, timeout=60)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertNotIn("ModuleNotFoundError", result.stderr)
+        self.assertIn("usage", result.stdout.lower())
+
     def test_complete_game_without_fixture_cli_is_healthy(self):
         with tempfile.TemporaryDirectory() as directory:
             support = Path(directory)
