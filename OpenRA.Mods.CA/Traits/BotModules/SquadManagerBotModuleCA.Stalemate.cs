@@ -719,6 +719,13 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 			}
 
+			// IMPL02 L1: this manager's reported-dead set is empty after a load or a personality handoff, so deaths the wave already
+			// holds would be re-reported (WindowDeaths++ and a spurious no-progress reset). Derive the set from the wave first.
+			// In a straight-through game the set is already a superset of the wave's dead set, so this adds nothing.
+			if (stalemateReportedDead.Count < wave.DeadCount)
+				foreach (var id in wave.DeadActorIds)
+					stalemateReportedDead.Add(id);
+
 			// Personality handoff: the newly enabled manager takes the wave over (design _03 §1 single owner, two-phase).
 			if (stalemateSquad == null || !Squads.Contains(stalemateSquad))
 			{
@@ -934,6 +941,11 @@ namespace OpenRA.Mods.CA.Traits
 			var index = stalemateSquad == null ? -1 : Squads.IndexOf(stalemateSquad);
 			if (index >= 0)
 				data.Add(new MiniYamlNode("StalemateSquadIndex", FieldSaver.FormatValue(index)));
+
+			// IMPL02 L2: the neutral blocker cache is built once, lazily, at the first route query; persist it so a loaded game
+			// routes over the same cells as a straight-through one (rebuilding from the world would add neutrals that spawned later).
+			if (stalemateNeutralActors != null)
+				data.Add(new MiniYamlNode("StalemateNeutrals", "", StalemateNeutralCacheCA.Save(stalemateNeutralActors)));
 		}
 
 		void StalemateLoad(Dictionary<string, MiniYaml> nodes)
@@ -952,6 +964,12 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				var index = FieldLoader.GetValue<int>("StalemateSquadIndex", indexNode.Value);
 				stalemateSquad = index >= 0 && index < Squads.Count ? Squads[index] : null;
+			}
+
+			if (nodes.TryGetValue("StalemateNeutrals", out var neutralsNode))
+			{
+				stalemateNeutralActors = StalemateNeutralCacheCA.Load(neutralsNode);
+				stalemateNeutralCells = null;
 			}
 		}
 
@@ -1212,9 +1230,12 @@ namespace OpenRA.Mods.CA.Traits
 				Activity = a.CurrentActivity?.GetType().Name ?? "idle", Live = !a.IsDead, InWorld = a.IsInWorld
 			}).ToList();
 			var checksum = roster.Aggregate(17L, (h, u) => unchecked(h * 31 + u.ActorId)).ToString(System.Globalization.CultureInfo.InvariantCulture);
+
+			// IMPL02 L6f: a roster above the chunk cap is truncated, but expected_count keeps the full count so emitted_count < expected_count shows it.
+			var expectedCount = roster.Count;
 			if (roster.Count > BotPassiveDiagnosticWriter.MaximumPositionChunkEntries * BotPassiveDiagnosticWriter.MaximumPositionChunks)
 				roster = roster.Take(BotPassiveDiagnosticWriter.MaximumPositionChunkEntries * BotPassiveDiagnosticWriter.MaximumPositionChunks).ToList();
-			w.TryEnqueueUnitPosition(t, roster, roster.Count, checksum);
+			w.TryEnqueueUnitPosition(t, roster, expectedCount, checksum);
 		}
 
 		void DiagnosticHealth(BotPassiveDiagnosticWriter w, int t)

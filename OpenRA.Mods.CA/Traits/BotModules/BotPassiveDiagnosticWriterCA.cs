@@ -53,6 +53,17 @@ namespace OpenRA.Mods.CA.Traits.BotModules
 		readonly BlockingCollection<QueuedRecord> queue;
 		readonly Thread worker;
 		readonly object admissionLock = new();
+
+		// IMPL02 L6c: the worker's completeness decision and the join-timeout failure are mutually exclusive under this lock.
+		readonly object finalizeLock = new();
+		bool manifestDecided;
+
+		// Test seams (InternalsVisibleTo; all null/default in production). They only let a test stall or fail the worker deterministically.
+		internal static Action<Thread> TestStartWorker;
+		internal Action<long> TestBeforeWrite;
+		internal Action TestBeforeManifest;
+		internal TimeSpan? TestCompleteTimeout;
+
 		long nextSequence;
 		long reservedBytes;
 		int acceptedRecords;
@@ -99,7 +110,23 @@ namespace OpenRA.Mods.CA.Traits.BotModules
 				IsBackground = true,
 				Name = "Bot passive diagnostic writer"
 			};
-			worker.Start();
+
+			// IMPL02 L6e: a worker that cannot start must not leak the open FileStream (the exclusive file would stay locked).
+			try
+			{
+				var start = TestStartWorker;
+				if (start != null)
+					start(worker);
+				else
+					worker.Start();
+			}
+			catch (Exception)
+			{
+				queue.Dispose();
+				output.Dispose();
+				throw;
+			}
+
 			enabled = true;
 		}
 
@@ -110,10 +137,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules
 		public static BotPassiveDiagnosticWriter TryCreate(bool enabled, string freshJsonlPath,
 			string gameUid, string seat, string botType, out BotPassiveDiagnosticWriter writer)
 		{
-			if (string.IsNullOrWhiteSpace(gameUid) || string.IsNullOrWhiteSpace(seat)
-				|| string.IsNullOrWhiteSpace(botType))
-				throw new ArgumentException("Diagnostic identity fields are required.");
-
+			// IMPL02 L6d: diagnostics never throw into game logic, so a blank identity is a failed (disabled, incomplete) writer, not an exception.
 			if (!enabled)
 			{
 				writer = new BotPassiveDiagnosticWriter(gameUid, seat, botType);
@@ -122,6 +146,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules
 
 			try
 			{
+				if (string.IsNullOrWhiteSpace(gameUid) || string.IsNullOrWhiteSpace(seat) || string.IsNullOrWhiteSpace(botType))
+					throw new ArgumentException("Diagnostic identity fields are required.");
+
 				if (string.IsNullOrWhiteSpace(freshJsonlPath))
 					throw new ArgumentException("Enabled telemetry requires a fresh output path.", nameof(freshJsonlPath));
 
@@ -190,13 +217,14 @@ namespace OpenRA.Mods.CA.Traits.BotModules
 		/// <summary>
 		/// Enqueues one position sample, splitting a sorted roster into chunks of at most 256 entries that each
 		/// also fit the 8192-byte record cap (a unit entry is ~100 bytes, so the byte bound binds first).
-		/// More than 16 chunks is a cap hit (overflow).
+		/// More than 16 chunks is a cap hit (overflow). IMPL02 L6f: expectedCount may exceed the roster size when the caller truncated
+		/// the roster to the chunk cap, so emitted_count &lt; expected_count then records the truncation; expectedCount &lt; roster size is invalid.
 		/// </summary>
 		public bool TryEnqueueUnitPosition(int tick, IReadOnlyList<BotPassiveUnitPositionSnapshot> sortedRoster,
 			int expectedCount, string rosterChecksum)
 		{
 			if (sortedRoster == null || tick < 0 || tick > MaximumPositionTick || tick % PositionIntervalTicks != 0
-				|| expectedCount < 0 || expectedCount != sortedRoster.Count || string.IsNullOrWhiteSpace(rosterChecksum)
+				|| expectedCount < sortedRoster.Count || string.IsNullOrWhiteSpace(rosterChecksum)
 				|| sortedRoster.Count > MaximumPositionChunkEntries * MaximumPositionChunks)
 				return Reject();
 
@@ -492,7 +520,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules
 
 		/// <summary>
 		/// Closes admission, waits (bounded) for the writer to drain and write the manifest with tick = finalTick.
-		/// When this returns the file is final, unless the wait timed out (then the stream is marked failed).
+		/// When this returns the file is final, unless the wait timed out: then the stream is marked failed, except when the worker had
+		/// already committed its completeness decision (IMPL02 L6c), in which case memory and file both follow that decision once it finishes.
 		/// </summary>
 		public void Complete(int finalTick)
 		{
@@ -514,8 +543,14 @@ namespace OpenRA.Mods.CA.Traits.BotModules
 
 			try
 			{
-				if (!worker.Join(CompleteTimeout))
-					MarkFailed();
+				if (!worker.Join(TestCompleteTimeout ?? CompleteTimeout))
+				{
+					lock (finalizeLock)
+					{
+						if (!manifestDecided)
+							MarkFailed();
+					}
+				}
 			}
 			catch (ThreadStateException)
 			{
@@ -618,6 +653,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules
 				using var hash = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
 				foreach (var item in queue.GetConsumingEnumerable())
 				{
+					TestBeforeWrite?.Invoke(item.Sequence);
 					var line = new byte[item.Bytes.Length + 1];
 					Buffer.BlockCopy(item.Bytes, 0, line, 0, item.Bytes.Length);
 					line[^1] = (byte)'\n';
@@ -630,10 +666,22 @@ namespace OpenRA.Mods.CA.Traits.BotModules
 				output.Flush(true);
 				Volatile.Write(ref dataSha256, Convert.ToHexString(hash.GetHashAndReset()).ToLowerInvariant());
 
-				// One completeness decision, used both for the manifest and the in-memory flag.
-				var isComplete = Volatile.Read(ref failed) == 0 && Volatile.Read(ref missingCount) == 0
-					&& Volatile.Read(ref overflowCount) == 0;
-				var manifest = SerializeManifest(Volatile.Read(ref finalTick), isComplete);
+				// One completeness decision, used both for the manifest and the in-memory flag. IMPL02 L6c: the counters are read once, so the
+				// manifest's complete flag always agrees with its own overflow_count and missing_count, and the decision is committed under
+				// finalizeLock so a join timeout cannot mark the stream failed after a complete=true decision was taken.
+				bool isComplete;
+				int overflowSnapshot;
+				int missingSnapshot;
+				lock (finalizeLock)
+				{
+					overflowSnapshot = Volatile.Read(ref overflowCount);
+					missingSnapshot = Volatile.Read(ref missingCount);
+					isComplete = Volatile.Read(ref failed) == 0 && missingSnapshot == 0 && overflowSnapshot == 0;
+					manifestDecided = true;
+				}
+
+				TestBeforeManifest?.Invoke();
+				var manifest = SerializeManifest(Volatile.Read(ref finalTick), isComplete, overflowSnapshot, missingSnapshot);
 				if (manifest.Length + 1 <= MaximumRecordBytes
 					&& Interlocked.Read(ref dataBytes) + manifest.Length + 1 <= MaximumDataBytes + ManifestReserveBytes)
 				{
@@ -663,7 +711,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules
 			}
 		}
 
-		byte[] SerializeManifest(int tick, bool isComplete)
+		byte[] SerializeManifest(int tick, bool isComplete, int overflows, int missing)
 		{
 			using var stream = new MemoryStream();
 			using (var json = new Utf8JsonWriter(stream))
@@ -674,8 +722,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules
 				json.WriteNumber("data_records", Volatile.Read(ref writtenRecords));
 				json.WriteNumber("data_bytes", Interlocked.Read(ref dataBytes));
 				json.WriteString("data_sha256", Volatile.Read(ref dataSha256));
-				json.WriteNumber("overflow_count", Volatile.Read(ref overflowCount));
-				json.WriteNumber("missing_count", Volatile.Read(ref missingCount));
+				json.WriteNumber("overflow_count", overflows);
+				json.WriteNumber("missing_count", missing);
 				json.WriteNumber("last_sequence", last);
 				json.WriteEndObject();
 			}
@@ -697,6 +745,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules
 			MarkMissing();
 		}
 
+		// overflow_count and missing_count partition the lost records by cause: a cap hit (record size, record count, data bytes, queue,
+		// chunk count) is an overflow and a rejected or failed enqueue is missing. A manifest with complete=false therefore always has
+		// overflow_count + missing_count > 0 (IMPL02 L6a: documented, not merged, so existing readers keep their semantics).
 		void MarkOverflow()
 		{
 			Interlocked.Increment(ref overflowCount);

@@ -68,6 +68,15 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		public IReadOnlyList<StalemateWaveMemberCA> Members => roster;
 
+		/// <summary>Number of confirmed-dead members (IMPL02 L1).</summary>
+		public int DeadCount => dead.Count;
+
+		/// <summary>
+		/// Actor ids of the confirmed-dead members in ascending id order (IMPL02 L1): lets a manager whose own reported-dead set is
+		/// empty (after a load or a personality handoff) derive it from the wave instead of re-reporting the same deaths.
+		/// </summary>
+		public IEnumerable<uint> DeadActorIds => roster.Where(m => dead.Contains((m.ActorId, m.Generation))).Select(m => m.ActorId);
+
 		public StalemateBreakerWaveCA(int commitTick, IEnumerable<StalemateWaveMemberCA> initialMembers,
 			StalemateBreakerPolicyCA.TimingCA timing, int n0, long v0, int routeEstL, uint leaderId)
 		{
@@ -125,9 +134,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		/// <summary>
 		/// Compatibility overload for the earlier draft signature (StalemateSeatOwnerTest): the policy's minimum
 		/// timing (E 0, rally 750, no-progress 1500, absolute 3000), N0/V0 = the committed roster, L = 0, and the
-		/// lowest-ActorId member as leader.
+		/// lowest-ActorId member as leader. Internal (IMPL02 L3): only the test assembly calls it (InternalsVisibleTo).
 		/// </summary>
-		public StalemateBreakerWaveCA(int commitTick, IEnumerable<StalemateWaveMemberCA> initialMembers)
+		internal StalemateBreakerWaveCA(int commitTick, IEnumerable<StalemateWaveMemberCA> initialMembers)
 			: this(commitTick, initialMembers?.ToArray(),
 				new StalemateBreakerPolicyCA.TimingCA(0, StalemateBreakerPolicyCA.RallyTicks,
 					StalemateBreakerPolicyCA.NoMovementTicks, StalemateBreakerPolicyCA.WaveTicks), true) { }
