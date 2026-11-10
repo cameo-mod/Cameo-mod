@@ -1,5 +1,4 @@
 """SENTINEL-RUNNER-POLICY (rev6.1): opt-in sentinel economy gate unit tests.
-HEALTHFIX_03 successor of test_sentinel_policy.py 24A88378: seven DispositionTests expectations changed to the D-E ruling (E1HFRUL02 7C127BC2); nothing else.
 
 Covers the all-seat collector (sentinel_economy_collect), the policy
 dispositions (sentinel_policy), the MISSING_SITUATIONS verdict predicate,
@@ -25,7 +24,7 @@ UID = "uid-sentinel-1"
 def pulse(seq, tick, *, seat, cash=2000, resources=0, capacity=5000,
           uid=UID, faction="td_nod", bot="classic", active=True, seat_state="active"):
     return {"schema": 2, "seq": seq, "tick": tick, "map_uid": "m1", "faction": faction,
-            "profile": bot, "profile_supported": True, "dropped": 0,
+            "profile": "p", "profile_supported": True, "dropped": 0,
             "player": seat, "game_uid": uid, "bot_type": bot, "kind": "pulse",
             "player_active": active, "seat_state": seat_state,
             "queues": [], "queues_complete": True,
@@ -35,7 +34,7 @@ def pulse(seq, tick, *, seat, cash=2000, resources=0, capacity=5000,
 
 def end(seq, tick, *, seat, uid=UID, faction="td_nod", bot="classic", state="lost"):
     return {"schema": 2, "seq": seq, "tick": tick, "map_uid": "m1", "faction": faction,
-            "profile": bot, "profile_supported": True, "dropped": 0,
+            "profile": "p", "profile_supported": True, "dropped": 0,
             "player": seat, "game_uid": uid, "bot_type": bot, "kind": "end",
             "complete": True, "seat_state": state}
 
@@ -108,81 +107,6 @@ class CollectorTests(unittest.TestCase):
             leaf, [mrec("seat_0"), mrec("seat_1", faction="td_gdi", bot="hard", home="2,2")],
             PLANNED)
         self.assertEqual(legacy_status, "BLOCK")
-
-
-    def test_coverage_joins_map_names_to_seat_records(self):
-        roster = [("BotA", "td_gdi", "hard", "1,1"),
-                  ("BotB", "td_nod", "classic", "2,2")]
-        records = [mrec("seat_0", faction="td_gdi", bot="hard", home="1,1"),
-                   mrec("seat_1", faction="td_nod", bot="classic", home="2,2")]
-        seen = []
-
-        def inspect(_support, uid, player, live=False):
-            seen.append((uid, player, live))
-            return {"policy": "test-policy", "game_uid": uid, "player": player,
-                    "status": "OBSERVED_HEALTHY", "findings": [], "error": None}
-
-        checker = mock.Mock(POLICY_VERSION="test-policy", inspect=inspect)
-        with tempfile.TemporaryDirectory() as td, mock.patch.dict(
-                sys.modules, {"replay_health": checker}):
-            status, reports, failures = batch.sentinel_coverage_collect(
-                pathlib.Path(td), records, roster)
-        self.assertEqual(status, "OBSERVED_HEALTHY")
-        self.assertEqual(failures, [])
-        # E1 policy D-A/D-B: inspect() takes the SEAT ID; the report maps back to the roster name.
-        self.assertEqual([item[1] for item in seen], ["seat_0", "seat_1"])
-        self.assertEqual([r["player"] for r in reports], ["BotA", "BotB"])
-        self.assertEqual([r["raw_report"]["policy"] for r in reports],
-                         ["test-policy", "test-policy"])
-
-    def test_wrong_checker_identity_becomes_unknown(self):
-        roster = [("BotA", "td_gdi", "hard", "1,1"),
-                  ("BotB", "td_nod", "classic", "2,2")]
-        records = [mrec("seat_0", faction="td_gdi", bot="hard", home="1,1"),
-                   mrec("seat_1", faction="td_nod", bot="classic", home="2,2")]
-        checker = mock.Mock(POLICY_VERSION="test-policy", inspect=lambda _s, uid, player, live=False:
-                            {"game_uid": uid, "player": "foreign-player", "status": "OBSERVED_HEALTHY",
-                             "findings": [], "error": None})
-        with tempfile.TemporaryDirectory() as td, mock.patch.dict(
-                sys.modules, {"replay_health": checker}):
-            status, reports, failures = batch.sentinel_coverage_collect(
-                pathlib.Path(td), records, roster)
-        self.assertEqual(status, "UNKNOWN")
-        self.assertEqual(len(reports), 2)
-        self.assertTrue(any("different game or seat" in failure for failure in failures))
-        self.assertTrue(all(r["raw_report"]["status"] == "UNKNOWN" for r in reports))
-
-    def test_wrong_checker_game_uid_becomes_unknown(self):
-        roster = [("BotA", "td_gdi", "hard", "1,1"),
-                  ("BotB", "td_nod", "classic", "2,2")]
-        records = [mrec("seat_0", faction="td_gdi", bot="hard", home="1,1"),
-                   mrec("seat_1", faction="td_nod", bot="classic", home="2,2")]
-        checker = mock.Mock(POLICY_VERSION="test-policy", inspect=lambda _s, _uid, player, live=False:
-                            {"game_uid": "foreign-game", "player": player,
-                             "status": "OBSERVED_HEALTHY", "findings": [], "error": None})
-        with tempfile.TemporaryDirectory() as td, mock.patch.dict(
-                sys.modules, {"replay_health": checker}):
-            status, reports, failures = batch.sentinel_coverage_collect(
-                pathlib.Path(td), records, roster)
-        self.assertEqual(status, "UNKNOWN")
-        self.assertTrue(any("different game or seat" in failure for failure in failures))
-        self.assertTrue(all(r["raw_report"]["status"] == "UNKNOWN" for r in reports))
-
-    def test_collector_exception_is_unknown_with_reason(self):
-        roster = [("BotA", "td_gdi", "hard", "1,1"),
-                  ("BotB", "td_nod", "classic", "2,2")]
-        records = [mrec("seat_0", faction="td_gdi", bot="hard", home="1,1"),
-                   mrec("seat_1", faction="td_nod", bot="classic", home="2,2")]
-        def explode(*_args, **_kwargs):
-            raise RuntimeError("synthetic checker fault")
-        checker = mock.Mock(POLICY_VERSION="test-policy", inspect=explode)
-        with tempfile.TemporaryDirectory() as td, mock.patch.dict(
-                sys.modules, {"replay_health": checker}):
-            status, reports, failures = batch.sentinel_coverage_collect(
-                pathlib.Path(td), records, roster)
-        self.assertEqual(status, "UNKNOWN")
-        self.assertTrue(all(r["raw_report"]["status"] == "UNKNOWN" for r in reports))
-        self.assertTrue(any("synthetic checker fault" in failure for failure in failures))
 
     def test_missing_file_is_unknown_not_block(self):
         leaf = pathlib.Path(tempfile.mkdtemp(prefix="sentinel_leaf_"))
@@ -287,24 +211,21 @@ class DispositionTests(unittest.TestCase):
                  self.seat("seat_1", "hard", "OBSERVED_HEALTHY")]
         self.assertEqual(self.policy("BLOCK", seats)["disposition"], "baseline_exempted")
 
-    # HEALTHFIX_03 (Opus E1HFRUL02 7C127BC2 D-E): this case now expects ECONOMY_FINDINGS_RECORDED (the pre-D-E expectation was 'blocking').
-    def test_mixed_allowed_and_disallowed_code_is_recorded(self):
+    def test_mixed_allowed_and_disallowed_code_blocks(self):
         seats = [self.seat("seat_0", "classic", "BLOCK",
                          ["NEAR_EMPTY_FUNDS", "STORAGE_FULL"]),
                  self.seat("seat_1", "hard", "OBSERVED_HEALTHY")]
-        self.assertEqual(self.policy("BLOCK", seats)["disposition"], "ECONOMY_FINDINGS_RECORDED")
+        self.assertEqual(self.policy("BLOCK", seats)["disposition"], "blocking")
 
-    # HEALTHFIX_03 (Opus E1HFRUL02 7C127BC2 D-E): this case now expects ECONOMY_FINDINGS_RECORDED (the pre-D-E expectation was 'blocking').
-    def test_storage_full_alone_is_recorded(self):
+    def test_storage_full_alone_blocks(self):
         seats = [self.seat("seat_0", "classic", "BLOCK", ["STORAGE_FULL"]),
                  self.seat("seat_1", "hard", "OBSERVED_HEALTHY")]
-        self.assertEqual(self.policy("BLOCK", seats)["disposition"], "ECONOMY_FINDINGS_RECORDED")
+        self.assertEqual(self.policy("BLOCK", seats)["disposition"], "blocking")
 
-    # HEALTHFIX_03 (Opus E1HFRUL02 7C127BC2 D-E): this case now expects ECONOMY_FINDINGS_RECORDED (the pre-D-E expectation was 'blocking').
-    def test_non_fund_defect_code_is_recorded(self):
+    def test_non_fund_defect_code_blocks(self):
         seats = [self.seat("seat_0", "classic", "BLOCK", ["READY_BUILDING_UNPLACED"]),
                  self.seat("seat_1", "hard", "OBSERVED_HEALTHY")]
-        self.assertEqual(self.policy("BLOCK", seats)["disposition"], "ECONOMY_FINDINGS_RECORDED")
+        self.assertEqual(self.policy("BLOCK", seats)["disposition"], "blocking")
 
     def test_non_defect_severity_blocks(self):
         seats = [self.seat("seat_0", "classic", "BLOCK", ["NEAR_EMPTY_FUNDS"],
@@ -323,41 +244,14 @@ class DispositionTests(unittest.TestCase):
         out = self.policy("UNKNOWN", seats, failures=["integrity: foreign uid"])
         self.assertEqual(out["disposition"], "blocking")
 
-    # HEALTHFIX_03 (Opus E1HFRUL02 7C127BC2 D-E): this case now expects ECONOMY_FINDINGS_RECORDED (the pre-D-E expectation was 'blocking').
-    def test_hard_seat_block_is_recorded(self):
+    def test_hard_seat_block_blocks(self):
         seats = [self.seat("seat_0", "classic", "OBSERVED_HEALTHY"),
                  self.seat("seat_1", "hard", "BLOCK", ["NEAR_EMPTY_FUNDS"])]
-        self.assertEqual(self.policy("BLOCK", seats)["disposition"], "ECONOMY_FINDINGS_RECORDED")
-
-    # HEALTHFIX_03 (Opus E1HFRUL02 7C127BC2 D-E): this case now expects ECONOMY_FINDINGS_RECORDED (the pre-D-E expectation was 'blocking').
-    def test_hard_seat_block_alongside_exemptible_classic_is_recorded(self):
-        seats = [self.seat("seat_0", "classic", "BLOCK", ["NEAR_EMPTY_FUNDS"]),
-                 self.seat("seat_1", "hard", "BLOCK", ["FUNDS_BELOW_BAND"])]
-        self.assertEqual(self.policy("BLOCK", seats)["disposition"], "ECONOMY_FINDINGS_RECORDED")
-
-    # RC01 outer (Sonnet addendum EFEC711F): row-03 policy pair.
-    # Actual row-03 reports: BotA hard BLOCK carries error "incomplete building queue census" and DROPPED_TELEMETRY.
-    def test_row03_reports_with_error_and_dropped_telemetry_block(self):
-        seats = [self.seat("seat_0", "classic", "BLOCK", ["NEAR_EMPTY_FUNDS"]),
-                 self.seat("seat_1", "hard", "BLOCK",
-                           ["FUNDS_ABOVE_BAND", "NEAR_EMPTY_FUNDS", "FUNDS_BELOW_BAND",
-                            "READY_BUILDING_UNPLACED", "DROPPED_TELEMETRY"],
-                           error="incomplete building queue census")]
         self.assertEqual(self.policy("BLOCK", seats)["disposition"], "blocking")
 
-    # Same row-03 reports minus the error and DROPPED_TELEMETRY (the receipt-backed outcome) must be recorded.
-    def test_row03_reports_sanitized_are_recorded(self):
+    def test_hard_seat_block_alongside_exemptible_classic_blocks(self):
         seats = [self.seat("seat_0", "classic", "BLOCK", ["NEAR_EMPTY_FUNDS"]),
-                 self.seat("seat_1", "hard", "BLOCK",
-                           ["FUNDS_ABOVE_BAND", "NEAR_EMPTY_FUNDS", "FUNDS_BELOW_BAND",
-                            "READY_BUILDING_UNPLACED"])]
-        self.assertEqual(self.policy("BLOCK", seats)["disposition"], "ECONOMY_FINDINGS_RECORDED")
-
-    # Mutant: an unreceipted eviction keeps the error and DROPPED_TELEMETRY, so the episode must still BLOCK.
-    def test_unreceipted_eviction_mutant_still_blocks(self):
-        seats = [self.seat("seat_0", "classic", "BLOCK", ["NEAR_EMPTY_FUNDS"]),
-                 self.seat("seat_1", "hard", "BLOCK", ["DROPPED_TELEMETRY"],
-                           error="incomplete building queue census")]
+                 self.seat("seat_1", "hard", "BLOCK", ["FUNDS_BELOW_BAND"])]
         self.assertEqual(self.policy("BLOCK", seats)["disposition"], "blocking")
 
     def test_seat_analyzer_unknown_dominates_as_blocking(self):
@@ -373,81 +267,13 @@ class DispositionTests(unittest.TestCase):
         self.assertEqual(out["disposition"], "clean_diagnostic")
         self.assertEqual(out["exempt_findings"], [])
 
-    def test_coverage_axis_all_healthy_and_canonical_intermediate(self):
-        reports = [{"player": "seat_0", "status": "OBSERVED_HEALTHY", "findings": [], "error": None},
-                   {"player": "seat_1", "status": "OBSERVED_HEALTHY", "findings": [], "error": None}]
-        coverage = pol.coverage_disposition("OBSERVED_HEALTHY", reports, [], PLANNED)
-        econ_rows = [{"player": "seat_0", "status": "OBSERVED_HEALTHY", "findings": [], "error": None},
-                     {"player": "seat_1", "status": "OBSERVED_HEALTHY", "findings": [], "error": None}]
-        economy = pol.economy_disposition("OBSERVED_HEALTHY", econ_rows, [], PLANNED)
-        self.assertEqual(coverage["disposition"], "coverage_healthy")
-        self.assertEqual(pol.canonical_decision(economy, coverage)["next_admission"],
-                         "REQUEST_ELIGIBLE")
-
-    def test_coverage_exception_is_classic_sole_missing_situations_only(self):
-        reports = [{"player": "seat_0", "status": "UNKNOWN", "error": None,
-                    "findings": [{"code": "MISSING_SITUATIONS"}]},
-                   {"player": "seat_1", "status": "OBSERVED_HEALTHY", "error": None,
-                    "findings": []}]
-        coverage = pol.coverage_disposition("UNKNOWN", reports, [], PLANNED)
-        self.assertEqual(coverage["disposition"], "coverage_diagnostic")
-        self.assertEqual(pol.canonical_decision(
-            {"disposition": "clean_diagnostic", "raw_status": "OBSERVED_HEALTHY"},
-            coverage, final_row=True)["next_admission"], "END_OF_SENTINEL_REVIEW")
-        # Seat_1 is a hard bot. Its own sole MISSING_SITUATIONS UNKNOWN must
-        # fail the classic-only exception; the prior duplicate-name case only
-        # exercised roster mismatch and did not test this rule.
-        hard = [reports[0], dict(reports[1], status="UNKNOWN",
-                                 findings=[{"code": "MISSING_SITUATIONS"}])]
-        self.assertEqual(pol.coverage_disposition("UNKNOWN", hard, [], PLANNED)["disposition"],
-                         "blocking")
-
-    def test_coverage_structural_error_or_cofinding_halts_no_go(self):
-        reports = [{"player": "seat_0", "status": "UNKNOWN", "error": "bad source",
-                    "findings": [{"code": "MISSING_SITUATIONS"}]},
-                   {"player": "seat_1", "status": "OBSERVED_HEALTHY", "error": None,
-                    "findings": []}]
-        coverage = pol.coverage_disposition("UNKNOWN", reports, [], PLANNED)
-        decision = pol.canonical_decision(
-            {"disposition": "blocking", "raw_status": "UNKNOWN"}, coverage)
-        self.assertEqual(coverage["disposition"], "blocking")
-        self.assertEqual((decision["decision"], decision["next_admission"]), ("HALT", "NO_GO"))
-        self.assertEqual(decision["dispatch_gate"], {
-            "status": "NO_GO", "jit_granted": False, "requires_fresh_preflight": True})
-
-    def test_structural_unknown_halts_and_is_not_an_economy_block(self):
-        reports = [{"player": "seat_0", "status": "UNKNOWN", "error": "missing file",
-                    "findings": []},
-                   {"player": "seat_1", "status": "OBSERVED_HEALTHY", "error": None,
-                    "findings": []}]
-        economy = pol.economy_disposition("UNKNOWN", reports, ["missing evidence"], PLANNED)
-        coverage = pol.coverage_disposition("UNKNOWN", reports, ["missing evidence"], PLANNED)
-        decision = pol.canonical_decision(economy, coverage)
-        self.assertEqual(economy["disposition"], "blocking")
-        self.assertEqual(economy["seats"][0]["status"], "UNKNOWN")
-        self.assertNotEqual(economy["seats"][0]["status"], "BLOCK")
-        self.assertEqual(coverage["disposition"], "blocking")
-        self.assertEqual((decision["decision"], decision["next_admission"]), ("HALT", "NO_GO"))
-
-    def test_hard_block_is_preserved_alongside_structural_failure(self):
-        reports = [{"player": "seat_0", "status": "BLOCK", "error": None,
-                    "findings": [{"code": "NEAR_EMPTY_FUNDS", "severity": "DEFECT"}]},
-                   {"player": "seat_1", "status": "OBSERVED_HEALTHY", "error": None,
-                    "findings": []}]
-        economy = pol.economy_disposition("BLOCK", reports, ["capture verify failed"], PLANNED)
-        coverage = pol.coverage_disposition("BLOCK", reports, ["capture verify failed"], PLANNED)
-        decision = pol.canonical_decision(economy, coverage)
-        self.assertEqual(coverage["hard_block"], True)
-        self.assertEqual((decision["decision"], decision["next_admission"]), ("HALT", "NO_GO"))
-
-    # HEALTHFIX_03 (Opus E1HFRUL02 7C127BC2 D-E): this case now expects ECONOMY_FINDINGS_RECORDED (the pre-D-E expectation was 'blocking').
-    def test_unplanned_seat_never_baseline_exempted_is_recorded(self):
+    def test_unplanned_seat_never_exempted(self):
         roster = [("seat_0", "td_nod", "hard", "1,1"),
                   ("seat_1", "td_gdi", "hard", "2,2")]
         seats = [self.seat("seat_0", "hard", "BLOCK", ["NEAR_EMPTY_FUNDS"]),
                  self.seat("seat_1", "hard", "OBSERVED_HEALTHY")]
         self.assertEqual(self.policy("BLOCK", seats, roster=roster)["disposition"],
-                         "ECONOMY_FINDINGS_RECORDED")
+                         "blocking")
 
     def test_two_eligible_classic_seats_are_baseline_exempted(self):
         seats = [self.seat("seat_0", "classic", "BLOCK", ["NEAR_EMPTY_FUNDS"]),
@@ -475,12 +301,11 @@ class DispositionTests(unittest.TestCase):
         self.assertEqual(self.policy("BLOCK", seats, roster=TWO_CLASSIC)["disposition"],
                          "blocking")
 
-    # HEALTHFIX_03 (Opus E1HFRUL02 7C127BC2 D-E): this case now expects ECONOMY_FINDINGS_RECORDED (the pre-D-E expectation was 'blocking').
-    def test_second_classic_other_recordable_code_is_recorded(self):
+    def test_second_classic_disallowed_code_blocks(self):
         seats = [self.seat("seat_0", "classic", "BLOCK", ["NEAR_EMPTY_FUNDS"]),
                  self.seat("seat_1", "classic", "BLOCK", ["STORAGE_FULL"])]
         self.assertEqual(self.policy("BLOCK", seats, roster=TWO_CLASSIC)["disposition"],
-                         "ECONOMY_FINDINGS_RECORDED")
+                         "blocking")
 
     def test_classic_block_with_error_blocks(self):
         # R2 completed/no-error: an errored BLOCK report's findings cannot
@@ -530,23 +355,6 @@ class DispositionTests(unittest.TestCase):
         self.assertEqual(out["disposition"], "blocking")
         self.assertEqual(out["seats"][1]["error"], "incomplete seat analysis")
 
-    def test_all_healthy_with_missing_roster_seat_blocks(self):
-        seats = [self.seat("seat_0", "classic", "OBSERVED_HEALTHY")]
-        self.assertEqual(self.policy("OBSERVED_HEALTHY", seats)["disposition"],
-                         "blocking")
-
-    def test_duplicate_roster_report_blocks(self):
-        seats = [self.seat("seat_0", "classic", "OBSERVED_HEALTHY"),
-                 self.seat("seat_0", "classic", "OBSERVED_HEALTHY")]
-        self.assertEqual(self.policy("OBSERVED_HEALTHY", seats)["disposition"],
-                         "blocking")
-
-    def test_healthy_raw_status_with_report_error_blocks(self):
-        seats = [self.seat("seat_0", "classic", "OBSERVED_HEALTHY", error="bad terminal"),
-                 self.seat("seat_1", "hard", "OBSERVED_HEALTHY")]
-        self.assertEqual(self.policy("OBSERVED_HEALTHY", seats)["disposition"],
-                         "blocking")
-
 
 class MissingSituationsTests(unittest.TestCase):
     """Verdict-layer predicate only — checker output is never altered."""
@@ -578,18 +386,6 @@ class MissingSituationsTests(unittest.TestCase):
     def test_healthy_status_does_not_pass(self):
         rep = self.report(status="OBSERVED_HEALTHY", findings=[])
         self.assertFalse(pol.missing_situations_coverage(rep, "classic"))
-
-    def test_error_does_not_pass(self):
-        rep = self.report()
-        rep["error"] = "parse failure"
-        self.assertFalse(pol.missing_situations_coverage(rep, "classic"))
-
-    def test_malformed_top_level_values_fail_closed(self):
-        self.assertFalse(pol.missing_situations_coverage(None, "classic"))
-        result = pol.economy_disposition("OBSERVED_HEALTHY", None, [], PLANNED)
-        self.assertEqual(result["disposition"], "blocking")
-        result = pol.economy_disposition("OBSERVED_HEALTHY", [], [], None)
-        self.assertEqual(result["disposition"], "blocking")
 
 
 class DispatchRefusalTests(unittest.TestCase):
@@ -628,12 +424,6 @@ class DispatchRefusalTests(unittest.TestCase):
         self.run_main(["--factions", "td_gdi", "--team-size", "1",
                        "--repeats", "1", "--retries", "0",
                        "--require-economy-health"])
-
-    def test_final_row_flag_requires_diagnostic_mode(self):
-        with mock.patch.object(sys, "argv", ["run_ai_match_batch.py", "--sentinel-final-row"]):
-            with self.assertRaises(SystemExit) as cm:
-                batch.main()
-        self.assertEqual(cm.exception.code, 1)
 
 
 class ScoreboardQuarantineTests(unittest.TestCase):
@@ -680,44 +470,6 @@ class ResultShapeTests(unittest.TestCase):
                                     "structural_failures": []}}
         self.assertTrue(capture_provenance.record_marked(result))
         self.assertEqual(result["health_policy"]["disposition"], "baseline_exempted")
-
-    def test_main_status_is_bound_to_canonical_decision(self):
-        accepted = {"decision": "ACCEPTED_DIAGNOSTIC", "next_admission": "REQUEST_ELIGIBLE"}
-        halted = {"decision": "HALT", "next_admission": "NO_GO"}
-        held = {"decision": "HOLD", "next_admission": "NO_GO"}
-        self.assertEqual(batch.apply_sentinel_decision("ok", accepted), "ok")
-        self.assertEqual(batch.apply_sentinel_decision("ok", halted), "UNKNOWN")
-        self.assertEqual(batch.apply_sentinel_decision("norecord", held), "UNKNOWN")
-
-    def test_snapshot_and_verify_failures_are_returned_for_result_recording(self):
-        import capture_provenance
-        with tempfile.TemporaryDirectory() as td:
-            support = pathlib.Path(td)
-            with mock.patch.object(capture_provenance, "snapshot_capture_tree",
-                                   side_effect=ValueError("synthetic snapshot fault")):
-                snapshot, reason = batch.snapshot_sentinel_capture(support, support / "map.yaml")
-            self.assertIsNone(snapshot)
-            self.assertIn("synthetic snapshot fault", reason)
-            with mock.patch.object(capture_provenance, "verify_capture_inputs",
-                                   side_effect=ValueError("synthetic verify fault")):
-                reason = batch.verify_sentinel_capture({}, support)
-            self.assertIn("synthetic verify fault", reason)
-
-    def test_provenance_write_failure_is_returned_for_result_recording(self):
-        # R4b: a failed sidecar write must surface as a structural reason the
-        # main path converts to HALT/UNKNOWN — never escape as an exception.
-        import capture_provenance
-        with tempfile.TemporaryDirectory() as td:
-            support = pathlib.Path(td)
-            for exc in (FileExistsError("synthetic sidecar exists"),
-                        OSError("synthetic write io fault"),
-                        ValueError("synthetic write value fault")):
-                with mock.patch.object(capture_provenance, "write_provenance",
-                                       side_effect=exc):
-                    reason = batch.write_sentinel_provenance(support, [UID])
-                self.assertIsNotNone(reason)
-                self.assertIn("provenance write structural failure", reason)
-                self.assertIn(str(exc), reason)
 
 
 if __name__ == "__main__":

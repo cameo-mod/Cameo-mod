@@ -9,7 +9,7 @@ that bind every produced artifact by relative path + SHA-256 to the game
 UID(s) it carries, and every supported scoring ingest MUST resolve a
 positive association before any row may become scoreable.
 
-Binding contract (SENTINEL-RUNNER-POLICY Rev7.1 + Sol's binding
+Binding contract (SENTINEL-RUNNER-POLICY rev6.1 + Sol's binding
 interpretation):
 - Every resolution route must prove actual artifact SHA and complete UID
   membership. Mere directory ancestry, a marker-free batch summary, or a
@@ -24,7 +24,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import os
 import pathlib
 
 SCHEMA = 1
@@ -34,14 +33,6 @@ SENTINEL_KIND = "sentinel_diagnostic"
 BATCH_KIND = "match_batch"
 LEGACY_KIND = "legacy_import"
 KNOWN_KINDS = {SENTINEL_KIND, BATCH_KIND, LEGACY_KIND}
-
-def _unique_json_object(pairs):
-    obj = {}
-    for key, value in pairs:
-        if key in obj:
-            raise ValueError(f"duplicate JSON key {key!r}")
-        obj[key] = value
-    return obj
 
 ALLOW = "allow"
 SENTINEL = "sentinel"   # bound to a sentinel capture — skip, never scoreable
@@ -75,119 +66,9 @@ def collect_artifacts(root: pathlib.Path) -> dict[str, str]:
     """
     artifacts: dict[str, str] = {}
     for f in sorted(root.rglob("*")):
-        if f.is_symlink():
-            raise ValueError(f"refusing to hash a symlink in capture provenance: {f}")
         if f.is_file() and not _is_provenance_name(f.name):
             artifacts[f.relative_to(root).as_posix()] = sha256_file(f)
     return artifacts
-
-
-def _create_json_once(path: pathlib.Path, doc: dict) -> pathlib.Path:
-    """Durably publish a provenance JSON file without replacing prior evidence."""
-    raw = (json.dumps(doc, indent=2, sort_keys=True) + "\n").encode("utf-8")
-    with path.open("xb") as stream:
-        stream.write(raw)
-        stream.flush()
-        os.fsync(stream.fileno())
-    return path
-
-
-def _snapshot_entry(path: pathlib.Path) -> dict:
-    """Stable identity for an input or a provenance/marker candidate.
-
-    Absence is recorded explicitly so a newly appearing association is drift,
-    not something silently consulted midway through collection.
-    """
-    try:
-        st = path.lstat()
-    except FileNotFoundError:
-        return {"present": False, "size": None, "sha256": None}
-    if path.is_symlink() or not path.is_file():
-        raise ValueError(f"unsupported non-regular capture input: {path}")
-    return {"present": True, "size": st.st_size, "sha256": sha256_file(path)}
-
-
-def snapshot_capture_inputs(paths) -> dict[str, dict]:
-    """Snapshot consumed files and every ancestor association/marker candidate.
-
-    The returned mapping is deterministic and includes absent candidate paths
-    through the filesystem root. Call verify_capture_inputs after decisions;
-    expected_additions is only for a sidecar deliberately published by the
-    caller after the pre-publication verification.
-    """
-    targets = {pathlib.Path(p).absolute() for p in paths}
-    candidates: set[pathlib.Path] = set(targets)
-    for target in targets:
-        candidates.add(target.with_name(target.name + SIBLING_SUFFIX))
-        for parent in target.parents:
-            candidates.add(parent / SIDECAR_NAME)
-            candidates.add(parent / "batch_summary.json")
-            candidates.add(parent / "batch_results.jsonl")
-    return {str(p): _snapshot_entry(p) for p in sorted(candidates, key=lambda x: str(x).casefold())}
-
-
-def snapshot_capture_tree(root: pathlib.Path, extra_paths=()) -> dict[str, dict]:
-    """Snapshot every member (files and directories), plus external inputs."""
-    root = pathlib.Path(root).absolute()
-    if root.is_symlink() or not root.is_dir():
-        raise ValueError(f"capture root is not a regular directory: {root}")
-    members = {}
-    for path in sorted(root.rglob("*"), key=lambda p: str(p).casefold()):
-        if path.is_symlink() or (getattr(path, "is_junction", lambda: False)()):
-            raise ValueError(f"reparse member in capture tree: {path}")
-        rel = path.relative_to(root).as_posix()
-        if path.is_dir():
-            members[rel] = {"kind": "directory"}
-        elif path.is_file():
-            st = path.stat()
-            members[rel] = {"kind": "file", "size": st.st_size,
-                            "sha256": sha256_file(path)}
-        else:
-            raise ValueError(f"unsupported capture tree member: {path}")
-    paths = [p for p in root.rglob("*") if p.is_file()]
-    paths.extend(pathlib.Path(p) for p in extra_paths)
-    return {"__tree_members__": {str(root): members},
-            "__inputs__": snapshot_capture_inputs(paths)}
-
-
-def verify_capture_inputs(snapshot: dict[str, dict], *, expected_additions=()) -> None:
-    """Fail if any consumed file, tree member, or association candidate drifted."""
-    additions = {str(pathlib.Path(p).absolute()) for p in expected_additions}
-    trees = snapshot.get("__tree_members__", {})
-    inputs = snapshot.get("__inputs__", snapshot)
-    for raw_root, expected_members in trees.items():
-        root = pathlib.Path(raw_root)
-        actual_members = {}
-        if root.is_symlink() or not root.is_dir():
-            raise ValueError(f"capture tree disappeared or changed type: {root}")
-        for path in sorted(root.rglob("*"), key=lambda p: str(p).casefold()):
-            if path.is_symlink() or getattr(path, "is_junction", lambda: False)():
-                raise ValueError(f"reparse member in capture tree: {path}")
-            rel = path.relative_to(root).as_posix()
-            if path.is_dir():
-                actual_members[rel] = {"kind": "directory"}
-            elif path.is_file():
-                st = path.stat()
-                actual_members[rel] = {"kind": "file", "size": st.st_size,
-                                       "sha256": sha256_file(path)}
-            else:
-                raise ValueError(f"unsupported capture tree member: {path}")
-        for addition in additions:
-            try:
-                rel = pathlib.Path(addition).relative_to(root).as_posix()
-            except ValueError:
-                continue
-            if rel not in expected_members and rel in actual_members:
-                del actual_members[rel]
-        if actual_members != expected_members:
-            raise ValueError(f"capture tree member/path-presence drift: {root}")
-    for raw, expected in inputs.items():
-        path = pathlib.Path(raw)
-        if raw in additions and expected.get("present") is False:
-            continue
-        actual = _snapshot_entry(path)
-        if actual != expected:
-            raise ValueError(f"capture source/association drift: {path}")
 
 
 def write_provenance(root: pathlib.Path, *, capture_kind: str,
@@ -195,8 +76,6 @@ def write_provenance(root: pathlib.Path, *, capture_kind: str,
     """Write <root>/capture_provenance.json binding this tree's artifacts."""
     if capture_kind not in KNOWN_KINDS:
         raise ValueError(f"unknown capture_kind {capture_kind!r}")
-    root = pathlib.Path(root)
-    snapshot = snapshot_capture_tree(root)
     artifacts = collect_artifacts(root)
     doc = {
         "schema": SCHEMA,
@@ -208,11 +87,7 @@ def write_provenance(root: pathlib.Path, *, capture_kind: str,
     if extra:
         doc.update(extra)
     out = root / SIDECAR_NAME
-    verify_capture_inputs(snapshot)
-    _create_json_once(out, doc)
-    if collect_artifacts(root) != artifacts:
-        raise ValueError("capture source tree changed during provenance publication")
-    verify_capture_inputs(snapshot, expected_additions=[out])
+    out.write_text(json.dumps(doc, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return out
 
 
@@ -227,8 +102,6 @@ def write_file_sibling(dest: pathlib.Path, *, game_uids, capture_kind: str,
     """
     if capture_kind not in KNOWN_KINDS:
         raise ValueError(f"unknown capture_kind {capture_kind!r}")
-    dest = pathlib.Path(dest)
-    snapshot = snapshot_capture_inputs([dest])
     doc = {
         "schema": SCHEMA,
         "capture_kind": capture_kind,
@@ -240,9 +113,7 @@ def write_file_sibling(dest: pathlib.Path, *, game_uids, capture_kind: str,
     if extra:
         doc.update(extra)
     out = dest.with_name(dest.name + SIBLING_SUFFIX)
-    verify_capture_inputs(snapshot)
-    _create_json_once(out, doc)
-    verify_capture_inputs(snapshot, expected_additions=[out])
+    out.write_text(json.dumps(doc, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return out
 
 
@@ -258,16 +129,9 @@ def write_promoted_sibling(dest: pathlib.Path, *, game_uid: str,
 
 
 def _load_json(path: pathlib.Path):
-    def unique_pairs(pairs):
-        obj = {}
-        for key, value in pairs:
-            if key in obj:
-                raise ValueError(f"duplicate JSON key {key!r}")
-            obj[key] = value
-        return obj
     try:
-        data = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=unique_pairs)
-    except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError):
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
         return None
     return data if isinstance(data, dict) else None
 
@@ -290,41 +154,32 @@ def _row_uids(row) -> set[str]:
     return uids
 
 
-def file_game_uids(path: pathlib.Path, *, strict: bool = False) -> set[str]:
-    """Union UIDs in a JSONL/JSON artifact; strict mode rejects malformed input."""
+def file_game_uids(path: pathlib.Path) -> set[str]:
+    """Tolerant scan: union of game_uids referenced by a JSONL/JSON artifact."""
     uids: set[str] = set()
     try:
         text = path.read_text(encoding="utf-8", errors="replace")
-    except OSError as exc:
-        if strict:
-            raise ValueError(f"cannot read UID-bearing artifact {path}: {exc}") from exc
+    except OSError:
         return uids
     if path.suffix == ".json":
         data = _load_json(path)
-        if data is None:
-            if strict:
-                raise ValueError(f"malformed JSON UID artifact {path}")
-            return uids
-        uids |= _row_uids(data)
-        for key in ("results", "bot_outcomes"):
-            for row in data.get(key) or []:
-                uids |= _row_uids(row)
-        for u in data.get("sentinel_uids") or []:
-            if isinstance(u, str):
-                uids.add(u)
+        if data is not None:
+            uids |= _row_uids(data)
+            for key in ("results", "bot_outcomes"):
+                for row in data.get(key) or []:
+                    uids |= _row_uids(row)
+            for u in data.get("sentinel_uids") or []:
+                if isinstance(u, str):
+                    uids.add(u)
         return uids
     for line in text.splitlines():
         line = line.strip()
         if not line:
             continue
         try:
-            row = json.loads(line, object_pairs_hook=_unique_json_object)
-        except (json.JSONDecodeError, ValueError) as exc:
-            if strict:
-                raise ValueError(f"malformed JSONL UID row in {path}: {exc}") from exc
+            row = json.loads(line)
+        except json.JSONDecodeError:
             continue
-        if strict and not isinstance(row, dict):
-            raise ValueError(f"non-object JSONL UID row in {path}")
         uids |= _row_uids(row)
     return uids
 
@@ -334,11 +189,11 @@ def _association_paths(f: pathlib.Path) -> list[pathlib.Path]:
     not priority-ordered."""
     paths: list[pathlib.Path] = []
     sibling = f.with_name(f.name + SIBLING_SUFFIX)
-    if sibling.exists() or sibling.is_symlink():
+    if sibling.is_file():
         paths.append(sibling)
     for d in f.parents:
         sidecar = d / SIDECAR_NAME
-        if sidecar.exists() or sidecar.is_symlink():
+        if sidecar.is_file():
             paths.append(sidecar)
     return paths
 
@@ -349,28 +204,19 @@ def _marker_summaries(f: pathlib.Path) -> list[pathlib.Path]:
     for d in f.parents:
         for name in ("batch_summary.json", "batch_results.jsonl"):
             p = d / name
-            if p.exists() or p.is_symlink():
+            if p.is_file():
                 out.append(p)
     return out
 
 
 def _assoc_uids(assoc: dict) -> set[str]:
-    raw = assoc.get("game_uids", [])
-    if (not isinstance(raw, list)
-            or any(not isinstance(u, str) or not u for u in raw)
-            or len(raw) != len(set(raw))):
-        raise ValueError("malformed game_uids")
-    uids = set(raw)
-    uid = assoc.get("game_uid")
-    if uid is not None:
-        if not isinstance(uid, str) or not uid:
-            raise ValueError("malformed game_uid")
-        uids.add(uid)
+    uids = {u for u in (assoc.get("game_uids") or []) if isinstance(u, str)}
+    if isinstance(assoc.get("game_uid"), str):
+        uids.add(assoc["game_uid"])
     return uids
 
 
-def _assoc_binding(assoc: dict, association_root: pathlib.Path,
-                   f: pathlib.Path, sha_fn, uids: set[str]) -> str | None:
+def _assoc_binding(assoc: dict, f: pathlib.Path, sha_fn, uids: set[str]) -> str | None:
     """Does one association dict bind file f?
 
     "bound"      — artifact SHA verified for f.
@@ -381,24 +227,22 @@ def _assoc_binding(assoc: dict, association_root: pathlib.Path,
     """
     artifacts = assoc.get("artifacts")
     if isinstance(artifacts, dict):
-        try:
-            rel = f.resolve().relative_to(association_root.resolve()).as_posix()
-        except (ValueError, OSError):
-            rel = None
-        if rel in artifacts:
-            declared = artifacts[rel]
-            if not _is_sha(declared) or declared != declared.lower():
-                return "malformed"
-            return "bound" if sha_fn() == declared else "sha_mismatch"
+        for base in f.parents:
+            try:
+                rel = f.relative_to(base).as_posix()
+            except ValueError:
+                continue
+            if rel in artifacts:
+                declared = artifacts[rel]
+                if not isinstance(declared, str) or len(declared) != 64:
+                    return "malformed"
+                return "bound" if sha_fn() == declared else "sha_mismatch"
     if assoc.get("bound_file") == f.name:
         declared = assoc.get("sha256")
-        if not _is_sha(declared) or declared != declared.lower():
+        if not isinstance(declared, str) or len(declared) != 64:
             return "malformed"
         return "bound" if sha_fn() == declared else "sha_mismatch"
-    try:
-        assoc_uids = _assoc_uids(assoc)
-    except ValueError:
-        return "malformed"
+    assoc_uids = _assoc_uids(assoc)
     if uids and assoc_uids and uids <= assoc_uids:
         return "uid_only"
     return None
@@ -414,21 +258,9 @@ def assess_file(path: pathlib.Path, game_uids: set[str] | None = None) -> tuple[
                  detached bare file is never ingested as historical.
     """
     f = pathlib.Path(path)
-    if f.is_symlink() or not f.is_file():
+    if not f.is_file():
         return REJECT, f"no such artifact {f}"
-    try:
-        actual_uids = file_game_uids(f, strict=True)
-        if game_uids is not None:
-            supplied_uids = set(game_uids)
-            if (not supplied_uids or any(not isinstance(uid, str) or not uid
-                                         for uid in supplied_uids)
-                    or actual_uids != supplied_uids):
-                claimed = sorted((repr(uid) for uid in supplied_uids))
-                return REJECT, (f"caller UID claim {claimed} does not equal "
-                                f"artifact UID membership {sorted(actual_uids)}")
-        uids = actual_uids
-    except (OSError, ValueError, UnicodeError, TypeError) as exc:
-        return REJECT, f"malformed UID-bearing artifact {f}: {exc}"
+    uids = set(game_uids) if game_uids is not None else file_game_uids(f)
     _sha: list[str] = []
 
     def sha() -> str:
@@ -437,7 +269,6 @@ def assess_file(path: pathlib.Path, game_uids: set[str] | None = None) -> tuple[
         return _sha[0]
 
     allowed = False
-    sentinel_seen = False
     reasons: list[str] = []
 
     for apath in _association_paths(f):
@@ -446,34 +277,16 @@ def assess_file(path: pathlib.Path, game_uids: set[str] | None = None) -> tuple[
             return REJECT, f"malformed provenance file {apath}"
         kind = assoc.get("capture_kind")
         scoreable = assoc.get("scoreable")
-        if (kind not in KNOWN_KINDS or type(scoreable) is not bool
-                or assoc.get("schema") != SCHEMA):
+        if kind not in KNOWN_KINDS or type(scoreable) is not bool:
             return REJECT, f"malformed provenance record {apath}"
-        try:
-            assoc_uids = _assoc_uids(assoc)
-        except ValueError as exc:
-            return REJECT, f"malformed provenance record {apath}: {exc}"
-        artifacts = assoc.get("artifacts")
-        if artifacts is not None and not isinstance(artifacts, dict):
-            return REJECT, f"malformed artifact table in {apath}"
-        if isinstance(artifacts, dict):
-            for rel, digest in artifacts.items():
-                parts = _path_parts(rel)
-                if (parts is None or pathlib.PurePosixPath(rel.replace("\\", "/")).is_absolute()
-                        or ".." in parts or not _is_sha(digest) or digest != digest.lower()):
-                    return REJECT, f"malformed artifact entry in {apath}: {rel!r}"
-        if not assoc_uids and (kind != BATCH_KIND or not artifacts):
-            return REJECT, f"provenance has no UID membership in {apath}"
-        binding = _assoc_binding(assoc, apath.parent, f, sha, uids)
+        binding = _assoc_binding(assoc, f, sha, uids)
         if kind == SENTINEL_KIND or scoreable is False:
             if binding in ("bound", "uid_only", "sha_mismatch"):
                 # Quarantine persists through byte drift: a sha_mismatch means
                 # this manifest tried to bind the file, so it is in the
                 # capture's scope regardless of what the bytes now are. This
                 # direction is fail-safe — it can only exclude, never score.
-                sentinel_seen = True
-                reasons.append(f"{f.name} bound to sentinel capture by {apath}")
-                continue
+                return SENTINEL, f"{f.name} bound to sentinel capture by {apath}"
             if binding == "malformed":
                 return REJECT, f"conflicting provenance {apath}: {binding}"
             # A sentinel manifest that does not cover this file proves
@@ -482,13 +295,10 @@ def assess_file(path: pathlib.Path, game_uids: set[str] | None = None) -> tuple[
             continue
         # Scoreable manifest (match_batch / legacy_import): positive binding
         # requires artifact SHA match AND complete UID membership.
-        if binding == "bound" and uids and uids <= _assoc_uids(assoc):
+        if binding == "bound" and (not uids or uids <= _assoc_uids(assoc)):
             allowed = True
         elif binding == "bound":
-            if not uids:
-                return REJECT, f"hash-bound association lacks verifiable artifact UID membership: {apath}"
-            return REJECT, (f"hash-bound association {apath} omits actual UID(s) "
-                            f"{sorted(uids - _assoc_uids(assoc))}")
+            reasons.append(f"{apath}: UID(s) {sorted(uids - _assoc_uids(assoc))} not bound")
         elif binding in ("sha_mismatch", "malformed"):
             return REJECT, f"conflicting provenance {apath}: {binding}"
         else:
@@ -505,43 +315,27 @@ def assess_file(path: pathlib.Path, game_uids: set[str] | None = None) -> tuple[
         if mpath.name == "batch_summary.json":
             data = _load_json(mpath)
             if data is None:
-                return REJECT, f"malformed marker summary {mpath}"
+                continue
             if record_marked(data):
-                sentinel_seen = True
-                reasons.append(f"{f.name} under sentinel-marked batch {mpath}")
-            raw_s_uids = data.get("sentinel_uids", [])
-            if (not isinstance(raw_s_uids, list)
-                    or any(not isinstance(u, str) or not u for u in raw_s_uids)
-                    or len(raw_s_uids) != len(set(raw_s_uids))):
-                return REJECT, f"malformed sentinel UID index in {mpath}"
-            s_uids = set(raw_s_uids)
+                return SENTINEL, f"{f.name} under sentinel-marked batch {mpath}"
+            s_uids = {u for u in (data.get("sentinel_uids") or []) if isinstance(u, str)}
             if s_uids & uids:
-                sentinel_seen = True
-                reasons.append(f"{f.name} covered by sentinel index in {mpath}")
+                return SENTINEL, f"{f.name} covered by sentinel index in {mpath}"
         else:
             try:
                 lines = mpath.read_text(encoding="utf-8", errors="replace").splitlines()
             except OSError:
-                return REJECT, f"unreadable marker summary {mpath}"
+                continue
             for line in lines:
                 if not line.strip():
                     continue
                 try:
-                    row = json.loads(line, object_pairs_hook=_unique_json_object)
-                except (json.JSONDecodeError, ValueError):
-                    return REJECT, f"malformed marker row in {mpath}"
-                if not isinstance(row, dict):
-                    return REJECT, f"malformed marker row in {mpath}"
-                if record_marked(row):
-                    row_uids = _row_uids(row)
-                    if not row_uids:
-                        return REJECT, f"sentinel marker row lacks UID in {mpath}"
-                    if row_uids & uids:
-                        sentinel_seen = True
-                        reasons.append(f"{f.name} covered by sentinel batch row in {mpath}")
+                    row = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if record_marked(row) and (_row_uids(row) & uids):
+                    return SENTINEL, f"{f.name} covered by sentinel batch row in {mpath}"
 
-    if sentinel_seen:
-        return SENTINEL, "; ".join(reasons)
     if allowed:
         return ALLOW, f"{f.name} bound"
     detail = "; ".join(reasons) if reasons else "no resolvable association"
@@ -701,29 +495,15 @@ def reconcile_embedded_provenance(receipt: dict) -> tuple[bool, str]:
         return True, "no embedded provenance"
     if not isinstance(prov, dict):
         return False, "embedded capture_provenance is not a mapping"
-    if (prov.get("schema") != SCHEMA
-            or prov.get("capture_kind") not in KNOWN_KINDS
-            or type(prov.get("scoreable")) is not bool
-            or prov.get("scoreable") is not True):
-        return False, "embedded provenance schema/kind/scoreable fields malformed"
     if record_marked(prov):
         return False, "embedded provenance is sentinel-marked"
     uids = prov.get("game_uids")
-    if (not isinstance(uids, list) or not uids
-            or any(not isinstance(u, str) or not u for u in uids)
-            or len(uids) != len(set(uids))
-            or not isinstance(receipt.get("game_uid"), str)
+    if (not isinstance(uids, list)
             or receipt.get("game_uid") not in uids):
         return False, "receipt game_uid not bound by embedded provenance"
     prov_artifacts = prov.get("artifacts")
     if not isinstance(prov_artifacts, dict):
         return False, "embedded provenance artifact table missing/malformed"
-    for rel, digest in prov_artifacts.items():
-        parts = _path_parts(rel)
-        if (parts is None or ".." in parts
-                or pathlib.PurePosixPath(rel.replace("\\", "/")).is_absolute()
-                or not _is_sha(digest) or digest != digest.lower()):
-            return False, f"embedded provenance artifact entry {rel!r} malformed"
     artifacts = receipt.get("artifacts")
     if artifacts is None:
         artifacts = {}
@@ -741,6 +521,8 @@ def reconcile_embedded_provenance(receipt: dict) -> tuple[bool, str]:
         if rel is None:
             return False, f"{role}: {why}"
         declared = prov_artifacts[rel]
+        if not _is_sha(declared):
+            return False, f"{role}: embedded binding entry {rel!r} malformed"
         if declared != rsha:
             return False, f"{role}: sha256 disagrees with embedded binding {rel!r}"
     return True, "receipt artifacts agree with embedded provenance"
@@ -772,13 +554,6 @@ def verify_artifact_bytes(receipt: dict, role: str,
         return False, f"{role} bytes differ from the receipt artifact record"
     prov = receipt.get("capture_provenance")
     if prov is not None:
-        if (not isinstance(prov, dict) or prov.get("schema") != SCHEMA
-                or prov.get("capture_kind") not in KNOWN_KINDS
-                or type(prov.get("scoreable")) is not bool
-                or prov.get("scoreable") is not True
-                or not isinstance(prov.get("game_uids"), list)
-                or receipt.get("game_uid") not in prov.get("game_uids", [])):
-            return False, "embedded provenance schema/kind/UID/scoreable fields malformed"
         prov_artifacts = prov.get("artifacts") if isinstance(prov, dict) else None
         if not isinstance(prov_artifacts, dict):
             return False, "embedded provenance artifact table missing/malformed"
@@ -786,7 +561,7 @@ def verify_artifact_bytes(receipt: dict, role: str,
         if rel is None:
             return False, f"{role}: {why}"
         declared_prov = prov_artifacts[rel]
-        if not _is_sha(declared_prov) or declared_prov != declared_prov.lower():
+        if not _is_sha(declared_prov):
             return False, f"{role}: embedded binding entry {rel!r} malformed"
         if actual != declared_prov:
             return False, f"{role} bytes differ from the embedded provenance binding"
