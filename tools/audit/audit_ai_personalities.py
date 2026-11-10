@@ -20,7 +20,8 @@ CONTROLLER_PATH = ROOT / "OpenRA.Mods.Cameo" / "Traits" / "BotPersonalityControl
 PERSONALITIES = ("rush", "turtle", "tech", "expansion", "steamroller", "guerrilla")
 CONDITIONS = {f"personality-{name}" for name in PERSONALITIES}
 DIFFICULTIES = ("easiest", "veryeasy", "easy", "medium", "hard", "veryhard", "brutal", "challenger", "unbeatable", "god")
-REACTION_DELAYS = (7500, 6750, 6000, 5250, 4500, 3750, 3000, 2250, 1500, 750)
+# TIER-01 (TABLE_03_R2 079A06F2, Opus ruling 4: proposal values are the target): easiest..god PersonalityReactionDelay.
+REACTION_DELAYS = (5500, 5000, 4500, 4000, 3500, 3000, 2500, 2000, 1500, 1000)
 TUNING_FIELDS = {
     "MinimumAttackForceDelay",
     "SquadSize",
@@ -224,7 +225,8 @@ SCALE_CATEGORIES = ("army", "harvester", "refinery", "production", "conyard", "t
 # category -> the BotLimits number its minute-0, nothing-seen line must reproduce (DESIGN 19.1 table).
 SCALE_VS_LIMITS = {
     "refinery": "RefineryLimit",
-    "harvester": "HarvesterLimit",
+    # harvester: removed (USER RULING 2026-11-08). HarvesterLimit is 0 on all tiers: the value cap replaces the count
+    # limit, so the ScaleTargets harvester line has no BotLimits count to match (Form B, later item).
     "production": "ProductionTypeLimit",
     "conyard": "ConstructionYardLimit",
 }
@@ -319,6 +321,75 @@ def tier_gate_failures() -> list[str]:
     return failures
 
 
+NOOB_TIER = "noob"
+
+
+def noob_one_step(easiest: int, god: int, floor: int) -> int:
+    """NOOB-TIER-01 rule: one linear step below easiest, extrapolated on the easiest..god line (rank -1, C#
+    truncating division over 9 steps). Where that is below the floor (1 for *Limit fields, 0 otherwise),
+    noob = easiest."""
+    value = easiest + int((god - easiest) * -1 / 9)
+    return value if value >= floor else easiest
+
+
+def noob_failures(lines: list[str]) -> list[str]:
+    """NOOB-TIER-01 (user ruling, final). Documented noob check, separate from the easiest..god checks:
+    - every numeric BotLimits field of noob equals noob_one_step(easiest, god) with the floor rule;
+    - noob's RequiresCondition is noobbot and its wiring exists (GrantConditionOnBotOwner@noob, ModularBot@NoobAI);
+    - the one-step ScaleTargets line of noob is not below 0 (a negative value would need the easiest fallback)."""
+    failures: list[str] = []
+    noob = field_blocks(lines_for_block(lines, f"BotLimits@{NOOB_TIER}"))
+    easiest = field_blocks(lines_for_block(lines, "BotLimits@easiest"))
+    god = field_blocks(lines_for_block(lines, "BotLimits@god"))
+    if not noob or not easiest or not god:
+        return ["noob, easiest or god BotLimits block missing"]
+
+    def value(fields: dict[str, str], name: str) -> str:
+        return fields[name].split(":", 1)[1].strip()
+
+    for name in easiest:
+        if name == "RequiresCondition":
+            if value(noob, name) != "noobbot":
+                failures.append(f"noob RequiresCondition is {value(noob, name)!r}, expected noobbot")
+            continue
+        e_text = value(easiest, name)
+        if not e_text.lstrip("-").isdigit():
+            continue  # booleans: checked by the existing order and tier-gate checks
+        e, g = int(e_text), int(value(god, name))
+        # TIER-01: CapturerInfantryLimitPct is a percent, not a count; its noob value is the proposal's first value 0 (Opus ruling 4).
+        floor = 0 if name == "CapturerInfantryLimitPct" else (1 if "Limit" in name else 0)
+        expected = noob_one_step(e, g, floor)
+        got = value(noob, name) if name in noob else None
+        if got != str(expected):
+            failures.append(f"noob {name} is {got}, the rule gives {expected} (easiest {e}, god {g})")
+
+    if "\tGrantConditionOnBotOwner@noob:" not in lines or "\tModularBot@NoobAI:" not in lines:
+        failures.append("noob wiring missing (GrantConditionOnBotOwner@noob or ModularBot@NoobAI)")
+
+    start = lines.index("\tScaleTargetsBotModule:")
+    cats = lines.index("\t\tCategories:", start)
+    category = None
+    bounds: dict[str, dict[str, int]] = {}
+    for line in lines[cats + 1:]:
+        if line.strip() and len(line) - len(line.lstrip("\t")) <= 2:
+            break
+        m = re.match(r"^\t\t\t([a-z]+):$", line)
+        if m:
+            category = m.group(1)
+            bounds[category] = {}
+            continue
+        m = re.match(r"^\t\t\t\t(Min|Max|RatioMin|RatioMax): (\d+)$", line)
+        if m and category:
+            bounds[category][m.group(1)] = int(m.group(2))
+    for cat, b in bounds.items():
+        for lo, hi in (("Min", "Max"), ("RatioMin", "RatioMax")):
+            if lo in b and hi in b:
+                noob_line = b[lo] + int((b[hi] - b[lo]) * -1 / 9)
+                if noob_line < 0:
+                    failures.append(f"ScaleTargets {cat} {lo}: noob line {noob_line} < 0 (needs the easiest fallback)")
+    return failures
+
+
 def main() -> int:
     lines = AI_PATH.read_text(encoding="utf-8").splitlines()
     failures: list[str] = []
@@ -338,10 +409,12 @@ def main() -> int:
     if not source_conditions or len(source_conditions) != len(set(source_conditions)) or set(source_conditions) != CONDITIONS:
         failures.append(f"controller conditions {sorted(set(source_conditions))} != {sorted(CONDITIONS)}")
 
+    # NOOB-TIER-01: the equal-step order is checked over easiest..god exactly as at base; noob is checked
+    # by noob_failures() below (its own documented rule).
     bot_limits = [
         match.group(1)
         for line in lines
-        if (match := re.match(r"^\tBotLimits@([^:]+):$", line))
+        if (match := re.match(r"^\tBotLimits@([^:]+):$", line)) and match.group(1) != NOOB_TIER
     ]
     if bot_limits != list(DIFFICULTIES):
         failures.append(f"BotLimits difficulty order {bot_limits} != {list(DIFFICULTIES)}")
@@ -419,6 +492,7 @@ def main() -> int:
                 failures.append(f"shared field set differs between {reference_name} and {name}")
 
     failures.extend(difficulty_scale_failures())
+    failures.extend(noob_failures(lines))
     failures.extend(scale_target_failures())
     failures.extend(tier_gate_failures())
 

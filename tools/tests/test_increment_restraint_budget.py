@@ -18,7 +18,7 @@ class RestraintBudgetTests(unittest.TestCase):
     def test_reviewed_catalogue_covers_every_group(self):
         _, groups, _ = switches.load_spec(switches.SPEC)
         classes = switches.load_effect_classes(switches.SPEC, groups)
-        self.assertEqual(Counter(classes.values()), {"restraint": 32, "capability": 25, "neutral": 12})
+        self.assertEqual(Counter(classes.values()), {"restraint": 35, "capability": 27, "neutral": 13})
         self.assertEqual(classes["TF4_turtle_fallback_expiry"], "restraint")
         self.assertEqual(classes["BP_squad_desire"], "restraint")
         self.assertEqual(classes["AE_army_first"], "restraint")
@@ -26,6 +26,19 @@ class RestraintBudgetTests(unittest.TestCase):
         self.assertEqual(classes["BV_m13_liveness"], "restraint")
         self.assertEqual(classes["CB_frontier_observe"], "neutral")
         self.assertEqual(classes["BR_learn_fight"], "restraint")
+        self.assertEqual(classes["CD_stalemate_breaker"], "restraint")
+        self.assertEqual(classes["CF_agg_core"], "restraint")
+        _, _, needs = switches.load_spec(switches.SPEC)
+        self.assertEqual(needs["CF_agg_core"], ["CD_stalemate_breaker"])
+        self.assertEqual(groups["CF_agg_core"], {"SquadManagerBotModuleCA": {"AggressionEnabled": "true"}})
+        self.assertEqual(classes["CE_botpassive_diagnostics"], "neutral")
+        self.assertEqual(classes["CG_agg_team"], "capability")
+        self.assertEqual(classes["CH_retreat_rally"], "restraint")
+        self.assertEqual(needs["CH_retreat_rally"], ["CG_agg_team", "CF_agg_core"])
+        self.assertEqual(groups["CH_retreat_rally"], {"SquadManagerBotModuleCA": {"RetreatRallyEnabled": "true"}})
+        self.assertEqual(classes["CI_refinery_stall_fix"], "capability")
+        self.assertEqual(needs.get("CI_refinery_stall_fix", []), [])
+        self.assertEqual(groups["CI_refinery_stall_fix"], {"ExpansionPlannerBotModule": {"RefineryFallbackForceAfterTicks": "1500"}})
 
     def test_class_metadata_fails_closed(self):
         for text in ("", "effect_classes:\n  a: wrong\n", "effect_classes:\n  b: neutral\n",
@@ -188,3 +201,61 @@ class ManifestAndCliTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class RetreatRallyGroupTests(unittest.TestCase):
+    """A10 CH_retreat_rally: needs CG_agg_team AND CF_agg_core (design DRAFT02 M1); the applier refuses any arm lacking one."""
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.tree = pathlib.Path(self.temp.name)
+        (self.tree / "mods/cameo/ai").mkdir(parents=True)
+        (self.tree / "mods/cameo/ai/ai.yaml").write_text("Bot:\n\tSquadManagerBotModuleCA:\n\t\tRetreatRallyEnabled: false\n", encoding="utf-8")
+
+    def cli(self, groups, combination=True, dry=True):
+        args = [sys.executable, "-I", "-B", str(ROOT / "tools/ai/apply_increment_switches.py"), str(self.tree), "--groups", ",".join(groups)]
+        if combination:
+            manifest = self.tree / "manifest.json"
+            manifest.write_text(json.dumps({"version": 1, "approval_receipt": "external-review.md", "baseline_classes": {},
+                                            "selected_groups": groups, "purpose": "combination_test", "campaign_allowed": False}), encoding="utf-8")
+            args += ["--increment-manifest", str(manifest), "--manifest-sha256", hashlib.sha256(manifest.read_bytes()).hexdigest()]
+        if dry:
+            args.append("--dry-run")
+        return subprocess.run(args, capture_output=True, text=True)
+
+    def test_ch_alone_is_refused_for_both_dependencies(self):
+        result = self.cli(["CH_retreat_rally"], combination=False)
+        self.assertEqual(result.returncode, 2, result.stdout + result.stderr)
+        self.assertIn("unmet switch dependencies", result.stderr)
+        self.assertIn("CG_agg_team", result.stderr)
+        self.assertIn("CF_agg_core", result.stderr)
+
+    def test_ch_without_cf_is_refused(self):
+        result = self.cli(["CD_stalemate_breaker", "CG_agg_team", "CH_retreat_rally"])
+        self.assertEqual(result.returncode, 2, result.stdout + result.stderr)
+        self.assertIn("unmet switch dependencies", result.stderr)
+        self.assertIn("CF_agg_core", result.stderr)
+        self.assertNotIn("'CG_agg_team'", result.stderr.split("unmet switch dependencies")[1])
+
+    def test_ch_without_cg_is_refused(self):
+        result = self.cli(["CD_stalemate_breaker", "CF_agg_core", "CH_retreat_rally"])
+        self.assertEqual(result.returncode, 2, result.stdout + result.stderr)
+        self.assertIn("unmet switch dependencies", result.stderr)
+        self.assertIn("CG_agg_team", result.stderr)
+        self.assertNotIn("'CF_agg_core'", result.stderr.split("unmet switch dependencies")[1])
+
+    def test_ch_with_cd_cf_cg_is_accepted_and_sets_only_the_flag(self):
+        result = self.cli(["CD_stalemate_breaker", "CF_agg_core", "CG_agg_team", "CH_retreat_rally"])
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertRegex(result.stdout, r"SquadManagerBotModuleCA\.RetreatRallyEnabled: .*false -> true")
+        self.assertIn("4 change(s) (dry run)", result.stdout)
+        _, groups, _ = switches.load_spec(switches.SPEC)
+        self.assertEqual(groups["CH_retreat_rally"], {"SquadManagerBotModuleCA": {"RetreatRallyEnabled": "true"}})
+
+    def test_ch_is_not_in_the_arm07_pair(self):
+        # ARM07: ON = CD+CE+CF+CG, OFF = CE. The spec's group order never names CH inside CD..CG; CH is only ever armed on its own request.
+        _, groups, needs = switches.load_spec(switches.SPEC)
+        for name in ("CD_stalemate_breaker", "CE_botpassive_diagnostics", "CF_agg_core", "CG_agg_team"):
+            self.assertNotIn("CH_retreat_rally", needs.get(name, []))
+            self.assertNotIn("RetreatRallyEnabled", groups[name].get("SquadManagerBotModuleCA", {}))

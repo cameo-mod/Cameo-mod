@@ -16,7 +16,10 @@ skip: [SquadManagerBotModuleCA@classic]
 # DriveMcvRequests) need no entry.
 needs:
   Q_ut3_defend_share: [O_ca2_defend_reserve]    # scales the reserve O creates
+  CF_agg_core: [CD_stalemate_breaker]           # IMPL02-AGG-CORE: AggressionOn also needs StalemateBreakerEnabled; without it the group is inert (fail closed)
   AA_cn4_region_roles: [D_zone_topology]        # role fronts need zone-graph regions
+  CG_agg_team: [CD_stalemate_breaker]           # IMPL02-AGG-TEAM reads the home-threat provider that CD arms; without it the group is inert (fail closed)
+  CH_retreat_rally: [CG_agg_team, CF_agg_core]  # A10 RETREAT-RALLY: RetreatRallyOn = AggTeamEnabled && RetreatRallyEnabled && AggressionOn; it reads the agg-core ratio/commit members (CF) and the agg-team defence plan and ally intents (CG); either missing = inert (fail closed), and the applier refuses the arm
 
 effect_classes:
   BV_m13_liveness: restraint
@@ -88,6 +91,12 @@ effect_classes:
   CB_frontier_observe: neutral         # P3a read-only stage-machine shadow; emits outpost_stage v2 rows on TELEMETRY-V2; moves no behaviour (same class as AI_radar_contacts / BK_squad_order_dedup)
   BR_learn_fight: restraint            # learned engage/retreat thresholds can hold attacks (LEARN-FIGHT; renamed from BV_ — the prefix already belongs to BV_m13_liveness)
   BX_context_providers: neutral        # P4 telemetry-only context vectors; anonymous rows on their own channel — same class as CB_frontier_observe / AI_radar_contacts
+  CF_agg_core: restraint              # IMPL02-AGG-CORE: coalition bands, forward regroup, fight/march holds; the 80% coalition bar, the regroup and the tiny-squad hold can hold back an attack the legacy 75% squad rule made (M13: any hold part = restraint)
+  CD_stalemate_breaker: restraint     # BOTPASSIVE-FIX01: concentrated stalemate waves, but the rally wait, the attempt HOLDs and the personality dwell hold (M13: any hold part = restraint)
+  CE_botpassive_diagnostics: neutral  # BOTPASSIVE telemetry flag: botpassive-diagnostic/1 file per seat, never read by decisions (design _09 LE); arm both sides
+  CG_agg_team: capability             # IMPL02-AGG-TEAM: send more of the army out (home-reserve cap, max-strength push) and join allied attacks; no part of it holds an attack back
+  CH_retreat_rally: restraint         # A10 RETREAT-RALLY: a retreating ground squad walks to a friendly army instead of the base; while it rallies it stays out of the pool, A4 joins and A5 launches for up to AggTeamRallyMaxTicks (M13: any hold part = restraint). The Support leg is an AttackMove onto an ally's target, which the legacy flow never made (new behaviour, not 'no new attack capability'). Retreat decisions (WHEN) are unchanged: A10 only chooses WHERE
+  CI_refinery_stall_fix: capability     # STALL-FIX-01: a retained refinery whose fallback scan stayed Deferred for RefineryFallbackForceAfterTicks game ticks is forced to a Site or Exhausted verdict in one poll; unblocks the building queue (a completed refinery at the head blocks every later building). No part holds anything back; the cancel rule is unchanged (cancel only on Exhausted with a current certificate)
 
 groups:
   BV_m13_liveness:
@@ -373,3 +382,23 @@ groups:
     UnitBuilderBotModuleCA:
       SwitchCondition: genericbot
       ObservedAirThreats: true
+  CF_agg_core:                       # IMPL02-AGG-CORE (A1-A3, A4 no-abandonment, A9 registry; Opus S4). Needs CD_stalemate_breaker. Off = AggressionOn false = the FREEZE8 idle/attack decisions
+    SquadManagerBotModuleCA:
+      AggressionEnabled: true
+  CD_stalemate_breaker:              # BOTPASSIVE-FIX01 (designs _06-_09): breaker trigger, home-scoped urgency (F3/F4), wave FSM. Off = no state, no save field, no RNG draw
+    SquadManagerBotModuleCA:
+      StalemateBreakerEnabled: true
+    MasterAiBotModule:
+      StalemateUrgencyEnabled: true
+  CE_botpassive_diagnostics:         # BOTPASSIVE telemetry flag only (design _09 LE): independent of CD_stalemate_breaker; orders/RNG/save bytes identical on and off
+    SquadManagerBotModuleCA:
+      StalemateDiagnosticsEnabled: true
+  CG_agg_team:                       # IMPL02-AGG-TEAM (A4 allied attack intents + A5 home-reserve cap / max-strength push). Needs CD_stalemate_breaker. Off = no intent, no join, no cap, no push
+    SquadManagerBotModuleCA:
+      AggTeamEnabled: true
+  CH_retreat_rally:                  # A10 RETREAT-RALLY (design DRAFT02). Needs CG_agg_team and CF_agg_core. Off = RetreatRallyOn false = the legacy flight home, no scoring, no state, no row. Never part of the ARM07 arms (ON = CD+CE+CF+CG, OFF = CE)
+    SquadManagerBotModuleCA:
+      RetreatRallyEnabled: true
+  CI_refinery_stall_fix:             # STALL-FIX-01 (Opus order, FREEZE11 input). Independent of the CD..CH group (no needs). Off = RefineryFallbackForceAfterTicks 0 = the budgeted scan path unchanged, no force, no line. On: after 1500 deferred ticks (about one minute) the retained-refinery fallback scan completes in one poll (Site, or Exhausted with its own certificate); every other verdict still holds
+    ExpansionPlannerBotModule:
+      RefineryFallbackForceAfterTicks: 1500

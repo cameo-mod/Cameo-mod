@@ -55,8 +55,9 @@ are instantaneous counts, not cumulative idle ticks. Refunds/other income mean
 earned resources are not a proof of harvester delivery. No warning changes exit
 status. Detailed economy/combat timelines retain the original units and ticks.
 
-Inputs are bounded (128 MiB/file, 1 MiB/row, 200000 rows/file), JSON objects only,
-supported schemas, stable identities and increasing ticks. Reports contain
+Inputs are bounded (128 MiB/file, 8 MiB/row, 200000 rows/file), JSON objects only,
+supported schemas, stable identities and increasing ticks. batch_summary.json is
+capped at the same 8 MiB (an oversized summary is an EvidenceError). Reports contain
 consumed-prefix hashes. Fingerprints copied from summaries are provenance,
 not validated launch receipts: scheduler must separately enforce manifests,
 parser completeness, hashes, end reason and crash/cap status.

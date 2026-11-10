@@ -16,6 +16,7 @@ using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
+using IBotStalemateUrgencyProvider = OpenRA.Mods.CA.Traits.BotModules.IBotStalemateUrgencyProvider;
 
 namespace OpenRA.Mods.Cameo.Traits.BotModules
 {
@@ -294,6 +295,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Default-off terminal turtle fallback hold: outside visible base danger, keep a legal " +
 			"offensive incumbent for twice the tier personality reaction delay. Pressure cannot renew expiry.")]
 		public readonly bool UseTurtleFallbackExpiry = false;
+
+		[Desc("BOTPASSIVE switch CD_stalemate_breaker (design _06 §4-§5.4, _07 L2, _08 M3/N4/N5): own team versus the summed ",
+			"enemy for the army ratio, and Emergency/Pressured scoped to home (CYs and production, else the start cell). ",
+			"Default off: the legacy urgency, allocations and save bytes are unchanged. Classic never sets it.")]
+		public readonly bool StalemateUrgencyEnabled = false;
+
 		public readonly int PressuredArmyRatio = 60;
 		public readonly int EmergencyCheckInterval = 25;
 		public readonly int SnapshotInterval = 150;
@@ -590,7 +597,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotEnemyAirIntelProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory, IBotPersonalityLeadProvider, IBotUtilityAxes, IBotDirector, IBotTeamMember, IBotCoalition
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotEnemyAirIntelProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory, IBotPersonalityLeadProvider, IBotUtilityAxes, IBotDirector, IBotTeamMember, IBotCoalition, IBotStalemateUrgencyProvider
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
@@ -644,6 +651,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// Own combat-army value from the latest snapshot (the emergency check runs more often than Rebuild).
 		// Not persisted: -1 after a load means "unknown", which blocks the relative loss test until the next snapshot.
 		int emergencyOwnArmy = -1;
+
+		// BOTPASSIVE F3/F4 (switch ON only). Null while off, so the legacy path allocates and saves nothing new.
+		readonly StalemateUrgencyState stalemate;
 		readonly Dictionary<string, int> counterDemandCandidateSince = new(StringComparer.Ordinal);
 		string[] lastIssuedCounterDemands = Array.Empty<string>();
 
@@ -1040,6 +1050,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			lastPersonalitySwitchTick = -Math.Max(1, info.PersonalityHoldTicks);
 			nextSnapshotTick = Math.Abs(player.ClientIndex * 37) % Math.Max(1, info.SnapshotInterval);
 			nextEmergencyTick = nextSnapshotTick;
+			if (info.StalemateUrgencyEnabled)
+				stalemate = new StalemateUrgencyState();
 		}
 
 		void IBotTick.BotTick(IBot bot)
@@ -1213,9 +1225,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			var threats = TrackThreats(tick, enemies, actorsByOwner, ownBuildings, fogged);
 			var enemyArmy = profiles.Values.Sum(p => p.ArmyValue);
-			var urgency = MasterAiEval.ClassifyUrgency(currentUrgency,
-				profiles.Values.Any(p => p.PressureValue > 0), enemyArmy, ownArmy,
-				Info.PressuredArmyRatio);
+			var urgency = stalemate == null
+				? MasterAiEval.ClassifyUrgency(currentUrgency,
+					profiles.Values.Any(p => p.PressureValue > 0), enemyArmy, ownArmy,
+					Info.PressuredArmyRatio)
+				: StalemateUrgency(tick, enemies, actorsByOwner, ownBuildings, fogged, profiles, enemyArmy, ownArmy);
 			currentUrgency = urgency;
 			if (urgency != BotUrgency.Emergency)
 				emergencyPersonalityHandled = false;
@@ -1336,14 +1350,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 			else if (banditArm == null
 				&& ShouldSwitchPersonality(currentPersonality, candidatePersonality, lastPersonalitySwitchTick, tick,
-					emergencyTransition, reactionDelay, personalityCandidateSince, Info))
+					emergencyTransition, reactionDelay, personalityCandidateSince, Info)
+				&& (stalemate == null || OpenRA.Mods.CA.Traits.BotModules.Squads.StalemateBreakerPolicyCA.MaySwitchPersonality(
+					true, urgency == BotUrgency.Emergency, tick, stalemate.LastAppliedSwitchTick)))
 			{
+				// BOTPASSIVE dwell (switch ON, design _03 §1): >= 3000 ticks since the last applied switch, bypassed only
+				// by the home-scoped Emergency'. The candidate stays pending and is re-evaluated at the next decision.
 				bot.QueueOrder(new Order("SetBotPersonality", player.PlayerActor, false)
 				{
 					TargetString = candidatePersonality,
 					SuppressVisualFeedback = true
 				});
 				lastPersonalitySwitchTick = tick;
+				if (stalemate != null)
+					stalemate.LastAppliedSwitchTick = tick;
 			}
 
 			if (emergencyTransition)
@@ -1485,6 +1505,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					: OwnBaseCenter(player.World, ownLiveBuildings);
 			}
 
+			// IMPL02-AGG-TEAM (A4): the squad manager's live attack intent; null while the AggTeam flag is off, so an OFF broadcast is unchanged.
+			var attackIntent = player.PlayerActor.TraitsImplementing<IBotAttackIntentSource>().FirstEnabledTraitOrDefault()?.AttackIntent;
+
 			broadcast = new TeamBroadcast(tick, ownArmy, (int)urgency, director.Tension, director.Phase,
 				target, requestsDefence,
 				requestsDefence ? OwnBaseCenter(player.World, ownLiveBuildings) : WPos.Zero,
@@ -1492,7 +1515,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				expansionClaim.HasValue ? player.World.Map.CenterOfCell(expansionClaim.Value) : WPos.Zero,
 				armyCentroid: armyCentroid, expansionAssist: expansionAssist, spawnPoint: spawnPoint,
 				captureClaims: captureClaims, participantId: player.InternalName,
-				defenceEpisode: defenceClaimEpisodes.Observe(requestsDefence));
+				defenceEpisode: defenceClaimEpisodes.Observe(requestsDefence), attackIntent: attackIntent);
 			// ExpansionAssistTarget has no owner-produced admission episode API. Its
 			// metadata remains UNKNOWN; a snapshot/location cannot manufacture one.
 
@@ -1713,10 +1736,112 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			DeathsCostWindow = lossSamples.Sum(s => s.Delta);
 			KillsCostWindow = killSamples.Sum(s => s.Delta);
-			var emergency = IsLossEmergency(DeathsCostWindow, KillsCostWindow, emergencyOwnArmy,
-				currentUrgency == BotUrgency.Emergency, productionLossTicks.Count > 0, Info);
-			currentUrgency = emergency ? BotUrgency.Emergency : BotUrgency.Normal;
+			if (stalemate == null)
+			{
+				var emergency = IsLossEmergency(DeathsCostWindow, KillsCostWindow, emergencyOwnArmy,
+					currentUrgency == BotUrgency.Emergency, productionLossTicks.Count > 0, Info);
+				currentUrgency = emergency ? BotUrgency.Emergency : BotUrgency.Normal;
+				return;
+			}
+
+			// BOTPASSIVE F4 Emergency' (switch ON). The legacy state runs in parallel for urgency_legacy only.
+			stalemate.LegacyEmergency = IsLossEmergency(DeathsCostWindow, KillsCostWindow, emergencyOwnArmy,
+				stalemate.LegacyEmergency, productionLossTicks.Count > 0, Info);
+			var lossBranch = IsLossEmergency(DeathsCostWindow, KillsCostWindow, emergencyOwnArmy,
+				currentUrgency == BotUrgency.Emergency, false, Info);
+			var live = new Dictionary<uint, (int X, int Y, bool Cy)>();
+			foreach (var a in LiveProductionAndCy())
+				live[a.ActorID] = (a.Location.X, a.Location.Y, a.Info.HasTraitInfo<BaseBuildingInfo>());
+			var homeLoss = stalemate.StepHomeProductionLoss(tick, live,
+				(player.HomeLocation.X, player.HomeLocation.Y), Info.LossWindowTicks, delta > 0);
+			currentUrgency = MasterAiEval.StalemateEmergency(homeLoss, lossBranch, stalemate.HomeThreat, stalemate.HomeLatch.Active)
+				? BotUrgency.Emergency : BotUrgency.Normal;
+
+			IEnumerable<Actor> LiveProductionAndCy() =>
+				player.World.ActorsHavingTrait<Production>()
+					.Where(a => a.Info.HasTraitInfo<ProductionInfo>())
+					.Concat(player.World.ActorsHavingTrait<BaseBuilding>())
+					.Where(a => a.IsInWorld && !a.IsDead && a.Owner == player && HasSpace(a) && a.Info.HasTraitInfo<BuildingInfo>());
 		}
+
+		// BOTPASSIVE F3/F4 Urgency' at a snapshot (switch ON). HomeThreat = a combat unit seen this snapshot within its
+		// radius (20 cells, or its weapon range + 2) of an anchor (own CYs and production, else the start cell).
+		// The latch observes it on the 150-tick snapshot grid. Mutual live allies join the army ratio (design _07 L2).
+		BotUrgency StalemateUrgency(int tick, OpenRA.Player[] enemies, Dictionary<OpenRA.Player, Actor[]> actorsByOwner,
+			Actor[] ownBuildings, bool fogged, Dictionary<OpenRA.Player, EnemyProfile> profiles, int enemyArmy, int ownArmy)
+		{
+			var anchors = StalemateUrgencyState.Anchors(ownBuildings
+				.Where(b => HasSpace(b) && (b.Info.HasTraitInfo<ProductionInfo>() || b.Info.HasTraitInfo<BaseBuildingInfo>()))
+				.OrderBy(b => b.ActorID).Select(b => (b.Location.X, b.Location.Y)),
+				(player.HomeLocation.X, player.HomeLocation.Y));
+			var homeThreat = false;
+			foreach (var enemy in enemies)
+			{
+				if (fogged)
+					homeThreat = fogMemory.Remembered(enemy).Any(seen => seen.Combat && seen.LastSeenTick == tick
+						&& MasterAiEval.WithinAnyAnchor(seen.Location.X, seen.Location.Y, anchors, stalemate.RadiusFor(seen.Info)));
+				else if (actorsByOwner.TryGetValue(enemy, out var list))
+					homeThreat = list.Any(a => HasSpace(a) && IsCombatUnit(a)
+						&& MasterAiEval.WithinAnyAnchor(a.Location.X, a.Location.Y, anchors, stalemate.RadiusFor(a.Info)));
+				if (homeThreat)
+					break;
+			}
+
+			stalemate.HomeThreat = homeThreat;
+			stalemate.HomeLatch.Observe(tick, true, homeThreat);
+
+			// DEFENCE-DETACH: the value behind HomeThreat (every enemy combat unit within its radius of an anchor), and the own armed static defences near the anchors.
+			long threatValue = 0;
+			foreach (var enemy in enemies)
+			{
+				if (fogged)
+				{
+					foreach (var seen in fogMemory.Remembered(enemy))
+						if (seen.Combat && seen.LastSeenTick == tick
+							&& MasterAiEval.WithinAnyAnchor(seen.Location.X, seen.Location.Y, anchors, stalemate.RadiusFor(seen.Info)))
+							threatValue += seen.Info?.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+				}
+				else if (actorsByOwner.TryGetValue(enemy, out var seenList))
+				{
+					foreach (var a in seenList)
+						if (HasSpace(a) && IsCombatUnit(a) && MasterAiEval.WithinAnyAnchor(a.Location.X, a.Location.Y, anchors, stalemate.RadiusFor(a.Info)))
+							threatValue += Value(a);
+				}
+			}
+
+			stalemate.HomeThreatValue = threatValue;
+			stalemate.HomeDefenceValue = ownBuildings.Where(b => HasSpace(b) && b.Info.HasTraitInfo<AttackBaseInfo>() && !b.Info.HasTraitInfo<LineBuildInfo>()
+				&& MasterAiEval.WithinAnyAnchor(b.Location.X, b.Location.Y, anchors, StalemateUrgencyState.HomeRadiusCells)).Sum(b => (long)Value(b));
+
+			long allied = 0;
+			foreach (var ally in player.World.Players)
+				if (ally != player && IsEligible(ally) && ally.WinState == WinState.Undefined
+					&& player.RelationshipWith(ally) == PlayerRelationship.Ally
+					&& ally.RelationshipWith(player) == PlayerRelationship.Ally
+					&& actorsByOwner.TryGetValue(ally, out var allyActors))
+					allied += allyActors.Where(IsCombatUnit).Sum(a => (long)Value(a));
+
+			stalemate.OwnArmy = ownArmy;
+			stalemate.AlliedArmy = allied;
+			stalemate.EnemyArmy = enemyArmy;
+			stalemate.LegacyUrgency = MasterAiEval.ClassifyUrgency(
+				stalemate.LegacyEmergency ? BotUrgency.Emergency : BotUrgency.Normal,
+				profiles.Values.Any(p => p.PressureValue > 0), enemyArmy, ownArmy, Info.PressuredArmyRatio);
+			return MasterAiEval.ClassifyUrgencyStalemate(currentUrgency, homeThreat, stalemate.HomeLatch.Active,
+				MasterAiEval.TeamRatioPressure(ownArmy, allied, enemyArmy, Info.PressuredArmyRatio));
+		}
+
+		bool IBotStalemateUrgencyProvider.StalemateUrgencyEnabled => stalemate != null && !IsTraitDisabled;
+		int IBotStalemateUrgencyProvider.StalemateUrgency => stalemate == null ? 0 : (int)currentUrgency;
+		int IBotStalemateUrgencyProvider.StalemateUrgencyLegacy => stalemate == null ? 0 : (int)stalemate.LegacyUrgency;
+		bool IBotStalemateUrgencyProvider.StalemateHomeEmergency => stalemate != null && currentUrgency == BotUrgency.Emergency;
+		bool IBotStalemateUrgencyProvider.StalemateHomeThreat => stalemate != null && stalemate.HomeThreat;
+		bool IBotStalemateUrgencyProvider.StalemateHomeLatch => stalemate != null && stalemate.HomeLatch.Active;
+		long IBotStalemateUrgencyProvider.StalemateHomeThreatValue => stalemate?.HomeThreatValue ?? 0;
+		long IBotStalemateUrgencyProvider.StalemateHomeDefenceValue => stalemate?.HomeDefenceValue ?? 0;
+		long IBotStalemateUrgencyProvider.StalemateOwnArmy => stalemate?.OwnArmy ?? 0;
+		long IBotStalemateUrgencyProvider.StalemateAlliedArmy => stalemate?.AlliedArmy ?? 0;
+		long IBotStalemateUrgencyProvider.StalemateEnemyArmy => stalemate?.EnemyArmy ?? 0;
 
 		internal static List<BotMission> DeriveMissions(
 			RegionMemory regions,
@@ -2401,7 +2526,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				KillSamples = killSamples.ToArray(),
 				ProductionLossTicks = productionLossTicks.ToArray(),
 				ProductionBuildings = productionBuildings.OrderBy(id => id).ToArray()
-			});
+			}, stalemate);
 		}
 
 		void IGameSaveTraitData.ResolveTraitData(Actor self, MiniYaml data)
@@ -2445,9 +2570,23 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			productionBuildings.Clear();
 			foreach (var id in state.ProductionBuildings)
 				productionBuildings.Add(id);
+
+			if (stalemate != null)
+				stalemate.CopyFrom(StalemateUrgencyState.Load(data.Nodes.FirstOrDefault(n => n.Key == StalemateNodeKey)?.Value));
 		}
 
-		internal static List<MiniYamlNode> SerializeState(MasterAiBotSavedState state)
+		const string StalemateNodeKey = "StalemateUrgency";
+
+		/// <summary>The legacy node list, plus one StalemateUrgency node only when the switch-ON state exists.</summary>
+		internal static List<MiniYamlNode> SerializeState(MasterAiBotSavedState state, StalemateUrgencyState stalemate = null)
+		{
+			var nodes = SerializeLegacyState(state);
+			if (stalemate != null)
+				nodes.Add(new MiniYamlNode(StalemateNodeKey, "", stalemate.Save()));
+			return nodes;
+		}
+
+		static List<MiniYamlNode> SerializeLegacyState(MasterAiBotSavedState state)
 		{
 			return new List<MiniYamlNode>
 			{
@@ -2665,6 +2804,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		static bool IsBuilding(Actor a) => a.Info.HasTraitInfo<BuildingInfo>();
+
+		// IMPL01-HOTFIX01: Actor.Location/CenterPosition dereference OccupiesSpace, which is null for actors without an
+		// IOccupySpace trait (the Player actor carries Production). Switch-ON reads skip such actors.
+		internal static bool HasSpace(Actor a) => a != null && a.OccupiesSpace != null;
 		bool IsDefence(Actor a) => IsBuilding(a) && (a.Info.HasTraitInfo<AttackBaseInfo>() ||
 			a.GetEnabledTargetTypes().Overlaps(Info.DefenceTargetTypes));
 		List<BotThreatTracker.Group> previousThreatGroups = new();
@@ -2673,7 +2816,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		IReadOnlyList<BotPredictedThreat> IBotThreatPredictionProvider.PredictedThreats => predictedThreats;
 
 		bool IBotThreatPredictionProvider.PerceivedBaseThreat =>
-			Situation != null && (Situation.Urgency != BotUrgency.Normal || Situation.Enemies.Values.Any(e => e.PressureValue > 0));
+			Situation != null && (Situation.Urgency != BotUrgency.Normal || (stalemate == null
+				? Situation.Enemies.Values.Any(e => e.PressureValue > 0)
+				: stalemate.HomeThreat || stalemate.HomeLatch.Active));
 
 		// DF step 1: enemy combat units SEEN this snapshot (fogged: remembered entries refreshed at this tick),
 		// grouped, tracked against the previous snapshot, and extrapolated to the own building they head for.

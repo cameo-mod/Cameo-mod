@@ -4134,8 +4134,11 @@
 		VoiceSet: DinoVoice
 
 ^BotProductionBehavior:
-	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): Hard is the fair 100% tier; time 140 -> 50 in
-	# steps of 10, cost 120 -> 75 in steps of 5. Guarded by tools/audit/audit_ai_personalities.py (difficulty_scale_failures).
+	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): Hard is the fair 100% tier; time 150 -> 50 in
+	# steps of 10, cost 125 -> 75 in steps of 5. Guarded by tools/audit/audit_ai_personalities.py (difficulty_scale_failures).
+	ProductionTimeMultiplier@noobbotplayer:
+		Multiplier: 150
+		Prerequisites: noobbotplayer
 	ProductionTimeMultiplier@easiestbotplayer:
 		Multiplier: 140
 		Prerequisites: easiestbotplayer
@@ -4166,6 +4169,9 @@
 	ProductionTimeMultiplier@cameogodbotplayer:
 		Multiplier: 50
 		Prerequisites: cameogodbotplayer
+	ProductionCostMultiplier@noobbotplayer:
+		Multiplier: 125
+		Prerequisites: noobbotplayer
 	ProductionCostMultiplier@easiestbotplayer:
 		Multiplier: 120
 		Prerequisites: easiestbotplayer

@@ -24,6 +24,11 @@ namespace OpenRA.Mods.CA.Traits
 
 		public readonly int HarvesterLimit = 8;
 
+		[Desc("HVCAP-01: cap on the summed ValuedInfo cost of the owner's live harvesters. 0 = off.",
+			"A new harvester is refused when live cost + its cost would exceed this. The gate runs after the",
+			"ScaleTargets harvester target, so a provider cannot raise the cap around it.")]
+		public readonly int HarvesterValueLimit = 0;
+
 		public readonly int UnitDelayModifier = 100;
 		public readonly int UnitIntervalModifier = 100;
 

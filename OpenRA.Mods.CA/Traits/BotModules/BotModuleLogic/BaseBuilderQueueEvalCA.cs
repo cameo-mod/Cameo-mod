@@ -743,16 +743,69 @@ namespace OpenRA.Mods.CA.Traits
 			return replacementYard ? ExpansionTransformTransition.Deploy : ExpansionTransformTransition.Relocate;
 		}
 
-		/// <summary>Plug install proof (VP re-review of ae259554d): !AcceptsPlug alone is NOT
-		/// proof — on pin 0a3f77dbe AcceptsPlug returns false for three different reasons:
-		/// the slot doesn't define the type, a dynamic Requirement currently fails, or —
-		/// requirement-free types only — the slot's active plug is non-null. Only the last
-		/// is install evidence (EnablePlug is the sole writer of active), so proof requires
-		/// slotDefinesType && !requirementKeyed && !acceptsNow. Requirement-keyed slots
-		/// report availability, never install state — and the engine exposes no public
-		/// active-state API — so those requests honestly stay UNKNOWN and expire Removed.</summary>
-		public static bool PlugInstallProven(bool slotDefinesType, bool requirementKeyed, bool acceptsNow)
-			=> slotDefinesType && !requirementKeyed && !acceptsNow;
+		/// <summary>Plug install proof (VP re-review of ae259554d, S2 successor F1): !AcceptsPlug alone is
+		/// NOT proof — on pin 0a3f77dbe AcceptsPlug returns false for three different reasons: the slot
+		/// doesn't define the type, a dynamic Requirement currently fails, or — requirement-free types
+		/// only — the slot's active plug is non-null. For a requirement-free slot the refusal IS the
+		/// install (EnablePlug is the sole writer of active): slotDefinesType && !acceptsNow. A
+		/// requirement-keyed slot reports availability, never install state (the engine exposes no
+		/// public active-state reader), so the refusal only counts when the SAME host accepted the type
+		/// when the order was chosen (<paramref name="acceptedAtOrder"/>, captured at order time): the
+		/// order was legal and the host then refuses within the bounded proof window, and the install is
+		/// the transition that makes the requirement false (S2 ioncannonuplink: !ionc is granted by the
+		/// plug itself). A host that was not accepting at order time proves nothing. Whether the plug's
+		/// host is still live and owned is decided by <see cref="PlugHostEligible"/>.</summary>
+		public static bool PlugInstallProven(bool slotDefinesType, bool requirementKeyed, bool acceptsNow, bool acceptedAtOrder)
+			=> slotDefinesType && (requirementKeyed ? acceptedAtOrder && !acceptsNow : !acceptsNow);
+
+		/// <summary>S2 F1: the plug proof is evaluated on the host captured at order time and only while
+		/// that host is present, live and owned by the player — a dead, disowned or missing host stays
+		/// UNKNOWN (its Pluggable state says nothing about an install on a building we no longer hold).</summary>
+		public static bool PlugHostEligible(bool hostFound, bool hostLive, bool hostOwned)
+			=> hostFound && hostLive && hostOwned;
+
+		/// <summary>S2 F2: how long a stale watch's item that is really gone (not in the queue) while its
+		/// producer still reads live and owned is held before it resolves as an honest UNKNOWN. Sell and
+		/// transform clear the queue while the actor is still alive and disable the queue; the actor
+		/// is disposed only when the animation ends, which turns the removal into a proven Destruction.
+		/// Bounded and deterministic: world ticks, no RNG, no orders. N3 (Opus 0AE14EB2): 600, not 150 — the
+		/// longest measured sell or transform animation is 75 ticks, but 53 shipped make sequences whose
+		/// frame count comes from the sprite file (Length *) at 100 ms or more per frame could not be
+		/// measured statically (td_nod_templeprime: 256 ms, over 150 ticks above 23 frames); 600 tolerates
+		/// 93 frames at 256 ms and 60 at 400 ms. An item still held when the game ends emits nothing and
+		/// latches nothing; a seat that is eliminated resolves it at once as Elimination.</summary>
+		public const int StaleResolveGraceTicks = 600;
+
+		/// <summary>S2 F2: the per-item verdict of one stale-watch sweep (queue left FindQueues).
+		/// Resolve = emit the Removed now (a proven cause class exists, or the grace window expired);
+		/// Keep = the item is still in the queue, so the queue is merely unobserved — emit nothing
+		/// and keep the watch entry; Hold = really gone but inside the grace window.
+		/// Elimination, a dead/disposed producer and a captured (not owned) producer resolve at once as
+		/// before — those causes are provable at this tick.</summary>
+		public static BotStaleItemDecision StaleItemDecision(
+			bool stillQueued, bool playerEliminated, bool producerLive, bool producerOwned, int firstGoneTick, int now)
+		{
+			if (playerEliminated || !producerLive || !producerOwned)
+				return BotStaleItemDecision.Resolve;
+			if (stillQueued)
+				return BotStaleItemDecision.Keep;
+			return now - firstGoneTick >= StaleResolveGraceTicks ? BotStaleItemDecision.Resolve : BotStaleItemDecision.Hold;
+		}
+
+		/// <summary>S2 F3: AiEconomy config lists BuildingAddons in BOTH BuildingQueues and DefenseQueues,
+		/// so two managers sweep one queue and each would observe and emit every item. The observation
+		/// state of a category is owned by the first manager created for it: this returns that manager's
+		/// slot among <paramref name="earlierSlotCategories"/> (the categories of the slots created so
+		/// far, in creation order), or -1 when the new manager is the first of its category and owns it.
+		/// Observation only — every manager still ticks and decides exactly as before.</summary>
+		public static int ObservationOwnerSlot(IReadOnlyList<string> earlierSlotCategories, string category)
+		{
+			for (var i = 0; i < earlierSlotCategories.Count; i++)
+				if (earlierSlotCategories[i] == category)
+					return i;
+
+			return -1;
+		}
 
 		/// <summary>PLACEMENT-PROOF-LOCATION-FIX (01a131ba): the occupied-cell proof —
 		/// an own, live, name-matching actor occupies the ordered site cell itself. The
@@ -776,19 +829,23 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>QUEUE-REMOVAL-DISCRIMINATOR (01a13686): the removal-cause ladder for an
 		/// item that left its queue — every rung is event-local state resolved at the emit
 		/// tick, never intent or correlation. Elimination trumps all (the seat ended); a
-		/// dead or disposed producer clears its queue on every lifecycle path (kill, sell,
-		/// demolish, transform — INotifyKilled/Selling/BeforeTransform all ClearQueue); a
-		/// live producer owned by someone else was captured (OnOwnerChanged → ClearQueue
+		/// dead or disposed producer is proven destroyed (kill: Health.IsDead is true before
+		/// Killed, so only a kill or a disposal gives !producerLive). Sell and transform
+		/// (INotifySold.Selling / INotifyTransform.BeforeTransform) ALSO ClearQueue and disable the
+		/// queue, but the actor still reads live until its animation ends — S2 successor F2 holds
+		/// those removals for a bounded grace window so the disposal can resolve them as Destruction;
+		/// a live producer owned by someone else was captured (OnOwnerChanged → ClearQueue
 		/// is unconditional). DISCRIMINATOR-REPAIR (01a13908, Sol adjudication
 		/// 2026-10-14): the buildable-absence rung emits Unbuildable as a DIAGNOSTIC
 		/// predicate only — CancelUnbuildableItems is cached-set gated and prefers
 		/// migration, so observed absence is not a receipt that the engine evicted this
 		/// item (an uninstrumented removal plus prerequisite loss before the next probe
-		/// reads identically). Evidence classifies Unbuildable UNKNOWN like None;
+		/// reads identically). Evidence classifies a bare Unbuildable UNKNOWN like None (only a receipt-backed EvictedUnbuildable, E6, is admitted);
 		/// queueSeen still gates the probe because a stale watch on a live, owned queue
 		/// is not even diagnostic buildability evidence.</summary>
 		public static BotQueueCancellationClass RemovalCauseClass(
-			bool playerEliminated, bool producerLive, bool producerOwned, bool queueSeen, bool itemBuildable)
+			bool playerEliminated, bool producerLive, bool producerOwned, bool queueSeen, bool itemBuildable,
+			bool unbuildableEvicted = false)
 		{
 			if (playerEliminated)
 				return BotQueueCancellationClass.Elimination;
@@ -796,6 +853,11 @@ namespace OpenRA.Mods.CA.Traits
 				return BotQueueCancellationClass.Destruction;
 			if (!producerOwned)
 				return BotQueueCancellationClass.Captured;
+			// E6 (RC01-OUTER01): the engine's receipt proves CancelUnbuildableItems evicted this exact
+			// item. It outranks the diagnostic Unbuildable predicate, and the stale-watch gate does not
+			// revoke it. A receiptless queueSeen && !buildable still returns Unbuildable.
+			if (unbuildableEvicted)
+				return BotQueueCancellationClass.EvictedUnbuildable;
 			if (queueSeen && !itemBuildable)
 				return BotQueueCancellationClass.Unbuildable;
 			return BotQueueCancellationClass.None;
@@ -1046,7 +1108,13 @@ namespace OpenRA.Mods.CA.Traits
 		/// evidence-admitted — the engine's eviction is cached-set gated and prefers
 		/// migration, so absence is not a receipt the routine ran. Serialized on the
 		/// raw row for diagnosis; the capture latches UNKNOWN like None.</summary>
-		Unbuildable
+		Unbuildable,
+
+		/// <summary>RC01-OUTER01 (E5): the item left a live, owned queue and the engine's
+		/// CancelUnbuildableItems eviction receipt is bound to that exact ProductionItem and this
+		/// episode (E1). The only admitted proof of an unbuildable eviction. Evidence admits it on the
+		/// Removed path alone and never as a cancellation class. Appended last: no value is renumbered.</summary>
+		EvictedUnbuildable
 	}
 
 	public readonly struct BotQueueTransition
@@ -1157,6 +1225,20 @@ namespace OpenRA.Mods.CA.Traits
 		KeepAwaitingProof
 	}
 
+	/// <summary>S2 F2: the verdict for one item of a stale watch (its queue left FindQueues) —
+	/// see <see cref="BaseBuilderQueueEvalCA.StaleItemDecision"/>.</summary>
+	public enum BotStaleItemDecision
+	{
+		/// <summary>Emit the removal now: a proven cause class exists, or the grace window expired.</summary>
+		Resolve,
+
+		/// <summary>The item is still in the queue: unobserved, not emptied — emit nothing, keep watching.</summary>
+		Keep,
+
+		/// <summary>Really gone with a live, owned producer — held for the bounded grace window.</summary>
+		Hold
+	}
+
 	/// <summary>A terminal request in flight — resolves to a record on the tick the item
 	/// actually leaves the queue. Item is null when only the name is known (module-side
 	/// demand cancels); such an entry resolves against the next removed same-name item.
@@ -1190,6 +1272,15 @@ namespace OpenRA.Mods.CA.Traits
 		/// occupied (AcceptsPlug false) is the proof — plugs create no actor.</summary>
 		public string PlugType;
 
+		/// <summary>S2 F1: the Pluggable host actor the order chose (0 = none captured). The install proof
+		/// is evaluated on this host only, and only while it is live and owned.</summary>
+		public uint PlugHostId;
+
+		/// <summary>S2 F1: the chosen host's AcceptsPlug(PlugType) at order time (true by construction,
+		/// the candidate list filters on it). A requirement-keyed refusal proves the install only when
+		/// the host accepted at order time.</summary>
+		public bool PlugAcceptedAtOrder;
+
 		/// <summary>Bound at issue for cancel requests on an Infinite item — the flag flip to
 		/// false on the still-queued item is CancelProductionInner's unique signature.</summary>
 		public bool WasInfinite;
@@ -1197,6 +1288,19 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>The bound item left the queue without proof; the request stays armed only
 		/// for the bounded proof window (IssuedTick restarts at the removal tick).</summary>
 		public bool AwaitingProof;
+
+		/// <summary>RC01-OUTER01 (E1/E7): the engine eviction receipt result, bound and consumed once at
+		/// the FIRST removal detection. The engine receipt expires 64 ticks after the eviction, and a
+		/// Placed request can await proof longer, so the emit path reads this stored value and never
+		/// queries the engine. A name-only request cannot bind a receipt (the engine keys by reference).</summary>
+		public bool UnbuildableEvicted;
+
+		/// <summary>S2 F1 world-free seam: the plug install proof for this request, from the facts the
+		/// caller reads off the captured host's slot. False for a non-plug request and for an
+		/// ineligible (dead, disowned or missing) host.</summary>
+		public bool PlugProven(bool hostEligible, bool slotDefinesType, bool requirementKeyed, bool acceptsNow)
+			=> PlugType != null && hostEligible
+				&& BaseBuilderQueueEvalCA.PlugInstallProven(slotDefinesType, requirementKeyed, acceptsNow, PlugAcceptedAtOrder);
 
 		/// <summary>World-free seam: the request is stale when its item is still queued
 		/// <see cref="MaxInFlightTicks"/> after issue.</summary>
@@ -1261,5 +1365,39 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly HashSet<object> Items = [];
 		public readonly List<BotQueuePendingTerminal> Pending = [];
 		public int SeenTick = -1;
+
+		/// <summary>S2 F2: the tick each item was first seen really gone while the watch was stale.
+		/// Bounded by the item count; cleared when the queue is observed again.</summary>
+		public readonly Dictionary<object, int> GoneSince = [];
+
+		/// <summary>S2 F2: one stale sweep over the watched items (the queue left FindQueues). Records
+		/// first-gone ticks for held items, forgets items that are still queued, and returns the items
+		/// to resolve now (null = none). The caller resolves them and removes them from Items.</summary>
+		public List<object> StaleSweep(Func<object, bool> stillQueued, bool playerEliminated,
+			bool producerLive, bool producerOwned, int now)
+		{
+			List<object> resolve = null;
+			foreach (var item in Items)
+			{
+				if (!GoneSince.TryGetValue(item, out var firstGone))
+					firstGone = now;
+
+				switch (BaseBuilderQueueEvalCA.StaleItemDecision(
+					stillQueued(item), playerEliminated, producerLive, producerOwned, firstGone, now))
+				{
+					case BotStaleItemDecision.Keep:
+						GoneSince.Remove(item);
+						break;
+					case BotStaleItemDecision.Hold:
+						GoneSince[item] = firstGone;
+						break;
+					default:
+						(resolve ??= []).Add(item);
+						break;
+				}
+			}
+
+			return resolve;
+		}
 	}
 }

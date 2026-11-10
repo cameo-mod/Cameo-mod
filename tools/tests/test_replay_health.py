@@ -293,6 +293,81 @@ class HealthTests(unittest.TestCase):
                           legacy["metrics"]["first_refinery_placement_tick"])
         self.assertNotIn("MISSING_SITUATIONS", [f["code"] for f in seated["findings"]])
 
+    def test_seat_privacy_schema_malformed_missing_duplicate_and_conflicts_fail_closed(self):
+        def seated_inputs():
+            situations = []
+            for tick in (3000, 3750, 4500):
+                row = snapshot(tick, 1, 1, bank=30000)
+                row["seat"] = row.pop("player")
+                situations.append(row)
+            placed = placement(player="hard")
+            placed["seat"] = placed.pop("player")
+            final = terminal()
+            final["schema"] = 3
+            final["record_id"] = "g|hard"
+            final["player"] = {"seat": final["player"].pop("name"), **final["player"]}
+            return situations, [placed], [final]
+
+        # With all selected identities missing or malformed, the raw checker
+        # preserves UNKNOWN/MISSING_SITUATIONS rather than inferring a seat.
+        for malformed in (False, True):
+            situations, placements, matches = seated_inputs()
+            for row in situations:
+                row.pop("seat")
+                if malformed:
+                    row["player"] = 17
+                else:
+                    row.pop("player", None)
+            report = health.analyze(situations, placements, matches, "g", "hard")
+            self.assertEqual(report["status"], "UNKNOWN")
+            self.assertIn("MISSING_SITUATIONS", [item["code"] for item in report["findings"]])
+
+        situations, placements, matches = seated_inputs()
+        situations.append(dict(situations[-1]))
+        with self.assertRaisesRegex(health.EvidenceError, "duplicate or non-monotonic"):
+            health.analyze(situations, placements, matches, "g", "hard")
+
+        situations, placements, matches = seated_inputs()
+        situations[0]["player"] = "other-seat"
+        with self.assertRaisesRegex(health.EvidenceError, "conflicting situation"):
+            health.analyze(situations, placements, matches, "g", "hard")
+
+        situations, placements, matches = seated_inputs()
+        placements[0]["player"] = "other-seat"
+        with self.assertRaisesRegex(health.EvidenceError, "conflicting placement"):
+            health.analyze(situations, placements, matches, "g", "hard")
+
+        situations, placements, matches = seated_inputs()
+        matches[0]["player"]["name"] = "other-seat"
+        with self.assertRaisesRegex(health.EvidenceError, "conflicting terminal"):
+            health.analyze(situations, placements, matches, "g", "hard")
+
+    def test_row_line_bound_is_8_mib_and_a_5_mib_row_parses(self):
+        # RH-BOUND-01: 8-seat matches rows reach 1.6 MiB at 43k ticks (cap 60k); the old 1 MiB bound refused every such game.
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "cameo-ai-matches.jsonl"
+            line = json.dumps({"schema": 3, "pad": "x" * (5 * 1024 * 1024)}) + "\n"
+            self.assertGreater(len(line), 5 * 1024 * 1024)
+            path.write_text(line, encoding="ascii")
+            rows, receipt = health.read_jsonl(path)
+            self.assertEqual(len(rows), 1)
+            self.assertEqual(receipt["rows"], 1)
+
+    def test_over_8_mib_row_is_structured_unknown_through_main(self):
+        with tempfile.TemporaryDirectory() as temp:
+            support = Path(temp)
+            (support / "Logs").mkdir()
+            over = json.dumps({"schema": 3, "pad": "x" * (8 * 1024 * 1024)}) + "\n"
+            (support / "Logs" / "cameo-ai-matches.jsonl").write_text(over, encoding="ascii")
+            with self.assertRaisesRegex(health.EvidenceError, "input bound"):
+                health.read_jsonl(support / "Logs" / "cameo-ai-matches.jsonl")
+            with patch("sys.argv", ["replay_health", str(support), "--game-uid", "g", "--player", "seat_3"]):
+                with contextlib.redirect_stdout(io.StringIO()) as output:
+                    self.assertEqual(health.main(), 21)
+            report = json.loads(output.getvalue())
+            self.assertEqual(report["status"], "UNKNOWN")
+            self.assertIn("input bound", report["error"])
+
 
 class PlayerEventVersionTests(unittest.TestCase):
     """CB_frontier_observe (P3a): cameo-player-event rows dispatch on the row's own

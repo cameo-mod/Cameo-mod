@@ -108,12 +108,15 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly BotClaimEpisode DefenceEpisode;
 		public readonly BotClaimEpisode ExpansionAssistEpisode;
 
+		/// <summary>IMPL02-AGG-TEAM (A4): the publisher's live ground attack (target, rendezvous, ETA); null when none or the flag is off.</summary>
+		public readonly TeamAttackIntent AttackIntent;
+
 		public TeamBroadcast(int snapshotTick, int ownArmyValue, int urgencyLevel, int directorTension,
 			DirectorPhase directorPhase, Player mainTarget, bool requestsDefence, WPos defendPosition,
 			int clientIndex = 0, WPos expansionClaim = default, WPos armyCentroid = default,
 			WPos expansionAssist = default, WPos spawnPoint = default, IReadOnlyList<WPos> captureClaims = null,
 			string participantId = null, BotClaimEpisode defenceEpisode = default,
-			BotClaimEpisode expansionAssistEpisode = default)
+			BotClaimEpisode expansionAssistEpisode = default, TeamAttackIntent attackIntent = null)
 		{
 			SnapshotTick = snapshotTick;
 			OwnArmyValue = ownArmyValue;
@@ -133,6 +136,7 @@ namespace OpenRA.Mods.CA.Traits
 			DefenceEpisode = requestsDefence && defenceEpisode.BelongsTo(participantId) ? defenceEpisode : default;
 			ExpansionAssistEpisode = expansionAssist != WPos.Zero && expansionAssistEpisode.BelongsTo(participantId)
 				? expansionAssistEpisode : default;
+			AttackIntent = attackIntent;
 		}
 
 		/// <summary>What an absent, disabled or never-snapshotted provider publishes.</summary>

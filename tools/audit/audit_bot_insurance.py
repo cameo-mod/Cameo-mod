@@ -64,7 +64,7 @@ INSURANCE_RE = re.compile(r"\b\w+botinsurance\b")
 # whose exposure purpose an income drip would blunt, and `fransbot` is the module donor.
 UNINSURED_BOT_TYPES = {"campaign", "classic", "exploit_expansion",
                        "exploit_guerrilla", "exploit_rush", "exploit_steamroller",
-                       "exploit_tech", "exploit_turtle", "fransbot"}
+                       "exploit_tech", "exploit_turtle", "fransbot", "noob"}  # noob: NOOB-TIER-01 ruling, insurance 0x
 
 CS_TRAIT = pathlib.Path("OpenRA.Mods.Cameo/Traits/DynamicBotInsurance.cs")
 TOKEN_RE = re.compile(r"[A-Za-z_][A-Za-z0-9_.-]*|\(|\)|&&|\|\||!")

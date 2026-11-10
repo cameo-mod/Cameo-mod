@@ -24,7 +24,7 @@ UID = "uid-sentinel-1"
 def pulse(seq, tick, *, seat, cash=2000, resources=0, capacity=5000,
           uid=UID, faction="td_nod", bot="classic", active=True, seat_state="active"):
     return {"schema": 2, "seq": seq, "tick": tick, "map_uid": "m1", "faction": faction,
-            "profile": "p", "profile_supported": True, "dropped": 0,
+            "profile": bot, "profile_supported": True, "dropped": 0,
             "player": seat, "game_uid": uid, "bot_type": bot, "kind": "pulse",
             "player_active": active, "seat_state": seat_state,
             "queues": [], "queues_complete": True,
@@ -34,7 +34,7 @@ def pulse(seq, tick, *, seat, cash=2000, resources=0, capacity=5000,
 
 def end(seq, tick, *, seat, uid=UID, faction="td_nod", bot="classic", state="lost"):
     return {"schema": 2, "seq": seq, "tick": tick, "map_uid": "m1", "faction": faction,
-            "profile": "p", "profile_supported": True, "dropped": 0,
+            "profile": bot, "profile_supported": True, "dropped": 0,
             "player": seat, "game_uid": uid, "bot_type": bot, "kind": "end",
             "complete": True, "seat_state": state}
 
@@ -107,6 +107,81 @@ class CollectorTests(unittest.TestCase):
             leaf, [mrec("seat_0"), mrec("seat_1", faction="td_gdi", bot="hard", home="2,2")],
             PLANNED)
         self.assertEqual(legacy_status, "BLOCK")
+
+
+    def test_coverage_joins_map_names_to_seat_records(self):
+        roster = [("BotA", "td_gdi", "hard", "1,1"),
+                  ("BotB", "td_nod", "classic", "2,2")]
+        records = [mrec("seat_0", faction="td_gdi", bot="hard", home="1,1"),
+                   mrec("seat_1", faction="td_nod", bot="classic", home="2,2")]
+        seen = []
+
+        def inspect(_support, uid, player, live=False):
+            seen.append((uid, player, live))
+            return {"policy": "test-policy", "game_uid": uid, "player": player,
+                    "status": "OBSERVED_HEALTHY", "findings": [], "error": None}
+
+        checker = mock.Mock(POLICY_VERSION="test-policy", inspect=inspect)
+        with tempfile.TemporaryDirectory() as td, mock.patch.dict(
+                sys.modules, {"replay_health": checker}):
+            status, reports, failures = batch.sentinel_coverage_collect(
+                pathlib.Path(td), records, roster)
+        self.assertEqual(status, "OBSERVED_HEALTHY")
+        self.assertEqual(failures, [])
+        # E1 policy D-A/D-B: inspect() takes the SEAT ID; the report maps back to the roster name.
+        self.assertEqual([item[1] for item in seen], ["seat_0", "seat_1"])
+        self.assertEqual([r["player"] for r in reports], ["BotA", "BotB"])
+        self.assertEqual([r["raw_report"]["policy"] for r in reports],
+                         ["test-policy", "test-policy"])
+
+    def test_wrong_checker_identity_becomes_unknown(self):
+        roster = [("BotA", "td_gdi", "hard", "1,1"),
+                  ("BotB", "td_nod", "classic", "2,2")]
+        records = [mrec("seat_0", faction="td_gdi", bot="hard", home="1,1"),
+                   mrec("seat_1", faction="td_nod", bot="classic", home="2,2")]
+        checker = mock.Mock(POLICY_VERSION="test-policy", inspect=lambda _s, uid, player, live=False:
+                            {"game_uid": uid, "player": "foreign-player", "status": "OBSERVED_HEALTHY",
+                             "findings": [], "error": None})
+        with tempfile.TemporaryDirectory() as td, mock.patch.dict(
+                sys.modules, {"replay_health": checker}):
+            status, reports, failures = batch.sentinel_coverage_collect(
+                pathlib.Path(td), records, roster)
+        self.assertEqual(status, "UNKNOWN")
+        self.assertEqual(len(reports), 2)
+        self.assertTrue(any("different game or seat" in failure for failure in failures))
+        self.assertTrue(all(r["raw_report"]["status"] == "UNKNOWN" for r in reports))
+
+    def test_wrong_checker_game_uid_becomes_unknown(self):
+        roster = [("BotA", "td_gdi", "hard", "1,1"),
+                  ("BotB", "td_nod", "classic", "2,2")]
+        records = [mrec("seat_0", faction="td_gdi", bot="hard", home="1,1"),
+                   mrec("seat_1", faction="td_nod", bot="classic", home="2,2")]
+        checker = mock.Mock(POLICY_VERSION="test-policy", inspect=lambda _s, _uid, player, live=False:
+                            {"game_uid": "foreign-game", "player": player,
+                             "status": "OBSERVED_HEALTHY", "findings": [], "error": None})
+        with tempfile.TemporaryDirectory() as td, mock.patch.dict(
+                sys.modules, {"replay_health": checker}):
+            status, reports, failures = batch.sentinel_coverage_collect(
+                pathlib.Path(td), records, roster)
+        self.assertEqual(status, "UNKNOWN")
+        self.assertTrue(any("different game or seat" in failure for failure in failures))
+        self.assertTrue(all(r["raw_report"]["status"] == "UNKNOWN" for r in reports))
+
+    def test_collector_exception_is_unknown_with_reason(self):
+        roster = [("BotA", "td_gdi", "hard", "1,1"),
+                  ("BotB", "td_nod", "classic", "2,2")]
+        records = [mrec("seat_0", faction="td_gdi", bot="hard", home="1,1"),
+                   mrec("seat_1", faction="td_nod", bot="classic", home="2,2")]
+        def explode(*_args, **_kwargs):
+            raise RuntimeError("synthetic checker fault")
+        checker = mock.Mock(POLICY_VERSION="test-policy", inspect=explode)
+        with tempfile.TemporaryDirectory() as td, mock.patch.dict(
+                sys.modules, {"replay_health": checker}):
+            status, reports, failures = batch.sentinel_coverage_collect(
+                pathlib.Path(td), records, roster)
+        self.assertEqual(status, "UNKNOWN")
+        self.assertTrue(all(r["raw_report"]["status"] == "UNKNOWN" for r in reports))
+        self.assertTrue(any("synthetic checker fault" in failure for failure in failures))
 
     def test_missing_file_is_unknown_not_block(self):
         leaf = pathlib.Path(tempfile.mkdtemp(prefix="sentinel_leaf_"))
@@ -252,6 +327,31 @@ class DispositionTests(unittest.TestCase):
     def test_hard_seat_block_alongside_exemptible_classic_blocks(self):
         seats = [self.seat("seat_0", "classic", "BLOCK", ["NEAR_EMPTY_FUNDS"]),
                  self.seat("seat_1", "hard", "BLOCK", ["FUNDS_BELOW_BAND"])]
+        self.assertEqual(self.policy("BLOCK", seats)["disposition"], "blocking")
+
+    # RC01 outer (Sonnet addendum EFEC711F): row-03 policy pair.
+    # Actual row-03 reports: BotA hard BLOCK carries error "incomplete building queue census" and DROPPED_TELEMETRY.
+    def test_row03_reports_with_error_and_dropped_telemetry_block(self):
+        seats = [self.seat("seat_0", "classic", "BLOCK", ["NEAR_EMPTY_FUNDS"]),
+                 self.seat("seat_1", "hard", "BLOCK",
+                           ["FUNDS_ABOVE_BAND", "NEAR_EMPTY_FUNDS", "FUNDS_BELOW_BAND",
+                            "READY_BUILDING_UNPLACED", "DROPPED_TELEMETRY"],
+                           error="incomplete building queue census")]
+        self.assertEqual(self.policy("BLOCK", seats)["disposition"], "blocking")
+
+    # Same row-03 reports minus the error and DROPPED_TELEMETRY (the receipt-backed outcome) must be recorded.
+    def test_row03_reports_sanitized_are_recorded(self):
+        seats = [self.seat("seat_0", "classic", "BLOCK", ["NEAR_EMPTY_FUNDS"]),
+                 self.seat("seat_1", "hard", "BLOCK",
+                           ["FUNDS_ABOVE_BAND", "NEAR_EMPTY_FUNDS", "FUNDS_BELOW_BAND",
+                            "READY_BUILDING_UNPLACED"])]
+        self.assertEqual(self.policy("BLOCK", seats)["disposition"], "ECONOMY_FINDINGS_RECORDED")
+
+    # Mutant: an unreceipted eviction keeps the error and DROPPED_TELEMETRY, so the episode must still BLOCK.
+    def test_unreceipted_eviction_mutant_still_blocks(self):
+        seats = [self.seat("seat_0", "classic", "BLOCK", ["NEAR_EMPTY_FUNDS"]),
+                 self.seat("seat_1", "hard", "BLOCK", ["DROPPED_TELEMETRY"],
+                           error="incomplete building queue census")]
         self.assertEqual(self.policy("BLOCK", seats)["disposition"], "blocking")
 
     def test_seat_analyzer_unknown_dominates_as_blocking(self):

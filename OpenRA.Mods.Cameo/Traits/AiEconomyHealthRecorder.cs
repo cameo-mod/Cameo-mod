@@ -44,6 +44,12 @@ namespace OpenRA.Mods.Cameo.Traits
 		bool finished;
 		readonly EconomyAcceptedTick accepted = new();
 
+		// SPEND-LEDGER-01 Step 1: record-only production attribution, one pass per Observe.
+		readonly AiEconomySpendLedger spend = new();
+		readonly List<ProductionItem> spendItems = new();
+		readonly List<ProductionItem> spendItemsPrevious = new();
+		long spentAtPulse;
+
 		// Own-queue canonical index, rebuilt at most once per world tick on the first proven
 		// cancellation: one enumeration of world production queues amortizes every cancel in
 		// that tick instead of scanning per event. A queue created mid-tick after the index was
@@ -66,6 +72,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			resolvedEpisodes = new HashSet<uint>();
 			groups = self.Info.TraitInfos<BaseBuilderBotModuleCAInfo>()
 				.SelectMany(i => i.BuildingQueues).ToHashSet(StringComparer.Ordinal);
+			spentAtPulse = self.TraitOrDefault<PlayerResources>()?.Spent ?? 0;
 			if (groups.Count == 0 || string.IsNullOrEmpty(uid))
 				state.MarkIncomplete();
 		}
@@ -76,14 +83,21 @@ namespace OpenRA.Mods.Cameo.Traits
 				return;
 			FlushAccepted(tick, terminal);
 			observations.Clear();
+			spendItems.Clear();
 			foreach (var pair in self.World.ActorsWithTrait<ProductionQueue>())
 			{
 				var queue = pair.Trait;
-				if (pair.Actor.Owner != self.Owner || !groups.Contains(queue.Info.Group))
+				if (pair.Actor.Owner != self.Owner)
+					continue;
+				// Every own production queue feeds the spend ledger (units, aircraft, research, buildings);
+				// only the health observations below are filtered by group.
+				spendItems.AddRange(queue.AllQueued());
+				if (!groups.Contains(queue.Info.Group))
 					continue;
 				if (observations.Count == AiEconomyHealthState.MaximumQueues)
 				{
 					state.MarkIncomplete();
+					spend.MarkIncomplete();
 					break;
 				}
 				var head = queue.CurrentItem();
@@ -94,6 +108,7 @@ namespace OpenRA.Mods.Cameo.Traits
 					!pair.Actor.IsDead && !pair.Actor.Disposed,
 					queue.Enabled ? "observed" : "producer-disabled"));
 			}
+			SpendObserve();
 			state.Observe(tick, observations);
 			// Scheduled pulses are %50-only; a terminal observe may add one off-boundary
 			// pulse before the end record. The consumer's <=50-tick watermark allows it.
@@ -124,7 +139,29 @@ namespace OpenRA.Mods.Cameo.Traits
 				self.Owner.WinState == WinState.Undefined, state.Complete, snapshots,
 				resources?.Cash ?? 0, resources?.Resources ?? 0, resources?.ResourceCapacity ?? 0,
 				resources?.Spent ?? 0, SeatState()));
+			WriteSpendLedger(tick, resources);
 			lastPulse = tick;
+		}
+
+		void SpendObserve()
+		{
+			var now = new HashSet<ProductionItem>(spendItems, ReferenceEqualityComparer.Instance);
+			var removed = spendItemsPrevious.Where(i => !now.Contains(i)).Select(SpendSample).ToList();
+			spend.Observe(spendItems.Select(SpendSample), removed);
+			spendItemsPrevious.Clear();
+			spendItemsPrevious.AddRange(spendItems);
+		}
+
+		static SpendItemSample SpendSample(ProductionItem item) => new(item, item.TotalCost, item.RemainingCost);
+
+		void WriteSpendLedger(int tick, PlayerResources resources)
+		{
+			var spent = resources?.Spent ?? 0;
+			var netSpentDelta = (long)spent - spentAtPulse;
+			spentAtPulse = spent;
+			var production = spend.TakePulse();
+			var complete = resources != null && spent != int.MinValue && spend.Complete;
+			WriteRaw("spend_ledger", tick, AiEconomySpendLedger.Evidence(lastPulse, tick, production, netSpentDelta, complete));
 		}
 
 		EconomyHealthIdentity Identity(int tick, string kind) => new(sequence++, tick, kind, gameUid,

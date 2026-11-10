@@ -20,9 +20,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 {
 	abstract class StateBaseCA
 	{
-		protected static void GoToRandomOwnBuilding(SquadCA squad)
+		protected static void GoToRandomOwnBuilding(SquadCA squad, bool fleeing = false)
 		{
-			var loc = HomeLocation(squad);
+			var loc = HomeLocation(squad, fleeing);
 			// CA F2p2 (2bad89a77): AttackMove instead of Move, so the squad fights on the way home.
 			var orderName = squad.SquadManager.Info.UseUpstreamStateTweaks ? "AttackMove" : "Move";
 			foreach (var a in squad.Units)
@@ -32,7 +32,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		// DESIGN 19.12: a ground squad that falls back or goes idle returns to the staging point nearest to it (the front, with the
 		// defences) when a staging provider is enabled. Air and naval squads, and every squad without a provider, keep the random
 		// own building (the provider branch draws no random number).
-		protected static CPos HomeLocation(SquadCA squad)
+		//
+		// A10 RETREAT-RALLY: a FLEEING Rush or Guerrilla squad without a staging plan goes to the base cell on the enemy-to-own-base axis
+		// (null, i.e. the random building below, while A10 is off or no axis exists). Every other caller keeps the default and is not moved.
+		protected static CPos HomeLocation(SquadCA squad, bool fleeing = false)
 		{
 			if (squad.Type != SquadCAType.Air && squad.Type != SquadCAType.Naval && squad.Units.Count > 0)
 			{
@@ -40,6 +43,13 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				var cell = squad.SquadManager.ArmyStaging?.StagingCellNear(from);
 				if (cell != null)
 					return cell.Value;
+			}
+
+			if (fleeing && (squad.Type == SquadCAType.Rush || squad.Type == SquadCAType.Guerrilla))
+			{
+				var axis = squad.SquadManager.RetreatRallyBaseCell(squad);
+				if (axis != null)
+					return axis.Value;
 			}
 
 			return RandomBuildingLocation(squad);
@@ -347,7 +357,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			{
 				// Armed: one home pick per flee episode — a fresh random building per
 				// tick cancels the leg every time (the wander the maintainer saw).
-				var home = HomeLocation(squad);
+				var home = HomeLocation(squad, flee);
 				if (squad.SquadManager.Info.UseSquadOrderDedup)
 				{
 					if (squad.FleeHomeCell == null)

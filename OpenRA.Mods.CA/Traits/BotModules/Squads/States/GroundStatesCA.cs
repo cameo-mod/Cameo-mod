@@ -27,6 +27,19 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			return ShouldFlee(owner, enemies => !AttackOrFleeFuzzyCA.Default.CanAttack(owner.Units.ConvertAll(u => u.Actor), enemies));
 		}
 
+		// IMPL02-AGG-CORE (switch ON only, A2/A4): a committed squad that the legacy rule wants to pull out stays unless it is
+		// decisively out-numbered with its coalition and engaged allies (review C1); the window only names the hold. OFF: false.
+		protected static bool AggressionHolds(SquadCA owner) =>
+			owner.SquadManager.AggressionOn && owner.SquadManager.AggressionHoldsInFight(owner) != AggressionPolicyCA.HoldReason.None;
+
+		// IMPL02-AGG-CORE (switch ON only, A2 on the march): a remembered-defence verdict (siege Retreat, committed veto) is
+		// cancelled only by the ratio reasons (Coalition, AllyEngaged; review C3), judged against what it observes at its target.
+		// FREEZE9 CF seam: never for a squad that holds a unit the agg-team defence plan keeps home (CG off: never true).
+		// OFF: false.
+		protected static bool AggressionHoldsMarch(SquadCA owner) =>
+			owner.SquadManager.AggressionOn && owner.IsTargetValid && !owner.SquadManager.AggressionSquadDefends(owner)
+			&& owner.SquadManager.AggressionHoldsInFight(owner, owner.Target.CenterPosition) != AggressionPolicyCA.HoldReason.None;
+
 		protected Actor FindClosestEnemy(SquadCA owner)
 		{
 			return owner.SquadManager.FindClosestEnemy(owner.Units.First().Actor, owner);
@@ -101,6 +114,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 	{
 		Actor leader;
 
+		// IMPL02-AGG-CORE (switch ON only): the tick the current forward regroup began, -1 = not regrouping.
+		int regroupSinceTick = -1;
+
 		public void Activate(SquadCA owner) { }
 
 		public void Tick(SquadCA owner)
@@ -132,6 +148,14 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				return;
 			}
 
+			// IMPL02-AGG-CORE (switch ON only): coalition bands, the forward regroup and the tiny-squad hold replace the
+			// squad-alone engage-or-flee call below. AggressionOn is false on the OFF arm, which keeps the legacy path as is.
+			if (owner.SquadManager.AggressionOn)
+			{
+				AggressionTick(owner, enemyUnits);
+				return;
+			}
+
 			var engage = owner.SquadManager.Info.UseCombatPredictor
 				? owner.SquadManager.PredictsWin(owner, enemyUnits)
 				: AttackOrFleeFuzzyCA.Default.CanAttack(owner.Units.ConvertAll(u => u.Actor), enemyUnits);
@@ -150,8 +174,141 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				else
 					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
 			}
+
+			// BOTPASSIVE (switch ON only): the live breaker wave defers this predicted-loss disengagement (guard_bypass).
+			else if (owner.SquadManager.StalemateDefersRetreat(owner, "idle_engage"))
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
 			else
+			{
+				owner.SquadManager.NoteRetreatStart(owner, "idle_engage");
+
+				// A10 RETREAT-RALLY (switch ON only; both calls return at once while off): mark the flight, then rally to a friendly army if one qualifies.
+				owner.SquadManager.RetreatRallyNoteFlight(owner);
+				if (owner.SquadManager.TryRetreatRally(owner, "idle_engage", out var plan))
+				{
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsRallyStateCA(plan), false);
+					return;
+				}
+
 				Retreat(owner, flee: true, rearm: true, repair: true);
+			}
+		}
+
+		// IMPL02-AGG-CORE A1-A3 (switch ON only). A1: the ratio counts the squad's coalition (AggressionFriends) and the
+		// attack bar is AggressionEngageRatioPct. A2: Flee below AggressionFleeRatioPct, a bounded forward regroup in between.
+		// A3: a tiny squad attacks only in the attack band and otherwise holds - it never runs the flee loop.
+		void AggressionTick(SquadCA owner, List<Actor> enemyUnits)
+		{
+			var manager = owner.SquadManager;
+			var info = manager.Info;
+
+			// An idle squad is not committed; the attack band below starts a fresh commit.
+			SquadManagerBotModuleCA.AggressionUncommit(owner);
+
+			// FREEZE9 CF seam (Opus): a squad that holds a unit the agg-team defence plan keeps home starts no attack from idle;
+			// it holds (no order, as the A3 hold) until the plan releases the unit. CG off: never true.
+			if (manager.AggressionSquadDefends(owner))
+			{
+				regroupSinceTick = -1;
+				return;
+			}
+
+			var friends = manager.AggressionFriends(owner, owner.Target.CenterPosition);
+			var ratio = manager.AggressionRatio(owner, friends, enemyUnits);
+			var band = AggressionPolicyCA.Band(ratio, manager.AggressionParam(nameof(SquadManagerBotModuleCAInfo.AggressionFleeRatioPct), owner), manager.AggressionParam(nameof(SquadManagerBotModuleCAInfo.AggressionEngageRatioPct), owner));
+
+			// FREEZE10 DIAG-FIX-01 (CG seam; unchanged with CG off): the flee band is re-judged with the allied squads that are fighting
+			// beside this one counted, as the in-fight rule does, so an idle squad does not abandon an engaged ally. The ratio that decided
+			// is the one recorded (A6) for the retreat_start row.
+			if (band == AggressionBandCA.Flee)
+				(band, ratio) = manager.AggressionIdleAlliedBand(owner, friends, enemyUnits, band, ratio);
+
+			var tiny = AggressionPolicyCA.IsTiny(owner.Units.Count, manager.SquadValueOf(owner),
+				manager.AggressionParam(nameof(SquadManagerBotModuleCAInfo.AggressionMinDispatchUnits), owner), manager.AggressionParam(nameof(SquadManagerBotModuleCAInfo.AggressionMinDispatchValue), owner));
+
+			// INC-N combat veto (§12.31), as on the legacy path: asked only for a commit, it turns it into a regroup (or a hold).
+			// The finishing push ignores the veto, so it is not asked then (review L4).
+			var vetoed = band == AggressionBandCA.Attack && !manager.AggressionFinishActive
+				&& manager.VetoEngage(owner, enemyUnits, alreadyCommitted: false, out _);
+			var decision = AggressionPolicyCA.IdleDecision(band, tiny, vetoed, manager.AggressionFinishActive);
+
+			if (decision == AggressionBandCA.Attack)
+			{
+				regroupSinceTick = -1;
+				manager.AggressionCommit(owner);
+				if (owner.Type == SquadCAType.Rush && info.StageBeforeAssault)
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsStageStateCA(), false);
+				else
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+
+				return;
+			}
+
+			if (decision == null)
+			{
+				// A3 hold: no order, no retreat; the squad grows (guerrilla joins) or the band changes.
+				regroupSinceTick = -1;
+				return;
+			}
+
+			var site = "idle_engage";
+			if (decision == AggressionBandCA.Regroup)
+			{
+				if (regroupSinceTick < 0)
+					regroupSinceTick = owner.World.WorldTick;
+
+				if (owner.World.WorldTick - regroupSinceTick < manager.AggressionParam(nameof(SquadManagerBotModuleCAInfo.AggressionRegroupMaxTicks), owner))
+				{
+					RegroupForward(owner);
+					return;
+				}
+
+				// The bounded regroup ran out without reaching the attack band: the legacy retreat below, under its own reason
+				// (Opus ruling d, review C2), so CHECK01 counts an expired regroup apart from a Flee-band retreat.
+				regroupSinceTick = -1;
+				site = "idle_regroup_expired";
+			}
+
+			// The flee band, or an expired regroup: the legacy predicted-loss retreat (breaker deferral first).
+			if (manager.StalemateDefersRetreat(owner, site))
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+			else
+			{
+				// A6 telemetry: what the coalition saw, for the retreat_start row (an idle squad has no commit, so no trade).
+				manager.AggressionRecordEvidence(owner, band, ratio, enemyUnits, null);
+				manager.NoteRetreatStart(owner, site);
+
+				// A10 RETREAT-RALLY (switch ON only; both calls return at once while off): mark the flight, then rally to a friendly army if one qualifies.
+				manager.RetreatRallyNoteFlight(owner);
+				if (manager.TryRetreatRally(owner, site, out var plan))
+				{
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsRallyStateCA(plan), false);
+					return;
+				}
+
+				Retreat(owner, flee: true, rearm: true, repair: true);
+			}
+		}
+
+		// A2: move to the forward regroup point (IdleScanRadius + AggressionRegroupMarginCells from the target, toward the
+		// squad), never home. An unreachable point holds the squad where it is.
+		void RegroupForward(SquadCA owner)
+		{
+			var manager = owner.SquadManager;
+			var info = manager.Info;
+			var map = owner.World.Map;
+			var standoff = WDist.FromCells(info.IdleScanRadius + manager.AggressionParam(nameof(SquadManagerBotModuleCAInfo.AggressionRegroupMarginCells), owner)).Length;
+			var point = AggressionPolicyCA.RegroupPoint(owner.CenterPosition, owner.Target.CenterPosition, standoff);
+			var cell = map.Clamp(map.CellContaining(point));
+			if (leader == null || !CheckReachability(leader, cell))
+				return;
+
+			var rally = map.CenterOfCell(cell);
+			var radiusSquared = (long)WDist.FromCells(info.StageRadiusCells).LengthSquared;
+			var movers = owner.Units.Select(u => u.Actor)
+				.Where(a => (a.CenterPosition - rally).LengthSquared > radiusSquared).ToList();
+			if (movers.Count > 0)
+				QueueDeduped(owner, "Move", SquadOrderKey.ForCell("Move", cell), Target.FromCell(owner.World, cell), movers);
 		}
 
 		public void Deactivate(SquadCA owner) { }
@@ -465,7 +622,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (owner.Type == SquadCAType.Rush || owner.Type == SquadCAType.Guerrilla || owner.Type == SquadCAType.Harass)
 			{
 				var siegeVerdict = owner.SquadManager.EvaluateSiege(owner, out var standOffCell);
-				if (siegeVerdict == SiegeVerdict.Retreat)
+				if (siegeVerdict == SiegeVerdict.Retreat && !AggressionHoldsMarch(owner))
 				{
 					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), false);
 					return;
@@ -487,7 +644,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				{
 					var vetoEnemies = owner.World.FindActorsInCircle(owner.Target.CenterPosition, WDist.FromCells(owner.SquadManager.Info.IdleScanRadius))
 						.Where(owner.SquadManager.IsPreferredObservedEnemyUnit).ToList();
-					if (owner.SquadManager.VetoEngage(owner, vetoEnemies, alreadyCommitted: true, out _))
+					if (owner.SquadManager.VetoEngage(owner, vetoEnemies, alreadyCommitted: true, out _) && !AggressionHoldsMarch(owner))
 					{
 						owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), false);
 						return;
@@ -1105,7 +1262,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		CPos? lastLeaderLocation;
 		Actor lastTarget;
 
-		public void Activate(SquadCA owner) { }
+		public void Activate(SquadCA owner)
+		{
+			// IMPL02-AGG-CORE (switch ON only, A2): a fight that did not start from the idle attack band commits here.
+			if (owner.SquadManager.AggressionOn && owner.AggressionCommitTick < 0)
+				owner.SquadManager.AggressionCommit(owner);
+		}
 
 		public void Tick(SquadCA owner)
 		{
@@ -1201,8 +1363,13 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					owner.Bot.QueueOrder(new Order("AttackMove", a.Actor, Target.FromActor(owner.TargetActor), false));
 			}
 
-			if (ShouldFlee(owner))
+			// BOTPASSIVE (switch ON only): the live breaker wave defers this predicted-loss disengagement (guard_bypass).
+			// IMPL02-AGG-CORE (switch ON only, A2/A4): AggressionHolds can only cancel a legacy flight, never start one.
+			if (ShouldFlee(owner) && !AggressionHolds(owner) && !owner.SquadManager.StalemateDefersRetreat(owner, "attack_should_flee"))
+			{
+				owner.SquadManager.NoteRetreatStart(owner, "attack_should_flee");
 				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), true);
+			}
 		}
 
 		// One member's micro order (the order half of SquadMicroEvalCA),
@@ -1283,6 +1450,16 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 	class GroundUnitsFleeStateCA : GroundStateBaseCA, IState
 	{
+		// A10 RETREAT-RALLY: baseOnly = the legacy flight with the rally refused (the rally state's downgrade); handoff = the squad was
+		// given to the rally state, so Deactivate must not dismiss it. Every entry creates a new state object: no reset is needed.
+		readonly bool baseOnly;
+		bool handoff;
+
+		public GroundUnitsFleeStateCA(bool baseOnly = false)
+		{
+			this.baseOnly = baseOnly;
+		}
+
 		public void Activate(SquadCA owner) { }
 
 		public void Tick(SquadCA owner)
@@ -1290,11 +1467,25 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (!owner.IsValid)
 				return;
 
-			GoToRandomOwnBuilding(owner);
+			owner.SquadManager.RetreatRallyNoteFlight(owner);
+			if (!baseOnly && owner.SquadManager.TryRetreatRally(owner, "flee_state", out var plan))
+			{
+				handoff = true;
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsRallyStateCA(plan), false);
+				return;
+			}
+
+			GoToRandomOwnBuilding(owner, fleeing: true);
 			owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), true);
 		}
 
-		public void Deactivate(SquadCA owner) { owner.SquadManager.DismissSquad(owner); }
+		public void Deactivate(SquadCA owner)
+		{
+			if (handoff)
+				return;
+
+			owner.SquadManager.DismissSquad(owner);
+		}
 	}
 
 	class HarasserUnitsIdleStateCA : GroundStateBaseCA, IState

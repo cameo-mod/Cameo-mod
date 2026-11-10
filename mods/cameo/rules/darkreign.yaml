@@ -3333,7 +3333,7 @@ drpplant1.freedomguard:
 		RespawnTicks: 750
 		ExitByBudding: false
 		AggregateHealth: false
-		RequiresCondition: lvl2 && !cameogodbot && !unbeatablebot && !challengerbot && !brutalbot && !hardbot && !normalbot && !easybot && !easiestbot
+		RequiresCondition: lvl2 && !cameogodbot && !unbeatablebot && !challengerbot && !brutalbot && !hardbot && !normalbot && !easybot && !easiestbot && !noobbot
 		PauseOnCondition: disabled
 	MobSpawnerMaster@brutalbot:
 		Actors: drphasetran

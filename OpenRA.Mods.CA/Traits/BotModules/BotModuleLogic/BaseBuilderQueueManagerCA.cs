@@ -106,9 +106,16 @@ namespace OpenRA.Mods.CA.Traits
 		Dictionary<ProductionQueue, BotQueueWatch> queueWatches;
 		HashSet<ProductionItem> queueProbeScratch;
 
+		// S2 F3: when another manager of the same category exists (ai.yaml lists BuildingAddons in both
+		// BuildingQueues and DefenseQueues), the first-created one owns the observation state; this
+		// manager borrows it so each queue item is observed and emitted once. Null = this manager owns
+		// its own state. Observation only: every manager still ticks and decides on its own.
+		readonly BaseBuilderQueueManagerCA observationOwner;
+
 		public BaseBuilderQueueManagerCA(BaseBuilderBotModuleCA baseBuilder, string category, Player p, PowerManager pm,
-			PlayerResources pr, IResourceLayer rl)
+			PlayerResources pr, IResourceLayer rl, BaseBuilderQueueManagerCA observationOwner = null)
 		{
+			this.observationOwner = observationOwner;
 			this.baseBuilder = baseBuilder;
 			world = p.World;
 			player = p;
@@ -149,6 +156,18 @@ namespace OpenRA.Mods.CA.Traits
 		// seam on — observers resolve once, the tracker and per-queue watches allocate lazily.
 		bool ObserveQueueTransitions()
 		{
+			if (observationOwner != null)
+			{
+				if (!observationOwner.ObserveQueueTransitions())
+					return false;
+
+				queueObservers = observationOwner.queueObservers;
+				queueEpisodes = observationOwner.queueEpisodes;
+				queueWatches = observationOwner.queueWatches;
+				queueProbeScratch = observationOwner.queueProbeScratch;
+				return true;
+			}
+
 			queueObservers ??= player.PlayerActor.TraitsImplementing<IBotBuildQueueObserver>().ToArray();
 			if (queueObservers.Length == 0)
 				return false;
@@ -174,6 +193,7 @@ namespace OpenRA.Mods.CA.Traits
 					queueWatches[queue] = watch = new BotQueueWatch();
 
 				watch.SeenTick = tick;
+				watch.GoneSince.Clear();
 				var now = queue.AllQueued();
 
 				queueProbeScratch.Clear();
@@ -253,8 +273,12 @@ namespace OpenRA.Mods.CA.Traits
 					watch.Items.Add(it);
 			}
 
-			// Stale watches: the queue left FindQueues (disabled or destroyed producer) —
-			// every remaining item resolves as a removal on this observation tick.
+			// Stale watches: the queue left FindQueues (disabled or destroyed producer). S2 F2: an item
+			// still in the queue is unobserved, not emptied: nothing resolves and the watch is kept.
+			// An item really gone while the producer reads live and owned is held for the bounded
+			// StaleResolveGraceTicks (sell and transform clear the queue while the actor still reads
+			// live; the disposal that follows turns the removal into a proven Destruction). A dead or
+			// disposed producer, a captured one and an eliminated seat resolve on this tick as before.
 			List<ProductionQueue> dead = null;
 			foreach (var kv in queueWatches)
 			{
@@ -262,22 +286,44 @@ namespace OpenRA.Mods.CA.Traits
 				if (watch.SeenTick == tick)
 					continue;
 
-				foreach (var old in watch.Items)
-					ResolveRemovedItem(kv.Key, watch, (ProductionItem)old, queueSeen: false);
-
-				// Requests left over after the item flush — armed proof entries get one
-				// last actor check (a builder unit's BuildOnSite survives its producer's
-				// death), everything else resolves Removed carrying its intent reason so
-				// a registered request's fate is never silently cleared.
 				var staleLive = !kv.Key.Actor.IsDead && !kv.Key.Actor.Disposed;
-				foreach (var p in watch.Pending)
+				var eliminated = player.WinState != WinState.Undefined;
+
+				if (watch.Items.Count > 0)
 				{
-					var res = p.AwaitingProof && p.ResolveWhileAwaiting(tick, PlacementProof(p), player.WinState != WinState.Undefined) == BotQueuePendingResolution.EmitRequested;
-					EmitTerminalOutcome(kv.Key, p.Item, p.ItemName, p, res, staleLive, queueSeen: false);
+					var staleOwned = kv.Key.Actor.Owner == player;
+					queueProbeScratch.Clear();
+					if (staleLive && staleOwned && !eliminated)
+						foreach (var it in kv.Key.AllQueued())
+							queueProbeScratch.Add(it);
+
+					var resolve = watch.StaleSweep(o => queueProbeScratch.Contains((ProductionItem)o),
+						eliminated, staleLive, staleOwned, tick);
+					if (resolve != null)
+						foreach (var old in resolve)
+						{
+							ResolveRemovedItem(kv.Key, watch, (ProductionItem)old, queueSeen: false);
+							watch.Items.Remove(old);
+							watch.GoneSince.Remove(old);
+						}
 				}
 
-				watch.Items.Clear();
-				watch.Pending.Clear();
+				// Requests left over after the item flush: armed proof entries get one
+				// last actor check (a builder unit's BuildOnSite survives its producer's
+				// death), everything else resolves Removed carrying its intent reason so
+				// a registered request's fate is never silently cleared. Only once no item
+				// is still held or kept: a request bound to such an item resolves with it.
+				if (watch.Items.Count == 0)
+				{
+					foreach (var p in watch.Pending)
+					{
+						var res = p.AwaitingProof && p.ResolveWhileAwaiting(tick, PlacementProof(p), eliminated) == BotQueuePendingResolution.EmitRequested;
+						EmitTerminalOutcome(kv.Key, p.Item, p.ItemName, p, res, staleLive, queueSeen: false);
+					}
+
+					watch.Pending.Clear();
+				}
+
 				watch.SeenTick = tick;
 
 				// A dead producer can never re-enable its queue — drop the watch and its
@@ -313,8 +359,17 @@ namespace OpenRA.Mods.CA.Traits
 			var pending = FindPending(watch, oldItem);
 			var live = !queue.Actor.IsDead && !queue.Actor.Disposed;
 
+			// RC01-OUTER01 (E1): the engine's eviction receipt is bound and consumed at the FIRST
+			// removal detection, keyed by the exact ProductionItem reference and the episode taken
+			// before the episode ends. The receipt expires 64 ticks after the eviction, and a Placed
+			// request can await actor proof far longer, so every later emit reads the stored result
+			// (E2) and never asks the engine again.
+			var episode = queueEpisodes.EpisodeOf(oldItem);
+			var evicted = ConsumeUnbuildableEviction(queue, oldItem, episode);
+
 			if (pending != null)
 			{
+				pending.UnbuildableEvicted = evicted;
 				var resolution = pending.ResolveOnRemoval(world.WorldTick, queueSeen, PlacementProof(pending));
 				if (resolution == BotQueuePendingResolution.KeepAwaitingProof)
 				{
@@ -331,12 +386,24 @@ namespace OpenRA.Mods.CA.Traits
 			}
 			else
 			{
-				var episode = queueEpisodes.EpisodeOf(oldItem);
 				queueEpisodes.EndEpisode(oldItem);
 				EmitQueueTransition(queue, queue.Actor, oldItem, oldItem.Item, QueueCategoryOf(oldItem.Item),
 					BotQueueTransitionKind.Removed, BotQueueTransitionReason.None,
-					ResolveRemovalCause(queue, oldItem.Item, live, queueSeen), episode);
+					ResolveRemovalCause(queue, oldItem.Item, evicted, live, queueSeen), episode);
 			}
+		}
+
+		// RC01-OUTER01 (E1): bind, then consume, the engine's eviction receipt for this exact item
+		// and episode. True only for a receipt the engine recorded for this ProductionItem; a
+		// name-only match, a zero episode or an owner mismatch fails closed (false).
+		bool ConsumeUnbuildableEviction(ProductionQueue queue, ProductionItem item, uint episode)
+		{
+			if (item == null || episode == 0)
+				return false;
+
+			var tick = world.WorldTick;
+			return queue.TryBindUnbuildableEviction(item, player, episode, tick)
+				&& queue.TryConsumeUnbuildableEviction(item, player, episode, tick);
 		}
 
 		// Terminal emit for a resolved request: proof emits the requested kind (Placed); the
@@ -348,8 +415,14 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			var episode = queueEpisodes.EpisodeOf(itemRef);
 			queueEpisodes.EndEpisode(itemRef);
+			// E4: a proven placement retires any eviction receipt still held for this exact item,
+			// so a stale receipt cannot attach to a later same-name item.
+			if (proven && itemRef is ProductionItem provenItem)
+				queue.RetireUnbuildableEviction(provenItem, world.WorldTick);
+
+			// E2: the receipt result was bound at first detection; the emit path never asks the engine.
 			var cls = proven ? BotQueueCancellationClass.None
-				: ResolveRemovalCause(queue, itemName, live, queueSeen);
+				: ResolveRemovalCause(queue, itemName, pending.UnbuildableEvicted, live, queueSeen);
 			EmitQueueTransition(queue, queue.Actor, itemRef, itemName, QueueCategoryOf(itemName),
 				proven ? pending.Kind : BotQueueTransitionKind.Removed, pending.Reason, cls, episode);
 		}
@@ -360,17 +433,18 @@ namespace OpenRA.Mods.CA.Traits
 		// diagnosis — CancelUnbuildableItems diffs BuildableItems names — but Sol's
 		// 2026-10-14 adjudication rules it NON-PROBATIVE: the routine is cached-set
 		// gated and prefers migration, so an uninstrumented removal plus prerequisite
-		// loss reads identically. Unbuildable emits as a diagnostic class only; the
+		// loss reads identically. A receipt-backed eviction emits EvictedUnbuildable (E1/E6); a bare
+		// Unbuildable emits as a diagnostic class only; the
 		// evidence seam latches it UNKNOWN like None. Proven mechanism causes
 		// (unconditional ClearQueue paths) observe; every other live-queue removal
 		// stays None = UNKNOWN.
-		BotQueueCancellationClass ResolveRemovalCause(ProductionQueue queue, string itemName, bool live, bool queueSeen)
+		BotQueueCancellationClass ResolveRemovalCause(ProductionQueue queue, string itemName, bool evicted, bool live, bool queueSeen)
 		{
 			var owned = queue.Actor.Owner == player;
 			var buildable = queueSeen && live && owned
 				&& queue.BuildableItems().Any(b => b.Name == itemName);
 			return BaseBuilderQueueEvalCA.RemovalCauseClass(
-				player.WinState != WinState.Undefined, live, owned, queueSeen, buildable);
+				player.WinState != WinState.Undefined, live, owned, queueSeen, buildable, evicted);
 		}
 
 		// Actor-lifecycle proof for a Placed request — the lead's "building actor added to
@@ -378,10 +452,13 @@ namespace OpenRA.Mods.CA.Traits
 		// cell. Normal placement lands inside the same frame-end task as the removal, so it
 		// is already provable at the next probe tick; a builder unit lands whenever
 		// BuildOnSite completes (or never, on failure). A plug order creates no actor — its
-		// proof is the host slot's installed plug state: only a requirement-free slot
-		// refusing the type it accepted is positive evidence (EnablePlug is the sole writer
-		// of active). A requirement-keyed or unknown-type slot reports availability, not
-		// install — those pendings stay UNKNOWN and expire Removed.
+		// proof is the host slot's installed plug state, read on the host captured at
+		// order time (live and owned): a requirement-free slot refusing the type it
+		// accepted is positive evidence (EnablePlug is the sole writer of active); a
+		// requirement-keyed slot refusing a type its host accepted AT ORDER TIME is too,
+		// because the install is what makes the requirement false (S2 F1). An unknown-type
+		// slot, a host that did not accept at order time, or a dead or disowned host stays
+		// UNKNOWN and expires Removed.
 		bool PlacementProof(BotQueuePendingTerminal p)
 		{
 			if (p.Kind != BotQueueTransitionKind.Placed || p.Site == null)
@@ -389,12 +466,20 @@ namespace OpenRA.Mods.CA.Traits
 
 			var site = p.Site.Value;
 			if (p.PlugType != null)
-				return world.ActorsWithTrait<Pluggable>().Any(t => t.Actor.Owner == player
-					&& t.Actor.Location + t.Trait.Info.Offset == site
-					&& BaseBuilderQueueEvalCA.PlugInstallProven(
-						t.Trait.Info.Conditions.ContainsKey(p.PlugType),
-						t.Trait.Info.Requirements.ContainsKey(p.PlugType),
-						t.Trait.AcceptsPlug(p.PlugType)));
+			{
+				// S2 F1: evaluated on the host captured at order time, and only while that host is
+				// present, live and owned. The slot at the ordered site is the one the order named.
+				var host = p.PlugHostId != 0 ? world.GetActorById(p.PlugHostId) : null;
+				if (!BaseBuilderQueueEvalCA.PlugHostEligible(host != null,
+					host != null && !host.IsDead && !host.Disposed, host != null && host.Owner == player))
+					return false;
+
+				return host.TraitsImplementing<Pluggable>().Any(t => host.Location + t.Info.Offset == site
+					&& p.PlugProven(true,
+						t.Info.Conditions.ContainsKey(p.PlugType),
+						t.Info.Requirements.ContainsKey(p.PlugType),
+						t.AcceptsPlug(p.PlugType)));
+			}
 
 			// Occupied-cell proof first: the actor lands inside the same frame-end task
 			// the item leaves in, so the building influencing the ordered cell proves
@@ -440,7 +525,7 @@ namespace OpenRA.Mods.CA.Traits
 		// decision wins: a later request for the same item supersedes the earlier pending.
 		void NotePendingTerminal(ProductionQueue queue, ProductionItem itemRef, string itemName,
 			BotQueueTransitionKind kind, BotQueueTransitionReason reason, BotQueueCancellationClass cls,
-			CPos? site = null, string plugType = null)
+			CPos? site = null, string plugType = null, uint plugHostId = 0, bool plugAcceptedAtOrder = false)
 		{
 			if (queueWatches == null || !queueWatches.TryGetValue(queue, out var watch))
 				return;
@@ -450,6 +535,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				Item = itemRef, ItemName = itemName, Kind = kind, Reason = reason, Class = cls,
 				IssuedTick = world.WorldTick, Site = site, PlugType = plugType,
+				PlugHostId = plugHostId, PlugAcceptedAtOrder = plugAcceptedAtOrder,
 				WasInfinite = (itemRef as ProductionItem)?.Infinite ?? false
 			});
 
@@ -1042,6 +1128,8 @@ namespace OpenRA.Mods.CA.Traits
 				lastFrontBackPick = null;
 				frontBackHold = false;
 				demandAdvisedDefense = false;
+				uint plugHostId = 0;
+				var plugAcceptedAtOrder = false;
 				if (plugInfo != null)
 				{
 					// Maintainer ruling (playtest repair): the normal base builder picks a
@@ -1057,6 +1145,10 @@ namespace OpenRA.Mods.CA.Traits
 						var possibleBuilding = plugCandidates[BotRng.For(player).Next(plugCandidates.Length)];
 						orderString = "PlacePlug";
 						location = possibleBuilding.Actor.Location + possibleBuilding.Trait.Info.Offset;
+
+						// S2 F1 (observer capture only): the chosen host and whether it accepted at order time.
+						plugHostId = possibleBuilding.Actor.ActorID;
+						plugAcceptedAtOrder = possibleBuilding.Trait.AcceptsPlug(plugInfo.Type);
 					}
 				}
 				else
@@ -1270,7 +1362,8 @@ namespace OpenRA.Mods.CA.Traits
 					// BuildOnSite can still land after the item leaves the queue.
 					NotePendingTerminal(queue, currentBuilding, currentBuilding.Item, BotQueueTransitionKind.Placed,
 						BotQueueTransitionReason.None, BotQueueCancellationClass.None,
-						location.Value, orderString == "PlacePlug" ? plugInfo?.Type : null);
+						location.Value, orderString == "PlacePlug" ? plugInfo?.Type : null,
+						orderString == "PlacePlug" ? plugHostId : 0, orderString == "PlacePlug" && plugAcceptedAtOrder);
 
 					bot.QueueOrder(new Order(orderString, player.PlayerActor, Target.FromCell(world, location.Value), false)
 					{

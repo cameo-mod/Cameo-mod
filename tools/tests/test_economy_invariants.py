@@ -297,6 +297,45 @@ class InvariantTests(unittest.TestCase):
         self.assertEqual(report["status"], "UNKNOWN")
         self.assertIn("no complete terminal", report["error"])
 
+    # RC01 outer row-3 fixture (synthetic, from the episode-34 eviction shape: ra1_advancedpowerplant on the
+    # building queue; health seq 599-601, raw seq 5258-5261, 5332, 5345-5346). Historical row-03 logs are not edited.
+    def test_row03_eviction_shape_with_complete_census_is_recordable(self):
+        rows = capture(1500)
+        for row in rows:
+            for q in row["queues"]:
+                q["item"] = "ra1_advancedpowerplant"
+        report = analyze(rows, "g", "p")
+        self.assertEqual(report["status"], "OBSERVED_HEALTHY", report)
+        self.assertNotIn("error", report)
+
+    # FREEZE5-PREP01 row-03 shape with the receipt wiring: ra1_advancedpowerplant (episode 34) is evicted as
+    # unbuildable at tick 600 and the queue moves on. A receipt-backed removal is Observation on the recorder
+    # side, so the census stays complete: queues_complete on every pulse, dropped 0, and no DROPPED_TELEMETRY.
+    def test_row03_receipt_evicted_census_complete_no_dropped_telemetry(self):
+        rows = capture(1500)
+        for row in rows:
+            for q in row["queues"]:
+                q["item"] = "ra1_advancedpowerplant"
+                if row["tick"] > 600:
+                    q["item"] = "refinery"
+        report = analyze(rows, "g", "p")
+        self.assertNotIn("DROPPED_TELEMETRY", codes(rows))
+        self.assertEqual(report["status"], "OBSERVED_HEALTHY", report)
+        self.assertNotIn("error", report)
+        self.assertTrue(all(r["queues_complete"] is True for r in rows if r["kind"] == "pulse"))
+        self.assertTrue(all(r["dropped"] == 0 for r in rows))
+
+    def test_row03_eviction_shape_queues_complete_false_still_blocks(self):
+        rows = capture(1500)
+        for row in rows:
+            for q in row["queues"]:
+                q["item"] = "ra1_advancedpowerplant"
+        mid = next(r for r in rows if r["kind"] == "pulse" and r["tick"] == 600)
+        mid["queues_complete"] = False
+        report = analyze(rows, "g", "p")
+        self.assertIn(report["status"], ("BLOCK", "UNKNOWN"), report)
+        self.assertNotEqual(report["status"], "OBSERVED_HEALTHY")
+
     def test_clean_capture_requires_full_completeness_tuple(self):
         # Post-lift acceptance needs the whole tuple, not just dropped=0:
         # dropped=0 on every record, queues_complete=true on pulses,

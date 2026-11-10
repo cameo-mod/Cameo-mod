@@ -94,7 +94,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var rel = Path.Combine("ai", "learned", "fight_learning.yaml");
 			Directory.CreateDirectory(Path.GetDirectoryName(Path.Combine(root, rel)));
 			File.WriteAllText(Path.Combine(root, rel),
-				"BotFightLearning:\n\tSchema: 1\n\tEvidence@any: 200\n\tEngageMarginPct@any: 137\n\tRetreatRatioPct@any: 42\n");
+				"BotFightLearning:\n\tSchema: 1\n\tEvidence@any: 200\n\tEngageMarginPct@any: 137\n\tRetreatMultPct@any: 42\n");
 
 			var fs = MountPackage(root);
 			try
@@ -105,7 +105,7 @@ namespace OpenRA.Mods.Cameo.Test
 				Assert.That(fitted.TryEngageMarginPct("td_gdi", "td_nod", out var margin), Is.True,
 					"a fitted engage margin must reach the consumer, not just a resolved string");
 				Assert.That(margin, Is.EqualTo(137));
-				Assert.That(fitted.TryRetreatRatioPct("td_gdi", "td_nod", out var ratio), Is.True);
+				Assert.That(fitted.TryRetreatMultPct("td_gdi", "td_nod", out var ratio), Is.True);
 				Assert.That(ratio, Is.EqualTo(42));
 
 				// Package-qualified override passes the resolver through unchanged.

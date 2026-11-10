@@ -26,7 +26,7 @@ using static OpenRA.GameInformation;
 namespace OpenRA.Mods.CA.Traits
 {
 	[Desc("Manages AI squads.")]
-	public class SquadManagerBotModuleCAInfo : ConditionalTraitInfo
+	public partial class SquadManagerBotModuleCAInfo : ConditionalTraitInfo
 	{
 		[Desc("Actor types that are valid for naval squads.")]
 		public readonly HashSet<string> NavalUnitsTypes = new HashSet<string>();
@@ -73,6 +73,16 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("M13 bounded team-response and attack-liveness consumer. Default off; classic excluded by the increment applier.")]
 		public readonly bool AttackLivenessEnabled = false;
 
+		[Desc("Default-off BOTPASSIVE concentrated-wave behavior; classic must remain off.")]
+		public readonly bool StalemateBreakerEnabled = false;
+
+		[Desc("Static profile marker; only consulted while StalemateBreakerEnabled is true.")]
+		public readonly bool StalemateSteamrollerProfile = false;
+
+		[Desc("BOTPASSIVE telemetry flag (design _09 LE): one botpassive-diagnostic/1 file per seat. Independent of ",
+			"StalemateBreakerEnabled and never read by a decision, so orders, RNG draws and save bytes match on and off.")]
+		public readonly bool StalemateDiagnosticsEnabled = false;
+
 		[ActorReference]
 		[Desc("Units that form a guerrilla squad.")]
 		public readonly HashSet<string> GuerrillaTypes = new();
@@ -107,6 +117,47 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("Retreat threshold when no BotLimits trait is enabled (percent of predicted strength ratio).")]
 		public readonly int DefaultRetreatRatioPct = 50;
+
+		// ---- IMPL02-AGG-CORE (AGGRESSION_PLAN_01 A1-A3, A4 no-abandonment part). Switch-ON only: every field below is read
+		// only while StalemateBreakerEnabled (group CD), AggressionEnabled (group CF) and UseCombatPredictor are all true. ----
+
+		[Desc("IMPL02-AGG-CORE switch, group CF_agg_core (Opus S4): set by the ON arm, never in the base yaml. It takes effect",
+			"only with StalemateBreakerEnabled (group CD) and UseCombatPredictor; false keeps the FREEZE8 idle/attack decisions.")]
+		public readonly bool AggressionEnabled = false;
+
+		[Desc("A1/A2: an idle ground squad attacks when the coalition ratio (own squad + own/allied-bot units near it or its",
+			"target + own defences there) is at least this percent. The attacker bias: below 100 means engage an even fight. Range 1-300.")]
+		public readonly int AggressionEngageRatioPct = 80;
+
+		[Desc("A2: below this coalition ratio percent the squad retreats; between this and AggressionEngageRatioPct it",
+			"regroups forward. A committed squad never retreats while its coalition ratio is at or above it. Range 0-300, and at most AggressionEngageRatioPct.")]
+		public readonly int AggressionFleeRatioPct = 50;
+
+		[Desc("A1: own and allied-bot armed units within this many cells of the squad count in its coalition. Range 1-64.")]
+		public readonly int AggressionCoalitionCells = 12;
+
+		[Desc("A4: a committed squad does not abandon an engaged own or allied-bot squad within this many cells while the",
+			"ratio counting that squad is at or above AggressionFleeRatioPct. Range 1-64.")]
+		public readonly int AggressionAllyEngagedCells = 20;
+
+		[Desc("A2: the forward regroup point lies IdleScanRadius plus this many cells from the target, toward the squad. Range 0-32.")]
+		public readonly int AggressionRegroupMarginCells = 4;
+
+		[Desc("A2: a squad that has regrouped this many ticks without reaching the attack band falls back to the legacy retreat. Range 0-6000.")]
+		public readonly int AggressionRegroupMaxTicks = 750;
+
+		[Desc("A2: once committed, the squad does not flee for this many ticks unless it lost AggressionCommitBreakLossPct. Range 0-3000.")]
+		public readonly int AggressionMinCommitTicks = 250;
+
+		[Desc("A2: own committed value lost (percent) that breaks the commit window early. Range 0-100.")]
+		public readonly int AggressionCommitBreakLossPct = 50;
+
+		[Desc("A3: squads with fewer units than this never run the flee loop and never regroup; they attack only in the",
+			"attack band and otherwise hold. Range 0-20.")]
+		public readonly int AggressionMinDispatchUnits = 3;
+
+		[Desc("A3: squads below this total unit value are treated like AggressionMinDispatchUnits squads. Range 0-20000.")]
+		public readonly int AggressionMinDispatchValue = 1000;
 
 		[Desc("Cameo DF-2 (AI_DEEP_RESEARCH.md §14): when the master predicts an enemy group heading for an own asset,",
 			"draft the idle pool into the protection squad and send it to the own defence nearest that asset BEFORE the",
@@ -633,12 +684,38 @@ namespace OpenRA.Mods.CA.Traits
 			"stance choice (§19.3). Off, or no enabled provider, keeps the unchanged binary call.")]
 		public readonly bool UseSquadDesire = false;
 
+		/// <summary>A9: the aggression threshold named by its yaml key (the keys of AggressionPolicyCA.Ranges).</summary>
+		internal int AggressionValue(string key) => key switch
+		{
+			nameof(AggressionEngageRatioPct) => AggressionEngageRatioPct,
+			nameof(AggressionFleeRatioPct) => AggressionFleeRatioPct,
+			nameof(AggressionCoalitionCells) => AggressionCoalitionCells,
+			nameof(AggressionAllyEngagedCells) => AggressionAllyEngagedCells,
+			nameof(AggressionRegroupMarginCells) => AggressionRegroupMarginCells,
+			nameof(AggressionRegroupMaxTicks) => AggressionRegroupMaxTicks,
+			nameof(AggressionMinCommitTicks) => AggressionMinCommitTicks,
+			nameof(AggressionCommitBreakLossPct) => AggressionCommitBreakLossPct,
+			nameof(AggressionMinDispatchUnits) => AggressionMinDispatchUnits,
+			nameof(AggressionMinDispatchValue) => AggressionMinDispatchValue,
+			_ => throw new ArgumentOutOfRangeException(nameof(key), key, "not an aggression threshold")
+		};
+
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
 			base.RulesetLoaded(rules, ai);
 
 			if (DangerScanRadius <= 0)
 				throw new YamlException("DangerScanRadius must be greater than zero.");
+
+			// A9: every aggression threshold stays inside its documented range (AggressionPolicyCA.Ranges).
+			var aggressionError = AggressionPolicyCA.RangeError(AggressionValue);
+			if (aggressionError != null)
+				throw new YamlException(aggressionError);
+
+			// A10: every rally parameter stays inside its documented range and the score weights are not all zero.
+			var rallyError = RetreatRallyPolicyCA.RangeError(RetreatRallyValue);
+			if (rallyError != null)
+				throw new YamlException(rallyError);
 
 			if (SquadValueMaxEarlyBonus > SquadValueMaxLateBonus)
 				throw new YamlException("SquadValueMaxEarlyBonus cannot be greater than SquadValueMaxLateBonus.");
@@ -705,7 +782,7 @@ namespace OpenRA.Mods.CA.Traits
 		public override object Create(ActorInitializer init) { return new SquadManagerBotModuleCA(init.Self, this); }
 	}
 
-	public class SquadManagerBotModuleCA : ConditionalTrait<SquadManagerBotModuleCAInfo>, IBotEnabled, IBotTick, IBotRespondToAttack, IBotPositionsUpdated, IGameSaveTraitData, INotifyActorDisposing, IBotMissionAssignmentProvider
+	public partial class SquadManagerBotModuleCA : ConditionalTrait<SquadManagerBotModuleCAInfo>, IBotEnabled, IBotTick, IBotRespondToAttack, IBotPositionsUpdated, IGameSaveTraitData, INotifyActorDisposing, IBotMissionAssignmentProvider
 	{
 		const float SquadValueRampDurationTicks = 20f * 60f * 25f; // Assumes the default 25 ticks per second.
 
@@ -1613,6 +1690,9 @@ namespace OpenRA.Mods.CA.Traits
 			heldDefendMission = null;
 			defendMissionHeldSince = -1;
 			defendMissionExhaustedRegions.Clear();
+
+			// BOTPASSIVE: a live breaker wave outlives the manager; the next enabled manager re-forms its squad.
+			stalemateSquad = null;
 			foreach (var squad in Squads)
 				DismissSquad(squad);
 
@@ -1661,8 +1741,16 @@ namespace OpenRA.Mods.CA.Traits
 			if (securePushTarget != null && securePushTarget.WinState != WinState.Undefined)
 				CloseSecurePush(BotMissionAttemptState.Success, BotMissionReasons.Done);
 
+			// BOTPASSIVE (switch ON only; returns at once while off): the breaker wave is driven before role assignment.
+			StalemateTick(bot);
 			AssignRolesToIdleUnits(bot);
+			// IMPL02-AGG-TEAM (A5; switch ON only): the home-reserve cap launches what the pool holds above the reserve.
+			if (Info.AggTeamEnabled)
+				AggTeamTick(bot);
 			StageIdlePool(bot);
+
+			// BOTPASSIVE telemetry (telemetry flag only; observation only).
+			DiagnosticTick();
 		}
 
 		// DESIGN 19.12: the idle pool waits at the front. The provider says which group each unit joins and where that group stands;
@@ -1745,8 +1833,8 @@ namespace OpenRA.Mods.CA.Traits
 			// Fogged scans never fall back to actors the bot cannot see; remembered
 			// enemy buildings are offered separately as FrozenActor targets.
 			var picked = FoggedScans
-				? visible.ClosestToIgnoringPath(sourceActor.CenterPosition)
-				: visible.ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
+				? AggTeamPickVisible(visible, sourceActor, owner)
+				: AggTeamPickVisible(visible, sourceActor, owner) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
 			CanaryObserved(picked, "find-closest-enemy");
 			return picked;
 		}
@@ -1767,8 +1855,8 @@ namespace OpenRA.Mods.CA.Traits
 			var visible = units.Where(IsNotHiddenUnit).ToList();
 
 			var picked = FoggedScans
-				? visible.ClosestToIgnoringPath(sourceActor.CenterPosition)
-				: visible.ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
+				? AggTeamPickVisible(visible, sourceActor, owner)
+				: AggTeamPickVisible(visible, sourceActor, owner) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
 			CanaryObserved(picked, "find-closest-enemy");
 			return picked;
 		}
@@ -2852,12 +2940,15 @@ namespace OpenRA.Mods.CA.Traits
 				OffensiveSquadsLaunched++;
 				if (Info.AttackLivenessEnabled)
 					ret.M13WaveId = M13StateOwner.m13State.AllocateWave();
+				DiagnosticNoteLaunch(ret);
 			}
 			return ret;
 		}
 
 		public void DismissSquad(SquadCA squad)
 		{
+			RetreatRallyDetach(squad);
+			DiagnosticSquadEvent(squad, "disband");
 			var leases = BotUnitLeases.Of(Player);
 			if (leases != null)
 				foreach (var u in squad.Units)
@@ -2977,8 +3068,16 @@ namespace OpenRA.Mods.CA.Traits
 						// a corpse must not burn an attention slot on a no-op Update.
 						if (!s.IsValid)
 							continue;
+
+						// BOTPASSIVE: the breaker squad is held back from the ordinary state machine during its rally.
+						if (StalemateSkipsUpdate(s))
+							continue;
 						if (actionBudget != null && !actionBudget.TryConsumeAttention(s))
 							continue;
+
+						// IMPL02-AGG-TEAM (A4; switch ON only): an idle squad in range joins an allied or own attack intent.
+						if (Info.AggTeamEnabled)
+							AggTeamPrepare(s);
 
 						CheckAttemptVerdict(s);
 						s.Update();
@@ -3036,7 +3135,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		internal static bool IsRetreatingForLiveness(SquadCA squad) =>
 			squad.FuzzyStateMachine?.CurrentState is GroundUnitsFleeStateCA or NavyUnitsFleeStateCA
-				or AirFleeStateCA or StealthFleeStateCA or UnitsForProtectionFleeState;
+				or AirFleeStateCA or StealthFleeStateCA or UnitsForProtectionFleeState or GroundUnitsRallyStateCA;
 
 		bool IsM13AssaultDraftable(UnitWposWrapper u, IBotUnitLeases leases) =>
 			!unitCannotBeOrdered(u.Actor) && IsDefenderDraftable(u, leases)
@@ -3390,12 +3489,18 @@ namespace OpenRA.Mods.CA.Traits
 		// private resolved Faction value. Cameo consumers use BotFactionView.
 		string EnemyFaction(IEnumerable<Actor> enemies) => "";
 
+		// TIER-01 D1: effective retreat = (tier value + in-match delta) x the learned multiplier / 100, clamped 0..100. Without a
+		// provider or a row the multiplier is 1.00, so the three cases agree; the in-match delta now also applies under a row.
 		int RetreatRatioPct(IEnumerable<Actor> enemies)
 		{
-			var fallback = Math.Max(0, (botLimits?.Info.RetreatRatioPct ?? Info.DefaultRetreatRatioPct) + (InMatchAdaptation?.RetreatRatioDeltaPct ?? 0));
+			var basePct = RetreatBasePct(botLimits?.Info.RetreatRatioPct ?? Info.DefaultRetreatRatioPct, InMatchAdaptation?.RetreatRatioDeltaPct ?? 0);
 			var provider = fightThresholds?.FirstEnabledTraitOrDefault();
-			return provider == null ? fallback : provider.RetreatRatioPct(Player.Faction.InternalName, EnemyFaction(enemies), fallback);
+			return Math.Clamp(provider == null ? basePct : provider.RetreatRatioPct(Player.Faction.InternalName, EnemyFaction(enemies), basePct), 0, 100);
 		}
+
+		/// <summary>TIER-01 D1 (user ruling: noob NEVER retreats): a tier value of 0 or less stays 0, so no in-match delta lifts
+		/// it (and 0 x any learned multiplier is 0); any other tier value takes the delta.</summary>
+		internal static int RetreatBasePct(int tierPct, int deltaPct) => tierPct <= 0 ? 0 : tierPct + deltaPct;
 
 		int EngageMarginPct(IEnumerable<Actor> enemies)
 		{
@@ -3660,7 +3765,7 @@ namespace OpenRA.Mods.CA.Traits
 				n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
 		}
 
-		void CreateAttackForce(IBot bot)
+		void CreateAttackForce(IBot bot, bool aggForce = false)
 		{
 			// Create an attack force when we have enough units around our base.
 			// (don't bother leaving any behind for defense)
@@ -3711,12 +3816,18 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			var requiredValue = ApplyForceScale(desiredValue, forceScale);
+			if (Info.StalemateBreakerEnabled && Info.StalemateSteamrollerProfile)
+			{
+				requiredValue = StalemateBreakerPolicyCA.SteamrollerValueBar(true, requiredValue);
+				maxIdleUnits = StalemateBreakerPolicyCA.SteamrollerOverflow(true, maxIdleUnits);
+			}
 			var requiredSize = ApplyForceScale(desiredAttackForceSize, forceScale);
 			if (Info.AttackLivenessEnabled)
 				requiredSize = AttackForceEvalCA.RequiredSize(requiredSize, botLimits?.Info.TempoMinWaveUnits ?? 0);
 
 			// CA F2p2 (A5-2): ValueOnlyAttackLaunch drops the unit-count gate when a squad value threshold is configured; MaxIdleUnits still applies.
-			if (AttackForceEvalCA.ShouldLaunch(unitsHangingAroundTheBase.Count, maxIdleUnits,
+			// IMPL02-AGG-TEAM (A5): aggForce is true only from AggTeamTick (switch ON) - the pool above the reserve launches regardless of the ordinary bars.
+			if (aggForce || AttackForceEvalCA.ShouldLaunch(unitsHangingAroundTheBase.Count, maxIdleUnits,
 					idleUnitsValue, requiredValue, requiredSize, Info.ValueOnlyAttackLaunch, Info.SquadValue))
 			{
 				// 12.5: squads form to the same mix production builds - an assault
@@ -3834,6 +3945,8 @@ namespace OpenRA.Mods.CA.Traits
 					}
 				}
 
+				// IMPL02-AGG-TEAM (A5): the reserve stays home; put back after the wave is formed.
+				var aggKeep = aggForce ? AggTeamTakeReserve() : Info.AggTeamEnabled ? AggTeamTakeDetached() : null;
 				var attackForce = RegisterNewSquad(bot, SquadCAType.Rush);
 
 				// 6f: long-range units peel off into an artillery squad that trails
@@ -3919,6 +4032,14 @@ namespace OpenRA.Mods.CA.Traits
 				}
 				else
 					unitsHangingAroundTheBase.Clear();
+				if (aggKeep != null)
+					unitsHangingAroundTheBase.AddRange(aggKeep);
+				if (aggForce)
+				{
+					AggLaunches++;
+					DiagnosticSquadEvent(attackForce, "agg_launch", reason: AggTeamPushActive(World.WorldTick) ? "push" : "excess");
+				}
+
 				foreach (var n in notifyIdleBaseUnits)
 					n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
 
@@ -4144,7 +4265,14 @@ namespace OpenRA.Mods.CA.Traits
 		List<MiniYamlNode> IGameSaveTraitData.IssueTraitData(Actor self)
 		{
 			if (IsTraitDisabled)
-				return null;
+			{
+				// BOTPASSIVE (switch ON only): the breaker state owner persists its seat state even while disabled.
+				if (!Info.StalemateBreakerEnabled)
+					return null;
+				var breakerOnly = new List<MiniYamlNode>();
+				StalemateSave(breakerOnly);
+				return breakerOnly.Count > 0 ? breakerOnly : null;
+			}
 
 			var data = new List<MiniYamlNode>()
 			{
@@ -4186,6 +4314,8 @@ namespace OpenRA.Mods.CA.Traits
 					data.Add(new MiniYamlNode("M13Player", "", M13PlayerSnapshotNodes()));
 			}
 
+			// BOTPASSIVE (switch ON only): adds no node while off.
+			StalemateSave(data);
 			return data;
 		}
 
@@ -4276,6 +4406,9 @@ namespace OpenRA.Mods.CA.Traits
 			var inPool = unitsHangingAroundTheBase.Select(u => u.Actor).ToHashSet();
 			foreach (var a in activeUnits.Where(a => !inSquads.Contains(a) && !inPool.Contains(a) && !unitCannotBeOrdered(a)))
 				unitsHangingAroundTheBase.Add(new UnitWposWrapper(a));
+
+			// BOTPASSIVE (switch ON only).
+			StalemateLoad(nodes);
 		}
 
 		List<MiniYamlNode> M13PlayerSnapshotNodes()
@@ -4523,6 +4656,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		void INotifyActorDisposing.Disposing(Actor self)
 		{
+			DiagnosticComplete();
 			constructionYardBuildings.Dispose();
 		}
 	}

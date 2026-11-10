@@ -25,6 +25,9 @@ namespace OpenRA.Mods.Cameo.Traits
 				// diagnostic predicate, not an eviction receipt — CancelUnbuildableItems
 				// is cached-set gated and prefers migration, so an uninstrumented
 				// removal plus prerequisite loss produces the identical observation.
+				// RC01-OUTER01 (E8): a receipt-backed EvictedUnbuildable (the engine's eviction receipt bound
+				// to this exact item and episode) is admitted here as Observation. A bare Unbuildable stays
+				// Unknown.
 				// The class still serializes for diagnosis; the unresolved removal
 				// latches UNKNOWN. Only an unresolved Removed with no proven cause is an
 				// unproven disappearance and stays UNKNOWN.
@@ -32,6 +35,7 @@ namespace OpenRA.Mods.Cameo.Traits
 					|| transition.CancellationClass is BotQueueCancellationClass.Destruction
 						or BotQueueCancellationClass.Elimination
 						or BotQueueCancellationClass.Captured
+						or BotQueueCancellationClass.EvictedUnbuildable
 					? EconomyQueueEvidenceKind.Observation
 					: EconomyQueueEvidenceKind.Unknown;
 			if (transition.Kind is not (BotQueueTransitionKind.Placed or BotQueueTransitionKind.Cancelled))
@@ -68,6 +72,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			// Unbuildable is diagnostic-only (Sol adjudication 2026-10-14) and can never
 			// enter canonical cancel evidence — a Cancelled row carrying it maps to null
 			// and stays UNKNOWN rather than asserting the unproven eviction.
+			// RC01-OUTER01 (E8, Sonnet review 02 item 2): EvictedUnbuildable has no cancellation class
+			// and maps to null here, so a Cancelled row carrying it stays Unknown.
 			_ => null
 		};
 

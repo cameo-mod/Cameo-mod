@@ -48,6 +48,22 @@ namespace OpenRA.Mods.CA.Traits
 			["exploit_guerrilla"] = "hard",
 		};
 
+		/// <summary>
+		/// NOOB-TIER-01 (user ruling): noob sits one linear step below easiest. It is NOT in the lists above, so
+		/// every existing rank (easiest = 0) is unchanged. Its values are InterpolateByRank at NoobRank, and where
+		/// that step is impossible (below the knob's floor) the value is easiest's.
+		/// </summary>
+		public const int NoobRank = -1;
+
+		/// <summary>The bot type that plays the noob tier (ai.yaml ModularBot@NoobAI).</summary>
+		public const string NoobBotType = "noob";
+
+		/// <summary>True when the owner is a noob bot.</summary>
+		public static bool IsNoob(Player owner)
+		{
+			return owner != null && owner.IsBot && string.Equals(owner.BotType, NoobBotType, StringComparison.OrdinalIgnoreCase);
+		}
+
 		/// <summary>Bot-type rank on the ladder, aliases applied. -1 = not a listed bot.</summary>
 		public static int RankOf(Player owner, string[] difficulties = null, IReadOnlyDictionary<string, string> aliases = null)
 		{
@@ -75,6 +91,13 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>Resolve + interpolate in one step on the canonical ladder. Unranked owners get <paramref name="unranked"/>.</summary>
 		public static int Scale(int min, int max, Player owner, int unranked = 0)
 		{
+			if (IsNoob(owner))
+			{
+				// One step below easiest; impossible (negative) falls back to easiest's value.
+				var noob = InterpolateByRank(min, max, NoobRank, Difficulties.Length);
+				return noob >= 0 ? noob : InterpolateByRank(min, max, 0, Difficulties.Length);
+			}
+
 			var rank = RankOf(owner);
 			return rank < 0 ? unranked : InterpolateByRank(min, max, rank, Difficulties.Length);
 		}

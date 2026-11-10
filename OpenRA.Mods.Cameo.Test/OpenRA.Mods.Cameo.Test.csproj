@@ -49,6 +49,9 @@
     <None Include="../mods/cameo/ai/ai.yaml"
           Link="tools/tests/fixtures/mcv_deploy_ai.yaml"
           CopyToOutputDirectory="Always" />
+    <None Include="../tools/ai/increment_switches.yaml"
+          Link="tools/tests/fixtures/increment_switches.yaml"
+          CopyToOutputDirectory="Always" />
     <None Include="../tools/tests/fixtures/mcv_deploy_cell_legacy_block.yaml"
           Link="tools/tests/fixtures/mcv_deploy_cell_legacy_block.yaml"
           CopyToOutputDirectory="Always" />

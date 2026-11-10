@@ -18,7 +18,7 @@ import tempfile
 POLICY_VERSION = "startup-economy-v1"
 PROFILES = {"td_gdi", "td_nod", "ra1_allies", "ra1_soviets", "japan"}
 MAX_FILE_BYTES = 128 * 1024 * 1024
-MAX_LINE_BYTES = 1024 * 1024
+MAX_LINE_BYTES = 8 * 1024 * 1024  # RH-BOUND-01: 8-seat matches rows reach 1.6 MiB at 43k ticks
 MAX_ROWS = 200000
 REFERENCE_BOTS = {"classic", "classic_hard"}
 
@@ -96,7 +96,7 @@ PLAYER_EVENT_V1_FIELDS = {
 PLAYER_EVENT_KINDS = {
     "building_placed", "structure_lost", "conyard_deployed", "conyard_packed",
     "first_unit_enemy_territory", "attack_wave_start", "superweapon_built",
-    "superweapon_fired",
+    "superweapon_fired", "mcv_lost",
 }
 # CB_frontier_observe (P3a, DESIGN_2026-10-12_protected_frontier §8): outpost_stage
 # rows emit at version 2 — the field/kind sets dispatch on the row's own version so

@@ -246,6 +246,60 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void Row03ReceiptEvictionKeepsCensusCompleteWithoutDroppedTelemetry()
+		{
+			// FREEZE5-PREP01 row-03 shape (recorder level): ra1_advancedpowerplant, episode 34, evicted
+			// unbuildable with its engine receipt. The recorder marks coverage incomplete only when
+			// Classify returns Unknown, so the receipt-backed Removed must leave the census complete.
+			var evicted = new BotQueueTransition(10, "ra1_advancedpowerplant", "Building", BuildingType.Building,
+				17, 34, BotQueueTransitionKind.Removed, BotQueueTransitionReason.None, true, true,
+				BotQueueCancellationClass.EvictedUnbuildable);
+			var state = new AiEconomyHealthState();
+			if (AiEconomyQueueEvidence.Classify(in evicted) == EconomyQueueEvidenceKind.Unknown)
+				state.MarkIncomplete();
+			state.Observe(0, System.Array.Empty<EconomyQueueObservation>());
+			state.Observe(1, System.Array.Empty<EconomyQueueObservation>());
+			Assert.That(state.Complete, Is.True, "a receipt-backed eviction is Observation, not a census gap");
+
+			// Control: the same shape without the receipt is the row-03 gap and marks the census incomplete.
+			var bare = new BotQueueTransition(10, "ra1_advancedpowerplant", "Building", BuildingType.Building,
+				17, 34, BotQueueTransitionKind.Removed, BotQueueTransitionReason.None, true, true,
+				BotQueueCancellationClass.Unbuildable);
+			var control = new AiEconomyHealthState();
+			if (AiEconomyQueueEvidence.Classify(in bare) == EconomyQueueEvidenceKind.Unknown)
+				control.MarkIncomplete();
+			Assert.That(control.Complete, Is.False);
+		}
+
+		[Test]
+		public void ReceiptBackedEvictionObservesOnRemovedPathOnly()
+		{
+			// RC01-OUTER01 (E8, T5): the engine's CancelUnbuildableItems receipt, bound to this exact
+			// item and episode, is the only proof of an unbuildable eviction. It is admitted on the
+			// Removed path as Observation. A bare Unbuildable is not, and an eviction never serializes
+			// a cancellation class.
+			var evicted = Transition(BotQueueTransitionKind.Removed, cls: BotQueueCancellationClass.EvictedUnbuildable);
+			Assert.That(AiEconomyQueueEvidence.Classify(in evicted), Is.EqualTo(EconomyQueueEvidenceKind.Observation));
+			Assert.That(AiEconomyQueueEvidence.Classify(in evicted, false), Is.EqualTo(EconomyQueueEvidenceKind.Observation));
+			Assert.That(AiEconomyQueueEvidence.TryCancellation(in evicted, "17:Building:Building", out _), Is.False);
+
+			var unbuildable = Transition(BotQueueTransitionKind.Removed, cls: BotQueueCancellationClass.Unbuildable);
+			Assert.That(AiEconomyQueueEvidence.Classify(in unbuildable), Is.EqualTo(EconomyQueueEvidenceKind.Unknown));
+			var none = Transition(BotQueueTransitionKind.Removed, cls: BotQueueCancellationClass.None);
+			Assert.That(AiEconomyQueueEvidence.Classify(in none), Is.EqualTo(EconomyQueueEvidenceKind.Unknown));
+		}
+
+		[Test]
+		public void EvictedUnbuildableCancelledRowStaysUnknown()
+		{
+			// Sonnet review 02, item 4 (T5): a Cancelled row carrying EvictedUnbuildable has no
+			// cancellation class. It is never a proven cancellation and serializes none.
+			var t = Transition(BotQueueTransitionKind.Cancelled, cls: BotQueueCancellationClass.EvictedUnbuildable);
+			Assert.That(AiEconomyQueueEvidence.Classify(in t), Is.EqualTo(EconomyQueueEvidenceKind.Unknown));
+			Assert.That(AiEconomyQueueEvidence.TryCancellation(in t, "17:Building:Building", out _), Is.False);
+		}
+
+		[Test]
 		public void UnbuildableRemovalPermanentlyMarksCoverageUnknown()
 		{
 			// DISCRIMINATOR-REPAIR (01a13908, Sol adjudication 2026-10-14) — the
