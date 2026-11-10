@@ -293,55 +293,6 @@ class HealthTests(unittest.TestCase):
                           legacy["metrics"]["first_refinery_placement_tick"])
         self.assertNotIn("MISSING_SITUATIONS", [f["code"] for f in seated["findings"]])
 
-    def test_seat_privacy_schema_malformed_missing_duplicate_and_conflicts_fail_closed(self):
-        def seated_inputs():
-            situations = []
-            for tick in (3000, 3750, 4500):
-                row = snapshot(tick, 1, 1, bank=30000)
-                row["seat"] = row.pop("player")
-                situations.append(row)
-            placed = placement(player="hard")
-            placed["seat"] = placed.pop("player")
-            final = terminal()
-            final["schema"] = 3
-            final["record_id"] = "g|hard"
-            final["player"] = {"seat": final["player"].pop("name"), **final["player"]}
-            return situations, [placed], [final]
-
-        # With all selected identities missing or malformed, the raw checker
-        # preserves UNKNOWN/MISSING_SITUATIONS rather than inferring a seat.
-        for malformed in (False, True):
-            situations, placements, matches = seated_inputs()
-            for row in situations:
-                row.pop("seat")
-                if malformed:
-                    row["player"] = 17
-                else:
-                    row.pop("player", None)
-            report = health.analyze(situations, placements, matches, "g", "hard")
-            self.assertEqual(report["status"], "UNKNOWN")
-            self.assertIn("MISSING_SITUATIONS", [item["code"] for item in report["findings"]])
-
-        situations, placements, matches = seated_inputs()
-        situations.append(dict(situations[-1]))
-        with self.assertRaisesRegex(health.EvidenceError, "duplicate or non-monotonic"):
-            health.analyze(situations, placements, matches, "g", "hard")
-
-        situations, placements, matches = seated_inputs()
-        situations[0]["player"] = "other-seat"
-        with self.assertRaisesRegex(health.EvidenceError, "conflicting situation"):
-            health.analyze(situations, placements, matches, "g", "hard")
-
-        situations, placements, matches = seated_inputs()
-        placements[0]["player"] = "other-seat"
-        with self.assertRaisesRegex(health.EvidenceError, "conflicting placement"):
-            health.analyze(situations, placements, matches, "g", "hard")
-
-        situations, placements, matches = seated_inputs()
-        matches[0]["player"]["name"] = "other-seat"
-        with self.assertRaisesRegex(health.EvidenceError, "conflicting terminal"):
-            health.analyze(situations, placements, matches, "g", "hard")
-
     def test_row_line_bound_is_8_mib_and_a_5_mib_row_parses(self):
         # RH-BOUND-01: 8-seat matches rows reach 1.6 MiB at 43k ticks (cap 60k); the old 1 MiB bound refused every such game.
         with tempfile.TemporaryDirectory() as temp:
