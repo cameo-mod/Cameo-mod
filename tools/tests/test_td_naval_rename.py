@@ -281,6 +281,14 @@ class TdNavalRenameTests(unittest.TestCase):
             return True
         if re.match(r'^/Production(Cost|Time)Multiplier@[^/]+botplayer/Multiplier: baseline "\d+" != live "\d+"$', diff):
             return True
+        # FIX-4 (Opus, 2026-11-10): the port's noob-tier rules add a noobbotplayer multiplier pair and
+        # DynamicWeaponPriority to two renamed actors. Exact diff strings for those two new ids only;
+        # the frozen captured baseline fixture is unchanged.
+        if new in ("td_gdi_landingcraft", "td_nod_transportsubmarine") and diff in (
+                '/AutoTarget/DynamicWeaponPriority: added "true"',
+                '/ProductionCostMultiplier@noobbotplayer: added {"Multiplier": "125", "Prerequisites": "noobbotplayer"}',
+                '/ProductionTimeMultiplier@noobbotplayer: added {"Multiplier": "150", "Prerequisites": "noobbotplayer"}'):
+            return True
         return False
 
     def test_complete_normalized_resolved_payloads_match_baseline(self):
