@@ -1370,16 +1370,25 @@ namespace OpenRA.Mods.CA.Traits
 		/// Bounded by the item count; cleared when the queue is observed again.</summary>
 		public readonly Dictionary<object, int> GoneSince = [];
 
+		/// <summary>S2-RECEIPT-01: items whose engine eviction receipt was bound and consumed at the FIRST stale
+		/// sweep that saw them gone. The receipt lives 64 engine ticks while the grace window holds the item for
+		/// <see cref="BaseBuilderQueueEvalCA.StaleResolveGraceTicks"/>, so a receipt read at resolve time has always
+		/// expired (RCA E6E2C60F: conyard lost, queued building evicted, Removed class None, DROPPED_TELEMETRY).
+		/// The stored positive result feeds the same cause ladder at resolve. Bounded by the item count; cleared
+		/// with GoneSince.</summary>
+		public readonly HashSet<object> EvictedAtFirstGone = [];
+
 		/// <summary>S2 F2: one stale sweep over the watched items (the queue left FindQueues). Records
 		/// first-gone ticks for held items, forgets items that are still queued, and returns the items
 		/// to resolve now (null = none). The caller resolves them and removes them from Items.</summary>
 		public List<object> StaleSweep(Func<object, bool> stillQueued, bool playerEliminated,
-			bool producerLive, bool producerOwned, int now)
+			bool producerLive, bool producerOwned, int now, Func<object, bool> bindEviction = null)
 		{
 			List<object> resolve = null;
 			foreach (var item in Items)
 			{
-				if (!GoneSince.TryGetValue(item, out var firstGone))
+				var firstSeenGone = !GoneSince.TryGetValue(item, out var firstGone);
+				if (firstSeenGone)
 					firstGone = now;
 
 				switch (BaseBuilderQueueEvalCA.StaleItemDecision(
@@ -1387,9 +1396,14 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					case BotStaleItemDecision.Keep:
 						GoneSince.Remove(item);
+						EvictedAtFirstGone.Remove(item);
 						break;
 					case BotStaleItemDecision.Hold:
 						GoneSince[item] = firstGone;
+						// S2-RECEIPT-01: bind the engine eviction receipt once, at the first sweep that sees the item
+						// gone (the receipt is 64 ticks old at most then); the result is kept for the resolve.
+						if (firstSeenGone && bindEviction != null && bindEviction(item))
+							EvictedAtFirstGone.Add(item);
 						break;
 					default:
 						(resolve ??= []).Add(item);

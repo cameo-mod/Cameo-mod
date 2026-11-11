@@ -150,6 +150,8 @@ namespace OpenRA.Mods.Cameo.Test
 			public bool Live = true;
 			public bool Owned = true;
 			public bool Eliminated;
+			public int Now; // lets a Bind closure read the sweep tick
+			public Func<object, bool> Bind; // S2-RECEIPT-01: models the manager's first-gone receipt bind (null = none)
 
 			public object AddItem()
 			{
@@ -163,12 +165,13 @@ namespace OpenRA.Mods.Cameo.Test
 			{
 				var result = new List<(object, BotQueueCancellationClass)>();
 				var scratch = Live && Owned && !Eliminated ? Queued : new HashSet<object>();
-				var resolve = Watch.StaleSweep(o => scratch.Contains(o), Eliminated, Live, Owned, now);
+				var resolve = Watch.StaleSweep(o => scratch.Contains(o), Eliminated, Live, Owned, now, Bind);
 				if (resolve != null)
 					foreach (var item in resolve)
 					{
+						var evicted = Watch.EvictedAtFirstGone.Remove(item); // as ResolveRemovedItem reads it
 						result.Add((item, BaseBuilderQueueEvalCA.RemovalCauseClass(Eliminated, Live, Owned,
-							queueSeen: false, itemBuildable: false)));
+							queueSeen: false, itemBuildable: false, unbuildableEvicted: evicted)));
 						Watch.Items.Remove(item);
 						Watch.GoneSince.Remove(item);
 					}
@@ -221,6 +224,103 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(resolved, Has.Count.EqualTo(1));
 			Assert.That(resolved[0].Class, Is.EqualTo(BotQueueCancellationClass.None),
 				"a live producer at expiry is as unproven as today: class None = UNKNOWN");
+		}
+
+		// ---- S2-RECEIPT-01: the eviction receipt (64 ticks) is bound at first-gone, not at the 600-tick resolve ----
+
+		// Engine eviction receipt lifetime (ProductionQueue.UnbuildableEvictionReceiptLifetime).
+		const int ReceiptLifetime = 64;
+
+		[Test]
+		public void ConyardLostQueuedBuildingEvictedGraceResolvesAsEvictedUnbuildable()
+		{
+			// The stage S S2 / VERIFY G3 sequence: the conyard dies, the queue is disabled (left FindQueues), the engine
+			// evicts the queued building and writes a receipt; the bot sweeps every 25 ticks, holds the item for the
+			// grace window and resolves it 600 ticks later with a producer (the Player actor) that still reads live.
+			const int evictedAt = 22115;
+			var receiptLive = true;
+			var bindCalls = 0;
+			var m = new StaleModel();
+			var item = m.AddItem();
+			m.Bind = o =>
+			{
+				bindCalls++;
+				var valid = receiptLive && m.Now - evictedAt < ReceiptLifetime;
+				receiptLive = false; // bind-and-consume: a receipt answers exactly once
+				return valid;
+			};
+
+			m.Queued.Remove(item); // evicted at 22115
+			List<(object Item, BotQueueCancellationClass Class)> resolved = null;
+			for (var tick = 22125; resolved == null || resolved.Count == 0; tick += 25)
+			{
+				m.Now = tick;
+				resolved = m.Sweep(tick);
+				Assert.That(tick, Is.LessThan(22125 + BaseBuilderQueueEvalCA.StaleResolveGraceTicks + 50), "never resolves");
+			}
+
+			Assert.That(bindCalls, Is.EqualTo(1), "bound once, at the first sweep that saw the item gone");
+			Assert.That(resolved, Has.Count.EqualTo(1));
+			Assert.That(resolved[0].Item, Is.SameAs(item));
+			Assert.That(resolved[0].Class, Is.EqualTo(BotQueueCancellationClass.EvictedUnbuildable),
+				"the cause was bound while the receipt was alive, so the 600-tick resolve is receipt-backed, not None");
+			Assert.That(m.Watch.EvictedAtFirstGone, Is.Empty);
+		}
+
+		[Test]
+		public void FirstGoneWithoutAReceiptStaysAnHonestUnknown()
+		{
+			// Sell or transform clear the queue with no engine eviction: no receipt, so nothing is invented.
+			var m = new StaleModel { Bind = o => false };
+			var item = m.AddItem();
+			m.Queued.Remove(item);
+			Assert.That(m.Sweep(100), Is.Empty);
+			Assert.That(m.Watch.EvictedAtFirstGone, Is.Empty);
+
+			var resolved = m.Sweep(100 + BaseBuilderQueueEvalCA.StaleResolveGraceTicks);
+			Assert.That(resolved, Has.Count.EqualTo(1));
+			Assert.That(resolved[0].Class, Is.EqualTo(BotQueueCancellationClass.None));
+		}
+
+		[Test]
+		public void DisposedProducerStillOutranksAStoredReceipt()
+		{
+			// The ladder order is unchanged: a producer that is disposed inside the window is a proven Destruction
+			// even when a receipt was bound at first-gone.
+			var m = new StaleModel { Bind = o => true };
+			var item = m.AddItem();
+			m.Queued.Remove(item);
+			Assert.That(m.Sweep(100), Is.Empty);
+			Assert.That(m.Watch.EvictedAtFirstGone, Does.Contain(item));
+
+			m.Live = false;
+			var resolved = m.Sweep(160);
+			Assert.That(resolved, Has.Count.EqualTo(1));
+			Assert.That(resolved[0].Class, Is.EqualTo(BotQueueCancellationClass.Destruction));
+		}
+
+		[Test]
+		public void ReceiptIsBoundOncePerGoneEpisodeAndNeverWhileStillQueued()
+		{
+			var binds = 0;
+			var m = new StaleModel { Bind = o => { binds++; return true; } };
+			var item = m.AddItem();
+			for (var tick = 100; tick < 400; tick += 25)
+				Assert.That(m.Sweep(tick), Is.Empty);
+
+			Assert.That(binds, Is.EqualTo(0), "an intact queue is unobserved: nothing is bound");
+
+			m.Queued.Remove(item);
+			for (var tick = 400; tick < 500; tick += 25)
+				Assert.That(m.Sweep(tick), Is.Empty);
+
+			Assert.That(binds, Is.EqualTo(1), "one bind for the whole gone episode");
+			Assert.That(m.Watch.EvictedAtFirstGone, Does.Contain(item));
+
+			m.Queued.Add(item); // the queue is observed intact again: the episode is over
+			Assert.That(m.Sweep(500), Is.Empty);
+			Assert.That(m.Watch.EvictedAtFirstGone, Is.Empty);
+			Assert.That(m.Watch.GoneSince, Is.Empty);
 		}
 
 		[Test]

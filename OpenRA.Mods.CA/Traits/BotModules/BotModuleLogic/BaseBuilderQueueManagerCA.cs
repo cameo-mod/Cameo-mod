@@ -194,6 +194,7 @@ namespace OpenRA.Mods.CA.Traits
 
 				watch.SeenTick = tick;
 				watch.GoneSince.Clear();
+				watch.EvictedAtFirstGone.Clear();
 				var now = queue.AllQueued();
 
 				queueProbeScratch.Clear();
@@ -298,13 +299,15 @@ namespace OpenRA.Mods.CA.Traits
 							queueProbeScratch.Add(it);
 
 					var resolve = watch.StaleSweep(o => queueProbeScratch.Contains((ProductionItem)o),
-						eliminated, staleLive, staleOwned, tick);
+						eliminated, staleLive, staleOwned, tick,
+						o => ConsumeUnbuildableEviction(kv.Key, (ProductionItem)o, queueEpisodes.EpisodeOf(o)));
 					if (resolve != null)
 						foreach (var old in resolve)
 						{
 							ResolveRemovedItem(kv.Key, watch, (ProductionItem)old, queueSeen: false);
 							watch.Items.Remove(old);
 							watch.GoneSince.Remove(old);
+							watch.EvictedAtFirstGone.Remove(old);
 						}
 				}
 
@@ -365,7 +368,9 @@ namespace OpenRA.Mods.CA.Traits
 			// request can await actor proof far longer, so every later emit reads the stored result
 			// (E2) and never asks the engine again.
 			var episode = queueEpisodes.EpisodeOf(oldItem);
-			var evicted = ConsumeUnbuildableEviction(queue, oldItem, episode);
+			// S2-RECEIPT-01: a stale item's receipt was already bound at its first-gone sweep (the grace window
+			// outlasts the 64-tick receipt); a first detection on the live path still asks the engine here.
+			var evicted = watch.EvictedAtFirstGone.Remove(oldItem) || ConsumeUnbuildableEviction(queue, oldItem, episode);
 
 			if (pending != null)
 			{
