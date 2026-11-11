@@ -25,6 +25,8 @@ namespace OpenRA.Mods.Cameo.Traits
 				// diagnostic predicate, not an eviction receipt — CancelUnbuildableItems
 				// is cached-set gated and prefers migration, so an uninstrumented
 				// removal plus prerequisite loss produces the identical observation.
+				// S2-RECEIPT-02: ProducerDisabledCleared (the engine ClearQueue ran with every producer of the queue
+				// type disabled; the receipts are cleared by the same call) is admitted on the Removed path like EvictedUnbuildable.
 				// RC01-OUTER01 (E8): a receipt-backed EvictedUnbuildable (the engine's eviction receipt bound
 				// to this exact item and episode) is admitted here as Observation. A bare Unbuildable stays
 				// Unknown.
@@ -36,6 +38,7 @@ namespace OpenRA.Mods.Cameo.Traits
 						or BotQueueCancellationClass.Elimination
 						or BotQueueCancellationClass.Captured
 						or BotQueueCancellationClass.EvictedUnbuildable
+						or BotQueueCancellationClass.ProducerDisabledCleared
 					? EconomyQueueEvidenceKind.Observation
 					: EconomyQueueEvidenceKind.Unknown;
 			if (transition.Kind is not (BotQueueTransitionKind.Placed or BotQueueTransitionKind.Cancelled))

@@ -287,6 +287,11 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(AiEconomyQueueEvidence.Classify(in unbuildable), Is.EqualTo(EconomyQueueEvidenceKind.Unknown));
 			var none = Transition(BotQueueTransitionKind.Removed, cls: BotQueueCancellationClass.None);
 			Assert.That(AiEconomyQueueEvidence.Classify(in none), Is.EqualTo(EconomyQueueEvidenceKind.Unknown));
+			// S2-RECEIPT-02: ClearQueue with every producer disabled is an accounted removal cause on the Removed path only.
+			var cleared = Transition(BotQueueTransitionKind.Removed, cls: BotQueueCancellationClass.ProducerDisabledCleared);
+			Assert.That(AiEconomyQueueEvidence.Classify(in cleared), Is.EqualTo(EconomyQueueEvidenceKind.Observation));
+			var clearedCancel = Transition(BotQueueTransitionKind.Cancelled, cls: BotQueueCancellationClass.ProducerDisabledCleared);
+			Assert.That(AiEconomyQueueEvidence.Classify(in clearedCancel), Is.EqualTo(EconomyQueueEvidenceKind.Unknown));
 		}
 
 		[Test]

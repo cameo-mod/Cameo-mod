@@ -845,7 +845,7 @@ namespace OpenRA.Mods.CA.Traits
 		/// is not even diagnostic buildability evidence.</summary>
 		public static BotQueueCancellationClass RemovalCauseClass(
 			bool playerEliminated, bool producerLive, bool producerOwned, bool queueSeen, bool itemBuildable,
-			bool unbuildableEvicted = false)
+			bool unbuildableEvicted = false, bool producerSetDisabled = false)
 		{
 			if (playerEliminated)
 				return BotQueueCancellationClass.Elimination;
@@ -853,6 +853,11 @@ namespace OpenRA.Mods.CA.Traits
 				return BotQueueCancellationClass.Destruction;
 			if (!producerOwned)
 				return BotQueueCancellationClass.Captured;
+			// S2-RECEIPT-02: the engine's ClearQueue ran because every production trait of this queue type was
+			// disabled (the last producer lost). It refunds and clears every item and wipes the eviction receipts,
+			// so no receipt exists for the item. This class supersedes EvictedUnbuildable for that removal.
+			if (producerSetDisabled)
+				return BotQueueCancellationClass.ProducerDisabledCleared;
 			// E6 (RC01-OUTER01): the engine's receipt proves CancelUnbuildableItems evicted this exact
 			// item. It outranks the diagnostic Unbuildable predicate, and the stale-watch gate does not
 			// revoke it. A receiptless queueSeen && !buildable still returns Unbuildable.
@@ -1114,7 +1119,13 @@ namespace OpenRA.Mods.CA.Traits
 		/// CancelUnbuildableItems eviction receipt is bound to that exact ProductionItem and this
 		/// episode (E1). The only admitted proof of an unbuildable eviction. Evidence admits it on the
 		/// Removed path alone and never as a cancellation class. Appended last: no value is renumbered.</summary>
-		EvictedUnbuildable
+		EvictedUnbuildable,
+
+		/// <summary>S2-RECEIPT-02: the item left a live, owned queue because the engine's ClearQueue ran with every
+		/// production trait of the queue type disabled (the last producer lost, e.g. the last construction yard).
+		/// Bound at the first sweep that sees the item gone, like EvictedAtFirstGone. Evidence admits it on the
+		/// Removed path as an accounted, proven cause. Appended last: no value is renumbered.</summary>
+		ProducerDisabledCleared
 	}
 
 	public readonly struct BotQueueTransition
@@ -1295,6 +1306,10 @@ namespace OpenRA.Mods.CA.Traits
 		/// queries the engine. A name-only request cannot bind a receipt (the engine keys by reference).</summary>
 		public bool UnbuildableEvicted;
 
+		/// <summary>S2-RECEIPT-02: the producer set was disabled (the engine ClearQueue ran) at the removal, bound at first
+		/// detection with UnbuildableEvicted; the emit path reads it and never asks the queue again.</summary>
+		public bool ProducerDisabled;
+
 		/// <summary>S2 F1 world-free seam: the plug install proof for this request, from the facts the
 		/// caller reads off the captured host's slot. False for a non-plug request and for an
 		/// ineligible (dead, disowned or missing) host.</summary>
@@ -1378,11 +1393,16 @@ namespace OpenRA.Mods.CA.Traits
 		/// with GoneSince.</summary>
 		public readonly HashSet<object> EvictedAtFirstGone = [];
 
+		/// <summary>S2-RECEIPT-02: items whose queue had every production trait disabled when first seen gone (the engine
+		/// ClearQueue ran). Bound once at the first sweep, like EvictedAtFirstGone. Bounded by the item count.</summary>
+		public readonly HashSet<object> QueueDisabledAtFirstGone = [];
+
 		/// <summary>S2 F2: one stale sweep over the watched items (the queue left FindQueues). Records
 		/// first-gone ticks for held items, forgets items that are still queued, and returns the items
 		/// to resolve now (null = none). The caller resolves them and removes them from Items.</summary>
 		public List<object> StaleSweep(Func<object, bool> stillQueued, bool playerEliminated,
-			bool producerLive, bool producerOwned, int now, Func<object, bool> bindEviction = null)
+			bool producerLive, bool producerOwned, int now, Func<object, bool> bindEviction = null,
+				Func<object, bool> bindQueueDisabled = null)
 		{
 			List<object> resolve = null;
 			foreach (var item in Items)
@@ -1397,6 +1417,7 @@ namespace OpenRA.Mods.CA.Traits
 					case BotStaleItemDecision.Keep:
 						GoneSince.Remove(item);
 						EvictedAtFirstGone.Remove(item);
+						QueueDisabledAtFirstGone.Remove(item);
 						break;
 					case BotStaleItemDecision.Hold:
 						GoneSince[item] = firstGone;
@@ -1404,6 +1425,8 @@ namespace OpenRA.Mods.CA.Traits
 						// gone (the receipt is 64 ticks old at most then); the result is kept for the resolve.
 						if (firstSeenGone && bindEviction != null && bindEviction(item))
 							EvictedAtFirstGone.Add(item);
+						if (firstSeenGone && bindQueueDisabled != null && bindQueueDisabled(item))
+							QueueDisabledAtFirstGone.Add(item);
 						break;
 					default:
 						(resolve ??= []).Add(item);

@@ -300,7 +300,8 @@ namespace OpenRA.Mods.CA.Traits
 
 					var resolve = watch.StaleSweep(o => queueProbeScratch.Contains((ProductionItem)o),
 						eliminated, staleLive, staleOwned, tick,
-						o => ConsumeUnbuildableEviction(kv.Key, (ProductionItem)o, queueEpisodes.EpisodeOf(o)));
+						o => ConsumeUnbuildableEviction(kv.Key, (ProductionItem)o, queueEpisodes.EpisodeOf(o)),
+							o => ProducerSetDisabled(kv.Key));
 					if (resolve != null)
 						foreach (var old in resolve)
 						{
@@ -308,6 +309,7 @@ namespace OpenRA.Mods.CA.Traits
 							watch.Items.Remove(old);
 							watch.GoneSince.Remove(old);
 							watch.EvictedAtFirstGone.Remove(old);
+							watch.QueueDisabledAtFirstGone.Remove(old);
 						}
 				}
 
@@ -371,10 +373,13 @@ namespace OpenRA.Mods.CA.Traits
 			// S2-RECEIPT-01: a stale item's receipt was already bound at its first-gone sweep (the grace window
 			// outlasts the 64-tick receipt); a first detection on the live path still asks the engine here.
 			var evicted = watch.EvictedAtFirstGone.Remove(oldItem) || ConsumeUnbuildableEviction(queue, oldItem, episode);
+			// S2-RECEIPT-02: the ClearQueue flag is bound at first-gone on the stale path; a live first detection reads it now.
+			var producerDisabled = watch.QueueDisabledAtFirstGone.Remove(oldItem) || (queueSeen && ProducerSetDisabled(queue));
 
 			if (pending != null)
 			{
 				pending.UnbuildableEvicted = evicted;
+				pending.ProducerDisabled = producerDisabled;
 				var resolution = pending.ResolveOnRemoval(world.WorldTick, queueSeen, PlacementProof(pending));
 				if (resolution == BotQueuePendingResolution.KeepAwaitingProof)
 				{
@@ -394,7 +399,7 @@ namespace OpenRA.Mods.CA.Traits
 				queueEpisodes.EndEpisode(oldItem);
 				EmitQueueTransition(queue, queue.Actor, oldItem, oldItem.Item, QueueCategoryOf(oldItem.Item),
 					BotQueueTransitionKind.Removed, BotQueueTransitionReason.None,
-					ResolveRemovalCause(queue, oldItem.Item, evicted, live, queueSeen), episode);
+					ResolveRemovalCause(queue, oldItem.Item, evicted, live, queueSeen, producerDisabled), episode);
 			}
 		}
 
@@ -427,7 +432,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			// E2: the receipt result was bound at first detection; the emit path never asks the engine.
 			var cls = proven ? BotQueueCancellationClass.None
-				: ResolveRemovalCause(queue, itemName, pending.UnbuildableEvicted, live, queueSeen);
+				: ResolveRemovalCause(queue, itemName, pending.UnbuildableEvicted, live, queueSeen, pending.ProducerDisabled);
 			EmitQueueTransition(queue, queue.Actor, itemRef, itemName, QueueCategoryOf(itemName),
 				proven ? pending.Kind : BotQueueTransitionKind.Removed, pending.Reason, cls, episode);
 		}
@@ -443,14 +448,20 @@ namespace OpenRA.Mods.CA.Traits
 		// evidence seam latches it UNKNOWN like None. Proven mechanism causes
 		// (unconditional ClearQueue paths) observe; every other live-queue removal
 		// stays None = UNKNOWN.
-		BotQueueCancellationClass ResolveRemovalCause(ProductionQueue queue, string itemName, bool evicted, bool live, bool queueSeen)
+		BotQueueCancellationClass ResolveRemovalCause(ProductionQueue queue, string itemName, bool evicted, bool live, bool queueSeen,
+			bool producerDisabled)
 		{
 			var owned = queue.Actor.Owner == player;
 			var buildable = queueSeen && live && owned
 				&& queue.BuildableItems().Any(b => b.Name == itemName);
 			return BaseBuilderQueueEvalCA.RemovalCauseClass(
-				player.WinState != WinState.Undefined, live, owned, queueSeen, buildable, evicted);
+				player.WinState != WinState.Undefined, live, owned, queueSeen, buildable, evicted, producerDisabled);
 		}
+
+		// S2-RECEIPT-02: the exact ClearQueue condition (ProductionQueue.Tick): no production trait of this queue type is
+		// enabled. The engine then refunds and clears every item and wipes the eviction receipts in the same call.
+		static bool ProducerSetDisabled(ProductionQueue queue) =>
+			!queue.Actor.TraitsImplementing<Production>().Any(p => p.Info.Produces.Contains(queue.Info.Type) && !p.IsTraitDisabled);
 
 		// Actor-lifecycle proof for a Placed request — the lead's "building actor added to
 		// the world" criterion: an own, live actor of the ordered type occupying the ordered

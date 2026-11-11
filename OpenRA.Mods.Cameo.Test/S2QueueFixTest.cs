@@ -152,6 +152,7 @@ namespace OpenRA.Mods.Cameo.Test
 			public bool Eliminated;
 			public int Now; // lets a Bind closure read the sweep tick
 			public Func<object, bool> Bind; // S2-RECEIPT-01: models the manager's first-gone receipt bind (null = none)
+			public Func<object, bool> BindDisabled; // S2-RECEIPT-02: models the manager's first-gone ClearQueue bind (null = none)
 
 			public object AddItem()
 			{
@@ -165,13 +166,14 @@ namespace OpenRA.Mods.Cameo.Test
 			{
 				var result = new List<(object, BotQueueCancellationClass)>();
 				var scratch = Live && Owned && !Eliminated ? Queued : new HashSet<object>();
-				var resolve = Watch.StaleSweep(o => scratch.Contains(o), Eliminated, Live, Owned, now, Bind);
+				var resolve = Watch.StaleSweep(o => scratch.Contains(o), Eliminated, Live, Owned, now, Bind, BindDisabled);
 				if (resolve != null)
 					foreach (var item in resolve)
 					{
 						var evicted = Watch.EvictedAtFirstGone.Remove(item); // as ResolveRemovedItem reads it
+						var disabledFlag = Watch.QueueDisabledAtFirstGone.Remove(item); // as ResolveRemovedItem reads it
 						result.Add((item, BaseBuilderQueueEvalCA.RemovalCauseClass(Eliminated, Live, Owned,
-							queueSeen: false, itemBuildable: false, unbuildableEvicted: evicted)));
+							queueSeen: false, itemBuildable: false, unbuildableEvicted: evicted, producerSetDisabled: disabledFlag)));
 						Watch.Items.Remove(item);
 						Watch.GoneSince.Remove(item);
 					}
@@ -380,6 +382,88 @@ namespace OpenRA.Mods.Cameo.Test
 			eliminated.AddItem();
 			Assert.That(eliminated.Sweep(100).Single().Class, Is.EqualTo(BotQueueCancellationClass.Elimination));
 		}
+
+		// ---- S2-RECEIPT-02: the last producer lost (engine ClearQueue, no receipt) classes as ProducerDisabledCleared ----
+
+		[Test]
+		public void LastConyardLossClassesTheClearedItemAsProducerDisabledNotNone()
+		{
+			// VERIFY-02 G2 / VERIFY-01 G3 / ARM10 S2: the last conyard dies, Tick sees no enabled production trait and ClearQueue
+			// refunds and clears the queued item. No receipt exists. The stale sweep binds the disabled set at first-gone.
+			var disabled = true;
+			var m = new StaleModel { BindDisabled = _ => disabled };
+			var item = m.AddItem();
+			m.Queued.Remove(item);
+			Assert.That(m.Sweep(22115), Is.Empty);
+			for (var tick = 22140; tick < 22115 + BaseBuilderQueueEvalCA.StaleResolveGraceTicks; tick += 25)
+				Assert.That(m.Sweep(tick), Is.Empty, $"tick {tick} is inside the grace window");
+			var resolved = m.Sweep(22115 + BaseBuilderQueueEvalCA.StaleResolveGraceTicks);
+			Assert.That(resolved, Has.Count.EqualTo(1));
+			Assert.That(resolved[0].Item, Is.SameAs(item));
+			Assert.That(resolved[0].Class, Is.EqualTo(BotQueueCancellationClass.ProducerDisabledCleared));
+			Assert.That(m.Watch.Items, Is.Empty);
+			Assert.That(m.Watch.QueueDisabledAtFirstGone, Is.Empty);
+		}
+
+		[Test]
+		public void RebuiltConyardInsideTheGraceStillClassesAtFirstGone()
+		{
+			var disabled = true;
+			var m = new StaleModel { BindDisabled = _ => disabled };
+			var item = m.AddItem();
+			m.Queued.Remove(item);
+			Assert.That(m.Sweep(100), Is.Empty); // first-gone: the bind reads the disabled set
+			disabled = false; // a rebuilt conyard re-enables the queue before the window ends
+			var resolved = m.Sweep(100 + BaseBuilderQueueEvalCA.StaleResolveGraceTicks);
+			Assert.That(resolved, Has.Count.EqualTo(1));
+			Assert.That(resolved[0].Class, Is.EqualTo(BotQueueCancellationClass.ProducerDisabledCleared),
+				"the bind is taken once at first-gone; a later re-enable does not revoke it");
+		}
+
+		[Test]
+		public void GoneItemOnAnEnabledQueueWithoutReceiptStaysAnHonestUnknown()
+		{
+			// Control: the queue stayed enabled and no receipt was bound, so the removal is as unproven as before.
+			var m = new StaleModel { BindDisabled = _ => false };
+			var item = m.AddItem();
+			m.Queued.Remove(item);
+			Assert.That(m.Sweep(100), Is.Empty);
+			var resolved = m.Sweep(100 + BaseBuilderQueueEvalCA.StaleResolveGraceTicks);
+			Assert.That(resolved, Has.Count.EqualTo(1));
+			Assert.That(resolved[0].Class, Is.EqualTo(BotQueueCancellationClass.None));
+		}
+
+		[Test]
+		public void ItemThatReturnsToTheQueueDropsItsDisabledBinding()
+		{
+			var disabled = true;
+			var m = new StaleModel { BindDisabled = _ => disabled };
+			var item = m.AddItem();
+			m.Queued.Remove(item);
+			Assert.That(m.Sweep(100), Is.Empty);
+			Assert.That(m.Watch.QueueDisabledAtFirstGone, Does.Contain(item));
+			m.Queued.Add(item); // still queued: the window is abandoned
+			Assert.That(m.Sweep(125), Is.Empty);
+			Assert.That(m.Watch.QueueDisabledAtFirstGone, Is.Empty);
+			Assert.That(m.Watch.GoneSince, Is.Empty);
+		}
+
+		[Test]
+		public void ProducerDisabledRanksAfterOwnershipAndBeforeTheReceipt()
+		{
+			// Argument order: (eliminated, live, owned, queueSeen, buildable, unbuildableEvicted, producerSetDisabled).
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, true, true, false, true, true),
+				Is.EqualTo(BotQueueCancellationClass.ProducerDisabledCleared), "the same ClearQueue wiped the receipt");
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, false, true, false, false, true),
+				Is.EqualTo(BotQueueCancellationClass.Captured), "an owner change outranks the disabled set");
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, false, true, true, false, false, true),
+				Is.EqualTo(BotQueueCancellationClass.Destruction));
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(true, true, true, true, false, false, true),
+				Is.EqualTo(BotQueueCancellationClass.Elimination));
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, true, false, false, false, false),
+				Is.EqualTo(BotQueueCancellationClass.None), "an enabled queue with no receipt is unchanged");
+		}
+
 
 		static BotQueueTransition RemovedTransition(int tick, BotQueueCancellationClass cls)
 			=> new(tick, "td_gdi_tiberiumrefinery", "Building", BuildingType.Refinery, 3, 37,
