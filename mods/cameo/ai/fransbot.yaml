@@ -73,7 +73,7 @@ Player:
 		RequiresCondition: enable-fransbot
 		# Fog-honest adaptive counter-production: CombatIntel's seen/remembered enemy
 		# army steers a minority of combat picks toward the best Versus counter.
-		AdaptiveCounterWeight: 40
+		AdaptiveCounterWeight: 50
 		AdaptiveCounterObservationInterval: 250
 	FransHarvesterBotModule:
 		RequiresCondition: enable-fransbot

@@ -535,6 +535,137 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
+		/// STALL-FIX-01 (CI switch): the game tick this episode's scan started. Lives on the scan so it
+		/// survives exactly as long as the scan does — the owner's prune (stale-poll gap or the scan cap)
+		/// drops the scan and with it this clock, so a pruned episode restarts both the ladder and the force bound.
+		/// </summary>
+		public int ForceStartTick { get; set; }
+
+		/// <summary>STALL-FIX-01: no further forced poll before this tick (one forced pass per relist epoch).</summary>
+		public int ForceNotBeforeTick { get; private set; } = int.MinValue;
+
+		/// <summary>STALL-FIX-01: how many forced polls this scan has run (diagnostics).</summary>
+		public int ForcedPolls { get; private set; }
+
+		/// <summary>
+		/// STALL-FIX-01 R1 (two-verdict cancel gate): the tick of the FIRST Exhausted verdict of the current
+		/// unbroken chain, int.MinValue when none. Lives on the scan, so dropping or pruning the scan clears it.
+		/// A Site, a drained non-Exhausted pass (NoSite/NoUniverse) or an aborted pass clears it.
+		/// </summary>
+		public int FirstExhaustedTick { get; private set; } = int.MinValue;
+
+		/// <summary>
+		/// STALL-FIX-01 R1: the latest Exhausted verdict was issued at least one relist epoch after the chain's
+		/// first one (a second, separate proof). The owner's cancel arm requires it under the CI switch.
+		/// </summary>
+		public bool ExhaustedConfirmed { get; private set; }
+
+		/// <summary>STALL-FIX-01 R1: Exhausted verdicts issued in the current chain (diagnostics).</summary>
+		public int ExhaustedChain { get; private set; }
+
+		void NoteExhausted(int now)
+		{
+			ExhaustedChain++;
+			if (FirstExhaustedTick == int.MinValue)
+			{
+				FirstExhaustedTick = now;
+				ExhaustedConfirmed = false;
+			}
+			else
+				ExhaustedConfirmed = now - FirstExhaustedTick >= relistEpochTicks;
+		}
+
+		void ClearExhaustedRecord()
+		{
+			FirstExhaustedTick = int.MinValue;
+			ExhaustedConfirmed = false;
+			ExhaustedChain = 0;
+		}
+
+		/// <summary>
+		/// STALL-FIX-01 R1: the cancel arm's certificate check under the CI switch. Off
+		/// (<paramref name="forceAfterTicks"/> &lt;= 0) it is exactly <see cref="CertificateCurrent"/>; on, the
+		/// certificate must ALSO belong to a second Exhausted verdict at least one relist epoch after the first
+		/// of an unbroken chain — the first Exhausted only holds.
+		/// </summary>
+		public bool CancelCertificateCurrent(int forceAfterTicks) =>
+			CertificateCurrent() && (forceAfterTicks <= 0 || ExhaustedConfirmed);
+
+		/// <summary>STALL-FIX-01 R3: Chebyshev distance in cells (integer), the metric of the scan's own gap rule.</summary>
+		public static int ChebyshevCells(CPos a, CPos b) => Chebyshev(a.X - b.X, a.Y - b.Y);
+
+		/// <summary>STALL-FIX-01 R3: squared Euclidean distance in cells (long, record only).</summary>
+		public static long SquaredCells(CPos a, CPos b)
+		{
+			long dx = a.X - b.X;
+			long dy = a.Y - b.Y;
+			return dx * dx + dy * dy;
+		}
+
+		/// <summary>
+		/// STALL-FIX-01: the forced-poll telemetry line (record only; no decision reads any part of it). A Site
+		/// carries its distance from the base reference in cells (R3), an Exhausted its chain position and
+		/// whether the two-verdict cancel gate is satisfied (R1).
+		/// </summary>
+		public static string ForcedLine(int playerIndex, string item, uint producerId, int deferredTicks, int bound,
+			int forcedPolls, Verdict verdict, CPos? site, CPos? baseRef, int work, int epochs, int exhaustedChain,
+			bool confirmed, int now)
+		{
+			var where = string.Empty;
+			if (site.HasValue)
+			{
+				where = $" at {site.Value}";
+				if (baseRef.HasValue)
+					where += $", base distance {ChebyshevCells(site.Value, baseRef.Value)} cells (sq {SquaredCells(site.Value, baseRef.Value)}) from {baseRef.Value}";
+			}
+
+			return $"AI ({playerIndex}): STALL-FIX-01 refinery fallback scan {item} on producer {producerId} forced after {deferredTicks} deferred ticks (bound {bound}, force #{forcedPolls}): {verdict}{where}, work {work}, epochs {epochs}, exhausted chain {exhaustedChain}, cancel gate {(confirmed ? "satisfied" : "not satisfied")} at tick {now}";
+		}
+
+		/// <summary>
+		/// STALL-FIX-01: true while the scan sits inside the epoch wait of a CONCLUSIVE verdict it already
+		/// produced (Exhausted, NoSite, NoUniverse, or a still-replayable Site). An aborted pass (Deferred
+		/// placeholder) is not conclusive — that is the stall the force exists to break.
+		/// </summary>
+		public bool ReplayingConclusiveVerdict(int now) =>
+			phase == Phase.WaitForEpoch && relistAt != int.MinValue && now < relistAt && waitingVerdict != Verdict.Deferred;
+
+		/// <summary>
+		/// STALL-FIX-01: the force bound. Off (<paramref name="forceAfterTicks"/> &lt;= 0) never forces.
+		/// Otherwise the scan is forced once it has run for at least <paramref name="forceAfterTicks"/> game
+		/// ticks since <see cref="ForceStartTick"/> without a conclusive verdict in force, and at most once per
+		/// relist epoch (<see cref="ForceNotBeforeTick"/>). Pure integer arithmetic, no RNG.
+		/// </summary>
+		public bool ForceDue(int forceAfterTicks, int now) =>
+			forceAfterTicks > 0
+				&& now - ForceStartTick >= forceAfterTicks
+				&& now >= ForceNotBeforeTick
+				&& !ReplayingConclusiveVerdict(now);
+
+		/// <summary>
+		/// STALL-FIX-01: complete the episode in ONE poll. The scan is moved onto the terminal tier
+		/// (<paramref name="terminalTier"/>, the owner's RefineryFallbackTierMaxDist), any half-run pass is
+		/// discarded and a fresh pass starts at once; the budget is unlimited. The world does not mutate
+		/// inside one poll, so the coherence sweep stamps and the whole-map enumeration drains with no drift
+		/// and no dirty marks: the verdict is Site, or Exhausted with the certificate of that same poll — or
+		/// NoSite/NoUniverse when the pass drains without a certifiable domain (no provider), which still
+		/// only holds. This never authorizes a cancel by itself: the owner's cancel arm re-verifies
+		/// <see cref="CertificateCurrent"/> against the live world exactly as for a natural verdict.
+		/// </summary>
+		public Verdict PollForced(int terminalTier, int now, Func<Snapshot> snapshotAtPassStart, out CPos? site)
+		{
+			DisposeCursors();
+			tier = Math.Max(tier, terminalTier);
+			phase = Phase.WaitForEpoch;
+			relistAt = int.MinValue;
+			waitingVerdict = Verdict.Deferred;
+			certIssued = false;
+			ForcedPolls++;
+			ForceNotBeforeTick = now + relistEpochTicks;
+			return Poll(int.MaxValue, now, snapshotAtPassStart, out site);
+		}
+
+		/// <summary>
 		/// One sweep's bounded work: at most <paramref name="cellBudget"/> charged steps of
 		/// provider collection, rank-set collection/sorting, domain enumeration, ranking and
 		/// pick revalidation — each charged BEFORE the bounded step runs. The snapshot
@@ -648,6 +779,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 								// Poll keep draining stale candidates. Site replays idempotently (with
 								// its cell) inside the epoch; a poll past it re-lists fresh.
 								DisposeCursors();
+								ClearExhaustedRecord();
 								waitingVerdict = Verdict.Site;
 								pickedCell = site.Value;
 								relistAt = now + relistEpochTicks;
@@ -872,6 +1004,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				{
 					certDirtyEpoch = dirtyEpoch;
 					certIssued = true;
+					NoteExhausted(now);
 					DisposeCursors();
 					waitingVerdict = Verdict.Exhausted;
 					relistAt = now + relistEpochTicks;
@@ -1151,6 +1284,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		void AbortPass(int now)
 		{
 			DisposeCursors();
+			ClearExhaustedRecord();
 			waitingVerdict = Verdict.Deferred;
 			relistAt = now + relistEpochTicks;
 			phase = Phase.WaitForEpoch;
@@ -1161,6 +1295,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		void FinishPass(int now)
 		{
 			DisposeCursors();
+			ClearExhaustedRecord();
 			waitingVerdict = domainCells == 0 ? Verdict.NoUniverse : Verdict.NoSite;
 			relistAt = now + relistEpochTicks;
 			phase = Phase.WaitForEpoch;

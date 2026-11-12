@@ -293,6 +293,32 @@ class HealthTests(unittest.TestCase):
                           legacy["metrics"]["first_refinery_placement_tick"])
         self.assertNotIn("MISSING_SITUATIONS", [f["code"] for f in seated["findings"]])
 
+    def test_row_line_bound_is_8_mib_and_a_5_mib_row_parses(self):
+        # RH-BOUND-01: 8-seat matches rows reach 1.6 MiB at 43k ticks (cap 60k); the old 1 MiB bound refused every such game.
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "cameo-ai-matches.jsonl"
+            line = json.dumps({"schema": 3, "pad": "x" * (5 * 1024 * 1024)}) + "\n"
+            self.assertGreater(len(line), 5 * 1024 * 1024)
+            path.write_text(line, encoding="ascii")
+            rows, receipt = health.read_jsonl(path)
+            self.assertEqual(len(rows), 1)
+            self.assertEqual(receipt["rows"], 1)
+
+    def test_over_8_mib_row_is_structured_unknown_through_main(self):
+        with tempfile.TemporaryDirectory() as temp:
+            support = Path(temp)
+            (support / "Logs").mkdir()
+            over = json.dumps({"schema": 3, "pad": "x" * (8 * 1024 * 1024)}) + "\n"
+            (support / "Logs" / "cameo-ai-matches.jsonl").write_text(over, encoding="ascii")
+            with self.assertRaisesRegex(health.EvidenceError, "input bound"):
+                health.read_jsonl(support / "Logs" / "cameo-ai-matches.jsonl")
+            with patch("sys.argv", ["replay_health", str(support), "--game-uid", "g", "--player", "seat_3"]):
+                with contextlib.redirect_stdout(io.StringIO()) as output:
+                    self.assertEqual(health.main(), 21)
+            report = json.loads(output.getvalue())
+            self.assertEqual(report["status"], "UNKNOWN")
+            self.assertIn("input bound", report["error"])
+
 
 class PlayerEventVersionTests(unittest.TestCase):
     """CB_frontier_observe (P3a): cameo-player-event rows dispatch on the row's own

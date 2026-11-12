@@ -134,6 +134,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		BotLimits botLimits;
 		int harvesterLimit;
+		int harvesterValueLimit; // HVCAP-01: cached with harvesterLimit (0 = off)
 		IBotScaleTargets[] scaleTargets;
 
 		// BU_harvester_logistics state (unused while the switch is off).
@@ -165,7 +166,10 @@ namespace OpenRA.Mods.CA.Traits
 
 			botLimits = self.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
 			if (botLimits != null)
+			{
 				harvesterLimit = botLimits.Info.HarvesterLimit;
+				harvesterValueLimit = botLimits.Info.HarvesterValueLimit;
+			}
 
 			limitsRechecked = false;
 
@@ -209,6 +213,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				botLimits = BotLimitsResolver.Recheck(player, botLimits, nameof(HarvesterBotModuleCA));
 				harvesterLimit = botLimits?.Info.HarvesterLimit ?? 0;
+				harvesterValueLimit = botLimits?.Info.HarvesterValueLimit ?? 0;
 				limitsRechecked = true;
 			}
 
@@ -288,7 +293,19 @@ namespace OpenRA.Mods.CA.Traits
 					maxHarvesters = int.MaxValue;
 				}
 
-				if ((limit > 0 && numHarvesters >= limit) || numHarvesters >= maxHarvesters)
+				// HVCAP-01: value cap, evaluated after the ScaleTargets branch above so a provider target cannot bypass it.
+				// Off (0) computes nothing extra. On: refuse when live harvester cost + the next harvester's cost exceeds the cap.
+				var valueNow = 0;
+				var nextCost = 0;
+				if (HarvesterValueCap.Active(harvesterValueLimit))
+				{
+					valueNow = HarvesterValueCap.Sum(harvestersIndex.Actors.Where(a => !a.IsDead)
+						.Select(a => a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0));
+					var nextInfo = AIUtils.GetBuildableInfoByCommonName(Info.HarvesterTypes, player);
+					nextCost = nextInfo?.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+				}
+
+				if (!HarvesterValueCap.MayProduce(numHarvesters, limit, maxHarvesters, harvesterValueLimit, valueNow, nextCost))
 					return;
 
 				bool harvCountTooLow;

@@ -2002,6 +2002,31 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void RemovalCauseClassEvictionReceiptPrecedence()
+		{
+			// RC01-OUTER01 (E6, T4): Elimination > Destruction > Captured > EvictedUnbuildable >
+			// Unbuildable > None. A receiptless queueSeen && !buildable still returns Unbuildable.
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(true, true, true, true, false, true),
+				Is.EqualTo(BotQueueCancellationClass.Elimination));
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, false, true, true, false, true),
+				Is.EqualTo(BotQueueCancellationClass.Destruction));
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, false, true, false, true),
+				Is.EqualTo(BotQueueCancellationClass.Captured));
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, true, true, false, true),
+				Is.EqualTo(BotQueueCancellationClass.EvictedUnbuildable));
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, true, false, false, true),
+				Is.EqualTo(BotQueueCancellationClass.EvictedUnbuildable),
+				"the receipt names this exact item; the stale-watch gate does not revoke it");
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, true, true, true, true),
+				Is.EqualTo(BotQueueCancellationClass.EvictedUnbuildable));
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, true, true, false, false),
+				Is.EqualTo(BotQueueCancellationClass.Unbuildable),
+				"a receiptless absence keeps the diagnostic class");
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, true, true, true, false),
+				Is.EqualTo(BotQueueCancellationClass.None));
+		}
+
+		[Test]
 		public void CancelRemovalStillNeverConfirmsInsideNewBound()
 		{
 			// The widened bound does not promote cancels: a pending cancel at wire-
@@ -2028,43 +2053,48 @@ namespace OpenRA.Mods.Cameo.Test
 			// and it now refuses — for requirement-free types AcceptsPlug is exactly
 			// `active == null`, so false here is the engine's own installed state.
 			Assert.That(BaseBuilderQueueEvalCA.PlugInstallProven(
-					slotDefinesType: true, requirementKeyed: false, acceptsNow: false),
+					slotDefinesType: true, requirementKeyed: false, acceptsNow: false, acceptedAtOrder: true),
 				Is.True, "requirement-free slot refusing its own type = active plug installed");
 
-			// Requirement flip: a requirement-keyed refusal is availability state —
-			// no EnablePlug ran. Never proof.
-			Assert.That(BaseBuilderQueueEvalCA.PlugInstallProven(true, requirementKeyed: true, acceptsNow: false),
-				Is.False, "requirement-keyed refusal is a requirement state, never install proof");
-			Assert.That(BaseBuilderQueueEvalCA.PlugInstallProven(true, true, acceptsNow: true),
+			// S2 F1: a requirement-keyed refusal counts only when the same host accepted
+			// the type at order time (the install is what makes the requirement false).
+			Assert.That(BaseBuilderQueueEvalCA.PlugInstallProven(true, requirementKeyed: true, acceptsNow: false, acceptedAtOrder: true),
+				Is.True, "requirement-keyed host accepted at order, refuses now = installed");
+			Assert.That(BaseBuilderQueueEvalCA.PlugInstallProven(true, requirementKeyed: true, acceptsNow: false, acceptedAtOrder: false),
+				Is.False, "a requirement-keyed host that never accepted proves nothing");
+			Assert.That(BaseBuilderQueueEvalCA.PlugInstallProven(true, true, acceptsNow: true, acceptedAtOrder: true),
 				Is.False, "availability true means the slot would still accept — not installed");
 
 			// Unknown type: the slot refuses by definition, not by installation.
-			Assert.That(BaseBuilderQueueEvalCA.PlugInstallProven(slotDefinesType: false, false, false),
+			Assert.That(BaseBuilderQueueEvalCA.PlugInstallProven(slotDefinesType: false, false, false, true),
 				Is.False, "a slot that never defined the type cannot 'refuse' it");
 
 			// Still accepting: no install.
-			Assert.That(BaseBuilderQueueEvalCA.PlugInstallProven(true, false, acceptsNow: true),
+			Assert.That(BaseBuilderQueueEvalCA.PlugInstallProven(true, false, acceptsNow: true, acceptedAtOrder: true),
 				Is.False, "an empty accepting slot is not installed");
 		}
 
 		[Test]
-		public void RequirementFlipPlugPendingExpiresToRemoved()
+		public void RequirementFlipOnHostNotAcceptedAtOrderPendingExpiresToRemoved()
 		{
-			// The VP scenario end to end through the production predicate: a plug order
-			// issued, then the host's dynamic Requirement fails before PlacePlug resolves —
-			// no EnablePlug runs, the slot reports refusal. With the corrected predicate
-			// that is NOT proof, so the armed pending expires to Removed + intent reason.
+			// The VP scenario through the production predicate: a plug order for a host that
+			// was NOT accepting at order time (its dynamic Requirement already failed, so no
+			// EnablePlug can have run) and still refuses — that is not proof, so the armed
+			// pending expires to Removed + intent reason. (Replaces the pre-S2 test that kept
+			// every requirement-keyed refusal UNKNOWN; S2 F1 admits it only when the host
+			// accepted at order time.)
 			var pending = new BotQueuePendingTerminal
 			{
 				Item = new object(), ItemName = "plug", Kind = BotQueueTransitionKind.Placed,
-				IssuedTick = 100, Site = new CPos(5, 6), PlugType = "adv", AwaitingProof = true
+				IssuedTick = 100, Site = new CPos(5, 6), PlugType = "adv", AwaitingProof = true,
+				PlugHostId = 9, PlugAcceptedAtOrder = false
 			};
 
-			var requirementFlipped = BaseBuilderQueueEvalCA.PlugInstallProven(
-				slotDefinesType: true, requirementKeyed: true, acceptsNow: false);
+			var requirementFlipped = pending.PlugProven(
+				hostEligible: true, slotDefinesType: true, requirementKeyed: true, acceptsNow: false);
 			Assert.That(pending.ResolveWhileAwaiting(125, placementProven: requirementFlipped, playerEliminated: false),
 				Is.EqualTo(BotQueuePendingResolution.EmitRemoved),
-				"requirement flip -> no install -> expires Removed, never Placed");
+				"requirement flip on a host that never accepted -> no install -> expires Removed, never Placed");
 		}
 
 		[Test]
@@ -2079,7 +2109,7 @@ namespace OpenRA.Mods.Cameo.Test
 			};
 
 			var installed = BaseBuilderQueueEvalCA.PlugInstallProven(
-				slotDefinesType: true, requirementKeyed: false, acceptsNow: false);
+				slotDefinesType: true, requirementKeyed: false, acceptsNow: false, acceptedAtOrder: true);
 			Assert.That(pending.ResolveWhileAwaiting(104, placementProven: installed, playerEliminated: false),
 				Is.EqualTo(BotQueuePendingResolution.EmitRequested),
 				"slot occupied by EnablePlug -> Placed");

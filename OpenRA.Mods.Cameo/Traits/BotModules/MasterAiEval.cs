@@ -37,6 +37,50 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				? BotUrgency.Pressured : BotUrgency.Normal;
 		}
 
+		/// <summary>BOTPASSIVE F3 (design _06 §4, switch ON only): own team versus the summed enemy.
+		/// alliedArmy = live combat value of mutual allies (0 in 1v1/FFA, where this equals the old ratio).</summary>
+		public static bool TeamRatioPressure(long ownArmy, long alliedArmy, long enemyArmy, int pressuredArmyRatio)
+		{
+			if (enemyArmy <= 0)
+				return false;
+			var own = Math.Max(0, ownArmy) + Math.Max(0, alliedArmy);
+			return checked(own * 100) < checked(enemyArmy * pressuredArmyRatio);
+		}
+
+		/// <summary>BOTPASSIVE F4 Emergency′ (design _06 §5.4, _08 M3 anchors, switch ON only): a home production/CY
+		/// loss, or the unchanged loss branch together with a visible home threat or the home latch.</summary>
+		public static bool StalemateEmergency(bool homeProductionLoss, bool lossBranch, bool homeThreat, bool homeLatch) =>
+			homeProductionLoss || (lossBranch && (homeThreat || homeLatch));
+
+		/// <summary>BOTPASSIVE F4 Urgency′ (switch ON only): Emergency′ latches between snapshots as the legacy
+		/// Emergency does; else Pressured on a home threat, the home latch or the team ratio; else Normal.</summary>
+		public static BotUrgency ClassifyUrgencyStalemate(BotUrgency current, bool homeThreat, bool homeLatch, bool teamRatioPressure)
+		{
+			if (current == BotUrgency.Emergency)
+				return BotUrgency.Emergency;
+			return homeThreat || homeLatch || teamRatioPressure ? BotUrgency.Pressured : BotUrgency.Normal;
+		}
+
+		/// <summary>Squared-Euclidean anchor test (design _08 N4): within radiusCells of any anchor cell.</summary>
+		public static bool WithinAnyAnchor(int x, int y, IReadOnlyList<(int X, int Y)> anchors, int radiusCells)
+		{
+			if (anchors == null || radiusCells < 0)
+				return false;
+			var r2 = (long)radiusCells * radiusCells;
+			foreach (var a in anchors)
+			{
+				long dx = x - a.X, dy = y - a.Y;
+				if (dx * dx + dy * dy <= r2)
+					return true;
+			}
+
+			return false;
+		}
+
+		/// <summary>Per-unit HomeThreat radius (design _08 N5): 20 cells, or the unit's longest weapon range + 2 when larger.</summary>
+		public static int HomeThreatRadiusCells(int maxWeaponRangeWorld) =>
+			Math.Max(20, (int)((Math.Max(0, (long)maxWeaponRangeWorld) + 1023) / 1024) + 2);
+
 		/// <summary>TC-3 BE (§12.18): the coalition directive's MainTarget adopted only when
 		/// the flag is on, a shared target exists and it is still one of this bot's own
 		/// attackable candidates. Null keeps the locally chosen target.</summary>

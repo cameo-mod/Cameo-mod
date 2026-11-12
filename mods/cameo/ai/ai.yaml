@@ -2,6 +2,14 @@
 	GrantConditionOnBotOwner@generic:
 		Condition: genericbot
 		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod
+	GrantConditionOnBotOwner@noob:
+		Condition: noobbot
+		Bots: noob
+	# NOOB-TIER-01: noob gets genericbot (ScaleTargets, legacy-fallback exclusion) through its own grant,
+	# so the base genericbot Bots list above stays exactly as at 8a0297b7.
+	GrantConditionOnBotOwner@noobgeneric:
+		Condition: genericbot
+		Bots: noob
 	GrantConditionOnBotOwner@easiest:
 		Condition: easiestbot
 		Bots: easiest
@@ -169,264 +177,301 @@
 		Condition: context_features
 		Bots:
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
-	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
+	# from noob to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
 	# Guarded by tools/audit/audit_ai_personalities.py (difficulty_scale_failures).
-	BotLimits@easiest:
+	# TIER-01 yaml applied (TABLE_03_R2 079A06F2, SCALE_PLAN_01 section 8)
+	BotLimits@noob:
 		ProductionTypeLimit: 1
 		ConstructionYardLimit: 1
 		RefineryLimit: 1
-		HarvesterLimit: 3
+		HarvesterLimit: 0
+		HarvesterValueLimit: 2000
 		BuildingDelayModifier: 250
 		BuildingIntervalModifier: 250
 		UnitDelayModifier: 250
 		UnitIntervalModifier: 250
-		InitialAttackDelay: 6750
-		AttackLivenessMaxNoLaunchTicks: 9500
-		AttackLivenessFirstWaveMaxTicks: 4750
-		TempoMinWaveUnits: 4
-		TeamResponseMaxLeaseTicks: 1900
-		TeamResponseRearmCooldownTicks: 950
+		InitialAttackDelay: 7500
+		AttackLivenessMaxNoLaunchTicks: 10000
+		AttackLivenessFirstWaveMaxTicks: 5000
+		TempoMinWaveUnits: 5
+		TeamResponseMaxLeaseTicks: 2000
+		TeamResponseRearmCooldownTicks: 1000
 		TeamResponseLeaseLimit: 1
-		PersonalityReactionDelay: 7500
-		NewProductionCashThreshold: 20000
-		MaximiseProductionCashRequirement: 9500
-		BankSaturationCash: 4200
+		PersonalityReactionDelay: 6000
+		NewProductionCashThreshold: 12000
+		MaximiseProductionCashRequirement: 6000
+		BankSaturationCash: 9000
 		AdaptiveCounterWeight: 0
-		CapturerInfantryLimitPct: 10
-		EngineerCompletionIntervalTicks: 2000
-		RetreatRatioPct: 10
-		RequiresCondition: easiestbot
-	BotLimits@veryeasy:
+		CapturerInfantryLimitPct: 0
+		EngineerCompletionIntervalTicks: 2200
+		RetreatRatioPct: 0
+		RequiresCondition: noobbot
+	BotLimits@easiest:
 		ProductionTypeLimit: 2
 		ConstructionYardLimit: 2
 		RefineryLimit: 2
-		HarvesterLimit: 6
+		HarvesterLimit: 0
+		HarvesterValueLimit: 4000
 		BuildingDelayModifier: 225
 		BuildingIntervalModifier: 225
 		UnitDelayModifier: 225
 		UnitIntervalModifier: 225
-		InitialAttackDelay: 6000
-		AttackLivenessMaxNoLaunchTicks: 9000
-		AttackLivenessFirstWaveMaxTicks: 4500
-		TempoMinWaveUnits: 5
-		TeamResponseMaxLeaseTicks: 1800
-		TeamResponseRearmCooldownTicks: 900
+		InitialAttackDelay: 6750
+		AttackLivenessMaxNoLaunchTicks: 9500
+		AttackLivenessFirstWaveMaxTicks: 4750
+		TempoMinWaveUnits: 6
+		TeamResponseMaxLeaseTicks: 1900
+		TeamResponseRearmCooldownTicks: 950
 		TeamResponseLeaseLimit: 1
-		PersonalityReactionDelay: 6750
-		NewProductionCashThreshold: 18000
-		MaximiseProductionCashRequirement: 8500
-		BankSaturationCash: 3900
-		AdaptiveCounterWeight: 4
-		CapturerInfantryLimitPct: 10
-		EngineerCompletionIntervalTicks: 1800
-		RetreatRatioPct: 20
-		RequiresCondition: veryeasybot
-	BotLimits@easy:
-		ProductionTypeLimit: 2
-		ConstructionYardLimit: 2
+		PersonalityReactionDelay: 5500
+		NewProductionCashThreshold: 11000
+		MaximiseProductionCashRequirement: 5500
+		BankSaturationCash: 8250
+		AdaptiveCounterWeight: 5
+		CapturerInfantryLimitPct: 1
+		EngineerCompletionIntervalTicks: 2000
+		RetreatRatioPct: 5
+		RequiresCondition: easiestbot
+	BotLimits@veryeasy:
+		ProductionTypeLimit: 3
+		ConstructionYardLimit: 3
 		RefineryLimit: 3
-		HarvesterLimit: 9
+		HarvesterLimit: 0
+		HarvesterValueLimit: 6000
 		BuildingDelayModifier: 200
 		BuildingIntervalModifier: 200
 		UnitDelayModifier: 200
 		UnitIntervalModifier: 200
-		InitialAttackDelay: 5250
-		AttackLivenessMaxNoLaunchTicks: 8500
-		AttackLivenessFirstWaveMaxTicks: 4250
-		TempoMinWaveUnits: 6
-		TeamResponseMaxLeaseTicks: 1700
-		TeamResponseRearmCooldownTicks: 850
+		InitialAttackDelay: 6000
+		AttackLivenessMaxNoLaunchTicks: 9000
+		AttackLivenessFirstWaveMaxTicks: 4500
+		TempoMinWaveUnits: 7
+		TeamResponseMaxLeaseTicks: 1800
+		TeamResponseRearmCooldownTicks: 900
 		TeamResponseLeaseLimit: 1
-		PersonalityReactionDelay: 6000
-		NewProductionCashThreshold: 16000
-		MaximiseProductionCashRequirement: 7500
-		BankSaturationCash: 3600
-		AdaptiveCounterWeight: 9
-		CapturerInfantryLimitPct: 10
-		EngineerCompletionIntervalTicks: 1600
-		RetreatRatioPct: 30
-		RequiresCondition: easybot
-	BotLimits@medium:
-		ProductionTypeLimit: 3
-		ConstructionYardLimit: 3
+		PersonalityReactionDelay: 5000
+		NewProductionCashThreshold: 10000
+		MaximiseProductionCashRequirement: 5000
+		BankSaturationCash: 7500
+		AdaptiveCounterWeight: 10
+		CapturerInfantryLimitPct: 2
+		EngineerCompletionIntervalTicks: 1800
+		RetreatRatioPct: 10
+		RequiresCondition: veryeasybot
+	BotLimits@easy:
+		ProductionTypeLimit: 4
+		ConstructionYardLimit: 4
 		RefineryLimit: 4
-		HarvesterLimit: 12
+		HarvesterLimit: 0
+		HarvesterValueLimit: 8000
 		BuildingDelayModifier: 175
 		BuildingIntervalModifier: 175
 		UnitDelayModifier: 175
 		UnitIntervalModifier: 175
-		InitialAttackDelay: 4500
-		AttackLivenessMaxNoLaunchTicks: 8000
-		AttackLivenessFirstWaveMaxTicks: 4000
-		TempoMinWaveUnits: 7
-		TeamResponseMaxLeaseTicks: 1600
-		TeamResponseRearmCooldownTicks: 800
+		InitialAttackDelay: 5250
+		AttackLivenessMaxNoLaunchTicks: 8500
+		AttackLivenessFirstWaveMaxTicks: 4250
+		TempoMinWaveUnits: 8
+		TeamResponseMaxLeaseTicks: 1700
+		TeamResponseRearmCooldownTicks: 850
 		TeamResponseLeaseLimit: 1
-		PersonalityReactionDelay: 5250
-		NewProductionCashThreshold: 14000
-		MaximiseProductionCashRequirement: 6500
-		BankSaturationCash: 3300
-		AdaptiveCounterWeight: 13
-		CapturerInfantryLimitPct: 10
-		EngineerCompletionIntervalTicks: 1400
-		RetreatRatioPct: 40
-		RequiresCondition: mediumbot
-	BotLimits@hard:
-		ProductionTypeLimit: 4
-		ConstructionYardLimit: 4
+		PersonalityReactionDelay: 4500
+		NewProductionCashThreshold: 9000
+		MaximiseProductionCashRequirement: 4500
+		BankSaturationCash: 6750
+		AdaptiveCounterWeight: 15
+		CapturerInfantryLimitPct: 3
+		EngineerCompletionIntervalTicks: 1600
+		RetreatRatioPct: 15
+		RequiresCondition: easybot
+	BotLimits@medium:
+		ProductionTypeLimit: 5
+		ConstructionYardLimit: 5
 		RefineryLimit: 5
-		HarvesterLimit: 15
+		HarvesterLimit: 0
+		HarvesterValueLimit: 10000
 		BuildingDelayModifier: 150
 		BuildingIntervalModifier: 150
 		UnitDelayModifier: 150
 		UnitIntervalModifier: 150
-		InitialAttackDelay: 3750
-		AttackLivenessMaxNoLaunchTicks: 7500
-		AttackLivenessFirstWaveMaxTicks: 3750
-		TempoMinWaveUnits: 8
-		TeamResponseMaxLeaseTicks: 1500
-		TeamResponseRearmCooldownTicks: 750
+		InitialAttackDelay: 4500
+		AttackLivenessMaxNoLaunchTicks: 8000
+		AttackLivenessFirstWaveMaxTicks: 4000
+		TempoMinWaveUnits: 9
+		TeamResponseMaxLeaseTicks: 1600
+		TeamResponseRearmCooldownTicks: 800
 		TeamResponseLeaseLimit: 1
-		PrioritizeBarracksBeforeRefinery: true
-		PersonalityReactionDelay: 4500
-		NewProductionCashThreshold: 12000
-		MaximiseProductionCashRequirement: 5500
-		BankSaturationCash: 3000
-		AdaptiveCounterWeight: 18
-		CapturerInfantryLimitPct: 10
-		EngineerCompletionIntervalTicks: 1200
-		RetreatRatioPct: 50
-		RequiresCondition: hardbot
-	BotLimits@veryhard:
-		ProductionTypeLimit: 4
-		ConstructionYardLimit: 4
+		PersonalityReactionDelay: 4000
+		NewProductionCashThreshold: 8000
+		MaximiseProductionCashRequirement: 4000
+		BankSaturationCash: 6000
+		AdaptiveCounterWeight: 20
+		CapturerInfantryLimitPct: 4
+		EngineerCompletionIntervalTicks: 1400
+		RetreatRatioPct: 20
+		RequiresCondition: mediumbot
+	BotLimits@hard:
+		ProductionTypeLimit: 6
+		ConstructionYardLimit: 6
 		RefineryLimit: 6
-		HarvesterLimit: 18
+		HarvesterLimit: 0
+		HarvesterValueLimit: 12000
 		BuildingDelayModifier: 125
 		BuildingIntervalModifier: 125
 		UnitDelayModifier: 125
 		UnitIntervalModifier: 125
-		InitialAttackDelay: 3000
-		AttackLivenessMaxNoLaunchTicks: 7000
-		AttackLivenessFirstWaveMaxTicks: 3500
-		TempoMinWaveUnits: 9
-		TeamResponseMaxLeaseTicks: 1400
-		TeamResponseRearmCooldownTicks: 700
+		InitialAttackDelay: 3750
+		AttackLivenessMaxNoLaunchTicks: 7500
+		AttackLivenessFirstWaveMaxTicks: 3750
+		TempoMinWaveUnits: 10
+		TeamResponseMaxLeaseTicks: 1500
+		TeamResponseRearmCooldownTicks: 750
 		TeamResponseLeaseLimit: 1
 		PrioritizeBarracksBeforeRefinery: true
-		PersonalityReactionDelay: 3750
-		NewProductionCashThreshold: 10000
-		MaximiseProductionCashRequirement: 4500
-		BankSaturationCash: 2700
-		AdaptiveCounterWeight: 22
-		CapturerInfantryLimitPct: 10
-		EngineerCompletionIntervalTicks: 1000
-		RetreatRatioPct: 60
-		RequiresCondition: veryhardbot
-	BotLimits@brutal:
-		ProductionTypeLimit: 5
-		ConstructionYardLimit: 5
+		PersonalityReactionDelay: 3500
+		NewProductionCashThreshold: 7000
+		MaximiseProductionCashRequirement: 3500
+		BankSaturationCash: 5250
+		AdaptiveCounterWeight: 25
+		CapturerInfantryLimitPct: 5
+		EngineerCompletionIntervalTicks: 1200
+		RetreatRatioPct: 25
+		RequiresCondition: hardbot
+	BotLimits@veryhard:
+		ProductionTypeLimit: 7
+		ConstructionYardLimit: 7
 		RefineryLimit: 7
-		HarvesterLimit: 21
+		HarvesterLimit: 0
+		HarvesterValueLimit: 14000
 		BuildingDelayModifier: 100
 		BuildingIntervalModifier: 100
 		UnitDelayModifier: 100
 		UnitIntervalModifier: 100
-		InitialAttackDelay: 2250
-		AttackLivenessMaxNoLaunchTicks: 6500
-		AttackLivenessFirstWaveMaxTicks: 3250
-		TempoMinWaveUnits: 10
-		TeamResponseMaxLeaseTicks: 1300
-		TeamResponseRearmCooldownTicks: 650
+		InitialAttackDelay: 3000
+		AttackLivenessMaxNoLaunchTicks: 7000
+		AttackLivenessFirstWaveMaxTicks: 3500
+		TempoMinWaveUnits: 11
+		TeamResponseMaxLeaseTicks: 1400
+		TeamResponseRearmCooldownTicks: 700
 		TeamResponseLeaseLimit: 1
 		PrioritizeBarracksBeforeRefinery: true
 		PersonalityReactionDelay: 3000
-		NewProductionCashThreshold: 8000
-		MaximiseProductionCashRequirement: 3500
-		BankSaturationCash: 2400
-		AdaptiveCounterWeight: 27
-		CapturerInfantryLimitPct: 10
-		EngineerCompletionIntervalTicks: 800
-		RetreatRatioPct: 70
-		RequiresCondition: brutalbot
-	BotLimits@challenger:
-		ProductionTypeLimit: 6
-		ConstructionYardLimit: 6
+		NewProductionCashThreshold: 6000
+		MaximiseProductionCashRequirement: 3000
+		BankSaturationCash: 4500
+		AdaptiveCounterWeight: 30
+		CapturerInfantryLimitPct: 6
+		EngineerCompletionIntervalTicks: 1000
+		RetreatRatioPct: 30
+		RequiresCondition: veryhardbot
+	BotLimits@brutal:
+		ProductionTypeLimit: 8
+		ConstructionYardLimit: 8
 		RefineryLimit: 8
-		HarvesterLimit: 24
+		HarvesterLimit: 0
+		HarvesterValueLimit: 16000
 		BuildingDelayModifier: 75
 		BuildingIntervalModifier: 75
 		UnitDelayModifier: 75
 		UnitIntervalModifier: 75
-		InitialAttackDelay: 1500
-		AttackLivenessMaxNoLaunchTicks: 6000
-		AttackLivenessFirstWaveMaxTicks: 3000
-		TempoMinWaveUnits: 11
-		TeamResponseMaxLeaseTicks: 1200
-		TeamResponseRearmCooldownTicks: 600
+		InitialAttackDelay: 2250
+		AttackLivenessMaxNoLaunchTicks: 6500
+		AttackLivenessFirstWaveMaxTicks: 3250
+		TempoMinWaveUnits: 12
+		TeamResponseMaxLeaseTicks: 1300
+		TeamResponseRearmCooldownTicks: 650
 		TeamResponseLeaseLimit: 1
 		PrioritizeBarracksBeforeRefinery: true
-		PersonalityReactionDelay: 2250
-		NewProductionCashThreshold: 6000
+		PersonalityReactionDelay: 2500
+		NewProductionCashThreshold: 5000
 		MaximiseProductionCashRequirement: 2500
-		BankSaturationCash: 2100
-		AdaptiveCounterWeight: 31
-		CapturerInfantryLimitPct: 10
-		EngineerCompletionIntervalTicks: 600
-		RetreatRatioPct: 80
-		RequiresCondition: challengerbot
-	BotLimits@unbeatable:
-		ProductionTypeLimit: 6
-		ConstructionYardLimit: 6
+		BankSaturationCash: 3750
+		AdaptiveCounterWeight: 35
+		CapturerInfantryLimitPct: 7
+		EngineerCompletionIntervalTicks: 800
+		RetreatRatioPct: 35
+		RequiresCondition: brutalbot
+	BotLimits@challenger:
+		ProductionTypeLimit: 9
+		ConstructionYardLimit: 9
 		RefineryLimit: 9
-		HarvesterLimit: 27
+		HarvesterLimit: 0
+		HarvesterValueLimit: 18000
 		BuildingDelayModifier: 50
 		BuildingIntervalModifier: 50
 		UnitDelayModifier: 50
 		UnitIntervalModifier: 50
+		InitialAttackDelay: 1500
+		AttackLivenessMaxNoLaunchTicks: 6000
+		AttackLivenessFirstWaveMaxTicks: 3000
+		TempoMinWaveUnits: 13
+		TeamResponseMaxLeaseTicks: 1200
+		TeamResponseRearmCooldownTicks: 600
+		TeamResponseLeaseLimit: 1
+		PrioritizeBarracksBeforeRefinery: true
+		PersonalityReactionDelay: 2000
+		NewProductionCashThreshold: 4000
+		MaximiseProductionCashRequirement: 2000
+		BankSaturationCash: 3000
+		AdaptiveCounterWeight: 40
+		CapturerInfantryLimitPct: 8
+		EngineerCompletionIntervalTicks: 600
+		RetreatRatioPct: 40
+		RequiresCondition: challengerbot
+	BotLimits@unbeatable:
+		ProductionTypeLimit: 10
+		ConstructionYardLimit: 10
+		RefineryLimit: 10
+		HarvesterLimit: 0
+		HarvesterValueLimit: 20000
+		BuildingDelayModifier: 25
+		BuildingIntervalModifier: 25
+		UnitDelayModifier: 25
+		UnitIntervalModifier: 25
 		InitialAttackDelay: 750
 		AttackLivenessMaxNoLaunchTicks: 5500
 		AttackLivenessFirstWaveMaxTicks: 2750
-		TempoMinWaveUnits: 12
+		TempoMinWaveUnits: 14
 		TeamResponseMaxLeaseTicks: 1100
 		TeamResponseRearmCooldownTicks: 550
 		TeamResponseLeaseLimit: 1
 		PrioritizeBarracksBeforeRefinery: true
 		PersonalityReactionDelay: 1500
-		NewProductionCashThreshold: 4000
+		NewProductionCashThreshold: 3000
 		MaximiseProductionCashRequirement: 1500
-		BankSaturationCash: 1800
-		AdaptiveCounterWeight: 36
-		CapturerInfantryLimitPct: 10
+		BankSaturationCash: 2250
+		AdaptiveCounterWeight: 45
+		CapturerInfantryLimitPct: 9
 		EngineerCompletionIntervalTicks: 400
-		RetreatRatioPct: 90
+		RetreatRatioPct: 45
 		RequiresCondition: unbeatablebot
 	BotLimits@god:
-		ProductionTypeLimit: 7
-		ConstructionYardLimit: 7
-		RefineryLimit: 10
-		HarvesterLimit: 30
-		BuildingDelayModifier: 25
-		BuildingIntervalModifier: 25
-		UnitDelayModifier: 25
-		UnitIntervalModifier: 25
+		ProductionTypeLimit: 11
+		ConstructionYardLimit: 11
+		RefineryLimit: 11
+		HarvesterLimit: 0
+		HarvesterValueLimit: 22000
+		BuildingDelayModifier: 0
+		BuildingIntervalModifier: 0
+		UnitDelayModifier: 0
+		UnitIntervalModifier: 0
 		InitialAttackDelay: 0
 		AttackLivenessMaxNoLaunchTicks: 5000
 		AttackLivenessFirstWaveMaxTicks: 2500
-		TempoMinWaveUnits: 13
+		TempoMinWaveUnits: 15
 		TeamResponseMaxLeaseTicks: 1000
 		TeamResponseRearmCooldownTicks: 500
 		TeamResponseLeaseLimit: 1
 		PrioritizeBarracksBeforeRefinery: true
-		PersonalityReactionDelay: 750
+		PersonalityReactionDelay: 1000
 		NewProductionCashThreshold: 2000
-		MaximiseProductionCashRequirement: 500
+		MaximiseProductionCashRequirement: 1000
 		BankSaturationCash: 1500
-		AdaptiveCounterWeight: 40
+		AdaptiveCounterWeight: 50
 		CapturerInfantryLimitPct: 10
 		EngineerCompletionIntervalTicks: 200
-		RetreatRatioPct: 100
+		RetreatRatioPct: 50
 		RequiresCondition: cameogodbot
 
 	# PUSH-1 (bank overflow): while the bank sits above OverflowCash the armed base builder
@@ -526,6 +571,9 @@ Player:
 	BotUnitRoles:
 		RequiresCondition: genericbot
 	Inherits@aidifficulties: ^AIDifficulties
+	ModularBot@NoobAI:
+		Name: bot_ai.noob
+		Type: noob
 	ModularBot@EasiestAI:
 		Name: bot_ai.easiest
 		Type: easiest
@@ -620,6 +668,9 @@ Player:
 	ProvidesPrerequisite@botplayer:
 		Prerequisite: botplayer
 		RequiresCondition: genericbot || classicbot
+	ProvidesPrerequisite@noobbot:
+		Prerequisite: noobbotplayer
+		RequiresCondition: noobbot
 	ProvidesPrerequisite@easiestbot:
 		Prerequisite: easiestbotplayer
 		RequiresCondition: easiestbot
@@ -667,7 +718,7 @@ Player:
 		RequiresCondition: demand-artillery
 	ProvidesPrerequisite@brutalorhuman:
 		Prerequisite: brutalaiorhuman
-		RequiresCondition: !easiestbot && !veryeasybot && !easybot && !mediumbot && !hardbot
+		RequiresCondition: !noobbot && !easiestbot && !veryeasybot && !easybot && !mediumbot && !hardbot
 	PowerDownBotModule:
 		RequiresCondition: genericbot || classicbot
 	SupportPowerBotASModule:
@@ -3738,59 +3789,59 @@ Player:
 				Min: 1000
 				Max: 1000
 				RatioMin: 600
-				RatioMax: 1400
+				RatioMax: 1500
 				Margin: 1000
 				Growth: 1000
 				Floor: 0
 				TurtleRushLean: 25
 				TechRushExpansionLean: 0
 			harvester:
-				Min: 3000
-				Max: 30000
+				Min: 4000
+				Max: 22000
 				RatioMin: 600
-				RatioMax: 1400
+				RatioMax: 1500
 				Margin: 500
 				Growth: 500
 				Floor: 1
 				TurtleRushLean: 0
 				TechRushExpansionLean: 25
 			refinery:
-				Min: 1000
-				Max: 10000
+				Min: 2000
+				Max: 11000
 				RatioMin: 600
-				RatioMax: 1400
+				RatioMax: 1500
 				Margin: 500
-				Growth: 500
+				Growth: 0
 				Floor: 1
 				TurtleRushLean: 0
 				TechRushExpansionLean: 25
 			# 1.5 -> 7.5 floors to the old rounded line 1 2 2 3 4 4 5 6 6 7
 			production:
-				Min: 1500
-				Max: 7500
+				Min: 2000
+				Max: 11000
 				RatioMin: 600
-				RatioMax: 1400
+				RatioMax: 1500
 				Margin: 500
-				Growth: 500
+				Growth: 0
 				Floor: 1
 				TurtleRushLean: 0
 				TechRushExpansionLean: 25
 			conyard:
-				Min: 1500
-				Max: 7500
+				Min: 2000
+				Max: 11000
 				RatioMin: 600
-				RatioMax: 1400
+				RatioMax: 1500
 				Margin: 500
-				Growth: 500
+				Growth: 0
 				Floor: 1
 				TurtleRushLean: 0
 				TechRushExpansionLean: 25
 			# 1 1 1 1 2 2 2 2 3 3 across the ten tiers
 			tech:
-				Min: 1000
+				Min: 1225
 				Max: 3250
 				RatioMin: 600
-				RatioMax: 1400
+				RatioMax: 1500
 				Margin: 500
 				Growth: 500
 				Floor: 1
@@ -3801,7 +3852,7 @@ Player:
 				Min: 1000
 				Max: 1000
 				RatioMin: 600
-				RatioMax: 1400
+				RatioMax: 1500
 				Margin: 500
 				Growth: 500
 				Floor: 0
@@ -3812,7 +3863,7 @@ Player:
 				Min: 0
 				Max: 0
 				RatioMin: 600
-				RatioMax: 1400
+				RatioMax: 1500
 				Margin: 500
 				Growth: 500
 				Floor: 0
@@ -3823,7 +3874,7 @@ Player:
 				Min: 25000
 				Max: 25000
 				RatioMin: 600
-				RatioMax: 1400
+				RatioMax: 1500
 				Margin: 500
 				Growth: 500
 				Floor: 0
@@ -4231,6 +4282,7 @@ Player:
 	BotCounterDemandController:
 		RequiresCondition: genericbot
 	MasterAiBotModule:
+		StalemateUrgencyEnabled: true
 		RaidFailuresBeforeDormant: 2
 		RequiresCondition: genericbot
 		UseFoggedObservation: true
@@ -4324,6 +4376,7 @@ Player:
 	# best as the target field (EX-0). EX-1: BaseCrawl placements walk toward it (genericbot only; classic, which
 	# shares BaseBuilderBotModuleCA@generic, gets no provider and keeps today's placement).
 	ExpansionPlannerBotModule:
+		RefineryFallbackForceAfterTicks: 1500
 		RequiresCondition: genericbot
 		DriveBaseCrawl: true
 		# Enabled for the maintainer's 2026-10-15 combined playtest (BY).
@@ -4465,6 +4518,13 @@ Player:
 		RequiresCondition: genericbot && personality-rush
 		Notification: notification-bot-personality-rush
 	SquadManagerBotModuleCA@rush:
+		RetreatRallyEnabled: true
+		AggTeamEnabled: true
+		AggressionEnabled: true
+		StalemateDiagnosticsEnabled: true
+		StalemateBreakerEnabled: true
+		# IMPL02-AGG-TEAM (A5): home-reserve cap for this personality; inert while AggTeamEnabled is false (switch CG_agg_team).
+		AggTeamReserveSharePercent: 10
 		UseProtectionRequests: true
 		# CA-2 (AI_ARCHITECTURE 12.6): the defend draft keeps a reserve instead of
 		# stripping the idle pool on every ping (FransGroundDefendForcePreservationGuard
@@ -4517,6 +4577,18 @@ Player:
 		MaxGuerrillaSquads: 2
 		MaxGuerrillaSquadsLate: 5
 		UseCombatPredictor: true
+		# IMPL02 aggression registry (A9; AGGRESSION_PLAN_01 A1-A4). Read only with groups CD + CF on (the ON arm);
+		# each value stays inside its documented range (AggressionPolicyCA.Ranges), checked at ruleset load.
+		AggressionEngageRatioPct: 80
+		AggressionFleeRatioPct: 50
+		AggressionCoalitionCells: 12
+		AggressionAllyEngagedCells: 20
+		AggressionRegroupMarginCells: 4
+		AggressionRegroupMaxTicks: 750
+		AggressionMinCommitTicks: 250
+		AggressionCommitBreakLossPct: 50
+		AggressionMinDispatchUnits: 3
+		AggressionMinDispatchValue: 1000
 		PreferMainTarget: true
 		AirPriorityTags: artillery, harvester
 		StageBeforeAssault: true
@@ -4563,6 +4635,16 @@ Player:
 		RequiresCondition: genericbot && personality-turtle
 		Notification: notification-bot-personality-turtle
 	SquadManagerBotModuleCA@turtle:
+		RetreatRallyEnabled: true
+		AggTeamEnabled: true
+		AggressionEnabled: true
+		StalemateDiagnosticsEnabled: true
+		StalemateBreakerEnabled: true
+		# IMPL02-AGG-TEAM (A5): home-reserve cap for this personality; inert while AggTeamEnabled is false (switch CG_agg_team).
+		AggTeamReserveSharePercent: 40
+		# Turtle must still win: a max-strength push (no reserve) at this own combat value or from this tick on.
+		AggTeamPushArmyValue: 20000
+		AggTeamPushLateTick: 20000
 		UseProtectionRequests: true
 		UseDefendPreservation: false
 		UseDirectorPacing: false
@@ -4609,6 +4691,18 @@ Player:
 		MaxGuerrillaSquads: 1
 		MaxGuerrillaSquadsLate: 3
 		UseCombatPredictor: true
+		# IMPL02 aggression registry (A9; AGGRESSION_PLAN_01 A1-A4). Read only with groups CD + CF on (the ON arm);
+		# each value stays inside its documented range (AggressionPolicyCA.Ranges), checked at ruleset load.
+		AggressionEngageRatioPct: 80
+		AggressionFleeRatioPct: 50
+		AggressionCoalitionCells: 12
+		AggressionAllyEngagedCells: 20
+		AggressionRegroupMarginCells: 4
+		AggressionRegroupMaxTicks: 750
+		AggressionMinCommitTicks: 250
+		AggressionCommitBreakLossPct: 50
+		AggressionMinDispatchUnits: 3
+		AggressionMinDispatchValue: 1000
 		PreferMainTarget: true
 		AirPriorityTags: artillery, harvester
 		StageBeforeAssault: true
@@ -4655,6 +4749,13 @@ Player:
 		RequiresCondition: genericbot && personality-tech
 		Notification: notification-bot-personality-tech
 	SquadManagerBotModuleCA@tech:
+		RetreatRallyEnabled: true
+		AggTeamEnabled: true
+		AggressionEnabled: true
+		StalemateDiagnosticsEnabled: true
+		StalemateBreakerEnabled: true
+		# IMPL02-AGG-TEAM (A5): home-reserve cap for this personality; inert while AggTeamEnabled is false (switch CG_agg_team).
+		AggTeamReserveSharePercent: 25
 		UseProtectionRequests: true
 		UseDefendPreservation: false
 		UseDirectorPacing: false
@@ -4703,6 +4804,18 @@ Player:
 		MaxGuerrillaSquads: 1
 		MaxGuerrillaSquadsLate: 4
 		UseCombatPredictor: true
+		# IMPL02 aggression registry (A9; AGGRESSION_PLAN_01 A1-A4). Read only with groups CD + CF on (the ON arm);
+		# each value stays inside its documented range (AggressionPolicyCA.Ranges), checked at ruleset load.
+		AggressionEngageRatioPct: 80
+		AggressionFleeRatioPct: 50
+		AggressionCoalitionCells: 12
+		AggressionAllyEngagedCells: 20
+		AggressionRegroupMarginCells: 4
+		AggressionRegroupMaxTicks: 750
+		AggressionMinCommitTicks: 250
+		AggressionCommitBreakLossPct: 50
+		AggressionMinDispatchUnits: 3
+		AggressionMinDispatchValue: 1000
 		PreferMainTarget: true
 		AirPriorityTags: artillery, harvester
 		StageBeforeAssault: true
@@ -4749,6 +4862,13 @@ Player:
 		RequiresCondition: genericbot && personality-expansion
 		Notification: notification-bot-personality-expansion
 	SquadManagerBotModuleCA@expansion:
+		RetreatRallyEnabled: true
+		AggTeamEnabled: true
+		AggressionEnabled: true
+		StalemateDiagnosticsEnabled: true
+		StalemateBreakerEnabled: true
+		# IMPL02-AGG-TEAM (A5): home-reserve cap for this personality; inert while AggTeamEnabled is false (switch CG_agg_team).
+		AggTeamReserveSharePercent: 25
 		UseProtectionRequests: true
 		UseDefendPreservation: false
 		UseDirectorPacing: false
@@ -4796,6 +4916,18 @@ Player:
 		MaxGuerrillaSquads: 2
 		MaxGuerrillaSquadsLate: 5
 		UseCombatPredictor: true
+		# IMPL02 aggression registry (A9; AGGRESSION_PLAN_01 A1-A4). Read only with groups CD + CF on (the ON arm);
+		# each value stays inside its documented range (AggressionPolicyCA.Ranges), checked at ruleset load.
+		AggressionEngageRatioPct: 80
+		AggressionFleeRatioPct: 50
+		AggressionCoalitionCells: 12
+		AggressionAllyEngagedCells: 20
+		AggressionRegroupMarginCells: 4
+		AggressionRegroupMaxTicks: 750
+		AggressionMinCommitTicks: 250
+		AggressionCommitBreakLossPct: 50
+		AggressionMinDispatchUnits: 3
+		AggressionMinDispatchValue: 1000
 		PreferMainTarget: true
 		AirPriorityTags: artillery, harvester
 		StageBeforeAssault: true
@@ -4842,6 +4974,14 @@ Player:
 		RequiresCondition: genericbot && personality-steamroller
 		Notification: notification-bot-personality-steamroller
 	SquadManagerBotModuleCA@steamroller:
+		RetreatRallyEnabled: true
+		AggTeamEnabled: true
+		AggressionEnabled: true
+		StalemateDiagnosticsEnabled: true
+		StalemateBreakerEnabled: true
+		# IMPL02-AGG-TEAM (A5): home-reserve cap for this personality; inert while AggTeamEnabled is false (switch CG_agg_team).
+		AggTeamReserveSharePercent: 15
+		StalemateSteamrollerProfile: true
 		UseProtectionRequests: true
 		UseDefendPreservation: false
 		UseDirectorPacing: false
@@ -4888,6 +5028,18 @@ Player:
 		MaxGuerrillaSquads: 1
 		MaxGuerrillaSquadsLate: 3
 		UseCombatPredictor: true
+		# IMPL02 aggression registry (A9; AGGRESSION_PLAN_01 A1-A4). Read only with groups CD + CF on (the ON arm);
+		# each value stays inside its documented range (AggressionPolicyCA.Ranges), checked at ruleset load.
+		AggressionEngageRatioPct: 80
+		AggressionFleeRatioPct: 50
+		AggressionCoalitionCells: 12
+		AggressionAllyEngagedCells: 20
+		AggressionRegroupMarginCells: 4
+		AggressionRegroupMaxTicks: 750
+		AggressionMinCommitTicks: 250
+		AggressionCommitBreakLossPct: 50
+		AggressionMinDispatchUnits: 3
+		AggressionMinDispatchValue: 1000
 		PreferMainTarget: true
 		AirPriorityTags: artillery, harvester
 		StageBeforeAssault: true
@@ -4933,6 +5085,13 @@ Player:
 		RequiresCondition: genericbot && personality-guerrilla
 		Notification: notification-bot-personality-guerrilla
 	SquadManagerBotModuleCA@guerrilla:
+		RetreatRallyEnabled: true
+		AggTeamEnabled: true
+		AggressionEnabled: true
+		StalemateDiagnosticsEnabled: true
+		StalemateBreakerEnabled: true
+		# IMPL02-AGG-TEAM (A5): home-reserve cap for this personality; inert while AggTeamEnabled is false (switch CG_agg_team).
+		AggTeamReserveSharePercent: 10
 		UseProtectionRequests: true
 		UseDefendPreservation: false
 		UseDirectorPacing: false
@@ -4980,6 +5139,18 @@ Player:
 		MaxGuerrillaSquads: 2
 		MaxGuerrillaSquadsLate: 6
 		UseCombatPredictor: true
+		# IMPL02 aggression registry (A9; AGGRESSION_PLAN_01 A1-A4). Read only with groups CD + CF on (the ON arm);
+		# each value stays inside its documented range (AggressionPolicyCA.Ranges), checked at ruleset load.
+		AggressionEngageRatioPct: 80
+		AggressionFleeRatioPct: 50
+		AggressionCoalitionCells: 12
+		AggressionAllyEngagedCells: 20
+		AggressionRegroupMarginCells: 4
+		AggressionRegroupMaxTicks: 750
+		AggressionMinCommitTicks: 250
+		AggressionCommitBreakLossPct: 50
+		AggressionMinDispatchUnits: 3
+		AggressionMinDispatchValue: 1000
 		PreferMainTarget: false
 		AirPriorityTags: artillery, harvester
 		StageBeforeAssault: false

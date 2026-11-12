@@ -171,7 +171,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		HashSet<string> superweaponNames;
 
 		int nextRecomputeTick;
-		int tier = -1;
+		/// <summary>Tier sentinel for an UNRANKED owner. Noob is not unranked: it is BotDifficultyLadder.NoobRank (-1).</summary>
+		const int Unranked = int.MinValue;
+
+		int tier = Unranked;
 		int lastArmyBaseline;
 		readonly Dictionary<string, int> targets = new(StringComparer.Ordinal);
 		readonly Dictionary<string, int> targetByBuilding = new(StringComparer.Ordinal);
@@ -237,6 +240,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int ResolveTier()
 		{
 			var expression = BotLimitsResolver.Describe(BotLimitsResolver.Current(player));
+			if (expression == "noobbot" || BotDifficultyLadder.IsNoob(player))
+				return BotDifficultyLadder.NoobRank;
+
 			if (expression.EndsWith("bot", StringComparison.Ordinal))
 			{
 				var index = Array.IndexOf(Info.Difficulties, expression[..^3]);
@@ -244,7 +250,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					return index;
 			}
 
-			return BotDifficultyLadder.RankOf(player, Info.Difficulties, BotDifficultyLadder.DefaultAliases);
+			var rank = BotDifficultyLadder.RankOf(player, Info.Difficulties, BotDifficultyLadder.DefaultAliases);
+			return rank < 0 ? Unranked : rank;
 		}
 
 		void Recompute(int tick)
@@ -275,7 +282,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				var name = names[i];
 				seenArray[i] = seen[name];
-				if (tier < 0 || !Info.Categories.TryGetValue(name, out var category))
+				if (tier == Unranked || !Info.Categories.TryGetValue(name, out var category))
 					continue;
 
 				var p = PersonalityMilli(personality, name, category, turtleRush, techExpansion);
@@ -296,7 +303,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			Snapshot = new ScaleTargetsSnapshot
 			{
 				Tick = tick,
-				Tier = tier,
+				Tier = tier == Unranked ? -1 : tier,
 				TeamSize = teamSize,
 				UnscoutedMilli = unscoutedMilli,
 				GameMinutesMilli = (int)Math.Min(int.MaxValue, 1000L * tick / Math.Max(1, ticksPerMinute)),
@@ -439,7 +446,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		int ArmyTarget(int baselineValue)
 		{
-			if (tier < 0 || !Info.Categories.TryGetValue("army", out var category))
+			if (tier == Unranked || !Info.Categories.TryGetValue("army", out var category))
 				return 0;
 
 			return ScaleTargetsEval.Target(category.Line, tier, Info.Difficulties.Length, gameTicksAtRecompute, ticksPerMinute,
@@ -449,13 +456,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		bool IBotScaleTargets.TryGetTarget(string category, out int target)
 		{
 			target = 0;
-			return !IsTraitDisabled && resolved && tier >= 0 && targets.TryGetValue(category, out target);
+			return !IsTraitDisabled && resolved && tier != Unranked && targets.TryGetValue(category, out target);
 		}
 
 		bool IBotScaleTargets.TryGetArmyValueTarget(int baselineValue, out int value)
 		{
 			value = 0;
-			if (IsTraitDisabled || !resolved || tier < 0 || !Info.Categories.ContainsKey("army"))
+			if (IsTraitDisabled || !resolved || tier == Unranked || !Info.Categories.ContainsKey("army"))
 				return false;
 
 			lastArmyBaseline = baselineValue;
@@ -466,7 +473,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		bool IBotScaleTargets.TryGetBuildingTarget(string actorName, out int target)
 		{
 			target = 0;
-			if (IsTraitDisabled || !resolved || tier < 0)
+			if (IsTraitDisabled || !resolved || tier == Unranked)
 				return false;
 
 			if (targetByBuilding.TryGetValue(actorName, out target))

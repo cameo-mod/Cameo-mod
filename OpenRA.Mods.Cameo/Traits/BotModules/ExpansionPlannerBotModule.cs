@@ -302,6 +302,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"and authorizes the queue's only permitted cancel of a completed refinery.")]
 		public readonly int RefineryFallbackTierMaxDist = 16;
 
+		[Desc("STALL-FIX-01 (switch CI): game ticks a retained refinery's fallback scan may stay Deferred",
+			"before one poll is forced to completion (terminal tier, unlimited budget, one fresh pass) so it",
+			"returns Site or an Exhausted verdict with that poll's own certificate. A multi-poll terminal pass",
+			"cannot finish on a busy map: any actor spawn/death or a stale-mark overflow between its polls",
+			"aborts it for a whole relist epoch. Cancel is still allowed only on Exhausted with a current",
+			"certificate, and while this switch is on only on the SECOND Exhausted verdict of an unbroken chain,",
+			"issued at least one relist epoch after the first (a Site or any non-Exhausted pass clears the chain).",
+			"0 = off (the default; the poll path and the single-verdict cancel are unchanged).")]
+		public readonly int RefineryFallbackForceAfterTicks = 0;
+
 		[Desc("FE-1: the factor a site/field keeps when its bearing from the main base lies within CrawlSeparationDegrees of",
 			"the crawl target, an own yard or another in-flight MCV site (deprioritised, never forbidden).")]
 		public readonly double MinSeparationFactor = 0.25;
@@ -351,7 +361,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 	}
 
-	public class ExpansionPlannerBotModule : ConditionalTrait<ExpansionPlannerBotModuleInfo>, IBotTick, IBotExpansionTargetProvider,
+	public partial class ExpansionPlannerBotModule : ConditionalTrait<ExpansionPlannerBotModuleInfo>, IBotTick, IBotExpansionTargetProvider,
 		IBotMcvExpansionSiteProvider, IBotPositionsUpdated, IBotExpansionAssistProvider,
 		IBotProtectionRequestProvider, IBotScoutInterestProvider
 	{
@@ -931,7 +941,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (!fallbackScans.TryGetValue(key, out var scan))
 			{
 				WireFallbackEvents();
-				fallbackScans[key] = scan = new RefineryFallbackScan(Info.RefineryFallbackRelistEpochTicks);
+				fallbackScans[key] = scan = new RefineryFallbackScan(Info.RefineryFallbackRelistEpochTicks) { ForceStartTick = now };
 			}
 
 			fallbackScanTicks[key] = now;
@@ -945,8 +955,24 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (scan.Tier >= Info.RefineryFallbackTierMaxDist)
 				budget += FallbackSweepBound();
 
-			var verdict = scan.Poll(budget, now,
-				() => FallbackSnapshot(actorInfo, bi, producer, distanceToBaseIsImportant), out site);
+			// STALL-FIX-01 (CI, Info.RefineryFallbackForceAfterTicks > 0): a scan deferred this long is forced
+			// to completion in this one poll (the world is frozen inside it, so the sweep and drain cannot
+			// drift); every other branch below, and the cancel rule, are unchanged. Off: ForceDue is false.
+			RefineryFallbackScan.Verdict verdict;
+			if (scan.ForceDue(Info.RefineryFallbackForceAfterTicks, now))
+			{
+				verdict = scan.PollForced(Info.RefineryFallbackTierMaxDist, now,
+					() => FallbackSnapshot(actorInfo, bi, producer, distanceToBaseIsImportant), out site);
+
+				var forced = RefineryFallbackScan.ForcedLine(player.ClientIndex, item, producer.ActorID,
+					now - scan.ForceStartTick, Info.RefineryFallbackForceAfterTicks, scan.ForcedPolls, verdict, site,
+					baseCenter ?? producer.Location, scan.LastPollWork, scan.Epochs, scan.ExhaustedChain, scan.ExhaustedConfirmed, now);
+				Log.Write("debug", forced);
+				AIUtils.BotDebug(forced);
+			}
+			else
+				verdict = scan.Poll(budget, now,
+					() => FallbackSnapshot(actorInfo, bi, producer, distanceToBaseIsImportant), out site);
 
 			switch (verdict)
 			{
@@ -977,7 +1003,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			return producer != null
 				&& fallbackScans.TryGetValue((producer.ActorID, item), out var scan)
-				&& scan.CertificateCurrent();
+				&& scan.CancelCertificateCurrent(Info.RefineryFallbackForceAfterTicks);
 		}
 
 		void IBotExpansionTargetProvider.RefinerySiteCommitted(CPos site)
@@ -2417,8 +2443,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			var tick = world.WorldTick;
 			var locomotor = mcv.TraitOrDefault<Mobile>()?.Locomotor;
+			var safe = McvSafeBegin();
+			var rejected = new HashSet<int>();
 			bool Eligible(FieldScore f)
 			{
+				// MCV-SAFE-01 (CG only): never a field inside a remembered enemy defence/production/artillery zone, nor one already refused for this MCV.
+				if (safe != null && (rejected.Contains(f.Index) || !McvSafeSiteAllowed(safe, f)))
+					return false;
+
+				// DIAG-FIX-01 (CG only): never a field nearer to a suspected enemy start than to any own base (the contested middle and the enemy half).
+				if (safe != null && McvSafeSiteInEnemyHalf(safe, f))
+					return false;
+
 				if (parkedUntil.TryGetValue(f.Index, out var until) && tick < until)
 					return false;
 
@@ -2468,11 +2504,26 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					* SpreadFactor(NearestOwnBuildingDistance(f.Center), diagonal, Info.SpreadBonus);
 			}
 
-			// At most one park per request: a parked field falls out and the next best is offered.
-			for (var attempt = 0; attempt < 2; attempt++)
+			// MCV-SAFE-01 (CG only): forward-contain and full-field bonuses multiply the field score of every site that passed the exclusion.
+			if (safe != null)
+			{
+				var baseWeight = weight;
+				weight = f => (baseWeight?.Invoke(f) ?? 1.0) * McvSafeSiteFactor(safe, f);
+			}
+
+			// At most one park per request: a parked field falls out and the next best is offered (CG: a field with no safe route is refused for this MCV and the next is tried).
+			for (var attempt = 0; attempt < (safe != null ? 3 : 2); attempt++)
 			{
 				if (McvSite(LastScores, mcv.Location, Info.McvMinHops, Info.McvTauCells, Eligible, weight) is not FieldScore s)
-					return null;
+					return safe != null ? McvSafeFallback(safe, mcv) : null;
+
+				List<CPos> safeRoute = null;
+				if (safe != null && !McvSafeRoute(safe, mcv, s.Center, true, out safeRoute))
+				{
+					rejected.Add(s.Index);
+					Log.Write("debug", $"AI ({player.ClientIndex}): MS-0 field {s.Index} at {s.Center} has no route around the enemy zones for {mcv.Info.Name} {mcv.ActorID} at {mcv.Location}, tick {tick}");
+					continue;
+				}
 
 				(mcvHandout, var park) = TrackMcvHandout(mcvHandout, s.Index, Info.McvMaxSiteHandouts);
 				if (park)
@@ -2485,12 +2536,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (Info.FieldCoverage)
 					inflightMcvSites[mcv.ActorID] = s.Center;
 
-				Log.Write("debug", $"AI ({player.ClientIndex}): EX-3 MCV {mcv.Info.Name} at {mcv.Location} sent to field {s.Index} at {s.Center}: value {s.Value}, hops {s.Hops}, safety {s.Safety:F2}, hand-out {mcvHandout.Count} at tick {tick}");
+				if (safe != null)
+					McvSafeIssue(mcv, s.Index, safeRoute);
+
+				Log.Write("debug", $"AI ({player.ClientIndex}): EX-3 MCV {mcv.Info.Name} at {mcv.Location} sent to field {s.Index} at {s.Center}: value {s.Value}, hops {s.Hops}, safety {s.Safety:F2}, hand-out {mcvHandout.Count}{(safe != null ? McvSafeZoneNote(safe, mcv, s) : string.Empty)} at tick {tick}");
 				LastMcvSite = s.Center;
 				return s.Center;
 			}
 
-			return null;
+			return safe != null ? McvSafeFallback(safe, mcv) : null;
 		}
 
 		/// <summary>
@@ -2647,6 +2701,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					Idle(resourceMap == null ? "no enabled ResourceMapBotModule" : "no PlayerResources");
 				return;
 			}
+
+			// MCV-SAFE-01 (CG only): en-route guard and loss memory for the expansion MCVs.
+			McvSafeTick(bot);
 
 			income.Enqueue((world.WorldTick, resources.Earned));
 			while (income.Count > 1 && world.WorldTick - income.Peek().Tick > Info.IncomeWindowTicks)

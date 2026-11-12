@@ -43,7 +43,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					continue;
 
 				Add(node.Key, "Evidence@", result.evidence, value);
-				Add(node.Key, "RetreatRatioPct@", result.retreat, value);
+				// TIER-01 D1: the learned retreat value is a multiplier in percent (100 = 1.00). An absolute RetreatRatioPct@ row of
+				// the former format is not read, so such a file falls back to the tier value instead of being misread.
+				Add(node.Key, "RetreatMultPct@", result.retreat, value);
 				Add(node.Key, "EngageMarginPct@", result.engage, value);
 			}
 
@@ -75,7 +77,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return halves.All(part => part.All(c => c is >= 'a' and <= 'z' or >= '0' and <= '9' or '_' or '-' or '.'));
 		}
 
-		public bool TryRetreatRatioPct(string own, string enemy, out int value) => TryLookup(retreat, own, enemy, out value);
+		public bool TryRetreatMultPct(string own, string enemy, out int value) => TryLookup(retreat, own, enemy, out value);
 		public bool TryEngageMarginPct(string own, string enemy, out int value) => TryLookup(engage, own, enemy, out value);
 
 		bool TryLookup(Dictionary<string, int> source, string own, string enemy, out int value)
@@ -102,8 +104,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	public class FightThresholdsBotModuleInfo : ConditionalTraitInfo
 	{
 		public readonly string LearnedFile = "ai/learned/fight_learning.yaml";
-		public readonly int MinimumRetreatRatioPct = 1;
+		[Desc("TIER-01 D1: the effective retreat percent (base x learned multiplier / 100) is clamped to this range. 0 = never retreat.")]
+		public readonly int MinimumRetreatRatioPct = 0;
 		public readonly int MaximumRetreatRatioPct = 100;
+		[Desc("TIER-01 D1: the learned RetreatMultPct row (percent of the base, 100 = 1.00) is clamped to this range first.")]
+		public readonly int MinimumRetreatMultPct = 0;
+		public readonly int MaximumRetreatMultPct = 200;
 		public readonly int MinimumEngageMarginPct = 100;
 		public readonly int MaximumEngageMarginPct = 300;
 		public override object Create(ActorInitializer init) => new FightThresholdsBotModule(init.Self, this);
@@ -145,12 +151,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 		}
 
+		// TIER-01 D1: a learned row scales the caller's base (the squad manager's tier value with the in-match delta, or CombatVeto's
+		// own engage bar). No row returns the base unchanged, which is the same as a row of 100.
 		int IBotFightThresholds.RetreatRatioPct(string own, string enemy, int fallback)
 		{
-			if (IsTraitDisabled || !loaded || !thresholds.TryRetreatRatioPct(own, enemy, out var value))
+			if (IsTraitDisabled || !loaded || !thresholds.TryRetreatMultPct(own, enemy, out var value))
 				return fallback;
-			return Math.Clamp(value, Info.MinimumRetreatRatioPct, Info.MaximumRetreatRatioPct);
+			return EffectiveRetreatPct(fallback, value, Info);
 		}
+
+		/// <summary>TIER-01 D1: base x clamp(mult, 0..200) / 100, clamped to the retreat range (0..100).</summary>
+		internal static int EffectiveRetreatPct(int basePct, int multPct, FightThresholdsBotModuleInfo info) =>
+			Math.Clamp((int)((long)basePct * Math.Clamp(multPct, info.MinimumRetreatMultPct, info.MaximumRetreatMultPct) / 100),
+				info.MinimumRetreatRatioPct, info.MaximumRetreatRatioPct);
 
 		int IBotFightThresholds.EngageMarginPct(string own, string enemy, int fallback)
 		{

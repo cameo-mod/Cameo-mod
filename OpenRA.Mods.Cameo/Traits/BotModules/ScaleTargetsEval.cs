@@ -45,14 +45,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// <summary>The fixed-point scale: 1000 = 1.0.</summary>
 		public const int One = 1000;
 
-		/// <summary>lerp(min, max) at tier / (tierCount - 1), in thousandths. A one-tier ladder reads min.</summary>
+		/// <summary>
+		/// lerp(min, max) at tier / (tierCount - 1), in thousandths. A one-tier ladder reads min.
+		/// NOOB-TIER-01: tier -1 is noob (one step below easiest, extrapolated); no other negative tier is accepted.
+		/// </summary>
 		public static long Lerp(int minMilli, int maxMilli, int tier, int tierCount)
 		{
 			var steps = tierCount - 1;
 			if (steps <= 0)
 				return minMilli;
 
-			var t = Math.Clamp(tier, 0, steps);
+			var t = Math.Clamp(tier, -1, steps);
 			return minMilli + ((long)(maxMilli - minMilli) * t) / steps;
 		}
 

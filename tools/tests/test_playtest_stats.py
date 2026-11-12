@@ -226,6 +226,32 @@ class ChannelFixture(unittest.TestCase):
             self.assertEqual(row["spent_total"], 4200)
             self.assertIn("cash_reserved", row["hold_top"])
 
+    def test_bot_queue_negative_spent_delta_is_a_refund_not_malformed(self):
+        # PLAYTEST-PORT FIX-5: the engine emits spent_delta = spent - last_spent and
+        # PlayerResources.Spent drops on refunds (VERIFY G1 seat rows carried -381).
+        with tempfile.TemporaryDirectory() as temp:
+            write_channel(temp, [
+                botqueue("seat_2", 250, spent_delta=1000),
+                botqueue("seat_2", 500, spent_delta=-381),
+            ])
+            _, metrics = health.players_channel(
+                pathlib.Path(temp) / "Logs", UID, "seat_2")
+            self.assertEqual(metrics["player_channel_queue_rows"], 2)
+            _, _, queues = stats.read_channel(
+                pathlib.Path(temp) / "Logs" /
+                f"cameo-ai-players-{hashlib.sha256(UID.encode()).hexdigest()}.jsonl")
+            self.assertEqual(queues["seat_2"]["spent_total"], 619)
+        # Only spent_delta is signed: other counters stay nonnegative, and the
+        # signed field still rejects bools, floats, strings and out-of-int64 values.
+        with self.assertRaises(health.EvidenceError):
+            health.validate_bot_queue_row(botqueue("seat_2", 250, banked=-1))
+        with self.assertRaises(health.EvidenceError):
+            health.validate_bot_queue_row(botqueue("seat_2", -1))
+        for bad in (True, 1.5, "-381", None, 2 ** 63, -(2 ** 63) - 1):
+            with self.assertRaises(health.EvidenceError):
+                health.validate_bot_queue_row(botqueue("seat_2", 250, spent_delta=bad))
+        health.validate_bot_queue_row(botqueue("seat_2", 250, spent_delta=-(2 ** 63)))
+
     def test_bot_queue_bad_shapes_fail_closed(self):
         # An unsupported hold reason must not pass silently.
         with tempfile.TemporaryDirectory() as temp:

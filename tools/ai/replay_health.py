@@ -18,7 +18,7 @@ import tempfile
 POLICY_VERSION = "startup-economy-v1"
 PROFILES = {"td_gdi", "td_nod", "ra1_allies", "ra1_soviets", "japan"}
 MAX_FILE_BYTES = 128 * 1024 * 1024
-MAX_LINE_BYTES = 1024 * 1024
+MAX_LINE_BYTES = 8 * 1024 * 1024  # RH-BOUND-01: 8-seat matches rows reach 1.6 MiB at 43k ticks
 MAX_ROWS = 200000
 REFERENCE_BOTS = {"classic", "classic_hard"}
 
@@ -96,7 +96,7 @@ PLAYER_EVENT_V1_FIELDS = {
 PLAYER_EVENT_KINDS = {
     "building_placed", "structure_lost", "conyard_deployed", "conyard_packed",
     "first_unit_enemy_territory", "attack_wave_start", "superweapon_built",
-    "superweapon_fired",
+    "superweapon_fired", "mcv_lost",
 }
 # CB_frontier_observe (P3a, DESIGN_2026-10-12_protected_frontier §8): outpost_stage
 # rows emit at version 2 — the field/kind sets dispatch on the row's own version so
@@ -194,6 +194,16 @@ def atomic_report(path, encoded, support):
 def integer(value):
     if isinstance(value, bool) or not isinstance(value, int) or value < 0:
         raise EvidenceError("expected nonnegative integer")
+    return value
+
+
+def signed_integer(value):
+    """Signed 64-bit integer for fields that can legitimately go negative.
+    PLAYTEST-PORT FIX-5: bot-queue spent_delta is spent - last_spent, and the engine
+    lowers PlayerResources.Spent on refunds (RefundCash/RefundResources), so a refund
+    larger than the spending in one sample interval gives a negative delta."""
+    if isinstance(value, bool) or not isinstance(value, int) or not -(2 ** 63) <= value < 2 ** 63:
+        raise EvidenceError("expected signed 64-bit integer")
     return value
 
 
@@ -441,7 +451,7 @@ def validate_bot_queue_row(row):
         raise EvidenceError("unsupported bot-queue version")
     integer(row.get("tick"))
     integer(row.get("banked"))
-    integer(row.get("spent_delta"))
+    signed_integer(row.get("spent_delta"))  # FIX-5: refunds make it negative
     for key in ("requested", "accepted", "completed", "spend"):
         values = row.get(key)
         if not isinstance(values, dict):

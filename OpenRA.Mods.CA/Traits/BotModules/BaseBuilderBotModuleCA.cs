@@ -711,11 +711,24 @@ namespace OpenRA.Mods.CA.Traits
 
 			var i = 0;
 
+			// S2 F3: a category listed in both BuildingQueues and DefenseQueues (BuildingAddons) gets two
+			// managers over one queue. The first-created one owns the observation state and the later
+			// one borrows it, so each queue item is observed and emitted once. Observation only: both
+			// still tick and decide exactly as before.
+			var slotCategories = new List<string>(builders.Length);
+			BaseBuilderQueueManagerCA CreateManager(string category)
+			{
+				var ownerSlot = BaseBuilderQueueEvalCA.ObservationOwnerSlot(slotCategories, category);
+				slotCategories.Add(category);
+				return new BaseBuilderQueueManagerCA(this, category, player, PlayerPower, playerResources, resourceLayer,
+					ownerSlot >= 0 ? builders[ownerSlot] : null);
+			}
+
 			foreach (var building in Info.BuildingQueues)
-				builders[i++] = new BaseBuilderQueueManagerCA(this, building, player, PlayerPower, playerResources, resourceLayer);
+				builders[i++] = CreateManager(building);
 
 			foreach (var defense in Info.DefenseQueues)
-				builders[i++] = new BaseBuilderQueueManagerCA(this, defense, player, PlayerPower, playerResources, resourceLayer);
+				builders[i++] = CreateManager(defense);
 		}
 
 		protected override void TraitEnabled(Actor self)

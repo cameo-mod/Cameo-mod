@@ -30,9 +30,10 @@ TWO THINGS THIS FILE EXISTS TO SETTLE, both of which change the answer:
    two observations that each said "twice". The geometric mean sqrt(a*b) = 0.5 is the standard fix
    and keeps the result on the same scale as its inputs. `--combine` shows the divergence.
 
-⭐ THE ASYMPTOTE SCALE IS ALREADY IN THE TREE. `BotLimits` HarvesterLimit is 3*(rank+1) --
-3, 6, 9 ... 30 -- an exact 1x to 10x ladder, which is the scale the maintainer guessed at. Income
-capacity IS harvester count, so the per-difficulty asymptote needs no new invented numbers.
+⭐ THE ASYMPTOTE SCALE IS ALREADY IN THE TREE. `BotLimits` HarvesterValueLimit is the harvester
+budget per difficulty, 2000 to 22000 credits (TIER-01). Income capacity follows that budget, so the
+per-difficulty asymptote needs no new invented numbers. HarvesterLimit is 0 on every tier since
+TIER-01 and no longer carries the scale (TIER01-CURVE-FIX-01, Sonnet F-1).
 
 ⭐ AND THE TIME CONSTANT IS TOO. ProductionTimeMultiplier runs 130 (easiest) to 40 (cameogod), so
 scaling the curve's midpoint by it makes harder bots ramp proportionally sooner, reusing a number
@@ -49,22 +50,22 @@ import sys
 DIFFICULTIES = ["easiest", "veryeasy", "easy", "medium", "hard",
                 "veryhard", "brutal", "challenger", "unbeatable", "cameogod"]
 
-def _harvester_limits() -> dict[str, int]:
-    """HarvesterLimit per difficulty, READ from ai.yaml rather than hardcoded.
+def _harvester_value_limits() -> dict[str, int]:
+    """HarvesterValueLimit (credits) per difficulty, READ from ai.yaml rather than hardcoded.
 
-    ⚠ The whole point of deriving the asymptote from the build limits is that it stays tied to
-    them. A copy pasted in here would drift the moment someone retunes `BotLimits`, and the curve
+    ⚠ The whole point of deriving the asymptote from the harvester budget is that it stays tied to
+    it. A copy pasted in here would drift the moment someone retunes `BotLimits`, and the curve
     would keep quoting numbers the mod no longer has.
     ⚠ `BotLimits@god` is the block name but `cameogod` is the bot type — a naming inconsistency in
     ai.yaml, mapped here rather than "fixed", because renaming the block is a yaml change needing
     a boot gate.
     """
     src = pathlib.Path("mods/cameo/ai/ai.yaml").read_text(encoding="utf-8")
-    found = dict(re.findall(r"BotLimits@(\w+):\n(?:\s+\w+:.*\n)*?\s+HarvesterLimit:\s*(\d+)", src))
+    found = dict(re.findall(r"BotLimits@(\w+):\n(?:\s+\w+:.*\n)*?\s+HarvesterValueLimit:\s*(\d+)", src))
     found = {("cameogod" if k == "god" else k): int(v) for k, v in found.items()}
     missing = [d for d in DIFFICULTIES if d not in found]
     if missing:
-        raise SystemExit(f"ai.yaml has no HarvesterLimit for: {', '.join(missing)}")
+        raise SystemExit(f"ai.yaml has no HarvesterValueLimit for: {', '.join(missing)}")
     return found
 
 
@@ -79,12 +80,13 @@ def _production_time() -> dict[str, int]:
     return found
 
 
-HARVESTER_LIMIT = _harvester_limits()
+HARVESTER_VALUE_LIMIT = _harvester_value_limits()
 PRODUCTION_TIME = _production_time()
 
 TICKS_PER_MINUTE = 1500          # 40ms timestep -- mods/cameo/mod.yaml GameSpeeds/default
 START_CASH = 10000               # opening bank; the curve must equal this at t=0
 ASYMPTOTE_PER_HARVESTER = 5000   # tuning knob: net worth a bot converges to, per harvester slot
+HARVESTER_SLOT_VALUE = 5000      # credits of HarvesterValueLimit per slot (README: 5000 per slot)
 MIDPOINT_MINUTES = 12.0          # when a MEDIUM bot reaches halfway to its asymptote
 # ⚠ Steepness is expressed RELATIVE TO THE MIDPOINT, not per minute. A fixed per-minute k would
 # give faster difficulties a relatively shallower S-curve -- an artifact of the parameterisation,
@@ -94,8 +96,9 @@ STEEPNESS_X_MIDPOINT = 5.4
 
 
 def asymptote(difficulty: str) -> int:
-    """Where this difficulty's economy flattens out. Derived from its harvester cap."""
-    return START_CASH + ASYMPTOTE_PER_HARVESTER * HARVESTER_LIMIT[difficulty]
+    """Where this difficulty's economy flattens out: the opening bank plus one slot per
+    HARVESTER_SLOT_VALUE credits of its harvester budget (HarvesterValueLimit)."""
+    return START_CASH + ASYMPTOTE_PER_HARVESTER * HARVESTER_VALUE_LIMIT[difficulty] // HARVESTER_SLOT_VALUE
 
 
 def midpoint(difficulty: str) -> float:
@@ -155,17 +158,17 @@ def main() -> int:
         return 0
 
     print(f"# Expected NET WORTH by difficulty and game time\n")
-    print(f"Asymptote = {START_CASH} + {ASYMPTOTE_PER_HARVESTER} x HarvesterLimit  "
-          f"(HarvesterLimit = 3x(rank+1), measured from ai.yaml)\n"
+    print(f"Asymptote = {START_CASH} + {ASYMPTOTE_PER_HARVESTER}/{HARVESTER_SLOT_VALUE} x HarvesterValueLimit  "
+          f"(measured from ai.yaml)\n"
           f"Midpoint  = {MIDPOINT_MINUTES} min x ProductionTimeMultiplier/100 "
           f"(measured from defaults.yaml)\n")
 
     mins = [0, 5, 10, 15, 20, 30, 45]
-    print("| difficulty | harv | asymptote | midpoint | " + " | ".join(f"{m}m" for m in mins) + " |")
+    print("| difficulty | budget | asymptote | midpoint | " + " | ".join(f"{m}m" for m in mins) + " |")
     print("|---|--:|--:|--:|" + "--:|" * len(mins))
     for d in DIFFICULTIES:
         row = " | ".join(f"{logistic(d, m):,}" for m in mins)
-        print(f"| {d} | {HARVESTER_LIMIT[d]} | {asymptote(d):,} | "
+        print(f"| {d} | {HARVESTER_VALUE_LIMIT[d]:,} | {asymptote(d):,} | "
               f"{midpoint(d):.1f}m | {row} |")
 
     print("\n## Shape check — logistic vs the exponential approach (medium)\n")

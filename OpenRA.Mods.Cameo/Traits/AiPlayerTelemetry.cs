@@ -294,6 +294,38 @@ namespace OpenRA.Mods.Cameo.Traits
 		public OpenRA.Player Owner;
 		public CPos Cell;
 		public int Tick;
+		public string ActorName;
+		public long ActorId;
+		public string Cause;
+	}
+
+	/// <summary>Pure matching of an MCV removal against a yard added moments earlier (the engine's Transform adds the yard first).</summary>
+	internal static class DeployMatchMath
+	{
+		/// <summary>Index of the newest entry of the same owner within windowTicks and cells (Chebyshev) of the removal; -1 when none.</summary>
+		public static int Find<TOwner>(IReadOnlyList<(TOwner Owner, CPos Cell, int Tick)> entries, TOwner owner, CPos cell, int tick, int windowTicks, int cells)
+		{
+			for (var i = entries.Count - 1; i >= 0; i--)
+			{
+				var e = entries[i];
+				if (!EqualityComparer<TOwner>.Default.Equals(e.Owner, owner)
+					|| Math.Abs(e.Tick - tick) > windowTicks
+					|| Math.Max(Math.Abs(e.Cell.X - cell.X), Math.Abs(e.Cell.Y - cell.Y)) > cells)
+					continue;
+
+				return i;
+			}
+
+			return -1;
+		}
+	}
+
+	internal sealed class PendingDeployAdd
+	{
+		public Actor Actor;
+		public OpenRA.Player Owner;
+		public CPos Cell;
+		public int Tick;
 	}
 
 	internal sealed class PendingConyardRemoval
@@ -357,6 +389,10 @@ namespace OpenRA.Mods.Cameo.Traits
 		readonly Dictionary<uint, BuildingTrack> buildings = new();
 		readonly List<DeployEvent> mcvRemoved = [];
 		readonly List<PendingConyardRemoval> pendingConyardRemoved = [];
+
+		// MCV-SAFE-01 (IMPL02-E): the engine's Transform creates the yard (World.Add is immediate) BEFORE its queued Dispose removes the MCV, so a
+		// deploy is seen as add-then-remove. A yard that matched no earlier removal waits here for the MCV removal (or expires to the old path).
+		readonly List<PendingDeployAdd> pendingDeployAdds = [];
 		readonly Dictionary<OpenRA.Player, SeatTelemetry> seats = new();
 		static readonly List<(string Seat, CPos Home)> NoEnemies = [];
 		int lastSampleTick = -1;
@@ -601,34 +637,14 @@ namespace OpenRA.Mods.Cameo.Traits
 
 					EmitEvent(seat, "building_placed", actor.Info.Name, actor.Location,
 						startDist: Cells(actor.Location, seat.Home), actorId: actor.ActorID);
-					var deployMatched = IsConyardBuilding(actor, tagMap)
-						&& TryMatchDeploy(mcvRemoved, actor.Owner, actor.Location, world.WorldTick);
+					var isConyard = IsConyardBuilding(actor, tagMap);
+					var deployMatched = isConyard && TryMatchDeploy(mcvRemoved, actor.Owner, actor.Location, world.WorldTick);
 					if (deployMatched)
-					{
-						// An expansion deploy adds a ConYard while one already stands; the
-						// starting MCV's first deploy (none owned) and a pack/redeploy
-						// relocation (the last ConYard left) do not count.
-						var conyards = 0;
-						foreach (var other in world.Actors)
-							if (other != actor && other.IsInWorld && !other.IsDead
-								&& other.Owner == actor.Owner && IsConyardBuilding(other, tagMap))
-								conyards++;
-
-						if (conyards > 0)
-							seat.ExpansionDeploys++;
-
-						EmitEvent(seat, "conyard_deployed", actor.Info.Name, actor.Location,
-							startDist: Cells(actor.Location, seat.Home), actorId: actor.ActorID);
-					}
+						FinishDeploy(seat, actor);
+					else if (isConyard && pendingDeployAdds.Count < info.MaxPendingConyardRemovals)
+						pendingDeployAdds.Add(new PendingDeployAdd { Actor = actor, Owner = actor.Owner, Cell = actor.Location, Tick = world.WorldTick });
 					else
-					{
-						// A ConYard only ever appears through an MCV transform, never from a
-						// queue — deploys are not completed production; the MCV was counted
-						// as a completed unit when it appeared.
-						var bot = BotSeat(actor.Owner);
-						if (bot != null)
-							Bump(bot.QueueCompleted, BuildingCategoryOf(bot, actor.Info.Name));
-					}
+						BumpBuildingCompleted(actor);
 
 					if (tagMap.TryGetValue(actor.Info.Name, out var tags) && tags.Contains(BotTargetTags.Superweapon))
 						EmitEvent(seat, "superweapon_built", actor.Info.Name, actor.Location,
@@ -682,8 +698,18 @@ namespace OpenRA.Mods.Cameo.Traits
 			{
 				if (IsMobileConyard(actor))
 				{
+					if (TryMatchPendingDeploy(actor.Owner, actor.Location, world.WorldTick, out var deployedYard))
+					{
+						FinishDeploy(Seat(actor.Owner), deployedYard);
+						return;
+					}
+
 					if (mcvRemoved.Count < info.MaxPendingConyardRemovals)
-						mcvRemoved.Add(new DeployEvent { Owner = actor.Owner, Cell = actor.Location, Tick = world.WorldTick });
+						mcvRemoved.Add(new DeployEvent
+						{
+							Owner = actor.Owner, Cell = actor.Location, Tick = world.WorldTick,
+							ActorName = actor.Info.Name, ActorId = actor.ActorID, Cause = LossCause(actor)
+						});
 					return;
 				}
 
@@ -719,6 +745,48 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 		}
 
+		/// <summary>An expansion deploy adds a ConYard while one already stands; the starting MCV's first deploy and a pack/redeploy relocation do not count.</summary>
+		void FinishDeploy(SeatTelemetry seat, Actor yard)
+		{
+			if (seat == null)
+				return;
+
+			var conyards = 0;
+			foreach (var other in world.Actors)
+				if (other != yard && other.IsInWorld && !other.IsDead
+					&& other.Owner == yard.Owner && IsConyardBuilding(other, tagMap))
+					conyards++;
+
+			if (conyards > 0)
+				seat.ExpansionDeploys++;
+
+			EmitEvent(seat, "conyard_deployed", yard.Info.Name, yard.Location,
+				startDist: Cells(yard.Location, seat.Home), actorId: yard.ActorID);
+		}
+
+		/// <summary>A ConYard only ever appears through an MCV transform, never from a queue; a yard no MCV removal claimed counts as completed production as before.</summary>
+		void BumpBuildingCompleted(Actor actor)
+		{
+			var bot = BotSeat(actor.Owner);
+			if (bot != null)
+				Bump(bot.QueueCompleted, BuildingCategoryOf(bot, actor.Info.Name));
+		}
+
+		bool TryMatchPendingDeploy(OpenRA.Player owner, CPos cell, int tick, out Actor yard)
+		{
+			var entries = pendingDeployAdds.ConvertAll(e => (e.Owner, e.Cell, e.Tick));
+			var index = DeployMatchMath.Find(entries, owner, cell, tick, info.DeployMatchWindowTicks, info.DeployMatchCells);
+			if (index < 0)
+			{
+				yard = null;
+				return false;
+			}
+
+			yard = pendingDeployAdds[index].Actor;
+			pendingDeployAdds.RemoveAt(index);
+			return true;
+		}
+
 		bool TryMatchDeploy(List<DeployEvent> recent, OpenRA.Player owner, CPos cell, int tick)
 		{
 			for (var i = recent.Count - 1; i >= 0; i--)
@@ -736,10 +804,32 @@ namespace OpenRA.Mods.Cameo.Traits
 			return false;
 		}
 
+		static bool McvSafetyOn(OpenRA.Player owner) =>
+			owner?.PlayerActor != null && owner.PlayerActor.TraitsImplementing<OpenRA.Mods.CA.Traits.BotModules.IBotMcvSafetyPolicy>().Any(t => t.McvSafeEnabled);
+
 		void PruneEvents(int tick)
 		{
 			var horizon = tick - info.DeployMatchWindowTicks * 2;
+			foreach (var e in mcvRemoved.Where(e => e.Tick < horizon && e.Cause == "killed" && McvSafetyOn(e.Owner)).ToList())
+			{
+				// MCV-SAFE-01: a killed MCV no yard ever claimed (the planner's loss zone has the same signal); only with the CG policy on.
+				var seat = Seat(e.Owner);
+				if (seat != null)
+					EmitEvent(seat, "mcv_lost", e.ActorName, e.Cell, cause: e.Cause, startDist: Cells(e.Cell, seat.Home), actorId: e.ActorId);
+			}
+
 			mcvRemoved.RemoveAll(e => e.Tick < horizon);
+
+			for (var i = pendingDeployAdds.Count - 1; i >= 0; i--)
+			{
+				var p = pendingDeployAdds[i];
+				if (p.Tick >= horizon)
+					continue;
+
+				pendingDeployAdds.RemoveAt(i);
+				if (p.Actor != null && !p.Actor.Disposed)
+					BumpBuildingCompleted(p.Actor);
+			}
 
 			for (var i = pendingConyardRemoved.Count - 1; i >= 0; i--)
 			{

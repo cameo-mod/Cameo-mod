@@ -75,6 +75,16 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		// until the whole squad is idle (the episode's end); a new leg then re-rolls.
 		internal CPos? FleeHomeCell;
 
+		// IMPL02-AGG-CORE (switch ON only; never written while SquadManagerBotModuleCA.AggressionOn is false): the commit the
+		// A2 window and trade rule measure from. Tick -1 = not committed. Members map each committed actor to its value.
+		internal int AggressionCommitTick = -1;
+		internal long AggressionCommitKills;
+		internal readonly Dictionary<Actor, int> AggressionCommitMembers = new();
+
+		// A10 RETREAT-RALLY (switch ON only; never written while SquadManagerBotModuleCA.RetreatRallyOn is false): the tick of this squad's
+		// latest flight tick (the retreat mark candidates are filtered by). -1 = never. Transient: not serialized.
+		internal int RetreatSinceTick = -1;
+
 		SquadDesireController<Actor> desireController;
 
 		// internal CPos BaseLocation;

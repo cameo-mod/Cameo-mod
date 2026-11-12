@@ -17,6 +17,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules
 	/// </summary>
 	public interface IBotFightThresholds
 	{
+		/// <summary>TIER-01 D1: the effective retreat percent for <paramref name="fallback"/> as the base: base x the learned
+		/// multiplier / 100 when a scope row exists, else the base unchanged.</summary>
 		int RetreatRatioPct(string ownFaction, string enemyFaction, int fallback);
 		int EngageMarginPct(string ownFaction, string enemyFaction, int fallback);
 	}

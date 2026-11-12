@@ -355,6 +355,7 @@ button-production-types-scroll-up-tooltip = Scroll up
 button-production-types-scroll-down-tooltip = Scroll down
 
 bot_ai =
+   .noob = Noob AI
    .easiest = Easiest AI
    .veryeasy = Very Easy AI
    .easy = Easy AI

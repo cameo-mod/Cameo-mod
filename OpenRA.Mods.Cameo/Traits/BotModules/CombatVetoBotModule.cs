@@ -195,6 +195,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var enemy = enemies.Where(a => a?.Owner?.Faction != null && player.RelationshipWith(a.Owner) == PlayerRelationship.Enemy)
 				.Select(a => BotFactionView.PublicFactionOf(a.Owner)).Where(f => !string.IsNullOrEmpty(f))
 				.OrderBy(f => f, System.StringComparer.Ordinal).FirstOrDefault() ?? "";
+			// TIER-01 D1: the same effective rule as the squad manager (base x learned multiplier / 100, 0..100); the base here is
+			// VetoEngageRatioPct, so no row (or a row of 100) keeps the veto bar as it is.
 			var engage = provider.RetreatRatioPct(player.Faction.InternalName, enemy, Info.VetoEngageRatioPct);
 			var abort = Info.VetoAbortRatioPct * engage / System.Math.Max(1, Info.VetoEngageRatioPct);
 			return (engage, System.Math.Min(engage, abort));

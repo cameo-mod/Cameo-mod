@@ -4839,19 +4839,21 @@ already uses (`Difficulties` list + `Min*`/`Max*` fields). A feature that switch
 above" is not a scale. Only a genuine on/off capability may be a single threshold (off below, on
 from one tier up, never on-off-on), and it must say why it cannot scale.
 
-| value (index 0 → 9) | easiest | veryeasy | easy | medium | hard | veryhard | brutal | challenger | unbeatable | cameogod |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| production time % | 140 | 130 | 120 | 110 | **100** | 90 | 80 | 70 | 60 | 50 |
-| production cost % | 120 | 115 | 110 | 105 | **100** | 95 | 90 | 85 | 80 | 75 |
-| build/unit delay + interval modifier | 250 | 225 | 200 | 175 | 150 | 125 | 100 | 75 | 50 | 25 |
-| InitialAttackDelay (ticks) | 6750 | 6000 | 5250 | 4500 | 3750 | 3000 | 2250 | 1500 | 750 | 0 |
-| PersonalityReactionDelay (ticks) | 7500 | 6750 | 6000 | 5250 | 4500 | 3750 | 3000 | 2250 | 1500 | 750 |
-| RefineryLimit | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-| HarvesterLimit | 3 | 6 | 9 | 12 | 15 | 18 | 21 | 24 | 27 | 30 |
-| ProductionTypeLimit, ConstructionYardLimit (rounded) | 1 | 2 | 2 | 3 | 4 | 4 | 5 | 6 | 6 | 7 |
-| NewProductionCashThreshold (extra factories above this cash) | 20000 | 18000 | 16000 | 14000 | 12000 | 10000 | 8000 | 6000 | 4000 | 2000 |
-| MaximiseProductionCashRequirement (fill every queue above this cash) | 9500 | 8500 | 7500 | 6500 | 5500 | 4500 | 3500 | 2500 | 1500 | 500 |
-| AdaptiveCounterWeight (% of combat picks that counter; rounded) | 0 | 4 | 9 | 13 | 18 | 22 | 27 | 31 | 36 | 40 |
+| value (index 0 → 10) | noob | easiest | veryeasy | easy | medium | hard | veryhard | brutal | challenger | unbeatable | cameogod |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| production time % | 150 | 140 | 130 | 120 | 110 | **100** | 90 | 80 | 70 | 60 | 50 |
+| production cost % | 125 | 120 | 115 | 110 | 105 | **100** | 95 | 90 | 85 | 80 | 75 |
+| build/unit delay + interval modifier | 275 | 250 | 225 | 200 | 175 | 150 | 125 | 100 | 75 | 50 | 25 |
+| InitialAttackDelay (ticks) | 7500 | 6750 | 6000 | 5250 | 4500 | 3750 | 3000 | 2250 | 1500 | 750 | 0 |
+| PersonalityReactionDelay (ticks) | 8250 | 7500 | 6750 | 6000 | 5250 | 4500 | 3750 | 3000 | 2250 | 1500 | 750 |
+| RefineryLimit | 1 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+| HarvesterLimit | 3 | 3 | 6 | 9 | 12 | 15 | 18 | 21 | 24 | 27 | 30 |
+| ProductionTypeLimit, ConstructionYardLimit (rounded) | 1 | 1 | 2 | 2 | 3 | 4 | 4 | 5 | 6 | 6 | 7 |
+| NewProductionCashThreshold (extra factories above this cash) | 22000 | 20000 | 18000 | 16000 | 14000 | 12000 | 10000 | 8000 | 6000 | 4000 | 2000 |
+| MaximiseProductionCashRequirement (fill every queue above this cash) | 10500 | 9500 | 8500 | 7500 | 6500 | 5500 | 4500 | 3500 | 2500 | 1500 | 500 |
+| AdaptiveCounterWeight (% of combat picks that counter; rounded) | 0 | 5 | 10 | 15 | 20 | 25 | 30 | 35 | 40 | 45 | 50 |
+
+Noob AI tier (NOOB-TIER-01 final ruling): one linear step below easiest (rank -1, extrapolated on the easiest..cameogod line). Where that step is impossible (below the field's floor) noob = easiest: RefineryLimit 1, HarvesterLimit 3, ProductionTypeLimit 1, ConstructionYardLimit 1. Insurance noob = 0 (outside the DynamicBotInsurance ladder). AdaptiveCounterWeight noob = 0. Existing tiers unchanged.
 
 * **`InitialAttackDelay` holds back only the MAIN army** (`CreateAttackForce`, the big assault
   squads). Guerrilla, harasser, air and naval squads are formed in `FindNewUnits` and fight from

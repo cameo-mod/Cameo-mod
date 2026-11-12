@@ -506,17 +506,32 @@ def test_the_par_curve_is_monotonic_in_time_and_difficulty():
 
 
 def test_the_integer_table_tracks_the_continuous_logistic_it_was_sampled_from():
-    """⚠ Sampling costs accuracy. Bounded, and bounded well inside the noise of three invented
-    magnitudes — but asserted, so a future edit to ParShape cannot quietly break the shape."""
+    """⚠ Sampling costs accuracy. Compared as SHAPE: each curve as a fraction of its own way from
+    the opening bank to its own asymptote. The tool's asymptote follows HarvesterValueLimit
+    (TIER01-CURVE-FIX-01); the model still ships 15000 per rank, so magnitudes are not comparable.
+    Bounded, and asserted, so a future edit to ParShape cannot quietly break the shape."""
     sys.path.insert(0, str(ROOT / "tools" / "balance"))
     import bot_difficulty_curve as c
     worst = 0.0
     for rank, d in enumerate(m.DIFFICULTIES):
+        model_top = m.PAR_BASE_WORTH + m.PAR_ASYMPTOTE_PER_RANK * (rank + 1)
+        tool_top = c.asymptote(d)
         for minutes in (5, 10, 15, 20, 30):
             approx = m.par_worth(rank, minutes * m.TICKS_PER_MINUTE)
             exact = c.logistic(d, minutes)
-            worst = max(worst, abs(approx - exact) / max(exact, 1))
-    assert worst < 0.05, f"table diverges {worst:.1%} from its own logistic"
+            shape_model = (approx - m.PAR_BASE_WORTH) / (model_top - m.PAR_BASE_WORTH)
+            shape_tool = (exact - c.START_CASH) / (tool_top - c.START_CASH)
+            worst = max(worst, abs(shape_model - shape_tool))
+    assert worst < 0.05, f"table shape diverges {worst:.1%} from its own logistic"
+
+
+def test_the_curve_asymptote_follows_the_harvester_budget_not_the_zeroed_limit():
+    """TIER01-CURVE-FIX-01: HarvesterLimit is 0 on every tier, so the old derivation was flat."""
+    sys.path.insert(0, str(ROOT / "tools" / "balance"))
+    import bot_difficulty_curve as c
+    assert c.asymptote("easiest") == c.START_CASH + 4000
+    assert c.asymptote("cameogod") == c.START_CASH + 22000
+    assert len({c.asymptote(d) for d in m.DIFFICULTIES}) == len(m.DIFFICULTIES)
 
 
 def test_the_par_ratio_is_clamped_so_a_bad_curve_cannot_dominate():

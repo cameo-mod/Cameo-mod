@@ -51,7 +51,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		{
 			// No arbitrary bot/player labels in the public stream.
 			var code = type == "classic" ? "hard" : type;
-			return code is "easiest" or "veryeasy" or "easy" or "medium" or "hard" or "veryhard"
+			return code is "noob" or "easiest" or "veryeasy" or "easy" or "medium" or "hard" or "veryhard"
 				or "brutal" or "challenger" or "unbeatable" or "cameogod" ? code : "unknown";
 		}
 

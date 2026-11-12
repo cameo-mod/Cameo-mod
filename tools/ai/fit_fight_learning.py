@@ -118,6 +118,10 @@ def facts(row: dict, allowed_factions: set[str]):
     return record_id, fingerprint.lower(), own, enemy, expected, actual, actual - min(own_value, max(0, lost)), own_value, ratio
 
 
+# TIER-01 D1: the runtime default tier retreat value (SquadManagerBotModuleCA DefaultRetreatRatioPct, BotLimits default).
+REFERENCE_RETREAT_PCT = 50
+
+
 def fit(records):
     totals = defaultdict(Totals)
     threshold_observations = defaultdict(list)
@@ -180,9 +184,11 @@ def fit(records):
         # throughout its range instead of saturating after a single good trade.
         effective = (max(500, min(2000, NEUTRAL + total.trade * NEUTRAL // max(1, total.own)))
                      if total.n >= EFFECTIVE_VALUE_MIN else None)
-        retreat = smoothed_retreat(scope)
-        # Preserve hysteresis and never reduce the engage threshold below retreat.
-        engage = max(100, min(300, 150 + (retreat - 50)))
+        # TIER-01 D1: the runtime reads the learned retreat as a multiplier of the tier value (percent, 100 = 1.00, 0..200).
+        # The fitted absolute percent is expressed against REFERENCE_RETREAT_PCT, the runtime default tier value.
+        retreat = max(0, min(200, smoothed_retreat(scope) * 100 // REFERENCE_RETREAT_PCT))
+        # Preserve hysteresis: the former 150 + (absolute - 50) in multiplier form; a multiplier of 100 gives the default 150.
+        engage = max(100, min(300, 100 + retreat * REFERENCE_RETREAT_PCT // 100))
         rows[scope] = (total.n, calibration, effective, retreat, engage)
     return rows
 
@@ -201,7 +207,7 @@ def render(rows):
         if calibration is not None:
             out.append(f"\tCalibrationMilli@{scope}: {calibration}")
             out.append(f"\tEffectiveValueMilli@{scope}: {effective}")
-        out += [f"\tRetreatRatioPct@{scope}: {retreat}", f"\tEngageMarginPct@{scope}: {engage}"]
+        out += [f"\tRetreatMultPct@{scope}: {retreat}", f"\tEngageMarginPct@{scope}: {engage}"]
     return "\n".join(out) + "\n"
 
 
