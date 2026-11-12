@@ -5529,6 +5529,8 @@ ra2_cow:
 		DeathSequencePalette: ra2infantry
 	Voiced:
 		VoiceSet: CowVoice
+	Health:
+		HP: 20000
 ra2_mumy:
 	Inherits: ^AgressiveAnimal
 	Tooltip:
@@ -5539,6 +5541,8 @@ ra2_mumy:
 		DeathSequencePalette: ra2infantry
 	Voiced:
 		VoiceSet: MummyVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Claw
 ra2_caml:
 	Inherits: ^AgressiveAnimal
 	Tooltip:
@@ -5548,7 +5552,9 @@ ra2_caml:
 	WithDeathAnimation:
 		DeathSequencePalette: ra2infantry
 	Voiced:
-		VoiceSet: CowVoice
+		VoiceSet: CamelVoice
+	Health:
+		HP: 20000
 ra2_all:
 	Inherits: ^AgressiveAnimal
 	Tooltip:
@@ -5559,16 +5565,22 @@ ra2_all:
 		DeathSequencePalette: ra2infantry
 	Voiced:
 		VoiceSet: AsianCrocVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Bite
 ra2_polarb:
 	Inherits: ^AgressiveAnimal
 	Tooltip:
 		Name: Polar Bear
+	Health:
+		HP: 20000
 	RenderSprites:
 		PlayerPalette: ra2infantry
 	WithDeathAnimation:
 		DeathSequencePalette: ra2infantry
 	Voiced:
 		VoiceSet: BearVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Claw
 ra2_josh:
 	Inherits: ^AgressiveAnimal
 	Tooltip:
@@ -5579,9 +5591,399 @@ ra2_josh:
 		DeathSequencePalette: ra2infantry
 	Voiced:
 		VoiceSet: LatinMonkeyDie
-
+	Armament@PRIMARY:
+		Weapon: Animal_Claw
 # RA2 Custom Civilian/Animal Stuff
+#   Zoo Tycoon creatures
+zoo_bighorn_m:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Big Horn Ram
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: SheepGoatVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Ram
 
+zoo_bighorn_y:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Big Horn Lamb
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: SheepGoatVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Ram
+
+zoo_bighorn_f:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Sheep
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: SheepGoatVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Ram
+
+zoo_bison_m:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Bison
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: CowVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Ram
+	Health:
+		HP: 20000
+zoo_bison_y:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Young Bison
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: CowVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Ram
+	Health:
+		HP: 20000
+zoo_blackbr_m:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Black Bear
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: BearVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Claw
+	Health:
+		HP: 20000
+zoo_blackbr_y:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Young Black Bear
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: BearVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Ram_Large
+	Health:
+		HP: 20000
+zoo_grizzly_m:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Grizzly Bear
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: BearVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Claw
+	Health:
+		HP: 20000
+zoo_grizzly_y:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Young Grizzly Bear
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: BearVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Ram_Large
+	Health:
+		HP: 20000
+
+zoo_brhino_m:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Rhino
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: CowVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Ram_Large
+	Health:
+		HP: 30000
+zoo_brhino_y:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Young Rhino
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: CowVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Ram
+	Health:
+		HP: 30000
+zoo_hippo_m:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Hippo
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: HippoVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Bite
+	Health:
+		HP: 30000
+zoo_hippo_y:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Young Hippo
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: HippoVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Bite
+	Health:
+		HP: 30000
+zoo_afrbuf_m:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Water Buffalo
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: CowVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Ram
+	Health:
+		HP: 20000
+zoo_afrbuf_y:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Young Water Buffalo
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: CowVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Ram
+	Health:
+		HP: 20000
+zoo_arcwolf_m:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Artic Wolf
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: DogVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Bite
+
+zoo_arcwolf_y:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Young Artic Wolf
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: DogVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Bite
+zoo_graywolf_m:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Gray Wolf
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: DogVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Bite
+
+zoo_graywolf_y:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Young Gray Wolf
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: DogVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Bite
+
+zoo_baboon_m:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Baboon
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: LatinMonkeyDie
+	Armament@PRIMARY:
+		Weapon: Animal_Claw
+
+zoo_baboon_y:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Young Baboon
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: LatinMonkeyDie
+	Armament@PRIMARY:
+		Weapon: Animal_Claw
+
+zoo_cheetah_m:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Cheetah
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: BigcatVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Claw
+
+zoo_cheetah_y:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Young Cheetah
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: BigcatVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Claw
+zoo_elephant_m:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Elephant
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: ElephantVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Ram_Large
+	Health:
+		HP: 40000
+zoo_elephant_y:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Young Elephant
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: ElephantVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Ram_Large
+	Health:
+		HP: 40000
+zoo_gazelle_m:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Gazelle
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: CamelVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Ram
+
+zoo_gazelle_y:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Young Gazelle
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: CamelVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Ram
+
+zoo_giraffe_m:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Giraffe
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: CamelVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Ram
+
+zoo_giraffe_y:
+	Inherits: ^AgressiveAnimal
+	Tooltip:
+		Name: Young Giraffe
+	RenderSprites:
+		PlayerPalette: zooplayer
+	WithDeathAnimation:
+		DeathSequencePalette: zooplayer
+	Voiced:
+		VoiceSet: CamelVoice
+	Armament@PRIMARY:
+		Weapon: Animal_Ram
 # RA2UNIONTANK:
 # 	Inherits: ^Tank
 # 	Inherits@Template: ^HighTechTankTemplate

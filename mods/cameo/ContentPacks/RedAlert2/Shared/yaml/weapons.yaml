@@ -3866,6 +3866,54 @@ IonPulseDischarge:
 		ValidTargets: Ground, Water, Structure, wall
 
 
+
+Animal_Ram:
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
+	Inherits@fx: ^Effect_Melee_Medium
+	ReloadDelay: 30
+	Report: attack_ram.wav
+	Range: 1500
+	Warhead@Melee_Medium:
+		Damage: 2000
+	Warhead@Effect: CreateEffect
+		ImpactSounds: attack_ram.wav
+
+Animal_Ram_Large:
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
+	Inherits@fx: ^Effect_Melee_Medium
+	ReloadDelay: 30
+	Report: elephant_attack.wav
+	Range: 1500
+	Warhead@Melee_Medium:
+		Damage: 3000
+	Warhead@Effect: CreateEffect
+		ImpactSounds: elephant_attack.wav
+
+Animal_Bite:
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
+	Inherits@fx: ^Effect_Melee_Medium
+	ReloadDelay: 30
+	Report: attack_bite.wav
+	Range: 1500
+	Warhead@Melee_Medium:
+		Damage: 2000
+	Warhead@Effect: CreateEffect
+		ImpactSounds: attack_bite.wav
+
+Animal_Claw:
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
+	Inherits@fx: ^Effect_Melee_Medium
+	ReloadDelay: 30
+	Report: attack_claw.wav
+	Range: 1500
+	Warhead@Melee_Medium:
+		Damage: 2000
+	Warhead@Effect: CreateEffect
+		ImpactSounds: attack_claw.wav
 ####################################################################################################
 #		Chemical and Flame Weapons
 ####################################################################################################

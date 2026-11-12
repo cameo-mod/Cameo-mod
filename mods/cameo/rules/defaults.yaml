@@ -4068,6 +4068,8 @@
 
 ^Animal:
 	Inherits: ^DefaultInfantry
+	-RevealsShroud@base-reveal:
+	-GrantConditionOnPrerequisite@base-reveal:
 	Health:
 		HP: 10000
 	Armor:
@@ -4081,7 +4083,7 @@
 	RevealOnFire:
 	RevealOnDeath:
 	Mobile:
-		Speed: 75
+		Speed: 70
 		Voice: Move
 	Targetable:
 		RequiresCondition: !parachute && !chronobeamed
@@ -4116,6 +4118,7 @@
 
 ^AgressiveAnimal:
 	Inherits: ^Animal
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
 	AutoTarget:

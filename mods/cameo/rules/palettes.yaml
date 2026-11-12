@@ -788,6 +788,16 @@
 		BasePalette: d2kunit
 		BaseName: playerd2k
 		RemapIndex: 255, 254, 253, 252, 251, 250, 249, 248, 247, 246, 245, 244, 243, 242, 241, 240
+	PaletteFromFile@zoo:
+		Name: zoo
+		Filename: zoo.pal
+		ShadowIndex: 1
+		AllowModifiers: false
+	PlayerColorPalette@zooplayer:
+		BaseName: zooplayer
+		BasePalette: zoo
+		RemapIndex: 1
+		AllowModifiers: false
 	PaletteFromPaletteWithAlpha@effect75alpha:
 		Name: effect75alpha
 		BasePalette: d2keffect
