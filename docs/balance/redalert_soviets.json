@@ -9084,10 +9084,10 @@
     "armaments": [
      {
       "burst": "2",
-      "burstdelays": "10",
+      "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "14000",
+        "damage": "18000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "300",
         "tag": "Flame_Medium",
@@ -9097,11 +9097,13 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "2390",
-      "reloaddelay": "50",
+      "range": "6342",
+      "reloaddelay": "45",
       "slot": "Armament",
       "versus_templates": [
-       "BigFlamer"
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium"
       ],
       "warheads": [
        "^Warhead_Flame_Medium"
@@ -9143,6 +9145,10 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "repairable_hp_per_step": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Repairable.HpPerStep",
+     "v": "7500"
+    },
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
@@ -9152,8 +9158,8 @@
      }
     ],
     "self_heal_step": {
-     "src": "inherited",
-     "v": "10"
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
+     "v": "60"
     },
     "shield_flat": {
      "src": "inherited",
