@@ -12,8 +12,15 @@ def _veto(reason="below_threshold", detail="", value=3000, bot="hard", player="p
 
 
 def _engagement(trade=100, skirmish=False, bot="hard", player="p1", game="g1", personality=""):
-    return {"skirmish": skirmish, "bot_type": bot, "player": player, "game_uid": game,
-            "personality": personality, "score": {"trade_milli": trade, "total_milli": trade}}
+    return {"record": "engagement", "skirmish": skirmish, "bot_type": bot, "player": player,
+            "game_uid": game, "personality": personality,
+            "score": {"trade_milli": trade, "total_milli": trade}}
+
+
+def _posture(player="p1", game="g1"):
+    # the 250-tick army snapshot — no record fields beyond the shared header, no score/personality
+    return {"record": "posture", "player": player, "game_uid": game, "tick": 250,
+            "bot_type": "hard", "army_dist_at_start_cells": 3}
 
 
 def test_parse_detail():
@@ -47,6 +54,18 @@ def test_summarise_gap_and_personality_join():
     assert row["taken_n"] == 2          # skirmish excluded
     assert row["taken_trade"] == 100
     assert row["gap"] == 100 - (-426)   # allowed fights scored better than blocked ones
+
+
+def test_posture_rows_do_not_inflate_taken_or_pin_personality():
+    # EL-0 writes one posture record per 250 ticks beside engagements (~2.2x the count on
+    # real logs): unfiltered they counted toward taken_n, and a posture row seen first
+    # pinned personality_of[...] to "" via setdefault.
+    missions = [_veto(detail="trade=-400", player="p1")]
+    engagements = [_posture()] * 5 + [_engagement(trade=100, personality="rush")]
+    out = vs.summarise(missions, engagements)
+    row = out["hard|rush"]  # personality join reached through the posture rows
+    assert row["taken_n"] == 1
+    assert row["taken_trade"] == 100
 
 
 def test_missing_detail_and_unknown_personality():
