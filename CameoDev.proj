@@ -16,9 +16,13 @@
     <ItemGroup>
       <CameoDevContent Include="$(MSBuildThisFileDirectory)mods/cameo/**/*" />
       <CameoDevCommon Include="$(MSBuildThisFileDirectory)engine/mods/common/**/*" />
+      <CameoDevInstaller Include="$(MSBuildThisFileDirectory)mods/cameo-content/**/*" />
+      <CameoDevCommonContent Include="$(MSBuildThisFileDirectory)engine/mods/common-content/**/*" />
     </ItemGroup>
     <Copy SourceFiles="@(CameoDevContent)" DestinationFiles="@(CameoDevContent->'$(CameoDevOutputPath)mods/cameo/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(CameoDevCommon)" DestinationFiles="@(CameoDevCommon->'$(CameoDevOutputPath)mods/common/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(CameoDevInstaller)" DestinationFiles="@(CameoDevInstaller->'$(CameoDevOutputPath)mods/cameo-content/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(CameoDevCommonContent)" DestinationFiles="@(CameoDevCommonContent->'$(CameoDevOutputPath)mods/common-content/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
     <Exec Command="&quot;$(PythonCommand)&quot; -I -B &quot;$(MSBuildThisFileDirectory)tools/ai/generate_cameo_dev_manifest.py&quot; &quot;$(MSBuildThisFileDirectory)mods/cameo&quot; &quot;$(CameoDevOutputPath)mods/cameo-dev/mod.yaml&quot;" />
   </Target>
 </Project>

@@ -52,5 +52,19 @@ namespace OpenRA.Mods.Cameo.Test
 				Assert.That(release, Does.Not.Contain("\t" + trait + ":"), trait);
 			}
 		}
+
+		[Test]
+		public void MissingControllerStillUsesResidentPersonalityRecorder()
+		{
+			var source = Source("mods/Cameo/Traits/BotModules/BotSituation.cs");
+			var start = source.IndexOf("string CurrentPersonality()", StringComparison.Ordinal);
+			Assert.That(start, Is.GreaterThanOrEqualTo(0));
+			var end = source.IndexOf("IEnumerable<string> AvailablePersonalities()", start, StringComparison.Ordinal);
+			Assert.That(end, Is.GreaterThan(start));
+			var method = source.Substring(start, end - start);
+			Assert.That(method, Does.Contain("TraitOrDefault<BotPersonalityController>()?.CurrentPersonality"));
+			Assert.That(method, Does.Contain("?? player.PlayerActor.TraitOrDefault<AiMatchLogRecorder>()?.CurrentPersonality"));
+			Assert.That(method, Does.Not.Contain("CameoLogHub"));
+		}
 	}
 }

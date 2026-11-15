@@ -59,6 +59,12 @@ namespace OpenRA.Mods.Cameo.Test
 				Assert.That(Allowed(type, new HashSet<Type>(), EventTypes), Is.True, type.FullName);
 			Assert.That(typeof(MissionEvent).GetProperty(nameof(MissionEvent.TargetCell)).PropertyType, Is.EqualTo(typeof(CellXY?)));
 			Assert.That(typeof(MissionEvent).GetProperty(nameof(MissionEvent.UnitCell)).PropertyType, Is.EqualTo(typeof(CellXY?)));
+			foreach (var method in typeof(ICameoLogSink).GetMethods().Where(m => !m.IsSpecialName))
+			{
+				Assert.That(method.ReturnType, Is.EqualTo(typeof(void)), method.Name);
+				foreach (var parameter in method.GetParameters())
+					Assert.That(Allowed(parameter.ParameterType, new HashSet<Type>(), EventTypes), Is.True, method.Name + ":" + parameter.Name);
+			}
 		}
 
 		[Test]
