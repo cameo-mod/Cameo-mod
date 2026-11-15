@@ -864,8 +864,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				header.BanditArmed = bandit.ArmedModules;
 			}
 
-			FillBalance(s, header);
-			sink.Append(EngagementRecord.BuildEngagement(header, s, out var totalMilli, out var isSkirmish));
+			int totalMilli;
+			bool isSkirmish;
+			if (world.WorldActor.TraitOrDefault<OpenRA.Mods.CA.Traits.CameoLogHub>()?.Sink.Enabled == true)
+			{
+				FillBalance(s, header);
+				sink.Append(EngagementRecord.BuildEngagement(header, s, out totalMilli, out isSkirmish));
+			}
+			else
+				EngagementRecord.ScoreOnly(header, s, out totalMilli, out isSkirmish);
 			if (!isSkirmish)
 			{
 				RunningTotalMilli += totalMilli;
@@ -890,6 +897,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void WritePosture(int tick)
 		{
+			if (world.WorldActor.TraitOrDefault<OpenRA.Mods.CA.Traits.CameoLogHub>()?.Sink.Enabled != true)
+				return;
+
 			if (!ArmyCentroid(out var ax, out var ay, out var units, out var value))
 				return;
 
@@ -1011,6 +1021,27 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public static string BuildEngagement(EngagementHeader h, EngagementState s)
 		{
 			return BuildEngagement(h, s, out _, out _);
+		}
+
+		// Same inputs and arithmetic as BuildEngagement, without constructing a JSON record.
+		public static void ScoreOnly(EngagementHeader h, EngagementState s, out int totalMilli, out bool isSkirmish)
+		{
+			var ownBuildings = s.Buildings.Values.Where(b => b.Own).ToList();
+			var enemyBuildings = s.Buildings.Values.Where(b => !b.Own).ToList();
+			var ownBuildingLossMilli = EngagementScore.BuildingsLoss(ownBuildings.Select(b => (b.Value, EngagementScore.HpLost(b.HpStart, b.HpEnd, b.MaxHp), b.Dead)).ToList());
+			var enemyBuildingLossMilli = EngagementScore.BuildingsLoss(enemyBuildings.Select(b => (b.Value, EngagementScore.HpLost(b.HpStart, b.HpEnd, b.MaxHp), b.Dead)).ToList());
+			var ownBuildingValueLost = ownBuildings.Where(b => b.Dead).Sum(b => b.Value);
+			var lost = s.OwnLostUnitValue + ownBuildingValueLost;
+			var killed = s.EnemyKilledValue;
+			isSkirmish = lost + killed < EngagementConstants.MinValueTraded || s.Deaths < EngagementConstants.MinDeaths;
+			var seen = s.SeenStart ?? new EngagementSeen();
+			var ownStart = seen.OwnCommittedValue + seen.OwnDefenceValue;
+			var enemyStart = seen.EnemyUnitValue + seen.EnemyDefenceValue;
+			var trade = EngagementScore.Trade(killed, lost);
+			var predicted = EngagementScore.PredictedTrade(ownStart, enemyStart, seen.PredictedOwnSurvivingPermille, seen.PredictedEnemySurvivingPermille);
+			var vsPrediction = EngagementScore.VsPrediction(trade, predicted);
+			var objective = EngagementScore.Objective(h.Kind, ownBuildingLossMilli, enemyBuildingLossMilli, ownBuildings.Count > 0, enemyBuildings.Count > 0);
+			totalMilli = EngagementScore.Total(trade, vsPrediction, objective);
 		}
 
 		public static string BuildEngagement(EngagementHeader h, EngagementState s, out int totalMilli, out bool isSkirmish)

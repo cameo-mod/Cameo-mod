@@ -56,7 +56,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	public class ContextFeatureProviderBotModule : ConditionalTrait<ContextFeatureProviderBotModuleInfo>,
 		IBotMapFeatures, IBotOpponentFeatures, IWorldLoaded, IBotTick, IGameOver
 	{
-		const int MaxPendingRows = 64;
 		static readonly CVec[] NeighborDeltas = [new(0, -1), new(1, 0), new(0, 1), new(-1, 0)];
 
 		// One immutable geometry build per (world, locomotors, resource table) - the same bounded
@@ -71,16 +70,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			public int RegionCount;
 		}
 
-		sealed class PendingRow
-		{
-			public string Text;
-			public AiLogFileAppender Appender;
-			public int NextAttemptTick;
-		}
-
 		readonly World world;
 		readonly OpenRA.Player player;
-		readonly List<PendingRow> pendingRows = new();
 		readonly List<OpenRA.Player> enemies = new();
 		readonly List<OpponentFeatureWindow> windows = new();
 		readonly List<ContextFeatureVector> opponentVectors = new();
@@ -133,7 +124,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					byKey[key] = geometry = BuildGeometry(w, ground, naval, resourceValues);
 
 				BuildFeatures(w, geometry);
-				EnqueueRow(SafeSerialize(MapFeatures));
+				if (LogSink?.Enabled == true)
+					EnqueueRow(SafeSerialize(MapFeatures));
 			});
 		}
 
@@ -409,39 +401,27 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				}
 
 				opponentVectors[i] = vector;
-				EnqueueRow(SafeSerialize(vector));
+				if (LogSink?.Enabled == true)
+					EnqueueRow(SafeSerialize(vector));
 			}
 		}
 
+		OpenRA.Mods.CA.Traits.ICameoLogSink LogSink =>
+			world.WorldActor.TraitOrDefault<OpenRA.Mods.CA.Traits.CameoLogHub>()?.Sink;
+
 		void EnqueueRow(string text)
 		{
-			if (text == null)
-				return;
-			if (pendingRows.Count >= MaxPendingRows)
-				pendingRows.RemoveAt(0);
-			pendingRows.Add(new PendingRow
-			{
-				Text = text + "\n",
-				Appender = new AiLogFileAppender(Info.FileName),
-				NextAttemptTick = world.WorldTick,
-			});
+			var sink = LogSink;
+			if (sink?.Enabled == true && text != null)
+				sink.ContextRow(Array.IndexOf(world.Players, player), Info.FileName, text, world.WorldTick);
 		}
 
 		void DrainPending(int tick)
 		{
-			for (var i = pendingRows.Count - 1; i >= 0; i--)
-			{
-				var row = pendingRows[i];
-				if (tick < row.NextAttemptTick)
-					continue;
-				var result = row.Appender.TryAppend(row.Text, tick, out var next);
-				if (result == AiLogAppendResult.RetryableFailure && !row.Appender.IsTerminal)
-					row.NextAttemptTick = next;
-				else
-					pendingRows.RemoveAt(i); // Appended, or terminally failed: bounded telemetry drops.
-			}
+			var sink = LogSink;
+			if (sink?.Enabled == true)
+				sink.FlushContext(Array.IndexOf(world.Players, player), tick);
 		}
-
 		static int Clamp(long value) => value > int.MaxValue ? int.MaxValue : (int)value;
 
 		static string SafeSerialize(ContextFeatureVector vector)

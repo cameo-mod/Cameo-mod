@@ -27,84 +27,13 @@ namespace OpenRA.Mods.Cameo.Traits
 		public override object Create(ActorInitializer init) { return new AiSituationLogWriter(this); }
 	}
 
-	public class AiSituationLogWriter : IWorldLoaded, IGameOver, ITick
+	public class AiSituationLogWriter
 	{
-		readonly AiSituationLogWriterInfo info;
-		string fallbackGameUid;
-		string pendingText;
-		AiLogFileAppender appender;
-		bool written;
-		bool eligibleAtWorldLoad;
-		int nextAttemptTick;
-
-		public AiSituationLogWriter(AiSituationLogWriterInfo info) { this.info = info; }
-
-		void IWorldLoaded.WorldLoaded(World world, WorldRenderer worldRenderer)
-		{
-			eligibleAtWorldLoad = Eligible(world.Type, world.IsReplay, world.IsLoadingGameSave, Game.IsHost);
-			if (!eligibleAtWorldLoad)
-			{
-				written = true;
-				return;
-			}
-
-			fallbackGameUid = Guid.NewGuid().ToString("N");
-			appender = new AiLogFileAppender(info.FileName);
-		}
-
-		void ITick.Tick(Actor self)
-		{
-			var world = self.World;
-			if (written || world.WorldTick < nextAttemptTick)
-				return;
-			if (pendingText != null)
-			{
-				TryAppend(world.WorldTick);
-				return;
-			}
-			if (AllBotsResolved(world))
-				CaptureAndAppend(world);
-		}
-
-		void IGameOver.GameOver(World world)
-		{
-			// World.EndGame pauses before dispatching IGameOver, and paused worlds do not advance ticks.
-			// A retry scheduled here may therefore never run; retries matter for live all-bots-resolved capture.
-			CaptureAndAppend(world);
-		}
-
-		void CaptureAndAppend(World world)
-		{
-			if (written)
-				return;
-			if (!eligibleAtWorldLoad || world.Type != WorldType.Regular || world.IsReplay || !Game.IsHost)
-			{
-				written = true;
-				return;
-			}
-
-			pendingText ??= BuildLog(world);
-			if (string.IsNullOrEmpty(pendingText))
-			{
-				written = true;
-				return;
-			}
-			TryAppend(world.WorldTick);
-		}
+		public AiSituationLogWriter(AiSituationLogWriterInfo info) { }
 
 		internal static bool Eligible(WorldType type, bool replay, bool loadingSave, bool host)
 		{
 			return AiMatchLogWriter.Eligible(type, replay, loadingSave, host);
-		}
-
-		void TryAppend(int worldTick)
-		{
-			var result = appender.TryAppend(pendingText, worldTick, out nextAttemptTick);
-			if (result != AiLogAppendResult.RetryableFailure || appender.IsTerminal)
-			{
-				written = true;
-				return;
-			}
 		}
 
 		internal static string AnonymousTarget(string name, IEnumerable<OpenRA.Player> players, Func<OpenRA.Player, string> seatOf)
@@ -112,32 +41,6 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (string.IsNullOrEmpty(name)) return "";
 			var target = players.FirstOrDefault(p => p != null && p.InternalName == name);
 			return target == null ? "" : seatOf(target);
-		}
-
-		static bool AllBotsResolved(World world)
-		{
-			return world.Players.Where(AiMatchLogWriter.IsLoggableBot)
-				.All(p => p.WinState != WinState.Undefined);
-		}
-
-		string BuildLog(World world)
-		{
-			var gameUid = world.LobbyInfo.GlobalSettings.GameUid;
-			if (string.IsNullOrEmpty(gameUid))
-				gameUid = fallbackGameUid;
-			var lines = new StringBuilder();
-			foreach (var player in world.Players.Where(AiMatchLogWriter.IsLoggableBot)
-				.OrderBy(p => AiMatchLogWriter.SeatKey(world, p), StringComparer.Ordinal))
-			{
-				var module = player.PlayerActor.TraitsImplementing<MasterAiBotModule>().FirstOrDefault();
-				if (module == null)
-					continue;
-				foreach (var situation in module.PendingSituations)
-					AppendSituation(lines, p => AiMatchLogWriter.SeatKey(world, p), gameUid, world.LobbyInfo.GlobalSettings.GameUid ?? "", world.Map.Uid,
-						AiMatchLogWriter.SeatKey(world, player), player.Faction.InternalName, player.BotType ?? "",
-						situation.OwnPersonality, situation);
-			}
-			return lines.ToString();
 		}
 
 		// DF step 1: per tracked enemy group its centre, value, velocity (cells per 1000 ticks) and, if moving, the

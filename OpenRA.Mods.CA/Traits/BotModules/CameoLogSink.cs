@@ -20,6 +20,11 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		bool Enabled { get; }
 		void MissionRecorded(MissionEvent record);
+		void InsurancePayout(int playerIndex, int tick, string reason, int requested, long before, long after);
+		void EngagementLine(string line);
+		void EngagementEnd(int tick);
+		void ContextRow(int playerIndex, string fileName, string row, int tick);
+		void FlushContext(int playerIndex, int tick);
 		void BeginPassive(int playerIndex, bool enabled, string gameUid, string seat, string botType, int tick);
 		void PassiveSquadEvent(int playerIndex, BotPassiveSquadEventSnapshot snapshot);
 		void PassiveAttackCommit(int playerIndex, BotPassiveAttackCommitSnapshot snapshot);
@@ -43,6 +48,11 @@ namespace OpenRA.Mods.CA.Traits
 
 		public bool Enabled => false;
 		public void MissionRecorded(MissionEvent record) { }
+		public void InsurancePayout(int playerIndex, int tick, string reason, int requested, long before, long after) { }
+		public void EngagementLine(string line) { }
+		public void EngagementEnd(int tick) { }
+		public void ContextRow(int playerIndex, string fileName, string row, int tick) { }
+		public void FlushContext(int playerIndex, int tick) { }
 		public void BeginPassive(int playerIndex, bool enabled, string gameUid, string seat, string botType, int tick) { }
 		public void PassiveSquadEvent(int playerIndex, BotPassiveSquadEventSnapshot snapshot) { }
 		public void PassiveAttackCommit(int playerIndex, BotPassiveAttackCommitSnapshot snapshot) { }

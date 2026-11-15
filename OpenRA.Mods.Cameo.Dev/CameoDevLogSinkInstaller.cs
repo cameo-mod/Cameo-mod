@@ -23,8 +23,15 @@ namespace OpenRA.Mods.Cameo.Dev
 	{
 		readonly Actor worldActor;
 		readonly Dictionary<int, BotPassiveDiagnosticWriter> passive = new();
+		readonly ContextLogWriter context = new();
 		public CameoDevLogSink(Actor worldActor) { this.worldActor = worldActor; }
 		public bool Enabled => true;
+		public void InsurancePayout(int playerIndex, int tick, string reason, int requested, long before, long after) =>
+			worldActor.TraitOrDefault<InsuranceTelemetryDev>()?.Record(playerIndex, tick, reason, requested, before, after);
+		public void EngagementLine(string line) => worldActor.TraitOrDefault<AiEngagementLogWriterDev>()?.Append(line);
+		public void EngagementEnd(int tick) => worldActor.TraitOrDefault<AiEngagementLogWriterDev>()?.End(tick);
+		public void ContextRow(int playerIndex, string fileName, string row, int tick) => context.Enqueue(playerIndex, fileName, row, tick);
+		public void FlushContext(int playerIndex, int tick) => context.Flush(playerIndex, tick);
 
 		public void MissionRecorded(MissionEvent record)
 		{
