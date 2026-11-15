@@ -283,7 +283,7 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void TheTelemetryTellsAKilledUnclaimedMcvOnlyWithTheCgPolicyOn()
 		{
-			var text = Source("mods/Cameo/Traits/AiPlayerTelemetry.cs");
+			var text = Source("mods/Cameo.Dev/AiPlayerTelemetryDev.cs");
 			var prune = Section(text, "void PruneEvents(int tick)", "void ITick.Tick(Actor self)");
 			foreach (var guard in new[]
 			{
@@ -327,7 +327,7 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void TheTelemetryMatchesADeployWhenTheYardIsAddedBeforeTheMcvIsRemoved()
 		{
-			var text = Source("mods/Cameo/Traits/AiPlayerTelemetry.cs");
+			var text = Source("mods/Cameo.Dev/AiPlayerTelemetryDev.cs");
 			Assert.That(text, Does.Contain("pendingDeployAdds"));
 			Assert.That(Section(text, "void ActorRemoved(Actor actor)", "bool TryMatchDeploy("), Does.Contain("if (TryMatchPendingDeploy(actor.Owner, actor.Location, world.WorldTick, out var deployedYard))"));
 		}

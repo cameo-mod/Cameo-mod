@@ -27,6 +27,8 @@
     <!-- Every mod project's code, for the repo-wide "who queues a MoveToDock" audit pin. -->
     <None Include="../OpenRA.Mods.Cameo/**/*.cs" Exclude="../OpenRA.Mods.Cameo/obj/**;../OpenRA.Mods.Cameo/bin/**"
           Link="source/mods/Cameo/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../OpenRA.Mods.Cameo.Dev/AiPlayerTelemetryDev.cs"
+          Link="source/mods/Cameo.Dev/AiPlayerTelemetryDev.cs" CopyToOutputDirectory="Always" />
     <None Include="../OpenRA.Mods.CA/**/*.cs" Exclude="../OpenRA.Mods.CA/obj/**;../OpenRA.Mods.CA/bin/**"
           Link="source/mods/CA/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../OpenRA.Mods.Cameo.Unified/**/*.cs" Exclude="../OpenRA.Mods.Cameo.Unified/obj/**;../OpenRA.Mods.Cameo.Unified/bin/**"
