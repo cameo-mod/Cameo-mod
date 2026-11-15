@@ -14013,8 +14013,29 @@ ra1_soviets_heavytank_105mm:
 		Damage: 18909
 	Warhead@Effect:
 		Explosions: small_poof
+
 ra1_soviets_gorynychtank_bigflamer:
-	Inherits: BigFlamer
+	Inherits@wh: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@fx: ^Effect_Flame_Medium
+	ReloadDelay: 45
+	Range: 6342
+	Burst: 2
+	BurstDelays: 5
+	Report: firebl3.aud
+	Projectile: Bullet
+		Speed: 250
+		TrailImage: fb2
+		Image: FB1
+		TrailInterval: 1
+		TrailDelay: 0
+	Warhead@Flame_Medium: AreaDamage
+		Damage: 18000
+	Warhead@Effect: CreateEffect
+		Explosions: napalm
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 
 ra1_soviets_mammothtank_ra120mm:
 	Inherits: ra120mm

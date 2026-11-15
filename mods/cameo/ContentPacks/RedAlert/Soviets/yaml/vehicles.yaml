@@ -457,6 +457,10 @@ ra1_soviets_gorynychtank:
 		AddToArmyValue: true
 	Health:
 		HP: 150000
+	Repairable:
+		HpPerStep: 7500
+	ChangesHealth@SelfHealing:
+		Step: 60
 	Armor:
 		Type: Heavy
 	Mobile:
