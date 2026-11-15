@@ -34,6 +34,13 @@
     <None Include="../OpenRA.Mods.Cameo.Dev/AiPlayerTelemetryDev.cs"
           Link="source/mods/Cameo.Dev/AiPlayerTelemetryDev.cs" CopyToOutputDirectory="Always" />
     <None Include="MissionBuildLineOracle.cs" Link="source/MissionBuildLineOracle.cs" CopyToOutputDirectory="Always" />
+    <None Include="../mods/cameo/mod.yaml" Link="source/packaging/cameo-mod.yaml" CopyToOutputDirectory="Always" />
+    <None Include="../Directory.Build.targets" Link="source/packaging/Directory.Build.targets" CopyToOutputDirectory="Always" />
+    <None Include="../CameoDev.proj" Link="source/packaging/CameoDev.proj" CopyToOutputDirectory="Always" />
+    <None Include="../packaging/functions.sh" Link="source/packaging/functions.sh" CopyToOutputDirectory="Always" />
+    <None Include="../packaging/linux/buildpackage.sh" Link="source/packaging/linux-buildpackage.sh" CopyToOutputDirectory="Always" />
+    <None Include="../packaging/macos/buildpackage.sh" Link="source/packaging/macos-buildpackage.sh" CopyToOutputDirectory="Always" />
+    <None Include="../packaging/windows/buildpackage.sh" Link="source/packaging/windows-buildpackage.sh" CopyToOutputDirectory="Always" />
     <None Include="../OpenRA.Mods.CA/**/*.cs" Exclude="../OpenRA.Mods.CA/obj/**;../OpenRA.Mods.CA/bin/**"
           Link="source/mods/CA/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../OpenRA.Mods.Cameo.Unified/**/*.cs" Exclude="../OpenRA.Mods.Cameo.Unified/obj/**;../OpenRA.Mods.Cameo.Unified/bin/**"

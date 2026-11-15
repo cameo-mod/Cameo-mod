@@ -1,0 +1,14 @@
+<Project DefaultTargets="Build">
+  <!-- Use a private output directory: the engine loads mod assemblies next to the executable. -->
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
+    <CameoDevLogging Condition="'$(CameoDevLogging)' == ''">false</CameoDevLogging>
+    <CameoDevOutputPath Condition="'$(CameoDevOutputPath)' == ''">$(MSBuildThisFileDirectory)artifacts/dev-bin/</CameoDevOutputPath>
+  </PropertyGroup>
+  <Target Name="Build">
+    <Error Condition="'$(CameoDevLogging)' != 'true'" Text="The DEV entry point requires CameoDevLogging=true." />
+    <Error Condition="'$(CameoOfficialPackaging)' == 'true'" Text="The DEV entry point cannot be used for official packaging." />
+    <MSBuild Projects="CameoMod.sln" Targets="Build" Properties="Configuration=$(Configuration);CameoDevLogging=true;OutputPath=$(CameoDevOutputPath)" />
+    <MSBuild Projects="OpenRA.Mods.Cameo.Dev/OpenRA.Mods.Cameo.Dev.csproj" Targets="Build" Properties="Configuration=$(Configuration);CameoDevLogging=true;OutputPath=$(CameoDevOutputPath)" />
+  </Target>
+</Project>

@@ -51,6 +51,28 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void MissionAndAttemptWireFormsMatchThePinnedOracle()
+		{
+			foreach (var state in Enum.GetValues<BotMissionAttemptState>())
+			foreach (var reason in new[] { null, "", "x_invalid_bad", "done" })
+			foreach (var executor in new[] { null, "", "engineer" })
+			{
+				var record = new BotMissionRecord { MissionId = "capture:Multi1:oil:42", State = state,
+					Reason = reason, Executor = executor, Attempt = 2, Tick = 12, Units = 0, RegionIndex = -1 };
+				var detached = MissionEvent.Detach(record, default);
+				Assert.That(AiMissionLogWriterDev.BuildLine(detached, "g", "m", "map", DateTime.UnixEpoch),
+					Is.EqualTo(MissionBuildLineOracle.BuildLine(record, "g", "m", "map", DateTime.UnixEpoch)));
+			}
+
+			foreach (var missionEvent in Enum.GetValues<BotMissionEvent>())
+			{
+				var record = new BotMissionRecord { MissionId = "recon:Multi1:42", Event = missionEvent, Tick = 42 };
+				Assert.That(AiMissionLogWriterDev.BuildLine(MissionEvent.Detach(record, default), "g", "m", "map", DateTime.UnixEpoch),
+					Is.EqualTo(MissionBuildLineOracle.BuildLine(record, "g", "m", "map", DateTime.UnixEpoch)));
+			}
+		}
+
+		[Test]
 		public void CellTypeIsDetachedAndReadOnly()
 		{
 			Assert.That(typeof(MissionEvent).GetProperty(nameof(MissionEvent.TargetCell)).PropertyType, Is.EqualTo(typeof(CellXY?)));
