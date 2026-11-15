@@ -45,7 +45,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		// ---- telemetry state (lives on the first telemetry-ON instance) ----
 		SquadManagerBotModuleCA diagnosticCachedOwner;
-		BotPassiveDiagnosticWriter diagnosticWriter;
+		BotPassiveChannel diagnosticWriter;
 		bool diagnosticInitialized;
 		int diagnosticSquadCounter;
 		List<SquadCA> diagnosticPendingCommits;
@@ -57,8 +57,10 @@ namespace OpenRA.Mods.CA.Traits
 		SquadManagerBotModuleCA StalemateOwner => stalemateCachedOwner ??= Player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>()
 			.FirstOrDefault(m => m.Info.StalemateBreakerEnabled) ?? this;
 
-		SquadManagerBotModuleCA DiagnosticOwner => diagnosticCachedOwner ??= Player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>()
-			.FirstOrDefault(m => m.Info.StalemateDiagnosticsEnabled) ?? this;
+		bool DiagnosticSinkEnabled => World.WorldActor.TraitOrDefault<CameoLogHub>()?.Sink.Enabled == true;
+
+		SquadManagerBotModuleCA DiagnosticOwner => !DiagnosticSinkEnabled ? this : (diagnosticCachedOwner ??= Player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>()
+			.FirstOrDefault(m => m.Info.StalemateDiagnosticsEnabled) ?? this);
 
 		string StalemateManagerName => Info.InstanceName ?? "";
 
@@ -101,7 +103,7 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>Telemetry only (BOTHEALTH H13): the GroundStatesCA predicted-loss retreat site.</summary>
 		internal void NoteRetreatStart(SquadCA squad, string site)
 		{
-			if (!Info.StalemateDiagnosticsEnabled)
+			if (!Info.StalemateDiagnosticsEnabled || !DiagnosticSinkEnabled)
 				return;
 			var owner = DiagnosticOwner;
 			owner.diagnosticRetreatTicks.Enqueue(World.WorldTick);
@@ -976,11 +978,11 @@ namespace OpenRA.Mods.CA.Traits
 		// ======================================================================================
 		// Telemetry (telemetry flag only; observation only)
 		// ======================================================================================
-		BotPassiveDiagnosticWriter DiagnosticWriter
+		BotPassiveChannel DiagnosticWriter
 		{
 			get
 			{
-				if (!Info.StalemateDiagnosticsEnabled)
+				if (!Info.StalemateDiagnosticsEnabled || !DiagnosticSinkEnabled)
 					return null;
 				var owner = DiagnosticOwner;
 				if (!owner.diagnosticInitialized)
@@ -991,20 +993,9 @@ namespace OpenRA.Mods.CA.Traits
 					if (string.IsNullOrWhiteSpace(uid))
 						uid = "unknown";
 					var seat = string.IsNullOrWhiteSpace(Player.InternalName) ? "seat" + StalemateSeatIndex : Player.InternalName;
-					string path = null;
-					try
-					{
-						var directory = Path.Combine(Platform.SupportDir, "Logs");
-						Directory.CreateDirectory(directory);
-						path = Path.Combine(directory, $"cameo-ai-botpassive-{uid}-{seat}-{World.WorldTick}.jsonl");
-					}
-					catch (Exception e) when (e is IOException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
-					{
-						path = null;
-					}
-
-					BotPassiveDiagnosticWriter.TryCreate(enabled, path, uid, seat,
-						string.IsNullOrWhiteSpace(Player.BotType) ? "unknown" : Player.BotType, out owner.diagnosticWriter);
+					owner.diagnosticWriter = new BotPassiveChannel(World.WorldActor.Trait<CameoLogHub>().Sink,
+						StalemateSeatIndex, enabled, uid, seat,
+						string.IsNullOrWhiteSpace(Player.BotType) ? "unknown" : Player.BotType, World.WorldTick);
 				}
 
 				return owner.diagnosticWriter is { Enabled: true } w ? w : null;
@@ -1030,7 +1021,7 @@ namespace OpenRA.Mods.CA.Traits
 				Tick = World.WorldTick, SquadId = DiagnosticSquadId(squad), Generation = 1, Event = evt,
 				Size = squad.Units.Count, Value = squad.Units.Sum(u => (long)UnitValue(u.Actor)),
 				StateTo = squad.FuzzyStateMachine?.CurrentState?.GetType().Name, TargetType = squad.Target.Type.ToString(),
-				TargetCell = cell == null ? null : BotPassiveDiagnosticWriter.Cell(cell.Value.X, cell.Value.Y), Reason = reason,
+				TargetCell = cell == null ? null : BotPassiveChannel.Cell(cell.Value.X, cell.Value.Y), Reason = reason,
 				LeaseOwner = LeaseOwner,
 				PredictedRatioMilli = evidence?.PredictedRatioMilli, CoalitionRatioMilli = evidence?.CoalitionRatioMilli, Band = evidence?.Band,
 				TradeDelta = evidence?.TradeDelta, AlliesEngaged = evidence?.AlliesEngaged, OwnFaction = evidence?.OwnFaction, EnemyFaction = evidence?.EnemyFaction
@@ -1040,7 +1031,7 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>Ordinary launches are recorded at the end of the tick, when the launch site has added its members.</summary>
 		void DiagnosticNoteLaunch(SquadCA squad)
 		{
-			if (!Info.StalemateDiagnosticsEnabled)
+			if (!Info.StalemateDiagnosticsEnabled || !DiagnosticSinkEnabled)
 				return;
 			(diagnosticPendingCommits ??= new List<SquadCA>()).Add(squad);
 		}
@@ -1077,7 +1068,7 @@ namespace OpenRA.Mods.CA.Traits
 				PoolCount = pool.Count + (kind == "breaker" ? 0 : squad.Units.Count), PoolValue = pool.Value
 					+ (kind == "breaker" ? 0 : squad.Units.Sum(u => (long)UnitValue(u.Actor))),
 				ArmyCount = army.Count, ArmyValue = army.Value, TargetSeat = targetOwner?.InternalName,
-				TargetCell = cell == null ? null : BotPassiveDiagnosticWriter.Cell(cell.Value.X, cell.Value.Y)
+				TargetCell = cell == null ? null : BotPassiveChannel.Cell(cell.Value.X, cell.Value.Y)
 			});
 		}
 
@@ -1127,14 +1118,14 @@ namespace OpenRA.Mods.CA.Traits
 				Groups = seat.Groups.Select(g => new BotPassiveWaveGroup
 				{
 					Locomotor = g.Locomotor, RepActor = g.RepId, L = g.L, S = g.S,
-					Tc = BotPassiveDiagnosticWriter.Cell(g.TcX, g.TcY), Cen = BotPassiveDiagnosticWriter.Cell(g.CenX, g.CenY)
+					Tc = BotPassiveChannel.Cell(g.TcX, g.TcY), Cen = BotPassiveChannel.Cell(g.CenX, g.CenY)
 				}).ToList(),
 				RallyDuration = wave.RallyDuration, NoProgressDuration = wave.NoProgressDuration, AbsoluteDuration = wave.AbsoluteDuration,
 				RallyDeadline = wave.RallyDeadline, AbsoluteDeadline = wave.AbsoluteDeadline, ArmTick = wave.ArmTick,
 				N0 = wave.N0, V0 = wave.V0, CommittedCount = wave.InitialCount, CommittedValue = wave.InitialValue,
 				LeaderActor = wave.LeaderId,
 				TargetSeat = seat.TargetOwnerIndex >= 0 && seat.TargetOwnerIndex < World.Players.Length ? World.Players[seat.TargetOwnerIndex].InternalName : null,
-				TargetActor = seat.TargetId, TargetCell = BotPassiveDiagnosticWriter.Cell(seat.TargetX, seat.TargetY)
+				TargetActor = seat.TargetId, TargetCell = BotPassiveChannel.Cell(seat.TargetX, seat.TargetY)
 			});
 			DiagnosticAttackCommit(stalemateSquad, "breaker", seat.WaveId);
 		}
@@ -1180,7 +1171,7 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>End of every BotTick: pending ordinary attack_commit rows, unit_position, health, and the terminal manifest.</summary>
 		void DiagnosticTick()
 		{
-			if (!Info.StalemateDiagnosticsEnabled)
+			if (!Info.StalemateDiagnosticsEnabled || !DiagnosticSinkEnabled)
 				return;
 			var w = DiagnosticWriter;
 			var t = World.WorldTick;
@@ -1205,7 +1196,7 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 			}
 
-			if (t % BotPassiveDiagnosticWriter.PositionIntervalTicks == 0 && t <= BotPassiveDiagnosticWriter.MaximumPositionTick)
+			if (t % BotPassiveChannel.PositionIntervalTicks == 0 && t <= BotPassiveChannel.MaximumPositionTick)
 				DiagnosticUnitPositions(w, t);
 
 			if (t % StalemateBreakerCA.HealthInterval == 0)
@@ -1216,7 +1207,7 @@ namespace OpenRA.Mods.CA.Traits
 			.Where(a => a.Owner == Player && !a.IsDead && a.IsInWorld && a.OccupiesSpace != null && !a.Info.HasTraitInfo<BuildingInfo>() && !a.Info.HasTraitInfo<HarvesterInfo>())
 			.Distinct().OrderBy(a => a.ActorID);
 
-		void DiagnosticUnitPositions(BotPassiveDiagnosticWriter w, int t)
+		void DiagnosticUnitPositions(BotPassiveChannel w, int t)
 		{
 			var squadOf = new Dictionary<Actor, SquadCA>();
 			foreach (var s in Squads)
@@ -1233,12 +1224,12 @@ namespace OpenRA.Mods.CA.Traits
 
 			// IMPL02 L6f: a roster above the chunk cap is truncated, but expected_count keeps the full count so emitted_count < expected_count shows it.
 			var expectedCount = roster.Count;
-			if (roster.Count > BotPassiveDiagnosticWriter.MaximumPositionChunkEntries * BotPassiveDiagnosticWriter.MaximumPositionChunks)
-				roster = roster.Take(BotPassiveDiagnosticWriter.MaximumPositionChunkEntries * BotPassiveDiagnosticWriter.MaximumPositionChunks).ToList();
+			if (roster.Count > BotPassiveChannel.MaximumPositionChunkEntries * BotPassiveChannel.MaximumPositionChunks)
+				roster = roster.Take(BotPassiveChannel.MaximumPositionChunkEntries * BotPassiveChannel.MaximumPositionChunks).ToList();
 			w.TryEnqueueUnitPosition(t, roster, expectedCount, checksum);
 		}
 
-		void DiagnosticHealth(BotPassiveDiagnosticWriter w, int t)
+		void DiagnosticHealth(BotPassiveChannel w, int t)
 		{
 			var owner = DiagnosticOwner;
 			var leases = BotUnitLeases.Of(Player);
@@ -1281,7 +1272,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		void DiagnosticComplete()
 		{
-			if (Info.StalemateDiagnosticsEnabled && this == DiagnosticOwner)
+			if (Info.StalemateDiagnosticsEnabled && DiagnosticSinkEnabled && this == DiagnosticOwner)
 				diagnosticWriter?.Complete(World.WorldTick);
 		}
 	}

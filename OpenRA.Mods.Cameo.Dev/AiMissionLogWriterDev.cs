@@ -1,0 +1,217 @@
+#region Copyright & License Information
+/*
+ * Copyright (c) OpenRA Developers and Contributors
+ * This file is part of OpenRA, which is free software. It is made
+ * available under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3 of
+ * the License, or (at your option) any later version.
+ */
+#endregion
+
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
+using OpenRA.Graphics;
+using OpenRA.Mods.CA.Traits;
+using OpenRA.Traits;
+
+namespace OpenRA.Mods.Cameo.Traits
+{
+	[TraitLocation(SystemActors.World)]
+	[Desc("Development-only mission logging.")]
+	public sealed class AiMissionLogWriterDevInfo : TraitInfo, Requires<AiMissionLogWriterInfo>
+	{
+		public override object Create(ActorInitializer init) =>
+			new AiMissionLogWriterDev(init.Self.Info.TraitInfo<AiMissionLogWriterInfo>());
+	}
+
+	public class AiMissionLogWriterDev : IWorldLoaded, IGameOver, ITick, INotifyActorDisposing
+	{
+		public const string Schema = "mission-card/2";
+
+		readonly AiMissionLogWriterInfo info;
+		readonly StringBuilder pending = new();
+		bool eligible;
+		string gameUid;
+		string mapUid;
+		string mapTitle;
+		int pendingLines;
+		int nextFlushTick;
+		int nextRetryTick;
+		AiLogFileAppender appender;
+		string inFlight;
+		readonly Dictionary<int, string> seats = new();
+		readonly Dictionary<string, string> seatReplacements = new(StringComparer.Ordinal);
+
+		public int Dropped { get; private set; }
+
+		public AiMissionLogWriterDev(AiMissionLogWriterInfo info) { this.info = info; }
+
+		void IWorldLoaded.WorldLoaded(World world, WorldRenderer worldRenderer)
+		{
+			if (!world.WorldActor.Trait<CameoLogHub>().Sink.Enabled)
+				return;
+
+			eligible = AiMatchLogWriter.Eligible(world.Type, world.IsReplay, world.IsLoadingGameSave, Game.IsHost);
+			gameUid = world.LobbyInfo.GlobalSettings.GameUid;
+			if (string.IsNullOrEmpty(gameUid))
+				gameUid = Guid.NewGuid().ToString("N");
+
+			mapUid = world.Map.Uid;
+			mapTitle = world.Map.Title;
+			for (var i = 0; i < world.Players.Length; i++)
+			{
+				seats[i] = AiMatchLogWriter.SeatKey(world, world.Players[i]);
+				seatReplacements[world.Players[i].InternalName] = seats[i];
+			}
+			nextFlushTick = info.FlushIntervalTicks;
+		}
+
+		public void MissionRecorded(MissionEvent record)
+		{
+			if (!eligible || record == null || !record.IsBot || record.NonCombatant)
+				return;
+
+			if (pendingLines >= info.MaxPendingLines)
+			{
+				Dropped++;
+				return;
+			}
+
+			pending.Append(BuildLine(record, gameUid, mapUid, mapTitle, seats.GetValueOrDefault(record.PlayerIndex, ""), seatReplacements, DateTime.UtcNow)).Append('\n');
+			pendingLines++;
+		}
+
+		/// <summary>One JSONL line, free of world state beyond the record so it can be tested.</summary>
+		public static string BuildLine(MissionEvent r, string gameUid, string mapUid, string mapTitle, string seat,
+			IReadOnlyDictionary<string, string> seatReplacements, DateTime utc)
+		{
+			var b = new StringBuilder();
+			AiMatchLogWriter.AppendObjectStart(b);
+			AiMatchLogWriter.AppendString(b, "schema", Schema, true);
+			AiMatchLogWriter.AppendString(b, "recorded_utc", utc.ToString("o", CultureInfo.InvariantCulture));
+			AiMatchLogWriter.AppendString(b, "game_uid", gameUid);
+			AiMatchLogWriter.AppendString(b, "map_uid", mapUid);
+			AiMatchLogWriter.AppendString(b, "map_title", mapTitle);
+			AiMatchLogWriter.AppendString(b, "seat", seat);
+			AiMatchLogWriter.AppendString(b, "faction", r.FactionInternalName);
+			AiMatchLogWriter.AppendString(b, "bot", r.BotType);
+			AiMatchLogWriter.AppendString(b, "mission_id", Anonymous(r.MissionId, seatReplacements));
+			if (r.Event is BotMissionEvent e)
+			{
+				// A mission-level event: the card's own story, no attempt (AI_MISSION_CARDS §2.2).
+				AiMatchLogWriter.AppendString(b, "record_kind", "mission");
+				AiMatchLogWriter.AppendString(b, "event", BotMissionLog.EventName(e));
+			}
+			else
+			{
+				AiMatchLogWriter.AppendString(b, "record_kind", "attempt");
+				AiMatchLogWriter.AppendNumber(b, "attempt", r.Attempt);
+				AiMatchLogWriter.AppendString(b, "attempt_id", Anonymous(r.MissionId, seatReplacements) + "|A" + r.Attempt.ToString(CultureInfo.InvariantCulture));
+				AiMatchLogWriter.AppendString(b, "state", BotMissionLog.StateName(r.State));
+				AiMatchLogWriter.AppendBoolean(b, "terminal", BotMissionLog.IsTerminal(r.State));
+			}
+			if (r.Reason != null)
+				AiMatchLogWriter.AppendString(b, "reason", r.Reason);
+
+			// An executor-less record (a DENIED no commander bid on) omits `by` rather than writing an empty name.
+			if (!string.IsNullOrEmpty(r.Executor))
+				AiMatchLogWriter.AppendString(b, "by", r.Executor);
+			AiMatchLogWriter.AppendNumber(b, "tick", r.Tick);
+			if (r.MissionType != null)
+				AiMatchLogWriter.AppendString(b, "type", r.MissionType);
+
+			if (r.RegionIndex.HasValue)
+				AiMatchLogWriter.AppendNumber(b, "region", r.RegionIndex.Value);
+
+			if (r.TargetCell.HasValue)
+				AiMatchLogWriter.AppendString(b, "target_cell", r.TargetCell.Value.X + "," + r.TargetCell.Value.Y);
+
+			if (r.UnitCell.HasValue)
+				AiMatchLogWriter.AppendString(b, "unit_cell", r.UnitCell.Value.X + "," + r.UnitCell.Value.Y);
+
+			if (r.Units.HasValue)
+				AiMatchLogWriter.AppendNumber(b, "units", r.Units.Value);
+
+			if (r.Value.HasValue)
+				AiMatchLogWriter.AppendNumber(b, "value", r.Value.Value);
+
+			b.Append('}');
+			return b.ToString();
+		}
+
+		public static string BuildLine(MissionEvent r, string gameUid, string mapUid, string mapTitle, DateTime utc) =>
+			BuildLine(r, gameUid, mapUid, mapTitle, "seat_1", new Dictionary<string, string>(), utc);
+
+		static string Anonymous(string value, IReadOnlyDictionary<string, string> replacements)
+		{
+			if (string.IsNullOrEmpty(value)) return value;
+			// IdentityKey has exactly three colon-delimited fields. Replace only the target,
+			// never a substring of the mission type, region or a prefix-overlapping slot.
+			var parts = value.Split(':');
+			if ((parts.Length == 3 && (parts[0] == "raid" || parts[0] == "recon" || parts[0] == "secure" || parts[0] == "defend")) ||
+				(parts.Length == 4 && parts[0] == "capture"))
+				parts[1] = parts[1] == "self" ? "self" : replacements.GetValueOrDefault(parts[1], "unknown");
+			// Other producer grammars contain actor-type/actor-ID or numeric IDs, not player references.
+			else if (parts[0] != "capture" && parts[0] != "frans" && parts[0] != "garrison_contest" && parts[0] != "veto")
+				return "unknown";
+			return string.Join(":", parts);
+		}
+
+		void ITick.Tick(Actor self)
+		{
+			var tick = self.World.WorldTick;
+			if (inFlight != null)
+			{
+				if (tick >= nextRetryTick)
+					TryFlush(tick);
+
+				return;
+			}
+
+			if (tick >= nextFlushTick)
+			{
+				nextFlushTick = tick + info.FlushIntervalTicks;
+				TryFlush(tick);
+			}
+		}
+
+		void IGameOver.GameOver(World world)
+		{
+			// World.EndGame pauses before IGameOver and a paused world does not tick: flush now, retries included.
+			for (var i = 0; i < 8 && (inFlight != null || pendingLines > 0); i++)
+				TryFlush(world.WorldTick);
+		}
+
+		void INotifyActorDisposing.Disposing(Actor self)
+		{
+			// World.Dispose disposes newest actors first and the world actor last, so every
+			// player-actor BotMissionAttemptTracker has already written its Released(match_end)
+			// records into pending by now. The last GameOver flush ran before them — flush once
+			// more or those terminal lines die in the buffer.
+			for (var i = 0; i < 8 && (inFlight != null || pendingLines > 0); i++)
+				TryFlush(self.World.WorldTick);
+		}
+
+		void TryFlush(int tick)
+		{
+			if (inFlight == null)
+			{
+				if (pendingLines == 0)
+					return;
+
+				inFlight = pending.ToString();
+				pending.Clear();
+				pendingLines = 0;
+
+				// The appender is single-shot (terminal after one append), so each batch gets its own.
+				appender = new AiLogFileAppender(info.FileName);
+			}
+
+			var result = appender.TryAppend(inFlight, tick, out nextRetryTick);
+			if (result != AiLogAppendResult.RetryableFailure || appender.IsTerminal)
+				inFlight = null;
+		}
+	}
+}

@@ -7,6 +7,8 @@
   <ItemGroup>
     <ProjectReference Include="../OpenRA.Mods.CA/OpenRA.Mods.CA.csproj" />
     <ProjectReference Include="../OpenRA.Mods.Cameo/OpenRA.Mods.Cameo.csproj" />
+    <Compile Include="../OpenRA.Mods.Cameo.Dev/AiMissionLogWriterDev.cs" Link="Dev/AiMissionLogWriterDev.cs" />
+    <Compile Include="../OpenRA.Mods.Cameo.Dev/BotPassiveDiagnosticWriterCA.cs" Link="Dev/BotPassiveDiagnosticWriterCA.cs" />
     <ProjectReference Include="../OpenRA.Mods.Cameo.Unified/OpenRA.Mods.Cameo.Unified.csproj" />
     <ProjectReference Include="../OpenRA.Mods.Fransbot/OpenRA.Mods.Fransbot.csproj" />
     <ProjectReference Include="../engine/OpenRA.Test/OpenRA.Test.csproj" />
@@ -29,6 +31,7 @@
           Link="source/mods/Cameo/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../OpenRA.Mods.Cameo.Dev/AiPlayerTelemetryDev.cs"
           Link="source/mods/Cameo.Dev/AiPlayerTelemetryDev.cs" CopyToOutputDirectory="Always" />
+    <None Include="MissionBuildLineOracle.cs" Link="source/MissionBuildLineOracle.cs" CopyToOutputDirectory="Always" />
     <None Include="../OpenRA.Mods.CA/**/*.cs" Exclude="../OpenRA.Mods.CA/obj/**;../OpenRA.Mods.CA/bin/**"
           Link="source/mods/CA/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../OpenRA.Mods.Cameo.Unified/**/*.cs" Exclude="../OpenRA.Mods.Cameo.Unified/obj/**;../OpenRA.Mods.Cameo.Unified/bin/**"

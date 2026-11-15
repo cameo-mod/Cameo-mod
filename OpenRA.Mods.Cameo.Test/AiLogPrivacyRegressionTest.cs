@@ -118,13 +118,13 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var map = new Dictionary<string, string> { ["Multi1"] = "seat_4", ["Multi10"] = "seat_13" };
 			var record = new BotMissionRecord { MissionId = "raid:Multi10:r4", Attempt = 1, Tick = 750 };
-			var line = AiMissionLogWriter.BuildLine(record, "00000000-0000-0000-0000-000000000001", "map", "map", "seat_4", map, DateTime.UnixEpoch);
+			var line = AiMissionLogWriterDev.BuildLine(MissionEvent.Detach(record, default), "00000000-0000-0000-0000-000000000001", "map", "map", "seat_4", map, DateTime.UnixEpoch);
 			using var doc = JsonDocument.Parse(line);
 			Assert.That(doc.RootElement.GetProperty("mission_id").GetString(), Is.EqualTo("raid:seat_13:r4"));
 			Assert.That(doc.RootElement.GetProperty("attempt_id").GetString(), Is.EqualTo("raid:seat_13:r4|A1"));
 			Export("mission.jsonl", line);
 			record.MissionId = "capture:oilb:611";
-			line = AiMissionLogWriter.BuildLine(record, "00000000-0000-0000-0000-000000000001", "map", "map", "seat_4", new Dictionary<string,string> { ["oil"]="seat_9" }, DateTime.UnixEpoch);
+			line = AiMissionLogWriterDev.BuildLine(MissionEvent.Detach(record, default), "00000000-0000-0000-0000-000000000001", "map", "map", "seat_4", new Dictionary<string,string> { ["oil"]="seat_9" }, DateTime.UnixEpoch);
 			using var capture = JsonDocument.Parse(line);
 			Assert.That(capture.RootElement.GetProperty("mission_id").GetString(), Is.EqualTo("capture:oilb:611"));
 		}

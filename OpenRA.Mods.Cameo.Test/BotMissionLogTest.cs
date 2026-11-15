@@ -66,7 +66,7 @@ namespace OpenRA.Mods.Cameo.Test
 				Executor = "Engineers", Tick = 6919
 			};
 
-			var line = AiMissionLogWriter.BuildLine(record, "g", "m", "A Nuclear Winter", new DateTime(2026, 9, 30, 0, 0, 0, DateTimeKind.Utc));
+			var line = AiMissionLogWriterDev.BuildLine(MissionEvent.Detach(record, default), "g", "m", "A Nuclear Winter", new DateTime(2026, 9, 30, 0, 0, 0, DateTimeKind.Utc));
 			using var doc = JsonDocument.Parse(line);
 			var root = doc.RootElement;
 			Assert.That(root.GetProperty("record_kind").GetString(), Is.EqualTo("mission"));
@@ -82,7 +82,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			// DAWN's #679 smoke: broker DENIED rows serialized `by: ""`.
 			var record = new BotMissionRecord { MissionId = "frans:77", Event = BotMissionEvent.Denied, Executor = "", Tick = 500 };
-			var line = AiMissionLogWriter.BuildLine(record, "g", "m", "A Nuclear Winter", new DateTime(2026, 9, 30, 0, 0, 0, DateTimeKind.Utc));
+			var line = AiMissionLogWriterDev.BuildLine(MissionEvent.Detach(record, default), "g", "m", "A Nuclear Winter", new DateTime(2026, 9, 30, 0, 0, 0, DateTimeKind.Utc));
 			using var doc = JsonDocument.Parse(line);
 			Assert.That(doc.RootElement.TryGetProperty("by", out _), Is.False);
 			Assert.That(BotMissionLog.FormatEventLine("Multi0", "frans:77", BotMissionEvent.Denied, null, "", 500),
@@ -99,7 +99,7 @@ namespace OpenRA.Mods.Cameo.Test
 				TargetCell = new CPos(61, 33), Units = 1, Tick = 2561
 			};
 
-			var line = AiMissionLogWriter.BuildLine(record, "g-uid", "m-uid", "A Nuclear Winter", new DateTime(2026, 9, 30, 12, 0, 0, DateTimeKind.Utc));
+			var line = AiMissionLogWriterDev.BuildLine(MissionEvent.Detach(record, default), "g-uid", "m-uid", "A Nuclear Winter", new DateTime(2026, 9, 30, 12, 0, 0, DateTimeKind.Utc));
 			using var doc = JsonDocument.Parse(line);
 			var root = doc.RootElement;
 		Assert.That(root.GetProperty("schema").GetString(), Is.EqualTo("mission-card/2"));
@@ -285,7 +285,7 @@ namespace OpenRA.Mods.Cameo.Test
 				Executor = "Engineers", TargetCell = new CPos(60, 8), UnitCell = new CPos(41, 22), Tick = 14720
 			};
 
-			var line = AiMissionLogWriter.BuildLine(record, "g", "m", "A Nuclear Winter", new DateTime(2026, 9, 30, 0, 0, 0, DateTimeKind.Utc));
+			var line = AiMissionLogWriterDev.BuildLine(MissionEvent.Detach(record, default), "g", "m", "A Nuclear Winter", new DateTime(2026, 9, 30, 0, 0, 0, DateTimeKind.Utc));
 			using var doc = JsonDocument.Parse(line);
 			Assert.That(doc.RootElement.GetProperty("target_cell").GetString(), Is.EqualTo("60,8"));
 			Assert.That(doc.RootElement.GetProperty("unit_cell").GetString(), Is.EqualTo("41,22"));

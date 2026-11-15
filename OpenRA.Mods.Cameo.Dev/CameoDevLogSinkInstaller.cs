@@ -8,7 +8,12 @@
  */
 #endregion
 
+using System;
+using System.Collections.Generic;
+using System.IO;
 using OpenRA.Mods.CA.Traits;
+using OpenRA.Mods.CA.Traits.BotModules;
+using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Dev
@@ -16,7 +21,51 @@ namespace OpenRA.Mods.Cameo.Dev
 	/// <summary>The development-only endpoint installed behind the resident hub.</summary>
 	public sealed class CameoDevLogSink : ICameoLogSink
 	{
+		readonly Actor worldActor;
+		readonly Dictionary<int, BotPassiveDiagnosticWriter> passive = new();
+		public CameoDevLogSink(Actor worldActor) { this.worldActor = worldActor; }
 		public bool Enabled => true;
+
+		public void MissionRecorded(MissionEvent record)
+		{
+			Log.Write("debug", record.Event is BotMissionEvent e
+				? BotMissionLog.FormatEventLine(record.PlayerInternalName, record.MissionId, e, record.Reason, record.Executor, record.Tick)
+				: BotMissionLog.FormatLine(record.PlayerInternalName, record.MissionId, record.Attempt, record.State, record.Reason, record.Executor, record.Tick));
+			worldActor.TraitOrDefault<AiMissionLogWriterDev>()?.MissionRecorded(record);
+		}
+
+		public void BeginPassive(int playerIndex, bool enabled, string gameUid, string seat, string botType, int tick)
+		{
+			if (passive.ContainsKey(playerIndex))
+				return;
+			string path = null;
+			try
+			{
+				var directory = Path.Combine(Platform.SupportDir, "Logs");
+				Directory.CreateDirectory(directory);
+				path = Path.Combine(directory, $"cameo-ai-botpassive-{gameUid}-{seat}-{tick}.jsonl");
+			}
+			catch (Exception e) when (e is IOException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
+			{
+				path = null;
+			}
+			BotPassiveDiagnosticWriter.TryCreate(enabled, path, gameUid, seat, botType, out var writer);
+			passive[playerIndex] = writer;
+		}
+
+		BotPassiveDiagnosticWriter Writer(int playerIndex) => passive.GetValueOrDefault(playerIndex);
+		public void PassiveSquadEvent(int playerIndex, BotPassiveSquadEventSnapshot s) => Writer(playerIndex)?.TryEnqueueSquadEvent(s);
+		public void PassiveAttackCommit(int playerIndex, BotPassiveAttackCommitSnapshot s) => Writer(playerIndex)?.TryEnqueueAttackCommit(s);
+		public void PassiveDispatchCheck(int playerIndex, BotPassiveDispatchCheckSnapshot s) => Writer(playerIndex)?.TryEnqueueDispatchCheck(s);
+		public void PassiveJobEnd(int playerIndex, BotPassiveJobEndSnapshot s) => Writer(playerIndex)?.TryEnqueueJobEnd(s);
+		public void PassiveWaveStart(int playerIndex, BotPassiveWaveStartSnapshot s) => Writer(playerIndex)?.TryEnqueueWaveStart(s);
+		public void PassiveWaveSample(int playerIndex, BotPassiveWaveSampleSnapshot s) => Writer(playerIndex)?.TryEnqueueWaveSample(s);
+		public void PassiveRallyEnd(int playerIndex, BotPassiveRallyEndSnapshot s) => Writer(playerIndex)?.TryEnqueueRallyEnd(s);
+		public void PassiveWaveExit(int playerIndex, BotPassiveWaveExitSnapshot s) => Writer(playerIndex)?.TryEnqueueWaveExit(s);
+		public void PassiveHealth(int playerIndex, BotPassiveHealthSnapshot s) => Writer(playerIndex)?.TryEnqueueHealth(s);
+		public void PassivePositions(int playerIndex, int tick, IReadOnlyList<BotPassiveUnitPositionSnapshot> roster, int expectedCount, string checksum) =>
+			Writer(playerIndex)?.TryEnqueueUnitPosition(tick, roster, expectedCount, checksum);
+		public void CompletePassive(int playerIndex, int tick) => Writer(playerIndex)?.Complete(tick);
 	}
 
 	[TraitLocation(SystemActors.World)]
@@ -30,7 +79,7 @@ namespace OpenRA.Mods.Cameo.Dev
 	{
 		void INotifyCreated.Created(Actor self)
 		{
-			self.Trait<CameoLogHub>().Install(new CameoDevLogSink());
+			self.Trait<CameoLogHub>().Install(new CameoDevLogSink(self));
 		}
 	}
 }

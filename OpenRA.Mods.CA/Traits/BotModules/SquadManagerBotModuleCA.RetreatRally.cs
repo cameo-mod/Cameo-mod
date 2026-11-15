@@ -209,11 +209,11 @@ namespace OpenRA.Mods.CA.Traits
 			if (why != null)
 			{
 				RallyBases++;
-				if (Info.StalemateDiagnosticsEnabled)
+				if (Info.StalemateDiagnosticsEnabled && DiagnosticSinkEnabled)
 				{
 					var axis = RetreatRallyBaseCellPeek(squad);
 					DiagnosticSquadEventAt(squad, "rally_base",
-						Inv($"why={why};best={best};axis={(axis == null ? "none" : BotPassiveDiagnosticWriter.Cell(axis.Value.X, axis.Value.Y))}"), null);
+						Inv($"why={why};best={best};axis={(axis == null ? "none" : BotPassiveChannel.Cell(axis.Value.X, axis.Value.Y))}"), null);
 				}
 
 				return false;
@@ -224,7 +224,7 @@ namespace OpenRA.Mods.CA.Traits
 			episode.Hops = Policy.EffectiveHops(episode.Hops, episode.LastRallyTick, now, RallyP(nameof(SquadManagerBotModuleCAInfo.AggTeamRallyEpisodeResetTicks), squad)) + 1;
 			episode.LastRallyTick = now;
 			RallyPicks++;
-			if (Info.StalemateDiagnosticsEnabled)
+			if (Info.StalemateDiagnosticsEnabled && DiagnosticSinkEnabled)
 			{
 				var cell = World.Map.CellContaining(rc.Pos);
 				DiagnosticSquadEventAt(squad, "rally_pick",
@@ -579,7 +579,7 @@ namespace OpenRA.Mods.CA.Traits
 			next.StartTick = plan.StartTick;
 			next.Size0 = plan.Size0;
 			next.V0 = plan.V0;
-			if (Info.StalemateDiagnosticsEnabled)
+			if (Info.StalemateDiagnosticsEnabled && DiagnosticSinkEnabled)
 				DiagnosticSquadEventAt(owner, "rally_switch", Inv($"from={plan.Key};to={next.Key};gain={choice.Score - oldScore}"), World.Map.CellContaining(rc.Pos));
 
 			return next;
@@ -609,7 +609,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (action == Policy.RallyAction.Support)
 				AggressionCommit(owner);
 
-			if (Info.StalemateDiagnosticsEnabled)
+			if (Info.StalemateDiagnosticsEnabled && DiagnosticSinkEnabled)
 				DiagnosticSquadEventAt(owner, "rally_arrive", Inv($"dest={plan.DestName};ratio={ratioMilli}"), World.Map.CellContaining(plan.DestPos));
 		}
 
@@ -639,7 +639,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			RallyEpisodes.GetValue(owner, _ => new RallyEpisode()).LastRallyTick = now;
-			if (Info.StalemateDiagnosticsEnabled)
+			if (Info.StalemateDiagnosticsEnabled && DiagnosticSinkEnabled)
 				DiagnosticSquadEventAt(owner, "rally_end",
 					Inv($"end={Policy.EndName(end)};phase={Policy.PhaseName(phase)};ticks={now - plan.StartTick};size0={plan.Size0};size1={owner.Units.Count};v0={plan.V0};v1={RallyUnitValue(owner)}"),
 					World.Map.CellContaining(plan.DestPos));
