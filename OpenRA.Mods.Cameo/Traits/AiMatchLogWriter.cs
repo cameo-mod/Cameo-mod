@@ -38,20 +38,12 @@ namespace OpenRA.Mods.Cameo.Traits
 
 	public class AiMatchLogWriter : IWorldLoaded, IGameOver, ITick, BotModules.IAiSeenProfileSource
 	{
-		readonly AiMatchLogWriterInfo info;
 
-		string fallbackGameUid;
-		string pendingText;
-		AiLogFileAppender appender;
 		bool written;
 		bool eligibleAtWorldLoad;
-		int nextAttemptTick;
 		BotTakeoverTracker takeover;
-		readonly Dictionary<OpenRA.Player, List<int[]>> samples = new();
 		readonly Dictionary<OpenRA.Player, BotModules.BotFogMemory> signatureMemory = new();
-		readonly Dictionary<(OpenRA.Player Observer, OpenRA.Player Enemy), List<SignatureSample>> signatures = new();
 		readonly BotModules.MasterAiBotModuleInfo signatureInfo = new();
-		bool gameEnded;
 
 		internal sealed class SignatureSample
 		{
@@ -68,106 +60,28 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		public AiMatchLogWriter(AiMatchLogWriterInfo info)
 		{
-			this.info = info;
 		}
 
 		void IWorldLoaded.WorldLoaded(World world, WorldRenderer worldRenderer)
 		{
 			takeover = world.WorldActor.TraitOrDefault<BotTakeoverTracker>();
-
-			// Save replay-in eventually clears IsLoadingGameSave. Keep the exclusion
-			// for this world's entire lifetime, including its eventual GameOver.
-			// The owner check (admin host or elected takeover controller) is deferred to
-			// capture: the controller is only elected once the tracker itself loads.
 			eligibleAtWorldLoad = Eligible(world.Type, world.IsReplay, world.IsLoadingGameSave, host: true);
-			if (!eligibleAtWorldLoad)
-			{
-				written = true;
-				return;
-			}
-
-			fallbackGameUid = Guid.NewGuid().ToString("N");
-			appender = new AiLogFileAppender(info.FileName);
+			written = !eligibleAtWorldLoad;
 		}
 
 		void ITick.Tick(Actor self)
 		{
 			var world = self.World;
-			// Separate, record-only fog memory: never reuse an omniscient bot profile.
 			if (!written && eligibleAtWorldLoad && IsLogOwner() && world.WorldTick % 25 == 0)
-				SampleSignatures(world);
-			if (!written && info.SampleIntervalTicks > 0 && world.WorldTick % info.SampleIntervalTicks == 0)
-				Sample(world);
-
-			if (written || world.WorldTick < nextAttemptTick)
-				return;
-
-			if (pendingText != null)
-			{
-				TryAppend(world.WorldTick);
-				return;
-			}
-
-
+				UpdateSeenMemory(world);
 		}
 
 		void IGameOver.GameOver(World world)
 		{
-			// World.EndGame pauses before dispatching IGameOver. Finish the appender's
-			// bounded mutex retries here, because no future simulation tick is guaranteed.
-			gameEnded = true;
 			if (eligibleAtWorldLoad && IsLogOwner())
-				SampleSignatures(world);
-			CaptureAndAppend(world);
-			for (var i = 0; i < 7 && !written && pendingText != null; i++)
-				TryAppend(world.WorldTick);
+				UpdateSeenMemory(world);
+			written = true;
 		}
-
-		void CaptureAndAppend(World world)
-		{
-			if (!TruthCaptureReady(gameEnded, false))
-				return;
-			if (written)
-				return;
-
-			if (!eligibleAtWorldLoad || world.Type != WorldType.Regular || world.IsReplay)
-			{
-				written = true;
-				return;
-			}
-
-			// Not (yet) the writing process: a client that is neither host nor the current
-			// controller stays silent but keeps the record open — it may be elected after
-			// the admin drops, and latching written here would lose that forever
-			// (boss_review T1/T4).
-			if (!IsLogOwner())
-				return;
-
-			pendingText ??= BuildLog(world);
-			if (string.IsNullOrEmpty(pendingText))
-			{
-				// An empty record only means nothing loggable has resolved yet. It latches
-				// "done" ONLY when nothing more can appear: while a bound human seat can
-				// still convert to a takeover bot the capture stays open (boss_review T1).
-				pendingText = null;
-				if (!OpenTakeoverSeats())
-					written = true;
-				return;
-			}
-
-			TryAppend(world.WorldTick);
-		}
-
-		void TryAppend(int worldTick)
-		{
-			var result = appender.TryAppend(pendingText, worldTick, out nextAttemptTick);
-			if (result != AiLogAppendResult.RetryableFailure || appender.IsTerminal)
-			{
-				written = true;
-				return;
-			}
-		}
-
 		// Log ownership in a takeover-enabled match belongs to the elected controller from
 		// match start (boss_review T4 rev-2): a bound client re-elected on every synced
 		// disconnect is the sole writer, so spectator connectivity — including a departed
@@ -193,26 +107,6 @@ namespace OpenRA.Mods.Cameo.Traits
 		bool IsLoggedPlayer(OpenRA.Player player)
 		{
 			return IsLoggableBot(player) || (takeover != null && takeover.IsTakenOver(player));
-		}
-
-		// Fixed tick cadence, unlike PlayerStatistics' own graph samples, which follow wall-clock
-		// game time (every 3000 ticks at the harness's maximum speed, 750 at normal speed).
-		void Sample(World world)
-		{
-			foreach (var player in world.Players.Where(IsEligiblePlayer))
-			{
-				var stats = player.PlayerActor.TraitOrDefault<PlayerStatistics>();
-				var resources = player.PlayerActor.TraitOrDefault<PlayerResources>();
-				if (!samples.TryGetValue(player, out var list))
-					samples[player] = list = new List<int[]>();
-
-				list.Add(new[]
-				{
-					world.WorldTick, resources?.Earned ?? 0, resources?.Spent ?? 0, stats?.ArmyValue ?? 0,
-					stats?.AssetsValue ?? 0, stats?.KillsCost ?? 0, stats?.DeathsCost ?? 0,
-					(resources?.Cash ?? 0) + (resources?.Resources ?? 0), IdleQueues(player)
-				});
-			}
 		}
 
 		// The arsenal ledger (AI_ARCHITECTURE.md §12.3): per own actor type, created / lost / value lost / value
@@ -418,103 +312,10 @@ namespace OpenRA.Mods.Cameo.Traits
 		internal static string SeatKey(World world, OpenRA.Player player) =>
 			"seat_" + (Array.IndexOf(world.Players, player) + 1).ToString(CultureInfo.InvariantCulture);
 
-		string BuildLog(World world)
-		{
-			var gameUid = world.LobbyInfo.GlobalSettings.GameUid;
-			if (string.IsNullOrEmpty(gameUid))
-				gameUid = fallbackGameUid;
-
-			var lines = new StringBuilder();
-			foreach (var player in world.Players.Where(IsEligiblePlayer))
-			{
-				var recorder = player.PlayerActor.TraitOrDefault<AiMatchLogRecorder>();
-				var stats = player.PlayerActor.TraitOrDefault<PlayerStatistics>();
-				var resources = player.PlayerActor.TraitOrDefault<PlayerResources>();
-				var team = LoggedTeam(world, takeover, player);
-				TakeoverRecord takeoverRecord = null;
-				takeover?.TryGetTakeoverRecord(player, out takeoverRecord);
-
-				AppendObjectStart(lines);
-				AppendNumber(lines, "schema", 3, true);
-				AppendString(lines, "record_id", gameUid + "|" + SeatKey(world, player));
-				AppendString(lines, "recorded_utc", DateTime.UtcNow.ToString("o", CultureInfo.InvariantCulture));
-				AppendString(lines, "mod_version", Game.ModData.Manifest.Metadata.Version);
-				AppendString(lines, "game_uid", gameUid);
-				AppendString(lines, "map_uid", world.Map.Uid);
-				AppendString(lines, "map_title", world.Map.Title);
-				AppendNumber(lines, "duration_ticks", world.WorldTick);
-				AppendNumber(lines, "timestep", world.Timestep);
-
-				AppendObjectPropertyStart(lines, "player");
-				AppendString(lines, "seat", SeatKey(world, player), true);
-				AppendString(lines, "bot_type", player.BotType ?? takeoverRecord?.BotType);
-				AppendString(lines, "faction", player.Faction.InternalName);
-				AppendNumber(lines, "team", team);
-				AppendNumber(lines, "handicap", player.Handicap);
-				AppendNumber(lines, "spawn", player.SpawnPoint);
-
-				// SpawnPoint is the lobby's choice and stays 0 for map-side players (the A/B harness),
-				// so the home cell is what tells the two sides of a duel apart.
-				AppendString(lines, "home", $"{player.HomeLocation.X},{player.HomeLocation.Y}");
-				AppendString(lines, "outcome", Outcome(player.WinState));
-				AppendPersonalitySummary(lines, recorder);
-				var priorsStates = player.PlayerActor.TraitsImplementing<OpenRA.Mods.CA.Traits.BotModuleLogic.IBotEngagementPriors>()
-					.Select(p => p.PriorsState).Where(s => s != null).ToArray();
-				if (priorsStates.Length > 0)
-					AppendString(lines, "priors_state", string.Join("+", priorsStates));
-
-				AppendTimeline(lines, recorder?.PersonalityTimeline);
-				AppendString(lines, "composition", recorder?.CurrentComposition ?? "");
-				AppendNumber(lines, "composition_switches", recorder?.CompositionSwitches ?? 0);
-				AppendCompositionTimeline(lines, recorder?.CompositionTimeline);
-				AppendEpisodeTimeline(lines, recorder?.EpisodeTimeline);
-				lines.Append('}');
-
-				// Takeover provenance for learning/A-B exclusion; absent for ordinary bots.
-				if (takeoverRecord != null)
-				{
-					AppendObjectPropertyStart(lines, "takeover");
-					AppendNumber(lines, "taken_over_at", takeoverRecord.Tick, true);
-					AppendString(lines, "trigger", takeoverRecord.Trigger == TakeoverTrigger.Surrender ? "surrender" : "disconnect");
-					AppendString(lines, "bot_type", takeoverRecord.BotType);
-					lines.Append('}');
-				}
-
-				AppendObjectPropertyStart(lines, "stats");
-				AppendNumber(lines, "units_killed", stats?.UnitsKilled ?? 0, true);
-				AppendNumber(lines, "units_lost", stats?.UnitsDead ?? 0);
-				AppendNumber(lines, "buildings_killed", stats?.BuildingsKilled ?? 0);
-				AppendNumber(lines, "buildings_lost", stats?.BuildingsDead ?? 0);
-				AppendNumber(lines, "kills_cost", stats?.KillsCost ?? 0);
-				AppendNumber(lines, "deaths_cost", stats?.DeathsCost ?? 0);
-				AppendNumber(lines, "army_value", stats?.ArmyValue ?? 0);
-				AppendNumber(lines, "assets_value", stats?.AssetsValue ?? 0);
-				AppendNumber(lines, "resources_earned", resources?.Earned ?? 0);
-				AppendNumber(lines, "resources_spent", resources?.Spent ?? 0);
-				samples.TryGetValue(player, out var timeline);
-				AppendStatsTimeline(lines, timeline);
-				lines.Append('}');
-
-				AppendArsenal(lines, player.PlayerActor.TraitOrDefault<BotArsenalLedger>());
-				AppendOwnership(lines, player.PlayerActor.TraitsImplementing<BotModules.BotOwnershipWatchdog>().FirstOrDefault(w => w.Passes > 0));
-				if (OpenRA.Mods.CA.Traits.BotUnitLeases.Of(player) != null)
-					AppendOrderGate(lines, player.PlayerActor.TraitsImplementing<ModularBot>().FirstOrDefault(b => b.IsEnabled));
-
-				AppendRelationships(lines, world, takeover, player, "opponents", false);
-				AppendRelationships(lines, world, takeover, player, "allies", true);
-				AppendSeats(lines, world);
-				AppendOpponentSignatures(lines, world, player);
-				lines.Append("}\n");
-			}
-
-			return lines.ToString();
-		}
-
-		void SampleSignatures(World world)
+		// Preserve the fog-honest source, independent of development logging.
+		void UpdateSeenMemory(World world)
 		{
 			var players = world.Players.Where(IsEligiblePlayer).ToArray();
-			// Snapshot each seat's OWN actors for the deferred truth relabel. These buffers
-			// have no runtime consumer and are not serialized before IGameOver.
 			var byOwner = world.Actors.Where(a => a.IsInWorld && !a.IsDead && a.Info.HasTraitInfo<IOccupySpaceInfo>())
 				.GroupBy(a => a.Owner).ToDictionary(g => g.Key, g => g.ToArray());
 			foreach (var observer in players)
@@ -524,27 +325,9 @@ namespace OpenRA.Mods.Cameo.Traits
 				if (!signatureMemory.TryGetValue(observer, out var memory))
 					signatureMemory[observer] = memory = new BotModules.BotFogMemory(observer, signatureInfo);
 				foreach (var enemy in players.Where(p => p != observer && !p.AlliedPlayersMask.Overlaps(observer.PlayerMask)))
-				{
-					var owned = byOwner.GetValueOrDefault(enemy, Array.Empty<Actor>());
-					memory.Observe(enemy, owned, world.WorldTick); // CanBeViewedByPlayer/frozen sightings only.
-					var seen = ProfileOf(memory.Remembered(enemy));
-					seen.FactionName = BotModules.BotFactionView.PublicFactionOf(enemy);
-					var key = (observer, enemy);
-					if (!signatures.TryGetValue(key, out var history))
-						signatures[key] = history = new List<SignatureSample>();
-					var previous = history.LastOrDefault();
-					if (!SignatureSampleDue(world.WorldTick, previous?.Tick ?? -1,
-						previous == null || SignatureChanged(previous.Seen, seen), Math.Max(750, info.SampleIntervalTicks)))
-						continue;
-					var truth = ProfileOf(owned.Select(a => BotModules.BotFogMemory.Classify(a.Info,
-						a.ActorID, a.Location, a.GetEnabledTargetTypes(), world.WorldTick, signatureInfo)));
-					history.Add(new SignatureSample { Tick = world.WorldTick, Seen = seen, Truth = truth });
-					if (info.SignatureHistoryCapPerPair > 0 && history.Count > info.SignatureHistoryCapPerPair)
-						history.RemoveRange(0, history.Count - info.SignatureHistoryCapPerPair);
-				}
+					memory.Observe(enemy, byOwner.GetValueOrDefault(enemy, Array.Empty<Actor>()), world.WorldTick);
 			}
 		}
-
 		internal static bool SignatureChanged(BotModules.EnemyProfile a, BotModules.EnemyProfile b) =>
 			a.FactionName != b.FactionName || a.ArmyValue != b.ArmyValue || a.InfantryValue != b.InfantryValue ||
 			a.VehicleValue != b.VehicleValue || a.AirValue != b.AirValue || a.NavalValue != b.NavalValue ||
@@ -582,23 +365,6 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 			p.KnownRegions = regions.Count;
 			return p;
-		}
-
-		void AppendOpponentSignatures(StringBuilder builder, World world, OpenRA.Player subject)
-		{
-			AppendArrayPropertyStart(builder, "opponent_signatures");
-			var first = true;
-			foreach (var enemy in world.Players.Where(IsEligiblePlayer)
-				.Where(p => p != subject && !p.AlliedPlayersMask.Overlaps(subject.PlayerMask)))
-				if (signatures.TryGetValue((subject, enemy), out var history))
-					foreach (var sample in history)
-					{
-						if (!first) builder.Append(',');
-						first = false;
-						AppendOpponentSignature(builder, SeatKey(world, enemy), sample.Seen,
-							enemy.Faction.InternalName, Outcome(enemy.WinState), sample.Truth, sample.Tick);
-					}
-			builder.Append(']');
 		}
 
 		internal static void AppendOpponentSignature(StringBuilder builder, string seat,
