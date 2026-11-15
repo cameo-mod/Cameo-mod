@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
@@ -42,8 +43,18 @@ namespace OpenRA.Mods.Cameo.Test
 				var actual = AiMissionLogWriterDev.BuildLine(detached, "g", "m", "map", time);
 				Assert.That(actual, Is.EqualTo(expected));
 				record.MissionId = "changed";
+				record.Player = null;
+				record.Event = BotMissionEvent.Denied;
+				record.Attempt = 99;
+				record.State = BotMissionAttemptState.Success;
 				record.Reason = null;
+				record.Executor = "changed";
+				record.MissionType = "changed";
+				record.RegionIndex = 5;
 				record.TargetCell = new CPos(1, 1);
+				record.UnitCell = null;
+				record.Units = null;
+				record.Value = 99;
 				record.Tick = 1;
 				Assert.That(AiMissionLogWriterDev.BuildLine(detached, "g", "m", "map", time), Is.EqualTo(actual));
 			}
@@ -83,6 +94,56 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void EventDoesNotRetainTheSourcePlayer()
+		{
+			var player = (Player)RuntimeHelpers.GetUninitializedObject(typeof(Player));
+			var record = new BotMissionRecord { Player = player, MissionId = "raid:self:r1" };
+			var detached = MissionEvent.Detach(record, new PlayerIdentity(2, "seat", "faction", "bot", true, false));
+			record.Player = (Player)RuntimeHelpers.GetUninitializedObject(typeof(Player));
+			Assert.That(detached.PlayerIndex, Is.EqualTo(2));
+			Assert.That(detached.PlayerInternalName, Is.EqualTo("seat"));
+			Assert.That(detached.FactionInternalName, Is.EqualTo("faction"));
+			Assert.That(detached.BotType, Is.EqualTo("bot"));
+		}
+
+		[Test]
+		public void AttemptAndCooldownStateStaysResident()
+		{
+			var actor = (Actor)RuntimeHelpers.GetUninitializedObject(typeof(Actor));
+			var tracker = new BotMissionAttemptTracker(actor, new BotMissionAttemptTrackerInfo());
+			var record = new BotMissionRecord { MissionId = "raid:self:r1", Attempt = 1, State = BotMissionAttemptState.Committed };
+			tracker.Note(record);
+			Assert.That(tracker.CurrentAttemptNumber(record.MissionId), Is.EqualTo(1));
+			Assert.That(tracker.NextAttemptNumber(record.MissionId), Is.EqualTo(2));
+			tracker.CoolAnswer(record.MissionId, 100);
+			Assert.That(tracker.AnswerCooling(record.MissionId, 99), Is.True);
+			Assert.That(tracker.AnswerCooling(record.MissionId, 100), Is.False);
+			record.Attempt = 2;
+			record.State = BotMissionAttemptState.Released;
+			tracker.Note(record);
+			Assert.That(tracker.NextAttemptNumber(record.MissionId), Is.EqualTo(3));
+		}
+
+		[Test]
+		public void ResidentWriteStepsPrecedeTheEnabledGuard()
+		{
+			var path = Path.Combine(AppContext.BaseDirectory, "source", "mods", "CA", "Traits", "BotModules", "BotMissionLog.cs");
+			var source = File.ReadAllText(path);
+			var start = source.IndexOf("public static void Write(BotMissionRecord record)", StringComparison.Ordinal);
+			Assert.That(start, Is.GreaterThanOrEqualTo(0));
+			var note = source.IndexOf("?.Note(record)", start, StringComparison.Ordinal);
+			var reason = source.IndexOf("if (!BotMissionReasons.IsValid(record.Reason))", start, StringComparison.Ordinal);
+			var stamp = source.IndexOf("record.Tick = world.WorldTick;", start, StringComparison.Ordinal);
+			var guard = source.IndexOf("hub.Sink.Enabled", start, StringComparison.Ordinal);
+			var detach = source.IndexOf("MissionEvent.Detach(record,", start, StringComparison.Ordinal);
+			Assert.That(note, Is.GreaterThan(start));
+			Assert.That(reason, Is.GreaterThan(note));
+			Assert.That(stamp, Is.GreaterThan(reason));
+			Assert.That(guard, Is.GreaterThan(stamp));
+			Assert.That(detach, Is.GreaterThan(guard));
+		}
+
+		[Test]
 		public void PassiveListsOwnTheirContents()
 		{
 			var failures = new List<BotPassiveCandidateFailure> { new() { TargetActor = 7, Reason = "blocked" } };
@@ -91,9 +152,13 @@ namespace OpenRA.Mods.Cameo.Test
 			var wave = new BotPassiveWaveStartSnapshot { Groups = groups };
 			failures.Clear();
 			groups[0] = new BotPassiveWaveGroup { Locomotor = "changed" };
+			groups.Add(new BotPassiveWaveGroup { Locomotor = "extra" });
 			Assert.That(job.CandidateFailures, Has.Count.EqualTo(1));
 			Assert.That(job.CandidateFailures[0].Reason, Is.EqualTo("blocked"));
 			Assert.That(wave.Groups[0].Locomotor, Is.EqualTo("wheel"));
+			Assert.That(wave.Groups, Has.Count.EqualTo(1));
+			Assert.That(new BotPassiveJobEndSnapshot { CandidateFailures = new List<BotPassiveCandidateFailure>() }.CandidateFailures, Is.Empty);
+			Assert.That(new BotPassiveWaveStartSnapshot { Groups = new List<BotPassiveWaveGroup>() }.Groups, Is.Empty);
 			Assert.That(new BotPassiveJobEndSnapshot { CandidateFailures = null }.CandidateFailures, Is.Null);
 			Assert.That(new BotPassiveWaveStartSnapshot { Groups = null }.Groups, Is.Null);
 		}
