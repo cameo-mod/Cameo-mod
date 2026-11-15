@@ -907,6 +907,7 @@
 World:
 	Inherits: ^BaseWorld
 	Inherits@MapGenerators: ^MapGenerators
+	CameoLogHub:
 	CryoFogLimiter:
 		Max: 24
 	CameoCareerFinalizer:

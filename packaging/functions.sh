@@ -6,6 +6,21 @@
 # Copy-paste the entire script into http://shellcheck.net to check.
 ####
 
+# Fail packaging if a development assembly, mod or rules folder is present under a path
+# Arguments:
+#   CHECK_PATH: Path to search (the install destination or a copied mods directory)
+assert_no_dev_content() {
+	CHECK_PATH="${1}"
+	if ! DEV_CONTENT=$(find "${CHECK_PATH}" \( -name 'OpenRA.Mods.Cameo.Dev*' -o -name 'cameo-dev' -o -path '*/rules/dev' \) -print); then
+		echo >&2 "Could not inspect official package content under ${CHECK_PATH}"
+		exit 1
+	fi
+	if [ -n "${DEV_CONTENT}" ]; then
+		echo >&2 "Official package contains a development assembly, mod or rules folder under ${CHECK_PATH}"
+		exit 1
+	fi
+}
+
 # Compile and publish any mod assemblies to the target directory
 # Arguments:
 #   SRC_PATH: Path to the root SDK directory
@@ -28,7 +43,7 @@ install_mod_assemblies() {
 
 		rm -rf "${ENGINE_PATH:?}/bin"
 
-		find . -maxdepth 1 -name '*.sln' -exec msbuild -verbosity:m -nologo -t:Build -restore -p:Configuration=Release -p:TargetPlatform="${TARGETPLATFORM}" -p:Mono=true \;
+		msbuild CameoMod.sln -verbosity:m -nologo -t:Build -restore -p:Configuration=Release -p:TargetPlatform="${TARGETPLATFORM}" -p:Mono=true -p:CameoDevLogging=false -p:CameoOfficialPackaging=true || exit 1
 
 		cd "${ORIG_PWD}" || exit 1
 		for LIB in "${ENGINE_PATH}/bin/"*.dll "${ENGINE_PATH}/bin/"*.dll.config; do
@@ -47,7 +62,10 @@ install_mod_assemblies() {
 			done
 		fi
 	else
-		find . -maxdepth 1 -name '*.sln' -exec dotnet publish -c Release -p:TargetPlatform="${TARGETPLATFORM}" -r "${TARGETPLATFORM}" -p:PublishDir="${DEST_PATH}" --self-contained true \;
+		dotnet publish CameoMod.sln -c Release -p:TargetPlatform="${TARGETPLATFORM}" -r "${TARGETPLATFORM}" -p:PublishDir="${DEST_PATH}" -p:CameoDevLogging=false -p:CameoOfficialPackaging=true --self-contained true || exit 1
 		cd "${ORIG_PWD}" || exit 1
 	fi
+
+	# A stale or accidentally published development assembly or rules folder must fail packaging.
+	assert_no_dev_content "${DEST_PATH}"
 }
