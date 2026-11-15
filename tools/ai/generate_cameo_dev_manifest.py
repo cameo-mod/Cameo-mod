@@ -15,7 +15,7 @@ def generate(cameo_dir: Path) -> str:
     manifest = (root / "mod.yaml").read_text(encoding="utf-8").replace("\r\n", "\n")
     changes = (
         ("\t\t$cameo: cameo", "\t\t^EngineDir|mods/cameo: cameo"),
-        ("\nRules:\n", "\nRules:\n\tcameo|rules/dev/logging.yaml\n"),
+        ("\nSequences:\n", "\n\tcameo|rules/dev/logging.yaml\nSequences:\n"),
         ("Assemblies: OpenRA.Mods.Cameo.Unified.dll,", "Assemblies: OpenRA.Mods.Cameo.Dev.dll, OpenRA.Mods.Cameo.Unified.dll,"),
     )
     for old, new in changes:

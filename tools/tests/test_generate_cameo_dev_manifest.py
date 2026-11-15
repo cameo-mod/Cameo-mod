@@ -15,6 +15,7 @@ def make_release(tmp_path, include="ContentPacks/Core/content.yaml"):
         "FileSystem:\n\tSystemPackages:\n\t\t$cameo: cameo\n"
         f"Include: {include}\n"
         "Rules:\n\tcameo|rules/world.yaml\n"
+        "Sequences:\n\tcameo|sequences/misc.yaml\n"
         "Assemblies: OpenRA.Mods.Cameo.Unified.dll, OpenRA.Mods.CA.dll\n",
         encoding="utf-8",
     )
@@ -30,6 +31,7 @@ def test_includes_are_expanded_before_dev_mounts(tmp_path):
     assert "ContentPacks|Core/yaml/faction.yaml" in generated
     assert "^EngineDir|mods/cameo: cameo" in generated
     assert "cameo|rules/dev/logging.yaml" in generated
+    assert generated.index("cameo|rules/world.yaml") < generated.index("cameo|rules/dev/logging.yaml")
     assert "OpenRA.Mods.Cameo.Dev.dll" in generated
 
 
