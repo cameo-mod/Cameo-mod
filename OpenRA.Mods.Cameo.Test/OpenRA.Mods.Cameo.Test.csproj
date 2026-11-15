@@ -35,6 +35,8 @@
           Link="source/mods/Cameo.Dev/AiPlayerTelemetryDev.cs" CopyToOutputDirectory="Always" />
     <None Include="MissionBuildLineOracle.cs" Link="source/MissionBuildLineOracle.cs" CopyToOutputDirectory="Always" />
     <None Include="../mods/cameo/mod.yaml" Link="source/packaging/cameo-mod.yaml" CopyToOutputDirectory="Always" />
+    <None Include="../mods/cameo/rules/world.yaml" Link="source/packaging/world.yaml" CopyToOutputDirectory="Always" />
+    <None Include="../mods/cameo/rules/dev/logging.yaml" Link="source/packaging/dev-logging.yaml" CopyToOutputDirectory="Always" />
     <None Include="../Directory.Build.targets" Link="source/packaging/Directory.Build.targets" CopyToOutputDirectory="Always" />
     <None Include="../CameoDev.proj" Link="source/packaging/CameoDev.proj" CopyToOutputDirectory="Always" />
     <None Include="../packaging/functions.sh" Link="source/packaging/functions.sh" CopyToOutputDirectory="Always" />

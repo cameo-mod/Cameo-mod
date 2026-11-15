@@ -38,5 +38,19 @@ namespace OpenRA.Mods.Cameo.Test
 			var entry = Source("packaging/CameoDev.proj");
 			Assert.That(entry, Does.Contain("The DEV entry point requires CameoDevLogging=true."));
 		}
+
+		[Test]
+		public void SeparateDevelopmentRulesMountTheRecordingTraits()
+		{
+			var release = Source("packaging/world.yaml");
+			var dev = Source("packaging/dev-logging.yaml");
+			foreach (var trait in new[] { "AiMemoryTelemetryDev", "AiPlayerTelemetryDev", "AiEconomyHealthCaptureDev",
+				"AiMatchLogWriterDev", "AiMissionLogWriterDev", "AiSituationLogWriterDev", "InsuranceTelemetryDev",
+				"AiEngagementLogWriterDev", "AiPlacementLogWriterDev" })
+			{
+				Assert.That(dev, Does.Contain("\t" + trait + ":"), trait);
+				Assert.That(release, Does.Not.Contain("\t" + trait + ":"), trait);
+			}
+		}
 	}
 }

@@ -70,7 +70,7 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		sealed class Good { public int Value { get; init; } }
-		sealed class BadField { public int Value; }
+		sealed class BadField { public int Value = 1; }
 		sealed class BadSetter { public int Value { get; set; } }
 		sealed class BadPlayer { public Player Value { get; init; } }
 		sealed class BadArray { public int[] Value { get; init; } }
