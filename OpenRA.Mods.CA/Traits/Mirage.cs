@@ -244,7 +244,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		void INotifySupportPower.Charged(Actor self) { }
 
-		void INotifySupportPower.Activated(Actor self)
+		void INotifySupportPower.Activated(Actor self, string orderName)
 		{
 			if (Info.RevealOn.HasFlag(MirageRevealType.SupportPower))
 				Reveal();

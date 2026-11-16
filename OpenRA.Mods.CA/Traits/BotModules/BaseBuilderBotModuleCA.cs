@@ -2051,7 +2051,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			var defenseCenterNode = data.NodeWithKeyOrDefault("DefenseCenter");
 			if (defenseCenterNode != null)
-				DefenseCenter = FieldLoader.GetValue<CPos>("DefenseCenter", defenseCenterNode.Value.Value);
+				DefenseCenter = FieldLoader.GetValue<CPos?>("DefenseCenter", defenseCenterNode.Value.Value);
 
 			var openingBarracksPriorityCompletedNode = data.NodeWithKeyOrDefault("OpeningBarracksPriorityCompleted");
 			if (openingBarracksPriorityCompletedNode != null)

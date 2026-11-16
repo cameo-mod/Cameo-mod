@@ -2033,7 +2033,7 @@ namespace OpenRA.Mods.Common.Traits
 			var initial = data.NodeWithKeyOrDefault("InitialBaseCenter");
 			if (initial != null) initialBaseCenter = FieldLoader.GetValue<CPos>("InitialBaseCenter", initial.Value.Value);
 			var defense = data.NodeWithKeyOrDefault("DefenseCenter");
-			if (defense != null) DefenseCenter = FieldLoader.GetValue<CPos>("DefenseCenter", defense.Value.Value);
+			if (defense != null) DefenseCenter = FieldLoader.GetValue<CPos?>("DefenseCenter", defense.Value.Value);
 		}
 
 		void SellUselessRefinery(IBot bot)
