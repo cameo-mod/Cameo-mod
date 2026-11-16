@@ -136,7 +136,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (decision == BaseRepairDecision.Order)
 			{
 				RepairOrders++;
-				AIUtils.BotDebug($"{player} noticed damage {self} {e.PreviousDamageState}->{e.DamageState}, repairing.");
+				OpenRA.Mods.CA.AIUtils.BotDebug($"{player} noticed damage {self} {e.PreviousDamageState}->{e.DamageState}, repairing.");
 			}
 			else if ((decision == BaseRepairDecision.AlreadyRepairing || decision == BaseRepairDecision.OrderInFlight)
 				&& !rb.RepairActive && e.PreviousDamageState < e.DamageState)
@@ -156,7 +156,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				bot.QueueOrder(new Order("RepairBuilding", player.PlayerActor, Target.FromActor(building), false));
 
 				// Plan step 4 telemetry: a batch shows every repair decision (BotDebug alone only reaches chat).
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): RV1 repair {building.Info.Name} {building.ActorID} at {state} ({source}) tick {tick}");
+#endif
 			}
 
 			return decision;

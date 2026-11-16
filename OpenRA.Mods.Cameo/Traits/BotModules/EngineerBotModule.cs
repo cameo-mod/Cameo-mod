@@ -556,7 +556,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						// unattributed and the next module's order counted crossed (GC-1 StandDownWalkers).
 						bot.QueueOrder(new Order("Stop", a, false));
 						leases?.Release(a, LeaseOwner);
+#if CAMEO_DEV_LOGGING
 						Log.Write("debug", $"AI ({player.ClientIndex}): ENG stuck {a.Info.Name} {a.ActorID} on {job.Job}, stopped and released (tick {tick})");
+#endif
 						break;
 					default:
 						BotUnitLeases.TryClaim(leases, a, LeaseOwner, PurposeOf(job.Job), Info.LeaseTicks);
@@ -598,7 +600,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				job.SamplePos = a.CenterPosition;
 				Reroutes++;
 				BotUnitLeases.TryClaim(leases, a, LeaseOwner, BotLeasePurpose.Capture, Info.LeaseTicks);
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): ENG reroute {a.Info.Name} {a.ActorID} -> {target.Info.Name} {target.ActorID}: {remaining} exposed cells ahead > {Info.MaxExposedRouteCells} (tick {tick}; reroutes {Reroutes}, pullbacks {Pullbacks})");
+#endif
 				return false;
 			}
 
@@ -607,7 +611,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			leases?.Release(a, LeaseOwner);
 			EndMission(a, job, EngineerCheck.Working, true);
 			Pullbacks++;
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI ({player.ClientIndex}): ENG pullback {a.Info.Name} {a.ActorID} from {target.Info.Name} {target.ActorID}: {remaining} exposed cells ahead, no safe route (tick {tick}; reroutes {Reroutes}, pullbacks {Pullbacks})");
+#endif
 			return true;
 		}
 
@@ -767,7 +773,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				default: BuildingRepairOrders++; break;
 			}
 
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI ({player.ClientIndex}): ENG {job} {engineer.Info.Name} {engineer.ActorID} -> {target.Info.Name} {target.ActorID} (tick {tick}; captures {CaptureOrders}, bridges {BridgeOrders}, repairs {BuildingRepairOrders}, stuck {StuckStops}, skipped-claimed {SkippedClaimed})");
+#endif
 			return true;
 		}
 
@@ -814,7 +822,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					// Order before release (same shape as the Stuck path above).
 					bot.QueueOrder(new Order("Stop", a, false));
 					leases?.Release(a, LeaseOwner);
+#if CAMEO_DEV_LOGGING
 					Log.Write("debug", $"AI ({player.ClientIndex}): ENG capture superseded {a.Info.Name} {a.ActorID} -> {job.Target.Info.Name} {job.Target.ActorID} (tick {world.WorldTick}; superseded {SupersededCaptures})");
+#endif
 				}
 
 				// The waiting escort plan is the same claim without a walking engineer — deny it too.
@@ -1020,7 +1030,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				StartMission(job, passengers[k], "Transport");
 			}
 
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI ({player.ClientIndex}): ENG transport run: {passengers.Count} engineer(s) -> {string.Join(", ", targets.Select(t => $"{t.Info.Name} {t.ActorID}"))} (tick {tick})");
+#endif
 
 			// The remaining candidates list may skip engineers whose claim failed; the caller advances by the scanned count.
 			return candidates.IndexOf(passengers[^1]) + 1;
@@ -1043,7 +1055,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return false;
 
 			GuardedSkips++;
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI ({player.ClientIndex}): ENG stealth target {target.Info.Name} {target.ActorID} guarded by {defenders} > {Info.StealthMaxDefenders} (tick {world.WorldTick}; guarded {GuardedSkips})");
+#endif
 			return true;
 		}
 
@@ -1062,7 +1076,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (exposed > Info.MaxExposedRouteCells)
 			{
 				UnsafeRoutes++;
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): ENG route to {target.Info.Name} {target.ActorID} too exposed: {exposed} cells under fire > {Info.MaxExposedRouteCells} (tick {world.WorldTick}; unsafe {UnsafeRoutes})");
+#endif
 				return false;
 			}
 

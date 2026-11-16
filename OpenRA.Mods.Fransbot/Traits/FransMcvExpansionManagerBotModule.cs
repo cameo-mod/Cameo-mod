@@ -3279,9 +3279,10 @@ namespace OpenRA.Mods.Common.Traits
 			stage = ExpansionStage.WaitingForMcv;
 			repackTransformIssuedTick = world.WorldTick;
 			repackTransformRetries = 0;
+			var repackSlotCount = CountConstructionYardSlots();
 			FransBotLog.BotDebug(world,
 				"{0}: newest non-main non-SECURE Construction Yard {1} repacks as the reserve MCV because {2}. Protected SECURE anchors are never consumed; strict slot budget remains {3}/{4}.",
-				player, candidate, reason, CountConstructionYardSlots(), Info.MaximumConstructionYardSlots);
+				player, candidate, reason, repackSlotCount, Info.MaximumConstructionYardSlots);
 			bot.QueueOrder(new Order("DeployTransform", candidate, true));
 			return true;
 		}
@@ -3321,6 +3322,7 @@ namespace OpenRA.Mods.Common.Traits
 				var routineLandCandidateEvidence = landScanRan && perf.Land.ElapsedMs >= 10.0
 					? $" landCandidateEvidence=[{perf.Land.FormatRoutineLandCandidateEvidence()}]"
 					: string.Empty;
+#if CAMEO_DEV_LOGGING
 				OpenRA.Log.Write("debug",
 					$"[MCV OBJECTIVE PERF][WT {world.WorldTick}] mcv={mcv.ActorID}/{mcv.Info.Name}/{mobile.ToCell} " +
 					$"task={expansionTask.Id}/{expansionTask.Mode} stage={stage} scans={(landScanRan ? "Sea+Land" : "Sea")} " +
@@ -3330,6 +3332,7 @@ namespace OpenRA.Mods.Common.Traits
 					$"crossSeaLandExactDuplicates={perf.CrossSeaLandExactDuplicates} " +
 					$"duplicateResolvedDeployCells={perf.DuplicateResolvedDeployCells} elapsedMs={elapsedMs:0.00}" +
 					routineLandCandidateEvidence);
+#endif
 			}
 			catch
 			{
@@ -3355,6 +3358,7 @@ namespace OpenRA.Mods.Common.Traits
 				nextMcvRecoveryFailurePerfLogTick = world.WorldTick + 250;
 			try
 			{
+#if CAMEO_DEV_LOGGING
 				OpenRA.Log.Write("debug",
 					$"[MCV RECOVERY PERF][WT {world.WorldTick}] mcv={mcv.ActorID}/{mcv.Info.Name}/{mobile.ToCell} " +
 					$"task={expansionTask.Id}/{expansionTask.Mode} stage={stage} trigger={perf.Trigger} " +
@@ -3377,6 +3381,7 @@ namespace OpenRA.Mods.Common.Traits
 					$"routeRiskChecks={perf.RouteRiskChecks} routeRiskRejects={perf.RouteRiskRejects} shorelineCandidates=0 " +
 					$"selectedDeploy={(selectedDeployCell.HasValue ? selectedDeployCell.Value.ToString() : "none")} " +
 					$"result={result} elapsedMs={elapsedMs:0.00}");
+#endif
 			}
 			catch
 			{
@@ -3422,6 +3427,7 @@ namespace OpenRA.Mods.Common.Traits
 				var activityLabel = activity == null
 					? "None"
 					: string.Join("/", activity.DebugLabelComponents());
+#if CAMEO_DEV_LOGGING
 				var queuedMoveActivities = activity?.ActivitiesImplementing<Move>().Count() ?? 0;
 				OpenRA.Log.Write("debug",
 					$"[MCV RECOVERY MOVE][WT {world.WorldTick}] mcv={mcv.ActorID}/{mcv.Info.Name}/{currentCell} " +
@@ -3436,6 +3442,7 @@ namespace OpenRA.Mods.Common.Traits
 					$"nextRecoveryCheck={emergencyRecoveryNextCheckTick} " +
 					$"recheckDueIn={Math.Max(0, emergencyRecoveryNextCheckTick - world.WorldTick)} " +
 					$"deployIssuedTick={emergencyRecoveryDeployIssuedTick}");
+#endif
 			}
 			catch
 			{
@@ -12939,6 +12946,7 @@ namespace OpenRA.Mods.Common.Traits
 				var workState = perf.WorkRecreated
 					? perf.WorkPresent ? "Recreated" : "Created"
 					: perf.WorkPresent ? "Reused" : "NotChecked";
+#if CAMEO_DEV_LOGGING
 				var land = perf.LandRoutePerf;
 				var seaLanding = perf.SeaLandingPerf;
 				var targetCount = land?.LastNativeTargetCount ?? 0;
@@ -12979,6 +12987,7 @@ namespace OpenRA.Mods.Common.Traits
 					$"seaLandingNativeMs={(seaLanding?.NativePathSearchElapsedMs ?? 0):0.00} " +
 					$"phasesThisTick={perf.PhasesThisTick} phaseMs={perf.PhaseElapsedMs:0.00} " +
 					$"result={(perf.PhaseDeferred ? "Deferred" : pending ? "Pending" : result.ToString())} elapsedMs={ElapsedMilliseconds(perf.Started):0.00}");
+#endif
 			}
 			catch
 			{

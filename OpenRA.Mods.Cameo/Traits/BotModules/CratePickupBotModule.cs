@@ -139,7 +139,7 @@ namespace OpenRA.Mods.Cameo.Traits
 					continue;
 
 				var cell = world.Map.CellContaining(target.CenterPosition);
-				AIUtils.BotDebug($"{bot.Player}: Ordering {crateCollector} to {cell} for Crate pick up.");
+				OpenRA.Mods.CA.AIUtils.BotDebug($"{bot.Player}: Ordering {crateCollector} to {cell} for Crate pick up.");
 				bot.QueueOrder(new Order("Move", crateCollector, target, true));
 				reservations[crate] = (crateCollector, world.WorldTick);
 			}

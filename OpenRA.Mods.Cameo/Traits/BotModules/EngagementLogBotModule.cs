@@ -897,8 +897,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void WritePosture(int tick)
 		{
-			if (world.WorldActor.TraitOrDefault<OpenRA.Mods.CA.Traits.CameoLogHub>()?.Sink.Enabled != true)
-				return;
+			var logging = world.WorldActor.TraitOrDefault<OpenRA.Mods.CA.Traits.CameoLogHub>()?.Sink.Enabled == true;
 
 			if (!ArmyCentroid(out var ax, out var ay, out var units, out var value))
 				return;
@@ -934,7 +933,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					enemyArmy = d;
 			}
 
-			// AI_ARCHITECTURE 12.29: the staging point, read-only via IBotArmyStaging (null when no provider / no plan yet).
+			// The SeenScan above feeds decision state (enemyBases, Close, InMatchAdapt) and runs with the sink off; only the posture record below is gated.
+				if (!logging)
+					return;
+
+				// AI_ARCHITECTURE 12.29: the staging point, read-only via IBotArmyStaging (null when no provider / no plan yet).
 			string stagingCell = null;
 			var stagingDist = -1;
 			var staging = player.PlayerActor.TraitsImplementing<IBotArmyStaging>().FirstOrDefault();

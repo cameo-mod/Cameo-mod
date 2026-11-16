@@ -200,9 +200,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				activeAssignments[repairer] = target;
 				assignedTargets.Add(target);
 
+#if CAMEO_DEV_LOGGING
 				var line = $"AI ({player.ClientIndex}): Ordered {repairer} to repair bridge hut {target}";
 				Log.Write("debug", line);
-				AIUtils.BotDebug(line);
+				OpenRA.Mods.CA.AIUtils.BotDebug(line);
+#endif
 			}
 		}
 

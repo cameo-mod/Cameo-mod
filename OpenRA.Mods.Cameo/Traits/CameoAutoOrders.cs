@@ -70,7 +70,9 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			world = w;
 			armed = true;
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"CAMEO DEV AUTO-ORDERS ACTIVE - {orders.Count} timed order(s) scheduled");
+#endif
 		}
 
 		void ITick.Tick(Actor self)
@@ -84,7 +86,9 @@ namespace OpenRA.Mods.Cameo.Traits
 					continue;
 
 				world.IssueOrder(new Order(orders[i].OrderString, world.LocalPlayer.PlayerActor, false));
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"CAMEO DEV AUTO-ORDERS issued '{orders[i].OrderString}' at tick {world.WorldTick}");
+#endif
 				orders.RemoveAt(i);
 			}
 

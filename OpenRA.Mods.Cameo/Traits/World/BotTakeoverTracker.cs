@@ -191,15 +191,23 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (!enabled || !IsTakeoverCandidate(p))
 			{
 				if (CameoDevArgs.IsEnabled("Cameo.DevAutoOrders"))
+				{
+#if CAMEO_DEV_LOGGING
 					Log.Write("debug", $"bot_takeover: disconnect of {p.InternalName} client {p.ClientIndex} skipped " +
 						$"(enabled={enabled}, candidate={IsTakeoverCandidate(p)})");
+#endif
+				}
 				return;
 			}
 
 			var decision = Decide(CountTeamsAlive(Seats()), HasUndefeatedTeammate(Seats(), SeatOf(p)),
 				TakeoverTrigger.Disconnect, info.LastPlayerDisconnect);
 			if (CameoDevArgs.IsEnabled("Cameo.DevAutoOrders"))
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"bot_takeover: disconnect of {p.InternalName} client {p.ClientIndex} -> {decision}");
+#endif
+			}
 			ApplyDecision(p, decision, TakeoverTrigger.Disconnect);
 		}
 
@@ -454,7 +462,9 @@ namespace OpenRA.Mods.Cameo.Traits
 				return;
 			}
 
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"bot_takeover: activated '{info.BotType}' bot for {p.InternalName} on controller client {Controller}");
+#endif
 			logic.Activate(p);
 		}
 

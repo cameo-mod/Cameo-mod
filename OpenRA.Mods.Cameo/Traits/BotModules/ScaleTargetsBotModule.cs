@@ -226,6 +226,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			resolved = true;
 
+#if CAMEO_DEV_LOGGING
 			// One debug.log line: how many of the hand-written BuildingLimits entries the tech / superweapon categories take over.
 			var limits = playerActor.TraitsImplementing<BaseBuilderBotModuleCA>().FirstEnabledTraitOrDefault()?.Info.BuildingLimits;
 			if (limits != null)
@@ -234,6 +235,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var tech = limits.Keys.Count(k => !superweaponNames.Contains(k) && IsTech(k));
 				Log.Write("debug", $"AI ({player.ClientIndex}): ST BuildingLimits entries taken over by a category: tech {tech}, superweapon {superweapons} of {limits.Count}");
 			}
+#endif
 		}
 
 		/// <summary>The tier index from the active BotLimits (its condition, `<tier>bot`), else the owner's bot type. -1 = unranked.</summary>

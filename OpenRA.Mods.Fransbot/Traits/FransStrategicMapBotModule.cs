@@ -2432,7 +2432,7 @@ namespace OpenRA.Mods.Common.Traits
 			var frontlineSectors = sectorMetrics.Count(m => m.IsFrontlineSector);
 			var localProductionPressureSectors = sectorMetrics.Count(m => m.NeedsLocalProductionCapacity);
 
-			AIUtils.BotDebug(
+			OpenRA.Mods.CA.AIUtils.BotDebug(
 				"{0}: StrategicMap [{1}] terrain-v{2}: known {3}/{4}, ground {5}, MCV {6}, naval {7}, choke {8} ({9} articulation), beachheads {10}, high-value resource sectors {11}, contested resource sectors {12}, remembered enemy structures {13}, mine/gmine {14}.",
 				player,
 				KnowledgeMode,
@@ -2450,7 +2450,7 @@ namespace OpenRA.Mods.Common.Traits
 				knownEnemyStructures.Length,
 				knownResourceCreators.Length);
 
-			AIUtils.BotDebug(
+			OpenRA.Mods.CA.AIUtils.BotDebug(
 				"{0}: StrategicMap objective/frontline: remembered objectives {1} across {2} sectors, frontline sectors {3}, local production-pressure sectors {4}.",
 				player,
 				knownStrategicObjectives.Length,
@@ -2458,7 +2458,7 @@ namespace OpenRA.Mods.Common.Traits
 				frontlineSectors,
 				localProductionPressureSectors);
 
-			AIUtils.BotDebug(
+			OpenRA.Mods.CA.AIUtils.BotDebug(
 				"{0}: StrategicMap global production pressure: PROC {1}, producers total {2} (WEAP {3}, infantry {4}, HPAD {5}, AFLD {6}, naval {7}), suggested minimum {8}, deficit {9}, pressure {10}%, needs capacity {11}.",
 				player,
 				productionPressure.RefineryCount,
@@ -2476,7 +2476,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (primaryBaseCell.HasValue)
 			{
 				foreach (var priority in GetStrategicPrioritySectors(3))
-					AIUtils.BotDebug(
+					OpenRA.Mods.CA.AIUtils.BotDebug(
 						"{0}: StrategicMap priority sector {1} at {2}: score {3}, resource {4}, objective {5}, frontline {6}, threat {7}, enemy-control {8}, enemy objectives {9}, neutral objectives {10}, staging {11}.",
 						player,
 						priority.SectorId,

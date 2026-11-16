@@ -297,7 +297,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(partial, Does.Contain("IsFresh(World.WorldTick)"));
 
 			// F1: both record entry points return before measuring anything while diagnostics are off.
-			Assert.That(partial, Does.Contain("bool AggressionEvidenceWanted => Info.StalemateDiagnosticsEnabled;"));
+			Assert.That(partial, Does.Contain("bool AggressionEvidenceWanted => Info.StalemateDiagnosticsEnabled && DiagnosticSinkEnabled;"));
 			foreach (var entry in new[] { "internal void AggressionRecordEvidence(", "internal void AggressionRecordFightEvidence(" })
 			{
 				var body = Section(partial, entry, "\n\t\t}\n");

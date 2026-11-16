@@ -37,9 +37,13 @@ namespace OpenRA.Mods.Cameo.Traits
 			var takeoverSeat = tracker != null && tracker.IsTakenOver(owner);
 			var subjectClient = orderManager.LobbyInfo.ClientWithIndex(owner.ClientIndex);
 			if (!takeoverSeat && subjectClient == null)
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"Tick {world.WorldTick}: " +
 					$"Order sent to {owner.ResolvedPlayerName}: " +
 					$"resolved ClientIndex `{owner.ClientIndex}` doesn't exist");
+#endif
+			}
 
 			return OrderIsValid(
 				clientId,

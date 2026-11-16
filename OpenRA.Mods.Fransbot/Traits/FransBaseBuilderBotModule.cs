@@ -3678,10 +3678,11 @@ namespace OpenRA.Mods.Common.Traits
 						.FirstOrDefault();
 					if (candidate != null)
 					{
+						var ownedQueuedCount = baseBuilder.CountOwnedOrQueued(category.Types);
 						FransBotLog.BotDebug(world,
 							"{0}: {1} capacity selects {2} category actor {3}; current combined count {4}/{5}, normalized capacity deficit; personality priority tiebreak {6}.",
 							player, fullSurplus ? "Surplus" : "Prosperous", category.Name, candidate.Name,
-							baseBuilder.CountOwnedOrQueued(category.Types), effectiveTarget, category.Priority);
+							ownedQueuedCount, effectiveTarget, category.Priority);
 						return candidate;
 					}
 				}

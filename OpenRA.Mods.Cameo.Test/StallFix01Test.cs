@@ -790,6 +790,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 		// ---- R3: the forced Site's distance from the base rides the telemetry line (record only) ----
 
+#if CAMEO_DEV_LOGGING
 		[Test]
 		public void R3TheForcedSiteLineCarriesItsChebyshevAndSquaredDistanceFromTheBase()
 		{
@@ -799,7 +800,9 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(line, Does.Contain("base distance 37 cells (sq 1810) from 33,40"));
 			Assert.That(line, Does.EndWith("at tick 41234"));
 		}
+#endif
 
+#if CAMEO_DEV_LOGGING
 		[Test]
 		public void R3AnExhaustedLineCarriesTheChainAndTheGateNotADistance()
 		{
@@ -809,6 +812,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(RefineryFallbackScan.ForcedLine(2, "x", 1, 1500, 1500, 1, RefineryFallbackScan.Verdict.Exhausted, null, null, 1, 1, 1, false, 1),
 				Does.Contain("cancel gate not satisfied"));
 		}
+#endif
 
 		[TestCase(33, 40, 70, 61, 37, 1810L)]
 		[TestCase(70, 61, 33, 40, 37, 1810L)]

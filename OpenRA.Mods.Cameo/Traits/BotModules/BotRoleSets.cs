@@ -21,6 +21,12 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits.BotModules
 {
+	/// <summary>Release-off switch for the bot-roles.log diagnostic. Only a dev build may set it; release never does.</summary>
+	public static class BotRoleLog
+	{
+		public static bool Enabled;
+	}
+
 	[Desc("What this actor is FOR, as far as the bots are concerned (AI_ARCHITECTURE.md §2.8).",
 		"Declared on the actor in its own ContentPack, so that no central ai.yaml list has to name it.",
 		"BotRoleSets turns roles into the bot modules' actor lists.")]
@@ -112,7 +118,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			var members = ComputeMembers(rules, info);
 
-			Log.AddChannel("bot-roles", "bot-roles.log");
+			if (BotRoleLog.Enabled)
+				Log.AddChannel("bot-roles", "bot-roles.log");
 			foreach (var (role, targets) in Targets)
 			{
 				var roleMembers = members.GetValueOrDefault(role) ?? [];
@@ -144,7 +151,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						var added = roleMembers.Where(m => !current.Contains(m)).OrderBy(m => m, StringComparer.Ordinal).ToList();
 						var writtenOnly = current.Where(c => !roleMembers.Contains(c)).OrderBy(c => c, StringComparer.Ordinal).ToList();
 						var applied = Apply.Contains(role);
-						Log.Write("bot-roles",
+						if (BotRoleLog.Enabled)
+							Log.Write("bot-roles",
 							$"{info.Name} {target} role `{role}`: {roleMembers.Count} members, {current.Count} written; " +
 							$"{(applied ? "ADDED" : "would add")} {added.Count}: {string.Join(", ", added)}; " +
 							$"written but not in role {writtenOnly.Count}: {string.Join(", ", writtenOnly)}");

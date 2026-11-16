@@ -178,7 +178,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return false;
 
 			if (mcvEnemyHalfLogged.Add(f.Index))
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): MS-6 field {f.Index} at {f.Center} is nearer to a suspected enemy start than to any own base ({ctx.EnemyStarts.Count} starts, {ctx.OwnBases.Count} own bases), refused at tick {ctx.Now}");
+#endif
+			}
 
 			return true;
 		}
@@ -264,7 +268,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				queued = true;
 			}
 
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI ({player.ClientIndex}): MS-1 MCV {mcv.ActorID} routed around enemy zones with {waypoints.Count} waypoints, last {waypoints[^1]}, at tick {world.WorldTick}");
+#endif
 		}
 
 		/// <summary>
@@ -278,7 +284,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			McvSafeRoute(ctx, mcv, baseCenter.Value, false, out var route);
 			McvSafeIssue(mcv, -1, route);
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI ({player.ClientIndex}): MS-2 MCV {mcv.Info.Name} {mcv.ActorID} at {mcv.Location}: no safe far field, deploys at the base {baseCenter.Value} at tick {world.WorldTick}");
+#endif
 			return baseCenter;
 		}
 
@@ -352,7 +360,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					parkedUntil[track.Field] = now + Info.ParkTicks;
 
 				inflightMcvSites.Remove(mcv.ActorID);
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): MS-3 MCV {mcv.ActorID} at {mcv.Location} aborted its trip (zone/threat {threat}), field {track.Field} parked, at tick {now}");
+#endif
 			}
 
 			foreach (var id in mcvTracks.Keys.ToList())
@@ -389,7 +399,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (!queued)
 				bot.QueueOrder(new Order("Move", mcv, OpenRA.Traits.Target.FromCell(world, baseCenter.Value), false));
 
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI ({player.ClientIndex}): MS-5 MCV {mcv.ActorID} at {mcv.Location} aborted: moves to the base {baseCenter.Value} ({route?.Count ?? 0} waypoints) at tick {now}");
+#endif
 			return true;
 		}
 
@@ -411,7 +423,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (track.Field >= 0)
 				parkedUntil[track.Field] = now + Info.ParkTicks;
 
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI ({player.ClientIndex}): MS-4 MCV lost near {track.LastCell} (field {track.Field}), loss zone and field park set, at tick {now}");
+#endif
 		}
 	}
 }

@@ -197,7 +197,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var scope = ownFaction.Length > 0 && enemyFaction.Length > 0 ? $"{ownFaction}__vs__{enemyFaction}" : ownFaction;
 			snapshot.Scope = scope;
 			snapshot.ArmedModules = ArmedModules();
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI {player.InternalName}: plan-bandit resolve diag: tick={world.WorldTick} players={world.Players.Count()} lobby={world.LobbyInfo?.Clients.Count ?? -1} me={world.LobbyInfo?.Clients.FirstOrDefault(c => c.Index == player.ClientIndex)?.Index ?? -1} enemy='{enemyFaction}'");
+#endif
 
 			LoadLearned();
 
@@ -208,7 +210,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				{
 					snapshot.PersonalityArm = arm;
 					snapshot.PersonalityPinned = true;
+#if CAMEO_DEV_LOGGING
 					Log.Write("debug", $"AI {player.InternalName}: plan-bandit personality arm '{arm}' (scope {scope})");
+#endif
 				}
 			}
 
@@ -218,7 +222,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (arm != null)
 				{
 					snapshot.PlanArm = arm;
+#if CAMEO_DEV_LOGGING
 					Log.Write("debug", $"AI {player.InternalName}: plan-bandit plan arm '{arm}' (scope {scope})");
+#endif
 				}
 			}
 		}
@@ -236,7 +242,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			using (var stream = fs.Open(learnedPath))
 				learned = PlanBanditLearned.Parse(MiniYaml.FromStream(stream, Info.LearnedFile));
 
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI {player.InternalName}: plan-bandit learned: {learned.ScopeCount} scopes");
+#endif
 		}
 
 		string Choose(string bandit, string ownFaction, string enemyFaction, string[] arms)

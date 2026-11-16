@@ -155,8 +155,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			Denied++;
+#if CAMEO_DEV_LOGGING
 			var holder = table.LeaseOf(actor, world.WorldTick);
 			Log.Write("debug", $"AI ({player.ClientIndex}): LC1 lease denied: {owner} wanted {actor.Info.Name} {actor.ActorID} for {purpose}; {holder?.Owner} holds it for {holder?.Purpose} since tick {holder?.AcquiredTick} (tick {world.WorldTick})");
+#endif
 			return false;
 		}
 
@@ -182,7 +184,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			Preempts++;
 			if (previous != null && previous != owner)
 			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): LC1 lease preempted: {owner} took {actor.Info.Name} {actor.ActorID} from {previous} for {purpose} (tick {world.WorldTick})");
+#endif
 				foreach (var lost in player.PlayerActor.TraitsImplementing<IBotUnitLeaseLost>())
 					if (lost.GetType().Name == previous)
 						lost.LeaseLost(actor, owner, purpose);
@@ -214,7 +218,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			Gone += gone;
 			var summary = (table.Count, Claims, Denied, Expired, Gone);
 			if (summary != lastSummary)
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): LC1 leases: {table.Count} held, claims {Claims}, denied {Denied}, expired {Expired}, gone {Gone} at tick {world.WorldTick}");
+#endif
+			}
 
 			lastSummary = summary;
 		}

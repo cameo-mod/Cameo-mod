@@ -602,6 +602,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return dx * dx + dy * dy;
 		}
 
+#if CAMEO_DEV_LOGGING
 		/// <summary>
 		/// STALL-FIX-01: the forced-poll telemetry line (record only; no decision reads any part of it). A Site
 		/// carries its distance from the base reference in cells (R3), an Exhausted its chain position and
@@ -621,6 +622,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			return $"AI ({playerIndex}): STALL-FIX-01 refinery fallback scan {item} on producer {producerId} forced after {deferredTicks} deferred ticks (bound {bound}, force #{forcedPolls}): {verdict}{where}, work {work}, epochs {epochs}, exhausted chain {exhaustedChain}, cancel gate {(confirmed ? "satisfied" : "not satisfied")} at tick {now}";
 		}
+#endif
 
 		/// <summary>
 		/// STALL-FIX-01: true while the scan sits inside the epoch wait of a CONCLUSIVE verdict it already

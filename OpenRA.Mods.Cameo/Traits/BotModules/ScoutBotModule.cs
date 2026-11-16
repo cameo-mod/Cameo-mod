@@ -286,7 +286,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					scouts.Add(candidate);
 					idlePool.Remove(candidate);
 					claimedAny = true;
-					AIUtils.BotDebug("AI ({0}): claimed scout {1}", player.ClientIndex, actor);
+					OpenRA.Mods.CA.AIUtils.BotDebug("AI ({0}): claimed scout {1}", player.ClientIndex, actor);
 				}
 			}
 

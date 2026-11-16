@@ -121,6 +121,20 @@ namespace OpenRA.Mods.Cameo
 	// build from rewriting a career created by a newer build that it cannot understand.
 	public sealed class CameoCareerRepository : ICameoCareerAppender
 	{
+		// Repeating error lines (the save retry loop and each Statistics-window open) are written once per process.
+		static readonly System.Collections.Generic.HashSet<string> LoggedOnce = new();
+
+		static void LogOnce(string key, string message)
+		{
+			lock (LoggedOnce)
+			{
+				if (!LoggedOnce.Add(key))
+					return;
+			}
+
+			Log.Write("debug", message);
+		}
+
 		public const int CurrentSchemaVersion = 2;
 		public const string CareerFileName = "cameo-career.yaml";
 		public const string LegacyFileName = "cameo-statistics.yaml";
@@ -161,7 +175,7 @@ namespace OpenRA.Mods.Cameo
 			}
 			catch (Exception primaryError)
 			{
-				Log.Write("debug", $"Unable to load Cameo career '{filePath}': {primaryError}");
+				LogOnce("R14", $"Unable to load Cameo career '{filePath}': {primaryError}");
 				if (File.Exists(backupPath))
 				{
 					try
@@ -170,7 +184,7 @@ namespace OpenRA.Mods.Cameo
 					}
 					catch (Exception backupError)
 					{
-						Log.Write("debug", $"Unable to load Cameo career backup '{backupPath}': {backupError}");
+						LogOnce("R15", $"Unable to load Cameo career backup '{backupPath}': {backupError}");
 						return new CameoCareerLoadResult(NewProfile(), CameoCareerLoadStatus.Invalid,
 							$"Primary: {primaryError.Message}; Backup: {backupError.Message}");
 					}
@@ -184,7 +198,7 @@ namespace OpenRA.Mods.Cameo
 		{
 			if (!TryEnterLock(out var mutex))
 			{
-				Log.Write("debug", $"Timed out waiting to import Cameo career '{filePath}'.");
+				LogOnce("R16", $"Timed out waiting to import Cameo career '{filePath}'.");
 				return Load();
 			}
 
@@ -221,7 +235,7 @@ namespace OpenRA.Mods.Cameo
 			}
 			catch (Exception e)
 			{
-				Log.Write("debug", $"Unable to import legacy Cameo statistics '{legacyPath}': {e}");
+				LogOnce("R18", $"Unable to import legacy Cameo statistics '{legacyPath}': {e}");
 				return loaded;
 			}
 		}
@@ -233,7 +247,7 @@ namespace OpenRA.Mods.Cameo
 
 			if (!TryEnterLock(out var mutex))
 			{
-				Log.Write("debug", $"Timed out waiting to append match '{recordId}' to Cameo career '{filePath}'.");
+				LogOnce("R19", $"Timed out waiting to append match '{recordId}' to Cameo career '{filePath}'.");
 				return CameoCareerAppendResult.RetryableFailure;
 			}
 
@@ -271,7 +285,7 @@ namespace OpenRA.Mods.Cameo
 			}
 			catch (Exception e)
 			{
-				Log.Write("debug", $"Unable to append match '{recordId}' to Cameo career '{filePath}': {e}");
+				LogOnce("R21", $"Unable to append match '{recordId}' to Cameo career '{filePath}': {e}");
 				return CameoCareerAppendResult.RetryableFailure;
 			}
 		}
@@ -334,7 +348,7 @@ namespace OpenRA.Mods.Cameo
 			{
 				mutex?.Dispose();
 				mutex = null;
-				Log.Write("debug", $"Unable to acquire Cameo career lock '{mutexName}': {e}");
+				LogOnce("R22", $"Unable to acquire Cameo career lock '{mutexName}': {e}");
 				return false;
 			}
 
@@ -365,7 +379,7 @@ namespace OpenRA.Mods.Cameo
 
 			if (version > CurrentSchemaVersion)
 			{
-				Log.Write("debug", $"Cameo career '{path}' uses future schema {version}; opening read-only.");
+				LogOnce("R23", $"Cameo career '{path}' uses future schema {version}; opening read-only.");
 				return new CameoCareerLoadResult(new CameoCareerProfile { SchemaVersion = version },
 					CameoCareerLoadStatus.UnsupportedFutureVersion);
 			}

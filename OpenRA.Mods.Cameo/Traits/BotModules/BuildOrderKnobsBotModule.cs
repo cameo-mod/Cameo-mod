@@ -347,7 +347,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			using (var stream = fs.Open(learnedPath))
 				learned = BuildOrderLearned.Parse(MiniYaml.FromStream(stream, Info.LearnedFile));
 
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI {player.InternalName}: BO learned: {learned.ScopeCount} knob scopes, {learned.OpeningScopeCount} opening scopes");
+#endif
 		}
 
 		/// <summary>The preset x learned x jitter vector for a personality. The jitter draws are kept, so a personality switch only re-reads the preset.</summary>

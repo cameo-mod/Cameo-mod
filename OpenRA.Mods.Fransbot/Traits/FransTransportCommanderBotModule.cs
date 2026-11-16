@@ -1915,6 +1915,7 @@ namespace OpenRA.Mods.Common.Traits
 			nextTransportPlanPerfLogTick = world.WorldTick + 250;
 			try
 			{
+#if CAMEO_DEV_LOGGING
 				var passenger = mission.Passenger;
 				var target = mission.Target;
 				var selected = planningPass.SelectedTransport;
@@ -1935,6 +1936,7 @@ namespace OpenRA.Mods.Common.Traits
 					$"nativePathCostCallbackCalls={planningPass.NativePathCostCallbackCalls} logicalFirstSuccessPosition={planningPass.LogicalFirstSuccessPosition} " +
 					$"selectedTransport={selectedActor}/{selectedType} selectedPickup={selectedPickup} selectedDrop={selectedDrop} " +
 					$"result={(planningPass.Success ? "success" : "failure")} elapsedMs={elapsedMs:0.00}");
+#endif
 			}
 			catch
 			{

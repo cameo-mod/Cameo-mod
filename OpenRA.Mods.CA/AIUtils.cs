@@ -111,6 +111,7 @@ namespace OpenRA.Mods.CA
 			return GetInfoByCommonName(names, owner);
 		}
 
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
 		public static void BotDebug(string s, params object[] args)
 		{
 			if (Game.Settings.Debug.BotDebug)

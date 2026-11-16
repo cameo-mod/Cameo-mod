@@ -1879,20 +1879,32 @@ namespace OpenRA.Mods.CA.Traits
 		void TraceLowPowerOverride(ActorInfo power)
 		{
 			if (EconTraceDue("lowpower"))
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): ECON-TRACE lowpower-override {power.Name} {EconTraceState()}");
+#endif
+			}
 		}
 
 		void TraceThresholdOverride(string outcome, ActorInfo pick)
 		{
 			if (EconTraceDue("threshold-" + outcome))
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): ECON-TRACE threshold-override {outcome} {pick?.Name ?? "-"} {EconTraceState()}");
+#endif
+			}
 		}
 
 		// PUSH-1: the conditioned overflow rung's outcomes — armed/declined/picked, same bounded writer.
 		void TraceOverflow(string outcome, ActorInfo pick)
 		{
 			if (EconTraceDue("overflow-" + outcome))
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): ECON-TRACE overflow {outcome} {pick?.Name ?? "-"} {EconTraceState()}");
+#endif
+			}
 		}
 
 		// The bank is over the threshold yet an earlier priority took the queue: name the pre-emptor.
@@ -1903,7 +1915,11 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			if (EconTraceDue("shadow-" + item.Name))
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): ECON-TRACE threshold-shadowed-by {item.Name} {EconTraceState()}");
+#endif
+			}
 		}
 
 		ActorInfo ChooseBuildingToBuild(ProductionQueue queue)
@@ -2709,7 +2725,9 @@ namespace OpenRA.Mods.CA.Traits
 							// for that owner instead of holding the set hostage until UntilTick.
 							if (BaseBuilderQueueEvalCA.CommitRefineryClaimOrPark(law, c, placed.Location, demand))
 							{
+#if CAMEO_DEV_LOGGING
 								Log.Write("debug", $"AI ({player.ClientIndex}): REF-1 refinery {actorType} at {placed.Location.Value} claims anchor {c.Anchor} field {c.FieldId} tier {c.Tier} gap {placed.Gap} at tick {world.WorldTick}");
+#endif
 								refineryClaimed = true;
 								if (requestRef != null)
 									baseBuilder.RequestedRefineries.Remove(requestRef);
@@ -2727,7 +2745,9 @@ namespace OpenRA.Mods.CA.Traits
 						if (fallback == RefineryFallbackOutcome.Site)
 						{
 							law.RefinerySiteCommitted(fallbackSite.Value);
+#if CAMEO_DEV_LOGGING
 							Log.Write("debug", $"AI ({player.ClientIndex}): REF-2 P1a refinery {actorType} at widened site {fallbackSite.Value} at tick {world.WorldTick}");
+#endif
 							refineryClaimed = true;
 							if (requestRef != null)
 								baseBuilder.RequestedRefineries.Remove(requestRef);
@@ -2770,7 +2790,9 @@ namespace OpenRA.Mods.CA.Traits
 							0, claimer.ExpansionTargetClaimRadius);
 						if (claim.Location != null)
 						{
+#if CAMEO_DEV_LOGGING
 							Log.Write("debug", $"AI ({player.ClientIndex}): EX-2 refinery {actorType} at {claim.Location.Value} claims field {field} at tick {world.WorldTick}");
+#endif
 							refineryClaimed = true;
 							return claim;
 						}
@@ -2870,7 +2892,9 @@ namespace OpenRA.Mods.CA.Traits
 							baseBuilder.Info.MinBaseRadius, baseBuilder.Info.BaseCrawlRadius, bypassAdvisor: crawlLaw != null);
 						if (toward.Location != null)
 						{
+#if CAMEO_DEV_LOGGING
 							Log.Write("debug", $"AI ({player.ClientIndex}): EX-1 BaseCrawl {actorType} at {toward.Location.Value} toward field {crawlAim.Value} at tick {world.WorldTick}");
+#endif
 							return toward;
 						}
 					}

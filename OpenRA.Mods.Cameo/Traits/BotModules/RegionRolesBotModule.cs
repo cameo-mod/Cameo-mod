@@ -580,7 +580,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					+ $"{s.Connections} conn, {s.SealableDoors} doors w{s.DoorWidthTotal}, {s.OwnBuildings}b{cap}"
 					+ (s.BordersEnemy ? ", enemy adj" : "") + ")";
 			});
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI ({player.ClientIndex}): REGION ROLES {held.Count} of {regions.Count} held | " + string.Join("  ", rows));
+#endif
 		}
 	}
 }

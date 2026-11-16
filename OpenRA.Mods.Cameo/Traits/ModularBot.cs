@@ -195,7 +195,9 @@ namespace OpenRA.Mods.Cameo.Traits
 				orders.RemoveFirst();
 				DroppedOrders++;
 				trackedOrders.NotifyTerminal(dropped.Order, BotOrderOutcome.RefusedLocally);
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI {player.InternalName}: ORDERGATE DROPPED {dropped.Issuer ?? "?"} queued {dropped.Order.OrderString} (queue full {info.MaxQueuedOrders}; tick {world.WorldTick})");
+#endif
 			}
 
 			orders.AddLast(item);
@@ -269,7 +271,11 @@ namespace OpenRA.Mods.Cameo.Traits
 			var ri = registry.Info;
 			var (verdict, first) = gate.Judge(issuer, holder, ri.EnforceAtOrderGate, emergency, ri.EmergencyModules);
 			if (first)
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI {player.InternalName}: ORDERGATE {verdict.ToString().ToUpperInvariant()} {issuer ?? "?"} ordered {unit.Info.Name} {unit.ActorID} ({order.OrderString}) held by {holder} (tick {world.WorldTick}; first of this pair)");
+#endif
+			}
 
 			if (verdict == BotModules.BotOrderVerdict.Refuse)
 				return false;
@@ -279,7 +285,11 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			var earlier = gate.NoteIssued(unit, issuer, world.WorldTick, ri.CrossedOrderWindowTicks, holder);
 			if (earlier != null && gate.CrossedPairs[(earlier, issuer)] == 1)
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI {player.InternalName}: ORDERGATE CROSSED {earlier} then {issuer} ordered {unit.Info.Name} {unit.ActorID} within {ri.CrossedOrderWindowTicks} ticks (tick {world.WorldTick}; first of this pair)");
+#endif
+			}
 
 			if (world.WorldTick - gatePruneTick > 500)
 			{
@@ -370,6 +380,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (moduleTiming.Count == 0)
 				return;
 
+#if CAMEO_DEV_LOGGING
 			var perModule = moduleTiming
 				.Select(kv => (Name: kv.Key.GetType().Name, Ticks: kv.Value.Ticks, Count: kv.Value.Count))
 				.OrderByDescending(m => m.Ticks)
@@ -385,6 +396,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				player.ClientIndex, calls, totalMs, top);
 			Log.Write("debug", line);
 			TextNotificationsManager.Debug(line);
+#endif
 
 			moduleTiming.Clear();
 		}

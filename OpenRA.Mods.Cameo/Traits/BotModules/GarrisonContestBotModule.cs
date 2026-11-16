@@ -378,9 +378,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(world, garrison.Location), false, groupedActors: claimed.ToArray()));
 				bot.QueueOrder(new Order("EnterGarrison", null, Target.FromActor(garrison), true, groupedActors: claimed.ToArray()));
 
+#if CAMEO_DEV_LOGGING
 				var line = $"AI ({player.ClientIndex}): GC-1 contest claim on {garrison.Info.Name} {garrison.ActorID} at {garrison.Location} - {claimed.Count} walkers leased, at tick {world.WorldTick}";
 				Log.Write("debug", line);
 				CAAIUtils.BotDebug(line);
+#endif
 				BotMissionLog.Write(new BotMissionRecord
 				{
 					Player = player,

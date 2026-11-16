@@ -54,7 +54,31 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void MissingControllerStillUsesResidentPersonalityRecorder()
+		public void FinishedPackageHasNoDevelopmentContent()
+			{
+				var root = Environment.GetEnvironmentVariable("CAMEO_FINISHED_PACKAGE");
+				if (string.IsNullOrWhiteSpace(root) || !Directory.Exists(root))
+					Assert.Inconclusive("Set CAMEO_FINISHED_PACKAGE to a finished package directory to run the package scan.");
+
+				foreach (var entry in Directory.EnumerateFileSystemEntries(root, "*", SearchOption.AllDirectories))
+				{
+					var name = Path.GetFileName(entry);
+					var relative = Path.GetRelativePath(root, entry).Replace('\\', '/');
+					Assert.That(name, Does.Not.StartWith("OpenRA.Mods.Cameo.Dev"), relative);
+					Assert.That(name, Is.Not.EqualTo("cameo-dev"), relative);
+					Assert.That(relative, Does.Not.Contain("rules/dev/"), relative);
+					Assert.That(name, Does.Not.Match(@"^cameo-ai-.*\.jsonl$"), relative);
+					if (name == "mod.yaml")
+					{
+						var text = File.ReadAllText(entry);
+						Assert.That(text, Does.Not.Contain("OpenRA.Mods.Cameo.Dev.dll"), relative);
+						Assert.That(text, Does.Not.Contain("rules/dev/"), relative);
+					}
+				}
+			}
+
+			[Test]
+			public void MissingControllerStillUsesResidentPersonalityRecorder()
 		{
 			var source = Source("mods/Cameo/Traits/BotModules/BotSituation.cs");
 			var start = source.IndexOf("string CurrentPersonality()", StringComparison.Ordinal);

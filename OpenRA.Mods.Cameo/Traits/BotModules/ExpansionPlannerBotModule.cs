@@ -964,11 +964,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				verdict = scan.PollForced(Info.RefineryFallbackTierMaxDist, now,
 					() => FallbackSnapshot(actorInfo, bi, producer, distanceToBaseIsImportant), out site);
 
+#if CAMEO_DEV_LOGGING
 				var forced = RefineryFallbackScan.ForcedLine(player.ClientIndex, item, producer.ActorID,
 					now - scan.ForceStartTick, Info.RefineryFallbackForceAfterTicks, scan.ForcedPolls, verdict, site,
 					baseCenter ?? producer.Location, scan.LastPollWork, scan.Epochs, scan.ExhaustedChain, scan.ExhaustedConfirmed, now);
 				Log.Write("debug", forced);
-				AIUtils.BotDebug(forced);
+				OpenRA.Mods.CA.AIUtils.BotDebug(forced);
+#endif
 			}
 			else
 				verdict = scan.Poll(budget, now,
@@ -1449,7 +1451,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return false;
 
 			var ok = anchorReservations.TryReserveAll(set, owner, tick, untilTick, a => AnchorTakenForOwner(a, tick, owner));
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI ({player.ClientIndex}): REPAIR-B3 reserve {set.Count} anchors for site {site} v{modelVersion}: {(ok ? "committed" : "refused")} at tick {tick}");
+#endif
 			return ok;
 		}
 
@@ -2411,7 +2415,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// want (td_gdi: the repair facility gating the MCV for ~10k ticks of the trace).
 				wantedMcvPrerequisite = MissingMcvPrerequisite();
 				if (wantedMcvPrerequisite != null)
+				{
+#if CAMEO_DEV_LOGGING
 					Log.Write("debug", $"AI ({player.ClientIndex}): REF-1 MCV due but not producible — wants prerequisite building {wantedMcvPrerequisite} at tick {world.WorldTick}");
+#endif
+				}
 				return;
 			}
 
@@ -2420,9 +2428,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			unitBuilder.RequestUnitProduction(bot, mcvType);
+#if CAMEO_DEV_LOGGING
 			var line = $"AI ({player.ClientIndex}): greedy MCV request {mcvType}: {active} active yards/MCVs, {queued} queued, cash {resources.GetCashAndResources()}, at tick {world.WorldTick}";
 			Log.Write("debug", line);
-			AIUtils.BotDebug(line);
+			OpenRA.Mods.CA.AIUtils.BotDebug(line);
+#endif
 		}
 
 		CPos? IBotMcvExpansionSiteProvider.McvExpansionSite(Actor mcv)
@@ -2434,7 +2444,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// BEV: a base-building vehicle deploys at home; the MCV module's deploy search takes the cells 2-20 around it.
 			if (Info.BaseVehiclesAtBase && baseCenter.HasValue && RoleOf(mcv.Info) == McvRole.BaseBuilding)
 			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): BEV {mcv.Info.Name} {mcv.ActorID} deploys at the base {baseCenter.Value} (not a construction MCV, not a refinery) at tick {world.WorldTick}");
+#endif
 				return baseCenter;
 			}
 
@@ -2464,7 +2476,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					&& !pathFinder.PathMightExistForLocomotorBlockedByImmovable(locomotor, mcv.Location, f.Center))
 				{
 					if (landUnreachableLogged.Add(f.Index))
+					{
+#if CAMEO_DEV_LOGGING
 						Log.Write("debug", $"AI ({player.ClientIndex}): LC3 field {f.Index} at {f.Center} is not reachable for {mcv.Info.Name} ({locomotor.Info.Name}) from {mcv.Location} at tick {tick}");
+#endif
+					}
 
 					return false;
 				}
@@ -2476,7 +2492,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				{
 					parkedUntil[f.Index] = tick + Info.ParkTicks;
 					if (deployRejectedLogged.Add(f.Index))
+					{
+#if CAMEO_DEV_LOGGING
 						Log.Write("debug", $"AI ({player.ClientIndex}): BZ field {f.Index} at {f.Center} parked {Info.ParkTicks} ticks — no deployable cell in the annulus for {mcv.Info.Name} at tick {tick}");
+#endif
+					}
 
 					return false;
 				}
@@ -2521,7 +2541,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (safe != null && !McvSafeRoute(safe, mcv, s.Center, true, out safeRoute))
 				{
 					rejected.Add(s.Index);
+#if CAMEO_DEV_LOGGING
 					Log.Write("debug", $"AI ({player.ClientIndex}): MS-0 field {s.Index} at {s.Center} has no route around the enemy zones for {mcv.Info.Name} {mcv.ActorID} at {mcv.Location}, tick {tick}");
+#endif
 					continue;
 				}
 
@@ -2529,7 +2551,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (park)
 				{
 					parkedUntil[s.Index] = tick + Info.ParkTicks;
+#if CAMEO_DEV_LOGGING
 					Log.Write("debug", $"AI ({player.ClientIndex}): LC3 parked field {s.Index} at {s.Center} for {Info.ParkTicks} ticks: handed to an idle MCV more than {Info.McvMaxSiteHandouts} times in a row, no yard founded, at tick {tick}");
+#endif
 					continue;
 				}
 
@@ -2539,7 +2563,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (safe != null)
 					McvSafeIssue(mcv, s.Index, safeRoute);
 
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): EX-3 MCV {mcv.Info.Name} at {mcv.Location} sent to field {s.Index} at {s.Center}: value {s.Value}, hops {s.Hops}, safety {s.Safety:F2}, hand-out {mcvHandout.Count}{(safe != null ? McvSafeZoneNote(safe, mcv, s) : string.Empty)} at tick {tick}");
+#endif
 				LastMcvSite = s.Center;
 				return s.Center;
 			}
@@ -2991,9 +3017,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					claimAttempts.Remove(want.Index);
 					claimField = null;
 					wantsRefinery = false;
+#if CAMEO_DEV_LOGGING
 					var parked = $"AI ({player.ClientIndex}): EX-2 parked field {want.Index} at {want.Center} for {Info.ParkTicks} ticks: {now} refinery(ies) built without claiming it, at tick {world.WorldTick}";
 					Log.Write("debug", parked);
-					AIUtils.BotDebug(parked);
+					OpenRA.Mods.CA.AIUtils.BotDebug(parked);
+#endif
 				}
 			}
 			else
@@ -3003,10 +3031,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// wanted to expand and why. BotDebug alone only reaches the in-game chat.
 			if (Target is FieldScore t && t.Index != previous)
 			{
+#if CAMEO_DEV_LOGGING
 				var line = string.Format("AI ({0}): EX-0 target field {1} at {2}: value {3}, hops {4}, payback {5} ticks, threat {6}, score {7:F4} ({8} fields) at tick {9}",
 					player.ClientIndex, t.Index, t.Center, t.Value, t.Hops, t.PaybackTicks, t.Threat, t.Score, scores.Count, world.WorldTick);
 				Log.Write("debug", line);
-				AIUtils.BotDebug(line);
+				OpenRA.Mods.CA.AIUtils.BotDebug(line);
+#endif
 			}
 
 			// Greedy expansion: ask for the next construction MCV right away; the engine module would wait for its
@@ -3493,13 +3523,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (lastCrawlRefusal != reason)
 				{
 					lastCrawlRefusal = reason;
+#if CAMEO_DEV_LOGGING
 					var refusal = string.Format(
 						"AI ({0}): TF-1 crawl link {1} REFUSED ({2}) target {3} aim {4} distSq {5} paid {6}/{7} count {8}/{9} stall {10} at tick {11}",
 						player.ClientIndex, link.Info.Name, reason, Target.Value.Center, crawlTargetEdge, distanceSq,
 						crawlAllowance.PaidCost, Info.OptionalLinkCostAllowance, crawlAllowance.PaidCount,
 						Info.OptionalLinkCountAllowance, crawlAllowance.NonprogressReplans, world.WorldTick);
 					Log.Write("debug", refusal);
-					AIUtils.BotDebug(refusal);
+					OpenRA.Mods.CA.AIUtils.BotDebug(refusal);
+#endif
 				}
 
 				return;
@@ -3509,13 +3541,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			wantedLinkBuilding = link.Info.Name;
 			wantWasMandatory = mandatoryPower;
 			crawlFrontierAnchor = FrontierAnchor(buildingTiles, crawlTargetEdge);
+#if CAMEO_DEV_LOGGING
 			var admitted = string.Format(
 				"AI ({0}): TF-1 crawl link {1} ADMITTED{2} target {3} aim {4} distSq {5} paid {6}/{7} count {8}/{9} at tick {10}",
 				player.ClientIndex, link.Info.Name, mandatoryPower ? " (mandatory power)" : "",
 				Target.Value.Center, crawlTargetEdge, distanceSq, crawlAllowance.PaidCost,
 				Info.OptionalLinkCostAllowance, crawlAllowance.PaidCount, Info.OptionalLinkCountAllowance, world.WorldTick);
 			Log.Write("debug", admitted);
-			AIUtils.BotDebug(admitted);
+			OpenRA.Mods.CA.AIUtils.BotDebug(admitted);
+#endif
 		}
 
 		/// <summary>
@@ -3552,11 +3586,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (bound > 0 && worst >= bound)
 				{
 					crawlParkedUntil[Target.Value.Index] = tick + Info.LossParkTicks;
+#if CAMEO_DEV_LOGGING
 					var parked = string.Format(
 						"AI ({0}): CRAWL-SAFETY parked target field {1} for {2} ticks — {3} links lost near {4} at tick {5}",
 						player.ClientIndex, Target.Value.Index, Info.LossParkTicks, worst, hottest, tick);
 					Log.Write("debug", parked);
-					AIUtils.BotDebug(parked);
+					OpenRA.Mods.CA.AIUtils.BotDebug(parked);
+#endif
 					return RefuseSafety("route farmed");
 				}
 			}
@@ -3787,9 +3823,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			anchorParkedUntil[anchor] = (tick + Info.RefineryClaimFailParkTicks, owner);
 			anchorOfferStreaks.Remove(anchor);
+#if CAMEO_DEV_LOGGING
 			var parked = $"AI ({player.ClientIndex}): REPAIR-B3 parked claim anchor {anchor} for {Info.RefineryClaimFailParkTicks} ticks ({reason}), at tick {tick}";
 			Log.Write("debug", parked);
-			AIUtils.BotDebug(parked);
+			OpenRA.Mods.CA.AIUtils.BotDebug(parked);
+#endif
 		}
 
 		/// <summary>
@@ -4294,7 +4332,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				coverageBudget = new RefineryProbeBudget(Info.CoverageSiteLimit, Info.CoverageProbeLimit, Info.CoverageProbesPerTick);
 				evaluatedSites.Clear();
 				coverageFirstBudgetDeferred = -1;
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): REPAIR-B3 coverage pass ceiling hit at tick {world.WorldTick}: refresh budget re-armed for the next pass");
+#endif
 			}
 
 			var hadPending = coveragePendingAnchors;
@@ -4308,19 +4348,27 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// never folded into Unserved).
 			if (coveragePendingAnchors == 0 && hadPending > 0)
 			{
+#if CAMEO_DEV_LOGGING
 				var line = $"AI ({player.ClientIndex}): REPAIR-B3 coverage refresh complete at tick {world.WorldTick}: {anchors.Count} anchors, {coverageSweepScanned} anchor-scans, {coverageBudget.SitesEvaluated} sites, {coverageBudget.ProbesUsed} probes, {coverageBudget.DeferredCandidates} deferred candidates, {coverageBudget.CacheHits} witness cache hits";
 				Log.Write("debug", line);
-				AIUtils.BotDebug(line);
+				OpenRA.Mods.CA.AIUtils.BotDebug(line);
+#endif
 			}
 
 			if (coverageFirstBudgetDeferred >= 0 && hadFirstBudgetDeferred < 0)
 			{
+#if CAMEO_DEV_LOGGING
 				var line = $"AI ({player.ClientIndex}): REPAIR-B3 coverage refresh ceiling reached at tick {world.WorldTick}: anchor {coverageFirstBudgetDeferred} first deferred, {coverageBudget.SitesEvaluated}/{coverageBudget.SiteLimit} sites, {coverageBudget.ProbesUsed}/{coverageBudget.ProbeLimit} probes spent; {coveragePendingAnchors} anchors stay Unknown until the next refresh";
 				Log.Write("debug", line);
-				AIUtils.BotDebug(line);
+				OpenRA.Mods.CA.AIUtils.BotDebug(line);
+#endif
 			}
 			else if (!coverageBudget.TickProbesOpen && coveragePendingAnchors > 0)
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): REPAIR-B3 coverage tick pacing at tick {world.WorldTick}: {coveragePendingAnchors} anchors pending, resume at cursor {coverageCursor}");
+#endif
+			}
 
 			// Verified pairs may have moved the assignment since the model build — recompute so served
 			// and the pending-commit clears read the live verdict, not this morning's.
@@ -4402,9 +4450,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				anchorParkedUntil[anchor] = (tick + Info.ParkTicks, null);
 				anchorStuck = (null, 0, refineryCells.Count);
+#if CAMEO_DEV_LOGGING
 				var parked = $"AI ({player.ClientIndex}): REF-1 parked anchor {anchor} for {Info.ParkTicks} ticks: wanted {replans} re-plans with no refinery placed, at tick {tick}";
 				Log.Write("debug", parked);
-				AIUtils.BotDebug(parked);
+				OpenRA.Mods.CA.AIUtils.BotDebug(parked);
+#endif
 				return;
 			}
 
@@ -4419,9 +4469,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			lastIdleReason = reason;
+#if CAMEO_DEV_LOGGING
 			var line = $"AI ({player.ClientIndex}): EX-0 no target at tick {world.WorldTick}: {reason}";
 			Log.Write("debug", line);
-			AIUtils.BotDebug(line);
+			OpenRA.Mods.CA.AIUtils.BotDebug(line);
+#endif
 		}
 
 		/// <summary>The planner's building-queue types, resolved per call: the base builder's condition may

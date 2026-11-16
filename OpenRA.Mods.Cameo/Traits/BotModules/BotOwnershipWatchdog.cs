@@ -300,8 +300,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				managers = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().ToArray();
 
 				// One line when it starts, so a silent log reads as "no violations", never as "never ran".
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI {player.InternalName}: LC5 ownership watchdog active: {managers.Length} squad manager(s), "
 					+ $"lease registry {(BotUnitLeases.Of(player) != null ? "on" : "off")}, every {Info.CheckIntervalTicks} ticks, tick={world.WorldTick}");
+#endif
 			}
 
 			ledger.Begin();
@@ -348,12 +350,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var type = actor.Info.Name;
 				byType[(kind, type)] = byType.GetValueOrDefault((kind, type)) + 1;
 				examples.Add(kind, world.WorldTick, type, actor.ActorID, detail);
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI {player.InternalName}: LC5 OWNERSHIP {kind.ToString().ToUpperInvariant()} {type} {actor.ActorID}: {detail} tick={world.WorldTick}");
+#endif
 			}
 
 			if (found.Count > 0)
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI {player.InternalName}: LC5 ownership totals after {ledger.Passes} checks: "
 					+ string.Join(", ", ledger.Counts.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key} {kv.Value}")) + $" tick={world.WorldTick}");
+#endif
+			}
 		}
 	}
 }

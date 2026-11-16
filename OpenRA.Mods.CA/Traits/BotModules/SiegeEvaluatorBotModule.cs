@@ -209,10 +209,12 @@ namespace OpenRA.Mods.CA.Traits
 					s.IsValid && s.Type == SquadCAType.Artillery && s.Parent == squad && s.Units.Count > 0));
 				// Log.Write direct: AIUtils.BotDebug is gated on Game.Settings.Debug.BotDebug,
 				// which the match harness does not set — the FransBotLog pattern.
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", string.Format("[SIEGE-EVAL][WT {0}] AI {1} {2} squad v={3} units={4} at {5} -> {6}: defences={7} v={8} maxRange={9} threat={10} verdict={11} artillery={12} siegeMem={13}",
 					world.WorldTick, player.ClientIndex, squad.Type, squadValue, squad.Units.Count, squadCell, targetCell,
 					covering.Length, defenceValue, standOffCells, rememberedThreat, verdict,
 					artilleryAttached ? "attached" : "none", siegeMem));
+#endif
 			}
 
 			// Drop transition entries for squads that left evaluation (dissolved
@@ -222,9 +224,11 @@ namespace OpenRA.Mods.CA.Traits
 
 			// Heartbeat: distinguishes "module silent" from "no assault squads
 			// qualified" — a whole batch of silence means formation starves.
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", string.Format("[SIEGE-EVAL][WT {0}] AI {1} pass: squads={2} evaluated={3} defences={4}",
 				world.WorldTick, player.ClientIndex,
 				squadManagers.Sum(m => m.Squads.Count(s => s.IsValid)), evaluated, defences.Length));
+#endif
 		}
 
 		// IBotSiegeAdvisor — serves the cached evaluation. Disabled or stale

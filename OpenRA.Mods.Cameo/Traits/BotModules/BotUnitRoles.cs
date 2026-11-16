@@ -95,6 +95,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			ActorRoles = actorRoles;
 			RoleMembers = members;
 
+			if (!BotRoleLog.Enabled)
+				return;
+
 			Log.AddChannel("bot-roles", "bot-roles.log");
 			foreach (var role in members.Keys.OrderBy(r => r, StringComparer.Ordinal))
 				Log.Write("bot-roles",

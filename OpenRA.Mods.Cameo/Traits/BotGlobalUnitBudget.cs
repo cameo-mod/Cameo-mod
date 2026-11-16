@@ -145,8 +145,12 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 
 			if (Info.Debug)
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"BotBudget {player.InternalName}: livingBots={livingBots} " +
 					$"cap={cap} units={count} paused={count >= cap}");
+#endif
+			}
 
 			return count >= cap;
 		}
