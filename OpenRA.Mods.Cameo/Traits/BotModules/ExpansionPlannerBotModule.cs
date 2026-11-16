@@ -335,7 +335,99 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"builder's own BuildingQueues (Cameo's classic mode builds from the player-level RABuilding queue).")]
 		public readonly HashSet<string> BuildingQueues = new();
 
+		[Desc("REFSCAN D-5 (design _12 + ERRATUM_01, TREATMENT arm): site-first anytime refinery search. A law refinery",
+			"opens an episode when it enters the queue, searches during production under a per-visit unit cap, reserves",
+			"its best site and places at READY from the bot module tick (READY to placed <= 75 ticks). False = CONTROL:",
+			"the claim ladder, the park and the fallback poll at READY, exactly as before.")]
+		public readonly bool RefinerySiteSearchEnabled = false;
+
+		[Desc("REFSCAN sec 3.6 (F1): the completed-refinery cancel needs two Exhausted verdicts one relist epoch apart.",
+			"In force when this is true OR the STALL-FIX-01 force bound is on. Lint L-C refuses the search with this false.")]
+		public readonly bool RefineryCancelRequiresTwoVerdicts = false;
+
+		[Desc("REFSCAN sec 6 (D-3): units (one legality check plus its score) a search visit may spend during production.")]
+		public readonly int RefinerySearchVisitUnits = 64;
+
+		[Desc("REFSCAN sec 4.3 (D-3): units per visit in the deadline phase (READY, no legal member).")]
+		public readonly int RefinerySearchDeadlineVisitUnits = 512;
+
+		[Desc("REFSCAN sec 3.3 F8 (D-3): units per visit for the O-3 static order. O-3 is the widened scan's own paged",
+			"pass here, so this caps each O-3 poll's cell budget.")]
+		public readonly int RefinerySearchOrderBuildUnits = 64;
+
+		[Desc("REFSCAN sec 2 (D-3): ticks an admitted refinery may take to appear in its producer's queue.")]
+		public readonly int RefinerySearchEpisodeBindGraceTicks = 75;
+
+		[Desc("REFSCAN sec 4.1 (F5): L_o*, the order latency bound in ticks (PlaceBuilding issue to resolve), max",
+			"observed + one net frame. Placeholder 9 until V-1 measures it. Lint L-R: 2 * (V + L_o*) <= 75 for every N.")]
+		public readonly int RefineryOrderLatencyTicks = 9;
+
+		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
+		{
+			base.RulesetLoaded(rules, ai);
+
+			// REFSCAN lint L-C (sec 3.6): the search never runs without the two-verdict cancel.
+			if (RefinerySiteSearchLogic.CancelKnobLintFails(RefinerySiteSearchEnabled, RefineryCancelRequiresTwoVerdicts))
+				throw new YamlException($"{ai.Name}.ExpansionPlannerBotModule: lint L-C: RefinerySiteSearchEnabled is true but "
+					+ "RefineryCancelRequiresTwoVerdicts is false.");
+
+			if (!RefinerySiteSearchEnabled)
+				return;
+
+			// REFSCAN lint L-R (sec 4.4): 2 * (V + L_o*) <= 75 for N = 1..12 and a re-pack; any failing N is refused.
+			var failed = RefinerySiteSearchLogic.LatencyLintFailures(RefineryOrderLatencyTicks);
+			if (failed.Count > 0)
+				throw new YamlException($"{ai.Name}.ExpansionPlannerBotModule: lint L-R: 2 * (V + {RefineryOrderLatencyTicks}) > "
+					+ $"{RefinerySiteSearchLogic.DeadlineTicks} for {string.Join(", ", failed)}.");
+
+			if (RefinerySearchVisitUnits < 1 || RefinerySearchDeadlineVisitUnits < RefinerySearchVisitUnits
+				|| RefinerySearchOrderBuildUnits < 1 || RefinerySearchEpisodeBindGraceTicks < 0)
+				throw new YamlException($"{ai.Name}.ExpansionPlannerBotModule: REFSCAN unit knobs out of range.");
+
+			// REFSCAN lint L-M (sec 3.4, Haiku C1 on D-6): for every bot type that runs this planner, the placement
+			// emitters are a subset of {QM, MXM}: the engine McvManagerBotModule is not configured, and no enabled
+			// Fransbot base builder runs beside the planner.
+			var lintM = RefineryEmitterLint.Failures(ai, this);
+			if (lintM.Count > 0)
+				throw new YamlException($"{ai.Name}.ExpansionPlannerBotModule: lint L-M: {string.Join("; ", lintM)}.");
+		}
+
 		public override object Create(ActorInitializer init) { return new ExpansionPlannerBotModule(init.Self, this); }
+	}
+
+	/// <summary>
+	/// REFSCAN lint L-M: the bot types that enable the planner (per GrantConditionOnBotOwner) may not also enable a
+	/// placement emitter the reservation mask cannot see — the engine McvManagerBotModule (not hooked by D-6) or a
+	/// Fransbot base builder (its own emitters, scoped out in sec 3.4).
+	/// </summary>
+	public static class RefineryEmitterLint
+	{
+		public static List<string> Failures(ActorInfo ai, ConditionalTraitInfo planner)
+		{
+			var failures = new List<string>();
+			var grants = ai.TraitInfos<GrantConditionOnBotOwnerInfo>().ToList();
+			var bots = grants.SelectMany(g => g.Bots).Distinct().OrderBy(b => b, StringComparer.Ordinal).ToList();
+			var emitters = ai.TraitInfos<ConditionalTraitInfo>()
+				.Where(t => t is McvManagerBotModuleInfo || t.GetType().Name == "FransBaseBuilderBotModuleInfo")
+				.ToList();
+
+			foreach (var bot in bots)
+			{
+				var symbols = grants.Where(g => g.Bots.Contains(bot) && g.Condition != null)
+					.Select(g => g.Condition).Distinct().ToDictionary(c => c, c => 1);
+				if (!Enabled(planner, symbols))
+					continue;
+
+				foreach (var e in emitters)
+					if (Enabled(e, symbols))
+						failures.Add($"bot type '{bot}' enables both the planner and {e.GetType().Name}");
+			}
+
+			return failures;
+		}
+
+		static bool Enabled(ConditionalTraitInfo info, IReadOnlyDictionary<string, int> symbols) =>
+			info.RequiresCondition == null || info.RequiresCondition.Evaluate(symbols);
 	}
 
 	public enum McvRole { Expansion, FieldRefinery, BaseBuilding }
@@ -928,6 +1020,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		RefineryFallbackOutcome IBotExpansionTargetProvider.PollRefineryFallbackSite(Actor producer, string item,
 			bool distanceToBaseIsImportant, out CPos? site)
 		{
+			return PollFallback(producer, item, distanceToBaseIsImportant, -1, true, out site);
+		}
+
+		/// <summary>
+		/// REF-2 P1a widened poll, shared by the queue's READY path (<paramref name="cellBudget"/> &lt; 0: the
+		/// per-sweep Info budget, as before) and REFSCAN O-3 (an explicit budget charged to the search visit).
+		/// <paramref name="terminalSweep"/> = add the terminal tier's same-tick coherence sweep bound (always on
+		/// the old path; REFSCAN asks for it only in the deadline phase, where the cancel certificate matters).
+		/// </summary>
+		RefineryFallbackOutcome PollFallback(Actor producer, string item, bool distanceToBaseIsImportant, int cellBudget,
+			bool terminalSweep, out CPos? site)
+		{
 			site = null;
 			if (!LawActive || producer == null || producer.IsDead || !producer.IsInWorld)
 				return RefineryFallbackOutcome.NoUniverse;
@@ -951,8 +1055,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// the ordinary enumeration budget — the atom count scales with actors and rank
 			// cells, so the terminal budget is sized to cover it (all work stays charged; an
 			// undersized terminal budget would stall the pass into a hold).
-			var budget = Info.RefineryFallbackScanCellBudget;
-			if (scan.Tier >= Info.RefineryFallbackTierMaxDist)
+			var budget = cellBudget < 0 ? Info.RefineryFallbackScanCellBudget : cellBudget;
+			if (terminalSweep && scan.Tier >= Info.RefineryFallbackTierMaxDist)
 				budget += FallbackSweepBound();
 
 			// STALL-FIX-01 (CI, Info.RefineryFallbackForceAfterTicks > 0): a scan deferred this long is forced
@@ -1005,7 +1109,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			return producer != null
 				&& fallbackScans.TryGetValue((producer.ActorID, item), out var scan)
-				&& scan.CancelCertificateCurrent(Info.RefineryFallbackForceAfterTicks);
+				&& scan.CancelCertificateCurrent(RefinerySiteSearchLogic.CancelRequiresTwoVerdicts(
+					Info.RefineryCancelRequiresTwoVerdicts, Info.RefineryFallbackForceAfterTicks));
 		}
 
 		void IBotExpansionTargetProvider.RefinerySiteCommitted(CPos site)
@@ -1260,14 +1365,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		bool FallbackLegal(ActorInfo actorInfo, BuildingInfo bi, Actor producer, bool distanceToBaseIsImportant,
 			IReadOnlyList<WVec> dockOffsets, IReadOnlySet<string> valuable, IResourceLayer layer, CPos topLeft)
 		{
-			if (!world.CanPlaceBuilding(topLeft, actorInfo, bi, null))
-				return false;
-
-			if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, topLeft))
-				return false;
-
-			return BaseBuilderQueueEvalCA.AnyDockClear(
-				dockOffsets.Select(off => BaseBuilderQueueEvalCA.CheckDockAccess(world, layer, actorInfo, bi, topLeft, off, valuable)));
+			// REFSCAN sec 3.1: the one shared implementation (same chain, same order, same ∃-dock rule).
+			return BaseBuilderQueueEvalCA.RefinerySiteLegal(world, player, layer, actorInfo, bi, producer,
+				distanceToBaseIsImportant, dockOffsets, valuable, topLeft);
 		}
 
 		/// <summary>

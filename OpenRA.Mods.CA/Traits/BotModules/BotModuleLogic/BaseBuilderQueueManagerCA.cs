@@ -1131,6 +1131,12 @@ namespace OpenRA.Mods.CA.Traits
 					}
 				}
 
+				// REFSCAN D-5 (sec 2, 3.5): an item a site-search episode owns is placed by the episode from the
+				// bot module tick (BaseBuilderBotModuleCA.BotTick), never here — no claim ladder, no park and no
+				// fallback poll on its behalf, and nothing on its path waits on WaitTicks.
+				if (baseBuilder.RefinerySearchOwns(currentBuilding))
+					return false;
+
 				// Check if Building is a plug for other Building
 				var actorInfo = world.Map.Rules.Actors[currentBuilding.Item];
 				var plugInfo = actorInfo.TraitInfoOrDefault<PlugInfo>();
@@ -1272,6 +1278,15 @@ namespace OpenRA.Mods.CA.Traits
 					}
 				}
 
+				// REFSCAN F2 (sec 3.4): every non-episode PlaceBuilding/PlacePlug passes the reservation mask at
+				// this single emission point, before NotifyPlacement. A blocked placement takes the null-location
+				// branch for its class (a refinery defers; anything else counts a failure). Empty mask = no-op.
+				if (location != null && baseBuilder.PlacementMasked(currentBuilding.Item, location.Value))
+				{
+					AIUtils.BotDebug($"{player} {currentBuilding.Item} at {location.Value}: reserved by a refinery search at tick {world.WorldTick}");
+					location = null;
+				}
+
 				if (location == null)
 				{
 					// FIX-RA-REFINERY: under the law a siteless refinery defers — it must not spend
@@ -1395,36 +1410,106 @@ namespace OpenRA.Mods.CA.Traits
 					});
 
 					// After succesfuly placing a building, nudge BaseExpansionModules to expand.
-					// We want to avoid expanding too often, so we make a judgement by counting buildings.
-					if (baseBuilder.Info.ProductionTypes.Contains(currentBuilding.Item)
-						|| baseBuilder.Info.FragileTypes.Contains(currentBuilding.Item) || baseBuilder.Info.RefineryTypes.Contains(currentBuilding.Item))
-					{
-						var numRef = baseBuilder.RefineryBuildings.Actors.Count(a => !a.IsDead) + (baseBuilder.Info.RefineryTypes.Contains(currentBuilding.Item) ? 1 : 0);
-
-						var numProd = baseBuilder.ProductionBuildings.Actors.Count(a => !a.IsDead) + (baseBuilder.Info.ProductionTypes.Contains(currentBuilding.Item) ? 1 : 0);
-
-						var numTech = playerBuildings.Count(a => baseBuilder.Info.FragileTypes.Contains(a.Info.Name))
-							+ (baseBuilder.Info.FragileTypes.Contains(currentBuilding.Item) ? 1 : 0);
-
-						var tolerateOnCash = playerResources.GetCashAndResources() / Math.Max(baseBuilder.Info.PerExpansionTolerateOnCash, 1);
-
-						// REF-1 B4 (§12.24 v2): under the refinery law the raw refinery total is replaced by
-						// coverage — nudge an expansion when every anchor in reach is served and unserved anchors
-						// still exist beyond reach. Classic/switch-off keep the old count.
-						if (RefineryLawNudge.Due(baseBuilder.RefineryLawProvider(), numRef,
-								baseBuilder.Info.InititalMinimumRefineryCount + baseBuilder.Info.AdditionalMinimumRefineryCount)
-							&& numProd > 0 && BaseBuilderQueueEvalCA.ExpansionBalance(numProd, numTech, RandomTolerance(baseBuilder.Info.ExpansionTolerate), tolerateOnCash, numRef))
-						{
-							var undeployEvenNoBase = BaseBuilderQueueEvalCA.ExpansionBalance(numProd, numTech, RandomTolerance(baseBuilder.Info.ForceExpansionTolerate), tolerateOnCash, numRef);
-
-							foreach (var be in baseBuilder.BaseExpansionModules)
-								be.UpdateExpansionParams(bot, true, undeployEvenNoBase, null);
-						}
-					}
+					NudgeExpansionAfterPlacement(bot, currentBuilding.Item);
 					return true;
 				}
 			}
 
+			return true;
+		}
+
+		// After succesfuly placing a building, nudge BaseExpansionModules to expand.
+		// We want to avoid expanding too often, so we make a judgement by counting buildings.
+		// (REFSCAN D-5: extracted verbatim so the episode emission nudges exactly like the queue sweep.)
+		void NudgeExpansionAfterPlacement(IBot bot, string item)
+		{
+			if (baseBuilder.Info.ProductionTypes.Contains(item)
+				|| baseBuilder.Info.FragileTypes.Contains(item) || baseBuilder.Info.RefineryTypes.Contains(item))
+			{
+				var numRef = baseBuilder.RefineryBuildings.Actors.Count(a => !a.IsDead) + (baseBuilder.Info.RefineryTypes.Contains(item) ? 1 : 0);
+
+				var numProd = baseBuilder.ProductionBuildings.Actors.Count(a => !a.IsDead) + (baseBuilder.Info.ProductionTypes.Contains(item) ? 1 : 0);
+
+				var numTech = playerBuildings.Count(a => baseBuilder.Info.FragileTypes.Contains(a.Info.Name))
+					+ (baseBuilder.Info.FragileTypes.Contains(item) ? 1 : 0);
+
+				var tolerateOnCash = playerResources.GetCashAndResources() / Math.Max(baseBuilder.Info.PerExpansionTolerateOnCash, 1);
+
+				// REF-1 B4 (§12.24 v2): under the refinery law the raw refinery total is replaced by
+				// coverage — nudge an expansion when every anchor in reach is served and unserved anchors
+				// still exist beyond reach. Classic/switch-off keep the old count.
+				if (RefineryLawNudge.Due(baseBuilder.RefineryLawProvider(), numRef,
+						baseBuilder.Info.InititalMinimumRefineryCount + baseBuilder.Info.AdditionalMinimumRefineryCount)
+					&& numProd > 0 && BaseBuilderQueueEvalCA.ExpansionBalance(numProd, numTech, RandomTolerance(baseBuilder.Info.ExpansionTolerate), tolerateOnCash, numRef))
+				{
+					var undeployEvenNoBase = BaseBuilderQueueEvalCA.ExpansionBalance(numProd, numTech, RandomTolerance(baseBuilder.Info.ForceExpansionTolerate), tolerateOnCash, numRef);
+
+					foreach (var be in baseBuilder.BaseExpansionModules)
+						be.UpdateExpansionParams(bot, true, undeployEvenNoBase, null);
+				}
+			}
+		}
+
+		/// <summary>
+		/// REFSCAN D-5 (sec 2, 4.2): an episode's placement through this manager's emission — the same order,
+		/// the same NotifyPlacement / PlacementOrdered records, the same claim commit (CommitRefineryClaim at the
+		/// site for a class-0 claim, RefinerySiteCommitted for a class-1 site) and the same expansion nudge as the
+		/// queue sweep's refinery path. Called from the bot module tick, not behind WaitTicks.
+		/// </summary>
+		internal void EmitEpisodePlacement(IBot bot, ProductionQueue queue, ProductionItem item, CPos cell,
+			RefineryAnchorClaim? claim, ExpansionDemand demand)
+		{
+			var requestRef = demand?.Mcv ?? BaseBuilderQueueEvalCA.FirstRequestedRefinery(baseBuilder.RequestedRefineries);
+			if (requestRef != null && !baseBuilder.RequestedRefineries.ContainsKey(requestRef))
+				requestRef = null;
+
+			var law = baseBuilder.RefineryLawProvider();
+			if (law != null)
+			{
+				if (claim is { } c)
+					BaseBuilderQueueEvalCA.CommitRefineryClaimOrPark(law, c, cell, demand);
+				else
+					law.RefinerySiteCommitted(cell);
+			}
+
+			if (requestRef != null)
+				baseBuilder.RequestedRefineries.Remove(requestRef);
+
+			refineryClaimed = true;
+			failCount = 0;
+			NotifyPlacement(item.Item, cell, queue.Actor.ActorID, "PlaceBuilding", BuildingType.Refinery, false, null);
+			NotePendingTerminal(queue, item, item.Item, BotQueueTransitionKind.Placed,
+				BotQueueTransitionReason.None, BotQueueCancellationClass.None, cell);
+
+			bot.QueueOrder(new Order("PlaceBuilding", player.PlayerActor, Target.FromCell(world, cell), false)
+			{
+				TargetString = item.Item,
+				ExtraLocation = new CPos(0, 0),
+				ExtraData = queue.Actor.ActorID,
+				SuppressVisualFeedback = true
+			});
+
+			// The nudge reads the building list the sweep refreshes; the episode runs outside the sweep.
+			playerBuildings = world.ActorsHavingTrait<Building>().Where(a => a.Owner == player).ToArray();
+			NudgeExpansionAfterPlacement(bot, item.Item);
+		}
+
+		/// <summary>
+		/// REFSCAN sec 4.3 / 3.6: the episode's only cancel authority — the _08 exhaustion certificate, re-verified
+		/// live with the two-verdict gate, through the same binding and records as the queue sweep's cancel.
+		/// </summary>
+		internal bool EpisodeCertifiedCancel(IBot bot, ProductionQueue queue, ProductionItem item)
+		{
+			if (!CertificateAuthorizes(queue, item.Item, item))
+				return false;
+
+			AIUtils.BotDebug($"{player} cancels {item.Item}: refinery search domain exhausted at tick {world.WorldTick}");
+			var cancelTarget = BaseBuilderQueueEvalCA.CancelBindTarget(queue.AllQueued(), i => i.Item, item.Item, item);
+			NotePendingTerminal(queue, cancelTarget, item.Item, BotQueueTransitionKind.Cancelled,
+				BotQueueTransitionReason.RefineryDomainExhausted, BotQueueCancellationClass.Production);
+			bot.QueueOrder(Order.CancelProduction(queue.Actor, item.Item, 1));
+			EmitQueueTransition(queue, queue.Actor, item, item.Item, QueueCategoryOf(item.Item),
+				BotQueueTransitionKind.Held, BotQueueTransitionReason.RefineryDomainExhausted);
 			return true;
 		}
 

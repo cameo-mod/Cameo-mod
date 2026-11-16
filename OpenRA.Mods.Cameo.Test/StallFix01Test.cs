@@ -19,7 +19,7 @@ using OpenRA.Mods.Cameo.Traits.BotModules;
 namespace OpenRA.Mods.Cameo.Test
 {
 	[TestFixture]
-	public sealed class StallFix01Test
+	public sealed partial class StallFix01Test
 	{
 		const int Epoch = 50;
 		const int Bound = 1500;
@@ -781,11 +781,14 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var p = Planner();
 			var arm = Section(p, "bool IBotExpansionTargetProvider.RefineryFallbackCertificateCurrent", "void IBotExpansionTargetProvider.RefinerySiteCommitted");
-			Assert.That(arm, Does.Contain("scan.CancelCertificateCurrent(Info.RefineryFallbackForceAfterTicks)"));
+			// REFSCAN sec 3.6 (F1): the gate now reads its own knob OR the force bound (requireTwo), never the force alone.
+			Assert.That(arm, Does.Contain("scan.CancelCertificateCurrent(RefinerySiteSearchLogic.CancelRequiresTwoVerdicts(\n"
+				+ "\t\t\t\t\tInfo.RefineryCancelRequiresTwoVerdicts, Info.RefineryFallbackForceAfterTicks))"));
 			Assert.That(arm, Does.Not.Contain("scan.CertificateCurrent()"));
 			Assert.That(Manager(), Does.Not.Contain("CancelCertificateCurrent"));
 			Assert.That(Manager(), Does.Contain("law.RefineryFallbackCertificateCurrent(queue.Actor, itemName)"));
-			Assert.That(Scan(), Does.Contain("CertificateCurrent() && (forceAfterTicks <= 0 || ExhaustedConfirmed)"));
+			Assert.That(Scan(), Does.Contain("CertificateCurrent() && (!requireTwo || ExhaustedConfirmed)"));
+			Assert.That(Scan(), Does.Contain("CancelCertificateCurrent(int forceAfterTicks) => CancelCertificateCurrent(forceAfterTicks > 0)"));
 		}
 
 		// ---- R3: the forced Site's distance from the base rides the telemetry line (record only) ----

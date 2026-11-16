@@ -588,8 +588,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// certificate must ALSO belong to a second Exhausted verdict at least one relist epoch after the first
 		/// of an unbroken chain — the first Exhausted only holds.
 		/// </summary>
-		public bool CancelCertificateCurrent(int forceAfterTicks) =>
-			CertificateCurrent() && (forceAfterTicks <= 0 || ExhaustedConfirmed);
+		public bool CancelCertificateCurrent(int forceAfterTicks) => CancelCertificateCurrent(forceAfterTicks > 0);
+
+		/// <summary>
+		/// REFSCAN sec 3.6 (F1): the cancel gate on its own knob — <c>CertificateCurrent() &amp;&amp; (!requireTwo ||
+		/// ExhaustedConfirmed)</c>, where the owner passes <c>requireTwo = RefineryCancelRequiresTwoVerdicts ||
+		/// RefineryFallbackForceAfterTicks &gt; 0</c>, so the two-verdict rule never follows the force knob alone.
+		/// </summary>
+		public bool CancelCertificateCurrent(bool requireTwo) =>
+			CertificateCurrent() && (!requireTwo || ExhaustedConfirmed);
 
 		/// <summary>STALL-FIX-01 R3: Chebyshev distance in cells (integer), the metric of the scan's own gap rule.</summary>
 		public static int ChebyshevCells(CPos a, CPos b) => Chebyshev(a.X - b.X, a.Y - b.Y);

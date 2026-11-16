@@ -351,6 +351,28 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>
+		/// REFSCAN sec 3.1: <c>Legal(c)</c>, the law placement predicate promoted here so the site search, its
+		/// revalidation, the handoff and the widened scan share one implementation — CanPlaceBuilding, then
+		/// IsCloseEnoughToBase when the base distance matters, then the ∃-dock rule (one Clear dock suffices).
+		/// </summary>
+		public static bool RefinerySiteLegal(World world, Player player, IResourceLayer resourceLayer, ActorInfo actorInfo,
+			BuildingInfo bi, Actor producer, bool distanceToBaseIsImportant, IReadOnlyList<WVec> dockOffsets,
+			IReadOnlySet<string> valuable, CPos topLeft)
+		{
+			if (!world.CanPlaceBuilding(topLeft, actorInfo, bi, null))
+				return false;
+
+			if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, topLeft))
+				return false;
+
+			foreach (var off in dockOffsets)
+				if (CheckDockAccess(world, resourceLayer, actorInfo, bi, topLeft, off, valuable) == DockAccess.Clear)
+					return true;
+
+			return false;
+		}
+
+		/// <summary>
 		/// REF-2 P1a: the hold reason a widened verdict maps to — Deferred stays a scanning hold,
 		/// an empty domain with no preferred claim offered is the claim absence, everything else is
 		/// the drained-scan "no site under this pass" (mixed-time evidence, never an emptiness proof).

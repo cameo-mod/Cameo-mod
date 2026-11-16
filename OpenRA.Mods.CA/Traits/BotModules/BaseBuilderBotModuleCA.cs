@@ -320,7 +320,8 @@ namespace OpenRA.Mods.CA.Traits
 	}
 
 	public class BaseBuilderBotModuleCA : ConditionalTrait<BaseBuilderBotModuleCAInfo>, IGameSaveTraitData,
-		IBotTick, IBotPositionsUpdated, IBotRespondToAttack, IBotRequestPauseUnitProduction, IBotSuggestRefineryProduction, INotifyActorDisposing
+		IBotTick, IBotPositionsUpdated, IBotRespondToAttack, IBotRequestPauseUnitProduction, IBotSuggestRefineryProduction, INotifyActorDisposing,
+		IBotPlacementVeto
 	{
 		public CPos GetRandomBaseCenter()
 		{
@@ -635,6 +636,9 @@ namespace OpenRA.Mods.CA.Traits
 		int openingDefenseCommittedCost;
 
 		readonly BaseBuilderQueueManagerCA[] builders;
+
+		// REFSCAN D-5: the site-first refinery search (TREATMENT); inert while the law provider does not enable it.
+		RefinerySiteSearch refinerySearch;
 		int currentBuilderIndex = 0;
 
 		public readonly ActorIndex.OwnerAndNamesAndTrait<RefineryInfo> RefineryBuildings;
@@ -729,7 +733,30 @@ namespace OpenRA.Mods.CA.Traits
 
 			foreach (var defense in Info.DefenseQueues)
 				builders[i++] = CreateManager(defense);
+
+			refinerySearch = new RefinerySiteSearch(this, world, player, resourceLayer);
 		}
+
+		/// <summary>REFSCAN: true iff a site-search episode owns this queue item (the queue sweep must not place it).</summary>
+		public bool RefinerySearchOwns(ProductionItem item) => refinerySearch != null && refinerySearch.Owns(item);
+
+		/// <summary>REFSCAN F2: the reservation mask at the queue's emission point (non-episode placements).</summary>
+		public bool PlacementMasked(string item, CPos topLeft) =>
+			refinerySearch != null && world.Map.Rules.Actors.TryGetValue(item, out var ai) && refinerySearch.Masked(ai, topLeft);
+
+		/// <summary>REFSCAN: the queue manager that owns emission for a queue category (the observation owner first).</summary>
+		internal BaseBuilderQueueManagerCA ManagerFor(string category)
+		{
+			foreach (var b in builders)
+				if (b != null && b.Category == category)
+					return b;
+
+			return null;
+		}
+
+		// REFSCAN D-6 (a), engine 234178b0: the MCV deploy cell choice consults the same mask (own player only).
+		bool IBotPlacementVeto.VetoesPlacement(Player p, CPos topLeft, ActorInfo building) =>
+			p == player && refinerySearch != null && refinerySearch.Masked(building, topLeft);
 
 		protected override void TraitEnabled(Actor self)
 		{
@@ -903,6 +930,10 @@ namespace OpenRA.Mods.CA.Traits
 
 				UpdateProductionScaling();
 			}
+
+			// REFSCAN D-5 (sec 2): the search pump and the READY handoff run here, every bot visit, ahead of the
+			// queue managers' rotation and WaitTicks — the placement path never waits on the queue sweep.
+			refinerySearch?.Pump(bot, RefineryLawProvider());
 
 			builders[currentBuilderIndex].Tick(bot);
 
@@ -2099,6 +2130,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		void INotifyActorDisposing.Disposing(Actor self)
 		{
+			refinerySearch?.Dispose();
 			RefineryBuildings.Dispose();
 			powerBuildings.Dispose();
 			ConstructionYardBuildings.Dispose();
