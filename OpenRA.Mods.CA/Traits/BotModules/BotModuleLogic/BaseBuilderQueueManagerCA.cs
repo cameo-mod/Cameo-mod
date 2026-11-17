@@ -1466,8 +1466,9 @@ namespace OpenRA.Mods.CA.Traits
 			var law = baseBuilder.RefineryLawProvider();
 			if (law != null)
 			{
+				// N-2 (587A0D62): the helper returns false only for a null site; an episode always passes a cell.
 				if (claim is { } c)
-					BaseBuilderQueueEvalCA.CommitRefineryClaimOrPark(law, c, cell, demand);
+					_ = BaseBuilderQueueEvalCA.CommitRefineryClaimOrPark(law, c, cell, demand);
 				else
 					law.RefinerySiteCommitted(cell);
 			}

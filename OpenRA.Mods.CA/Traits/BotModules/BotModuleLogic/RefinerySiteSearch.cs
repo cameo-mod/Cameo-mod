@@ -461,7 +461,19 @@ namespace OpenRA.Mods.CA.Traits
 					e.DockOffsets, baseBuilder.ResourceMapModule?.Info.ValuableResourceTypes, cell))
 				return false;
 
-			return !mask.Blocks(e.Bi.Tiles(cell), e.Key);
+			// FIX-1 (587A0D62): the candidate's dock cells are checked too, so a site whose dock falls on another
+			// episode's reserved footprint or dock is refused before that episode's building exists.
+			return mask.IsEmpty || !mask.BlocksSite(e.Bi.Tiles(cell), DockCells(e, cell), e.Key);
+		}
+
+		// The dock cells of a site at this top-left cell: the same cells UpdateMask reserves and LegalCell checks.
+		List<CPos> DockCells(Episode e, CPos cell)
+		{
+			var cells = new List<CPos>(e.DockOffsets.Count);
+			foreach (var off in e.DockOffsets)
+				cells.Add(world.Map.CellContaining(world.Map.CenterOfCell(cell) + e.Bi.CenterOffset(world) + off));
+
+			return cells;
 		}
 
 		void Offer(Episode e, CPos cell, RefinerySiteScore score, RefineryAnchorClaim? claim, int now)
@@ -657,7 +669,8 @@ namespace OpenRA.Mods.CA.Traits
 			if (providers.Count == 0)
 				return;
 
-			for (var n = 1; n < chunk; n++)
+			// N-1 (587A0D62): one sample per charged unit.
+			for (var n = 0; n < chunk; n++)
 			{
 				var p = providers[rng.Next(providers.Count)];
 				var cell = new CPos(p.Center.X + rng.Next(-p.Reach, p.Reach + 1), p.Center.Y + rng.Next(-p.Reach, p.Reach + 1));
@@ -691,8 +704,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			var cells = e.Bi.Tiles(site.Cell).ToList();
-			foreach (var off in e.DockOffsets)
-				cells.Add(world.Map.CellContaining(world.Map.CenterOfCell(site.Cell) + e.Bi.CenterOffset(world) + off));
+			cells.AddRange(DockCells(e, site.Cell));
 
 			mask.Set(e.Key, cells);
 			e.MaskCell = site.Cell;

@@ -316,5 +316,12 @@ namespace OpenRA.Mods.CA.Traits
 
 			return false;
 		}
+
+		/// <summary>
+		/// Sec 3.4 LegalFor (review 587A0D62 FIX-1): a candidate site is blocked iff any of its footprint OR dock cells
+		/// maps to another episode's reserved cells (which are themselves footprint + dock). The owner stays exempt (F3).
+		/// </summary>
+		public bool BlocksSite(IEnumerable<CPos> footprint, IEnumerable<CPos> dockCells, long episode) =>
+			owner.Count != 0 && (Blocks(footprint, episode) || Blocks(dockCells, episode));
 	}
 }

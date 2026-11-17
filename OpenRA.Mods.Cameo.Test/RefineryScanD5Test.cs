@@ -97,6 +97,29 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(mask.IsEmpty, Is.True, "the end of an episode releases its reservation");
 		}
 
+		[Test]
+		public void ASecondEpisodesCandidateWhoseDockOverlapsTheFirstsReservedFootprintIsRejected()
+		{
+			// FIX-1 (587A0D62): episode A reserves its site = footprint + dock (as UpdateMask does).
+			var mask = new RefineryReservationMask();
+			var aFootprint = new[] { new CPos(10, 10), new CPos(11, 10), new CPos(10, 11), new CPos(11, 11) };
+			var aDock = new[] { new CPos(11, 12) };
+			mask.Set(1, aFootprint.Concat(aDock));
+
+			// Episode B: the footprint is clear of A, but the dock cell falls on A's reserved footprint.
+			var bFootprint = new[] { new CPos(13, 9), new CPos(14, 9), new CPos(13, 10), new CPos(14, 10) };
+			var bDockOnAFootprint = new[] { new CPos(11, 10) };
+			Assert.That(mask.Blocks(bFootprint, 2), Is.False, "the footprint alone does not see the conflict");
+			Assert.That(mask.BlocksSite(bFootprint, bDockOnAFootprint, 2), Is.True, "B's dock on A's footprint is rejected");
+			Assert.That(mask.BlocksSite(bFootprint, aDock, 2), Is.True, "B's dock on A's dock is rejected");
+			Assert.That(mask.BlocksSite(aDock, System.Array.Empty<CPos>(), 2), Is.True, "B's footprint on A's dock is rejected");
+			Assert.That(mask.BlocksSite(bFootprint, new[] { new CPos(14, 11) }, 2), Is.False, "a clear footprint and dock pass");
+			Assert.That(mask.BlocksSite(aFootprint, aDock, 1), Is.False, "F3: A's own site stays legal for A");
+
+			mask.Release(1);
+			Assert.That(mask.BlocksSite(bFootprint, bDockOnAFootprint, 2), Is.False, "after A ends, B's site is free");
+		}
+
 		// ---- sec 4.4: lint L-R, and sec 3.6: lint L-C and the two-verdict gate ----
 
 		[Test]
