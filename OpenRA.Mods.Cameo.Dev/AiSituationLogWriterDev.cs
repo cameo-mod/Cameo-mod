@@ -10,6 +10,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using OpenRA.Graphics;
@@ -35,6 +36,8 @@ namespace OpenRA.Mods.Cameo.Traits
 		bool written;
 		bool eligibleAtWorldLoad;
 		int nextAttemptTick;
+		TimeSpan enqueueElapsed;
+		int enqueueChars;
 
 		public AiSituationLogWriterDev(AiSituationLogWriterInfo info) { this.info = info; }
 
@@ -54,7 +57,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 
 			fallbackGameUid = Guid.NewGuid().ToString("N");
-			appender = new AiLogFileAppender(info.FileName);
+			appender = new AiLogFileAppender(info.FileName, nameof(AiSituationLogWriterDev));
 		}
 
 		void ITick.Tick(Actor self)
@@ -75,7 +78,12 @@ namespace OpenRA.Mods.Cameo.Traits
 		{
 			// World.EndGame pauses before dispatching IGameOver, and paused worlds do not advance ticks.
 			// A retry scheduled here may therefore never run; retries matter for live all-bots-resolved capture.
+			var whole = Stopwatch.StartNew();
+			enqueueElapsed = TimeSpan.Zero;
+			enqueueChars = 0;
 			CaptureAndAppend(world);
+			AiLogWriteQueue.FlushSharedForGameEnd();
+			AiGameOverProbe.Report(nameof(AiSituationLogWriterDev), whole.Elapsed, enqueueElapsed, enqueueChars);
 		}
 
 		void CaptureAndAppend(World world)
@@ -102,9 +110,13 @@ namespace OpenRA.Mods.Cameo.Traits
 			return AiMatchLogWriter.Eligible(type, replay, loadingSave, host);
 		}
 
+		// Every situation batch is the game's single end-of-match record (live all-bots-resolved capture or GameOver), so it is final on every path.
 		void TryAppend(int worldTick)
 		{
-			var result = appender.TryAppend(pendingText, worldTick, out nextAttemptTick);
+			var enqueue = Stopwatch.StartNew();
+			var result = appender.TryAppend(pendingText, worldTick, out nextAttemptTick, finalRecord: true);
+			enqueueElapsed += enqueue.Elapsed;
+			enqueueChars = pendingText.Length;
 			if (result != AiLogAppendResult.RetryableFailure || appender.IsTerminal)
 			{
 				written = true;

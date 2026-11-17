@@ -23,7 +23,7 @@ namespace OpenRA.Mods.Cameo.Dev
 				byPlayer[playerIndex] = rows = new List<PendingRow>();
 			if (rows.Count >= 64)
 				rows.RemoveAt(0);
-			rows.Add(new PendingRow { Text = text + "\n", Appender = new AiLogFileAppender(fileName), NextAttemptTick = tick });
+			rows.Add(new PendingRow { Text = text + "\n", Appender = new AiLogFileAppender(fileName, nameof(ContextLogWriter)), NextAttemptTick = tick });
 		}
 
 		public void Flush(int playerIndex, int tick)

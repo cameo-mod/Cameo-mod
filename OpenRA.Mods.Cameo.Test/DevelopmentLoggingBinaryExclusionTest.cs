@@ -14,6 +14,10 @@ namespace OpenRA.Mods.Cameo.Test
 			!assemblyReferences.Any(n => n == "OpenRA.Mods.Cameo.Dev") &&
 			!typeNames.Any(n => n.StartsWith("OpenRA.Mods.Cameo.Dev.", StringComparison.Ordinal) ||
 				n == "OpenRA.Mods.Cameo.Traits.AiLogFileAppender" ||
+				n == "OpenRA.Mods.Cameo.Traits.AiLogWriteQueue" ||
+				n == "OpenRA.Mods.Cameo.Traits.AiLogWriteRequest" ||
+				n == "OpenRA.Mods.Cameo.Traits.AiLogWriteTiming" ||
+				n == "OpenRA.Mods.Cameo.Traits.AiLogWriteSink" ||
 				n == "OpenRA.Mods.Cameo.Traits.AiEconomyHealthLogWriter" ||
 				n == "OpenRA.Mods.CA.Traits.BotModules.BotPassiveDiagnosticWriter");
 

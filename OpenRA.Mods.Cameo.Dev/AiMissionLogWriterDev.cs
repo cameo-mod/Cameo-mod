@@ -10,6 +10,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 using OpenRA.Graphics;
@@ -39,6 +40,8 @@ namespace OpenRA.Mods.Cameo.Traits
 		int pendingLines;
 		int nextFlushTick;
 		int nextRetryTick;
+		TimeSpan enqueueElapsed;
+		int enqueueChars;
 		AiLogFileAppender appender;
 		string inFlight;
 		readonly Dictionary<int, string> seats = new();
@@ -179,9 +182,15 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void IGameOver.GameOver(World world)
 		{
+			var whole = Stopwatch.StartNew();
+			enqueueElapsed = TimeSpan.Zero;
+			enqueueChars = 0;
 			// World.EndGame pauses before IGameOver and a paused world does not tick: flush now, retries included.
 			for (var i = 0; i < 8 && (inFlight != null || pendingLines > 0); i++)
-				TryFlush(world.WorldTick);
+				TryFlush(world.WorldTick, finalRecord: true);
+
+			AiLogWriteQueue.FlushSharedForGameEnd();
+			AiGameOverProbe.Report(nameof(AiMissionLogWriterDev), whole.Elapsed, enqueueElapsed, enqueueChars);
 		}
 
 		void INotifyActorDisposing.Disposing(Actor self)
@@ -191,10 +200,12 @@ namespace OpenRA.Mods.Cameo.Traits
 			// records into pending by now. The last GameOver flush ran before them — flush once
 			// more or those terminal lines die in the buffer.
 			for (var i = 0; i < 8 && (inFlight != null || pendingLines > 0); i++)
-				TryFlush(self.World.WorldTick);
+				TryFlush(self.World.WorldTick, finalRecord: true);
+
+			AiLogWriteQueue.FlushSharedForGameEnd();
 		}
 
-		void TryFlush(int tick)
+		void TryFlush(int tick, bool finalRecord = false)
 		{
 			if (inFlight == null)
 			{
@@ -206,10 +217,13 @@ namespace OpenRA.Mods.Cameo.Traits
 				pendingLines = 0;
 
 				// The appender is single-shot (terminal after one append), so each batch gets its own.
-				appender = new AiLogFileAppender(info.FileName);
+				appender = new AiLogFileAppender(info.FileName, nameof(AiMissionLogWriterDev));
 			}
 
-			var result = appender.TryAppend(inFlight, tick, out nextRetryTick);
+			var enqueue = Stopwatch.StartNew();
+			var result = appender.TryAppend(inFlight, tick, out nextRetryTick, finalRecord);
+			enqueueElapsed += enqueue.Elapsed;
+			enqueueChars = inFlight.Length;
 			if (result != AiLogAppendResult.RetryableFailure || appender.IsTerminal)
 				inFlight = null;
 		}

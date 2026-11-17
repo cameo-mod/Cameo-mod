@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -38,6 +39,8 @@ namespace OpenRA.Mods.Cameo.Traits
 		bool written;
 		bool eligibleAtWorldLoad;
 		int nextAttemptTick;
+		TimeSpan enqueueElapsed;
+		int enqueueChars;
 		BotTakeoverTracker takeover;
 		readonly Dictionary<OpenRA.Player, List<int[]>> samples = new();
 		readonly Dictionary<OpenRA.Player, BotModules.BotFogMemory> signatureMemory = new();
@@ -85,7 +88,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 
 			fallbackGameUid = Guid.NewGuid().ToString("N");
-			appender = new AiLogFileAppender(info.FileName);
+			appender = new AiLogFileAppender(info.FileName, nameof(AiMatchLogWriterDev));
 		}
 
 		void ITick.Tick(Actor self)
@@ -113,12 +116,18 @@ namespace OpenRA.Mods.Cameo.Traits
 		{
 			// World.EndGame pauses before dispatching IGameOver. Finish the appender's
 			// bounded mutex retries here, because no future simulation tick is guaranteed.
+			var whole = Stopwatch.StartNew();
+			enqueueElapsed = TimeSpan.Zero;
+			enqueueChars = 0;
 			gameEnded = true;
 			if (eligibleAtWorldLoad && IsLogOwner())
 				SampleSignatures(world);
 			CaptureAndAppend(world);
 			for (var i = 0; i < 7 && !written && pendingText != null; i++)
 				TryAppend(world.WorldTick);
+
+			AiLogWriteQueue.FlushSharedForGameEnd();
+			AiGameOverProbe.Report(nameof(AiMatchLogWriterDev), whole.Elapsed, enqueueElapsed, enqueueChars);
 		}
 
 		void CaptureAndAppend(World world)
@@ -158,7 +167,11 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void TryAppend(int worldTick)
 		{
-			var result = appender.TryAppend(pendingText, worldTick, out nextAttemptTick);
+			// The match record is built only at GameOver (CaptureAndAppend), so every append here is a final record.
+			var enqueue = Stopwatch.StartNew();
+			var result = appender.TryAppend(pendingText, worldTick, out nextAttemptTick, finalRecord: true);
+			enqueueElapsed += enqueue.Elapsed;
+			enqueueChars = pendingText.Length;
 			if (result != AiLogAppendResult.RetryableFailure || appender.IsTerminal)
 			{
 				written = true;

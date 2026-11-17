@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -52,6 +53,8 @@ namespace OpenRA.Mods.Cameo.Traits
 		bool eligibleAtWorldLoad;
 		bool flushing;
 		int nextAttemptTick;
+		TimeSpan enqueueElapsed;
+		int enqueueChars;
 		World world;
 
 		public AiPlacementLogWriterDev(AiPlacementLogWriterInfo info) { this.info = info; }
@@ -73,7 +76,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 
 			fallbackGameUid = Guid.NewGuid().ToString("N");
-			appender = new AiLogFileAppender(info.FileName);
+			appender = new AiLogFileAppender(info.FileName, nameof(AiPlacementLogWriterDev));
 		}
 
 		void ITick.Tick(Actor self)
@@ -194,11 +197,17 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void IGameOver.GameOver(World world)
 		{
-			if (written || !eligibleAtWorldLoad)
-				return;
+			var whole = Stopwatch.StartNew();
+			enqueueElapsed = TimeSpan.Zero;
+			enqueueChars = 0;
+			if (!written && eligibleAtWorldLoad)
+			{
+				flushing = true;
+				TryAppend(world.WorldTick);
+			}
 
-			flushing = true;
-			TryAppend(world.WorldTick);
+			AiLogWriteQueue.FlushSharedForGameEnd();
+			AiGameOverProbe.Report(nameof(AiPlacementLogWriterDev), whole.Elapsed, enqueueElapsed, enqueueChars);
 		}
 
 		void TryAppend(int worldTick)
@@ -209,7 +218,12 @@ namespace OpenRA.Mods.Cameo.Traits
 				return;
 			}
 
-			var result = appender.TryAppend(lines.ToString(), worldTick, out nextAttemptTick);
+			// Placement lines are written only from GameOver (flushing), so every append here is a final record.
+			var text = lines.ToString();
+			var enqueue = Stopwatch.StartNew();
+			var result = appender.TryAppend(text, worldTick, out nextAttemptTick, finalRecord: true);
+			enqueueElapsed += enqueue.Elapsed;
+			enqueueChars = text.Length;
 			if (result != AiLogAppendResult.RetryableFailure || appender.IsTerminal)
 				written = true;
 		}

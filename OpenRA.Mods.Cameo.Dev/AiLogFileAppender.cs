@@ -12,22 +12,25 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading;
 
 namespace OpenRA.Mods.Cameo.Traits
 {
 	internal enum AiLogAppendResult { Appended, RetryableFailure, Failed }
 
+	// E3-3: enqueue-only. The file is written by AiLogWriteQueue's single worker thread, so the sim thread
+	// never touches the mutex or the file. Accepted = Appended (the worker reports later failures on the log
+	// channel); refused (queue full) = Failed and counted as dropped. Both are terminal for the writer.
 	internal sealed class AiLogFileAppender
 	{
 		readonly string filePath;
 		readonly string mutexName;
-		int attempts;
+		readonly string writer;
 
 		public bool IsTerminal { get; private set; }
 
-		public AiLogFileAppender(string fileName)
+		public AiLogFileAppender(string fileName, string writer)
 		{
+			this.writer = writer;
 			filePath = Path.Combine(Platform.SupportDir, "Logs", fileName);
 			var canonicalPath = Path.GetFullPath(filePath);
 			if (OperatingSystem.IsWindows())
@@ -37,49 +40,14 @@ namespace OpenRA.Mods.Cameo.Traits
 				SHA256.HashData(Encoding.UTF8.GetBytes(canonicalPath)));
 		}
 
-		public AiLogAppendResult TryAppend(string text, int worldTick, out int nextAttemptTick)
+		// finalRecord: the writer's GameOver/Disposing (or end-of-game) record, exempt from the text budget.
+		public AiLogAppendResult TryAppend(string text, int worldTick, out int nextAttemptTick, bool finalRecord = false)
 		{
-			attempts++;
-			var result = Append(text);
-			if (result != AiLogAppendResult.RetryableFailure || attempts >= 8)
-			{
-				IsTerminal = true;
-				nextAttemptTick = worldTick;
-				return result;
-			}
-
-			nextAttemptTick = worldTick + Math.Min(1 << Math.Min(attempts - 1, 5), 30);
-			return result;
-		}
-
-		AiLogAppendResult Append(string text)
-		{
-			Mutex mutex = null;
-			try
-			{
-				mutex = new Mutex(false, mutexName);
-				try
-				{
-					if (!mutex.WaitOne(TimeSpan.FromMilliseconds(100)))
-						return AiLogAppendResult.RetryableFailure;
-				}
-				catch (AbandonedMutexException) { }
-
-				try
-				{
-					Directory.CreateDirectory(Path.GetDirectoryName(filePath));
-					File.AppendAllText(filePath, text, new UTF8Encoding(false));
-					return AiLogAppendResult.Appended;
-				}
-				catch { return AiLogAppendResult.Failed; }
-				finally
-				{
-					try { mutex.ReleaseMutex(); }
-					catch { }
-				}
-			}
-			catch { return AiLogAppendResult.Failed; }
-			finally { mutex?.Dispose(); }
+			// No tick-based retry any more: the worker owns retry and backoff.
+			nextAttemptTick = worldTick;
+			IsTerminal = true;
+			var request = new AiLogWriteRequest(filePath, mutexName, text, worldTick, writer, finalRecord);
+			return AiLogWriteQueue.Shared.TryEnqueue(request) ? AiLogAppendResult.Appended : AiLogAppendResult.Failed;
 		}
 	}
 }
