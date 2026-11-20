@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Support;
 using OpenRA.Traits;
@@ -96,7 +97,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			public int Units;
 			public long Draws;
-			public int LastSearchTick = int.MinValue;
+			public BotCooldown FullListSearchCooldown;
 		}
 
 		readonly BaseBuilderBotModuleCA baseBuilder;
@@ -309,9 +310,9 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (!ready)
 			{
-				if (e.Best.Count < RefinerySiteSearchLogic.K || now - e.LastSearchTick >= FullListSearchIntervalTicks)
+				if (e.Best.Count < RefinerySiteSearchLogic.K || e.FullListSearchCooldown.Ready(now))
 				{
-					e.LastSearchTick = now;
+					e.FullListSearchCooldown.Start(now, FullListSearchIntervalTicks);
 					Search(law, settings, e, demand, now, ref units, false);
 				}
 
