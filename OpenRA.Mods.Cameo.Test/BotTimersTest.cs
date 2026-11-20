@@ -153,6 +153,33 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void ExpansionDemandEtaReloadMatchesItsN1AbsoluteTickCadence()
+		{
+			var oldDue = 100;
+			var cooldown = new BotCooldown { Due = 0 };
+			var oldRefreshes = new List<int>();
+			var newRefreshes = new List<int>();
+
+			for (var now = 100; now <= 250; now++)
+			{
+				if (now >= oldDue)
+				{
+					oldRefreshes.Add(now);
+					oldDue = now + 25;
+				}
+
+				if (cooldown.Ready(now))
+				{
+					newRefreshes.Add(now);
+					cooldown.Start(now, 25);
+				}
+			}
+
+			Assert.That(newRefreshes, Is.EqualTo(oldRefreshes));
+			Assert.That(newRefreshes, Is.EqualTo(new[] { 100, 125, 150, 175, 200, 225, 250 }));
+		}
+
+		[Test]
 		public void RuledOutFirstDeadlineFormsFail()
 		{
 			// Positive control (9.5): the withdrawn due0 = r + x0 reproduces Sol's tick-25-against-26 defect at x0 = 0.

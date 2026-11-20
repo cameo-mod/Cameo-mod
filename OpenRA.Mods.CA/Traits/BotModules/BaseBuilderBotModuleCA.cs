@@ -1468,7 +1468,7 @@ namespace OpenRA.Mods.CA.Traits
 						continue;
 					}
 
-					if (now >= demand.NextEtaTick)
+					if (demand.NextEtaCooldown.Ready(now))
 						RefreshExpansionEta(demand);
 				}
 				else if (demand.DeployedYard == null || demand.DeployedYard.Disposed || demand.DeployedYard.IsDead
@@ -1703,7 +1703,7 @@ namespace OpenRA.Mods.CA.Traits
 			var now = world.WorldTick;
 			var travel = EstimateTravelTicks(demand.Mcv, demand.ConyardLoc);
 			demand.EtaTick = travel == int.MaxValue ? int.MaxValue : now + travel + Info.ExpansionDeployTicks;
-			demand.NextEtaTick = now + Info.ExpansionEtaIntervalTicks;
+			demand.NextEtaCooldown.Start(now, Info.ExpansionEtaIntervalTicks);
 			if (demand.DefenceType == null)
 				demand.DefenceType = ChooseDemandDefence(demand.EtaTick);
 		}
@@ -2183,7 +2183,7 @@ namespace OpenRA.Mods.CA.Traits
 			demand.ResourceLoc = request.ResourceLoc;
 			demand.YardFootprint = DeployFootprint(expandActor, request.ConyardLoc);
 			demand.ExpiresTick = world.WorldTick + Info.ExpansionDemandIdleTicks;
-			demand.NextEtaTick = world.WorldTick;
+			demand.NextEtaCooldown.Start(world.WorldTick, 0);
 
 			// ECON-A-FIX (R4): the demand publishes only while the expansion order issuer's lease holds on the
 			// traveller — a first claim refused by a foreign owner's lease means this journey is not ours
