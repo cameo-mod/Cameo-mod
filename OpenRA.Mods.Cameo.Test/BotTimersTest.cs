@@ -225,6 +225,59 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void RetreatRallyCooldownsRebaseFromTheLastEventWhenTheResolvedIntervalChanges()
+		{
+			static int IntervalAt(int tick) => tick < 60 ? 100 : tick < 90 ? 25 : tick < 150 ? 80 : 40;
+			var oldRescoreTick = 7;
+			var cooldownRescoreTick = 7;
+			var rescoreCooldown = new BotCooldown();
+			var oldRescores = new List<int>();
+			var newRescores = new List<int>();
+			var oldOrderTick = int.MinValue / 2;
+			var cooldownOrderTick = int.MinValue / 2;
+			var orderCooldown = new BotCooldown { Due = int.MinValue / 2 };
+			var hasOrder = false;
+			var oldOrders = new List<int>();
+			var newOrders = new List<int>();
+
+			for (var now = 1; now <= 300; now++)
+			{
+				var interval = IntervalAt(now);
+				if (now - oldRescoreTick >= interval)
+				{
+					oldRescores.Add(now);
+					oldRescoreTick = now;
+				}
+
+				rescoreCooldown.Due = cooldownRescoreTick + interval;
+				if (rescoreCooldown.Ready(now))
+				{
+					newRescores.Add(now);
+					cooldownRescoreTick = now;
+					rescoreCooldown.Start(now, interval);
+				}
+
+				if (!hasOrder || now - oldOrderTick >= interval)
+				{
+					oldOrders.Add(now);
+					oldOrderTick = now;
+					hasOrder = true;
+				}
+
+				orderCooldown.Due = cooldownOrderTick + interval;
+				if (!hasOrder || orderCooldown.Ready(now))
+				{
+					newOrders.Add(now);
+					cooldownOrderTick = now;
+					orderCooldown.Start(now, interval);
+				}
+			}
+
+			Assert.That(newRescores, Is.EqualTo(oldRescores));
+			Assert.That(newOrders, Is.EqualTo(oldOrders));
+		}
+
+		[Test]
 		public void RuledOutFirstDeadlineFormsFail()
 		{
 			// Positive control (9.5): the withdrawn due0 = r + x0 reproduces Sol's tick-25-against-26 defect at x0 = 0.
