@@ -89,6 +89,28 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void RosterRepackedFiresAtEveryBoundaryWithTheSlotOrderedRoster()
+		{
+			var f = Fixture.WithSeats(3);
+			var seen = new List<string[]>();
+			f.Core.RosterRepacked += roster => seen.Add(roster.Select(s => s.Name).ToArray());
+
+			for (var t = 0; t < 7; t++)
+			{
+				if (t == 4)
+					f.Dead.Add("p1");
+
+				f.Core.Advance(t);
+			}
+
+			// Boundaries at t=0, 3 and 6; p1 is gone from the t=6 roster (it died inside the second cycle).
+			Assert.That(seen.Count, Is.EqualTo(3));
+			Assert.That(seen[0], Is.EqualTo(new[] { "p0", "p1", "p2" }));
+			Assert.That(seen[1], Is.EqualTo(new[] { "p0", "p1", "p2" }));
+			Assert.That(seen[2], Is.EqualTo(new[] { "p0", "p2" }));
+		}
+
+		[Test]
 		public void SingleBotIsVisitedEveryTick()
 		{
 			var f = Fixture.WithSeats(1);

@@ -75,6 +75,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			this.playerIndexOf = playerIndexOf ?? (s => s.PlayerIndex);
 		}
 
+		// 5.1 TransferSharedJobOwners / 10.3: raised at every cycle boundary with the new roster in slot order. A subscriber
+		// (the heavy-op job registry) must not mutate the roster or register seats from the callback.
+		public event Action<IReadOnlyList<BotSeat>> RosterRepacked;
+
 		public IReadOnlyList<BotSeat> Roster => roster;
 		public IReadOnlyList<BotSeat> Registered => registered;
 		public int CycleStart => cycleStart;
@@ -127,6 +131,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				roster = registered.Where(isLive).OrderBy(s => s.SpawnKey).ThenBy(s => s.PlayerIndex).ToArray();
 				cycleStart = t;
 				epoch++;
+				RosterRepacked?.Invoke(roster);
 			}
 
 			if (roster.Length > 0 && !isLive(roster[t - cycleStart]))
