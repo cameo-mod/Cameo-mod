@@ -1,3 +1,6 @@
+### 2026-11-21 - FullStack: PERF-TMAP-DEAD-01 remote backup
+- Pushed branch `fullstack/perf-tmap-dead-01` to `origin` without force as requested; initial remote tip/source pin `36e193c34d53b635e3b4796f732b494f9fcbb781` (implementation `71ae73c8377d18346ea52d0707be2bae9c300611`).
+- No build, test, or game run. Sol static re-review is pending; order-identity game remains gated on the next approved perf window.
 ### 2026-11-21 - FullStack: PERF-TMAP-DEAD-01 successor for Sol FIX_STATIC
 - Successor implementation `71ae73c8377d18346ea52d0707be2bae9c300611` on `fullstack/perf-tmap-dead-01` (parent reviewed SHA `35f178e183536f5c42e5b798503c00f7f184892c`).
 - Replaced the weak projection test with a fixture using the production `RunRefreshCycle` dispatcher, production `BuildTerritoryClaim`, `TallyOwners`, and the same `ResolveRegionGateCorridor` used by `GetRegionGateCorridor`; compares claim, owner, and RegionRoles corridor values with optional work skipped/requested. Sim/overlay optional getters document async first availability per Opus ruling; overlay requests only schedule sim-thread work.
