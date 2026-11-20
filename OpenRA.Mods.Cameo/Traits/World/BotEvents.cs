@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
 
@@ -208,31 +209,40 @@ namespace OpenRA.Mods.Cameo.Traits
 		public override string Kind => AppliedKindName;
 	}
 
-	public enum LeaseLostReason { Preempted, Released, Expired, UnitLost }
-
+	// BotUnitLeaseRegistry.Preempt (the only source): the holder named PreviousHolder (a trait type name, the lease-owner
+	// convention) lost UnitActorId to NewOwner. Recipient is empty: the bot re-runs the registry's holder match at delivery.
 	public sealed class LeaseLostEvent : BotEvent
 	{
 		public const string KindName = "LeaseLostEvent";
 
 		public uint UnitActorId;
-		public ModuleKey PreviousHolder;
-		public LeaseLostReason Reason;
+		public string PreviousHolder = "";
+		public string NewOwner = "";
+		public int Purpose;
+
+		// Not saved: the live reference of the continuous game; a load resolves the id.
+		public Actor Unit;
 
 		public override string Kind => KindName;
 		public override IEnumerable<uint> ActorIds => [UnitActorId];
 
+		public static LeaseLostEvent From(Actor unit, string previousHolder, string newOwner, int purpose) =>
+			new() { Unit = unit, UnitActorId = unit.ActorID, PreviousHolder = previousHolder ?? "", NewOwner = newOwner ?? "", Purpose = purpose };
+
 		protected override void SaveFields(List<MiniYamlNode> into)
 		{
 			into.Add(new("UnitActorId", Fmt(UnitActorId)));
-			into.Add(new("PreviousHolder", PreviousHolder.ToString()));
-			into.Add(new("Reason", Fmt((int)Reason)));
+			into.Add(new("PreviousHolder", PreviousHolder));
+			into.Add(new("NewOwner", NewOwner));
+			into.Add(new("Purpose", Fmt(Purpose)));
 		}
 
 		protected override void LoadFields(MiniYaml data)
 		{
 			UnitActorId = GetUInt(data, "UnitActorId");
-			PreviousHolder = ModuleKey.Parse(Get(data, "PreviousHolder"));
-			Reason = (LeaseLostReason)GetInt(data, "Reason");
+			PreviousHolder = Get(data, "PreviousHolder");
+			NewOwner = Get(data, "NewOwner");
+			Purpose = GetInt(data, "Purpose");
 		}
 	}
 
@@ -251,12 +261,23 @@ namespace OpenRA.Mods.Cameo.Traits
 		public ModuleKey Issuer;
 		public int IssueTick;
 		public int Outcome;
+		public bool Terminal;
 
 		// Not saved.
 		public Order Order;
 
 		public override string Kind => KindName;
 		public override IEnumerable<uint> ActorIds => SubjectActorId == 0 ? Array.Empty<uint>() : new[] { SubjectActorId };
+
+		public static OrderDispositionEvent From(Order order, BotOrderOutcome outcome, bool terminal, long serial) => new()
+		{
+			Order = order,
+			Serial = serial,
+			OrderString = order.OrderString ?? "",
+			SubjectActorId = order.Subject?.ActorID ?? 0,
+			Outcome = (int)outcome,
+			Terminal = terminal,
+		};
 
 		protected override void SaveFields(List<MiniYamlNode> into)
 		{
@@ -269,6 +290,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			into.Add(new("Issuer", Issuer.ToString()));
 			into.Add(new("IssueTick", Fmt(IssueTick)));
 			into.Add(new("Outcome", Fmt(Outcome)));
+			into.Add(new("Terminal", Terminal ? "true" : "false"));
 		}
 
 		protected override void LoadFields(MiniYaml data)
@@ -282,6 +304,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			Issuer = ModuleKey.Parse(Get(data, "Issuer"));
 			IssueTick = GetInt(data, "IssueTick");
 			Outcome = GetInt(data, "Outcome");
+			Terminal = Get(data, "Terminal") == "true";
 		}
 	}
 

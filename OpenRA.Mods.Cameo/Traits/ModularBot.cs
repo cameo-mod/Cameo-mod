@@ -186,6 +186,38 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		public bool CanResolveModule(ModuleKey key) => receivers.ContainsKey(key.Module);
 
+		/// <summary>Queued dispositions that met no binding (after a load, 7.2). Counted, never an error.</summary>
+		public long DispositionUnmatched { get; private set; }
+
+		// 7.2: dispositions produced by the every-tick DrainOrders (Phase Done or Off) are queued to the slot; one produced
+		// inside the bot's own Running phase (QueueOrderTracked from a module) is delivered now, exactly as before.
+		void NotifyDisposition(bool terminal, Order order, BotOrderOutcome outcome)
+		{
+			if (order == null)
+				return;
+
+			if (seat == null || !seat.Gated || !TryDefer(() => OrderDispositionEvent.From(order, outcome, terminal, ++seat.TrackingSerial)))
+				DeliverDisposition(order, outcome, terminal);
+		}
+
+		void DeliverDisposition(Order order, BotOrderOutcome outcome, bool terminal)
+		{
+			if (terminal)
+				trackedOrders.NotifyTerminal(order, outcome);
+			else
+				trackedOrders.NotifyResident(order, outcome);
+		}
+
+		/// <summary>The player's enabled bot, or null (a player actor carries one ModularBot per bot type; one is activated).</summary>
+		public static ModularBot ActiveOf(OpenRA.Player p)
+		{
+			foreach (var b in p.PlayerActor.TraitsImplementing<ModularBot>())
+				if (b.IsEnabled)
+					return b;
+
+			return null;
+		}
+
 		// Called by the host's player creation code
 		public void Activate(OpenRA.Player p)
 		{
@@ -250,14 +282,14 @@ namespace OpenRA.Mods.Cameo.Traits
 				var dropped = orders.First.Value;
 				orders.RemoveFirst();
 				DroppedOrders++;
-				trackedOrders.NotifyTerminal(dropped.Order, BotOrderOutcome.RefusedLocally);
+				NotifyDisposition(true, dropped.Order, BotOrderOutcome.RefusedLocally);
 #if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI {player.InternalName}: ORDERGATE DROPPED {dropped.Issuer ?? "?"} queued {dropped.Order.OrderString} (queue full {info.MaxQueuedOrders}; tick {world.WorldTick})");
 #endif
 			}
 
 			orders.AddLast(item);
-			trackedOrders.NotifyResident(item.Order, BotOrderOutcome.LocallyQueued);
+			NotifyDisposition(false, item.Order, BotOrderOutcome.LocallyQueued);
 		}
 
 		/// <summary>
@@ -409,7 +441,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				{
 					// Tracked orders are never grouped, so a null gate result means the
 					// exact registered instance died here — terminal RefusedLocally.
-					trackedOrders.NotifyTerminal(item.Order, BotOrderOutcome.RefusedLocally);
+					NotifyDisposition(true, item.Order, BotOrderOutcome.RefusedLocally);
 					continue;
 				}
 
@@ -418,7 +450,7 @@ namespace OpenRA.Mods.Cameo.Traits
 					// The budget, not the gate, stopped it: it goes back to the front for next tick
 					// instead of vanishing the way a dequeued-then-abandoned order used to.
 					orders.AddFirst(item);
-					trackedOrders.NotifyResident(item.Order, BotOrderOutcome.Deferred);
+					NotifyDisposition(false, item.Order, BotOrderOutcome.Deferred);
 					break;
 				}
 
@@ -426,7 +458,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 				// Routing released it — terminal for tracking. NOT engine acceptance,
 				// queue insertion or production completion (Sol 0CB8EF18 §1).
-				trackedOrders.NotifyTerminal(item.Order, BotOrderOutcome.IssuedToWorld);
+				NotifyDisposition(true, item.Order, BotOrderOutcome.IssuedToWorld);
 			}
 		}
 
@@ -545,6 +577,21 @@ namespace OpenRA.Mods.Cameo.Traits
 			{
 				if (ev is AttackEvent a)
 					DeliverAttack(a.Self, a.Info, true);
+				else if (ev is OrderDispositionEvent disposition)
+				{
+					if (disposition.Order != null)
+						DeliverDisposition(disposition.Order, (BotOrderOutcome)disposition.Outcome, disposition.Terminal);
+					else
+						DispositionUnmatched++;
+				}
+				else if (ev is LeaseLostEvent lost)
+				{
+					// A-1: the unit may have died while the notice waited for the slot. A dead or unresolvable unit is
+					// dropped without a call, which is what every holder does with it anyway.
+					var unit = lost.Unit ?? world.GetActorById(lost.UnitActorId);
+					if (unit != null && !unit.IsDead)
+						BotModules.BotUnitLeaseRegistry.NotifyLeaseLost(player, unit, lost.PreviousHolder, lost.NewOwner, (BotLeasePurpose)lost.Purpose);
+				}
 
 				return;
 			}

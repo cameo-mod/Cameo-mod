@@ -187,12 +187,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 #if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): LC1 lease preempted: {owner} took {actor.Info.Name} {actor.ActorID} from {previous} for {purpose} (tick {world.WorldTick})");
 #endif
-				foreach (var lost in player.PlayerActor.TraitsImplementing<IBotUnitLeaseLost>())
-					if (lost.GetType().Name == previous)
-						lost.LeaseLost(actor, owner, purpose);
+				// STAGGER_DESIGN_06 7.1: a gated bot's lease-lost notice is queued to its slot; every other bot, and a
+				// gated bot in its own Running phase, is notified now, exactly as before.
+				var bot = ModularBot.ActiveOf(player);
+				if (bot == null || !bot.TryDefer(() => LeaseLostEvent.From(actor, previous, owner, (int)purpose)))
+					NotifyLeaseLost(player, actor, previous, owner, purpose);
 			}
 
 			return true;
+		}
+
+		/// <summary>Tells the holder named <paramref name="previous"/> (matched by trait type name) that an emergency took its unit.</summary>
+		public static void NotifyLeaseLost(OpenRA.Player player, Actor actor, string previous, string newOwner, BotLeasePurpose purpose)
+		{
+			foreach (var lost in player.PlayerActor.TraitsImplementing<IBotUnitLeaseLost>())
+				if (lost.GetType().Name == previous)
+					lost.LeaseLost(actor, newOwner, purpose);
 		}
 
 		bool IBotUnitLeases.Transfer(Actor actor, string newOwner, BotLeasePurpose purpose, int durationTicks)
