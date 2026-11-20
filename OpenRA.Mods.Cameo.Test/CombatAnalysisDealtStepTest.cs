@@ -145,6 +145,49 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TheEngagementHitSnapshotKeepsEveryFieldThroughTheSavedForm()
+		{
+			var ev = new EngagementHitEvent
+			{
+				Recipient = new ModuleKey("Multi2", "EngagementLogBotModule@0"),
+				Hurt = true,
+				EventTick = 5150,
+				SubjectId = 991,
+				SubjectType = "fact",
+				X = 40,
+				Y = 12,
+				Dead = true,
+				Damage = 250,
+				Hp = 30,
+				MaxHp = 1000,
+				AttackerId = 55,
+				AttackerType = "e3",
+				AttackerAlive = true,
+				AttackerInWorld = false,
+				AttackerX = 44,
+				AttackerY = 9,
+			};
+
+			var back = (EngagementHitEvent)BotEvent.Load(ev.Save().Value);
+			Assert.That(back, Is.Not.Null);
+			Assert.That(back.Recipient, Is.EqualTo(ev.Recipient));
+			Assert.That(back.Hurt, Is.True);
+			Assert.That(back.EventTick, Is.EqualTo(5150));
+			Assert.That(back.SubjectId, Is.EqualTo(991u));
+			Assert.That(back.SubjectType, Is.EqualTo("fact"));
+			Assert.That((back.X, back.Y), Is.EqualTo((40, 12)));
+			Assert.That(back.Dead, Is.True);
+			Assert.That(back.Damage, Is.EqualTo(250));
+			Assert.That((back.Hp, back.MaxHp), Is.EqualTo((30, 1000)));
+			Assert.That(back.AttackerId, Is.EqualTo(55u));
+			Assert.That(back.AttackerType, Is.EqualTo("e3"));
+			Assert.That(back.AttackerAlive, Is.True);
+			Assert.That(back.AttackerInWorld, Is.False);
+			Assert.That((back.AttackerX, back.AttackerY), Is.EqualTo((44, 9)));
+			Assert.That(back.ActorIds, Is.Empty);
+		}
+
+		[Test]
 		public void TheSnapshotKeepsEveryFieldThroughTheSavedForm()
 		{
 			var ev = new DamageDealtEvent

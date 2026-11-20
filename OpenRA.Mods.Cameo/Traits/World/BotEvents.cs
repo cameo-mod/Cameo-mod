@@ -80,6 +80,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				AppliedDamageEvent.AppliedKindName => new AppliedDamageEvent(),
 				LeaseLostEvent.KindName => new LeaseLostEvent(),
 				DamageDealtEvent.KindName => new DamageDealtEvent(),
+				EngagementHitEvent.KindName => new EngagementHitEvent(),
 				OrderDispositionEvent.KindName => new OrderDispositionEvent(),
 				QueueTransitionEvent.KindName => new QueueTransitionEvent(),
 				BeaconEvent.KindName => new BeaconEvent(),
@@ -381,6 +382,74 @@ namespace OpenRA.Mods.Cameo.Traits
 		}
 	}
 
+	// EngagementLog hurt/dealt hits (its RunningTotalMilli feeds InMatchAdapt, so deferral must not change what it sees).
+	// Everything the module's Apply reads is captured at event time; type names resolve against the rules at delivery.
+	public sealed class EngagementHitEvent : BotEvent
+	{
+		public const string KindName = "EngagementHitEvent";
+
+		public bool Hurt;
+		public int EventTick;
+		public uint SubjectId;
+		public string SubjectType = "";
+		public int X;
+		public int Y;
+		public bool Dead;
+		public int Damage;
+		public int Hp;
+		public int MaxHp = 1;
+		public uint AttackerId;
+		public string AttackerType = "";
+		public bool AttackerAlive;
+		public bool AttackerInWorld;
+		public int AttackerX;
+		public int AttackerY;
+
+		public override string Kind => KindName;
+
+		static string B(bool v) => v ? "true" : "false";
+
+		protected override void SaveFields(List<MiniYamlNode> into)
+		{
+			into.Add(new("Hurt", B(Hurt)));
+			into.Add(new("EventTick", Fmt(EventTick)));
+			into.Add(new("SubjectId", Fmt(SubjectId)));
+			into.Add(new("SubjectType", SubjectType));
+			into.Add(new("X", Fmt(X)));
+			into.Add(new("Y", Fmt(Y)));
+			into.Add(new("Dead", B(Dead)));
+			into.Add(new("Damage", Fmt(Damage)));
+			into.Add(new("Hp", Fmt(Hp)));
+			into.Add(new("MaxHp", Fmt(MaxHp)));
+			into.Add(new("AttackerId", Fmt(AttackerId)));
+			into.Add(new("AttackerType", AttackerType));
+			into.Add(new("AttackerAlive", B(AttackerAlive)));
+			into.Add(new("AttackerInWorld", B(AttackerInWorld)));
+			into.Add(new("AttackerX", Fmt(AttackerX)));
+			into.Add(new("AttackerY", Fmt(AttackerY)));
+		}
+
+		protected override void LoadFields(MiniYaml data)
+		{
+			Hurt = Get(data, "Hurt") == "true";
+			EventTick = GetInt(data, "EventTick");
+			SubjectId = GetUInt(data, "SubjectId");
+			SubjectType = Get(data, "SubjectType");
+			X = GetInt(data, "X");
+			Y = GetInt(data, "Y");
+			Dead = Get(data, "Dead") == "true";
+			Damage = GetInt(data, "Damage");
+			Hp = GetInt(data, "Hp");
+			MaxHp = GetInt(data, "MaxHp");
+			AttackerId = GetUInt(data, "AttackerId");
+			AttackerType = Get(data, "AttackerType");
+			AttackerAlive = Get(data, "AttackerAlive") == "true";
+			AttackerInWorld = Get(data, "AttackerInWorld") == "true";
+			AttackerX = GetInt(data, "AttackerX");
+			AttackerY = GetInt(data, "AttackerY");
+		}
+	}
+
 	public enum QueueTransition {Started, Done, Cancelled, Placed, Refunded }
 
 	public sealed class QueueTransitionEvent : BotEvent
@@ -451,5 +520,13 @@ namespace OpenRA.Mods.Cameo.Traits
 	public interface IBotEventReceiver
 	{
 		void ReceiveBotEvent(BotEvent ev);
+	}
+
+	// A module that also implements IBotRespondToAttack and reads live state there (liveness, health, location) takes its own
+	// event-time snapshot instead of seeing the queued attack at the slot. For a gated bot ModularBot posts SnapshotAttack's
+	// event to the module and skips the module in the queued attack delivery. Null = nothing to record.
+	public interface IBotAttackSnapshotter
+	{
+		BotEvent SnapshotAttack(Actor self, AttackInfo e);
 	}
 }

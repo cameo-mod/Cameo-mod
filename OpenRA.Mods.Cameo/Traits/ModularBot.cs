@@ -530,6 +530,22 @@ namespace OpenRA.Mods.Cameo.Traits
 				return;
 			}
 
+			// A module that reads live state in its response (EngagementLog: liveness, health, location) takes an event-time
+			// snapshot and gets its own event; the queued attack below skips it (DeliverAttack, gatedPath).
+			foreach (var t in attackResponseModules)
+			{
+				if (t is not IBotAttackSnapshotter snapshotter || !t.IsTraitEnabled())
+					continue;
+
+				var snapshot = snapshotter.SnapshotAttack(self, e);
+				if (snapshot == null)
+					continue;
+
+				snapshot.Recipient = KeyOf(t);
+				if (!TryDefer(() => snapshot) && t is IBotEventReceiver receiver)
+					receiver.ReceiveBotEvent(snapshot);
+			}
+
 			// 6.3: a gated bot's attack response is queued to its slot and delivered through the same body.
 			if (!TryDefer(() => AttackEvent.From(self, e)))
 				DeliverAttack(self, e, true);
@@ -550,6 +566,10 @@ namespace OpenRA.Mods.Cameo.Traits
 					foreach (var t in attackResponseModules)
 					{
 						if (!t.IsTraitEnabled())
+							continue;
+
+						// Snapshotters were handed their own event-time snapshot by Damaged.
+						if (gatedPath && t is IBotAttackSnapshotter)
 							continue;
 
 						issuer = issuerOf.TryGetValue(t, out var n) ? n : t.GetType().Name;
