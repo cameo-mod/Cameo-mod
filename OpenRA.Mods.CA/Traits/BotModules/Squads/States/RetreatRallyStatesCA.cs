@@ -28,8 +28,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		Policy.RallyPhase phase = Policy.RallyPhase.March;
 		Policy.RallyAction action;
 		int supportSinceTick;
-		int lastRescoreTick;
-		int lastOrderTick = int.MinValue / 2;
+		BotCooldown rescoreCooldown;
+		bool rescoreCooldownInitialized;
+		BotCooldown orderCooldown = new() { Due = int.MinValue / 2 };
 		CPos? lastOrderCell;
 		bool ended;
 
@@ -37,11 +38,16 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		{
 			this.plan = plan;
 			action = plan.Action;
-			lastRescoreTick = plan.PickTick;
 		}
 
 		public void Activate(SquadCA owner)
 		{
+			if (!rescoreCooldownInitialized)
+			{
+				rescoreCooldown.Start(plan.PickTick, Param(owner, nameof(SquadManagerBotModuleCAInfo.AggTeamRallyRescoreTicks)));
+				rescoreCooldownInitialized = true;
+			}
+
 			Order(owner, plan.DestPos);
 		}
 
@@ -55,9 +61,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var observed = manager.RetreatRallyObserve(owner, plan, phase, action);
 
 			// G7: the destination is re-scored every RescoreTicks (and at once when it became invalid); a switch needs the lock and the margin.
-			if (!observed.Losing && (observed.DestInvalid || Policy.RescoreDue(lastRescoreTick, now, Param(owner, nameof(SquadManagerBotModuleCAInfo.AggTeamRallyRescoreTicks)))))
+			if (!observed.Losing && (observed.DestInvalid || rescoreCooldown.Ready(now)))
 			{
-				lastRescoreTick = now;
+				rescoreCooldown.Start(now, Param(owner, nameof(SquadManagerBotModuleCAInfo.AggTeamRallyRescoreTicks)));
 				var next = manager.RetreatRallyRescore(owner, plan, observed.DestInvalid);
 				if (next != null)
 				{
@@ -109,7 +115,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		{
 			var manager = owner.SquadManager;
 			var now = owner.World.WorldTick;
-			if (lastOrderCell != null && now - lastOrderTick < Param(owner, nameof(SquadManagerBotModuleCAInfo.AggTeamRallyRescoreTicks)))
+			if (lastOrderCell != null && !orderCooldown.Ready(now))
 				return;
 
 			var map = owner.World.Map;
@@ -125,7 +131,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				return;
 
 			lastOrderCell = cell;
-			lastOrderTick = now;
+			orderCooldown.Start(now, Param(owner, nameof(SquadManagerBotModuleCAInfo.AggTeamRallyRescoreTicks)));
 			if (support)
 				QueueDeduped(owner, "AttackMove", SquadOrderKey.ForCell("AttackMove", cell), Target.FromCell(owner.World, cell), members);
 			else

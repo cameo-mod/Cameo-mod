@@ -180,6 +180,51 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void RetreatRallyRescoreAndOrderCooldownsMatchTheirN1Gates()
+		{
+			const int interval = 100;
+			const int pickTick = 7;
+			var lastRescoreTick = pickTick;
+			var rescoreCooldown = BotCooldown.FromRemaining(pickTick, interval);
+			var lastOrderTick = int.MinValue / 2;
+			var orderCooldown = new BotCooldown { Due = int.MinValue / 2 };
+			var oldRescores = new List<int>();
+			var newRescores = new List<int>();
+			var oldOrders = new List<int>();
+			var newOrders = new List<int>();
+
+			for (var now = 1; now <= 400; now++)
+			{
+				if (now - lastRescoreTick >= interval)
+				{
+					oldRescores.Add(now);
+					lastRescoreTick = now;
+				}
+
+				if (rescoreCooldown.Ready(now))
+				{
+					newRescores.Add(now);
+					rescoreCooldown.Start(now, interval);
+				}
+
+				if (now - lastOrderTick >= interval)
+				{
+					oldOrders.Add(now);
+					lastOrderTick = now;
+				}
+
+				if (orderCooldown.Ready(now))
+				{
+					newOrders.Add(now);
+					orderCooldown.Start(now, interval);
+				}
+			}
+
+			Assert.That(newRescores, Is.EqualTo(oldRescores));
+			Assert.That(newOrders, Is.EqualTo(oldOrders));
+		}
+
+		[Test]
 		public void RuledOutFirstDeadlineFormsFail()
 		{
 			// Positive control (9.5): the withdrawn due0 = r + x0 reproduces Sol's tick-25-against-26 defect at x0 = 0.
