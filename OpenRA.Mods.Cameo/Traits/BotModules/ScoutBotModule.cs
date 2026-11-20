@@ -194,8 +194,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var scout in scouts.ToArray())
 			{
 				var actor = scout.Actor;
-				if (scoutTargets.TryGetValue(actor, out var target) && tick - target.AssignedTick < Info.RetargetTicks && !actor.IsIdle)
-					continue;
+				if (scoutTargets.TryGetValue(actor, out var target) && !actor.IsIdle)
+				{
+					var retargetCooldown = new BotCooldown();
+					retargetCooldown.Start(target.AssignedTick, Info.RetargetTicks);
+					if (!retargetCooldown.Ready(tick))
+						continue;
+				}
 
 				var region = ChooseScoutTarget(regions, actor.Location, tick, taken);
 				if (region < 0)
@@ -296,7 +301,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		internal static bool MayRequest(int tick, int lastRequestTick, int cooldownTicks)
 		{
-			return cooldownTicks <= 0 || lastRequestTick < 0 || tick - lastRequestTick >= cooldownTicks;
+			if (cooldownTicks <= 0 || lastRequestTick < 0)
+				return true;
+
+			var cooldown = new BotCooldown();
+			cooldown.Start(lastRequestTick, cooldownTicks);
+			return cooldown.Ready(tick);
 		}
 
 		bool RequestScout(IBot bot)
