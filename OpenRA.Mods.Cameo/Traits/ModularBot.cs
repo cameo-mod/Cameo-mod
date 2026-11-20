@@ -104,7 +104,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		}
 	}
 
-	public sealed class ModularBot : ITick, IBot, INotifyDamage, IBotOrderTracking
+	public sealed class ModularBot : ITick, IBot, INotifyDamage, IBotOrderTracking, OpenRA.Mods.CA.IBotVisitClock
 	{
 		public bool IsEnabled;
 
@@ -462,7 +462,15 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 		}
 
-		// The module loop, unchanged. A gated bot calls it once per visit; every other bot, every tick.
+		// STAGGER-ENG-01 (Opus ruling): the engine-owned IBotTick modules with call-counted timers (ENGINE_REPLAY_LIST_01).
+		// Matched by type name; every one lives in engine/ (OpenRA.Mods.Common / OpenRA.Mods.AS).
+		public static readonly HashSet<string> EngineReplay = new()
+		{
+			"PowerDownBotModule", "SupportPowerBotASModule", "SendUnitToAttackBotModule", "LoadCargoBotModule",
+			"McvExpansionManagerBotModule", "MinelayerBotModule", "ResourceMapBotModule",
+		};
+
+		// The module loop. A gated bot calls it once per visit; every other bot, every tick.
 		void RunModules(bool timed)
 		{
 			// Every module ticks every tick — timers (scan intervals, countdowns)
@@ -476,17 +484,24 @@ namespace OpenRA.Mods.Cameo.Traits
 						continue;
 
 					issuer = issuerOf.TryGetValue(t, out var n) ? n : t.GetType().Name;
+
+					// STAGGER-ENG-01: an engine-owned module counts BotTick calls and cannot be edited here, so the
+					// gated visit replays its call once per elapsed tick. At N = 1 (and for every ungated bot) Elapsed
+					// is 1, so it runs exactly once, as before.
+					var calls = IsGated && EngineReplay.Contains(t.GetType().Name) ? Math.Max(1, Clock.Elapsed) : 1;
 					if (timed)
 					{
 						moduleStopwatch.Restart();
-						t.BotTick(this);
+						for (var i = 0; i < calls; i++)
+							t.BotTick(this);
 						moduleStopwatch.Stop();
 
 						moduleTiming.TryGetValue(t, out var acc);
 						moduleTiming[t] = (acc.Ticks + moduleStopwatch.ElapsedTicks, acc.Count + 1);
 					}
 					else
-						t.BotTick(this);
+						for (var i = 0; i < calls; i++)
+							t.BotTick(this);
 
 					issuer = null;
 				}
