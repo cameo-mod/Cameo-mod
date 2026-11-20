@@ -13,6 +13,7 @@ using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
+using BotSlotPhases = OpenRA.Mods.CA.Traits.BotSlotPhases;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 
@@ -226,7 +227,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				// De-phase the refresh deterministically across bots (donor used LocalRandom — a desync
 				// hazard for the order stream; ActorID is identical on all clients).
-				nextRefreshTick = world.WorldTick + (int)(player.PlayerActor.ActorID % Math.Max(1, Info.RegionRefreshInterval));
+				// QW-B: with phase-offset timers the first refresh is the next tick that is on the bot's phase.
+				var interval = Math.Max(1, Info.RegionRefreshInterval);
+				nextRefreshTick = FirstRefreshTick(world.WorldTick, interval, player.PlayerActor.ActorID,
+					BotSlotPhases.TryResolve(bot, interval, out var phase), phase);
 				return;
 			}
 
@@ -236,6 +240,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			nextRefreshTick = world.WorldTick + Math.Max(1, Info.RegionRefreshInterval);
 			Refresh();
 		}
+
+		// Pure, for tests: the legacy ActorID offset, or (phase-offset timers) the first tick after `now` on the bot's phase.
+		internal static int FirstRefreshTick(int now, int interval, uint actorId, bool phased, int phase) =>
+			phased ? BotSlotPhases.NextDue(now + 1, interval, phase) : now + (int)(actorId % interval);
 
 		void Refresh()
 		{

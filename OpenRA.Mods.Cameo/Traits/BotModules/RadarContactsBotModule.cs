@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.AS.Traits;
 using OpenRA.Mods.Cameo.Effects;
+using BotSlotPhases = OpenRA.Mods.CA.Traits.BotSlotPhases;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 
@@ -64,6 +65,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly List<BotRadarContact> contacts = new();
 		IReadOnlyList<BotRadarContact> published = Array.Empty<BotRadarContact>();
 		int nextRefreshTick;
+		bool phaseSeeded;
 
 		public RadarContactsSnapshot Snapshot { get; private set; }
 
@@ -104,6 +106,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			if (IsTraitDisabled)
 				return;
+
+			// QW-B: the first refresh waits for the bot's phase (0, the old initial value, unless the bot phase-offsets its timers).
+			if (!phaseSeeded)
+			{
+				phaseSeeded = true;
+				nextRefreshTick = BotSlotPhases.Resolve(bot, Math.Max(1, Info.ContactsIntervalTicks), 0);
+			}
 
 			var tick = world.WorldTick;
 			if (tick < nextRefreshTick)

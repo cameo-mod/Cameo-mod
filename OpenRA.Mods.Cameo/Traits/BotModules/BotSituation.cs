@@ -633,6 +633,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int missionTick;
 		int nextSnapshotTick;
 		int nextEmergencyTick;
+		bool phaseSeeded;
 		int lastDecisionTick;
 		OpenRA.Player incumbentTarget;
 		string incumbentPersonality = "";
@@ -1074,6 +1075,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var queue in cachedQueues)
 				if (queue.Enabled && queue.CurrentItem() == null && !queue.AllQueued().Any())
 					idleProductionTicks++;
+
+			// QW-B: with phase-offset timers the first emergency check and the first snapshot wait for the bot's phase of
+			// their own interval, instead of the ClientIndex offset (which map-side bots share). Not saved: a loaded game
+			// is past both ticks either way.
+			if (!phaseSeeded)
+			{
+				phaseSeeded = true;
+				if (BotSlotPhases.TryResolve(bot, Math.Max(1, Info.SnapshotInterval), out var snapshotPhase))
+					nextSnapshotTick = snapshotPhase;
+				if (BotSlotPhases.TryResolve(bot, Math.Max(1, Info.EmergencyCheckInterval), out var emergencyPhase))
+					nextEmergencyTick = emergencyPhase;
+			}
 
 			var tick = player.World.WorldTick;
 			ReopenDormant(tick);

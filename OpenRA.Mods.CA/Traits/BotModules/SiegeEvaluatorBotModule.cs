@@ -69,6 +69,9 @@ namespace OpenRA.Mods.CA.Traits
 		readonly Dictionary<SquadCA, SiegeVerdict> lastVerdictBySquad = new();
 		int lastEvaluationTick = -1;
 
+		// QW-B: the evaluation tick within the interval; ClientIndex % interval (shared by map-side bots) unless the bot phase-offsets its timers.
+		int evaluationPhase = -1;
+
 		public SiegeEvaluatorBotModule(Actor self, SiegeEvaluatorBotModuleInfo info)
 			: base(info)
 		{
@@ -78,8 +81,13 @@ namespace OpenRA.Mods.CA.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (IsTraitDisabled || world.WorldTick == lastEvaluationTick ||
-				world.WorldTick % Info.EvaluationInterval != player.ClientIndex % Info.EvaluationInterval)
+			if (IsTraitDisabled || world.WorldTick == lastEvaluationTick)
+				return;
+
+			if (evaluationPhase < 0)
+				evaluationPhase = BotSlotPhases.Resolve(bot, Info.EvaluationInterval, player.ClientIndex % Info.EvaluationInterval);
+
+			if (!BotSlotPhases.IsDue(world.WorldTick, Info.EvaluationInterval, evaluationPhase))
 				return;
 			lastEvaluationTick = world.WorldTick;
 

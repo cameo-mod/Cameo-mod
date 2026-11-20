@@ -54,6 +54,15 @@ namespace OpenRA.Mods.Cameo.Traits
 			"and the A/B harness (the `fransbot` donor and the `classic` reference bot, maintainer 2026-09-28).")]
 		public readonly bool HiddenInLobby = false;
 
+		[Desc("Cameo-only (STAGGER_DESIGN_06): this bot type belongs to the round-robin family. When activated it registers",
+			"with the BotRoundRobinScheduler and counts toward N, whatever RoundRobin says. Classic types leave it false.")]
+		public readonly bool RoundRobinFamily = false;
+
+		[Desc("Cameo-only (QW-B, STAGGER_DESIGN_06 section 15): this bot type gives its periodic modules a phase offset from its",
+			"seat rank among the family bots, so several bots' timer bursts land on different ticks instead of one frame.",
+			"Requires RoundRobinFamily. False keeps today's phases (the A/B control).")]
+		public readonly bool SlotPhasedTimers = false;
+
 		string IBotInfo.Type => Type;
 
 		string IBotInfo.Name => Name;
@@ -96,7 +105,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		}
 	}
 
-	public sealed class ModularBot : ITick, IBot, INotifyDamage, IBotOrderTracking
+	public sealed class ModularBot : ITick, IBot, INotifyDamage, IBotOrderTracking, IBotSlotPhase
 	{
 		public bool IsEnabled;
 
@@ -141,8 +150,24 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		public ModularBot(ModularBotInfo info, ActorInitializer init)
 		{
+			if (info.SlotPhasedTimers && !info.RoundRobinFamily)
+				throw new YamlException($"Bot type '{info.Type}' sets SlotPhasedTimers without RoundRobinFamily.");
+
 			this.info = info;
 			world = init.World;
+		}
+
+		/// <summary>This bot type counts toward the round-robin family (and so toward N_fam in the QW-B phase rule).</summary>
+		public bool InRoundRobinFamily => info.RoundRobinFamily;
+
+		// QW-B: an active bot whose type sets SlotPhasedTimers offsets its periodic modules by its seat rank.
+		bool IBotSlotPhase.TryPhaseOf(int period, out int phase)
+		{
+			phase = 0;
+			if (!IsEnabled || !info.SlotPhasedTimers || player == null)
+				return false;
+
+			return BotSlotPhase.TryOf(player, period, out phase);
 		}
 
 		// Called by the host's player creation code
@@ -304,6 +329,10 @@ namespace OpenRA.Mods.Cameo.Traits
 		{
 			if (!IsEnabled || self.World.IsLoadingGameSave)
 				return;
+
+			// QW-B: the family roster is built at the first bot tick, once every bot has activated.
+			if (info.SlotPhasedTimers)
+				BotSlotPhase.Prepare(world);
 
 			var timed = info.ModulePerfReportIntervalTicks > 0;
 			using (new PerfSample("bot_tick"))

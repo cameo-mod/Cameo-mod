@@ -1168,6 +1168,8 @@ namespace OpenRA.Mods.CA.Traits
 			});
 		}
 
+		int diagnosticPhase = -1;
+
 		/// <summary>End of every BotTick: pending ordinary attack_commit rows, unit_position, health, and the terminal manifest.</summary>
 		void DiagnosticTick()
 		{
@@ -1196,10 +1198,15 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 			}
 
-			if (t % BotPassiveChannel.PositionIntervalTicks == 0 && t <= BotPassiveChannel.MaximumPositionTick)
+			// QW-B: the position and health snapshots land on the bot's phase of the interval (0, the old absolute
+			// modulo, unless the bot phase-offsets its timers). Both cadences are 250 ticks and share one phase.
+			if (diagnosticPhase < 0)
+				diagnosticPhase = BotSlotPhases.Resolve(Player, StalemateBreakerCA.HealthInterval, 0);
+
+			if (BotSlotPhases.IsDue(t, BotPassiveChannel.PositionIntervalTicks, diagnosticPhase % BotPassiveChannel.PositionIntervalTicks) && t <= BotPassiveChannel.MaximumPositionTick)
 				DiagnosticUnitPositions(w, t);
 
-			if (t % StalemateBreakerCA.HealthInterval == 0)
+			if (BotSlotPhases.IsDue(t, StalemateBreakerCA.HealthInterval, diagnosticPhase))
 				DiagnosticHealth(w, t);
 		}
 

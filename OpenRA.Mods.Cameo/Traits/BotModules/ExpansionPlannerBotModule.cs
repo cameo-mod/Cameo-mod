@@ -756,6 +756,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		IBotRegionThreatProvider[] threatProviders;
 		BaseBuilderBotModuleCA[] baseBuilders;
 		int ticks;
+
+		// QW-B: the call within each ReplanTicks window on which the replan runs; 0 (the old `ticks % ReplanTicks == 0`)
+		// unless the bot phase-offsets its timers. The first replan is still never before call ReplanTicks.
+		int replanPhase = -1;
 		string lastIdleReason;
 		readonly Dictionary<int, int> claimAttempts = new();
 		readonly Dictionary<int, int> parkedUntil = new();
@@ -2823,7 +2827,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			if (resourceMap == null || resources == null)
 			{
-				if (++ticks % Info.ReplanTicks == 0)
+				if (ReplanDue(bot))
 					Idle(resourceMap == null ? "no enabled ResourceMapBotModule" : "no PlayerResources");
 				return;
 			}
@@ -2841,11 +2845,26 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (Info.FieldCoverage && Info.DriveRefineries)
 				CoverageTick();
 
-			if (++ticks % Info.ReplanTicks != 0)
+			if (!ReplanDue(bot))
 				return;
 
 			Replan(bot);
 		}
+
+		// Counts this call and says whether it is a replan call.
+		bool ReplanDue(IBot bot)
+		{
+			if (replanPhase < 0)
+				replanPhase = BotSlotPhases.Resolve(bot, Info.ReplanTicks, 0);
+
+			++ticks;
+			return IsReplanCall(ticks, Info.ReplanTicks, replanPhase);
+		}
+
+		// Pure, for tests: call number `calls` (1-based) is a replan call. Phase 0 is the old `calls % replanTicks == 0`; a
+		// phase p moves every replan p calls later, and the first one is never before call replanTicks.
+		internal static bool IsReplanCall(int calls, int replanTicks, int phase) =>
+			calls >= replanTicks && calls % replanTicks == phase;
 
 		void Replan(IBot bot)
 		{
