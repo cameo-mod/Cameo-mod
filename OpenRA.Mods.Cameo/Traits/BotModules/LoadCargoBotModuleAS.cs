@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Activities;
 using OpenRA.Mods.AS.Traits;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using BotRng = OpenRA.Mods.CA.BotRng;
 using OpenRA.Mods.Common;
@@ -80,7 +81,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		readonly List<UnitWposWrapper> activePassengers = [];
 		readonly List<Actor> stuckPassengers = [];
-		int minAssignRoleDelayTicks;
+		BotPeriod minAssignRoleDelayTicks; // STAGGER-06 F1
 
 		public LoadCargoBotModuleAS(Actor self, LoadCargoBotModuleASInfo info)
 			: base(info)
@@ -115,7 +116,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		protected override void TraitEnabled(Actor self)
 		{
 			// Avoid all AIs reevaluating assignments on the same tick, randomize their initial evaluation delay.
-			minAssignRoleDelayTicks = BotRng.For(player, nameof(LoadCargoBotModuleAS)).Next(0, Info.ScanTick);
+			minAssignRoleDelayTicks = BotPeriod.F1(player.World.WorldTick, BotRng.For(player, nameof(LoadCargoBotModuleAS)).Next(0, Info.ScanTick), Info.ScanTick);
 		}
 
 		protected override void TraitDisabled(Actor self)
@@ -140,10 +141,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (--minAssignRoleDelayTicks > 0)
+			if (!minAssignRoleDelayTicks.TryFire(BotVisitClock.Of(bot).VisitTick))
 				return;
-
-			minAssignRoleDelayTicks = Info.ScanTick;
 
 			var leases = BotUnitLeases.Of(player);
 

@@ -66,7 +66,7 @@ namespace OpenRA.Mods.CA.Traits
 		readonly Func<Actor, bool> isEnemyUnit;
 		readonly int maximumCaptureTargetOptions;
 
-		int minCaptureDelayTicks;
+		BotPeriod minCaptureDelayTicks; // STAGGER-06 F1
 		CPos initialBaseCenter;
 
 		public CaptureManagerBotModuleCA(Actor self, CaptureManagerBotModuleCAInfo info)
@@ -96,14 +96,13 @@ namespace OpenRA.Mods.CA.Traits
 		protected override void TraitEnabled(Actor self)
 		{
 			// Avoid all AIs reevaluating assignments on the same tick, randomize their initial evaluation delay.
-			minCaptureDelayTicks = BotRng.For(player, nameof(CaptureManagerBotModuleCA)).Next(Info.MinimumCaptureDelay);
+			minCaptureDelayTicks = BotPeriod.F1(world.WorldTick, BotRng.For(player, nameof(CaptureManagerBotModuleCA)).Next(Info.MinimumCaptureDelay), Info.MinimumCaptureDelay);
 		}
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (--minCaptureDelayTicks <= 0)
+			if (minCaptureDelayTicks.TryFire(BotVisitClock.Of(bot).VisitTick))
 			{
-				minCaptureDelayTicks = Info.MinimumCaptureDelay;
 				QueueCaptureOrders(bot);
 			}
 		}

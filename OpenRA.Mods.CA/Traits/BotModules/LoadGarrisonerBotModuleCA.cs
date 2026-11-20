@@ -67,7 +67,7 @@ namespace OpenRA.Mods.CA.Traits
 		// get another attempt instead of being blacklisted until it dies.
 		readonly Dictionary<Actor, int> stuckGarrisoner = new();
 		const int StuckExpiryTicks = 9144;
-		int minAssignRoleDelayTicks;
+		BotPeriod minAssignRoleDelayTicks; // STAGGER-06 F1
 
 		public LoadGarrisonerBotModuleCA(Actor self, LoadGarrisonerBotModuleCAInfo info)
 			: base(info)
@@ -83,7 +83,7 @@ namespace OpenRA.Mods.CA.Traits
 		protected override void TraitEnabled(Actor self)
 		{
 			// Avoid all AIs reevaluating assignments on the same tick, randomize their initial evaluation delay.
-			minAssignRoleDelayTicks = BotRng.For(player, nameof(LoadGarrisonerBotModuleCA)).Next(0, Info.ScanTick);
+			minAssignRoleDelayTicks = BotPeriod.F1(world.WorldTick, BotRng.For(player, nameof(LoadGarrisonerBotModuleCA)).Next(0, Info.ScanTick), Info.ScanTick);
 		}
 
 		protected override void TraitDisabled(Actor self)
@@ -100,9 +100,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (--minAssignRoleDelayTicks <= 0)
+			if (minAssignRoleDelayTicks.TryFire(BotVisitClock.Of(bot).VisitTick))
 			{
-				minAssignRoleDelayTicks = Info.ScanTick;
 
 				var leases = BotUnitLeases.Of(player);
 
