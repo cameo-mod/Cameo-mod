@@ -77,6 +77,10 @@ namespace OpenRA.Mods.CA.Traits
 		bool exhausted;
 
 		public long CommittedCost => pending.Values.Concat(inFlight.Values).Aggregate(0L, (sum, cost) => sum + cost);
+		public bool HasState => nextGeneration != 1 || exhausted || usedGenerations.Count != 0
+			|| selectedRecovery != null || floorLease != null;
+		public RecoverySpendEntry[] OutstandingEntries() => pending.Select(x => new RecoverySpendEntry(x.Key, x.Value, false))
+			.Concat(inFlight.Select(x => new RecoverySpendEntry(x.Key, x.Value, true))).ToArray();
 
 		public bool TryAllocateGeneration(out uint generation)
 		{

@@ -94,7 +94,9 @@ namespace OpenRA.Mods.Cameo.Test
 		public void ReloadRetainsUnknownCommitmentsAndRejectsCorruptSnapshot()
 		{
 			var original = new RecoverySpendLedgerCA();
+			Assert.That(original.HasState, Is.False);
 			Assert.That(original.TryAllocateGeneration(out var generation), Is.True);
+			Assert.That(original.HasState, Is.True);
 			var key = new RecoverySpendKey(generation, 4, 0, "harvester");
 			original.SelectRecovery(key);
 			Assert.That(original.TryReserve(key, 2000, 1000, 0, 0, 1000, false,
