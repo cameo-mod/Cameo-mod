@@ -71,7 +71,9 @@ namespace OpenRA.Mods.CA.Traits
 				if (ordinal < 0)
 					continue;
 
-				foreach (var item in queue.BuildableItems())
+				// BuildableItems filters by current cash for PayUpFront queues. A
+				// legal recovery route must remain visible while its funds accumulate.
+				foreach (var item in queue.AllItems().Where(queue.CanBuild))
 				{
 					if (!powerQueued && info.PowerTypes.Contains(item.Name)
 						&& item.TraitInfos<PowerInfo>().Where(p => p.EnabledByDefault).Sum(p => p.Amount) > 0)

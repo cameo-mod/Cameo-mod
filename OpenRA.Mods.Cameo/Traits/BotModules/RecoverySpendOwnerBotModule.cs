@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Text;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Primitives;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits
@@ -27,7 +28,7 @@ namespace OpenRA.Mods.Cameo.Traits
 	// Persistence/ownership skeleton only: admission and receipt integration are
 	// intentionally absent until the shared engine receipt is available.
 	public class RecoverySpendOwnerBotModule : ConditionalTrait<RecoverySpendOwnerBotModuleInfo>,
-		IBotRecoverySpendOwner, IGameSaveTraitData
+		IBotRecoverySpendOwner, IGameSaveTraitData, INotifyOtherProduction
 	{
 		const string StateKey = "RecoverySpendState";
 		readonly RecoverySpendLedgerCA ledger = new();
@@ -41,6 +42,16 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		RecoverySpendLedgerCA IBotRecoverySpendOwner.Ledger => ledger;
 		bool IBotRecoverySpendOwner.Faulted => faulted;
+
+		void INotifyOtherProduction.UnitProducedByOther(Actor self, Actor producer, Actor produced, string productionType, TypeDictionary init)
+		{
+			// Check ownership before inspecting any actor details. Replayed history
+			// is followed by the authoritative saved owner snapshot.
+			if (faulted || self.World.IsLoadingGameSave || produced == null || produced.Owner != self.Owner)
+				return;
+
+			ledger.NoteProduced(produced.Info.Name, produced.ActorID, self.World.WorldTick);
+		}
 
 		protected override void Created(Actor self)
 		{

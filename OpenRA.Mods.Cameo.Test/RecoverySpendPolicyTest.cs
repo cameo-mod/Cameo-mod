@@ -132,5 +132,53 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(selected.Value.Item, Is.EqualTo("mcv-a"));
 			Assert.That(RecoverySpendPolicyCA.SelectRecovery(new RecoverySpendPolicyCA.RecoveryCandidate[0]), Is.Null);
 		}
+
+		[Test]
+		public void DeliveryCoverageOutlivesCashAndOnlyRetiredStartsTimeout()
+		{
+			var ledger = new RecoverySpendLedgerCA();
+			Assert.That(ledger.TryAllocateGeneration(out var generation), Is.True);
+			var key = new RecoverySpendKey(generation, 4, 0, "harvester");
+			ledger.SelectRecovery(key);
+			Assert.That(ledger.TryReserve(key, 2000, 1000, 0, 0, 1000, false,
+				RecoverySpendPolicyCA.Admission.SelectedRecovery), Is.True);
+			Assert.That(ledger.RegisterDelivery(key, 100), Is.True);
+			Assert.That(ledger.DeliveryCovered(key, 10000), Is.True, "unresolved has no timeout");
+			Assert.That(ledger.NoteRetired(key, 200), Is.True);
+			Assert.That(ledger.Settle(key), Is.True);
+			Assert.That(ledger.CommittedCost, Is.Zero);
+			Assert.That(ledger.DeliveryCovered(key, 1699), Is.True);
+			Assert.That(ledger.DeliveryCovered(key, 1700), Is.False);
+			Assert.That(ledger.ReleaseDelivery(key, 1700), Is.True);
+		}
+
+		[Test]
+		public void OneProducedActorCoversAtMostOneGenerationAcrossSave()
+		{
+			var ledger = new RecoverySpendLedgerCA();
+			Assert.That(ledger.TryAllocateGeneration(out var first), Is.True);
+			Assert.That(ledger.TryAllocateGeneration(out var second), Is.True);
+			var one = new RecoverySpendKey(first, 1, 0, "harvester");
+			var two = new RecoverySpendKey(second, 2, 0, "harvester");
+			ledger.SelectRecovery(one);
+			Assert.That(ledger.TryReserve(one, 5000, 1000, 0, 0, 0, false,
+				RecoverySpendPolicyCA.Admission.SelectedRecovery), Is.True);
+			Assert.That(ledger.RegisterDelivery(one, 10), Is.True);
+			ledger.SelectRecovery(two);
+			Assert.That(ledger.TryReserve(two, 5000, 1000, 0, 0, 0, false,
+				RecoverySpendPolicyCA.Admission.SelectedRecovery), Is.True);
+			Assert.That(ledger.RegisterDelivery(two, 10), Is.True);
+			Assert.That(ledger.NoteProduced("harvester", 100, 10), Is.False);
+			Assert.That(ledger.NoteProduced("harvester", 100, 11), Is.True);
+			Assert.That(ledger.NoteProduced("harvester", 100, 11), Is.False);
+			Assert.That(ledger.DeliveryCovered(one, 11), Is.True, "an unresolved order still covers");
+			Assert.That(ledger.NoteRetired(one, 12), Is.True);
+			Assert.That(ledger.NoteRetired(two, 12), Is.True);
+			var restored = new RecoverySpendLedgerCA();
+			Assert.That(restored.RestoreText(ledger.SaveText()), Is.True);
+			Assert.That(restored.DeliveryCovered(one, 12), Is.False);
+			Assert.That(restored.DeliveryCovered(two, 12), Is.True);
+			Assert.That(restored.NoteProduced("harvester", 100, 13), Is.False);
+		}
 	}
 }

@@ -63,14 +63,18 @@ namespace OpenRA.Mods.CA.Traits
 	// This ledger is not a world trait and does not itself issue production orders.
 	public readonly record struct RecoverySpendKey(uint Generation, uint Actor, int Queue, string Item);
 	public readonly record struct RecoverySpendEntry(RecoverySpendKey Key, int Remaining, bool Queued);
+	public readonly record struct RecoveryDeliveryEntry(RecoverySpendKey Key, int RequestTick, int? RetiredTick, uint? ObservedActor);
 	public sealed record RecoverySpendSnapshot(RecoverySpendEntry[] Entries, uint[] UsedGenerations,
-		RecoverySpendKey? SelectedRecovery, (uint Actor, int Queue)? FloorLease, uint NextGeneration, bool Exhausted);
+		RecoverySpendKey? SelectedRecovery, (uint Actor, int Queue)? FloorLease, uint NextGeneration, bool Exhausted,
+		RecoveryDeliveryEntry[] Deliveries, uint[] UsedActors);
 
 	public sealed class RecoverySpendLedgerCA
 	{
 		readonly Dictionary<RecoverySpendKey, int> pending = new();
 		readonly Dictionary<RecoverySpendKey, int> inFlight = new();
 		readonly HashSet<uint> usedGenerations = new();
+		readonly Dictionary<RecoverySpendKey, RecoveryDeliveryEntry> deliveries = new();
+		readonly HashSet<uint> usedActors = new();
 		RecoverySpendKey? selectedRecovery;
 		(uint Actor, int Queue)? floorLease;
 		uint nextGeneration = 1;
@@ -78,7 +82,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		public long CommittedCost => pending.Values.Concat(inFlight.Values).Aggregate(0L, (sum, cost) => sum + cost);
 		public bool HasState => nextGeneration != 1 || exhausted || usedGenerations.Count != 0
-			|| selectedRecovery != null || floorLease != null;
+			|| selectedRecovery != null || floorLease != null || deliveries.Count != 0 || usedActors.Count != 0;
 		public RecoverySpendEntry[] OutstandingEntries() => pending.Select(x => new RecoverySpendEntry(x.Key, x.Value, false))
 			.Concat(inFlight.Select(x => new RecoverySpendEntry(x.Key, x.Value, true))).ToArray();
 
@@ -142,6 +146,57 @@ namespace OpenRA.Mods.CA.Traits
 		// Call only after authoritative refusal or an exact item's terminal event.
 		public bool Settle(RecoverySpendKey key) => pending.Remove(key) || inFlight.Remove(key);
 
+		// Replacement coverage is independent of the cash reservation: an item
+		// may have left its queue while its already-paid actor awaits delivery.
+		public bool RegisterDelivery(RecoverySpendKey key, int requestTick)
+		{
+			if (requestTick < 0 || !pending.ContainsKey(key) || deliveries.ContainsKey(key))
+				return false;
+
+			deliveries.Add(key, new RecoveryDeliveryEntry(key, requestTick, null, null));
+			return true;
+		}
+
+		public bool NoteRetired(RecoverySpendKey key, int tick)
+		{
+			if (!deliveries.TryGetValue(key, out var entry) || tick < entry.RequestTick)
+				return false;
+
+			if (entry.RetiredTick == null)
+				deliveries[key] = entry with { RetiredTick = tick };
+			return true;
+		}
+
+		// The caller must prove this is a newly produced owned actor. One actor
+		// supplies conservative appearance evidence for at most one generation.
+		public bool NoteProduced(string item, uint actor, int tick)
+		{
+			if (string.IsNullOrEmpty(item) || usedActors.Contains(actor))
+				return false;
+
+			var selected = deliveries.Values.Where(x => x.Key.Item == item && x.ObservedActor == null && tick > x.RequestTick)
+				.OrderBy(x => x.Key.Generation).Select(x => (RecoveryDeliveryEntry?)x).FirstOrDefault();
+			if (selected == null)
+				return false;
+
+			var entry = selected.Value;
+			deliveries[entry.Key] = entry with { ObservedActor = actor };
+			usedActors.Add(actor);
+			return true;
+		}
+
+		public bool DeliveryCovered(RecoverySpendKey key, int tick)
+		{
+			if (!deliveries.TryGetValue(key, out var entry))
+				return false;
+
+			return entry.RetiredTick == null || (entry.ObservedActor == null
+				&& (tick < entry.RetiredTick.Value || (long)tick - entry.RetiredTick.Value < 1500));
+		}
+
+		public bool ReleaseDelivery(RecoverySpendKey key, int tick) =>
+			!DeliveryCovered(key, tick) && deliveries.Remove(key);
+
 		public bool TryAcquireFloorLease(uint actor, int queue, bool slotAvailable,
 			IEnumerable<(uint Actor, int Queue)> structurallyEligible)
 		{
@@ -171,7 +226,8 @@ namespace OpenRA.Mods.CA.Traits
 			pending.Select(x => new RecoverySpendEntry(x.Key, x.Value, false))
 				.Concat(inFlight.Select(x => new RecoverySpendEntry(x.Key, x.Value, true)))
 				.OrderBy(x => x.Key.Generation).ToArray(),
-			usedGenerations.OrderBy(x => x).ToArray(), selectedRecovery, floorLease, nextGeneration, exhausted);
+			usedGenerations.OrderBy(x => x).ToArray(), selectedRecovery, floorLease, nextGeneration, exhausted,
+			deliveries.Values.OrderBy(x => x.Key.Generation).ToArray(), usedActors.OrderBy(x => x).ToArray());
 
 		static readonly JsonSerializerOptions SaveOptions = new() { IncludeFields = true };
 
@@ -195,13 +251,22 @@ namespace OpenRA.Mods.CA.Traits
 
 		public bool Restore(RecoverySpendSnapshot snapshot)
 		{
-			if (snapshot?.Entries == null || snapshot.UsedGenerations == null || snapshot.NextGeneration == 0
+			if (snapshot?.Entries == null || snapshot.UsedGenerations == null || snapshot.Deliveries == null
+				|| snapshot.UsedActors == null || snapshot.NextGeneration == 0
 				|| snapshot.Exhausted && snapshot.NextGeneration != uint.MaxValue
 				|| snapshot.UsedGenerations.Any(x => x == 0 || !snapshot.Exhausted && x >= snapshot.NextGeneration)
 				|| snapshot.UsedGenerations.Distinct().Count() != snapshot.UsedGenerations.Length
 				|| snapshot.Entries.Any(x => x.Remaining < 0 || x.Key.Queue < 0 || string.IsNullOrEmpty(x.Key.Item))
 				|| snapshot.Entries.Select(x => x.Key.Generation).Distinct().Count() != snapshot.Entries.Length
 				|| snapshot.Entries.Any(x => !snapshot.UsedGenerations.Contains(x.Key.Generation))
+				|| snapshot.UsedActors.Distinct().Count() != snapshot.UsedActors.Length
+				|| snapshot.Deliveries.Select(x => x.Key.Generation).Distinct().Count() != snapshot.Deliveries.Length
+				|| snapshot.Deliveries.Any(x => x.RequestTick < 0 || x.Key.Queue < 0 || string.IsNullOrEmpty(x.Key.Item)
+					|| !snapshot.UsedGenerations.Contains(x.Key.Generation)
+					|| x.RetiredTick != null && x.RetiredTick < x.RequestTick
+					|| x.ObservedActor != null && !snapshot.UsedActors.Contains(x.ObservedActor.Value))
+				|| snapshot.Deliveries.Where(x => x.ObservedActor != null).Select(x => x.ObservedActor).Distinct().Count()
+					!= snapshot.Deliveries.Count(x => x.ObservedActor != null)
 				|| snapshot.SelectedRecovery is { } selected && (selected.Generation == 0
 					|| !snapshot.Exhausted && selected.Generation >= snapshot.NextGeneration
 					|| selected.Queue < 0 || string.IsNullOrEmpty(selected.Item))
@@ -211,10 +276,16 @@ namespace OpenRA.Mods.CA.Traits
 			pending.Clear();
 			inFlight.Clear();
 			usedGenerations.Clear();
+			deliveries.Clear();
+			usedActors.Clear();
 			foreach (var generation in snapshot.UsedGenerations)
 				usedGenerations.Add(generation);
 			foreach (var entry in snapshot.Entries)
 				(entry.Queued ? inFlight : pending).Add(entry.Key, entry.Remaining);
+			foreach (var entry in snapshot.Deliveries)
+				deliveries.Add(entry.Key, entry);
+			foreach (var actor in snapshot.UsedActors)
+				usedActors.Add(actor);
 			selectedRecovery = snapshot.SelectedRecovery;
 			floorLease = snapshot.FloorLease;
 			nextGeneration = snapshot.NextGeneration;
