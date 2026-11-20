@@ -15,6 +15,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using OpenRA.Graphics;
 using OpenRA.Mods.CA.Traits.BotModules;
+using BotSlotPhases = OpenRA.Mods.CA.Traits.BotSlotPhases;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 
@@ -129,6 +130,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			});
 		}
 
+		int featurePhase = -1;
+
 		void IBotTick.BotTick(IBot bot)
 		{
 			if (!eligibleAtWorldLoad || IsTraitDisabled)
@@ -138,9 +141,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 			if (seenSource != null && player.Shroud != null && enemies.Count != 0)
 			{
-				if (tick % OpponentFeatureWindow.SampleInterval == 0)
+				// QW-B: one phase for both cadences, taken from the shorter, so every sample tick is still an update tick
+				// (SampleInterval is a multiple of UpdateInterval). Phase 0 is the old absolute modulo.
+				if (featurePhase < 0)
+					featurePhase = BotSlotPhases.Resolve(bot, OpponentFeatureWindow.UpdateInterval, 0);
+
+				if (BotSlotPhases.IsDue(tick, OpponentFeatureWindow.SampleInterval, featurePhase))
 					SampleCensuses(tick);
-				if (tick % OpponentFeatureWindow.UpdateInterval == 0)
+				if (BotSlotPhases.IsDue(tick, OpponentFeatureWindow.UpdateInterval, featurePhase))
 					EmitOpponentRows(tick);
 			}
 

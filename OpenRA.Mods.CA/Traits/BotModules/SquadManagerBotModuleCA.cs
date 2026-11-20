@@ -864,6 +864,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		int rushTicks;
 		int assignRolesTicks;
+		int rolesPhase = -1;
 		int attackForceTicks;
 		int protectionForceTicks;
 
@@ -3033,7 +3034,12 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// Telemetry only: a snapshot every role pass is fresh enough for a death's position.
-			if (World.WorldTick % Math.Max(1, Info.AssignRolesInterval) == 0)
+			// QW-B: the snapshot tick is the bot's phase of the interval (0, the old absolute modulo, unless the bot phase-offsets its timers).
+			var rolesInterval = Math.Max(1, Info.AssignRolesInterval);
+			if (rolesPhase < 0)
+				rolesPhase = BotSlotPhases.Resolve(bot, rolesInterval, 0);
+
+			if (BotSlotPhases.IsDue(World.WorldTick, rolesInterval, rolesPhase))
 				TrackRoleLosses();
 
 			CleanSquads();

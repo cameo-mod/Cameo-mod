@@ -125,6 +125,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly OpenRA.Player player;
 		readonly BotLeaseTable<Actor> table = new();
 		int pruneTicks;
+		bool pruneSeeded;
 		(int, int, int, int, int) lastSummary;
 
 		// Telemetry: Denied counts the claims the contract refused because another module held the unit — each one
@@ -209,6 +210,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			// QW-B: the initial countdown is phase + 1 (design section 15); the reload is unchanged. Phase 0 (the default, and
+			// one bot) makes the first call prune, exactly as the old initial countdown of 0 did.
+			if (!pruneSeeded)
+			{
+				pruneSeeded = true;
+				pruneTicks = BotSlotPhases.Resolve(bot, Info.PruneIntervalTicks, 0) + 1;
+			}
+
 			if (--pruneTicks > 0)
 				return;
 

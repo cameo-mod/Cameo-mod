@@ -81,6 +81,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly Dictionary<Actor, Actor> activeAssignments = [];
 		IBotRequestUnitProduction[] requestUnitProduction = [];
 		int repairScanTicks;
+		bool phaseSeeded;
 
 		public BridgeRepairBotModule(Actor self, BridgeRepairBotModuleInfo info)
 			: base(info)
@@ -110,6 +111,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			// QW-B: the first scan waits for the bot's phase instead of ActorID % interval; the reload is unchanged.
+			if (!phaseSeeded)
+			{
+				phaseSeeded = true;
+				repairScanTicks = BotSlotPhases.Resolve(bot, RepairScanInterval, repairScanTicks);
+			}
+
 			if (--repairScanTicks > 0)
 				return;
 

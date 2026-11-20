@@ -56,6 +56,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		EngagementLogBotModule log;
 		int deltaPct;
 
+		// QW-B: the recompute tick within the interval; 0 (today's `tick % interval == 0`) unless the bot phase-offsets its timers.
+		int phase = -1;
+
 		public InMatchAdaptBotModule(Actor self, InMatchAdaptBotModuleInfo info)
 			: base(info)
 		{
@@ -66,7 +69,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (IsTraitDisabled || player.World.WorldTick % Info.IntervalTicks != 0)
+			if (IsTraitDisabled)
+				return;
+
+			if (phase < 0)
+				phase = BotSlotPhases.Resolve(bot, Info.IntervalTicks, 0);
+
+			if (!BotSlotPhases.IsDue(player.World.WorldTick, Info.IntervalTicks, phase))
 				return;
 
 			log ??= player.PlayerActor.TraitOrDefault<EngagementLogBotModule>();

@@ -101,6 +101,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int nextEnemyBaseRefreshTick;
 		int nextPostureTick = EngagementConstants.PostureIntervalTicks;
 		int postureCount;
+		bool phaseSeeded;
 
 		/// <summary>Running sum of total_milli over this match's closed non-skirmish engagements (seen-side only).
 		/// Read by the gated InMatchAdaptBotModule; the log itself stays record-only.</summary>
@@ -237,6 +238,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			if (!Ready())
 				return;
+
+			// QW-B: with phase-offset timers the three cadences start on the bot's phase of their interval; the reloads are unchanged.
+			if (!phaseSeeded)
+			{
+				phaseSeeded = true;
+				if (BotSlotPhases.TryResolve(bot, EngagementConstants.SampleIntervalTicks, out var samplePhase))
+					nextSampleTick = samplePhase;
+				if (BotSlotPhases.TryResolve(bot, EngagementConstants.PostureIntervalTicks, out var posturePhase))
+				{
+					nextPostureTick = EngagementConstants.PostureIntervalTicks + posturePhase;
+					nextBaseRefreshTick = posturePhase;
+				}
+			}
 
 			var tick = world.WorldTick;
 			if (tick >= nextSampleTick)
