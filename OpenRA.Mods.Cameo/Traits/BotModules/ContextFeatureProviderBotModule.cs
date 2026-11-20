@@ -30,6 +30,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	/// </summary>
 	internal interface IAiSeenProfileSource
 	{
+		/// <summary>PERF-SEEN-01R: registers a consumer; the source samples its seen memory only after a call.</summary>
+		void EnableSeenMemory();
+
 		IReadOnlyCollection<ObservedActor> SeenActorsOf(OpenRA.Player observer, OpenRA.Player enemy);
 	}
 
@@ -114,6 +117,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				takeover = w.WorldActor.TraitOrDefault<BotTakeoverTracker>();
 				seenSource = w.WorldActor.TraitOrDefault<IAiSeenProfileSource>();
+				seenSource?.EnableSeenMemory();
 
 				var ground = LocomotorFor(w, Info.GroundLocomotors, IsGroundCapable);
 				var naval = LocomotorFor(w, Info.NavalLocomotors, IsNavalCapable);

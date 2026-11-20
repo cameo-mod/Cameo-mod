@@ -41,6 +41,10 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		bool written;
 		bool eligibleAtWorldLoad;
+		// PERF-SEEN-01R: the release fog-honest seen memory has one consumer, the context feature provider
+		// (IAiSeenProfileSource); the DEV match record keeps its own memory (AiMatchLogWriterDev). Sample only
+		// once a consumer has registered, so a match without one pays nothing.
+		bool seenConsumer;
 		BotTakeoverTracker takeover;
 		readonly Dictionary<OpenRA.Player, BotModules.BotFogMemory> signatureMemory = new();
 		readonly BotModules.MasterAiBotModuleInfo signatureInfo = new();
@@ -57,6 +61,9 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		internal static bool TruthCaptureReady(bool gameEnded, bool allResolved) => gameEnded;
 
+		internal static bool SeenMemoryWanted(bool eligibleAtWorldLoad, bool consumerRegistered) =>
+			eligibleAtWorldLoad && consumerRegistered;
+
 
 		public AiMatchLogWriter(AiMatchLogWriterInfo info)
 		{
@@ -72,13 +79,13 @@ namespace OpenRA.Mods.Cameo.Traits
 		void ITick.Tick(Actor self)
 		{
 			var world = self.World;
-			if (!written && eligibleAtWorldLoad && IsLogOwner() && world.WorldTick % 25 == 0)
+			if (!written && SeenMemoryWanted(eligibleAtWorldLoad, seenConsumer) && IsLogOwner() && world.WorldTick % 25 == 0)
 				UpdateSeenMemory(world);
 		}
 
 		void IGameOver.GameOver(World world)
 		{
-			if (eligibleAtWorldLoad && IsLogOwner())
+			if (SeenMemoryWanted(eligibleAtWorldLoad, seenConsumer) && IsLogOwner())
 				UpdateSeenMemory(world);
 			written = true;
 		}
@@ -339,6 +346,8 @@ namespace OpenRA.Mods.Cameo.Traits
 		IReadOnlyCollection<BotModules.ObservedActor> BotModules.IAiSeenProfileSource.SeenActorsOf(
 			OpenRA.Player observer, OpenRA.Player enemy) =>
 			signatureMemory.TryGetValue(observer, out var memory) ? memory.Remembered(enemy) : null;
+
+		void BotModules.IAiSeenProfileSource.EnableSeenMemory() => seenConsumer = true;
 
 		internal static BotModules.EnemyProfile ProfileOf(IEnumerable<BotModules.ObservedActor> actors)
 		{
