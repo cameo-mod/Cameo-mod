@@ -261,6 +261,28 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void SaveLoadRoundTripKeepsThePhase()
+		{
+			var p = BotPeriod.F1(0, 30, 25);
+			for (var t = 1; t <= 40; t++)
+				p.TryFire(t);
+
+			var saved = p.SavedRemaining(40);
+			var loaded = BotPeriod.Restore(40, saved, 25, true);
+			Assert.That(loaded.Due, Is.EqualTo(p.Due));
+
+			// Legacy number: a fresh x0 at r = loadTick, first deadline loadTick + max(1, x) (F1).
+			Assert.That(BotPeriod.Restore(40, 0, 25, false).Due, Is.EqualTo(41));
+			Assert.That(BotPeriod.Restore(40, 7, 25, false).Due, Is.EqualTo(47));
+			// An overdue (negative) remaining is restored exactly.
+			Assert.That(BotPeriod.Restore(40, -3, 25, true).Due, Is.EqualTo(37));
+
+			Assert.That(BotPeriod.ReadTimerFormat("M", null), Is.False);
+			Assert.That(BotPeriod.ReadTimerFormat("M", "1"), Is.True);
+			Assert.That(() => BotPeriod.ReadTimerFormat("M", "2"), Throws.InvalidOperationException);
+		}
+
+		[Test]
 		public void CoalescedMissesAreCountedNotLost()
 		{
 			var p = BotPeriod.F1(0, 0, 10);

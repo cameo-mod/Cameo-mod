@@ -863,8 +863,8 @@ namespace OpenRA.Mods.CA.Traits
 		public CPos[] airStrikeGrid;
 
 		int rushTicks;
-		int assignRolesTicks;
-		int attackForceTicks;
+		BotPeriod assignRolesTicks; // STAGGER-06 A002 F1
+		BotPeriod attackForceTicks; // STAGGER-06 A004 F1
 		int protectionForceTicks;
 
 		// DF-2: where the protection squad waits for a predicted attack, and until when.
@@ -1671,8 +1671,8 @@ namespace OpenRA.Mods.CA.Traits
 			limitsRechecked = false;
 
 			// Avoid all AIs reevaluating assignments on the same tick, randomize their initial evaluation delay.
-			assignRolesTicks = BotRng.For(Player, nameof(SquadManagerBotModuleCA)).Next(0, Info.AssignRolesInterval);
-			attackForceTicks = BotRng.For(Player, nameof(SquadManagerBotModuleCA)).Next(0, Info.AttackForceInterval);
+			assignRolesTicks = BotPeriod.F1(World.WorldTick, BotRng.For(Player, nameof(SquadManagerBotModuleCA)).Next(0, Info.AssignRolesInterval), Info.AssignRolesInterval);
+			attackForceTicks = BotPeriod.F1(World.WorldTick, BotRng.For(Player, nameof(SquadManagerBotModuleCA)).Next(0, Info.AttackForceInterval), Info.AttackForceInterval);
 			protectionForceTicks = BotRng.For(Player, nameof(SquadManagerBotModuleCA)).Next(0, Info.ProtectInterval);
 			minAttackForceDelayTicks = BotRng.For(Player, nameof(SquadManagerBotModuleCA)).Next(0, Info.MinimumAttackForceDelay) +
 				RemainingInitialAttackDelay(initialAttackDelay, World.WorldTick);
@@ -3044,9 +3044,8 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var n in notifyIdleBaseUnits)
 				n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
 
-			if (--attackForceTicks <= 0)
+			if (attackForceTicks.TryFire(BotVisitClock.Of(bot).VisitTick))
 			{
-				attackForceTicks = Info.AttackForceInterval;
 				foreach (var s in Squads)
 					s.Units.RemoveAll(u => unitCannotBeOrdered(u.Actor));
 
@@ -3086,9 +3085,8 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
-			if (--assignRolesTicks <= 0)
+			if (assignRolesTicks.TryFire(BotVisitClock.Of(bot).VisitTick))
 			{
-				assignRolesTicks = Info.AssignRolesInterval;
 				unitsHangingAroundTheBase.RemoveAll(u => unitCannotBeOrdered(u.Actor));
 				activeUnits.RemoveAll(unitCannotBeOrdered);
 				FindNewUnits(bot);
@@ -4287,9 +4285,10 @@ namespace OpenRA.Mods.CA.Traits
 					.Select(a => a.ActorID)
 					.ToArray())),
 				new("RushTicks", FieldSaver.FormatValue(rushTicks)),
-				new("AssignRolesTicks", FieldSaver.FormatValue(assignRolesTicks)),
+				new("TimerFormat", FieldSaver.FormatValue(BotPeriod.TimerFormatVersion)),
+				new("AssignRolesTicks", FieldSaver.FormatValue(assignRolesTicks.SavedRemaining(World.WorldTick))),
 				new("protectionForceTicks", FieldSaver.FormatValue(protectionForceTicks)),
-				new("AttackForceTicks", FieldSaver.FormatValue(attackForceTicks)),
+				new("AttackForceTicks", FieldSaver.FormatValue(attackForceTicks.SavedRemaining(World.WorldTick))),
 				new("MinAttackForceDelayTicks", FieldSaver.FormatValue(minAttackForceDelayTicks)),
 			};
 
@@ -4327,6 +4326,7 @@ namespace OpenRA.Mods.CA.Traits
 			defendMissionExhaustedRegions.Clear();
 
 			var nodes = data.ToDictionary();
+			var timerNew = BotPeriod.ReadTimerFormat(nameof(SquadManagerBotModuleCA), nodes.TryGetValue("TimerFormat", out var timerFormatNode) ? timerFormatNode.Value : null);
 
 			if (nodes.TryGetValue("InitialBaseCenter", out var initialBaseCenterNode))
 				initialBaseCenter = FieldLoader.GetValue<CPos>("InitialBaseCenter", initialBaseCenterNode.Value);
@@ -4352,13 +4352,13 @@ namespace OpenRA.Mods.CA.Traits
 				rushTicks = FieldLoader.GetValue<int>("RushTicks", rushTicksNode.Value);
 
 			if (nodes.TryGetValue("AssignRolesTicks", out var assignRolesTicksNode))
-				assignRolesTicks = FieldLoader.GetValue<int>("AssignRolesTicks", assignRolesTicksNode.Value);
+				assignRolesTicks = BotPeriod.Restore(self.World.WorldTick, FieldLoader.GetValue<int>("AssignRolesTicks", assignRolesTicksNode.Value), Info.AssignRolesInterval, timerNew);
 
 			if (nodes.TryGetValue("protectionForceTicks", out var protectionForceTicksNode))
 				protectionForceTicks = FieldLoader.GetValue<int>("protectionForceTicks", protectionForceTicksNode.Value);
 
 			if (nodes.TryGetValue("AttackForceTicks", out var attackForceTicksNode))
-				attackForceTicks = FieldLoader.GetValue<int>("AttackForceTicks", attackForceTicksNode.Value);
+				attackForceTicks = BotPeriod.Restore(self.World.WorldTick, FieldLoader.GetValue<int>("AttackForceTicks", attackForceTicksNode.Value), Info.AttackForceInterval, timerNew);
 
 			if (nodes.TryGetValue("MinAttackForceDelayTicks", out var minAttackForceDelayTicksNode))
 				minAttackForceDelayTicks = FieldLoader.GetValue<int>("MinAttackForceDelayTicks", minAttackForceDelayTicksNode.Value);

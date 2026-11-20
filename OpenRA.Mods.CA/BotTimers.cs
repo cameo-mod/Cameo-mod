@@ -90,6 +90,28 @@ namespace OpenRA.Mods.CA
 		/// <summary>Restore form A (absolute due) or form R (remaining ticks at the load tick).</summary>
 		public static BotPeriod FromRemaining(int loadTick, int remaining, int k) => new(loadTick + Math.Max(1, remaining), Math.Max(1, k));
 
+		/// <summary>11.2 save form R: remaining = due - saveTick (may be zero or negative when overdue between visits).</summary>
+		public int SavedRemaining(int saveTick) => Due - saveTick;
+
+		/// <summary>11.2 load: TimerFormat 1 restores due = loadTick + saved exactly; a legacy number is a fresh x0 at r = loadTick (F1).</summary>
+		public static BotPeriod Restore(int loadTick, int saved, int k, bool newFormat) =>
+			newFormat ? new BotPeriod(loadTick + saved, k) : F1(loadTick, saved, k);
+
+		public const int TimerFormatVersion = 1;
+
+		/// <summary>A module that finds a newer TimerFormat than it knows refuses the load, naming itself (11.2).</summary>
+		public static bool ReadTimerFormat(string module, string formatText)
+		{
+			if (formatText == null)
+				return false;
+
+			var v = int.Parse(formatText, System.Globalization.CultureInfo.InvariantCulture);
+			if (v > TimerFormatVersion)
+				throw new InvalidOperationException($"{module} save TimerFormat {v} is newer than the supported {TimerFormatVersion}.");
+
+			return v >= 1;
+		}
+
 		public int Remaining(int visitTick) => Math.Max(0, Due - visitTick);
 
 		/// <summary>True when the routine is due at visit v; advances the deadline past v.</summary>

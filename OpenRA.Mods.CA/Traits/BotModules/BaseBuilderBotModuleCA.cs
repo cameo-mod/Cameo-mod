@@ -621,9 +621,10 @@ namespace OpenRA.Mods.CA.Traits
 		int projectedSpentPerTick;
 
 		readonly Stack<TraitPair<RallyPoint>> rallyPoints = [];
-		int assignRallyPointsTicks;
-		int checkBestResourceLocationTicks;
-		int sellRefineryTick;
+		BotPeriod assignRallyPoints; // STAGGER-06 B001 F1 K=max(2,Interval)
+		BotPeriod checkBestResourceLocation; // STAGGER-06 B003 F1
+
+		BotPeriod sellRefinery; // STAGGER-06 B007 F1
 		bool firstTick = true;
 		bool openingBarracksPriorityCompleted;
 		bool openingStartingCashCaptured;
@@ -763,9 +764,9 @@ namespace OpenRA.Mods.CA.Traits
 			RefreshBotLimits();
 
 			// Avoid all AIs reevaluating assignments on the same tick, randomize their initial evaluation delay.
-			assignRallyPointsTicks = BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(0, Info.AssignRallyPointsInterval);
-			checkBestResourceLocationTicks = BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(0, Info.CheckBestResourceLocationInterval);
-			sellRefineryTick = Info.SellRefineryInterval < 0 ? 0 : BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(0, Info.SellRefineryInterval);
+			assignRallyPoints = BotPeriod.F1(world.WorldTick, BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(0, Info.AssignRallyPointsInterval), Math.Max(2, Info.AssignRallyPointsInterval));
+			checkBestResourceLocation = BotPeriod.F1(world.WorldTick, BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(0, Info.CheckBestResourceLocationInterval), Info.CheckBestResourceLocationInterval);
+			sellRefinery = BotPeriod.F1(world.WorldTick, Info.SellRefineryInterval < 0 ? 0 : BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(0, Info.SellRefineryInterval), Info.SellRefineryInterval);
 		}
 
 		void IBotPositionsUpdated.UpdatedBaseCenter(CPos newLocation)
@@ -805,16 +806,15 @@ namespace OpenRA.Mods.CA.Traits
 				!BaseExpansionModules.Any(be => be.IsConyardRelocationPending(RelocationHoldConyard))))
 				RelocationHoldConyard = null;
 
-			if (--assignRallyPointsTicks <= 0)
+			if (assignRallyPoints.TryFire(BotVisitClock.Of(bot).VisitTick))
 			{
-				assignRallyPointsTicks = Math.Max(2, Info.AssignRallyPointsInterval);
 				foreach (var rp in world.ActorsWithTrait<RallyPoint>().Where(rp => rp.Actor.Owner == player))
 					rallyPoints.Push(rp);
 			}
 			else
 			{
 				// PERF: Spread out rally point assignments updates across multiple ticks.
-				var updateCount = Exts.IntegerDivisionRoundingAwayFromZero(rallyPoints.Count, assignRallyPointsTicks);
+				var updateCount = Exts.IntegerDivisionRoundingAwayFromZero(rallyPoints.Count, assignRallyPoints.Remaining(BotVisitClock.Of(bot).VisitTick));
 				for (var i = 0; i < updateCount; i++)
 				{
 					var rp = rallyPoints.Pop();
@@ -823,9 +823,8 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
-			if (--checkBestResourceLocationTicks <= 0 && resourceLayer != null)
+			if (checkBestResourceLocation.TryFire(BotVisitClock.Of(bot).VisitTick) && resourceLayer != null)
 			{
-				checkBestResourceLocationTicks = Info.CheckBestResourceLocationInterval;
 
 				// Clear outdated refinery requests that add too many refinery to a map indice
 				if (ResourceMapModule != null)
@@ -937,10 +936,9 @@ namespace OpenRA.Mods.CA.Traits
 
 			builders[currentBuilderIndex].Tick(bot);
 
-			if (Info.SellRefineryInterval >= 0 && --sellRefineryTick <= 0)
+			if (Info.SellRefineryInterval >= 0 && sellRefinery.TryFire(BotVisitClock.Of(bot).VisitTick))
 			{
 				SellUselessRefinery(bot);
-				sellRefineryTick = Info.SellRefineryInterval;
 			}
 		}
 
