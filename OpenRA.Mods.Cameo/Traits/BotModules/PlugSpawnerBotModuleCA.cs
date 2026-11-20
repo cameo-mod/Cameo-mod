@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 
@@ -38,13 +39,13 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		// plugActor -> (plug type, host name set, prerequisites, actor info)
 		readonly Dictionary<string, (string Type, HashSet<string> Hosts, string[] Prerequisites, ActorInfo Info)> plugs = new();
-		int ticks;
+		BotPeriod ticks; // STAGGER-06 E099 F1 K=Interval x0=K
 
 		public PlugSpawnerBotModuleCA(Actor self, PlugSpawnerBotModuleCAInfo info)
 			: base(info)
 		{
 			world = self.World;
-			ticks = Info.Interval;
+			ticks = BotPeriod.F1(world.WorldTick, Info.Interval, Info.Interval);
 		}
 
 		protected override void Created(Actor self)
@@ -80,7 +81,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (--ticks > 0)
+			if (!ticks.TryFire(BotVisitClock.Of(bot).VisitTick))
 				return;
 
 			var player = bot.Player;
@@ -124,8 +125,6 @@ namespace OpenRA.Mods.Cameo.Traits
 
 				bot.QueueOrder(Order.StartProduction(queue.Actor, plugActor, 1));
 			}
-
-			ticks = Info.Interval;
 		}
 
 		// The first owner queue that can currently produce the plug, else null. Pure seam
@@ -154,7 +153,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		protected override void TraitEnabled(Actor self)
 		{
-			ticks = Info.Interval;
+			ticks = BotPeriod.F1(world.WorldTick, Info.Interval, Info.Interval);
 		}
 	}
 }

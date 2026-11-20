@@ -13,6 +13,7 @@ using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
@@ -80,7 +81,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly OpenRA.Player player;
 		readonly Dictionary<Actor, Actor> activeAssignments = [];
 		IBotRequestUnitProduction[] requestUnitProduction = [];
-		int repairScanTicks;
+		BotPeriod repairScanTicks; // STAGGER-06 F1
 
 		public BridgeRepairBotModule(Actor self, BridgeRepairBotModuleInfo info)
 			: base(info)
@@ -90,7 +91,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			// ActorID is identical on all clients — unlike LocalRandom, which would offset the first scan
 			// differently per client and make the order stream diverge (§1.6).
-			repairScanTicks = (int)(self.ActorID % (uint)RepairScanInterval);
+			repairScanTicks = BotPeriod.F1(self.World.WorldTick, (int)(self.ActorID % (uint)RepairScanInterval), RepairScanInterval);
 		}
 
 		protected override void Created(Actor self)
@@ -110,10 +111,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (--repairScanTicks > 0)
+			if (!repairScanTicks.TryFire(BotVisitClock.Of(bot).VisitTick))
 				return;
-
-			repairScanTicks = RepairScanInterval;
 			QueueRepairOrders(bot);
 		}
 

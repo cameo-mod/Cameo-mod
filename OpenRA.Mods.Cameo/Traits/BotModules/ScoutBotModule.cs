@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using BotRng = OpenRA.Mods.CA.BotRng;
 using OpenRA.Mods.Common;
@@ -109,7 +110,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int lastScoutRequestTick = -1;
 		// Null until the squad manager supplies its shared idle-unit pool.
 		List<UnitWposWrapper> idlePool;
-		int scanTicks;
+		BotPeriod scanTicks; // STAGGER-06 F1
 
 		public ScoutBotModule(Actor self, ScoutBotModuleInfo info)
 			: base(info)
@@ -128,7 +129,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			unitBuilders = self.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
 			leadProviders = self.Owner.PlayerActor.TraitsImplementing<IBotPersonalityLeadProvider>().ToArray();
 			interestProviders = self.TraitsImplementing<IBotScoutInterestProvider>().ToArray();
-			scanTicks = BotRng.For(player, nameof(ScoutBotModule)).Next(0, Info.ScanInterval);
+			scanTicks = BotPeriod.F1(player.World.WorldTick, BotRng.For(player, nameof(ScoutBotModule)).Next(0, Info.ScanInterval), Info.ScanInterval);
 		}
 
 		void IBotEnabled.BotEnabled(IBot bot) { }
@@ -140,10 +141,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (--scanTicks > 0)
+			if (!scanTicks.TryFire(BotVisitClock.Of(bot).VisitTick))
 				return;
-
-			scanTicks = Info.ScanInterval;
 
 			scouts.RemoveAll(u => unitCannotBeOrdered(u.Actor));
 			foreach (var dead in scoutTargets.Keys.Where(a => unitCannotBeOrdered(a)).ToArray())

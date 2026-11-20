@@ -118,7 +118,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		readonly World world;
 		readonly OpenRA.Player player;
-		int scanTicks;
+		BotPeriod scanTicks; // STAGGER-06 F1
 
 		// AR-9 (§19.6): whoever orders holds the lease. A unit is claimed for as long as its group
 		// keeps issuing it orders — TryClaim renews on every ordered tick — and the lease lapses
@@ -139,15 +139,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			world = self.World;
 			player = self.Owner;
-			scanTicks = BotRng.For(player, nameof(DeployBotModule)).Next(ScanInterval);
+			scanTicks = BotPeriod.F1(world.WorldTick, BotRng.For(player, nameof(DeployBotModule)).Next(ScanInterval), ScanInterval);
 		}
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (--scanTicks > 0)
+			if (!scanTicks.TryFire(BotVisitClock.Of(bot).VisitTick))
 				return;
-
-			scanTicks = ScanInterval;
 
 			// Clean up dead actors from ability tracking
 			foreach (var dead in abilityDeployedAt.Keys

@@ -132,14 +132,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		IBotZoneTopology zoneTopology;
 		IBotRememberedDefenceProvider[] defenceProviders;
 		bool providersSearched;
-		int scanTicks;
+		BotPeriod scanTicks; // STAGGER-06 F1
 
 		public GarrisonContestBotModule(Actor self, GarrisonContestBotModuleInfo info)
 			: base(info)
 		{
 			world = self.World;
 			player = self.Owner;
-			scanTicks = BotRng.For(player, nameof(GarrisonContestBotModule)).Next(Info.ScanInterval);
+			scanTicks = BotPeriod.F1(player.World.WorldTick, BotRng.For(player, nameof(GarrisonContestBotModule)).Next(Info.ScanInterval), Info.ScanInterval);
 		}
 
 		protected override void TraitDisabled(Actor self)
@@ -158,10 +158,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (--scanTicks > 0)
+			if (!scanTicks.TryFire(BotVisitClock.Of(bot).VisitTick))
 				return;
-
-			scanTicks = Info.ScanInterval;
 
 			if (!providersSearched)
 			{

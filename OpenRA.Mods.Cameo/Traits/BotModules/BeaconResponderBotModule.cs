@@ -58,7 +58,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		IBotRegionThreatProvider[] threatProviders;
 		List<UnitWposWrapper> idlePool = new();
-		int scanTicks;
+		BotPeriod scanTicks; // STAGGER-06 F1
 		int lastProcessedTick = -1;
 
 		public BeaconResponderBotModule(Actor self, BeaconResponderBotModuleInfo info)
@@ -72,7 +72,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		protected override void TraitEnabled(Actor self)
 		{
 			threatProviders = self.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
-			scanTicks = BotRng.For(player, nameof(BeaconResponderBotModule)).Next(0, Info.ScanInterval);
+			scanTicks = BotPeriod.F1(player.World.WorldTick, BotRng.For(player, nameof(BeaconResponderBotModule)).Next(0, Info.ScanInterval), Info.ScanInterval);
 		}
 
 		void IBotEnabled.BotEnabled(IBot bot) { }
@@ -84,10 +84,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (--scanTicks > 0)
+			if (!scanTicks.TryFire(BotVisitClock.Of(bot).VisitTick))
 				return;
-
-			scanTicks = Info.ScanInterval;
 
 			var tracker = world.WorldActor.TraitOrDefault<BeaconTracker>();
 			if (tracker == null)
