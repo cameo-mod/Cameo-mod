@@ -79,6 +79,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				AttackEvent.KindName => new AttackEvent(),
 				AppliedDamageEvent.AppliedKindName => new AppliedDamageEvent(),
 				LeaseLostEvent.KindName => new LeaseLostEvent(),
+				DamageDealtEvent.KindName => new DamageDealtEvent(),
 				OrderDispositionEvent.KindName => new OrderDispositionEvent(),
 				QueueTransitionEvent.KindName => new QueueTransitionEvent(),
 				BeaconEvent.KindName => new BeaconEvent(),
@@ -308,7 +309,79 @@ namespace OpenRA.Mods.Cameo.Traits
 		}
 	}
 
-	public enum QueueTransition { Started, Done, Cancelled, Placed, Refunded }
+	// INotifyAppliedDamage into CombatAnalysis (Opus condition): every fact the module reads is captured at event time, so a
+	// deferred delivery scores exactly what the synchronous call would have. No live actor reference, so nothing to resolve
+	// after a load and nothing can go stale.
+	public sealed class DamageDealtEvent : BotEvent
+	{
+		public const string KindName = "DamageDealtEvent";
+
+		public int EventTick;
+		public uint DamagedActorId;
+		public string VictimOwner = "";
+		public string VictimType = "";
+		public uint AttackerActorId;
+		public string AttackerOwner = "";
+		public string AttackerType = "";
+		public int Damage;
+		public int LocationX;
+		public int LocationY;
+		public bool Dead;
+
+		public override string Kind => KindName;
+
+		public static DamageDealtEvent From(ModuleKey recipient, int tick, Actor damaged, AttackInfo e)
+		{
+			var attacker = e.Attacker;
+			return new DamageDealtEvent
+			{
+				Recipient = recipient,
+				EventTick = tick,
+				DamagedActorId = damaged.ActorID,
+				VictimOwner = damaged.Owner?.InternalName ?? "",
+				VictimType = damaged.Info.Name,
+				AttackerActorId = attacker?.ActorID ?? 0,
+				AttackerOwner = attacker?.Owner?.InternalName ?? "",
+				AttackerType = attacker?.Info.Name ?? "",
+				Damage = e.Damage?.Value ?? 0,
+				LocationX = damaged.Location.X,
+				LocationY = damaged.Location.Y,
+				Dead = e.DamageState == DamageState.Dead,
+			};
+		}
+
+		protected override void SaveFields(List<MiniYamlNode> into)
+		{
+			into.Add(new("EventTick", Fmt(EventTick)));
+			into.Add(new("DamagedActorId", Fmt(DamagedActorId)));
+			into.Add(new("VictimOwner", VictimOwner));
+			into.Add(new("VictimType", VictimType));
+			into.Add(new("AttackerActorId", Fmt(AttackerActorId)));
+			into.Add(new("AttackerOwner", AttackerOwner));
+			into.Add(new("AttackerType", AttackerType));
+			into.Add(new("Damage", Fmt(Damage)));
+			into.Add(new("LocationX", Fmt(LocationX)));
+			into.Add(new("LocationY", Fmt(LocationY)));
+			into.Add(new("Dead", Dead ? "true" : "false"));
+		}
+
+		protected override void LoadFields(MiniYaml data)
+		{
+			EventTick = GetInt(data, "EventTick");
+			DamagedActorId = GetUInt(data, "DamagedActorId");
+			VictimOwner = Get(data, "VictimOwner");
+			VictimType = Get(data, "VictimType");
+			AttackerActorId = GetUInt(data, "AttackerActorId");
+			AttackerOwner = Get(data, "AttackerOwner");
+			AttackerType = Get(data, "AttackerType");
+			Damage = GetInt(data, "Damage");
+			LocationX = GetInt(data, "LocationX");
+			LocationY = GetInt(data, "LocationY");
+			Dead = Get(data, "Dead") == "true";
+		}
+	}
+
+	public enum QueueTransition {Started, Done, Cancelled, Placed, Refunded }
 
 	public sealed class QueueTransitionEvent : BotEvent
 	{
