@@ -293,6 +293,16 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void BeaconResponderReleaseCooldownIsReadyAtTheOriginalTickBoundary()
+		{
+			var cooldown = new BotCooldown();
+			cooldown.Start(100, 50);
+
+			Assert.That(cooldown.Ready(149), Is.False);
+			Assert.That(cooldown.Ready(150), Is.True);
+		}
+
+		[Test]
 		public void RuledOutFirstDeadlineFormsFail()
 		{
 			// Positive control (9.5): the withdrawn due0 = r + x0 reproduces Sol's tick-25-against-26 defect at x0 = 0.
