@@ -236,7 +236,7 @@ share drift and K stops being well-defined.
   string; the maintainer has not objected to the accurate one. **Keep using your own** —
   the trailer is the only provenance signal we have on a shared git identity.
 - `audit_recent_changes` R3 is deliberately review-only now: three demonstrated
-  false-positive classes, including *your* PR #251 (authored "Zan Yewang" with a correct
+  false-positive classes, including *your* PR #251 (authored "AedisToru" with a correct
   Devin trailer). `STRICT_TRAILER = True` restores blocking if the maintainer wants it.
 - The maintainer's `docs/audit/latest` stash was superseded and dropped this session;
   recovery SHA is in the session log if it is ever wanted:

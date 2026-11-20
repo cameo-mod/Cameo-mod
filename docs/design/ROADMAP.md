@@ -316,7 +316,7 @@ first. Faction reference: [`FACTIONS.md`](../FACTIONS.md).
 
 > **Multi-agent repo — one owner per file-set.** Committing into this tree, by git author:
 > **AedisToru** (maintainer; also lands most agent work under the shared repo identity),
-> **Blackrobe** (co-maintainer), **Elpollo315**, **Zan Yewang**, and **Devin AI**. The commit
+> **Blackrobe** (co-maintainer), **Elpollo315**, **AedisToru**, and **Devin AI**. The commit
 > TRAILER, not the author line, records which agent wrote a change (CLAUDE.md rule 10).
 > Always `git add <files>` scoped, never `-A`. Check a file's mtime and `git log -3 <file>`
 > for a live agent before editing, and re-verify others' commits before building on them.

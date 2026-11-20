@@ -330,7 +330,7 @@ def main() -> int:
         if trailer and not shared:
             # A separate account claiming an agent wrote this. Review-only:
             # agents also legitimately push under their OWN bot account (Devin's
-            # GitHub App authored PR #251 as "Zan Yewang" with a correct Devin
+            # GitHub App authored PR #251 as "AedisToru" with a correct Devin
             # trailer), so this cannot be told apart from impersonation.
             r3.append([sha[:8], commit["date"], commit["author"],
                        f"agent trailer `{trailer.group(1).strip()}` on a "
