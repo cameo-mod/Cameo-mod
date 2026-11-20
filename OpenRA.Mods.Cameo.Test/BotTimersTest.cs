@@ -303,6 +303,20 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void DeployAbilityAndActionCooldownsMatchTheirN1Boundaries()
+		{
+			var ability = new BotCooldown();
+			ability.Start(100, 100);
+			Assert.That(ability.Ready(199), Is.False);
+			Assert.That(ability.Ready(200), Is.True);
+
+			var action = new BotCooldown();
+			action.Start(100, 150);
+			Assert.That(action.Ready(249), Is.False);
+			Assert.That(action.Ready(250), Is.True);
+		}
+
+		[Test]
 		public void RuledOutFirstDeadlineFormsFail()
 		{
 			// Positive control (9.5): the withdrawn due0 = r + x0 reproduces Sol's tick-25-against-26 defect at x0 = 0.

@@ -129,10 +129,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly HashSet<Actor> leasedUnits = new();
 
 		// Tracks when Ability-mode units deployed, for undeploy timing
-		readonly Dictionary<Actor, int> abilityDeployedAt = [];
+		readonly Dictionary<Actor, BotCooldown> abilityUndeployCooldown = [];
 
 		// Cooldown after deploy/undeploy to prevent oscillation
-		readonly Dictionary<Actor, int> deployCooldown = [];
+		readonly Dictionary<Actor, BotCooldown> deployCooldown = [];
 
 		public DeployBotModule(Actor self, DeployBotModuleInfo info)
 			: base(info)
@@ -148,9 +148,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			// Clean up dead actors from ability tracking
-			foreach (var dead in abilityDeployedAt.Keys
+			foreach (var dead in abilityUndeployCooldown.Keys
 				.Where(a => a.IsDead || !a.IsInWorld).ToList())
-				abilityDeployedAt.Remove(dead);
+				abilityUndeployCooldown.Remove(dead);
 			foreach (var dead in deployCooldown.Keys
 				.Where(a => a.IsDead || !a.IsInWorld).ToList())
 				deployCooldown.Remove(dead);
@@ -351,11 +351,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var isDeployed = deployState == DeployState.Deployed;
 			if (isDeployed)
 			{
-				if (abilityDeployedAt.TryGetValue(unit, out var deployTick)
-					&& world.WorldTick - deployTick >= group.AbilityDuration)
+				if (abilityUndeployCooldown.TryGetValue(unit, out var undeployCooldown)
+					&& undeployCooldown.Ready(world.WorldTick))
 				{
 					TryUndeploy(bot, unit, group);
-					abilityDeployedAt.Remove(unit);
+					abilityUndeployCooldown.Remove(unit);
 				}
 
 				return;
@@ -369,7 +369,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (distSq <= RangeSq(group.DeployRange))
 			{
 				TryDeploy(bot, unit, group);
-				abilityDeployedAt[unit] = world.WorldTick;
+				var cooldown = new BotCooldown();
+				cooldown.Start(world.WorldTick, group.AbilityDuration);
+				abilityUndeployCooldown[unit] = cooldown;
 			}
 			else if (distSq <= RangeSq(group.ScanRadius))
 			{
@@ -380,8 +382,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// --- Deploy/Undeploy via IIssueDeployOrder ---
 		void TryDeploy(IBot bot, Actor unit, DeployBotGroup group)
 		{
-			if (deployCooldown.TryGetValue(unit, out var lastAction)
-				&& world.WorldTick - lastAction < group.DeployCooldown)
+			if (deployCooldown.TryGetValue(unit, out var cooldown)
+				&& !cooldown.Ready(world.WorldTick))
 				return;
 
 			var deploy = unit.TraitsImplementing<GrantConditionOnDeploy>()
@@ -402,13 +404,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var d in deployTraits)
 				QueueLeased(bot, unit, d.IssueDeployOrder(unit, false));
 
-			deployCooldown[unit] = world.WorldTick;
+			var nextDeploy = new BotCooldown();
+			nextDeploy.Start(world.WorldTick, group.DeployCooldown);
+			deployCooldown[unit] = nextDeploy;
 		}
 
 		void TryUndeploy(IBot bot, Actor unit, DeployBotGroup group)
 		{
-			if (deployCooldown.TryGetValue(unit, out var lastAction)
-				&& world.WorldTick - lastAction < group.DeployCooldown)
+			if (deployCooldown.TryGetValue(unit, out var cooldown)
+				&& !cooldown.Ready(world.WorldTick))
 				return;
 
 			var deployTraits = unit.TraitsImplementing<IIssueDeployOrder>()
@@ -416,7 +420,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var d in deployTraits)
 				QueueLeased(bot, unit, d.IssueDeployOrder(unit, false));
 
-			deployCooldown[unit] = world.WorldTick;
+			var nextUndeploy = new BotCooldown();
+			nextUndeploy.Start(world.WorldTick, group.DeployCooldown);
+			deployCooldown[unit] = nextUndeploy;
 		}
 
 		CPos? FindNearestValidDeployCell(Actor unit, GrantConditionOnDeploy deploy)
