@@ -206,6 +206,22 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void OpeningStepTimeoutReloadsFromTheVisitThatAdvancesTheStep()
+		{
+			var opening = new BuildOrderOpening("t", new[] { "power", "refinery" }, 10000, 10, startTick: 100);
+			opening.Update(109);
+			Assert.That(opening.StepIndex, Is.EqualTo(0));
+
+			opening.Update(110);
+			Assert.That(opening.StepIndex, Is.EqualTo(1));
+			opening.Update(119);
+			Assert.That(opening.StepIndex, Is.EqualTo(1), "the next step is not due before its reloaded deadline");
+
+			opening.Update(120);
+			Assert.That(opening.EndReason, Is.EqualTo("completed"), "the next step is due at the reloaded deadline");
+		}
+
+		[Test]
 		public void TheReactLayerCanInvalidateAnOpeningAndANoteAfterwardsIsIgnored()
 		{
 			var opening = new BuildOrderOpening("eco", new[] { "power", "refinery" }, 7500, 1500);

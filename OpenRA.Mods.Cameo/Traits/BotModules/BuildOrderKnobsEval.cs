@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits.BotModules
@@ -75,7 +76,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly string Name;
 		readonly string[] steps;
 		readonly int maxTicks, stepTimeoutTicks;
-		int index, stepStartTick;
+		int index;
+		BotCooldown stepTimeout;
 
 		public string EndReason { get; private set; } = "";
 		public int StepIndex => index;
@@ -88,7 +90,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			this.steps = steps ?? Array.Empty<string>();
 			this.maxTicks = maxTicks;
 			this.stepTimeoutTicks = stepTimeoutTicks;
-			stepStartTick = startTick;
+			stepTimeout.Start(startTick, stepTimeoutTicks);
 			if (this.steps.Length == 0)
 				EndReason = "empty";
 		}
@@ -107,7 +109,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 			}
 
-			while (Active && tick - stepStartTick >= stepTimeoutTicks)
+			while (Active && stepTimeout.Ready(tick))
 				Advance(tick);
 		}
 
@@ -127,7 +129,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		void Advance(int tick)
 		{
 			index++;
-			stepStartTick = tick;
+			stepTimeout.Start(tick, stepTimeoutTicks);
 			if (index >= steps.Length)
 				EndReason = "completed";
 		}
