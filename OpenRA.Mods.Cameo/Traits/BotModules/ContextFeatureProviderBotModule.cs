@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using OpenRA.Graphics;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits.BotModules;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -133,14 +134,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			if (!eligibleAtWorldLoad || IsTraitDisabled)
 				return;
-			var tick = world.WorldTick;
+			var clock = BotVisitClock.Of(bot);
+			var tick = clock.VisitTick;
 			if (!IsContextOwner())
 				return;
 			if (seenSource != null && player.Shroud != null && enemies.Count != 0)
 			{
-				if (tick % OpponentFeatureWindow.SampleInterval == 0)
+				if (BotPeriod.ResidueHit(tick, clock.Elapsed, OpponentFeatureWindow.SampleInterval, 0))
 					SampleCensuses(tick);
-				if (tick % OpponentFeatureWindow.UpdateInterval == 0)
+				if (BotPeriod.ResidueHit(tick, clock.Elapsed, OpponentFeatureWindow.UpdateInterval, 0))
 					EmitOpponentRows(tick);
 			}
 

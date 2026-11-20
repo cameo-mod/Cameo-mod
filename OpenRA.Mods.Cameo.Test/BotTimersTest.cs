@@ -132,6 +132,27 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void ResidueWindowMatchesOldModuloAtN1AndKeepsGridAtVisitSpacingN()
+		{
+			foreach (var k in new[] { 1, 25, 75, 100, 250, 750 })
+				foreach (var res in new[] { 0, 1, k - 1 }.Where(v => v >= 0 && v < k))
+				{
+					for (var t = 1; t <= 3000; t++)
+						Assert.That(BotPeriod.ResidueHit(t, 1, k, res), Is.EqualTo(t % k == res), $"N=1 K={k} res={res} t={t}");
+
+					// N = 4: a grid tick falling between visits is taken at the first visit at or after it, none lost.
+					var hits = 0;
+					for (var t = 4; t <= 3000; t += 4)
+						if (BotPeriod.ResidueHit(t, 4, k, res))
+							hits++;
+
+					var grid = Enumerable.Range(1, 3000).Count(t => t % k == res && t <= 3000);
+					var expected = k >= 4 ? grid : (3000 / 4);
+					Assert.That(hits, Is.EqualTo(expected).Within(1), $"N=4 K={k} res={res}");
+				}
+		}
+
+		[Test]
 		public void RuledOutFirstDeadlineFormsFail()
 		{
 			// Positive control (9.5): the withdrawn due0 = r + x0 reproduces Sol's tick-25-against-26 defect at x0 = 0.

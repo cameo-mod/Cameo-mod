@@ -78,10 +78,11 @@ namespace OpenRA.Mods.CA.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (IsTraitDisabled || world.WorldTick == lastEvaluationTick ||
-				world.WorldTick % Info.EvaluationInterval != player.ClientIndex % Info.EvaluationInterval)
+			var clock = BotVisitClock.Of(bot);
+			if (IsTraitDisabled || clock.VisitTick == lastEvaluationTick ||
+				!BotPeriod.ResidueHit(clock.VisitTick, clock.Elapsed, Info.EvaluationInterval, player.ClientIndex % Info.EvaluationInterval))
 				return;
-			lastEvaluationTick = world.WorldTick;
+			lastEvaluationTick = clock.VisitTick;
 
 			// Personality-named squad managers (@rush/@turtle/…) enable only after
 			// the personality latch and re-latch on switch — never cache an empty

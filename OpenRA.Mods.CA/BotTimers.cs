@@ -75,6 +75,18 @@ namespace OpenRA.Mods.CA
 		/// <summary>An absolute first deadline (<c>WorldTick >= next</c> forms): due0 = max(r + 1, next0).</summary>
 		public static BotPeriod Abs(int r, int next0, int k) => new(Math.Max(r + 1, next0), Math.Max(1, k));
 
+		/// <summary>
+		/// F4 residue form <c>WorldTick % K == res</c> (R4): true when ANY tick in the visit's elapsed window
+		/// [v - elapsed + 1, v] has the residue. Stateless, so a module that was disabled for a while does not fire a
+		/// stale deadline on re-enable; at N = 1 (elapsed 1) it is exactly the old test.
+		/// </summary>
+		public static bool ResidueHit(int visitTick, int elapsed, int k, int res)
+		{
+			var kk = Math.Max(1, k);
+			var last = visitTick - (((visitTick - res) % kk) + kk) % kk;
+			return last >= visitTick - Math.Max(1, elapsed) + 1;
+		}
+
 		/// <summary>Restore form A (absolute due) or form R (remaining ticks at the load tick).</summary>
 		public static BotPeriod FromRemaining(int loadTick, int remaining, int k) => new(loadTick + Math.Max(1, remaining), Math.Max(1, k));
 
