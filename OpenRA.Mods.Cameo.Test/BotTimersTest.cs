@@ -278,6 +278,21 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void AssaultFormationRefanCooldownMatchesItsN1GateAndPruneBoundary()
+		{
+			const int recordTick = 100;
+			const int cooldownTicks = 750;
+			var cooldown = new BotCooldown();
+			cooldown.Start(recordTick, cooldownTicks);
+
+			foreach (var now in new[] { recordTick, recordTick + cooldownTicks - 1, recordTick + cooldownTicks, recordTick + cooldownTicks + 1 })
+			{
+				Assert.That(!cooldown.Ready(now), Is.EqualTo(now - recordTick < cooldownTicks), $"same-ground gate at {now}");
+				Assert.That(now > cooldown.Due, Is.EqualTo(now - recordTick > cooldownTicks), $"prune gate at {now}");
+			}
+		}
+
+		[Test]
 		public void RuledOutFirstDeadlineFormsFail()
 		{
 			// Positive control (9.5): the withdrawn due0 = r + x0 reproduces Sol's tick-25-against-26 defect at x0 = 0.
