@@ -87,23 +87,30 @@ namespace OpenRA.Mods.Cameo.Traits
 			Rosters.Add(world, new Roster(seats));
 		}
 
-		/// <summary>The phase of this player's bot for a timer of the given period, in [0, period). False until the roster is
-		/// built (the first bot tick): a module that seeds earlier, from a trait-enabled callback at world load, must keep its
-		/// old phase, because the roster built then would be partial. A player outside the roster (a human, a classic bot, a
-		/// bot activated after the first tick) gets phase 0.</summary>
+		/// <summary>The phase of a seat, or false when the site must keep its legacy schedule: a roster of one seat (N = 1
+		/// identity: every site behaves exactly as today, including the sites whose legacy phase is not 0), a seat outside the
+		/// roster (rank below 0: a bot activated after the first tick), or a period of 1 or less.</summary>
+		public static bool TryPhase(int rank, int count, int period, out int phase)
+		{
+			phase = 0;
+			if (period <= 1 || count <= 1 || rank < 0)
+				return false;
+
+			phase = Phase(rank, count, period);
+			return true;
+		}
+
+		/// <summary>The phase of this player's bot for a timer of the given period, in [0, period). False (the site keeps its
+		/// legacy schedule) until the roster is built (the first bot tick: a module that seeds earlier, from a trait-enabled
+		/// callback at world load, would see a partial roster), for a roster of one, and for a player outside the roster.</summary>
 		public static bool TryOf(OpenRA.Player player, int period, out int phase)
 		{
 			phase = 0;
 			if (!Rosters.TryGetValue(player.World, out var roster))
 				return false;
 
-			var rank = Array.IndexOf(roster.Seats, player);
-			phase = rank < 0 ? 0 : Phase(rank, roster.Seats.Length, period);
-			return true;
+			return TryPhase(Array.IndexOf(roster.Seats, player), roster.Seats.Length, period, out phase);
 		}
-
-		/// <summary>Phase 0 when the roster is not built (test and telemetry convenience).</summary>
-		public static int Of(OpenRA.Player player, int period) => TryOf(player, period, out var phase) ? phase : 0;
 
 		/// <summary>N_fam for this world once the roster is built, else 0 (test and telemetry).</summary>
 		public static int FamilyCount(World world) => Rosters.TryGetValue(world, out var roster) ? roster.Seats.Length : 0;

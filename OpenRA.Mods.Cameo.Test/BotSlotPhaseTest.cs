@@ -40,14 +40,91 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(new ModularBotInfo().RoundRobinFamily, Is.False);
 		}
 
-		[Test]
-		public void OneBotKeepsPhaseZeroForEveryPeriod()
+		// A bot as the sites see it: the seat's rank and the roster size, resolved through the same TryPhase the real bot uses.
+		sealed class SeatStub : IBotSlotPhase
 		{
+			readonly int rank;
+			readonly int count;
+
+			public SeatStub(int rank, int count)
+			{
+				this.rank = rank;
+				this.count = count;
+			}
+
+			public bool TryPhaseOf(int period, out int phase) => BotSlotPhase.TryPhase(rank, count, period, out phase);
+		}
+
+		[Test]
+		public void OneSeatRosterGivesNoPhaseSoEverySiteKeepsItsLegacySchedule()
+		{
+			// N = 1 identity: a phase of 0 is not enough, because the legacy phase of some sites is not 0 (TacticalMap's draw,
+			// RegionRoles' ActorID offset, SiegeEvaluator's ClientIndex % interval, BridgeRepair's ActorID offset).
 			foreach (var k in Periods)
 			{
-				Assert.That(BotSlotPhase.Phase(0, 1, k), Is.EqualTo(0), $"K={k}");
-				Assert.That(BotSlotPhase.Phase(3, 1, k), Is.EqualTo(0), "a single seat never offsets, whatever rank it is handed");
+				Assert.That(BotSlotPhase.TryPhase(0, 1, k, out _), Is.False, $"K={k}");
+				Assert.That(BotSlotPhase.TryPhase(3, 1, k, out _), Is.False);
+				Assert.That(BotSlotPhases.TryResolve(new SeatStub(0, 1), k, out _), Is.False);
+				Assert.That(BotSlotPhases.Resolve(new SeatStub(0, 1), k, 17), Is.EqualTo(17), $"legacy nonzero phase kept, K={k}");
 			}
+		}
+
+		[Test]
+		public void ASeatOutsideTheRosterKeepsItsLegacySchedule()
+		{
+			// A bot activated after the first tick (rank below 0) is not in the frozen roster.
+			foreach (var k in Periods)
+			{
+				Assert.That(BotSlotPhase.TryPhase(-1, 6, k, out _), Is.False);
+				Assert.That(BotSlotPhases.Resolve(new SeatStub(-1, 6), k, 17), Is.EqualTo(17), $"K={k}");
+			}
+		}
+
+		[Test]
+		public void APeriodOfOneOrLessGivesNoPhase()
+		{
+			Assert.That(BotSlotPhase.TryPhase(1, 4, 1, out _), Is.False);
+			Assert.That(BotSlotPhase.TryPhase(1, 4, 0, out _), Is.False);
+			Assert.That(BotSlotPhases.Resolve(new SeatStub(1, 4), 1, 9), Is.EqualTo(9));
+		}
+
+		[Test]
+		public void TwoOrMoreSeatsReplaceTheLegacyPhaseEvenForRankZero()
+		{
+			// Rank 0 of two: phase 0, which replaces a nonzero legacy phase (the point of the flag).
+			Assert.That(BotSlotPhases.TryResolve(new SeatStub(0, 2), 250, out var phase), Is.True);
+			Assert.That(phase, Is.EqualTo(0));
+			Assert.That(BotSlotPhases.Resolve(new SeatStub(0, 2), 250, 17), Is.EqualTo(0));
+			Assert.That(BotSlotPhases.Resolve(new SeatStub(1, 2), 250, 17), Is.EqualTo(125));
+		}
+
+		[Test]
+		public void AnUnphasedBotOrNoBotKeepsTheLegacyPhase()
+		{
+			Assert.That(BotSlotPhases.Resolve((IBotSlotPhase)null, 250, 17), Is.EqualTo(17), "classic / non-modular bot");
+		}
+
+		[Test]
+		public void EachSiteKeepsItsLegacyScheduleWhenNoPhaseIsGiven()
+		{
+			// TacticalMap: today's now + BotRng draw (nonzero), phase not used.
+			Assert.That(TacticalMapBotModule.NextRefreshTick(1000, 250, 77, false, 0), Is.EqualTo(1077));
+
+			// RegionRoles: today's ActorID % interval offset (nonzero).
+			Assert.That(RegionRolesBotModule.FirstRefreshTick(1000, 250, 123u, false, 0), Is.EqualTo(1123));
+			Assert.That(RegionRolesBotModule.FirstRefreshTick(1000, 250, 123u, true, 41), Is.EqualTo(1041 + 0), "phased: the first on-phase tick after now");
+			Assert.That(RegionRolesBotModule.FirstRefreshTick(1000, 250, 123u, true, 41) % 250, Is.EqualTo(41));
+
+			// SiegeEvaluator ClientIndex % interval, BridgeRepair ActorID % interval: Resolve returns the site's own `today`.
+			var oneSeat = new SeatStub(0, 1);
+			Assert.That(BotSlotPhases.Resolve(oneSeat, 100, 7 % 100), Is.EqualTo(7));
+			Assert.That(BotSlotPhases.Resolve(oneSeat, 100, 37), Is.EqualTo(37));
+
+			// BotSituation: neither TryResolve assigns, so the constructor's ClientIndex * 37 offset stands.
+			var nextSnapshotTick = 41;
+			if (BotSlotPhases.TryResolve(oneSeat, 150, out var snapshotPhase))
+				nextSnapshotTick = snapshotPhase;
+			Assert.That(nextSnapshotTick, Is.EqualTo(41));
 		}
 
 		[Test]

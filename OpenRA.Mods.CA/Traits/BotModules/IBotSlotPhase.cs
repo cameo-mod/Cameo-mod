@@ -20,8 +20,9 @@ namespace OpenRA.Mods.CA.Traits
 	// so they reach it through this seam. A bot that does not implement it, or whose flag is off, gives no phase.
 	public interface IBotSlotPhase
 	{
-		/// <summary>True when this bot is active, phase-offsets its timers and has its roster (from the first bot tick on).
-		/// <paramref name="phase"/> is then in [0, period).</summary>
+		/// <summary>True when this bot is active, phase-offsets its timers and has its roster (from the first bot tick on), the
+		/// roster holds more than one seat, and this bot is in it. <paramref name="phase"/> is then in [0, period). False means
+		/// every site keeps its legacy schedule (N = 1 identity).</summary>
 		bool TryPhaseOf(int period, out int phase);
 	}
 
@@ -45,10 +46,12 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>The same through the bot a module is ticking under (no trait enumeration).</summary>
-		public static bool TryResolve(IBot bot, int period, out int phase)
+		public static bool TryResolve(IBot bot, int period, out int phase) => TryResolve(bot as IBotSlotPhase, period, out phase);
+
+		public static bool TryResolve(IBotSlotPhase phased, int period, out int phase)
 		{
 			phase = 0;
-			if (period <= 1 || bot is not IBotSlotPhase phased)
+			if (period <= 1 || phased == null)
 				return false;
 
 			return phased.TryPhaseOf(period, out phase);
@@ -56,6 +59,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>The phase for a site whose existing phase is <paramref name="today"/>.</summary>
 		public static int Resolve(IBot bot, int period, int today) => TryResolve(bot, period, out var phase) ? phase : today;
+
+		public static int Resolve(IBotSlotPhase phased, int period, int today) => TryResolve(phased, period, out var phase) ? phase : today;
 
 		/// <summary>The phase for a site whose existing phase is <paramref name="today"/>.</summary>
 		public static int Resolve(Player player, int period, int today) => TryResolve(player, period, out var phase) ? phase : today;

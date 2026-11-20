@@ -229,9 +229,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// hazard for the order stream; ActorID is identical on all clients).
 				// QW-B: with phase-offset timers the first refresh is the next tick that is on the bot's phase.
 				var interval = Math.Max(1, Info.RegionRefreshInterval);
-				nextRefreshTick = BotSlotPhases.TryResolve(bot, interval, out var phase)
-					? BotSlotPhases.NextDue(world.WorldTick + 1, interval, phase)
-					: world.WorldTick + (int)(player.PlayerActor.ActorID % interval);
+				nextRefreshTick = FirstRefreshTick(world.WorldTick, interval, player.PlayerActor.ActorID,
+					BotSlotPhases.TryResolve(bot, interval, out var phase), phase);
 				return;
 			}
 
@@ -241,6 +240,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			nextRefreshTick = world.WorldTick + Math.Max(1, Info.RegionRefreshInterval);
 			Refresh();
 		}
+
+		// Pure, for tests: the legacy ActorID offset, or (phase-offset timers) the first tick after `now` on the bot's phase.
+		internal static int FirstRefreshTick(int now, int interval, uint actorId, bool phased, int phase) =>
+			phased ? BotSlotPhases.NextDue(now + 1, interval, phase) : now + (int)(actorId % interval);
 
 		void Refresh()
 		{
