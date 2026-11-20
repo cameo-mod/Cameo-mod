@@ -129,10 +129,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly HashSet<Actor> leasedUnits = new();
 
 		// Tracks when Ability-mode units deployed, for undeploy timing
-		readonly Dictionary<Actor, BotCooldown> abilityUndeployCooldown = [];
+		readonly Dictionary<Actor, int> abilityDeployedAt = [];
 
 		// Cooldown after deploy/undeploy to prevent oscillation
-		readonly Dictionary<Actor, BotCooldown> deployCooldown = [];
+		readonly Dictionary<Actor, int> deployCooldown = [];
 
 		public DeployBotModule(Actor self, DeployBotModuleInfo info)
 			: base(info)
@@ -148,9 +148,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			// Clean up dead actors from ability tracking
-			foreach (var dead in abilityUndeployCooldown.Keys
+			foreach (var dead in abilityDeployedAt.Keys
 				.Where(a => a.IsDead || !a.IsInWorld).ToList())
-				abilityUndeployCooldown.Remove(dead);
+				abilityDeployedAt.Remove(dead);
 			foreach (var dead in deployCooldown.Keys
 				.Where(a => a.IsDead || !a.IsInWorld).ToList())
 				deployCooldown.Remove(dead);
@@ -351,11 +351,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var isDeployed = deployState == DeployState.Deployed;
 			if (isDeployed)
 			{
-				if (abilityUndeployCooldown.TryGetValue(unit, out var undeployCooldown)
-					&& undeployCooldown.Ready(world.WorldTick))
+				if (abilityDeployedAt.TryGetValue(unit, out var deployTick))
 				{
-					TryUndeploy(bot, unit, group);
-					abilityUndeployCooldown.Remove(unit);
+					var cooldown = new BotCooldown();
+					cooldown.Start(deployTick, group.AbilityDuration);
+					if (cooldown.Ready(world.WorldTick))
+					{
+						TryUndeploy(bot, unit, group);
+						abilityDeployedAt.Remove(unit);
+					}
 				}
 
 				return;
@@ -369,9 +373,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (distSq <= RangeSq(group.DeployRange))
 			{
 				TryDeploy(bot, unit, group);
-				var cooldown = new BotCooldown();
-				cooldown.Start(world.WorldTick, group.AbilityDuration);
-				abilityUndeployCooldown[unit] = cooldown;
+				abilityDeployedAt[unit] = world.WorldTick;
 			}
 			else if (distSq <= RangeSq(group.ScanRadius))
 			{
@@ -382,9 +384,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// --- Deploy/Undeploy via IIssueDeployOrder ---
 		void TryDeploy(IBot bot, Actor unit, DeployBotGroup group)
 		{
-			if (deployCooldown.TryGetValue(unit, out var cooldown)
-				&& !cooldown.Ready(world.WorldTick))
-				return;
+			if (deployCooldown.TryGetValue(unit, out var lastAction))
+			{
+				var cooldown = new BotCooldown();
+				cooldown.Start(lastAction, group.DeployCooldown);
+				if (!cooldown.Ready(world.WorldTick))
+					return;
+			}
 
 			var deploy = unit.TraitsImplementing<GrantConditionOnDeploy>()
 				.FirstOrDefault(d => !d.IsTraitDisabled && !d.IsTraitPaused);
@@ -404,25 +410,25 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var d in deployTraits)
 				QueueLeased(bot, unit, d.IssueDeployOrder(unit, false));
 
-			var nextDeploy = new BotCooldown();
-			nextDeploy.Start(world.WorldTick, group.DeployCooldown);
-			deployCooldown[unit] = nextDeploy;
+			deployCooldown[unit] = world.WorldTick;
 		}
 
 		void TryUndeploy(IBot bot, Actor unit, DeployBotGroup group)
 		{
-			if (deployCooldown.TryGetValue(unit, out var cooldown)
-				&& !cooldown.Ready(world.WorldTick))
-				return;
+			if (deployCooldown.TryGetValue(unit, out var lastAction))
+			{
+				var cooldown = new BotCooldown();
+				cooldown.Start(lastAction, group.DeployCooldown);
+				if (!cooldown.Ready(world.WorldTick))
+					return;
+			}
 
 			var deployTraits = unit.TraitsImplementing<IIssueDeployOrder>()
 				.Where(d => d.CanIssueDeployOrder(unit, false));
 			foreach (var d in deployTraits)
 				QueueLeased(bot, unit, d.IssueDeployOrder(unit, false));
 
-			var nextUndeploy = new BotCooldown();
-			nextUndeploy.Start(world.WorldTick, group.DeployCooldown);
-			deployCooldown[unit] = nextUndeploy;
+			deployCooldown[unit] = world.WorldTick;
 		}
 
 		CPos? FindNearestValidDeployCell(Actor unit, GrantConditionOnDeploy deploy)

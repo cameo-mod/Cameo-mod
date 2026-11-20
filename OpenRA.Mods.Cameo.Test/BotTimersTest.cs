@@ -317,6 +317,20 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void DeployCooldownUsesTheIntervalOfTheReadingGroup()
+		{
+			const int actionTick = 100;
+			var longGroupCooldown = new BotCooldown();
+			longGroupCooldown.Start(actionTick, 150);
+			var shortGroupCooldown = new BotCooldown();
+			shortGroupCooldown.Start(actionTick, 0);
+
+			Assert.That(longGroupCooldown.Ready(actionTick), Is.False);
+			Assert.That(shortGroupCooldown.Ready(actionTick), Is.True);
+			Assert.That(longGroupCooldown.Ready(actionTick + 150), Is.True);
+		}
+
+		[Test]
 		public void RuledOutFirstDeadlineFormsFail()
 		{
 			// Positive control (9.5): the withdrawn due0 = r + x0 reproduces Sol's tick-25-against-26 defect at x0 = 0.
