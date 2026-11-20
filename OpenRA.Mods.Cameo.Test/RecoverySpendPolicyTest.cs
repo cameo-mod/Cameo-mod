@@ -109,6 +109,11 @@ namespace OpenRA.Mods.Cameo.Test
 			var corrupt = original.Save() with { UsedGenerations = new uint[0] };
 			Assert.That(restored.Restore(corrupt), Is.False);
 			Assert.That(restored.CommittedCost, Is.EqualTo(1000));
+			var decoded = new RecoverySpendLedgerCA();
+			Assert.That(decoded.RestoreText(original.SaveText()), Is.True);
+			Assert.That(decoded.CommittedCost, Is.EqualTo(1000));
+			Assert.That(decoded.RestoreText("{broken"), Is.False);
+			Assert.That(decoded.CommittedCost, Is.EqualTo(1000));
 		}
 
 		[Test]

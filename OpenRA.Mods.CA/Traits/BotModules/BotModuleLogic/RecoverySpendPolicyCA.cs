@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 
 namespace OpenRA.Mods.CA.Traits
 {
@@ -167,6 +168,26 @@ namespace OpenRA.Mods.CA.Traits
 				.Concat(inFlight.Select(x => new RecoverySpendEntry(x.Key, x.Value, true)))
 				.OrderBy(x => x.Key.Generation).ToArray(),
 			usedGenerations.OrderBy(x => x).ToArray(), selectedRecovery, floorLease, nextGeneration, exhausted);
+
+		static readonly JsonSerializerOptions SaveOptions = new() { IncludeFields = true };
+
+		// Actual game-save wiring remains the responsibility of the player trait.
+		public string SaveText() => JsonSerializer.Serialize(Save(), SaveOptions);
+
+		public bool RestoreText(string text)
+		{
+			if (string.IsNullOrEmpty(text))
+				return false;
+
+			try
+			{
+				return Restore(JsonSerializer.Deserialize<RecoverySpendSnapshot>(text, SaveOptions));
+			}
+			catch (JsonException)
+			{
+				return false;
+			}
+		}
 
 		public bool Restore(RecoverySpendSnapshot snapshot)
 		{
