@@ -10,6 +10,7 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 
@@ -99,6 +100,41 @@ namespace OpenRA.Mods.Cameo.Test
 			var owners = TacticalMapBotModule.TallyOwners(2, tally);
 
 			Assert.That(owners, Is.All.Null);
+		}
+
+		[Test]
+		public void LazyOptionalMapOutputsLeaveUsedTerritoryAndRegionOwnersBitIdentical()
+		{
+			var claim = new HashSet<CPos> { new(1, 1), new(1, 2), new(2, 2) };
+			var queries = new[] { new CPos(1, 1), new CPos(0, 0), new CPos(2, 2), new CPos(3, 3) };
+			var tally = new Dictionary<int, Dictionary<string, int>>
+			{
+				[0] = new() { ["own"] = 4, ["enemy"] = 1 },
+				[1] = new() { ["own"] = 2, ["enemy"] = 2 },
+				[2] = new() { ["enemy"] = 3 },
+			};
+
+			string[] UsedOutputs(bool optionalPassesRequested)
+			{
+				// This is the production gate used only by the optional passes. Core claim and ownership
+				// readers remain independent of the gate and therefore must have identical outputs.
+				var optionalPassRan = false;
+				if (TacticalMapBotModule.ShouldRefreshOptionalOutput(optionalPassesRequested))
+					optionalPassRan = true;
+
+				var territoryBits = queries.Select(claim.Contains).Select(inside => inside ? "in" : "out").ToArray();
+				var owners = TacticalMapBotModule.TallyOwners(3, tally);
+				var usedBits = territoryBits.Concat(owners.Select(o => o ?? "contested")).ToArray();
+				Assert.That(optionalPassRan, Is.EqualTo(optionalPassesRequested));
+				return usedBits;
+			}
+
+			var skipped = UsedOutputs(optionalPassesRequested: false);
+			var eager = UsedOutputs(optionalPassesRequested: true);
+
+			Assert.That(skipped, Is.EqualTo(eager), "used territory and region-owner outputs are bit-identical");
+			Assert.That(TacticalMapBotModule.ShouldRefreshOptionalOutput(false), Is.False);
+			Assert.That(TacticalMapBotModule.ShouldRefreshOptionalOutput(true), Is.True);
 		}
 
 		[Test]
