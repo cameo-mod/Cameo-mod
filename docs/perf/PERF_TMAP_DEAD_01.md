@@ -24,10 +24,13 @@ ownership remain eager because they have decision readers.
 
 The optional useful, corridor and high-ground refreshes now return until their corresponding API or
 overlay accessor requests that output. Once requested, the original incremental refresh runs on the bot
-tick with the original interval, cursor and ordering. Territory membership remains on the original
-unconditional refresh path. Its derived door/wall/front pass runs only when one of those output accessors
-requests details; overlay accessors request the work for a later simulation tick rather than computing
-from the render thread. The same snapshots and builder are used when the details are requested.
+tick with the original interval, cursor and ordering. Opus approved asynchronous first availability:
+these getters may return an empty/stale snapshot while the requested scan runs. The docs on each getter
+state that a sim caller requiring synchronous first availability must add that path and get it reviewed.
+Territory membership remains on the original unconditional refresh path. Its derived door/wall/front pass
+runs only when one of those output accessors requests details; overlay accessors request the work for a
+later simulation tick and never compute on the render thread. The same snapshots and builder are used
+when the details are requested.
 
 `ResetPerBaseCaches` retains the original five `BotRng.For(player, nameof(TacticalMapBotModule)).Next(interval)`
 draws in their original order (high-ground, useful, corridor, territory, region ownership). The skipped
@@ -37,8 +40,9 @@ funnel message is emitted when the optional territory details are built.
 
 ## Verification
 
-Added `LazyOptionalMapOutputsLeaveUsedTerritoryAndRegionOwnersBitIdentical`, comparing the used territory
-membership and region-owner projections with the production lazy gate false/true. This pins the independent
-core outputs while optional work is skipped or requested. `git diff --check` passes. Build, unit-test
+The `ZoneTopologyTest` refresh-cycle fixture now invokes the same `RunRefreshCycle` production dispatcher
+as `BotTick`, comparing the production territory-claim flood, `TallyOwners`, and the
+`RegionRolesBotModule` corridor resolver/width values with optional outputs skipped versus requested.
+This exercises the actual core builders and request gate. `git diff --check` passes. Build, unit-test
 execution and game/order-identity capture were not run under the active E3B batch freeze; the order-identity
 game remains a separate Workhorse perf-window gate after static review.

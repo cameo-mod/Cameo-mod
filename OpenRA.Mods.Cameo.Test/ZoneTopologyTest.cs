@@ -103,10 +103,16 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void LazyOptionalMapOutputsLeaveUsedTerritoryAndRegionOwnersBitIdentical()
+		public void RefreshCycleSkipDoesNotChangeClaimOwnersOrRegionRolesCorridors()
 		{
-			var claim = new HashSet<CPos> { new(1, 1), new(1, 2), new(2, 2) };
-			var queries = new[] { new CPos(1, 1), new CPos(0, 0), new CPos(2, 2), new CPos(3, 3) };
+			var passable = new HashSet<CPos>();
+			for (var y = 0; y < 3; y++)
+				for (var x = 0; x < 5; x++)
+					passable.Add(new CPos(x, y));
+
+			var ownSeeds = new[] { new CPos(0, 1) };
+			var enemySeeds = new[] { new CPos(4, 1) };
+			var gate = new HashSet<CPos> { new(2, 1) };
 			var tally = new Dictionary<int, Dictionary<string, int>>
 			{
 				[0] = new() { ["own"] = 4, ["enemy"] = 1 },
@@ -114,27 +120,52 @@ namespace OpenRA.Mods.Cameo.Test
 				[2] = new() { ["enemy"] = 3 },
 			};
 
-			string[] UsedOutputs(bool optionalPassesRequested)
+			var regionCorridors = new List<ZoneGateCorridor>
 			{
-				// This is the production gate used only by the optional passes. Core claim and ownership
-				// readers remain independent of the gate and therefore must have identical outputs.
-				var optionalPassRan = false;
-				if (TacticalMapBotModule.ShouldRefreshOptionalOutput(optionalPassesRequested))
-					optionalPassRan = true;
+				new(new CPos(1, 0), true, [new CPos(0, 0), new CPos(1, 0)]),
+				new(new CPos(3, 2), false, [new CPos(3, 1), new CPos(3, 2), new CPos(3, 3)]),
+			};
 
-				var territoryBits = queries.Select(claim.Contains).Select(inside => inside ? "in" : "out").ToArray();
-				var owners = TacticalMapBotModule.TallyOwners(3, tally);
-				var usedBits = territoryBits.Concat(owners.Select(o => o ?? "contested")).ToArray();
-				Assert.That(optionalPassRan, Is.EqualTo(optionalPassesRequested));
-				return usedBits;
+			(string[] Outputs, int OptionalCalls) Refresh(bool optionalRequested)
+			{
+				var optionalCalls = 0;
+				TacticalMapBotModule.TerritoryClaimResult claim = null;
+				string[] owners = null;
+				ZoneGateCorridor regionRolesCorridor = null;
+
+				TacticalMapBotModule.RunRefreshCycle(optionalRequested, optionalRequested, optionalRequested,
+					() => optionalCalls++, () => optionalCalls++, () => optionalCalls++,
+					() => claim = TacticalMapBotModule.BuildTerritoryClaim(ownSeeds, enemySeeds,
+						passable.Contains, passable.Contains, gate, unopposedRadius: 5, cellCap: 15),
+					() => owners = TacticalMapBotModule.TallyOwners(3, tally));
+
+				// RegionRolesBotModule consumes this exact production resolver and scores corridor.Width.
+				regionRolesCorridor = TacticalMapBotModule.ResolveRegionGateCorridor(regionCorridors, 1);
+				var claimBits = claim.Mine.OrderBy(c => c.Y).ThenBy(c => c.X).Select(c => $"claim:{c.X},{c.Y}");
+				var ownerBits = owners.Select((owner, index) => $"owner:{index}:{owner ?? "contested"}");
+				var gateBits = new[]
+				{
+					$"gate:{regionRolesCorridor.Center.X},{regionRolesCorridor.Center.Y}",
+					$"width:{regionRolesCorridor.Width}",
+					$"axis:{regionRolesCorridor.WallRunsHorizontal}",
+				}.Concat(regionRolesCorridor.Cells.Select(c => $"cell:{c.X},{c.Y}")).ToArray();
+
+				return (claimBits.Concat(ownerBits).Concat(gateBits).ToArray(), optionalCalls);
 			}
 
-			var skipped = UsedOutputs(optionalPassesRequested: false);
-			var eager = UsedOutputs(optionalPassesRequested: true);
+			var skipped = Refresh(optionalRequested: false);
+			var eager = Refresh(optionalRequested: true);
 
-			Assert.That(skipped, Is.EqualTo(eager), "used territory and region-owner outputs are bit-identical");
-			Assert.That(TacticalMapBotModule.ShouldRefreshOptionalOutput(false), Is.False);
-			Assert.That(TacticalMapBotModule.ShouldRefreshOptionalOutput(true), Is.True);
+			Assert.That(skipped.Outputs, Is.EqualTo(eager.Outputs), "claim, owners and RegionRoles corridor output are bit-identical");
+			Assert.That(skipped.OptionalCalls, Is.Zero, "lazy unrequested cycle skips all three optional passes");
+			Assert.That(eager.OptionalCalls, Is.EqualTo(3), "eager cycle runs all three optional passes");
+			Assert.That(skipped.Outputs, Does.Contain("claim:0,1"));
+			Assert.That(skipped.Outputs, Does.Not.Contain("claim:4,1"), "the enemy seed is excluded from our claim");
+			Assert.That(skipped.Outputs, Does.Contain("owner:0:own"));
+			Assert.That(skipped.Outputs, Does.Contain("owner:1:contested"));
+			Assert.That(skipped.Outputs, Does.Contain("owner:2:enemy"));
+			Assert.That(skipped.Outputs, Does.Contain("gate:3,2"));
+			Assert.That(skipped.Outputs, Does.Contain("width:3"));
 		}
 
 		[Test]
