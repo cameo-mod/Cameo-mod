@@ -543,7 +543,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public int ForceStartTick { get; set; }
 
 		/// <summary>STALL-FIX-01: no further forced poll before this tick (one forced pass per relist epoch).</summary>
-		public BotCooldown ForceNotBeforeCooldown { get; private set; }
+		BotCooldown forceNotBeforeCooldown = new() { Due = int.MinValue };
 
 		/// <summary>STALL-FIX-01: how many forced polls this scan has run (diagnostics).</summary>
 		public int ForcedPolls { get; private set; }
@@ -644,12 +644,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// STALL-FIX-01: the force bound. Off (<paramref name="forceAfterTicks"/> &lt;= 0) never forces.
 		/// Otherwise the scan is forced once it has run for at least <paramref name="forceAfterTicks"/> game
 		/// ticks since <see cref="ForceStartTick"/> without a conclusive verdict in force, and at most once per
-		/// relist epoch (<see cref="ForceNotBeforeCooldown"/>). Pure integer arithmetic, no RNG.
+		/// relist epoch (<see cref="forceNotBeforeCooldown"/>). Pure integer arithmetic, no RNG.
 		/// </summary>
 		public bool ForceDue(int forceAfterTicks, int now) =>
 			forceAfterTicks > 0
 				&& now - ForceStartTick >= forceAfterTicks
-				&& ForceNotBeforeCooldown.Ready(now)
+				&& forceNotBeforeCooldown.Ready(now)
 				&& !ReplayingConclusiveVerdict(now);
 
 		/// <summary>
@@ -671,7 +671,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			waitingVerdict = Verdict.Deferred;
 			certIssued = false;
 			ForcedPolls++;
-			ForceNotBeforeCooldown.Start(now, relistEpochTicks);
+			forceNotBeforeCooldown.Start(now, relistEpochTicks);
 			return Poll(int.MaxValue, now, snapshotAtPassStart, out site);
 		}
 
