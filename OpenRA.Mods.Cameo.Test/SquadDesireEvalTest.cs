@@ -157,6 +157,18 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void MemorySwitchDwellIsInclusiveAtTheWorldTickDeadline()
+		{
+			var memory = new SquadDesireMemory();
+			Assert.That(memory.Evaluate(Signals(tick: 0), "", 1000, 0, 100, 0),
+				Is.EqualTo(SquadDesireStance.Attack));
+			Assert.That(memory.Evaluate(Signals(enemy: 6000, ratio: 400, health: 900, tick: 99), "", 1000, 0, 100, 0),
+				Is.EqualTo(SquadDesireStance.Attack), "a strong challenger waits one tick before due");
+			Assert.That(memory.Evaluate(Signals(enemy: 6000, ratio: 400, health: 900, tick: 100), "", 1000, 0, 100, 0),
+				Is.EqualTo(SquadDesireStance.Reinforce), "the deadline tick is eligible");
+		}
+
+		[Test]
 		public void PickTieKeepsIncumbent()
 		{
 			var d = new[] { 500, 500, 0, 0, 0, 0 };
