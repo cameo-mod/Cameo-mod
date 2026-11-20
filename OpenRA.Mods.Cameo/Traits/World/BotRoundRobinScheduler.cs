@@ -49,10 +49,14 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		public readonly BotRoundRobinCore Core;
 
+		// Heavy-op shared jobs (design section 10). No consumer yet; owners follow the live roster at every cycle boundary (10.3).
+		public readonly BotSharedJobRegistry SharedJobs = new(new BotJobSeq());
+
 		public BotRoundRobinScheduler(World world)
 		{
 			this.world = world;
 			Core = new BotRoundRobinCore(IsLive, PlayerIndexOf);
+			Core.RosterRepacked += roster => SharedJobs.TransferOwners(roster.Select(s => s.Name).ToList());
 		}
 
 		// Live = enabled, undefeated, not disposed (5.1).
