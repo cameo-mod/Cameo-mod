@@ -54,6 +54,14 @@ namespace OpenRA.Mods.Cameo.Traits
 			"and the A/B harness (the `fransbot` donor and the `classic` reference bot, maintainer 2026-09-28).")]
 		public readonly bool HiddenInLobby = false;
 
+		[Desc("Cameo-only (STAGGER_DESIGN_06): this bot type belongs to the round-robin family. When activated it registers",
+			"with the BotRoundRobinScheduler and counts toward N, whatever RoundRobin says. Classic types leave it false.")]
+		public readonly bool RoundRobinFamily = false;
+
+		[Desc("Cameo-only (STAGGER_DESIGN_06): this bot type is gated. Its decision work runs only in its slot, once every N ticks.",
+			"Requires RoundRobinFamily. False keeps the every-tick behaviour (the A/B control).")]
+		public readonly bool RoundRobin = false;
+
 		string IBotInfo.Type => Type;
 
 		string IBotInfo.Name => Name;
@@ -139,11 +147,44 @@ namespace OpenRA.Mods.Cameo.Traits
 		IBotInfo IBot.Info => info;
 		OpenRA.Player IBot.Player => player;
 
+		// STAGGER_DESIGN_06: the seat is null for a bot outside the family, or when the scheduler trait is absent.
+		BotRoundRobinScheduler scheduler;
+		BotSeat seat;
+		readonly Dictionary<string, IBotEventReceiver> receivers = [];
+
 		public ModularBot(ModularBotInfo info, ActorInitializer init)
 		{
+			if (info.RoundRobin && !info.RoundRobinFamily)
+				throw new YamlException($"Bot type '{info.Type}' sets RoundRobin without RoundRobinFamily.");
+
 			this.info = info;
 			world = init.World;
 		}
+
+		public bool IsGated => seat != null && seat.Gated;
+
+		/// <summary>The bot clock of section 8: the visit tick, the ticks elapsed since the previous visit, and whether a visit is running.</summary>
+		public (int VisitTick, int Elapsed, bool InVisit) Clock =>
+			scheduler != null ? scheduler.Core.ClockOf(seat, world.WorldTick) : (world.WorldTick, 1, true);
+
+		/// <summary>
+		/// The Post rule of 6.2 for a module ingress point. True: the event was queued to this bot's slot (or discarded and
+		/// counted) and the caller must NOT deliver it. False: deliver it now, exactly as before.
+		/// </summary>
+		public bool TryDefer(Func<BotEvent> make) =>
+			seat != null && scheduler.Core.Post(seat, make, world.WorldTick) != PostOutcome.DeliverNow;
+
+		// 7.4: ModuleKey = seat + "<type>@<ordinal among the bot's receivers of that type>".
+		public ModuleKey KeyOf(object module)
+		{
+			foreach (var kv in receivers)
+				if (ReferenceEquals(kv.Value, module))
+					return new ModuleKey(player.InternalName, kv.Key);
+
+			return new ModuleKey(player.InternalName, "");
+		}
+
+		public bool CanResolveModule(ModuleKey key) => receivers.ContainsKey(key.Module);
 
 		// Called by the host's player creation code
 		public void Activate(OpenRA.Player p)
@@ -164,6 +205,21 @@ namespace OpenRA.Mods.Cameo.Traits
 				issuerOf.TryAdd(t, BotIssuer.Of(t, p.PlayerActor));
 			foreach (var ibe in p.PlayerActor.TraitsImplementing<IBotEnabled>())
 				ibe.BotEnabled(this);
+
+			var ordinals = new Dictionary<string, int>();
+			foreach (var r in p.PlayerActor.TraitsImplementing<IBotEventReceiver>())
+			{
+				var typeName = r.GetType().Name;
+				ordinals.TryGetValue(typeName, out var ordinal);
+				ordinals[typeName] = ordinal + 1;
+				receivers[typeName + "@" + ordinal] = r;
+			}
+
+			if (info.RoundRobinFamily)
+			{
+				scheduler = p.World.WorldActor.TraitOrDefault<BotRoundRobinScheduler>();
+				seat = scheduler?.Register(p, this, info.RoundRobin);
+			}
 		}
 
 		void IBot.QueueOrder(Order order)
@@ -306,34 +362,27 @@ namespace OpenRA.Mods.Cameo.Traits
 				return;
 
 			var timed = info.ModulePerfReportIntervalTicks > 0;
-			using (new PerfSample("bot_tick"))
+			if (seat != null && seat.Gated)
 			{
-				// Every module ticks every tick — timers (scan intervals, countdowns)
-				// live inside BotTick, so an attention budget must not skip whole
-				// modules here. Attention gating needs a clock/decision split first.
-				Sync.RunUnsynced(Game.Settings.Debug.SyncCheckBotModuleCode, world, () =>
+				// STAGGER_DESIGN_06 6.1: BeginVisit -> drain FIFO -> modules -> EndVisit. The order drain below stays every tick (D-1).
+				if (scheduler.Core.BeginVisit(seat, world.WorldTick))
 				{
-					foreach (var t in tickModules)
+					using (new PerfSample("bot_tick"))
 					{
-						if (!t.IsTraitEnabled())
-							continue;
+						while (scheduler.Core.TryDequeue(seat, out var queued))
+							Deliver(queued);
 
-						issuer = issuerOf.TryGetValue(t, out var n) ? n : t.GetType().Name;
-						if (timed)
-						{
-							moduleStopwatch.Restart();
-							t.BotTick(this);
-							moduleStopwatch.Stop();
-
-							moduleTiming.TryGetValue(t, out var acc);
-							moduleTiming[t] = (acc.Ticks + moduleStopwatch.ElapsedTicks, acc.Count + 1);
-						}
-						else
-							t.BotTick(this);
-
-						issuer = null;
+						scheduler.Core.BeginRunning(seat);
+						RunModules(timed);
 					}
-				});
+
+					scheduler.Core.EndVisit(seat);
+				}
+			}
+			else
+			{
+				using (new PerfSample("bot_tick"))
+					RunModules(timed);
 			}
 
 			if (timed && ++ticksSinceReport >= info.ModulePerfReportIntervalTicks)
@@ -342,6 +391,12 @@ namespace OpenRA.Mods.Cameo.Traits
 				ReportModuleTiming(self);
 			}
 
+			DrainOrders();
+		}
+
+		// Output metering: every tick, gated or not (D-1).
+		void DrainOrders()
+		{
 			var ordersToIssueThisTick = Math.Min((orders.Count + info.MinOrderQuotientPerTick - 1) / info.MinOrderQuotientPerTick, orders.Count);
 			for (var i = 0; i < ordersToIssueThisTick && orders.Count > 0; i++)
 			{
@@ -375,6 +430,37 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 		}
 
+		// The module loop, unchanged. A gated bot calls it once per visit; every other bot, every tick.
+		void RunModules(bool timed)
+		{
+			// Every module ticks every tick — timers (scan intervals, countdowns)
+			// live inside BotTick, so an attention budget must not skip whole
+			// modules here. Attention gating needs a clock/decision split first.
+			Sync.RunUnsynced(Game.Settings.Debug.SyncCheckBotModuleCode, world, () =>
+			{
+				foreach (var t in tickModules)
+				{
+					if (!t.IsTraitEnabled())
+						continue;
+
+					issuer = issuerOf.TryGetValue(t, out var n) ? n : t.GetType().Name;
+					if (timed)
+					{
+						moduleStopwatch.Restart();
+						t.BotTick(this);
+						moduleStopwatch.Stop();
+
+						moduleTiming.TryGetValue(t, out var acc);
+						moduleTiming[t] = (acc.Ticks + moduleStopwatch.ElapsedTicks, acc.Count + 1);
+					}
+					else
+						t.BotTick(this);
+
+					issuer = null;
+				}
+			});
+		}
+
 		void ReportModuleTiming(Actor self)
 		{
 			if (moduleTiming.Count == 0)
@@ -406,10 +492,28 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (!IsEnabled || self.World.IsLoadingGameSave)
 				return;
 
+			if (seat == null || !seat.Gated)
+			{
+				DeliverAttack(self, e, false);
+				return;
+			}
+
+			// 6.3: a gated bot's attack response is queued to its slot and delivered through the same body.
+			if (!TryDefer(() => AttackEvent.From(self, e)))
+				DeliverAttack(self, e, true);
+		}
+
+		// 6.3: today's Damaged body. The context is identical: PerfSample, the unsynced wrapper and flag, emergency = true,
+		// the issuer per module, and the module order. The gated path restores the previous issuer and flag instead of
+		// resetting them, so a nested delivery inside a running module does not clobber that module's issuer.
+		void DeliverAttack(Actor self, AttackInfo e, bool gatedPath)
+		{
 			using (new PerfSample("bot_attack_response"))
 			{
 				Sync.RunUnsynced(Game.Settings.Debug.SyncCheckBotModuleCode, world, () =>
 				{
+					var previousIssuer = issuer;
+					var previousEmergency = emergency;
 					emergency = true;
 					foreach (var t in attackResponseModules)
 					{
@@ -420,10 +524,34 @@ namespace OpenRA.Mods.Cameo.Traits
 						t.RespondToAttack(this, self, e);
 					}
 
-					issuer = null;
-					emergency = false;
+					if (gatedPath)
+					{
+						issuer = previousIssuer;
+						emergency = previousEmergency;
+					}
+					else
+					{
+						issuer = null;
+						emergency = false;
+					}
 				});
 			}
 		}
+
+		// Delivery of a queued event at this bot's visit. An empty recipient module means the bot itself.
+		void Deliver(BotEvent ev)
+		{
+			if (ev.Recipient.Module.Length == 0)
+			{
+				if (ev is AttackEvent a)
+					DeliverAttack(a.Self, a.Info, true);
+
+				return;
+			}
+
+			if (receivers.TryGetValue(ev.Recipient.Module, out var receiver))
+				receiver.ReceiveBotEvent(ev);
+		}
+
 	}
 }
