@@ -153,6 +153,7 @@ APCGun:
 		PercentageScale: 9975
 td_gdi_apc_apcgun_AA:
 	Inherits: APCGun
+	Inherits@tracer: ^Tracer_Flak_Medium
 	Range: 8502
 	ValidTargets: Air
 	Warhead@Flak_Medium_Flat:
@@ -5179,6 +5180,7 @@ td_gdi_rocketsoldier_rocketsamt:
 
 td_gdi_apc_apcgun:
 	Inherits: APCGun
+	Inherits@tracer: ^Tracer_Flak_Medium
 
 td_gdi_battletank_120mm:
 	Inherits@w71: ^Warhead_CannonHE_Medium
