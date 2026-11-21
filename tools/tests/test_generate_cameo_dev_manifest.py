@@ -15,6 +15,7 @@ def make_release(tmp_path, include="ContentPacks/Core/content.yaml"):
         "FileSystem:\n\tSystemPackages:\n\t\t$cameo: cameo\n"
         f"Include: {include}\n"
         "Rules:\n\tcameo|rules/world.yaml\n"
+        "ServerTraits:\n\tMasterServerPinger\n\tCameoDevSeed\n"
         "Sequences:\n\tcameo|sequences/misc.yaml\n"
         "Assemblies: OpenRA.Mods.Cameo.Unified.dll, OpenRA.Mods.CA.dll\n",
         encoding="utf-8",
@@ -33,6 +34,23 @@ def test_includes_are_expanded_before_dev_mounts(tmp_path):
     assert "cameo|rules/dev/logging.yaml" in generated
     assert generated.index("cameo|rules/world.yaml") < generated.index("cameo|rules/dev/logging.yaml")
     assert "OpenRA.Mods.Cameo.Dev.dll" in generated
+
+
+def test_dev_manifest_adds_the_ablation_server_trait_and_release_never_names_it(tmp_path):
+    make_release(tmp_path)
+    release = (tmp_path / "mod.yaml").read_text(encoding="utf-8")
+    assert "AblationServerDev" not in release
+    generated = module.generate(tmp_path)
+    assert generated.count("\tAblationServerDev\n") == 1
+    assert generated.index("\tCameoDevSeed\n") < generated.index("\tAblationServerDev\n")
+
+
+def test_release_manifest_shape_change_fails_closed(tmp_path):
+    make_release(tmp_path)
+    text = (tmp_path / "mod.yaml").read_text(encoding="utf-8").replace("\tCameoDevSeed\n", "")
+    (tmp_path / "mod.yaml").write_text(text, encoding="utf-8")
+    with pytest.raises(ValueError):
+        module.generate(tmp_path)
 
 
 def test_missing_or_escaping_include_fails_closed(tmp_path):

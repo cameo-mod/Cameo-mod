@@ -151,7 +151,7 @@ the fog sequencing.
     whole idle pool — `UseDefendPreservation` port behind `O_ca2_defend_reserve` on
     `devin/dawn/ca2-defend-reserve`.)
   - [~] **M** CA-3 role-mix production + squad composition with a use-every-role floor (**mechanism merged #678:**
-    `RoleMix` + `RoleMixRoleFloorPct` + `ChooseRoleDeficit` on master; the six personality `RoleMix` rows
+    `RoleMix` + `RoleMixUnnamedTotalPct` (was `RoleMixRoleFloorPct`) + `ChooseRoleDeficit` on master; the six personality `RoleMix` rows
     land behind `UseRoleMix` as switch group `J_rolemix_production` in #731). **NOVA.**
   - [x] **M** (merged #678) CA-4 formation movement (frontline leads, infantry with tanks, AA inside,
     artillery back, gunships over the front, pace of the slowest frontline): `FormationMovement` +

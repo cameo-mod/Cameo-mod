@@ -20,7 +20,10 @@ namespace OpenRA.Mods.CA.Traits
 	/// weight is that share scaled by its Versus-weighted strength relative to the other
 	/// candidates that share its primary role:
 	///
-	///   share[r]    = mix[r] when the mix names r, else the manager's RoleMixRoleFloorPct
+	///   share[r]    = RoleShares(mix, RoleMixUnnamedTotalPct, ...)[r] (PROD-IDLE_PLAN_05): the
+	///                 named roles keep their relative weights inside 100 - U, the unnamed
+	///                 buildable roles split U evenly; unnamed transport and air_transport get
+	///                 no share and their rows keep the yaml weight verbatim
 	///   strength[u] = max over weapons of (DamagePerTick × mean(Versus values) / 100),
 	///                 floored at 1 so a weaponless unit still counts toward the role mean
 	///   w[u]        = max(1, round(share[primaryRole(u)] × strength[u] / mean strength
@@ -36,14 +39,72 @@ namespace OpenRA.Mods.CA.Traits
 	/// </summary>
 	public sealed class DerivedUnitWeights
 	{
-		// The derived table is a pure function of (yamlWeights, mix, floorPct, roles,
+		// The derived table is a pure function of (yamlWeights, mix, unnamedTotalPct, roles,
 		// ruleset); every input but the enabled squad manager is fixed at rules load,
 		// and a personality switch swaps the manager — hence the mix dictionary — so
-		// (mix, floorPct) is the whole cache key. One table serves every queue
+		// (mix, unnamedTotalPct) is the whole cache key. One table serves every queue
 		// category: UnitsToBuild is not split per category.
 		IReadOnlyDictionary<string, int> cachedMix;
-		int cachedFloorPct = -1;
+		int cachedUnnamedPct = int.MinValue;
 		Dictionary<string, int> cachedTable;
+
+		/// <summary>
+		/// PROD-IDLE_PLAN_05, the ONE share function used by both consumers (the deficit chooser
+		/// `ChooseRoleDeficit` and `Derive`): percent share per combat role.
+		///
+		///   S = sum of the positive mix values over the named combat roles (keys outside
+		///       BotUnitRole.CombatRoles are ignored, as before); S = 0 or no mix: empty result.
+		///   N = combat roles the mix does not name, minus transport and air_transport, that have
+		///       at least one member for which `inGate` is true (the UnitsToBuild membership gate).
+		///   unnamed role in N : U / |N|
+		///   named role        : (100 - U) x mix[r] / S when N is non-empty and U &gt; 0,
+		///                       otherwise mix[r] unscaled (nowhere to put the reserve).
+		///   unnamed transport / air_transport: absent (no deficit target, yaml weight verbatim).
+		///   A mix that names transport or air_transport serves it as any named role.
+		/// U is clamped to 0..100; a negative U (line not written) means no unnamed share.
+		/// </summary>
+		public static Dictionary<string, double> RoleShares(
+			IReadOnlyDictionary<string, int> mix,
+			int unnamedTotalPct,
+			IBotUnitRoles roles,
+			Func<string, bool> inGate)
+		{
+			var shares = new Dictionary<string, double>(StringComparer.Ordinal);
+			if (mix == null || mix.Count == 0 || roles == null)
+				return shares;
+
+			double sum = 0;
+			foreach (var kv in mix)
+				if (BotUnitRole.CombatRoles.Contains(kv.Key))
+					sum += Math.Max(0, kv.Value);
+
+			if (sum <= 0)
+				return shares;
+
+			var u = Math.Clamp(unnamedTotalPct, 0, 100);
+			var unnamed = new List<string>();
+			if (u > 0 && inGate != null)
+			{
+				foreach (var role in BotUnitRole.PrimaryRoleOrder)
+				{
+					if (mix.ContainsKey(role) || role == BotUnitRole.Transport || role == BotUnitRole.AirTransport)
+						continue;
+
+					if (roles.RoleMembers.TryGetValue(role, out var members) && members.Any(inGate))
+						unnamed.Add(role);
+				}
+			}
+
+			var scaled = unnamed.Count > 0;
+			foreach (var kv in mix)
+				if (BotUnitRole.CombatRoles.Contains(kv.Key))
+					shares[kv.Key] = scaled ? (100 - u) * (double)Math.Max(0, kv.Value) / sum : Math.Max(0, kv.Value);
+
+			foreach (var role in unnamed)
+				shares[role] = (double)u / unnamed.Count;
+
+			return shares;
+		}
 
 		/// <summary>
 		/// The UnitsToBuild table for one queue pick. An applicable composition wins over
@@ -56,7 +117,7 @@ namespace OpenRA.Mods.CA.Traits
 			Dictionary<string, int> compositionWeights,
 			Dictionary<string, int> yamlWeights,
 			IReadOnlyDictionary<string, int> mix,
-			int roleFloorPct,
+			int unnamedTotalPct,
 			IBotUnitRoles roles,
 			Func<string, double> strengthOf)
 		{
@@ -67,11 +128,11 @@ namespace OpenRA.Mods.CA.Traits
 				roles == null || strengthOf == null)
 				return yamlWeights;
 
-			if (cachedTable == null || !ReferenceEquals(cachedMix, mix) || cachedFloorPct != roleFloorPct)
+			if (cachedTable == null || !ReferenceEquals(cachedMix, mix) || cachedUnnamedPct != unnamedTotalPct)
 			{
-				cachedTable = Derive(yamlWeights, mix, roleFloorPct, roles, strengthOf);
+				cachedTable = Derive(yamlWeights, mix, unnamedTotalPct, roles, strengthOf);
 				cachedMix = mix;
-				cachedFloorPct = roleFloorPct;
+				cachedUnnamedPct = unnamedTotalPct;
 			}
 
 			return cachedTable;
@@ -84,13 +145,18 @@ namespace OpenRA.Mods.CA.Traits
 		public static Dictionary<string, int> Derive(
 			IReadOnlyDictionary<string, int> yamlWeights,
 			IReadOnlyDictionary<string, int> mix,
-			int roleFloorPct,
+			int unnamedTotalPct,
 			IBotUnitRoles roles,
 			Func<string, double> strengthOf)
 		{
 			var result = new Dictionary<string, int>(yamlWeights.Count, StringComparer.Ordinal);
 			foreach (var kv in yamlWeights)
 				result[kv.Key] = kv.Value;
+
+			// S = 0 (no usable mix): nothing to derive, the yaml rows stay verbatim.
+			var shares = RoleShares(mix, unnamedTotalPct, roles, yamlWeights.ContainsKey);
+			if (shares.Count == 0)
+				return result;
 
 			// Bucket the candidates by the one role they count toward. Roles with no
 			// candidate member (a mix key the roster cannot serve) are simply absent.
@@ -108,7 +174,10 @@ namespace OpenRA.Mods.CA.Traits
 
 			foreach (var (role, members) in byRole)
 			{
-				var share = mix.TryGetValue(role, out var named) ? named : roleFloorPct;
+				// An unnamed transport / air_transport has no share: its rows keep the yaml weight.
+				if (!shares.TryGetValue(role, out var share))
+					continue;
+
 				var strength = members.ToDictionary(m => m, strengthOf, StringComparer.Ordinal);
 
 				// strength is floored at 1, so the mean is never 0.

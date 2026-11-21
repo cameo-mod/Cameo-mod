@@ -17,6 +17,9 @@ def generate(cameo_dir: Path) -> str:
         ("\t\t$cameo: cameo", "\t\t^EngineDir|mods/cameo: cameo"),
         ("\nSequences:\n", "\n\tcameo|rules/dev/logging.yaml\nSequences:\n"),
         ("Assemblies: OpenRA.Mods.Cameo.Unified.dll,", "Assemblies: OpenRA.Mods.Cameo.Dev.dll, OpenRA.Mods.Cameo.Unified.dll,"),
+        # ABLATE-01: the DEV-only ServerTrait that writes the synced cameo-ablate lobby option. It lives in the DEV
+        # assembly, so only this generated DEV manifest may name it (the release manifest never does).
+        ("\n\tCameoDevSeed\n", "\n\tCameoDevSeed\n\tAblationServerDev\n"),
     )
     for old, new in changes:
         if manifest.count(old) != 1:

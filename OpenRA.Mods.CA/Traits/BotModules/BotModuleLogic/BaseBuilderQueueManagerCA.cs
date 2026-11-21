@@ -91,6 +91,7 @@ namespace OpenRA.Mods.CA.Traits
 		// PUSH-1 (bank overflow): the conditioned policy arming the overflow rung — profiles that
 		// never carry the grant resolve null here and run the legacy ladder bit-identically.
 		BotOverflowPolicy overflowPolicy;
+		AblationLatch ablateOverflow; // ABLATE-01 hook pi_overflow (DEV provider only; release = on)
 
 		// Cameo (§12.20): lazy — resolved on first TickQueue, an OR-of-vetoes pause on new building
 		// production. Empty = nothing pauses, upstream-identical.
@@ -963,7 +964,13 @@ namespace OpenRA.Mods.CA.Traits
 				var exempt = plannerWant || demandPick.Demand != null;
 				var cost = queue.GetProductionCost(item);
 				var itemEssential = IsArmyFirstEssential(item);
-				var nonCashVeto = pauseBuilding.Any(p => p.PausesBuilding(item, itemEssential))
+
+				// PROD-IDLE_PLAN_03 section 2.3 class of this building order: K1/K2 essentials, K4 other
+				// essential buildings (extra refineries, planner and demand wants), K6 everything else.
+				var buildingClass = itemEssential ? RecoverySpendPolicyCA.Admission.OpeningOrEssential
+					: isRefinery || exempt ? RecoverySpendPolicyCA.Admission.EssentialBuilding
+					: RecoverySpendPolicyCA.Admission.General;
+				var nonCashVeto = pauseBuilding.Any(p => p.PausesBuilding(item, itemEssential, buildingClass, cost))
 					|| BaseBuilderQueueEvalCA.MobileSpendBlocks(cashNow, cost, reserveFloor, itemEssential);
 				cashClock.Observe(queue.Actor.ActorID, item.Name,
 					BaseBuilderQueueEvalCA.StarvationEligible(
@@ -983,7 +990,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (pauseBuilding.Length > 0 || reserveFloor > 0)
 				{
 					var essential = IsArmyFirstEssential(item);
-					if (pauseBuilding.Any(p => p.PausesBuilding(item, essential)))
+					if (pauseBuilding.Any(p => p.PausesBuilding(item, essential, buildingClass, cost)))
 						return false;
 
 					// TF-2: the reservation — optional spend (optional defences, crawl links) may
@@ -1052,6 +1059,12 @@ namespace OpenRA.Mods.CA.Traits
 					baseBuilder.StorageObservation.NoteEmitted(storageReservation, world.WorldTick);
 
 				queuedAt[queue.Actor.ActorID] = (item.Name, world.WorldTick);
+
+				// PROD-IDLE PR-3: the admitted building is recorded before the next candidate is tested, so
+				// two admissions in one pass cannot both pass an old share snapshot (PLAN_03 section 3).
+				foreach (var p in pauseBuilding)
+					p.BuildingAdmitted(item, cost);
+
 				if (demandPick.Demand != null)
 				{
 					// ECON-A-FIX (R5): bind on the admitted order, not the pick — the recorded in-flight
@@ -2127,8 +2140,13 @@ namespace OpenRA.Mods.CA.Traits
 			// threshold rung, below the safety rungs (opening, low power, refinery law, MCV gate).
 			// Candidates are cap-filtered AND power-resolved before a single deterministic draw;
 			// any decline — empty set or policy absent — consumes no RNG.
-			if (BaseBuilderQueueEvalCA.OverflowArmed(overflowPolicy != null && overflowPolicy.IsTraitEnabled(),
-					availableCash, overflowPolicy?.Info.OverflowCash ?? 0))
+			// PROD-IDLE G1: the line is the tier's BotLimits.OverflowCash (12000 - 800 r) when written, else the
+			// carrier's own; the carrier stays the on/off scope (classic has none) and pi_overflow ablates the row.
+			if (BaseBuilderQueueEvalCA.OverflowArmed(
+					overflowPolicy != null && overflowPolicy.IsTraitEnabled() && !ablateOverflow.Off(player, AblationIds.Overflow),
+					availableCash,
+					BaseBuilderQueueEvalCA.OverflowLine(botLimits != null ? botLimits.Info.OverflowCash : -1,
+						overflowPolicy?.Info.OverflowCash ?? 0)))
 			{
 				var pick = BaseBuilderQueueEvalCA.DrawOverflowPick(OverflowProductionCandidates(buildableThings, power),
 					BotRng.For(player, nameof(BaseBuilderQueueManagerCA)));

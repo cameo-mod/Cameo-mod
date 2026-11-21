@@ -603,6 +603,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
 		readonly OpenRA.Player player;
+		AblationLatch ablateLean; // ABLATE-01 hook pi_lean (DEV provider only; release = on)
 		readonly BotFogMemory fogMemory;
 
 		// E1 (lead ruling 2026-10-12): the sticky air-intel latch — enemy InternalNames whose
@@ -2822,7 +2823,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		double IBotPersonalityLeadProvider.PersonalityLeadLean(string personality)
 		{
-			return PersonalityLeadLean(IsTraitDisabled, Info.UsePersonalityLeads, Situation,
+			return PersonalityLeadLean(IsTraitDisabled, Info.UsePersonalityLeads && !ablateLean.Off(player, AblationIds.Lean), Situation,
 				personality, Info.PersonalityLeadMaxLeanPercent);
 		}
 
