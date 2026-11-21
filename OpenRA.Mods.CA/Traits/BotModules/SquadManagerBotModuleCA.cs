@@ -928,7 +928,7 @@ namespace OpenRA.Mods.CA.Traits
 		int armyStagingTick = -1;
 		IBotInMatchAdaptation inMatchAdaptation;
 		int inMatchAdaptationTick = -1;
-		int nextStagingTick;
+		BotCooldown nextStagingCooldown;
 		readonly Dictionary<Actor, (CPos Cell, int Tick)> stagingOrders = new();
 
 		internal IBotArmyStaging ArmyStaging
@@ -1759,11 +1759,12 @@ namespace OpenRA.Mods.CA.Traits
 		void StageIdlePool(IBot bot)
 		{
 			var staging = ArmyStaging;
-			if (staging == null || World.WorldTick < nextStagingTick)
+			var now = World.WorldTick;
+			if (staging == null || !nextStagingCooldown.Ready(now))
 				return;
 
 			var interval = Math.Max(1, staging.StagingIntervalTicks);
-			nextStagingTick = World.WorldTick + interval;
+			nextStagingCooldown.Start(now, interval);
 
 			var leases = BotUnitLeases.Of(Player);
 			var pool = new List<ArmyStagingUnit>();
