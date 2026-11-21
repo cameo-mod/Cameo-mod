@@ -89,6 +89,7 @@ namespace OpenRA.Mods.CA.Traits
 		// PUSH-1 (bank overflow): the conditioned policy arming the overflow rung — profiles that
 		// never carry the grant resolve null here and run the legacy ladder bit-identically.
 		BotOverflowPolicy overflowPolicy;
+		AblationLatch ablateOverflow; // ABLATE-01 hook pi_overflow (DEV provider only; release = on)
 
 		// Cameo (§12.20): lazy — resolved on first TickQueue, an OR-of-vetoes pause on new building
 		// production. Empty = nothing pauses, upstream-identical.
@@ -2134,8 +2135,13 @@ namespace OpenRA.Mods.CA.Traits
 			// threshold rung, below the safety rungs (opening, low power, refinery law, MCV gate).
 			// Candidates are cap-filtered AND power-resolved before a single deterministic draw;
 			// any decline — empty set or policy absent — consumes no RNG.
-			if (BaseBuilderQueueEvalCA.OverflowArmed(overflowPolicy != null && overflowPolicy.IsTraitEnabled(),
-					availableCash, overflowPolicy?.Info.OverflowCash ?? 0))
+			// PROD-IDLE G1: the line is the tier's BotLimits.OverflowCash (12000 - 800 r) when written, else the
+			// carrier's own; the carrier stays the on/off scope (classic has none) and pi_overflow ablates the row.
+			if (BaseBuilderQueueEvalCA.OverflowArmed(
+					overflowPolicy != null && overflowPolicy.IsTraitEnabled() && !ablateOverflow.Off(player, AblationIds.Overflow),
+					availableCash,
+					BaseBuilderQueueEvalCA.OverflowLine(botLimits != null ? botLimits.Info.OverflowCash : -1,
+						overflowPolicy?.Info.OverflowCash ?? 0)))
 			{
 				var pick = BaseBuilderQueueEvalCA.DrawOverflowPick(OverflowProductionCandidates(buildableThings, power),
 					BotRng.For(player, nameof(BaseBuilderQueueManagerCA)));

@@ -40,12 +40,13 @@
 	GrantConditionOnBotOwner@cameogod:
 		Condition: cameogodbot
 		Bots: cameogod
-	# PUSH-1 (bank overflow): scopes the BotOverflowPolicy carrier to exactly the hard profile —
-	# classic shares BotLimits@hard via hardbot, so a separate condition is the only seam that
-	# leaves the A/B control byte-identical (Sol/Luna ruling 2026-10-14).
+	# PUSH-1 (bank overflow) + PROD-IDLE G1 (Opus 2026-11-21: bank_overflow on all tiers): scopes the
+	# BotOverflowPolicy carrier to the 11 tier bots. Classic shares BotLimits@hard via hardbot, so a separate
+	# condition stays the only seam that leaves the A/B control byte-identical (Sol/Luna ruling 2026-10-14):
+	# classic never carries this grant. The per-tier line is BotLimits.OverflowCash (12000 - 800 r).
 	GrantConditionOnBotOwner@bankoverflow:
 		Condition: bank_overflow
-		Bots: hard
+		Bots: noob, easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod
 	# ENG-T (#694, DESIGN §22): arms Fransbot's capture-transport service as the genericbot
 	# IBotCaptureTransportProvider. Inert by itself — EngineerBotModule only requests a run when
 	# TransportChance > 0 (default 0). Classic is excluded: the A/B reference stays untouched.
@@ -512,9 +513,10 @@
 
 	# PUSH-1 (bank overflow): while the bank sits above OverflowCash the armed base builder
 	# preempts the planner's front/link wants with a production pick (see
-	# BaseBuilderQueueManagerCA's overflow rung). hard only; classic never carries the grant.
-	# 8000 sits below the economy checker's 10000 band ceiling — candidate tuning, the
-	# sentinel evidence judges it.
+	# BaseBuilderQueueManagerCA's overflow rung). The 11 tier bots carry it; classic never does.
+	# The tier line BotLimits.OverflowCash (12000 - 800 r; hard = 8000) is the value; the 8000 here is
+	# only the fallback when a profile writes no line (negative). 8000 sits below the economy
+	# checker's 10000 band ceiling — candidate tuning, the sentinel evidence judges it.
 	BotOverflowPolicy@bankoverflow:
 		OverflowCash: 8000
 		RequiresCondition: bank_overflow
