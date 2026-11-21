@@ -11,6 +11,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 
@@ -167,7 +168,7 @@ namespace OpenRA.Mods.CA.Traits
 		// Answer ids released by a pivot, keyed per-player so the cooldown survives the
 		// personality-conditioned SquadManagerBotModuleCA instance rotating out — a fresh
 		// instance's own map is empty and would re-draft the same standing request.
-		readonly Dictionary<string, int> answerCooldownUntil = new();
+		readonly Dictionary<string, BotCooldown> answerCooldowns = new();
 
 		// Highest attempt number seen per mission id — attempt numbering lives here so a
 		// personality rotation can't re-issue attempt 1 and collide the (mission, attempt)
@@ -191,12 +192,12 @@ namespace OpenRA.Mods.CA.Traits
 
 		public void CoolAnswer(string missionId, int untilTick)
 		{
-			answerCooldownUntil[missionId] = untilTick;
+			answerCooldowns[missionId] = new BotCooldown { Due = untilTick };
 		}
 
 		public bool AnswerCooling(string missionId, int tick)
 		{
-			return answerCooldownUntil.TryGetValue(missionId, out var until) && tick < until;
+			return answerCooldowns.TryGetValue(missionId, out var cooldown) && !cooldown.Ready(tick);
 		}
 
 		public void Note(BotMissionRecord record)
