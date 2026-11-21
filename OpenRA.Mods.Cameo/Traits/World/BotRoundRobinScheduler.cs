@@ -153,8 +153,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				return dev.Value;
 			}
 #endif
-			source = !botTypeRoundRobin ? "bot-type" : "lobby";
-			return botTypeRoundRobin && OptionOn;
+			return ResolveGated(botTypeRoundRobin, OptionOn, null, out source);
 		}
 
 		/// <summary>Period used for the slot_phase field of the arm line: the 75-tick (3 s) timer period, the one the stalemate
@@ -209,6 +208,20 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 		}
 #endif
+
+		/// <summary>The gating decision (ENABLE-01): a bot is gated only when its bot type sets RoundRobin and the lobby option is On; a DEV
+		/// override, when present, wins. Option Off therefore always means ungated, the pre-scheduler behaviour.</summary>
+		public static bool ResolveGated(bool botTypeRoundRobin, bool optionOn, bool? devOverride, out string source)
+		{
+			if (devOverride.HasValue)
+			{
+				source = "override";
+				return devOverride.Value;
+			}
+
+			source = !botTypeRoundRobin ? "bot-type" : "lobby";
+			return botTypeRoundRobin && optionOn;
+		}
 
 		// Called from ModularBot.Activate after IsEnabled = true; host only (engine Player.cs:223).
 		public BotSeat Register(OpenRA.Player p, ModularBot bot, bool gated)

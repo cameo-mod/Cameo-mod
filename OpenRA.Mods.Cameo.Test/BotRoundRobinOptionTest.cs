@@ -62,6 +62,22 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void FamilyBotIsGatedWithTheOptionOnAndUngatedWithItOff()
+		{
+			// ENABLE-01: every Cameo family bot type sets RoundRobin, so the lobby option alone decides.
+			Assert.That(BotRoundRobinScheduler.ResolveGated(true, true, null, out var source), Is.True);
+			Assert.That(source, Is.EqualTo("lobby"));
+			Assert.That(BotRoundRobinScheduler.ResolveGated(true, false, null, out _), Is.False, "Off = the pre-scheduler behaviour");
+
+			// A bot type that does not set RoundRobin (classic) is never gated; a DEV override wins over both.
+			Assert.That(BotRoundRobinScheduler.ResolveGated(false, true, null, out source), Is.False);
+			Assert.That(source, Is.EqualTo("bot-type"));
+			Assert.That(BotRoundRobinScheduler.ResolveGated(true, false, true, out source), Is.True);
+			Assert.That(source, Is.EqualTo("override"));
+			Assert.That(BotRoundRobinScheduler.ResolveGated(true, true, false, out _), Is.False);
+		}
+
+		[Test]
 		public void EmptyOrMalformedSpecNamesNobody()
 		{
 			Assert.That(BotRoundRobinScheduler.ParseOverride(null, "Multi0"), Is.Null);
