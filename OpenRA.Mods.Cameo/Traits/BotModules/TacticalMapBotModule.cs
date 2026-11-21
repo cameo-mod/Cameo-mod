@@ -2292,9 +2292,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void TickTerritoryRefresh()
 		{
-			// STAGGER-06 D076: absolute due, carried to the first visit at or after it (identical at N = 1).
-			if (!BotPeriod.CarryDue(ref territoryNextRefreshTick, world.WorldTick, Info.TerritoryRefreshInterval))
+			// STAGGER-06 D076: restart form, exact at N = 1 by construction (the reset seeds due = r + BotRng, which can be r, and
+			// a late first visit must reload to v + K, not carry the old grid). At N > 1 the reload is anchored to the visit.
+			if (world.WorldTick < territoryNextRefreshTick)
 				return;
+
+			territoryNextRefreshTick = world.WorldTick + Math.Max(1, Info.TerritoryRefreshInterval);
 
 			var reference = GetOwnBaseReference();
 			if (reference == null)
@@ -2326,9 +2329,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// </summary>
 		void TickRegionOwnershipRefresh()
 		{
-			// STAGGER-06 D077: as D076; the regions guard stays first and does not move the deadline.
-			if (regions.Count == 0 || !BotPeriod.CarryDue(ref regionOwnershipNextRefreshTick, world.WorldTick, Info.RegionOwnershipRefreshInterval))
+			// STAGGER-06 D077: restart form as D076 (the regions guard stays first and does not move the deadline).
+			if (regions.Count == 0 || world.WorldTick < regionOwnershipNextRefreshTick)
 				return;
+
+			regionOwnershipNextRefreshTick = world.WorldTick + Math.Max(1, Info.RegionOwnershipRefreshInterval);
 
 			var tally = new Dictionary<int, Dictionary<OpenRA.Player, int>>();
 
