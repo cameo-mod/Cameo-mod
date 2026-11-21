@@ -67,6 +67,9 @@ namespace OpenRA.Mods.Cameo.Traits
 		readonly World world;
 		readonly BotRoundRobinSchedulerInfo info;
 		bool resolvedFromSave;
+#if CAMEO_DEV_LOGGING
+		bool loggedFirstRoster;
+#endif
 
 		public readonly BotRoundRobinCore Core;
 
@@ -78,7 +81,18 @@ namespace OpenRA.Mods.Cameo.Traits
 			this.world = world;
 			this.info = info;
 			Core = new BotRoundRobinCore(IsLive, PlayerIndexOf);
-			Core.RosterRepacked += roster => SharedJobs.TransferOwners(roster.Select(s => s.Name).ToList());
+			Core.RosterRepacked += roster =>
+			{
+				SharedJobs.TransferOwners(roster.Select(s => s.Name).ToList());
+#if CAMEO_DEV_LOGGING
+				if (!loggedFirstRoster)
+				{
+					loggedFirstRoster = true;
+					Log.Write("perf", string.Format(CultureInfo.InvariantCulture, "BotRoundRobinRoster n={0} tick={1} slots={2}",
+						roster.Count, world.WorldTick, string.Join(",", roster.Select((s, i) => s.Name + ":" + i))));
+				}
+#endif
+			};
 		}
 
 		// Live = enabled, undefeated, not disposed (5.1).
@@ -125,14 +139,18 @@ namespace OpenRA.Mods.Cameo.Traits
 			return null;
 		}
 
-		bool IsGated(OpenRA.Player p, bool botTypeRoundRobin)
+		bool IsGated(OpenRA.Player p, bool botTypeRoundRobin, out string source)
 		{
 #if CAMEO_DEV_LOGGING
 			// DEV builds only, per process: every client of a multiplayer game must be given the same argument.
 			var dev = ParseOverride(CameoDevArgs.Value("Cameo.DevRoundRobin"), p.InternalName, p.PlayerName);
 			if (dev.HasValue)
+			{
+				source = "override";
 				return dev.Value;
+			}
 #endif
+			source = !botTypeRoundRobin ? "bot-type" : "lobby";
 			return botTypeRoundRobin && OptionOn;
 		}
 
@@ -140,7 +158,15 @@ namespace OpenRA.Mods.Cameo.Traits
 		public BotSeat Register(OpenRA.Player p, ModularBot bot, bool gated)
 		{
 			var spawnKey = p.SpawnPoint > 0 ? p.SpawnPoint : BotRoundRobinCore.NoSpawnKey;
-			return Core.Register(p.InternalName, spawnKey, Array.IndexOf(world.Players, p), IsGated(p, gated), new SeatBinding(p, bot), world.WorldTick);
+			var arm = IsGated(p, gated, out var source);
+			var seat = Core.Register(p.InternalName, spawnKey, Array.IndexOf(world.Players, p), arm, new SeatBinding(p, bot), world.WorldTick);
+#if CAMEO_DEV_LOGGING
+			// DEV: one line per bot seat at game start naming its round-robin arm (STAGGER_EVAL_PLAN_01 O-7).
+			Log.Write("perf", string.Format(CultureInfo.InvariantCulture,
+				"BotRoundRobinArm seat={0} player={1} arm={2} source={3} lobby_option={4} tick={5}",
+				seat.Name, p.PlayerName, arm ? "On" : "Off", source, OptionOn ? "On" : "Off", world.WorldTick));
+#endif
+			return seat;
 		}
 
 		void ITick.Tick(Actor self)
