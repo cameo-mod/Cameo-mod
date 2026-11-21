@@ -10,6 +10,7 @@
 #endregion
 
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -57,6 +58,22 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		/// <summary>Essentials (conyard, refinery, power, first factory) always pass; everything else yields to either vote.</summary>
 		public static bool Holds(bool essential, bool cashPoorPaused, bool armyCountHolds) => !essential && (cashPoorPaused || armyCountHolds);
+
+		/// <summary>Class C scan clock; a disabled visit freezes the remaining world-tick delay.</summary>
+		public static bool ShouldScan(ref BotCooldown cooldown, int visitTick, int elapsed, int interval, bool enabled)
+		{
+			if (!enabled)
+			{
+				cooldown.Freeze(elapsed);
+				return false;
+			}
+
+			if (!cooldown.Ready(visitTick))
+				return false;
+
+			cooldown.Start(visitTick, interval);
+			return true;
+		}
 	}
 
 	/// <summary>
@@ -74,7 +91,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		bool paused;
 		bool hasUnitProducer;
 		int armyUnits;
-		int scanTicks;
+		BotCooldown scanCooldown;
 
 		public ArmyFirstBotModule(ArmyFirstBotModuleInfo info, ActorInitializer init)
 			: base(info)
@@ -100,13 +117,10 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (IsTraitDisabled || playerResources == null)
+			var (visitTick, elapsed, _) = BotVisitClock.Of(bot);
+			if (!ArmyFirstEval.ShouldScan(ref scanCooldown, visitTick, elapsed, info.ScanInterval,
+				!IsTraitDisabled && playerResources != null))
 				return;
-
-			if (--scanTicks > 0)
-				return;
-
-			scanTicks = info.ScanInterval;
 
 			var world = bot.Player.World;
 
