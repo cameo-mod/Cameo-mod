@@ -44,15 +44,22 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(latch.Off(null, AblationIds.FairProducer), Is.False);
 		}
 
+		// Every owner adds ids in its own partial file, so the rules are checked over the whole registry.
 		[Test]
-		public void NineG1RowIdsAreDistinctPiPrefixedRegistryKeys()
+		public void EveryRegistryIdIsUniqueAndSafeInTheLobbyList()
 		{
 			var ids = Ids();
-			Assert.That(ids.Length, Is.EqualTo(9));
-			Assert.That(ids.Distinct().Count(), Is.EqualTo(9));
-			Assert.That(ids.All(i => i.StartsWith("pi_") && i == i.ToLowerInvariant() && !i.Contains(' ') && !i.Contains(',') && !i.Contains('@')), Is.True,
-				"ids go into a comma list with an @team suffix, so they carry none of those characters");
-			Assert.That(ids, Is.SupersetOf(new[]
+			Assert.That(ids.Distinct().Count(), Is.EqualTo(ids.Length), "duplicate id across partial files");
+			Assert.That(ids.All(i => System.Text.RegularExpressions.Regex.IsMatch(i, "^[a-z][a-z0-9]*(_[a-z0-9]+)+$")), Is.True,
+				"lowercase area prefix + name; the lobby value is a comma list with an @team suffix, so no comma, @, ; or space");
+		}
+
+		[Test]
+		public void NineG1RowIdsArePresentUnderThePiPrefix()
+		{
+			var pi = Ids().Where(i => i.StartsWith("pi_")).ToArray();
+			Assert.That(pi.Length, Is.EqualTo(9));
+			Assert.That(pi, Is.EquivalentTo(new[]
 			{
 				"pi_fair_producer", "pi_army_ratio", "pi_overflow", "pi_lean", "pi_demand_capturers",
 				"pi_role_mix", "pi_derived_weights", "pi_queue_depth", "pi_recovery",

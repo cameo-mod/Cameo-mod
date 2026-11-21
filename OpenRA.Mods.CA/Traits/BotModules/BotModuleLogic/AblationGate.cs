@@ -24,18 +24,17 @@ namespace OpenRA.Mods.CA.Traits
 		bool IsOff(Player owner, string id);
 	}
 
-	/// <summary>Registry ids of the PROD-IDLE G1 rows (tools/ablate/ablate_groups.yaml). Inert constants in release.</summary>
-	public static class AblationIds
+	/// <summary>
+	/// Group-name registry for the ABLATE-01 hook (mirror of tools/ablate/ablate_groups.yaml). Inert constants in release.
+	/// One id per independently ablatable feature or merge group. Rules: lowercase `[a-z0-9_]`, prefixed by the owning area
+	/// (`pi_` PROD-IDLE G1, add your own, e.g. `cn_` CN waves, `bn_` BOT-NEXT, `ed_` ENGDROP), no comma, `@`, `;` or space (the
+	/// lobby value is a comma list with an optional `@team<k>` suffix). The class is partial so each owner adds a
+	/// constants-only file of its own (`AblationIds.<Area>.cs`) and nobody edits another owner's file. With the DEV half
+	/// (ABLATE-01, not in this commit) an id that is in the lobby value but missing from the registry yaml aborts the DEV
+	/// start (fail closed), so register every id in both places.
+	/// </summary>
+	public static partial class AblationIds
 	{
-		public const string FairProducer = "pi_fair_producer";
-		public const string ArmyRatio = "pi_army_ratio";
-		public const string Overflow = "pi_overflow";
-		public const string Lean = "pi_lean";
-		public const string DemandCapturers = "pi_demand_capturers";
-		public const string RoleMix = "pi_role_mix";
-		public const string DerivedWeights = "pi_derived_weights";
-		public const string QueueDepth = "pi_queue_depth";
-		public const string Recovery = "pi_recovery";
 	}
 
 	public static class AblationGate
