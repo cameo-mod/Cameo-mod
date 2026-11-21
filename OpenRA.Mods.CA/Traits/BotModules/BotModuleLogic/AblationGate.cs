@@ -62,7 +62,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		public bool Off(Player owner, string id)
 		{
-			if (state == 0)
+			// An answer for no owner is not an answer: never cache it, so a call made before the owner is
+			// known cannot pin the row ON for the whole game.
+			if (state == 0 && owner != null)
 				state = AblationGate.Off(owner, id) ? (byte)2 : (byte)1;
 
 			return state == 2;

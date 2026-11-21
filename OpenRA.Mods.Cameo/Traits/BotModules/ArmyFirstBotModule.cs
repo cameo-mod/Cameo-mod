@@ -125,7 +125,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			long armyLive = 0, buildingLive = 0, armyInflight = 0, buildingInflight = 0;
 
 			foreach (var a in world.ActorsHavingTrait<Building>())
-				if (a.Owner == owner && !a.IsDead)
+				if (a.Owner == owner && !a.IsDead && a.IsInWorld)
 					buildingLive += a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
 
 			foreach (var a in world.ActorsHavingTrait<AttackBase>())
