@@ -9,7 +9,6 @@
 #endregion
 
 using System;
-using OpenRA.Mods.CA;
 
 namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 {
@@ -19,7 +18,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		readonly int[] desires = new int[SquadDesireEval.StanceCount];
 		readonly int[] urgencies = new int[SquadDesireEval.StanceCount];
 		int current = -1;
-		BotCooldown switchDwell;
+		int lastSwitchTick;
 		public int LastSeenTick { get; private set; } = -1;
 
 		public SquadDesireStance Evaluate(in SquadDesireSignals signals, string personality,
@@ -33,12 +32,13 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			for (var i = 0; i < desires.Length; i++)
 				desires[i] = current < 0 ? urgencies[i]
 					: SquadDesireEval.Step(desires[i], urgencies[i], Math.Clamp(leakPermille, 0, 1000));
+			// The provider supplies the dwell on each call; keep the current value and widen subtraction to avoid overflow.
 			var next = SquadDesireEval.Pick(desires, current, Math.Max(0, hysteresisMilli),
-				switchDwell.Ready(signals.WorldTick));
+				(long)signals.WorldTick - lastSwitchTick >= Math.Max(0, minDwellTicks));
 			if (next != current)
 			{
 				current = next;
-				switchDwell.Start(signals.WorldTick, Math.Max(0, minDwellTicks));
+				lastSwitchTick = signals.WorldTick;
 			}
 			LastSeenTick = signals.WorldTick;
 			return (SquadDesireStance)current;
