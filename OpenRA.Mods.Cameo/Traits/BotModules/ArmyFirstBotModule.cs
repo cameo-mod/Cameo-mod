@@ -57,6 +57,15 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		/// <summary>Essentials (conyard, refinery, power, first factory) always pass; everything else yields to either vote.</summary>
 		public static bool Holds(bool essential, bool cashPoorPaused, bool armyCountHolds) => !essential && (cashPoorPaused || armyCountHolds);
+
+		/// <summary>
+		/// PR-3 projected-share vote (PROD-IDLE_PLAN_03 section 3): only K6 orders (General class: PW, defences, walls,
+		/// extra tech and support) are ratio-tested. Essentials, K4 essential buildings and K1/K2 pass untested.
+		/// An unset target (negative) holds K6 closed; see <see cref="ArmyShareCA.BuildingAdmits"/>.
+		/// </summary>
+		public static bool ShareHolds(bool essential, RecoverySpendPolicyCA.Admission admission, ArmyShareCA share, long cost,
+			int targetPermille) =>
+			!essential && admission == RecoverySpendPolicyCA.Admission.General && !share.BuildingAdmits(cost, targetPermille);
 	}
 
 	/// <summary>
@@ -70,7 +79,9 @@ namespace OpenRA.Mods.Cameo.Traits
 	public class ArmyFirstBotModule : ConditionalTrait<ArmyFirstBotModuleInfo>, IBotTick, IBotRequestPauseBuildingProduction
 	{
 		readonly ArmyFirstBotModuleInfo info;
+		readonly ArmyShareCA share = new();
 		PlayerResources playerResources;
+		BotLimits botLimits;
 		bool paused;
 		bool hasUnitProducer;
 		int armyUnits;
@@ -82,14 +93,63 @@ namespace OpenRA.Mods.Cameo.Traits
 			this.info = info;
 		}
 
-		bool IBotRequestPauseBuildingProduction.PausesBuilding(ActorInfo building, bool essential)
+		// T(r) in permille from the tier line (500 + 25 r); -1 = unset, which holds K6 closed.
+		int ShareTarget => botLimits != null ? botLimits.Info.ArmyShareTargetPermille : -1;
+
+		bool IBotRequestPauseBuildingProduction.PausesBuilding(ActorInfo building, bool essential,
+			RecoverySpendPolicyCA.Admission admission, int cost)
 		{
 			if (IsTraitDisabled || playerResources == null)
 				return false;
 
 			var armyHolds = ArmyFirstEval.ArmyCountHolds(hasUnitProducer, playerResources.GetCashAndResources(), armyUnits,
 				info.MinArmyUnitsBeforeBuildings, info.ArmyFirstMinCash);
-			return ArmyFirstEval.Holds(essential, paused, armyHolds);
+			return ArmyFirstEval.Holds(essential, paused, armyHolds)
+				|| ArmyFirstEval.ShareHolds(essential, admission, share, cost, ShareTarget);
+		}
+
+		void IBotRequestPauseBuildingProduction.BuildingAdmitted(ActorInfo building, int cost)
+		{
+			if (!IsTraitDisabled)
+				share.Record(ArmyShareSide.Building, cost);
+		}
+
+		// PLAN_02 section 2 values: live actors by their Valued cost (the Squad Manager's UnitValue),
+		// in-flight items by their full queue cost. One scan per ScanInterval; admitted orders are
+		// recorded on top by BuildingAdmitted until the next scan.
+		void RefreshShare(World world, Player owner)
+		{
+			long armyLive = 0, buildingLive = 0, armyInflight = 0, buildingInflight = 0;
+
+			foreach (var a in world.ActorsHavingTrait<Building>())
+				if (a.Owner == owner && !a.IsDead)
+					buildingLive += a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+
+			foreach (var a in world.ActorsHavingTrait<AttackBase>())
+				if (a.Owner == owner && !a.IsDead && a.IsInWorld
+					&& ArmyShareCA.Classify(a.Info.HasTraitInfo<BuildingInfo>(), true, a.Info.HasTraitInfo<HarvesterInfo>()) == ArmyShareSide.Army)
+					armyLive += a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+
+			foreach (var pair in world.ActorsWithTrait<ProductionQueue>())
+			{
+				if (pair.Actor.Owner != owner || pair.Actor.IsDead || !pair.Trait.Enabled)
+					continue;
+
+				foreach (var item in pair.Trait.AllQueued())
+				{
+					if (!world.Map.Rules.Actors.TryGetValue(item.Item, out var itemInfo))
+						continue;
+
+					var side = ArmyShareCA.Classify(itemInfo.HasTraitInfo<BuildingInfo>(), itemInfo.HasTraitInfo<AttackBaseInfo>(),
+						itemInfo.HasTraitInfo<HarvesterInfo>());
+					if (side == ArmyShareSide.Army)
+						armyInflight += item.TotalCost;
+					else if (side == ArmyShareSide.Building)
+						buildingInflight += item.TotalCost;
+				}
+			}
+
+			share.Refresh(armyLive, armyInflight, buildingLive, buildingInflight);
 		}
 
 		protected override void Created(Actor self)
@@ -109,6 +169,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			scanTicks = info.ScanInterval;
 
 			var world = bot.Player.World;
+
+			// PR-3: the target is the tier's line; the share snapshot is rebuilt here, once per scan.
+			botLimits = bot.Player.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
+			RefreshShare(world, bot.Player);
 
 			// The vote only exists while at least one unit producer does - otherwise it would block the
 			// very structures that make an army-first policy meaningful (first barracks/war factory, or

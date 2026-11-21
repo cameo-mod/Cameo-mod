@@ -958,7 +958,13 @@ namespace OpenRA.Mods.CA.Traits
 				var exempt = plannerWant || demandPick.Demand != null;
 				var cost = queue.GetProductionCost(item);
 				var itemEssential = IsArmyFirstEssential(item);
-				var nonCashVeto = pauseBuilding.Any(p => p.PausesBuilding(item, itemEssential))
+
+				// PROD-IDLE_PLAN_03 section 2.3 class of this building order: K1/K2 essentials, K4 other
+				// essential buildings (extra refineries, planner and demand wants), K6 everything else.
+				var buildingClass = itemEssential ? RecoverySpendPolicyCA.Admission.OpeningOrEssential
+					: isRefinery || exempt ? RecoverySpendPolicyCA.Admission.EssentialBuilding
+					: RecoverySpendPolicyCA.Admission.General;
+				var nonCashVeto = pauseBuilding.Any(p => p.PausesBuilding(item, itemEssential, buildingClass, cost))
 					|| BaseBuilderQueueEvalCA.MobileSpendBlocks(cashNow, cost, reserveFloor, itemEssential);
 				cashClock.Observe(queue.Actor.ActorID, item.Name,
 					BaseBuilderQueueEvalCA.StarvationEligible(
@@ -978,7 +984,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (pauseBuilding.Length > 0 || reserveFloor > 0)
 				{
 					var essential = IsArmyFirstEssential(item);
-					if (pauseBuilding.Any(p => p.PausesBuilding(item, essential)))
+					if (pauseBuilding.Any(p => p.PausesBuilding(item, essential, buildingClass, cost)))
 						return false;
 
 					// TF-2: the reservation — optional spend (optional defences, crawl links) may
@@ -1047,6 +1053,12 @@ namespace OpenRA.Mods.CA.Traits
 					baseBuilder.StorageObservation.NoteEmitted(storageReservation, world.WorldTick);
 
 				queuedAt[queue.Actor.ActorID] = (item.Name, world.WorldTick);
+
+				// PROD-IDLE PR-3: the admitted building is recorded before the next candidate is tested, so
+				// two admissions in one pass cannot both pass an old share snapshot (PLAN_03 section 3).
+				foreach (var p in pauseBuilding)
+					p.BuildingAdmitted(item, cost);
+
 				if (demandPick.Demand != null)
 				{
 					// ECON-A-FIX (R5): bind on the admitted order, not the pick — the recorded in-flight
