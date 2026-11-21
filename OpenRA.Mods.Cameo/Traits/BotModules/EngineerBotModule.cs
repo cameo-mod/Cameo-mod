@@ -1228,6 +1228,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				.OrderByDescending(t => RankScore(t.GetSellValue(), (t.Location - capturers[0].Location).Length, 0, 0))
 				.ThenBy(t => t.ActorID)
 				.AsEnumerable();
+			// A target whose area is not yet Known still passes the threat filter (the stamps only exist once its route has been planned, see
+			// TryOpportunityRun). The plan throttle rotates them: a target planned (or refused) in the last DropPlanRetryTicks drops out here, so the
+			// next scan's CaptureTargetTries window reaches the next unknown target instead of re-planning the same few.
 			var tries = opportunity
 				? TriggerATries(ranked,
 					t => AreaMemory.Assess(t.Location, AvoidanceCells, [], null, world.WorldTick, Info.DropFreshTicks).ThreatValue == 0,
