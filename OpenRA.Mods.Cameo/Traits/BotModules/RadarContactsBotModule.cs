@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.AS.Traits;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Cameo.Effects;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -106,10 +107,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			var tick = world.WorldTick;
-			if (tick < nextRefreshTick)
+			if (!BotPeriod.CarryDue(ref nextRefreshTick, tick, Info.ContactsIntervalTicks))
 				return;
 
-			nextRefreshTick = tick + Math.Max(1, Info.ContactsIntervalTicks);
 			Refresh(tick);
 		}
 

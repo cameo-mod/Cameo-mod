@@ -13,6 +13,7 @@ using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 
@@ -230,10 +231,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 			}
 
-			if (world.WorldTick < nextRefreshTick)
+			if (!BotPeriod.CarryDue(ref nextRefreshTick, world.WorldTick, Info.RegionRefreshInterval))
 				return;
 
-			nextRefreshTick = world.WorldTick + Math.Max(1, Info.RegionRefreshInterval);
 			Refresh();
 		}
 
