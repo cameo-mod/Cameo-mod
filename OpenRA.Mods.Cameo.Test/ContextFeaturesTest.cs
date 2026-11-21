@@ -117,6 +117,32 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void SampleWindowUsesNominalGridWithActualObservationTime()
+		{
+			var window = new OpponentFeatureWindow();
+			Assert.That(window.Add(new OpponentFeatureCensus(0, 5, 8, 1000, 0, 0,
+				new[] { 10, 0, 0, 0, 0, 0, 0 }, observedTick: 5)), Is.True);
+			Assert.That(window.Add(new OpponentFeatureCensus(750, 756, 8, 1000, 0, 0,
+				new[] { 760, 0, 0, 0, 0, 0, 0 }, observedTick: 756)), Is.True);
+			Assert.That(window.Add(new OpponentFeatureCensus(750, 757, 8, 1000, 0, 0,
+				new[] { 770, 0, 0, 0, 0, 0, 0 }, observedTick: 757)), Is.False,
+				"A repeated visit in the same grid slot cannot create a second sample.");
+			Assert.That(window.Features(756).Fields["army_value_slope"].Value, Is.EqualTo(1000),
+				"The time series uses nominal ticks; observation recency keeps the actual observation time.");
+		}
+
+		[Test]
+		public void FeatureCacheAdvancesOnNominalUpdateGridDespiteVisitJitter()
+		{
+			var window = new OpponentFeatureWindow();
+			window.Add(Census(0));
+			var first = window.Features(252);
+			Assert.That(window.Features(499), Is.SameAs(first), "Both visits belong to the 250-tick grid slot.");
+			Assert.That(window.Features(500), Is.Not.SameAs(first),
+				"A visit at the next grid boundary is due even though only 248 ticks elapsed since the previous visit.");
+		}
+
+		[Test]
 		public void RecomputeCadenceIs250TicksAndHistoryIsBounded()
 		{
 			var window = new OpponentFeatureWindow();
