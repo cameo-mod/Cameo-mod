@@ -12,7 +12,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.CA.Traits;
+using BotCallPeriod = OpenRA.Mods.CA.BotCallPeriod;
 using BotRng = OpenRA.Mods.CA.BotRng;
+using BotVisitClock = OpenRA.Mods.CA.BotVisitClock;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Primitives;
@@ -755,7 +757,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		PlayerResources resources;
 		IBotRegionThreatProvider[] threatProviders;
 		BaseBuilderBotModuleCA[] baseBuilders;
-		int ticks;
+		// STAGGER-06 C001/C002 (TIMER_TABLE_06, class P, form F3 with c0 = 0, K = ReplanTicks): ONE world-tick due for the
+		// idle-path check and the main-path check, which shared the old `ticks` call counter (one increment per BotTick
+		// call on either path, `++ticks % K == 0`). See BotCallPeriod: armed on the first call, frozen while the trait is
+		// disabled (R2), not saved (a load re-arms, as `ticks` restarted at 0).
+		BotCallPeriod replanCalls;
 		string lastIdleReason;
 		readonly Dictionary<int, int> claimAttempts = new();
 		readonly Dictionary<int, int> parkedUntil = new();
@@ -2823,7 +2829,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			if (resourceMap == null || resources == null)
 			{
-				if (++ticks % Info.ReplanTicks == 0)
+				if (ReplanDue(bot))
 					Idle(resourceMap == null ? "no enabled ResourceMapBotModule" : "no PlayerResources");
 				return;
 			}
@@ -2841,10 +2847,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (Info.FieldCoverage && Info.DriveRefineries)
 				CoverageTick();
 
-			if (++ticks % Info.ReplanTicks != 0)
+			if (!ReplanDue(bot))
 				return;
 
 			Replan(bot);
+		}
+
+		// C001/C002: true on the call at which the old `++ticks % ReplanTicks == 0` was true. Called exactly once per
+		// BotTick call (the idle path and the main path are exclusive), as the old increment was.
+		bool ReplanDue(IBot bot)
+		{
+			var clock = BotVisitClock.Of(bot);
+			return replanCalls.Call(clock.VisitTick, clock.Elapsed, Info.ReplanTicks);
 		}
 
 		void Replan(IBot bot)
