@@ -31,6 +31,40 @@ namespace OpenRA.Mods.Cameo.Test
 	{
 		static readonly CPos Base = new(10, 10);
 
+		[Test]
+		public void QueueSweepCooldownUsesWorldTicksAndCanBeForcedDue()
+		{
+			var cooldown = default(BotCooldown);
+			Assert.That(BaseBuilderQueueEvalCA.QueueSweepDue(cooldown, 0), Is.True);
+
+			BaseBuilderQueueEvalCA.StartQueueSweepCooldown(ref cooldown, 100, 25);
+			Assert.That(BaseBuilderQueueEvalCA.QueueSweepDue(cooldown, 124), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.QueueSweepDue(cooldown, 125), Is.True);
+
+			BaseBuilderQueueEvalCA.StartQueueSweepCooldown(ref cooldown, 200, 150);
+			BaseBuilderQueueEvalCA.MakeQueueSweepDue(ref cooldown, 210);
+			Assert.That(BaseBuilderQueueEvalCA.QueueSweepDue(cooldown, 210), Is.True);
+		}
+
+		[Test]
+		public void QueueSweepCooldownFreezesAcrossConditionDisabledGap()
+		{
+			var cooldown = default(BotCooldown);
+			BaseBuilderQueueEvalCA.StartQueueSweepCooldown(ref cooldown, 100, 25);
+			var disabledFrom = BaseBuilderQueueEvalCA.QueueSweepPauseFromTick(100, 100);
+			BaseBuilderQueueEvalCA.ResumeQueueSweepCooldown(ref cooldown, started: true, tick: 131,
+				disabledFromTick: disabledFrom);
+			Assert.That(BaseBuilderQueueEvalCA.QueueSweepDue(cooldown, 154), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.QueueSweepDue(cooldown, 155), Is.True);
+
+			var beforeFirstVisit = default(BotCooldown);
+			var disabledBeforeVisitFrom = BaseBuilderQueueEvalCA.QueueSweepPauseFromTick(100, 99);
+			BaseBuilderQueueEvalCA.ResumeQueueSweepCooldown(ref beforeFirstVisit, started: false, tick: 131,
+				disabledFromTick: disabledBeforeVisitFrom);
+			Assert.That(BaseBuilderQueueEvalCA.QueueSweepDue(beforeFirstVisit, 131), Is.True,
+				"An unstarted manager remains ready when the trait is re-enabled.");
+		}
+
 		// BlockedByCash
 
 		[Test]

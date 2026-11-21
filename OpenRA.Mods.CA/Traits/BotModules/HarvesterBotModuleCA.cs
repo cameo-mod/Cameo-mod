@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Graphics;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Activities;
 using OpenRA.Mods.Common.Traits;
@@ -20,6 +21,34 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.CA.Traits
 {
+	internal static class HarvesterLogisticsCooldown
+	{
+		public static BotCooldown Start(int tick, int duration)
+		{
+			var cooldown = new BotCooldown();
+			cooldown.Start(tick, duration);
+			return cooldown;
+		}
+
+		public static bool IsDue(BotCooldown cooldown, int tick) => cooldown.Ready(tick);
+	}
+
+	internal static class HarvesterScanCooldown
+	{
+		public static BotCooldown StartInitial(int tick, int initialDelay)
+		{
+			var cooldown = new BotCooldown();
+			cooldown.Start(tick, Math.Max(1, initialDelay));
+			return cooldown;
+		}
+
+		public static bool IsDue(BotCooldown cooldown, int tick) => cooldown.Ready(tick);
+
+		public static void Reload(ref BotCooldown cooldown, int tick, int interval) => cooldown.Start(tick, interval);
+
+		public static void Freeze(ref BotCooldown cooldown, int elapsed) => cooldown.Freeze(elapsed);
+	}
+
 	[TraitLocation(SystemActors.Player)]
 	[Desc("Put this on the Player actor. Manages bot harvesters to ensure they always continue harvesting as long as there are resources on the map.")]
 	public class HarvesterBotModuleCAInfo : ConditionalTraitInfo, NotBefore<IResourceLayerInfo>, NotBefore<ResourceMapBotModuleInfo>
@@ -125,9 +154,9 @@ namespace OpenRA.Mods.CA.Traits
 		IBotRequestUnitProduction[] requestUnitProduction;
 		ResourceMapBotModule resourceMapModule;
 
-		int scanForLowEffectHarvestersTicks;
-		int scanForEnoughHarvestersTicks;
-		int scanForIdleHarvestersTicks;
+		BotCooldown scanForLowEffectHarvestersCooldown;
+		BotCooldown scanForEnoughHarvestersCooldown;
+		BotCooldown scanForIdleHarvestersCooldown;
 		int respondToAttackCooldown = 40; // prevent too many responses to the same wave of attacks
 		bool firstTick = true;
 		bool limitsRechecked;
@@ -139,7 +168,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		// BU_harvester_logistics state (unused while the switch is off).
 		IBotRegionThreatProvider[] threatProviders;
-		readonly Dictionary<Actor, int> lastReassignTick = [];
+		readonly Dictionary<Actor, BotCooldown> lastReassignCooldown = [];
 		readonly HashSet<Actor> evacuatedHarvesters = [];
 		int logisticsShortfall;
 		bool logisticsScanned;
@@ -174,11 +203,12 @@ namespace OpenRA.Mods.CA.Traits
 			limitsRechecked = false;
 
 			// Avoid all AIs scanning for idle harvesters on the same tick, randomize their initial scan delay.
-			scanForIdleHarvestersTicks = BotRng.For(player, nameof(HarvesterBotModuleCA)).Next(Info.ScanForIdleHarvestersInterval, Info.ScanForIdleHarvestersInterval * 2);
-
-			scanForLowEffectHarvestersTicks = BotRng.For(player, nameof(HarvesterBotModuleCA)).Next(Info.ScanForLowEffectHarvestersInterval);
-
-			scanForEnoughHarvestersTicks = Info.ProduceHarvestersInterval;
+			var idleDelay = BotRng.For(player, nameof(HarvesterBotModuleCA)).Next(Info.ScanForIdleHarvestersInterval, Info.ScanForIdleHarvestersInterval * 2);
+			var lowEffectDelay = BotRng.For(player, nameof(HarvesterBotModuleCA)).Next(Info.ScanForLowEffectHarvestersInterval);
+			var tick = world.WorldTick;
+			scanForIdleHarvestersCooldown = HarvesterScanCooldown.StartInitial(tick, idleDelay);
+			scanForLowEffectHarvestersCooldown = HarvesterScanCooldown.StartInitial(tick, lowEffectDelay);
+			scanForEnoughHarvestersCooldown = HarvesterScanCooldown.StartInitial(tick, Info.ProduceHarvestersInterval);
 		}
 
 		public void WorldLoaded(World w, WorldRenderer wr)
@@ -207,6 +237,7 @@ namespace OpenRA.Mods.CA.Traits
 		void IBotTick.BotTick(IBot bot)
 		{
 			respondToAttackCooldown--;
+			var tick = BotVisitClock.Of(bot).VisitTick;
 
 			// LC4: the BotLimits cached in TraitEnabled can predate the tier condition (BotLimitsResolver).
 			if (!limitsRechecked)
@@ -218,7 +249,13 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			if (resourceLayer == null || resourceLayer.IsEmpty)
+			{
+				var elapsed = BotVisitClock.Of(bot).Elapsed;
+				HarvesterScanCooldown.Freeze(ref scanForIdleHarvestersCooldown, elapsed);
+				HarvesterScanCooldown.Freeze(ref scanForLowEffectHarvestersCooldown, elapsed);
+				HarvesterScanCooldown.Freeze(ref scanForEnoughHarvestersCooldown, elapsed);
 				return;
+			}
 
 			if (firstTick)
 			{
@@ -232,15 +269,15 @@ namespace OpenRA.Mods.CA.Traits
 			while (harvestersNeedingOrders.TryPop(out var hno) && !searchedForResources)
 				searchedForResources = HarvestIfAble(bot, hno);
 
-			if (--scanForIdleHarvestersTicks <= 0)
+			if (HarvesterScanCooldown.IsDue(scanForIdleHarvestersCooldown, tick))
 			{
 				FindIdleHarvester();
-				scanForIdleHarvestersTicks = Info.ScanForIdleHarvestersInterval;
+				HarvesterScanCooldown.Reload(ref scanForIdleHarvestersCooldown, tick, Info.ScanForIdleHarvestersInterval);
 			}
 
-			if (--scanForLowEffectHarvestersTicks <= 0)
+			if (HarvesterScanCooldown.IsDue(scanForLowEffectHarvestersCooldown, tick))
 			{
-				scanForLowEffectHarvestersTicks = Info.ScanForLowEffectHarvestersInterval;
+				HarvesterScanCooldown.Reload(ref scanForLowEffectHarvestersCooldown, tick, Info.ScanForLowEffectHarvestersInterval);
 				if (resourceMapModule != null)
 				{
 					if (Info.UseHarvesterLogistics)
@@ -250,10 +287,10 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
-			if (--scanForEnoughHarvestersTicks <= 0)
+			if (HarvesterScanCooldown.IsDue(scanForEnoughHarvestersCooldown, tick))
 			{
 				ProduceHarvesters(bot);
-				scanForEnoughHarvestersTicks = Info.ProduceHarvestersInterval;
+				HarvesterScanCooldown.Reload(ref scanForEnoughHarvestersCooldown, tick, Info.ProduceHarvestersInterval);
 			}
 		}
 
@@ -574,8 +611,8 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// Drop bookkeeping for harvesters no longer tracked; evacuees re-enter the pool only when free again.
-			foreach (var a in lastReassignTick.Keys.Where(a => !harvesters.ContainsKey(a)).ToList())
-				lastReassignTick.Remove(a);
+			foreach (var a in lastReassignCooldown.Keys.Where(a => !harvesters.ContainsKey(a)).ToList())
+				lastReassignCooldown.Remove(a);
 
 			evacuatedHarvesters.RemoveWhere(a =>
 				a.IsDead || !a.IsInWorld || !BotUnitLeases.IsClaimedByOther(leases, a, owner));
@@ -589,7 +626,8 @@ namespace OpenRA.Mods.CA.Traits
 				if (evacuatedHarvesters.Contains(actor))
 					continue;
 
-				if (lastReassignTick.TryGetValue(actor, out var lastTick) && now - lastTick < Info.LogisticsReassignCooldownTicks)
+				if (lastReassignCooldown.TryGetValue(actor, out var cooldown)
+					&& !HarvesterLogisticsCooldown.IsDue(cooldown, now))
 					continue;
 
 				if (BotUnitLeases.IsClaimedByOther(leases, actor, owner))
@@ -630,7 +668,7 @@ namespace OpenRA.Mods.CA.Traits
 					bot.QueueOrder(new Order("Harvest", actor, Target.FromCell(world, cells[0]), false));
 					AIUtils.BotDebug($"AI: Harvester {actor} re-routed to field at {cells[0]} (reservation {reserved[index]}, cells {cellsCount[index]})");
 					remaining[index]--;
-					lastReassignTick[actor] = now;
+					lastReassignCooldown[actor] = HarvesterLogisticsCooldown.Start(now, Info.LogisticsReassignCooldownTicks);
 					break;
 				}
 			}

@@ -125,7 +125,9 @@ namespace OpenRA.Mods.CA.Traits
 			owner.stalemateSeatOwner ??= new StalemateSeatOwnerCA();
 			var t = World.WorldTick;
 
-			if (t % StalemateBreakerWaveCA.SampleInterval == 0)
+			// STAGGER-06 A066: F4 K=75 res=0, stateless window [v - Elapsed + 1, v] (identical to t % 75 == 0 at N = 1).
+			var stalemateClock = BotVisitClock.Of(bot);
+			if (BotPeriod.ResidueHit(stalemateClock.VisitTick, stalemateClock.Elapsed, StalemateBreakerWaveCA.SampleInterval, 0))
 				StalemateObserve(seat, t);
 
 			if (seat.Wave != null)
@@ -488,7 +490,7 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 			}
 
-			if (!rotation.IsWinner(seatIndex, t, World.Players.Length))
+			if (!rotation.IsWinner(seatIndex, t, World.Players.Length, BotVisitClock.Of(bot).Elapsed))
 				return;
 
 			var deferred = Math.Max(0, t - rotation.PendingSince(seatIndex) - 1);
@@ -758,18 +760,42 @@ namespace OpenRA.Mods.CA.Traits
 			if (wave.IsActive && !status.Known && !status.Destroyed)
 				status = StalemateRetarget(seat, t, status);
 
+			// STAGGER-06 R5 (A071/A072/A074): the wave's absolute ticks are tested against the visit window
+			// [v - Elapsed + 1, v] instead of ==, and the work is recorded at its NOMINAL tick, so the wave state machine
+			// (ObserveSample requires t == LastSampleTick + 75; RallyEnd before ObserveSample at a shared tick) sees the same
+			// ticks at every N. At N = 1 the window is {v} and every branch below is the old equality.
+			var clock = BotVisitClock.Of(bot);
+			var windowStart = t - Math.Max(1, clock.Elapsed) + 1;
+			var rallyDue = wave.Phase == StalemateWavePhaseCA.Rally && wave.RallyDeadline >= windowStart && wave.RallyDeadline <= t;
+
 			wave.Continue(t, provider != null, true, StalemateBlocked(provider), status.Known, status.Destroyed);
-			wave.CheckDeadlines(t);
+			wave.CheckDeadlines(rallyDue ? wave.RallyDeadline : t);
 
-			if (wave.IsActive && wave.Phase == StalemateWavePhaseCA.Rally && t == wave.RallyDeadline)
-				StalemateRallyEnd(seat, t);
+			if (wave.IsActive && rallyDue && wave.Phase == StalemateWavePhaseCA.Rally)
+			{
+				StalemateRallyEnd(seat, wave.RallyDeadline);
 
-			if (wave.IsActive && wave.IsSampleTick(t))
-				StalemateSample(seat, t, status, provider);
+				// The absolute deadline is still judged at the visit tick (a no-op at N = 1: same tick as above).
+				if (wave.IsActive)
+					wave.CheckDeadlines(t);
+			}
 
-			if (wave.IsActive && wave.Phase == StalemateWavePhaseCA.Rally && t > wave.C
-				&& (t - wave.C) % StalemateBreakerCA.RallyReissueInterval == 0)
-				StalemateIssueRally(bot, seat, force: false);
+			// Last grid point C + 75k at or before this visit; sampled only if it falls inside the window (an older, missed
+			// one is what ObserveSample's contiguity check turns into MissingEvidence, as before).
+			if (wave.IsActive && t > wave.C)
+			{
+				var gridTick = wave.C + (t - wave.C) / StalemateBreakerWaveCA.SampleInterval * StalemateBreakerWaveCA.SampleInterval;
+				if (gridTick > wave.C && gridTick >= windowStart)
+					StalemateSample(seat, gridTick, status, provider);
+			}
+
+			if (wave.IsActive && wave.Phase == StalemateWavePhaseCA.Rally && t > wave.C)
+			{
+				var reissue = StalemateBreakerCA.RallyReissueInterval;
+				var reissueTick = wave.C + (t - wave.C) / reissue * reissue;
+				if (reissueTick > wave.C && reissueTick >= windowStart)
+					StalemateIssueRally(bot, seat, force: false);
+			}
 
 			if (!wave.IsActive)
 				StalemateEndWave(bot, owner, seat, t);

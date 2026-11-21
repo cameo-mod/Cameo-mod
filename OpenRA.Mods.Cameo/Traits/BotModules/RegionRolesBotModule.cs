@@ -14,6 +14,7 @@ using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
 using BotSlotPhases = OpenRA.Mods.CA.Traits.BotSlotPhases;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 
@@ -234,10 +235,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 			}
 
+			// Restart form (the seed can be `now`, so a carried grid would be one tick off the old reload at N = 1).
 			if (world.WorldTick < nextRefreshTick)
 				return;
 
 			nextRefreshTick = world.WorldTick + Math.Max(1, Info.RegionRefreshInterval);
+
 			Refresh();
 		}
 

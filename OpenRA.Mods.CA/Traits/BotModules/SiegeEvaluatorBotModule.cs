@@ -81,15 +81,17 @@ namespace OpenRA.Mods.CA.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (IsTraitDisabled || world.WorldTick == lastEvaluationTick)
+			var clock = BotVisitClock.Of(bot);
+			if (IsTraitDisabled || clock.VisitTick == lastEvaluationTick)
 				return;
 
+			// QW-B phase (ClientIndex % interval unless the bot phase-offsets its timers) is the residue of the visit window.
 			if (evaluationPhase < 0)
 				evaluationPhase = BotSlotPhases.Resolve(bot, Info.EvaluationInterval, player.ClientIndex % Info.EvaluationInterval);
 
-			if (!BotSlotPhases.IsDue(world.WorldTick, Info.EvaluationInterval, evaluationPhase))
+			if (!BotPeriod.ResidueHit(clock.VisitTick, clock.Elapsed, Info.EvaluationInterval, evaluationPhase))
 				return;
-			lastEvaluationTick = world.WorldTick;
+			lastEvaluationTick = clock.VisitTick;
 
 			// Personality-named squad managers (@rush/@turtle/…) enable only after
 			// the personality latch and re-latch on switch — never cache an empty

@@ -893,7 +893,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(Policy.NextState(Policy.RallyEnd.Detached, Policy.RallyPhase.Support), Is.EqualTo(Policy.RallyNext.None));
 			Assert.That(Policy.EndName(Policy.RallyEnd.Detached), Is.EqualTo("detached"));
 			var end = Section(text, "internal void RetreatRallyEnd(", "// ---- the fallback base cell ----");
-			Assert.That(end, Does.Contain("RallyCooldowns.GetValue(owner, _ => new StrongBox<int>()).Value = until;"), "a detached rally still cools the squad and its destination");
+			Assert.That(end, Does.Contain("RallyCooldowns.GetValue(owner, _ => new StrongBox<BotCooldown>()).Value.Start(now, cooldownTicks);"), "a detached rally still cools the squad and its destination");
 			Assert.That(end.IndexOf("RallyEnds++;", StringComparison.Ordinal), Is.GreaterThanOrEqualTo(0));
 		}
 
@@ -1126,11 +1126,22 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var text = Manager();
 			var end = Section(text, "internal void RetreatRallyEnd(", "// ---- the fallback base cell ----");
-			Assert.That(end, Does.Contain("RallyCooldowns.GetValue(owner, _ => new StrongBox<int>()).Value = until;"));
-			Assert.That(end, Does.Contain("RallyCooldowns.GetValue(plan.DestSquad, _ => new StrongBox<int>()).Value = until;"), "the destination is cooled too");
+			Assert.That(end, Does.Contain("RallyCooldowns.GetValue(owner, _ => new StrongBox<BotCooldown>()).Value.Start(now, cooldownTicks);"));
+			Assert.That(end, Does.Contain("RallyCooldowns.GetValue(plan.DestSquad, _ => new StrongBox<BotCooldown>()).Value.Start(now, cooldownTicks);"), "the destination is cooled too");
 			Assert.That(end, Does.Contain("end == Policy.RallyEnd.AbortLosing || (end == Policy.RallyEnd.Expired && phase == Policy.RallyPhase.March)"), "only a lost destination is blacklisted");
 			Assert.That(end, Does.Contain("AggTeamRallyBlacklistTicks"));
 			Assert.That(end, Does.Contain("AggTeamRallyCooldownTicks"));
+		}
+
+		[Test]
+		public void RallyCooldownAndBlacklistUseInclusiveBotCooldownDeadlines()
+		{
+			var text = Manager();
+			Assert.That(text, Does.Contain("ConditionalWeakTable<SquadCA, StrongBox<BotCooldown>> RallyCooldowns"));
+			Assert.That(text, Does.Contain("List<(string Key, BotCooldown Until)>"));
+			Assert.That(text, Does.Contain("!cooldown.Value.Ready(now)"), "the squad and destination are blocked only before due");
+			Assert.That(text, Does.Contain("k == key && !until.Ready(now)"), "the blacklist is inclusive at due");
+			Assert.That(text, Does.Contain("e.Key == plan.Key || e.Until.Ready(now)"), "expired entries are pruned at due");
 		}
 	}
 }

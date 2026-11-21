@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Activities;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using BotRng = OpenRA.Mods.CA.BotRng;
 using OpenRA.Mods.Common;
@@ -291,9 +292,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// the squad manager serves requests at.</summary>
 		public static int EscortRequestValue(int defenceValue, int floor) => Math.Max(Math.Max(1, defenceValue), floor);
 
-		int captureTicks;
-		int routeRecheckCountdown;
-		int repairTicks;
+		BotPeriod captureTicks; // STAGGER-06 F1
+		BotPeriod routeRecheck; // STAGGER-06 E070: call-counted F1 K=RouteRecheckTicks x0=0; frozen across a disabled gap (lastSeen), not reset on enable
+		BotCooldown repairCooldown;
 		int nextRepairJob;
 		int housekeptTick = -1;
 		CPos initialBaseCenter;
@@ -390,6 +391,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			world = self.World;
 			player = self.Owner;
+			routeRecheck = BotPeriod.F1(world.WorldTick, 0, Info.RouteRecheckTicks);
 			escortEpisodes = new BotClaimEpisodeCounter(player.InternalName, nameof(EngineerBotModule),
 				self.Info.TraitInfos<EngineerBotModuleInfo>().ToList().IndexOf(info));
 			maximumCaptureTargetOptions = Math.Max(1, info.MaximumCaptureTargetOptions);
@@ -417,8 +419,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		protected override void TraitEnabled(Actor self)
 		{
 			// Avoid all AIs reevaluating on the same tick (both parents do this).
-			captureTicks = BotRng.For(player, nameof(EngineerBotModule)).Next(Info.MinimumCaptureDelay);
-			repairTicks = BotRng.For(player, nameof(EngineerBotModule)).Next(Info.AssignRoleDelay);
+			captureTicks = BotPeriod.F1(player.World.WorldTick, BotRng.For(player, nameof(EngineerBotModule)).Next(Info.MinimumCaptureDelay), Info.MinimumCaptureDelay);
+			var repairDelay = BotRng.For(player, nameof(EngineerBotModule)).Next(Info.AssignRoleDelay);
+			repairCooldown = new BotCooldown { Due = player.World.WorldTick + Math.Max(1, repairDelay) };
 		}
 
 		void IBotPositionsUpdated.UpdatedBaseCenter(CPos newLocation) { initialBaseCenter = newLocation; }
@@ -448,9 +451,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (player.WinState != WinState.Undefined)
 				return;
 
-			if (--repairTicks <= 0)
+			var visitTick = BotVisitClock.Of(bot).VisitTick;
+			if (repairCooldown.Ready(visitTick))
 			{
-				repairTicks = Info.AssignRoleDelay;
+				repairCooldown.Start(visitTick, Info.AssignRoleDelay);
 				if (repairJobs.Length > 0)
 				{
 					Housekeep(bot);
@@ -463,9 +467,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				}
 			}
 
-			if (Info.RouteRecheckTicks > 0 && Info.MaxExposedRouteCells >= 0 && --routeRecheckCountdown <= 0)
+			if (Info.RouteRecheckTicks > 0 && Info.MaxExposedRouteCells >= 0 && routeRecheck.TryFire(BotVisitClock.Of(bot)))
 			{
-				routeRecheckCountdown = Info.RouteRecheckTicks;
 				var tick = world.WorldTick;
 				var leases = BotUnitLeases.Of(player);
 				foreach (var (a, job) in assigned.ToList())
@@ -473,9 +476,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						Recheck(bot, leases, a, job, tick);
 			}
 
-			if (--captureTicks <= 0)
+			if (captureTicks.TryFire(BotVisitClock.Of(bot)))
 			{
-				captureTicks = Info.MinimumCaptureDelay;
 				Housekeep(bot);
 				QueueCaptureOrders(bot);
 			}

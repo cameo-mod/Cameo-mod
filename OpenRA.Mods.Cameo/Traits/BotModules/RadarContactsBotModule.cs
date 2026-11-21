@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.AS.Traits;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Cameo.Effects;
 using BotSlotPhases = OpenRA.Mods.CA.Traits.BotSlotPhases;
 using OpenRA.Mods.Common.Traits;
@@ -111,14 +112,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (!phaseSeeded)
 			{
 				phaseSeeded = true;
-				nextRefreshTick = BotSlotPhases.Resolve(bot, Math.Max(1, Info.ContactsIntervalTicks), 0);
+				var radarPhase = BotSlotPhases.Resolve(bot, Math.Max(1, Info.ContactsIntervalTicks), 0);
+				nextRefreshTick = radarPhase <= world.WorldTick ? 0 : radarPhase; // 0 = unarmed: first visit fires, reload v + K
 			}
 
 			var tick = world.WorldTick;
-			if (tick < nextRefreshTick)
+			if (!BotPeriod.CarryDue(ref nextRefreshTick, tick, Info.ContactsIntervalTicks))
 				return;
 
-			nextRefreshTick = tick + Math.Max(1, Info.ContactsIntervalTicks);
 			Refresh(tick);
 		}
 

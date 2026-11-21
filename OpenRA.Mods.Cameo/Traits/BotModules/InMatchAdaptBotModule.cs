@@ -9,6 +9,7 @@
  */
 #endregion
 
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -69,13 +70,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			var clock = BotVisitClock.Of(bot);
 			if (IsTraitDisabled)
 				return;
 
 			if (phase < 0)
 				phase = BotSlotPhases.Resolve(bot, Info.IntervalTicks, 0);
 
-			if (!BotSlotPhases.IsDue(player.World.WorldTick, Info.IntervalTicks, phase))
+			if (!BotPeriod.ResidueHit(clock.VisitTick, clock.Elapsed, Info.IntervalTicks, phase))
 				return;
 
 			log ??= player.PlayerActor.TraitOrDefault<EngagementLogBotModule>();

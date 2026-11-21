@@ -12,7 +12,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.CA.Traits;
+using BotCallPeriod = OpenRA.Mods.CA.BotCallPeriod;
 using BotRng = OpenRA.Mods.CA.BotRng;
+using BotVisitClock = OpenRA.Mods.CA.BotVisitClock;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Primitives;
@@ -755,11 +757,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		PlayerResources resources;
 		IBotRegionThreatProvider[] threatProviders;
 		BaseBuilderBotModuleCA[] baseBuilders;
-		int ticks;
-
-		// QW-B: the call within each ReplanTicks window on which the replan runs; 0 (the old `ticks % ReplanTicks == 0`)
-		// unless the bot phase-offsets its timers. The first replan is still never before call ReplanTicks.
-		int replanPhase = -1;
+		// STAGGER-06 C001/C002 (TIMER_TABLE_06, class P, form F3 with c0 = 0, K = ReplanTicks): ONE world-tick due for the
+		// idle-path check and the main-path check, which shared the old `ticks` call counter (one increment per BotTick
+		// call on either path, `++ticks % K == 0`). See BotCallPeriod: armed on the first call, frozen while the trait is
+		// disabled (R2), not saved (a load re-arms, as `ticks` restarted at 0).
+		// QW-B: the bot's phase p (0 unless it phase-offsets its timers) arms the counter at c0 = -p, so the replans run on
+		// calls K + p, 2K + p, ... (never before call K): see BotCallPeriod.Call and IsReplanCall.
+		BotCallPeriod replanCalls;
 		string lastIdleReason;
 		readonly Dictionary<int, int> claimAttempts = new();
 		readonly Dictionary<int, int> parkedUntil = new();
@@ -2851,18 +2855,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			Replan(bot);
 		}
 
-		// Counts this call and says whether it is a replan call.
+		// C001/C002: true on the call at which the old `++ticks % ReplanTicks == 0` (QW-B: `calls >= K && calls % K == phase`) was
+		// true. Called exactly once per BotTick call (the idle path and the main path are exclusive), as the old increment was.
 		bool ReplanDue(IBot bot)
 		{
-			if (replanPhase < 0)
-				replanPhase = BotSlotPhases.Resolve(bot, Info.ReplanTicks, 0);
-
-			++ticks;
-			return IsReplanCall(ticks, Info.ReplanTicks, replanPhase);
+			var clock = BotVisitClock.Of(bot);
+			return replanCalls.Call(clock.VisitTick, clock.Elapsed, Info.ReplanTicks,
+				replanCalls.Armed ? 0 : BotSlotPhases.Resolve(bot, Info.ReplanTicks, 0));
 		}
 
-		// Pure, for tests: call number `calls` (1-based) is a replan call. Phase 0 is the old `calls % replanTicks == 0`; a
-		// phase p moves every replan p calls later, and the first one is never before call replanTicks.
+		// Pure oracle for tests (the QW-B rule BotCallPeriod must reproduce at N = 1): call number `calls` (1-based) is a replan
+		// call. Phase 0 is the old `calls % replanTicks == 0`; a phase p moves every replan p calls later, and the first one is
+		// never before call replanTicks.
 		internal static bool IsReplanCall(int calls, int replanTicks, int phase) =>
 			calls >= replanTicks && calls % replanTicks == phase;
 

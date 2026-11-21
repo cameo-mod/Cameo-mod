@@ -286,8 +286,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(site, Is.Null);
 			Assert.That(scan.CertificateCurrent(), Is.False);
 			Assert.That(scan.ReplayingConclusiveVerdict(2001), Is.False, "an aborted forced pass is not a conclusive verdict");
-			Assert.That(scan.ForceDue(Bound, 2001), Is.False, "no second forced pass inside the same epoch");
-			Assert.That(scan.ForceDue(Bound, 2000 + Epoch), Is.True, "forced again at the next epoch");
+			Assert.That(scan.ForceDue(Bound, 2000 + Epoch - 1), Is.False, "the persisted cooldown blocks the visit immediately before due");
+			Assert.That(scan.ForceDue(Bound, 2000 + Epoch), Is.True, "the forced poll becomes eligible exactly at the due tick");
 		}
 
 		// ---- the cancel rule is unchanged: only Exhausted with a current certificate ----

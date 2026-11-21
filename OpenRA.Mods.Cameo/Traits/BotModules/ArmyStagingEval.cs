@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 
 namespace OpenRA.Mods.Cameo.Traits.BotModules
 {
@@ -46,6 +47,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	public static class ArmyStagingEval
 	{
 		public const int Sectors = 8;
+
+		/// <summary>Class C plan gate: reload from the visit that recomputes, with no catch-up.</summary>
+		public static bool TryStartPlan(ref BotCooldown cooldown, int tick, int interval)
+		{
+			if (!cooldown.Ready(tick))
+				return false;
+
+			cooldown.Start(tick, Math.Max(1, interval));
+			return true;
+		}
 
 		// tan(22.5 degrees) in thousandths: the octant boundary.
 		const int TanHalfOctantMilli = 414;

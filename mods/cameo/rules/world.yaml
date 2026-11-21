@@ -911,6 +911,8 @@ World:
 	CryoFogLimiter:
 		Max: 24
 	CameoCareerFinalizer:
+	# STAGGER_DESIGN_06 H1: round-robin scheduler. Inert until a bot type sets RoundRobinFamily/RoundRobin (none does yet).
+	BotRoundRobinScheduler:
 	AiMatchLogWriter:
 	InsuranceTelemetry:
 	# S8: record-only private-bytes/GC growth channel, cameo-ai-memory-*.jsonl (FINDINGS_2026-10-12 S8).
