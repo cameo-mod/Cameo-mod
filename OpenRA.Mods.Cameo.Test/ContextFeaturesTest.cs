@@ -120,14 +120,15 @@ namespace OpenRA.Mods.Cameo.Test
 		public void SampleWindowUsesNominalGridWithActualObservationTime()
 		{
 			var window = new OpponentFeatureWindow();
-			Assert.That(window.Add(new OpponentFeatureCensus(0, 5, 8, 1000, 0, 0,
-				new[] { 10, 0, 0, 0, 0, 0, 0 }, observedTick: 5)), Is.True);
-			Assert.That(window.Add(new OpponentFeatureCensus(750, 756, 8, 1000, 0, 0,
-				new[] { 760, 0, 0, 0, 0, 0, 0 }, observedTick: 756)), Is.True);
-			Assert.That(window.Add(new OpponentFeatureCensus(750, 757, 8, 1000, 0, 0,
-				new[] { 770, 0, 0, 0, 0, 0, 0 }, observedTick: 757)), Is.False,
+			Assert.That(window.Add(new OpponentFeatureCensus(0, 6, 8, 1000, 0, 0,
+				new[] { 10, 0, 0, 0, 0, 0, 0 }, observedTick: 6)), Is.True);
+			Assert.That(window.Add(new OpponentFeatureCensus(750, 752, 8, 1000, 0, 0,
+				new[] { 760, 0, 0, 0, 0, 0, 0 }, observedTick: 752)), Is.True,
+				"A nominal grid sample is accepted even when observed visits are only 746 ticks apart.");
+			Assert.That(window.Add(new OpponentFeatureCensus(750, 753, 8, 1000, 0, 0,
+				new[] { 770, 0, 0, 0, 0, 0, 0 }, observedTick: 753)), Is.False,
 				"A repeated visit in the same grid slot cannot create a second sample.");
-			Assert.That(window.Features(756).Fields["army_value_slope"].Value, Is.EqualTo(1000),
+			Assert.That(window.Features(752).Fields["army_value_slope"].Value, Is.EqualTo(1000),
 				"The time series uses nominal ticks; observation recency keeps the actual observation time.");
 		}
 
