@@ -135,6 +135,11 @@ namespace OpenRA.Mods.Cameo.Traits
 		public int DroppedOrders { get; private set; }
 		readonly Stopwatch moduleStopwatch = new();
 		int ticksSinceReport;
+#if CAMEO_DEV_LOGGING
+		// DEV only (STAGGER_EVAL_PLAN_04 F-B): defend trigger -> reaction records. Trigger stamped at the damage notification
+		// (source side, before any gating); reaction = first order queued by a squad/defence module afterwards.
+		DefendReactionTracker defendReactions;
+#endif
 
 		IBotInfo IBot.Info => info;
 		OpenRA.Player IBot.Player => player;
@@ -155,6 +160,9 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			IsEnabled = true;
 			player = p;
+#if CAMEO_DEV_LOGGING
+			defendReactions = new DefendReactionTracker(p.InternalName, line => Log.Write("perf", line));
+#endif
 			tickModules = p.PlayerActor.TraitsImplementing<IBotTick>().ToArray();
 			actionBudget = p.PlayerActor.TraitsImplementing<IBotActionBudget>().FirstEnabledTraitOrDefault();
 			attackResponseModules = p.PlayerActor.TraitsImplementing<IBotRespondToAttack>().ToArray();
@@ -202,6 +210,9 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			orders.AddLast(item);
 			trackedOrders.NotifyResident(item.Order, BotOrderOutcome.LocallyQueued);
+#if CAMEO_DEV_LOGGING
+			defendReactions?.Reaction(world.WorldTick, BotIssuer.TypeOf(item.Issuer));
+#endif
 		}
 
 		/// <summary>
@@ -305,6 +316,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (!IsEnabled || self.World.IsLoadingGameSave)
 				return;
 
+#if CAMEO_DEV_LOGGING
+			defendReactions?.Expire(world.WorldTick);
+#endif
+
 			var timed = info.ModulePerfReportIntervalTicks > 0;
 			using (new PerfSample("bot_tick"))
 			{
@@ -405,6 +420,17 @@ namespace OpenRA.Mods.Cameo.Traits
 		{
 			if (!IsEnabled || self.World.IsLoadingGameSave)
 				return;
+
+#if CAMEO_DEV_LOGGING
+			if (defendReactions != null && e.Damage != null && e.Damage.Value > 0 && e.Attacker != null && !e.Attacker.Disposed
+				&& e.Attacker.Owner != null && !e.Attacker.Owner.NonCombatant
+				&& player.RelationshipWith(e.Attacker.Owner) == PlayerRelationship.Enemy)
+				defendReactions.Trigger(world.WorldTick,
+					self.Info.HasTraitInfo<BuildingInfo>() ? DefendReactionTracker.BuildingAttacked
+					: self.Info.HasTraitInfo<HarvesterInfo>() ? DefendReactionTracker.HarvesterAttacked
+					: DefendReactionTracker.UnitAttacked,
+					self.ActorID, self.Location.X, self.Location.Y);
+#endif
 
 			using (new PerfSample("bot_attack_response"))
 			{
