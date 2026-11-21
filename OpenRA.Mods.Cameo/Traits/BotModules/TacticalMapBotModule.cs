@@ -306,7 +306,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		CPos highGroundBaseRef;
 		int highGroundBaseHeight;
 		CPos? highGroundLastBaseRef;
-		volatile bool highGroundRequested;
 
 		// Sealable corridors are refreshed INCREMENTALLY (a few chokepoints per tick) to avoid a periodic burst.
 		readonly List<ZoneGateCorridor> sealableCorridors = [];
@@ -319,11 +318,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		HashSet<CPos> corridorSeen;
 		CPos? corridorLastBaseRef;
 		int corridorLastEnemyCount = -1;
-		volatile bool corridorsRequested;
 
 		// "Useful" chokepoints (reachable from own base, leading somewhere). The per-chokepoint flood is expensive,
 		// so it is computed INCREMENTALLY on the sim thread (a few per tick) into usefulBuilding, then swapped into
-		// usefulChokepoints. The optional API/overlay readers opt in; until then the refresh is skipped.
+		// usefulChokepoints. Queries (base builder, overlay) just read the last completed snapshot.
 		readonly List<ZoneChokepoint> usefulChokepoints = [];
 		readonly List<ZoneChokepoint> usefulBuilding = [];
 		int usefulCursor = -1;
@@ -337,12 +335,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		HashSet<CPos> usefulEnemyBuildings;
 		CPos? usefulLastBaseRef;
 		int usefulLastEnemyCount = -1;
-		volatile bool usefulRequested;
-		readonly Action usefulRefreshAction;
-		readonly Action corridorRefreshAction;
-		readonly Action highGroundRefreshAction;
-		readonly Action territoryRefreshAction;
-		readonly Action regionOwnershipRefreshAction;
 
 		// Terrain passability cached once per rebuild (avoids repeated Locomotor.MovementCostForCell in scans/floods).
 		CellLayer<bool> passability;
@@ -352,11 +344,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			world = self.World;
 			player = self.Owner;
-			usefulRefreshAction = TickUsefulRefresh;
-			corridorRefreshAction = TickCorridorRefresh;
-			highGroundRefreshAction = TickHighGroundRefresh;
-			territoryRefreshAction = TickTerritoryRefresh;
-			regionOwnershipRefreshAction = TickRegionOwnershipRefresh;
 		}
 
 		protected override void Created(Actor self)
@@ -414,10 +401,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 			}
 
-			// The first three outputs are optional and request-gated; claim and region ownership are decision inputs.
-			RunRefreshCycle(usefulRequested, corridorsRequested, highGroundRequested,
-				usefulRefreshAction, corridorRefreshAction, highGroundRefreshAction,
-				territoryRefreshAction, regionOwnershipRefreshAction);
+			// Five incremental refreshes, each doing a slice of work every tick so no single tick pays a
+			// full flood. (Donor wrapped each in a CNBotPerf scope; Cameo drops those - no sampler exists.)
+			TickUsefulRefresh();
+			TickCorridorRefresh();
+			TickHighGroundRefresh();
+			TickTerritoryRefresh();
+			TickRegionOwnershipRefresh();
 
 			if (Info.RecomputeInterval > 0 && --recomputeTick <= 0)
 			{
@@ -544,9 +534,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			doors.Clear();
 			territoryWall.Clear();
 			territoryFront.Clear();
-			territoryDetailsDirty = false;
-			territoryEnemySnapshot.Clear();
-			territoryCorridorSnapshot.Clear();
 			horizon.Clear();
 			territoryLastBaseRef = null;
 			territoryLastEnemyCount = -1;
@@ -1557,21 +1544,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// ---------------------------------------------------------------------
 
 		// Throttled: recomputing this per query (a flood + enemy-building scan per chokepoint) caused frame
-		// spikes. Usefulness is base-relative and changes slowly. The getter opts the module into the incremental
-		// refresh below, then reads the last completed snapshot.
-		/// <summary>
-		/// Async first availability; a sim caller must add a synchronous path + review.
-		/// </summary>
-		public IReadOnlyList<ZoneChokepoint> GetUsefulChokepoints()
-		{
-			RequestUsefulRefresh();
-			return usefulChokepoints;
-		}
-
-		void RequestUsefulRefresh()
-		{
-			usefulRequested = true;
-		}
+		// spikes, because the base builder queries topology very frequently. Usefulness is base-relative and
+		// changes slowly. Pure read of the last completed snapshot; the refresh runs incrementally below.
+		public IReadOnlyList<ZoneChokepoint> GetUsefulChokepoints() => usefulChokepoints;
 
 		// Advances the incremental 'useful' refresh by one chunk. Called from BotTick (sim thread) so the cost of the
 		// per-chokepoint flood is spread over several ticks instead of bursting every UsefulRefreshInterval ticks.
@@ -1709,8 +1684,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return false;
 		}
 
-		/// <summary>Chokepoints reachable from the reference as defensive placement threats (proactive, static).
-		/// Async first availability; a sim caller must add a synchronous path + review.</summary>
+		/// <summary>Chokepoints reachable from the reference, as defensive placement threats (proactive, static).</summary>
 		public IEnumerable<ZoneDefenseThreat> GetTopologyHotspots(CPos reference)
 		{
 			EnsureBuilt();
@@ -1733,7 +1707,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// Deliberately territory-wide, not per-base like <see cref="GetTopologyHotspots"/> - a door does not
 		/// belong to whichever base happens to be nearest it, and re-ranking the same small door list by
 		/// distance to each base in turn is exactly the per-base scatter this was built to stop.
-		/// Async first availability; a sim caller must add a synchronous path + review.
 		/// </summary>
 		/// <param name="coverage">
 		/// How many of the bot's own defence structures already cover a door, or null to weight purely by
@@ -1796,7 +1769,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// Positions behind a territory door, facing the approach - same shape as
 		/// <see cref="GetChokepointDefenseAnchors"/>, but the axis and side are already known from the door
 		/// itself instead of having to be resigned against a reference each call.
-		/// Async first availability; a sim caller must add a synchronous path + review.
 		/// </summary>
 		public IReadOnlyList<CPos> GetDoorDefenseAnchors()
 		{
@@ -1853,8 +1825,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return cells;
 		}
 
-		/// <summary>Bearings (from reference) toward each reachable access point, for the sealed-flank penalty.
-		/// Async first availability; a sim caller must add a synchronous path + review.</summary>
+		/// <summary>Bearings (from reference) toward each reachable access point, for the sealed-flank penalty.</summary>
 		public IReadOnlyList<CVec> GetAccessBearings(CPos reference)
 		{
 			EnsureBuilt();
@@ -1869,18 +1840,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		// Pure reads for the debug overlay (render thread): never build or recompute - just read what the sim produced.
 		public IReadOnlyList<ZoneChokepoint> ChokepointsForOverlay() => chokepoints;
-		/// <summary>Async first availability; overlay requests schedule simulation-thread work and never compute on render.</summary>
-		public IReadOnlyList<ZoneChokepoint> UsefulForOverlay()
-		{
-			usefulRequested = true;
-			return usefulChokepoints;
-		}
+		public IReadOnlyList<ZoneChokepoint> UsefulForOverlay() => usefulChokepoints;
 
 		// The chokepoints this bot actually acts on (reachable from its base and leading to a real region, not a
 		// dead end). Used by the debug overlay to distinguish "detected" from "acted-on".
-		/// <summary>
-		/// Async first availability; a sim caller must add a synchronous path + review.
-		/// </summary>
 		public IReadOnlyList<ZoneChokepoint> GetUsefulChokepointsForOwnBase()
 		{
 			EnsureBuilt();
@@ -1932,18 +1895,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// <summary>
 		/// Passable cliff-edge cells within range of the reference that overlook reachable lower ground.
 		/// Turrets here gain the height advantage bonus and use the cliff as a natural wall.
-		/// Async first availability; a sim caller must add a synchronous path + review.
 		/// </summary>
-		public IReadOnlyList<ZoneHighGroundEdge> GetHighGroundEdges(CPos reference)
-		{
-			RequestHighGroundRefresh();
-			return highGroundEdges;
-		}
-
-		void RequestHighGroundRefresh()
-		{
-			highGroundRequested = true;
-		}
+		public IReadOnlyList<ZoneHighGroundEdge> GetHighGroundEdges(CPos reference) => highGroundEdges;
 
 		// Incremental refresh on the sim thread: scan a few candidate cells per tick instead of the whole
 		// circle (~1000 cells at the default radius) in one go. With one TacticalMapBotModule per bot and
@@ -2032,19 +1985,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// <summary>
 		/// Reachable chokepoints whose passable corridor is narrow enough to plug with a single axis-aligned wall line.
 		/// The wall runs perpendicular to the approach; a matching gate goes at the corridor center.
-		/// Async first availability; a sim caller must add a synchronous path + review.
 		/// </summary>
-		public IReadOnlyList<ZoneGateCorridor> GetSealableCorridors(CPos reference)
-		{
-			RequestUsefulRefresh();
-			RequestCorridorRefresh();
-			return sealableCorridors;
-		}
-
-		void RequestCorridorRefresh()
-		{
-			corridorsRequested = true;
-		}
+		public IReadOnlyList<ZoneGateCorridor> GetSealableCorridors(CPos reference) => sealableCorridors;
 
 		// Incremental refresh on the sim thread: process a few useful chokepoints per tick (the snap search + dead-end
 		// flood per chokepoint is the cost), build into corridorBuilding, then swap. Spreads what was a periodic burst.
@@ -2114,7 +2056,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// <summary>
 		/// Candidate defense cells on the base side of sealable chokepoints.
 		/// These sit just behind the wall/gate line so turrets cover the forced path instead of blocking it.
-		/// Async first availability; a sim caller must add a synchronous path + review.
 		/// </summary>
 		public IReadOnlyList<CPos> GetChokepointDefenseAnchors(CPos reference)
 		{
@@ -2301,10 +2242,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int doorsMeasuredByRegion;
 		int doorsMeasuredByPinch;
 		int doorsUnmeasured;
-		volatile bool territoryDetailsRequested;
-		bool territoryDetailsDirty;
-		HashSet<CPos> territoryEnemySnapshot = [];
-		List<ZoneGateCorridor> territoryCorridorSnapshot = [];
 
 		// ZG-b divergence: the donor's ownership tally lived on the SHARED topology (CNSharedTopology.
 		// RegionOwners) because every omniscient bot computed the identical answer. Under fog each bot
@@ -2326,18 +2263,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// </summary>
 		public bool IsInTerritory(CPos cell) { EnsureBuilt(); return territory.Contains(cell); }
 
-		/// <summary>The believed ways into that ground. Everything else along its edge is terrain doing the work.
-		/// Async first availability; a sim caller must add a synchronous path + review.
-		/// </summary>
-		public IReadOnlyList<ZoneTerritoryDoor> TerritoryDoors
-		{
-			get
-			{
-				EnsureBuilt();
-				RequestTerritoryDetails();
-				return doors;
-			}
-		}
+		/// <summary>The believed ways into that ground. Everything else along its edge is terrain doing the work.</summary>
+		public IReadOnlyList<ZoneTerritoryDoor> TerritoryDoors { get { EnsureBuilt(); return doors; } }
 
 		/// <summary>
 		/// The ways into the region containing a cell. Unlike <see cref="TerritoryDoors"/> this is not
@@ -2364,66 +2291,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return gates;
 		}
 
-		/// <summary>Edge cells backed by cliff, water or map edge - free wall, nothing to build there.
-		/// Async first availability; a sim caller must add a synchronous path + review.
-		/// </summary>
-		public IReadOnlyList<CPos> GetTerritoryWall()
-		{
-			EnsureBuilt();
-			RequestTerritoryDetails();
-			return territoryWall;
-		}
+		/// <summary>Edge cells backed by cliff, water or map edge - free wall, nothing to build there.</summary>
+		public IReadOnlyList<CPos> GetTerritoryWall() { EnsureBuilt(); return territoryWall; }
 
-		/// <summary>Edge cells open to the (remembered) enemy, or too wide to plug. Held with an army, not with turrets.
-		/// Async first availability; a sim caller must add a synchronous path + review.
-		/// </summary>
-		public IReadOnlyList<CPos> GetTerritoryFront()
-		{
-			EnsureBuilt();
-			RequestTerritoryDetails();
-			return territoryFront;
-		}
+		/// <summary>Edge cells open to the (remembered) enemy, or too wide to plug. Held with an army, not with turrets.</summary>
+		public IReadOnlyList<CPos> GetTerritoryFront() { EnsureBuilt(); return territoryFront; }
 
 		// Read-only views for the render thread. Deliberately without EnsureBuilt: the overlay must never
 		// trigger a topology build from render-prepare, which is what used to cause periodic spikes.
 		public IReadOnlyCollection<CPos> TerritoryForOverlay() => territory;
-		/// <summary>Async first availability; overlay requests schedule simulation-thread work and never compute on render.</summary>
-		public IReadOnlyList<ZoneTerritoryDoor> DoorsForOverlay()
-		{
-			territoryDetailsRequested = true;
-			return doors;
-		}
-
-		/// <summary>Async first availability; overlay requests schedule simulation-thread work and never compute on render.</summary>
-		public IReadOnlyList<CPos> TerritoryWallForOverlay()
-		{
-			territoryDetailsRequested = true;
-			return territoryWall;
-		}
-
-		/// <summary>Async first availability; overlay requests schedule simulation-thread work and never compute on render.</summary>
-		public IReadOnlyList<CPos> TerritoryFrontForOverlay()
-		{
-			territoryDetailsRequested = true;
-			return territoryFront;
-		}
-
-		void RequestTerritoryDetails() => territoryDetailsRequested = true;
-
-		void EnsureTerritoryDetails()
-		{
-			if (!territoryDetailsDirty)
-				return;
-
-			BuildDoors(territoryEnemySnapshot, territoryCorridorSnapshot);
-			territoryDetailsDirty = false;
-		}
+		public IReadOnlyList<ZoneTerritoryDoor> DoorsForOverlay() => doors;
+		public IReadOnlyList<CPos> TerritoryWallForOverlay() => territoryWall;
+		public IReadOnlyList<CPos> TerritoryFrontForOverlay() => territoryFront;
 
 		void TickTerritoryRefresh()
 		{
-			if (ShouldRefreshOptionalOutput(territoryDetailsRequested) && territoryDetailsDirty)
-				EnsureTerritoryDetails();
-
 			// STAGGER-06 D076: restart form, exact at N = 1 by construction (the reset seeds due = r + BotRng, which can be r, and
 			// a late first visit must reload to v + K, not carry the old grid). At N > 1 the reload is anchored to the visit.
 			if (world.WorldTick < territoryNextRefreshTick)
@@ -2448,32 +2330,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			RebuildTerritory(enemyCells);
 		}
-
-		// A missing reader costs only these optional base-relative outputs. The shared topology, region ownership,
-		// and territory claim refreshes remain unconditional and keep their original order and RNG schedule.
-		internal static bool ShouldRefreshOptionalOutput(bool requested) => requested;
-
-		// Single production seam for the refresh schedule. Tests drive this same dispatcher with its optional
-		// outputs requested and skipped, while exercising the real claim/owner/region-corridor builders.
-		internal static void RunRefreshCycle(bool usefulRequested, bool corridorsRequested, bool highGroundRequested,
-			Action usefulRefresh, Action corridorRefresh, Action highGroundRefresh,
-			Action territoryRefresh, Action regionOwnershipRefresh)
-		{
-			if (ShouldRefreshOptionalOutput(usefulRequested))
-				usefulRefresh();
-
-			if (ShouldRefreshOptionalOutput(corridorsRequested))
-				corridorRefresh();
-
-			if (ShouldRefreshOptionalOutput(highGroundRequested))
-				highGroundRefresh();
-
-			territoryRefresh();
-			regionOwnershipRefresh();
-		}
-
-		internal static ZoneGateCorridor ResolveRegionGateCorridor(IReadOnlyList<ZoneGateCorridor> corridors, int index) =>
-			index >= 0 && index < corridors.Count ? corridors[index] : null;
 
 		/// <summary>
 		/// Region ownership as a cheap, periodically-refreshed tally over the (rarely-changing) region
@@ -2566,64 +2422,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return owners;
 		}
 
-		/// <summary>Outputs of the production claim flood, kept separate from optional territory detail work.</summary>
-		internal sealed record TerritoryClaimResult(HashSet<CPos> Mine, HashSet<CPos> Theirs, HashSet<CPos> Horizon);
-
-		/// <summary>Production territory-claim flood; delegates make its exact walk usable by the static fixture.</summary>
-		internal static TerritoryClaimResult BuildTerritoryClaim(IReadOnlyCollection<CPos> ownCells, IReadOnlyCollection<CPos> enemyCells,
-			Func<CPos, bool> contains, Func<CPos, bool> isPassable, HashSet<CPos> gate, int unopposedRadius, int cellCap)
-		{
-			var mine = new HashSet<CPos>();
-			var theirs = new HashSet<CPos>();
-			var claimed = new HashSet<CPos>();
-			var horizon = new HashSet<CPos>();
-			var queue = new Queue<(CPos Cell, bool Mine, int Dist)>();
-
-			foreach (var cell in ownCells)
-				if (contains(cell) && claimed.Add(cell))
-				{
-					mine.Add(cell);
-					queue.Enqueue((cell, true, 0));
-				}
-
-			foreach (var cell in enemyCells)
-				if (contains(cell) && claimed.Add(cell))
-				{
-					theirs.Add(cell);
-					queue.Enqueue((cell, false, 0));
-				}
-
-			var unopposedLimit = enemyCells.Count == 0 ? Math.Max(1, unopposedRadius) : int.MaxValue;
-			var cap = Math.Max(1, cellCap);
-			while (queue.Count > 0)
-			{
-				var (cell, isMine, dist) = queue.Dequeue();
-				if (dist >= unopposedLimit || claimed.Count >= cap)
-				{
-					if (isMine)
-						horizon.Add(cell);
-
-					continue;
-				}
-
-				foreach (var dir in CVec.Directions)
-				{
-					var next = cell + dir;
-					if (!contains(next) || !isPassable(next) || gate.Contains(next) || !claimed.Add(next))
-						continue;
-
-					if (isMine)
-						mine.Add(next);
-					else
-						theirs.Add(next);
-
-					queue.Enqueue((next, isMine, dist + 1));
-				}
-			}
-
-			return new TerritoryClaimResult(mine, theirs, horizon);
-		}
-
 		/// <summary>
 		/// Claims ground for this player, then reads its edge.
 		/// <para>
@@ -2640,9 +2438,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			doors.Clear();
 			territoryWall.Clear();
 			territoryFront.Clear();
-			territoryDetailsDirty = false;
-			territoryEnemySnapshot.Clear();
-			territoryCorridorSnapshot.Clear();
 
 			var ownCells = OwnBuildingCells();
 			if (ownCells.Count == 0)
@@ -2663,19 +2458,63 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var gate = new HashSet<CPos>();
 			var chokepointCorridors = ResolveChokepointCorridors(gate);
 
+			var mine = new HashSet<CPos>();
+			var theirs = new HashSet<CPos>();
+			var claimed = new HashSet<CPos>();
+			var queue = new Queue<(CPos Cell, bool Mine, int Dist)>();
+
+			foreach (var cell in ownCells)
+				if (world.Map.Contains(cell) && claimed.Add(cell))
+				{
+					mine.Add(cell);
+					queue.Enqueue((cell, true, 0));
+				}
+
+			foreach (var cell in enemyCells)
+				if (world.Map.Contains(cell) && claimed.Add(cell))
+				{
+					theirs.Add(cell);
+					queue.Enqueue((cell, false, 0));
+				}
+
 			// Without a remembered enemy there is no race to lose, so the claim has to be bounded by
-			// something else or it swallows the map. The cell cap also marks incomplete claim edges so
-			// optional territory details do not mistake a budget horizon for a real wall or door.
-			var claim = BuildTerritoryClaim(ownCells, enemyCells, world.Map.Contains, IsPassable, gate,
-				Info.TerritoryUnopposedRadius, Info.TerritoryCellCap);
+			// something else or it swallows the map.
+			var unopposedLimit = enemyCells.Count == 0 ? Math.Max(1, Info.TerritoryUnopposedRadius) : int.MaxValue;
+			var cap = Math.Max(1, Info.TerritoryCellCap);
+
+			// Where the walk ran out of budget rather than out of ground. This edge is an artefact of the
+			// bound, not a feature of the map, and reading it as one produced a "door" sixty cells wide
+			// with the rest of the map behind it - the outside of a circle is open in every direction.
 			horizon.Clear();
-			horizon.UnionWith(claim.Horizon);
-			territory.UnionWith(claim.Mine);
-			territoryEnemySnapshot = claim.Theirs;
-			territoryCorridorSnapshot = chokepointCorridors;
-			territoryDetailsDirty = true;
-			if (ShouldRefreshOptionalOutput(territoryDetailsRequested))
-				EnsureTerritoryDetails();
+
+			while (queue.Count > 0)
+			{
+				var (cell, isMine, dist) = queue.Dequeue();
+				if (dist >= unopposedLimit || claimed.Count >= cap)
+				{
+					if (isMine)
+						horizon.Add(cell);
+
+					continue;
+				}
+
+				foreach (var dir in CVec.Directions)
+				{
+					var next = cell + dir;
+					if (!world.Map.Contains(next) || !IsPassable(next) || gate.Contains(next) || !claimed.Add(next))
+						continue;
+
+					if (isMine)
+						mine.Add(next);
+					else
+						theirs.Add(next);
+
+					queue.Enqueue((next, isMine, dist + 1));
+				}
+			}
+
+			territory.UnionWith(mine);
+			BuildDoors(theirs, chokepointCorridors);
 		}
 
 		/// <summary>
@@ -3223,7 +3062,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public ZoneGateCorridor GetRegionGateCorridor(int corridorIndex)
 		{
 			EnsureBuilt();
-			return ResolveRegionGateCorridor(regionGateCorridors, corridorIndex);
+			return corridorIndex >= 0 && corridorIndex < regionGateCorridors.Count ? regionGateCorridors[corridorIndex] : null;
 		}
 
 		/// <summary>The resolved gate corridors bounding regions, indexed by <see cref="Zone.GateCorridorIndices"/>.</summary>
