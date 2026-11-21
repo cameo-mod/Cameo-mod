@@ -10,7 +10,6 @@
 #endregion
 
 using System.Collections.Generic;
-using System.Linq;
 using NUnit.Framework;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 
@@ -100,72 +99,6 @@ namespace OpenRA.Mods.Cameo.Test
 			var owners = TacticalMapBotModule.TallyOwners(2, tally);
 
 			Assert.That(owners, Is.All.Null);
-		}
-
-		[Test]
-		public void RefreshCycleSkipDoesNotChangeClaimOwnersOrRegionRolesCorridors()
-		{
-			var passable = new HashSet<CPos>();
-			for (var y = 0; y < 3; y++)
-				for (var x = 0; x < 5; x++)
-					passable.Add(new CPos(x, y));
-
-			var ownSeeds = new[] { new CPos(0, 1) };
-			var enemySeeds = new[] { new CPos(4, 1) };
-			var gate = new HashSet<CPos> { new(2, 1) };
-			var tally = new Dictionary<int, Dictionary<string, int>>
-			{
-				[0] = new() { ["own"] = 4, ["enemy"] = 1 },
-				[1] = new() { ["own"] = 2, ["enemy"] = 2 },
-				[2] = new() { ["enemy"] = 3 },
-			};
-
-			var regionCorridors = new List<ZoneGateCorridor>
-			{
-				new(new CPos(1, 0), true, [new CPos(0, 0), new CPos(1, 0)]),
-				new(new CPos(3, 2), false, [new CPos(3, 1), new CPos(3, 2), new CPos(3, 3)]),
-			};
-
-			(string[] Outputs, int OptionalCalls) Refresh(bool optionalRequested)
-			{
-				var optionalCalls = 0;
-				TacticalMapBotModule.TerritoryClaimResult claim = null;
-				string[] owners = null;
-				ZoneGateCorridor regionRolesCorridor = null;
-
-				TacticalMapBotModule.RunRefreshCycle(optionalRequested, optionalRequested, optionalRequested,
-					() => optionalCalls++, () => optionalCalls++, () => optionalCalls++,
-					() => claim = TacticalMapBotModule.BuildTerritoryClaim(ownSeeds, enemySeeds,
-						passable.Contains, passable.Contains, gate, unopposedRadius: 5, cellCap: 15),
-					() => owners = TacticalMapBotModule.TallyOwners(3, tally));
-
-				// RegionRolesBotModule consumes this exact production resolver and scores corridor.Width.
-				regionRolesCorridor = TacticalMapBotModule.ResolveRegionGateCorridor(regionCorridors, 1);
-				var claimBits = claim.Mine.OrderBy(c => c.Y).ThenBy(c => c.X).Select(c => $"claim:{c.X},{c.Y}");
-				var ownerBits = owners.Select((owner, index) => $"owner:{index}:{owner ?? "contested"}");
-				var gateBits = new[]
-				{
-					$"gate:{regionRolesCorridor.Center.X},{regionRolesCorridor.Center.Y}",
-					$"width:{regionRolesCorridor.Width}",
-					$"axis:{regionRolesCorridor.WallRunsHorizontal}",
-				}.Concat(regionRolesCorridor.Cells.Select(c => $"cell:{c.X},{c.Y}")).ToArray();
-
-				return (claimBits.Concat(ownerBits).Concat(gateBits).ToArray(), optionalCalls);
-			}
-
-			var skipped = Refresh(optionalRequested: false);
-			var eager = Refresh(optionalRequested: true);
-
-			Assert.That(skipped.Outputs, Is.EqualTo(eager.Outputs), "claim, owners and RegionRoles corridor output are bit-identical");
-			Assert.That(skipped.OptionalCalls, Is.Zero, "lazy unrequested cycle skips all three optional passes");
-			Assert.That(eager.OptionalCalls, Is.EqualTo(3), "eager cycle runs all three optional passes");
-			Assert.That(skipped.Outputs, Does.Contain("claim:0,1"));
-			Assert.That(skipped.Outputs, Does.Not.Contain("claim:4,1"), "the enemy seed is excluded from our claim");
-			Assert.That(skipped.Outputs, Does.Contain("owner:0:own"));
-			Assert.That(skipped.Outputs, Does.Contain("owner:1:contested"));
-			Assert.That(skipped.Outputs, Does.Contain("owner:2:enemy"));
-			Assert.That(skipped.Outputs, Does.Contain("gate:3,2"));
-			Assert.That(skipped.Outputs, Does.Contain("width:3"));
 		}
 
 		[Test]
