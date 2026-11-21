@@ -1496,7 +1496,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			}
 
 			// Opus ruling: the pull-back hold is capped by the tier's StandOffMaxTicks line. On expiry the squad is released to the
-			// normal regroup/rally-home path (the legacy retreat orders, no DismissSquad); the evaluator's re-engage cooldown keeps running.
+			// normal regroup/rally-home path (the legacy retreat orders, never a squad dismissal); the evaluator's re-engage cooldown keeps running.
 			if (SiegeEvaluatorBotModule.HoldExpired(owner.World.WorldTick, startTick, owner.SquadManager.SiegeHoldCapTicks()))
 			{
 				Retreat(owner, flee: true, rearm: true, repair: true);

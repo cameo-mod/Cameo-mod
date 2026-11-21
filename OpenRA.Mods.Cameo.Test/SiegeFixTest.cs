@@ -203,7 +203,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void S8_TheVerdictIsServedWithoutASwitch()
 		{
 			var serve = Section(Module(), "public SiegeVerdict VerdictFor(SquadCA squad, out CPos standOffCell)", "return cached.Verdict;");
-			Assert.That(serve, Does.Contain("if (IsTraitDisabled || !verdicts.TryGetValue(squad, out var cached))"));
+			Assert.That(serve, Does.Contain("if (!ServesVerdicts || !verdicts.TryGetValue(squad, out var cached))"));
 		}
 
 		// ---- S6 wiring: a siege retreat never dismisses ----

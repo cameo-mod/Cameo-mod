@@ -734,7 +734,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void H3TheRallyStateCountsAsRetreatingForLivenessAndIsNotQuiet()
 		{
 			var text = Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCA.cs");
-			Assert.That(text, Does.Contain("or AirFleeStateCA or StealthFleeStateCA or UnitsForProtectionFleeState or GroundUnitsRallyStateCA;"));
+			Assert.That(text, Does.Contain("or AirFleeStateCA or StealthFleeStateCA or UnitsForProtectionFleeState or GroundUnitsRallyStateCA\n\t\t\t\tor GroundUnitsSiegeRetreatStateCA;"));
 			Assert.That(Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCA.AggTeam.cs"),
 				Does.Contain("internal static bool AggTeamIsQuietState(IState state) => state is GroundUnitsIdleStateCA;"), "unchanged");
 			var rally = new GroundUnitsRallyStateCA(new RetreatRallyPlan());
