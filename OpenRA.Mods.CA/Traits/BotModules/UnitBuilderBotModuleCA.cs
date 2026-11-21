@@ -432,7 +432,14 @@ namespace OpenRA.Mods.CA.Traits
 		bool FairService => switchesActive && Info.FairProducerService && !ablateFairProducer.Off(player, AblationIds.FairProducer);
 
 		// ABLATE-01 hooks (DEV-only provider; absent in release = always on): one cached answer per row.
-		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights;
+		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth;
+
+		// PR-2 queue depth (fair path only): world ticks between this bot's last two passes. Round-robin makes it long;
+		// a single-slot queue is topped up while its loaded build time is shorter than this gap (QueueDepthCA).
+		// 0 until two passes were seen, which keeps the old "fill only an empty queue" rule on the first pass.
+		int lastPassTick = -1;
+		int visitGapTicks;
+		bool DepthOn => FairService && visitGapTicks > 0 && !ablateQueueDepth.Off(player, AblationIds.QueueDepth);
 		bool DerivedWeightsOn => Info.UseDerivedUnitWeights && !ablateDerivedWeights.Off(player, AblationIds.DerivedWeights);
 
 		// U2 (Sol EB513352): the intent ledger's coverage-retaining semantics arm
@@ -708,6 +715,9 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (ticks % (FeedbackTime + Info.UnitBuilderInterval) == 0)
 			{
+				visitGapTicks = lastPassTick < 0 ? 0 : world.WorldTick - lastPassTick;
+				lastPassTick = world.WorldTick;
+
 				UpdateComposition();
 
 				// U1 (Sol F1): one ephemeral reservation batch shared by the external
@@ -977,6 +987,12 @@ namespace OpenRA.Mods.CA.Traits
 			var start = UnitProducerServiceCA.ResumeIndex(keys, serviceCursorByCategory.GetValueOrDefault(category));
 			var offers = UnitProducerServiceCA.OfferBudget(queues.Count, maxQueues);
 
+			// PR-2: single-slot queues are topped up to cover the gap to this bot's next pass; extra items are
+			// paid from spare cash only, so the unpaid remainder of what is already queued is protected.
+			// Parallel-slot queues keep their own slots. Off (no gap yet, ablated) = the old empty-queue rule.
+			var depth = DepthOn;
+			var unpaidQueued = depth ? UnpaidQueuedCost() : 0L;
+
 			// P4: armed-infantry floor — in-pass emissions count toward it so one batch
 			// cannot overshoot; the census is one tick-cached scan, skipped when off.
 			var armedInfantryFloor = Info.CombatInfantryFloor;
@@ -993,7 +1009,10 @@ namespace OpenRA.Mods.CA.Traits
 				// a producer the budget stopped us from reaching; that one stays in rotation.
 				serviceCursorByCategory[category] = keys[index];
 
-				var freeSlots = LiveFreeSlots(queue);
+				var depthQueue = depth && queue is not IHasParallelQueueSlots;
+				var queuedItems = depthQueue ? queue.AllQueued().Count() : 0;
+				var loadedTicks = depthQueue ? LoadedBuildTicks(queue) : 0L;
+				var freeSlots = depthQueue ? QueueDepthCA.FreeSlots(queuedItems, loadedTicks, visitGapTicks) : LiveFreeSlots(queue);
 				if (freeSlots <= 0)
 					continue;
 
@@ -1007,6 +1026,11 @@ namespace OpenRA.Mods.CA.Traits
 					// Saturation lapses mid-fill: stop slotting the moment the bank drops below
 					// the bar. The reserved bank counts — emitted orders are spent cash.
 					if (saturated && !ProductionSaturationCA.Saturated(batch.BankLeft, BankSaturationThreshold))
+						break;
+
+					// PR-2: the queue (plus what this pass already ordered into it) covers the gap: stop.
+					var held = queuedItems + batch.PendingOf(queue);
+					if (depthQueue && QueueDepthCA.Covered(held, loadedTicks, visitGapTicks))
 						break;
 
 					// P4: below the armed-infantry floor this queue prefers the best
@@ -1094,7 +1118,8 @@ namespace OpenRA.Mods.CA.Traits
 					// Sol F2: an unaffordable pick retries the remaining candidates — the
 					// batch keeps the bank accounting so a cheaper feasible one can land.
 					var cost = Math.Max(0, queue.GetProductionCost(unit));
-					if (!batch.Affords(cost))
+					if (!batch.Affords(cost)
+						|| depthQueue && held > 0 && !QueueDepthCA.CashAdmits(batch.BankLeft, unpaidQueued, cost))
 					{
 						Reject();
 						continue;
@@ -1105,6 +1130,8 @@ namespace OpenRA.Mods.CA.Traits
 					NotifyStarted(name, queue.Info.Type);
 					counters.Record(unit);
 					batch.Reserve(queue, cost);
+					if (depthQueue)
+						loadedTicks += queue.GetBuildTime(unit, BuildableInfo.GetTraitForQueue(unit, queue.Info.Type));
 					SpendLimitHeadroom(batch, name);
 					if (isAircraft)
 					{
@@ -1124,6 +1151,29 @@ namespace OpenRA.Mods.CA.Traits
 
 		static int LiveFreeSlots(ProductionQueue queue) =>
 			queue is IHasParallelQueueSlots p ? p.AvailableSlots : (queue.AllQueued().Any() ? 0 : 1);
+
+		// PR-2: build time still loaded in a queue. An item that has not started keeps the placeholder
+		// RemainingTime of 1 until it reaches the head, so it counts its full build time instead.
+		static long LoadedBuildTicks(ProductionQueue queue)
+		{
+			long ticks = 0;
+			foreach (var item in queue.AllQueued())
+				ticks += item.Started ? item.RemainingTime : queue.GetBuildTime(item.ActorInfo, item.BuildableInfo);
+
+			return ticks;
+		}
+
+		// PR-2: cash the already queued unit items have not paid yet (RemainingCost, counted per item exactly as
+		// TF-2's UpdateMobileReserve does); depth items beyond the first must leave it untouched.
+		long UnpaidQueuedCost()
+		{
+			long unpaid = 0;
+			foreach (var queue in Info.UnitQueues.SelectMany(c => AIUtils.FindQueues(player, c)).Distinct())
+				foreach (var item in queue.AllQueued())
+					unpaid += item.RemainingCost;
+
+			return unpaid;
+		}
 
 		// U1: per-name cap headroom shared across the batch — UnitLimits counts only
 		// living actors; in-pass emissions spend the headroom the census cannot see.
