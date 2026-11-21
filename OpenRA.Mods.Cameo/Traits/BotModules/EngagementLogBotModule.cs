@@ -16,6 +16,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using OpenRA.FileSystem;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
@@ -316,9 +317,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			var tick = world.WorldTick;
-			if (tick >= nextSampleTick)
+			if (BotPeriod.CarryDue(ref nextSampleTick, tick, EngagementConstants.SampleIntervalTicks))
 			{
-				nextSampleTick = tick + EngagementConstants.SampleIntervalTicks;
 				SampleOwnUnits(tick);
 				UpdateDirectEntry();
 			}

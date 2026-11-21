@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -124,7 +125,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly World world;
 		readonly OpenRA.Player player;
 		readonly BotLeaseTable<Actor> table = new();
-		int pruneTicks;
+		int pruneDue; // STAGGER-06 D006: absolute due, 0 = not armed (first visit prunes, as F1 x0 = 0)
 		(int, int, int, int, int) lastSummary;
 
 		// Telemetry: Denied counts the claims the contract refused because another module held the unit — each one
@@ -219,10 +220,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (--pruneTicks > 0)
+			if (!BotPeriod.CarryDue(ref pruneDue, BotVisitClock.Of(bot).VisitTick, Info.PruneIntervalTicks))
 				return;
 
-			pruneTicks = Info.PruneIntervalTicks;
 			var (expired, gone) = table.Prune(world.WorldTick, IsGone);
 			Expired += expired;
 			Gone += gone;

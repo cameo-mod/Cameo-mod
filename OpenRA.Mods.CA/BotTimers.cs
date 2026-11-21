@@ -67,6 +67,9 @@ namespace OpenRA.Mods.CA
 		public static BotPeriod F4(int r, int k, int res)
 		{
 			var kk = Math.Max(1, k);
+			if (res < 0 || res >= kk)
+				throw new ArgumentOutOfRangeException(nameof(res), res, $"F4 residue must be in [0, {kk}).");
+
 			var t = r + 1;
 			var m = ((t - res) % kk + kk) % kk;
 			return new BotPeriod(m == 0 ? t : t + (kk - m), kk);
@@ -89,6 +92,24 @@ namespace OpenRA.Mods.CA
 
 		/// <summary>Restore form A (absolute due) or form R (remaining ticks at the load tick).</summary>
 		public static BotPeriod FromRemaining(int loadTick, int remaining, int k) => new(loadTick + Math.Max(1, remaining), Math.Max(1, k));
+
+		/// <summary>
+		/// Carry for a plain int due field (<c>if (WorldTick >= next) { next = WorldTick + K; run }</c> forms). A due of 0 or
+		/// less means "never armed": the first visit fires and the next deadline is v + K (identical to the old form at N = 1,
+		/// where due0 = max(r + 1, next0)); afterwards due advances by whole periods past v (coalesced).
+		/// </summary>
+		public static bool CarryDue(ref int due, int visitTick, int k)
+		{
+			var kk = Math.Max(1, k);
+			if (due <= 0)
+				due = visitTick;
+
+			if (visitTick < due)
+				return false;
+
+			due += ((visitTick - due) / kk + 1) * kk;
+			return true;
+		}
 
 		/// <summary>11.2 save form R: remaining = due - saveTick (may be zero or negative when overdue between visits).</summary>
 		public int SavedRemaining(int saveTick) => Due - saveTick;
@@ -117,6 +138,9 @@ namespace OpenRA.Mods.CA
 		/// <summary>True when the routine is due at visit v; advances the deadline past v.</summary>
 		public bool TryFire(int visitTick)
 		{
+			if (Period <= 0)
+				throw new InvalidOperationException("BotPeriod used before it was armed (default struct has no period).");
+
 			if (visitTick < Due)
 				return false;
 
