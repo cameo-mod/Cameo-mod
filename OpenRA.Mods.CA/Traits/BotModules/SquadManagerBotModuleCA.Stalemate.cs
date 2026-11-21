@@ -54,6 +54,10 @@ namespace OpenRA.Mods.CA.Traits
 		readonly StalemateStuckTrackerCA<SquadCA> diagnosticStuck = new();
 		long diagnosticHomeThirdSquared = -1;
 
+		// ADP-05: next scheduled slot tick of each emit stream (position, health); lives on the telemetry owner.
+		int diagnosticNextPositionEmit;
+		int diagnosticNextHealthEmit;
+
 		SquadManagerBotModuleCA StalemateOwner => stalemateCachedOwner ??= Player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>()
 			.FirstOrDefault(m => m.Info.StalemateBreakerEnabled) ?? this;
 
@@ -1196,11 +1200,19 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 			}
 
-			if (t % BotPassiveChannel.PositionIntervalTicks == 0 && t <= BotPassiveChannel.MaximumPositionTick)
-				DiagnosticUnitPositions(w, t);
+			// ADP-05 catch-up emit (DEV-only, read-only; manifest botpassive_emit=catchup). A bot that the
+			// round-robin scheduler visits less often than every tick never sees `t % interval == 0`, so each
+			// stream keeps its next slot tick and emits at the first visited tick t >= slot, then advances the
+			// slot by one interval. The row carries the SLOT tick (the writer requires multiples of the interval);
+			// the sample is taken at t. With every tick visited this equals the old modulo test exactly.
+			var emit = DiagnosticOwner;
+			if (DiagnosticEmitSchedule.TryTake(t, ref emit.diagnosticNextPositionEmit,
+				BotPassiveChannel.PositionIntervalTicks, BotPassiveChannel.MaximumPositionTick, out var positionSlot))
+				DiagnosticUnitPositions(w, positionSlot);
 
-			if (t % StalemateBreakerCA.HealthInterval == 0)
-				DiagnosticHealth(w, t);
+			if (DiagnosticEmitSchedule.TryTake(t, ref emit.diagnosticNextHealthEmit,
+				StalemateBreakerCA.HealthInterval, int.MaxValue / 2, out var healthSlot))
+				DiagnosticHealth(w, healthSlot, t);
 		}
 
 		IEnumerable<Actor> DiagnosticCombatUnits() => World.ActorsHavingTrait<AttackBase>()
@@ -1229,7 +1241,8 @@ namespace OpenRA.Mods.CA.Traits
 			w.TryEnqueueUnitPosition(t, roster, expectedCount, checksum);
 		}
 
-		void DiagnosticHealth(BotPassiveChannel w, int t)
+		// `slot` is the scheduled emit tick written to the row; `t` is the visited tick used for the windows.
+		void DiagnosticHealth(BotPassiveChannel w, int slot, int t)
 		{
 			var owner = DiagnosticOwner;
 			var leases = BotUnitLeases.Of(Player);
@@ -1262,7 +1275,7 @@ namespace OpenRA.Mods.CA.Traits
 			var provider = StalemateUrgency;
 			w.TryEnqueueHealth(new BotPassiveHealthSnapshot
 			{
-				Tick = t, IdleCombatUnits = idle, UnsquaddedCombatUnits = units.Count(a => !inSquad.Contains(a)),
+				Tick = slot, IdleCombatUnits = idle, UnsquaddedCombatUnits = units.Count(a => !inSquad.Contains(a)),
 				HomeThirdUnits = homeThird, CombatUnits = units.Count, StuckSquads = stuck,
 				RetreatsWindow = owner.diagnosticRetreatTicks.Count, KillsWindow = killsWindow,
 				Urgency = provider == null ? "unknown" : UrgencyName(provider.StalemateUrgency),

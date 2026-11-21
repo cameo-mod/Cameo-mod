@@ -35,6 +35,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules
 		public const int MaximumPositionChunkEntries = 256;
 		public const int MaximumPositionChunks = 16;
 		public const int PositionIntervalTicks = 250;
+
+		/// <summary>ADP-05: how unit_position and health rows are scheduled (manifest field botpassive_emit).</summary>
+		public const string EmitMode = "catchup";
 		public const int MaximumPositionTick = 50000;
 		public const int MaximumCandidateFailures = 4;
 		public const int MaximumWaveGroups = 3;
@@ -725,6 +728,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules
 				json.WriteNumber("overflow_count", overflows);
 				json.WriteNumber("missing_count", missing);
 				json.WriteNumber("last_sequence", last);
+				// ADP-05 header marker BOTPASSIVE_EMIT=catchup: unit_position and health rows carry the slot tick
+				// (a multiple of the interval) and were sampled at the first visited tick at or after it, so a bot
+				// that round-robin visits less often than every tick still emits every slot. DEV-only, read-only.
+				json.WriteString("botpassive_emit", EmitMode);
 				json.WriteEndObject();
 			}
 
