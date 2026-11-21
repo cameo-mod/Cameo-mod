@@ -2405,6 +2405,8 @@ ra1_soviets_flaktruck_flak_cannon:
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
 	Inherits@tracer: ^Tracer_Flak_Medium
+	Projectile: InstantHitWithFakeBullets
+		-Image:
 	ValidTargets: Ground, Water
 	Burst: 2
 	ReloadDelay: 5

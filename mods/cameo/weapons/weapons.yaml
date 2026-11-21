@@ -16536,9 +16536,10 @@ DefuseKit:
 # TRACER-01: Guard-Tower-style tapered streak instead of the 1-tick contrail line. Opt in per weapon with
 # `Inherits@tracer: ^Tracer_Flak_Medium` AFTER the ^Projectile_Flak_* inherit. Render only: the warhead still lands on the first tick.
 # Values are the Guard Tower streak (td_gdi_guardtower_highv). Per-weapon override of width/colour/length is allowed.
+# `-Image:` is NOT in this abstract template (a removal needs a parent that has the key: the template inherits nothing, so the ruleset load
+# fails). Each opting weapon carries `Projectile: InstantHitWithFakeBullets` + `-Image:` after its tracer inherit, where ^Projectile_Flak_* supplies Image.
 ^Tracer_Flak_Medium:
 	Projectile: InstantHitWithFakeBullets
-		-Image:
 		FakeBulletNumber: 1
 		FakeBulletSpawnInterval: 2
 		FakeBulletSpeed: 4000
