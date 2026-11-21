@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Activities;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using BotRng = OpenRA.Mods.CA.BotRng;
 using OpenRA.Mods.Common;
@@ -291,8 +292,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// the squad manager serves requests at.</summary>
 		public static int EscortRequestValue(int defenceValue, int floor) => Math.Max(Math.Max(1, defenceValue), floor);
 
-		int captureTicks;
-		int routeRecheckCountdown;
+		BotPeriod captureTicks; // STAGGER-06 F1
+		int routeRecheckDue; // STAGGER-06 E070: absolute due, 0 = not armed (F1 x0 = 0)
 		int repairTicks;
 		int nextRepairJob;
 		int housekeptTick = -1;
@@ -417,7 +418,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		protected override void TraitEnabled(Actor self)
 		{
 			// Avoid all AIs reevaluating on the same tick (both parents do this).
-			captureTicks = BotRng.For(player, nameof(EngineerBotModule)).Next(Info.MinimumCaptureDelay);
+			captureTicks = BotPeriod.F1(player.World.WorldTick, BotRng.For(player, nameof(EngineerBotModule)).Next(Info.MinimumCaptureDelay), Info.MinimumCaptureDelay);
 			repairTicks = BotRng.For(player, nameof(EngineerBotModule)).Next(Info.AssignRoleDelay);
 		}
 
@@ -463,9 +464,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				}
 			}
 
-			if (Info.RouteRecheckTicks > 0 && Info.MaxExposedRouteCells >= 0 && --routeRecheckCountdown <= 0)
+			if (Info.RouteRecheckTicks > 0 && Info.MaxExposedRouteCells >= 0 && BotPeriod.CarryDue(ref routeRecheckDue, BotVisitClock.Of(bot).VisitTick, Info.RouteRecheckTicks))
 			{
-				routeRecheckCountdown = Info.RouteRecheckTicks;
 				var tick = world.WorldTick;
 				var leases = BotUnitLeases.Of(player);
 				foreach (var (a, job) in assigned.ToList())
@@ -473,9 +473,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						Recheck(bot, leases, a, job, tick);
 			}
 
-			if (--captureTicks <= 0)
+			if (captureTicks.TryFire(BotVisitClock.Of(bot).VisitTick))
 			{
-				captureTicks = Info.MinimumCaptureDelay;
 				Housekeep(bot);
 				QueueCaptureOrders(bot);
 			}
