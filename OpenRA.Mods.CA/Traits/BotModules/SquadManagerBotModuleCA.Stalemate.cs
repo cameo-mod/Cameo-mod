@@ -488,7 +488,7 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 			}
 
-			if (!rotation.IsWinner(seatIndex, t, World.Players.Length))
+			if (!rotation.IsWinner(seatIndex, t, World.Players.Length, BotVisitClock.Of(bot).Elapsed))
 				return;
 
 			var deferred = Math.Max(0, t - rotation.PendingSince(seatIndex) - 1);
