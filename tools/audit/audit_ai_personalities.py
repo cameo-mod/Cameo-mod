@@ -176,6 +176,47 @@ def on_line(values: list[int]) -> bool:
     return all(abs(v - (values[0] + (values[-1] - values[0]) * i / n)) <= 0.5 for i, v in enumerate(values))
 
 
+def siege_ladder_failures() -> list[str]:
+    """SIEGE-FIX-01 S8 (DESIGN 19.1): the siege evaluator has no on/off switch, and its two graded knobs lie on one equal-step line
+    over the 11 tiers (noob = easiest minus one step): StandOffMaxTicks 3000 - 150 r, SiegeReengagePct 40 - 2 r, r = 0 (noob) .. 10
+    (cameogod), no zero endpoint. Min* is written for the easiest tier, Max* for cameogod (BotDifficultyLadder.Scale interpolates)."""
+    text = (ROOT / "mods" / "cameo" / "ai" / "ai.yaml").read_text(encoding="utf-8")
+    match = re.search(r"^\tSiegeEvaluatorBotModule:\n((?:\t\t.*\n|[ \t]*\n)+)", text, re.MULTILINE)
+    if not match:
+        return ["SiegeEvaluatorBotModule block not found in ai.yaml"]
+
+    block = match.group(1)
+    failures = []
+    if "BehaviourEnabled" in block:
+        failures.append("SiegeEvaluatorBotModule.BehaviourEnabled must not exist: no ladder tier may switch a feature off (SIEGE-FIX-01 S8)")
+
+    knobs = {}
+    for key in ("StandOffMaxTicksEasy", "StandOffMaxTicksHard", "SiegeReengagePctEasy", "SiegeReengagePctHard"):
+        found = re.search(rf"^\t\t{key}:[ \t]*(\d+)[ \t]*$", block, re.MULTILINE)
+        if not found:
+            failures.append(f"SiegeEvaluatorBotModule.{key} is not written in ai.yaml")
+        else:
+            knobs[key] = int(found.group(1))
+
+    if failures:
+        return failures
+
+    steps = 9  # easiest = rank 0 .. cameogod = rank 9; noob = rank -1
+    for name, lo, hi, base, per_rank in (
+        ("StandOffMaxTicks", knobs["StandOffMaxTicksEasy"], knobs["StandOffMaxTicksHard"], 3000, -150),
+        ("SiegeReengagePct", knobs["SiegeReengagePctEasy"], knobs["SiegeReengagePctHard"], 40, -2),
+    ):
+        # C# int arithmetic: min + ((max - min) * rank) / steps, truncated toward zero.
+        values = [lo + int(((hi - lo) * rank) / steps) for rank in range(-1, steps + 1)]
+        expected = [base + per_rank * r for r in range(0, 11)]
+        if values != expected:
+            failures.append(f"{name} tiers {values} != the ratified line {expected}")
+        if min(values) <= 0:
+            failures.append(f"{name} reaches zero or below: {values}")
+
+    return failures
+
+
 def difficulty_scale_failures() -> list[str]:
     """DESIGN §19.1: every per-tier number lies on one straight line in equal steps, and is written in
     every tier (a missing field falls back to a C# default and breaks the line silently)."""
@@ -492,6 +533,7 @@ def main() -> int:
                 failures.append(f"shared field set differs between {reference_name} and {name}")
 
     failures.extend(difficulty_scale_failures())
+    failures.extend(siege_ladder_failures())
     failures.extend(noob_failures(lines))
     failures.extend(scale_target_failures())
     failures.extend(tier_gate_failures())

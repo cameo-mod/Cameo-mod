@@ -107,7 +107,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 		static IEnumerable<Type> RetreatStates => new[] {
 			typeof(GroundUnitsFleeStateCA), typeof(NavyUnitsFleeStateCA), typeof(AirFleeStateCA),
-			typeof(StealthFleeStateCA), typeof(UnitsForProtectionFleeState) };
+			typeof(StealthFleeStateCA), typeof(UnitsForProtectionFleeState), typeof(GroundUnitsSiegeRetreatStateCA) };
 
 		[TestCaseSource(nameof(RetreatStates))]
 		public void ActualRetreatStateIsExcludedBeforeReadingActivityTargets(Type type)

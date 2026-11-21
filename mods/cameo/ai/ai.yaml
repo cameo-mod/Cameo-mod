@@ -5748,9 +5748,12 @@ Player:
 	# validates the remembered-defence inputs on the hard candidate.
 	SiegeEvaluatorBotModule:
 		RequiresCondition: genericbot
-		# CA-2b: false = telemetry only. Flip true on the A/B candidate only --
-		# stand-off/retreat orders then reach assault squads via EvaluateSiege.
-		BehaviourEnabled: false
+		# SIEGE-FIX-01 S8: the CA-2b BehaviourEnabled switch is removed (no tier may switch a feature off). The verdict reaches assault squads on all
+		# 11 genericbot tiers; its strength is the Min/Max ladder below (DESIGN 19.1, equal steps: noob 3000/40 .. cameogod 1500/20).
+		StandOffMaxTicksEasy: 2850
+		StandOffMaxTicksHard: 1500
+		SiegeReengagePctEasy: 38
+		SiegeReengagePctHard: 20
 		# CA-2c (§12.6 rule 5): retreat verdicts write a failed-siege memory into
 		# the region and later evaluations read the wall as heavier. Own A/B
 		# variable -- keep false while the CA-2b gate is measured.

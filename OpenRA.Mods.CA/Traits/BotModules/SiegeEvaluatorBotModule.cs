@@ -40,8 +40,21 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Minimum summed squad unit value worth evaluating — empty or token squads are noise.")]
 		public readonly int MinimumSquadValue = 500;
 
-		[Desc("CA-2b: feed the verdict back to assault squads through IBotSiegeAdvisor (stand-off / retreat). False = telemetry only.")]
-		public readonly bool BehaviourEnabled = false;
+		// SIEGE-FIX-01 S8 (Opus D1, user rule "no ladder tier may switch a feature off"): the CA-2b BehaviourEnabled switch is gone.
+		// The verdict is always served; its strength scales on one straight line (DESIGN 19.1), noob = easiest minus one equal step.
+		// Min* is the easiest tier, Max* the cameogod tier; BotDifficultyLadder.Scale interpolates by tier index (noob extrapolates).
+		// StandOffMaxTicks = 3000 - 150 r, SiegeReengagePct = 40 - 2 r, r = 0 (noob) .. 10 (cameogod): the stronger tier decides sooner.
+		[Desc("S2: longest a squad holds at the stand-off line, in ticks, at the easiest tier. After it the squad commits (the fight is predicted won).")]
+		public readonly int StandOffMaxTicksEasy = 2850;
+
+		[Desc("S2: the same bound at the cameogod tier.")]
+		public readonly int StandOffMaxTicksHard = 1500;
+
+		[Desc("S6: percent the squad's value must grow after a retreat verdict before it may re-engage, at the easiest tier.")]
+		public readonly int SiegeReengagePctEasy = 38;
+
+		[Desc("S6: the same percent at the cameogod tier.")]
+		public readonly int SiegeReengagePctHard = 20;
 
 		[Desc("CA-2c (§12.6 rule 5): a retreat verdict writes a failed-siege memory into the target",
 			"region and remembered failures inflate the obstacle value on later evaluations,",
@@ -67,10 +80,16 @@ namespace OpenRA.Mods.CA.Traits
 		IBotSiegeFailureMemory[] failureMemory;
 		readonly Dictionary<SquadCA, (SiegeVerdict Verdict, CPos StandOff)> verdicts = new();
 		readonly Dictionary<SquadCA, SiegeVerdict> lastVerdictBySquad = new();
+
+		// S2/S6 per-squad memory (hold timer, latch, re-engage base value); dropped with the squad.
+		readonly Dictionary<SquadCA, SiegeHold> holds = new();
 		int lastEvaluationTick = -1;
 
 		// QW-B: the evaluation tick within the interval; ClientIndex % interval (shared by map-side bots) unless the bot phase-offsets its timers.
 		int evaluationPhase = -1;
+
+		int StandOffMaxTicks => BotDifficultyLadder.Scale(Info.StandOffMaxTicksEasy, Info.StandOffMaxTicksHard, player, Info.StandOffMaxTicksHard);
+		int SiegeReengagePct => BotDifficultyLadder.Scale(Info.SiegeReengagePctEasy, Info.SiegeReengagePctHard, player, Info.SiegeReengagePctHard);
 
 		public SiegeEvaluatorBotModule(Actor self, SiegeEvaluatorBotModuleInfo info)
 			: base(info)
@@ -148,12 +167,18 @@ namespace OpenRA.Mods.CA.Traits
 				// commit on cleared area or overwhelming effective value -> retreat on loss.
 				// "Effective" is Versus-weighted: BotCombatPredictor.Predict with the
 				// remembered defences as the enemy set — one engagement authority.
+				var artilleryAttached = squadManagers.Any(m => m.Squads.Any(s =>
+					s.IsValid && s.Type == SquadCAType.Artillery && s.Parent == squad && s.Units.Count > 0));
+				var now = world.WorldTick;
 				string verdict;
 				var standOffCells = 0;
 				var verdictKind = SiegeVerdict.Advance;
 				var standOffCell = CPos.Zero;
 				if (covering.Length == 0)
+				{
 					verdict = obstacleValue > 0 ? "commit-no-defences(army-covered)" : "free-advance";
+					holds.Remove(squad);
+				}
 				else
 				{
 					var own = squad.Units.Where(u => u.Actor != null)
@@ -188,35 +213,24 @@ namespace OpenRA.Mods.CA.Traits
 						standOffCell = new CPos(hx, hy);
 					}
 
-					if (committed)
-					{
-						verdict = insideLine ? "overrun-line(commit anyway)" : "commit";
-					}
-					else if (!prediction.OwnWins)
-					{
-						verdict = "retreat(predicted-loss)";
-						verdictKind = SiegeVerdict.Retreat;
+					if (!holds.TryGetValue(squad, out var hold))
+						holds[squad] = hold = new SiegeHold();
 
-						// The failed siege writes the loss into the wall's region
-						// memory — once per retreat transition, not per pass spent
-						// pinned (a standing-off squad does not stack the count).
-						if (Info.SiegeMemoryEnabled &&
-							(!lastVerdictBySquad.TryGetValue(squad, out var prev) || prev != SiegeVerdict.Retreat))
-							foreach (var p in failureMemory)
-								p.RecordFailedSiege(nearest.Enemy, nearest.Cell, world.WorldTick);
-					}
-					else
-					{
-						verdict = insideLine ? "inside-defence-range(HOLD-FAIL)" : "stand-off";
-						verdictKind = SiegeVerdict.StandOff;
-					}
+					var wasRetreating = lastVerdictBySquad.TryGetValue(squad, out var prev) && prev == SiegeVerdict.Retreat;
+					verdictKind = Decide(prediction.OwnWins, committed, insideLine, artilleryAttached, squadValue, now,
+						StandOffMaxTicks, SiegeReengagePct, wasRetreating, hold, out verdict, out var newRetreat);
+
+					// The failed siege writes the loss into the wall's region
+					// memory — once per retreat transition, not per pass spent
+					// pinned (a standing-off squad does not stack the count).
+					if (newRetreat && Info.SiegeMemoryEnabled)
+						foreach (var p in failureMemory)
+							p.RecordFailedSiege(nearest.Enemy, nearest.Cell, now);
 				}
 
 				verdicts[squad] = (verdictKind, standOffCell);
 				lastVerdictBySquad[squad] = verdictKind;
 
-				var artilleryAttached = squadManagers.Any(m => m.Squads.Any(s =>
-					s.IsValid && s.Type == SquadCAType.Artillery && s.Parent == squad && s.Units.Count > 0));
 				// Log.Write direct: AIUtils.BotDebug is gated on Game.Settings.Debug.BotDebug,
 				// which the match harness does not set — the FransBotLog pattern.
 #if CAMEO_DEV_LOGGING
@@ -230,7 +244,10 @@ namespace OpenRA.Mods.CA.Traits
 			// Drop transition entries for squads that left evaluation (dissolved
 			// or below value floor) — the dict must not grow with squad churn.
 			foreach (var stale in lastVerdictBySquad.Keys.Where(k => !verdicts.ContainsKey(k)).ToArray())
+			{
 				lastVerdictBySquad.Remove(stale);
+				holds.Remove(stale);
+			}
 
 			// Heartbeat: distinguishes "module silent" from "no assault squads
 			// qualified" — a whole batch of silence means formation starves.
@@ -241,14 +258,88 @@ namespace OpenRA.Mods.CA.Traits
 #endif
 		}
 
-		// IBotSiegeAdvisor — serves the cached evaluation. Disabled or stale
-		// answers Advance so the state machine behaves exactly as without the
-		// module (CA-2b switch: BehaviourEnabled).
+		/// <summary>S2/S6 memory of one squad's siege: when the current stand-off hold began, whether it ended by timeout, and the value at the last retreat.</summary>
+		internal sealed class SiegeHold
+		{
+			public int StandOffSince = -1;
+			public bool TimedOut;
+			public int ReengageBase = -1;
+		}
+
+		/// <summary>
+		/// The verdict ladder for a squad that has remembered defences covering its target (pure, headless-testable).
+		/// Retreat: the fight is predicted lost, or the re-engage cooldown still holds (SiegeReengagePct growth since the retreat; an
+		/// overwhelming commit bypasses it). Advance: committed; or no artillery is attached (S1: a stand-off is held only while artillery
+		/// works the defences); or the hold timed out (S2: the predicted-won fight is taken, and stays taken until a Retreat).
+		/// StandOff: artillery attached, fight predicted won, hold not yet timed out.
+		/// </summary>
+		internal static SiegeVerdict Decide(bool ownWins, bool committed, bool insideLine, bool artilleryAttached, int squadValue, int now,
+			int standOffMaxTicks, int reengagePct, bool wasRetreating, SiegeHold hold, out string label, out bool newRetreat)
+		{
+			newRetreat = false;
+			var cooling = !committed && hold.ReengageBase >= 0 &&
+				(long)squadValue * 100 < (long)hold.ReengageBase * (100 + reengagePct);
+
+			if (!ownWins || cooling)
+			{
+				label = ownWins ? "retreat(reengage-cooldown)" : "retreat(predicted-loss)";
+				hold.StandOffSince = -1;
+				hold.TimedOut = false;
+				if (!wasRetreating)
+				{
+					hold.ReengageBase = squadValue;
+					newRetreat = true;
+				}
+
+				return SiegeVerdict.Retreat;
+			}
+
+			if (committed)
+			{
+				hold.StandOffSince = -1;
+				hold.TimedOut = false;
+				hold.ReengageBase = -1;
+				label = insideLine ? "overrun-line(commit anyway)" : "commit";
+				return SiegeVerdict.Advance;
+			}
+
+			hold.ReengageBase = -1;
+			if (hold.TimedOut)
+			{
+				label = "commit(stand-off-timeout)";
+				return SiegeVerdict.Advance;
+			}
+
+			if (!artilleryAttached)
+			{
+				hold.StandOffSince = -1;
+				label = "advance(no-artillery)";
+				return SiegeVerdict.Advance;
+			}
+
+			if (hold.StandOffSince < 0)
+				hold.StandOffSince = now;
+
+			if (now - hold.StandOffSince >= standOffMaxTicks)
+			{
+				hold.StandOffSince = -1;
+				hold.TimedOut = true;
+				label = "commit(stand-off-timeout)";
+				return SiegeVerdict.Advance;
+			}
+
+			label = insideLine ? "inside-defence-range(HOLD-FAIL)" : "stand-off";
+			return SiegeVerdict.StandOff;
+		}
+
+		// IBotSiegeAdvisor — serves the cached evaluation. A disabled trait or a squad
+		// without a cached evaluation answers Advance (no objection). There is no
+		// behaviour switch (SIEGE-FIX-01 S8): the verdict is always served, graded on the ladder.
+		// standOffCell is valid for StandOff and Retreat (the pull-back point on the stand-off line).
 		public SiegeVerdict VerdictFor(SquadCA squad, out CPos standOffCell)
 		{
 			standOffCell = CPos.Zero;
-			if (IsTraitDisabled || !Info.BehaviourEnabled ||
-				!verdicts.TryGetValue(squad, out var cached))
+			if (IsTraitDisabled || !verdicts.TryGetValue(squad, out var cached))
 				return SiegeVerdict.Advance;
 
 			standOffCell = cached.StandOff;

@@ -5,7 +5,7 @@
 # Arms: ctrl = previous master (no switches); all = groups A + B; half = group A only.
 # A trait key matches every instance of that trait in mods/cameo/ai/*.yaml (Trait or Trait@name), except the
 # instances named in `skip` (classic stays the untouched A/B reference).
-# Off on purpose: SiegeEvaluatorBotModule.BehaviourEnabled (lost its A/B, AI_MATCH_LOG ca2b), and the engineer safe
+# Off on purpose: the engineer safe
 # route v1 alone (lost its smoke) — v2 below replaces it.
 
 skip: [SquadManagerBotModuleCA@classic]

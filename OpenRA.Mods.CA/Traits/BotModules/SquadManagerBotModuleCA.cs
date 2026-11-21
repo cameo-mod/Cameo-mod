@@ -3170,7 +3170,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		internal static bool IsRetreatingForLiveness(SquadCA squad) =>
 			squad.FuzzyStateMachine?.CurrentState is GroundUnitsFleeStateCA or NavyUnitsFleeStateCA
-				or AirFleeStateCA or StealthFleeStateCA or UnitsForProtectionFleeState or GroundUnitsRallyStateCA;
+				or AirFleeStateCA or StealthFleeStateCA or UnitsForProtectionFleeState or GroundUnitsRallyStateCA
+				or GroundUnitsSiegeRetreatStateCA;
 
 		bool IsM13AssaultDraftable(UnitWposWrapper u, IBotUnitLeases leases) =>
 			!unitCannotBeOrdered(u.Actor) && IsDefenderDraftable(u, leases)

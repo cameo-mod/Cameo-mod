@@ -18,10 +18,10 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>No objection — the normal advance/engage path runs.</summary>
 		Advance,
 
-		/// <summary>Hold at <c>standOffCell</c> (max remembered defence range + margin) while artillery works.</summary>
+		/// <summary>Hold at <c>standOffCell</c> (max remembered defence range + margin) while artillery works; served only with artillery attached (SIEGE-FIX-01 S1) and for at most the tier's StandOffMaxTicks (S2).</summary>
 		StandOff,
 
-		/// <summary>Pull out — the projected trade loses (§12.6 rule 5).</summary>
+		/// <summary>Pull out — the projected trade loses (§12.6 rule 5), or the re-engage cooldown holds (S6). <c>standOffCell</c> is the pull-back point when no rally is chosen.</summary>
 		Retreat,
 	}
 
@@ -38,7 +38,7 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>
 		/// Per-tick verdict for one assault squad. Called every AttackMove tick —
 		/// implementations must be cheap (cache the evaluation, serve lookups).
-		/// <paramref name="standOffCell"/> is valid only for <see cref="SiegeVerdict.StandOff"/>.
+		/// <paramref name="standOffCell"/> is valid for <see cref="SiegeVerdict.StandOff"/> and <see cref="SiegeVerdict.Retreat"/>.
 		/// </summary>
 		SiegeVerdict VerdictFor(SquadCA squad, out CPos standOffCell);
 	}

@@ -2075,7 +2075,7 @@ above a value floor — stand-off cell on the `maxRange + StandOffMarginCells`
 line, `BotCombatPredictor.Predict` on the squad's own unit profiles vs the
 remembered defences' observed types for the "effective" check (4b), commit at
 `CommitRatioPercent` — and serves it through `IBotSiegeAdvisor` to the assault
-states when `BehaviourEnabled` is on (the CA-2b A/B variable). Rule 5's
+states (SIEGE-FIX-01 S8, 2026-11-21: the `BehaviourEnabled` switch was removed; the verdict is always served and its strength scales on the DESIGN 19.1 ladder). Rule 5's
 write-back landed as `IBotSiegeFailureMemory`: a retreat-verdict *transition*
 records one failed siege against the nearest covering defence's
 (owner, region) on `MasterAiBotModule` — `RegionMemory` is a per-publish
@@ -2083,8 +2083,8 @@ snapshot, so the durable count lives on the module and stamps onto each
 snapshot's `Region.FailedSiegeCount/LastFailedSiegeTick`; with
 `SiegeMemoryEnabled` the remembered failures inflate `obstacleValue`
 (`SiegeFailureWeightPercent` per failure inside `SiegeFailureMemoryTicks`),
-so the next plan reads the wall that beat it as heavier. Both flags default
-false — each is its own isolated A/B variable.
+so the next plan reads the wall that beat it as heavier. `SiegeMemoryEnabled`
+defaults false and stays its own isolated A/B variable.
 
 Donor to evaluate first: `FransRiskModel` + `FransGroundDefendForcePreservationGuard`.
 

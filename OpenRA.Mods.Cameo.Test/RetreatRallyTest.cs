@@ -696,7 +696,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(deactivate.IndexOf("if (handoff)", StringComparison.Ordinal), Is.GreaterThanOrEqualTo(0));
 			Assert.That(deactivate.IndexOf("if (handoff)", StringComparison.Ordinal), Is.LessThan(deactivate.IndexOf("DismissSquad(owner)", StringComparison.Ordinal)), "ChangeState calls the old Deactivate first");
 			Assert.That(Source("mods/CA/Traits/BotModules/Squads/SquadCA.cs"), Does.Not.Contain("RallyHandoff"), "L5: no field on the squad");
-			Assert.That(Count(GroundStates(), "new GroundUnitsFleeStateCA()"), Is.EqualTo(7), "the 7 legacy entries are unchanged");
+			Assert.That(Count(GroundStates(), "new GroundUnitsFleeStateCA()"), Is.EqualTo(6), "the 7 legacy entries minus the siege retreat, which SIEGE-FIX-01 S6 moved to GroundUnitsSiegeRetreatStateCA");
 		}
 
 		// ---- 16. H2 pin ----
@@ -724,8 +724,8 @@ namespace OpenRA.Mods.Cameo.Test
 
 			Assert.That(idle, Does.Contain("TryRetreatRally(owner, \"idle_engage\", out var plan)"));
 			Assert.That(idle, Does.Contain("TryRetreatRally(owner, site, out var plan)"), "the agg-core site keeps its regroup-expired reason");
-			Assert.That(Count(GroundStates(), "TryRetreatRally("), Is.EqualTo(3), "two idle sites and the Flee state");
-			Assert.That(Count(GroundStates(), "RetreatRallyNoteFlight("), Is.EqualTo(3));
+			Assert.That(Count(GroundStates(), "TryRetreatRally("), Is.EqualTo(4), "two idle sites, the Flee state and the siege retreat state (SIEGE-FIX-01 S6)");
+			Assert.That(Count(GroundStates(), "RetreatRallyNoteFlight("), Is.EqualTo(4));
 		}
 
 		// ---- 17. H3 pin ----

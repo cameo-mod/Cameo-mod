@@ -4852,6 +4852,8 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
 | NewProductionCashThreshold (extra factories above this cash) | 22000 | 20000 | 18000 | 16000 | 14000 | 12000 | 10000 | 8000 | 6000 | 4000 | 2000 |
 | MaximiseProductionCashRequirement (fill every queue above this cash) | 10500 | 9500 | 8500 | 7500 | 6500 | 5500 | 4500 | 3500 | 2500 | 1500 | 500 |
 | AdaptiveCounterWeight (% of combat picks that counter; rounded) | 0 | 5 | 10 | 15 | 20 | 25 | 30 | 35 | 40 | 45 | 50 |
+| SiegeEvaluator StandOffMaxTicks (longest stand-off hold; SIEGE-FIX-01 S2; ai.yaml Min 2850 easiest, Max 1500 cameogod) | 3000 | 2850 | 2700 | 2550 | 2400 | 2250 | 2100 | 1950 | 1800 | 1650 | 1500 |
+| SiegeEvaluator SiegeReengagePct (% squad value must grow after a retreat before re-engaging; SIEGE-FIX-01 S6; Min 38, Max 20) | 40 | 38 | 36 | 34 | 32 | 30 | 28 | 26 | 24 | 22 | 20 |
 
 Noob AI tier (NOOB-TIER-01 final ruling): one linear step below easiest (rank -1, extrapolated on the easiest..cameogod line). Where that step is impossible (below the field's floor) noob = easiest: RefineryLimit 1, HarvesterLimit 3, ProductionTypeLimit 1, ConstructionYardLimit 1. Insurance noob = 0 (outside the DynamicBotInsurance ladder). AdaptiveCounterWeight noob = 0. Existing tiers unchanged.
 
