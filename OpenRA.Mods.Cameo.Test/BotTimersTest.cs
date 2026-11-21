@@ -492,6 +492,48 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void DisabledGapFreezesACallCountedTimerLikeTheOldCounter()
+		{
+			// The module is not ticked while disabled (RunModules skips it): the old counter does not move.
+			bool Disabled(int t) => (t >= 100 && t < 190) || (t >= 400 && t < 403);
+
+			foreach (var k in new[] { 25, 150 })
+				foreach (var x0 in new[] { 0, 7, k })
+				{
+					var old = new List<int>();
+					var x = x0;
+					for (var t = 1; t <= 2000; t++)
+					{
+						if (Disabled(t))
+							continue;
+						if (--x > 0)
+							continue;
+						x = k;
+						old.Add(t);
+					}
+
+					var p = BotPeriod.F1(0, x0, k);
+					var now = new List<int>();
+					for (var t = 1; t <= 2000; t++)
+					{
+						if (Disabled(t))
+							continue;
+						if (p.TryFire(t, 1))
+							now.Add(t);
+					}
+
+					Assert.That(now, Is.EqualTo(old), $"gap K={k} x0={x0}");
+				}
+		}
+
+		[Test]
+		public void ResidueHitRejectsAResidueOutsideThePeriod()
+		{
+			Assert.That(() => BotPeriod.ResidueHit(10, 1, 25, 25), Throws.InstanceOf<ArgumentOutOfRangeException>());
+			Assert.That(() => BotPeriod.ResidueHit(10, 1, 25, -1), Throws.InstanceOf<ArgumentOutOfRangeException>());
+		}
+
+		[Test]
 		public void CarryDueMatchesTheOldDueFormAtN1()
 		{
 			foreach (var k in new[] { 0, 1, 30, 50, 250 })

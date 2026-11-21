@@ -158,7 +158,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (!scanTicks.TryFire(BotVisitClock.Of(bot).VisitTick))
+			if (!scanTicks.TryFire(BotVisitClock.Of(bot)))
 				return;
 
 			if (!providersSearched)

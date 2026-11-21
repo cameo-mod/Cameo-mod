@@ -111,7 +111,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (!repairScanTicks.TryFire(BotVisitClock.Of(bot).VisitTick))
+			if (!repairScanTicks.TryFire(BotVisitClock.Of(bot)))
 				return;
 			QueueRepairOrders(bot);
 		}

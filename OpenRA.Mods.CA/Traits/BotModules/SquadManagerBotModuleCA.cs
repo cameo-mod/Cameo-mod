@@ -3049,7 +3049,7 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var n in notifyIdleBaseUnits)
 				n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
 
-			if (attackForceTicks.TryFire(BotVisitClock.Of(bot).VisitTick))
+			if (attackForceTicks.TryFire(BotVisitClock.Of(bot)))
 			{
 				foreach (var s in Squads)
 					s.Units.RemoveAll(u => unitCannotBeOrdered(u.Actor));
@@ -3090,7 +3090,7 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
-			if (assignRolesTicks.TryFire(BotVisitClock.Of(bot).VisitTick))
+			if (assignRolesTicks.TryFire(BotVisitClock.Of(bot)))
 			{
 				unitsHangingAroundTheBase.RemoveAll(u => unitCannotBeOrdered(u.Actor));
 				activeUnits.RemoveAll(unitCannotBeOrdered);

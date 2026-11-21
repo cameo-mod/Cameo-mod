@@ -101,7 +101,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (minCaptureDelayTicks.TryFire(BotVisitClock.Of(bot).VisitTick))
+			if (minCaptureDelayTicks.TryFire(BotVisitClock.Of(bot)))
 			{
 				QueueCaptureOrders(bot);
 			}
