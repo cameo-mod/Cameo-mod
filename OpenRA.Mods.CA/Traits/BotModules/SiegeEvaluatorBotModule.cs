@@ -256,8 +256,9 @@ namespace OpenRA.Mods.CA.Traits
 
 					// The failed siege writes the loss into the wall's region
 					// memory — once per retreat transition, not per pass spent
-					// pinned (a standing-off squad does not stack the count).
-					if (newRetreat && Info.SiegeMemoryEnabled)
+					// pinned (a standing-off squad does not stack the count). Opus ruling on Haiku D89D4D72: an army-outweighs retreat is
+					// NOT a defence failure of the region, so it never writes siegeMem; it keeps only the re-engage cooldown.
+					if (WritesFailedSiege(newRetreat, Info.SiegeMemoryEnabled, prediction.OwnWins, armyOutweighs))
 						foreach (var p in failureMemory)
 							p.RecordFailedSiege(nearest.Enemy, nearest.Cell, now);
 				}
@@ -304,6 +305,14 @@ namespace OpenRA.Mods.CA.Traits
 			// What Decide said last pass (not what was served): the retreat-transition test must not depend on the held verdict.
 			public SiegeVerdict? LastRaw;
 		}
+
+		/// <summary>
+		/// Whether a retreat transition writes the regional failed-siege memory (pure). Only a DEFENCE failure does: when the
+		/// fight is predicted won against the defences and the retreat comes from the remembered army outweighing the squad, the
+		/// region's defences did not beat us, so nothing is written (Opus ruling on Haiku D89D4D72). The cooldown still applies.
+		/// </summary>
+		internal static bool WritesFailedSiege(bool newRetreat, bool memoryEnabled, bool ownWins, bool armyOutweighs) =>
+			newRetreat && memoryEnabled && !(ownWins && armyOutweighs);
 
 		/// <summary>
 		/// S3 hysteresis (pure). Serve <paramref name="raw"/> at once on the first evaluation, when <paramref name="bypass"/> is set, or when the

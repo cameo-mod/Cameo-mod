@@ -464,6 +464,24 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(Module(), Does.Contain("CoversApproach(d.Cell, d.MaxRangeCells + Info.StandOffMarginCells, squadCell, targetCell)"));
 		}
 
+		// Opus ruling on Haiku D89D4D72: siegeMem is the region's DEFENCE failure memory; an army-outweighs retreat leaves it unchanged.
+		[TestCase(true, true, true, false, ExpectedResult = true, TestName = "defence retreat writes")]
+		[TestCase(true, true, false, false, ExpectedResult = true, TestName = "lost prediction writes")]
+		[TestCase(true, true, false, true, ExpectedResult = true, TestName = "lost prediction with army still writes")]
+		[TestCase(true, true, true, true, ExpectedResult = false, TestName = "army-outweighs retreat leaves siegeMem unchanged")]
+		[TestCase(false, true, false, false, ExpectedResult = false, TestName = "no retreat transition writes nothing")]
+		[TestCase(true, false, false, false, ExpectedResult = false, TestName = "memory disabled writes nothing")]
+		public bool OnlyADefenceFailureWritesTheFailedSiegeMemory(bool newRetreat, bool memoryEnabled, bool ownWins, bool armyOutweighs) =>
+			SiegeEvaluatorBotModule.WritesFailedSiege(newRetreat, memoryEnabled, ownWins, armyOutweighs);
+
+		[Test]
+		public void TheFailedSiegeWriteGoesThroughTheGuard()
+		{
+			var module = Module();
+			Assert.That(module, Does.Contain("if (WritesFailedSiege(newRetreat, Info.SiegeMemoryEnabled, prediction.OwnWins, armyOutweighs))"));
+			Assert.That(module, Does.Not.Contain("if (newRetreat && Info.SiegeMemoryEnabled)"));
+		}
+
 		[Test]
 		public void TheEvaluatorKeepsItsPerSquadMemoryBounded()
 		{
