@@ -9,6 +9,7 @@
  */
 #endregion
 
+using System;
 using System.Linq;
 using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
@@ -59,11 +60,14 @@ namespace OpenRA.Mods.Cameo.Traits
 		/// <summary>Essentials (conyard, refinery, power, first factory) always pass; everything else yields to either vote.</summary>
 		public static bool Holds(bool essential, bool cashPoorPaused, bool armyCountHolds) => !essential && (cashPoorPaused || armyCountHolds);
 
-		/// <summary>Class C scan clock; preserve the exact remaining delay across a disabled interval.</summary>
-		public static int PauseScan(ref BotCooldown cooldown, int tick) => cooldown.Remaining(tick);
+		/// <summary>Freeze only ticks spent disabled; a visit later in the transition tick has already counted.</summary>
+		public static int PauseScan(int transitionTick, int lastVisitTick) => Math.Max(transitionTick, lastVisitTick + 1);
 
-		public static void ResumeScan(ref BotCooldown cooldown, int tick, int remaining) =>
-			cooldown = BotCooldown.FromRemaining(tick, remaining);
+		public static void ResumeScan(ref BotCooldown cooldown, int tick, int disabledFromTick)
+		{
+			if (disabledFromTick >= 0)
+				cooldown.Freeze(Math.Max(0, tick - disabledFromTick));
+		}
 
 		public static bool ShouldScan(ref BotCooldown cooldown, int visitTick, int interval)
 		{
@@ -91,8 +95,9 @@ namespace OpenRA.Mods.Cameo.Traits
 		bool hasUnitProducer;
 		int armyUnits;
 		BotCooldown scanCooldown;
-		int pausedScanRemaining;
-		bool scanPaused;
+		int disabledFromTick = -1;
+		int lastBotTick;
+		bool scanStarted;
 
 		public ArmyFirstBotModule(ArmyFirstBotModuleInfo info, ActorInitializer init)
 			: base(info)
@@ -118,17 +123,15 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		protected override void TraitDisabled(Actor self)
 		{
-			pausedScanRemaining = ArmyFirstEval.PauseScan(ref scanCooldown, self.World.WorldTick);
-			scanPaused = true;
+			disabledFromTick = scanStarted
+				? ArmyFirstEval.PauseScan(self.World.WorldTick, lastBotTick)
+				: -1;
 		}
 
 		protected override void TraitEnabled(Actor self)
 		{
-			if (scanPaused)
-			{
-				ArmyFirstEval.ResumeScan(ref scanCooldown, self.World.WorldTick, pausedScanRemaining);
-				scanPaused = false;
-			}
+			ArmyFirstEval.ResumeScan(ref scanCooldown, self.World.WorldTick, disabledFromTick);
+			disabledFromTick = -1;
 		}
 
 		void IBotTick.BotTick(IBot bot)
@@ -137,8 +140,10 @@ namespace OpenRA.Mods.Cameo.Traits
 				return;
 
 			var visitTick = BotVisitClock.Of(bot).VisitTick;
+			lastBotTick = visitTick;
 			if (!ArmyFirstEval.ShouldScan(ref scanCooldown, visitTick, info.ScanInterval))
 				return;
+			scanStarted = true;
 
 			var world = bot.Player.World;
 
