@@ -178,6 +178,9 @@ namespace OpenRA.Mods.CA.Traits
 		/// PROD-IDLE G1: the overflow line. The tier's BotLimits.OverflowCash (12000 - 800 r) wins when the
 		/// profile writes it (non-negative); otherwise the carrier's own value. The policy trait stays the
 		/// on/off scope, so a bot without the carrier (classic) never arms the rung whatever its profile says.
+		/// The fallback is deliberately fail-OPEN, unlike ArmyShareTargetPermille and ProductionCashReserve (unset =
+		/// held): the overflow rung only converts surplus bank into production, so an unset line keeps the legacy
+		/// carrier value (the pre-G1 behaviour) instead of stalling spend. All 11 tiers write the line.
 		/// </summary>
 		public static int OverflowLine(int tierLine, int carrierLine) => tierLine >= 0 ? tierLine : carrierLine;
 
