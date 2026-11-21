@@ -154,6 +154,70 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(gap.First(f => f > 300) - noGap.First(f => f > 300), Is.EqualTo(100));
 		}
 
+		// B044 / B045: the UnitBuilder BotTick state machine, the two old counters against two BotCallPeriod. Each tick is in
+		// one of three states (0 free, 1 base-builder pause, 2 foreign pause); a state lasts 1..120 ticks. The foreign pause
+		// returns before either counter; the base-builder pause counts the episode counter; a free call resets the episode
+		// counter (`= default` for the new form) and counts the build counter.
+		[Test]
+		public void N1_UnitBuilderPauseStateMachine_MatchesTheOldCounters()
+		{
+			foreach (var seed in new[] { 3, 11, 999 })
+			{
+				foreach (var k in new[] { 30, 35, 40 })
+				{
+					var oldOpen = new List<int>();
+					var oldBuild = new List<int>();
+					var newOpen = new List<int>();
+					var newBuild = new List<int>();
+					var openingDefenseTicks = 0;
+					var ticks = 0;
+					var openCalls = new BotCallPeriod();
+					var buildCalls = new BotCallPeriod();
+					var state = (uint)seed;
+					var mode = 0;
+					var left = 0;
+					for (var t = 1; t <= Horizon; t++)
+					{
+						if (left == 0)
+						{
+							state = unchecked(state * 1103515245u + 12345u);
+							mode = (int)((state >> 16) % 3);
+							left = 1 + (int)((state >> 8) % 120);
+						}
+
+						left--;
+						if (mode == 2)
+							continue;
+
+						if (mode == 1)
+						{
+							if (++openingDefenseTicks % k == 0)
+								oldOpen.Add(t);
+
+							if (openCalls.Call(t, 1, k))
+								newOpen.Add(t);
+
+							continue;
+						}
+
+						openingDefenseTicks = 0;
+						openCalls = default;
+						ticks++;
+						if (ticks % k == 0)
+							oldBuild.Add(t);
+
+						if (buildCalls.Call(t, 1, k))
+							newBuild.Add(t);
+					}
+
+					Assert.That(newOpen, Is.EqualTo(oldOpen), $"opening defence seed={seed} K={k}");
+					Assert.That(newBuild, Is.EqualTo(oldBuild), $"build sweep seed={seed} K={k}");
+					Assert.That(oldOpen.Count, Is.GreaterThan(0), $"the test must exercise the opening-defence counter, seed={seed} K={k}");
+					Assert.That(oldBuild.Count, Is.GreaterThan(0), $"the test must exercise the build counter, seed={seed} K={k}");
+				}
+			}
+		}
+
 		[Test]
 		public void DefaultStruct_IsUnarmedUntilTheFirstCall()
 		{
