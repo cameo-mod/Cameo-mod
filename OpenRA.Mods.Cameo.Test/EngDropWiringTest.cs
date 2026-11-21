@@ -42,7 +42,7 @@ namespace OpenRA.Mods.Cameo.Test
 			IBotCaptureTransportProvider provider = legacy;
 			var none = new List<Actor>();
 			Assert.That(provider.CanStartCaptureRun(none, none, DropConstraints.None), Is.False);
-			Assert.That(provider.TryRequestConstrainedCaptureRun(null, none, none, DropConstraints.None, false, out var runIdentity), Is.False);
+			Assert.That(provider.TryRequestConstrainedCaptureRun(null, none, none, DropConstraints.None, false, null, out var runIdentity), Is.False);
 			Assert.That(runIdentity, Is.Null);
 			Assert.That(provider.RequestAbort(null, "transport:1#1", null, "test"), Is.False);
 			Assert.That(provider.TryPlanCaptureRoute(none, none, DropConstraints.None, out var route), Is.False, "no planned route = no Trigger A");

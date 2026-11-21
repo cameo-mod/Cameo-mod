@@ -54,10 +54,12 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>
 		/// ENGDROP: the run request with hard exclusion constraints. Commit revalidates a stale readiness answer. queueProduction false (Trigger A) = existing craft or a refusal that
 		/// leaves nothing behind; true (a successful Trigger B roll) may request a transport on an appropriate no-craft refusal.
-		/// runIdentity names this run's generation for <see cref="RequestAbort"/> and is null on refusal.
+		/// runIdentity names this run's generation for <see cref="RequestAbort"/> and is null on refusal. vettedRoute (Trigger A) is the journey
+		/// <see cref="TryPlanCaptureRoute"/> returned for these very passengers and targets: the commit is refused unless the craft it would use plans
+		/// exactly that journey now (the vetted route is bound to the committed passengers, craft and plan); null = no binding (Trigger B).
 		/// </summary>
 		bool TryRequestConstrainedCaptureRun(IBot bot, IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets,
-			DropConstraints constraints, bool queueProduction, out string runIdentity)
+			DropConstraints constraints, bool queueProduction, IReadOnlyList<CPos> vettedRoute, out string runIdentity)
 		{
 			runIdentity = null;
 			return false;

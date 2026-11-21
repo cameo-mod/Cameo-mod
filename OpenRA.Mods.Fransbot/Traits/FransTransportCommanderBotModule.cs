@@ -329,6 +329,7 @@ namespace OpenRA.Mods.Common.Traits
 
 			// CAMEO-LOCAL: ENGDROP - hard exclusion geometry of this run, its generation (RequestAbort identity) and the one-shot abort flag.
 			public DropConstraints Constraints;
+			public bool NoProduction; // Trigger A: this run never requests a transport build, from any caller
 			public int RunGeneration;
 			public bool AbortRequested;
 			public readonly int MissionStartedTick;
@@ -1053,7 +1054,7 @@ namespace OpenRA.Mods.Common.Traits
 		/// <summary>The run admission. queueProduction false = ENGDROP Trigger A: an existing craft or a refusal, never a build.</summary>
 		bool TryRequestCaptureRunCore(
 			IBot bot, IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets, bool queueProduction,
-			DropConstraints constraints = null)
+			DropConstraints constraints = null, IReadOnlyList<CPos> vettedRoute = null)
 		{
 			using var _ = BotIssuer.IssueAs(IssuerName);
 			if (bot == null || passengers == null || targets == null ||
@@ -1083,6 +1084,13 @@ namespace OpenRA.Mods.Common.Traits
 				reusableRoundTrip: false, out var existing) || existing != null)
 				return false;
 
+			// CAMEO-LOCAL: ENGDROP - bind the route Trigger A vetted to this commit: the craft the commit would use must plan exactly that
+			// journey now, else the run is refused before any state or lease is touched.
+			if (vettedRoute != null &&
+				(!FindStartableCraft(passengers, targets, constraints ?? DropConstraints.None, out var vetCraft, out var vetPlan) ||
+				PlanJourney(vetCraft, vetPlan) is not { } vetJourney || !vetJourney.SequenceEqual(vettedRoute)))
+				return false;
+
 			// §19.6 order-gate compatibility: whoever drives a unit must hold its lease, so each leg's
 			// lease moves from the consumer (the seam's Capture claim) to this module for the ride —
 			// boarding orders then count as owned. The handoff is all-or-nothing so the seam's
@@ -1110,6 +1118,7 @@ namespace OpenRA.Mods.Common.Traits
 				RunTargetByPassenger = legs.ToDictionary(l => l.Passenger, l => l.Target),
 				RunMissionId = $"transport:{legs[0].Passenger.ActorID}",
 				Constraints = constraints, // CAMEO-LOCAL: ENGDROP
+				NoProduction = !queueProduction,
 				RunGeneration = ++runGeneration
 			};
 
@@ -1211,20 +1220,26 @@ namespace OpenRA.Mods.Common.Traits
 		// CAMEO-LOCAL: ENGDROP - constrained run requests, side-effect-free readiness and RequestAbort (see the ENGDROP block below).
 		bool IBotCaptureTransportProvider.CanStartCaptureRun(IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets,
 			DropConstraints constraints) =>
-			CanStartConstrainedRun(passengers, targets, constraints);
+			AsSelf(() => CanStartConstrainedRun(passengers, targets, constraints));
 
 		bool IBotCaptureTransportProvider.TryPlanCaptureRoute(IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets,
 			DropConstraints constraints, out IReadOnlyList<CPos> route) =>
-			TryPlanConstrainedRoute(passengers, targets, constraints, out route);
+			TryPlanConstrainedRouteAsSelf(passengers, targets, constraints, out route);
+
+		bool TryPlanConstrainedRouteAsSelf(IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets, DropConstraints constraints, out IReadOnlyList<CPos> route)
+		{
+			using var _ = BotIssuer.IssueAs(IssuerName);
+			return TryPlanConstrainedRoute(passengers, targets, constraints, out route);
+		}
 
 		bool IBotCaptureTransportProvider.TryRequestConstrainedCaptureRun(IBot bot, IReadOnlyList<Actor> passengers,
-			IReadOnlyList<Actor> targets, DropConstraints constraints, bool queueProduction, out string runIdentity)
+			IReadOnlyList<Actor> targets, DropConstraints constraints, bool queueProduction, IReadOnlyList<CPos> vettedRoute, out string runIdentity)
 		{
 			runIdentity = null;
 			if (passengers == null || targets == null || passengers.Count == 0 || passengers.Count != targets.Count)
 				return false;
 
-			var accepted = AsSelf(() => TryRequestCaptureRunCore(bot, passengers, targets, queueProduction, constraints ?? DropConstraints.None));
+			var accepted = AsSelf(() => TryRequestCaptureRunCore(bot, passengers, targets, queueProduction, constraints ?? DropConstraints.None, vettedRoute));
 			if (accepted && missions.TryGetValue(passengers[0], out var mission))
 				runIdentity = RunIdentity(mission);
 
@@ -3238,6 +3253,9 @@ namespace OpenRA.Mods.Common.Traits
 
 		void RequestBestTransport(IBot bot, TransportMission mission, bool landPathAvailable)
 		{
+			if (mission.NoProduction) // CAMEO-LOCAL: ENGDROP - a Trigger A run never builds a craft, whichever path asks
+				return;
+
 			if (playerResources == null ||
 				playerResources.GetCashAndResources() < Info.MinimumCashForTransportProduction ||
 				world.WorldTick < mission.NextProductionRequestTick)

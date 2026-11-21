@@ -244,6 +244,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"target area, route and landing samples do not fit the 256-cell table).")]
 		public readonly int DropRouteSamples = 64;
 
+		[Desc("ENGDROP Trigger A: a target whose route was planned (or refused) is not planned again for this many ticks (the plan runs a path finder).")]
+		public readonly int DropPlanRetryTicks = 100;
+
 		[Desc("TC-2e (AI_ARCHITECTURE §12.17): yield a capture target an outranking allied bot already claims",
 			"(published on the team blackboard — lower ClientIndex wins), and stand an in-flight capture down",
 			"when an outranking ally's claim lands on its cell. Inert in 1v1 — no allied broadcasts exist.")]
@@ -1118,10 +1121,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>The run's hard exclusion geometry from the same memory: anti-air discs for aircraft, ground discs for every landing and target.</summary>
-		DropConstraints BuildDropConstraints() =>
-			new(AreaThreats().Take(256).Select(th => new DropExclusion(world.Map.CenterOfCell(th.Cell),
-				WDist.FromCells(Math.Max(1, th.RangeCells)).Length, th.AntiAir ? DropExclusionKind.AntiAir : DropExclusionKind.Ground)),
-				world.WorldTick);
+		DropConstraints BuildDropConstraints() => ConstraintsFor(AreaThreats(), world.Map.CenterOfCell, world.WorldTick);
+
+		/// <summary>Most exclusion zones a run carries. More remembered threats than this and the geometry would be clipped (a clipped zone is a hole
+		/// the craft may cross), so there are NO constraints: null, and Trigger A refuses.</summary>
+		internal const int MaxDropZones = 256;
+
+		internal static DropConstraints ConstraintsFor(IReadOnlyList<AreaThreat> threats, Func<CPos, WPos> centreOf, int tick) =>
+			threats.Count > MaxDropZones
+				? null
+				: new DropConstraints(threats.Select(th => new DropExclusion(centreOf(th.Cell),
+					WDist.FromCells(Math.Max(1, th.RangeCells)).Length, th.AntiAir ? DropExclusionKind.AntiAir : DropExclusionKind.Ground)), tick);
+
+		/// <summary>Trigger A may plan a target's route again only DropPlanRetryTicks after the last plan (or refusal).</summary>
+		internal static bool PlanDue(int now, int lastPlanTick, int retryTicks) => lastPlanTick <= 0 || now - lastPlanTick >= retryTicks;
+
+		readonly Dictionary<uint, int> dropPlanTick = [];
 
 		/// <summary>DESIGN 19.5: the engineer owner is omniscient as a whole, so target choice reads the world as the legacy loop does.</summary>
 		List<Actor> DropTargets(List<Actor> capturers)
@@ -1166,10 +1181,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (pool.Count == 0)
 				return false;
 
-			foreach (var first in pool
+			// Trigger A: a target whose area holds remembered defence, army or anti-air cannot qualify, so it must not use up one of the few tries.
+			var ranked = pool
 				.OrderByDescending(t => RankScore(t.GetSellValue(), (t.Location - capturers[0].Location).Length, 0, 0))
 				.ThenBy(t => t.ActorID)
-				.Take(Math.Max(1, Info.CaptureTargetTries)))
+				.AsEnumerable();
+			if (opportunity)
+				ranked = ranked.Where(t => AreaMemory.Assess(t.Location, AvoidanceCells, [], null, world.WorldTick, Info.DropFreshTicks).ThreatValue == 0);
+
+			foreach (var first in ranked.Take(Math.Max(1, Info.CaptureTargetTries)))
 			{
 				var crew = capturers.OrderBy(c => (c.CenterPosition - first.CenterPosition).LengthSquared).ThenBy(c => c.ActorID).ToList();
 				if (opportunity)
@@ -1196,8 +1216,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// </summary>
 		bool TryOpportunityRun(IBot bot, IBotUnitLeases leases, List<Actor> crew, Actor target, IBotCaptureTransportProvider provider)
 		{
+			if (dropPlanTick.TryGetValue(target.ActorID, out var lastPlan) && !PlanDue(world.WorldTick, lastPlan, Info.DropPlanRetryTicks))
+				return false;
+
+			if (dropPlanTick.Count > 64)
+				dropPlanTick.Clear();
+
+			dropPlanTick[target.ActorID] = Math.Max(1, world.WorldTick);
+
 			var constraints = BuildDropConstraints();
-			if (!provider.TryPlanCaptureRoute([crew[0]], [target], constraints, out var journey))
+			if (constraints == null || !provider.TryPlanCaptureRoute([crew[0]], [target], constraints, out var journey))
 				return false;
 
 			var samples = VisibilityStamps.SampleRoute(journey, Info.DropRouteSamples);
@@ -1205,7 +1233,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (!DropArea(target, samples).Undefended)
 				return false;
 
-			return TryTransportRun(bot, leases, crew, target, [target], provider, allowProduction: false, constraints, opportunity: true, samples) > 0;
+			return TryTransportRun(bot, leases, crew, target, [target], provider, allowProduction: false, constraints, opportunity: true, samples, journey) > 0;
 		}
 
 		/// <summary>Re-check each in-flight Trigger A run against the memory: a gone target or newly seen defence/army/anti-air at the target, on the
@@ -1259,7 +1287,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		/// <summary>ENG-T: one run of up to TransportRunMax engineers, one per stealth building; returns the engineers used.</summary>
 		int TryTransportRun(IBot bot, IBotUnitLeases leases, List<Actor> candidates, Actor first, List<Actor> pool, IBotCaptureTransportProvider provider,
-			bool allowProduction = true, DropConstraints constraints = null, bool opportunity = false, IReadOnlyList<CPos> routeSamples = null)
+			bool allowProduction = true, DropConstraints constraints = null, bool opportunity = false, IReadOnlyList<CPos> routeSamples = null,
+			IReadOnlyList<CPos> vettedRoute = null)
 		{
 			// The stops: the chosen building, then other stealth buildings that are free for an attempt.
 			var stops = new List<Actor> { first };
@@ -1280,11 +1309,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				targets.Add(stops[order[passengers.Count - 1]]);
 			}
 
+			// ENGDROP: Trigger A vetted the route for crew[0] alone; any other passenger set is a different run.
+			var bindBroken = opportunity && (passengers.Count != 1 || passengers[0] != candidates[0]);
+
 			// ENGDROP: Trigger A asks the side-effect-free readiness first; only a ready run reaches the commit request.
 			string runId = null;
-			if (passengers.Count == 0 || (opportunity && !provider.CanStartCaptureRun(passengers, targets, constraints ?? DropConstraints.None))
+			if (passengers.Count == 0 || bindBroken || (opportunity && !provider.CanStartCaptureRun(passengers, targets, constraints ?? DropConstraints.None))
 				|| !(constraints != null
-					? provider.TryRequestConstrainedCaptureRun(bot, passengers, targets, constraints, allowProduction, out runId)
+					? provider.TryRequestConstrainedCaptureRun(bot, passengers, targets, constraints, allowProduction, opportunity ? vettedRoute : null, out runId)
 					: provider.TryRequestCaptureRun(bot, passengers, targets)))
 			{
 				foreach (var p in passengers)
