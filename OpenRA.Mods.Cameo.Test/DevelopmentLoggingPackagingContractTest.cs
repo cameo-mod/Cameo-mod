@@ -49,7 +49,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var dev = Source("packaging/dev-logging.yaml");
 			foreach (var trait in new[] { "AiMemoryTelemetryDev", "AiPlayerTelemetryDev", "AiEconomyHealthCaptureDev",
 				"AiMatchLogWriterDev", "AiMissionLogWriterDev", "AiSituationLogWriterDev", "InsuranceTelemetryDev",
-				"AiEngagementLogWriterDev", "AiPlacementLogWriterDev" })
+				"AiEngagementLogWriterDev", "AiPlacementLogWriterDev", "AblationProviderDev" })
 			{
 				Assert.That(dev, Does.Contain("\t" + trait + ":"), trait);
 				Assert.That(release, Does.Not.Contain("\t" + trait + ":"), trait);

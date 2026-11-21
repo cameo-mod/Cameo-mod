@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="../OpenRA.Mods.CA/OpenRA.Mods.CA.csproj" />
     <ProjectReference Include="../OpenRA.Mods.Cameo/OpenRA.Mods.Cameo.csproj" />
+    <Compile Include="../OpenRA.Mods.Cameo.Dev/AblationSpec.cs" Link="Dev/AblationSpec.cs" />
     <Compile Include="../OpenRA.Mods.Cameo.Dev/AiMissionLogWriterDev.cs" Link="Dev/AiMissionLogWriterDev.cs" />
     <Compile Include="../OpenRA.Mods.Cameo.Dev/BotPassiveDiagnosticWriterCA.cs" Link="Dev/BotPassiveDiagnosticWriterCA.cs" />
     <Compile Include="../OpenRA.Mods.Cameo.Dev/AiEconomyHealthLogWriter.cs" Link="Dev/AiEconomyHealthLogWriter.cs" />
