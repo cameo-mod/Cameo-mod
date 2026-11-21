@@ -2292,10 +2292,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void TickTerritoryRefresh()
 		{
-			if (world.WorldTick < territoryNextRefreshTick)
+			// STAGGER-06 D076: absolute due, carried to the first visit at or after it (identical at N = 1).
+			if (!BotPeriod.CarryDue(ref territoryNextRefreshTick, world.WorldTick, Info.TerritoryRefreshInterval))
 				return;
-
-			territoryNextRefreshTick = world.WorldTick + Math.Max(1, Info.TerritoryRefreshInterval);
 
 			var reference = GetOwnBaseReference();
 			if (reference == null)
@@ -2327,10 +2326,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// </summary>
 		void TickRegionOwnershipRefresh()
 		{
-			if (regions.Count == 0 || world.WorldTick < regionOwnershipNextRefreshTick)
+			// STAGGER-06 D077: as D076; the regions guard stays first and does not move the deadline.
+			if (regions.Count == 0 || !BotPeriod.CarryDue(ref regionOwnershipNextRefreshTick, world.WorldTick, Info.RegionOwnershipRefreshInterval))
 				return;
-
-			regionOwnershipNextRefreshTick = world.WorldTick + Math.Max(1, Info.RegionOwnershipRefreshInterval);
 
 			var tally = new Dictionary<int, Dictionary<OpenRA.Player, int>>();
 
