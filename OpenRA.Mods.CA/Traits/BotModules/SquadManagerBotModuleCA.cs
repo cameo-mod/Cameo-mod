@@ -2777,11 +2777,39 @@ namespace OpenRA.Mods.CA.Traits
 		// service = no contract, which keeps classic byte-identical.
 		const string LeaseOwner = nameof(SquadManagerBotModuleCA);
 		readonly HashSet<Actor> claimedBySquads = new();
+		readonly HashSet<Actor> heldBySquadsScratch = new();
+		readonly List<UnitWposWrapper> squadUnitsScratch = new();
+		bool reconcilingSquadLeases;
 
 		int LeaseHeartbeatTicks() => Math.Max(200, Info.AttackForceInterval * 4);
 
 		void ReconcileSquadLeases()
 		{
+			// Lease callbacks may re-enter reconciliation. Preserve the old nested-call
+			// isolation in that rare case; the common non-nested path reuses both buffers.
+			if (reconcilingSquadLeases)
+			{
+				ReconcileSquadLeasesCore(new HashSet<Actor>(), new List<UnitWposWrapper>());
+				return;
+			}
+
+			reconcilingSquadLeases = true;
+			try
+			{
+				ReconcileSquadLeasesCore(heldBySquadsScratch, squadUnitsScratch);
+			}
+			finally
+			{
+				heldBySquadsScratch.Clear();
+				squadUnitsScratch.Clear();
+				reconcilingSquadLeases = false;
+			}
+		}
+
+		void ReconcileSquadLeasesCore(HashSet<Actor> held, List<UnitWposWrapper> squadUnitSnapshot)
+		{
+			held.Clear();
+			squadUnitSnapshot.Clear();
 			var leases = BotUnitLeases.Of(Player);
 			if (leases == null)
 			{
@@ -2801,14 +2829,15 @@ namespace OpenRA.Mods.CA.Traits
 				return true;
 			});
 
-			var held = new HashSet<Actor>();
 			foreach (var squad in Squads)
 			{
 				if (!squad.IsValid)
 					continue;
 
 				var handedOff = false;
-				foreach (var u in squad.Units.ToList())
+				squadUnitSnapshot.Clear();
+				squadUnitSnapshot.AddRange(squad.Units);
+				foreach (var u in squadUnitSnapshot)
 				{
 					var a = u.Actor;
 					if (a == null)
