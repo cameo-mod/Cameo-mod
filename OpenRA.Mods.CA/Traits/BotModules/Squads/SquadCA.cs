@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Support;
 using OpenRA.Traits;
@@ -62,7 +63,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		// prongs forever. Per squad (no provider needed - the objective shape is gated by
 		// FormationMovement); it dies with the squad.
 		internal CPos DeployCooldownCell;
-		internal int DeployCooldownTick = int.MinValue / 2;
+		internal BotCooldown DeployCooldown = new() { Due = int.MinValue / 2 };
 
 		// AR-S residual (2026-10-04): the last (order, quantized target) a dedup call site queued
 		// per member — survives state changes, so even a new state repeating the same order is

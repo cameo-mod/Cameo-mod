@@ -115,14 +115,14 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			else
 			{
 				owner.DeployCooldownCell = cooldownCell;
-				owner.DeployCooldownTick = owner.World.WorldTick;
+				owner.DeployCooldown.Start(owner.World.WorldTick, ObjectiveCooldownTicks);
 			}
 		}
 
 		static bool ObjectiveCooling(SquadCA owner, CPos targetCell)
 		{
 			var radius = owner.SquadManager.Info.AssaultEngageRadiusCells;
-			return owner.World.WorldTick - owner.DeployCooldownTick < ObjectiveCooldownTicks
+			return !owner.DeployCooldown.Ready(owner.World.WorldTick)
 				&& (owner.DeployCooldownCell - targetCell).LengthSquared <= radius * radius;
 		}
 

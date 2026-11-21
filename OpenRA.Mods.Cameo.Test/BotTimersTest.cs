@@ -293,6 +293,16 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void ObjectiveFanCooldownIsReadyAtItsOriginalWorldTickDeadline()
+		{
+			var cooldown = new BotCooldown { Due = int.MinValue / 2 };
+			Assert.That(cooldown.Ready(0), Is.True, "the initial sentinel does not block the first fan");
+			cooldown.Start(100, 750);
+			Assert.That(cooldown.Ready(849), Is.False);
+			Assert.That(cooldown.Ready(850), Is.True);
+		}
+
+		[Test]
 		public void BeaconResponderReleaseCooldownIsReadyAtTheOriginalTickBoundary()
 		{
 			var cooldown = new BotCooldown();
