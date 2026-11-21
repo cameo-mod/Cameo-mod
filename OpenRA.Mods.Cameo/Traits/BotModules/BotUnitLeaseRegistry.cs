@@ -125,7 +125,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly World world;
 		readonly OpenRA.Player player;
 		readonly BotLeaseTable<Actor> table = new();
-		int pruneDue; // STAGGER-06 D006: absolute due, 0 = not armed (first visit prunes, as F1 x0 = 0)
+		BotPeriod prune; // STAGGER-06 D006: call-counted F1 K=PruneIntervalTicks x0=0 (frozen across a disabled gap)
 		(int, int, int, int, int) lastSummary;
 
 		// Telemetry: Denied counts the claims the contract refused because another module held the unit — each one
@@ -140,6 +140,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			world = self.World;
 			player = self.Owner;
+			prune = BotPeriod.F1(world.WorldTick, 0, Info.PruneIntervalTicks);
 		}
 
 		bool IsGone(Actor a) => a.IsDead || !a.IsInWorld || a.Owner != player;
@@ -220,7 +221,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (!BotPeriod.CarryDue(ref pruneDue, BotVisitClock.Of(bot).VisitTick, Info.PruneIntervalTicks))
+			if (!prune.TryFire(BotVisitClock.Of(bot)))
 				return;
 
 			var (expired, gone) = table.Prune(world.WorldTick, IsGone);
