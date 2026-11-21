@@ -527,6 +527,23 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void E070ArmedCounterDoesNotRecheckImmediatelyAfterADisabledGap()
+		{
+			// Sol FIX on 270164ab: counter armed (K = 40) and fired at tick 1; the module is disabled for 100 ticks
+			// (longer than the remaining count); the first enabled visit must NOT fire, the old counter resumes.
+			var p = BotPeriod.F1(0, 0, 40);
+			Assert.That(p.TryFire(1, 1), Is.True);
+
+			// Old counter: x = 40 after the fire at tick 1; calls resume at tick 201 and count 40 -> fires at tick 240.
+			var fires = new List<int>();
+			for (var t = 201; t <= 300; t++)
+				if (p.TryFire(t, 1))
+					fires.Add(t);
+
+			Assert.That(fires, Is.EqualTo(new[] { 240, 280 }));
+		}
+
+		[Test]
 		public void ResidueHitRejectsAResidueOutsideThePeriod()
 		{
 			Assert.That(() => BotPeriod.ResidueHit(10, 1, 25, 25), Throws.InstanceOf<ArgumentOutOfRangeException>());
