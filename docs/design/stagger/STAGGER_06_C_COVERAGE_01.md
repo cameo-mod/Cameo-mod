@@ -1,4 +1,4 @@
-﻿# STAGGER-06-C coverage report
+# STAGGER-06-C coverage report
 
 Date: 2026-11-21
 Branch: `fullstack/stagger-06-c`
@@ -54,4 +54,3 @@ No conversion was needed because these already store/compare world ticks, use th
 ## Verification and open gates
 
 Static review only. Sol's individual review pins are recorded in the commits/messages for each converted batch; the whole-branch review is requested against `b6a6e0d24`. Haiku's independent coverage matrix is pending. No build, test, or game was run because the perf-window freeze remains in force; runtime callback ordering remains unverified.
-
