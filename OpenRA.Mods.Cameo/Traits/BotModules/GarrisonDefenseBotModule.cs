@@ -81,15 +81,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		readonly World world;
 		readonly HashSet<Actor> heldUnits = [];
-		int scanTicks;
-		int swapTicks;
+		BotPeriod scanTicks; // STAGGER-06 E087 F1
+		BotPeriod swapTicks; // STAGGER-06 E088 F1
 
 		public GarrisonDefenseBotModule(Actor self, GarrisonDefenseBotModuleInfo info)
 			: base(info)
 		{
 			world = self.World;
-			scanTicks = BotRng.For(self.Owner, nameof(GarrisonDefenseBotModule)).Next(Info.ScanInterval);
-			swapTicks = BotRng.For(self.Owner, nameof(GarrisonDefenseBotModule)).Next(Info.SwapInterval);
+			scanTicks = BotPeriod.F1(self.World.WorldTick, BotRng.For(self.Owner, nameof(GarrisonDefenseBotModule)).Next(Info.ScanInterval), Info.ScanInterval);
+			swapTicks = BotPeriod.F1(self.World.WorldTick, BotRng.For(self.Owner, nameof(GarrisonDefenseBotModule)).Next(Info.SwapInterval), Info.SwapInterval);
 		}
 
 		protected override void TraitDisabled(Actor self)
@@ -103,12 +103,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			var doFill = --scanTicks <= 0;
-			var doSwap = --swapTicks <= 0;
-			if (doFill)
-				scanTicks = Info.ScanInterval;
-			if (doSwap)
-				swapTicks = Info.SwapInterval;
+			var visitClock = BotVisitClock.Of(bot);
+			var doFill = scanTicks.TryFire(visitClock);
+			var doSwap = swapTicks.TryFire(visitClock);
 			if (!doFill && !doSwap)
 				return;
 

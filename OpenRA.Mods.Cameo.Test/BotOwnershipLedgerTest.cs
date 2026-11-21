@@ -12,6 +12,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 
 namespace OpenRA.Mods.Cameo.Test
@@ -20,6 +21,20 @@ namespace OpenRA.Mods.Cameo.Test
 	public class BotOwnershipLedgerTest
 	{
 		static readonly HashSet<string> NoneGone = new();
+
+		[Test]
+		public void WatchdogCooldownFreezesOnlyActualTraitDisabledTicks()
+		{
+			var cooldown = new BotCooldown();
+			Assert.That(BotOwnershipWatchdogClock.Ready(cooldown, 0), Is.True);
+			BotOwnershipWatchdogClock.Start(ref cooldown, 0, 100);
+			var disabledFrom = BotOwnershipWatchdogClock.DisabledFromTick(1, 0);
+
+			// ModularBot does not invoke IBotTick while the conditional trait is disabled.
+			BotOwnershipWatchdogClock.Resume(ref cooldown, 31, disabledFrom);
+			Assert.That(BotOwnershipWatchdogClock.Ready(cooldown, 129), Is.False);
+			Assert.That(BotOwnershipWatchdogClock.Ready(cooldown, 130), Is.True);
+		}
 
 		static List<BotOwnershipViolation> Kinds(IEnumerable<(BotOwnershipViolation Kind, string Key, string Detail)> found) =>
 			found.Select(f => f.Kind).ToList();

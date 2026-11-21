@@ -9,6 +9,7 @@
  */
 #endregion
 
+using System;
 using System.Linq;
 using OpenRA.Traits;
 using Policy = OpenRA.Mods.CA.Traits.BotModules.Squads.RetreatRallyPolicyCA;
@@ -29,7 +30,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		Policy.RallyAction action;
 		int supportSinceTick;
 		int lastRescoreTick;
+		BotCooldown rescoreCooldown;
 		int lastOrderTick = int.MinValue / 2;
+		BotCooldown orderCooldown = new() { Due = int.MinValue / 2 };
 		CPos? lastOrderCell;
 		bool ended;
 
@@ -55,18 +58,24 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var observed = manager.RetreatRallyObserve(owner, plan, phase, action);
 
 			// G7: the destination is re-scored every RescoreTicks (and at once when it became invalid); a switch needs the lock and the margin.
-			if (!observed.Losing && (observed.DestInvalid || Policy.RescoreDue(lastRescoreTick, now, Param(owner, nameof(SquadManagerBotModuleCAInfo.AggTeamRallyRescoreTicks)))))
+			if (!observed.Losing)
 			{
-				lastRescoreTick = now;
-				var next = manager.RetreatRallyRescore(owner, plan, observed.DestInvalid);
-				if (next != null)
+				var rescoreTicks = Param(owner, nameof(SquadManagerBotModuleCAInfo.AggTeamRallyRescoreTicks));
+				rescoreCooldown.Due = lastRescoreTick + Math.Max(1, rescoreTicks);
+				if (observed.DestInvalid || rescoreCooldown.Ready(now))
 				{
-					plan = next;
-					action = plan.Action;
-					phase = Policy.RallyPhase.March;
-					lastOrderCell = null;
-					Order(owner, plan.DestPos);
-					return;
+					lastRescoreTick = now;
+					rescoreCooldown.Start(now, Math.Max(1, rescoreTicks));
+					var next = manager.RetreatRallyRescore(owner, plan, observed.DestInvalid);
+					if (next != null)
+					{
+						plan = next;
+						action = plan.Action;
+						phase = Policy.RallyPhase.March;
+						lastOrderCell = null;
+						Order(owner, plan.DestPos);
+						return;
+					}
 				}
 			}
 
@@ -109,8 +118,14 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		{
 			var manager = owner.SquadManager;
 			var now = owner.World.WorldTick;
-			if (lastOrderCell != null && now - lastOrderTick < Param(owner, nameof(SquadManagerBotModuleCAInfo.AggTeamRallyRescoreTicks)))
-				return;
+			var orderCooldownTicks = 0;
+			if (lastOrderCell != null)
+			{
+				orderCooldownTicks = Param(owner, nameof(SquadManagerBotModuleCAInfo.AggTeamRallyRescoreTicks));
+				orderCooldown.Due = lastOrderTick + orderCooldownTicks;
+				if (!orderCooldown.Ready(now))
+					return;
+			}
 
 			var map = owner.World.Map;
 			var support = phase == Policy.RallyPhase.Support;
@@ -123,9 +138,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var members = owner.Units.Select(u => u.Actor).Where(a => !manager.unitCannotBeOrdered(a)).ToList();
 			if (members.Count == 0)
 				return;
+			if (lastOrderCell == null)
+				orderCooldownTicks = Param(owner, nameof(SquadManagerBotModuleCAInfo.AggTeamRallyRescoreTicks));
 
 			lastOrderCell = cell;
 			lastOrderTick = now;
+			orderCooldown.Start(now, orderCooldownTicks);
 			if (support)
 				QueueDeduped(owner, "AttackMove", SquadOrderKey.ForCell("AttackMove", cell), Target.FromCell(owner.World, cell), members);
 			else

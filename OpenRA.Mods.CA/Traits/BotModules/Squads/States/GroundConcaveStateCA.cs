@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
@@ -77,7 +78,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		WPos planAnchor;
 		WPos anchor;
 		int frontDepth;
-		int lastPlanTick = int.MinValue / 2;
+		BotCooldown replanCooldown = new() { Due = int.MinValue / 2 };
 		int formStartTick;
 		bool committed;
 
@@ -114,14 +115,14 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			else
 			{
 				owner.DeployCooldownCell = cooldownCell;
-				owner.DeployCooldownTick = owner.World.WorldTick;
+				owner.DeployCooldown.Start(owner.World.WorldTick, ObjectiveCooldownTicks);
 			}
 		}
 
 		static bool ObjectiveCooling(SquadCA owner, CPos targetCell)
 		{
 			var radius = owner.SquadManager.Info.AssaultEngageRadiusCells;
-			return owner.World.WorldTick - owner.DeployCooldownTick < ObjectiveCooldownTicks
+			return !owner.DeployCooldown.Ready(owner.World.WorldTick)
 				&& (owner.DeployCooldownCell - targetCell).LengthSquared <= radius * radius;
 		}
 
@@ -265,7 +266,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// Re-plan when the anchor moved, or when an eligible member joined while forming (a
 			// late joiner gets a slot); both are rate-limited by ReplanMinTicks.
 			if (placed == null
-				|| (tick - lastPlanTick >= ReplanMinTicks
+				|| (replanCooldown.Ready(tick)
 					&& ((anchor - planAnchor).HorizontalLengthSquared > (long)replanRange.Length * replanRange.Length
 						|| members.Any(m => !plannedIds.Contains(m.ActorID)))))
 			{
@@ -275,7 +276,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					return;
 				}
 
-				lastPlanTick = tick;
+				replanCooldown.Start(tick, ReplanMinTicks);
 				planAnchor = anchor;
 			}
 

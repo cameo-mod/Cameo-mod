@@ -497,8 +497,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 	public sealed class StalemateRotationCA
 	{
 		readonly SortedDictionary<int, int> pendingSince = new();
-		int electionTick = int.MinValue;
-		int electionWinner = -1;
+		// Per-tick election results (tick -> winning seat or -1), decided at the first query of that tick so a seat that fires
+		// and clears cannot hand the same tick to the next seat (one admission per tick at every N).
+		readonly Dictionary<int, int> elected = new();
+
+		// A seat visited every N ticks asks about the ticks since its previous visit; this bounds that look-back.
+		const int MaxWindow = 64;
 
 		public bool IsPending(int seat) => pendingSince.ContainsKey(seat);
 
@@ -515,29 +519,47 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		public static int Rank(int seat, int tick, int seatCount) =>
 			(int)((((long)seat - ((long)tick % seatCount)) % seatCount + seatCount) % seatCount);
 
-		public bool IsWinner(int seat, int tick, int seatCount)
+		/// <summary>
+		/// STAGGER-06 R4 (A069): the seat wins if it is the elected seat at ANY tick in its visit window [tick - elapsed + 1, tick].
+		/// Each tick's election is the old one (lowest Rank among the seats pending since before that tick) and is decided
+		/// once, so no tick has two winners. At N = 1 the window is {tick}: identical to the per-tick election.
+		/// </summary>
+		public bool IsWinner(int seat, int tick, int seatCount, int elapsed = 1)
 		{
 			if (seatCount <= 0)
 				return false;
-			if (electionTick != tick)
+
+			var oldest = tick - Math.Min(Math.Max(1, elapsed), MaxWindow) + 1;
+			if (elected.Count > 4 * MaxWindow)
+				foreach (var k in elected.Keys.Where(k => k < oldest - MaxWindow).ToList())
+					elected.Remove(k);
+
+			for (var tau = oldest; tau <= tick; tau++)
 			{
-				electionTick = tick;
-				electionWinner = -1;
-				var best = int.MaxValue;
-				foreach (var (s, since) in pendingSince)
+				if (!elected.TryGetValue(tau, out var winner))
 				{
-					if (since >= tick)
-						continue;
-					var r = Rank(s, tick, seatCount);
-					if (r < best)
+					winner = -1;
+					var best = int.MaxValue;
+					foreach (var (s, since) in pendingSince)
 					{
-						best = r;
-						electionWinner = s;
+						if (since >= tau)
+							continue;
+						var r = Rank(s, tau, seatCount);
+						if (r < best)
+						{
+							best = r;
+							winner = s;
+						}
 					}
+
+					elected[tau] = winner;
 				}
+
+				if (winner == seat)
+					return true;
 			}
 
-			return electionWinner == seat;
+			return false;
 		}
 	}
 }

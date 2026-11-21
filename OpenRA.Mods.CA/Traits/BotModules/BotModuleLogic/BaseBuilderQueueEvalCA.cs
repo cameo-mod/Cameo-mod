@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Common.Warheads;
 using OpenRA.Primitives;
@@ -548,6 +549,24 @@ namespace OpenRA.Mods.CA.Traits
 
 			failRetryTicks = resumeDelay;
 			return true;
+		}
+
+		public static bool QueueSweepDue(BotCooldown cooldown, int tick) => cooldown.Ready(tick);
+
+		public static void StartQueueSweepCooldown(ref BotCooldown cooldown, int tick, int delay) => cooldown.Start(tick, delay);
+
+		public static int QueueSweepPauseFromTick(int transitionTick, int lastVisitTick) => Math.Max(transitionTick, lastVisitTick + 1);
+
+		public static void ResumeQueueSweepCooldown(ref BotCooldown cooldown, bool started, int tick, int disabledFromTick)
+		{
+			if (started && disabledFromTick >= 0)
+				cooldown.Freeze(Math.Max(0, tick - disabledFromTick));
+		}
+
+		public static void MakeQueueSweepDue(ref BotCooldown cooldown, int tick)
+		{
+			if (cooldown.Due > tick)
+				cooldown.Due = tick;
 		}
 
 		/// <summary>

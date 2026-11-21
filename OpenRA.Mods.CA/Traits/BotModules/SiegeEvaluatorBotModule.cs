@@ -69,6 +69,9 @@ namespace OpenRA.Mods.CA.Traits
 		readonly Dictionary<SquadCA, SiegeVerdict> lastVerdictBySquad = new();
 		int lastEvaluationTick = -1;
 
+		// QW-B: the evaluation tick within the interval; ClientIndex % interval (shared by map-side bots) unless the bot phase-offsets its timers.
+		int evaluationPhase = -1;
+
 		public SiegeEvaluatorBotModule(Actor self, SiegeEvaluatorBotModuleInfo info)
 			: base(info)
 		{
@@ -78,10 +81,17 @@ namespace OpenRA.Mods.CA.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (IsTraitDisabled || world.WorldTick == lastEvaluationTick ||
-				world.WorldTick % Info.EvaluationInterval != player.ClientIndex % Info.EvaluationInterval)
+			var clock = BotVisitClock.Of(bot);
+			if (IsTraitDisabled || clock.VisitTick == lastEvaluationTick)
 				return;
-			lastEvaluationTick = world.WorldTick;
+
+			// QW-B phase (ClientIndex % interval unless the bot phase-offsets its timers) is the residue of the visit window.
+			if (evaluationPhase < 0)
+				evaluationPhase = BotSlotPhases.Resolve(bot, Info.EvaluationInterval, player.ClientIndex % Info.EvaluationInterval);
+
+			if (!BotPeriod.ResidueHit(clock.VisitTick, clock.Elapsed, Info.EvaluationInterval, evaluationPhase))
+				return;
+			lastEvaluationTick = clock.VisitTick;
 
 			// Personality-named squad managers (@rush/@turtle/…) enable only after
 			// the personality latch and re-latch on switch — never cache an empty

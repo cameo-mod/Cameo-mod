@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -103,7 +104,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		IBotRememberedDefenceProvider[] defenceProviders;
 		IBotThreatPredictionProvider[] predictionProviders;
 
-		int nextPlanTick, lastPlanTick;
+		BotCooldown planCooldown;
+		int lastPlanTick;
 		int lastLiveTick = int.MinValue / 2;
 		long lastIdleValue;
 
@@ -129,10 +131,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			var tick = world.WorldTick;
-			if (tick < nextPlanTick)
+			if (!ArmyStagingEval.TryStartPlan(ref planCooldown, tick, Info.PlanIntervalTicks))
 				return;
 
-			nextPlanTick = tick + Math.Max(1, Info.PlanIntervalTicks);
 			Recompute(tick);
 		}
 

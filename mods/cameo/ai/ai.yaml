@@ -574,37 +574,71 @@ Player:
 	ModularBot@NoobAI:
 		Name: bot_ai.noob
 		Type: noob
+		# QW-B (STAGGER_DESIGN_06 section 15): one shared family for every Cameo bot, so mixed-difficulty lobbies spread their timer phases across all bots.
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 	ModularBot@EasiestAI:
 		Name: bot_ai.easiest
 		Type: easiest
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 	ModularBot@VeryEasyAI:
 		Name: bot_ai.veryeasy
 		Type: veryeasy
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 	ModularBot@EasyAI:
 		Name: bot_ai.easy
 		Type: easy
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 	ModularBot@MediumAI:
 		Name: bot_ai.medium
 		Type: medium
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 	ModularBot@HardAI:
 		Name: bot_ai.hard
 		Type: hard
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 		ModulePerfReportIntervalTicks: 300
 	ModularBot@VeryHardAI:
 		Name: bot_ai.veryhard
 		Type: veryhard
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 	ModularBot@BrutalAI:
 		Name: bot_ai.brutal
 		Type: brutal
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 	ModularBot@ChallengerAI:
 		Name: bot_ai.challenger
 		Type: challenger
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 	ModularBot@UnbeatableAI:
 		Name: bot_ai.unbeatable
 		Type: unbeatable
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 	ModularBot@CameoGodAI:
 		Name: bot_ai.cameogod
 		Type: cameogod
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 	# A/B reference bot ("classic"): the pre-Cognition-wave module stack —
 	# SquadManagerBotModuleCA and the CA builders/harvesters, but none of the
 	# CN-era brains (MasterAiBotModule, Scout/Beacon/CombatAnalysis, personality
@@ -638,26 +672,44 @@ Player:
 	ModularBot@ExploitRushAI:
 		Name: bot_ai.exploit_rush
 		Type: exploit_rush
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 		HiddenInLobby: True
 	ModularBot@ExploitTurtleAI:
 		Name: bot_ai.exploit_turtle
 		Type: exploit_turtle
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 		HiddenInLobby: True
 	ModularBot@ExploitGuerrillaAI:
 		Name: bot_ai.exploit_guerrilla
 		Type: exploit_guerrilla
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 		HiddenInLobby: True
 	ModularBot@ExploitExpansionAI:
 		Name: bot_ai.exploit_expansion
 		Type: exploit_expansion
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 		HiddenInLobby: True
 	ModularBot@ExploitSteamrollerAI:
 		Name: bot_ai.exploit_steamroller
 		Type: exploit_steamroller
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 		HiddenInLobby: True
 	ModularBot@ExploitTechAI:
 		Name: bot_ai.exploit_tech
 		Type: exploit_tech
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 		HiddenInLobby: True
 	GrantConditionOnBotOwner@exploitstack:
 		Condition: genericbot

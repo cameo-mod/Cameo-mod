@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Activities;
 using OpenRA.Mods.Common.Traits;
@@ -37,6 +38,23 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// <summary>A live unit the squad layer should own sits in no squad, no pool and no lease after the grace window —
 		/// the "released but never returned to the idle pool" class.</summary>
 		Orphan,
+	}
+
+	/// <summary>World-tick clock for the guarded ownership audit pass.</summary>
+	public static class BotOwnershipWatchdogClock
+	{
+		public static int DisabledFromTick(int transitionTick, int lastVisitTick) => Math.Max(transitionTick, lastVisitTick + 1);
+
+		public static void Resume(ref BotCooldown cooldown, int tick, int disabledFromTick)
+		{
+			if (disabledFromTick >= 0)
+				cooldown.Freeze(Math.Max(0, tick - disabledFromTick));
+		}
+
+		public static bool Ready(BotCooldown cooldown, int tick) => cooldown.Ready(tick);
+
+		public static void Start(ref BotCooldown cooldown, int tick, int interval) =>
+			cooldown.Start(tick, Math.Max(1, interval));
 	}
 
 	/// <summary>
@@ -248,7 +266,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly Dictionary<(BotOwnershipViolation, string), int> byType = new();
 		SquadManagerBotModuleCA[] managers;
 		bool? active;
-		int ticks;
+		BotCooldown checkCooldown;
+		int disabledFromTick = -1;
+		int lastBotTick;
+		bool checkStarted;
 
 		public BotOwnershipWatchdog(Actor self, BotOwnershipWatchdogInfo info)
 			: base(info)
@@ -267,6 +288,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		/// <summary>kind → the first ViolationExamplesPerKind violations with tick, actor type, id and holders.</summary>
 		public IReadOnlyDictionary<BotOwnershipViolation, List<(int Tick, string Type, uint ActorId, string Detail)>> ExamplesByKind => examples.ByKind;
+
+		protected override void TraitDisabled(Actor self)
+		{
+			disabledFromTick = checkStarted
+				? BotOwnershipWatchdogClock.DisabledFromTick(self.World.WorldTick, lastBotTick)
+				: -1;
+		}
+
+		protected override void TraitEnabled(Actor self)
+		{
+			BotOwnershipWatchdogClock.Resume(ref checkCooldown, self.World.WorldTick, disabledFromTick);
+			disabledFromTick = -1;
+		}
 
 		void IBotNotifyIdleBaseUnits.UpdatedIdleBaseUnits(List<UnitWposWrapper> unitsHangingAroundTheBase)
 		{
@@ -288,10 +322,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (IsTraitDisabled || --ticks > 0 || !Active())
+			if (IsTraitDisabled)
 				return;
 
-			ticks = Info.CheckIntervalTicks;
+			var tick = world.WorldTick;
+			lastBotTick = tick;
+			if (!BotOwnershipWatchdogClock.Ready(checkCooldown, tick) || !Active())
+				return;
+
+			BotOwnershipWatchdogClock.Start(ref checkCooldown, tick, Info.CheckIntervalTicks);
+			checkStarted = true;
 
 			// Every instance, enabled or not (one per personality): the set is fixed, only IsTraitDisabled moves, and that
 			// is read each pass — caching the ENABLED subset would be LC4's bug class.

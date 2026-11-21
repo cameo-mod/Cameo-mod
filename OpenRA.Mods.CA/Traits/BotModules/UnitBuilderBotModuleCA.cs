@@ -410,8 +410,14 @@ namespace OpenRA.Mods.CA.Traits
 			BotUnitRole.Gunship, BotUnitRole.Fighter, BotUnitRole.Bomber
 		};
 
-		int ticks;
-		int openingDefenseTicks;
+		// STAGGER-06 B044 / B045 (TIMER_TABLE_06, R2 keep the freeze): the two never-reset / episode call counters of
+		// IBotTick.BotTick become BotCallPeriod (F3 c0=0, K = FeedbackTime + UnitBuilderInterval). `buildCalls` counts only
+		// the calls that pass both pause guards (the old `ticks++`); `openingDefenseCalls` counts calls inside a base-builder
+		// pause episode and is re-armed (`= default`) when the episode ends (the old `openingDefenseTicks = 0`). A call
+		// under a foreign pause counts for neither, so the gap to the next counted call is frozen time (R2). Not saved:
+		// both restarted at 0 after a load, and a default BotCallPeriod re-arms on its first call.
+		BotCallPeriod buildCalls;
+		BotCallPeriod openingDefenseCalls;
 		int unitDelayModifier = 100;
 		int unitIntervalModifier = 100;
 		bool firstTick = true;
@@ -686,19 +692,18 @@ namespace OpenRA.Mods.CA.Traits
 			if (requestPause.Any(rp => !ReferenceEquals(rp, baseBuilderPause) && rp.IsTraitEnabled() && rp.PauseUnitProduction))
 				return;
 
+			var clock = BotVisitClock.Of(bot);
 			if (baseBuilderPause != null && baseBuilderPause.PauseUnitProduction)
 			{
-				if (++openingDefenseTicks % (FeedbackTime + Info.UnitBuilderInterval) == 0)
+				if (openingDefenseCalls.Call(clock.VisitTick, clock.Elapsed, FeedbackTime + Info.UnitBuilderInterval))
 					TryBuildOpeningDefense(bot);
 
 				return;
 			}
 
-			openingDefenseTicks = 0;
+			openingDefenseCalls = default;
 
-			ticks++;
-
-			if (ticks % (FeedbackTime + Info.UnitBuilderInterval) == 0)
+			if (buildCalls.Call(clock.VisitTick, clock.Elapsed, FeedbackTime + Info.UnitBuilderInterval))
 			{
 				UpdateComposition();
 
@@ -1348,9 +1353,8 @@ namespace OpenRA.Mods.CA.Traits
 			var queues = Info.UnitQueues.SelectMany(c => AIUtils.FindQueues(player, c)).Distinct().ToList();
 			var feasible = queues.Any(q => q.Enabled);
 			var capacity = queues.Any(q => q is IHasParallelQueueSlots p ? p.AvailableSlots > 0 : !q.AllQueued().Any());
-			if (world.WorldTick >= nextPoolCheckTick)
+			if (BotPeriod.CarryDue(ref nextPoolCheckTick, world.WorldTick, FeedbackTime))
 			{
-				nextPoolCheckTick = world.WorldTick + FeedbackTime;
 				poolNeedsReplenish = OffensivePoolNeedsReplenish();
 			}
 

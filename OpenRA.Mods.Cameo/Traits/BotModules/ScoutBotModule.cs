@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using BotRng = OpenRA.Mods.CA.BotRng;
 using OpenRA.Mods.Common;
@@ -109,7 +110,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int lastScoutRequestTick = -1;
 		// Null until the squad manager supplies its shared idle-unit pool.
 		List<UnitWposWrapper> idlePool;
-		int scanTicks;
+		BotPeriod scanTicks; // STAGGER-06 F1
 
 		public ScoutBotModule(Actor self, ScoutBotModuleInfo info)
 			: base(info)
@@ -128,7 +129,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			unitBuilders = self.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
 			leadProviders = self.Owner.PlayerActor.TraitsImplementing<IBotPersonalityLeadProvider>().ToArray();
 			interestProviders = self.TraitsImplementing<IBotScoutInterestProvider>().ToArray();
-			scanTicks = BotRng.For(player, nameof(ScoutBotModule)).Next(0, Info.ScanInterval);
+			scanTicks = BotPeriod.F1(player.World.WorldTick, BotRng.For(player, nameof(ScoutBotModule)).Next(0, Info.ScanInterval), Info.ScanInterval);
 		}
 
 		void IBotEnabled.BotEnabled(IBot bot) { }
@@ -140,10 +141,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (--scanTicks > 0)
+			if (!scanTicks.TryFire(BotVisitClock.Of(bot)))
 				return;
-
-			scanTicks = Info.ScanInterval;
 
 			scouts.RemoveAll(u => unitCannotBeOrdered(u.Actor));
 			foreach (var dead in scoutTargets.Keys.Where(a => unitCannotBeOrdered(a)).ToArray())
@@ -195,8 +194,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var scout in scouts.ToArray())
 			{
 				var actor = scout.Actor;
-				if (scoutTargets.TryGetValue(actor, out var target) && tick - target.AssignedTick < Info.RetargetTicks && !actor.IsIdle)
-					continue;
+				if (scoutTargets.TryGetValue(actor, out var target) && !actor.IsIdle)
+				{
+					var retargetCooldown = new BotCooldown();
+					retargetCooldown.Start(target.AssignedTick, Info.RetargetTicks);
+					if (!retargetCooldown.Ready(tick))
+						continue;
+				}
 
 				var region = ChooseScoutTarget(regions, actor.Location, tick, taken);
 				if (region < 0)
@@ -297,7 +301,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		internal static bool MayRequest(int tick, int lastRequestTick, int cooldownTicks)
 		{
-			return cooldownTicks <= 0 || lastRequestTick < 0 || tick - lastRequestTick >= cooldownTicks;
+			if (cooldownTicks <= 0 || lastRequestTick < 0)
+				return true;
+
+			var cooldown = new BotCooldown();
+			cooldown.Start(lastRequestTick, cooldownTicks);
+			return cooldown.Ready(tick);
 		}
 
 		bool RequestScout(IBot bot)
