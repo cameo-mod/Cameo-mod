@@ -1091,6 +1091,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					nextSnapshotTick = snapshotPhase <= player.World.WorldTick ? 0 : snapshotPhase; // 0 = unarmed: fire at the first visit, reload v + K (the old `tick >= next`)
 				if (BotSlotPhases.TryResolve(bot, Math.Max(1, Info.EmergencyCheckInterval), out var emergencyPhase))
 					nextEmergencyTick = emergencyPhase <= player.World.WorldTick ? 0 : emergencyPhase;
+
+				// R-QWB Haiku FIX: with no resolved phase (N = 1 roster, flag off, a bot activated mid-game) the constructor seed is
+				// a plain tick; one already past at the first visit must reload v + K, as the old `tick >= next` form does, not
+				// s + m K (CarryDue would give 187 for s 37, K 150, v 100; master gives 250). Zero = unarmed. A seed still in
+				// the future is kept (both forms wait for it); a resolved phase is already normalised, so this is idempotent.
+				nextSnapshotTick = BotPeriod.SeedDue(nextSnapshotTick, player.World.WorldTick);
+				nextEmergencyTick = BotPeriod.SeedDue(nextEmergencyTick, player.World.WorldTick);
 			}
 
 			var tick = player.World.WorldTick;

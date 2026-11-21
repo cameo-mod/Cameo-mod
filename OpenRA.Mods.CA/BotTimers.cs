@@ -121,6 +121,13 @@ namespace OpenRA.Mods.CA
 			return true;
 		}
 
+		/// <summary>
+		/// Seed a plain due field for <see cref="CarryDue"/> from a constructor value: a seed already at or before the first visit
+		/// becomes 0 (unarmed: fire at the first visit, next v + K, as the old <c>tick >= next</c> form does), a seed still in the
+		/// future is kept. Without it CarryDue would reload s + m K from a stale positive seed (s 37, K 150, v 100: 187, not 250).
+		/// </summary>
+		public static int SeedDue(int seed, int worldTick) => seed <= worldTick ? 0 : seed;
+
 		/// <summary>11.2 save form R: remaining = due - saveTick (may be zero or negative when overdue between visits).</summary>
 		public int SavedRemaining(int saveTick) => Due - saveTick;
 

@@ -569,6 +569,42 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void StaleConstructorSeedReloadsFromTheFirstVisitAtN1()
+		{
+			// R-QWB Haiku FIX (BotSituation): constructor seed 37, K 150, first visit 100. The old form fires and reloads 100 + 150 = 250.
+			var due = BotPeriod.SeedDue(37, 100);
+			Assert.That(due, Is.EqualTo(0));
+			Assert.That(BotPeriod.CarryDue(ref due, 100, 150), Is.True);
+			Assert.That(due, Is.EqualTo(250));
+
+			// What the unseeded form gave: 37 + 150 = 187.
+			var raw = 37;
+			BotPeriod.CarryDue(ref raw, 100, 150);
+			Assert.That(raw, Is.EqualTo(187));
+
+			// A seed in the future is kept and waited for.
+			due = BotPeriod.SeedDue(130, 100);
+			Assert.That(due, Is.EqualTo(130));
+			Assert.That(BotPeriod.CarryDue(ref due, 100, 150), Is.False);
+			Assert.That(BotPeriod.CarryDue(ref due, 130, 150), Is.True);
+			Assert.That(due, Is.EqualTo(280));
+		}
+
+		[Test]
+		public void StaleConstructorSeedAtN8FiresOnTheFirstVisitThenCoalesces()
+		{
+			// N = 8: first visit at 104, then every 8 ticks. Seed 37 is past: fire at 104, next 254; the visit at 256 fires once.
+			var due = BotPeriod.SeedDue(37, 104);
+			var fires = new System.Collections.Generic.List<int>();
+			for (var v = 104; v <= 400; v += 8)
+				if (BotPeriod.CarryDue(ref due, v, 150))
+					fires.Add(v);
+
+			Assert.That(fires, Is.EqualTo(new[] { 104, 256 }));
+			Assert.That(due, Is.EqualTo(404));
+		}
+
+		[Test]
 		public void UnarmedPeriodAndBadResidueThrow()
 		{
 			Assert.That(() => default(BotPeriod).TryFire(5), Throws.InvalidOperationException);
