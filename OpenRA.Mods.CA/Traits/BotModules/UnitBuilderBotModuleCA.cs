@@ -389,6 +389,8 @@ namespace OpenRA.Mods.CA.Traits
 		TechTree techTree;
 
 		IBotRequestPauseUnitProduction[] requestPause;
+		IBotItemAwareUnitCap[] itemAwareCaps;
+		IBotItemAwareUnitCap[] cappedOut = [];
 		IBotUnitProductionObserver[] unitObservers;
 		int idleUnitCount;
 		int currentQueueIndex = 0;
@@ -438,7 +440,7 @@ namespace OpenRA.Mods.CA.Traits
 		bool FairService => switchesActive && Info.FairProducerService && !ablateFairProducer.Off(player, AblationIds.FairProducer);
 
 		// ABLATE-01 hooks (DEV-only provider; absent in release = always on): one cached answer per row.
-		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth;
+		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery;
 
 		// PR-2 queue depth (fair path only): world ticks between this bot's last two passes. Round-robin makes it long;
 		// a single-slot queue is topped up while its loaded build time is shorter than this gap (QueueDepthCA).
@@ -635,6 +637,7 @@ namespace OpenRA.Mods.CA.Traits
 			// so we must query player traits from self, which refers
 			// for bot modules always to the Player actor.
 			requestPause = self.TraitsImplementing<IBotRequestPauseUnitProduction>().ToArray();
+			itemAwareCaps = self.TraitsImplementing<IBotItemAwareUnitCap>().ToArray();
 			playerResources = self.Owner.PlayerActor.Trait<PlayerResources>();
 			techTree = self.Owner.PlayerActor.TraitOrDefault<TechTree>();
 			compositionProvider = self.TraitsImplementing<IBotEnemyCompositionProvider>().FirstOrDefault();
@@ -704,7 +707,13 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			var baseBuilderPause = requestPause.FirstOrDefault(rp => ReferenceEquals(rp, baseBuilder));
-			if (requestPause.Any(rp => !ReferenceEquals(rp, baseBuilderPause) && rp.IsTraitEnabled() && rp.PauseUnitProduction))
+
+			// PROD-IDLE item-aware cap: under the fair service a cap that says which items it counts stops only those
+			// (ShouldBuild below), so an army parked at its cap can still rebuild a harvester or MCV. Every other vote,
+			// and every vote under the legacy service, still stops all unit production here.
+			cappedOut = FairService ? ItemAwareCapsReached() : [];
+			if (requestPause.Any(rp => !ReferenceEquals(rp, baseBuilderPause) && rp.IsTraitEnabled() && rp.PauseUnitProduction
+				&& !(FairService && rp is IBotItemAwareUnitCap)))
 				return;
 
 			var clock = BotVisitClock.Of(bot);
@@ -997,6 +1006,7 @@ namespace OpenRA.Mods.CA.Traits
 			// Parallel-slot queues keep their own slots. Off (no gap yet, ablated) = the old empty-queue rule.
 			var depth = DepthOn;
 			var unpaidQueued = depth ? UnpaidQueuedCost() : 0L;
+			// (the K5 reserve gate reads the same per-tick figure through ReserveAdmits)
 
 			// P4: armed-infantry floor — in-pass emissions count toward it so one batch
 			// cannot overshoot; the census is one tick-cached scan, skipped when off.
@@ -1019,6 +1029,10 @@ namespace OpenRA.Mods.CA.Traits
 				var loadedTicks = depthQueue ? LoadedBuildTicks(queue) : 0L;
 				var freeSlots = depthQueue ? QueueDepthCA.FreeSlots(queuedItems, loadedTicks, visitGapTicks) : LiveFreeSlots(queue);
 				if (freeSlots <= 0)
+					continue;
+
+				// Item-aware cap reached: a queue that can build nothing the cap leaves uncounted costs no offer and no scan.
+				if (cappedOut.Length > 0 && !queue.BuildableItems().Any(a => !CappedOut(a)))
 					continue;
 
 				offers--;
@@ -1123,7 +1137,7 @@ namespace OpenRA.Mods.CA.Traits
 					// Sol F2: an unaffordable pick retries the remaining candidates — the
 					// batch keeps the bank accounting so a cheaper feasible one can land.
 					var cost = Math.Max(0, queue.GetProductionCost(unit));
-					if (!batch.Affords(cost)
+					if (!batch.Affords(cost) || !ReserveAdmits(batch, cost)
 						|| depthQueue && held > 0 && !QueueDepthCA.CashAdmits(batch.BankLeft, unpaidQueued, cost))
 					{
 						Reject();
@@ -1168,16 +1182,62 @@ namespace OpenRA.Mods.CA.Traits
 			return ticks;
 		}
 
-		// PR-2: cash the already queued unit items have not paid yet (RemainingCost, counted per item exactly as
-		// TF-2's UpdateMobileReserve does); depth items beyond the first must leave it untouched.
+		// PLAN_03 section 2.2: cash that EVERY queued item of the player (units, buildings, defences) has not paid yet
+		// (RemainingCost per item, as TF-2's UpdateMobileReserve counts it). One scan per world tick: a pass and its
+		// categories run inside one tick, and this pass's own orders are in the batch, never in this figure.
+		// Staleness bound (Code Monkey F1, option b): orders are resolved after every module's tick, so the queues this
+		// scan reads are the same for all modules in a tick; what it cannot see are the orders ANOTHER module (the base
+		// builder, via the K6 vote) issued earlier in the same tick, i.e. at most the cost of that module's orders of
+		// this one tick. The owner's per-tick commitment ledger closes it (G1b, PLAN_03 section 2.4).
 		long UnpaidQueuedCost()
 		{
-			long unpaid = 0;
-			foreach (var queue in Info.UnitQueues.SelectMany(c => AIUtils.FindQueues(player, c)).Distinct())
-				foreach (var item in queue.AllQueued())
-					unpaid += item.RemainingCost;
+			if (cachedUnpaidTick != world.WorldTick)
+			{
+				cachedUnpaidTick = world.WorldTick;
+				cachedUnpaid = SpendCommitmentsCA.UnpaidQueued(world, player);
+			}
 
-			return unpaid;
+			return cachedUnpaid;
+		}
+
+		int cachedUnpaidTick = -1;
+		long cachedUnpaid;
+
+		// The item-aware caps that are pausing right now (empty almost always). Votes are throttled by their owner.
+		IBotItemAwareUnitCap[] ItemAwareCapsReached()
+		{
+			if (itemAwareCaps.Length == 0)
+				return [];
+
+			List<IBotItemAwareUnitCap> reached = null;
+			foreach (var cap in itemAwareCaps)
+				if (cap is IBotRequestPauseUnitProduction vote && vote.IsTraitEnabled() && vote.PauseUnitProduction)
+					(reached ??= []).Add(cap);
+
+			return reached?.ToArray() ?? [];
+		}
+
+		// True when a pausing cap counts this item; a name the ruleset does not know counts as capped (ItemAwareCapCA).
+		bool CappedOut(string name) =>
+			ItemAwareCapCA.CappedOut(cappedOut, world.Map.Rules.Actors.TryGetValue(name, out var info) ? info : null);
+
+		bool CappedOut(ActorInfo info) => ItemAwareCapCA.CappedOut(cappedOut, info);
+
+		// PROD-IDLE K5 (PLAN_03 section 2.3): a unit order of the fair path passes the general gate
+		// C - x >= max(M, E, P(r)) + R. M, E and R are 0 here: no owner is mounted and units are what M reserves for.
+		// C = the bank left after this pass's orders, net of every unpaid queued item. P is the tier's
+		// BotLimits.ProductionCashReserve (300 x (11 - r)) scaled by the Steamroller lean (PLAN_04 row 4); an unset line (-1)
+		// fails closed. pi_recovery ablates the term.
+		bool ReserveAdmits(ProducerServiceBatch batch, int cost)
+		{
+			if (ablateRecovery.Off(player, AblationIds.Recovery))
+				return true;
+
+			var line = botLimits != null
+				? RecoverySpendPolicyCA.EffectiveReserve(botLimits.Info.ProductionCashReserve, BotPersonalityLeads.Lean(leadProviders, "steamroller"))
+				: -1;
+			return RecoverySpendPolicyCA.Admits(SpendCommitmentsCA.Available(batch.BankLeft, UnpaidQueuedCost()), cost, 0, 0, 0, false,
+				RecoverySpendPolicyCA.Admission.General, line);
 		}
 
 		// U1: per-name cap headroom shared across the batch — UnitLimits counts only
@@ -1284,7 +1344,8 @@ namespace OpenRA.Mods.CA.Traits
 						.Where(q => q.BuildableItems().Any(b => b.Name == name))
 						.FirstOrDefault(q =>
 							batch.SlotsFree(q, LiveFreeSlots(q)) > 0 &&
-							batch.Affords(q.GetProductionCost(actorInfo)));
+							batch.Affords(q.GetProductionCost(actorInfo)) &&
+							ReserveAdmits(batch, q.GetProductionCost(actorInfo)));
 				}
 				else
 				{
@@ -1473,6 +1534,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool ShouldBuild(string name, bool ignoreUnitsToBuild, string queueCategory = null)
 		{
+			if (cappedOut.Length > 0 && CappedOut(name))
+				return false;
+
 			var unitsToBuildShares = GetUnitsToBuildForCategory(queueCategory);
 			if (!ignoreUnitsToBuild && unitsToBuildShares != null && !unitsToBuildShares.ContainsKey(name))
 				return false;
