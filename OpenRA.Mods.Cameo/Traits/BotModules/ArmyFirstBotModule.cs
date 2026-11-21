@@ -81,6 +81,8 @@ namespace OpenRA.Mods.Cameo.Traits
 		readonly ArmyFirstBotModuleInfo info;
 		readonly ArmyShareCA share = new();
 		PlayerResources playerResources;
+		OpenRA.Player player;
+		AblationLatch ablateArmyRatio; // ABLATE-01 hook pi_army_ratio (DEV provider only; release = on)
 		BotLimits botLimits;
 		bool paused;
 		bool hasUnitProducer;
@@ -105,7 +107,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			var armyHolds = ArmyFirstEval.ArmyCountHolds(hasUnitProducer, playerResources.GetCashAndResources(), armyUnits,
 				info.MinArmyUnitsBeforeBuildings, info.ArmyFirstMinCash);
 			return ArmyFirstEval.Holds(essential, paused, armyHolds)
-				|| ArmyFirstEval.ShareHolds(essential, admission, share, cost, ShareTarget);
+				|| !ablateArmyRatio.Off(player, AblationIds.ArmyRatio)
+					&& ArmyFirstEval.ShareHolds(essential, admission, share, cost, ShareTarget);
 		}
 
 		void IBotRequestPauseBuildingProduction.BuildingAdmitted(ActorInfo building, int cost)
@@ -117,7 +120,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		// PLAN_02 section 2 values: live actors by their Valued cost (the Squad Manager's UnitValue),
 		// in-flight items by their full queue cost. One scan per ScanInterval; admitted orders are
 		// recorded on top by BuildingAdmitted until the next scan.
-		void RefreshShare(World world, Player owner)
+		void RefreshShare(World world, OpenRA.Player owner)
 		{
 			long armyLive = 0, buildingLive = 0, armyInflight = 0, buildingInflight = 0;
 
@@ -154,6 +157,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		protected override void Created(Actor self)
 		{
+			player = self.Owner;
 			playerResources = self.Owner.PlayerActor.TraitOrDefault<PlayerResources>();
 			base.Created(self);
 		}

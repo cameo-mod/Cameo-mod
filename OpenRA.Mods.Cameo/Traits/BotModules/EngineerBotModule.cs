@@ -248,6 +248,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		readonly World world;
 		readonly OpenRA.Player player;
+		AblationLatch ablateDemandCapturers; // ABLATE-01 hook pi_demand_capturers (DEV provider only; release = on)
 		readonly int maximumCaptureTargetOptions;
 		readonly EngineerJob[] repairJobs;
 		readonly HashSet<string> capturingTypes;
@@ -852,7 +853,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// FB2: safe targets justify building a specialist even when none is available — without
 			// this, the first capturer only ever appears by unit-mix luck (the enumeration above is
 			// the module's own-units scan; the demand count includes assigned and riding engineers).
-			if (Info.UseDemandCapturers)
+			if (Info.UseDemandCapturers && !ablateDemandCapturers.Off(player, AblationIds.DemandCapturers))
 				DemandCapturers(bot, liveCapturers);
 
 			if (capturers.Count == 0)

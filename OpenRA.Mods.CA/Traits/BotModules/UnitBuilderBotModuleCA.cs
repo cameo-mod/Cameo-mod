@@ -429,7 +429,11 @@ namespace OpenRA.Mods.CA.Traits
 		// U1 (service-contract §3): the switch-gated fair-service arm and its per-category
 		// rotation cursor over stable queue keys ("actorID|queueType") — a visit resumes
 		// AFTER the last examined producer instead of always re-walking the head.
-		bool FairService => switchesActive && Info.FairProducerService;
+		bool FairService => switchesActive && Info.FairProducerService && !ablateFairProducer.Off(player, AblationIds.FairProducer);
+
+		// ABLATE-01 hooks (DEV-only provider; absent in release = always on): one cached answer per row.
+		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights;
+		bool DerivedWeightsOn => Info.UseDerivedUnitWeights && !ablateDerivedWeights.Off(player, AblationIds.DerivedWeights);
 
 		// U2 (Sol EB513352): the intent ledger's coverage-retaining semantics arm
 		// only behind their own default-off switch — OFF keeps request removal,
@@ -1583,7 +1587,7 @@ namespace OpenRA.Mods.CA.Traits
 			HashSet<string> retrySkip = null)
 		{
 			var manager = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().FirstEnabledTraitOrDefault();
-			var mix = manager?.Info.UseRoleMix == true ? manager.Info.RoleMix : null;
+			var mix = manager?.Info.UseRoleMix == true && !ablateRoleMix.Off(player, AblationIds.RoleMix) ? manager.Info.RoleMix : null;
 			if (mix == null || mix.Count == 0)
 				return null;
 
@@ -1670,12 +1674,12 @@ namespace OpenRA.Mods.CA.Traits
 			SquadManagerBotModuleCA manager = null;
 			IReadOnlyDictionary<string, int> mix = null;
 			IBotUnitRoles roles = null;
-			if (compositionWeights == null && Info.UseDerivedUnitWeights &&
+			if (compositionWeights == null && DerivedWeightsOn &&
 				(manager = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().FirstEnabledTraitOrDefault()) != null &&
 				(mix = manager.Info.RoleMix) != null && mix.Count != 0)
 				roles = unitRoles ??= player.PlayerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
 
-			return derivedUnitWeights.Select(Info.UseDerivedUnitWeights, compositionWeights, Info.UnitsToBuild,
+			return derivedUnitWeights.Select(DerivedWeightsOn, compositionWeights, Info.UnitsToBuild,
 				mix, RoleMixUnnamedPct, roles, DerivedUnitStrength);
 		}
 
