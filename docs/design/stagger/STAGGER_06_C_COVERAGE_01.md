@@ -11,9 +11,9 @@ Coverage: 108 actionable class-C rows; each is listed once below as converted, r
 
 The source table contains 131 class-C rows. 131 minus these 23 exclusions equals the 108 rows covered here.
 
-## Converted: 47 rows
+## Converted: 48 rows
 
-`A011`, `A015`, `A016`, `A041`, `A043`, `A058`, `A059`, `A062`, `A064`, `A103`, `A104`, `B004`, `B006`, `B011`, `B022`, `B023`, `B024`, `B065`, `B066`, `B067`, `B069`, `B079`, `B080`, `C054`, `C058`, `C070`, `C089`, `C095`, `E008`, `E009`, `E016`, `E023`, `E025`, `E032`, `E035`, `E048`, `E054`, `E055`, `E056`, `E069`, `E084`, `E103`, `E108`, `E109`, `E112`, `E127`, `E128`.
+`A011`, `A015`, `A016`, `A041`, `A043`, `A058`, `A059`, `A062`, `A064`, `A069`, `A103`, `A104`, `B004`, `B006`, `B011`, `B022`, `B023`, `B024`, `B065`, `B066`, `B067`, `B069`, `B079`, `B080`, `C054`, `C058`, `C070`, `C089`, `C095`, `E008`, `E009`, `E016`, `E023`, `E025`, `E032`, `E035`, `E048`, `E054`, `E055`, `E056`, `E069`, `E084`, `E103`, `E108`, `E109`, `E112`, `E127`, `E128`.
 
 Changes use `BotCooldown`, `BotPeriod`, or the row-specific absolute-tick/nominal-grid implementation. Reloads remain anchored to the actual event/visit where required; no catch-up was added. BotRng draw order was kept in the reviewed conversion batches. `B004/B006/B023/B024` additionally preserve remaining sweep waits across condition-disabled gaps. `E127/E128` retain the nominal grid anchor while validating observations against actual timestamps.
 
@@ -36,15 +36,14 @@ These retain processed-update semantics because exact N=1 parity depends on the 
 - `D058`, `D059` — topology counters advance on actual rebuild visits; adoption/rebuild branches can return before the decrement, and moving the checks can change rebuild timing and BotRng draws. `TacticalMapBotModule.cs:381-425,452-465,504-566`.
 - `E039` — the combat-analysis decay countdown (`CombatAnalysisBotModule.cs:449-452`, `--decayTicks` / `Info.DecayInterval`) is the same counter as `E040` and stays counted: Opus R-C5 2026-11-21 reverted the earlier conversion `0e60b385` (E040 was ruled RETAIN).
 
-## Already using absolute-tick or ruled elapsed-time semantics: 35 rows
+## Already using absolute-tick or ruled elapsed-time semantics: 34 rows
 
-`A021`, `A067`, `A068`, `A069`, `A123`, `B051`, `B052`, `B054`, `B063`, `D017`, `D018`, `D020`, `D021`, `D032`, `D054`, `D060`, `D061`, `D062`, `D063`, `D065`, `D066`, `D067`, `D068`, `D069`, `D071`, `D072`, `D073`, `D074`, `E058`, `E059`, `E060`, `E062`, `E074`, `E100`, `E115`.
+`A021`, `A067`, `A068`, `A123`, `B051`, `B052`, `B054`, `B063`, `D017`, `D018`, `D020`, `D021`, `D032`, `D054`, `D060`, `D061`, `D062`, `D063`, `D065`, `D066`, `D067`, `D068`, `D069`, `D071`, `D072`, `D073`, `D074`, `E058`, `E059`, `E060`, `E062`, `E074`, `E100`, `E115`.
 
 No conversion was needed because these already store/compare world ticks, use the ruled any-tick window, or are covered by the surrounding absolute-tick snapshot cadence:
 
 - `A021` — explicit Opus ruling: keep long absolute deadlines and `M13Cooldowns` save/load unchanged; do not narrow serialized values.
 - `A067`, `A068`, `A123` — `NextAttemptTick`/`CooldownUntil` are absolute tick values assigned at the event and checked lazily; the existing `StalemateEndWave` cadence is unchanged.
-- `A069` — ruled R4 any-tick window; leave its residue-window selection unchanged.
 - `B051`, `B052`, `B054`, `B063` — event/sample stamps are already world-tick values and are compared against the current world tick.
 - `D017`, `D018`, `D020`, `D021`, `D032`, `D054` — existing world-tick decision/role stamps; snapshot work is already behind the 150-tick `BotSituation.Rebuild` cadence where applicable.
 - `D060`–`D063`, `D065`–`D069`, `D071` — already absolute world-tick refresh/rebuild deadlines (R1 satisfied as-is).
