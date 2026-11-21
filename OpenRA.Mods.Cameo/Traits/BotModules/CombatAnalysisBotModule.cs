@@ -309,7 +309,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// scores from event-time facts and not from whatever the actors look like at the slot. Everything else
 			// (an ungated bot, N = 1, the bot's own Running phase) records now, exactly as before.
 			var tick = world.WorldTick;
-			var bot = ModularBot.ActiveOf(self);
+			var bot = ModularBot.ActiveOf(this.self);
 			if (bot != null && bot.TryDefer(() => DamageDealtEvent.From(bot.KeyOf(this), tick, damaged, e)))
 				return;
 

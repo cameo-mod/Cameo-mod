@@ -426,14 +426,14 @@ namespace OpenRA.Mods.Cameo.Traits
 
 	// 10.1: admission test A-5, as the rejecting function the J6 test exercises. The profile fields come from the
 	// per-op register row (the audit, plus the DEV microbenchmark of the S0 and T6 games).
-	public readonly record struct BotUnitProfile(
+	public readonly record struct BotJobUnitProfile(
 		int WorstCaseCost, bool CostDependsOnMapOrActors, bool UnboundedNestedCall, bool UnboundedAllocation,
 		bool UnboundedSort, bool PublishTouchesEveryCell);
 
 	public static class BotUnitAdmission
 	{
 		// Returns null when admitted, otherwise the rule that rejects the unit.
-		public static string Admit(BotUnitProfile p, int maxUnitCost)
+		public static string Admit(BotJobUnitProfile p, int maxUnitCost)
 		{
 			if (p.CostDependsOnMapOrActors || p.WorstCaseCost > maxUnitCost)
 				return "1: the unit's worst-case cost has no constant bound";

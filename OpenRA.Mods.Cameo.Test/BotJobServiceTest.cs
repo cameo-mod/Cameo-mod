@@ -114,6 +114,21 @@ namespace OpenRA.Mods.Cameo.Test
 			protected override void Publish() { }
 		}
 
+		// As SwitchJob, but every served pass completes at once: pending only on the visits where `On` is set.
+		sealed class OneShotSwitchJob : BotSlicedJob
+		{
+			public bool On;
+
+			public OneShotSwitchJob(BotJobSpec spec)
+				: base(spec) { }
+
+			protected override bool HasWork => On;
+			protected override void BeginPass() { }
+			protected override int StepUnits(int budget) => budget;
+			protected override bool PassComplete => true;
+			protected override void Publish() { }
+		}
+
 		static BotJobSpec Spec(string kind, int quota, int floor, int slotCap, int debtCap = 0, int rMax = 2, int backoff = 2, int work = 1000) =>
 			new(kind, quota, floor, slotCap, debtCap, rMax, backoff, work);
 
@@ -362,7 +377,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var set = new BotJobSet(3, new BotJobSeq());
 			var a = new EndlessJob(Spec("a", 10, 1, 3, 100));
 			var b = new EndlessJob(Spec("b", 10, 1, 3, 100));
-			var filler = new SwitchJob(Spec("filler", 0, 1, 1));
+			var filler = new OneShotSwitchJob(Spec("filler", 0, 1, 1));
 			set.Add(a);
 			set.Add(b);
 			set.Add(filler);
@@ -403,7 +418,7 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void J6_AdmissionRejectsEachSyntheticFailure()
 		{
-			var good = new BotUnitProfile(10, false, false, false, false, false);
+			var good = new BotJobUnitProfile(10, false, false, false, false, false);
 			Assert.That(BotUnitAdmission.Admit(good, 16), Is.Null);
 			Assert.That(BotUnitAdmission.Admit(good with { WorstCaseCost = 17 }, 16), Does.StartWith("1"));
 			Assert.That(BotUnitAdmission.Admit(good with { CostDependsOnMapOrActors = true }, 16), Does.StartWith("1"));

@@ -18,6 +18,7 @@ using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using BotRng = OpenRA.Mods.CA.BotRng;
 using OpenRA.Mods.Common;
+using AIUtils = OpenRA.Mods.Common.AIUtils;
 using OpenRA.Mods.Common.Activities;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;

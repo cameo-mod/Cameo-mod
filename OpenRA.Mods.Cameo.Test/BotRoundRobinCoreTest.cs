@@ -450,8 +450,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void AnUnknownEventKindIsNotLoadable()
 		{
 			var node = new BeaconEvent().Save();
-			node.Value.Value = "ActionEvent";
-			Assert.That(BotEvent.Load(node.Value), Is.Null);
+			Assert.That(BotEvent.Load(node.Value.WithValue("ActionEvent")), Is.Null);
 		}
 
 		[Test]

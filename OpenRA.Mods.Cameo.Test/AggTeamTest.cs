@@ -340,7 +340,7 @@ namespace OpenRA.Mods.Cameo.Test
 			foreach (var guard in new[]
 			{
 				"s.Type != SquadCAType.Rush", "ReferenceEquals(s, stalemateSquad)", "!AggTeamIsQuietState(s.FuzzyStateMachine?.CurrentState)",
-				"s.Units.Count < (aggFinishActive ? AggP(nameof(SquadManagerBotModuleCAInfo.AggTeamFinishJoinMinUnits)) : AggP(nameof(SquadManagerBotModuleCAInfo.AggTeamJoinMinUnits)))", "now < cooldown.Value", "var blocked = provider == null || defence.RecallAll || AggTeamSquadDefends(s);", "if (blocked)",
+				"s.Units.Count < (aggFinishActive ? AggP(nameof(SquadManagerBotModuleCAInfo.AggTeamFinishJoinMinUnits)) : AggP(nameof(SquadManagerBotModuleCAInfo.AggTeamJoinMinUnits)))", "!cooldown.Value.Ready(now)", "var blocked = provider == null || defence.RecallAll || AggTeamSquadDefends(s);", "if (blocked)",
 				"AggTeamPolicyCA.MayLeaveHome(AggTeamHomeValue(), SquadValueOf(s), reserve, blocked)", "AggTeamPolicyCA.ChooseIntent(AggTeamCandidates()",
 			})
 				Assert.That(prep, Does.Contain(guard), guard);

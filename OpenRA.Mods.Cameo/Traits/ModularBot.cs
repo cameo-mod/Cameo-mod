@@ -616,7 +616,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			{
 				var top = string.Join(", ", rows.Take(info.ModulePerfReportTop).Select(m => string.Format(
 					System.Globalization.CultureInfo.InvariantCulture, "{0}={1:F1}ms/{2}c/max{3:F2}/ge10:{4}",
-					m.Name, Ms(m.Stat.Ticks), m.Stat.Calls, Ms(m.Stat.MaxTicks), m.Stat.Over10Ms));
+					m.Name, Ms(m.Stat.Ticks), m.Stat.Calls, Ms(m.Stat.MaxTicks), m.Stat.Over10Ms)));
 				var line = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0} scope=window total_ms={1:F1} calls={2} top: {3}",
 					head, rows.Sum(m => Ms(m.Stat.Ticks)), rows.Sum(m => m.Stat.Calls), top);
 				Log.Write("perf", line);
