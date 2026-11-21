@@ -153,6 +153,194 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void ExpansionDemandEtaReloadMatchesItsN1AbsoluteTickCadence()
+		{
+			var oldDue = 100;
+			var cooldown = new BotCooldown { Due = 0 };
+			var oldRefreshes = new List<int>();
+			var newRefreshes = new List<int>();
+
+			for (var now = 100; now <= 250; now++)
+			{
+				if (now >= oldDue)
+				{
+					oldRefreshes.Add(now);
+					oldDue = now + 25;
+				}
+
+				if (cooldown.Ready(now))
+				{
+					newRefreshes.Add(now);
+					cooldown.Start(now, 25);
+				}
+			}
+
+			Assert.That(newRefreshes, Is.EqualTo(oldRefreshes));
+			Assert.That(newRefreshes, Is.EqualTo(new[] { 100, 125, 150, 175, 200, 225, 250 }));
+		}
+
+		[Test]
+		public void RetreatRallyRescoreAndOrderCooldownsMatchTheirN1Gates()
+		{
+			const int interval = 100;
+			const int pickTick = 7;
+			var lastRescoreTick = pickTick;
+			var rescoreCooldown = BotCooldown.FromRemaining(pickTick, interval);
+			var lastOrderTick = int.MinValue / 2;
+			var orderCooldown = new BotCooldown { Due = int.MinValue / 2 };
+			var oldRescores = new List<int>();
+			var newRescores = new List<int>();
+			var oldOrders = new List<int>();
+			var newOrders = new List<int>();
+
+			for (var now = 1; now <= 400; now++)
+			{
+				if (now - lastRescoreTick >= interval)
+				{
+					oldRescores.Add(now);
+					lastRescoreTick = now;
+				}
+
+				if (rescoreCooldown.Ready(now))
+				{
+					newRescores.Add(now);
+					rescoreCooldown.Start(now, interval);
+				}
+
+				if (now - lastOrderTick >= interval)
+				{
+					oldOrders.Add(now);
+					lastOrderTick = now;
+				}
+
+				if (orderCooldown.Ready(now))
+				{
+					newOrders.Add(now);
+					orderCooldown.Start(now, interval);
+				}
+			}
+
+			Assert.That(newRescores, Is.EqualTo(oldRescores));
+			Assert.That(newOrders, Is.EqualTo(oldOrders));
+		}
+
+		[Test]
+		public void RetreatRallyCooldownsRebaseFromTheLastEventWhenTheResolvedIntervalChanges()
+		{
+			static int IntervalAt(int tick) => tick < 60 ? 100 : tick < 90 ? 25 : tick < 150 ? 80 : 40;
+			var oldRescoreTick = 7;
+			var cooldownRescoreTick = 7;
+			var rescoreCooldown = new BotCooldown();
+			var oldRescores = new List<int>();
+			var newRescores = new List<int>();
+			var oldOrderTick = int.MinValue / 2;
+			var cooldownOrderTick = int.MinValue / 2;
+			var orderCooldown = new BotCooldown { Due = int.MinValue / 2 };
+			var hasOrder = false;
+			var oldOrders = new List<int>();
+			var newOrders = new List<int>();
+
+			for (var now = 1; now <= 300; now++)
+			{
+				var interval = IntervalAt(now);
+				if (now - oldRescoreTick >= interval)
+				{
+					oldRescores.Add(now);
+					oldRescoreTick = now;
+				}
+
+				rescoreCooldown.Due = cooldownRescoreTick + interval;
+				if (rescoreCooldown.Ready(now))
+				{
+					newRescores.Add(now);
+					cooldownRescoreTick = now;
+					rescoreCooldown.Start(now, interval);
+				}
+
+				if (!hasOrder || now - oldOrderTick >= interval)
+				{
+					oldOrders.Add(now);
+					oldOrderTick = now;
+					hasOrder = true;
+				}
+
+				orderCooldown.Due = cooldownOrderTick + interval;
+				if (!hasOrder || orderCooldown.Ready(now))
+				{
+					newOrders.Add(now);
+					cooldownOrderTick = now;
+					orderCooldown.Start(now, interval);
+				}
+			}
+
+			Assert.That(newRescores, Is.EqualTo(oldRescores));
+			Assert.That(newOrders, Is.EqualTo(oldOrders));
+		}
+
+		[Test]
+		public void AssaultFormationRefanCooldownMatchesItsN1GateAndPruneBoundary()
+		{
+			const int recordTick = 100;
+			const int cooldownTicks = 750;
+			var cooldown = new BotCooldown();
+			cooldown.Start(recordTick, cooldownTicks);
+
+			foreach (var now in new[] { recordTick, recordTick + cooldownTicks - 1, recordTick + cooldownTicks, recordTick + cooldownTicks + 1 })
+			{
+				Assert.That(!cooldown.Ready(now), Is.EqualTo(now - recordTick < cooldownTicks), $"same-ground gate at {now}");
+				Assert.That(now > cooldown.Due, Is.EqualTo(now - recordTick > cooldownTicks), $"prune gate at {now}");
+			}
+		}
+
+		[Test]
+		public void ObjectiveFanCooldownIsReadyAtItsOriginalWorldTickDeadline()
+		{
+			var cooldown = new BotCooldown { Due = int.MinValue / 2 };
+			Assert.That(cooldown.Ready(0), Is.True, "the initial sentinel does not block the first fan");
+			cooldown.Start(100, 750);
+			Assert.That(cooldown.Ready(849), Is.False);
+			Assert.That(cooldown.Ready(850), Is.True);
+		}
+
+		[Test]
+		public void BeaconResponderReleaseCooldownIsReadyAtTheOriginalTickBoundary()
+		{
+			var cooldown = new BotCooldown();
+			cooldown.Start(100, 50);
+
+			Assert.That(cooldown.Ready(149), Is.False);
+			Assert.That(cooldown.Ready(150), Is.True);
+		}
+
+		[Test]
+		public void DeployAbilityAndActionCooldownsMatchTheirN1Boundaries()
+		{
+			var ability = new BotCooldown();
+			ability.Start(100, 100);
+			Assert.That(ability.Ready(199), Is.False);
+			Assert.That(ability.Ready(200), Is.True);
+
+			var action = new BotCooldown();
+			action.Start(100, 150);
+			Assert.That(action.Ready(249), Is.False);
+			Assert.That(action.Ready(250), Is.True);
+		}
+
+		[Test]
+		public void DeployCooldownUsesTheIntervalOfTheReadingGroup()
+		{
+			const int actionTick = 100;
+			var longGroupCooldown = new BotCooldown();
+			longGroupCooldown.Start(actionTick, 150);
+			var shortGroupCooldown = new BotCooldown();
+			shortGroupCooldown.Start(actionTick, 0);
+
+			Assert.That(longGroupCooldown.Ready(actionTick), Is.False);
+			Assert.That(shortGroupCooldown.Ready(actionTick), Is.True);
+			Assert.That(longGroupCooldown.Ready(actionTick + 150), Is.True);
+		}
+
+		[Test]
 		public void RuledOutFirstDeadlineFormsFail()
 		{
 			// Positive control (9.5): the withdrawn due0 = r + x0 reproduces Sol's tick-25-against-26 defect at x0 = 0.

@@ -341,6 +341,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void SampleCensuses(int tick)
 		{
+			var sampleGridTick = tick - tick % OpponentFeatureWindow.SampleInterval;
 			for (var i = 0; i < enemies.Count; i++)
 			{
 				var actors = seenSource.SeenActorsOf(player, enemies[i]);
@@ -375,9 +376,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// Artillery stays 0: the observed classifier has no artillery axis - no synthesis.
 				try
 				{
-					windows[i].Add(new OpponentFeatureCensus(tick, lastSeen, actors.Count, coverage,
+					windows[i].Add(new OpponentFeatureCensus(sampleGridTick, lastSeen, actors.Count, coverage,
 						Clamp(economy), Clamp(production),
-						new[] { Clamp(infantry), Clamp(vehicle), Clamp(air), Clamp(naval), Clamp(defence), 0, Clamp(other) }));
+						new[] { Clamp(infantry), Clamp(vehicle), Clamp(air), Clamp(naval), Clamp(defence), 0, Clamp(other) }, observedTick: tick));
 				}
 				catch
 				{

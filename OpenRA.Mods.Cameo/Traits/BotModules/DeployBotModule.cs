@@ -351,11 +351,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var isDeployed = deployState == DeployState.Deployed;
 			if (isDeployed)
 			{
-				if (abilityDeployedAt.TryGetValue(unit, out var deployTick)
-					&& world.WorldTick - deployTick >= group.AbilityDuration)
+				if (abilityDeployedAt.TryGetValue(unit, out var deployTick))
 				{
-					TryUndeploy(bot, unit, group);
-					abilityDeployedAt.Remove(unit);
+					var cooldown = new BotCooldown();
+					cooldown.Start(deployTick, group.AbilityDuration);
+					if (cooldown.Ready(world.WorldTick))
+					{
+						TryUndeploy(bot, unit, group);
+						abilityDeployedAt.Remove(unit);
+					}
 				}
 
 				return;
@@ -380,9 +384,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// --- Deploy/Undeploy via IIssueDeployOrder ---
 		void TryDeploy(IBot bot, Actor unit, DeployBotGroup group)
 		{
-			if (deployCooldown.TryGetValue(unit, out var lastAction)
-				&& world.WorldTick - lastAction < group.DeployCooldown)
-				return;
+			if (deployCooldown.TryGetValue(unit, out var lastAction))
+			{
+				var cooldown = new BotCooldown();
+				cooldown.Start(lastAction, group.DeployCooldown);
+				if (!cooldown.Ready(world.WorldTick))
+					return;
+			}
 
 			var deploy = unit.TraitsImplementing<GrantConditionOnDeploy>()
 				.FirstOrDefault(d => !d.IsTraitDisabled && !d.IsTraitPaused);
@@ -407,9 +415,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void TryUndeploy(IBot bot, Actor unit, DeployBotGroup group)
 		{
-			if (deployCooldown.TryGetValue(unit, out var lastAction)
-				&& world.WorldTick - lastAction < group.DeployCooldown)
-				return;
+			if (deployCooldown.TryGetValue(unit, out var lastAction))
+			{
+				var cooldown = new BotCooldown();
+				cooldown.Start(lastAction, group.DeployCooldown);
+				if (!cooldown.Ready(world.WorldTick))
+					return;
+			}
 
 			var deployTraits = unit.TraitsImplementing<IIssueDeployOrder>()
 				.Where(d => d.CanIssueDeployOrder(unit, false));

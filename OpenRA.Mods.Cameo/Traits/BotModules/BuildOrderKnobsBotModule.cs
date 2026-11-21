@@ -232,7 +232,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		string enemyFaction = "";
 		BuildOrderReaction active;
 		int lastReactTick;
-		int nextReactTick;
+		BotCooldown reactCooldown;
 		readonly List<string> events = new();
 		int ticksPerMinute = 1500;
 
@@ -305,10 +305,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					LogOpeningEnd(tick);
 			}
 
-			if (tick >= nextReactTick)
+			if (ReactReady(reactCooldown, tick))
 			{
 				React(tick);
-				nextReactTick = tick + Math.Max(1, Info.ReactEvalTicks);
+				ReloadReact(ref reactCooldown, tick, Info.ReactEvalTicks);
 			}
 		}
 
@@ -333,6 +333,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			resolved = true;
 		}
+
+		internal static bool ReactReady(BotCooldown cooldown, int tick) => cooldown.Ready(tick);
+
+		internal static void ReloadReact(ref BotCooldown cooldown, int tick, int interval) =>
+			cooldown.Start(tick, Math.Max(1, interval));
 
 		void LoadLearned()
 		{
