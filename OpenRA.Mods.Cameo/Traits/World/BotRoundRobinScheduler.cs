@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using OpenRA.Network;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits
@@ -22,9 +23,28 @@ namespace OpenRA.Mods.Cameo.Traits
 	// the trait absent ModularBot behaves exactly as before.
 	[TraitLocation(SystemActors.World)]
 	[Desc("Round-robin scheduler for Cameo-family bots (STAGGER_DESIGN_06). Mounted on the world actor; inert until a bot type sets RoundRobin.")]
-	public sealed class BotRoundRobinSchedulerInfo : TraitInfo
+	public sealed class BotRoundRobinSchedulerInfo : TraitInfo, ILobbyOptions
 	{
-		public override object Create(ActorInitializer init) => new BotRoundRobinScheduler(init.World);
+		public const string OptionId = "botroundrobin";
+
+		[Desc("Default state of the Bot Round-Robin lobby option. Off forces every bot to act every tick (the pre-scheduler behaviour).")]
+		public readonly bool CheckboxEnabled = true;
+
+		[Desc("Prevent the Bot Round-Robin lobby option from being changed in the lobby.")]
+		public readonly bool CheckboxLocked = false;
+
+		[Desc("Display order for the Bot Round-Robin lobby option.")]
+		public readonly int CheckboxDisplayOrder = 0;
+
+		IEnumerable<LobbyOption> ILobbyOptions.LobbyOptions(MapPreview map)
+		{
+			yield return new LobbyBooleanOption(map, OptionId,
+				"Bot Round-Robin",
+				"Each bot thinks once every N ticks (N = number of bots) instead of every tick: faster games, slightly coarser bot timing. Off = every bot acts every tick.",
+				true, CheckboxDisplayOrder, CheckboxEnabled, CheckboxLocked);
+		}
+
+		public override object Create(ActorInitializer init) => new BotRoundRobinScheduler(init.World, this);
 	}
 
 	public sealed class SeatBinding
@@ -45,6 +65,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		public const int SchedulerDataVersion = 1;
 
 		readonly World world;
+		readonly BotRoundRobinSchedulerInfo info;
 		bool resolvedFromSave;
 
 		public readonly BotRoundRobinCore Core;
@@ -52,9 +73,10 @@ namespace OpenRA.Mods.Cameo.Traits
 		// Heavy-op shared jobs (design section 10). No consumer yet; owners follow the live roster at every cycle boundary (10.3).
 		public readonly BotSharedJobRegistry SharedJobs = new(new BotJobSeq());
 
-		public BotRoundRobinScheduler(World world)
+		public BotRoundRobinScheduler(World world, BotRoundRobinSchedulerInfo info)
 		{
 			this.world = world;
+			this.info = info;
 			Core = new BotRoundRobinCore(IsLive, PlayerIndexOf);
 			Core.RosterRepacked += roster => SharedJobs.TransferOwners(roster.Select(s => s.Name).ToList());
 		}
@@ -69,11 +91,56 @@ namespace OpenRA.Mods.Cameo.Traits
 		// The player list is fixed after the bots activate, so the index is read at a cycle boundary.
 		int PlayerIndexOf(BotSeat s) => Array.IndexOf(world.Players, ((SeatBinding)s.Bot).Player);
 
+		// The synced lobby option (default On). Off means N = 1 for every bot: its seat is registered ungated,
+		// which is the byte-identical pre-scheduler behaviour.
+		public bool OptionOn => world.LobbyInfo?.GlobalSettings.OptionOrDefault(BotRoundRobinSchedulerInfo.OptionId, info.CheckboxEnabled)
+			?? info.CheckboxEnabled;
+
+		/// <summary>
+		/// DEV override spec: comma-separated <c>player:on</c> or <c>player:off</c>, player = InternalName or
+		/// PlayerName (case-insensitive), e.g. <c>Multi0:on,Multi1:off</c>. Returns null when no entry names the player.
+		/// </summary>
+		public static bool? ParseOverride(string spec, params string[] playerKeys)
+		{
+			if (string.IsNullOrWhiteSpace(spec))
+				return null;
+
+			foreach (var entry in spec.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+			{
+				var i = entry.LastIndexOf(':');
+				if (i <= 0)
+					continue;
+
+				var key = entry[..i].Trim();
+				var value = entry[(i + 1)..].Trim();
+				if (!playerKeys.Any(k => k != null && string.Equals(k, key, StringComparison.OrdinalIgnoreCase)))
+					continue;
+
+				if (value.Equals("on", StringComparison.OrdinalIgnoreCase))
+					return true;
+				if (value.Equals("off", StringComparison.OrdinalIgnoreCase))
+					return false;
+			}
+
+			return null;
+		}
+
+		bool IsGated(OpenRA.Player p, bool botTypeRoundRobin)
+		{
+#if CAMEO_DEV_LOGGING
+			// DEV builds only, per process: every client of a multiplayer game must be given the same argument.
+			var dev = ParseOverride(CameoDevArgs.Value("Cameo.DevRoundRobin"), p.InternalName, p.PlayerName);
+			if (dev.HasValue)
+				return dev.Value;
+#endif
+			return botTypeRoundRobin && OptionOn;
+		}
+
 		// Called from ModularBot.Activate after IsEnabled = true; host only (engine Player.cs:223).
 		public BotSeat Register(OpenRA.Player p, ModularBot bot, bool gated)
 		{
 			var spawnKey = p.SpawnPoint > 0 ? p.SpawnPoint : BotRoundRobinCore.NoSpawnKey;
-			return Core.Register(p.InternalName, spawnKey, Array.IndexOf(world.Players, p), gated, new SeatBinding(p, bot), world.WorldTick);
+			return Core.Register(p.InternalName, spawnKey, Array.IndexOf(world.Players, p), IsGated(p, gated), new SeatBinding(p, bot), world.WorldTick);
 		}
 
 		void ITick.Tick(Actor self)
