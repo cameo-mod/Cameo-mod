@@ -17,6 +17,10 @@ namespace OpenRA.Mods.CA.Traits
 	/// one interval. A bot the round-robin scheduler visits less often than every tick never sees
 	/// `t % interval == 0`, but it still emits every slot. When every tick is visited the emitted slots are
 	/// exactly the old modulo ticks. Pure arithmetic: no world state, no RNG, read-only telemetry.
+	/// Release safety: the only caller (SquadManagerBotModuleCA.DiagnosticTick) returns before reaching this
+	/// type unless the stalemate diagnostics flag and the DEV sink are on and a live writer exists, so a
+	/// release build never advances a slot, allocates or logs through it. It lives in shared CA logic because
+	/// the squad manager is shared; the writer and manifest field stay in the DEV assembly.
 	/// </summary>
 	public static class DiagnosticEmitSchedule
 	{

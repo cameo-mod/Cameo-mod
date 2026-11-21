@@ -43,10 +43,28 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void DefaultProductionReserveKeepsTheF2F3Behaviour()
+		public void UnsetProductionReserveFailsClosedForGeneralOnly()
 		{
-			Assert.That(RecoverySpendPolicyCA.Admits(4000, 1000, 2000, 1500, 1000, false, General),
-				Is.EqualTo(RecoverySpendPolicyCA.Admits(4000, 1000, 2000, 1500, 1000, false, General, 0)));
+			// P is a required argument. A negative P is the unset BotLimits sentinel (-1): the General
+			// class (K5 units, K6 PW/DX) is denied even with ample cash, so a missing line is never a free spend.
+			Assert.That(RecoverySpendPolicyCA.Admits(int.MaxValue, 1000, 0, 0, 0, false, General, -1), Is.False);
+			Assert.That(RecoverySpendPolicyCA.Admits(int.MaxValue, 1000, 0, 0, 0, false, General, 0), Is.True);
+
+			// K1-K4 never read P: the same sentinel changes nothing for them.
+			Assert.That(RecoverySpendPolicyCA.Admits(1000, 1000, 2000, 0, 1000, false,
+				RecoverySpendPolicyCA.Admission.OpeningOrEssential, -1), Is.True);
+			Assert.That(RecoverySpendPolicyCA.Admits(1500, 1000, 2000, 500, 1000, false,
+				RecoverySpendPolicyCA.Admission.SelectedRecovery, -1), Is.True);
+			Assert.That(RecoverySpendPolicyCA.Admits(1500, 1000, 2000, 500, 1000, false,
+				RecoverySpendPolicyCA.Admission.EssentialBuilding, -1), Is.True);
+
+			// The ledger passes the sentinel through to the policy and records nothing on a denial.
+			var ledger = new RecoverySpendLedgerCA();
+			Assert.That(ledger.TryAllocateGeneration(out var generation), Is.True);
+			var key = new RecoverySpendKey(generation, 7, 0, "barracks");
+			Assert.That(ledger.TryReserve(key, int.MaxValue, 1000, 0, 0, 0, false, General, -1), Is.False);
+			Assert.That(ledger.CommittedCost, Is.Zero);
+			Assert.That(ledger.TryReserve(key, int.MaxValue, 1000, 0, 0, 0, false, General, 0), Is.True);
 		}
 
 		[Test]
@@ -123,7 +141,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(ledger.TryAllocateGeneration(out var generation), Is.True);
 			var key = new RecoverySpendKey(generation, 7, 0, "harv");
 			Assert.That(ledger.TryReserve(key, 2000, 1000, 0, 0, 0, false,
-				RecoverySpendPolicyCA.Admission.General), Is.True);
+				RecoverySpendPolicyCA.Admission.General, productionReserve: 0), Is.True);
 			Assert.That(ledger.RegisterDelivery(key, 10), Is.True);
 			// Not retired: covered at any tick, no timeout.
 			Assert.That(ledger.DeliveryCovered(key, 10 + RecoverySpendPolicyCA.DeliveryTimeoutTicks + 5000), Is.True);

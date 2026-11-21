@@ -21,30 +21,30 @@ namespace OpenRA.Mods.Cameo.Test
 		public void GeneralSpendRespectsMaximumFloorAndSeparateRecoveryCharge()
 		{
 			var kind = RecoverySpendPolicyCA.Admission.General;
-			Assert.That(RecoverySpendPolicyCA.Admits(4000, 1000, 2000, 1500, 1000, false, kind), Is.True);
-			Assert.That(RecoverySpendPolicyCA.Admits(3999, 1000, 2000, 1500, 1000, false, kind), Is.False);
-			Assert.That(RecoverySpendPolicyCA.Admits(4000, 1500, 2000, 1500, 1000, true, kind), Is.True);
+			Assert.That(RecoverySpendPolicyCA.Admits(4000, 1000, 2000, 1500, 1000, false, kind, productionReserve: 0), Is.True);
+			Assert.That(RecoverySpendPolicyCA.Admits(3999, 1000, 2000, 1500, 1000, false, kind, productionReserve: 0), Is.False);
+			Assert.That(RecoverySpendPolicyCA.Admits(4000, 1500, 2000, 1500, 1000, true, kind, productionReserve: 0), Is.True);
 		}
 
 		[Test]
 		public void OnlySelectedRecoveryMayUseMobileFloorButItLeavesEssentialFloor()
 		{
 			Assert.That(RecoverySpendPolicyCA.Admits(2500, 1000, 2000, 1500, 1000, false,
-				RecoverySpendPolicyCA.Admission.SelectedRecovery), Is.True);
+				RecoverySpendPolicyCA.Admission.SelectedRecovery, productionReserve: 0), Is.True);
 			Assert.That(RecoverySpendPolicyCA.Admits(2499, 1000, 2000, 1500, 1000, false,
-				RecoverySpendPolicyCA.Admission.SelectedRecovery), Is.False);
+				RecoverySpendPolicyCA.Admission.SelectedRecovery, productionReserve: 0), Is.False);
 			Assert.That(RecoverySpendPolicyCA.Admits(2500, 1000, 2000, 1500, 1000, false,
-				RecoverySpendPolicyCA.Admission.General), Is.False);
+				RecoverySpendPolicyCA.Admission.General, productionReserve: 0), Is.False);
 		}
 
 		[Test]
 		public void EssentialMayUseReservesButNeverSpendMoreThanAvailable()
 		{
 			var kind = RecoverySpendPolicyCA.Admission.OpeningOrEssential;
-			Assert.That(RecoverySpendPolicyCA.Admits(1000, 1000, 2000, 1000, 2000, false, kind), Is.True);
-			Assert.That(RecoverySpendPolicyCA.Admits(999, 1000, 0, 0, 0, false, kind), Is.False);
+			Assert.That(RecoverySpendPolicyCA.Admits(1000, 1000, 2000, 1000, 2000, false, kind, productionReserve: 0), Is.True);
+			Assert.That(RecoverySpendPolicyCA.Admits(999, 1000, 0, 0, 0, false, kind, productionReserve: 0), Is.False);
 			Assert.That(RecoverySpendPolicyCA.Admits(int.MaxValue, 0, int.MaxValue, 0, int.MaxValue, false,
-				RecoverySpendPolicyCA.Admission.General), Is.False);
+				RecoverySpendPolicyCA.Admission.General, productionReserve: 0), Is.False);
 		}
 
 		[Test]
@@ -58,11 +58,11 @@ namespace OpenRA.Mods.Cameo.Test
 			var general = new RecoverySpendKey(generalGeneration, 2, 0, "tank");
 			ledger.SelectRecovery(selected);
 			Assert.That(ledger.TryReserve(wrongQueue, 3000, 1000, 1500, 500, 1000, false,
-				RecoverySpendPolicyCA.Admission.SelectedRecovery), Is.False);
+				RecoverySpendPolicyCA.Admission.SelectedRecovery, productionReserve: 0), Is.False);
 			Assert.That(ledger.TryReserve(selected, 3000, 1000, 1500, 500, 1000, false,
-				RecoverySpendPolicyCA.Admission.SelectedRecovery), Is.True);
+				RecoverySpendPolicyCA.Admission.SelectedRecovery, productionReserve: 0), Is.True);
 			Assert.That(ledger.TryReserve(general, 3000, 1, 1500, 500, 1000, false,
-				RecoverySpendPolicyCA.Admission.General), Is.False);
+				RecoverySpendPolicyCA.Admission.General, productionReserve: 0), Is.False);
 			Assert.That(ledger.Settle(general), Is.False);
 			Assert.That(ledger.Settle(wrongQueue), Is.False);
 			Assert.That(ledger.TransferToQueue(wrongQueue, 1000), Is.False);
@@ -74,7 +74,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(ledger.Settle(selected), Is.True);
 			Assert.That(ledger.Settle(selected), Is.False);
 			Assert.That(ledger.TryReserve(selected, 3000, 1000, 1500, 500, 1000, false,
-				RecoverySpendPolicyCA.Admission.SelectedRecovery), Is.False);
+				RecoverySpendPolicyCA.Admission.SelectedRecovery, productionReserve: 0), Is.False);
 		}
 
 		[Test]
@@ -100,14 +100,14 @@ namespace OpenRA.Mods.Cameo.Test
 			var key = new RecoverySpendKey(generation, 4, 0, "harvester");
 			original.SelectRecovery(key);
 			Assert.That(original.TryReserve(key, 2000, 1000, 0, 0, 1000, false,
-				RecoverySpendPolicyCA.Admission.SelectedRecovery), Is.True);
+				RecoverySpendPolicyCA.Admission.SelectedRecovery, productionReserve: 0), Is.True);
 			var restored = new RecoverySpendLedgerCA();
 			Assert.That(restored.Restore(original.Save()), Is.True);
 			Assert.That(restored.CommittedCost, Is.EqualTo(1000));
 			Assert.That(restored.TryAllocateGeneration(out var next), Is.True);
 			Assert.That(next, Is.GreaterThan(generation));
 			Assert.That(restored.TryReserve(key, 2000, 1000, 0, 0, 1000, false,
-				RecoverySpendPolicyCA.Admission.SelectedRecovery), Is.False);
+				RecoverySpendPolicyCA.Admission.SelectedRecovery, productionReserve: 0), Is.False);
 			var corrupt = original.Save() with { UsedGenerations = new uint[0] };
 			Assert.That(restored.Restore(corrupt), Is.False);
 			Assert.That(restored.CommittedCost, Is.EqualTo(1000));
@@ -141,7 +141,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var key = new RecoverySpendKey(generation, 4, 0, "harvester");
 			ledger.SelectRecovery(key);
 			Assert.That(ledger.TryReserve(key, 2000, 1000, 0, 0, 1000, false,
-				RecoverySpendPolicyCA.Admission.SelectedRecovery), Is.True);
+				RecoverySpendPolicyCA.Admission.SelectedRecovery, productionReserve: 0), Is.True);
 			Assert.That(ledger.RegisterDelivery(key, 100), Is.True);
 			Assert.That(ledger.DeliveryCovered(key, 10000), Is.True, "unresolved has no timeout");
 			Assert.That(ledger.NoteRetired(key, 200), Is.True);
@@ -162,11 +162,11 @@ namespace OpenRA.Mods.Cameo.Test
 			var two = new RecoverySpendKey(second, 2, 0, "harvester");
 			ledger.SelectRecovery(one);
 			Assert.That(ledger.TryReserve(one, 5000, 1000, 0, 0, 0, false,
-				RecoverySpendPolicyCA.Admission.SelectedRecovery), Is.True);
+				RecoverySpendPolicyCA.Admission.SelectedRecovery, productionReserve: 0), Is.True);
 			Assert.That(ledger.RegisterDelivery(one, 10), Is.True);
 			ledger.SelectRecovery(two);
 			Assert.That(ledger.TryReserve(two, 5000, 1000, 0, 0, 0, false,
-				RecoverySpendPolicyCA.Admission.SelectedRecovery), Is.True);
+				RecoverySpendPolicyCA.Admission.SelectedRecovery, productionReserve: 0), Is.True);
 			Assert.That(ledger.RegisterDelivery(two, 10), Is.True);
 			Assert.That(ledger.NoteProduced("harvester", 100, 10), Is.False);
 			Assert.That(ledger.NoteProduced("harvester", 100, 11), Is.True);

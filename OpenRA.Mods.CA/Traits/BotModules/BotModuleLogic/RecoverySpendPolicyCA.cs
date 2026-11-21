@@ -52,9 +52,13 @@ namespace OpenRA.Mods.CA.Traits
 		// The general gate is C - x >= max(M, E, P(r)) + R (PROD-IDLE_PLAN_03 section 2.2): never M + E + P.
 		// `available` is C, already net of every earlier commitment counted once, so a pending
 		// cost is never subtracted from x again. `productionReserve` is P(r), appended last and
-		// 0 by default so callers that have no P line (and the F2/F3 tests) keep their behaviour.
+		// REQUIRED (no default): a caller that has no P cannot compile, so the reserve is never
+		// dropped by omission. A negative value is the unset BotLimits sentinel (-1), a
+		// configuration error: the General class (K5/K6) then fails closed (denied) rather than
+		// admitting with no reserve. K1-K4 do not use P and are unaffected. F2/F3-only callers
+		// and tests pass an explicit 0.
 		public static bool Admits(int available, int cost, int mobileFloor, int essentialFloor,
-			int recoveryCharge, bool sameEssentialCommitment, Admission admission, int productionReserve = 0)
+			int recoveryCharge, bool sameEssentialCommitment, Admission admission, int productionReserve)
 		{
 			var remaining = (long)Math.Max(0, available) - Math.Max(0, cost);
 			if (remaining < 0)
@@ -66,7 +70,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (admission == Admission.SelectedRecovery || admission == Admission.EssentialBuilding)
 				return remaining >= essential;
 
-			var floor = Math.Max(Math.Max(Math.Max(0, mobileFloor), essential), Math.Max(0, productionReserve));
+			if (productionReserve < 0)
+				return false;
+
+			var floor = Math.Max(Math.Max(Math.Max(0, mobileFloor), essential), productionReserve);
 			return remaining >= (long)floor + (sameEssentialCommitment ? 0 : Math.Max(0, recoveryCharge));
 		}
 
@@ -134,7 +141,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		public bool TryReserve(RecoverySpendKey key, int cash, int cost, int mobileFloor, int essentialFloor,
 			int recoveryCharge, bool sameEssentialCommitment, RecoverySpendPolicyCA.Admission admission,
-			int productionReserve = 0)
+			int productionReserve)
 		{
 			if (key.Generation == 0 || (!exhausted && key.Generation >= nextGeneration)
 				|| string.IsNullOrEmpty(key.Item) || key.Queue < 0 || usedGenerations.Contains(key.Generation)
