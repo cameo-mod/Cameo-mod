@@ -89,10 +89,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		public void Observe(int interval, IBotEnemyCompositionProvider provider)
 		{
-			if (world.WorldTick < nextObservation)
+			if (!BotPeriod.CarryDue(ref nextObservation, world.WorldTick, interval))
 				return;
 
-			nextObservation = world.WorldTick + Math.Max(1, interval);
 			IReadOnlyDictionary<string, int> sample = null;
 			if (provider == null || !provider.TryGetEnemyComposition(out sample))
 				sample = OmniscientSample();

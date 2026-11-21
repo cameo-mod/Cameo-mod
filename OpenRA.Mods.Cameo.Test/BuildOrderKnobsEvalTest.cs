@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 
@@ -21,6 +22,19 @@ namespace OpenRA.Mods.Cameo.Test
 	[TestFixture]
 	public class BuildOrderKnobsEvalTest
 	{
+		[Test]
+		public void ReactCooldownReloadsAtOverdueVisitWithoutCatchUp()
+		{
+			var cooldown = new BotCooldown();
+			Assert.That(BuildOrderKnobsBotModule.ReactReady(cooldown, 0), Is.True);
+			BuildOrderKnobsBotModule.ReloadReact(ref cooldown, 0, 125);
+			Assert.That(BuildOrderKnobsBotModule.ReactReady(cooldown, 124), Is.False);
+			Assert.That(BuildOrderKnobsBotModule.ReactReady(cooldown, 126), Is.True);
+			BuildOrderKnobsBotModule.ReloadReact(ref cooldown, 126, 125);
+			Assert.That(BuildOrderKnobsBotModule.ReactReady(cooldown, 250), Is.False);
+			Assert.That(BuildOrderKnobsBotModule.ReactReady(cooldown, 251), Is.True);
+		}
+
 		const int TicksPerMinute = 1500;
 
 		static readonly BuildOrderReactThresholds Thresholds = new(600, 9000, 800, 1500, 40, 130, 6);
@@ -203,6 +217,22 @@ namespace OpenRA.Mods.Cameo.Test
 			var late = new BuildOrderOpening("t", new[] { "tech", "tech", "tech", "tech", "tech", "tech" }, 7500, 1500);
 			late.Update(7500);
 			Assert.That(late.EndReason, Is.EqualTo("timeout"));
+		}
+
+		[Test]
+		public void OpeningStepTimeoutReloadsFromTheVisitThatAdvancesTheStep()
+		{
+			var opening = new BuildOrderOpening("t", new[] { "power", "refinery" }, 10000, 10, startTick: 100);
+			opening.Update(109);
+			Assert.That(opening.StepIndex, Is.EqualTo(0));
+
+			opening.Update(110);
+			Assert.That(opening.StepIndex, Is.EqualTo(1));
+			opening.Update(119);
+			Assert.That(opening.StepIndex, Is.EqualTo(1), "the next step is not due before its reloaded deadline");
+
+			opening.Update(120);
+			Assert.That(opening.EndReason, Is.EqualTo("completed"), "the next step is due at the reloaded deadline");
 		}
 
 		[Test]

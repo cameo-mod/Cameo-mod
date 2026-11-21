@@ -18,6 +18,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using NUnit.Framework;
 using OpenRA.GameRules;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.CA.Traits.BotModules.Squads;
 using OpenRA.Mods.Common.Activities;
@@ -228,7 +229,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 				// Seed as "planned this tick at the current anchor" so the replan
 				// gate is closed and the seed list is what the commit checks see.
-				Set(State, "lastPlanTick", 0);
+				Set(State, "replanCooldown", new BotCooldown { Due = 25 });
 				Set(State, "formStartTick", 0);
 				Set(State, "planAnchor", Anchor);
 				Set(State, "settings", new AssaultFormationSettings(

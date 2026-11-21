@@ -118,7 +118,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		readonly World world;
 		readonly OpenRA.Player player;
-		int scanTicks;
+		BotPeriod scanTicks; // STAGGER-06 F1
 
 		// AR-9 (§19.6): whoever orders holds the lease. A unit is claimed for as long as its group
 		// keeps issuing it orders — TryClaim renews on every ordered tick — and the lease lapses
@@ -139,15 +139,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			world = self.World;
 			player = self.Owner;
-			scanTicks = BotRng.For(player, nameof(DeployBotModule)).Next(ScanInterval);
+			scanTicks = BotPeriod.F1(world.WorldTick, BotRng.For(player, nameof(DeployBotModule)).Next(ScanInterval), ScanInterval);
 		}
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (--scanTicks > 0)
+			if (!scanTicks.TryFire(BotVisitClock.Of(bot)))
 				return;
-
-			scanTicks = ScanInterval;
 
 			// Clean up dead actors from ability tracking
 			foreach (var dead in abilityDeployedAt.Keys
@@ -353,11 +351,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var isDeployed = deployState == DeployState.Deployed;
 			if (isDeployed)
 			{
-				if (abilityDeployedAt.TryGetValue(unit, out var deployTick)
-					&& world.WorldTick - deployTick >= group.AbilityDuration)
+				if (abilityDeployedAt.TryGetValue(unit, out var deployTick))
 				{
-					TryUndeploy(bot, unit, group);
-					abilityDeployedAt.Remove(unit);
+					var cooldown = new BotCooldown();
+					cooldown.Start(deployTick, group.AbilityDuration);
+					if (cooldown.Ready(world.WorldTick))
+					{
+						TryUndeploy(bot, unit, group);
+						abilityDeployedAt.Remove(unit);
+					}
 				}
 
 				return;
@@ -382,9 +384,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// --- Deploy/Undeploy via IIssueDeployOrder ---
 		void TryDeploy(IBot bot, Actor unit, DeployBotGroup group)
 		{
-			if (deployCooldown.TryGetValue(unit, out var lastAction)
-				&& world.WorldTick - lastAction < group.DeployCooldown)
-				return;
+			if (deployCooldown.TryGetValue(unit, out var lastAction))
+			{
+				var cooldown = new BotCooldown();
+				cooldown.Start(lastAction, group.DeployCooldown);
+				if (!cooldown.Ready(world.WorldTick))
+					return;
+			}
 
 			var deploy = unit.TraitsImplementing<GrantConditionOnDeploy>()
 				.FirstOrDefault(d => !d.IsTraitDisabled && !d.IsTraitPaused);
@@ -409,9 +415,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void TryUndeploy(IBot bot, Actor unit, DeployBotGroup group)
 		{
-			if (deployCooldown.TryGetValue(unit, out var lastAction)
-				&& world.WorldTick - lastAction < group.DeployCooldown)
-				return;
+			if (deployCooldown.TryGetValue(unit, out var lastAction))
+			{
+				var cooldown = new BotCooldown();
+				cooldown.Start(lastAction, group.DeployCooldown);
+				if (!cooldown.Ready(world.WorldTick))
+					return;
+			}
 
 			var deployTraits = unit.TraitsImplementing<IIssueDeployOrder>()
 				.Where(d => d.CanIssueDeployOrder(unit, false));

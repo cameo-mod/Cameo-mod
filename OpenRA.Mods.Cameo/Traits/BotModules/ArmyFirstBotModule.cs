@@ -9,7 +9,9 @@
  */
 #endregion
 
+using System;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -57,6 +59,24 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		/// <summary>Essentials (conyard, refinery, power, first factory) always pass; everything else yields to either vote.</summary>
 		public static bool Holds(bool essential, bool cashPoorPaused, bool armyCountHolds) => !essential && (cashPoorPaused || armyCountHolds);
+
+		/// <summary>Freeze only ticks spent disabled; a visit later in the transition tick has already counted.</summary>
+		public static int PauseScan(int transitionTick, int lastVisitTick) => Math.Max(transitionTick, lastVisitTick + 1);
+
+		public static void ResumeScan(ref BotCooldown cooldown, int tick, int disabledFromTick)
+		{
+			if (disabledFromTick >= 0)
+				cooldown.Freeze(Math.Max(0, tick - disabledFromTick));
+		}
+
+		public static bool ShouldScan(ref BotCooldown cooldown, int visitTick, int interval)
+		{
+			if (!cooldown.Ready(visitTick))
+				return false;
+
+			cooldown.Start(visitTick, interval);
+			return true;
+		}
 	}
 
 	/// <summary>
@@ -74,7 +94,10 @@ namespace OpenRA.Mods.Cameo.Traits
 		bool paused;
 		bool hasUnitProducer;
 		int armyUnits;
-		int scanTicks;
+		BotCooldown scanCooldown;
+		int disabledFromTick = -1;
+		int lastBotTick;
+		bool scanStarted;
 
 		public ArmyFirstBotModule(ArmyFirstBotModuleInfo info, ActorInitializer init)
 			: base(info)
@@ -98,15 +121,29 @@ namespace OpenRA.Mods.Cameo.Traits
 			base.Created(self);
 		}
 
+		protected override void TraitDisabled(Actor self)
+		{
+			disabledFromTick = scanStarted
+				? ArmyFirstEval.PauseScan(self.World.WorldTick, lastBotTick)
+				: -1;
+		}
+
+		protected override void TraitEnabled(Actor self)
+		{
+			ArmyFirstEval.ResumeScan(ref scanCooldown, self.World.WorldTick, disabledFromTick);
+			disabledFromTick = -1;
+		}
+
 		void IBotTick.BotTick(IBot bot)
 		{
 			if (IsTraitDisabled || playerResources == null)
 				return;
 
-			if (--scanTicks > 0)
+			var visitTick = BotVisitClock.Of(bot).VisitTick;
+			lastBotTick = visitTick;
+			if (!ArmyFirstEval.ShouldScan(ref scanCooldown, visitTick, info.ScanInterval))
 				return;
-
-			scanTicks = info.ScanInterval;
+			scanStarted = true;
 
 			var world = bot.Player.World;
 

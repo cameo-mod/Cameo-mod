@@ -54,11 +54,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly Predicate<Actor> unitCannotBeOrdered;
 
 		readonly List<UnitWposWrapper> responders = new();
-		readonly Dictionary<Actor, int> responderAssignedTick = new();
+		readonly Dictionary<Actor, BotCooldown> responderReleaseCooldowns = new();
 
 		IBotRegionThreatProvider[] threatProviders;
 		List<UnitWposWrapper> idlePool = new();
-		int scanTicks;
+		BotPeriod scanTicks; // STAGGER-06 F1
 		int lastProcessedTick = -1;
 
 		public BeaconResponderBotModule(Actor self, BeaconResponderBotModuleInfo info)
@@ -72,7 +72,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		protected override void TraitEnabled(Actor self)
 		{
 			threatProviders = self.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
-			scanTicks = BotRng.For(player, nameof(BeaconResponderBotModule)).Next(0, Info.ScanInterval);
+			scanTicks = BotPeriod.F1(player.World.WorldTick, BotRng.For(player, nameof(BeaconResponderBotModule)).Next(0, Info.ScanInterval), Info.ScanInterval);
 		}
 
 		void IBotEnabled.BotEnabled(IBot bot) { }
@@ -84,10 +84,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (--scanTicks > 0)
+			if (!scanTicks.TryFire(BotVisitClock.Of(bot)))
 				return;
-
-			scanTicks = Info.ScanInterval;
 
 			var tracker = world.WorldActor.TraitOrDefault<BeaconTracker>();
 			if (tracker == null)
@@ -129,9 +127,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				foreach (var r in responders.Where(u =>
 					unitCannotBeOrdered(u.Actor) || squadOwned.Contains(u.Actor) ||
-					u.Actor.IsIdle && tick - responderAssignedTick.GetValueOrDefault(u.Actor) >= Info.ReleaseAfterTicks).ToArray())
+					u.Actor.IsIdle && responderReleaseCooldowns.GetValueOrDefault(u.Actor).Ready(tick)).ToArray())
 				{
-					responderAssignedTick.Remove(r.Actor);
+					responderReleaseCooldowns.Remove(r.Actor);
 					responders.Remove(r);
 
 					// Alive and not squad-owned -> hand back to the idle pool; a unit
@@ -206,7 +204,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				idlePool.Remove(u);
 				responders.Add(u);
-				responderAssignedTick[u.Actor] = world.WorldTick;
+				StartResponderReleaseCooldown(u.Actor);
 				BotUnitLeases.TryClaim(leases, u.Actor, LeaseOwner, BotLeasePurpose.Beacon, ResponderLeaseTicks);
 			}
 
@@ -232,9 +230,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			idlePool.Remove(support);
 			responders.Add(support);
-			responderAssignedTick[support.Actor] = world.WorldTick;
+			StartResponderReleaseCooldown(support.Actor);
 			bot.QueueOrder(new Order("Move", support.Actor, Target.FromCell(world, cell), false));
 			CAAIUtils.BotDebug("AI ({0}): beacon support response — {1} to {2}", player.ClientIndex, support.Actor, cell);
+		}
+
+		void StartResponderReleaseCooldown(Actor actor)
+		{
+			var cooldown = new BotCooldown();
+			cooldown.Start(world.WorldTick, Info.ReleaseAfterTicks);
+			responderReleaseCooldowns[actor] = cooldown;
 		}
 	}
 }

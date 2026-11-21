@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.CA.Traits.BotModules;
 using OpenRA.Mods.CA.Traits.BotModules.Squads;
@@ -42,7 +43,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			public Actor Actor;
 			public CPos LastCell;
 			public int Field = -1;
-			public int NextAbortTick;
+			public BotCooldown AbortCooldown;
 			public CPos? TripStart;
 		}
 
@@ -50,7 +51,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int mcvZonesTick = int.MinValue / 2;
 		List<McvThreatZone> mcvZoneCache = new();
 		List<CPos> mcvStarts;
-		int mcvNextGuardTick;
+		BotCooldown mcvGuardCooldown;
 		readonly List<McvThreatZone> mcvLossZones = new();
 		readonly Dictionary<uint, McvTrack> mcvTracks = new();
 		readonly Dictionary<string, int> mcvWeaponRangeCache = new();
@@ -319,10 +320,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			var now = world.WorldTick;
-			if (now < mcvNextGuardTick)
+			if (!mcvGuardCooldown.Ready(now))
 				return;
 
-			mcvNextGuardTick = now + policy.McvSafeParam(nameof(SquadManagerBotModuleCAInfo.AggTeamMcvGuardIntervalTicks));
+			mcvGuardCooldown.Start(now, policy.McvSafeParam(nameof(SquadManagerBotModuleCAInfo.AggTeamMcvGuardIntervalTicks)));
 			var zones = McvZones(policy, now);
 			var abortMargin = policy.McvSafeParam(nameof(SquadManagerBotModuleCAInfo.AggTeamMcvAbortMarginCells));
 			var threatCells = policy.McvSafeParam(nameof(SquadManagerBotModuleCAInfo.AggTeamMcvAbortThreatCells));
@@ -344,7 +345,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				}
 
 				track.TripStart ??= mcv.Location;
-				if (now < track.NextAbortTick)
+				if (!track.AbortCooldown.Ready(now))
 					continue;
 
 				var threat = McvNearestVisibleThreatCells(mcv, threatCells);
@@ -352,7 +353,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (!McvSafePolicyCA.ShouldAbort(mcv.Location, tripZones, now, abortMargin, threat, threatCells))
 					continue;
 
-				track.NextAbortTick = now + policy.McvSafeParam(nameof(SquadManagerBotModuleCAInfo.AggTeamMcvAbortCooldownTicks));
+				track.AbortCooldown.Start(now, policy.McvSafeParam(nameof(SquadManagerBotModuleCAInfo.AggTeamMcvAbortCooldownTicks)));
 				if (!McvSafeAbortHome(bot, policy, zones, now, mcv))
 					bot.QueueOrder(new Order("Stop", mcv, false));
 

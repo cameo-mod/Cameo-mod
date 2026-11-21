@@ -14,7 +14,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using OpenRA.Graphics;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits.BotModules;
+using BotSlotPhases = OpenRA.Mods.CA.Traits.BotSlotPhases;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 
@@ -30,6 +32,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	/// </summary>
 	internal interface IAiSeenProfileSource
 	{
+		/// <summary>PERF-SEEN-01R: registers a consumer; the source samples its seen memory only after a call.</summary>
+		void EnableSeenMemory();
+
 		IReadOnlyCollection<ObservedActor> SeenActorsOf(OpenRA.Player observer, OpenRA.Player enemy);
 	}
 
@@ -114,6 +119,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				takeover = w.WorldActor.TraitOrDefault<BotTakeoverTracker>();
 				seenSource = w.WorldActor.TraitOrDefault<IAiSeenProfileSource>();
+				seenSource?.EnableSeenMemory();
 
 				var ground = LocomotorFor(w, Info.GroundLocomotors, IsGroundCapable);
 				var naval = LocomotorFor(w, Info.NavalLocomotors, IsNavalCapable);
@@ -129,18 +135,27 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			});
 		}
 
+		int featurePhase = -1;
+
 		void IBotTick.BotTick(IBot bot)
 		{
 			if (!eligibleAtWorldLoad || IsTraitDisabled)
 				return;
-			var tick = world.WorldTick;
+			var clock = BotVisitClock.Of(bot);
+			var tick = clock.VisitTick;
 			if (!IsContextOwner())
 				return;
 			if (seenSource != null && player.Shroud != null && enemies.Count != 0)
 			{
-				if (tick % OpponentFeatureWindow.SampleInterval == 0)
+				// QW-B: one phase for both cadences, taken from the shorter, so every sample tick is still an update tick
+				// (SampleInterval is a multiple of UpdateInterval). Phase 0 is the old absolute modulo; the phase is the
+				// residue of the visit window (STAGGER-06).
+				if (featurePhase < 0)
+					featurePhase = BotSlotPhases.Resolve(bot, OpponentFeatureWindow.UpdateInterval, 0);
+
+				if (BotPeriod.ResidueHit(tick, clock.Elapsed, OpponentFeatureWindow.SampleInterval, featurePhase))
 					SampleCensuses(tick);
-				if (tick % OpponentFeatureWindow.UpdateInterval == 0)
+				if (BotPeriod.ResidueHit(tick, clock.Elapsed, OpponentFeatureWindow.UpdateInterval, featurePhase))
 					EmitOpponentRows(tick);
 			}
 
@@ -339,6 +354,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void SampleCensuses(int tick)
 		{
+			var sampleGridTick = tick - tick % OpponentFeatureWindow.SampleInterval;
 			for (var i = 0; i < enemies.Count; i++)
 			{
 				var actors = seenSource.SeenActorsOf(player, enemies[i]);
@@ -373,9 +389,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// Artillery stays 0: the observed classifier has no artillery axis - no synthesis.
 				try
 				{
-					windows[i].Add(new OpponentFeatureCensus(tick, lastSeen, actors.Count, coverage,
+					windows[i].Add(new OpponentFeatureCensus(sampleGridTick, lastSeen, actors.Count, coverage,
 						Clamp(economy), Clamp(production),
-						new[] { Clamp(infantry), Clamp(vehicle), Clamp(air), Clamp(naval), Clamp(defence), 0, Clamp(other) }));
+						new[] { Clamp(infantry), Clamp(vehicle), Clamp(air), Clamp(naval), Clamp(defence), 0, Clamp(other) }, observedTick: tick));
 				}
 				catch
 				{

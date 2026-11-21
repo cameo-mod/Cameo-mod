@@ -16,6 +16,7 @@ using System.IO;
 using System.Linq;
 using OpenRA.Activities;
 using OpenRA.Mods.AS.Traits;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Pathfinder;
 using OpenRA.Mods.Common.Traits;
@@ -621,9 +622,10 @@ namespace OpenRA.Mods.CA.Traits
 		int projectedSpentPerTick;
 
 		readonly Stack<TraitPair<RallyPoint>> rallyPoints = [];
-		int assignRallyPointsTicks;
-		int checkBestResourceLocationTicks;
-		int sellRefineryTick;
+		BotPeriod assignRallyPoints; // STAGGER-06 B001 F1 K=max(2,Interval)
+		BotPeriod checkBestResourceLocation; // STAGGER-06 B003 F1
+
+		BotPeriod sellRefinery; // STAGGER-06 B007 F1
 		bool firstTick = true;
 		bool openingBarracksPriorityCompleted;
 		bool openingStartingCashCaptured;
@@ -649,6 +651,8 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> ProductionBuildings;
 
 		BotLimits botLimits;
+		int queueSweepDisabledFromTick = -1;
+		int lastBotTick = -1;
 		int refineryLimit;
 		IBotScaleTargets[] scaleTargets;
 		IBotBuildOrderKnobs[] buildOrderKnobs;
@@ -760,12 +764,23 @@ namespace OpenRA.Mods.CA.Traits
 
 		protected override void TraitEnabled(Actor self)
 		{
+			foreach (var builder in builders)
+				if (builder != null)
+					BaseBuilderQueueEvalCA.ResumeQueueSweepCooldown(ref builder.WaitCooldown,
+						builder.WaitCooldownStarted, world.WorldTick, queueSweepDisabledFromTick);
+
+			queueSweepDisabledFromTick = -1;
 			RefreshBotLimits();
 
 			// Avoid all AIs reevaluating assignments on the same tick, randomize their initial evaluation delay.
-			assignRallyPointsTicks = BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(0, Info.AssignRallyPointsInterval);
-			checkBestResourceLocationTicks = BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(0, Info.CheckBestResourceLocationInterval);
-			sellRefineryTick = Info.SellRefineryInterval < 0 ? 0 : BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(0, Info.SellRefineryInterval);
+			assignRallyPoints = BotPeriod.F1(world.WorldTick, BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(0, Info.AssignRallyPointsInterval), Math.Max(2, Info.AssignRallyPointsInterval));
+			checkBestResourceLocation = BotPeriod.F1(world.WorldTick, BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(0, Info.CheckBestResourceLocationInterval), Info.CheckBestResourceLocationInterval);
+			sellRefinery = BotPeriod.F1(world.WorldTick, Info.SellRefineryInterval < 0 ? 0 : BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(0, Info.SellRefineryInterval), Info.SellRefineryInterval);
+		}
+
+		protected override void TraitDisabled(Actor self)
+		{
+			queueSweepDisabledFromTick = BaseBuilderQueueEvalCA.QueueSweepPauseFromTick(world.WorldTick, lastBotTick);
 		}
 
 		void IBotPositionsUpdated.UpdatedBaseCenter(CPos newLocation)
@@ -782,6 +797,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			lastBotTick = world.WorldTick;
+
 			if (firstTick)
 			{
 				// Conditional traits are initialized after INotifyCreated, so resolve difficulty limits again here.
@@ -805,16 +822,15 @@ namespace OpenRA.Mods.CA.Traits
 				!BaseExpansionModules.Any(be => be.IsConyardRelocationPending(RelocationHoldConyard))))
 				RelocationHoldConyard = null;
 
-			if (--assignRallyPointsTicks <= 0)
+			if (assignRallyPoints.TryFire(BotVisitClock.Of(bot)))
 			{
-				assignRallyPointsTicks = Math.Max(2, Info.AssignRallyPointsInterval);
 				foreach (var rp in world.ActorsWithTrait<RallyPoint>().Where(rp => rp.Actor.Owner == player))
 					rallyPoints.Push(rp);
 			}
 			else
 			{
 				// PERF: Spread out rally point assignments updates across multiple ticks.
-				var updateCount = Exts.IntegerDivisionRoundingAwayFromZero(rallyPoints.Count, assignRallyPointsTicks);
+				var updateCount = Exts.IntegerDivisionRoundingAwayFromZero(rallyPoints.Count, assignRallyPoints.Remaining(BotVisitClock.Of(bot).VisitTick));
 				for (var i = 0; i < updateCount; i++)
 				{
 					var rp = rallyPoints.Pop();
@@ -823,9 +839,8 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
-			if (--checkBestResourceLocationTicks <= 0 && resourceLayer != null)
+			if (checkBestResourceLocation.TryFire(BotVisitClock.Of(bot)) && resourceLayer != null)
 			{
-				checkBestResourceLocationTicks = Info.CheckBestResourceLocationInterval;
 
 				// Clear outdated refinery requests that add too many refinery to a map indice
 				if (ResourceMapModule != null)
@@ -879,8 +894,6 @@ namespace OpenRA.Mods.CA.Traits
 				if (++builderIndex >= builders.Length)
 					builderIndex = 0;
 
-				--builders[builderIndex].WaitTicks;
-
 				var queues = AIUtils.FindQueues(player, builders[builderIndex].Category).ToArray();
 				if (queues.Length != 0)
 				{
@@ -932,15 +945,14 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// REFSCAN D-5 (sec 2): the search pump and the READY handoff run here, every bot visit, ahead of the
-			// queue managers' rotation and WaitTicks — the placement path never waits on the queue sweep.
+			// queue managers' rotation and queue-sweep cooldown — the placement path never waits on the queue sweep.
 			refinerySearch?.Pump(bot, RefineryLawProvider());
 
 			builders[currentBuilderIndex].Tick(bot);
 
-			if (Info.SellRefineryInterval >= 0 && --sellRefineryTick <= 0)
+			if (Info.SellRefineryInterval >= 0 && sellRefinery.TryFire(BotVisitClock.Of(bot)))
 			{
 				SellUselessRefinery(bot);
-				sellRefineryTick = Info.SellRefineryInterval;
 			}
 		}
 
@@ -1397,7 +1409,7 @@ namespace OpenRA.Mods.CA.Traits
 						demand.ExpiresTick = now + Info.ExpansionDemandIdleTicks;
 						ExpansionMcvLease.Release(leases, mcv);
 						foreach (var builder in builders)
-							builder.WaitTicks = Math.Min(builder.WaitTicks, 0);
+							BaseBuilderQueueEvalCA.MakeQueueSweepDue(ref builder.WaitCooldown, now);
 					}
 					else if (transition == BaseBuilderQueueEvalCA.ExpansionTransformTransition.Relocate)
 					{
@@ -1470,7 +1482,7 @@ namespace OpenRA.Mods.CA.Traits
 						continue;
 					}
 
-					if (now >= demand.NextEtaTick)
+					if (demand.NextEtaCooldown.Ready(now))
 						RefreshExpansionEta(demand);
 				}
 				else if (demand.DeployedYard == null || demand.DeployedYard.Disposed || demand.DeployedYard.IsDead
@@ -1705,7 +1717,7 @@ namespace OpenRA.Mods.CA.Traits
 			var now = world.WorldTick;
 			var travel = EstimateTravelTicks(demand.Mcv, demand.ConyardLoc);
 			demand.EtaTick = travel == int.MaxValue ? int.MaxValue : now + travel + Info.ExpansionDeployTicks;
-			demand.NextEtaTick = now + Info.ExpansionEtaIntervalTicks;
+			demand.NextEtaCooldown.Start(now, Info.ExpansionEtaIntervalTicks);
 			if (demand.DefenceType == null)
 				demand.DefenceType = ChooseDemandDefence(demand.EtaTick);
 		}
@@ -2185,7 +2197,7 @@ namespace OpenRA.Mods.CA.Traits
 			demand.ResourceLoc = request.ResourceLoc;
 			demand.YardFootprint = DeployFootprint(expandActor, request.ConyardLoc);
 			demand.ExpiresTick = world.WorldTick + Info.ExpansionDemandIdleTicks;
-			demand.NextEtaTick = world.WorldTick;
+			demand.NextEtaCooldown.Start(world.WorldTick, 0);
 
 			// ECON-A-FIX (R4): the demand publishes only while the expansion order issuer's lease holds on the
 			// traveller — a first claim refused by a foreign owner's lease means this journey is not ours

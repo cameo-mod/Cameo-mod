@@ -20,6 +20,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	public sealed class OpponentFeatureCensus
 	{
 		public int Tick { get; }
+		public int ObservedTick { get; }
 		public int LastVisibleTick { get; }
 		public int ObservedActorSamples { get; }
 		public int CoveragePermille { get; }
@@ -31,14 +32,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		public OpponentFeatureCensus(int tick, int lastVisibleTick, int observedActorSamples,
 			int coveragePermille, int rememberedEconomyValue, int rememberedProductionValue,
-			IEnumerable<int> rememberedRoleValues)
+			IEnumerable<int> rememberedRoleValues, int? observedTick = null)
 		{
 			var roles = rememberedRoleValues.Take(8).ToArray();
-			if (tick < 0 || lastVisibleTick < 0 || lastVisibleTick > tick || observedActorSamples < 0 ||
+			var capturedTick = observedTick ?? tick;
+			if (tick < 0 || capturedTick < tick || lastVisibleTick < 0 || lastVisibleTick > capturedTick || observedActorSamples < 0 ||
 				coveragePermille < 0 || coveragePermille > 1000 || rememberedEconomyValue < 0 ||
 				rememberedProductionValue < 0 || roles.Length != 7 || roles.Any(v => v < 0))
 				throw new ArgumentException("Invalid observed census.");
 			Tick = tick;
+			ObservedTick = capturedTick;
 			LastVisibleTick = lastVisibleTick;
 			ObservedActorSamples = observedActorSamples;
 			CoveragePermille = coveragePermille;
@@ -66,7 +69,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"role_share_defence", "role_share_artillery", "role_share_other"
 		];
 		readonly List<OpponentFeatureCensus> samples = [];
-		int lastUpdate = -1;
+		int lastUpdateTick = -1;
+		int lastUpdateGridTick = -1;
 		ContextFeatureVector cached = new(ContextFeatureKind.Opponent);
 		public int SampleCount => samples.Count;
 
@@ -76,7 +80,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (samples.Count != 0)
 			{
 				var elapsed = sample.Tick - samples[^1].Tick;
-				if (elapsed < 0)
+				if (elapsed < 0 || sample.ObservedTick < samples[^1].ObservedTick)
 					throw new ArgumentException("Census ticks must be monotonic.", nameof(sample));
 				if (elapsed < SampleInterval)
 					return false;
@@ -91,11 +95,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		public ContextFeatureVector Features(int tick)
 		{
-			if (tick < 0 || (samples.Count != 0 && tick < samples[^1].Tick) || tick < lastUpdate)
+			if (tick < 0 || (samples.Count != 0 && tick < samples[^1].ObservedTick) || tick < lastUpdateTick)
 				throw new ArgumentOutOfRangeException(nameof(tick));
-			if (lastUpdate >= 0 && tick - lastUpdate < UpdateInterval)
+			var updateGridTick = tick - tick % UpdateInterval;
+			if (lastUpdateGridTick >= 0 && updateGridTick <= lastUpdateGridTick)
 				return cached;
-			lastUpdate = tick;
+			lastUpdateTick = tick;
+			lastUpdateGridTick = updateGridTick;
 			var fields = new SortedDictionary<string, ContextFeatureMeasurement>(StringComparer.Ordinal);
 			if (samples.Count == 0)
 				return cached = new(ContextFeatureKind.Opponent);

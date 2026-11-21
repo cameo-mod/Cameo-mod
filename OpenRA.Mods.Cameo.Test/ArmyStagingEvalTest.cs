@@ -11,6 +11,7 @@
 
 using System.Linq;
 using NUnit.Framework;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 
 namespace OpenRA.Mods.Cameo.Test
@@ -19,6 +20,17 @@ namespace OpenRA.Mods.Cameo.Test
 	[TestFixture]
 	public sealed class ArmyStagingEvalTest
 	{
+		[Test]
+		public void PlanCooldownFiresInitiallyAtDueAndReloadsFromOverdueVisit()
+		{
+			var cooldown = new BotCooldown();
+			Assert.That(ArmyStagingEval.TryStartPlan(ref cooldown, 0, 25), Is.True);
+			Assert.That(ArmyStagingEval.TryStartPlan(ref cooldown, 24, 25), Is.False);
+			Assert.That(ArmyStagingEval.TryStartPlan(ref cooldown, 25, 25), Is.True);
+			Assert.That(ArmyStagingEval.TryStartPlan(ref cooldown, 56, 25), Is.True);
+			Assert.That(ArmyStagingEval.TryStartPlan(ref cooldown, 80, 25), Is.False);
+			Assert.That(ArmyStagingEval.TryStartPlan(ref cooldown, 81, 25), Is.True);
+		}
 		const long Unit = 1000;
 
 		static long[] Rim(params (int Sector, long Value)[] weights)

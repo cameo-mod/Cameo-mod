@@ -318,6 +318,44 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void WindowElectionServesEverySeatOnceAtVisitSpacingEightWithNoDoubleFire()
+		{
+			// STAGGER-06 R4 (A069): 8 seats, each visited once per N = 8 ticks (seat s at ticks = s mod 8), all pending since 100.
+			// The window [t - 7, t] makes each seat eligible for the ticks it did not visit; the per-tick election is decided once.
+			var rotation = new StalemateRotationCA();
+			for (var s = 0; s < 8; s++)
+				rotation.MarkPending(s, 100);
+
+			var served = new List<(int Tick, int Seat)>();
+			for (var t = 101; t <= 300; t++)
+			{
+				var s = t % 8;
+				if (rotation.IsPending(s) && rotation.IsWinner(s, t, 8, 8))
+				{
+					rotation.Clear(s);
+					served.Add((t, s));
+				}
+			}
+
+			Assert.That(served.Select(x => x.Seat).OrderBy(x => x), Is.EqualTo(Enumerable.Range(0, 8)), "every pending seat eventually wins, once");
+			Assert.That(served.Max(x => x.Tick), Is.LessThanOrEqualTo(108), "no seat starves");
+		}
+
+		[Test]
+		public void WindowElectionAtElapsedOneIsTheOldPerTickElection()
+		{
+			var rotation = new StalemateRotationCA();
+			rotation.MarkPending(3, 500);
+			rotation.MarkPending(5, 500);
+			// tick 501: 501 mod 8 = 5, so seat 5 has rank 0 and seat 3 has rank 6.
+			Assert.That(rotation.IsWinner(3, 501, 8, 1), Is.False);
+			Assert.That(rotation.IsWinner(5, 501, 8, 1), Is.True);
+			rotation.Clear(5);
+			Assert.That(rotation.IsWinner(3, 501, 8, 1), Is.False, "the cleared winner does not hand the same tick to the next seat");
+			Assert.That(rotation.IsWinner(3, 502, 8, 1), Is.True, "the next tick elects the remaining seat");
+		}
+
+		[Test]
 		public void ASeatPendingThisTickWaitsForTheNextElection()
 		{
 			var rotation = new StalemateRotationCA();

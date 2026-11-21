@@ -58,6 +58,15 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(AiMatchLogWriter.TruthCaptureReady(ended, botsResolved), Is.EqualTo(expected));
 		}
 
+		[TestCase(true, true, true)]
+		[TestCase(true, false, false)]
+		[TestCase(false, true, false)]
+		[TestCase(false, false, false)]
+		public void SeenMemorySamplesOnlyForAnEligibleMatchWithARegisteredConsumer(bool eligible, bool consumer, bool expected)
+		{
+			Assert.That(AiMatchLogWriter.SeenMemoryWanted(eligible, consumer), Is.EqualTo(expected));
+		}
+
 		[Test]
 		public void SightingChangeAndCadenceFloorProduceSamplesWithNumericTruth()
 		{

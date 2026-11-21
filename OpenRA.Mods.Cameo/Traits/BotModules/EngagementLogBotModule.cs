@@ -16,6 +16,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using OpenRA.FileSystem;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
@@ -39,7 +40,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public override object Create(ActorInitializer init) { return new EngagementLogBotModule(init.Self, this); }
 	}
 
-	public class EngagementLogBotModule : ConditionalTrait<EngagementLogBotModuleInfo>, IBotTick, IBotRespondToAttack, INotifyAppliedDamage
+	public class EngagementLogBotModule : ConditionalTrait<EngagementLogBotModuleInfo>, IBotTick, IBotRespondToAttack, INotifyAppliedDamage, IBotEventReceiver, IBotAttackSnapshotter
 	{
 		/// <summary>The per-type facts the log needs, read once per actor type from the rules.</summary>
 		sealed class UnitFlags
@@ -101,6 +102,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int nextEnemyBaseRefreshTick;
 		int nextPostureTick = EngagementConstants.PostureIntervalTicks;
 		int postureCount;
+		bool phaseSeeded;
 
 		/// <summary>Running sum of total_milli over this match's closed non-skirmish engagements (seen-side only).
 		/// Read by the gated InMatchAdaptBotModule; the log itself stays record-only.</summary>
@@ -134,81 +136,158 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		// ── hooks ──────────────────────────────────────────────────────────────────────────────────────────────────
 
-		void IBotRespondToAttack.RespondToAttack(IBot bot, Actor self, AttackInfo e)
+		// STAGGER_DESIGN_06 7.1 (Opus condition): RunningTotalMilli feeds InMatchAdaptBotModule, so this log is NOT decision-free.
+		// A gated bot's hits are therefore captured at event time (a snapshot event) and applied at its slot; every other path
+		// applies the same snapshot at once, which is today's synchronous behaviour. Apply reads only the snapshot and the rules.
+		readonly EngagementHitEvent scratch = new();
+
+		bool HurtWanted(Actor self, AttackInfo e)
 		{
 			if (!Ready() || e.Attacker == null || e.Attacker.Disposed || e.Damage == null || e.Damage.Value <= 0 || !self.IsInWorld)
-				return;
-			if (e.Attacker.Owner == null || e.Attacker.Owner.NonCombatant || player.RelationshipWith(e.Attacker.Owner) != PlayerRelationship.Enemy)
-				return;
+				return false;
 
-			var tick = world.WorldTick;
-			var loc = self.Location;
-			var state = Locate(tick, loc.X, loc.Y);
-			var f = FlagsOf(self.Info);
-			var dead = e.DamageState == DamageState.Dead;
+			return e.Attacker.Owner != null && !e.Attacker.Owner.NonCombatant && player.RelationshipWith(e.Attacker.Owner) == PlayerRelationship.Enemy;
+		}
 
-			state.OwnHurtEvents++;
-			if (state.FirstOwnHurtTick < 0)
-				state.FirstOwnHurtTick = tick;
+		bool DealtWanted(Actor damaged, AttackInfo e)
+		{
+			if (!Ready() || damaged == null || damaged.Disposed || !damaged.IsInWorld || e.Damage == null || e.Damage.Value <= 0)
+				return false;
 
-			NoteEnemyDefence(state, e.Attacker);
+			return damaged.Owner != null && !damaged.Owner.NonCombatant && player.RelationshipWith(damaged.Owner) == PlayerRelationship.Enemy;
+		}
 
-			if (f.Building)
-			{
-				buildingsUnderAttack[self.ActorID] = (loc.X, loc.Y, tick);
-				TrackBuilding(state, self, true, f, e);
-				if (dead)
-					state.OwnBuildingsLost++;
-				return;
-			}
+		void IBotRespondToAttack.RespondToAttack(IBot bot, Actor self, AttackInfo e)
+		{
+			// A gated bot never reaches here from a queued attack: ModularBot skips snapshotters there and posts SnapshotAttack.
+			if (HurtWanted(self, e))
+				Apply(Capture(scratch, true, world.WorldTick, self, e));
+		}
 
-			if (!dead)
-				return;
+		BotEvent IBotAttackSnapshotter.SnapshotAttack(Actor self, AttackInfo e) =>
+			HurtWanted(self, e) ? Capture(new EngagementHitEvent(), true, world.WorldTick, self, e) : null;
 
-			state.OwnLostUnits++;
-			state.OwnLostUnitValue += f.Value;
-			var role = Roles()?.PrimaryRoleOf(f.Name) ?? "unclassified";
-			state.LostByRole[role] = state.LostByRole.GetValueOrDefault(role) + f.Value;
-			foreach (var d in state.Defences)
-				if (EngagementGeometry.Dist2(loc.X, loc.Y, d.X, d.Y) <= (long)d.RangeCells * d.RangeCells)
-				{
-					state.IntoDefencesValue += f.Value;
-					break;
-				}
+		void IBotEventReceiver.ReceiveBotEvent(BotEvent ev)
+		{
+			if (ev is EngagementHitEvent hit)
+				Apply(hit);
 		}
 
 		void INotifyAppliedDamage.AppliedDamage(Actor self, Actor damaged, AttackInfo e)
 		{
-			if (!Ready() || damaged == null || damaged.Disposed || !damaged.IsInWorld || e.Damage == null || e.Damage.Value <= 0)
-				return;
-			if (damaged.Owner == null || damaged.Owner.NonCombatant || player.RelationshipWith(damaged.Owner) != PlayerRelationship.Enemy)
+			if (!DealtWanted(damaged, e))
 				return;
 
 			var tick = world.WorldTick;
-			var loc = damaged.Location;
-			var state = Locate(tick, loc.X, loc.Y);
-			var f = FlagsOf(damaged.Info);
-			var dead = e.DamageState == DamageState.Dead;
+			var bot = ModularBot.ActiveOf(player);
+			if (bot != null && bot.TryDefer(() =>
+			{
+				var snapshot = Capture(new EngagementHitEvent(), false, tick, damaged, e);
+				snapshot.Recipient = bot.KeyOf(this);
+				return snapshot;
+			}))
+				return;
+
+			Apply(Capture(scratch, false, tick, damaged, e));
+		}
+
+		// Everything Apply reads, taken at event time. The health is read only for a building (TrackBuilding is its one reader).
+		EngagementHitEvent Capture(EngagementHitEvent ev, bool hurt, int tick, Actor subject, AttackInfo e)
+		{
+			var loc = subject.Location;
+			ev.Hurt = hurt;
+			ev.EventTick = tick;
+			ev.SubjectId = subject.ActorID;
+			ev.SubjectType = subject.Info.Name;
+			ev.X = loc.X;
+			ev.Y = loc.Y;
+			ev.Dead = e.DamageState == DamageState.Dead;
+			ev.Damage = e.Damage.Value;
+
+			ev.Hp = 0;
+			ev.MaxHp = 1;
+			if (FlagsOf(subject.Info).Building)
+			{
+				var health = subject.TraitOrDefault<IHealth>();
+				ev.MaxHp = Math.Max(1, health?.MaxHP ?? 1);
+				ev.Hp = health?.HP ?? 0;
+			}
+
+			var attacker = e.Attacker;
+			ev.AttackerId = attacker?.ActorID ?? 0;
+			ev.AttackerType = attacker?.Info.Name ?? "";
+			ev.AttackerAlive = attacker != null && !attacker.Disposed;
+			ev.AttackerInWorld = ev.AttackerAlive && attacker.IsInWorld;
+			ev.AttackerX = 0;
+			ev.AttackerY = 0;
+			if (ev.AttackerInWorld)
+			{
+				var al = attacker.Location;
+				ev.AttackerX = al.X;
+				ev.AttackerY = al.Y;
+			}
+
+			return ev;
+		}
+
+		void Apply(EngagementHitEvent h)
+		{
+			var f = FlagsOf(world.Map.Rules.Actors[h.SubjectType]);
+			var state = Locate(h.EventTick, h.X, h.Y);
+
+			if (h.Hurt)
+			{
+				state.OwnHurtEvents++;
+				if (state.FirstOwnHurtTick < 0)
+					state.FirstOwnHurtTick = h.EventTick;
+
+				NoteEnemyDefence(state, h.AttackerId, h.AttackerType, h.AttackerInWorld, h.AttackerX, h.AttackerY);
+
+				if (f.Building)
+				{
+					buildingsUnderAttack[h.SubjectId] = (h.X, h.Y, h.EventTick);
+					TrackBuilding(state, h.SubjectId, true, f, h);
+					if (h.Dead)
+						state.OwnBuildingsLost++;
+					return;
+				}
+
+				if (!h.Dead)
+					return;
+
+				state.OwnLostUnits++;
+				state.OwnLostUnitValue += f.Value;
+				var role = Roles()?.PrimaryRoleOf(f.Name) ?? "unclassified";
+				state.LostByRole[role] = state.LostByRole.GetValueOrDefault(role) + f.Value;
+				foreach (var d in state.Defences)
+					if (EngagementGeometry.Dist2(h.X, h.Y, d.X, d.Y) <= (long)d.RangeCells * d.RangeCells)
+					{
+						state.IntoDefencesValue += f.Value;
+						break;
+					}
+
+				return;
+			}
 
 			state.OwnDealtEvents++;
-			if (state.FirstOwnMobileDealtTick < 0 && e.Attacker != null && !e.Attacker.Disposed)
+			if (state.FirstOwnMobileDealtTick < 0 && h.AttackerAlive)
 			{
-				var af = FlagsOf(e.Attacker.Info);
+				var af = FlagsOf(world.Map.Rules.Actors[h.AttackerType]);
 				if (af.Mobile && af.Combat)
-					state.FirstOwnMobileDealtTick = tick;
+					state.FirstOwnMobileDealtTick = h.EventTick;
 			}
 
 			if (f.Defence)
-				NoteEnemyDefence(state, damaged);
+				NoteEnemyDefence(state, h.SubjectId, h.SubjectType, true, h.X, h.Y);
 
 			if (f.Building)
 			{
-				TrackBuilding(state, damaged, false, f, e);
+				TrackBuilding(state, h.SubjectId, false, f, h);
 				if (f.BaseBuilding)
-					enemyBases[damaged.ActorID] = (loc.X, loc.Y);
+					enemyBases[h.SubjectId] = (h.X, h.Y);
 			}
 
-			if (!dead)
+			if (!h.Dead)
 				return;
 
 			if (f.Defence)
@@ -238,10 +317,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (!Ready())
 				return;
 
-			var tick = world.WorldTick;
-			if (tick >= nextSampleTick)
+			// QW-B: with phase-offset timers the three cadences start on the bot's phase of their interval; the reloads are unchanged.
+			if (!phaseSeeded)
 			{
-				nextSampleTick = tick + EngagementConstants.SampleIntervalTicks;
+				phaseSeeded = true;
+				if (BotSlotPhases.TryResolve(bot, EngagementConstants.SampleIntervalTicks, out var samplePhase))
+					nextSampleTick = samplePhase <= world.WorldTick ? 0 : samplePhase; // 0 = unarmed: first visit fires, reload v + K
+				if (BotSlotPhases.TryResolve(bot, EngagementConstants.PostureIntervalTicks, out var posturePhase))
+				{
+					nextPostureTick = EngagementConstants.PostureIntervalTicks + posturePhase;
+					nextBaseRefreshTick = posturePhase;
+				}
+			}
+
+			var tick = world.WorldTick;
+			if (BotPeriod.CarryDue(ref nextSampleTick, tick, EngagementConstants.SampleIntervalTicks))
+			{
 				SampleOwnUnits(tick);
 				UpdateDirectEntry();
 			}
@@ -619,34 +710,34 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			h.BalanceVersus = cells;
 		}
 
-		void NoteEnemyDefence(EngagementState s, Actor defence)
+		// `present` = the actor was a live in-world actor at event time (the old Disposed / IsInWorld guard).
+		void NoteEnemyDefence(EngagementState s, uint id, string type, bool present, int x, int y)
 		{
-			if (defence == null || defence.Disposed || !defence.IsInWorld)
+			if (id == 0 || !present)
 				return;
 
-			var f = FlagsOf(defence.Info);
-			if (!f.Defence || s.Defences.Any(d => d.Id == defence.ActorID))
+			var f = FlagsOf(world.Map.Rules.Actors[type]);
+			if (!f.Defence || s.Defences.Any(d => d.Id == id))
 				return;
 
-			s.Defences.Add(new EngagementDefence(defence.ActorID, defence.Location.X, defence.Location.Y, f.RangeCells, f.Value));
+			s.Defences.Add(new EngagementDefence(id, x, y, f.RangeCells, f.Value));
 		}
 
-		static void TrackBuilding(EngagementState s, Actor building, bool own, UnitFlags f, AttackInfo e)
+		static void TrackBuilding(EngagementState s, uint id, bool own, UnitFlags f, EngagementHitEvent h)
 		{
-			var health = building.TraitOrDefault<IHealth>();
-			var max = Math.Max(1, health?.MaxHP ?? 1);
-			var hp = e.DamageState == DamageState.Dead ? 0 : Math.Min(max, health?.HP ?? 0);
-			if (!s.Buildings.TryGetValue(building.ActorID, out var b))
-				s.Buildings[building.ActorID] = b = new EngagementBuilding
+			var max = h.MaxHp;
+			var hp = h.Dead ? 0 : Math.Min(max, h.Hp);
+			if (!s.Buildings.TryGetValue(id, out var b))
+				s.Buildings[id] = b = new EngagementBuilding
 				{
 					Own = own,
 					Value = f.Value,
 					MaxHp = max,
-					HpStart = Math.Min(max, hp + e.Damage.Value),
+					HpStart = Math.Min(max, hp + h.Damage),
 				};
 
 			b.HpEnd = hp;
-			b.Dead |= e.DamageState == DamageState.Dead;
+			b.Dead |= h.Dead;
 		}
 
 		// ── what the bot SAW (fog-honest) ──────────────────────────────────────────────────────────────────────────

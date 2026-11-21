@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -124,7 +125,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly World world;
 		readonly OpenRA.Player player;
 		readonly BotLeaseTable<Actor> table = new();
-		int pruneTicks;
+		BotPeriod prune; // STAGGER-06 D006: call-counted F1 K=PruneIntervalTicks (frozen across a disabled gap)
+		bool pruneSeeded;
 		(int, int, int, int, int) lastSummary;
 
 		// Telemetry: Denied counts the claims the contract refused because another module held the unit — each one
@@ -139,6 +141,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			world = self.World;
 			player = self.Owner;
+			prune = BotPeriod.F1(world.WorldTick, 0, Info.PruneIntervalTicks);
 		}
 
 		bool IsGone(Actor a) => a.IsDead || !a.IsInWorld || a.Owner != player;
@@ -187,12 +190,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 #if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): LC1 lease preempted: {owner} took {actor.Info.Name} {actor.ActorID} from {previous} for {purpose} (tick {world.WorldTick})");
 #endif
-				foreach (var lost in player.PlayerActor.TraitsImplementing<IBotUnitLeaseLost>())
-					if (lost.GetType().Name == previous)
-						lost.LeaseLost(actor, owner, purpose);
+				// STAGGER_DESIGN_06 7.1: a gated bot's lease-lost notice is queued to its slot; every other bot, and a
+				// gated bot in its own Running phase, is notified now, exactly as before.
+				var bot = ModularBot.ActiveOf(player);
+				if (bot == null || !bot.TryDefer(() => LeaseLostEvent.From(actor, previous, owner, (int)purpose)))
+					NotifyLeaseLost(player, actor, previous, owner, purpose);
 			}
 
 			return true;
+		}
+
+		/// <summary>Tells the holder named <paramref name="previous"/> (matched by trait type name) that an emergency took its unit.</summary>
+		public static void NotifyLeaseLost(OpenRA.Player player, Actor actor, string previous, string newOwner, BotLeasePurpose purpose)
+		{
+			foreach (var lost in player.PlayerActor.TraitsImplementing<IBotUnitLeaseLost>())
+				if (lost.GetType().Name == previous)
+					lost.LeaseLost(actor, newOwner, purpose);
 		}
 
 		bool IBotUnitLeases.Transfer(Actor actor, string newOwner, BotLeasePurpose purpose, int durationTicks)
@@ -209,10 +222,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (--pruneTicks > 0)
+			// QW-B: the initial countdown is phase + 1 (design section 15); the reload is unchanged. Phase 0 (the default, and
+			// one bot) makes the first call prune, exactly as the old initial countdown of 0 did. Seeded at the first call
+			// (call 1 is at the visit tick, so r = v - 1).
+			var pruneClock = BotVisitClock.Of(bot);
+			if (!pruneSeeded)
+			{
+				pruneSeeded = true;
+				prune = BotPeriod.F1(pruneClock.VisitTick - 1, BotSlotPhases.Resolve(bot, Info.PruneIntervalTicks, 0) + 1, Info.PruneIntervalTicks);
+			}
+
+			if (!prune.TryFire(pruneClock))
 				return;
 
-			pruneTicks = Info.PruneIntervalTicks;
 			var (expired, gone) = table.Prune(world.WorldTick, IsGone);
 			Expired += expired;
 			Gone += gone;
