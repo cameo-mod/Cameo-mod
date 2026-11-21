@@ -775,6 +775,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// What the map is actually made of, because three attempts at sealing ramps were each argued
 			// from a different guess about that and each was wrong in a different direction. Once per map,
 			// alongside the region census below.
+#if CAMEO_DEV_LOGGING
 			var passableCells = 0;
 			var slopeTileCells = 0;
 			var transitionCells = 0;
@@ -802,6 +803,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			CAAIUtils.BotDebug("terrain: {0} passable, {1} slope tiles, {2} height transitions, {3} cliff-adjacent | heights {4}",
 				passableCells, slopeTileCells, transitionCells, cliffAdjacentCells,
 				string.Join(" ", heightCensus.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key}:{kv.Value}")));
+#endif
 
 			// Bounded, because slope tiles are not rare on rolling terrain: their connected run reaches
 			// across half a map, and an unbounded growth swallowed it whole - the barrier covered open
