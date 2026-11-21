@@ -20,8 +20,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 {
 	internal static class NavyStateCooldown
 	{
-		public static void Start(ref BotCooldown cooldown, int tick, int interval) =>
-			cooldown.Start(tick, Math.Max(1, interval));
+		public static void Start(ref BotCooldown cooldown, int tick, int updateInterval, int updateCount) =>
+			cooldown.Start(tick, Math.Max(1, updateInterval) * Math.Max(1, updateCount));
 
 		public static bool IsActive(bool active, BotCooldown cooldown, int tick) =>
 			active && !cooldown.Ready(tick);
@@ -311,14 +311,16 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (shouldMakeWayPossibility >= MaxMakeWayPossibility)
 			{
 				AIUtils.BotDebug("AI ({0}): Make way for squad leader.", owner.Bot.Player.ClientIndex);
-				NavyStateCooldown.Start(ref makeWayCooldown, owner.World.WorldTick, MakeWayTicks);
+				NavyStateCooldown.Start(ref makeWayCooldown, owner.World.WorldTick,
+					owner.SquadManager.Info.AttackForceInterval, MakeWayTicks);
 				makeWayActive = true;
 				justMadeWay = false;
 			}
 			else if (shouldKickStuckPossibility >= MaxSquadStuckPossibility)
 			{
 				AIUtils.BotDebug("AI ({0}): Kick stuck units from squad.", owner.Bot.Player.ClientIndex);
-				NavyStateCooldown.Start(ref kickStuckCooldown, owner.World.WorldTick, KickStuckTicks);
+				NavyStateCooldown.Start(ref kickStuckCooldown, owner.World.WorldTick,
+					owner.SquadManager.Info.AttackForceInterval, KickStuckTicks);
 				kickStuckActive = true;
 			}
 

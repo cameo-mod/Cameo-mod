@@ -23,17 +23,17 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var kickStuck = new BotCooldown();
 			Assert.That(NavyStateCooldown.IsDue(true, kickStuck, 0), Is.True);
-			NavyStateCooldown.Start(ref kickStuck, 0, 4);
-			Assert.That(NavyStateCooldown.IsActive(true, kickStuck, 1), Is.True);
-			Assert.That(NavyStateCooldown.IsActive(true, kickStuck, 3), Is.True);
-			Assert.That(NavyStateCooldown.IsActive(true, kickStuck, 4), Is.False);
-			Assert.That(NavyStateCooldown.IsDue(true, kickStuck, 4), Is.True);
+			NavyStateCooldown.Start(ref kickStuck, 0, 75, 4);
+			Assert.That(NavyStateCooldown.IsActive(true, kickStuck, 75), Is.True);
+			Assert.That(NavyStateCooldown.IsActive(true, kickStuck, 225), Is.True);
+			Assert.That(NavyStateCooldown.IsActive(true, kickStuck, 300), Is.False);
+			Assert.That(NavyStateCooldown.IsDue(true, kickStuck, 300), Is.True);
 
 			var makeWay = new BotCooldown();
-			NavyStateCooldown.Start(ref makeWay, 10, 3);
-			Assert.That(NavyStateCooldown.IsActive(true, makeWay, 11), Is.True);
-			Assert.That(NavyStateCooldown.IsDue(true, makeWay, 13), Is.True);
-			Assert.That(NavyStateCooldown.IsDue(true, makeWay, 19), Is.True);
+			NavyStateCooldown.Start(ref makeWay, 10, 75, 3);
+			Assert.That(NavyStateCooldown.IsActive(true, makeWay, 85), Is.True);
+			Assert.That(NavyStateCooldown.IsDue(true, makeWay, 235), Is.True);
+			Assert.That(NavyStateCooldown.IsDue(true, makeWay, 400), Is.True);
 		}
 	}
 }
