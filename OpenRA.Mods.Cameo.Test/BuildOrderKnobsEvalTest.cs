@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 
@@ -21,6 +22,19 @@ namespace OpenRA.Mods.Cameo.Test
 	[TestFixture]
 	public class BuildOrderKnobsEvalTest
 	{
+		[Test]
+		public void ReactCooldownReloadsAtOverdueVisitWithoutCatchUp()
+		{
+			var cooldown = new BotCooldown();
+			Assert.That(BuildOrderKnobsBotModule.ReactReady(cooldown, 0), Is.True);
+			BuildOrderKnobsBotModule.ReloadReact(ref cooldown, 0, 125);
+			Assert.That(BuildOrderKnobsBotModule.ReactReady(cooldown, 124), Is.False);
+			Assert.That(BuildOrderKnobsBotModule.ReactReady(cooldown, 126), Is.True);
+			BuildOrderKnobsBotModule.ReloadReact(ref cooldown, 126, 125);
+			Assert.That(BuildOrderKnobsBotModule.ReactReady(cooldown, 250), Is.False);
+			Assert.That(BuildOrderKnobsBotModule.ReactReady(cooldown, 251), Is.True);
+		}
+
 		const int TicksPerMinute = 1500;
 
 		static readonly BuildOrderReactThresholds Thresholds = new(600, 9000, 800, 1500, 40, 130, 6);
