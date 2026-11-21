@@ -68,6 +68,16 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (Rosters.TryGetValue(world, out _))
 				return;
 
+			var seats = BuildSeats(world);
+			if (seats.Length == 0)
+				return;
+
+			Rosters.Add(world, new Roster(seats));
+		}
+
+		// The family seats in rank order; empty when no activated family bot exists.
+		static OpenRA.Player[] BuildSeats(World world)
+		{
 			var members = new List<(OpenRA.Player Player, int SpawnKey, int PlayerIndex)>();
 			for (var i = 0; i < world.Players.Length; i++)
 			{
@@ -76,15 +86,22 @@ namespace OpenRA.Mods.Cameo.Traits
 					members.Add((p, p.SpawnPoint > 0 ? p.SpawnPoint : NoSpawnKey, i));
 			}
 
-			if (members.Count == 0)
-				return;
-
 			var ranks = Ranks(members.Select(m => (m.SpawnKey, m.PlayerIndex)).ToArray());
 			var seats = new OpenRA.Player[members.Count];
 			for (var i = 0; i < members.Count; i++)
 				seats[ranks[i]] = members[i].Player;
 
-			Rosters.Add(world, new Roster(seats));
+			return seats;
+		}
+
+		/// <summary>DEV telemetry, read only: the rank of this player among the family seats and the family size. Uses the built
+		/// roster when there is one, otherwise the roster Prepare would build now; it never builds or changes the roster, so it
+		/// cannot affect a decision. Rank is -1 for a player outside the family.</summary>
+		public static void Peek(World world, OpenRA.Player player, out int rank, out int count)
+		{
+			var seats = Rosters.TryGetValue(world, out var roster) ? roster.Seats : BuildSeats(world);
+			rank = Array.IndexOf(seats, player);
+			count = seats.Length;
 		}
 
 		/// <summary>The phase of a seat, or false when the site must keep its legacy schedule: a roster of one seat (N = 1

@@ -69,6 +69,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		bool resolvedFromSave;
 #if CAMEO_DEV_LOGGING
 		bool loggedFirstRoster;
+		int loggedN = -1;
 #endif
 
 		public readonly BotRoundRobinCore Core;
@@ -91,6 +92,8 @@ namespace OpenRA.Mods.Cameo.Traits
 					Log.Write("perf", string.Format(CultureInfo.InvariantCulture, "BotRoundRobinRoster n={0} tick={1} slots={2}",
 						roster.Count, world.WorldTick, string.Join(",", roster.Select((s, i) => s.Name + ":" + i))));
 				}
+
+				LogSeatArms(roster);
 #endif
 			};
 		}
@@ -153,6 +156,59 @@ namespace OpenRA.Mods.Cameo.Traits
 			source = !botTypeRoundRobin ? "bot-type" : "lobby";
 			return botTypeRoundRobin && OptionOn;
 		}
+
+		/// <summary>Period used for the slot_phase field of the arm line: the 75-tick (3 s) timer period, the one the stalemate
+		/// and the signal sweeps share. The real phase of a timer is floor(rank x K / N_fam) for its own K; slot_rank and
+		/// slot_family let the analysis recompute it.</summary>
+		public const int ArmLinePhasePeriod = 75;
+
+		/// <summary>The tick residue (tick mod N) on which a seat is visited: slot i of a cycle that starts at <paramref name="cycleStart"/>
+		/// is visited at cycleStart + i, and cycles repeat every N ticks. -1 for a seat with no slot.</summary>
+		public static int VisitResidue(int cycleStart, int slotIndex, int n) => slotIndex < 0 || n <= 0 ? -1 : (cycleStart + slotIndex) % n;
+
+		/// <summary>The DEV arm line of one player (STAGGER_EVAL_PLAN_01 O-7). Pure formatting, so it is testable without a world.
+		/// An ungated seat reports n=1 and residue 0 (it acts every tick); a gated seat outside the roster reports its roster N
+		/// and residue -1.</summary>
+		public static string FormatSeatArm(string seat, string player, string faction, bool rrEnabled, bool gated, int n,
+			int visitResidue, int slotRank, int slotFamily, int tick)
+		{
+			var phase = BotSlotPhase.Phase(slotRank, slotFamily, ArmLinePhasePeriod);
+			return string.Format(CultureInfo.InvariantCulture,
+				"BotRoundRobinSeat seat={0} player={1} faction={2} rr_enabled={3} gated={4} n={5} visit_residue={6} slot_rank={7} slot_family={8} slot_phase={9} phase_period={10} tick={11}",
+				seat, player, faction, rrEnabled ? "true" : "false", gated ? "true" : "false", gated ? n : 1,
+				gated ? visitResidue : 0, slotRank, slotFamily, phase, ArmLinePhasePeriod, tick);
+		}
+
+#if CAMEO_DEV_LOGGING
+		// DEV: at the first roster, one line per registered bot seat (rr_enabled = the lobby option, gated = this seat's arm after the
+		// DEV override); afterwards a BotRoundRobinN line each time the number of live gated seats changes. Read only.
+		void LogSeatArms(IReadOnlyList<BotSeat> roster)
+		{
+			if (roster.Count == loggedN)
+				return;
+
+			var first = loggedN < 0;
+			if (!first)
+				Log.Write("perf", string.Format(CultureInfo.InvariantCulture, "BotRoundRobinN n={0} prev={1} tick={2}", roster.Count, loggedN, world.WorldTick));
+
+			loggedN = roster.Count;
+			if (!first)
+				return;
+
+			foreach (var seat in Core.Registered)
+			{
+				var player = ((SeatBinding)seat.Bot).Player;
+				BotSlotPhase.Peek(world, player, out var rank, out var family);
+				var slot = -1;
+				for (var i = 0; i < roster.Count; i++)
+					if (roster[i] == seat)
+						slot = i;
+
+				Log.Write("perf", FormatSeatArm(seat.Name, player.PlayerName, player.Faction?.InternalName, OptionOn, seat.Gated,
+					roster.Count, VisitResidue(Core.CycleStart, slot, roster.Count), rank, family, world.WorldTick));
+			}
+		}
+#endif
 
 		// Called from ModularBot.Activate after IsEnabled = true; host only (engine Player.cs:223).
 		public BotSeat Register(OpenRA.Player p, ModularBot bot, bool gated)
