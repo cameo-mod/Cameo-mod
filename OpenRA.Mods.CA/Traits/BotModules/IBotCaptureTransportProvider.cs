@@ -33,11 +33,30 @@ namespace OpenRA.Mods.CA.Traits
 		bool TryRequestCaptureRun(IBot bot, IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets);
 
 		/// <summary>
-		/// ENGDROP Trigger A (opportunity drop): the same run as <see cref="TryRequestCaptureRun"/>, but ONLY with a craft that
-		/// already exists and can start now. A refusal has no side effect: no production request, no lease, no mission. A
-		/// provider that does not implement it refuses (fail closed), so an opportunity drop never queues a transport.
+		/// ENGDROP: side-effect-free readiness. True when an EXISTING craft could start this run now against these targets and the
+		/// hard exclusion constraints. No order, no production request, no lease, no mission, no random number. A provider that does not
+		/// implement it answers false (fail closed): an opportunity drop never queues a transport.
 		/// </summary>
-		bool TryRequestCaptureRunWithoutProduction(IBot bot, IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets) => false;
+		bool CanStartCaptureRun(IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets, DropConstraints constraints) => false;
+
+		/// <summary>
+		/// ENGDROP: the run request with hard exclusion constraints. Commit revalidates a stale readiness answer. queueProduction false (Trigger A) = existing craft or a refusal that
+		/// leaves nothing behind; true (a successful Trigger B roll) may request a transport on an appropriate no-craft refusal.
+		/// runIdentity names this run's generation for <see cref="RequestAbort"/> and is null on refusal.
+		/// </summary>
+		bool TryRequestConstrainedCaptureRun(IBot bot, IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets,
+			DropConstraints constraints, bool queueProduction, out string runIdentity)
+		{
+			runIdentity = null;
+			return false;
+		}
+
+		/// <summary>
+		/// ENGDROP: ask the provider to abort a run it owns (the owner saw the evidence contradicted). Idempotent: only the current
+		/// owner and generation of the passenger's run is honoured, a second request or a stale identity returns false. The provider
+		/// takes its existing safe retreat path, then hands the passengers back once.
+		/// </summary>
+		bool RequestAbort(IBot bot, string runIdentity, Actor passenger, string reason) => false;
 
 		/// <summary>True while the passenger waits for, rides in or is being unloaded from a transport.</summary>
 		bool IsHandlingPassenger(Actor passenger);

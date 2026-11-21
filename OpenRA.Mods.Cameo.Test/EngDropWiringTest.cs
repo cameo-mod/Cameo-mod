@@ -36,11 +36,16 @@ namespace OpenRA.Mods.Cameo.Test
 
 		// A provider that predates ENGDROP must refuse an opportunity drop, never queue a transport on its behalf.
 		[Test]
-		public void ProviderWithoutTheProbeRefusesAnOpportunityDrop()
+		public void ProviderWithoutTheEngDropMembersFailsClosed()
 		{
-			IBotCaptureTransportProvider provider = new LegacyProvider();
-			Assert.That(provider.TryRequestCaptureRunWithoutProduction(null, new List<Actor>(), new List<Actor>()), Is.False);
-			Assert.That(((LegacyProvider)provider).Requests, Is.EqualTo(0), "the fail-closed default must not reach the production-capable request");
+			var legacy = new LegacyProvider();
+			IBotCaptureTransportProvider provider = legacy;
+			var none = new List<Actor>();
+			Assert.That(provider.CanStartCaptureRun(none, none, DropConstraints.None), Is.False);
+			Assert.That(provider.TryRequestConstrainedCaptureRun(null, none, none, DropConstraints.None, false, out var runIdentity), Is.False);
+			Assert.That(runIdentity, Is.Null);
+			Assert.That(provider.RequestAbort(null, "transport:1#1", null, "test"), Is.False);
+			Assert.That(legacy.Requests, Is.EqualTo(0), "the fail-closed defaults must not reach the production-capable request");
 		}
 
 		// A and B due on the same visit: B's one draw is consumed and B's timer reloads, but a run A admitted blocks B's run.
