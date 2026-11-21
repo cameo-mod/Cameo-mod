@@ -28,11 +28,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public const int MaxTargets = 16;
 		public const int MaxSamples = 256;
 
+		// One bounded dictionary of cell -> last tick the bot saw that cell, per tracked target (at most MaxSamples cells, the freshest kept).
 		sealed class Table
 		{
-			public CPos[] Samples;
-			public int[] Stamp;
-			public bool Truncated;
+			public readonly Dictionary<CPos, int> Stamp = [];
 		}
 
 		readonly Dictionary<CPos, Table> tables = [];
@@ -74,17 +73,32 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return (samples.ToArray(), truncated);
 		}
 
-		/// <summary>Cells on the straight corridor from origin to target (exclusive of both), one every stride cells, at most max of them.</summary>
-		public static IReadOnlyList<CPos> Corridor(CPos origin, CPos target, int strideCells, int max)
+		/// <summary>The cells of a planned route polyline (waypoints of an air corridor or the cells of a ground path), made contiguous one cell at
+		/// a time and sampled evenly to at most max cells, always keeping the first and the last. Deterministic.</summary>
+		public static IReadOnlyList<CPos> SampleRoute(IReadOnlyList<CPos> polyline, int max)
 		{
-			var delta = target - origin;
-			var length = Math.Max(Math.Abs(delta.X), Math.Abs(delta.Y));
-			var n = Math.Min(Math.Max(1, max + 1), Math.Max(1, (length + Math.Max(1, strideCells) - 1) / Math.Max(1, strideCells)));
-			var cells = new List<CPos>();
-			for (var i = 1; i < n; i++)
-				cells.Add(new CPos(origin.X + delta.X * i / n, origin.Y + delta.Y * i / n));
+			if (polyline == null || polyline.Count == 0 || max <= 0)
+				return [];
 
-			return cells;
+			var dense = new List<CPos> { polyline[0] };
+			for (var i = 1; i < polyline.Count; i++)
+			{
+				var from = polyline[i - 1];
+				var delta = polyline[i] - from;
+				var steps = Math.Min(2048, Math.Max(Math.Abs(delta.X), Math.Abs(delta.Y)));
+				for (var s = 1; s <= steps; s++)
+					dense.Add(new CPos(from.X + delta.X * s / steps, from.Y + delta.Y * s / steps));
+			}
+
+			dense = dense.Distinct().ToList();
+			if (dense.Count <= max)
+				return dense;
+
+			var sampled = new List<CPos>(max);
+			for (var i = 0; i < max; i++)
+				sampled.Add(dense[(int)((long)i * (dense.Count - 1) / Math.Max(1, max - 1))]);
+
+			return sampled.Distinct().ToList();
 		}
 
 		/// <summary>The landing ring: up to count cells at Chebyshev distance radius + 2 from the center, evenly spaced along the perimeter.</summary>
@@ -108,47 +122,47 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return perimeter.Where((_, i) => i % stride == 0).Take(count).ToList();
 		}
 
-		/// <summary>Stamp every sample the bot sees right now. A table is rebuilt (stamps reset) when its sample set changed.</summary>
+		/// <summary>Stamp every sample cell the bot sees right now. Stamps of cells seen earlier are kept (bounded, the freshest win), so a
+		/// route that changes between scans still benefits from what was seen on the cells it shares with an earlier one.</summary>
 		public void Observe(CPos center, int radiusCells, IReadOnlyList<CPos> approach, IReadOnlyList<CPos> landing, Func<CPos, bool> visibleNow, int now)
 		{
-			var (samples, truncated) = SampleCells(center, radiusCells, approach, landing);
-			if (!tables.TryGetValue(center, out var table) || !table.Samples.SequenceEqual(samples))
+			var (samples, _) = SampleCells(center, radiusCells, approach, landing);
+			if (!tables.TryGetValue(center, out var table))
 			{
-				if (table == null)
+				tables[center] = table = new Table();
+				insertionOrder.Add(center);
+				while (insertionOrder.Count > MaxTargets)
 				{
-					insertionOrder.Add(center);
-					while (insertionOrder.Count > MaxTargets)
-					{
-						tables.Remove(insertionOrder[0]);
-						insertionOrder.RemoveAt(0);
-					}
+					tables.Remove(insertionOrder[0]);
+					insertionOrder.RemoveAt(0);
 				}
-
-				tables[center] = table = new Table { Samples = samples, Stamp = new int[samples.Length], Truncated = truncated };
 			}
 
-			for (var i = 0; i < table.Samples.Length; i++)
-				if (visibleNow(table.Samples[i]))
-					table.Stamp[i] = Math.Max(1, now);
+			foreach (var cell in samples)
+				if (visibleNow(cell))
+					table.Stamp[cell] = Math.Max(1, now);
+
+			if (table.Stamp.Count > MaxSamples)
+				foreach (var drop in table.Stamp.OrderBy(kv => kv.Value).ThenBy(kv => kv.Key.X).ThenBy(kv => kv.Key.Y)
+					.Take(table.Stamp.Count - MaxSamples).Select(kv => kv.Key).ToList())
+					table.Stamp.Remove(drop);
 		}
 
-		/// <summary>Known only when a table exists for exactly this sample set, is not truncated, and every sample was seen within freshTicks.</summary>
+		/// <summary>Known only when the sample set fits the table (not truncated) and EVERY sample - target area, planned route and landing - has a
+		/// stamp no older than freshTicks. A missing, stale or clipped sample is unknown, never safe.</summary>
 		public bool IsKnown(CPos center, int radiusCells, IReadOnlyList<CPos> approach, IReadOnlyList<CPos> landing, int now, int freshTicks, out int oldestObserved)
 		{
 			oldestObserved = 0;
-			if (!tables.TryGetValue(center, out var table) || table.Truncated)
-				return false;
-
 			var (samples, truncated) = SampleCells(center, radiusCells, approach, landing);
-			if (truncated || !table.Samples.SequenceEqual(samples))
+			if (truncated || !tables.TryGetValue(center, out var table))
 				return false;
 
 			oldestObserved = int.MaxValue;
-			foreach (var stamp in table.Stamp)
+			foreach (var cell in samples)
 			{
-				if (stamp <= 0 || now - stamp > freshTicks)
+				if (!table.Stamp.TryGetValue(cell, out var stamp) || now - stamp > freshTicks)
 				{
-					oldestObserved = stamp <= 0 ? 0 : Math.Min(oldestObserved, stamp);
+					oldestObserved = table.Stamp.TryGetValue(cell, out stamp) ? stamp : 0;
 					return false;
 				}
 

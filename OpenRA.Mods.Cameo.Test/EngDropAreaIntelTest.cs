@@ -21,7 +21,7 @@ namespace OpenRA.Mods.Cameo.Test
 	public sealed class EngDropAreaIntelTest
 	{
 		static readonly CPos Target = new(50, 50);
-		static readonly IReadOnlyList<CPos> Corridor = VisibilityStamps.Corridor(new CPos(10, 10), Target, 4, 64);
+		static readonly IReadOnlyList<CPos> Corridor = VisibilityStamps.SampleRoute([new CPos(10, 10), new CPos(30, 14), Target], 64);
 		static readonly IReadOnlyList<CPos> Ring = VisibilityStamps.Ring(Target, 6, 24);
 
 		[Test]
@@ -75,13 +75,46 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(oldest, Is.EqualTo(1000));
 		}
 
+		// Trigger A vets the route the craft will actually take: a different planned route through cells never seen is unknown even
+		// though the target area itself is known.
 		[Test]
-		public void AChangedCorridorResetsTheStamps()
+		public void ADifferentPlannedRouteThroughUnseenCellsIsUnknown()
 		{
 			var stamps = new VisibilityStamps();
 			stamps.Observe(Target, 6, Corridor, Ring, _ => true, 1000);
-			var other = VisibilityStamps.Corridor(new CPos(90, 10), Target, 4, 64);
-			Assert.That(stamps.IsKnown(Target, 6, other, Ring, 1000, 2500, out _), Is.False, "no table for this sample set");
+			var other = VisibilityStamps.SampleRoute([new CPos(90, 10), new CPos(70, 60), Target], 64);
+			Assert.That(stamps.IsKnown(Target, 6, Corridor, Ring, 1000, 2500, out _), Is.True);
+			Assert.That(stamps.IsKnown(Target, 6, other, Ring, 1000, 2500, out _), Is.False, "the new route's far cells have no stamp");
+		}
+
+		[Test]
+		public void RouteSamplesAreContiguousBoundedDeterministicAndKeepTheEnds()
+		{
+			var polyline = new List<CPos> { new(0, 0), new(40, 0), new(40, 30) };
+			var all = VisibilityStamps.SampleRoute(polyline, 1000);
+			Assert.That(all.Count, Is.EqualTo(71), "40 + 30 steps plus the start");
+			Assert.That(all[0], Is.EqualTo(new CPos(0, 0)));
+			Assert.That(all[^1], Is.EqualTo(new CPos(40, 30)));
+
+			var few = VisibilityStamps.SampleRoute(polyline, 10);
+			Assert.That(few.Count, Is.LessThanOrEqualTo(10));
+			Assert.That(few[0], Is.EqualTo(new CPos(0, 0)));
+			Assert.That(few[^1], Is.EqualTo(new CPos(40, 30)));
+			Assert.That(VisibilityStamps.SampleRoute(polyline, 10), Is.EqualTo(few));
+			Assert.That(VisibilityStamps.SampleRoute([], 10), Is.Empty);
+		}
+
+		[Test]
+		public void StampsOfCellsSeenEarlierSurviveARouteChange()
+		{
+			var stamps = new VisibilityStamps();
+			var routeA = VisibilityStamps.SampleRoute([new CPos(10, 10), Target], 64);
+			stamps.Observe(Target, 6, routeA, Ring, _ => true, 1000);
+
+			// A later route shares its cells with the old one; the old stamps still count (inside the window) without a new sighting.
+			var routeB = routeA.Take(routeA.Count / 2).ToList();
+			Assert.That(stamps.IsKnown(Target, 6, routeB, Ring, 2000, 2500, out var oldest), Is.True);
+			Assert.That(oldest, Is.EqualTo(1000));
 		}
 
 		[Test]

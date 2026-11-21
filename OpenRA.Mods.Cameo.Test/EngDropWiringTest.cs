@@ -45,6 +45,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(provider.TryRequestConstrainedCaptureRun(null, none, none, DropConstraints.None, false, out var runIdentity), Is.False);
 			Assert.That(runIdentity, Is.Null);
 			Assert.That(provider.RequestAbort(null, "transport:1#1", null, "test"), Is.False);
+			Assert.That(provider.TryPlanCaptureRoute(none, none, DropConstraints.None, out var route), Is.False, "no planned route = no Trigger A");
+			Assert.That(route, Is.Null);
 			Assert.That(legacy.Requests, Is.EqualTo(0), "the fail-closed defaults must not reach the production-capable request");
 		}
 

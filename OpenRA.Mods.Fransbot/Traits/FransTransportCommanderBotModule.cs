@@ -1213,6 +1213,10 @@ namespace OpenRA.Mods.Common.Traits
 			DropConstraints constraints) =>
 			CanStartConstrainedRun(passengers, targets, constraints);
 
+		bool IBotCaptureTransportProvider.TryPlanCaptureRoute(IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets,
+			DropConstraints constraints, out IReadOnlyList<CPos> route) =>
+			TryPlanConstrainedRoute(passengers, targets, constraints, out route);
+
 		bool IBotCaptureTransportProvider.TryRequestConstrainedCaptureRun(IBot bot, IReadOnlyList<Actor> passengers,
 			IReadOnlyList<Actor> targets, DropConstraints constraints, bool queueProduction, out string runIdentity)
 		{
@@ -4808,8 +4812,15 @@ namespace OpenRA.Mods.Common.Traits
 
 		/// <summary>ENGDROP readiness: could an EXISTING craft start this run now? Mirrors the admission checks and the craft search, and never
 		/// reserves, leases, orders, requests production or draws a random number (the route memo is the only state it touches).</summary>
-		bool CanStartConstrainedRun(IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets, DropConstraints constraints)
+		bool CanStartConstrainedRun(IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets, DropConstraints constraints) =>
+			FindStartableCraft(passengers, targets, constraints, out _, out _);
+
+		/// <summary>ENGDROP: the first existing craft whose plan starts this run now (admission checks, craft search, constraints); no side effects.</summary>
+		bool FindStartableCraft(IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets, DropConstraints constraints,
+			out Actor craft, out TransportPlan craftPlan)
 		{
+			craft = null;
+			craftPlan = default;
 			if (passengers == null || targets == null || passengers.Count == 0 || passengers.Count != targets.Count)
 				return false;
 
@@ -4842,10 +4853,83 @@ namespace OpenRA.Mods.Common.Traits
 
 				foreach (var transport in FindAvailableTransports(type))
 					if (TryGetCachedOrPlanTransport(probe, transport, planningPass, out var plan) && ConstraintsAllow(probe, transport, plan))
+					{
+						craft = transport;
+						craftPlan = plan;
 						return true;
+					}
 			}
 
 			return false;
+		}
+
+		/// <summary>ENGDROP: the journey this craft will actually make for this plan, as a polyline of cells: air craft - current position, then the
+		/// bounded RiskModel corridor (detour waypoint included) to the pickup and on to the drop; ground and naval craft - the risk-aware path cells
+		/// to the pickup and on to the drop, from the same path finder and cost the mission uses. Null when no route can be planned now.</summary>
+		List<CPos> PlanJourney(Actor transport, TransportPlan plan)
+		{
+			var from = transport.Location;
+			var route = new List<CPos> { from };
+			if (IsAirTransport(transport))
+			{
+				if (!Info.EnableAirTransportRiskRouting)
+				{
+					route.Add(plan.PickupTransportCell);
+					route.Add(plan.DropTransportCell);
+					return route;
+				}
+
+				if (!TryPlanBoundedAirCorridor(transport, from, plan.PickupTransportCell, out var toPickup) ||
+					!TryPlanBoundedAirCorridor(transport, plan.PickupTransportCell, plan.DropTransportCell, out var toDrop))
+					return null;
+
+				route.AddRange(toPickup);
+				route.AddRange(toDrop);
+				return route;
+			}
+
+			var mobile = transport.TraitOrDefault<Mobile>();
+			if (mobile == null || mobile.PathFinder is not PathFinder pathFinder)
+				return null;
+
+			var role = TransportRiskRole(transport);
+			int CustomCost(CPos cell) => riskModelService.GetPathCost(transport, cell, role, FransRiskTolerance.Cautious);
+			foreach (var (a, b) in new[] { (from, plan.PickupTransportCell), (plan.PickupTransportCell, plan.DropTransportCell) })
+			{
+				if (a == b)
+					continue;
+
+				var path = pathFinder.FindPathToTargetCell(transport, [a], b, BlockedByActor.Immovable, CustomCost, laneBias: false);
+				if (path == null || path.Count == 0)
+					return null;
+
+				route.AddRange(path.AsEnumerable().Reverse());
+			}
+
+			return route;
+		}
+
+		/// <summary>ENGDROP Trigger A: the planned journey of the first startable existing craft, refused when any air leg crosses an anti-air zone.</summary>
+		bool TryPlanConstrainedRoute(IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets, DropConstraints constraints, out IReadOnlyList<CPos> route)
+		{
+			route = null;
+			if (!FindStartableCraft(passengers, targets, constraints, out var craft, out var plan))
+				return false;
+
+			var journey = PlanJourney(craft, plan);
+			if (journey == null || journey.Count == 0)
+				return false;
+
+			if (constraints != null && IsAirTransport(craft))
+			{
+				var map = world.Map;
+				for (var i = 1; i < journey.Count; i++)
+					if (constraints.RejectsSegment(map.CenterOfCell(journey[i - 1]), map.CenterOfCell(journey[i]), air: true))
+						return false;
+			}
+
+			route = journey;
+			return true;
 		}
 
 		/// <summary>ENGDROP RequestAbort: idempotent, current owner and generation only. A loaded run takes the existing safe RETREAT path
