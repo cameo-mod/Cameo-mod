@@ -1500,7 +1500,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (owner.World.Map.Contains(hold) &&
 				(owner.World.Map.CellContaining(leader.Actor.CenterPosition) - hold).LengthSquared > 4)
 				foreach (var u in owner.Units)
-					owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromCell(owner.World, hold), false));
+					if (u.Actor != null)
+						owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromCell(owner.World, hold), false));
 		}
 
 		// No dismissal: the squad keeps its units and its identity.

@@ -178,7 +178,7 @@ def on_line(values: list[int]) -> bool:
 
 def siege_ladder_failures() -> list[str]:
     """SIEGE-FIX-01 S8 (DESIGN 19.1): the siege evaluator has no on/off switch, and its two graded knobs lie on one equal-step line
-    over the 11 tiers (noob = easiest minus one step): StandOffMaxTicks 3000 - 150 r, SiegeReengagePct 40 - 2 r, r = 0 (noob) .. 10
+    over the 11 tiers (noob = easiest minus one step): StandOffMaxTicks 3000 - 150 r, SiegeReengagePct 40 - 2 r, HysteresisBandPct 25 - r, r = 0 (noob) .. 10
     (cameogod), no zero endpoint. Min* is written for the easiest tier, Max* for cameogod (BotDifficultyLadder.Scale interpolates)."""
     text = (ROOT / "mods" / "cameo" / "ai" / "ai.yaml").read_text(encoding="utf-8")
     match = re.search(r"^\tSiegeEvaluatorBotModule:\n((?:\t\t.*\n|[ \t]*\n)+)", text, re.MULTILINE)
@@ -191,7 +191,8 @@ def siege_ladder_failures() -> list[str]:
         failures.append("SiegeEvaluatorBotModule.BehaviourEnabled must not exist: no ladder tier may switch a feature off (SIEGE-FIX-01 S8)")
 
     knobs = {}
-    for key in ("StandOffMaxTicksEasy", "StandOffMaxTicksHard", "SiegeReengagePctEasy", "SiegeReengagePctHard"):
+    for key in ("StandOffMaxTicksEasy", "StandOffMaxTicksHard", "SiegeReengagePctEasy", "SiegeReengagePctHard",
+                "HysteresisBandPctEasy", "HysteresisBandPctHard"):
         found = re.search(rf"^\t\t{key}:[ \t]*(\d+)[ \t]*$", block, re.MULTILINE)
         if not found:
             failures.append(f"SiegeEvaluatorBotModule.{key} is not written in ai.yaml")
@@ -205,6 +206,7 @@ def siege_ladder_failures() -> list[str]:
     for name, lo, hi, base, per_rank in (
         ("StandOffMaxTicks", knobs["StandOffMaxTicksEasy"], knobs["StandOffMaxTicksHard"], 3000, -150),
         ("SiegeReengagePct", knobs["SiegeReengagePctEasy"], knobs["SiegeReengagePctHard"], 40, -2),
+        ("HysteresisBandPct", knobs["HysteresisBandPctEasy"], knobs["HysteresisBandPctHard"], 25, -1),
     ):
         # C# int arithmetic: min + ((max - min) * rank) / steps, truncated toward zero.
         values = [lo + int(((hi - lo) * rank) / steps) for rank in range(-1, steps + 1)]

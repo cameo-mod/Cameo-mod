@@ -162,6 +162,7 @@ namespace OpenRA.Mods.Cameo.Test
 			{
 				(info.StandOffMaxTicksEasy, info.StandOffMaxTicksHard, 3000, -150),
 				(info.SiegeReengagePctEasy, info.SiegeReengagePctHard, 40, -2),
+				(info.HysteresisBandPctEasy, info.HysteresisBandPctHard, 25, -1),
 			})
 			{
 				// noob = rank -1 .. cameogod = rank 9 on the shared ladder arithmetic (r = rank + 1).
@@ -182,6 +183,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(block.Groups[1].Value, Does.Contain("StandOffMaxTicksHard: " + info.StandOffMaxTicksHard));
 			Assert.That(block.Groups[1].Value, Does.Contain("SiegeReengagePctEasy: " + info.SiegeReengagePctEasy));
 			Assert.That(block.Groups[1].Value, Does.Contain("SiegeReengagePctHard: " + info.SiegeReengagePctHard));
+			Assert.That(block.Groups[1].Value, Does.Contain("HysteresisBandPctEasy: " + info.HysteresisBandPctEasy));
+			Assert.That(block.Groups[1].Value, Does.Contain("HysteresisBandPctHard: " + info.HysteresisBandPctHard));
 		}
 
 		[Test]
@@ -236,11 +239,122 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCA.cs"), Does.Contain("or GroundUnitsSiegeRetreatStateCA;"));
 		}
 
+		// ---- S3: hysteresis ----
+
+		static SiegeVerdict Serve(SiegeEvaluatorBotModule.SiegeHold hold, SiegeVerdict raw, int value = 2000, int band = 20, bool bypass = false)
+			=> SiegeEvaluatorBotModule.Hysteresis(raw, value, band, bypass, hold);
+
+		[Test]
+		public void S3_TheFirstEvaluationIsServedAtOnce()
+		{
+			Assert.That(Serve(new SiegeEvaluatorBotModule.SiegeHold(), SiegeVerdict.Retreat), Is.EqualTo(SiegeVerdict.Retreat));
+		}
+
+		[Test]
+		public void S3_AChangedVerdictNeedsTwoAgreeingEvaluations()
+		{
+			var hold = new SiegeEvaluatorBotModule.SiegeHold();
+			Serve(hold, SiegeVerdict.StandOff);
+			Assert.That(Serve(hold, SiegeVerdict.Retreat), Is.EqualTo(SiegeVerdict.StandOff), "one vote is not enough");
+			Assert.That(Serve(hold, SiegeVerdict.Retreat), Is.EqualTo(SiegeVerdict.Retreat), "the second consecutive vote switches");
+		}
+
+		[Test]
+		public void S3_AnAlternatingRawVerdictNeverFlipsTheServedOne()
+		{
+			var hold = new SiegeEvaluatorBotModule.SiegeHold();
+			Serve(hold, SiegeVerdict.StandOff);
+			var flips = 0;
+			var last = SiegeVerdict.StandOff;
+			for (var i = 0; i < 20; i++)
+			{
+				var served = Serve(hold, i % 2 == 0 ? SiegeVerdict.Retreat : SiegeVerdict.StandOff);
+				if (served != last)
+					flips++;
+				last = served;
+			}
+
+			Assert.That(flips, Is.EqualTo(0), "stand-off <-> retreat cycling on a stable squad is the RCA C4 symptom");
+		}
+
+		[Test]
+		public void S3_AMaterialValueChangeSwitchesAtOnce()
+		{
+			var hold = new SiegeEvaluatorBotModule.SiegeHold();
+			Serve(hold, SiegeVerdict.StandOff, value: 2000);
+			Assert.That(Serve(hold, SiegeVerdict.Retreat, value: 1601, band: 20), Is.EqualTo(SiegeVerdict.StandOff), "19.95% loss is inside the band");
+			Assert.That(Serve(hold, SiegeVerdict.Advance, value: 1600, band: 20), Is.EqualTo(SiegeVerdict.Advance), "20% change is decisive");
+			Assert.That(hold.ServedValue, Is.EqualTo(1600), "the band restarts from the new served value");
+		}
+
+		[Test]
+		public void S3_ATimedOutHoldIsServedAtOnceAndAgreeingRawResetsThePendingVote()
+		{
+			var hold = new SiegeEvaluatorBotModule.SiegeHold();
+			Serve(hold, SiegeVerdict.StandOff);
+			Assert.That(Serve(hold, SiegeVerdict.Advance, bypass: true), Is.EqualTo(SiegeVerdict.Advance));
+
+			Serve(hold, SiegeVerdict.Retreat);
+			Assert.That(hold.PendingCount, Is.EqualTo(1));
+			Serve(hold, SiegeVerdict.Advance);
+			Assert.That(hold.PendingCount, Is.EqualTo(0), "the raw verdict came back: no stale vote");
+		}
+
+		[Test]
+		public void S3_ARetreatTransitionIsJudgedOnTheRawVerdictNotTheHeldOne()
+		{
+			var module = Module();
+			Assert.That(module, Does.Contain("var wasRetreating = hold.LastRaw == SiegeVerdict.Retreat;"));
+			Assert.That(module, Does.Not.Contain("lastVerdictBySquad"), "the served verdict is not a transition source");
+		}
+
+		// ---- S4: one measure ----
+
+		[Test]
+		public void S4_TheCommitRatioPricesTheDefencesOnlyNotTheRegionalArmyOnTop()
+		{
+			var module = Module();
+			Assert.That(module, Does.Contain("var obstacleValue = defenceValue * siegeMem / 100;"));
+			Assert.That(module, Does.Not.Contain("(defenceValue + rememberedThreat)"));
+			Assert.That(module, Does.Not.Contain("Personality moves this later"), "stale Desc (RCA F4)");
+		}
+
+		// ---- S5: defences that can reach the approach ----
+
+		[Test]
+		public void S5_ADefenceBesideTheApproachSegmentCoversItAndOneBehindTheSquadDoesNot()
+		{
+			var from = new CPos(0, 0);
+			var to = new CPos(100, 0);
+			Assert.That(SiegeEvaluatorBotModule.CoversApproach(new CPos(50, 9), 11, from, to), Is.True, "9 cells off the line, reach 11");
+			Assert.That(SiegeEvaluatorBotModule.CoversApproach(new CPos(50, 12), 11, from, to), Is.False, "12 cells off the line");
+			Assert.That(SiegeEvaluatorBotModule.CoversApproach(new CPos(-20, 0), 11, from, to), Is.False, "behind the squad: the segment is clamped at the squad");
+			Assert.That(SiegeEvaluatorBotModule.CoversApproach(new CPos(-10, 0), 11, from, to), Is.True, "within reach of the squad itself");
+			Assert.That(SiegeEvaluatorBotModule.CoversApproach(new CPos(105, 0), 11, from, to), Is.True, "beyond the target but within reach of it");
+			Assert.That(SiegeEvaluatorBotModule.CoversApproach(new CPos(130, 0), 11, from, to), Is.False);
+		}
+
+		[Test]
+		public void S5_ADegenerateSegmentIsAPoint()
+		{
+			var p = new CPos(10, 10);
+			Assert.That(SiegeEvaluatorBotModule.DistanceSqToSegment(new CPos(13, 14), p, p), Is.EqualTo(25));
+		}
+
+		[Test]
+		public void S5_TheTargetCentredRadiusIsGone()
+		{
+			Assert.That(Module(), Does.Not.Contain("RelevantDefenceRadiusCells"));
+			Assert.That(typeof(SiegeEvaluatorBotModuleInfo).GetField("RelevantDefenceRadiusCells"), Is.Null);
+			Assert.That(Module(), Does.Contain("CoversApproach(d.Cell, d.MaxRangeCells + Info.StandOffMarginCells, squadCell, targetCell)"));
+		}
+
 		[Test]
 		public void TheEvaluatorKeepsItsPerSquadMemoryBounded()
 		{
 			var module = Module();
 			Assert.That(module, Does.Contain("holds.Remove(stale);"), "dropped with the squad");
+			Assert.That(module, Does.Contain("foreach (var stale in holds.Keys.Where(k => !verdicts.ContainsKey(k)).ToArray())"));
 			Assert.That(module, Does.Contain("holds.Remove(squad);"), "dropped when no defence covers the target");
 		}
 	}

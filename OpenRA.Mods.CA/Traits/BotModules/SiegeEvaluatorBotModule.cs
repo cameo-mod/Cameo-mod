@@ -31,10 +31,11 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Cells of safety margin added to the longest remembered defence range when computing the stand-off line (DESIGN §19.1 equal-step margin placeholder until per-difficulty margins land).")]
 		public readonly int StandOffMarginCells = 2;
 
-		[Desc("Remembered defence this close to the squad's target (cells) counts as covering the approach.")]
-		public readonly int RelevantDefenceRadiusCells = 24;
+		// SIEGE-FIX-01 S5: a remembered defence covers the approach when the squad-to-target segment passes within its range plus
+		// StandOffMarginCells (it can hit the approach), not when it merely stands within a fixed radius of the target.
 
-		[Desc("Commit when the squad's summed unit value reaches this percent of the remembered defence+army value around the target (rule 4's R, x100). Personality moves this later.")]
+		[Desc("Commit when the squad's summed unit value reaches this percent of the remembered defence value covering the approach (rule 4's R, x100). A constant on every tier.",
+			"The remembered regional army is NOT in this measure (SIEGE-FIX-01 S4): the 6c risk gate already screens it at target selection.")]
 		public readonly int CommitRatioPercent = 150;
 
 		[Desc("Minimum summed squad unit value worth evaluating — empty or token squads are noise.")]
@@ -55,6 +56,13 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("S6: the same percent at the cameogod tier.")]
 		public readonly int SiegeReengagePctHard = 20;
+
+		// S3: HysteresisBandPct = 25 - r (noob 25 .. cameogod 15).
+		[Desc("S3: a changed verdict is served after two consecutive agreeing evaluations, or at once when the squad's value moved by this percent since the served verdict, at the easiest tier.")]
+		public readonly int HysteresisBandPctEasy = 24;
+
+		[Desc("S3: the same band at the cameogod tier.")]
+		public readonly int HysteresisBandPctHard = 15;
 
 		[Desc("CA-2c (§12.6 rule 5): a retreat verdict writes a failed-siege memory into the target",
 			"region and remembered failures inflate the obstacle value on later evaluations,",
@@ -79,7 +87,6 @@ namespace OpenRA.Mods.CA.Traits
 		IBotRememberedDefenceProvider[] defenceProviders;
 		IBotSiegeFailureMemory[] failureMemory;
 		readonly Dictionary<SquadCA, (SiegeVerdict Verdict, CPos StandOff)> verdicts = new();
-		readonly Dictionary<SquadCA, SiegeVerdict> lastVerdictBySquad = new();
 
 		// S2/S6 per-squad memory (hold timer, latch, re-engage base value); dropped with the squad.
 		readonly Dictionary<SquadCA, SiegeHold> holds = new();
@@ -90,6 +97,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		int StandOffMaxTicks => BotDifficultyLadder.Scale(Info.StandOffMaxTicksEasy, Info.StandOffMaxTicksHard, player, Info.StandOffMaxTicksHard);
 		int SiegeReengagePct => BotDifficultyLadder.Scale(Info.SiegeReengagePctEasy, Info.SiegeReengagePctHard, player, Info.SiegeReengagePctHard);
+		int HysteresisBandPct => BotDifficultyLadder.Scale(Info.HysteresisBandPctEasy, Info.HysteresisBandPctHard, player, Info.HysteresisBandPctHard);
 
 		public SiegeEvaluatorBotModule(Actor self, SiegeEvaluatorBotModuleInfo info)
 			: base(info)
@@ -148,9 +156,8 @@ namespace OpenRA.Mods.CA.Traits
 				var targetCell = world.Map.CellContaining(target.CenterPosition);
 				var squadCell = world.Map.CellContaining(squad.CenterPosition);
 
-				var radiusSq = (long)Info.RelevantDefenceRadiusCells * Info.RelevantDefenceRadiusCells;
 				var covering = defences
-					.Where(d => (d.Cell - targetCell).LengthSquared <= radiusSq)
+					.Where(d => CoversApproach(d.Cell, d.MaxRangeCells + Info.StandOffMarginCells, squadCell, targetCell))
 					.ToArray();
 
 				var rememberedThreat = threatProviders.MergedThreatAt(targetCell);
@@ -161,7 +168,10 @@ namespace OpenRA.Mods.CA.Traits
 				var siegeMem = 100;
 				if (Info.SiegeMemoryEnabled && failureMemory.Length > 0)
 					siegeMem = failureMemory.Sum(p => p.FailedSiegeWeightPercentAt(targetCell, world.WorldTick));
-				var obstacleValue = (defenceValue + rememberedThreat) * siegeMem / 100;
+				// S4: ONE measure. The commit ratio compares the squad with the remembered defences the predictor priced; the remembered
+				// regional army (scalar, no composition, so the predictor cannot price it) is screened by the 6c risk gate at target
+				// selection and is only logged here. Stacking it on top was the second, differently-scaled comparison of RCA C2.
+				var obstacleValue = defenceValue * siegeMem / 100;
 
 				// §12.6 rule order: hold at stand-off -> artillery works the defences ->
 				// commit on cleared area or overwhelming effective value -> retreat on loss.
@@ -176,7 +186,7 @@ namespace OpenRA.Mods.CA.Traits
 				var standOffCell = CPos.Zero;
 				if (covering.Length == 0)
 				{
-					verdict = obstacleValue > 0 ? "commit-no-defences(army-covered)" : "free-advance";
+					verdict = rememberedThreat > 0 ? "commit-no-defences(army-covered)" : "free-advance";
 					holds.Remove(squad);
 				}
 				else
@@ -216,9 +226,16 @@ namespace OpenRA.Mods.CA.Traits
 					if (!holds.TryGetValue(squad, out var hold))
 						holds[squad] = hold = new SiegeHold();
 
-					var wasRetreating = lastVerdictBySquad.TryGetValue(squad, out var prev) && prev == SiegeVerdict.Retreat;
-					verdictKind = Decide(prediction.OwnWins, committed, insideLine, artilleryAttached, squadValue, now,
+					var wasRetreating = hold.LastRaw == SiegeVerdict.Retreat;
+					var raw = Decide(prediction.OwnWins, committed, insideLine, artilleryAttached, squadValue, now,
 						StandOffMaxTicks, SiegeReengagePct, wasRetreating, hold, out verdict, out var newRetreat);
+					hold.LastRaw = raw;
+
+					// S3: the served verdict follows the raw one only after two agreeing evaluations or a material change of the squad's value;
+					// a hold that just ended by timeout (S2) is a decision and is served at once.
+					verdictKind = Hysteresis(raw, squadValue, HysteresisBandPct, raw == SiegeVerdict.Advance && hold.TimedOut, hold);
+					if (verdictKind != raw)
+						verdict += "~held(" + verdictKind + ")";
 
 					// The failed siege writes the loss into the wall's region
 					// memory — once per retreat transition, not per pass spent
@@ -229,7 +246,6 @@ namespace OpenRA.Mods.CA.Traits
 				}
 
 				verdicts[squad] = (verdictKind, standOffCell);
-				lastVerdictBySquad[squad] = verdictKind;
 
 				// Log.Write direct: AIUtils.BotDebug is gated on Game.Settings.Debug.BotDebug,
 				// which the match harness does not set — the FransBotLog pattern.
@@ -243,11 +259,8 @@ namespace OpenRA.Mods.CA.Traits
 
 			// Drop transition entries for squads that left evaluation (dissolved
 			// or below value floor) — the dict must not grow with squad churn.
-			foreach (var stale in lastVerdictBySquad.Keys.Where(k => !verdicts.ContainsKey(k)).ToArray())
-			{
-				lastVerdictBySquad.Remove(stale);
+			foreach (var stale in holds.Keys.Where(k => !verdicts.ContainsKey(k)).ToArray())
 				holds.Remove(stale);
-			}
 
 			// Heartbeat: distinguishes "module silent" from "no assault squads
 			// qualified" — a whole batch of silence means formation starves.
@@ -264,6 +277,77 @@ namespace OpenRA.Mods.CA.Traits
 			public int StandOffSince = -1;
 			public bool TimedOut;
 			public int ReengageBase = -1;
+
+			// S3: the verdict being served (-1 none), the squad value when it began, and the changed raw verdict awaiting a second vote.
+			public int Served = -1;
+			public int ServedValue;
+			public int Pending = -1;
+			public int PendingCount;
+
+			// What Decide said last pass (not what was served): the retreat-transition test must not depend on the held verdict.
+			public SiegeVerdict? LastRaw;
+		}
+
+		/// <summary>
+		/// S3 hysteresis (pure). Serve <paramref name="raw"/> at once on the first evaluation, when <paramref name="bypass"/> is set, or when the
+		/// squad's value moved by at least <paramref name="bandPct"/> percent since the served verdict began; otherwise a changed verdict
+		/// is served only on its second consecutive vote. A new squad is a new <see cref="SiegeHold"/> (reset on squad change).
+		/// </summary>
+		internal static SiegeVerdict Hysteresis(SiegeVerdict raw, int squadValue, int bandPct, bool bypass, SiegeHold hold)
+		{
+			if (hold.Served < 0 || bypass || (int)raw == hold.Served)
+				return Serve(raw, squadValue, hold);
+
+			var moved = hold.ServedValue > 0 &&
+				Math.Abs((long)squadValue - hold.ServedValue) * 100 >= (long)bandPct * hold.ServedValue;
+			if (moved)
+				return Serve(raw, squadValue, hold);
+
+			hold.PendingCount = hold.Pending == (int)raw ? hold.PendingCount + 1 : 1;
+			hold.Pending = (int)raw;
+			return hold.PendingCount >= 2 ? Serve(raw, squadValue, hold) : (SiegeVerdict)hold.Served;
+		}
+
+		static SiegeVerdict Serve(SiegeVerdict raw, int squadValue, SiegeHold hold)
+		{
+			if ((int)raw != hold.Served)
+				hold.ServedValue = squadValue;
+
+			hold.Served = (int)raw;
+			hold.Pending = -1;
+			hold.PendingCount = 0;
+			return raw;
+		}
+
+		/// <summary>
+		/// S5 (pure): true when a defence of effective reach <paramref name="reachCells"/> (its range plus the stand-off margin) can hit the
+		/// approach, i.e. the squad-to-target segment passes within that reach of it. Integer math, no sqrt.
+		/// </summary>
+		internal static bool CoversApproach(CPos defence, int reachCells, CPos from, CPos to)
+		{
+			return DistanceSqToSegment(defence, from, to) <= (long)reachCells * reachCells;
+		}
+
+		internal static long DistanceSqToSegment(CPos p, CPos a, CPos b)
+		{
+			long dx = b.X - a.X, dy = b.Y - a.Y;
+			long px = p.X - a.X, py = p.Y - a.Y;
+			var len2 = dx * dx + dy * dy;
+			if (len2 == 0)
+				return px * px + py * py;
+
+			var t = px * dx + py * dy;
+			if (t <= 0)
+				return px * px + py * py;
+
+			if (t >= len2)
+			{
+				long qx = p.X - b.X, qy = p.Y - b.Y;
+				return qx * qx + qy * qy;
+			}
+
+			var cross = px * dy - py * dx;
+			return cross * cross / len2;
 		}
 
 		/// <summary>
