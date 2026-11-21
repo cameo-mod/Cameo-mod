@@ -293,7 +293,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public static int EscortRequestValue(int defenceValue, int floor) => Math.Max(Math.Max(1, defenceValue), floor);
 
 		BotPeriod captureTicks; // STAGGER-06 F1
-		int routeRecheckDue; // STAGGER-06 E070: absolute due, 0 = not armed (F1 x0 = 0)
+		BotPeriod routeRecheck; // STAGGER-06 E070: call-counted F1 K=RouteRecheckTicks x0=0; frozen across a disabled gap (lastSeen), not reset on enable
 		BotCooldown repairCooldown;
 		int nextRepairJob;
 		int housekeptTick = -1;
@@ -391,6 +391,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			world = self.World;
 			player = self.Owner;
+			routeRecheck = BotPeriod.F1(world.WorldTick, 0, Info.RouteRecheckTicks);
 			escortEpisodes = new BotClaimEpisodeCounter(player.InternalName, nameof(EngineerBotModule),
 				self.Info.TraitInfos<EngineerBotModuleInfo>().ToList().IndexOf(info));
 			maximumCaptureTargetOptions = Math.Max(1, info.MaximumCaptureTargetOptions);
@@ -466,7 +467,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				}
 			}
 
-			if (Info.RouteRecheckTicks > 0 && Info.MaxExposedRouteCells >= 0 && BotPeriod.CarryDue(ref routeRecheckDue, BotVisitClock.Of(bot).VisitTick, Info.RouteRecheckTicks))
+			if (Info.RouteRecheckTicks > 0 && Info.MaxExposedRouteCells >= 0 && routeRecheck.TryFire(BotVisitClock.Of(bot)))
 			{
 				var tick = world.WorldTick;
 				var leases = BotUnitLeases.Of(player);
