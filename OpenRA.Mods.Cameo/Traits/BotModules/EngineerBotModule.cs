@@ -294,7 +294,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		BotPeriod captureTicks; // STAGGER-06 F1
 		BotPeriod routeRecheck; // STAGGER-06 E070: call-counted F1 K=RouteRecheckTicks x0=0; frozen across a disabled gap (lastSeen), not reset on enable
-		int repairTicks;
+		BotCooldown repairCooldown;
 		int nextRepairJob;
 		int housekeptTick = -1;
 		CPos initialBaseCenter;
@@ -420,7 +420,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			// Avoid all AIs reevaluating on the same tick (both parents do this).
 			captureTicks = BotPeriod.F1(player.World.WorldTick, BotRng.For(player, nameof(EngineerBotModule)).Next(Info.MinimumCaptureDelay), Info.MinimumCaptureDelay);
-			repairTicks = BotRng.For(player, nameof(EngineerBotModule)).Next(Info.AssignRoleDelay);
+			var repairDelay = BotRng.For(player, nameof(EngineerBotModule)).Next(Info.AssignRoleDelay);
+			repairCooldown = new BotCooldown { Due = player.World.WorldTick + Math.Max(1, repairDelay) };
 		}
 
 		void IBotPositionsUpdated.UpdatedBaseCenter(CPos newLocation) { initialBaseCenter = newLocation; }
@@ -450,9 +451,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (player.WinState != WinState.Undefined)
 				return;
 
-			if (--repairTicks <= 0)
+			var visitTick = BotVisitClock.Of(bot).VisitTick;
+			if (repairCooldown.Ready(visitTick))
 			{
-				repairTicks = Info.AssignRoleDelay;
+				repairCooldown.Start(visitTick, Info.AssignRoleDelay);
 				if (repairJobs.Length > 0)
 				{
 					Housekeep(bot);

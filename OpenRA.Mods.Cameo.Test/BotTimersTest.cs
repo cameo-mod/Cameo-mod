@@ -421,6 +421,27 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void InitialF1CounterAndReloadCooldownMatchAtN1()
+		{
+			const int interval = 120;
+			foreach (var initial in new[] { 0, 1, 17, interval - 1 })
+			{
+				var remaining = initial;
+				var cooldown = new BotCooldown { Due = Math.Max(1, initial) };
+				for (var tick = 1; tick <= 1000; tick++)
+				{
+					var oldReady = --remaining <= 0;
+					Assert.That(cooldown.Ready(tick), Is.EqualTo(oldReady), $"initial={initial} tick={tick}");
+					if (oldReady)
+					{
+						remaining = interval;
+						cooldown.Start(tick, interval);
+					}
+				}
+			}
+		}
+
+		[Test]
 		public void PeriodIsKeptAtVisitSpacingN()
 		{
 			// T3-b/T3-c: with a visit every N ticks the carry form loses no deadline and keeps the period K on average.
