@@ -57,8 +57,10 @@ namespace OpenRA.Mods.Cameo.Dev
 	/// environment is validated against the registry (unknown id = the DEV start aborts) and written into the synced
 	/// lobby options, so sim-changing rows run identically on every client. Mounted only by the DEV manifest generator.
 	/// </summary>
-	public sealed class AblationServerDev : ServerTrait, INotifyServerStart
+	public sealed class AblationServerDev : ServerTrait, INotifyServerStart, INotifySyncLobbyInfo
 	{
+		string configured;
+
 		void INotifyServerStart.ServerStarted(S server)
 		{
 			var value = CameoDevArgs.Value(AblationSpec.ArgumentName) ?? Environment.GetEnvironmentVariable(AblationSpec.EnvironmentName);
@@ -68,11 +70,34 @@ namespace OpenRA.Mods.Cameo.Dev
 			if (!AblationSpec.TryParse(value, AblationSpec.RegistryIds(), out _, out var error))
 				throw new InvalidOperationException("CAMEO DEV ABLATE rejected: " + error);
 
-			value = value.Trim();
-			server.LobbyInfo.GlobalSettings.LobbyOptions[AblationSpec.OptionId] =
-				new OpenRA.Network.Session.LobbyOptionState { Value = value, PreferredValue = value, IsLocked = true };
+			configured = value.Trim();
+			WriteOption(server);
 			server.SyncLobbyInfo();
-			Log.Write("server", "CAMEO DEV ABLATE set - " + value);
+			Log.Write("server", "CAMEO DEV ABLATE set - " + configured);
+		}
+
+		// Map selection (LoadMapSettings) only touches the options a map declares, so this key survives it. The lobby
+		// "reset options" command (LobbyCommands.ResetOptions) REPLACES the whole dictionary and would drop it, which
+		// would silently turn an ablation run into a full-bundle run. Re-assert after every sync; idempotent (a present,
+		// equal value does nothing), so the nested SyncLobbyGlobalSettings below cannot loop.
+		void INotifySyncLobbyInfo.LobbyInfoSynced(S server)
+		{
+			if (configured == null)
+				return;
+
+			var options = server.LobbyInfo.GlobalSettings.LobbyOptions;
+			if (options.TryGetValue(AblationSpec.OptionId, out var state) && state.Value == configured)
+				return;
+
+			WriteOption(server);
+			server.SyncLobbyGlobalSettings();
+			Log.Write("server", "CAMEO DEV ABLATE re-asserted after the lobby dropped it - " + configured);
+		}
+
+		void WriteOption(S server)
+		{
+			server.LobbyInfo.GlobalSettings.LobbyOptions[AblationSpec.OptionId] =
+				new OpenRA.Network.Session.LobbyOptionState { Value = configured, PreferredValue = configured, IsLocked = true };
 		}
 	}
 }
