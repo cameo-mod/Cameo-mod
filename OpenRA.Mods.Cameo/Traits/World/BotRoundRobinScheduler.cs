@@ -59,7 +59,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		}
 	}
 
-	public sealed class BotRoundRobinScheduler : ITick, IGameSaveTraitData, INotifyGameLoaded
+	public sealed class BotRoundRobinScheduler : ITick, IGameSaveTraitData, INotifyGameLoaded, IGameOver
 	{
 		// 11.2: the scheduler's own data is versioned. A newer version refuses the load, naming the version.
 		public const int SchedulerDataVersion = 1;
@@ -149,6 +149,15 @@ namespace OpenRA.Mods.Cameo.Traits
 				return;
 
 			Core.Advance(world.WorldTick);
+		}
+
+		// DEV builds: the game-end per-module timing flush of every registered bot (ModularBot is a player trait and gets no IGameOver).
+		void IGameOver.GameOver(World w)
+		{
+#if CAMEO_DEV_LOGGING
+			foreach (var seat in Core.Registered)
+				((SeatBinding)seat.Bot).Bot.FlushModuleTiming();
+#endif
 		}
 
 		void INotifyGameLoaded.GameLoaded(World w)
