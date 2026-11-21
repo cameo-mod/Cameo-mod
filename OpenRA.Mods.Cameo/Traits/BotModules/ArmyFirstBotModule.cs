@@ -59,15 +59,14 @@ namespace OpenRA.Mods.Cameo.Traits
 		/// <summary>Essentials (conyard, refinery, power, first factory) always pass; everything else yields to either vote.</summary>
 		public static bool Holds(bool essential, bool cashPoorPaused, bool armyCountHolds) => !essential && (cashPoorPaused || armyCountHolds);
 
-		/// <summary>Class C scan clock; a disabled visit freezes the remaining world-tick delay.</summary>
-		public static bool ShouldScan(ref BotCooldown cooldown, int visitTick, int elapsed, int interval, bool enabled)
-		{
-			if (!enabled)
-			{
-				cooldown.Freeze(elapsed);
-				return false;
-			}
+		/// <summary>Class C scan clock; preserve the exact remaining delay across a disabled interval.</summary>
+		public static int PauseScan(ref BotCooldown cooldown, int tick) => cooldown.Remaining(tick);
 
+		public static void ResumeScan(ref BotCooldown cooldown, int tick, int remaining) =>
+			cooldown = BotCooldown.FromRemaining(tick, remaining);
+
+		public static bool ShouldScan(ref BotCooldown cooldown, int visitTick, int interval)
+		{
 			if (!cooldown.Ready(visitTick))
 				return false;
 
@@ -92,6 +91,8 @@ namespace OpenRA.Mods.Cameo.Traits
 		bool hasUnitProducer;
 		int armyUnits;
 		BotCooldown scanCooldown;
+		int pausedScanRemaining;
+		bool scanPaused;
 
 		public ArmyFirstBotModule(ArmyFirstBotModuleInfo info, ActorInitializer init)
 			: base(info)
@@ -115,11 +116,28 @@ namespace OpenRA.Mods.Cameo.Traits
 			base.Created(self);
 		}
 
+		protected override void TraitDisabled(Actor self)
+		{
+			pausedScanRemaining = ArmyFirstEval.PauseScan(ref scanCooldown, self.World.WorldTick);
+			scanPaused = true;
+		}
+
+		protected override void TraitEnabled(Actor self)
+		{
+			if (scanPaused)
+			{
+				ArmyFirstEval.ResumeScan(ref scanCooldown, self.World.WorldTick, pausedScanRemaining);
+				scanPaused = false;
+			}
+		}
+
 		void IBotTick.BotTick(IBot bot)
 		{
-			var (visitTick, elapsed, _) = BotVisitClock.Of(bot);
-			if (!ArmyFirstEval.ShouldScan(ref scanCooldown, visitTick, elapsed, info.ScanInterval,
-				!IsTraitDisabled && playerResources != null))
+			if (IsTraitDisabled || playerResources == null)
+				return;
+
+			var visitTick = BotVisitClock.Of(bot).VisitTick;
+			if (!ArmyFirstEval.ShouldScan(ref scanCooldown, visitTick, info.ScanInterval))
 				return;
 
 			var world = bot.Player.World;

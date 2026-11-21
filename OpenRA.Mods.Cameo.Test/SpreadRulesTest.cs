@@ -85,13 +85,14 @@ namespace OpenRA.Mods.Cameo.Test
 		public void ArmyFirstScanCooldownMatchesVisitCadenceAndDisabledFreeze()
 		{
 			var cooldown = new BotCooldown();
-			Assert.That(ArmyFirstEval.ShouldScan(ref cooldown, 0, 1, 25, true), Is.True);
-			for (var tick = 1; tick <= 10; tick++)
-				Assert.That(ArmyFirstEval.ShouldScan(ref cooldown, tick, 1, 25, false), Is.False);
+			Assert.That(ArmyFirstEval.ShouldScan(ref cooldown, 0, 25), Is.True);
+			var remaining = ArmyFirstEval.PauseScan(ref cooldown, 1);
+			Assert.That(remaining, Is.EqualTo(24));
 
-			Assert.That(ArmyFirstEval.ShouldScan(ref cooldown, 11, 1, 25, true), Is.False);
-			Assert.That(ArmyFirstEval.ShouldScan(ref cooldown, 34, 1, 25, true), Is.False);
-			Assert.That(ArmyFirstEval.ShouldScan(ref cooldown, 35, 1, 25, true), Is.True);
+			// No scan visits occur while the conditional trait is disabled.
+			ArmyFirstEval.ResumeScan(ref cooldown, 31, remaining);
+			Assert.That(ArmyFirstEval.ShouldScan(ref cooldown, 54, 25), Is.False);
+			Assert.That(ArmyFirstEval.ShouldScan(ref cooldown, 55, 25), Is.True);
 		}
 	}
 }
