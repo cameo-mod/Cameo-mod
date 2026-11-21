@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Cameo.Traits;
@@ -1077,15 +1078,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			var tick = player.World.WorldTick;
 			ReopenDormant(tick);
-			if (tick >= nextEmergencyTick)
+			if (BotPeriod.CarryDue(ref nextEmergencyTick, tick, Info.EmergencyCheckInterval))
 			{
-				nextEmergencyTick = tick + Math.Max(1, Info.EmergencyCheckInterval);
 				CheckEmergency(tick);
 			}
-			if (tick < nextSnapshotTick)
+			if (!BotPeriod.CarryDue(ref nextSnapshotTick, tick, Info.SnapshotInterval))
 				return;
 
-			nextSnapshotTick = tick + Math.Max(1, Info.SnapshotInterval);
 			Rebuild(tick, bot);
 		}
 

@@ -1348,9 +1348,8 @@ namespace OpenRA.Mods.CA.Traits
 			var queues = Info.UnitQueues.SelectMany(c => AIUtils.FindQueues(player, c)).Distinct().ToList();
 			var feasible = queues.Any(q => q.Enabled);
 			var capacity = queues.Any(q => q is IHasParallelQueueSlots p ? p.AvailableSlots > 0 : !q.AllQueued().Any());
-			if (world.WorldTick >= nextPoolCheckTick)
+			if (BotPeriod.CarryDue(ref nextPoolCheckTick, world.WorldTick, FeedbackTime))
 			{
-				nextPoolCheckTick = world.WorldTick + FeedbackTime;
 				poolNeedsReplenish = OffensivePoolNeedsReplenish();
 			}
 

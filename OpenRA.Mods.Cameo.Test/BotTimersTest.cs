@@ -471,6 +471,32 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void CarryDueMatchesTheOldDueFormAtN1()
+		{
+			foreach (var k in new[] { 0, 1, 30, 50, 250 })
+			{
+				var oldNext = 0;
+				var due = 0;
+				for (var t = 1; t <= 3000; t++)
+				{
+					var oldFire = t >= oldNext;
+					if (oldFire)
+						oldNext = t + Math.Max(1, k);
+
+					Assert.That(BotPeriod.CarryDue(ref due, t, k), Is.EqualTo(oldFire), $"K={k} t={t}");
+				}
+			}
+		}
+
+		[Test]
+		public void UnarmedPeriodAndBadResidueThrow()
+		{
+			Assert.That(() => default(BotPeriod).TryFire(5), Throws.InvalidOperationException);
+			Assert.That(() => BotPeriod.F4(0, 25, 25), Throws.InstanceOf<ArgumentOutOfRangeException>());
+			Assert.That(() => BotPeriod.F4(0, 25, -1), Throws.InstanceOf<ArgumentOutOfRangeException>());
+		}
+
+		[Test]
 		public void CoalescedMissesAreCountedNotLost()
 		{
 			var p = BotPeriod.F1(0, 0, 10);
