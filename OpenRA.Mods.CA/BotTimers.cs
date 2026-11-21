@@ -131,9 +131,20 @@ namespace OpenRA.Mods.CA
 		/// <summary>11.2 save form R: remaining = due - saveTick (may be zero or negative when overdue between visits).</summary>
 		public int SavedRemaining(int saveTick) => Due - saveTick;
 
-		/// <summary>11.2 load: TimerFormat 1 restores due = loadTick + saved exactly; a legacy number is a fresh x0 at r = loadTick (F1).</summary>
-		public static BotPeriod Restore(int loadTick, int saved, int k, bool newFormat) =>
-			newFormat ? new BotPeriod(loadTick + saved, k, loadTick, true) : F1(loadTick, saved, k);
+		/// <summary>
+		/// Ticks between the last call this timer received and saveTick (0 for forms that are not call-counted). A counted timer
+		/// ages by the calls it missed while its module was disabled; that age since lastSeen is part of the state, so a save in
+		/// the middle of a disabled gap must carry it (RR-SAVE-01), or the restored timer forgets the gap so far and fires early.
+		/// </summary>
+		public int SeenAge(int saveTick) => counted ? Math.Max(0, saveTick - lastSeen) : 0;
+
+		/// <summary>
+		/// 11.2 load: TimerFormat 1 restores due = loadTick + saved exactly; a legacy number is a fresh x0 at r = loadTick (F1).
+		/// seenAge is the saved <see cref="SeenAge"/>: lastSeen = loadTick - seenAge restores the exact pre-save last-seen tick.
+		/// A save without it (age 0, as written before RR-SAVE-01) keeps lastSeen = loadTick.
+		/// </summary>
+		public static BotPeriod Restore(int loadTick, int saved, int k, bool newFormat, int seenAge = 0) =>
+			newFormat ? new BotPeriod(loadTick + saved, k, loadTick - Math.Max(0, seenAge), true) : F1(loadTick, saved, k);
 
 		public const int TimerFormatVersion = 1;
 

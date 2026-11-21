@@ -4328,8 +4328,10 @@ namespace OpenRA.Mods.CA.Traits
 				new("RushTicks", FieldSaver.FormatValue(rushTicks)),
 				new("TimerFormat", FieldSaver.FormatValue(BotPeriod.TimerFormatVersion)),
 				new("AssignRolesTicks", FieldSaver.FormatValue(assignRolesTicks.SavedRemaining(World.WorldTick))),
+				new("AssignRolesSeenAge", FieldSaver.FormatValue(assignRolesTicks.SeenAge(World.WorldTick))),
 				new("protectionForceTicks", FieldSaver.FormatValue(protectionForceTicks)),
 				new("AttackForceTicks", FieldSaver.FormatValue(attackForceTicks.SavedRemaining(World.WorldTick))),
+				new("AttackForceSeenAge", FieldSaver.FormatValue(attackForceTicks.SeenAge(World.WorldTick))),
 				new("MinAttackForceDelayTicks", FieldSaver.FormatValue(minAttackForceDelayTicks)),
 			};
 
@@ -4393,13 +4395,15 @@ namespace OpenRA.Mods.CA.Traits
 				rushTicks = FieldLoader.GetValue<int>("RushTicks", rushTicksNode.Value);
 
 			if (nodes.TryGetValue("AssignRolesTicks", out var assignRolesTicksNode))
-				assignRolesTicks = BotPeriod.Restore(self.World.WorldTick, FieldLoader.GetValue<int>("AssignRolesTicks", assignRolesTicksNode.Value), Info.AssignRolesInterval, timerNew);
+				assignRolesTicks = BotPeriod.Restore(self.World.WorldTick, FieldLoader.GetValue<int>("AssignRolesTicks", assignRolesTicksNode.Value), Info.AssignRolesInterval, timerNew,
+					nodes.TryGetValue("AssignRolesSeenAge", out var assignRolesSeenAgeNode) ? FieldLoader.GetValue<int>("AssignRolesSeenAge", assignRolesSeenAgeNode.Value) : 0);
 
 			if (nodes.TryGetValue("protectionForceTicks", out var protectionForceTicksNode))
 				protectionForceTicks = FieldLoader.GetValue<int>("protectionForceTicks", protectionForceTicksNode.Value);
 
 			if (nodes.TryGetValue("AttackForceTicks", out var attackForceTicksNode))
-				attackForceTicks = BotPeriod.Restore(self.World.WorldTick, FieldLoader.GetValue<int>("AttackForceTicks", attackForceTicksNode.Value), Info.AttackForceInterval, timerNew);
+				attackForceTicks = BotPeriod.Restore(self.World.WorldTick, FieldLoader.GetValue<int>("AttackForceTicks", attackForceTicksNode.Value), Info.AttackForceInterval, timerNew,
+					nodes.TryGetValue("AttackForceSeenAge", out var attackForceSeenAgeNode) ? FieldLoader.GetValue<int>("AttackForceSeenAge", attackForceSeenAgeNode.Value) : 0);
 
 			if (nodes.TryGetValue("MinAttackForceDelayTicks", out var minAttackForceDelayTicksNode))
 				minAttackForceDelayTicks = FieldLoader.GetValue<int>("MinAttackForceDelayTicks", minAttackForceDelayTicksNode.Value);

@@ -492,6 +492,77 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void SaveInsideADisabledGapKeepsTheGapSoFar()
+		{
+			// RR-SAVE-01 (Sol): last module visit 100, due 125, module disabled from 101, saved and loaded at 120, next delivered visit 131.
+			var continuous = BotPeriod.F1(0, 125, 25);
+			for (var t = 1; t <= 100; t++)
+				continuous.TryFire(t, 1);
+
+			var saved = continuous.SavedRemaining(120);
+			var age = continuous.SeenAge(120);
+			Assert.That(age, Is.EqualTo(20));
+
+			var restored = BotPeriod.Restore(120, saved, 25, true, age);
+			Assert.That(continuous.TryFire(131, 1), Is.False);
+			Assert.That(restored.TryFire(131, 1), Is.False);
+			Assert.That(continuous.Due, Is.EqualTo(155));
+			Assert.That(restored.Due, Is.EqualTo(155));
+
+			// A save written before RR-SAVE-01 has no age: lastSeen = loadTick and the 20 ticks so far are lost (the old read path).
+			var legacy = BotPeriod.Restore(120, saved, 25, true);
+			legacy.TryFire(131, 1);
+			Assert.That(legacy.Due, Is.EqualTo(135));
+
+			// A timer that is not call-counted carries no age.
+			Assert.That(BotPeriod.Abs(0, 50, 25).SeenAge(120), Is.EqualTo(0));
+		}
+
+		[Test]
+		public void SaveAtAnyTickMatchesContinuousPlayAtN8()
+		{
+			// Visits every 8 ticks; the module is served up to 96, disabled for visits 104..128, enabled again from 136.
+			foreach (var saveTick in new[] { 97, 104, 112, 120, 128, 135 })
+			{
+				var continuous = BotPeriod.F1(0, 150, 25);
+				for (var t = 8; t <= 96; t += 8)
+					continuous.TryFire(t, 8);
+
+				var restored = BotPeriod.Restore(saveTick, continuous.SavedRemaining(saveTick), 25, true, continuous.SeenAge(saveTick));
+				var expected = new System.Collections.Generic.List<int>();
+				var actual = new System.Collections.Generic.List<int>();
+				for (var t = 136; t <= 400; t += 8)
+				{
+					if (continuous.TryFire(t, 8))
+						expected.Add(t);
+
+					if (restored.TryFire(t, 8))
+						actual.Add(t);
+				}
+
+				Assert.That(expected, Is.Not.Empty);
+				Assert.That(actual, Is.EqualTo(expected), $"save at {saveTick}");
+				Assert.That(restored.Due, Is.EqualTo(continuous.Due), $"save at {saveTick}");
+			}
+		}
+
+		[Test]
+		public void SaveOfAnEnabledModuleIsUnchangedAtN1()
+		{
+			// No gap: the age is 0 or 1 and the restored timer fires on exactly the continuous ticks.
+			foreach (var saveTick in new[] { 200, 201, 224 })
+			{
+				var continuous = BotPeriod.F1(0, 30, 25);
+				for (var t = 1; t < saveTick; t++)
+					continuous.TryFire(t, 1);
+
+				var restored = BotPeriod.Restore(saveTick, continuous.SavedRemaining(saveTick), 25, true, continuous.SeenAge(saveTick));
+				for (var t = saveTick; t <= 400; t++)
+					Assert.That(restored.TryFire(t, 1), Is.EqualTo(continuous.TryFire(t, 1)), $"save at {saveTick}, tick {t}");
+			}
+		}
+
+		[Test]
 		public void DisabledGapFreezesACallCountedTimerLikeTheOldCounter()
 		{
 			// The module is not ticked while disabled (RunModules skips it): the old counter does not move.
