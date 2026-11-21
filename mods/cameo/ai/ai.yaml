@@ -5442,8 +5442,8 @@ Player:
 		# least-provisioned queue type. SwitchCondition-gated — classic keeps today's behaviour.
 		# Enabled for the maintainer's 2026-10-15 combined playtest (BZ).
 		UseProductionScaling: true
-		BuildingProductionMinCashRequirement: 1000
-		DefenseProductionMinCashRequirement: 1500
+		BuildingProductionMinCashRequirement: 1500
+		DefenseProductionMinCashRequirement: 2000
 		BuildingQueues: Building, RABuilding, BuildingAddons
 		DefenseQueues: Defence, RADefence, BuildingAddons
 		ConstructionYardTypes: zerg_lair, zerg_hive
@@ -5612,7 +5612,7 @@ Player:
 		# Generic-only: classic retains its existing production rules.
 		SwitchCondition: genericbot
 		BankSaturationCash: 1
-		CapturerInfantryLimitPct: 10
+		CapturerInfantryLimitPct: 5
 		CapturerMinimumUnits: 2
 		CapturerAllowanceMax: 4
 		UseCompositions: true
@@ -5624,7 +5624,7 @@ Player:
 		# PROD-IDLE G1: the fair producer service replaces the legacy fill loop for genericbot (SwitchCondition above);
 		# classic keeps the legacy loop byte-identically.
 		FairProducerService: true
-		IdleBaseUnitsMaximum: 50
+		IdleBaseUnitsMaximum: 25
 		ProductionMinCashRequirement: 1000
 		MaximiseProductionCashRequirement: 5000
 		# One immediately buildable basic combat unit for each barracks-first faction.
