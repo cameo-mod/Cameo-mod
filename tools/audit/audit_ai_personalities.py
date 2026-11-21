@@ -9,8 +9,10 @@ instances.
 
 from __future__ import annotations
 
+import json
 import re
 import sys
+from fractions import Fraction
 from pathlib import Path
 
 
@@ -169,7 +171,7 @@ FAIR_TIER = "hard"
 # is forbidden — difficulty-selective behaviour belongs in BotLimits fields, not in which modules
 # exist.
 TIER_CONDITIONS = {
-    "easiestbot", "veryeasybot", "easybot", "mediumbot", "hardbot",
+    "noobbot", "easiestbot", "veryeasybot", "easybot", "mediumbot", "hardbot",
     "veryhardbot", "brutalbot", "challengerbot", "unbeatablebot", "cameogodbot",
 }
 # Structural nodes that legitimately reference a tier condition: the BotLimits ladder IS the
@@ -181,7 +183,82 @@ TIER_GATE_ALLOW_PREFIXES = ("BotLimits@", "ProvidesPrerequisite@", "GrantConditi
 def on_line(values: list[int]) -> bool:
     """Equal steps from the first tier to the last; an integer may sit within 0.5 of the line (DESIGN §19.1)."""
     n = len(values) - 1
-    return all(abs(v - (values[0] + (values[-1] - values[0]) * i / n)) <= 0.5 for i, v in enumerate(values))
+    return all(2 * abs(n * (v - values[0]) - (values[-1] - values[0]) * i) <= n for i, v in enumerate(values))
+
+
+LADDER_TIERS = ("noob", *PRODUCTION_TIERS)
+TIER_NAMES = {tier: tier for tier in LADDER_TIERS} | {"god": "cameogod"}
+for tier in LADDER_TIERS:
+    TIER_NAMES[f"{tier}bot"] = tier
+    TIER_NAMES[f"{tier}botplayer"] = tier
+
+ZERO_ALLOWLIST = Path(__file__).with_name("ai_ladder_legal_zeros.json")
+NUMBER = re.compile(r"[+-]?(?:\d+(?:\.\d*)?|\.\d+)")
+BOOLEANS = {"true", "false"}
+
+
+def check_ladder_row(path, values, legal_zeros):
+    present = [value.strip() for value in values if value is not None]
+    missing = [tier for tier, value in zip(LADDER_TIERS, values) if value is None]
+    if missing:
+        return [f"{path} missing on {', '.join(missing)}"]
+    types = {value.lower() for value in present}
+    if types & BOOLEANS or path.rsplit(".", 1)[-1].startswith("Use"):
+        return [] if len(types) == 1 and types <= BOOLEANS else [f"{path} inconsistent boolean: {present}"]
+    if not any(NUMBER.fullmatch(value) for value in present):
+        return []
+    if not all(NUMBER.fullmatch(value) for value in present):
+        return [f"{path} mixes numeric and nonnumeric values: {present}"]
+    numbers = [Fraction(value) for value in present]
+    failures = []
+    if not on_line(numbers):
+        failures.append(f"{path} is not on one equal-step line: {present}")
+    if len(set(numbers)) > 1 and (numbers[0] == 0 or numbers[-1] == 0) and not legal_zeros.get(path, "").strip():
+        failures.append(f"{path} has a zero endpoint without a cited allowance")
+    return failures
+
+
+def scalar_fields(node, prefix=""):
+    for child in node.children:
+        path = f"{prefix}.{child.key}" if prefix else child.key
+        if child.children:
+            yield from scalar_fields(child, path)
+        elif child.key not in {"RequiresCondition", "Prerequisites"}:
+            yield path, child.value
+
+
+def ladder_failures(roots, legal_zeros):
+    failures = []
+    all_tiers = set(LADDER_TIERS)
+    for root in roots:
+        if root is None:
+            continue
+        families = {}
+        grants = {}
+        for child in root.children:
+            family, _, suffix = child.key.partition("@")
+            if family == "GrantConditionOnBotOwner":
+                condition = child.get("Condition")
+                if condition and condition not in TIER_NAMES:
+                    bots = {bot.strip() for bot in (child.get("Bots") or "").split(",")}
+                    grants.setdefault(condition, set()).update(bots & all_tiers)
+            elif suffix in TIER_NAMES and family not in {"ProvidesPrerequisite", "ModularBot"}:
+                variants = families.setdefault(family, {})
+                tier = TIER_NAMES[suffix]
+                if tier in variants:
+                    failures.append(f"{root.key}.{family} has duplicate forms for {tier}")
+                variants[tier] = dict(scalar_fields(child))
+
+        for condition, enabled in sorted(grants.items()):
+            if enabled and enabled != all_tiers:
+                missing = ", ".join(t for t in LADDER_TIERS if t not in enabled)
+                failures.append(f"{root.key}.{condition} grant missing on {missing}")
+        for family, variants in sorted(families.items()):
+            fields = sorted({field for variant in variants.values() for field in variant})
+            for field in fields:
+                values = [variants.get(tier, {}).get(field) for tier in LADDER_TIERS]
+                failures.extend(check_ladder_row(f"{root.key}.{family}.{field}", values, legal_zeros))
+    return failures
 
 
 def siege_ladder_failures() -> list[str]:
@@ -294,11 +371,6 @@ def difficulty_scale_failures() -> list[str]:
         if not on_line(values):
             failures.append(f"BotLimits.{field} is not on one equal-step line: {values}")
 
-    for flag in BOOLEAN_LIMIT_FIELDS:
-        states = [(limits[t].get(flag) or "false").strip().lower() == "true" for t in DIFFICULTIES]
-        if states != sorted(states):
-            failures.append(f"BotLimits.{flag} is not a single threshold (off below, on from some tier up): {states}")
-
     behavior = rules.resolve("^BotProductionBehavior")
     for trait in ("ProductionTimeMultiplier", "ProductionCostMultiplier"):
         nodes = [behavior.child(f"{trait}@{t}botplayer") if behavior else None for t in PRODUCTION_TIERS]
@@ -311,6 +383,8 @@ def difficulty_scale_failures() -> list[str]:
         fair = values[PRODUCTION_TIERS.index(FAIR_TIER)]
         if fair != 100:
             failures.append(f"{trait}: the fair tier `{FAIR_TIER}` must be 100, is {fair}")
+    legal_zeros = json.loads(ZERO_ALLOWLIST.read_text(encoding="utf-8"))
+    failures.extend(ladder_failures((player, behavior), legal_zeros))
     return failures
 
 
