@@ -9,6 +9,7 @@
  */
 #endregion
 
+#if CAMEO_DEV_LOGGING || CAMEO_DEV_TEST_COMPILE
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -151,3 +152,4 @@ namespace OpenRA.Mods.Cameo.Traits
 		}
 	}
 }
+#endif

@@ -54,6 +54,14 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void DevCashBonusIsMountedOnlyByTheDevelopmentRules()
+		{
+			Assert.That(Source("packaging/dev-logging.yaml"), Does.Contain("	DevCashBonus:"));
+			Assert.That(Source("packaging/player.yaml"), Does.Not.Contain("DevCashBonus"));
+			Assert.That(Source("packaging/world.yaml"), Does.Not.Contain("DevCashBonus"));
+		}
+
+		[Test]
 		public void FinishedPackageHasNoDevelopmentContent()
 			{
 				var root = Environment.GetEnvironmentVariable("CAMEO_FINISHED_PACKAGE");

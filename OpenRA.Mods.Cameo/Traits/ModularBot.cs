@@ -659,7 +659,9 @@ namespace OpenRA.Mods.Cameo.Traits
 				defendReactions.Trigger(world.WorldTick, DefendReactionTracker.EnemyNearBase, intruder.ActorID, intruder.Location.X, intruder.Location.Y);
 		}
 
-		/// <summary>Game end: still-open defend triggers are written as censored (not none), see DefendReactionTracker.Flush.</summary>
+		/// <summary>Game end: still-open defend triggers are written as censored (not none), see DefendReactionTracker.Flush.
+		/// Called from the scheduler's GameOver, so only registered (round-robin family) bots flush; a classic bot's open triggers are
+		/// not written. Accepted (Opus): the evaluation uses family bots only.</summary>
 		public void FlushDefendReactions() => defendReactions?.Flush(world.WorldTick);
 #endif
 
