@@ -95,7 +95,8 @@ namespace OpenRA.Mods.CA.Traits
 		// QW-B: the evaluation tick within the interval; ClientIndex % interval (shared by map-side bots) unless the bot phase-offsets its timers.
 		int evaluationPhase = -1;
 
-		int StandOffMaxTicks => BotDifficultyLadder.Scale(Info.StandOffMaxTicksEasy, Info.StandOffMaxTicksHard, player, Info.StandOffMaxTicksHard);
+		/// <summary>The tier's hold bound (S2); the retreat-side pull-back hold is capped by the same line (Opus ruling).</summary>
+		public int StandOffMaxTicks => BotDifficultyLadder.Scale(Info.StandOffMaxTicksEasy, Info.StandOffMaxTicksHard, player, Info.StandOffMaxTicksHard);
 		int SiegeReengagePct => BotDifficultyLadder.Scale(Info.SiegeReengagePctEasy, Info.SiegeReengagePctHard, player, Info.SiegeReengagePctHard);
 		int HysteresisBandPct => BotDifficultyLadder.Scale(Info.HysteresisBandPctEasy, Info.HysteresisBandPctHard, player, Info.HysteresisBandPctHard);
 
@@ -202,6 +203,13 @@ namespace OpenRA.Mods.CA.Traits
 						.ToList();
 					var prediction = BotCombatPredictor.Predict(own, enemy, Info.UseEffectiveDamageModel);
 
+					// S1: stand-off support = artillery attached, or a ground unit whose weapon can hit the longest-range covering
+					// defence's type from at least that defence's range (it can work the defence from the stand-off line).
+					var longest = covering.Aggregate((a, b) => a.MaxRangeCells >= b.MaxRangeCells ? a : b);
+					var longestProfile = BotUnitProfiles.Get(rules, longest.Observed, Info.UseEffectiveDamageModel);
+					var standOffSupport = artilleryAttached ||
+						HasStandOffWeapon(own.Select(o => o.Item1), longestProfile, longest.MaxRangeCells);
+
 					standOffCells = covering.Max(d => d.MaxRangeCells) + Info.StandOffMarginCells;
 					var standOffSq = (long)standOffCells * standOffCells;
 					var nearest = covering.Aggregate((a, b) =>
@@ -227,7 +235,7 @@ namespace OpenRA.Mods.CA.Traits
 						holds[squad] = hold = new SiegeHold();
 
 					var wasRetreating = hold.LastRaw == SiegeVerdict.Retreat;
-					var raw = Decide(prediction.OwnWins, committed, insideLine, artilleryAttached, squadValue, now,
+					var raw = Decide(prediction.OwnWins, committed, insideLine, standOffSupport, squadValue, now,
 						StandOffMaxTicks, SiegeReengagePct, wasRetreating, hold, out verdict, out var newRetreat);
 					hold.LastRaw = raw;
 
@@ -319,6 +327,23 @@ namespace OpenRA.Mods.CA.Traits
 			return raw;
 		}
 
+		/// <summary>S1 (pure): a weapon reaches a defence from the stand-off line when its range is at least the defence's range.</summary>
+		internal static bool Outranges(WDist weaponRange, int defenceRangeCells) => weaponRange.Length >= WDist.FromCells(defenceRangeCells).Length;
+
+		/// <summary>S1 (pure): some unit has a weapon that can target the defence's type and Outranges it.</summary>
+		internal static bool HasStandOffWeapon(IEnumerable<BotUnitProfile> units, BotUnitProfile defence, int defenceRangeCells)
+		{
+			foreach (var u in units)
+				foreach (var w in u.Weapons)
+					if (w.CanTarget(defence.TargetTypes) && Outranges(w.Range, defenceRangeCells))
+						return true;
+
+			return false;
+		}
+
+		/// <summary>The retreat-side pull-back hold ends once it has run <paramref name="capTicks"/> (0 or less = uncapped).</summary>
+		internal static bool HoldExpired(int now, int startTick, int capTicks) => capTicks > 0 && now - startTick >= capTicks;
+
 		/// <summary>
 		/// S5 (pure): true when a defence of effective reach <paramref name="reachCells"/> (its range plus the stand-off margin) can hit the
 		/// approach, i.e. the squad-to-target segment passes within that reach of it. Integer math, no sqrt.
@@ -353,11 +378,11 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>
 		/// The verdict ladder for a squad that has remembered defences covering its target (pure, headless-testable).
 		/// Retreat: the fight is predicted lost, or the re-engage cooldown still holds (SiegeReengagePct growth since the retreat; an
-		/// overwhelming commit bypasses it). Advance: committed; or no artillery is attached (S1: a stand-off is held only while artillery
-		/// works the defences); or the hold timed out (S2: the predicted-won fight is taken, and stays taken until a Retreat).
+		/// overwhelming commit bypasses it). Advance: committed; or no stand-off support (S1: a stand-off is held only while artillery is
+		/// attached or a ground unit can work the covering defence from its own range); or the hold timed out (S2: the predicted-won fight is taken, and stays taken until a Retreat).
 		/// StandOff: artillery attached, fight predicted won, hold not yet timed out.
 		/// </summary>
-		internal static SiegeVerdict Decide(bool ownWins, bool committed, bool insideLine, bool artilleryAttached, int squadValue, int now,
+		internal static SiegeVerdict Decide(bool ownWins, bool committed, bool insideLine, bool standOffSupport, int squadValue, int now,
 			int standOffMaxTicks, int reengagePct, bool wasRetreating, SiegeHold hold, out string label, out bool newRetreat)
 		{
 			newRetreat = false;
@@ -394,10 +419,10 @@ namespace OpenRA.Mods.CA.Traits
 				return SiegeVerdict.Advance;
 			}
 
-			if (!artilleryAttached)
+			if (!standOffSupport)
 			{
 				hold.StandOffSince = -1;
-				label = "advance(no-artillery)";
+				label = "advance(no-standoff-support)";
 				return SiegeVerdict.Advance;
 			}
 

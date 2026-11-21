@@ -1456,13 +1456,17 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 	{
 		readonly CPos holdCell;
 		bool decided;
+		int startTick = -1;
 
 		public GroundUnitsSiegeRetreatStateCA(CPos holdCell)
 		{
 			this.holdCell = holdCell;
 		}
 
-		public void Activate(SquadCA owner) { }
+		public void Activate(SquadCA owner)
+		{
+			startTick = owner.World.WorldTick;
+		}
 
 		public void Tick(SquadCA owner)
 		{
@@ -1485,6 +1489,15 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (verdict != SiegeVerdict.Retreat || leader.Actor == null)
 			{
 				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+				return;
+			}
+
+			// Opus ruling: the pull-back hold is capped by the tier's StandOffMaxTicks line. On expiry the squad is released to the
+			// normal regroup/rally-home path (the legacy retreat orders, no DismissSquad); the evaluator's re-engage cooldown keeps running.
+			if (SiegeEvaluatorBotModule.HoldExpired(owner.World.WorldTick, startTick, owner.SquadManager.SiegeHoldCapTicks()))
+			{
+				Retreat(owner, flee: true, rearm: true, repair: true);
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);
 				return;
 			}
 

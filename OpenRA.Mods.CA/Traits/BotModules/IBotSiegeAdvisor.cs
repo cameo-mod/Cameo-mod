@@ -41,5 +41,8 @@ namespace OpenRA.Mods.CA.Traits
 		/// <paramref name="standOffCell"/> is valid for <see cref="SiegeVerdict.StandOff"/> and <see cref="SiegeVerdict.Retreat"/>.
 		/// </summary>
 		SiegeVerdict VerdictFor(SquadCA squad, out CPos standOffCell);
+
+		/// <summary>The tier's StandOffMaxTicks: also the cap of the retreat-side pull-back hold (SIEGE-FIX-01, Opus ruling).</summary>
+		int StandOffMaxTicks { get; }
 	}
 }

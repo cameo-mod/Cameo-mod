@@ -14,6 +14,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
+using OpenRA.Primitives;
+using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Test
 {
@@ -243,6 +245,69 @@ namespace OpenRA.Mods.Cameo.Test
 
 		static SiegeVerdict Serve(SiegeEvaluatorBotModule.SiegeHold hold, SiegeVerdict raw, int value = 2000, int band = 20, bool bypass = false)
 			=> SiegeEvaluatorBotModule.Hysteresis(raw, value, band, bypass, hold);
+
+		// ---- S1 ground-unit clause and the retreat-side hold cap (Opus ruling on Haiku 50B57A19) ----
+
+		static OpenRA.Mods.CA.Traits.BotUnitProfile Shooter(int rangeCells, string validTargets, string invalidTargets = "")
+		{
+			var weapon = new BotWeaponProfile(1.0, WDist.FromCells(rangeCells), new BitSet<TargetableType>(validTargets),
+				invalidTargets == "" ? default : new BitSet<TargetableType>(invalidTargets), null);
+			return new OpenRA.Mods.CA.Traits.BotUnitProfile("shooter", 500, 100, "none", 100, false, false, default, new[] { weapon });
+		}
+
+		static OpenRA.Mods.CA.Traits.BotUnitProfile Tower() =>
+			new("tower", 500, 400, "heavy", 0, false, true, new BitSet<TargetableType>("Structure"), new BotWeaponProfile[0]);
+
+		[Test]
+		public void S1_AGroundUnitThatOutranksTheCoveringDefenceSupportsTheStandOff()
+		{
+			var units = new[] { Shooter(9, "Structure") };
+			Assert.That(SiegeEvaluatorBotModule.HasStandOffWeapon(units, Tower(), 9), Is.True, "range equal to the defence's");
+			Assert.That(SiegeEvaluatorBotModule.HasStandOffWeapon(units, Tower(), 8), Is.True);
+			Assert.That(SiegeEvaluatorBotModule.HasStandOffWeapon(units, Tower(), 10), Is.False, "shorter than the defence: it would be shot first");
+		}
+
+		[Test]
+		public void S1_AWeaponThatCannotHitTheDefenceTypeDoesNotCount()
+		{
+			Assert.That(SiegeEvaluatorBotModule.HasStandOffWeapon(new[] { Shooter(20, "Air") }, Tower(), 9), Is.False, "anti-air with a long range");
+			Assert.That(SiegeEvaluatorBotModule.HasStandOffWeapon(new[] { Shooter(20, "Structure", "Structure") }, Tower(), 9), Is.False, "invalid target set wins");
+			Assert.That(SiegeEvaluatorBotModule.HasStandOffWeapon(new OpenRA.Mods.CA.Traits.BotUnitProfile[0], Tower(), 9), Is.False);
+		}
+
+		[Test]
+		public void S1_TheSupportFlagDecidesStandOffVersusAdvance()
+		{
+			Assert.That(Decide(new SiegeEvaluatorBotModule.SiegeHold(), artillery: true), Is.EqualTo(SiegeVerdict.StandOff), "support: hold");
+			Assert.That(Decide(new SiegeEvaluatorBotModule.SiegeHold(), artillery: false), Is.EqualTo(SiegeVerdict.Advance), "no support: take the fight");
+			var module = Module();
+			Assert.That(module, Does.Contain("var standOffSupport = artilleryAttached ||"));
+			Assert.That(module, Does.Contain("HasStandOffWeapon(own.Select(o => o.Item1), longestProfile, longest.MaxRangeCells)"));
+		}
+
+		[Test]
+		public void TheRetreatHoldIsCappedAtTheTierLineAndNeverHoldsForeverOnANeverGrowingSquad()
+		{
+			Assert.That(SiegeEvaluatorBotModule.HoldExpired(1000 + 2999, 1000, 3000), Is.False);
+			Assert.That(SiegeEvaluatorBotModule.HoldExpired(1000 + 3000, 1000, 3000), Is.True);
+			Assert.That(SiegeEvaluatorBotModule.HoldExpired(1000 + 999999, 1000, 0), Is.False, "no advisor: no cap");
+
+			// The squad never grows: the cooldown keeps answering Retreat for as long as it is asked, so only the cap ends the hold.
+			var hold = new SiegeEvaluatorBotModule.SiegeHold();
+			SiegeEvaluatorBotModule.Decide(false, false, false, true, 2000, 0, Max, Reengage, false, hold, out _, out _);
+			for (var t = 100; t <= 30 * Max; t += 100)
+				Assert.That(SiegeEvaluatorBotModule.Decide(true, false, false, true, 2000, t, Max, Reengage, true, hold, out _, out _), Is.EqualTo(SiegeVerdict.Retreat), "t=" + t);
+
+			var state = Section(GroundStates(), "class GroundUnitsSiegeRetreatStateCA", "class GroundUnitsFleeStateCA");
+			var cap = state.IndexOf("SiegeEvaluatorBotModule.HoldExpired(owner.World.WorldTick, startTick, owner.SquadManager.SiegeHoldCapTicks())", StringComparison.Ordinal);
+			var move = state.IndexOf("Target.FromCell(owner.World, hold)", StringComparison.Ordinal);
+			Assert.That(cap, Is.GreaterThan(0));
+			Assert.That(cap, Is.LessThan(move), "the cap is judged before any further pull-back order");
+			Assert.That(state, Does.Contain("Retreat(owner, flee: true, rearm: true, repair: true);"), "released to the legacy regroup/rally-home path");
+			Assert.That(state, Does.Contain("startTick = owner.World.WorldTick;"));
+			Assert.That(state, Does.Not.Contain("DismissSquad"));
+			Assert.That(Source("mods/CA/Traits/BotModules/IBotSiegeAdvisor.cs"), Does.Contain("int StandOffMaxTicks { get; }"));
+		}
 
 		[Test]
 		public void S3_TheFirstEvaluationIsServedAtOnce()

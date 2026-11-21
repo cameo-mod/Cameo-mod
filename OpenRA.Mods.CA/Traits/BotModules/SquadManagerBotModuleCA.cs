@@ -1971,6 +1971,16 @@ namespace OpenRA.Mods.CA.Traits
 			return SiegeVerdict.Advance;
 		}
 
+		/// <summary>The siege advisor's hold cap in ticks (the tier's StandOffMaxTicks); 0 = no advisor, uncapped.</summary>
+		internal int SiegeHoldCapTicks()
+		{
+			if (siegeAdvisors != null)
+				foreach (var advisor in siegeAdvisors)
+					return advisor.StandOffMaxTicks;
+
+			return 0;
+		}
+
 		// INC-N combat veto (AI_ARCHITECTURE §12.31): the one provider consulted where a squad commits an
 		// attack or a retreat. No enabled provider = every consult answers false, today's behaviour bit-identical.
 		/// <summary>Enabled combat-veto providers only; a disabled ConditionalTrait must stay completely inert.</summary>
