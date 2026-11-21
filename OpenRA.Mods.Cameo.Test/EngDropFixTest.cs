@@ -121,11 +121,8 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheDefendedTargetPrefilterRunsBeforeTheTryCut()
 		{
 			var scheduled = Section(Engineer(), "bool TryScheduledDrop(IBot bot, bool opportunity)", "bool TryOpportunityRun(");
-			var filter = scheduled.IndexOf("if (opportunity)\n\t\t\t\tranked = ranked.Where(", StringComparison.Ordinal);
-			var cut = scheduled.IndexOf("ranked.Take(Math.Max(1, Info.CaptureTargetTries))", StringComparison.Ordinal);
-			Assert.That(filter, Is.GreaterThan(0));
-			Assert.That(cut, Is.GreaterThan(filter));
-			Assert.That(scheduled, Does.Contain(".ThreatValue == 0);"));
+			Assert.That(scheduled, Does.Contain("? TriggerATries(ranked,"), "Trigger A filters and cuts through the one helper");
+			Assert.That(scheduled, Does.Contain(".ThreatValue == 0,"));
 		}
 
 		// ---- N3: one plan per target per DropPlanRetryTicks ----
@@ -138,6 +135,28 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(EngineerBotModule.PlanDue(1049, 950, 100), Is.False);
 			Assert.That(EngineerBotModule.PlanDue(1050, 950, 100), Is.True);
 			Assert.That(EngineerBotModule.PlanDue(1050, 1050, 0), Is.True, "a zero interval plans every scan");
+		}
+
+		// Haiku M1: throttled targets A, B, C must not consume the three tries; the known undefended D behind them is still tried.
+		[Test]
+		public void AThrottledTargetNeverConsumesATriggerATry()
+		{
+			var ranked = new[] { "A", "B", "C", "D", "E" };
+			var throttled = new HashSet<string> { "A", "B", "C" };
+			var tried = EngineerBotModule.TriggerATries(ranked, _ => true, t => !throttled.Contains(t), 3).ToList();
+			Assert.That(tried, Is.EqualTo(new[] { "D", "E" }));
+
+			var defendedAndThrottled = EngineerBotModule.TriggerATries(ranked, t => t != "A", t => t != "B", 3).ToList();
+			Assert.That(defendedAndThrottled, Is.EqualTo(new[] { "C", "D", "E" }));
+			Assert.That(EngineerBotModule.TriggerATries(ranked, _ => true, _ => true, 0), Is.EqualTo(new[] { "A" }), "at least one try");
+		}
+
+		[Test]
+		public void TheScheduledDropFiltersByThreatAndThrottleBeforeTheTryCut()
+		{
+			var scheduled = Section(Engineer(), "bool TryScheduledDrop(IBot bot, bool opportunity)", "bool TryOpportunityRun(");
+			Assert.That(scheduled, Does.Contain("PlanDue(world.WorldTick, lastPlan, Info.DropPlanRetryTicks)"));
+			Assert.That(scheduled, Does.Contain("foreach (var first in tries)"));
 		}
 
 		[Test]

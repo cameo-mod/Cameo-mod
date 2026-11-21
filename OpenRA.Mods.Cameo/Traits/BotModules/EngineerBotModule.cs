@@ -1136,6 +1136,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// <summary>Trigger A may plan a target's route again only DropPlanRetryTicks after the last plan (or refusal).</summary>
 		internal static bool PlanDue(int now, int lastPlanTick, int retryTicks) => lastPlanTick <= 0 || now - lastPlanTick >= retryTicks;
 
+		/// <summary>Trigger A's candidates: the ranked targets that pass BOTH the threat prefilter and the plan throttle, cut to the try count AFTER
+		/// filtering, so a throttled or defended target never uses up a try that a later, plannable one could have had.</summary>
+		internal static IEnumerable<T> TriggerATries<T>(IEnumerable<T> ranked, Func<T, bool> noThreat, Func<T, bool> planDue, int tries) =>
+			ranked.Where(t => noThreat(t) && planDue(t)).Take(Math.Max(1, tries));
+
 		readonly Dictionary<uint, int> dropPlanTick = [];
 
 		/// <summary>DESIGN 19.5: the engineer owner is omniscient as a whole, so target choice reads the world as the legacy loop does.</summary>
@@ -1186,10 +1191,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				.OrderByDescending(t => RankScore(t.GetSellValue(), (t.Location - capturers[0].Location).Length, 0, 0))
 				.ThenBy(t => t.ActorID)
 				.AsEnumerable();
-			if (opportunity)
-				ranked = ranked.Where(t => AreaMemory.Assess(t.Location, AvoidanceCells, [], null, world.WorldTick, Info.DropFreshTicks).ThreatValue == 0);
+			var tries = opportunity
+				? TriggerATries(ranked,
+					t => AreaMemory.Assess(t.Location, AvoidanceCells, [], null, world.WorldTick, Info.DropFreshTicks).ThreatValue == 0,
+					t => !dropPlanTick.TryGetValue(t.ActorID, out var lastPlan) || PlanDue(world.WorldTick, lastPlan, Info.DropPlanRetryTicks),
+					Info.CaptureTargetTries)
+				: ranked.Take(Math.Max(1, Info.CaptureTargetTries));
 
-			foreach (var first in ranked.Take(Math.Max(1, Info.CaptureTargetTries)))
+			foreach (var first in tries)
 			{
 				var crew = capturers.OrderBy(c => (c.CenterPosition - first.CenterPosition).LengthSquared).ThenBy(c => c.ActorID).ToList();
 				if (opportunity)
