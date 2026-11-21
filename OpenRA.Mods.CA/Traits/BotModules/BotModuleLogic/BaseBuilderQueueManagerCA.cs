@@ -14,6 +14,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Xml.Linq;
 using OpenRA.Mods.AS.Traits;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Common.Traits.Radar;
@@ -24,7 +25,7 @@ namespace OpenRA.Mods.CA.Traits
 	class BaseBuilderQueueManagerCA
 	{
 		public readonly string Category;
-		public int WaitTicks;
+		public BotCooldown WaitCooldown;
 
 		readonly BaseBuilderBotModuleCA baseBuilder;
 		readonly World world;
@@ -178,7 +179,7 @@ namespace OpenRA.Mods.CA.Traits
 			return true;
 		}
 
-		// Every-tick item-list reconciliation (F2/F3/F4): runs before the latch and WaitTicks
+		// Every-tick item-list reconciliation (F2/F3/F4): runs before the latch and queue-sweep cooldown
 		// early returns so Started/Ready carry the exact observation tick and terminal records
 		// fire when the item actually leaves the queue. A queue that drops out of FindQueues
 		// (producer dead -> trait disabled) still resolves its contents as removals, so a
@@ -689,7 +690,7 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			// REPLAY-HEALTH-LOGGER (F3): the probe reconciles queue state every tick so
 			// transition records carry exact observation ticks — it must run before the
-			// latch and WaitTicks early returns below. No observer = one lazy-resolve check.
+			// latch and queue-sweep cooldown early returns below. No observer = one lazy-resolve check.
 			if (ObserveQueueTransitions())
 				ProbeQueueTransitions();
 
@@ -819,8 +820,8 @@ namespace OpenRA.Mods.CA.Traits
 					checkForBasesTicks = baseBuilder.Info.CheckForNewBasesDelay;
 			}
 
-			// Only update once per second or so
-			if (WaitTicks > 0)
+			// Only update once per second or so.
+			if (!BaseBuilderQueueEvalCA.QueueSweepDue(WaitCooldown, world.WorldTick))
 				return;
 
 			playerBuildings = world.ActorsHavingTrait<Building>().Where(a => a.Owner == player).ToArray();
@@ -871,12 +872,14 @@ namespace OpenRA.Mods.CA.Traits
 			// Minimum should not be negative as delays in HackyAI could be zero.
 			var randomFactor = BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(0, baseBuilder.Info.StructureProductionRandomBonusDelay);
 
-			WaitTicks = active ? baseBuilder.Info.StructureProductionActiveDelay + randomFactor
+			var waitTicks = active ? baseBuilder.Info.StructureProductionActiveDelay + randomFactor
 				: baseBuilder.Info.StructureProductionInactiveDelay + randomFactor;
 
 			// Build-order knobs (12.25): tempo shortens (above 1000) or lengthens the general build interval.
 			if (knobs != null)
-				WaitTicks = DivideByKnob(WaitTicks, knobs.KnobMilli(BuildOrderKnob.Tempo));
+				waitTicks = DivideByKnob(waitTicks, knobs.KnobMilli(BuildOrderKnob.Tempo));
+
+			BaseBuilderQueueEvalCA.StartQueueSweepCooldown(ref WaitCooldown, world.WorldTick, waitTicks);
 		}
 
 		bool TickQueue(IBot bot, ProductionQueue queue)
@@ -1069,7 +1072,7 @@ namespace OpenRA.Mods.CA.Traits
 			else if (currentBuilding != null && currentBuilding.Done)
 			{
 				// REPLAY-HEALTH-LOGGER (F3): Ready also comes from the probe — the exact tick
-				// the head item flips Done, not this WaitTicks-gated sweep.
+				// the head item flips Done, not this cooldown-gated sweep.
 
 				// ECON-A (§4 Ready-hold): a bound demand item sits at Queue[0] until its MCV deploys —
 				// returning false holds it without spending failure budget (the same mechanic the REF-1
@@ -1133,7 +1136,7 @@ namespace OpenRA.Mods.CA.Traits
 
 				// REFSCAN D-5 (sec 2, 3.5): an item a site-search episode owns is placed by the episode from the
 				// bot module tick (BaseBuilderBotModuleCA.BotTick), never here — no claim ladder, no park and no
-				// fallback poll on its behalf, and nothing on its path waits on WaitTicks.
+				// fallback poll on its behalf, and nothing on its path waits on the queue-sweep cooldown.
 				if (baseBuilder.RefinerySearchOwns(currentBuilding))
 					return false;
 
@@ -1454,7 +1457,7 @@ namespace OpenRA.Mods.CA.Traits
 		/// REFSCAN D-5 (sec 2, 4.2): an episode's placement through this manager's emission — the same order,
 		/// the same NotifyPlacement / PlacementOrdered records, the same claim commit (CommitRefineryClaim at the
 		/// site for a class-0 claim, RefinerySiteCommitted for a class-1 site) and the same expansion nudge as the
-		/// queue sweep's refinery path. Called from the bot module tick, not behind WaitTicks.
+		/// queue sweep's refinery path. Called from the bot module tick, not behind the queue-sweep cooldown.
 		/// </summary>
 		internal void EmitEpisodePlacement(IBot bot, ProductionQueue queue, ProductionItem item, CPos cell,
 			RefineryAnchorClaim? claim, ExpansionDemand demand)

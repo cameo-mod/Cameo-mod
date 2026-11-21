@@ -16,6 +16,7 @@ using System.IO;
 using System.Linq;
 using OpenRA.Activities;
 using OpenRA.Mods.AS.Traits;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Pathfinder;
 using OpenRA.Mods.Common.Traits;
@@ -878,8 +879,6 @@ namespace OpenRA.Mods.CA.Traits
 				if (++builderIndex >= builders.Length)
 					builderIndex = 0;
 
-				--builders[builderIndex].WaitTicks;
-
 				var queues = AIUtils.FindQueues(player, builders[builderIndex].Category).ToArray();
 				if (queues.Length != 0)
 				{
@@ -931,7 +930,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// REFSCAN D-5 (sec 2): the search pump and the READY handoff run here, every bot visit, ahead of the
-			// queue managers' rotation and WaitTicks — the placement path never waits on the queue sweep.
+			// queue managers' rotation and queue-sweep cooldown — the placement path never waits on the queue sweep.
 			refinerySearch?.Pump(bot, RefineryLawProvider());
 
 			builders[currentBuilderIndex].Tick(bot);
@@ -1395,7 +1394,7 @@ namespace OpenRA.Mods.CA.Traits
 						demand.ExpiresTick = now + Info.ExpansionDemandIdleTicks;
 						ExpansionMcvLease.Release(leases, mcv);
 						foreach (var builder in builders)
-							builder.WaitTicks = Math.Min(builder.WaitTicks, 0);
+							BaseBuilderQueueEvalCA.MakeQueueSweepDue(ref builder.WaitCooldown, now);
 					}
 					else if (transition == BaseBuilderQueueEvalCA.ExpansionTransformTransition.Relocate)
 					{

@@ -31,6 +31,21 @@ namespace OpenRA.Mods.Cameo.Test
 	{
 		static readonly CPos Base = new(10, 10);
 
+		[Test]
+		public void QueueSweepCooldownUsesWorldTicksAndCanBeForcedDue()
+		{
+			var cooldown = default(BotCooldown);
+			Assert.That(BaseBuilderQueueEvalCA.QueueSweepDue(cooldown, 0), Is.True);
+
+			BaseBuilderQueueEvalCA.StartQueueSweepCooldown(ref cooldown, 100, 25);
+			Assert.That(BaseBuilderQueueEvalCA.QueueSweepDue(cooldown, 124), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.QueueSweepDue(cooldown, 125), Is.True);
+
+			BaseBuilderQueueEvalCA.StartQueueSweepCooldown(ref cooldown, 200, 150);
+			BaseBuilderQueueEvalCA.MakeQueueSweepDue(ref cooldown, 210);
+			Assert.That(BaseBuilderQueueEvalCA.QueueSweepDue(cooldown, 210), Is.True);
+		}
+
 		// BlockedByCash
 
 		[Test]
