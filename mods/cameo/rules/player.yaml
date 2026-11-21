@@ -243,6 +243,8 @@ Player:
 	RangedGpsWatcher:
 	TeleportNetworkManager:
 		Type: nydus
+	# DEV-only economy knob (STAGGER_EVAL_PLAN_03 option B); inert unless built with CAMEO_DEV_LOGGING and launched with Cameo.DevCashBonus=..
+	DevCashBonus:
 	# One bot-insurance state machine per player. Humans are ignored by the trait;
 	# the legacy construction-yard ladder remains removed from ^AIConyardCash.
 	DynamicBotInsurance:
