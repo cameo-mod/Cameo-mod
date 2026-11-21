@@ -54,7 +54,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly Predicate<Actor> unitCannotBeOrdered;
 
 		readonly List<UnitWposWrapper> responders = new();
-		readonly Dictionary<Actor, int> responderAssignedTick = new();
+		readonly Dictionary<Actor, BotCooldown> responderReleaseCooldowns = new();
 
 		IBotRegionThreatProvider[] threatProviders;
 		List<UnitWposWrapper> idlePool = new();
@@ -127,9 +127,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				foreach (var r in responders.Where(u =>
 					unitCannotBeOrdered(u.Actor) || squadOwned.Contains(u.Actor) ||
-					u.Actor.IsIdle && tick - responderAssignedTick.GetValueOrDefault(u.Actor) >= Info.ReleaseAfterTicks).ToArray())
+					u.Actor.IsIdle && responderReleaseCooldowns.GetValueOrDefault(u.Actor).Ready(tick)).ToArray())
 				{
-					responderAssignedTick.Remove(r.Actor);
+					responderReleaseCooldowns.Remove(r.Actor);
 					responders.Remove(r);
 
 					// Alive and not squad-owned -> hand back to the idle pool; a unit
@@ -204,7 +204,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				idlePool.Remove(u);
 				responders.Add(u);
-				responderAssignedTick[u.Actor] = world.WorldTick;
+				StartResponderReleaseCooldown(u.Actor);
 				BotUnitLeases.TryClaim(leases, u.Actor, LeaseOwner, BotLeasePurpose.Beacon, ResponderLeaseTicks);
 			}
 
@@ -230,9 +230,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			idlePool.Remove(support);
 			responders.Add(support);
-			responderAssignedTick[support.Actor] = world.WorldTick;
+			StartResponderReleaseCooldown(support.Actor);
 			bot.QueueOrder(new Order("Move", support.Actor, Target.FromCell(world, cell), false));
 			CAAIUtils.BotDebug("AI ({0}): beacon support response — {1} to {2}", player.ClientIndex, support.Actor, cell);
+		}
+
+		void StartResponderReleaseCooldown(Actor actor)
+		{
+			var cooldown = new BotCooldown();
+			cooldown.Start(world.WorldTick, Info.ReleaseAfterTicks);
+			responderReleaseCooldowns[actor] = cooldown;
 		}
 	}
 }

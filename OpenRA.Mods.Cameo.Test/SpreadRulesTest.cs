@@ -10,6 +10,7 @@
 #endregion
 
 using NUnit.Framework;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits;
 
@@ -78,6 +79,19 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(ArmyFirstEval.Holds(false, true, false), Is.True);
 			Assert.That(ArmyFirstEval.Holds(false, false, true), Is.True);
 			Assert.That(ArmyFirstEval.Holds(false, false, false), Is.False);
+		}
+
+		[Test]
+		public void ArmyFirstScanCooldownMatchesVisitCadenceAndDisabledFreeze()
+		{
+			var cooldown = new BotCooldown();
+			Assert.That(ArmyFirstEval.ShouldScan(ref cooldown, 0, 25), Is.True);
+			var disabledFromTick = ArmyFirstEval.PauseScan(1, 0);
+
+			// No scan visits occur while the conditional trait is disabled.
+			ArmyFirstEval.ResumeScan(ref cooldown, 31, disabledFromTick);
+			Assert.That(ArmyFirstEval.ShouldScan(ref cooldown, 54, 25), Is.False);
+			Assert.That(ArmyFirstEval.ShouldScan(ref cooldown, 55, 25), Is.True);
 		}
 	}
 }

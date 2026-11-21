@@ -157,6 +157,30 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void MemorySwitchDwellUsesTheCurrentDurationAndWidenedElapsedTicks()
+		{
+			var memory = new SquadDesireMemory();
+			Assert.That(memory.Evaluate(Signals(tick: 0), "", 1000, 0, 100, 0),
+				Is.EqualTo(SquadDesireStance.Attack));
+			Assert.That(memory.Evaluate(Signals(enemy: 6000, ratio: 400, health: 900, tick: 50), "", 1000, 0, 25, 0),
+				Is.EqualTo(SquadDesireStance.Reinforce), "the current call's shorter dwell permits a switch");
+
+			var deadline = new SquadDesireMemory();
+			Assert.That(deadline.Evaluate(Signals(tick: 0), "", 1000, 0, 100, 0),
+				Is.EqualTo(SquadDesireStance.Attack));
+			Assert.That(deadline.Evaluate(Signals(enemy: 6000, ratio: 400, health: 900, tick: 99), "", 1000, 0, 100, 0),
+				Is.EqualTo(SquadDesireStance.Attack), "the fixed dwell blocks one tick before due");
+			Assert.That(deadline.Evaluate(Signals(enemy: 6000, ratio: 400, health: 900, tick: 100), "", 1000, 0, 100, 0),
+				Is.EqualTo(SquadDesireStance.Reinforce), "the fixed dwell is inclusive at due");
+
+			var nearLimit = new SquadDesireMemory();
+			Assert.That(nearLimit.Evaluate(Signals(tick: int.MaxValue - 10), "", 1000, 0, 100, 0),
+				Is.EqualTo(SquadDesireStance.Attack));
+			Assert.That(nearLimit.Evaluate(Signals(enemy: 6000, ratio: 400, health: 900, tick: int.MaxValue), "", 1000, 0, 100, 0),
+				Is.EqualTo(SquadDesireStance.Attack), "wide elapsed math prevents a wrapped deadline");
+		}
+
+		[Test]
 		public void PickTieKeepsIncumbent()
 		{
 			var d = new[] { 500, 500, 0, 0, 0, 0 };

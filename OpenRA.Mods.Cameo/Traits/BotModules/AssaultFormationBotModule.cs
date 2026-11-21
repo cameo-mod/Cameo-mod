@@ -9,6 +9,7 @@
 #endregion
 
 using System.Collections.Generic;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.CA.Traits.BotModules.Squads;
 using OpenRA.Mods.Common.Traits;
@@ -79,9 +80,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	{
 		readonly World world;
 
-		// Squad -> (deployed target cell, last arm/commit/abort tick). Read on every consult
+		// Squad -> (deployed target cell, re-fan cooldown). Read on every consult
 		// to refuse a prompt re-fan of the same ground; pruned on record.
-		readonly Dictionary<SquadCA, (CPos Cell, int Tick)> recentFanouts = new();
+		readonly Dictionary<SquadCA, (CPos Cell, BotCooldown Cooldown)> recentFanouts = new();
 
 		public AssaultFormationBotModule(Actor self, AssaultFormationBotModuleInfo info)
 			: base(info)
@@ -106,7 +107,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				var radiusSq = Info.FanoutTriggerCells * Info.FanoutTriggerCells;
 				var sameGround = (rec.Cell - targetCell).LengthSquared <= radiusSq;
-				if (sameGround && world.WorldTick - rec.Tick < Info.RefanoutCooldownTicks)
+				if (sameGround && !rec.Cooldown.Ready(world.WorldTick))
 					return false;
 			}
 
@@ -115,7 +116,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		public void RecordFanout(SquadCA squad, CPos targetCell)
 		{
-			recentFanouts[squad] = (targetCell, world.WorldTick);
+			var cooldown = new BotCooldown();
+			cooldown.Start(world.WorldTick, Info.RefanoutCooldownTicks);
+			recentFanouts[squad] = (targetCell, cooldown);
 
 			// Prune entries whose cooldown has fully expired — dissolved squads
 			// never record again, so the record site does the housekeeping.
@@ -123,7 +126,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				var stale = new List<SquadCA>();
 				foreach (var kv in recentFanouts)
-					if (world.WorldTick - kv.Value.Tick > Info.RefanoutCooldownTicks)
+					if (world.WorldTick > kv.Value.Cooldown.Due)
 						stale.Add(kv.Key);
 
 				foreach (var s in stale)

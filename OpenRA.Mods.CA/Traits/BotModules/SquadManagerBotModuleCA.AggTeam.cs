@@ -15,13 +15,13 @@ namespace OpenRA.Mods.CA.Traits
 {
 	public partial class SquadManagerBotModuleCA : IBotAttackIntentSource, IBotMcvSafetyPolicy
 	{
-		static readonly ConditionalWeakTable<SquadCA, StrongBox<int>> AggJoinCooldowns = new();
+		static readonly ConditionalWeakTable<SquadCA, StrongBox<BotCooldown>> AggJoinCooldowns = new();
 		static readonly ConditionalWeakTable<SquadCA, StrongBox<int>> AggTinySince = new();
 
 		int aggNextCheckTick;
-		int aggPushUntilTick;
+		BotCooldown aggPushHold;
 		bool aggFinishActive;
-		int aggNextPushTick;
+		BotCooldown aggNextPush;
 		int aggIntentTick = -1;
 		TeamAttackIntent aggIntent;
 		int aggCandidatesTick = -1;
@@ -174,7 +174,7 @@ namespace OpenRA.Mods.CA.Traits
 			return value;
 		}
 
-		bool AggTeamPushActive(int now) => aggPushUntilTick > now;
+		bool AggTeamPushActive(int now) => !aggPushHold.Ready(now);
 
 		// ---- DEFENCE-DETACH (Opus ruling on C1/C2): a home threat detaches a proportional part of the army instead of freezing the attack ----
 		int aggDetachTick = -1;
@@ -361,17 +361,17 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			if (blocked)
 			{
-				aggPushUntilTick = 0;
+				aggPushHold.Due = 0;
 				return;
 			}
 
-			if (aggPushUntilTick > now || now < aggNextPushTick)
+			if (!aggPushHold.Ready(now) || !aggNextPush.Ready(now))
 				return;
 			if (!AggTeamPolicyCA.PushDue(provider.StalemateOwnArmy, now, AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamPushArmyValue)), AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamPushLateTick))))
 				return;
 
-			aggPushUntilTick = now + AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamPushHoldTicks));
-			aggNextPushTick = now + AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamPushCooldownTicks));
+			aggPushHold.Start(now, AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamPushHoldTicks)));
+			aggNextPush.Start(now, AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamPushCooldownTicks)));
 			AggPushes++;
 		}
 
@@ -451,7 +451,7 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			var now = World.WorldTick;
-			if (AggJoinCooldowns.TryGetValue(s, out var cooldown) && now < cooldown.Value)
+			if (AggJoinCooldowns.TryGetValue(s, out var cooldown) && !cooldown.Value.Ready(now))
 				return;
 
 			var provider = StalemateUrgency;
@@ -507,7 +507,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		internal void AggTeamNoteJoinFailed(SquadCA squad)
 		{
-			AggJoinCooldowns.GetValue(squad, _ => new StrongBox<int>()).Value = World.WorldTick + AggP(nameof(SquadManagerBotModuleCAInfo.AggTeamJoinCooldownTicks));
+			AggJoinCooldowns.GetValue(squad, _ => new StrongBox<BotCooldown>()).Value = new BotCooldown { Due = World.WorldTick + AggP(nameof(SquadManagerBotModuleCAInfo.AggTeamJoinCooldownTicks)) };
 		}
 
 		/// <summary>Point the squad at the intent's target: the published actor if it is still a visible enemy, else the nearest visible enemy there, else a remembered building.</summary>

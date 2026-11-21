@@ -126,7 +126,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// Consecutive bleeding closes per building and the resulting re-contest block - escalating backoff on
 		// lost_units/x_contest_lost, cleared when a claim lands.
 		readonly Dictionary<uint, int> contestFailures = new();
-		readonly Dictionary<uint, int> contestBlockedUntil = new();
+		readonly Dictionary<uint, BotCooldown> contestCooldowns = new();
 		readonly Dictionary<string, int> raidReservations = new();
 		List<BotMission> missions = [];
 		IBotZoneTopology zoneTopology;
@@ -153,7 +153,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			claimCells.Clear();
 			claimStartTicks.Clear();
 			contestFailures.Clear();
-			contestBlockedUntil.Clear();
+			contestCooldowns.Clear();
 		}
 
 		void IBotTick.BotTick(IBot bot)
@@ -309,7 +309,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					a.Owner.RelationshipWith(player) == PlayerRelationship.Neutral,
 					a.Trait<Garrisonable>().HasSpace(1),
 					claimWalkers.ContainsKey(a.ActorID),
-					contestBlockedUntil.TryGetValue(a.ActorID, out var blockedUntil) && world.WorldTick < blockedUntil,
+					contestCooldowns.TryGetValue(a.ActorID, out var cooldown) && !cooldown.Ready(world.WorldTick),
 					claimsAhead != null && claimsAhead.Contains(world.Map.CenterOfCell(a.Location)),
 					shroud.IsExplored(a.Location),
 					(a.Location - anchor.Value).LengthSquared <= radiusSq))
@@ -420,13 +420,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (reason == BotMissionReasons.Done)
 			{
 				contestFailures.Remove(building);
-				contestBlockedUntil.Remove(building);
+				contestCooldowns.Remove(building);
 			}
 			else if (reason == BotMissionReasons.LostUnits || reason == BotMissionReasons.Stuck || reason == "x_contest_lost")
 			{
 				var streak = contestFailures.TryGetValue(building, out var f) ? f + 1 : 1;
 				contestFailures[building] = streak;
-				contestBlockedUntil[building] = world.WorldTick + Info.ContestRetryCooldownTicks * streak;
+				var cooldown = new BotCooldown();
+				cooldown.Start(world.WorldTick, Info.ContestRetryCooldownTicks * streak);
+				contestCooldowns[building] = cooldown;
 			}
 
 			BotMissionLog.Write(new BotMissionRecord

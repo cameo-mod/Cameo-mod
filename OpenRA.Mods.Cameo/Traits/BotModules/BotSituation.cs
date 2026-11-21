@@ -1070,11 +1070,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				productionQueueCount = cachedQueues.Length;
 			}
 
+			// STAGGER-06 D012 / D013 (class B, telemetry only): each counter is published as a number of TICKS
+			// (BrownoutTicks, IdleProductionTicks), so a gated visit adds the ticks since the previous visit, taking the
+			// CURRENT observation as true over that gap. Elapsed is 1 at N = 1 and for an ungated bot: identical there.
+			var visitElapsed = Math.Max(1, BotVisitClock.Of(bot).Elapsed);
 			if (cachedPower != null && cachedPower.ExcessPower < 0)
-				brownoutTicks++;
+				brownoutTicks += visitElapsed;
 			foreach (var queue in cachedQueues)
 				if (queue.Enabled && queue.CurrentItem() == null && !queue.AllQueued().Any())
-					idleProductionTicks++;
+					idleProductionTicks += visitElapsed;
 
 			var tick = player.World.WorldTick;
 			ReopenDormant(tick);

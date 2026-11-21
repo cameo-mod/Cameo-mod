@@ -18,6 +18,7 @@ using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -25,6 +26,22 @@ using CAAIUtils = OpenRA.Mods.CA.AIUtils;
 
 namespace OpenRA.Mods.Cameo.Traits.BotModules
 {
+	public static class CombatAnalysisCooldown
+	{
+		public static int DisabledFromTick(int transitionTick, int lastVisitTick) => Math.Max(transitionTick, lastVisitTick + 1);
+
+		public static void Resume(ref BotCooldown cooldown, int tick, int disabledFromTick)
+		{
+			if (disabledFromTick >= 0)
+				cooldown.Freeze(Math.Max(0, tick - disabledFromTick));
+		}
+
+		public static bool Ready(BotCooldown cooldown, int tick) => cooldown.Ready(tick);
+
+		public static void Start(ref BotCooldown cooldown, int tick, int interval) =>
+			cooldown.Start(tick, Math.Max(1, interval));
+	}
+
 	[TraitLocation(SystemActors.Player)]
 	[Desc("Tracks enemy attack patterns and exposes per-role threat weights and a nemesis player.",
 		"Producer only: consumed through IBotThreatAnalysis; nothing is wired into scoring yet.")]
@@ -118,7 +135,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		readonly OpenRA.Player self;
 		readonly World world;
-		int decayTicks;
+		BotCooldown decayCooldown;
+		int decayDisabledFromTick = -1;
+		int lastBotTick;
+		bool decayStarted;
 		int nextThreatRecordTick;
 		int nextCombatUnitThreatRecordTick;
 
@@ -134,6 +154,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			this.self = self.Owner;
 			world = self.World;
+		}
+
+		protected override void TraitDisabled(Actor self)
+		{
+			decayDisabledFromTick = decayStarted
+				? CombatAnalysisCooldown.DisabledFromTick(self.World.WorldTick, lastBotTick)
+				: -1;
+		}
+
+		protected override void TraitEnabled(Actor self)
+		{
+			CombatAnalysisCooldown.Resume(ref decayCooldown, self.World.WorldTick, decayDisabledFromTick);
+			decayDisabledFromTick = -1;
 		}
 
 		public float GetThreatWeight(string role) =>
@@ -446,10 +479,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			if (IsTraitDisabled)
 				return;
-			if (--decayTicks > 0)
+
+			var tick = world.WorldTick;
+			lastBotTick = tick;
+			if (!CombatAnalysisCooldown.Ready(decayCooldown, tick))
 				return;
 
-			decayTicks = Info.DecayInterval;
+			CombatAnalysisCooldown.Start(ref decayCooldown, tick, Info.DecayInterval);
+			decayStarted = true;
 			var decay = 1f - Info.DecayRate;
 			foreach (var key in weights.Keys.ToList())
 				weights[key] = Math.Max(0f, weights[key] * decay);
