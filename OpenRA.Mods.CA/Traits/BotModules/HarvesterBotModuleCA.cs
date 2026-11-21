@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Graphics;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Activities;
 using OpenRA.Mods.Common.Traits;
@@ -20,6 +21,18 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.CA.Traits
 {
+	internal static class HarvesterLogisticsCooldown
+	{
+		public static BotCooldown Start(int tick, int duration)
+		{
+			var cooldown = new BotCooldown();
+			cooldown.Start(tick, duration);
+			return cooldown;
+		}
+
+		public static bool IsDue(BotCooldown cooldown, int tick) => cooldown.Ready(tick);
+	}
+
 	[TraitLocation(SystemActors.Player)]
 	[Desc("Put this on the Player actor. Manages bot harvesters to ensure they always continue harvesting as long as there are resources on the map.")]
 	public class HarvesterBotModuleCAInfo : ConditionalTraitInfo, NotBefore<IResourceLayerInfo>, NotBefore<ResourceMapBotModuleInfo>
@@ -139,7 +152,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		// BU_harvester_logistics state (unused while the switch is off).
 		IBotRegionThreatProvider[] threatProviders;
-		readonly Dictionary<Actor, int> lastReassignTick = [];
+		readonly Dictionary<Actor, BotCooldown> lastReassignCooldown = [];
 		readonly HashSet<Actor> evacuatedHarvesters = [];
 		int logisticsShortfall;
 		bool logisticsScanned;
@@ -574,8 +587,8 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// Drop bookkeeping for harvesters no longer tracked; evacuees re-enter the pool only when free again.
-			foreach (var a in lastReassignTick.Keys.Where(a => !harvesters.ContainsKey(a)).ToList())
-				lastReassignTick.Remove(a);
+			foreach (var a in lastReassignCooldown.Keys.Where(a => !harvesters.ContainsKey(a)).ToList())
+				lastReassignCooldown.Remove(a);
 
 			evacuatedHarvesters.RemoveWhere(a =>
 				a.IsDead || !a.IsInWorld || !BotUnitLeases.IsClaimedByOther(leases, a, owner));
@@ -589,7 +602,8 @@ namespace OpenRA.Mods.CA.Traits
 				if (evacuatedHarvesters.Contains(actor))
 					continue;
 
-				if (lastReassignTick.TryGetValue(actor, out var lastTick) && now - lastTick < Info.LogisticsReassignCooldownTicks)
+				if (lastReassignCooldown.TryGetValue(actor, out var cooldown)
+					&& !HarvesterLogisticsCooldown.IsDue(cooldown, now))
 					continue;
 
 				if (BotUnitLeases.IsClaimedByOther(leases, actor, owner))
@@ -630,7 +644,7 @@ namespace OpenRA.Mods.CA.Traits
 					bot.QueueOrder(new Order("Harvest", actor, Target.FromCell(world, cells[0]), false));
 					AIUtils.BotDebug($"AI: Harvester {actor} re-routed to field at {cells[0]} (reservation {reserved[index]}, cells {cellsCount[index]})");
 					remaining[index]--;
-					lastReassignTick[actor] = now;
+					lastReassignCooldown[actor] = HarvesterLogisticsCooldown.Start(now, Info.LogisticsReassignCooldownTicks);
 					break;
 				}
 			}
