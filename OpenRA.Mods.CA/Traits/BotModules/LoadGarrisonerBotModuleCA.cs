@@ -100,7 +100,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (minAssignRoleDelayTicks.TryFire(BotVisitClock.Of(bot).VisitTick))
+			if (minAssignRoleDelayTicks.TryFire(BotVisitClock.Of(bot)))
 			{
 
 				var leases = BotUnitLeases.Of(player);

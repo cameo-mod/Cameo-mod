@@ -806,7 +806,7 @@ namespace OpenRA.Mods.CA.Traits
 				!BaseExpansionModules.Any(be => be.IsConyardRelocationPending(RelocationHoldConyard))))
 				RelocationHoldConyard = null;
 
-			if (assignRallyPoints.TryFire(BotVisitClock.Of(bot).VisitTick))
+			if (assignRallyPoints.TryFire(BotVisitClock.Of(bot)))
 			{
 				foreach (var rp in world.ActorsWithTrait<RallyPoint>().Where(rp => rp.Actor.Owner == player))
 					rallyPoints.Push(rp);
@@ -823,7 +823,7 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
-			if (checkBestResourceLocation.TryFire(BotVisitClock.Of(bot).VisitTick) && resourceLayer != null)
+			if (checkBestResourceLocation.TryFire(BotVisitClock.Of(bot)) && resourceLayer != null)
 			{
 
 				// Clear outdated refinery requests that add too many refinery to a map indice
@@ -936,7 +936,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			builders[currentBuilderIndex].Tick(bot);
 
-			if (Info.SellRefineryInterval >= 0 && sellRefinery.TryFire(BotVisitClock.Of(bot).VisitTick))
+			if (Info.SellRefineryInterval >= 0 && sellRefinery.TryFire(BotVisitClock.Of(bot)))
 			{
 				SellUselessRefinery(bot);
 			}

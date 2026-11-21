@@ -103,9 +103,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			var visitTick = BotVisitClock.Of(bot).VisitTick;
-			var doFill = scanTicks.TryFire(visitTick);
-			var doSwap = swapTicks.TryFire(visitTick);
+			var visitClock = BotVisitClock.Of(bot);
+			var doFill = scanTicks.TryFire(visitClock);
+			var doSwap = swapTicks.TryFire(visitClock);
 			if (!doFill && !doSwap)
 				return;
 
