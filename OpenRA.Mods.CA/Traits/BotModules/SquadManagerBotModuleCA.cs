@@ -2065,10 +2065,9 @@ namespace OpenRA.Mods.CA.Traits
 			var requestsOn = Info.UseProtectionRequests && protectionRequestProviders is { Length: > 0 };
 			var teamAnswersOn = Info.UseTeamDefendAnswers;
 			var assistAnswersOn = Info.UseCoalitionAssist;
-			if ((!prepositionOn && !requestsOn && !teamAnswersOn && !assistAnswersOn) || World.WorldTick < nextPrepositionTick)
+			if ((!prepositionOn && !requestsOn && !teamAnswersOn && !assistAnswersOn) || !BotPeriod.CarryDue(ref nextPrepositionTick, World.WorldTick, Info.ProtectInterval))
 				return;
 
-			nextPrepositionTick = World.WorldTick + Math.Max(1, Info.ProtectInterval);
 			var threat = prepositionOn
 				? SelectPrepositionThreat(threatPredictionProviders.SelectMany(p => p.PredictedThreats),
 					Info.PrepositionMaxEtaTicks, Info.PrepositionMinThreatValue)
@@ -3033,7 +3032,8 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// Telemetry only: a snapshot every role pass is fresh enough for a death's position.
-			if (World.WorldTick % Math.Max(1, Info.AssignRolesInterval) == 0)
+			var roleClock = BotVisitClock.Of(bot);
+			if (BotPeriod.ResidueHit(roleClock.VisitTick, roleClock.Elapsed, Info.AssignRolesInterval, 0))
 				TrackRoleLosses();
 
 			CleanSquads();

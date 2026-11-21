@@ -379,10 +379,9 @@ namespace OpenRA.Mods.CA.Traits
 		void AggTeamTick(IBot bot)
 		{
 			var now = World.WorldTick;
-			if (now < aggNextCheckTick)
+			if (!BotPeriod.CarryDue(ref aggNextCheckTick, now, AggP(nameof(SquadManagerBotModuleCAInfo.AggTeamCheckIntervalTicks))))
 				return;
 
-			aggNextCheckTick = now + Math.Max(1, AggP(nameof(SquadManagerBotModuleCAInfo.AggTeamCheckIntervalTicks)));
 			if (now < initialAttackDelay)
 				return;
 
