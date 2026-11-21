@@ -5,6 +5,7 @@
 #endregion
 
 using System.Collections.Generic;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 
@@ -47,7 +48,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		public override object Create(ActorInitializer init) => new BotGlobalUnitBudget(init.Self, this);
 	}
 
-	public class BotGlobalUnitBudget : ConditionalTrait<BotGlobalUnitBudgetInfo>, IBotRequestPauseUnitProduction
+	public class BotGlobalUnitBudget : ConditionalTrait<BotGlobalUnitBudgetInfo>, IBotRequestPauseUnitProduction, IBotItemAwareUnitCap
 	{
 		readonly World world;
 		readonly OpenRA.Player player;
@@ -81,6 +82,17 @@ namespace OpenRA.Mods.Cameo.Traits
 				return paused;
 			}
 		}
+
+		/// <summary>
+		/// The same predicate <see cref="ComputePaused"/> counts with, on the ActorInfo that would be produced:
+		/// positionable (units, not buildings), not a harvester while <c>IgnoreHarvesters</c>, not an ignored name.
+		/// </summary>
+		public static bool Counts(BotGlobalUnitBudgetInfo info, ActorInfo actor) =>
+			actor.HasTraitInfo<IPositionableInfo>()
+			&& !(info.IgnoreHarvesters && actor.HasTraitInfo<HarvesterInfo>())
+			&& !info.IgnoredActorTypes.Contains(actor.Name);
+
+		bool IBotItemAwareUnitCap.CountsAgainstCap(ActorInfo actor) => Counts(Info, actor);
 
 		/// <summary>
 		/// This bot's share of the combat-unit budget right now (budget / living bots, clamped), or -1 when the budget
@@ -130,7 +142,8 @@ namespace OpenRA.Mods.Cameo.Traits
 					continue;
 
 				// Resource collectors don't count against the combat budget, so a lower budget
-				// never starves the economy.
+				// never starves the economy. (Counts() states the same rule for an ActorInfo; this loop keeps the
+				// cheaper per-actor form and must stay in step with it.)
 				if (Info.IgnoreHarvesters && a.Info.HasTraitInfo<HarvesterInfo>())
 					continue;
 

@@ -66,6 +66,18 @@ namespace OpenRA.Mods.Cameo.Traits
 		public static bool ShareHolds(bool essential, RecoverySpendPolicyCA.Admission admission, ArmyShareCA share, long cost,
 			int targetPermille) =>
 			!essential && admission == RecoverySpendPolicyCA.Admission.General && !share.BuildingAdmits(cost, targetPermille);
+
+		/// <summary>
+		/// PR-1 production-reserve vote (PROD-IDLE_PLAN_03 section 2.2/2.3): a K6 order (General class) must also leave the
+		/// tier's production reserve, C - x >= P(r), where C is the cash less every unpaid commitment counted once. M, E and R
+		/// are 0 until the recovery owner is mounted. Essentials, K1-K4 and anything not General pass untested. An unset line
+		/// (negative) holds General closed, like the share target.
+		/// </summary>
+		public static bool ReserveHolds(bool essential, RecoverySpendPolicyCA.Admission admission, long cash, long committed,
+			int cost, int productionReserve) =>
+			!essential && admission == RecoverySpendPolicyCA.Admission.General
+			&& !RecoverySpendPolicyCA.Admits(SpendCommitmentsCA.Available(cash, committed), cost, 0, 0, 0, false,
+				RecoverySpendPolicyCA.Admission.General, productionReserve);
 	}
 
 	/// <summary>
@@ -83,7 +95,12 @@ namespace OpenRA.Mods.Cameo.Traits
 		PlayerResources playerResources;
 		OpenRA.Player player;
 		AblationLatch ablateArmyRatio; // ABLATE-01 hook pi_army_ratio (DEV provider only; release = on)
+		AblationLatch ablateRecovery; // ABLATE-01 hook pi_recovery: the production-reserve term of the General gate
+		int committedTick = -1;
+		long committedQueued;
+		long recordedThisTick;
 		BotLimits botLimits;
+		IBotPersonalityLeadProvider[] leadProviders;
 		bool paused;
 		bool hasUnitProducer;
 		int armyUnits;
@@ -108,13 +125,41 @@ namespace OpenRA.Mods.Cameo.Traits
 				info.MinArmyUnitsBeforeBuildings, info.ArmyFirstMinCash);
 			return ArmyFirstEval.Holds(essential, paused, armyHolds)
 				|| !ablateArmyRatio.Off(player, AblationIds.ArmyRatio)
-					&& ArmyFirstEval.ShareHolds(essential, admission, share, cost, ShareTarget);
+					&& ArmyFirstEval.ShareHolds(essential, admission, share, cost, ShareTarget)
+				|| !ablateRecovery.Off(player, AblationIds.Recovery)
+					&& ArmyFirstEval.ReserveHolds(essential, admission, playerResources.GetCashAndResources(), Committed(), cost,
+						ReserveLine());
 		}
 
 		void IBotRequestPauseBuildingProduction.BuildingAdmitted(ActorInfo building, int cost)
 		{
-			if (!IsTraitDisabled)
-				share.Record(ArmyShareSide.Building, cost);
+			if (IsTraitDisabled)
+				return;
+
+			share.Record(ArmyShareSide.Building, cost);
+			recordedThisTick += cost;
+		}
+
+		// P_eff: the tier's reserve line scaled by the Steamroller lean (PLAN_04 row 4); -1 when the line is unset.
+		int ReserveLine() => botLimits != null
+			? RecoverySpendPolicyCA.EffectiveReserve(botLimits.Info.ProductionCashReserve, BotPersonalityLeads.Lean(leadProviders, "steamroller"))
+			: -1;
+
+		// Cash every queued item of the player has not paid yet, counted once, plus the orders this module admitted in the
+		// current tick (they enter a queue, and so the first term, from the next tick). One queue scan per tick.
+		// Orders another module issued earlier in the same tick are not visible here: that gap closes with the recovery
+		// owner's commitment ledger (PLAN_03 section 2.4).
+		long Committed()
+		{
+			var tick = player.World.WorldTick;
+			if (committedTick != tick)
+			{
+				committedTick = tick;
+				committedQueued = SpendCommitmentsCA.UnpaidQueued(player.World, player);
+				recordedThisTick = 0;
+			}
+
+			return committedQueued + recordedThisTick;
 		}
 
 		// PLAN_02 section 2 values: live actors by their Valued cost (the Squad Manager's UnitValue),
@@ -158,6 +203,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		protected override void Created(Actor self)
 		{
 			player = self.Owner;
+			leadProviders = self.TraitsImplementing<IBotPersonalityLeadProvider>().ToArray();
 			playerResources = self.Owner.PlayerActor.TraitOrDefault<PlayerResources>();
 			base.Created(self);
 		}

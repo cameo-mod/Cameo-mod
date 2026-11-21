@@ -77,6 +77,12 @@ namespace OpenRA.Mods.CA.Traits
 			return remaining >= (long)floor + (sameEssentialCommitment ? 0 : Math.Max(0, recoveryCharge));
 		}
 
+		// PLAN_04 row 4: the Steamroller lean scales the reserve term P ONLY (M, E and R are safety terms and never
+		// leaned): P_eff = Scaled(P, lean); lean >= 1 leaves P untouched. A negative P is the unset sentinel and stays
+		// negative, so the lean can never turn a missing line into "no reserve".
+		public static int EffectiveReserve(int productionReserve, double lean) =>
+			productionReserve < 0 ? productionReserve : BotPersonalityLeads.Scaled(productionReserve, lean);
+
 		// K6 projected share test (PROD-IDLE_PLAN_03 section 3), 64-bit integers:
 		// A' = A_live + A_inflight, B' = B_live + B_inflight + x, admit only if
 		// A' x 1000 >= T_permille x (A' + B'). A' + B' = 0 is share 0, below target, blocked.
