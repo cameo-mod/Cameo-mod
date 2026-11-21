@@ -4886,14 +4886,23 @@ Noob AI tier (NOOB-TIER-01 final ruling): one linear step below easiest (rank -1
 * ⛔ **Unit abilities are never gated by bot difficulty or bot type** (maintainer 2026-09-28): spells,
   deploys, micro-management and every other ability a unit has work the same for every bot. A trait
   that must know "is this a bot" uses `GrantConditionOnBotOwnerCA` with NO `Bots:` list (= any bot);
-  a per-tier `Bots:` list is for the difficulty definitions in `ai.yaml` only. Until 2026-09-28 the
+  a per-tier `Bots:` list is for the difficulty definitions in `ai.yaml` and for the feature grants of
+  the ladder (`GrantConditionOnBotOwner` with a `Condition:`), and such a grant must name **all eleven
+  tiers** (`noob` … `cameogod`; several grants of one condition are merged): `ladder_failures` in the
+  audit fails a grant that skips a tier. Until 2026-09-28 the
   WC2 mage's starting-spell grant listed eight of the ten tiers, so Very Easy and Very Hard mages
   never got a spell.
 * Single thresholds, kept on purpose: `PrioritizeBarracksBeforeRefinery` (hard up); the capture,
   engineer, crate-pickup and garrison modules are off for `easiest` only (capabilities, not strength).
 * Guarded by `tools/audit/audit_ai_personalities.py` (`difficulty_scale_failures`): every
   `BotLimits` number and both production multipliers must be written for all ten tiers, on the line,
-  with Hard at 100.
+  with Hard at 100. The canonical ladder audit (`ladder_failures`) covers all eleven tiers, `noob`
+  included, for every family that has tier forms (`BotLimits`, the production multipliers): every
+  field is written on every tier, booleans agree on every tier, numbers are whole and on one
+  equal-step line (a whole number may sit within 0.5 of the line; a fractional tier value fails), a
+  sibling whose `@suffix` is not a tier name fails, and a zero endpoint needs a cited allowance in
+  `tools/audit/ai_ladder_legal_zeros.json`. `test_audit_ai_personalities.py` runs the audit on the real
+  `ai.yaml` and ratchets the rows that are still open, so a new failing row is a red test.
 * ⛔ **Every decision module runs on every tier; only its strength scales** (maintainer 2026-09-30:
   *"I want all difficulties to scale in equal steps"*). A harvested or Cameo decision module (the
   Fransbot services, CA-2 siege, the expansion planner…) is never gated to one tier (`hardbot`,

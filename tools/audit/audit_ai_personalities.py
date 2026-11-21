@@ -181,9 +181,30 @@ TIER_GATE_ALLOW_PREFIXES = ("BotLimits@", "ProvidesPrerequisite@", "GrantConditi
 
 
 def on_line(values: list[int]) -> bool:
-    """Equal steps from the first tier to the last; an integer may sit within 0.5 of the line (DESIGN §19.1)."""
+    """Equal steps from the first tier to the last; an integer may sit within 0.5 of the line (DESIGN §19.1).
+    The half-step tolerance exists only because tier numbers are whole numbers (the engine rounds the line), so a
+    non-integer value is never on the line (LADDER-AUDIT-02 LOW, Code Monkey)."""
+    if any(Fraction(v).denominator != 1 for v in values):
+        return False
     n = len(values) - 1
     return all(2 * abs(n * (v - values[0]) - (values[-1] - values[0]) * i) <= n for i, v in enumerate(values))
+
+
+def whole_values(path, raw, failures):
+    """The tier values as ints, or None after recording why not: a fractional or non-numeric tier value is a
+    failure row, never a crash and never a silent int() truncation."""
+    out = []
+    for value in raw:
+        try:
+            number = Fraction(str(value).strip())
+        except (ValueError, ZeroDivisionError):
+            failures.append(f"{path} has a non-numeric tier value {value!r}")
+            return None
+        if number.denominator != 1:
+            failures.append(f"{path} has a non-integer tier value {value!r}: tier numbers are whole numbers")
+            return None
+        out.append(int(number))
+    return out
 
 
 LADDER_TIERS = ("noob", *PRODUCTION_TIERS)
@@ -211,7 +232,10 @@ def check_ladder_row(path, values, legal_zeros):
         return [f"{path} mixes numeric and nonnumeric values: {present}"]
     numbers = [Fraction(value) for value in present]
     failures = []
-    if not on_line(numbers):
+    fractional = [value for value, number in zip(present, numbers) if number.denominator != 1]
+    if fractional:
+        failures.append(f"{path} has non-integer tier values {fractional}: tier numbers are whole numbers")
+    elif not on_line(numbers):
         failures.append(f"{path} is not on one equal-step line: {present}")
     if len(set(numbers)) > 1 and (numbers[0] == 0 or numbers[-1] == 0) and not legal_zeros.get(path, "").strip():
         failures.append(f"{path} has a zero endpoint without a cited allowance")
@@ -235,6 +259,7 @@ def ladder_failures(roots, legal_zeros):
             continue
         families = {}
         grants = {}
+        foreign = {}
         for child in root.children:
             family, _, suffix = child.key.partition("@")
             if family == "GrantConditionOnBotOwner":
@@ -248,6 +273,14 @@ def ladder_failures(roots, legal_zeros):
                 if tier in variants:
                     failures.append(f"{root.key}.{family} has duplicate forms for {tier}")
                 variants[tier] = dict(scalar_fields(child))
+            elif suffix and family not in {"ProvidesPrerequisite", "ModularBot"}:
+                foreign.setdefault(family, []).append(suffix)
+
+        # A family that has tier forms is a ladder family: a sibling whose suffix is not a tier name (a typo such as
+        # `@hrad`, or `@brutalbot2`) would otherwise be skipped without a word (LADDER-AUDIT-02 LOW, Code Monkey).
+        for family, suffixes in sorted(foreign.items()):
+            if family in families:
+                failures.append(f"{root.key}.{family} has suffixed forms that are not tier names: {sorted(suffixes)}")
 
         for condition, enabled in sorted(grants.items()):
             if enabled and enabled != all_tiers:
@@ -367,8 +400,8 @@ def difficulty_scale_failures() -> list[str]:
         if missing:
             failures.append(f"BotLimits.{field} is not written for {missing}: that tier silently uses the C# default")
             continue
-        values = [int(v) for v in raw]
-        if not on_line(values):
+        values = whole_values(f"BotLimits.{field}", raw, failures)
+        if values is not None and not on_line(values):
             failures.append(f"BotLimits.{field} is not on one equal-step line: {values}")
 
     behavior = rules.resolve("^BotProductionBehavior")
@@ -377,7 +410,9 @@ def difficulty_scale_failures() -> list[str]:
         if any(n is None for n in nodes):
             failures.append(f"^BotProductionBehavior.{trait} is missing a tier")
             continue
-        values = [int(n.get("Multiplier")) for n in nodes]
+        values = whole_values(f"^BotProductionBehavior.{trait}", [n.get("Multiplier") for n in nodes], failures)
+        if values is None:
+            continue
         if not on_line(values):
             failures.append(f"{trait} is not on one equal-step line: {values}")
         fair = values[PRODUCTION_TIERS.index(FAIR_TIER)]
