@@ -8,28 +8,14 @@
  */
 #endregion
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenRA.Mods.CA;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 {
-	internal static class NavyStateCooldown
-	{
-		public static void Start(ref BotCooldown cooldown, int tick, int updateInterval, int updateCount) =>
-			cooldown.Start(tick, Math.Max(1, updateInterval) * Math.Max(1, updateCount));
-
-		public static bool IsActive(bool active, BotCooldown cooldown, int tick) =>
-			active && !cooldown.Ready(tick);
-
-		public static bool IsDue(bool active, BotCooldown cooldown, int tick) =>
-			active && cooldown.Ready(tick);
-	}
-
 	abstract class NavyStateBaseCA : StateBaseCA
 	{
 		protected virtual bool ShouldFlee(SquadCA owner)
@@ -138,11 +124,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		// Give tolerance for AI grouping team at start
 		int shouldMakeWayPossibility = -(MaxMakeWayPossibility * 6);
 		int shouldKickStuckPossibility = -(MaxSquadStuckPossibility * 6);
-		BotCooldown makeWayCooldown;
-		BotCooldown kickStuckCooldown;
-		bool makeWayActive;
-		bool kickStuckActive;
-		bool justMadeWay;
+		int makeWay = 0;
+		int kickStuck = 0;
 
 		public void Activate(SquadCA owner) { }
 
@@ -181,7 +164,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var occupiedArea = (long)WDist.FromCells(owner.Units.Count).Length * 1024;
 
 			// Try kick units in squad that cannot move at all.
-			if (kickStuckActive)
+			if (kickStuck > 0)
 			{
 				var stopUnits = new List<Actor>();
 				var otherUnits = new List<Actor>();
@@ -230,7 +213,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				if (owner.Units.Count == 0)
 					return;
 
-				if (NavyStateCooldown.IsActive(kickStuckActive, kickStuckCooldown, owner.World.WorldTick))
+				if (kickStuck > 1)
 				{
 					leader = GetPathfindLeader(owner, owner.SquadManager.Info.SuggestedNavyLeaderLocomotor);
 					leader.WPos = leader.Actor.CenterPosition;
@@ -240,8 +223,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					QueueDeduped(owner, "Stop", SquadOrderKey.Plain("Stop"), Target.Invalid, stopUnits, terminal: true);
 					QueueDeduped(owner, "AttackMove", SquadOrderKey.ForCell("AttackMove", leader.Actor.Location),
 						Target.FromCell(owner.World, leader.Actor.Location), otherUnits);
+					kickStuck--;
 				}
-				else if (NavyStateCooldown.IsDue(kickStuckActive, kickStuckCooldown, owner.World.WorldTick))
+				else if (kickStuck == 1)
 				{
 					shouldMakeWayPossibility = 0;
 					shouldKickStuckPossibility = 0;
@@ -249,24 +233,25 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 					// The end of "kickStuck": stop the leader for position record next tick
 					owner.Bot.QueueOrder(new Order("Stop", leader.Actor, false));
-					kickStuckActive = false;
+					kickStuck = 0;
 				}
 
 				return;
 			}
 
 			// Make way for leader: Make sure the guide unit has not been blocked by the rest of the squad.
-			if (makeWayActive)
+			if (makeWay > 0)
 			{
-				if (NavyStateCooldown.IsActive(makeWayActive, makeWayCooldown, owner.World.WorldTick))
+				if (makeWay > 1)
 				{
 					var others = owner.Units.Where(u => u.Actor != leader.Actor).Select(u => u.Actor);
 					QueueDeduped(owner, "Scatter", SquadOrderKey.Plain("Scatter"), Target.Invalid, others, terminal: true);
 					if (!owner.SquadManager.Info.UseSquadOrderDedup
 						|| owner.OrderChanged(leader.Actor, SquadOrderKey.ForCell("AttackMove", owner.World.Map.CellContaining(owner.Target.CenterPosition))))
 						owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromPos(owner.Target.CenterPosition), false));
+					makeWay--;
 				}
-				else if (NavyStateCooldown.IsDue(makeWayActive, makeWayCooldown, owner.World.WorldTick))
+				else if (makeWay == 1)
 				{
 					shouldMakeWayPossibility = 0;
 					shouldKickStuckPossibility = MaxSquadStuckPossibility / 2;
@@ -274,8 +259,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					// The end of "makeWay": stop the leader for position record next tick
 					// set "makeWay" to -1 to inform that squad just make way for leader
 					owner.Bot.QueueOrder(new Order("Stop", leader.Actor, false));
-					makeWayActive = false;
-					justMadeWay = true;
+					makeWay = -1;
 				}
 
 				return;
@@ -296,7 +280,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				shouldKickStuckPossibility++;
 			else if (leaderStopCheck && !leaderWaitCheck)
 			{
-				if (!justMadeWay)
+				if (makeWay != -1)
 					shouldMakeWayPossibility++;
 				else
 					shouldKickStuckPossibility++;
@@ -311,17 +295,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (shouldMakeWayPossibility >= MaxMakeWayPossibility)
 			{
 				AIUtils.BotDebug("AI ({0}): Make way for squad leader.", owner.Bot.Player.ClientIndex);
-				NavyStateCooldown.Start(ref makeWayCooldown, owner.World.WorldTick,
-					owner.SquadManager.Info.AttackForceInterval, MakeWayTicks);
-				makeWayActive = true;
-				justMadeWay = false;
+				makeWay = MakeWayTicks;
 			}
 			else if (shouldKickStuckPossibility >= MaxSquadStuckPossibility)
 			{
 				AIUtils.BotDebug("AI ({0}): Kick stuck units from squad.", owner.Bot.Player.ClientIndex);
-				NavyStateCooldown.Start(ref kickStuckCooldown, owner.World.WorldTick,
-					owner.SquadManager.Info.AttackForceInterval, KickStuckTicks);
-				kickStuckActive = true;
+				kickStuck = KickStuckTicks;
 			}
 
 			// Record current position of the squad leader
@@ -329,7 +308,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			// Leader will wait squad members that left behind, unless
 			// next tick is kick stuck unit (we need leader move in advance).
-			if (leaderWaitCheck && !kickStuckActive)
+			if (leaderWaitCheck && kickStuck <= 0)
 			{
 				if (!owner.SquadManager.Info.UseSquadOrderDedup
 					|| owner.OrderChanged(leader.Actor, SquadOrderKey.Plain("Stop"), terminal: true))
