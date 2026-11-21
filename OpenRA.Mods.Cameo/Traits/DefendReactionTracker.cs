@@ -81,18 +81,32 @@ namespace OpenRA.Mods.Cameo.Traits
 			open.Clear();
 		}
 
-		/// <summary>Closes the triggers whose timeout has passed (and, at game end, every open one).</summary>
-		public void Expire(int tick, bool final = false)
+		/// <summary>Closes the triggers whose timeout has passed as reaction_kind=none: the bot had the full timeout and did nothing.</summary>
+		public void Expire(int tick)
 		{
 			for (var i = open.Count - 1; i >= 0; i--)
 			{
 				var p = open[i];
-				if (!final && tick - p.Tick < TimeoutTicks)
+				if (tick - p.Tick < TimeoutTicks)
 					continue;
 
 				Write(p, -1, "none", "");
 				open.RemoveAt(i);
 			}
+		}
+
+		/// <summary>
+		/// Game end: closes every still-open trigger as reaction_kind=censored with censored_at=<paramref name="tick"/>. The game
+		/// ended before the timeout, so the outcome is unknown: the analysis must not count it as "no reaction" (none), only as
+		/// "no reaction in censored_at - trigger_tick ticks". Triggers already past the timeout are closed as none first.
+		/// </summary>
+		public void Flush(int tick)
+		{
+			Expire(tick);
+			for (var i = 0; i < open.Count; i++)
+				Write(open[i], -1, "censored", "", tick);
+
+			open.Clear();
 		}
 
 		/// <summary>The reaction a module type stands for; null when its orders are not a defend reaction.</summary>
@@ -111,11 +125,12 @@ namespace OpenRA.Mods.Cameo.Traits
 			return null;
 		}
 
-		void Write(Pending p, int reactionTick, string reactionKind, string issuer)
+		void Write(Pending p, int reactionTick, string reactionKind, string issuer, int censoredAt = -1)
 		{
 			sink(string.Format(CultureInfo.InvariantCulture,
-				"DefendReaction seat={0} trigger_tick={1} trigger_kind={2} trigger_id={3} x={4} y={5} hits={6} reaction_tick={7} reaction_kind={8} reaction_issuer={9} timeout={10}",
-				seat, p.Tick, p.Kind, p.Id, p.X, p.Y, p.Hits, reactionTick, reactionKind, string.IsNullOrEmpty(issuer) ? "-" : issuer, TimeoutTicks));
+				"DefendReaction seat={0} trigger_tick={1} trigger_kind={2} trigger_id={3} x={4} y={5} hits={6} reaction_tick={7} reaction_kind={8} reaction_issuer={9} timeout={10}{11}",
+				seat, p.Tick, p.Kind, p.Id, p.X, p.Y, p.Hits, reactionTick, reactionKind, string.IsNullOrEmpty(issuer) ? "-" : issuer, TimeoutTicks,
+				censoredAt >= 0 ? " censored_at=" + censoredAt.ToString(CultureInfo.InvariantCulture) : ""));
 		}
 	}
 }

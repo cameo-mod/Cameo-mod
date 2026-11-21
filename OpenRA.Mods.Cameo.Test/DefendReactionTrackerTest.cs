@@ -48,14 +48,20 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void FinalExpireClosesEveryOpenTriggerAsNone()
+		public void GameEndFlushClosesOpenTriggersAsCensoredNotNone()
 		{
 			var lines = new List<string>();
 			var t = new DefendReactionTracker("Multi0", lines.Add);
 			t.Trigger(100, DefendReactionTracker.HarvesterAttacked, 1, 0, 0);
-			t.Trigger(110, DefendReactionTracker.UnitAttacked, 2, 0, 0);
-			t.Expire(120, final: true);
+			t.Trigger(500, DefendReactionTracker.UnitAttacked, 2, 0, 0);
+			t.Flush(520); // the 100 trigger is past the 300 timeout (none); the 500 trigger is still open at game end (censored)
 			Assert.That(lines, Has.Count.EqualTo(2));
+			Assert.That(lines[0], Does.Contain("trigger_tick=100").And.Contain("reaction_kind=none").And.Not.Contain("censored_at"));
+			Assert.That(lines[1], Does.Contain("trigger_tick=500").And.Contain("reaction_kind=censored").And.Contain("reaction_tick=-1").And.Contain("censored_at=520"));
+			Assert.That(t.OpenCount, Is.EqualTo(0));
+
+			t.Flush(530);
+			Assert.That(lines, Has.Count.EqualTo(2), "a second flush writes nothing");
 		}
 	}
 }

@@ -625,6 +625,9 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		/// <summary>Game end: the scheduler (a world trait, so it receives IGameOver) flushes every registered bot.</summary>
 		public void FlushModuleTiming() => ReportModuleTiming(true);
+
+		/// <summary>Game end: still-open defend triggers are written as censored (not none), see DefendReactionTracker.Flush.</summary>
+		public void FlushDefendReactions() => defendReactions?.Flush(world.WorldTick);
 #endif
 
 		void INotifyDamage.Damaged(Actor self, AttackInfo e)

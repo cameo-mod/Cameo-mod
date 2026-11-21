@@ -251,7 +251,10 @@ namespace OpenRA.Mods.Cameo.Traits
 		{
 #if CAMEO_DEV_LOGGING
 			foreach (var seat in Core.Registered)
+			{
 				((SeatBinding)seat.Bot).Bot.FlushModuleTiming();
+				((SeatBinding)seat.Bot).Bot.FlushDefendReactions();
+			}
 #endif
 		}
 
