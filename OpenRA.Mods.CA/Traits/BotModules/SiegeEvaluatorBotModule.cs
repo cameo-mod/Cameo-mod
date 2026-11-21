@@ -95,6 +95,11 @@ namespace OpenRA.Mods.CA.Traits
 		readonly Dictionary<SquadCA, SiegeHold> holds = new();
 		int lastEvaluationTick = -1;
 
+		// ABLATE-01 hook sg_siege_behaviour (DEV provider only; release = on). Off = the pre-SIEGE-FIX inert evaluator: verdicts are still computed and
+		// logged, none is served (VerdictFor answers Advance, PricedAdvance false), so the squad manager runs its pre-SIEGE paths.
+		AblationLatch ablateSiege;
+		bool ServesVerdicts => !IsTraitDisabled && !ablateSiege.Off(player, AblationIds.SiegeBehaviour);
+
 		// QW-B: the evaluation tick within the interval; ClientIndex % interval (shared by map-side bots) unless the bot phase-offsets its timers.
 		int evaluationPhase = -1;
 
@@ -472,12 +477,12 @@ namespace OpenRA.Mods.CA.Traits
 		// standOffCell is valid for StandOff and Retreat (the pull-back point on the stand-off line).
 		/// <summary>S7: this pass served Advance AFTER pricing remembered defences (covering was non-empty), as opposed to no opinion.</summary>
 		public bool PricedAdvance(SquadCA squad) =>
-			!IsTraitDisabled && verdicts.TryGetValue(squad, out var cached) && cached.Verdict == SiegeVerdict.Advance && cached.Priced;
+			ServesVerdicts && verdicts.TryGetValue(squad, out var cached) && cached.Verdict == SiegeVerdict.Advance && cached.Priced;
 
 		public SiegeVerdict VerdictFor(SquadCA squad, out CPos standOffCell)
 		{
 			standOffCell = CPos.Zero;
-			if (IsTraitDisabled || !verdicts.TryGetValue(squad, out var cached))
+			if (!ServesVerdicts || !verdicts.TryGetValue(squad, out var cached))
 				return SiegeVerdict.Advance;
 
 			standOffCell = cached.StandOff;

@@ -482,6 +482,16 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(module, Does.Not.Contain("if (newRetreat && Info.SiegeMemoryEnabled)"));
 		}
 
+		// sg_siege_behaviour: the DEV Disabled arm serves nothing (verdicts still computed), and the release build serves as always.
+		[Test]
+		public void TheAblationRowGatesEveryServedVerdict()
+		{
+			var module = Module();
+			Assert.That(module, Does.Contain("bool ServesVerdicts => !IsTraitDisabled && !ablateSiege.Off(player, AblationIds.SiegeBehaviour);"));
+			Assert.That(module, Does.Contain("ServesVerdicts && verdicts.TryGetValue(squad, out var cached) && cached.Verdict == SiegeVerdict.Advance && cached.Priced;"));
+			Assert.That(module, Does.Contain("if (!ServesVerdicts || !verdicts.TryGetValue(squad, out var cached))"));
+		}
+
 		[Test]
 		public void TheEvaluatorKeepsItsPerSquadMemoryBounded()
 		{
