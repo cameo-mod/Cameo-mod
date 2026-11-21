@@ -4570,6 +4570,17 @@ Player:
 		RouteRecheckTicks: 100
 		MaxExposedRouteCells: 3
 		TransportChance: 25
+		# ENGDROP (ENGDROP_DESIGN_01, spec 02): drops come from the two-trigger scheduler. Trigger B on the equal-step ladder:
+		# chance 50 + 5 r %, every 525 - 30 r ticks, first due 675 - 60 r ticks after match start (r = 0 noob .. 10 cameogod;
+		# noob is one step below easiest by extrapolation). Trigger A (25-tick opportunity scan) has no per-tier switch.
+		# TransportChance above stays only for the DEV ed_engdrop Disabled arm (the legacy roll).
+		UseDropScheduler: true
+		DropChancePctEasy: 55
+		DropChancePctHard: 100
+		DropIntervalTicksEasy: 495
+		DropIntervalTicksHard: 225
+		DropInitialDelayTicksEasy: 615
+		DropInitialDelayTicksHard: 75
 		EscortThinnedPercent: 50
 		EscortSuperiority: 150
 		EscortDefendedCaptures: true

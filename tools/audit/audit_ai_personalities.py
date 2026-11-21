@@ -227,6 +227,49 @@ def siege_ladder_failures() -> list[str]:
     return failures
 
 
+def engdrop_ladder_failures() -> list[str]:
+    """ENGDROP (DESIGN 19.1): Trigger B lies on one equal-step line over the 11 tiers (noob = easiest minus one step): chance 50 + 5 r %,
+    interval 525 - 30 r ticks, initial delay 675 - 60 r ticks, r = 0 (noob) .. 10 (cameogod). The scheduler is on (UseDropScheduler) and no tier switches
+    it off. Easy is written for the easiest tier, Hard for cameogod (BotDifficultyLadder.Scale interpolates)."""
+    text = (ROOT / "mods" / "cameo" / "ai" / "ai.yaml").read_text(encoding="utf-8")
+    match = re.search(r"^\tEngineerBotModule:\n((?:\t\t.*\n|[ \t]*\n)+)", text, re.MULTILINE)
+    if not match:
+        return ["EngineerBotModule block not found in ai.yaml"]
+
+    block = match.group(1)
+    failures = []
+    if not re.search(r"^\t\tUseDropScheduler:[ \t]*true[ \t]*$", block, re.MULTILINE):
+        failures.append("EngineerBotModule.UseDropScheduler must be true (ENGDROP: no ladder tier may switch a feature off)")
+
+    knobs = {}
+    for key in ("DropChancePctEasy", "DropChancePctHard", "DropIntervalTicksEasy", "DropIntervalTicksHard",
+                "DropInitialDelayTicksEasy", "DropInitialDelayTicksHard"):
+        found = re.search(rf"^\t\t{key}:[ \t]*(\d+)[ \t]*$", block, re.MULTILINE)
+        if not found:
+            failures.append(f"EngineerBotModule.{key} is not written in ai.yaml")
+        else:
+            knobs[key] = int(found.group(1))
+
+    if failures:
+        return failures
+
+    steps = 9  # easiest = rank 0 .. cameogod = rank 9; noob = rank -1
+    for name, lo, hi, base, per_rank in (
+        ("DropChancePct", knobs["DropChancePctEasy"], knobs["DropChancePctHard"], 50, 5),
+        ("DropIntervalTicks", knobs["DropIntervalTicksEasy"], knobs["DropIntervalTicksHard"], 525, -30),
+        ("DropInitialDelayTicks", knobs["DropInitialDelayTicksEasy"], knobs["DropInitialDelayTicksHard"], 675, -60),
+    ):
+        # C# int arithmetic: min + ((max - min) * rank) / steps, truncated toward zero.
+        values = [lo + int(((hi - lo) * rank) / steps) for rank in range(-1, steps + 1)]
+        expected = [base + per_rank * r for r in range(0, 11)]
+        if values != expected:
+            failures.append(f"{name} tiers {values} != the ratified line {expected}")
+        if min(values) <= 0:
+            failures.append(f"{name} reaches zero or below: {values}")
+
+    return failures
+
+
 def difficulty_scale_failures() -> list[str]:
     """DESIGN §19.1: every per-tier number lies on one straight line in equal steps, and is written in
     every tier (a missing field falls back to a C# default and breaks the line silently)."""
@@ -543,6 +586,7 @@ def main() -> int:
                 failures.append(f"shared field set differs between {reference_name} and {name}")
 
     failures.extend(difficulty_scale_failures())
+    failures.extend(engdrop_ladder_failures())
     failures.extend(siege_ladder_failures())
     failures.extend(noob_failures(lines))
     failures.extend(scale_target_failures())

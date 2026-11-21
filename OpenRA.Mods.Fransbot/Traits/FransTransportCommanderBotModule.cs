@@ -1042,7 +1042,12 @@ namespace OpenRA.Mods.Common.Traits
 		/// TransportMission drives the craft; Distinct() in the manage loop keeps it single-owner.
 		/// </summary>
 		bool IFransCaptureTransportService.TryRequestCaptureRun(
-			IBot bot, IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets)
+			IBot bot, IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets) =>
+			TryRequestCaptureRunCore(bot, passengers, targets, queueProduction: true);
+
+		/// <summary>The run admission. queueProduction false = ENGDROP Trigger A: an existing craft or a refusal, never a build.</summary>
+		bool TryRequestCaptureRunCore(
+			IBot bot, IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets, bool queueProduction)
 		{
 			using var _ = BotIssuer.IssueAs(IssuerName);
 			if (bot == null || passengers == null || targets == null ||
@@ -1108,7 +1113,8 @@ namespace OpenRA.Mods.Common.Traits
 			{
 				foreach (var leg in legs)
 					leases?.Release(leg.Passenger, LeaseOwner);
-				RequestBestTransport(bot, mission, landPathAvailable: true);
+				if (queueProduction)
+					RequestBestTransport(bot, mission, landPathAvailable: true);
 				return false;
 			}
 
@@ -1193,6 +1199,10 @@ namespace OpenRA.Mods.Common.Traits
 		bool IBotCaptureTransportProvider.TryRequestCaptureRun(IBot bot, IReadOnlyList<Actor> passengers,
 			IReadOnlyList<Actor> targets) =>
 			AsSelf(() => ((IFransCaptureTransportService)this).TryRequestCaptureRun(bot, passengers, targets));
+
+		bool IBotCaptureTransportProvider.TryRequestCaptureRunWithoutProduction(IBot bot, IReadOnlyList<Actor> passengers,
+			IReadOnlyList<Actor> targets) =>
+			AsSelf(() => TryRequestCaptureRunCore(bot, passengers, targets, queueProduction: false));
 
 		bool IBotCaptureTransportProvider.IsHandlingPassenger(Actor passenger) =>
 			AsSelf(() => ((IFransCaptureTransportService)this).IsHandlingPassenger(passenger));

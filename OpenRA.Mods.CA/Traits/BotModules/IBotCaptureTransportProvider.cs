@@ -32,6 +32,13 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		bool TryRequestCaptureRun(IBot bot, IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets);
 
+		/// <summary>
+		/// ENGDROP Trigger A (opportunity drop): the same run as <see cref="TryRequestCaptureRun"/>, but ONLY with a craft that
+		/// already exists and can start now. A refusal has no side effect: no production request, no lease, no mission. A
+		/// provider that does not implement it refuses (fail closed), so an opportunity drop never queues a transport.
+		/// </summary>
+		bool TryRequestCaptureRunWithoutProduction(IBot bot, IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets) => false;
+
 		/// <summary>True while the passenger waits for, rides in or is being unloaded from a transport.</summary>
 		bool IsHandlingPassenger(Actor passenger);
 

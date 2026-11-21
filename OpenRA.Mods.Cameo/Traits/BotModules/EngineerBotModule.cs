@@ -212,6 +212,24 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("ENG-T: most engineers (and buildings) in one infiltration run — one per stop.")]
 		public readonly int TransportRunMax = 5;
 
+		[Desc("ENGDROP (ENGDROP_DESIGN_01): drive transport drops from the two-trigger scheduler instead of the per-candidate",
+			"TransportChance roll. Trigger A (every 25 ticks) launches at once when a visible, unguarded building, a free crew and",
+			"an EXISTING craft are at hand and never queues a transport. Trigger B draws one per-bot number per due visit.",
+			"With the ed_engdrop ablation off (DEV only) the legacy TransportChance roll runs instead.")]
+		public readonly bool UseDropScheduler = false;
+
+		[Desc("ENGDROP Trigger B: percent chance per due visit, easiest .. hardest tier (50 + 5 r, r = 0 noob .. 10 cameogod).")]
+		public readonly int DropChancePctEasy = 55;
+		public readonly int DropChancePctHard = 100;
+
+		[Desc("ENGDROP Trigger B: ticks from one due visit to the next, easiest .. hardest tier (525 - 30 r).")]
+		public readonly int DropIntervalTicksEasy = 495;
+		public readonly int DropIntervalTicksHard = 225;
+
+		[Desc("ENGDROP Trigger B: ticks from match start to the first due visit, easiest .. hardest tier (675 - 60 r).")]
+		public readonly int DropInitialDelayTicksEasy = 615;
+		public readonly int DropInitialDelayTicksHard = 75;
+
 		[Desc("TC-2e (AI_ARCHITECTURE §12.17): yield a capture target an outranking allied bot already claims",
 			"(published on the team blackboard — lower ClientIndex wins), and stand an in-flight capture down",
 			"when an outranking ally's claim lands on its cell. Inert in 1v1 — no allied broadcasts exist.")]
@@ -251,6 +269,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly World world;
 		readonly OpenRA.Player player;
 		AblationLatch ablateDemandCapturers; // ABLATE-01 hook pi_demand_capturers (DEV provider only; release = on)
+		AblationLatch ablateEngDrop; // ABLATE-01 hook ed_engdrop (DEV provider only; release = on): off = the legacy TransportChance roll
 		readonly int maximumCaptureTargetOptions;
 		readonly EngineerJob[] repairJobs;
 		readonly HashSet<string> capturingTypes;
@@ -295,6 +314,23 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public static int EscortRequestValue(int defenceValue, int floor) => Math.Max(Math.Max(1, defenceValue), floor);
 
 		BotPeriod captureTicks; // STAGGER-06 F1
+
+		// ENGDROP: the caller-persisted deadlines (IssueTraitData/ResolveTraitData). Start is match start + the tier's initial delay.
+		DropScheduleState dropState;
+		bool dropStarted;
+		DropScheduler? dropScheduler;
+
+		/// <summary>ENGDROP: runs launched by Trigger A (opportunity) and Trigger B (regular), for the DEV summary and tests.</summary>
+		public int OpportunityDrops { get; private set; }
+		public int RegularDrops { get; private set; }
+
+		DropScheduler DropTiers => dropScheduler ??= new DropScheduler(
+			BotDifficultyLadder.Scale(Info.DropChancePctEasy, Info.DropChancePctHard, player, Info.DropChancePctHard),
+			BotDifficultyLadder.Scale(Info.DropIntervalTicksEasy, Info.DropIntervalTicksHard, player, Info.DropIntervalTicksHard),
+			BotDifficultyLadder.Scale(Info.DropInitialDelayTicksEasy, Info.DropInitialDelayTicksHard, player, Info.DropInitialDelayTicksHard));
+
+		/// <summary>The scheduler owns transport drops; false = the legacy roll (the DEV ed_engdrop Disabled arm, or a module without the flag).</summary>
+		bool UsesDropScheduler => Info.UseDropScheduler && !ablateEngDrop.Off(player, AblationIds.EngDrop);
 		BotPeriod routeRecheck; // STAGGER-06 E070: call-counted F1 K=RouteRecheckTicks x0=0; frozen across a disabled gap (lastSeen), not reset on enable
 		BotCooldown repairCooldown;
 		int nextRepairJob;
@@ -424,6 +460,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			captureTicks = BotPeriod.F1(player.World.WorldTick, BotRng.For(player, nameof(EngineerBotModule)).Next(Info.MinimumCaptureDelay), Info.MinimumCaptureDelay);
 			var repairDelay = BotRng.For(player, nameof(EngineerBotModule)).Next(Info.AssignRoleDelay);
 			repairCooldown = new BotCooldown { Due = player.World.WorldTick + Math.Max(1, repairDelay) };
+
+			// ENGDROP: the schedule starts once (a re-enable keeps its deadlines, like routeRecheck). No random number here:
+			// Trigger B's draw happens only at a due visit.
+			if (!dropStarted && Info.UseDropScheduler)
+			{
+				dropState = DropTiers.Start(player.World.WorldTick);
+				dropStarted = true;
+			}
 		}
 
 		void IBotPositionsUpdated.UpdatedBaseCenter(CPos newLocation) { initialBaseCenter = newLocation; }
@@ -478,11 +522,34 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						Recheck(bot, leases, a, job, tick);
 			}
 
+			// ENGDROP: before the ordinary capture planning, so a drop takes its crew first (A commits before B).
+			if (dropStarted && UsesDropScheduler)
+				RunDropScheduler(bot, visitTick);
+
 			if (captureTicks.TryFire(BotVisitClock.Of(bot)))
 			{
 				Housekeep(bot);
 				QueueCaptureOrders(bot);
 			}
+		}
+
+		/// <summary>
+		/// ENGDROP: one bot visit. The scheduler says which triggers are due; late visits coalesce (no catch-up draws). A due B
+		/// visit consumes exactly one draw from this module's bot stream and reloads from this visit whether it succeeds, is
+		/// refused or finds nothing; if A launched a run in the same visit the draw is still consumed but B does not run.
+		/// </summary>
+		void RunDropScheduler(IBot bot, int visitTick)
+		{
+			var tiers = DropTiers;
+			var visit = tiers.Visit(dropState, visitTick);
+			dropState = visit.State;
+			if (!visit.ScanOpportunity && !visit.DrawRegular)
+				return;
+
+			int? roll = visit.DrawRegular ? BotRng.For(player, nameof(EngineerBotModule)).Next(100) : null;
+			var admitted = visit.ScanOpportunity && TryScheduledDrop(bot, true);
+			if (visit.TryRegular(roll, tiers.ChancePercent, admitted) && TryScheduledDrop(bot, false))
+				RegularDrops++;
 		}
 
 		bool IsGone(Actor a) => a.IsDead || !a.IsInWorld || a.Owner != player;
@@ -946,7 +1013,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					// so the roll precedes the route check; the provider plans its own way in, and a refused run falls
 					// through to the foot path. The roll is drawn only when it can matter, so a chance of 0 leaves
 					// LocalRandom's sequence — and every later random choice — exactly as before.
-					if (CaptureRules.ShouldRollForTransport(Info.TransportChance, EscortEligible(target))
+					// ENGDROP: with the scheduler on, drops come from RunDropScheduler and this roll (and its draw) never runs.
+					if (!UsesDropScheduler && CaptureRules.ShouldRollForTransport(Info.TransportChance, EscortEligible(target))
 						&& WantsTransport(true, BotRng.For(player, nameof(EngineerBotModule)).Next(100), Info.TransportChance)
 						&& TransportProvider() is IBotCaptureTransportProvider provider)
 					{
@@ -970,6 +1038,62 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// <summary>ENG-T's gate, free of world state so it can be tested.</summary>
 		public static bool WantsTransport(bool stealthTarget, int roll, int chancePct) => stealthTarget && chancePct > 0 && roll < chancePct;
 
+		/// <summary>
+		/// ENGDROP: try to start one transport run now. opportunity = Trigger A: only a visible building with no visible and no
+		/// remembered armed guard near it, only an existing craft, never a production request. Otherwise Trigger B: any visible
+		/// stealth building the foot path's own guard test accepts, and the provider may queue a transport for the next try.
+		/// Targets are ranked value per cell of distance with the actor id as the stable tie-break; stops come from the same pool.
+		/// </summary>
+		bool TryScheduledDrop(IBot bot, bool opportunity)
+		{
+			if (capturingTypes.Count == 0 || TransportProvider() is not { } provider)
+				return false;
+
+			var leases = BotUnitLeases.Of(player);
+			var capturers = world.ActorsHavingTrait<Captures>()
+				.Where(a => a.Owner == player && capturingTypes.Contains(a.Info.Name.ToLowerInvariant())
+					&& a.TraitOrDefault<CaptureManager>() != null && Available(a, leases, false))
+				.OrderBy(a => a.ActorID)
+				.ToList();
+			if (capturers.Count == 0)
+				return false;
+
+			HashSet<WPos> claimsAhead = null;
+			if (Info.UseTeamCaptureClaims)
+				claimsAhead = TeamBlackboard.ClaimsAheadOf(TeamBlackboard.CollectBroadcasts(player), player.InternalName);
+
+			// DESIGN 19.5: the engineer owner is omniscient as a whole, so target choice reads the world as the legacy loop does.
+			var pool = world.ActorsHavingTrait<CaptureManager>()
+				.Where(t => !t.IsDead && t.IsInWorld && t.Owner != null && Info.CapturableRelationships.HasRelationship(player.RelationshipWith(t.Owner))
+					&& (!Info.CheckCaptureTargetsForVisibility || t.CanBeViewedByPlayer(player))
+					&& !EscortEligible(t) && !TargetFull(t) && !Dormant(t)
+					&& (capturableTypes.Count == 0 || capturableTypes.Contains(t.Info.Name.ToLowerInvariant()))
+					&& (claimsAhead == null || !claimsAhead.Contains(world.Map.CenterOfCell(t.Location)))
+					&& capturers.Any(c => c.TraitOrDefault<CaptureManager>().CanTarget(t.TraitOrDefault<CaptureManager>())))
+				.Where(t => opportunity ? GuardingEnemies(capturers[0], t) == 0 : !StealthTargetGuarded(capturers[0], t))
+				.OrderBy(t => t.ActorID)
+				.ToList();
+			if (pool.Count == 0)
+				return false;
+
+			foreach (var first in pool
+				.OrderByDescending(t => RankScore(t.GetSellValue(), (t.Location - capturers[0].Location).Length, 0, 0))
+				.ThenBy(t => t.ActorID)
+				.Take(Math.Max(1, Info.CaptureTargetTries)))
+			{
+				var crew = capturers.OrderBy(c => (c.CenterPosition - first.CenterPosition).LengthSquared).ThenBy(c => c.ActorID).ToList();
+				if (TryTransportRun(bot, leases, crew, first, pool, provider, allowProduction: !opportunity) > 0)
+				{
+					if (opportunity)
+						OpportunityDrops++;
+
+					return true;
+				}
+			}
+
+			return false;
+		}
+
 		/// <summary>The enabled transport provider, resolved at use (never cached: LC4's bug class).</summary>
 		IBotCaptureTransportProvider TransportProvider() =>
 			player.PlayerActor.TraitsImplementing<IBotCaptureTransportProvider>().FirstOrDefault(p => p is not IDisabledTrait d || !d.IsTraitDisabled);
@@ -992,7 +1116,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>ENG-T: one run of up to TransportRunMax engineers, one per stealth building; returns the engineers used.</summary>
-		int TryTransportRun(IBot bot, IBotUnitLeases leases, List<Actor> candidates, Actor first, List<Actor> pool, IBotCaptureTransportProvider provider)
+		int TryTransportRun(IBot bot, IBotUnitLeases leases, List<Actor> candidates, Actor first, List<Actor> pool, IBotCaptureTransportProvider provider,
+			bool allowProduction = true)
 		{
 			// The stops: the chosen building, then other stealth buildings that are free for an attempt.
 			var stops = new List<Actor> { first };
@@ -1013,7 +1138,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				targets.Add(stops[order[passengers.Count - 1]]);
 			}
 
-			if (passengers.Count == 0 || !provider.TryRequestCaptureRun(bot, passengers, targets))
+			if (passengers.Count == 0 || !(allowProduction
+				? provider.TryRequestCaptureRun(bot, passengers, targets)
+				: provider.TryRequestCaptureRunWithoutProduction(bot, passengers, targets)))
 			{
 				foreach (var p in passengers)
 					leases?.Release(p, LeaseOwner);
@@ -1551,7 +1678,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (IsTraitDisabled)
 				return null;
 
-			return [new("InitialBaseCenter", FieldSaver.FormatValue(initialBaseCenter))];
+			var nodes = new List<MiniYamlNode> { new("InitialBaseCenter", FieldSaver.FormatValue(initialBaseCenter)) };
+
+			// ENGDROP: the scheduler's two deadlines (world ticks fit an int). The bot RNG streams are not saved by any module.
+			if (dropStarted)
+			{
+				nodes.Add(new("DropNextOpportunityTick", FieldSaver.FormatValue((int)dropState.NextOpportunityTick)));
+				nodes.Add(new("DropNextRegularTick", FieldSaver.FormatValue((int)dropState.NextRegularTick)));
+			}
+
+			return nodes;
 		}
 
 		void IGameSaveTraitData.ResolveTraitData(Actor self, MiniYaml data)
@@ -1567,6 +1703,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var nodes = data.ToDictionary();
 			if (nodes.TryGetValue("InitialBaseCenter", out var node))
 				initialBaseCenter = FieldLoader.GetValue<CPos>("InitialBaseCenter", node.Value);
+
+			if (Info.UseDropScheduler && nodes.TryGetValue("DropNextOpportunityTick", out var opportunityNode)
+				&& nodes.TryGetValue("DropNextRegularTick", out var regularNode))
+			{
+				dropState = new DropScheduleState(
+					FieldLoader.GetValue<int>("DropNextOpportunityTick", opportunityNode.Value),
+					FieldLoader.GetValue<int>("DropNextRegularTick", regularNode.Value));
+				dropStarted = true;
+			}
 		}
 	}
 }
