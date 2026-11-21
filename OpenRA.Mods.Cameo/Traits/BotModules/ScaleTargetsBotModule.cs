@@ -172,9 +172,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		HashSet<string> superweaponNames;
 
 		BotCooldown recomputeCooldown;
-		int recomputeDisabledFromTick = -1;
-		int lastBotTick;
-		bool recomputeStarted;
 		/// <summary>Tier sentinel for an UNRANKED owner. Noob is not unranked: it is BotDifficultyLadder.NoobRank (-1).</summary>
 		const int Unranked = int.MinValue;
 
@@ -205,34 +202,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			var tick = world.WorldTick;
-			lastBotTick = tick;
 			if (!ShouldRecompute(resolved, recomputeCooldown, tick))
 				return;
 
 			Recompute(tick);
 			ReloadRecompute(ref recomputeCooldown, tick, Info.RecomputeTicks);
-			recomputeStarted = true;
-		}
-
-		protected override void TraitDisabled(Actor self)
-		{
-			recomputeDisabledFromTick = recomputeStarted
-				? DisabledFromTick(self.World.WorldTick, lastBotTick)
-				: -1;
-		}
-
-		protected override void TraitEnabled(Actor self)
-		{
-			ResumeRecompute(ref recomputeCooldown, self.World.WorldTick, recomputeDisabledFromTick);
-			recomputeDisabledFromTick = -1;
-		}
-
-		internal static int DisabledFromTick(int transitionTick, int lastVisitTick) => Math.Max(transitionTick, lastVisitTick + 1);
-
-		internal static void ResumeRecompute(ref BotCooldown cooldown, int tick, int disabledFromTick)
-		{
-			if (disabledFromTick >= 0)
-				cooldown.Freeze(Math.Max(0, tick - disabledFromTick));
 		}
 
 		internal static bool ShouldRecompute(bool resolved, BotCooldown cooldown, int tick) =>

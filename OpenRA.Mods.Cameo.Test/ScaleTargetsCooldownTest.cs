@@ -36,16 +36,18 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void RecomputeCooldownPreservesRemainingDelayAcrossDisabledTicks()
+		public void RecomputeCooldownUsesAbsoluteWorldTickDeadlineAcrossDisabledTicks()
 		{
 			var cooldown = new BotCooldown();
 			ScaleTargetsBotModule.ReloadRecompute(ref cooldown, 0, 125);
-			var disabledFrom = ScaleTargetsBotModule.DisabledFromTick(1, 0);
 
-			// ConditionalTrait suppresses IBotTick while disabled; lifecycle callbacks account for that interval.
-			ScaleTargetsBotModule.ResumeRecompute(ref cooldown, 31, disabledFrom);
-			Assert.That(ScaleTargetsBotModule.ShouldRecompute(true, cooldown, 154), Is.False);
-			Assert.That(ScaleTargetsBotModule.ShouldRecompute(true, cooldown, 155), Is.True);
+			// ConditionalTrait suppresses IBotTick while disabled, but the legacy deadline is absolute WorldTick.
+			Assert.That(ScaleTargetsBotModule.ShouldRecompute(true, cooldown, 31), Is.False);
+			Assert.That(ScaleTargetsBotModule.ShouldRecompute(true, cooldown, 124), Is.False);
+			Assert.That(ScaleTargetsBotModule.ShouldRecompute(true, cooldown, 125), Is.True);
+
+			// If the gap passes the deadline, the next enabled call is immediately ready.
+			Assert.That(ScaleTargetsBotModule.ShouldRecompute(true, cooldown, 131), Is.True);
 		}
 	}
 }
