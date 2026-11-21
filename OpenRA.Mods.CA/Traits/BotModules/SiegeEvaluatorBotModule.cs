@@ -86,7 +86,10 @@ namespace OpenRA.Mods.CA.Traits
 		IBotRegionThreatProvider[] threatProviders;
 		IBotRememberedDefenceProvider[] defenceProviders;
 		IBotSiegeFailureMemory[] failureMemory;
-		readonly Dictionary<SquadCA, (SiegeVerdict Verdict, CPos StandOff)> verdicts = new();
+		/// <summary>S4 (Opus ruling): the regional army remembered at the target outweighs a squad when it is above this percent of the squad's value. A constant on every tier (1.0x).</summary>
+		internal const int ArmyOutweighPercent = 100;
+
+		readonly Dictionary<SquadCA, (SiegeVerdict Verdict, CPos StandOff, bool Priced)> verdicts = new();
 
 		// S2/S6 per-squad memory (hold timer, latch, re-engage base value); dropped with the squad.
 		readonly Dictionary<SquadCA, SiegeHold> holds = new();
@@ -216,7 +219,11 @@ namespace OpenRA.Mods.CA.Traits
 						(a.Cell - squadCell).LengthSquared <= (b.Cell - squadCell).LengthSquared ? a : b);
 					var distToNearestDefenceSq = (nearest.Cell - squadCell).LengthSquared;
 					var insideLine = distToNearestDefenceSq <= standOffSq;
-					var committed = prediction.OwnWins &&
+					// S4 (Opus ruling): two SEPARATE tests, never multiplied together. The commit ratio prices the defences only; a regional
+					// army remembered at the target that outweighs the squad is its own retreat test (0 = unknown, never penalised).
+					var armyOutweighs = ArmyOutweighs(rememberedThreat, squadValue);
+					var fightWon = prediction.OwnWins && !armyOutweighs;
+					var committed = fightWon &&
 						(long)squadValue * 100 >= (long)Info.CommitRatioPercent * obstacleValue;
 
 					// The hold point sits on the stand-off line, on the defence->squad bearing.
@@ -235,9 +242,11 @@ namespace OpenRA.Mods.CA.Traits
 						holds[squad] = hold = new SiegeHold();
 
 					var wasRetreating = hold.LastRaw == SiegeVerdict.Retreat;
-					var raw = Decide(prediction.OwnWins, committed, insideLine, standOffSupport, squadValue, now,
+					var raw = Decide(fightWon, committed, insideLine, standOffSupport, squadValue, now,
 						StandOffMaxTicks, SiegeReengagePct, wasRetreating, hold, out verdict, out var newRetreat);
 					hold.LastRaw = raw;
+					if (armyOutweighs && prediction.OwnWins && raw == SiegeVerdict.Retreat)
+						verdict = "retreat(army-outweighs)";
 
 					// S3: the served verdict follows the raw one only after two agreeing evaluations or a material change of the squad's value;
 					// a hold that just ended by timeout (S2) is a decision and is served at once.
@@ -253,7 +262,7 @@ namespace OpenRA.Mods.CA.Traits
 							p.RecordFailedSiege(nearest.Enemy, nearest.Cell, now);
 				}
 
-				verdicts[squad] = (verdictKind, standOffCell);
+				verdicts[squad] = (verdictKind, standOffCell, covering.Length > 0);
 
 				// Log.Write direct: AIUtils.BotDebug is gated on Game.Settings.Debug.BotDebug,
 				// which the match harness does not set — the FransBotLog pattern.
@@ -326,6 +335,13 @@ namespace OpenRA.Mods.CA.Traits
 			hold.PendingCount = 0;
 			return raw;
 		}
+
+		/// <summary>S4 (pure): the remembered regional army at the target is stronger than the squad (0 = unknown, never).</summary>
+		internal static bool ArmyOutweighs(int rememberedThreat, int squadValue) =>
+			rememberedThreat > 0 && (long)rememberedThreat * 100 > (long)squadValue * ArmyOutweighPercent;
+
+		/// <summary>S7 (pure): the INC-N march abort is skipped only after a priced Advance (siege priced the remembered defences) with no seen enemies near the target.</summary>
+		internal static bool SkipsMarchAbort(bool pricedAdvance, int seenEnemies) => pricedAdvance && seenEnemies == 0;
 
 		/// <summary>S1 (pure): a weapon reaches a defence from the stand-off line when its range is at least the defence's range.</summary>
 		internal static bool Outranges(WDist weaponRange, int defenceRangeCells) => weaponRange.Length >= WDist.FromCells(defenceRangeCells).Length;
@@ -445,6 +461,10 @@ namespace OpenRA.Mods.CA.Traits
 		// without a cached evaluation answers Advance (no objection). There is no
 		// behaviour switch (SIEGE-FIX-01 S8): the verdict is always served, graded on the ladder.
 		// standOffCell is valid for StandOff and Retreat (the pull-back point on the stand-off line).
+		/// <summary>S7: this pass served Advance AFTER pricing remembered defences (covering was non-empty), as opposed to no opinion.</summary>
+		public bool PricedAdvance(SquadCA squad) =>
+			!IsTraitDisabled && verdicts.TryGetValue(squad, out var cached) && cached.Verdict == SiegeVerdict.Advance && cached.Priced;
+
 		public SiegeVerdict VerdictFor(SquadCA squad, out CPos standOffCell)
 		{
 			standOffCell = CPos.Zero;

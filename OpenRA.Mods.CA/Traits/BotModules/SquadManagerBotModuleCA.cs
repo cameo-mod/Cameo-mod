@@ -1971,6 +1971,17 @@ namespace OpenRA.Mods.CA.Traits
 			return SiegeVerdict.Advance;
 		}
 
+		/// <summary>S7: an enabled advisor priced remembered defences and served Advance for this squad this pass.</summary>
+		internal bool SiegePricedAdvance(SquadCA squad)
+		{
+			if (siegeAdvisors != null)
+				foreach (var advisor in siegeAdvisors)
+					if (advisor.PricedAdvance(squad))
+						return true;
+
+			return false;
+		}
+
 		/// <summary>The siege advisor's hold cap in ticks (the tier's StandOffMaxTicks); 0 = no advisor, uncapped.</summary>
 		internal int SiegeHoldCapTicks()
 		{

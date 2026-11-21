@@ -309,6 +309,56 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(Source("mods/CA/Traits/BotModules/IBotSiegeAdvisor.cs"), Does.Contain("int StandOffMaxTicks { get; }"));
 		}
 
+		// ---- S4 separate army test and S7 march-abort skip (Opus rulings on 5fb08035d) ----
+
+		[Test]
+		public void S4_TheRememberedArmyIsItsOwnRetreatTest()
+		{
+			Assert.That(SiegeEvaluatorBotModule.ArmyOutweighs(0, 2000), Is.False, "0 = unknown, never penalised");
+			Assert.That(SiegeEvaluatorBotModule.ArmyOutweighs(2000, 2000), Is.False, "equal is not outweighing (1.0x)");
+			Assert.That(SiegeEvaluatorBotModule.ArmyOutweighs(2001, 2000), Is.True);
+			Assert.That(SiegeEvaluatorBotModule.ArmyOutweighs(1999, 2000), Is.False);
+			Assert.That(SiegeEvaluatorBotModule.ArmyOutweighPercent, Is.EqualTo(100), "a constant, not a ladder knob");
+		}
+
+		[Test]
+		public void S4_AnOutweighingArmyRetreatsEvenWhenTheDefencesAreCommittableAndNeverMultipliesTheMeasures()
+		{
+			// Branch 1: army outweighs -> the fight is not won, so neither commit nor stand-off is served: Retreat.
+			Assert.That(Decide(new SiegeEvaluatorBotModule.SiegeHold(), ownWins: false, committed: false), Is.EqualTo(SiegeVerdict.Retreat));
+			// Branch 2: army does not outweigh -> the defence-only ratio decides (commit / stand-off as before).
+			Assert.That(Decide(new SiegeEvaluatorBotModule.SiegeHold(), ownWins: true, committed: true), Is.EqualTo(SiegeVerdict.Advance));
+			Assert.That(Decide(new SiegeEvaluatorBotModule.SiegeHold(), ownWins: true, committed: false), Is.EqualTo(SiegeVerdict.StandOff));
+
+			var module = Module();
+			Assert.That(module, Does.Contain("var fightWon = prediction.OwnWins && !armyOutweighs;"));
+			Assert.That(module, Does.Contain("var committed = fightWon &&"), "an outweighing army cannot commit");
+			Assert.That(module, Does.Contain("var raw = Decide(fightWon, committed,"));
+			Assert.That(module, Does.Not.Contain("(defenceValue + rememberedThreat)"), "the two measures are never summed");
+		}
+
+		[Test]
+		public void S7_TheMarchAbortIsSkippedOnlyAfterAPricedAdvanceWithNoSeenEnemies()
+		{
+			Assert.That(SiegeEvaluatorBotModule.SkipsMarchAbort(true, 0), Is.True);
+			Assert.That(SiegeEvaluatorBotModule.SkipsMarchAbort(true, 1), Is.False, "seen enemies near the target: INC-N runs as today");
+			Assert.That(SiegeEvaluatorBotModule.SkipsMarchAbort(false, 0), Is.False, "no siege opinion: INC-N runs as today");
+			Assert.That(SiegeEvaluatorBotModule.SkipsMarchAbort(false, 3), Is.False);
+		}
+
+		[Test]
+		public void S7_TheStateGuardWrapsTheUnchangedVetoLine()
+		{
+			var march = Section(GroundStates(), "class GroundUnitsAttackMoveStateCA", "// Since units have different movement speeds");
+			var skip = march.IndexOf("if (!SiegeEvaluatorBotModule.SkipsMarchAbort(owner.SquadManager.SiegePricedAdvance(owner), vetoEnemies.Count))", StringComparison.Ordinal);
+			var veto = march.IndexOf("if (owner.SquadManager.VetoEngage(owner, vetoEnemies, alreadyCommitted: true, out _) && !AggressionHoldsMarch(owner))", StringComparison.Ordinal);
+			Assert.That(skip, Is.GreaterThan(0));
+			Assert.That(veto, Is.GreaterThan(skip), "the INC-N line itself is unchanged and runs inside the guard");
+			Assert.That(Module(), Does.Contain("cached.Verdict == SiegeVerdict.Advance && cached.Priced"));
+			Assert.That(Module(), Does.Contain("verdicts[squad] = (verdictKind, standOffCell, covering.Length > 0);"));
+			Assert.That(Source("mods/CA/Traits/BotModules/IBotSiegeAdvisor.cs"), Does.Contain("bool PricedAdvance(SquadCA squad);"));
+		}
+
 		[Test]
 		public void S3_TheFirstEvaluationIsServedAtOnce()
 		{

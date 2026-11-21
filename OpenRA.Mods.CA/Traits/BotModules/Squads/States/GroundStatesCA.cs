@@ -645,11 +645,14 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				{
 					var vetoEnemies = owner.World.FindActorsInCircle(owner.Target.CenterPosition, WDist.FromCells(owner.SquadManager.Info.IdleScanRadius))
 						.Where(owner.SquadManager.IsPreferredObservedEnemyUnit).ToList();
-					if (owner.SquadManager.VetoEngage(owner, vetoEnemies, alreadyCommitted: true, out _) && !AggressionHoldsMarch(owner))
-					{
-						owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), false);
-						return;
-					}
+					// SIEGE-FIX-01 S7 (Opus ruling): the siege has already priced the remembered defences for this march, so the abort is skipped
+					// only when it served a priced Advance AND no enemy is seen near the target; otherwise INC-N runs as before.
+					if (!SiegeEvaluatorBotModule.SkipsMarchAbort(owner.SquadManager.SiegePricedAdvance(owner), vetoEnemies.Count))
+						if (owner.SquadManager.VetoEngage(owner, vetoEnemies, alreadyCommitted: true, out _) && !AggressionHoldsMarch(owner))
+						{
+							owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), false);
+							return;
+						}
 				}
 			}
 
