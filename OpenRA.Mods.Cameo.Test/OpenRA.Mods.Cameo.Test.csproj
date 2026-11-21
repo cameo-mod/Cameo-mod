@@ -3,10 +3,11 @@
     <EngineRootPath>../engine</EngineRootPath>
     <IsPublishable>false</IsPublishable>
   </PropertyGroup>
+  <Import Project="../engine/Directory.Build.props" />
+  <!-- After the engine props: they reset DefineConstants for Debug builds. -->
   <PropertyGroup Condition="'$(CameoDevLogging)' != 'true'">
     <DefineConstants>$(DefineConstants);CAMEO_DEV_TEST_COMPILE</DefineConstants>
   </PropertyGroup>
-  <Import Project="../engine/Directory.Build.props" />
   <ItemGroup>
     <ProjectReference Include="../OpenRA.Mods.CA/OpenRA.Mods.CA.csproj" />
     <ProjectReference Include="../OpenRA.Mods.Cameo/OpenRA.Mods.Cameo.csproj" />
