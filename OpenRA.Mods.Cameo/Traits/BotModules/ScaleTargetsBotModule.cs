@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -170,7 +171,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		BotGlobalUnitBudget budget;
 		HashSet<string> superweaponNames;
 
-		int nextRecomputeTick;
+		BotCooldown recomputeCooldown;
+		int recomputeDisabledFromTick = -1;
+		int lastBotTick;
+		bool recomputeStarted;
 		/// <summary>Tier sentinel for an UNRANKED owner. Noob is not unranked: it is BotDifficultyLadder.NoobRank (-1).</summary>
 		const int Unranked = int.MinValue;
 
@@ -201,12 +205,41 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			var tick = world.WorldTick;
-			if (resolved && tick < nextRecomputeTick)
+			lastBotTick = tick;
+			if (!ShouldRecompute(resolved, recomputeCooldown, tick))
 				return;
 
 			Recompute(tick);
-			nextRecomputeTick = tick + Math.Max(1, Info.RecomputeTicks);
+			ReloadRecompute(ref recomputeCooldown, tick, Info.RecomputeTicks);
+			recomputeStarted = true;
 		}
+
+		protected override void TraitDisabled(Actor self)
+		{
+			recomputeDisabledFromTick = recomputeStarted
+				? DisabledFromTick(self.World.WorldTick, lastBotTick)
+				: -1;
+		}
+
+		protected override void TraitEnabled(Actor self)
+		{
+			ResumeRecompute(ref recomputeCooldown, self.World.WorldTick, recomputeDisabledFromTick);
+			recomputeDisabledFromTick = -1;
+		}
+
+		internal static int DisabledFromTick(int transitionTick, int lastVisitTick) => Math.Max(transitionTick, lastVisitTick + 1);
+
+		internal static void ResumeRecompute(ref BotCooldown cooldown, int tick, int disabledFromTick)
+		{
+			if (disabledFromTick >= 0)
+				cooldown.Freeze(Math.Max(0, tick - disabledFromTick));
+		}
+
+		internal static bool ShouldRecompute(bool resolved, BotCooldown cooldown, int tick) =>
+			!resolved || cooldown.Ready(tick);
+
+		internal static void ReloadRecompute(ref BotCooldown cooldown, int tick, int interval) =>
+			cooldown.Start(tick, Math.Max(1, interval));
 
 		void Resolve()
 		{
