@@ -44,12 +44,13 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(HarvesterScanCooldown.IsDue(zeroInitialDelay, 0), Is.False);
 			Assert.That(HarvesterScanCooldown.IsDue(zeroInitialDelay, 1), Is.True);
 
-			cooldown = HarvesterScanCooldown.StartInitial(0, 100);
-			var disabledFrom = HarvesterScanCooldown.DisabledFrom(40, 39);
-			HarvesterScanCooldown.Resume(ref cooldown, 80, disabledFrom);
-			Assert.That(HarvesterScanCooldown.IsDue(cooldown, 139), Is.False);
-			Assert.That(HarvesterScanCooldown.IsDue(cooldown, 140), Is.True,
-				"A disabled transition freezes only ticks without a counted visit.");
+			cooldown = HarvesterScanCooldown.StartInitial(0, 375);
+			Assert.That(HarvesterScanCooldown.IsDue(cooldown, 370), Is.False,
+				"The old interval had five ticks remaining at disable.");
+			cooldown = HarvesterScanCooldown.StartInitial(500, 375);
+			Assert.That(HarvesterScanCooldown.IsDue(cooldown, 874), Is.False);
+			Assert.That(HarvesterScanCooldown.IsDue(cooldown, 875), Is.True,
+				"TraitEnabled resets all three scan timers from the re-enable tick.");
 		}
 	}
 }

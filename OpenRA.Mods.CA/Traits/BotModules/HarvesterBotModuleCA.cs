@@ -47,14 +47,6 @@ namespace OpenRA.Mods.CA.Traits
 		public static void Reload(ref BotCooldown cooldown, int tick, int interval) => cooldown.Start(tick, interval);
 
 		public static void Freeze(ref BotCooldown cooldown, int elapsed) => cooldown.Freeze(elapsed);
-
-		public static int DisabledFrom(int transitionTick, int lastVisitTick) => Math.Max(transitionTick, lastVisitTick + 1);
-
-		public static void Resume(ref BotCooldown cooldown, int tick, int disabledFromTick)
-		{
-			if (disabledFromTick >= 0)
-				cooldown.Freeze(Math.Max(0, tick - disabledFromTick));
-		}
 	}
 
 	[TraitLocation(SystemActors.Player)]
@@ -165,9 +157,6 @@ namespace OpenRA.Mods.CA.Traits
 		BotCooldown scanForLowEffectHarvestersCooldown;
 		BotCooldown scanForEnoughHarvestersCooldown;
 		BotCooldown scanForIdleHarvestersCooldown;
-		int disabledFromTick = -1;
-		int lastBotTick;
-		bool scanCooldownsStarted;
 		int respondToAttackCooldown = 40; // prevent too many responses to the same wave of attacks
 		bool firstTick = true;
 		bool limitsRechecked;
@@ -217,28 +206,9 @@ namespace OpenRA.Mods.CA.Traits
 			var idleDelay = BotRng.For(player, nameof(HarvesterBotModuleCA)).Next(Info.ScanForIdleHarvestersInterval, Info.ScanForIdleHarvestersInterval * 2);
 			var lowEffectDelay = BotRng.For(player, nameof(HarvesterBotModuleCA)).Next(Info.ScanForLowEffectHarvestersInterval);
 			var tick = world.WorldTick;
-			if (scanCooldownsStarted)
-			{
-				HarvesterScanCooldown.Resume(ref scanForIdleHarvestersCooldown, tick, disabledFromTick);
-				HarvesterScanCooldown.Resume(ref scanForLowEffectHarvestersCooldown, tick, disabledFromTick);
-				HarvesterScanCooldown.Resume(ref scanForEnoughHarvestersCooldown, tick, disabledFromTick);
-			}
-			else
-			{
-				scanForIdleHarvestersCooldown = HarvesterScanCooldown.StartInitial(tick, idleDelay);
-				scanForLowEffectHarvestersCooldown = HarvesterScanCooldown.StartInitial(tick, lowEffectDelay);
-				scanForEnoughHarvestersCooldown = HarvesterScanCooldown.StartInitial(tick, Info.ProduceHarvestersInterval);
-				scanCooldownsStarted = true;
-			}
-
-			disabledFromTick = -1;
-		}
-
-		protected override void TraitDisabled(Actor self)
-		{
-			disabledFromTick = scanCooldownsStarted
-				? HarvesterScanCooldown.DisabledFrom(self.World.WorldTick, lastBotTick)
-				: -1;
+			scanForIdleHarvestersCooldown = HarvesterScanCooldown.StartInitial(tick, idleDelay);
+			scanForLowEffectHarvestersCooldown = HarvesterScanCooldown.StartInitial(tick, lowEffectDelay);
+			scanForEnoughHarvestersCooldown = HarvesterScanCooldown.StartInitial(tick, Info.ProduceHarvestersInterval);
 		}
 
 		public void WorldLoaded(World w, WorldRenderer wr)
@@ -267,7 +237,7 @@ namespace OpenRA.Mods.CA.Traits
 		void IBotTick.BotTick(IBot bot)
 		{
 			respondToAttackCooldown--;
-			lastBotTick = BotVisitClock.Of(bot).VisitTick;
+			var tick = BotVisitClock.Of(bot).VisitTick;
 
 			// LC4: the BotLimits cached in TraitEnabled can predate the tier condition (BotLimitsResolver).
 			if (!limitsRechecked)
@@ -299,7 +269,6 @@ namespace OpenRA.Mods.CA.Traits
 			while (harvestersNeedingOrders.TryPop(out var hno) && !searchedForResources)
 				searchedForResources = HarvestIfAble(bot, hno);
 
-			var tick = lastBotTick;
 			if (HarvesterScanCooldown.IsDue(scanForIdleHarvestersCooldown, tick))
 			{
 				FindIdleHarvester();
