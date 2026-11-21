@@ -97,7 +97,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (Info.RepairAllInterval < 0 || !sweep.TryFire(BotVisitClock.Of(bot).VisitTick))
+			if (Info.RepairAllInterval < 0 || !sweep.TryFire(BotVisitClock.Of(bot)))
 				return;
 
 			var tick = world.WorldTick;

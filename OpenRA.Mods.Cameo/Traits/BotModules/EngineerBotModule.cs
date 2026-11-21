@@ -473,7 +473,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						Recheck(bot, leases, a, job, tick);
 			}
 
-			if (captureTicks.TryFire(BotVisitClock.Of(bot).VisitTick))
+			if (captureTicks.TryFire(BotVisitClock.Of(bot)))
 			{
 				Housekeep(bot);
 				QueueCaptureOrders(bot);

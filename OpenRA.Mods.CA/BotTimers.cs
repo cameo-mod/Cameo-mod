@@ -47,21 +47,28 @@ namespace OpenRA.Mods.CA
 		public int Period;
 		public int Coalesced;
 
-		BotPeriod(int due, int period)
+		// Call-counted forms (F1-F3) only count calls the module actually received: a module that was disabled for a
+		// while (RunModules does not tick it) froze its old counter, so the gap is added back to Due (Sol: disabled-gap aging).
+		int lastSeen;
+		bool counted;
+
+		BotPeriod(int due, int period, int seen = 0, bool counted = false)
 		{
 			Due = due;
 			Period = Math.Max(1, period);
 			Coalesced = 0;
+			lastSeen = seen;
+			this.counted = counted;
 		}
 
 		/// <summary>F1 pre-decrement <c>if (--x > 0) return; x = K;</c>. r = registration tick, x0 = counter then.</summary>
-		public static BotPeriod F1(int r, int x0, int k) => new(r + Math.Max(1, x0), Math.Max(1, k));
+		public static BotPeriod F1(int r, int x0, int k) => new(r + Math.Max(1, x0), Math.Max(1, k), r, true);
 
 		/// <summary>F2 post-decrement <c>if (x-- > 0) return; x = K;</c> fires every K + 1 calls.</summary>
-		public static BotPeriod F2(int r, int x0, int k) => new(r + Math.Max(1, x0 + 1), Math.Max(1, k + 1));
+		public static BotPeriod F2(int r, int x0, int k) => new(r + Math.Max(1, x0 + 1), Math.Max(1, k + 1), r, true);
 
 		/// <summary>F3 pre-increment to a threshold <c>if (++c &lt; K) return; c = 0;</c>.</summary>
-		public static BotPeriod F3(int r, int c0, int k) => new(r + Math.Max(1, k - c0), Math.Max(1, k));
+		public static BotPeriod F3(int r, int c0, int k) => new(r + Math.Max(1, k - c0), Math.Max(1, k), r, true);
 
 		/// <summary>F4 residue <c>WorldTick % K == res</c>: the first tick t >= r + 1 with t mod K == res.</summary>
 		public static BotPeriod F4(int r, int k, int res)
@@ -86,6 +93,9 @@ namespace OpenRA.Mods.CA
 		public static bool ResidueHit(int visitTick, int elapsed, int k, int res)
 		{
 			var kk = Math.Max(1, k);
+			if (res < 0 || res >= kk)
+				throw new ArgumentOutOfRangeException(nameof(res), res, $"Residue must be in [0, {kk}).");
+
 			var last = visitTick - (((visitTick - res) % kk) + kk) % kk;
 			return last >= visitTick - Math.Max(1, elapsed) + 1;
 		}
@@ -116,7 +126,7 @@ namespace OpenRA.Mods.CA
 
 		/// <summary>11.2 load: TimerFormat 1 restores due = loadTick + saved exactly; a legacy number is a fresh x0 at r = loadTick (F1).</summary>
 		public static BotPeriod Restore(int loadTick, int saved, int k, bool newFormat) =>
-			newFormat ? new BotPeriod(loadTick + saved, k) : F1(loadTick, saved, k);
+			newFormat ? new BotPeriod(loadTick + saved, k, loadTick, true) : F1(loadTick, saved, k);
 
 		public const int TimerFormatVersion = 1;
 
@@ -134,6 +144,23 @@ namespace OpenRA.Mods.CA
 		}
 
 		public int Remaining(int visitTick) => Math.Max(0, Due - visitTick);
+
+		/// <summary>The visit clock overload: also accounts for visits this module did not receive (disabled gap).</summary>
+		public bool TryFire((int VisitTick, int Elapsed, bool InVisit) clock) => TryFire(clock.VisitTick, clock.Elapsed);
+
+		public bool TryFire(int visitTick, int elapsed)
+		{
+			if (counted)
+			{
+				var previousVisit = visitTick - Math.Max(1, elapsed);
+				if (previousVisit > lastSeen)
+					Due += previousVisit - lastSeen;
+
+				lastSeen = visitTick;
+			}
+
+			return TryFire(visitTick);
+		}
 
 		/// <summary>True when the routine is due at visit v; advances the deadline past v.</summary>
 		public bool TryFire(int visitTick)

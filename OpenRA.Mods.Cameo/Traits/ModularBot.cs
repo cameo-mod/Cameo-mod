@@ -11,7 +11,9 @@
 
 using System;
 using System.Collections.Generic;
+#if CAMEO_DEV_LOGGING
 using System.Diagnostics;
+#endif
 using System.Linq;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
@@ -122,7 +124,21 @@ namespace OpenRA.Mods.Cameo.Traits
 		IBotTick[] tickModules;
 		IBotRespondToAttack[] attackResponseModules;
 
-		readonly Dictionary<IBotTick, (long Ticks, long Count)> moduleTiming = [];
+#if CAMEO_DEV_LOGGING
+		// DEV-only per-module timing (compiled out of release): one entry per IBotTick module, per interval window and
+		// cumulative for the game-end flush. A replayed engine module records one call per replayed BotTick.
+		sealed class ModuleStat
+		{
+			public long Ticks;
+			public long Calls;
+			public long MaxTicks;
+			public long Over10Ms;
+		}
+
+		readonly Dictionary<IBotTick, ModuleStat> moduleWindow = [];
+		readonly Dictionary<IBotTick, ModuleStat> moduleTotal = [];
+		int ticksSinceReport;
+#endif
 
 		// U2: orders whose local routing is observed — see BotOrderDispositionTracker.
 		readonly BotOrderDispositionTracker trackedOrders = new();
@@ -141,8 +157,6 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		/// <summary>Orders dropped because the queue was full (MaxQueuedOrders): the oldest first.</summary>
 		public int DroppedOrders { get; private set; }
-		readonly Stopwatch moduleStopwatch = new();
-		int ticksSinceReport;
 
 		IBotInfo IBot.Info => info;
 		OpenRA.Player IBot.Player => player;
@@ -393,7 +407,6 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (!IsEnabled || self.World.IsLoadingGameSave)
 				return;
 
-			var timed = info.ModulePerfReportIntervalTicks > 0;
 			if (seat != null && seat.Gated)
 			{
 				// STAGGER_DESIGN_06 6.1: BeginVisit -> drain FIFO -> modules -> EndVisit. The order drain below stays every tick (D-1).
@@ -405,7 +418,7 @@ namespace OpenRA.Mods.Cameo.Traits
 							Deliver(queued);
 
 						scheduler.Core.BeginRunning(seat);
-						RunModules(timed);
+						RunModules();
 					}
 
 					scheduler.Core.EndVisit(seat);
@@ -414,14 +427,16 @@ namespace OpenRA.Mods.Cameo.Traits
 			else
 			{
 				using (new PerfSample("bot_tick"))
-					RunModules(timed);
+					RunModules();
 			}
 
-			if (timed && ++ticksSinceReport >= info.ModulePerfReportIntervalTicks)
+#if CAMEO_DEV_LOGGING
+			if (info.ModulePerfReportIntervalTicks > 0 && ++ticksSinceReport >= info.ModulePerfReportIntervalTicks)
 			{
 				ticksSinceReport = 0;
-				ReportModuleTiming(self);
+				ReportModuleTiming(false);
 			}
+#endif
 
 			DrainOrders();
 		}
@@ -471,7 +486,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		};
 
 		// The module loop. A gated bot calls it once per visit; every other bot, every tick.
-		void RunModules(bool timed)
+		void RunModules()
 		{
 			// Every module ticks every tick — timers (scan intervals, countdowns)
 			// live inside BotTick, so an attention budget must not skip whole
@@ -489,50 +504,89 @@ namespace OpenRA.Mods.Cameo.Traits
 					// gated visit replays its call once per elapsed tick. At N = 1 (and for every ungated bot) Elapsed
 					// is 1, so it runs exactly once, as before.
 					var calls = IsGated && EngineReplay.Contains(t.GetType().Name) ? Math.Max(1, Clock.Elapsed) : 1;
-					if (timed)
+#if CAMEO_DEV_LOGGING
+					for (var i = 0; i < calls; i++)
 					{
-						moduleStopwatch.Restart();
-						for (var i = 0; i < calls; i++)
-							t.BotTick(this);
-						moduleStopwatch.Stop();
-
-						moduleTiming.TryGetValue(t, out var acc);
-						moduleTiming[t] = (acc.Ticks + moduleStopwatch.ElapsedTicks, acc.Count + 1);
+						var started = Stopwatch.GetTimestamp();
+						t.BotTick(this);
+						RecordModuleCall(t, Stopwatch.GetTimestamp() - started);
 					}
-					else
-						for (var i = 0; i < calls; i++)
-							t.BotTick(this);
+#else
+					for (var i = 0; i < calls; i++)
+						t.BotTick(this);
+#endif
 
 					issuer = null;
 				}
 			});
 		}
 
-		void ReportModuleTiming(Actor self)
+#if CAMEO_DEV_LOGGING
+		static double Ms(long ticks) => ticks * 1000.0 / Stopwatch.Frequency;
+
+		string ModuleLabel(IBotTick t) => issuerOf.TryGetValue(t, out var n) ? n : t.GetType().Name;
+
+		void RecordModuleCall(IBotTick t, long ticks)
 		{
-			if (moduleTiming.Count == 0)
+			var over10 = ticks * 1000 >= 10 * Stopwatch.Frequency ? 1 : 0;
+			Bump(moduleWindow, t, ticks, over10);
+			Bump(moduleTotal, t, ticks, over10);
+		}
+
+		static void Bump(Dictionary<IBotTick, ModuleStat> map, IBotTick t, long ticks, int over10)
+		{
+			if (!map.TryGetValue(t, out var s))
+				map[t] = s = new ModuleStat();
+
+			s.Ticks += ticks;
+			s.Calls++;
+			s.Over10Ms += over10;
+			if (ticks > s.MaxTicks)
+				s.MaxTicks = ticks;
+		}
+
+		// Into the existing perf log (Logs/perf.log) and, for the window line, the debug log. DEV builds only.
+		// Window (every ModulePerfReportIntervalTicks): one line with the top ModulePerfReportTop modules.
+		// Game end (final = true): one line per module over the whole game.
+		void ReportModuleTiming(bool final)
+		{
+			var map = final ? moduleTotal : moduleWindow;
+			if (map.Count == 0)
 				return;
 
-#if CAMEO_DEV_LOGGING
-			var perModule = moduleTiming
-				.Select(kv => (Name: kv.Key.GetType().Name, Ticks: kv.Value.Ticks, Count: kv.Value.Count))
-				.OrderByDescending(m => m.Ticks)
+			var rows = map
+				.Select(kv => (Name: ModuleLabel(kv.Key), Stat: kv.Value))
+				.OrderByDescending(m => m.Stat.Ticks)
 				.ToList();
 
-			var totalMs = perModule.Sum(m => m.Ticks) * 1000.0 / Stopwatch.Frequency;
-			var calls = perModule.Sum(m => m.Count);
-			var top = string.Join(", ", perModule
-				.Take(info.ModulePerfReportTop)
-				.Select(m => $"{m.Name}={m.Ticks * 1000.0 / Stopwatch.Frequency:F1}ms/{m.Count}t"));
+			var tick = world.WorldTick;
+			var seatNote = seat == null ? "ungated" : seat.Gated ? "gated" : "n1";
+			var head = string.Format(System.Globalization.CultureInfo.InvariantCulture, "BotModuleTiming player={0} tick={1} mode={2}",
+				player.ClientIndex, tick, seatNote);
 
-			var line = string.Format("AI ({0}): module timing over {1} calls, total {2:F1} ms — {3}",
-				player.ClientIndex, calls, totalMs, top);
-			Log.Write("debug", line);
-			TextNotificationsManager.Debug(line);
-#endif
-
-			moduleTiming.Clear();
+			if (final)
+			{
+				foreach (var m in rows)
+					Log.Write("perf", string.Format(System.Globalization.CultureInfo.InvariantCulture,
+						"{0} scope=game module={1} total_ms={2:F1} calls={3} max_ms={4:F2} ge10ms={5}",
+						head, m.Name, Ms(m.Stat.Ticks), m.Stat.Calls, Ms(m.Stat.MaxTicks), m.Stat.Over10Ms));
+			}
+			else
+			{
+				var top = string.Join(", ", rows.Take(info.ModulePerfReportTop).Select(m => string.Format(
+					System.Globalization.CultureInfo.InvariantCulture, "{0}={1:F1}ms/{2}c/max{3:F2}/ge10:{4}",
+					m.Name, Ms(m.Stat.Ticks), m.Stat.Calls, Ms(m.Stat.MaxTicks), m.Stat.Over10Ms));
+				var line = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0} scope=window total_ms={1:F1} calls={2} top: {3}",
+					head, rows.Sum(m => Ms(m.Stat.Ticks)), rows.Sum(m => m.Stat.Calls), top);
+				Log.Write("perf", line);
+				Log.Write("debug", line);
+				moduleWindow.Clear();
+			}
 		}
+
+		/// <summary>Game end: the scheduler (a world trait, so it receives IGameOver) flushes every registered bot.</summary>
+		public void FlushModuleTiming() => ReportModuleTiming(true);
+#endif
 
 		void INotifyDamage.Damaged(Actor self, AttackInfo e)
 		{

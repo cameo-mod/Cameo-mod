@@ -81,7 +81,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (!ticks.TryFire(BotVisitClock.Of(bot).VisitTick))
+			if (!ticks.TryFire(BotVisitClock.Of(bot)))
 				return;
 
 			var player = bot.Player;
