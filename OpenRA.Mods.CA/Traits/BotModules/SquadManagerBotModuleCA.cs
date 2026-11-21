@@ -918,7 +918,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		// Answer ids released while the squad pivoted away — re-picking them inside the
 		// cooldown reproduces the commit/release churn the metric flagged (off at 0).
-		readonly Dictionary<string, int> allyAnswerCooldownUntil = new();
+		readonly Dictionary<string, BotCooldown> allyAnswerCooldowns = new();
 		int nextPrepositionTick;
 		IBotThreatPredictionProvider[] threatPredictionProviders;
 
@@ -984,7 +984,7 @@ namespace OpenRA.Mods.CA.Traits
 		// CN3: the detector-memory providers the stealth squads read. Conditional
 		// (`cn3_stealth_squads`), so enablement is resolved per use, never cached.
 		IBotStealthDoctrine[] stealthDoctrines;
-		readonly Dictionary<SquadCA, int> fastSquadReactedUntil = new();
+		readonly Dictionary<SquadCA, BotCooldown> fastSquadReactedUntil = new();
 		int protectionQuietSinceTick = -1;
 		int minAttackForceDelayTicks;
 		BotMission heldDefendMission;
@@ -2378,9 +2378,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (state == BotMissionAttemptState.Released && reason == BotMissionReasons.Superseded
 				&& Info.AllyAnswerCooldownTicks > 0)
 			{
-				var until = World.WorldTick + Info.AllyAnswerCooldownTicks;
-				allyAnswerCooldownUntil[allyDefendOpen] = until;
-				Player.PlayerActor.TraitOrDefault<BotMissionAttemptTracker>()?.CoolAnswer(allyDefendOpen, until);
+				var cooldown = new BotCooldown();
+				cooldown.Start(World.WorldTick, Info.AllyAnswerCooldownTicks);
+				allyAnswerCooldowns[allyDefendOpen] = cooldown;
+				Player.PlayerActor.TraitOrDefault<BotMissionAttemptTracker>()?.CoolAnswer(allyDefendOpen, cooldown.Due);
 			}
 			allyDefendOpen = null;
 		}
@@ -2421,7 +2422,7 @@ namespace OpenRA.Mods.CA.Traits
 				return false;
 
 			var id = $"{kind}:{requesterKey}:{rally}";
-			if (allyAnswerCooldownUntil.TryGetValue(id, out var until) && World.WorldTick < until)
+			if (allyAnswerCooldowns.TryGetValue(id, out var cooldown) && !cooldown.Ready(World.WorldTick))
 				return true;
 
 			return Player.PlayerActor.TraitOrDefault<BotMissionAttemptTracker>()?.AnswerCooling(id, World.WorldTick) ?? false;
@@ -2445,9 +2446,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (state == BotMissionAttemptState.Released && reason == BotMissionReasons.Superseded
 				&& Info.AllyAnswerCooldownTicks > 0)
 			{
-				var until = World.WorldTick + Info.AllyAnswerCooldownTicks;
-				allyAnswerCooldownUntil[allyAssistOpen] = until;
-				Player.PlayerActor.TraitOrDefault<BotMissionAttemptTracker>()?.CoolAnswer(allyAssistOpen, until);
+				var cooldown = new BotCooldown();
+				cooldown.Start(World.WorldTick, Info.AllyAnswerCooldownTicks);
+				allyAnswerCooldowns[allyAssistOpen] = cooldown;
+				Player.PlayerActor.TraitOrDefault<BotMissionAttemptTracker>()?.CoolAnswer(allyAssistOpen, cooldown.Due);
 			}
 			allyAssistOpen = null;
 		}
@@ -2594,10 +2596,12 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			foreach (var sq in Squads.Where(s => (s.Type == SquadCAType.Guerrilla || s.Type == SquadCAType.Harass) && s.IsValid).ToList())
 			{
-				if (fastSquadReactedUntil.TryGetValue(sq, out var until) && World.WorldTick < until)
+				if (fastSquadReactedUntil.TryGetValue(sq, out var cooldown) && !cooldown.Ready(World.WorldTick))
 					continue;
 
-				fastSquadReactedUntil[sq] = World.WorldTick + Math.Max(1, Info.FastSquadReactionCooldownTicks);
+				var reactionCooldown = new BotCooldown();
+				reactionCooldown.Start(World.WorldTick, Math.Max(1, Info.FastSquadReactionCooldownTicks));
+				fastSquadReactedUntil[sq] = reactionCooldown;
 				var leader = sq.Units[0].Actor;
 				var slowest = sq.Units.Min(u => (u.Actor.Info.TraitInfoOrDefault<MobileInfo>()?.Speed ?? 0) / 1024.0);
 				var distance = (leader.Location - rally).Length;
