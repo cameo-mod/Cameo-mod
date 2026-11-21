@@ -96,17 +96,9 @@
 		Condition: cn3_stealth_squads
 		Bots: fransbot
 
-	# AF-1 (AI_ARCHITECTURE §12.20): army-first building gate for genericbot (the spacing advisor needs no condition:
-	# its building gap is live for genericbot, only its re-ranking is switched, by a field).
-	# Same inert-on-master pattern - the switch arm flips Bots: to the genericbot tier list.
-	GrantConditionOnBotOwner@armyfirst:
-		Condition: army_first
-		Bots: fransbot
-	# PP-1 (AI_ARCHITECTURE §12.23): parallel-queue production width. Provider-seam so the shared
-	# UnitBuilderBotModuleCA@generic instance never hands the width to classic (the A/B control).
-	GrantConditionOnBotOwner@parallelprod:
-		Condition: parallel_production
-		Bots: fransbot
+	# PROD-IDLE G1 (PLAN_03 section 5, PLAN_04 rows 1-2): army_first and parallel_production are no longer
+	# granted. ArmyFirstBotModule mounts on genericbot (all 11 tiers) and ParallelProductionBotModule is removed:
+	# the spend owner's gate + the projected-ratio rule (BotLimits ArmyShareTargetPermille) are the one authority.
 	# The line-of-death fix (unified concave, AI_ARCHITECTURE 12.7a): Rush squads deploy a range-matched
 	# concave arc before the commit, so the wave fires together. The arm flips this to the
 	# genericbot tier list in the increment A/B; default fransbot-only - inert on master.
@@ -207,7 +199,7 @@
 		EngineerCompletionIntervalTicks: 2200
 		RetreatRatioPct: 0
 		ArmyShareTargetPermille: 500
-		ProductionCashReserve: 3000
+		ProductionCashReserve: 3300
 		OverflowCash: 12000
 		RoleMixUnnamedTotalPct: 10
 		RequiresCondition: noobbot
@@ -237,7 +229,7 @@
 		EngineerCompletionIntervalTicks: 2000
 		RetreatRatioPct: 5
 		ArmyShareTargetPermille: 525
-		ProductionCashReserve: 2700
+		ProductionCashReserve: 3000
 		OverflowCash: 11200
 		RoleMixUnnamedTotalPct: 11
 		RequiresCondition: easiestbot
@@ -267,7 +259,7 @@
 		EngineerCompletionIntervalTicks: 1800
 		RetreatRatioPct: 10
 		ArmyShareTargetPermille: 550
-		ProductionCashReserve: 2400
+		ProductionCashReserve: 2700
 		OverflowCash: 10400
 		RoleMixUnnamedTotalPct: 12
 		RequiresCondition: veryeasybot
@@ -297,7 +289,7 @@
 		EngineerCompletionIntervalTicks: 1600
 		RetreatRatioPct: 15
 		ArmyShareTargetPermille: 575
-		ProductionCashReserve: 2100
+		ProductionCashReserve: 2400
 		OverflowCash: 9600
 		RoleMixUnnamedTotalPct: 13
 		RequiresCondition: easybot
@@ -327,7 +319,7 @@
 		EngineerCompletionIntervalTicks: 1400
 		RetreatRatioPct: 20
 		ArmyShareTargetPermille: 600
-		ProductionCashReserve: 1800
+		ProductionCashReserve: 2100
 		OverflowCash: 8800
 		RoleMixUnnamedTotalPct: 14
 		RequiresCondition: mediumbot
@@ -358,7 +350,7 @@
 		EngineerCompletionIntervalTicks: 1200
 		RetreatRatioPct: 25
 		ArmyShareTargetPermille: 625
-		ProductionCashReserve: 1500
+		ProductionCashReserve: 1800
 		OverflowCash: 8000
 		RoleMixUnnamedTotalPct: 15
 		RequiresCondition: hardbot
@@ -389,7 +381,7 @@
 		EngineerCompletionIntervalTicks: 1000
 		RetreatRatioPct: 30
 		ArmyShareTargetPermille: 650
-		ProductionCashReserve: 1200
+		ProductionCashReserve: 1500
 		OverflowCash: 7200
 		RoleMixUnnamedTotalPct: 16
 		RequiresCondition: veryhardbot
@@ -420,7 +412,7 @@
 		EngineerCompletionIntervalTicks: 800
 		RetreatRatioPct: 35
 		ArmyShareTargetPermille: 675
-		ProductionCashReserve: 900
+		ProductionCashReserve: 1200
 		OverflowCash: 6400
 		RoleMixUnnamedTotalPct: 17
 		RequiresCondition: brutalbot
@@ -451,7 +443,7 @@
 		EngineerCompletionIntervalTicks: 600
 		RetreatRatioPct: 40
 		ArmyShareTargetPermille: 700
-		ProductionCashReserve: 600
+		ProductionCashReserve: 900
 		OverflowCash: 5600
 		RoleMixUnnamedTotalPct: 18
 		RequiresCondition: challengerbot
@@ -482,7 +474,7 @@
 		EngineerCompletionIntervalTicks: 400
 		RetreatRatioPct: 45
 		ArmyShareTargetPermille: 725
-		ProductionCashReserve: 300
+		ProductionCashReserve: 600
 		OverflowCash: 4800
 		RoleMixUnnamedTotalPct: 19
 		RequiresCondition: unbeatablebot
@@ -513,7 +505,7 @@
 		EngineerCompletionIntervalTicks: 200
 		RetreatRatioPct: 50
 		ArmyShareTargetPermille: 750
-		ProductionCashReserve: 0
+		ProductionCashReserve: 300
 		OverflowCash: 4000
 		RoleMixUnnamedTotalPct: 20
 		RequiresCondition: cameogodbot
@@ -4182,16 +4174,13 @@ Player:
 	# combat units are below MinArmyUnitsBeforeBuildings with cash above ArmyFirstMinCash (gate off until the switch sets it).
 	# Conyards, refineries, power and the first factory are essential and always pass; the vote is inert until a unit
 	# producer exists, so tech sequencing cannot stall.
-	# `genericbot && army_first`: off on master until the increment A/B arms it (switch group AE).
+	# PROD-IDLE G1: mounted on genericbot (all 11 tiers). The flat cash-poor vote is subsumed by the spend owner's gate and
+	# the projected-ratio rule, so it is the same no-vote value 0 on every tier; the ratio comes from BotLimits.
 	ArmyFirstBotModule:
-		RequiresCondition: genericbot && army_first
-	# PP-1 (AI_ARCHITECTURE §12.23): settings-only IBotProductionWidth provider - UnitBuilder fills up to
-	# MaxQueuesPerCategory idle queues of a category per call, so multiple factories produce in parallel
-	# when income allows. Settings-only like AssaultFormationBotModule: the unit builder keeps the only
-	# order authority. `genericbot && parallel_production`: off on master (switch group AH).
-	ParallelProductionBotModule:
-		RequiresCondition: genericbot && parallel_production
-		MaxQueuesPerCategory: 4
+		RequiresCondition: genericbot
+		ArmyReserveLowCash: 0
+		ArmyReserveHighCash: 0
+		MinArmyUnitsBeforeBuildings: 0
 	# CN3 (crystallized-nexus DeployBotModule port): unified deploy driving for GrantConditionOnDeploy units -
 	# artillery move-into-range/deploy/retreat-from-dead-zone, stat-deployers entrench when idle+threatened,
 	# support deploys near allies, ability deploys fire once and pack. Squad-held units are skipped entirely
@@ -4350,8 +4339,9 @@ Player:
 		# PL-1 (AI_ARCHITECTURE §12.14): while the bot's personality lead trails its target, lean that
 		# personality's budget knobs toward the lead's driver — Steamroller relaxes the unit builder's
 		# cash floors, Rush shortens the squad attack-force delay. The leads are computed on every
-		# snapshot regardless (record-only telemetry); switch group G arms the consumers for the A/B.
-		UsePersonalityLeads: false
+		# snapshot regardless (record-only telemetry); the consumers are armed on every tier
+		# (PROD-IDLE G1, spend part only: the lean scales the P(r) reserve line, never M, E or R).
+		UsePersonalityLeads: true
 		# TC-2d (§12.17): allied bots spread TechRush<->Expansion rests by ClientIndex rank
 		# (switch group W). Inert in 1v1; this module mounts on genericbot only.
 		UseTeamRoleSplit: false
@@ -4395,7 +4385,7 @@ Player:
 		# Maintainer 2026-09-28: scout constantly; keep checking the enemy's probable base (public mpspawn data).
 		EnemySpawnBonus: 20000
 		# PL-2 (§12.14): while the guerrilla lead trails, the effective MaxScouts grows by up to
-		# this many, scaled by the deficit. Inert unless switch G arms UsePersonalityLeads.
+		# this many, scaled by the deficit. Armed on every tier with UsePersonalityLeads.
 		GuerrillaLeadExtraScouts: 2
 		# CA-6 (AI_ARCHITECTURE 12.9): scouts refresh the current main target's footprint first --
 		# the intel that target choice and raid bidding consume. Switch group N_ca6_target_intel.
@@ -4539,8 +4529,9 @@ Player:
 		# unit production and tech structures outrank the civilian buildings the classic
 		# list already had; they also become escort-eligible.
 		PriorityCapturableActorTypes: v19, hosp, fcom, miss, ramiss, rabio, oilb, v19.husk, hosp.husk, bio.husk, miss.husk, fcom.husk, oilb.husk, td_gdi_constructionyard, td_nod_constructionyard, td_gdi_weaponsfactory, td_nod_airstrip, ts_nod_techcenter, ts_gdi_techcenter, cabal_techcenter, tsnttmpl, cabal_core, td_nod_templeofnod, td_nod_templeprime, ra1_allies_constructionyard, ra1_soviets_constructionyard, japan_japaneseconstructionyard, ra1_soviets_warfactory, ra1_soviets_largefactory, ra1_allies_warfactory, japan_japanesewarfactory, ra1_soviets_airfield, ra1_soviets_largesovietairfield, japan_japaneseairfield, ra1_allies_techcenter, ra1_soviets_techcenter, japan_japanesetechcenter, ra2_soviets_constructionyard, ra2_allies_constructionyard, yuri_constructionyard, ra2_soviets_warfactory, ra2_allies_warfactory, yuri_warfactory, ra2_allies_airforcecommandhq, ra2_allies_battlelab, ra2_soviets_battlelab, yuri_battlelab, yuri_lunarcommandcenter, asianalliance_constructionyard, asianalliance_warfactory, asianalliance_battlelab, ixian_constructionyard, ixian_advancedheavyfactory, ixian_ixresearchcenter, ixian_starport, latinsyndicate_syndicateconstructionyard, latinsyndicate_syndicatefactory, naxis_constructionyard, naxis_warfactory, naxis_academy, naxis_techcenter, schwarzermond_constructionyard, schwarzermond_warfactory, schwarzermond_techcenter, futuretech_constructionyard, futuretech_warpgate, futuretech_transmissioncenter, futuretech_battlelab, terran_commandcenter, terran_weaponsfactory, terran_academy, tkm_constructionyard, atreides_constructionyard, corrino_constructionyard, harkonnen_constructionyard, atreides_lightfactory, corrino_lightfactory, harkonnen_lightfactory, atreides_heavyfactory, corrino_heavyfactory, harkonnen_heavyfactory, atreides_hightechfactory, corrino_hightechfactory, harkonnen_hightechfactory, atreides_ixresearchcenter, corrino_ixresearchcenter, harkonnen_ixresearchcenter, atreides_starport, corrino_starport, harkonnen_starport, eden_factory_structure, eden_factory_vehicle, eden_factory_consumer, plymouth_structure_factory, plymouth_factory_vehicle, plymouth_factory_arachnid
-		# FB2: Frans SpecOps demand-capturers — safe targets justify building a specialist (switch T).
-		UseDemandCapturers: false
+		# FB2: Frans SpecOps demand-capturers — safe targets justify building a specialist (armed on every tier; requests pass the unit gate and
+		# CapturerInfantryLimitPct).
+		UseDemandCapturers: true
 		# TC-2e: yield a capture target to the outranking ally's published claim (switch group BF).
 		# Lowest ClientIndex keeps its claim; the loser falls through to another candidate. Inert in 1v1.
 		UseTeamCaptureClaims: false
@@ -4610,9 +4601,9 @@ Player:
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-rush
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
-		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Inert until switch group J_rolemix_production arms UseRoleMix.
+		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Rush: fast cheap pressure — skirmisher/anti-infantry heavy, scouts find the economy kills.
-		UseRoleMix: false
+		UseRoleMix: true
 		RoleMix:
 			frontline: 20
 			skirmisher: 25
@@ -4725,9 +4716,9 @@ Player:
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-turtle
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
-		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Inert until switch group J_rolemix_production arms UseRoleMix.
+		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Turtle: static-defence posture — artillery and anti-air mass behind the frontline screen.
-		UseRoleMix: false
+		UseRoleMix: true
 		RoleMix:
 			frontline: 25
 			artillery: 25
@@ -4836,9 +4827,9 @@ Player:
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-tech
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
-		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Inert until switch group J_rolemix_production arms UseRoleMix.
+		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Tech: quality over quantity — frontline core with the widest air split (gunship/fighter/bomber).
-		UseRoleMix: false
+		UseRoleMix: true
 		RoleMix:
 			frontline: 30
 			artillery: 15
@@ -4949,9 +4940,9 @@ Player:
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-expansion
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
-		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Inert until switch group J_rolemix_production arms UseRoleMix.
+		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Expansion: spread defence of growing territory — balanced core, extra scouts find the fields.
-		UseRoleMix: false
+		UseRoleMix: true
 		RoleMix:
 			frontline: 30
 			anti_air: 15
@@ -5062,9 +5053,9 @@ Player:
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-steamroller
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
-		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Inert until switch group J_rolemix_production arms UseRoleMix.
+		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Steamroller: massed armour push — frontline wall, artillery second line, AA cover.
-		UseRoleMix: false
+		UseRoleMix: true
 		RoleMix:
 			frontline: 40
 			artillery: 20
@@ -5172,9 +5163,9 @@ Player:
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-guerrilla
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
-		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Inert until switch group J_rolemix_production arms UseRoleMix.
+		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Guerrilla: map control — skirmishers and scouts hold ground, gunships punish exposed targets.
-		UseRoleMix: false
+		UseRoleMix: true
 		RoleMix:
 			skirmisher: 25
 			scout: 15
@@ -5570,10 +5561,13 @@ Player:
 		CapturerAllowanceMax: 4
 		UseCompositions: true
 		# UW-1 (AI_ARCHITECTURE §2.8b item 3): derive the UnitsToBuild weights from the enabled
-		# personality's RoleMix x each unit's Versus-weighted strength. Off until the next increment
-		# A/B — switch group I_derived_unit_weights. Inert on classic: it carries no RoleMix and no
-		# IBotUnitRoles provider, so the same @generic instance keeps the yaml table there.
-		UseDerivedUnitWeights: false
+		# personality's RoleMix x each unit's Versus-weighted strength. Armed on every tier (PROD-IDLE G1).
+		# Classic is unaffected: it carries no RoleMix and no IBotUnitRoles provider, so the same
+		# @generic instance keeps the yaml table there.
+		UseDerivedUnitWeights: true
+		# PROD-IDLE G1: the fair producer service replaces the legacy fill loop for genericbot (SwitchCondition above);
+		# classic keeps the legacy loop byte-identically.
+		FairProducerService: true
 		IdleBaseUnitsMaximum: 50
 		ProductionMinCashRequirement: 1000
 		MaximiseProductionCashRequirement: 5000

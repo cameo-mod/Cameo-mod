@@ -97,7 +97,7 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly int ArmyShareTargetPermille = -1;
 
 		[Desc("PROD-IDLE: P(r), the cash a unit or building order must leave in the bank, as one term of the",
-			"general gate C - x >= max(M, E, P) + R (never summed). 300 x (10 - r). Negative: no P term.")]
+			"general gate C - x >= max(M, E, P) + R (never summed). 300 x (11 - r), 3300 .. 300, never 0. Negative: no P term.")]
 		public readonly int ProductionCashReserve = -1;
 
 		[Desc("PROD-IDLE: O(r), banked cash above which spend goes to the overflow rung. 12000 - 800 r.",
