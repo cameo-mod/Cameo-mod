@@ -57,7 +57,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		string personality;
 		int personalityTick = -1;
-		int nextPruneTick;
+		BotCooldown pruneCooldown;
 
 		public SquadDesireBotModule(Actor self, SquadDesireBotModuleInfo info)
 			: base(info)
@@ -90,11 +90,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (IsTraitDisabled || world.WorldTick < nextPruneTick)
+			var tick = world.WorldTick;
+			if (IsTraitDisabled || !ShouldPrune(pruneCooldown, tick))
 				return;
 
-			nextPruneTick = world.WorldTick + Math.Max(1, Info.PruneIntervalTicks);
-			var cutoff = world.WorldTick - Math.Max(0, Info.PruneAfterTicks);
+			ReloadPrune(ref pruneCooldown, tick, Info.PruneIntervalTicks);
+			var cutoff = tick - Math.Max(0, Info.PruneAfterTicks);
 			foreach (var kv in states)
 				if (kv.Value.LastSeenTick < cutoff)
 					pruneScratch.Add(kv.Key);
@@ -103,5 +104,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				states.Remove(dead);
 			pruneScratch.Clear();
 		}
+
+		internal static bool ShouldPrune(BotCooldown cooldown, int tick) => cooldown.Ready(tick);
+
+		internal static void ReloadPrune(ref BotCooldown cooldown, int tick, int interval) =>
+			cooldown.Start(tick, Math.Max(1, interval));
 	}
 }
