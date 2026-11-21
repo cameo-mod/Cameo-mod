@@ -162,6 +162,11 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		/// <summary>Orders dropped because the queue was full (MaxQueuedOrders): the oldest first.</summary>
 		public int DroppedOrders { get; private set; }
+#if CAMEO_DEV_LOGGING
+		// DEV only (STAGGER_EVAL_PLAN_04 F-B): defend trigger -> reaction records. Trigger stamped at the damage notification
+		// (source side, before any gating); reaction = first order queued by a squad/defence module afterwards.
+		DefendReactionTracker defendReactions;
+#endif
 
 		IBotInfo IBot.Info => info;
 		OpenRA.Player IBot.Player => player;
@@ -262,6 +267,9 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			IsEnabled = true;
 			player = p;
+#if CAMEO_DEV_LOGGING
+			defendReactions = new DefendReactionTracker(p.InternalName, line => Log.Write("perf", line));
+#endif
 			tickModules = p.PlayerActor.TraitsImplementing<IBotTick>().ToArray();
 			actionBudget = p.PlayerActor.TraitsImplementing<IBotActionBudget>().FirstEnabledTraitOrDefault();
 			attackResponseModules = p.PlayerActor.TraitsImplementing<IBotRespondToAttack>().ToArray();
@@ -324,6 +332,9 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			orders.AddLast(item);
 			NotifyDisposition(false, item.Order, BotOrderOutcome.LocallyQueued);
+#if CAMEO_DEV_LOGGING
+			defendReactions?.Reaction(world.WorldTick, BotIssuer.TypeOf(item.Issuer));
+#endif
 		}
 
 		/// <summary>
@@ -426,6 +437,12 @@ namespace OpenRA.Mods.Cameo.Traits
 		{
 			if (!IsEnabled || self.World.IsLoadingGameSave)
 				return;
+
+#if CAMEO_DEV_LOGGING
+			defendReactions?.Expire(world.WorldTick);
+			if (defendReactions != null && world.WorldTick % DefendReactionTracker.NearBaseProbeTicks == 0)
+				ProbeEnemyNearBase();
+#endif
 
 			// QW-B: the family roster is built at the first bot tick, once every bot has activated.
 			if (info.SlotPhasedTimers)
@@ -610,12 +627,59 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		/// <summary>Game end: the scheduler (a world trait, so it receives IGameOver) flushes every registered bot.</summary>
 		public void FlushModuleTiming() => ReportModuleTiming(true);
+
+		// DEV only (F-B enemy_near_base): every NearBaseProbeTicks, the lowest-id visible armed enemy unit within NearBaseCells of the
+		// base anchor (this player's lowest-id BaseProvider building, the construction yard) opens a trigger. Read only: no RNG, no
+		// order, an id-minimum pick so the result does not depend on enumeration order. Ungated: runs every tick of the bot, not
+		// only on its visit.
+		void ProbeEnemyNearBase()
+		{
+			Actor anchor = null;
+			foreach (var a in world.ActorsHavingTrait<BaseProvider>())
+				if (a.Owner == player && a.IsInWorld && !a.IsDead && (anchor == null || a.ActorID < anchor.ActorID))
+					anchor = a;
+
+			if (anchor == null)
+				return;
+
+			Actor intruder = null;
+			foreach (var e in world.FindActorsInCircle(anchor.CenterPosition, WDist.FromCells(DefendReactionTracker.NearBaseCells)))
+			{
+				if (!e.IsInWorld || e.IsDead || e.Owner == null || e.Owner.NonCombatant || player.RelationshipWith(e.Owner) != PlayerRelationship.Enemy)
+					continue;
+
+				if (!e.Info.HasTraitInfo<AttackBaseInfo>() || e.Info.HasTraitInfo<BuildingInfo>() || !e.CanBeViewedByPlayer(player))
+					continue;
+
+				if (intruder == null || e.ActorID < intruder.ActorID)
+					intruder = e;
+			}
+
+			if (intruder != null)
+				defendReactions.Trigger(world.WorldTick, DefendReactionTracker.EnemyNearBase, intruder.ActorID, intruder.Location.X, intruder.Location.Y);
+		}
+
+		/// <summary>Game end: still-open defend triggers are written as censored (not none), see DefendReactionTracker.Flush.
+		/// Called from the scheduler's GameOver, so only registered (round-robin family) bots flush; a classic bot's open triggers are
+		/// not written. Accepted (Opus): the evaluation uses family bots only.</summary>
+		public void FlushDefendReactions() => defendReactions?.Flush(world.WorldTick);
 #endif
 
 		void INotifyDamage.Damaged(Actor self, AttackInfo e)
 		{
 			if (!IsEnabled || self.World.IsLoadingGameSave)
 				return;
+
+#if CAMEO_DEV_LOGGING
+			if (defendReactions != null && e.Damage != null && e.Damage.Value > 0 && e.Attacker != null && !e.Attacker.Disposed
+				&& e.Attacker.Owner != null && !e.Attacker.Owner.NonCombatant
+				&& player.RelationshipWith(e.Attacker.Owner) == PlayerRelationship.Enemy)
+				defendReactions.Trigger(world.WorldTick,
+					self.Info.HasTraitInfo<BuildingInfo>() ? DefendReactionTracker.BuildingAttacked
+					: self.Info.HasTraitInfo<HarvesterInfo>() ? DefendReactionTracker.HarvesterAttacked
+					: DefendReactionTracker.UnitAttacked,
+					self.ActorID, self.Location.X, self.Location.Y);
+#endif
 
 			if (seat == null || !seat.Gated)
 			{

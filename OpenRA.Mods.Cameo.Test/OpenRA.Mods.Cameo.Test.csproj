@@ -4,6 +4,10 @@
     <IsPublishable>false</IsPublishable>
   </PropertyGroup>
   <Import Project="../engine/Directory.Build.props" />
+  <!-- After the engine props: they reset DefineConstants for Debug builds. -->
+  <PropertyGroup Condition="'$(CameoDevLogging)' != 'true'">
+    <DefineConstants>$(DefineConstants);CAMEO_DEV_TEST_COMPILE</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../OpenRA.Mods.CA/OpenRA.Mods.CA.csproj" />
     <ProjectReference Include="../OpenRA.Mods.Cameo/OpenRA.Mods.Cameo.csproj" />
@@ -12,6 +16,9 @@
     <Compile Include="../OpenRA.Mods.Cameo.Dev/AiEconomyHealthLogWriter.cs" Link="Dev/AiEconomyHealthLogWriter.cs" />
     <Compile Include="../OpenRA.Mods.Cameo.Dev/AiLogFileAppender.cs" Link="Dev/AiLogFileAppender.cs" />
     <Compile Include="../OpenRA.Mods.Cameo.Dev/AiLogWriteQueue.cs" Link="Dev/AiLogWriteQueue.cs" />
+    <Compile Include="../OpenRA.Mods.Cameo.Dev/DevCashBonus.cs" Link="Dev/DevCashBonus.cs" />
+    <!-- DEV-only pure class: guarded out of the release Cameo assembly, compiled into the test assembly only when the Cameo assembly does not have it. -->
+    <Compile Include="../OpenRA.Mods.Cameo/Traits/DefendReactionTracker.cs" Link="Dev/DefendReactionTracker.cs" Condition="'$(CameoDevLogging)' != 'true'" />
     <ProjectReference Include="../OpenRA.Mods.Cameo.Unified/OpenRA.Mods.Cameo.Unified.csproj" />
     <ProjectReference Include="../OpenRA.Mods.Fransbot/OpenRA.Mods.Fransbot.csproj" />
     <ProjectReference Include="../engine/OpenRA.Test/OpenRA.Test.csproj" />
@@ -37,6 +44,7 @@
     <None Include="MissionBuildLineOracle.cs" Link="source/MissionBuildLineOracle.cs" CopyToOutputDirectory="Always" />
     <None Include="../mods/cameo/mod.yaml" Link="source/packaging/cameo-mod.yaml" CopyToOutputDirectory="Always" />
     <None Include="../mods/cameo/rules/world.yaml" Link="source/packaging/world.yaml" CopyToOutputDirectory="Always" />
+    <None Include="../mods/cameo/rules/player.yaml" Link="source/packaging/player.yaml" CopyToOutputDirectory="Always" />
     <None Include="../mods/cameo/rules/dev/logging.yaml" Link="source/packaging/dev-logging.yaml" CopyToOutputDirectory="Always" />
     <None Include="../Directory.Build.targets" Link="source/packaging/Directory.Build.targets" CopyToOutputDirectory="Always" />
     <None Include="../CameoDev.proj" Link="source/packaging/CameoDev.proj" CopyToOutputDirectory="Always" />

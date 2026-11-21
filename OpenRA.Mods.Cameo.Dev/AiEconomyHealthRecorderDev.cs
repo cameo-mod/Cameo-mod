@@ -26,7 +26,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		public override object Create(ActorInitializer init) => new AiEconomyHealthRecorderDev(init.Self);
 	}
 
-	public sealed class AiEconomyHealthRecorderDev : IBotBuildQueueObserver, INotifyResourceAccepted
+	public sealed class AiEconomyHealthRecorderDev : IBotBuildQueueObserver, INotifyResourceAccepted, ITick
 	{
 		readonly Actor self;
 		AiEconomyHealthState state;
@@ -56,7 +56,48 @@ namespace OpenRA.Mods.Cameo.Traits
 		// built resolves to null — fail-closed UNKNOWN, never a wrong binding.
 		IReadOnlyDictionary<(uint Producer, string Group), string> queueIndex;
 
+		// STAGGER_EVAL_PLAN_04 F-A: world tick at which each own building-queue head was FIRST seen Done by this ungated
+		// per-tick observer (the bot's own Ready stamp is taken inside the gated bot tick). Keyed by producer, queue group and
+		// item name; an entry lives only while that item is the Done head, so the map is bounded by the queue count.
+		readonly Dictionary<(uint Producer, string Queue, string Item), int> trueReady = new();
+		readonly List<(uint Producer, string Queue, string Item)> trueReadyKeys = new();
+		readonly HashSet<(uint Producer, string Queue, string Item)> trueReadyNow = new();
+
 		public AiEconomyHealthRecorderDev(Actor self) { this.self = self; }
+
+		// DEV only: no orders, no RNG, no gameplay state; reads queue heads and writes this recorder's own dictionary.
+		void ITick.Tick(Actor actor)
+		{
+			if (state == null || finished)
+				return;
+
+			var tick = self.World.WorldTick;
+			trueReadyNow.Clear();
+			foreach (var pair in self.World.ActorsWithTrait<ProductionQueue>())
+			{
+				if (pair.Actor.Owner != self.Owner || !groups.Contains(pair.Trait.Info.Group))
+					continue;
+
+				var head = pair.Trait.CurrentItem();
+				if (head == null || !head.Done)
+					continue;
+
+				var key = (pair.Actor.ActorID, pair.Trait.Info.Group, head.Item);
+				trueReadyNow.Add(key);
+				trueReady.TryAdd(key, tick);
+			}
+
+			if (trueReady.Count == trueReadyNow.Count)
+				return;
+
+			trueReadyKeys.Clear();
+			foreach (var key in trueReady.Keys)
+				if (!trueReadyNow.Contains(key))
+					trueReadyKeys.Add(key);
+
+			foreach (var key in trueReadyKeys)
+				trueReady.Remove(key);
+		}
 
 		internal void Activate(string uid, AiEconomyHealthLogWriter healthWriter, AiEconomyHealthLogWriter rawWriter)
 		{
@@ -193,13 +234,27 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (state == null || finished)
 				return;
 			FlushAccepted(transition.Tick);
-			WriteRaw("queue-observation", transition.Tick, new
+			if (transition.Kind is BotQueueTransitionKind.Ready or BotQueueTransitionKind.PlacementOrdered)
 			{
-				item = transition.ItemId, queue = transition.Queue, producer = transition.ProducerActorId,
-				episode = transition.EpisodeId, kind = transition.Kind.ToString(), reason = transition.Reason.ToString(),
-				player_active = transition.PlayerActive, producer_live = transition.ProducerLive,
-				cancellation_class = transition.CancellationClass.ToString(), category = transition.Category.ToString()
-			});
+				// F-A: true_ready_tick = first ungated observation of Done (-1 when this observer never saw it Done).
+				var trueTick = trueReady.TryGetValue((transition.ProducerActorId, transition.Queue, transition.ItemId), out var seen) ? seen : -1;
+				WriteRaw("queue-observation", transition.Tick, new
+				{
+					item = transition.ItemId, queue = transition.Queue, producer = transition.ProducerActorId,
+					episode = transition.EpisodeId, kind = transition.Kind.ToString(), reason = transition.Reason.ToString(),
+					player_active = transition.PlayerActive, producer_live = transition.ProducerLive,
+					cancellation_class = transition.CancellationClass.ToString(), category = transition.Category.ToString(),
+					true_ready_tick = trueTick
+				});
+			}
+			else
+				WriteRaw("queue-observation", transition.Tick, new
+				{
+					item = transition.ItemId, queue = transition.Queue, producer = transition.ProducerActorId,
+					episode = transition.EpisodeId, kind = transition.Kind.ToString(), reason = transition.Reason.ToString(),
+					player_active = transition.PlayerActive, producer_live = transition.ProducerLive,
+					cancellation_class = transition.CancellationClass.ToString(), category = transition.Category.ToString()
+				});
 			var evidence = AiEconomyQueueEvidence.Classify(in transition,
 				resolvedEpisodes.Contains(transition.EpisodeId));
 			if (evidence == EconomyQueueEvidenceKind.Unknown)
