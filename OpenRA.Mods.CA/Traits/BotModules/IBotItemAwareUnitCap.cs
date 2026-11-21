@@ -24,4 +24,27 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>True when producing <paramref name="actor"/> would add to the count this cap limits.</summary>
 		bool CountsAgainstCap(ActorInfo actor);
 	}
+
+	public static class ItemAwareCapCA
+	{
+		/// <summary>
+		/// True when one of the caps that are pausing right now counts the item. No pausing cap = never capped. An item
+		/// the ruleset does not know (<paramref name="item"/> null) is treated as counted: fail closed, the legacy full
+		/// stop is what such an item got before.
+		/// </summary>
+		public static bool CappedOut(IBotItemAwareUnitCap[] pausing, ActorInfo item)
+		{
+			if (pausing.Length == 0)
+				return false;
+
+			if (item == null)
+				return true;
+
+			foreach (var cap in pausing)
+				if (cap.CountsAgainstCap(item))
+					return true;
+
+			return false;
+		}
+	}
 }

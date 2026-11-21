@@ -84,13 +84,20 @@ namespace OpenRA.Mods.Cameo.Traits
 		}
 
 		/// <summary>
-		/// The same predicate <see cref="ComputePaused"/> counts with, on the ActorInfo that would be produced:
-		/// positionable (units, not buildings), not a harvester while <c>IgnoreHarvesters</c>, not an ignored name.
+		/// The ONE exclusion rule: resource collectors (while <c>IgnoreHarvesters</c>) and the ignored names never count
+		/// against the budget. <see cref="ComputePaused"/> applies it to live actors, <see cref="Counts"/> to an item
+		/// that is about to be produced.
+		/// </summary>
+		public static bool Excluded(BotGlobalUnitBudgetInfo info, ActorInfo actor) =>
+			(info.IgnoreHarvesters && actor.HasTraitInfo<HarvesterInfo>()) || info.IgnoredActorTypes.Contains(actor.Name);
+
+		/// <summary>
+		/// True when producing <paramref name="actor"/> adds to the count: positionable (a unit, not a building) and not
+		/// <see cref="Excluded"/>. The live count (<see cref="ComputePaused"/>) filters on the actor-level IPositionable
+		/// trait instead, so only the exclusion rule is shared.
 		/// </summary>
 		public static bool Counts(BotGlobalUnitBudgetInfo info, ActorInfo actor) =>
-			actor.HasTraitInfo<IPositionableInfo>()
-			&& !(info.IgnoreHarvesters && actor.HasTraitInfo<HarvesterInfo>())
-			&& !info.IgnoredActorTypes.Contains(actor.Name);
+			actor.HasTraitInfo<IPositionableInfo>() && !Excluded(info, actor);
 
 		bool IBotItemAwareUnitCap.CountsAgainstCap(ActorInfo actor) => Counts(Info, actor);
 
@@ -135,19 +142,14 @@ namespace OpenRA.Mods.Cameo.Traits
 			// Count this bot's live mobile units (IPositionable excludes buildings) - same notion of
 			// "army" the unit builders use. Stop as soon as we reach the cap; no need to count further.
 			var count = 0;
-			var ignoreNames = Info.IgnoredActorTypes.Count > 0;
 			foreach (var a in world.ActorsHavingTrait<IPositionable>())
 			{
 				if (a.Owner != player || a.IsDead)
 					continue;
 
 				// Resource collectors don't count against the combat budget, so a lower budget
-				// never starves the economy. (Counts() states the same rule for an ActorInfo; this loop keeps the
-				// cheaper per-actor form and must stay in step with it.)
-				if (Info.IgnoreHarvesters && a.Info.HasTraitInfo<HarvesterInfo>())
-					continue;
-
-				if (ignoreNames && Info.IgnoredActorTypes.Contains(a.Info.Name))
+				// never starves the economy; the rule is shared with the item-aware cap (Excluded).
+				if (Excluded(Info, a.Info))
 					continue;
 
 				// When not logging, stop as soon as we reach the cap - no need to count further.

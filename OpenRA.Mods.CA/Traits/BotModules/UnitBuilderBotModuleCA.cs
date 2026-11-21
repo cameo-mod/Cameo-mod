@@ -1180,6 +1180,10 @@ namespace OpenRA.Mods.CA.Traits
 		// PLAN_03 section 2.2: cash that EVERY queued item of the player (units, buildings, defences) has not paid yet
 		// (RemainingCost per item, as TF-2's UpdateMobileReserve counts it). One scan per world tick: a pass and its
 		// categories run inside one tick, and this pass's own orders are in the batch, never in this figure.
+		// Staleness bound (Code Monkey F1, option b): orders are resolved after every module's tick, so the queues this
+		// scan reads are the same for all modules in a tick; what it cannot see are the orders ANOTHER module (the base
+		// builder, via the K6 vote) issued earlier in the same tick, i.e. at most the cost of that module's orders of
+		// this one tick. The owner's per-tick commitment ledger closes it (G1b, PLAN_03 section 2.4).
 		long UnpaidQueuedCost()
 		{
 			if (cachedUnpaidTick != world.WorldTick)
@@ -1208,24 +1212,11 @@ namespace OpenRA.Mods.CA.Traits
 			return reached?.ToArray() ?? [];
 		}
 
-		// True when a pausing cap counts this item. A name the ruleset does not know is treated as counted (fail closed:
-		// the legacy full stop is what such an item got before).
-		bool CappedOut(string name)
-		{
-			if (!world.Map.Rules.Actors.TryGetValue(name, out var info))
-				return true;
+		// True when a pausing cap counts this item; a name the ruleset does not know counts as capped (ItemAwareCapCA).
+		bool CappedOut(string name) =>
+			ItemAwareCapCA.CappedOut(cappedOut, world.Map.Rules.Actors.TryGetValue(name, out var info) ? info : null);
 
-			return CappedOut(info);
-		}
-
-		bool CappedOut(ActorInfo info)
-		{
-			foreach (var cap in cappedOut)
-				if (cap.CountsAgainstCap(info))
-					return true;
-
-			return false;
-		}
+		bool CappedOut(ActorInfo info) => ItemAwareCapCA.CappedOut(cappedOut, info);
 
 		// PROD-IDLE K5 (PLAN_03 section 2.3): a unit order of the fair path passes the general gate
 		// C - x >= max(M, E, P(r)) + R. M, E and R are 0 here: no owner is mounted and units are what M reserves for.
