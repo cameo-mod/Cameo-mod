@@ -555,6 +555,14 @@ namespace OpenRA.Mods.CA.Traits
 
 		public static void StartQueueSweepCooldown(ref BotCooldown cooldown, int tick, int delay) => cooldown.Start(tick, delay);
 
+		public static int QueueSweepPauseFromTick(int transitionTick, int lastVisitTick) => Math.Max(transitionTick, lastVisitTick + 1);
+
+		public static void ResumeQueueSweepCooldown(ref BotCooldown cooldown, bool started, int tick, int disabledFromTick)
+		{
+			if (started && disabledFromTick >= 0)
+				cooldown.Freeze(Math.Max(0, tick - disabledFromTick));
+		}
+
 		public static void MakeQueueSweepDue(ref BotCooldown cooldown, int tick)
 		{
 			if (cooldown.Due > tick)

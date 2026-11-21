@@ -651,6 +651,8 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> ProductionBuildings;
 
 		BotLimits botLimits;
+		int queueSweepDisabledFromTick = -1;
+		int lastBotTick = -1;
 		int refineryLimit;
 		IBotScaleTargets[] scaleTargets;
 		IBotBuildOrderKnobs[] buildOrderKnobs;
@@ -762,12 +764,23 @@ namespace OpenRA.Mods.CA.Traits
 
 		protected override void TraitEnabled(Actor self)
 		{
+			foreach (var builder in builders)
+				if (builder != null)
+					BaseBuilderQueueEvalCA.ResumeQueueSweepCooldown(ref builder.WaitCooldown,
+						builder.WaitCooldownStarted, world.WorldTick, queueSweepDisabledFromTick);
+
+			queueSweepDisabledFromTick = -1;
 			RefreshBotLimits();
 
 			// Avoid all AIs reevaluating assignments on the same tick, randomize their initial evaluation delay.
 			assignRallyPoints = BotPeriod.F1(world.WorldTick, BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(0, Info.AssignRallyPointsInterval), Math.Max(2, Info.AssignRallyPointsInterval));
 			checkBestResourceLocation = BotPeriod.F1(world.WorldTick, BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(0, Info.CheckBestResourceLocationInterval), Info.CheckBestResourceLocationInterval);
 			sellRefinery = BotPeriod.F1(world.WorldTick, Info.SellRefineryInterval < 0 ? 0 : BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(0, Info.SellRefineryInterval), Info.SellRefineryInterval);
+		}
+
+		protected override void TraitDisabled(Actor self)
+		{
+			queueSweepDisabledFromTick = BaseBuilderQueueEvalCA.QueueSweepPauseFromTick(world.WorldTick, lastBotTick);
 		}
 
 		void IBotPositionsUpdated.UpdatedBaseCenter(CPos newLocation)
@@ -784,6 +797,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			lastBotTick = world.WorldTick;
+
 			if (firstTick)
 			{
 				// Conditional traits are initialized after INotifyCreated, so resolve difficulty limits again here.

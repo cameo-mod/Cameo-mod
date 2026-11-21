@@ -26,6 +26,7 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		public readonly string Category;
 		public BotCooldown WaitCooldown;
+		public bool WaitCooldownStarted { get; private set; }
 
 		readonly BaseBuilderBotModuleCA baseBuilder;
 		readonly World world;
@@ -880,6 +881,7 @@ namespace OpenRA.Mods.CA.Traits
 				waitTicks = DivideByKnob(waitTicks, knobs.KnobMilli(BuildOrderKnob.Tempo));
 
 			BaseBuilderQueueEvalCA.StartQueueSweepCooldown(ref WaitCooldown, world.WorldTick, waitTicks);
+			WaitCooldownStarted = true;
 		}
 
 		bool TickQueue(IBot bot, ProductionQueue queue)
