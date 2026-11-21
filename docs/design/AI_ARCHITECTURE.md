@@ -603,7 +603,7 @@ at rules load from the actors that are loaded, and a pack writes only a delibera
    (default **false**; switch group `I_derived_unit_weights`) derives the table as
    `max(1, round(share[r] x strength[u] / mean strength of the candidates sharing r))` where `r` is
    the unit's primary role (`IBotUnitRoles.PrimaryRoleOf`, combat taxonomy only), `share[r]` is the
-   `RoleMix` value or `RoleMixRoleFloorPct`, and `strength[u]` is the best weapon's
+   `RoleShares` value (RoleMix entries scaled into 100 - `RoleMixUnnamedTotalPct`, unnamed buildable roles splitting `RoleMixUnnamedTotalPct`), and `strength[u]` is the best weapon's
    `DamagePerTick x mean(Versus)/100` floored at 1 (`BotUnitProfiles`, own-side stats only — no
    enemy enumerated). The yaml rows stay the membership gate and pass through verbatim for unroled
    units; an active composition still wins; flag off, absent mix or absent provider return the yaml

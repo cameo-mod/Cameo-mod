@@ -440,6 +440,10 @@ namespace OpenRA.Mods.CA.Traits
 
 		int CounterWeight => botLimits?.Info.AdaptiveCounterWeight ?? 0;
 
+		// PROD-IDLE_PLAN_05: the TOTAL share of all unnamed buildable roles together, on the difficulty
+		// line (10 + r). Negative (line not written) = no unnamed share. Read by both RoleMix consumers.
+		int RoleMixUnnamedPct => botLimits != null ? botLimits.Info.RoleMixUnnamedTotalPct : -1;
+
 		int MaximiseProductionCash => botLimits != null && botLimits.Info.MaximiseProductionCashRequirement >= 0
 			? botLimits.Info.MaximiseProductionCashRequirement : Info.MaximiseProductionCashRequirement;
 
@@ -1569,8 +1573,10 @@ namespace OpenRA.Mods.CA.Traits
 		// CA-3 (AI_ARCHITECTURE.md 12.5): the enabled personality's RoleMix is a target
 		// army composition by role, in percent of own mobile combat units. Each pick
 		// fills the largest deficit — counter production still gets first refusal, and
-		// a fully satisfied mix falls through to the proportional pick. Roles the mix
-		// does not name get RoleMixRoleFloorPct whenever this queue can serve them.
+		// a fully satisfied mix falls through to the proportional pick. The unnamed roles
+		// this queue can serve share RoleMixUnnamedTotalPct between them (transport and
+		// air_transport excluded); the named roles keep their relative weights inside the
+		// rest (PROD-IDLE_PLAN_05, DerivedUnitWeights.RoleShares: one function for both consumers).
 		// The provider resolves lazily: BotUnitRoles is a genericbot-gated
 		// ConditionalTrait whose condition settles after Created.
 		ActorInfo ChooseRoleDeficit(IEnumerable<ActorInfo> buildableThings, Dictionary<string, int> unitsToBuildShares, bool excludeLimited,
@@ -1603,13 +1609,14 @@ namespace OpenRA.Mods.CA.Traits
 			// The deficit domain is the combat taxonomy: list/doctrine roles (guerrilla,
 			// firesupport, navalunit, ...) and the building target tags never become
 			// mix dimensions — a unit counts toward exactly one primary role.
-			foreach (var role in mix.Keys
-				.Concat(roles.RoleMembers.Keys)
-				.Where(r => BotUnitRole.CombatRoles.Contains(r))
-				.Distinct(StringComparer.Ordinal)
-				.Select(r => (Role: r, Target: mix.TryGetValue(r, out var t) ? t : manager.Info.RoleMixRoleFloorPct))
+			// The gate for the unnamed set is the table this pick is made from, the same table the
+			// options below are filtered by. S = 0 gives an empty set and null, as an empty mix does.
+			var roleShares = DerivedUnitWeights.RoleShares(mix, RoleMixUnnamedPct, roles, unitsToBuildShares.ContainsKey);
+			foreach (var role in roleShares
+				.Select(kv => (Role: kv.Key, Target: kv.Value))
 				.Where(rt => rt.Target > 0)
-				.OrderByDescending(rt => rt.Target - 100.0 * counts.GetValueOrDefault(rt.Role) / Math.Max(1, total)))
+				.OrderByDescending(rt => rt.Target - 100.0 * counts.GetValueOrDefault(rt.Role) / Math.Max(1, total))
+				.ThenBy(rt => rt.Role, StringComparer.Ordinal))
 			{
 				var members = roles.RoleMembers.GetValueOrDefault(role.Role);
 				if (members == null || members.Count == 0)
@@ -1669,7 +1676,7 @@ namespace OpenRA.Mods.CA.Traits
 				roles = unitRoles ??= player.PlayerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
 
 			return derivedUnitWeights.Select(Info.UseDerivedUnitWeights, compositionWeights, Info.UnitsToBuild,
-				mix, manager?.Info.RoleMixRoleFloorPct ?? 0, roles, DerivedUnitStrength);
+				mix, RoleMixUnnamedPct, roles, DerivedUnitStrength);
 		}
 
 		// A candidate's strength is read off its own type profile — no enemy is ever

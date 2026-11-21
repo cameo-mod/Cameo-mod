@@ -206,6 +206,10 @@
 		CapturerInfantryLimitPct: 0
 		EngineerCompletionIntervalTicks: 2200
 		RetreatRatioPct: 0
+		ArmyShareTargetPermille: 500
+		ProductionCashReserve: 3000
+		OverflowCash: 12000
+		RoleMixUnnamedTotalPct: 10
 		RequiresCondition: noobbot
 	BotLimits@easiest:
 		ProductionTypeLimit: 2
@@ -232,6 +236,10 @@
 		CapturerInfantryLimitPct: 1
 		EngineerCompletionIntervalTicks: 2000
 		RetreatRatioPct: 5
+		ArmyShareTargetPermille: 525
+		ProductionCashReserve: 2700
+		OverflowCash: 11200
+		RoleMixUnnamedTotalPct: 11
 		RequiresCondition: easiestbot
 	BotLimits@veryeasy:
 		ProductionTypeLimit: 3
@@ -258,6 +266,10 @@
 		CapturerInfantryLimitPct: 2
 		EngineerCompletionIntervalTicks: 1800
 		RetreatRatioPct: 10
+		ArmyShareTargetPermille: 550
+		ProductionCashReserve: 2400
+		OverflowCash: 10400
+		RoleMixUnnamedTotalPct: 12
 		RequiresCondition: veryeasybot
 	BotLimits@easy:
 		ProductionTypeLimit: 4
@@ -284,6 +296,10 @@
 		CapturerInfantryLimitPct: 3
 		EngineerCompletionIntervalTicks: 1600
 		RetreatRatioPct: 15
+		ArmyShareTargetPermille: 575
+		ProductionCashReserve: 2100
+		OverflowCash: 9600
+		RoleMixUnnamedTotalPct: 13
 		RequiresCondition: easybot
 	BotLimits@medium:
 		ProductionTypeLimit: 5
@@ -310,6 +326,10 @@
 		CapturerInfantryLimitPct: 4
 		EngineerCompletionIntervalTicks: 1400
 		RetreatRatioPct: 20
+		ArmyShareTargetPermille: 600
+		ProductionCashReserve: 1800
+		OverflowCash: 8800
+		RoleMixUnnamedTotalPct: 14
 		RequiresCondition: mediumbot
 	BotLimits@hard:
 		ProductionTypeLimit: 6
@@ -337,6 +357,10 @@
 		CapturerInfantryLimitPct: 5
 		EngineerCompletionIntervalTicks: 1200
 		RetreatRatioPct: 25
+		ArmyShareTargetPermille: 625
+		ProductionCashReserve: 1500
+		OverflowCash: 8000
+		RoleMixUnnamedTotalPct: 15
 		RequiresCondition: hardbot
 	BotLimits@veryhard:
 		ProductionTypeLimit: 7
@@ -364,6 +388,10 @@
 		CapturerInfantryLimitPct: 6
 		EngineerCompletionIntervalTicks: 1000
 		RetreatRatioPct: 30
+		ArmyShareTargetPermille: 650
+		ProductionCashReserve: 1200
+		OverflowCash: 7200
+		RoleMixUnnamedTotalPct: 16
 		RequiresCondition: veryhardbot
 	BotLimits@brutal:
 		ProductionTypeLimit: 8
@@ -391,6 +419,10 @@
 		CapturerInfantryLimitPct: 7
 		EngineerCompletionIntervalTicks: 800
 		RetreatRatioPct: 35
+		ArmyShareTargetPermille: 675
+		ProductionCashReserve: 900
+		OverflowCash: 6400
+		RoleMixUnnamedTotalPct: 17
 		RequiresCondition: brutalbot
 	BotLimits@challenger:
 		ProductionTypeLimit: 9
@@ -418,6 +450,10 @@
 		CapturerInfantryLimitPct: 8
 		EngineerCompletionIntervalTicks: 600
 		RetreatRatioPct: 40
+		ArmyShareTargetPermille: 700
+		ProductionCashReserve: 600
+		OverflowCash: 5600
+		RoleMixUnnamedTotalPct: 18
 		RequiresCondition: challengerbot
 	BotLimits@unbeatable:
 		ProductionTypeLimit: 10
@@ -445,6 +481,10 @@
 		CapturerInfantryLimitPct: 9
 		EngineerCompletionIntervalTicks: 400
 		RetreatRatioPct: 45
+		ArmyShareTargetPermille: 725
+		ProductionCashReserve: 300
+		OverflowCash: 4800
+		RoleMixUnnamedTotalPct: 19
 		RequiresCondition: unbeatablebot
 	BotLimits@god:
 		ProductionTypeLimit: 11
@@ -472,6 +512,10 @@
 		CapturerInfantryLimitPct: 10
 		EngineerCompletionIntervalTicks: 200
 		RetreatRatioPct: 50
+		ArmyShareTargetPermille: 750
+		ProductionCashReserve: 0
+		OverflowCash: 4000
+		RoleMixUnnamedTotalPct: 20
 		RequiresCondition: cameogodbot
 
 	# PUSH-1 (bank overflow): while the bank sits above OverflowCash the armed base builder
@@ -4565,8 +4609,8 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-rush
-		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
-		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
+		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Inert until switch group J_rolemix_production arms UseRoleMix.
 		# Rush: fast cheap pressure — skirmisher/anti-infantry heavy, scouts find the economy kills.
 		UseRoleMix: false
 		RoleMix:
@@ -4680,8 +4724,8 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-turtle
-		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
-		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
+		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Inert until switch group J_rolemix_production arms UseRoleMix.
 		# Turtle: static-defence posture — artillery and anti-air mass behind the frontline screen.
 		UseRoleMix: false
 		RoleMix:
@@ -4791,8 +4835,8 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-tech
-		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
-		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
+		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Inert until switch group J_rolemix_production arms UseRoleMix.
 		# Tech: quality over quantity — frontline core with the widest air split (gunship/fighter/bomber).
 		UseRoleMix: false
 		RoleMix:
@@ -4904,8 +4948,8 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-expansion
-		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
-		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
+		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Inert until switch group J_rolemix_production arms UseRoleMix.
 		# Expansion: spread defence of growing territory — balanced core, extra scouts find the fields.
 		UseRoleMix: false
 		RoleMix:
@@ -5017,8 +5061,8 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-steamroller
-		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
-		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
+		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Inert until switch group J_rolemix_production arms UseRoleMix.
 		# Steamroller: massed armour push — frontline wall, artillery second line, AA cover.
 		UseRoleMix: false
 		RoleMix:
@@ -5127,8 +5171,8 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-guerrilla
-		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
-		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
+		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Inert until switch group J_rolemix_production arms UseRoleMix.
 		# Guerrilla: map control — skirmishers and scouts hold ground, gunships punish exposed targets.
 		UseRoleMix: false
 		RoleMix:

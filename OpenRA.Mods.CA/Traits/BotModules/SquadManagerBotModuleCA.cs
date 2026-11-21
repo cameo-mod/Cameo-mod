@@ -422,10 +422,6 @@ namespace OpenRA.Mods.CA.Traits
 			"Off until the increment A/B (switch group J_rolemix_production); a mix without the flag is inert data.")]
 		public readonly bool UseRoleMix = false;
 
-		[Desc("Minimum target share for every role a buildable member exists for, when RoleMix is set.",
-			"Explicit mix entries win over the floor; roles the mix omits still get produced at this share.")]
-		public readonly int RoleMixRoleFloorPct = 5;
-
 		[Desc("CA-3 (12.5): max ticks a ready attack force waits for the idle pool to cover every role in StageRequiredRoles before launching anyway. 0 disables the composition gate.")]
 		public readonly int StageCompositionTicks = 0;
 

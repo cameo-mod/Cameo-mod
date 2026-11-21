@@ -89,6 +89,26 @@ namespace OpenRA.Mods.CA.Traits
 			"tiers value their units more. Maintainer 2026-09-28: never suicide units.")]
 		public readonly int RetreatRatioPct = 50;
 
+		// PROD-IDLE (PLAN_03 section 5, PLAN_05): four difficulty lines written for ALL 11 tiers
+		// (USER BINDING: one straight line, equal steps, no on/off per tier). Negative = not
+		// written (a ruleset without the line keeps the legacy behaviour). r = 0 noob .. 10 cameogod.
+		[Desc("PROD-IDLE: target mobile-army share of army + building value, in permille. 500 + 25 r.",
+			"Negative: no ratio rule.")]
+		public readonly int ArmyShareTargetPermille = -1;
+
+		[Desc("PROD-IDLE: P(r), the cash a unit or building order must leave in the bank, as one term of the",
+			"general gate C - x >= max(M, E, P) + R (never summed). 300 x (10 - r). Negative: no P term.")]
+		public readonly int ProductionCashReserve = -1;
+
+		[Desc("PROD-IDLE: O(r), banked cash above which spend goes to the overflow rung. 12000 - 800 r.",
+			"Negative: no overflow rung from this line.")]
+		public readonly int OverflowCash = -1;
+
+		[Desc("RoleMix: the TOTAL percent share of all unnamed buildable combat roles together, split evenly",
+			"among them (transport and air_transport excluded); named roles keep their relative weights in the",
+			"remaining share. 10 + r. Negative: the legacy per-role floor is not used either; no unnamed share.")]
+		public readonly int RoleMixUnnamedTotalPct = -1;
+
 		public override object Create(ActorInitializer init) { return new BotLimits(init.Self, this); }
 	}
 
