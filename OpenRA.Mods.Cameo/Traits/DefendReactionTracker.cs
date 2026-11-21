@@ -29,6 +29,14 @@ namespace OpenRA.Mods.Cameo.Traits
 		public const string BuildingAttacked = "building_attacked";
 		public const string UnitAttacked = "unit_attacked";
 		public const string HarvesterAttacked = "harvester_attacked";
+		public const string EnemyNearBase = "enemy_near_base";
+
+		/// <summary>Visibility probe cadence and radius for enemy_near_base (the bot-side source stamps it, ungated).</summary>
+		public const int NearBaseProbeTicks = 25;
+		public const int NearBaseCells = 20;
+
+		/// <summary>A visible armed enemy staying near the base would reopen enemy_near_base every probe; at most one is opened per this many ticks.</summary>
+		public const int NearBaseCooldownTicks = TimeoutTicks;
 
 		sealed class Pending
 		{
@@ -42,6 +50,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		readonly string seat;
 		readonly Action<string> sink;
 		readonly List<Pending> open = new();
+		int lastNearBaseOpen = int.MinValue;
 
 		public DefendReactionTracker(string seat, Action<string> sink)
 		{
@@ -51,7 +60,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		public int OpenCount => open.Count;
 
-		/// <summary>A damage notification on an own actor. Returns the trigger id when this opened a new trigger, else null.</summary>
+		/// <summary>A damage notification on an own actor, or (enemy_near_base) the intruder seen near the base; <paramref name="victimId"/> is that actor's id. Returns the trigger id when this opened a new trigger, else null.</summary>
 		public string Trigger(int tick, string kind, uint victimId, int x, int y)
 		{
 			Expire(tick);
@@ -61,6 +70,14 @@ namespace OpenRA.Mods.Cameo.Traits
 					p.Hits++;
 					return null;
 				}
+
+			if (kind == EnemyNearBase)
+			{
+				if (lastNearBaseOpen != int.MinValue && tick - lastNearBaseOpen < NearBaseCooldownTicks)
+					return null;
+
+				lastNearBaseOpen = tick;
+			}
 
 			var id = victimId.ToString(CultureInfo.InvariantCulture) + "@" + tick.ToString(CultureInfo.InvariantCulture);
 			open.Add(new Pending { Tick = tick, Kind = kind, Id = id, X = x, Y = y });

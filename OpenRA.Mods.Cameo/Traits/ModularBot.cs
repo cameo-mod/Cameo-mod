@@ -440,6 +440,8 @@ namespace OpenRA.Mods.Cameo.Traits
 
 #if CAMEO_DEV_LOGGING
 			defendReactions?.Expire(world.WorldTick);
+			if (defendReactions != null && world.WorldTick % DefendReactionTracker.NearBaseProbeTicks == 0)
+				ProbeEnemyNearBase();
 #endif
 
 			// QW-B: the family roster is built at the first bot tick, once every bot has activated.
@@ -625,6 +627,37 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		/// <summary>Game end: the scheduler (a world trait, so it receives IGameOver) flushes every registered bot.</summary>
 		public void FlushModuleTiming() => ReportModuleTiming(true);
+
+		// DEV only (F-B enemy_near_base): every NearBaseProbeTicks, the lowest-id visible armed enemy unit within NearBaseCells of the
+		// base anchor (this player's lowest-id BaseProvider building, the construction yard) opens a trigger. Read only: no RNG, no
+		// order, an id-minimum pick so the result does not depend on enumeration order. Ungated: runs every tick of the bot, not
+		// only on its visit.
+		void ProbeEnemyNearBase()
+		{
+			Actor anchor = null;
+			foreach (var a in world.ActorsHavingTrait<BaseProvider>())
+				if (a.Owner == player && a.IsInWorld && !a.IsDead && (anchor == null || a.ActorID < anchor.ActorID))
+					anchor = a;
+
+			if (anchor == null)
+				return;
+
+			Actor intruder = null;
+			foreach (var e in world.FindActorsInCircle(anchor.CenterPosition, WDist.FromCells(DefendReactionTracker.NearBaseCells)))
+			{
+				if (!e.IsInWorld || e.IsDead || e.Owner == null || e.Owner.NonCombatant || player.RelationshipWith(e.Owner) != PlayerRelationship.Enemy)
+					continue;
+
+				if (!e.Info.HasTraitInfo<AttackBaseInfo>() || e.Info.HasTraitInfo<BuildingInfo>() || !e.CanBeViewedByPlayer(player))
+					continue;
+
+				if (intruder == null || e.ActorID < intruder.ActorID)
+					intruder = e;
+			}
+
+			if (intruder != null)
+				defendReactions.Trigger(world.WorldTick, DefendReactionTracker.EnemyNearBase, intruder.ActorID, intruder.Location.X, intruder.Location.Y);
+		}
 
 		/// <summary>Game end: still-open defend triggers are written as censored (not none), see DefendReactionTracker.Flush.</summary>
 		public void FlushDefendReactions() => defendReactions?.Flush(world.WorldTick);

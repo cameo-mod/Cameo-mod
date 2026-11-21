@@ -48,6 +48,27 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void EnemyNearBaseOpensAReactionRecordAndIsRateLimited()
+		{
+			var lines = new List<string>();
+			var t = new DefendReactionTracker("Multi0", lines.Add);
+			Assert.That(t.Trigger(1000, DefendReactionTracker.EnemyNearBase, 77, 40, 41), Is.EqualTo("77@1000"));
+			Assert.That(t.Trigger(1025, DefendReactionTracker.EnemyNearBase, 78, 40, 42), Is.Null, "open: only counted");
+			t.Reaction(1030, "SquadManagerBotModuleCA");
+			Assert.That(lines, Has.Count.EqualTo(1));
+			Assert.That(lines[0], Does.Contain("trigger_kind=enemy_near_base").And.Contain("trigger_id=77@1000").And.Contain("hits=2")
+				.And.Contain("reaction_tick=1030").And.Contain("reaction_kind=protection_squad"));
+
+			// Closed after 30 ticks, the enemy still there at the next probes: no new record until 300 ticks after the last opening.
+			Assert.That(t.Trigger(1050, DefendReactionTracker.EnemyNearBase, 77, 40, 41), Is.Null);
+			Assert.That(t.Trigger(1299, DefendReactionTracker.EnemyNearBase, 77, 40, 41), Is.Null);
+			Assert.That(t.Trigger(1300, DefendReactionTracker.EnemyNearBase, 77, 40, 41), Is.EqualTo("77@1300"));
+
+			// The other kinds are not rate limited by it.
+			Assert.That(t.Trigger(1301, DefendReactionTracker.BuildingAttacked, 5, 1, 1), Is.EqualTo("5@1301"));
+		}
+
+		[Test]
 		public void GameEndFlushClosesOpenTriggersAsCensoredNotNone()
 		{
 			var lines = new List<string>();
