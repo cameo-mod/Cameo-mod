@@ -1,0 +1,190 @@
+#region Copyright & License Information
+/*
+ * Copyright (c) The OpenRA Developers and Contributors
+ * This file is part of OpenRA, which is free software. It is made
+ * available to you under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3 of
+ * the License, or (at your option) any later version. For more
+ * information, see COPYING.
+ */
+#endregion
+
+using NUnit.Framework;
+using OpenRA.Mods.CA.Traits;
+
+namespace OpenRA.Mods.Cameo.Test
+{
+	// RATIO-2X-01 (ARMY_FIRST_02_DESIGN_02 s2, _03, _04, _05): the pure 2x mobile/static rule. Pure state, no world.
+	[TestFixture]
+	public class MobileStaticRatioTest
+	{
+		[Test]
+		public void TheConstantsAreTheRuledValues()
+		{
+			Assert.That(MobileStaticRatioCA.Ratio, Is.EqualTo(2), "the user's 2x, fixed at every tier");
+			Assert.That(MobileStaticRatioCA.RecordTicks, Is.EqualTo(3));
+			Assert.That(MobileStaticRatioCA.SnapshotMaxAgeTicks, Is.EqualTo(300));
+			Assert.That(MobileStaticRatioCA.StoragePct, Is.EqualTo(90));
+		}
+
+		[Test]
+		public void AdmitsAtExactlyTwiceTheStaticValuePlusTheNewDefence()
+		{
+			Assert.That(MobileStaticRatioCA.Admits(1200, 0, 600), Is.True, "M = 2 x (0 + 600)");
+			Assert.That(MobileStaticRatioCA.Admits(1199, 0, 600), Is.False, "one below");
+			Assert.That(MobileStaticRatioCA.Admits(0, 0, 600), Is.False, "no army: no defence start");
+			Assert.That(MobileStaticRatioCA.Admits(5000, 1900, 600), Is.True, "5000 = 2 x (1900 + 600)");
+			Assert.That(MobileStaticRatioCA.Admits(4999, 1900, 600), Is.False);
+		}
+
+		[Test]
+		public void NegativeInputsClampAndHugeValuesNeverAdmitOrThrow()
+		{
+			Assert.That(MobileStaticRatioCA.Admits(0, -50, -10), Is.True, "negatives read as 0: 0 >= 0");
+			Assert.That(MobileStaticRatioCA.Admits(long.MaxValue, long.MaxValue, 1), Is.False, "overflowing need is never admitted");
+			Assert.That(MobileStaticRatioCA.Admits(long.MaxValue, long.MaxValue / 2, 1), Is.False, "2 x need overflows: never admitted");
+		}
+
+		[Test]
+		public void StageOneOrderIsInertAdmitFirstCopyThenNeedsFloat()
+		{
+			Assert.That(MobileStaticRatioCA.Stage1(false, 0, 99999, 600, true), Is.EqualTo(RatioVerdict.Inert), "no measure: inert even for a first copy");
+			Assert.That(MobileStaticRatioCA.Stage1(true, 1200, 0, 600, false), Is.EqualTo(RatioVerdict.Admit));
+			Assert.That(MobileStaticRatioCA.Stage1(true, 1200, 0, 600, true), Is.EqualTo(RatioVerdict.Admit),
+				"a first copy that satisfies the ratio is a plain Admit: an exempt start is always BELOW the ratio");
+			Assert.That(MobileStaticRatioCA.Stage1(true, 0, 0, 600, true), Is.EqualTo(RatioVerdict.ExemptFirst), "first copy below the ratio");
+			Assert.That(MobileStaticRatioCA.Stage1(true, 0, 0, 600, false), Is.EqualTo(RatioVerdict.NeedsFloat), "a further copy below the ratio");
+		}
+
+		[Test]
+		public void FloatNeedsBothTheSaturatedUnitSideAndAFloatingBank()
+		{
+			Assert.That(MobileStaticRatioCA.Float(true, true), Is.EqualTo(RatioVerdict.ExemptFloat));
+			Assert.That(MobileStaticRatioCA.Float(true, false), Is.EqualTo(RatioVerdict.Hold), "units can still absorb nothing, but the bank is not floating");
+			Assert.That(MobileStaticRatioCA.Float(false, true), Is.EqualTo(RatioVerdict.Hold), "the money can still go to units");
+			Assert.That(MobileStaticRatioCA.Float(false, false), Is.EqualTo(RatioVerdict.Hold));
+		}
+
+		[Test]
+		public void DecideComposesTheStagesAndOnlyAFurtherCopyBelowTheRatioReachesFloat()
+		{
+			// ratio satisfied: floats are irrelevant
+			Assert.That(MobileStaticRatioCA.Decide(true, 1200, 0, 600, false, false, false), Is.EqualTo(RatioVerdict.Admit));
+			// first copy: exempt without consulting float
+			Assert.That(MobileStaticRatioCA.Decide(true, 0, 0, 600, true, false, false), Is.EqualTo(RatioVerdict.ExemptFirst));
+			// further copy: float decides
+			Assert.That(MobileStaticRatioCA.Decide(true, 0, 0, 600, false, true, true), Is.EqualTo(RatioVerdict.ExemptFloat));
+			Assert.That(MobileStaticRatioCA.Decide(true, 0, 0, 600, false, true, false), Is.EqualTo(RatioVerdict.Hold));
+			Assert.That(MobileStaticRatioCA.Decide(true, 0, 0, 600, false, false, true), Is.EqualTo(RatioVerdict.Hold));
+			// unmeasured: never a hold
+			Assert.That(MobileStaticRatioCA.Decide(false, 0, 0, 600, false, false, false), Is.EqualTo(RatioVerdict.Inert));
+
+			Assert.That(MobileStaticRatioCA.Holds(RatioVerdict.Hold), Is.True);
+			foreach (var v in new[] { RatioVerdict.Inert, RatioVerdict.Admit, RatioVerdict.ExemptFirst, RatioVerdict.ExemptFloat, RatioVerdict.NeedsFloat })
+				Assert.That(MobileStaticRatioCA.Holds(v), Is.False, v.ToString());
+		}
+
+		[Test]
+		public void TheStorageLegIsNinetyPercentOfAPositiveCapacity()
+		{
+			Assert.That(MobileStaticRatioCA.StorageNearlyFull(899, 1000), Is.False);
+			Assert.That(MobileStaticRatioCA.StorageNearlyFull(900, 1000), Is.True);
+			Assert.That(MobileStaticRatioCA.StorageNearlyFull(1000, 1000), Is.True);
+			Assert.That(MobileStaticRatioCA.StorageNearlyFull(500, 0), Is.False, "no capacity: no storage leg");
+			Assert.That(MobileStaticRatioCA.StorageNearlyFull(0, 0), Is.False);
+		}
+
+		[Test]
+		public void TheBankLegIsTheTierBarAndAZeroBarLeavesOnlyTheStorageLeg()
+		{
+			Assert.That(MobileStaticRatioCA.Floating(0, 1000, 3999, 4000), Is.False, "bar - 1");
+			Assert.That(MobileStaticRatioCA.Floating(0, 1000, 4000, 4000), Is.True, "bar");
+			Assert.That(MobileStaticRatioCA.Floating(0, 1000, 999999, 0), Is.False, "bar 0 (switch off or classic): the bank leg never applies");
+			Assert.That(MobileStaticRatioCA.Floating(900, 1000, 0, 0), Is.True, "bar 0 still allows the storage leg");
+			Assert.That(MobileStaticRatioCA.Floating(900, 1000, 100, 4000), Is.True, "either leg is enough");
+			Assert.That(MobileStaticRatioCA.Floating(0, 0, 0, 4000), Is.False);
+		}
+
+		[Test]
+		public void AFreshSnapshotIsUsableUpToThreeHundredTicksOld()
+		{
+			Assert.That(MobileStaticRatioCA.MeasureUsable(true, 1000, 1000), Is.True);
+			Assert.That(MobileStaticRatioCA.MeasureUsable(true, 1000, 1300), Is.True, "age 300");
+			Assert.That(MobileStaticRatioCA.MeasureUsable(true, 1000, 1301), Is.False, "age 301: stale, so the rule is inert");
+			Assert.That(MobileStaticRatioCA.MeasureUsable(false, 1000, 1000), Is.False, "no snapshot yet");
+			Assert.That(MobileStaticRatioCA.MeasureUsable(true, 1000, 999), Is.False, "a snapshot from the future (a clock reset) is not usable");
+		}
+
+		[Test]
+		public void ARecordedStartCountsForThreeTicksThenExpires()
+		{
+			var r = new MobileStaticRatioCA();
+			r.Record(1000, "gun", 500);
+			Assert.That(r.Recorded(1000), Is.EqualTo(500));
+			r.Record(1001, "sam", 300);
+			Assert.That(r.Recorded(1001), Is.EqualTo(800), "both inside the window");
+			Assert.That(r.Recorded(1002), Is.EqualTo(800));
+			Assert.That(r.Recorded(1003), Is.EqualTo(300), "the first start is 3 ticks old and expired");
+			Assert.That(r.Recorded(1004), Is.EqualTo(0));
+			Assert.That(r.Recorded(1004), Is.EqualTo(0), "stable once pruned");
+
+			r.Record(2000, "gun", 400);
+			Assert.That(r.Recorded(1999), Is.EqualTo(0), "an entry from the future (a clock reset) is dropped");
+		}
+
+		[Test]
+		public void TwoDefencesCannotBothPassOneOldSnapshot()
+		{
+			var r = new MobileStaticRatioCA();
+			const long mobile = 2400;
+			const long staticLive = 0;
+
+			Assert.That(MobileStaticRatioCA.Admits(mobile, staticLive + r.Recorded(500), 1000), Is.True, "first defence of 1000 passes: 2400 >= 2000");
+			r.Record(500, "gun", 1000);
+			Assert.That(MobileStaticRatioCA.Admits(mobile, staticLive + r.Recorded(500), 1000), Is.False, "the same sweep: the second sees the first (2400 < 4000)");
+		}
+
+		[Test]
+		public void TheDoubleCountWindowIsAConservativeOvercountNeverALooserTest()
+		{
+			// _03 s2: for up to 3 ticks a started defence is in the queue term AND the record term. S only grows, so the test only tightens.
+			var r = new MobileStaticRatioCA();
+			r.Record(100, "gun", 600);
+			var once = 600L;
+			var twice = 600L + r.Recorded(101);
+			Assert.That(twice, Is.EqualTo(2 * once));
+			Assert.That(MobileStaticRatioCA.Admits(1800, twice, 300), Is.False);
+			Assert.That(MobileStaticRatioCA.Admits(1800, once, 300), Is.True, "without the overlap this would pass: the overlap is the safe side");
+			Assert.That(r.Recorded(103), Is.EqualTo(0), "and it is gone after 3 ticks");
+		}
+
+		[Test]
+		public void TheFirstCopyLedgerNeedsNeitherAnOwnedNorAQueuedNorAnEarlierStart()
+		{
+			var r = new MobileStaticRatioCA();
+			Assert.That(r.IsFirstCopy("gun", false), Is.True);
+			Assert.That(r.IsFirstCopy("gun", true), Is.False, "one already owned or queued");
+
+			r.Record(10, "gun", 600);
+			Assert.That(r.EverStarted("gun"), Is.True);
+			Assert.That(r.IsFirstCopy("gun", false), Is.False, "started once, then lost: not a first copy again");
+			Assert.That(r.IsFirstCopy("sam", false), Is.True, "another type is still a first copy");
+			Assert.That(r.EverStarted(null), Is.False);
+			Assert.That(r.IsFirstCopy(null, false), Is.True, "a null type name never counts as started");
+		}
+
+		[Test]
+		public void TheFirstCopyIsAdmittedBelowTheRatioAndTheSecondIsHeld()
+		{
+			var r = new MobileStaticRatioCA();
+			const long mobile = 0;
+
+			var first = MobileStaticRatioCA.Decide(true, mobile, 0, 600, r.IsFirstCopy("gun", false), false, false);
+			Assert.That(first, Is.EqualTo(RatioVerdict.ExemptFirst));
+			r.Record(10, "gun", 600);
+
+			var second = MobileStaticRatioCA.Decide(true, mobile, 600, 600, r.IsFirstCopy("gun", true), false, false);
+			Assert.That(second, Is.EqualTo(RatioVerdict.Hold), "the further copy waits for the army");
+		}
+	}
+}
