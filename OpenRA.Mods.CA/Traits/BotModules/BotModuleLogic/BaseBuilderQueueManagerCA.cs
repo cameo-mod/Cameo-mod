@@ -106,6 +106,7 @@ namespace OpenRA.Mods.CA.Traits
 		// the increment row. Null provider (classic, no MasterAiBotModule) = the ratio is inert. The live+queued static value is
 		// cached per world tick (the recorded window is added fresh on every read).
 		IBotMobileStaticValues staticValues;
+		bool staticValuesResolved; // a missing provider is cached too: classic runs the rule inert without a lookup per call
 		AblationLatch ablateRatio;
 		int staticLiveTick = -1;
 		long staticLiveValue;
@@ -2144,7 +2145,12 @@ namespace OpenRA.Mods.CA.Traits
 
 			// Not filtered by IsTraitEnabled: HasSnapshot carries the provider's own enabled state, and a null cached while the
 			// provider was still condition-disabled would otherwise pin the rule off for the whole game.
-			staticValues ??= player.PlayerActor.TraitsImplementing<IBotMobileStaticValues>().FirstOrDefault();
+			if (!staticValuesResolved)
+			{
+				staticValues = player.PlayerActor.TraitsImplementing<IBotMobileStaticValues>().FirstOrDefault();
+				staticValuesResolved = true;
+			}
+
 			if (staticValues == null || !staticValues.IsStaticDefence(item))
 				return RatioVerdict.Inert;
 
@@ -2156,8 +2162,10 @@ namespace OpenRA.Mods.CA.Traits
 			var mobile = staticValues.MobileValue;
 			var staticTotal = StaticDefenceValue(now);
 			var cost = ValuedCost(item);
+
+			// The owned/queued count is only needed when the ratio failed (a first copy matters only below the ratio).
 			var verdict = MobileStaticRatioCA.Stage1(true, mobile, staticTotal, cost,
-				baseBuilder.StaticRatio.IsFirstCopy(item.Name, OwnedOrQueued(item)));
+				!MobileStaticRatioCA.Admits(mobile, staticTotal, cost) && baseBuilder.StaticRatio.IsFirstCopy(item.Name, OwnedOrQueued(item)));
 			if (verdict == RatioVerdict.NeedsFloat)
 				verdict = MobileStaticRatioCA.Float(IsFloating());
 

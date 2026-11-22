@@ -40,8 +40,9 @@ namespace OpenRA.Mods.CA.Traits
 	/// world-free. A defence START is admitted only if <c>M &gt;= 2 x (S + cost)</c> (M = live mobile army value, S = static defence
 	/// value including queued and READY-held defences and the starts recorded in the last <see cref="RecordTicks"/> ticks), all in
 	/// Valued cost. It is a priority rule, never a veto: nothing is cancelled, sold or removed, a held start is retried next sweep.
-	/// Exemptions, first match wins (see <see cref="Stage1"/>): first copy of a defence type (O7), and FLOAT (unit side saturated AND
-	/// the bank is floating, the bar being the tier's existing bank-saturation threshold, no new value). The factor 2 is a constant:
+	/// Exemptions, first match wins (see <see cref="Stage1"/>): first copy of a defence type (O7), and FLOAT = <see cref="IsFloating"/>
+	/// (storage at least half full, alone; or every unit queue saturated AND the bank at the tier's bank-saturation bar; ARMY_FIRST_02_DESIGN_08,
+	/// no new value). The factor 2 is a constant:
 	/// no tier scaling and no yaml key. No RNG, no orders, no world access.
 	/// </summary>
 	public sealed class MobileStaticRatioCA
