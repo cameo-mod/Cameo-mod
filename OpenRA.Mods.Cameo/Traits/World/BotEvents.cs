@@ -21,15 +21,21 @@ namespace OpenRA.Mods.Cameo.Traits
 {
 	// STAGGER_DESIGN_06 section 7.4: a recipient is a seat plus a module, resolved to an object at delivery.
 	// Module = "<trait info type name>@<yaml instance name>"; an empty module means the bot itself.
+	// HOTFIX-RR-01: default(ModuleKey) is the unset Recipient of every event that addresses the bot itself (AttackEvent,
+	// LeaseLostEvent, OrderDispositionEvent are queued without one). Its fields are null, so both accessors normalize
+	// null to "": a default key IS the empty "bot itself" key, everywhere it is read, compared, hashed or saved.
 	public readonly struct ModuleKey : IEquatable<ModuleKey>
 	{
-		public readonly string Seat;
-		public readonly string Module;
+		readonly string seat;
+		readonly string module;
+
+		public string Seat => seat ?? "";
+		public string Module => module ?? "";
 
 		public ModuleKey(string seat, string module)
 		{
-			Seat = seat ?? "";
-			Module = module ?? "";
+			this.seat = seat ?? "";
+			this.module = module ?? "";
 		}
 
 		public bool Equals(ModuleKey other) => Seat == other.Seat && Module == other.Module;

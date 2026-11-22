@@ -472,5 +472,62 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(ModuleKey.Parse(key.ToString()), Is.EqualTo(key));
 			Assert.That(ModuleKey.Parse("Multi3"), Is.EqualTo(new ModuleKey("Multi3", "")));
 		}
+
+		// HOTFIX-RR-01: AttackEvent, LeaseLostEvent and OrderDispositionEvent are queued with an unset (default) Recipient.
+		// ModularBot.Deliver reads Recipient.Module.Length at the drain (ModularBot.cs:753); a null Module threw an NRE at
+		// tick 8 of every RR-on game (m6 RRa, exception-2026-11-22T000558Z.log).
+		[Test]
+		public void HotfixRr01AnUnsetRecipientDrainsAsTheBotItself()
+		{
+			var f = Fixture.WithSeats(3);
+			var s = f.Seats[2];
+			var queued = new BotEvent[] { AttackEvent.From(null, null), new LeaseLostEvent(), new OrderDispositionEvent() };
+			foreach (var ev in queued)
+				Assert.That(f.Core.Post(s, ev, 0), Is.EqualTo(PostOutcome.Queued));
+
+			Assert.That(f.Core.BeginVisit(s, 2), Is.True);
+			var drained = 0;
+			while (f.Core.TryDequeue(s, out var ev))
+			{
+				Assert.That(ev.Recipient.Module, Is.Not.Null, ev.Kind);
+				Assert.That(ev.Recipient.Module.Length, Is.EqualTo(0), ev.Kind);
+				Assert.That(ev.Recipient.Seat, Is.EqualTo(""), ev.Kind);
+				drained++;
+			}
+
+			Assert.That(drained, Is.EqualTo(queued.Length));
+			Assert.That(f.Core.ConservationHolds(), Is.True);
+		}
+
+		[Test]
+		public void HotfixRr01TheDefaultKeyIsTheEmptyKey()
+		{
+			var unset = default(ModuleKey);
+			Assert.That(unset.Seat, Is.EqualTo(""));
+			Assert.That(unset.Module, Is.EqualTo(""));
+			Assert.That(unset, Is.EqualTo(new ModuleKey("", "")));
+			Assert.That(unset, Is.EqualTo(new ModuleKey(null, null)));
+			Assert.That(unset.GetHashCode(), Is.EqualTo(new ModuleKey("", "").GetHashCode()));
+			Assert.That(unset.ToString(), Is.EqualTo("|"));
+			Assert.That(new Dictionary<string, int> { [""] = 1 }.TryGetValue(unset.Module, out _), Is.True);
+		}
+
+		[Test]
+		public void HotfixRr01EveryEventKindRoundTripsAnUnsetRecipient()
+		{
+			foreach (var type in EventTypes())
+			{
+				var ev = (BotEvent)Activator.CreateInstance(type);
+				var node = ev.Save();
+				Assert.That(node.Value.Nodes.First(n => n.Key == "Recipient").Value.Value, Is.EqualTo("|"), type.Name);
+
+				var back = BotEvent.Load(node.Value);
+				Assert.That(back, Is.Not.Null, type.Name);
+				Assert.That(back.Recipient, Is.EqualTo(ev.Recipient), type.Name);
+				Assert.That(back.Recipient.Module, Is.EqualTo(""), type.Name);
+				Assert.That(back.Save().Value.Nodes.Select(n => n.Key + "=" + n.Value.Value),
+					Is.EqualTo(node.Value.Nodes.Select(n => n.Key + "=" + n.Value.Value)), type.Name);
+			}
+		}
 	}
 }
