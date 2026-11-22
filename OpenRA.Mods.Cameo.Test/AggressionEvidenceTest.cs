@@ -199,7 +199,9 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void AShellModuleFindsNoEvidenceAndTouchesNoWorld()
 		{
-			var m = (SquadManagerBotModuleCA)RuntimeHelpers.GetUninitializedObject(typeof(SquadManagerBotModuleCA));
+			// The shell needs Info: AggressionEvidenceWanted reads Info.StalemateDiagnosticsEnabled first (the null-squad check comes
+			// after it), and a live bot always has Info. Shell(false) sets it; the && short-circuit then keeps World untouched.
+			var m = Shell(diagnostics: false);
 			var lookup = typeof(SquadManagerBotModuleCA).GetMethod("AggressionEvidenceFor", BindingFlags.Instance | BindingFlags.NonPublic);
 			Assert.That(lookup, Is.Not.Null);
 			Assert.That(lookup.Invoke(m, new object[] { null }), Is.Null, "no squad, no evidence, World is never read");
