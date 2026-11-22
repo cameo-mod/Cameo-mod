@@ -353,6 +353,30 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		BotCooldown dropRecheck;
 		public int RegularDrops { get; private set; }
 
+#if CAMEO_DEV_LOGGING
+		// ENGDROP-LOG-01 (DEV only; observer: no RNG, no order, no world write). Scans = visits that ran Trigger A's scan, tries = targets
+		// Trigger A / B actually tried this game; the summary line is cumulative, so the last one in the log is the game-end summary.
+		int dropScans;
+		int opportunityTries;
+		int regularTries;
+		int dropSummaryTick = -1;
+		string dropSummaryLast = "";
+
+		void LogDropSummary(int tick, bool force)
+		{
+			if (!force && dropSummaryTick >= 0 && tick - dropSummaryTick < 750)
+				return;
+
+			var line = $"A={OpportunityDrops} B={RegularDrops} aborts={OpportunityAborts} scans={dropScans} tries_A={opportunityTries} tries_B={regularTries}";
+			if (line == dropSummaryLast)
+				return;
+
+			dropSummaryTick = tick;
+			dropSummaryLast = line;
+			Log.Write("debug", $"AI ({player.ClientIndex}): ENGDROP summary {line} (tick {tick})");
+		}
+#endif
+
 		DropScheduler DropTiers => dropScheduler ??= new DropScheduler(
 			BotDifficultyLadder.Scale(Info.DropChancePctEasy, Info.DropChancePctHard, player, Info.DropChancePctHard),
 			BotDifficultyLadder.Scale(Info.DropIntervalTicksEasy, Info.DropIntervalTicksHard, player, Info.DropIntervalTicksHard),
@@ -578,13 +602,26 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var tiers = DropTiers;
 			var visit = tiers.Visit(dropState, visitTick);
 			dropState = visit.State;
+#if CAMEO_DEV_LOGGING
+			LogDropSummary(visitTick, false);
+#endif
 			if (!visit.ScanOpportunity && !visit.DrawRegular)
 				return;
 
 			int? roll = visit.DrawRegular ? BotRng.For(player, nameof(EngineerBotModule)).Next(100) : null;
+#if CAMEO_DEV_LOGGING
+			if (visit.ScanOpportunity)
+				dropScans++;
+#endif
 			var admitted = visit.ScanOpportunity && TryScheduledDrop(bot, true);
 			if (visit.TryRegular(roll, tiers.ChancePercent, admitted) && TryScheduledDrop(bot, false))
+			{
 				RegularDrops++;
+#if CAMEO_DEV_LOGGING
+				Log.Write("debug", $"AI ({player.ClientIndex}): ENGDROP B launch #{RegularDrops} (roll {roll} < chance {tiers.ChancePercent}; A admitted this visit: {admitted}) (tick {visitTick})");
+				LogDropSummary(visitTick, true);
+#endif
+			}
 		}
 
 		bool IsGone(Actor a) => a.IsDead || !a.IsInWorld || a.Owner != player;
@@ -1201,11 +1238,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var first in tries)
 			{
 				var crew = capturers.OrderBy(c => (c.CenterPosition - first.CenterPosition).LengthSquared).ThenBy(c => c.ActorID).ToList();
+#if CAMEO_DEV_LOGGING
+				if (opportunity)
+					opportunityTries++;
+				else
+					regularTries++;
+#endif
 				if (opportunity)
 				{
 					if (TryOpportunityRun(bot, leases, crew, first, provider))
 					{
 						OpportunityDrops++;
+#if CAMEO_DEV_LOGGING
+						Log.Write("debug", $"AI ({player.ClientIndex}): ENGDROP A launch #{OpportunityDrops} -> {first.Info.Name} {first.ActorID} (tick {world.WorldTick})");
+						LogDropSummary(world.WorldTick, true);
+#endif
 						return true;
 					}
 				}
@@ -1269,7 +1316,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				job.AbortRequested = true;
 				if (provider.RequestAbort(bot, job.RunId, a, reason))
+				{
 					OpportunityAborts++;
+#if CAMEO_DEV_LOGGING
+					Log.Write("debug", $"AI ({player.ClientIndex}): ENGDROP A abort #{OpportunityAborts} run {job.RunId} engineer {a.ActorID} -> {job.Target.Info.Name} {job.Target.ActorID}: {reason} (tick {world.WorldTick})");
+					LogDropSummary(world.WorldTick, true);
+#endif
+				}
 			}
 		}
 
