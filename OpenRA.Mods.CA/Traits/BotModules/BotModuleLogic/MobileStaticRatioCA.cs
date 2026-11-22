@@ -56,7 +56,7 @@ namespace OpenRA.Mods.CA.Traits
 		public const int SnapshotMaxAgeTicks = 300;
 
 		/// <summary>Storage leg of FLOAT: stored resources at or above this percent of the storage capacity (money above the cap is wasted).</summary>
-		public const int StoragePct = 90;
+		public const int StoragePct = 50;
 
 		readonly List<(int Tick, long Cost)> recorded = new();
 		readonly HashSet<string> started = new(StringComparer.Ordinal);
@@ -121,18 +121,18 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>
-		/// Money above the storage cap is wasted: stored resources at or above <see cref="StoragePct"/> percent of a positive capacity.
+		/// Half the storage is banked (USER 11-22: 50 percent, not 90): stored resources at or above <see cref="StoragePct"/> percent of a positive capacity.
 		/// </summary>
-		public static bool StorageNearlyFull(long resources, long resourceCapacity) =>
+		public static bool StorageFloating(long resources, long resourceCapacity) =>
 			resourceCapacity > 0 && resources * 100 >= resourceCapacity * StoragePct;
 
 		/// <summary>
-		/// FLOAT leg (b) (ARMY_FIRST_02_DESIGN_04 s3): the storage is nearly full, OR the bank has reached the tier's bank-saturation
+		/// FLOAT leg (b) (ARMY_FIRST_02_DESIGN_04 s3): the storage is at least half full, OR the bank has reached the tier's bank-saturation
 		/// bar (<see cref="ProductionSaturationCA.Saturated"/>: bar > 0 and bank >= bar; bar 0 = the saturation switch off or classic,
 		/// only the storage leg then applies). Condition (a), the unit side being saturated, is tested separately by the caller.
 		/// </summary>
 		public static bool Floating(long resources, long resourceCapacity, long cashAndResources, int bankSaturationBar) =>
-			StorageNearlyFull(resources, resourceCapacity) || ProductionSaturationCA.Saturated(cashAndResources, bankSaturationBar);
+			StorageFloating(resources, resourceCapacity) || ProductionSaturationCA.Saturated(cashAndResources, bankSaturationBar);
 
 		/// <summary>
 		/// Decision stages 1-3 (cheap, no unit-side scan): no measure = Inert; ratio satisfied = Admit (also for a first copy, so an

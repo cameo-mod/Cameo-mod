@@ -2079,7 +2079,7 @@ namespace OpenRA.Mods.CA.Traits
 		// RATIO-2X-01 (ARMY_FIRST_02_DESIGN_04/05) ------------------------------------------------------------------------------
 		// The 2x mobile/static ratio at a static-defence start. The pure decision is MobileStaticRatioCA; this is the measure
 		// assembly and the two call sites' shared entry. Read-only: no order, no RNG, no queue state; the only write is the
-		// shared tracker's record at an emitted start (RecordRatioStart).
+		// shared tracker's record at an emitted start (in TickQueue, right after the order is queued).
 
 		bool RatioActive() => baseBuilder.Info.MobileStaticRatioEnabled && !ablateRatio.Off(player, AblationIds.Ratio2x);
 
@@ -2122,7 +2122,7 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		// IsFloating (Opus 11-22, USER): ONE definition shared by RATIO FLOAT and TECHFIRST's float exemption. FLOAT (design 04 s3, 05): the money cannot go to units — the unit side saturated (cached by its provider) AND the bank
-		// floating (storage >= 90% of capacity, or Cash+Resources at the tier's RAW BankSaturationCash bar; bar 0 = storage leg only).
+		// floating (storage >= 50% of capacity, or Cash+Resources at the tier's RAW BankSaturationCash bar; bar 0 = storage leg only).
 		// The cheap bank leg runs first so the provider is asked only when it could matter.
 		bool IsFloating()
 		{

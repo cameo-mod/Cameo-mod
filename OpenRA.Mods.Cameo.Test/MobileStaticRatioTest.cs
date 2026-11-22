@@ -26,7 +26,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(MobileStaticRatioCA.Ratio, Is.EqualTo(2), "the user's 2x, fixed at every tier");
 			Assert.That(MobileStaticRatioCA.RecordTicks, Is.EqualTo(3));
 			Assert.That(MobileStaticRatioCA.SnapshotMaxAgeTicks, Is.EqualTo(300));
-			Assert.That(MobileStaticRatioCA.StoragePct, Is.EqualTo(90));
+			Assert.That(MobileStaticRatioCA.StoragePct, Is.EqualTo(50));
 		}
 
 		[Test]
@@ -91,13 +91,13 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void TheStorageLegIsNinetyPercentOfAPositiveCapacity()
+		public void TheStorageLegIsFiftyPercentOfAPositiveCapacity()
 		{
-			Assert.That(MobileStaticRatioCA.StorageNearlyFull(899, 1000), Is.False);
-			Assert.That(MobileStaticRatioCA.StorageNearlyFull(900, 1000), Is.True);
-			Assert.That(MobileStaticRatioCA.StorageNearlyFull(1000, 1000), Is.True);
-			Assert.That(MobileStaticRatioCA.StorageNearlyFull(500, 0), Is.False, "no capacity: no storage leg");
-			Assert.That(MobileStaticRatioCA.StorageNearlyFull(0, 0), Is.False);
+			Assert.That(MobileStaticRatioCA.StorageFloating(499, 1000), Is.False);
+			Assert.That(MobileStaticRatioCA.StorageFloating(500, 1000), Is.True);
+			Assert.That(MobileStaticRatioCA.StorageFloating(1000, 1000), Is.True);
+			Assert.That(MobileStaticRatioCA.StorageFloating(500, 0), Is.False, "no capacity: no storage leg");
+			Assert.That(MobileStaticRatioCA.StorageFloating(0, 0), Is.False);
 		}
 
 		[Test]
@@ -106,8 +106,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(MobileStaticRatioCA.Floating(0, 1000, 3999, 4000), Is.False, "bar - 1");
 			Assert.That(MobileStaticRatioCA.Floating(0, 1000, 4000, 4000), Is.True, "bar");
 			Assert.That(MobileStaticRatioCA.Floating(0, 1000, 999999, 0), Is.False, "bar 0 (switch off or classic): the bank leg never applies");
-			Assert.That(MobileStaticRatioCA.Floating(900, 1000, 0, 0), Is.True, "bar 0 still allows the storage leg");
-			Assert.That(MobileStaticRatioCA.Floating(900, 1000, 100, 4000), Is.True, "either leg is enough");
+			Assert.That(MobileStaticRatioCA.Floating(500, 1000, 0, 0), Is.True, "bar 0 still allows the storage leg");
+			Assert.That(MobileStaticRatioCA.Floating(500, 1000, 100, 4000), Is.True, "either leg is enough");
 			Assert.That(MobileStaticRatioCA.Floating(0, 0, 0, 4000), Is.False);
 		}
 
