@@ -45,7 +45,12 @@ def read(path):
                 limit = (1 << 63) - 1 if k in ("credited", "cumulative") else (1 << 31) - 1
                 if type(r.get(k)) is not int or not 0 <= r[k] <= limit:
                     raise ValueError("integer")
-            if r.get("complete") is not True or r.get("income_basis") != BASIS:
+            if r.get("kind") == "dropped":
+                # SPK-01: a counted drop. The stream is incomplete by design; it is reported as UNKNOWN, not a crash.
+                if r.get("complete") is not False or r.get("reason") != "row_budget" or not 0 < r["requested"] \
+                        or r["credited"] != 0 or r.get("income_basis") != BASIS:
+                    raise ValueError("dropped")
+            elif r.get("complete") is not True or r.get("income_basis") != BASIS:
                 raise ValueError("incomplete")
             for k in ("difficulty", "faction"):
                 if not isinstance(r.get(k), str) or not 0 < len(r[k]) <= 128:
@@ -69,9 +74,12 @@ def read(path):
             elif kind in ("start", "end"):
                 if r.get("reason") != "none" or r["requested"] or r["credited"] or (kind == "start" and r["seq"] != 0):
                     raise ValueError("boundary")
+            elif kind == "dropped":
+                s.update(end=True, dropped=r["requested"])
             else:
                 raise ValueError("kind")
-            if r["cumulative"] != s["total"]:
+            # A dropped row's cumulative may include credits the budget refused, so it is not checked against the file.
+            if kind != "dropped" and r["cumulative"] != s["total"]:
                 raise ValueError("total")
             if kind == "end":
                 income = r.get("income")
@@ -88,6 +96,9 @@ def read(path):
                 raise ValueError("premature summary")
         if not states or any(not s["end"] for s in states.values()):
             raise ValueError("missing terminal")
+        dropped = max((s.get("dropped", 0) for s in states.values()), default=0)
+        if dropped:
+            return [{"status": "UNKNOWN", "path": f"{path}: incomplete, {dropped} rows dropped by the row budget"}]
         return [{"game_uid": match, "slot": slot, **s, "status": "RECORDED"} for slot, s in sorted(states.items())]
     except (OSError, ValueError, TypeError, KeyError, UnicodeError, OverflowError):
         return [{"status": "UNKNOWN", "path": str(path)}]

@@ -68,6 +68,27 @@ class InsuranceSummaryTest(unittest.TestCase):
             self.write(rows)
             self.assertEqual(subject.read(self.path)[0]["status"], "UNKNOWN", field)
 
+    def test_counted_drop_is_reported_incomplete_not_a_crash(self):
+        # SPK-01: a "dropped" terminal (complete false, credited 0) is counted and UNKNOWN with the count.
+        rows = fixture()[:2]
+        rows.append(dict(rows[1], seq=2, tick=10, kind="dropped", reason="row_budget", requested=3,
+                         credited=0, cumulative=50, complete=False, income=None, income_share=None))
+        self.write(rows)
+        result = subject.read(self.path)
+        self.assertEqual(result[0]["status"], "UNKNOWN")
+        self.assertIn("3 rows dropped", result[0]["path"])
+
+    def test_dropped_row_that_claims_complete_or_credits_is_unknown_without_count(self):
+        base = fixture()[:2]
+        bad = dict(base[1], seq=2, tick=10, kind="dropped", reason="row_budget", requested=3,
+                   credited=0, cumulative=50, complete=False, income=None, income_share=None)
+        for field, value in (("complete", True), ("credited", 1), ("reason", "none")):
+            rows = base + [dict(bad, **{field: value})]
+            self.write(rows)
+            result = subject.read(self.path)[0]
+            self.assertEqual(result["status"], "UNKNOWN", field)
+            self.assertEqual(result["path"], str(self.path), field)
+
     def test_duplicates_and_bounds_fail_closed(self):
         self.write(fixture())
         self.path.write_text(self.path.read_text().replace('"slot": 1', '"slot": 1, "slot": 1'), encoding="utf-8")
