@@ -48,8 +48,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			{
 				var directory = Path.Combine(Platform.SupportDir, "Logs");
 				Directory.CreateDirectory(directory);
-				health = new AiQueuedJsonlWriter(directory, "cameo-ai-economy-health.jsonl", "economy-health");
-				raw = new AiQueuedJsonlWriter(directory, "cameo-ai-economy-raw.jsonl", "economy-raw");
+				health = new AiQueuedJsonlWriter("cameo-ai-economy-health.jsonl", "economy-health");
+				raw = new AiQueuedJsonlWriter("cameo-ai-economy-raw.jsonl", "economy-raw");
 			}
 			catch (Exception e) when (e is IOException or UnauthorizedAccessException)
 			{

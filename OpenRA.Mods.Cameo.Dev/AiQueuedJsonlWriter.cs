@@ -15,13 +15,15 @@ using System.Text;
 
 namespace OpenRA.Mods.Cameo.Traits
 {
-	// PERF-SPK-01 (DEV only): the queued twin of AiEconomyHealthLogWriter. The sim thread validates each row and appends it to
-	// a batch; Flush hands the batch to AiLogWriteQueue through AiLogFileAppender (enqueue-only, never blocks). The file is
-	// created exclusively once here (the only I/O on the sim thread, at load). A refused hand-off, or a worker failure seen
-	// before the terminal row, is sticky: Finish then writes no terminal row, so the file stays incomplete (reader: UNKNOWN).
+	// PERF-SPK-01 (DEV only): the queued twin of AiEconomyHealthLogWriter. The sim thread admits each row (AiJsonlRowRules, the same
+	// rule as the synchronous writer) and appends it to a batch; Flush hands the batch to AiLogWriteQueue through AiLogFileAppender
+	// (enqueue-only, never blocks). The file is created exclusively once, at construction, in Platform.SupportDir/Logs: the only
+	// I/O on the sim thread, at load. Failure is sticky. A refused hand-off, a drain that times out with batches pending, or a
+	// worker failure seen before a terminal row marks the stream failed, so its Complete reads false and the terminal row says so.
+	// The failure count is process-wide (AiLogWriteQueue.Failed): a worker failure on any other queued DEV file also marks this
+	// stream failed. That is fail-closed and spurious at worst; it is never a silent complete claim.
 	internal sealed class AiQueuedJsonlWriter
 	{
-		static readonly Encoding Utf8 = new UTF8Encoding(false, true);
 		readonly AiLogFileAppender appender;
 		readonly StringBuilder batch = new();
 		readonly long byteLimit;
@@ -33,13 +35,18 @@ namespace OpenRA.Mods.Cameo.Traits
 		bool failed;
 		bool closed;
 
-		internal AiQueuedJsonlWriter(string directory, string fileName, string writer,
+		internal AiQueuedJsonlWriter(string fileName, string writer,
 			long byteLimit = AiEconomyHealthLogWriter.MaximumFileBytes, int recordLimit = AiEconomyHealthLogWriter.MaximumRecords)
 		{
 			if (byteLimit < 1 || recordLimit < 1)
 				throw new ArgumentOutOfRangeException(nameof(byteLimit));
+
 			this.byteLimit = byteLimit;
 			this.recordLimit = recordLimit;
+
+			// The directory is fixed here, so the exclusive create and the appender can never name different files.
+			var directory = Path.Combine(Platform.SupportDir, "Logs");
+			Directory.CreateDirectory(directory);
 
 			// Exclusive create: existing evidence is never overwritten (same rule as the synchronous writer).
 			using (new FileStream(Path.Combine(directory, fileName), FileMode.CreateNew, FileAccess.Write, FileShare.Read)) { }
@@ -53,7 +60,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		internal long Bytes => bytes;
 		internal int MaximumRecordBytes => maximumRecordBytes;
 
-		// Sim thread: validation and a StringBuilder append only. No I/O.
+		// Sim thread: admission and a StringBuilder append only. No I/O.
 		internal bool TryWrite(string json)
 		{
 			if (failed || closed)
@@ -61,11 +68,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			try
 			{
-				if (json == null || json.Length > AiEconomyHealthLogWriter.MaximumLineBytes || json.Contains('\n') || json.Contains('\r'))
-					return Fail();
-
-				var count = Utf8.GetByteCount(json) + 1;
-				if (count > AiEconomyHealthLogWriter.MaximumLineBytes || count > byteLimit - bytes || records >= recordLimit)
+				if (!AiJsonlRowRules.TryCount(json, bytes, records, byteLimit, recordLimit, out var count))
 					return Fail();
 
 				batch.Append(json).Append('\n');
@@ -93,25 +96,21 @@ namespace OpenRA.Mods.Cameo.Traits
 			return !failed;
 		}
 
-		// GameOver only (may wait, bounded, as the sibling DEV writers do). BeginTerminal hands over the rows written so far, drains
-		// the shared queue, and marks the stream failed if a worker failure was seen. Terminal rows are written only after it, and
-		// read Complete at that point, so a failure seen here reads as incomplete. EndTerminal hands over the terminal rows and
-		// drains again; a failure there is sticky, and the reader's seq check fails closed on any row the worker lost.
+		// GameOver only (may wait, bounded by AiLogWriteQueue.GameEndFlushTimeout, as the sibling DEV writers do). BeginTerminal hands
+		// over the rows written so far and drains the shared queue. It marks the stream failed when a refusal happened, a worker failure
+		// was seen, or batches are still pending after the bound. The terminal rows are written only after it, and read Complete then.
 		internal bool BeginTerminal(int tick)
 		{
 			Flush(tick);
-			AiLogWriteQueue.FlushSharedForGameEnd();
-			if (AiLogWriteQueue.Shared.Failed != queueFailuresAtStart)
-				failed = true;
+			DrainOrFail();
 			return !failed;
 		}
 
+		// After the terminal rows are handed over: hands them over and drains again, under the same rules.
 		internal bool EndTerminal(int tick)
 		{
 			Flush(tick, finalRecord: true);
-			AiLogWriteQueue.FlushSharedForGameEnd();
-			if (AiLogWriteQueue.Shared.Failed != queueFailuresAtStart)
-				failed = true;
+			DrainOrFail();
 			return !failed;
 		}
 
@@ -123,6 +122,13 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			Flush(tick);
 			closed = true;
+		}
+
+		void DrainOrFail()
+		{
+			var drained = AiLogWriteQueue.Shared.FlushForGameEnd(AiLogWriteQueue.GameEndFlushTimeout, out var remaining);
+			if (!drained || remaining > 0 || AiLogWriteQueue.Shared.Failed != queueFailuresAtStart)
+				failed = true;
 		}
 
 		bool Fail()

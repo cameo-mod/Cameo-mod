@@ -59,7 +59,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				var directory = Path.Combine(Platform.SupportDir, "Logs");
 				Directory.CreateDirectory(directory);
 				var key = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(uid))).ToLowerInvariant();
-				writer = new AiQueuedJsonlWriter(directory, $"cameo-ai-memory-{key}.jsonl", "memory");
+				writer = new AiQueuedJsonlWriter($"cameo-ai-memory-{key}.jsonl", "memory");
 				process = Process.GetCurrentProcess();
 			}
 			// Fail closed on any setup fault — Process/GC APIs may throw beyond IO
