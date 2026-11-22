@@ -54,6 +54,10 @@ namespace OpenRA.Mods.Cameo.Traits
 		// GameOver then writes "dropped" rows instead of "end" rows, so the stream never claims coverage it does not have.
 		long droppedRows;
 
+		// LOW-1: once the budget has refused a data row, every later data row is refused too. A smaller row that
+		// still fits would leave a hole, and the reader would then see cumulative values above the file's sum.
+		bool budgetClosed;
+
 		void IWorldLoaded.WorldLoaded(World world, WorldRenderer renderer)
 		{
 			if (!world.WorldActor.Trait<OpenRA.Mods.CA.Traits.CameoLogHub>().Sink.Enabled)
@@ -105,9 +109,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			var row = InsuranceSchema.Row(uid, p.Slot, p.Difficulty, p.Faction, p.Seq, tick,
 				kind, reason, requested, credited, p.Ledger, complete, timestep);
 			var bytes = InsuranceRowBudget.RowBytes(row);
-			if (!InsuranceRowBudget.DataRowFits(committedRows + batchRows, committedBytes + batchBytes, bytes,
+			if (budgetClosed || !InsuranceRowBudget.DataRowFits(committedRows + batchRows, committedBytes + batchBytes, bytes,
 				participants.Count, AiEconomyHealthLogWriter.MaximumRecords, AiEconomyHealthLogWriter.MaximumFileBytes))
 			{
+				budgetClosed = true;
 				droppedRows++;
 				return;
 			}
@@ -193,6 +198,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 
 			FlushRows(true);
+			// MED-1: the terminal rows must reach the file before GameOver returns (bounded wait), as the sibling DEV writers do.
+			AiLogWriteQueue.FlushSharedForGameEnd();
 			ended = true;
 		}
 
