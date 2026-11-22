@@ -9,6 +9,8 @@
  */
 #endregion
 
+using System;
+using System.IO;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
 
@@ -63,6 +65,10 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(MobileStaticRatioCA.Float(true, false), Is.EqualTo(RatioVerdict.Hold), "units can still absorb nothing, but the bank is not floating");
 			Assert.That(MobileStaticRatioCA.Float(false, true), Is.EqualTo(RatioVerdict.Hold), "the money can still go to units");
 			Assert.That(MobileStaticRatioCA.Float(false, false), Is.EqualTo(RatioVerdict.Hold));
+
+			// The single-flag form (the base builder evaluates both legs lazily and passes the result).
+			Assert.That(MobileStaticRatioCA.Float(true), Is.EqualTo(RatioVerdict.ExemptFloat));
+			Assert.That(MobileStaticRatioCA.Float(false), Is.EqualTo(RatioVerdict.Hold));
 		}
 
 		[Test]
@@ -185,6 +191,108 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var second = MobileStaticRatioCA.Decide(true, mobile, 600, 600, r.IsFirstCopy("gun", true), false, false);
 			Assert.That(second, Is.EqualTo(RatioVerdict.Hold), "the further copy waits for the army");
+		}
+
+		// ---- source pins (R2/R3): the wiring cannot drift from the reviewed shape ----
+
+		static string Source(string file) =>
+			File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "source", file)).Replace("
+", "
+");
+
+		static string Builder() => Source("mods/CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs");
+
+		static string RatioRegion(string builder)
+		{
+			var a = builder.IndexOf("// RATIO-2X-01 (ARMY_FIRST_02_DESIGN_04/05) ---", StringComparison.Ordinal);
+			var b = builder.IndexOf("ActorInfo ChooseBuildingToBuild(ProductionQueue queue)", StringComparison.Ordinal);
+			Assert.That(a, Is.GreaterThanOrEqualTo(0), "the ratio helper region exists");
+			Assert.That(b, Is.GreaterThan(a));
+			return builder.Substring(a, b - a);
+		}
+
+		[Test]
+		public void TheAblationRowAndTheSwitchGateTheRule()
+		{
+			Assert.That(AblationIds.Ratio2x, Is.EqualTo("army_first_02_ratio"));
+			var region = RatioRegion(Builder());
+			Assert.That(region, Does.Contain("bool RatioActive() => baseBuilder.Info.MobileStaticRatioEnabled && !ablateRatio.Off(player, AblationIds.Ratio2x);"));
+			Assert.That(Source("mods/CA/Traits/BotModules/BaseBuilderBotModuleCA.cs"), Does.Contain("public readonly bool MobileStaticRatioEnabled = false;"), "off by default");
+		}
+
+		[Test]
+		public void TheGateHoldsBeforeEveryClaimAndRecordsOnlyAtTheEmittedOrder()
+		{
+			var b = Builder();
+			var gate = b.IndexOf("var ratioVerdict = RatioGate(item, out var ratioDefence);", StringComparison.Ordinal);
+			var afterReserve = b.IndexOf("// RATIO-2X-01 (ARMY_FIRST_02_DESIGN_04/05): a static-defence start must keep", StringComparison.Ordinal);
+			var firstClaim = b.IndexOf("lawWants.TryClaimCrawlLink(queue.Actor, item.Name", StringComparison.Ordinal);
+			var refReservation = b.IndexOf("BaseBuilderQueueEvalCA.RefineryReservationAdmits(", StringComparison.Ordinal);
+			var mobileBlock = b.IndexOf("BaseBuilderQueueEvalCA.MobileSpendBlocks(playerResources.GetCashAndResources()", StringComparison.Ordinal);
+			var emitted = b.IndexOf("queuedAt[queue.Actor.ActorID] = (item.Name, world.WorldTick);", StringComparison.Ordinal);
+			var record = b.IndexOf("baseBuilder.StaticRatio.Record(world.WorldTick, item.Name, ValuedCost(item));", StringComparison.Ordinal);
+
+			Assert.That(new[] { gate, afterReserve, firstClaim, refReservation, mobileBlock, emitted, record }, Has.All.GreaterThanOrEqualTo(0));
+			Assert.That(mobileBlock, Is.LessThan(gate), "after the cash gate and the TF-2 reservation");
+			Assert.That(gate, Is.LessThan(refReservation), "before the refinery reservation claim");
+			Assert.That(gate, Is.LessThan(firstClaim), "before the crawl-link claim");
+			Assert.That(record, Is.GreaterThan(emitted), "the start is recorded only after the order is emitted");
+			Assert.That(b, Does.Contain("if (MobileStaticRatioCA.Holds(ratioVerdict))
+				{
+					pendingDemandPick = default;
+					return false;"), "a hold drops the pending demand pick like the TF-2 veto");
+		}
+
+		[Test]
+		public void TheFractionLoopSkipsAHeldDefenceInsteadOfLosingTheSweep()
+		{
+			var b = Builder();
+			var skip = b.IndexOf("if (MobileStaticRatioCA.Holds(RatioGate(actor, out _)))", StringComparison.Ordinal);
+			var build = b.IndexOf("// Lets build this", StringComparison.Ordinal);
+			var lowPower = b.IndexOf("if (BaseBuilderQueueEvalCA.LowPowerBlocked(playerPower != null", StringComparison.Ordinal);
+			Assert.That(skip, Is.GreaterThan(lowPower));
+			Assert.That(build, Is.GreaterThan(skip));
+		}
+
+		[Test]
+		public void TheNewCodeNeverCancelsOrOrdersAndAddsNoVoterOrNewScalingConstant()
+		{
+			var region = RatioRegion(Builder());
+			var pure = Source("mods/CA/Traits/BotModules/BotModuleLogic/MobileStaticRatioCA.cs");
+			var seam = Source("mods/CA/Traits/BotModules/IBotMobileStaticValues.cs");
+			foreach (var text in new[] { region, pure, seam })
+			{
+				Assert.That(text, Does.Not.Contain("CancelProduction"), "a held defence is retried, never cancelled");
+				Assert.That(text, Does.Not.Contain("QueueOrder"));
+				Assert.That(text, Does.Not.Contain("[Sync]"), "no synced state");
+				Assert.That(text, Does.Not.Contain("IBotRequestPauseBuildingProduction"), "no building pause voter");
+				Assert.That(text, Does.Not.Contain("FloatCash"), "the fixed float bar was dropped");
+				Assert.That(text, Does.Not.Contain("ScalingNetIncomePerTick"));
+				Assert.That(text, Does.Not.Contain("BankSaturationThreshold"), "the raw tier bar is read, not the unit builder's switched threshold");
+				Assert.That(text, Does.Not.Contain("UnitProductionSaturationCash"));
+			}
+
+			Assert.That(region, Does.Contain("botLimits?.Info.BankSaturationCash ?? 0"));
+			Assert.That(region, Does.Not.Contain("BotRng"), "no RNG: the verdict is a pure function of the measure");
+		}
+
+		[Test]
+		public void TheDefenceClassificationIsTheInfoTwinOfTheSituationOwnersIsDefence()
+		{
+			var situation = Source("mods/Cameo/Traits/BotModules/BotSituation.cs");
+			Assert.That(situation, Does.Contain("bool IsDefence(Actor a) => IsBuilding(a) && (a.Info.HasTraitInfo<AttackBaseInfo>() ||
+			a.GetEnabledTargetTypes().Overlaps(Info.DefenceTargetTypes));"));
+			Assert.That(situation, Does.Contain("info != null && info.HasTraitInfo<BuildingInfo>()"));
+			Assert.That(situation, Does.Contain("&& (info.HasTraitInfo<AttackBaseInfo>() || info.TraitInfos<ITargetableInfo>().Any(t => t.GetTargetTypes().Overlaps(Info.DefenceTargetTypes)));"));
+			Assert.That(situation, Does.Contain("long IBotMobileStaticValues.MobileValue => Situation?.OwnArmyValue ?? 0;"), "the measure is the snapshot's own army value, no new scan");
+		}
+
+		[Test]
+		public void TheUnitSideSaturationIsCachedAndTheDefaultMeansNoFloat()
+		{
+			var unit = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			Assert.That(unit, Does.Contain("tick - unitSideSaturatedTick < FeedbackTime"), "never a per-call scan");
+			Assert.That(Source("mods/CA/Traits/BotModules/IBotMobileSpendReserve.cs"), Does.Contain("bool UnitSideSaturated => false;"));
 		}
 	}
 }

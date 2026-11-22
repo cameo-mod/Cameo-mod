@@ -96,6 +96,7 @@ effect_classes:
   CG_agg_team: capability             # IMPL02-AGG-TEAM: send more of the army out (home-reserve cap, max-strength push) and join allied attacks; no part of it holds an attack back
   CH_retreat_rally: restraint         # A10 RETREAT-RALLY: a retreating ground squad walks to a friendly army instead of the base; while it rallies it stays out of the pool, A4 joins and A5 launches for up to AggTeamRallyMaxTicks (M13: any hold part = restraint). The Support leg is an AttackMove onto an ally's target, which the legacy flow never made (new behaviour, not 'no new attack capability'). Retreat decisions (WHEN) are unchanged: A10 only chooses WHERE
   CI_refinery_stall_fix: capability     # STALL-FIX-01: a retained refinery whose fallback scan stayed Deferred for RefineryFallbackForceAfterTicks game ticks is forced to a Site or Exhausted verdict in one poll; unblocks the building queue (a completed refinery at the head blocks every later building). No part holds anything back; the cancel rule is unchanged (cancel only on Exhausted with a current certificate)
+  R2X_mobile_static_ratio: restraint    # RATIO-2X-01 (ARMY_FIRST_02_DESIGN_04/05): a static-defence start waits while the mobile army is below 2x the static defence value (first copy of each defence type and a floating bank with a saturated unit side are exempt; nothing is ever cancelled). A hold part = restraint (M13)
 
 groups:
   BV_m13_liveness:
@@ -398,3 +399,6 @@ groups:
   CI_refinery_stall_fix:             # STALL-FIX-01 (Opus order, FREEZE11 input). Independent of the CD..CH group (no needs). Off = RefineryFallbackForceAfterTicks 0 = the budgeted scan path unchanged, no force, no line. On: after 1500 deferred ticks (about one minute) the retained-refinery fallback scan completes in one poll (Site, or Exhausted with its own certificate); every other verdict still holds
     ExpansionPlannerBotModule:
       RefineryFallbackForceAfterTicks: 1500
+  R2X_mobile_static_ratio:           # RATIO-2X-01 standalone first increment. Off = MobileStaticRatioEnabled false = the army-first gate as before, no record, no line. Needs the situation owner's snapshot (MasterAiBotModule); a bot without one runs the rule inert (never holds). Classic carries no snapshot
+    BaseBuilderBotModuleCA:
+      MobileStaticRatioEnabled: true
