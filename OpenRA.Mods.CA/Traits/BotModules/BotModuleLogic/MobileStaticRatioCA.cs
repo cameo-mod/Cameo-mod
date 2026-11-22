@@ -127,17 +127,25 @@ namespace OpenRA.Mods.CA.Traits
 			resourceCapacity > 0 && resources * 100 >= resourceCapacity * StoragePct;
 
 		/// <summary>
-		/// FLOAT leg (b) (ARMY_FIRST_02_DESIGN_04 s3): the storage is at least half full, OR the bank has reached the tier's bank-saturation
-		/// bar (<see cref="ProductionSaturationCA.Saturated"/>: bar > 0 and bank >= bar; bar 0 = the saturation switch off or classic,
-		/// only the storage leg then applies). Condition (a), the unit side being saturated, is tested separately by the caller.
+		/// The bank leg: Cash+Resources at or above the tier's bank-saturation bar (<see cref="ProductionSaturationCA.Saturated"/>: bar > 0
+		/// and bank >= bar; bar 0 = the saturation switch off or classic, the leg never applies).
 		/// </summary>
-		public static bool Floating(long resources, long resourceCapacity, long cashAndResources, int bankSaturationBar) =>
-			StorageFloating(resources, resourceCapacity) || ProductionSaturationCA.Saturated(cashAndResources, bankSaturationBar);
+		public static bool BankOverBar(long cashAndResources, int bankSaturationBar) =>
+			ProductionSaturationCA.Saturated(cashAndResources, bankSaturationBar);
+
+		/// <summary>
+		/// THE float definition, shared by the 2x ratio's FLOAT exemption and TECHFIRST-01 (USER 11-22, Opus T1): the storage leg stands
+		/// alone (money near the cap is wasted), OR every unit queue is saturated AND the bank is over the tier's bar. The unit-side
+		/// answer is read from <paramref name="units"/> only when the bank leg holds and the storage leg did not (it is a cached but
+		/// non-trivial query). No provider = the unit side never reads saturated.
+		/// </summary>
+		public static bool IsFloating(bool storageFloating, bool bankOverBar, IBotMobileSpendReserve units) =>
+			storageFloating || (bankOverBar && units != null && units.UnitSideSaturated);
 
 		/// <summary>
 		/// Decision stages 1-3 (cheap, no unit-side scan): no measure = Inert; ratio satisfied = Admit (also for a first copy, so an
 		/// exempt start is always a start BELOW the ratio); first copy of the type = ExemptFirst; otherwise NeedsFloat, and the caller
-		/// completes with <see cref="Float"/> only then (the unit-side saturation is computed lazily).
+		/// completes with <see cref="Float"/> only then (the float test is computed lazily).
 		/// </summary>
 		public static RatioVerdict Stage1(bool measured, long mobile, long staticTotal, long cost, bool firstCopyOfType)
 		{
@@ -150,19 +158,14 @@ namespace OpenRA.Mods.CA.Traits
 			return firstCopyOfType ? RatioVerdict.ExemptFirst : RatioVerdict.NeedsFloat;
 		}
 
-		/// <summary>Stage 4: FLOAT needs BOTH the unit side saturated (a) and the bank floating (b); otherwise the start is held.</summary>
-		public static RatioVerdict Float(bool unitSideSaturated, bool floating) =>
-			unitSideSaturated && floating ? RatioVerdict.ExemptFloat : RatioVerdict.Hold;
-
-		/// <summary>Stage 4 for a caller that has already evaluated both legs (the base builder's lazy FLOAT test): floating = exempt, else hold.</summary>
+		/// <summary>Stage 4: the start is exempt while <see cref="IsFloating"/> holds, otherwise it is held.</summary>
 		public static RatioVerdict Float(bool floatNow) => floatNow ? RatioVerdict.ExemptFloat : RatioVerdict.Hold;
 
 		/// <summary>The whole decision for callers and tests that have every input at hand.</summary>
-		public static RatioVerdict Decide(bool measured, long mobile, long staticTotal, long cost, bool firstCopyOfType,
-			bool unitSideSaturated, bool floating)
+		public static RatioVerdict Decide(bool measured, long mobile, long staticTotal, long cost, bool firstCopyOfType, bool isFloating)
 		{
 			var v = Stage1(measured, mobile, staticTotal, cost, firstCopyOfType);
-			return v == RatioVerdict.NeedsFloat ? Float(unitSideSaturated, floating) : v;
+			return v == RatioVerdict.NeedsFloat ? Float(isFloating) : v;
 		}
 
 		/// <summary>The start waits this sweep (the only verdict that holds).</summary>

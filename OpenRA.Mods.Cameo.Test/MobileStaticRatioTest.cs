@@ -59,14 +59,8 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void FloatNeedsBothTheSaturatedUnitSideAndAFloatingBank()
+		public void StageFourExemptsWhileFloatingAndHoldsOtherwise()
 		{
-			Assert.That(MobileStaticRatioCA.Float(true, true), Is.EqualTo(RatioVerdict.ExemptFloat));
-			Assert.That(MobileStaticRatioCA.Float(true, false), Is.EqualTo(RatioVerdict.Hold), "units can still absorb nothing, but the bank is not floating");
-			Assert.That(MobileStaticRatioCA.Float(false, true), Is.EqualTo(RatioVerdict.Hold), "the money can still go to units");
-			Assert.That(MobileStaticRatioCA.Float(false, false), Is.EqualTo(RatioVerdict.Hold));
-
-			// The single-flag form (the base builder evaluates both legs lazily and passes the result).
 			Assert.That(MobileStaticRatioCA.Float(true), Is.EqualTo(RatioVerdict.ExemptFloat));
 			Assert.That(MobileStaticRatioCA.Float(false), Is.EqualTo(RatioVerdict.Hold));
 		}
@@ -75,15 +69,14 @@ namespace OpenRA.Mods.Cameo.Test
 		public void DecideComposesTheStagesAndOnlyAFurtherCopyBelowTheRatioReachesFloat()
 		{
 			// ratio satisfied: floats are irrelevant
-			Assert.That(MobileStaticRatioCA.Decide(true, 1200, 0, 600, false, false, false), Is.EqualTo(RatioVerdict.Admit));
+			Assert.That(MobileStaticRatioCA.Decide(true, 1200, 0, 600, false, false), Is.EqualTo(RatioVerdict.Admit));
 			// first copy: exempt without consulting float
-			Assert.That(MobileStaticRatioCA.Decide(true, 0, 0, 600, true, false, false), Is.EqualTo(RatioVerdict.ExemptFirst));
+			Assert.That(MobileStaticRatioCA.Decide(true, 0, 0, 600, true, false), Is.EqualTo(RatioVerdict.ExemptFirst));
 			// further copy: float decides
-			Assert.That(MobileStaticRatioCA.Decide(true, 0, 0, 600, false, true, true), Is.EqualTo(RatioVerdict.ExemptFloat));
-			Assert.That(MobileStaticRatioCA.Decide(true, 0, 0, 600, false, true, false), Is.EqualTo(RatioVerdict.Hold));
-			Assert.That(MobileStaticRatioCA.Decide(true, 0, 0, 600, false, false, true), Is.EqualTo(RatioVerdict.Hold));
+			Assert.That(MobileStaticRatioCA.Decide(true, 0, 0, 600, false, true), Is.EqualTo(RatioVerdict.ExemptFloat));
+			Assert.That(MobileStaticRatioCA.Decide(true, 0, 0, 600, false, false), Is.EqualTo(RatioVerdict.Hold));
 			// unmeasured: never a hold
-			Assert.That(MobileStaticRatioCA.Decide(false, 0, 0, 600, false, false, false), Is.EqualTo(RatioVerdict.Inert));
+			Assert.That(MobileStaticRatioCA.Decide(false, 0, 0, 600, false, false), Is.EqualTo(RatioVerdict.Inert));
 
 			Assert.That(MobileStaticRatioCA.Holds(RatioVerdict.Hold), Is.True);
 			foreach (var v in new[] { RatioVerdict.Inert, RatioVerdict.Admit, RatioVerdict.ExemptFirst, RatioVerdict.ExemptFloat, RatioVerdict.NeedsFloat })
@@ -101,14 +94,51 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void TheBankLegIsTheTierBarAndAZeroBarLeavesOnlyTheStorageLeg()
+		public void TheBankLegIsTheTierBarAndAZeroBarNeverApplies()
 		{
-			Assert.That(MobileStaticRatioCA.Floating(0, 1000, 3999, 4000), Is.False, "bar - 1");
-			Assert.That(MobileStaticRatioCA.Floating(0, 1000, 4000, 4000), Is.True, "bar");
-			Assert.That(MobileStaticRatioCA.Floating(0, 1000, 999999, 0), Is.False, "bar 0 (switch off or classic): the bank leg never applies");
-			Assert.That(MobileStaticRatioCA.Floating(500, 1000, 0, 0), Is.True, "bar 0 still allows the storage leg");
-			Assert.That(MobileStaticRatioCA.Floating(500, 1000, 100, 4000), Is.True, "either leg is enough");
-			Assert.That(MobileStaticRatioCA.Floating(0, 0, 0, 4000), Is.False);
+			Assert.That(MobileStaticRatioCA.BankOverBar(3999, 4000), Is.False, "bar - 1");
+			Assert.That(MobileStaticRatioCA.BankOverBar(4000, 4000), Is.True, "bar");
+			Assert.That(MobileStaticRatioCA.BankOverBar(999999, 0), Is.False, "bar 0 (switch off or classic): the bank leg never applies");
+		}
+
+		sealed class UnitSide : IBotMobileSpendReserve
+		{
+			public bool UnitSideSaturated { get; set; }
+
+			public int MobileSpendFloor => 0;
+
+			public int PaidUnitSharePct => 0;
+		}
+
+		// USER 11-22 (Opus T1): (all unit queues full AND bank >= bar) OR storage >= 50%; the storage leg stands alone.
+		[TestCase(true, false, false, ExpectedResult = true, TestName = "storage alone floats, units can still absorb")]
+		[TestCase(true, true, true, ExpectedResult = true, TestName = "all legs")]
+		[TestCase(false, true, true, ExpectedResult = true, TestName = "bank over the bar with a saturated unit side")]
+		[TestCase(false, true, false, ExpectedResult = false, TestName = "bank over the bar but units can still absorb")]
+		[TestCase(false, false, true, ExpectedResult = false, TestName = "saturated unit side without the bank")]
+		[TestCase(false, false, false, ExpectedResult = false, TestName = "nothing floats")]
+		public bool IsFloatingIsStorageAloneOrABankOverTheBarWithASaturatedUnitSide(bool storage, bool bank, bool unitsSaturated) =>
+			MobileStaticRatioCA.IsFloating(storage, bank, new UnitSide { UnitSideSaturated = unitsSaturated });
+
+		[Test]
+		public void NoProviderMeansTheUnitSideNeverReadsSaturatedButStorageStillFloats()
+		{
+			Assert.That(MobileStaticRatioCA.IsFloating(false, true, null), Is.False);
+			Assert.That(MobileStaticRatioCA.IsFloating(true, false, null), Is.True);
+		}
+
+		[Test]
+		public void TheDefaultProviderAnswerIsNotSaturated()
+		{
+			IBotMobileSpendReserve plain = new PlainReserve();
+			Assert.That(plain.UnitSideSaturated, Is.False, "the interface default: no float from the unit side");
+		}
+
+		sealed class PlainReserve : IBotMobileSpendReserve
+		{
+			public int MobileSpendFloor => 0;
+
+			public int PaidUnitSharePct => 0;
 		}
 
 		[Test]
@@ -185,11 +215,11 @@ namespace OpenRA.Mods.Cameo.Test
 			var r = new MobileStaticRatioCA();
 			const long mobile = 0;
 
-			var first = MobileStaticRatioCA.Decide(true, mobile, 0, 600, r.IsFirstCopy("gun", false), false, false);
+			var first = MobileStaticRatioCA.Decide(true, mobile, 0, 600, r.IsFirstCopy("gun", false), false);
 			Assert.That(first, Is.EqualTo(RatioVerdict.ExemptFirst));
 			r.Record(10, "gun", 600);
 
-			var second = MobileStaticRatioCA.Decide(true, mobile, 600, 600, r.IsFirstCopy("gun", true), false, false);
+			var second = MobileStaticRatioCA.Decide(true, mobile, 600, 600, r.IsFirstCopy("gun", true), false);
 			Assert.That(second, Is.EqualTo(RatioVerdict.Hold), "the further copy waits for the army");
 		}
 
@@ -273,6 +303,9 @@ namespace OpenRA.Mods.Cameo.Test
 			}
 
 			Assert.That(region, Does.Contain("botLimits?.Info.BankSaturationCash ?? 0"));
+			Assert.That(region, Does.Contain("bool IsFloating()"), "one shared float helper (TECHFIRST-01 calls it too)");
+			Assert.That(region, Does.Contain("return MobileStaticRatioCA.IsFloating("), "the definition lives in the pure class only");
+			Assert.That(region, Does.Contain("verdict = MobileStaticRatioCA.Float(IsFloating());"));
 			Assert.That(region, Does.Not.Contain("BotRng"), "no RNG: the verdict is a pure function of the measure");
 		}
 

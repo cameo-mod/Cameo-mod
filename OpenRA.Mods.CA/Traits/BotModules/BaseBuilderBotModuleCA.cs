@@ -205,8 +205,8 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly int DefenseProductionMinCashRequirement = 2250;
 
 		[Desc("RATIO-2X-01: a new static defence may start only if the mobile army value is at least 2x (static defence value + the new defence), "
-			+ "by cost. The first copy of each defence type is exempt, and so is a start while the unit side cannot absorb the money and the "
-			+ "bank is floating. A held defence waits and is never cancelled. Off by default; the R2X_mobile_static_ratio increment switch turns it on.")]
+			+ "by cost. The first copy of each defence type is exempt, and so is a start while the bank floats: storage at least half full, or every "
+			+ "unit queue saturated with Cash+Resources at the tier's bank-saturation bar. A held defence waits and is never cancelled. Off by default; the R2X_mobile_static_ratio increment switch turns it on.")]
 		public readonly bool MobileStaticRatioEnabled = false;
 
 		[Desc("Radius in cells around a factory scanned for rally points by the AI.")]

@@ -1622,8 +1622,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		int IBotMobileSpendReserve.PaidUnitSharePct => mobileReserve.PaidSharePct();
 
-		// RATIO-2X-01 FLOAT (a): the unit side cannot absorb money. Cached for FeedbackTime ticks: the base builder asks only when a
-		// defence start failed the 2x test and the first-copy exemption, so the scan below runs at most once per FeedbackTime ticks.
+		// RATIO-2X-01 / TECHFIRST-01 float, unit-side leg: the unit side cannot absorb money. Cached for FeedbackTime ticks: the base builder asks
+		// only when the storage leg did not float and the bank is over the tier's bar, so the scan below runs at most once per FeedbackTime ticks.
 		// "Busy and full" is the live slot measure (LiveFreeSlots: parallel slots, or any queued item on a single queue); the PR-2 depth
 		// allowance is not consulted, so a depth queue holding one item reads as full (the looser side; the bank leg of FLOAT still applies).
 		bool unitSideSaturated;

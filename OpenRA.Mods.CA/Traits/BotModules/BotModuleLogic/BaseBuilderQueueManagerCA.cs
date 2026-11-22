@@ -2121,17 +2121,17 @@ namespace OpenRA.Mods.CA.Traits
 			return staticLiveValue + baseBuilder.StaticRatio.Recorded(now);
 		}
 
-		// IsFloating (Opus 11-22, USER): ONE definition shared by RATIO FLOAT and TECHFIRST's float exemption. FLOAT (design 04 s3, 05): the money cannot go to units — the unit side saturated (cached by its provider) AND the bank
-		// floating (storage >= 50% of capacity, or Cash+Resources at the tier's RAW BankSaturationCash bar; bar 0 = storage leg only).
-		// The cheap bank leg runs first so the provider is asked only when it could matter.
+		// IsFloating (USER 11-22, Opus T1): ONE definition shared by the RATIO FLOAT exemption and TECHFIRST-01's float rule: storage at or
+		// above 50% of capacity (alone: money near the cap is wasted), OR every unit queue saturated AND Cash+Resources at the tier's RAW
+		// BankSaturationCash bar (bar 0 = that leg never applies). The two bank legs are cheap ints; the unit side is a cached provider
+		// answer read only when the bank leg holds (MobileStaticRatioCA.IsFloating short-circuits).
 		bool IsFloating()
 		{
-			if (!MobileStaticRatioCA.Floating(playerResources.Resources, playerResources.ResourceCapacity,
-					playerResources.GetCashAndResources(), botLimits?.Info.BankSaturationCash ?? 0))
-				return false;
-
 			mobileReserve ??= player.PlayerActor.TraitsImplementing<IBotMobileSpendReserve>().FirstEnabledTraitOrDefault();
-			return mobileReserve != null && mobileReserve.UnitSideSaturated;
+			return MobileStaticRatioCA.IsFloating(
+				MobileStaticRatioCA.StorageFloating(playerResources.Resources, playerResources.ResourceCapacity),
+				MobileStaticRatioCA.BankOverBar(playerResources.GetCashAndResources(), botLimits?.Info.BankSaturationCash ?? 0),
+				mobileReserve);
 		}
 
 		// The verdict for starting `item` now. Inert covers every case the rule does not apply to (switch off, ablated, not a
