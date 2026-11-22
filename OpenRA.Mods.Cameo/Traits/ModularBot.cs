@@ -747,13 +747,43 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 		}
 
+		/// <summary>HOTFIX-RR-01 B: the AttackInfo a queued attack notice is delivered with, or null to drop it. Dropped while the
+		/// damaged actor is gone (null, destroyed or out of the world): the immediate (ungated) path runs inside Damaged, where it
+		/// always exists, but a queued notice can outlive it (RR-on smoke: HarvesterBotModuleCA.RespondToAttack read a trait of a
+		/// destroyed ore truck). A destroyed attacker becomes null on a COPY (the original AttackInfo is shared with other
+		/// listeners); every RespondToAttack null-checks the attacker before its first read.</summary>
+		public static AttackInfo QueuedAttackInfo(Actor self, AttackInfo e)
+		{
+			if (self == null || e == null || self.Disposed || !self.IsInWorld)
+				return null;
+
+			if (e.Attacker == null || !e.Attacker.Disposed)
+				return e;
+
+			return new AttackInfo
+			{
+				Attacker = null,
+				Damage = e.Damage,
+				DamageState = e.DamageState,
+				PreviousDamageState = e.PreviousDamageState,
+				ProjectileType = e.ProjectileType,
+			};
+		}
+
 		// Delivery of a queued event at this bot's visit. An empty recipient module means the bot itself.
 		void Deliver(BotEvent ev)
 		{
 			if (ev.Recipient.Module.Length == 0)
 			{
 				if (ev is AttackEvent a)
-					DeliverAttack(a.Self, a.Info, true);
+				{
+					// HOTFIX-RR-01 B: like A-1 below, the damaged actor may have been destroyed (or left the world) while the
+					// notice waited for the slot; the attack modules read its traits, so such a notice is dropped without a call.
+					// A destroyed attacker is delivered as null (all 18 RespondToAttack implementations null-check it first).
+					var info = QueuedAttackInfo(a.Self, a.Info);
+					if (info != null)
+						DeliverAttack(a.Self, info, true);
+				}
 				else if (ev is OrderDispositionEvent disposition)
 				{
 					if (disposition.Order != null)
