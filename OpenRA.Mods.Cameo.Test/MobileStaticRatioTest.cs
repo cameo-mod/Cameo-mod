@@ -196,9 +196,7 @@ namespace OpenRA.Mods.Cameo.Test
 		// ---- source pins (R2/R3): the wiring cannot drift from the reviewed shape ----
 
 		static string Source(string file) =>
-			File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "source", file)).Replace("
-", "
-");
+			File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "source", file)).Replace("\r\n", "\n");
 
 		static string Builder() => Source("mods/CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs");
 
@@ -237,10 +235,12 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(gate, Is.LessThan(refReservation), "before the refinery reservation claim");
 			Assert.That(gate, Is.LessThan(firstClaim), "before the crawl-link claim");
 			Assert.That(record, Is.GreaterThan(emitted), "the start is recorded only after the order is emitted");
-			Assert.That(b, Does.Contain("if (MobileStaticRatioCA.Holds(ratioVerdict))
-				{
-					pendingDemandPick = default;
-					return false;"), "a hold drops the pending demand pick like the TF-2 veto");
+
+			var holdAt = b.IndexOf("if (MobileStaticRatioCA.Holds(ratioVerdict))", StringComparison.Ordinal);
+			Assert.That(holdAt, Is.GreaterThanOrEqualTo(0));
+			var holdBlock = b.Substring(holdAt, 160);
+			Assert.That(holdBlock, Does.Contain("pendingDemandPick = default;"), "a hold drops the pending demand pick like the TF-2 veto");
+			Assert.That(holdBlock, Does.Contain("return false;"));
 		}
 
 		[Test]
@@ -280,8 +280,8 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheDefenceClassificationIsTheInfoTwinOfTheSituationOwnersIsDefence()
 		{
 			var situation = Source("mods/Cameo/Traits/BotModules/BotSituation.cs");
-			Assert.That(situation, Does.Contain("bool IsDefence(Actor a) => IsBuilding(a) && (a.Info.HasTraitInfo<AttackBaseInfo>() ||
-			a.GetEnabledTargetTypes().Overlaps(Info.DefenceTargetTypes));"));
+			Assert.That(situation, Does.Contain("bool IsDefence(Actor a) => IsBuilding(a) && (a.Info.HasTraitInfo<AttackBaseInfo>() ||"));
+			Assert.That(situation, Does.Contain("a.GetEnabledTargetTypes().Overlaps(Info.DefenceTargetTypes));"));
 			Assert.That(situation, Does.Contain("info != null && info.HasTraitInfo<BuildingInfo>()"));
 			Assert.That(situation, Does.Contain("&& (info.HasTraitInfo<AttackBaseInfo>() || info.TraitInfos<ITargetableInfo>().Any(t => t.GetTargetTypes().Overlaps(Info.DefenceTargetTypes)));"));
 			Assert.That(situation, Does.Contain("long IBotMobileStaticValues.MobileValue => Situation?.OwnArmyValue ?? 0;"), "the measure is the snapshot's own army value, no new scan");
