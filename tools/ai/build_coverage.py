@@ -15,9 +15,10 @@ HOLD rules (Hard+ games of at least MIN_TICKS only):
   - any seat with 0 defences. Defences are the "defence" and "aa" (anti-air) categories. Walls and
     gates ("wall_gate") are reported in defence_split and do not count. A metadata seat with no
     placements counts as a 0-defence seat;
-  - tier-2 deadline and coverage minimum: ONLY when given explicitly (--tier2-deadline,
-    --coverage-min), from --calibrate on known-good replays. The tier-2 deadline is a HOLD only in
-    games of at least TIER2_CHECK_MIN_TICKS; shorter games list it as an advisory.
+  - tier-2 deadline and coverage minimum: the command line applies TIER2_DEADLINE_DEFAULT and
+    COVERAGE_MIN_DEFAULT unless --tier2-deadline / --coverage-min are given. evaluate() itself
+    applies a threshold only when one is passed. The tier-2 deadline is a HOLD only in games of at
+    least TIER2_CHECK_MIN_TICKS; shorter games list it as an advisory.
 
 Defence and building types come from the rules the mod loads: the Rules entries of mod.yaml
 and the Include chains of its content packs. Files the mod does not load are not read.
@@ -41,6 +42,11 @@ import sys
 
 MIN_TICKS = 12000
 TIER2_CHECK_MIN_TICKS = 30000     # the tier-2 deadline is a HOLD only in games at least this long
+
+# Built-in gates from the 11-22 calibration on the five identified C29 replays (commit 8c9c7d32).
+# main() applies them when no flag is given, so a gate that forgets the flags still runs both checks.
+TIER2_DEADLINE_DEFAULT = 30000    # 1.25 x latest good tier-2 tick (23571), rounded up to 1000
+COVERAGE_MIN_DEFAULT = 0.4        # 0.8 x lowest good-game seat coverage (0.5)
 DEFAULT_NET_INTERVAL = 3          # used only when the replay states no NetFrameInterval
 
 # Bot tiers of the 11-step ladder at or above Hard (mods/cameo/ai/ai.yaml, Bots lists).
@@ -639,7 +645,7 @@ def calibrate(paths, rules_root=_DEFAULT_RULES, matches_path=None, tier2_factor=
     return result
 
 
-def main(argv=None):
+def _parser():
     ap = argparse.ArgumentParser(description="Build-coverage guard for .orarep replays.")
     ap.add_argument("replays", nargs="+", help="one replay, or known-good replays with --calibrate")
     ap.add_argument("--calibrate", action="store_true", help="derive thresholds from known-good replays")
@@ -647,16 +653,20 @@ def main(argv=None):
                     help="calibrate: deadline = this x latest good tier-2 tick, up to 1000 (no default)")
     ap.add_argument("--coverage-factor", type=float, default=None,
                     help="calibrate: coverage minimum = this x lowest good coverage (no default)")
-    ap.add_argument("--tier2-deadline", type=int, default=None,
+    ap.add_argument("--tier2-deadline", type=int, default=TIER2_DEADLINE_DEFAULT,
                     help="HOLD if a seat has no tier-2 building by this tick, in games of at least "
-                         "TIER2_CHECK_MIN_TICKS (unset = not enforced)")
-    ap.add_argument("--coverage-min", type=float, default=None,
-                    help="HOLD below this coverage (unset = not enforced)")
+                         "TIER2_CHECK_MIN_TICKS (default {})".format(TIER2_DEADLINE_DEFAULT))
+    ap.add_argument("--coverage-min", type=float, default=COVERAGE_MIN_DEFAULT,
+                    help="HOLD below this coverage (default {})".format(COVERAGE_MIN_DEFAULT))
     ap.add_argument("--matches", default=None,
                     help="cameo-ai-matches.jsonl (default: found beside or above the replay)")
     ap.add_argument("--rules-root", default=_DEFAULT_RULES)
     ap.add_argument("--out", default=None, help="write the JSON report here too")
-    args = ap.parse_args(argv)
+    return ap
+
+
+def main(argv=None):
+    args = _parser().parse_args(argv)
     try:
         if args.calibrate:
             result = calibrate(args.replays, args.rules_root, args.matches,

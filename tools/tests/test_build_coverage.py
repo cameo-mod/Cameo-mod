@@ -401,6 +401,45 @@ class CalibrationTests(unittest.TestCase):
         self.assertIsNone(result["thresholds"]["tier2_deadline_tick"])
 
 
+class DefaultGateTests(unittest.TestCase):
+    """The command line runs the calibrated tier-2 and coverage checks when no flag is given."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        Path(self.tmp.name, "rules.yaml").write_text(RULES_YAML, encoding="utf-8")
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_built_in_defaults_are_the_calibrated_values(self):
+        self.assertEqual(bc.TIER2_DEADLINE_DEFAULT, 30000)
+        self.assertEqual(bc.COVERAGE_MIN_DEFAULT, 0.4)
+        args = bc._parser().parse_args(["replay.orarep"])
+        self.assertEqual(args.tier2_deadline, 30000)
+        self.assertEqual(args.coverage_min, 0.4)
+
+    def test_cli_holds_on_coverage_and_tier2_without_flags(self):
+        game = os.path.join(self.tmp.name, "defaults")
+        os.makedirs(game, exist_ok=True)
+        path = os.path.join(game, "game.orarep")
+        # td seat 1: 1 of 3 faction buildings (0.3333 < 0.4) and no tier-2 by tick 30000 (40000-tick game).
+        placements = [(100, 1, "td_gdi_barracks"), (500, 1, "td_gdi_guardtower"),
+                      (100, 2, "ra1_allies_barracks"), (500, 2, "ra1_allies_gunturret"),
+                      (900, 2, "ra1_allies_radardome")]
+        _replay(path, placements, 40000)
+        _matches(game, SEATS)
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            code = bc.main([path, "--rules-root", self.tmp.name])
+        out = json.loads(buf.getvalue())
+        self.assertEqual(code, 1)
+        self.assertEqual(out["status"], "HOLD")
+        self.assertEqual(out["thresholds"]["tier2_deadline_tick"], 30000)
+        self.assertEqual(out["thresholds"]["coverage_min"], 0.4)
+        self.assertIn("seat 1 (td_gdi) coverage 0.3333 below 0.4", out["reasons"])
+        self.assertIn("seat 1 (td_gdi) no tier-2 building by tick 30000", out["reasons"])
+
+
 @unittest.skipUnless(os.environ.get("BUILD_COVERAGE_P4ON"), "set BUILD_COVERAGE_P4ON to the known-bad replay")
 class KnownBadP4onTests(unittest.TestCase):
     def test_p4on_holds_with_zero_defences(self):
