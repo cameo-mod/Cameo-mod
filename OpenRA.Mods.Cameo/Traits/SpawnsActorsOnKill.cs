@@ -81,6 +81,11 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (self.World.SharedRandom.Next(100) >= Info.Probability)
 				return;
 
+			// ENGLOG-NRE-FIX (Opus): damaged.Location dereferences OccupiesSpace, null for an actor without IOccupySpace. Such a
+			// victim has no cell to place the recruit on, so nothing spawns; every victim with a position is unchanged.
+			if (damaged.OccupiesSpace == null)
+				return;
+
 			// The victim is mid-death; place the recruit on its cell at the end of the frame,
 			// once that actor is actually gone and the cell is free.
 			var location = damaged.Location;

@@ -296,7 +296,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			if (IsTraitDisabled)
 				return;
-			if (damaged == null || damaged.Disposed)
+			// ENGLOG-NRE-FIX: DamageDealtEvent.From reads damaged.Location, which dereferences OccupiesSpace (null for an actor
+			// without IOccupySpace); a victim with no position is not an event (Opus rule, as EngagementLog DealtWanted).
+			if (damaged == null || damaged.Disposed || damaged.OccupiesSpace == null)
 				return;
 
 			var victim = damaged.Owner;
