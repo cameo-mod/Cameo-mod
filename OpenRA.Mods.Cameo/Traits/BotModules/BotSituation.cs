@@ -598,7 +598,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotEnemyAirIntelProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory, IBotPersonalityLeadProvider, IBotUtilityAxes, IBotDirector, IBotTeamMember, IBotCoalition, IBotStalemateUrgencyProvider
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotEnemyAirIntelProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory, IBotPersonalityLeadProvider, IBotUtilityAxes, IBotDirector, IBotTeamMember, IBotCoalition, IBotStalemateUrgencyProvider, IBotMobileStaticValues
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
@@ -2834,6 +2834,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal static bool HasSpace(Actor a) => a != null && a.OccupiesSpace != null;
 		bool IsDefence(Actor a) => IsBuilding(a) && (a.Info.HasTraitInfo<AttackBaseInfo>() ||
 			a.GetEnabledTargetTypes().Overlaps(Info.DefenceTargetTypes));
+
+		// RATIO-2X-01 (IBotMobileStaticValues): the publish end. The value is the latest snapshot's own combat-army value (Rebuild computes it
+		// every SnapshotInterval ticks; no new scan). IsStaticDefence is the info-level twin of IsDefence above: the same two clauses.
+		bool IBotMobileStaticValues.HasSnapshot => !IsTraitDisabled && Situation != null;
+
+		int IBotMobileStaticValues.SnapshotTick => Situation?.Tick ?? 0;
+
+		long IBotMobileStaticValues.MobileValue => Situation?.OwnArmyValue ?? 0;
+
+		bool IBotMobileStaticValues.IsStaticDefence(ActorInfo info) =>
+			info != null && info.HasTraitInfo<BuildingInfo>()
+			&& (info.HasTraitInfo<AttackBaseInfo>() || info.TraitInfos<ITargetableInfo>().Any(t => t.GetTargetTypes().Overlaps(Info.DefenceTargetTypes)));
 		List<BotThreatTracker.Group> previousThreatGroups = new();
 		List<BotPredictedThreat> predictedThreats = new();
 

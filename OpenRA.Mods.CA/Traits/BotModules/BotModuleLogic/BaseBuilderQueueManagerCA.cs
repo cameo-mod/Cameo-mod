@@ -102,6 +102,14 @@ namespace OpenRA.Mods.CA.Traits
 		// no spend feed, admission unchanged).
 		IBotMobileSpendReserve mobileReserve;
 
+		// RATIO-2X-01: lazy — the situation owner's mobile army value and the defence classification, and the ablation latch of
+		// the increment row. Null provider (classic, no MasterAiBotModule) = the ratio is inert. The live+queued static value is
+		// cached per world tick (the recorded window is added fresh on every read).
+		IBotMobileStaticValues staticValues;
+		AblationLatch ablateRatio;
+		int staticLiveTick = -1;
+		long staticLiveValue;
+
 		// REPLAY-HEALTH-LOGGER (ACK-2, task 01a12023): record-only queue-transition dispatch.
 		// Everything here is lazy — with no observer trait on the PlayerActor the seam is one
 		// null check per Tick and no state is ever allocated (Sol review F5).
@@ -1007,6 +1015,17 @@ namespace OpenRA.Mods.CA.Traits
 					}
 				}
 
+				// RATIO-2X-01 (ARMY_FIRST_02_DESIGN_04/05): a static-defence start must keep the mobile army at 2x the static defence
+				// value, unless it is the first copy of its type (O7) or the bank floats with no other way to spend (FLOAT). A hold is
+				// side-effect free (nothing is queued, claimed or cancelled; the pick retries next sweep), so it sits before every claim.
+				// Decided before any admission side effect, recorded only at the emitted order below.
+				var ratioVerdict = RatioGate(item, out var ratioDefence);
+				if (MobileStaticRatioCA.Holds(ratioVerdict))
+				{
+					pendingDemandPick = default;
+					return false;
+				}
+
 				// ECON-A-FIX (R6): the demand's refinery reserves its claim's anchor as the order is
 				// admitted — taken off every other claim while the item is in flight. A pick whose
 				// anchor is no longer reservable (served, parked, pending, or another demand got there)
@@ -1063,6 +1082,17 @@ namespace OpenRA.Mods.CA.Traits
 					baseBuilder.StorageObservation.NoteEmitted(storageReservation, world.WorldTick);
 
 				queuedAt[queue.Actor.ActorID] = (item.Name, world.WorldTick);
+
+				// RATIO-2X-01: the admitted defence start is recorded for the next few ticks (the order is not an actor or a queue
+				// item yet) and for the first-copy ledger; exempt starts are counted for the DEV log only.
+				if (ratioDefence)
+				{
+					baseBuilder.StaticRatio.Record(world.WorldTick, item.Name, ValuedCost(item));
+#if CAMEO_DEV_LOGGING
+					if (ratioVerdict == RatioVerdict.ExemptFirst || ratioVerdict == RatioVerdict.ExemptFloat)
+						Log.Write("debug", $"AI ({player.ClientIndex}): RATIO-EXEMPT kind {(ratioVerdict == RatioVerdict.ExemptFirst ? "first" : "float")} start {item.Name} tick {world.WorldTick}");
+#endif
+				}
 
 				// PROD-IDLE PR-3: the admitted building is recorded before the next candidate is tested, so
 				// two admissions in one pass cannot both pass an old share snapshot (PLAN_03 section 3).
@@ -2046,6 +2076,98 @@ namespace OpenRA.Mods.CA.Traits
 			}
 		}
 
+		// RATIO-2X-01 (ARMY_FIRST_02_DESIGN_04/05) ------------------------------------------------------------------------------
+		// The 2x mobile/static ratio at a static-defence start. The pure decision is MobileStaticRatioCA; this is the measure
+		// assembly and the two call sites' shared entry. Read-only: no order, no RNG, no queue state; the only write is the
+		// shared tracker's record at an emitted start (RecordRatioStart).
+
+		bool RatioActive() => baseBuilder.Info.MobileStaticRatioEnabled && !ablateRatio.Off(player, AblationIds.Ratio2x);
+
+		static int ValuedCost(ActorInfo info) => info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+
+		// The type is owned (incl. its placement variants) or in production: the same count the fraction loop uses.
+		bool OwnedOrQueued(ActorInfo info)
+		{
+			var variants = info.TraitInfoOrDefault<PlaceBuildingVariantsInfo>()?.Actors ?? [];
+			return playerBuildings.Any(a => a.Info.Name == info.Name || variants.Contains(a.Info.Name))
+				|| (baseBuilder.BuildingsBeingProduced.TryGetValue(info.Name, out var n) && n > 0);
+		}
+
+		// S: valued cost of the live static defences plus the defence items in ANY building/defence queue (READY-held included),
+		// computed once per world tick; the 3-tick record of admitted starts is added on every read (a stated conservative
+		// double-count window while an order becomes a queue item).
+		long StaticDefenceValue(int now)
+		{
+			if (staticLiveTick != now)
+			{
+				long total = 0;
+				foreach (var a in playerBuildings)
+					if (staticValues.IsStaticDefence(a.Info))
+						total += ValuedCost(a.Info);
+
+				foreach (var category in baseBuilder.Info.BuildingQueues.Concat(baseBuilder.Info.DefenseQueues).Distinct())
+					foreach (var q in AIUtils.FindQueues(player, category))
+						foreach (var queued in q.AllQueued())
+						{
+							var queuedInfo = world.Map.Rules.Actors[queued.Item];
+							if (staticValues.IsStaticDefence(queuedInfo))
+								total += ValuedCost(queuedInfo);
+						}
+
+				staticLiveValue = total;
+				staticLiveTick = now;
+			}
+
+			return staticLiveValue + baseBuilder.StaticRatio.Recorded(now);
+		}
+
+		// IsFloating (Opus 11-22, USER): ONE definition shared by RATIO FLOAT and TECHFIRST's float exemption. FLOAT (design 04 s3, 05): the money cannot go to units — the unit side saturated (cached by its provider) AND the bank
+		// floating (storage >= 90% of capacity, or Cash+Resources at the tier's RAW BankSaturationCash bar; bar 0 = storage leg only).
+		// The cheap bank leg runs first so the provider is asked only when it could matter.
+		bool IsFloating()
+		{
+			if (!MobileStaticRatioCA.Floating(playerResources.Resources, playerResources.ResourceCapacity,
+					playerResources.GetCashAndResources(), botLimits?.Info.BankSaturationCash ?? 0))
+				return false;
+
+			mobileReserve ??= player.PlayerActor.TraitsImplementing<IBotMobileSpendReserve>().FirstEnabledTraitOrDefault();
+			return mobileReserve != null && mobileReserve.UnitSideSaturated;
+		}
+
+		// The verdict for starting `item` now. Inert covers every case the rule does not apply to (switch off, ablated, not a
+		// static defence, no usable measure); `isDefence` says whether the start must be recorded either way.
+		RatioVerdict RatioGate(ActorInfo item, out bool isDefence)
+		{
+			isDefence = false;
+			if (!RatioActive())
+				return RatioVerdict.Inert;
+
+			// Not filtered by IsTraitEnabled: HasSnapshot carries the provider's own enabled state, and a null cached while the
+			// provider was still condition-disabled would otherwise pin the rule off for the whole game.
+			staticValues ??= player.PlayerActor.TraitsImplementing<IBotMobileStaticValues>().FirstOrDefault();
+			if (staticValues == null || !staticValues.IsStaticDefence(item))
+				return RatioVerdict.Inert;
+
+			isDefence = true;
+			var now = world.WorldTick;
+			if (!MobileStaticRatioCA.MeasureUsable(staticValues.HasSnapshot, staticValues.SnapshotTick, now))
+				return RatioVerdict.Inert;
+
+			var mobile = staticValues.MobileValue;
+			var staticTotal = StaticDefenceValue(now);
+			var cost = ValuedCost(item);
+			var verdict = MobileStaticRatioCA.Stage1(true, mobile, staticTotal, cost,
+				baseBuilder.StaticRatio.IsFirstCopy(item.Name, OwnedOrQueued(item)));
+			if (verdict == RatioVerdict.NeedsFloat)
+				verdict = MobileStaticRatioCA.Float(IsFloating());
+
+#if CAMEO_DEV_LOGGING
+			if (verdict != RatioVerdict.Admit && EconTraceDue("ratio-" + verdict + "-" + item.Name))
+				Log.Write("debug", $"AI ({player.ClientIndex}): RATIO-{verdict} item {item.Name} cost {cost} M {mobile} S {staticTotal} cash {playerResources.Cash} resources {playerResources.Resources} capacity {playerResources.ResourceCapacity} bankBar {botLimits?.Info.BankSaturationCash ?? 0} tick {now}");
+#endif
+			return verdict;
+		}
+
 		ActorInfo ChooseBuildingToBuild(ProductionQueue queue)
 		{
 			var buildableThings = queue.BuildableItems();
@@ -2372,6 +2494,12 @@ namespace OpenRA.Mods.CA.Traits
 						return power;
 					}
 				}
+
+				// RATIO-2X-01: a defence the 2x gate would hold anyway must not take the pick — the rolled share flows to the
+				// remaining entries of this pass instead of the whole sweep being lost to a held defence. Same decision as the
+				// gate in TickQueue (one measure per tick), no state of its own.
+				if (MobileStaticRatioCA.Holds(RatioGate(actor, out _)))
+					continue;
 
 				// Lets build this
 				AIUtils.BotDebug("{0} decided to build {1}: Desired is {2} ({3} / {4}); current is {5} / {4}",

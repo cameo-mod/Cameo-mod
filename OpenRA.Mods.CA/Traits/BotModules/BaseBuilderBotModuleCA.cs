@@ -204,6 +204,11 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Only queue construction of a new defense when above this requirement.")]
 		public readonly int DefenseProductionMinCashRequirement = 2250;
 
+		[Desc("RATIO-2X-01: a new static defence may start only if the mobile army value is at least 2x (static defence value + the new defence), "
+			+ "by cost. The first copy of each defence type is exempt, and so is a start while the unit side cannot absorb the money and the "
+			+ "bank is floating. A held defence waits and is never cancelled. Off by default; the R2X_mobile_static_ratio increment switch turns it on.")]
+		public readonly bool MobileStaticRatioEnabled = false;
+
 		[Desc("Radius in cells around a factory scanned for rally points by the AI.")]
 		public readonly int RallyPointScanRadius = 8;
 
@@ -652,6 +657,10 @@ namespace OpenRA.Mods.CA.Traits
 		readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> barracksBuildings;
 		readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> factoryBuildings;
 		public readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> ProductionBuildings;
+
+		// RATIO-2X-01: the per-player 2x tracker (the 3-tick start record and the first-copy ledger), shared by every queue manager so a
+		// sibling queue cannot pass the same old measure. Pure state, no world access (MobileStaticRatioCA).
+		public readonly MobileStaticRatioCA StaticRatio = new();
 
 		BotLimits botLimits;
 		int queueSweepDisabledFromTick = -1;

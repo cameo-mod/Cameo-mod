@@ -1622,6 +1622,65 @@ namespace OpenRA.Mods.CA.Traits
 
 		int IBotMobileSpendReserve.PaidUnitSharePct => mobileReserve.PaidSharePct();
 
+		// RATIO-2X-01 FLOAT (a): the unit side cannot absorb money. Cached for FeedbackTime ticks: the base builder asks only when a
+		// defence start failed the 2x test and the first-copy exemption, so the scan below runs at most once per FeedbackTime ticks.
+		// "Busy and full" is the live slot measure (LiveFreeSlots: parallel slots, or any queued item on a single queue); the PR-2 depth
+		// allowance is not consulted, so a depth queue holding one item reads as full (the looser side; the bank leg of FLOAT still applies).
+		bool unitSideSaturated;
+		int unitSideSaturatedTick = -1;
+
+		bool IBotMobileSpendReserve.UnitSideSaturated
+		{
+			get
+			{
+				var tick = world.WorldTick;
+				if (unitSideSaturatedTick >= 0 && tick >= unitSideSaturatedTick && tick - unitSideSaturatedTick < FeedbackTime)
+					return unitSideSaturated;
+
+				unitSideSaturatedTick = tick;
+				unitSideSaturated = ComputeUnitSideSaturated();
+				return unitSideSaturated;
+			}
+		}
+
+		bool ComputeUnitSideSaturated()
+		{
+			var queues = Info.UnitQueues.SelectMany(c => AIUtils.FindQueues(player, c)).Distinct().ToList();
+
+			// No unit queue at all: units cannot absorb money (O3).
+			if (queues.Count == 0)
+				return true;
+
+			Dictionary<string, int> ownedByName = null;
+			foreach (var queue in queues)
+			{
+				if (!queue.Enabled || LiveFreeSlots(queue) <= 0)
+					continue;
+
+				// A free slot: the queue absorbs money unless the unit caps leave it nothing to build.
+				if (Info.UnitLimits != null && ownedByName == null)
+				{
+					ownedByName = new Dictionary<string, int>(StringComparer.Ordinal);
+					foreach (var a in world.Actors)
+						if (!a.IsDead && a.Owner == player && Info.UnitLimits.ContainsKey(a.Info.Name))
+							ownedByName[a.Info.Name] = ownedByName.TryGetValue(a.Info.Name, out var n) ? n + 1 : 1;
+				}
+
+				if (queue.BuildableItems().Any(b => !CappedOut(b) && !UnitLimitReached(b.Name, ownedByName)))
+					return false;
+			}
+
+			return true;
+		}
+
+		bool UnitLimitReached(string name, Dictionary<string, int> ownedByName)
+		{
+			if (Info.UnitLimits == null || !Info.UnitLimits.TryGetValue(name, out var limit))
+				return false;
+
+			return limit <= 0 || (ownedByName != null && ownedByName.TryGetValue(name, out var owned) && owned >= limit);
+		}
+
 		void IBotMobileSpendReserve.ReconcileUnitSpend(object owner, IReadOnlyList<(string Item, int Total, int Remaining)> items) =>
 			mobileReserve.ReconcileUnits(owner, items);
 

@@ -154,6 +154,9 @@ namespace OpenRA.Mods.CA.Traits
 		public static RatioVerdict Float(bool unitSideSaturated, bool floating) =>
 			unitSideSaturated && floating ? RatioVerdict.ExemptFloat : RatioVerdict.Hold;
 
+		/// <summary>Stage 4 for a caller that has already evaluated both legs (the base builder's lazy FLOAT test): floating = exempt, else hold.</summary>
+		public static RatioVerdict Float(bool floatNow) => floatNow ? RatioVerdict.ExemptFloat : RatioVerdict.Hold;
+
 		/// <summary>The whole decision for callers and tests that have every input at hand.</summary>
 		public static RatioVerdict Decide(bool measured, long mobile, long staticTotal, long cost, bool firstCopyOfType,
 			bool unitSideSaturated, bool floating)
