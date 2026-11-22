@@ -102,6 +102,7 @@ from __future__ import annotations
 
 import argparse
 import base64
+import csv
 import hashlib
 import itertools
 import json
@@ -109,6 +110,7 @@ import os
 import pathlib
 import re
 import shutil
+import struct
 import subprocess
 import sys
 import tempfile
@@ -138,6 +140,9 @@ DEFAULT_MAP = REPO_ROOT / "mods" / "cameo" / "maps" / "_ra_a-nuclear-winter.oram
 DEFAULT_TEAM_MAP = REPO_ROOT / "mods" / "cameo" / "maps" / "_ra_doubles.oramap"
 
 MATCH_LOG = "cameo-ai-matches.jsonl"
+# --no-record (logging-off builds, Opus RULING MR17 A): no DEV match record exists, so per-match evidence is the
+# Benchmark tick_time.csv reaching NO_RECORD_MIN_TICKS, zero new exception logs, and an intact replay trailer.
+NO_RECORD_MIN_TICKS = 3000
 CONFIG_KEYS = {"MOD_ID", "ENGINE_DIRECTORY"}
 BENCHMARK_PREFIX = "ai-duel-batch-"
 
@@ -807,6 +812,53 @@ def run_match(
     else:
         status = f"exit={process.returncode}"
     return process.returncode, "".join(output_parts), status
+
+
+def tick_time_last_tick(logs_dir: pathlib.Path) -> int:
+    """Highest tick index in the match's Benchmark tick_time.csv (rows: tick, ms); 0 when absent or unreadable."""
+    files = sorted(logs_dir.glob("*tick_time.csv"))
+    if len(files) != 1:
+        return 0
+    last = 0
+    try:
+        with files[0].open(newline="", encoding="utf-8", errors="replace") as f:
+            for row in csv.reader(f):
+                if row and row[0].isdigit():
+                    last = max(last, int(row[0]))
+    except OSError:
+        return 0
+    return last
+
+
+def replay_intact(path: pathlib.Path) -> bool:
+    """OpenRA .orarep trailer (ReplayMetadata.Write, read back by ReplayMetadata.Read): int32 -1, int32 1, data,
+    int32 data length, int32 -2 at EOF. ReplayRecorder writes it in Dispose, so a truncated replay fails."""
+    try:
+        size = path.stat().st_size
+        with path.open("rb") as f:
+            if size < 16:
+                return False
+            f.seek(size - 8)
+            data_len, end = struct.unpack("<ii", f.read(8))
+            if end != -2 or data_len < 0 or data_len + 16 > size:
+                return False
+            f.seek(size - data_len - 16)
+            start, version = struct.unpack("<ii", f.read(8))
+    except (OSError, struct.error):
+        return False
+    return start == -1 and version == 1
+
+
+def no_record_verdict(support: pathlib.Path, logs_dir: pathlib.Path, new_exc: list[str]) -> tuple[str, dict]:
+    """Logging-off MR evidence for one match (Opus RULING MR17 A): tick_time.csv reaches NO_RECORD_MIN_TICKS,
+    no new exception logs, and at least one Replays/*.orarep, all intact. Returns (status, evidence)."""
+    ticks = tick_time_last_tick(logs_dir)
+    replays = sorted(support.glob("Replays/**/*.orarep"))
+    intact = [replay_intact(p) for p in replays]
+    evidence = {"tick_time_last_tick": ticks, "exception_logs": len(new_exc),
+                "replays": len(replays), "replays_intact": sum(intact)}
+    ok = ticks >= NO_RECORD_MIN_TICKS and not new_exc and bool(replays) and all(intact)
+    return ("ok" if ok else "norecord"), evidence
 
 
 def read_appended_records(log_path: pathlib.Path, before_length: int) -> list[dict]:
@@ -1678,6 +1730,11 @@ def main() -> int:
     parser.add_argument("--stall-timeout", type=int, default=400,
                         help="seconds of debug.log silence before a live match counts as hung")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--no-record", action="store_true",
+                        help=f"logging-off build (no DEV match record): per match, evidence = tick_time.csv reaches "
+                             f"{NO_RECORD_MIN_TICKS} ticks, 0 new exception logs, and every Replays/*.orarep intact; "
+                             "rc 0 when all matches pass. Not with --round-trip, --sentinel-diagnostic or "
+                             "--require-economy-health (they need DEV records)")
     parser.add_argument("--allow-fingerprint-drift", action="store_true",
                         help="log arm drift between attempts and keep running "
                              "(default: abort the batch — a changed arm voids the A/B)")
@@ -1697,6 +1754,8 @@ def main() -> int:
                              "no RenderTick; same sim (same-seed sync hashes match the 'fast' run), far less memory, "
                              "no display/Xvfb needed (LESSONS_LEARNED 'Headless bot matches')")
     args = parser.parse_args()
+    if args.no_record and (args.round_trip or args.sentinel_diagnostic or args.require_economy_health):
+        parser.error("--no-record: --round-trip, --sentinel-diagnostic and --require-economy-health need DEV match records")
 
     factions = [f.strip() for f in args.factions.split(",") if f.strip()]
     if len(factions) < 1:
@@ -1945,7 +2004,9 @@ def main() -> int:
             # datapoint either — retry it the same bounded number of times.
             # A match that truly ran records both bots at GameOver; zero
             # appended records means nothing was played to judge.
-            no_data = not records and not new_exc
+            # --no-record: a completed logging-off game's tick_time.csv stands in for the record it cannot have.
+            no_data = not records and not new_exc and not (
+                args.no_record and tick_time_last_tick(match_logs_dir) >= NO_RECORD_MIN_TICKS)
             if not ((status.startswith("exit=") or status == "ok") and no_data and attempt <= args.retries):
                 break
             print(f"    -> {status} in {elapsed}s, no records/exception — external kill or phantom abort? retry {attempt}/{args.retries}",
@@ -2025,8 +2086,12 @@ def main() -> int:
                 economy_health_status, economy_health_error = "UNKNOWN", f"cannot derive planned health seats: {exc}"
         else:
             economy_health_status, economy_health_error = "NOT_REQUIRED", None
+        no_record_evidence = None
         if status == "ok" and not records:
-            status = "norecord"
+            if args.no_record:
+                status, no_record_evidence = no_record_verdict(match_support, match_logs_dir, new_exc)
+            else:
+                status = "norecord"
         # Sentinel blocks through the same required-semantics converter, but
         # only when the policy disposition is blocking — baseline-exempted and
         # clean_diagnostic keep status (the raw BLOCK stays in health_status).
@@ -2055,6 +2120,7 @@ def main() -> int:
             "attempts": attempt,
             "wall_seconds": elapsed,
             "records": len(records),
+            **({"no_record_evidence": no_record_evidence} if args.no_record else {}),
             "discarded_records_binary_changed": discarded_records,
             "outcomes": outcome,
             "bot_outcomes": [
@@ -2233,7 +2299,7 @@ def main() -> int:
         return 1
     if round_trip_failed:
         return 1
-    if not any(r["records"] for r in results):
+    if not results or (not args.no_record and not any(r["records"] for r in results)):
         return 2
     return 0 if all(r["status"] == "ok" for r in results) else 1
 
