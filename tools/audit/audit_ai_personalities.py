@@ -64,6 +64,14 @@ TUNING_FIELDS = {
     # guerrilla at least twice steamroller's, which spends its units on the main army.
     "MaxGuerrillaSquads",
     "MaxGuerrillaSquadsLate",
+    # AggTeam values are per-personality by design (672f2d7dc, PLAYTEST-PORT ARM10 port).
+    # AggTeamTest.cs pins them: the reserve share differs per personality (lines 858-861);
+    # turtle alone sets the push thresholds, every other personality is 0 (lines 868-873).
+    # StalemateSteamrollerProfile is the steamroller identity (default off).
+    "AggTeamReserveSharePercent",
+    "AggTeamPushArmyValue",
+    "AggTeamPushLateTick",
+    "StalemateSteamrollerProfile",
 }
 DEAD_FIELDS = {"RushInterval", "RushAttackScanRadius"}
 
