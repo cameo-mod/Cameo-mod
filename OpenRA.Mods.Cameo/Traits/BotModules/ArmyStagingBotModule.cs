@@ -152,6 +152,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (player.RelationshipWith(attacker.Owner) != PlayerRelationship.Enemy || attacker.Info.HasTraitInfo<AircraftInfo>())
 				return;
 
+			// ENGLOG-NRE-FIX: Location dereferences OccupiesSpace, null for an actor without IOccupySpace (no position to weigh).
+			if (self.OccupiesSpace == null || attacker.OccupiesSpace == null)
+				return;
+
 			var radius = (long)Info.BaseRadiusCells * Info.BaseRadiusCells;
 			if ((self.Location - plan.Centre).LengthSquared > radius)
 				return;

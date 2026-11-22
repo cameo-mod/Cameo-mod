@@ -241,7 +241,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var n = 0;
 			foreach (var a in actors)
 			{
-				if (a == null || a.IsDead || !a.IsInWorld)
+				if (a == null || a.IsDead || !a.IsInWorld || a.OccupiesSpace == null) // ENGLOG-NRE-FIX: no position
 					continue;
 
 				x += a.Location.X;

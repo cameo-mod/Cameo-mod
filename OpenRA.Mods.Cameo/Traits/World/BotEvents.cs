@@ -411,6 +411,9 @@ namespace OpenRA.Mods.Cameo.Traits
 		public int AttackerX;
 		public int AttackerY;
 
+		// ENGLOG-NRE-FIX: AttackerX/Y are a real cell only when this is true (the attacker has an IOccupySpace).
+		public bool AttackerHasPos;
+
 		public override string Kind => KindName;
 
 		static string B(bool v) => v ? "true" : "false";
@@ -433,6 +436,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			into.Add(new("AttackerInWorld", B(AttackerInWorld)));
 			into.Add(new("AttackerX", Fmt(AttackerX)));
 			into.Add(new("AttackerY", Fmt(AttackerY)));
+			into.Add(new("AttackerHasPos", B(AttackerHasPos)));
 		}
 
 		protected override void LoadFields(MiniYaml data)
@@ -453,6 +457,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			AttackerInWorld = Get(data, "AttackerInWorld") == "true";
 			AttackerX = GetInt(data, "AttackerX");
 			AttackerY = GetInt(data, "AttackerY");
+			AttackerHasPos = Get(data, "AttackerHasPos") == "true";
 		}
 	}
 

@@ -567,6 +567,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (RegionSpaceChanged(regions))
 				DropRegionCaches();
 
+			// ENGLOG-NRE-FIX: Location dereferences OccupiesSpace, null for an actor without IOccupySpace (no region to mark).
+			if (e.Attacker.OccupiesSpace == null)
+				return;
+
 			var value = e.Attacker.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
 			var index = regions.IndexOf(e.Attacker.Location);
 			dangerByRegion.TryGetValue(index, out var existing);

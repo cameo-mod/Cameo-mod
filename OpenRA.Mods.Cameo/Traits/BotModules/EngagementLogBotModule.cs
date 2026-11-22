@@ -141,9 +141,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// applies the same snapshot at once, which is today's synchronous behaviour. Apply reads only the snapshot and the rules.
 		readonly EngagementHitEvent scratch = new();
 
+		// ENGLOG-NRE-FIX: Actor.Location and Actor.CenterPosition both dereference Actor.OccupiesSpace, which is null for an actor
+		// without an IOccupySpace trait (PB01-C29-s1-DZFon crashed in Capture on an in-world attacker like that, tick ~28384). Such an
+		// actor has no position at all, so there is nothing to fall back to: a subject without one is not logged (the Wanted checks),
+		// and an attacker without one is logged with AttackerHasPos false (AttackerX/Y are then not an attack point; NoteEnemyDefence
+		// skips it). Every actor that has a position is logged exactly as before.
+		internal static bool TryCell(IOccupySpace occupies, out CPos cell)
+		{
+			cell = occupies != null ? occupies.TopLeft : CPos.Zero;
+			return occupies != null;
+		}
+
 		bool HurtWanted(Actor self, AttackInfo e)
 		{
-			if (!Ready() || e.Attacker == null || e.Attacker.Disposed || e.Damage == null || e.Damage.Value <= 0 || !self.IsInWorld)
+			if (!Ready() || e.Attacker == null || e.Attacker.Disposed || e.Damage == null || e.Damage.Value <= 0 || !self.IsInWorld
+				|| self.OccupiesSpace == null)
 				return false;
 
 			return e.Attacker.Owner != null && !e.Attacker.Owner.NonCombatant && player.RelationshipWith(e.Attacker.Owner) == PlayerRelationship.Enemy;
@@ -151,7 +163,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		bool DealtWanted(Actor damaged, AttackInfo e)
 		{
-			if (!Ready() || damaged == null || damaged.Disposed || !damaged.IsInWorld || e.Damage == null || e.Damage.Value <= 0)
+			if (!Ready() || damaged == null || damaged.Disposed || !damaged.IsInWorld || e.Damage == null || e.Damage.Value <= 0
+				|| damaged.OccupiesSpace == null)
 				return false;
 
 			return damaged.Owner != null && !damaged.Owner.NonCombatant && player.RelationshipWith(damaged.Owner) == PlayerRelationship.Enemy;
@@ -218,14 +231,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			ev.AttackerType = attacker?.Info.Name ?? "";
 			ev.AttackerAlive = attacker != null && !attacker.Disposed;
 			ev.AttackerInWorld = ev.AttackerAlive && attacker.IsInWorld;
-			ev.AttackerX = 0;
-			ev.AttackerY = 0;
-			if (ev.AttackerInWorld)
-			{
-				var al = attacker.Location;
-				ev.AttackerX = al.X;
-				ev.AttackerY = al.Y;
-			}
+
+			// ENGLOG-NRE-FIX (Opus): X, Y are an attack point only when AttackerHasPos; (0, 0) otherwise and never read as one.
+			var al = CPos.Zero;
+			ev.AttackerHasPos = ev.AttackerInWorld && TryCell(attacker.OccupiesSpace, out al);
+			ev.AttackerX = al.X;
+			ev.AttackerY = al.Y;
 
 			return ev;
 		}
@@ -241,7 +252,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (state.FirstOwnHurtTick < 0)
 					state.FirstOwnHurtTick = h.EventTick;
 
-				NoteEnemyDefence(state, h.AttackerId, h.AttackerType, h.AttackerInWorld, h.AttackerX, h.AttackerY);
+				NoteEnemyDefence(state, h.AttackerId, h.AttackerType, h.AttackerInWorld && h.AttackerHasPos, h.AttackerX, h.AttackerY);
 
 				if (f.Building)
 				{
@@ -445,7 +456,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			ringsSeen.Clear();
 			foreach (var a in world.ActorsHavingTrait<AttackBase>(t => !t.IsTraitDisabled))
 			{
-				if (a.Owner != player || !a.IsInWorld || a.IsDead)
+				if (a.Owner != player || !a.IsInWorld || a.IsDead || a.OccupiesSpace == null) // ENGLOG-NRE-FIX: no position
 					continue;
 
 				var f = FlagsOf(a.Info);
@@ -750,7 +761,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var radius = WDist.FromCells(radiusCells);
 			foreach (var a in world.FindActorsInCircle(centre, radius))
 			{
-				if (!a.IsInWorld || a.IsDead || a.Owner.NonCombatant || player.RelationshipWith(a.Owner) != PlayerRelationship.Enemy || !a.CanBeViewedByPlayer(player))
+				if (!a.IsInWorld || a.IsDead || a.OccupiesSpace == null || a.Owner.NonCombatant || player.RelationshipWith(a.Owner) != PlayerRelationship.Enemy
+					|| !a.CanBeViewedByPlayer(player)) // ENGLOG-NRE-FIX: no position
 					continue;
 
 				var f = FlagsOf(a.Info);
