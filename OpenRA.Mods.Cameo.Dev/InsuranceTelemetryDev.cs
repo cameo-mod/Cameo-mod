@@ -17,15 +17,13 @@ namespace OpenRA.Mods.Cameo.Traits
 		public override object Create(ActorInitializer init) => new InsuranceTelemetryDev();
 	}
 
+	// SPK-01 (DEV only). The sim thread only formats rows and appends them to a batch (no I/O). A batch is handed to the
+	// shared AiLogWriteQueue worker, which owns the append, the mutex and the retry. Batches go out every 150 ticks, at
+	// 2048 queued rows, and at GameOver. A refused hand-off is sticky: the file stops there and stays UNKNOWN.
 	public sealed class InsuranceTelemetryDev : IWorldLoaded, ITick, IGameOver, INotifyActorDisposing
 	{
-		// SPK-01 (DEV only): rows are batched on the sim thread and flushed once per batch, not once per record.
-		// A full batch or the periodic tick flush writes the pending lines and flushes once; GameOver and disposal drain it.
 		internal const int FlushEveryTicks = 150;
 		internal const int PendingRowLimit = 2048;
-
-		// Bytes held back for the terminal rows (one end or dropped row per participant). Rows are far below 1 KiB.
-		const int TerminalRowBytes = 1024;
 
 		sealed class Participant
 		{
@@ -38,17 +36,22 @@ namespace OpenRA.Mods.Cameo.Traits
 		}
 
 		readonly Dictionary<int, Participant> participants = [];
-		readonly List<string> pending = [];
-		AiEconomyHealthLogWriter writer;
+		readonly StringBuilder batch = new();
+		AiLogFileAppender appender;
 		string uid;
 		int timestep;
 		bool ended;
 		bool complete = true;
-		long pendingChars;
+		bool failed;
 		int tickCount;
+		int lastTick;
+		int batchRows;
+		long batchBytes;
+		int committedRows;
+		long committedBytes;
 
-		// SPK-01: counted, never silent. Every data row refused by the record or byte budget is counted here, and the
-		// terminal rows then carry the count as "dropped" instead of an end row (so the stream never claims coverage).
+		// Counted, never silent: a data row refused by the row budget, or a batch refused by the queue, adds to this count.
+		// GameOver then writes "dropped" rows instead of "end" rows, so the stream never claims coverage it does not have.
 		long droppedRows;
 
 		void IWorldLoaded.WorldLoaded(World world, WorldRenderer renderer)
@@ -60,18 +63,24 @@ namespace OpenRA.Mods.Cameo.Traits
 			uid = world.LobbyInfo.GlobalSettings.GameUid;
 			timestep = world.Timestep;
 			if (string.IsNullOrEmpty(uid) || uid.Length > 128) return;
+			lastTick = world.WorldTick;
 			try
 			{
 				var directory = Path.Combine(Platform.SupportDir, "Logs");
 				Directory.CreateDirectory(directory);
 				var key = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(uid))).ToLowerInvariant();
-				writer = new AiEconomyHealthLogWriter(Path.Combine(directory, $"cameo-ai-insurance-{key}.jsonl"), flushEachRecord: false);
+				var fileName = $"cameo-ai-insurance-{key}.jsonl";
+
+				// One exclusive create per match, once at load (not per row): existing evidence is never overwritten.
+				using (new FileStream(Path.Combine(directory, fileName), FileMode.CreateNew, FileAccess.Write, FileShare.Read)) { }
+				appender = new AiLogFileAppender(fileName, "insurance");
 			}
 			catch (Exception e) when (e is IOException or UnauthorizedAccessException)
 			{
 				Log.Write("debug", "Insurance telemetry unavailable: " + e.GetType().Name);
 				return;
 			}
+
 			var slot = 0;
 			foreach (var player in world.Players)
 			{
@@ -84,92 +93,113 @@ namespace OpenRA.Mods.Cameo.Traits
 					Ledger = new InsuranceLedger(world.WorldTick, resources.Earned) };
 				participants.Add(currentSlot, p);
 			}
+
 			foreach (var p in participants.Values) Write(p, world.WorldTick, "start", "none", 0, 0);
 		}
 
-		// Data rows. The budget reserves room for the terminal rows (two per participant), so a refusal here is a counted drop.
+		// A data row. It is built, then admitted only if the budget keeps room for every participant's terminal row.
 		void Write(Participant p, int tick, string kind, string reason, int requested, long credited)
 		{
-			if (!writer.Complete) return; // Failed stream stays UNKNOWN; stop allocating output rows.
-			if (writer.Records + pending.Count + 2 * participants.Count >= AiEconomyHealthLogWriter.MaximumRecords ||
-				writer.Bytes + pendingChars + 2L * participants.Count * TerminalRowBytes >= AiEconomyHealthLogWriter.MaximumFileBytes)
+			if (failed || appender == null) return;
+			lastTick = tick;
+			var row = InsuranceSchema.Row(uid, p.Slot, p.Difficulty, p.Faction, p.Seq, tick,
+				kind, reason, requested, credited, p.Ledger, complete, timestep);
+			var bytes = InsuranceRowBudget.RowBytes(row);
+			if (!InsuranceRowBudget.DataRowFits(committedRows + batchRows, committedBytes + batchBytes, bytes,
+				participants.Count, AiEconomyHealthLogWriter.MaximumRecords, AiEconomyHealthLogWriter.MaximumFileBytes))
 			{
 				droppedRows++;
 				return;
 			}
 
-			Append(p, tick, kind, reason, requested, credited, complete);
-			if (pending.Count >= PendingRowLimit)
-				FlushRows();
+			Queue(row, bytes);
+			p.Seq++;
+			if (batchRows >= PendingRowLimit)
+				FlushRows(false);
 		}
 
-		// Builds one row and queues it. Terminal rows bypass the data budget (their room is reserved).
-		void Append(Participant p, int tick, string kind, string reason, int requested, long credited, bool rowComplete)
+		// A terminal row (end or dropped). Its room is reserved by the data budget, so it is never refused by it.
+		void WriteTerminal(Participant p, int tick, string kind, string reason, int requested, bool rowComplete)
 		{
-			var row = InsuranceSchema.Row(uid, p.Slot, p.Difficulty, p.Faction, p.Seq++, tick,
-				kind, reason, requested, credited, p.Ledger, rowComplete && writer.Complete, timestep);
-			pending.Add(row);
-			pendingChars += row.Length;
+			lastTick = tick;
+			var row = InsuranceSchema.Row(uid, p.Slot, p.Difficulty, p.Faction, p.Seq, tick,
+				kind, reason, requested, 0, p.Ledger, rowComplete, timestep);
+			Queue(row, InsuranceRowBudget.RowBytes(row));
+			p.Seq++;
 		}
 
-		// Writes the queued lines in order and flushes once. A refused write is sticky in the writer; the rows not written
-		// are counted as drops, and the stream stays UNKNOWN for the reader.
-		void FlushRows()
+		void Queue(string row, long bytes)
 		{
-			if (writer == null)
+			batch.Append(row).Append('\n');
+			batchRows++;
+			batchBytes += bytes;
+		}
+
+		// Hands the batch to the shared queue. Never blocks; a refusal is counted and makes the stream sticky-failed.
+		// final: the GameOver batch, exempt from the queue's text budget.
+		void FlushRows(bool final)
+		{
+			if (appender == null || batchRows == 0)
 				return;
 
-			for (var i = 0; i < pending.Count; i++)
+			if (!failed)
 			{
-				if (!writer.TryWrite(pending[i]))
+				var result = appender.TryAppend(batch.ToString(), lastTick, out _, final);
+				if (result == AiLogAppendResult.Appended)
 				{
-					droppedRows += pending.Count - i;
-					break;
+					committedRows += batchRows;
+					committedBytes += batchBytes;
+				}
+				else
+				{
+					failed = true;
+					droppedRows += batchRows;
 				}
 			}
+			else
+				droppedRows += batchRows;
 
-			pending.Clear();
-			pendingChars = 0;
-			writer.FlushPending();
+			batch.Clear();
+			batchRows = 0;
+			batchBytes = 0;
 		}
 
 		internal void Record(int playerIndex, int tick, string reason, int requested, long before, long after)
 		{
-			if (writer == null || ended || !participants.TryGetValue(playerIndex, out var p)) return;
+			if (appender == null || ended || !participants.TryGetValue(playerIndex, out var p)) return;
 			var amount = p.Ledger.Credit(requested, before, after, p.Resources.Earned, p.Resources.Cash);
 			Write(p, tick, "payout", reason, requested, amount);
 		}
 
 		void ITick.Tick(Actor self)
 		{
-			if (writer == null || ended) return;
+			if (appender == null || ended) return;
+			lastTick = self.World.WorldTick;
 			foreach (var p in participants.Values) p.Ledger.Observe(p.Resources.Earned, p.Resources.Cash);
 			if (++tickCount % FlushEveryTicks == 0)
-				FlushRows();
+				FlushRows(false);
 		}
 
 		void IGameOver.GameOver(World world)
 		{
-			if (writer == null || ended) return;
+			if (appender == null || ended) return;
 			foreach (var p in participants.Values)
 			{
 				p.Ledger.Observe(p.Resources.Earned, p.Resources.Cash);
 				if (droppedRows == 0)
-					Append(p, world.WorldTick, "end", "none", 0, 0, true);
+					WriteTerminal(p, world.WorldTick, "end", "none", 0, complete);
 				else
-					Append(p, world.WorldTick, "dropped", "row_budget", (int)Math.Min(droppedRows, int.MaxValue), 0, false);
+					WriteTerminal(p, world.WorldTick, "dropped", "row_budget", (int)Math.Min(droppedRows, int.MaxValue), false);
 			}
 
-			FlushRows();
+			FlushRows(true);
 			ended = true;
-			writer.Dispose();
 		}
 
 		void INotifyActorDisposing.Disposing(Actor self)
 		{
 			ended = true;
-			FlushRows(); // Flushes complete rows already queued. Disposal cannot fabricate a covered terminal.
-			writer?.Dispose();
+			FlushRows(false); // Queued complete data rows only. Disposal cannot fabricate a covered terminal.
 		}
 	}
 }

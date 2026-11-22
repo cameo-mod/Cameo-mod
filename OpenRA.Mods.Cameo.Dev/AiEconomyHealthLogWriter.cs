@@ -34,15 +34,11 @@ namespace OpenRA.Mods.Cameo.Traits
 		bool failed;
 		bool disposed;
 
-		readonly bool flushEachRecord;
+		internal AiEconomyHealthLogWriter(string path)
+			: this(new FileStream(path, FileMode.CreateNew, FileAccess.Write, FileShare.Read)) { }
 
-		internal AiEconomyHealthLogWriter(string path, bool flushEachRecord = true)
-			: this(new FileStream(path, FileMode.CreateNew, FileAccess.Write, FileShare.Read), MaximumFileBytes, MaximumRecords, flushEachRecord) { }
-
-		// SPK-01: flushEachRecord false = the caller batches rows and calls FlushPending (one flush per batch, not per record).
-		// The default keeps the economy-health writer byte-for-byte on its existing per-record watermark behaviour.
 		internal AiEconomyHealthLogWriter(Stream stream, long byteLimit = MaximumFileBytes,
-			int recordLimit = MaximumRecords, bool flushEachRecord = true)
+			int recordLimit = MaximumRecords)
 		{
 			ArgumentNullException.ThrowIfNull(stream);
 			if (byteLimit < 1 || recordLimit < 1)
@@ -50,7 +46,6 @@ namespace OpenRA.Mods.Cameo.Traits
 			this.stream = stream;
 			this.byteLimit = byteLimit;
 			this.recordLimit = recordLimit;
-			this.flushEachRecord = flushEachRecord;
 		}
 
 		internal bool Complete => !failed && !disposed;
@@ -75,8 +70,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				var data = Utf8.GetBytes(json + "\n");
 				stream.Write(data);
 				// Each record is a read watermark only after flushing. Cross-file watermark is separate.
-				if (flushEachRecord)
-					stream.Flush();
+				stream.Flush();
 				bytes += count;
 				records++;
 				maximumRecordBytes = Math.Max(maximumRecordBytes, count);
@@ -84,23 +78,6 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 			catch (Exception e) when (e is IOException or UnauthorizedAccessException or
 				ObjectDisposedException or EncoderFallbackException)
-			{
-				return Fail();
-			}
-		}
-
-		// SPK-01: the batch watermark. Only whole, already-written lines are made durable here; a flush failure is sticky.
-		internal bool FlushPending()
-		{
-			if (failed || disposed)
-				return false;
-
-			try
-			{
-				stream.Flush();
-				return true;
-			}
-			catch (Exception e) when (e is IOException or UnauthorizedAccessException or ObjectDisposedException)
 			{
 				return Fail();
 			}

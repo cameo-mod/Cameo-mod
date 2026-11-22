@@ -17,6 +17,7 @@
     <Compile Include="../OpenRA.Mods.Cameo.Dev/AiEconomyHealthLogWriter.cs" Link="Dev/AiEconomyHealthLogWriter.cs" />
     <Compile Include="../OpenRA.Mods.Cameo.Dev/AiLogFileAppender.cs" Link="Dev/AiLogFileAppender.cs" />
     <Compile Include="../OpenRA.Mods.Cameo.Dev/AiLogWriteQueue.cs" Link="Dev/AiLogWriteQueue.cs" />
+    <Compile Include="../OpenRA.Mods.Cameo.Dev/InsuranceRowBudget.cs" Link="Dev/InsuranceRowBudget.cs" />
     <Compile Include="../OpenRA.Mods.Cameo.Dev/DevCashBonus.cs" Link="Dev/DevCashBonus.cs" />
     <!-- DEV-only pure class: guarded out of the release Cameo assembly, compiled into the test assembly only when the Cameo assembly does not have it. -->
     <Compile Include="../OpenRA.Mods.Cameo/Traits/DefendReactionTracker.cs" Link="Dev/DefendReactionTracker.cs" Condition="'$(CameoDevLogging)' != 'true'" />
