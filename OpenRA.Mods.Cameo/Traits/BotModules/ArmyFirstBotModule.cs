@@ -146,13 +146,46 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			var armyHolds = ArmyFirstEval.ArmyCountHolds(hasUnitProducer, playerResources.GetCashAndResources(), armyUnits,
 				info.MinArmyUnitsBeforeBuildings, info.ArmyFirstMinCash);
-			return ArmyFirstEval.Holds(essential, paused, armyHolds)
+			var holds = ArmyFirstEval.Holds(essential, paused, armyHolds)
 				|| !ablateArmyRatio.Off(player, AblationIds.ArmyRatio)
 					&& ArmyFirstEval.ShareHolds(essential, admission, share, cost, ShareTarget)
 				|| !ablateRecovery.Off(player, AblationIds.Recovery)
 					&& ArmyFirstEval.ReserveHolds(essential, admission, playerResources.GetCashAndResources(), Committed(), cost,
 						ReserveLine());
+#if CAMEO_DEV_LOGGING
+			if (holds)
+				CountShareHold(building, essential, admission, cost);
+#endif
+			return holds;
 		}
+
+#if CAMEO_DEV_LOGGING
+		// DEFENCE-ZERO-FIX F-D (DEV only): share_hold per class and item, so a future arming of this module shows what the
+		// projected-share vote holds (it writes no other trace). Read-only: re-asks the pure vote to attribute the hold; the
+		// base builder asks twice per pick in one tick, so a repeat of the same item in the same tick counts once.
+		readonly System.Collections.Generic.Dictionary<string, int> shareHolds = new();
+		int lastShareHoldTick = -1;
+		string lastShareHoldItem;
+
+		void CountShareHold(ActorInfo building, bool essential, RecoverySpendPolicyCA.Admission admission, int cost)
+		{
+			if (ablateArmyRatio.Off(player, AblationIds.ArmyRatio) || !ArmyFirstEval.ShareHolds(essential, admission, share, cost, ShareTarget))
+				return;
+
+			var tick = player.World.WorldTick;
+			if (tick == lastShareHoldTick && building.Name == lastShareHoldItem)
+				return;
+
+			lastShareHoldTick = tick;
+			lastShareHoldItem = building.Name;
+			var key = admission + "/" + building.Name;
+			shareHolds.TryGetValue(key, out var n);
+			shareHolds[key] = ++n;
+			if (n <= 8 || n % 25 == 0)
+				Log.Write("debug", $"AI ({player.ClientIndex}): SHARE-HOLD share_hold class={admission} item={building.Name} n={n} cost={cost}"
+					+ $" A={share.Army} B={share.Buildings} target={ShareTarget} bank={playerResources.GetCashAndResources()} tick={tick}");
+		}
+#endif
 
 		void IBotRequestPauseBuildingProduction.BuildingAdmitted(ActorInfo building, int cost)
 		{

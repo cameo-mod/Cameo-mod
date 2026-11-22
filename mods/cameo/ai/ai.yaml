@@ -99,9 +99,18 @@
 		Condition: cn3_stealth_squads
 		Bots: fransbot
 
-	# PROD-IDLE G1 (PLAN_03 section 5, PLAN_04 rows 1-2): army_first and parallel_production are no longer
-	# granted. ArmyFirstBotModule mounts on genericbot (all 11 tiers) and ParallelProductionBotModule is removed:
-	# the spend owner's gate + the projected-ratio rule (BotLimits ArmyShareTargetPermille) are the one authority.
+	# AF-1 (AI_ARCHITECTURE §12.20): army-first building gate for genericbot (the spacing advisor needs no condition:
+	# its building gap is live for genericbot, only its re-ranking is switched, by a field).
+	# Same inert-on-master pattern - the switch arm flips Bots: to the genericbot tier list.
+	# DEFENCE-ZERO-FIX (Opus 2026-11-22, user ruling): restored to the 837a13915 grant. The PROD-IDLE G1 mount of
+	# ArmyFirstBotModule on all 11 tiers (364f31ca5) gave every tier bot a building pause vote that held every defence,
+	# radar and tech building; no tier bot may carry a building veto. Army-first for tiers returns only as a redesign
+	# (a unit-side push, never a building veto) with its own design and ablation row.
+	GrantConditionOnBotOwner@armyfirst:
+		Condition: army_first
+		Bots: fransbot
+	# PROD-IDLE G1 (PLAN_03 section 5, PLAN_04 rows 1-2): parallel_production is no longer granted and
+	# ParallelProductionBotModule is removed (unchanged by the DEFENCE-ZERO-FIX revert).
 	# The line-of-death fix (unified concave, AI_ARCHITECTURE 12.7a): Rush squads deploy a range-matched
 	# concave arc before the commit, so the wave fires together. The arm flips this to the
 	# genericbot tier list in the increment A/B; default fransbot-only - inert on master.
@@ -4230,13 +4239,12 @@ Player:
 	# combat units are below MinArmyUnitsBeforeBuildings with cash above ArmyFirstMinCash (gate off until the switch sets it).
 	# Conyards, refineries, power and the first factory are essential and always pass; the vote is inert until a unit
 	# producer exists, so tech sequencing cannot stall.
-	# PROD-IDLE G1: mounted on genericbot (all 11 tiers). The flat cash-poor vote is subsumed by the spend owner's gate and
-	# the projected-ratio rule, so it is the same no-vote value 0 on every tier; the ratio comes from BotLimits.
+	# `genericbot && army_first`: off on master until the increment A/B arms it (switch group AE).
+	# DEFENCE-ZERO-FIX (Opus 2026-11-22, user ruling): restored to the 837a13915 gate. The PR-3 projected-share vote and the
+	# PR-1 reserve vote stay in the module code, dormant: no tier bot satisfies `army_first` (the grant above is fransbot only),
+	# so no tier bot carries a building pause vote. Do not re-mount this on the tiers; see the grant comment.
 	ArmyFirstBotModule:
-		RequiresCondition: genericbot
-		ArmyReserveLowCash: 0
-		ArmyReserveHighCash: 0
-		MinArmyUnitsBeforeBuildings: 0
+		RequiresCondition: genericbot && army_first
 	# CN3 (crystallized-nexus DeployBotModule port): unified deploy driving for GrantConditionOnDeploy units -
 	# artillery move-into-range/deploy/retreat-from-dead-zone, stat-deployers entrench when idle+threatened,
 	# support deploys near allies, ability deploys fire once and pack. Squad-held units are skipped entirely
