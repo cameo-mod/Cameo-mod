@@ -296,9 +296,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			if (IsTraitDisabled)
 				return;
-			// ENGLOG-NRE-FIX: DamageDealtEvent.From reads damaged.Location, which dereferences OccupiesSpace (null for an actor
-			// without IOccupySpace); a victim with no position is not an event (Opus rule, as EngagementLog DealtWanted).
-			if (damaged == null || damaged.Disposed || damaged.OccupiesSpace == null)
+			if (damaged == null || damaged.Disposed)
 				return;
 
 			var victim = damaged.Owner;
@@ -312,7 +310,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// (an ungated bot, N = 1, the bot's own Running phase) records now, exactly as before.
 			var tick = world.WorldTick;
 			var bot = ModularBot.ActiveOf(this.self);
-			if (bot != null && bot.TryDefer(() => DamageDealtEvent.From(bot.KeyOf(this), tick, damaged, e)))
+			// ENGLOG-NRE-FIX 3 (Opus): DamageDealtEvent.From reads damaged.Location, which dereferences OccupiesSpace (null for an
+			// actor without IOccupySpace), so only a victim with a position is deferred; one without records now, exactly as before.
+			if (bot != null && damaged.OccupiesSpace != null && bot.TryDefer(() => DamageDealtEvent.From(bot.KeyOf(this), tick, damaged, e)))
 				return;
 
 			RecordDealt(victim, e.Damage.Value, tick);
