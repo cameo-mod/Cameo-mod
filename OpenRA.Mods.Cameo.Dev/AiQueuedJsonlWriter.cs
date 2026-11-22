@@ -48,6 +48,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		}
 
 		internal bool Failed => failed;
+		internal bool Complete => !failed && !closed;
 		internal int Records => records;
 		internal long Bytes => bytes;
 		internal int MaximumRecordBytes => maximumRecordBytes;
@@ -92,28 +93,25 @@ namespace OpenRA.Mods.Cameo.Traits
 			return !failed;
 		}
 
-		// GameOver only (may wait, bounded, as the sibling DEV writers do): hands over the last batch, drains the shared queue,
-		// and writes the terminal row only if no failure has been seen by then. Returns false when the file is incomplete.
-		internal bool Finish(int tick, string terminalRow)
+		// GameOver only (may wait, bounded, as the sibling DEV writers do). BeginTerminal hands over the rows written so far, drains
+		// the shared queue, and marks the stream failed if a worker failure was seen. Terminal rows are written only after it, and
+		// read Complete at that point, so a failure seen here reads as incomplete. EndTerminal hands over the terminal rows and
+		// drains again; a failure there is sticky, and the reader's seq check fails closed on any row the worker lost.
+		internal bool BeginTerminal(int tick)
 		{
-			if (closed)
-				return false;
-
 			Flush(tick);
 			AiLogWriteQueue.FlushSharedForGameEnd();
-			if (failed || AiLogWriteQueue.Shared.Failed != queueFailuresAtStart)
-			{
+			if (AiLogWriteQueue.Shared.Failed != queueFailuresAtStart)
 				failed = true;
-				Close(tick);
-				return false;
-			}
+			return !failed;
+		}
 
-			var written = TryWrite(terminalRow) && Flush(tick, finalRecord: true);
+		internal bool EndTerminal(int tick)
+		{
+			Flush(tick, finalRecord: true);
 			AiLogWriteQueue.FlushSharedForGameEnd();
-			if (!written || AiLogWriteQueue.Shared.Failed != queueFailuresAtStart)
+			if (AiLogWriteQueue.Shared.Failed != queueFailuresAtStart)
 				failed = true;
-
-			closed = true;
 			return !failed;
 		}
 

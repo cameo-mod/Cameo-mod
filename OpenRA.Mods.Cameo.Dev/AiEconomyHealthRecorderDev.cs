@@ -30,8 +30,8 @@ namespace OpenRA.Mods.Cameo.Traits
 	{
 		readonly Actor self;
 		AiEconomyHealthState state;
-		AiEconomyHealthLogWriter health;
-		AiEconomyHealthLogWriter raw;
+		AiQueuedJsonlWriter health;
+		AiQueuedJsonlWriter raw;
 		HashSet<string> groups;
 		HashSet<uint> resolvedEpisodes;
 		List<EconomyQueueObservation> observations;
@@ -99,7 +99,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				trueReady.Remove(key);
 		}
 
-		internal void Activate(string uid, AiEconomyHealthLogWriter healthWriter, AiEconomyHealthLogWriter rawWriter)
+		internal void Activate(string uid, AiQueuedJsonlWriter healthWriter, AiQueuedJsonlWriter rawWriter)
 		{
 			gameUid = uid;
 			health = healthWriter;
