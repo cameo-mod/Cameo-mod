@@ -109,6 +109,13 @@
 	GrantConditionOnBotOwner@armyfirst:
 		Condition: army_first
 		Bots: fransbot
+	# ARMY-FIRST-02 (USER P0 11-23, Opus): the tier bots' army-first voter returns as the count-based redesign (user rule
+	# 11-22 "each available building at least once, then army"): ArmyFirstBotModule@af02 below holds only EXTRA copies
+	# (every first copy passes), defences follow a threat-scaled cap, not the stock vote. This grant is the feature switch:
+	# empty Bots = the DEFENCE-ZERO-FIX state (no tier voter). Classic never gets it (no genericbot).
+	GrantConditionOnBotOwner@armyfirst02:
+		Condition: army_first_02
+		Bots: noob, easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod
 	# PROD-IDLE G1 (PLAN_03 section 5, PLAN_04 rows 1-2): parallel_production is no longer granted and
 	# ParallelProductionBotModule is removed (unchanged by the DEFENCE-ZERO-FIX revert).
 	# The line-of-death fix (unified concave, AI_ARCHITECTURE 12.7a): Rush squads deploy a range-matched
@@ -3819,6 +3826,9 @@ Player:
 		RequiresCondition: classicbot
 	BaseRepairBotModule:
 		RequiresCondition: genericbot
+		# ARMY-FIRST-02 (USER rule 11-23): repair is always on unless cash + resources < 1000; one toggle per state change.
+		# Row af2_repair_cash; 0 = no floor.
+		RepairMinCash: 1000
 	# CN2 (AI_MASTER_PLAN §3, crystallized-nexus port): the UNIT side of repair - damaged idle units go to a
 	# depot (Repairable), a repair-near building, or within a mobile repairer's aura. BaseRepairBotModule owns
 	# buildings; this only ever orders units, and claims each one (BotLeasePurpose.Repair) so squads cannot
@@ -4242,9 +4252,29 @@ Player:
 	# `genericbot && army_first`: off on master until the increment A/B arms it (switch group AE).
 	# DEFENCE-ZERO-FIX (Opus 2026-11-22, user ruling): restored to the 837a13915 gate. The PR-3 projected-share vote and the
 	# PR-1 reserve vote stay in the module code, dormant: no tier bot satisfies `army_first` (the grant above is fransbot only),
-	# so no tier bot carries a building pause vote. Do not re-mount this on the tiers; see the grant comment.
+	# so no tier bot carries a building pause vote. Do not re-mount this on the tiers; see the grant comment. ARMY-FIRST-02
+	# mounts the count-based redesign as its own instance (@af02, next), not this one.
 	ArmyFirstBotModule:
 		RequiresCondition: genericbot && army_first
+	# ARMY-FIRST-02 (USER P0 11-23): the tier voter. The cash-poor and army-count votes stay off (0, as the PROD-IDLE G1 mount
+	# 364f31ca5); the PR-3 projected-share and PR-1 reserve votes act on EXTRA non-defence copies only:
+	# - FirstCopyPasses: a type with no owned, queued or recently admitted copy is never held (tech chain, radar, the first
+	#   defence of each type, support buildings), so the DEFENCE-ZERO and tech-starvation failures cannot return;
+	# - extra defences leave the stock votes and follow the threat-scaled cap: 3 quiet, up to 3 + 6 at full threat
+	#   intensity; turtle may hold 2x that until tick 27000 (early-mid game only); every personality ramps the army.
+	# Rows: af2_army_first (this instance), af2_first_copy, af2_defence_cap.
+	ArmyFirstBotModule@af02:
+		RequiresCondition: genericbot && army_first_02
+		ArmyReserveLowCash: 0
+		ArmyReserveHighCash: 0
+		MinArmyUnitsBeforeBuildings: 0
+		FirstCopyPasses: true
+		DefenceCapBase: 3
+		DefenceCapPerThreat: 6
+		DefenceThreatSaturationPercent: 300
+		TurtleDefenceCapPercent: 200
+		TurtleDefenceUntilTick: 27000
+		AblationRow: af2_army_first
 	# CN3 (crystallized-nexus DeployBotModule port): unified deploy driving for GrantConditionOnDeploy units -
 	# artillery move-into-range/deploy/retreat-from-dead-zone, stat-deployers entrench when idle+threatened,
 	# support deploys near allies, ability deploys fire once and pack. Squad-held units are skipped entirely

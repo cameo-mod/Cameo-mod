@@ -12,6 +12,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.CA;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -44,6 +45,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"expiring before the order resolves re-creates the toggle-off this module exists to prevent.")]
 		public readonly int PendingOrderTicks = 100;
 
+		[Desc("ARMY-FIRST-02 (USER rule 11-23): building repair is always on unless the bot's cash + resources are below this.",
+			"Below it, every repair the bot runs is switched off once (one toggle) and no new repair starts; at or above it the",
+			"sweep and the hit trigger resume as usual. A toggle is sent only on a state change, never twice for one building",
+			"while an order is in flight. 0 = no floor (the behaviour before). Ablation row af2_repair_cash.")]
+		public readonly int RepairMinCash = 0;
+
 		public override object Create(ActorInitializer init) { return new BaseRepairBotModule(init.Self, this); }
 	}
 
@@ -54,6 +61,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly World world;
 		readonly OpenRA.Player player;
 		readonly Dictionary<Actor, int> pendingSince = [];
+		PlayerResources resources;
+		AblationLatch ablateRepairCash; // ARMY-FIRST-02 row af2_repair_cash (DEV provider only; release = on)
 		BotPeriod sweep; // STAGGER-06 TIMER A: E019 F1 K=RepairAllInterval x0=K
 
 		// Telemetry (situation log `own.repair_*`, cumulative). TogglesAvoided counts the hits where master's
@@ -61,6 +70,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public int RepairOrders { get; private set; }
 		public int SweepOrders { get; private set; }
 		public int TogglesAvoided { get; private set; }
+
+		// ARMY-FIRST-02: repairs switched off below the cash floor, and new repairs not started because of it.
+		public int CashSuspends { get; private set; }
+		public int CashHolds { get; private set; }
 
 		public BaseRepairBotModule(Actor self, BaseRepairBotModuleInfo info)
 			: base(info)
@@ -71,8 +84,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		protected override void TraitEnabled(Actor self)
 		{
+			resources ??= player.PlayerActor.TraitOrDefault<PlayerResources>();
 			sweep = BotPeriod.F1(world.WorldTick, Info.RepairAllInterval, Info.RepairAllInterval);
 		}
+
+		/// <summary>ARMY-FIRST-02 cash floor: below the floor (floor &gt; 0) repair is off. Pure, for the tests.</summary>
+		public static bool BelowRepairFloor(int floor, int cashAndResources) => floor > 0 && cashAndResources < floor;
+
+		/// <summary>
+		/// ARMY-FIRST-02: below the floor a running repair (the bot is a repairer) with no order in flight gets exactly one
+		/// switch-off toggle; anything else sends nothing.
+		/// </summary>
+		public static bool SuspendRepair(bool belowFloor, bool alreadyRepairer, bool orderInFlight) =>
+			belowFloor && alreadyRepairer && !orderInFlight;
 
 		/// <summary>The whole policy, free of world state so it can be tested.</summary>
 		public static BaseRepairDecision Decide(DamageState state, DamageState minimum, bool isHeal,
@@ -101,6 +125,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			var tick = world.WorldTick;
+			var belowFloor = BelowFloor();
 
 			// Own buildings only: the bot's knowledge of its own base, no fog involved.
 			foreach (var tp in world.ActorsWithTrait<RepairableBuilding>())
@@ -112,6 +137,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var health = a.TraitOrDefault<IHealth>();
 				if (health == null)
 					continue;
+
+				if (belowFloor)
+				{
+					Suspend(bot, a, tp.Trait, tick);
+					continue;
+				}
 
 				if (Consider(bot, a, tp.Trait, health.DamageState, false, tick, "sweep") == BaseRepairDecision.Order)
 					SweepOrders++;
@@ -131,6 +162,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var rb = self.TraitOrDefault<RepairableBuilding>();
 			if (rb == null || rb.IsTraitDisabled)
 				return;
+
+			// ARMY-FIRST-02: below the cash floor no repair starts on a hit (the sweep switches running ones off).
+			if (BelowFloor())
+			{
+				if (!rb.Repairers.Contains(player) && e.Damage.Value > 0)
+					CashHolds++;
+				return;
+			}
 
 			var decision = Consider(bot, self, rb, e.DamageState, e.Damage.Value <= 0, world.WorldTick, "hit");
 			if (decision == BaseRepairDecision.Order)
@@ -162,6 +201,27 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			return decision;
+		}
+
+		bool BelowFloor() => Info.RepairMinCash > 0 && resources != null
+			&& !ablateRepairCash.Off(player, AblationIds.Af2RepairCash)
+			&& BelowRepairFloor(Info.RepairMinCash, resources.GetCashAndResources());
+
+		// One switch-off toggle for a repair the bot runs, recorded in flight like an order, so the next sweep cannot send a
+		// second toggle (which would switch it back on) before the first one resolved.
+		void Suspend(IBot bot, Actor building, RepairableBuilding rb, int tick)
+		{
+			var inFlight = pendingSince.TryGetValue(building, out var since) && tick - since < Info.PendingOrderTicks;
+			if (!SuspendRepair(true, rb.Repairers.Contains(player), inFlight))
+				return;
+
+			PruneExpired(tick);
+			pendingSince[building] = tick;
+			bot.QueueOrder(new Order("RepairBuilding", player.PlayerActor, Target.FromActor(building), false));
+			CashSuspends++;
+#if CAMEO_DEV_LOGGING
+			Log.Write("debug", $"AI ({player.ClientIndex}): AF2 repair_off {building.Info.Name} {building.ActorID} cash={resources.GetCashAndResources()} floor={Info.RepairMinCash} tick {tick}");
+#endif
 		}
 
 		void PruneExpired(int tick)
