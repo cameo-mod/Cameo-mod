@@ -71,8 +71,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Only queue construction of a new unit when above this requirement.")]
 		public readonly int ProductionMinCashRequirement = 2000;
 
-		[Desc("UPGRADE-QUEUE-01: the upgrade-like queues (UpgradeServiceQueues) get their own service that runs before the cash floor and the pause votes, so an",
-			"upgrade, add-on, research or promotion queue with something buildable is never idle. False = those queues are only visited by the ordinary unit sweep, behind the floor.")]
+		[Desc("UPGRADE-QUEUE-01: the upgrade-like queues (UpgradeServiceQueues) get their own service that runs before the cash floor and the K5 reserve, so an",
+			"upgrade, add-on, research or promotion queue with an affordable item is never idle (free items, promotions, always start). Paid items still wait for a unit-production pause vote.",
+			"False = those queues are only visited by the ordinary unit sweep, behind the floor.")]
 		public readonly bool UpgradeService = true;
 
 		[Desc("UPGRADE-QUEUE-01: queue types served by the upgrade service. Each one is served on its own: a queue with nothing buildable, or a busy one, never holds back the next.")]
@@ -719,7 +720,7 @@ namespace OpenRA.Mods.CA.Traits
 					activeUnitIntervals.Remove(i.Key);
 			}
 
-			// UPGRADE-QUEUE-01: runs before the pause votes and the cash floor; progressive payment makes an unfunded start harmless.
+			// UPGRADE-QUEUE-01: runs before the pause votes and the cash floor (see ServeUpgradeQueues for what it keeps).
 			if (UpgradeServiceOn)
 			{
 				var upgradeClock = BotVisitClock.Of(bot);
@@ -846,14 +847,23 @@ namespace OpenRA.Mods.CA.Traits
 			}
 		}
 
-		// UPGRADE-QUEUE-01. Every queue of every served type is its own producer: an idle one starts the best buildable item NOW,
-		// whatever the bank holds (production is paid progressively). Order of preference: free items (promotions) first, then items the faction's UnitsToBuild lists for this
-		// queue type, by weight (high first), then by cost (cheap first), then by name; items the list does not mention come last, so a
-		// queue never idles because the table missed a newly unlocked tier. No random draw, so same seed = same order.
+		// UPGRADE-QUEUE-01. Every queue of every served type is its own producer: an idle one starts the best buildable item NOW.
+		// Gates it skips: the ProductionMinCashRequirement floor and the K5 army reserve (they are sized for armies and were what idled these
+		// queues). Gates it keeps: an item must be AFFORDABLE (bank minus what this pass already ordered), so the unpaid remainder never
+		// builds up against the reserve gates; paid items wait while a unit-production pause vote is up (the base builder's refinery pause
+		// included); FREE items (promotions) start whatever the votes and the bank say. Delays, intervals and limits are honoured through
+		// ShouldBuild. An item already in production in ANY queue is not started again (Scrin has a second Upgrades queue).
+		// Choice: UpgradeServiceCA.Choose (pure): free first, then UnitsToBuild weight, then cost, then name; no random draw.
 		void ServeUpgradeQueues(IBot bot)
 		{
-			// One set for the whole pass: Scrin carries a second Upgrades queue on its nerve center, and two idle queues must not start the same item.
-			var picked = new HashSet<string>(StringComparer.Ordinal);
+			var inProduction = new HashSet<string>(StringComparer.Ordinal);
+			foreach (var category in Info.UpgradeServiceQueues)
+				foreach (var queue in AIUtils.FindQueues(player, category))
+					foreach (var queued in queue.AllQueued())
+						inProduction.Add(queued.Item);
+
+			var paused = requestPause.Any(rp => rp.IsTraitEnabled() && rp.PauseUnitProduction && rp is not IBotItemAwareUnitCap);
+			var bank = playerResources.GetCashAndResources();
 			foreach (var category in Info.UpgradeServiceQueues)
 			{
 				foreach (var queue in AIUtils.FindQueues(player, category))
@@ -863,58 +873,51 @@ namespace OpenRA.Mods.CA.Traits
 						continue;
 
 					var key = (queue.Actor.ActorID, queue.Info.Type);
-					if (upgradeIdleUntil.TryGetValue(key, out var idleUntil) && world.WorldTick < idleUntil)
-						continue;
+					if (upgradeIdleUntil.TryGetValue(key, out var idleUntil))
+					{
+						if (world.WorldTick < idleUntil)
+							continue;
+
+						upgradeIdleUntil.Remove(key);
+					}
 
 					var shares = GetUnitsToBuildForCategory(queue.Info.Type);
 					var startedHere = 0;
 					for (; slots > 0; slots--)
 					{
-						var item = ChooseUpgradeItem(queue, shares, picked);
-						if (item == null)
+						var candidates = new List<UpgradeServiceCA.Candidate>();
+						var infos = new List<ActorInfo>();
+						foreach (var item in queue.BuildableItems())
 						{
-							// Nothing buildable (everything researched, or the next tier is locked): look again in 75 ticks, not every pass.
+							if (!ShouldBuild(item.Name, true, queue.Info.Type))
+								continue;
+
+							candidates.Add(new UpgradeServiceCA.Candidate(item.Name, queue.GetProductionCost(item),
+								shares != null && shares.TryGetValue(item.Name, out var w) ? Math.Max(w, 0) : -1));
+							infos.Add(item);
+						}
+
+						var index = UpgradeServiceCA.Choose(candidates, inProduction, bank, paused);
+						if (index < 0)
+						{
+							// Nothing startable (all researched, next tier locked, or unaffordable): look again in 75 ticks, not every pass.
 							if (startedHere == 0)
 								upgradeIdleUntil[key] = world.WorldTick + UpgradeRecheckTicks;
 
 							break;
 						}
 
-						picked.Add(item.Name);
+						var item2 = infos[index];
+						inProduction.Add(item2.Name);
+						bank -= Math.Max(0, candidates[index].Cost);
 						startedHere++;
-						SetUnitInterval(item.Name);
-						bot.QueueOrder(Order.StartProduction(queue.Actor, item.Name, 1));
-						NotifyStarted(item.Name, queue.Info.Type);
-						AIUtils.BotDebug("AI: {0} upgrade service starts {1} in {2}.", player, item.Name, queue.Info.Type);
+						SetUnitInterval(item2.Name);
+						bot.QueueOrder(Order.StartProduction(queue.Actor, item2.Name, 1));
+						NotifyStarted(item2.Name, queue.Info.Type);
+						AIUtils.BotDebug("AI: {0} upgrade service starts {1} in {2}.", player, item2.Name, queue.Info.Type);
 					}
 				}
 			}
-		}
-
-		ActorInfo ChooseUpgradeItem(ProductionQueue queue, Dictionary<string, int> shares, HashSet<string> picked)
-		{
-			ActorInfo best = null;
-			var bestWeight = -1;
-			var bestCost = 0;
-			foreach (var item in queue.BuildableItems())
-			{
-				if (picked.Contains(item.Name))
-					continue;
-
-				var cost = queue.GetProductionCost(item);
-
-				// Free items (promotions) are always picked first, whatever the table says.
-				var weight = cost <= 0 ? int.MaxValue : shares != null && shares.TryGetValue(item.Name, out var w) ? Math.Max(w, 0) : -1;
-				if (best == null || weight > bestWeight ||
-					(weight == bestWeight && (cost < bestCost || (cost == bestCost && string.CompareOrdinal(item.Name, best.Name) < 0))))
-				{
-					best = item;
-					bestWeight = weight;
-					bestCost = cost;
-				}
-			}
-
-			return best;
 		}
 
 		void TryBuildOpeningDefense(IBot bot)
