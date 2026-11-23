@@ -96,6 +96,24 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TheVerifyingScanIsNeverBuiltUnlessTheFlagIsOn()
+		{
+			// The fresh list is the ARGUMENT of VerifyEnemyScan, so every call site must test the flag first (review 7f8cd10d MED).
+			var scan = Scan();
+			var calls = scan.Split("VerifyEnemyScan(").Length - 2; // minus the definition
+			Assert.That(calls, Is.EqualTo(3));
+			Assert.That(scan.Split("if (Info.VerifySharedEnemyScan").Length - 1, Is.EqualTo(3));
+			foreach (var site in new[] { "VerifyEnemyScan(scan.Preferred,", "VerifyEnemyScan(scan.HighValue,", "VerifyEnemyScan(scan.Visible," })
+			{
+				var at = scan.IndexOf(site, StringComparison.Ordinal);
+				Assert.That(at, Is.GreaterThan(0), site);
+				Assert.That(scan.Substring(Math.Max(0, at - 80), Math.Min(80, at)), Does.Contain("if (Info.VerifySharedEnemyScan"), site);
+			}
+
+			Assert.That(Section(scan, "void VerifyEnemyScan(", "}"), Does.Not.Contain("Info.VerifySharedEnemyScan"));
+		}
+
+		[Test]
 		public void TheSwitchIsOnByDefaultAndAblatable()
 		{
 			Assert.That(Scan(), Does.Contain("public readonly bool UseSharedEnemyScan = true;"));

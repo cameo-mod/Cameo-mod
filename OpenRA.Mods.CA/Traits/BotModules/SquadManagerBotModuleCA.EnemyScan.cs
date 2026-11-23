@@ -87,7 +87,8 @@ namespace OpenRA.Mods.CA.Traits
 			if (scan.Preferred != null && scan.PreferredFor == mainTarget)
 			{
 #if CAMEO_DEV_LOGGING
-				VerifyEnemyScan(scan.Preferred, EnemyCandidatesFresh(mainTarget), "candidates");
+				if (Info.VerifySharedEnemyScan)
+					VerifyEnemyScan(scan.Preferred, EnemyCandidatesFresh(mainTarget), "candidates");
 #endif
 				return scan.Preferred;
 			}
@@ -117,7 +118,13 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			var scan = enemyScan;
 			if (scan != null && ReferenceEquals(units, scan.Preferred))
+			{
+#if CAMEO_DEV_LOGGING
+				if (Info.VerifySharedEnemyScan && scan.Visible != null)
+					VerifyEnemyScan(scan.Visible, units.Where(IsNotHiddenUnit).ToList(), "visible");
+#endif
 				return scan.Visible ??= units.Where(IsNotHiddenUnit).ToList();
+			}
 
 			return units.Where(IsNotHiddenUnit).ToList();
 		}
@@ -129,7 +136,8 @@ namespace OpenRA.Mods.CA.Traits
 			if (scan != null && scan.HighValue != null && scan.HighValueFor == mainTarget)
 			{
 #if CAMEO_DEV_LOGGING
-				VerifyEnemyScan(scan.HighValue, HighValueCandidatesFresh(mainTarget), "high-value");
+				if (Info.VerifySharedEnemyScan)
+					VerifyEnemyScan(scan.HighValue, HighValueCandidatesFresh(mainTarget), "high-value");
 #endif
 				return scan.HighValue;
 			}
@@ -166,9 +174,10 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 #if CAMEO_DEV_LOGGING
+		// Call sites test Info.VerifySharedEnemyScan BEFORE building the fresh list: the argument is a full scan.
 		void VerifyEnemyScan(List<Actor> served, List<Actor> fresh, string what)
 		{
-			if (!Info.VerifySharedEnemyScan || served.SequenceEqual(fresh))
+			if (served.SequenceEqual(fresh))
 				return;
 
 			Log.Write("debug", $"PERF-F1 MISMATCH ({Player.ClientIndex}): {what} served {served.Count} actors, a fresh scan gives {fresh.Count} (tick {World.WorldTick})");
