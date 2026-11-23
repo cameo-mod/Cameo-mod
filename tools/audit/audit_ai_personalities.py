@@ -380,6 +380,31 @@ def engdrop_ladder_failures() -> list[str]:
     return failures
 
 
+# WAVE-MIN-01 (USER rule, 2026-11-23): an attack wave launches only with >= N units AND >= V summed unit cost. One line over all 11
+# tiers, noob (rank 0, no limit) to cameogod (rank 10): N = 2.4 r rounded half up, V = 1200 r. The generic ten-tier check above
+# starts at easiest and would reject the rounded 2.4 line, so these two fields are held to the exact 11-tier table instead.
+WAVE_MIN_LINES = {
+    "WaveMinUnits": lambda rank: (24 * rank + 5) // 10,
+    "WaveMinValue": lambda rank: 1200 * rank,
+}
+WAVE_MIN_TIER_KEYS = ("noob", *DIFFICULTIES)
+
+
+def wave_min_line_failures(limits) -> list[str]:
+    failures = []
+    for field, line in WAVE_MIN_LINES.items():
+        raw = [limits[t].get(field) if t in limits else None for t in WAVE_MIN_TIER_KEYS]
+        missing = [t for t, v in zip(WAVE_MIN_TIER_KEYS, raw) if v is None]
+        if missing:
+            failures.append(f"BotLimits.{field} is not written for {missing}: WAVE-MIN-01 writes it in every tier")
+            continue
+        values = whole_values(f"BotLimits.{field}", raw, failures)
+        expected = [line(rank) for rank in range(len(WAVE_MIN_TIER_KEYS))]
+        if values is not None and values != expected:
+            failures.append(f"BotLimits.{field} {values} != the WAVE-MIN-01 line {expected}")
+    return failures
+
+
 def difficulty_scale_failures() -> list[str]:
     """DESIGN §19.1: every per-tier number lies on one straight line in equal steps, and is written in
     every tier (a missing field falls back to a C# default and breaks the line silently)."""
@@ -395,6 +420,8 @@ def difficulty_scale_failures() -> list[str]:
 
     fields = sorted({c.key for block in limits.values() for c in block.children} - {"RequiresCondition"} - BOOLEAN_LIMIT_FIELDS)
     for field in fields:
+        if field in WAVE_MIN_LINES:
+            continue  # WAVE-MIN-01: its own exact 11-tier line (noob included), checked below
         raw = [limits[t].get(field) for t in DIFFICULTIES]
         missing = [t for t, v in zip(DIFFICULTIES, raw) if v is None]
         if missing:
@@ -403,6 +430,8 @@ def difficulty_scale_failures() -> list[str]:
         values = whole_values(f"BotLimits.{field}", raw, failures)
         if values is not None and not on_line(values):
             failures.append(f"BotLimits.{field} is not on one equal-step line: {values}")
+
+    failures.extend(wave_min_line_failures(limits))
 
     behavior = rules.resolve("^BotProductionBehavior")
     for trait in ("ProductionTimeMultiplier", "ProductionCostMultiplier"):

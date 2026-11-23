@@ -44,6 +44,12 @@ namespace OpenRA.Mods.CA.Traits
 			"bar only; MaxIdleUnits overflow, ValueOnlyAttackLaunch and the liveness deadline path are",
 			"untouched. 0 = off.")]
 		public readonly int TempoMinWaveUnits = 0;
+		[Desc("WAVE-MIN-01 (USER rule, 2026-11-23): an attack wave launches only when the idle pool holds at least this many",
+			"units AND (WaveMinValue) at least that summed unit cost. One line over the 11 tiers, 2.4 units per rank, written",
+			"in every tier; 0 = no limit (noob). Read only when the squad manager's WaveMinEnabled is on. Negative = not written.")]
+		public readonly int WaveMinUnits = -1;
+		[Desc("WAVE-MIN-01: minimum summed unit cost (credits) of the idle pool for an attack wave; 1200 per rank. 0 = no limit.")]
+		public readonly int WaveMinValue = -1;
 		[Desc("M13 non-renewing response expiry from first admission; a delay on the difficulty line.")]
 		public readonly int TeamResponseMaxLeaseTicks = 1500;
 		[Desc("M13 response re-admission cooldown for the same claim episode.")]

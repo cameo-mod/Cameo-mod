@@ -99,10 +99,12 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool DefendAllyActive => Info.DefendAllyEnabled && !ablateDefendAlly.Off(Player, AblationIds.DefendAlly);
 
-		// An idle attack squad: it has no target to go for, so it is free to answer a call for help.
+		// An attack squad that has not moved out yet - idle, or staging/gathering at its rally building - is free to answer a call for
+		// help (USER 2026-11-23: helping own or allied units comes first and ignores the wave minimum). A squad already marching or
+		// fighting keeps its job.
 		static bool IsIdleResponderSquad(SquadCA s) =>
 			s.IsValid && s.Type is SquadCAType.Rush or SquadCAType.Guerrilla
-			&& s.FuzzyStateMachine?.CurrentState is GroundUnitsIdleStateCA && !s.IsTargetValid;
+			&& s.FuzzyStateMachine?.CurrentState is GroundUnitsIdleStateCA or GroundUnitsStageStateCA;
 
 		void DefendAllyTick(IBot bot)
 		{

@@ -676,6 +676,32 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("DEFEND-ALLY-01: ticks after a response before the next one is considered.")]
 		public readonly int DefendAllyCooldownTicks = 100;
 
+		[Desc("WAVE-MIN-01 (USER rule, 2026-11-23): an attack wave leaves the base only when the idle pool holds at least BotLimits.WaveMinUnits",
+			"units AND at least BotLimits.WaveMinValue summed unit cost (the difficulty line). Applies only to moving out to attack the enemy:",
+			"base defence, DEFEND-ALLY responses, harvester retaliation, scouts and engineer drops never pass through it. Default off (Classic).")]
+		public readonly bool WaveMinEnabled = false;
+
+		[Desc("WAVE-MIN-01: personality floor for the wave unit count. The applied bar is max(tier line, this): a personality may raise the",
+			"minimum, never lower it. 0 = no floor.")]
+		public readonly int WaveMinUnits = 0;
+
+		[Desc("WAVE-MIN-01: personality floor for the wave summed unit cost (credits). The applied bar is max(tier line, this). 0 = no floor.")]
+		public readonly int WaveMinValue = 0;
+
+		[Desc("ARMY-MIX-01 (USER rule, 2026-11-23): squads mix ALL available unit types, never single-type groups. An attack wave needs at least",
+			"WaveMixMinRoles distinct roles in the idle pool (or every available role when fewer exist); the unit builder picks WHAT to build",
+			"for a missing role (never whether to build) and a wave that still lacks one waits at most WaveMixWaitTicks. Default off (Classic).")]
+		public readonly bool WaveMixEnabled = false;
+
+		[Desc("ARMY-MIX-01: distinct combat roles (frontline, anti_armour, anti_infantry, anti_air, artillery, skirmisher) an attack wave must hold.")]
+		public readonly int WaveMixMinRoles = 3;
+
+		[Desc("ARMY-MIX-01: longest a ready wave waits for a missing role before it goes anyway. 0 = never wait.")]
+		public readonly int WaveMixWaitTicks = 1500;
+
+		[Desc("ARMY-MIX-01: ticks one unit-builder pick for a missing role counts as covering it, so several queues do not all build the same role.")]
+		public readonly int WaveMixPickCoverTicks = 200;
+
 		[Desc("UT-1 (AI_DEEP_RESEARCH.md §5.1): the MinimumAttackForceDelay reset scales by the",
 			"master's Turtle<->Rush utility axis (IBotUtilityAxes) — 100 (Rush) x0.6, 50 x1.0,",
 			"0 (Turtle) x1.5. Off, or no enabled provider, keeps the unchanged delay.")]
@@ -3204,6 +3230,10 @@ namespace OpenRA.Mods.CA.Traits
 					m13IntentSquad = null;
 				}
 			}
+			// DEFEND-ALLY-01 (switch ON only): idle, staging and gathering units answer an own or allied actor that is under attack nearby.
+			// It runs BEFORE any attack launch (USER 2026-11-23: helping own or allied units always comes first, and ignores the wave minimum).
+			DefendAllyTick(bot);
+
 			var urgentDispatched = Info.AttackLivenessEnabled && TryM13UrgentAttack(bot);
 			if (!urgentDispatched && --minAttackForceDelayTicks <= 0)
 			{
@@ -3219,9 +3249,6 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (--protectOwnTicks <= 0 && protectOwnFrom != null)
 				ProtectOwn(protectOwnFrom);
-
-			// DEFEND-ALLY-01 (switch ON only): idle units answer an own or allied actor that is under attack nearby.
-			DefendAllyTick(bot);
 
 			PrepositionDefenceTick(bot);
 
@@ -3930,6 +3957,16 @@ namespace OpenRA.Mods.CA.Traits
 			if (aggForce || AttackForceEvalCA.ShouldLaunch(unitsHangingAroundTheBase.Count, maxIdleUnits,
 					idleUnitsValue, requiredValue, requiredSize, Info.ValueOnlyAttackLaunch, Info.SquadValue))
 			{
+				// WAVE-MIN-01 (switch ON only): moving out to attack needs the tier's unit count AND summed cost; below it the wave stays at
+				// home and the pool keeps growing. Defence, DEFEND-ALLY, retaliation, scouts and drops never come through here.
+				if (WaveBelowMinimum())
+					return;
+
+				// ARMY-MIX-01 (switch ON only): a ready wave waits, bounded by WaveMixWaitTicks, until the pool holds min(3, available) roles;
+				// the unit builder picks the missing role meanwhile. Same exemptions as WAVE-MIN-01 (only moving out to attack comes here).
+				if (WaveMixHolds())
+					return;
+
 				// 12.5: squads form to the same mix production builds - an assault
 				// missing a required role stages until the pool covers it, bounded
 				// by StageCompositionTicks, instead of trickling out under-strength.
@@ -3942,6 +3979,7 @@ namespace OpenRA.Mods.CA.Traits
 				}
 
 				stageSinceTick = -1;
+				var waveLaunchSummary = WaveLaunchSummary();
 				BotMission mission = null;
 				Actor missionTarget = null;
 				FrozenActor missionFrozenTarget = null;
@@ -4126,6 +4164,8 @@ namespace OpenRA.Mods.CA.Traits
 					squad.Parent = attackForce.IsValid ? attackForce : squad.Parent;
 
 				AIUtils.BotDebug("AI ({0}): Added {1} units to squad {2}", Player.ClientIndex, attackForce.Units.Count, attackForce.Type);
+				if (waveLaunchSummary != null)
+					DiagnosticSquadEvent(attackForce, "wave_launch", waveLaunchSummary);
 				if (Info.UseSquadPoolFixes)
 				{
 					var dispatchedIds = artilleryUnits.Concat(fireSupportUnits).Concat(assaultUnits)
