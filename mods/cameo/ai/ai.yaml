@@ -4303,10 +4303,14 @@ Player:
 	# B2/B6 repair: demand routes through ordinary StartProduction and the base builder's
 	# completed-item PlacePlug — bots buy plugs like players (maintainer ruling); the instant
 	# PlacePlugAI installer is retired. Queue-less plugs (dormant droppod uplink) stay
-	# unreachable. `genericbot && plug_spawn`: off on master until the increment A/B arms it
-	# (group F).
+	# unreachable.
+	# UPGRADE-QUEUE-02 (USER P0, add-ons never idle): the gate is now `genericbot` only, with its own
+	# switch AddonService (default true, ablation row pq_addon_service). The old plug_spawn gate kept
+	# every add-on idle on master. Classic has no genericbot, so Classic is untouched. Zerg lair/hive,
+	# sunken/spore, spire->greater spire, extractor->collector and WC2 castle/fortress entries added or
+	# corrected from each plug's own Plug.Type (castle = keep, fortress = stronghold).
 	PlugSpawnerBotModuleCA:
-		RequiresCondition: genericbot && plug_spawn
+		RequiresCondition: genericbot
 		Plugs:
 			cabal_missilesilo: cabal_core
 			naxis_machinegunbunkeraddon: naxis_naxibunker
@@ -4322,13 +4326,22 @@ Player:
 			ts_gdi_ioncannonuplink: ts_gdi_upgradecenter
 			ts_gdi_powerturbine: ts_gdi_powerplant
 			wc2_humans_cannontower_plug: wc2_humans_humanscouttower, wc2_orcs_orcwatchtower
-			wc2_humans_castle: wc2_humans_townhall
+			wc2_humans_castle: wc2_humans_keep
 			wc2_humans_guardtower_plug: wc2_humans_humanscouttower, wc2_orcs_orcwatchtower
 			wc2_humans_keep: wc2_humans_townhall
 			wc2_orcs_cannontower_plug: wc2_humans_humanscouttower, wc2_orcs_orcwatchtower
-			wc2_orcs_fortress: wc2_orcs_greathall
+			wc2_orcs_fortress: wc2_orcs_stronghold
 			wc2_orcs_guardtower_plug: wc2_humans_humanscouttower, wc2_orcs_orcwatchtower
 			wc2_orcs_stronghold: wc2_orcs_greathall
+			# Zerg add-ons (BuildingAddons queue). Host names are the Plug.Type of each plug; the module
+			# still queues only where a host's Pluggable accepts the type (AcceptsPlug), so a generous
+			# host list can never queue an unplaceable plug.
+			zerg_lair: zerg_hatchery
+			zerg_hive: zerg_hatchery, zerg_lair
+			zerg_sunkencolony: zerg_creepcolony
+			zerg_sporecolony_defense: zerg_creepcolony
+			zerg_vespenegascollector: zerg_extractor
+			zerg_greaterspire: zerg_spire
 			zerg_greaterspire: zerg_spire
 			zerg_hive: zerg_hatchery
 			zerg_lair: zerg_hatchery
