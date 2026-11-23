@@ -702,6 +702,39 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("ARMY-MIX-01: ticks one unit-builder pick for a missing role counts as covering it, so several queues do not all build the same role.")]
 		public readonly int WaveMixPickCoverTicks = 200;
 
+		[Desc("ARTY-02 (USER rule, 2026-11-23), a sub-switch of ArtyMicroEnabled: orphaned artillery (no assault to trail and no escort left)",
+			"disengages with Move orders, away from threats, and joins the nearest friendly attack squad that is not retreating and is reachable by a",
+			"SAFE route (own first, then allied squads when AggTeamEnabled); with none it takes the safest route home and rejoins the pool. Never",
+			"keeps attacking alone. Default off (Classic).")]
+		public readonly bool ArtyOrphanEnabled = false;
+
+		[Desc("ARTY-02: cells around the orphaned artillery scanned for known threats when a route is planned or re-checked.")]
+		public readonly int ArtyEscapeScanCells = 45;
+
+		[Desc("ARTY-02: margin added to a known enemy's weapon range to get the length out to which a route must keep clear (defence reach = range + margin).")]
+		public readonly int ArtyEscapeMarginCells = 2;
+
+		[Desc("ARTY-02: reach of an enemy structure without a weapon (a base counts as a threat zone), in cells.")]
+		public readonly int ArtyEscapeBaseReachCells = 10;
+
+		[Desc("ARTY-02: cost in cells added to a route for every threat whose reach it enters, so a safe detour beats a short unsafe line.")]
+		public readonly int ArtyEscapePenaltyCells = 40;
+
+		[Desc("ARTY-02: friendly attack squads farther than this (cells) are not considered.")]
+		public readonly int ArtyEscapeMaxSquadCells = 60;
+
+		[Desc("ARTY-02: at most this many nearest friendly squads (own, then allied) are costed per plan.")]
+		public readonly int ArtyEscapeMaxCandidates = 4;
+
+		[Desc("ARTY-02: waypoints asked from the threat-aware region router per route.")]
+		public readonly int ArtyEscapeMaxWaypoints = 4;
+
+		[Desc("ARTY-02: the orphan merges into a friendly squad (or rejoins the pool at home) once within this many cells of it.")]
+		public readonly int ArtyEscapeArriveCells = 6;
+
+		[Desc("ARTY-02: ticks between route re-checks on the way (never per tick).")]
+		public readonly int ArtyEscapeRecheckTicks = 50;
+
 		[Desc("UT-1 (AI_DEEP_RESEARCH.md §5.1): the MinimumAttackForceDelay reset scales by the",
 			"master's Turtle<->Rush utility axis (IBotUtilityAxes) — 100 (Rush) x0.6, 50 x1.0,",
 			"0 (Turtle) x1.5. Off, or no enabled provider, keeps the unchanged delay.")]
@@ -4086,6 +4119,7 @@ namespace OpenRA.Mods.CA.Traits
 				// IMPL02-AGG-TEAM (A5): the reserve stays home; put back after the wave is formed.
 				var aggKeep = aggForce ? AggTeamTakeReserve() : Info.AggTeamEnabled ? AggTeamTakeDetached() : null;
 				var attackForce = RegisterNewSquad(bot, SquadCAType.Rush);
+				WaveMixLaunched();
 
 				// 6f: long-range units peel off into an artillery squad that trails
 				// the assault and bombards its target, instead of charging with it.

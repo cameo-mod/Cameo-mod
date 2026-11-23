@@ -19,7 +19,7 @@ namespace OpenRA.Mods.CA.Traits
 	public partial class SquadManagerBotModuleCA
 	{
 		AblationLatch ablateArmyMix;
-		int waveMixSinceTick = -1;
+		WaveMixClock waveMixClock = WaveMixClock.Idle;
 
 		/// <summary>ARMY-MIX-01 is on for this bot: the Info switch and the DEV ablation row (row off = the old launch and build path).</summary>
 		internal bool WaveMixActive => Info.WaveMixEnabled && !ablateArmyMix.Off(Player, AblationIds.ArmyMix);
@@ -36,7 +36,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>
 		/// True while a ready wave should wait for a missing role. Needs the unit builder's report of the roles it can build now; without one
-		/// (no provider, no pick yet) there is nothing to wait for. Bounded by WaveMixWaitTicks, then the wave goes anyway.
+		/// (no provider, no pick yet) there is nothing to wait for. Bounded by WaveMixWaitTicks: then the wave is released and stays released until the role arrives or the wave launches.
 		/// </summary>
 		bool WaveMixHolds()
 		{
@@ -49,9 +49,12 @@ namespace OpenRA.Mods.CA.Traits
 
 			var needed = WaveMixCA.Needed(Info.WaveMixMinRoles, available.Count);
 			var satisfied = WaveMixPoolRoles().Count >= needed;
-			var (hold, since) = WaveMixCA.Hold(World.WorldTick, waveMixSinceTick, Info.WaveMixWaitTicks, satisfied);
-			waveMixSinceTick = since;
+			var (hold, next) = WaveMixCA.Step(World.WorldTick, waveMixClock, Info.WaveMixWaitTicks, satisfied);
+			waveMixClock = next;
 			return hold;
 		}
+
+		/// <summary>The wave left the base: the next wave starts a fresh wait (a released wait stays released until here).</summary>
+		void WaveMixLaunched() => waveMixClock = WaveMixClock.Idle;
 	}
 }

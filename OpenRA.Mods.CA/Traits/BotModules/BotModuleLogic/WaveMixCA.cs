@@ -31,6 +31,12 @@ namespace OpenRA.Mods.CA.Traits
 		bool TryRoleValues(string role, out MixRoleValues values);
 	}
 
+	/// <summary>The wait clock of a ready wave: when it started (-1 = not waiting) and whether the bounded wait already ran out for this wave.</summary>
+	public readonly record struct WaveMixClock(int Since, bool Released)
+	{
+		public static readonly WaveMixClock Idle = new(-1, false);
+	}
+
 	/// <summary>ARMY-MIX-01 (USER P0, 2026-11-23): the World-free half. A wave mixes the available roles: at least min(3, available) distinct roles.</summary>
 	public static class WaveMixCA
 	{
@@ -58,18 +64,23 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>
 		/// The bounded wait for a missing role. Satisfied: no hold and the clock resets. Otherwise the first call starts the clock and
-		/// every call holds until <paramref name="waitTicks"/> have passed, then the wave goes anyway (a wait that never ends would
-		/// stall the bot behind a role it cannot get). <paramref name="sinceTick"/> is the stored clock, -1 when none.
+		/// every call holds until <paramref name="waitTicks"/> have passed; then the wave is RELEASED and stays released (no hold, the
+		/// clock is not re-armed) until the role arrives or the wave launches (the caller then stores <see cref="WaveMixClock.Idle"/>). A
+		/// wait that never ends would stall the bot behind a role it cannot get, and a clock that re-armed itself after the timeout
+		/// would hold the wave again whenever a later launch gate returned first.
 		/// </summary>
-		public static (bool Hold, int Since) Hold(int now, int sinceTick, int waitTicks, bool satisfied)
+		public static (bool Hold, WaveMixClock Next) Step(int now, WaveMixClock clock, int waitTicks, bool satisfied)
 		{
 			if (satisfied || waitTicks <= 0)
-				return (false, -1);
+				return (false, WaveMixClock.Idle);
 
-			if (sinceTick < 0)
-				return (true, now);
+			if (clock.Released)
+				return (false, clock);
 
-			return now - sinceTick < waitTicks ? (true, sinceTick) : (false, -1);
+			if (clock.Since < 0)
+				return (true, new WaveMixClock(now, false));
+
+			return now - clock.Since < waitTicks ? (true, clock) : (false, new WaveMixClock(-1, true));
 		}
 
 		/// <summary>
