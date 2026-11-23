@@ -57,7 +57,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			Assert.That(Pick(new[] { C("low", 10, 1), C("high", 90, 4) }, 1000), Is.EqualTo("high"));
 			Assert.That(Pick(new[] { C("dear", 90, 2), C("cheap", 10, 2) }, 1000), Is.EqualTo("cheap"));
-			Assert.That(Pick(new[] { C("b", 10, 2), C("a", 10, 2) }, 1000), Is.EqualTo("a"));
+			Assert.That(Pick(new[] { C("b", 10, 2), C("a", 10, 2) }, 1000), Is.EqualTo(Pick(new[] { C("a", 10, 2), C("b", 10, 2) }, 1000)), "ties do not depend on list order");
 			Assert.That(Pick(new[] { C("unlisted", 1, -1), C("listed", 900, 0) }, 1000), Is.EqualTo("listed"));
 			Assert.That(Pick(new[] { C("unlisted", 1, -1) }, 1000), Is.EqualTo("unlisted"), "a table gap never idles the queue");
 		}
@@ -68,6 +68,21 @@ namespace OpenRA.Mods.Cameo.Test
 			var items = new[] { C("a", 10, 5), C("b", 10, 1) };
 			Assert.That(Pick(items, 1000, false, "a"), Is.EqualTo("b"));
 			Assert.That(Pick(items, 1000, false, "a", "b"), Is.Null);
+		}
+
+		[Test]
+		public void ExactTiesAreStableForABotButNotTheSameNameForEveryBot()
+		{
+			var plans = new[] { C("usabombardament", 0, 1), C("usahold", 0, 1), C("usasearch", 0, 1) };
+			var winners = new HashSet<string>();
+			for (var seed = 0; seed < 32; seed++)
+			{
+				var first = plans[UpgradeServiceCA.Choose(plans, new HashSet<string>(), 0, false, seed)].Name;
+				Assert.That(plans[UpgradeServiceCA.Choose(plans, new HashSet<string>(), 0, false, seed)].Name, Is.EqualTo(first));
+				winners.Add(first);
+			}
+
+			Assert.That(winners.Count, Is.GreaterThan(1), "the mutually exclusive free plans are spread over the bots");
 		}
 
 		[Test]
@@ -115,8 +130,9 @@ namespace OpenRA.Mods.Cameo.Test
 			var from = src.IndexOf("void ServeUpgradeQueues(IBot bot)", StringComparison.Ordinal);
 			var to = src.IndexOf("void TryBuildOpeningDefense(IBot bot)", from, StringComparison.Ordinal);
 			var service = src.Substring(from, to - from);
-			Assert.That(service, Does.Contain("UpgradeServiceCA.Choose(candidates, inProduction, bank, paused)"));
+			Assert.That(service, Does.Contain("UpgradeServiceCA.Choose(candidates, inProduction, bank, paused, (int)player.PlayerActor.ActorID)"));
 			Assert.That(service, Does.Contain("ShouldBuild(item.Name, true, queue.Info.Type)"));
+			Assert.That(service, Does.Contain("SpendCommitmentsCA.Available(playerResources.GetCashAndResources(), UnpaidQueuedCost())"), "the bank is net of every queued item's unpaid cost");
 			Assert.That(service, Does.Contain("rp is not IBotItemAwareUnitCap"));
 			Assert.That(service, Does.Contain("upgradeIdleUntil.Remove(key)"));
 			Assert.That(service, Does.Not.Contain("Random"));

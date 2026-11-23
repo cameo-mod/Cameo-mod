@@ -849,7 +849,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		// UPGRADE-QUEUE-01. Every queue of every served type is its own producer: an idle one starts the best buildable item NOW.
 		// Gates it skips: the ProductionMinCashRequirement floor and the K5 army reserve (they are sized for armies and were what idled these
-		// queues). Gates it keeps: an item must be AFFORDABLE (bank minus what this pass already ordered), so the unpaid remainder never
+		// queues). Gates it keeps: an item must be AFFORDABLE (bank minus what every queued item still owes and what this pass already ordered), so the unpaid remainder never
 		// builds up against the reserve gates; paid items wait while a unit-production pause vote is up (the base builder's refinery pause
 		// included); FREE items (promotions) start whatever the votes and the bank say. Delays, intervals and limits are honoured through
 		// ShouldBuild. An item already in production in ANY queue is not started again (Scrin has a second Upgrades queue).
@@ -863,7 +863,9 @@ namespace OpenRA.Mods.CA.Traits
 						inProduction.Add(queued.Item);
 
 			var paused = requestPause.Any(rp => rp.IsTraitEnabled() && rp.PauseUnitProduction && rp is not IBotItemAwareUnitCap);
-			var bank = playerResources.GetCashAndResources();
+			// The bank NET of what every queued item still owes (earlier passes included), so a start never builds up an unpaid remainder
+			// against the reserve gates (review H1).
+			var bank = SpendCommitmentsCA.Available(playerResources.GetCashAndResources(), UnpaidQueuedCost());
 			foreach (var category in Info.UpgradeServiceQueues)
 			{
 				foreach (var queue in AIUtils.FindQueues(player, category))
@@ -897,7 +899,7 @@ namespace OpenRA.Mods.CA.Traits
 							infos.Add(item);
 						}
 
-						var index = UpgradeServiceCA.Choose(candidates, inProduction, bank, paused);
+						var index = UpgradeServiceCA.Choose(candidates, inProduction, bank, paused, (int)player.PlayerActor.ActorID);
 						if (index < 0)
 						{
 							// Nothing startable (all researched, next tier locked, or unaffordable): look again in 75 ticks, not every pass.
