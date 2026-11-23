@@ -1199,7 +1199,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			var profiles = new Dictionary<OpenRA.Player, EnemyProfile>();
-			var frozenSnapshot = fogged ? fogMemory.SnapshotFrozen() : null;
+			var frozenSnapshot = fogged ? fogMemory.SnapshotFrozen(enemies) : null;
 			foreach (var enemy in enemies)
 			{
 				var enemyActors = actorsByOwner.TryGetValue(enemy, out var ownedEnemyActors) ? ownedEnemyActors : Array.Empty<Actor>();

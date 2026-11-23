@@ -37,6 +37,13 @@ namespace OpenRA.Mods.Cameo.Test
 			return info;
 		}
 
+		static ValuedInfo Valued(int cost)
+		{
+			var valued = new ValuedInfo();
+			typeof(ValuedInfo).GetField("Cost").SetValue(valued, cost);
+			return valued;
+		}
+
 		static ProductionInfo Producing(params string[] queues)
 		{
 			var production = new ProductionInfo();
@@ -46,14 +53,14 @@ namespace OpenRA.Mods.Cameo.Test
 
 		static ActorInfo[] Types() => new[]
 		{
-			new ActorInfo("tower", new BuildingInfo(), new AttackFrontalInfo(), new ValuedInfo { Cost = 700 }),
-			new ActorInfo("wall", new BuildingInfo(), new ValuedInfo { Cost = 50 }),
-			new ActorInfo("yard", new BuildingInfo(), new BaseBuildingInfo(), new ValuedInfo { Cost = 2000 }),
-			new ActorInfo("helipad", new BuildingInfo(), Producing("AircraftSQ"), new ValuedInfo { Cost = 500 }),
+			new ActorInfo("tower", new BuildingInfo(), new AttackFrontalInfo(), Valued(700)),
+			new ActorInfo("wall", new BuildingInfo(), Valued(50)),
+			new ActorInfo("yard", new BuildingInfo(), new BaseBuildingInfo(), Valued(2000)),
+			new ActorInfo("helipad", new BuildingInfo(), Producing("AircraftSQ"), Valued(500)),
 			new ActorInfo("barracks", new BuildingInfo(), Producing("InfantrySQ")),
 			new ActorInfo("refinery", new BuildingInfo(), new RefineryInfo()),
-			new ActorInfo("harv", new MobileInfo(), new HarvesterInfo(), new ValuedInfo { Cost = 1100 }),
-			new ActorInfo("tank", new MobileInfo(), new AttackFrontalInfo(), new ValuedInfo { Cost = 800 }),
+			new ActorInfo("harv", new MobileInfo(), new HarvesterInfo(), Valued(1100)),
+			new ActorInfo("tank", new MobileInfo(), new AttackFrontalInfo(), Valued(800)),
 			new ActorInfo("orca", new AircraftInfo(), new AttackFrontalInfo()),
 			new ActorInfo("spawner", Producing("AircraftSQ")),
 			new ActorInfo("bare"),
@@ -133,17 +140,19 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheRebuildReadsTheFrozenLayerOncePerRebuildAndOnlyWhenFogged()
 		{
 			var situation = Source("mods/Cameo/Traits/BotModules/BotSituation.cs");
-			Assert.That(situation, Does.Contain("var frozenSnapshot = fogged ? fogMemory.SnapshotFrozen() : null;"));
+			Assert.That(situation, Does.Contain("var frozenSnapshot = fogged ? fogMemory.SnapshotFrozen(enemies) : null;"));
 			Assert.That(situation, Does.Contain("fogMemory.Observe(enemy, enemyActors, tick, frozenSnapshot)"));
-			Assert.That(situation.Split("SnapshotFrozen()").Length - 1, Is.EqualTo(1));
+			Assert.That(situation.Split("SnapshotFrozen(").Length - 1, Is.EqualTo(1));
 		}
 
 		[Test]
 		public void TheSnapshotKeepsWalkOrderPerOwnerAndTheSameValidityFilter()
 		{
 			var fog = Source("mods/Cameo/Traits/BotModules/BotFogMemory.cs");
-			var snapshot = fog.Substring(fog.IndexOf("public FrozenSnapshot SnapshotFrozen()", StringComparison.Ordinal), 1100);
+			var snapshot = fog.Substring(fog.IndexOf("public FrozenSnapshot SnapshotFrozen(", StringComparison.Ordinal), 1100);
 			Assert.That(snapshot, Does.Contain("frozen.FrozenActorsInRegion(viewer.World.Map.AllCells)"));
+			Assert.That(snapshot, Does.Contain("enemies.Count < 2"));
+			Assert.That(snapshot, Does.Contain("!enemies.Contains(owner)"));
 			Assert.That(snapshot, Does.Contain("if (!fa.IsValid)"));
 			Assert.That(snapshot, Does.Contain("list.Add(fa);"));
 			Assert.That(snapshot, Does.Not.Contain("Sort").And.Not.Contain("OrderBy"));

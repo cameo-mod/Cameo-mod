@@ -351,7 +351,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (frozen != null)
 			{
 				// PERF-F2b: the snapshot lists, per owner, exactly the actors the full walk yields for that owner, in walk order.
-				var frozenActors = frozenSnapshot != null && frozenSnapshot.Serves(viewer)
+				IEnumerable<FrozenActor> frozenActors = frozenSnapshot != null && frozenSnapshot.Serves(viewer)
 					? frozenSnapshot.Of(enemy)
 					: frozen.FrozenActorsInRegion(viewer.World.Map.AllCells);
 				foreach (var fa in frozenActors)
@@ -390,10 +390,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		/// <summary>One read of the frozen-actor layer for a whole rebuild, split by owner (PERF-F2b). Null when the switch is off or
 		/// the viewer has no layer, so Observe falls back to its own walk.</summary>
-		public FrozenSnapshot SnapshotFrozen()
+		public FrozenSnapshot SnapshotFrozen(ICollection<OpenRA.Player> enemies)
 		{
+			// One walk per enemy is the old cost: the snapshot only pays off from two enemies up (1v1 keeps the single walk).
 			var frozen = viewer.FrozenActorLayer;
-			if (frozen == null || !info.UseSharedFrozenSnapshot || ablateFrozenSnapshot.Off(viewer, AblationIds.FogFrozenSnapshot))
+			if (frozen == null || enemies == null || enemies.Count < 2 || !info.UseSharedFrozenSnapshot
+				|| ablateFrozenSnapshot.Off(viewer, AblationIds.FogFrozenSnapshot))
 				return null;
 
 			var byOwner = new Dictionary<OpenRA.Player, List<FrozenActor>>();
@@ -403,7 +405,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					continue;
 
 				var owner = fa.Owner;
-				if (owner == null)
+				if (owner == null || !enemies.Contains(owner))
 					continue;
 
 				if (!byOwner.TryGetValue(owner, out var list))
@@ -417,7 +419,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		internal sealed class FrozenSnapshot
 		{
-			static readonly List<FrozenActor> None = new();
+			static readonly IReadOnlyList<FrozenActor> None = Array.Empty<FrozenActor>();
 			readonly OpenRA.Player viewer;
 			readonly Dictionary<OpenRA.Player, List<FrozenActor>> byOwner;
 
@@ -429,7 +431,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			internal bool Serves(OpenRA.Player player) => viewer == player;
 
-			internal List<FrozenActor> Of(OpenRA.Player owner) => byOwner.TryGetValue(owner, out var list) ? list : None;
+			internal IReadOnlyList<FrozenActor> Of(OpenRA.Player owner) => byOwner.TryGetValue(owner, out var list) ? list : None;
 		}
 
 		public IReadOnlyCollection<ObservedActor> Remembered(OpenRA.Player enemy)
