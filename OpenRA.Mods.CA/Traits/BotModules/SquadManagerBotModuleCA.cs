@@ -636,6 +636,46 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Cells an artillery squad trails its parent assault squad, measured away from the parent's target.")]
 		public readonly int ArtilleryHangBackCells = 8;
 
+		[Desc("ARTY-01 (USER P0): artillery micro. Each artillery unit targets defences first, then other structures, then units (a unit only when",
+			"no structure is in range or it threatens the artillery); stops at its maximum range minus ArtyRangeMarginCells from the target and",
+			"never walks into a known defence's reach; kites back (a Move, not an AttackMove) from hostile units it outranges; and an escort",
+			"squad is cut from the assault even when the faction has no FireSupportTypes. Off = the pre-ARTY-01 artillery state, byte for byte.")]
+		public readonly bool ArtyMicroEnabled = false;
+
+		[Desc("ARTY-01: cells inside the artillery unit's maximum range it stands off from its target.")]
+		public readonly int ArtyRangeMarginCells = 1;
+
+		[Desc("ARTY-01: cells added to a defence's weapon reach that a firing position must keep clear of.")]
+		public readonly int ArtyDefenceMarginCells = 2;
+
+		[Desc("ARTY-01: cells added to a hostile unit's weapon reach that a kiting artillery unit keeps (the stand-off).")]
+		public readonly int ArtyKiteMarginCells = 2;
+
+		[Desc("ARTY-01: a hostile unit this close (cells) is closing in and counts as a threat to the artillery unit.")]
+		public readonly int ArtyThreatRadiusCells = 8;
+
+		[Desc("ARTY-01: the longest single kite or stand-off step (cells) one order moves an artillery unit.")]
+		public readonly int ArtyMaxStepCells = 6;
+
+		[Desc("ARTY-01: ticks before the same artillery unit gets another micro order (stops order thrash).")]
+		public readonly int ArtyOrderCooldownTicks = 12;
+
+		[Desc("DEFEND-ALLY-01 (USER P0): when an own or allied unit or building within DefendAllyRadiusCells of idle units takes damage, those idle",
+			"pool units and idle squads respond to the nearest visible enemy. Leases are respected. Off = no response, byte for byte.")]
+		public readonly bool DefendAllyEnabled = false;
+
+		[Desc("DEFEND-ALLY-01: radius (cells) around the responders in which an attacked friendly is noticed, and from which they are drafted.")]
+		public readonly int DefendAllyRadiusCells = 25;
+
+		[Desc("DEFEND-ALLY-01: how far (cells) from the attacked friendly the attacker is searched for.")]
+		public readonly int DefendAllyAttackerScanCells = 12;
+
+		[Desc("DEFEND-ALLY-01: ticks between scans for attacked friendlies.")]
+		public readonly int DefendAllyIntervalTicks = 25;
+
+		[Desc("DEFEND-ALLY-01: ticks after a response before the next one is considered.")]
+		public readonly int DefendAllyCooldownTicks = 100;
+
 		[Desc("UT-1 (AI_DEEP_RESEARCH.md §5.1): the MinimumAttackForceDelay reset scales by the",
 			"master's Turtle<->Rush utility axis (IBotUtilityAxes) — 100 (Rush) x0.6, 50 x1.0,",
 			"0 (Turtle) x1.5. Off, or no enabled provider, keeps the unchanged delay.")]
@@ -3180,6 +3220,9 @@ namespace OpenRA.Mods.CA.Traits
 			if (--protectOwnTicks <= 0 && protectOwnFrom != null)
 				ProtectOwn(protectOwnFrom);
 
+			// DEFEND-ALLY-01 (switch ON only): idle units answer an own or allied actor that is under attack nearby.
+			DefendAllyTick(bot);
+
 			PrepositionDefenceTick(bot);
 
 			// LC5: claim fresh squad members before returning — a member still unclaimed when a
@@ -4042,7 +4085,12 @@ namespace OpenRA.Mods.CA.Traits
 				// artillery squad and pulls a frontline escort of FireSupportEscortPerArtillery
 				// tanks per artillery unit out of the assault.
 				var fsSquad = Squads.FirstOrDefault(s => s.Type == SquadCAType.FireSupport && s.IsValid);
-				if (fireSupportUnits.Count > 0 && fsSquad == null)
+
+				// ARTY-01 (switch ON only): the artillery is always escorted, also when the faction has no FireSupportTypes - the escort is
+				// cut from the assault below (a third of it at most, FireSupportEscortPerArtillery per artillery unit).
+				var artyEscortFromAssault = ArtyMicroActive && fsSquad == null && artilleryUnits.Count > 0
+					&& AttackForceEvalCA.EscortsNeeded(artilleryUnits.Count, attackForce.Units.Count, Info.FireSupportEscortPerArtillery) > 0;
+				if ((fireSupportUnits.Count > 0 || artyEscortFromAssault) && fsSquad == null)
 					fsSquad = RegisterNewSquad(bot, SquadCAType.FireSupport);
 				if (fsSquad != null)
 				{
