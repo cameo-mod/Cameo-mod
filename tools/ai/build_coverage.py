@@ -58,6 +58,8 @@ RADAR_COMMS_MARKERS = ("radar", "dome", "comm")
 PRODUCTION_MARKERS = ("barracks", "factory", "handofnod", "airstrip")
 REFINERY_MARKERS = ("refinery",)
 POWER_MARKERS = ("powerplant", "windtrap", "reactor")
+# Exact actor names that are power plants without a marker in their name: TD (GDI and Nod) power is "nuke".
+POWER_EXACT = ("nuke",)
 
 # Defence-queue actors that are buildings, not defences. The mod queues several of these under
 # Defence (ra1_oresilo, ra1_soviets_missilesilo, td_gdi_advancedcommunicationscenter, ...).
@@ -452,7 +454,7 @@ def _seat_row(subject, faction, items, defences, buildings):
         "coverage": coverage,
         "production_buildings": sum(1 for n in names if _has(n, PRODUCTION_MARKERS) and n not in defences),
         "refineries": sum(1 for n in names if _has(n, REFINERY_MARKERS)),
-        "power": sum(1 for n in names if _has(n, POWER_MARKERS)),
+        "power": sum(1 for n in names if _has(n, POWER_MARKERS) or n.lower() in POWER_EXACT),
     }
 
 

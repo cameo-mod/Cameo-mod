@@ -92,6 +92,7 @@ namespace OpenRA.Mods.CA.Traits
 		// never carry the grant resolve null here and run the legacy ladder bit-identically.
 		BotOverflowPolicy overflowPolicy;
 		AblationLatch ablateOverflow; // ABLATE-01 hook pi_overflow (DEV provider only; release = on)
+		AblationLatch ablateTechChain; // ABLATE-01 hook techchain_exempt (DEV provider only; release = on)
 
 		// Cameo (§12.20): lazy — resolved on first TickQueue, an OR-of-vetoes pause on new building
 		// production. Empty = nothing pauses, upstream-identical.
@@ -902,7 +903,10 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				var inflight = new List<(string Item, int Total, int Remaining, bool Essential)>();
 				foreach (var i in queue.AllQueued())
-					inflight.Add((i.Item, i.TotalCost, i.RemainingCost, IsArmyFirstEssential(world.Map.Rules.Actors[i.Item])));
+					// An admitted tech-chain item is queued, so the admission test (not-queued) would book it non-essential. An in-flight
+					// tech-chain item stays essential for the ledger: it was admitted as the first copy.
+					inflight.Add((i.Item, i.TotalCost, i.RemainingCost,
+						IsArmyFirstEssential(world.Map.Rules.Actors[i.Item]) || InTechChainList(i.Item)));
 				mobileReserve.ReconcileBuildingSpend(queue.Actor, inflight);
 			}
 
@@ -1941,6 +1945,18 @@ namespace OpenRA.Mods.CA.Traits
 			return ticks;
 		}
 
+		// BINDING tech chain (11-23, TECHCHAIN-EXEMPT-01): the faction's T2 and T3 gate passes the army-first pause and the
+		// mobile reserve while none is owned or queued. Ablation row techchain_exempt: off = today's army-first gate.
+		// List membership first: off-list names never reach the owned count, which allocates a set per call.
+		bool InTechChainList(string name) =>
+			baseBuilder.Info.TechChainTypes.Contains(name) && !ablateTechChain.Off(player, AblationIds.TechChainExempt);
+
+		bool TechChainExempt(string name) =>
+			InTechChainList(name)
+			&& TechChainExemptCA.Exempt(true,
+				AIUtils.CountBuildingByCommonName(new HashSet<string> { name }, player),
+				baseBuilder.BuildingsBeingProduced.ContainsKey(name));
+
 		// Cameo (army-first): buildings that stay allowed while the army-first vote holds
 		// the rest. Construction yards, refineries and power are always essential; the first
 		// production building must pass too — no factory means no army, so blocking it deadlocks.
@@ -1950,6 +1966,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (baseBuilder.Info.ConstructionYardTypes.Contains(name)
 				|| baseBuilder.Info.RefineryTypes.Contains(name)
 				|| baseBuilder.Info.PowerTypes.Contains(name))
+				return true;
+
+			// BINDING tech chain (11-23): the faction's T2 and T3 gate passes the army-first pause and the mobile reserve while none is owned or queued.
+			if (TechChainExempt(name))
 				return true;
 
 			// One queued-but-unplaced factory is enough to break the deadlock — don't let the

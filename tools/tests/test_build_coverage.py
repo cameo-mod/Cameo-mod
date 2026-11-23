@@ -155,6 +155,10 @@ class RulesTests(unittest.TestCase):
         self.assertNotIn("td_gdi_advancedcommunicationscenter", defences)
         self.assertIn("ra1_oresilo", buildings)
 
+    def test_td_power_plant_named_nuke_counts_as_power(self):
+        row = bc._seat_row(4, "td_nod", [(100, "nuke"), (200, "td_nod_tiberiumrefinery")], set(), set())
+        self.assertEqual(row["power"], 1)
+
     def test_tier2_markers_exclude_production(self):
         self.assertFalse(bc._has("td_nod_handofnod", bc.TIER2_MARKERS))
         self.assertFalse(bc._has("td_nod_airstrip", bc.TIER2_MARKERS))
