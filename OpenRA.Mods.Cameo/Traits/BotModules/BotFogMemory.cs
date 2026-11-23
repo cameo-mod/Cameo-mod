@@ -305,6 +305,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly MasterAiBotModuleInfo info;
 		readonly Dictionary<OpenRA.Player, Dictionary<uint, ObservedActor>> tables = new();
 
+		// PERF-F2a: the ActorInfo-static part of Classify, once per type. Rules are immutable during a game and `info` is fixed
+		// for this memory, so the cached record is what Classify would compute again on every sighting.
+		readonly Dictionary<ActorInfo, StaticClass> staticClasses = new();
+		AblationLatch ablateClassifyCache;
+		AblationLatch ablateFrozenSnapshot;
+
+		sealed class StaticClass
+		{
+			public ObservedActor Template;
+			public bool HasAttack;
+		}
+
 		public BotFogMemory(OpenRA.Player viewer, MasterAiBotModuleInfo info)
 		{
 			this.viewer = viewer;
@@ -317,7 +329,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// (a remembered cell now visible without the actor) or the unit timeout.
 		/// Returns the number of enemy harvesters visible right now.
 		/// </summary>
-		public int Observe(OpenRA.Player enemy, IEnumerable<Actor> enemyActors, int tick)
+		public int Observe(OpenRA.Player enemy, IEnumerable<Actor> enemyActors, int tick, FrozenSnapshot frozenSnapshot = null)
 		{
 			var table = Table(enemy);
 			var visibleIds = new HashSet<uint>();
@@ -328,7 +340,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					continue;
 
 				visibleIds.Add(actor.ActorID);
-				var record = Classify(actor.Info, actor.ActorID, actor.Location, actor.GetEnabledTargetTypes(), tick, info);
+				var record = ClassifyObserved(actor.Info, actor.ActorID, actor.Location, actor.GetEnabledTargetTypes(), tick);
 				record.Cloaked = actor.Info.HasTraitInfo<CloakInfo>();
 				table[actor.ActorID] = record;
 				if (record.Harvester)
@@ -338,12 +350,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var frozen = viewer.FrozenActorLayer;
 			if (frozen != null)
 			{
-				foreach (var fa in frozen.FrozenActorsInRegion(viewer.World.Map.AllCells))
+				// PERF-F2b: the snapshot lists, per owner, exactly the actors the full walk yields for that owner, in walk order.
+				var frozenActors = frozenSnapshot != null && frozenSnapshot.Serves(viewer)
+					? frozenSnapshot.Of(enemy)
+					: frozen.FrozenActorsInRegion(viewer.World.Map.AllCells);
+				foreach (var fa in frozenActors)
 				{
 					if (!fa.IsValid || fa.Owner != enemy || table.ContainsKey(fa.ID))
 						continue;
 
-					var record = Classify(fa.Info, fa.ID, viewer.World.Map.CellContaining(fa.CenterPosition), fa.TargetTypes, tick, info);
+					var record = ClassifyObserved(fa.Info, fa.ID, viewer.World.Map.CellContaining(fa.CenterPosition), fa.TargetTypes, tick);
 					record.Cloaked = fa.Info.HasTraitInfo<CloakInfo>();
 					table[fa.ID] = record;
 				}
@@ -372,6 +388,50 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return visibleHarvesters;
 		}
 
+		/// <summary>One read of the frozen-actor layer for a whole rebuild, split by owner (PERF-F2b). Null when the switch is off or
+		/// the viewer has no layer, so Observe falls back to its own walk.</summary>
+		public FrozenSnapshot SnapshotFrozen()
+		{
+			var frozen = viewer.FrozenActorLayer;
+			if (frozen == null || !info.UseSharedFrozenSnapshot || ablateFrozenSnapshot.Off(viewer, AblationIds.FogFrozenSnapshot))
+				return null;
+
+			var byOwner = new Dictionary<OpenRA.Player, List<FrozenActor>>();
+			foreach (var fa in frozen.FrozenActorsInRegion(viewer.World.Map.AllCells))
+			{
+				if (!fa.IsValid)
+					continue;
+
+				var owner = fa.Owner;
+				if (owner == null)
+					continue;
+
+				if (!byOwner.TryGetValue(owner, out var list))
+					byOwner[owner] = list = new List<FrozenActor>();
+
+				list.Add(fa);
+			}
+
+			return new FrozenSnapshot(viewer, byOwner);
+		}
+
+		internal sealed class FrozenSnapshot
+		{
+			static readonly List<FrozenActor> None = new();
+			readonly OpenRA.Player viewer;
+			readonly Dictionary<OpenRA.Player, List<FrozenActor>> byOwner;
+
+			internal FrozenSnapshot(OpenRA.Player viewer, Dictionary<OpenRA.Player, List<FrozenActor>> byOwner)
+			{
+				this.viewer = viewer;
+				this.byOwner = byOwner;
+			}
+
+			internal bool Serves(OpenRA.Player player) => viewer == player;
+
+			internal List<FrozenActor> Of(OpenRA.Player owner) => byOwner.TryGetValue(owner, out var list) ? list : None;
+		}
+
 		public IReadOnlyCollection<ObservedActor> Remembered(OpenRA.Player enemy)
 		{
 			return Table(enemy).Values;
@@ -396,6 +456,48 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (!tables.TryGetValue(enemy, out var table))
 				tables[enemy] = table = new Dictionary<uint, ObservedActor>();
 			return table;
+		}
+
+		// Classify with the ActorInfo-static part served from the per-type cache (PERF-F2a). The fields that read the sighting's
+		// target types (Defence, Infantry, Vehicle, Naval) and the sighting itself (ID, location, tick) are set per call, with the
+		// same expressions Classify uses. Switch off: the plain Classify.
+		internal ObservedActor ClassifyObserved(ActorInfo actorInfo, uint actorID, CPos location, BitSet<TargetableType> targetTypes, int tick)
+		{
+			if (!info.UseFogClassifyCache || ablateClassifyCache.Off(viewer, AblationIds.FogClassifyCache))
+				return Classify(actorInfo, actorID, location, targetTypes, tick, info);
+
+			if (!staticClasses.TryGetValue(actorInfo, out var cached))
+			{
+				var template = Classify(actorInfo, 0, default, default, 0, info);
+				cached = new StaticClass { Template = template, HasAttack = actorInfo.HasTraitInfo<AttackBaseInfo>() };
+				staticClasses[actorInfo] = cached;
+			}
+
+			var t = cached.Template;
+			return new ObservedActor
+			{
+				Info = actorInfo,
+				ActorID = actorID,
+				Location = location,
+				LastSeenTick = tick,
+				Value = t.Value,
+				Building = t.Building,
+				BaseBuilding = t.BaseBuilding,
+				Combat = t.Combat,
+				Defence = t.Building && (cached.HasAttack || targetTypes.Overlaps(info.DefenceTargetTypes)),
+				Tech = t.Tech,
+				Production = t.Production,
+				Refinery = t.Refinery,
+				Harvester = t.Harvester,
+				Aircraft = t.Aircraft,
+				ProducesAircraft = t.ProducesAircraft,
+				AntiAir = t.AntiAir,
+				Infantry = targetTypes.Overlaps(info.InfantryTargetTypes),
+				Vehicle = targetTypes.Overlaps(info.VehicleTargetTypes),
+				Naval = targetTypes.Overlaps(info.NavalTargetTypes),
+				Detector = t.Detector,
+				DetectorRangeCells = t.DetectorRangeCells
+			};
 		}
 
 		internal static ObservedActor Classify(ActorInfo actorInfo, uint actorID, CPos location,
