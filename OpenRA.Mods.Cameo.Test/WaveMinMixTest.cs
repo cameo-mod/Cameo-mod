@@ -106,12 +106,45 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void TheWaitForAMissingRoleIsBoundedAndNeverStartsWhenSatisfied()
 		{
-			Assert.That(WaveMixCA.Hold(100, -1, 1500, true), Is.EqualTo((false, -1)), "satisfied: go, clock reset");
-			Assert.That(WaveMixCA.Hold(100, -1, 1500, false), Is.EqualTo((true, 100)), "first miss starts the clock");
-			Assert.That(WaveMixCA.Hold(1599, 100, 1500, false), Is.EqualTo((true, 100)), "still waiting");
-			Assert.That(WaveMixCA.Hold(1600, 100, 1500, false), Is.EqualTo((false, -1)), "timeout: the wave goes anyway");
-			Assert.That(WaveMixCA.Hold(100, -1, 0, false), Is.EqualTo((false, -1)), "0 = never wait");
-			Assert.That(WaveMixCA.Hold(900, 100, 1500, true), Is.EqualTo((false, -1)), "the role arrived while waiting");
+			var idle = WaveMixClock.Idle;
+			Assert.That(WaveMixCA.Step(100, idle, 1500, true), Is.EqualTo((false, idle)), "satisfied: go, clock reset");
+			Assert.That(WaveMixCA.Step(100, idle, 1500, false), Is.EqualTo((true, new WaveMixClock(100, false))), "first miss starts the clock");
+			Assert.That(WaveMixCA.Step(1599, new WaveMixClock(100, false), 1500, false), Is.EqualTo((true, new WaveMixClock(100, false))), "still waiting");
+			Assert.That(WaveMixCA.Step(1600, new WaveMixClock(100, false), 1500, false), Is.EqualTo((false, new WaveMixClock(-1, true))), "timeout: released");
+			Assert.That(WaveMixCA.Step(100, idle, 0, false), Is.EqualTo((false, idle)), "0 = never wait");
+			Assert.That(WaveMixCA.Step(900, new WaveMixClock(100, false), 1500, true), Is.EqualTo((false, idle)), "the role arrived while waiting");
+		}
+
+		[Test]
+		public void AReleasedWaitStaysReleasedWhenALaterGateStopsTheLaunchAndEndsOnlyWithTheRoleOrTheLaunch()
+		{
+			// Code Monkey's FIX item: after the timeout a later launch gate (veto, staging) may return before the wave leaves. The next
+			// attempts must not re-arm the clock and hold the wave for another full wait.
+			var clock = WaveMixClock.Idle;
+			(bool Hold, WaveMixClock Next) Try(int now, bool satisfied)
+			{
+				var r = WaveMixCA.Step(now, clock, 1500, satisfied);
+				clock = r.Next;
+				return r;
+			}
+
+			Assert.That(Try(0, false).Hold, Is.True);
+			Assert.That(Try(1500, false).Hold, Is.False, "timeout releases the wave");
+			for (var now = 1501; now < 6000; now += 75)
+				Assert.That(Try(now, false).Hold, Is.False, "the later gate returned; the wave is still released at tick " + now);
+
+			Assert.That(Try(6000, true).Hold, Is.False);
+			Assert.That(clock, Is.EqualTo(WaveMixClock.Idle), "the role arrived: the next wave starts fresh");
+
+			Assert.That(Try(7000, false).Hold, Is.True, "a new wave waits again");
+			Assert.That(Try(8500, false).Hold, Is.False);
+			clock = WaveMixClock.Idle; // WaveMixLaunched(): the wave left
+			Assert.That(Try(9000, false).Hold, Is.True, "after the launch the next wave waits again");
+
+			var manager = RepoFile("OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs");
+			var register = manager.IndexOf("var attackForce = RegisterNewSquad(bot, SquadCAType.Rush);", StringComparison.Ordinal);
+			Assert.That(manager.IndexOf("WaveMixLaunched();", register, StringComparison.Ordinal) - register, Is.InRange(1, 160),
+				"the released latch is cleared right where the wave squad is created");
 		}
 
 		[Test]
