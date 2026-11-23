@@ -71,6 +71,14 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Only queue construction of a new unit when above this requirement.")]
 		public readonly int ProductionMinCashRequirement = 2000;
 
+		[Desc("UPGRADE-QUEUE-01: the upgrade-like queues (UpgradeServiceQueues) get their own service that runs before the cash floor and the K5 reserve, so an",
+			"upgrade, add-on, research or promotion queue with an affordable item is never idle (free items, promotions, always start). Paid items still wait for a unit-production pause vote.",
+			"False = those queues are only visited by the ordinary unit sweep, behind the floor.")]
+		public readonly bool UpgradeService = true;
+
+		[Desc("UPGRADE-QUEUE-01: queue types served by the upgrade service. Each one is served on its own: a queue with nothing buildable, or a busy one, never holds back the next.")]
+		public readonly string[] UpgradeServiceQueues = { "Promotions", "Upgrades", "Research", "Addons" };
+
 		[Desc("Only queue construction of a new unit when above this requirement.",
 			"BotLimits.MaximiseProductionCashRequirement overrides this per difficulty (DESIGN §19.1).")]
 		public readonly int MaximiseProductionCashRequirement = 10000;
@@ -440,7 +448,13 @@ namespace OpenRA.Mods.CA.Traits
 		bool FairService => switchesActive && Info.FairProducerService && !ablateFairProducer.Off(player, AblationIds.FairProducer);
 
 		// ABLATE-01 hooks (DEV-only provider; absent in release = always on): one cached answer per row.
-		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery;
+		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery, ablateUpgradeService;
+
+		// UPGRADE-QUEUE-01: own cadence (same period as the build pass) so the service is not tied to the pause guards the pass sits behind.
+		BotCallPeriod upgradeCalls;
+		readonly Dictionary<(uint, string), int> upgradeIdleUntil = new();
+		const int UpgradeRecheckTicks = 75;
+		bool UpgradeServiceOn => switchesActive && Info.UpgradeService && !ablateUpgradeService.Off(player, AblationIds.UpgradeService);
 
 		// PR-2 queue depth (fair path only): world ticks between this bot's last two passes. Round-robin makes it long;
 		// a single-slot queue is topped up while its loaded build time is shorter than this gap (QueueDepthCA).
@@ -706,6 +720,16 @@ namespace OpenRA.Mods.CA.Traits
 					activeUnitIntervals.Remove(i.Key);
 			}
 
+			// UPGRADE-QUEUE-01: runs before the pause votes and the cash floor (see ServeUpgradeQueues for what it keeps).
+			if (UpgradeServiceOn)
+			{
+				var upgradeClock = BotVisitClock.Of(bot);
+				if (upgradeCalls.Call(upgradeClock.VisitTick, upgradeClock.Elapsed, FeedbackTime + Info.UnitBuilderInterval))
+					ServeUpgradeQueues(bot);
+			}
+			else
+				upgradeCalls = default;
+
 			var baseBuilderPause = requestPause.FirstOrDefault(rp => ReferenceEquals(rp, baseBuilder));
 
 			// PROD-IDLE item-aware cap: under the fair service a cap that says which items it counts stops only those
@@ -801,6 +825,9 @@ namespace OpenRA.Mods.CA.Traits
 					if (++currentQueueIndex >= Info.UnitQueues.Length)
 						currentQueueIndex = 0;
 
+					if (UpgradeServiceOn && Array.IndexOf(Info.UpgradeServiceQueues, Info.UnitQueues[currentQueueIndex]) >= 0)
+						continue;
+
 					if (AIUtils.FindQueues(player, Info.UnitQueues[currentQueueIndex]).Any())
 					{
 						// BV_m13_liveness: re-evaluated per category with the same cash accounting —
@@ -815,6 +842,81 @@ namespace OpenRA.Mods.CA.Traits
 						if (ProductionSaturationCA.StopCategorySweep(saturated, playerResources.Cash + playerResources.Resources,
 							BotPersonalityLeads.Scaled(MaximiseProductionCash, cashLean)))
 							break;
+					}
+				}
+			}
+		}
+
+		// UPGRADE-QUEUE-01. Every queue of every served type is its own producer: an idle one starts the best buildable item NOW.
+		// Gates it skips: the ProductionMinCashRequirement floor and the K5 army reserve (they are sized for armies and were what idled these
+		// queues). Gates it keeps: an item must be AFFORDABLE (bank minus what every queued item still owes and what this pass already ordered), so the unpaid remainder never
+		// builds up against the reserve gates; paid items wait while a unit-production pause vote is up (the base builder's refinery pause
+		// included); FREE items (promotions) start whatever the votes and the bank say. Delays, intervals and limits are honoured through
+		// ShouldBuild. An item already in production in ANY queue is not started again (Scrin has a second Upgrades queue).
+		// Choice: UpgradeServiceCA.Choose (pure): free first, then UnitsToBuild weight, then cost, then name; no random draw.
+		void ServeUpgradeQueues(IBot bot)
+		{
+			var inProduction = new HashSet<string>(StringComparer.Ordinal);
+			foreach (var category in Info.UpgradeServiceQueues)
+				foreach (var queue in AIUtils.FindQueues(player, category))
+					foreach (var queued in queue.AllQueued())
+						inProduction.Add(queued.Item);
+
+			var paused = requestPause.Any(rp => rp.IsTraitEnabled() && rp.PauseUnitProduction && rp is not IBotItemAwareUnitCap);
+			// The bank NET of what every queued item still owes (earlier passes included), so a start never builds up an unpaid remainder
+			// against the reserve gates (review H1).
+			var bank = SpendCommitmentsCA.Available(playerResources.GetCashAndResources(), UnpaidQueuedCost());
+			foreach (var category in Info.UpgradeServiceQueues)
+			{
+				foreach (var queue in AIUtils.FindQueues(player, category))
+				{
+					var slots = LiveFreeSlots(queue);
+					if (slots <= 0)
+						continue;
+
+					var key = (queue.Actor.ActorID, queue.Info.Type);
+					if (upgradeIdleUntil.TryGetValue(key, out var idleUntil))
+					{
+						if (world.WorldTick < idleUntil)
+							continue;
+
+						upgradeIdleUntil.Remove(key);
+					}
+
+					var shares = GetUnitsToBuildForCategory(queue.Info.Type);
+					var startedHere = 0;
+					for (; slots > 0; slots--)
+					{
+						var candidates = new List<UpgradeServiceCA.Candidate>();
+						var infos = new List<ActorInfo>();
+						foreach (var item in queue.BuildableItems())
+						{
+							if (!ShouldBuild(item.Name, true, queue.Info.Type))
+								continue;
+
+							candidates.Add(new UpgradeServiceCA.Candidate(item.Name, queue.GetProductionCost(item),
+								shares != null && shares.TryGetValue(item.Name, out var w) ? Math.Max(w, 0) : -1));
+							infos.Add(item);
+						}
+
+						var index = UpgradeServiceCA.Choose(candidates, inProduction, bank, paused, (int)player.PlayerActor.ActorID);
+						if (index < 0)
+						{
+							// Nothing startable (all researched, next tier locked, or unaffordable): look again in 75 ticks, not every pass.
+							if (startedHere == 0)
+								upgradeIdleUntil[key] = world.WorldTick + UpgradeRecheckTicks;
+
+							break;
+						}
+
+						var item2 = infos[index];
+						inProduction.Add(item2.Name);
+						bank -= Math.Max(0, candidates[index].Cost);
+						startedHere++;
+						SetUnitInterval(item2.Name);
+						bot.QueueOrder(Order.StartProduction(queue.Actor, item2.Name, 1));
+						NotifyStarted(item2.Name, queue.Info.Type);
+						AIUtils.BotDebug("AI: {0} upgrade service starts {1} in {2}.", player, item2.Name, queue.Info.Type);
 					}
 				}
 			}
