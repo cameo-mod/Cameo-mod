@@ -434,6 +434,12 @@ namespace OpenRA.Mods.CA.Traits
 		IBotScaleTargets[] scaleTargets;
 		readonly DerivedUnitWeights derivedUnitWeights = new DerivedUnitWeights();
 
+		// ARMY-MIX-01 (USER P0): per queue type, the wave roles this builder could build at its last pick (tick-stamped), and the tick up to
+		// which a pick for a missing role counts as covering it. Both stay empty while the squad manager's WaveMixEnabled is off.
+		readonly Dictionary<string, (int Tick, HashSet<string> Roles)> waveMixAvailable = [];
+		readonly Dictionary<string, int> waveMixCoveredUntil = new(StringComparer.Ordinal);
+		const int WaveMixAvailableFreshTicks = 600;
+
 		// U1 (service-contract §3): the switch-gated fair-service arm and its per-category
 		// rotation cursor over stable queue keys ("actorID|queueType") — a visit resumes
 		// AFTER the last examined producer instead of always re-walking the head.
@@ -1590,6 +1596,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (counter != null)
 				return counter;
 
+			var waveMix = ChooseWaveMixRole(buildableThings, unitsToBuildShares, excludeLimited, retrySkip, queue.Info.Type);
+			if (waveMix != null)
+				return waveMix;
+
 			var deficit = ChooseRoleDeficit(buildableThings, unitsToBuildShares, excludeLimited, retrySkip);
 			if (deficit != null)
 				return deficit;
@@ -1649,6 +1659,10 @@ namespace OpenRA.Mods.CA.Traits
 				(retrySkip == null || !retrySkip.Contains(b.Name))));
 			if (counter != null)
 				return counter;
+
+			var waveMix = ChooseWaveMixRole(buildableThings, unitsToBuildShares, excludeLimited, retrySkip, queue.Info.Type);
+			if (waveMix != null)
+				return waveMix;
 
 			var deficit = ChooseRoleDeficit(buildableThings, unitsToBuildShares, excludeLimited, retrySkip);
 			if (deficit != null)
@@ -1761,6 +1775,57 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			return null;
+		}
+
+		/// <summary>ARMY-MIX-01: the union of the wave roles the builder could build in the last WaveMixAvailableFreshTicks; false when none was reported.</summary>
+		internal bool TryAvailableWaveRoles(int now, out HashSet<string> roles)
+		{
+			roles = [];
+			foreach (var entry in waveMixAvailable.Values)
+				if (now - entry.Tick <= WaveMixAvailableFreshTicks)
+					roles.UnionWith(entry.Roles);
+
+			return roles.Count > 0;
+		}
+
+		// ARMY-MIX-01 (USER P0, 2026-11-23): an assault wave mixes the available roles. When the idle pool lacks a wave role this queue can build,
+		// pick a unit of the best missing role (WHAT to build - the caller already decided to build; this never adds a build). The roles are ordered
+		// by the learned match-up value when a learner is present (4-value hook), else by the fixed wave order; a role stays covered for
+		// WaveMixPickCoverTicks after a pick so parallel queues do not all build it. Counters to the observed enemy keep first refusal.
+		ActorInfo ChooseWaveMixRole(IEnumerable<ActorInfo> buildableThings, Dictionary<string, int> unitsToBuildShares, bool excludeLimited,
+			HashSet<string> retrySkip, string queueType)
+		{
+			var manager = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().FirstEnabledTraitOrDefault();
+			if (manager == null || !manager.WaveMixActive)
+				return null;
+
+			var roles = unitRoles ??= player.PlayerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
+			if (roles == null)
+				return null;
+
+			var options = buildableThings.Where(b => unitsToBuildShares.ContainsKey(b.Name) &&
+				(!excludeLimited || Info.UnitLimits == null || !Info.UnitLimits.ContainsKey(b.Name)) &&
+				(retrySkip == null || !retrySkip.Contains(b.Name)) &&
+				ShouldBuild(b.Name, false) && CanBuildMoreOfAircraft(b)).ToList();
+			var now = world.WorldTick;
+			var queueRoles = WaveMixCA.DistinctRoles(options.Select(o => roles.PrimaryRoleOf(o.Name)));
+			waveMixAvailable[queueType] = (now, queueRoles);
+			if (queueRoles.Count == 0 || !TryAvailableWaveRoles(now, out var available))
+				return null;
+
+			var pool = manager.WaveMixPoolRoles();
+			if (pool.Count >= WaveMixCA.Needed(manager.Info.WaveMixMinRoles, available.Count))
+				return null;
+
+			var learning = player.PlayerActor.TraitsImplementing<IBotMixLearning>().FirstEnabledTraitOrDefault();
+			var missing = WaveMixCA.MissingRoles(queueRoles, pool,
+				role => learning != null && learning.TryRoleValues(role, out var values) ? WaveMixCA.Matchup(values) : 1.0);
+			var pick = WaveMixCA.NextMissing(missing, role => waveMixCoveredUntil.GetValueOrDefault(role), now);
+			if (pick == null)
+				return null;
+
+			waveMixCoveredUntil[pick] = now + manager.Info.WaveMixPickCoverTicks;
+			return options.Where(o => roles.PrimaryRoleOf(o.Name) == pick).ToList().Random(BotRng.For(player, nameof(UnitBuilderBotModuleCA)));
 		}
 
 		// Adaptive counters (DESIGN §19.1): below this tier's share of counter picks, the best counter to the

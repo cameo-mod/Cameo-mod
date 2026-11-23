@@ -199,6 +199,8 @@
 		AttackLivenessMaxNoLaunchTicks: 10000
 		AttackLivenessFirstWaveMaxTicks: 5000
 		TempoMinWaveUnits: 5
+		WaveMinUnits: 0
+		WaveMinValue: 0
 		TeamResponseMaxLeaseTicks: 2000
 		TeamResponseRearmCooldownTicks: 1000
 		TeamResponseLeaseLimit: 1
@@ -229,6 +231,8 @@
 		AttackLivenessMaxNoLaunchTicks: 9500
 		AttackLivenessFirstWaveMaxTicks: 4750
 		TempoMinWaveUnits: 6
+		WaveMinUnits: 2
+		WaveMinValue: 1200
 		TeamResponseMaxLeaseTicks: 1900
 		TeamResponseRearmCooldownTicks: 950
 		TeamResponseLeaseLimit: 1
@@ -259,6 +263,8 @@
 		AttackLivenessMaxNoLaunchTicks: 9000
 		AttackLivenessFirstWaveMaxTicks: 4500
 		TempoMinWaveUnits: 7
+		WaveMinUnits: 5
+		WaveMinValue: 2400
 		TeamResponseMaxLeaseTicks: 1800
 		TeamResponseRearmCooldownTicks: 900
 		TeamResponseLeaseLimit: 1
@@ -289,6 +295,8 @@
 		AttackLivenessMaxNoLaunchTicks: 8500
 		AttackLivenessFirstWaveMaxTicks: 4250
 		TempoMinWaveUnits: 8
+		WaveMinUnits: 7
+		WaveMinValue: 3600
 		TeamResponseMaxLeaseTicks: 1700
 		TeamResponseRearmCooldownTicks: 850
 		TeamResponseLeaseLimit: 1
@@ -319,6 +327,8 @@
 		AttackLivenessMaxNoLaunchTicks: 8000
 		AttackLivenessFirstWaveMaxTicks: 4000
 		TempoMinWaveUnits: 9
+		WaveMinUnits: 10
+		WaveMinValue: 4800
 		TeamResponseMaxLeaseTicks: 1600
 		TeamResponseRearmCooldownTicks: 800
 		TeamResponseLeaseLimit: 1
@@ -349,6 +359,8 @@
 		AttackLivenessMaxNoLaunchTicks: 7500
 		AttackLivenessFirstWaveMaxTicks: 3750
 		TempoMinWaveUnits: 10
+		WaveMinUnits: 12
+		WaveMinValue: 6000
 		TeamResponseMaxLeaseTicks: 1500
 		TeamResponseRearmCooldownTicks: 750
 		TeamResponseLeaseLimit: 1
@@ -380,6 +392,8 @@
 		AttackLivenessMaxNoLaunchTicks: 7000
 		AttackLivenessFirstWaveMaxTicks: 3500
 		TempoMinWaveUnits: 11
+		WaveMinUnits: 14
+		WaveMinValue: 7200
 		TeamResponseMaxLeaseTicks: 1400
 		TeamResponseRearmCooldownTicks: 700
 		TeamResponseLeaseLimit: 1
@@ -411,6 +425,8 @@
 		AttackLivenessMaxNoLaunchTicks: 6500
 		AttackLivenessFirstWaveMaxTicks: 3250
 		TempoMinWaveUnits: 12
+		WaveMinUnits: 17
+		WaveMinValue: 8400
 		TeamResponseMaxLeaseTicks: 1300
 		TeamResponseRearmCooldownTicks: 650
 		TeamResponseLeaseLimit: 1
@@ -442,6 +458,8 @@
 		AttackLivenessMaxNoLaunchTicks: 6000
 		AttackLivenessFirstWaveMaxTicks: 3000
 		TempoMinWaveUnits: 13
+		WaveMinUnits: 19
+		WaveMinValue: 9600
 		TeamResponseMaxLeaseTicks: 1200
 		TeamResponseRearmCooldownTicks: 600
 		TeamResponseLeaseLimit: 1
@@ -473,6 +491,8 @@
 		AttackLivenessMaxNoLaunchTicks: 5500
 		AttackLivenessFirstWaveMaxTicks: 2750
 		TempoMinWaveUnits: 14
+		WaveMinUnits: 22
+		WaveMinValue: 10800
 		TeamResponseMaxLeaseTicks: 1100
 		TeamResponseRearmCooldownTicks: 550
 		TeamResponseLeaseLimit: 1
@@ -504,6 +524,8 @@
 		AttackLivenessMaxNoLaunchTicks: 5000
 		AttackLivenessFirstWaveMaxTicks: 2500
 		TempoMinWaveUnits: 15
+		WaveMinUnits: 24
+		WaveMinValue: 12000
 		TeamResponseMaxLeaseTicks: 1000
 		TeamResponseRearmCooldownTicks: 500
 		TeamResponseLeaseLimit: 1
@@ -4671,6 +4693,10 @@ Player:
 		# ARTY-01 + DEFEND-ALLY-01 (USER P0, 2026-11-23): artillery micro and allied defence. @classic keeps the defaults (off).
 		ArtyMicroEnabled: true
 		DefendAllyEnabled: true
+		# WAVE-MIN-01 (USER rule, 2026-11-23): attack waves leave the base only at the tier minimum (BotLimits.WaveMinUnits / WaveMinValue). A personality may raise it with WaveMinUnits / WaveMinValue here, never lower it.
+		WaveMinEnabled: true
+		# ARMY-MIX-01 (USER rule, 2026-11-23): attack waves mix all available unit types (>= 3 roles or every available role).
+		WaveMixEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -4789,6 +4815,10 @@ Player:
 		# ARTY-01 + DEFEND-ALLY-01 (USER P0, 2026-11-23): artillery micro and allied defence. @classic keeps the defaults (off).
 		ArtyMicroEnabled: true
 		DefendAllyEnabled: true
+		# WAVE-MIN-01 (USER rule, 2026-11-23): attack waves leave the base only at the tier minimum (BotLimits.WaveMinUnits / WaveMinValue). A personality may raise it with WaveMinUnits / WaveMinValue here, never lower it.
+		WaveMinEnabled: true
+		# ARMY-MIX-01 (USER rule, 2026-11-23): attack waves mix all available unit types (>= 3 roles or every available role).
+		WaveMixEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -4903,6 +4933,10 @@ Player:
 		# ARTY-01 + DEFEND-ALLY-01 (USER P0, 2026-11-23): artillery micro and allied defence. @classic keeps the defaults (off).
 		ArtyMicroEnabled: true
 		DefendAllyEnabled: true
+		# WAVE-MIN-01 (USER rule, 2026-11-23): attack waves leave the base only at the tier minimum (BotLimits.WaveMinUnits / WaveMinValue). A personality may raise it with WaveMinUnits / WaveMinValue here, never lower it.
+		WaveMinEnabled: true
+		# ARMY-MIX-01 (USER rule, 2026-11-23): attack waves mix all available unit types (>= 3 roles or every available role).
+		WaveMixEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5019,6 +5053,10 @@ Player:
 		# ARTY-01 + DEFEND-ALLY-01 (USER P0, 2026-11-23): artillery micro and allied defence. @classic keeps the defaults (off).
 		ArtyMicroEnabled: true
 		DefendAllyEnabled: true
+		# WAVE-MIN-01 (USER rule, 2026-11-23): attack waves leave the base only at the tier minimum (BotLimits.WaveMinUnits / WaveMinValue). A personality may raise it with WaveMinUnits / WaveMinValue here, never lower it.
+		WaveMinEnabled: true
+		# ARMY-MIX-01 (USER rule, 2026-11-23): attack waves mix all available unit types (>= 3 roles or every available role).
+		WaveMixEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5135,6 +5173,10 @@ Player:
 		# ARTY-01 + DEFEND-ALLY-01 (USER P0, 2026-11-23): artillery micro and allied defence. @classic keeps the defaults (off).
 		ArtyMicroEnabled: true
 		DefendAllyEnabled: true
+		# WAVE-MIN-01 (USER rule, 2026-11-23): attack waves leave the base only at the tier minimum (BotLimits.WaveMinUnits / WaveMinValue). A personality may raise it with WaveMinUnits / WaveMinValue here, never lower it.
+		WaveMinEnabled: true
+		# ARMY-MIX-01 (USER rule, 2026-11-23): attack waves mix all available unit types (>= 3 roles or every available role).
+		WaveMixEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5248,6 +5290,10 @@ Player:
 		# ARTY-01 + DEFEND-ALLY-01 (USER P0, 2026-11-23): artillery micro and allied defence. @classic keeps the defaults (off).
 		ArtyMicroEnabled: true
 		DefendAllyEnabled: true
+		# WAVE-MIN-01 (USER rule, 2026-11-23): attack waves leave the base only at the tier minimum (BotLimits.WaveMinUnits / WaveMinValue). A personality may raise it with WaveMinUnits / WaveMinValue here, never lower it.
+		WaveMinEnabled: true
+		# ARMY-MIX-01 (USER rule, 2026-11-23): attack waves mix all available unit types (>= 3 roles or every available role).
+		WaveMixEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
