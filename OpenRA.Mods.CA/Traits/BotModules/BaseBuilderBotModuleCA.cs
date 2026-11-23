@@ -60,6 +60,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Tells the AI what building types are considered naval production facilities.")]
 		public readonly FrozenSet<string> NavalProductionTypes = FrozenSet<string>.Empty;
 
+		[Desc("BINDING tech chain (11-23): this faction's T2 and T3 gate buildings. Exempt from the army-first pause and the mobile reserve while none of them is owned or queued. Empty = no exemption.")]
+		public readonly FrozenSet<string> TechChainTypes = FrozenSet<string>.Empty;
+
 		[Desc("Tells the AI what building types are considered silos (resource storage).")]
 		public readonly FrozenSet<string> SiloTypes = FrozenSet<string>.Empty;
 
