@@ -903,7 +903,10 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				var inflight = new List<(string Item, int Total, int Remaining, bool Essential)>();
 				foreach (var i in queue.AllQueued())
-					inflight.Add((i.Item, i.TotalCost, i.RemainingCost, IsArmyFirstEssential(world.Map.Rules.Actors[i.Item])));
+					// An admitted tech-chain item is queued, so the admission test (not-queued) would book it non-essential. An in-flight
+					// tech-chain item stays essential for the ledger: it was admitted as the first copy.
+					inflight.Add((i.Item, i.TotalCost, i.RemainingCost,
+						IsArmyFirstEssential(world.Map.Rules.Actors[i.Item]) || InTechChainList(i.Item)));
 				mobileReserve.ReconcileBuildingSpend(queue.Actor, inflight);
 			}
 
@@ -1944,9 +1947,13 @@ namespace OpenRA.Mods.CA.Traits
 
 		// BINDING tech chain (11-23, TECHCHAIN-EXEMPT-01): the faction's T2 and T3 gate passes the army-first pause and the
 		// mobile reserve while none is owned or queued. Ablation row techchain_exempt: off = today's army-first gate.
+		// List membership first: off-list names never reach the owned count, which allocates a set per call.
+		bool InTechChainList(string name) =>
+			baseBuilder.Info.TechChainTypes.Contains(name) && !ablateTechChain.Off(player, AblationIds.TechChainExempt);
+
 		bool TechChainExempt(string name) =>
-			!ablateTechChain.Off(player, AblationIds.TechChainExempt)
-			&& TechChainExemptCA.Exempt(baseBuilder.Info.TechChainTypes.Contains(name),
+			InTechChainList(name)
+			&& TechChainExemptCA.Exempt(true,
 				AIUtils.CountBuildingByCommonName(new HashSet<string> { name }, player),
 				baseBuilder.BuildingsBeingProduced.ContainsKey(name));
 

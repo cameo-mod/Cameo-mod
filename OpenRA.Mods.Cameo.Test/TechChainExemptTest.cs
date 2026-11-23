@@ -28,7 +28,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TdNodTechChainGate(bool inList, int owned, bool queued)
 		{
 			var expected = owned == 0 && !queued;
-			Assert.AreEqual(expected, TechChainExemptCA.Exempt(inList, owned, queued));
+			Assert.That(TechChainExemptCA.Exempt(inList, owned, queued), Is.EqualTo(expected));
 		}
 
 		// RA2 Allies: ra2_allies_battlelab is the T3 gate by role (Opus ruling: RA2 Battle Lab is T3).
@@ -54,7 +54,7 @@ namespace OpenRA.Mods.Cameo.Test
 		[TestCase(0, true, TestName = "not_in_list_queued_not_exempt")]
 		public void BuildingOutsideTechChainListIsNeverExempt(int owned, bool queued)
 		{
-			Assert.IsFalse(TechChainExemptCA.Exempt(false, owned, queued));
+			Assert.That(TechChainExemptCA.Exempt(false, owned, queued), Is.False);
 		}
 	}
 }
