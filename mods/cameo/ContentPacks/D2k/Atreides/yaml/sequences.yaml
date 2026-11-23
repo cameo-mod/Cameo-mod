@@ -147,6 +147,26 @@ atreides_sandbike:
 		Tick: 80
 	icon:
 		Filename: d2k_atreides_icons|atreides_sandbike_build_icon.png
+atreides_trike:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 1635
+		Facings: -32
+	move:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 1635
+		Facings: -32
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4305
+		Offset: -30,-24
 
 atreides_apc:
 	Defaults:
@@ -275,6 +295,72 @@ atreides_rocket_turret:
 		Filename: invisibleitem.shp
 		Length: *
 		Facings: 1
+
+atreides_machinegun_tower:
+	Defaults:
+		Filename: d2k_atreides_sprites|atreides_machinegun_tower.png
+		Scale: 1
+	turret:
+		Facings: 64
+	idle:
+		Filename: invisibleitem.shp
+	damaged-idle:
+		Filename: invisibleitem.shp
+	invisible:
+		Filename: invisibleitem.shp
+	make:
+		Start: 64
+		Facings: 32
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4585
+		Length: 7
+		Offset: -16,16
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3671
+		Length: 3
+		BlendMode: Additive
+	icon:
+		Filename: d2k_atreides_icons|atreides_machinegun_tower_icon.png
+		Offset: 0,-1
+
+atreides_missile_tower:
+	Defaults:
+		Filename: d2k_atreides_sprites|atreides_missile_tower.png
+		Scale: 1
+	turret:
+		Facings: 64
+	idle:
+		Filename: invisibleitem.shp
+	damaged-idle:
+		Filename: invisibleitem.shp
+	invisible:
+		Filename: invisibleitem.shp
+	make:
+		Start: 64
+		Facings: 32
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4585
+		Length: 7
+		Offset: -16,16
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3671
+		Length: 3
+		BlendMode: Additive
+	icon:
+		Filename: d2k_atreides_icons|atreides_missile_tower_icon.png
+		Offset: 0,-1
 
 # Migrated from legacy mods/cameo/sequences/d2k.yaml (Ruling 9 sequences)
 

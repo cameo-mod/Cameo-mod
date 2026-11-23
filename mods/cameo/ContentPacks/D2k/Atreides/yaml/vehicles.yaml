@@ -305,7 +305,7 @@ atreides_sandbike:
 		Factions: atreides
 		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 10
-		Prerequisites: ~atreides_vehicle_production, ~atreides_light
+		Prerequisites: ~atreides_vehicle_production, ~atreides_light_vehicle_production
 		Description: actor_atreides_sandbike.description
 		IconPalette: d2kunit
 	Valued:
@@ -332,6 +332,50 @@ atreides_sandbike:
 	RenderSprites:
 		Image: atreides_sandbike
 		PlayerPalette: player_rgba
+	Voiced:
+		VoiceSet: D2KVehicleVoice
+	MapEditorData:
+		Categories: Vehicle
+atreides_trike:
+	Inherits@D2KT: ^D2KTank
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@exp: ^D2KGainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@AntiInf: ^PrioritizeInfantry
+	BotRoles:
+		Roles: guerrilla
+	Buildable:
+		Factions: atreides
+		Queue: Vehicle, RAVehicle, Starport
+		BuildPaletteOrder: 10
+		Prerequisites: ~atreides_vehicle_production, ~atreides_light_vehicle_production
+		Description: actor_atreides_sandbike.description
+		IconPalette: d2kunit
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Atreides Trike
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 30000
+	Mobile:
+		Locomotor: wheeled
+		Speed: 90
+		TurnSpeed: 24
+	Armament:
+		Weapon: HMG
+		LocalOffset: 256,0,0
+	AttackFrontal:
+		FacingTolerance: 0
+	FireWarheadsOnDeath:
+		Weapon: D2KUnitExplodeSmall
+		EmptyWeapon: D2KUnitExplodeSmall
+	-WithDeathAnimation:
+	RenderSprites:
+		Image: atreides_trike
 	Voiced:
 		VoiceSet: D2KVehicleVoice
 	MapEditorData:
