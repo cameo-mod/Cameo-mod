@@ -31,7 +31,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var info = new UnitBuilderBotModuleCAInfo();
 			Assert.That(info.UpgradeService, Is.True);
-			Assert.That(info.UpgradeServiceQueues, Is.EqualTo(new[] { "Upgrades", "Addons", "Research", "Promotions" }));
+			Assert.That(info.UpgradeServiceQueues, Is.EqualTo(new[] { "Promotions", "Upgrades", "Research", "Addons" }));
 			Assert.That(AblationIds.UpgradeService, Is.EqualTo("pq_upgrade_service"));
 			Assert.That(AblationSpec.RegistryIds(), Does.Contain("pq_upgrade_service"));
 		}
@@ -74,6 +74,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(service.Split("new HashSet<string>(").Length - 1, Is.EqualTo(1), "one picked-set per pass: two idle queues never start the same item");
 			Assert.That(service, Does.Contain("Order.StartProduction(queue.Actor, item.Name, 1)"));
 			Assert.That(service, Does.Contain("UpgradeRecheckTicks"));
+			Assert.That(src, Does.Contain("cost <= 0 ? int.MaxValue"), "free items (promotions) are always picked first");
 		}
 	}
 }

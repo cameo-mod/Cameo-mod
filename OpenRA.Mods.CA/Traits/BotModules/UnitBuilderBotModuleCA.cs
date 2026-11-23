@@ -76,7 +76,7 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly bool UpgradeService = true;
 
 		[Desc("UPGRADE-QUEUE-01: queue types served by the upgrade service. Each one is served on its own: a queue with nothing buildable, or a busy one, never holds back the next.")]
-		public readonly string[] UpgradeServiceQueues = { "Upgrades", "Addons", "Research", "Promotions" };
+		public readonly string[] UpgradeServiceQueues = { "Promotions", "Upgrades", "Research", "Addons" };
 
 		[Desc("Only queue construction of a new unit when above this requirement.",
 			"BotLimits.MaximiseProductionCashRequirement overrides this per difficulty (DESIGN §19.1).")]
@@ -847,7 +847,7 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		// UPGRADE-QUEUE-01. Every queue of every served type is its own producer: an idle one starts the best buildable item NOW,
-		// whatever the bank holds (production is paid progressively). Order of preference: items the faction's UnitsToBuild lists for this
+		// whatever the bank holds (production is paid progressively). Order of preference: free items (promotions) first, then items the faction's UnitsToBuild lists for this
 		// queue type, by weight (high first), then by cost (cheap first), then by name; items the list does not mention come last, so a
 		// queue never idles because the table missed a newly unlocked tier. No random draw, so same seed = same order.
 		void ServeUpgradeQueues(IBot bot)
@@ -901,8 +901,10 @@ namespace OpenRA.Mods.CA.Traits
 				if (picked.Contains(item.Name))
 					continue;
 
-				var weight = shares != null && shares.TryGetValue(item.Name, out var w) ? Math.Max(w, 0) : -1;
 				var cost = queue.GetProductionCost(item);
+
+				// Free items (promotions) are always picked first, whatever the table says.
+				var weight = cost <= 0 ? int.MaxValue : shares != null && shares.TryGetValue(item.Name, out var w) ? Math.Max(w, 0) : -1;
 				if (best == null || weight > bestWeight ||
 					(weight == bestWeight && (cost < bestCost || (cost == bestCost && string.CompareOrdinal(item.Name, best.Name) < 0))))
 				{
