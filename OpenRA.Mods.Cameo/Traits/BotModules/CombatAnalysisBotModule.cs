@@ -91,7 +91,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public override object Create(ActorInitializer init) { return new CombatAnalysisBotModule(init.Self, this); }
 	}
 
-	public class CombatAnalysisBotModule : ConditionalTrait<CombatAnalysisBotModuleInfo>, IBotTick, IBotRespondToAttack, IBotThreatAnalysis, INotifyAppliedDamage
+	public class CombatAnalysisBotModule : ConditionalTrait<CombatAnalysisBotModuleInfo>, IBotTick, IBotRespondToAttack, IBotThreatAnalysis, INotifyAppliedDamage, IBotEventReceiver
 	{
 		readonly Dictionary<string, float> weights = new()
 		{
@@ -305,12 +305,53 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (e.Damage.Value < Info.MinDamageThreshold)
 				return;
 
-			if (nextDealtRecordTickByVictim.TryGetValue(victim, out var nextTick) && world.WorldTick < nextTick)
+			// STAGGER_DESIGN_06 7.1 (Opus condition): a gated bot gets a snapshot taken NOW, so the deferred delivery
+			// scores from event-time facts and not from whatever the actors look like at the slot. Everything else
+			// (an ungated bot, N = 1, the bot's own Running phase) records now, exactly as before.
+			var tick = world.WorldTick;
+			var bot = ModularBot.ActiveOf(this.self);
+			if (bot != null && bot.TryDefer(() => DamageDealtEvent.From(bot.KeyOf(this), tick, damaged, e)))
 				return;
 
+			RecordDealt(victim, e.Damage.Value, tick);
+		}
+
+		void IBotEventReceiver.ReceiveBotEvent(BotEvent ev)
+		{
+			if (ev is not DamageDealtEvent dealt)
+				return;
+
+			var victim = world.Players.FirstOrDefault(p => p.InternalName == dealt.VictimOwner);
+			if (victim != null)
+				RecordDealt(victim, dealt.Damage, dealt.EventTick);
+		}
+
+		void RecordDealt(OpenRA.Player victim, int damage, int tick)
+		{
+			var hasNext = nextDealtRecordTickByVictim.TryGetValue(victim, out var nextTick);
 			dealtScores.TryGetValue(victim, out var current);
-			dealtScores[victim] = Math.Min(100f, current + Info.NemesisWeightPerHit);
-			nextDealtRecordTickByVictim[victim] = world.WorldTick + Math.Max(1, Info.NemesisRecordInterval);
+			var step = DealtStep(current, hasNext ? nextTick : null, tick, damage, Info.MinDamageThreshold, Info.NemesisWeightPerHit, Info.NemesisRecordInterval);
+			if (!step.Applied)
+				return;
+
+			dealtScores[victim] = step.Score;
+			nextDealtRecordTickByVictim[victim] = step.NextTick;
+		}
+
+		/// <summary>
+		/// The dealt-score update of one applied-damage event as a pure function (today's rule, unchanged): below the damage
+		/// threshold or inside the per-victim throttle nothing happens; otherwise the score rises by one hit weight (capped at
+		/// 100) and the next allowed tick moves a full interval past the EVENT tick.
+		/// </summary>
+		public static (bool Applied, float Score, int NextTick) DealtStep(float current, int? nextAllowedTick, int eventTick, int damage, int minDamage, float weightPerHit, int intervalTicks)
+		{
+			if (damage < minDamage)
+				return (false, current, nextAllowedTick ?? 0);
+
+			if (nextAllowedTick.HasValue && eventTick < nextAllowedTick.Value)
+				return (false, current, nextAllowedTick.Value);
+
+			return (true, Math.Min(100f, current + weightPerHit), eventTick + Math.Max(1, intervalTicks));
 		}
 
 		/// <summary>

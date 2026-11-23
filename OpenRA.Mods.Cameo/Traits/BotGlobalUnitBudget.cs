@@ -5,6 +5,7 @@
 #endregion
 
 using System.Collections.Generic;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 
@@ -47,7 +48,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		public override object Create(ActorInitializer init) => new BotGlobalUnitBudget(init.Self, this);
 	}
 
-	public class BotGlobalUnitBudget : ConditionalTrait<BotGlobalUnitBudgetInfo>, IBotRequestPauseUnitProduction
+	public class BotGlobalUnitBudget : ConditionalTrait<BotGlobalUnitBudgetInfo>, IBotRequestPauseUnitProduction, IBotItemAwareUnitCap
 	{
 		readonly World world;
 		readonly OpenRA.Player player;
@@ -81,6 +82,24 @@ namespace OpenRA.Mods.Cameo.Traits
 				return paused;
 			}
 		}
+
+		/// <summary>
+		/// The ONE exclusion rule: resource collectors (while <c>IgnoreHarvesters</c>) and the ignored names never count
+		/// against the budget. <see cref="ComputePaused"/> applies it to live actors, <see cref="Counts"/> to an item
+		/// that is about to be produced.
+		/// </summary>
+		public static bool Excluded(BotGlobalUnitBudgetInfo info, ActorInfo actor) =>
+			(info.IgnoreHarvesters && actor.HasTraitInfo<HarvesterInfo>()) || info.IgnoredActorTypes.Contains(actor.Name);
+
+		/// <summary>
+		/// True when producing <paramref name="actor"/> adds to the count: positionable (a unit, not a building) and not
+		/// <see cref="Excluded"/>. The live count (<see cref="ComputePaused"/>) filters on the actor-level IPositionable
+		/// trait instead, so only the exclusion rule is shared.
+		/// </summary>
+		public static bool Counts(BotGlobalUnitBudgetInfo info, ActorInfo actor) =>
+			actor.HasTraitInfo<IPositionableInfo>() && !Excluded(info, actor);
+
+		bool IBotItemAwareUnitCap.CountsAgainstCap(ActorInfo actor) => Counts(Info, actor);
 
 		/// <summary>
 		/// This bot's share of the combat-unit budget right now (budget / living bots, clamped), or -1 when the budget
@@ -123,18 +142,14 @@ namespace OpenRA.Mods.Cameo.Traits
 			// Count this bot's live mobile units (IPositionable excludes buildings) - same notion of
 			// "army" the unit builders use. Stop as soon as we reach the cap; no need to count further.
 			var count = 0;
-			var ignoreNames = Info.IgnoredActorTypes.Count > 0;
 			foreach (var a in world.ActorsHavingTrait<IPositionable>())
 			{
 				if (a.Owner != player || a.IsDead)
 					continue;
 
 				// Resource collectors don't count against the combat budget, so a lower budget
-				// never starves the economy.
-				if (Info.IgnoreHarvesters && a.Info.HasTraitInfo<HarvesterInfo>())
-					continue;
-
-				if (ignoreNames && Info.IgnoredActorTypes.Contains(a.Info.Name))
+				// never starves the economy; the rule is shared with the item-aware cap (Excluded).
+				if (Excluded(Info, a.Info))
 					continue;
 
 				// When not logging, stop as soon as we reach the cap - no need to count further.
@@ -145,8 +160,12 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 
 			if (Info.Debug)
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"BotBudget {player.InternalName}: livingBots={livingBots} " +
 					$"cap={cap} units={count} paused={count >= cap}");
+#endif
+			}
 
 			return count >= cap;
 		}

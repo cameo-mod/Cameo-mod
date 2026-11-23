@@ -13,6 +13,7 @@ using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
@@ -80,7 +81,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly OpenRA.Player player;
 		readonly Dictionary<Actor, Actor> activeAssignments = [];
 		IBotRequestUnitProduction[] requestUnitProduction = [];
-		int repairScanTicks;
+		BotPeriod repairScanTicks; // STAGGER-06 F1
+		bool phaseSeeded;
 
 		public BridgeRepairBotModule(Actor self, BridgeRepairBotModuleInfo info)
 			: base(info)
@@ -90,7 +92,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			// ActorID is identical on all clients — unlike LocalRandom, which would offset the first scan
 			// differently per client and make the order stream diverge (§1.6).
-			repairScanTicks = (int)(self.ActorID % (uint)RepairScanInterval);
+			repairScanTicks = BotPeriod.F1(self.World.WorldTick, (int)(self.ActorID % (uint)RepairScanInterval), RepairScanInterval);
 		}
 
 		protected override void Created(Actor self)
@@ -110,10 +112,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (--repairScanTicks > 0)
-				return;
+			// QW-B: the first scan waits for the bot's phase instead of ActorID % interval; the reload is unchanged. Re-seeded
+			// at the first call (call 1 is at the visit tick, so r = v - 1); unphased keeps the constructor's ActorID offset.
+			var scanClock = BotVisitClock.Of(bot);
+			if (!phaseSeeded)
+			{
+				phaseSeeded = true;
+				if (BotSlotPhases.TryResolve(bot, RepairScanInterval, out var scanPhase))
+					repairScanTicks = BotPeriod.F1(scanClock.VisitTick - 1, scanPhase, RepairScanInterval);
+			}
 
-			repairScanTicks = RepairScanInterval;
+			if (!repairScanTicks.TryFire(scanClock))
+				return;
 			QueueRepairOrders(bot);
 		}
 
@@ -200,9 +210,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				activeAssignments[repairer] = target;
 				assignedTargets.Add(target);
 
+#if CAMEO_DEV_LOGGING
 				var line = $"AI ({player.ClientIndex}): Ordered {repairer} to repair bridge hut {target}";
 				Log.Write("debug", line);
-				AIUtils.BotDebug(line);
+				OpenRA.Mods.CA.AIUtils.BotDebug(line);
+#endif
 			}
 		}
 

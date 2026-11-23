@@ -1,0 +1,16 @@
+World:
+	CameoDevLogSinkInstaller:
+	AiMemoryTelemetryDev:
+	AiPlayerTelemetryDev:
+	AiEconomyHealthCaptureDev:
+	AiMatchLogWriterDev:
+	AiMissionLogWriterDev:
+	AiSituationLogWriterDev:
+	InsuranceTelemetryDev:
+	AiEngagementLogWriterDev:
+	AiPlacementLogWriterDev:
+	AblationProviderDev:
+Player:
+	AiEconomyHealthRecorderDev:
+	# DEV-only economy knob (STAGGER_EVAL_PLAN_03 option B); inert unless launched with Cameo.DevCashBonus=Multi0:10,..
+	DevCashBonus:

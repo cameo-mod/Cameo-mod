@@ -199,7 +199,9 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void AShellModuleFindsNoEvidenceAndTouchesNoWorld()
 		{
-			var m = (SquadManagerBotModuleCA)RuntimeHelpers.GetUninitializedObject(typeof(SquadManagerBotModuleCA));
+			// The shell needs Info: AggressionEvidenceWanted reads Info.StalemateDiagnosticsEnabled first (the null-squad check comes
+			// after it), and a live bot always has Info. Shell(false) sets it; the && short-circuit then keeps World untouched.
+			var m = Shell(diagnostics: false);
 			var lookup = typeof(SquadManagerBotModuleCA).GetMethod("AggressionEvidenceFor", BindingFlags.Instance | BindingFlags.NonPublic);
 			Assert.That(lookup, Is.Not.Null);
 			Assert.That(lookup.Invoke(m, new object[] { null }), Is.Null, "no squad, no evidence, World is never read");
@@ -297,7 +299,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(partial, Does.Contain("IsFresh(World.WorldTick)"));
 
 			// F1: both record entry points return before measuring anything while diagnostics are off.
-			Assert.That(partial, Does.Contain("bool AggressionEvidenceWanted => Info.StalemateDiagnosticsEnabled;"));
+			Assert.That(partial, Does.Contain("bool AggressionEvidenceWanted => Info.StalemateDiagnosticsEnabled && DiagnosticSinkEnabled;"));
 			foreach (var entry in new[] { "internal void AggressionRecordEvidence(", "internal void AggressionRecordFightEvidence(" })
 			{
 				var body = Section(partial, entry, "\n\t\t}\n");

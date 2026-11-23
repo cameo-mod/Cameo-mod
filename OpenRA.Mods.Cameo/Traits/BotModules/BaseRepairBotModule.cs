@@ -11,6 +11,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -53,7 +54,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly World world;
 		readonly OpenRA.Player player;
 		readonly Dictionary<Actor, int> pendingSince = [];
-		int sweepTicks;
+		BotPeriod sweep; // STAGGER-06 TIMER A: E019 F1 K=RepairAllInterval x0=K
 
 		// Telemetry (situation log `own.repair_*`, cumulative). TogglesAvoided counts the hits where master's
 		// CA module (damage state rose, `!RepairActive`) would have sent a second order and switched the repair OFF.
@@ -70,7 +71,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		protected override void TraitEnabled(Actor self)
 		{
-			sweepTicks = Info.RepairAllInterval;
+			sweep = BotPeriod.F1(world.WorldTick, Info.RepairAllInterval, Info.RepairAllInterval);
 		}
 
 		/// <summary>The whole policy, free of world state so it can be tested.</summary>
@@ -96,10 +97,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (Info.RepairAllInterval < 0 || --sweepTicks > 0)
+			if (Info.RepairAllInterval < 0 || !sweep.TryFire(BotVisitClock.Of(bot)))
 				return;
 
-			sweepTicks = Info.RepairAllInterval;
 			var tick = world.WorldTick;
 
 			// Own buildings only: the bot's knowledge of its own base, no fog involved.
@@ -136,7 +136,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (decision == BaseRepairDecision.Order)
 			{
 				RepairOrders++;
-				AIUtils.BotDebug($"{player} noticed damage {self} {e.PreviousDamageState}->{e.DamageState}, repairing.");
+				OpenRA.Mods.CA.AIUtils.BotDebug($"{player} noticed damage {self} {e.PreviousDamageState}->{e.DamageState}, repairing.");
 			}
 			else if ((decision == BaseRepairDecision.AlreadyRepairing || decision == BaseRepairDecision.OrderInFlight)
 				&& !rb.RepairActive && e.PreviousDamageState < e.DamageState)
@@ -156,7 +156,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				bot.QueueOrder(new Order("RepairBuilding", player.PlayerActor, Target.FromActor(building), false));
 
 				// Plan step 4 telemetry: a batch shows every repair decision (BotDebug alone only reaches chat).
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): RV1 repair {building.Info.Name} {building.ActorID} at {state} ({source}) tick {tick}");
+#endif
 			}
 
 			return decision;

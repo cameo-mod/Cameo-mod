@@ -130,7 +130,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			using (var stream = fs.Open(priorsPath))
 				priors = ArsenalPriors.Parse(MiniYaml.FromStream(stream, Info.PriorsFile));
 
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI {player.InternalName}: LEARNED priors: {priors.PairCount} pairs, {priors.TypeCount} types");
+#endif
 		}
 
 		// The public enemy faction: the main target's if a provider names one, else the most common non-empty

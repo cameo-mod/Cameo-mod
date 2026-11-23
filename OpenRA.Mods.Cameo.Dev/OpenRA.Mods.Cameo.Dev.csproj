@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <EngineRootPath>../engine</EngineRootPath>
+  </PropertyGroup>
+  <Import Project="../engine/Directory.Build.props" />
+  <ItemGroup>
+    <ProjectReference Include="../OpenRA.Mods.CA/OpenRA.Mods.CA.csproj">
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="../OpenRA.Mods.Cameo/OpenRA.Mods.Cameo.csproj">
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="$(EngineRootPath)/OpenRA.Game/OpenRA.Game.csproj">
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Target Name="RequireDevelopmentLogging" BeforeTargets="PrepareForBuild">
+    <Error Condition="'$(CameoDevLogging)' != 'true'"
+           Text="OpenRA.Mods.Cameo.Dev must only be built with CameoDevLogging=true." />
+  </Target>
+</Project>

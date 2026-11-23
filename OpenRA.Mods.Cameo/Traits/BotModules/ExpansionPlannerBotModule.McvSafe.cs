@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.CA.Traits.BotModules;
 using OpenRA.Mods.CA.Traits.BotModules.Squads;
@@ -42,7 +43,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			public Actor Actor;
 			public CPos LastCell;
 			public int Field = -1;
-			public int NextAbortTick;
+			public BotCooldown AbortCooldown;
 			public CPos? TripStart;
 		}
 
@@ -50,7 +51,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int mcvZonesTick = int.MinValue / 2;
 		List<McvThreatZone> mcvZoneCache = new();
 		List<CPos> mcvStarts;
-		int mcvNextGuardTick;
+		BotCooldown mcvGuardCooldown;
 		readonly List<McvThreatZone> mcvLossZones = new();
 		readonly Dictionary<uint, McvTrack> mcvTracks = new();
 		readonly Dictionary<string, int> mcvWeaponRangeCache = new();
@@ -178,7 +179,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return false;
 
 			if (mcvEnemyHalfLogged.Add(f.Index))
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): MS-6 field {f.Index} at {f.Center} is nearer to a suspected enemy start than to any own base ({ctx.EnemyStarts.Count} starts, {ctx.OwnBases.Count} own bases), refused at tick {ctx.Now}");
+#endif
+			}
 
 			return true;
 		}
@@ -264,7 +269,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				queued = true;
 			}
 
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI ({player.ClientIndex}): MS-1 MCV {mcv.ActorID} routed around enemy zones with {waypoints.Count} waypoints, last {waypoints[^1]}, at tick {world.WorldTick}");
+#endif
 		}
 
 		/// <summary>
@@ -278,7 +285,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			McvSafeRoute(ctx, mcv, baseCenter.Value, false, out var route);
 			McvSafeIssue(mcv, -1, route);
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI ({player.ClientIndex}): MS-2 MCV {mcv.Info.Name} {mcv.ActorID} at {mcv.Location}: no safe far field, deploys at the base {baseCenter.Value} at tick {world.WorldTick}");
+#endif
 			return baseCenter;
 		}
 
@@ -311,10 +320,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			var now = world.WorldTick;
-			if (now < mcvNextGuardTick)
+			if (!mcvGuardCooldown.Ready(now))
 				return;
 
-			mcvNextGuardTick = now + policy.McvSafeParam(nameof(SquadManagerBotModuleCAInfo.AggTeamMcvGuardIntervalTicks));
+			mcvGuardCooldown.Start(now, policy.McvSafeParam(nameof(SquadManagerBotModuleCAInfo.AggTeamMcvGuardIntervalTicks)));
 			var zones = McvZones(policy, now);
 			var abortMargin = policy.McvSafeParam(nameof(SquadManagerBotModuleCAInfo.AggTeamMcvAbortMarginCells));
 			var threatCells = policy.McvSafeParam(nameof(SquadManagerBotModuleCAInfo.AggTeamMcvAbortThreatCells));
@@ -336,7 +345,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				}
 
 				track.TripStart ??= mcv.Location;
-				if (now < track.NextAbortTick)
+				if (!track.AbortCooldown.Ready(now))
 					continue;
 
 				var threat = McvNearestVisibleThreatCells(mcv, threatCells);
@@ -344,7 +353,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (!McvSafePolicyCA.ShouldAbort(mcv.Location, tripZones, now, abortMargin, threat, threatCells))
 					continue;
 
-				track.NextAbortTick = now + policy.McvSafeParam(nameof(SquadManagerBotModuleCAInfo.AggTeamMcvAbortCooldownTicks));
+				track.AbortCooldown.Start(now, policy.McvSafeParam(nameof(SquadManagerBotModuleCAInfo.AggTeamMcvAbortCooldownTicks)));
 				if (!McvSafeAbortHome(bot, policy, zones, now, mcv))
 					bot.QueueOrder(new Order("Stop", mcv, false));
 
@@ -352,7 +361,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					parkedUntil[track.Field] = now + Info.ParkTicks;
 
 				inflightMcvSites.Remove(mcv.ActorID);
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): MS-3 MCV {mcv.ActorID} at {mcv.Location} aborted its trip (zone/threat {threat}), field {track.Field} parked, at tick {now}");
+#endif
 			}
 
 			foreach (var id in mcvTracks.Keys.ToList())
@@ -389,7 +400,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (!queued)
 				bot.QueueOrder(new Order("Move", mcv, OpenRA.Traits.Target.FromCell(world, baseCenter.Value), false));
 
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI ({player.ClientIndex}): MS-5 MCV {mcv.ActorID} at {mcv.Location} aborted: moves to the base {baseCenter.Value} ({route?.Count ?? 0} waypoints) at tick {now}");
+#endif
 			return true;
 		}
 
@@ -411,7 +424,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (track.Field >= 0)
 				parkedUntil[track.Field] = now + Info.ParkTicks;
 
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI ({player.ClientIndex}): MS-4 MCV lost near {track.LastCell} (field {track.Field}), loss zone and field park set, at tick {now}");
+#endif
 		}
 	}
 }

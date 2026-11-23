@@ -22,7 +22,18 @@ namespace OpenRA.Mods.CA.Traits
 		/// Whether the base builder should hold <paramref name="building"/> this tick. <paramref name="essential"/>
 		/// is the base builder's own classification (construction yard, refinery, power, first production
 		/// building) - providers normally let essentials through so the economy and tech chain never stall.
+		/// <paramref name="admission"/> is the PROD-IDLE_PLAN_03 section 2.3 class of the order (K1/K2
+		/// OpeningOrEssential, K4 EssentialBuilding, K6 General) and <paramref name="cost"/> its production
+		/// cost, so a provider can apply the projected army-share test to K6 orders only. A query only: it
+		/// records nothing (see <see cref="BuildingAdmitted"/>).
 		/// </summary>
-		bool PausesBuilding(ActorInfo building, bool essential);
+		bool PausesBuilding(ActorInfo building, bool essential, RecoverySpendPolicyCA.Admission admission, int cost);
+
+		/// <summary>
+		/// The base builder admitted (is about to order) <paramref name="building"/> at <paramref name="cost"/>:
+		/// providers that track a projected state count it before the next candidate is tested, whatever its
+		/// class (K1-K4 orders are not ratio-tested but are counted in every later test).
+		/// </summary>
+		void BuildingAdmitted(ActorInfo building, int cost);
 	}
 }

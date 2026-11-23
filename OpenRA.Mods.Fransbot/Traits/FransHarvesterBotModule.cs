@@ -600,7 +600,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (safeDock == null)
 				return;
 
-			AIUtils.BotDebug("{0}: attacked harvester {1} retreats to RiskModel-selected refinery {2}.", player, self, safeDock);
+			OpenRA.Mods.CA.AIUtils.BotDebug("{0}: attacked harvester {1} retreats to RiskModel-selected refinery {2}.", player, self, safeDock);
 			bot.QueueOrder(new Order("Dock", self, Target.FromActor(safeDock), false));
 		}
 

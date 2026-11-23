@@ -14,6 +14,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Xml.Linq;
 using OpenRA.Mods.AS.Traits;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Common.Traits.Radar;
@@ -24,7 +25,8 @@ namespace OpenRA.Mods.CA.Traits
 	class BaseBuilderQueueManagerCA
 	{
 		public readonly string Category;
-		public int WaitTicks;
+		public BotCooldown WaitCooldown;
+		public bool WaitCooldownStarted { get; private set; }
 
 		readonly BaseBuilderBotModuleCA baseBuilder;
 		readonly World world;
@@ -89,6 +91,7 @@ namespace OpenRA.Mods.CA.Traits
 		// PUSH-1 (bank overflow): the conditioned policy arming the overflow rung — profiles that
 		// never carry the grant resolve null here and run the legacy ladder bit-identically.
 		BotOverflowPolicy overflowPolicy;
+		AblationLatch ablateOverflow; // ABLATE-01 hook pi_overflow (DEV provider only; release = on)
 
 		// Cameo (§12.20): lazy — resolved on first TickQueue, an OR-of-vetoes pause on new building
 		// production. Empty = nothing pauses, upstream-identical.
@@ -178,7 +181,7 @@ namespace OpenRA.Mods.CA.Traits
 			return true;
 		}
 
-		// Every-tick item-list reconciliation (F2/F3/F4): runs before the latch and WaitTicks
+		// Every-tick item-list reconciliation (F2/F3/F4): runs before the latch and queue-sweep cooldown
 		// early returns so Started/Ready carry the exact observation tick and terminal records
 		// fire when the item actually leaves the queue. A queue that drops out of FindQueues
 		// (producer dead -> trait disabled) still resolves its contents as removals, so a
@@ -689,7 +692,7 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			// REPLAY-HEALTH-LOGGER (F3): the probe reconciles queue state every tick so
 			// transition records carry exact observation ticks — it must run before the
-			// latch and WaitTicks early returns below. No observer = one lazy-resolve check.
+			// latch and queue-sweep cooldown early returns below. No observer = one lazy-resolve check.
 			if (ObserveQueueTransitions())
 				ProbeQueueTransitions();
 
@@ -819,8 +822,8 @@ namespace OpenRA.Mods.CA.Traits
 					checkForBasesTicks = baseBuilder.Info.CheckForNewBasesDelay;
 			}
 
-			// Only update once per second or so
-			if (WaitTicks > 0)
+			// Only update once per second or so.
+			if (!BaseBuilderQueueEvalCA.QueueSweepDue(WaitCooldown, world.WorldTick))
 				return;
 
 			playerBuildings = world.ActorsHavingTrait<Building>().Where(a => a.Owner == player).ToArray();
@@ -871,12 +874,15 @@ namespace OpenRA.Mods.CA.Traits
 			// Minimum should not be negative as delays in HackyAI could be zero.
 			var randomFactor = BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(0, baseBuilder.Info.StructureProductionRandomBonusDelay);
 
-			WaitTicks = active ? baseBuilder.Info.StructureProductionActiveDelay + randomFactor
+			var waitTicks = active ? baseBuilder.Info.StructureProductionActiveDelay + randomFactor
 				: baseBuilder.Info.StructureProductionInactiveDelay + randomFactor;
 
 			// Build-order knobs (12.25): tempo shortens (above 1000) or lengthens the general build interval.
 			if (knobs != null)
-				WaitTicks = DivideByKnob(WaitTicks, knobs.KnobMilli(BuildOrderKnob.Tempo));
+				waitTicks = DivideByKnob(waitTicks, knobs.KnobMilli(BuildOrderKnob.Tempo));
+
+			BaseBuilderQueueEvalCA.StartQueueSweepCooldown(ref WaitCooldown, world.WorldTick, waitTicks);
+			WaitCooldownStarted = true;
 		}
 
 		bool TickQueue(IBot bot, ProductionQueue queue)
@@ -958,7 +964,13 @@ namespace OpenRA.Mods.CA.Traits
 				var exempt = plannerWant || demandPick.Demand != null;
 				var cost = queue.GetProductionCost(item);
 				var itemEssential = IsArmyFirstEssential(item);
-				var nonCashVeto = pauseBuilding.Any(p => p.PausesBuilding(item, itemEssential))
+
+				// PROD-IDLE_PLAN_03 section 2.3 class of this building order: K1/K2 essentials, K4 other
+				// essential buildings (extra refineries, planner and demand wants), K6 everything else.
+				var buildingClass = itemEssential ? RecoverySpendPolicyCA.Admission.OpeningOrEssential
+					: isRefinery || exempt ? RecoverySpendPolicyCA.Admission.EssentialBuilding
+					: RecoverySpendPolicyCA.Admission.General;
+				var nonCashVeto = pauseBuilding.Any(p => p.PausesBuilding(item, itemEssential, buildingClass, cost))
 					|| BaseBuilderQueueEvalCA.MobileSpendBlocks(cashNow, cost, reserveFloor, itemEssential);
 				cashClock.Observe(queue.Actor.ActorID, item.Name,
 					BaseBuilderQueueEvalCA.StarvationEligible(
@@ -978,7 +990,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (pauseBuilding.Length > 0 || reserveFloor > 0)
 				{
 					var essential = IsArmyFirstEssential(item);
-					if (pauseBuilding.Any(p => p.PausesBuilding(item, essential)))
+					if (pauseBuilding.Any(p => p.PausesBuilding(item, essential, buildingClass, cost)))
 						return false;
 
 					// TF-2: the reservation — optional spend (optional defences, crawl links) may
@@ -1047,6 +1059,12 @@ namespace OpenRA.Mods.CA.Traits
 					baseBuilder.StorageObservation.NoteEmitted(storageReservation, world.WorldTick);
 
 				queuedAt[queue.Actor.ActorID] = (item.Name, world.WorldTick);
+
+				// PROD-IDLE PR-3: the admitted building is recorded before the next candidate is tested, so
+				// two admissions in one pass cannot both pass an old share snapshot (PLAN_03 section 3).
+				foreach (var p in pauseBuilding)
+					p.BuildingAdmitted(item, cost);
+
 				if (demandPick.Demand != null)
 				{
 					// ECON-A-FIX (R5): bind on the admitted order, not the pick — the recorded in-flight
@@ -1069,7 +1087,7 @@ namespace OpenRA.Mods.CA.Traits
 			else if (currentBuilding != null && currentBuilding.Done)
 			{
 				// REPLAY-HEALTH-LOGGER (F3): Ready also comes from the probe — the exact tick
-				// the head item flips Done, not this WaitTicks-gated sweep.
+				// the head item flips Done, not this cooldown-gated sweep.
 
 				// ECON-A (§4 Ready-hold): a bound demand item sits at Queue[0] until its MCV deploys —
 				// returning false holds it without spending failure budget (the same mechanic the REF-1
@@ -1130,6 +1148,12 @@ namespace OpenRA.Mods.CA.Traits
 						}
 					}
 				}
+
+				// REFSCAN D-5 (sec 2, 3.5): an item a site-search episode owns is placed by the episode from the
+				// bot module tick (BaseBuilderBotModuleCA.BotTick), never here — no claim ladder, no park and no
+				// fallback poll on its behalf, and nothing on its path waits on the queue-sweep cooldown.
+				if (baseBuilder.RefinerySearchOwns(currentBuilding))
+					return false;
 
 				// Check if Building is a plug for other Building
 				var actorInfo = world.Map.Rules.Actors[currentBuilding.Item];
@@ -1272,6 +1296,15 @@ namespace OpenRA.Mods.CA.Traits
 					}
 				}
 
+				// REFSCAN F2 (sec 3.4): every non-episode PlaceBuilding/PlacePlug passes the reservation mask at
+				// this single emission point, before NotifyPlacement. A blocked placement takes the null-location
+				// branch for its class (a refinery defers; anything else counts a failure). Empty mask = no-op.
+				if (location != null && baseBuilder.PlacementMasked(currentBuilding.Item, location.Value))
+				{
+					AIUtils.BotDebug($"{player} {currentBuilding.Item} at {location.Value}: reserved by a refinery search at tick {world.WorldTick}");
+					location = null;
+				}
+
 				if (location == null)
 				{
 					// FIX-RA-REFINERY: under the law a siteless refinery defers — it must not spend
@@ -1395,36 +1428,107 @@ namespace OpenRA.Mods.CA.Traits
 					});
 
 					// After succesfuly placing a building, nudge BaseExpansionModules to expand.
-					// We want to avoid expanding too often, so we make a judgement by counting buildings.
-					if (baseBuilder.Info.ProductionTypes.Contains(currentBuilding.Item)
-						|| baseBuilder.Info.FragileTypes.Contains(currentBuilding.Item) || baseBuilder.Info.RefineryTypes.Contains(currentBuilding.Item))
-					{
-						var numRef = baseBuilder.RefineryBuildings.Actors.Count(a => !a.IsDead) + (baseBuilder.Info.RefineryTypes.Contains(currentBuilding.Item) ? 1 : 0);
-
-						var numProd = baseBuilder.ProductionBuildings.Actors.Count(a => !a.IsDead) + (baseBuilder.Info.ProductionTypes.Contains(currentBuilding.Item) ? 1 : 0);
-
-						var numTech = playerBuildings.Count(a => baseBuilder.Info.FragileTypes.Contains(a.Info.Name))
-							+ (baseBuilder.Info.FragileTypes.Contains(currentBuilding.Item) ? 1 : 0);
-
-						var tolerateOnCash = playerResources.GetCashAndResources() / Math.Max(baseBuilder.Info.PerExpansionTolerateOnCash, 1);
-
-						// REF-1 B4 (§12.24 v2): under the refinery law the raw refinery total is replaced by
-						// coverage — nudge an expansion when every anchor in reach is served and unserved anchors
-						// still exist beyond reach. Classic/switch-off keep the old count.
-						if (RefineryLawNudge.Due(baseBuilder.RefineryLawProvider(), numRef,
-								baseBuilder.Info.InititalMinimumRefineryCount + baseBuilder.Info.AdditionalMinimumRefineryCount)
-							&& numProd > 0 && BaseBuilderQueueEvalCA.ExpansionBalance(numProd, numTech, RandomTolerance(baseBuilder.Info.ExpansionTolerate), tolerateOnCash, numRef))
-						{
-							var undeployEvenNoBase = BaseBuilderQueueEvalCA.ExpansionBalance(numProd, numTech, RandomTolerance(baseBuilder.Info.ForceExpansionTolerate), tolerateOnCash, numRef);
-
-							foreach (var be in baseBuilder.BaseExpansionModules)
-								be.UpdateExpansionParams(bot, true, undeployEvenNoBase, null);
-						}
-					}
+					NudgeExpansionAfterPlacement(bot, currentBuilding.Item);
 					return true;
 				}
 			}
 
+			return true;
+		}
+
+		// After succesfuly placing a building, nudge BaseExpansionModules to expand.
+		// We want to avoid expanding too often, so we make a judgement by counting buildings.
+		// (REFSCAN D-5: extracted verbatim so the episode emission nudges exactly like the queue sweep.)
+		void NudgeExpansionAfterPlacement(IBot bot, string item)
+		{
+			if (baseBuilder.Info.ProductionTypes.Contains(item)
+				|| baseBuilder.Info.FragileTypes.Contains(item) || baseBuilder.Info.RefineryTypes.Contains(item))
+			{
+				var numRef = baseBuilder.RefineryBuildings.Actors.Count(a => !a.IsDead) + (baseBuilder.Info.RefineryTypes.Contains(item) ? 1 : 0);
+
+				var numProd = baseBuilder.ProductionBuildings.Actors.Count(a => !a.IsDead) + (baseBuilder.Info.ProductionTypes.Contains(item) ? 1 : 0);
+
+				var numTech = playerBuildings.Count(a => baseBuilder.Info.FragileTypes.Contains(a.Info.Name))
+					+ (baseBuilder.Info.FragileTypes.Contains(item) ? 1 : 0);
+
+				var tolerateOnCash = playerResources.GetCashAndResources() / Math.Max(baseBuilder.Info.PerExpansionTolerateOnCash, 1);
+
+				// REF-1 B4 (§12.24 v2): under the refinery law the raw refinery total is replaced by
+				// coverage — nudge an expansion when every anchor in reach is served and unserved anchors
+				// still exist beyond reach. Classic/switch-off keep the old count.
+				if (RefineryLawNudge.Due(baseBuilder.RefineryLawProvider(), numRef,
+						baseBuilder.Info.InititalMinimumRefineryCount + baseBuilder.Info.AdditionalMinimumRefineryCount)
+					&& numProd > 0 && BaseBuilderQueueEvalCA.ExpansionBalance(numProd, numTech, RandomTolerance(baseBuilder.Info.ExpansionTolerate), tolerateOnCash, numRef))
+				{
+					var undeployEvenNoBase = BaseBuilderQueueEvalCA.ExpansionBalance(numProd, numTech, RandomTolerance(baseBuilder.Info.ForceExpansionTolerate), tolerateOnCash, numRef);
+
+					foreach (var be in baseBuilder.BaseExpansionModules)
+						be.UpdateExpansionParams(bot, true, undeployEvenNoBase, null);
+				}
+			}
+		}
+
+		/// <summary>
+		/// REFSCAN D-5 (sec 2, 4.2): an episode's placement through this manager's emission — the same order,
+		/// the same NotifyPlacement / PlacementOrdered records, the same claim commit (CommitRefineryClaim at the
+		/// site for a class-0 claim, RefinerySiteCommitted for a class-1 site) and the same expansion nudge as the
+		/// queue sweep's refinery path. Called from the bot module tick, not behind the queue-sweep cooldown.
+		/// </summary>
+		internal void EmitEpisodePlacement(IBot bot, ProductionQueue queue, ProductionItem item, CPos cell,
+			RefineryAnchorClaim? claim, ExpansionDemand demand)
+		{
+			var requestRef = demand?.Mcv ?? BaseBuilderQueueEvalCA.FirstRequestedRefinery(baseBuilder.RequestedRefineries);
+			if (requestRef != null && !baseBuilder.RequestedRefineries.ContainsKey(requestRef))
+				requestRef = null;
+
+			var law = baseBuilder.RefineryLawProvider();
+			if (law != null)
+			{
+				// N-2 (587A0D62): the helper returns false only for a null site; an episode always passes a cell.
+				if (claim is { } c)
+					_ = BaseBuilderQueueEvalCA.CommitRefineryClaimOrPark(law, c, cell, demand);
+				else
+					law.RefinerySiteCommitted(cell);
+			}
+
+			if (requestRef != null)
+				baseBuilder.RequestedRefineries.Remove(requestRef);
+
+			refineryClaimed = true;
+			failCount = 0;
+			NotifyPlacement(item.Item, cell, queue.Actor.ActorID, "PlaceBuilding", BuildingType.Refinery, false, null);
+			NotePendingTerminal(queue, item, item.Item, BotQueueTransitionKind.Placed,
+				BotQueueTransitionReason.None, BotQueueCancellationClass.None, cell);
+
+			bot.QueueOrder(new Order("PlaceBuilding", player.PlayerActor, Target.FromCell(world, cell), false)
+			{
+				TargetString = item.Item,
+				ExtraLocation = new CPos(0, 0),
+				ExtraData = queue.Actor.ActorID,
+				SuppressVisualFeedback = true
+			});
+
+			// The nudge reads the building list the sweep refreshes; the episode runs outside the sweep.
+			playerBuildings = world.ActorsHavingTrait<Building>().Where(a => a.Owner == player).ToArray();
+			NudgeExpansionAfterPlacement(bot, item.Item);
+		}
+
+		/// <summary>
+		/// REFSCAN sec 4.3 / 3.6: the episode's only cancel authority — the _08 exhaustion certificate, re-verified
+		/// live with the two-verdict gate, through the same binding and records as the queue sweep's cancel.
+		/// </summary>
+		internal bool EpisodeCertifiedCancel(IBot bot, ProductionQueue queue, ProductionItem item)
+		{
+			if (!CertificateAuthorizes(queue, item.Item, item))
+				return false;
+
+			AIUtils.BotDebug($"{player} cancels {item.Item}: refinery search domain exhausted at tick {world.WorldTick}");
+			var cancelTarget = BaseBuilderQueueEvalCA.CancelBindTarget(queue.AllQueued(), i => i.Item, item.Item, item);
+			NotePendingTerminal(queue, cancelTarget, item.Item, BotQueueTransitionKind.Cancelled,
+				BotQueueTransitionReason.RefineryDomainExhausted, BotQueueCancellationClass.Production);
+			bot.QueueOrder(Order.CancelProduction(queue.Actor, item.Item, 1));
+			EmitQueueTransition(queue, queue.Actor, item, item.Item, QueueCategoryOf(item.Item),
+				BotQueueTransitionKind.Held, BotQueueTransitionReason.RefineryDomainExhausted);
 			return true;
 		}
 
@@ -1879,20 +1983,32 @@ namespace OpenRA.Mods.CA.Traits
 		void TraceLowPowerOverride(ActorInfo power)
 		{
 			if (EconTraceDue("lowpower"))
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): ECON-TRACE lowpower-override {power.Name} {EconTraceState()}");
+#endif
+			}
 		}
 
 		void TraceThresholdOverride(string outcome, ActorInfo pick)
 		{
 			if (EconTraceDue("threshold-" + outcome))
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): ECON-TRACE threshold-override {outcome} {pick?.Name ?? "-"} {EconTraceState()}");
+#endif
+			}
 		}
 
 		// PUSH-1: the conditioned overflow rung's outcomes — armed/declined/picked, same bounded writer.
 		void TraceOverflow(string outcome, ActorInfo pick)
 		{
 			if (EconTraceDue("overflow-" + outcome))
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): ECON-TRACE overflow {outcome} {pick?.Name ?? "-"} {EconTraceState()}");
+#endif
+			}
 		}
 
 		// The bank is over the threshold yet an earlier priority took the queue: name the pre-emptor.
@@ -1903,7 +2019,11 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			if (EconTraceDue("shadow-" + item.Name))
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): ECON-TRACE threshold-shadowed-by {item.Name} {EconTraceState()}");
+#endif
+			}
 		}
 
 		ActorInfo ChooseBuildingToBuild(ProductionQueue queue)
@@ -2020,8 +2140,13 @@ namespace OpenRA.Mods.CA.Traits
 			// threshold rung, below the safety rungs (opening, low power, refinery law, MCV gate).
 			// Candidates are cap-filtered AND power-resolved before a single deterministic draw;
 			// any decline — empty set or policy absent — consumes no RNG.
-			if (BaseBuilderQueueEvalCA.OverflowArmed(overflowPolicy != null && overflowPolicy.IsTraitEnabled(),
-					availableCash, overflowPolicy?.Info.OverflowCash ?? 0))
+			// PROD-IDLE G1: the line is the tier's BotLimits.OverflowCash (12000 - 800 r) when written, else the
+			// carrier's own; the carrier stays the on/off scope (classic has none) and pi_overflow ablates the row.
+			if (BaseBuilderQueueEvalCA.OverflowArmed(
+					overflowPolicy != null && overflowPolicy.IsTraitEnabled() && !ablateOverflow.Off(player, AblationIds.Overflow),
+					availableCash,
+					BaseBuilderQueueEvalCA.OverflowLine(botLimits != null ? botLimits.Info.OverflowCash : -1,
+						overflowPolicy?.Info.OverflowCash ?? 0)))
 			{
 				var pick = BaseBuilderQueueEvalCA.DrawOverflowPick(OverflowProductionCandidates(buildableThings, power),
 					BotRng.For(player, nameof(BaseBuilderQueueManagerCA)));
@@ -2709,7 +2834,9 @@ namespace OpenRA.Mods.CA.Traits
 							// for that owner instead of holding the set hostage until UntilTick.
 							if (BaseBuilderQueueEvalCA.CommitRefineryClaimOrPark(law, c, placed.Location, demand))
 							{
+#if CAMEO_DEV_LOGGING
 								Log.Write("debug", $"AI ({player.ClientIndex}): REF-1 refinery {actorType} at {placed.Location.Value} claims anchor {c.Anchor} field {c.FieldId} tier {c.Tier} gap {placed.Gap} at tick {world.WorldTick}");
+#endif
 								refineryClaimed = true;
 								if (requestRef != null)
 									baseBuilder.RequestedRefineries.Remove(requestRef);
@@ -2727,7 +2854,9 @@ namespace OpenRA.Mods.CA.Traits
 						if (fallback == RefineryFallbackOutcome.Site)
 						{
 							law.RefinerySiteCommitted(fallbackSite.Value);
+#if CAMEO_DEV_LOGGING
 							Log.Write("debug", $"AI ({player.ClientIndex}): REF-2 P1a refinery {actorType} at widened site {fallbackSite.Value} at tick {world.WorldTick}");
+#endif
 							refineryClaimed = true;
 							if (requestRef != null)
 								baseBuilder.RequestedRefineries.Remove(requestRef);
@@ -2770,7 +2899,9 @@ namespace OpenRA.Mods.CA.Traits
 							0, claimer.ExpansionTargetClaimRadius);
 						if (claim.Location != null)
 						{
+#if CAMEO_DEV_LOGGING
 							Log.Write("debug", $"AI ({player.ClientIndex}): EX-2 refinery {actorType} at {claim.Location.Value} claims field {field} at tick {world.WorldTick}");
+#endif
 							refineryClaimed = true;
 							return claim;
 						}
@@ -2870,7 +3001,9 @@ namespace OpenRA.Mods.CA.Traits
 							baseBuilder.Info.MinBaseRadius, baseBuilder.Info.BaseCrawlRadius, bypassAdvisor: crawlLaw != null);
 						if (toward.Location != null)
 						{
+#if CAMEO_DEV_LOGGING
 							Log.Write("debug", $"AI ({player.ClientIndex}): EX-1 BaseCrawl {actorType} at {toward.Location.Value} toward field {crawlAim.Value} at tick {world.WorldTick}");
+#endif
 							return toward;
 						}
 					}

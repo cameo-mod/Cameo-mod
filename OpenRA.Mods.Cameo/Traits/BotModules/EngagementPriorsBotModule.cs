@@ -228,8 +228,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					priors = BotEngagementPriors.Parse(MiniYaml.FromStream(stream, Info.PriorsFile));
 
 				priorsState = "fitted";
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI {player.InternalName}: TIER1 priors: {priors.FactorCount} cells, into-defences {priors.IntoDefencesPermille}‰" +
 					$"{(priors.LedgerHash != null ? $", ledger {priors.LedgerHash} (provenance only — unverifiable in-match)" : "")}");
+#endif
 			}
 			catch (Exception e)
 			{

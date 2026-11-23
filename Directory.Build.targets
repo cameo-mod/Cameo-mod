@@ -1,0 +1,16 @@
+<Project>
+  <!-- The release default is deliberately independent of Configuration. -->
+  <PropertyGroup>
+    <CameoDevLogging Condition="'$(CameoDevLogging)' == ''">false</CameoDevLogging>
+    <DefineConstants Condition="'$(CameoDevLogging)' == 'true'">$(DefineConstants);CAMEO_DEV_LOGGING</DefineConstants>
+  </PropertyGroup>
+
+  <Target Name="ValidateCameoLoggingConfiguration" BeforeTargets="PrepareForBuild">
+    <Error Condition="'$(CameoDevLogging)' != 'true' and '$(CameoDevLogging)' != 'false'"
+           Text="CameoDevLogging must be true or false." />
+    <Error Condition="'$(CameoOfficialPackaging)' == 'true' and '$(CameoDevLogging)' != 'false'"
+           Text="Official packages must exclude development logging." />
+    <Error Condition="'$(CameoOfficialPackaging)' == 'true' and $([System.Text.RegularExpressions.Regex]::IsMatch('$(DefineConstants)', '(^|[;,\s])CAMEO_DEV_LOGGING($|[;,\s])'))"
+           Text="Official packages must not define CAMEO_DEV_LOGGING." />
+  </Target>
+</Project>

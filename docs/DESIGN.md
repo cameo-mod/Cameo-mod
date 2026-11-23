@@ -4852,6 +4852,12 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
 | NewProductionCashThreshold (extra factories above this cash) | 22000 | 20000 | 18000 | 16000 | 14000 | 12000 | 10000 | 8000 | 6000 | 4000 | 2000 |
 | MaximiseProductionCashRequirement (fill every queue above this cash) | 10500 | 9500 | 8500 | 7500 | 6500 | 5500 | 4500 | 3500 | 2500 | 1500 | 500 |
 | AdaptiveCounterWeight (% of combat picks that counter; rounded) | 0 | 5 | 10 | 15 | 20 | 25 | 30 | 35 | 40 | 45 | 50 |
+| SiegeEvaluator StandOffMaxTicks (longest stand-off hold; SIEGE-FIX-01 S2; ai.yaml Min 2850 easiest, Max 1500 cameogod) | 3000 | 2850 | 2700 | 2550 | 2400 | 2250 | 2100 | 1950 | 1800 | 1650 | 1500 |
+| SiegeEvaluator SiegeReengagePct (% squad value must grow after a retreat before re-engaging; SIEGE-FIX-01 S6; Min 38, Max 20) | 40 | 38 | 36 | 34 | 32 | 30 | 28 | 26 | 24 | 22 | 20 |
+| SiegeEvaluator HysteresisBandPct (% squad-value change that serves a changed verdict at once; SIEGE-FIX-01 S3; Min 24, Max 15) | 25 | 24 | 23 | 22 | 21 | 20 | 19 | 18 | 17 | 16 | 15 |
+| EngDrop Trigger B chance (% per due visit; ENGDROP; ai.yaml Easy 55, Hard 100) | 50 | 55 | 60 | 65 | 70 | 75 | 80 | 85 | 90 | 95 | 100 |
+| EngDrop Trigger B interval (ticks between due visits; Easy 495, Hard 225) | 525 | 495 | 465 | 435 | 405 | 375 | 345 | 315 | 285 | 255 | 225 |
+| EngDrop Trigger B initial delay (ticks after match start; Easy 615, Hard 75) | 675 | 615 | 555 | 495 | 435 | 375 | 315 | 255 | 195 | 135 | 75 |
 
 Noob AI tier (NOOB-TIER-01 final ruling): one linear step below easiest (rank -1, extrapolated on the easiest..cameogod line). Where that step is impossible (below the field's floor) noob = easiest: RefineryLimit 1, HarvesterLimit 3, ProductionTypeLimit 1, ConstructionYardLimit 1. Insurance noob = 0 (outside the DynamicBotInsurance ladder). AdaptiveCounterWeight noob = 0. Existing tiers unchanged.
 
@@ -4880,14 +4886,23 @@ Noob AI tier (NOOB-TIER-01 final ruling): one linear step below easiest (rank -1
 * ⛔ **Unit abilities are never gated by bot difficulty or bot type** (maintainer 2026-09-28): spells,
   deploys, micro-management and every other ability a unit has work the same for every bot. A trait
   that must know "is this a bot" uses `GrantConditionOnBotOwnerCA` with NO `Bots:` list (= any bot);
-  a per-tier `Bots:` list is for the difficulty definitions in `ai.yaml` only. Until 2026-09-28 the
+  a per-tier `Bots:` list is for the difficulty definitions in `ai.yaml` and for the feature grants of
+  the ladder (`GrantConditionOnBotOwner` with a `Condition:`), and such a grant must name **all eleven
+  tiers** (`noob` … `cameogod`; several grants of one condition are merged): `ladder_failures` in the
+  audit fails a grant that skips a tier. Until 2026-09-28 the
   WC2 mage's starting-spell grant listed eight of the ten tiers, so Very Easy and Very Hard mages
   never got a spell.
 * Single thresholds, kept on purpose: `PrioritizeBarracksBeforeRefinery` (hard up); the capture,
   engineer, crate-pickup and garrison modules are off for `easiest` only (capabilities, not strength).
 * Guarded by `tools/audit/audit_ai_personalities.py` (`difficulty_scale_failures`): every
   `BotLimits` number and both production multipliers must be written for all ten tiers, on the line,
-  with Hard at 100.
+  with Hard at 100. The canonical ladder audit (`ladder_failures`) covers all eleven tiers, `noob`
+  included, for every family that has tier forms (`BotLimits`, the production multipliers): every
+  field is written on every tier, booleans agree on every tier, numbers are whole and on one
+  equal-step line (a whole number may sit within 0.5 of the line; a fractional tier value fails), a
+  sibling whose `@suffix` is not a tier name fails, and a zero endpoint needs a cited allowance in
+  `tools/audit/ai_ladder_legal_zeros.json`. `test_audit_ai_personalities.py` runs the audit on the real
+  `ai.yaml` and ratchets the rows that are still open, so a new failing row is a red test.
 * ⛔ **Every decision module runs on every tier; only its strength scales** (maintainer 2026-09-30:
   *"I want all difficulties to scale in equal steps"*). A harvested or Cameo decision module (the
   Fransbot services, CA-2 siege, the expansion planner…) is never gated to one tier (`hardbot`,

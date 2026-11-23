@@ -48,7 +48,7 @@ namespace OpenRA.Mods.CA.Traits
 		public int ExpiresTick;
 
 		/// <summary>Next tick the ETA gets recomputed from the MCV's live path (it may detour).</summary>
-		public int NextEtaTick;
+		public BotCooldown NextEtaCooldown;
 
 		/// <summary>Set when the MCV's Transform completed — the new conyard exists and holds place.</summary>
 		public bool Deployed;

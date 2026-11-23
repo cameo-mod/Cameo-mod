@@ -99,6 +99,9 @@ function build_platform()
 	install_mod_assemblies "${TEMPLATE_ROOT}" "${BUILTDIR}" "win-${PLATFORM}" "net6" "${TEMPLATE_ROOT}/${ENGINE_DIRECTORY}"
 
 	cp -Lr "${TEMPLATE_ROOT}/mods/"* "${BUILTDIR}/mods"
+	# Development rules and mods must never ship in the official package.
+	rm -rf "${BUILTDIR}/mods/"*/rules/dev "${BUILTDIR}/mods/cameo-dev"
+	assert_no_dev_content "${BUILTDIR}/mods"
 
 	set_engine_version "${ENGINE_VERSION}" "${BUILTDIR}"
 	if [ "${PACKAGING_OVERWRITE_MOD_VERSION}" == "True" ]; then

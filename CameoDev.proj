@@ -1,0 +1,29 @@
+<Project DefaultTargets="Build">
+  <!-- Use a private output directory: the engine loads mod assemblies next to the executable. -->
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
+    <CameoDevLogging Condition="'$(CameoDevLogging)' == ''">false</CameoDevLogging>
+    <CameoDevOutputPath Condition="'$(CameoDevOutputPath)' == ''">$(MSBuildThisFileDirectory)artifacts/dev-bin/</CameoDevOutputPath>
+    <PythonCommand Condition="'$(PythonCommand)' == ''">python</PythonCommand>
+  </PropertyGroup>
+  <Target Name="Build">
+    <Error Condition="'$(CameoDevLogging)' != 'true'" Text="The DEV entry point requires CameoDevLogging=true." />
+    <Error Condition="'$(CameoOfficialPackaging)' == 'true'" Text="The DEV entry point cannot be used for official packaging." />
+    <MSBuild Projects="CameoMod.sln" Targets="Build" Properties="Configuration=$(Configuration);CameoDevLogging=true;OutputPath=$(CameoDevOutputPath)" />
+    <MSBuild Projects="OpenRA.Mods.Cameo.Dev/OpenRA.Mods.Cameo.Dev.csproj" Targets="Build" Properties="Configuration=$(Configuration);CameoDevLogging=true;OutputPath=$(CameoDevOutputPath)" />
+    <MSBuild Projects="engine/OpenRA.Launcher/OpenRA.Launcher.csproj;engine/OpenRA.Server/OpenRA.Server.csproj;engine/OpenRA.Platforms.Default/OpenRA.Platforms.Default.csproj" Targets="Build" Properties="Configuration=$(Configuration);CameoDevLogging=true;OutputPath=$(CameoDevOutputPath)" />
+    <Error Condition="!Exists('$(MSBuildThisFileDirectory)engine/mods/common')" Text="The engine common mod is missing." />
+    <Error Condition="!Exists('$(MSBuildThisFileDirectory)engine/mods/common-content') or !Exists('$(MSBuildThisFileDirectory)mods/cameo-content')" Text="The content installer mods are missing." />
+    <ItemGroup>
+      <CameoDevContent Include="$(MSBuildThisFileDirectory)mods/cameo/**/*" />
+      <CameoDevCommon Include="$(MSBuildThisFileDirectory)engine/mods/common/**/*" />
+      <CameoDevInstaller Include="$(MSBuildThisFileDirectory)mods/cameo-content/**/*" />
+      <CameoDevCommonContent Include="$(MSBuildThisFileDirectory)engine/mods/common-content/**/*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(CameoDevContent)" DestinationFiles="@(CameoDevContent->'$(CameoDevOutputPath)mods/cameo/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(CameoDevCommon)" DestinationFiles="@(CameoDevCommon->'$(CameoDevOutputPath)mods/common/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(CameoDevInstaller)" DestinationFiles="@(CameoDevInstaller->'$(CameoDevOutputPath)mods/cameo-content/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(CameoDevCommonContent)" DestinationFiles="@(CameoDevCommonContent->'$(CameoDevOutputPath)mods/common-content/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+    <Exec Command="&quot;$(PythonCommand)&quot; -I -B &quot;$(MSBuildThisFileDirectory)tools/ai/generate_cameo_dev_manifest.py&quot; &quot;$(MSBuildThisFileDirectory)mods/cameo&quot; &quot;$(CameoDevOutputPath)mods/cameo-dev/mod.yaml&quot;" />
+  </Target>
+</Project>

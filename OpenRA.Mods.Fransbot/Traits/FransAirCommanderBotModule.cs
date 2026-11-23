@@ -1733,6 +1733,7 @@ namespace OpenRA.Mods.Common.Traits
 				if (airRaidGeometryCacheReuseProofLogged || geometryCacheHits == 0 || !riskRevisionChanged)
 					return;
 				airRaidGeometryCacheReuseProofLogged = true;
+#if CAMEO_DEV_LOGGING
 				OpenRA.Log.Write("debug",
 					$"[AIR RAID BID PERF][WT {world.WorldTick}] player={player} bidder={BidderKey} " +
 					$"cacheProof=FastGeometryReuse raidCapacityMs={elapsedMs:0.00} routeRequests={routeRequests} " +
@@ -1740,11 +1741,13 @@ namespace OpenRA.Mods.Common.Traits
 					$"knownAaZones={knownAaZones.Count} knownAaSignature={diagnostic.KnownAntiAirSignature} " +
 					$"previousRiskRevision={previousRiskRevision} riskRevision={diagnostic.RiskRevision} " +
 					"diagnosticLogWriteExcluded=True");
+#endif
 				return;
 			}
 			if (geometryCacheHits > 0 && riskRevisionChanged)
 				airRaidGeometryCacheReuseProofLogged = true;
 
+#if CAMEO_DEV_LOGGING
 			OpenRA.Log.Write("debug",
 				$"[AIR RAID BID PERF][WT {world.WorldTick}] player={player} bidder={BidderKey} " +
 				$"raidCapacityMs={elapsedMs:0.00} raidMissions={diagnostic.RaidMissionCount} " +
@@ -1757,7 +1760,9 @@ namespace OpenRA.Mods.Common.Traits
 				$"knownAaSnapshotWT={cachedKnownAntiAirWorldTick} combatSnapshotWT={combatIntelService.SnapshotWorldTick} " +
 				$"previousRiskRevision={previousRiskRevision} riskRevision={diagnostic.RiskRevision} " +
 				$"riskRevisionChanged={riskRevisionChanged} diagnosticLogWriteExcluded=True");
+#endif
 
+#if CAMEO_DEV_LOGGING
 			foreach (var candidate in diagnostic.Candidates)
 			{
 				var candidatePathTicks = candidate.Routes.Sum(r => r.Path?.PathElapsedTimestampTicks ?? 0);
@@ -1775,6 +1780,7 @@ namespace OpenRA.Mods.Common.Traits
 					$"availableAttackers={candidate.AvailableAttackers} aaPathRejected={candidate.AntiAirPathRejected} " +
 					$"metricRejected={candidate.MetricRejected} routes=[{string.Join(" | ", candidate.Routes.Select(FormatAirRaidRoutePerformance))}]");
 			}
+#endif
 		}
 
 		void LogRaidCapacityProtection(HashSet<uint> protectedActorIds, uint protectedTargetActorId)

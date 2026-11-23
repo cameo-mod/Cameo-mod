@@ -62,14 +62,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		readonly List<UnitWposWrapper> idleBaseUnits = [];
 		readonly HashSet<Actor> heldUnits = [];
-		int repairScanTicks;
+		BotPeriod repairScanTicks; // STAGGER-06 F1
 		readonly World world;
 
 		public UnitRepairBotModule(Actor self, UnitRepairBotModuleInfo info)
 			: base(info)
 		{
 			world = self.World;
-			repairScanTicks = BotRng.For(self.Owner, nameof(UnitRepairBotModule)).Next(RepairScanInterval);
+			repairScanTicks = BotPeriod.F1(world.WorldTick, BotRng.For(self.Owner, nameof(UnitRepairBotModule)).Next(RepairScanInterval), RepairScanInterval);
 		}
 
 		void IBotNotifyIdleBaseUnits.UpdatedIdleBaseUnits(List<UnitWposWrapper> idleUnits)
@@ -90,10 +90,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (--repairScanTicks > 0)
+			if (!repairScanTicks.TryFire(BotVisitClock.Of(bot)))
 				return;
-
-			repairScanTicks = RepairScanInterval;
 			var leases = BotUnitLeases.Of(bot.Player);
 
 			// Reconcile held units first: release the healed and the gone, renew the rest so the lease

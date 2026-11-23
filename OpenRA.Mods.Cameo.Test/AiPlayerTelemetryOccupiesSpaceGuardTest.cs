@@ -39,7 +39,7 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void MovementSampleSkipsActorsWithoutOccupiesSpace()
 		{
-			var body = Section(Source("mods/Cameo/Traits/AiPlayerTelemetry.cs"),
+			var body = Section(Source("mods/Cameo.Dev/AiPlayerTelemetryDev.cs"),
 				"void MovementSample(", "static (double Distance, string Seat) NearestEnemy(");
 			var guard = body.IndexOf("OccupiesSpace == null", StringComparison.Ordinal);
 			Assert.That(guard, Is.GreaterThanOrEqualTo(0),
@@ -66,7 +66,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			// The site tags are what localized this NRE; a regression that drops the tag makes
 			// the next channel death unfindable again.
-			var telemetry = Source("mods/Cameo/Traits/AiPlayerTelemetry.cs");
+			var telemetry = Source("mods/Cameo.Dev/AiPlayerTelemetryDev.cs");
 			var tick = Section(telemetry, "void ITick.Tick(Actor self)", "void CheckBuildingOwners()");
 			Assert.That(tick, Does.Contain("Fail(e, \"tick\")"));
 		}

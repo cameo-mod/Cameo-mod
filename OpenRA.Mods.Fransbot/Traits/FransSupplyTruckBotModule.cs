@@ -155,7 +155,7 @@ namespace OpenRA.Mods.Common.Traits
 				var recipientResources = target.Owner.PlayerActor.TraitOrDefault<PlayerResources>();
 				var recipientFunds = recipientResources?.GetCashAndResources() ?? -1;
 				var recipientEconomy = target.Owner.PlayerActor.TraitsImplementing<IFransEconomicSaturationService>().FirstOrDefault();
-				AIUtils.BotDebug("{0} is sending {1} to deliver supplies to {2} owned by {3} with {4} total funds; explicit Struggling request {5}.",
+				OpenRA.Mods.CA.AIUtils.BotDebug("{0} is sending {1} to deliver supplies to {2} owned by {3} with {4} total funds; explicit Struggling request {5}.",
 					player, truck, target, target.Owner, recipientFunds, recipientEconomy?.RequestsSupplyCash ?? false);
 				bot.QueueOrder(new Order("DeliverCash", truck, Target.FromActor(target), false));
 			}
@@ -200,7 +200,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (!retryUnconfirmedRequest)
 				productionRequestCooldownTicks = Info.ProductionRequestCooldown;
 
-			AIUtils.BotDebug("{0} requested {1} for an allied supply delivery.", player, supplyTruckType);
+			OpenRA.Mods.CA.AIUtils.BotDebug("{0} requested {1} for an allied supply delivery.", player, supplyTruckType);
 		}
 
 		int CountQueuedSupplyTrucks()

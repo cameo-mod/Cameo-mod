@@ -389,6 +389,8 @@ namespace OpenRA.Mods.CA.Traits
 		TechTree techTree;
 
 		IBotRequestPauseUnitProduction[] requestPause;
+		IBotItemAwareUnitCap[] itemAwareCaps;
+		IBotItemAwareUnitCap[] cappedOut = [];
 		IBotUnitProductionObserver[] unitObservers;
 		int idleUnitCount;
 		int currentQueueIndex = 0;
@@ -410,8 +412,14 @@ namespace OpenRA.Mods.CA.Traits
 			BotUnitRole.Gunship, BotUnitRole.Fighter, BotUnitRole.Bomber
 		};
 
-		int ticks;
-		int openingDefenseTicks;
+		// STAGGER-06 B044 / B045 (TIMER_TABLE_06, R2 keep the freeze): the two never-reset / episode call counters of
+		// IBotTick.BotTick become BotCallPeriod (F3 c0=0, K = FeedbackTime + UnitBuilderInterval). `buildCalls` counts only
+		// the calls that pass both pause guards (the old `ticks++`); `openingDefenseCalls` counts calls inside a base-builder
+		// pause episode and is re-armed (`= default`) when the episode ends (the old `openingDefenseTicks = 0`). A call
+		// under a foreign pause counts for neither, so the gap to the next counted call is frozen time (R2). Not saved:
+		// both restarted at 0 after a load, and a default BotCallPeriod re-arms on its first call.
+		BotCallPeriod buildCalls;
+		BotCallPeriod openingDefenseCalls;
 		int unitDelayModifier = 100;
 		int unitIntervalModifier = 100;
 		bool firstTick = true;
@@ -429,7 +437,18 @@ namespace OpenRA.Mods.CA.Traits
 		// U1 (service-contract §3): the switch-gated fair-service arm and its per-category
 		// rotation cursor over stable queue keys ("actorID|queueType") — a visit resumes
 		// AFTER the last examined producer instead of always re-walking the head.
-		bool FairService => switchesActive && Info.FairProducerService;
+		bool FairService => switchesActive && Info.FairProducerService && !ablateFairProducer.Off(player, AblationIds.FairProducer);
+
+		// ABLATE-01 hooks (DEV-only provider; absent in release = always on): one cached answer per row.
+		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery;
+
+		// PR-2 queue depth (fair path only): world ticks between this bot's last two passes. Round-robin makes it long;
+		// a single-slot queue is topped up while its loaded build time is shorter than this gap (QueueDepthCA).
+		// 0 until two passes were seen, which keeps the old "fill only an empty queue" rule on the first pass.
+		int lastPassTick = -1;
+		int visitGapTicks;
+		bool DepthOn => FairService && visitGapTicks > 0 && !ablateQueueDepth.Off(player, AblationIds.QueueDepth);
+		bool DerivedWeightsOn => Info.UseDerivedUnitWeights && !ablateDerivedWeights.Off(player, AblationIds.DerivedWeights);
 
 		// U2 (Sol EB513352): the intent ledger's coverage-retaining semantics arm
 		// only behind their own default-off switch — OFF keeps request removal,
@@ -439,6 +458,10 @@ namespace OpenRA.Mods.CA.Traits
 		readonly Dictionary<string, string> serviceCursorByCategory = new(StringComparer.Ordinal);
 
 		int CounterWeight => botLimits?.Info.AdaptiveCounterWeight ?? 0;
+
+		// PROD-IDLE_PLAN_05: the TOTAL share of all unnamed buildable roles together, on the difficulty
+		// line (10 + r). Negative (line not written) = no unnamed share. Read by both RoleMix consumers.
+		int RoleMixUnnamedPct => botLimits != null ? botLimits.Info.RoleMixUnnamedTotalPct : -1;
 
 		int MaximiseProductionCash => botLimits != null && botLimits.Info.MaximiseProductionCashRequirement >= 0
 			? botLimits.Info.MaximiseProductionCashRequirement : Info.MaximiseProductionCashRequirement;
@@ -614,6 +637,7 @@ namespace OpenRA.Mods.CA.Traits
 			// so we must query player traits from self, which refers
 			// for bot modules always to the Player actor.
 			requestPause = self.TraitsImplementing<IBotRequestPauseUnitProduction>().ToArray();
+			itemAwareCaps = self.TraitsImplementing<IBotItemAwareUnitCap>().ToArray();
 			playerResources = self.Owner.PlayerActor.Trait<PlayerResources>();
 			techTree = self.Owner.PlayerActor.TraitOrDefault<TechTree>();
 			compositionProvider = self.TraitsImplementing<IBotEnemyCompositionProvider>().FirstOrDefault();
@@ -683,23 +707,31 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			var baseBuilderPause = requestPause.FirstOrDefault(rp => ReferenceEquals(rp, baseBuilder));
-			if (requestPause.Any(rp => !ReferenceEquals(rp, baseBuilderPause) && rp.IsTraitEnabled() && rp.PauseUnitProduction))
+
+			// PROD-IDLE item-aware cap: under the fair service a cap that says which items it counts stops only those
+			// (ShouldBuild below), so an army parked at its cap can still rebuild a harvester or MCV. Every other vote,
+			// and every vote under the legacy service, still stops all unit production here.
+			cappedOut = FairService ? ItemAwareCapsReached() : [];
+			if (requestPause.Any(rp => !ReferenceEquals(rp, baseBuilderPause) && rp.IsTraitEnabled() && rp.PauseUnitProduction
+				&& !(FairService && rp is IBotItemAwareUnitCap)))
 				return;
 
+			var clock = BotVisitClock.Of(bot);
 			if (baseBuilderPause != null && baseBuilderPause.PauseUnitProduction)
 			{
-				if (++openingDefenseTicks % (FeedbackTime + Info.UnitBuilderInterval) == 0)
+				if (openingDefenseCalls.Call(clock.VisitTick, clock.Elapsed, FeedbackTime + Info.UnitBuilderInterval))
 					TryBuildOpeningDefense(bot);
 
 				return;
 			}
 
-			openingDefenseTicks = 0;
+			openingDefenseCalls = default;
 
-			ticks++;
-
-			if (ticks % (FeedbackTime + Info.UnitBuilderInterval) == 0)
+			if (buildCalls.Call(clock.VisitTick, clock.Elapsed, FeedbackTime + Info.UnitBuilderInterval))
 			{
+				visitGapTicks = lastPassTick < 0 ? 0 : world.WorldTick - lastPassTick;
+				lastPassTick = world.WorldTick;
+
 				UpdateComposition();
 
 				// U1 (Sol F1): one ephemeral reservation batch shared by the external
@@ -969,6 +1001,13 @@ namespace OpenRA.Mods.CA.Traits
 			var start = UnitProducerServiceCA.ResumeIndex(keys, serviceCursorByCategory.GetValueOrDefault(category));
 			var offers = UnitProducerServiceCA.OfferBudget(queues.Count, maxQueues);
 
+			// PR-2: single-slot queues are topped up to cover the gap to this bot's next pass; extra items are
+			// paid from spare cash only, so the unpaid remainder of what is already queued is protected.
+			// Parallel-slot queues keep their own slots. Off (no gap yet, ablated) = the old empty-queue rule.
+			var depth = DepthOn;
+			var unpaidQueued = depth ? UnpaidQueuedCost() : 0L;
+			// (the K5 reserve gate reads the same per-tick figure through ReserveAdmits)
+
 			// P4: armed-infantry floor — in-pass emissions count toward it so one batch
 			// cannot overshoot; the census is one tick-cached scan, skipped when off.
 			var armedInfantryFloor = Info.CombatInfantryFloor;
@@ -985,8 +1024,15 @@ namespace OpenRA.Mods.CA.Traits
 				// a producer the budget stopped us from reaching; that one stays in rotation.
 				serviceCursorByCategory[category] = keys[index];
 
-				var freeSlots = LiveFreeSlots(queue);
+				var depthQueue = depth && queue is not IHasParallelQueueSlots;
+				var queuedItems = depthQueue ? queue.AllQueued().Count() : 0;
+				var loadedTicks = depthQueue ? LoadedBuildTicks(queue) : 0L;
+				var freeSlots = depthQueue ? QueueDepthCA.FreeSlots(queuedItems, loadedTicks, visitGapTicks) : LiveFreeSlots(queue);
 				if (freeSlots <= 0)
+					continue;
+
+				// Item-aware cap reached: a queue that can build nothing the cap leaves uncounted costs no offer and no scan.
+				if (cappedOut.Length > 0 && !queue.BuildableItems().Any(a => !CappedOut(a)))
 					continue;
 
 				offers--;
@@ -999,6 +1045,11 @@ namespace OpenRA.Mods.CA.Traits
 					// Saturation lapses mid-fill: stop slotting the moment the bank drops below
 					// the bar. The reserved bank counts — emitted orders are spent cash.
 					if (saturated && !ProductionSaturationCA.Saturated(batch.BankLeft, BankSaturationThreshold))
+						break;
+
+					// PR-2: the queue (plus what this pass already ordered into it) covers the gap: stop.
+					var held = queuedItems + batch.PendingOf(queue);
+					if (depthQueue && QueueDepthCA.Covered(held, loadedTicks, visitGapTicks))
 						break;
 
 					// P4: below the armed-infantry floor this queue prefers the best
@@ -1086,7 +1137,8 @@ namespace OpenRA.Mods.CA.Traits
 					// Sol F2: an unaffordable pick retries the remaining candidates — the
 					// batch keeps the bank accounting so a cheaper feasible one can land.
 					var cost = Math.Max(0, queue.GetProductionCost(unit));
-					if (!batch.Affords(cost))
+					if (!batch.Affords(cost) || !ReserveAdmits(batch, cost)
+						|| depthQueue && held > 0 && !QueueDepthCA.CashAdmits(batch.BankLeft, unpaidQueued, cost))
 					{
 						Reject();
 						continue;
@@ -1097,6 +1149,8 @@ namespace OpenRA.Mods.CA.Traits
 					NotifyStarted(name, queue.Info.Type);
 					counters.Record(unit);
 					batch.Reserve(queue, cost);
+					if (depthQueue)
+						loadedTicks += queue.GetBuildTime(unit, BuildableInfo.GetTraitForQueue(unit, queue.Info.Type));
 					SpendLimitHeadroom(batch, name);
 					if (isAircraft)
 					{
@@ -1116,6 +1170,75 @@ namespace OpenRA.Mods.CA.Traits
 
 		static int LiveFreeSlots(ProductionQueue queue) =>
 			queue is IHasParallelQueueSlots p ? p.AvailableSlots : (queue.AllQueued().Any() ? 0 : 1);
+
+		// PR-2: build time still loaded in a queue. An item that has not started keeps the placeholder
+		// RemainingTime of 1 until it reaches the head, so it counts its full build time instead.
+		static long LoadedBuildTicks(ProductionQueue queue)
+		{
+			long ticks = 0;
+			foreach (var item in queue.AllQueued())
+				ticks += item.Started ? item.RemainingTime : queue.GetBuildTime(item.ActorInfo, item.BuildableInfo);
+
+			return ticks;
+		}
+
+		// PLAN_03 section 2.2: cash that EVERY queued item of the player (units, buildings, defences) has not paid yet
+		// (RemainingCost per item, as TF-2's UpdateMobileReserve counts it). One scan per world tick: a pass and its
+		// categories run inside one tick, and this pass's own orders are in the batch, never in this figure.
+		// Staleness bound (Code Monkey F1, option b): orders are resolved after every module's tick, so the queues this
+		// scan reads are the same for all modules in a tick; what it cannot see are the orders ANOTHER module (the base
+		// builder, via the K6 vote) issued earlier in the same tick, i.e. at most the cost of that module's orders of
+		// this one tick. The owner's per-tick commitment ledger closes it (G1b, PLAN_03 section 2.4).
+		long UnpaidQueuedCost()
+		{
+			if (cachedUnpaidTick != world.WorldTick)
+			{
+				cachedUnpaidTick = world.WorldTick;
+				cachedUnpaid = SpendCommitmentsCA.UnpaidQueued(world, player);
+			}
+
+			return cachedUnpaid;
+		}
+
+		int cachedUnpaidTick = -1;
+		long cachedUnpaid;
+
+		// The item-aware caps that are pausing right now (empty almost always). Votes are throttled by their owner.
+		IBotItemAwareUnitCap[] ItemAwareCapsReached()
+		{
+			if (itemAwareCaps.Length == 0)
+				return [];
+
+			List<IBotItemAwareUnitCap> reached = null;
+			foreach (var cap in itemAwareCaps)
+				if (cap is IBotRequestPauseUnitProduction vote && vote.IsTraitEnabled() && vote.PauseUnitProduction)
+					(reached ??= []).Add(cap);
+
+			return reached?.ToArray() ?? [];
+		}
+
+		// True when a pausing cap counts this item; a name the ruleset does not know counts as capped (ItemAwareCapCA).
+		bool CappedOut(string name) =>
+			ItemAwareCapCA.CappedOut(cappedOut, world.Map.Rules.Actors.TryGetValue(name, out var info) ? info : null);
+
+		bool CappedOut(ActorInfo info) => ItemAwareCapCA.CappedOut(cappedOut, info);
+
+		// PROD-IDLE K5 (PLAN_03 section 2.3): a unit order of the fair path passes the general gate
+		// C - x >= max(M, E, P(r)) + R. M, E and R are 0 here: no owner is mounted and units are what M reserves for.
+		// C = the bank left after this pass's orders, net of every unpaid queued item. P is the tier's
+		// BotLimits.ProductionCashReserve (300 x (11 - r)) scaled by the Steamroller lean (PLAN_04 row 4); an unset line (-1)
+		// fails closed. pi_recovery ablates the term.
+		bool ReserveAdmits(ProducerServiceBatch batch, int cost)
+		{
+			if (ablateRecovery.Off(player, AblationIds.Recovery))
+				return true;
+
+			var line = botLimits != null
+				? RecoverySpendPolicyCA.EffectiveReserve(botLimits.Info.ProductionCashReserve, BotPersonalityLeads.Lean(leadProviders, "steamroller"))
+				: -1;
+			return RecoverySpendPolicyCA.Admits(SpendCommitmentsCA.Available(batch.BankLeft, UnpaidQueuedCost()), cost, 0, 0, 0, false,
+				RecoverySpendPolicyCA.Admission.General, line);
+		}
 
 		// U1: per-name cap headroom shared across the batch — UnitLimits counts only
 		// living actors; in-pass emissions spend the headroom the census cannot see.
@@ -1221,7 +1344,8 @@ namespace OpenRA.Mods.CA.Traits
 						.Where(q => q.BuildableItems().Any(b => b.Name == name))
 						.FirstOrDefault(q =>
 							batch.SlotsFree(q, LiveFreeSlots(q)) > 0 &&
-							batch.Affords(q.GetProductionCost(actorInfo)));
+							batch.Affords(q.GetProductionCost(actorInfo)) &&
+							ReserveAdmits(batch, q.GetProductionCost(actorInfo)));
 				}
 				else
 				{
@@ -1348,9 +1472,8 @@ namespace OpenRA.Mods.CA.Traits
 			var queues = Info.UnitQueues.SelectMany(c => AIUtils.FindQueues(player, c)).Distinct().ToList();
 			var feasible = queues.Any(q => q.Enabled);
 			var capacity = queues.Any(q => q is IHasParallelQueueSlots p ? p.AvailableSlots > 0 : !q.AllQueued().Any());
-			if (world.WorldTick >= nextPoolCheckTick)
+			if (BotPeriod.CarryDue(ref nextPoolCheckTick, world.WorldTick, FeedbackTime))
 			{
-				nextPoolCheckTick = world.WorldTick + FeedbackTime;
 				poolNeedsReplenish = OffensivePoolNeedsReplenish();
 			}
 
@@ -1411,6 +1534,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool ShouldBuild(string name, bool ignoreUnitsToBuild, string queueCategory = null)
 		{
+			if (cappedOut.Length > 0 && CappedOut(name))
+				return false;
+
 			var unitsToBuildShares = GetUnitsToBuildForCategory(queueCategory);
 			if (!ignoreUnitsToBuild && unitsToBuildShares != null && !unitsToBuildShares.ContainsKey(name))
 				return false;
@@ -1569,15 +1695,17 @@ namespace OpenRA.Mods.CA.Traits
 		// CA-3 (AI_ARCHITECTURE.md 12.5): the enabled personality's RoleMix is a target
 		// army composition by role, in percent of own mobile combat units. Each pick
 		// fills the largest deficit — counter production still gets first refusal, and
-		// a fully satisfied mix falls through to the proportional pick. Roles the mix
-		// does not name get RoleMixRoleFloorPct whenever this queue can serve them.
+		// a fully satisfied mix falls through to the proportional pick. The unnamed roles
+		// this queue can serve share RoleMixUnnamedTotalPct between them (transport and
+		// air_transport excluded); the named roles keep their relative weights inside the
+		// rest (PROD-IDLE_PLAN_05, DerivedUnitWeights.RoleShares: one function for both consumers).
 		// The provider resolves lazily: BotUnitRoles is a genericbot-gated
 		// ConditionalTrait whose condition settles after Created.
 		ActorInfo ChooseRoleDeficit(IEnumerable<ActorInfo> buildableThings, Dictionary<string, int> unitsToBuildShares, bool excludeLimited,
 			HashSet<string> retrySkip = null)
 		{
 			var manager = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().FirstEnabledTraitOrDefault();
-			var mix = manager?.Info.UseRoleMix == true ? manager.Info.RoleMix : null;
+			var mix = manager?.Info.UseRoleMix == true && !ablateRoleMix.Off(player, AblationIds.RoleMix) ? manager.Info.RoleMix : null;
 			if (mix == null || mix.Count == 0)
 				return null;
 
@@ -1603,13 +1731,14 @@ namespace OpenRA.Mods.CA.Traits
 			// The deficit domain is the combat taxonomy: list/doctrine roles (guerrilla,
 			// firesupport, navalunit, ...) and the building target tags never become
 			// mix dimensions — a unit counts toward exactly one primary role.
-			foreach (var role in mix.Keys
-				.Concat(roles.RoleMembers.Keys)
-				.Where(r => BotUnitRole.CombatRoles.Contains(r))
-				.Distinct(StringComparer.Ordinal)
-				.Select(r => (Role: r, Target: mix.TryGetValue(r, out var t) ? t : manager.Info.RoleMixRoleFloorPct))
+			// The gate for the unnamed set is the table this pick is made from, the same table the
+			// options below are filtered by. S = 0 gives an empty set and null, as an empty mix does.
+			var roleShares = DerivedUnitWeights.RoleShares(mix, RoleMixUnnamedPct, roles, unitsToBuildShares.ContainsKey);
+			foreach (var role in roleShares
+				.Select(kv => (Role: kv.Key, Target: kv.Value))
 				.Where(rt => rt.Target > 0)
-				.OrderByDescending(rt => rt.Target - 100.0 * counts.GetValueOrDefault(rt.Role) / Math.Max(1, total)))
+				.OrderByDescending(rt => rt.Target - 100.0 * counts.GetValueOrDefault(rt.Role) / Math.Max(1, total))
+				.ThenBy(rt => rt.Role, StringComparer.Ordinal))
 			{
 				var members = roles.RoleMembers.GetValueOrDefault(role.Role);
 				if (members == null || members.Count == 0)
@@ -1663,13 +1792,13 @@ namespace OpenRA.Mods.CA.Traits
 			SquadManagerBotModuleCA manager = null;
 			IReadOnlyDictionary<string, int> mix = null;
 			IBotUnitRoles roles = null;
-			if (compositionWeights == null && Info.UseDerivedUnitWeights &&
+			if (compositionWeights == null && DerivedWeightsOn &&
 				(manager = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().FirstEnabledTraitOrDefault()) != null &&
 				(mix = manager.Info.RoleMix) != null && mix.Count != 0)
 				roles = unitRoles ??= player.PlayerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
 
-			return derivedUnitWeights.Select(Info.UseDerivedUnitWeights, compositionWeights, Info.UnitsToBuild,
-				mix, manager?.Info.RoleMixRoleFloorPct ?? 0, roles, DerivedUnitStrength);
+			return derivedUnitWeights.Select(DerivedWeightsOn, compositionWeights, Info.UnitsToBuild,
+				mix, RoleMixUnnamedPct, roles, DerivedUnitStrength);
 		}
 
 		// A candidate's strength is read off its own type profile — no enemy is ever

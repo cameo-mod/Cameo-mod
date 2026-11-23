@@ -46,6 +46,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using OpenRA.Graphics;
 using OpenRA.Mods.CA;
+using BotSlotPhases = OpenRA.Mods.CA.Traits.BotSlotPhases;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 using CAAIUtils = OpenRA.Mods.CA.AIUtils;
@@ -536,10 +537,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			horizon.Clear();
 			territoryLastBaseRef = null;
 			territoryLastEnemyCount = -1;
-			territoryNextRefreshTick = world.WorldTick + BotRng.For(player, nameof(TacticalMapBotModule)).Next(interval);
+			territoryNextRefreshTick = PhasedNextRefresh(interval, BotRng.For(player, nameof(TacticalMapBotModule)).Next(interval));
 			regionOwners = [];
-			regionOwnershipNextRefreshTick = world.WorldTick + BotRng.For(player, nameof(TacticalMapBotModule)).Next(interval);
+			regionOwnershipNextRefreshTick = PhasedNextRefresh(interval, BotRng.For(player, nameof(TacticalMapBotModule)).Next(interval));
 		}
+
+		// QW-B: the territory and region-ownership refreshes land on the bot's phase of the interval when its type
+		// phase-offsets its timers. The caller always draws from BotRng first and passes the value in, so the stream
+		// position (and every later pick on this module's stream) is the same with the flag on or off; the draw is
+		// only discarded when a phase is used.
+		int PhasedNextRefresh(int interval, int draw) =>
+			NextRefreshTick(world.WorldTick, interval, draw, BotSlotPhases.TryResolve(player, interval, out var phase), phase);
+
+		// Pure, for tests: today's `now + draw`, or the first tick at or after `now` on the bot's phase.
+		internal static int NextRefreshTick(int now, int interval, int draw, bool phased, int phase) =>
+			phased ? BotSlotPhases.NextDue(now, interval, phase) : now + draw;
 
 		// Adopt a shared topology built by another bot: reference the heavy data, copy the small lists.
 		void Adopt(SharedZoneTopology sh)
@@ -2292,6 +2304,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void TickTerritoryRefresh()
 		{
+			// STAGGER-06 D076: restart form, exact at N = 1 by construction (the reset seeds due = r + BotRng, which can be r, and
+			// a late first visit must reload to v + K, not carry the old grid). At N > 1 the reload is anchored to the visit.
 			if (world.WorldTick < territoryNextRefreshTick)
 				return;
 
@@ -2327,6 +2341,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// </summary>
 		void TickRegionOwnershipRefresh()
 		{
+			// STAGGER-06 D077: restart form as D076 (the regions guard stays first and does not move the deadline).
 			if (regions.Count == 0 || world.WorldTick < regionOwnershipNextRefreshTick)
 				return;
 

@@ -11,6 +11,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 
@@ -90,15 +91,6 @@ namespace OpenRA.Mods.CA.Traits
 	}
 
 	/// <summary>
-	/// Receives every mission record, e.g. Cameo's AiMissionLogWriter (World actor), which appends
-	/// `cameo-ai-missions.jsonl` record-only (DESIGN §21.1). Implemented on the World actor.
-	/// </summary>
-	public interface IBotMissionRecordSink
-	{
-		void MissionRecorded(BotMissionRecord record);
-	}
-
-	/// <summary>
 	/// MC1 (AI_MASTER_PLAN §3): the ONE writer of mission-card transitions for every bot stack — the genericbot squad
 	/// layer, the master AI, the MCV and engineer owners, and the vendored Fransbot broker all emit through here, so
 	/// both logs share one line format and one archive format. It never changes a decision: one plain-text debug.log
@@ -151,12 +143,9 @@ namespace OpenRA.Mods.CA.Traits
 
 			var world = record.Player.World;
 			record.Tick = world.WorldTick;
-			Log.Write("debug", record.Event is BotMissionEvent e
-				? FormatEventLine(record.Player.InternalName, record.MissionId, e, record.Reason, record.Executor, record.Tick)
-				: FormatLine(record.Player.InternalName, record.MissionId, record.Attempt, record.State, record.Reason, record.Executor, record.Tick));
-
-			foreach (var sink in world.WorldActor.TraitsImplementing<IBotMissionRecordSink>())
-				sink.MissionRecorded(record);
+			var hub = world.WorldActor.TraitOrDefault<CameoLogHub>();
+			if (hub != null && hub.Sink.Enabled)
+				hub.Sink.MissionRecorded(MissionEvent.Detach(record, PlayerIdentity.Of(record.Player)));
 		}
 	}
 
@@ -179,7 +168,7 @@ namespace OpenRA.Mods.CA.Traits
 		// Answer ids released by a pivot, keyed per-player so the cooldown survives the
 		// personality-conditioned SquadManagerBotModuleCA instance rotating out — a fresh
 		// instance's own map is empty and would re-draft the same standing request.
-		readonly Dictionary<string, int> answerCooldownUntil = new();
+		readonly Dictionary<string, BotCooldown> answerCooldowns = new();
 
 		// Highest attempt number seen per mission id — attempt numbering lives here so a
 		// personality rotation can't re-issue attempt 1 and collide the (mission, attempt)
@@ -203,12 +192,12 @@ namespace OpenRA.Mods.CA.Traits
 
 		public void CoolAnswer(string missionId, int untilTick)
 		{
-			answerCooldownUntil[missionId] = untilTick;
+			answerCooldowns[missionId] = new BotCooldown { Due = untilTick };
 		}
 
 		public bool AnswerCooling(string missionId, int tick)
 		{
-			return answerCooldownUntil.TryGetValue(missionId, out var until) && tick < until;
+			return answerCooldowns.TryGetValue(missionId, out var cooldown) && !cooldown.Ready(tick);
 		}
 
 		public void Note(BotMissionRecord record)

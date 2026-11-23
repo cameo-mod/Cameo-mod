@@ -10,6 +10,7 @@
 
 using System;
 using System.Collections.Generic;
+using OpenRA.Mods.CA;
 
 namespace OpenRA.Mods.Cameo.Traits.BotModules
 {
@@ -542,7 +543,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public int ForceStartTick { get; set; }
 
 		/// <summary>STALL-FIX-01: no further forced poll before this tick (one forced pass per relist epoch).</summary>
-		public int ForceNotBeforeTick { get; private set; } = int.MinValue;
+		BotCooldown forceNotBeforeCooldown = new() { Due = int.MinValue };
 
 		/// <summary>STALL-FIX-01: how many forced polls this scan has run (diagnostics).</summary>
 		public int ForcedPolls { get; private set; }
@@ -588,8 +589,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// certificate must ALSO belong to a second Exhausted verdict at least one relist epoch after the first
 		/// of an unbroken chain — the first Exhausted only holds.
 		/// </summary>
-		public bool CancelCertificateCurrent(int forceAfterTicks) =>
-			CertificateCurrent() && (forceAfterTicks <= 0 || ExhaustedConfirmed);
+		public bool CancelCertificateCurrent(int forceAfterTicks) => CancelCertificateCurrent(forceAfterTicks > 0);
+
+		/// <summary>
+		/// REFSCAN sec 3.6 (F1): the cancel gate on its own knob — <c>CertificateCurrent() &amp;&amp; (!requireTwo ||
+		/// ExhaustedConfirmed)</c>, where the owner passes <c>requireTwo = RefineryCancelRequiresTwoVerdicts ||
+		/// RefineryFallbackForceAfterTicks &gt; 0</c>, so the two-verdict rule never follows the force knob alone.
+		/// </summary>
+		public bool CancelCertificateCurrent(bool requireTwo) =>
+			CertificateCurrent() && (!requireTwo || ExhaustedConfirmed);
 
 		/// <summary>STALL-FIX-01 R3: Chebyshev distance in cells (integer), the metric of the scan's own gap rule.</summary>
 		public static int ChebyshevCells(CPos a, CPos b) => Chebyshev(a.X - b.X, a.Y - b.Y);
@@ -602,6 +610,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return dx * dx + dy * dy;
 		}
 
+#if CAMEO_DEV_LOGGING
 		/// <summary>
 		/// STALL-FIX-01: the forced-poll telemetry line (record only; no decision reads any part of it). A Site
 		/// carries its distance from the base reference in cells (R3), an Exhausted its chain position and
@@ -621,6 +630,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			return $"AI ({playerIndex}): STALL-FIX-01 refinery fallback scan {item} on producer {producerId} forced after {deferredTicks} deferred ticks (bound {bound}, force #{forcedPolls}): {verdict}{where}, work {work}, epochs {epochs}, exhausted chain {exhaustedChain}, cancel gate {(confirmed ? "satisfied" : "not satisfied")} at tick {now}";
 		}
+#endif
 
 		/// <summary>
 		/// STALL-FIX-01: true while the scan sits inside the epoch wait of a CONCLUSIVE verdict it already
@@ -634,12 +644,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// STALL-FIX-01: the force bound. Off (<paramref name="forceAfterTicks"/> &lt;= 0) never forces.
 		/// Otherwise the scan is forced once it has run for at least <paramref name="forceAfterTicks"/> game
 		/// ticks since <see cref="ForceStartTick"/> without a conclusive verdict in force, and at most once per
-		/// relist epoch (<see cref="ForceNotBeforeTick"/>). Pure integer arithmetic, no RNG.
+		/// relist epoch (<see cref="forceNotBeforeCooldown"/>). Pure integer arithmetic, no RNG.
 		/// </summary>
 		public bool ForceDue(int forceAfterTicks, int now) =>
 			forceAfterTicks > 0
 				&& now - ForceStartTick >= forceAfterTicks
-				&& now >= ForceNotBeforeTick
+				&& forceNotBeforeCooldown.Ready(now)
 				&& !ReplayingConclusiveVerdict(now);
 
 		/// <summary>
@@ -661,7 +671,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			waitingVerdict = Verdict.Deferred;
 			certIssued = false;
 			ForcedPolls++;
-			ForceNotBeforeTick = now + relistEpochTicks;
+			forceNotBeforeCooldown.Start(now, relistEpochTicks);
 			return Poll(int.MaxValue, now, snapshotAtPassStart, out site);
 		}
 

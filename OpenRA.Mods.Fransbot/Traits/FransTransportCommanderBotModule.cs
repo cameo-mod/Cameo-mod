@@ -326,6 +326,12 @@ namespace OpenRA.Mods.Common.Traits
 			public int LastBoardingProgressTick;
 			public string RunMissionId;
 			public bool IsRunMission => RunLegs != null;
+
+			// CAMEO-LOCAL: ENGDROP - hard exclusion geometry of this run, its generation (RequestAbort identity) and the one-shot abort flag.
+			public DropConstraints Constraints;
+			public bool NoProduction; // Trigger A: this run never requests a transport build, from any caller
+			public int RunGeneration;
+			public bool AbortRequested;
 			public readonly int MissionStartedTick;
 			public int StartedTick;
 			public int LastProductionRequestTick = -1;
@@ -1042,7 +1048,13 @@ namespace OpenRA.Mods.Common.Traits
 		/// TransportMission drives the craft; Distinct() in the manage loop keeps it single-owner.
 		/// </summary>
 		bool IFransCaptureTransportService.TryRequestCaptureRun(
-			IBot bot, IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets)
+			IBot bot, IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets) =>
+			TryRequestCaptureRunCore(bot, passengers, targets, queueProduction: true);
+
+		/// <summary>The run admission. queueProduction false = ENGDROP Trigger A: an existing craft or a refusal, never a build.</summary>
+		bool TryRequestCaptureRunCore(
+			IBot bot, IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets, bool queueProduction,
+			DropConstraints constraints = null, IReadOnlyList<CPos> vettedRoute = null)
 		{
 			using var _ = BotIssuer.IssueAs(IssuerName);
 			if (bot == null || passengers == null || targets == null ||
@@ -1072,6 +1084,13 @@ namespace OpenRA.Mods.Common.Traits
 				reusableRoundTrip: false, out var existing) || existing != null)
 				return false;
 
+			// CAMEO-LOCAL: ENGDROP - bind the route Trigger A vetted to this commit: the craft the commit would use must plan exactly that
+			// journey now, else the run is refused before any state or lease is touched.
+			if (vettedRoute != null &&
+				(!FindStartableCraft(passengers, targets, constraints ?? DropConstraints.None, out var vetCraft, out var vetPlan) ||
+				PlanJourney(vetCraft, vetPlan) is not { } vetJourney || !vetJourney.SequenceEqual(vettedRoute)))
+				return false;
+
 			// §19.6 order-gate compatibility: whoever drives a unit must hold its lease, so each leg's
 			// lease moves from the consumer (the seam's Capture claim) to this module for the ride —
 			// boarding orders then count as owned. The handoff is all-or-nothing so the seam's
@@ -1097,7 +1116,10 @@ namespace OpenRA.Mods.Common.Traits
 			{
 				RunLegs = legs,
 				RunTargetByPassenger = legs.ToDictionary(l => l.Passenger, l => l.Target),
-				RunMissionId = $"transport:{legs[0].Passenger.ActorID}"
+				RunMissionId = $"transport:{legs[0].Passenger.ActorID}",
+				Constraints = constraints, // CAMEO-LOCAL: ENGDROP
+				NoProduction = !queueProduction,
+				RunGeneration = ++runGeneration
 			};
 
 			// Commit only when the planner can put a real craft on the run NOW: a craft that
@@ -1108,7 +1130,8 @@ namespace OpenRA.Mods.Common.Traits
 			{
 				foreach (var leg in legs)
 					leases?.Release(leg.Passenger, LeaseOwner);
-				RequestBestTransport(bot, mission, landPathAvailable: true);
+				if (queueProduction)
+					RequestBestTransport(bot, mission, landPathAvailable: true);
 				return false;
 			}
 
@@ -1193,6 +1216,38 @@ namespace OpenRA.Mods.Common.Traits
 		bool IBotCaptureTransportProvider.TryRequestCaptureRun(IBot bot, IReadOnlyList<Actor> passengers,
 			IReadOnlyList<Actor> targets) =>
 			AsSelf(() => ((IFransCaptureTransportService)this).TryRequestCaptureRun(bot, passengers, targets));
+
+		// CAMEO-LOCAL: ENGDROP - constrained run requests, side-effect-free readiness and RequestAbort (see the ENGDROP block below).
+		bool IBotCaptureTransportProvider.CanStartCaptureRun(IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets,
+			DropConstraints constraints) =>
+			AsSelf(() => CanStartConstrainedRun(passengers, targets, constraints));
+
+		bool IBotCaptureTransportProvider.TryPlanCaptureRoute(IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets,
+			DropConstraints constraints, out IReadOnlyList<CPos> route) =>
+			TryPlanConstrainedRouteAsSelf(passengers, targets, constraints, out route);
+
+		bool TryPlanConstrainedRouteAsSelf(IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets, DropConstraints constraints, out IReadOnlyList<CPos> route)
+		{
+			using var _ = BotIssuer.IssueAs(IssuerName);
+			return TryPlanConstrainedRoute(passengers, targets, constraints, out route);
+		}
+
+		bool IBotCaptureTransportProvider.TryRequestConstrainedCaptureRun(IBot bot, IReadOnlyList<Actor> passengers,
+			IReadOnlyList<Actor> targets, DropConstraints constraints, bool queueProduction, IReadOnlyList<CPos> vettedRoute, out string runIdentity)
+		{
+			runIdentity = null;
+			if (passengers == null || targets == null || passengers.Count == 0 || passengers.Count != targets.Count)
+				return false;
+
+			var accepted = AsSelf(() => TryRequestCaptureRunCore(bot, passengers, targets, queueProduction, constraints ?? DropConstraints.None, vettedRoute));
+			if (accepted && missions.TryGetValue(passengers[0], out var mission))
+				runIdentity = RunIdentity(mission);
+
+			return accepted;
+		}
+
+		bool IBotCaptureTransportProvider.RequestAbort(IBot bot, string runIdentity, Actor passenger, string reason) =>
+			AsSelf(() => AbortRun(bot, runIdentity, passenger, reason));
 
 		bool IBotCaptureTransportProvider.IsHandlingPassenger(Actor passenger) =>
 			AsSelf(() => ((IFransCaptureTransportService)this).IsHandlingPassenger(passenger));
@@ -1852,6 +1907,10 @@ namespace OpenRA.Mods.Common.Traits
 						continue;
 					}
 
+					// CAMEO-LOCAL: ENGDROP - a plan that violates the run's hard exclusion geometry is a refusal for this craft.
+					if (!ConstraintsAllow(mission, transport, plan))
+						continue;
+
 					if (!TryReserveTransport(transport, mission.Passenger))
 						continue;
 
@@ -1915,6 +1974,7 @@ namespace OpenRA.Mods.Common.Traits
 			nextTransportPlanPerfLogTick = world.WorldTick + 250;
 			try
 			{
+#if CAMEO_DEV_LOGGING
 				var passenger = mission.Passenger;
 				var target = mission.Target;
 				var selected = planningPass.SelectedTransport;
@@ -1935,6 +1995,7 @@ namespace OpenRA.Mods.Common.Traits
 					$"nativePathCostCallbackCalls={planningPass.NativePathCostCallbackCalls} logicalFirstSuccessPosition={planningPass.LogicalFirstSuccessPosition} " +
 					$"selectedTransport={selectedActor}/{selectedType} selectedPickup={selectedPickup} selectedDrop={selectedDrop} " +
 					$"result={(planningPass.Success ? "success" : "failure")} elapsedMs={elapsedMs:0.00}");
+#endif
 			}
 			catch
 			{
@@ -3192,6 +3253,9 @@ namespace OpenRA.Mods.Common.Traits
 
 		void RequestBestTransport(IBot bot, TransportMission mission, bool landPathAvailable)
 		{
+			if (mission.NoProduction) // CAMEO-LOCAL: ENGDROP - a Trigger A run never builds a craft, whichever path asks
+				return;
+
 			if (playerResources == null ||
 				playerResources.GetCashAndResources() < Info.MinimumCashForTransportProduction ||
 				world.WorldTick < mission.NextProductionRequestTick)
@@ -4734,6 +4798,175 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			return actor != null && !actor.Disposed && actor.IsInWorld && !actor.IsDead && actor.Owner == player &&
 				IsConfiguredTransportType(actor.Info.Name);
+		}
+
+		// ---- CAMEO-LOCAL: ENGDROP ----------------------------------------------------------------------------------------------
+		int runGeneration;
+
+		static string RunIdentity(TransportMission mission) => mission.RunMissionId + "#" + mission.RunGeneration;
+
+		/// <summary>The run's hard exclusion geometry against one planned craft: the pickup-to-drop flight (aircraft) and the drop and every
+		/// target point (any craft). Violation is a refusal, with no permissive fallback.</summary>
+		bool ConstraintsAllow(TransportMission mission, Actor transport, TransportPlan plan)
+		{
+			var constraints = mission.Constraints;
+			if (constraints == null || constraints.Zones.Count == 0)
+				return true;
+
+			var air = Info.AirTransportTypes.Contains(transport.Info.Name);
+			var map = world.Map;
+			var pickup = map.CenterOfCell(plan.PickupTransportCell);
+			var drop = map.CenterOfCell(plan.DropTransportCell);
+			if (constraints.RejectsPoint(drop, air) || constraints.RejectsSegment(transport.CenterPosition, pickup, air) ||
+				constraints.RejectsSegment(pickup, drop, air))
+				return false;
+
+			foreach (var leg in AllLegs(mission))
+				if (constraints.RejectsPoint(leg.Target.CenterPosition, air))
+					return false;
+
+			return true;
+		}
+
+		/// <summary>ENGDROP readiness: could an EXISTING craft start this run now? Mirrors the admission checks and the craft search, and never
+		/// reserves, leases, orders, requests production or draws a random number (the route memo is the only state it touches).</summary>
+		bool CanStartConstrainedRun(IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets, DropConstraints constraints) =>
+			FindStartableCraft(passengers, targets, constraints, out _, out _);
+
+		/// <summary>ENGDROP: the first existing craft whose plan starts this run now (admission checks, craft search, constraints); no side effects.</summary>
+		bool FindStartableCraft(IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets, DropConstraints constraints,
+			out Actor craft, out TransportPlan craftPlan)
+		{
+			craft = null;
+			craftPlan = default;
+			if (passengers == null || targets == null || passengers.Count == 0 || passengers.Count != targets.Count)
+				return false;
+
+			for (var i = 0; i < passengers.Count; i++)
+				if (!IsValidPassenger(passengers[i]) || !IsValidCaptureTarget(targets[i]) || missions.ContainsKey(passengers[i]) ||
+					!IsMissionCompatibleTransportRequest(passengers[i], targets[i]) || IsWaitingTransportPairCoolingDown(passengers[i], targets[i]))
+					return false;
+
+			if (missions.Values.Distinct().Count() >= Info.MaximumActiveMissions)
+				return false;
+
+			if (!HasPotentialTransport(passengers[0], targets[0], landPathAvailable: true, reusableRoundTrip: false, out var existing) || existing != null)
+				return false;
+
+			var legs = new List<(Actor Passenger, Actor Target)>();
+			for (var i = 0; i < passengers.Count; i++)
+				legs.Add((passengers[i], targets[i]));
+
+			var probe = new TransportMission(legs[0].Passenger, legs[0].Target, landPathAvailable: true, world.WorldTick, reusableRoundTrip: false)
+			{
+				RunLegs = legs,
+				Constraints = constraints
+			};
+
+			var planningPass = new PassengerTargetProofPlanningPass(PreferredTransportTypesFor(probe));
+			foreach (var type in planningPass.OrderedCandidateTypes)
+			{
+				if (!IsConfiguredTransportType(type))
+					continue;
+
+				foreach (var transport in FindAvailableTransports(type))
+					if (TryGetCachedOrPlanTransport(probe, transport, planningPass, out var plan) && ConstraintsAllow(probe, transport, plan))
+					{
+						craft = transport;
+						craftPlan = plan;
+						return true;
+					}
+			}
+
+			return false;
+		}
+
+		/// <summary>ENGDROP: the journey this craft will actually make for this plan, as a polyline of cells: air craft - current position, then the
+		/// bounded RiskModel corridor (detour waypoint included) to the pickup and on to the drop; ground and naval craft - the risk-aware path cells
+		/// to the pickup and on to the drop, from the same path finder and cost the mission uses. Null when no route can be planned now.</summary>
+		List<CPos> PlanJourney(Actor transport, TransportPlan plan)
+		{
+			var from = transport.Location;
+			var route = new List<CPos> { from };
+			if (IsAirTransport(transport))
+			{
+				if (!Info.EnableAirTransportRiskRouting)
+				{
+					route.Add(plan.PickupTransportCell);
+					route.Add(plan.DropTransportCell);
+					return route;
+				}
+
+				if (!TryPlanBoundedAirCorridor(transport, from, plan.PickupTransportCell, out var toPickup) ||
+					!TryPlanBoundedAirCorridor(transport, plan.PickupTransportCell, plan.DropTransportCell, out var toDrop))
+					return null;
+
+				route.AddRange(toPickup);
+				route.AddRange(toDrop);
+				return route;
+			}
+
+			var mobile = transport.TraitOrDefault<Mobile>();
+			if (mobile == null || mobile.PathFinder is not PathFinder pathFinder)
+				return null;
+
+			var role = TransportRiskRole(transport);
+			int CustomCost(CPos cell) => riskModelService.GetPathCost(transport, cell, role, FransRiskTolerance.Cautious);
+			foreach (var (a, b) in new[] { (from, plan.PickupTransportCell), (plan.PickupTransportCell, plan.DropTransportCell) })
+			{
+				if (a == b)
+					continue;
+
+				var path = pathFinder.FindPathToTargetCell(transport, [a], b, BlockedByActor.Immovable, CustomCost, laneBias: false);
+				if (path == null || path.Count == 0)
+					return null;
+
+				route.AddRange(path.AsEnumerable().Reverse());
+			}
+
+			return route;
+		}
+
+		/// <summary>ENGDROP Trigger A: the planned journey of the first startable existing craft, refused when any air leg crosses an anti-air zone.</summary>
+		bool TryPlanConstrainedRoute(IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets, DropConstraints constraints, out IReadOnlyList<CPos> route)
+		{
+			route = null;
+			if (!FindStartableCraft(passengers, targets, constraints, out var craft, out var plan))
+				return false;
+
+			var journey = PlanJourney(craft, plan);
+			if (journey == null || journey.Count == 0)
+				return false;
+
+			if (constraints != null && IsAirTransport(craft))
+			{
+				var map = world.Map;
+				for (var i = 1; i < journey.Count; i++)
+					if (constraints.RejectsSegment(map.CenterOfCell(journey[i - 1]), map.CenterOfCell(journey[i]), air: true))
+						return false;
+			}
+
+			route = journey;
+			return true;
+		}
+
+		/// <summary>ENGDROP RequestAbort: idempotent, current owner and generation only. A loaded run takes the existing safe RETREAT path
+		/// (which unloads and hands the engineers back once); a run still boarding is ended and released at once.</summary>
+		bool AbortRun(IBot bot, string runIdentity, Actor passenger, string reason)
+		{
+			if (bot == null || passenger == null || string.IsNullOrEmpty(runIdentity) ||
+				!missions.TryGetValue(passenger, out var mission) || !mission.IsRunMission || mission.AbortRequested ||
+				RunIdentity(mission) != runIdentity || mission.State == MissionState.Retreat || mission.State == MissionState.Handoff)
+				return false;
+
+			mission.AbortRequested = true;
+			FransBotLog.BotDebug(world, "{0}: capture RUN {1} abort requested by its owner: {2}.", player, mission.RunMissionId, reason);
+			if (AnyRunPassengerLoaded(mission))
+				BeginRetreat(bot, mission, "owner abort: " + reason);
+			else
+				EndRunMission(bot, mission, BotMissionAttemptState.Released, "aborted");
+
+			return true;
 		}
 
 		bool IsValidPassenger(Actor actor)

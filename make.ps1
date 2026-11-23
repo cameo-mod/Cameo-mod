@@ -17,7 +17,7 @@ function All-Command
 	}
 
 	Write-Host "Building $modID in" $configuration "configuration..." -ForegroundColor Cyan
-	dotnet build -c $configuration --nologo -p:TargetPlatform=win-x64
+	dotnet build CameoMod.sln -c $configuration --nologo -p:TargetPlatform=win-x64
 
 	if ($lastexitcode -ne 0)
 	{
@@ -44,7 +44,7 @@ function Clean-Command
 
 	Write-Host "Cleaning $modID..." -ForegroundColor Cyan
 
-	dotnet clean /nologo
+	dotnet clean CameoMod.sln /nologo
 	Remove-Item ./*/obj -Recurse -ErrorAction Ignore
 	Remove-Item env:ENGINE_DIRECTORY/bin -Recurse -ErrorAction Ignore
 	Remove-Item env:ENGINE_DIRECTORY/*/obj -Recurse -ErrorAction Ignore
@@ -119,8 +119,8 @@ function Check-Command
 	Write-Host "Compiling $modID in Debug configuration..." -ForegroundColor Cyan
 
 	# Enabling EnforceCodeStyleInBuild and GenerateDocumentationFile as a workaround for some code style rules (in particular IDE0005) being bugged and not reporting warnings/errors otherwise.
-	dotnet clean -c Debug --nologo --verbosity minimal
-	dotnet build -c Debug --nologo -warnaserror -p:TargetPlatform=win-x64 -p:EnforceCodeStyleInBuild=true -p:GenerateDocumentationFile=true
+	dotnet clean CameoMod.sln -c Debug --nologo --verbosity minimal
+	dotnet build CameoMod.sln -c Debug --nologo -warnaserror -p:TargetPlatform=win-x64 -p:EnforceCodeStyleInBuild=true -p:GenerateDocumentationFile=true
 	if ($lastexitcode -ne 0)
 	{
 		Write-Host "Build failed." -ForegroundColor Red

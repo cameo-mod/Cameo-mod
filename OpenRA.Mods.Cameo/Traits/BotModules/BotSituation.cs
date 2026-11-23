@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Cameo.Traits;
@@ -602,6 +603,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
 		readonly OpenRA.Player player;
+		AblationLatch ablateLean; // ABLATE-01 hook pi_lean (DEV provider only; release = on)
 		readonly BotFogMemory fogMemory;
 
 		// E1 (lead ruling 2026-10-12): the sticky air-intel latch — enemy InternalNames whose
@@ -633,6 +635,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int missionTick;
 		int nextSnapshotTick;
 		int nextEmergencyTick;
+		bool phaseSeeded;
 		int lastDecisionTick;
 		OpenRA.Player incumbentTarget;
 		string incumbentPersonality = "";
@@ -1069,23 +1072,44 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				productionQueueCount = cachedQueues.Length;
 			}
 
+			// STAGGER-06 D012 / D013 (class B, telemetry only): each counter is published as a number of TICKS
+			// (BrownoutTicks, IdleProductionTicks), so a gated visit adds the ticks since the previous visit, taking the
+			// CURRENT observation as true over that gap. Elapsed is 1 at N = 1 and for an ungated bot: identical there.
+			var visitElapsed = Math.Max(1, BotVisitClock.Of(bot).Elapsed);
 			if (cachedPower != null && cachedPower.ExcessPower < 0)
-				brownoutTicks++;
+				brownoutTicks += visitElapsed;
 			foreach (var queue in cachedQueues)
 				if (queue.Enabled && queue.CurrentItem() == null && !queue.AllQueued().Any())
-					idleProductionTicks++;
+					idleProductionTicks += visitElapsed;
+
+			// QW-B: with phase-offset timers the first emergency check and the first snapshot wait for the bot's phase of
+			// their own interval, instead of the ClientIndex offset (which map-side bots share). Not saved: a loaded game
+			// is past both ticks either way.
+			if (!phaseSeeded)
+			{
+				phaseSeeded = true;
+				if (BotSlotPhases.TryResolve(bot, Math.Max(1, Info.SnapshotInterval), out var snapshotPhase))
+					nextSnapshotTick = snapshotPhase <= player.World.WorldTick ? 0 : snapshotPhase; // 0 = unarmed: fire at the first visit, reload v + K (the old `tick >= next`)
+				if (BotSlotPhases.TryResolve(bot, Math.Max(1, Info.EmergencyCheckInterval), out var emergencyPhase))
+					nextEmergencyTick = emergencyPhase <= player.World.WorldTick ? 0 : emergencyPhase;
+
+				// R-QWB Haiku FIX: with no resolved phase (N = 1 roster, flag off, a bot activated mid-game) the constructor seed is
+				// a plain tick; one already past at the first visit must reload v + K, as the old `tick >= next` form does, not
+				// s + m K (CarryDue would give 187 for s 37, K 150, v 100; master gives 250). Zero = unarmed. A seed still in
+				// the future is kept (both forms wait for it); a resolved phase is already normalised, so this is idempotent.
+				nextSnapshotTick = BotPeriod.SeedDue(nextSnapshotTick, player.World.WorldTick);
+				nextEmergencyTick = BotPeriod.SeedDue(nextEmergencyTick, player.World.WorldTick);
+			}
 
 			var tick = player.World.WorldTick;
 			ReopenDormant(tick);
-			if (tick >= nextEmergencyTick)
+			if (BotPeriod.CarryDue(ref nextEmergencyTick, tick, Info.EmergencyCheckInterval))
 			{
-				nextEmergencyTick = tick + Math.Max(1, Info.EmergencyCheckInterval);
 				CheckEmergency(tick);
 			}
-			if (tick < nextSnapshotTick)
+			if (!BotPeriod.CarryDue(ref nextSnapshotTick, tick, Info.SnapshotInterval))
 				return;
 
-			nextSnapshotTick = tick + Math.Max(1, Info.SnapshotInterval);
 			Rebuild(tick, bot);
 		}
 
@@ -2799,7 +2823,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		double IBotPersonalityLeadProvider.PersonalityLeadLean(string personality)
 		{
-			return PersonalityLeadLean(IsTraitDisabled, Info.UsePersonalityLeads, Situation,
+			return PersonalityLeadLean(IsTraitDisabled, Info.UsePersonalityLeads && !ablateLean.Off(player, AblationIds.Lean), Situation,
 				personality, Info.PersonalityLeadMaxLeanPercent);
 		}
 

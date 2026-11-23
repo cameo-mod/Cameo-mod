@@ -39,7 +39,9 @@ exit /b
 :crashdialog
 echo ----------------------------------------
 echo OpenRA has encountered a fatal error.
-echo   * Log Files are available in Documents\OpenRA\Logs
+echo   * Log Files are available in %APPDATA%\OpenRA\Logs
+echo     (or in the Support folder next to the engine, if that folder exists,
+echo     or in the folder given by an Engine.SupportDir launch argument)
 echo   * FAQ is available at https://github.com/OpenRA/OpenRA/wiki/FAQ
 echo ----------------------------------------
 pause

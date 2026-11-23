@@ -622,9 +622,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (owner.Type == SquadCAType.Rush || owner.Type == SquadCAType.Guerrilla || owner.Type == SquadCAType.Harass)
 			{
 				var siegeVerdict = owner.SquadManager.EvaluateSiege(owner, out var standOffCell);
+				// SIEGE-FIX-01 S6: a siege retreat never dismisses the squad. It tries the retreat rally once, else pulls back to the stand-off line and holds.
 				if (siegeVerdict == SiegeVerdict.Retreat && !AggressionHoldsMarch(owner))
 				{
-					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), false);
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsSiegeRetreatStateCA(standOffCell), false);
 					return;
 				}
 
@@ -644,11 +645,14 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				{
 					var vetoEnemies = owner.World.FindActorsInCircle(owner.Target.CenterPosition, WDist.FromCells(owner.SquadManager.Info.IdleScanRadius))
 						.Where(owner.SquadManager.IsPreferredObservedEnemyUnit).ToList();
-					if (owner.SquadManager.VetoEngage(owner, vetoEnemies, alreadyCommitted: true, out _) && !AggressionHoldsMarch(owner))
-					{
-						owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), false);
-						return;
-					}
+					// SIEGE-FIX-01 S7 (Opus ruling): the siege has already priced the remembered defences for this march, so the abort is skipped
+					// only when it served a priced Advance AND no enemy is seen near the target; otherwise INC-N runs as before.
+					if (!SiegeEvaluatorBotModule.SkipsMarchAbort(owner.SquadManager.SiegePricedAdvance(owner), vetoEnemies.Count))
+						if (owner.SquadManager.VetoEngage(owner, vetoEnemies, alreadyCommitted: true, out _) && !AggressionHoldsMarch(owner))
+						{
+							owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), false);
+							return;
+						}
 				}
 			}
 
@@ -1445,6 +1449,78 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				profile.IsAircraft, profile.IsBuilding, profile.TargetTypes, profile.Weapons);
 		}
 
+		public void Deactivate(SquadCA owner) { }
+	}
+
+	// SIEGE-FIX-01 S6: the retreat the siege advisor asks for. One rally decision on entry (the same A10 episode rule as the Flee state);
+	// when the rally refuses the squad is NOT dismissed: it pulls back to the stand-off cell and holds there while the advisor still says
+	// Retreat (the evaluator's re-engage cooldown ends that verdict once the squad has grown). Any other verdict returns it to AttackMove.
+	class GroundUnitsSiegeRetreatStateCA : GroundStateBaseCA, IState
+	{
+		readonly CPos holdCell;
+		bool decided;
+		int startTick = -1;
+
+		public GroundUnitsSiegeRetreatStateCA(CPos holdCell)
+		{
+			this.holdCell = holdCell;
+		}
+
+		public void Activate(SquadCA owner)
+		{
+			startTick = owner.World.WorldTick;
+		}
+
+		public void Tick(SquadCA owner)
+		{
+			if (!owner.IsValid)
+				return;
+
+			if (!decided)
+			{
+				decided = true;
+				owner.SquadManager.RetreatRallyNoteFlight(owner);
+				if (owner.SquadManager.TryRetreatRally(owner, "siege_retreat", out var plan))
+				{
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsRallyStateCA(plan), false);
+					return;
+				}
+			}
+
+			var verdict = owner.SquadManager.EvaluateSiege(owner, out var cell);
+			var leader = owner.Units.FirstOrDefault(u => u.Actor != null && !u.Actor.IsDead && u.Actor.IsInWorld);
+			if (verdict != SiegeVerdict.Retreat || leader.Actor == null)
+			{
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+				return;
+			}
+
+			// Opus ruling: the pull-back hold is capped by the tier's StandOffMaxTicks line. On expiry the squad is released to the
+			// normal regroup/rally-home path (the legacy retreat orders, never a squad dismissal); the evaluator's re-engage cooldown keeps running.
+			if (SiegeEvaluatorBotModule.HoldExpired(owner.World.WorldTick, startTick, owner.SquadManager.SiegeHoldCapTicks()))
+			{
+				Retreat(owner, flee: true, rearm: true, repair: true);
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);
+				return;
+			}
+
+			// Contact: the AttackMove state owns engagement (same enemy scan it runs before its own siege consult).
+			if (owner.SquadManager.FindClosestEnemy(leader.Actor, WDist.FromCells(owner.SquadManager.Info.AttackScanRadius), owner) != null)
+			{
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+				return;
+			}
+
+			// The cell follows the latest evaluation (the squad may have grown, defences may have moved); re-order only when the leader drifts off it.
+			var hold = owner.World.Map.Contains(cell) ? cell : holdCell;
+			if (owner.World.Map.Contains(hold) &&
+				(owner.World.Map.CellContaining(leader.Actor.CenterPosition) - hold).LengthSquared > 4)
+				foreach (var u in owner.Units)
+					if (u.Actor != null)
+						owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromCell(owner.World, hold), false));
+		}
+
+		// No dismissal: the squad keeps its units and its identity.
 		public void Deactivate(SquadCA owner) { }
 	}
 

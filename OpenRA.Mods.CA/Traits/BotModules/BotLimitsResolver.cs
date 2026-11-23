@@ -33,8 +33,10 @@ namespace OpenRA.Mods.CA.Traits
 		public static BotLimits Recheck(Player player, BotLimits cached, string module)
 		{
 			var current = Current(player);
+#if CAMEO_DEV_LOGGING
 			var verdict = current == cached ? "kept" : $"CORRECTED from {Describe(cached)}";
 			Log.Write("debug", $"AI ({player.ClientIndex}): LC4 {module} BotLimits on its first tick: {Describe(current)}, {verdict} (tick {player.World.WorldTick})");
+#endif
 			return current;
 		}
 	}

@@ -696,7 +696,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(deactivate.IndexOf("if (handoff)", StringComparison.Ordinal), Is.GreaterThanOrEqualTo(0));
 			Assert.That(deactivate.IndexOf("if (handoff)", StringComparison.Ordinal), Is.LessThan(deactivate.IndexOf("DismissSquad(owner)", StringComparison.Ordinal)), "ChangeState calls the old Deactivate first");
 			Assert.That(Source("mods/CA/Traits/BotModules/Squads/SquadCA.cs"), Does.Not.Contain("RallyHandoff"), "L5: no field on the squad");
-			Assert.That(Count(GroundStates(), "new GroundUnitsFleeStateCA()"), Is.EqualTo(7), "the 7 legacy entries are unchanged");
+			Assert.That(Count(GroundStates(), "new GroundUnitsFleeStateCA()"), Is.EqualTo(6), "the 7 legacy entries minus the siege retreat, which SIEGE-FIX-01 S6 moved to GroundUnitsSiegeRetreatStateCA");
 		}
 
 		// ---- 16. H2 pin ----
@@ -724,8 +724,8 @@ namespace OpenRA.Mods.Cameo.Test
 
 			Assert.That(idle, Does.Contain("TryRetreatRally(owner, \"idle_engage\", out var plan)"));
 			Assert.That(idle, Does.Contain("TryRetreatRally(owner, site, out var plan)"), "the agg-core site keeps its regroup-expired reason");
-			Assert.That(Count(GroundStates(), "TryRetreatRally("), Is.EqualTo(3), "two idle sites and the Flee state");
-			Assert.That(Count(GroundStates(), "RetreatRallyNoteFlight("), Is.EqualTo(3));
+			Assert.That(Count(GroundStates(), "TryRetreatRally("), Is.EqualTo(4), "two idle sites, the Flee state and the siege retreat state (SIEGE-FIX-01 S6)");
+			Assert.That(Count(GroundStates(), "RetreatRallyNoteFlight("), Is.EqualTo(4));
 		}
 
 		// ---- 17. H3 pin ----
@@ -734,7 +734,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void H3TheRallyStateCountsAsRetreatingForLivenessAndIsNotQuiet()
 		{
 			var text = Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCA.cs");
-			Assert.That(text, Does.Contain("or AirFleeStateCA or StealthFleeStateCA or UnitsForProtectionFleeState or GroundUnitsRallyStateCA;"));
+			Assert.That(text, Does.Contain("or AirFleeStateCA or StealthFleeStateCA or UnitsForProtectionFleeState or GroundUnitsRallyStateCA\n\t\t\t\tor GroundUnitsSiegeRetreatStateCA;"));
 			Assert.That(Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCA.AggTeam.cs"),
 				Does.Contain("internal static bool AggTeamIsQuietState(IState state) => state is GroundUnitsIdleStateCA;"), "unchanged");
 			var rally = new GroundUnitsRallyStateCA(new RetreatRallyPlan());
@@ -893,7 +893,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(Policy.NextState(Policy.RallyEnd.Detached, Policy.RallyPhase.Support), Is.EqualTo(Policy.RallyNext.None));
 			Assert.That(Policy.EndName(Policy.RallyEnd.Detached), Is.EqualTo("detached"));
 			var end = Section(text, "internal void RetreatRallyEnd(", "// ---- the fallback base cell ----");
-			Assert.That(end, Does.Contain("RallyCooldowns.GetValue(owner, _ => new StrongBox<int>()).Value = until;"), "a detached rally still cools the squad and its destination");
+			Assert.That(end, Does.Contain("RallyCooldowns.GetValue(owner, _ => new StrongBox<BotCooldown>()).Value.Start(now, cooldownTicks);"), "a detached rally still cools the squad and its destination");
 			Assert.That(end.IndexOf("RallyEnds++;", StringComparison.Ordinal), Is.GreaterThanOrEqualTo(0));
 		}
 
@@ -1126,11 +1126,22 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var text = Manager();
 			var end = Section(text, "internal void RetreatRallyEnd(", "// ---- the fallback base cell ----");
-			Assert.That(end, Does.Contain("RallyCooldowns.GetValue(owner, _ => new StrongBox<int>()).Value = until;"));
-			Assert.That(end, Does.Contain("RallyCooldowns.GetValue(plan.DestSquad, _ => new StrongBox<int>()).Value = until;"), "the destination is cooled too");
+			Assert.That(end, Does.Contain("RallyCooldowns.GetValue(owner, _ => new StrongBox<BotCooldown>()).Value.Start(now, cooldownTicks);"));
+			Assert.That(end, Does.Contain("RallyCooldowns.GetValue(plan.DestSquad, _ => new StrongBox<BotCooldown>()).Value.Start(now, cooldownTicks);"), "the destination is cooled too");
 			Assert.That(end, Does.Contain("end == Policy.RallyEnd.AbortLosing || (end == Policy.RallyEnd.Expired && phase == Policy.RallyPhase.March)"), "only a lost destination is blacklisted");
 			Assert.That(end, Does.Contain("AggTeamRallyBlacklistTicks"));
 			Assert.That(end, Does.Contain("AggTeamRallyCooldownTicks"));
+		}
+
+		[Test]
+		public void RallyCooldownAndBlacklistUseInclusiveBotCooldownDeadlines()
+		{
+			var text = Manager();
+			Assert.That(text, Does.Contain("ConditionalWeakTable<SquadCA, StrongBox<BotCooldown>> RallyCooldowns"));
+			Assert.That(text, Does.Contain("List<(string Key, BotCooldown Until)>"));
+			Assert.That(text, Does.Contain("!cooldown.Value.Ready(now)"), "the squad and destination are blocked only before due");
+			Assert.That(text, Does.Contain("k == key && !until.Ready(now)"), "the blacklist is inclusive at due");
+			Assert.That(text, Does.Contain("e.Key == plan.Key || e.Until.Ready(now)"), "expired entries are pruned at due");
 		}
 	}
 }

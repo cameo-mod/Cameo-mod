@@ -9,7 +9,9 @@
  */
 #endregion
 
+using System;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -57,6 +59,45 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		/// <summary>Essentials (conyard, refinery, power, first factory) always pass; everything else yields to either vote.</summary>
 		public static bool Holds(bool essential, bool cashPoorPaused, bool armyCountHolds) => !essential && (cashPoorPaused || armyCountHolds);
+
+		/// <summary>Freeze only ticks spent disabled; a visit later in the transition tick has already counted.</summary>
+		public static int PauseScan(int transitionTick, int lastVisitTick) => Math.Max(transitionTick, lastVisitTick + 1);
+
+		public static void ResumeScan(ref BotCooldown cooldown, int tick, int disabledFromTick)
+		{
+			if (disabledFromTick >= 0)
+				cooldown.Freeze(Math.Max(0, tick - disabledFromTick));
+		}
+
+		public static bool ShouldScan(ref BotCooldown cooldown, int visitTick, int interval)
+		{
+			if (!cooldown.Ready(visitTick))
+				return false;
+
+			cooldown.Start(visitTick, interval);
+			return true;
+		}
+
+		/// <summary>
+		/// PR-3 projected-share vote (PROD-IDLE_PLAN_03 section 3): only K6 orders (General class: PW, defences, walls,
+		/// extra tech and support) are ratio-tested. Essentials, K4 essential buildings and K1/K2 pass untested.
+		/// An unset target (negative) holds K6 closed; see <see cref="ArmyShareCA.BuildingAdmits"/>.
+		/// </summary>
+		public static bool ShareHolds(bool essential, RecoverySpendPolicyCA.Admission admission, ArmyShareCA share, long cost,
+			int targetPermille) =>
+			!essential && admission == RecoverySpendPolicyCA.Admission.General && !share.BuildingAdmits(cost, targetPermille);
+
+		/// <summary>
+		/// PR-1 production-reserve vote (PROD-IDLE_PLAN_03 section 2.2/2.3): a K6 order (General class) must also leave the
+		/// tier's production reserve, C - x >= P(r), where C is the cash less every unpaid commitment counted once. M, E and R
+		/// are 0 until the recovery owner is mounted. Essentials, K1-K4 and anything not General pass untested. An unset line
+		/// (negative) holds General closed, like the share target.
+		/// </summary>
+		public static bool ReserveHolds(bool essential, RecoverySpendPolicyCA.Admission admission, long cash, long committed,
+			int cost, int productionReserve) =>
+			!essential && admission == RecoverySpendPolicyCA.Admission.General
+			&& !RecoverySpendPolicyCA.Admits(SpendCommitmentsCA.Available(cash, committed), cost, 0, 0, 0, false,
+				RecoverySpendPolicyCA.Admission.General, productionReserve);
 	}
 
 	/// <summary>
@@ -70,11 +111,23 @@ namespace OpenRA.Mods.Cameo.Traits
 	public class ArmyFirstBotModule : ConditionalTrait<ArmyFirstBotModuleInfo>, IBotTick, IBotRequestPauseBuildingProduction
 	{
 		readonly ArmyFirstBotModuleInfo info;
+		readonly ArmyShareCA share = new();
 		PlayerResources playerResources;
+		OpenRA.Player player;
+		AblationLatch ablateArmyRatio; // ABLATE-01 hook pi_army_ratio (DEV provider only; release = on)
+		AblationLatch ablateRecovery; // ABLATE-01 hook pi_recovery: the production-reserve term of the General gate
+		int committedTick = -1;
+		long committedQueued;
+		long recordedThisTick;
+		BotLimits botLimits;
+		IBotPersonalityLeadProvider[] leadProviders;
 		bool paused;
 		bool hasUnitProducer;
 		int armyUnits;
-		int scanTicks;
+		BotCooldown scanCooldown;
+		int disabledFromTick = -1;
+		int lastBotTick;
+		bool scanStarted;
 
 		public ArmyFirstBotModule(ArmyFirstBotModuleInfo info, ActorInitializer init)
 			: base(info)
@@ -82,20 +135,113 @@ namespace OpenRA.Mods.Cameo.Traits
 			this.info = info;
 		}
 
-		bool IBotRequestPauseBuildingProduction.PausesBuilding(ActorInfo building, bool essential)
+		// T(r) in permille from the tier line (500 + 25 r); -1 = unset, which holds K6 closed.
+		int ShareTarget => botLimits != null ? botLimits.Info.ArmyShareTargetPermille : -1;
+
+		bool IBotRequestPauseBuildingProduction.PausesBuilding(ActorInfo building, bool essential,
+			RecoverySpendPolicyCA.Admission admission, int cost)
 		{
 			if (IsTraitDisabled || playerResources == null)
 				return false;
 
 			var armyHolds = ArmyFirstEval.ArmyCountHolds(hasUnitProducer, playerResources.GetCashAndResources(), armyUnits,
 				info.MinArmyUnitsBeforeBuildings, info.ArmyFirstMinCash);
-			return ArmyFirstEval.Holds(essential, paused, armyHolds);
+			return ArmyFirstEval.Holds(essential, paused, armyHolds)
+				|| !ablateArmyRatio.Off(player, AblationIds.ArmyRatio)
+					&& ArmyFirstEval.ShareHolds(essential, admission, share, cost, ShareTarget)
+				|| !ablateRecovery.Off(player, AblationIds.Recovery)
+					&& ArmyFirstEval.ReserveHolds(essential, admission, playerResources.GetCashAndResources(), Committed(), cost,
+						ReserveLine());
+		}
+
+		void IBotRequestPauseBuildingProduction.BuildingAdmitted(ActorInfo building, int cost)
+		{
+			if (IsTraitDisabled)
+				return;
+
+			share.Record(ArmyShareSide.Building, cost);
+			recordedThisTick += cost;
+		}
+
+		// P_eff: the tier's reserve line scaled by the Steamroller lean (PLAN_04 row 4); -1 when the line is unset.
+		int ReserveLine() => botLimits != null
+			? RecoverySpendPolicyCA.EffectiveReserve(botLimits.Info.ProductionCashReserve, BotPersonalityLeads.Lean(leadProviders, "steamroller"))
+			: -1;
+
+		// Cash every queued item of the player has not paid yet, counted once, plus the orders this module admitted in the
+		// current tick (they enter a queue, and so the first term, from the next tick). One queue scan per tick.
+		// Orders another module issued earlier in the same tick are not visible here: that gap closes with the recovery
+		// owner's commitment ledger (PLAN_03 section 2.4).
+		long Committed()
+		{
+			var tick = player.World.WorldTick;
+			if (committedTick != tick)
+			{
+				committedTick = tick;
+				committedQueued = SpendCommitmentsCA.UnpaidQueued(player.World, player);
+				recordedThisTick = 0;
+			}
+
+			return committedQueued + recordedThisTick;
+		}
+
+		// PLAN_02 section 2 values: live actors by their Valued cost (the Squad Manager's UnitValue),
+		// in-flight items by their full queue cost. One scan per ScanInterval; admitted orders are
+		// recorded on top by BuildingAdmitted until the next scan.
+		void RefreshShare(World world, OpenRA.Player owner)
+		{
+			long armyLive = 0, buildingLive = 0, armyInflight = 0, buildingInflight = 0;
+
+			foreach (var a in world.ActorsHavingTrait<Building>())
+				if (a.Owner == owner && !a.IsDead && a.IsInWorld)
+					buildingLive += a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+
+			foreach (var a in world.ActorsHavingTrait<AttackBase>())
+				if (a.Owner == owner && !a.IsDead && a.IsInWorld
+					&& ArmyShareCA.Classify(a.Info.HasTraitInfo<BuildingInfo>(), true, a.Info.HasTraitInfo<HarvesterInfo>()) == ArmyShareSide.Army)
+					armyLive += a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+
+			foreach (var pair in world.ActorsWithTrait<ProductionQueue>())
+			{
+				if (pair.Actor.Owner != owner || pair.Actor.IsDead || !pair.Trait.Enabled)
+					continue;
+
+				foreach (var item in pair.Trait.AllQueued())
+				{
+					if (!world.Map.Rules.Actors.TryGetValue(item.Item, out var itemInfo))
+						continue;
+
+					var side = ArmyShareCA.Classify(itemInfo.HasTraitInfo<BuildingInfo>(), itemInfo.HasTraitInfo<AttackBaseInfo>(),
+						itemInfo.HasTraitInfo<HarvesterInfo>());
+					if (side == ArmyShareSide.Army)
+						armyInflight += item.TotalCost;
+					else if (side == ArmyShareSide.Building)
+						buildingInflight += item.TotalCost;
+				}
+			}
+
+			share.Refresh(armyLive, armyInflight, buildingLive, buildingInflight);
 		}
 
 		protected override void Created(Actor self)
 		{
+			player = self.Owner;
+			leadProviders = self.TraitsImplementing<IBotPersonalityLeadProvider>().ToArray();
 			playerResources = self.Owner.PlayerActor.TraitOrDefault<PlayerResources>();
 			base.Created(self);
+		}
+
+		protected override void TraitDisabled(Actor self)
+		{
+			disabledFromTick = scanStarted
+				? ArmyFirstEval.PauseScan(self.World.WorldTick, lastBotTick)
+				: -1;
+		}
+
+		protected override void TraitEnabled(Actor self)
+		{
+			ArmyFirstEval.ResumeScan(ref scanCooldown, self.World.WorldTick, disabledFromTick);
+			disabledFromTick = -1;
 		}
 
 		void IBotTick.BotTick(IBot bot)
@@ -103,12 +249,17 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (IsTraitDisabled || playerResources == null)
 				return;
 
-			if (--scanTicks > 0)
+			var visitTick = BotVisitClock.Of(bot).VisitTick;
+			lastBotTick = visitTick;
+			if (!ArmyFirstEval.ShouldScan(ref scanCooldown, visitTick, info.ScanInterval))
 				return;
-
-			scanTicks = info.ScanInterval;
+			scanStarted = true;
 
 			var world = bot.Player.World;
+
+			// PR-3: the target is the tier's line; the share snapshot is rebuilt here, once per scan.
+			botLimits = bot.Player.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
+			RefreshShare(world, bot.Player);
 
 			// The vote only exists while at least one unit producer does - otherwise it would block the
 			// very structures that make an army-first policy meaningful (first barracks/war factory, or

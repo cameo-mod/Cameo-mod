@@ -204,7 +204,8 @@ namespace OpenRA.Mods.Cameo.Test
 				"combat_units", "stuck_squads", "retreats_window", "kills_window", "urgency", "urgency_legacy");
 
 			AssertFields(records[10], "manifest", "complete", "data_records", "data_bytes", "data_sha256", "overflow_count",
-				"missing_count", "last_sequence");
+				"missing_count", "last_sequence", "botpassive_emit");
+			Assert.That(records[10].GetProperty("botpassive_emit").GetString(), Is.EqualTo("catchup"));
 		}
 
 		[Test]

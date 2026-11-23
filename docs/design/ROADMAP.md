@@ -151,7 +151,7 @@ the fog sequencing.
     whole idle pool — `UseDefendPreservation` port behind `O_ca2_defend_reserve` on
     `devin/dawn/ca2-defend-reserve`.)
   - [~] **M** CA-3 role-mix production + squad composition with a use-every-role floor (**mechanism merged #678:**
-    `RoleMix` + `RoleMixRoleFloorPct` + `ChooseRoleDeficit` on master; the six personality `RoleMix` rows
+    `RoleMix` + `RoleMixUnnamedTotalPct` (was `RoleMixRoleFloorPct`) + `ChooseRoleDeficit` on master; the six personality `RoleMix` rows
     land behind `UseRoleMix` as switch group `J_rolemix_production` in #731). **NOVA.**
   - [x] **M** (merged #678) CA-4 formation movement (frontline leads, infantry with tanks, AA inside,
     artillery back, gunships over the front, pace of the slowest frontline): `FormationMovement` +
@@ -316,7 +316,7 @@ first. Faction reference: [`FACTIONS.md`](../FACTIONS.md).
 
 > **Multi-agent repo — one owner per file-set.** Committing into this tree, by git author:
 > **AedisToru** (maintainer; also lands most agent work under the shared repo identity),
-> **Blackrobe** (co-maintainer), **Elpollo315**, **Zan Yewang**, and **Devin AI**. The commit
+> **Blackrobe** (co-maintainer), **Elpollo315**, **AedisToru**, and **Devin AI**. The commit
 > TRAILER, not the author line, records which agent wrote a change (CLAUDE.md rule 10).
 > Always `git add <files>` scoped, never `-A`. Check a file's mtime and `git log -3 <file>`
 > for a live agent before editing, and re-verify others' commits before building on them.

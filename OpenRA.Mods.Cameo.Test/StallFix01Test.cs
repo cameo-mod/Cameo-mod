@@ -19,7 +19,7 @@ using OpenRA.Mods.Cameo.Traits.BotModules;
 namespace OpenRA.Mods.Cameo.Test
 {
 	[TestFixture]
-	public sealed class StallFix01Test
+	public sealed partial class StallFix01Test
 	{
 		const int Epoch = 50;
 		const int Bound = 1500;
@@ -286,8 +286,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(site, Is.Null);
 			Assert.That(scan.CertificateCurrent(), Is.False);
 			Assert.That(scan.ReplayingConclusiveVerdict(2001), Is.False, "an aborted forced pass is not a conclusive verdict");
-			Assert.That(scan.ForceDue(Bound, 2001), Is.False, "no second forced pass inside the same epoch");
-			Assert.That(scan.ForceDue(Bound, 2000 + Epoch), Is.True, "forced again at the next epoch");
+			Assert.That(scan.ForceDue(Bound, 2000 + Epoch - 1), Is.False, "the persisted cooldown blocks the visit immediately before due");
+			Assert.That(scan.ForceDue(Bound, 2000 + Epoch), Is.True, "the forced poll becomes eligible exactly at the due tick");
 		}
 
 		// ---- the cancel rule is unchanged: only Exhausted with a current certificate ----
@@ -781,15 +781,19 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var p = Planner();
 			var arm = Section(p, "bool IBotExpansionTargetProvider.RefineryFallbackCertificateCurrent", "void IBotExpansionTargetProvider.RefinerySiteCommitted");
-			Assert.That(arm, Does.Contain("scan.CancelCertificateCurrent(Info.RefineryFallbackForceAfterTicks)"));
+			// REFSCAN sec 3.6 (F1): the gate now reads its own knob OR the force bound (requireTwo), never the force alone.
+			Assert.That(arm, Does.Contain("scan.CancelCertificateCurrent(RefinerySiteSearchLogic.CancelRequiresTwoVerdicts(\n"
+				+ "\t\t\t\t\tInfo.RefineryCancelRequiresTwoVerdicts, Info.RefineryFallbackForceAfterTicks))"));
 			Assert.That(arm, Does.Not.Contain("scan.CertificateCurrent()"));
 			Assert.That(Manager(), Does.Not.Contain("CancelCertificateCurrent"));
 			Assert.That(Manager(), Does.Contain("law.RefineryFallbackCertificateCurrent(queue.Actor, itemName)"));
-			Assert.That(Scan(), Does.Contain("CertificateCurrent() && (forceAfterTicks <= 0 || ExhaustedConfirmed)"));
+			Assert.That(Scan(), Does.Contain("CertificateCurrent() && (!requireTwo || ExhaustedConfirmed)"));
+			Assert.That(Scan(), Does.Contain("CancelCertificateCurrent(int forceAfterTicks) => CancelCertificateCurrent(forceAfterTicks > 0)"));
 		}
 
 		// ---- R3: the forced Site's distance from the base rides the telemetry line (record only) ----
 
+#if CAMEO_DEV_LOGGING
 		[Test]
 		public void R3TheForcedSiteLineCarriesItsChebyshevAndSquaredDistanceFromTheBase()
 		{
@@ -799,7 +803,9 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(line, Does.Contain("base distance 37 cells (sq 1810) from 33,40"));
 			Assert.That(line, Does.EndWith("at tick 41234"));
 		}
+#endif
 
+#if CAMEO_DEV_LOGGING
 		[Test]
 		public void R3AnExhaustedLineCarriesTheChainAndTheGateNotADistance()
 		{
@@ -809,6 +815,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(RefineryFallbackScan.ForcedLine(2, "x", 1, 1500, 1500, 1, RefineryFallbackScan.Verdict.Exhausted, null, null, 1, 1, 1, false, 1),
 				Does.Contain("cancel gate not satisfied"));
 		}
+#endif
 
 		[TestCase(33, 40, 70, 61, 37, 1810L)]
 		[TestCase(70, 61, 33, 40, 37, 1810L)]

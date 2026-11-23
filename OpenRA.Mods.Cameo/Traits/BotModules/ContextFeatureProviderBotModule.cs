@@ -14,7 +14,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using OpenRA.Graphics;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits.BotModules;
+using BotSlotPhases = OpenRA.Mods.CA.Traits.BotSlotPhases;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 
@@ -30,6 +32,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	/// </summary>
 	internal interface IAiSeenProfileSource
 	{
+		/// <summary>PERF-SEEN-01R: registers a consumer; the source samples its seen memory only after a call.</summary>
+		void EnableSeenMemory();
+
 		IReadOnlyCollection<ObservedActor> SeenActorsOf(OpenRA.Player observer, OpenRA.Player enemy);
 	}
 
@@ -56,7 +61,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	public class ContextFeatureProviderBotModule : ConditionalTrait<ContextFeatureProviderBotModuleInfo>,
 		IBotMapFeatures, IBotOpponentFeatures, IWorldLoaded, IBotTick, IGameOver
 	{
-		const int MaxPendingRows = 64;
 		static readonly CVec[] NeighborDeltas = [new(0, -1), new(1, 0), new(0, 1), new(-1, 0)];
 
 		// One immutable geometry build per (world, locomotors, resource table) - the same bounded
@@ -71,16 +75,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			public int RegionCount;
 		}
 
-		sealed class PendingRow
-		{
-			public string Text;
-			public AiLogFileAppender Appender;
-			public int NextAttemptTick;
-		}
-
 		readonly World world;
 		readonly OpenRA.Player player;
-		readonly List<PendingRow> pendingRows = new();
 		readonly List<OpenRA.Player> enemies = new();
 		readonly List<OpponentFeatureWindow> windows = new();
 		readonly List<ContextFeatureVector> opponentVectors = new();
@@ -123,6 +119,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				takeover = w.WorldActor.TraitOrDefault<BotTakeoverTracker>();
 				seenSource = w.WorldActor.TraitOrDefault<IAiSeenProfileSource>();
+				seenSource?.EnableSeenMemory();
 
 				var ground = LocomotorFor(w, Info.GroundLocomotors, IsGroundCapable);
 				var naval = LocomotorFor(w, Info.NavalLocomotors, IsNavalCapable);
@@ -133,22 +130,32 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					byKey[key] = geometry = BuildGeometry(w, ground, naval, resourceValues);
 
 				BuildFeatures(w, geometry);
-				EnqueueRow(SafeSerialize(MapFeatures));
+				if (LogSink?.Enabled == true)
+					EnqueueRow(SafeSerialize(MapFeatures));
 			});
 		}
+
+		int featurePhase = -1;
 
 		void IBotTick.BotTick(IBot bot)
 		{
 			if (!eligibleAtWorldLoad || IsTraitDisabled)
 				return;
-			var tick = world.WorldTick;
+			var clock = BotVisitClock.Of(bot);
+			var tick = clock.VisitTick;
 			if (!IsContextOwner())
 				return;
 			if (seenSource != null && player.Shroud != null && enemies.Count != 0)
 			{
-				if (tick % OpponentFeatureWindow.SampleInterval == 0)
+				// QW-B: one phase for both cadences, taken from the shorter, so every sample tick is still an update tick
+				// (SampleInterval is a multiple of UpdateInterval). Phase 0 is the old absolute modulo; the phase is the
+				// residue of the visit window (STAGGER-06).
+				if (featurePhase < 0)
+					featurePhase = BotSlotPhases.Resolve(bot, OpponentFeatureWindow.UpdateInterval, 0);
+
+				if (BotPeriod.ResidueHit(tick, clock.Elapsed, OpponentFeatureWindow.SampleInterval, featurePhase))
 					SampleCensuses(tick);
-				if (tick % OpponentFeatureWindow.UpdateInterval == 0)
+				if (BotPeriod.ResidueHit(tick, clock.Elapsed, OpponentFeatureWindow.UpdateInterval, featurePhase))
 					EmitOpponentRows(tick);
 			}
 
@@ -347,6 +354,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void SampleCensuses(int tick)
 		{
+			var sampleGridTick = tick - tick % OpponentFeatureWindow.SampleInterval;
 			for (var i = 0; i < enemies.Count; i++)
 			{
 				var actors = seenSource.SeenActorsOf(player, enemies[i]);
@@ -381,9 +389,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// Artillery stays 0: the observed classifier has no artillery axis - no synthesis.
 				try
 				{
-					windows[i].Add(new OpponentFeatureCensus(tick, lastSeen, actors.Count, coverage,
+					windows[i].Add(new OpponentFeatureCensus(sampleGridTick, lastSeen, actors.Count, coverage,
 						Clamp(economy), Clamp(production),
-						new[] { Clamp(infantry), Clamp(vehicle), Clamp(air), Clamp(naval), Clamp(defence), 0, Clamp(other) }));
+						new[] { Clamp(infantry), Clamp(vehicle), Clamp(air), Clamp(naval), Clamp(defence), 0, Clamp(other) }, observedTick: tick));
 				}
 				catch
 				{
@@ -409,39 +417,27 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				}
 
 				opponentVectors[i] = vector;
-				EnqueueRow(SafeSerialize(vector));
+				if (LogSink?.Enabled == true)
+					EnqueueRow(SafeSerialize(vector));
 			}
 		}
 
+		OpenRA.Mods.CA.Traits.ICameoLogSink LogSink =>
+			world.WorldActor.TraitOrDefault<OpenRA.Mods.CA.Traits.CameoLogHub>()?.Sink;
+
 		void EnqueueRow(string text)
 		{
-			if (text == null)
-				return;
-			if (pendingRows.Count >= MaxPendingRows)
-				pendingRows.RemoveAt(0);
-			pendingRows.Add(new PendingRow
-			{
-				Text = text + "\n",
-				Appender = new AiLogFileAppender(Info.FileName),
-				NextAttemptTick = world.WorldTick,
-			});
+			var sink = LogSink;
+			if (sink?.Enabled == true && text != null)
+				sink.ContextRow(Array.IndexOf(world.Players, player), Info.FileName, text, world.WorldTick);
 		}
 
 		void DrainPending(int tick)
 		{
-			for (var i = pendingRows.Count - 1; i >= 0; i--)
-			{
-				var row = pendingRows[i];
-				if (tick < row.NextAttemptTick)
-					continue;
-				var result = row.Appender.TryAppend(row.Text, tick, out var next);
-				if (result == AiLogAppendResult.RetryableFailure && !row.Appender.IsTerminal)
-					row.NextAttemptTick = next;
-				else
-					pendingRows.RemoveAt(i); // Appended, or terminally failed: bounded telemetry drops.
-			}
+			var sink = LogSink;
+			if (sink?.Enabled == true)
+				sink.FlushContext(Array.IndexOf(world.Players, player), tick);
 		}
-
 		static int Clamp(long value) => value > int.MaxValue ? int.MaxValue : (int)value;
 
 		static string SafeSerialize(ContextFeatureVector vector)

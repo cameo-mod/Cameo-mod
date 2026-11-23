@@ -147,6 +147,9 @@ install_mod_assemblies "${TEMPLATE_ROOT}" "${LAUNCHER_ASSEMBLY_DIR}/x86_64" "osx
 install_mod_assemblies "${TEMPLATE_ROOT}" "${LAUNCHER_ASSEMBLY_DIR}/arm64" "osx-arm64" "net6" "${TEMPLATE_ROOT}/${ENGINE_DIRECTORY}"
 
 cp -LR "${TEMPLATE_ROOT}mods/"* "${LAUNCHER_RESOURCES_DIR}/mods"
+# Development rules and mods must never ship in the official package.
+rm -rf "${LAUNCHER_RESOURCES_DIR}/mods/"*/rules/dev "${LAUNCHER_RESOURCES_DIR}/mods/cameo-dev"
+assert_no_dev_content "${LAUNCHER_RESOURCES_DIR}/mods"
 
 set_engine_version "${ENGINE_VERSION}" "${LAUNCHER_RESOURCES_DIR}"
 if [ "${PACKAGING_OVERWRITE_MOD_VERSION}" == "True" ]; then

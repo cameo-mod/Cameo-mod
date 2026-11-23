@@ -142,7 +142,9 @@ namespace OpenRA.Mods.Cameo.Effects
 				&& trait.Providers.Exists(p => !p.IsDead && renderPlayer.IsAlliedWith(p.Owner)))
 			{
 				state.AlliedLogged = true;
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"radar_ally: dot on {actor.Info.Name} visible to {renderPlayer.InternalName} via allied provider");
+#endif
 			}
 		}
 

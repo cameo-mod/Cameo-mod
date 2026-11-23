@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Common.Warheads;
 using OpenRA.Primitives;
@@ -173,6 +174,16 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		public static bool OverflowArmed(bool policyEnabled, int cash, int overflowCash) =>
 			policyEnabled && overflowCash > 0 && cash > overflowCash;
+
+		/// <summary>
+		/// PROD-IDLE G1: the overflow line. The tier's BotLimits.OverflowCash (12000 - 800 r) wins when the
+		/// profile writes it (non-negative); otherwise the carrier's own value. The policy trait stays the
+		/// on/off scope, so a bot without the carrier (classic) never arms the rung whatever its profile says.
+		/// The fallback is deliberately fail-OPEN, unlike ArmyShareTargetPermille and ProductionCashReserve (unset =
+		/// held): the overflow rung only converts surplus bank into production, so an unset line keeps the legacy
+		/// carrier value (the pre-G1 behaviour) instead of stalling spend. All 11 tiers write the line.
+		/// </summary>
+		public static int OverflowLine(int tierLine, int carrierLine) => tierLine >= 0 ? tierLine : carrierLine;
 
 		/// <summary>
 		/// PUSH-1: an overflow candidate survives the production-type cap only while the fraction
@@ -345,6 +356,28 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			foreach (var c in checks)
 				if (c == DockAccess.Clear)
+					return true;
+
+			return false;
+		}
+
+		/// <summary>
+		/// REFSCAN sec 3.1: <c>Legal(c)</c>, the law placement predicate promoted here so the site search, its
+		/// revalidation, the handoff and the widened scan share one implementation — CanPlaceBuilding, then
+		/// IsCloseEnoughToBase when the base distance matters, then the ∃-dock rule (one Clear dock suffices).
+		/// </summary>
+		public static bool RefinerySiteLegal(World world, Player player, IResourceLayer resourceLayer, ActorInfo actorInfo,
+			BuildingInfo bi, Actor producer, bool distanceToBaseIsImportant, IReadOnlyList<WVec> dockOffsets,
+			IReadOnlySet<string> valuable, CPos topLeft)
+		{
+			if (!world.CanPlaceBuilding(topLeft, actorInfo, bi, null))
+				return false;
+
+			if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, topLeft))
+				return false;
+
+			foreach (var off in dockOffsets)
+				if (CheckDockAccess(world, resourceLayer, actorInfo, bi, topLeft, off, valuable) == DockAccess.Clear)
 					return true;
 
 			return false;
@@ -526,6 +559,24 @@ namespace OpenRA.Mods.CA.Traits
 
 			failRetryTicks = resumeDelay;
 			return true;
+		}
+
+		public static bool QueueSweepDue(BotCooldown cooldown, int tick) => cooldown.Ready(tick);
+
+		public static void StartQueueSweepCooldown(ref BotCooldown cooldown, int tick, int delay) => cooldown.Start(tick, delay);
+
+		public static int QueueSweepPauseFromTick(int transitionTick, int lastVisitTick) => Math.Max(transitionTick, lastVisitTick + 1);
+
+		public static void ResumeQueueSweepCooldown(ref BotCooldown cooldown, bool started, int tick, int disabledFromTick)
+		{
+			if (started && disabledFromTick >= 0)
+				cooldown.Freeze(Math.Max(0, tick - disabledFromTick));
+		}
+
+		public static void MakeQueueSweepDue(ref BotCooldown cooldown, int tick)
+		{
+			if (cooldown.Due > tick)
+				cooldown.Due = tick;
 		}
 
 		/// <summary>

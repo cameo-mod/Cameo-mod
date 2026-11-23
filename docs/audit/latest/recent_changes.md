@@ -112,18 +112,18 @@ Commits reviewed: **919**, files touched: **4162**
 | cefceacd | 2026-09-28 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | 624348f6 | 2026-09-29 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | 7b0cd5d7 | 2026-09-28 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 5b526e79 | 2026-09-28 | Zan Yewang | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
-| 86b463d6 | 2026-09-28 | Zan Yewang | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
-| 58005b41 | 2026-09-28 | Zan Yewang | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
-| b862072c | 2026-09-28 | Zan Yewang | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
-| 8f1e5579 | 2026-09-28 | Zan Yewang | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
-| c6c990b7 | 2026-09-28 | Zan Yewang | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
+| 5b526e79 | 2026-09-28 | AedisToru | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
+| 86b463d6 | 2026-09-28 | AedisToru | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
+| 58005b41 | 2026-09-28 | AedisToru | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
+| b862072c | 2026-09-28 | AedisToru | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
+| 8f1e5579 | 2026-09-28 | AedisToru | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
+| c6c990b7 | 2026-09-28 | AedisToru | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
 | b92183f3 | 2026-09-28 | Blackrobe | agent trailer `OpenAI GPT-6 Astra <noreply@openai.com>` on a non-shared identity | review |
 | cfafbbf0 | 2026-09-28 | Blackrobe | agent trailer `OpenAI GPT-6 Astra <noreply@openai.com>` on a non-shared identity | review |
-| 045d0c37 | 2026-09-27 | Zan Yewang | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
-| 67b18009 | 2026-09-27 | Zan Yewang | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
-| e9d50021 | 2026-09-27 | Zan Yewang | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
-| 56de7db0 | 2026-09-27 | Zan Yewang | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
+| 045d0c37 | 2026-09-27 | AedisToru | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
+| 67b18009 | 2026-09-27 | AedisToru | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
+| e9d50021 | 2026-09-27 | AedisToru | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
+| 56de7db0 | 2026-09-27 | AedisToru | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
 
 
 ## R4 — engine/config changes to re-verify (13)

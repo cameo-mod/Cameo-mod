@@ -26,6 +26,21 @@ namespace OpenRA.Mods.Common.Traits
 	/// </summary>
 	public static class FransBotLog
 	{
+		// A persistent fault repeats these error lines per tick or per message: write each once per world.
+		static readonly ConditionalWeakTable<World, System.Collections.Generic.HashSet<string>> ErrorLatches = new();
+		static readonly System.Collections.Generic.HashSet<string> ProcessErrorLatches = new();
+
+		static bool FirstErrorInWorld(World world, string key)
+		{
+			if (world == null)
+			{
+				lock (ProcessErrorLatches)
+					return ProcessErrorLatches.Add(key);
+			}
+
+			return ErrorLatches.GetValue(world, _ => new System.Collections.Generic.HashSet<string>()).Add(key);
+		}
+
 		public const string PackageVersion = "V1.29.48";
 		public const string BasePackageVersion = "V1.29.47";
 		public const string BuildId = "FB-1.29.48-211D3D16F2BF";
@@ -97,11 +112,13 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			try
 			{
+#if CAMEO_DEV_LOGGING
 				var map = world.Map;
 				OpenRA.Log.Write("debug",
 					$"[MATCH INFO] Map=\"{MatchInfoValue(map.Title)}\" MapUID={MatchInfoValue(map.Uid)} " +
 					$"Tileset={MatchInfoValue(map.Tileset)} Size={map.MapSize.Width}x{map.MapSize.Height} " +
 					$"Package=\"{MatchInfoValue(map.Package?.Name)}\" BuildId={BuildId} Version={PackageVersion}");
+#endif
 			}
 			catch
 			{
@@ -126,11 +143,17 @@ namespace OpenRA.Mods.Common.Traits
 
 			try
 			{
+#if CAMEO_DEV_LOGGING
 				OpenRA.Log.Write("debug", $"[FRANS-BUILD][WT {world.WorldTick}] PACKAGE={PackageVersion} BASE={BasePackageVersion} ID={BuildId}");
+#endif
+#if CAMEO_DEV_LOGGING
 				OpenRA.Log.Write("debug", $"[FRANS-BUILD-FILES][WT {world.WorldTick}] {SourceFingerprint};FransBotLog.cs=SELF-{PackageVersion}");
+#endif
+#if CAMEO_DEV_LOGGING
 				OpenRA.Log.Write("debug",
 					$"[FRANS-PERF-CONFIG][WT {world.WorldTick}] module spike >= {ImmediateSpikeMilliseconds:0.0} ms; world-tick wall gap >= {WorldTickGapMilliseconds:0.0} ms; aggregate window {PerfSummaryIntervalWorldTicks} WT. " +
 					"Diagnostic wall-clock measurements only; no gameplay/order side effects.");
+#endif
 			}
 			catch
 			{
@@ -164,8 +187,12 @@ namespace OpenRA.Mods.Common.Traits
 					aggregate.SlowCalls++;
 
 				if (elapsedMs >= ImmediateSpikeMilliseconds)
+				{
+#if CAMEO_DEV_LOGGING
 					OpenRA.Log.Write("debug",
 						$"[FRANS-PERF-SPIKE][WT {world.WorldTick}] {player} {label} = {elapsedMs:0.00} ms");
+#endif
+				}
 			}
 			catch
 			{
@@ -209,12 +236,13 @@ namespace OpenRA.Mods.Common.Traits
 					var gapMs = TimestampTicksToMilliseconds(now - state.LastHeartbeatTimestamp);
 					if (worldTickDelta == 1 && gapMs >= WorldTickGapMilliseconds)
 					{
+#if CAMEO_DEV_LOGGING
 						var context = state.Context.Count == 0
 							? "no ferry context"
 							: string.Join(" | ", state.Context.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key}={kv.Value}"));
-
 						OpenRA.Log.Write("debug",
 							$"[FRANS-PERF-WORLD][WT {worldTick}] previous world-tick wall interval = {gapMs:0.00} ms; {context}");
+#endif
 					}
 				}
 
@@ -236,14 +264,18 @@ namespace OpenRA.Mods.Common.Traits
 
 				if (entries.Length > 0)
 				{
+#if CAMEO_DEV_LOGGING
 					OpenRA.Log.Write("debug",
 						$"[FRANS-PERF-SUMMARY][WT {worldTick}] top {entries.Length} Frans profiles over last ~{worldTick - state.LastSummaryWorldTick} WT:");
+#endif
 
 					foreach (var entry in entries)
 					{
+#if CAMEO_DEV_LOGGING
 						var a = entry.Value;
 						OpenRA.Log.Write("debug",
 							$"[FRANS-PERF-SUMMARY][WT {worldTick}] {entry.Key}: calls={a.Calls}, total={TimestampTicksToMilliseconds(a.TotalTimestampTicks):0.00} ms, max={TimestampTicksToMilliseconds(a.MaxTimestampTicks):0.00} ms, >=2ms={a.SlowCalls}");
+#endif
 					}
 				}
 
@@ -252,12 +284,17 @@ namespace OpenRA.Mods.Common.Traits
 			}
 			catch (Exception e)
 			{
-				OpenRA.Log.Write("debug", $"[FRANS-PERF-ERROR][WT {world.WorldTick}] {e.Message}");
+				if (FirstErrorInWorld(world, "FRANS-PERF-ERROR"))
+					OpenRA.Log.Write("debug", $"[FRANS-PERF-ERROR][WT {world.WorldTick}] {e.Message}");
 			}
 		}
 
+		// Compile boundary: release call sites are elided by the compiler, so their arguments are never evaluated.
+		// The runtime AIUtils.BotDebug mirror below is therefore dev-only as well (see CANDIDATE08 exemption list).
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
 		public static void BotDebug(World world, string format, params object[] args)
 		{
+#if CAMEO_DEV_LOGGING
 			EnsureBuildFingerprintLogged(world);
 
 			AIUtils.BotDebug(format, args);
@@ -270,8 +307,10 @@ namespace OpenRA.Mods.Common.Traits
 			}
 			catch (Exception e)
 			{
-				OpenRA.Log.Write("debug", $"[FRANS][LOGGER-ERROR] {e.Message}");
+				if (FirstErrorInWorld(world, "FRANS-LOGGER-ERROR"))
+					OpenRA.Log.Write("debug", $"[FRANS][LOGGER-ERROR] {e.Message}");
 			}
+#endif
 		}
 	}
 }

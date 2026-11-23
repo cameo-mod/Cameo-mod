@@ -40,12 +40,13 @@
 	GrantConditionOnBotOwner@cameogod:
 		Condition: cameogodbot
 		Bots: cameogod
-	# PUSH-1 (bank overflow): scopes the BotOverflowPolicy carrier to exactly the hard profile —
-	# classic shares BotLimits@hard via hardbot, so a separate condition is the only seam that
-	# leaves the A/B control byte-identical (Sol/Luna ruling 2026-10-14).
+	# PUSH-1 (bank overflow) + PROD-IDLE G1 (Opus 2026-11-21: bank_overflow on all tiers): scopes the
+	# BotOverflowPolicy carrier to the 11 tier bots. Classic shares BotLimits@hard via hardbot, so a separate
+	# condition stays the only seam that leaves the A/B control byte-identical (Sol/Luna ruling 2026-10-14):
+	# classic never carries this grant. The per-tier line is BotLimits.OverflowCash (12000 - 800 r).
 	GrantConditionOnBotOwner@bankoverflow:
 		Condition: bank_overflow
-		Bots: hard
+		Bots: noob, easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod
 	# ENG-T (#694, DESIGN §22): arms Fransbot's capture-transport service as the genericbot
 	# IBotCaptureTransportProvider. Inert by itself — EngineerBotModule only requests a run when
 	# TransportChance > 0 (default 0). Classic is excluded: the A/B reference stays untouched.
@@ -60,9 +61,11 @@
 	# bots named below — the arm sets `Bots: hard, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech`
 	# (genericbot && hardbot, exactly the F1-ctrl population; classic stays Frans-free).
 	# Default grants to `fransbot` only, where the flag is already implied — inert on master.
+	# PUSH-2 (LADDER-FIX F3, Orchestrator ruling 2026-11-21): the grant lists all 11 tier bots, noob included, so
+	# no tier is left out of the ladder; the only tier exception is Noob's missing insurance (a value, not a grant).
 	GrantConditionOnBotOwner@inc3f1:
 		Condition: inc3_frans_services
-		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
+		Bots: noob, easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	# CN2 unit-repair manager + garrison defence: the arm flips these to the genericbot tier list in the
 	# increment A/B (tools/ai/increment_switches.yaml); default grants to fransbot only - inert on master.
 	GrantConditionOnBotOwner@cn2unitrepair:
@@ -96,17 +99,9 @@
 		Condition: cn3_stealth_squads
 		Bots: fransbot
 
-	# AF-1 (AI_ARCHITECTURE §12.20): army-first building gate for genericbot (the spacing advisor needs no condition:
-	# its building gap is live for genericbot, only its re-ranking is switched, by a field).
-	# Same inert-on-master pattern - the switch arm flips Bots: to the genericbot tier list.
-	GrantConditionOnBotOwner@armyfirst:
-		Condition: army_first
-		Bots: fransbot
-	# PP-1 (AI_ARCHITECTURE §12.23): parallel-queue production width. Provider-seam so the shared
-	# UnitBuilderBotModuleCA@generic instance never hands the width to classic (the A/B control).
-	GrantConditionOnBotOwner@parallelprod:
-		Condition: parallel_production
-		Bots: fransbot
+	# PROD-IDLE G1 (PLAN_03 section 5, PLAN_04 rows 1-2): army_first and parallel_production are no longer
+	# granted. ArmyFirstBotModule mounts on genericbot (all 11 tiers) and ParallelProductionBotModule is removed:
+	# the spend owner's gate + the projected-ratio rule (BotLimits ArmyShareTargetPermille) are the one authority.
 	# The line-of-death fix (unified concave, AI_ARCHITECTURE 12.7a): Rush squads deploy a range-matched
 	# concave arc before the commit, so the wave fires together. The arm flips this to the
 	# genericbot tier list in the increment A/B; default fransbot-only - inert on master.
@@ -206,6 +201,10 @@
 		CapturerInfantryLimitPct: 0
 		EngineerCompletionIntervalTicks: 2200
 		RetreatRatioPct: 0
+		ArmyShareTargetPermille: 500
+		ProductionCashReserve: 3300
+		OverflowCash: 12000
+		RoleMixUnnamedTotalPct: 10
 		RequiresCondition: noobbot
 	BotLimits@easiest:
 		ProductionTypeLimit: 2
@@ -232,6 +231,10 @@
 		CapturerInfantryLimitPct: 1
 		EngineerCompletionIntervalTicks: 2000
 		RetreatRatioPct: 5
+		ArmyShareTargetPermille: 525
+		ProductionCashReserve: 3000
+		OverflowCash: 11200
+		RoleMixUnnamedTotalPct: 11
 		RequiresCondition: easiestbot
 	BotLimits@veryeasy:
 		ProductionTypeLimit: 3
@@ -258,6 +261,10 @@
 		CapturerInfantryLimitPct: 2
 		EngineerCompletionIntervalTicks: 1800
 		RetreatRatioPct: 10
+		ArmyShareTargetPermille: 550
+		ProductionCashReserve: 2700
+		OverflowCash: 10400
+		RoleMixUnnamedTotalPct: 12
 		RequiresCondition: veryeasybot
 	BotLimits@easy:
 		ProductionTypeLimit: 4
@@ -284,6 +291,10 @@
 		CapturerInfantryLimitPct: 3
 		EngineerCompletionIntervalTicks: 1600
 		RetreatRatioPct: 15
+		ArmyShareTargetPermille: 575
+		ProductionCashReserve: 2400
+		OverflowCash: 9600
+		RoleMixUnnamedTotalPct: 13
 		RequiresCondition: easybot
 	BotLimits@medium:
 		ProductionTypeLimit: 5
@@ -310,6 +321,10 @@
 		CapturerInfantryLimitPct: 4
 		EngineerCompletionIntervalTicks: 1400
 		RetreatRatioPct: 20
+		ArmyShareTargetPermille: 600
+		ProductionCashReserve: 2100
+		OverflowCash: 8800
+		RoleMixUnnamedTotalPct: 14
 		RequiresCondition: mediumbot
 	BotLimits@hard:
 		ProductionTypeLimit: 6
@@ -337,6 +352,10 @@
 		CapturerInfantryLimitPct: 5
 		EngineerCompletionIntervalTicks: 1200
 		RetreatRatioPct: 25
+		ArmyShareTargetPermille: 625
+		ProductionCashReserve: 1800
+		OverflowCash: 8000
+		RoleMixUnnamedTotalPct: 15
 		RequiresCondition: hardbot
 	BotLimits@veryhard:
 		ProductionTypeLimit: 7
@@ -364,6 +383,10 @@
 		CapturerInfantryLimitPct: 6
 		EngineerCompletionIntervalTicks: 1000
 		RetreatRatioPct: 30
+		ArmyShareTargetPermille: 650
+		ProductionCashReserve: 1500
+		OverflowCash: 7200
+		RoleMixUnnamedTotalPct: 16
 		RequiresCondition: veryhardbot
 	BotLimits@brutal:
 		ProductionTypeLimit: 8
@@ -391,6 +414,10 @@
 		CapturerInfantryLimitPct: 7
 		EngineerCompletionIntervalTicks: 800
 		RetreatRatioPct: 35
+		ArmyShareTargetPermille: 675
+		ProductionCashReserve: 1200
+		OverflowCash: 6400
+		RoleMixUnnamedTotalPct: 17
 		RequiresCondition: brutalbot
 	BotLimits@challenger:
 		ProductionTypeLimit: 9
@@ -418,6 +445,10 @@
 		CapturerInfantryLimitPct: 8
 		EngineerCompletionIntervalTicks: 600
 		RetreatRatioPct: 40
+		ArmyShareTargetPermille: 700
+		ProductionCashReserve: 900
+		OverflowCash: 5600
+		RoleMixUnnamedTotalPct: 18
 		RequiresCondition: challengerbot
 	BotLimits@unbeatable:
 		ProductionTypeLimit: 10
@@ -445,6 +476,10 @@
 		CapturerInfantryLimitPct: 9
 		EngineerCompletionIntervalTicks: 400
 		RetreatRatioPct: 45
+		ArmyShareTargetPermille: 725
+		ProductionCashReserve: 600
+		OverflowCash: 4800
+		RoleMixUnnamedTotalPct: 19
 		RequiresCondition: unbeatablebot
 	BotLimits@god:
 		ProductionTypeLimit: 11
@@ -472,13 +507,18 @@
 		CapturerInfantryLimitPct: 10
 		EngineerCompletionIntervalTicks: 200
 		RetreatRatioPct: 50
+		ArmyShareTargetPermille: 750
+		ProductionCashReserve: 300
+		OverflowCash: 4000
+		RoleMixUnnamedTotalPct: 20
 		RequiresCondition: cameogodbot
 
 	# PUSH-1 (bank overflow): while the bank sits above OverflowCash the armed base builder
 	# preempts the planner's front/link wants with a production pick (see
-	# BaseBuilderQueueManagerCA's overflow rung). hard only; classic never carries the grant.
-	# 8000 sits below the economy checker's 10000 band ceiling — candidate tuning, the
-	# sentinel evidence judges it.
+	# BaseBuilderQueueManagerCA's overflow rung). The 11 tier bots carry it; classic never does.
+	# The tier line BotLimits.OverflowCash (12000 - 800 r; hard = 8000) is the value; the 8000 here is
+	# only the fallback when a profile writes no line (negative). 8000 sits below the economy
+	# checker's 10000 band ceiling — candidate tuning, the sentinel evidence judges it.
 	BotOverflowPolicy@bankoverflow:
 		OverflowCash: 8000
 		RequiresCondition: bank_overflow
@@ -574,37 +614,71 @@ Player:
 	ModularBot@NoobAI:
 		Name: bot_ai.noob
 		Type: noob
+		# QW-B (STAGGER_DESIGN_06 section 15): one shared family for every Cameo bot, so mixed-difficulty lobbies spread their timer phases across all bots.
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 	ModularBot@EasiestAI:
 		Name: bot_ai.easiest
 		Type: easiest
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 	ModularBot@VeryEasyAI:
 		Name: bot_ai.veryeasy
 		Type: veryeasy
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 	ModularBot@EasyAI:
 		Name: bot_ai.easy
 		Type: easy
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 	ModularBot@MediumAI:
 		Name: bot_ai.medium
 		Type: medium
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 	ModularBot@HardAI:
 		Name: bot_ai.hard
 		Type: hard
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 		ModulePerfReportIntervalTicks: 300
 	ModularBot@VeryHardAI:
 		Name: bot_ai.veryhard
 		Type: veryhard
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 	ModularBot@BrutalAI:
 		Name: bot_ai.brutal
 		Type: brutal
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 	ModularBot@ChallengerAI:
 		Name: bot_ai.challenger
 		Type: challenger
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 	ModularBot@UnbeatableAI:
 		Name: bot_ai.unbeatable
 		Type: unbeatable
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 	ModularBot@CameoGodAI:
 		Name: bot_ai.cameogod
 		Type: cameogod
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 	# A/B reference bot ("classic"): the pre-Cognition-wave module stack —
 	# SquadManagerBotModuleCA and the CA builders/harvesters, but none of the
 	# CN-era brains (MasterAiBotModule, Scout/Beacon/CombatAnalysis, personality
@@ -638,26 +712,44 @@ Player:
 	ModularBot@ExploitRushAI:
 		Name: bot_ai.exploit_rush
 		Type: exploit_rush
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 		HiddenInLobby: True
 	ModularBot@ExploitTurtleAI:
 		Name: bot_ai.exploit_turtle
 		Type: exploit_turtle
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 		HiddenInLobby: True
 	ModularBot@ExploitGuerrillaAI:
 		Name: bot_ai.exploit_guerrilla
 		Type: exploit_guerrilla
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 		HiddenInLobby: True
 	ModularBot@ExploitExpansionAI:
 		Name: bot_ai.exploit_expansion
 		Type: exploit_expansion
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 		HiddenInLobby: True
 	ModularBot@ExploitSteamrollerAI:
 		Name: bot_ai.exploit_steamroller
 		Type: exploit_steamroller
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 		HiddenInLobby: True
 	ModularBot@ExploitTechAI:
 		Name: bot_ai.exploit_tech
 		Type: exploit_tech
+		RoundRobinFamily: True
+		RoundRobin: True
+		SlotPhasedTimers: True
 		HiddenInLobby: True
 	GrantConditionOnBotOwner@exploitstack:
 		Condition: genericbot
@@ -4138,16 +4230,13 @@ Player:
 	# combat units are below MinArmyUnitsBeforeBuildings with cash above ArmyFirstMinCash (gate off until the switch sets it).
 	# Conyards, refineries, power and the first factory are essential and always pass; the vote is inert until a unit
 	# producer exists, so tech sequencing cannot stall.
-	# `genericbot && army_first`: off on master until the increment A/B arms it (switch group AE).
+	# PROD-IDLE G1: mounted on genericbot (all 11 tiers). The flat cash-poor vote is subsumed by the spend owner's gate and
+	# the projected-ratio rule, so it is the same no-vote value 0 on every tier; the ratio comes from BotLimits.
 	ArmyFirstBotModule:
-		RequiresCondition: genericbot && army_first
-	# PP-1 (AI_ARCHITECTURE §12.23): settings-only IBotProductionWidth provider - UnitBuilder fills up to
-	# MaxQueuesPerCategory idle queues of a category per call, so multiple factories produce in parallel
-	# when income allows. Settings-only like AssaultFormationBotModule: the unit builder keeps the only
-	# order authority. `genericbot && parallel_production`: off on master (switch group AH).
-	ParallelProductionBotModule:
-		RequiresCondition: genericbot && parallel_production
-		MaxQueuesPerCategory: 4
+		RequiresCondition: genericbot
+		ArmyReserveLowCash: 0
+		ArmyReserveHighCash: 0
+		MinArmyUnitsBeforeBuildings: 0
 	# CN3 (crystallized-nexus DeployBotModule port): unified deploy driving for GrantConditionOnDeploy units -
 	# artillery move-into-range/deploy/retreat-from-dead-zone, stat-deployers entrench when idle+threatened,
 	# support deploys near allies, ability deploys fire once and pack. Squad-held units are skipped entirely
@@ -4306,8 +4395,9 @@ Player:
 		# PL-1 (AI_ARCHITECTURE §12.14): while the bot's personality lead trails its target, lean that
 		# personality's budget knobs toward the lead's driver — Steamroller relaxes the unit builder's
 		# cash floors, Rush shortens the squad attack-force delay. The leads are computed on every
-		# snapshot regardless (record-only telemetry); switch group G arms the consumers for the A/B.
-		UsePersonalityLeads: false
+		# snapshot regardless (record-only telemetry); the consumers are armed on every tier
+		# (PROD-IDLE G1, spend part only: the lean scales the P(r) reserve line, never M, E or R).
+		UsePersonalityLeads: true
 		# TC-2d (§12.17): allied bots spread TechRush<->Expansion rests by ClientIndex rank
 		# (switch group W). Inert in 1v1; this module mounts on genericbot only.
 		UseTeamRoleSplit: false
@@ -4351,7 +4441,7 @@ Player:
 		# Maintainer 2026-09-28: scout constantly; keep checking the enemy's probable base (public mpspawn data).
 		EnemySpawnBonus: 20000
 		# PL-2 (§12.14): while the guerrilla lead trails, the effective MaxScouts grows by up to
-		# this many, scaled by the deficit. Inert unless switch G arms UsePersonalityLeads.
+		# this many, scaled by the deficit. Armed on every tier with UsePersonalityLeads.
 		GuerrillaLeadExtraScouts: 2
 		# CA-6 (AI_ARCHITECTURE 12.9): scouts refresh the current main target's footprint first --
 		# the intel that target choice and raid bidding consume. Switch group N_ca6_target_intel.
@@ -4376,7 +4466,13 @@ Player:
 	# best as the target field (EX-0). EX-1: BaseCrawl placements walk toward it (genericbot only; classic, which
 	# shares BaseBuilderBotModuleCA@generic, gets no provider and keeps today's placement).
 	ExpansionPlannerBotModule:
-		RefineryFallbackForceAfterTicks: 1500
+		# REFSCAN D-5 TREATMENT (design _12 + ERRATUM_01; user rule: READY to placed <= 75 ticks in every case):
+		# site-first anytime search during production, placement from the bot tick, force off, two-verdict
+		# cancel on its own knob. CONTROL = RefinerySiteSearchEnabled false, RefineryFallbackForceAfterTicks 1500,
+		# RefineryCancelRequiresTwoVerdicts false (the pre-REFSCAN genericbot rules).
+		RefinerySiteSearchEnabled: true
+		RefineryFallbackForceAfterTicks: 0
+		RefineryCancelRequiresTwoVerdicts: true
 		RequiresCondition: genericbot
 		DriveBaseCrawl: true
 		# Enabled for the maintainer's 2026-10-15 combined playtest (BY).
@@ -4474,6 +4570,17 @@ Player:
 		RouteRecheckTicks: 100
 		MaxExposedRouteCells: 3
 		TransportChance: 25
+		# ENGDROP (ENGDROP_DESIGN_01, spec 02): drops come from the two-trigger scheduler. Trigger B on the equal-step ladder:
+		# chance 50 + 5 r %, every 525 - 30 r ticks, first due 675 - 60 r ticks after match start (r = 0 noob .. 10 cameogod;
+		# noob is one step below easiest by extrapolation). Trigger A (25-tick opportunity scan) has no per-tier switch.
+		# TransportChance above stays only for the DEV ed_engdrop Disabled arm (the legacy roll).
+		UseDropScheduler: true
+		DropChancePctEasy: 55
+		DropChancePctHard: 100
+		DropIntervalTicksEasy: 495
+		DropIntervalTicksHard: 225
+		DropInitialDelayTicksEasy: 615
+		DropInitialDelayTicksHard: 75
 		EscortThinnedPercent: 50
 		EscortSuperiority: 150
 		EscortDefendedCaptures: true
@@ -4489,8 +4596,9 @@ Player:
 		# unit production and tech structures outrank the civilian buildings the classic
 		# list already had; they also become escort-eligible.
 		PriorityCapturableActorTypes: v19, hosp, fcom, miss, ramiss, rabio, oilb, v19.husk, hosp.husk, bio.husk, miss.husk, fcom.husk, oilb.husk, td_gdi_constructionyard, td_nod_constructionyard, td_gdi_weaponsfactory, td_nod_airstrip, ts_nod_techcenter, ts_gdi_techcenter, cabal_techcenter, tsnttmpl, cabal_core, td_nod_templeofnod, td_nod_templeprime, ra1_allies_constructionyard, ra1_soviets_constructionyard, japan_japaneseconstructionyard, ra1_soviets_warfactory, ra1_soviets_largefactory, ra1_allies_warfactory, japan_japanesewarfactory, ra1_soviets_airfield, ra1_soviets_largesovietairfield, japan_japaneseairfield, ra1_allies_techcenter, ra1_soviets_techcenter, japan_japanesetechcenter, ra2_soviets_constructionyard, ra2_allies_constructionyard, yuri_constructionyard, ra2_soviets_warfactory, ra2_allies_warfactory, yuri_warfactory, ra2_allies_airforcecommandhq, ra2_allies_battlelab, ra2_soviets_battlelab, yuri_battlelab, yuri_lunarcommandcenter, asianalliance_constructionyard, asianalliance_warfactory, asianalliance_battlelab, ixian_constructionyard, ixian_advancedheavyfactory, ixian_ixresearchcenter, ixian_starport, latinsyndicate_syndicateconstructionyard, latinsyndicate_syndicatefactory, naxis_constructionyard, naxis_warfactory, naxis_academy, naxis_techcenter, schwarzermond_constructionyard, schwarzermond_warfactory, schwarzermond_techcenter, futuretech_constructionyard, futuretech_warpgate, futuretech_transmissioncenter, futuretech_battlelab, terran_commandcenter, terran_weaponsfactory, terran_academy, tkm_constructionyard, atreides_constructionyard, corrino_constructionyard, harkonnen_constructionyard, atreides_lightfactory, corrino_lightfactory, harkonnen_lightfactory, atreides_heavyfactory, corrino_heavyfactory, harkonnen_heavyfactory, atreides_hightechfactory, corrino_hightechfactory, harkonnen_hightechfactory, atreides_ixresearchcenter, corrino_ixresearchcenter, harkonnen_ixresearchcenter, atreides_starport, corrino_starport, harkonnen_starport, eden_factory_structure, eden_factory_vehicle, eden_factory_consumer, plymouth_structure_factory, plymouth_factory_vehicle, plymouth_factory_arachnid
-		# FB2: Frans SpecOps demand-capturers — safe targets justify building a specialist (switch T).
-		UseDemandCapturers: false
+		# FB2: Frans SpecOps demand-capturers — safe targets justify building a specialist (armed on every tier; requests pass the unit gate and
+		# CapturerInfantryLimitPct).
+		UseDemandCapturers: true
 		# TC-2e: yield a capture target to the outranking ally's published claim (switch group BF).
 		# Lowest ClientIndex keeps its claim; the loser falls through to another candidate. Inert in 1v1.
 		UseTeamCaptureClaims: false
@@ -4559,10 +4667,10 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-rush
-		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
-		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
+		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Rush: fast cheap pressure — skirmisher/anti-infantry heavy, scouts find the economy kills.
-		UseRoleMix: false
+		UseRoleMix: true
 		RoleMix:
 			frontline: 20
 			skirmisher: 25
@@ -4674,10 +4782,10 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-turtle
-		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
-		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
+		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Turtle: static-defence posture — artillery and anti-air mass behind the frontline screen.
-		UseRoleMix: false
+		UseRoleMix: true
 		RoleMix:
 			frontline: 25
 			artillery: 25
@@ -4785,10 +4893,10 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-tech
-		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
-		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
+		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Tech: quality over quantity — frontline core with the widest air split (gunship/fighter/bomber).
-		UseRoleMix: false
+		UseRoleMix: true
 		RoleMix:
 			frontline: 30
 			artillery: 15
@@ -4898,10 +5006,10 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-expansion
-		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
-		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
+		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Expansion: spread defence of growing territory — balanced core, extra scouts find the fields.
-		UseRoleMix: false
+		UseRoleMix: true
 		RoleMix:
 			frontline: 30
 			anti_air: 15
@@ -5011,10 +5119,10 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-steamroller
-		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
-		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
+		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Steamroller: massed armour push — frontline wall, artillery second line, AA cover.
-		UseRoleMix: false
+		UseRoleMix: true
 		RoleMix:
 			frontline: 40
 			artillery: 20
@@ -5121,10 +5229,10 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-guerrilla
-		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
-		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
+		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Guerrilla: map control — skirmishers and scouts hold ground, gunships punish exposed targets.
-		UseRoleMix: false
+		UseRoleMix: true
 		RoleMix:
 			skirmisher: 25
 			scout: 15
@@ -5345,8 +5453,8 @@ Player:
 		# least-provisioned queue type. SwitchCondition-gated — classic keeps today's behaviour.
 		# Enabled for the maintainer's 2026-10-15 combined playtest (BZ).
 		UseProductionScaling: true
-		BuildingProductionMinCashRequirement: 1000
-		DefenseProductionMinCashRequirement: 1500
+		BuildingProductionMinCashRequirement: 1500
+		DefenseProductionMinCashRequirement: 2000
 		BuildingQueues: Building, RABuilding, BuildingAddons
 		DefenseQueues: Defence, RADefence, BuildingAddons
 		ConstructionYardTypes: zerg_lair, zerg_hive
@@ -5515,16 +5623,19 @@ Player:
 		# Generic-only: classic retains its existing production rules.
 		SwitchCondition: genericbot
 		BankSaturationCash: 1
-		CapturerInfantryLimitPct: 10
+		CapturerInfantryLimitPct: 5
 		CapturerMinimumUnits: 2
 		CapturerAllowanceMax: 4
 		UseCompositions: true
 		# UW-1 (AI_ARCHITECTURE §2.8b item 3): derive the UnitsToBuild weights from the enabled
-		# personality's RoleMix x each unit's Versus-weighted strength. Off until the next increment
-		# A/B — switch group I_derived_unit_weights. Inert on classic: it carries no RoleMix and no
-		# IBotUnitRoles provider, so the same @generic instance keeps the yaml table there.
-		UseDerivedUnitWeights: false
-		IdleBaseUnitsMaximum: 50
+		# personality's RoleMix x each unit's Versus-weighted strength. Armed on every tier (PROD-IDLE G1).
+		# Classic is unaffected: it carries no RoleMix and no IBotUnitRoles provider, so the same
+		# @generic instance keeps the yaml table there.
+		UseDerivedUnitWeights: true
+		# PROD-IDLE G1: the fair producer service replaces the legacy fill loop for genericbot (SwitchCondition above);
+		# classic keeps the legacy loop byte-identically.
+		FairProducerService: true
+		IdleBaseUnitsMaximum: 25
 		ProductionMinCashRequirement: 1000
 		MaximiseProductionCashRequirement: 5000
 		# One immediately buildable basic combat unit for each barracks-first faction.
@@ -5648,9 +5759,14 @@ Player:
 	# validates the remembered-defence inputs on the hard candidate.
 	SiegeEvaluatorBotModule:
 		RequiresCondition: genericbot
-		# CA-2b: false = telemetry only. Flip true on the A/B candidate only --
-		# stand-off/retreat orders then reach assault squads via EvaluateSiege.
-		BehaviourEnabled: false
+		# SIEGE-FIX-01 S8: the CA-2b behaviour on/off switch is removed (no tier may switch a feature off). The verdict reaches assault squads on all
+		# 11 genericbot tiers; its strength is the Min/Max ladder below (DESIGN 19.1, equal steps: noob 3000/40/25 .. cameogod 1500/20/15).
+		StandOffMaxTicksEasy: 2850
+		StandOffMaxTicksHard: 1500
+		SiegeReengagePctEasy: 38
+		SiegeReengagePctHard: 20
+		HysteresisBandPctEasy: 24
+		HysteresisBandPctHard: 15
 		# CA-2c (§12.6 rule 5): retreat verdicts write a failed-siege memory into
 		# the region and later evaluations read the wall as heavier. Own A/B
 		# variable -- keep false while the CA-2b gate is measured.

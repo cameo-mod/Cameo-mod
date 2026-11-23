@@ -24,11 +24,11 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>Evidence has one reader, NoteRetreatStart, which returns at once while diagnostics are off; so nothing is measured then
 		/// (no extra ratio, ally scan or allocation on a switch-ON hold). Review A6-TELEMETRY-01 F1.</summary>
-		bool AggressionEvidenceWanted => Info.StalemateDiagnosticsEnabled;
+		bool AggressionEvidenceWanted => Info.StalemateDiagnosticsEnabled && DiagnosticSinkEnabled;
 
 		/// <summary>The evidence recorded for this squad in the current tick, or null (never records, never allocates).</summary>
 		internal AggressionEvidenceCA AggressionEvidenceFor(SquadCA squad) =>
-			squad != null && AggressionEvidenceTable.TryGetValue(squad, out var evidence) && evidence.IsFresh(World.WorldTick) ? evidence : null;
+			AggressionEvidenceWanted && squad != null && AggressionEvidenceTable.TryGetValue(squad, out var evidence) && evidence.IsFresh(World.WorldTick) ? evidence : null;
 
 		/// <summary>
 		/// Record what the rule saw as the squad is about to retreat. `coalitionRatio` is the ratio that decided (with engaged allies where

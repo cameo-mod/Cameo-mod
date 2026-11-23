@@ -9,8 +9,10 @@ instances.
 
 from __future__ import annotations
 
+import json
 import re
 import sys
+from fractions import Fraction
 from pathlib import Path
 
 
@@ -64,6 +66,14 @@ TUNING_FIELDS = {
     # guerrilla at least twice steamroller's, which spends its units on the main army.
     "MaxGuerrillaSquads",
     "MaxGuerrillaSquadsLate",
+    # AggTeam values are per-personality by design (672f2d7dc, PLAYTEST-PORT ARM10 port).
+    # AggTeamTest.cs pins them: the reserve share differs per personality (lines 858-861);
+    # turtle alone sets the push thresholds, every other personality is 0 (lines 868-873).
+    # StalemateSteamrollerProfile is the steamroller identity (default off).
+    "AggTeamReserveSharePercent",
+    "AggTeamPushArmyValue",
+    "AggTeamPushLateTick",
+    "StalemateSteamrollerProfile",
 }
 DEAD_FIELDS = {"RushInterval", "RushAttackScanRadius"}
 
@@ -161,7 +171,7 @@ FAIR_TIER = "hard"
 # is forbidden — difficulty-selective behaviour belongs in BotLimits fields, not in which modules
 # exist.
 TIER_CONDITIONS = {
-    "easiestbot", "veryeasybot", "easybot", "mediumbot", "hardbot",
+    "noobbot", "easiestbot", "veryeasybot", "easybot", "mediumbot", "hardbot",
     "veryhardbot", "brutalbot", "challengerbot", "unbeatablebot", "cameogodbot",
 }
 # Structural nodes that legitimately reference a tier condition: the BotLimits ladder IS the
@@ -171,9 +181,203 @@ TIER_GATE_ALLOW_PREFIXES = ("BotLimits@", "ProvidesPrerequisite@", "GrantConditi
 
 
 def on_line(values: list[int]) -> bool:
-    """Equal steps from the first tier to the last; an integer may sit within 0.5 of the line (DESIGN §19.1)."""
+    """Equal steps from the first tier to the last; an integer may sit within 0.5 of the line (DESIGN §19.1).
+    The half-step tolerance exists only because tier numbers are whole numbers (the engine rounds the line), so a
+    non-integer value is never on the line (LADDER-AUDIT-02 LOW, Code Monkey)."""
+    if any(Fraction(v).denominator != 1 for v in values):
+        return False
     n = len(values) - 1
-    return all(abs(v - (values[0] + (values[-1] - values[0]) * i / n)) <= 0.5 for i, v in enumerate(values))
+    return all(2 * abs(n * (v - values[0]) - (values[-1] - values[0]) * i) <= n for i, v in enumerate(values))
+
+
+def whole_values(path, raw, failures):
+    """The tier values as ints, or None after recording why not: a fractional or non-numeric tier value is a
+    failure row, never a crash and never a silent int() truncation."""
+    out = []
+    for value in raw:
+        try:
+            number = Fraction(str(value).strip())
+        except (ValueError, ZeroDivisionError):
+            failures.append(f"{path} has a non-numeric tier value {value!r}")
+            return None
+        if number.denominator != 1:
+            failures.append(f"{path} has a non-integer tier value {value!r}: tier numbers are whole numbers")
+            return None
+        out.append(int(number))
+    return out
+
+
+LADDER_TIERS = ("noob", *PRODUCTION_TIERS)
+TIER_NAMES = {tier: tier for tier in LADDER_TIERS} | {"god": "cameogod"}
+for tier in LADDER_TIERS:
+    TIER_NAMES[f"{tier}bot"] = tier
+    TIER_NAMES[f"{tier}botplayer"] = tier
+
+ZERO_ALLOWLIST = Path(__file__).with_name("ai_ladder_legal_zeros.json")
+NUMBER = re.compile(r"[+-]?(?:\d+(?:\.\d*)?|\.\d+)")
+BOOLEANS = {"true", "false"}
+
+
+def check_ladder_row(path, values, legal_zeros):
+    present = [value.strip() for value in values if value is not None]
+    missing = [tier for tier, value in zip(LADDER_TIERS, values) if value is None]
+    if missing:
+        return [f"{path} missing on {', '.join(missing)}"]
+    types = {value.lower() for value in present}
+    if types & BOOLEANS or path.rsplit(".", 1)[-1].startswith("Use"):
+        return [] if len(types) == 1 and types <= BOOLEANS else [f"{path} inconsistent boolean: {present}"]
+    if not any(NUMBER.fullmatch(value) for value in present):
+        return []
+    if not all(NUMBER.fullmatch(value) for value in present):
+        return [f"{path} mixes numeric and nonnumeric values: {present}"]
+    numbers = [Fraction(value) for value in present]
+    failures = []
+    fractional = [value for value, number in zip(present, numbers) if number.denominator != 1]
+    if fractional:
+        failures.append(f"{path} has non-integer tier values {fractional}: tier numbers are whole numbers")
+    elif not on_line(numbers):
+        failures.append(f"{path} is not on one equal-step line: {present}")
+    if len(set(numbers)) > 1 and (numbers[0] == 0 or numbers[-1] == 0) and not legal_zeros.get(path, "").strip():
+        failures.append(f"{path} has a zero endpoint without a cited allowance")
+    return failures
+
+
+def scalar_fields(node, prefix=""):
+    for child in node.children:
+        path = f"{prefix}.{child.key}" if prefix else child.key
+        if child.children:
+            yield from scalar_fields(child, path)
+        elif child.key not in {"RequiresCondition", "Prerequisites"}:
+            yield path, child.value
+
+
+def ladder_failures(roots, legal_zeros):
+    failures = []
+    all_tiers = set(LADDER_TIERS)
+    for root in roots:
+        if root is None:
+            continue
+        families = {}
+        grants = {}
+        foreign = {}
+        for child in root.children:
+            family, _, suffix = child.key.partition("@")
+            if family == "GrantConditionOnBotOwner":
+                condition = child.get("Condition")
+                if condition and condition not in TIER_NAMES:
+                    bots = {bot.strip() for bot in (child.get("Bots") or "").split(",")}
+                    grants.setdefault(condition, set()).update(bots & all_tiers)
+            elif suffix in TIER_NAMES and family not in {"ProvidesPrerequisite", "ModularBot"}:
+                variants = families.setdefault(family, {})
+                tier = TIER_NAMES[suffix]
+                if tier in variants:
+                    failures.append(f"{root.key}.{family} has duplicate forms for {tier}")
+                variants[tier] = dict(scalar_fields(child))
+            elif suffix and family not in {"ProvidesPrerequisite", "ModularBot"}:
+                foreign.setdefault(family, []).append(suffix)
+
+        # A family that has tier forms is a ladder family: a sibling whose suffix is not a tier name (a typo such as
+        # `@hrad`, or `@brutalbot2`) would otherwise be skipped without a word (LADDER-AUDIT-02 LOW, Code Monkey).
+        for family, suffixes in sorted(foreign.items()):
+            if family in families:
+                failures.append(f"{root.key}.{family} has suffixed forms that are not tier names: {sorted(suffixes)}")
+
+        for condition, enabled in sorted(grants.items()):
+            if enabled and enabled != all_tiers:
+                missing = ", ".join(t for t in LADDER_TIERS if t not in enabled)
+                failures.append(f"{root.key}.{condition} grant missing on {missing}")
+        for family, variants in sorted(families.items()):
+            fields = sorted({field for variant in variants.values() for field in variant})
+            for field in fields:
+                values = [variants.get(tier, {}).get(field) for tier in LADDER_TIERS]
+                failures.extend(check_ladder_row(f"{root.key}.{family}.{field}", values, legal_zeros))
+    return failures
+
+
+def siege_ladder_failures() -> list[str]:
+    """SIEGE-FIX-01 S8 (DESIGN 19.1): the siege evaluator has no on/off switch, and its two graded knobs lie on one equal-step line
+    over the 11 tiers (noob = easiest minus one step): StandOffMaxTicks 3000 - 150 r, SiegeReengagePct 40 - 2 r, HysteresisBandPct 25 - r, r = 0 (noob) .. 10
+    (cameogod), no zero endpoint. Min* is written for the easiest tier, Max* for cameogod (BotDifficultyLadder.Scale interpolates)."""
+    text = (ROOT / "mods" / "cameo" / "ai" / "ai.yaml").read_text(encoding="utf-8")
+    match = re.search(r"^\tSiegeEvaluatorBotModule:\n((?:\t\t.*\n|[ \t]*\n)+)", text, re.MULTILINE)
+    if not match:
+        return ["SiegeEvaluatorBotModule block not found in ai.yaml"]
+
+    block = match.group(1)
+    failures = []
+    if "BehaviourEnabled" in block:
+        failures.append("SiegeEvaluatorBotModule.BehaviourEnabled must not exist: no ladder tier may switch a feature off (SIEGE-FIX-01 S8)")
+
+    knobs = {}
+    for key in ("StandOffMaxTicksEasy", "StandOffMaxTicksHard", "SiegeReengagePctEasy", "SiegeReengagePctHard",
+                "HysteresisBandPctEasy", "HysteresisBandPctHard"):
+        found = re.search(rf"^\t\t{key}:[ \t]*(\d+)[ \t]*$", block, re.MULTILINE)
+        if not found:
+            failures.append(f"SiegeEvaluatorBotModule.{key} is not written in ai.yaml")
+        else:
+            knobs[key] = int(found.group(1))
+
+    if failures:
+        return failures
+
+    steps = 9  # easiest = rank 0 .. cameogod = rank 9; noob = rank -1
+    for name, lo, hi, base, per_rank in (
+        ("StandOffMaxTicks", knobs["StandOffMaxTicksEasy"], knobs["StandOffMaxTicksHard"], 3000, -150),
+        ("SiegeReengagePct", knobs["SiegeReengagePctEasy"], knobs["SiegeReengagePctHard"], 40, -2),
+        ("HysteresisBandPct", knobs["HysteresisBandPctEasy"], knobs["HysteresisBandPctHard"], 25, -1),
+    ):
+        # C# int arithmetic: min + ((max - min) * rank) / steps, truncated toward zero.
+        values = [lo + int(((hi - lo) * rank) / steps) for rank in range(-1, steps + 1)]
+        expected = [base + per_rank * r for r in range(0, 11)]
+        if values != expected:
+            failures.append(f"{name} tiers {values} != the ratified line {expected}")
+        if min(values) <= 0:
+            failures.append(f"{name} reaches zero or below: {values}")
+
+    return failures
+
+
+def engdrop_ladder_failures() -> list[str]:
+    """ENGDROP (DESIGN 19.1): Trigger B lies on one equal-step line over the 11 tiers (noob = easiest minus one step): chance 50 + 5 r %,
+    interval 525 - 30 r ticks, initial delay 675 - 60 r ticks, r = 0 (noob) .. 10 (cameogod). The scheduler is on (UseDropScheduler) and no tier switches
+    it off. Easy is written for the easiest tier, Hard for cameogod (BotDifficultyLadder.Scale interpolates)."""
+    text = (ROOT / "mods" / "cameo" / "ai" / "ai.yaml").read_text(encoding="utf-8")
+    match = re.search(r"^\tEngineerBotModule:\n((?:\t\t.*\n|[ \t]*\n)+)", text, re.MULTILINE)
+    if not match:
+        return ["EngineerBotModule block not found in ai.yaml"]
+
+    block = match.group(1)
+    failures = []
+    if not re.search(r"^\t\tUseDropScheduler:[ \t]*true[ \t]*$", block, re.MULTILINE):
+        failures.append("EngineerBotModule.UseDropScheduler must be true (ENGDROP: no ladder tier may switch a feature off)")
+
+    knobs = {}
+    for key in ("DropChancePctEasy", "DropChancePctHard", "DropIntervalTicksEasy", "DropIntervalTicksHard",
+                "DropInitialDelayTicksEasy", "DropInitialDelayTicksHard"):
+        found = re.search(rf"^\t\t{key}:[ \t]*(\d+)[ \t]*$", block, re.MULTILINE)
+        if not found:
+            failures.append(f"EngineerBotModule.{key} is not written in ai.yaml")
+        else:
+            knobs[key] = int(found.group(1))
+
+    if failures:
+        return failures
+
+    steps = 9  # easiest = rank 0 .. cameogod = rank 9; noob = rank -1
+    for name, lo, hi, base, per_rank in (
+        ("DropChancePct", knobs["DropChancePctEasy"], knobs["DropChancePctHard"], 50, 5),
+        ("DropIntervalTicks", knobs["DropIntervalTicksEasy"], knobs["DropIntervalTicksHard"], 525, -30),
+        ("DropInitialDelayTicks", knobs["DropInitialDelayTicksEasy"], knobs["DropInitialDelayTicksHard"], 675, -60),
+    ):
+        # C# int arithmetic: min + ((max - min) * rank) / steps, truncated toward zero.
+        values = [lo + int(((hi - lo) * rank) / steps) for rank in range(-1, steps + 1)]
+        expected = [base + per_rank * r for r in range(0, 11)]
+        if values != expected:
+            failures.append(f"{name} tiers {values} != the ratified line {expected}")
+        if min(values) <= 0:
+            failures.append(f"{name} reaches zero or below: {values}")
+
+    return failures
 
 
 def difficulty_scale_failures() -> list[str]:
@@ -196,14 +400,9 @@ def difficulty_scale_failures() -> list[str]:
         if missing:
             failures.append(f"BotLimits.{field} is not written for {missing}: that tier silently uses the C# default")
             continue
-        values = [int(v) for v in raw]
-        if not on_line(values):
+        values = whole_values(f"BotLimits.{field}", raw, failures)
+        if values is not None and not on_line(values):
             failures.append(f"BotLimits.{field} is not on one equal-step line: {values}")
-
-    for flag in BOOLEAN_LIMIT_FIELDS:
-        states = [(limits[t].get(flag) or "false").strip().lower() == "true" for t in DIFFICULTIES]
-        if states != sorted(states):
-            failures.append(f"BotLimits.{flag} is not a single threshold (off below, on from some tier up): {states}")
 
     behavior = rules.resolve("^BotProductionBehavior")
     for trait in ("ProductionTimeMultiplier", "ProductionCostMultiplier"):
@@ -211,12 +410,16 @@ def difficulty_scale_failures() -> list[str]:
         if any(n is None for n in nodes):
             failures.append(f"^BotProductionBehavior.{trait} is missing a tier")
             continue
-        values = [int(n.get("Multiplier")) for n in nodes]
+        values = whole_values(f"^BotProductionBehavior.{trait}", [n.get("Multiplier") for n in nodes], failures)
+        if values is None:
+            continue
         if not on_line(values):
             failures.append(f"{trait} is not on one equal-step line: {values}")
         fair = values[PRODUCTION_TIERS.index(FAIR_TIER)]
         if fair != 100:
             failures.append(f"{trait}: the fair tier `{FAIR_TIER}` must be 100, is {fair}")
+    legal_zeros = json.loads(ZERO_ALLOWLIST.read_text(encoding="utf-8"))
+    failures.extend(ladder_failures((player, behavior), legal_zeros))
     return failures
 
 
@@ -492,6 +695,8 @@ def main() -> int:
                 failures.append(f"shared field set differs between {reference_name} and {name}")
 
     failures.extend(difficulty_scale_failures())
+    failures.extend(engdrop_ladder_failures())
+    failures.extend(siege_ladder_failures())
     failures.extend(noob_failures(lines))
     failures.extend(scale_target_failures())
     failures.extend(tier_gate_failures())

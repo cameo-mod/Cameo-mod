@@ -129,6 +129,37 @@ namespace OpenRA.Mods.Cameo.Projectiles
 		[Desc("The alpha value [from 0 to 255] of color at the contrail end.")]
 		public readonly int ContrailEndColorAlpha = 0;
 
+		[Desc("Length of a moving streak drawn behind each fake bullet instead of a sprite and contrail. Zero (default) keeps the old fake bullet rendering. Set ContrailLength: 0 with it.",
+			"The ProjectileStreak* keys have the same names and meaning as on Bullet; the streak is render only and never changes the hit.")]
+		public readonly WDist ProjectileStreakLength = WDist.Zero;
+
+		[Desc("Maximum amount added to or subtracted from ProjectileStreakLength, picked per shot for the look only (no random generator, never changes the hit).")]
+		public readonly WDist ProjectileStreakLengthVariation = WDist.Zero;
+
+		[Desc("Width of the streak at its thickest.")]
+		public readonly WDist ProjectileStreakWidth = new(32);
+
+		[Desc("Color of the streak.")]
+		public readonly Color ProjectileStreakColor = Color.White;
+
+		[Desc("Width of the streak at its tail. Defaults to ProjectileStreakWidth.")]
+		public readonly WDist? ProjectileStreakTailWidth = null;
+
+		[Desc("Width at the tip of the leading taper. Defaults to ProjectileStreakWidth.")]
+		public readonly WDist? ProjectileStreakHeadWidth = null;
+
+		[Desc("Length of the leading taper. Zero disables it.")]
+		public readonly WDist ProjectileStreakHeadTaperLength = WDist.Zero;
+
+		[Desc("Color at the streak tail. Defaults to ProjectileStreakColor.")]
+		public readonly Color? ProjectileStreakTailColor = null;
+
+		[Desc("Alpha [0 to 255] of ProjectileStreakTailColor. Values outside the range are clamped.")]
+		public readonly int ProjectileStreakTailColorAlpha = 255;
+
+		[Desc("Equivalent to sequence ZOffset. Controls Z sorting.")]
+		public readonly int ProjectileStreakZOffset = 2047;
+
 		public IProjectile Create(ProjectileArgs args) { return new InstantHitWithFakeBullets(this, args); }
 	}
 
@@ -145,6 +176,11 @@ namespace OpenRA.Mods.Cameo.Projectiles
 		bool notImpacted = true;
 		int ticks;
 		WPos fakeBulletEndBasePos;
+		readonly bool streak;
+		readonly ProjectileStreakStyle streakStyle;
+		int renderedWorldTick = -1;
+		long renderMoveStart;
+		int renderMoveElapsed;
 
 		struct FakeBulletWrapper
 		{
@@ -163,6 +199,10 @@ namespace OpenRA.Mods.Cameo.Projectiles
 			this.args = args;
 			this.info = info;
 			world = args.SourceActor.World;
+			streak = info.ProjectileStreakLength.Length > 0;
+			streakStyle = new ProjectileStreakStyle(info.ProjectileStreakWidth, info.ProjectileStreakTailWidth,
+				info.ProjectileStreakHeadWidth, info.ProjectileStreakHeadTaperLength, info.ProjectileStreakColor,
+				info.ProjectileStreakTailColor, info.ProjectileStreakTailColorAlpha, info.ProjectileStreakZOffset);
 
 			animPalette = info.Palette;
 			if (info.IsPlayerPalette)
@@ -308,10 +348,96 @@ namespace OpenRA.Mods.Cameo.Projectiles
 				world.AddFrameEndTask(w => w.Remove(this));
 		}
 
+		// Streak mode (ProjectileStreakLength > 0) is render only. Tick, lifetime and the end of the projectile are the legacy fake bullet
+		// code, untouched; the streak is derived here from the state that code already keeps (SourcePos, EndPos, OverallTime, ticks).
+		// Bullet i is generated on the tick max(1, i * FakeBulletSpawnInterval) (the first tick has ticks == 1), so its age in ticks is
+		// ticks - that tick, and it has flown 'age' of its OverallTime steps. It is shown for age 0 .. OverallTime - 1: every tick of its
+		// flight including the last one, where the head reaches EndPos. The legacy sprite hides the last step (Time <= 0); the streak does not,
+		// so a flight of one step (distance below 2 * FakeBulletSpeed) is still drawn for that one tick.
+		// Set ContrailLength: 0 on streak weapons (the ^Tracer_* templates do): the legacy contrail fader would draw the old line.
+		IEnumerable<IRenderable> RenderStreaks(WorldRenderer wr)
+		{
+			var timestep = Math.Max(wr.World.Timestep, 1);
+			if (renderedWorldTick != wr.World.WorldTick)
+			{
+				renderedWorldTick = wr.World.WorldTick;
+				renderMoveStart = Game.RunTime;
+				renderMoveElapsed = 0;
+			}
+			else if (!wr.World.Paused)
+				renderMoveElapsed = (int)Math.Clamp(Game.RunTime - renderMoveStart, 0L, timestep);
+
+			for (var i = 0; i < fakeBullets.Length; i++)
+			{
+				var fb = fakeBullets[i];
+				if (fb.OverallTime == 0)
+					continue;
+
+				var age = ticks - Math.Max(1, i * info.FakeBulletSpawnInterval);
+				if (age < 0 || age >= fb.OverallTime)
+					continue;
+
+				var path = fb.EndPos - fb.SourcePos;
+				var total = path.Length;
+				if (total == 0)
+					continue;
+
+				// Head: age ticks plus the smooth part of the current tick, over OverallTime ticks (long math, no int overflow).
+				var head = fb.SourcePos + ProjectileStreak.Scale(path, (long)age * timestep + renderMoveElapsed, (long)fb.OverallTime * timestep);
+
+				// The length variation is derived from the shot (source, end, slot), so it is stable across frames and draws no random number.
+				var length = ProjectileStreak.VariedLength(info.ProjectileStreakLength.Length, info.ProjectileStreakLengthVariation.Length, StreakRoll(i, fb.SourcePos, fb.EndPos));
+				var visibleLength = Math.Min(length, (head - fb.SourcePos).Length);
+				if (visibleLength <= 0)
+					continue;
+
+				var tail = head - ProjectileStreak.Scale(path, visibleLength, total);
+				if (wr.World.FogObscures(head) && wr.World.FogObscures(tail))
+					continue;
+
+				foreach (var beam in ProjectileStreak.Render(streakStyle, head, tail, visibleLength))
+					yield return beam;
+			}
+		}
+
+		// Stable per-shot value (splitmix64 finaliser over the shot geometry). Wraps on overflow by design.
+		static ulong StreakRoll(int slot, WPos source, WPos end)
+		{
+			unchecked
+			{
+				var h = Mix(0x9E3779B97F4A7C15UL, slot);
+				h = Mix(h, source.X);
+				h = Mix(h, source.Y);
+				h = Mix(h, source.Z);
+				h = Mix(h, end.X);
+				h = Mix(h, end.Y);
+				return Mix(h, end.Z);
+			}
+		}
+
+		static ulong Mix(ulong h, int v)
+		{
+			unchecked
+			{
+				h += (ulong)(long)v + 0x9E3779B97F4A7C15UL;
+				h = (h ^ (h >> 30)) * 0xBF58476D1CE4E5B9UL;
+				h = (h ^ (h >> 27)) * 0x94D049BB133111EBUL;
+				return h ^ (h >> 31);
+			}
+		}
+
 		public IEnumerable<IRenderable> Render(WorldRenderer wr)
 		{
 			if (fakeBullets == null)
 				yield break;
+
+			if (streak)
+			{
+				foreach (var r in RenderStreaks(wr))
+					yield return r;
+
+				yield break;
+			}
 
 			foreach (var c in fakeBullets)
 			{

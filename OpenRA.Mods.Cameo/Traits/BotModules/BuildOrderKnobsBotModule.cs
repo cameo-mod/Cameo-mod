@@ -232,7 +232,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		string enemyFaction = "";
 		BuildOrderReaction active;
 		int lastReactTick;
-		int nextReactTick;
+		BotCooldown reactCooldown;
 		readonly List<string> events = new();
 		int ticksPerMinute = 1500;
 
@@ -305,10 +305,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					LogOpeningEnd(tick);
 			}
 
-			if (tick >= nextReactTick)
+			if (ReactReady(reactCooldown, tick))
 			{
 				React(tick);
-				nextReactTick = tick + Math.Max(1, Info.ReactEvalTicks);
+				ReloadReact(ref reactCooldown, tick, Info.ReactEvalTicks);
 			}
 		}
 
@@ -334,6 +334,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			resolved = true;
 		}
 
+		internal static bool ReactReady(BotCooldown cooldown, int tick) => cooldown.Ready(tick);
+
+		internal static void ReloadReact(ref BotCooldown cooldown, int tick, int interval) =>
+			cooldown.Start(tick, Math.Max(1, interval));
+
 		void LoadLearned()
 		{
 			var fs = Game.ModData.DefaultFileSystem;
@@ -347,7 +352,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			using (var stream = fs.Open(learnedPath))
 				learned = BuildOrderLearned.Parse(MiniYaml.FromStream(stream, Info.LearnedFile));
 
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI {player.InternalName}: BO learned: {learned.ScopeCount} knob scopes, {learned.OpeningScopeCount} opening scopes");
+#endif
 		}
 
 		/// <summary>The preset x learned x jitter vector for a personality. The jitter draws are kept, so a personality switch only re-reads the preset.</summary>

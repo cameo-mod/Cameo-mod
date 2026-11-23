@@ -12,7 +12,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.CA.Traits;
+using BotCallPeriod = OpenRA.Mods.CA.BotCallPeriod;
 using BotRng = OpenRA.Mods.CA.BotRng;
+using BotVisitClock = OpenRA.Mods.CA.BotVisitClock;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Primitives;
@@ -335,7 +337,99 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"builder's own BuildingQueues (Cameo's classic mode builds from the player-level RABuilding queue).")]
 		public readonly HashSet<string> BuildingQueues = new();
 
+		[Desc("REFSCAN D-5 (design _12 + ERRATUM_01, TREATMENT arm): site-first anytime refinery search. A law refinery",
+			"opens an episode when it enters the queue, searches during production under a per-visit unit cap, reserves",
+			"its best site and places at READY from the bot module tick (READY to placed <= 75 ticks). False = CONTROL:",
+			"the claim ladder, the park and the fallback poll at READY, exactly as before.")]
+		public readonly bool RefinerySiteSearchEnabled = false;
+
+		[Desc("REFSCAN sec 3.6 (F1): the completed-refinery cancel needs two Exhausted verdicts one relist epoch apart.",
+			"In force when this is true OR the STALL-FIX-01 force bound is on. Lint L-C refuses the search with this false.")]
+		public readonly bool RefineryCancelRequiresTwoVerdicts = false;
+
+		[Desc("REFSCAN sec 6 (D-3): units (one legality check plus its score) a search visit may spend during production.")]
+		public readonly int RefinerySearchVisitUnits = 64;
+
+		[Desc("REFSCAN sec 4.3 (D-3): units per visit in the deadline phase (READY, no legal member).")]
+		public readonly int RefinerySearchDeadlineVisitUnits = 512;
+
+		[Desc("REFSCAN sec 3.3 F8 (D-3): units per visit for the O-3 static order. O-3 is the widened scan's own paged",
+			"pass here, so this caps each O-3 poll's cell budget.")]
+		public readonly int RefinerySearchOrderBuildUnits = 64;
+
+		[Desc("REFSCAN sec 2 (D-3): ticks an admitted refinery may take to appear in its producer's queue.")]
+		public readonly int RefinerySearchEpisodeBindGraceTicks = 75;
+
+		[Desc("REFSCAN sec 4.1 (F5): L_o*, the order latency bound in ticks (PlaceBuilding issue to resolve), max",
+			"observed + one net frame. Placeholder 9 until V-1 measures it. Lint L-R: 2 * (V + L_o*) <= 75 for every N.")]
+		public readonly int RefineryOrderLatencyTicks = 9;
+
+		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
+		{
+			base.RulesetLoaded(rules, ai);
+
+			// REFSCAN lint L-C (sec 3.6): the search never runs without the two-verdict cancel.
+			if (RefinerySiteSearchLogic.CancelKnobLintFails(RefinerySiteSearchEnabled, RefineryCancelRequiresTwoVerdicts))
+				throw new YamlException($"{ai.Name}.ExpansionPlannerBotModule: lint L-C: RefinerySiteSearchEnabled is true but "
+					+ "RefineryCancelRequiresTwoVerdicts is false.");
+
+			if (!RefinerySiteSearchEnabled)
+				return;
+
+			// REFSCAN lint L-R (sec 4.4): 2 * (V + L_o*) <= 75 for N = 1..12 and a re-pack; any failing N is refused.
+			var failed = RefinerySiteSearchLogic.LatencyLintFailures(RefineryOrderLatencyTicks);
+			if (failed.Count > 0)
+				throw new YamlException($"{ai.Name}.ExpansionPlannerBotModule: lint L-R: 2 * (V + {RefineryOrderLatencyTicks}) > "
+					+ $"{RefinerySiteSearchLogic.DeadlineTicks} for {string.Join(", ", failed)}.");
+
+			if (RefinerySearchVisitUnits < 1 || RefinerySearchDeadlineVisitUnits < RefinerySearchVisitUnits
+				|| RefinerySearchOrderBuildUnits < 1 || RefinerySearchEpisodeBindGraceTicks < 0)
+				throw new YamlException($"{ai.Name}.ExpansionPlannerBotModule: REFSCAN unit knobs out of range.");
+
+			// REFSCAN lint L-M (sec 3.4, Haiku C1 on D-6): for every bot type that runs this planner, the placement
+			// emitters are a subset of {QM, MXM}: the engine McvManagerBotModule is not configured, and no enabled
+			// Fransbot base builder runs beside the planner.
+			var lintM = RefineryEmitterLint.Failures(ai, this);
+			if (lintM.Count > 0)
+				throw new YamlException($"{ai.Name}.ExpansionPlannerBotModule: lint L-M: {string.Join("; ", lintM)}.");
+		}
+
 		public override object Create(ActorInitializer init) { return new ExpansionPlannerBotModule(init.Self, this); }
+	}
+
+	/// <summary>
+	/// REFSCAN lint L-M: the bot types that enable the planner (per GrantConditionOnBotOwner) may not also enable a
+	/// placement emitter the reservation mask cannot see — the engine McvManagerBotModule (not hooked by D-6) or a
+	/// Fransbot base builder (its own emitters, scoped out in sec 3.4).
+	/// </summary>
+	public static class RefineryEmitterLint
+	{
+		public static List<string> Failures(ActorInfo ai, ConditionalTraitInfo planner)
+		{
+			var failures = new List<string>();
+			var grants = ai.TraitInfos<GrantConditionOnBotOwnerInfo>().ToList();
+			var bots = grants.SelectMany(g => g.Bots).Distinct().OrderBy(b => b, StringComparer.Ordinal).ToList();
+			var emitters = ai.TraitInfos<ConditionalTraitInfo>()
+				.Where(t => t is McvManagerBotModuleInfo || t.GetType().Name == "FransBaseBuilderBotModuleInfo")
+				.ToList();
+
+			foreach (var bot in bots)
+			{
+				var symbols = grants.Where(g => g.Bots.Contains(bot) && g.Condition != null)
+					.Select(g => g.Condition).Distinct().ToDictionary(c => c, c => 1);
+				if (!Enabled(planner, symbols))
+					continue;
+
+				foreach (var e in emitters)
+					if (Enabled(e, symbols))
+						failures.Add($"bot type '{bot}' enables both the planner and {e.GetType().Name}");
+			}
+
+			return failures;
+		}
+
+		static bool Enabled(ConditionalTraitInfo info, IReadOnlyDictionary<string, int> symbols) =>
+			info.RequiresCondition == null || info.RequiresCondition.Evaluate(symbols);
 	}
 
 	public enum McvRole { Expansion, FieldRefinery, BaseBuilding }
@@ -663,7 +757,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		PlayerResources resources;
 		IBotRegionThreatProvider[] threatProviders;
 		BaseBuilderBotModuleCA[] baseBuilders;
-		int ticks;
+		// STAGGER-06 C001/C002 (TIMER_TABLE_06, class P, form F3 with c0 = 0, K = ReplanTicks): ONE world-tick due for the
+		// idle-path check and the main-path check, which shared the old `ticks` call counter (one increment per BotTick
+		// call on either path, `++ticks % K == 0`). See BotCallPeriod: armed on the first call, frozen while the trait is
+		// disabled (R2), not saved (a load re-arms, as `ticks` restarted at 0).
+		// QW-B: the bot's phase p (0 unless it phase-offsets its timers) arms the counter at c0 = -p, so the replans run on
+		// calls K + p, 2K + p, ... (never before call K): see BotCallPeriod.Call and IsReplanCall.
+		BotCallPeriod replanCalls;
 		string lastIdleReason;
 		readonly Dictionary<int, int> claimAttempts = new();
 		readonly Dictionary<int, int> parkedUntil = new();
@@ -928,6 +1028,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		RefineryFallbackOutcome IBotExpansionTargetProvider.PollRefineryFallbackSite(Actor producer, string item,
 			bool distanceToBaseIsImportant, out CPos? site)
 		{
+			return PollFallback(producer, item, distanceToBaseIsImportant, -1, true, out site);
+		}
+
+		/// <summary>
+		/// REF-2 P1a widened poll, shared by the queue's READY path (<paramref name="cellBudget"/> &lt; 0: the
+		/// per-sweep Info budget, as before) and REFSCAN O-3 (an explicit budget charged to the search visit).
+		/// <paramref name="terminalSweep"/> = add the terminal tier's same-tick coherence sweep bound (always on
+		/// the old path; REFSCAN asks for it only in the deadline phase, where the cancel certificate matters).
+		/// </summary>
+		RefineryFallbackOutcome PollFallback(Actor producer, string item, bool distanceToBaseIsImportant, int cellBudget,
+			bool terminalSweep, out CPos? site)
+		{
 			site = null;
 			if (!LawActive || producer == null || producer.IsDead || !producer.IsInWorld)
 				return RefineryFallbackOutcome.NoUniverse;
@@ -951,8 +1063,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// the ordinary enumeration budget — the atom count scales with actors and rank
 			// cells, so the terminal budget is sized to cover it (all work stays charged; an
 			// undersized terminal budget would stall the pass into a hold).
-			var budget = Info.RefineryFallbackScanCellBudget;
-			if (scan.Tier >= Info.RefineryFallbackTierMaxDist)
+			var budget = cellBudget < 0 ? Info.RefineryFallbackScanCellBudget : cellBudget;
+			if (terminalSweep && scan.Tier >= Info.RefineryFallbackTierMaxDist)
 				budget += FallbackSweepBound();
 
 			// STALL-FIX-01 (CI, Info.RefineryFallbackForceAfterTicks > 0): a scan deferred this long is forced
@@ -964,11 +1076,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				verdict = scan.PollForced(Info.RefineryFallbackTierMaxDist, now,
 					() => FallbackSnapshot(actorInfo, bi, producer, distanceToBaseIsImportant), out site);
 
+#if CAMEO_DEV_LOGGING
 				var forced = RefineryFallbackScan.ForcedLine(player.ClientIndex, item, producer.ActorID,
 					now - scan.ForceStartTick, Info.RefineryFallbackForceAfterTicks, scan.ForcedPolls, verdict, site,
 					baseCenter ?? producer.Location, scan.LastPollWork, scan.Epochs, scan.ExhaustedChain, scan.ExhaustedConfirmed, now);
 				Log.Write("debug", forced);
-				AIUtils.BotDebug(forced);
+				OpenRA.Mods.CA.AIUtils.BotDebug(forced);
+#endif
 			}
 			else
 				verdict = scan.Poll(budget, now,
@@ -1003,7 +1117,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			return producer != null
 				&& fallbackScans.TryGetValue((producer.ActorID, item), out var scan)
-				&& scan.CancelCertificateCurrent(Info.RefineryFallbackForceAfterTicks);
+				&& scan.CancelCertificateCurrent(RefinerySiteSearchLogic.CancelRequiresTwoVerdicts(
+					Info.RefineryCancelRequiresTwoVerdicts, Info.RefineryFallbackForceAfterTicks));
 		}
 
 		void IBotExpansionTargetProvider.RefinerySiteCommitted(CPos site)
@@ -1258,14 +1373,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		bool FallbackLegal(ActorInfo actorInfo, BuildingInfo bi, Actor producer, bool distanceToBaseIsImportant,
 			IReadOnlyList<WVec> dockOffsets, IReadOnlySet<string> valuable, IResourceLayer layer, CPos topLeft)
 		{
-			if (!world.CanPlaceBuilding(topLeft, actorInfo, bi, null))
-				return false;
-
-			if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, topLeft))
-				return false;
-
-			return BaseBuilderQueueEvalCA.AnyDockClear(
-				dockOffsets.Select(off => BaseBuilderQueueEvalCA.CheckDockAccess(world, layer, actorInfo, bi, topLeft, off, valuable)));
+			// REFSCAN sec 3.1: the one shared implementation (same chain, same order, same ∃-dock rule).
+			return BaseBuilderQueueEvalCA.RefinerySiteLegal(world, player, layer, actorInfo, bi, producer,
+				distanceToBaseIsImportant, dockOffsets, valuable, topLeft);
 		}
 
 		/// <summary>
@@ -1449,7 +1559,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return false;
 
 			var ok = anchorReservations.TryReserveAll(set, owner, tick, untilTick, a => AnchorTakenForOwner(a, tick, owner));
+#if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI ({player.ClientIndex}): REPAIR-B3 reserve {set.Count} anchors for site {site} v{modelVersion}: {(ok ? "committed" : "refused")} at tick {tick}");
+#endif
 			return ok;
 		}
 
@@ -2411,7 +2523,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// want (td_gdi: the repair facility gating the MCV for ~10k ticks of the trace).
 				wantedMcvPrerequisite = MissingMcvPrerequisite();
 				if (wantedMcvPrerequisite != null)
+				{
+#if CAMEO_DEV_LOGGING
 					Log.Write("debug", $"AI ({player.ClientIndex}): REF-1 MCV due but not producible — wants prerequisite building {wantedMcvPrerequisite} at tick {world.WorldTick}");
+#endif
+				}
 				return;
 			}
 
@@ -2420,9 +2536,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			unitBuilder.RequestUnitProduction(bot, mcvType);
+#if CAMEO_DEV_LOGGING
 			var line = $"AI ({player.ClientIndex}): greedy MCV request {mcvType}: {active} active yards/MCVs, {queued} queued, cash {resources.GetCashAndResources()}, at tick {world.WorldTick}";
 			Log.Write("debug", line);
-			AIUtils.BotDebug(line);
+			OpenRA.Mods.CA.AIUtils.BotDebug(line);
+#endif
 		}
 
 		CPos? IBotMcvExpansionSiteProvider.McvExpansionSite(Actor mcv)
@@ -2434,7 +2552,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// BEV: a base-building vehicle deploys at home; the MCV module's deploy search takes the cells 2-20 around it.
 			if (Info.BaseVehiclesAtBase && baseCenter.HasValue && RoleOf(mcv.Info) == McvRole.BaseBuilding)
 			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): BEV {mcv.Info.Name} {mcv.ActorID} deploys at the base {baseCenter.Value} (not a construction MCV, not a refinery) at tick {world.WorldTick}");
+#endif
 				return baseCenter;
 			}
 
@@ -2464,7 +2584,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					&& !pathFinder.PathMightExistForLocomotorBlockedByImmovable(locomotor, mcv.Location, f.Center))
 				{
 					if (landUnreachableLogged.Add(f.Index))
+					{
+#if CAMEO_DEV_LOGGING
 						Log.Write("debug", $"AI ({player.ClientIndex}): LC3 field {f.Index} at {f.Center} is not reachable for {mcv.Info.Name} ({locomotor.Info.Name}) from {mcv.Location} at tick {tick}");
+#endif
+					}
 
 					return false;
 				}
@@ -2476,7 +2600,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				{
 					parkedUntil[f.Index] = tick + Info.ParkTicks;
 					if (deployRejectedLogged.Add(f.Index))
+					{
+#if CAMEO_DEV_LOGGING
 						Log.Write("debug", $"AI ({player.ClientIndex}): BZ field {f.Index} at {f.Center} parked {Info.ParkTicks} ticks — no deployable cell in the annulus for {mcv.Info.Name} at tick {tick}");
+#endif
+					}
 
 					return false;
 				}
@@ -2521,7 +2649,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (safe != null && !McvSafeRoute(safe, mcv, s.Center, true, out safeRoute))
 				{
 					rejected.Add(s.Index);
+#if CAMEO_DEV_LOGGING
 					Log.Write("debug", $"AI ({player.ClientIndex}): MS-0 field {s.Index} at {s.Center} has no route around the enemy zones for {mcv.Info.Name} {mcv.ActorID} at {mcv.Location}, tick {tick}");
+#endif
 					continue;
 				}
 
@@ -2529,7 +2659,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (park)
 				{
 					parkedUntil[s.Index] = tick + Info.ParkTicks;
+#if CAMEO_DEV_LOGGING
 					Log.Write("debug", $"AI ({player.ClientIndex}): LC3 parked field {s.Index} at {s.Center} for {Info.ParkTicks} ticks: handed to an idle MCV more than {Info.McvMaxSiteHandouts} times in a row, no yard founded, at tick {tick}");
+#endif
 					continue;
 				}
 
@@ -2539,7 +2671,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (safe != null)
 					McvSafeIssue(mcv, s.Index, safeRoute);
 
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): EX-3 MCV {mcv.Info.Name} at {mcv.Location} sent to field {s.Index} at {s.Center}: value {s.Value}, hops {s.Hops}, safety {s.Safety:F2}, hand-out {mcvHandout.Count}{(safe != null ? McvSafeZoneNote(safe, mcv, s) : string.Empty)} at tick {tick}");
+#endif
 				LastMcvSite = s.Center;
 				return s.Center;
 			}
@@ -2697,7 +2831,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			if (resourceMap == null || resources == null)
 			{
-				if (++ticks % Info.ReplanTicks == 0)
+				if (ReplanDue(bot))
 					Idle(resourceMap == null ? "no enabled ResourceMapBotModule" : "no PlayerResources");
 				return;
 			}
@@ -2715,11 +2849,26 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (Info.FieldCoverage && Info.DriveRefineries)
 				CoverageTick();
 
-			if (++ticks % Info.ReplanTicks != 0)
+			if (!ReplanDue(bot))
 				return;
 
 			Replan(bot);
 		}
+
+		// C001/C002: true on the call at which the old `++ticks % ReplanTicks == 0` (QW-B: `calls >= K && calls % K == phase`) was
+		// true. Called exactly once per BotTick call (the idle path and the main path are exclusive), as the old increment was.
+		bool ReplanDue(IBot bot)
+		{
+			var clock = BotVisitClock.Of(bot);
+			return replanCalls.Call(clock.VisitTick, clock.Elapsed, Info.ReplanTicks,
+				replanCalls.Armed ? 0 : BotSlotPhases.Resolve(bot, Info.ReplanTicks, 0));
+		}
+
+		// Pure oracle for tests (the QW-B rule BotCallPeriod must reproduce at N = 1): call number `calls` (1-based) is a replan
+		// call. Phase 0 is the old `calls % replanTicks == 0`; a phase p moves every replan p calls later, and the first one is
+		// never before call replanTicks.
+		internal static bool IsReplanCall(int calls, int replanTicks, int phase) =>
+			calls >= replanTicks && calls % replanTicks == phase;
 
 		void Replan(IBot bot)
 		{
@@ -2991,9 +3140,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					claimAttempts.Remove(want.Index);
 					claimField = null;
 					wantsRefinery = false;
+#if CAMEO_DEV_LOGGING
 					var parked = $"AI ({player.ClientIndex}): EX-2 parked field {want.Index} at {want.Center} for {Info.ParkTicks} ticks: {now} refinery(ies) built without claiming it, at tick {world.WorldTick}";
 					Log.Write("debug", parked);
-					AIUtils.BotDebug(parked);
+					OpenRA.Mods.CA.AIUtils.BotDebug(parked);
+#endif
 				}
 			}
 			else
@@ -3003,10 +3154,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// wanted to expand and why. BotDebug alone only reaches the in-game chat.
 			if (Target is FieldScore t && t.Index != previous)
 			{
+#if CAMEO_DEV_LOGGING
 				var line = string.Format("AI ({0}): EX-0 target field {1} at {2}: value {3}, hops {4}, payback {5} ticks, threat {6}, score {7:F4} ({8} fields) at tick {9}",
 					player.ClientIndex, t.Index, t.Center, t.Value, t.Hops, t.PaybackTicks, t.Threat, t.Score, scores.Count, world.WorldTick);
 				Log.Write("debug", line);
-				AIUtils.BotDebug(line);
+				OpenRA.Mods.CA.AIUtils.BotDebug(line);
+#endif
 			}
 
 			// Greedy expansion: ask for the next construction MCV right away; the engine module would wait for its
@@ -3493,13 +3646,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (lastCrawlRefusal != reason)
 				{
 					lastCrawlRefusal = reason;
+#if CAMEO_DEV_LOGGING
 					var refusal = string.Format(
 						"AI ({0}): TF-1 crawl link {1} REFUSED ({2}) target {3} aim {4} distSq {5} paid {6}/{7} count {8}/{9} stall {10} at tick {11}",
 						player.ClientIndex, link.Info.Name, reason, Target.Value.Center, crawlTargetEdge, distanceSq,
 						crawlAllowance.PaidCost, Info.OptionalLinkCostAllowance, crawlAllowance.PaidCount,
 						Info.OptionalLinkCountAllowance, crawlAllowance.NonprogressReplans, world.WorldTick);
 					Log.Write("debug", refusal);
-					AIUtils.BotDebug(refusal);
+					OpenRA.Mods.CA.AIUtils.BotDebug(refusal);
+#endif
 				}
 
 				return;
@@ -3509,13 +3664,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			wantedLinkBuilding = link.Info.Name;
 			wantWasMandatory = mandatoryPower;
 			crawlFrontierAnchor = FrontierAnchor(buildingTiles, crawlTargetEdge);
+#if CAMEO_DEV_LOGGING
 			var admitted = string.Format(
 				"AI ({0}): TF-1 crawl link {1} ADMITTED{2} target {3} aim {4} distSq {5} paid {6}/{7} count {8}/{9} at tick {10}",
 				player.ClientIndex, link.Info.Name, mandatoryPower ? " (mandatory power)" : "",
 				Target.Value.Center, crawlTargetEdge, distanceSq, crawlAllowance.PaidCost,
 				Info.OptionalLinkCostAllowance, crawlAllowance.PaidCount, Info.OptionalLinkCountAllowance, world.WorldTick);
 			Log.Write("debug", admitted);
-			AIUtils.BotDebug(admitted);
+			OpenRA.Mods.CA.AIUtils.BotDebug(admitted);
+#endif
 		}
 
 		/// <summary>
@@ -3552,11 +3709,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (bound > 0 && worst >= bound)
 				{
 					crawlParkedUntil[Target.Value.Index] = tick + Info.LossParkTicks;
+#if CAMEO_DEV_LOGGING
 					var parked = string.Format(
 						"AI ({0}): CRAWL-SAFETY parked target field {1} for {2} ticks — {3} links lost near {4} at tick {5}",
 						player.ClientIndex, Target.Value.Index, Info.LossParkTicks, worst, hottest, tick);
 					Log.Write("debug", parked);
-					AIUtils.BotDebug(parked);
+					OpenRA.Mods.CA.AIUtils.BotDebug(parked);
+#endif
 					return RefuseSafety("route farmed");
 				}
 			}
@@ -3787,9 +3946,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			anchorParkedUntil[anchor] = (tick + Info.RefineryClaimFailParkTicks, owner);
 			anchorOfferStreaks.Remove(anchor);
+#if CAMEO_DEV_LOGGING
 			var parked = $"AI ({player.ClientIndex}): REPAIR-B3 parked claim anchor {anchor} for {Info.RefineryClaimFailParkTicks} ticks ({reason}), at tick {tick}";
 			Log.Write("debug", parked);
-			AIUtils.BotDebug(parked);
+			OpenRA.Mods.CA.AIUtils.BotDebug(parked);
+#endif
 		}
 
 		/// <summary>
@@ -4294,7 +4455,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				coverageBudget = new RefineryProbeBudget(Info.CoverageSiteLimit, Info.CoverageProbeLimit, Info.CoverageProbesPerTick);
 				evaluatedSites.Clear();
 				coverageFirstBudgetDeferred = -1;
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): REPAIR-B3 coverage pass ceiling hit at tick {world.WorldTick}: refresh budget re-armed for the next pass");
+#endif
 			}
 
 			var hadPending = coveragePendingAnchors;
@@ -4308,19 +4471,27 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// never folded into Unserved).
 			if (coveragePendingAnchors == 0 && hadPending > 0)
 			{
+#if CAMEO_DEV_LOGGING
 				var line = $"AI ({player.ClientIndex}): REPAIR-B3 coverage refresh complete at tick {world.WorldTick}: {anchors.Count} anchors, {coverageSweepScanned} anchor-scans, {coverageBudget.SitesEvaluated} sites, {coverageBudget.ProbesUsed} probes, {coverageBudget.DeferredCandidates} deferred candidates, {coverageBudget.CacheHits} witness cache hits";
 				Log.Write("debug", line);
-				AIUtils.BotDebug(line);
+				OpenRA.Mods.CA.AIUtils.BotDebug(line);
+#endif
 			}
 
 			if (coverageFirstBudgetDeferred >= 0 && hadFirstBudgetDeferred < 0)
 			{
+#if CAMEO_DEV_LOGGING
 				var line = $"AI ({player.ClientIndex}): REPAIR-B3 coverage refresh ceiling reached at tick {world.WorldTick}: anchor {coverageFirstBudgetDeferred} first deferred, {coverageBudget.SitesEvaluated}/{coverageBudget.SiteLimit} sites, {coverageBudget.ProbesUsed}/{coverageBudget.ProbeLimit} probes spent; {coveragePendingAnchors} anchors stay Unknown until the next refresh";
 				Log.Write("debug", line);
-				AIUtils.BotDebug(line);
+				OpenRA.Mods.CA.AIUtils.BotDebug(line);
+#endif
 			}
 			else if (!coverageBudget.TickProbesOpen && coveragePendingAnchors > 0)
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): REPAIR-B3 coverage tick pacing at tick {world.WorldTick}: {coveragePendingAnchors} anchors pending, resume at cursor {coverageCursor}");
+#endif
+			}
 
 			// Verified pairs may have moved the assignment since the model build — recompute so served
 			// and the pending-commit clears read the live verdict, not this morning's.
@@ -4402,9 +4573,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				anchorParkedUntil[anchor] = (tick + Info.ParkTicks, null);
 				anchorStuck = (null, 0, refineryCells.Count);
+#if CAMEO_DEV_LOGGING
 				var parked = $"AI ({player.ClientIndex}): REF-1 parked anchor {anchor} for {Info.ParkTicks} ticks: wanted {replans} re-plans with no refinery placed, at tick {tick}";
 				Log.Write("debug", parked);
-				AIUtils.BotDebug(parked);
+				OpenRA.Mods.CA.AIUtils.BotDebug(parked);
+#endif
 				return;
 			}
 
@@ -4419,9 +4592,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			lastIdleReason = reason;
+#if CAMEO_DEV_LOGGING
 			var line = $"AI ({player.ClientIndex}): EX-0 no target at tick {world.WorldTick}: {reason}";
 			Log.Write("debug", line);
-			AIUtils.BotDebug(line);
+			OpenRA.Mods.CA.AIUtils.BotDebug(line);
+#endif
 		}
 
 		/// <summary>The planner's building-queue types, resolved per call: the base builder's condition may

@@ -76,7 +76,7 @@ ABSENT because its own author reverted it. **They are landed and can be closed.*
 
 **Multiple developers and agents work on this repository.** Committing identities seen in the
 log: **AedisToru** (maintainer — also lands most agent work under the shared repo identity),
-**Blackrobe** (co-maintainer), **Elpollo315**, **Zan Yewang**, **Devin AI**. Because the git
+**Blackrobe** (co-maintainer), **Elpollo315**, **AedisToru**, **Devin AI**. Because the git
 author is often the shared identity, the `Co-Authored-By:` **trailer** is the only reliable
 record of which agent wrote a change — see CLAUDE.md rule 10.
 

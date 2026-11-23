@@ -1791,7 +1791,7 @@ namespace OpenRA.Mods.Common.Traits
 				waypoints.Remove(capturer);
 				activeCaptureOrders.Remove(capturer);
 				nextRouteRecheckTick.Remove(capturer);
-				AIUtils.BotDebug("{0}: {1} returned from Frans transport; resuming capture target {2} through unified RiskModel.",
+				OpenRA.Mods.CA.AIUtils.BotDebug("{0}: {1} returned from Frans transport; resuming capture target {2} through unified RiskModel.",
 					player, capturer, transportedTarget);
 			}
 
@@ -1811,7 +1811,7 @@ namespace OpenRA.Mods.Common.Traits
 			{
 				AbandonCaptureMission(bot, capturer);
 				if (QueueEscape(bot, capturer, mobile))
-					AIUtils.BotDebug("{0}: {1} aborts capture activity: unified RiskModel immediate risk {2} >= critical {3}.",
+					OpenRA.Mods.CA.AIUtils.BotDebug("{0}: {1} aborts capture activity: unified RiskModel immediate risk {2} >= critical {3}.",
 						player, capturer, immediateRisk.Score, immediateRisk.CriticalThreshold);
 				return;
 			}
@@ -1839,7 +1839,7 @@ namespace OpenRA.Mods.Common.Traits
 							QueueStopOrder(bot, capturer);
 							waypoints.Remove(capturer);
 							activeCaptureOrders.Remove(capturer);
-							AIUtils.BotDebug("{0}: {1} cancels a capture approach after unified RiskModel route risk rose to {2} at {3}.",
+							OpenRA.Mods.CA.AIUtils.BotDebug("{0}: {1} cancels a capture approach after unified RiskModel route risk rose to {2} at {3}.",
 								player, capturer, route.PeakScore, route.PeakCell);
 						}
 					}
@@ -1885,7 +1885,7 @@ namespace OpenRA.Mods.Common.Traits
 				var targetRisk = riskModelService.EvaluateCell(capturer, missionTarget.Location, FransRiskRole.Capturer, tolerance);
 				if (!targetRisk.IsPreferred)
 				{
-					AIUtils.BotDebug("{0}: {1} abandons capture target {2}: unified RiskModel target risk {3} exceeds preferred {4}.",
+					OpenRA.Mods.CA.AIUtils.BotDebug("{0}: {1} abandons capture target {2}: unified RiskModel target risk {3} exceeds preferred {4}.",
 						player, capturer, missionTarget, targetRisk.Score, targetRisk.PreferredThreshold);
 					AbandonCaptureMission(bot, capturer);
 					return;
@@ -1925,7 +1925,7 @@ namespace OpenRA.Mods.Common.Traits
 
 			missions[capturer] = choice.Target;
 			StartBoldFirstCaptureMission(capturer, choice.Target);
-			AIUtils.BotDebug("{0}: {1} reserves capture target {2}; unified RiskModel target risk {3}, route peak {4}.",
+			OpenRA.Mods.CA.AIUtils.BotDebug("{0}: {1} reserves capture target {2}; unified RiskModel target risk {3}, route peak {4}.",
 				player, capturer, choice.Target, choice.TargetRiskScore, choice.RoutePeakRisk);
 
 			if (choice.UseTransport && TryStartTransport(bot, capturer, choice.Target, choice.LandPathAvailable))
@@ -2057,7 +2057,7 @@ namespace OpenRA.Mods.Common.Traits
 			nextRouteRecheckTick.Remove(capturer);
 			QueueStopOrder(bot, capturer);
 
-			AIUtils.BotDebug("{0}: {1} handed capture target {2} to FransTransportCommanderBotModule.",
+			OpenRA.Mods.CA.AIUtils.BotDebug("{0}: {1} handed capture target {2} to FransTransportCommanderBotModule.",
 				player, capturer, target);
 			return true;
 		}
@@ -2228,7 +2228,7 @@ namespace OpenRA.Mods.Common.Traits
 			activeCaptureOrders[capturer] = target;
 			nextRouteRecheckTick[capturer] = world.WorldTick + Info.RouteRecheckInterval;
 
-			AIUtils.BotDebug("{0}: {1} {2}; unified RiskModel Move -> CaptureActor via {3} to {4}.",
+			OpenRA.Mods.CA.AIUtils.BotDebug("{0}: {1} {2}; unified RiskModel Move -> CaptureActor via {3} to {4}.",
 				player, capturer, reason, destination, target);
 
 			// §19.6: the accepted route rides a bounded native waypoint packet instead of a

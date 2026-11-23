@@ -13,6 +13,7 @@ using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
@@ -61,7 +62,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		CrateSpawner crateSpawner;
 
-		int scanForCratesTicks;
+		BotCooldown scanForCratesCooldown;
 
 		// LC2: crate -> (collector, tick ordered). Released by ReservationStale; the old List<Actor> was never cleared.
 		readonly Dictionary<Actor, (Actor Collector, int Tick)> reservations = [];
@@ -82,18 +83,22 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		protected override void TraitEnabled(Actor self)
 		{
-			scanForCratesTicks = Info.ScanForCratesInterval;
+			scanForCratesCooldown.Start(world.WorldTick, Info.ScanForCratesInterval);
 		}
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			var clock = BotVisitClock.Of(bot);
 			if (crateSpawner == null || !crateSpawner.IsTraitEnabled())
+			{
+				scanForCratesCooldown.Freeze(clock.Elapsed);
+				return;
+			}
+
+			if (!scanForCratesCooldown.Ready(clock.VisitTick))
 				return;
 
-			if (--scanForCratesTicks > 0)
-				return;
-
-			scanForCratesTicks = Info.ScanForCratesInterval;
+			scanForCratesCooldown.Start(clock.VisitTick, Info.ScanForCratesInterval);
 
 			ReleaseStaleReservations();
 
@@ -139,7 +144,7 @@ namespace OpenRA.Mods.Cameo.Traits
 					continue;
 
 				var cell = world.Map.CellContaining(target.CenterPosition);
-				AIUtils.BotDebug($"{bot.Player}: Ordering {crateCollector} to {cell} for Crate pick up.");
+				OpenRA.Mods.CA.AIUtils.BotDebug($"{bot.Player}: Ordering {crateCollector} to {cell} for Crate pick up.");
 				bot.QueueOrder(new Order("Move", crateCollector, target, true));
 				reservations[crate] = (crateCollector, world.WorldTick);
 			}

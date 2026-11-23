@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits.BotModules;
 using OpenRA.Mods.CA.Traits.BotModules.Squads;
 using OpenRA.Mods.Common.Traits;
@@ -78,10 +79,10 @@ namespace OpenRA.Mods.CA.Traits
 			public readonly Dictionary<string, RallyCand> ByKey = new();
 		}
 
-		static readonly ConditionalWeakTable<SquadCA, StrongBox<int>> RallyCooldowns = new();
+		static readonly ConditionalWeakTable<SquadCA, StrongBox<BotCooldown>> RallyCooldowns = new();
 		static readonly ConditionalWeakTable<SquadCA, StrongBox<int>> RallyIds = new();
 		static readonly ConditionalWeakTable<SquadCA, RallyEpisode> RallyEpisodes = new();
-		static readonly ConditionalWeakTable<SquadCA, List<(string Key, int Until)>> RallyBlacklists = new();
+		static readonly ConditionalWeakTable<SquadCA, List<(string Key, BotCooldown Until)>> RallyBlacklists = new();
 
 		int retreatRallyNextId;
 
@@ -188,7 +189,7 @@ namespace OpenRA.Mods.CA.Traits
 				RallyHopBlocks++;
 			}
 
-			if (why == null && RallyCooldowns.TryGetValue(squad, out var cooldown) && Policy.Blocked(cooldown.Value, now))
+			if (why == null && RallyCooldowns.TryGetValue(squad, out var cooldown) && !cooldown.Value.Ready(now))
 				why = "cooldown";
 
 			Policy.Choice choice = default;
@@ -209,11 +210,11 @@ namespace OpenRA.Mods.CA.Traits
 			if (why != null)
 			{
 				RallyBases++;
-				if (Info.StalemateDiagnosticsEnabled)
+				if (Info.StalemateDiagnosticsEnabled && DiagnosticSinkEnabled)
 				{
 					var axis = RetreatRallyBaseCellPeek(squad);
 					DiagnosticSquadEventAt(squad, "rally_base",
-						Inv($"why={why};best={best};axis={(axis == null ? "none" : BotPassiveDiagnosticWriter.Cell(axis.Value.X, axis.Value.Y))}"), null);
+						Inv($"why={why};best={best};axis={(axis == null ? "none" : BotPassiveChannel.Cell(axis.Value.X, axis.Value.Y))}"), null);
 				}
 
 				return false;
@@ -224,7 +225,7 @@ namespace OpenRA.Mods.CA.Traits
 			episode.Hops = Policy.EffectiveHops(episode.Hops, episode.LastRallyTick, now, RallyP(nameof(SquadManagerBotModuleCAInfo.AggTeamRallyEpisodeResetTicks), squad)) + 1;
 			episode.LastRallyTick = now;
 			RallyPicks++;
-			if (Info.StalemateDiagnosticsEnabled)
+			if (Info.StalemateDiagnosticsEnabled && DiagnosticSinkEnabled)
 			{
 				var cell = World.Map.CellContaining(rc.Pos);
 				DiagnosticSquadEventAt(squad, "rally_pick",
@@ -356,7 +357,7 @@ namespace OpenRA.Mods.CA.Traits
 						var key = ownerKey + "#" + m.RetreatRallyIdOf(s);
 						var c = new Policy.Candidate(ownerKey, m.RetreatRallyIdOf(s), ally, idle, false, need, m.SquadValueOf(s), 0,
 							RallyCells(s.CenterPosition - center), IsRetreatingForLiveness(s), state is GroundUnitsRallyStateCA,
-							Policy.IsMarked(s.RetreatSinceTick, now, markTicks), RallyCooldowns.TryGetValue(s, out var cooldown) && Policy.Blocked(cooldown.Value, now),
+							Policy.IsMarked(s.RetreatSinceTick, now, markTicks), RallyCooldowns.TryGetValue(s, out var cooldown) && !cooldown.Value.Ready(now),
 							RallyBlacklisted(squad, key, now), ReferenceEquals(s, m.stalemateSquad), self, other);
 						List<Actor> friends = null;
 						if (Policy.Exclusion(c, p) == null)
@@ -394,7 +395,7 @@ namespace OpenRA.Mods.CA.Traits
 				return false;
 
 			foreach (var (k, until) in list)
-				if (k == key && Policy.Blocked(until, now))
+				if (k == key && !until.Ready(now))
 					return true;
 			return false;
 		}
@@ -579,7 +580,7 @@ namespace OpenRA.Mods.CA.Traits
 			next.StartTick = plan.StartTick;
 			next.Size0 = plan.Size0;
 			next.V0 = plan.V0;
-			if (Info.StalemateDiagnosticsEnabled)
+			if (Info.StalemateDiagnosticsEnabled && DiagnosticSinkEnabled)
 				DiagnosticSquadEventAt(owner, "rally_switch", Inv($"from={plan.Key};to={next.Key};gain={choice.Score - oldScore}"), World.Map.CellContaining(rc.Pos));
 
 			return next;
@@ -609,7 +610,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (action == Policy.RallyAction.Support)
 				AggressionCommit(owner);
 
-			if (Info.StalemateDiagnosticsEnabled)
+			if (Info.StalemateDiagnosticsEnabled && DiagnosticSinkEnabled)
 				DiagnosticSquadEventAt(owner, "rally_arrive", Inv($"dest={plan.DestName};ratio={ratioMilli}"), World.Map.CellContaining(plan.DestPos));
 		}
 
@@ -626,20 +627,22 @@ namespace OpenRA.Mods.CA.Traits
 			if (end == Policy.RallyEnd.MergedPool)
 				RallyMerges++;
 
-			var until = Policy.BlockedUntil(now, RallyP(nameof(SquadManagerBotModuleCAInfo.AggTeamRallyCooldownTicks), owner));
-			RallyCooldowns.GetValue(owner, _ => new StrongBox<int>()).Value = until;
+			var cooldownTicks = Math.Max(0, RallyP(nameof(SquadManagerBotModuleCAInfo.AggTeamRallyCooldownTicks), owner));
+			RallyCooldowns.GetValue(owner, _ => new StrongBox<BotCooldown>()).Value.Start(now, cooldownTicks);
 			if (plan.DestSquad != null)
-				RallyCooldowns.GetValue(plan.DestSquad, _ => new StrongBox<int>()).Value = until;
+				RallyCooldowns.GetValue(plan.DestSquad, _ => new StrongBox<BotCooldown>()).Value.Start(now, cooldownTicks);
 
 			if (end == Policy.RallyEnd.AbortLosing || (end == Policy.RallyEnd.Expired && phase == Policy.RallyPhase.March))
 			{
-				var list = RallyBlacklists.GetValue(owner, _ => new List<(string Key, int Until)>());
-				list.RemoveAll(e => e.Key == plan.Key || !Policy.Blocked(e.Until, now));
-				list.Add((plan.Key, Policy.BlockedUntil(now, RallyP(nameof(SquadManagerBotModuleCAInfo.AggTeamRallyBlacklistTicks), owner))));
+				var list = RallyBlacklists.GetValue(owner, _ => new List<(string Key, BotCooldown Until)>());
+				list.RemoveAll(e => e.Key == plan.Key || e.Until.Ready(now));
+				var blacklist = new BotCooldown();
+				blacklist.Start(now, Math.Max(0, RallyP(nameof(SquadManagerBotModuleCAInfo.AggTeamRallyBlacklistTicks), owner)));
+				list.Add((plan.Key, blacklist));
 			}
 
 			RallyEpisodes.GetValue(owner, _ => new RallyEpisode()).LastRallyTick = now;
-			if (Info.StalemateDiagnosticsEnabled)
+			if (Info.StalemateDiagnosticsEnabled && DiagnosticSinkEnabled)
 				DiagnosticSquadEventAt(owner, "rally_end",
 					Inv($"end={Policy.EndName(end)};phase={Policy.PhaseName(phase)};ticks={now - plan.StartTick};size0={plan.Size0};size1={owner.Units.Count};v0={plan.V0};v1={RallyUnitValue(owner)}"),
 					World.Map.CellContaining(plan.DestPos));

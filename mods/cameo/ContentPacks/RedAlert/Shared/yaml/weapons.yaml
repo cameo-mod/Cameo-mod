@@ -1178,6 +1178,9 @@ ra1_allies_alliedapc_gun:
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
+	Inherits@tracer: ^Tracer_Flak_Medium
+	Projectile: InstantHitWithFakeBullets
+		-Image:
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Range: 5978
@@ -1269,6 +1272,9 @@ ra1_allies_alliedapc_gun_AA:
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
+	Inherits@tracer: ^Tracer_Flak_Medium
+	Projectile: InstantHitWithFakeBullets
+		-Image:
 	ValidTargets: Air
 	ReloadDelay: 10
 	Range: 8967

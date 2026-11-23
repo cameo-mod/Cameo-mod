@@ -598,10 +598,14 @@ namespace OpenRA.Mods.Cameo.Traits
 			worthFactor = stats != null ? WorthFactorPermille(worth) : 1000;
 
 			if (info.LogInterval > 0 && gameTicks % info.LogInterval == 0)
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"BotInsurance {self.Owner.InternalName} [{self.Owner.BotType}] "
 					+ $"t={gameTicks} phase={phase} liquidity={liquidity} worth={worth} peak={peakWorth} "
 					+ $"par={(info.UseParCurve ? ParWorth() : 0)} worthFactor={worthFactor} "
 					+ $"threshold={threshold}");
+#endif
+			}
 
 			switch (phase)
 			{

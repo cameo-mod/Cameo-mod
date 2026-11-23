@@ -77,6 +77,9 @@ echo "Building mod files"
 install_mod_assemblies "${TEMPLATE_ROOT}" "${APPDIR}/usr/lib/openra" "linux-x64" "net6" "${TEMPLATE_ROOT}/${ENGINE_DIRECTORY}"
 
 cp -Lr "${TEMPLATE_ROOT}/mods/"* "${APPDIR}/usr/lib/openra/mods"
+# Development rules and mods must never ship in the official package.
+rm -rf "${APPDIR}/usr/lib/openra/mods/"*/rules/dev "${APPDIR}/usr/lib/openra/mods/cameo-dev"
+assert_no_dev_content "${APPDIR}/usr/lib/openra/mods"
 
 set_engine_version "${ENGINE_VERSION}" "${APPDIR}/usr/lib/openra"
 if [ "${PACKAGING_OVERWRITE_MOD_VERSION}" == "True" ]; then

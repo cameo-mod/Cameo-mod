@@ -441,6 +441,41 @@ namespace OpenRA.Mods.CA.Traits
 		/// no offered anchor exists, so nothing else is pending-marked or released. Default no-op.
 		/// </summary>
 		void RefinerySiteCommitted(CPos site) { }
+
+		/// <summary>
+		/// REFSCAN D-5 (design _12 sec 2): the site-search knobs. Default: search off — CONTROL and every
+		/// provider without the switch keep the claim ladder and the fallback poll exactly as today.
+		/// </summary>
+		RefinerySiteSearchSettings RefinerySiteSearch => default;
+
+		/// <summary>
+		/// REFSCAN sec 3.3 O-2 (F7, R1): exactly the claims <see cref="NextRefineryClaim"/> would offer now, in
+		/// its order — the same claim order, the same blocked/committed filters, and every anchor whose offer
+		/// streak would park it (<c>streak + 1 &gt; RefineryClaimFailAttempts</c>) left out. Writes nothing:
+		/// no removal, no streak write, no park. Default empty.
+		/// </summary>
+		IReadOnlyList<RefineryAnchorClaim> PeekRefineryClaims(CPos? near) => Array.Empty<RefineryAnchorClaim>();
+
+		/// <summary>
+		/// REFSCAN sec 3.3 O-3: the widened poll under an explicit per-call cell budget (the search charges
+		/// it against its visit units). <paramref name="terminalSweep"/> adds the terminal tier's same-tick
+		/// coherence sweep on top (the search asks for it only in the deadline phase). Default: the provider's
+		/// own per-sweep budget.
+		/// </summary>
+		RefineryFallbackOutcome PollRefineryFallbackSite(Actor producer, string item, bool distanceToBaseIsImportant,
+			int cellBudget, bool terminalSweep, out CPos? site) => PollRefineryFallbackSite(producer, item, distanceToBaseIsImportant, out site);
+
+		/// <summary>
+		/// REFSCAN sec 3.2: the class-1 gap rank of a top-left — the minimum Chebyshev distance from any footprint
+		/// tile to a declared resource cell (the widened scan's own metric). Default int.MaxValue (no rank cells).
+		/// </summary>
+		int RefineryResourceGap(string item, CPos topLeft) => int.MaxValue;
+
+		/// <summary>
+		/// REFSCAN sec 3.3 R: the reach providers for the seeded samples, ActorID order — each centre with the
+		/// Chebyshev reach (cells) a legal top-left can lie from it. Default: none (no samples drawn).
+		/// </summary>
+		void RefinerySearchProviders(Actor producer, string item, List<(CPos Center, int Reach)> into) { }
 	}
 
 	/// <summary>

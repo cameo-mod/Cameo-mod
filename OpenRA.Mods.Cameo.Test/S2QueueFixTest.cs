@@ -653,14 +653,18 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			// Counts measured on base d4ac5f6a: the S2 change adds capture and observation code only. Any new
 			// order, RNG draw or production call in this file changes one of these numbers.
+			// REFSCAN D-5 adds exactly two orders: the episode's PlaceBuilding (EmitEpisodePlacement: +1 QueueOrder,
+			// +1 new Order, +2 "PlaceBuilding" literals: the order and its NotifyPlacement) and its certified cancel
+			// (EpisodeCertifiedCancel: +1 QueueOrder, +1 CancelProduction); +1 PlaceBuilding in the F2 mask comment.
+			// No RNG draw or production call is added.
 			var src = ManagerSource();
-			Assert.That(Count(src, "bot.QueueOrder("), Is.EqualTo(6));
+			Assert.That(Count(src, "bot.QueueOrder("), Is.EqualTo(8));
 			Assert.That(Count(src, "Order.StartProduction("), Is.EqualTo(1));
-			Assert.That(Count(src, "Order.CancelProduction("), Is.EqualTo(4));
-			Assert.That(Count(src, "new Order("), Is.EqualTo(1));
+			Assert.That(Count(src, "Order.CancelProduction("), Is.EqualTo(5));
+			Assert.That(Count(src, "new Order("), Is.EqualTo(2));
 			Assert.That(Count(src, "BotRng.For("), Is.EqualTo(14));
 			Assert.That(Count(src, ".Next("), Is.EqualTo(7));
-			Assert.That(Count(src, "PlaceBuilding"), Is.EqualTo(17));
+			Assert.That(Count(src, "PlaceBuilding"), Is.EqualTo(20));
 		}
 
 		[Test]

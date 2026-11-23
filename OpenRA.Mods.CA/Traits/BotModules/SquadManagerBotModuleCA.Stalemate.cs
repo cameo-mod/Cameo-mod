@@ -45,7 +45,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		// ---- telemetry state (lives on the first telemetry-ON instance) ----
 		SquadManagerBotModuleCA diagnosticCachedOwner;
-		BotPassiveDiagnosticWriter diagnosticWriter;
+		BotPassiveChannel diagnosticWriter;
 		bool diagnosticInitialized;
 		int diagnosticSquadCounter;
 		List<SquadCA> diagnosticPendingCommits;
@@ -54,11 +54,17 @@ namespace OpenRA.Mods.CA.Traits
 		readonly StalemateStuckTrackerCA<SquadCA> diagnosticStuck = new();
 		long diagnosticHomeThirdSquared = -1;
 
+		// ADP-05: next scheduled slot tick of each emit stream (position, health); lives on the telemetry owner.
+		int diagnosticNextPositionEmit;
+		int diagnosticNextHealthEmit;
+
 		SquadManagerBotModuleCA StalemateOwner => stalemateCachedOwner ??= Player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>()
 			.FirstOrDefault(m => m.Info.StalemateBreakerEnabled) ?? this;
 
-		SquadManagerBotModuleCA DiagnosticOwner => diagnosticCachedOwner ??= Player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>()
-			.FirstOrDefault(m => m.Info.StalemateDiagnosticsEnabled) ?? this;
+		bool DiagnosticSinkEnabled => World.WorldActor.TraitOrDefault<CameoLogHub>()?.Sink.Enabled == true;
+
+		SquadManagerBotModuleCA DiagnosticOwner => !DiagnosticSinkEnabled ? this : (diagnosticCachedOwner ??= Player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>()
+			.FirstOrDefault(m => m.Info.StalemateDiagnosticsEnabled) ?? this);
 
 		string StalemateManagerName => Info.InstanceName ?? "";
 
@@ -101,7 +107,7 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>Telemetry only (BOTHEALTH H13): the GroundStatesCA predicted-loss retreat site.</summary>
 		internal void NoteRetreatStart(SquadCA squad, string site)
 		{
-			if (!Info.StalemateDiagnosticsEnabled)
+			if (!Info.StalemateDiagnosticsEnabled || !DiagnosticSinkEnabled)
 				return;
 			var owner = DiagnosticOwner;
 			owner.diagnosticRetreatTicks.Enqueue(World.WorldTick);
@@ -123,7 +129,9 @@ namespace OpenRA.Mods.CA.Traits
 			owner.stalemateSeatOwner ??= new StalemateSeatOwnerCA();
 			var t = World.WorldTick;
 
-			if (t % StalemateBreakerWaveCA.SampleInterval == 0)
+			// STAGGER-06 A066: F4 K=75 res=0, stateless window [v - Elapsed + 1, v] (identical to t % 75 == 0 at N = 1).
+			var stalemateClock = BotVisitClock.Of(bot);
+			if (BotPeriod.ResidueHit(stalemateClock.VisitTick, stalemateClock.Elapsed, StalemateBreakerWaveCA.SampleInterval, 0))
 				StalemateObserve(seat, t);
 
 			if (seat.Wave != null)
@@ -486,7 +494,7 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 			}
 
-			if (!rotation.IsWinner(seatIndex, t, World.Players.Length))
+			if (!rotation.IsWinner(seatIndex, t, World.Players.Length, BotVisitClock.Of(bot).Elapsed))
 				return;
 
 			var deferred = Math.Max(0, t - rotation.PendingSince(seatIndex) - 1);
@@ -756,18 +764,42 @@ namespace OpenRA.Mods.CA.Traits
 			if (wave.IsActive && !status.Known && !status.Destroyed)
 				status = StalemateRetarget(seat, t, status);
 
+			// STAGGER-06 R5 (A071/A072/A074): the wave's absolute ticks are tested against the visit window
+			// [v - Elapsed + 1, v] instead of ==, and the work is recorded at its NOMINAL tick, so the wave state machine
+			// (ObserveSample requires t == LastSampleTick + 75; RallyEnd before ObserveSample at a shared tick) sees the same
+			// ticks at every N. At N = 1 the window is {v} and every branch below is the old equality.
+			var clock = BotVisitClock.Of(bot);
+			var windowStart = t - Math.Max(1, clock.Elapsed) + 1;
+			var rallyDue = wave.Phase == StalemateWavePhaseCA.Rally && wave.RallyDeadline >= windowStart && wave.RallyDeadline <= t;
+
 			wave.Continue(t, provider != null, true, StalemateBlocked(provider), status.Known, status.Destroyed);
-			wave.CheckDeadlines(t);
+			wave.CheckDeadlines(rallyDue ? wave.RallyDeadline : t);
 
-			if (wave.IsActive && wave.Phase == StalemateWavePhaseCA.Rally && t == wave.RallyDeadline)
-				StalemateRallyEnd(seat, t);
+			if (wave.IsActive && rallyDue && wave.Phase == StalemateWavePhaseCA.Rally)
+			{
+				StalemateRallyEnd(seat, wave.RallyDeadline);
 
-			if (wave.IsActive && wave.IsSampleTick(t))
-				StalemateSample(seat, t, status, provider);
+				// The absolute deadline is still judged at the visit tick (a no-op at N = 1: same tick as above).
+				if (wave.IsActive)
+					wave.CheckDeadlines(t);
+			}
 
-			if (wave.IsActive && wave.Phase == StalemateWavePhaseCA.Rally && t > wave.C
-				&& (t - wave.C) % StalemateBreakerCA.RallyReissueInterval == 0)
-				StalemateIssueRally(bot, seat, force: false);
+			// Last grid point C + 75k at or before this visit; sampled only if it falls inside the window (an older, missed
+			// one is what ObserveSample's contiguity check turns into MissingEvidence, as before).
+			if (wave.IsActive && t > wave.C)
+			{
+				var gridTick = wave.C + (t - wave.C) / StalemateBreakerWaveCA.SampleInterval * StalemateBreakerWaveCA.SampleInterval;
+				if (gridTick > wave.C && gridTick >= windowStart)
+					StalemateSample(seat, gridTick, status, provider);
+			}
+
+			if (wave.IsActive && wave.Phase == StalemateWavePhaseCA.Rally && t > wave.C)
+			{
+				var reissue = StalemateBreakerCA.RallyReissueInterval;
+				var reissueTick = wave.C + (t - wave.C) / reissue * reissue;
+				if (reissueTick > wave.C && reissueTick >= windowStart)
+					StalemateIssueRally(bot, seat, force: false);
+			}
 
 			if (!wave.IsActive)
 				StalemateEndWave(bot, owner, seat, t);
@@ -976,11 +1008,11 @@ namespace OpenRA.Mods.CA.Traits
 		// ======================================================================================
 		// Telemetry (telemetry flag only; observation only)
 		// ======================================================================================
-		BotPassiveDiagnosticWriter DiagnosticWriter
+		BotPassiveChannel DiagnosticWriter
 		{
 			get
 			{
-				if (!Info.StalemateDiagnosticsEnabled)
+				if (!Info.StalemateDiagnosticsEnabled || !DiagnosticSinkEnabled)
 					return null;
 				var owner = DiagnosticOwner;
 				if (!owner.diagnosticInitialized)
@@ -991,20 +1023,9 @@ namespace OpenRA.Mods.CA.Traits
 					if (string.IsNullOrWhiteSpace(uid))
 						uid = "unknown";
 					var seat = string.IsNullOrWhiteSpace(Player.InternalName) ? "seat" + StalemateSeatIndex : Player.InternalName;
-					string path = null;
-					try
-					{
-						var directory = Path.Combine(Platform.SupportDir, "Logs");
-						Directory.CreateDirectory(directory);
-						path = Path.Combine(directory, $"cameo-ai-botpassive-{uid}-{seat}-{World.WorldTick}.jsonl");
-					}
-					catch (Exception e) when (e is IOException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
-					{
-						path = null;
-					}
-
-					BotPassiveDiagnosticWriter.TryCreate(enabled, path, uid, seat,
-						string.IsNullOrWhiteSpace(Player.BotType) ? "unknown" : Player.BotType, out owner.diagnosticWriter);
+					owner.diagnosticWriter = new BotPassiveChannel(World.WorldActor.Trait<CameoLogHub>().Sink,
+						StalemateSeatIndex, enabled, uid, seat,
+						string.IsNullOrWhiteSpace(Player.BotType) ? "unknown" : Player.BotType, World.WorldTick);
 				}
 
 				return owner.diagnosticWriter is { Enabled: true } w ? w : null;
@@ -1030,7 +1051,7 @@ namespace OpenRA.Mods.CA.Traits
 				Tick = World.WorldTick, SquadId = DiagnosticSquadId(squad), Generation = 1, Event = evt,
 				Size = squad.Units.Count, Value = squad.Units.Sum(u => (long)UnitValue(u.Actor)),
 				StateTo = squad.FuzzyStateMachine?.CurrentState?.GetType().Name, TargetType = squad.Target.Type.ToString(),
-				TargetCell = cell == null ? null : BotPassiveDiagnosticWriter.Cell(cell.Value.X, cell.Value.Y), Reason = reason,
+				TargetCell = cell == null ? null : BotPassiveChannel.Cell(cell.Value.X, cell.Value.Y), Reason = reason,
 				LeaseOwner = LeaseOwner,
 				PredictedRatioMilli = evidence?.PredictedRatioMilli, CoalitionRatioMilli = evidence?.CoalitionRatioMilli, Band = evidence?.Band,
 				TradeDelta = evidence?.TradeDelta, AlliesEngaged = evidence?.AlliesEngaged, OwnFaction = evidence?.OwnFaction, EnemyFaction = evidence?.EnemyFaction
@@ -1040,7 +1061,7 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>Ordinary launches are recorded at the end of the tick, when the launch site has added its members.</summary>
 		void DiagnosticNoteLaunch(SquadCA squad)
 		{
-			if (!Info.StalemateDiagnosticsEnabled)
+			if (!Info.StalemateDiagnosticsEnabled || !DiagnosticSinkEnabled)
 				return;
 			(diagnosticPendingCommits ??= new List<SquadCA>()).Add(squad);
 		}
@@ -1077,7 +1098,7 @@ namespace OpenRA.Mods.CA.Traits
 				PoolCount = pool.Count + (kind == "breaker" ? 0 : squad.Units.Count), PoolValue = pool.Value
 					+ (kind == "breaker" ? 0 : squad.Units.Sum(u => (long)UnitValue(u.Actor))),
 				ArmyCount = army.Count, ArmyValue = army.Value, TargetSeat = targetOwner?.InternalName,
-				TargetCell = cell == null ? null : BotPassiveDiagnosticWriter.Cell(cell.Value.X, cell.Value.Y)
+				TargetCell = cell == null ? null : BotPassiveChannel.Cell(cell.Value.X, cell.Value.Y)
 			});
 		}
 
@@ -1127,14 +1148,14 @@ namespace OpenRA.Mods.CA.Traits
 				Groups = seat.Groups.Select(g => new BotPassiveWaveGroup
 				{
 					Locomotor = g.Locomotor, RepActor = g.RepId, L = g.L, S = g.S,
-					Tc = BotPassiveDiagnosticWriter.Cell(g.TcX, g.TcY), Cen = BotPassiveDiagnosticWriter.Cell(g.CenX, g.CenY)
+					Tc = BotPassiveChannel.Cell(g.TcX, g.TcY), Cen = BotPassiveChannel.Cell(g.CenX, g.CenY)
 				}).ToList(),
 				RallyDuration = wave.RallyDuration, NoProgressDuration = wave.NoProgressDuration, AbsoluteDuration = wave.AbsoluteDuration,
 				RallyDeadline = wave.RallyDeadline, AbsoluteDeadline = wave.AbsoluteDeadline, ArmTick = wave.ArmTick,
 				N0 = wave.N0, V0 = wave.V0, CommittedCount = wave.InitialCount, CommittedValue = wave.InitialValue,
 				LeaderActor = wave.LeaderId,
 				TargetSeat = seat.TargetOwnerIndex >= 0 && seat.TargetOwnerIndex < World.Players.Length ? World.Players[seat.TargetOwnerIndex].InternalName : null,
-				TargetActor = seat.TargetId, TargetCell = BotPassiveDiagnosticWriter.Cell(seat.TargetX, seat.TargetY)
+				TargetActor = seat.TargetId, TargetCell = BotPassiveChannel.Cell(seat.TargetX, seat.TargetY)
 			});
 			DiagnosticAttackCommit(stalemateSquad, "breaker", seat.WaveId);
 		}
@@ -1180,7 +1201,7 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>End of every BotTick: pending ordinary attack_commit rows, unit_position, health, and the terminal manifest.</summary>
 		void DiagnosticTick()
 		{
-			if (!Info.StalemateDiagnosticsEnabled)
+			if (!Info.StalemateDiagnosticsEnabled || !DiagnosticSinkEnabled)
 				return;
 			var w = DiagnosticWriter;
 			var t = World.WorldTick;
@@ -1205,18 +1226,26 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 			}
 
-			if (t % BotPassiveDiagnosticWriter.PositionIntervalTicks == 0 && t <= BotPassiveDiagnosticWriter.MaximumPositionTick)
-				DiagnosticUnitPositions(w, t);
+			// ADP-05 catch-up emit (DEV-only, read-only; manifest botpassive_emit=catchup). A bot that the
+			// round-robin scheduler visits less often than every tick never sees `t % interval == 0`, so each
+			// stream keeps its next slot tick and emits at the first visited tick t >= slot, then advances the
+			// slot by one interval. The row carries the SLOT tick (the writer requires multiples of the interval);
+			// the sample is taken at t. With every tick visited this equals the old modulo test exactly.
+			var emit = DiagnosticOwner;
+			if (DiagnosticEmitSchedule.TryTake(t, ref emit.diagnosticNextPositionEmit,
+				BotPassiveChannel.PositionIntervalTicks, BotPassiveChannel.MaximumPositionTick, out var positionSlot))
+				DiagnosticUnitPositions(w, positionSlot);
 
-			if (t % StalemateBreakerCA.HealthInterval == 0)
-				DiagnosticHealth(w, t);
+			if (DiagnosticEmitSchedule.TryTake(t, ref emit.diagnosticNextHealthEmit,
+				StalemateBreakerCA.HealthInterval, int.MaxValue / 2, out var healthSlot))
+				DiagnosticHealth(w, healthSlot, t);
 		}
 
 		IEnumerable<Actor> DiagnosticCombatUnits() => World.ActorsHavingTrait<AttackBase>()
 			.Where(a => a.Owner == Player && !a.IsDead && a.IsInWorld && a.OccupiesSpace != null && !a.Info.HasTraitInfo<BuildingInfo>() && !a.Info.HasTraitInfo<HarvesterInfo>())
 			.Distinct().OrderBy(a => a.ActorID);
 
-		void DiagnosticUnitPositions(BotPassiveDiagnosticWriter w, int t)
+		void DiagnosticUnitPositions(BotPassiveChannel w, int t)
 		{
 			var squadOf = new Dictionary<Actor, SquadCA>();
 			foreach (var s in Squads)
@@ -1233,12 +1262,13 @@ namespace OpenRA.Mods.CA.Traits
 
 			// IMPL02 L6f: a roster above the chunk cap is truncated, but expected_count keeps the full count so emitted_count < expected_count shows it.
 			var expectedCount = roster.Count;
-			if (roster.Count > BotPassiveDiagnosticWriter.MaximumPositionChunkEntries * BotPassiveDiagnosticWriter.MaximumPositionChunks)
-				roster = roster.Take(BotPassiveDiagnosticWriter.MaximumPositionChunkEntries * BotPassiveDiagnosticWriter.MaximumPositionChunks).ToList();
+			if (roster.Count > BotPassiveChannel.MaximumPositionChunkEntries * BotPassiveChannel.MaximumPositionChunks)
+				roster = roster.Take(BotPassiveChannel.MaximumPositionChunkEntries * BotPassiveChannel.MaximumPositionChunks).ToList();
 			w.TryEnqueueUnitPosition(t, roster, expectedCount, checksum);
 		}
 
-		void DiagnosticHealth(BotPassiveDiagnosticWriter w, int t)
+		// `slot` is the scheduled emit tick written to the row; `t` is the visited tick used for the windows.
+		void DiagnosticHealth(BotPassiveChannel w, int slot, int t)
 		{
 			var owner = DiagnosticOwner;
 			var leases = BotUnitLeases.Of(Player);
@@ -1271,7 +1301,7 @@ namespace OpenRA.Mods.CA.Traits
 			var provider = StalemateUrgency;
 			w.TryEnqueueHealth(new BotPassiveHealthSnapshot
 			{
-				Tick = t, IdleCombatUnits = idle, UnsquaddedCombatUnits = units.Count(a => !inSquad.Contains(a)),
+				Tick = slot, IdleCombatUnits = idle, UnsquaddedCombatUnits = units.Count(a => !inSquad.Contains(a)),
 				HomeThirdUnits = homeThird, CombatUnits = units.Count, StuckSquads = stuck,
 				RetreatsWindow = owner.diagnosticRetreatTicks.Count, KillsWindow = killsWindow,
 				Urgency = provider == null ? "unknown" : UrgencyName(provider.StalemateUrgency),
@@ -1281,7 +1311,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		void DiagnosticComplete()
 		{
-			if (Info.StalemateDiagnosticsEnabled && this == DiagnosticOwner)
+			if (Info.StalemateDiagnosticsEnabled && DiagnosticSinkEnabled && this == DiagnosticOwner)
 				diagnosticWriter?.Complete(World.WorldTick);
 		}
 	}

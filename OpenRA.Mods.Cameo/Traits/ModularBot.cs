@@ -11,7 +11,9 @@
 
 using System;
 using System.Collections.Generic;
+#if CAMEO_DEV_LOGGING
 using System.Diagnostics;
+#endif
 using System.Linq;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
@@ -53,6 +55,19 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("Cameo-only: not offered in the lobby's bot lists. The type still exists for map-side bots, scripts",
 			"and the A/B harness (the `fransbot` donor and the `classic` reference bot, maintainer 2026-09-28).")]
 		public readonly bool HiddenInLobby = false;
+
+		[Desc("Cameo-only (STAGGER_DESIGN_06): this bot type belongs to the round-robin family. When activated it registers",
+			"with the BotRoundRobinScheduler and counts toward N, whatever RoundRobin says. Classic types leave it false.")]
+		public readonly bool RoundRobinFamily = false;
+
+		[Desc("Cameo-only (QW-B, STAGGER_DESIGN_06 section 15): this bot type gives its periodic modules a phase offset from its",
+			"seat rank among the family bots, so several bots' timer bursts land on different ticks instead of one frame.",
+			"Requires RoundRobinFamily. False keeps today's phases (the A/B control).")]
+		public readonly bool SlotPhasedTimers = false;
+
+		[Desc("Cameo-only (STAGGER_DESIGN_06): this bot type is gated. Its decision work runs only in its slot, once every N ticks.",
+			"Requires RoundRobinFamily. False keeps the every-tick behaviour (the A/B control).")]
+		public readonly bool RoundRobin = false;
 
 		string IBotInfo.Type => Type;
 
@@ -96,7 +111,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		}
 	}
 
-	public sealed class ModularBot : ITick, IBot, INotifyDamage, IBotOrderTracking
+	public sealed class ModularBot : ITick, IBot, INotifyDamage, IBotOrderTracking, IBotSlotPhase, OpenRA.Mods.CA.IBotVisitClock
 	{
 		public bool IsEnabled;
 
@@ -114,7 +129,21 @@ namespace OpenRA.Mods.Cameo.Traits
 		IBotTick[] tickModules;
 		IBotRespondToAttack[] attackResponseModules;
 
-		readonly Dictionary<IBotTick, (long Ticks, long Count)> moduleTiming = [];
+#if CAMEO_DEV_LOGGING
+		// DEV-only per-module timing (compiled out of release): one entry per IBotTick module, per interval window and
+		// cumulative for the game-end flush. A replayed engine module records one call per replayed BotTick.
+		sealed class ModuleStat
+		{
+			public long Ticks;
+			public long Calls;
+			public long MaxTicks;
+			public long Over10Ms;
+		}
+
+		readonly Dictionary<IBotTick, ModuleStat> moduleWindow = [];
+		readonly Dictionary<IBotTick, ModuleStat> moduleTotal = [];
+		int ticksSinceReport;
+#endif
 
 		// U2: orders whose local routing is observed — see BotOrderDispositionTracker.
 		readonly BotOrderDispositionTracker trackedOrders = new();
@@ -133,16 +162,99 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		/// <summary>Orders dropped because the queue was full (MaxQueuedOrders): the oldest first.</summary>
 		public int DroppedOrders { get; private set; }
-		readonly Stopwatch moduleStopwatch = new();
-		int ticksSinceReport;
+#if CAMEO_DEV_LOGGING
+		// DEV only (STAGGER_EVAL_PLAN_04 F-B): defend trigger -> reaction records. Trigger stamped at the damage notification
+		// (source side, before any gating); reaction = first order queued by a squad/defence module afterwards.
+		DefendReactionTracker defendReactions;
+#endif
 
 		IBotInfo IBot.Info => info;
 		OpenRA.Player IBot.Player => player;
 
+		// STAGGER_DESIGN_06: the seat is null for a bot outside the family, or when the scheduler trait is absent.
+		BotRoundRobinScheduler scheduler;
+		BotSeat seat;
+		readonly Dictionary<string, IBotEventReceiver> receivers = [];
+
 		public ModularBot(ModularBotInfo info, ActorInitializer init)
 		{
+			if (info.SlotPhasedTimers && !info.RoundRobinFamily)
+				throw new YamlException($"Bot type '{info.Type}' sets SlotPhasedTimers without RoundRobinFamily.");
+			if (info.RoundRobin && !info.RoundRobinFamily)
+				throw new YamlException($"Bot type '{info.Type}' sets RoundRobin without RoundRobinFamily.");
+
 			this.info = info;
 			world = init.World;
+		}
+
+		/// <summary>This bot type counts toward the round-robin family (and so toward N_fam in the QW-B phase rule).</summary>
+		public bool InRoundRobinFamily => info.RoundRobinFamily;
+
+		// QW-B: an active bot whose type sets SlotPhasedTimers offsets its periodic modules by its seat rank.
+		bool IBotSlotPhase.TryPhaseOf(int period, out int phase)
+		{
+			phase = 0;
+			if (!IsEnabled || !info.SlotPhasedTimers || player == null)
+				return false;
+
+			return BotSlotPhase.TryOf(player, period, out phase);
+		}
+
+		public bool IsGated => seat != null && seat.Gated;
+
+		/// <summary>The bot clock of section 8: the visit tick, the ticks elapsed since the previous visit, and whether a visit is running.</summary>
+		public (int VisitTick, int Elapsed, bool InVisit) Clock =>
+			scheduler != null ? scheduler.Core.ClockOf(seat, world.WorldTick) : (world.WorldTick, 1, true);
+
+		/// <summary>
+		/// The Post rule of 6.2 for a module ingress point. True: the event was queued to this bot's slot (or discarded and
+		/// counted) and the caller must NOT deliver it. False: deliver it now, exactly as before.
+		/// </summary>
+		public bool TryDefer(Func<BotEvent> make) =>
+			seat != null && scheduler.Core.Post(seat, make, world.WorldTick) != PostOutcome.DeliverNow;
+
+		// 7.4: ModuleKey = seat + "<type>@<ordinal among the bot's receivers of that type>".
+		public ModuleKey KeyOf(object module)
+		{
+			foreach (var kv in receivers)
+				if (ReferenceEquals(kv.Value, module))
+					return new ModuleKey(player.InternalName, kv.Key);
+
+			return new ModuleKey(player.InternalName, "");
+		}
+
+		public bool CanResolveModule(ModuleKey key) => receivers.ContainsKey(key.Module);
+
+		/// <summary>Queued dispositions that met no binding (after a load, 7.2). Counted, never an error.</summary>
+		public long DispositionUnmatched { get; private set; }
+
+		// 7.2: dispositions produced by the every-tick DrainOrders (Phase Done or Off) are queued to the slot; one produced
+		// inside the bot's own Running phase (QueueOrderTracked from a module) is delivered now, exactly as before.
+		void NotifyDisposition(bool terminal, Order order, BotOrderOutcome outcome)
+		{
+			if (order == null)
+				return;
+
+			if (seat == null || !seat.Gated || !TryDefer(() => OrderDispositionEvent.From(order, outcome, terminal, ++seat.TrackingSerial)))
+				DeliverDisposition(order, outcome, terminal);
+		}
+
+		void DeliverDisposition(Order order, BotOrderOutcome outcome, bool terminal)
+		{
+			if (terminal)
+				trackedOrders.NotifyTerminal(order, outcome);
+			else
+				trackedOrders.NotifyResident(order, outcome);
+		}
+
+		/// <summary>The player's enabled bot, or null (a player actor carries one ModularBot per bot type; one is activated).</summary>
+		public static ModularBot ActiveOf(OpenRA.Player p)
+		{
+			foreach (var b in p.PlayerActor.TraitsImplementing<ModularBot>())
+				if (b.IsEnabled)
+					return b;
+
+			return null;
 		}
 
 		// Called by the host's player creation code
@@ -155,6 +267,9 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			IsEnabled = true;
 			player = p;
+#if CAMEO_DEV_LOGGING
+			defendReactions = new DefendReactionTracker(p.InternalName, line => Log.Write("perf", line));
+#endif
 			tickModules = p.PlayerActor.TraitsImplementing<IBotTick>().ToArray();
 			actionBudget = p.PlayerActor.TraitsImplementing<IBotActionBudget>().FirstEnabledTraitOrDefault();
 			attackResponseModules = p.PlayerActor.TraitsImplementing<IBotRespondToAttack>().ToArray();
@@ -164,6 +279,21 @@ namespace OpenRA.Mods.Cameo.Traits
 				issuerOf.TryAdd(t, BotIssuer.Of(t, p.PlayerActor));
 			foreach (var ibe in p.PlayerActor.TraitsImplementing<IBotEnabled>())
 				ibe.BotEnabled(this);
+
+			var ordinals = new Dictionary<string, int>();
+			foreach (var r in p.PlayerActor.TraitsImplementing<IBotEventReceiver>())
+			{
+				var typeName = r.GetType().Name;
+				ordinals.TryGetValue(typeName, out var ordinal);
+				ordinals[typeName] = ordinal + 1;
+				receivers[typeName + "@" + ordinal] = r;
+			}
+
+			if (info.RoundRobinFamily)
+			{
+				scheduler = p.World.WorldActor.TraitOrDefault<BotRoundRobinScheduler>();
+				seat = scheduler?.Register(p, this, info.RoundRobin);
+			}
 		}
 
 		void IBot.QueueOrder(Order order)
@@ -194,12 +324,17 @@ namespace OpenRA.Mods.Cameo.Traits
 				var dropped = orders.First.Value;
 				orders.RemoveFirst();
 				DroppedOrders++;
-				trackedOrders.NotifyTerminal(dropped.Order, BotOrderOutcome.RefusedLocally);
+				NotifyDisposition(true, dropped.Order, BotOrderOutcome.RefusedLocally);
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI {player.InternalName}: ORDERGATE DROPPED {dropped.Issuer ?? "?"} queued {dropped.Order.OrderString} (queue full {info.MaxQueuedOrders}; tick {world.WorldTick})");
+#endif
 			}
 
 			orders.AddLast(item);
-			trackedOrders.NotifyResident(item.Order, BotOrderOutcome.LocallyQueued);
+			NotifyDisposition(false, item.Order, BotOrderOutcome.LocallyQueued);
+#if CAMEO_DEV_LOGGING
+			defendReactions?.Reaction(world.WorldTick, BotIssuer.TypeOf(item.Issuer));
+#endif
 		}
 
 		/// <summary>
@@ -269,7 +404,11 @@ namespace OpenRA.Mods.Cameo.Traits
 			var ri = registry.Info;
 			var (verdict, first) = gate.Judge(issuer, holder, ri.EnforceAtOrderGate, emergency, ri.EmergencyModules);
 			if (first)
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI {player.InternalName}: ORDERGATE {verdict.ToString().ToUpperInvariant()} {issuer ?? "?"} ordered {unit.Info.Name} {unit.ActorID} ({order.OrderString}) held by {holder} (tick {world.WorldTick}; first of this pair)");
+#endif
+			}
 
 			if (verdict == BotModules.BotOrderVerdict.Refuse)
 				return false;
@@ -279,7 +418,11 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			var earlier = gate.NoteIssued(unit, issuer, world.WorldTick, ri.CrossedOrderWindowTicks, holder);
 			if (earlier != null && gate.CrossedPairs[(earlier, issuer)] == 1)
+			{
+#if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI {player.InternalName}: ORDERGATE CROSSED {earlier} then {issuer} ordered {unit.Info.Name} {unit.ActorID} within {ri.CrossedOrderWindowTicks} ticks (tick {world.WorldTick}; first of this pair)");
+#endif
+			}
 
 			if (world.WorldTick - gatePruneTick > 500)
 			{
@@ -295,43 +438,53 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (!IsEnabled || self.World.IsLoadingGameSave)
 				return;
 
-			var timed = info.ModulePerfReportIntervalTicks > 0;
-			using (new PerfSample("bot_tick"))
+#if CAMEO_DEV_LOGGING
+			defendReactions?.Expire(world.WorldTick);
+			if (defendReactions != null && world.WorldTick % DefendReactionTracker.NearBaseProbeTicks == 0)
+				ProbeEnemyNearBase();
+#endif
+
+			// QW-B: the family roster is built at the first bot tick, once every bot has activated.
+			if (info.SlotPhasedTimers)
+				BotSlotPhase.Prepare(world);
+
+			if (seat != null && seat.Gated)
 			{
-				// Every module ticks every tick — timers (scan intervals, countdowns)
-				// live inside BotTick, so an attention budget must not skip whole
-				// modules here. Attention gating needs a clock/decision split first.
-				Sync.RunUnsynced(Game.Settings.Debug.SyncCheckBotModuleCode, world, () =>
+				// STAGGER_DESIGN_06 6.1: BeginVisit -> drain FIFO -> modules -> EndVisit. The order drain below stays every tick (D-1).
+				if (scheduler.Core.BeginVisit(seat, world.WorldTick))
 				{
-					foreach (var t in tickModules)
+					using (new PerfSample("bot_tick"))
 					{
-						if (!t.IsTraitEnabled())
-							continue;
+						while (scheduler.Core.TryDequeue(seat, out var queued))
+							Deliver(queued);
 
-						issuer = issuerOf.TryGetValue(t, out var n) ? n : t.GetType().Name;
-						if (timed)
-						{
-							moduleStopwatch.Restart();
-							t.BotTick(this);
-							moduleStopwatch.Stop();
-
-							moduleTiming.TryGetValue(t, out var acc);
-							moduleTiming[t] = (acc.Ticks + moduleStopwatch.ElapsedTicks, acc.Count + 1);
-						}
-						else
-							t.BotTick(this);
-
-						issuer = null;
+						scheduler.Core.BeginRunning(seat);
+						RunModules();
 					}
-				});
+
+					scheduler.Core.EndVisit(seat);
+				}
+			}
+			else
+			{
+				using (new PerfSample("bot_tick"))
+					RunModules();
 			}
 
-			if (timed && ++ticksSinceReport >= info.ModulePerfReportIntervalTicks)
+#if CAMEO_DEV_LOGGING
+			if (info.ModulePerfReportIntervalTicks > 0 && ++ticksSinceReport >= info.ModulePerfReportIntervalTicks)
 			{
 				ticksSinceReport = 0;
-				ReportModuleTiming(self);
+				ReportModuleTiming(false);
 			}
+#endif
 
+			DrainOrders();
+		}
+
+		// Output metering: every tick, gated or not (D-1).
+		void DrainOrders()
+		{
 			var ordersToIssueThisTick = Math.Min((orders.Count + info.MinOrderQuotientPerTick - 1) / info.MinOrderQuotientPerTick, orders.Count);
 			for (var i = 0; i < ordersToIssueThisTick && orders.Count > 0; i++)
 			{
@@ -344,7 +497,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				{
 					// Tracked orders are never grouped, so a null gate result means the
 					// exact registered instance died here — terminal RefusedLocally.
-					trackedOrders.NotifyTerminal(item.Order, BotOrderOutcome.RefusedLocally);
+					NotifyDisposition(true, item.Order, BotOrderOutcome.RefusedLocally);
 					continue;
 				}
 
@@ -353,7 +506,7 @@ namespace OpenRA.Mods.Cameo.Traits
 					// The budget, not the gate, stopped it: it goes back to the front for next tick
 					// instead of vanishing the way a dequeued-then-abandoned order used to.
 					orders.AddFirst(item);
-					trackedOrders.NotifyResident(item.Order, BotOrderOutcome.Deferred);
+					NotifyDisposition(false, item.Order, BotOrderOutcome.Deferred);
 					break;
 				}
 
@@ -361,57 +514,298 @@ namespace OpenRA.Mods.Cameo.Traits
 
 				// Routing released it — terminal for tracking. NOT engine acceptance,
 				// queue insertion or production completion (Sol 0CB8EF18 §1).
-				trackedOrders.NotifyTerminal(item.Order, BotOrderOutcome.IssuedToWorld);
+				NotifyDisposition(true, item.Order, BotOrderOutcome.IssuedToWorld);
 			}
 		}
 
-		void ReportModuleTiming(Actor self)
+		// STAGGER-ENG-01 (Opus ruling): the engine-owned IBotTick modules with call-counted timers (ENGINE_REPLAY_LIST_01).
+		// Matched by type name; every one lives in engine/ (OpenRA.Mods.Common / OpenRA.Mods.AS).
+		public static readonly HashSet<string> EngineReplay = new()
 		{
-			if (moduleTiming.Count == 0)
+			"PowerDownBotModule", "SupportPowerBotASModule", "SendUnitToAttackBotModule", "LoadCargoBotModule",
+			"McvExpansionManagerBotModule", "MinelayerBotModule", "ResourceMapBotModule",
+		};
+
+		// The module loop. A gated bot calls it once per visit; every other bot, every tick.
+		void RunModules()
+		{
+			// Every module ticks every tick — timers (scan intervals, countdowns)
+			// live inside BotTick, so an attention budget must not skip whole
+			// modules here. Attention gating needs a clock/decision split first.
+			Sync.RunUnsynced(Game.Settings.Debug.SyncCheckBotModuleCode, world, () =>
+			{
+				foreach (var t in tickModules)
+				{
+					if (!t.IsTraitEnabled())
+						continue;
+
+					issuer = issuerOf.TryGetValue(t, out var n) ? n : t.GetType().Name;
+
+					// STAGGER-ENG-01: an engine-owned module counts BotTick calls and cannot be edited here, so the
+					// gated visit replays its call once per elapsed tick. At N = 1 (and for every ungated bot) Elapsed
+					// is 1, so it runs exactly once, as before.
+					var calls = IsGated && EngineReplay.Contains(t.GetType().Name) ? Math.Max(1, Clock.Elapsed) : 1;
+#if CAMEO_DEV_LOGGING
+					for (var i = 0; i < calls; i++)
+					{
+						var started = Stopwatch.GetTimestamp();
+						t.BotTick(this);
+						RecordModuleCall(t, Stopwatch.GetTimestamp() - started);
+					}
+#else
+					for (var i = 0; i < calls; i++)
+						t.BotTick(this);
+#endif
+
+					issuer = null;
+				}
+			});
+		}
+
+#if CAMEO_DEV_LOGGING
+		static double Ms(long ticks) => ticks * 1000.0 / Stopwatch.Frequency;
+
+		string ModuleLabel(IBotTick t) => issuerOf.TryGetValue(t, out var n) ? n : t.GetType().Name;
+
+		void RecordModuleCall(IBotTick t, long ticks)
+		{
+			var over10 = ticks * 1000 >= 10 * Stopwatch.Frequency ? 1 : 0;
+			Bump(moduleWindow, t, ticks, over10);
+			Bump(moduleTotal, t, ticks, over10);
+		}
+
+		static void Bump(Dictionary<IBotTick, ModuleStat> map, IBotTick t, long ticks, int over10)
+		{
+			if (!map.TryGetValue(t, out var s))
+				map[t] = s = new ModuleStat();
+
+			s.Ticks += ticks;
+			s.Calls++;
+			s.Over10Ms += over10;
+			if (ticks > s.MaxTicks)
+				s.MaxTicks = ticks;
+		}
+
+		// Into the existing perf log (Logs/perf.log) and, for the window line, the debug log. DEV builds only.
+		// Window (every ModulePerfReportIntervalTicks): one line with the top ModulePerfReportTop modules.
+		// Game end (final = true): one line per module over the whole game.
+		void ReportModuleTiming(bool final)
+		{
+			var map = final ? moduleTotal : moduleWindow;
+			if (map.Count == 0)
 				return;
 
-			var perModule = moduleTiming
-				.Select(kv => (Name: kv.Key.GetType().Name, Ticks: kv.Value.Ticks, Count: kv.Value.Count))
-				.OrderByDescending(m => m.Ticks)
+			var rows = map
+				.Select(kv => (Name: ModuleLabel(kv.Key), Stat: kv.Value))
+				.OrderByDescending(m => m.Stat.Ticks)
 				.ToList();
 
-			var totalMs = perModule.Sum(m => m.Ticks) * 1000.0 / Stopwatch.Frequency;
-			var calls = perModule.Sum(m => m.Count);
-			var top = string.Join(", ", perModule
-				.Take(info.ModulePerfReportTop)
-				.Select(m => $"{m.Name}={m.Ticks * 1000.0 / Stopwatch.Frequency:F1}ms/{m.Count}t"));
+			var tick = world.WorldTick;
+			var seatNote = seat == null ? "ungated" : seat.Gated ? "gated" : "n1";
+			var head = string.Format(System.Globalization.CultureInfo.InvariantCulture, "BotModuleTiming player={0} tick={1} mode={2}",
+				player.ClientIndex, tick, seatNote);
 
-			var line = string.Format("AI ({0}): module timing over {1} calls, total {2:F1} ms — {3}",
-				player.ClientIndex, calls, totalMs, top);
-			Log.Write("debug", line);
-			TextNotificationsManager.Debug(line);
-
-			moduleTiming.Clear();
+			if (final)
+			{
+				foreach (var m in rows)
+					Log.Write("perf", string.Format(System.Globalization.CultureInfo.InvariantCulture,
+						"{0} scope=game module={1} total_ms={2:F1} calls={3} max_ms={4:F2} ge10ms={5}",
+						head, m.Name, Ms(m.Stat.Ticks), m.Stat.Calls, Ms(m.Stat.MaxTicks), m.Stat.Over10Ms));
+			}
+			else
+			{
+				var top = string.Join(", ", rows.Take(info.ModulePerfReportTop).Select(m => string.Format(
+					System.Globalization.CultureInfo.InvariantCulture, "{0}={1:F1}ms/{2}c/max{3:F2}/ge10:{4}",
+					m.Name, Ms(m.Stat.Ticks), m.Stat.Calls, Ms(m.Stat.MaxTicks), m.Stat.Over10Ms)));
+				var line = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0} scope=window total_ms={1:F1} calls={2} top: {3}",
+					head, rows.Sum(m => Ms(m.Stat.Ticks)), rows.Sum(m => m.Stat.Calls), top);
+				Log.Write("perf", line);
+				Log.Write("debug", line);
+				moduleWindow.Clear();
+			}
 		}
+
+		/// <summary>Game end: the scheduler (a world trait, so it receives IGameOver) flushes every registered bot.</summary>
+		public void FlushModuleTiming() => ReportModuleTiming(true);
+
+		// DEV only (F-B enemy_near_base): every NearBaseProbeTicks, the lowest-id visible armed enemy unit within NearBaseCells of the
+		// base anchor (this player's lowest-id BaseProvider building, the construction yard) opens a trigger. Read only: no RNG, no
+		// order, an id-minimum pick so the result does not depend on enumeration order. Ungated: runs every tick of the bot, not
+		// only on its visit.
+		void ProbeEnemyNearBase()
+		{
+			Actor anchor = null;
+			foreach (var a in world.ActorsHavingTrait<BaseProvider>())
+				if (a.Owner == player && a.IsInWorld && !a.IsDead && (anchor == null || a.ActorID < anchor.ActorID))
+					anchor = a;
+
+			if (anchor == null)
+				return;
+
+			Actor intruder = null;
+			foreach (var e in world.FindActorsInCircle(anchor.CenterPosition, WDist.FromCells(DefendReactionTracker.NearBaseCells)))
+			{
+				if (!e.IsInWorld || e.IsDead || e.Owner == null || e.Owner.NonCombatant || player.RelationshipWith(e.Owner) != PlayerRelationship.Enemy)
+					continue;
+
+				if (!e.Info.HasTraitInfo<AttackBaseInfo>() || e.Info.HasTraitInfo<BuildingInfo>() || !e.CanBeViewedByPlayer(player))
+					continue;
+
+				if (intruder == null || e.ActorID < intruder.ActorID)
+					intruder = e;
+			}
+
+			if (intruder != null)
+				defendReactions.Trigger(world.WorldTick, DefendReactionTracker.EnemyNearBase, intruder.ActorID, intruder.Location.X, intruder.Location.Y);
+		}
+
+		/// <summary>Game end: still-open defend triggers are written as censored (not none), see DefendReactionTracker.Flush.
+		/// Called from the scheduler's GameOver, so only registered (round-robin family) bots flush; a classic bot's open triggers are
+		/// not written. Accepted (Opus): the evaluation uses family bots only.</summary>
+		public void FlushDefendReactions() => defendReactions?.Flush(world.WorldTick);
+#endif
 
 		void INotifyDamage.Damaged(Actor self, AttackInfo e)
 		{
 			if (!IsEnabled || self.World.IsLoadingGameSave)
 				return;
 
+#if CAMEO_DEV_LOGGING
+			if (defendReactions != null && e.Damage != null && e.Damage.Value > 0 && e.Attacker != null && !e.Attacker.Disposed
+				&& e.Attacker.Owner != null && !e.Attacker.Owner.NonCombatant
+				&& player.RelationshipWith(e.Attacker.Owner) == PlayerRelationship.Enemy)
+				defendReactions.Trigger(world.WorldTick,
+					self.Info.HasTraitInfo<BuildingInfo>() ? DefendReactionTracker.BuildingAttacked
+					: self.Info.HasTraitInfo<HarvesterInfo>() ? DefendReactionTracker.HarvesterAttacked
+					: DefendReactionTracker.UnitAttacked,
+					self.ActorID, self.Location.X, self.Location.Y);
+#endif
+
+			if (seat == null || !seat.Gated)
+			{
+				DeliverAttack(self, e, false);
+				return;
+			}
+
+			// A module that reads live state in its response (EngagementLog: liveness, health, location) takes an event-time
+			// snapshot and gets its own event; the queued attack below skips it (DeliverAttack, gatedPath).
+			foreach (var t in attackResponseModules)
+			{
+				if (t is not IBotAttackSnapshotter snapshotter || !t.IsTraitEnabled())
+					continue;
+
+				var snapshot = snapshotter.SnapshotAttack(self, e);
+				if (snapshot == null)
+					continue;
+
+				snapshot.Recipient = KeyOf(t);
+				if (!TryDefer(() => snapshot) && t is IBotEventReceiver receiver)
+					receiver.ReceiveBotEvent(snapshot);
+			}
+
+			// 6.3: a gated bot's attack response is queued to its slot and delivered through the same body.
+			if (!TryDefer(() => AttackEvent.From(self, e)))
+				DeliverAttack(self, e, true);
+		}
+
+		// 6.3: today's Damaged body. The context is identical: PerfSample, the unsynced wrapper and flag, emergency = true,
+		// the issuer per module, and the module order. The gated path restores the previous issuer and flag instead of
+		// resetting them, so a nested delivery inside a running module does not clobber that module's issuer.
+		void DeliverAttack(Actor self, AttackInfo e, bool gatedPath)
+		{
 			using (new PerfSample("bot_attack_response"))
 			{
 				Sync.RunUnsynced(Game.Settings.Debug.SyncCheckBotModuleCode, world, () =>
 				{
+					var previousIssuer = issuer;
+					var previousEmergency = emergency;
 					emergency = true;
 					foreach (var t in attackResponseModules)
 					{
 						if (!t.IsTraitEnabled())
 							continue;
 
+						// Snapshotters were handed their own event-time snapshot by Damaged.
+						if (gatedPath && t is IBotAttackSnapshotter)
+							continue;
+
 						issuer = issuerOf.TryGetValue(t, out var n) ? n : t.GetType().Name;
 						t.RespondToAttack(this, self, e);
 					}
 
-					issuer = null;
-					emergency = false;
+					if (gatedPath)
+					{
+						issuer = previousIssuer;
+						emergency = previousEmergency;
+					}
+					else
+					{
+						issuer = null;
+						emergency = false;
+					}
 				});
 			}
 		}
+
+		/// <summary>HOTFIX-RR-01 B: the AttackInfo a queued attack notice is delivered with, or null to drop it. Dropped while the
+		/// damaged actor is gone (null, destroyed or out of the world): the immediate (ungated) path runs inside Damaged, where it
+		/// always exists, but a queued notice can outlive it (RR-on smoke: HarvesterBotModuleCA.RespondToAttack read a trait of a
+		/// destroyed ore truck). A destroyed attacker becomes null on a COPY (the original AttackInfo is shared with other
+		/// listeners); every RespondToAttack null-checks the attacker before its first read.</summary>
+		public static AttackInfo QueuedAttackInfo(Actor self, AttackInfo e)
+		{
+			if (self == null || e == null || self.Disposed || !self.IsInWorld)
+				return null;
+
+			if (e.Attacker == null || !e.Attacker.Disposed)
+				return e;
+
+			return new AttackInfo
+			{
+				Attacker = null,
+				Damage = e.Damage,
+				DamageState = e.DamageState,
+				PreviousDamageState = e.PreviousDamageState,
+				ProjectileType = e.ProjectileType,
+			};
+		}
+
+		// Delivery of a queued event at this bot's visit. An empty recipient module means the bot itself.
+		void Deliver(BotEvent ev)
+		{
+			if (ev.Recipient.Module.Length == 0)
+			{
+				if (ev is AttackEvent a)
+				{
+					// HOTFIX-RR-01 B: like A-1 below, the damaged actor may have been destroyed (or left the world) while the
+					// notice waited for the slot; the attack modules read its traits, so such a notice is dropped without a call.
+					// A destroyed attacker is delivered as null (all 18 RespondToAttack implementations null-check it first).
+					var info = QueuedAttackInfo(a.Self, a.Info);
+					if (info != null)
+						DeliverAttack(a.Self, info, true);
+				}
+				else if (ev is OrderDispositionEvent disposition)
+				{
+					if (disposition.Order != null)
+						DeliverDisposition(disposition.Order, (BotOrderOutcome)disposition.Outcome, disposition.Terminal);
+					else
+						DispositionUnmatched++;
+				}
+				else if (ev is LeaseLostEvent lost)
+				{
+					// A-1: the unit may have died while the notice waited for the slot. A dead or unresolvable unit is
+					// dropped without a call, which is what every holder does with it anyway.
+					var unit = lost.Unit ?? world.GetActorById(lost.UnitActorId);
+					if (unit != null && !unit.IsDead)
+						BotModules.BotUnitLeaseRegistry.NotifyLeaseLost(player, unit, lost.PreviousHolder, lost.NewOwner, (BotLeasePurpose)lost.Purpose);
+				}
+
+				return;
+			}
+
+			if (receivers.TryGetValue(ev.Recipient.Module, out var receiver))
+				receiver.ReceiveBotEvent(ev);
+		}
+
 	}
 }

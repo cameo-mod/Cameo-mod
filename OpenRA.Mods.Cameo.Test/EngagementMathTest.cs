@@ -124,6 +124,23 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void ScoreWithoutSerializationMatchesTheRecordedScore()
+		{
+			foreach (var kind in new[] { "defend", "attack", "field" })
+			foreach (var lost in new[] { 0, 400 })
+			{
+				var state = new EngagementState { Id = 3, StartTick = 100, EventCount = 1, OwnLostUnitValue = lost,
+					EnemyKilledUnitValue = 900, EnemyKilledUnits = 3, SeenStart = new EngagementSeen { Tick = 100 } };
+				state.Buildings[1] = new EngagementBuilding { Own = true, Value = 500, MaxHp = 1000, HpStart = 1000, HpEnd = 500 };
+				var header = new EngagementHeader { GameUid = "g", MapUid = "m", Player = "seat", Kind = kind, EndTick = 300 };
+				EngagementRecord.BuildEngagement(header, state, out var expected, out var expectedSkirmish);
+				EngagementRecord.ScoreOnly(header, state, out var actual, out var actualSkirmish);
+				Assert.That(actual, Is.EqualTo(expected), kind);
+				Assert.That(actualSkirmish, Is.EqualTo(expectedSkirmish), kind);
+			}
+		}
+
+		[Test]
 		public void LinesAreValidJson()
 		{
 			var s = new EngagementState { Id = 3, StartTick = 100, EventCount = 1, SumX = 40, SumY = 41, OwnLostUnitValue = 400, OwnLostUnits = 2,

@@ -4,9 +4,22 @@
     <IsPublishable>false</IsPublishable>
   </PropertyGroup>
   <Import Project="../engine/Directory.Build.props" />
+  <!-- After the engine props: they reset DefineConstants for Debug builds. -->
+  <PropertyGroup Condition="'$(CameoDevLogging)' != 'true'">
+    <DefineConstants>$(DefineConstants);CAMEO_DEV_TEST_COMPILE</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../OpenRA.Mods.CA/OpenRA.Mods.CA.csproj" />
     <ProjectReference Include="../OpenRA.Mods.Cameo/OpenRA.Mods.Cameo.csproj" />
+    <Compile Include="../OpenRA.Mods.Cameo.Dev/AblationSpec.cs" Link="Dev/AblationSpec.cs" />
+    <Compile Include="../OpenRA.Mods.Cameo.Dev/AiMissionLogWriterDev.cs" Link="Dev/AiMissionLogWriterDev.cs" />
+    <Compile Include="../OpenRA.Mods.Cameo.Dev/BotPassiveDiagnosticWriterCA.cs" Link="Dev/BotPassiveDiagnosticWriterCA.cs" />
+    <Compile Include="../OpenRA.Mods.Cameo.Dev/AiEconomyHealthLogWriter.cs" Link="Dev/AiEconomyHealthLogWriter.cs" />
+    <Compile Include="../OpenRA.Mods.Cameo.Dev/AiLogFileAppender.cs" Link="Dev/AiLogFileAppender.cs" />
+    <Compile Include="../OpenRA.Mods.Cameo.Dev/AiLogWriteQueue.cs" Link="Dev/AiLogWriteQueue.cs" />
+    <Compile Include="../OpenRA.Mods.Cameo.Dev/DevCashBonus.cs" Link="Dev/DevCashBonus.cs" />
+    <!-- DEV-only pure class: guarded out of the release Cameo assembly, compiled into the test assembly only when the Cameo assembly does not have it. -->
+    <Compile Include="../OpenRA.Mods.Cameo/Traits/DefendReactionTracker.cs" Link="Dev/DefendReactionTracker.cs" Condition="'$(CameoDevLogging)' != 'true'" />
     <ProjectReference Include="../OpenRA.Mods.Cameo.Unified/OpenRA.Mods.Cameo.Unified.csproj" />
     <ProjectReference Include="../OpenRA.Mods.Fransbot/OpenRA.Mods.Fransbot.csproj" />
     <ProjectReference Include="../engine/OpenRA.Test/OpenRA.Test.csproj" />
@@ -27,6 +40,19 @@
     <!-- Every mod project's code, for the repo-wide "who queues a MoveToDock" audit pin. -->
     <None Include="../OpenRA.Mods.Cameo/**/*.cs" Exclude="../OpenRA.Mods.Cameo/obj/**;../OpenRA.Mods.Cameo/bin/**"
           Link="source/mods/Cameo/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../OpenRA.Mods.Cameo.Dev/AiPlayerTelemetryDev.cs"
+          Link="source/mods/Cameo.Dev/AiPlayerTelemetryDev.cs" CopyToOutputDirectory="Always" />
+    <None Include="MissionBuildLineOracle.cs" Link="source/MissionBuildLineOracle.cs" CopyToOutputDirectory="Always" />
+    <None Include="../mods/cameo/mod.yaml" Link="source/packaging/cameo-mod.yaml" CopyToOutputDirectory="Always" />
+    <None Include="../mods/cameo/rules/world.yaml" Link="source/packaging/world.yaml" CopyToOutputDirectory="Always" />
+    <None Include="../mods/cameo/rules/player.yaml" Link="source/packaging/player.yaml" CopyToOutputDirectory="Always" />
+    <None Include="../mods/cameo/rules/dev/logging.yaml" Link="source/packaging/dev-logging.yaml" CopyToOutputDirectory="Always" />
+    <None Include="../Directory.Build.targets" Link="source/packaging/Directory.Build.targets" CopyToOutputDirectory="Always" />
+    <None Include="../CameoDev.proj" Link="source/packaging/CameoDev.proj" CopyToOutputDirectory="Always" />
+    <None Include="../packaging/functions.sh" Link="source/packaging/functions.sh" CopyToOutputDirectory="Always" />
+    <None Include="../packaging/linux/buildpackage.sh" Link="source/packaging/linux-buildpackage.sh" CopyToOutputDirectory="Always" />
+    <None Include="../packaging/macos/buildpackage.sh" Link="source/packaging/macos-buildpackage.sh" CopyToOutputDirectory="Always" />
+    <None Include="../packaging/windows/buildpackage.sh" Link="source/packaging/windows-buildpackage.sh" CopyToOutputDirectory="Always" />
     <None Include="../OpenRA.Mods.CA/**/*.cs" Exclude="../OpenRA.Mods.CA/obj/**;../OpenRA.Mods.CA/bin/**"
           Link="source/mods/CA/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../OpenRA.Mods.Cameo.Unified/**/*.cs" Exclude="../OpenRA.Mods.Cameo.Unified/obj/**;../OpenRA.Mods.Cameo.Unified/bin/**"

@@ -32,6 +32,46 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		bool TryRequestCaptureRun(IBot bot, IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets);
 
+		/// <summary>
+		/// ENGDROP: side-effect-free readiness. True when an EXISTING craft could start this run now against these targets and the
+		/// hard exclusion constraints. No order, no production request, no lease, no mission, no random number. A provider that does not
+		/// implement it answers false (fail closed): an opportunity drop never queues a transport.
+		/// </summary>
+		bool CanStartCaptureRun(IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets, DropConstraints constraints) => false;
+
+		/// <summary>
+		/// ENGDROP Trigger A: the route the first startable EXISTING craft will actually fly or drive for this run, as its own planned
+		/// polyline (current position, pickup, any risk detour waypoint, drop; ground and naval craft: the planned path cells). Same readiness
+		/// and no-side-effect rules as <see cref="CanStartCaptureRun"/>; a route that crosses the constraints is refused. False when no route
+		/// is planned at decision time: the run then cannot qualify for Trigger A and goes to Trigger B.
+		/// </summary>
+		bool TryPlanCaptureRoute(IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets, DropConstraints constraints, out IReadOnlyList<CPos> route)
+		{
+			route = null;
+			return false;
+		}
+
+		/// <summary>
+		/// ENGDROP: the run request with hard exclusion constraints. Commit revalidates a stale readiness answer. queueProduction false (Trigger A) = existing craft or a refusal that
+		/// leaves nothing behind; true (a successful Trigger B roll) may request a transport on an appropriate no-craft refusal.
+		/// runIdentity names this run's generation for <see cref="RequestAbort"/> and is null on refusal. vettedRoute (Trigger A) is the journey
+		/// <see cref="TryPlanCaptureRoute"/> returned for these very passengers and targets: the commit is refused unless the craft it would use plans
+		/// exactly that journey now (the vetted route is bound to the committed passengers, craft and plan); null = no binding (Trigger B).
+		/// </summary>
+		bool TryRequestConstrainedCaptureRun(IBot bot, IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets,
+			DropConstraints constraints, bool queueProduction, IReadOnlyList<CPos> vettedRoute, out string runIdentity)
+		{
+			runIdentity = null;
+			return false;
+		}
+
+		/// <summary>
+		/// ENGDROP: ask the provider to abort a run it owns (the owner saw the evidence contradicted). Idempotent: only the current
+		/// owner and generation of the passenger's run is honoured, a second request or a stale identity returns false. The provider
+		/// takes its existing safe retreat path, then hands the passengers back once.
+		/// </summary>
+		bool RequestAbort(IBot bot, string runIdentity, Actor passenger, string reason) => false;
+
 		/// <summary>True while the passenger waits for, rides in or is being unloaded from a transport.</summary>
 		bool IsHandlingPassenger(Actor passenger);
 
