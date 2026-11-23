@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Primitives;
 using OpenRA.Traits;
 using OpenRA.Mods.Common.Traits;
 
@@ -1816,29 +1817,265 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var anchor = SquadManagerBotModuleCA.HangBackAnchor(parent.CenterPosition, targetPos,
 				WDist.FromCells(owner.SquadManager.Info.ArtilleryHangBackCells).Length);
 
+			// ARTY-01 (switch ON only): per-unit target priority, stand-off, defence avoidance and kiting. Off = the loop below.
+			if (owner.SquadManager.ArtyMicroActive)
+			{
+				TickMicro(owner, anchor);
+				return;
+			}
+
+			foreach (var u in owner.Units)
+				LegacyUnitOrder(owner, u, anchor);
+		}
+
+		// The pre-ARTY-01 per-unit order (also the fallback for a unit the micro cannot plan for).
+		static void LegacyUnitOrder(SquadCA owner, UnitWposWrapper u, WPos anchor)
+		{
+			// Longest range over the enabled attack traits; TraitOrDefault<AttackBase>
+			// throws on the many actors that carry more than one.
+			var range = WDist.Zero;
+			foreach (var attack in u.Actor.TraitsImplementing<AttackBase>())
+			{
+				if (attack.IsTraitDisabled)
+					continue;
+
+				var r = attack.GetMaximumRangeVersusTarget(owner.Target);
+				if (r > range)
+					range = r;
+			}
+
+			// In range: bombard the shared target. Out of range: move to the
+			// hang-back anchor, NOT toward the target — the assault squad does
+			// the closing so artillery keeps its range advantage.
+			if (range > WDist.Zero && owner.Target.IsInRange(u.Actor.CenterPosition, range))
+				owner.Bot.QueueOrder(new Order("Attack", u.Actor, owner.Target, false));
+			else
+				owner.Bot.QueueOrder(new Order("AttackMove", u.Actor, Target.FromPos(anchor), false));
+		}
+
+		struct ArtyMemory
+		{
+			public int NextThinkTick;
+			public uint LastAttackId;
+		}
+
+		static readonly BitSet<TargetableType> WallTargetType = new("Wall");
+
+		readonly Dictionary<uint, ArtyMemory> memory = [];
+		readonly List<ArtyCandidate> candidates = [];
+		readonly List<Actor> candidateActors = [];
+		readonly List<ArtyDefence> defences = [];
+
+		// ARTY-01: each unit decides for itself, at most once per ArtyOrderCooldownTicks. Priority per unit:
+		// kite from a hostile unit it outranges, back off a defence that reaches it, attack the best target in range
+		// (defences, then structures, then units), otherwise approach the squad target to its firing position.
+		void TickMicro(SquadCA owner, WPos anchor)
+		{
+			var manager = owner.SquadManager;
+			var info = manager.Info;
+			var now = owner.World.WorldTick;
+			var rules = owner.World.Map.Rules;
+			var rangeMargin = WDist.FromCells(info.ArtyRangeMarginCells).Length;
+			var defenceMargin = WDist.FromCells(info.ArtyDefenceMarginCells).Length;
+			var kiteMargin = WDist.FromCells(info.ArtyKiteMarginCells).Length;
+			var threatRadius = WDist.FromCells(info.ArtyThreatRadiusCells).Length;
+			var maxStep = WDist.FromCells(info.ArtyMaxStepCells).Length;
+
+			if (memory.Count > owner.Units.Count * 2 + 8)
+				memory.Clear();
+
 			foreach (var u in owner.Units)
 			{
-				// Longest range over the enabled attack traits; TraitOrDefault<AttackBase>
-				// throws on the many actors that carry more than one.
-				var range = WDist.Zero;
-				foreach (var attack in u.Actor.TraitsImplementing<AttackBase>())
-				{
-					if (attack.IsTraitDisabled)
-						continue;
+				var unit = u.Actor;
+				if (manager.unitCannotBeOrdered(unit))
+					continue;
 
-					var r = attack.GetMaximumRangeVersusTarget(owner.Target);
-					if (r > range)
-						range = r;
+				memory.TryGetValue(unit.ActorID, out var mem);
+				if (now < mem.NextThinkTick)
+					continue;
+
+				mem.NextThinkTick = now + info.ArtyOrderCooldownTicks;
+				memory[unit.ActorID] = mem;
+
+				var rangeLen = BotUnitProfiles.Get(rules, unit.Info).MaxRange.Length;
+				if (rangeLen <= 0)
+				{
+					LegacyUnitOrder(owner, u, anchor);
+					continue;
 				}
 
-				// In range: bombard the shared target. Out of range: move to the
-				// hang-back anchor, NOT toward the target — the assault squad does
-				// the closing so artillery keeps its range advantage.
-				if (range > WDist.Zero && owner.Target.IsInRange(u.Actor.CenterPosition, range))
-					owner.Bot.QueueOrder(new Order("Attack", u.Actor, owner.Target, false));
-				else
-					owner.Bot.QueueOrder(new Order("AttackMove", u.Actor, Target.FromPos(anchor), false));
+				var pos = unit.CenterPosition;
+				var scanLen = rangeLen + Math.Max(kiteMargin, defenceMargin) + WDist.FromCells(4).Length;
+				GatherEnemies(owner, unit, pos, scanLen, threatRadius, kiteMargin, rangeLen);
+
+				// 1. Kite: the nearest hostile unit that closes in, when this unit outranges it.
+				if (TryKite(owner, unit, pos, rangeLen, kiteMargin, maxStep, ref mem))
+				{
+					memory[unit.ActorID] = mem;
+					continue;
+				}
+
+				// 2. Never stand inside a defence's reach: back off to outrange it again.
+				if (TryDefenceBackoff(owner, unit, pos, rangeLen, rangeMargin, defenceMargin, ref mem))
+				{
+					memory[unit.ActorID] = mem;
+					continue;
+				}
+
+				// 3. Attack the best target in range.
+				var pick = ArtyMicroCA.PickTarget(pos, rangeLen, candidates);
+				if (pick >= 0)
+				{
+					var target = candidateActors[pick];
+					if (mem.LastAttackId != target.ActorID || !BusyAttack(unit))
+					{
+						if (!manager.TryConsumeMicroActions())
+							continue;
+
+						owner.Bot.QueueOrder(new Order("Attack", unit, Target.FromActor(target), false));
+						mem.LastAttackId = target.ActorID;
+						memory[unit.ActorID] = mem;
+					}
+
+					continue;
+				}
+
+				// 4. Nothing visible in range: the squad target (possibly a remembered building) when it is in range, else approach it.
+				if (!owner.Target.IsValidFor(unit))
+				{
+					LegacyUnitOrder(owner, u, anchor);
+					continue;
+				}
+
+				var targetPos = owner.Target.CenterPosition;
+				if ((targetPos - pos).HorizontalLengthSquared <= (long)rangeLen * rangeLen)
+				{
+					if (mem.LastAttackId == uint.MaxValue && BusyAttack(unit))
+						continue;
+
+					if (!manager.TryConsumeMicroActions())
+						continue;
+
+					owner.Bot.QueueOrder(new Order("Attack", unit, owner.Target, false));
+					mem.LastAttackId = uint.MaxValue;
+					memory[unit.ActorID] = mem;
+					continue;
+				}
+
+				var plan = ArtyMicroCA.PlanApproach(pos, targetPos, rangeLen, rangeMargin, defences, defenceMargin);
+				if (plan.Kind == ArtyApproachKind.Move)
+				{
+					if (!manager.TryConsumeMicroActions())
+						continue;
+
+					owner.Bot.QueueOrder(new Order("Move", unit, Target.FromPos(plan.Point), false));
+					mem.LastAttackId = 0;
+					memory[unit.ActorID] = mem;
+				}
 			}
+		}
+
+		// Fills candidates/candidateActors/defences with what this unit can see within scanLen: observed enemies from the actor
+		// layer, plus remembered enemy defences (FrozenActorLayer). Enemies only; fog-honest.
+		void GatherEnemies(SquadCA owner, Actor unit, WPos pos, int scanLen, int threatRadius, int kiteMargin, int ownRangeLen)
+		{
+			candidates.Clear();
+			candidateActors.Clear();
+			defences.Clear();
+
+			var manager = owner.SquadManager;
+			var rules = owner.World.Map.Rules;
+			foreach (var e in owner.World.FindActorsInCircle(pos, new WDist(scanLen)))
+			{
+				if (e == unit || !manager.IsPreferredObservedEnemyUnit(e) || e.GetEnabledTargetTypes().Overlaps(WallTargetType))
+					continue;
+
+				var isBuilding = e.Info.HasTraitInfo<BuildingInfo>();
+				var armed = e.Info.HasTraitInfo<AttackBaseInfo>();
+				var reach = armed ? BotUnitProfiles.Get(rules, e.Info).MaxRange.Length : 0;
+				if (isBuilding)
+				{
+					var kind = armed ? ArtyKind.Defence : ArtyKind.Structure;
+					candidates.Add(new ArtyCandidate(e.ActorID, e.CenterPosition, kind, false));
+					candidateActors.Add(e);
+					if (armed)
+						defences.Add(new ArtyDefence(e.CenterPosition, reach));
+				}
+				else
+				{
+					var d = (e.CenterPosition - pos).HorizontalLength;
+					var threatens = armed && (d <= threatRadius || d <= reach + kiteMargin);
+					candidates.Add(new ArtyCandidate(e.ActorID, e.CenterPosition, ArtyKind.Unit, threatens));
+					candidateActors.Add(e);
+				}
+			}
+
+			var layer = owner.SquadManager.Player.FrozenActorLayer;
+			if (layer == null)
+				return;
+
+			foreach (var fa in layer.FrozenActorsInCircle(owner.World, pos, new WDist(scanLen)))
+			{
+				if (!fa.IsValid || fa.Hidden || fa.Owner == null || (fa.Actor != null && fa.Actor.IsInWorld && manager.IsNotHiddenUnit(fa.Actor))
+					|| owner.SquadManager.Player.RelationshipWith(fa.Owner) != PlayerRelationship.Enemy
+					|| !fa.Info.HasTraitInfo<BuildingInfo>() || !fa.Info.HasTraitInfo<AttackBaseInfo>())
+					continue;
+
+				defences.Add(new ArtyDefence(fa.CenterPosition, BotUnitProfiles.Get(rules, fa.Info).MaxRange.Length));
+			}
+		}
+
+		bool TryKite(SquadCA owner, Actor unit, WPos pos, int rangeLen, int kiteMargin, int maxStep, ref ArtyMemory mem)
+		{
+			var rules = owner.World.Map.Rules;
+			Actor nearest = null;
+			var nearestSq = long.MaxValue;
+			for (var i = 0; i < candidates.Count; i++)
+			{
+				if (candidates[i].Kind != ArtyKind.Unit || !candidates[i].Threatens)
+					continue;
+
+				var d = (candidates[i].Pos - pos).HorizontalLengthSquared;
+				if (d < nearestSq)
+				{
+					nearestSq = d;
+					nearest = candidateActors[i];
+				}
+			}
+
+			if (nearest == null)
+				return false;
+
+			var standoff = ArtyMicroCA.KiteStandoff(rangeLen, BotUnitProfiles.Get(rules, nearest.Info).MaxRange.Length, kiteMargin);
+			if (standoff == null)
+				return false;
+
+			var point = ArtyMicroCA.KitePoint(pos, nearest.CenterPosition, standoff.Value, maxStep);
+			if (point == null || !owner.SquadManager.TryConsumeMicroActions())
+				return false;
+
+			owner.Bot.QueueOrder(new Order("Move", unit, Target.FromPos(point.Value), false));
+			mem.LastAttackId = 0;
+			return true;
+		}
+
+		bool TryDefenceBackoff(SquadCA owner, Actor unit, WPos pos, int rangeLen, int rangeMargin, int defenceMargin, ref ArtyMemory mem)
+		{
+			for (var i = 0; i < defences.Count; i++)
+			{
+				var point = ArtyMicroCA.DefenceBackoff(pos, defences[i], rangeLen, rangeMargin, defenceMargin);
+				if (point == null)
+					continue;
+
+				if (!owner.SquadManager.TryConsumeMicroActions())
+					return false;
+
+				owner.Bot.QueueOrder(new Order("Move", unit, Target.FromPos(point.Value), false));
+				mem.LastAttackId = 0;
+				return true;
+			}
+
+			return false;
 		}
 
 		public void Deactivate(SquadCA owner) { }
