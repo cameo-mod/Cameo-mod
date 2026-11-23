@@ -49,7 +49,8 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("ARMY-FIRST-02: armed static defences (a building with an attack trait) leave the projected-share and reserve votes",
 			"(defences count as army, user 11-22) and follow a threat-scaled cap instead: an extra defence is held while the bot",
 			"already has this many (owned + queued + recently admitted) plus DefenceCapPerThreat x threat intensity. The first",
-			"copy of each defence type passes (FirstCopyPasses). -1 = no cap, defences are voted like any building.",
+			"copy of each defence type passes (FirstCopyPasses); an essential building always passes. -1 = no cap, defences are",
+			"voted like any building. The cap is computed at the first scan (ScanInterval): before it nothing is capped.",
 			"Ablation row af2_defence_cap.")]
 		public readonly int DefenceCapBase = -1;
 
@@ -70,6 +71,10 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("Ticks an admitted building counts as in flight for the first-copy and defence counts (covers the order latency",
 			"until the next scan sees it queued; a conservative overcount inside the window).")]
 		public readonly int AdmittedHoldTicks = 50;
+
+		[Desc("An admission older than this many ticks at a scan is in that scan's queue count already and is dropped from the",
+			"defence in-flight count (orders resolve within a few ticks; the scan counts the queued item itself).")]
+		public readonly int AdmittedSeenTicks = 10;
 
 		[Desc("ABLATE-01 row that switches this whole instance off (DEV provider only; release = on). Empty = no row.")]
 		public readonly string AblationRow = "";
@@ -243,7 +248,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				var isDefence = ArmyFirstEval.IsDefence(building.HasTraitInfo<BuildingInfo>(), building.HasTraitInfo<AttackBaseInfo>());
 				if (firstCopyOn && isFirstCopy || capOn && isDefence)
 				{
-					var capHolds = capOn && isDefence && ArmyFirstEval.DefenceCapHolds(defenceCap, DefenceCount(tick));
+					var capHolds = capOn && isDefence && !essential && ArmyFirstEval.DefenceCapHolds(defenceCap, DefenceCount(tick));
 					var af2Holds = ArmyFirstEval.Af02Holds(firstCopyOn, isFirstCopy, capOn, isDefence, capHolds, false);
 #if CAMEO_DEV_LOGGING
 					CountAf2(building, isFirstCopy && firstCopyOn ? "first_copy" : af2Holds ? "cap_hold" : "cap_admit", tick);
@@ -491,6 +496,10 @@ namespace OpenRA.Mods.Cameo.Traits
 				personality ??= bot.Player.PlayerActor.TraitOrDefault<BotPersonalityController>();
 				RefreshDefenceCap(world.WorldTick);
 			}
+
+			// An admission the scan above already saw queued is counted there; keep only the ones still in flight.
+			var seenBefore = world.WorldTick - info.AdmittedSeenTicks;
+			admittedDefenceTicks.RemoveAll(t => t <= seenBefore);
 
 			if (admittedAt.Count > 0)
 				foreach (var stale in admittedAt.Where(kv => world.WorldTick - kv.Value >= info.AdmittedHoldTicks).Select(kv => kv.Key).ToList())

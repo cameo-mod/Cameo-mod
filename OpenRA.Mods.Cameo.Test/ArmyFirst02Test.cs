@@ -151,6 +151,17 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TheSwitchListIsExactlyTheGenericbotLadder()
+		{
+			// Sonnet LOW-4: a typo would leave a tier silently without the voter. The switch list must equal the union of every
+			// genericbot grant (the base tier grant plus the noob grant).
+			var generic = TopLevel().Single(n => n.Key == "^AIDifficulties").Value.Nodes
+				.Where(n => n.Value.Nodes.Any(c => c.Key == "Condition" && c.Value.Value.Trim() == "genericbot"))
+				.SelectMany(n => Field(n, "Bots").Split(',').Select(x => x.Trim())).ToHashSet();
+			Assert.That(generic, Is.EquivalentTo(Tiers));
+		}
+
+		[Test]
 		public void RepairFloorIsOneThousandOnTheTierRepairOwner()
 		{
 			var repair = PlayerNode("BaseRepairBotModule");
