@@ -28,6 +28,9 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		public bool IsTerminal { get; private set; }
 
+		// PERF-SPK-01: the path this appender writes, so the writer can assert it matches the file it created exclusively.
+		internal string FilePath => filePath;
+
 		public AiLogFileAppender(string fileName, string writer)
 		{
 			this.writer = writer;

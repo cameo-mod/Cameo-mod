@@ -10,6 +10,7 @@
 #endregion
 
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 
@@ -51,6 +52,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			// Exclusive create: existing evidence is never overwritten (same rule as the synchronous writer).
 			using (new FileStream(Path.Combine(directory, fileName), FileMode.CreateNew, FileAccess.Write, FileShare.Read)) { }
 			appender = new AiLogFileAppender(fileName, writer);
+			Debug.Assert(appender.FilePath == Path.Combine(directory, fileName), "queued writer: create and append paths diverged");
 			queueFailuresAtStart = AiLogWriteQueue.Shared.Failed;
 		}
 
