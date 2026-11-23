@@ -17,6 +17,7 @@ Player:
 				TryGetHealed: false
 				AttackOrderName: AssaultMove
 	BaseBuilderBotModuleCA@generic:
+		TechChainTypes: wc2_humans_keep, wc2_humans_castle
 		BuildingIntervals:
 			wc2_humans_elvenlumbermill: 1500
 			wc2_humans_barracks: 1500

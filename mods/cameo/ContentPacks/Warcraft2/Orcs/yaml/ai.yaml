@@ -17,6 +17,7 @@ Player:
 				TryGetHealed: false
 				AttackOrderName: AssaultMove
 	BaseBuilderBotModuleCA@generic:
+		TechChainTypes: wc2_orcs_stronghold, wc2_orcs_fortress
 		BuildingIntervals:
 			wc2_orcs_trolllumbermill: 1500
 			wc2_orcs_barracks: 1500
