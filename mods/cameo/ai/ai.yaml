@@ -4304,13 +4304,12 @@ Player:
 	# completed-item PlacePlug — bots buy plugs like players (maintainer ruling); the instant
 	# PlacePlugAI installer is retired. Queue-less plugs (dormant droppod uplink) stay
 	# unreachable.
-	# UPGRADE-QUEUE-02 (USER P0, add-ons never idle): the gate is now `genericbot` only, with its own
-	# switch AddonService (default true, ablation row pq_addon_service). The old plug_spawn gate kept
-	# every add-on idle on master. Classic has no genericbot, so Classic is untouched. Zerg lair/hive,
-	# sunken/spore, spire->greater spire, extractor->collector and WC2 castle/fortress entries added or
-	# corrected from each plug's own Plug.Type (castle = keep, fortress = stronghold).
+	# UPGRADE-QUEUE-02: the module's own switch AddonService (default true, ablation row pq_addon_service)
+	# sits inside this gate. The gate stays `genericbot && plug_spawn`, so add-ons are OFF on master until
+	# Opus rules on the gate (Leader, 11-23). Zerg lair/hive, sunken/spore, spire->greater spire,
+	# extractor->collector and WC2 castle/fortress entries are corrected from each plug's own Plug.Type.
 	PlugSpawnerBotModuleCA:
-		RequiresCondition: genericbot
+		RequiresCondition: genericbot && plug_spawn
 		Plugs:
 			cabal_missilesilo: cabal_core
 			naxis_machinegunbunkeraddon: naxis_naxibunker
