@@ -1817,6 +1817,20 @@ namespace OpenRA.Mods.CA.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			// PERF-F1: the shared enemy lists live for exactly this call.
+			BeginEnemyScanPass();
+			try
+			{
+				BotTickBody(bot);
+			}
+			finally
+			{
+				EndEnemyScanPass();
+			}
+		}
+
+		void BotTickBody(IBot bot)
+		{
 			// LC4: the BotLimits cached in TraitEnabled can predate the tier condition (BotLimitsResolver). A corrected
 			// tier also corrects the initial attack delay; it only ever lengthens the wait already scheduled.
 			if (!limitsRechecked)
@@ -1916,13 +1930,11 @@ namespace OpenRA.Mods.CA.Traits
 
 		internal Actor FindClosestEnemy(Actor sourceActor, SquadCA owner = null)
 		{
-			var units = World.Actors.Where(IsPreferredEnemyUnit).ToList();
+			// PERF-F1: the world scan, fog filter and main-target preference come from the per-tick shared list (read only here).
 			var mainTarget = EffectiveMainTarget();
-
-			units = FilterHiddenUnderFog(units, FoggedScans, IsNotHiddenUnit);
-			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
+			var units = EnemyCandidates(mainTarget);
 			units = PreferSquadTargets(units, owner, TagsOf);
-			var visible = units.Where(IsNotHiddenUnit).ToList();
+			var visible = VisibleOfCandidates(units);
 
 			// CA F2p2 (A5-1): visible enemy buildings first; only the already-observed candidates are re-ordered.
 			if (Info.PreferBuildingTargets)
@@ -1947,13 +1959,12 @@ namespace OpenRA.Mods.CA.Traits
 		// candidate fails the gate the squad holds instead of suiciding.
 		internal Actor FindClosestEnemy(Actor sourceActor, int attackerValue, SquadCA owner = null)
 		{
-			var units = World.Actors.Where(IsPreferredEnemyUnit).ToList();
 			var mainTarget = EffectiveMainTarget();
-
-			units = FilterHiddenUnderFog(units, FoggedScans, IsNotHiddenUnit);
-			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
+			var units = EnemyCandidates(mainTarget);
 			units = PreferSquadTargets(units, owner, TagsOf);
-			units.RemoveAll(u => !PassesRiskGate(u.Location, attackerValue));
+
+			// PERF-F1: a new list; the shared one is never modified in place.
+			units = WithoutRiskyTargets(units, attackerValue);
 			var visible = units.Where(IsNotHiddenUnit).ToList();
 
 			var picked = FoggedScans
@@ -1972,9 +1983,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (targetPlayer == null)
 				return null;
 
-			var units = World.Actors
-				.Where(a => a.Owner == targetPlayer && IsPreferredEnemyUnit(a))
-				.ToList();
+			var units = EnemyUnitsOf(targetPlayer);
 
 			units = FilterHiddenUnderFog(units, FoggedScans, IsNotHiddenUnit);
 			units = PreferSquadTargets(units, owner, TagsOf);
@@ -1992,12 +2001,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		internal Actor FindHighValueTarget(WPos pos)
 		{
-			var units = World.Actors.Where(IsHighValueTarget).ToList();
-			if (FoggedScans)
-				units = units.Where(IsNotHiddenUnit).ToList();
-
-			var mainTarget = EffectiveMainTarget();
-			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
+			var units = HighValueCandidates(EffectiveMainTarget());
 			var picked = units.RandomOrDefault(BotRng.For(Player, nameof(SquadManagerBotModuleCA)));
 			CanaryObserved(picked, "find-hv-target");
 			return picked;
@@ -2005,13 +2009,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		internal Actor FindHighValueTarget(WPos pos, int attackerValue)
 		{
-			var units = World.Actors.Where(IsHighValueTarget).ToList();
-			if (FoggedScans)
-				units = units.Where(IsNotHiddenUnit).ToList();
-
-			var mainTarget = EffectiveMainTarget();
-			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
-			units.RemoveAll(u => !PassesRiskGate(u.Location, attackerValue));
+			var units = HighValueCandidates(EffectiveMainTarget());
+			units = WithoutRiskyTargets(units, attackerValue);
 			var picked = units.RandomOrDefault(BotRng.For(Player, nameof(SquadManagerBotModuleCA)));
 			CanaryObserved(picked, "find-hv-target");
 			return picked;

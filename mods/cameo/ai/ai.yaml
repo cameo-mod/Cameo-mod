@@ -5727,6 +5727,8 @@ Player:
 	SquadManagerBotModuleCA@classic:
 		# §12.7b contact-first all-in is genericbot behaviour; classic stays the untouched A/B reference.
 		ContactFirstAllIn: false
+		# PERF-F1: the classic reference bot keeps its per-call enemy scans (the A/B control stays untouched).
+		UseSharedEnemyScan: false
 		RequiresCondition: classicbot
 		# Restored verbatim from the pre-wave @generic node (786bb2f2c era): the
 		# classic reference bot's squad brain — no missions, no personality variants.
