@@ -71,6 +71,13 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Only queue construction of a new unit when above this requirement.")]
 		public readonly int ProductionMinCashRequirement = 2000;
 
+		[Desc("UPGRADE-QUEUE-01: the upgrade-like queues (UpgradeServiceQueues) get their own service that runs before the cash floor and the pause votes, so an",
+			"upgrade, add-on, research or promotion queue with something buildable is never idle. False = those queues are only visited by the ordinary unit sweep, behind the floor.")]
+		public readonly bool UpgradeService = true;
+
+		[Desc("UPGRADE-QUEUE-01: queue types served by the upgrade service. Each one is served on its own: a queue with nothing buildable, or a busy one, never holds back the next.")]
+		public readonly string[] UpgradeServiceQueues = { "Upgrades", "Addons", "Research", "Promotions" };
+
 		[Desc("Only queue construction of a new unit when above this requirement.",
 			"BotLimits.MaximiseProductionCashRequirement overrides this per difficulty (DESIGN §19.1).")]
 		public readonly int MaximiseProductionCashRequirement = 10000;
@@ -440,7 +447,13 @@ namespace OpenRA.Mods.CA.Traits
 		bool FairService => switchesActive && Info.FairProducerService && !ablateFairProducer.Off(player, AblationIds.FairProducer);
 
 		// ABLATE-01 hooks (DEV-only provider; absent in release = always on): one cached answer per row.
-		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery;
+		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery, ablateUpgradeService;
+
+		// UPGRADE-QUEUE-01: own cadence (same period as the build pass) so the service is not tied to the pause guards the pass sits behind.
+		BotCallPeriod upgradeCalls;
+		readonly Dictionary<(uint, string), int> upgradeIdleUntil = new();
+		const int UpgradeRecheckTicks = 75;
+		bool UpgradeServiceOn => switchesActive && Info.UpgradeService && !ablateUpgradeService.Off(player, AblationIds.UpgradeService);
 
 		// PR-2 queue depth (fair path only): world ticks between this bot's last two passes. Round-robin makes it long;
 		// a single-slot queue is topped up while its loaded build time is shorter than this gap (QueueDepthCA).
@@ -706,6 +719,16 @@ namespace OpenRA.Mods.CA.Traits
 					activeUnitIntervals.Remove(i.Key);
 			}
 
+			// UPGRADE-QUEUE-01: runs before the pause votes and the cash floor; progressive payment makes an unfunded start harmless.
+			if (UpgradeServiceOn)
+			{
+				var upgradeClock = BotVisitClock.Of(bot);
+				if (upgradeCalls.Call(upgradeClock.VisitTick, upgradeClock.Elapsed, FeedbackTime + Info.UnitBuilderInterval))
+					ServeUpgradeQueues(bot);
+			}
+			else
+				upgradeCalls = default;
+
 			var baseBuilderPause = requestPause.FirstOrDefault(rp => ReferenceEquals(rp, baseBuilder));
 
 			// PROD-IDLE item-aware cap: under the fair service a cap that says which items it counts stops only those
@@ -801,6 +824,9 @@ namespace OpenRA.Mods.CA.Traits
 					if (++currentQueueIndex >= Info.UnitQueues.Length)
 						currentQueueIndex = 0;
 
+					if (UpgradeServiceOn && Array.IndexOf(Info.UpgradeServiceQueues, Info.UnitQueues[currentQueueIndex]) >= 0)
+						continue;
+
 					if (AIUtils.FindQueues(player, Info.UnitQueues[currentQueueIndex]).Any())
 					{
 						// BV_m13_liveness: re-evaluated per category with the same cash accounting —
@@ -818,6 +844,75 @@ namespace OpenRA.Mods.CA.Traits
 					}
 				}
 			}
+		}
+
+		// UPGRADE-QUEUE-01. Every queue of every served type is its own producer: an idle one starts the best buildable item NOW,
+		// whatever the bank holds (production is paid progressively). Order of preference: items the faction's UnitsToBuild lists for this
+		// queue type, by weight (high first), then by cost (cheap first), then by name; items the list does not mention come last, so a
+		// queue never idles because the table missed a newly unlocked tier. No random draw, so same seed = same order.
+		void ServeUpgradeQueues(IBot bot)
+		{
+			// One set for the whole pass: Scrin carries a second Upgrades queue on its nerve center, and two idle queues must not start the same item.
+			var picked = new HashSet<string>(StringComparer.Ordinal);
+			foreach (var category in Info.UpgradeServiceQueues)
+			{
+				foreach (var queue in AIUtils.FindQueues(player, category))
+				{
+					var slots = LiveFreeSlots(queue);
+					if (slots <= 0)
+						continue;
+
+					var key = (queue.Actor.ActorID, queue.Info.Type);
+					if (upgradeIdleUntil.TryGetValue(key, out var idleUntil) && world.WorldTick < idleUntil)
+						continue;
+
+					var shares = GetUnitsToBuildForCategory(queue.Info.Type);
+					var startedHere = 0;
+					for (; slots > 0; slots--)
+					{
+						var item = ChooseUpgradeItem(queue, shares, picked);
+						if (item == null)
+						{
+							// Nothing buildable (everything researched, or the next tier is locked): look again in 75 ticks, not every pass.
+							if (startedHere == 0)
+								upgradeIdleUntil[key] = world.WorldTick + UpgradeRecheckTicks;
+
+							break;
+						}
+
+						picked.Add(item.Name);
+						startedHere++;
+						SetUnitInterval(item.Name);
+						bot.QueueOrder(Order.StartProduction(queue.Actor, item.Name, 1));
+						NotifyStarted(item.Name, queue.Info.Type);
+						AIUtils.BotDebug("AI: {0} upgrade service starts {1} in {2}.", player, item.Name, queue.Info.Type);
+					}
+				}
+			}
+		}
+
+		ActorInfo ChooseUpgradeItem(ProductionQueue queue, Dictionary<string, int> shares, HashSet<string> picked)
+		{
+			ActorInfo best = null;
+			var bestWeight = -1;
+			var bestCost = 0;
+			foreach (var item in queue.BuildableItems())
+			{
+				if (picked.Contains(item.Name))
+					continue;
+
+				var weight = shares != null && shares.TryGetValue(item.Name, out var w) ? Math.Max(w, 0) : -1;
+				var cost = queue.GetProductionCost(item);
+				if (best == null || weight > bestWeight ||
+					(weight == bestWeight && (cost < bestCost || (cost == bestCost && string.CompareOrdinal(item.Name, best.Name) < 0))))
+				{
+					best = item;
+					bestWeight = weight;
+					bestCost = cost;
+				}
+			}
+
+			return best;
 		}
 
 		void TryBuildOpeningDefense(IBot bot)
