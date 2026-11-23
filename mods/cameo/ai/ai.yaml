@@ -5485,6 +5485,10 @@ Player:
 	BaseBuilderBotModuleCA@generic:
 		RequiresCondition: genericbot || classicbot
 		SwitchCondition: genericbot
+		# p0-integration-01 (Opus 11-23): RATIO-2X-01 switched ON for the P0 acceptance test (the 2x mobile/static ratio at a
+		# defence start; row army_first_02_ratio). Classic shares this instance but has no IBotMobileStaticValues provider
+		# (MasterAiBotModule is genericbot), so its gate is Inert and records nothing.
+		MobileStaticRatioEnabled: true
 		InititalMinimumRefineryCount: 1
 		AdditionalMinimumRefineryCount: 2
 		RefineriesPerBase: 3
