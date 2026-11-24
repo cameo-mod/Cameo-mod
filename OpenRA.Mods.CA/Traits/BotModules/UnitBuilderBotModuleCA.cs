@@ -89,6 +89,10 @@ namespace OpenRA.Mods.CA.Traits
 			"(votes, limits and the aircraft cap still apply) runs whatever the bank. Gated by SwitchCondition; row pb_idle_cap.")]
 		public readonly bool ShareTestNeverIdles = false;
 
+		[Desc("PROD-BUSY-03b (USER 11-24): the idle-unit limit is the tier's BotLimits.IdleBaseUnitsMaximum (25 Noob .. 75 Cameo God,",
+			"steps of 5) instead of IdleBaseUnitsMaximum here, which stays the fallback. Gated by SwitchCondition; row pb_idle_cap_tiered.")]
+		public readonly bool TieredIdleCap = false;
+
 		[Desc("UPGRADE-QUEUE-01: queue types served by the upgrade service. Each one is served on its own: a queue with nothing buildable, or a busy one, never holds back the next.")]
 		public readonly string[] UpgradeServiceQueues = { "Promotions", "Upgrades", "Research", "Addons" };
 
@@ -477,8 +481,18 @@ namespace OpenRA.Mods.CA.Traits
 
 		// PROD-BUSY-01: one switch and one ablation row each. With both on, every queue is served every pass, so the PR-2 depth horizon
 		// (visitGapTicks = the gap to this bot's next pass) is also the gap to that queue's next service.
-		AblationLatch ablateIdleCap;
+		AblationLatch ablateIdleCap, ablateIdleCapTiered;
 		bool IdleCapOn => switchesActive && Info.ShareTestNeverIdles && !ablateIdleCap.Off(player, AblationIds.ProdBusyIdleCap);
+		bool TieredIdleCapOn => switchesActive && Info.TieredIdleCap && !ablateIdleCapTiered.Off(player, AblationIds.ProdBusyIdleCapTiered);
+
+		/// <summary>PROD-BUSY-03b: this bot's idle-unit limit (the tier value while pb_idle_cap_tiered is on, else IdleBaseUnitsMaximum).</summary>
+		public int IdleUnitsLimit => ProdBusyCA.IdleLimit(TieredIdleCapOn, botLimits?.Info.IdleBaseUnitsMaximum ?? -1, Info.IdleBaseUnitsMaximum);
+
+		/// <summary>PROD-BUSY-03b: idle base units as last reported by the squad manager.</summary>
+		public int IdleUnitCount => idleUnitCount;
+
+		/// <summary>PROD-BUSY-03b: idle base units at or over the limit (TEAM-LEAD forced-push trigger).</summary>
+		public bool IdleAtLimit => idleUnitCount >= IdleUnitsLimit;
 		AblationLatch ablateAllFactories, ablateAllCategories, ablateThroughPauseResearch, ablateThroughPauseUpgrade, ablateThroughPauseAddon;
 		bool AllFactoriesOn => switchesActive && Info.ServeAllFactories && !ablateAllFactories.Off(player, AblationIds.ProdBusyAllFactories);
 		bool AllCategoriesOn => switchesActive && Info.ServeAllCategories && !ablateAllCategories.Off(player, AblationIds.ProdBusyAllCategories);
@@ -876,7 +890,7 @@ namespace OpenRA.Mods.CA.Traits
 
 						// PERF: We tick only one type of valid queue at a time
 						// if AI gets enough cash, it can fill all of its queues with enough ticks
-						BuildUnit(bot, Info.UnitQueues[currentQueueIndex], idleUnitCount < Info.IdleBaseUnitsMaximum, false, saturated, batch);
+						BuildUnit(bot, Info.UnitQueues[currentQueueIndex], idleUnitCount < IdleUnitsLimit, false, saturated, batch);
 
 						// The fair path's batch nets this pass's orders; the legacy path (FairProducerService ablated, DEV only) has no batch,
 						// so its bank never drops during the pass and only the reserve-gated item checks stop spending (Sonnet LOW 2).

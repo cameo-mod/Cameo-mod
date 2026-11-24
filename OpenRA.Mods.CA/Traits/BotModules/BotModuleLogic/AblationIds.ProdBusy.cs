@@ -16,6 +16,7 @@ namespace OpenRA.Mods.CA.Traits
 	// pb_all_categories off = the sweep stops after the first served category below MaximiseProductionCash, as before.
 	// pb_all_building_producers off = one building/defence start per category per base-builder sweep, as before.
 	// pb_building_idle_sweep off = an idle base-builder sweep waits StructureProductionInactiveDelay, as before.
+	// pb_idle_cap_tiered off (PROD-BUSY-03b) = the idle-unit limit is the module's IdleBaseUnitsMaximum (25), as before.
 	// pb_idle_cap off (PROD-BUSY-03) = a met share mix idles the unit queue unless the bank is saturated, as before.
 	public static partial class AblationIds
 	{
@@ -24,5 +25,6 @@ namespace OpenRA.Mods.CA.Traits
 		public const string ProdBusyAllBuildingProducers = "pb_all_building_producers";
 		public const string ProdBusyBuildingIdleSweep = "pb_building_idle_sweep";
 		public const string ProdBusyIdleCap = "pb_idle_cap";
+		public const string ProdBusyIdleCapTiered = "pb_idle_cap_tiered";
 	}
 }

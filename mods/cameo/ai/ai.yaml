@@ -214,6 +214,7 @@
 		PersonalityReactionDelay: 6000
 		NewProductionCashThreshold: 12000
 		MaximiseProductionCashRequirement: 6000
+		IdleBaseUnitsMaximum: 25
 		BankSaturationCash: 9000
 		AdaptiveCounterWeight: 0
 		CapturerInfantryLimitPct: 0
@@ -246,6 +247,7 @@
 		PersonalityReactionDelay: 5500
 		NewProductionCashThreshold: 11000
 		MaximiseProductionCashRequirement: 5500
+		IdleBaseUnitsMaximum: 30
 		BankSaturationCash: 8250
 		AdaptiveCounterWeight: 5
 		CapturerInfantryLimitPct: 1
@@ -278,6 +280,7 @@
 		PersonalityReactionDelay: 5000
 		NewProductionCashThreshold: 10000
 		MaximiseProductionCashRequirement: 5000
+		IdleBaseUnitsMaximum: 35
 		BankSaturationCash: 7500
 		AdaptiveCounterWeight: 10
 		CapturerInfantryLimitPct: 2
@@ -310,6 +313,7 @@
 		PersonalityReactionDelay: 4500
 		NewProductionCashThreshold: 9000
 		MaximiseProductionCashRequirement: 4500
+		IdleBaseUnitsMaximum: 40
 		BankSaturationCash: 6750
 		AdaptiveCounterWeight: 15
 		CapturerInfantryLimitPct: 3
@@ -342,6 +346,7 @@
 		PersonalityReactionDelay: 4000
 		NewProductionCashThreshold: 8000
 		MaximiseProductionCashRequirement: 4000
+		IdleBaseUnitsMaximum: 45
 		BankSaturationCash: 6000
 		AdaptiveCounterWeight: 20
 		CapturerInfantryLimitPct: 4
@@ -375,6 +380,7 @@
 		PersonalityReactionDelay: 3500
 		NewProductionCashThreshold: 7000
 		MaximiseProductionCashRequirement: 3500
+		IdleBaseUnitsMaximum: 50
 		BankSaturationCash: 5250
 		AdaptiveCounterWeight: 25
 		CapturerInfantryLimitPct: 5
@@ -408,6 +414,7 @@
 		PersonalityReactionDelay: 3000
 		NewProductionCashThreshold: 6000
 		MaximiseProductionCashRequirement: 3000
+		IdleBaseUnitsMaximum: 55
 		BankSaturationCash: 4500
 		AdaptiveCounterWeight: 30
 		CapturerInfantryLimitPct: 6
@@ -441,6 +448,7 @@
 		PersonalityReactionDelay: 2500
 		NewProductionCashThreshold: 5000
 		MaximiseProductionCashRequirement: 2500
+		IdleBaseUnitsMaximum: 60
 		BankSaturationCash: 3750
 		AdaptiveCounterWeight: 35
 		CapturerInfantryLimitPct: 7
@@ -474,6 +482,7 @@
 		PersonalityReactionDelay: 2000
 		NewProductionCashThreshold: 4000
 		MaximiseProductionCashRequirement: 2000
+		IdleBaseUnitsMaximum: 65
 		BankSaturationCash: 3000
 		AdaptiveCounterWeight: 40
 		CapturerInfantryLimitPct: 8
@@ -507,6 +516,7 @@
 		PersonalityReactionDelay: 1500
 		NewProductionCashThreshold: 3000
 		MaximiseProductionCashRequirement: 1500
+		IdleBaseUnitsMaximum: 70
 		BankSaturationCash: 2250
 		AdaptiveCounterWeight: 45
 		CapturerInfantryLimitPct: 9
@@ -540,6 +550,7 @@
 		PersonalityReactionDelay: 1000
 		NewProductionCashThreshold: 2000
 		MaximiseProductionCashRequirement: 1000
+		IdleBaseUnitsMaximum: 75
 		BankSaturationCash: 1500
 		AdaptiveCounterWeight: 50
 		CapturerInfantryLimitPct: 10
@@ -5795,6 +5806,7 @@ Player:
 		ServeAllFactories: true
 		ServeAllCategories: true
 		ShareTestNeverIdles: true
+		TieredIdleCap: true
 		IdleBaseUnitsMaximum: 25
 		ProductionMinCashRequirement: 1000
 		MaximiseProductionCashRequirement: 5000

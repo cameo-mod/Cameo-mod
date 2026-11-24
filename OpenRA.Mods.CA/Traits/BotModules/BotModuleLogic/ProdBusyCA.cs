@@ -36,5 +36,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		// PROD-BUSY-03: whether a unit pick whose proportional-share test found nothing retries without the share test.
 		public static bool ShareFallback(bool idleCap, bool saturated) => idleCap || saturated;
+
+		// PROD-BUSY-03b: the idle-unit limit: the tier value while the switch is on and the tier sets one (>= 0), else the module's.
+		public static int IdleLimit(bool tiered, int tierValue, int moduleValue) => tiered && tierValue >= 0 ? tierValue : moduleValue;
 	}
 }

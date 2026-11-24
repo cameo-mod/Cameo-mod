@@ -71,6 +71,11 @@ namespace OpenRA.Mods.CA.Traits
 			"Overrides UnitBuilderBotModuleCA.MaximiseProductionCashRequirement. Negative: use the module's value.")]
 		public readonly int MaximiseProductionCashRequirement = -1;
 
+		[Desc("PROD-BUSY-03b (USER 11-24): idle base units at which the unit builder stops random picks and the team leader is",
+			"pushed to publish. Read only by a unit builder with TieredIdleCap on (row pb_idle_cap_tiered). Negative: the module's",
+			"IdleBaseUnitsMaximum.")]
+		public readonly int IdleBaseUnitsMaximum = -1;
+
 		[Desc("M13 tempo (BV_m13_liveness): cash+resources at or above this tier bar saturate the bank — the armed",
 			"unit builder stops honouring MaximiseProductionCashRequirement, fills up to two free queues per category",
 			"per cycle, and retries a share-rejected pick once without the share test. 0 = off.")]

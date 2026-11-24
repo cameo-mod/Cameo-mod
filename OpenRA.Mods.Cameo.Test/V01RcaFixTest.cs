@@ -29,6 +29,9 @@ namespace OpenRA.Mods.Cameo.Test
 		static MiniYamlNode PlayerNode(string key) => MiniYaml.FromString(Source("packaging/ai.yaml"), "ai")
 			.Single(n => n.Key == "Player").Value.Nodes.Single(n => n.Key == key);
 
+		static MiniYamlNode TierNode(string key) => MiniYaml.FromString(Source("packaging/ai.yaml"), "ai")
+			.Single(n => n.Key == "^AIDifficulties").Value.Nodes.Single(n => n.Key == key);
+
 		static string Field(MiniYamlNode node, string key) => node.Value.Nodes.Single(n => n.Key == key).Value.Value.Trim();
 
 		[Test]
@@ -52,6 +55,47 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(src, Does.Contain("bool IdleCapOn => switchesActive && Info.ShareTestNeverIdles && !ablateIdleCap.Off(player, AblationIds.ProdBusyIdleCap);"));
 			Assert.That(src, Does.Contain("if (ProdBusyCA.ShareFallback(IdleCapOn, saturated))"));
 			Assert.That(src, Does.Not.Contain("\t\t\tif (saturated)\n\t\t\t{\n\t\t\t\tvar fallback"), "the retry reads the switch-aware gate");
+		}
+
+		static readonly string[] TierBlocks =
+		{
+			"noob", "easiest", "veryeasy", "easy", "medium", "hard", "veryhard", "brutal", "challenger", "unbeatable", "god",
+		};
+
+		[Test]
+		public void IdleLimitIsTheTierValueWhileTheSwitchIsOn()
+		{
+			Assert.That(ProdBusyCA.IdleLimit(true, 50, 25), Is.EqualTo(50));
+			Assert.That(ProdBusyCA.IdleLimit(true, -1, 25), Is.EqualTo(25), "a tier without a value: the module's fallback");
+			Assert.That(ProdBusyCA.IdleLimit(false, 50, 25), Is.EqualTo(25), "off: the module's value, as before");
+			Assert.That(ProdBusyCA.IdleLimit(true, 0, 25), Is.EqualTo(0), "0 is a real tier value");
+		}
+
+		[Test]
+		public void TierIdleLimitsRunLinearlyFromNoob25ToGod75()
+		{
+			// USER 11-24 (corrected): one straight line, 25 (Noob) .. 75 (Cameo God), steps of 5.
+			for (var i = 0; i < TierBlocks.Length; i++)
+				Assert.That(Field(TierNode("BotLimits@" + TierBlocks[i]), "IdleBaseUnitsMaximum"),
+					Is.EqualTo((25 + 5 * i).ToString()), TierBlocks[i]);
+
+			Assert.That(Field(TierNode("BotLimits@hard"), "IdleBaseUnitsMaximum"), Is.EqualTo("50"));
+		}
+
+		[Test]
+		public void TieredLimitIsArmedGatedPublicAndHasItsOwnRow()
+		{
+			var unit = PlayerNode("UnitBuilderBotModuleCA@generic");
+			Assert.That(Field(unit, "TieredIdleCap"), Is.EqualTo("true"));
+			Assert.That(Field(unit, "IdleBaseUnitsMaximum"), Is.EqualTo("25"), "the module value stays the fallback");
+			Assert.That(AblationSpec.RegistryIds(), Does.Contain("pb_idle_cap_tiered"));
+
+			var src = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			Assert.That(src, Does.Contain("bool TieredIdleCapOn => switchesActive && Info.TieredIdleCap && !ablateIdleCapTiered.Off(player, AblationIds.ProdBusyIdleCapTiered);"));
+			Assert.That(src, Does.Contain("public int IdleUnitsLimit => ProdBusyCA.IdleLimit(TieredIdleCapOn, botLimits?.Info.IdleBaseUnitsMaximum ?? -1, Info.IdleBaseUnitsMaximum);"));
+			Assert.That(src, Does.Contain("public bool IdleAtLimit => idleUnitCount >= IdleUnitsLimit;"));
+			Assert.That(src, Does.Contain("idleUnitCount < IdleUnitsLimit, false, saturated, batch);"));
+			Assert.That(src, Does.Not.Contain("idleUnitCount < Info.IdleBaseUnitsMaximum"), "BuildUnit reads the switch-aware limit");
 		}
 
 		[Test]
