@@ -106,6 +106,7 @@ namespace OpenRA.Mods.CA.Traits
 				Fractions = b.BuildingFractions,
 				BuildingCount = playerBuildings.Length,
 				FractionMilli = FractionMilli,
+				StageSource = stage => PipelineStageNames(stage, queue, buildable, power, law), // c4: S2, S2b, S6, S7 (Pipeline01Stages.cs)
 				IntervalActive = name => b.BuildingIntervals != null && b.BuildingIntervals.ContainsKey(name) && activeBuildingIntervals.ContainsKey(name),
 			};
 

@@ -324,6 +324,10 @@ namespace OpenRA.Mods.CA.Traits
 			"and its post-pick vetoes, unchanged. Gated by SwitchCondition; row bb_pipeline_01.")]
 		public readonly bool BbPipeline01 = false;
 
+		[Desc("CONSOLIDATE-01 c4 (R8): stage S6 of the staged planner offers the cash-trickler (passive income) buildings up to their BuildingLimits value (a type with no",
+			"limit once) and a silo when storage is nearly full, at reserve 0. Needs BbPipeline01. Off = S6 offers nothing. Gated by SwitchCondition; row bb_passive_income.")]
+		public readonly bool BbPassiveIncome = false;
+
 		[Desc("BASE-06: ticks a READY building may be held before it is placed at a base cell.")]
 		public readonly int ReadyWatchdogTicks = 75;
 
@@ -789,6 +793,8 @@ namespace OpenRA.Mods.CA.Traits
 		public bool RecountInFlightArmed => Info.RecountInFlightAlways && switchesActive && !ablateRecountInFlight.Off(player, AblationIds.RecountInFlight);
 		AblationLatch ablatePipeline01; // CONSOLIDATE-01 c2
 		public bool Pipeline01Armed => Info.BbPipeline01 && switchesActive && !ablatePipeline01.Off(player, AblationIds.BbPipeline01);
+		AblationLatch ablatePassiveIncome; // CONSOLIDATE-01 c4
+		public bool PassiveIncomeArmed => Info.BbPassiveIncome && switchesActive && !ablatePassiveIncome.Off(player, AblationIds.BbPassiveIncome);
 		public bool NoSpaceBanArmed => Info.NoSpaceBan && switchesActive;
 		public bool RefinerySafetyAllClaimsArmed => Info.RefinerySafetyAllClaims && switchesActive;
 		public bool RefineryEconomyGateArmed => Info.RefineryEconomyGate && switchesActive;
