@@ -52,9 +52,5 @@ namespace OpenRA.Mods.CA.Traits
 		public const string TeamLeadGatherHold = "tl_gather_hold";
 		public const string TeamLeadGraceHold = "tl_grace_hold";
 		public const string TeamLeadRouteAll = "tl_route_all";
-
-		// TEAM-GATHER-01 c2 (USER order, V04 RCA 2026-11-24): small pools merge into a rally order (join minimum 1), a rally order is published only for a team army at
-		// WAVE-MIN, and an order is not re-published right after a no_reports cancel (tl_join_any; Info TeamLeadJoinAnyEnabled).
-		public const string TeamLeadJoinAny = "tl_join_any";
 	}
 }
