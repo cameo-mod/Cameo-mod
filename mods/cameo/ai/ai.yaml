@@ -391,7 +391,34 @@
 		ProductionCashReserve: 1800
 		OverflowCash: 8000
 		RoleMixUnnamedTotalPct: 15
-		RequiresCondition: hardbot
+		RequiresCondition: hardbot && !classicbot
+	BotLimits@classic:
+		ProductionTypeLimit: 4
+		ConstructionYardLimit: 4
+		RefineryLimit: 5
+		HarvesterLimit: 15
+		BuildingDelayModifier: 150
+		BuildingIntervalModifier: 150
+		UnitDelayModifier: 150
+		UnitIntervalModifier: 150
+		InitialAttackDelay: 3750
+		AttackLivenessMaxNoLaunchTicks: 7500
+		AttackLivenessFirstWaveMaxTicks: 3750
+		TempoMinWaveUnits: 8
+		TeamResponseMaxLeaseTicks: 1500
+		TeamResponseRearmCooldownTicks: 750
+		TeamResponseLeaseLimit: 1
+		PrioritizeBarracksBeforeRefinery: true
+		PersonalityReactionDelay: 4500
+		NewProductionCashThreshold: 12000
+		MaximiseProductionCashRequirement: 5500
+		BankSaturationCash: 3000
+		AdaptiveCounterWeight: 18
+		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 1200
+		RetreatRatioPct: 50
+		RequiresCondition: classicbot
+
 	BotLimits@veryhard:
 		ProductionTypeLimit: 7
 		ConstructionYardLimit: 7
@@ -5741,7 +5768,7 @@ Player:
 		# construction yards, defenses, producers
 		EnemyBaseBuildingTypes: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_constructionyard, ra1_soviets_constructionyard, japan_japaneseconstructionyard, ra2_soviets_constructionyard, ra2_allies_constructionyard, yuri_constructionyard, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, terran_commandcenter, protoss_nexus, zerg_hatchery, zerg_lair, zerg_hive, glcommand, chcommand, usacommand, ixian_constructionyard, ordos_constructionyard, ordos_laserturret, ordos_chemturret, wc2_humans_townhall, wc2_orcs_greathall, asianalliance_constructionyard, steelconsortium_consortiumconstructionyard, latinsyndicate_syndicateconstructionyard, naxis_constructionyard, schwarzermond_constructionyard, futuretech_constructionyard, tkm_constructionyard, td_gdi_guardtower, td_gdi_advancedguardtower, td_nod_gunturret, td_nod_laserturret, td_nod_obeliskoflight, ra1_allies_pillbox, ra1_allies_camopillbox, ra1_allies_gunturret, ra1_allies_gapgenerator, ra1_allies_bastionartillerybunker, ra1_soviets_flametower, ra1_soviets_teslacoil, japan_waveforceturret, ra2_allies_pillbox, ra2_allies_prismtower, ra2_allies_grandcannon, ra2_soviets_battlebunker, ra2_soviets_sentrygun, ra2_soviets_flakcannon, ra2_soviets_teslacoil, yuri_gatlingcannon, yuri_tankbunker, asianalliance_sentryflamer, asianalliance_cgpnch, asianalliance_railtower, asianalliance_chaostower, asianalliance_plasmacannon, ixian_machinegunturret, ixian_gunturret, ixian_rocketturret, ixian_stormlasher, steelconsortium_consortiumsentryturret, steelconsortium_quantumcannon, steelconsortium_bfg10000, latinsyndicate_latinsentrygun, latinsyndicate_bunkertower, latinsyndicate_defensebureau, latinsyndicate_smlturret, naxis_rifletower, naxis_flak88, schwarzermond_lasertower, schwarzermond_sturmcannon, futuretech_multiturretsystem, futuretech_frostbiteturret, terran_bunker, zerg_creepcolony, zerg_creepcolony_defense, protoss_photoncannon, wc2_humans_humanscouttower, wc2_humans_sunwell, wc2_orcs_orcwatchtower, tkm_bunker, tkm_tankturretbunker, td_gdi_barracks, td_nod_handofnod, ra1_allies_barracks, ra1_soviets_barracks, ra2_allies_barracks, ra2_soviets_barracks, yuri_barracks, terran_barracks, protoss_gateway, zerg_spawningpool, ts_gdi_barracks, forgotten_barracks, ts_nod_handof, cabal_cyborgfactory, glbarracks, chbarracks, usabarracks, d2k_barracks, ixian_barracks, wc2_humans_barracks, wc2_orcs_barracks, asianalliance_barracks, steelconsortium_steelbarracks, latinsyndicate_combatbarracks, naxis_barracks, schwarzermond_barracks, futuretech_troopgate, td_gdi_weaponsfactory, td_nod_airstrip, ra1_allies_warfactory, ra1_soviets_warfactory, ra1_soviets_largefactory, ra2_allies_warfactory, ra2_soviets_warfactory, yuri_warfactory, terran_weaponsfactory, protoss_roboticsfacility, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_warfactory, forgotten_warfactory, ts_nod_warfactory, cabal_mechfactory, glweap, chweap, usaweap, ixian_advancedheavyfactory, ixian_starport, wc2_humans_gnomishinventor, wc2_orcs_golbinalchemist, asianalliance_warfactory, steelconsortium_consortiumwarfactory, latinsyndicate_syndicatefactory, naxis_warfactory, schwarzermond_warfactory, futuretech_warpgate, td_gdi_helipad, ts_nod_helipad, ts_nod_helipad, forgotten_helipad, ts_gdi_helipad, td_nod_helipad, ra1_allies_helipad, ra1_soviets_airfield, ra1_soviets_largesovietairfield, japan_japaneseairfield, ra2_allies_airforcecommandhq, ra2_soviets_airfield, ixian_hightechfactory, asianalliance_airforcecommand, latinsyndicate_airstation, naxis_airfield, schwarzermond_airfield, futuretech_launchpad, ordos_heavyfactory, ordos_starport, ordos_lightfactory, ordos_barracks, ordos_barracks, tkm_barracks, tkm_warfactory, tkm_airpad, atreides_constructionyard, corrino_constructionyard, harkonnen_constructionyard, atreides_barracks, corrino_barracks, harkonnen_barracks, atreides_lightfactory, corrino_lightfactory, harkonnen_lightfactory, atreides_heavyfactory, corrino_heavyfactory, harkonnen_heavyfactory, atreides_refinery, corrino_refinery, harkonnen_refinery, atreides_outpost, corrino_outpost, harkonnen_outpost, eden_factory_structure, eden_factory_vehicle, eden_factory_consumer, eden_smelter_common, eden_smelter_rare, plymouth_structure_factory, plymouth_factory_vehicle, plymouth_factory_arachnid, plymouth_smelter_common, plymouth_smelter_rare
 	BaseBuilderBotModuleCA@generic:
-		RequiresCondition: genericbot || classicbot
+		RequiresCondition: genericbot
 		SwitchCondition: genericbot
 		# PROD-BUSY-01: every building/defence producer may start in the same sweep; an idle sweep re-checks after the short delay.
 		# Rows pb_all_building_producers / pb_building_idle_sweep; genericbot only (SwitchCondition above).
@@ -5930,6 +5957,197 @@ Player:
 			#################### BuildingFractions Brayans
 			#################### BuildingFractions TKM
 			# tkm_powerplant: 15
+
+	BaseBuilderBotModuleCA@classic:
+		RequiresCondition: classicbot
+		SwitchCondition: genericbot
+		# PROD-BUSY-01: every building/defence producer may start in the same sweep; an idle sweep re-checks after the short delay.
+		# Rows pb_all_building_producers / pb_building_idle_sweep; genericbot only (SwitchCondition above).
+		ServeAllBuildingProducers: true
+		BuildingIdleSweepActive: true
+		# ESSENTIALS-01: below the tier MaximiseProductionCash line only essentials start (row pb_essentials_low_cash); genericbot only.
+		EssentialsOnlyBelowTierLine: true
+		# UPGRADE-PRODUCERS-01: every structure type with no BuildingFractions row is built once (upgrade/research producers, radar, tech centres); row af2_unlisted_once; genericbot only.
+		UnlistedBuildingsOnce: true
+		# ESSENTIAL-PASS-01: first copies of every building type and cash tricklers pass the army-first and mobile-spend votes; row af2_essential_pass; genericbot only.
+		EssentialPassFirstCopies: true
+		# PROD-BUSY cycle: above the same line, more production buildings cycled across the types (row pb_cycle_production); genericbot only.
+		CycleProductionAboveLine: true
+		# SUSTAINED-CASH-01: a bank above the tier line for 1500 ticks forces the next building to be production (row pb_sustained_cash_production); genericbot only.
+		SustainedCashProduction: true
+		# pb_expansion_refinery_safety: the expansion refinery goes first only while the new yard is safe; genericbot only.
+		ExpansionRefinerySafety: true
+		# p0-integration-01 (Opus 11-23): RATIO-2X-01 switched ON for the P0 acceptance test (the 2x mobile/static ratio at a
+		# defence start; row army_first_02_ratio). Classic shares this instance but has no IBotMobileStaticValues provider
+		# (MasterAiBotModule is genericbot), so its gate is Inert and records nothing.
+		MobileStaticRatioEnabled: true
+		InititalMinimumRefineryCount: 1
+		AdditionalMinimumRefineryCount: 2
+		RefineriesPerBase: 3
+		MaxExtraRefineries: 3
+		ExpansionTolerate: 1,2
+		ForceExpansionTolerate: 5,6
+		MinimumExcessPower: 100
+		MaximumExcessPower: 1000
+		ExcessPowerIncrement: 10
+		ExcessPowerIncreaseThreshold: 1
+		PlaceDefenseTowardsEnemyChance: 50
+		BaseCrawlChance: 100
+		BaseCrawlRadius: 50
+		MinBaseRadius: 5
+		MaxBaseRadius: 25
+		MinimumDefenseRadius: 10
+		MaximumDefenseRadius: 50
+		MaxResourceCellsToCheck: 5
+		NewProductionCashThreshold: 0
+		# BZ_production_scaling: banked cash held over the difficulty line while every unit queue is busy
+		# (or net income per producer over the line) queues another production building for the
+		# least-provisioned queue type. SwitchCondition-gated — classic keeps today's behaviour.
+		# Enabled for the maintainer's 2026-10-15 combined playtest (BZ).
+		UseProductionScaling: true
+		BuildingProductionMinCashRequirement: 1000
+		DefenseProductionMinCashRequirement: 1500
+		BuildingQueues: Building, RABuilding, BuildingAddons
+		DefenseQueues: Defence, RADefence, BuildingAddons
+		ConstructionYardTypes: zerg_lair, zerg_hive
+		RefineryTypes: wc2_humans_townhall, wc2_orcs_greathall
+		PowerTypes: nuke, nuk2, ra1_powerplant, ra1_advancedpowerplant, japan_waveforcereactor, ra2_soviets_teslareactor, ra2_allies_powerplant, ra2_soviets_nuclearreactor, yuri_bioreactor, terran_supplydepot, protoss_pylon, scbotoverlord, ts_gdi_powerplant, forgotten_crystalpowerextractor, cabal_powerplant, ts_nod_powerplant, ts_nod_advancedpowerplant, chpower, chpower2, usapower, wind_trap, ixian_windtrap, ordos_windtrap, d2k_mini_windtrap, wc2_humans_farm, wc2_orcs_pigfarm, asianalliance_petrolplant, asianalliance_tankreactor, steelconsortium_consortiumpowerplant, latinsyndicate_powerstation, naxis_naxpetrolplant, schwarzermond_hydrogenplant, futuretech_thermalpowerplant, zerg_overlord, tkm_powerplant, atreides_windtrap, corrino_windtrap, harkonnen_windtrap, atreides_constructionyard, corrino_constructionyard, harkonnen_constructionyard, eden_tokamak, eden_solar_array, eden_factory_structure, plymouth_tokamak, plymouth_solararray, plymouth_structure_factory
+		BarracksTypes: td_gdi_barracks, td_nod_handofnod, ra1_allies_barracks, ra1_soviets_barracks, ra2_allies_barracks, ra2_soviets_barracks, yuri_barracks, terran_barracks, protoss_gateway, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_barracks, forgotten_barracks, ts_nod_handof, cabal_cyborgfactory, glbarracks, chbarracks, usabarracks, d2k_barracks, ixian_barracks, ordos_barracks, wc2_humans_barracks, wc2_orcs_barracks, asianalliance_barracks, steelconsortium_steelbarracks, latinsyndicate_combatbarracks, naxis_barracks, schwarzermond_barracks, futuretech_troopgate, tkm_barracks, atreides_barracks, corrino_barracks, harkonnen_barracks, eden_factory_consumer, plymouth_factory_arachnid
+		# Conventional selectable factions; Japan, StarCraft, and Warcraft II use nonstandard economies.
+		BarracksBeforeRefineryFactions: td_gdi, td_nod, ra1_allies, ra1_soviets, ts_gdi, ts_nod, forgotten, cabal, ra2_allies, ra2_soviets, yuri, asianalliance, steelconsortium, latinsyndicate, naxis, schwarzermond, futuretech, ixian, ordos, tkm
+		VehiclesFactoryTypes: td_gdi_weaponsfactory, td_nod_airstrip, ra1_allies_warfactory, ra1_soviets_warfactory, ra1_soviets_largefactory, ra2_allies_warfactory, ra2_soviets_warfactory, yuri_warfactory, terran_weaponsfactory, protoss_roboticsfacility, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_warfactory, forgotten_warfactory, ts_nod_warfactory, cabal_mechfactory, glweap, chweap, usaweap, ixian_advancedheavyfactory, ixian_starport, ordos_heavyfactory, ordos_starport, ordos_lightfactory, wc2_humans_gnomishinventor, wc2_orcs_golbinalchemist, asianalliance_warfactory, steelconsortium_consortiumwarfactory, latinsyndicate_syndicatefactory, naxis_warfactory, schwarzermond_warfactory, futuretech_warpgate, ts_nod_warfactory, cabal_mechfactory, forgotten_warfactory, tkm_warfactory, atreides_lightfactory, corrino_lightfactory, harkonnen_lightfactory, atreides_heavyfactory, corrino_heavyfactory, harkonnen_heavyfactory, eden_factory_vehicle, plymouth_factory_vehicle
+		ProductionTypes: td_gdi_barracks, td_nod_handofnod, ra1_allies_barracks, ra1_soviets_barracks, ra2_allies_barracks, ra2_soviets_barracks, yuri_barracks, terran_barracks, protoss_gateway, zerg_spawningpool, ts_gdi_barracks, forgotten_barracks, ts_nod_handof, cabal_cyborgfactory, glbarracks, chbarracks, usabarracks, d2k_barracks, ixian_barracks, wc2_humans_barracks, wc2_orcs_barracks, asianalliance_barracks, steelconsortium_steelbarracks, latinsyndicate_combatbarracks, naxis_barracks, schwarzermond_barracks, futuretech_troopgate, td_gdi_weaponsfactory, td_nod_airstrip, ra1_allies_warfactory, ra1_soviets_warfactory, ra1_soviets_largefactory, ra2_allies_warfactory, ra2_soviets_warfactory, yuri_warfactory, terran_weaponsfactory, protoss_roboticsfacility, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_warfactory, forgotten_warfactory, ts_nod_warfactory, cabal_mechfactory, glweap, chweap, usaweap, ixian_advancedheavyfactory, ixian_starport, wc2_humans_gnomishinventor, wc2_orcs_golbinalchemist, asianalliance_warfactory, steelconsortium_consortiumwarfactory, latinsyndicate_syndicatefactory, naxis_warfactory, schwarzermond_warfactory, futuretech_warpgate, td_gdi_helipad, ts_nod_helipad, ts_nod_helipad, forgotten_helipad, ts_gdi_helipad, td_nod_helipad, ra1_allies_helipad, ra1_soviets_airfield, ra1_soviets_largesovietairfield, japan_japaneseairfield, ra2_allies_airforcecommandhq, ra2_soviets_airfield, ixian_hightechfactory, asianalliance_airforcecommand, latinsyndicate_airstation, naxis_airfield, schwarzermond_airfield, futuretech_launchpad, ordos_heavyfactory, ordos_starport, ordos_lightfactory, ordos_barracks, ordos_barracks, tkm_barracks, tkm_warfactory, tkm_airpad, atreides_barracks, corrino_barracks, harkonnen_barracks, atreides_lightfactory, corrino_lightfactory, harkonnen_lightfactory, atreides_heavyfactory, corrino_heavyfactory, harkonnen_heavyfactory, atreides_starport, corrino_starport, harkonnen_starport, eden_factory_consumer, eden_factory_vehicle, plymouth_factory_arachnid, plymouth_factory_vehicle
+		NavalProductionTypes: cncsyrd, cncspen, ra1_soviets_subpen, ra1_allies_navalyard, japan_japanesenavalyard, yrygyard, ra2gayard, ra2nayard, asianalliance_cgyard, latin_cgyard, naxis_naval
+		SiloTypes: silo, ra1_oresilo, terran_supplydepot, protoss_pylon, zerg_overlord, d2k_silo, wc2_humans_elvenlumbermill, wc2_orcs_trolllumbermill, tkm_powerplant, atreides_storagesilo, corrino_storagesilo, harkonnen_storagesilo, atreides_refinery, corrino_refinery, harkonnen_refinery, eden_smelter_common, eden_smelter_rare, plymouth_smelter_common, plymouth_smelter_rare, eden_storage_common, plymouth_storage_common
+		AntiAirTypes: td_nod_samsite, td_gdi_skyshield, td_gdi_advancedguardtower, ra1_allies_aagun, ra1_soviets_samsite, ra1_allies_camopillbox, japan_japanesemgnest, ra2_allies_patriotmissilesystem, ra2_soviets_flakcannon, yuri_gatlingcannon, yrngbnkr.bot, ixian_rocketturret, asianalliance_pulsar, asianalliance_hyperionprojector, steelconsortium_antiairquantummissileturret, latinsyndicate_smlturret, latinsyndicate_latinaadefender, naxis_flak88, ordos_laserturret, schwarzermond_lasertower, futuretech_multiturretsystem, terran_missileturret, zerg_creepcolony, zerg_creepcolony_defense, tkm_quadturretbunker, atreides_rocketturret, corrino_rocketturret, harkonnen_rocketturret, harkonnen_autogunturret, eden_gp_laser, plymouth_gp_rpg
+		DefenseTypes: td_gdi_guardtower, td_gdi_advancedguardtower, td_nod_gunturret, td_nod_laserturret, td_nod_obeliskoflight, ra1_allies_pillbox, ra1_allies_camopillbox, ra1_allies_gunturret, ra1_allies_gapgenerator, ra1_allies_bastionartillerybunker, ra1_soviets_flametower, ra1_soviets_teslacoil, japan_waveforceturret, ra2_allies_pillbox, ra2_allies_prismtower, ra2_allies_grandcannon, ra2_soviets_battlebunker, ra2_soviets_sentrygun, ra2_soviets_flakcannon, ra2_soviets_teslacoil, yuri_gatlingcannon, yuri_tankbunker, asianalliance_sentryflamer, asianalliance_cgpnch, asianalliance_railtower, asianalliance_chaostower, asianalliance_plasmacannon, ixian_machinegunturret, ixian_gunturret, ixian_rocketturret, ixian_stormlasher, steelconsortium_consortiumsentryturret, steelconsortium_quantumcannon, steelconsortium_bfg10000, latinsyndicate_latinsentrygun, latinsyndicate_bunkertower, latinsyndicate_defensebureau, latinsyndicate_smlturret, naxis_rifletower, naxis_flak88, schwarzermond_lasertower, schwarzermond_sturmcannon, futuretech_multiturretsystem, futuretech_frostbiteturret, ordos_laserturret, ordos_chemturret, terran_bunker, zerg_creepcolony, zerg_creepcolony_defense, protoss_photoncannon, wc2_humans_humanscouttower, wc2_humans_sunwell, wc2_orcs_orcwatchtower, tkm_bunker, tkm_tankturretbunker, atreides_gunturret, atreides_rocketturret, corrino_gunturret, corrino_rocketturret, harkonnen_autogunturret, harkonnen_flameturret, harkonnen_rocketturret, harkonnen_devastatorturret, eden_gp_emp, eden_gp_laser, eden_gp_railgun, plymouth_gp_microwave, plymouth_gp_rpg, plymouth_gp_stickyfoam
+		FragileTypes: ra1_allies_techcenter, ra1_soviets_techcenter, japan_japanesetechcenter, japan_japaneseshrine, ra1_soviets_missilesilo, ra1_allies_chronosphere, ra1_soviets_ironcurtain, ra1_allies_reinforcementpad, ra2_allies_battlelab, ra2_soviets_battlelab, yuri_battlelab, yuri_lunarcommandcenter, ra2_allies_orepurifier, ra2_soviets_nuclearreactor, ra2_soviets_industrialplant, yuri_cloningvats, ra2_allies_weathercontrolcenter, ra2_allies_chronosphere, ra2_soviets_nuclearmissilesilo, ra2_soviets_ironcurtain, yuri_psychicdominator, yuri_geneticmutator, asianalliance_battlelab, asianalliance_advancedcommunicationcenter, asianalliance_chaosstorminductor, asianalliance_militaryacademy, ixian_ixresearchcenter, ixian_starport, ordos_ixresearchcenter, ordos_starport, ixian_supercomputer, oilb.building, ra2_oilderrick, d2k_spicesifter, steelconsortium_consortiumbattlelab, latinsyndicate_spycenter, latinsyndicate_defensebureau, latinsyndicate_recyclingcenter, latinsyndicate_topolsilo, naxis_academy, naxis_techcenter, naxis_sausagefactory, naxis_beerfactory, naxis_naxirocketsilo, schwarzermond_techcenter, schwarzermond_moondairyfarm, schwarzermond_meteortractionray, futuretech_battlelab, futuretech_hypercore, terran_engineeringbay, terran_academy, terran_armory, terran_sciencefacility, terran_missilesilo, wc2_humans_humangoldmine_bot, wc2_orcs_orcgoldmine_bot, tkm_techcenter, atreides_outpost, corrino_outpost, atreides_hightechfactory, corrino_hightechfactory, harkonnen_hightechfactory, atreides_ixresearchcenter, corrino_ixresearchcenter, harkonnen_ixresearchcenter, atreides_palace, corrino_palace, harkonnen_palace, eden_lab_basic, eden_lab_standard, eden_lab_advanced, eden_spaceport, eden_dirt, plymouth_basic_lab, plymouth_lab_standard, plymouth_lab_advanced, plymouth_spaceport, plymouth_dirt
+		BuildingIntervals:
+		#Refinery
+		#Barracks
+		#Factory
+		#Airfield
+		BuildingDelays:
+		#MCV Unlock
+			### Prevent AI techrush
+			tsgtdept: 4500
+		#Radar Tier
+		#Tech Tier
+			tsnttmpl: 6000
+		#Super Weapons
+			nax2_chrono: 9000
+		BuildingLimits:
+			#################### BuildingLimits CNC
+			cncsyrd: 1
+			cncspen: 1
+			#################### BuildingLimits RA
+			#################### BuildingLimits RA2
+			##################################################
+			##################################################
+			#################### BuildingLimits TS GDI
+			#################### BuildingLimits TS Nod
+			#################### BuildingLimits TS Forgotten
+			#################### BuildingLimits TS CABAL
+			#################### BuildingLimits Asian
+			#################### BuildingLimits Consortium
+			#################### BuildingLimits Syndicate
+			#################### BuildingLimits Naxis
+			#################### BuildingLimits Schwarzer Mond
+			#################### BuildingLimits Future Tech
+			#################### BuildingLimits Dune Universe Ixian
+			#################### BuildingLimits Dune Universe Ordos
+			#################### BuildingLimits Modded RA
+			#evo: 1
+			#tevo: 1
+			##################### BuildingLimits TKM
+			#################### BuildingLimits TERRAN
+			#################### BuildingLimits PROTOSS
+			#################### BuildingLimits ZERG
+			##################### BuildingLimits Warcraft 2 Humans
+			wc2_human_shipyard: 1
+			wc2_human_foundry: 1
+			wc2_human_oil_refinery: 1
+			wc2_human_oil_platform: 1
+			##################### BuildingLimits Warcraft 2 Orcs
+			wc2_orc_shipyard: 1
+			wc2_orc_foundry: 1
+			wc2_orc_oil_refinery: 1
+			wc2_orc_oil_platform: 1
+			#################### BuildingLimits Dawn of the Tomorrow
+			#################### BuildingLimits Brayans
+			#################### BuildingLimits GLA
+			#################### BuildingLimits CHINA
+			#################### BuildingLimits USA
+			#################### BuildingLimits Imperium
+			#################### BuildingLimits Freedom Guard
+			#################### BuildingLimits Togran
+			#################### BuildingLimits Aliens
+			#################### BuildingLimits Terrorist
+			#################### BuildingLimits Descendants
+			##################### BuildingLimits Simcity 2000
+		BuildingFractions:
+			#################### Shared
+			#################### BuildingFractions CNC
+			#nuke: 3
+			cncsyrd: 1
+			cncspen: 1
+			#################### BuildingFractions RA
+			#ra1_powerplant: 3
+			#japan_waveforcereactor: 3
+			#################### BuildingFractions RA2
+			#################### Buildings Allies
+			#ra2_allies_powerplant: 3
+			#################### Buildings Soviets
+			#ra2_soviets_teslareactor: 3
+			#ra2_soviets_nuclearreactor: 3
+			#################### Buildings Yuri
+			#yuri_bioreactor: 3
+			#yryapowr.bot: 3
+			#################### BuildingFractions TS GDI
+			#################### BuildingFractions TS Nod
+			# tsnttmpl: 1
+			# tsntpulsnod: 1
+			#################### BuildingFractions TS Forgotten
+			#################### BuildingFractions TS CABAL
+			#################### Buildings Asian Alliance
+			#asianalliance_petrolplant: 3
+			#################### Buildings Consortium
+			#steelconsortium_consortiumpowerplant: 3
+			#################### Buildings Syndicate
+			#latinsyndicate_powerstation: 3
+			#################### Buildings Naxis
+			# naxis_naxpetrolplant: 1
+			#################### Buildings Schwarzer Mond
+			# schwarzermond_hydrogenplant: 1
+			#################### Buildings Future Tech
+			#futuretech_thermalpowerplant: 3
+			#################### Buildings Ixians
+			#concreteb: 1
+			#################### Buildings Ordos
+			#################### BuildingFractions TERRAN
+			#terran_supplydepot: 10
+			#################### BuildingFractions PROTOSS
+			#protoss_pylon: 15
+			#################### BuildingFractions ZERG
+			##################### BuildingFractions Warcraft 2 Humans
+			wc2_human_shipyard: 1
+			wc2_human_foundry: 1
+			wc2_human_oil_refinery: 1
+			wc2_human_oil_platform: 1
+			##################### BuildingFractions Warcraft 2 Orcs
+			wc2_orc_shipyard: 1
+			wc2_orc_foundry: 1
+			wc2_orc_oil_refinery: 1
+			wc2_orc_oil_platform: 1
+			#################### BuildingFractions Dawn of the Tomorrow
+			#################### BuildingFractions GLA
+			#################### BuildingFractions CHINA
+			#################### BuildingFractions USA
+			#################### BuildingFractions Generals
+			#################### BuildingFractions Dark
+			#################### BuildingFractions Brayans
+			#################### BuildingFractions TKM
+			# tkm_powerplant: 15
 	BotGlobalUnitBudget:
 		# Total combat-unit budget shared across all LIVING bots (cap per bot = budget / living bots).
 		# Keeps total actor count - and the single-thread sim tick - bounded in big AI games, while
@@ -5943,7 +6161,7 @@ Player:
 		GlobalUnitBudget: 900
 		MaxUnitsPerBot: 200
 	UnitBuilderBotModuleCA@generic:
-		RequiresCondition: genericbot || classicbot
+		RequiresCondition: genericbot
 		# S1 (FINDINGS_2026-10-12 §3): the switch gate also arms the capturer ratio — classic
 		# (the A/B control) never sees genericbot, so its engineer spam is untouched there.
 		# S1b (ENGINEER-CAP-10PCT, maintainer 2026-10-12): the line is flat 10 on every tier —
@@ -5985,6 +6203,153 @@ Player:
 		IntervalElapsed: true
 		NoUnitFloor: true
 		IdleBaseUnitsMaximum: 25
+		ProductionMinCashRequirement: 1000
+		MaximiseProductionCashRequirement: 5000
+		# One immediately buildable basic combat unit for each barracks-first faction.
+		OpeningDefenseUnitTypes: td_gdi_minigunner, td_nod_minigunner, ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry, ts_gdi_lightinfantry, ts_nod_lightinfantry, forgotten_mutant, cabal_cyborginfantry, ra2_allies_gi, ra2_soviets_conscript, yuri_initiate, asianalliance_militia, steelconsortium_clonetrooper, latinsyndicate_latinmilitia, naxis_naxiriflerecruit, schwarzermond_lunarsoldier, futuretech_enforcer, ixian_lightinfantry, ordos_lightinfantry, tkm_rifleman, atreides_lightinfantry, corrino_lightinfantry, harkonnen_lightinfantry, eden_scout, plymouth_scout
+		MaxAircraft: 25
+		MaintainAirSuperiority: true
+		MaxAirSuperiority: 25
+		# A3 (REVIEW_2026-10-17): count enemy air threats from the observed enemy composition
+		# for genericbot — AA sizing stops reading hidden aircraft. Armed by switch group
+		# BW_observed_air_threats; SwitchCondition keeps the shared instance off classic.
+		#ObservedAirThreats: false
+		AirToAirUnits: td_nod_apacheattackhelicopter, td_gdi_orca, td_nod_venom, td_gdi_firehawk, ra1_soviets_yakscoutplane, ra1_soviets_teslayak, ra1_soviets_armoredyak, ra1_soviets_nuclearyak, ra1_soviets_migattackbomber, ra1_soviets_su57attackbomber, ra1_allies_longbow, ra1_allies_rapierjumpjet, japan_zerofighter, ra2_allies_harrier, ra2_soviets_siegechopper, ra2_soviets_migbomber, latinsyndicate_hindtransport, yuri_floatingdisk, ra2_allies_nighthawk, asianalliance_phoenix, asianalliance_pelican, ixian_airdrone, ixian_farasha, steelconsortium_twister, steelconsortium_skyhammer, steelconsortium_cloudbreaker, latinsyndicate_yakovlev, latinsyndicate_mig21, schwarzermond_haunebuii, schwarzermond_haunebuiii, naxis_me262, naxis_bf109, schwarzermond_corruptorpiercer, schwarzermond_haunebuii, schwarzermond_haunebuiii, naxis_me262, schwarzermond_corruptorpiercer, schwarzermond_dieglocke, naxis_bf109, futuretech_twister, futuretech_cryocopter, futuretech_harbingergunship, terran_wraith, terran_sundog, terran_battlecruiser, terran_valkyrie, terran_wyvern, protoss_scout, protoss_epigraph, protoss_carrier, protoss_gladius, protoss_voidray, zerg_mutalisk, zerg_devourer, terran_pythean, terran_phobos, zerg_behemoth, protoss_starshipsovereign, wc2_humans_gryphonrider, wc2_orcs_dragon, atreides_ornithopter, harkonnen_gunship, corrino_gunship
+		AirThreatUnits: td_nod_apacheattackhelicopter, td_gdi_orca, td_nod_venom, td_gdi_firehawk, td_gdi_chinooktransport, td_nod_chinooktransport, ra1_soviets_yakscoutplane, ra1_soviets_teslayak, ra1_soviets_armoredyak, ra1_soviets_nuclearyak, ra1_soviets_migattackbomber, ra1_soviets_su57attackbomber, ra1_soviets_supersonicnuclearbomber, ra1_soviets_hindattackhelicopter, ra1_allies_longbow, ra1_allies_blackhawk, ra1_allies_rapierjumpjet, japan_zerofighter, japan_japanesebomber, ra1_soviets_hiptransport, ra1_allies_chinooktransport, ra2_allies_harrier, ra2_allies_blackeagle, ra2_soviets_siegechopper, ra2_soviets_migbomber, latinsyndicate_hindtransport, ra2_soviets_kirovairship, yuri_floatingdisk, ra2_allies_nighthawk, asianalliance_phoenix, asianalliance_pelican, ixian_airdrone, ixian_farasha, steelconsortium_empressstation, steelconsortium_twister, steelconsortium_skyhammer, steelconsortium_cargoship, steelconsortium_cloudbreaker, latinsyndicate_yakovlev, latinsyndicate_mig21, naxis_transportzeppelin, schwarzermond_spacezeppelin, schwarzermond_haunebuii, schwarzermond_haunebuiii, naxis_me262, naxis_bf109, schwarzermond_corruptorpiercer, schwarzermond_dieglocke, futuretech_twister, futuretech_cryocopter, futuretech_harbingergunship, terran_wraith, terran_sundog, terran_battlecruiser, terran_valkyrie, terran_wyvern, protoss_scout, protoss_epigraph, protoss_carrier, protoss_gladius, protoss_voidray, zerg_mutalisk, zerg_devourer, terran_pythean, terran_phobos, zerg_behemoth, protoss_starshipsovereign, wc2_humans_gryphonrider, wc2_orc_dragonwc2_orc_dragon, atreides_ornithopter, atreides_airdrone, atreides_advancedcarryall, harkonnen_carryall, harkonnen_gunship, harkonnen_advancedcarryall, corrino_carryall, corrino_gunship, corrino_advancedcarryall
+		#UnitBuilderMinCredits: 0
+		UnitQueues: Infantry, RAInfantry, SCZergInfantry, Vehicle, RAVehicle, Starport, Aircraft, RAAircraft, Naval, RANaval, Addons, Upgrades, Research, Promotions
+		UnitDelays:
+		UnitIntervals:
+		UnitsToBuild:
+			#################### UnitsToBuild Naval
+			#################### UnitsToBuild CNC
+			#################### UnitsToBuild TS GDI
+			#################### UnitsToBuild TS Nod
+			#################### UnitsToBuild TS Forgotten
+			RAPT: 3
+			#################### UnitsToBuild CABAL
+			tsprobe: 1
+			#################### UnitsToBuild RA
+			ra1_allies_rifleinfantry: 5
+			ra1_allies_rocketsoldier: 5
+			#################### UnitsToBuild RA2
+			########### Units Allies
+			########### Units Soviets
+			########### Units Yuri
+			########### Units Asian Alliance
+			########### Units Consortium
+			########### Units Syndicate
+			########### Units Naxis
+			########### Naxis Promotion
+			########### Naxis Upgrades
+			# naxis_upgrade_resurrection: 1
+			########### Units Future Tech
+			########### Units Space Naxis
+			########### Space Naxis Upgrades
+			########### Dune Upgrades
+			########### Units Ixians
+			########### Units Ordos
+			########### Units Ordos B
+			########### Upgrades Ordos
+			########### Units Atreides
+			########### Promotions Harkonnen
+			########### Units Harkonnen
+			########### Units Corrino
+			#################### UnitsToBuild Dune Universe
+			#################### UnitsToBuild TERRAN
+			#################### UnitsToBuild PROTOSS
+			#################### UnitsToBuild ZERG
+			##################### UnitsToBuild Warcraft 2 Humans
+			wc2_human_oil_tanker: 1
+			wc2_human_elven_destroyer: 1
+			wc2_human_transport: 1
+			wc2_human_battleship: 1
+			wc2_human_gnomish_submarine: 1
+			wc2_h_str_navyshield: 1
+			wc2_h_str_navyshield2: 1
+			##################### UnitsToBuild Warcraft 2 Orcs
+			wc2_orc_oil_tanker: 1
+			wc2_orc_trolldestroyer: 1
+			wc2_orc_transport: 1
+			wc2_orc_ogre_juggernaught: 1
+			wc2_orc_giant_turtle: 1
+			wc2_o_str_navyshield: 1
+			wc2_o_str_navyshield2: 1
+			#################### UnitsToBuild Dawn of the Tomorrow
+			#################### UnitsToBuild GLA
+			#################### UnitsToBuild CHINA
+			#chhacker: 1
+			#chcrawl: 1
+			#################### UnitsToBuild USA
+			#################### UnitsToBuild GENERALSUPGRADES
+			#################### Generals Promotions
+			#################### TKM Promotions
+			#################### UnitsToBuild Dark Imperium
+			#################### UnitsToBuild FreedomGuard
+			#################### UnitsToBuild Shadowhand
+			#################### UnitsToBuild Xenite
+			#################### UnitsToBuild Dark Togran
+			#################### UnitsToBuild Dark Aliens
+			#################### UnitsToBuild Terrorist
+			#################### UnitsToBuild Descendants
+			#################### UnitsToBuild CNC
+			#################### UnitsToBuild TKM
+		UnitLimits:
+			#################### UnitLimits Naval
+			#################### UnitLimits CNC
+			#################### UnitLimits RA
+			#################### UnitLimits TS
+			#################### UnitLimits ALLIESRA2
+			#################### UnitLimits SOVIETRA2
+			#################### UnitLimits YURI
+			#################### UnitLimits Asian
+			########### Consortium
+			########### Syndicate
+			########### Future Tech
+			#################### UnitLimits Dune Universe
+			#################### UnitLimits GENERALS
+			#################### UnitLimits ALPHA
+			#################### UnitLimits TERRAN
+			#################### UnitLimits PROTOSS
+			#################### UnitLimits ZERG
+			#################### UnitLimits Warcraft 2
+
+	UnitBuilderBotModuleCA@classic:
+		RequiresCondition: classicbot
+		# S1 (FINDINGS_2026-10-12 §3): the switch gate also arms the capturer ratio — classic
+		# (the A/B control) never sees genericbot, so its engineer spam is untouched there.
+		# S1b (ENGINEER-CAP-10PCT, maintainer 2026-10-12): the line is flat 10 on every tier —
+		# CapturerLimitPctCeiling clamps anything higher; the +allowance comes from the
+		# engineer owner's fog-fair KNOWN-target count (IBotCapturerTargetAllowance), and
+		# EngineerCompletionIntervalTicks paces completions on the difficulty line.
+		# CapturerInfantryLimitPct lives on the BotLimits difficulty line; 10 is only the
+		# fallback for a ruleset that ships no BotLimits.
+		# High-cash production fallback enabled for maintainer playtesting, 2026-10-15.
+		# 1 arms the fallback; BotLimits supplies the per-difficulty cash threshold.
+		# Generic-only: classic retains its existing production rules.
+		SwitchCondition: genericbot
+		BankSaturationCash: 1
+		CapturerInfantryLimitPct: 5
+		CapturerMinimumUnits: 2
+		CapturerAllowanceMax: 4
+		UseCompositions: true
+		# UW-1 (AI_ARCHITECTURE §2.8b item 3): derive the UnitsToBuild weights from the enabled
+		# personality's RoleMix x each unit's Versus-weighted strength. Armed on every tier (PROD-IDLE G1).
+		# Classic is unaffected: it carries no RoleMix and no IBotUnitRoles provider, so the same
+		# @generic instance keeps the yaml table there.
+		UseDerivedUnitWeights: true
+		# PROD-IDLE G1: the fair producer service replaces the legacy fill loop for genericbot (SwitchCondition above);
+		# classic keeps the legacy loop byte-identically.
+		FairProducerService: true
+		# PROD-BUSY-01 (USER P0: every queue busy while cash > reserve): every factory of every category served on every pass.
+		# Rows pb_all_factories / pb_all_categories; genericbot only (SwitchCondition above).
+		ServeAllFactories: true
+		ServeAllCategories: true
+		ShareTestNeverIdles: true
+		TieredIdleCap: true
+		# INFANTRY-IDLE-01: an idle infantry queue the role mix / share table left without a pick builds the best buildable unit (row pb_idle_queue_floor).
+		IdleQueueFloor: true
+		IdleBaseUnitsMaximum: 50
 		ProductionMinCashRequirement: 1000
 		MaximiseProductionCashRequirement: 5000
 		# One immediately buildable basic combat unit for each barracks-first faction.
