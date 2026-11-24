@@ -34,5 +34,12 @@ namespace OpenRA.Mods.CA.Traits
 		// survives a leader re-election (tl_order_survive; Info TeamLeadOrderSurviveEnabled).
 		public const string TeamLeadFallbackPublish = "tl_fallback_publish";
 		public const string TeamLeadOrderSurvive = "tl_order_survive";
+
+		// HARASS-CAP-01 (USER P0, V02 RCA 2026-11-24): raiders at most a percent of the seat's combat units (tl_harass_cap; Info HarassCapEnabled), a raid launches
+		// with at least HarassMinUnits (tl_harass_min; Info HarassMinEnabled), and from the late start the raiders join the blob and the open order (tl_raider_recall;
+		// Info TeamLeadRaiderRecallEnabled).
+		public const string TeamLeadHarassCap = "tl_harass_cap";
+		public const string TeamLeadHarassMin = "tl_harass_min";
+		public const string TeamLeadRaiderRecall = "tl_raider_recall";
 	}
 }

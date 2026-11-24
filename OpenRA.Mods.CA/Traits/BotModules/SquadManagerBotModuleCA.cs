@@ -1773,6 +1773,8 @@ namespace OpenRA.Mods.CA.Traits
 			minAttackForceDelayTicks = BotRng.For(Player, nameof(SquadManagerBotModuleCA)).Next(0, Info.MinimumAttackForceDelay) +
 				RemainingInitialAttackDelay(initialAttackDelay, World.WorldTick);
 
+			TeamLeadSwitchTakeover();
+
 			// Without this the desired force stays 0/0 and the very first
 			// `idleUnits >= desired` check passes unconditionally — an empty Rush
 			// squad on the first tick the module runs (and after every load).
@@ -2661,10 +2663,10 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 
 				var name = u.Actor.Info.Name;
-				var guerrilla = Info.GuerrillaTypes.Contains(name) && Info.JoinGuerrilla > 0 ? OpenGuerrillaSquad(bot) : null;
+				var guerrilla = Info.GuerrillaTypes.Contains(name) && Info.JoinGuerrilla > 0 && HarassCapAllows() ? OpenGuerrillaSquad(bot) : null;
 				if (guerrilla != null)
 					guerrilla.Units.Add(u);
-				else if (Info.HarasserTypes.Contains(name))
+				else if (Info.HarasserTypes.Contains(name) && HarassCapAllows())
 					AddToHarassSquad(bot, u);
 				else if (Info.FireSupportTypes.Contains(name) && OpenFireSupportSquad(bot) is { } releasedFs)
 					releasedFs.Units.Add(u);
@@ -3234,6 +3236,13 @@ namespace OpenRA.Mods.CA.Traits
 						if (actionBudget != null && !actionBudget.TryConsumeAttention(s))
 							continue;
 
+						// HARASS-CAP-01 (tl_harass_min): a quiet raid squad below the minimum raid holds, merges or goes to the pool.
+						if (HarassMinHolds(s))
+						{
+							squadCursor = index + 1;
+							continue;
+						}
+
 						// TEAM-LEAD-01 (switch ON, team engaged): the squad joins the leader's order, or - a follower with no order - stands down.
 						if (TeamLeadOn)
 						{
@@ -3570,7 +3579,9 @@ namespace OpenRA.Mods.CA.Traits
 		SquadCA OpenGuerrillaSquad(IBot bot)
 		{
 			var guerrillas = Squads.Where(s => s.Type == SquadCAType.Guerrilla).ToList();
-			var open = guerrillas.Where(s => s.Units.Count < Info.MaxGuerrillaSize).MinByOrDefault(s => s.Units.Count);
+			var openSquads = guerrillas.Where(s => s.Units.Count < Info.MaxGuerrillaSize);
+			// HARASS-CAP-01 (tl_harass_min): fill the biggest open squad first so a raid reaches its minimum sooner (off = the smallest first, as before).
+			var open = HarassMinOn ? openSquads.MaxByOrDefault(s => s.Units.Count) : openSquads.MinByOrDefault(s => s.Units.Count);
 			if (open != null)
 				return open;
 
@@ -3860,7 +3871,7 @@ namespace OpenRA.Mods.CA.Traits
 					// derived air role, but only when the doctrine is on - flag off
 					// keeps master's air-first order so @classic is unmoved.
 					if (GuerrillaOutranksAir(Info.AirDoctrineEnabled, a.Info.Name, Info.GuerrillaTypes)
-						&& guerrillaRoll && OpenGuerrillaSquad(bot) is { } airGuerrilla)
+						&& guerrillaRoll && HarassCapAllows() && OpenGuerrillaSquad(bot) is { } airGuerrilla)
 					{
 						airGuerrilla.Units.Add(new UnitWposWrapper(a));
 						AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, airGuerrilla.Type);
@@ -3909,12 +3920,12 @@ namespace OpenRA.Mods.CA.Traits
 					fsSquad.Units.Add(new UnitWposWrapper(a));
 					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, fsSquad.Type);
 				}
-				else if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaRoll && OpenGuerrillaSquad(bot) is { } guerrillaForce)
+				else if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaRoll && HarassCapAllows() && OpenGuerrillaSquad(bot) is { } guerrillaForce)
 				{
 					guerrillaForce.Units.Add(new UnitWposWrapper(a));
 					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, guerrillaForce.Type);
 				}
-				else if (Info.HarasserTypes.Contains(a.Info.Name))
+				else if (Info.HarasserTypes.Contains(a.Info.Name) && HarassCapAllows())
 					AddToHarassSquad(bot, new UnitWposWrapper(a));
 				else if (Info.SupportUnitTypes.Contains(a.Info.Name))
 				{

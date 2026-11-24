@@ -4757,6 +4757,10 @@ Player:
 		# TEAM-BLOB-01: the leader publishes the push after 1500 / 3000 ticks without any order (V02: a tiny blob never reached WAVE-MIN), and a leader re-election hands the open order over instead of cancelling it.
 		TeamLeadFallbackPublishEnabled: true
 		TeamLeadOrderSurviveEnabled: true
+		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
+		HarassCapEnabled: true
+		HarassMinEnabled: true
+		TeamLeadRaiderRecallEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -4900,6 +4904,10 @@ Player:
 		# TEAM-BLOB-01: the leader publishes the push after 1500 / 3000 ticks without any order (V02: a tiny blob never reached WAVE-MIN), and a leader re-election hands the open order over instead of cancelling it.
 		TeamLeadFallbackPublishEnabled: true
 		TeamLeadOrderSurviveEnabled: true
+		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
+		HarassCapEnabled: true
+		HarassMinEnabled: true
+		TeamLeadRaiderRecallEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5039,6 +5047,10 @@ Player:
 		# TEAM-BLOB-01: the leader publishes the push after 1500 / 3000 ticks without any order (V02: a tiny blob never reached WAVE-MIN), and a leader re-election hands the open order over instead of cancelling it.
 		TeamLeadFallbackPublishEnabled: true
 		TeamLeadOrderSurviveEnabled: true
+		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
+		HarassCapEnabled: true
+		HarassMinEnabled: true
+		TeamLeadRaiderRecallEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5180,6 +5192,10 @@ Player:
 		# TEAM-BLOB-01: the leader publishes the push after 1500 / 3000 ticks without any order (V02: a tiny blob never reached WAVE-MIN), and a leader re-election hands the open order over instead of cancelling it.
 		TeamLeadFallbackPublishEnabled: true
 		TeamLeadOrderSurviveEnabled: true
+		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
+		HarassCapEnabled: true
+		HarassMinEnabled: true
+		TeamLeadRaiderRecallEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5321,6 +5337,10 @@ Player:
 		# TEAM-BLOB-01: the leader publishes the push after 1500 / 3000 ticks without any order (V02: a tiny blob never reached WAVE-MIN), and a leader re-election hands the open order over instead of cancelling it.
 		TeamLeadFallbackPublishEnabled: true
 		TeamLeadOrderSurviveEnabled: true
+		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
+		HarassCapEnabled: true
+		HarassMinEnabled: true
+		TeamLeadRaiderRecallEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5459,6 +5479,11 @@ Player:
 		# TEAM-BLOB-01: the leader publishes the push after 1500 / 3000 ticks without any order (V02: a tiny blob never reached WAVE-MIN), and a leader re-election hands the open order over instead of cancelling it.
 		TeamLeadFallbackPublishEnabled: true
 		TeamLeadOrderSurviveEnabled: true
+		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
+		HarassCapEnabled: true
+		HarassCapPercent: 40
+		HarassMinEnabled: true
+		TeamLeadRaiderRecallEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only

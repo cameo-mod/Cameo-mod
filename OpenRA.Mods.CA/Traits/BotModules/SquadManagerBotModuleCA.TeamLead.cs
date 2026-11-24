@@ -97,6 +97,21 @@ namespace OpenRA.Mods.CA.Traits
 			return value;
 		}
 
+		/// <summary>
+		/// TEAM-BLOB-01 (tl_order_survive): a personality switch disables the old module (it throws every squad back to the pool) and enables this one mid-game.
+		/// This module then takes the units over at once - its first role-assignment pass and its first team check are due on the next tick instead of
+		/// after the start-up stagger - so it re-joins the open order quickly; the order's no-report grace counts from the last report (see TeamLeadMaintainOrder).
+		/// </summary>
+		void TeamLeadSwitchTakeover()
+		{
+			if (World.WorldTick <= 100 || !Info.TeamLeadOrderSurviveEnabled || !TeamLeadActive || ablateOrderSurvive.Off(Player, AblationIds.TeamLeadOrderSurvive))
+				return;
+
+			teamLeadNextCheck = 0;
+			assignRolesTicks = BotPeriod.F1(World.WorldTick, 0, Info.AssignRolesInterval);
+			DiagnosticTeamEvent("team_takeover", "tick=" + World.WorldTick);
+		}
+
 		/// <summary>One team pass, at most every TeamLeadCheckTicks per bot: publish the own pool; the first bot of the team to arrive in a window also elects and keeps the order.</summary>
 		void TeamLeadTick(IBot bot)
 		{
@@ -181,10 +196,20 @@ namespace OpenRA.Mods.CA.Traits
 			return (units, value);
 		}
 
-		// A quiet team-wave squad: Rush, idle, not one of the squads that keep their own job (breaker, M13 liveness) and not defending.
-		bool TeamLeadWaveSquad(SquadCA s) => s.IsValid && s.Type == SquadCAType.Rush && !ReferenceEquals(s, stalemateSquad) && !s.M13Response
-			&& !ReferenceEquals(s, m13IntentSquad) && !ReferenceEquals(s, m13ResponseSquad)
-			&& AggTeamIsQuietState(s.FuzzyStateMachine?.CurrentState) && !AggTeamSquadDefends(s);
+		// A quiet team-wave squad: Rush, idle, not one of the squads that keep their own job (breaker, M13 liveness) and not defending. HARASS-CAP-01
+		// (tl_raider_recall, from the late start): a guerrilla/harass squad that is idle or still marching (no contact yet) counts as one too.
+		bool TeamLeadWaveSquad(SquadCA s)
+		{
+			if (!s.IsValid || ReferenceEquals(s, stalemateSquad) || s.M13Response || ReferenceEquals(s, m13IntentSquad) || ReferenceEquals(s, m13ResponseSquad))
+				return false;
+
+			var state = s.FuzzyStateMachine?.CurrentState;
+			if (s.Type == SquadCAType.Rush)
+				return AggTeamIsQuietState(state) && !AggTeamSquadDefends(s);
+
+			return s.Type is SquadCAType.Guerrilla or SquadCAType.Harass && TeamLeadRaiderRecallOn
+				&& (AggTeamIsQuietState(state) || state is GroundUnitsAttackMoveStateCA) && !AggTeamSquadDefends(s);
+		}
 
 		// The member's idle army is at its tier's idle-unit limit (25 Noob .. 75 God, Hard 50): the unit builder stops queuing units there, so an idle
 		// army at the limit is starving production. The unit builder owns the number (IdleAtLimit); the leader pushes at once when any member is at it.
@@ -214,6 +239,8 @@ namespace OpenRA.Mods.CA.Traits
 			var why = TeamLeadCA.OrderDue(false, ready, now, team.LastOrderTick, interval, team.AnyAtCap(now, Info.TeamLeadPoolMaxAgeTicks))
 				? TeamLeadCA.PublishWhy.Ready
 				: TeamLeadCA.PublishWhy.None;
+			// The bar is the blob launch minimum measured on the blob itself: MinUnits(tier, blob.Units) = max(tier, (blob + 1) / 2). The half-blob term never decides
+			// here: it exceeds the tier only for a blob that is above the tier anyway, so the effective bar is blob.Units >= the WAVE-MIN unit tier.
 			if (why == TeamLeadCA.PublishWhy.None && TeamLeadFallbackPublishOn)
 				why = TeamLeadCA.FallbackPublish(BlobLaunch01CA.TicksSinceOrder(now, team.LastOrderTick, initialAttackDelay), Info.TeamLeadFallbackTicks,
 					Info.TeamLeadForcedPublishTicks, blob.Units, BlobLaunch01CA.MinUnits(minUnits, blob.Units), Info.TeamLeadJoinMinUnits);
@@ -530,7 +557,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			var cancel = order.LeaderKey != team.Election.Leader ? "leader_changed"
 				: now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? "max_age"
-				: order.ReportCount == 0 && now - order.IssueTick > reportGrace ? "no_reports"
+				: order.ReportCount == 0 && now - (TeamLeadOrderSurviveOn ? HarassCapCA.NoReportSince(order.IssueTick, order.LastReportTick) : order.IssueTick) > reportGrace ? "no_reports"
 				: null;
 			if (cancel != null)
 			{
@@ -638,6 +665,15 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		bool TeamLeadPrepare(SquadCA s)
 		{
+			// HARASS-CAP-01 (tl_raider_recall): from the late start an idle or marching raider squad joins the open team order (TeamLeadWaveSquad is false
+			// for a raider unless the recall is on); with no order open it raids as before.
+			if (s.IsValid && s.Type is SquadCAType.Guerrilla or SquadCAType.Harass && TeamLeadWaveSquad(s) && TeamLeadOpenOrder() is { } recalled)
+			{
+				DiagnosticSquadEvent(s, "team_join", reason: "raider_recall seq=" + recalled.Seq);
+				s.FuzzyStateMachine.ChangeState(s, new TeamLeadGatherStateCA(recalled), false);
+				return true;
+			}
+
 			// Guerrilla and harass squads of every bot form one joint group with its own target, apart from the main blob.
 			if (s.IsValid && s.Type is SquadCAType.Guerrilla or SquadCAType.Harass && TeamLeadJointHarassOn)
 			{
@@ -739,6 +775,7 @@ namespace OpenRA.Mods.CA.Traits
 			var rally = TeamLeadRallyOf(squad, order);
 			var near = squad.Units.Count(u => (u.Actor.CenterPosition - rally).HorizontalLengthSquared <= radiusSquared);
 			order.Report(squad, SquadValueOf(squad), near * 100 >= squad.Units.Count * Info.TeamLeadArrivePercent);
+			order.LastReportTick = World.WorldTick;
 		}
 
 		// TEAM-BLOB-01 telemetry: a gathering squad fights what it meets (and leaves the order); a pushed one goes for the target.

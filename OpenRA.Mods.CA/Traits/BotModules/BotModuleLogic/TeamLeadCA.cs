@@ -406,6 +406,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		public int ReportCount => reports.Count;
 
+		/// <summary>The tick of the latest squad report (-1 = none yet); the no-report grace of a surviving order counts from it.</summary>
+		public int LastReportTick = -1;
+
 		public void Report(object squad, long value, bool arrived) => reports[squad] = (value, arrived);
 
 		public void Forget(object squad)
