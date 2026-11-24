@@ -36,7 +36,6 @@ namespace OpenRA.Mods.Cameo.Test
 
 		[TestCase("cn2unitrepair")]
 		[TestCase("cn2garrison")]
-		[TestCase("cn3bridgerepair")]
 		public void TheGrantCoversEveryGenericbotTierAndPersonalityAndNotClassic(string grant)
 		{
 			var bots = Bots(grant);
@@ -47,8 +46,9 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[TestCase("cn3deploy")]
+		[TestCase("cn3bridgerepair")] // USER 11-24: waits for properly repairable bridges
 		[TestCase("cn4regionroles")]
-		public void DeployAndRegionRolesStayFransbotOnly(string grant)
+		public void DeployBridgeRepairAndRegionRolesStayFransbotOnly(string grant)
 		{
 			Assert.That(Bots(grant), Is.EqualTo(new[] { "fransbot" }));
 		}

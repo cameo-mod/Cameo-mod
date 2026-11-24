@@ -66,9 +66,9 @@
 	GrantConditionOnBotOwner@inc3f1:
 		Condition: inc3_frans_services
 		Bots: noob, easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
-	# CN-ARM-01 (Opus 11-24): cn2_unit_repair, cn2_garrison_defense and cn3_bridge_repair are armed for every genericbot tier + personality bot (not classic).
+	# CN-ARM-01 (Opus 11-24): cn2_unit_repair and cn2_garrison_defense are armed for every genericbot tier + personality bot (not classic). cn3_bridge_repair stays fransbot-only until bridges are properly repairable (USER 11-24).
 	# CN2 unit-repair manager + garrison defence: the arm flips these to the genericbot tier list in the
-	# increment A/B (tools/ai/increment_switches.yaml); armed for every genericbot tier by CN-ARM-01 (cn2_unit_repair, cn2_garrison_defense, cn3_bridge_repair).
+	# increment A/B (tools/ai/increment_switches.yaml); armed for every genericbot tier by CN-ARM-01 (cn2_unit_repair, cn2_garrison_defense).
 	GrantConditionOnBotOwner@cn2unitrepair:
 		Condition: cn2_unit_repair
 		Bots: fransbot, noob, easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
@@ -80,7 +80,7 @@
 		Bots: fransbot
 	GrantConditionOnBotOwner@cn3bridgerepair:
 		Condition: cn3_bridge_repair
-		Bots: fransbot, noob, easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
+		Bots: fransbot
 	GrantConditionOnBotOwner@plugspawn:
 		Condition: plug_spawn
 		Bots: fransbot
