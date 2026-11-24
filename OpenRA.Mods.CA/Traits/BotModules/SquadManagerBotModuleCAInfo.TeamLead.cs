@@ -97,5 +97,14 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("TEAM-PINCER-01: the lighter prong must carry at least this percent of the committed value when the gather minimum is over; below that the pincer collapses into one blob (both prongs push at once).")]
 		public readonly int TeamLeadPincerMinSharePercent = 25;
+
+		[Desc("TEAM-BLOB-01 (release switch; the DEV row is tl_fallback_publish). On: the leader's no-order guarantee. After TeamLeadFallbackTicks without any team order it publishes as soon as the blob's units reach the blob launch minimum (the WAVE-MIN value bar is dropped); after TeamLeadForcedPublishTicks it publishes with whatever the blob holds (at least TeamLeadJoinMinUnits). Needs TeamLeadCadenceEnabled.")]
+		public readonly bool TeamLeadFallbackPublishEnabled = false;
+
+		[Desc("TEAM-BLOB-01: the last-resort step of the no-order guarantee, in ticks without any team order. 0 = off.")]
+		public readonly int TeamLeadForcedPublishTicks = 3000;
+
+		[Desc("TEAM-BLOB-01 (release switch; the DEV row is tl_order_survive). On: when the elected leader changes while an order lives, the new leader takes the order over instead of cancelling it (the squads gathering for it are not thrown back to the pool). Off = the order is cancelled on a leader change as before.")]
+		public readonly bool TeamLeadOrderSurviveEnabled = false;
 	}
 }

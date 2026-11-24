@@ -4754,6 +4754,9 @@ Player:
 		TeamLeadFinishWeakestEnabled: true
 		# TEAM-PINCER-01: a team push with a blob of at least twice the WAVE-MIN tier splits into two prongs that stage on opposite sides of the same target and push together. Needs TeamLeadEnabled.
 		TeamLeadPincerEnabled: true
+		# TEAM-BLOB-01: the leader publishes the push after 1500 / 3000 ticks without any order (V02: a tiny blob never reached WAVE-MIN), and a leader re-election hands the open order over instead of cancelling it.
+		TeamLeadFallbackPublishEnabled: true
+		TeamLeadOrderSurviveEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -4892,6 +4895,9 @@ Player:
 		TeamLeadFinishWeakestEnabled: true
 		# TEAM-PINCER-01: a team push with a blob of at least twice the WAVE-MIN tier splits into two prongs that stage on opposite sides of the same target and push together. Needs TeamLeadEnabled.
 		TeamLeadPincerEnabled: true
+		# TEAM-BLOB-01: the leader publishes the push after 1500 / 3000 ticks without any order (V02: a tiny blob never reached WAVE-MIN), and a leader re-election hands the open order over instead of cancelling it.
+		TeamLeadFallbackPublishEnabled: true
+		TeamLeadOrderSurviveEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5026,6 +5032,9 @@ Player:
 		TeamLeadFinishWeakestEnabled: true
 		# TEAM-PINCER-01: a team push with a blob of at least twice the WAVE-MIN tier splits into two prongs that stage on opposite sides of the same target and push together. Needs TeamLeadEnabled.
 		TeamLeadPincerEnabled: true
+		# TEAM-BLOB-01: the leader publishes the push after 1500 / 3000 ticks without any order (V02: a tiny blob never reached WAVE-MIN), and a leader re-election hands the open order over instead of cancelling it.
+		TeamLeadFallbackPublishEnabled: true
+		TeamLeadOrderSurviveEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5162,6 +5171,9 @@ Player:
 		TeamLeadFinishWeakestEnabled: true
 		# TEAM-PINCER-01: a team push with a blob of at least twice the WAVE-MIN tier splits into two prongs that stage on opposite sides of the same target and push together. Needs TeamLeadEnabled.
 		TeamLeadPincerEnabled: true
+		# TEAM-BLOB-01: the leader publishes the push after 1500 / 3000 ticks without any order (V02: a tiny blob never reached WAVE-MIN), and a leader re-election hands the open order over instead of cancelling it.
+		TeamLeadFallbackPublishEnabled: true
+		TeamLeadOrderSurviveEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5298,6 +5310,9 @@ Player:
 		TeamLeadFinishWeakestEnabled: true
 		# TEAM-PINCER-01: a team push with a blob of at least twice the WAVE-MIN tier splits into two prongs that stage on opposite sides of the same target and push together. Needs TeamLeadEnabled.
 		TeamLeadPincerEnabled: true
+		# TEAM-BLOB-01: the leader publishes the push after 1500 / 3000 ticks without any order (V02: a tiny blob never reached WAVE-MIN), and a leader re-election hands the open order over instead of cancelling it.
+		TeamLeadFallbackPublishEnabled: true
+		TeamLeadOrderSurviveEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5431,6 +5446,9 @@ Player:
 		TeamLeadFinishWeakestEnabled: true
 		# TEAM-PINCER-01: a team push with a blob of at least twice the WAVE-MIN tier splits into two prongs that stage on opposite sides of the same target and push together. Needs TeamLeadEnabled.
 		TeamLeadPincerEnabled: true
+		# TEAM-BLOB-01: the leader publishes the push after 1500 / 3000 ticks without any order (V02: a tiny blob never reached WAVE-MIN), and a leader re-election hands the open order over instead of cancelling it.
+		TeamLeadFallbackPublishEnabled: true
+		TeamLeadOrderSurviveEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only

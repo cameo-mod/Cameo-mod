@@ -59,7 +59,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var manager = owner.SquadManager;
 			if (!manager.TeamLeadOn || order.Cancelled)
 			{
-				manager.TeamLeadAbandon(owner);
+				manager.TeamLeadAbandon(owner, !manager.TeamLeadOn ? "not_engaged" : "cancelled:" + (order.CancelReason ?? "unknown"));
 				return;
 			}
 
@@ -67,6 +67,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var enemy = manager.FindClosestEnemy(owner.Units[0].Actor, WDist.FromCells(manager.Info.AttackScanRadius), owner);
 			if (enemy != null)
 			{
+				manager.TeamLeadNoteContact(owner, order);
 				owner.TargetActor = enemy;
 				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackState(), false);
 				return;
@@ -78,10 +79,11 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			if (!manager.TeamLeadResolveTarget(owner, order))
 			{
-				manager.TeamLeadAbandon(owner);
+				manager.TeamLeadAbandon(owner, "resolve_failed");
 				return;
 			}
 
+			manager.TeamLeadNoteGo(owner, order);
 			owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
 		}
 

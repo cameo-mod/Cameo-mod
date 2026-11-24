@@ -10,6 +10,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA.Traits.BotModules;
 using OpenRA.Mods.CA.Traits.BotModules.Squads;
 using OpenRA.Mods.Common.Pathfinder;
 using OpenRA.Mods.Common.Traits;
@@ -27,6 +28,8 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateCadence;
 		AblationLatch ablateFinishWeakest;
 		AblationLatch ablatePincer;
+		AblationLatch ablateFallbackPublish;
+		AblationLatch ablateOrderSurvive;
 		int teamLeadNextCheck;
 		string teamLeadKey;
 		TeamLeadTeam teamLeadTeam;
@@ -48,6 +51,11 @@ namespace OpenRA.Mods.CA.Traits
 		// TEAM-PINCER-01: a team push with a big blob splits into two prongs on opposite sides of the target (own switch + row). Read by the leader
 		// when it issues the order; the members follow the order's own prong data, so a member needs no switch of its own.
 		internal bool TeamLeadPincerOn => TeamLeadOn && Info.TeamLeadPincerEnabled && !ablatePincer.Off(Player, AblationIds.TeamLeadPincer);
+
+		// TEAM-BLOB-01: the no-order guarantee (needs the cadence publish) and the order that survives a leader re-election; each with its own switch + row.
+		bool TeamLeadFallbackPublishOn => TeamLeadCadenceOn && Info.TeamLeadFallbackPublishEnabled && !ablateFallbackPublish.Off(Player, AblationIds.TeamLeadFallbackPublish);
+
+		bool TeamLeadOrderSurviveOn => TeamLeadOn && Info.TeamLeadOrderSurviveEnabled && !ablateOrderSurvive.Off(Player, AblationIds.TeamLeadOrderSurvive);
 
 		/// <summary>The feature is in force for this bot right now: active, and the team has a leader and at least two living bots.</summary>
 		internal bool TeamLeadOn => teamLeadEngaged && TeamLeadActive;
@@ -203,7 +211,13 @@ namespace OpenRA.Mods.CA.Traits
 			var (minUnits, minValue) = WaveMinActive ? WaveMinBars() : (0, 0);
 			var ready = TeamLeadCA.BlobReady(blob.Units, blob.Value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue);
 			var interval = TeamLeadCA.PublishInterval(TeamLeadCadenceTicks(), Info.TeamLeadFallbackTicks);
-			if (!TeamLeadCA.OrderDue(false, ready, now, team.LastOrderTick, interval, team.AnyAtCap(now, Info.TeamLeadPoolMaxAgeTicks)))
+			var why = TeamLeadCA.OrderDue(false, ready, now, team.LastOrderTick, interval, team.AnyAtCap(now, Info.TeamLeadPoolMaxAgeTicks))
+				? TeamLeadCA.PublishWhy.Ready
+				: TeamLeadCA.PublishWhy.None;
+			if (why == TeamLeadCA.PublishWhy.None && TeamLeadFallbackPublishOn)
+				why = TeamLeadCA.FallbackPublish(BlobLaunch01CA.TicksSinceOrder(now, team.LastOrderTick, initialAttackDelay), Info.TeamLeadFallbackTicks,
+					Info.TeamLeadForcedPublishTicks, blob.Units, BlobLaunch01CA.MinUnits(minUnits, blob.Units), Info.TeamLeadJoinMinUnits);
+			if (why == TeamLeadCA.PublishWhy.None)
 				return;
 
 			var home = AggTeamHomePos();
@@ -212,6 +226,8 @@ namespace OpenRA.Mods.CA.Traits
 
 			var forced = TeamLeadCA.FallbackForced(now, team.LastOrderTick, Info.TeamLeadFallbackTicks);
 			var order = TeamLeadIssue(home, target, targetId, now);
+			DiagnosticTeamEvent("team_order", "seq=" + order.Seq + " why=" + why.ToString().ToLowerInvariant() + " blob=" + blob.Units + "/" + blob.Value + " target=" + targetId
+				+ " pincer=" + order.HasProngs + " leader=" + teamLeadKey);
 			AIUtils.BotDebug("AI ({0}): team push published seq {1} at {2}: blob {3}/{4}, target {5}{6}", Player.ClientIndex, order.Seq, now, blob.Units, blob.Value,
 				targetId, forced ? " (fallback)" : "");
 		}
@@ -504,10 +520,24 @@ namespace OpenRA.Mods.CA.Traits
 			// An order published by the leader's team check has no squad yet: the members form theirs on their next check and report from the gather
 			// state one squad pass later, so the no-report grace is longer while TEAM-LEAD-02 publishes (Info switch; the row only changes the publish).
 			var reportGrace = (Info.TeamLeadCadenceEnabled ? 5 : 2) * Info.TeamLeadCheckTicks;
-			if (order.LeaderKey != team.Election.Leader || now - order.IssueTick > Info.TeamLeadOrderMaxTicks
-				|| (order.ReportCount == 0 && now - order.IssueTick > reportGrace))
+
+			// TEAM-BLOB-01: a leader re-election hands the order to the new leader; the squads gathering for it carry on.
+			if (order.LeaderKey != team.Election.Leader && team.Election.Leader != null && TeamLeadOrderSurviveOn)
+			{
+				DiagnosticTeamEvent("team_handover", "seq=" + order.Seq + " from=" + order.LeaderKey + " to=" + team.Election.Leader);
+				order.HandOver(team.Election.Leader);
+			}
+
+			var cancel = order.LeaderKey != team.Election.Leader ? "leader_changed"
+				: now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? "max_age"
+				: order.ReportCount == 0 && now - order.IssueTick > reportGrace ? "no_reports"
+				: null;
+			if (cancel != null)
 			{
 				order.Cancelled = true;
+				order.CancelReason = cancel;
+				DiagnosticTeamEvent("team_cancel", "seq=" + order.Seq + " why=" + cancel + " age=" + (now - order.IssueTick) + " reports=" + order.ReportCount + " leader=" + order.LeaderKey
+					+ " elected=" + (team.Election.Leader ?? "none"));
 				return;
 			}
 
@@ -533,6 +563,8 @@ namespace OpenRA.Mods.CA.Traits
 						ready0, ready1, order.FirstReadyTick))
 					{
 						order.PushTick = now;
+						order.PushReason = ready0 && ready1 ? "pincer_ready" : now - order.IssueTick >= Info.TeamLeadPincerGatherMaxTicks ? "pincer_window" : "pincer_hold";
+						DiagnosticTeamEvent("team_push", "seq=" + order.Seq + " why=" + order.PushReason + " age=" + (now - order.IssueTick) + " prongs=" + committed0 + "/" + committed1);
 						AIUtils.BotDebug("AI ({0}): pincer seq {1} push at {2}: ready {3}/{4}, prongs {5}/{6}", Player.ClientIndex, order.Seq, now, ready0, ready1, committed0, committed1);
 					}
 
@@ -542,7 +574,24 @@ namespace OpenRA.Mods.CA.Traits
 
 			var (committed, arrived) = order.Totals();
 			if (TeamLeadCA.PushDue(now, order.IssueTick, Info.TeamLeadGatherMinTicks, Info.TeamLeadGatherMaxTicks, committed, arrived, Info.TeamLeadArrivePercent))
+			{
 				order.PushTick = now;
+				order.PushReason = now - order.IssueTick >= Info.TeamLeadGatherMaxTicks ? "window" : "arrived";
+				DiagnosticTeamEvent("team_push", "seq=" + order.Seq + " why=" + order.PushReason + " age=" + (now - order.IssueTick) + " committed=" + committed + " arrived=" + arrived);
+			}
+		}
+
+		// TEAM-BLOB-01 telemetry (DEV only; the writer is null in a release build): one record for a team-level fact (order, push, cancel, handover).
+		void DiagnosticTeamEvent(string evt, string reason)
+		{
+			var w = DiagnosticWriter;
+			if (w == null)
+				return;
+
+			w.TryEnqueueSquadEvent(new BotPassiveSquadEventSnapshot
+			{
+				Tick = World.WorldTick, SquadId = (Info.InstanceName ?? "sq") + "-team", Generation = 1, Event = evt, Reason = reason, LeaseOwner = LeaseOwner
+			});
 		}
 
 		/// <summary>The team's open order, or null.</summary>
@@ -677,7 +726,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			var order = TeamLeadIssue(from, target, targetId, now);
-			DiagnosticSquadEvent(s, "team_order", reason: "seq=" + order.Seq);
+			DiagnosticSquadEvent(s, "team_order", reason: "seq=" + order.Seq + " why=leader_squad pincer=" + order.HasProngs + " leader=" + teamLeadKey);
 			return order;
 		}
 
@@ -692,10 +741,15 @@ namespace OpenRA.Mods.CA.Traits
 			order.Report(squad, SquadValueOf(squad), near * 100 >= squad.Units.Count * Info.TeamLeadArrivePercent);
 		}
 
+		// TEAM-BLOB-01 telemetry: a gathering squad fights what it meets (and leaves the order); a pushed one goes for the target.
+		internal void TeamLeadNoteContact(SquadCA squad, TeamLeadOrder order) => DiagnosticSquadEvent(squad, "team_contact", "seq=" + order.Seq + " pushed=" + order.Pushed);
+
+		internal void TeamLeadNoteGo(SquadCA squad, TeamLeadOrder order) => DiagnosticSquadEvent(squad, "team_go", "seq=" + order.Seq + " why=" + order.PushReason);
+
 		/// <summary>The order is gone or the squad cannot follow it: a follower returns its units to the pool, the leader's squad plays on as before.</summary>
-		internal void TeamLeadAbandon(SquadCA squad)
+		internal void TeamLeadAbandon(SquadCA squad, string why = null)
 		{
-			DiagnosticSquadEvent(squad, "team_abandon");
+			DiagnosticSquadEvent(squad, "team_abandon", why);
 			if (teamLeadIsLeader)
 			{
 				squad.FuzzyStateMachine.ChangeState(squad, new GroundUnitsIdleStateCA(), true);

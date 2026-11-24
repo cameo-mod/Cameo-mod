@@ -29,5 +29,10 @@ namespace OpenRA.Mods.CA.Traits
 		// TEAM-PINCER-01 (USER P0, 2026-11-24): a team push whose blob holds at least twice the WAVE-MIN tier splits into two prongs that
 		// stage on opposite sides of the same target and push together. Info switch: TeamLeadPincerEnabled.
 		public const string TeamLeadPincer = "tl_pincer";
+
+		// TEAM-BLOB-01 (USER P0, V02 RCA 2026-11-24): the no-order guarantee (tl_fallback_publish; Info TeamLeadFallbackPublishEnabled) and the order that
+		// survives a leader re-election (tl_order_survive; Info TeamLeadOrderSurviveEnabled).
+		public const string TeamLeadFallbackPublish = "tl_fallback_publish";
+		public const string TeamLeadOrderSurvive = "tl_order_survive";
 	}
 }

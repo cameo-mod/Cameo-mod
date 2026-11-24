@@ -249,6 +249,29 @@ namespace OpenRA.Mods.CA.Traits
 			return other >= 0 ? other : focusSeat;
 		}
 
+		// ---- TEAM-BLOB-01 (USER P0, V02 RCA 2026-11-24): the no-order guarantee ----
+
+		/// <summary>Why the leader publishes: the ready blob on cadence, the first fallback (units bar only) or the last one (whatever there is).</summary>
+		public enum PublishWhy { None, Ready, Fallback, Forced }
+
+		/// <summary>
+		/// The no-order guarantee. <paramref name="sinceOrder"/> ticks without any team order (BlobLaunch01CA.TicksSinceOrder): from
+		/// <paramref name="fallbackTicks"/> on the leader publishes once the blob's units reach <paramref name="minUnits"/> (the blob launch
+		/// minimum; the WAVE-MIN value bar is dropped), and from <paramref name="forcedTicks"/> on it publishes with whatever it has, if that
+		/// is at least <paramref name="floorUnits"/> (an empty blob never goes out). 0 turns a step off. The ready path is OrderDue.
+		/// </summary>
+		public static PublishWhy FallbackPublish(int sinceOrder, int fallbackTicks, int forcedTicks, int units, int minUnits, int floorUnits)
+		{
+			if (units < Math.Max(1, floorUnits))
+				return PublishWhy.None;
+			if (forcedTicks > 0 && sinceOrder >= forcedTicks)
+				return PublishWhy.Forced;
+			if (fallbackTicks > 0 && sinceOrder >= fallbackTicks && units >= minUnits)
+				return PublishWhy.Fallback;
+
+			return PublishWhy.None;
+		}
+
 		// ---- TEAM-PINCER-01 (USER P0, 2026-11-24): a big blob splits into two prongs that stage on opposite sides of one target and push together ----
 		// Reference: Crystallized Nexus (CN, Astor / DoGyAUT, GPLv3) Squads/States/CNWaveStates.cs + the pincer wave plan of its squad manager
 		// (TryBuildPincerWavePlans, IsWaveStageReady): two flanks on opposite approaches to ONE target, a per-flank arrival bar that rounds UP,
@@ -344,7 +367,7 @@ namespace OpenRA.Mods.CA.Traits
 	public sealed class TeamLeadOrder
 	{
 		public readonly int Seq;
-		public readonly string LeaderKey;
+		public string LeaderKey { get; private set; }
 		public readonly WPos Rally;
 		public readonly WPos Target;
 		public readonly uint TargetActorId;
@@ -354,6 +377,15 @@ namespace OpenRA.Mods.CA.Traits
 		public int PushTick = -1;
 
 		public bool Cancelled;
+
+		/// <summary>Why the order was cancelled (set with <see cref="Cancelled"/>; null while it lives): leader_changed, max_age, no_reports.</summary>
+		public string CancelReason;
+
+		/// <summary>How the order was released: "arrived" (the arrive bar), "window" (the gather window ran out), "pincer_ready", "pincer_hold", "pincer_window".</summary>
+		public string PushReason;
+
+		/// <summary>TEAM-BLOB-01: the elected leader changed while the order lived: the new leader takes the order over (it is not cancelled).</summary>
+		public void HandOver(string newLeaderKey) => LeaderKey = newLeaderKey;
 
 		readonly Dictionary<object, (long Value, bool Arrived)> reports = new();
 
