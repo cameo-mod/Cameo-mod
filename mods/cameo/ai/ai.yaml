@@ -4737,6 +4737,9 @@ Player:
 	# Try to get a MCV from a crate if we don't have one
 	CratePickupBotModule:
 		RequiresCondition: classicbot || genericbot # && nobase no conyard condition defined in player.yaml
+		# CRATE-RESERVE-01 (USER rule): crates within 25 cells of an own or allied yard are left for the MCV chance; others are collected by a cheap idle unit away from threat; no yard and no MCV = hunt every crate. genericbot only (row crate_reserve_mcv).
+		SwitchCondition: genericbot
+		CrateReserveMcv: true
 		ScanForCratesInterval: 300
 		# Omniscient on purpose (DESIGN §19.5): a bot that lost its MCV must find a crate anywhere.
 		CheckTargetsForVisibility: false
