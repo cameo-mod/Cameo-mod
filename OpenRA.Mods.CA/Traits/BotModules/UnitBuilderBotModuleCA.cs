@@ -555,6 +555,7 @@ namespace OpenRA.Mods.CA.Traits
 		// CONSOLIDATE-01 C8: firstItemRoundPass is true only while the first-item round of a pass runs (a queue that already holds an item is left for the depth round).
 		bool FirstItemRoundOn => switchesActive && Info.UnitFirstItemRound && FairService && !ablateFirstRound.Off(player, AblationIds.UnitFirstItemRound);
 		bool firstItemRoundPass;
+		readonly Dictionary<string, string> firstRoundSavedCursors = new(StringComparer.Ordinal);
 		int unitMixTick = -1;
 		List<string> unitMixDeficitQueues = [];
 		readonly Dictionary<string, UnitMixCategory> unitMixCategoryByName = new(StringComparer.Ordinal);
@@ -1026,7 +1027,10 @@ namespace OpenRA.Mods.CA.Traits
 				if (FirstItemRoundOn)
 				{
 					var savedIndex = currentQueueIndex;
-					var savedCursors = new Dictionary<string, string>(serviceCursorByCategory, StringComparer.Ordinal);
+					firstRoundSavedCursors.Clear();
+					foreach (var pair in serviceCursorByCategory)
+						firstRoundSavedCursors[pair.Key] = pair.Value;
+
 					firstItemRoundPass = true;
 					try
 					{
@@ -1037,7 +1041,7 @@ namespace OpenRA.Mods.CA.Traits
 						firstItemRoundPass = false;
 						currentQueueIndex = savedIndex;
 						serviceCursorByCategory.Clear();
-						foreach (var pair in savedCursors)
+						foreach (var pair in firstRoundSavedCursors)
 							serviceCursorByCategory[pair.Key] = pair.Value;
 					}
 				}
@@ -1405,6 +1409,8 @@ namespace OpenRA.Mods.CA.Traits
 
 			// INFANTRY-REJECT-LOG-01: null unless the DEV sink is on; then only the infantry queues are counted.
 			var rejectLog = InfantryRejectLogOn ? infantryRejectLog : null;
+			if (firstItemRoundPass)
+				rejectLog = null; // C8: round 2 revisits every queue, so DEV rows are written once per queue per pass
 
 			for (var k = 0; k < queues.Count && offers > 0; k++)
 			{

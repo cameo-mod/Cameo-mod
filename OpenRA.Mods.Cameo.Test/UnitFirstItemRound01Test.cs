@@ -37,6 +37,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(block, Does.Contain("currentQueueIndex = savedIndex;"), "the pass rotates once");
 			Assert.That(block, Does.Contain("serviceCursorByCategory[pair.Key] = pair.Value;"), "the fair-service cursors are restored too");
 			Assert.That(u.IndexOf("UnitMixDeficitQueues().ToList())", StringComparison.Ordinal), Is.LessThan(round1), "the deficit categories are served before both rounds");
+			Assert.That(u, Does.Contain("if (firstItemRoundPass)\n\t\t\t\trejectLog = null;"), "DEV reject rows are written once per queue per pass (round 2)");
+			Assert.That(u, Does.Contain("readonly Dictionary<string, string> firstRoundSavedCursors"), "no per-tick allocation");
 		}
 
 		[Test]
