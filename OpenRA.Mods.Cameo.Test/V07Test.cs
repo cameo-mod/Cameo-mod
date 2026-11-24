@@ -188,7 +188,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var info = RepoFile(Bots + "SquadManagerBotModuleCAInfo.V07.cs");
 			Assert.That(info, Does.Contain("public readonly bool TeamLeadPincerWideEnabled = false;"));
 			Assert.That(info, Does.Contain("public readonly int TeamLeadPincerMinAngleDegrees = 90;"));
-			Assert.That(info, Does.Contain("public readonly int TeamLeadPincerArmPercent = 75;"));
+			Assert.That(info, Does.Contain("public readonly int TeamLeadPincerArmPercent = 100;"));
 			Assert.That(AblationIds.TeamLeadPincerWide, Is.EqualTo("tl_pincer_wide"));
 
 			var yaml = RepoFile("mods/cameo/ai/ai.yaml");

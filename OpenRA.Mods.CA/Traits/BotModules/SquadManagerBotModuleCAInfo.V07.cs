@@ -20,6 +20,6 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly int TeamLeadPincerMinAngleDegrees = 90;
 
 		[Desc("PINCER-02: each arm needs this percent of the WAVE-MIN bars (units and value, each arm on its own); 100 = a full WAVE-MIN per arm. Range 50-100. Below 100 the pincer fires with a smaller blob (the pair still holds at least twice the arm bar, so never less than this share of two waves).")]
-		public readonly int TeamLeadPincerArmPercent = 75;
+		public readonly int TeamLeadPincerArmPercent = 100;
 	}
 }
