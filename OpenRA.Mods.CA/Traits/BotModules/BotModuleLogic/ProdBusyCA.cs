@@ -25,6 +25,10 @@ namespace OpenRA.Mods.CA.Traits
 			allCategories ? bankLeft < cashFloor : ProductionSaturationCA.StopCategorySweep(saturated, cashAndResources, maximiseCash);
 
 		// Whether an earlier start in this base-builder sweep holds the next producer of the same category.
+		// The bank a base-builder producer sees: net of this sweep's unpaid starts while the switch is on, else the live bank.
+		public static int SweepBank(bool allProducers, int cashAndResources, int orderedThisSweep) =>
+			allProducers ? cashAndResources - orderedThisSweep : cashAndResources;
+
 		public static bool QueuedThisSweepBlocks(bool allProducers, bool queuedThisSweep) => queuedThisSweep && !allProducers;
 
 		// Whether the next base-builder sweep comes after the short (active) delay.

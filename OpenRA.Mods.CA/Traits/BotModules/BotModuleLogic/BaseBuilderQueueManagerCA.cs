@@ -73,6 +73,10 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool itemQueuedThisTick = false;
 
+		// PROD-BUSY-01 (Sonnet MED): cost of the starts this sweep already ordered. Those orders are not paid yet, so with
+		// pb_all_building_producers on the next producer sees the bank net of them (the cash floor and the cost check hold).
+		int orderedCostThisSweep;
+
 		// An empty tolerance list in yaml would make ImmutableArray.Random throw.
 		int RandomTolerance(ImmutableArray<int> values)
 		{
@@ -855,6 +859,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			// PERF: Queue only one actor at a time per category
 			itemQueuedThisTick = false;
+			orderedCostThisSweep = 0;
 			var active = false;
 			sweptProducers.Clear();
 			foreach (var queue in AIUtils.FindQueues(player, Category))
@@ -977,7 +982,7 @@ namespace OpenRA.Mods.CA.Traits
 				pauseBuilding ??= player.PlayerActor.TraitsImplementing<IBotRequestPauseBuildingProduction>().ToArray();
 				mobileReserve ??= player.PlayerActor.TraitsImplementing<IBotMobileSpendReserve>().FirstEnabledTraitOrDefault();
 				var reserveFloor = mobileReserve?.MobileSpendFloor ?? 0;
-				var cashNow = playerResources.GetCashAndResources();
+				var cashNow = ProdBusyCA.SweepBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep);
 				var isRefinery = baseBuilder.Info.RefineryTypes.Contains(item.Name);
 				var exempt = plannerWant || demandPick.Demand != null;
 				var cost = queue.GetProductionCost(item);
@@ -1120,6 +1125,7 @@ namespace OpenRA.Mods.CA.Traits
 
 				baseBuilder.RecordProducerOrder(queue.Actor, item.Name);
 				itemQueuedThisTick = true;
+				orderedCostThisSweep += Math.Max(0, cost);
 				SetBuildingInterval(item.Name);
 
 				// REPLAY-HEALTH-LOGGER (F2/F3): no emit here — the probe records Started on

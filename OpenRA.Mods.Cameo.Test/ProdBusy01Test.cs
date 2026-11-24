@@ -65,6 +65,18 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void SecondProducerSeesTheBankNetOfThisSweepsStarts()
+		{
+			// Sonnet MED: 1100 bank, floor 1000, the first yard ordered a 1000 item -> the second yard sees 100 and is blocked.
+			var bank = ProdBusyCA.SweepBank(true, 1100, 1000);
+			Assert.That(bank, Is.EqualTo(100));
+			Assert.That(BaseBuilderQueueEvalCA.BlockedByCash(bank, 1000, false, false, 800, ProdBusyCA.QueuedThisSweepBlocks(true, true)), Is.True);
+			Assert.That(BaseBuilderQueueEvalCA.BlockedByCash(ProdBusyCA.SweepBank(true, 5000, 1000), 1000, false, false, 800, false), Is.False,
+				"enough bank left: the second producer starts");
+			Assert.That(ProdBusyCA.SweepBank(false, 1100, 1000), Is.EqualTo(1100), "off = the live bank, as before");
+		}
+
+		[Test]
 		public void SwitchesAreArmedOnTheGenericInstancesOnly()
 		{
 			var unit = PlayerNode("UnitBuilderBotModuleCA@generic");

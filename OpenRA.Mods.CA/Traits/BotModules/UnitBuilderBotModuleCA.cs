@@ -850,6 +850,8 @@ namespace OpenRA.Mods.CA.Traits
 						// if AI gets enough cash, it can fill all of its queues with enough ticks
 						BuildUnit(bot, Info.UnitQueues[currentQueueIndex], idleUnitCount < Info.IdleBaseUnitsMaximum, false, saturated, batch);
 
+						// The fair path's batch nets this pass's orders; the legacy path (FairProducerService ablated, DEV only) has no batch,
+						// so its bank never drops during the pass and only the reserve-gated item checks stop spending (Sonnet LOW 2).
 						var bankNow = (long)playerResources.Cash + playerResources.Resources;
 						if (ProdBusyCA.StopCategorySweep(AllCategoriesOn, saturated, bankNow,
 							BotPersonalityLeads.Scaled(MaximiseProductionCash, cashLean), batch?.BankLeft ?? bankNow,
