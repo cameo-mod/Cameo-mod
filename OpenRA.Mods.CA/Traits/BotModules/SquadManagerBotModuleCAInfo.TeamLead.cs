@@ -71,7 +71,7 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("TEAM-LEAD-02 (release switch; the DEV row is tl_finish_weakest). On, from LateEscalationStartTick: the team's push target (and the joint harass target) is the WEAKEST known enemy seat - the fewest known buildings, from what the bot sees and remembers - and it stays until that seat is dead. Off = the nearest known enemy as before. Needs TeamLeadEnabled.")]
 		public readonly bool TeamLeadFinishWeakestEnabled = false;
 
-		[Desc("TEAM-LEAD-02: a finish focus held this long without killing the seat (unreachable) rotates once to the next weakest seat. Range 6000-30000.")]
+		[Desc("TEAM-LEAD-02: a finish focus held this long without killing the seat (unreachable) rotates to the next weakest seat (and may come back to this one after the next such period). Range 6000-30000.")]
 		public readonly int TeamLeadFocusMaxTicks = 12000;
 	}
 }

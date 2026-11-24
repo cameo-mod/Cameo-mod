@@ -286,7 +286,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (team == null || !TeamLeadFinishWeakestOn)
 				return false;
 
-			if (now - team.FocusEvalTick >= Info.TeamLeadCheckTicks)
+			if (TeamLeadCA.FocusDue(now, team.FocusEvalTick, Info.TeamLeadCheckTicks))
 			{
 				team.FocusEvalTick = now;
 				TeamLeadRefreshFocus(team, from, now);

@@ -64,11 +64,77 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void AFocusHeldTooLongWithoutAKillRotatesToTheNextWeakestOnceAndStaysIfItIsTheOnlyOne()
+		public void AFocusHeldTooLongWithoutAKillRotatesToTheNextWeakestAndStaysIfItIsTheOnlyOne()
 		{
 			Assert.That(TeamLeadCA.PickWeakest(Seats((9, 5), (4, 2), (7, 6)), 7, 25000, 36999, 12000), Is.EqualTo(7), "one tick before the limit");
 			Assert.That(TeamLeadCA.PickWeakest(Seats((9, 5), (4, 2), (7, 6)), 7, 25000, 37000, 12000), Is.EqualTo(4), "an unreachable seat does not block the team forever");
 			Assert.That(TeamLeadCA.PickWeakest(Seats((7, 6)), 7, 25000, 40000, 12000), Is.EqualTo(7), "no other seat known: it stays");
+		}
+
+		// Code Monkey FIX on a33da8b4e: FocusEvalTick started at int.MinValue, so "now - FocusEvalTick" wrapped negative for every tick and the
+		// refresh gate never opened (the feature was inert in game). The start value must keep the subtraction in range.
+		[Test]
+		public void TheFocusRefreshGateOpensAtTheFirstCheckAndThenOncePerWindow()
+		{
+			var team = new TeamLeadTeam();
+			Assert.That(team.FocusEvalTick, Is.EqualTo(-1), "never evaluated");
+			Assert.That(unchecked(25000 - team.FocusEvalTick), Is.GreaterThan(0), "the start value must not overflow the subtraction (int.MinValue did)");
+			Assert.That(TeamLeadCA.FocusDue(25000, team.FocusEvalTick, 100), Is.True, "the first check after the late start evaluates");
+			Assert.That(TeamLeadCA.FocusDue(25000, int.MinValue, 100), Is.True, "even the old start value opens the gate now");
+
+			team.FocusEvalTick = 25000;
+			Assert.That(TeamLeadCA.FocusDue(25099, team.FocusEvalTick, 100), Is.False);
+			Assert.That(TeamLeadCA.FocusDue(25100, team.FocusEvalTick, 100), Is.True);
+			Assert.That(TeamLeadCA.FocusDue(25001, 25000, 0), Is.True, "a zero window still moves on");
+		}
+
+		/// <summary>
+		/// The focus actually engages: the exact sequence the leader's check runs (gate, pick, store) on a fresh board from the late start on.
+		/// With the old start value (int.MinValue) the gate never opened and the focus stayed -1 for the whole game.
+		/// </summary>
+		[Test]
+		public void TheFocusEngagesAtTheFirstCheckAfterTheLateStartAndFollowsTheKillsToTheNextWeakest()
+		{
+			var team = new TeamLeadTeam();
+			var known = new Dictionary<int, int> { [9] = 2, [4] = 11, [7] = 6 };
+			var evaluations = 0;
+
+			void Check(int now)
+			{
+				if (!TeamLeadCA.FocusDue(now, team.FocusEvalTick, 100))
+					return;
+
+				team.FocusEvalTick = now;
+				evaluations++;
+				var seats = new List<(int Seat, int Buildings)>();
+				foreach (var kv in known)
+					seats.Add((kv.Key, kv.Value));
+
+				var pick = TeamLeadCA.PickWeakest(seats, team.FocusSeat, team.FocusSince, now, 12000);
+				if (pick != team.FocusSeat)
+				{
+					team.FocusSeat = pick;
+					team.FocusSince = now;
+				}
+			}
+
+			Check(25000);
+			Assert.That(team.FocusSeat, Is.EqualTo(9), "the weakest seat is the focus at the first check");
+			Assert.That(evaluations, Is.EqualTo(1));
+
+			// Between checks nothing is re-evaluated, even when another seat gets weaker: the team finishes seat 9 first.
+			known[4] = 1;
+			for (var now = 25010; now < 25100; now += 10)
+				Check(now);
+			Assert.That(evaluations, Is.EqualTo(1), "one evaluation per team check window");
+			Check(25100);
+			Assert.That(team.FocusSeat, Is.EqualTo(9), "seat 4 is weaker now, but seat 9 is finished first");
+
+			// Seat 9 dies (not listed any more): the next check takes the weakest of the rest.
+			known.Remove(9);
+			Check(25200);
+			Assert.That(team.FocusSeat, Is.EqualTo(4));
+			Assert.That(team.FocusSince, Is.EqualTo(25200));
 		}
 
 		[Test]
@@ -121,7 +187,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(body, Does.Contain("Player.FrozenActorLayer"), "everything else is what the bot remembers");
 			Assert.That(body, Does.Contain("LineBuildInfo"), "walls do not make a seat strong");
 			Assert.That(body, Does.Contain("TeamLeadFocusEnemy("), "living enemy seats only");
-			Assert.That(wiring, Does.Contain("if (now - team.FocusEvalTick >= Info.TeamLeadCheckTicks)"), "no heavy scan outside the team check");
+			Assert.That(wiring, Does.Contain("if (TeamLeadCA.FocusDue(now, team.FocusEvalTick, Info.TeamLeadCheckTicks))"), "no heavy scan outside the team check");
 		}
 	}
 }

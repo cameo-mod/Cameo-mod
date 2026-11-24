@@ -198,11 +198,14 @@ namespace OpenRA.Mods.CA.Traits
 		public static bool FallbackForced(int now, int lastOrderTick, int fallbackTicks) =>
 			lastOrderTick >= 0 && now - lastOrderTick >= Math.Max(1, fallbackTicks);
 
+		/// <summary>The finish focus is re-evaluated: never yet (<paramref name="lastEval"/> below 0), or a full check window ago.</summary>
+		public static bool FocusDue(int now, int lastEval, int checkTicks) => lastEval < 0 || now - lastEval >= Math.Max(1, checkTicks);
+
 		/// <summary>
 		/// The enemy seat the team finishes: the WEAKEST known one (fewest known buildings, ties to the lower seat id; seats with none known
 		/// cannot be targeted). The previous pick sticks until it dies or has no known building left, so the team finishes it before it
 		/// switches - except that a focus held longer than <paramref name="maxFocusTicks"/> (an unreachable seat) rotates to the next weakest
-		/// once. -1 = no seat to finish.
+		/// (again after every such period; it can return to the first seat later). -1 = no seat to finish.
 		/// </summary>
 		public static int PickWeakest(IReadOnlyList<(int Seat, int Buildings)> seats, int focusSeat, int focusSince, int now, int maxFocusTicks)
 		{
@@ -332,7 +335,7 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>TEAM-LEAD-02 finish-the-weakest focus: the enemy seat (its player-actor id, -1 = none), the tick it was taken, and the cached pick (re-evaluated at most every check window).</summary>
 		public int FocusSeat = -1;
 		public int FocusSince = -1;
-		public int FocusEvalTick = int.MinValue;
+		public int FocusEvalTick = -1;
 		public bool FocusHasTarget;
 		public WPos FocusTarget;
 		public uint FocusTargetId;
