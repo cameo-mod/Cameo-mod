@@ -657,6 +657,8 @@ namespace OpenRA.Mods.Cameo.Test
 			// +1 new Order, +2 "PlaceBuilding" literals: the order and its NotifyPlacement) and its certified cancel
 			// (EpisodeCertifiedCancel: +1 QueueOrder, +1 CancelProduction); +1 PlaceBuilding in the F2 mask comment.
 			// No RNG draw or production call is added.
+			// RATIO-2X-01 R2 (4339d3607) adds one more "PlaceBuilding" token: the PlaceBuildingVariantsInfo lookup of its fraction-loop
+			// pre-filter (20 -> 21). It adds no order, RNG draw or production call, so every other count is unchanged.
 			var src = ManagerSource();
 			Assert.That(Count(src, "bot.QueueOrder("), Is.EqualTo(8));
 			Assert.That(Count(src, "Order.StartProduction("), Is.EqualTo(1));
@@ -664,7 +666,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(Count(src, "new Order("), Is.EqualTo(2));
 			Assert.That(Count(src, "BotRng.For("), Is.EqualTo(14));
 			Assert.That(Count(src, ".Next("), Is.EqualTo(7));
-			Assert.That(Count(src, "PlaceBuilding"), Is.EqualTo(20));
+			Assert.That(Count(src, "PlaceBuilding"), Is.EqualTo(21));
 		}
 
 		[Test]
