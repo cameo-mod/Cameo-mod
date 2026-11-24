@@ -92,9 +92,9 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(rung, Is.LessThan(opening));
 			Assert.That(rung, Is.LessThan(expansion));
 			Assert.That(src, Does.Contain("&& !baseBuilder.Info.DefenseQueues.Contains(Category)\n\t\t\t&& baseBuilder.SustainedCash.Active(world.WorldTick, baseBuilder.Info.SustainedCashTicks);"));
-			Assert.That(src, Does.Contain("var sustained = ChooseCycledProduction(buildableThings, power);"));
+			Assert.That(src, Does.Contain("var sustained = ChooseCycledProduction(buildableThings, power, c => VotesAdmit(queue, c, RecoverySpendPolicyCA.Admission.EssentialBuilding));"));
 			var expansionRefinery = src.IndexOf("var expansionRefinery = ChooseWantedRefinery(queue, buildableThings, power);", from, StringComparison.Ordinal);
-			var cycled = src.IndexOf("var sustained = ChooseCycledProduction(buildableThings, power);", from, StringComparison.Ordinal);
+			var cycled = src.IndexOf("var sustained = ChooseCycledProduction(buildableThings, power, c => VotesAdmit(queue, c, RecoverySpendPolicyCA.Admission.EssentialBuilding));", from, StringComparison.Ordinal);
 			Assert.That(expansionRefinery, Is.GreaterThan(rung), "the expansion refinery is inside the active block");
 			Assert.That(expansionRefinery, Is.LessThan(cycled), "the expansion refinery comes before the sustained-cash production pick");
 			Assert.That(src, Does.Contain("var wantedRefinery = ChooseWantedRefinery(queue, buildableThings, power);"), "the economy rung uses the same pick");

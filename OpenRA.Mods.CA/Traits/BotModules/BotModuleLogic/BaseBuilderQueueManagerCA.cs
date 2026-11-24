@@ -116,6 +116,10 @@ namespace OpenRA.Mods.CA.Traits
 		// PROD-BUSY-01 rows (DEV provider only; release = on).
 		AblationLatch ablateAllProducers, ablateIdleSweep, ablateEssentials, ablateCycle, ablateSustained, ablateSafety;
 		string lastCycledProduction;
+
+		// SUSTAINED-FIX-01: the item the SUSTAINED-CASH rung returned in this ChooseBuildingToBuild call (null otherwise). TickQueue rides it at its own cost
+		// floor and in the essential-building class, like a planner want: the bank is floating, so the army/building share vote must not hold it.
+		string sustainedPickName;
 		bool AllProducersOn => baseBuilder.AllBuildingProducersArmed && !ablateAllProducers.Off(player, AblationIds.ProdBusyAllBuildingProducers);
 		bool SustainedActive => baseBuilder.SustainedCashArmed && !ablateSustained.Off(player, AblationIds.SustainedCashProduction)
 			&& !baseBuilder.Info.DefenseQueues.Contains(Category)
@@ -991,7 +995,7 @@ namespace OpenRA.Mods.CA.Traits
 				var reserveFloor = mobileReserve?.MobileSpendFloor ?? 0;
 				var cashNow = ProdBusyCA.SweepBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep);
 				var isRefinery = baseBuilder.Info.RefineryTypes.Contains(item.Name);
-				var exempt = plannerWant || demandPick.Demand != null;
+				var exempt = plannerWant || demandPick.Demand != null || (sustainedPickName != null && item.Name == sustainedPickName);
 				var cost = queue.GetProductionCost(item);
 				var itemEssential = IsArmyFirstEssential(item);
 
@@ -2024,7 +2028,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		// PROD-BUSY cycle: the candidates are the same cap-filtered, power-resolved production buildings the overflow rung uses, plus the naval yard when
 		// the base has water; the pick is CycleProductionCA (fewest first, then the next type in name order), no random draw.
-		ActorInfo ChooseCycledProduction(IEnumerable<ActorInfo> buildableThings, ActorInfo power)
+		// SUSTAINED-FIX-01: a candidate the later admission votes would hold is dropped HERE (admits), so the pick never returns an item that the
+		// TickQueue vetoes after the rung has already pre-empted the tech chain and the rest of the order: with none left the order falls through.
+		ActorInfo ChooseCycledProduction(IEnumerable<ActorInfo> buildableThings, ActorInfo power, Func<ActorInfo, bool> admits = null)
 		{
 			var candidates = OverflowProductionCandidates(buildableThings, power);
 			if (waterState == WaterCheck.EnoughWater
@@ -2047,6 +2053,9 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
+			if (admits != null)
+				candidates.RemoveAll(c => !admits(c));
+
 			if (candidates.Count == 0)
 				return null;
 
@@ -2061,6 +2070,20 @@ namespace OpenRA.Mods.CA.Traits
 
 			lastCycledProduction = candidates[index].Name;
 			return candidates[index];
+		}
+
+		/// <summary>
+		/// SUSTAINED-FIX-01: whether the admission votes TickQueue asks after the pick (the pause votes: army-first, share, reserve; the mobile reserve) would let
+		/// <paramref name="item"/> through as an order of <paramref name="admission"/>. Side-effect-free queries only.
+		/// </summary>
+		bool VotesAdmit(ProductionQueue queue, ActorInfo item, RecoverySpendPolicyCA.Admission admission)
+		{
+			pauseBuilding ??= player.PlayerActor.TraitsImplementing<IBotRequestPauseBuildingProduction>().ToArray();
+			mobileReserve ??= player.PlayerActor.TraitsImplementing<IBotMobileSpendReserve>().FirstEnabledTraitOrDefault();
+			var essential = IsArmyFirstEssential(item);
+			var cost = queue.GetProductionCost(item);
+			return !pauseBuilding.Any(p => p.PausesBuilding(item, essential, admission, cost))
+				&& !BaseBuilderQueueEvalCA.MobileSpendBlocks(playerResources.GetCashAndResources(), cost, mobileReserve?.MobileSpendFloor ?? 0, essential);
 		}
 
 		bool EssentialsHolds(ActorInfo item, bool isRefinery, bool plannerOrDemand, int bank)
@@ -2297,6 +2320,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		ActorInfo ChooseBuildingToBuild(ProductionQueue queue)
 		{
+			sustainedPickName = null;
 			var buildableThings = queue.BuildableItems();
 			var availableCash = playerResources.GetCashAndResources();
 
@@ -2331,9 +2355,10 @@ namespace OpenRA.Mods.CA.Traits
 				if (expansionRefinery != null)
 					return expansionRefinery;
 
-				var sustained = ChooseCycledProduction(buildableThings, power);
+				var sustained = ChooseCycledProduction(buildableThings, power, c => VotesAdmit(queue, c, RecoverySpendPolicyCA.Admission.EssentialBuilding));
 				if (sustained != null)
 				{
+					sustainedPickName = sustained.Name;
 					AIUtils.BotDebug("{0} decided to build {1}: Priority override (sustained cash production)", queue.Actor.Owner, sustained.Name);
 					return sustained;
 				}
@@ -2472,7 +2497,7 @@ namespace OpenRA.Mods.CA.Traits
 				var cycleLine = TierLine;
 				if (cycleLine > 0 && ProdBusyCA.SweepBank(AllProducersOn, availableCash, orderedCostThisSweep) > cycleLine)
 				{
-					var cycled = ChooseCycledProduction(buildableThings, power);
+					var cycled = ChooseCycledProduction(buildableThings, power, c => VotesAdmit(queue, c, RecoverySpendPolicyCA.Admission.General));
 					if (cycled != null)
 					{
 						AIUtils.BotDebug("{0} decided to build {1}: Priority override (cycled production)", queue.Actor.Owner, cycled.Name);
