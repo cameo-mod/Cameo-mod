@@ -116,6 +116,14 @@ namespace OpenRA.Mods.CA.Traits
 		// PROD-BUSY-01 rows (DEV provider only; release = on).
 		AblationLatch ablateAllProducers, ablateIdleSweep, ablateEssentials, ablateCycle, ablateSustained, ablateSafety, ablateUnlistedOnce, ablateEssentialPass;
 		bool EssentialPassOn => baseBuilder.EssentialPassArmed && !ablateEssentialPass.Off(player, AblationIds.Af2EssentialPass);
+		AblationLatch ablateOpeningStep, ablateSustainedKeeps, ablatePrefilter, ablateDefenceNeed, ablatePowerCap, ablateDefenceFirstCopy, ablateFloorExempt;
+		bool DefenceFirstCopyOn => baseBuilder.DefenceFirstCopyArmed && !ablateDefenceFirstCopy.Off(player, AblationIds.Af2DefenceFirstCopy);
+		bool FloorExemptOn => baseBuilder.FloorEssentialsExemptArmed && !ablateFloorExempt.Off(player, AblationIds.FloorEssentialsExempt);
+		bool OpeningStepOn => baseBuilder.OpeningStepArmed && !ablateOpeningStep.Off(player, AblationIds.OpeningWfStep);
+		bool SustainedKeepsOn => baseBuilder.SustainedKeepsEssentialsArmed && !ablateSustainedKeeps.Off(player, AblationIds.SustainedKeepsEssentials);
+		bool PrefilterOn => baseBuilder.PrefilterArmed && !ablatePrefilter.Off(player, AblationIds.PrefilterPicks);
+		bool DefenceNeedOn => baseBuilder.DefenceNeedArmed && !ablateDefenceNeed.Off(player, AblationIds.Af2DefenceNeedGate);
+		bool PowerCapOn => baseBuilder.PowerMarginCapArmed && !ablatePowerCap.Off(player, AblationIds.PowerMarginCap);
 		bool UnlistedOnceOn => baseBuilder.UnlistedOnceArmed && !ablateUnlistedOnce.Off(player, AblationIds.Af2UnlistedOnce);
 		readonly Dictionary<string, bool> unlistedKinds = new();
 		string lastCycledProduction;
@@ -862,6 +870,7 @@ namespace OpenRA.Mods.CA.Traits
 			playerBuildings = world.ActorsHavingTrait<Building>().Where(a => a.Owner == player).ToArray();
 			var excessPowerBonus = baseBuilder.Info.ExcessPowerIncrement * (playerBuildings.Count() / baseBuilder.Info.ExcessPowerIncreaseThreshold.Clamp(1, int.MaxValue));
 			minimumExcessPower = (baseBuilder.Info.MinimumExcessPower + excessPowerBonus).Clamp(baseBuilder.Info.MinimumExcessPower, baseBuilder.Info.MaximumExcessPower);
+			minimumExcessPower = BaseFix01CA.CapPowerMargin(PowerCapOn, minimumExcessPower, baseBuilder.Info.MinimumExcessPower, baseBuilder.Info.PowerMarginCap);
 
 			// Build-order knobs (12.25): power_margin scales the surplus target (no provider = unchanged).
 			var knobs = baseBuilder.BuildOrderKnobs;
@@ -998,9 +1007,11 @@ namespace OpenRA.Mods.CA.Traits
 				var reserveFloor = mobileReserve?.MobileSpendFloor ?? 0;
 				var cashNow = ProdBusyCA.SweepBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep);
 				var isRefinery = baseBuilder.Info.RefineryTypes.Contains(item.Name);
-				var exempt = plannerWant || demandPick.Demand != null || (sustainedPickName != null && item.Name == sustainedPickName);
-				var cost = queue.GetProductionCost(item);
 				var itemEssential = IsArmyFirstEssential(item);
+				// C-07 / BASE-09: an army-first essential rides at its own cost, the building cash floor does not hold it.
+				var exempt = plannerWant || demandPick.Demand != null || (sustainedPickName != null && item.Name == sustainedPickName)
+					|| (FloorExemptOn && itemEssential);
+				var cost = queue.GetProductionCost(item);
 
 				// PROD-IDLE_PLAN_03 section 2.3 class of this building order: K1/K2 essentials, K4 other
 				// essential buildings (extra refineries, planner and demand wants), K6 everything else.
@@ -2109,6 +2120,114 @@ namespace OpenRA.Mods.CA.Traits
 		bool UnlistedOnceKind(ActorInfo info) =>
 			!(baseBuilder.Info.BuildingFractions != null && baseBuilder.Info.BuildingFractions.ContainsKey(info.Name)) && FirstCopyKind(info);
 
+		bool BuildingStillDelayed(string name) =>
+			baseBuilder.Info.BuildingDelays != null && baseBuilder.Info.BuildingDelays.TryGetValue(name, out var delay)
+			&& BaseBuilderQueueEvalCA.StillDelayed(KnobTicks(delay * buildingDelayModifier / 100, name), world.WorldTick);
+
+		// BASE-02: owned or in-production count of a set of building types.
+		int OwnedOrQueuedCount(IReadOnlyCollection<string> types)
+		{
+			var n = playerBuildings != null ? playerBuildings.Count(a => types.Contains(a.Info.Name)) : 0;
+			foreach (var kv in baseBuilder.BuildingsBeingProduced)
+				if (types.Contains(kv.Key))
+					n += kv.Value;
+
+			return n;
+		}
+
+		// BASE-02: the opening's next forced step (power, barracks, then the war factory once a refinery stands), power-resolved. Null = the ladder goes on.
+		ActorInfo ChooseOpeningStep(IEnumerable<ActorInfo> buildableThings, ActorInfo power)
+		{
+			if (!OpeningStepOn || baseBuilder.Info.DefenseQueues.Contains(Category))
+				return null;
+
+			var b = baseBuilder.Info;
+			var barracks = GetProducibleBuilding(b.BarracksTypes, buildableThings);
+			var warFactory = GetProducibleBuilding(b.VehiclesFactoryTypes, buildableThings);
+			var step = BaseFix01CA.NextOpeningStep(true, world.WorldTick, b.OpeningWarFactoryStepTicks,
+				OwnedOrQueuedCount(b.PowerTypes), power != null, OwnedOrQueuedCount(b.BarracksTypes), barracks != null,
+				OwnedOrQueuedCount(b.RefineryTypes), OwnedOrQueuedCount(b.VehiclesFactoryTypes), warFactory != null);
+
+			var pick = step switch
+			{
+				OpeningStep.Power => power,
+				OpeningStep.Barracks => BaseBuilderQueueEvalCA.PickOrPower(barracks, power, HasSufficientPowerForActor),
+				OpeningStep.WarFactory => BaseBuilderQueueEvalCA.PickOrPower(warFactory, power, HasSufficientPowerForActor),
+				_ => null,
+			};
+
+			if (pick != null)
+				AIUtils.BotDebug("{0} decided to build {1}: Priority override (opening {2})", player, pick.Name, step);
+
+			return pick;
+		}
+
+		// BASE-05: a pick the admission votes would hold is dropped here so the ladder goes on to the lower rungs (off = never filtered).
+		bool Admitted(ProductionQueue queue, ActorInfo pick) =>
+			pick == null || !PrefilterOn || VotesAdmit(queue, pick, RecoverySpendPolicyCA.Admission.General);
+
+		// BASE-04: ground defence = a defence type that is no anti-air (anti-air has its own intel gate).
+		bool IsGroundDefence(ActorInfo info)
+		{
+			var b = baseBuilder.Info;
+			if (b.AntiAirTypes.Contains(info.Name))
+				return false;
+
+			if (!staticValuesResolved)
+			{
+				staticValues = player.PlayerActor.TraitsImplementing<IBotMobileStaticValues>().FirstOrDefault();
+				staticValuesResolved = true;
+			}
+
+			return b.DefenseTypes.Contains(info.Name) || (staticValues != null && staticValues.IsStaticDefence(info));
+		}
+
+		// BASE-04: a threat was seen (latched for the game): the threat analysis reports an active threat or a nemesis, or an enemy armed unit we can see stands
+		// within DefenceNeedRadius of a construction yard. Re-checked every 25 ticks; observation only, no hidden state is read.
+		bool defenceThreatSeen;
+		int defenceThreatCheckTick = -1000;
+		IBotThreatAnalysis defenceThreatAnalysis;
+		bool defenceThreatResolved;
+
+		bool DefenceThreatSeen()
+		{
+			if (defenceThreatSeen)
+				return true;
+
+			var now = world.WorldTick;
+			if (now - defenceThreatCheckTick < 25)
+				return false;
+
+			defenceThreatCheckTick = now;
+			if (!defenceThreatResolved)
+			{
+				defenceThreatAnalysis = player.PlayerActor.TraitsImplementing<IBotThreatAnalysis>().FirstOrDefault();
+				defenceThreatResolved = true;
+			}
+
+			if (defenceThreatAnalysis != null && (defenceThreatAnalysis.HasActiveThreat() || defenceThreatAnalysis.GetNemesis() != null))
+				return defenceThreatSeen = true;
+
+			if (playerBuildings == null)
+				return false;
+
+			var radius = WDist.FromCells(baseBuilder.Info.DefenceNeedRadius);
+			foreach (var yard in playerBuildings)
+			{
+				if (!baseBuilder.Info.ConstructionYardTypes.Contains(yard.Info.Name))
+					continue;
+
+				foreach (var a in world.FindActorsInCircle(yard.CenterPosition, radius))
+				{
+					if (!a.IsDead && a.IsInWorld && player.RelationshipWith(a.Owner) == PlayerRelationship.Enemy
+						&& a.Info.HasTraitInfo<AttackBaseInfo>() && a.CanBeViewedByPlayer(player))
+						return defenceThreatSeen = true;
+				}
+			}
+
+			return false;
+		}
+
 		/// <summary>A naval production structure while the base has no water to place it on (same test as the fraction roll); never essential, never picked.</summary>
 		bool NavalNeedsWater(ActorInfo info) =>
 			BaseBuilderQueueEvalCA.NavalBlocked(baseBuilder.Info.NavalProductionTypes.Contains(info.Name), waterState == WaterCheck.NotEnoughWater,
@@ -2141,16 +2260,27 @@ namespace OpenRA.Mods.CA.Traits
 
 		// UPGRADE-PRODUCERS-01: the cheapest buildable first copy of an unlisted structure type (UnlistedOnceCA.Pick), within the build limits, the naval
 		// water check and the power rule (power instead when the pick would leave power short). Only the building queues, and only once a production building stands.
-		ActorInfo ChooseUnlistedOnce(ProductionQueue queue, IEnumerable<ActorInfo> buildableThings, ActorInfo power)
+		ActorInfo ChooseUnlistedOnce(ProductionQueue queue, IEnumerable<ActorInfo> buildableThings, ActorInfo power) =>
+			ChooseFirstCopyOnce(queue, buildableThings, power, false);
+
+		/// <summary>
+		/// BASE-03: the same pick with <paramref name="includeListed"/> = every first-copy kind (the fraction-listed types and the tech chain too), used by the
+		/// sustained rung. BuildingDelays and BuildingIntervals are honoured there, so a techrush-guarded building never comes early.
+		/// </summary>
+		ActorInfo ChooseFirstCopyOnce(ProductionQueue queue, IEnumerable<ActorInfo> buildableThings, ActorInfo power, bool includeListed)
 		{
-			if (!UnlistedOnceOn || baseBuilder.Info.DefenseQueues.Contains(Category) || !baseBuilder.HasAdequateProductionCount())
+			if (!(includeListed ? SustainedKeepsOn : UnlistedOnceOn) || baseBuilder.Info.DefenseQueues.Contains(Category) || !baseBuilder.HasAdequateProductionCount())
 				return null;
 
 			var infos = new List<ActorInfo>();
 			var candidates = new List<(string Name, int Cost)>();
 			foreach (var item in buildableThings)
 			{
-				if (!UnlistedOnceKind(item) || OwnedOrQueued(item))
+				if (!(includeListed ? FirstCopyKind(item) : UnlistedOnceKind(item)) || OwnedOrQueued(item))
+					continue;
+
+				if (includeListed && (BuildingStillDelayed(item.Name) || (baseBuilder.Info.BuildingIntervals != null && baseBuilder.Info.BuildingIntervals.ContainsKey(item.Name)
+					&& activeBuildingIntervals.ContainsKey(item.Name))))
 					continue;
 
 				if (baseBuilder.TryGetBuildingLimit(item.Name, out var limit) && BaseBuilderQueueEvalCA.LimitReached(0, limit))
@@ -2360,7 +2490,8 @@ namespace OpenRA.Mods.CA.Traits
 
 			// The owned/queued count is only needed when the ratio failed (a first copy matters only below the ratio).
 			var verdict = MobileStaticRatioCA.Stage1(true, mobile, staticTotal, cost,
-				!MobileStaticRatioCA.Admits(mobile, staticTotal, cost) && baseBuilder.StaticRatio.IsFirstCopy(item.Name, OwnedOrQueued(item)));
+				!MobileStaticRatioCA.Admits(mobile, staticTotal, cost) && baseBuilder.StaticRatio.IsFirstCopy(item.Name, OwnedOrQueued(item))
+				&& (!DefenceFirstCopyOn || DefenceThreatSeen())); // C-04: the first copy of a defence type is exempt only while a threat is seen
 			if (verdict == RatioVerdict.NeedsFloat)
 				verdict = MobileStaticRatioCA.Float(IsFloating());
 
@@ -2440,6 +2571,14 @@ namespace OpenRA.Mods.CA.Traits
 				if (expansionRefinery != null)
 					return expansionRefinery;
 
+				// BASE-03 (Opus ruling): the tech chain and each building once stay above the sustained production pick.
+				var keptEssential = ChooseFirstCopyOnce(queue, buildableThings, power, true);
+				if (keptEssential != null)
+				{
+					AIUtils.BotDebug("{0} decided to build {1}: Priority override (essential kept above sustained)", queue.Actor.Owner, keptEssential.Name);
+					return keptEssential;
+				}
+
 				var sustained = ChooseCycledProduction(buildableThings, power, c => VotesAdmit(queue, c, RecoverySpendPolicyCA.Admission.EssentialBuilding));
 				if (sustained != null)
 				{
@@ -2480,6 +2619,11 @@ namespace OpenRA.Mods.CA.Traits
 					}
 				}
 			}
+
+			// BASE-02 (AUDIT_BASE_01): power, barracks, refinery, war factory: the next missing opening step outranks the refinery pick for every faction.
+			var openingStep = ChooseOpeningStep(buildableThings, power);
+			if (openingStep != null)
+				return openingStep;
 
 			// Next is to build up a strong economy
 			var wantedRefinery = ChooseWantedRefinery(queue, buildableThings, power);
@@ -2531,7 +2675,11 @@ namespace OpenRA.Mods.CA.Traits
 					BaseBuilderQueueEvalCA.OverflowLine(botLimits != null ? botLimits.Info.OverflowCash : -1,
 						overflowPolicy?.Info.OverflowCash ?? 0)))
 			{
-				var pick = BaseBuilderQueueEvalCA.DrawOverflowPick(OverflowProductionCandidates(buildableThings, power),
+				var overflowCandidates = OverflowProductionCandidates(buildableThings, power);
+				if (PrefilterOn)
+					overflowCandidates.RemoveAll(c => !Admitted(queue, c));
+
+				var pick = BaseBuilderQueueEvalCA.DrawOverflowPick(overflowCandidates,
 					BotRng.For(player, nameof(BaseBuilderQueueManagerCA)));
 				if (pick == null)
 					TraceOverflow("no-candidate", null);
@@ -2607,7 +2755,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (baseBuilder.ProductionScalingEnabled)
 			{
 				var scalingPick = ChooseProductionScalingItem(queue, buildableThings, power);
-				if (scalingPick != null)
+				if (scalingPick != null && Admitted(queue, scalingPick))
 					return scalingPick;
 			}
 
@@ -2619,7 +2767,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (production != null && (ProductionTypeLimit <= 0 || !BaseBuilderQueueEvalCA.LimitReached(playerBuildings.Count(a => a.Info.Name == production.Name), ProductionTypeLimit)))
 				{
 					var pick = BaseBuilderQueueEvalCA.PickOrPower(production, power, HasSufficientPowerForActor);
-					if (pick != null)
+					if (pick != null && Admitted(queue, pick))
 					{
 						AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, pick.Name,
 							pick == production ? "production" : "would be low power");
@@ -2638,7 +2786,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				var navalproduction = GetProducibleBuilding(baseBuilder.Info.NavalProductionTypes, buildableThings);
 				var navalPick = BaseBuilderQueueEvalCA.PickOrPower(navalproduction, power, HasSufficientPowerForActor);
-				if (navalPick != null)
+				if (navalPick != null && Admitted(queue, navalPick))
 				{
 					AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, navalPick.Name,
 						navalPick == navalproduction ? "navalproduction" : "would be low power");
@@ -2658,7 +2806,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				var silo = GetProducibleBuilding(baseBuilder.Info.SiloTypes, buildableThings);
 				var siloPick = BaseBuilderQueueEvalCA.PickOrPower(silo, power, HasSufficientPowerForActor);
-				if (siloPick != null)
+				if (siloPick != null && Admitted(queue, siloPick))
 				{
 					AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, siloPick.Name,
 						siloPick == silo ? "silo" : "would be low power");
@@ -2674,7 +2822,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				var radar = frontBack.PreferredRadarProvider(GetRadarProducibles(buildableThings));
 				var radarPick = BaseBuilderQueueEvalCA.PickOrPower(radar, power, HasSufficientPowerForActor);
-				if (radarPick != null)
+				if (radarPick != null && Admitted(queue, radarPick))
 				{
 					AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, radarPick.Name,
 						radarPick == radar ? "radar for front" : "radar would be low power");
@@ -2691,6 +2839,11 @@ namespace OpenRA.Mods.CA.Traits
 				// enemy air intel; the rolled share then flows to the remaining
 				// (anti-ground) entries of this same pass.
 				if (!BaseBuilderQueueEvalCA.AirDefenceAdmits(baseBuilder.IsGatedAirDefence(name), baseBuilder.DedicatedAntiAirAllowed))
+					continue;
+
+				// BASE-04 (AUDIT_BASE_01): no ground defence from the roll before a threat is seen (the planner's front defence and demand defence stay).
+				if (DefenceNeedOn && world.Map.Rules.Actors.TryGetValue(name, out var defenceCandidate)
+					&& BaseFix01CA.DefenceNeedHolds(true, IsGroundDefence(defenceCandidate), DefenceThreatSeen()))
 					continue;
 
 				// Does this building have initial delay, if so have we passed it?

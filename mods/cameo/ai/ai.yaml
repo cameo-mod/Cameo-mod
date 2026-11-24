@@ -194,6 +194,8 @@
 	# Guarded by tools/audit/audit_ai_personalities.py (difficulty_scale_failures).
 	# TIER-01 yaml applied (TABLE_03_R2 079A06F2, SCALE_PLAN_01 section 8)
 	BotLimits@noob:
+		# C-03 (AUDIT_CONFIG_01): barracks before the first refinery on every tier (binding opening order); no tier jump.
+		PrioritizeBarracksBeforeRefinery: true
 		ProductionTypeLimit: 1
 		ConstructionYardLimit: 1
 		RefineryLimit: 1
@@ -227,6 +229,8 @@
 		RoleMixUnnamedTotalPct: 10
 		RequiresCondition: noobbot
 	BotLimits@easiest:
+		# C-03 (AUDIT_CONFIG_01): barracks before the first refinery on every tier (binding opening order); no tier jump.
+		PrioritizeBarracksBeforeRefinery: true
 		ProductionTypeLimit: 2
 		ConstructionYardLimit: 2
 		RefineryLimit: 2
@@ -260,6 +264,8 @@
 		RoleMixUnnamedTotalPct: 11
 		RequiresCondition: easiestbot
 	BotLimits@veryeasy:
+		# C-03 (AUDIT_CONFIG_01): barracks before the first refinery on every tier (binding opening order); no tier jump.
+		PrioritizeBarracksBeforeRefinery: true
 		ProductionTypeLimit: 3
 		ConstructionYardLimit: 3
 		RefineryLimit: 3
@@ -293,6 +299,8 @@
 		RoleMixUnnamedTotalPct: 12
 		RequiresCondition: veryeasybot
 	BotLimits@easy:
+		# C-03 (AUDIT_CONFIG_01): barracks before the first refinery on every tier (binding opening order); no tier jump.
+		PrioritizeBarracksBeforeRefinery: true
 		ProductionTypeLimit: 4
 		ConstructionYardLimit: 4
 		RefineryLimit: 4
@@ -326,6 +334,8 @@
 		RoleMixUnnamedTotalPct: 13
 		RequiresCondition: easybot
 	BotLimits@medium:
+		# C-03 (AUDIT_CONFIG_01): barracks before the first refinery on every tier (binding opening order); no tier jump.
+		PrioritizeBarracksBeforeRefinery: true
 		ProductionTypeLimit: 5
 		ConstructionYardLimit: 5
 		RefineryLimit: 5
@@ -4330,6 +4340,8 @@ Player:
 		ArmyReserveHighCash: 0
 		MinArmyUnitsBeforeBuildings: 0
 		FirstCopyPasses: true
+		# C-04: the first copy of a defence type counts toward the cap below (row af2_defence_first_copy).
+		DefenceFirstCopyCounts: true
 		DefenceCapBase: 3
 		DefenceCapPerThreat: 6
 		DefenceThreatSaturationPercent: 300
@@ -5780,6 +5792,21 @@ Player:
 		UnlistedBuildingsOnce: true
 		# ESSENTIAL-PASS-01: first copies of every building type and cash tricklers pass the army-first and mobile-spend votes; row af2_essential_pass; genericbot only.
 		EssentialPassFirstCopies: true
+		# BASE-FIX-01 (AUDIT_BASE_01, Opus 11-24); every row genericbot only (SwitchCondition above).
+		# opening_wf_step: power, barracks, refinery, war factory for every faction, above the refinery pick.
+		OpeningWarFactoryStep: true
+		# pb_sustained_keeps_essentials: the tech chain and each building once stay above the sustained production pick.
+		SustainedKeepsEssentials: true
+		# pb_prefilter_picks: the overflow, scaling, threshold, naval, silo and radar picks are vote-filtered before selection.
+		PrefilterBuildingPicks: true
+		# af2_defence_need_gate: ground defences from the roll only after a seen threat.
+		DefenceNeedGate: true
+		# pb_power_margin_cap: the growing power margin stops at 300.
+		PowerMarginCapEnabled: true
+		# af2_defence_first_copy: the first copy of a defence type counts toward RATIO-2X (exempt only while a threat is seen).
+		DefenceFirstCopyCounts: true
+		# pb_floor_essentials_exempt: army-first essential buildings ride at their own cost, the building cash floor does not hold them.
+		FloorEssentialsExempt: true
 		# PROD-BUSY cycle: above the same line, more production buildings cycled across the types (row pb_cycle_production); genericbot only.
 		CycleProductionAboveLine: true
 		# SUSTAINED-CASH-01: a bank above the tier line for 1500 ticks forces the next building to be production (row pb_sustained_cash_production); genericbot only.

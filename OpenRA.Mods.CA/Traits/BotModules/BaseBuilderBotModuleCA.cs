@@ -235,6 +235,44 @@ namespace OpenRA.Mods.CA.Traits
 			"Gated by SwitchCondition; row af2_essential_pass.")]
 		public readonly bool EssentialPassFirstCopies = false;
 
+		[Desc("BASE-02 (AUDIT_BASE_01, USER ruling): the opening is power, barracks, refinery, WAR FACTORY, power if needed, refinery. For every faction",
+			"(not only BarracksBeforeRefineryFactions) the next missing opening step outranks the wanted-refinery pick until the war factory is owned or",
+			"queued, or OpeningWarFactoryStepTicks have passed. Gated by SwitchCondition; row opening_wf_step.")]
+		public readonly bool OpeningWarFactoryStep = false;
+
+		[Desc("BASE-02: world ticks after which the opening steps stop forcing the pick (a faction with no claimable refinery or no vehicle factory never deadlocks).")]
+		public readonly int OpeningWarFactoryStepTicks = 6000;
+
+		[Desc("BASE-03 (AUDIT_BASE_01, Opus ruling): while SUSTAINED-CASH is active, the first copy of every building type (the tech chain and each building once)",
+			"still comes BEFORE the sustained production pick. Gated by SwitchCondition; row pb_sustained_keeps_essentials.")]
+		public readonly bool SustainedKeepsEssentials = false;
+
+		[Desc("BASE-05 (AUDIT_BASE_01): the overflow, production-scaling, threshold, naval, silo and radar picks are filtered by the same admission votes TickQueue asks",
+			"BEFORE they are returned, so a held pick never ends the sweep and the lower picks still run. Gated by SwitchCondition; row pb_prefilter_picks.")]
+		public readonly bool PrefilterBuildingPicks = false;
+
+		[Desc("BASE-04 (AUDIT_BASE_01): ground defences from the fraction roll are built only after a threat is seen (an enemy armed unit seen near a construction yard,",
+			"or the threat analysis reports an active threat or a nemesis); threat-driven defence stays. Gated by SwitchCondition; row af2_defence_need_gate.")]
+		public readonly bool DefenceNeedGate = false;
+
+		[Desc("BASE-04: cells around a construction yard in which a seen enemy armed unit counts as a threat.")]
+		public readonly int DefenceNeedRadius = 28;
+
+		[Desc("BASE-13 (AUDIT_BASE_01): caps the growing power margin (MinimumExcessPower + ExcessPowerIncrement per building group) at PowerMarginCap, never below",
+			"MinimumExcessPower, so the low-power rung cannot outrank everything. Gated by SwitchCondition; row pb_power_margin_cap.")]
+		public readonly bool PowerMarginCapEnabled = false;
+
+		[Desc("BASE-13: the cap itself (power units).")]
+		public readonly int PowerMarginCap = 300;
+
+		[Desc("C-04 (AUDIT_CONFIG_01): the first copy of a defence type no longer skips RATIO-2X (mobile army >= 2x static defence) unless a threat is seen. Gated by",
+			"SwitchCondition; row af2_defence_first_copy (shared with the ArmyFirstBotModule cap).")]
+		public readonly bool DefenceFirstCopyCounts = false;
+
+		[Desc("C-07 / BASE-09 (AUDIT_CONFIG_01): army-first essential buildings (yards, refineries, power, tech chain, first copies, upgrade producers) ride at their own",
+			"cost like a planner want: the building cash floor (BuildingProductionMinCash) does not hold them. Gated by SwitchCondition; row pb_floor_essentials_exempt.")]
+		public readonly bool FloorEssentialsExempt = false;
+
 		[Desc("PROD-BUSY (USER 11-24): while the bank stays above the tier MaximiseProductionCash line the base builder adds production buildings, cycled",
 			"across the types (barracks, war factory, airfield, naval yard with water access, then again), bounded by the build limits and by the failed-",
 			"placement latch; power is added as needed. Gated by SwitchCondition; row pb_cycle_production.")]
@@ -613,6 +651,13 @@ namespace OpenRA.Mods.CA.Traits
 		public bool EssentialsLowCashArmed => Info.EssentialsOnlyBelowTierLine && switchesActive;
 		public bool UnlistedOnceArmed => Info.UnlistedBuildingsOnce && switchesActive;
 		public bool EssentialPassArmed => Info.EssentialPassFirstCopies && switchesActive;
+		public bool OpeningStepArmed => Info.OpeningWarFactoryStep && switchesActive;
+		public bool SustainedKeepsEssentialsArmed => Info.SustainedKeepsEssentials && switchesActive;
+		public bool PrefilterArmed => Info.PrefilterBuildingPicks && switchesActive;
+		public bool DefenceNeedArmed => Info.DefenceNeedGate && switchesActive;
+		public bool PowerMarginCapArmed => Info.PowerMarginCapEnabled && switchesActive;
+		public bool DefenceFirstCopyArmed => Info.DefenceFirstCopyCounts && switchesActive;
+		public bool FloorEssentialsExemptArmed => Info.FloorEssentialsExempt && switchesActive;
 
 		// E1 observational slice (lead-accepted, observational ONLY): the switch-gated commitment
 		// ledger. Never read by any admission decision — recording and verdict logging only.
