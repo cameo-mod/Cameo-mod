@@ -139,8 +139,8 @@ namespace OpenRA.Mods.CA.Traits
 		bool NoSpaceBanned(string name)
 		{
 			var banned =
-			NoSpaceBanOn && noSpaceBan.TryGetValue(name, out var ban)
-			&& BaseFix02CA.BanActive(true, world.WorldTick, ban.Until, world.ActorsHavingTrait<BaseProvider>().Count(a => a.Owner == player), ban.Providers);
+				NoSpaceBanOn && noSpaceBan.TryGetValue(name, out var ban)
+				&& BaseFix02CA.BanActive(true, world.WorldTick, ban.Until, world.ActorsHavingTrait<BaseProvider>().Count(a => a.Owner == player), ban.Providers);
 			if (banned)
 				TechReject(name, "nospace");
 
@@ -2231,8 +2231,8 @@ namespace OpenRA.Mods.CA.Traits
 		bool BuildingStillDelayed(string name)
 		{
 			var delayed =
-			baseBuilder.Info.BuildingDelays != null && baseBuilder.Info.BuildingDelays.TryGetValue(name, out var delay)
-			&& BaseBuilderQueueEvalCA.StillDelayed(KnobTicks(delay * buildingDelayModifier / 100, name), world.WorldTick);
+				baseBuilder.Info.BuildingDelays != null && baseBuilder.Info.BuildingDelays.TryGetValue(name, out var delay)
+				&& BaseBuilderQueueEvalCA.StillDelayed(KnobTicks(delay * buildingDelayModifier / 100, name), world.WorldTick);
 			if (delayed)
 				TechReject(name, "delay");
 
@@ -2904,10 +2904,12 @@ namespace OpenRA.Mods.CA.Traits
 			openingPickName = null;
 			antiRushPickName = null;
 			var buildableThings = queue.BuildableItems();
-			if (TechLogOn) // TECH-LOG-01: a tech-chain type the engine does not offer yet has an unmet prerequisite
-				foreach (var tech in baseBuilder.Info.TechChainTypes)
-					if (!buildableThings.Any(b => b.Name == tech))
-						TechReject(tech, "prereq");
+			if (TechLogOn) // TECH-LOG-01: only a tech-chain type this queue offers, and cannot build yet, has an unmet prerequisite
+			{
+				var techBuildable = buildableThings.Select(b => b.Name).ToHashSet();
+				foreach (var prereqType in TechLogCA.PrereqMissing(queue.AllItems().Select(i => i.Name), baseBuilder.Info.TechChainTypes.Contains, techBuildable))
+					TechReject(prereqType, "prereq");
+			}
 			var availableCash = playerResources.GetCashAndResources();
 
 			// This gets used quite a bit, so let's cache it here

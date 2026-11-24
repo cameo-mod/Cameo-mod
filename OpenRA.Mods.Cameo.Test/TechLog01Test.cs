@@ -9,7 +9,9 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
 
@@ -37,6 +39,24 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(TechLogCA.FileName, Is.EqualTo("tech_log.csv"));
 		}
 
+		// queueItems = what this seat's queue can build (AllItems); foreignTech is another faction's type and is not among them.
+		[TestCase(new[] { "own_tech" }, new[] { "own_tech" }, new[] { "own_tech" }, new string[0])]
+		[TestCase(new[] { "own_tech" }, new string[0], new[] { "own_tech" }, new[] { "own_tech" })]
+		[TestCase(new[] { "own_tech", "plain" }, new string[0], new[] { "own_tech" }, new[] { "own_tech" })]
+		[TestCase(new string[0], new string[0], new[] { "foreign_tech" }, new string[0])]
+		public void OnlyATechTypeThisQueueOffersAndCannotBuildYetIsAPrereqRow(string[] queueItems, string[] buildable, string[] chain, string[] expected)
+		{
+			var missing = TechLogCA.PrereqMissing(queueItems, new HashSet<string>(chain).Contains, new HashSet<string>(buildable)).ToArray();
+			Assert.That(missing, Is.EqualTo(expected));
+		}
+
+		[Test]
+		public void AForeignTechTypeNeverGetsAPrereqRow()
+		{
+			var missing = TechLogCA.PrereqMissing(new string[0], s => s == "foreign_tech", new HashSet<string>()).ToArray();
+			Assert.That(missing, Is.Empty);
+		}
+
 		[Test]
 		public void TheBaseBuilderReportsEachRejectionReasonAndFirstCompletions()
 		{
@@ -46,7 +66,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(q, Does.Contain("TechReject(actorInfo.Name, \"power\");"));
 			Assert.That(q, Does.Contain("TechReject(name, \"delay\");"));
 			Assert.That(q, Does.Contain("TechReject(item.Name, \"vote\");"));
-			Assert.That(q, Does.Contain("TechReject(tech, \"prereq\");"));
+			Assert.That(q, Does.Contain("TechReject(prereqType, \"prereq\");"));
+			Assert.That(q, Does.Contain("TechLogCA.PrereqMissing(queue.AllItems().Select(i => i.Name), baseBuilder.Info.TechChainTypes.Contains, techBuildable)"));
 		}
 
 		[Test]
