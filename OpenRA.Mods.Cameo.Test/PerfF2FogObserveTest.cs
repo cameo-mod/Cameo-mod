@@ -15,6 +15,7 @@ using System.Linq;
 using System.Reflection;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
+using OpenRA.Mods.Cameo.Dev;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Primitives;
@@ -128,7 +129,9 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var fog = Source("mods/Cameo/Traits/BotModules/BotFogMemory.cs");
 			Assert.That(fog, Does.Contain("!info.UseFogClassifyCache || ablateClassifyCache.Off(viewer, AblationIds.FogClassifyCache)"));
-			Assert.That(fog, Does.Contain("!info.UseSharedFrozenSnapshot || ablateFrozenSnapshot.Off(viewer, AblationIds.FogFrozenSnapshot)"));
+			// 7cb1a7b97 wraps this condition over two lines (the enemies.Count gate comes first).
+			Assert.That(fog, Does.Contain("|| !info.UseSharedFrozenSnapshot"));
+			Assert.That(fog, Does.Contain("|| ablateFrozenSnapshot.Off(viewer, AblationIds.FogFrozenSnapshot)"));
 			var observe = fog.Substring(fog.IndexOf("public int Observe(", StringComparison.Ordinal), 2600);
 			Assert.That(observe, Does.Not.Contain("Classify(actor.Info"), "both sightings go through ClassifyObserved");
 			Assert.That(observe.Split("ClassifyObserved(").Length - 1, Is.EqualTo(2));

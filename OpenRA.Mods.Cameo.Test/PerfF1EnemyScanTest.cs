@@ -66,7 +66,7 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void TheRiskGateHelperBuildsANewListAndNeverRemovesFromTheInput()
 		{
-			var helper = Section(Scan(), "List<Actor> WithoutRiskyTargets(", "#if CAMEO_DEV_LOGGING\n\t\tvoid VerifyEnemyScan");
+			var helper = Section(Scan(), "List<Actor> WithoutRiskyTargets(", "\t\tvoid VerifyEnemyScan(");
 			Assert.That(helper, Does.Contain("var kept = new List<Actor>(units.Count);"));
 			Assert.That(helper, Does.Contain("if (PassesRiskGate(u.Location, attackerValue))"));
 			Assert.That(helper, Does.Not.Contain("RemoveAll"));
