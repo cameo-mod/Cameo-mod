@@ -64,7 +64,8 @@ namespace OpenRA.Mods.Cameo.Test
 				("veryhard", 14, 7200), ("brutal", 17, 8400), ("challenger", 19, 9600), ("unbeatable", 22, 10800), ("god", 24, 12000)
 			};
 
-			var segments = RepoFile("mods/cameo/ai/ai.yaml").Split("\n\tBotLimits@", StringSplitOptions.None).Skip(1).ToList();
+			var segments = RepoFile("mods/cameo/ai/ai.yaml").Split("\n\tBotLimits@", StringSplitOptions.None).Skip(1)
+				.Where(s => !s.StartsWith("classic:", StringComparison.Ordinal)).ToList(); // CLASSIC-FREEZE-01: BotLimits@classic is the frozen pin copy
 			Assert.That(segments.Count, Is.EqualTo(11), "eleven BotLimits tiers");
 			foreach (var (tier, units, value) in expected)
 			{
