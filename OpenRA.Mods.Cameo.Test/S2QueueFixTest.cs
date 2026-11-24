@@ -659,6 +659,7 @@ namespace OpenRA.Mods.Cameo.Test
 			// No RNG draw or production call is added.
 			// RATIO-2X-01 R2 (4339d3607) adds one more "PlaceBuilding" token: the PlaceBuildingVariantsInfo lookup of its fraction-loop
 			// pre-filter (20 -> 21). It adds no order, RNG draw or production call, so every other count is unchanged.
+			// ESSENTIALS-01 naval type-limit fix (d42966e45) adds the same lookup for the naval candidate (21 -> 22), again no order.
 			var src = ManagerSource();
 			Assert.That(Count(src, "bot.QueueOrder("), Is.EqualTo(8));
 			Assert.That(Count(src, "Order.StartProduction("), Is.EqualTo(1));
@@ -666,7 +667,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(Count(src, "new Order("), Is.EqualTo(2));
 			Assert.That(Count(src, "BotRng.For("), Is.EqualTo(14));
 			Assert.That(Count(src, ".Next("), Is.EqualTo(7));
-			Assert.That(Count(src, "PlaceBuilding"), Is.EqualTo(21));
+			Assert.That(Count(src, "PlaceBuilding"), Is.EqualTo(22));
 		}
 
 		[Test]
