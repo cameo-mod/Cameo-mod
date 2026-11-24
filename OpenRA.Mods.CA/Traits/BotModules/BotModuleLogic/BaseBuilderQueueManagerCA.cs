@@ -2215,7 +2215,8 @@ namespace OpenRA.Mods.CA.Traits
 						break;
 					case OpeningRole.Refinery:
 						have = OwnedOrQueuedCount(b.RefineryTypes);
-						pick = OpeningCheapest(queue, buildable, a => b.RefineryTypes.Contains(a.Name), false);
+						// CM FIX: the slot is open only when the wanted-refinery rung will really pick one (adequate count, the max and the expansion safety all close it): a closed slot is skipped, never waited on.
+						pick = ChooseWantedRefinery(queue, buildable, power);
 						break;
 					case OpeningRole.WarFactory:
 						have = OwnedOrQueuedCount(b.VehiclesFactoryTypes);
@@ -2258,11 +2259,12 @@ namespace OpenRA.Mods.CA.Traits
 					return false;
 				}
 
+				// Cumulative since the step first became the next step (a cash hold does not reset it): after OpeningStepStuckTicks the order goes on without it.
 				return now - since > b.OpeningStepStuckTicks;
 			}
 
 			var order = BaseFix01CA.StandardOrder(b.OpeningSecondBarracksFirstFactions.Contains(player.Faction.InternalName));
-			var next = BaseFix01CA.NextRole(order, Status, Stuck);
+			var next = BaseFix01CA.NextRole(order, Status, Stuck, (role, required) => openingStepSince.Remove((role, required)));
 			if (next == OpeningRole.None || next == OpeningRole.Refinery)
 				return null;
 

@@ -59,12 +59,18 @@ namespace OpenRA.Mods.CA.Traits
 		/// on). A Refinery result means "let the wanted-refinery rung pick it": the caller returns no pick of its own.
 		/// </summary>
 		public static OpeningRole NextRole(System.Collections.Generic.IReadOnlyList<OpeningSlot> order, Func<OpeningRole, (bool Can, int Have)> status,
-			Func<OpeningRole, int, bool> stuck)
+			Func<OpeningRole, int, bool> stuck, Action<OpeningRole, int> satisfied = null)
 		{
 			foreach (var slot in order)
 			{
 				var (can, have) = status(slot.Role);
-				if (!can || have >= slot.Required || stuck(slot.Role, slot.Required))
+				if (have >= slot.Required)
+				{
+					satisfied?.Invoke(slot.Role, slot.Required);
+					continue;
+				}
+
+				if (!can || stuck(slot.Role, slot.Required))
 					continue;
 
 				return slot.Role;

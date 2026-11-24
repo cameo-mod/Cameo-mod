@@ -63,7 +63,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void AWarFactoryIsBuiltWithinTheFirstFiveBuildingsForEveryFactionShape()
 		{
 			// Any subset of the optional roles a faction may lack (no barracks, no radar, no airfield, no tech chain, no trickler) and both second-production orders.
-			var optional = new[] { OpeningRole.Barracks, OpeningRole.Radar, OpeningRole.Airfield, OpeningRole.TechCenter, OpeningRole.PassiveIncome };
+			var optional = new[] { OpeningRole.Barracks, OpeningRole.Refinery, OpeningRole.Radar, OpeningRole.Airfield, OpeningRole.TechCenter, OpeningRole.PassiveIncome };
 			for (var mask = 0; mask < 1 << optional.Length; mask++)
 			{
 				var lacking = new System.Collections.Generic.HashSet<OpeningRole>(optional.Where((_, i) => (mask & (1 << i)) != 0));
@@ -74,6 +74,30 @@ namespace OpenRA.Mods.Cameo.Test
 					Assert.That(warFactory, Is.InRange(0, 4), $"mask {mask} barracksFirst {barracksFirst}: {string.Join(",", built)}");
 				}
 			}
+		}
+
+		[Test]
+		public void AClosedRefinerySlotIsSkippedNotWaitedOn()
+		{
+			// CM FIX: when the wanted-refinery rung has nothing to pick (adequate count, max, unsafe) the slot is closed and the war factory still comes within the first 5.
+			foreach (var barracksFirst in new[] { false, true })
+			{
+				var built = Simulate(barracksFirst, new System.Collections.Generic.HashSet<OpeningRole> { OpeningRole.Refinery });
+				Assert.That(built, Does.Not.Contain(OpeningRole.Refinery));
+				Assert.That(built.IndexOf(OpeningRole.WarFactory), Is.InRange(0, 4));
+			}
+		}
+
+		[Test]
+		public void TheRefinerySlotMirrorsTheWantedRefineryRungAndASatisfiedStepForgetsItsTimer()
+		{
+			var q = Source("mods/CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs");
+			Assert.That(q, Does.Contain("pick = ChooseWantedRefinery(queue, buildable, power);"));
+			Assert.That(q, Does.Contain("(role, required) => openingStepSince.Remove((role, required))"));
+			var cleared = new System.Collections.Generic.List<(OpeningRole, int)>();
+			var order = BaseFix01CA.StandardOrder(false);
+			BaseFix01CA.NextRole(order, r => (true, r == OpeningRole.Power ? 1 : 0), (r, n) => false, (r, n) => cleared.Add((r, n)));
+			Assert.That(cleared, Is.EqualTo(new[] { (OpeningRole.Power, 1) }));
 		}
 
 		[Test]
