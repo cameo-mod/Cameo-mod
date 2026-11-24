@@ -293,6 +293,10 @@ namespace OpenRA.Mods.CA.Traits
 			"engine placement check. Gated by SwitchCondition; row tm_ally_turret_support.")]
 		public readonly bool TeamTurretSupport = false;
 
+		[Desc("CONSOLIDATE-01 C9 (P7, X6): the unit-production pause for a missing refinery applies only until the first refinery has ever stood (the opening). After that a bot that loses",
+			"its refineries keeps building units, because that is exactly when it needs them. Gated by SwitchCondition; row ub_refinery_pause_opening.")]
+		public readonly bool RefineryPauseOpeningOnly = false;
+
 		[Desc("TEAM-DEFEND-02: cells around an own or allied building in which a seen enemy armed unit counts as attacking it.")]
 		public readonly int TurretSupportRadiusCells = 14;
 
@@ -1212,7 +1216,19 @@ namespace OpenRA.Mods.CA.Traits
 			DefenseCenter = newLocation;
 		}
 
-		bool IBotRequestPauseUnitProduction.PauseUnitProduction => !IsTraitDisabled && !HasMinimalRefineryCount();
+		bool IBotRequestPauseUnitProduction.PauseUnitProduction => !IsTraitDisabled && !HasMinimalRefineryCount() && !RefineryPauseLapsed();
+
+		// C9 (ub_refinery_pause_opening): latched the first time the minimal refinery count is seen standing; a pure function of synced world state.
+		bool refineryEverOwned;
+		AblationLatch ablateRefineryPause;
+
+		bool RefineryPauseLapsed()
+		{
+			if (!Info.RefineryPauseOpeningOnly || !switchesActive || ablateRefineryPause.Off(player, AblationIds.UnitRefineryPauseOpening))
+				return false;
+
+			return refineryEverOwned;
+		}
 
 		void IBotTick.BotTick(IBot bot)
 		{
@@ -1673,8 +1689,14 @@ namespace OpenRA.Mods.CA.Traits
 			? Info.InititalMinimumRefineryCount + Info.AdditionalMinimumRefineryCount + (AIUtils.CountActorByCommonName(ConstructionYardBuildings) - 1) * Info.RefineriesPerBase
 			: Info.InititalMinimumRefineryCount;
 
-		bool HasMinimalRefineryCount() =>
-			AIUtils.CountActorByCommonName(RefineryBuildings) >= Info.InititalMinimumRefineryCount;
+		bool HasMinimalRefineryCount()
+		{
+			var has = AIUtils.CountActorByCommonName(RefineryBuildings) >= Info.InititalMinimumRefineryCount;
+			if (has)
+				refineryEverOwned = true;
+
+			return has;
+		}
 
 		public bool HasAdequateProductionCount() =>
 			Info.ProductionTypes.Count == 0 ||

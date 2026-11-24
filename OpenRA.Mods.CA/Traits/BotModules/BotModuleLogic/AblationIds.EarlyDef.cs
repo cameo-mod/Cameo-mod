@@ -26,5 +26,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		// CONSOLIDATE-01 C8 (P3): the unit pass serves one FIRST item per queue over every category before any queue takes a second (depth) item.
 		public const string UnitFirstItemRound = "ub_first_item_round";
+
+		// CONSOLIDATE-01 C9 (P7, X6): the no-refinery unit-production pause applies only until the first refinery has ever stood.
+		public const string UnitRefineryPauseOpening = "ub_refinery_pause_opening";
 	}
 }

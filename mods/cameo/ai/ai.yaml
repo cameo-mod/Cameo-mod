@@ -5929,6 +5929,8 @@ Player:
 		AntiRushBaseMax: 3
 		# TEAM-DEFEND-02 (USER 11-24): tm_ally_turret_support: while an own or allied base is attacked every ready ground turret is placed at its max weapon range from the attackers; genericbot only.
 		TeamTurretSupport: true
+		# CONSOLIDATE-01 C9 (X6, row ub_refinery_pause_opening): the no-refinery unit-production pause applies only until the first refinery has stood; a bot that loses its refineries keeps building units.
+		RefineryPauseOpeningOnly: true
 		# BASE-FIX-02 (AUDIT_BASE_01): ready_watchdog_all (75 ticks), pb_nospace_ban (3000 ticks), pb_refinery_safety_all_claims; genericbot only.
 		ReadyWatchdogAll: true
 		NoSpaceBan: true
@@ -6361,6 +6363,8 @@ Player:
 		UnitMixCategoryFloor: true
 		# CONSOLIDATE-01 C8 (row ub_first_item_round): every unit pass gives each queue its FIRST item (all categories) before any queue takes a second.
 		UnitFirstItemRound: true
+		# CONSOLIDATE-01 C9 (X13): paid Promotions also start while a unit-production pause vote is up (pq_upgrade_service); free items always did.
+		UpgradeServiceThroughPause: Upgrades, Research, Addons, Promotions
 		IdleBaseUnitsMaximum: 25
 		ProductionMinCashRequirement: 1000
 		MaximiseProductionCashRequirement: 5000
