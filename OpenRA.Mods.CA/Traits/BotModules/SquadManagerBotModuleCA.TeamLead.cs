@@ -181,11 +181,42 @@ namespace OpenRA.Mods.CA.Traits
 			return targeted != null && targeted.Owner != null && TeamLeadFocusEnemy(targeted.Owner) ? targeted.Owner : null;
 		}
 
-		// The next target of a squad that keeps going: the nearest enemy of the focus seat, else the nearest enemy anywhere (the old pick).
-		internal Actor TeamLeadGoOnTarget(SquadCA s, Actor leader)
+		// The next target of a squad that keeps going: the nearest visible enemy of the focus seat, else a remembered (fogged) building of that seat, else the nearest
+		// visible enemy anywhere (the old pick), else (no focus seat) any remembered enemy building. False = nothing known at all: the caller stands the squad idle, never flees.
+		internal bool TeamLeadGoOn(SquadCA s, Actor leader)
 		{
 			var seat = TeamLeadGoOnPlayer();
-			return (seat != null ? FindClosestEnemy(leader.Location, SquadValueOf(s), seat, s) : null) ?? FindClosestEnemy(leader, s);
+			var pick = seat != null ? FindClosestEnemy(leader.Location, SquadValueOf(s), seat, s) : null;
+			if (pick == null && seat != null && FoggedScans && FindFrozenEnemyTarget(leader.CenterPosition, -1, s, seat) is { } frozenSeat)
+			{
+				s.Target = Target.FromFrozenActor(frozenSeat);
+				return true;
+			}
+
+			pick ??= FindClosestEnemy(leader, s);
+			if (pick != null)
+			{
+				s.TargetActor = pick;
+				return true;
+			}
+
+			if (seat == null && FoggedScans && FindFrozenEnemyTarget(leader.CenterPosition, -1, s) is { } frozen)
+			{
+				s.Target = Target.FromFrozenActor(frozen);
+				return true;
+			}
+
+			return false;
+		}
+
+		// A pushed blob that stands within the scan radius of its valid target is sieging it (it does not move): the attack state stuck rule leaves it alone.
+		internal bool TeamLeadSieging(SquadCA s)
+		{
+			if (!s.IsValid || s.TeamPushSeq <= 0 || !s.IsTargetValid || !TeamLeadKeepsGoing(s))
+				return false;
+
+			var scan = (long)WDist.FromCells(Info.AttackScanRadius).Length;
+			return TeamLeadCA.SiegeHolds(true, true, (s.Units[0].Actor.CenterPosition - s.Target.CenterPosition).HorizontalLengthSquared, scan * scan);
 		}
 
 		// tl_pincer_double: a pincer that is due to push with less than twice the WAVE-MIN bars gathered collapses into the single blob (each prong must meet WAVE-MIN).
@@ -220,7 +251,13 @@ namespace OpenRA.Mods.CA.Traits
 				if (p.NonCombatant || p.WinState != WinState.Undefined || (p != Player && Player.RelationshipWith(p) != PlayerRelationship.Ally))
 					continue;
 
-				var at = baseOf.TryGetValue(p, out var found) ? found : World.Map.CenterOfCell(p.HomeLocation);
+				WPos at;
+				if (baseOf.TryGetValue(p, out var found))
+					at = found;
+				else if (p.HomeLocation != CPos.Zero)
+					at = World.Map.CenterOfCell(p.HomeLocation);
+				else
+					continue;
 				x += at.X;
 				y += at.Y;
 				n++;
@@ -231,7 +268,10 @@ namespace OpenRA.Mods.CA.Traits
 
 			var mid = TeamLeadCA.RallyBetween(new WPos((int)(x / n), (int)(y / n), 0), target, Info.TeamLeadRallyMidPercent);
 			var map = World.Map;
+			// TEAM-GATHER-02 c3: the staging cell is the leader own one; it counts only close to the mid point, else the mid point snapped to a legal ground cell is the rally.
 			var staged = ArmyStaging?.StagingCellNear(map.CellContaining(mid));
+			if (staged.HasValue && !TeamLeadCA.StagingNearMid(mid, map.CenterOfCell(staged.Value), Info.TeamLeadRallyMidStagingCells))
+				staged = null;
 			var sample = TeamLeadPincerSample();
 			var mobile = sample?.TraitOrDefault<Mobile>();
 			if (mobile == null)
@@ -1010,9 +1050,20 @@ namespace OpenRA.Mods.CA.Traits
 			if (!TeamLeadOn || !TeamLeadWaveSquad(s))
 				return false;
 
+			// TEAM-GATHER-02 c3 (gt_bounded_retarget): a squad of a pushed order is not taken back into a team order and its blob is not dismissed (the closed order has no place
+			// for it): it goes on to the next enemy of the focus seat. With nothing known at all it waits idle (the hunt via order), still not dismissed.
+			var goesOn = s.TeamPushSeq > 0 && TeamLeadKeepsGoing(s);
+			if (goesOn && TeamLeadGoOn(s, s.Units[0].Actor))
+			{
+				DiagnosticSquadEvent(s, "team_goon", reason: "seq=" + s.TeamPushSeq);
+				s.FuzzyStateMachine.ChangeState(s, new GroundUnitsAttackMoveStateCA(), false);
+				return true;
+			}
+
 			var now = World.WorldTick;
 			var order = TeamLeadOpenOrder();
-			if (order == null && teamLeadIsLeader)
+			// A pushed squad with nothing known to attack may still join an order that is open, but it never issues a new rally from the leader (CM: no re-issue at home).
+			if (order == null && teamLeadIsLeader && !goesOn)
 				order = TeamLeadTryIssue(s, now);
 
 			if (order != null)
@@ -1025,7 +1076,7 @@ namespace OpenRA.Mods.CA.Traits
 				return true;
 			}
 
-			if (teamLeadIsLeader)
+			if (teamLeadIsLeader || goesOn)
 				return false;
 
 			DiagnosticSquadEvent(s, "team_hold");

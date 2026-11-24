@@ -161,6 +161,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("TEAM-GATHER-02 c2 tl_rally_mid: how far from the allied base centroid toward the target the rally lies, in percent.")]
 		public readonly int TeamLeadRallyMidPercent = 35;
 
+		[Desc("TEAM-GATHER-02 c3 tl_rally_mid: the army staging cell is used for the rally only when it lies within this many cells of the mid point; it is the leader own staging cell and must not pull the rally home.")]
+		public readonly int TeamLeadRallyMidStagingCells = 10;
+
 		[Desc("TEAM-GATHER-02 c2 (release switch; the DEV row is tl_pincer_double). On: a pincer pushes only when the gathered blob is at least twice the WAVE-MIN units and value (each prong meets WAVE-MIN); a thinner one collapses into the single blob.")]
 		public readonly bool TeamLeadPincerDoubleEnabled = false;
 

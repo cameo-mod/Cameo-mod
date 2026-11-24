@@ -591,21 +591,33 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					// TEAM-GATHER-02 (gt_bounded_retarget): a team Rush squad that lost its target looks for the next enemy only around its fight; with none there it goes back
 					// to idle, where the team pass re-joins the open order or stands it down, instead of marching alone to the nearest enemy anywhere.
 					var bounded = owner.SquadManager.TeamLeadBoundsRetarget(owner);
-					var targetActor = bounded
-						? owner.SquadManager.FindClosestEnemy(leader.Actor, WDist.FromCells(owner.SquadManager.Info.AttackScanRadius), owner)
-						: owner.SquadManager.TeamLeadKeepsGoing(owner) ? owner.SquadManager.TeamLeadGoOnTarget(owner, leader.Actor)
-						: owner.SquadManager.FindClosestEnemy(leader.Actor, owner);
-					if (targetActor != null)
-						owner.TargetActor = targetActor;
-					else if (bounded)
+					if (owner.SquadManager.TeamLeadKeepsGoing(owner))
 					{
-						owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);
-						return;
+						// TEAM-GATHER-02 c2/c3: the pushed blob keeps going: the next enemy of the focus seat (a remembered building of it when none is visible). With nothing known at
+						// all it stands idle (the hunt via order / the team pass), it never flees.
+						if (!owner.SquadManager.TeamLeadGoOn(owner, leader.Actor))
+						{
+							owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);
+							return;
+						}
 					}
 					else
 					{
-						owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), false);
-						return;
+						var targetActor = bounded
+							? owner.SquadManager.FindClosestEnemy(leader.Actor, WDist.FromCells(owner.SquadManager.Info.AttackScanRadius), owner)
+							: owner.SquadManager.FindClosestEnemy(leader.Actor, owner);
+						if (targetActor != null)
+							owner.TargetActor = targetActor;
+						else if (bounded)
+						{
+							owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);
+							return;
+						}
+						else
+						{
+							owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), false);
+							return;
+						}
 					}
 				}
 			}
@@ -1327,15 +1339,15 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				return;
 			}
 
-			// TEAM-GATHER-02 c2 (gt_bounded_retarget): the pushed blob keeps going: the next enemy of the order focus seat, until that seat is dead.
+			// TEAM-GATHER-02 c2/c3 (gt_bounded_retarget): the pushed blob keeps going: the next enemy of the order focus seat, until that seat is dead.
 			if (!owner.IsTargetValid && owner.SquadManager.TeamLeadKeepsGoing(owner))
 			{
-				var next = owner.SquadManager.TeamLeadGoOnTarget(owner, owner.Units[0].Actor);
-				if (next != null)
-				{
-					owner.TargetActor = next;
+				if (owner.SquadManager.TeamLeadGoOn(owner, owner.Units[0].Actor))
 					return;
-				}
+
+				// Nothing known at all (visible or remembered): stand idle, the team pass or the hunt via order takes over; the blob never flees.
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);
+				return;
 			}
 
 			if (!owner.IsTargetValid && !FindNewTarget(owner))
@@ -1375,7 +1387,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// HACK: Drop back to the idle state if we haven't moved in 2.5 seconds
 			// This works around the squad being stuck trying to attack-move to a location
 			// that they cannot path to, generating expensive pathfinding calls each tick.
-			if (owner.World.WorldTick > lastUpdatedTick + (owner.SquadManager.Info.UseUpstreamStateTweaks ? 100 : 63)) // CA F2p2 (9a68fea15)
+			// TEAM-GATHER-02 c3: a pushed blob sieging its target (inside the scan radius of it) does not move and is not stuck.
+			if (owner.World.WorldTick > lastUpdatedTick + (owner.SquadManager.Info.UseUpstreamStateTweaks ? 100 : 63) // CA F2p2 (9a68fea15)
+				&& !owner.SquadManager.TeamLeadSieging(owner))
 			{
 				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), true);
 				return;

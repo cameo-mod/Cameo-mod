@@ -297,6 +297,12 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>TEAM-GATHER-02 c2 tl_pincer_double: both prongs meet WAVE-MIN only when the gathered blob holds twice the bars.</summary>
 		public static bool PincerGathered(int units, long value, int waveMinUnits, long waveMinValue) => units >= 2 * waveMinUnits && value >= 2 * waveMinValue;
 
+		/// <summary>TEAM-GATHER-02 c3 gt_bounded_retarget: a pushed blob that stands within the scan radius of a valid target is sieging it: the stuck rule (no move for 100 ticks) does not drop it to idle.</summary>
+		public static bool SiegeHolds(bool pushedAndKeepsGoing, bool targetValid, long distanceSquared, long scanRadiusSquared) => pushedAndKeepsGoing && targetValid && distanceSquared <= scanRadiusSquared;
+
+		/// <summary>TEAM-GATHER-02 c3 tl_rally_mid: the army staging cell counts for the rally only close to the mid point.</summary>
+		public static bool StagingNearMid(WPos mid, WPos staging, int cells) => (staging - mid).HorizontalLengthSquared <= (long)Math.Max(0, cells) * CellUnits * Math.Max(0, cells) * CellUnits;
+
 		/// <summary>TEAM-GATHER-02 c2 tl_rally_mid: the point <paramref name="percent"/> percent (0-100) of the way from <paramref name="from"/> to <paramref name="to"/>.</summary>
 		public static WPos RallyBetween(WPos from, WPos to, int percent)
 		{

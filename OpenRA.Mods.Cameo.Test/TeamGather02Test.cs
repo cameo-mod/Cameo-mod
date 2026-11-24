@@ -45,7 +45,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(TeamLeadCA.KeepsGoing(false, 40, 0), Is.False, "WAVE-MIN off: only the pushed order exempts");
 
 			var states = RepoFile(Bots + "Squads/States/GroundStatesCA.cs");
-			Assert.That(states, Does.Contain(": owner.SquadManager.TeamLeadKeepsGoing(owner) ? owner.SquadManager.TeamLeadGoOnTarget(owner, leader.Actor)"), "AttackMove: the next enemy of the focus seat");
+			Assert.That(states, Does.Contain("if (!owner.SquadManager.TeamLeadGoOn(owner, leader.Actor))"), "AttackMove: the next enemy of the focus seat");
 			Assert.That(states, Does.Contain("if (!owner.IsTargetValid && owner.SquadManager.TeamLeadKeepsGoing(owner))"), "Attack state: the same");
 
 			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
@@ -53,7 +53,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(wiring, Does.Contain("TeamLeadCA.KeepsGoing(s.TeamPushSeq > 0, s.Units.Count, WaveMinActive ? WaveMinBars().Units : 0)"));
 			Assert.That(wiring, Does.Contain("squad.TeamPushSeq = order.Seq;"), "set when the squad is pushed");
 			Assert.That(wiring, Does.Contain("s.TeamPushSeq = 0;"), "cleared when it joins the next order");
-			Assert.That(wiring, Does.Contain("return (seat != null ? FindClosestEnemy(leader.Location, SquadValueOf(s), seat, s) : null) ?? FindClosestEnemy(leader, s);"), "the focus seat first, then the old nearest pick");
+			Assert.That(wiring, Does.Contain("var pick = seat != null ? FindClosestEnemy(leader.Location, SquadValueOf(s), seat, s) : null;"), "the focus seat first");
+			Assert.That(wiring, Does.Contain("pick ??= FindClosestEnemy(leader, s);"), "then the old nearest pick");
 			Assert.That(wiring, Does.Contain("var focus = TeamLeadFocusPlayer();\n\t\t\tif (focus != null)\n\t\t\t\treturn focus;"));
 			Assert.That(RepoFile(Bots + "Squads/SquadCA.cs"), Does.Contain("public int TeamPushSeq;"));
 		}
@@ -122,6 +123,53 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void ASiegingPushedBlobStaysPushedAndIsNeverFledOrDismissed()
+		{
+			// The stuck rule (no move for 100 ticks) must not drop a pushed blob that stands at its target shooting it.
+			var scan = 12L * 1024;
+			Assert.That(TeamLeadCA.SiegeHolds(true, true, 8L * 1024 * 8 * 1024, scan * scan), Is.True, "pushed, valid target, 8 cells away: sieging");
+			Assert.That(TeamLeadCA.SiegeHolds(true, true, 30L * 1024 * 30 * 1024, scan * scan), Is.False, "30 cells away: really stuck, the old rule applies");
+			Assert.That(TeamLeadCA.SiegeHolds(true, false, 0, scan * scan), Is.False, "no valid target");
+			Assert.That(TeamLeadCA.SiegeHolds(false, true, 0, scan * scan), Is.False, "not a pushed blob");
+
+			var states = RepoFile(Bots + "Squads/States/GroundStatesCA.cs");
+			Assert.That(states, Does.Contain("+ (owner.SquadManager.Info.UseUpstreamStateTweaks ? 100 : 63) // CA F2p2 (9a68fea15)\n\t\t\t\t&& !owner.SquadManager.TeamLeadSieging(owner))"), "the stuck rule leaves a sieging blob alone");
+
+			// Nothing known at all: idle, never Flee, in both states.
+			var keeps = states[states.IndexOf("if (owner.SquadManager.TeamLeadKeepsGoing(owner))", StringComparison.Ordinal)..];
+			keeps = keeps[..keeps.IndexOf("else\n", StringComparison.Ordinal)];
+			Assert.That(keeps, Does.Contain("new GroundUnitsIdleStateCA()"));
+			Assert.That(keeps, Does.Not.Contain("Flee"), "the pushed blob never flees");
+			Assert.That(states, Does.Not.Contain("TeamLeadGoOnTarget"));
+
+			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
+			Assert.That(wiring, Does.Contain("if (pick == null && seat != null && FoggedScans && FindFrozenEnemyTarget(leader.CenterPosition, -1, s, seat) is { } frozenSeat)"), "a remembered building of the focus seat");
+			Assert.That(wiring, Does.Contain("if (seat == null && FoggedScans && FindFrozenEnemyTarget(leader.CenterPosition, -1, s) is { } frozen)"));
+			Assert.That(wiring, Does.Contain("if (!s.IsValid || s.TeamPushSeq <= 0 || !s.IsTargetValid || !TeamLeadKeepsGoing(s))\n\t\t\t\treturn false;"));
+
+			// TeamLeadPrepare: a pushed squad attacks on (never joins a new order first, never dismissed); nothing known = it waits, still not dismissed.
+			Assert.That(wiring, Does.Contain("var goesOn = s.TeamPushSeq > 0 && TeamLeadKeepsGoing(s);"));
+			Assert.That(wiring, Does.Contain("if (goesOn && TeamLeadGoOn(s, s.Units[0].Actor))"));
+			Assert.That(wiring, Does.Contain("if (order == null && teamLeadIsLeader && !goesOn)\n\t\t\t\torder = TeamLeadTryIssue(s, now);"), "no rally re-issued from a pushed squad");
+			Assert.That(wiring, Does.Contain("if (teamLeadIsLeader || goesOn)\n\t\t\t\treturn false;\n\n\t\t\tDiagnosticSquadEvent(s, \"team_hold\");"));
+		}
+
+		[Test]
+		public void TheMidRallyIsNotPulledBackToTheLeaderStagingCellAndSkipsPlayersWithoutABase()
+		{
+			var mid = new WPos(10240, 5120, 0);
+			Assert.That(TeamLeadCA.StagingNearMid(mid, new WPos(10240 + 9 * 1024, 5120, 0), 10), Is.True, "9 cells from the mid point: close enough");
+			Assert.That(TeamLeadCA.StagingNearMid(mid, new WPos(10240 + 10 * 1024, 5120, 0), 10), Is.True, "exactly 10 cells");
+			Assert.That(TeamLeadCA.StagingNearMid(mid, new WPos(10240 + 11 * 1024, 5120, 0), 10), Is.False, "11 cells: the leader own cell, not used");
+			Assert.That(TeamLeadCA.StagingNearMid(mid, mid, 0), Is.True);
+
+			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
+			Assert.That(wiring, Does.Contain("if (staged.HasValue && !TeamLeadCA.StagingNearMid(mid, map.CenterOfCell(staged.Value), Info.TeamLeadRallyMidStagingCells))\n\t\t\t\tstaged = null;"));
+			Assert.That(wiring, Does.Contain("else if (p.HomeLocation != CPos.Zero)"), "a player without a base building and without a start location is skipped");
+			Assert.That(RepoFile(Bots + "SquadManagerBotModuleCAInfo.TeamLead.cs"), Does.Contain("public readonly int TeamLeadRallyMidStagingCells = 10;"));
+		}
+
+		[Test]
 		public void AllyDefenceLeavesASquadInTheOrderOrJustFormedAlone()
 		{
 			Assert.That(TeamLeadCA.SquadKeptForOrder(true, true, 5000, 100, 100), Is.True, "gathering for the open order: kept");
@@ -172,7 +220,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var states = RepoFile(Bots + "Squads/States/GroundStatesCA.cs");
 			Assert.That(states, Does.Contain("var bounded = owner.SquadManager.TeamLeadBoundsRetarget(owner);"));
 			Assert.That(states, Does.Contain("? owner.SquadManager.FindClosestEnemy(leader.Actor, WDist.FromCells(owner.SquadManager.Info.AttackScanRadius), owner)"));
-			Assert.That(states, Does.Contain("else if (bounded)\n\t\t\t\t\t{\n\t\t\t\t\t\towner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);"));
+			Assert.That(states, Does.Contain("else if (bounded)\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\towner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);"));
 			Assert.That(states, Does.Contain("if (!owner.IsTargetValid && owner.SquadManager.TeamLeadBoundsRetarget(owner))"), "the attack state is bounded too");
 			Assert.That(states, Does.Contain("TeamLeadHuntsViaOrder(owner)"), "the finish hunt and its arrival go through the order");
 
