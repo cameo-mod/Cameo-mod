@@ -230,7 +230,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
 			Assert.That(wiring, Does.Contain("Info.TeamLeadEnabled && Info.AggTeamEnabled && !ablateTeamLead.Off(Player, AblationIds.TeamLead)"));
-			Assert.That(wiring, Does.Contain("TeamLeadCA.Engaged(seats, team.Election)"), "a team of one bot plays as before");
+			Assert.That(wiring, Does.Contain("TeamLeadCA.Engaged(seats, team.Election, TeamLeadSoloOn ? 1 : 2)"), "a team of one bot plays as before (two living bots needed) unless the tl_solo_lead switch is on");
 			Assert.That(wiring, Does.Contain("BotPeriod.CarryDue(ref teamLeadNextCheck, now, Info.TeamLeadCheckTicks)"), "at most one pass per check interval");
 			Assert.That(wiring, Does.Contain("m.TeamLeadActive"), "only bots that can take orders hold a seat");
 			Assert.That(wiring, Does.Not.Contain("IssueOrder"), "orders go through the squads and bot.QueueOrder only");

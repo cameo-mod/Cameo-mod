@@ -275,7 +275,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(body, Does.Contain("order.Prune("), "a rally order still drops squads that left it");
 
 			var join = wiring[wiring.IndexOf("void TeamLeadJoin(", StringComparison.Ordinal)..wiring.IndexOf("bool TeamLeadPickTarget(", StringComparison.Ordinal)];
-			Assert.That(join, Does.Contain("(order.Seq == teamLeadJoinedSeq && !order.GatherOnly && !order.Extending)"), "an attack order is joined once, a rally (or held) order again and again");
+			Assert.That(join, Does.Contain("(!AllInCA.JoinsAgain(order.AllIn, teamLeadJoinedSeq, order.Seq) && !order.GatherOnly && !order.Extending)"), "an attack order is joined once, a rally (or held) order again and again");
 			Assert.That(join, Does.Contain("teamLeadIsLeader && !order.GatherOnly && !order.Extending ? Info.TeamLeadLeaderMinUnits : Info.TeamLeadJoinMinUnits"), "no one-unit rally squads");
 
 			Assert.That(wiring, Does.Contain("void TeamLeadPromoteRally(TeamLeadOrder order, int now)"));
@@ -478,7 +478,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(wiring, Does.Contain("order.Open(World.WorldTick, TeamLeadPushBarOn ? 0 : Info.TeamLeadLateJoinTicks)"), "no late joiner follows a push alone");
 
 			var join = wiring[wiring.IndexOf("void TeamLeadJoin(", StringComparison.Ordinal)..wiring.IndexOf("bool TeamLeadPickTarget(", StringComparison.Ordinal)];
-			Assert.That(join, Does.Contain("(order.Seq == teamLeadJoinedSeq && !order.GatherOnly && !order.Extending)"), "a held order keeps merging new groups");
+			Assert.That(join, Does.Contain("(!AllInCA.JoinsAgain(order.AllIn, teamLeadJoinedSeq, order.Seq) && !order.GatherOnly && !order.Extending)"), "a held order keeps merging new groups");
 		}
 
 		[Test]

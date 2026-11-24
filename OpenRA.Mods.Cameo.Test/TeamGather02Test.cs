@@ -273,9 +273,9 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(wiring, Does.Contain("!Info.ArtilleryTypes.Contains(u.Actor.Info.Name) && !Info.FireSupportTypes.Contains(u.Actor.Info.Name)"));
 
 			// Merge: a rally or held order takes the joinable units into the gathering squad; a new squad needs a real group; the join counts only for a formed squad.
-			Assert.That(wiring, Does.Contain("if (TeamLeadJoinMergeOn && (order.GatherOnly || order.Extending))"));
+			Assert.That(wiring, Does.Contain("if (TeamLeadJoinMergeOn && (order.GatherOnly || order.Extending || order.AllIn))"));
 			Assert.That(wiring, Does.Contain("if (TeamLeadMergeIntoGatherSquad(bot, order))\n\t\t\t\t\treturn;"));
-			Assert.That(wiring, Does.Contain("if (unitsHangingAroundTheBase.Count(TeamLeadJoinable) < Info.TeamLeadJoinMinUnits)\n\t\t\t\t\treturn;"));
+			Assert.That(wiring, Does.Contain("if (unitsHangingAroundTheBase.Count(TeamLeadJoinable) < AllInCA.JoinMinUnits(order.AllIn, Info.TeamLeadJoinMinUnits, Info.TeamLeadAllInJoinMinUnits))\n\t\t\t\t\treturn;"));
 			Assert.That(wiring, Does.Contain("(!TeamLeadJoinMergeOn || Squads.Any(q => q.IsValid && q.Type == SquadCAType.Rush && q.FormedTick == now)))\n\t\t\t\tteamLeadJoinedSeq = order.Seq;"));
 
 			// The rally publish floor: BlobLaunch01CA.MinUnits bar and the value bar, joinable units only.
@@ -305,7 +305,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(wiring, Does.Contain("System.Math.Clamp(max, fixedRange.Length, System.Math.Max(fixedRange.Length, WDist.FromCells(Info.AttackScanRadius).Length))"));
 
 			// Late hunt: the order target is the one hunt cell (actor id 0 = a position, which TeamLeadResolveTarget turns into the squads' HuntCell).
-			Assert.That(wiring, Does.Contain("if (TeamLeadHuntViaOrderOn && FinishModeActive"));
+			Assert.That(wiring, Does.Contain("if (((TeamLeadHuntViaOrderOn && FinishModeActive) || teamLeadAllInPicking)"));
 			Assert.That(wiring, Does.Contain("target = World.Map.CenterOfCell(hunt);\n\t\t\t\tactorId = 0;\n\t\t\t\treturn true;"));
 			Assert.That(RepoFile(Bots + "Squads/States/GroundStatesCA.cs"), Does.Contain("Stalemate01CA.Hunts(owner.Type) && !owner.SquadManager.TeamLeadHuntsViaOrder(owner))"));
 		}

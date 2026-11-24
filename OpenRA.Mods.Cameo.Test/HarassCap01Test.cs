@@ -240,13 +240,13 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheRecallJoinsIdleAndMarchingRaidersToTheOpenOrderAndTheReportGraceCountsFromTheLastReport()
 		{
 			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
-			Assert.That(wiring, Does.Contain("return s.Type is SquadCAType.Guerrilla or SquadCAType.Harass && TeamLeadRaiderRecallOn"));
+			Assert.That(wiring, Does.Contain("return s.Type is SquadCAType.Guerrilla or SquadCAType.Harass && (TeamLeadRaiderRecallOn || TeamLeadAllInOrderOpen)"));
 			Assert.That(wiring, Does.Contain("(AggTeamIsQuietState(state) || state is GroundUnitsAttackMoveStateCA) && !AggTeamSquadDefends(s);"), "a squad in a fight finishes it");
 			Assert.That(wiring, Does.Contain("s.Type is SquadCAType.Guerrilla or SquadCAType.Harass && TeamLeadWaveSquad(s) && TeamLeadOpenOrder() is { } recalled && !TeamLeadRaiderInContact(s))"),
 				"CM FIX: a marching raider squad with an enemy in its scan radius is in contact and is never pulled out of it");
 			Assert.That(wiring, Does.Contain("s.FuzzyStateMachine?.CurrentState is GroundUnitsAttackMoveStateCA"));
 			Assert.That(wiring, Does.Contain("FindClosestEnemy(s.Units[0].Actor, WDist.FromCells(Info.AttackScanRadius), s) != null;"), "the same scan the gather state makes");
-			Assert.That(wiring, Does.Contain("TeamLeadRaiderRecallOn && !s.IsHunting"), "a finish-mode hunting squad keeps its hunt");
+			Assert.That(wiring, Does.Contain("(TeamLeadRaiderRecallOn || TeamLeadAllInOrderOpen) && !s.IsHunting"), "a finish-mode hunting squad keeps its hunt");
 			var blob = wiring[wiring.IndexOf("(int Units, long Value) TeamLeadBlob()", StringComparison.Ordinal)..wiring.IndexOf("bool TeamLeadWaveSquad(SquadCA s)", StringComparison.Ordinal)];
 			Assert.That(blob, Does.Not.Contain("TeamLeadRaiderInContact"), "the blob count never runs the enemy scan");
 			Assert.That(wiring.IndexOf("TeamLeadOpenOrder() is { } recalled", StringComparison.Ordinal), Is.LessThan(wiring.IndexOf("s.Type is SquadCAType.Guerrilla or SquadCAType.Harass && TeamLeadJointHarassOn", StringComparison.Ordinal)), "the recall is asked before the joint harass group");
