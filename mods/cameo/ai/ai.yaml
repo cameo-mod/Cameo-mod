@@ -66,20 +66,21 @@
 	GrantConditionOnBotOwner@inc3f1:
 		Condition: inc3_frans_services
 		Bots: noob, easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
+	# CN-ARM-01 (Opus 11-24): cn2_unit_repair, cn2_garrison_defense and cn3_bridge_repair are armed for every genericbot tier + personality bot (not classic).
 	# CN2 unit-repair manager + garrison defence: the arm flips these to the genericbot tier list in the
 	# increment A/B (tools/ai/increment_switches.yaml); default grants to fransbot only - inert on master.
 	GrantConditionOnBotOwner@cn2unitrepair:
 		Condition: cn2_unit_repair
-		Bots: fransbot
+		Bots: fransbot, noob, easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	GrantConditionOnBotOwner@cn2garrison:
 		Condition: cn2_garrison_defense
-		Bots: fransbot
+		Bots: fransbot, noob, easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	GrantConditionOnBotOwner@cn3deploy:
 		Condition: cn3_deploy
 		Bots: fransbot
 	GrantConditionOnBotOwner@cn3bridgerepair:
 		Condition: cn3_bridge_repair
-		Bots: fransbot
+		Bots: fransbot, noob, easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	GrantConditionOnBotOwner@plugspawn:
 		Condition: plug_spawn
 		Bots: fransbot
@@ -4793,6 +4794,9 @@ Player:
 		AggressionMinDispatchValue: 1000
 		PreferMainTarget: true
 		AirPriorityTags: artillery, harvester
+		# CN-ARM-01 (6g ground target tags, soft preference only): rush squads prefer artillery and production, assault squads production and superweapons.
+		RushPriorityTags: artillery, production
+		AssaultPriorityTags: production, superweapon
 		StageBeforeAssault: true
 		MinimumAttackForceDelay: 400
 		SquadSize: 3
@@ -4923,6 +4927,9 @@ Player:
 		AggressionMinDispatchValue: 1000
 		PreferMainTarget: true
 		AirPriorityTags: artillery, harvester
+		# CN-ARM-01 (6g ground target tags, soft preference only): rush squads prefer artillery and production, assault squads production and superweapons.
+		RushPriorityTags: artillery, production
+		AssaultPriorityTags: production, superweapon
 		StageBeforeAssault: true
 		MinimumAttackForceDelay: 2500
 		SquadSize: 8
@@ -5052,6 +5059,9 @@ Player:
 		AggressionMinDispatchValue: 1000
 		PreferMainTarget: true
 		AirPriorityTags: artillery, harvester
+		# CN-ARM-01 (6g ground target tags, soft preference only): rush squads prefer artillery and production, assault squads production and superweapons.
+		RushPriorityTags: artillery, production
+		AssaultPriorityTags: production, superweapon
 		StageBeforeAssault: true
 		MinimumAttackForceDelay: 1800
 		SquadSize: 6
@@ -5180,6 +5190,9 @@ Player:
 		AggressionMinDispatchValue: 1000
 		PreferMainTarget: true
 		AirPriorityTags: artillery, harvester
+		# CN-ARM-01 (6g ground target tags, soft preference only): rush squads prefer artillery and production, assault squads production and superweapons.
+		RushPriorityTags: artillery, production
+		AssaultPriorityTags: production, superweapon
 		StageBeforeAssault: true
 		MinimumAttackForceDelay: 1200
 		SquadSize: 5
@@ -5308,6 +5321,9 @@ Player:
 		AggressionMinDispatchValue: 1000
 		PreferMainTarget: true
 		AirPriorityTags: artillery, harvester
+		# CN-ARM-01 (6g ground target tags, soft preference only): rush squads prefer artillery and production, assault squads production and superweapons.
+		RushPriorityTags: artillery, production
+		AssaultPriorityTags: production, superweapon
 		StageBeforeAssault: true
 		MinimumAttackForceDelay: 2000
 		SquadSize: 12
@@ -5435,6 +5451,9 @@ Player:
 		AggressionMinDispatchValue: 1000
 		PreferMainTarget: false
 		AirPriorityTags: artillery, harvester
+		# CN-ARM-01 (6g ground target tags, soft preference only): rush squads prefer artillery and production, assault squads production and superweapons.
+		RushPriorityTags: artillery, production
+		AssaultPriorityTags: production, superweapon
 		StageBeforeAssault: false
 		MinimumAttackForceDelay: 700
 		SquadSize: 3
