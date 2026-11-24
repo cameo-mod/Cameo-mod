@@ -6004,7 +6004,7 @@ Player:
 		# (or net income per producer over the line) queues another production building for the
 		# least-provisioned queue type. SwitchCondition-gated — classic keeps today's behaviour.
 		# Enabled for the maintainer's 2026-10-15 combined playtest (BZ).
-		UseProductionScaling: true
+		UseProductionScaling: false
 		BuildingProductionMinCashRequirement: 1000
 		DefenseProductionMinCashRequirement: 1500
 		BuildingQueues: Building, RABuilding, BuildingAddons
@@ -6329,7 +6329,7 @@ Player:
 		# Generic-only: classic retains its existing production rules.
 		SwitchCondition: genericbot
 		BankSaturationCash: 1
-		CapturerInfantryLimitPct: 5
+		CapturerInfantryLimitPct: 10
 		CapturerMinimumUnits: 2
 		CapturerAllowanceMax: 4
 		UseCompositions: true
@@ -6337,7 +6337,7 @@ Player:
 		# personality's RoleMix x each unit's Versus-weighted strength. Armed on every tier (PROD-IDLE G1).
 		# Classic is unaffected: it carries no RoleMix and no IBotUnitRoles provider, so the same
 		# @generic instance keeps the yaml table there.
-		UseDerivedUnitWeights: true
+		UseDerivedUnitWeights: false
 		# PROD-IDLE G1: the fair producer service replaces the legacy fill loop for genericbot (SwitchCondition above);
 		# classic keeps the legacy loop byte-identically.
 		FairProducerService: true
