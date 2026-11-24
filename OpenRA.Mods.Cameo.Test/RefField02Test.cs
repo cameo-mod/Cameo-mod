@@ -58,30 +58,64 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void TheEconomyRungGoesRefineryWarFactoryRefinery()
 		{
-			Assert.That(RefineryFieldGateCA.Economy(true, 0, false, true, false, 100, -1, 1500, false, -1, 1500), Is.EqualTo(V.Allow), "ref1 is never gated");
-			Assert.That(RefineryFieldGateCA.Economy(true, 1, false, true, false, 5000, 100, 1500, false, -1, 1500), Is.EqualTo(V.WaitFactory));
-			Assert.That(RefineryFieldGateCA.Economy(true, 1, false, true, true, 5000, 100, 1500, false, -1, 1500), Is.EqualTo(V.Allow));
-			Assert.That(RefineryFieldGateCA.Economy(true, 1, false, false, false, 5000, 100, 1500, false, -1, 1500), Is.EqualTo(V.Allow),
+			Assert.That(RefineryFieldGateCA.Economy(true, 0, false, true, false, false, 100, -1, 1500, false, -1, 1500), Is.EqualTo(V.Allow), "ref1 is never gated");
+			Assert.That(RefineryFieldGateCA.Economy(true, 1, false, true, false, false, 5000, 100, 1500, false, -1, 1500), Is.EqualTo(V.WaitFactory));
+			Assert.That(RefineryFieldGateCA.Economy(true, 1, false, true, true, false, 5000, 100, 1500, false, -1, 1500), Is.EqualTo(V.Allow));
+			Assert.That(RefineryFieldGateCA.Economy(true, 1, false, false, false, false, 5000, 100, 1500, false, -1, 1500), Is.EqualTo(V.Allow),
 				"a faction that cannot build a vehicle factory yet is not held");
+		}
+
+		[Test]
+		public void TheWarFactoryWaitNeverDeadlocks()
+		{
+			// CM FIX / Opus ruling: banned or out of placement budget, or 1500 ticks after ref1 stood; never before ref1 stood otherwise.
+			Assert.That(RefineryFieldGateCA.FactoryWaitReleased(false, false, 2000, 1000, 1500), Is.False);
+			Assert.That(RefineryFieldGateCA.FactoryWaitReleased(true, false, 2000, 1000, 1500), Is.True, "no-space banned");
+			Assert.That(RefineryFieldGateCA.FactoryWaitReleased(false, true, 2000, 1000, 1500), Is.True, "placement budget used up");
+			Assert.That(RefineryFieldGateCA.FactoryWaitReleased(false, false, 2500, 1000, 1500), Is.True, "1500 ticks after ref1");
+			Assert.That(RefineryFieldGateCA.FactoryWaitReleased(false, false, 99999, -1, 1500), Is.False, "ref1 still in production");
+
+			// A buildable but banned factory: ref2 waits for the factory while not released, and goes ahead once released.
+			Assert.That(RefineryFieldGateCA.Economy(true, 1, false, true, false, false, 5000, 100, 1500, false, -1, 1500), Is.EqualTo(V.WaitFactory));
+			var released = RefineryFieldGateCA.FactoryWaitReleased(true, false, 5000, 4900, 1500);
+			Assert.That(RefineryFieldGateCA.Economy(true, 1, false, true, false, released, 5000, 100, 1500, false, -1, 1500), Is.EqualTo(V.Allow));
+
+			// The interval still applies after the release.
+			Assert.That(RefineryFieldGateCA.Economy(true, 1, false, true, false, true, 5000, 4000, 1500, false, -1, 1500), Is.EqualTo(V.WaitInterval));
+		}
+
+		[Test]
+		public void TheFactoryPlacementBudgetFeedsTheReleaseAndTheHoldLogIsDebounced()
+		{
+			var s = Source("mods/CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs");
+			Assert.That(s, Does.Contain("if (baseBuilder.Info.VehiclesFactoryTypes.Contains(currentBuilding.Item))\n							baseBuilder.RefineryGateFactoryPlacementFailed = true;"));
+			Assert.That(s, Does.Contain("RefineryFieldGateCA.FactoryWaitReleased(b.VehiclesFactoryTypes.Any(NoSpaceBanned),"));
+			Assert.That(s, Does.Contain("if (verdict != lastRefineryEconomyVerdict)"));
+
+			// The placement-budget flag is set inside the saturation branch, after the max-fail check.
+			var budget = s.IndexOf("else if (++failCount >= baseBuilder.Info.MaximumFailedPlacementAttempts)", StringComparison.Ordinal);
+			var flag = s.IndexOf("baseBuilder.RefineryGateFactoryPlacementFailed = true;", StringComparison.Ordinal);
+			Assert.That(budget, Is.GreaterThan(0));
+			Assert.That(flag, Is.GreaterThan(budget));
 		}
 
 		[Test]
 		public void RefineriesKeepTheMinimumIntervalAndYieldToFirstCopiesForABoundedTime()
 		{
-			Assert.That(RefineryFieldGateCA.Economy(true, 2, false, true, true, 1000, 100, 1500, false, -1, 1500), Is.EqualTo(V.WaitInterval));
-			Assert.That(RefineryFieldGateCA.Economy(true, 2, false, true, true, 1600, 100, 1500, false, -1, 1500), Is.EqualTo(V.Allow));
-			Assert.That(RefineryFieldGateCA.Economy(true, 2, false, true, true, 1600, 100, 1500, true, 1600, 1500), Is.EqualTo(V.YieldEssential));
-			Assert.That(RefineryFieldGateCA.Economy(true, 2, false, true, true, 3200, 100, 1500, true, 1600, 1500), Is.EqualTo(V.Allow),
+			Assert.That(RefineryFieldGateCA.Economy(true, 2, false, true, true, false, 1000, 100, 1500, false, -1, 1500), Is.EqualTo(V.WaitInterval));
+			Assert.That(RefineryFieldGateCA.Economy(true, 2, false, true, true, false, 1600, 100, 1500, false, -1, 1500), Is.EqualTo(V.Allow));
+			Assert.That(RefineryFieldGateCA.Economy(true, 2, false, true, true, false, 1600, 100, 1500, true, 1600, 1500), Is.EqualTo(V.YieldEssential));
+			Assert.That(RefineryFieldGateCA.Economy(true, 2, false, true, true, false, 3200, 100, 1500, true, 1600, 1500), Is.EqualTo(V.Allow),
 				"the yield ends after the yield time");
-			Assert.That(RefineryFieldGateCA.Economy(true, 1, false, true, true, 3200, 100, 1500, true, 3200, 1500), Is.EqualTo(V.Allow),
+			Assert.That(RefineryFieldGateCA.Economy(true, 1, false, true, true, false, 3200, 100, 1500, true, 3200, 1500), Is.EqualTo(V.Allow),
 				"ref2 does not yield (only the third refinery on)");
 		}
 
 		[Test]
 		public void AYardWithoutARefinerySkipsTheEconomyGateAndTheRowOffIsUnchanged()
 		{
-			Assert.That(RefineryFieldGateCA.Economy(true, 3, true, true, false, 1000, 990, 1500, true, 1000, 1500), Is.EqualTo(V.Allow), "expansion refinery first");
-			Assert.That(RefineryFieldGateCA.Economy(false, 3, false, true, false, 1000, 990, 1500, true, 1000, 1500), Is.EqualTo(V.Allow));
+			Assert.That(RefineryFieldGateCA.Economy(true, 3, true, true, false, false, 1000, 990, 1500, true, 1000, 1500), Is.EqualTo(V.Allow), "expansion refinery first");
+			Assert.That(RefineryFieldGateCA.Economy(false, 3, false, true, false, false, 1000, 990, 1500, true, 1000, 1500), Is.EqualTo(V.Allow));
 		}
 
 		[Test]

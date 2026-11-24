@@ -46,17 +46,26 @@ namespace OpenRA.Mods.CA.Traits
 		public static bool Blocks(bool on, int ownRefineries, bool capped, bool locked) => on && ownRefineries > 0 && (capped || locked);
 
 		/// <summary>
+		/// REF-FIELD-02 c2 (CM FIX, Opus ruling): the war-factory wait never deadlocks. It ends when a vehicle factory type is no-space banned
+		/// or used up its placement budget, or <paramref name="waitTicks"/> after the first refinery stood (<paramref name="firstStoodTick"/>
+		/// negative = not yet). "No vehicle factory buildable" is the factoryBuildable input of <see cref="Economy"/>.
+		/// </summary>
+		public static bool FactoryWaitReleased(bool factoryBanned, bool placementFailed, int now, int firstStoodTick, int waitTicks) =>
+			factoryBanned || placementFailed || (firstStoodTick >= 0 && now - firstStoodTick >= waitTicks);
+
+		/// <summary>
 		/// The economy rung's verdict for the next refinery. <paramref name="refineries"/> = owned + in production; <paramref name="yardWithoutRefinery"/> =
 		/// an own construction yard has no own refinery near it; <paramref name="lastRefineryTick"/> = when the count last rose (negative = never);
-		/// <paramref name="yieldSince"/> = when a pending first copy was first seen (negative = not yet).
+		/// <paramref name="yieldSince"/> = when a pending first copy was first seen (negative = not yet); <paramref name="factoryWaitReleased"/> =
+		/// <see cref="FactoryWaitReleased"/>.
 		/// </summary>
 		public static EconomyVerdict Economy(bool on, int refineries, bool yardWithoutRefinery, bool factoryBuildable, bool factoryOwnedOrQueued,
-			int now, int lastRefineryTick, int minIntervalTicks, bool essentialPending, int yieldSince, int yieldTicks)
+			bool factoryWaitReleased, int now, int lastRefineryTick, int minIntervalTicks, bool essentialPending, int yieldSince, int yieldTicks)
 		{
 			if (!on || refineries <= 0 || yardWithoutRefinery)
 				return EconomyVerdict.Allow;
 
-			if (factoryBuildable && !factoryOwnedOrQueued)
+			if (factoryBuildable && !factoryOwnedOrQueued && !factoryWaitReleased)
 				return EconomyVerdict.WaitFactory;
 
 			if (lastRefineryTick >= 0 && now - lastRefineryTick < minIntervalTicks)

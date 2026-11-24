@@ -1513,6 +1513,10 @@ namespace OpenRA.Mods.CA.Traits
 						if (NoSpaceBanOn)
 							noSpaceBan[currentBuilding.Item] = (world.WorldTick + baseBuilder.Info.NoSpaceBanTicks, world.ActorsHavingTrait<BaseProvider>().Count(a => a.Owner == player));
 
+						// REF-FIELD-02 c2: a vehicle factory with nowhere to go releases the war-factory wait before ref2 (read only by row rf_economy_gate).
+						if (baseBuilder.Info.VehiclesFactoryTypes.Contains(currentBuilding.Item))
+							baseBuilder.RefineryGateFactoryPlacementFailed = true;
+
 						// FIX-RA-REFINERY R1: the latch snapshot is taken at every saturation —
 						// the old `BaseExpansionModules == null` guard never ran (the array is
 						// never null), which left the recovery probe comparing stale or
@@ -2710,11 +2714,16 @@ namespace OpenRA.Mods.CA.Traits
 				baseBuilder.RefineryGateLastRiseTick = now;
 
 			baseBuilder.RefineryGateLastCount = count;
-			var factoryBuildable = buildableThings.Any(a => baseBuilder.Info.VehiclesFactoryTypes.Contains(a.Name));
-			var factoryOwnedOrQueued = baseBuilder.VehicleFactoryOwnedOrQueued();
-			var yardWithoutRefinery = count > 0 && baseBuilder.YardWithoutRefinery();
+			if (baseBuilder.RefineryGateFirstStoodTick < 0 && AIUtils.CountActorByCommonName(baseBuilder.RefineryBuildings) > 0)
+				baseBuilder.RefineryGateFirstStoodTick = now;
+
 			var b = baseBuilder.Info;
-			var verdict = RefineryFieldGateCA.Economy(true, count, yardWithoutRefinery, factoryBuildable, factoryOwnedOrQueued, now,
+			var factoryBuildable = buildableThings.Any(a => b.VehiclesFactoryTypes.Contains(a.Name));
+			var factoryOwnedOrQueued = baseBuilder.VehicleFactoryOwnedOrQueued();
+			var factoryWaitReleased = RefineryFieldGateCA.FactoryWaitReleased(b.VehiclesFactoryTypes.Any(NoSpaceBanned),
+				baseBuilder.RefineryGateFactoryPlacementFailed, now, baseBuilder.RefineryGateFirstStoodTick, b.RefineryFactoryWaitTicks);
+			var yardWithoutRefinery = count > 0 && baseBuilder.YardWithoutRefinery();
+			var verdict = RefineryFieldGateCA.Economy(true, count, yardWithoutRefinery, factoryBuildable, factoryOwnedOrQueued, factoryWaitReleased, now,
 				baseBuilder.RefineryGateLastRiseTick, b.RefineryMinIntervalTicks, false, -1, b.RefineryEssentialYieldTicks);
 
 			// The first-copy scan runs only when the earlier steps admit the refinery and two refineries already stand or are queued.
@@ -2726,16 +2735,22 @@ namespace OpenRA.Mods.CA.Traits
 				else if (baseBuilder.RefineryGateYieldSince < 0)
 					baseBuilder.RefineryGateYieldSince = now;
 
-				verdict = RefineryFieldGateCA.Economy(true, count, yardWithoutRefinery, factoryBuildable, factoryOwnedOrQueued, now,
+				verdict = RefineryFieldGateCA.Economy(true, count, yardWithoutRefinery, factoryBuildable, factoryOwnedOrQueued, factoryWaitReleased, now,
 					baseBuilder.RefineryGateLastRiseTick, b.RefineryMinIntervalTicks, essential, baseBuilder.RefineryGateYieldSince, b.RefineryEssentialYieldTicks);
 			}
 
-			if (verdict == RefineryFieldGateCA.EconomyVerdict.Allow)
-				return false;
+			// CM NIT: logged once per verdict change, not on every call.
+			if (verdict != lastRefineryEconomyVerdict)
+			{
+				lastRefineryEconomyVerdict = verdict;
+				if (verdict != RefineryFieldGateCA.EconomyVerdict.Allow)
+					AIUtils.BotDebug("{0} holds the refinery pick: {1} (refineries {2})", queue.Actor.Owner, verdict, count);
+			}
 
-			AIUtils.BotDebug("{0} holds the refinery pick: {1} (refineries {2})", queue.Actor.Owner, verdict, count);
-			return true;
+			return verdict != RefineryFieldGateCA.EconomyVerdict.Allow;
 		}
+
+		RefineryFieldGateCA.EconomyVerdict lastRefineryEconomyVerdict = RefineryFieldGateCA.EconomyVerdict.Allow;
 
 		// REF-FIELD-02: a first copy this queue can build is still missing: the tech chain, or a first-copy kind (no wall, defence, fake, proxy or
 		// own-rule type) that is not owned or queued, within its build limit and not a naval yard without water.

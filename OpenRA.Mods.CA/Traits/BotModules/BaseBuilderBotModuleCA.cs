@@ -297,6 +297,7 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("BASE-12: the expansion-refinery safety test iterates every wanting claim (the first safe one wins) and also gates the fraction roll's refinery. Needs ExpansionRefinerySafety.",
 			"Gated by SwitchCondition; row pb_refinery_safety_all_claims.")]
 		public readonly bool RefinerySafetyAllClaims = false;
+
 		[Desc("REF-FIELD-02 (USER PRIORITY 11-24, refinery spam; AUDIT_BASE_01 BASE-01): the economy rung's refinery pick waits for the first vehicle",
 			"factory after ref1 (ref1, war factory, ref2), keeps RefineryMinIntervalTicks between refineries once every yard has one, and from the third",
 			"refinery on yields to a pending first copy for at most RefineryEssentialYieldTicks. Gated by SwitchCondition; row rf_economy_gate.")]
@@ -307,6 +308,10 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("REF-FIELD-02: longest a refinery pick yields to a pending first copy before it may go ahead anyway.")]
 		public readonly int RefineryEssentialYieldTicks = 1500;
+
+		[Desc("REF-FIELD-02 c2 (CM FIX, Opus ruling): the war-factory wait before ref2 ends this many ticks after ref1 completed; it also ends at once when",
+			"a vehicle factory type is no-space banned or used up its placement budget (MaximumFailedPlacementAttempts), or none is buildable.")]
+		public readonly int RefineryFactoryWaitTicks = 1500;
 
 		[Desc("REF-FIELD-02: a yard with no own refinery within this many cells skips the refinery economy gate (the expansion refinery is next).")]
 		public readonly int RefineryYardRadiusCells = 14;
@@ -747,6 +752,10 @@ namespace OpenRA.Mods.CA.Traits
 		public int RefineryGateLastRiseTick = -1;
 		public int RefineryGateLastCount;
 		public int RefineryGateYieldSince = -1;
+
+		// REF-FIELD-02 c2: the tick the first own refinery stood (-1 = not yet), and whether a vehicle factory type used up its placement budget.
+		public int RefineryGateFirstStoodTick = -1;
+		public bool RefineryGateFactoryPlacementFailed;
 
 		/// <summary>REF-FIELD-02: own refineries standing plus in production.</summary>
 		public int RefineryCountWithQueued()
