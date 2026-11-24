@@ -114,9 +114,12 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateRatio;
 
 		// PROD-BUSY-01 rows (DEV provider only; release = on).
-		AblationLatch ablateAllProducers, ablateIdleSweep, ablateEssentials, ablateCycle;
+		AblationLatch ablateAllProducers, ablateIdleSweep, ablateEssentials, ablateCycle, ablateSustained;
 		string lastCycledProduction;
 		bool AllProducersOn => baseBuilder.AllBuildingProducersArmed && !ablateAllProducers.Off(player, AblationIds.ProdBusyAllBuildingProducers);
+		bool SustainedActive => baseBuilder.SustainedCashArmed && !ablateSustained.Off(player, AblationIds.SustainedCashProduction)
+			&& !baseBuilder.Info.DefenseQueues.Contains(Category)
+			&& baseBuilder.SustainedCash.Active(world.WorldTick, baseBuilder.Info.SustainedCashTicks);
 		bool CycleOn => baseBuilder.CycleProductionArmed && !ablateCycle.Off(player, AblationIds.CycleProduction);
 		bool EssentialsOn => baseBuilder.EssentialsLowCashArmed && !ablateEssentials.Off(player, AblationIds.EssentialsLowCash);
 		bool IdleSweepOn => baseBuilder.BuildingIdleSweepArmed && !ablateIdleSweep.Off(player, AblationIds.ProdBusyBuildingIdleSweep);
@@ -2282,6 +2285,20 @@ namespace OpenRA.Mods.CA.Traits
 					AIUtils.BotDebug("{0} decided to build {1}: Priority override (low power)", queue.Actor.Owner, power.Name);
 					TraceLowPowerOverride(power);
 					return power;
+			}
+
+			// SUSTAINED-CASH-01 (USER 11-24): the bank has stayed above the tier line for SustainedCashTicks, so the next building is another production
+			// building, cycled fewest-first across the types (power only when it would leave power short: the candidates are power-resolved). It sits
+			// right after the low-power rung and above the opening, the planner wants and the expansion demand. Types at their limit are not candidates;
+			// with none left (null) normal building resumes. The defence queue never reaches it.
+			if (SustainedActive)
+			{
+				var sustained = ChooseCycledProduction(buildableThings, power);
+				if (sustained != null)
+				{
+					AIUtils.BotDebug("{0} decided to build {1}: Priority override (sustained cash production)", queue.Actor.Owner, sustained.Name);
+					return sustained;
+				}
 			}
 
 			if (openingBarracksPolicyActive && !baseBuilder.HasBuiltOrQueuedBarracks())

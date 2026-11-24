@@ -229,6 +229,15 @@ namespace OpenRA.Mods.CA.Traits
 			"placement latch; power is added as needed. Gated by SwitchCondition; row pb_cycle_production.")]
 		public readonly bool CycleProductionAboveLine = false;
 
+		[Desc("SUSTAINED-CASH-01 (USER 11-24): when the bank stays above the tier MaximiseProductionCash line (BotLimits) for SustainedCashTicks, the NEXT",
+			"building started is a production building (the pb_cycle_production pick), whatever the planner wants, the opening or the expansion demand say.",
+			"Types at their build limit are skipped; with every type at its limit normal building resumes. Power stays allowed when the production building",
+			"would leave power short. The defence queue is untouched. Gated by SwitchCondition; row pb_sustained_cash_production.")]
+		public readonly bool SustainedCashProduction = false;
+
+		[Desc("SUSTAINED-CASH-01: ticks the bank must stay above the tier line, unbroken.")]
+		public readonly int SustainedCashTicks = 1500;
+
 		[Desc("Radius in cells around a factory scanned for rally points by the AI.")]
 		public readonly int RallyPointScanRadius = 8;
 
@@ -522,6 +531,8 @@ namespace OpenRA.Mods.CA.Traits
 		// PROD-BUSY-01: switch-gated like the arms above (the shared @generic instance serves classic too).
 		public bool AllBuildingProducersArmed => Info.ServeAllBuildingProducers && switchesActive;
 		public bool BuildingIdleSweepArmed => Info.BuildingIdleSweepActive && switchesActive;
+		public bool SustainedCashArmed => Info.SustainedCashProduction && switchesActive;
+		public readonly SustainedCashClock SustainedCash = new();
 		public bool CycleProductionArmed => Info.CycleProductionAboveLine && switchesActive;
 		public bool EssentialsLowCashArmed => Info.EssentialsOnlyBelowTierLine && switchesActive;
 
@@ -836,6 +847,13 @@ namespace OpenRA.Mods.CA.Traits
 		void IBotTick.BotTick(IBot bot)
 		{
 			lastBotTick = world.WorldTick;
+
+			// SUSTAINED-CASH-01: one observation per bot visit, so a dip below the line resets the run at once.
+			if (SustainedCashArmed)
+			{
+				var sustainedLine = botLimits != null && botLimits.Info.MaximiseProductionCashRequirement >= 0 ? botLimits.Info.MaximiseProductionCashRequirement : 0;
+				SustainedCash.Observe(lastBotTick, sustainedLine > 0 && playerResources.GetCashAndResources() > sustainedLine);
+			}
 
 			if (firstTick)
 			{
