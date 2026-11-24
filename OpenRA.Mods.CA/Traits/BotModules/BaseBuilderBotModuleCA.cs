@@ -235,6 +235,18 @@ namespace OpenRA.Mods.CA.Traits
 			"would leave power short. The defence queue is untouched. Gated by SwitchCondition; row pb_sustained_cash_production.")]
 		public readonly bool SustainedCashProduction = false;
 
+		[Desc("pb_expansion_refinery_safety (USER 11-24): the refinery wanted for an expansion yard goes into the very-next slot only while that yard is SAFE.",
+			"Unsafe = the yard took damage from an enemy, or a visible (fog-honest) enemy combat unit is within ExpansionSafetyScanCells of it; it is safe",
+			"again ExpansionSafetyQuietTicks after the last threat. While unsafe the refinery is dropped from the slot (not held) and the order goes on.",
+			"Gated by SwitchCondition; row pb_expansion_refinery_safety.")]
+		public readonly bool ExpansionRefinerySafety = false;
+
+		[Desc("pb_expansion_refinery_safety: quiet ticks after the last threat before the expansion yard counts as safe again.")]
+		public readonly int ExpansionSafetyQuietTicks = 750;
+
+		[Desc("pb_expansion_refinery_safety: cells around the expansion yard scanned for visible enemy combat units.")]
+		public readonly int ExpansionSafetyScanCells = 12;
+
 		[Desc("SUSTAINED-CASH-01: ticks the bank must stay above the tier line, unbroken.")]
 		public readonly int SustainedCashTicks = 1500;
 
@@ -531,6 +543,58 @@ namespace OpenRA.Mods.CA.Traits
 		// PROD-BUSY-01: switch-gated like the arms above (the shared @generic instance serves classic too).
 		public bool AllBuildingProducersArmed => Info.ServeAllBuildingProducers && switchesActive;
 		public bool BuildingIdleSweepArmed => Info.BuildingIdleSweepActive && switchesActive;
+		public bool ExpansionSafetyArmed => Info.ExpansionRefinerySafety && switchesActive;
+		readonly Dictionary<uint, int> yardThreatTick = new();
+		int nextYardScanTick;
+
+		/// <summary>Records the last tick an enemy threatened an own expansion yard (a visible combat unit in range); damage is recorded in RespondToAttack.</summary>
+		void RecordYardThreats(int now)
+		{
+			if (now < nextYardScanTick)
+				return;
+
+			nextYardScanTick = now + 25;
+			var radius = WDist.FromCells(Info.ExpansionSafetyScanCells);
+			foreach (var yard in ConstructionYardBuildings.Actors)
+			{
+				if (yard.IsDead || !yard.IsInWorld)
+					continue;
+
+				if (!ExpansionSafetyCA.IsExpansionYard((yard.Location - initialBaseCenter).LengthSquared, 28))
+					continue;
+
+				// Fog-honest: only enemy combat units this player can see right now.
+				if (world.FindActorsInCircle(yard.CenterPosition, radius).Any(a => IsEnemyGroundUnit(a) && a.Info.HasTraitInfo<AttackBaseInfo>() && a.CanBeViewedByPlayer(player)))
+					yardThreatTick[yard.ActorID] = now;
+			}
+		}
+
+		/// <summary>
+		/// False when the own expansion yard nearest to <paramref name="target"/> is unsafe. The main base, and a target with no live yard, are never gated.
+		/// </summary>
+		public bool ExpansionRefinerySafe(CPos target)
+		{
+			Actor nearest = null;
+			var best = long.MaxValue;
+			foreach (var yard in ConstructionYardBuildings.Actors)
+			{
+				if (yard.IsDead || !yard.IsInWorld)
+					continue;
+
+				var d = (yard.Location - target).LengthSquared;
+				if (d < best)
+				{
+					best = d;
+					nearest = yard;
+				}
+			}
+
+			if (nearest == null || !ExpansionSafetyCA.IsExpansionYard((nearest.Location - initialBaseCenter).LengthSquared, 28))
+				return true;
+
+			return ExpansionSafetyCA.Safe(world.WorldTick, yardThreatTick.TryGetValue(nearest.ActorID, out var t) ? t : -1, Info.ExpansionSafetyQuietTicks);
+		}
+
 		public bool SustainedCashArmed => Info.SustainedCashProduction && switchesActive;
 		public readonly SustainedCashClock SustainedCash = new();
 		public bool CycleProductionArmed => Info.CycleProductionAboveLine && switchesActive;
@@ -848,6 +912,9 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			lastBotTick = world.WorldTick;
 
+			if (ExpansionSafetyArmed)
+				RecordYardThreats(lastBotTick);
+
 			// SUSTAINED-CASH-01: one observation per bot visit, so a dip below the line resets the run at once.
 			if (SustainedCashArmed)
 			{
@@ -1072,6 +1139,10 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (e.Attacker.Owner.RelationshipWith(self.Owner) != PlayerRelationship.Enemy)
 				return;
+
+			// pb_expansion_refinery_safety: record only; an enemy hit on an own yard marks it unsafe.
+			if (ExpansionSafetyArmed && Info.ConstructionYardTypes.Contains(self.Info.Name))
+				yardThreatTick[self.ActorID] = world.WorldTick;
 
 			if (!e.Attacker.Info.HasTraitInfo<ITargetableInfo>())
 				return;

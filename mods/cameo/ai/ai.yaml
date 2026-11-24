@@ -5578,6 +5578,8 @@ Player:
 		CycleProductionAboveLine: true
 		# SUSTAINED-CASH-01: a bank above the tier line for 1500 ticks forces the next building to be production (row pb_sustained_cash_production); genericbot only.
 		SustainedCashProduction: true
+		# pb_expansion_refinery_safety: the expansion refinery goes first only while the new yard is safe; genericbot only.
+		ExpansionRefinerySafety: true
 		# p0-integration-01 (Opus 11-23): RATIO-2X-01 switched ON for the P0 acceptance test (the 2x mobile/static ratio at a
 		# defence start; row army_first_02_ratio). Classic shares this instance but has no IBotMobileStaticValues provider
 		# (MasterAiBotModule is genericbot), so its gate is Inert and records nothing.
