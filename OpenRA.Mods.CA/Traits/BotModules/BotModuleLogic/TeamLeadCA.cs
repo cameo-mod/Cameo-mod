@@ -693,6 +693,9 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>The tick of the last order any seat of the team issued (-1 = none yet); with the election and the first attack tick it is the stall clock.</summary>
 		public int LastOrderTick = -1;
 
+		/// <summary>V07 TEAM-DEFEND: the team alarm in force (null = none ever raised; check TeamDefendCA.Active for its age). Host-side, shared by every bot of the team.</summary>
+		public TeamDefendCA.Alarm? DefendAlarm;
+
 		/// <summary>The tick the last order was cancelled (a leader change excepted; -1 = never); tl_grace_rally holds the next publish for a while.</summary>
 		public int LastCancelTick = -1;
 

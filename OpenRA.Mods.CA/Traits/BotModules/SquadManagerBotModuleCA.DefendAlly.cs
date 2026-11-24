@@ -173,6 +173,9 @@ namespace OpenRA.Mods.CA.Traits
 			(allyHp, allyHpNext) = (allyHpNext, allyHp);
 			allyHpNext.Clear();
 
+			// V07 tl_defend_team: a serious attack on a friendly raises the team alarm (throttled; free of work with the switch off).
+			TeamDefendScan(now);
+
 			if (defendAllyAttacked.Count == 0 || now < defendAllyNextResponse)
 				return;
 

@@ -3288,6 +3288,9 @@ namespace OpenRA.Mods.CA.Traits
 			// It runs BEFORE any attack launch (USER 2026-11-23: helping own or allied units always comes first, and ignores the wave minimum).
 			DefendAllyTick(bot);
 
+			// V07 tl_defend_team: every teammate answers the team alarm of an attacked ally (free of work with the switch off).
+			TeamDefendTick(bot);
+
 			var urgentDispatched = Info.AttackLivenessEnabled && TryM13UrgentAttack(bot);
 			if (!urgentDispatched && --minAttackForceDelayTicks <= 0)
 			{
@@ -4495,6 +4498,9 @@ namespace OpenRA.Mods.CA.Traits
 					n.UpdatedDefenseCenter(e.Attacker.Location);
 
 				ProtectOwn(e.Attacker);
+
+				// V07 tl_defend_team: the victim's own side raises the team alarm even when none of its idle units stands near (throttled; free with the switch off).
+				TeamDefendRaiseOwn(self);
 			}
 		}
 
