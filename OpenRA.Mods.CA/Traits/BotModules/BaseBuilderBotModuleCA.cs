@@ -550,7 +550,8 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>Records the last tick an enemy threatened an own expansion yard (a visible combat unit in range); damage is recorded in RespondToAttack.</summary>
 		void RecordYardThreats(int now)
 		{
-			if (now < nextYardScanTick)
+			// The base centre is unknown (0,0) until UpdatedBaseCenter has run: then no yard can be told from the main one.
+			if (now < nextYardScanTick || initialBaseCenter == default)
 				return;
 
 			nextYardScanTick = now + 25;
@@ -589,7 +590,7 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
-			if (nearest == null || !ExpansionSafetyCA.IsExpansionYard((nearest.Location - initialBaseCenter).LengthSquared, 28))
+			if (nearest == null || initialBaseCenter == default || !ExpansionSafetyCA.IsExpansionYard((nearest.Location - initialBaseCenter).LengthSquared, 28))
 				return true;
 
 			return ExpansionSafetyCA.Safe(world.WorldTick, yardThreatTick.TryGetValue(nearest.ActorID, out var t) ? t : -1, Info.ExpansionSafetyQuietTicks);

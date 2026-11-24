@@ -101,5 +101,15 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(b, Does.Contain("IsEnemyGroundUnit(a) && a.Info.HasTraitInfo<AttackBaseInfo>()"));
 			Assert.That(b, Does.Contain("WDist.FromCells(Info.ExpansionSafetyScanCells)"));
 		}
+
+		[Test]
+		public void TheMainYardIsNeverTakenForAnExpansionBeforeTheBaseCentreIsKnown()
+		{
+			// initialBaseCenter is (0,0) until UpdatedBaseCenter has run; without the guard the main yard would count as an expansion on the first visits and could
+			// drop the opening refinery. Both the scan and the gate stand down until the centre is known.
+			var b = Source("mods/CA/Traits/BotModules/BaseBuilderBotModuleCA.cs");
+			Assert.That(b, Does.Contain("now < nextYardScanTick || initialBaseCenter == default"), "no scan before the base centre is known");
+			Assert.That(b, Does.Contain("nearest == null || initialBaseCenter == default ||"), "the main yard is never gated before the base centre is known");
+		}
 	}
 }
