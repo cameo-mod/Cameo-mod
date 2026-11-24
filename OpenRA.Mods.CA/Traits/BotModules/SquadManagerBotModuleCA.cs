@@ -642,8 +642,11 @@ namespace OpenRA.Mods.CA.Traits
 			"squad is cut from the assault even when the faction has no FireSupportTypes. Off = the pre-ARTY-01 artillery state, byte for byte.")]
 		public readonly bool ArtyMicroEnabled = false;
 
-		[Desc("ARTY-TARGET-01 (USER P0): a sub-switch of ArtyMicroEnabled. The artillery squad's target is a defence or a structure only; a unit is never attacked or approached as the squad target unless it threatens the artillery (the micro's threat rule). Row arty_struct_first. Off = the ARTY-01 behaviour.")]
+		[Desc("ARTY-TARGET-01 (USER P0): a sub-switch of ArtyMicroEnabled. Artillery attacks a seen or remembered defence first, then another structure, near its anchor (ArtyAssaultScanCells); a unit is attacked only when it threatens the artillery, or when no structure is known. Row arty_struct_first. Off = the ARTY-01 behaviour.")]
 		public readonly bool ArtyStructFirstEnabled = false;
+
+		[Desc("ARTY-TARGET-01 (c2): the radius around an artillery squad's anchor in which the structure-first switch looks for a defence or structure to assault (seen or remembered).")]
+		public readonly int ArtyAssaultScanCells = 40;
 
 		[Desc("ARTY-01: cells inside the artillery unit's maximum range it stands off from its target.")]
 		public readonly int ArtyRangeMarginCells = 1;

@@ -91,11 +91,11 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		const int ApproachRetargets = 4;
 
-		/// <summary>ARTY-TARGET-01: with the structure-first switch a squad target that is a unit is never attacked or approached (a unit is picked only as a threat, step 3).</summary>
-		public static bool SquadTargetUsable(bool structFirst, bool targetIsUnit) => !(structFirst && targetIsUnit);
-
-		/// <summary>Index of the candidate to attack from <paramref name="from"/>, or -1 when none is in range.</summary>
-		public static int PickTarget(WPos from, int rangeLen, IReadOnlyList<ArtyCandidate> candidates)
+		/// <summary>
+		/// Index of the candidate to attack from <paramref name="from"/>, or -1 when none is in range. ARTY-TARGET-01: with
+		/// <paramref name="structFirst"/> a unit that does not threaten the artillery is never picked, so only a threat, a defence or a structure is attacked.
+		/// </summary>
+		public static int PickTarget(WPos from, int rangeLen, IReadOnlyList<ArtyCandidate> candidates, bool structFirst = false)
 		{
 			var rangeSq = (long)rangeLen * rangeLen;
 			var threat = -1;
@@ -112,7 +112,8 @@ namespace OpenRA.Mods.CA.Traits
 					if (c.Threatens)
 						threat = Closer(from, candidates, threat, i, false);
 					else
-						unit = Closer(from, candidates, unit, i, false);
+						if (!structFirst)
+								unit = Closer(from, candidates, unit, i, false);
 				}
 				else
 					structure = Closer(from, candidates, structure, i, true);
@@ -122,6 +123,22 @@ namespace OpenRA.Mods.CA.Traits
 				return threat;
 
 			return structure >= 0 ? structure : unit;
+		}
+
+		/// <summary>
+		/// ARTY-TARGET-01 (c2): the structure an artillery squad assaults when nothing structural is in range - the nearest defence to the
+		/// assault point, else the nearest other structure. Units are never picked. Index into <paramref name="candidates"/>, or -1.
+		/// </summary>
+		public static int PickStructure(WPos assault, IReadOnlyList<ArtyCandidate> candidates)
+		{
+			var best = -1;
+			for (var i = 0; i < candidates.Count; i++)
+			{
+				if (candidates[i].Kind != ArtyKind.Unit)
+					best = Closer(assault, candidates, best, i, true);
+			}
+
+			return best;
 		}
 
 		// Lower kind first (only for structures), then nearer, then lower id.

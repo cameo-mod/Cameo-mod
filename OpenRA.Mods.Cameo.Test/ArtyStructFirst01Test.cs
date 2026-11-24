@@ -17,27 +17,83 @@ using OpenRA.Mods.CA.Traits;
 namespace OpenRA.Mods.Cameo.Test
 {
 	// ARTY-TARGET-01 (USER P0, Opus): artillery squads take defences and structures first, at stand-off; a unit is a target only when it threatens the artillery.
+	// c2: with no structure in range the artillery assaults the nearest seen or remembered defence, else structure, near its anchor; a unit squad target only when no structure is known.
 	// Owner: Code Monkey. Reviewer: Sonnet.
 	[TestFixture]
 	public sealed class ArtyStructFirst01Test
 	{
+		static readonly WPos Origin = new WPos(0, 0, 0);
+
 		static string Source(string file) => File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "source", file)).Replace("\r\n", "\n");
 
-		[TestCase(true, true, false)]
-		[TestCase(true, false, true)]
-		[TestCase(false, true, true)]
-		[TestCase(false, false, true)]
-		public void ASquadTargetThatIsAUnitIsRefusedOnlyWhenTheSwitchIsOn(bool structFirst, bool targetIsUnit, bool usable) =>
-			Assert.That(ArtyMicroCA.SquadTargetUsable(structFirst, targetIsUnit), Is.EqualTo(usable));
+		[Test]
+		public void WithTheSwitchANonThreateningUnitIsNeverPicked()
+		{
+			var units = new[] { new ArtyCandidate(7, new WPos(1000, 0, 0), ArtyKind.Unit, false) };
+			Assert.That(ArtyMicroCA.PickTarget(Origin, 2000, units), Is.EqualTo(0), "without the switch the unit is the fallback");
+			Assert.That(ArtyMicroCA.PickTarget(Origin, 2000, units, true), Is.EqualTo(-1), "with the switch a non-threatening unit is not picked");
+		}
 
 		[Test]
-		public void TheStepFourGuardRefusesAUnitSquadTargetAndHoldsAtTheAnchor()
+		public void WithTheSwitchAThreateningUnitIsStillPicked()
+		{
+			var units = new[] { new ArtyCandidate(7, new WPos(1000, 0, 0), ArtyKind.Unit, true) };
+			Assert.That(ArtyMicroCA.PickTarget(Origin, 2000, units, true), Is.EqualTo(0));
+		}
+
+		[Test]
+		public void WithTheSwitchAStructureInRangeBeatsAUnit()
+		{
+			var list = new[]
+			{
+				new ArtyCandidate(7, new WPos(500, 0, 0), ArtyKind.Unit, false),
+				new ArtyCandidate(9, new WPos(1500, 0, 0), ArtyKind.Structure, false),
+			};
+			Assert.That(ArtyMicroCA.PickTarget(Origin, 2000, list, true), Is.EqualTo(1));
+		}
+
+		[Test]
+		public void TheAssaultPicksADefenceBeforeANearerStructure()
+		{
+			var list = new[]
+			{
+				new ArtyCandidate(1, new WPos(1000, 0, 0), ArtyKind.Structure, false),
+				new ArtyCandidate(2, new WPos(3000, 0, 0), ArtyKind.Defence, false),
+			};
+			Assert.That(ArtyMicroCA.PickStructure(Origin, list), Is.EqualTo(1));
+		}
+
+		[Test]
+		public void TheAssaultFallsBackToTheNearestStructureWhenNoDefenceIsKnown()
+		{
+			var list = new[]
+			{
+				new ArtyCandidate(1, new WPos(3000, 0, 0), ArtyKind.Structure, false),
+				new ArtyCandidate(2, new WPos(1000, 0, 0), ArtyKind.Structure, false),
+			};
+			Assert.That(ArtyMicroCA.PickStructure(Origin, list), Is.EqualTo(1));
+		}
+
+		[Test]
+		public void TheAssaultNeverPicksAUnitAndReportsNothingWhenOnlyUnitsAreKnown()
+		{
+			var list = new[]
+			{
+				new ArtyCandidate(1, new WPos(1000, 0, 0), ArtyKind.Unit, true),
+				new ArtyCandidate(2, new WPos(500, 0, 0), ArtyKind.Unit, false),
+			};
+			Assert.That(ArtyMicroCA.PickStructure(Origin, list), Is.EqualTo(-1));
+		}
+
+		[Test]
+		public void TheStructuralAimIsAnExplicitAttackAfterAStandOffMove()
 		{
 			var states = Source("mods/CA/Traits/BotModules/Squads/States/GroundStatesCA.cs");
-			Assert.That(states, Does.Contain("var targetIsUnit = owner.Target.Type == TargetType.Actor && owner.Target.Actor != null && !owner.Target.Actor.Info.HasTraitInfo<BuildingInfo>();"));
-			Assert.That(states, Does.Contain("if (!ArtyMicroCA.SquadTargetUsable(manager.ArtyStructFirstActive, targetIsUnit))"));
-			Assert.That(states, Does.Contain("if ((anchor - pos).HorizontalLengthSquared > (long)rangeMargin * rangeMargin && manager.TryConsumeMicroActions())\n\t\t\t\t\t\towner.Bot.QueueOrder(new Order(\"Move\", unit, Target.FromPos(anchor), false));"),
-				"a unit squad target holds: a Move to the anchor, never an Attack or an approach");
+			Assert.That(states, Does.Contain("PickTarget(pos, rangeLen, candidates, manager.ArtyStructFirstActive)"));
+			Assert.That(states, Does.Contain("if (manager.ArtyStructFirstActive && (targetIsUnit || !owner.Target.IsValidFor(unit))"));
+			Assert.That(states, Does.Contain("ArtyMicroCA.PickStructure(anchor, structures)"));
+			Assert.That(states, Does.Contain("ArtyMicroCA.PlanApproach(pos, targetPos, rangeLen, rangeMargin, assaultDefences, defenceMargin)"));
+			Assert.That(states, Does.Contain("new Order(\"Attack\", unit, Target.FromActor(actor), false)"));
 		}
 
 		[Test]
@@ -45,6 +101,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var squad = Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCA.cs");
 			Assert.That(squad, Does.Contain("public readonly bool ArtyStructFirstEnabled = false;"));
+			Assert.That(squad, Does.Contain("public readonly int ArtyAssaultScanCells = 40;"));
 
 			var ally = Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCA.DefendAlly.cs");
 			Assert.That(ally, Does.Contain("internal bool ArtyStructFirstActive => ArtyMicroActive && Info.ArtyStructFirstEnabled && !ablateArtyStruct.Off(Player, AblationIds.ArtyStructFirst);"));

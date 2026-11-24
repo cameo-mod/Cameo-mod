@@ -1949,6 +1949,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		readonly List<ArtyCandidate> candidates = [];
 		readonly List<Actor> candidateActors = [];
 		readonly List<ArtyDefence> defences = [];
+		readonly List<ArtyCandidate> structures = []; // ARTY-TARGET-01 (c2): seen or remembered structures near the anchor
+		readonly List<Actor> structureActors = []; // the actor behind each structure, null when only remembered
+		readonly List<ArtyDefence> assaultDefences = []; // the armed ones among structures (their reach covers the firing points)
 
 		// ARTY-01: each unit decides for itself, at most once per ArtyOrderCooldownTicks. Priority per unit:
 		// kite from a hostile unit it outranges, back off a defence that reaches it, attack the best target in range
@@ -2007,7 +2010,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				}
 
 				// 3. Attack the best target in range.
-				var pick = ArtyMicroCA.PickTarget(pos, rangeLen, candidates);
+				var pick = ArtyMicroCA.PickTarget(pos, rangeLen, candidates, manager.ArtyStructFirstActive);
 				if (pick >= 0)
 				{
 					var target = candidateActors[pick];
@@ -2024,17 +2027,17 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					continue;
 				}
 
-				// 4. Nothing visible in range: the squad target (possibly a remembered building) when it is in range, else approach it.
-				// ARTY-TARGET-01: with the structure-first switch a squad target that is a unit is never attacked or approached; the unit holds at its anchor.
+				// 4. Nothing in range to shoot now. ARTY-TARGET-01 (c2): with the structure-first switch the artillery aims at structures - a seen or
+				// remembered defence first, then another structure, near its anchor - and a unit squad target is taken only when no structure is known.
 				var targetIsUnit = owner.Target.Type == TargetType.Actor && owner.Target.Actor != null && !owner.Target.Actor.Info.HasTraitInfo<BuildingInfo>();
-				if (!ArtyMicroCA.SquadTargetUsable(manager.ArtyStructFirstActive, targetIsUnit))
+				if (manager.ArtyStructFirstActive && (targetIsUnit || !owner.Target.IsValidFor(unit))
+					&& TryStructuralAssault(owner, unit, pos, anchor, rangeLen, rangeMargin, defenceMargin, ref mem))
 				{
-					if ((anchor - pos).HorizontalLengthSquared > (long)rangeMargin * rangeMargin && manager.TryConsumeMicroActions())
-						owner.Bot.QueueOrder(new Order("Move", unit, Target.FromPos(anchor), false));
-
+					memory[unit.ActorID] = mem;
 					continue;
 				}
 
+				// The squad target (possibly a remembered building) when it is in range, else approach it.
 				if (!owner.Target.IsValidFor(unit))
 				{
 					LegacyUnitOrder(owner, u, anchor);
@@ -2116,6 +2119,81 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					continue;
 
 				defences.Add(new ArtyDefence(fa.CenterPosition, BotUnitProfiles.Get(rules, fa.Info).MaxRange.Length));
+			}
+		}
+
+		// ARTY-TARGET-01 (c2): the structure-first aim. Attacks the nearest structure in range, or moves to its firing point (stand-off at max range,
+		// never into a known defence's reach). Returns false only when no structure is seen or remembered near the anchor: the caller then falls back.
+		bool TryStructuralAssault(SquadCA owner, Actor unit, WPos pos, WPos anchor, int rangeLen, int rangeMargin, int defenceMargin, ref ArtyMemory mem)
+		{
+			GatherStructures(owner, unit, anchor);
+			var pick = ArtyMicroCA.PickStructure(anchor, structures);
+			if (pick < 0)
+				return false;
+
+			var targetPos = structures[pick].Pos;
+			if ((targetPos - pos).HorizontalLengthSquared <= (long)rangeLen * rangeLen)
+			{
+				var actor = structureActors[pick];
+				if (actor == null || (mem.LastAttackId == actor.ActorID && BusyAttack(unit)))
+					return true; // remembered only (wait for vision) or already firing at it
+
+				if (owner.SquadManager.TryConsumeMicroActions())
+				{
+					owner.Bot.QueueOrder(new Order("Attack", unit, Target.FromActor(actor), false));
+					mem.LastAttackId = actor.ActorID;
+				}
+
+				return true;
+			}
+
+			var plan = ArtyMicroCA.PlanApproach(pos, targetPos, rangeLen, rangeMargin, assaultDefences, defenceMargin);
+			if (plan.Kind == ArtyApproachKind.Move && owner.SquadManager.TryConsumeMicroActions())
+			{
+				owner.Bot.QueueOrder(new Order("Move", unit, Target.FromPos(plan.Point), false));
+				mem.LastAttackId = 0;
+			}
+
+			return true; // Hold or Blocked: the unit stays where it is
+		}
+
+		// Fills structures (seen enemy buildings and remembered ones) and defences (armed ones among them) within ArtyAssaultScanCells of the anchor. Walls are not targets.
+		void GatherStructures(SquadCA owner, Actor unit, WPos anchor)
+		{
+			structures.Clear();
+			structureActors.Clear();
+			assaultDefences.Clear();
+
+			var manager = owner.SquadManager;
+			var rules = owner.World.Map.Rules;
+			var scanLen = WDist.FromCells(manager.Info.ArtyAssaultScanCells);
+			foreach (var e in owner.World.FindActorsInCircle(anchor, scanLen))
+			{
+				if (e == unit || !e.Info.HasTraitInfo<BuildingInfo>() || !manager.IsPreferredObservedEnemyUnit(e) || e.GetEnabledTargetTypes().Overlaps(WallTargetType))
+					continue;
+
+				var armed = e.Info.HasTraitInfo<AttackBaseInfo>();
+				structures.Add(new ArtyCandidate(e.ActorID, e.CenterPosition, armed ? ArtyKind.Defence : ArtyKind.Structure, false));
+				structureActors.Add(e);
+				if (armed)
+					assaultDefences.Add(new ArtyDefence(e.CenterPosition, BotUnitProfiles.Get(rules, e.Info).MaxRange.Length));
+			}
+
+			var layer = manager.Player.FrozenActorLayer;
+			if (layer == null)
+				return;
+
+			foreach (var fa in layer.FrozenActorsInCircle(owner.World, anchor, scanLen))
+			{
+				if (!fa.IsValid || fa.Hidden || fa.Owner == null || (fa.Actor != null && fa.Actor.IsInWorld && manager.IsNotHiddenUnit(fa.Actor))
+					|| manager.Player.RelationshipWith(fa.Owner) != PlayerRelationship.Enemy || !fa.Info.HasTraitInfo<BuildingInfo>())
+					continue;
+
+				var armed = fa.Info.HasTraitInfo<AttackBaseInfo>();
+				structures.Add(new ArtyCandidate(0, fa.CenterPosition, armed ? ArtyKind.Defence : ArtyKind.Structure, false));
+				structureActors.Add(null);
+				if (armed)
+					assaultDefences.Add(new ArtyDefence(fa.CenterPosition, BotUnitProfiles.Get(rules, fa.Info).MaxRange.Length));
 			}
 		}
 
