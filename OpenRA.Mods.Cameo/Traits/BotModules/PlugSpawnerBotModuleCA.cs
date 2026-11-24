@@ -94,7 +94,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			// AR-4 (fleet orders 2026-10-04b): the owned-host scan is lazy and reads only Pluggable actors, and runs
 			// only for a real candidate (not pending, prerequisites met, queue present), so an idle check stays cheap.
 			List<Actor> owned = null;
-			var queues = player.PlayerActor.TraitsImplementing<ProductionQueue>().ToArray();
+			var queues = player.PlayerActor.TraitsImplementing<ProductionQueue>(); // UPGRADE-QUEUE-02 (Sonnet LOW): lazy, no per-visit array
 
 			foreach (var (plugActor, plug) in plugs)
 			{
