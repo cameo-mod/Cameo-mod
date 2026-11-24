@@ -4734,6 +4734,8 @@ Player:
 		WaveMinEnabled: true
 		# ARMY-MIX-01 (USER rule, 2026-11-23): attack waves mix all available unit types (>= 3 roles or every available role).
 		WaveMixEnabled: true
+		# TEAM-LEAD-01 (USER rule, 2026-11-23): per team the highest-score bot leads; followers launch only on its order; the team gathers at one rally point and pushes one target together. Needs AggTeamEnabled. @classic keeps the default (off).
+		TeamLeadEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -4856,6 +4858,8 @@ Player:
 		WaveMinEnabled: true
 		# ARMY-MIX-01 (USER rule, 2026-11-23): attack waves mix all available unit types (>= 3 roles or every available role).
 		WaveMixEnabled: true
+		# TEAM-LEAD-01 (USER rule, 2026-11-23): per team the highest-score bot leads; followers launch only on its order; the team gathers at one rally point and pushes one target together. Needs AggTeamEnabled. @classic keeps the default (off).
+		TeamLeadEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -4974,6 +4978,8 @@ Player:
 		WaveMinEnabled: true
 		# ARMY-MIX-01 (USER rule, 2026-11-23): attack waves mix all available unit types (>= 3 roles or every available role).
 		WaveMixEnabled: true
+		# TEAM-LEAD-01 (USER rule, 2026-11-23): per team the highest-score bot leads; followers launch only on its order; the team gathers at one rally point and pushes one target together. Needs AggTeamEnabled. @classic keeps the default (off).
+		TeamLeadEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5094,6 +5100,8 @@ Player:
 		WaveMinEnabled: true
 		# ARMY-MIX-01 (USER rule, 2026-11-23): attack waves mix all available unit types (>= 3 roles or every available role).
 		WaveMixEnabled: true
+		# TEAM-LEAD-01 (USER rule, 2026-11-23): per team the highest-score bot leads; followers launch only on its order; the team gathers at one rally point and pushes one target together. Needs AggTeamEnabled. @classic keeps the default (off).
+		TeamLeadEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5214,6 +5222,8 @@ Player:
 		WaveMinEnabled: true
 		# ARMY-MIX-01 (USER rule, 2026-11-23): attack waves mix all available unit types (>= 3 roles or every available role).
 		WaveMixEnabled: true
+		# TEAM-LEAD-01 (USER rule, 2026-11-23): per team the highest-score bot leads; followers launch only on its order; the team gathers at one rally point and pushes one target together. Needs AggTeamEnabled. @classic keeps the default (off).
+		TeamLeadEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5331,6 +5341,8 @@ Player:
 		WaveMinEnabled: true
 		# ARMY-MIX-01 (USER rule, 2026-11-23): attack waves mix all available unit types (>= 3 roles or every available role).
 		WaveMixEnabled: true
+		# TEAM-LEAD-01 (USER rule, 2026-11-23): per team the highest-score bot leads; followers launch only on its order; the team gathers at one rally point and pushes one target together. Needs AggTeamEnabled. @classic keeps the default (off).
+		TeamLeadEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only

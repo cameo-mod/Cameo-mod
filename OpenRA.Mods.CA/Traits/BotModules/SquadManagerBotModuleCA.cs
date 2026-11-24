@@ -1840,6 +1840,9 @@ namespace OpenRA.Mods.CA.Traits
 			// BOTPASSIVE (switch ON only; returns at once while off): the breaker wave is driven before role assignment.
 			StalemateTick(bot);
 			AssignRolesToIdleUnits(bot);
+			// TEAM-LEAD-01 (switch ON only): election, order upkeep and the own pool, once per TeamLeadCheckTicks.
+			if (Info.TeamLeadEnabled)
+				TeamLeadTick();
 			// IMPL02-AGG-TEAM (A5; switch ON only): the home-reserve cap launches what the pool holds above the reserve.
 			if (Info.AggTeamEnabled)
 				AggTeamTick(bot);
@@ -3231,8 +3234,17 @@ namespace OpenRA.Mods.CA.Traits
 						if (actionBudget != null && !actionBudget.TryConsumeAttention(s))
 							continue;
 
+						// TEAM-LEAD-01 (switch ON, team engaged): the squad joins the leader's order, or - a follower with no order - stands down.
+						if (TeamLeadOn)
+						{
+							if (TeamLeadPrepare(s))
+							{
+								squadCursor = index + 1;
+								continue;
+							}
+						}
 						// IMPL02-AGG-TEAM (A4; switch ON only): an idle squad in range joins an allied or own attack intent.
-						if (Info.AggTeamEnabled)
+						else if (Info.AggTeamEnabled)
 							AggTeamPrepare(s);
 
 						CheckAttemptVerdict(s);
@@ -3927,6 +3939,12 @@ namespace OpenRA.Mods.CA.Traits
 
 		void CreateAttackForce(IBot bot, bool aggForce = false)
 		{
+			// TEAM-LEAD-01 (switch ON, team engaged): a follower forms a wave only for the leader's open order, the leader needs a real
+			// contribution of its own. Both then measure the launch bars on the combined team pool and skip the per-bot mix/staging holds.
+			var teamLaunch = false;
+			if (TeamLeadHoldsLaunch(out teamLaunch))
+				return;
+
 			// Create an attack force when we have enough units around our base.
 			// (don't bother leaving any behind for defense)
 			var idleUnitsValue = 0;
@@ -3987,23 +4005,27 @@ namespace OpenRA.Mods.CA.Traits
 
 			// CA F2p2 (A5-2): ValueOnlyAttackLaunch drops the unit-count gate when a squad value threshold is configured; MaxIdleUnits still applies.
 			// IMPL02-AGG-TEAM (A5): aggForce is true only from AggTeamTick (switch ON) - the pool above the reserve launches regardless of the ordinary bars.
-			if (aggForce || AttackForceEvalCA.ShouldLaunch(unitsHangingAroundTheBase.Count, maxIdleUnits,
-					idleUnitsValue, requiredValue, requiredSize, Info.ValueOnlyAttackLaunch, Info.SquadValue))
+			// TEAM-LEAD-01: the leader measures the whole team's pool; a follower with an open order contributes whatever it holds (>= TeamLeadJoinMinUnits).
+			var teamFollowerLaunch = teamLaunch && !TeamLeadIsLeader;
+			var (launchUnits, launchValue) = TeamLeadLaunchPool(unitsHangingAroundTheBase.Count, idleUnitsValue);
+			if (aggForce || teamFollowerLaunch || AttackForceEvalCA.ShouldLaunch(launchUnits, maxIdleUnits,
+					(int)System.Math.Min(int.MaxValue, launchValue), requiredValue, requiredSize, Info.ValueOnlyAttackLaunch, Info.SquadValue))
 			{
 				// WAVE-MIN-01 (switch ON only): moving out to attack needs the tier's unit count AND summed cost; below it the wave stays at
 				// home and the pool keeps growing. Defence, DEFEND-ALLY, retaliation, scouts and drops never come through here.
-				if (WaveBelowMinimum())
+				// TEAM-LEAD-01: the leader's tier gate measures the combined team blob; a follower's wave is part of the leader's order.
+				if (!teamFollowerLaunch && WaveBelowMinimum())
 					return;
 
 				// ARMY-MIX-01 (switch ON only): a ready wave waits, bounded by WaveMixWaitTicks, until the pool holds min(3, available) roles;
 				// the unit builder picks the missing role meanwhile. Same exemptions as WAVE-MIN-01 (only moving out to attack comes here).
-				if (WaveMixHolds())
+				if (!teamLaunch && WaveMixHolds())
 					return;
 
 				// 12.5: squads form to the same mix production builds - an assault
 				// missing a required role stages until the pool covers it, bounded
 				// by StageCompositionTicks, instead of trickling out under-strength.
-				if (!StagedCompositionReady())
+				if (!teamLaunch && !StagedCompositionReady())
 				{
 					if (stageSinceTick < 0)
 						stageSinceTick = World.WorldTick;

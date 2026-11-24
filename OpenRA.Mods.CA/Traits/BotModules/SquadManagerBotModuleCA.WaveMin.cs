@@ -43,7 +43,9 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var u in unitsHangingAroundTheBase)
 				value += UnitValue(u.Actor);
 
-			return !WaveMinCA.Passes(unitsHangingAroundTheBase.Count, value, minUnits, minValue);
+			// TEAM-LEAD-01: the leader's tier applies to the combined team blob (this pool unchanged while the feature is off or the bot is no leader).
+			var (poolUnits, poolValue) = TeamLeadLaunchPool(unitsHangingAroundTheBase.Count, value);
+			return !WaveMinCA.Passes(poolUnits, poolValue, minUnits, minValue);
 		}
 
 		/// <summary>DEV launch record: pool units, summed cost, the bars and the roles. Null (nothing built) unless the DEV log is on.</summary>
