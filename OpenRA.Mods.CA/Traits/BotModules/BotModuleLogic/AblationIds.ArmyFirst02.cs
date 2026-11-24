@@ -29,5 +29,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		// UPGRADE-PRODUCERS-01: every buildable structure type without a BuildingFractions row is built once (upgrade/research producers, radar, tech centres).
 		public const string Af2UnlistedOnce = "af2_unlisted_once";
+
+		// ESSENTIAL-PASS-01: first copies of every building type and cash tricklers are army-first essentials (pass the share, reserve and mobile-spend votes).
+		public const string Af2EssentialPass = "af2_essential_pass";
 	}
 }

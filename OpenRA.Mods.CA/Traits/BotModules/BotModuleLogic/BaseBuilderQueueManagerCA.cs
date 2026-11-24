@@ -114,7 +114,8 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateRatio;
 
 		// PROD-BUSY-01 rows (DEV provider only; release = on).
-		AblationLatch ablateAllProducers, ablateIdleSweep, ablateEssentials, ablateCycle, ablateSustained, ablateSafety, ablateUnlistedOnce;
+		AblationLatch ablateAllProducers, ablateIdleSweep, ablateEssentials, ablateCycle, ablateSustained, ablateSafety, ablateUnlistedOnce, ablateEssentialPass;
+		bool EssentialPassOn => baseBuilder.EssentialPassArmed && !ablateEssentialPass.Off(player, AblationIds.Af2EssentialPass);
 		bool UnlistedOnceOn => baseBuilder.UnlistedOnceArmed && !ablateUnlistedOnce.Off(player, AblationIds.Af2UnlistedOnce);
 		readonly Dictionary<string, bool> unlistedKinds = new();
 		string lastCycledProduction;
@@ -2105,7 +2106,11 @@ namespace OpenRA.Mods.CA.Traits
 		/// UPGRADE-PRODUCERS-01: whether <paramref name="info"/> is a structure type the each-building-once rule must cover although it has no
 		/// BuildingFractions row: not a wall, defence, anti-air, fake or proxy, and not a type with its own rule (yard, refinery, power, silo). Cached per name.
 		/// </summary>
-		bool UnlistedOnceKind(ActorInfo info)
+		bool UnlistedOnceKind(ActorInfo info) =>
+			!(baseBuilder.Info.BuildingFractions != null && baseBuilder.Info.BuildingFractions.ContainsKey(info.Name)) && FirstCopyKind(info);
+
+		/// <summary>ESSENTIAL-PASS-01: the structure kinds whose first copy is essential: UnlistedOnceKind's classification without the fraction-row test. Cached per name.</summary>
+		bool FirstCopyKind(ActorInfo info)
 		{
 			if (unlistedKinds.TryGetValue(info.Name, out var kind))
 				return kind;
@@ -2119,7 +2124,7 @@ namespace OpenRA.Mods.CA.Traits
 			var b = baseBuilder.Info;
 			var name = info.Name;
 			kind = UnlistedOnceCA.Eligible(
-				inFractions: b.BuildingFractions != null && b.BuildingFractions.ContainsKey(name),
+				inFractions: false,
 				isBuilding: info.HasTraitInfo<BuildingInfo>(),
 				wallOrFake: info.HasTraitInfo<LineBuildInfo>() || info.TraitInfos<GivesBuildableAreaInfo>().Any(g => g.AreaTypes.Contains("fake")),
 				hasOwnRule: b.ConstructionYardTypes.Contains(name) || b.RefineryTypes.Contains(name) || b.PowerTypes.Contains(name) || b.SiloTypes.Contains(name),
@@ -2174,6 +2179,10 @@ namespace OpenRA.Mods.CA.Traits
 
 			// BINDING tech chain (11-23): the faction's T2 and T3 gate passes the army-first pause and the mobile reserve while none is owned or queued.
 			if (TechChainExempt(name))
+				return true;
+
+			// ESSENTIAL-PASS-01: the first copy of every building type and every cash trickler passes the share, reserve and mobile-spend votes.
+			if (EssentialPassOn && EssentialPassCA.Essential(FirstCopyKind(actorInfo), OwnedOrQueued(actorInfo), actorInfo.HasTraitInfo<CashTricklerInfo>()))
 				return true;
 
 			// UPGRADE-PRODUCERS-01: the first copy of a structure type with no fraction row (upgrade/research producers, radar, tech centres) is essential.

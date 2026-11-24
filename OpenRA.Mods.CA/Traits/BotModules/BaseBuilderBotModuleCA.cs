@@ -230,6 +230,11 @@ namespace OpenRA.Mods.CA.Traits
 			"yards, refineries, power plants and silos are excluded (they have their own rules). Gated by SwitchCondition; row af2_unlisted_once.")]
 		public readonly bool UnlistedBuildingsOnce = false;
 
+		[Desc("ESSENTIAL-PASS-01 (USER P0, Opus 11-24): the first copy of every building type (not a wall, defence, fake or proxy) and every cash trickler is an",
+			"army-first essential, so neither the projected-share and reserve votes nor the mobile-spend reserve hold it (the low-cash hold already passes it).",
+			"Gated by SwitchCondition; row af2_essential_pass.")]
+		public readonly bool EssentialPassFirstCopies = false;
+
 		[Desc("PROD-BUSY (USER 11-24): while the bank stays above the tier MaximiseProductionCash line the base builder adds production buildings, cycled",
 			"across the types (barracks, war factory, airfield, naval yard with water access, then again), bounded by the build limits and by the failed-",
 			"placement latch; power is added as needed. Gated by SwitchCondition; row pb_cycle_production.")]
@@ -607,6 +612,7 @@ namespace OpenRA.Mods.CA.Traits
 		public bool CycleProductionArmed => Info.CycleProductionAboveLine && switchesActive;
 		public bool EssentialsLowCashArmed => Info.EssentialsOnlyBelowTierLine && switchesActive;
 		public bool UnlistedOnceArmed => Info.UnlistedBuildingsOnce && switchesActive;
+		public bool EssentialPassArmed => Info.EssentialPassFirstCopies && switchesActive;
 
 		// E1 observational slice (lead-accepted, observational ONLY): the switch-gated commitment
 		// ledger. Never read by any admission decision — recording and verdict logging only.
