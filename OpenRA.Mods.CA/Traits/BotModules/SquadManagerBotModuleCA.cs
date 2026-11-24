@@ -3948,7 +3948,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			// BLOB-LAUNCH-01 (USER 11-24, switch ON only): the team leader never forms a wave of its own outside an open team order; it attacks
 			// by publishing the order and joining it, so the whole team moves as one blob (V02: the leader sent its own 1-6 units on the team bar).
-			if (BlobLaunch01CA.LeaderHolds(BlobLeaderOrderOnlyActive, teamLaunch && TeamLeadIsLeader, TeamLeadCadenceOn, TeamLeadOpenOrder() != null))
+			if (BlobLeaderHolds(teamLaunch))
 				return;
 
 			// Create an attack force when we have enough units around our base.

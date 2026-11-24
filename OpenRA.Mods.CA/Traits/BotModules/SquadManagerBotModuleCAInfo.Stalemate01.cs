@@ -38,6 +38,10 @@ namespace OpenRA.Mods.CA.Traits
 			"outside an open team order; it attacks only by publishing the order and joining it. Off = the leader may launch its own wave.")]
 		public readonly bool BlobLeaderOrderOnly = false;
 
+		[Desc("BLOB-LAUNCH-01 safety fallback (Opus 11-24): after this many ticks without any team order, with the team pool at the blob",
+			"minimum (BlobLaunch01CA.MinUnits), the leader may launch its own wave; its squad then issues the team order. 0 = never.")]
+		public readonly int BlobLeaderFallbackTicks = 3000;
+
 		[Desc("STALEMATE-01 finish mode (row st_finish_mode): from LateEscalationStartTick a ground squad with no visible and no",
 			"remembered enemy target hunts instead of holding: it attack-moves to the least recently assigned map grid cell the bot",
 			"cannot see now (fog-honest) that its leader can reach, and on arrival takes the next. Off = it holds, as before.")]

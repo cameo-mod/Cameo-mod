@@ -35,14 +35,29 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(BlobLaunch01CA.MinUnits(-5, -3), Is.EqualTo(0), "negatives clamp");
 		}
 
+		static bool Holds(bool active, bool leader, bool cadence, bool order, int since = 0, int pool = 0, int min = 12) =>
+			BlobLaunch01CA.LeaderHolds(active, leader, cadence, order, since, 3000, pool, min);
+
 		[Test]
 		public void LeaderHoldsOnlyOutsideAnOpenOrder()
 		{
-			Assert.That(BlobLaunch01CA.LeaderHolds(true, true, true, false), Is.True, "no order: the leader forms no wave of its own");
-			Assert.That(BlobLaunch01CA.LeaderHolds(true, true, true, true), Is.False, "an open order is joined");
-			Assert.That(BlobLaunch01CA.LeaderHolds(true, false, true, false), Is.False, "followers are TEAM-LEAD's (they wait for an order there)");
-			Assert.That(BlobLaunch01CA.LeaderHolds(true, true, false, false), Is.False, "cadence off: the TEAM-LEAD-01 leader launch, as before");
-			Assert.That(BlobLaunch01CA.LeaderHolds(false, true, true, false), Is.False, "switch off: as before");
+			Assert.That(Holds(true, true, true, false), Is.True, "no order: the leader forms no wave of its own");
+			Assert.That(Holds(true, true, true, true), Is.False, "an open order is joined");
+			Assert.That(Holds(true, false, true, false), Is.False, "followers are TEAM-LEAD's (they wait for an order there)");
+			Assert.That(Holds(true, true, false, false), Is.False, "cadence off: the TEAM-LEAD-01 leader launch, as before");
+			Assert.That(Holds(false, true, true, false), Is.False, "switch off: as before");
+		}
+
+		[Test]
+		public void SafetyFallbackAfterThreeThousandTicksWithoutAnOrderAtTheBlobMinimum()
+		{
+			Assert.That(Holds(true, true, true, false, 2999, 40, 20), Is.True, "not yet 3000 ticks");
+			Assert.That(Holds(true, true, true, false, 3000, 40, 20), Is.False, "3000 ticks and the pool at the minimum: the leader launches");
+			Assert.That(Holds(true, true, true, false, 9000, 11, 12), Is.True, "below the blob minimum it still holds");
+			Assert.That(BlobLaunch01CA.LeaderHolds(true, true, true, false, 9000, 0, 40, 12), Is.True, "0 fallback ticks = never");
+			Assert.That(BlobLaunch01CA.TicksSinceOrder(10000, 4000, 3000), Is.EqualTo(6000));
+			Assert.That(BlobLaunch01CA.TicksSinceOrder(10000, -1, 3000), Is.EqualTo(7000), "no order yet: since the initial attack delay");
+			Assert.That(BlobLaunch01CA.TicksSinceOrder(1000, -1, 3000), Is.EqualTo(0), "never negative");
 		}
 
 		[Test]
@@ -54,8 +69,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var squad = Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCA.cs");
 			var hold = squad.IndexOf("if (TeamLeadHoldsLaunch(out teamLaunch))", StringComparison.Ordinal);
-			var blob = squad.IndexOf("if (BlobLaunch01CA.LeaderHolds(BlobLeaderOrderOnlyActive, teamLaunch && TeamLeadIsLeader, TeamLeadCadenceOn, TeamLeadOpenOrder() != null))",
-				StringComparison.Ordinal);
+			var blob = squad.IndexOf("if (BlobLeaderHolds(teamLaunch))", StringComparison.Ordinal);
 			var pool = squad.IndexOf("var idleUnitsValue = 0;", blob > 0 ? blob : 0, StringComparison.Ordinal);
 			Assert.That(hold, Is.GreaterThan(0));
 			Assert.That(blob, Is.GreaterThan(hold), "after the TEAM-LEAD hold, before any wave is measured");

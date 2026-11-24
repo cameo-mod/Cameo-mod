@@ -40,6 +40,19 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>BLOB-LAUNCH-01: the leader attacks only through an open team order (row bl_leader_order_only).</summary>
 		internal bool BlobLeaderOrderOnlyActive => Info.BlobLeaderOrderOnly && !ablateBlobLeaderOrderOnly.Off(Player, AblationIds.BlobLeaderOrderOnly);
 
+		/// <summary>BLOB-LAUNCH-01: the leader's own CreateAttackForce forms no wave (see BlobLaunch01CA.LeaderHolds; fallback included).</summary>
+		bool BlobLeaderHolds(bool teamLaunch)
+		{
+			if (!BlobLeaderOrderOnlyActive || !teamLaunch || !TeamLeadIsLeader || !TeamLeadCadenceOn || TeamLeadOpenOrder() != null)
+				return false;
+
+			var now = World.WorldTick;
+			var pool = teamLeadTeam?.Pool(now, Info.TeamLeadPoolMaxAgeTicks).Units ?? 0;
+			var minUnits = BlobLaunch01CA.MinUnits(WaveMinActive ? WaveMinBars().Units : 0, pool);
+			var since = BlobLaunch01CA.TicksSinceOrder(now, teamLeadTeam?.LastOrderTick ?? -1, initialAttackDelay);
+			return BlobLaunch01CA.LeaderHolds(true, true, true, false, since, Info.BlobLeaderFallbackTicks, pool, minUnits);
+		}
+
 		/// <summary>Finish-mode hunt pick for a squad whose leader is <paramref name="leader"/>: null when none is reachable.</summary>
 		internal CPos? FinishHuntCell(Actor leader)
 		{
