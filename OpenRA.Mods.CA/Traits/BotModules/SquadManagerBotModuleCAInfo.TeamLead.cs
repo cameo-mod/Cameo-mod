@@ -107,7 +107,7 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("TEAM-BLOB-01 push bar: the hard cap of the hold, in ticks after the first held push. Range 1500-6000.")]
 		public readonly int TeamLeadPushBarMaxTicks = 3000;
 
-		[Desc("TEAM-GATHER-01 (release switch; the DEV row is tl_gather_hold). On: a squad gathering for an order that has not pushed yet never leaves the order for a fight. It reports to the order the moment it joins; when an enemy stands inside TeamLeadGatherFightCells it stops (its units fire at what is in weapon range), fights it out, then walks on to the rally; its report is not dropped while it stays a live squad of the bot. Off = a contact sends the squad into its own attack and out of the order as before.")]
+		[Desc("TEAM-GATHER-01 (release switch; the DEV row is tl_gather_hold). On: a squad gathering for an order that has not pushed yet never leaves the order for a fight. It reports to the order the moment it joins; when an enemy stands inside TeamLeadGatherFightCells it stops (its units fire at what is in weapon range), fights it out, then walks on to the rally; a fight is no state change, so its report stays. Off = a contact sends the squad into its own attack and out of the order as before.")]
 		public readonly bool TeamLeadGatherHoldEnabled = false;
 
 		[Desc("TEAM-GATHER-01 tl_gather_hold: the distance in cells inside which a gathering squad stops to fight an enemy (about the weapon range of an infantry or tank squad).")]

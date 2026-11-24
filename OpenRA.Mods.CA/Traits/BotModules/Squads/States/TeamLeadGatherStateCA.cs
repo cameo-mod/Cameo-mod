@@ -69,7 +69,6 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var manager = owner.SquadManager;
 			if (!manager.TeamLeadOn || order.Cancelled)
 			{
-				order.Forget(owner);
 				manager.TeamLeadAbandon(owner, !manager.TeamLeadOn ? "not_engaged" : "cancelled:" + (order.CancelReason ?? "unknown"));
 				return;
 			}
@@ -126,7 +125,6 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			if (!manager.TeamLeadResolveTarget(owner, order))
 			{
-				order.Forget(owner);
 				manager.TeamLeadAbandon(owner, "resolve_failed");
 				return;
 			}
@@ -137,9 +135,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		public void Deactivate(SquadCA owner)
 		{
-			// TEAM-GATHER-01 (tl_gather_hold): the report outlives a state change; the order's upkeep drops the reports of squads that are gone.
-			if (!owner.SquadManager.TeamLeadGatherHoldOn)
-				order.Forget(owner);
+			order.Forget(owner);
 		}
 	}
 }

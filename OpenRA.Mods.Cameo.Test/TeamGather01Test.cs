@@ -73,7 +73,7 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void AReportOfALiveSquadSurvivesAFightAndIsDroppedOnlyWhenTheSquadIsGone()
+		public void AReportStaysWhileTheSquadIsInTheGatherStateAndIsDroppedWhenItLeaves()
 		{
 			var order = new TeamLeadOrder(1, "Multi0", new WPos(0, 0, 0), new WPos(1, 1, 0), 0, 1500);
 			var fighting = new object();
@@ -108,8 +108,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(fightBranch, Does.Not.Contain("ChangeState("), "a fight before the push never changes the squad's state");
 
 			var deactivate = gather[gather.IndexOf("public void Deactivate(", StringComparison.Ordinal)..];
-			Assert.That(deactivate, Does.Contain("if (!owner.SquadManager.TeamLeadGatherHoldOn)\n\t\t\t\torder.Forget(owner);"), "the report outlives a state change");
-			Assert.That(Regex.Matches(tick, @"order\.Forget\(owner\);").Count, Is.EqualTo(2), "a squad that abandons the order takes its report with it");
+			Assert.That(deactivate, Does.Contain("order.Forget(owner);"), "a squad that leaves the gather state takes its report with it (CM FIX: no stale arrived report)");
+			Assert.That(deactivate, Does.Not.Contain("TeamLeadGatherHoldOn"));
 		}
 
 		[Test]
@@ -117,8 +117,8 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
 			var upkeep = Between(wiring, "void TeamLeadMaintainOrder(", "bool TeamLeadPushHeld(");
-			Assert.That(upkeep, Does.Contain("if (TeamLeadGatherHoldOn)\n\t\t\t\torder.Prune(o => o is SquadCA q && q.IsValid && Squads.Contains(q));"));
-			Assert.That(upkeep, Does.Contain("order.Prune(o => o is SquadCA q && q.IsValid && q.FuzzyStateMachine?.CurrentState is TeamLeadGatherStateCA);"), "row off = the old prune");
+			Assert.That(upkeep, Does.Contain("order.Prune(o => o is SquadCA q && q.IsValid && q.FuzzyStateMachine?.CurrentState is TeamLeadGatherStateCA);"), "a squad that left the gather state drops its report");
+			Assert.That(upkeep, Does.Not.Contain("Squads.Contains(q)"));
 			Assert.That(upkeep, Does.Contain(": TeamLeadCA.GraceHolds(TeamLeadGraceHoldOn, order.Extending) ? null\n"));
 			Assert.That(upkeep.IndexOf("TeamLeadCA.GraceHolds(", StringComparison.Ordinal), Is.LessThan(upkeep.IndexOf("\"no_reports\"", StringComparison.Ordinal)), "before the no_reports test");
 			Assert.That(upkeep.IndexOf("\"below_bar\"", StringComparison.Ordinal), Is.LessThan(upkeep.IndexOf("TeamLeadCA.GraceHolds(", StringComparison.Ordinal)), "the dissolve test comes first");

@@ -599,11 +599,8 @@ namespace OpenRA.Mods.CA.Traits
 			if (order == null || order.Cancelled || order.Pushed)
 				return;
 
-			// TEAM-GATHER-01 (tl_gather_hold): a report stays while its squad is a live squad of this bot (a fight or a state change does not drop it).
-			if (TeamLeadGatherHoldOn)
-				order.Prune(o => o is SquadCA q && q.IsValid && Squads.Contains(q));
-			else
-				order.Prune(o => o is SquadCA q && q.IsValid && q.FuzzyStateMachine?.CurrentState is TeamLeadGatherStateCA);
+			// A report stays only while its squad is in the gather state (tl_gather_hold keeps a fighting squad in it: the fight is no state change).
+			order.Prune(o => o is SquadCA q && q.IsValid && q.FuzzyStateMachine?.CurrentState is TeamLeadGatherStateCA);
 			// An order published by the leader's team check has no squad yet: the members form theirs on their next check and report from the gather
 			// state one squad pass later, so the no-report grace is longer while TEAM-LEAD-02 publishes (Info switch; the row only changes the publish).
 			var reportGrace = (Info.TeamLeadCadenceEnabled ? 5 : 2) * Info.TeamLeadCheckTicks;
