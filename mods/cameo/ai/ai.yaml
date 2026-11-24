@@ -5924,6 +5924,8 @@ Player:
 		ReadyWatchdogAll: true
 		NoSpaceBan: true
 		RefinerySafetyAllClaims: true
+		# CONSOLIDATE-01 c1 (B07/X11): bb_recount_in_flight - in-flight buildings recounted every tick whatever the bank; genericbot only.
+		RecountInFlightAlways: true
 		# REF-FIELD-02 (row rf_economy_gate): ref1, the first vehicle factory, then ref2; 1500 ticks between refineries; from the third refinery a
 		# pending first copy goes first (at most 1500 ticks); a yard with no refinery skips the gate (expansion refinery). genericbot only.
 		RefineryEconomyGate: true

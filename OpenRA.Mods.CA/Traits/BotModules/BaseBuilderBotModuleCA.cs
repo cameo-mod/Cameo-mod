@@ -313,6 +313,11 @@ namespace OpenRA.Mods.CA.Traits
 			"refineries). Gated by SwitchCondition; row ready_watchdog_all.")]
 		public readonly bool ReadyWatchdogAll = false;
 
+		[Desc("CONSOLIDATE-01 c1 (B07/X11): the buildings in flight on every building queue (and their power) are recounted every bot tick whatever the bank.",
+			"Off = the old recount, which ran only at bank >= BuildingProductionMinCashRequirement, so below it the first-copy, limit and refinery counts",
+			"missed buildings already being produced. Gated by SwitchCondition; row bb_recount_in_flight.")]
+		public readonly bool RecountInFlightAlways = false;
+
 		[Desc("BASE-06: ticks a READY building may be held before it is placed at a base cell.")]
 		public readonly int ReadyWatchdogTicks = 75;
 
@@ -774,6 +779,8 @@ namespace OpenRA.Mods.CA.Traits
 		public bool TeamTurretSupportArmed => Info.TeamTurretSupport && switchesActive;
 		public bool FloorEssentialsExemptArmed => Info.FloorEssentialsExempt && switchesActive;
 		public bool ReadyWatchdogArmed => Info.ReadyWatchdogAll && switchesActive;
+		AblationLatch ablateRecountInFlight; // CONSOLIDATE-01 c1
+		public bool RecountInFlightArmed => Info.RecountInFlightAlways && switchesActive && !ablateRecountInFlight.Off(player, AblationIds.RecountInFlight);
 		public bool NoSpaceBanArmed => Info.NoSpaceBan && switchesActive;
 		public bool RefinerySafetyAllClaimsArmed => Info.RefinerySafetyAllClaims && switchesActive;
 		public bool RefineryEconomyGateArmed => Info.RefineryEconomyGate && switchesActive;
@@ -1268,7 +1275,8 @@ namespace OpenRA.Mods.CA.Traits
 
 					// Record buildings being produced only when AI can produce,
 					// and record their power only when AI can produce
-					if (playerResources.GetCashAndResources() >= Info.BuildingProductionMinCashRequirement)
+					// CONSOLIDATE-01 c1: armed, the recount runs whatever the bank (InFlightRecountCA.Recounts).
+					if (InFlightRecountCA.Recounts(RecountInFlightArmed, playerResources.GetCashAndResources(), Info.BuildingProductionMinCashRequirement))
 					{
 						foreach (var queue in queues)
 						{
@@ -1277,10 +1285,7 @@ namespace OpenRA.Mods.CA.Traits
 							if (producing == null)
 								continue;
 
-							if (BuildingsBeingProduced.TryGetValue(producing.Item, out var value))
-								BuildingsBeingProduced[producing.Item] = ++value;
-							else
-								BuildingsBeingProduced.Add(producing.Item, 1);
+							InFlightRecountCA.Record(BuildingsBeingProduced, producing.Item);
 
 							// Record the power of the building.
 							ExcessPower += producing.ActorInfo.TraitInfos<PowerInfo>().Where(p => p.EnabledByDefault).Sum(pi => pi.Amount);
