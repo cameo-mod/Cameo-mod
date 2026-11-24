@@ -199,12 +199,12 @@ namespace OpenRA.Mods.Cameo.Test
 				Assert.That(yaml[classic..], Does.Not.Contain(key), key + ": @classic keeps the default (off)");
 			}
 
-			// 25 stays the default; only the guerrilla personality raises the cap, to 40.
+			// 25 is the default and the guerrilla personality sets the same 25 (USER 25% rule, TEAM-GATHER-02; it was 40).
 			Assert.That(Regex.Matches(yaml, @"\n\t\tHarassCapPercent: ").Count, Is.EqualTo(1));
 			var guerrilla = yaml.IndexOf("SquadManagerBotModuleCA@guerrilla:", StringComparison.Ordinal);
 			Assert.That(guerrilla, Is.GreaterThan(0));
-			Assert.That(yaml.IndexOf("\n\t\tHarassCapPercent: 40", StringComparison.Ordinal), Is.GreaterThan(guerrilla));
-			Assert.That(yaml.IndexOf("\n\t\tHarassCapPercent: 40", StringComparison.Ordinal), Is.LessThan(classic));
+			Assert.That(yaml.IndexOf("\n\t\tHarassCapPercent: 25", StringComparison.Ordinal), Is.GreaterThan(guerrilla));
+			Assert.That(yaml.IndexOf("\n\t\tHarassCapPercent: 25", StringComparison.Ordinal), Is.LessThan(classic));
 
 			Assert.That(AblationIds.TeamLeadHarassCap, Is.EqualTo("tl_harass_cap"));
 			Assert.That(AblationIds.TeamLeadHarassMin, Is.EqualTo("tl_harass_min"));

@@ -274,6 +274,19 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>TEAM-GATHER-01 tl_grace_hold: an order whose push is held (extending) is never cancelled for missing reports; its own dissolve ends it.</summary>
 		public static bool GraceHolds(bool graceHoldOn, bool extending) => graceHoldOn && extending;
 
+		/// <summary>TEAM-GATHER-02 tl_grace_rally: a rally (gather-only) order is never cancelled for missing reports; the order max age ends it.</summary>
+		public static bool RallyGraceHolds(bool graceRallyOn, bool gatherOnly) => graceRallyOn && gatherOnly;
+
+		/// <summary>TEAM-GATHER-02 tl_defend_respects_order: a squad gathering for the open order, or formed less than <paramref name="freshTicks"/> ago, is not free for ally defence.</summary>
+		public static bool SquadKeptForOrder(bool respectsOrder, bool inOrder, int now, int formedTick, int freshTicks) =>
+			respectsOrder && (inOrder || (formedTick >= 0 && now - formedTick < Math.Max(0, freshTicks)));
+
+		/// <summary>TEAM-GATHER-02 tl_join_merge: a rally order is published only when the team idle army reaches the WAVE-MIN bars (the units bar is BlobLaunch01CA.MinUnits).</summary>
+		public static bool RallyFloorPassed(int teamUnits, long teamValue, int needUnits, long needValue) => teamUnits >= Math.Max(1, needUnits) && teamValue >= Math.Max(0, needValue);
+
+		/// <summary>TEAM-GATHER-02 tl_grace_rally: no order is published within <paramref name="holdTicks"/> of a cancel (-1 = none yet).</summary>
+		public static bool RepublishHeld(int now, int cancelTick, int holdTicks) => cancelTick >= 0 && now - cancelTick < Math.Max(0, holdTicks);
+
 		/// <summary>
 		/// The no-order guarantee (USER rule 2026-11-24: bots never trickle in small groups; nothing below WAVE-MIN ever attacks). It is called only when the
 		/// ready path (OrderDue) said no, so the blob is below the WAVE-MIN bars: after <paramref name="sinceOrder"/> ticks without any team order
@@ -618,6 +631,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>The tick of the last order any seat of the team issued (-1 = none yet); with the election and the first attack tick it is the stall clock.</summary>
 		public int LastOrderTick = -1;
+
+		/// <summary>The tick the last order was cancelled (a leader change excepted; -1 = never); tl_grace_rally holds the next publish for a while.</summary>
+		public int LastCancelTick = -1;
 
 		/// <summary>TEAM-LEAD-02 finish-the-weakest focus: the enemy seat (its player-actor id, -1 = none), the tick it was taken, and the cached pick (re-evaluated at most every check window).</summary>
 		public int FocusSeat = -1;

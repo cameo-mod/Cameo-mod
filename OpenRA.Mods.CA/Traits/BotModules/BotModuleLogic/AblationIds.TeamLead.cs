@@ -52,5 +52,18 @@ namespace OpenRA.Mods.CA.Traits
 		public const string TeamLeadGatherHold = "tl_gather_hold";
 		public const string TeamLeadGraceHold = "tl_grace_hold";
 		public const string TeamLeadRouteAll = "tl_route_all";
+
+		// TEAM-GATHER-02 (USER order via Opus, AUDIT_SQUAD_01 / AUDIT_CONFIG_01): ally defence leaves the order's squads alone (tl_defend_respects_order), a squad that lost its
+		// target retargets only around its fight (gt_bounded_retarget), a formed squad joins at once (tl_join_at_form), the push bar and the publish floor count joinable units
+		// (tl_bar_joinable), units merge into the gathering squad (tl_join_merge), a rally order keeps its grace and is not re-published at once (tl_grace_rally), the gather
+		// fight uses the weapon range (tl_gather_range), and the late hunt goes through the order (tl_hunt_via_order). Info switches: TeamLead<Key>Enabled.
+		public const string TeamLeadDefendRespectsOrder = "tl_defend_respects_order";
+		public const string TeamLeadBoundedRetarget = "gt_bounded_retarget";
+		public const string TeamLeadJoinAtForm = "tl_join_at_form";
+		public const string TeamLeadBarJoinable = "tl_bar_joinable";
+		public const string TeamLeadJoinMerge = "tl_join_merge";
+		public const string TeamLeadGraceRally = "tl_grace_rally";
+		public const string TeamLeadGatherRange = "tl_gather_range";
+		public const string TeamLeadHuntViaOrder = "tl_hunt_via_order";
 	}
 }

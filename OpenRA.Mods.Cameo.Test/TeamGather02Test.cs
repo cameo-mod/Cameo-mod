@@ -1,0 +1,190 @@
+#region Copyright & License Information
+/**
+ * Copyright (c) The OpenRA Combined Arms Developers (see CREDITS).
+ * This file is part of OpenRA Combined Arms, which is free software.
+ * It is made available to you under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3 of the License,
+ * or (at your option) any later version. For more information, see COPYING.
+ */
+#endregion
+
+using System;
+using System.IO;
+using System.Text.RegularExpressions;
+using NUnit.Framework;
+using OpenRA.Mods.CA.Traits;
+
+namespace OpenRA.Mods.Cameo.Test
+{
+	/// <summary>
+	/// TEAM-GATHER-02 (AUDIT_SQUAD_01 / AUDIT_CONFIG_01, USER order via Opus): TEAM-GATHER-01 still left 22 of 29 joined V04 squads in the attack state through
+	/// ally defence, a lost target sent a squad alone to the nearest enemy anywhere, the push bar grew with the idle army, and the rally order churned. One switch
+	/// per row (release, default off, ON in the six personalities, never @classic) and one DEV row each.
+	/// </summary>
+	[TestFixture]
+	public class TeamGather02Test
+	{
+		const string Bots = "OpenRA.Mods.CA/Traits/BotModules/";
+
+		static string RepoFile(string relative)
+		{
+			var dir = new DirectoryInfo(AppContext.BaseDirectory);
+			while (dir != null && !File.Exists(Path.Combine(dir.FullName, "mod.config")))
+				dir = dir.Parent;
+
+			Assert.That(dir, Is.Not.Null, "repository root (mod.config) not found above " + AppContext.BaseDirectory);
+			return File.ReadAllText(Path.Combine(dir.FullName, relative)).Replace("\r\n", "\n");
+		}
+
+		[Test]
+		public void AllyDefenceLeavesASquadInTheOrderOrJustFormedAlone()
+		{
+			Assert.That(TeamLeadCA.SquadKeptForOrder(true, true, 5000, 100, 100), Is.True, "gathering for the open order: kept");
+			Assert.That(TeamLeadCA.SquadKeptForOrder(true, false, 5050, 5000, 100), Is.True, "formed 50 ticks ago: its first team pass has not run");
+			Assert.That(TeamLeadCA.SquadKeptForOrder(true, false, 5100, 5000, 100), Is.False, "formed 100 ticks ago: free again");
+			Assert.That(TeamLeadCA.SquadKeptForOrder(true, false, 5050, -1, 100), Is.False, "no formation tick (a loaded save): free");
+			Assert.That(TeamLeadCA.SquadKeptForOrder(false, true, 5000, 4990, 100), Is.False, "row off = the old rule, any idle or gathering squad can be sent");
+		}
+
+		[Test]
+		public void ARallyOrderIsOnlyPublishedForAnArmyAtWaveMinAndIsNotRepublishedAtOnce()
+		{
+			Assert.That(TeamLeadCA.RallyFloorPassed(8, 4000, 8, 4000), Is.True);
+			Assert.That(TeamLeadCA.RallyFloorPassed(7, 9000, 8, 4000), Is.False, "units below the WAVE-MIN units bar");
+			Assert.That(TeamLeadCA.RallyFloorPassed(20, 3999, 8, 4000), Is.False, "value below the WAVE-MIN value bar");
+			Assert.That(TeamLeadCA.RallyFloorPassed(0, 0, 0, 0), Is.False, "an empty army never passes");
+
+			Assert.That(TeamLeadCA.RepublishHeld(1000, -1, 1500), Is.False, "no cancel yet");
+			Assert.That(TeamLeadCA.RepublishHeld(2499, 1000, 1500), Is.True);
+			Assert.That(TeamLeadCA.RepublishHeld(2500, 1000, 1500), Is.False, "1500 ticks after the cancel the leader may publish again");
+
+			Assert.That(TeamLeadCA.RallyGraceHolds(true, true), Is.True, "rally order + row on: no no_reports cancel");
+			Assert.That(TeamLeadCA.RallyGraceHolds(true, false), Is.False, "an attack order keeps the grace rule");
+			Assert.That(TeamLeadCA.RallyGraceHolds(false, true), Is.False, "row off = the old behaviour");
+
+			var team = new TeamLeadTeam();
+			Assert.That(team.LastCancelTick, Is.EqualTo(-1));
+		}
+
+		[Test]
+		public void AllyDefenceAndTheSquadFormationAreWired()
+		{
+			var ally = RepoFile(Bots + "SquadManagerBotModuleCA.DefendAlly.cs");
+			Assert.That(ally, Does.Contain("bool DefendAllyFreeSquad(SquadCA s) => IsIdleResponderSquad(s) && !TeamLeadKeepsSquad(s);"));
+			Assert.That(ally, Does.Contain("if (DefendAllyFreeSquad(s))\n\t\t\t\t\tdefendAllyResponders.Add(s.CenterPosition);"));
+			Assert.That(ally, Does.Contain("s == protectSq || !DefendAllyFreeSquad(s) ||"));
+			Assert.That(ally, Does.Not.Contain("!IsIdleResponderSquad(s) ||"), "the respond loop uses the free-squad rule, not the bare state rule");
+
+			var squads = RepoFile(Bots + "SquadManagerBotModuleCA.cs");
+			Assert.That(squads, Does.Contain("ret.FormedTick = World.WorldTick;\n\t\t\tSquads.Add(ret);"));
+			Assert.That(squads, Does.Contain("if (TeamLeadJoinAtFormOn && attackForce.IsValid && TeamLeadOpenOrder() != null)\n\t\t\t\t\tTeamLeadPrepare(attackForce);"));
+			Assert.That(RepoFile(Bots + "Squads/SquadCA.cs"), Does.Contain("public int FormedTick = -1;"));
+		}
+
+		[Test]
+		public void ALostTargetRetargetsOnlyAroundTheFightThenGoesIdle()
+		{
+			var states = RepoFile(Bots + "Squads/States/GroundStatesCA.cs");
+			Assert.That(states, Does.Contain("var bounded = owner.SquadManager.TeamLeadBoundsRetarget(owner);"));
+			Assert.That(states, Does.Contain("? owner.SquadManager.FindClosestEnemy(leader.Actor, WDist.FromCells(owner.SquadManager.Info.AttackScanRadius), owner)"));
+			Assert.That(states, Does.Contain("else if (bounded)\n\t\t\t\t\t{\n\t\t\t\t\t\towner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);"));
+			Assert.That(states, Does.Contain("if (!owner.IsTargetValid && owner.SquadManager.TeamLeadBoundsRetarget(owner))"), "the attack state is bounded too");
+			Assert.That(states, Does.Contain("TeamLeadHuntsViaOrder(owner)"), "the finish hunt and its arrival go through the order");
+
+			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
+			Assert.That(wiring, Does.Contain("bool TeamLeadTeamSquad(SquadCA s) => s.Type == SquadCAType.Rush && !s.M13Response"));
+			Assert.That(wiring, Does.Contain("&& !ReferenceEquals(s, stalemateSquad) && !ReferenceEquals(s, m13IntentSquad) && !ReferenceEquals(s, m13ResponseSquad);"), "the breaker and the liveness wave keep their own targeting");
+			Assert.That(wiring, Does.Contain("internal bool TeamLeadBoundsRetarget(SquadCA s) => TeamLeadBoundedRetargetOn && TeamLeadTeamSquad(s) && (!s.IsHunting || TeamLeadHuntViaOrderOn);"));
+			Assert.That(wiring, Does.Contain("internal bool TeamLeadHuntsViaOrder(SquadCA s) => TeamLeadHuntViaOrderOn && TeamLeadTeamSquad(s);"));
+		}
+
+		[Test]
+		public void TheBarAndThePoolCountOnlyJoinableUnitsAndUnitsMergeIntoTheGatheringSquad()
+		{
+			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
+			Assert.That(wiring, Does.Contain("if (!TeamLeadBarJoinableOn || TeamLeadJoinable(u))\n\t\t\t\t\tvalue += UnitValue(u.Actor);"));
+			Assert.That(wiring, Does.Contain("var units = TeamLeadBarJoinableOn ? unitsHangingAroundTheBase.Count(TeamLeadJoinable) : unitsHangingAroundTheBase.Count;"));
+			Assert.That(wiring, Does.Contain("HasTraitInfo<AttackBaseInfo>() && u.Actor.Info.HasTraitInfo<MobileInfo>()"));
+			Assert.That(wiring, Does.Contain("!Info.ArtilleryTypes.Contains(u.Actor.Info.Name) && !Info.FireSupportTypes.Contains(u.Actor.Info.Name)"));
+
+			// Merge: a rally or held order takes the joinable units into the gathering squad; a new squad needs a real group; the join counts only for a formed squad.
+			Assert.That(wiring, Does.Contain("if (TeamLeadJoinMergeOn && (order.GatherOnly || order.Extending))"));
+			Assert.That(wiring, Does.Contain("if (TeamLeadMergeIntoGatherSquad(bot, order))\n\t\t\t\t\treturn;"));
+			Assert.That(wiring, Does.Contain("if (unitsHangingAroundTheBase.Count(TeamLeadJoinable) < Info.TeamLeadJoinMinUnits)\n\t\t\t\t\treturn;"));
+			Assert.That(wiring, Does.Contain("(!TeamLeadJoinMergeOn || Squads.Any(q => q.IsValid && q.Type == SquadCAType.Rush && q.FormedTick == now)))\n\t\t\t\tteamLeadJoinedSeq = order.Seq;"));
+
+			// The rally publish floor: BlobLaunch01CA.MinUnits bar and the value bar, joinable units only.
+			Assert.That(wiring, Does.Contain("!TeamLeadCA.RallyFloorPassed(blob.Units, blob.Value, BlobLaunch01CA.MinUnits(minUnits, blob.Units), minValue))"));
+		}
+
+		[Test]
+		public void ARallyOrderKeepsItsGraceUpToTheMaxAgeAndNoOrderFollowsACancelAtOnce()
+		{
+			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
+			Assert.That(wiring, Does.Contain(": TeamLeadCA.RallyGraceHolds(TeamLeadGraceRallyOn, order.GatherOnly) ? (now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? \"max_age\" : null)"));
+			Assert.That(wiring, Does.Contain("if (cancel != \"leader_changed\")\n\t\t\t\t\tteam.LastCancelTick = now;"));
+			Assert.That(wiring, Does.Contain("if (TeamLeadGraceRallyOn && TeamLeadCA.RepublishHeld(now, team.LastCancelTick, Info.TeamLeadRepublishHoldTicks))\n\t\t\t\treturn;"));
+		}
+
+		[Test]
+		public void TheGatherFightUsesTheSquadWeaponRangeAndTheLateHuntIsOneCellForTheBlob()
+		{
+			var gather = RepoFile(Bots + "Squads/States/TeamLeadGatherStateCA.cs");
+			Assert.That(gather, Does.Contain("manager.TeamLeadFightRange(owner)"));
+			Assert.That(gather, Does.Not.Contain("WDist.FromCells(manager.Info.TeamLeadGatherFightCells)"), "the fixed distance lives in TeamLeadFightRange now");
+			Assert.That(gather, Does.Not.Contain("\"AttackMove\""), "the gather state still never queues an AttackMove order");
+
+			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
+			Assert.That(wiring, Does.Contain("if (!TeamLeadGatherRangeOn)\n\t\t\t\treturn fixedRange;"));
+			Assert.That(wiring, Does.Contain("max = System.Math.Max(max, a.GetMaximumRange().Length);"));
+			Assert.That(wiring, Does.Contain("System.Math.Clamp(max, fixedRange.Length, System.Math.Max(fixedRange.Length, WDist.FromCells(Info.AttackScanRadius).Length))"));
+
+			// Late hunt: the order target is the one hunt cell (actor id 0 = a position, which TeamLeadResolveTarget turns into the squads' HuntCell).
+			Assert.That(wiring, Does.Contain("if (TeamLeadHuntViaOrderOn && FinishModeActive"));
+			Assert.That(wiring, Does.Contain("target = World.Map.CenterOfCell(hunt);\n\t\t\t\tactorId = 0;\n\t\t\t\treturn true;"));
+			Assert.That(RepoFile(Bots + "Squads/States/GroundStatesCA.cs"), Does.Contain("Stalemate01CA.Hunts(owner.Type) && !owner.SquadManager.TeamLeadHuntsViaOrder(owner))"));
+		}
+
+		[Test]
+		public void EverySwitchIsOffByDefaultOnInTheSixPersonalitiesAndNeverInClassicAndTheGuerrillaCapIs25()
+		{
+			var info = RepoFile(Bots + "SquadManagerBotModuleCAInfo.TeamLead.cs");
+			var keys = new[]
+			{
+				"TeamLeadDefendRespectsOrderEnabled", "TeamLeadBoundedRetargetEnabled", "TeamLeadJoinAtFormEnabled", "TeamLeadBarJoinableEnabled",
+				"TeamLeadJoinMergeEnabled", "TeamLeadGraceRallyEnabled", "TeamLeadGatherRangeEnabled", "TeamLeadHuntViaOrderEnabled"
+			};
+
+			foreach (var key in keys)
+				Assert.That(info, Does.Contain("public readonly bool " + key + " = false;"), key);
+
+			Assert.That(info, Does.Contain("public readonly int TeamLeadFreshSquadTicks = 100;"));
+			Assert.That(info, Does.Contain("public readonly int TeamLeadRepublishHoldTicks = 1500;"));
+
+			var yaml = RepoFile("mods/cameo/ai/ai.yaml");
+			var classic = yaml.IndexOf("SquadManagerBotModuleCA@classic:", StringComparison.Ordinal);
+			Assert.That(classic, Is.GreaterThan(0));
+			foreach (var key in keys)
+			{
+				Assert.That(Regex.Matches(yaml[..classic], "\n\t\t" + key + ": true").Count, Is.EqualTo(6), key);
+				Assert.That(yaml[classic..], Does.Not.Contain(key), key + " never in @classic");
+			}
+
+			// C-10: the guerrilla personality's harass cap is 25 like the others (USER 25% rule).
+			var guerrilla = yaml.IndexOf("SquadManagerBotModuleCA@guerrilla:", StringComparison.Ordinal);
+			var cap = yaml.IndexOf("\n\t\tHarassCapPercent: 25", StringComparison.Ordinal);
+			Assert.That(cap, Is.GreaterThan(guerrilla));
+			Assert.That(cap, Is.LessThan(classic));
+			Assert.That(yaml, Does.Not.Contain("HarassCapPercent: 40"));
+
+			Assert.That(AblationIds.TeamLeadDefendRespectsOrder, Is.EqualTo("tl_defend_respects_order"));
+			Assert.That(AblationIds.TeamLeadBoundedRetarget, Is.EqualTo("gt_bounded_retarget"));
+			Assert.That(AblationIds.TeamLeadJoinAtForm, Is.EqualTo("tl_join_at_form"));
+			Assert.That(AblationIds.TeamLeadBarJoinable, Is.EqualTo("tl_bar_joinable"));
+			Assert.That(AblationIds.TeamLeadJoinMerge, Is.EqualTo("tl_join_merge"));
+			Assert.That(AblationIds.TeamLeadGraceRally, Is.EqualTo("tl_grace_rally"));
+			Assert.That(AblationIds.TeamLeadGatherRange, Is.EqualTo("tl_gather_range"));
+			Assert.That(AblationIds.TeamLeadHuntViaOrder, Is.EqualTo("tl_hunt_via_order"));
+		}
+	}
+}

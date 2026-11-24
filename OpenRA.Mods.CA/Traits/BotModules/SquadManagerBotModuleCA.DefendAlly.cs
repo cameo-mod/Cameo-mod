@@ -106,6 +106,9 @@ namespace OpenRA.Mods.CA.Traits
 			s.IsValid && s.Type is SquadCAType.Rush or SquadCAType.Guerrilla
 			&& s.FuzzyStateMachine?.CurrentState is GroundUnitsIdleStateCA or GroundUnitsStageStateCA or TeamLeadGatherStateCA;
 
+		// TEAM-GATHER-02 (tl_defend_respects_order): an idle responder squad that is not gathering for the open order and not freshly formed.
+		bool DefendAllyFreeSquad(SquadCA s) => IsIdleResponderSquad(s) && !TeamLeadKeepsSquad(s);
+
 		void DefendAllyTick(IBot bot)
 		{
 			if (!DefendAllyActive)
@@ -125,7 +128,7 @@ namespace OpenRA.Mods.CA.Traits
 					defendAllyResponders.Add(u.Actor.CenterPosition);
 
 			foreach (var s in Squads)
-				if (IsIdleResponderSquad(s))
+				if (DefendAllyFreeSquad(s))
 					defendAllyResponders.Add(s.CenterPosition);
 
 			if (defendAllyResponders.Count == 0)
@@ -237,7 +240,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			foreach (var s in Squads)
 			{
-				if (s == protectSq || !IsIdleResponderSquad(s) || !DefendAllyCA.InRadius(s.CenterPosition, friendlyPos, radius))
+				if (s == protectSq || !DefendAllyFreeSquad(s) || !DefendAllyCA.InRadius(s.CenterPosition, friendlyPos, radius))
 					continue;
 
 				s.TargetActor = attacker;

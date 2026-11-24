@@ -109,7 +109,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			// STALEMATE-01 finish mode (switch ON only, late game): nothing visible and nothing remembered - hunt the least recently
 			// visited unseen grid cell the leader can reach instead of holding (a seat with no known building must still be found).
-			if (owner.SquadManager.FinishModeActive && Stalemate01CA.Hunts(owner.Type))
+			if (owner.SquadManager.FinishModeActive && Stalemate01CA.Hunts(owner.Type) && !owner.SquadManager.TeamLeadHuntsViaOrder(owner))
 			{
 				var cell = owner.SquadManager.FinishHuntCell(owner.Units.First().Actor);
 				if (cell != null)
@@ -569,12 +569,13 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (owner.IsHunting && leader.Actor != null && Stalemate01CA.Arrived(
 				(leader.Actor.Location - owner.HuntCell.Value).LengthSquared, owner.SquadManager.Info.FinishHuntArriveCells)
 				&& !FindNewTarget(owner))
-			{
-				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), false);
-				return;
-			}
+				{
+					// TEAM-GATHER-02 (tl_hunt_via_order): the blob's hunt cell is reached and nothing is in view: back to idle, where the team pass takes the next order.
+					owner.FuzzyStateMachine.ChangeState(owner, owner.SquadManager.TeamLeadHuntsViaOrder(owner) ? (IState)new GroundUnitsIdleStateCA() : new GroundUnitsFleeStateCA(), false);
+					return;
+				}
 
-			if (!owner.IsTargetValid || !CheckReachability(leader.Actor, owner.World.Map.CellContaining(owner.Target.CenterPosition)))
+				if (!owner.IsTargetValid || !CheckReachability(leader.Actor, owner.World.Map.CellContaining(owner.Target.CenterPosition)))
 			{
 				// Harassers retarget high-value first when the target is gone (HV
 				// roll + risk gate + frozen fallback live inside FindNewTarget); a
@@ -587,9 +588,19 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				}
 				else if (owner.Type != SquadCAType.Harass || owner.IsTargetValid)
 				{
-					var targetActor = owner.SquadManager.FindClosestEnemy(leader.Actor, owner);
+					// TEAM-GATHER-02 (gt_bounded_retarget): a team Rush squad that lost its target looks for the next enemy only around its fight; with none there it goes back
+					// to idle, where the team pass re-joins the open order or stands it down, instead of marching alone to the nearest enemy anywhere.
+					var bounded = owner.SquadManager.TeamLeadBoundsRetarget(owner);
+					var targetActor = bounded
+						? owner.SquadManager.FindClosestEnemy(leader.Actor, WDist.FromCells(owner.SquadManager.Info.AttackScanRadius), owner)
+						: owner.SquadManager.FindClosestEnemy(leader.Actor, owner);
 					if (targetActor != null)
 						owner.TargetActor = targetActor;
+					else if (bounded)
+					{
+						owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);
+						return;
+					}
 					else
 					{
 						owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), false);
@@ -1301,9 +1312,23 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (!owner.IsValid)
 				return;
 
+			// TEAM-GATHER-02 (gt_bounded_retarget): a team Rush squad whose target is gone fights on only around its leader, else goes back to idle (see the AttackMove state).
+			if (!owner.IsTargetValid && owner.SquadManager.TeamLeadBoundsRetarget(owner))
+			{
+				var near = owner.SquadManager.FindClosestEnemy(owner.Units[0].Actor, WDist.FromCells(owner.SquadManager.Info.AttackScanRadius), owner);
+				if (near != null)
+				{
+					owner.TargetActor = near;
+					return;
+				}
+
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);
+				return;
+			}
+
 			if (!owner.IsTargetValid && !FindNewTarget(owner))
 			{
-				// CA F2p2 (2bad89a77): rather than fleeing, take an opportunity target near the leader, else resume AttackMove.
+			// CA F2p2 (2bad89a77): rather than fleeing, take an opportunity target near the leader, else resume AttackMove.
 				// FindClosestEnemy(leader, range) is the observed overload (visible or remembered enemies only).
 				if (owner.SquadManager.Info.UseUpstreamStateTweaks)
 				{

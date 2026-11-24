@@ -3087,6 +3087,7 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			var ret = new SquadCA(bot, this, type, target);
 			ret.PriorityTags = PriorityTagsFor(type);
+			ret.FormedTick = World.WorldTick;
 			Squads.Add(ret);
 			if (type is SquadCAType.Rush or SquadCAType.Harass or SquadCAType.Guerrilla
 				or SquadCAType.Air or SquadCAType.Naval or SquadCAType.Fighter
@@ -4271,6 +4272,10 @@ namespace OpenRA.Mods.CA.Traits
 					AggLaunches++;
 					DiagnosticSquadEvent(attackForce, "agg_launch", reason: AggTeamPushActive(World.WorldTick) ? "push" : "excess");
 				}
+
+				// TEAM-GATHER-02 (tl_join_at_form): a wave squad formed while a team order is open joins it now, before ally defence (or anything else) can take it.
+				if (TeamLeadJoinAtFormOn && attackForce.IsValid && TeamLeadOpenOrder() != null)
+					TeamLeadPrepare(attackForce);
 
 				foreach (var n in notifyIdleBaseUnits)
 					n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);

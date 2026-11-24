@@ -181,6 +181,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			}
 		}
 
+		/// <summary>The tick this squad was registered (TEAM-GATHER-02: ally defence leaves a freshly formed squad to its first team pass).</summary>
+		public int FormedTick = -1;
+
 		public bool IsValid => Units.Count > 0;
 
 		/// <summary>

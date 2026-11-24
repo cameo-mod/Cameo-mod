@@ -78,7 +78,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			{
 				// TEAM-GATHER-01 (tl_gather_hold): before the push the squad never leaves its order for a fight. It stops where an enemy stands inside its fight
 				// range (idle units fire at what is in weapon range), fights it out, then walks on to the rally. A stand-off nobody can win is dropped after a while.
-				var near = now < calmUntil ? null : manager.FindClosestEnemy(owner.Units[0].Actor, WDist.FromCells(manager.Info.TeamLeadGatherFightCells), owner);
+				var near = now < calmUntil ? null : manager.FindClosestEnemy(owner.Units[0].Actor, manager.TeamLeadFightRange(owner), owner);
 				if (near != null && fighting && now - fightSince > manager.Info.TeamLeadGatherFightMaxTicks)
 				{
 					calmUntil = now + manager.Info.TeamLeadGatherFightMaxTicks;

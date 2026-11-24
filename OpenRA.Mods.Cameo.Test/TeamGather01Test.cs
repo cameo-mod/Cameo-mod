@@ -97,7 +97,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var tick = Between(gather, "public void Tick(", "public void Deactivate(");
 			Assert.That(tick, Does.Contain("TeamLeadCA.GatherHoldsOnContact(manager.TeamLeadGatherHoldOn, order.Pushed)"));
-			Assert.That(tick, Does.Contain("WDist.FromCells(manager.Info.TeamLeadGatherFightCells)"), "the fight range, not the scan radius");
+			Assert.That(tick, Does.Contain("manager.TeamLeadFightRange(owner)"), "the fight range (TEAM-GATHER-02: the weapon range, else TeamLeadGatherFightCells), not the scan radius");
 			Assert.That(tick, Does.Contain("new Order(\"Stop\", u.Actor, false)"), "idle units fire at what is in weapon range");
 			Assert.That(tick, Does.Contain("fighting = false;\n\t\t\t\t\tActivate(owner);"), "back to the rally when the fight is over");
 			Assert.That(tick, Does.Contain("manager.Info.TeamLeadGatherFightMaxTicks"), "a stand-off nobody can win is dropped");

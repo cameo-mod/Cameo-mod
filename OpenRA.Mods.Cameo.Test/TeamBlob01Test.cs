@@ -235,7 +235,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(body.IndexOf("TeamLeadCA.OrderDue(", StringComparison.Ordinal), Is.GreaterThan(0));
 			Assert.That(body.IndexOf("TeamLeadCA.FallbackPublish(", StringComparison.Ordinal), Is.GreaterThan(body.IndexOf("TeamLeadCA.OrderDue(", StringComparison.Ordinal)));
 			Assert.That(body, Does.Contain("if (why == TeamLeadCA.PublishWhy.None && TeamLeadFallbackPublishOn)"));
-			Assert.That(body, Does.Not.Contain("MinUnits(minUnits, blob.Units)"), "no unit bar of its own: the fallback never attacks");
+			// TEAM-GATHER-02 (tl_join_merge): the one use is the rally publish floor (RallyFloorPassed); the fallback itself has no unit bar of its own and never attacks.
+			Assert.That(System.Text.RegularExpressions.Regex.Matches(body, System.Text.RegularExpressions.Regex.Escape("MinUnits(minUnits, blob.Units)")).Count, Is.LessThanOrEqualTo(1), "only the rally publish floor uses the unit bar");
 			Assert.That(body.IndexOf("TeamLeadPromoteRally(rally, now);", StringComparison.Ordinal), Is.LessThan(body.IndexOf("if (now < initialAttackDelay || TeamLeadOpenOrder() != null)", StringComparison.Ordinal)), "a rally order is promoted before the open-order guard");
 			Assert.That(body, Does.Contain("if (why == TeamLeadCA.PublishWhy.Gather)\n\t\t\t\torder.MakeGatherOnly();"));
 			Assert.That(body, Does.Contain("BlobLaunch01CA.TicksSinceOrder("));

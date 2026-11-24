@@ -122,6 +122,36 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("TEAM-GATHER-01 (release switch; the DEV row is tl_route_all). On: while a team order is open, the liveness (M13) urgent attack and the stalemate breaker wave do not launch alone; their units stay in the pool and join the order. Defence and ally defence are not affected. Off = they launch as before (behind the BLOB-LAUNCH-01 attack gate).")]
 		public readonly bool TeamLeadRouteAllEnabled = false;
 
+		[Desc("TEAM-GATHER-02 (release switch; the DEV row is tl_defend_respects_order). On: ally defence (DEFEND-ALLY) never takes a squad that gathers for the open team order or was formed less than TeamLeadFreshSquadTicks ago (its first team pass has not run yet); it uses free squads and pool units only, inside its radius. Off = any idle or gathering squad can be sent.")]
+		public readonly bool TeamLeadDefendRespectsOrderEnabled = false;
+
+		[Desc("TEAM-GATHER-02 tl_defend_respects_order: ticks after its formation during which a squad is left to its first team pass (join or stand down).")]
+		public readonly int TeamLeadFreshSquadTicks = 100;
+
+		[Desc("TEAM-GATHER-02 (release switch; the DEV row is gt_bounded_retarget). On: a team Rush squad that lost its target looks for the next enemy only inside AttackScanRadius around its leader; with none there it goes back to idle, where the team pass re-joins the open order or stands it down. Off = it marches to the nearest enemy anywhere.")]
+		public readonly bool TeamLeadBoundedRetargetEnabled = false;
+
+		[Desc("TEAM-GATHER-02 (release switch; the DEV row is tl_join_at_form). On: a wave squad that is formed while a team order is open joins it in the same pass, before ally defence or anything else can take it.")]
+		public readonly bool TeamLeadJoinAtFormEnabled = false;
+
+		[Desc("TEAM-GATHER-02 (release switch; the DEV row is tl_bar_joinable). On: the team idle army (the push bar, the ready blob and the rally publish floor) counts only joinable units: live, armed, ground (Mobile) units that are not artillery or fire support. Off = every pool unit counts.")]
+		public readonly bool TeamLeadBarJoinableEnabled = false;
+
+		[Desc("TEAM-GATHER-02 (release switch; the DEV row is tl_join_merge). On: for a rally or held order, joinable pool units of any number merge into the seat's gathering squad (no new one-unit squads; a new squad forms only from TeamLeadJoinMinUnits joinable units), the join counts only when a squad with units was formed, and the leader publishes a rally order only when the team idle army reaches the WAVE-MIN units (BlobLaunch01CA.MinUnits) and value.")]
+		public readonly bool TeamLeadJoinMergeEnabled = false;
+
+		[Desc("TEAM-GATHER-02 (release switch; the DEV row is tl_grace_rally). On: a rally (gather-only) order is not cancelled for missing reports (it ends by promotion or at TeamLeadOrderMaxTicks), and no order is published within TeamLeadRepublishHoldTicks of a cancel (a leader change excepted).")]
+		public readonly bool TeamLeadGraceRallyEnabled = false;
+
+		[Desc("TEAM-GATHER-02 tl_grace_rally: ticks after a cancel during which the leader publishes no new order.")]
+		public readonly int TeamLeadRepublishHoldTicks = 1500;
+
+		[Desc("TEAM-GATHER-02 (release switch; the DEV row is tl_gather_range). On: a gathering squad stops to fight an enemy inside its own maximum weapon range (at least TeamLeadGatherFightCells, at most AttackScanRadius) instead of the fixed TeamLeadGatherFightCells.")]
+		public readonly bool TeamLeadGatherRangeEnabled = false;
+
+		[Desc("TEAM-GATHER-02 (release switch; the DEV row is tl_hunt_via_order). On: from the late start a team Rush squad does not hunt its own grid cell; with nothing known the leader's order target is one hunt cell for the whole blob.")]
+		public readonly bool TeamLeadHuntViaOrderEnabled = false;
+
 		[Desc("TEAM-BLOB-01 (release switch; the DEV row is tl_order_survive). On: when the elected leader changes while an order lives, the new leader takes the order over instead of cancelling it (the squads gathering for it are not thrown back to the pool). Off = the order is cancelled on a leader change as before.")]
 		public readonly bool TeamLeadOrderSurviveEnabled = false;
 	}
