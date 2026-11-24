@@ -450,10 +450,6 @@ namespace OpenRA.Mods.CA.Traits
 		// ABLATE-01 hooks (DEV-only provider; absent in release = always on): one cached answer per row.
 		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery, ablateUpgradeService;
 
-		// UPGRADE-QUEUE-01: own cadence (same period as the build pass) so the service is not tied to the pause guards the pass sits behind.
-		BotCallPeriod upgradeCalls;
-		readonly Dictionary<(uint, string), int> upgradeIdleUntil = new();
-		const int UpgradeRecheckTicks = 75;
 		bool UpgradeServiceOn => switchesActive && Info.UpgradeService && !ablateUpgradeService.Off(player, AblationIds.UpgradeService);
 
 		// PR-2 queue depth (fair path only): world ticks between this bot's last two passes. Round-robin makes it long;
@@ -721,14 +717,9 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// UPGRADE-QUEUE-01: runs before the pause votes and the cash floor (see ServeUpgradeQueues for what it keeps).
+			// No period and no re-check delay (user rule: no delay): every bot visit looks at every served queue.
 			if (UpgradeServiceOn)
-			{
-				var upgradeClock = BotVisitClock.Of(bot);
-				if (upgradeCalls.Call(upgradeClock.VisitTick, upgradeClock.Elapsed, FeedbackTime + Info.UnitBuilderInterval))
-					ServeUpgradeQueues(bot);
-			}
-			else
-				upgradeCalls = default;
+				ServeUpgradeQueues(bot);
 
 			var baseBuilderPause = requestPause.FirstOrDefault(rp => ReferenceEquals(rp, baseBuilder));
 
@@ -874,17 +865,7 @@ namespace OpenRA.Mods.CA.Traits
 					if (slots <= 0)
 						continue;
 
-					var key = (queue.Actor.ActorID, queue.Info.Type);
-					if (upgradeIdleUntil.TryGetValue(key, out var idleUntil))
-					{
-						if (world.WorldTick < idleUntil)
-							continue;
-
-						upgradeIdleUntil.Remove(key);
-					}
-
 					var shares = GetUnitsToBuildForCategory(queue.Info.Type);
-					var startedHere = 0;
 					for (; slots > 0; slots--)
 					{
 						var candidates = new List<UpgradeServiceCA.Candidate>();
@@ -901,18 +882,11 @@ namespace OpenRA.Mods.CA.Traits
 
 						var index = UpgradeServiceCA.Choose(candidates, inProduction, bank, paused, (int)player.PlayerActor.ActorID);
 						if (index < 0)
-						{
-							// Nothing startable (all researched, next tier locked, or unaffordable): look again in 75 ticks, not every pass.
-							if (startedHere == 0)
-								upgradeIdleUntil[key] = world.WorldTick + UpgradeRecheckTicks;
-
-							break;
-						}
+							break; // nothing startable now (all researched, next tier locked, unaffordable); looked at again on the next visit
 
 						var item2 = infos[index];
 						inProduction.Add(item2.Name);
 						bank -= Math.Max(0, candidates[index].Cost);
-						startedHere++;
 						SetUnitInterval(item2.Name);
 						bot.QueueOrder(Order.StartProduction(queue.Actor, item2.Name, 1));
 						NotifyStarted(item2.Name, queue.Info.Type);

@@ -134,7 +134,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(service, Does.Contain("ShouldBuild(item.Name, true, queue.Info.Type)"));
 			Assert.That(service, Does.Contain("SpendCommitmentsCA.Available(playerResources.GetCashAndResources(), UnpaidQueuedCost())"), "the bank is net of every queued item's unpaid cost");
 			Assert.That(service, Does.Contain("rp is not IBotItemAwareUnitCap"));
-			Assert.That(service, Does.Contain("upgradeIdleUntil.Remove(key)"));
+			Assert.That(service, Does.Not.Contain("IdleUntil"), "no re-check delay: an idle queue is looked at on every visit");
+			Assert.That(src, Does.Not.Contain("upgradeCalls"), "no service period");
 			Assert.That(service, Does.Not.Contain("Random"));
 			Assert.That(service, Does.Not.Contain("ProductionMinCashRequirement"));
 			Assert.That(service, Does.Contain("Order.StartProduction(queue.Actor, item2.Name, 1)"));
