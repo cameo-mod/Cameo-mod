@@ -16,6 +16,8 @@ namespace OpenRA.Mods.CA.Traits
 	public static partial class AblationIds
 	{
 		public const string EssentialsLowCash = "pb_essentials_low_cash";
+		public const string ExpansionRefinerySafety = "pb_expansion_refinery_safety"; // off = the expansion refinery goes first whether or not the new yard is under threat
+		public const string SustainedCashProduction = "pb_sustained_cash_production"; // off = a long-lasting bank above the line no longer forces the next building to be production
 		public const string CycleProduction = "pb_cycle_production"; // off = the old production rungs (overflow, scaling, threshold) only
 	}
 }

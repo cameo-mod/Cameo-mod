@@ -114,9 +114,13 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateRatio;
 
 		// PROD-BUSY-01 rows (DEV provider only; release = on).
-		AblationLatch ablateAllProducers, ablateIdleSweep, ablateEssentials, ablateCycle;
+		AblationLatch ablateAllProducers, ablateIdleSweep, ablateEssentials, ablateCycle, ablateSustained, ablateSafety;
 		string lastCycledProduction;
 		bool AllProducersOn => baseBuilder.AllBuildingProducersArmed && !ablateAllProducers.Off(player, AblationIds.ProdBusyAllBuildingProducers);
+		bool SustainedActive => baseBuilder.SustainedCashArmed && !ablateSustained.Off(player, AblationIds.SustainedCashProduction)
+			&& !baseBuilder.Info.DefenseQueues.Contains(Category)
+			&& baseBuilder.SustainedCash.Active(world.WorldTick, baseBuilder.Info.SustainedCashTicks);
+		bool SafetyOn => baseBuilder.ExpansionSafetyArmed && !ablateSafety.Off(player, AblationIds.ExpansionRefinerySafety);
 		bool CycleOn => baseBuilder.CycleProductionArmed && !ablateCycle.Off(player, AblationIds.CycleProduction);
 		bool EssentialsOn => baseBuilder.EssentialsLowCashArmed && !ablateEssentials.Off(player, AblationIds.EssentialsLowCash);
 		bool IdleSweepOn => baseBuilder.BuildingIdleSweepArmed && !ablateIdleSweep.Off(player, AblationIds.ProdBusyBuildingIdleSweep);
@@ -2259,6 +2263,38 @@ namespace OpenRA.Mods.CA.Traits
 			return verdict;
 		}
 
+		// The refinery the economy rung wants (also the expansion refinery of a new yard under the refinery law: HasAdequateRefineryCount is false while an
+		// anchor is claimable), or null. Shared by the economy rung and SUSTAINED-CASH-01 so both pick the same item.
+		ActorInfo ChooseWantedRefinery(ProductionQueue queue, IEnumerable<ActorInfo> buildableThings, ActorInfo power)
+		{
+			if (baseBuilder.HasAdequateRefineryCount())
+				return null;
+
+			// pb_expansion_refinery_safety: a refinery wanted for an expansion yard under threat is dropped from this slot (not held).
+			if (SafetyOn)
+			{
+				var wantedBy = baseBuilder.ExpansionWantsRefinery();
+				var wantedField = wantedBy?.RefineryClaimTarget ?? wantedBy?.ExpansionTarget;
+				if (wantedField != null && !baseBuilder.ExpansionRefinerySafe(wantedField.Value))
+					return null;
+			}
+
+			var refinery = GetProducibleBuilding(baseBuilder.Info.RefineryTypes, buildableThings);
+
+			// RefineryLimit is shared across every faction the player owns, so always allow
+			// a faction's own first refinery through even if that global cap has already
+			// been reached by a different faction's construction yard.
+			if (refinery == null || baseBuilder.HasMaxRefineriesFor(refinery))
+				return null;
+
+			var pick = BaseBuilderQueueEvalCA.PickOrPower(refinery, power, HasSufficientPowerForActor);
+			if (pick != null)
+				AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, pick.Name,
+					pick == refinery ? "refinery" : "would be low power");
+
+			return pick;
+		}
+
 		ActorInfo ChooseBuildingToBuild(ProductionQueue queue)
 		{
 			var buildableThings = queue.BuildableItems();
@@ -2282,6 +2318,25 @@ namespace OpenRA.Mods.CA.Traits
 					AIUtils.BotDebug("{0} decided to build {1}: Priority override (low power)", queue.Actor.Owner, power.Name);
 					TraceLowPowerOverride(power);
 					return power;
+			}
+
+			// SUSTAINED-CASH-01 (USER 11-24): the bank has stayed above the tier line for SustainedCashTicks, so the next building is another production
+			// building, cycled fewest-first across the types (power only when it would leave power short: the candidates are power-resolved). Order while
+			// active: low power (above), the EXPANSION REFINERY (external fields are harvested ASAP; same pick as the economy rung), then this pick, above the
+			// opening, the planner wants and the expansion demand. Types at their limit are not candidates; with none left (null) normal building resumes.
+			// The defence queue never reaches it.
+			if (SustainedActive)
+			{
+				var expansionRefinery = ChooseWantedRefinery(queue, buildableThings, power);
+				if (expansionRefinery != null)
+					return expansionRefinery;
+
+				var sustained = ChooseCycledProduction(buildableThings, power);
+				if (sustained != null)
+				{
+					AIUtils.BotDebug("{0} decided to build {1}: Priority override (sustained cash production)", queue.Actor.Owner, sustained.Name);
+					return sustained;
+				}
 			}
 
 			if (openingBarracksPolicyActive && !baseBuilder.HasBuiltOrQueuedBarracks())
@@ -2317,24 +2372,9 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// Next is to build up a strong economy
-			if (!baseBuilder.HasAdequateRefineryCount())
-			{
-				var refinery = GetProducibleBuilding(baseBuilder.Info.RefineryTypes, buildableThings);
-
-				// RefineryLimit is shared across every faction the player owns, so always allow
-				// a faction's own first refinery through even if that global cap has already
-				// been reached by a different faction's construction yard.
-				if (refinery != null && !baseBuilder.HasMaxRefineriesFor(refinery))
-				{
-					var pick = BaseBuilderQueueEvalCA.PickOrPower(refinery, power, HasSufficientPowerForActor);
-					if (pick != null)
-					{
-						AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, pick.Name,
-							pick == refinery ? "refinery" : "would be low power");
-						return pick;
-					}
-				}
-			}
+			var wantedRefinery = ChooseWantedRefinery(queue, buildableThings, power);
+			if (wantedRefinery != null)
+				return wantedRefinery;
 
 			// REF-1 B1/B2 (§12.24 v2): the planner's own wants, after refineries but before the fraction roll —
 			// the due MCV's missing prerequisite, then the cheapest crawl-eligible link building while the crawl
