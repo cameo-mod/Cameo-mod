@@ -642,6 +642,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			tickModuleTicks = 0;
 			tickModuleCalls.Clear();
+		}
 
 		static void Bump(Dictionary<IBotTick, ModuleStat> map, IBotTick t, long ticks, int over10)
 		{
