@@ -104,7 +104,7 @@ namespace OpenRA.Mods.CA.Traits
 		// fighting keeps its job.
 		static bool IsIdleResponderSquad(SquadCA s) =>
 			s.IsValid && s.Type is SquadCAType.Rush or SquadCAType.Guerrilla
-			&& s.FuzzyStateMachine?.CurrentState is GroundUnitsIdleStateCA or GroundUnitsStageStateCA;
+			&& s.FuzzyStateMachine?.CurrentState is GroundUnitsIdleStateCA or GroundUnitsStageStateCA or TeamLeadGatherStateCA;
 
 		void DefendAllyTick(IBot bot)
 		{

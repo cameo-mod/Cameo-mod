@@ -227,9 +227,10 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheGatesSitInFrontOfTheLaunchAndOnlyThere()
 		{
 			var manager = RepoFile("OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs");
-			var gate = manager.IndexOf("if (WaveBelowMinimum())", StringComparison.Ordinal);
-			var mix = manager.IndexOf("if (WaveMixHolds())", StringComparison.Ordinal);
-			var staged = manager.IndexOf("if (!StagedCompositionReady())", StringComparison.Ordinal);
+			// TEAM-LEAD-01: a follower's wave is part of the leader's order, so the gates skip it (all three terms are false while the feature is off).
+			var gate = manager.IndexOf("if (!teamFollowerLaunch && WaveBelowMinimum())", StringComparison.Ordinal);
+			var mix = manager.IndexOf("if (!teamLaunch && WaveMixHolds())", StringComparison.Ordinal);
+			var staged = manager.IndexOf("if (!teamLaunch && !StagedCompositionReady())", StringComparison.Ordinal);
 			var register = manager.IndexOf("var attackForce = RegisterNewSquad(bot, SquadCAType.Rush);", Math.Max(staged, 0), StringComparison.Ordinal);
 			Assert.That(gate, Is.GreaterThan(0));
 			Assert.That(mix, Is.GreaterThan(gate));
