@@ -4624,6 +4624,9 @@ Player:
 		# REPAIR-B3 (SPEC_2026-10-09 §1): shared coverage — a usable own refinery serves every anchor inside an
 		# inclusive Euclidean radius-10 (the default 0 would fall back to ClaimRadiusCells = 8).
 		AnchorServeRadiusCells: 10
+		# REF-FIELD-02 (USER PRIORITY 11-24, refinery spam; row rf_field_gate): at most 2 refineries per field (total = fields in reach x 2), and a
+		# field where an own refinery was lost stays locked 3000 ticks, then until no enemy was seen there for 1500 ticks. genericbot only (this module).
+		RefineryFieldGate: true
 		# BZ_production_scaling: up to ScalingMcvMaxExtra extra construction MCVs while windowed income
 		# holds over the difficulty line, a far field is free and army parity admits; also parks MCV
 		# site handouts whose deploy annulus holds no placeable cell (MCV-EXPAND-IDLE H1).
@@ -5812,6 +5815,9 @@ Player:
 		ReadyWatchdogAll: true
 		NoSpaceBan: true
 		RefinerySafetyAllClaims: true
+		# REF-FIELD-02 (row rf_economy_gate): ref1, the first vehicle factory, then ref2; 1500 ticks between refineries; from the third refinery a
+		# pending first copy goes first (at most 1500 ticks); a yard with no refinery skips the gate (expansion refinery). genericbot only.
+		RefineryEconomyGate: true
 		# PROD-BUSY cycle: above the same line, more production buildings cycled across the types (row pb_cycle_production); genericbot only.
 		CycleProductionAboveLine: true
 		# SUSTAINED-CASH-01: a bank above the tier line for 1500 ticks forces the next building to be production (row pb_sustained_cash_production); genericbot only.

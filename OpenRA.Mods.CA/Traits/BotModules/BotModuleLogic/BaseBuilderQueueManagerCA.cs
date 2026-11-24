@@ -147,6 +147,8 @@ namespace OpenRA.Mods.CA.Traits
 		bool DefenceNeedOn => baseBuilder.DefenceNeedArmed && !ablateDefenceNeed.Off(player, AblationIds.Af2DefenceNeedGate);
 		bool PowerCapOn => baseBuilder.PowerMarginCapArmed && !ablatePowerCap.Off(player, AblationIds.PowerMarginCap);
 		bool UnlistedOnceOn => baseBuilder.UnlistedOnceArmed && !ablateUnlistedOnce.Off(player, AblationIds.Af2UnlistedOnce);
+		AblationLatch ablateRefineryEconomyGate;
+		bool RefineryEconomyGateOn => baseBuilder.RefineryEconomyGateArmed && !ablateRefineryEconomyGate.Off(player, AblationIds.RefineryEconomyGate);
 		readonly Dictionary<string, bool> unlistedKinds = new();
 		string lastCycledProduction;
 
@@ -2687,12 +2689,76 @@ namespace OpenRA.Mods.CA.Traits
 			if (refinery == null || baseBuilder.HasMaxRefineriesFor(refinery))
 				return null;
 
+			// REF-FIELD-02 (row rf_economy_gate): ref1, the first vehicle factory, then ref2; the interval; the bounded first-copy yield.
+			if (RefineryEconomyGateOn && RefineryEconomyHolds(queue, buildableThings))
+				return null;
+
 			var pick = BaseBuilderQueueEvalCA.PickOrPower(refinery, power, HasSufficientPowerForActor);
 			if (pick != null)
 				AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, pick.Name,
 					pick == refinery ? "refinery" : "would be low power");
 
 			return pick;
+		}
+
+		// REF-FIELD-02: true = the refinery pick waits this pass. The rise clock and the yield clock live on the module (shared by its queues).
+		bool RefineryEconomyHolds(ProductionQueue queue, IEnumerable<ActorInfo> buildableThings)
+		{
+			var now = world.WorldTick;
+			var count = baseBuilder.RefineryCountWithQueued();
+			if (count > baseBuilder.RefineryGateLastCount)
+				baseBuilder.RefineryGateLastRiseTick = now;
+
+			baseBuilder.RefineryGateLastCount = count;
+			var factoryBuildable = buildableThings.Any(a => baseBuilder.Info.VehiclesFactoryTypes.Contains(a.Name));
+			var factoryOwnedOrQueued = baseBuilder.VehicleFactoryOwnedOrQueued();
+			var yardWithoutRefinery = count > 0 && baseBuilder.YardWithoutRefinery();
+			var b = baseBuilder.Info;
+			var verdict = RefineryFieldGateCA.Economy(true, count, yardWithoutRefinery, factoryBuildable, factoryOwnedOrQueued, now,
+				baseBuilder.RefineryGateLastRiseTick, b.RefineryMinIntervalTicks, false, -1, b.RefineryEssentialYieldTicks);
+
+			// The first-copy scan runs only when the earlier steps admit the refinery and two refineries already stand or are queued.
+			if (verdict == RefineryFieldGateCA.EconomyVerdict.Allow && count >= 2)
+			{
+				var essential = EssentialFirstCopyPending(buildableThings);
+				if (!essential)
+					baseBuilder.RefineryGateYieldSince = -1;
+				else if (baseBuilder.RefineryGateYieldSince < 0)
+					baseBuilder.RefineryGateYieldSince = now;
+
+				verdict = RefineryFieldGateCA.Economy(true, count, yardWithoutRefinery, factoryBuildable, factoryOwnedOrQueued, now,
+					baseBuilder.RefineryGateLastRiseTick, b.RefineryMinIntervalTicks, essential, baseBuilder.RefineryGateYieldSince, b.RefineryEssentialYieldTicks);
+			}
+
+			if (verdict == RefineryFieldGateCA.EconomyVerdict.Allow)
+				return false;
+
+			AIUtils.BotDebug("{0} holds the refinery pick: {1} (refineries {2})", queue.Actor.Owner, verdict, count);
+			return true;
+		}
+
+		// REF-FIELD-02: a first copy this queue can build is still missing: the tech chain, or a first-copy kind (no wall, defence, fake, proxy or
+		// own-rule type) that is not owned or queued, within its build limit and not a naval yard without water.
+		bool EssentialFirstCopyPending(IEnumerable<ActorInfo> buildableThings)
+		{
+			foreach (var item in buildableThings)
+			{
+				if (baseBuilder.Info.RefineryTypes.Contains(item.Name))
+					continue;
+
+				if (TechChainExempt(item.Name))
+					return true;
+
+				if (!FirstCopyKind(item) || NavalNeedsWater(item) || OwnedOrQueued(item))
+					continue;
+
+				if (baseBuilder.TryGetBuildingLimit(item.Name, out var limit) && BaseBuilderQueueEvalCA.LimitReached(0, limit))
+					continue;
+
+				return true;
+			}
+
+			return false;
 		}
 
 		ActorInfo ChooseBuildingToBuild(ProductionQueue queue)

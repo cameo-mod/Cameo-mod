@@ -297,6 +297,19 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("BASE-12: the expansion-refinery safety test iterates every wanting claim (the first safe one wins) and also gates the fraction roll's refinery. Needs ExpansionRefinerySafety.",
 			"Gated by SwitchCondition; row pb_refinery_safety_all_claims.")]
 		public readonly bool RefinerySafetyAllClaims = false;
+		[Desc("REF-FIELD-02 (USER PRIORITY 11-24, refinery spam; AUDIT_BASE_01 BASE-01): the economy rung's refinery pick waits for the first vehicle",
+			"factory after ref1 (ref1, war factory, ref2), keeps RefineryMinIntervalTicks between refineries once every yard has one, and from the third",
+			"refinery on yields to a pending first copy for at most RefineryEssentialYieldTicks. Gated by SwitchCondition; row rf_economy_gate.")]
+		public readonly bool RefineryEconomyGate = false;
+
+		[Desc("REF-FIELD-02: minimum ticks between two refineries once every construction yard has one.")]
+		public readonly int RefineryMinIntervalTicks = 1500;
+
+		[Desc("REF-FIELD-02: longest a refinery pick yields to a pending first copy before it may go ahead anyway.")]
+		public readonly int RefineryEssentialYieldTicks = 1500;
+
+		[Desc("REF-FIELD-02: a yard with no own refinery within this many cells skips the refinery economy gate (the expansion refinery is next).")]
+		public readonly int RefineryYardRadiusCells = 14;
 
 		[Desc("PROD-BUSY (USER 11-24): while the bank stays above the tier MaximiseProductionCash line the base builder adds production buildings, cycled",
 			"across the types (barracks, war factory, airfield, naval yard with water access, then again), bounded by the build limits and by the failed-",
@@ -727,6 +740,65 @@ namespace OpenRA.Mods.CA.Traits
 		public bool ReadyWatchdogArmed => Info.ReadyWatchdogAll && switchesActive;
 		public bool NoSpaceBanArmed => Info.NoSpaceBan && switchesActive;
 		public bool RefinerySafetyAllClaimsArmed => Info.RefinerySafetyAllClaims && switchesActive;
+		public bool RefineryEconomyGateArmed => Info.RefineryEconomyGate && switchesActive;
+
+		// REF-FIELD-02 (row rf_economy_gate): shared by every queue manager of this module. The tick the refinery count (owned + in production)
+		// last rose, the count it rose to, and the tick a pending first copy first made the refinery pick yield (-1 = none).
+		public int RefineryGateLastRiseTick = -1;
+		public int RefineryGateLastCount;
+		public int RefineryGateYieldSince = -1;
+
+		/// <summary>REF-FIELD-02: own refineries standing plus in production.</summary>
+		public int RefineryCountWithQueued()
+		{
+			var n = AIUtils.CountActorByCommonName(RefineryBuildings);
+			if (BuildingsBeingProduced != null)
+				foreach (var r in Info.RefineryTypes)
+					if (BuildingsBeingProduced.TryGetValue(r, out var q))
+						n += q;
+
+			return n;
+		}
+
+		/// <summary>REF-FIELD-02: an own vehicle factory stands or one is in production.</summary>
+		public bool VehicleFactoryOwnedOrQueued()
+		{
+			if (AIUtils.CountActorByCommonName(factoryBuildings) > 0)
+				return true;
+
+			if (BuildingsBeingProduced != null)
+				foreach (var f in Info.VehiclesFactoryTypes)
+					if (BuildingsBeingProduced.TryGetValue(f, out var q) && q > 0)
+						return true;
+
+			return false;
+		}
+
+		/// <summary>REF-FIELD-02: an own construction yard stands with no own refinery within RefineryYardRadiusCells (the expansion refinery is next).</summary>
+		public bool YardWithoutRefinery()
+		{
+			var r2 = (long)Info.RefineryYardRadiusCells * Info.RefineryYardRadiusCells;
+			foreach (var yard in ConstructionYardBuildings.Actors)
+			{
+				if (yard.IsDead || !yard.IsInWorld)
+					continue;
+
+				var served = false;
+				foreach (var refinery in RefineryBuildings.Actors)
+				{
+					if (!refinery.IsDead && refinery.IsInWorld && (refinery.Location - yard.Location).LengthSquared <= r2)
+					{
+						served = true;
+						break;
+					}
+				}
+
+				if (!served)
+					return true;
+			}
+
+			return false;
+		}
 
 		// E1 observational slice (lead-accepted, observational ONLY): the switch-gated commitment
 		// ledger. Never read by any admission decision — recording and verdict logging only.
