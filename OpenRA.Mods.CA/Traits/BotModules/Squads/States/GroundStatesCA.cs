@@ -569,13 +569,13 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (owner.IsHunting && leader.Actor != null && Stalemate01CA.Arrived(
 				(leader.Actor.Location - owner.HuntCell.Value).LengthSquared, owner.SquadManager.Info.FinishHuntArriveCells)
 				&& !FindNewTarget(owner))
-				{
-					// TEAM-GATHER-02 (tl_hunt_via_order): the blob's hunt cell is reached and nothing is in view: back to idle, where the team pass takes the next order.
-					owner.FuzzyStateMachine.ChangeState(owner, owner.SquadManager.TeamLeadHuntsViaOrder(owner) ? (IState)new GroundUnitsIdleStateCA() : new GroundUnitsFleeStateCA(), false);
-					return;
-				}
+			{
+				// TEAM-GATHER-02 (tl_hunt_via_order): the blob's hunt cell is reached and nothing is in view: back to idle, where the team pass takes the next order.
+				owner.FuzzyStateMachine.ChangeState(owner, owner.SquadManager.TeamLeadHuntsViaOrder(owner) ? (IState)new GroundUnitsIdleStateCA() : new GroundUnitsFleeStateCA(), false);
+				return;
+			}
 
-				if (!owner.IsTargetValid || !CheckReachability(leader.Actor, owner.World.Map.CellContaining(owner.Target.CenterPosition)))
+			if (!owner.IsTargetValid || !CheckReachability(leader.Actor, owner.World.Map.CellContaining(owner.Target.CenterPosition)))
 			{
 				// Harassers retarget high-value first when the target is gone (HV
 				// roll + risk gate + frozen fallback live inside FindNewTarget); a
@@ -593,6 +593,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					var bounded = owner.SquadManager.TeamLeadBoundsRetarget(owner);
 					var targetActor = bounded
 						? owner.SquadManager.FindClosestEnemy(leader.Actor, WDist.FromCells(owner.SquadManager.Info.AttackScanRadius), owner)
+						: owner.SquadManager.TeamLeadKeepsGoing(owner) ? owner.SquadManager.TeamLeadGoOnTarget(owner, leader.Actor)
 						: owner.SquadManager.FindClosestEnemy(leader.Actor, owner);
 					if (targetActor != null)
 						owner.TargetActor = targetActor;
@@ -1326,9 +1327,20 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				return;
 			}
 
+			// TEAM-GATHER-02 c2 (gt_bounded_retarget): the pushed blob keeps going: the next enemy of the order focus seat, until that seat is dead.
+			if (!owner.IsTargetValid && owner.SquadManager.TeamLeadKeepsGoing(owner))
+			{
+				var next = owner.SquadManager.TeamLeadGoOnTarget(owner, owner.Units[0].Actor);
+				if (next != null)
+				{
+					owner.TargetActor = next;
+					return;
+				}
+			}
+
 			if (!owner.IsTargetValid && !FindNewTarget(owner))
 			{
-			// CA F2p2 (2bad89a77): rather than fleeing, take an opportunity target near the leader, else resume AttackMove.
+				// CA F2p2 (2bad89a77): rather than fleeing, take an opportunity target near the leader, else resume AttackMove.
 				// FindClosestEnemy(leader, range) is the observed overload (visible or remembered enemies only).
 				if (owner.SquadManager.Info.UseUpstreamStateTweaks)
 				{

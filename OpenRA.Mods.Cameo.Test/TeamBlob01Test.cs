@@ -236,7 +236,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(body.IndexOf("TeamLeadCA.FallbackPublish(", StringComparison.Ordinal), Is.GreaterThan(body.IndexOf("TeamLeadCA.OrderDue(", StringComparison.Ordinal)));
 			Assert.That(body, Does.Contain("if (why == TeamLeadCA.PublishWhy.None && TeamLeadFallbackPublishOn)"));
 			// TEAM-GATHER-02 (tl_join_merge): the one use is the rally publish floor (RallyFloorPassed); the fallback itself has no unit bar of its own and never attacks.
-			Assert.That(System.Text.RegularExpressions.Regex.Matches(body, System.Text.RegularExpressions.Regex.Escape("MinUnits(minUnits, blob.Units)")).Count, Is.LessThanOrEqualTo(1), "only the rally publish floor uses the unit bar");
+			Assert.That(body.Replace("RallyFloorPassed(blob.Units, blob.Value, BlobLaunch01CA.MinUnits(minUnits, blob.Units), minValue)", ""), Does.Not.Contain("MinUnits(minUnits, blob.Units)"), "only the rally publish floor call uses the unit bar");
 			Assert.That(body.IndexOf("TeamLeadPromoteRally(rally, now);", StringComparison.Ordinal), Is.LessThan(body.IndexOf("if (now < initialAttackDelay || TeamLeadOpenOrder() != null)", StringComparison.Ordinal)), "a rally order is promoted before the open-order guard");
 			Assert.That(body, Does.Contain("if (why == TeamLeadCA.PublishWhy.Gather)\n\t\t\t\torder.MakeGatherOnly();"));
 			Assert.That(body, Does.Contain("BlobLaunch01CA.TicksSinceOrder("));
@@ -283,7 +283,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(wiring, Does.Contain("TeamLeadCA.BlobReady(units, value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue)"), "the same bars as the ready path");
 			Assert.That(wiring, Does.Contain("order.Promote(now, target, targetId);"));
 			Assert.That(wiring, Does.Contain("DiagnosticTeamEvent(\"team_promote\""));
-			Assert.That(wiring, Does.Contain("order.Report(squad, SquadValueOf(squad), near * 100 >= squad.Units.Count * Info.TeamLeadArrivePercent, squad.Units.Count);"));
+			Assert.That(wiring, Does.Contain("order.Report(squad, SquadValueOf(squad), near * 100 >= squad.Units.Count * Info.TeamLeadArrivePercent, squad.Units.Count, TeamLeadJoinMergeOn ? near : -1);"));
 		}
 
 		// ---- the push bar: a due push waits while the squads at the rally are below the bar; the hold has a hard cap ----
@@ -463,7 +463,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
 			var start = wiring.IndexOf("void TeamLeadMaintainOrder(", StringComparison.Ordinal);
 			var body = wiring[start..wiring.IndexOf("TeamLeadOrder TeamLeadOpenOrder()", start, StringComparison.Ordinal)];
-			Assert.That(body, Does.Contain("order.FirstReadyTick) && !TeamLeadPushHeld(order, now))"), "the pincer push");
+			Assert.That(body, Does.Contain("order.FirstReadyTick) && !TeamLeadPincerThinCollapse(order, now) && !TeamLeadPushHeld(order, now))"), "the pincer push (a thin pincer collapses first, TEAM-GATHER-02 c2)");
 			Assert.That(body, Does.Contain("committed, arrived, Info.TeamLeadArrivePercent)\n\t\t\t\t&& !TeamLeadPushHeld(order, now))"), "the single-blob push (window and early arrival)");
 			Assert.That(body, Does.Contain(": order.Extending && TeamLeadCA.PushBarDissolve(now, order.PushBarSince, Info.TeamLeadPushBarMaxTicks) ? \"below_bar\""));
 			Assert.That(body, Does.Contain(": !order.GatherOnly && !order.Extending && now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? \"max_age\""), "the hold has its own cap");

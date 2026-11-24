@@ -65,5 +65,11 @@ namespace OpenRA.Mods.CA.Traits
 		public const string TeamLeadGraceRally = "tl_grace_rally";
 		public const string TeamLeadGatherRange = "tl_gather_range";
 		public const string TeamLeadHuntViaOrder = "tl_hunt_via_order";
+
+		// TEAM-GATHER-02 c2 (Opus audit FIX): a leader squad below WAVE-MIN issues an order only when the team joinable army reaches WAVE-MIN (tl_issue_floor), the rally lies
+		// between the team bases and the target (tl_rally_mid), and a pincer pushes only with two WAVE-MIN prongs gathered (tl_pincer_double).
+		public const string TeamLeadIssueFloor = "tl_issue_floor";
+		public const string TeamLeadRallyMid = "tl_rally_mid";
+		public const string TeamLeadPincerDouble = "tl_pincer_double";
 	}
 }

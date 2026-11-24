@@ -287,6 +287,23 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>TEAM-GATHER-02 tl_grace_rally: no order is published within <paramref name="holdTicks"/> of a cancel (-1 = none yet).</summary>
 		public static bool RepublishHeld(int now, int cancelTick, int holdTicks) => cancelTick >= 0 && now - cancelTick < Math.Max(0, holdTicks);
 
+		/// <summary>TEAM-GATHER-02 c2 gt_bounded_retarget: a squad of a pushed order, or one at WAVE-MIN size or more, keeps going after its target dies (the next enemy of the focus seat) instead of standing down.</summary>
+		public static bool KeepsGoing(bool pushedOrder, int squadUnits, int waveMinUnits) => pushedOrder || (waveMinUnits > 0 && squadUnits >= waveMinUnits);
+
+		/// <summary>TEAM-GATHER-02 c2 tl_issue_floor: a leader squad issues an order when it reaches the WAVE-MIN bars itself, or when the team joinable army does.</summary>
+		public static bool LeaderMayIssue(int squadUnits, long squadValue, int teamUnits, long teamValue, int waveMinUnits, long waveMinValue) =>
+			(squadUnits >= waveMinUnits && squadValue >= waveMinValue) || (teamUnits >= waveMinUnits && teamValue >= waveMinValue);
+
+		/// <summary>TEAM-GATHER-02 c2 tl_pincer_double: both prongs meet WAVE-MIN only when the gathered blob holds twice the bars.</summary>
+		public static bool PincerGathered(int units, long value, int waveMinUnits, long waveMinValue) => units >= 2 * waveMinUnits && value >= 2 * waveMinValue;
+
+		/// <summary>TEAM-GATHER-02 c2 tl_rally_mid: the point <paramref name="percent"/> percent (0-100) of the way from <paramref name="from"/> to <paramref name="to"/>.</summary>
+		public static WPos RallyBetween(WPos from, WPos to, int percent)
+		{
+			var p = Math.Clamp(percent, 0, 100);
+			return new WPos(from.X + (int)((long)(to.X - from.X) * p / 100), from.Y + (int)((long)(to.Y - from.Y) * p / 100), 0);
+		}
+
 		/// <summary>
 		/// The no-order guarantee (USER rule 2026-11-24: bots never trickle in small groups; nothing below WAVE-MIN ever attacks). It is called only when the
 		/// ready path (OrderDue) said no, so the blob is below the WAVE-MIN bars: after <paramref name="sinceOrder"/> ticks without any team order
@@ -446,7 +463,7 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>TEAM-BLOB-01: the elected leader changed while the order lived: the new leader takes the order over (it is not cancelled).</summary>
 		public void HandOver(string newLeaderKey) => LeaderKey = newLeaderKey;
 
-		readonly Dictionary<object, (long Value, bool Arrived, int Units)> reports = new();
+		readonly Dictionary<object, (long Value, bool Arrived, int Units, int ArrivedUnits)> reports = new();
 
 		public TeamLeadOrder(int seq, string leaderKey, WPos rally, WPos target, uint targetActorId, int issueTick)
 		{
@@ -468,7 +485,11 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>The tick of the latest squad report (-1 = none yet); the no-report grace of a surviving order counts from it.</summary>
 		public int LastReportTick = -1;
 
-		public void Report(object squad, long value, bool arrived, int units = 0) => reports[squad] = (value, arrived, units);
+		/// <param name="arrivedUnits">TEAM-GATHER-02 c2 (tl_join_merge): the units of the squad that stand at the rally; with it (>= 0) arrival is counted per unit (value pro rata), so units merged in at home do not undo the arrival of the rest. -1 = the squad is arrived as a whole (<paramref name="arrived"/>).</param>
+		public void Report(object squad, long value, bool arrived, int units = 0, int arrivedUnits = -1) => reports[squad] = (value, arrived, units, arrivedUnits);
+
+		static long ArrivedValue(long value, bool arrived, int units, int arrivedUnits) =>
+			arrivedUnits < 0 ? (arrived ? value : 0) : units > 0 ? value * Math.Min(arrivedUnits, units) / units : 0;
 
 		/// <summary>The units and value of the squads that stand at the rally point (the push bar measures these).</summary>
 		public (int Units, long Value) ArrivedTotals()
@@ -477,11 +498,12 @@ namespace OpenRA.Mods.CA.Traits
 			long value = 0;
 			foreach (var r in reports.Values)
 			{
-				if (!r.Arrived)
+				var n = r.ArrivedUnits < 0 ? (r.Arrived ? r.Units : 0) : Math.Min(r.ArrivedUnits, r.Units);
+				if (n <= 0)
 					continue;
 
-				units += r.Units;
-				value += r.Value;
+				units += n;
+				value += ArrivedValue(r.Value, r.Arrived, r.Units, r.ArrivedUnits);
 			}
 
 			return (units, value);
@@ -586,8 +608,7 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 
 				committed += r.Value;
-				if (r.Arrived)
-					arrived += r.Value;
+				arrived += ArrivedValue(r.Value, r.Arrived, r.Units, r.ArrivedUnits);
 			}
 
 			return (committed, arrived);
@@ -607,8 +628,7 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var r in reports.Values)
 			{
 				committed += r.Value;
-				if (r.Arrived)
-					arrived += r.Value;
+				arrived += ArrivedValue(r.Value, r.Arrived, r.Units, r.ArrivedUnits);
 			}
 
 			return (committed, arrived);

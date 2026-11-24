@@ -37,6 +37,91 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void APushedBlobKeepsGoingAfterItsAreaIsClearedInsteadOfStandingDown()
+		{
+			Assert.That(TeamLeadCA.KeepsGoing(true, 3, 8), Is.True, "a squad of a pushed order keeps going whatever its size");
+			Assert.That(TeamLeadCA.KeepsGoing(false, 8, 8), Is.True, "a squad at WAVE-MIN size keeps going");
+			Assert.That(TeamLeadCA.KeepsGoing(false, 7, 8), Is.False, "a small unpushed squad stays bounded");
+			Assert.That(TeamLeadCA.KeepsGoing(false, 40, 0), Is.False, "WAVE-MIN off: only the pushed order exempts");
+
+			var states = RepoFile(Bots + "Squads/States/GroundStatesCA.cs");
+			Assert.That(states, Does.Contain(": owner.SquadManager.TeamLeadKeepsGoing(owner) ? owner.SquadManager.TeamLeadGoOnTarget(owner, leader.Actor)"), "AttackMove: the next enemy of the focus seat");
+			Assert.That(states, Does.Contain("if (!owner.IsTargetValid && owner.SquadManager.TeamLeadKeepsGoing(owner))"), "Attack state: the same");
+
+			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
+			Assert.That(wiring, Does.Contain("&& !TeamLeadKeepsGoing(s);"), "the bound never applies to a squad that keeps going");
+			Assert.That(wiring, Does.Contain("TeamLeadCA.KeepsGoing(s.TeamPushSeq > 0, s.Units.Count, WaveMinActive ? WaveMinBars().Units : 0)"));
+			Assert.That(wiring, Does.Contain("squad.TeamPushSeq = order.Seq;"), "set when the squad is pushed");
+			Assert.That(wiring, Does.Contain("s.TeamPushSeq = 0;"), "cleared when it joins the next order");
+			Assert.That(wiring, Does.Contain("return (seat != null ? FindClosestEnemy(leader.Location, SquadValueOf(s), seat, s) : null) ?? FindClosestEnemy(leader, s);"), "the focus seat first, then the old nearest pick");
+			Assert.That(wiring, Does.Contain("var focus = TeamLeadFocusPlayer();\n\t\t\tif (focus != null)\n\t\t\t\treturn focus;"));
+			Assert.That(RepoFile(Bots + "Squads/SquadCA.cs"), Does.Contain("public int TeamPushSeq;"));
+		}
+
+		[Test]
+		public void ArrivalIsCountedPerUnitSoUnitsMergedInAtHomeDoNotUndoIt()
+		{
+			var order = new TeamLeadOrder(1, "Multi0", new WPos(0, 0, 0), new WPos(1, 1, 0), 0, 1500);
+			var merged = new object();
+			var whole = new object();
+
+			// The V04 shape: 6 of the squad 10 units stand at the rally, 4 were merged in at home. The old whole-squad flag (70%) says not arrived.
+			order.Report(merged, 1000, false, 10);
+			Assert.That(order.ArrivedTotals(), Is.EqualTo((0, 0L)), "old rule: nothing counts");
+
+			order.Report(merged, 1000, false, 10, 6);
+			Assert.That(order.ArrivedTotals(), Is.EqualTo((6, 600L)), "per unit: 6 units and 60% of the value count toward the bar");
+			Assert.That(order.Totals(), Is.EqualTo((1000L, 600L)));
+
+			order.Report(whole, 500, true, 5);
+			Assert.That(order.ArrivedTotals(), Is.EqualTo((11, 1100L)), "a squad reported without a per-unit count still counts as a whole");
+			Assert.That(order.Totals(), Is.EqualTo((1500L, 1100L)));
+
+			order.Report(merged, 1000, false, 10, 99);
+			Assert.That(order.ArrivedTotals().Units, Is.EqualTo(15), "never more than the squad units");
+
+			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
+			Assert.That(wiring, Does.Contain("squad.Units.Count, TeamLeadJoinMergeOn ? near : -1);"));
+		}
+
+		[Test]
+		public void ALeaderBelowWaveMinNeedsTheTeamArmyAndAPincerNeedsTwoWaveMinProngs()
+		{
+			// tl_issue_floor: (squad units, squad value, team units, team value, bars).
+			Assert.That(TeamLeadCA.LeaderMayIssue(8, 4000, 8, 4000, 8, 4000), Is.True, "the leader squad itself reaches the bars");
+			Assert.That(TeamLeadCA.LeaderMayIssue(3, 1500, 12, 6000, 8, 4000), Is.True, "a small leader squad: the team joinable army reaches the bars");
+			Assert.That(TeamLeadCA.LeaderMayIssue(3, 1500, 7, 6000, 8, 4000), Is.False, "neither reaches the bars");
+			Assert.That(TeamLeadCA.LeaderMayIssue(3, 1500, 12, 3000, 8, 4000), Is.False, "the team value is below the value bar");
+			Assert.That(TeamLeadCA.LeaderMayIssue(1, 100, 1, 100, 0, 0), Is.True, "WAVE-MIN off: no floor");
+
+			// tl_pincer_double: both prongs meet WAVE-MIN only with twice the bars gathered.
+			Assert.That(TeamLeadCA.PincerGathered(16, 8000, 8, 4000), Is.True);
+			Assert.That(TeamLeadCA.PincerGathered(15, 9000, 8, 4000), Is.False, "units below twice the bar");
+			Assert.That(TeamLeadCA.PincerGathered(20, 7999, 8, 4000), Is.False, "value below twice the bar");
+
+			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
+			Assert.That(wiring, Does.Contain("if (TeamLeadIssueFloorOn && WaveMinActive)"));
+			Assert.That(wiring, Does.Contain("!TeamLeadCA.LeaderMayIssue(s.Units.Count, SquadValueOf(s), pool.Units, pool.Value, minUnits, minValue)"));
+			Assert.That(wiring, Does.Contain("ready0, ready1, order.FirstReadyTick) && !TeamLeadPincerThinCollapse(order, now) && !TeamLeadPushHeld(order, now))"));
+			Assert.That(wiring, Does.Contain("if (TeamLeadCA.PincerGathered(units, value, minUnits, minValue))\n\t\t\t\treturn false;\n\n\t\t\torder.PincerCollapsed = true;"));
+		}
+
+		[Test]
+		public void TheRallyLiesBetweenTheTeamBasesAndTheTargetNotAtTheLeaderStagingCell()
+		{
+			var rally = TeamLeadCA.RallyBetween(new WPos(0, 0, 0), new WPos(10240, 5120, 0), 35);
+			Assert.That(rally, Is.EqualTo(new WPos(3584, 1792, 0)), "35% of the way");
+			Assert.That(TeamLeadCA.RallyBetween(new WPos(100, 200, 0), new WPos(900, 200, 0), 0), Is.EqualTo(new WPos(100, 200, 0)));
+			Assert.That(TeamLeadCA.RallyBetween(new WPos(100, 200, 0), new WPos(900, 200, 0), 100), Is.EqualTo(new WPos(900, 200, 0)));
+			Assert.That(TeamLeadCA.RallyBetween(new WPos(100, 200, 0), new WPos(900, 200, 0), 250), Is.EqualTo(new WPos(900, 200, 0)), "never past the target");
+
+			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
+			Assert.That(wiring, Does.Contain("if (TeamLeadRallyMidOn && TeamLeadMidRally(target, out var mid))"));
+			Assert.That(wiring, Does.Contain("TeamLeadCA.RallyBetween(new WPos((int)(x / n), (int)(y / n), 0), target, Info.TeamLeadRallyMidPercent)"));
+			Assert.That(wiring, Does.Contain("PathExistsForLocomotor(mobile.Locomotor, sample.Location, cell)"), "the rally is reachable for the leader sample");
+		}
+
+		[Test]
 		public void AllyDefenceLeavesASquadInTheOrderOrJustFormedAlone()
 		{
 			Assert.That(TeamLeadCA.SquadKeptForOrder(true, true, 5000, 100, 100), Is.True, "gathering for the open order: kept");
@@ -94,7 +179,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
 			Assert.That(wiring, Does.Contain("bool TeamLeadTeamSquad(SquadCA s) => s.Type == SquadCAType.Rush && !s.M13Response"));
 			Assert.That(wiring, Does.Contain("&& !ReferenceEquals(s, stalemateSquad) && !ReferenceEquals(s, m13IntentSquad) && !ReferenceEquals(s, m13ResponseSquad);"), "the breaker and the liveness wave keep their own targeting");
-			Assert.That(wiring, Does.Contain("internal bool TeamLeadBoundsRetarget(SquadCA s) => TeamLeadBoundedRetargetOn && TeamLeadTeamSquad(s) && (!s.IsHunting || TeamLeadHuntViaOrderOn);"));
+			Assert.That(wiring, Does.Contain("internal bool TeamLeadBoundsRetarget(SquadCA s) => TeamLeadBoundedRetargetOn && TeamLeadTeamSquad(s) && (!s.IsHunting || TeamLeadHuntViaOrderOn) && !TeamLeadKeepsGoing(s);"));
 			Assert.That(wiring, Does.Contain("internal bool TeamLeadHuntsViaOrder(SquadCA s) => TeamLeadHuntViaOrderOn && TeamLeadTeamSquad(s);"));
 		}
 
@@ -152,7 +237,8 @@ namespace OpenRA.Mods.Cameo.Test
 			var keys = new[]
 			{
 				"TeamLeadDefendRespectsOrderEnabled", "TeamLeadBoundedRetargetEnabled", "TeamLeadJoinAtFormEnabled", "TeamLeadBarJoinableEnabled",
-				"TeamLeadJoinMergeEnabled", "TeamLeadGraceRallyEnabled", "TeamLeadGatherRangeEnabled", "TeamLeadHuntViaOrderEnabled"
+				"TeamLeadJoinMergeEnabled", "TeamLeadGraceRallyEnabled", "TeamLeadGatherRangeEnabled", "TeamLeadHuntViaOrderEnabled",
+				"TeamLeadIssueFloorEnabled", "TeamLeadRallyMidEnabled", "TeamLeadPincerDoubleEnabled"
 			};
 
 			foreach (var key in keys)
@@ -160,6 +246,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			Assert.That(info, Does.Contain("public readonly int TeamLeadFreshSquadTicks = 100;"));
 			Assert.That(info, Does.Contain("public readonly int TeamLeadRepublishHoldTicks = 1500;"));
+			Assert.That(info, Does.Contain("public readonly int TeamLeadRallyMidPercent = 35;"));
 
 			var yaml = RepoFile("mods/cameo/ai/ai.yaml");
 			var classic = yaml.IndexOf("SquadManagerBotModuleCA@classic:", StringComparison.Ordinal);
@@ -185,6 +272,9 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(AblationIds.TeamLeadGraceRally, Is.EqualTo("tl_grace_rally"));
 			Assert.That(AblationIds.TeamLeadGatherRange, Is.EqualTo("tl_gather_range"));
 			Assert.That(AblationIds.TeamLeadHuntViaOrder, Is.EqualTo("tl_hunt_via_order"));
+			Assert.That(AblationIds.TeamLeadIssueFloor, Is.EqualTo("tl_issue_floor"));
+			Assert.That(AblationIds.TeamLeadRallyMid, Is.EqualTo("tl_rally_mid"));
+			Assert.That(AblationIds.TeamLeadPincerDouble, Is.EqualTo("tl_pincer_double"));
 		}
 	}
 }

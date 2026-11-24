@@ -152,6 +152,18 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("TEAM-GATHER-02 (release switch; the DEV row is tl_hunt_via_order). On: from the late start a team Rush squad does not hunt its own grid cell; with nothing known the leader's order target is one hunt cell for the whole blob.")]
 		public readonly bool TeamLeadHuntViaOrderEnabled = false;
 
+		[Desc("TEAM-GATHER-02 c2 (release switch; the DEV row is tl_issue_floor). On: a leader squad below the WAVE-MIN bars issues a team order only when the team joinable army (pool plus quiet wave squads of every seat) reaches WAVE-MIN units and value.")]
+		public readonly bool TeamLeadIssueFloorEnabled = false;
+
+		[Desc("TEAM-GATHER-02 c2 (release switch; the DEV row is tl_rally_mid). On: the rally of a new order lies TeamLeadRallyMidPercent of the way from the centroid of the allied bases to the target (on the team side), so followers do not walk to the leader staging cell. Off = the leader staging cell.")]
+		public readonly bool TeamLeadRallyMidEnabled = false;
+
+		[Desc("TEAM-GATHER-02 c2 tl_rally_mid: how far from the allied base centroid toward the target the rally lies, in percent.")]
+		public readonly int TeamLeadRallyMidPercent = 35;
+
+		[Desc("TEAM-GATHER-02 c2 (release switch; the DEV row is tl_pincer_double). On: a pincer pushes only when the gathered blob is at least twice the WAVE-MIN units and value (each prong meets WAVE-MIN); a thinner one collapses into the single blob.")]
+		public readonly bool TeamLeadPincerDoubleEnabled = false;
+
 		[Desc("TEAM-BLOB-01 (release switch; the DEV row is tl_order_survive). On: when the elected leader changes while an order lives, the new leader takes the order over instead of cancelling it (the squads gathering for it are not thrown back to the pool). Off = the order is cancelled on a leader change as before.")]
 		public readonly bool TeamLeadOrderSurviveEnabled = false;
 	}
