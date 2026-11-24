@@ -13,6 +13,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
+using OpenRA.Mods.CA.Traits.BotModules.Squads;
 
 namespace OpenRA.Mods.Cameo.Test
 {
@@ -172,6 +173,122 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(AblationIds.TeamLeadGatherHold, Is.EqualTo("tl_gather_hold"));
 			Assert.That(AblationIds.TeamLeadGraceHold, Is.EqualTo("tl_grace_hold"));
 			Assert.That(AblationIds.TeamLeadRouteAll, Is.EqualTo("tl_route_all"));
+		}
+
+		// ---- c2: tl_join_any (USER order via Opus, V04 RCA: the 12 zero-join orders and the ~500 tick re-publish churn) ----------------------------------
+
+		[Test]
+		public void ARallyOrderTakesAnyLiveIdleUnitsSoSmallPoolsMergeIntoTheBlob()
+		{
+			Assert.That(TeamLeadCA.JoinMinUnits(true, true, 3), Is.EqualTo(1), "rally or held order + row on: join minimum 1");
+			Assert.That(TeamLeadCA.JoinMinUnits(true, false, 3), Is.EqualTo(3), "an attack order keeps the configured minimum");
+			Assert.That(TeamLeadCA.JoinMinUnits(false, true, 3), Is.EqualTo(3), "row off = as before");
+
+			// V04: a rally order for a blob of 5 units spread over six seats (1,1,0,1,0,2). No seat reached the minimum of 3, so nobody joined.
+			var pools = new[] { 1, 1, 0, 1, 0, 2 };
+			var before = 0;
+			var after = 0;
+			foreach (var pool in pools)
+			{
+				if (TeamLeadCA.FollowerMayLaunch(true, pool, TeamLeadCA.JoinMinUnits(false, true, 3)))
+					before++;
+
+				if (TeamLeadCA.FollowerMayLaunch(true, pool, TeamLeadCA.JoinMinUnits(true, true, 3)))
+					after++;
+			}
+
+			Assert.That(before, Is.EqualTo(0), "V04: nobody joined");
+			Assert.That(after, Is.EqualTo(4), "every seat with a live unit joins the rally order");
+		}
+
+		[Test]
+		public void ARallyOrderIsPublishedOnlyForATeamArmyAtWaveMin()
+		{
+			const int minUnits = 12;
+			const long minValue = 6000;
+			Assert.That(TeamLeadCA.RallyFloorPassed(5, 3840, BlobLaunch01CA.MinUnits(minUnits, 5), minValue), Is.False, "V04 seq 2: blob 5/3840");
+			Assert.That(TeamLeadCA.RallyFloorPassed(11, 9000, BlobLaunch01CA.MinUnits(minUnits, 11), minValue), Is.False, "one unit short");
+			Assert.That(TeamLeadCA.RallyFloorPassed(12, 5999, BlobLaunch01CA.MinUnits(minUnits, 12), minValue), Is.False, "one value short");
+			Assert.That(TeamLeadCA.RallyFloorPassed(12, 6000, BlobLaunch01CA.MinUnits(minUnits, 12), minValue), Is.True);
+			Assert.That(TeamLeadCA.RallyFloorPassed(30, 9000, BlobLaunch01CA.MinUnits(minUnits, 30), minValue), Is.True, "half of the team army (15) is the unit bar of a big team, 30 passes it");
+			Assert.That(TeamLeadCA.RallyFloorPassed(0, 0, BlobLaunch01CA.MinUnits(0, 0), 0), Is.False, "an empty blob never publishes");
+		}
+
+		[Test]
+		public void NoOrderIsPublishedWithinTheHoldAfterANoReportsCancelAndTheChurnStops()
+		{
+			Assert.That(TeamLeadCA.RepublishHeld(1599, 100, 1500), Is.True);
+			Assert.That(TeamLeadCA.RepublishHeld(1600, 100, 1500), Is.False, "1500 ticks after the cancel it may publish again");
+			Assert.That(TeamLeadCA.RepublishHeld(50, -1, 1500), Is.False, "no cancel yet");
+			Assert.That(TeamLeadCA.RepublishHeld(101, 100, 0), Is.False, "a zero hold is off");
+
+			// V04: a rally order every ~600 ticks, each cancelled for missing reports ~500 ticks after it was published (leader checks every 100 ticks).
+			int Publishes(bool hold)
+			{
+				var publishes = 0;
+				var cancelTick = -1;
+				var openUntil = -1;
+				for (var now = 100; now <= 12000; now += 100)
+				{
+					if (openUntil >= 0 && now >= openUntil)
+					{
+						openUntil = -1;
+						cancelTick = now;
+					}
+
+					if (openUntil < 0 && !(hold && TeamLeadCA.RepublishHeld(now, cancelTick, 1500)))
+					{
+						publishes++;
+						openUntil = now + 500;
+					}
+				}
+
+				return publishes;
+			}
+
+			Assert.That(Publishes(false), Is.GreaterThanOrEqualTo(20), "V04: churn");
+			Assert.That(Publishes(true), Is.LessThanOrEqualTo(6), "one order per ~2000 ticks at most");
+		}
+
+		[Test]
+		public void TheJoinAnyWiringPinsTheJoinMinimumThePublishFloorAndTheRepublishHold()
+		{
+			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
+			Assert.That(wiring, Does.Contain("bool TeamLeadJoinAnyOn => TeamLeadOn && Info.TeamLeadJoinAnyEnabled && !ablateJoinAny.Off(Player, AblationIds.TeamLeadJoinAny);"));
+			Assert.That(wiring, Does.Contain("int TeamLeadJoinMin(TeamLeadOrder order) => TeamLeadCA.JoinMinUnits(TeamLeadJoinAnyOn, order != null && (order.GatherOnly || order.Extending), Info.TeamLeadJoinMinUnits);"));
+
+			var join = Between(wiring, "void TeamLeadJoin(", "bool TeamLeadPickTarget(");
+			Assert.That(join, Does.Contain("? Info.TeamLeadLeaderMinUnits : TeamLeadJoinMin(order)"));
+			var holds = Between(wiring, "bool TeamLeadHoldsLaunch(", "TeamLeadLaunchPool(");
+			Assert.That(holds, Does.Contain("var open = TeamLeadOpenOrder();\n\t\t\treturn !TeamLeadCA.FollowerMayLaunch(open != null, unitsHangingAroundTheBase.Count, TeamLeadJoinMin(open));"));
+
+			var publish = Between(wiring, "void TeamLeadPublish(", "void TeamLeadPromoteRally(");
+			var held = publish.IndexOf("TeamLeadCA.RepublishHeld(now, team.NoReportsCancelTick, Info.TeamLeadRepublishHoldTicks)", StringComparison.Ordinal);
+			var fallback = publish.IndexOf("TeamLeadCA.FallbackPublish(", StringComparison.Ordinal);
+			var floor = publish.IndexOf("TeamLeadCA.RallyFloorPassed(blob.Units, blob.Value, BlobLaunch01CA.MinUnits(minUnits, blob.Units), minValue)", StringComparison.Ordinal);
+			var none = publish.IndexOf("if (why == TeamLeadCA.PublishWhy.None)\n\t\t\t\treturn;", StringComparison.Ordinal);
+			Assert.That(held, Is.GreaterThan(0));
+			Assert.That(fallback, Is.GreaterThan(held), "the republish hold comes before any publish decision");
+			Assert.That(floor, Is.GreaterThan(fallback), "the floor judges the fallback's rally order");
+			Assert.That(none, Is.GreaterThan(floor));
+			Assert.That(publish, Does.Contain("why == TeamLeadCA.PublishWhy.Gather && TeamLeadJoinAnyOn"), "the ready (attack) path is never floored here");
+
+			var upkeep = Between(wiring, "void TeamLeadMaintainOrder(", "bool TeamLeadPushHeld(");
+			Assert.That(upkeep, Does.Contain("if (cancel == \"no_reports\")\n\t\t\t\t\tteam.NoReportsCancelTick = now;"));
+		}
+
+		[Test]
+		public void TheJoinAnySwitchDefaultsOffIsOnInSixPersonalitiesNotClassicAndHasItsRow()
+		{
+			var info = RepoFile(Bots + "SquadManagerBotModuleCAInfo.TeamLead.cs");
+			Assert.That(info, Does.Contain("public readonly bool TeamLeadJoinAnyEnabled = false;"));
+			Assert.That(info, Does.Contain("public readonly int TeamLeadRepublishHoldTicks = 1500;"));
+
+			var yaml = RepoFile("mods/cameo/ai/ai.yaml");
+			var classic = yaml.IndexOf("SquadManagerBotModuleCA@classic:", StringComparison.Ordinal);
+			Assert.That(Regex.Matches(yaml[..classic], "\n\t\tTeamLeadJoinAnyEnabled: true").Count, Is.EqualTo(6));
+			Assert.That(yaml[classic..], Does.Not.Contain("TeamLeadJoinAnyEnabled"));
+			Assert.That(AblationIds.TeamLeadJoinAny, Is.EqualTo("tl_join_any"));
 		}
 	}
 }

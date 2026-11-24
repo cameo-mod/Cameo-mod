@@ -122,6 +122,12 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("TEAM-GATHER-01 (release switch; the DEV row is tl_route_all). On: while a team order is open, the liveness (M13) urgent attack and the stalemate breaker wave do not launch alone; their units stay in the pool and join the order. Defence and ally defence are not affected. Off = they launch as before (behind the BLOB-LAUNCH-01 attack gate).")]
 		public readonly bool TeamLeadRouteAllEnabled = false;
 
+		[Desc("TEAM-GATHER-01 c2 (release switch; the DEV row is tl_join_any). On: (a) for a rally (gather-only) or held order a seat joins with ANY live idle units (the join minimum is 1, not TeamLeadJoinMinUnits), so small pools merge into the blob instead of idling; (b) the leader publishes a rally order only when the team's idle army already reaches the WAVE-MIN units and value (BlobLaunch01CA.MinUnits), below that nothing is published; (c) no order is published within TeamLeadRepublishHoldTicks of a no_reports cancel. Off = as before.")]
+		public readonly bool TeamLeadJoinAnyEnabled = false;
+
+		[Desc("TEAM-GATHER-01 c2 tl_join_any: ticks after a no_reports cancel during which the leader publishes no new order.")]
+		public readonly int TeamLeadRepublishHoldTicks = 1500;
+
 		[Desc("TEAM-BLOB-01 (release switch; the DEV row is tl_order_survive). On: when the elected leader changes while an order lives, the new leader takes the order over instead of cancelling it (the squads gathering for it are not thrown back to the pool). Off = the order is cancelled on a leader change as before.")]
 		public readonly bool TeamLeadOrderSurviveEnabled = false;
 	}

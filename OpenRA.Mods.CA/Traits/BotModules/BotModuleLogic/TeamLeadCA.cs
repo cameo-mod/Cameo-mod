@@ -274,6 +274,15 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>TEAM-GATHER-01 tl_grace_hold: an order whose push is held (extending) is never cancelled for missing reports; its own dissolve ends it.</summary>
 		public static bool GraceHolds(bool graceHoldOn, bool extending) => graceHoldOn && extending;
 
+		/// <summary>TEAM-GATHER-01 c2 tl_join_any: the join minimum of a seat's idle units for the open order: any live unit (1) for a rally or held order, else the configured one.</summary>
+		public static int JoinMinUnits(bool joinAny, bool gathering, int configured) => joinAny && gathering ? 1 : configured;
+
+		/// <summary>TEAM-GATHER-01 c2 tl_join_any: a rally order is published only when the team's idle army already reaches the WAVE-MIN bars (the units bar is BlobLaunch01CA.MinUnits).</summary>
+		public static bool RallyFloorPassed(int teamUnits, long teamValue, int needUnits, long needValue) => teamUnits >= Math.Max(1, needUnits) && teamValue >= Math.Max(0, needValue);
+
+		/// <summary>TEAM-GATHER-01 c2 tl_join_any: no order is published within <paramref name="holdTicks"/> of a no_reports cancel (-1 = none yet).</summary>
+		public static bool RepublishHeld(int now, int cancelTick, int holdTicks) => cancelTick >= 0 && now - cancelTick < Math.Max(0, holdTicks);
+
 		/// <summary>
 		/// The no-order guarantee (USER rule 2026-11-24: bots never trickle in small groups; nothing below WAVE-MIN ever attacks). It is called only when the
 		/// ready path (OrderDue) said no, so the blob is below the WAVE-MIN bars: after <paramref name="sinceOrder"/> ticks without any team order
@@ -618,6 +627,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>The tick of the last order any seat of the team issued (-1 = none yet); with the election and the first attack tick it is the stall clock.</summary>
 		public int LastOrderTick = -1;
+
+		/// <summary>The tick the last order was cancelled for missing reports (-1 = never); tl_join_any holds the next publish for a while.</summary>
+		public int NoReportsCancelTick = -1;
 
 		/// <summary>TEAM-LEAD-02 finish-the-weakest focus: the enemy seat (its player-actor id, -1 = none), the tick it was taken, and the cached pick (re-evaluated at most every check window).</summary>
 		public int FocusSeat = -1;

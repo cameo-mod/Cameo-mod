@@ -34,6 +34,7 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateGatherHold;
 		AblationLatch ablateGraceHold;
 		AblationLatch ablateRouteAll;
+		AblationLatch ablateJoinAny;
 		int teamLeadNextCheck;
 		string teamLeadKey;
 		TeamLeadTeam teamLeadTeam;
@@ -72,6 +73,11 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>A team order is open and the route-all row is on: the liveness (M13) wave and the stalemate breaker wave hold, their units join the order.</summary>
 		internal bool TeamLeadRoutesLaunch() => TeamLeadRouteAllOn && TeamLeadOpenOrder() != null;
+
+		// TEAM-GATHER-01 c2: small pools merge into a rally order, a rally order needs a team army at WAVE-MIN, no re-publish right after a no_reports cancel; own switch + row.
+		bool TeamLeadJoinAnyOn => TeamLeadOn && Info.TeamLeadJoinAnyEnabled && !ablateJoinAny.Off(Player, AblationIds.TeamLeadJoinAny);
+
+		int TeamLeadJoinMin(TeamLeadOrder order) => TeamLeadCA.JoinMinUnits(TeamLeadJoinAnyOn, order != null && (order.GatherOnly || order.Extending), Info.TeamLeadJoinMinUnits);
 
 		bool TeamLeadOrderSurviveOn => TeamLeadOn && Info.TeamLeadOrderSurviveEnabled && !ablateOrderSurvive.Off(Player, AblationIds.TeamLeadOrderSurvive);
 
@@ -265,6 +271,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (now < initialAttackDelay || TeamLeadOpenOrder() != null)
 				return;
 
+			// TEAM-GATHER-01 c2 (tl_join_any): no new order right after one was cancelled for missing reports (V04: a rally order was re-published every ~500 ticks).
+			if (TeamLeadJoinAnyOn && TeamLeadCA.RepublishHeld(now, team.NoReportsCancelTick, Info.TeamLeadRepublishHoldTicks))
+				return;
+
 			var blob = team.Pool(now, Info.TeamLeadPoolMaxAgeTicks);
 			var (minUnits, minValue) = WaveMinActive ? WaveMinBars() : (0, 0);
 			var ready = TeamLeadCA.BlobReady(blob.Units, blob.Value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue);
@@ -277,6 +287,12 @@ namespace OpenRA.Mods.CA.Traits
 			if (why == TeamLeadCA.PublishWhy.None && TeamLeadFallbackPublishOn)
 				why = TeamLeadCA.FallbackPublish(BlobLaunch01CA.TicksSinceOrder(now, team.LastOrderTick, initialAttackDelay), Info.TeamLeadFallbackTicks,
 					blob.Units, Info.TeamLeadJoinMinUnits);
+
+			// TEAM-GATHER-01 c2 (tl_join_any): a rally order only for a team army that already reaches WAVE-MIN; below that floor nothing is published and nothing churns.
+			if (why == TeamLeadCA.PublishWhy.Gather && TeamLeadJoinAnyOn
+				&& !TeamLeadCA.RallyFloorPassed(blob.Units, blob.Value, BlobLaunch01CA.MinUnits(minUnits, blob.Units), minValue))
+				why = TeamLeadCA.PublishWhy.None;
+
 			if (why == TeamLeadCA.PublishWhy.None)
 				return;
 
@@ -323,7 +339,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			// A rally order takes the new units again and again (they walk to the rally and wait there), but only real groups: no one-unit squads.
 			unitsHangingAroundTheBase.RemoveAll(u => unitCannotBeOrdered(u.Actor));
-			if (unitsHangingAroundTheBase.Count < (teamLeadIsLeader && !order.GatherOnly && !order.Extending ? Info.TeamLeadLeaderMinUnits : Info.TeamLeadJoinMinUnits))
+			if (unitsHangingAroundTheBase.Count < (teamLeadIsLeader && !order.GatherOnly && !order.Extending ? Info.TeamLeadLeaderMinUnits : TeamLeadJoinMin(order)))
 				return;
 
 			var before = unitsHangingAroundTheBase.Count;
@@ -622,6 +638,9 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				order.Cancelled = true;
 				order.CancelReason = cancel;
+				if (cancel == "no_reports")
+					team.NoReportsCancelTick = now;
+
 				DiagnosticTeamEvent("team_cancel", "seq=" + order.Seq + " why=" + cancel + " age=" + (now - order.IssueTick) + " reports=" + order.ReportCount + " leader=" + order.LeaderKey
 					+ " elected=" + (team.Election.Leader ?? "none"));
 				return;
@@ -739,7 +758,8 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			teamLaunch = true;
-			return !TeamLeadCA.FollowerMayLaunch(TeamLeadOpenOrder() != null, unitsHangingAroundTheBase.Count, Info.TeamLeadJoinMinUnits);
+			var open = TeamLeadOpenOrder();
+			return !TeamLeadCA.FollowerMayLaunch(open != null, unitsHangingAroundTheBase.Count, TeamLeadJoinMin(open));
 		}
 
 		/// <summary>The idle pool the launch bars measure: the whole team's for the leader, the own pool otherwise.</summary>
