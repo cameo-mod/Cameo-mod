@@ -77,8 +77,9 @@ namespace OpenRA.Mods.Cameo.Traits
 		void INotifyCreated.Created(Actor self)
 		{
 			playerStats = self.TraitOrDefault<PlayerStatistics>();
-			var unitBuilder = self.TraitOrDefault<UnitBuilderBotModuleCA>();
-			if (unitBuilder != null)
+			// MULTI-BUILDER-FIX-01: the player actor carries one UnitBuilderBotModuleCA per bot family (@generic, @classic since CLASSIC-FREEZE-01).
+			// A single-instance lookup throws at world creation (V06). Only the enabled instance ticks, so only it raises the event.
+			foreach (var unitBuilder in self.TraitsImplementing<UnitBuilderBotModuleCA>())
 				unitBuilder.ActiveCompositionChanged += OnCompositionChanged;
 		}
 
