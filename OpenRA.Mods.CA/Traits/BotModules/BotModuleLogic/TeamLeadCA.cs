@@ -251,25 +251,22 @@ namespace OpenRA.Mods.CA.Traits
 
 		// ---- TEAM-BLOB-01 (USER P0, V02 RCA 2026-11-24): the no-order guarantee ----
 
-		/// <summary>Why the leader publishes: the ready blob on cadence, the first fallback (units bar only) or the last one (whatever there is).</summary>
-		public enum PublishWhy { None, Ready, Fallback, Forced }
+		/// <summary>Why the leader publishes: the ready blob (an attack order), or the fallback's rally order (gather only, never an attack).</summary>
+		public enum PublishWhy { None, Ready, Gather }
 
 		/// <summary>
-		/// The no-order guarantee. <paramref name="sinceOrder"/> ticks without any team order (BlobLaunch01CA.TicksSinceOrder): from
-		/// <paramref name="fallbackTicks"/> on the leader publishes once the blob's units reach <paramref name="minUnits"/> (the blob launch
-		/// minimum; the WAVE-MIN value bar is dropped), and from <paramref name="forcedTicks"/> on it publishes with whatever it has, if that
-		/// is at least <paramref name="floorUnits"/> (an empty blob never goes out). 0 turns a step off. The ready path is OrderDue.
+		/// The no-order guarantee (USER rule 2026-11-24: bots never trickle in small groups; nothing below WAVE-MIN ever attacks). It is called only when the
+		/// ready path (OrderDue) said no, so the blob is below the WAVE-MIN bars: after <paramref name="sinceOrder"/> ticks without any team order
+		/// (BlobLaunch01CA.TicksSinceOrder) of at least <paramref name="fallbackTicks"/> the leader re-publishes the RALLY order - a gather-only order whose
+		/// squads walk to the rally point and wait there; it turns into the attack only when the gathered squads pass the WAVE-MIN bars. Needs at least
+		/// <paramref name="floorUnits"/> units in the blob (an empty blob has nothing to gather). 0 fallback ticks = off. The ready path is OrderDue.
 		/// </summary>
-		public static PublishWhy FallbackPublish(int sinceOrder, int fallbackTicks, int forcedTicks, int units, int minUnits, int floorUnits)
+		public static PublishWhy FallbackPublish(int sinceOrder, int fallbackTicks, int units, int floorUnits)
 		{
 			if (units < Math.Max(1, floorUnits))
 				return PublishWhy.None;
-			if (forcedTicks > 0 && sinceOrder >= forcedTicks)
-				return PublishWhy.Forced;
-			if (fallbackTicks > 0 && sinceOrder >= fallbackTicks && units >= minUnits)
-				return PublishWhy.Fallback;
 
-			return PublishWhy.None;
+			return fallbackTicks > 0 && sinceOrder >= fallbackTicks ? PublishWhy.Gather : PublishWhy.None;
 		}
 
 		// ---- TEAM-PINCER-01 (USER P0, 2026-11-24): a big blob splits into two prongs that stage on opposite sides of one target and push together ----
@@ -369,9 +366,26 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly int Seq;
 		public string LeaderKey { get; private set; }
 		public readonly WPos Rally;
-		public readonly WPos Target;
-		public readonly uint TargetActorId;
-		public readonly int IssueTick;
+		public WPos Target { get; private set; }
+		public uint TargetActorId { get; private set; }
+		public int IssueTick { get; private set; }
+
+		/// <summary>
+		/// TEAM-BLOB-01 rally order (the no-order fallback): the squads gather at <see cref="Rally"/> and wait; the order never pushes and never ages out
+		/// while it is gather-only. <see cref="Promote"/> turns it into the ordinary attack order once the gathered squads pass the WAVE-MIN bars.
+		/// </summary>
+		public bool GatherOnly { get; private set; }
+
+		public void MakeGatherOnly() => GatherOnly = true;
+
+		/// <summary>The gathered squads are a wave: the order becomes the attack order. Its gather window restarts now, and it takes a fresh target.</summary>
+		public void Promote(int now, WPos target, uint targetActorId)
+		{
+			GatherOnly = false;
+			IssueTick = now;
+			Target = target;
+			TargetActorId = targetActorId;
+		}
 
 		/// <summary>The tick the blob was released (-1 = still gathering).</summary>
 		public int PushTick = -1;
@@ -387,7 +401,7 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>TEAM-BLOB-01: the elected leader changed while the order lived: the new leader takes the order over (it is not cancelled).</summary>
 		public void HandOver(string newLeaderKey) => LeaderKey = newLeaderKey;
 
-		readonly Dictionary<object, (long Value, bool Arrived)> reports = new();
+		readonly Dictionary<object, (long Value, bool Arrived, int Units)> reports = new();
 
 		public TeamLeadOrder(int seq, string leaderKey, WPos rally, WPos target, uint targetActorId, int issueTick)
 		{
@@ -409,7 +423,21 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>The tick of the latest squad report (-1 = none yet); the no-report grace of a surviving order counts from it.</summary>
 		public int LastReportTick = -1;
 
-		public void Report(object squad, long value, bool arrived) => reports[squad] = (value, arrived);
+		public void Report(object squad, long value, bool arrived, int units = 0) => reports[squad] = (value, arrived, units);
+
+		/// <summary>The units and value the reporting squads committed (what a gather-only order measures against the WAVE-MIN bars).</summary>
+		public (int Units, long Value) CommittedTotals()
+		{
+			var units = 0;
+			long value = 0;
+			foreach (var r in reports.Values)
+			{
+				units += r.Units;
+				value += r.Value;
+			}
+
+			return (units, value);
+		}
 
 		public void Forget(object squad)
 		{

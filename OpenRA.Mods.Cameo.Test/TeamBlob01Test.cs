@@ -38,10 +38,20 @@ namespace OpenRA.Mods.Cameo.Test
 			return File.ReadAllText(Path.Combine(dir.FullName, relative));
 		}
 
-		static TeamLeadCA.PublishWhy Why(int sinceOrder, int units, int waveMinUnits = 12, int fallback = 1500, int forced = 3000, int floor = 3) =>
-			TeamLeadCA.FallbackPublish(sinceOrder, fallback, forced, units, BlobLaunch01CA.MinUnits(waveMinUnits, units), floor);
+		static TeamLeadCA.PublishWhy Why(int sinceOrder, int units, int fallback = 1500, int floor = 3) =>
+			TeamLeadCA.FallbackPublish(sinceOrder, fallback, units, floor);
 
-		// ---- the no-order guarantee ----
+		// ---- the no-order guarantee: a rally order, never an attack (USER rule 2026-11-24: nothing below WAVE-MIN ever attacks) ----
+
+		[Test]
+		public void TheGuaranteeCanOnlyPublishARallyOrderNeverAnAttack()
+		{
+			// The only attack publish is Ready (the OrderDue path). The old Fallback / Forced steps, which sent a 3-11 unit blob out, are gone.
+			Assert.That(Enum.GetNames(typeof(TeamLeadCA.PublishWhy)), Is.EquivalentTo(new[] { "None", "Ready", "Gather" }));
+			Assert.That(Why(1500, 12), Is.EqualTo(TeamLeadCA.PublishWhy.Gather));
+			Assert.That(Why(3000, 11), Is.EqualTo(TeamLeadCA.PublishWhy.Gather), "V02: 6-11 units for 3000 ticks used to be a forced attack");
+			Assert.That(Why(9000, 40), Is.EqualTo(TeamLeadCA.PublishWhy.Gather));
+		}
 
 		[Test]
 		public void BeforeTheFallbackNothingIsPublishedByTheGuarantee()
@@ -51,60 +61,126 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void After1500TicksTheLeaderPublishesAsSoonAsTheBlobsUnitsReachTheBlobMinimum()
+		public void AnAlmostEmptyBlobAndAZeroFallbackPublishNothing()
 		{
-			// WAVE-MIN 12 units: 12 units pass at 1500 (the value bar is not asked), 11 do not.
-			Assert.That(Why(1500, 12), Is.EqualTo(TeamLeadCA.PublishWhy.Fallback));
-			Assert.That(Why(1500, 40), Is.EqualTo(TeamLeadCA.PublishWhy.Fallback));
-			Assert.That(Why(1500, 11), Is.EqualTo(TeamLeadCA.PublishWhy.None), "the blob is below the launch minimum");
-			Assert.That(Why(2999, 11), Is.EqualTo(TeamLeadCA.PublishWhy.None));
+			Assert.That(Why(5000, 2), Is.EqualTo(TeamLeadCA.PublishWhy.None), "nothing to gather");
+			Assert.That(Why(5000, 0), Is.EqualTo(TeamLeadCA.PublishWhy.None));
+			Assert.That(Why(5000, 3), Is.EqualTo(TeamLeadCA.PublishWhy.Gather), "the join floor");
+			Assert.That(Why(5000, 20, fallback: 0), Is.EqualTo(TeamLeadCA.PublishWhy.None), "0 turns the guarantee off");
 		}
 
 		[Test]
-		public void After3000TicksTheLeaderPublishesWithWhateverTheBlobHoldsIfItIsNotEmpty()
+		public void ARallyOrderIsGatherOnlyAndIsPromotedOnlyWhenTheGatheredSquadsPassTheBars()
 		{
-			Assert.That(Why(3000, 11), Is.EqualTo(TeamLeadCA.PublishWhy.Forced), "V02: 6-11 units never reached the bar for 3000 ticks");
-			Assert.That(Why(3000, 3), Is.EqualTo(TeamLeadCA.PublishWhy.Forced), "the join floor");
-			Assert.That(Why(3000, 2), Is.EqualTo(TeamLeadCA.PublishWhy.None), "an almost empty blob never goes out");
-			Assert.That(Why(3000, 0), Is.EqualTo(TeamLeadCA.PublishWhy.None));
-			Assert.That(Why(9000, 40), Is.EqualTo(TeamLeadCA.PublishWhy.Forced), "the later step wins once it is due");
+			var order = new TeamLeadOrder(9, "Multi0", new WPos(1024, 1024, 0), new WPos(9000, 9000, 0), 42, 3000);
+			Assert.That(order.GatherOnly, Is.False, "an order is an attack order unless the fallback makes it a rally order");
+			order.MakeGatherOnly();
+			Assert.That(order.GatherOnly, Is.True);
+
+			var a = new object();
+			var b = new object();
+			order.Report(a, 2400, true, 5);
+			order.Report(b, 2000, false, 6);
+			var (units, value) = order.CommittedTotals();
+			Assert.That((units, value), Is.EqualTo((11, 4400L)));
+
+			// WAVE-MIN 12 units / 6000 value: 11 units and 4400 value are below it, so the rally order stays.
+			Assert.That(TeamLeadCA.BlobReady(units, value, 3, true, 12, 6000), Is.False);
+			order.Report(b, 3700, true, 7);
+			(units, value) = order.CommittedTotals();
+			Assert.That(TeamLeadCA.BlobReady(units, value, 3, true, 12, 6000), Is.True, "12 units and 6100 value pass both bars");
+
+			order.Promote(4200, new WPos(5000, 5000, 0), 77);
+			Assert.That(order.GatherOnly, Is.False);
+			Assert.That(order.IssueTick, Is.EqualTo(4200), "the gather window restarts");
+			Assert.That(order.TargetActorId, Is.EqualTo(77u));
+			Assert.That(order.Target, Is.EqualTo(new WPos(5000, 5000, 0)));
+			Assert.That(order.Seq, Is.EqualTo(9));
+			Assert.That(order.ReportCount, Is.EqualTo(2), "the gathered squads stay in the order");
+			Assert.That(order.Pushed, Is.False, "promotion is not a push");
 		}
 
 		[Test]
-		public void AZeroTurnsAStepOffAndNoTierMeansTheFloorDecides()
+		public void AReportWithoutUnitsAddsNothingToTheUnitTotalSoOldCallersStayValueOnly()
 		{
-			Assert.That(Why(5000, 20, forced: 0), Is.EqualTo(TeamLeadCA.PublishWhy.Fallback));
-			Assert.That(Why(5000, 5, forced: 0), Is.EqualTo(TeamLeadCA.PublishWhy.None));
-			Assert.That(Why(5000, 20, fallback: 0, forced: 0), Is.EqualTo(TeamLeadCA.PublishWhy.None));
-
-			// No WAVE-MIN tier (0 units): half of the blob is the minimum, so any blob at the floor passes the fallback.
-			Assert.That(Why(1500, 4, waveMinUnits: 0), Is.EqualTo(TeamLeadCA.PublishWhy.Fallback));
+			var order = new TeamLeadOrder(1, "Multi0", new WPos(0, 0, 0), new WPos(1, 1, 0), 0, 0);
+			order.Report(new object(), 1000, true);
+			Assert.That(order.CommittedTotals(), Is.EqualTo((0, 1000L)));
+			Assert.That(order.Totals(), Is.EqualTo((1000L, 1000L)));
 		}
 
-		/// <summary>The V02 sequence on a team that never reached the bar: nothing, nothing, then the forced push; one order resets the clock.</summary>
+		/// <summary>
+		/// The V02 team from its real state: an idle blob that grows slowly and sits at 6-11 units for thousands of ticks while the bars are 12 units / 6000 value.
+		/// Whatever the leader does, nothing is ever pushed below the bars; the rally order is re-published while it waits and is promoted the tick the squads pass them.
+		/// </summary>
 		[Test]
-		public void TheV02TeamThatNeverReachedTheBarGetsAnOrderEvery3000Ticks()
+		public void TheV02TeamNeverPushesBelowTheBarsAndRalliesInsteadUntilItPassesThem()
 		{
-			var lastOrder = -1;
-			var orders = 0;
+			const int MinUnits = 12;
+			const int MinValue = 6000;
 			const int Start = 3000;
+			const int UnitValue = 500;
+			TeamLeadOrder open = null;
+			var lastOrder = -1;
+			var rallyOrders = 0;
+			var attackOrders = 0;
+			var promotions = 0;
+			var firstAttackTick = -1;
+			var firstRallyTick = -1;
 			for (var now = Start; now <= 60000; now += 100)
 			{
+				// The blob: 0 -> 14 units over the first 40000 ticks (below the bar for a long time), losses now and then.
+				var blobUnits = Math.Min(14, (now - Start) / 2800);
+				if (now % 7000 == 0)
+					blobUnits = Math.Max(0, blobUnits - 4);
+				var blobValue = (long)blobUnits * UnitValue;
+
+				if (open != null && open.GatherOnly)
+				{
+					// All of the blob has joined the rally order and reported (the members re-join every check).
+					open.Report(open, blobValue, true, blobUnits);
+					var (cu, cv) = open.CommittedTotals();
+					if (TeamLeadCA.BlobReady(cu, cv, 3, true, MinUnits, MinValue))
+					{
+						open.Promote(now, new WPos(1, 1, 0), 1);
+						promotions++;
+						Assert.That(cu, Is.GreaterThanOrEqualTo(MinUnits), "a promotion never pushes below the unit bar");
+						Assert.That(cv, Is.GreaterThanOrEqualTo(MinValue), "...or the value bar");
+						firstAttackTick = firstAttackTick < 0 ? now : firstAttackTick;
+						open = null;
+					}
+
+					continue;
+				}
+
 				var since = BlobLaunch01CA.TicksSinceOrder(now, lastOrder, Start);
-				var blobUnits = 8; // V02 team idle: 0-9 for most of the game, 12 is the Hard bar
-				var ready = TeamLeadCA.BlobReady(blobUnits, 2500, 3, true, 12, 6000);
+				var ready = TeamLeadCA.BlobReady(blobUnits, blobValue, 3, true, MinUnits, MinValue);
 				var why = TeamLeadCA.OrderDue(false, ready, now, lastOrder, 1500)
 					? TeamLeadCA.PublishWhy.Ready
-					: TeamLeadCA.FallbackPublish(since, 1500, 3000, blobUnits, BlobLaunch01CA.MinUnits(12, blobUnits), 3);
+					: TeamLeadCA.FallbackPublish(since, 1500, blobUnits, 3);
 				if (why == TeamLeadCA.PublishWhy.None)
 					continue;
 
-				Assert.That(why, Is.EqualTo(TeamLeadCA.PublishWhy.Forced));
-				orders++;
 				lastOrder = now;
+				if (why == TeamLeadCA.PublishWhy.Ready)
+				{
+					Assert.That(blobUnits, Is.GreaterThanOrEqualTo(MinUnits), "an attack order needs the unit bar");
+					Assert.That(blobValue, Is.GreaterThanOrEqualTo(MinValue), "an attack order needs the value bar");
+					attackOrders++;
+					firstAttackTick = firstAttackTick < 0 ? now : firstAttackTick;
+				}
+				else
+				{
+					rallyOrders++;
+					firstRallyTick = firstRallyTick < 0 ? now : firstRallyTick;
+					open = new TeamLeadOrder(rallyOrders, "Multi0", new WPos(0, 0, 0), new WPos(1, 1, 0), 0, now);
+					open.MakeGatherOnly();
+				}
 			}
 
-			Assert.That(orders, Is.GreaterThanOrEqualTo(18), "about one order per 3000 ticks over 57000 ticks (V02 had 4 in 60000)");
+			Assert.That(rallyOrders, Is.GreaterThanOrEqualTo(1), "while the blob is below the bars the fallback rallies the team");
+			Assert.That(firstRallyTick, Is.LessThan(firstAttackTick), "the rally comes first, the attack only after the bars are passed");
+			Assert.That(attackOrders + promotions, Is.GreaterThanOrEqualTo(1), "the team does attack once the blob passes the bars");
 		}
 
 		// ---- the order survives a leader re-election ----
@@ -133,7 +209,8 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var info = RepoFile(Bots + "SquadManagerBotModuleCAInfo.TeamLead.cs");
 			Assert.That(info, Does.Contain("public readonly bool TeamLeadFallbackPublishEnabled = false;"));
-			Assert.That(info, Does.Contain("public readonly int TeamLeadForcedPublishTicks = 3000;"));
+			Assert.That(info, Does.Not.Contain("TeamLeadForcedPublishTicks"), "the forced attack step is gone: nothing below WAVE-MIN attacks");
+			Assert.That(info, Does.Contain("RALLY order"));
 			Assert.That(info, Does.Contain("public readonly bool TeamLeadOrderSurviveEnabled = false;"));
 
 			var yaml = RepoFile("mods/cameo/ai/ai.yaml");
@@ -158,7 +235,9 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(body.IndexOf("TeamLeadCA.OrderDue(", StringComparison.Ordinal), Is.GreaterThan(0));
 			Assert.That(body.IndexOf("TeamLeadCA.FallbackPublish(", StringComparison.Ordinal), Is.GreaterThan(body.IndexOf("TeamLeadCA.OrderDue(", StringComparison.Ordinal)));
 			Assert.That(body, Does.Contain("if (why == TeamLeadCA.PublishWhy.None && TeamLeadFallbackPublishOn)"));
-			Assert.That(body, Does.Contain("BlobLaunch01CA.MinUnits(minUnits, blob.Units)"), "the same blob minimum as the leader's launch gate");
+			Assert.That(body, Does.Not.Contain("MinUnits(minUnits, blob.Units)"), "no unit bar of its own: the fallback never attacks");
+			Assert.That(body.IndexOf("TeamLeadPromoteRally(rally, now);", StringComparison.Ordinal), Is.LessThan(body.IndexOf("if (now < initialAttackDelay || TeamLeadOpenOrder() != null)", StringComparison.Ordinal)), "a rally order is promoted before the open-order guard");
+			Assert.That(body, Does.Contain("if (why == TeamLeadCA.PublishWhy.Gather)\n\t\t\t\torder.MakeGatherOnly();"));
 			Assert.That(body, Does.Contain("BlobLaunch01CA.TicksSinceOrder("));
 			Assert.That(body, Does.Contain("if (now < initialAttackDelay || TeamLeadOpenOrder() != null)"), "never while an order is open or before the initial attack delay");
 			Assert.That(body, Does.Contain("DiagnosticTeamEvent(\"team_order\""));
@@ -179,6 +258,31 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(body, Does.Contain("DiagnosticTeamEvent(\"team_cancel\""));
 			Assert.That(body, Does.Contain("DiagnosticTeamEvent(\"team_push\""));
 			Assert.That(wiring, Does.Contain("bool TeamLeadOrderSurviveOn => TeamLeadOn && Info.TeamLeadOrderSurviveEnabled && !ablateOrderSurvive.Off(Player, AblationIds.TeamLeadOrderSurvive);"));
+		}
+
+		[Test]
+		public void ARallyOrderNeverPushesNeverAgesOutAndIsJoinedAgainAndAgainByRealGroups()
+		{
+			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
+			var start = wiring.IndexOf("void TeamLeadMaintainOrder(", StringComparison.Ordinal);
+			var body = wiring[start..wiring.IndexOf("TeamLeadOrder TeamLeadOpenOrder()", start, StringComparison.Ordinal)];
+			Assert.That(body, Does.Contain(": !order.GatherOnly && now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? \"max_age\""), "a rally order waits as long as it takes");
+			var gatherReturn = body.IndexOf("if (order.GatherOnly)\n\t\t\t\treturn;", StringComparison.Ordinal);
+			Assert.That(gatherReturn, Is.GreaterThan(0));
+			Assert.That(gatherReturn, Is.LessThan(body.IndexOf("if (order.Pincer)", StringComparison.Ordinal)), "no push (single blob or pincer) for a rally order");
+			Assert.That(gatherReturn, Is.LessThan(body.IndexOf("TeamLeadCA.PushDue(", StringComparison.Ordinal)));
+			Assert.That(body, Does.Contain("order.Prune("), "a rally order still drops squads that left it");
+
+			var join = wiring[wiring.IndexOf("void TeamLeadJoin(", StringComparison.Ordinal)..wiring.IndexOf("bool TeamLeadPickTarget(", StringComparison.Ordinal)];
+			Assert.That(join, Does.Contain("(order.Seq == teamLeadJoinedSeq && !order.GatherOnly)"), "an attack order is joined once, a rally order again and again");
+			Assert.That(join, Does.Contain("teamLeadIsLeader && !order.GatherOnly ? Info.TeamLeadLeaderMinUnits : Info.TeamLeadJoinMinUnits"), "no one-unit rally squads");
+
+			Assert.That(wiring, Does.Contain("void TeamLeadPromoteRally(TeamLeadOrder order, int now)"));
+			Assert.That(wiring, Does.Contain("var (units, value) = order.CommittedTotals();"));
+			Assert.That(wiring, Does.Contain("TeamLeadCA.BlobReady(units, value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue)"), "the same bars as the ready path");
+			Assert.That(wiring, Does.Contain("order.Promote(now, target, targetId);"));
+			Assert.That(wiring, Does.Contain("DiagnosticTeamEvent(\"team_promote\""));
+			Assert.That(wiring, Does.Contain("order.Report(squad, SquadValueOf(squad), near * 100 >= squad.Units.Count * Info.TeamLeadArrivePercent, squad.Units.Count);"));
 		}
 
 		[Test]

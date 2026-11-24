@@ -237,6 +237,13 @@ namespace OpenRA.Mods.CA.Traits
 		// Leader only. No open order, a ready blob (WAVE-MIN tier on the combined blob), cadence due: publish the order now.
 		void TeamLeadPublish(TeamLeadTeam team, int now)
 		{
+			// TEAM-BLOB-01: a rally (gather-only) order waits until the squads gathered for it pass the WAVE-MIN bars, then it becomes the attack order.
+			if (TeamLeadOpenOrder() is { GatherOnly: true } rally)
+			{
+				TeamLeadPromoteRally(rally, now);
+				return;
+			}
+
 			if (now < initialAttackDelay || TeamLeadOpenOrder() != null)
 				return;
 
@@ -247,11 +254,11 @@ namespace OpenRA.Mods.CA.Traits
 			var why = TeamLeadCA.OrderDue(false, ready, now, team.LastOrderTick, interval, team.AnyAtCap(now, Info.TeamLeadPoolMaxAgeTicks))
 				? TeamLeadCA.PublishWhy.Ready
 				: TeamLeadCA.PublishWhy.None;
-			// The bar is the blob launch minimum measured on the blob itself: MinUnits(tier, blob.Units) = max(tier, (blob + 1) / 2). The half-blob term never decides
-			// here: it exceeds the tier only for a blob that is above the tier anyway, so the effective bar is blob.Units >= the WAVE-MIN unit tier.
+			// USER rule (2026-11-24): nothing below WAVE-MIN ever attacks. The ready path above is the only attack publish; when it says no the blob is below the
+			// bars, and the fallback re-publishes the RALLY order only (gather-only, see TeamLeadPromoteRally).
 			if (why == TeamLeadCA.PublishWhy.None && TeamLeadFallbackPublishOn)
 				why = TeamLeadCA.FallbackPublish(BlobLaunch01CA.TicksSinceOrder(now, team.LastOrderTick, initialAttackDelay), Info.TeamLeadFallbackTicks,
-					Info.TeamLeadForcedPublishTicks, blob.Units, BlobLaunch01CA.MinUnits(minUnits, blob.Units), Info.TeamLeadJoinMinUnits);
+					blob.Units, Info.TeamLeadJoinMinUnits);
 			if (why == TeamLeadCA.PublishWhy.None)
 				return;
 
@@ -261,21 +268,44 @@ namespace OpenRA.Mods.CA.Traits
 
 			var forced = TeamLeadCA.FallbackForced(now, team.LastOrderTick, Info.TeamLeadFallbackTicks);
 			var order = TeamLeadIssue(home, target, targetId, now);
+			if (why == TeamLeadCA.PublishWhy.Gather)
+				order.MakeGatherOnly();
+
 			DiagnosticTeamEvent("team_order", "seq=" + order.Seq + " why=" + why.ToString().ToLowerInvariant() + " blob=" + blob.Units + "/" + blob.Value + " target=" + targetId
 				+ " pincer=" + order.HasProngs + " leader=" + teamLeadKey);
 			AIUtils.BotDebug("AI ({0}): team push published seq {1} at {2}: blob {3}/{4}, target {5}{6}", Player.ClientIndex, order.Seq, now, blob.Units, blob.Value,
 				targetId, forced ? " (fallback)" : "");
 		}
 
+		// Leader only. The squads of a rally order have reported what they hold; once that passes the WAVE-MIN bars (units AND value, the same bars as the ready
+		// path) the order becomes the attack order: its gather window restarts and it takes the leader's current target. Below the bars it stays a rally order.
+		void TeamLeadPromoteRally(TeamLeadOrder order, int now)
+		{
+			var (units, value) = order.CommittedTotals();
+			var (minUnits, minValue) = WaveMinActive ? WaveMinBars() : (0, 0);
+			if (!TeamLeadCA.BlobReady(units, value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue))
+				return;
+
+			if (!TeamLeadPickTarget(AggTeamHomePos(), now, out var target, out var targetId))
+			{
+				target = order.Target;
+				targetId = order.TargetActorId;
+			}
+
+			order.Promote(now, target, targetId);
+			DiagnosticTeamEvent("team_promote", "seq=" + order.Seq + " committed=" + units + "/" + value + " target=" + targetId + " leader=" + teamLeadKey);
+		}
+
 		// Every member (the leader too) forms its wave for the open order at once. Retried each window until the pool actually goes into a squad.
 		void TeamLeadJoin(IBot bot, int now)
 		{
 			var order = TeamLeadOpenOrder();
-			if (order == null || order.Seq == teamLeadJoinedSeq || now < initialAttackDelay)
+			if (order == null || (order.Seq == teamLeadJoinedSeq && !order.GatherOnly) || now < initialAttackDelay)
 				return;
 
+			// A rally order takes the new units again and again (they walk to the rally and wait there), but only real groups: no one-unit squads.
 			unitsHangingAroundTheBase.RemoveAll(u => unitCannotBeOrdered(u.Actor));
-			if (unitsHangingAroundTheBase.Count < (teamLeadIsLeader ? Info.TeamLeadLeaderMinUnits : Info.TeamLeadJoinMinUnits))
+			if (unitsHangingAroundTheBase.Count < (teamLeadIsLeader && !order.GatherOnly ? Info.TeamLeadLeaderMinUnits : Info.TeamLeadJoinMinUnits))
 				return;
 
 			var before = unitsHangingAroundTheBase.Count;
@@ -564,7 +594,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			var cancel = order.LeaderKey != team.Election.Leader ? "leader_changed"
-				: now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? "max_age"
+				: !order.GatherOnly && now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? "max_age"
 				: order.ReportCount == 0 && now - (TeamLeadOrderSurviveOn ? HarassCapCA.NoReportSince(order.IssueTick, order.LastReportTick) : order.IssueTick) > reportGrace ? "no_reports"
 				: null;
 			if (cancel != null)
@@ -575,6 +605,10 @@ namespace OpenRA.Mods.CA.Traits
 					+ " elected=" + (team.Election.Leader ?? "none"));
 				return;
 			}
+
+			// TEAM-BLOB-01: a rally order only gathers; the leader's publish pass promotes it (TeamLeadPromoteRally) or it is cancelled for another reason.
+			if (order.GatherOnly)
+				return;
 
 			// TEAM-PINCER-01: two prongs hold at their own staging points; both push on the same tick, when both are ready or the first ready one
 			// has waited the hold for the other. A prong too light (squads missing or lost) collapses the pincer: one blob, the rules below.
@@ -782,7 +816,7 @@ namespace OpenRA.Mods.CA.Traits
 			var radiusSquared = (long)WDist.FromCells(Info.TeamLeadArriveCells).LengthSquared;
 			var rally = TeamLeadRallyOf(squad, order);
 			var near = squad.Units.Count(u => (u.Actor.CenterPosition - rally).HorizontalLengthSquared <= radiusSquared);
-			order.Report(squad, SquadValueOf(squad), near * 100 >= squad.Units.Count * Info.TeamLeadArrivePercent);
+			order.Report(squad, SquadValueOf(squad), near * 100 >= squad.Units.Count * Info.TeamLeadArrivePercent, squad.Units.Count);
 			order.LastReportTick = World.WorldTick;
 		}
 
