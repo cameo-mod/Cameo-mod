@@ -6271,6 +6271,9 @@ Player:
 		# PROD-IDLE G1: the fair producer service replaces the legacy fill loop for genericbot (SwitchCondition above);
 		# classic keeps the legacy loop byte-identically.
 		FairProducerService: true
+		# MCV-REBUILD-01: no yard + no MCV starts an MCV at once, past every unit gate (row mcv_rebuild_first); a failed external request frees its slot after 25 sweeps (row pb_request_slot). genericbot only.
+		McvRebuildFirst: true
+		RequestSlotFastDrop: true
 		# PROD-BUSY-01 (USER P0: every queue busy while cash > reserve): every factory of every category served on every pass.
 		# Rows pb_all_factories / pb_all_categories; genericbot only (SwitchCondition above).
 		ServeAllFactories: true

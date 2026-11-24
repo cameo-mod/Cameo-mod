@@ -235,6 +235,16 @@ namespace OpenRA.Mods.CA.Traits
 			"recovery. Gated by SwitchCondition.")]
 		public readonly bool BuildIntentTracking = false;
 
+		[Desc("MCV-REBUILD-01: no construction yard, no MCV and none queued starts an MCV at once in any queue that can build one, bypassing share, idle cap, cash floor,",
+			"UnitIntervals and UnitDelays. Gated by SwitchCondition; row mcv_rebuild_first.")]
+		public readonly bool McvRebuildFirst = false;
+
+		[Desc("MCV-REBUILD-01: a failed external build request frees its slot after RequestDropFailedSweepsFast sweeps instead of 250. Gated by SwitchCondition; row pb_request_slot.")]
+		public readonly bool RequestSlotFastDrop = false;
+
+		[Desc("MCV-REBUILD-01: failed sweeps after which a waiting external request is dropped when RequestSlotFastDrop is armed.")]
+		public readonly int RequestDropFailedSweepsFast = 25;
+
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
 			base.RulesetLoaded(rules, ai);
@@ -508,6 +518,10 @@ namespace OpenRA.Mods.CA.Traits
 
 		// ABLATE-01 hooks (DEV-only provider; absent in release = always on): one cached answer per row.
 		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery, ablateUpgradeService;
+		AblationLatch ablateMcvRebuild, ablateRequestSlot; // MCV-REBUILD-01
+		bool McvRebuildOn => switchesActive && Info.McvRebuildFirst && !ablateMcvRebuild.Off(player, AblationIds.McvRebuildFirst);
+		int RequestDropSweeps => McvRebuildCA.DropLimit(switchesActive && Info.RequestSlotFastDrop && !ablateRequestSlot.Off(player, AblationIds.RequestSlot),
+			RequestDropFailedSweeps, Info.RequestDropFailedSweepsFast);
 
 		// PROD-BUSY-01: one switch and one ablation row each. With both on, every queue is served every pass, so the PR-2 depth horizon
 		// (visitGapTicks = the gap to this bot's next pass) is also the gap to that queue's next service.
@@ -829,6 +843,10 @@ namespace OpenRA.Mods.CA.Traits
 					activeUnitIntervals.Remove(i.Key);
 			}
 
+			// MCV-REBUILD-01: runs first, before the pause votes, the cash floor, the shares and the unit intervals and delays.
+			if (McvRebuildOn)
+				TryRebuildMcv(bot);
+
 			// UPGRADE-QUEUE-01: runs before the pause votes and the cash floor (see ServeUpgradeQueues for what it keeps).
 			// No period and no re-check delay (user rule: no delay): every bot visit looks at every served queue.
 			if (UpgradeServiceOn)
@@ -893,7 +911,7 @@ namespace OpenRA.Mods.CA.Traits
 						// visible in the skip telemetry, not silently removed.
 						if (PermanentlyInvalidBuildRequest(intent.Name))
 							buildIntents.Remove(intent);
-						else if (++intent.FailedSweeps >= RequestDropFailedSweeps)
+						else if (++intent.FailedSweeps >= RequestDropSweeps)
 						{
 							foreach (var observer in UnitObservers)
 								observer.UnitProductionSkipped(player, world.WorldTick, intent.Name, "request_dropped");
@@ -967,6 +985,82 @@ namespace OpenRA.Mods.CA.Traits
 		// builder's refinery pause included); FREE items (promotions) start whatever the votes say. Delays, intervals and limits are honoured through
 		// ShouldBuild. An item already in production in ANY queue is not started again (Scrin has a second Upgrades queue).
 		// Choice: UpgradeServiceCA.Choose (pure): free first, then UnitsToBuild weight, then cost, then name; no random draw.
+		// MCV-REBUILD-01: the engine's MCV module only REQUESTS an MCV, and the request then passes every unit gate (pause votes, cash floor, shares, interval, delay,
+		// queue slot, mobile reserve) before it starts - V04 seats with no yard and 1.6-17k banked never got one. This rule starts the MCV itself.
+		McvExpansionManagerBotModule mcvManager;
+		int mcvNeedCheckTick = -1;
+		bool mcvNeeded;
+		int nextMcvNoQueueLogTick;
+
+		void TryRebuildMcv(IBot bot)
+		{
+			mcvManager ??= player.PlayerActor.TraitsImplementing<McvExpansionManagerBotModule>().FirstEnabledTraitOrDefault();
+			if (mcvManager == null)
+				return;
+
+			var mcvInfo = mcvManager.Info;
+			var types = mcvInfo.ConstructionMcvTypes.Count > 0 ? mcvInfo.ConstructionMcvTypes : mcvInfo.McvTypes;
+			if (types.Count == 0 || mcvInfo.ConstructionYardTypes.Count == 0)
+				return;
+
+			var now = world.WorldTick;
+			var queues = world.ActorsWithTrait<ProductionQueue>().Where(a => a.Actor.Owner == player && a.Trait.Enabled).Select(a => a.Trait).ToArray();
+
+			// The need is recomputed every 25 ticks; while it holds, every visit looks for a free slot so the MCV wins it before the ordinary fill.
+			if (mcvNeedCheckTick < 0 || now - mcvNeedCheckTick >= 25)
+			{
+				mcvNeedCheckTick = now;
+				var yards = world.ActorsHavingTrait<Building>().Count(a => a.Owner == player && !a.IsDead && mcvInfo.ConstructionYardTypes.Contains(a.Info.Name));
+				var mcvs = world.ActorsHavingTrait<Transforms>().Count(a => a.Owner == player && !a.IsDead && types.Contains(a.Info.Name));
+				var queued = queues.Any(q => q.AllQueued().Any(i => types.Contains(i.Item)));
+				mcvNeeded = McvRebuildCA.NeedsMcv(yards, mcvs, queued);
+			}
+
+			if (!mcvNeeded)
+				return;
+
+			ProductionQueue best = null;
+			ActorInfo bestItem = null;
+			var capableButBusy = false;
+			foreach (var queue in queues)
+			{
+				var item = queue.BuildableItems().Where(b => types.Contains(b.Name)).OrderBy(b => queue.GetProductionCost(b)).ThenBy(b => b.Name, StringComparer.Ordinal).FirstOrDefault();
+				if (item == null)
+					continue;
+
+				if (LiveFreeSlots(queue) <= 0)
+				{
+					capableButBusy = true;
+					continue;
+				}
+
+				if (best == null || queue.GetProductionCost(item) < best.GetProductionCost(bestItem))
+				{
+					best = queue;
+					bestItem = item;
+				}
+			}
+
+			if (best == null)
+			{
+#if CAMEO_DEV_LOGGING
+				// DEV: nothing can build an MCV now (no factory, a missing prerequisite or every capable queue busy) - logged once per 1500 ticks.
+				if (now >= nextMcvNoQueueLogTick)
+				{
+					nextMcvNoQueueLogTick = now + 1500;
+					Log.Write("debug", $"AI ({player.ClientIndex}): no yard and no MCV, but {(capableButBusy ? "every queue that can build an MCV is busy" : "no queue can build an MCV")} at tick {now}");
+				}
+#endif
+				return;
+			}
+
+			mcvNeeded = false; // re-evaluated in 25 ticks: by then the order has landed and the MCV counts as queued
+			mcvNeedCheckTick = now;
+			bot.QueueOrder(Order.StartProduction(best.Actor, bestItem.Name, 1));
+			NotifyStarted(bestItem.Name, best.Info.Type);
+			AIUtils.BotDebug("AI: {0} decided to build {1}: yard and MCV are gone (mcv_rebuild_first).", player, bestItem.Name);
+		}
+
 		void ServeUpgradeQueues(IBot bot)
 		{
 			var inProduction = new HashSet<string>(StringComparer.Ordinal);
