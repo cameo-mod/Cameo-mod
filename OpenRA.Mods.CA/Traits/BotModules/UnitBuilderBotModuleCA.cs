@@ -128,6 +128,10 @@ namespace OpenRA.Mods.CA.Traits
 			"buildable unit; the cash, reserve, limit and aircraft-cap gates still apply and no queue waits. Gated by SwitchCondition; row um_category_floor.")]
 		public readonly bool UnitMixCategoryFloor = false;
 
+		[Desc("CONSOLIDATE-01 C8 (P3 round-robin): every unit pass runs a FIRST-ITEM round over all categories before the depth round, so a queue never takes a second item before",
+			"every other queue has had its first. Gated by SwitchCondition; row ub_first_item_round.")]
+		public readonly bool UnitFirstItemRound = false;
+
 		[Desc("UNIT-MIX-01: the queue types that make an airfield (aircraft floor); the infantry floor uses IdleQueueFloorQueues.")]
 		public readonly string[] UnitMixAircraftQueues = { "Aircraft", "RAAircraft" };
 
@@ -533,7 +537,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		// PROD-BUSY-01: one switch and one ablation row each. With both on, every queue is served every pass, so the PR-2 depth horizon
 		// (visitGapTicks = the gap to this bot's next pass) is also the gap to that queue's next service.
-		AblationLatch ablateIdleCap, ablateIdleCapTiered, ablateIdleQueueFloor, ablateUnitMix;
+		AblationLatch ablateIdleCap, ablateIdleCapTiered, ablateIdleQueueFloor, ablateUnitMix, ablateFirstRound;
 
 		// PROD-FIX-01: one switch and one ablation row each.
 		AblationLatch ablateUnitReserve, ablateRotateStart, ablateSatBatch, ablateIntervalElapsed, ablateNoUnitFloor;
@@ -548,6 +552,9 @@ namespace OpenRA.Mods.CA.Traits
 		// UNIT-MIX-01 (um_category_floor): the army keeps a minimum VALUE share in infantry (and aircraft once an airfield exists). The queue types of a category below its floor
 		// are served first on every pass and their idle queue takes the best buildable unit (fair-service pick below). One census per world tick.
 		bool UnitMixOn => switchesActive && Info.UnitMixCategoryFloor && !ablateUnitMix.Off(player, AblationIds.UnitMixCategoryFloor);
+		// CONSOLIDATE-01 C8: firstItemRoundPass is true only while the first-item round of a pass runs (a queue that already holds an item is left for the depth round).
+		bool FirstItemRoundOn => switchesActive && Info.UnitFirstItemRound && FairService && !ablateFirstRound.Off(player, AblationIds.UnitFirstItemRound);
+		bool firstItemRoundPass;
 		int unitMixTick = -1;
 		List<string> unitMixDeficitQueues = [];
 		readonly Dictionary<string, UnitMixCategory> unitMixCategoryByName = new(StringComparer.Ordinal);
@@ -1014,32 +1021,58 @@ namespace OpenRA.Mods.CA.Traits
 						BuildUnit(bot, queueType, idleUnitCount < IdleUnitsLimit, false,
 							ProductionSaturationCA.Saturated(playerResources.Cash + playerResources.Resources, BankSaturationThreshold), batch);
 
-				for (var i = 0; i < Info.UnitQueues.Length; i++)
+				// CONSOLIDATE-01 C8: with ub_first_item_round the category loop runs twice. Round 1 gives every queue its FIRST item (a 4-deep tank queue can no longer take
+				// four items before infantry has one); round 2 is today's loop and fills the depth. Round 1 restores the rotation cursors, so the pass rotates exactly once.
+				if (FirstItemRoundOn)
 				{
-					if (++currentQueueIndex >= Info.UnitQueues.Length)
-						currentQueueIndex = 0;
-
-					if (UpgradeServiceOn && Array.IndexOf(Info.UpgradeServiceQueues, Info.UnitQueues[currentQueueIndex]) >= 0)
-						continue;
-
-					if (AIUtils.FindQueues(player, Info.UnitQueues[currentQueueIndex]).Any())
+					var savedIndex = currentQueueIndex;
+					var savedCursors = new Dictionary<string, string>(serviceCursorByCategory, StringComparer.Ordinal);
+					firstItemRoundPass = true;
+					try
 					{
-						// BV_m13_liveness: re-evaluated per category with the same cash accounting —
-						// while the bank stays at/above the tier bar the MaximiseProductionCash break is skipped.
-						var saturated = ProductionSaturationCA.Saturated(
-							ProdBusyCA.SaturationBank(SatBatchOn, (long)playerResources.Cash + playerResources.Resources, batch?.BankLeft), BankSaturationThreshold);
+						ServeCategories();
+					}
+					finally
+					{
+						firstItemRoundPass = false;
+						currentQueueIndex = savedIndex;
+						serviceCursorByCategory.Clear();
+						foreach (var pair in savedCursors)
+							serviceCursorByCategory[pair.Key] = pair.Value;
+					}
+				}
 
-						// PERF: We tick only one type of valid queue at a time
-						// if AI gets enough cash, it can fill all of its queues with enough ticks
-						BuildUnit(bot, Info.UnitQueues[currentQueueIndex], idleUnitCount < IdleUnitsLimit, false, saturated, batch);
+				ServeCategories();
 
-						// The fair path's batch nets this pass's orders; the legacy path (FairProducerService ablated, DEV only) has no batch,
-						// so its bank never drops during the pass and only the reserve-gated item checks stop spending (Sonnet LOW 2).
-						var bankNow = (long)playerResources.Cash + playerResources.Resources;
-						if (ProdBusyCA.StopCategorySweep(AllCategoriesOn, saturated, bankNow,
-							BotPersonalityLeads.Scaled(MaximiseProductionCash, cashLean), batch?.BankLeft ?? bankNow,
-							noUnitFloor ? 0 : BotPersonalityLeads.Scaled(Info.ProductionMinCashRequirement, cashLean)))
-							break;
+				void ServeCategories()
+				{
+					for (var i = 0; i < Info.UnitQueues.Length; i++)
+					{
+						if (++currentQueueIndex >= Info.UnitQueues.Length)
+							currentQueueIndex = 0;
+
+						if (UpgradeServiceOn && Array.IndexOf(Info.UpgradeServiceQueues, Info.UnitQueues[currentQueueIndex]) >= 0)
+							continue;
+
+						if (AIUtils.FindQueues(player, Info.UnitQueues[currentQueueIndex]).Any())
+						{
+							// BV_m13_liveness: re-evaluated per category with the same cash accounting —
+							// while the bank stays at/above the tier bar the MaximiseProductionCash break is skipped.
+							var saturated = ProductionSaturationCA.Saturated(
+								ProdBusyCA.SaturationBank(SatBatchOn, (long)playerResources.Cash + playerResources.Resources, batch?.BankLeft), BankSaturationThreshold);
+
+							// PERF: We tick only one type of valid queue at a time
+							// if AI gets enough cash, it can fill all of its queues with enough ticks
+							BuildUnit(bot, Info.UnitQueues[currentQueueIndex], idleUnitCount < IdleUnitsLimit, false, saturated, batch);
+
+							// The fair path's batch nets this pass's orders; the legacy path (FairProducerService ablated, DEV only) has no batch,
+							// so its bank never drops during the pass and only the reserve-gated item checks stop spending (Sonnet LOW 2).
+							var bankNow = (long)playerResources.Cash + playerResources.Resources;
+							if (ProdBusyCA.StopCategorySweep(AllCategoriesOn, saturated, bankNow,
+								BotPersonalityLeads.Scaled(MaximiseProductionCash, cashLean), batch?.BankLeft ?? bankNow,
+								noUnitFloor ? 0 : BotPersonalityLeads.Scaled(Info.ProductionMinCashRequirement, cashLean)))
+								break;
+						}
 					}
 				}
 			}
@@ -1390,6 +1423,10 @@ namespace OpenRA.Mods.CA.Traits
 				if (freeSlots <= 0)
 					continue;
 
+				// C8 first-item round: a single-slot queue that already holds an item waits for the depth round and costs no offer.
+				if (firstItemRoundPass && depthQueue && queuedItems > 0)
+					continue;
+
 				// Item-aware cap reached: a queue that can build nothing the cap leaves uncounted costs no offer and no scan.
 				if (cappedOut.Length > 0 && !queue.BuildableItems().Any(a => !CappedOut(a)))
 					continue;
@@ -1408,6 +1445,9 @@ namespace OpenRA.Mods.CA.Traits
 
 					// PR-2: the queue (plus what this pass already ordered into it) covers the gap: stop.
 					var held = queuedItems + batch.PendingOf(queue);
+					if (firstItemRoundPass && depthQueue && held > 0)
+						break;
+
 					if (depthQueue && QueueDepthCA.Covered(held, loadedTicks, visitGapTicks))
 						break;
 

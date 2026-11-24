@@ -23,5 +23,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		// UNIT-MIX-01: the army keeps a minimum VALUE share in infantry (and aircraft once an airfield exists); below the floor that category's queue is served first and its idle queue takes the best buildable unit.
 		public const string UnitMixCategoryFloor = "um_category_floor";
+
+		// CONSOLIDATE-01 C8 (P3): the unit pass serves one FIRST item per queue over every category before any queue takes a second (depth) item.
+		public const string UnitFirstItemRound = "ub_first_item_round";
 	}
 }

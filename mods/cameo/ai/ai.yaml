@@ -6359,6 +6359,8 @@ Player:
 		NoUnitFloor: true
 		# UNIT-MIX-01 (USER 11-24): um_category_floor: the army keeps >= 20% of its value in infantry and >= 10% in aircraft (airfield present); per personality via the squad manager UnitMixInfantryFloorPct / UnitMixAircraftFloorPct; genericbot only.
 		UnitMixCategoryFloor: true
+		# CONSOLIDATE-01 C8 (row ub_first_item_round): every unit pass gives each queue its FIRST item (all categories) before any queue takes a second.
+		UnitFirstItemRound: true
 		IdleBaseUnitsMaximum: 25
 		ProductionMinCashRequirement: 1000
 		MaximiseProductionCashRequirement: 5000
