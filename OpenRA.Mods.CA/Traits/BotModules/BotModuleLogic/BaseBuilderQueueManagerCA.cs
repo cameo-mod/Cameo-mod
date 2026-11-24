@@ -136,9 +136,16 @@ namespace OpenRA.Mods.CA.Traits
 			return now - since;
 		}
 
-		bool NoSpaceBanned(string name) =>
+		bool NoSpaceBanned(string name)
+		{
+			var banned =
 			NoSpaceBanOn && noSpaceBan.TryGetValue(name, out var ban)
 			&& BaseFix02CA.BanActive(true, world.WorldTick, ban.Until, world.ActorsHavingTrait<BaseProvider>().Count(a => a.Owner == player), ban.Providers);
+			if (banned)
+				TechReject(name, "nospace");
+
+			return banned;
+		}
 		bool DefenceFirstCopyOn => baseBuilder.DefenceFirstCopyArmed && !ablateDefenceFirstCopy.Off(player, AblationIds.Af2DefenceFirstCopy);
 		bool FloorExemptOn => baseBuilder.FloorEssentialsExemptArmed && !ablateFloorExempt.Off(player, AblationIds.FloorEssentialsExempt);
 		bool OpeningStepOn => baseBuilder.OpeningStepArmed && !ablateOpeningStep.Off(player, AblationIds.OpeningStandardOrder);
@@ -759,6 +766,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		public void Tick(IBot bot)
 		{
+			TechLogCompletions(); // TECH-LOG-01 (DEV only; no-op without the sink)
+
 			// REPLAY-HEALTH-LOGGER (F3): the probe reconciles queue state every tick so
 			// transition records carry exact observation ticks — it must run before the
 			// latch and queue-sweep cooldown early returns below. No observer = one lazy-resolve check.
@@ -1841,8 +1850,12 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool HasSufficientPowerForActor(ActorInfo actorInfo)
 		{
-			return playerPower == null || (actorInfo.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault)
+			var powerOk = playerPower == null || (actorInfo.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault)
 				.Sum(p => p.Amount) + playerPower.ExcessPower) >= ScaledBaseMinimumExcessPower();
+			if (!powerOk)
+				TechReject(actorInfo.Name, "power");
+
+			return powerOk;
 		}
 
 		// Build-order knobs (12.25): power_margin scales the configured surplus floor too.
@@ -2089,6 +2102,37 @@ namespace OpenRA.Mods.CA.Traits
 		// BINDING tech chain (11-23, TECHCHAIN-EXEMPT-01): the faction's T2 and T3 gate passes the army-first pause and the
 		// mobile reserve while none is owned or queued. Ablation row techchain_exempt: off = today's army-first gate.
 		// List membership first: off-list names never reach the owned count, which allocates a set per call.
+		// TECH-LOG-01 (DEV only): the first completion of each building type for this seat, and the base-builder picks rejected for radar and
+		// tech-chain types (one row per type per TechLogCA.RejectThrottleTicks). Rows go through the log sink; release has the null sink.
+		readonly HashSet<string> techFirstSeen = new();
+		readonly Dictionary<string, int> techRejectNextTick = new();
+
+		ICameoLogSink TechSink => world.WorldActor.TraitOrDefault<CameoLogHub>()?.Sink;
+		bool TechLogOn => TechSink?.Enabled == true;
+
+		void TechLogCompletions()
+		{
+			if (playerBuildings == null || !TechLogOn)
+				return;
+
+			foreach (var a in playerBuildings)
+				if (!a.IsDead && a.IsInWorld && techFirstSeen.Add(a.Info.Name))
+					TechSink.TechLogEvent(Array.IndexOf(world.Players, player), player.Faction?.InternalName ?? "", world.WorldTick, "first_completed", a.Info.Name, "");
+		}
+
+		void TechReject(string name, string reason)
+		{
+			if (!TechLogOn || !(InTechChainList(name) || (world.Map.Rules.Actors.TryGetValue(name, out var info) && IsRadarProvider(info))))
+				return;
+
+			var now = world.WorldTick;
+			if (!TechLogCA.RejectRowDue(now, techRejectNextTick.GetValueOrDefault(name, int.MinValue)))
+				return;
+
+			techRejectNextTick[name] = now + TechLogCA.RejectThrottleTicks;
+			TechSink.TechLogEvent(Array.IndexOf(world.Players, player), player.Faction?.InternalName ?? "", now, "rejected", name, reason);
+		}
+
 		bool InTechChainList(string name) =>
 			baseBuilder.Info.TechChainTypes.Contains(name) && !ablateTechChain.Off(player, AblationIds.TechChainExempt);
 
@@ -2157,8 +2201,12 @@ namespace OpenRA.Mods.CA.Traits
 			mobileReserve ??= player.PlayerActor.TraitsImplementing<IBotMobileSpendReserve>().FirstEnabledTraitOrDefault();
 			var essential = IsArmyFirstEssential(item);
 			var cost = queue.GetProductionCost(item);
-			return !pauseBuilding.Any(p => p.PausesBuilding(item, essential, admission, cost))
+			var admitted = !pauseBuilding.Any(p => p.PausesBuilding(item, essential, admission, cost))
 				&& !BaseBuilderQueueEvalCA.MobileSpendBlocks(playerResources.GetCashAndResources(), cost, mobileReserve?.MobileSpendFloor ?? 0, essential);
+			if (!admitted)
+				TechReject(item.Name, "vote");
+
+			return admitted;
 		}
 
 		bool EssentialsHolds(ActorInfo item, bool isRefinery, bool plannerOrDemand, int bank)
@@ -2180,9 +2228,16 @@ namespace OpenRA.Mods.CA.Traits
 		bool UnlistedOnceKind(ActorInfo info) =>
 			!(baseBuilder.Info.BuildingFractions != null && baseBuilder.Info.BuildingFractions.ContainsKey(info.Name)) && FirstCopyKind(info);
 
-		bool BuildingStillDelayed(string name) =>
+		bool BuildingStillDelayed(string name)
+		{
+			var delayed =
 			baseBuilder.Info.BuildingDelays != null && baseBuilder.Info.BuildingDelays.TryGetValue(name, out var delay)
 			&& BaseBuilderQueueEvalCA.StillDelayed(KnobTicks(delay * buildingDelayModifier / 100, name), world.WorldTick);
+			if (delayed)
+				TechReject(name, "delay");
+
+			return delayed;
+		}
 
 		// BASE-02: owned or in-production count of a set of building types.
 		int OwnedOrQueuedCount(IReadOnlyCollection<string> types)
@@ -2849,6 +2904,10 @@ namespace OpenRA.Mods.CA.Traits
 			openingPickName = null;
 			antiRushPickName = null;
 			var buildableThings = queue.BuildableItems();
+			if (TechLogOn) // TECH-LOG-01: a tech-chain type the engine does not offer yet has an unmet prerequisite
+				foreach (var tech in baseBuilder.Info.TechChainTypes)
+					if (!buildableThings.Any(b => b.Name == tech))
+						TechReject(tech, "prereq");
 			var availableCash = playerResources.GetCashAndResources();
 
 			// This gets used quite a bit, so let's cache it here

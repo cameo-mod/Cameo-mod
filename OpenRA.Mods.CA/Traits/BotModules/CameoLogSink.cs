@@ -26,6 +26,7 @@ namespace OpenRA.Mods.CA.Traits
 		void ContextRow(int playerIndex, string fileName, string row, int tick);
 		void FlushContext(int playerIndex, int tick);
 		void InfantryRejectRow(int playerIndex, string fileName, string row, int tick);
+		void TechLogEvent(int playerIndex, string faction, int tick, string kind, string type, string reason);
 		void BeginPassive(int playerIndex, bool enabled, string gameUid, string seat, string botType, int tick);
 		void PassiveSquadEvent(int playerIndex, BotPassiveSquadEventSnapshot snapshot);
 		void PassiveAttackCommit(int playerIndex, BotPassiveAttackCommitSnapshot snapshot);
@@ -55,6 +56,7 @@ namespace OpenRA.Mods.CA.Traits
 		public void ContextRow(int playerIndex, string fileName, string row, int tick) { }
 		public void FlushContext(int playerIndex, int tick) { }
 		public void InfantryRejectRow(int playerIndex, string fileName, string row, int tick) { }
+		public void TechLogEvent(int playerIndex, string faction, int tick, string kind, string type, string reason) { }
 		public void BeginPassive(int playerIndex, bool enabled, string gameUid, string seat, string botType, int tick) { }
 		public void PassiveSquadEvent(int playerIndex, BotPassiveSquadEventSnapshot snapshot) { }
 		public void PassiveAttackCommit(int playerIndex, BotPassiveAttackCommitSnapshot snapshot) { }
