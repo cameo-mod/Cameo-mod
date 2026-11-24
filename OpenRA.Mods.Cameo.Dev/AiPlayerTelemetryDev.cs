@@ -325,13 +325,17 @@ namespace OpenRA.Mods.Cameo.Traits
 
 					// An MCV that closes no repack window was produced — completed unit output.
 					if (!repacked && BotSeat(actor.Owner) is { } bot)
+					{
 						Bump(bot.QueueCompleted, "unit");
+						EmitUnitEvent(bot, actor.World.WorldTick, "ready", actor.Info.Name);
+					}
 				}
 				else if (BotSeat(actor.Owner) is { } bot)
 				{
 					// A mobile actor appearing is a completed unit production for the bot-queue
 					// row (transforms land in the building branch's deploy match instead).
 					Bump(bot.QueueCompleted, "unit");
+					EmitUnitEvent(bot, actor.World.WorldTick, "ready", actor.Info.Name);
 				}
 			}
 			catch (Exception e)
@@ -709,7 +713,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			{
 				var seat = BotSeat(owner);
 				if (seat != null)
+				{
 					Bump(seat.QueueRequested, "unit");
+					EmitUnitEvent(seat, tick, "requested", actor);
+				}
 			}
 			catch (Exception e)
 			{
@@ -726,6 +733,7 @@ namespace OpenRA.Mods.Cameo.Traits
 					return;
 
 				Bump(seat.QueueAccepted, "unit");
+				EmitUnitEvent(seat, tick, "queued", actor);
 				seat.QueueSpend["unit"] = seat.QueueSpend.GetValueOrDefault("unit") + CostOfName(actor);
 
 				// The poll's head-diff would see this order again when the item reaches
@@ -992,6 +1000,36 @@ namespace OpenRA.Mods.Cameo.Traits
 			return counts;
 		}
 
+		// PROD-SAMPLE-LOG-01 (DEV only, assembly compiled out of release): one row per unit-queue step on the same
+		// players writer as cameo-bot-queue. kind = requested | queued | ready. Queue is always "unit" here; building
+		// queues are already in cameo-bot-queue.
+		void EmitUnitEvent(SeatTelemetry seat, int tick, string kind, string type)
+		{
+			if (ended || writer == null || seat == null)
+				return;
+
+			var b = new StringBuilder(256);
+			AiMatchLogWriter.AppendObjectStart(b);
+			AiMatchLogWriter.AppendString(b, "schema", "cameo-unit-queue-event", true);
+			AiMatchLogWriter.AppendNumber(b, "version", 1);
+			AiMatchLogWriter.AppendString(b, "game_uid", uid);
+			AiMatchLogWriter.AppendNumber(b, "tick", tick);
+			AiMatchLogWriter.AppendString(b, "seat", seat.Seat);
+			AiMatchLogWriter.AppendString(b, "kind", kind);
+			AiMatchLogWriter.AppendString(b, "queue", "unit");
+			AiMatchLogWriter.AppendString(b, "type", type);
+			b.Append('}');
+			writer.TryWrite(b.ToString());
+		}
+
+		// The configured ProductionCashReserve of the seat's BotLimits (-1 when the seat has none). The effective
+		// reserve can be personality-leaned (RecoverySpendPolicyCA.EffectiveReserve); this is the configured value.
+		static int ReserveOf(OpenRA.Player player)
+		{
+			var limits = player?.PlayerActor?.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
+			return limits == null ? -1 : limits.Info.ProductionCashReserve;
+		}
+
 		void EmitQueueRow(SeatTelemetry seat, int tick, int banked, long spentDelta, List<QueueRow> rows)
 		{
 			var b = new StringBuilder(768);
@@ -1003,6 +1041,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(b, "tick", tick);
 			AiMatchLogWriter.AppendString(b, "seat", seat.Seat);
 			AiMatchLogWriter.AppendNumber(b, "banked", banked);
+			AiMatchLogWriter.AppendNumber(b, "reserve", ReserveOf(seat.Player));
 			AiMatchLogWriter.AppendNumber(b, "spent_delta", spentDelta);
 
 			AppendCategoryMap(b, "requested", seat.QueueRequested);
