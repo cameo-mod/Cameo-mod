@@ -101,6 +101,12 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("TEAM-BLOB-01 (release switch; the DEV row is tl_fallback_publish). On: the leader's no-order guarantee. After TeamLeadFallbackTicks without any team order and a blob below the WAVE-MIN bars (the ready path publishes the attack when it is above them) it re-publishes the RALLY order: a gather-only order whose squads walk to the rally point and wait; it becomes the attack order only when the gathered squads pass the WAVE-MIN bars (USER rule: nothing below WAVE-MIN ever attacks). Needs TeamLeadCadenceEnabled.")]
 		public readonly bool TeamLeadFallbackPublishEnabled = false;
 
+		[Desc("TEAM-BLOB-01 push bar (release switch; the DEV row is tl_push_bar). On (USER rule: bots never trickle in small groups): a team push that is due (the window or the arrival) is held back while the squads standing at the rally are below the blob launch minimum (the WAVE-MIN unit tier or half of the team's idle army, whichever is more; AND the WAVE-MIN value). Every share goes to the rally and none advances alone; all advance on one tick, a share formed after the push does not follow it (TeamLeadLateJoinTicks is ignored). The order stays at the rally and keeps merging new groups, and is dissolved (squads back to the pool) after TeamLeadPushBarMaxTicks of hold. Off = the push goes with whatever has arrived. Needs TeamLeadEnabled.")]
+		public readonly bool TeamLeadPushBarEnabled = false;
+
+		[Desc("TEAM-BLOB-01 push bar: the hard cap of the hold, in ticks after the first held push. Range 1500-6000.")]
+		public readonly int TeamLeadPushBarMaxTicks = 3000;
+
 		[Desc("TEAM-BLOB-01 (release switch; the DEV row is tl_order_survive). On: when the elected leader changes while an order lives, the new leader takes the order over instead of cancelling it (the squads gathering for it are not thrown back to the pool). Off = the order is cancelled on a leader change as before.")]
 		public readonly bool TeamLeadOrderSurviveEnabled = false;
 	}

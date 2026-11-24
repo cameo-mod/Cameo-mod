@@ -30,6 +30,7 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablatePincer;
 		AblationLatch ablateFallbackPublish;
 		AblationLatch ablateOrderSurvive;
+		AblationLatch ablatePushBar;
 		int teamLeadNextCheck;
 		string teamLeadKey;
 		TeamLeadTeam teamLeadTeam;
@@ -54,6 +55,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		// TEAM-BLOB-01: the no-order guarantee (needs the cadence publish) and the order that survives a leader re-election; each with its own switch + row.
 		bool TeamLeadFallbackPublishOn => TeamLeadCadenceOn && Info.TeamLeadFallbackPublishEnabled && !ablateFallbackPublish.Off(Player, AblationIds.TeamLeadFallbackPublish);
+
+		// TEAM-BLOB-01 push bar: no push (window or arrival) while the squads at the rally are below the WAVE-MIN bars; own switch + row.
+		internal bool TeamLeadPushBarOn => TeamLeadOn && Info.TeamLeadPushBarEnabled && !ablatePushBar.Off(Player, AblationIds.TeamLeadPushBar);
 
 		bool TeamLeadOrderSurviveOn => TeamLeadOn && Info.TeamLeadOrderSurviveEnabled && !ablateOrderSurvive.Off(Player, AblationIds.TeamLeadOrderSurvive);
 
@@ -300,12 +304,12 @@ namespace OpenRA.Mods.CA.Traits
 		void TeamLeadJoin(IBot bot, int now)
 		{
 			var order = TeamLeadOpenOrder();
-			if (order == null || (order.Seq == teamLeadJoinedSeq && !order.GatherOnly) || now < initialAttackDelay)
+			if (order == null || (order.Seq == teamLeadJoinedSeq && !order.GatherOnly && !order.Extending) || now < initialAttackDelay)
 				return;
 
 			// A rally order takes the new units again and again (they walk to the rally and wait there), but only real groups: no one-unit squads.
 			unitsHangingAroundTheBase.RemoveAll(u => unitCannotBeOrdered(u.Actor));
-			if (unitsHangingAroundTheBase.Count < (teamLeadIsLeader && !order.GatherOnly ? Info.TeamLeadLeaderMinUnits : Info.TeamLeadJoinMinUnits))
+			if (unitsHangingAroundTheBase.Count < (teamLeadIsLeader && !order.GatherOnly && !order.Extending ? Info.TeamLeadLeaderMinUnits : Info.TeamLeadJoinMinUnits))
 				return;
 
 			var before = unitsHangingAroundTheBase.Count;
@@ -594,7 +598,8 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			var cancel = order.LeaderKey != team.Election.Leader ? "leader_changed"
-				: !order.GatherOnly && now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? "max_age"
+				: order.Extending && TeamLeadCA.PushBarDissolve(now, order.PushBarSince, Info.TeamLeadPushBarMaxTicks) ? "below_bar"
+				: !order.GatherOnly && !order.Extending && now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? "max_age"
 				: order.ReportCount == 0 && now - (TeamLeadOrderSurviveOn ? HarassCapCA.NoReportSince(order.IssueTick, order.LastReportTick) : order.IssueTick) > reportGrace ? "no_reports"
 				: null;
 			if (cancel != null)
@@ -629,7 +634,7 @@ namespace OpenRA.Mods.CA.Traits
 						order.NoteReady(now);
 
 					if (TeamLeadCA.PincerPushDue(now, order.IssueTick, Info.TeamLeadGatherMinTicks, Info.TeamLeadPincerGatherMaxTicks, Info.TeamLeadPincerHoldTicks,
-						ready0, ready1, order.FirstReadyTick))
+						ready0, ready1, order.FirstReadyTick) && !TeamLeadPushHeld(order, now))
 					{
 						order.PushTick = now;
 						order.PushReason = ready0 && ready1 ? "pincer_ready" : now - order.IssueTick >= Info.TeamLeadPincerGatherMaxTicks ? "pincer_window" : "pincer_hold";
@@ -642,12 +647,37 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			var (committed, arrived) = order.Totals();
-			if (TeamLeadCA.PushDue(now, order.IssueTick, Info.TeamLeadGatherMinTicks, Info.TeamLeadGatherMaxTicks, committed, arrived, Info.TeamLeadArrivePercent))
+			if (TeamLeadCA.PushDue(now, order.IssueTick, Info.TeamLeadGatherMinTicks, Info.TeamLeadGatherMaxTicks, committed, arrived, Info.TeamLeadArrivePercent)
+				&& !TeamLeadPushHeld(order, now))
 			{
 				order.PushTick = now;
 				order.PushReason = now - order.IssueTick >= Info.TeamLeadGatherMaxTicks ? "window" : "arrived";
 				DiagnosticTeamEvent("team_push", "seq=" + order.Seq + " why=" + order.PushReason + " age=" + (now - order.IssueTick) + " committed=" + committed + " arrived=" + arrived);
 			}
+		}
+
+		// TEAM-BLOB-01 push bar (USER rule 2026-11-24: bots never trickle): a push that is due is held back while the squads standing at the rally are below the
+		// WAVE-MIN units or value bar (the same bars as the ready path). The order stays at the rally and keeps merging new groups; after TeamLeadPushBarMaxTicks
+		// of hold it is dissolved (cancel reason below_bar) - a small blob never pushes. True = hold, do not push now.
+		bool TeamLeadPushHeld(TeamLeadOrder order, int now)
+		{
+			if (!TeamLeadPushBarOn)
+				return false;
+
+			var (units, value) = order.ArrivedTotals();
+			var (minUnits, minValue) = WaveMinActive ? WaveMinBars() : (0, 0);
+
+			// The team's idle army = what waits in the blob plus what the order already holds (gathered or on the way); half of it is the blob launch minimum's second term.
+			var teamIdle = (teamLeadTeam?.Pool(now, Info.TeamLeadPoolMaxAgeTicks).Units ?? 0) + order.CommittedTotals().Units;
+			var needUnits = BlobLaunch01CA.MinUnits(minUnits, teamIdle);
+			if (TeamLeadCA.PushBarPassed(units, value, Info.TeamLeadJoinMinUnits, needUnits, minValue))
+				return false;
+
+			if (!order.Extending)
+				DiagnosticTeamEvent("team_push_hold", "seq=" + order.Seq + " arrived=" + units + "/" + value + " bars=" + needUnits + "/" + minValue + " idle=" + teamIdle + " age=" + (now - order.IssueTick));
+
+			order.HoldPush(now);
+			return true;
 		}
 
 		// TEAM-BLOB-01 telemetry (DEV only; the writer is null in a release build): one record for a team-level fact (order, push, cancel, handover).
@@ -667,7 +697,8 @@ namespace OpenRA.Mods.CA.Traits
 		TeamLeadOrder TeamLeadOpenOrder()
 		{
 			var order = teamLeadTeam?.Order;
-			return order != null && order.Open(World.WorldTick, Info.TeamLeadLateJoinTicks) ? order : null;
+			// Push bar on: nothing advances alone, so a share formed after the push does not follow it (it waits for the next order).
+			return order != null && order.Open(World.WorldTick, TeamLeadPushBarOn ? 0 : Info.TeamLeadLateJoinTicks) ? order : null;
 		}
 
 		/// <summary>

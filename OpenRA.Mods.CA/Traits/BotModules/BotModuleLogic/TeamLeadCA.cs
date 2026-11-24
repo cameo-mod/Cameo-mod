@@ -198,6 +198,20 @@ namespace OpenRA.Mods.CA.Traits
 		public static bool FallbackForced(int now, int lastOrderTick, int fallbackTicks) =>
 			lastOrderTick >= 0 && now - lastOrderTick >= Math.Max(1, fallbackTicks);
 
+		/// <summary>
+		/// TEAM-BLOB-01 push bar (USER rule 2026-11-24: never push small): an order whose push was held back for the WAVE-MIN bars since
+		/// <paramref name="since"/> (-1 = never held) is dissolved once the hold has lasted <paramref name="maxTicks"/>.
+		/// </summary>
+		public static bool PushBarDissolve(int now, int since, int maxTicks) => since >= 0 && now - since >= Math.Max(1, maxTicks);
+
+		/// <summary>
+		/// TEAM-BLOB-01 push bar: the squads standing at the rally (<paramref name="units"/>, <paramref name="value"/>) may advance. The unit bar is the blob launch
+		/// minimum (BlobLaunch01CA.MinUnits: the WAVE-MIN tier or half of the team's idle army, whichever is more), at least the join floor; the value bar is the
+		/// WAVE-MIN value. Both must pass: nothing below WAVE-MIN advances, and neither does a share of a much bigger army.
+		/// </summary>
+		public static bool PushBarPassed(int units, long value, int floorUnits, int needUnits, long needValue) =>
+			units >= Math.Max(1, Math.Max(floorUnits, needUnits)) && value >= Math.Max(0, needValue);
+
 		/// <summary>The finish focus is re-evaluated: never yet (<paramref name="lastEval"/> below 0), or a full check window ago.</summary>
 		public static bool FocusDue(int now, int lastEval, int checkTicks) => lastEval < 0 || now - lastEval >= Math.Max(1, checkTicks);
 
@@ -371,12 +385,24 @@ namespace OpenRA.Mods.CA.Traits
 		public int IssueTick { get; private set; }
 
 		/// <summary>
-		/// TEAM-BLOB-01 rally order (the no-order fallback): the squads gather at <see cref="Rally"/> and wait; the order never pushes and never ages out
-		/// while it is gather-only. <see cref="Promote"/> turns it into the ordinary attack order once the gathered squads pass the WAVE-MIN bars.
+		/// TEAM-BLOB-01 rally order (the no-order fallback): the squads gather at <see cref="Rally"/> and wait; the order never pushes and is exempt from the max-age cancel
+		/// while it is gather-only (an order with no squad report at all is still cancelled after the report grace, and the leader re-publishes it). <see cref="Promote"/> turns it into the ordinary attack order once the gathered squads pass the WAVE-MIN bars.
 		/// </summary>
 		public bool GatherOnly { get; private set; }
 
 		public void MakeGatherOnly() => GatherOnly = true;
+
+		/// <summary>TEAM-BLOB-01 push bar: the tick the push was first held back because the squads at the rally were below the WAVE-MIN bars (-1 = never).</summary>
+		public int PushBarSince { get; private set; } = -1;
+
+		/// <summary>The push is being held for the bars: the order stays at the rally, keeps merging, and is dissolved at the hard cap.</summary>
+		public bool Extending => PushBarSince >= 0;
+
+		public void HoldPush(int now)
+		{
+			if (PushBarSince < 0)
+				PushBarSince = now;
+		}
 
 		/// <summary>The gathered squads are a wave: the order becomes the attack order. Its gather window restarts now, and it takes a fresh target.</summary>
 		public void Promote(int now, WPos target, uint targetActorId)
@@ -424,6 +450,23 @@ namespace OpenRA.Mods.CA.Traits
 		public int LastReportTick = -1;
 
 		public void Report(object squad, long value, bool arrived, int units = 0) => reports[squad] = (value, arrived, units);
+
+		/// <summary>The units and value of the squads that stand at the rally point (the push bar measures these).</summary>
+		public (int Units, long Value) ArrivedTotals()
+		{
+			var units = 0;
+			long value = 0;
+			foreach (var r in reports.Values)
+			{
+				if (!r.Arrived)
+					continue;
+
+				units += r.Units;
+				value += r.Value;
+			}
+
+			return (units, value);
+		}
 
 		/// <summary>The units and value the reporting squads committed (what a gather-only order measures against the WAVE-MIN bars).</summary>
 		public (int Units, long Value) CommittedTotals()

@@ -35,6 +35,10 @@ namespace OpenRA.Mods.CA.Traits
 		public const string TeamLeadFallbackPublish = "tl_fallback_publish";
 		public const string TeamLeadOrderSurvive = "tl_order_survive";
 
+		// TEAM-BLOB-01 push bar (USER rule 2026-11-24, nothing below WAVE-MIN attacks): a due push waits while the squads at the rally are below the bars (tl_push_bar;
+		// Info TeamLeadPushBarEnabled), dissolving the order after TeamLeadPushBarMaxTicks.
+		public const string TeamLeadPushBar = "tl_push_bar";
+
 		// HARASS-CAP-01 (USER P0, V02 RCA 2026-11-24): raiders at most a percent of the seat's combat units (tl_harass_cap; Info HarassCapEnabled), a raid launches
 		// with at least HarassMinUnits (tl_harass_min; Info HarassMinEnabled), and from the late start the raiders join the blob and the open order (tl_raider_recall;
 		// Info TeamLeadRaiderRecallEnabled).

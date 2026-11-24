@@ -266,7 +266,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
 			var start = wiring.IndexOf("void TeamLeadMaintainOrder(", StringComparison.Ordinal);
 			var body = wiring[start..wiring.IndexOf("TeamLeadOrder TeamLeadOpenOrder()", start, StringComparison.Ordinal)];
-			Assert.That(body, Does.Contain(": !order.GatherOnly && now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? \"max_age\""), "a rally order waits as long as it takes");
+			Assert.That(body, Does.Contain(": !order.GatherOnly && !order.Extending && now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? \"max_age\""), "a rally order waits as long as it takes");
 			var gatherReturn = body.IndexOf("if (order.GatherOnly)\n\t\t\t\treturn;", StringComparison.Ordinal);
 			Assert.That(gatherReturn, Is.GreaterThan(0));
 			Assert.That(gatherReturn, Is.LessThan(body.IndexOf("if (order.Pincer)", StringComparison.Ordinal)), "no push (single blob or pincer) for a rally order");
@@ -274,8 +274,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(body, Does.Contain("order.Prune("), "a rally order still drops squads that left it");
 
 			var join = wiring[wiring.IndexOf("void TeamLeadJoin(", StringComparison.Ordinal)..wiring.IndexOf("bool TeamLeadPickTarget(", StringComparison.Ordinal)];
-			Assert.That(join, Does.Contain("(order.Seq == teamLeadJoinedSeq && !order.GatherOnly)"), "an attack order is joined once, a rally order again and again");
-			Assert.That(join, Does.Contain("teamLeadIsLeader && !order.GatherOnly ? Info.TeamLeadLeaderMinUnits : Info.TeamLeadJoinMinUnits"), "no one-unit rally squads");
+			Assert.That(join, Does.Contain("(order.Seq == teamLeadJoinedSeq && !order.GatherOnly && !order.Extending)"), "an attack order is joined once, a rally (or held) order again and again");
+			Assert.That(join, Does.Contain("teamLeadIsLeader && !order.GatherOnly && !order.Extending ? Info.TeamLeadLeaderMinUnits : Info.TeamLeadJoinMinUnits"), "no one-unit rally squads");
 
 			Assert.That(wiring, Does.Contain("void TeamLeadPromoteRally(TeamLeadOrder order, int now)"));
 			Assert.That(wiring, Does.Contain("var (units, value) = order.CommittedTotals();"));
@@ -283,6 +283,215 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(wiring, Does.Contain("order.Promote(now, target, targetId);"));
 			Assert.That(wiring, Does.Contain("DiagnosticTeamEvent(\"team_promote\""));
 			Assert.That(wiring, Does.Contain("order.Report(squad, SquadValueOf(squad), near * 100 >= squad.Units.Count * Info.TeamLeadArrivePercent, squad.Units.Count);"));
+		}
+
+		// ---- the push bar: a due push waits while the squads at the rally are below the bar; the hold has a hard cap ----
+
+		[Test]
+		public void TheHoldDissolvesTheOrderOnlyAfterTheCapAndNeverBeforeAHoldStarted()
+		{
+			Assert.That(TeamLeadCA.PushBarDissolve(99999, -1, 3000), Is.False, "never held = never dissolved");
+			Assert.That(TeamLeadCA.PushBarDissolve(3099, 100, 3000), Is.False);
+			Assert.That(TeamLeadCA.PushBarDissolve(3100, 100, 3000), Is.True, "3000 ticks after the first held push");
+			Assert.That(TeamLeadCA.PushBarDissolve(100, 100, 0), Is.False, "a zero cap counts as 1 tick, not as a free pass");
+			Assert.That(TeamLeadCA.PushBarDissolve(101, 100, 0), Is.True);
+		}
+
+		[Test]
+		public void TheBarIsTheBlobLaunchMinimumForUnitsAndTheWaveMinValue()
+		{
+			// WAVE-MIN 12 units / 6000 value, team idle army 40: half of it = 20 > 12, so 20 units must stand at the rally; 19 do not.
+			var need = BlobLaunch01CA.MinUnits(12, 40);
+			Assert.That(need, Is.EqualTo(20));
+			Assert.That(TeamLeadCA.PushBarPassed(20, 6000, 3, need, 6000), Is.True);
+			Assert.That(TeamLeadCA.PushBarPassed(19, 9000, 3, need, 6000), Is.False, "one unit short of the unit bar");
+			Assert.That(TeamLeadCA.PushBarPassed(30, 5999, 3, need, 6000), Is.False, "one value short of the value bar");
+
+			// A small army: the WAVE-MIN tier is the bar (half of 16 = 8 < 12).
+			Assert.That(BlobLaunch01CA.MinUnits(12, 16), Is.EqualTo(12));
+			Assert.That(TeamLeadCA.PushBarPassed(11, 9000, 3, 12, 6000), Is.False);
+			Assert.That(TeamLeadCA.PushBarPassed(12, 6000, 3, 12, 6000), Is.True);
+
+			// No tier: half of the army, never less than the join floor.
+			Assert.That(TeamLeadCA.PushBarPassed(2, 0, 3, BlobLaunch01CA.MinUnits(0, 4), 0), Is.False);
+			Assert.That(TeamLeadCA.PushBarPassed(3, 0, 3, BlobLaunch01CA.MinUnits(0, 4), 0), Is.True);
+		}
+
+		[Test]
+		public void TheHoldIsRecordedOnceAndOnlyTheSquadsAtTheRallyCountTowardTheBar()
+		{
+			var order = new TeamLeadOrder(4, "Multi1", new WPos(0, 0, 0), new WPos(1, 1, 0), 0, 1000);
+			Assert.That(order.Extending, Is.False);
+			order.Report(new object(), 3000, true, 6);
+			order.Report(new object(), 2500, false, 5);
+			Assert.That(order.ArrivedTotals(), Is.EqualTo((6, 3000L)), "a squad still on the way does not count");
+			Assert.That(order.CommittedTotals(), Is.EqualTo((11, 5500L)));
+
+			order.HoldPush(2500);
+			order.HoldPush(2900);
+			Assert.That(order.Extending, Is.True);
+			Assert.That(order.PushBarSince, Is.EqualTo(2500), "the cap runs from the FIRST held push");
+		}
+
+		/// <summary>Opus's case: three followers with 4 / 10 / 6 units (V03: each share of 4-10 units went alone). All hold at the rally until 20 have gathered, then all move on one tick.</summary>
+		[Test]
+		public void ThreeFollowerSharesOf4And10And6HoldAtTheRallyUntil20HaveGatheredThenAdvanceTogether()
+		{
+			var order = new TeamLeadOrder(1, "Multi0", new WPos(0, 0, 0), new WPos(1, 1, 0), 0, 0);
+			var share4 = new object();
+			var share10 = new object();
+			var share6 = new object();
+			const int TeamIdle = 40; // blob left at the bases + the three shares
+			var need = BlobLaunch01CA.MinUnits(12, TeamIdle);
+			Assert.That(need, Is.EqualTo(20));
+
+			// The shares reach the rally at 200, 500 and 900 and report there (4 + 10 = 14 units, then 20).
+			var arrivals = new[] { (Tick: 200, Squad: share4, Units: 4, Value: 1600L), (Tick: 500, Squad: share10, Units: 10, Value: 4000L), (Tick: 900, Squad: share6, Units: 6, Value: 2400L) };
+			var pushTick = -1;
+			var pushedUnits = 0;
+			for (var now = 0; now <= 3000 && pushTick < 0; now += 100)
+			{
+				foreach (var a in arrivals)
+					if (now >= a.Tick)
+						order.Report(a.Squad, a.Value, true, a.Units);
+					else
+						order.Report(a.Squad, a.Value, false, a.Units);
+
+				if (order.Extending && TeamLeadCA.PushBarDissolve(now, order.PushBarSince, 3000))
+					Assert.Fail("dissolved although the shares gathered in time");
+
+				var (committed, arrived) = order.Totals();
+				if (!TeamLeadCA.PushDue(now, order.IssueTick, 300, 1500, committed, arrived, 70))
+					continue;
+
+				var (units, value) = order.ArrivedTotals();
+				if (!TeamLeadCA.PushBarPassed(units, value, 3, need, 6000))
+				{
+					order.HoldPush(now);
+					continue;
+				}
+
+				pushTick = now;
+				pushedUnits = units;
+			}
+
+			Assert.That(order.Extending, Is.True, "the 4 and the 10 were held, not sent alone");
+			Assert.That(pushTick, Is.EqualTo(900), "the push is on the check the last share reports in: 4 + 10 + 6 = 20 units, 8000 value");
+			Assert.That(pushedUnits, Is.EqualTo(20));
+
+			// One order, one push tick: every gathered squad advances on it (PushTick is the order's, not the squad's), and a share formed after it finds no open order.
+			order.PushTick = pushTick;
+			Assert.That(order.Open(pushTick + 1, 0), Is.False, "push bar on: no late joiner follows the push alone");
+			Assert.That(order.Open(pushTick, 0), Is.True);
+		}
+
+		/// <summary>The window push of a ready order whose squads at the rally are below the bar: it waits, keeps merging, then pushes or dissolves.</summary>
+		[Test]
+		public void ASmallArrivedGroupIsHeldThenPushesWhenItPassesTheBarOrIsDissolvedAtTheCap()
+		{
+			const int Need = 12;
+			const int MinValue = 6000;
+
+			// (a) 8 units / 4000 value at the rally for ever: due at the early arrival, held, dissolved 3000 ticks later. It never pushes.
+			var order = new TeamLeadOrder(1, "Multi0", new WPos(0, 0, 0), new WPos(1, 1, 0), 0, 0);
+			var pushed = false;
+			var dissolvedAt = -1;
+			for (var now = 0; now <= 9000 && dissolvedAt < 0; now += 100)
+			{
+				order.Report(order, 4000, true, 8);
+				if (order.Extending && TeamLeadCA.PushBarDissolve(now, order.PushBarSince, 3000))
+				{
+					dissolvedAt = now;
+					break;
+				}
+
+				var (committed, arrived) = order.Totals();
+				if (!TeamLeadCA.PushDue(now, order.IssueTick, 300, 1500, committed, arrived, 70))
+					continue;
+
+				var (au, av) = order.ArrivedTotals();
+				if (!TeamLeadCA.PushBarPassed(au, av, 3, Need, MinValue))
+				{
+					order.HoldPush(now);
+					continue;
+				}
+
+				pushed = true;
+			}
+
+			Assert.That(pushed, Is.False, "8 units never push against a 12 unit bar");
+			Assert.That(order.PushBarSince, Is.EqualTo(300), "held from the first due check (the early arrival at the gather minimum)");
+			Assert.That(dissolvedAt, Is.EqualTo(3300), "dissolved 3000 ticks after the first held push");
+
+			// (b) the same order with a unit merging in every 300 ticks: it pushes the check the arrived units AND value pass the bar, before the cap.
+			order = new TeamLeadOrder(2, "Multi0", new WPos(0, 0, 0), new WPos(1, 1, 0), 0, 0);
+			var pushTick = -1;
+			for (var now = 0; now <= 9000 && pushTick < 0; now += 100)
+			{
+				var units = 8 + now / 300;
+				order.Report(order, units * 500L, true, units);
+				if (order.Extending && TeamLeadCA.PushBarDissolve(now, order.PushBarSince, 3000))
+					Assert.Fail("dissolved although the bar was passed in time");
+
+				var (committed, arrived) = order.Totals();
+				if (!TeamLeadCA.PushDue(now, order.IssueTick, 300, 1500, committed, arrived, 70))
+					continue;
+
+				var (au, av) = order.ArrivedTotals();
+				if (!TeamLeadCA.PushBarPassed(au, av, 3, Need, MinValue))
+				{
+					order.HoldPush(now);
+					continue;
+				}
+
+				pushTick = now;
+				Assert.That(au, Is.GreaterThanOrEqualTo(Need));
+				Assert.That(av, Is.GreaterThanOrEqualTo(MinValue));
+			}
+
+			Assert.That(pushTick, Is.EqualTo(1200), "8 + 1200/300 = 12 units = 6000 value");
+			Assert.That(order.Extending, Is.True, "it was held first");
+
+			// (c) V03 saw a window push with committed 0 / arrived 0: nothing at the rally is below every bar, so it is held (and the order dies at the cap).
+			Assert.That(TeamLeadCA.PushBarPassed(0, 0, 3, Need, MinValue), Is.False);
+		}
+
+		[Test]
+		public void ThePushBarGatesBothPushPathsAndTheHoldHasItsOwnCancelAndNoMaxAge()
+		{
+			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
+			var start = wiring.IndexOf("void TeamLeadMaintainOrder(", StringComparison.Ordinal);
+			var body = wiring[start..wiring.IndexOf("TeamLeadOrder TeamLeadOpenOrder()", start, StringComparison.Ordinal)];
+			Assert.That(body, Does.Contain("order.FirstReadyTick) && !TeamLeadPushHeld(order, now))"), "the pincer push");
+			Assert.That(body, Does.Contain("committed, arrived, Info.TeamLeadArrivePercent)\n\t\t\t\t&& !TeamLeadPushHeld(order, now))"), "the single-blob push (window and early arrival)");
+			Assert.That(body, Does.Contain(": order.Extending && TeamLeadCA.PushBarDissolve(now, order.PushBarSince, Info.TeamLeadPushBarMaxTicks) ? \"below_bar\""));
+			Assert.That(body, Does.Contain(": !order.GatherOnly && !order.Extending && now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? \"max_age\""), "the hold has its own cap");
+
+			var held = wiring[wiring.IndexOf("bool TeamLeadPushHeld(", StringComparison.Ordinal)..wiring.IndexOf("void DiagnosticTeamEvent(", StringComparison.Ordinal)];
+			Assert.That(held, Does.Contain("if (!TeamLeadPushBarOn)\n\t\t\t\treturn false;"), "off = every due push goes");
+			Assert.That(held, Does.Contain("order.ArrivedTotals()"), "the squads at the rally, not the whole blob");
+			Assert.That(held, Does.Contain("BlobLaunch01CA.MinUnits(minUnits, teamIdle)"), "the blob launch minimum");
+			Assert.That(held, Does.Contain("TeamLeadCA.PushBarPassed(units, value, Info.TeamLeadJoinMinUnits, needUnits, minValue)"));
+			Assert.That(held, Does.Contain("DiagnosticTeamEvent(\"team_push_hold\""));
+			Assert.That(wiring, Does.Contain("internal bool TeamLeadPushBarOn => TeamLeadOn && Info.TeamLeadPushBarEnabled && !ablatePushBar.Off(Player, AblationIds.TeamLeadPushBar);"));
+			Assert.That(wiring, Does.Contain("order.Open(World.WorldTick, TeamLeadPushBarOn ? 0 : Info.TeamLeadLateJoinTicks)"), "no late joiner follows a push alone");
+
+			var join = wiring[wiring.IndexOf("void TeamLeadJoin(", StringComparison.Ordinal)..wiring.IndexOf("bool TeamLeadPickTarget(", StringComparison.Ordinal)];
+			Assert.That(join, Does.Contain("(order.Seq == teamLeadJoinedSeq && !order.GatherOnly && !order.Extending)"), "a held order keeps merging new groups");
+		}
+
+		[Test]
+		public void ThePushBarSwitchDefaultsOffIsOnInSixPersonalitiesNotClassicAndHasItsRow()
+		{
+			var info = RepoFile(Bots + "SquadManagerBotModuleCAInfo.TeamLead.cs");
+			Assert.That(info, Does.Contain("public readonly bool TeamLeadPushBarEnabled = false;"));
+			Assert.That(info, Does.Contain("public readonly int TeamLeadPushBarMaxTicks = 3000;"));
+
+			var yaml = RepoFile("mods/cameo/ai/ai.yaml");
+			var classic = yaml.IndexOf("SquadManagerBotModuleCA@classic:", StringComparison.Ordinal);
+			Assert.That(Regex.Matches(yaml[..classic], @"\n\t\tTeamLeadPushBarEnabled: true").Count, Is.EqualTo(6));
+			Assert.That(yaml[classic..], Does.Not.Contain("TeamLeadPushBarEnabled"));
+			Assert.That(AblationIds.TeamLeadPushBar, Is.EqualTo("tl_push_bar"));
 		}
 
 		[Test]
