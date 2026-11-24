@@ -136,6 +136,19 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(TeamLeadCA.SkipActive(77, 5000, 5000, 77), Is.False, "until the skip runs out");
 			Assert.That(TeamLeadCA.SkipActive(77, 5000, 4000, 78), Is.False, "other targets are fine");
 			Assert.That(TeamLeadCA.SkipActive(0, 5000, 4000, 0), Is.False, "no skip");
+
+			// A siege of a fogged building (frozen target, no TargetActor) is skipped by the frozen id, and the next-enemy pick must not take it again while the skip lasts.
+			var frozenSkip = TeamLeadCA.SkipIdOf(0, 4242);
+			Assert.That(frozenSkip, Is.EqualTo(4242u), "no actor target: the frozen id");
+			Assert.That(TeamLeadCA.SkipIdOf(77, 4242), Is.EqualTo(77u), "an actor target wins");
+			Assert.That(TeamLeadCA.SkipIdOf(0, 0), Is.EqualTo(0u), "nothing to skip");
+			Assert.That(TeamLeadCA.SkipActive(frozenSkip, 5000, 4500, 4242), Is.True, "the same frozen id is not picked again while the skip is active");
+			Assert.That(TeamLeadCA.SkipActive(frozenSkip, 5000, 5000, 4242), Is.False, "after the skip it may be picked again");
+
+			// The pushed idle retarget runs at most once per 25 ticks per squad.
+			Assert.That(TeamLeadCA.GoOnDue(1000, 990, 25), Is.False);
+			Assert.That(TeamLeadCA.GoOnDue(1015, 990, 25), Is.True);
+			Assert.That(TeamLeadCA.GoOnDue(50, 0, 25), Is.True, "a fresh squad (tick 0) is due");
 			Assert.That(TeamLeadCA.SiegeHolds(true, true, 30L * 1024 * 30 * 1024, scan * scan, 120, 300), Is.False, "30 cells away: really stuck, the old rule applies");
 			Assert.That(TeamLeadCA.SiegeHolds(true, false, 0, scan * scan, 120, 300), Is.False, "no valid target");
 			Assert.That(TeamLeadCA.SiegeHolds(false, true, 0, scan * scan, 120, 300), Is.False, "not a pushed blob");
@@ -158,9 +171,15 @@ namespace OpenRA.Mods.Cameo.Test
 
 			// TeamLeadPrepare: a pushed squad attacks on (never joins a new order first, never dismissed); nothing known = it waits, still not dismissed.
 			Assert.That(wiring, Does.Contain("var goesOn = s.TeamPushSeq > 0 && TeamLeadKeepsGoing(s);"));
-			Assert.That(wiring, Does.Contain("if (goesOn && TeamLeadGoOn(s, s.Units[0].Actor))"));
-			Assert.That(wiring, Does.Contain("s.TeamSkipActor = s.TargetActor.ActorID;"));
+			Assert.That(wiring, Does.Contain("if (!TeamLeadCA.GoOnDue(World.WorldTick, s.TeamGoOnTick, Info.TeamLeadGoOnTicks))"), "the pushed idle retarget is throttled");
+			Assert.That(wiring, Does.Contain("s.TeamGoOnTick = World.WorldTick;\n\t\t\t\tif (TeamLeadGoOn(s, s.Units[0].Actor))"));
+			Assert.That(wiring, Does.Contain("s.TeamSkipActor = skipId;"));
+			Assert.That(wiring, Does.Contain("var skipId = TeamLeadCA.SkipIdOf(s.TargetActor?.ActorID ?? 0u, frozenId);"));
+			Assert.That(wiring, Does.Contain("s.Target.Type == TargetType.FrozenActor && s.Target.FrozenActor != null ? s.Target.FrozenActor.ID : 0u;"), "a fogged building that froze the blob is skipped by its frozen id");
 			Assert.That(wiring, Does.Contain("? TeamLeadNearestEnemyExcept(leader, seat, skip) ?? (seat != null ? TeamLeadNearestEnemyExcept(leader, null, skip) : null)"));
+			Assert.That(wiring, Does.Contain("World.FindActorsInCircle(leader.CenterPosition, WDist.FromCells(Info.TeamLeadSkipSearchCells))"), "a bounded circle query");
+			Assert.That(wiring, Does.Not.Contain("World.Actors.Where(a => a.ActorID != skipId"), "never a scan of every actor");
+			Assert.That(RepoFile(Bots + "Squads/States/GroundStatesCA.cs"), Does.Contain("owner.Units.Any(u => IsAttackingAndTryAttack(u.Actor).IsFiring))\n\t\t\t\tlastUpdatedTick = owner.World.WorldTick;"), "a unit that is attacking restarts the stuck clock of a pushed blob");
 			Assert.That(wiring, Does.Contain("TeamLeadCA.SiegeHolds(true, true,"));
 			Assert.That(wiring, Does.Contain("stuckTicks, Info.TeamLeadSiegeMaxTicks);"));
 			Assert.That(wiring, Does.Contain("if (order == null && teamLeadIsLeader && !goesOn)\n\t\t\t\torder = TeamLeadTryIssue(s, now);"), "no rally re-issued from a pushed squad");
@@ -309,6 +328,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(info, Does.Contain("public readonly int TeamLeadRepublishHoldTicks = 1500;"));
 			Assert.That(info, Does.Contain("public readonly int TeamLeadSiegeMaxTicks = 300;"));
 			Assert.That(info, Does.Contain("public readonly int TeamLeadSkipTicks = 900;"));
+			Assert.That(info, Does.Contain("public readonly int TeamLeadGoOnTicks = 25;"));
+			Assert.That(info, Does.Contain("public readonly int TeamLeadSkipSearchCells = 40;"));
 			Assert.That(info, Does.Contain("public readonly int TeamLeadRallyMidPercent = 35;"));
 
 			var yaml = RepoFile("mods/cameo/ai/ai.yaml");

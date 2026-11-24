@@ -191,6 +191,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		public uint TeamSkipActor;
 		public int TeamSkipUntil;
 
+		/// <summary>TEAM-GATHER-02 c5: the tick of this pushed squad last next-enemy pick from TeamLeadPrepare (throttle).</summary>
+		public int TeamGoOnTick;
+
 		public bool IsValid => Units.Count > 0;
 
 		/// <summary>

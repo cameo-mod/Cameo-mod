@@ -307,6 +307,12 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>TEAM-GATHER-02 c4: the target that froze a pushed blob is skipped until <paramref name="skipUntil"/>.</summary>
 		public static bool SkipActive(uint skipId, int skipUntil, int now, uint candidateId) => skipId != 0 && now < skipUntil && candidateId == skipId;
 
+		/// <summary>TEAM-GATHER-02 c5: the id of the target that froze a blob: its actor id, else the id of the remembered (frozen) building it was sieging, else 0.</summary>
+		public static uint SkipIdOf(uint actorId, uint frozenId) => actorId != 0 ? actorId : frozenId;
+
+		/// <summary>TEAM-GATHER-02 c5: a pushed idle squad retargets at most once per <paramref name="interval"/> ticks.</summary>
+		public static bool GoOnDue(int now, int lastTick, int interval) => now - lastTick >= Math.Max(1, interval);
+
 		/// <summary>TEAM-GATHER-02 c3 tl_rally_mid: the army staging cell counts for the rally only close to the mid point.</summary>
 		public static bool StagingNearMid(WPos mid, WPos staging, int cells) => (staging - mid).HorizontalLengthSquared <= (long)Math.Max(0, cells) * CellUnits * Math.Max(0, cells) * CellUnits;
 

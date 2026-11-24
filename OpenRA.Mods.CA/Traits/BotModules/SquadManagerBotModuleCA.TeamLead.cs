@@ -214,9 +214,12 @@ namespace OpenRA.Mods.CA.Traits
 			return false;
 		}
 
-		// The nearest visible preferred enemy (of <seat>, or any when null) other than <skipId>: used only after a pushed blob froze on a target, so a full actor scan is rare.
+		// The nearest visible preferred enemy (of <seat>, or any when null) other than <skipId> within TeamLeadSkipSearchCells of the leader: used only while a skip is active (a blob
+		// froze on a target); a bounded circle query through the actor map, never a scan of every actor.
 		Actor TeamLeadNearestEnemyExcept(Actor leader, Player seat, uint skipId) =>
-			World.Actors.Where(a => a.ActorID != skipId && (seat == null || a.Owner == seat) && IsPreferredEnemyUnit(a) && IsNotHiddenUnit(a)).ClosestToIgnoringPath(leader.CenterPosition);
+			World.FindActorsInCircle(leader.CenterPosition, WDist.FromCells(Info.TeamLeadSkipSearchCells))
+				.Where(a => a.ActorID != skipId && (seat == null || a.Owner == seat) && IsPreferredEnemyUnit(a) && IsNotHiddenUnit(a))
+				.ClosestToIgnoringPath(leader.CenterPosition);
 
 		// The stuck rule fired for a squad: a pushed blob skips the target it froze on and takes the next enemy (TeamLeadGoOn), instead of going idle with nothing changed.
 		internal bool TeamLeadStuckRetarget(SquadCA s, Actor leader)
@@ -224,9 +227,12 @@ namespace OpenRA.Mods.CA.Traits
 			if (!TeamLeadKeepsGoing(s))
 				return false;
 
-			if (s.TargetActor != null)
+			// A blob sieging a fogged building has a frozen target and no TargetActor: skip that building (its id) too.
+			var frozenId = s.Target.Type == TargetType.FrozenActor && s.Target.FrozenActor != null ? s.Target.FrozenActor.ID : 0u;
+			var skipId = TeamLeadCA.SkipIdOf(s.TargetActor?.ActorID ?? 0u, frozenId);
+			if (skipId != 0)
 			{
-				s.TeamSkipActor = s.TargetActor.ActorID;
+				s.TeamSkipActor = skipId;
 				s.TeamSkipUntil = World.WorldTick + Info.TeamLeadSkipTicks;
 			}
 
@@ -1078,11 +1084,20 @@ namespace OpenRA.Mods.CA.Traits
 			// TEAM-GATHER-02 c3 (gt_bounded_retarget): a squad of a pushed order is not taken back into a team order and its blob is not dismissed (the closed order has no place
 			// for it): it goes on to the next enemy of the focus seat. With nothing known at all it waits idle (the hunt via order), still not dismissed.
 			var goesOn = s.TeamPushSeq > 0 && TeamLeadKeepsGoing(s);
-			if (goesOn && TeamLeadGoOn(s, s.Units[0].Actor))
+			if (goesOn)
 			{
-				DiagnosticSquadEvent(s, "team_goon", reason: "seq=" + s.TeamPushSeq);
-				s.FuzzyStateMachine.ChangeState(s, new GroundUnitsAttackMoveStateCA(), false);
-				return true;
+				// Throttled to once per TeamLeadGoOnTicks per squad: with a skip active and nothing visible the pick scans every actor (TeamLeadNearestEnemyExcept), so the cost
+				// is one scan per pushed idle squad per interval, never per tick.
+				if (!TeamLeadCA.GoOnDue(World.WorldTick, s.TeamGoOnTick, Info.TeamLeadGoOnTicks))
+					return false;
+
+				s.TeamGoOnTick = World.WorldTick;
+				if (TeamLeadGoOn(s, s.Units[0].Actor))
+				{
+					DiagnosticSquadEvent(s, "team_goon", reason: "seq=" + s.TeamPushSeq);
+					s.FuzzyStateMachine.ChangeState(s, new GroundUnitsAttackMoveStateCA(), false);
+					return true;
+				}
 			}
 
 			var now = World.WorldTick;

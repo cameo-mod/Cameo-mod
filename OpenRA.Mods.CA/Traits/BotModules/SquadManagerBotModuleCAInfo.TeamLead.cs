@@ -170,6 +170,12 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("TEAM-GATHER-02 c4 gt_bounded_retarget: ticks a target that froze a pushed blob is skipped when the squad picks its next enemy.")]
 		public readonly int TeamLeadSkipTicks = 900;
 
+		[Desc("TEAM-GATHER-02 c5 gt_bounded_retarget: a pushed idle squad retargets (TeamLeadGoOn) at most once per this many ticks; with a skip active and nothing visible the pick scans every actor, so the cost is bounded to one scan per squad per interval.")]
+		public readonly int TeamLeadGoOnTicks = 25;
+
+		[Desc("TEAM-GATHER-02 c5 gt_bounded_retarget: while a skip is active the next enemy is searched within this many cells of the leader (a bounded circle query, never a scan of every actor).")]
+		public readonly int TeamLeadSkipSearchCells = 40;
+
 		[Desc("TEAM-GATHER-02 c2 (release switch; the DEV row is tl_pincer_double). On: a pincer pushes only when the gathered blob is at least twice the WAVE-MIN units and value (each prong meets WAVE-MIN); a thinner one collapses into the single blob.")]
 		public readonly bool TeamLeadPincerDoubleEnabled = false;
 
