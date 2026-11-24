@@ -280,6 +280,31 @@ namespace OpenRA.Mods.CA.Traits
 			"cost like a planner want: the building cash floor (BuildingProductionMinCash) does not hold them. Gated by SwitchCondition; row pb_floor_essentials_exempt.")]
 		public readonly bool FloorEssentialsExempt = false;
 
+		[Desc("BASE-06 (AUDIT_BASE_01): a READY building held for crawl or front/back placement is placed at a base cell after ReadyWatchdogTicks (the old 75-tick watchdog covered only",
+			"refineries). Gated by SwitchCondition; row ready_watchdog_all.")]
+		public readonly bool ReadyWatchdogAll = false;
+
+		[Desc("BASE-06: ticks a READY building may be held before it is placed at a base cell.")]
+		public readonly int ReadyWatchdogTicks = 75;
+
+		[Desc("BASE-07: a type that failed its placement budget is banned from the overflow, cycled, each-once and fraction extras for NoSpaceBanTicks, or until a new base provider appears.",
+			"Gated by SwitchCondition; row pb_nospace_ban.")]
+		public readonly bool NoSpaceBan = false;
+
+		[Desc("BASE-07: how long a no-space ban lasts.")]
+		public readonly int NoSpaceBanTicks = 3000;
+
+		[Desc("BASE-12: the expansion-refinery safety test iterates every wanting claim (the first safe one wins) and also gates the fraction roll's refinery. Needs ExpansionRefinerySafety.",
+			"Gated by SwitchCondition; row pb_refinery_safety_all_claims.")]
+		public readonly bool RefinerySafetyAllClaims = false;
+
+		[Desc("BASE-16: a completed refinery with no site is refunded after RefineryHoldCapTicks even without a live exhaustion certificate (the claim stays). Gated by SwitchCondition;",
+			"row refinery_hold_cap.")]
+		public readonly bool RefineryHoldCap = false;
+
+		[Desc("BASE-16: ticks a siteless completed refinery is held before it is refunded.")]
+		public readonly int RefineryHoldCapTicks = 600;
+
 		[Desc("PROD-BUSY (USER 11-24): while the bank stays above the tier MaximiseProductionCash line the base builder adds production buildings, cycled",
 			"across the types (barracks, war factory, airfield, naval yard with water access, then again), bounded by the build limits and by the failed-",
 			"placement latch; power is added as needed. Gated by SwitchCondition; row pb_cycle_production.")]
@@ -527,6 +552,25 @@ namespace OpenRA.Mods.CA.Traits
 
 		// Cameo (§12.13, EX-2): a provider whose target field is in reach and unclaimed wants a refinery there, so the
 		// refinery count is not adequate yet, whatever the fixed optimum says: every field in reach gets one.
+		/// <summary>BASE-12: true when at least one provider wants a refinery at a field and none of those fields is safe (a want with no field is not gated).</summary>
+		public bool ExpansionRefineryBlockedByAllUnsafe()
+		{
+			if (expansionTargetProviders == null)
+				return false;
+
+			var safe = new List<bool>();
+			foreach (var provider in expansionTargetProviders)
+			{
+				if (!(provider.WantsRefineryAtExpansionTarget && (provider.ExpansionTarget != null || provider.RefineryLawActive)))
+					continue;
+
+				var field = provider.RefineryClaimTarget ?? provider.ExpansionTarget;
+				safe.Add(field == null || ExpansionRefinerySafe(field.Value));
+			}
+
+			return BaseFix02CA.SafetyBlocksAll(safe);
+		}
+
 		public IBotExpansionTargetProvider ExpansionWantsRefinery()
 		{
 			if (expansionTargetProviders == null)
@@ -665,6 +709,10 @@ namespace OpenRA.Mods.CA.Traits
 		public bool PowerMarginCapArmed => Info.PowerMarginCapEnabled && switchesActive;
 		public bool DefenceFirstCopyArmed => Info.DefenceFirstCopyCounts && switchesActive;
 		public bool FloorEssentialsExemptArmed => Info.FloorEssentialsExempt && switchesActive;
+		public bool ReadyWatchdogArmed => Info.ReadyWatchdogAll && switchesActive;
+		public bool NoSpaceBanArmed => Info.NoSpaceBan && switchesActive;
+		public bool RefinerySafetyAllClaimsArmed => Info.RefinerySafetyAllClaims && switchesActive;
+		public bool RefineryHoldCapArmed => Info.RefineryHoldCap && switchesActive;
 
 		// E1 observational slice (lead-accepted, observational ONLY): the switch-gated commitment
 		// ledger. Never read by any admission decision — recording and verdict logging only.

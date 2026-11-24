@@ -358,7 +358,9 @@ namespace OpenRA.Mods.Cameo.Test
 
 			// The only other cancel on the refinery-law branch would be a regression: no cancel outside the certificate arm of this block.
 			var lawBlock = Section(m, "if (refineryDefers)", "REF-2 P1a (retained-refinery): a completed refinery is NEVER");
-			Assert.That(Count(lawBlock, "Order.CancelProduction"), Is.EqualTo(1));
+			// BASE-FIX-02 (BASE-16, Opus): the second cancel is the switch-gated refinery_hold_cap (genericbot only), placed BEFORE the exhaustion arm.
+			Assert.That(Count(lawBlock, "Order.CancelProduction"), Is.EqualTo(2));
+			Assert.That(lawBlock.IndexOf("RefineryHoldCapOn", StringComparison.Ordinal), Is.GreaterThan(0));
 		}
 
 		[Test]

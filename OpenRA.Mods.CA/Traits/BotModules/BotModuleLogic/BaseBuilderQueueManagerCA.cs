@@ -117,6 +117,29 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateAllProducers, ablateIdleSweep, ablateEssentials, ablateCycle, ablateSustained, ablateSafety, ablateUnlistedOnce, ablateEssentialPass;
 		bool EssentialPassOn => baseBuilder.EssentialPassArmed && !ablateEssentialPass.Off(player, AblationIds.Af2EssentialPass);
 		AblationLatch ablateOpeningStep, ablateSustainedKeeps, ablatePrefilter, ablateDefenceNeed, ablatePowerCap, ablateDefenceFirstCopy, ablateFloorExempt;
+		AblationLatch ablateReadyWatchdog, ablateNoSpaceBan, ablateSafetyAll, ablateRefineryHoldCap; // BASE-FIX-02
+		bool ReadyWatchdogOn => baseBuilder.ReadyWatchdogArmed && !ablateReadyWatchdog.Off(player, AblationIds.ReadyWatchdogAll);
+		bool NoSpaceBanOn => baseBuilder.NoSpaceBanArmed && !ablateNoSpaceBan.Off(player, AblationIds.NoSpaceBan);
+		bool SafetyAllOn => baseBuilder.RefinerySafetyAllClaimsArmed && !ablateSafetyAll.Off(player, AblationIds.RefinerySafetyAllClaims);
+		bool RefineryHoldCapOn => baseBuilder.RefineryHoldCapArmed && !ablateRefineryHoldCap.Off(player, AblationIds.RefineryHoldCap);
+
+		// BASE-06 / BASE-16: how long the READY item at the head of a queue has been held (per queue actor, restarts when the item changes or the hold was not seen for 300 ticks).
+		readonly Dictionary<uint, (string Item, int Since, int Last)> readyHoldSince = new();
+		// BASE-07: type -> (ban end tick, base providers when it was set).
+		readonly Dictionary<string, (int Until, int Providers)> noSpaceBan = new();
+
+		int ReadyHeldTicks(ProductionQueue queue, string item)
+		{
+			var now = world.WorldTick;
+			var known = readyHoldSince.TryGetValue(queue.Actor.ActorID, out var e) && e.Item == item;
+			var (since, last) = BaseFix02CA.TouchHold(known, known ? e.Since : 0, known ? e.Last : 0, now, 300);
+			readyHoldSince[queue.Actor.ActorID] = (item, since, last);
+			return now - since;
+		}
+
+		bool NoSpaceBanned(string name) =>
+			NoSpaceBanOn && noSpaceBan.TryGetValue(name, out var ban)
+			&& BaseFix02CA.BanActive(true, world.WorldTick, ban.Until, world.ActorsHavingTrait<BaseProvider>().Count(a => a.Owner == player), ban.Providers);
 		bool DefenceFirstCopyOn => baseBuilder.DefenceFirstCopyArmed && !ablateDefenceFirstCopy.Off(player, AblationIds.Af2DefenceFirstCopy);
 		bool FloorExemptOn => baseBuilder.FloorEssentialsExemptArmed && !ablateFloorExempt.Off(player, AblationIds.FloorEssentialsExempt);
 		bool OpeningStepOn => baseBuilder.OpeningStepArmed && !ablateOpeningStep.Off(player, AblationIds.OpeningStandardOrder);
@@ -1359,9 +1382,18 @@ namespace OpenRA.Mods.CA.Traits
 					// link on an un-aimed fallback cell.
 					if (BaseBuilderQueueEvalCA.CrawlHold(type, law != null, law?.CrawlTargetEdge != null, baseBuilder.ExpansionTarget() != null))
 					{
-						EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, type,
-							BotQueueTransitionKind.Held, BotQueueTransitionReason.CrawlHold);
-						return false;
+						// BASE-06: after the watchdog ticks the READY building is placed at a base cell instead of waiting for a crawl aim.
+						if (ReadyWatchdogOn && BaseFix02CA.HoldExpired(true, world.WorldTick, world.WorldTick - ReadyHeldTicks(queue, currentBuilding.Item), baseBuilder.Info.ReadyWatchdogTicks))
+						{
+							AIUtils.BotDebug($"{player} places {currentBuilding.Item} at a base cell: crawl hold watchdog at tick {world.WorldTick}");
+							type = BuildingType.Building;
+						}
+						else
+						{
+							EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, type,
+								BotQueueTransitionKind.Held, BotQueueTransitionReason.CrawlHold);
+							return false;
+						}
 					}
 
 					if (advisedDefense != null)
@@ -1373,7 +1405,7 @@ namespace OpenRA.Mods.CA.Traits
 						// BP-2 (§19.15): the front/back advisor's hold — no legal cell and no fallback
 						// (a radar on a front with no defence line waits; it never goes forward). Same
 						// semantics as the REF-1 crawl hold above: queued, no failure budget spent.
-						if (frontBackHold)
+						if (frontBackHold && !(ReadyWatchdogOn && BaseFix02CA.HoldExpired(true, world.WorldTick, world.WorldTick - ReadyHeldTicks(queue, currentBuilding.Item), baseBuilder.Info.ReadyWatchdogTicks)))
 						{
 							EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, type,
 								BotQueueTransitionKind.Held, BotQueueTransitionReason.FrontBackHold);
@@ -1400,6 +1432,18 @@ namespace OpenRA.Mods.CA.Traits
 					// through the re-queue loop while no site existed.
 					if (refineryDefers)
 					{
+						// BASE-16: a siteless refinery is refunded after a bounded hold even without a live exhaustion certificate (the claim stays; a new refinery is wanted again).
+						if (RefineryHoldCapOn && BaseFix02CA.HoldExpired(true, world.WorldTick, world.WorldTick - ReadyHeldTicks(queue, currentBuilding.Item), baseBuilder.Info.RefineryHoldCapTicks))
+						{
+							AIUtils.BotDebug($"{player} cancels {currentBuilding.Item}: refinery hold cap at tick {world.WorldTick}");
+							var capTarget = BaseBuilderQueueEvalCA.CancelBindTarget(queue.AllQueued(), i => i.Item, currentBuilding.Item, currentBuilding);
+							NotePendingTerminal(queue, capTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
+								BotQueueTransitionReason.SaturationLatch, BotQueueCancellationClass.Production);
+							bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
+							readyHoldSince.Remove(queue.Actor.ActorID);
+							return false;
+						}
+
 						// Maintainer ruling 2026-10-16: cancellation is permitted ONLY on a
 						// proven total-domain exhaustion — the tiered fallback's TERMINAL
 						// pass enumerated the whole map unconditionally (provider squares
@@ -1476,6 +1520,10 @@ namespace OpenRA.Mods.CA.Traits
 						}
 						lastFailedBuilding = currentBuilding.Item;
 
+						// BASE-07: this type has nowhere to go; keep it out of the extras until the ban ends or a new base provider appears.
+						if (NoSpaceBanOn)
+							noSpaceBan[currentBuilding.Item] = (world.WorldTick + baseBuilder.Info.NoSpaceBanTicks, world.ActorsHavingTrait<BaseProvider>().Count(a => a.Owner == player));
+
 						// FIX-RA-REFINERY R1: the latch snapshot is taken at every saturation —
 						// the old `BaseExpansionModules == null` guard never ran (the array is
 						// never null), which left the recovery probe comparing stale or
@@ -1488,6 +1536,7 @@ namespace OpenRA.Mods.CA.Traits
 				else
 				{
 					failCount = 0;
+					readyHoldSince.Remove(queue.Actor.ActorID);
 					NotifyPlacement(currentBuilding.Item, location.Value, queue.Actor.ActorID, orderString, type, advisedDefense != null || demandAdvisedDefense, lastFrontBackPick);
 
 					// REPLAY-HEALTH-LOGGER (F2): the place order is in flight — the intent
@@ -1719,7 +1768,7 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var actor in buildableThings)
 			{
 				var name = actor.Name;
-				if (!baseBuilder.Info.ProductionTypes.Contains(name))
+				if (!baseBuilder.Info.ProductionTypes.Contains(name) || NoSpaceBanned(name))
 					continue;
 
 				var producing = baseBuilder.BuildingsBeingProduced.TryGetValue(name, out var beingProduced) ? beingProduced : 0;
@@ -2152,7 +2201,7 @@ namespace OpenRA.Mods.CA.Traits
 			var bestCost = int.MaxValue;
 			foreach (var item in buildable)
 			{
-				if (!inRole(item) || (firstCopyOnly && OwnedOrQueued(item)) || BuildingStillDelayed(item.Name))
+				if (!inRole(item) || (firstCopyOnly && OwnedOrQueued(item)) || BuildingStillDelayed(item.Name) || NoSpaceBanned(item.Name))
 					continue;
 
 				var count = playerBuildings.Count(a => a.Info.Name == item.Name);
@@ -2392,7 +2441,7 @@ namespace OpenRA.Mods.CA.Traits
 			var candidates = new List<(string Name, int Cost)>();
 			foreach (var item in buildableThings)
 			{
-				if (!(includeListed ? FirstCopyKind(item) : UnlistedOnceKind(item)) || OwnedOrQueued(item))
+				if (!(includeListed ? FirstCopyKind(item) : UnlistedOnceKind(item)) || OwnedOrQueued(item) || NoSpaceBanned(item.Name))
 					continue;
 
 				if (includeListed && (BuildingStillDelayed(item.Name) || (baseBuilder.Info.BuildingIntervals != null && baseBuilder.Info.BuildingIntervals.ContainsKey(item.Name)
@@ -2628,10 +2677,19 @@ namespace OpenRA.Mods.CA.Traits
 			// pb_expansion_refinery_safety: a refinery wanted for an expansion yard under threat is dropped from this slot (not held).
 			if (SafetyOn)
 			{
-				var wantedBy = baseBuilder.ExpansionWantsRefinery();
-				var wantedField = wantedBy?.RefineryClaimTarget ?? wantedBy?.ExpansionTarget;
-				if (wantedField != null && !baseBuilder.ExpansionRefinerySafe(wantedField.Value))
-					return null;
+				if (SafetyAllOn)
+				{
+					// BASE-12: only when every wanting claim is unsafe is the slot dropped; a safe claim behind an unsafe head claim still goes.
+					if (baseBuilder.ExpansionRefineryBlockedByAllUnsafe())
+						return null;
+				}
+				else
+				{
+					var wantedBy = baseBuilder.ExpansionWantsRefinery();
+					var wantedField = wantedBy?.RefineryClaimTarget ?? wantedBy?.ExpansionTarget;
+					if (wantedField != null && !baseBuilder.ExpansionRefinerySafe(wantedField.Value))
+						return null;
+				}
 			}
 
 			var refinery = GetProducibleBuilding(baseBuilder.Info.RefineryTypes, buildableThings);
@@ -2956,6 +3014,14 @@ namespace OpenRA.Mods.CA.Traits
 				// enemy air intel; the rolled share then flows to the remaining
 				// (anti-ground) entries of this same pass.
 				if (!BaseBuilderQueueEvalCA.AirDefenceAdmits(baseBuilder.IsGatedAirDefence(name), baseBuilder.DedicatedAntiAirAllowed))
+					continue;
+
+				// BASE-07: a type that just failed its placement budget is not rolled again.
+				if (NoSpaceBanned(name))
+					continue;
+
+				// BASE-12: the roll's refinery obeys the expansion safety test too (every wanting claim unsafe = held).
+				if (SafetyOn && SafetyAllOn && baseBuilder.Info.RefineryTypes.Contains(name) && baseBuilder.ExpansionRefineryBlockedByAllUnsafe())
 					continue;
 
 				// BASE-04 (AUDIT_BASE_01): no ground defence from the roll before a threat is seen (the planner's front defence and demand defence stay).
