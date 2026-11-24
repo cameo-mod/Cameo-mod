@@ -2030,8 +2030,11 @@ namespace OpenRA.Mods.CA.Traits
 				if (naval != null)
 				{
 					var producing = baseBuilder.BuildingsBeingProduced.TryGetValue(naval.Name, out var n) ? n : 0;
+					var navalVariants = naval.TraitInfoOrDefault<PlaceBuildingVariantsInfo>()?.Actors ?? [];
+					var navalStanding = playerBuildings.Count(a => a.Info.Name == naval.Name || navalVariants.Contains(a.Info.Name));
 					if (BaseBuilderQueueEvalCA.LimitAdmits(baseBuilder.TryGetBuildingLimit(naval.Name, out var limit), limit,
-							playerBuildings.Count(a => a.Info.Name == naval.Name), producing))
+							playerBuildings.Count(a => a.Info.Name == naval.Name), producing)
+						&& BaseBuilderQueueEvalCA.OverflowTypeAdmits(navalStanding, producing, ProductionTypeLimit))
 					{
 						var resolved = BaseBuilderQueueEvalCA.PickOrPower(naval, power, HasSufficientPowerForActor);
 						if (resolved != null)
@@ -2423,7 +2426,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// PROD-BUSY cycle (USER 11-24): above the tier line cash becomes more units, i.e. one more production building per type in turn.
-			// Below the planner wants, the opening and the expansion demand, which still win; above the bank-overflow rung's own higher line.
+			// Below the planner wants, the opening and the expansion demand, which still win, and below the bank-overflow rung (its own, higher line).
 			if (CycleOn)
 			{
 				var cycleLine = TierLine;
