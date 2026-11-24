@@ -26,7 +26,7 @@ namespace OpenRA.Mods.Cameo.Dev
 			rows.Add(new PendingRow { Text = text + "\n", Appender = new AiLogFileAppender(fileName, nameof(ContextLogWriter)), NextAttemptTick = tick });
 		}
 
-		public void Flush(int playerIndex, int tick)
+		public void Flush(int playerIndex, int tick, bool finalRecord = false)
 		{
 			if (!byPlayer.TryGetValue(playerIndex, out var rows))
 				return;
@@ -35,7 +35,7 @@ namespace OpenRA.Mods.Cameo.Dev
 				var row = rows[i];
 				if (tick < row.NextAttemptTick)
 					continue;
-				var result = row.Appender.TryAppend(row.Text, tick, out var next);
+				var result = row.Appender.TryAppend(row.Text, tick, out var next, finalRecord);
 				if (result == AiLogAppendResult.RetryableFailure && !row.Appender.IsTerminal)
 					row.NextAttemptTick = next;
 				else

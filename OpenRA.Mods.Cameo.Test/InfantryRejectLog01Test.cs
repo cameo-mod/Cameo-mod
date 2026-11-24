@@ -87,5 +87,20 @@ namespace OpenRA.Mods.Cameo.Test
 				"ShouldBuild keeps its bool meaning");
 			Assert.That(builder, Does.Contain("var refusedBy = ShouldBuildReject(name, baselineTried || fromIdleFloor, queue.Info.Type);"));
 		}
+
+		[Test]
+		public void TheRowsHaveTheirOwnWriterThatFlushesWithoutContextFeatures()
+		{
+			var builder = RepoFile(Bots + "UnitBuilderBotModuleCA.cs");
+			Assert.That(builder, Does.Contain("Sink.InfantryRejectRow("));
+			Assert.That(builder, Does.Not.Contain("Sink.ContextRow("));
+
+			var dev = RepoFile("OpenRA.Mods.Cameo.Dev/InfantryRejectCsvWriterDev.cs");
+			Assert.That(dev, Does.Contain("public const int FlushTicks = 750;"));
+			Assert.That(dev, Does.Contain("void IGameOver.GameOver(World world) => FlushAll(world, true);"));
+			Assert.That(RepoFile("OpenRA.Mods.Cameo.Dev/CameoDevLogSinkInstaller.cs"), Does.Contain(
+				"public void InfantryRejectRow(int playerIndex, string fileName, string row, int tick) =>"));
+			Assert.That(RepoFile("mods/cameo/rules/dev/logging.yaml"), Does.Contain("\tInfantryRejectCsvWriterDev:"));
+		}
 	}
 }

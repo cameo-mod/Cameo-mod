@@ -1489,7 +1489,7 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					rejectLog.Pass(queue.Info.Type, !queue.AllQueued().Any() && batch.PendingOf(queue) == 0);
 					if (rejectLog.TryFlush(queue.Info.Type, world.WorldTick, out var line))
-						world.WorldActor.TraitOrDefault<CameoLogHub>()?.Sink.ContextRow(Array.IndexOf(world.Players, player), "infantry_reject.csv", line, world.WorldTick);
+						world.WorldActor.TraitOrDefault<CameoLogHub>()?.Sink.InfantryRejectRow(Array.IndexOf(world.Players, player), "infantry_reject.csv", line, world.WorldTick);
 				}
 			}
 		}

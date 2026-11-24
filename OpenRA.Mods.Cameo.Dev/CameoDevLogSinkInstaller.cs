@@ -32,6 +32,8 @@ namespace OpenRA.Mods.Cameo.Dev
 		public void EngagementEnd(int tick) => worldActor.TraitOrDefault<AiEngagementLogWriterDev>()?.End(tick);
 		public void ContextRow(int playerIndex, string fileName, string row, int tick) => context.Enqueue(playerIndex, fileName, row, tick);
 		public void FlushContext(int playerIndex, int tick) => context.Flush(playerIndex, tick);
+		public void InfantryRejectRow(int playerIndex, string fileName, string row, int tick) =>
+			worldActor.TraitOrDefault<InfantryRejectCsvWriterDev>()?.Enqueue(playerIndex, fileName, row, tick);
 
 		public void MissionRecorded(MissionEvent record)
 		{
