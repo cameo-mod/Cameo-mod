@@ -6332,7 +6332,7 @@ Player:
 		SatBatchConsistent: true
 		IntervalElapsed: true
 		NoUnitFloor: true
-		# UNIT-MIX-01 (USER 11-24): um_category_floor: the army keeps >= 20% of its value in infantry and >= 10% in aircraft (airfield present); per personality via the squad manager UnitMixInfantryFloorPct / UnitMixAircraftFloorPct; genericbot only.		UnitMixCategoryFloor: true
+		# UNIT-MIX-01 (USER 11-24): um_category_floor: the army keeps >= 20% of its value in infantry and >= 10% in aircraft (airfield present); per personality via the squad manager UnitMixInfantryFloorPct / UnitMixAircraftFloorPct; genericbot only.
 		UnitMixCategoryFloor: true
 		IdleBaseUnitsMaximum: 25
 		ProductionMinCashRequirement: 1000
