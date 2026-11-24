@@ -24,6 +24,7 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateTeamLead;
 		AblationLatch ablateJointHarass;
 		AblationLatch ablateCadence;
+		AblationLatch ablateFinishWeakest;
 		int teamLeadNextCheck;
 		string teamLeadKey;
 		TeamLeadTeam teamLeadTeam;
@@ -34,10 +35,14 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>TEAM-LEAD-01 is on for this bot: the Info switch (with the AggTeam code it builds on) and the DEV ablation row.</summary>
 		internal bool TeamLeadActive => Info.TeamLeadEnabled && Info.AggTeamEnabled && !ablateTeamLead.Off(Player, AblationIds.TeamLead);
 
-		// TEAM-LEAD-02 (P0 FIX): the leader publishes the push on cadence (own switch + row).
+		// TEAM-LEAD-02 (P0 FIX): the leader publishes the push on cadence (own switch + row); the weakest known enemy seat is finished first after the late start.
 		bool TeamLeadCadenceActive => TeamLeadActive && Info.TeamLeadCadenceEnabled && !ablateCadence.Off(Player, AblationIds.TeamLeadCadence);
 
 		internal bool TeamLeadCadenceOn => teamLeadEngaged && TeamLeadCadenceActive;
+
+		internal bool TeamLeadFinishWeakestOn => TeamLeadOn && Info.TeamLeadFinishWeakestEnabled && World.WorldTick >= Info.LateEscalationStartTick
+			&& !ablateFinishWeakest.Off(Player, AblationIds.TeamLeadFinishWeakest);
+
 		/// <summary>The feature is in force for this bot right now: active, and the team has a leader and at least two living bots.</summary>
 		internal bool TeamLeadOn => teamLeadEngaged && TeamLeadActive;
 
@@ -131,10 +136,15 @@ namespace OpenRA.Mods.CA.Traits
 			if (!teamLeadEngaged)
 				return;
 
-			// TEAM-LEAD-02: the leader publishes the push from its own team check (no formed squad of its own needed); every member
-			// forms its wave for an open order right away instead of waiting for its own attack-force timer.
-			if (teamLeadIsLeader && TeamLeadCadenceOn)
-				TeamLeadPublish(team, now);
+			// TEAM-LEAD-02: the leader keeps the finish focus and publishes the push from its own team check (no formed squad of its own
+			// needed); every member forms its wave for an open order right away instead of waiting for its own attack-force timer.
+			if (teamLeadIsLeader)
+			{
+				if (TeamLeadFinishWeakestOn)
+					TeamLeadFocusTarget(AggTeamHomePos(), now, out _, out _);
+				if (TeamLeadCadenceOn)
+					TeamLeadPublish(team, now);
+			}
 
 			if (TeamLeadCadenceOn)
 				TeamLeadJoin(bot, now);
@@ -217,11 +227,13 @@ namespace OpenRA.Mods.CA.Traits
 				teamLeadJoinedSeq = order.Seq;
 		}
 
-		// Where the order goes, from the leader's own view: the nearest known enemy (the main target's visible actors, any visible enemy,
-		// then a remembered building).
+		// Where the order goes, from the leader's own view: the weakest seat after the late start, else the nearest known enemy (the main target's
+		// visible actors, any visible enemy, then a remembered building).
 		bool TeamLeadPickTarget(WPos from, int now, out WPos target, out uint actorId)
 		{
-			target = default;
+			if (TeamLeadFocusTarget(from, now, out target, out actorId))
+				return true;
+
 			var mainTarget = EffectiveMainTarget();
 			var seen = mainTarget != null ? FindClosestEnemy(World.Map.CellContaining(from), TeamLeadOpenRisk, mainTarget) : null;
 			if (seen == null)
@@ -256,6 +268,130 @@ namespace OpenRA.Mods.CA.Traits
 			var staged = ArmyStaging?.StagingCellNear(World.Map.CellContaining(from));
 			var rally = staged.HasValue ? World.Map.CenterOfCell(staged.Value) : TeamLeadCA.RallyPoint(from, target, Info.TeamLeadRallyForwardCells);
 			return teamLeadTeam.Issue(teamLeadKey, rally, target, targetActorId, now);
+		}
+
+		bool TeamLeadFocusEnemy(Player p) =>
+			p != Player && p.WinState == WinState.Undefined && !p.NonCombatant && Player.RelationshipWith(p) == PlayerRelationship.Enemy;
+
+		/// <summary>
+		/// The finish-the-weakest target (switch ON, after the late start): the known building of the team's focus seat nearest to
+		/// <paramref name="from"/>. The focus is the weakest known enemy seat and stays until it dies; the pick is refreshed once per team check.
+		/// False = not active, or no enemy building known.
+		/// </summary>
+		bool TeamLeadFocusTarget(WPos from, int now, out WPos target, out uint actorId)
+		{
+			target = default;
+			actorId = 0;
+			var team = teamLeadTeam;
+			if (team == null || !TeamLeadFinishWeakestOn)
+				return false;
+
+			if (now - team.FocusEvalTick >= Info.TeamLeadCheckTicks)
+			{
+				team.FocusEvalTick = now;
+				TeamLeadRefreshFocus(team, from, now);
+			}
+
+			if (!team.FocusHasTarget)
+				return false;
+
+			target = team.FocusTarget;
+			actorId = team.FocusTargetId;
+			return true;
+		}
+
+		void TeamLeadRefreshFocus(TeamLeadTeam team, WPos from, int now)
+		{
+			var known = TeamLeadKnownBuildings();
+			var seats = new List<(int Seat, int Buildings)>(known.Count);
+			foreach (var kv in known)
+				seats.Add(((int)kv.Key.PlayerActor.ActorID, kv.Value.Count));
+
+			var pick = TeamLeadCA.PickWeakest(seats, team.FocusSeat, team.FocusSince, now, Info.TeamLeadFocusMaxTicks);
+			if (pick != team.FocusSeat)
+			{
+				AIUtils.BotDebug("AI ({0}): team finishes seat {1} (weakest, {2} known buildings) at {3}", Player.ClientIndex, pick,
+					seats.Where(s => s.Seat == pick).Select(s => s.Buildings).DefaultIfEmpty(0).First(), now);
+				team.FocusSeat = pick;
+				team.FocusSince = now;
+			}
+			else if (pick >= 0 && now - team.FocusSince >= Info.TeamLeadFocusMaxTicks)
+				team.FocusSince = now;
+
+			team.FocusHasTarget = false;
+			if (pick < 0)
+				return;
+
+			foreach (var kv in known)
+			{
+				if ((int)kv.Key.PlayerActor.ActorID != pick)
+					continue;
+
+				var best = long.MaxValue;
+				foreach (var (id, pos) in kv.Value)
+				{
+					var d = (long)(pos - from).HorizontalLengthSquared;
+					if (d >= best)
+						continue;
+
+					best = d;
+					team.FocusHasTarget = true;
+					team.FocusTarget = pos;
+					team.FocusTargetId = id;
+				}
+
+				break;
+			}
+		}
+
+		// Fog-honest: the enemy buildings (walls aside) the bot sees now or remembers in its frozen-actor layer, per living enemy seat.
+		Dictionary<Player, List<(uint Id, WPos Pos)>> TeamLeadKnownBuildings()
+		{
+			var known = new Dictionary<Player, List<(uint Id, WPos Pos)>>();
+			var counted = new HashSet<uint>();
+
+			void Add(Player owner, uint id, WPos pos)
+			{
+				if (!counted.Add(id))
+					return;
+				if (!known.TryGetValue(owner, out var list))
+					known[owner] = list = new List<(uint, WPos)>();
+				list.Add((id, pos));
+			}
+
+			foreach (var a in World.ActorsHavingTrait<Building>())
+			{
+				if (a.IsDead || !a.IsInWorld || a.Owner == null || !TeamLeadFocusEnemy(a.Owner) || a.Info.HasTraitInfo<LineBuildInfo>() || !a.CanBeViewedByPlayer(Player))
+					continue;
+
+				Add(a.Owner, a.ActorID, a.CenterPosition);
+			}
+
+			var layer = Player.FrozenActorLayer;
+			if (layer != null)
+				foreach (var fa in layer.FrozenActorsInRegion(World.Map.AllCells))
+				{
+					if (!fa.IsValid || fa.Hidden || !TeamLeadFocusEnemy(fa.Owner) || !fa.Info.HasTraitInfo<BuildingInfo>() || fa.Info.HasTraitInfo<LineBuildInfo>())
+						continue;
+
+					Add(fa.Owner, fa.ID, fa.CenterPosition);
+				}
+
+			return known;
+		}
+
+		// The team's finish focus as a player, or null (not active, none picked, or the seat is gone).
+		Player TeamLeadFocusPlayer()
+		{
+			var seat = teamLeadTeam?.FocusSeat ?? -1;
+			if (seat < 0 || !TeamLeadFinishWeakestOn)
+				return null;
+
+			foreach (var p in World.Players)
+				if ((int)p.PlayerActor.ActorID == seat)
+					return TeamLeadFocusEnemy(p) ? p : null;
+
+			return null;
 		}
 
 		// Order upkeep (once per window per team): cancel a stale or orphaned order, release the blob when it is gathered or the window is over.
@@ -377,7 +513,9 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
-			var pick = FindClosestEnemy(s.Units[0].Actor, s);
+			// TEAM-LEAD-02: after the late start the group harasses the weakest enemy seat (the nearest of its actors); none seen = the nearest enemy as before.
+			var focus = TeamLeadFocusPlayer();
+			var pick = (focus != null ? FindClosestEnemy(s.Units[0].Actor.Location, SquadValueOf(s), focus, s) : null) ?? FindClosestEnemy(s.Units[0].Actor, s);
 			if (pick == null)
 				return;
 
@@ -393,11 +531,22 @@ namespace OpenRA.Mods.CA.Traits
 			if (teamLeadTeam == null || s.Units.Count < Info.TeamLeadLeaderMinUnits)
 				return null;
 
-			var intent = AggTeamPushIntent(s, now);
-			if (intent == null)
-				return null;
+			var from = s.CenterPosition;
+			WPos target;
+			uint targetId;
 
-			var order = TeamLeadIssue(s.CenterPosition, intent.Target, intent.TargetActorId, now);
+			// TEAM-LEAD-02: the weakest seat first (after the late start), else the squad's own nearest-enemy pick.
+			if (!TeamLeadFocusTarget(from, now, out target, out targetId))
+			{
+				var intent = AggTeamPushIntent(s, now);
+				if (intent == null)
+					return null;
+
+				target = intent.Target;
+				targetId = intent.TargetActorId;
+			}
+
+			var order = TeamLeadIssue(from, target, targetId, now);
 			DiagnosticSquadEvent(s, "team_order", reason: "seq=" + order.Seq);
 			return order;
 		}

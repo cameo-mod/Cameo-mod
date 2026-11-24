@@ -198,6 +198,53 @@ namespace OpenRA.Mods.CA.Traits
 		public static bool FallbackForced(int now, int lastOrderTick, int fallbackTicks) =>
 			lastOrderTick >= 0 && now - lastOrderTick >= Math.Max(1, fallbackTicks);
 
+		/// <summary>
+		/// The enemy seat the team finishes: the WEAKEST known one (fewest known buildings, ties to the lower seat id; seats with none known
+		/// cannot be targeted). The previous pick sticks until it dies or has no known building left, so the team finishes it before it
+		/// switches - except that a focus held longer than <paramref name="maxFocusTicks"/> (an unreachable seat) rotates to the next weakest
+		/// once. -1 = no seat to finish.
+		/// </summary>
+		public static int PickWeakest(IReadOnlyList<(int Seat, int Buildings)> seats, int focusSeat, int focusSince, int now, int maxFocusTicks)
+		{
+			var best = -1;
+			var bestBuildings = int.MaxValue;
+			var focusKnown = false;
+			foreach (var (seat, buildings) in seats)
+			{
+				if (buildings <= 0)
+					continue;
+				if (seat == focusSeat)
+					focusKnown = true;
+				if (buildings < bestBuildings || (buildings == bestBuildings && seat < best))
+				{
+					best = seat;
+					bestBuildings = buildings;
+				}
+			}
+
+			if (best < 0)
+				return -1;
+			if (!focusKnown)
+				return best;
+			if (now - focusSince < Math.Max(1, maxFocusTicks))
+				return focusSeat;
+
+			// The focus has been held too long: take the weakest of the others, or stay when it is the only one left.
+			var other = -1;
+			var otherBuildings = int.MaxValue;
+			foreach (var (seat, buildings) in seats)
+			{
+				if (buildings <= 0 || seat == focusSeat)
+					continue;
+				if (buildings < otherBuildings || (buildings == otherBuildings && seat < other))
+				{
+					other = seat;
+					otherBuildings = buildings;
+				}
+			}
+
+			return other >= 0 ? other : focusSeat;
+		}
 	}
 
 	/// <summary>One team order: where the army gathers, what it pushes, and who has reported in. Created by the leader, read by every member.</summary>
@@ -281,6 +328,14 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>The tick of the last order any seat of the team issued (-1 = none yet); with the election and the first attack tick it is the stall clock.</summary>
 		public int LastOrderTick = -1;
+
+		/// <summary>TEAM-LEAD-02 finish-the-weakest focus: the enemy seat (its player-actor id, -1 = none), the tick it was taken, and the cached pick (re-evaluated at most every check window).</summary>
+		public int FocusSeat = -1;
+		public int FocusSince = -1;
+		public int FocusEvalTick = int.MinValue;
+		public bool FocusHasTarget;
+		public WPos FocusTarget;
+		public uint FocusTargetId;
 
 		readonly Dictionary<string, (bool AtCap, int Tick)> caps = new(StringComparer.Ordinal);
 

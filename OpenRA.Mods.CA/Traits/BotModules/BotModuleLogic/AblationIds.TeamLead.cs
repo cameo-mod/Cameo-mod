@@ -20,8 +20,10 @@ namespace OpenRA.Mods.CA.Traits
 		// The joint guerrilla/harass group (all bots of the team hit one shared harass target) has its own row; the Info switch is TeamLeadEnabled.
 		public const string TeamLeadJointHarass = "tl_joint_harass";
 
-		// TEAM-LEAD-02 (P0 FIX, 2026-11-24): the leader publishes the push on cadence from its own team check (tl_leader_cadence). Info switch:
-		// TeamLeadCadenceEnabled.
+		// TEAM-LEAD-02 (P0 FIX, 2026-11-24): the leader publishes the push on cadence from its own team check (tl_leader_cadence), and after
+		// the late-escalation start the push and harass target is the weakest known enemy seat until it dies (tl_finish_weakest). Info switches:
+		// TeamLeadCadenceEnabled, TeamLeadFinishWeakestEnabled.
 		public const string TeamLeadCadence = "tl_leader_cadence";
+		public const string TeamLeadFinishWeakest = "tl_finish_weakest";
 	}
 }

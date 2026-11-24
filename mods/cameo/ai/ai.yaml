@@ -4749,6 +4749,8 @@ Player:
 		TeamLeadEnabled: true
 		# TEAM-LEAD-02 (USER P0, V01 timeout RCA): the leader publishes the team push from its own check once the combined blob reaches the WAVE-MIN tier (or any member hits its idle-unit limit), every member forms its wave for the order at once. Needs TeamLeadEnabled.
 		TeamLeadCadenceEnabled: true
+		# TEAM-LEAD-02: after LateEscalationStartTick the team finishes the WEAKEST known enemy seat (fewest known buildings) before it switches. Needs TeamLeadEnabled.
+		TeamLeadFinishWeakestEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -4878,6 +4880,8 @@ Player:
 		TeamLeadEnabled: true
 		# TEAM-LEAD-02 (USER P0, V01 timeout RCA): the leader publishes the team push from its own check once the combined blob reaches the WAVE-MIN tier (or any member hits its idle-unit limit), every member forms its wave for the order at once. Needs TeamLeadEnabled.
 		TeamLeadCadenceEnabled: true
+		# TEAM-LEAD-02: after LateEscalationStartTick the team finishes the WEAKEST known enemy seat (fewest known buildings) before it switches. Needs TeamLeadEnabled.
+		TeamLeadFinishWeakestEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5003,6 +5007,8 @@ Player:
 		TeamLeadEnabled: true
 		# TEAM-LEAD-02 (USER P0, V01 timeout RCA): the leader publishes the team push from its own check once the combined blob reaches the WAVE-MIN tier (or any member hits its idle-unit limit), every member forms its wave for the order at once. Needs TeamLeadEnabled.
 		TeamLeadCadenceEnabled: true
+		# TEAM-LEAD-02: after LateEscalationStartTick the team finishes the WEAKEST known enemy seat (fewest known buildings) before it switches. Needs TeamLeadEnabled.
+		TeamLeadFinishWeakestEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5130,6 +5136,8 @@ Player:
 		TeamLeadEnabled: true
 		# TEAM-LEAD-02 (USER P0, V01 timeout RCA): the leader publishes the team push from its own check once the combined blob reaches the WAVE-MIN tier (or any member hits its idle-unit limit), every member forms its wave for the order at once. Needs TeamLeadEnabled.
 		TeamLeadCadenceEnabled: true
+		# TEAM-LEAD-02: after LateEscalationStartTick the team finishes the WEAKEST known enemy seat (fewest known buildings) before it switches. Needs TeamLeadEnabled.
+		TeamLeadFinishWeakestEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5257,6 +5265,8 @@ Player:
 		TeamLeadEnabled: true
 		# TEAM-LEAD-02 (USER P0, V01 timeout RCA): the leader publishes the team push from its own check once the combined blob reaches the WAVE-MIN tier (or any member hits its idle-unit limit), every member forms its wave for the order at once. Needs TeamLeadEnabled.
 		TeamLeadCadenceEnabled: true
+		# TEAM-LEAD-02: after LateEscalationStartTick the team finishes the WEAKEST known enemy seat (fewest known buildings) before it switches. Needs TeamLeadEnabled.
+		TeamLeadFinishWeakestEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5381,6 +5391,8 @@ Player:
 		TeamLeadEnabled: true
 		# TEAM-LEAD-02 (USER P0, V01 timeout RCA): the leader publishes the team push from its own check once the combined blob reaches the WAVE-MIN tier (or any member hits its idle-unit limit), every member forms its wave for the order at once. Needs TeamLeadEnabled.
 		TeamLeadCadenceEnabled: true
+		# TEAM-LEAD-02: after LateEscalationStartTick the team finishes the WEAKEST known enemy seat (fewest known buildings) before it switches. Needs TeamLeadEnabled.
+		TeamLeadFinishWeakestEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
