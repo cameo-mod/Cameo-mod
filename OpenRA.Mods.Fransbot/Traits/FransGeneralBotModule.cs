@@ -908,6 +908,23 @@ namespace OpenRA.Mods.Common.Traits
 			if (lastPublishedWorldTick >= 0 && world.WorldTick - lastPublishedWorldTick < Info.ScanInterval)
 				return;
 
+			// SPIKE-FRANS-01 (CM c1 FIX): the SiteIntel cache lives only while the board is rebuilt. Outside this scan (attack callbacks, order paths in the
+			// same world tick) BuildSiteIntel reads live health and visibility, so it always builds fresh there.
+			siteIntelCache.Clear();
+			inMissionScan = true;
+			try
+			{
+				RebuildMissionBoard();
+			}
+			finally
+			{
+				inMissionScan = false;
+				siteIntelCache.Clear();
+			}
+		}
+
+		void RebuildMissionBoard()
+		{
 			using (Step("snapshot"))
 				combatIntelService.EnsureCurrentSnapshot();
 			using (Step("cleanup_defense"))
@@ -1405,13 +1422,14 @@ namespace OpenRA.Mods.Common.Traits
 		// here, visibility and health, cannot change within a tick), keyed by everything the result depends on.
 		readonly Dictionary<(CPos Center, int Radius, int MaxAge, uint Primary), FransSiteIntel> siteIntelCache = [];
 		int siteIntelCacheTick = -1;
+		bool inMissionScan;
 		int siteIntelCacheSnapshot = -1;
 
 		FransSiteIntel BuildSiteIntel(CPos center, int radiusCells, int maximumContactAgeTicks, Actor visiblePrimary = null)
 		{
 			using var siteIntelStep = Step("site_intel");
 			combatIntelService.EnsureCurrentSnapshot();
-			if (!Info.ScanSiteIntelCache)
+			if (!Info.ScanSiteIntelCache || !inMissionScan)
 				return BuildSiteIntelUncached(center, radiusCells, maximumContactAgeTicks, visiblePrimary, false);
 
 			if (siteIntelCacheTick != world.WorldTick || siteIntelCacheSnapshot != combatIntelService.SnapshotWorldTick)

@@ -51,7 +51,9 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(general, Does.Contain("var key = (center, radiusCells, maximumContactAgeTicks, visiblePrimary?.ActorID ?? 0u);"), "centre, radius, age and primary actor");
 			Assert.That(general, Does.Contain("if (siteIntelCacheTick != world.WorldTick || siteIntelCacheSnapshot != combatIntelService.SnapshotWorldTick)"), "one world tick and one sensor snapshot");
 			Assert.That(general, Does.Contain("siteIntelCache.Clear();"));
-			Assert.That(general, Does.Contain("if (!Info.ScanSiteIntelCache)\n\t\t\t\treturn BuildSiteIntelUncached(center, radiusCells, maximumContactAgeTicks, visiblePrimary, false);"), "switch off = the old per-call build with the old sorts");
+			Assert.That(general, Does.Contain("if (!Info.ScanSiteIntelCache || !inMissionScan)\n\t\t\t\treturn BuildSiteIntelUncached(center, radiusCells, maximumContactAgeTicks, visiblePrimary, false);"), "switch off, or outside the scan = the old per-call build with the old sorts");
+			Assert.That(general, Does.Contain("siteIntelCache.Clear();\n\t\t\tinMissionScan = true;\n\t\t\ttry\n\t\t\t{\n\t\t\t\tRebuildMissionBoard();\n\t\t\t}\n\t\t\tfinally\n\t\t\t{\n\t\t\t\tinMissionScan = false;\n\t\t\t\tsiteIntelCache.Clear();\n\t\t\t}"), "the cache lives only inside EnsureCurrentMissions (cleared at both ends, also on an exception): attack callbacks and order paths read live health and never see it");
+			Assert.That(general, Does.Contain("\t\tvoid RebuildMissionBoard()\n\t\t{\n\t\t\tusing (Step(\"snapshot\"))"), "the board rebuild body");
 			Assert.That(general, Does.Contain("presorted ? (IEnumerable<FransCombatIntelContact>)combatIntelService.EnemyCombatContacts : combatIntelService.EnemyCombatContacts.OrderBy(c => c.ActorId)"), "no second sort of a list already in actor-id order");
 			Assert.That(general, Does.Contain("presorted && visiblePrimary == null ? actors.Values.ToArray() : actors.Values.OrderBy(a => a.ActorId).ToArray()"), "the final sort stays when a primary may add an id");
 			Assert.That(general, Does.Contain("var built = BuildSiteIntelUncached(center, radiusCells, maximumContactAgeTicks, visiblePrimary, true);"));
