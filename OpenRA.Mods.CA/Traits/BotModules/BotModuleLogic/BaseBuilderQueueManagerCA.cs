@@ -2701,8 +2701,8 @@ namespace OpenRA.Mods.CA.Traits
 
 			// The owned/queued count is only needed when the ratio failed (a first copy matters only below the ratio).
 			var verdict = MobileStaticRatioCA.Stage1(true, mobile, staticTotal, cost,
-				!MobileStaticRatioCA.Admits(mobile, staticTotal, cost) && baseBuilder.StaticRatio.IsFirstCopy(item.Name, OwnedOrQueued(item))
-				&& (!DefenceFirstCopyOn || DefenceThreatSeen())
+				(!MobileStaticRatioCA.Admits(mobile, staticTotal, cost) && baseBuilder.StaticRatio.IsFirstCopy(item.Name, OwnedOrQueued(item))
+				&& (!DefenceFirstCopyOn || DefenceThreatSeen()))
 				|| (antiRushPickName != null && item.Name == antiRushPickName)); // C-04: the first copy of a defence type is exempt only while a threat is seen; EARLY-DEF-01: the base set is exempt (still recorded below)
 			if (verdict == RatioVerdict.NeedsFloat)
 				verdict = MobileStaticRatioCA.Float(IsFloating());
