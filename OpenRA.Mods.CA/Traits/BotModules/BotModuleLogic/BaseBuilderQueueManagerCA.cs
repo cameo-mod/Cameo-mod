@@ -117,13 +117,12 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateAllProducers, ablateIdleSweep, ablateEssentials, ablateCycle, ablateSustained, ablateSafety, ablateUnlistedOnce, ablateEssentialPass;
 		bool EssentialPassOn => baseBuilder.EssentialPassArmed && !ablateEssentialPass.Off(player, AblationIds.Af2EssentialPass);
 		AblationLatch ablateOpeningStep, ablateSustainedKeeps, ablatePrefilter, ablateDefenceNeed, ablatePowerCap, ablateDefenceFirstCopy, ablateFloorExempt;
-		AblationLatch ablateReadyWatchdog, ablateNoSpaceBan, ablateSafetyAll, ablateRefineryHoldCap; // BASE-FIX-02
+		AblationLatch ablateReadyWatchdog, ablateNoSpaceBan, ablateSafetyAll; // BASE-FIX-02
 		bool ReadyWatchdogOn => baseBuilder.ReadyWatchdogArmed && !ablateReadyWatchdog.Off(player, AblationIds.ReadyWatchdogAll);
 		bool NoSpaceBanOn => baseBuilder.NoSpaceBanArmed && !ablateNoSpaceBan.Off(player, AblationIds.NoSpaceBan);
 		bool SafetyAllOn => baseBuilder.RefinerySafetyAllClaimsArmed && !ablateSafetyAll.Off(player, AblationIds.RefinerySafetyAllClaims);
-		bool RefineryHoldCapOn => baseBuilder.RefineryHoldCapArmed && !ablateRefineryHoldCap.Off(player, AblationIds.RefineryHoldCap);
 
-		// BASE-06 / BASE-16: how long the READY item at the head of a queue has been held (per queue actor, restarts when the item changes or the hold was not seen for 300 ticks).
+		// BASE-06: how long the READY item at the head of a queue has been held (per queue actor, restarts when the item changes or the hold was not seen for 300 ticks).
 		readonly Dictionary<uint, (string Item, int Since, int Last)> readyHoldSince = new();
 		// BASE-07: type -> (ban end tick, base providers when it was set).
 		readonly Dictionary<string, (int Until, int Providers)> noSpaceBan = new();
@@ -1432,18 +1431,6 @@ namespace OpenRA.Mods.CA.Traits
 					// through the re-queue loop while no site existed.
 					if (refineryDefers)
 					{
-						// BASE-16: a siteless refinery is refunded after a bounded hold even without a live exhaustion certificate (the claim stays; a new refinery is wanted again).
-						if (RefineryHoldCapOn && BaseFix02CA.HoldExpired(true, world.WorldTick, world.WorldTick - ReadyHeldTicks(queue, currentBuilding.Item), baseBuilder.Info.RefineryHoldCapTicks))
-						{
-							AIUtils.BotDebug($"{player} cancels {currentBuilding.Item}: refinery hold cap at tick {world.WorldTick}");
-							var capTarget = BaseBuilderQueueEvalCA.CancelBindTarget(queue.AllQueued(), i => i.Item, currentBuilding.Item, currentBuilding);
-							NotePendingTerminal(queue, capTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
-								BotQueueTransitionReason.SaturationLatch, BotQueueCancellationClass.Production);
-							bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
-							readyHoldSince.Remove(queue.Actor.ActorID);
-							return false;
-						}
-
 						// Maintainer ruling 2026-10-16: cancellation is permitted ONLY on a
 						// proven total-domain exhaustion — the tiered fallback's TERMINAL
 						// pass enumerated the whole map unconditionally (provider squares
@@ -3635,7 +3622,8 @@ namespace OpenRA.Mods.CA.Traits
 
 					// Cameo (AI_ARCHITECTURE §12.13, EX-2): the planner's field is in reach and unclaimed, so the refinery goes
 					// there, close enough to count as claiming it. A refinery the MCV module requested keeps priority.
-					var claimer = requestRef == null ? baseBuilder.ExpansionWantsRefinery() : null;
+					// BASE-12: with the all-claims row the site follows the first SAFE wanting claim, not the head claim.
+					var claimer = requestRef == null ? (SafetyOn && SafetyAllOn ? baseBuilder.ExpansionWantsRefinerySafe() : baseBuilder.ExpansionWantsRefinery()) : null;
 					if (claimer != null)
 					{
 						// EX-2c: the claim field may differ from the crawl aim — any free field already in

@@ -27,17 +27,17 @@ namespace OpenRA.Mods.CA.Traits
 		public static bool BanActive(bool armed, int now, int until, int providersNow, int providersAtBan) =>
 			armed && now < until && providersNow <= providersAtBan;
 
-		/// <summary>BASE-12: the refinery want is blocked only when claims exist and none of them is safe.</summary>
-		public static bool SafetyBlocksAll(IReadOnlyList<bool> claimSafe)
+		/// <summary>BASE-12: the index of the first safe claim, or -1 when there is none.</summary>
+		public static int FirstSafe(IReadOnlyList<bool> claimSafe)
 		{
-			if (claimSafe.Count == 0)
-				return false;
+			for (var i = 0; i < claimSafe.Count; i++)
+				if (claimSafe[i])
+					return i;
 
-			foreach (var safe in claimSafe)
-				if (safe)
-					return false;
-
-			return true;
+			return -1;
 		}
+
+		/// <summary>BASE-12: the refinery want is blocked only when claims exist and none of them is safe.</summary>
+		public static bool SafetyBlocksAll(IReadOnlyList<bool> claimSafe) => claimSafe.Count > 0 && FirstSafe(claimSafe) < 0;
 	}
 }

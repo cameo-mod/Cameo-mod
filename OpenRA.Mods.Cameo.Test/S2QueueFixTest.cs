@@ -661,10 +661,9 @@ namespace OpenRA.Mods.Cameo.Test
 			// pre-filter (20 -> 21). It adds no order, RNG draw or production call, so every other count is unchanged.
 			// ESSENTIALS-01 naval type-limit fix (d42966e45) adds the same lookup for the naval candidate (21 -> 22), again no order.
 			var src = ManagerSource();
-			// BASE-FIX-02 (BASE-16, refinery_hold_cap) adds one gated refinery cancel order (8 -> 9, cancels 5 -> 6).
-			Assert.That(Count(src, "bot.QueueOrder("), Is.EqualTo(9));
+			Assert.That(Count(src, "bot.QueueOrder("), Is.EqualTo(8));
 			Assert.That(Count(src, "Order.StartProduction("), Is.EqualTo(1));
-			Assert.That(Count(src, "Order.CancelProduction("), Is.EqualTo(6));
+			Assert.That(Count(src, "Order.CancelProduction("), Is.EqualTo(5));
 			Assert.That(Count(src, "new Order("), Is.EqualTo(2));
 			Assert.That(Count(src, "BotRng.For("), Is.EqualTo(14));
 			Assert.That(Count(src, ".Next("), Is.EqualTo(7));

@@ -60,6 +60,15 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TheSiteFollowsTheFirstSafeClaimNotTheHeadClaim()
+		{
+			Assert.That(BaseFix02CA.FirstSafe(new[] { false, true, true }), Is.EqualTo(1));
+			Assert.That(BaseFix02CA.FirstSafe(new[] { false, false }), Is.EqualTo(-1));
+			Assert.That(BaseFix02CA.FirstSafe(Array.Empty<bool>()), Is.EqualTo(-1));
+			Assert.That(Queue(), Does.Contain("SafetyOn && SafetyAllOn ? baseBuilder.ExpansionWantsRefinerySafe() : baseBuilder.ExpansionWantsRefinery()"));
+		}
+
+		[Test]
 		public void TheWatchdogCoversTheCrawlAndFrontBackHoldsAndAPlacementClearsIt()
 		{
 			var q = Queue();
@@ -81,31 +90,29 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void TheRefineryCapSitsBeforeTheRetainedHoldAndTheSafetyCoversTheRoll()
+		public void TheSafetyCoversTheRollAndThereIsNoRefineryCap()
 		{
 			var q = Queue();
-			var cap = q.IndexOf("if (RefineryHoldCapOn && BaseFix02CA.HoldExpired(", StringComparison.Ordinal);
-			Assert.That(cap, Is.GreaterThan(0));
-			Assert.That(cap, Is.LessThan(q.IndexOf("// REF-2 P1a (retained-refinery): a completed refinery is NEVER cancelled", StringComparison.Ordinal)));
 			Assert.That(q, Does.Contain("if (SafetyOn && SafetyAllOn && baseBuilder.Info.RefineryTypes.Contains(name) && baseBuilder.ExpansionRefineryBlockedByAllUnsafe())"));
 			Assert.That(q, Does.Contain("if (baseBuilder.ExpansionRefineryBlockedByAllUnsafe())\n\t\t\t\t\t\treturn null;"));
+			Assert.That(q, Does.Not.Contain("RefineryHoldCap"), "Opus ruling: no cancel of a completed refinery outside the exhaustion certificate (REF-2 P1a)");
 		}
 
 		[Test]
 		public void EveryRowIsRegisteredAndOnlyGenericbotArmsIt()
 		{
 			var ids = Source("mods/CA/Traits/BotModules/BotModuleLogic/AblationIds.BaseFix02.cs");
-			foreach (var id in new[] { "ready_watchdog_all", "pb_nospace_ban", "pb_refinery_safety_all_claims", "refinery_hold_cap" })
+			foreach (var id in new[] { "ready_watchdog_all", "pb_nospace_ban", "pb_refinery_safety_all_claims" })
 				Assert.That(ids, Does.Contain($"\"{id}\""), id);
 
 			var player = MiniYaml.FromString(Source("packaging/ai.yaml"), "ai").Single(n => n.Key == "Player").Value.Nodes;
 			var generic = player.Single(n => n.Key == "BaseBuilderBotModuleCA@generic").Value.Nodes;
 			Assert.That(generic.Single(n => n.Key == "SwitchCondition").Value.Value, Is.EqualTo("genericbot"));
-			foreach (var key in new[] { "ReadyWatchdogAll", "NoSpaceBan", "RefinerySafetyAllClaims", "RefineryHoldCap" })
+			foreach (var key in new[] { "ReadyWatchdogAll", "NoSpaceBan", "RefinerySafetyAllClaims" })
 				Assert.That(generic.Single(n => n.Key == key).Value.Value, Is.EqualTo("true"), key);
 
 			foreach (var o in player.Where(n => n.Key.StartsWith("BaseBuilderBotModuleCA", StringComparison.Ordinal) && n.Key != "BaseBuilderBotModuleCA@generic"))
-				Assert.That(o.Value.Nodes.Any(n => n.Key is "ReadyWatchdogAll" or "NoSpaceBan" or "RefinerySafetyAllClaims" or "RefineryHoldCap"), Is.False, o.Key);
+				Assert.That(o.Value.Nodes.Any(n => n.Key is "ReadyWatchdogAll" or "NoSpaceBan" or "RefinerySafetyAllClaims"), Is.False, o.Key);
 		}
 	}
 }

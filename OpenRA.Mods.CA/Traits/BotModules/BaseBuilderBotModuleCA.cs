@@ -287,7 +287,7 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("BASE-06: ticks a READY building may be held before it is placed at a base cell.")]
 		public readonly int ReadyWatchdogTicks = 75;
 
-		[Desc("BASE-07: a type that failed its placement budget is banned from the overflow, cycled, each-once and fraction extras for NoSpaceBanTicks, or until a new base provider appears.",
+		[Desc("BASE-07: a type that failed its placement budget is banned from the overflow, cycled, each-once, tech-chain, opening and fraction picks for NoSpaceBanTicks, or until a new base provider appears.",
 			"Gated by SwitchCondition; row pb_nospace_ban.")]
 		public readonly bool NoSpaceBan = false;
 
@@ -297,13 +297,6 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("BASE-12: the expansion-refinery safety test iterates every wanting claim (the first safe one wins) and also gates the fraction roll's refinery. Needs ExpansionRefinerySafety.",
 			"Gated by SwitchCondition; row pb_refinery_safety_all_claims.")]
 		public readonly bool RefinerySafetyAllClaims = false;
-
-		[Desc("BASE-16: a completed refinery with no site is refunded after RefineryHoldCapTicks even without a live exhaustion certificate (the claim stays). Gated by SwitchCondition;",
-			"row refinery_hold_cap.")]
-		public readonly bool RefineryHoldCap = false;
-
-		[Desc("BASE-16: ticks a siteless completed refinery is held before it is refunded.")]
-		public readonly int RefineryHoldCapTicks = 600;
 
 		[Desc("PROD-BUSY (USER 11-24): while the bank stays above the tier MaximiseProductionCash line the base builder adds production buildings, cycled",
 			"across the types (barracks, war factory, airfield, naval yard with water access, then again), bounded by the build limits and by the failed-",
@@ -571,6 +564,28 @@ namespace OpenRA.Mods.CA.Traits
 			return BaseFix02CA.SafetyBlocksAll(safe);
 		}
 
+		/// <summary>BASE-12: the first wanting provider whose field is safe (or has no field); null when none. The refinery's SITE follows this claim, not the head claim.</summary>
+		public IBotExpansionTargetProvider ExpansionWantsRefinerySafe()
+		{
+			if (expansionTargetProviders == null)
+				return null;
+
+			var wanting = new List<IBotExpansionTargetProvider>();
+			var safe = new List<bool>();
+			foreach (var provider in expansionTargetProviders)
+			{
+				if (!(provider.WantsRefineryAtExpansionTarget && (provider.ExpansionTarget != null || provider.RefineryLawActive)))
+					continue;
+
+				var field = provider.RefineryClaimTarget ?? provider.ExpansionTarget;
+				wanting.Add(provider);
+				safe.Add(field == null || ExpansionRefinerySafe(field.Value));
+			}
+
+			var index = BaseFix02CA.FirstSafe(safe);
+			return index < 0 ? null : wanting[index];
+		}
+
 		public IBotExpansionTargetProvider ExpansionWantsRefinery()
 		{
 			if (expansionTargetProviders == null)
@@ -712,7 +727,6 @@ namespace OpenRA.Mods.CA.Traits
 		public bool ReadyWatchdogArmed => Info.ReadyWatchdogAll && switchesActive;
 		public bool NoSpaceBanArmed => Info.NoSpaceBan && switchesActive;
 		public bool RefinerySafetyAllClaimsArmed => Info.RefinerySafetyAllClaims && switchesActive;
-		public bool RefineryHoldCapArmed => Info.RefineryHoldCap && switchesActive;
 
 		// E1 observational slice (lead-accepted, observational ONLY): the switch-gated commitment
 		// ledger. Never read by any admission decision — recording and verdict logging only.

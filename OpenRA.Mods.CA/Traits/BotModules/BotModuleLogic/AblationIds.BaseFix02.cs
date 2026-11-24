@@ -22,8 +22,5 @@ namespace OpenRA.Mods.CA.Traits
 
 		// The expansion-refinery safety test covers every wanting claim and the fraction roll: an unsafe claim no longer blocks the safe ones.
 		public const string RefinerySafetyAllClaims = "pb_refinery_safety_all_claims";
-
-		// A completed refinery with no site is refunded after a bounded hold even without an exhaustion certificate.
-		public const string RefineryHoldCap = "refinery_hold_cap";
 	}
 }
