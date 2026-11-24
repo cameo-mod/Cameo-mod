@@ -129,7 +129,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var from = src.IndexOf("void ServeUpgradeQueues(IBot bot)", StringComparison.Ordinal);
 			var to = src.IndexOf("void TryBuildOpeningDefense(IBot bot)", from, StringComparison.Ordinal);
 			var service = src.Substring(from, to - from);
-			Assert.That(service, Does.Contain("UpgradeServiceCA.Choose(candidates, inProduction, paused, (int)player.PlayerActor.ActorID)"));
+			Assert.That(service, Does.Contain("UpgradeServiceCA.Choose(candidates, inProduction, heldByPause, (int)player.PlayerActor.ActorID)"));
 			Assert.That(service, Does.Contain("ShouldBuild(item.Name, true, queue.Info.Type)"));
 			Assert.That(service, Does.Not.Contain("SpendCommitmentsCA"), "no bank gate: upgrades are always queued and paid progressively");
 			Assert.That(service, Does.Not.Contain("bank"));
