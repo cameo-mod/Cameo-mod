@@ -24,6 +24,16 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("STALEMATE-01: percent of the attack-delay reset while late escalation is on (0-100).")]
 		public readonly int LateEscalationDelayPercent = 50;
 
+		[Desc("STALEMATE-01 r4 (V01 timeout): every LateEscalationStepTicks after LateEscalationStartTick the attack-delay percent is",
+			"multiplied again by LateEscalationStepPercent, never below LateEscalationDelayFloorPercent. 0 ticks = no steps.")]
+		public readonly int LateEscalationStepTicks = 5000;
+
+		[Desc("STALEMATE-01 r4: per-step multiplier of the attack-delay percent (0-100).")]
+		public readonly int LateEscalationStepPercent = 75;
+
+		[Desc("STALEMATE-01 r4: lowest attack-delay percent the steps reach (0-100).")]
+		public readonly int LateEscalationDelayFloorPercent = 20;
+
 		[Desc("STALEMATE-01: percent of the launch value and size bars while late escalation is on (0-100).")]
 		public readonly int LateEscalationForcePercent = 60;
 

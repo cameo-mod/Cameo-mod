@@ -28,7 +28,10 @@ namespace OpenRA.Mods.CA.Traits
 		internal bool FinishModeActive => Stalemate01CA.Late(Info.FinishModeEnabled, World.WorldTick, Info.LateEscalationStartTick)
 			&& !ablateFinishMode.Off(Player, AblationIds.StalemateFinishMode);
 
-		int LateDelay(int reset) => LateEscalationActive ? Stalemate01CA.Scale(reset, Info.LateEscalationDelayPercent) : reset;
+		int LateDelay(int reset) => LateEscalationActive
+			? Stalemate01CA.Scale(reset, Stalemate01CA.SteppedPercent(World.WorldTick, Info.LateEscalationStartTick, Info.LateEscalationDelayPercent,
+				Info.LateEscalationStepTicks, Info.LateEscalationStepPercent, Info.LateEscalationDelayFloorPercent))
+			: reset;
 
 		int LateBar(int bar) => LateEscalationActive ? Stalemate01CA.Scale(bar, Info.LateEscalationForcePercent) : bar;
 

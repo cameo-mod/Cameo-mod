@@ -33,5 +33,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		// Whether the next base-builder sweep comes after the short (active) delay.
 		public static bool ShortSweepDelay(bool active, bool idleSweep) => active || idleSweep;
+
+		// PROD-BUSY-03: whether a unit pick whose proportional-share test found nothing retries without the share test.
+		public static bool ShareFallback(bool idleCap, bool saturated) => idleCap || saturated;
 	}
 }

@@ -84,6 +84,11 @@ namespace OpenRA.Mods.CA.Traits
 			"above ProductionMinCashRequirement; no MaximiseProductionCash break. Gated by SwitchCondition; row pb_all_categories.")]
 		public readonly bool ServeAllCategories = false;
 
+		[Desc("PROD-BUSY-03 (V01 RCA): the proportional-share test never idles a queue. With IdleBaseUnitsMaximum or more units idle at base",
+			"the pick is share-only, and a met mix returned null (no_desire) unless the bank was saturated. On: the share-free fallback",
+			"(votes, limits and the aircraft cap still apply) runs whatever the bank. Gated by SwitchCondition; row pb_idle_cap.")]
+		public readonly bool ShareTestNeverIdles = false;
+
 		[Desc("UPGRADE-QUEUE-01: queue types served by the upgrade service. Each one is served on its own: a queue with nothing buildable, or a busy one, never holds back the next.")]
 		public readonly string[] UpgradeServiceQueues = { "Promotions", "Upgrades", "Research", "Addons" };
 
@@ -472,6 +477,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		// PROD-BUSY-01: one switch and one ablation row each. With both on, every queue is served every pass, so the PR-2 depth horizon
 		// (visitGapTicks = the gap to this bot's next pass) is also the gap to that queue's next service.
+		AblationLatch ablateIdleCap;
+		bool IdleCapOn => switchesActive && Info.ShareTestNeverIdles && !ablateIdleCap.Off(player, AblationIds.ProdBusyIdleCap);
 		AblationLatch ablateAllFactories, ablateAllCategories, ablateThroughPauseResearch, ablateThroughPauseUpgrade, ablateThroughPauseAddon;
 		bool AllFactoriesOn => switchesActive && Info.ServeAllFactories && !ablateAllFactories.Off(player, AblationIds.ProdBusyAllFactories);
 		bool AllCategoriesOn => switchesActive && Info.ServeAllCategories && !ablateAllCategories.Off(player, AblationIds.ProdBusyAllCategories);
@@ -1853,7 +1860,8 @@ namespace OpenRA.Mods.CA.Traits
 
 			// BV_m13_liveness: with a saturated bank the share test alone must not idle the queue —
 			// one deterministic (no extra RNG) retry that skips only the proportional-share check.
-			if (saturated)
+			// PROD-BUSY-03: with the switch on the same retry runs whatever the bank.
+			if (ProdBusyCA.ShareFallback(IdleCapOn, saturated))
 			{
 				var fallback = ProductionSaturationCA.PickExcludingShare(
 					unitsToBuildShares.OrderBy(kv => kv.Key).Select(kv => kv.Key),

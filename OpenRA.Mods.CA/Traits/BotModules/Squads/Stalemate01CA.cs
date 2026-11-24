@@ -24,6 +24,22 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		public static int Scale(int value, int percent) =>
 			value <= 0 ? value : Math.Max(1, (int)((long)value * Math.Clamp(percent, 0, 100) / 100));
 
+		/// <summary>STALEMATE-01 r4: the late attack-delay percent at tick now: basePercent from startTick, times stepPercent once more per
+		/// full stepTicks after it, never below floorPercent (a floor above the base does not raise it). stepTicks &lt;= 0 = basePercent.</summary>
+		public static int SteppedPercent(int now, int startTick, int basePercent, int stepTicks, int stepPercent, int floorPercent)
+		{
+			var pct = Math.Clamp(basePercent, 0, 100);
+			if (stepTicks <= 0 || now < startTick)
+				return pct;
+
+			var floor = Math.Min(pct, Math.Clamp(floorPercent, 0, 100));
+			var step = Math.Clamp(stepPercent, 0, 100);
+			for (var steps = (now - startTick) / stepTicks; steps > 0 && pct > floor; steps--)
+				pct = Math.Max(floor, pct * step / 100);
+
+			return pct;
+		}
+
 		/// <summary>Only attack squads hunt (Sonnet MED): base defenders (Protection), harassers and support types keep their own roles.</summary>
 		public static bool Hunts(SquadCAType type) => type == SquadCAType.Rush || type == SquadCAType.Guerrilla;
 
