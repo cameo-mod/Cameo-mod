@@ -22,7 +22,7 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.CA.Traits
 {
-	class BaseBuilderQueueManagerCA
+	partial class BaseBuilderQueueManagerCA
 	{
 		public readonly string Category;
 		public BotCooldown WaitCooldown;
@@ -990,6 +990,12 @@ namespace OpenRA.Mods.CA.Traits
 			if (currentBuilding == null && failCount < baseBuilder.Info.MaximumFailedPlacementAttempts)
 			{
 				pendingDemandPick = default;
+
+				// CONSOLIDATE-01 c2 (bb_pipeline_01): armed, the staged planner picks and admits (BaseBuilderQueueManagerCA.Pipeline01.cs).
+				// Off (and classic): the ladder and vetoes below, unchanged.
+				if (PipelineOn)
+					return TickQueuePlanned(bot, queue);
+
 				var item = ChooseBuildingToBuild(queue);
 				if (item == null)
 				{

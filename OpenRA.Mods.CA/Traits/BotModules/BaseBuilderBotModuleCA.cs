@@ -318,6 +318,12 @@ namespace OpenRA.Mods.CA.Traits
 			"missed buildings already being produced. Gated by SwitchCondition; row bb_recount_in_flight.")]
 		public readonly bool RecountInFlightAlways = false;
 
+		[Desc("CONSOLIDATE-01 c2: master switch of the staged build planner (BaseBuildPlanCA, CONSOLIDATE_01_DESIGN.md 3.1). Armed, each building and defence",
+			"producer starts the first candidate of the ordered stages (c2: S1 power, S3 opening order, S10 fraction roll) that passes the feasibility tests A1-A7;",
+			"a held candidate falls through to the next one, with no veto after the pick, and at most 8 tests per producer per sweep. Off = the old pick ladder",
+			"and its post-pick vetoes, unchanged. Gated by SwitchCondition; row bb_pipeline_01.")]
+		public readonly bool BbPipeline01 = false;
+
 		[Desc("BASE-06: ticks a READY building may be held before it is placed at a base cell.")]
 		public readonly int ReadyWatchdogTicks = 75;
 
@@ -781,6 +787,8 @@ namespace OpenRA.Mods.CA.Traits
 		public bool ReadyWatchdogArmed => Info.ReadyWatchdogAll && switchesActive;
 		AblationLatch ablateRecountInFlight; // CONSOLIDATE-01 c1
 		public bool RecountInFlightArmed => Info.RecountInFlightAlways && switchesActive && !ablateRecountInFlight.Off(player, AblationIds.RecountInFlight);
+		AblationLatch ablatePipeline01; // CONSOLIDATE-01 c2
+		public bool Pipeline01Armed => Info.BbPipeline01 && switchesActive && !ablatePipeline01.Off(player, AblationIds.BbPipeline01);
 		public bool NoSpaceBanArmed => Info.NoSpaceBan && switchesActive;
 		public bool RefinerySafetyAllClaimsArmed => Info.RefinerySafetyAllClaims && switchesActive;
 		public bool RefineryEconomyGateArmed => Info.RefineryEconomyGate && switchesActive;

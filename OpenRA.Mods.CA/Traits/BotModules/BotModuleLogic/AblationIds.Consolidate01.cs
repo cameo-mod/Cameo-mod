@@ -14,5 +14,6 @@ namespace OpenRA.Mods.CA.Traits
 	public static partial class AblationIds
 	{
 		public const string RecountInFlight = "bb_recount_in_flight"; // off = in-flight buildings are recounted only at bank >= BuildingProductionMinCashRequirement
+		public const string BbPipeline01 = "bb_pipeline_01"; // off = the old pick ladder (ChooseBuildingToBuild) and the TickQueue post-pick vetoes
 	}
 }
