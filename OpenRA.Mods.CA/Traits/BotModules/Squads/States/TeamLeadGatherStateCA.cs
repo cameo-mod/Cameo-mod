@@ -30,9 +30,25 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		public void Activate(SquadCA owner)
 		{
-			var cell = owner.World.Map.CellContaining(order.Rally);
+			// TEAM-PINCER-01: on a pincer the squad gathers at its own prong's staging point (the first ask shares it out), by the threat-aware
+			// route when a router has one; any other order gathers at the one rally point as before.
+			var manager = owner.SquadManager;
+			var cell = owner.World.Map.CellContaining(manager.TeamLeadRallyOf(owner, order));
+			var route = order.Pincer && owner.Units.Count > 0 ? manager.RouteAroundThreat(owner.Units[0].Actor, cell) : null;
 			foreach (var u in owner.Units)
-				owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromCell(owner.World, cell), false));
+			{
+				var queued = false;
+				if (route != null)
+				{
+					foreach (var waypoint in route)
+					{
+						owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromCell(owner.World, waypoint), queued));
+						queued = true;
+					}
+				}
+
+				owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromCell(owner.World, cell), queued));
+			}
 		}
 
 		public void Tick(SquadCA owner)

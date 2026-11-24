@@ -73,5 +73,29 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("TEAM-LEAD-02: a finish focus held this long without killing the seat (unreachable) rotates to the next weakest seat (and may come back to this one after the next such period). Range 6000-30000.")]
 		public readonly int TeamLeadFocusMaxTicks = 12000;
+
+		[Desc("TEAM-PINCER-01 (release switch; the DEV row is tl_pincer). On: when the leader publishes a team push and the combined blob holds at least twice the WAVE-MIN tier (and twice the join floor), the push splits into two prongs with the SAME target. Each prong stages on its own side of the target, the two staging points at least TeamLeadPincerMinSeparationCells apart; the members' squads are shared out lightest-prong-first; the prongs hold at their staging points until both are ready (at most TeamLeadPincerHoldTicks after the first one is), then both push together. A blob that is too small, a target too close, or no two reachable staging points = the single blob as before. Needs TeamLeadEnabled.")]
+		public readonly bool TeamLeadPincerEnabled = false;
+
+		[Desc("TEAM-PINCER-01: distance of a prong's staging point from the target, in cells. Never less than AttackScanRadius + 4: a gathering squad fights any enemy inside its scan radius and leaves the order, so a staging point inside it would break the pincer at the target itself.")]
+		public readonly int TeamLeadPincerStandOffCells = 24;
+
+		[Desc("TEAM-PINCER-01: angle between the direct line to the target and each prong's staging point as seen from the target, in degrees (the two prongs are twice this apart). Range 45-90.")]
+		public readonly int TeamLeadPincerSpreadDegrees = 70;
+
+		[Desc("TEAM-PINCER-01: no pincer when the target is closer than this to the leader's home, in cells (nothing to flank).")]
+		public readonly int TeamLeadPincerMinTargetCells = 30;
+
+		[Desc("TEAM-PINCER-01: the two staging points must be at least this far apart, in cells; closer means one blob.")]
+		public readonly int TeamLeadPincerMinSeparationCells = 16;
+
+		[Desc("TEAM-PINCER-01: the longest the first ready prong waits for the other at its staging point, in ticks (the AssaultSyncHoldTicks pattern, max 750). Then both push.")]
+		public readonly int TeamLeadPincerHoldTicks = 750;
+
+		[Desc("TEAM-PINCER-01: the gather window of a pincer order, in ticks (the way round takes longer than one rally). Keep it below TeamLeadOrderMaxTicks.")]
+		public readonly int TeamLeadPincerGatherMaxTicks = 2250;
+
+		[Desc("TEAM-PINCER-01: the lighter prong must carry at least this percent of the committed value when the gather minimum is over; below that the pincer collapses into one blob (both prongs push at once).")]
+		public readonly int TeamLeadPincerMinSharePercent = 25;
 	}
 }

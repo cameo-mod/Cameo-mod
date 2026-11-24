@@ -25,5 +25,9 @@ namespace OpenRA.Mods.CA.Traits
 		// TeamLeadCadenceEnabled, TeamLeadFinishWeakestEnabled.
 		public const string TeamLeadCadence = "tl_leader_cadence";
 		public const string TeamLeadFinishWeakest = "tl_finish_weakest";
+
+		// TEAM-PINCER-01 (USER P0, 2026-11-24): a team push whose blob holds at least twice the WAVE-MIN tier splits into two prongs that
+		// stage on opposite sides of the same target and push together. Info switch: TeamLeadPincerEnabled.
+		public const string TeamLeadPincer = "tl_pincer";
 	}
 }

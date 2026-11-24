@@ -248,6 +248,96 @@ namespace OpenRA.Mods.CA.Traits
 
 			return other >= 0 ? other : focusSeat;
 		}
+
+		// ---- TEAM-PINCER-01 (USER P0, 2026-11-24): a big blob splits into two prongs that stage on opposite sides of one target and push together ----
+		// Reference: Crystallized Nexus (CN, Astor / DoGyAUT, GPLv3) Squads/States/CNWaveStates.cs + the pincer wave plan of its squad manager
+		// (TryBuildPincerWavePlans, IsWaveStageReady): two flanks on opposite approaches to ONE target, a per-flank arrival bar that rounds UP,
+		// release only when both flanks are in place. Ported in intent: this order has no region/door graph, so a prong's staging point is a
+		// terrain-checked cell on its own side of the target.
+
+		/// <summary>The hold cap of a pincer: the first ready prong never waits longer than this for the other (the assault fan's AssaultSyncHoldTicks pattern).</summary>
+		public const int PincerHoldCapTicks = 750;
+
+		/// <summary>
+		/// The combined blob can field TWO prongs: twice the join floor, and - when the WAVE-MIN tier applies - twice its unit and value bars,
+		/// so each prong alone would still pass the tier. Anything smaller stays one blob.
+		/// </summary>
+		public static bool PincerBlob(int units, long value, int floorUnits, bool waveMinLimits, int waveMinUnits, int waveMinValue) =>
+			BlobReady(units, value, 2 * Math.Max(1, floorUnits), waveMinLimits, 2 * waveMinUnits, 2 * waveMinValue);
+
+		/// <summary>The prong the next squad joins: the lighter one by value, then the one with fewer squads, then prong 0.</summary>
+		public static int PickProng(long value0, long value1, int squads0, int squads1) =>
+			value1 < value0 || (value1 == value0 && squads1 < squads0) ? 1 : 0;
+
+		/// <summary>
+		/// The lighter prong carries at least <paramref name="minSharePercent"/> percent (0-50) of the committed value. Nothing committed yet
+		/// is undecided (true): the check only ever collapses a pincer that has real squads behind it.
+		/// </summary>
+		public static bool PincerBalanced(long value0, long value1, int minSharePercent)
+		{
+			var total = value0 + value1;
+			if (total <= 0)
+				return true;
+
+			return Math.Min(value0, value1) * 100 >= total * Math.Clamp(minSharePercent, 0, 50);
+		}
+
+		/// <summary>A prong is ready when it has squads and <paramref name="arrivePercent"/> percent of its committed value stands at its own staging point.</summary>
+		public static bool ProngReady(long committed, long arrived, int arrivePercent) =>
+			committed > 0 && arrived * 100 >= committed * Math.Clamp(arrivePercent, 0, 100);
+
+		/// <summary>
+		/// The pincer pushes when the gather window is over (<paramref name="maxTicks"/>), or - never before <paramref name="minTicks"/> - when both
+		/// prongs are ready, or when the first ready prong (<paramref name="firstReadyTick"/>, -1 = none yet) has waited
+		/// <paramref name="holdTicks"/> (capped at <see cref="PincerHoldCapTicks"/>) for the other. Both prongs then push on the same tick.
+		/// </summary>
+		public static bool PincerPushDue(int now, int issueTick, int minTicks, int maxTicks, int holdTicks, bool ready0, bool ready1, int firstReadyTick)
+		{
+			var elapsed = now - issueTick;
+			if (elapsed >= maxTicks)
+				return true;
+			if (elapsed < minTicks)
+				return false;
+			if (ready0 && ready1)
+				return true;
+
+			return firstReadyTick >= 0 && now - firstReadyTick >= Math.Clamp(holdTicks, 1, PincerHoldCapTicks);
+		}
+
+		/// <summary>The target is far enough from home to be worth flanking.</summary>
+		public static bool PincerTargetFar(WPos from, WPos target, int minCells) =>
+			(target - from).HorizontalLengthSquared >= (long)Math.Max(1, minCells) * CellUnits * Math.Max(1, minCells) * CellUnits;
+
+		/// <summary>The two staging points are far enough apart to be two approaches, not one.</summary>
+		public static bool PincerSeparated(WPos a, WPos b, int minCells) =>
+			(a - b).HorizontalLengthSquared >= (long)Math.Max(1, minCells) * CellUnits * Math.Max(1, minCells) * CellUnits;
+
+		/// <summary>
+		/// The staging points for one side of the target (<paramref name="side"/> below 0 = one side, otherwise the other), best first:
+		/// <paramref name="standOffCells"/> from the target, <paramref name="spreadDegrees"/> round from the line target-to-home; then the same
+		/// point swung 15 and 25 degrees closer to the line and pulled 4 cells in. The caller takes the first one the terrain allows.
+		/// </summary>
+		public static List<WPos> PincerStaging(WPos from, WPos target, int side, int standOffCells, int spreadDegrees)
+		{
+			var result = new List<WPos>();
+			var toHome = from - target;
+			var length = toHome.HorizontalLength;
+			if (length <= 0)
+				return result;
+
+			var spread = Math.Clamp(spreadDegrees, 45, 90);
+			var standOff = Math.Max(4, standOffCells);
+			foreach (var (swing, pull) in new[] { (0, 0), (-15, 0), (-25, 0), (0, 4), (-15, 4), (-25, 4) })
+			{
+				var radius = (long)Math.Max(4, standOff - pull) * CellUnits;
+				var line = new WVec((int)(toHome.X * radius / length), (int)(toHome.Y * radius / length), 0);
+				var angle = (side < 0 ? -1 : 1) * Math.Max(30, spread + swing);
+				var cell = target + line.Rotate(WRot.FromYaw(WAngle.FromDegrees(angle)));
+				result.Add(new WPos(cell.X, cell.Y, 0));
+			}
+
+			return result;
+		}
 	}
 
 	/// <summary>One team order: where the army gathers, what it pushes, and who has reported in. Created by the leader, read by every member.</summary>
@@ -286,7 +376,11 @@ namespace OpenRA.Mods.CA.Traits
 
 		public void Report(object squad, long value, bool arrived) => reports[squad] = (value, arrived);
 
-		public void Forget(object squad) => reports.Remove(squad);
+		public void Forget(object squad)
+		{
+			reports.Remove(squad);
+			prongOf.Remove(squad);
+		}
 
 		/// <summary>Drop the reports of squads that no longer take part (the caller says who still does).</summary>
 		public void Prune(Func<object, bool> stillTakesPart)
@@ -295,9 +389,90 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var key in reports.Keys)
 				if (!stillTakesPart(key))
 					(gone ??= new List<object>()).Add(key);
+			foreach (var key in prongOf.Keys)
+				if (!reports.ContainsKey(key) && !stillTakesPart(key))
+					(gone ??= new List<object>()).Add(key);
 			if (gone != null)
 				foreach (var key in gone)
-					reports.Remove(key);
+					Forget(key);
+		}
+
+		// ---- TEAM-PINCER-01: two prongs with their own staging points; null = the single blob gathering at Rally ----
+
+		WPos[] prongRallies;
+		readonly Dictionary<object, (int Prong, long Value)> prongOf = new();
+
+		/// <summary>The pincer collapsed back into one blob (a prong too light): everyone pushes as the single-blob order does.</summary>
+		public bool PincerCollapsed;
+
+		/// <summary>The tick the first prong was ready at its staging point (-1 = none yet); the hold for the other prong runs from here.</summary>
+		public int FirstReadyTick = -1;
+
+		/// <summary>The order was published with two prongs (it may have collapsed since).</summary>
+		public bool HasProngs => prongRallies != null;
+
+		/// <summary>Two prongs are in force: published with them and not collapsed.</summary>
+		public bool Pincer => prongRallies != null && !PincerCollapsed;
+
+		public void SetProngs(WPos rally0, WPos rally1) => prongRallies = new[] { rally0, rally1 };
+
+		public WPos ProngRally(int prong) => prongRallies[prong == 0 ? 0 : 1];
+
+		/// <summary>The prong a squad belongs to; the first ask shares it out (lighter prong first), so a joining squad is placed once.</summary>
+		public int ProngOf(object squad, long value)
+		{
+			if (prongOf.TryGetValue(squad, out var assigned))
+				return assigned.Prong;
+
+			long value0 = 0;
+			long value1 = 0;
+			var squads0 = 0;
+			var squads1 = 0;
+			foreach (var (prong, v) in prongOf.Values)
+			{
+				if (prong == 0)
+				{
+					value0 += v;
+					squads0++;
+				}
+				else
+				{
+					value1 += v;
+					squads1++;
+				}
+			}
+
+			var pick = TeamLeadCA.PickProng(value0, value1, squads0, squads1);
+			prongOf[squad] = (pick, value);
+			return pick;
+		}
+
+		/// <summary>The squad's prong if it has one, else -1.</summary>
+		public int ProngOrNone(object squad) => prongOf.TryGetValue(squad, out var assigned) ? assigned.Prong : -1;
+
+		/// <summary>The reported value of the squads of one prong, and how much of it stands at the prong's staging point.</summary>
+		public (long Committed, long Arrived) Totals(int prong)
+		{
+			long committed = 0;
+			long arrived = 0;
+			foreach (var (squad, r) in reports)
+			{
+				if (!prongOf.TryGetValue(squad, out var assigned) || assigned.Prong != prong)
+					continue;
+
+				committed += r.Value;
+				if (r.Arrived)
+					arrived += r.Value;
+			}
+
+			return (committed, arrived);
+		}
+
+		/// <summary>The first tick a prong was ready is kept; later calls change nothing.</summary>
+		public void NoteReady(int now)
+		{
+			if (FirstReadyTick < 0)
+				FirstReadyTick = now;
 		}
 
 		public (long Committed, long Arrived) Totals()

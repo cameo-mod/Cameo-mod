@@ -11,6 +11,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.CA.Traits.BotModules.Squads;
+using OpenRA.Mods.Common.Pathfinder;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 
@@ -25,6 +26,7 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateJointHarass;
 		AblationLatch ablateCadence;
 		AblationLatch ablateFinishWeakest;
+		AblationLatch ablatePincer;
 		int teamLeadNextCheck;
 		string teamLeadKey;
 		TeamLeadTeam teamLeadTeam;
@@ -42,6 +44,10 @@ namespace OpenRA.Mods.CA.Traits
 
 		internal bool TeamLeadFinishWeakestOn => TeamLeadOn && Info.TeamLeadFinishWeakestEnabled && World.WorldTick >= Info.LateEscalationStartTick
 			&& !ablateFinishWeakest.Off(Player, AblationIds.TeamLeadFinishWeakest);
+
+		// TEAM-PINCER-01: a team push with a big blob splits into two prongs on opposite sides of the target (own switch + row). Read by the leader
+		// when it issues the order; the members follow the order's own prong data, so a member needs no switch of its own.
+		internal bool TeamLeadPincerOn => TeamLeadOn && Info.TeamLeadPincerEnabled && !ablatePincer.Off(Player, AblationIds.TeamLeadPincer);
 
 		/// <summary>The feature is in force for this bot right now: active, and the team has a leader and at least two living bots.</summary>
 		internal bool TeamLeadOn => teamLeadEngaged && TeamLeadActive;
@@ -267,7 +273,100 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			var staged = ArmyStaging?.StagingCellNear(World.Map.CellContaining(from));
 			var rally = staged.HasValue ? World.Map.CenterOfCell(staged.Value) : TeamLeadCA.RallyPoint(from, target, Info.TeamLeadRallyForwardCells);
-			return teamLeadTeam.Issue(teamLeadKey, rally, target, targetActorId, now);
+			var order = teamLeadTeam.Issue(teamLeadKey, rally, target, targetActorId, now);
+			TeamLeadPincerPlan(order, from, target, now);
+			return order;
+		}
+
+		// TEAM-PINCER-01 (leader only, once per order, no per-tick work): a blob of at least twice the WAVE-MIN tier splits into two prongs with the
+		// SAME target. Each prong gets its own staging point, one on each side of the target (terrain-checked for the leader's own locomotor with
+		// the pathfinder - the terrain is public knowledge, so nothing here reads what the bot has not seen). No target far enough, no legal
+		// staging point on either side, or two points too close together = no prongs: the order is the single blob it always was.
+		void TeamLeadPincerPlan(TeamLeadOrder order, WPos from, WPos target, int now)
+		{
+			if (!TeamLeadPincerOn)
+				return;
+
+			var blob = teamLeadTeam.Pool(now, Info.TeamLeadPoolMaxAgeTicks);
+			var (minUnits, minValue) = WaveMinActive ? WaveMinBars() : (0, 0);
+			if (!TeamLeadCA.PincerBlob(blob.Units, blob.Value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue)
+				|| !TeamLeadCA.PincerTargetFar(from, target, Info.TeamLeadPincerMinTargetCells))
+				return;
+
+			var sample = TeamLeadPincerSample();
+			var mobile = sample?.TraitOrDefault<Mobile>();
+			if (mobile == null)
+				return;
+
+			var map = World.Map;
+			var pathFinder = World.WorldActor.Trait<IPathFinder>();
+			var home = sample.Location;
+			bool Legal(CPos c) => map.Contains(c) && mobile.Locomotor.MovementCostForCell(c) != PathGraph.MovementCostForUnreachableCell;
+
+			// A staging point outside the scan radius: a gathering squad fights what it sees there and leaves the order.
+			var standOff = System.Math.Max(Info.TeamLeadPincerStandOffCells, Info.AttackScanRadius + 4);
+			CPos? Stage(int side)
+			{
+				foreach (var candidate in TeamLeadCA.PincerStaging(from, target, side, standOff, Info.TeamLeadPincerSpreadDegrees))
+				{
+					var cell = mobile.NearestCell(map.CellContaining(candidate), Legal, 1, 3);
+					if (Legal(cell) && pathFinder.PathExistsForLocomotor(mobile.Locomotor, home, cell))
+						return cell;
+				}
+
+				return null;
+			}
+
+			var first = Stage(-1);
+			var second = Stage(1);
+			if (first == null || second == null)
+			{
+				AIUtils.BotDebug("AI ({0}): pincer skipped at {1}: no legal staging point on {2}", Player.ClientIndex, now, first == null ? "side A" : "side B");
+				return;
+			}
+
+			var rally0 = map.CenterOfCell(first.Value);
+			var rally1 = map.CenterOfCell(second.Value);
+			if (!TeamLeadCA.PincerSeparated(rally0, rally1, Info.TeamLeadPincerMinSeparationCells))
+			{
+				AIUtils.BotDebug("AI ({0}): pincer skipped at {1}: staging points too close", Player.ClientIndex, now);
+				return;
+			}
+
+			order.SetProngs(rally0, rally1);
+			AIUtils.BotDebug("AI ({0}): pincer published seq {1} at {2}: blob {3}/{4}, staging {5} / {6}", Player.ClientIndex, order.Seq, now, blob.Units, blob.Value,
+				first.Value, second.Value);
+		}
+
+		// A ground unit of the leader's idle army (the pool first, then its quiet wave squads): the locomotor the staging points are checked for.
+		Actor TeamLeadPincerSample()
+		{
+			foreach (var u in unitsHangingAroundTheBase)
+				if (!unitCannotBeOrdered(u.Actor) && u.Actor.TraitOrDefault<Mobile>() != null)
+					return u.Actor;
+
+			foreach (var s in Squads)
+			{
+				if (!TeamLeadWaveSquad(s))
+					continue;
+
+				foreach (var u in s.Units)
+					if (!unitCannotBeOrdered(u.Actor) && u.Actor.TraitOrDefault<Mobile>() != null)
+						return u.Actor;
+			}
+
+			return null;
+		}
+
+		/// <summary>Where this squad gathers for the order: its prong's staging point on a pincer (the first ask shares the squad out), else the order's one rally point.</summary>
+		internal WPos TeamLeadRallyOf(SquadCA squad, TeamLeadOrder order)
+		{
+			if (!order.HasProngs)
+				return order.Rally;
+
+			// A collapsed pincer keeps the squads where they were sent; one that arrives after the collapse gathers at the plain rally.
+			var prong = order.PincerCollapsed ? order.ProngOrNone(squad) : order.ProngOf(squad, SquadValueOf(squad));
+			return prong < 0 ? order.Rally : order.ProngRally(prong);
 		}
 
 		bool TeamLeadFocusEnemy(Player p) =>
@@ -412,6 +511,35 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 			}
 
+			// TEAM-PINCER-01: two prongs hold at their own staging points; both push on the same tick, when both are ready or the first ready one
+			// has waited the hold for the other. A prong too light (squads missing or lost) collapses the pincer: one blob, the rules below.
+			if (order.Pincer)
+			{
+				var (committed0, arrived0) = order.Totals(0);
+				var (committed1, arrived1) = order.Totals(1);
+				if (now - order.IssueTick >= Info.TeamLeadGatherMinTicks && !TeamLeadCA.PincerBalanced(committed0, committed1, Info.TeamLeadPincerMinSharePercent))
+				{
+					order.PincerCollapsed = true;
+					AIUtils.BotDebug("AI ({0}): pincer seq {1} collapsed at {2}: prongs {3}/{4}", Player.ClientIndex, order.Seq, now, committed0, committed1);
+				}
+				else
+				{
+					var ready0 = TeamLeadCA.ProngReady(committed0, arrived0, Info.TeamLeadArrivePercent);
+					var ready1 = TeamLeadCA.ProngReady(committed1, arrived1, Info.TeamLeadArrivePercent);
+					if (ready0 || ready1)
+						order.NoteReady(now);
+
+					if (TeamLeadCA.PincerPushDue(now, order.IssueTick, Info.TeamLeadGatherMinTicks, Info.TeamLeadPincerGatherMaxTicks, Info.TeamLeadPincerHoldTicks,
+						ready0, ready1, order.FirstReadyTick))
+					{
+						order.PushTick = now;
+						AIUtils.BotDebug("AI ({0}): pincer seq {1} push at {2}: ready {3}/{4}, prongs {5}/{6}", Player.ClientIndex, order.Seq, now, ready0, ready1, committed0, committed1);
+					}
+
+					return;
+				}
+			}
+
 			var (committed, arrived) = order.Totals();
 			if (TeamLeadCA.PushDue(now, order.IssueTick, Info.TeamLeadGatherMinTicks, Info.TeamLeadGatherMaxTicks, committed, arrived, Info.TeamLeadArrivePercent))
 				order.PushTick = now;
@@ -481,6 +609,8 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				DiagnosticSquadEvent(s, "team_join", reason: teamLeadIsLeader ? "leader" : "follower");
 				s.FuzzyStateMachine.ChangeState(s, new TeamLeadGatherStateCA(order), false);
+				if (order.HasProngs)
+					DiagnosticSquadEvent(s, "team_prong", reason: "prong=" + order.ProngOrNone(s) + (order.PincerCollapsed ? " collapsed" : ""));
 				return true;
 			}
 
@@ -557,7 +687,8 @@ namespace OpenRA.Mods.CA.Traits
 		internal void TeamLeadReport(SquadCA squad, TeamLeadOrder order)
 		{
 			var radiusSquared = (long)WDist.FromCells(Info.TeamLeadArriveCells).LengthSquared;
-			var near = squad.Units.Count(u => (u.Actor.CenterPosition - order.Rally).HorizontalLengthSquared <= radiusSquared);
+			var rally = TeamLeadRallyOf(squad, order);
+			var near = squad.Units.Count(u => (u.Actor.CenterPosition - rally).HorizontalLengthSquared <= radiusSquared);
 			order.Report(squad, SquadValueOf(squad), near * 100 >= squad.Units.Count * Info.TeamLeadArrivePercent);
 		}
 

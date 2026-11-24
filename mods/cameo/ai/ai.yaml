@@ -4752,6 +4752,8 @@ Player:
 		TeamLeadCadenceEnabled: true
 		# TEAM-LEAD-02: after LateEscalationStartTick the team finishes the WEAKEST known enemy seat (fewest known buildings) before it switches. Needs TeamLeadEnabled.
 		TeamLeadFinishWeakestEnabled: true
+		# TEAM-PINCER-01: a team push with a blob of at least twice the WAVE-MIN tier splits into two prongs that stage on opposite sides of the same target and push together. Needs TeamLeadEnabled.
+		TeamLeadPincerEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -4888,6 +4890,8 @@ Player:
 		TeamLeadCadenceEnabled: true
 		# TEAM-LEAD-02: after LateEscalationStartTick the team finishes the WEAKEST known enemy seat (fewest known buildings) before it switches. Needs TeamLeadEnabled.
 		TeamLeadFinishWeakestEnabled: true
+		# TEAM-PINCER-01: a team push with a blob of at least twice the WAVE-MIN tier splits into two prongs that stage on opposite sides of the same target and push together. Needs TeamLeadEnabled.
+		TeamLeadPincerEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5020,6 +5024,8 @@ Player:
 		TeamLeadCadenceEnabled: true
 		# TEAM-LEAD-02: after LateEscalationStartTick the team finishes the WEAKEST known enemy seat (fewest known buildings) before it switches. Needs TeamLeadEnabled.
 		TeamLeadFinishWeakestEnabled: true
+		# TEAM-PINCER-01: a team push with a blob of at least twice the WAVE-MIN tier splits into two prongs that stage on opposite sides of the same target and push together. Needs TeamLeadEnabled.
+		TeamLeadPincerEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5154,6 +5160,8 @@ Player:
 		TeamLeadCadenceEnabled: true
 		# TEAM-LEAD-02: after LateEscalationStartTick the team finishes the WEAKEST known enemy seat (fewest known buildings) before it switches. Needs TeamLeadEnabled.
 		TeamLeadFinishWeakestEnabled: true
+		# TEAM-PINCER-01: a team push with a blob of at least twice the WAVE-MIN tier splits into two prongs that stage on opposite sides of the same target and push together. Needs TeamLeadEnabled.
+		TeamLeadPincerEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5288,6 +5296,8 @@ Player:
 		TeamLeadCadenceEnabled: true
 		# TEAM-LEAD-02: after LateEscalationStartTick the team finishes the WEAKEST known enemy seat (fewest known buildings) before it switches. Needs TeamLeadEnabled.
 		TeamLeadFinishWeakestEnabled: true
+		# TEAM-PINCER-01: a team push with a blob of at least twice the WAVE-MIN tier splits into two prongs that stage on opposite sides of the same target and push together. Needs TeamLeadEnabled.
+		TeamLeadPincerEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5419,6 +5429,8 @@ Player:
 		TeamLeadCadenceEnabled: true
 		# TEAM-LEAD-02: after LateEscalationStartTick the team finishes the WEAKEST known enemy seat (fewest known buildings) before it switches. Needs TeamLeadEnabled.
 		TeamLeadFinishWeakestEnabled: true
+		# TEAM-PINCER-01: a team push with a blob of at least twice the WAVE-MIN tier splits into two prongs that stage on opposite sides of the same target and push together. Needs TeamLeadEnabled.
+		TeamLeadPincerEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
