@@ -43,6 +43,16 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>The units a member needs in its pool to send them: the all-in minimum on an all-in order (never below 1), else the order's ordinary minimum.</summary>
 		public static int JoinMinUnits(bool allIn, int ordinaryMin, int allInMin) => allIn ? Math.Max(1, allInMin) : ordinaryMin;
 
+		/// <summary>
+		/// After the push an all-in re-join may form a squad only when the joinable group itself is a WAVE-MIN wave (units AND value): never a small squad that walks
+		/// to the target alone (USER rule: nothing below WAVE-MIN ever attacks). Before the push the units merge into the gathering squad or gather with the blob.
+		/// </summary>
+		public static bool RejoinAllowed(bool pushed, int units, long value, bool waveMinLimits, int waveMinUnits, int waveMinValue) =>
+			!pushed || !waveMinLimits || WaveMinCA.Passes(units, value, waveMinUnits, waveMinValue);
+
+		/// <summary>The nearly-won scan (every enemy structure the bot sees or remembers) is due: never scanned yet, or <paramref name="intervalTicks"/> since the last scan.</summary>
+		public static bool ScanDue(int now, int lastScanTick, int intervalTicks) => lastScanTick < 0 || now - lastScanTick >= Math.Max(1, intervalTicks);
+
 		/// <summary>A member that already joined this order asks again: only an all-in order takes the units that arrived since (the others join once).</summary>
 		public static bool JoinsAgain(bool allIn, int joinedSeq, int orderSeq) => allIn || joinedSeq != orderSeq;
 	}

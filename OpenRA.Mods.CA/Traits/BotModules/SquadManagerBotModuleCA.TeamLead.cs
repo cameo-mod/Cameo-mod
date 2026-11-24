@@ -638,6 +638,10 @@ namespace OpenRA.Mods.CA.Traits
 				< AllInCA.JoinMinUnits(order.AllIn, teamLeadIsLeader && !order.GatherOnly && !order.Extending ? Info.TeamLeadLeaderMinUnits : Info.TeamLeadJoinMinUnits, Info.TeamLeadAllInJoinMinUnits))
 				return;
 
+			// ALL-IN-01: a pushed all-in order takes a re-join only as a WAVE-MIN group; a smaller one waits in the pool (never a squad that walks to the target alone).
+			if (order.AllIn && order.Pushed && !TeamLeadAllInRejoinGroup())
+				return;
+
 			var before = unitsHangingAroundTheBase.Count;
 			CreateAttackForce(bot);
 			if (order.AllIn && unitsHangingAroundTheBase.Count < before)

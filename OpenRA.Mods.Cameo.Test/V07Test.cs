@@ -352,5 +352,42 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(System.Text.RegularExpressions.Regex.Matches(wiring, "TeamLeadAllInPushRecord\\(order, now\\);").Count, Is.EqualTo(2), "both push sites");
 			Assert.That(RepoFile(Bots + "BotModuleLogic/TeamLeadCA.cs"), Does.Contain("public static bool Engaged(IReadOnlyList<Seat> seats, Election election, int minSeats = 2)"));
 		}
+
+		[Test]
+		public void AfterThePushAnAllInRejoinIsAWaveMinGroupOrItWaits()
+		{
+			// Before the push the units merge into the gathering squad or gather with the blob: the gate does not apply.
+			Assert.That(AllInCA.RejoinAllowed(false, 2, 200, true, 8, 800), Is.True);
+			// After the push: units AND value must reach the WAVE-MIN bars; two units walking to the target alone are a trickle.
+			Assert.That(AllInCA.RejoinAllowed(true, 2, 200, true, 8, 800), Is.False, "a pair does not form a squad of its own after the push");
+			Assert.That(AllInCA.RejoinAllowed(true, 7, 5000, true, 8, 800), Is.False, "one unit short of WAVE-MIN");
+			Assert.That(AllInCA.RejoinAllowed(true, 8, 799, true, 8, 800), Is.False, "one cash short of WAVE-MIN");
+			Assert.That(AllInCA.RejoinAllowed(true, 8, 800, true, 8, 800), Is.True, "a WAVE-MIN group re-joins");
+			Assert.That(AllInCA.RejoinAllowed(true, 2, 200, false, 0, 0), Is.True, "no WAVE-MIN tier: nothing to hold");
+		}
+
+		[Test]
+		public void TheNearlyWonScanRunsOnceAnIntervalAndTheResultIsReused()
+		{
+			Assert.That(AllInCA.ScanDue(16000, -1, 250), Is.True, "never scanned");
+			Assert.That(AllInCA.ScanDue(16100, 16000, 250), Is.False);
+			Assert.That(AllInCA.ScanDue(16249, 16000, 250), Is.False);
+			Assert.That(AllInCA.ScanDue(16250, 16000, 250), Is.True);
+			Assert.That(AllInCA.ScanDue(16001, 16000, 0), Is.True, "an interval below 1 still rescans every tick, never divides");
+
+			var info = RepoFile(Bots + "SquadManagerBotModuleCAInfo.V07.cs");
+			Assert.That(info, Does.Contain("public readonly int TeamLeadAllInScanIntervalTicks = 250;"));
+			var v07 = RepoFile(Bots + "SquadManagerBotModuleCA.V07.cs");
+			Assert.That(v07, Does.Contain("if (AllInCA.ScanDue(now, allInScanTick, Info.TeamLeadAllInScanIntervalTicks))"));
+			Assert.That(v07, Does.Contain("allInEnemyValue = TeamLeadKnownEnemyStructures(out allInEnemyStructures);"));
+			Assert.That(v07, Does.Contain("var counted = allInCounted;\n\t\t\tcounted.Clear();"), "no new set per scan");
+			Assert.That(v07, Does.Not.Contain("new HashSet<uint>()"), "the set is a field");
+
+			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
+			Assert.That(wiring, Does.Contain("if (order.AllIn && order.Pushed && !TeamLeadAllInRejoinGroup())\n\t\t\t\treturn;"), "a pushed all-in order takes only a WAVE-MIN re-join group");
+			Assert.That(v07, Does.Contain("AllInCA.RejoinAllowed(true, units, value, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue)"));
+			Assert.That(wiring.IndexOf("TeamLeadAllInRejoinGroup()", StringComparison.Ordinal), Is.LessThan(wiring.IndexOf("CreateAttackForce(bot);\n\t\t\tif (order.AllIn", StringComparison.Ordinal)),
+				"the gate runs before the squad is formed");
+		}
 	}
 }

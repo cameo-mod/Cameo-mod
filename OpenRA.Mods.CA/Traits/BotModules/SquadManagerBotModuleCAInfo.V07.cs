@@ -37,6 +37,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("ALL-IN-01: the nearly-won trigger waits for this world tick (a scouted early outpost is not a won game).")]
 		public readonly int TeamLeadAllInStartTick = 15000;
 
+		[Desc("ALL-IN-01: the nearly-won scan (every enemy structure the leader sees or remembers) runs at most once per this many ticks; the last result is reused in between. Range 100-1000.")]
+		public readonly int TeamLeadAllInScanIntervalTicks = 250;
+
 		[Desc("ALL-IN-01: on an all-in order a member sends its idle units again whenever at least this many wait in its pool (one unit would walk alone).")]
 		public readonly int TeamLeadAllInJoinMinUnits = 2;
 	}

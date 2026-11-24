@@ -51,6 +51,12 @@ namespace OpenRA.Mods.CA.Traits
 		// ALL-IN-01: set only while the leader picks the target of an all-in order (TeamLeadPickTarget then hunts when it knows no target).
 		bool teamLeadAllInPicking;
 
+		// ALL-IN-01: the last nearly-won scan (tick, enemy structure value, enemy structure count).
+		int allInScanTick = -1;
+		long allInEnemyValue;
+		int allInEnemyStructures;
+		readonly HashSet<uint> allInCounted = new();
+
 		// The living seats of this bot's team at its last team check (1 = it leads alone: a 1v1 or the last survivor); for the DEV records.
 		int teamLeadAliveSeats;
 
@@ -84,8 +90,14 @@ namespace OpenRA.Mods.CA.Traits
 				var (minUnits, minValue) = WaveMinActive ? WaveMinBars() : (0, 0);
 				if (TeamLeadCA.BlobReady(blob.Units, blob.Value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue))
 				{
-					var enemyValue = TeamLeadKnownEnemyStructures(out var enemyStructures);
-					won = AllInCA.NearlyWon(now, Info.TeamLeadAllInStartTick, blob.Value, enemyValue, enemyStructures, Info.TeamLeadAllInWinPercent);
+					// Throttled: the scan walks every building and every frozen actor of the map, so the last result is reused for TeamLeadAllInScanIntervalTicks.
+					if (AllInCA.ScanDue(now, allInScanTick, Info.TeamLeadAllInScanIntervalTicks))
+					{
+						allInScanTick = now;
+						allInEnemyValue = TeamLeadKnownEnemyStructures(out allInEnemyStructures);
+					}
+
+					won = AllInCA.NearlyWon(now, Info.TeamLeadAllInStartTick, blob.Value, allInEnemyValue, allInEnemyStructures, Info.TeamLeadAllInWinPercent);
 				}
 			}
 
@@ -97,7 +109,8 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			long value = 0;
 			var n = 0;
-			var counted = new HashSet<uint>();
+			var counted = allInCounted;
+			counted.Clear();
 			foreach (var a in World.ActorsHavingTrait<Building>())
 			{
 				if (a.IsDead || !a.IsInWorld || a.Owner == null || !TeamLeadFocusEnemy(a.Owner) || a.Info.HasTraitInfo<LineBuildInfo>() || !a.CanBeViewedByPlayer(Player)
@@ -121,6 +134,24 @@ namespace OpenRA.Mods.CA.Traits
 
 			count = n;
 			return value;
+		}
+
+		// ALL-IN-01: after the push the joinable pool forms a re-join squad only as a WAVE-MIN group (see AllInCA.RejoinAllowed).
+		bool TeamLeadAllInRejoinGroup()
+		{
+			var (minUnits, minValue) = WaveMinActive ? WaveMinBars() : (0, 0);
+			var units = 0;
+			long value = 0;
+			foreach (var u in unitsHangingAroundTheBase)
+			{
+				if (!TeamLeadJoinable(u))
+					continue;
+
+				units++;
+				value += UnitValue(u.Actor);
+			}
+
+			return AllInCA.RejoinAllowed(true, units, value, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue);
 		}
 
 		// ALL-IN-01: a ground unit to path-check the hunt cells for: the first Mobile unit of the pool or the quiet wave squads, else of the active units.
