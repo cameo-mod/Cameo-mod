@@ -5916,6 +5916,8 @@ Player:
 		AntiRushBase: true
 		AntiRushBaseMin: 2
 		AntiRushBaseMax: 3
+		# TEAM-DEFEND-02 (USER 11-24): tm_ally_turret_support: while an own or allied base is attacked every ready ground turret is placed at its max weapon range from the attackers; genericbot only.		TeamTurretSupport: true
+		TeamTurretSupport: true
 		# BASE-FIX-02 (AUDIT_BASE_01): ready_watchdog_all (75 ticks), pb_nospace_ban (3000 ticks), pb_refinery_safety_all_claims; genericbot only.
 		ReadyWatchdogAll: true
 		NoSpaceBan: true

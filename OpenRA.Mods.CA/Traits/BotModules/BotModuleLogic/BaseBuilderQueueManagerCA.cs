@@ -145,6 +145,8 @@ namespace OpenRA.Mods.CA.Traits
 		bool SustainedKeepsOn => baseBuilder.SustainedKeepsEssentialsArmed && !ablateSustainedKeeps.Off(player, AblationIds.SustainedKeepsEssentials);
 		bool PrefilterOn => baseBuilder.PrefilterArmed && !ablatePrefilter.Off(player, AblationIds.PrefilterPicks);
 		bool DefenceNeedOn => baseBuilder.DefenceNeedArmed && !ablateDefenceNeed.Off(player, AblationIds.Af2DefenceNeedGate);
+		AblationLatch ablateTurretSupport; // TEAM-DEFEND-02
+		bool TurretSupportOn => baseBuilder.TeamTurretSupportArmed && !ablateTurretSupport.Off(player, AblationIds.TeamTurretSupport);
 		AblationLatch ablateAntiRush; // EARLY-DEF-01
 		bool AntiRushOn => baseBuilder.AntiRushBaseArmed && !ablateAntiRush.Off(player, AblationIds.AntiRushBase);
 		bool PowerCapOn => baseBuilder.PowerMarginCapArmed && !ablatePowerCap.Off(player, AblationIds.PowerMarginCap);
@@ -1401,7 +1403,18 @@ namespace OpenRA.Mods.CA.Traits
 						}
 					}
 
-					if (advisedDefense != null)
+					// TEAM-DEFEND-02 (tm_ally_turret_support): a turret placed while an own or allied base is attacked goes where it covers the attackers (solo and team alike).
+					var (supportCell, supportHold) = ChooseSupportTurretCell(actorInfo, queue.Actor);
+					if (supportHold && !(ReadyWatchdogOn && BaseFix02CA.HoldExpired(true, world.WorldTick, world.WorldTick - ReadyHeldTicks(queue, currentBuilding.Item), baseBuilder.Info.ReadyWatchdogTicks)))
+					{
+						EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, type,
+							BotQueueTransitionKind.Held, BotQueueTransitionReason.FrontBackHold);
+						return false;
+					}
+
+					if (supportCell != null)
+						location = supportCell;
+					else if (advisedDefense != null)
 						location = advisedDefense;
 					else
 					{
@@ -3547,6 +3560,94 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			return legal;
+		}
+
+		// TEAM-DEFEND-02: the attack picture, refreshed every TurretSupportScanTicks while a turret waits: the own or allied building with the most seen enemy armed units near it (at least
+		// TurretSupportMinAttackers), the mean position of those units and the building's position. Observation only: enemies count when the bot (or an ally, shared shroud) sees them.
+		int turretFocusTick = -1000;
+		(bool Valid, WPos Attackers, WPos Anchor) turretFocus;
+
+		(bool Valid, WPos Attackers, WPos Anchor) TurretSupportFocus()
+		{
+			var now = world.WorldTick;
+			if (now - turretFocusTick < Math.Max(1, baseBuilder.Info.TurretSupportScanTicks))
+				return turretFocus;
+
+			turretFocusTick = now;
+			turretFocus = default;
+			var radius = WDist.FromCells(baseBuilder.Info.TurretSupportRadiusCells).Length;
+			var friendly = world.ActorsHavingTrait<Building>()
+				.Where(a => a.IsInWorld && !a.IsDead && (a.Owner == player || player.RelationshipWith(a.Owner) == PlayerRelationship.Ally))
+				.OrderBy(a => a.ActorID).ToList();
+			if (friendly.Count == 0)
+				return turretFocus;
+
+			var near = new SortedDictionary<uint, List<WPos>>();
+			foreach (var enemy in world.ActorsHavingTrait<Mobile>())
+			{
+				if (!enemy.IsInWorld || enemy.IsDead || player.RelationshipWith(enemy.Owner) != PlayerRelationship.Enemy
+					|| !enemy.CanBeViewedByPlayer(player) || !enemy.Info.HasTraitInfo<AttackBaseInfo>())
+					continue;
+
+				Actor nearest = null;
+				var bestSq = (long)radius * radius + 1;
+				foreach (var b in friendly)
+				{
+					var d = (b.CenterPosition - enemy.CenterPosition).HorizontalLengthSquared;
+					if (d < bestSq)
+					{
+						bestSq = d;
+						nearest = b;
+					}
+				}
+
+				if (nearest == null)
+					continue;
+
+				if (!near.TryGetValue(nearest.ActorID, out var list))
+					near[nearest.ActorID] = list = [];
+
+				list.Add(enemy.CenterPosition);
+			}
+
+			var ids = near.Keys.ToList();
+			var pick = TurretSupportCA.Focus(ids.Select(id => (id, near[id].Count)).ToList(), baseBuilder.Info.TurretSupportMinAttackers);
+			if (pick < 0)
+				return turretFocus;
+
+			var centroid = TurretSupportCA.Centroid(near[ids[pick]].Select(p => ((long)p.X, (long)p.Y)).ToList());
+			var anchor = friendly.First(a => a.ActorID == ids[pick]).CenterPosition;
+			return turretFocus = (true, new WPos((int)centroid.X, (int)centroid.Y, 0), anchor);
+		}
+
+		// TEAM-DEFEND-02: the cell for a ready ground turret while a base is attacked. (null, false) = no attack or not a turret, the normal placement runs; (cell, false) = place there;
+		// (null, true) = an attack but no legal cell inside the weapon range: hold (the READY watchdog places it at a base cell later). Legality is the engine's own placement check, so the
+		// lobby build-next-to-an-ally option applies by itself: with it off only own cells are legal and the same rule picks the best of them.
+		(CPos? Cell, bool Hold) ChooseSupportTurretCell(ActorInfo actorInfo, Actor producer)
+		{
+			if (!TurretSupportOn || !actorInfo.HasTraitInfo<AttackBaseInfo>() || !IsGroundDefence(actorInfo))
+				return (null, false);
+
+			var bi = actorInfo.TraitInfoOrDefault<BuildingInfo>();
+			if (bi == null)
+				return (null, false);
+
+			var focus = TurretSupportFocus();
+			if (!focus.Valid)
+				return (null, false);
+
+			var range = BotUnitProfiles.Get(world.Map.Rules, actorInfo).MaxRange.Length;
+			if (range <= 0)
+				return (null, false);
+
+			// The engine's own admission gate (placement check, near-base rule with the lobby ally option, spacing gap) over the cells around the attackers; only those inside the weapon range stay.
+			var legal = AdvisorLegalCells(actorInfo, true, producer, world.Map.CellContaining(focus.Attackers))
+				.Where(cell => (world.Map.CenterOfCell(cell) - focus.Attackers).HorizontalLengthSquared <= (long)range * range).ToList();
+			var positions = legal.Select(cell => { var c = world.Map.CenterOfCell(cell); return ((long)c.X, (long)c.Y); }).ToList();
+
+			var index = TurretSupportCA.Pick(positions, (focus.Attackers.X, focus.Attackers.Y), (focus.Anchor.X, focus.Anchor.Y), range,
+				TurretSupportCA.MinSafe(range, WDist.FromCells(baseBuilder.Info.TurretSupportMinGapCells).Length));
+			return index >= 0 ? (legal[index], false) : (null, true);
 		}
 
 		// The variant an advisor-claimed placement uses: findPos's non-facing random draw, 0 otherwise

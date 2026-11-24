@@ -17,5 +17,8 @@ namespace OpenRA.Mods.CA.Traits
 		// EARLY-DEF-01: every bot builds 2-3 ground defences (scaled by tier) right after its first production building; they are essentials at low cash and exempt
 		// from the defence-need gate and the seen-threat rule (those always meant extra defences only). The AF2 cap and RATIO-2X still count them.
 		public const string AntiRushBase = "bb_antirush_base";
+
+		// TEAM-DEFEND-02: a ready turret is placed at its maximum weapon range from the current attackers of an own or allied base (solo and team), on the defended side.
+		public const string TeamTurretSupport = "tm_ally_turret_support";
 	}
 }

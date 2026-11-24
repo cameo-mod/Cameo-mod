@@ -287,6 +287,24 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("EARLY-DEF-01: the anti-rush set size at the highest tier.")]
 		public readonly int AntiRushBaseMax = 3;
 
+		[Desc("TEAM-DEFEND-02 (USER 11-24): while own or allied buildings are attacked, every ready ground turret is placed where it covers the current attackers: as close as possible to",
+			"exactly its maximum weapon range from them, on the defended side, never next to the enemy; the nearest legal in-range cell otherwise; with none the turret is held (the READY",
+			"watchdog places it at a base cell later). Solo (own base attacked) and team (an ally attacked) use the same rule; building next to an ally follows the lobby option through the",
+			"engine placement check. Gated by SwitchCondition; row tm_ally_turret_support.")]
+		public readonly bool TeamTurretSupport = false;
+
+		[Desc("TEAM-DEFEND-02: cells around an own or allied building in which a seen enemy armed unit counts as attacking it.")]
+		public readonly int TurretSupportRadiusCells = 14;
+
+		[Desc("TEAM-DEFEND-02: at least this many seen enemy armed units near one building count as an attack (a lone scout does not pull the turrets).")]
+		public readonly int TurretSupportMinAttackers = 2;
+
+		[Desc("TEAM-DEFEND-02: a turret keeps at least this many cells from the attackers (never next to the enemy), or three fifths of its range when that is smaller.")]
+		public readonly int TurretSupportMinGapCells = 4;
+
+		[Desc("TEAM-DEFEND-02: how often the attack picture is refreshed while a turret waits to be placed.")]
+		public readonly int TurretSupportScanTicks = 25;
+
 		[Desc("C-07 / BASE-09 (AUDIT_CONFIG_01): army-first essential buildings (yards, refineries, power, tech chain, first copies, upgrade producers) ride at their own",
 			"cost like a planner want: the building cash floor (BuildingProductionMinCash) does not hold them. Gated by SwitchCondition; row pb_floor_essentials_exempt.")]
 		public readonly bool FloorEssentialsExempt = false;
@@ -753,6 +771,7 @@ namespace OpenRA.Mods.CA.Traits
 		public bool PowerMarginCapArmed => Info.PowerMarginCapEnabled && switchesActive;
 		public bool DefenceFirstCopyArmed => Info.DefenceFirstCopyCounts && switchesActive;
 		public bool AntiRushBaseArmed => Info.AntiRushBase && switchesActive;
+		public bool TeamTurretSupportArmed => Info.TeamTurretSupport && switchesActive;
 		public bool FloorEssentialsExemptArmed => Info.FloorEssentialsExempt && switchesActive;
 		public bool ReadyWatchdogArmed => Info.ReadyWatchdogAll && switchesActive;
 		public bool NoSpaceBanArmed => Info.NoSpaceBan && switchesActive;
