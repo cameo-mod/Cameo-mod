@@ -1952,6 +1952,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		readonly List<ArtyCandidate> structures = []; // ARTY-TARGET-01 (c2): seen or remembered structures near the anchor
 		readonly List<Actor> structureActors = []; // the actor behind each structure, null when only remembered
 		readonly List<ArtyDefence> assaultDefences = []; // the armed ones among structures (their reach covers the firing points)
+		bool structuresGathered; // c3: the structure scan runs at most once per squad per think, shared by its units
 
 		// ARTY-01: each unit decides for itself, at most once per ArtyOrderCooldownTicks. Priority per unit:
 		// kite from a hostile unit it outranges, back off a defence that reaches it, attack the best target in range
@@ -1968,6 +1969,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var threatRadius = WDist.FromCells(info.ArtyThreatRadiusCells).Length;
 			var maxStep = WDist.FromCells(info.ArtyMaxStepCells).Length;
 
+			structuresGathered = false;
 			if (memory.Count > owner.Units.Count * 2 + 8)
 				memory.Clear();
 
@@ -2126,7 +2128,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		// never into a known defence's reach). Returns false only when no structure is seen or remembered near the anchor: the caller then falls back.
 		bool TryStructuralAssault(SquadCA owner, Actor unit, WPos pos, WPos anchor, int rangeLen, int rangeMargin, int defenceMargin, ref ArtyMemory mem)
 		{
-			GatherStructures(owner, unit, anchor);
+			if (!structuresGathered)
+			{
+				GatherStructures(owner, anchor);
+				structuresGathered = true;
+			}
+
 			var pick = ArtyMicroCA.PickStructure(anchor, structures);
 			if (pick < 0)
 				return false;
@@ -2135,8 +2142,11 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if ((targetPos - pos).HorizontalLengthSquared <= (long)rangeLen * rangeLen)
 			{
 				var actor = structureActors[pick];
-				if (actor == null || (mem.LastAttackId == actor.ActorID && BusyAttack(unit)))
-					return true; // remembered only (wait for vision) or already firing at it
+				if (actor == null)
+					return false; // remembered only and in range: no live target to fire at; the caller falls back rather than waiting for vision that may never come
+
+				if (mem.LastAttackId == actor.ActorID && BusyAttack(unit))
+					return true; // already firing at it
 
 				if (owner.SquadManager.TryConsumeMicroActions())
 				{
@@ -2158,7 +2168,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		}
 
 		// Fills structures (seen enemy buildings and remembered ones) and defences (armed ones among them) within ArtyAssaultScanCells of the anchor. Walls are not targets.
-		void GatherStructures(SquadCA owner, Actor unit, WPos anchor)
+		void GatherStructures(SquadCA owner, WPos anchor)
 		{
 			structures.Clear();
 			structureActors.Clear();
@@ -2169,7 +2179,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var scanLen = WDist.FromCells(manager.Info.ArtyAssaultScanCells);
 			foreach (var e in owner.World.FindActorsInCircle(anchor, scanLen))
 			{
-				if (e == unit || !e.Info.HasTraitInfo<BuildingInfo>() || !manager.IsPreferredObservedEnemyUnit(e) || e.GetEnabledTargetTypes().Overlaps(WallTargetType))
+				if (!e.Info.HasTraitInfo<BuildingInfo>() || !manager.IsPreferredObservedEnemyUnit(e) || e.GetEnabledTargetTypes().Overlaps(WallTargetType))
 					continue;
 
 				var armed = e.Info.HasTraitInfo<AttackBaseInfo>();
@@ -2186,7 +2196,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			foreach (var fa in layer.FrozenActorsInCircle(owner.World, anchor, scanLen))
 			{
 				if (!fa.IsValid || fa.Hidden || fa.Owner == null || (fa.Actor != null && fa.Actor.IsInWorld && manager.IsNotHiddenUnit(fa.Actor))
-					|| manager.Player.RelationshipWith(fa.Owner) != PlayerRelationship.Enemy || !fa.Info.HasTraitInfo<BuildingInfo>())
+					|| manager.Player.RelationshipWith(fa.Owner) != PlayerRelationship.Enemy || !fa.Info.HasTraitInfo<BuildingInfo>() || fa.TargetTypes.Overlaps(WallTargetType))
 					continue;
 
 				var armed = fa.Info.HasTraitInfo<AttackBaseInfo>();

@@ -111,9 +111,8 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					if (c.Threatens)
 						threat = Closer(from, candidates, threat, i, false);
-					else
-						if (!structFirst)
-								unit = Closer(from, candidates, unit, i, false);
+					else if (!structFirst)
+						unit = Closer(from, candidates, unit, i, false);
 				}
 				else
 					structure = Closer(from, candidates, structure, i, true);

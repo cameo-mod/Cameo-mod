@@ -97,6 +97,17 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TheStructureScanIsSharedPerSquadAndSkipsWalls()
+		{
+			var states = Source("mods/CA/Traits/BotModules/Squads/States/GroundStatesCA.cs");
+			Assert.That(states, Does.Contain("if (!structuresGathered)"), "the scan runs at most once per squad per think");
+			Assert.That(states, Does.Contain("GatherStructures(owner, anchor);"));
+			Assert.That(states, Does.Not.Contain("GatherStructures(owner, unit, anchor)"));
+			Assert.That(states, Does.Contain("fa.TargetTypes.Overlaps(WallTargetType)"), "remembered walls are not targets");
+			Assert.That(states, Does.Contain("e.GetEnabledTargetTypes().Overlaps(WallTargetType))"), "seen walls are not targets");
+		}
+
+		[Test]
 		public void TheSwitchIsAnOwnRowOnlyWhileTheMicroIsOn()
 		{
 			var squad = Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCA.cs");
