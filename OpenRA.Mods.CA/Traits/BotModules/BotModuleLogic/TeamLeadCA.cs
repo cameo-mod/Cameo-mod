@@ -633,6 +633,17 @@ namespace OpenRA.Mods.CA.Traits
 			return (committed, arrived);
 		}
 
+		/// <summary>PINCER-02: the units the squads of one prong committed (the per-arm WAVE-MIN gate measures these).</summary>
+		public int ProngUnits(int prong)
+		{
+			var units = 0;
+			foreach (var (squad, r) in reports)
+				if (prongOf.TryGetValue(squad, out var assigned) && assigned.Prong == prong)
+					units += r.Units;
+
+			return units;
+		}
+
 		/// <summary>The first tick a prong was ready is kept; later calls change nothing.</summary>
 		public void NoteReady(int now)
 		{

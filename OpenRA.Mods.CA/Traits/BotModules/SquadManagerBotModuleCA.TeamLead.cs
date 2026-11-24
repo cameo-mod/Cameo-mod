@@ -253,6 +253,10 @@ namespace OpenRA.Mods.CA.Traits
 		// tl_pincer_double: a pincer that is due to push with less than twice the WAVE-MIN bars gathered collapses into the single blob (each prong must meet WAVE-MIN).
 		bool TeamLeadPincerThinCollapse(TeamLeadOrder order, int now)
 		{
+			// PINCER-02 (tl_pincer_wide): the gate is read per arm (each arm holds its arm bar) instead of the total of twice the bars.
+			if (TeamLeadPincerWideOn)
+				return TeamLeadPincerArmCollapse(order, now);
+
 			if (!TeamLeadPincerDoubleOn || !WaveMinActive)
 				return false;
 
@@ -688,8 +692,11 @@ namespace OpenRA.Mods.CA.Traits
 
 			var blob = teamLeadTeam.Pool(now, Info.TeamLeadPoolMaxAgeTicks);
 			var (minUnits, minValue) = WaveMinActive ? WaveMinBars() : (0, 0);
-			if (!TeamLeadCA.PincerBlob(blob.Units, blob.Value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue)
-				|| !TeamLeadCA.PincerTargetFar(from, target, Info.TeamLeadPincerMinTargetCells))
+			var wide = TeamLeadPincerWideOn;
+			var blobOk = wide
+				? PincerWideCA.PincerBlob(blob.Units, blob.Value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue, Info.TeamLeadPincerArmPercent)
+				: TeamLeadCA.PincerBlob(blob.Units, blob.Value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue);
+			if (!blobOk || !TeamLeadCA.PincerTargetFar(from, target, Info.TeamLeadPincerMinTargetCells))
 				return;
 
 			var sample = TeamLeadPincerSample();
@@ -716,8 +723,34 @@ namespace OpenRA.Mods.CA.Traits
 				return null;
 			}
 
-			var first = Stage(-1);
-			var second = Stage(1);
+			CPos? first;
+			CPos? second;
+			if (wide)
+			{
+				// PINCER-02: the first legal PAIR of the fanned-out candidates whose real approach separation is 90-180 degrees (no exact opposite sides).
+				var listA = PincerWideCA.Candidates(from, target, -1, standOff, Info.TeamLeadPincerSpreadDegrees);
+				var listB = PincerWideCA.Candidates(from, target, 1, standOff, Info.TeamLeadPincerSpreadDegrees);
+				WPos? Resolve(List<WPos> list, int i)
+				{
+					var cell = mobile.NearestCell(map.CellContaining(list[i]), Legal, 1, 3);
+					return Legal(cell) && pathFinder.PathExistsForLocomotor(mobile.Locomotor, home, cell) ? map.CenterOfCell(cell) : null;
+				}
+
+				if (PincerWideCA.PickPair(target, listA.Count, i => Resolve(listA, i), listB.Count, i => Resolve(listB, i), Info.TeamLeadPincerMinAngleDegrees,
+					Info.TeamLeadPincerMinSeparationCells, out var pointA, out var pointB, out _))
+				{
+					first = map.CellContaining(pointA);
+					second = map.CellContaining(pointB);
+				}
+				else
+					first = second = null;
+			}
+			else
+			{
+				first = Stage(-1);
+				second = Stage(1);
+			}
+
 			if (first == null || second == null)
 			{
 				AIUtils.BotDebug("AI ({0}): pincer skipped at {1}: no legal staging point on {2}", Player.ClientIndex, now, first == null ? "side A" : "side B");
@@ -733,6 +766,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			order.SetProngs(rally0, rally1);
+			TeamLeadPincerRecord("pincer_planned", order, "blob=" + blob.Units + "/" + blob.Value);
 			AIUtils.BotDebug("AI ({0}): pincer published seq {1} at {2}: blob {3}/{4}, staging {5} / {6}", Player.ClientIndex, order.Seq, now, blob.Units, blob.Value,
 				first.Value, second.Value);
 		}
@@ -958,6 +992,7 @@ namespace OpenRA.Mods.CA.Traits
 						order.PushTick = now;
 						order.PushReason = ready0 && ready1 ? "pincer_ready" : now - order.IssueTick >= Info.TeamLeadPincerGatherMaxTicks ? "pincer_window" : "pincer_hold";
 						DiagnosticTeamEvent("team_push", "seq=" + order.Seq + " why=" + order.PushReason + " age=" + (now - order.IssueTick) + " prongs=" + committed0 + "/" + committed1);
+						TeamLeadPincerRecord("pincer_fired", order, "why=" + order.PushReason + " prongs=" + order.ProngUnits(0) + "/" + committed0 + "," + order.ProngUnits(1) + "/" + committed1);
 						AIUtils.BotDebug("AI ({0}): pincer seq {1} push at {2}: ready {3}/{4}, prongs {5}/{6}", Player.ClientIndex, order.Seq, now, ready0, ready1, committed0, committed1);
 					}
 
