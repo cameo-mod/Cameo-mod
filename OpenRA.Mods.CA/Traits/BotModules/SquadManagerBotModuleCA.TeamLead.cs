@@ -207,9 +207,17 @@ namespace OpenRA.Mods.CA.Traits
 			if (s.Type == SquadCAType.Rush)
 				return AggTeamIsQuietState(state) && !AggTeamSquadDefends(s);
 
-			return s.Type is SquadCAType.Guerrilla or SquadCAType.Harass && TeamLeadRaiderRecallOn
+			// A hunting squad (finish mode) has its own job; one in a fight finishes it (see TeamLeadRaiderInContact for the marching ones).
+			return s.Type is SquadCAType.Guerrilla or SquadCAType.Harass && TeamLeadRaiderRecallOn && !s.IsHunting
 				&& (AggTeamIsQuietState(state) || state is GroundUnitsAttackMoveStateCA) && !AggTeamSquadDefends(s);
 		}
+
+		// A marching raider squad (GroundUnitsAttackMoveStateCA) with an enemy inside its scan radius is already in contact: its own state switches to the
+		// fight on its next tick, and the recall must not pull it out of it with Move orders. The same scan the gather state makes. Asked only when the
+		// recall actually joins an order, never for the blob count.
+		bool TeamLeadRaiderInContact(SquadCA s) =>
+			s.FuzzyStateMachine?.CurrentState is GroundUnitsAttackMoveStateCA
+			&& FindClosestEnemy(s.Units[0].Actor, WDist.FromCells(Info.AttackScanRadius), s) != null;
 
 		// The member's idle army is at its tier's idle-unit limit (25 Noob .. 75 God, Hard 50): the unit builder stops queuing units there, so an idle
 		// army at the limit is starving production. The unit builder owns the number (IdleAtLimit); the leader pushes at once when any member is at it.
@@ -667,7 +675,7 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			// HARASS-CAP-01 (tl_raider_recall): from the late start an idle or marching raider squad joins the open team order (TeamLeadWaveSquad is false
 			// for a raider unless the recall is on); with no order open it raids as before.
-			if (s.IsValid && s.Type is SquadCAType.Guerrilla or SquadCAType.Harass && TeamLeadWaveSquad(s) && TeamLeadOpenOrder() is { } recalled)
+			if (s.IsValid && s.Type is SquadCAType.Guerrilla or SquadCAType.Harass && TeamLeadWaveSquad(s) && TeamLeadOpenOrder() is { } recalled && !TeamLeadRaiderInContact(s))
 			{
 				DiagnosticSquadEvent(s, "team_join", reason: "raider_recall seq=" + recalled.Seq);
 				s.FuzzyStateMachine.ChangeState(s, new TeamLeadGatherStateCA(recalled), false);
