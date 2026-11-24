@@ -22,10 +22,10 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>
 		/// Index of the item to start, or -1. Free items (cost 0, promotions) are always eligible and rank first. A paid item needs
-		/// <paramref name="bank"/> to cover its cost and no pause vote. Items in <paramref name="excluded"/> (already in production in any queue)
+		/// no pause vote and no bank (user rule: no cash floor; OpenRA pays progressively). Items in <paramref name="excluded"/> (already in production in any queue)
 		/// are never chosen. Among the eligible: free first, then higher weight, then lower cost, then a seeded stable hash of the name (ties only), then name (ordinal). No random draw.
 		/// </summary>
-		public static int Choose(IReadOnlyList<Candidate> items, ISet<string> excluded, int bank, bool paused, int tieSeed = 0)
+		public static int Choose(IReadOnlyList<Candidate> items, ISet<string> excluded, bool paused, int tieSeed = 0)
 		{
 			var best = -1;
 			for (var i = 0; i < items.Count; i++)
@@ -35,7 +35,7 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 
 				var free = c.Cost <= 0;
-				if (!free && (paused || c.Cost > bank))
+				if (!free && paused)
 					continue;
 
 				if (best < 0 || Better(c, items[best], tieSeed))

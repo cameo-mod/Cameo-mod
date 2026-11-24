@@ -839,10 +839,9 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		// UPGRADE-QUEUE-01. Every queue of every served type is its own producer: an idle one starts the best buildable item NOW.
-		// Gates it skips: the ProductionMinCashRequirement floor and the K5 army reserve (they are sized for armies and were what idled these
-		// queues). Gates it keeps: an item must be AFFORDABLE (bank minus what every queued item still owes and what this pass already ordered), so the unpaid remainder never
-		// builds up against the reserve gates; paid items wait while a unit-production pause vote is up (the base builder's refinery pause
-		// included); FREE items (promotions) start whatever the votes and the bank say. Delays, intervals and limits are honoured through
+		// Gates it skips: the ProductionMinCashRequirement floor, the K5 army reserve and any bank check (the user rule is no cash floor; OpenRA pays
+		// progressively, so an unfunded item advances with income). Gates it keeps: paid items wait while a unit-production pause vote is up (the base
+		// builder's refinery pause included); FREE items (promotions) start whatever the votes say. Delays, intervals and limits are honoured through
 		// ShouldBuild. An item already in production in ANY queue is not started again (Scrin has a second Upgrades queue).
 		// Choice: UpgradeServiceCA.Choose (pure): free first, then UnitsToBuild weight, then cost, then name; no random draw.
 		void ServeUpgradeQueues(IBot bot)
@@ -854,9 +853,6 @@ namespace OpenRA.Mods.CA.Traits
 						inProduction.Add(queued.Item);
 
 			var paused = requestPause.Any(rp => rp.IsTraitEnabled() && rp.PauseUnitProduction && rp is not IBotItemAwareUnitCap);
-			// The bank NET of what every queued item still owes (earlier passes included), so a start never builds up an unpaid remainder
-			// against the reserve gates (review H1).
-			var bank = SpendCommitmentsCA.Available(playerResources.GetCashAndResources(), UnpaidQueuedCost());
 			foreach (var category in Info.UpgradeServiceQueues)
 			{
 				foreach (var queue in AIUtils.FindQueues(player, category))
@@ -880,13 +876,12 @@ namespace OpenRA.Mods.CA.Traits
 							infos.Add(item);
 						}
 
-						var index = UpgradeServiceCA.Choose(candidates, inProduction, bank, paused, (int)player.PlayerActor.ActorID);
+						var index = UpgradeServiceCA.Choose(candidates, inProduction, paused, (int)player.PlayerActor.ActorID);
 						if (index < 0)
 							break; // nothing startable now (all researched, next tier locked, unaffordable); looked at again on the next visit
 
 						var item2 = infos[index];
 						inProduction.Add(item2.Name);
-						bank -= Math.Max(0, candidates[index].Cost);
 						SetUnitInterval(item2.Name);
 						bot.QueueOrder(Order.StartProduction(queue.Actor, item2.Name, 1));
 						NotifyStarted(item2.Name, queue.Info.Type);
