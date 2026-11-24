@@ -186,21 +186,26 @@ namespace OpenRA.Mods.CA.Traits
 		internal bool TeamLeadGoOn(SquadCA s, Actor leader)
 		{
 			var seat = TeamLeadGoOnPlayer();
-			var pick = seat != null ? FindClosestEnemy(leader.Location, SquadValueOf(s), seat, s) : null;
-			if (pick == null && seat != null && FoggedScans && FindFrozenEnemyTarget(leader.CenterPosition, -1, s, seat) is { } frozenSeat)
+			// The target that froze this blob (a cliff, water or wall between) is skipped for a while, so the retarget really picks another one.
+			var skip = s.TeamSkipActor != 0 && World.WorldTick < s.TeamSkipUntil ? s.TeamSkipActor : 0u;
+			var pick = skip != 0
+				? TeamLeadNearestEnemyExcept(leader, seat, skip) ?? (seat != null ? TeamLeadNearestEnemyExcept(leader, null, skip) : null)
+				: seat != null ? FindClosestEnemy(leader.Location, SquadValueOf(s), seat, s) : null;
+			if (pick == null && seat != null && FoggedScans && FindFrozenEnemyTarget(leader.CenterPosition, -1, s, seat) is { } frozenSeat && frozenSeat.ID != skip)
 			{
 				s.Target = Target.FromFrozenActor(frozenSeat);
 				return true;
 			}
 
-			pick ??= FindClosestEnemy(leader, s);
+			if (skip == 0)
+				pick ??= FindClosestEnemy(leader, s);
 			if (pick != null)
 			{
 				s.TargetActor = pick;
 				return true;
 			}
 
-			if (seat == null && FoggedScans && FindFrozenEnemyTarget(leader.CenterPosition, -1, s) is { } frozen)
+			if (seat == null && FoggedScans && FindFrozenEnemyTarget(leader.CenterPosition, -1, s) is { } frozen && frozen.ID != skip)
 			{
 				s.Target = Target.FromFrozenActor(frozen);
 				return true;
@@ -209,14 +214,34 @@ namespace OpenRA.Mods.CA.Traits
 			return false;
 		}
 
-		// A pushed blob that stands within the scan radius of its valid target is sieging it (it does not move): the attack state stuck rule leaves it alone.
-		internal bool TeamLeadSieging(SquadCA s)
+		// The nearest visible preferred enemy (of <seat>, or any when null) other than <skipId>: used only after a pushed blob froze on a target, so a full actor scan is rare.
+		Actor TeamLeadNearestEnemyExcept(Actor leader, Player seat, uint skipId) =>
+			World.Actors.Where(a => a.ActorID != skipId && (seat == null || a.Owner == seat) && IsPreferredEnemyUnit(a) && IsNotHiddenUnit(a)).ClosestToIgnoringPath(leader.CenterPosition);
+
+		// The stuck rule fired for a squad: a pushed blob skips the target it froze on and takes the next enemy (TeamLeadGoOn), instead of going idle with nothing changed.
+		internal bool TeamLeadStuckRetarget(SquadCA s, Actor leader)
+		{
+			if (!TeamLeadKeepsGoing(s))
+				return false;
+
+			if (s.TargetActor != null)
+			{
+				s.TeamSkipActor = s.TargetActor.ActorID;
+				s.TeamSkipUntil = World.WorldTick + Info.TeamLeadSkipTicks;
+			}
+
+			return TeamLeadGoOn(s, leader);
+		}
+
+		// A pushed blob that stands within the scan radius of its valid target is sieging it (it does not move): the attack state stuck rule leaves it alone for at most
+		// TeamLeadSiegeMaxTicks without a move (nobody may be able to fire at it); then TeamLeadStuckRetarget picks another target.
+		internal bool TeamLeadSieging(SquadCA s, int stuckTicks)
 		{
 			if (!s.IsValid || s.TeamPushSeq <= 0 || !s.IsTargetValid || !TeamLeadKeepsGoing(s))
 				return false;
 
 			var scan = (long)WDist.FromCells(Info.AttackScanRadius).Length;
-			return TeamLeadCA.SiegeHolds(true, true, (s.Units[0].Actor.CenterPosition - s.Target.CenterPosition).HorizontalLengthSquared, scan * scan);
+			return TeamLeadCA.SiegeHolds(true, true, (s.Units[0].Actor.CenterPosition - s.Target.CenterPosition).HorizontalLengthSquared, scan * scan, stuckTicks, Info.TeamLeadSiegeMaxTicks);
 		}
 
 		// tl_pincer_double: a pincer that is due to push with less than twice the WAVE-MIN bars gathered collapses into the single blob (each prong must meet WAVE-MIN).

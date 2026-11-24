@@ -288,7 +288,9 @@ namespace OpenRA.Mods.CA.Traits
 		public static bool RepublishHeld(int now, int cancelTick, int holdTicks) => cancelTick >= 0 && now - cancelTick < Math.Max(0, holdTicks);
 
 		/// <summary>TEAM-GATHER-02 c2 gt_bounded_retarget: a squad of a pushed order, or one at WAVE-MIN size or more, keeps going after its target dies (the next enemy of the focus seat) instead of standing down.</summary>
-		public static bool KeepsGoing(bool pushedOrder, int squadUnits, int waveMinUnits) => pushedOrder || (waveMinUnits > 0 && squadUnits >= waveMinUnits);
+		// c4: a pushed remnant below half of WAVE-MIN merges back and re-joins instead of attacking on.
+		public static bool KeepsGoing(bool pushedOrder, int squadUnits, int waveMinUnits) =>
+			(pushedOrder && (waveMinUnits <= 0 || 2 * squadUnits >= waveMinUnits)) || (waveMinUnits > 0 && squadUnits >= waveMinUnits);
 
 		/// <summary>TEAM-GATHER-02 c2 tl_issue_floor: a leader squad issues an order when it reaches the WAVE-MIN bars itself, or when the team joinable army does.</summary>
 		public static bool LeaderMayIssue(int squadUnits, long squadValue, int teamUnits, long teamValue, int waveMinUnits, long waveMinValue) =>
@@ -298,7 +300,12 @@ namespace OpenRA.Mods.CA.Traits
 		public static bool PincerGathered(int units, long value, int waveMinUnits, long waveMinValue) => units >= 2 * waveMinUnits && value >= 2 * waveMinValue;
 
 		/// <summary>TEAM-GATHER-02 c3 gt_bounded_retarget: a pushed blob that stands within the scan radius of a valid target is sieging it: the stuck rule (no move for 100 ticks) does not drop it to idle.</summary>
-		public static bool SiegeHolds(bool pushedAndKeepsGoing, bool targetValid, long distanceSquared, long scanRadiusSquared) => pushedAndKeepsGoing && targetValid && distanceSquared <= scanRadiusSquared;
+		/// <remarks>c4: only for <paramref name="maxTicks"/> ticks without a move (nobody may be able to fire at it: cliff, water, wall); after that the blob retargets.</remarks>
+		public static bool SiegeHolds(bool pushedAndKeepsGoing, bool targetValid, long distanceSquared, long scanRadiusSquared, int stuckTicks, int maxTicks) =>
+			pushedAndKeepsGoing && targetValid && distanceSquared <= scanRadiusSquared && stuckTicks <= maxTicks;
+
+		/// <summary>TEAM-GATHER-02 c4: the target that froze a pushed blob is skipped until <paramref name="skipUntil"/>.</summary>
+		public static bool SkipActive(uint skipId, int skipUntil, int now, uint candidateId) => skipId != 0 && now < skipUntil && candidateId == skipId;
 
 		/// <summary>TEAM-GATHER-02 c3 tl_rally_mid: the army staging cell counts for the rally only close to the mid point.</summary>
 		public static bool StagingNearMid(WPos mid, WPos staging, int cells) => (staging - mid).HorizontalLengthSquared <= (long)Math.Max(0, cells) * CellUnits * Math.Max(0, cells) * CellUnits;

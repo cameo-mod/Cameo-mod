@@ -39,7 +39,9 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void APushedBlobKeepsGoingAfterItsAreaIsClearedInsteadOfStandingDown()
 		{
-			Assert.That(TeamLeadCA.KeepsGoing(true, 3, 8), Is.True, "a squad of a pushed order keeps going whatever its size");
+			Assert.That(TeamLeadCA.KeepsGoing(true, 4, 8), Is.True, "a pushed squad with at least half of WAVE-MIN keeps going");
+			Assert.That(TeamLeadCA.KeepsGoing(true, 3, 8), Is.False, "a pushed remnant below half of WAVE-MIN merges back and re-joins");
+			Assert.That(TeamLeadCA.KeepsGoing(true, 1, 0), Is.True, "WAVE-MIN off: a pushed squad keeps going whatever its size");
 			Assert.That(TeamLeadCA.KeepsGoing(false, 8, 8), Is.True, "a squad at WAVE-MIN size keeps going");
 			Assert.That(TeamLeadCA.KeepsGoing(false, 7, 8), Is.False, "a small unpushed squad stays bounded");
 			Assert.That(TeamLeadCA.KeepsGoing(false, 40, 0), Is.False, "WAVE-MIN off: only the pushed order exempts");
@@ -53,7 +55,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(wiring, Does.Contain("TeamLeadCA.KeepsGoing(s.TeamPushSeq > 0, s.Units.Count, WaveMinActive ? WaveMinBars().Units : 0)"));
 			Assert.That(wiring, Does.Contain("squad.TeamPushSeq = order.Seq;"), "set when the squad is pushed");
 			Assert.That(wiring, Does.Contain("s.TeamPushSeq = 0;"), "cleared when it joins the next order");
-			Assert.That(wiring, Does.Contain("var pick = seat != null ? FindClosestEnemy(leader.Location, SquadValueOf(s), seat, s) : null;"), "the focus seat first");
+			Assert.That(wiring, Does.Contain(": seat != null ? FindClosestEnemy(leader.Location, SquadValueOf(s), seat, s) : null;"), "the focus seat first");
 			Assert.That(wiring, Does.Contain("pick ??= FindClosestEnemy(leader, s);"), "then the old nearest pick");
 			Assert.That(wiring, Does.Contain("var focus = TeamLeadFocusPlayer();\n\t\t\tif (focus != null)\n\t\t\t\treturn focus;"));
 			Assert.That(RepoFile(Bots + "Squads/SquadCA.cs"), Does.Contain("public int TeamPushSeq;"));
@@ -127,13 +129,20 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			// The stuck rule (no move for 100 ticks) must not drop a pushed blob that stands at its target shooting it.
 			var scan = 12L * 1024;
-			Assert.That(TeamLeadCA.SiegeHolds(true, true, 8L * 1024 * 8 * 1024, scan * scan), Is.True, "pushed, valid target, 8 cells away: sieging");
-			Assert.That(TeamLeadCA.SiegeHolds(true, true, 30L * 1024 * 30 * 1024, scan * scan), Is.False, "30 cells away: really stuck, the old rule applies");
-			Assert.That(TeamLeadCA.SiegeHolds(true, false, 0, scan * scan), Is.False, "no valid target");
-			Assert.That(TeamLeadCA.SiegeHolds(false, true, 0, scan * scan), Is.False, "not a pushed blob");
+			Assert.That(TeamLeadCA.SiegeHolds(true, true, 8L * 1024 * 8 * 1024, scan * scan, 120, 300), Is.True, "pushed, valid target, 8 cells away: sieging");
+			Assert.That(TeamLeadCA.SiegeHolds(true, true, 8L * 1024 * 8 * 1024, scan * scan, 300, 300), Is.True, "still inside the cap");
+			Assert.That(TeamLeadCA.SiegeHolds(true, true, 8L * 1024 * 8 * 1024, scan * scan, 301, 300), Is.False, "an unreachable target within range: after 300 ticks without a move the blob retargets");
+			Assert.That(TeamLeadCA.SkipActive(77, 5000, 4000, 77), Is.True, "the target that froze the blob is skipped");
+			Assert.That(TeamLeadCA.SkipActive(77, 5000, 5000, 77), Is.False, "until the skip runs out");
+			Assert.That(TeamLeadCA.SkipActive(77, 5000, 4000, 78), Is.False, "other targets are fine");
+			Assert.That(TeamLeadCA.SkipActive(0, 5000, 4000, 0), Is.False, "no skip");
+			Assert.That(TeamLeadCA.SiegeHolds(true, true, 30L * 1024 * 30 * 1024, scan * scan, 120, 300), Is.False, "30 cells away: really stuck, the old rule applies");
+			Assert.That(TeamLeadCA.SiegeHolds(true, false, 0, scan * scan, 120, 300), Is.False, "no valid target");
+			Assert.That(TeamLeadCA.SiegeHolds(false, true, 0, scan * scan, 120, 300), Is.False, "not a pushed blob");
 
 			var states = RepoFile(Bots + "Squads/States/GroundStatesCA.cs");
-			Assert.That(states, Does.Contain("+ (owner.SquadManager.Info.UseUpstreamStateTweaks ? 100 : 63) // CA F2p2 (9a68fea15)\n\t\t\t\t&& !owner.SquadManager.TeamLeadSieging(owner))"), "the stuck rule leaves a sieging blob alone");
+			Assert.That(states, Does.Contain("+ (owner.SquadManager.Info.UseUpstreamStateTweaks ? 100 : 63) // CA F2p2 (9a68fea15)\n\t\t\t\t&& !owner.SquadManager.TeamLeadSieging(owner, owner.World.WorldTick - lastUpdatedTick))"), "the stuck rule leaves a sieging blob alone, for a while");
+			Assert.That(states, Does.Contain("if (owner.SquadManager.TeamLeadStuckRetarget(owner, leader))\n\t\t\t\t{\n\t\t\t\t\tlastUpdatedTick = owner.World.WorldTick;"), "after the cap the blob skips the frozen target and takes the next one");
 
 			// Nothing known at all: idle, never Flee, in both states.
 			var keeps = states[states.IndexOf("if (owner.SquadManager.TeamLeadKeepsGoing(owner))", StringComparison.Ordinal)..];
@@ -143,13 +152,17 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(states, Does.Not.Contain("TeamLeadGoOnTarget"));
 
 			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
-			Assert.That(wiring, Does.Contain("if (pick == null && seat != null && FoggedScans && FindFrozenEnemyTarget(leader.CenterPosition, -1, s, seat) is { } frozenSeat)"), "a remembered building of the focus seat");
-			Assert.That(wiring, Does.Contain("if (seat == null && FoggedScans && FindFrozenEnemyTarget(leader.CenterPosition, -1, s) is { } frozen)"));
+			Assert.That(wiring, Does.Contain("if (pick == null && seat != null && FoggedScans && FindFrozenEnemyTarget(leader.CenterPosition, -1, s, seat) is { } frozenSeat && frozenSeat.ID != skip)"), "a remembered building of the focus seat (not the one that froze the blob)");
+			Assert.That(wiring, Does.Contain("if (seat == null && FoggedScans && FindFrozenEnemyTarget(leader.CenterPosition, -1, s) is { } frozen && frozen.ID != skip)"));
 			Assert.That(wiring, Does.Contain("if (!s.IsValid || s.TeamPushSeq <= 0 || !s.IsTargetValid || !TeamLeadKeepsGoing(s))\n\t\t\t\treturn false;"));
 
 			// TeamLeadPrepare: a pushed squad attacks on (never joins a new order first, never dismissed); nothing known = it waits, still not dismissed.
 			Assert.That(wiring, Does.Contain("var goesOn = s.TeamPushSeq > 0 && TeamLeadKeepsGoing(s);"));
 			Assert.That(wiring, Does.Contain("if (goesOn && TeamLeadGoOn(s, s.Units[0].Actor))"));
+			Assert.That(wiring, Does.Contain("s.TeamSkipActor = s.TargetActor.ActorID;"));
+			Assert.That(wiring, Does.Contain("? TeamLeadNearestEnemyExcept(leader, seat, skip) ?? (seat != null ? TeamLeadNearestEnemyExcept(leader, null, skip) : null)"));
+			Assert.That(wiring, Does.Contain("TeamLeadCA.SiegeHolds(true, true,"));
+			Assert.That(wiring, Does.Contain("stuckTicks, Info.TeamLeadSiegeMaxTicks);"));
 			Assert.That(wiring, Does.Contain("if (order == null && teamLeadIsLeader && !goesOn)\n\t\t\t\torder = TeamLeadTryIssue(s, now);"), "no rally re-issued from a pushed squad");
 			Assert.That(wiring, Does.Contain("if (teamLeadIsLeader || goesOn)\n\t\t\t\treturn false;\n\n\t\t\tDiagnosticSquadEvent(s, \"team_hold\");"));
 		}
@@ -294,6 +307,8 @@ namespace OpenRA.Mods.Cameo.Test
 
 			Assert.That(info, Does.Contain("public readonly int TeamLeadFreshSquadTicks = 100;"));
 			Assert.That(info, Does.Contain("public readonly int TeamLeadRepublishHoldTicks = 1500;"));
+			Assert.That(info, Does.Contain("public readonly int TeamLeadSiegeMaxTicks = 300;"));
+			Assert.That(info, Does.Contain("public readonly int TeamLeadSkipTicks = 900;"));
 			Assert.That(info, Does.Contain("public readonly int TeamLeadRallyMidPercent = 35;"));
 
 			var yaml = RepoFile("mods/cameo/ai/ai.yaml");

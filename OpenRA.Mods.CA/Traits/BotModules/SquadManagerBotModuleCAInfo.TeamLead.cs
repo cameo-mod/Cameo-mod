@@ -164,6 +164,12 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("TEAM-GATHER-02 c3 tl_rally_mid: the army staging cell is used for the rally only when it lies within this many cells of the mid point; it is the leader own staging cell and must not pull the rally home.")]
 		public readonly int TeamLeadRallyMidStagingCells = 10;
 
+		[Desc("TEAM-GATHER-02 c4 gt_bounded_retarget: a pushed blob sieging its target (inside the scan radius of it) is exempt from the stuck rule for at most this many ticks without a move; after that it retargets (an unreachable target within range must not freeze it).")]
+		public readonly int TeamLeadSiegeMaxTicks = 300;
+
+		[Desc("TEAM-GATHER-02 c4 gt_bounded_retarget: ticks a target that froze a pushed blob is skipped when the squad picks its next enemy.")]
+		public readonly int TeamLeadSkipTicks = 900;
+
 		[Desc("TEAM-GATHER-02 c2 (release switch; the DEV row is tl_pincer_double). On: a pincer pushes only when the gathered blob is at least twice the WAVE-MIN units and value (each prong meets WAVE-MIN); a thinner one collapses into the single blob.")]
 		public readonly bool TeamLeadPincerDoubleEnabled = false;
 

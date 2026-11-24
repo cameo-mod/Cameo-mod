@@ -1387,10 +1387,17 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// HACK: Drop back to the idle state if we haven't moved in 2.5 seconds
 			// This works around the squad being stuck trying to attack-move to a location
 			// that they cannot path to, generating expensive pathfinding calls each tick.
-			// TEAM-GATHER-02 c3: a pushed blob sieging its target (inside the scan radius of it) does not move and is not stuck.
+			// TEAM-GATHER-02 c3/c4: a pushed blob sieging its target (inside the scan radius of it) does not move and is not stuck, for at most TeamLeadSiegeMaxTicks; then it
+			// skips that target and takes the next enemy of the focus seat.
 			if (owner.World.WorldTick > lastUpdatedTick + (owner.SquadManager.Info.UseUpstreamStateTweaks ? 100 : 63) // CA F2p2 (9a68fea15)
-				&& !owner.SquadManager.TeamLeadSieging(owner))
+				&& !owner.SquadManager.TeamLeadSieging(owner, owner.World.WorldTick - lastUpdatedTick))
 			{
+				if (owner.SquadManager.TeamLeadStuckRetarget(owner, leader))
+				{
+					lastUpdatedTick = owner.World.WorldTick;
+					return;
+				}
+
 				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), true);
 				return;
 			}
