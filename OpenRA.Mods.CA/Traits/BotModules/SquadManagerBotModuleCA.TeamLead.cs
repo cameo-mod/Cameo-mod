@@ -22,6 +22,7 @@ namespace OpenRA.Mods.CA.Traits
 	public partial class SquadManagerBotModuleCA
 	{
 		AblationLatch ablateTeamLead;
+		AblationLatch ablateJointHarass;
 		int teamLeadNextCheck;
 		string teamLeadKey;
 		TeamLeadTeam teamLeadTeam;
@@ -33,6 +34,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>The feature is in force for this bot right now: active, and the team has a leader and at least two living bots.</summary>
 		internal bool TeamLeadOn => teamLeadEngaged && TeamLeadActive;
+
+		/// <summary>The joint guerrilla/harass group is on: the team feature in force, and its own DEV row (row off = every squad picks its own target).</summary>
+		internal bool TeamLeadJointHarassOn => TeamLeadOn && !ablateJointHarass.Off(Player, AblationIds.TeamLeadJointHarass);
 
 		/// <summary>This bot is the elected leader of an engaged team.</summary>
 		internal bool TeamLeadIsLeader => TeamLeadOn && teamLeadIsLeader;
@@ -170,6 +174,13 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		bool TeamLeadPrepare(SquadCA s)
 		{
+			// Guerrilla and harass squads of every bot form one joint group with its own target, apart from the main blob.
+			if (s.IsValid && s.Type is SquadCAType.Guerrilla or SquadCAType.Harass && TeamLeadJointHarassOn)
+			{
+				TeamLeadShareHarassTarget(s);
+				return false;
+			}
+
 			// The liveness (M13) response and urgent-attack squads and the breaker squad keep their own job: they are not team waves.
 			if (!TeamLeadOn || s.Type != SquadCAType.Rush || !s.IsValid || ReferenceEquals(s, stalemateSquad) || s.M13Response
 				|| ReferenceEquals(s, m13IntentSquad) || ReferenceEquals(s, m13ResponseSquad)
@@ -194,6 +205,37 @@ namespace OpenRA.Mods.CA.Traits
 			DiagnosticSquadEvent(s, "team_hold");
 			DismissSquad(s);
 			return true;
+		}
+
+		// A quiet guerrilla/harass squad without a target takes the team's live harass target, so all of them hit the same one. With none live,
+		// its own pick becomes the group's target. A shared target this bot cannot see is left alone (the squad plays as before); it never
+		// replaces a live one, so the target does not flap between bots with different views.
+		void TeamLeadShareHarassTarget(SquadCA s)
+		{
+			var team = teamLeadTeam;
+			if (team == null || s.IsTargetValid || !AggTeamIsQuietState(s.FuzzyStateMachine?.CurrentState))
+				return;
+
+			var now = World.WorldTick;
+			if (TeamLeadCA.HarassLive(now, team.HarassTick, Info.TeamLeadHarassTicks) && team.HarassTargetId != 0)
+			{
+				var shared = World.GetActorById(team.HarassTargetId);
+				if (shared != null && !shared.IsDead && shared.IsInWorld)
+				{
+					if (IsPreferredObservedEnemyUnit(shared))
+						s.TargetActor = shared;
+					return;
+				}
+			}
+
+			var pick = FindClosestEnemy(s.Units[0].Actor, s);
+			if (pick == null)
+				return;
+
+			team.HarassTargetId = pick.ActorID;
+			team.HarassTick = now;
+			s.TargetActor = pick;
+			DiagnosticSquadEvent(s, "team_harass", reason: "target=" + pick.ActorID);
 		}
 
 		TeamLeadOrder TeamLeadTryIssue(SquadCA s, int now)

@@ -16,5 +16,8 @@ namespace OpenRA.Mods.CA.Traits
 	public static partial class AblationIds
 	{
 		public const string TeamLead = "tl_team_lead";
+
+		// The joint guerrilla/harass group (all bots of the team hit one shared harass target) has its own row; the Info switch is TeamLeadEnabled.
+		public const string TeamLeadJointHarass = "tl_joint_harass";
 	}
 }

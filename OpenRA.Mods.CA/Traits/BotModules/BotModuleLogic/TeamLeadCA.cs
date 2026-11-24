@@ -114,6 +114,9 @@ namespace OpenRA.Mods.CA.Traits
 			return arrivedValue * 100 >= committedValue * Math.Clamp(arrivePercent, 0, 100);
 		}
 
+		/// <summary>The team's joint guerrilla/harass target is still in force: published at <paramref name="since"/> (-1 = none) and not older than <paramref name="maxTicks"/>.</summary>
+		public static bool HarassLive(int now, int since, int maxTicks) => since >= 0 && now - since <= maxTicks;
+
 		/// <summary>A follower may form a wave only for an open order, and only with at least <paramref name="minUnits"/> idle units.</summary>
 		public static bool FollowerMayLaunch(bool orderOpen, int poolUnits, int minUnits) =>
 			orderOpen && poolUnits >= Math.Max(1, minUnits);
@@ -213,6 +216,10 @@ namespace OpenRA.Mods.CA.Traits
 		public int NextEvalTick;
 		public TeamLeadOrder Order;
 		int orderSeq;
+
+		/// <summary>The joint guerrilla/harass group's one target (actor id, 0 = none) and the tick it was published (-1 = never).</summary>
+		public uint HarassTargetId;
+		public int HarassTick = -1;
 
 		readonly Dictionary<string, (int Units, long Value, int Tick)> pools = new(StringComparer.Ordinal);
 

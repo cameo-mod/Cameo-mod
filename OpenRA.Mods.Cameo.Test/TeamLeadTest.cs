@@ -271,6 +271,35 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(state, Does.Contain("order.Forget(owner)"));
 		}
 
+		// --- joint guerrilla / harass group (second commit) -----------------------------------------------------------------------------
+
+		[Test]
+		public void TheJointHarassTargetLivesForTheWindowAndNeverBeforeItIsPublished()
+		{
+			Assert.That(TeamLeadCA.HarassLive(100, -1, 1500), Is.False, "never published");
+			Assert.That(TeamLeadCA.HarassLive(1600, 100, 1500), Is.True, "exactly at the end of the window");
+			Assert.That(TeamLeadCA.HarassLive(1601, 100, 1500), Is.False, "expired: the next squad without a target publishes a new one");
+
+			var team = new TeamLeadTeam();
+			Assert.That(team.HarassTargetId, Is.EqualTo(0u));
+			Assert.That(team.HarassTick, Is.EqualTo(-1));
+		}
+
+		[Test]
+		public void TheJointHarassGroupHasItsOwnRowAndSitsBehindTheTeamSwitch()
+		{
+			Assert.That(AblationIds.TeamLeadJointHarass, Is.EqualTo("tl_joint_harass"));
+			Assert.That(AblationIds.TeamLeadJointHarass, Is.Not.EqualTo(AblationIds.TeamLead));
+
+			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
+			Assert.That(wiring, Does.Contain("TeamLeadOn && !ablateJointHarass.Off(Player, AblationIds.TeamLeadJointHarass)"));
+			Assert.That(wiring, Does.Contain("s.Type is SquadCAType.Guerrilla or SquadCAType.Harass && TeamLeadJointHarassOn"));
+			Assert.That(wiring, Does.Contain("s.TargetActor = shared;"), "the squad takes the shared target and plays on as before");
+			Assert.That(wiring, Does.Not.Contain("new Order(\"AttackMove\""), "the harass group is steered by its target, not by extra orders");
+
+			Assert.That(RepoFile(Bots + "SquadManagerBotModuleCAInfo.TeamLead.cs"), Does.Contain("public readonly int TeamLeadHarassTicks = 1500;"));
+		}
+
 		[Test]
 		public void TheLiveFilesNeverLeakEnemyStateIntoTheTeamBoard()
 		{

@@ -50,6 +50,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("An order that has not pushed after this many ticks is cancelled. Range 1500-6000.")]
 		public readonly int TeamLeadOrderMaxTicks = 3000;
 
+		[Desc("The joint guerrilla/harass target of the team is kept this many ticks (or until it dies), then the next squad without a target publishes a new one. Range 600-3000.")]
+		public readonly int TeamLeadHarassTicks = 1500;
+
 		[Desc("A published idle-pool count older than this many ticks is ignored in the combined blob. Range 200-600.")]
 		public readonly int TeamLeadPoolMaxAgeTicks = 300;
 	}
