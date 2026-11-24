@@ -149,6 +149,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("TEAM-GATHER-02 (release switch; the DEV row is tl_gather_range). On: a gathering squad stops to fight an enemy inside its own maximum weapon range (at least TeamLeadGatherFightCells, at most AttackScanRadius) instead of the fixed TeamLeadGatherFightCells.")]
 		public readonly bool TeamLeadGatherRangeEnabled = false;
 
+		[Desc("CONSOLIDATE-02 D1 (release switch; the DEV row is tl_bar_arrived_only). On: the push bar is the WAVE-MIN units and value on the committed blob that has ARRIVED at the rally; the half-of-the-team-idle-army term (BlobLaunch01CA.MinUnits) is dropped, so units still at home never raise the bar and the all-in is not held by it. Off = the bar also needs half of the team idle army arrived.")]
+		public readonly bool TeamLeadBarArrivedOnlyEnabled = false;
+
 		[Desc("TEAM-GATHER-02 (release switch; the DEV row is tl_hunt_via_order). On: from the late start a team Rush squad does not hunt its own grid cell; with nothing known the leader's order target is one hunt cell for the whole blob.")]
 		public readonly bool TeamLeadHuntViaOrderEnabled = false;
 

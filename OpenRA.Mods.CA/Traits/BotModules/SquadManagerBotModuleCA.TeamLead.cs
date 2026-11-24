@@ -45,6 +45,7 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateIssueFloor;
 		AblationLatch ablateRallyMid;
 		AblationLatch ablatePincerDouble;
+		AblationLatch ablateBarArrivedOnly;
 		int teamLeadNextCheck;
 		string teamLeadKey;
 		TeamLeadTeam teamLeadTeam;
@@ -105,6 +106,9 @@ namespace OpenRA.Mods.CA.Traits
 		bool TeamLeadRallyMidOn => TeamLeadOn && Info.TeamLeadRallyMidEnabled && !ablateRallyMid.Off(Player, AblationIds.TeamLeadRallyMid);
 
 		bool TeamLeadPincerDoubleOn => TeamLeadOn && Info.TeamLeadPincerDoubleEnabled && !ablatePincerDouble.Off(Player, AblationIds.TeamLeadPincerDouble);
+
+		// CONSOLIDATE-02 D1: the push bar counts the arrived blob only (WAVE-MIN), not half of the team idle army; own switch + row.
+		bool TeamLeadBarArrivedOnlyOn => TeamLeadOn && Info.TeamLeadBarArrivedOnlyEnabled && !ablateBarArrivedOnly.Off(Player, AblationIds.TeamLeadBarArrivedOnly);
 
 		// ---- TEAM-GATHER-02 ----
 
@@ -1051,8 +1055,9 @@ namespace OpenRA.Mods.CA.Traits
 			var (minUnits, minValue) = WaveMinActive ? WaveMinBars() : (0, 0);
 
 			// The team's idle army = what waits in the blob plus what the order already holds (gathered or on the way); half of it is the blob launch minimum's second term.
+			// CONSOLIDATE-02 D1 (tl_bar_arrived_only): that term is dropped, the bar is WAVE-MIN on the arrived blob (the idle count stays for the hold record).
 			var teamIdle = (teamLeadTeam?.Pool(now, Info.TeamLeadPoolMaxAgeTicks).Units ?? 0) + order.CommittedTotals().Units;
-			var needUnits = BlobLaunch01CA.MinUnits(minUnits, teamIdle);
+			var needUnits = TeamLeadBarArrivedOnlyOn ? minUnits : BlobLaunch01CA.MinUnits(minUnits, teamIdle);
 			if (TeamLeadCA.PushBarPassed(units, value, Info.TeamLeadJoinMinUnits, needUnits, minValue))
 				return false;
 
