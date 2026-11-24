@@ -503,6 +503,14 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>PROD-BUSY-03b: idle base units at or over the limit (TEAM-LEAD forced-push trigger).</summary>
 		public bool IdleAtLimit => idleUnitCount >= IdleUnitsLimit;
+
+		// INFANTRY-REJECT-LOG-01 (DEV only): why the infantry queues end a pass idle. Compiled in only with CAMEO_DEV_LOGGING (official builds: constant false, nothing fed).
+		readonly InfantryRejectLogCA infantryRejectLog = new();
+#if CAMEO_DEV_LOGGING
+		bool InfantryRejectLogOn => world.WorldActor.TraitOrDefault<CameoLogHub>()?.Sink.Enabled == true;
+#else
+		bool InfantryRejectLogOn => false;
+#endif
 		AblationLatch ablateAllFactories, ablateAllCategories, ablateThroughPauseResearch, ablateThroughPauseUpgrade, ablateThroughPauseAddon;
 		bool AllFactoriesOn => switchesActive && Info.ServeAllFactories && !ablateAllFactories.Off(player, AblationIds.ProdBusyAllFactories);
 		bool AllCategoriesOn => switchesActive && Info.ServeAllCategories && !ablateAllCategories.Off(player, AblationIds.ProdBusyAllCategories);
@@ -1163,10 +1171,14 @@ namespace OpenRA.Mods.CA.Traits
 			if (armedInfantryFloor > 0)
 				CapturerArmyCounts(out _, out armedInfantryAlive);
 
+			// INFANTRY-REJECT-LOG-01: null unless the DEV sink is on; then only the infantry queues are counted.
+			var rejectLog = InfantryRejectLogOn ? infantryRejectLog : null;
+
 			for (var k = 0; k < queues.Count && offers > 0; k++)
 			{
 				var index = (start + k) % queues.Count;
 				var queue = queues[index];
+				var logThis = rejectLog != null && Array.IndexOf(Info.IdleQueueFloorQueues, queue.Info.Type) >= 0;
 
 				// The cursor tracks every examined producer — successful or not — but never
 				// a producer the budget stopped us from reaching; that one stays in rotation.
@@ -1234,10 +1246,16 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						unit = ChooseIdleFloorUnit(queue, shares, skip);
 						fromIdleFloor = unit != null;
+						if (logThis)
+							rejectLog.Floor(queue.Info.Type, fromIdleFloor);
 					}
 
 					if (unit == null)
 					{
+						// INFANTRY-REJECT-LOG-01: an empty pick is counted only when no candidate was refused before it (those are counted as they were refused).
+						if (logThis && skip.Count == 0)
+							rejectLog.Reject(queue.Info.Type, shares != null && shares.Count > 0 ? "share_held" : "no_candidate");
+
 						if (skip.Count == 0 && activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
 							RevertToBaselineComposition();
 
@@ -1256,8 +1274,11 @@ namespace OpenRA.Mods.CA.Traits
 								observer.UnitProductionSkipped(player, world.WorldTick, name, "combat_floor");
 					}
 
-					if (!ShouldBuild(name, baselineTried || fromIdleFloor, queue.Info.Type))
+					var refusedBy = ShouldBuildReject(name, baselineTried || fromIdleFloor, queue.Info.Type);
+					if (refusedBy != null)
 					{
+						if (logThis)
+							rejectLog.Reject(queue.Info.Type, refusedBy);
 						Reject();
 						continue;
 					}
@@ -1267,12 +1288,16 @@ namespace OpenRA.Mods.CA.Traits
 					// spends the headroom the census cannot see.
 					if (!LimitHeadroomAdmits(batch, name))
 					{
+						if (logThis)
+							rejectLog.Reject(queue.Info.Type, "headroom");
 						Reject();
 						continue;
 					}
 
 					if (!CapturerCapAdmitsWithPending(unit, batch))
 					{
+						if (logThis)
+							rejectLog.Reject(queue.Info.Type, "capturer");
 						Reject();
 						continue;
 					}
@@ -1286,6 +1311,8 @@ namespace OpenRA.Mods.CA.Traits
 						Info.MaintainAirSuperiority, batch);
 					if (!CanBuildMoreOfAircraft(unit, aircraftPending))
 					{
+						if (logThis)
+							rejectLog.Reject(queue.Info.Type, "aircraft");
 						Reject();
 						continue;
 					}
@@ -1296,6 +1323,8 @@ namespace OpenRA.Mods.CA.Traits
 					if (!batch.Affords(cost) || !ReserveAdmits(batch, cost)
 						|| depthQueue && held > 0 && !QueueDepthCA.CashAdmits(batch.BankLeft, unpaidQueued, cost))
 					{
+						if (logThis)
+							rejectLog.Reject(queue.Info.Type, "afford_cash");
 						Reject();
 						continue;
 					}
@@ -1320,6 +1349,14 @@ namespace OpenRA.Mods.CA.Traits
 						batch.PendingCapturers++;
 					if (activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
 						AddToActiveCompositionProducedValue(unit);
+				}
+
+				// INFANTRY-REJECT-LOG-01 (DEV only): this queue's pass ended; idle = nothing queued or ordered in it. One aggregated row per period.
+				if (logThis)
+				{
+					rejectLog.Pass(queue.Info.Type, !queue.AllQueued().Any() && batch.PendingOf(queue) == 0);
+					if (rejectLog.TryFlush(queue.Info.Type, world.WorldTick, out var line))
+						world.WorldActor.TraitOrDefault<CameoLogHub>()?.Sink.ContextRow(Array.IndexOf(world.Players, player), "infantry_reject.csv", line, world.WorldTick);
 				}
 			}
 		}
@@ -1747,29 +1784,34 @@ namespace OpenRA.Mods.CA.Traits
 		void IBotMobileSpendReserve.FlushBuildingSpendOwners(IReadOnlyCollection<object> liveOwners) =>
 			mobileReserve.FlushUnseenBuildings(liveOwners);
 
-		bool ShouldBuild(string name, bool ignoreUnitsToBuild, string queueCategory = null)
+		bool ShouldBuild(string name, bool ignoreUnitsToBuild, string queueCategory = null) =>
+			ShouldBuildReject(name, ignoreUnitsToBuild, queueCategory) == null;
+
+		// INFANTRY-REJECT-LOG-01: the first gate that refuses the candidate, or null when it may be built. The same gates in the same order as
+		// ShouldBuild always ran; the reason names are what the DEV reject log counts.
+		string ShouldBuildReject(string name, bool ignoreUnitsToBuild, string queueCategory)
 		{
 			if (cappedOut.Length > 0 && CappedOut(name))
-				return false;
+				return "cappedout";
 
 			var unitsToBuildShares = GetUnitsToBuildForCategory(queueCategory);
 			if (!ignoreUnitsToBuild && unitsToBuildShares != null && !unitsToBuildShares.ContainsKey(name))
-				return false;
+				return "not_in_shares";
 
 			if (Info.UnitDelays != null &&
 				Info.UnitDelays.ContainsKey(name) &&
 				Info.UnitDelays[name] * unitDelayModifier / 100 > world.WorldTick)
-				return false;
+				return "delay";
 
 			if (Info.UnitIntervals != null &&
 				Info.UnitIntervals.ContainsKey(name) &&
 				activeUnitIntervals.ContainsKey(name))
-				return false;
+				return "interval";
 
 			if (Info.UnitLimits != null &&
 				Info.UnitLimits.ContainsKey(name) &&
 				world.Actors.Count(a => !a.IsDead && a.Owner == player && a.Info.Name == name) >= Info.UnitLimits[name])
-				return false;
+				return "limit";
 
 			// S1/F1: the capturer ratio — counts only while the cap is on AND the candidate
 			// IS a capturer; the off cap (classic: CapturerLimitPct reads 0) short-circuits
@@ -1782,10 +1824,10 @@ namespace OpenRA.Mods.CA.Traits
 				if (!CapturerCapAdmits(CapturerLimitPct, capturerUnits, armedInfantryUnits, Info.CapturerMinimumUnits,
 						Info.CapturerAllowanceMax, CapturerAllowance(), QueuedCapturers(),
 						TicksSinceLastCapturerCompletion(), EngineerCompletionInterval))
-					return false;
+					return "capturer";
 			}
 
-			return true;
+			return null;
 		}
 
 		ActorInfo ChooseRandomUnitToBuild(ProductionQueue queue, bool excludeLimited,

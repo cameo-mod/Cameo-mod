@@ -50,7 +50,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var pick = s.IndexOf("unit == null && held == 0 && IdleQueueFloorOn", StringComparison.Ordinal);
 			var normal = s.IndexOf(": ChooseUnitToBuild(queue, excludeLimited, saturated, shares, skip));", StringComparison.Ordinal);
 			var nullBreak = s.IndexOf("RevertToBaselineComposition();", pick, StringComparison.Ordinal);
-			var gate = s.IndexOf("ShouldBuild(name, baselineTried || fromIdleFloor, queue.Info.Type)", StringComparison.Ordinal);
+			var gate = s.IndexOf("ShouldBuildReject(name, baselineTried || fromIdleFloor, queue.Info.Type)", StringComparison.Ordinal);
 			Assert.That(pick, Is.GreaterThan(normal));
 			Assert.That(pick, Is.LessThan(nullBreak), "the floor runs before the empty-pick break");
 			Assert.That(gate, Is.GreaterThan(pick), "delays, intervals, limits, caps and the afford gates still run on the floor pick");
