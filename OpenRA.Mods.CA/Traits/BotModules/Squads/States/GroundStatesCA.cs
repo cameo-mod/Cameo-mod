@@ -2134,7 +2134,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				structuresGathered = true;
 			}
 
-			var pick = ArtyMicroCA.PickStructure(anchor, structures);
+			// c4: a remembered-only structure in range has no live target to fire at, so it is skipped and the next known structure is taken.
+			var pick = ArtyMicroCA.PickStructure(anchor, structures, i => structureActors[i] != null || (structures[i].Pos - pos).HorizontalLengthSquared > (long)rangeLen * rangeLen);
 			if (pick < 0)
 				return false;
 
@@ -2143,7 +2144,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			{
 				var actor = structureActors[pick];
 				if (actor == null)
-					return false; // remembered only and in range: no live target to fire at; the caller falls back rather than waiting for vision that may never come
+					return false; // unreachable after the c4 filter above; kept as a guard
 
 				if (mem.LastAttackId == actor.ActorID && BusyAttack(unit))
 					return true; // already firing at it

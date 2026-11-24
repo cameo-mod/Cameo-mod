@@ -91,9 +91,28 @@ namespace OpenRA.Mods.Cameo.Test
 			var states = Source("mods/CA/Traits/BotModules/Squads/States/GroundStatesCA.cs");
 			Assert.That(states, Does.Contain("PickTarget(pos, rangeLen, candidates, manager.ArtyStructFirstActive)"));
 			Assert.That(states, Does.Contain("if (manager.ArtyStructFirstActive && (targetIsUnit || !owner.Target.IsValidFor(unit))"));
-			Assert.That(states, Does.Contain("ArtyMicroCA.PickStructure(anchor, structures)"));
+			Assert.That(states, Does.Contain("ArtyMicroCA.PickStructure(anchor, structures, i => structureActors[i] != null"));
 			Assert.That(states, Does.Contain("ArtyMicroCA.PlanApproach(pos, targetPos, rangeLen, rangeMargin, assaultDefences, defenceMargin)"));
 			Assert.That(states, Does.Contain("new Order(\"Attack\", unit, Target.FromActor(actor), false)"));
+		}
+
+		[Test]
+		public void AStructureThatIsNotUsableIsSkippedForTheNextOne()
+		{
+			var list = new[]
+			{
+				new ArtyCandidate(0, new WPos(1000, 0, 0), ArtyKind.Defence, false),
+				new ArtyCandidate(5, new WPos(2000, 0, 0), ArtyKind.Structure, false),
+			};
+			Assert.That(ArtyMicroCA.PickStructure(Origin, list, i => i != 0), Is.EqualTo(1), "a remembered-only defence in range is skipped");
+			Assert.That(ArtyMicroCA.PickStructure(Origin, list, i => false), Is.EqualTo(-1));
+		}
+
+		[Test]
+		public void TheRememberedOnlyStructureInRangeIsSkippedNotWaitedOn()
+		{
+			var states = Source("mods/CA/Traits/BotModules/Squads/States/GroundStatesCA.cs");
+			Assert.That(states, Does.Contain("structureActors[i] != null || (structures[i].Pos - pos).HorizontalLengthSquared > (long)rangeLen * rangeLen"));
 		}
 
 		[Test]

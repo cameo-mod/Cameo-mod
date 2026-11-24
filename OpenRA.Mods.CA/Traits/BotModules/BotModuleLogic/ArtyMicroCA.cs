@@ -128,12 +128,15 @@ namespace OpenRA.Mods.CA.Traits
 		/// ARTY-TARGET-01 (c2): the structure an artillery squad assaults when nothing structural is in range - the nearest defence to the
 		/// assault point, else the nearest other structure. Units are never picked. Index into <paramref name="candidates"/>, or -1.
 		/// </summary>
-		public static int PickStructure(WPos assault, IReadOnlyList<ArtyCandidate> candidates)
+		public static int PickStructure(WPos assault, IReadOnlyList<ArtyCandidate> candidates) => PickStructure(assault, candidates, _ => true);
+
+		/// <summary>ARTY-TARGET-01 (c4): as above, but only entries for which <paramref name="usable"/> is true may be picked.</summary>
+		public static int PickStructure(WPos assault, IReadOnlyList<ArtyCandidate> candidates, Func<int, bool> usable)
 		{
 			var best = -1;
 			for (var i = 0; i < candidates.Count; i++)
 			{
-				if (candidates[i].Kind != ArtyKind.Unit)
+				if (candidates[i].Kind != ArtyKind.Unit && usable(i))
 					best = Closer(assault, candidates, best, i, true);
 			}
 
