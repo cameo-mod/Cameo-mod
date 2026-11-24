@@ -71,6 +71,17 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void UnreachableIdleUnitsNeverHoldTheWave()
+		{
+			// Sonnet LOW 11-24: 40 idle, 15 reachable on a split map. Unclamped MinUnits = 20 > 15 held the breaker forever.
+			Assert.That(BlobLaunch01CA.GateHolds(15, 12, 40), Is.True, "unclamped: holds");
+			Assert.That(BlobLaunch01CA.ReachableGateHolds(15, 12, 40, 15), Is.False, "clamped to the reachable roster: launches");
+			Assert.That(BlobLaunch01CA.ReachableGateHolds(11, 12, 40, 11), Is.True, "WAVE-MIN still holds");
+			Assert.That(BlobLaunch01CA.ReachableGateHolds(14, 0, 40, 40), Is.True, "reachable pool 40: half = 20");
+			Assert.That(BlobLaunch01CA.ReachableGateHolds(5, 0, 0, -3), Is.False);
+		}
+
+		[Test]
 		public void BreakerAndLivenessWavesAreGatedUnderTheirOwnRow()
 		{
 			var yaml = Source("packaging/ai.yaml");

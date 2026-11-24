@@ -43,10 +43,11 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateBlobAttackGate;
 
 		/// <summary>BLOB-LAUNCH-01 attack gate (row bl_attack_gate): the per-bot attack launches outside CreateAttackForce (stalemate breaker
-		/// wave, M13 liveness wave) hold below BlobLaunch01CA.MinUnits(WAVE-MIN units, own idle pool).</summary>
+		/// wave, M13 liveness wave) hold below BlobLaunch01CA.MinUnits(WAVE-MIN units, own idle pool). The wave is the path-checked
+		/// (reachable) roster, so the idle-pool term is clamped to it: unreachable idle units (islands, naval) never hold the wave forever.</summary>
 		bool BlobAttackGateHolds(int waveUnits) =>
 			Info.BlobAttackGate && !ablateBlobAttackGate.Off(Player, AblationIds.BlobAttackGate)
-				&& BlobLaunch01CA.GateHolds(waveUnits, WaveMinActive ? WaveMinBars().Units : 0, unitsHangingAroundTheBase.Count);
+				&& BlobLaunch01CA.ReachableGateHolds(waveUnits, WaveMinActive ? WaveMinBars().Units : 0, unitsHangingAroundTheBase.Count, waveUnits);
 
 		/// <summary>BLOB-LAUNCH-01: the leader's own CreateAttackForce forms no wave (see BlobLaunch01CA.LeaderHolds; fallback included).</summary>
 		bool BlobLeaderHolds(bool teamLaunch)

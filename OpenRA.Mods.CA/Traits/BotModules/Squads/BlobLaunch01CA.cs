@@ -22,6 +22,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		/// <summary>Attack gate: a wave of waveUnits holds below MinUnits(waveMinUnits, idleUnits).</summary>
 		public static bool GateHolds(int waveUnits, int waveMinUnits, int idleUnits) => waveUnits < MinUnits(waveMinUnits, idleUnits);
 
+		/// <summary>The attack gate with the idle-pool term clamped to the reachable units, so unreachable idle units never hold a wave.</summary>
+		public static bool ReachableGateHolds(int waveUnits, int waveMinUnits, int idleUnits, int reachableUnits) =>
+			GateHolds(waveUnits, waveMinUnits, Math.Min(Math.Max(0, idleUnits), Math.Max(0, reachableUnits)));
+
 		/// <summary>Whether the team leader's own attack-force check forms no wave: switch on, it is the engaged leader, cadence is on,
 		/// and no team order is open (an open order is joined, not launched alone). Safety fallback (Opus 11-24): after fallbackTicks
 		/// without any team order, with the team pool at the blob minimum, the leader may launch (its squad then issues the team order).</summary>
