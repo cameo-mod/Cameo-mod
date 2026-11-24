@@ -58,6 +58,10 @@ namespace OpenRA.Mods.Cameo.Test
 			}).ToArray();
 			Assert.That(order, Is.EqualTo(new[] { 3, 2, 4, 0 }), "never-assigned nearest first; visible cells never");
 
+			// Frontrunner FIX: a cell marked after a failed reachability check (tick 900) goes behind every never-tried cell.
+			var afterFail = Stalemate01CA.HuntOrder(new[] { (false, 900, 1L), (false, -1, 50L), (false, -1, 60L) }).ToArray();
+			Assert.That(afterFail, Is.EqualTo(new[] { 1, 2, 0 }));
+
 			Assert.That(Stalemate01CA.Hunts(SquadCAType.Rush), Is.True);
 			Assert.That(Stalemate01CA.Hunts(SquadCAType.Guerrilla), Is.True);
 			Assert.That(Stalemate01CA.Hunts(SquadCAType.Protection), Is.False, "base defenders never leave home to hunt");
@@ -94,6 +98,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(logic, Does.Contain("!ablateFinishMode.Off(Player, AblationIds.StalemateFinishMode)"));
 			Assert.That(logic, Does.Contain("Player.Shroud.IsVisible(cell)"), "fog-honest: only the bot's own vision");
 			Assert.That(logic, Does.Contain("huntRetryAt = World.WorldTick + Stalemate01CA.HuntRetryTicks;"), "a failed pick cools down");
+			Assert.That(logic.Split("huntAssigned[cell] = World.WorldTick;").Length - 1, Is.EqualTo(2), "a picked and an unreachable cell are both marked");
 
 			var squad = Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCA.cs");
 			Assert.That(squad, Does.Contain("minAttackForceDelayTicks = LateDelay("));

@@ -63,8 +63,12 @@ namespace OpenRA.Mods.CA.Traits
 					break;
 
 				var cell = huntCells[i];
+				// Frontrunner FIX: an unreachable cell is marked too, so it rotates behind the untried cells instead of heading every pick.
 				if (!mobile.PathFinder.PathExistsForLocomotor(mobile.Locomotor, from, cell))
+				{
+					huntAssigned[cell] = World.WorldTick;
 					continue;
+				}
 
 				huntAssigned[cell] = World.WorldTick;
 				return cell;

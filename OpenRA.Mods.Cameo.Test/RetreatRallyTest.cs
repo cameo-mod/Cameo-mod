@@ -696,7 +696,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(deactivate.IndexOf("if (handoff)", StringComparison.Ordinal), Is.GreaterThanOrEqualTo(0));
 			Assert.That(deactivate.IndexOf("if (handoff)", StringComparison.Ordinal), Is.LessThan(deactivate.IndexOf("DismissSquad(owner)", StringComparison.Ordinal)), "ChangeState calls the old Deactivate first");
 			Assert.That(Source("mods/CA/Traits/BotModules/Squads/SquadCA.cs"), Does.Not.Contain("RallyHandoff"), "L5: no field on the squad");
-			Assert.That(Count(GroundStates(), "new GroundUnitsFleeStateCA()"), Is.EqualTo(6), "the 7 legacy entries minus the siege retreat, which SIEGE-FIX-01 S6 moved to GroundUnitsSiegeRetreatStateCA");
+			Assert.That(Count(GroundStates(), "new GroundUnitsFleeStateCA()"), Is.EqualTo(7), "the 7 legacy entries minus the siege retreat, which SIEGE-FIX-01 S6 moved to GroundUnitsSiegeRetreatStateCA, plus the STALEMATE-01 hunt arrival with no next target");
 		}
 
 		// ---- 16. H2 pin ----
