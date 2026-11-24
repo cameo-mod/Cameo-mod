@@ -102,8 +102,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var squad = Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCA.cs");
 			Assert.That(squad, Does.Contain("minAttackForceDelayTicks = LateDelay("));
-			Assert.That(squad, Does.Contain("requiredValue = LateBar(requiredValue);"));
-			Assert.That(squad, Does.Contain("requiredSize = LateBar(requiredSize);"));
+			Assert.That(squad, Does.Not.Contain("LateBar("), "r5 (USER 11-24): the late escalation never lowers the launch bar");
 
 			var ground = Source("mods/CA/Traits/BotModules/Squads/States/GroundStatesCA.cs");
 			Assert.That(ground, Does.Contain("owner.SquadManager.FinishHuntCell(owner.Units.First().Actor)"));

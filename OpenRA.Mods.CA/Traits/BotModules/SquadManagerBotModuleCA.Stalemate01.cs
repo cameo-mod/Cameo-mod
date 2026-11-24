@@ -33,7 +33,12 @@ namespace OpenRA.Mods.CA.Traits
 				Info.LateEscalationStepTicks, Info.LateEscalationStepPercent, Info.LateEscalationDelayFloorPercent))
 			: reset;
 
-		int LateBar(int bar) => LateEscalationActive ? Stalemate01CA.Scale(bar, Info.LateEscalationForcePercent) : bar;
+		// STALEMATE-01 r5: no late launch-bar scaling (USER 11-24: big blob pushes, not frequent trickles).
+
+		AblationLatch ablateBlobLeaderOrderOnly;
+
+		/// <summary>BLOB-LAUNCH-01: the leader attacks only through an open team order (row bl_leader_order_only).</summary>
+		internal bool BlobLeaderOrderOnlyActive => Info.BlobLeaderOrderOnly && !ablateBlobLeaderOrderOnly.Off(Player, AblationIds.BlobLeaderOrderOnly);
 
 		/// <summary>Finish-mode hunt pick for a squad whose leader is <paramref name="leader"/>: null when none is reachable.</summary>
 		internal CPos? FinishHuntCell(Actor leader)

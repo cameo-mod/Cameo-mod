@@ -3946,6 +3946,11 @@ namespace OpenRA.Mods.CA.Traits
 			if (TeamLeadHoldsLaunch(out teamLaunch))
 				return;
 
+			// BLOB-LAUNCH-01 (USER 11-24, switch ON only): the team leader never forms a wave of its own outside an open team order; it attacks
+			// by publishing the order and joining it, so the whole team moves as one blob (V02: the leader sent its own 1-6 units on the team bar).
+			if (BlobLaunch01CA.LeaderHolds(BlobLeaderOrderOnlyActive, teamLaunch && TeamLeadIsLeader, TeamLeadCadenceOn, TeamLeadOpenOrder() != null))
+				return;
+
 			// Create an attack force when we have enough units around our base.
 			// (don't bother leaving any behind for defense)
 			var idleUnitsValue = 0;
@@ -4002,10 +4007,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 			var requiredSize = ApplyForceScale(desiredAttackForceSize, forceScale);
 
-			// STALEMATE-01 late escalation (switch ON only): a lower launch bar for every personality, Turtle included. The tempo floor
-			// below and WAVE-MIN-01 still apply on top.
-			requiredValue = LateBar(requiredValue);
-			requiredSize = LateBar(requiredSize);
+			// STALEMATE-01 r5 (USER 11-24, big blob pushes): the late escalation shortens the attack delay only; it never lowers the launch bar.
 			if (Info.AttackLivenessEnabled)
 				requiredSize = AttackForceEvalCA.RequiredSize(requiredSize, botLimits?.Info.TempoMinWaveUnits ?? 0);
 

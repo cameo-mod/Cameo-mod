@@ -14,8 +14,8 @@ namespace OpenRA.Mods.CA.Traits
 	public partial class SquadManagerBotModuleCAInfo
 	{
 		[Desc("STALEMATE-01 late escalation (row st_late_escalation): from LateEscalationStartTick every personality, Turtle included,",
-			"attacks more often (the MinimumAttackForceDelay reset scaled by LateEscalationDelayPercent) with a lower launch bar (value",
-			"and size scaled by LateEscalationForcePercent). WAVE-MIN still applies. Off = unchanged.")]
+			"attacks more often (the MinimumAttackForceDelay reset scaled by LateEscalationDelayPercent, stepped). The launch bar is never",
+			"lowered (r5, USER 11-24). Off = unchanged.")]
 		public readonly bool LateEscalationEnabled = false;
 
 		[Desc("STALEMATE-01: first tick of late escalation and of finish mode.")]
@@ -34,8 +34,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("STALEMATE-01 r4: lowest attack-delay percent the steps reach (0-100).")]
 		public readonly int LateEscalationDelayFloorPercent = 20;
 
-		[Desc("STALEMATE-01: percent of the launch value and size bars while late escalation is on (0-100).")]
-		public readonly int LateEscalationForcePercent = 60;
+		[Desc("BLOB-LAUNCH-01 (USER 11-24, row bl_leader_order_only): with TEAM-LEAD cadence on, the team leader forms no wave of its own",
+			"outside an open team order; it attacks only by publishing the order and joining it. Off = the leader may launch its own wave.")]
+		public readonly bool BlobLeaderOrderOnly = false;
 
 		[Desc("STALEMATE-01 finish mode (row st_finish_mode): from LateEscalationStartTick a ground squad with no visible and no",
 			"remembered enemy target hunts instead of holding: it attack-moves to the least recently assigned map grid cell the bot",

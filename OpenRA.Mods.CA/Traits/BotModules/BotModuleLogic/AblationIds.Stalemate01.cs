@@ -16,5 +16,8 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		public const string StalemateLateEscalation = "st_late_escalation";
 		public const string StalemateFinishMode = "st_finish_mode";
+
+		// BLOB-LAUNCH-01 (USER 11-24): bl_leader_order_only off = the team leader may form its own wave outside a team order, as before.
+		public const string BlobLeaderOrderOnly = "bl_leader_order_only";
 	}
 }

@@ -127,8 +127,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var src = Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCA.Stalemate01.cs");
 			Assert.That(src, Does.Contain("Stalemate01CA.SteppedPercent(World.WorldTick, Info.LateEscalationStartTick, Info.LateEscalationDelayPercent,"));
-			Assert.That(src, Does.Contain("int LateBar(int bar) => LateEscalationActive ? Stalemate01CA.Scale(bar, Info.LateEscalationForcePercent) : bar;"),
-				"the launch bar keeps its r1 scale; WAVE-MIN still runs after it");
+			Assert.That(src, Does.Not.Contain("LateBar("), "r5 (USER 11-24): the launch bar is never lowered");
 		}
 	}
 }
