@@ -14,8 +14,9 @@ namespace OpenRA.Mods.CA.Traits
 	// BASE-FIX-01 rows (AUDIT_BASE_01, Opus 11-24). One row per feature; row off = the build without that feature.
 	public static partial class AblationIds
 	{
-		// The opening's war-factory step outranks the wanted-refinery pick for every faction.
-		public const string OpeningWfStep = "opening_wf_step";
+		// The user's standard opening order (power, barracks, refinery, war factory, refinery, 2nd production, radar, airfield, tech, 3rd production, passive income)
+		// outranks the refinery pick, random extras and sustained cash for every faction.
+		public const string OpeningStandardOrder = "opening_standard_order";
 
 		// The tech chain and each building once stay above the sustained-cash production pick.
 		public const string SustainedKeepsEssentials = "pb_sustained_keeps_essentials";

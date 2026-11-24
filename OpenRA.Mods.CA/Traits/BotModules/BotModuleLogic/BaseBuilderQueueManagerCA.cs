@@ -119,7 +119,7 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateOpeningStep, ablateSustainedKeeps, ablatePrefilter, ablateDefenceNeed, ablatePowerCap, ablateDefenceFirstCopy, ablateFloorExempt;
 		bool DefenceFirstCopyOn => baseBuilder.DefenceFirstCopyArmed && !ablateDefenceFirstCopy.Off(player, AblationIds.Af2DefenceFirstCopy);
 		bool FloorExemptOn => baseBuilder.FloorEssentialsExemptArmed && !ablateFloorExempt.Off(player, AblationIds.FloorEssentialsExempt);
-		bool OpeningStepOn => baseBuilder.OpeningStepArmed && !ablateOpeningStep.Off(player, AblationIds.OpeningWfStep);
+		bool OpeningStepOn => baseBuilder.OpeningStepArmed && !ablateOpeningStep.Off(player, AblationIds.OpeningStandardOrder);
 		bool SustainedKeepsOn => baseBuilder.SustainedKeepsEssentialsArmed && !ablateSustainedKeeps.Off(player, AblationIds.SustainedKeepsEssentials);
 		bool PrefilterOn => baseBuilder.PrefilterArmed && !ablatePrefilter.Off(player, AblationIds.PrefilterPicks);
 		bool DefenceNeedOn => baseBuilder.DefenceNeedArmed && !ablateDefenceNeed.Off(player, AblationIds.Af2DefenceNeedGate);
@@ -1010,6 +1010,7 @@ namespace OpenRA.Mods.CA.Traits
 				var itemEssential = IsArmyFirstEssential(item);
 				// C-07 / BASE-09: an army-first essential rides at its own cost, the building cash floor does not hold it.
 				var exempt = plannerWant || demandPick.Demand != null || (sustainedPickName != null && item.Name == sustainedPickName)
+					|| (openingPickName != null && item.Name == openingPickName)
 					|| (FloorExemptOn && itemEssential);
 				var cost = queue.GetProductionCost(item);
 
@@ -1035,7 +1036,7 @@ namespace OpenRA.Mods.CA.Traits
 
 				// ESSENTIALS-01: below the tier MaximiseProductionCash line only essentials start (side-effect free; the pick retries next sweep).
 				// The sustained pick is exempt from the share/floor votes but NOT from the low-cash hold: a bank that dipped under the tier line holds it.
-				if (EssentialsOn && EssentialsHolds(item, isRefinery, exempt && item.Name != sustainedPickName, cashNow))
+				if (EssentialsOn && EssentialsHolds(item, isRefinery, exempt && item.Name != sustainedPickName && item.Name != openingPickName, cashNow))
 				{
 					pendingDemandPick = default;
 					return false;
@@ -2135,31 +2136,144 @@ namespace OpenRA.Mods.CA.Traits
 			return n;
 		}
 
-		// BASE-02: the opening's next forced step (power, barracks, then the war factory once a refinery stands), power-resolved. Null = the ladder goes on.
-		ActorInfo ChooseOpeningStep(IEnumerable<ActorInfo> buildableThings, ActorInfo power)
+		// BASE-02 (opening_standard_order): the standard order's item picked in this ChooseBuildingToBuild call (null otherwise). TickQueue rides it at its own cost
+		// floor like a planner want; its low-cash hold and admission votes are checked BEFORE it is picked (OpeningAdmits), so a held step never shadows the ladder.
+		string openingPickName;
+		readonly Dictionary<(OpeningRole Role, int Required), int> openingStepSince = new();
+
+		bool OpeningAdmits(ProductionQueue queue, ActorInfo item) =>
+			VotesAdmit(queue, item, RecoverySpendPolicyCA.Admission.General)
+			&& !(EssentialsOn && EssentialsHolds(item, false, false, ProdBusyCA.SweepBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep)));
+
+		// The cheapest building of <types> the faction can build now: within its limits, its production-type limit and its delay; first copies only when asked.
+		ActorInfo OpeningCheapest(ProductionQueue queue, IEnumerable<ActorInfo> buildable, Func<ActorInfo, bool> inRole, bool firstCopyOnly)
 		{
-			if (!OpeningStepOn || baseBuilder.Info.DefenseQueues.Contains(Category))
+			ActorInfo best = null;
+			var bestCost = int.MaxValue;
+			foreach (var item in buildable)
+			{
+				if (!inRole(item) || (firstCopyOnly && OwnedOrQueued(item)) || BuildingStillDelayed(item.Name))
+					continue;
+
+				var count = playerBuildings.Count(a => a.Info.Name == item.Name);
+				var producing = baseBuilder.BuildingsBeingProduced.TryGetValue(item.Name, out var n) ? n : 0;
+				if (!BaseBuilderQueueEvalCA.LimitAdmits(baseBuilder.TryGetBuildingLimit(item.Name, out var limit), limit, count, producing))
+					continue;
+
+				if (baseBuilder.Info.ProductionTypes.Contains(item.Name) && botLimits != null && BaseBuilderQueueEvalCA.LimitReached(count + producing, ProductionTypeLimit))
+					continue;
+
+				if (NavalNeedsWater(item))
+					continue;
+
+				var cost = Math.Max(0, queue.GetProductionCost(item));
+				if (best == null || cost < bestCost || (cost == bestCost && string.CompareOrdinal(item.Name, best.Name) < 0))
+				{
+					best = item;
+					bestCost = cost;
+				}
+			}
+
+			return best;
+		}
+
+		// BASE-02: the user's standard order. Each role is mapped through the existing building lists (power, barracks, refinery, vehicle factory, the other production
+		// types as the airfield role, radar providers, the tech chain, cash tricklers); a role the faction lacks is skipped. Null = the normal ladder goes on.
+		ActorInfo ChooseOpeningStandard(ProductionQueue queue, IEnumerable<ActorInfo> buildableThings, ActorInfo power)
+		{
+			openingPickName = null;
+			var b = baseBuilder.Info;
+			var now = world.WorldTick;
+			if (!OpeningStepOn || b.DefenseQueues.Contains(Category) || now >= b.OpeningStandardMaxTicks || playerBuildings == null)
 				return null;
 
-			var b = baseBuilder.Info;
-			var barracks = GetProducibleBuilding(b.BarracksTypes, buildableThings);
-			var warFactory = GetProducibleBuilding(b.VehiclesFactoryTypes, buildableThings);
-			var step = BaseFix01CA.NextOpeningStep(true, world.WorldTick, b.OpeningWarFactoryStepTicks,
-				OwnedOrQueuedCount(b.PowerTypes), power != null, OwnedOrQueuedCount(b.BarracksTypes), barracks != null,
-				OwnedOrQueuedCount(b.RefineryTypes), OwnedOrQueuedCount(b.VehiclesFactoryTypes), warFactory != null);
+			// An expansion yard (its refinery goes first) and a threat defence want interrupt the order; they run in the ladder below.
+			if (OwnedOrQueuedCount(b.ConstructionYardTypes) > 1)
+				return null;
 
-			var pick = step switch
+			var law = baseBuilder.RefineryLawProvider();
+			if (law != null && law.WantedFrontDefence != null)
+				return null;
+
+			var buildable = buildableThings as IReadOnlyList<ActorInfo> ?? buildableThings.ToList();
+			var airRole = new HashSet<string>(b.ProductionTypes.Except(b.BarracksTypes).Except(b.VehiclesFactoryTypes).Except(b.NavalProductionTypes));
+			var picks = new Dictionary<OpeningRole, ActorInfo>();
+
+			(bool Can, int Have) Status(OpeningRole role)
 			{
-				OpeningStep.Power => power,
-				OpeningStep.Barracks => BaseBuilderQueueEvalCA.PickOrPower(barracks, power, HasSufficientPowerForActor),
-				OpeningStep.WarFactory => BaseBuilderQueueEvalCA.PickOrPower(warFactory, power, HasSufficientPowerForActor),
-				_ => null,
-			};
+				ActorInfo pick;
+				int have;
+				switch (role)
+				{
+					case OpeningRole.Power:
+						have = OwnedOrQueuedCount(b.PowerTypes);
+						pick = power;
+						break;
+					case OpeningRole.Barracks:
+						have = OwnedOrQueuedCount(b.BarracksTypes);
+						pick = OpeningCheapest(queue, buildable, a => b.BarracksTypes.Contains(a.Name), false);
+						break;
+					case OpeningRole.Refinery:
+						have = OwnedOrQueuedCount(b.RefineryTypes);
+						pick = OpeningCheapest(queue, buildable, a => b.RefineryTypes.Contains(a.Name), false);
+						break;
+					case OpeningRole.WarFactory:
+						have = OwnedOrQueuedCount(b.VehiclesFactoryTypes);
+						pick = OpeningCheapest(queue, buildable, a => b.VehiclesFactoryTypes.Contains(a.Name), false);
+						break;
+					case OpeningRole.Radar:
+						have = OwnedRadarProviders();
+						var radars = GetRadarProducibles(buildable);
+						pick = OpeningCheapest(queue, radars, a => true, true);
+						break;
+					case OpeningRole.Airfield:
+						have = OwnedOrQueuedCount(airRole);
+						pick = OpeningCheapest(queue, buildable, a => airRole.Contains(a.Name), false);
+						break;
+					case OpeningRole.TechCenter:
+						have = OwnedOrQueuedCount(b.TechChainTypes);
+						pick = OpeningCheapest(queue, buildable, a => b.TechChainTypes.Contains(a.Name), true);
+						break;
+					default:
+						have = playerBuildings.Count(a => a.Info.HasTraitInfo<CashTricklerInfo>())
+							+ baseBuilder.BuildingsBeingProduced.Count(kv => kv.Value > 0 && world.Map.Rules.Actors.TryGetValue(kv.Key, out var info) && info.HasTraitInfo<CashTricklerInfo>());
+						pick = OpeningCheapest(queue, buildable, a => a.HasTraitInfo<CashTricklerInfo>(), true);
+						break;
+				}
 
-			if (pick != null)
-				AIUtils.BotDebug("{0} decided to build {1}: Priority override (opening {2})", player, pick.Name, step);
+				if (pick == null)
+					return (false, have);
 
-			return pick;
+				picks[role] = pick;
+
+				// The refinery is picked by the wanted-refinery rung (its own placement law); every other step must pass the admission votes and the low-cash hold now.
+				return (role == OpeningRole.Refinery || role == OpeningRole.Power || OpeningAdmits(queue, pick), have);
+			}
+
+			bool Stuck(OpeningRole role, int required)
+			{
+				if (!openingStepSince.TryGetValue((role, required), out var since))
+				{
+					openingStepSince[(role, required)] = now;
+					return false;
+				}
+
+				return now - since > b.OpeningStepStuckTicks;
+			}
+
+			var order = BaseFix01CA.StandardOrder(b.OpeningSecondBarracksFirstFactions.Contains(player.Faction.InternalName));
+			var next = BaseFix01CA.NextRole(order, Status, Stuck);
+			if (next == OpeningRole.None || next == OpeningRole.Refinery)
+				return null;
+
+			var item = BaseBuilderQueueEvalCA.PickOrPower(picks[next], power, HasSufficientPowerForActor);
+			if (item != null)
+			{
+				openingPickName = item.Name;
+				AIUtils.BotDebug("{0} decided to build {1}: Priority override (standard opening {2})", player, item.Name, next);
+			}
+
+			return item;
 		}
 
 		// BASE-05: a pick the admission votes would hold is dropped here so the ladder goes on to the lower rungs (off = never filtered).
@@ -2537,6 +2651,7 @@ namespace OpenRA.Mods.CA.Traits
 		ActorInfo ChooseBuildingToBuild(ProductionQueue queue)
 		{
 			sustainedPickName = null;
+			openingPickName = null;
 			var buildableThings = queue.BuildableItems();
 			var availableCash = playerResources.GetCashAndResources();
 
@@ -2621,7 +2736,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// BASE-02 (AUDIT_BASE_01): power, barracks, refinery, war factory: the next missing opening step outranks the refinery pick for every faction.
-			var openingStep = ChooseOpeningStep(buildableThings, power);
+			var openingStep = ChooseOpeningStandard(queue, buildableThings, power);
 			if (openingStep != null)
 				return openingStep;
 

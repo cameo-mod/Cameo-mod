@@ -59,7 +59,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(q, Does.Contain("ChooseCycledProduction(buildableThings, power, c => VotesAdmit(queue, c, RecoverySpendPolicyCA.Admission.EssentialBuilding))"));
 			Assert.That(q, Does.Contain("ChooseCycledProduction(buildableThings, power, c => VotesAdmit(queue, c, RecoverySpendPolicyCA.Admission.General))"));
 			Assert.That(q, Does.Contain("p.PausesBuilding(item, essential, admission, cost)"), "the same pause votes TickQueue asks");
-			Assert.That(q, Does.Contain("EssentialsHolds(item, isRefinery, exempt && item.Name != sustainedPickName, cashNow)"), "the sustained pick is not exempt from the low-cash hold");
+			Assert.That(q, Does.Contain("EssentialsHolds(item, isRefinery, exempt && item.Name != sustainedPickName && item.Name != openingPickName, cashNow)"), "the sustained pick is not exempt from the low-cash hold");
 		}
 
 		[Test]

@@ -235,13 +235,20 @@ namespace OpenRA.Mods.CA.Traits
 			"Gated by SwitchCondition; row af2_essential_pass.")]
 		public readonly bool EssentialPassFirstCopies = false;
 
-		[Desc("BASE-02 (AUDIT_BASE_01, USER ruling): the opening is power, barracks, refinery, WAR FACTORY, power if needed, refinery. For every faction",
-			"(not only BarracksBeforeRefineryFactions) the next missing opening step outranks the wanted-refinery pick until the war factory is owned or",
-			"queued, or OpeningWarFactoryStepTicks have passed. Gated by SwitchCondition; row opening_wf_step.")]
-		public readonly bool OpeningWarFactoryStep = false;
+		[Desc("BASE-02 (USER standard order, a soft guideline): power, barracks, refinery, war factory, refinery, 2nd barracks OR 2nd war factory, radar, airfield, the other 2nd",
+			"production building, tech center, 3rd production buildings, passive income. For every faction each step is mapped through the building role lists and skipped when",
+			"the faction lacks it. The next missing step outranks the wanted-refinery pick, random extras and sustained cash; power is inserted when short; threat defence and an",
+			"expansion yard interrupt it; the planner takes over afterwards. Gated by SwitchCondition; row opening_standard_order.")]
+		public readonly bool OpeningStandardOrder = false;
 
-		[Desc("BASE-02: world ticks after which the opening steps stop forcing the pick (a faction with no claimable refinery or no vehicle factory never deadlocks).")]
-		public readonly int OpeningWarFactoryStepTicks = 6000;
+		[Desc("BASE-02: world ticks after which the standard order stops forcing picks.")]
+		public readonly int OpeningStandardMaxTicks = 20000;
+
+		[Desc("BASE-02: a step that has been the next step for this many ticks without being satisfied is skipped (no claimable refinery, no space): the order never deadlocks.")]
+		public readonly int OpeningStepStuckTicks = 3000;
+
+		[Desc("BASE-02: factions whose 2nd production building is a barracks before the 2nd war factory (every other faction: war factory first).")]
+		public readonly FrozenSet<string> OpeningSecondBarracksFirstFactions = FrozenSet<string>.Empty;
 
 		[Desc("BASE-03 (AUDIT_BASE_01, Opus ruling): while SUSTAINED-CASH is active, the first copy of every building type (the tech chain and each building once)",
 			"still comes BEFORE the sustained production pick. Gated by SwitchCondition; row pb_sustained_keeps_essentials.")]
@@ -651,7 +658,7 @@ namespace OpenRA.Mods.CA.Traits
 		public bool EssentialsLowCashArmed => Info.EssentialsOnlyBelowTierLine && switchesActive;
 		public bool UnlistedOnceArmed => Info.UnlistedBuildingsOnce && switchesActive;
 		public bool EssentialPassArmed => Info.EssentialPassFirstCopies && switchesActive;
-		public bool OpeningStepArmed => Info.OpeningWarFactoryStep && switchesActive;
+		public bool OpeningStepArmed => Info.OpeningStandardOrder && switchesActive;
 		public bool SustainedKeepsEssentialsArmed => Info.SustainedKeepsEssentials && switchesActive;
 		public bool PrefilterArmed => Info.PrefilterBuildingPicks && switchesActive;
 		public bool DefenceNeedArmed => Info.DefenceNeedGate && switchesActive;

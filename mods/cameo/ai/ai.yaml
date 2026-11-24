@@ -5793,8 +5793,9 @@ Player:
 		# ESSENTIAL-PASS-01: first copies of every building type and cash tricklers pass the army-first and mobile-spend votes; row af2_essential_pass; genericbot only.
 		EssentialPassFirstCopies: true
 		# BASE-FIX-01 (AUDIT_BASE_01, Opus 11-24); every row genericbot only (SwitchCondition above).
-		# opening_wf_step: power, barracks, refinery, war factory for every faction, above the refinery pick.
-		OpeningWarFactoryStep: true
+		# opening_standard_order (USER): power, barracks, refinery, war factory, refinery, 2nd production, radar, airfield, 2nd production, tech, 3rd production, passive income;
+		# every faction, a soft order above the refinery pick, random extras and sustained cash.
+		OpeningStandardOrder: true
 		# pb_sustained_keeps_essentials: the tech chain and each building once stay above the sustained production pick.
 		SustainedKeepsEssentials: true
 		# pb_prefilter_picks: the overflow, scaling, threshold, naval, silo and radar picks are vote-filtered before selection.

@@ -25,20 +25,64 @@ namespace OpenRA.Mods.Cameo.Test
 
 		static string Queue() => Source("mods/CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs");
 
-		[Test]
-		public void TheOpeningIsPowerBarracksRefineryWarFactoryForEveryFaction()
+		// Simulates the opening: every sweep builds the role NextRole names (a Refinery result is built by the refinery rung), counts grow, until nothing is left.
+		static System.Collections.Generic.List<OpeningRole> Simulate(bool secondBarracksFirst, System.Collections.Generic.ISet<OpeningRole> lacking)
 		{
-			OpeningStep Next(int power, int barracks, int refinery, int wf, int tick = 100, bool canWf = true) =>
-				BaseFix01CA.NextOpeningStep(true, tick, 6000, power, true, barracks, true, refinery, wf, canWf);
+			var have = Enum.GetValues<OpeningRole>().ToDictionary(r => r, _ => 0);
+			var built = new System.Collections.Generic.List<OpeningRole>();
+			var order = BaseFix01CA.StandardOrder(secondBarracksFirst);
+			for (var i = 0; i < 40; i++)
+			{
+				var next = BaseFix01CA.NextRole(order, r => (!lacking.Contains(r), have[r]), (r, n) => false);
+				if (next == OpeningRole.None)
+					break;
 
-			Assert.That(Next(0, 0, 0, 0), Is.EqualTo(OpeningStep.Power));
-			Assert.That(Next(1, 0, 0, 0), Is.EqualTo(OpeningStep.Barracks));
-			Assert.That(Next(1, 1, 0, 0), Is.EqualTo(OpeningStep.None), "the wanted-refinery rung picks the first refinery");
-			Assert.That(Next(1, 1, 1, 0), Is.EqualTo(OpeningStep.WarFactory), "before the second refinery");
-			Assert.That(Next(1, 1, 1, 1), Is.EqualTo(OpeningStep.None), "the opening is done");
-			Assert.That(Next(1, 1, 1, 0, tick: 6000), Is.EqualTo(OpeningStep.None), "never deadlocks past the step window");
-			Assert.That(Next(1, 1, 1, 0, canWf: false), Is.EqualTo(OpeningStep.None), "a faction with no vehicle factory skips the step");
-			Assert.That(BaseFix01CA.NextOpeningStep(false, 0, 6000, 0, true, 0, true, 0, 0, true), Is.EqualTo(OpeningStep.None), "switch off");
+				have[next]++;
+				built.Add(next);
+			}
+
+			return built;
+		}
+
+		[Test]
+		public void TheStandardOrderIsFollowedForAFactionWithEveryRole()
+		{
+			var built = Simulate(false, new System.Collections.Generic.HashSet<OpeningRole>());
+			Assert.That(built, Is.EqualTo(new[]
+			{
+				OpeningRole.Power, OpeningRole.Barracks, OpeningRole.Refinery, OpeningRole.WarFactory, OpeningRole.Refinery, OpeningRole.WarFactory, OpeningRole.Radar,
+				OpeningRole.Airfield, OpeningRole.Barracks, OpeningRole.TechCenter, OpeningRole.Barracks, OpeningRole.WarFactory, OpeningRole.PassiveIncome,
+			}));
+
+			var swapped = Simulate(true, new System.Collections.Generic.HashSet<OpeningRole>());
+			Assert.That(swapped[5], Is.EqualTo(OpeningRole.Barracks), "a barracks-first faction builds its 2nd barracks before the 2nd war factory");
+			Assert.That(swapped[8], Is.EqualTo(OpeningRole.WarFactory));
+		}
+
+		[Test]
+		public void AWarFactoryIsBuiltWithinTheFirstFiveBuildingsForEveryFactionShape()
+		{
+			// Any subset of the optional roles a faction may lack (no barracks, no radar, no airfield, no tech chain, no trickler) and both second-production orders.
+			var optional = new[] { OpeningRole.Barracks, OpeningRole.Radar, OpeningRole.Airfield, OpeningRole.TechCenter, OpeningRole.PassiveIncome };
+			for (var mask = 0; mask < 1 << optional.Length; mask++)
+			{
+				var lacking = new System.Collections.Generic.HashSet<OpeningRole>(optional.Where((_, i) => (mask & (1 << i)) != 0));
+				foreach (var barracksFirst in new[] { false, true })
+				{
+					var built = Simulate(barracksFirst, lacking);
+					var warFactory = built.IndexOf(OpeningRole.WarFactory);
+					Assert.That(warFactory, Is.InRange(0, 4), $"mask {mask} barracksFirst {barracksFirst}: {string.Join(",", built)}");
+				}
+			}
+		}
+
+		[Test]
+		public void AStepStuckTooLongIsSkippedSoTheOrderNeverDeadlocks()
+		{
+			var order = BaseFix01CA.StandardOrder(false);
+			var next = BaseFix01CA.NextRole(order, r => (true, r == OpeningRole.Power ? 1 : 0), (r, n) => r == OpeningRole.Barracks);
+			Assert.That(next, Is.EqualTo(OpeningRole.Refinery), "the stuck barracks is skipped");
+			Assert.That(BaseFix01CA.NextRole(order, r => (false, 0), (r, n) => false), Is.EqualTo(OpeningRole.None), "a faction with nothing buildable");
 		}
 
 		[Test]
@@ -63,7 +107,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheOpeningRungSitsAboveTheRefineryPickAndTheSustainedRungKeepsEssentialsFirst()
 		{
 			var q = Queue();
-			var opening = q.IndexOf("var openingStep = ChooseOpeningStep(buildableThings, power);", StringComparison.Ordinal);
+			var opening = q.IndexOf("var openingStep = ChooseOpeningStandard(queue, buildableThings, power);", StringComparison.Ordinal);
 			Assert.That(opening, Is.GreaterThan(0));
 			Assert.That(opening, Is.LessThan(q.IndexOf("var wantedRefinery = ChooseWantedRefinery(queue, buildableThings, power);", StringComparison.Ordinal)));
 			var kept = q.IndexOf("var keptEssential = ChooseFirstCopyOnce(queue, buildableThings, power, true);", StringComparison.Ordinal);
@@ -109,21 +153,21 @@ namespace OpenRA.Mods.Cameo.Test
 		public void EveryRowIsRegisteredAndOnlyGenericbotArmsIt()
 		{
 			var ids = Source("mods/CA/Traits/BotModules/BotModuleLogic/AblationIds.BaseFix01.cs");
-			foreach (var id in new[] { "opening_wf_step", "pb_sustained_keeps_essentials", "pb_prefilter_picks", "af2_defence_need_gate", "pb_power_margin_cap",
+			foreach (var id in new[] { "opening_standard_order", "pb_sustained_keeps_essentials", "pb_prefilter_picks", "af2_defence_need_gate", "pb_power_margin_cap",
 				"af2_defence_first_copy", "pb_floor_essentials_exempt" })
 				Assert.That(ids, Does.Contain($"\"{id}\""), id);
 
 			var player = MiniYaml.FromString(Source("packaging/ai.yaml"), "ai").Single(n => n.Key == "Player").Value.Nodes;
 			var generic = player.Single(n => n.Key == "BaseBuilderBotModuleCA@generic").Value.Nodes;
 			Assert.That(generic.Single(n => n.Key == "SwitchCondition").Value.Value, Is.EqualTo("genericbot"));
-			foreach (var key in new[] { "OpeningWarFactoryStep", "SustainedKeepsEssentials", "PrefilterBuildingPicks", "DefenceNeedGate", "PowerMarginCapEnabled",
+			foreach (var key in new[] { "OpeningStandardOrder", "SustainedKeepsEssentials", "PrefilterBuildingPicks", "DefenceNeedGate", "PowerMarginCapEnabled",
 				"DefenceFirstCopyCounts", "FloorEssentialsExempt" })
 				Assert.That(generic.Single(n => n.Key == key).Value.Value, Is.EqualTo("true"), key);
 
 			// no other base builder instance (classic) carries any of them
 			var others = player.Where(n => n.Key.StartsWith("BaseBuilderBotModuleCA", StringComparison.Ordinal) && n.Key != "BaseBuilderBotModuleCA@generic");
 			foreach (var o in others)
-				Assert.That(o.Value.Nodes.Any(n => n.Key is "OpeningWarFactoryStep" or "SustainedKeepsEssentials" or "PrefilterBuildingPicks" or "DefenceNeedGate"
+				Assert.That(o.Value.Nodes.Any(n => n.Key is "OpeningStandardOrder" or "SustainedKeepsEssentials" or "PrefilterBuildingPicks" or "DefenceNeedGate"
 					or "PowerMarginCapEnabled" or "DefenceFirstCopyCounts" or "FloorEssentialsExempt"), Is.False, o.Key);
 
 			var af02 = player.Single(n => n.Key == "ArmyFirstBotModule@af02").Value.Nodes;
