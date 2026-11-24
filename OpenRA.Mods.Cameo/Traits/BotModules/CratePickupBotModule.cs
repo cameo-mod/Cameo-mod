@@ -209,7 +209,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		const string LeaseOwner = nameof(CratePickupBotModule);
 
 		// CRATE-RESERVE-01: the crate memory. A crate is remembered when the bot player sees it (shared allied vision is part of the player's shroud) and forgotten when its cell is seen
-		// again without a crate (picked up by anyone) or after CrateMemoryTicks. Every mode of the reserve rule works from this set only: the bot plays fair, it never reads the whole map.
+		// again without a crate (picked up by anyone) or after CrateMemoryTicks. Every mode of the reserve rule works from this set only: the bot plays fair: only crates it can see enter the memory, a hidden or fogged crate is never used.
 		readonly Dictionary<CPos, int> crateMemory = [];
 		readonly Dictionary<CPos, (Actor Collector, int Tick)> cellReservations = [];
 		int nextMemoryTick;
@@ -227,9 +227,12 @@ namespace OpenRA.Mods.Cameo.Traits
 				if (!crate.IsInWorld || !crate.IsAtGroundLevel())
 					continue;
 
+				// Only a crate the bot (or an ally, through the shared shroud) can see counts: a hidden or fogged crate changes nothing.
+				if (!crate.CanBeViewedByPlayer(player))
+					continue;
+
 				present.Add(crate.Location);
-				if (crate.CanBeViewedByPlayer(player))
-					crateMemory[crate.Location] = now;
+				crateMemory[crate.Location] = now;
 			}
 
 			foreach (var (cell, seen) in crateMemory.ToList())

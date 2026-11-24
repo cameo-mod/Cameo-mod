@@ -119,7 +119,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var body = c.Substring(scan, c.IndexOf("IEnumerable<Actor> EligibleUnits(", scan, StringComparison.Ordinal) - scan);
 			Assert.That(body, Does.Not.Contain("ActorsHavingTrait<Crate>"), "no whole-map crate read in any reserve mode");
 			Assert.That(body, Does.Contain("foreach (var cell in crateMemory.Keys)"));
-			Assert.That(c, Does.Contain("if (crate.CanBeViewedByPlayer(player))\n\t\t\t\t\tcrateMemory[crate.Location] = now;"), "remembered only when the bot sees it");
+			Assert.That(c, Does.Contain("if (!crate.CanBeViewedByPlayer(player))\n\t\t\t\t\tcontinue;\n\n\t\t\t\tpresent.Add(crate.Location);\n\t\t\t\tcrateMemory[crate.Location] = now;"), "an unseen crate neither enters the memory nor counts as present");
 			Assert.That(c, Does.Contain("(player.Shroud.IsVisible(cell) && !present.Contains(cell)) || now - seen > Info.CrateMemoryTicks"), "forgotten when seen gone, or after the memory time");
 			Assert.That(c, Does.Contain("if (ReserveOn)\n\t\t\t\tUpdateCrateMemory();"), "refreshed on its own cadence, before the pickup cooldown");
 		}
