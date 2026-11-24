@@ -1020,7 +1020,8 @@ namespace OpenRA.Mods.CA.Traits
 				cashClock.Reset(queue.Actor.ActorID);
 
 				// ESSENTIALS-01: below the tier MaximiseProductionCash line only essentials start (side-effect free; the pick retries next sweep).
-				if (EssentialsOn && EssentialsHolds(item, isRefinery, exempt, cashNow))
+				// The sustained pick is exempt from the share/floor votes but NOT from the low-cash hold: a bank that dipped under the tier line holds it.
+				if (EssentialsOn && EssentialsHolds(item, isRefinery, exempt && item.Name != sustainedPickName, cashNow))
 				{
 					pendingDemandPick = default;
 					return false;

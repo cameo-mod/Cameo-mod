@@ -39,10 +39,10 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void WhenEveryProductionCandidateIsVetoedThePickIsNullSoTheOrderFallsThroughToTheTechChain()
 		{
-			// Three types at three buildings each (flat at 3 in V02), all held by the vote: the filtered candidate list is empty -> no pick.
+			// Three types at three buildings each (flat at 3 in V02). The queue manager removes the vetoed ones before Pick (pinned in source below);
+			// an empty list gives no pick (the order falls through) and a single admitted type is still cycled.
 			var counted = new[] { ("barracks", 3), ("warfactory", 3), ("airfield", 3) };
-			var admitted = counted.Where(c => false).ToList();
-			Assert.That(CycleProductionCA.Pick(admitted, null), Is.EqualTo(-1));
+			Assert.That(CycleProductionCA.Pick(counted.Where(c => false).ToList(), null), Is.EqualTo(-1));
 
 			// One admitted type is still cycled as before.
 			var some = counted.Where(c => c.Item1 == "warfactory").ToList();
@@ -59,6 +59,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(q, Does.Contain("ChooseCycledProduction(buildableThings, power, c => VotesAdmit(queue, c, RecoverySpendPolicyCA.Admission.EssentialBuilding))"));
 			Assert.That(q, Does.Contain("ChooseCycledProduction(buildableThings, power, c => VotesAdmit(queue, c, RecoverySpendPolicyCA.Admission.General))"));
 			Assert.That(q, Does.Contain("p.PausesBuilding(item, essential, admission, cost)"), "the same pause votes TickQueue asks");
+			Assert.That(q, Does.Contain("EssentialsHolds(item, isRefinery, exempt && item.Name != sustainedPickName, cashNow)"), "the sustained pick is not exempt from the low-cash hold");
 		}
 
 		[Test]
