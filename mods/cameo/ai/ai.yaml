@@ -4769,6 +4769,8 @@ Player:
 		FinishModeEnabled: true
 		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
 		BlobLeaderOrderOnly: true
+		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
+		BlobLeaderFallbackTicks: 0
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Rush: fast cheap pressure — skirmisher/anti-infantry heavy, scouts find the economy kills.
@@ -4910,6 +4912,8 @@ Player:
 		FinishModeEnabled: true
 		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
 		BlobLeaderOrderOnly: true
+		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
+		BlobLeaderFallbackTicks: 0
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Turtle: static-defence posture — artillery and anti-air mass behind the frontline screen.
@@ -5047,6 +5051,8 @@ Player:
 		FinishModeEnabled: true
 		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
 		BlobLeaderOrderOnly: true
+		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
+		BlobLeaderFallbackTicks: 0
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Tech: quality over quantity — frontline core with the widest air split (gunship/fighter/bomber).
@@ -5186,6 +5192,8 @@ Player:
 		FinishModeEnabled: true
 		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
 		BlobLeaderOrderOnly: true
+		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
+		BlobLeaderFallbackTicks: 0
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Expansion: spread defence of growing territory — balanced core, extra scouts find the fields.
@@ -5325,6 +5333,8 @@ Player:
 		FinishModeEnabled: true
 		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
 		BlobLeaderOrderOnly: true
+		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
+		BlobLeaderFallbackTicks: 0
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Steamroller: massed armour push — frontline wall, artillery second line, AA cover.
@@ -5461,6 +5471,8 @@ Player:
 		FinishModeEnabled: true
 		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
 		BlobLeaderOrderOnly: true
+		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
+		BlobLeaderFallbackTicks: 0
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Guerrilla: map control — skirmishers and scouts hold ground, gunships punish exposed targets.

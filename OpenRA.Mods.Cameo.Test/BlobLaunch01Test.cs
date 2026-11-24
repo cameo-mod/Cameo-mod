@@ -66,6 +66,8 @@ namespace OpenRA.Mods.Cameo.Test
 			var yaml = Source("packaging/ai.yaml");
 			Assert.That(yaml.Split("\n\t\tBlobLeaderOrderOnly: true\n").Length - 1, Is.EqualTo(6));
 			Assert.That(AblationSpec.RegistryIds(), Does.Contain("bl_leader_order_only"));
+			Assert.That(yaml.Split("\n\t\tBlobLeaderFallbackTicks: 0\n").Length - 1, Is.EqualTo(6),
+				"one no-order fallback: TEAM-BLOB-01 tl_fallback_publish publishes the order itself");
 
 			var squad = Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCA.cs");
 			var hold = squad.IndexOf("if (TeamLeadHoldsLaunch(out teamLaunch))", StringComparison.Ordinal);
