@@ -14,6 +14,7 @@ using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Traits;
+using Stopwatch = System.Diagnostics.Stopwatch;
 
 namespace OpenRA.Mods.Common.Traits
 {
@@ -112,6 +113,9 @@ namespace OpenRA.Mods.Common.Traits
 	{
 		[Desc("World ticks between ordinary strategic mission-board rebuilds. Qualifying attack callbacks invalidate the board immediately.")]
 		public readonly int ScanInterval = 25;
+
+		[Desc("SPIKE-FRANS-01 release switch (default false; true in fransbot.yaml): inside one mission-board scan the SiteIntel for the same centre, radius, age and primary actor is built once and reused, and the contact list (already sorted by actor id) is not sorted again. Same results, fewer allocations; false = the old per-call build.")]
+		public readonly bool ScanSiteIntelCache = false;
 
 		[Desc("World ticks between read-only long-game strategic assessment summaries. This diagnostic never creates missions, bids or orders.")]
 		public readonly int StrategicAssessmentInterval = 1500;
@@ -639,9 +643,74 @@ namespace OpenRA.Mods.Common.Traits
 			if (--scanTicks > 0)
 				return;
 			scanTicks = Info.ScanInterval;
-			EnsureCurrentMissions();
-			WriteStrategicAssessmentIfDue();
+#if CAMEO_DEV_LOGGING
+			scanSteps.Clear();
+			var scanStart = Stopwatch.GetTimestamp();
+			var scanGc = FransBotLog.GcMark.Now();
+#endif
+			using (Step("ensure_missions"))
+				EnsureCurrentMissions();
+			using (Step("strategic_assessment"))
+				WriteStrategicAssessmentIfDue();
+#if CAMEO_DEV_LOGGING
+			ReportScanSpike(Stopwatch.GetTimestamp() - scanStart, scanGc);
+#endif
 		}
+
+		// SPIKE-FRANS-01 (DEV only): the wall-clock steps of one General scan, summed per name (calls and ticks, inclusive: site_intel runs
+		// inside the append_* steps). A scan over FransBotLog.SpikeLogMilliseconds logs one line with the top steps and the GC delta. Every
+		// AI prints as the same player name, so the seat is its internal name. A release build keeps nothing: Step returns an empty struct.
+		readonly struct ScanStep : IDisposable
+		{
+#if CAMEO_DEV_LOGGING
+			readonly FransGeneralBotModule owner;
+			readonly string name;
+			readonly long start;
+
+			public ScanStep(FransGeneralBotModule owner, string name)
+			{
+				this.owner = owner;
+				this.name = name;
+				start = Stopwatch.GetTimestamp();
+			}
+
+			public void Dispose() => owner.AddScanStep(name, Stopwatch.GetTimestamp() - start);
+#else
+			public ScanStep(FransGeneralBotModule owner, string name)
+			{
+			}
+
+			public void Dispose()
+			{
+			}
+#endif
+		}
+
+		ScanStep Step(string name) => new(this, name);
+
+#if CAMEO_DEV_LOGGING
+		readonly Dictionary<string, (int Calls, long Ticks)> scanSteps = [];
+
+		void AddScanStep(string name, long ticks)
+		{
+			scanSteps.TryGetValue(name, out var step);
+			scanSteps[name] = (step.Calls + 1, step.Ticks + ticks);
+		}
+
+		void ReportScanSpike(long totalTicks, FransBotLog.GcMark gc)
+		{
+			var totalMs = totalTicks * 1000.0 / Stopwatch.Frequency;
+			if (totalMs >= FransBotLog.SpikeLogMilliseconds)
+			{
+				var steps = string.Join(", ", scanSteps.OrderByDescending(kv => kv.Value.Ticks).Take(10)
+					.Select(kv => FormattableString.Invariant($"{kv.Key}={kv.Value.Ticks * 1000.0 / Stopwatch.Frequency:0.0}ms/{kv.Value.Calls}c")));
+				OpenRA.Log.Write("debug", FormattableString.Invariant(
+					$"[FRANS-SCAN-SPIKE][WT {world.WorldTick}] seat={player.InternalName}#{player.PlayerActor.ActorID} total={totalMs:0.0} ms contacts={combatIntelService.EnemyCombatContacts.Count} missions={currentMissions.Count} {gc.Since()} steps(inclusive): {steps}"));
+			}
+
+			scanSteps.Clear();
+		}
+#endif
 
 		static bool IsNonCombatHusk(Actor actor) => actor?.Info != null &&
 			(actor.Info.HasTraitInfo<HuskInfo>() || actor.Info.Name.EndsWith(".husk", StringComparison.OrdinalIgnoreCase));
@@ -839,15 +908,22 @@ namespace OpenRA.Mods.Common.Traits
 			if (lastPublishedWorldTick >= 0 && world.WorldTick - lastPublishedWorldTick < Info.ScanInterval)
 				return;
 
-			combatIntelService.EnsureCurrentSnapshot();
-			CleanupDefenseIncidents();
-			EnsureSpawnProbesSeeded();
-			UpdateMineClusterObservationMemory();
+			using (Step("snapshot"))
+				combatIntelService.EnsureCurrentSnapshot();
+			using (Step("cleanup_defense"))
+				CleanupDefenseIncidents();
+			using (Step("spawn_probes"))
+				EnsureSpawnProbesSeeded();
+			using (Step("mine_observation"))
+				UpdateMineClusterObservationMemory();
 			// foothold development is locally gated by a physical owned FACT at that SECURE anchor.
 			// The old all-map ore-occupation gate is intentionally no longer part of mission publication.
-			CleanupSeaTransportBeachSecureRequests();
-			ObserveOwnedTransportLosses();
-			UpdateTransportLossSecureIncidentValidity();
+			using (Step("transport_losses"))
+			{
+				CleanupSeaTransportBeachSecureRequests();
+				ObserveOwnedTransportLosses();
+				UpdateTransportLossSecureIncidentValidity();
+			}
 
 			missionsByActorId.Clear();
 			currentMissions.Clear();
@@ -855,6 +931,7 @@ namespace OpenRA.Mods.Common.Traits
 			// Strategic ATTACK is retired. Only currently visible representatives of live DEFEND incidents
 			// are published from enemy actor contacts; invisible incident representatives remain debounce memory only.
 			var defendMissions = 0;
+			var defendStep = Step("defend_missions");
 			foreach (var target in combatIntelService.VisibleEnemies.Where(IsValidVisibleEnemy)
 				.Where(IsDefenseTarget)
 				.OrderByDescending(t => defendTargetPriority.TryGetValue(t.ActorID, out var p) ? p : 0)
@@ -874,14 +951,21 @@ namespace OpenRA.Mods.Common.Traits
 				defendMissions++;
 			}
 
+			defendStep.Dispose();
+
 			// LST-loss SECURE is a normal domain-neutral incident and is published before ordinary
 			// territorial opportunities so a known transport kill-zone cannot be hidden by expansion work.
-			AppendTransportLossSecureMissions();
+			using (Step("append_transport_secure"))
+				AppendTransportLossSecureMissions();
 			// SECURE is selected first so RAID publication in the same scan can soften the next SECURE point.
-			AppendSecureMission();
-			AppendSeaTransportBeachSecureMissions();
-			AppendRaidMissions();
-			AppendReconMission();
+			using (Step("append_secure"))
+				AppendSecureMission();
+			using (Step("append_beach_secure"))
+				AppendSeaTransportBeachSecureMissions();
+			using (Step("append_raid"))
+				AppendRaidMissions();
+			using (Step("append_recon"))
+				AppendReconMission();
 			lastPublishedWorldTick = world.WorldTick;
 		}
 
@@ -1317,13 +1401,42 @@ namespace OpenRA.Mods.Common.Traits
 			}
 		}
 
+		// SPIKE-FRANS-01 ScanSiteIntelCache: results are reused only inside one world tick and one combat-intel snapshot (the live parts read
+		// here, visibility and health, cannot change within a tick), keyed by everything the result depends on.
+		readonly Dictionary<(CPos Center, int Radius, int MaxAge, uint Primary), FransSiteIntel> siteIntelCache = [];
+		int siteIntelCacheTick = -1;
+		int siteIntelCacheSnapshot = -1;
+
 		FransSiteIntel BuildSiteIntel(CPos center, int radiusCells, int maximumContactAgeTicks, Actor visiblePrimary = null)
 		{
+			using var siteIntelStep = Step("site_intel");
 			combatIntelService.EnsureCurrentSnapshot();
+			if (!Info.ScanSiteIntelCache)
+				return BuildSiteIntelUncached(center, radiusCells, maximumContactAgeTicks, visiblePrimary, false);
+
+			if (siteIntelCacheTick != world.WorldTick || siteIntelCacheSnapshot != combatIntelService.SnapshotWorldTick)
+			{
+				siteIntelCache.Clear();
+				siteIntelCacheTick = world.WorldTick;
+				siteIntelCacheSnapshot = combatIntelService.SnapshotWorldTick;
+			}
+
+			var key = (center, radiusCells, maximumContactAgeTicks, visiblePrimary?.ActorID ?? 0u);
+			if (siteIntelCache.TryGetValue(key, out var cached))
+				return cached;
+
+			var built = BuildSiteIntelUncached(center, radiusCells, maximumContactAgeTicks, visiblePrimary, true);
+			siteIntelCache[key] = built;
+			return built;
+		}
+
+		// presorted: the contact list is built in actor-id order, so the scan switch skips the second sort (the final sort is kept when a visible primary may add an id).
+		FransSiteIntel BuildSiteIntelUncached(CPos center, int radiusCells, int maximumContactAgeTicks, Actor visiblePrimary, bool presorted)
+		{
 			var radiusSq = Math.Max(0, radiusCells) * Math.Max(0, radiusCells);
 			var actors = new Dictionary<uint, FransSiteIntelActor>();
 
-			foreach (var contact in combatIntelService.EnemyCombatContacts.OrderBy(c => c.ActorId))
+			foreach (var contact in presorted ? (IEnumerable<FransCombatIntelContact>)combatIntelService.EnemyCombatContacts : combatIntelService.EnemyCombatContacts.OrderBy(c => c.ActorId))
 			{
 				if ((contact.LastSeenCell - center).LengthSquared > radiusSq ||
 					(!contact.IsBuilding && world.WorldTick - contact.LastSeenWorldTick > maximumContactAgeTicks))
@@ -1349,7 +1462,7 @@ namespace OpenRA.Mods.Common.Traits
 					Math.Max(1, visiblePrimary.TraitOrDefault<Health>()?.HP ?? 1), Math.Max(0, GetTargetValue(visiblePrimary)));
 			}
 
-			return new FransSiteIntel(center, actors.Values.OrderBy(a => a.ActorId).ToArray());
+			return new FransSiteIntel(center, presorted && visiblePrimary == null ? actors.Values.ToArray() : actors.Values.OrderBy(a => a.ActorId).ToArray());
 		}
 
 		public bool TryGetLatestGroundAnchor(out CPos anchorPoint)

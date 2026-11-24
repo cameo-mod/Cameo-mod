@@ -52,6 +52,8 @@ Player:
 	FransGeneralBotModule:
 		RequiresCondition: enable-fransbot || inc3_frans_services
 		RaidPublishRememberedBuildings: true
+		# SPIKE-FRANS-01: one SiteIntel build per key per scan tick (release switch; false = the old per-call build).
+		ScanSiteIntelCache: true
 		ReconProbeSpawnRepeatTicks: 4500
 		RaidInterferencePriorityBonus: 40
 		RaidInterferenceMemoryTicks: 500
