@@ -24,6 +24,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		public static int Scale(int value, int percent) =>
 			value <= 0 ? value : Math.Max(1, (int)((long)value * Math.Clamp(percent, 0, 100) / 100));
 
+		/// <summary>Only attack squads hunt (Sonnet MED): base defenders (Protection), harassers and support types keep their own roles.</summary>
+		public static bool Hunts(SquadCAType type) => type == SquadCAType.Rush || type == SquadCAType.Guerrilla;
+
+		/// <summary>After a pick that found no reachable cell, the next one waits this long (Sonnet LOW: no repeated path queries).</summary>
+		public const int HuntRetryTicks = 75;
+
 		/// <summary>The hunting squad's leader is within arriveCells of its hunt cell.</summary>
 		public static bool Arrived(long distSq, int arriveCells) => distSq <= (long)arriveCells * arriveCells;
 

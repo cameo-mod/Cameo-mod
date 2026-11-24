@@ -58,6 +58,11 @@ namespace OpenRA.Mods.Cameo.Test
 			}).ToArray();
 			Assert.That(order, Is.EqualTo(new[] { 3, 2, 4, 0 }), "never-assigned nearest first; visible cells never");
 
+			Assert.That(Stalemate01CA.Hunts(SquadCAType.Rush), Is.True);
+			Assert.That(Stalemate01CA.Hunts(SquadCAType.Guerrilla), Is.True);
+			Assert.That(Stalemate01CA.Hunts(SquadCAType.Protection), Is.False, "base defenders never leave home to hunt");
+			Assert.That(Stalemate01CA.Hunts(SquadCAType.Harass), Is.False);
+
 			Assert.That(Stalemate01CA.Arrived(16, 4), Is.True);
 			Assert.That(Stalemate01CA.Arrived(17, 4), Is.False);
 		}
@@ -88,6 +93,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(logic, Does.Contain("!ablateLateEscalation.Off(Player, AblationIds.StalemateLateEscalation)"));
 			Assert.That(logic, Does.Contain("!ablateFinishMode.Off(Player, AblationIds.StalemateFinishMode)"));
 			Assert.That(logic, Does.Contain("Player.Shroud.IsVisible(cell)"), "fog-honest: only the bot's own vision");
+			Assert.That(logic, Does.Contain("huntRetryAt = World.WorldTick + Stalemate01CA.HuntRetryTicks;"), "a failed pick cools down");
 
 			var squad = Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCA.cs");
 			Assert.That(squad, Does.Contain("minAttackForceDelayTicks = LateDelay("));
@@ -96,6 +102,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var ground = Source("mods/CA/Traits/BotModules/Squads/States/GroundStatesCA.cs");
 			Assert.That(ground, Does.Contain("owner.SquadManager.FinishHuntCell(owner.Units.First().Actor)"));
+			Assert.That(ground, Does.Contain("owner.SquadManager.FinishModeActive && Stalemate01CA.Hunts(owner.Type)"));
 			Assert.That(ground, Does.Contain("owner.Target.Type == TargetType.FrozenActor || owner.IsHunting"));
 		}
 	}

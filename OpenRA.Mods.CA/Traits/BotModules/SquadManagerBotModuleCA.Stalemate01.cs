@@ -20,6 +20,7 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateLateEscalation, ablateFinishMode;
 		List<CPos> huntCells;
 		readonly Dictionary<CPos, int> huntAssigned = new();
+		int huntRetryAt;
 
 		internal bool LateEscalationActive => Stalemate01CA.Late(Info.LateEscalationEnabled, World.WorldTick, Info.LateEscalationStartTick)
 			&& !ablateLateEscalation.Off(Player, AblationIds.StalemateLateEscalation);
@@ -35,7 +36,7 @@ namespace OpenRA.Mods.CA.Traits
 		internal CPos? FinishHuntCell(Actor leader)
 		{
 			var mobile = leader?.TraitOrDefault<Mobile>();
-			if (mobile == null)
+			if (mobile == null || World.WorldTick < huntRetryAt)
 				return null;
 
 			if (huntCells == null)
@@ -69,6 +70,7 @@ namespace OpenRA.Mods.CA.Traits
 				return cell;
 			}
 
+			huntRetryAt = World.WorldTick + Stalemate01CA.HuntRetryTicks;
 			return null;
 		}
 	}

@@ -109,7 +109,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			// STALEMATE-01 finish mode (switch ON only, late game): nothing visible and nothing remembered - hunt the least recently
 			// visited unseen grid cell the leader can reach instead of holding (a seat with no known building must still be found).
-			if (owner.SquadManager.FinishModeActive)
+			if (owner.SquadManager.FinishModeActive && Stalemate01CA.Hunts(owner.Type))
 			{
 				var cell = owner.SquadManager.FinishHuntCell(owner.Units.First().Actor);
 				if (cell != null)
