@@ -49,6 +49,7 @@
     <None Include="../mods/cameo/rules/world.yaml" Link="source/packaging/world.yaml" CopyToOutputDirectory="Always" />
     <None Include="../mods/cameo/rules/player.yaml" Link="source/packaging/player.yaml" CopyToOutputDirectory="Always" />
     <None Include="../mods/cameo/ai/ai.yaml" Link="source/packaging/ai.yaml" CopyToOutputDirectory="Always" />
+    <None Include="../mods/cameo/ContentPacks/**/ai.yaml" Link="source/packs/%(RecursiveDir)ai.yaml" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../mods/cameo/rules/dev/logging.yaml" Link="source/packaging/dev-logging.yaml" CopyToOutputDirectory="Always" />
     <None Include="../Directory.Build.targets" Link="source/packaging/Directory.Build.targets" CopyToOutputDirectory="Always" />
     <None Include="../CameoDev.proj" Link="source/packaging/CameoDev.proj" CopyToOutputDirectory="Always" />
