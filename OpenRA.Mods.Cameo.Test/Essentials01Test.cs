@@ -61,6 +61,46 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(AblationSpec.RegistryIds(), Does.Contain("pb_essentials_low_cash"));
 		}
 
+		static string Cycle(string last, params (string, int)[] items)
+		{
+			var i = CycleProductionCA.Pick(items, last);
+			return i < 0 ? null : items[i].Item1;
+		}
+
+		[Test]
+		public void TheProductionTypesAreCycledFewestFirstThenInNameOrder()
+		{
+			// barracks, war factory, airfield, naval yard: each at 1; the cycle walks the names and then the counts rise together
+			var counts = new[] { ("airfield", 1), ("barracks", 1), ("navalyard", 1), ("warfactory", 1) };
+			Assert.That(Cycle(null, counts), Is.EqualTo("airfield"));
+			Assert.That(Cycle("airfield", counts), Is.EqualTo("barracks"));
+			Assert.That(Cycle("barracks", counts), Is.EqualTo("navalyard"));
+			Assert.That(Cycle("navalyard", counts), Is.EqualTo("warfactory"));
+			Assert.That(Cycle("warfactory", counts), Is.EqualTo("airfield"), "wraps around");
+		}
+
+		[Test]
+		public void ATypeWithFewerBuildingsGoesBeforeTheCycleCursorAndNothingMeansNone()
+		{
+			Assert.That(Cycle("airfield", ("airfield", 3), ("barracks", 2), ("warfactory", 1)), Is.EqualTo("warfactory"));
+			Assert.That(Cycle("warfactory", ("airfield", 1), ("barracks", 2)), Is.EqualTo("airfield"));
+			Assert.That(CycleProductionCA.Pick(new (string, int)[0], null), Is.EqualTo(-1));
+			Assert.That(AblationIds.CycleProduction, Is.EqualTo("pb_cycle_production"));
+			Assert.That(AblationSpec.RegistryIds(), Does.Contain("pb_cycle_production"));
+			Assert.That(new BaseBuilderBotModuleCAInfo().CycleProductionAboveLine, Is.False, "code default off; the yaml arms genericbot only");
+		}
+
+		[Test]
+		public void TheCycleRungIsSwitchGatedAboveTheLineAndUsesNoRandomDraw()
+		{
+			var src = Queue();
+			Assert.That(src, Does.Contain("bool CycleOn => baseBuilder.CycleProductionArmed && !ablateCycle.Off(player, AblationIds.CycleProduction);"));
+			Assert.That(src, Does.Contain("ProdBusyCA.SweepBank(AllProducersOn, availableCash, orderedCostThisSweep) > cycleLine"));
+			var from = src.IndexOf("ActorInfo ChooseCycledProduction(", StringComparison.Ordinal);
+			var to = src.IndexOf("bool EssentialsHolds(", from, StringComparison.Ordinal);
+			Assert.That(src.Substring(from, to - from), Does.Not.Contain("Random"));
+		}
+
 		[Test]
 		public void TheWiringIsSwitchGatedAndAFirstStartCountsAsBeingProducedAtOnce()
 		{

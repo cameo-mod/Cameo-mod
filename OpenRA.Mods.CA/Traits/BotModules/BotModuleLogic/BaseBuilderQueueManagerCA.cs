@@ -114,8 +114,10 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateRatio;
 
 		// PROD-BUSY-01 rows (DEV provider only; release = on).
-		AblationLatch ablateAllProducers, ablateIdleSweep, ablateEssentials;
+		AblationLatch ablateAllProducers, ablateIdleSweep, ablateEssentials, ablateCycle;
+		string lastCycledProduction;
 		bool AllProducersOn => baseBuilder.AllBuildingProducersArmed && !ablateAllProducers.Off(player, AblationIds.ProdBusyAllBuildingProducers);
+		bool CycleOn => baseBuilder.CycleProductionArmed && !ablateCycle.Off(player, AblationIds.CycleProduction);
 		bool EssentialsOn => baseBuilder.EssentialsLowCashArmed && !ablateEssentials.Off(player, AblationIds.EssentialsLowCash);
 		bool IdleSweepOn => baseBuilder.BuildingIdleSweepArmed && !ablateIdleSweep.Off(player, AblationIds.ProdBusyBuildingIdleSweep);
 		int staticLiveTick = -1;
@@ -2014,9 +2016,49 @@ namespace OpenRA.Mods.CA.Traits
 				baseBuilder.BuildingsBeingProduced.ContainsKey(name));
 
 		// ESSENTIALS-01: the tier line is BotLimits.MaximiseProductionCashRequirement (Hard 3500); no BotLimits or a negative value = no line (inert).
+		int TierLine => botLimits != null && botLimits.Info.MaximiseProductionCashRequirement >= 0 ? botLimits.Info.MaximiseProductionCashRequirement : 0;
+
+		// PROD-BUSY cycle: the candidates are the same cap-filtered, power-resolved production buildings the overflow rung uses, plus the naval yard when
+		// the base has water; the pick is CycleProductionCA (fewest first, then the next type in name order), no random draw.
+		ActorInfo ChooseCycledProduction(IEnumerable<ActorInfo> buildableThings, ActorInfo power)
+		{
+			var candidates = OverflowProductionCandidates(buildableThings, power);
+			if (waterState == WaterCheck.EnoughWater
+				&& AIUtils.IsAreaAvailable<GivesBuildableArea>(world, player, world.Map, baseBuilder.Info.CheckForWaterRadius, baseBuilder.Info.WaterTerrainTypes))
+			{
+				var naval = GetProducibleBuilding(baseBuilder.Info.NavalProductionTypes, buildableThings);
+				if (naval != null)
+				{
+					var producing = baseBuilder.BuildingsBeingProduced.TryGetValue(naval.Name, out var n) ? n : 0;
+					if (BaseBuilderQueueEvalCA.LimitAdmits(baseBuilder.TryGetBuildingLimit(naval.Name, out var limit), limit,
+							playerBuildings.Count(a => a.Info.Name == naval.Name), producing))
+					{
+						var resolved = BaseBuilderQueueEvalCA.PickOrPower(naval, power, HasSufficientPowerForActor);
+						if (resolved != null)
+							candidates.Add(resolved);
+					}
+				}
+			}
+
+			if (candidates.Count == 0)
+				return null;
+
+			var counted = new List<(string Name, int Count)>(candidates.Count);
+			foreach (var c in candidates)
+				counted.Add((c.Name, playerBuildings.Count(a => a.Info.Name == c.Name)
+					+ (baseBuilder.BuildingsBeingProduced.TryGetValue(c.Name, out var inProd) ? inProd : 0)));
+
+			var index = CycleProductionCA.Pick(counted, lastCycledProduction);
+			if (index < 0)
+				return null;
+
+			lastCycledProduction = candidates[index].Name;
+			return candidates[index];
+		}
+
 		bool EssentialsHolds(ActorInfo item, bool isRefinery, bool plannerOrDemand, int bank)
 		{
-			var line = botLimits != null && botLimits.Info.MaximiseProductionCashRequirement >= 0 ? botLimits.Info.MaximiseProductionCashRequirement : 0;
+			var line = TierLine;
 			if (line <= 0 || bank >= line)
 				return false;
 
@@ -2378,6 +2420,22 @@ namespace OpenRA.Mods.CA.Traits
 				var demandPick = ChooseExpansionDemandItem(queue, buildableThings);
 				if (demandPick != null)
 					return demandPick;
+			}
+
+			// PROD-BUSY cycle (USER 11-24): above the tier line cash becomes more units, i.e. one more production building per type in turn.
+			// Below the planner wants, the opening and the expansion demand, which still win; above the bank-overflow rung's own higher line.
+			if (CycleOn)
+			{
+				var cycleLine = TierLine;
+				if (cycleLine > 0 && ProdBusyCA.SweepBank(AllProducersOn, availableCash, orderedCostThisSweep) > cycleLine)
+				{
+					var cycled = ChooseCycledProduction(buildableThings, power);
+					if (cycled != null)
+					{
+						AIUtils.BotDebug("{0} decided to build {1}: Priority override (cycled production)", queue.Actor.Owner, cycled.Name);
+						return cycled;
+					}
+				}
 			}
 
 			// BZ_production_scaling: banked cash held over the difficulty line while every unit

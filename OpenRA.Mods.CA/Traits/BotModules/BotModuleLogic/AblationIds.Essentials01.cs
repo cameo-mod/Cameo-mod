@@ -16,5 +16,6 @@ namespace OpenRA.Mods.CA.Traits
 	public static partial class AblationIds
 	{
 		public const string EssentialsLowCash = "pb_essentials_low_cash";
+		public const string CycleProduction = "pb_cycle_production"; // off = the old production rungs (overflow, scaling, threshold) only
 	}
 }
