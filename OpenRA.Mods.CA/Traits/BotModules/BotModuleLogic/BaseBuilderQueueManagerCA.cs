@@ -2195,7 +2195,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// UPGRADE-PRODUCERS-01: the first copy of a structure type with no fraction row (upgrade/research producers, radar, tech centres) is essential.
-			if (UnlistedOnceOn && UnlistedOnceKind(actorInfo) && !OwnedOrQueued(actorInfo))
+			if (UnlistedOnceOn && UnlistedOnceKind(actorInfo) && !NavalNeedsWater(actorInfo) && !OwnedOrQueued(actorInfo))
 				return true;
 
 			// One queued-but-unplaced factory is enough to break the deadlock — don't let the
