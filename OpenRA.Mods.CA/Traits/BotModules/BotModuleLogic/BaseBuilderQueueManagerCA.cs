@@ -2109,6 +2109,11 @@ namespace OpenRA.Mods.CA.Traits
 		bool UnlistedOnceKind(ActorInfo info) =>
 			!(baseBuilder.Info.BuildingFractions != null && baseBuilder.Info.BuildingFractions.ContainsKey(info.Name)) && FirstCopyKind(info);
 
+		/// <summary>A naval production structure while the base has no water to place it on (same test as the fraction roll); never essential, never picked.</summary>
+		bool NavalNeedsWater(ActorInfo info) =>
+			BaseBuilderQueueEvalCA.NavalBlocked(baseBuilder.Info.NavalProductionTypes.Contains(info.Name), waterState == WaterCheck.NotEnoughWater,
+				() => AIUtils.IsAreaAvailable<GivesBuildableArea>(world, player, world.Map, baseBuilder.Info.CheckForWaterRadius, baseBuilder.Info.WaterTerrainTypes));
+
 		/// <summary>ESSENTIAL-PASS-01: the structure kinds whose first copy is essential: UnlistedOnceKind's classification without the fraction-row test. Cached per name.</summary>
 		bool FirstCopyKind(ActorInfo info)
 		{
@@ -2154,8 +2159,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (baseBuilder.Info.ProductionTypes.Contains(item.Name) && botLimits != null && BaseBuilderQueueEvalCA.LimitReached(0, ProductionTypeLimit))
 					continue;
 
-				if (BaseBuilderQueueEvalCA.NavalBlocked(baseBuilder.Info.NavalProductionTypes.Contains(item.Name), waterState == WaterCheck.NotEnoughWater,
-						() => AIUtils.IsAreaAvailable<GivesBuildableArea>(world, player, world.Map, baseBuilder.Info.CheckForWaterRadius, baseBuilder.Info.WaterTerrainTypes)))
+				if (NavalNeedsWater(item))
 					continue;
 
 				infos.Add(item);
@@ -2182,8 +2186,13 @@ namespace OpenRA.Mods.CA.Traits
 				return true;
 
 			// ESSENTIAL-PASS-01: the first copy of every building type and every cash trickler passes the share, reserve and mobile-spend votes.
-			if (EssentialPassOn && EssentialPassCA.Essential(FirstCopyKind(actorInfo), OwnedOrQueued(actorInfo), actorInfo.HasTraitInfo<CashTricklerInfo>()))
-				return true;
+			if (EssentialPassOn && !NavalNeedsWater(actorInfo))
+			{
+				// the owned/queued scan only runs for an eligible kind (Haiku NIT)
+				var firstCopyKind = FirstCopyKind(actorInfo);
+				if (EssentialPassCA.Essential(firstCopyKind, firstCopyKind && OwnedOrQueued(actorInfo), actorInfo.HasTraitInfo<CashTricklerInfo>()))
+					return true;
+			}
 
 			// UPGRADE-PRODUCERS-01: the first copy of a structure type with no fraction row (upgrade/research producers, radar, tech centres) is essential.
 			if (UnlistedOnceOn && UnlistedOnceKind(actorInfo) && !OwnedOrQueued(actorInfo))

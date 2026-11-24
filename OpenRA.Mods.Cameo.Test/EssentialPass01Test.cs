@@ -49,7 +49,10 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheRuleSitsInIsArmyFirstEssentialAheadOfTheFirstFactoryRuleAndReusesTheKindCache()
 		{
 			var q = Source("mods/CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs");
-			var rule = q.IndexOf("EssentialPassCA.Essential(FirstCopyKind(actorInfo), OwnedOrQueued(actorInfo), actorInfo.HasTraitInfo<CashTricklerInfo>())", StringComparison.Ordinal);
+			var rule = q.IndexOf("EssentialPassCA.Essential(firstCopyKind, firstCopyKind && OwnedOrQueued(actorInfo), actorInfo.HasTraitInfo<CashTricklerInfo>())", StringComparison.Ordinal);
+			Assert.That(q, Does.Contain("if (EssentialPassOn && !NavalNeedsWater(actorInfo))"), "a naval structure without water is never an essential (CM NIT)");
+			Assert.That(q, Does.Contain("if (NavalNeedsWater(item))"), "the unlisted-once pick uses the same test");
+			Assert.That(q, Does.Contain("continue;\n\n\t\t\t\tinfos.Add(item);"), "the unlisted-once pick uses the same test");
 			Assert.That(rule, Is.GreaterThan(q.IndexOf("bool IsArmyFirstEssential(ActorInfo actorInfo)", StringComparison.Ordinal)));
 			Assert.That(rule, Is.LessThan(q.IndexOf("// One queued-but-unplaced factory is enough", StringComparison.Ordinal)));
 			Assert.That(q, Does.Contain("bool EssentialPassOn => baseBuilder.EssentialPassArmed && !ablateEssentialPass.Off(player, AblationIds.Af2EssentialPass);"));
