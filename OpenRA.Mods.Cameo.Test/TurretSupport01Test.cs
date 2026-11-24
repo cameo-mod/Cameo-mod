@@ -108,7 +108,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(q, Does.Contain("if (supportCell != null)\n\t\t\t\t\t\tlocation = supportCell;\n\t\t\t\t\telse if (advisedDefense != null)"));
 
 			// a hold keeps the READY item queued, bounded by the READY watchdog (the turret is then placed at a base cell)
-			Assert.That(q, Does.Contain("if (supportHold && !(ReadyWatchdogOn && BaseFix02CA.HoldExpired("));
+			Assert.That(q, Does.Contain("if (supportHold && ReadyWatchdogOn && !BaseFix02CA.HoldExpired("));
 
 			// legality is the engine's own check, which already honours the lobby build-next-to-an-ally option; the attack picture counts own AND allied buildings (solo = own only)
 			var chooser = q.Substring(q.IndexOf("(CPos? Cell, bool Hold) ChooseSupportTurretCell(", StringComparison.Ordinal));

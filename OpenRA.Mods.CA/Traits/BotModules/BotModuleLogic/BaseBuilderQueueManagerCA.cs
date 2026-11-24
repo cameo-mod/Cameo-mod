@@ -1405,7 +1405,7 @@ namespace OpenRA.Mods.CA.Traits
 
 					// TEAM-DEFEND-02 (tm_ally_turret_support): a turret placed while an own or allied base is attacked goes where it covers the attackers (solo and team alike).
 					var (supportCell, supportHold) = ChooseSupportTurretCell(actorInfo, queue.Actor);
-					if (supportHold && !(ReadyWatchdogOn && BaseFix02CA.HoldExpired(true, world.WorldTick, world.WorldTick - ReadyHeldTicks(queue, currentBuilding.Item), baseBuilder.Info.ReadyWatchdogTicks)))
+					if (supportHold && ReadyWatchdogOn && !BaseFix02CA.HoldExpired(true, world.WorldTick, world.WorldTick - ReadyHeldTicks(queue, currentBuilding.Item), baseBuilder.Info.ReadyWatchdogTicks))
 					{
 						EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, type,
 							BotQueueTransitionKind.Held, BotQueueTransitionReason.FrontBackHold);
