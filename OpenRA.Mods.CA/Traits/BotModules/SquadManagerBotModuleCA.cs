@@ -3486,6 +3486,11 @@ namespace OpenRA.Mods.CA.Traits
 			roster.RemoveAll(u => !AIUtils.PathExist(u.Actor, targetCell,
 				m13CandidateTarget, BlockedByActor.Immovable));
 
+			// TEAM-GATHER-01 (tl_route_all): with a team order open the liveness wave does not launch alone; its units stay in the pool and join the order
+			// (CreateAttackForce, which the caller runs next when nothing was dispatched, forms their squad for it).
+			if (TeamLeadRoutesLaunch())
+				return false;
+
 			// BLOB-LAUNCH-01 attack gate (USER 11-24: no attack below WAVE-MIN): the liveness wave holds below BlobLaunch01CA.MinUnits.
 			if (BlobAttackGateHolds(roster.Count))
 				return false;

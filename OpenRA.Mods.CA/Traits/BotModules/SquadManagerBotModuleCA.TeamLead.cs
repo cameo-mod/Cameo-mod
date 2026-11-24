@@ -31,6 +31,9 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateFallbackPublish;
 		AblationLatch ablateOrderSurvive;
 		AblationLatch ablatePushBar;
+		AblationLatch ablateGatherHold;
+		AblationLatch ablateGraceHold;
+		AblationLatch ablateRouteAll;
 		int teamLeadNextCheck;
 		string teamLeadKey;
 		TeamLeadTeam teamLeadTeam;
@@ -58,6 +61,17 @@ namespace OpenRA.Mods.CA.Traits
 
 		// TEAM-BLOB-01 push bar: no push (window or arrival) while the squads at the rally are below the WAVE-MIN bars; own switch + row.
 		internal bool TeamLeadPushBarOn => TeamLeadOn && Info.TeamLeadPushBarEnabled && !ablatePushBar.Off(Player, AblationIds.TeamLeadPushBar);
+
+		// TEAM-GATHER-01 (V04 RCA): a gathering squad keeps its order on contact, a held order is never cancelled for missing reports, and the M13 / stalemate
+		// launches join an open order; each with its own switch + row.
+		internal bool TeamLeadGatherHoldOn => TeamLeadOn && Info.TeamLeadGatherHoldEnabled && !ablateGatherHold.Off(Player, AblationIds.TeamLeadGatherHold);
+
+		bool TeamLeadGraceHoldOn => TeamLeadOn && Info.TeamLeadGraceHoldEnabled && !ablateGraceHold.Off(Player, AblationIds.TeamLeadGraceHold);
+
+		bool TeamLeadRouteAllOn => TeamLeadOn && Info.TeamLeadRouteAllEnabled && !ablateRouteAll.Off(Player, AblationIds.TeamLeadRouteAll);
+
+		/// <summary>A team order is open and the route-all row is on: the liveness (M13) wave and the stalemate breaker wave hold, their units join the order.</summary>
+		internal bool TeamLeadRoutesLaunch() => TeamLeadRouteAllOn && TeamLeadOpenOrder() != null;
 
 		bool TeamLeadOrderSurviveOn => TeamLeadOn && Info.TeamLeadOrderSurviveEnabled && !ablateOrderSurvive.Off(Player, AblationIds.TeamLeadOrderSurvive);
 
@@ -585,7 +599,11 @@ namespace OpenRA.Mods.CA.Traits
 			if (order == null || order.Cancelled || order.Pushed)
 				return;
 
-			order.Prune(o => o is SquadCA q && q.IsValid && q.FuzzyStateMachine?.CurrentState is TeamLeadGatherStateCA);
+			// TEAM-GATHER-01 (tl_gather_hold): a report stays while its squad is a live squad of this bot (a fight or a state change does not drop it).
+			if (TeamLeadGatherHoldOn)
+				order.Prune(o => o is SquadCA q && q.IsValid && Squads.Contains(q));
+			else
+				order.Prune(o => o is SquadCA q && q.IsValid && q.FuzzyStateMachine?.CurrentState is TeamLeadGatherStateCA);
 			// An order published by the leader's team check has no squad yet: the members form theirs on their next check and report from the gather
 			// state one squad pass later, so the no-report grace is longer while TEAM-LEAD-02 publishes (Info switch; the row only changes the publish).
 			var reportGrace = (Info.TeamLeadCadenceEnabled ? 5 : 2) * Info.TeamLeadCheckTicks;
@@ -600,6 +618,7 @@ namespace OpenRA.Mods.CA.Traits
 			var cancel = order.LeaderKey != team.Election.Leader ? "leader_changed"
 				: order.Extending && TeamLeadCA.PushBarDissolve(now, order.PushBarSince, Info.TeamLeadPushBarMaxTicks) ? "below_bar"
 				: !order.GatherOnly && !order.Extending && now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? "max_age"
+				: TeamLeadCA.GraceHolds(TeamLeadGraceHoldOn, order.Extending) ? null
 				: order.ReportCount == 0 && now - (TeamLeadOrderSurviveOn ? HarassCapCA.NoReportSince(order.IssueTick, order.LastReportTick) : order.IssueTick) > reportGrace ? "no_reports"
 				: null;
 			if (cancel != null)
@@ -675,6 +694,10 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (!order.Extending)
 				DiagnosticTeamEvent("team_push_hold", "seq=" + order.Seq + " arrived=" + units + "/" + value + " bars=" + needUnits + "/" + minValue + " idle=" + teamIdle + " age=" + (now - order.IssueTick));
+
+			// TEAM-GATHER-01 (tl_grace_hold): a held push counts as life of the order, so the no-report grace cannot run out under it.
+			if (TeamLeadGraceHoldOn)
+				order.LastReportTick = now;
 
 			order.HoldPush(now);
 			return true;

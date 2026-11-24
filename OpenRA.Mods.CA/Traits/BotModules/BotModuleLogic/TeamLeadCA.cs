@@ -268,6 +268,12 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>Why the leader publishes: the ready blob (an attack order), or the fallback's rally order (gather only, never an attack).</summary>
 		public enum PublishWhy { None, Ready, Gather }
 
+		/// <summary>TEAM-GATHER-01 tl_gather_hold: before the push a gathering squad keeps its order on contact (it fights what is in range and walks on to the rally).</summary>
+		public static bool GatherHoldsOnContact(bool holdOn, bool pushed) => holdOn && !pushed;
+
+		/// <summary>TEAM-GATHER-01 tl_grace_hold: an order whose push is held (extending) is never cancelled for missing reports; its own dissolve ends it.</summary>
+		public static bool GraceHolds(bool graceHoldOn, bool extending) => graceHoldOn && extending;
+
 		/// <summary>
 		/// The no-order guarantee (USER rule 2026-11-24: bots never trickle in small groups; nothing below WAVE-MIN ever attacks). It is called only when the
 		/// ready path (OrderDue) said no, so the blob is below the WAVE-MIN bars: after <paramref name="sinceOrder"/> ticks without any team order

@@ -45,5 +45,12 @@ namespace OpenRA.Mods.CA.Traits
 		public const string TeamLeadHarassCap = "tl_harass_cap";
 		public const string TeamLeadHarassMin = "tl_harass_min";
 		public const string TeamLeadRaiderRecall = "tl_raider_recall";
+
+		// TEAM-GATHER-01 (USER order, V04 RCA 2026-11-24): a gathering squad keeps its order on contact (tl_gather_hold; Info TeamLeadGatherHoldEnabled), a held or
+		// extending order is never cancelled for missing reports (tl_grace_hold; Info TeamLeadGraceHoldEnabled), and the liveness (M13) and stalemate-breaker
+		// launches join an open team order instead of launching alone (tl_route_all; Info TeamLeadRouteAllEnabled).
+		public const string TeamLeadGatherHold = "tl_gather_hold";
+		public const string TeamLeadGraceHold = "tl_grace_hold";
+		public const string TeamLeadRouteAll = "tl_route_all";
 	}
 }

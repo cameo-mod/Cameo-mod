@@ -4759,6 +4759,9 @@ Player:
 		TeamLeadOrderSurviveEnabled: true
 		# TEAM-BLOB-01 push bar (USER rule: bots never trickle): a due team push waits at the rally while the arrived squads are below the WAVE-MIN bars; dissolved after 3000 ticks of hold.
 		TeamLeadPushBarEnabled: true
+		TeamLeadGatherHoldEnabled: true
+		TeamLeadGraceHoldEnabled: true
+		TeamLeadRouteAllEnabled: true
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		HarassMinEnabled: true
@@ -4910,6 +4913,9 @@ Player:
 		TeamLeadOrderSurviveEnabled: true
 		# TEAM-BLOB-01 push bar (USER rule: bots never trickle): a due team push waits at the rally while the arrived squads are below the WAVE-MIN bars; dissolved after 3000 ticks of hold.
 		TeamLeadPushBarEnabled: true
+		TeamLeadGatherHoldEnabled: true
+		TeamLeadGraceHoldEnabled: true
+		TeamLeadRouteAllEnabled: true
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		HarassMinEnabled: true
@@ -5057,6 +5063,9 @@ Player:
 		TeamLeadOrderSurviveEnabled: true
 		# TEAM-BLOB-01 push bar (USER rule: bots never trickle): a due team push waits at the rally while the arrived squads are below the WAVE-MIN bars; dissolved after 3000 ticks of hold.
 		TeamLeadPushBarEnabled: true
+		TeamLeadGatherHoldEnabled: true
+		TeamLeadGraceHoldEnabled: true
+		TeamLeadRouteAllEnabled: true
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		HarassMinEnabled: true
@@ -5206,6 +5215,9 @@ Player:
 		TeamLeadOrderSurviveEnabled: true
 		# TEAM-BLOB-01 push bar (USER rule: bots never trickle): a due team push waits at the rally while the arrived squads are below the WAVE-MIN bars; dissolved after 3000 ticks of hold.
 		TeamLeadPushBarEnabled: true
+		TeamLeadGatherHoldEnabled: true
+		TeamLeadGraceHoldEnabled: true
+		TeamLeadRouteAllEnabled: true
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		HarassMinEnabled: true
@@ -5355,6 +5367,9 @@ Player:
 		TeamLeadOrderSurviveEnabled: true
 		# TEAM-BLOB-01 push bar (USER rule: bots never trickle): a due team push waits at the rally while the arrived squads are below the WAVE-MIN bars; dissolved after 3000 ticks of hold.
 		TeamLeadPushBarEnabled: true
+		TeamLeadGatherHoldEnabled: true
+		TeamLeadGraceHoldEnabled: true
+		TeamLeadRouteAllEnabled: true
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		HarassMinEnabled: true
@@ -5501,6 +5516,9 @@ Player:
 		TeamLeadOrderSurviveEnabled: true
 		# TEAM-BLOB-01 push bar (USER rule: bots never trickle): a due team push waits at the rally while the arrived squads are below the WAVE-MIN bars; dissolved after 3000 ticks of hold.
 		TeamLeadPushBarEnabled: true
+		TeamLeadGatherHoldEnabled: true
+		TeamLeadGraceHoldEnabled: true
+		TeamLeadRouteAllEnabled: true
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		HarassCapPercent: 40

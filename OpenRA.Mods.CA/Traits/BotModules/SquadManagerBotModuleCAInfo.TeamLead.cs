@@ -107,6 +107,21 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("TEAM-BLOB-01 push bar: the hard cap of the hold, in ticks after the first held push. Range 1500-6000.")]
 		public readonly int TeamLeadPushBarMaxTicks = 3000;
 
+		[Desc("TEAM-GATHER-01 (release switch; the DEV row is tl_gather_hold). On: a squad gathering for an order that has not pushed yet never leaves the order for a fight. It reports to the order the moment it joins; when an enemy stands inside TeamLeadGatherFightCells it stops (its units fire at what is in weapon range), fights it out, then walks on to the rally; its report is not dropped while it stays a live squad of the bot. Off = a contact sends the squad into its own attack and out of the order as before.")]
+		public readonly bool TeamLeadGatherHoldEnabled = false;
+
+		[Desc("TEAM-GATHER-01 tl_gather_hold: the distance in cells inside which a gathering squad stops to fight an enemy (about the weapon range of an infantry or tank squad).")]
+		public readonly int TeamLeadGatherFightCells = 6;
+
+		[Desc("TEAM-GATHER-01 tl_gather_hold: a fight (a stand-off with an enemy nobody can reach) longer than this many ticks is dropped: the squad walks on to the rally and ignores contacts for the same time.")]
+		public readonly int TeamLeadGatherFightMaxTicks = 450;
+
+		[Desc("TEAM-GATHER-01 (release switch; the DEV row is tl_grace_hold). On: the no-report grace never cancels an order whose push is held or extending (the dissolve at TeamLeadPushBarMaxTicks after the first hold stays); each held push also refreshes the last report tick. Off = no_reports can cancel a held order as before.")]
+		public readonly bool TeamLeadGraceHoldEnabled = false;
+
+		[Desc("TEAM-GATHER-01 (release switch; the DEV row is tl_route_all). On: while a team order is open, the liveness (M13) urgent attack and the stalemate breaker wave do not launch alone; their units stay in the pool and join the order. Defence and ally defence are not affected. Off = they launch as before (behind the BLOB-LAUNCH-01 attack gate).")]
+		public readonly bool TeamLeadRouteAllEnabled = false;
+
 		[Desc("TEAM-BLOB-01 (release switch; the DEV row is tl_order_survive). On: when the elected leader changes while an order lives, the new leader takes the order over instead of cancelling it (the squads gathering for it are not thrown back to the pool). Off = the order is cancelled on a leader change as before.")]
 		public readonly bool TeamLeadOrderSurviveEnabled = false;
 	}
