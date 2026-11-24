@@ -47,7 +47,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void NoModCodeUsesASingleInstanceLookupForAMultiInstanceTrait()
 		{
 			var types = MultiInstanceTypes();
-			var lookup = new Regex(@"\b(Trait|TraitOrDefault|TraitInfo|TraitInfoOrDefault)<(" + string.Join("|", types) + @")(Info)?>\s*\(");
+			var lookup = new Regex(@"\b(Trait|TraitOrDefault|TraitInfo|TraitInfoOrDefault)<(?:[A-Za-z_][A-Za-z0-9_]*\.)*(" + string.Join("|", types) + @")(Info)?>\s*\(");
 			var hits = Directory.GetFiles(Path.Combine(Root, "mods"), "*.cs", SearchOption.AllDirectories)
 				.SelectMany(f => File.ReadAllLines(f).Select((l, i) => (f, i, l)))
 				.Where(x => lookup.IsMatch(x.l))
