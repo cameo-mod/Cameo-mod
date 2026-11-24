@@ -99,6 +99,27 @@ namespace OpenRA.Mods.CA.Traits
 			"Gated by SwitchCondition; row pb_idle_queue_floor.")]
 		public readonly bool IdleQueueFloor = false;
 
+		[Desc("PROD-FIX-01 F-A (AUDIT_PRODUCTION_01): the K5 reserve gate of a unit order leaves the unpaid cost of the UpgradeServiceQueues types",
+			"(upgrades, research, add-ons, promotions) out of the spent bank and does not apply the production reserve P, so units keep being",
+			"built at low cash while upgrades run. Gated by SwitchCondition; row pb_unit_reserve_excl_upgrades.")]
+		public readonly bool UnitReserveExclUpgrades = false;
+
+		[Desc("PROD-FIX-01 F-B (AUDIT_PRODUCTION_01): the category sweep start advances one step every pass, so infantry is not always last.",
+			"Gated by SwitchCondition; row pb_rotate_start.")]
+		public readonly bool RotateStart = false;
+
+		[Desc("PROD-FIX-01 F-B: the bank-saturation verdict of every category visit reads the bank left after this pass's orders, the same value the in-fill",
+			"saturation break reads, not the pass-start snapshot. Gated by SwitchCondition; row pb_sat_batch_consistent.")]
+		public readonly bool SatBatchConsistent = false;
+
+		[Desc("PROD-FIX-01 F-D: UnitIntervals count elapsed game ticks (the world tick delta since the last bot visit) instead of bot visits.",
+			"Gated by SwitchCondition; row pb_interval_elapsed.")]
+		public readonly bool IntervalElapsed = false;
+
+		[Desc("PROD-FIX-01 F-F: the pass-level ProductionMinCashRequirement floor no longer ends the unit pass or the category sweep; an affordable unit is",
+			"still built (the batch bank and the reserve gate still apply). Gated by SwitchCondition; row pb_no_unit_floor.")]
+		public readonly bool NoUnitFloor = false;
+
 		[Desc("INFANTRY-IDLE-01: the queue types the idle floor serves.")]
 		public readonly string[] IdleQueueFloorQueues = { "Infantry", "RAInfantry", "SCZergInfantry" };
 
@@ -491,6 +512,15 @@ namespace OpenRA.Mods.CA.Traits
 		// PROD-BUSY-01: one switch and one ablation row each. With both on, every queue is served every pass, so the PR-2 depth horizon
 		// (visitGapTicks = the gap to this bot's next pass) is also the gap to that queue's next service.
 		AblationLatch ablateIdleCap, ablateIdleCapTiered, ablateIdleQueueFloor;
+
+		// PROD-FIX-01: one switch and one ablation row each.
+		AblationLatch ablateUnitReserve, ablateRotateStart, ablateSatBatch, ablateIntervalElapsed, ablateNoUnitFloor;
+		bool UnitReserveExclOn => switchesActive && Info.UnitReserveExclUpgrades && !ablateUnitReserve.Off(player, AblationIds.ProdFixUnitReserveExclUpgrades);
+		bool RotateStartOn => switchesActive && Info.RotateStart && !ablateRotateStart.Off(player, AblationIds.ProdFixRotateStart);
+		bool SatBatchOn => switchesActive && Info.SatBatchConsistent && !ablateSatBatch.Off(player, AblationIds.ProdFixSatBatchConsistent);
+		bool IntervalElapsedOn => switchesActive && Info.IntervalElapsed && !ablateIntervalElapsed.Off(player, AblationIds.ProdFixIntervalElapsed);
+		bool NoUnitFloorOn => switchesActive && Info.NoUnitFloor && !ablateNoUnitFloor.Off(player, AblationIds.ProdFixNoUnitFloor);
+		int lastIntervalTick = -1;
 		bool IdleQueueFloorOn => switchesActive && Info.IdleQueueFloor && !ablateIdleQueueFloor.Off(player, AblationIds.ProdBusyIdleQueueFloor);
 		bool IdleCapOn => switchesActive && Info.ShareTestNeverIdles && !ablateIdleCap.Off(player, AblationIds.ProdBusyIdleCap);
 		bool TieredIdleCapOn => switchesActive && Info.TieredIdleCap && !ablateIdleCapTiered.Off(player, AblationIds.ProdBusyIdleCapTiered);
@@ -789,9 +819,12 @@ namespace OpenRA.Mods.CA.Traits
 				counters.Observe(Info.AdaptiveObservationInterval, compositionProvider);
 
 			// Decrement any active unit intervals, removing any that reach zero
+			// PROD-FIX-01 F-D: pb_interval_elapsed counts the game ticks since the last visit (round-robin visits are many ticks apart).
+			var intervalStep = ProdBusyCA.IntervalStep(IntervalElapsedOn, lastIntervalTick, world.WorldTick);
+			lastIntervalTick = world.WorldTick;
 			foreach (KeyValuePair<string, int> i in activeUnitIntervals.ToList())
 			{
-				activeUnitIntervals[i.Key]--;
+				activeUnitIntervals[i.Key] -= intervalStep;
 				if (activeUnitIntervals[i.Key] <= 0)
 					activeUnitIntervals.Remove(i.Key);
 			}
@@ -888,8 +921,14 @@ namespace OpenRA.Mods.CA.Traits
 				var cashLean = BotPersonalityLeads.Lean(leadProviders, "steamroller");
 
 				// Don't produce if we don't have enough cash
-				if (playerResources.Cash + playerResources.Resources < BotPersonalityLeads.Scaled(Info.ProductionMinCashRequirement, cashLean))
+				// PROD-FIX-01 F-F: pb_no_unit_floor lets an affordable unit through whatever the bank (the batch still gates the spend).
+				var noUnitFloor = NoUnitFloorOn;
+				if (!noUnitFloor && playerResources.Cash + playerResources.Resources < BotPersonalityLeads.Scaled(Info.ProductionMinCashRequirement, cashLean))
 					return;
+
+				// PROD-FIX-01 F-B: pb_rotate_start moves the sweep start on every pass.
+				if (RotateStartOn)
+					currentQueueIndex = ProdBusyCA.RotateStart(currentQueueIndex, Info.UnitQueues.Length);
 
 				for (var i = 0; i < Info.UnitQueues.Length; i++)
 				{
@@ -904,7 +943,7 @@ namespace OpenRA.Mods.CA.Traits
 						// BV_m13_liveness: re-evaluated per category with the same cash accounting —
 						// while the bank stays at/above the tier bar the MaximiseProductionCash break is skipped.
 						var saturated = ProductionSaturationCA.Saturated(
-							playerResources.Cash + playerResources.Resources, BankSaturationThreshold);
+							ProdBusyCA.SaturationBank(SatBatchOn, (long)playerResources.Cash + playerResources.Resources, batch?.BankLeft), BankSaturationThreshold);
 
 						// PERF: We tick only one type of valid queue at a time
 						// if AI gets enough cash, it can fill all of its queues with enough ticks
@@ -915,7 +954,7 @@ namespace OpenRA.Mods.CA.Traits
 						var bankNow = (long)playerResources.Cash + playerResources.Resources;
 						if (ProdBusyCA.StopCategorySweep(AllCategoriesOn, saturated, bankNow,
 							BotPersonalityLeads.Scaled(MaximiseProductionCash, cashLean), batch?.BankLeft ?? bankNow,
-							BotPersonalityLeads.Scaled(Info.ProductionMinCashRequirement, cashLean)))
+							noUnitFloor ? 0 : BotPersonalityLeads.Scaled(Info.ProductionMinCashRequirement, cashLean)))
 							break;
 					}
 				}
@@ -1387,7 +1426,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (cachedUnpaidTick != world.WorldTick)
 			{
 				cachedUnpaidTick = world.WorldTick;
-				cachedUnpaid = SpendCommitmentsCA.UnpaidQueued(world, player);
+				cachedUnpaid = SpendCommitmentsCA.UnpaidQueued(world, player, UnitReserveExclOn ? Info.UpgradeServiceQueues : null);
 			}
 
 			return cachedUnpaid;
@@ -1429,6 +1468,7 @@ namespace OpenRA.Mods.CA.Traits
 			var line = botLimits != null
 				? RecoverySpendPolicyCA.EffectiveReserve(botLimits.Info.ProductionCashReserve, BotPersonalityLeads.Lean(leadProviders, "steamroller"))
 				: -1;
+			line = ProdBusyCA.UnitReserveLine(UnitReserveExclOn, line);
 			return RecoverySpendPolicyCA.Admits(SpendCommitmentsCA.Available(batch.BankLeft, UnpaidQueuedCost()), cost, 0, 0, 0, false,
 				RecoverySpendPolicyCA.Admission.General, line);
 		}

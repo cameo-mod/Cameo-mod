@@ -22,12 +22,18 @@ namespace OpenRA.Mods.CA.Traits
 	public static class SpendCommitmentsCA
 	{
 		/// <summary>Cash the player's already queued items (every queue: units, buildings, defences) have not paid yet.</summary>
-		public static long UnpaidQueued(World world, Player player)
+		public static long UnpaidQueued(World world, Player player) => UnpaidQueued(world, player, null);
+
+		/// <summary>PROD-FIX-01 F-A: as above, leaving out the queues whose type is in <paramref name="excludedTypes"/> (null = none).</summary>
+		public static long UnpaidQueued(World world, Player player, string[] excludedTypes)
 		{
 			long unpaid = 0;
 			foreach (var pair in world.ActorsWithTrait<ProductionQueue>())
 			{
 				if (pair.Actor.Owner != player || pair.Actor.IsDead || !pair.Trait.Enabled)
+					continue;
+
+				if (excludedTypes != null && System.Array.IndexOf(excludedTypes, pair.Trait.Info.Type) >= 0)
 					continue;
 
 				foreach (var item in pair.Trait.AllQueued())

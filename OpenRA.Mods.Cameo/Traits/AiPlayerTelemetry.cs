@@ -66,6 +66,9 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("Per-seat cap on queue rows inside one bot-queue sample.")]
 		public readonly int MaxQueueRowsPerSeat = 32;
 
+		[Desc("PROD-FIX-01 F-E (DEV telemetry only): an idle queue reports prerequisite_missing and unit_cap ahead of saturation_stop. Row tm_idle_reason_order.")]
+		public readonly bool IdleReasonGateOrder = false;
+
 		public override object Create(ActorInitializer init) { return new AiPlayerTelemetry(this); }
 	}
 
@@ -199,8 +202,22 @@ namespace OpenRA.Mods.Cameo.Traits
 		/// is genuinely no desire. Inferred from the same public signals the module reads.
 		/// </summary>
 		public static string IdleReason(bool reserved, bool belowCashFloor, bool saturated,
-			bool noBuildable, bool atUnitCap)
+			bool noBuildable, bool atUnitCap, bool gateOrder = false)
 		{
+			// tm_idle_reason_order: the first failing gate of the unit builder (prerequisites, cap) names the hold before the saturation stop.
+			if (gateOrder)
+			{
+				if (reserved)
+					return "cash_reserved";
+				if (belowCashFloor)
+					return "no_cash";
+				if (noBuildable)
+					return "prerequisite_missing";
+				if (atUnitCap)
+					return "unit_cap";
+				return saturated ? "saturation_stop" : "no_desire";
+			}
+
 			if (reserved)
 				return "cash_reserved";
 			if (belowCashFloor)
