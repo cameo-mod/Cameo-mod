@@ -93,6 +93,15 @@ namespace OpenRA.Mods.CA.Traits
 			"steps of 5) instead of IdleBaseUnitsMaximum here, which stays the fallback. Gated by SwitchCondition; row pb_idle_cap_tiered.")]
 		public readonly bool TieredIdleCap = false;
 
+		[Desc("INFANTRY-IDLE-01 (USER P0, V03: the infantry queues sat 67-75% idle with ~10k banked): an idle queue of IdleQueueFloorQueues that the",
+			"role mix, the share table or a composition left without a pick falls back to the best buildable unit of the queue: highest UnitsToBuild",
+			"weight, then cheapest, then name. Delays, intervals, limits, the capturer cap, the aircraft cap, the cash and reserve gates all still apply.",
+			"Gated by SwitchCondition; row pb_idle_queue_floor.")]
+		public readonly bool IdleQueueFloor = false;
+
+		[Desc("INFANTRY-IDLE-01: the queue types the idle floor serves.")]
+		public readonly string[] IdleQueueFloorQueues = { "Infantry", "RAInfantry", "SCZergInfantry" };
+
 		[Desc("UPGRADE-QUEUE-01: queue types served by the upgrade service. Each one is served on its own: a queue with nothing buildable, or a busy one, never holds back the next.")]
 		public readonly string[] UpgradeServiceQueues = { "Promotions", "Upgrades", "Research", "Addons" };
 
@@ -481,7 +490,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		// PROD-BUSY-01: one switch and one ablation row each. With both on, every queue is served every pass, so the PR-2 depth horizon
 		// (visitGapTicks = the gap to this bot's next pass) is also the gap to that queue's next service.
-		AblationLatch ablateIdleCap, ablateIdleCapTiered;
+		AblationLatch ablateIdleCap, ablateIdleCapTiered, ablateIdleQueueFloor;
+		bool IdleQueueFloorOn => switchesActive && Info.IdleQueueFloor && !ablateIdleQueueFloor.Off(player, AblationIds.ProdBusyIdleQueueFloor);
 		bool IdleCapOn => switchesActive && Info.ShareTestNeverIdles && !ablateIdleCap.Off(player, AblationIds.ProdBusyIdleCap);
 		bool TieredIdleCapOn => switchesActive && Info.TieredIdleCap && !ablateIdleCapTiered.Off(player, AblationIds.ProdBusyIdleCapTiered);
 
@@ -1197,6 +1207,7 @@ namespace OpenRA.Mods.CA.Traits
 						armedInfantryAlive + batch.PendingArmedInfantry < armedInfantryFloor
 						? PickArmedInfantry(queue, shares, skip)
 						: null;
+					var fromIdleFloor = false;
 					var unit = fromFloor ?? (buildRandom
 						? ChooseRandomUnitToBuild(queue, excludeLimited, shares, skip)
 						: ChooseUnitToBuild(queue, excludeLimited, saturated, shares, skip));
@@ -1216,6 +1227,13 @@ namespace OpenRA.Mods.CA.Traits
 						AIUtils.BotDebug("AI: {0} composition {1} has no feasible unit for {2}; falling back to baseline shares",
 							player, activeComposition.Id, queue.Info.Type);
 						continue;
+					}
+
+					// INFANTRY-IDLE-01: an empty queue that the normal pick left idle takes the best buildable unit instead; the admission gates below still apply.
+					if (unit == null && held == 0 && IdleQueueFloorOn && Array.IndexOf(Info.IdleQueueFloorQueues, queue.Info.Type) >= 0)
+					{
+						unit = ChooseIdleFloorUnit(queue, shares, skip);
+						fromIdleFloor = unit != null;
 					}
 
 					if (unit == null)
@@ -1238,7 +1256,7 @@ namespace OpenRA.Mods.CA.Traits
 								observer.UnitProductionSkipped(player, world.WorldTick, name, "combat_floor");
 					}
 
-					if (!ShouldBuild(name, baselineTried, queue.Info.Type))
+					if (!ShouldBuild(name, baselineTried || fromIdleFloor, queue.Info.Type))
 					{
 						Reject();
 						continue;
@@ -1890,6 +1908,27 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			return null;
+		}
+
+		// INFANTRY-IDLE-01: the idle queue's last resort. Every item of the queue the normal pick has not already had refused, through ShouldBuild with the
+		// share table ignored (delays, intervals, limits, the capturer cap still count) and the aircraft cap; the best one by IdleQueueFloorCA.Pick.
+		ActorInfo ChooseIdleFloorUnit(ProductionQueue queue, Dictionary<string, int> shares, HashSet<string> skip)
+		{
+			var infos = new List<ActorInfo>();
+			var candidates = new List<(string Name, int Cost, int Weight)>();
+			foreach (var item in queue.BuildableItems())
+			{
+				if (skip.Contains(item.Name) || !ShouldBuild(item.Name, true, queue.Info.Type) || !CanBuildMoreOfAircraft(item))
+					continue;
+
+				var weight = shares != null && shares.TryGetValue(item.Name, out var w) ? w
+					: Info.UnitsToBuild != null && Info.UnitsToBuild.TryGetValue(item.Name, out var baseline) ? baseline : 0;
+				infos.Add(item);
+				candidates.Add((item.Name, Math.Max(0, queue.GetProductionCost(item)), weight));
+			}
+
+			var index = IdleQueueFloorCA.Pick(candidates);
+			return index < 0 ? null : infos[index];
 		}
 
 		int ShareFor(string name, int share)

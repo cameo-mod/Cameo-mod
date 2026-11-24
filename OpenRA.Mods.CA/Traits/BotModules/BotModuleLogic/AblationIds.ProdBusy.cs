@@ -26,5 +26,6 @@ namespace OpenRA.Mods.CA.Traits
 		public const string ProdBusyBuildingIdleSweep = "pb_building_idle_sweep";
 		public const string ProdBusyIdleCap = "pb_idle_cap";
 		public const string ProdBusyIdleCapTiered = "pb_idle_cap_tiered";
+		public const string ProdBusyIdleQueueFloor = "pb_idle_queue_floor"; // off = an idle infantry queue the normal pick left empty stays empty, as before
 	}
 }

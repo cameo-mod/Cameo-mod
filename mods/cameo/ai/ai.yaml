@@ -5953,6 +5953,8 @@ Player:
 		ServeAllCategories: true
 		ShareTestNeverIdles: true
 		TieredIdleCap: true
+		# INFANTRY-IDLE-01: an idle infantry queue the role mix / share table left without a pick builds the best buildable unit (row pb_idle_queue_floor).
+		IdleQueueFloor: true
 		IdleBaseUnitsMaximum: 25
 		ProductionMinCashRequirement: 1000
 		MaximiseProductionCashRequirement: 5000
