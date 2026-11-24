@@ -87,6 +87,12 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("UPGRADE-QUEUE-01: queue types served by the upgrade service. Each one is served on its own: a queue with nothing buildable, or a busy one, never holds back the next.")]
 		public readonly string[] UpgradeServiceQueues = { "Promotions", "Upgrades", "Research", "Addons" };
 
+		[Desc("PROD-BUSY-02 (USER P0: all queues stay busy): the served queue types whose PAID items are NOT held by a unit-production pause vote.",
+			"OpenRA pays progressively, so such an item advances with income next to whatever the vote protects. Promotions are free and never held, so",
+			"they are not listed. Each type has its own ablation row (pb_research_through_pause, pb_upgrade_through_pause, pb_addon_through_pause).",
+			"Empty = every pause vote holds paid upgrade-service items (the UPGRADE-QUEUE-01 rule).")]
+		public readonly string[] UpgradeServiceThroughPause = { "Upgrades", "Research", "Addons" };
+
 		[Desc("Only queue construction of a new unit when above this requirement.",
 			"BotLimits.MaximiseProductionCashRequirement overrides this per difficulty (DESIGN §19.1).")]
 		public readonly int MaximiseProductionCashRequirement = 10000;
@@ -466,9 +472,24 @@ namespace OpenRA.Mods.CA.Traits
 
 		// PROD-BUSY-01: one switch and one ablation row each. With both on, every queue is served every pass, so the PR-2 depth horizon
 		// (visitGapTicks = the gap to this bot's next pass) is also the gap to that queue's next service.
-		AblationLatch ablateAllFactories, ablateAllCategories;
+		AblationLatch ablateAllFactories, ablateAllCategories, ablateThroughPauseResearch, ablateThroughPauseUpgrade, ablateThroughPauseAddon;
 		bool AllFactoriesOn => switchesActive && Info.ServeAllFactories && !ablateAllFactories.Off(player, AblationIds.ProdBusyAllFactories);
 		bool AllCategoriesOn => switchesActive && Info.ServeAllCategories && !ablateAllCategories.Off(player, AblationIds.ProdBusyAllCategories);
+
+		// PROD-BUSY-02: a served queue type whose paid items ignore the pause votes (per-type switch + ablation row).
+		bool ServedThroughPause(string queueType)
+		{
+			if (Array.IndexOf(Info.UpgradeServiceThroughPause, queueType) < 0)
+				return false;
+
+			return queueType switch
+			{
+				"Research" => !ablateThroughPauseResearch.Off(player, AblationIds.ProdBusyResearchThroughPause),
+				"Upgrades" => !ablateThroughPauseUpgrade.Off(player, AblationIds.ProdBusyUpgradeThroughPause),
+				"Addons" => !ablateThroughPauseAddon.Off(player, AblationIds.ProdBusyAddonThroughPause),
+				_ => false,
+			};
+		}
 
 		bool UpgradeServiceOn => switchesActive && Info.UpgradeService && !ablateUpgradeService.Off(player, AblationIds.UpgradeService);
 
@@ -879,6 +900,7 @@ namespace OpenRA.Mods.CA.Traits
 			var paused = requestPause.Any(rp => rp.IsTraitEnabled() && rp.PauseUnitProduction && rp is not IBotItemAwareUnitCap);
 			foreach (var category in Info.UpgradeServiceQueues)
 			{
+				var heldByPause = UpgradeServiceCA.HeldByPause(paused, ServedThroughPause(category));
 				foreach (var queue in AIUtils.FindQueues(player, category))
 				{
 					var slots = LiveFreeSlots(queue);
@@ -900,7 +922,7 @@ namespace OpenRA.Mods.CA.Traits
 							infos.Add(item);
 						}
 
-						var index = UpgradeServiceCA.Choose(candidates, inProduction, paused, (int)player.PlayerActor.ActorID);
+						var index = UpgradeServiceCA.Choose(candidates, inProduction, heldByPause, (int)player.PlayerActor.ActorID);
 						if (index < 0)
 							break; // nothing startable now (all researched, next tier locked, unaffordable); looked at again on the next visit
 

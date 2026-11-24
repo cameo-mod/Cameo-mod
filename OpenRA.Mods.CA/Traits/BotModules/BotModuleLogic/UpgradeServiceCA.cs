@@ -45,6 +45,9 @@ namespace OpenRA.Mods.CA.Traits
 			return best;
 		}
 
+		/// <summary>PROD-BUSY-02: whether the unit-production pause votes hold the paid items of a served queue type (a type served through pause is never held).</summary>
+		public static bool HeldByPause(bool pauseVoteUp, bool servedThroughPause) => pauseVoteUp && !servedThroughPause;
+
 		static bool Better(Candidate a, Candidate b, int tieSeed)
 		{
 			var aFree = a.Cost <= 0;
