@@ -216,5 +216,141 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(wiring, Does.Contain("TeamLeadPincerRecord(\"pincer_planned\", order,"));
 			Assert.That(RepoFile(Bots + "BotModuleLogic/TeamLeadCA.cs"), Does.Contain("public int ProngUnits(int prong)"));
 		}
+
+		// ---- ALL-IN-01 + SOLO-LEAD ----
+
+		[Test]
+		public void TheAllInTriggersAreCapIdleHugeAndNearlyWonInThatOrder()
+		{
+			Assert.That(AllInCA.IdleHuge(60, 60), Is.True);
+			Assert.That(AllInCA.IdleHuge(59, 60), Is.False);
+			Assert.That(AllInCA.IdleHuge(500, 0), Is.False, "0 = this trigger is off");
+
+			// 100 ticks past the start, ours 8000, theirs 2000 over 5 structures: 400 percent exactly.
+			Assert.That(AllInCA.NearlyWon(15000, 15000, 8000, 2000, 5, 400), Is.True);
+			Assert.That(AllInCA.NearlyWon(15000, 15000, 7999, 2000, 5, 400), Is.False, "one cash short of the percent");
+			Assert.That(AllInCA.NearlyWon(14999, 15000, 90000, 100, 1, 400), Is.False, "a scouted early outpost is not a won game");
+			Assert.That(AllInCA.NearlyWon(20000, 15000, 90000, 0, 0, 400), Is.False, "no known enemy structure = nothing to compare (blind)");
+			Assert.That(AllInCA.NearlyWon(20000, 15000, 0, 0, 3, 400), Is.False, "no army, no all-in");
+			Assert.That(AllInCA.NearlyWon(20000, 15000, 1000, 2000, 3, 10), Is.False, "the percent never goes below 100: half the enemy value is not won");
+			Assert.That(AllInCA.NearlyWon(20000, 15000, 2000, 2000, 3, 10), Is.True, "equal value passes the 100 floor");
+
+			Assert.That(AllInCA.Why(true, true, true), Is.EqualTo("cap"));
+			Assert.That(AllInCA.Why(false, true, true), Is.EqualTo("idle"));
+			Assert.That(AllInCA.Why(false, false, true), Is.EqualTo("won"));
+			Assert.That(AllInCA.Why(false, false, false), Is.Null);
+
+			Assert.That(AllInCA.JoinMinUnits(true, 6, 2), Is.EqualTo(2), "an all-in order takes the small group");
+			Assert.That(AllInCA.JoinMinUnits(true, 6, 0), Is.EqualTo(1), "never below one unit");
+			Assert.That(AllInCA.JoinMinUnits(false, 6, 2), Is.EqualTo(6), "an ordinary order keeps its minimum");
+			Assert.That(AllInCA.JoinsAgain(true, 5, 5), Is.True, "an all-in order takes the units that arrived since");
+			Assert.That(AllInCA.JoinsAgain(false, 5, 5), Is.False, "an ordinary order is joined once");
+			Assert.That(AllInCA.JoinsAgain(false, 4, 5), Is.True, "a new order is joined");
+		}
+
+		[Test]
+		public void AnOrderKeepsTheFirstAllInReasonAndIsOrdinaryUntilMarked()
+		{
+			var team = new TeamLeadTeam();
+			var order = team.Issue("a", Home, Target, 7, 100);
+			Assert.That(order.AllIn, Is.False);
+			Assert.That(order.AllInWhy, Is.Null);
+			order.MarkAllIn("idle");
+			order.MarkAllIn("cap");
+			Assert.That(order.AllIn, Is.True);
+			Assert.That(order.AllInWhy, Is.EqualTo("idle"), "the first trigger is the record");
+		}
+
+		[Test]
+		public void ATeamOfOneEngagesOnlyWithTheSoloRuleAndThenLeadsItselfThroughAnAllInOrder()
+		{
+			var alone = new List<TeamLeadCA.Seat> { new("bot", 100, true) };
+			var election = TeamLeadCA.Elect(alone, TeamLeadCA.Election.None, 200, 15, 1500);
+			Assert.That(election.Leader, Is.EqualTo("bot"), "the one seat is elected");
+			Assert.That(TeamLeadCA.TeamKey(alone), Is.EqualTo("bot"));
+
+			Assert.That(TeamLeadCA.Engaged(alone, election), Is.False, "the old rule: two living bots");
+			Assert.That(TeamLeadCA.Engaged(alone, election, 1), Is.True, "tl_solo_lead: a team of one leads itself");
+			Assert.That(TeamLeadCA.Engaged(alone, TeamLeadCA.Election.None, 1), Is.False, "no leader yet = not engaged");
+			Assert.That(TeamLeadCA.Engaged(new List<TeamLeadCA.Seat> { new("bot", 100, false) }, election, 1), Is.False, "a dead seat does not engage");
+			Assert.That(TeamLeadCA.Engaged(alone, election, 0), Is.True, "the minimum never goes below one living seat");
+			var two = new List<TeamLeadCA.Seat> { new("a", 10, true), new("b", 20, true) };
+			Assert.That(TeamLeadCA.Engaged(two, TeamLeadCA.Elect(two, TeamLeadCA.Election.None, 200, 15, 1500)), Is.True, "two living bots engage as before");
+
+			// The solo leader: its own pool is the team pool; 70 idle units trigger the all-in, the order publishes at once, and it is marked.
+			var team = new TeamLeadTeam();
+			team.Publish("bot", 70, 9000, 300);
+			var pool = team.Pool(300, 400);
+			Assert.That(pool.Units, Is.EqualTo(70));
+			var why = AllInCA.Why(team.AnyAtCap(300, 400), AllInCA.IdleHuge(pool.Units, 60), false);
+			Assert.That(why, Is.EqualTo("idle"));
+			Assert.That(TeamLeadCA.BlobReady(pool.Units, pool.Value, 3, true, 8, 800), Is.True);
+			Assert.That(TeamLeadCA.OrderDue(false, true, 300, 290, 1500, why != null), Is.True, "an all-in publishes without waiting for the interval");
+			Assert.That(TeamLeadCA.OrderDue(false, true, 300, 290, 1500, false), Is.False, "an ordinary order waits for it");
+			var order = team.Issue("bot", Home, Target, 7, 300);
+			order.MarkAllIn(why);
+			Assert.That(order.AllIn, Is.True);
+			order.Report("squad", 9000, true, 70, 70);
+			Assert.That(order.CommittedTotals(), Is.EqualTo((70, 9000L)), "the solo leader's own squad reports to its own order");
+
+			// A cap on the one seat triggers it too.
+			team.Publish("bot", 20, 2500, 400, true);
+			Assert.That(AllInCA.Why(team.AnyAtCap(400, 400), AllInCA.IdleHuge(team.Pool(400, 400).Units, 60), false), Is.EqualTo("cap"));
+		}
+
+		[Test]
+		public void AllInAndSoloLeadAreOffByDefaultOnInTheSixPersonalitiesAndNeverInClassic()
+		{
+			var info = RepoFile(Bots + "SquadManagerBotModuleCAInfo.V07.cs");
+			Assert.That(info, Does.Contain("public readonly bool TeamLeadSoloEnabled = false;"));
+			Assert.That(info, Does.Contain("public readonly bool TeamLeadAllInEnabled = false;"));
+			Assert.That(info, Does.Contain("public readonly int TeamLeadAllInIdleUnits = 60;"));
+			Assert.That(info, Does.Contain("public readonly int TeamLeadAllInWinPercent = 400;"));
+			Assert.That(info, Does.Contain("public readonly int TeamLeadAllInStartTick = 15000;"));
+			Assert.That(info, Does.Contain("public readonly int TeamLeadAllInJoinMinUnits = 2;"));
+			Assert.That(AblationIds.TeamLeadAllIn, Is.EqualTo("tl_all_in"));
+			Assert.That(AblationIds.TeamLeadSoloLead, Is.EqualTo("tl_solo_lead"));
+
+			var yaml = RepoFile("mods/cameo/ai/ai.yaml");
+			var classic = yaml.IndexOf("SquadManagerBotModuleCA@classic:", StringComparison.Ordinal);
+			Assert.That(classic, Is.GreaterThan(0));
+			foreach (var key in new[] { "TeamLeadSoloEnabled", "TeamLeadAllInEnabled" })
+			{
+				Assert.That(Regex.Matches(yaml[..classic], "\n\t\t" + key + ": true").Count, Is.EqualTo(6), key);
+				Assert.That(yaml[classic..], Does.Not.Contain(key), key + " never in @classic");
+			}
+		}
+
+		[Test]
+		public void AllInAndSoloLeadAreWiredBehindTheirOwnSwitchesAndLogTheDecision()
+		{
+			var v07 = RepoFile(Bots + "SquadManagerBotModuleCA.V07.cs");
+			Assert.That(v07, Does.Contain("internal bool TeamLeadAllInOn => TeamLeadOn && Info.TeamLeadAllInEnabled && !ablateAllIn.Off(Player, AblationIds.TeamLeadAllIn);"));
+			Assert.That(v07, Does.Contain("bool TeamLeadSoloOn => TeamLeadActive && Info.TeamLeadSoloEnabled && !ablateSoloLead.Off(Player, AblationIds.TeamLeadSoloLead);"));
+			Assert.That(v07, Does.Contain("internal bool TeamLeadAllInOrderOpen => TeamLeadOpenOrder() is { AllIn: true };"));
+			Assert.That(v07, Does.Contain("if (!TeamLeadAllInOn)\n\t\t\t\treturn null;"), "free of work with the switch off");
+			Assert.That(v07, Does.Contain("TeamLeadPincerSample() ?? activeUnits.FirstOrDefault(a => !a.IsDead && a.IsInWorld && a.TraitOrDefault<Mobile>() != null)"), "the hunt starts from a ground unit");
+			Assert.That(v07, Does.Contain("if (TeamLeadOpenOrder() is { } open && (open.AllIn || open.GatherOnly))
+				return null;"), "no nearly-won scan for an order that needs no trigger");
+			Assert.That(v07, Does.Contain("\"all_in_push\""));
+			Assert.That(v07, Does.Contain("idle_home="));
+
+			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
+			Assert.That(wiring, Does.Contain("teamLeadEngaged = TeamLeadCA.Engaged(seats, team.Election, TeamLeadSoloOn ? 1 : 2);"), "a team of one engages only with the solo rule");
+			Assert.That(wiring, Does.Contain("var allIn = TeamLeadAllInWhy(team, now);"));
+			Assert.That(wiring, Does.Contain("|| allIn != null)"), "an all-in skips the interval wait");
+			Assert.That(wiring, Does.Contain("if (allIn != null && TeamLeadOpenOrder() is { AllIn: false } open)"), "an open attack order turns all-in");
+			Assert.That(wiring, Does.Contain("else if (allIn != null)\n\t\t\t\torder.MarkAllIn(allIn);"));
+			Assert.That(wiring, Does.Contain("teamLeadAllInPicking = allIn != null && why == TeamLeadCA.PublishWhy.Ready;"));
+			Assert.That(wiring, Does.Contain("(!AllInCA.JoinsAgain(order.AllIn, teamLeadJoinedSeq, order.Seq) && !order.GatherOnly && !order.Extending)"), "members re-join an all-in order");
+			Assert.That(wiring, Does.Contain("AllInCA.JoinMinUnits(order.AllIn, Info.TeamLeadJoinMinUnits, Info.TeamLeadAllInJoinMinUnits)"));
+			Assert.That(wiring, Does.Contain("(order.AllIn ? unitsHangingAroundTheBase.Count(TeamLeadJoinable) : unitsHangingAroundTheBase.Count)"), "an all-in order counts joinable units only");
+			Assert.That(wiring, Does.Contain("(TeamLeadRaiderRecallOn || TeamLeadAllInOrderOpen)"), "raiders join an all-in order whatever the clock");
+			Assert.That(wiring, Does.Contain("((TeamLeadHuntViaOrderOn && FinishModeActive) || teamLeadAllInPicking)"), "an all-in order with no known target hunts");
+			Assert.That(wiring, Does.Contain("TeamLeadAllInRecord(\"all_in_start\""));
+			Assert.That(wiring, Does.Contain("TeamLeadAllInRecord(\"all_in_join\""));
+			Assert.That(System.Text.RegularExpressions.Regex.Matches(wiring, "TeamLeadAllInPushRecord\\(order, now\\);").Count, Is.EqualTo(2), "both push sites");
+			Assert.That(RepoFile(Bots + "BotModuleLogic/TeamLeadCA.cs"), Does.Contain("public static bool Engaged(IReadOnlyList<Seat> seats, Election election, int minSeats = 2)"));
+		}
 	}
 }

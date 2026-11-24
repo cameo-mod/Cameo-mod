@@ -449,7 +449,8 @@ namespace OpenRA.Mods.CA.Traits
 				TeamLeadMaintainOrder(team, now);
 			}
 
-			teamLeadEngaged = TeamLeadCA.Engaged(seats, team.Election);
+			teamLeadAliveSeats = seats.Count(q => q.Alive);
+			teamLeadEngaged = TeamLeadCA.Engaged(seats, team.Election, TeamLeadSoloOn ? 1 : 2);
 			teamLeadIsLeader = teamLeadEngaged && team.Election.Leader == teamLeadKey;
 
 			if (!teamLeadEngaged)
@@ -498,7 +499,7 @@ namespace OpenRA.Mods.CA.Traits
 				return AggTeamIsQuietState(state) && !AggTeamSquadDefends(s);
 
 			// A hunting squad (finish mode) has its own job; one in a fight finishes it (see TeamLeadRaiderInContact for the marching ones).
-			return s.Type is SquadCAType.Guerrilla or SquadCAType.Harass && TeamLeadRaiderRecallOn && !s.IsHunting
+			return s.Type is SquadCAType.Guerrilla or SquadCAType.Harass && (TeamLeadRaiderRecallOn || TeamLeadAllInOrderOpen) && !s.IsHunting
 				&& (AggTeamIsQuietState(state) || state is GroundUnitsAttackMoveStateCA) && !AggTeamSquadDefends(s);
 		}
 
@@ -527,11 +528,21 @@ namespace OpenRA.Mods.CA.Traits
 		// Leader only. No open order, a ready blob (WAVE-MIN tier on the combined blob), cadence due: publish the order now.
 		void TeamLeadPublish(TeamLeadTeam team, int now)
 		{
+			// V07 ALL-IN-01 (tl_all_in): the trigger that fired (cap, idle, won) or null; null and free of work with the switch off.
+			var allIn = TeamLeadAllInWhy(team, now);
+
 			// TEAM-BLOB-01: a rally (gather-only) order waits until the squads gathered for it pass the WAVE-MIN bars, then it becomes the attack order.
 			if (TeamLeadOpenOrder() is { GatherOnly: true } rally)
 			{
 				TeamLeadPromoteRally(rally, now);
 				return;
+			}
+
+			// ALL-IN-01: an attack order that is still open turns all-in when the trigger fires; its members then send every unit.
+			if (allIn != null && TeamLeadOpenOrder() is { AllIn: false } open)
+			{
+				open.MarkAllIn(allIn);
+				TeamLeadAllInRecord("all_in_start", open, "why=" + allIn + " upgraded=1");
 			}
 
 			if (now < initialAttackDelay || TeamLeadOpenOrder() != null)
@@ -545,7 +556,7 @@ namespace OpenRA.Mods.CA.Traits
 			var (minUnits, minValue) = WaveMinActive ? WaveMinBars() : (0, 0);
 			var ready = TeamLeadCA.BlobReady(blob.Units, blob.Value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue);
 			var interval = TeamLeadCA.PublishInterval(TeamLeadCadenceTicks(), Info.TeamLeadFallbackTicks);
-			var why = TeamLeadCA.OrderDue(false, ready, now, team.LastOrderTick, interval, team.AnyAtCap(now, Info.TeamLeadPoolMaxAgeTicks))
+			var why = TeamLeadCA.OrderDue(false, ready, now, team.LastOrderTick, interval, team.AnyAtCap(now, Info.TeamLeadPoolMaxAgeTicks) || allIn != null)
 				? TeamLeadCA.PublishWhy.Ready
 				: TeamLeadCA.PublishWhy.None;
 			// USER rule (2026-11-24): nothing below WAVE-MIN ever attacks. The ready path above is the only attack publish; when it says no the blob is below the
@@ -563,16 +574,23 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			var home = AggTeamHomePos();
-			if (!TeamLeadPickTarget(home, now, out var target, out var targetId))
+			teamLeadAllInPicking = allIn != null && why == TeamLeadCA.PublishWhy.Ready;
+			var picked = TeamLeadPickTarget(home, now, out var target, out var targetId);
+			teamLeadAllInPicking = false;
+			if (!picked)
 				return;
 
 			var forced = TeamLeadCA.FallbackForced(now, team.LastOrderTick, Info.TeamLeadFallbackTicks);
 			var order = TeamLeadIssue(home, target, targetId, now);
 			if (why == TeamLeadCA.PublishWhy.Gather)
 				order.MakeGatherOnly();
+			else if (allIn != null)
+				order.MarkAllIn(allIn);
 
 			DiagnosticTeamEvent("team_order", "seq=" + order.Seq + " why=" + why.ToString().ToLowerInvariant() + " blob=" + blob.Units + "/" + blob.Value + " target=" + targetId
 				+ " pincer=" + order.HasProngs + " leader=" + teamLeadKey);
+			if (order.AllIn)
+				TeamLeadAllInRecord("all_in_start", order, "why=" + order.AllInWhy + " blob=" + blob.Units + "/" + blob.Value + " target=" + targetId + " hunt=" + (targetId == 0 ? 1 : 0));
 			AIUtils.BotDebug("AI ({0}): team push published seq {1} at {2}: blob {3}/{4}, target {5}{6}", Player.ClientIndex, order.Seq, now, blob.Units, blob.Value,
 				targetId, forced ? " (fallback)" : "");
 		}
@@ -600,26 +618,30 @@ namespace OpenRA.Mods.CA.Traits
 		void TeamLeadJoin(IBot bot, int now)
 		{
 			var order = TeamLeadOpenOrder();
-			if (order == null || (order.Seq == teamLeadJoinedSeq && !order.GatherOnly && !order.Extending) || now < initialAttackDelay)
+			if (order == null || (!AllInCA.JoinsAgain(order.AllIn, teamLeadJoinedSeq, order.Seq) && !order.GatherOnly && !order.Extending) || now < initialAttackDelay)
 				return;
 
 			// A rally order takes the new units again and again (they walk to the rally and wait there), but only real groups: no one-unit squads.
 			unitsHangingAroundTheBase.RemoveAll(u => unitCannotBeOrdered(u.Actor));
 			// TEAM-GATHER-02 (tl_join_merge): for a rally or held order the joinable units merge into the seat's gathering squad; a new squad forms only from a real group.
-			if (TeamLeadJoinMergeOn && (order.GatherOnly || order.Extending))
+			if (TeamLeadJoinMergeOn && (order.GatherOnly || order.Extending || order.AllIn))
 			{
 				if (TeamLeadMergeIntoGatherSquad(bot, order))
 					return;
 
-				if (unitsHangingAroundTheBase.Count(TeamLeadJoinable) < Info.TeamLeadJoinMinUnits)
+				if (unitsHangingAroundTheBase.Count(TeamLeadJoinable) < AllInCA.JoinMinUnits(order.AllIn, Info.TeamLeadJoinMinUnits, Info.TeamLeadAllInJoinMinUnits))
 					return;
 			}
 
-			if (unitsHangingAroundTheBase.Count < (teamLeadIsLeader && !order.GatherOnly && !order.Extending ? Info.TeamLeadLeaderMinUnits : Info.TeamLeadJoinMinUnits))
+			// An all-in order counts the joinable units only (two artillery pieces would form an empty squad each check).
+			if ((order.AllIn ? unitsHangingAroundTheBase.Count(TeamLeadJoinable) : unitsHangingAroundTheBase.Count)
+				< AllInCA.JoinMinUnits(order.AllIn, teamLeadIsLeader && !order.GatherOnly && !order.Extending ? Info.TeamLeadLeaderMinUnits : Info.TeamLeadJoinMinUnits, Info.TeamLeadAllInJoinMinUnits))
 				return;
 
 			var before = unitsHangingAroundTheBase.Count;
 			CreateAttackForce(bot);
+			if (order.AllIn && unitsHangingAroundTheBase.Count < before)
+				TeamLeadAllInRecord("all_in_join", order, "sent=" + (before - unitsHangingAroundTheBase.Count) + " left=" + unitsHangingAroundTheBase.Count);
 			if (unitsHangingAroundTheBase.Count < before && (!TeamLeadJoinMergeOn || Squads.Any(q => q.IsValid && q.Type == SquadCAType.Rush && q.FormedTick == now)))
 				teamLeadJoinedSeq = order.Seq;
 		}
@@ -654,8 +676,9 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// TEAM-GATHER-02 (tl_hunt_via_order): late game, nothing known: the blob hunts ONE cell, the order target, instead of each squad hunting its own.
-			if (TeamLeadHuntViaOrderOn && FinishModeActive
-				&& FinishHuntCell(unitsHangingAroundTheBase.Count > 0 ? unitsHangingAroundTheBase[0].Actor : activeUnits.FirstOrDefault(a => !a.IsDead && a.IsInWorld)) is { } hunt)
+			// ALL-IN-01: an all-in order with no known target hunts too (whatever the finish mode says), and from a ground unit: the first pool unit may be an aircraft with no locomotor.
+			if (((TeamLeadHuntViaOrderOn && FinishModeActive) || teamLeadAllInPicking)
+				&& FinishHuntCell(teamLeadAllInPicking ? TeamLeadHuntSample() : unitsHangingAroundTheBase.Count > 0 ? unitsHangingAroundTheBase[0].Actor : activeUnits.FirstOrDefault(a => !a.IsDead && a.IsInWorld)) is { } hunt)
 			{
 				target = World.Map.CenterOfCell(hunt);
 				actorId = 0;
@@ -990,6 +1013,7 @@ namespace OpenRA.Mods.CA.Traits
 						ready0, ready1, order.FirstReadyTick) && !TeamLeadPincerThinCollapse(order, now) && !TeamLeadPushHeld(order, now))
 					{
 						order.PushTick = now;
+						TeamLeadAllInPushRecord(order, now);
 						order.PushReason = ready0 && ready1 ? "pincer_ready" : now - order.IssueTick >= Info.TeamLeadPincerGatherMaxTicks ? "pincer_window" : "pincer_hold";
 						DiagnosticTeamEvent("team_push", "seq=" + order.Seq + " why=" + order.PushReason + " age=" + (now - order.IssueTick) + " prongs=" + committed0 + "/" + committed1);
 						TeamLeadPincerRecord("pincer_fired", order, "why=" + order.PushReason + " prongs=" + order.ProngUnits(0) + "/" + committed0 + "," + order.ProngUnits(1) + "/" + committed1);
@@ -1005,6 +1029,7 @@ namespace OpenRA.Mods.CA.Traits
 				&& !TeamLeadPushHeld(order, now))
 			{
 				order.PushTick = now;
+				TeamLeadAllInPushRecord(order, now);
 				order.PushReason = now - order.IssueTick >= Info.TeamLeadGatherMaxTicks ? "window" : "arrived";
 				DiagnosticTeamEvent("team_push", "seq=" + order.Seq + " why=" + order.PushReason + " age=" + (now - order.IssueTick) + " committed=" + committed + " arrived=" + arrived);
 			}

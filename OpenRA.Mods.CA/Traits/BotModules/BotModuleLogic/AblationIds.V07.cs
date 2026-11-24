@@ -18,5 +18,13 @@ namespace OpenRA.Mods.CA.Traits
 		// PINCER-02: any approach separation of 90-180 degrees counts, the staging search fans out to more angles, and the pincer gate is read per arm.
 		// Info switch: TeamLeadPincerWideEnabled.
 		public const string TeamLeadPincerWide = "tl_pincer_wide";
+
+		// ALL-IN-01: the team leader launches every joinable unit of every team bot on one order when the army is about the cap, very large idle, or the team has
+		// nearly won. Info switch: TeamLeadAllInEnabled.
+		public const string TeamLeadAllIn = "tl_all_in";
+
+		// SOLO-LEAD (V07, the 1v1 addendum): a team of one living bot is engaged and leads itself, so TEAM-LEAD, ALL-IN and PINCER also work in a 1v1 and for the last
+		// survivor of a team. Info switch: TeamLeadSoloEnabled.
+		public const string TeamLeadSoloLead = "tl_solo_lead";
 	}
 }

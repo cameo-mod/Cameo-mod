@@ -106,7 +106,8 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>At least two living seats and a leader: below that the team has nobody to command and every bot plays as before.</summary>
-		public static bool Engaged(IReadOnlyList<Seat> seats, Election election)
+		/// <param name="minSeats">V07 SOLO-LEAD (tl_solo_lead): 1 = a team of one living bot leads itself; the default 2 is the rule above.</param>
+		public static bool Engaged(IReadOnlyList<Seat> seats, Election election, int minSeats = 2)
 		{
 			if (election.Leader == null)
 				return false;
@@ -114,7 +115,7 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var s in seats)
 				if (s.Alive)
 					alive++;
-			return alive >= 2;
+			return alive >= Math.Max(1, minSeats);
 		}
 
 		/// <summary>The rally point <paramref name="forwardCells"/> from <paramref name="from"/> toward <paramref name="target"/>; never past the target.</summary>
@@ -467,6 +468,16 @@ namespace OpenRA.Mods.CA.Traits
 			Target = target;
 			TargetActorId = targetActorId;
 		}
+
+		/// <summary>ALL-IN-01: why the leader marked the order all-in (AllInCA.WhyCap / WhyIdle / WhyWon); null = an ordinary order. Members read it: an all-in order takes every joinable unit.</summary>
+		public string AllInWhy { get; private set; }
+
+		public bool AllIn => AllInWhy != null;
+
+		/// <summary>The all-in push has been recorded (DEV log, once).</summary>
+		public bool AllInPushLogged;
+
+		public void MarkAllIn(string why) => AllInWhy ??= why;
 
 		/// <summary>The tick the blob was released (-1 = still gathering).</summary>
 		public int PushTick = -1;
