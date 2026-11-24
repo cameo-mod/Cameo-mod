@@ -60,6 +60,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Tells the AI what building types are considered naval production facilities.")]
 		public readonly FrozenSet<string> NavalProductionTypes = FrozenSet<string>.Empty;
 
+		[Desc("BINDING tech chain (11-23): this faction's T2 and T3 gate buildings. Exempt from the army-first pause and the mobile reserve while none of them is owned or queued. Empty = no exemption.")]
+		public readonly FrozenSet<string> TechChainTypes = FrozenSet<string>.Empty;
+
 		[Desc("Tells the AI what building types are considered silos (resource storage).")]
 		public readonly FrozenSet<string> SiloTypes = FrozenSet<string>.Empty;
 
@@ -200,6 +203,58 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("Only queue construction of a new defense when above this requirement.")]
 		public readonly int DefenseProductionMinCashRequirement = 2250;
+
+		[Desc("RATIO-2X-01: a new static defence may start only if the mobile army value is at least 2x (static defence value + the new defence), "
+			+ "by cost. The first copy of each defence type is exempt, and so is a start while the bank floats: storage at least half full, or every "
+			+ "unit queue saturated with Cash+Resources at the tier's bank-saturation bar. A held defence waits and is never cancelled. Off by default; the R2X_mobile_static_ratio increment switch turns it on.")]
+		public readonly bool MobileStaticRatioEnabled = false;
+
+		[Desc("PROD-BUSY-01 (USER P0): every building/defence producer of a category may start an item in the same sweep (the old rule: one",
+			"start per category per sweep, so a second construction yard waited). Cash gates are unchanged. Gated by SwitchCondition; row",
+			"pb_all_building_producers.")]
+		public readonly bool ServeAllBuildingProducers = false;
+
+		[Desc("PROD-BUSY-01 (USER P0): a sweep that started nothing re-checks after StructureProductionActiveDelay instead of",
+			"StructureProductionInactiveDelay, so a queue idles at most the short delay once cash or a prerequisite arrives. Gated by",
+			"SwitchCondition; row pb_building_idle_sweep.")]
+		public readonly bool BuildingIdleSweepActive = false;
+
+		[Desc("ESSENTIALS-01 (USER 11-24): below the tier MaximiseProductionCash line (BotLimits) the base builder admits only essentials: each available",
+			"building once, tech-chain prerequisites, refineries, power while short, passive-income generators, and planner/demand-driven starts (threat",
+			"defence). Extras wait for the bank to reach the line. Gated by SwitchCondition; row pb_essentials_low_cash.")]
+		public readonly bool EssentialsOnlyBelowTierLine = false;
+
+		[Desc("UPGRADE-PRODUCERS-01 (USER P0, V03: upgrade and research producers such as the GDI communication center were never built, so no upgrade ever",
+			"started): every buildable structure type with NO BuildingFractions row is built once when its prerequisites are met (cheapest first), is an",
+			"army-first essential while none is owned or queued, and passes the low-cash hold as a first copy. Walls, defences, fakes, proxies, construction",
+			"yards, refineries, power plants and silos are excluded (they have their own rules). Gated by SwitchCondition; row af2_unlisted_once.")]
+		public readonly bool UnlistedBuildingsOnce = false;
+
+		[Desc("PROD-BUSY (USER 11-24): while the bank stays above the tier MaximiseProductionCash line the base builder adds production buildings, cycled",
+			"across the types (barracks, war factory, airfield, naval yard with water access, then again), bounded by the build limits and by the failed-",
+			"placement latch; power is added as needed. Gated by SwitchCondition; row pb_cycle_production.")]
+		public readonly bool CycleProductionAboveLine = false;
+
+		[Desc("SUSTAINED-CASH-01 (USER 11-24): when the bank stays above the tier MaximiseProductionCash line (BotLimits) for SustainedCashTicks, the NEXT",
+			"building started is a production building (the pb_cycle_production pick), whatever the planner wants, the opening or the expansion demand say.",
+			"Types at their build limit are skipped; with every type at its limit normal building resumes. Power stays allowed when the production building",
+			"would leave power short. The defence queue is untouched. Gated by SwitchCondition; row pb_sustained_cash_production.")]
+		public readonly bool SustainedCashProduction = false;
+
+		[Desc("pb_expansion_refinery_safety (USER 11-24): the refinery wanted for an expansion yard goes into the very-next slot only while that yard is SAFE.",
+			"Unsafe = the yard took damage from an enemy, or a visible (fog-honest) enemy combat unit is within ExpansionSafetyScanCells of it; it is safe",
+			"again ExpansionSafetyQuietTicks after the last threat. While unsafe the refinery is dropped from the slot (not held) and the order goes on.",
+			"Gated by SwitchCondition; row pb_expansion_refinery_safety.")]
+		public readonly bool ExpansionRefinerySafety = false;
+
+		[Desc("pb_expansion_refinery_safety: quiet ticks after the last threat before the expansion yard counts as safe again.")]
+		public readonly int ExpansionSafetyQuietTicks = 750;
+
+		[Desc("pb_expansion_refinery_safety: cells around the expansion yard scanned for visible enemy combat units.")]
+		public readonly int ExpansionSafetyScanCells = 12;
+
+		[Desc("SUSTAINED-CASH-01: ticks the bank must stay above the tier line, unbroken.")]
+		public readonly int SustainedCashTicks = 1500;
 
 		[Desc("Radius in cells around a factory scanned for rally points by the AI.")]
 		public readonly int RallyPointScanRadius = 8;
@@ -491,6 +546,68 @@ namespace OpenRA.Mods.CA.Traits
 		// instance serves classic too, so the arm is inert there (bit-identical A/B reference).
 		public bool ProductionScalingEnabled => Info.UseProductionScaling && switchesActive;
 
+		// PROD-BUSY-01: switch-gated like the arms above (the shared @generic instance serves classic too).
+		public bool AllBuildingProducersArmed => Info.ServeAllBuildingProducers && switchesActive;
+		public bool BuildingIdleSweepArmed => Info.BuildingIdleSweepActive && switchesActive;
+		public bool ExpansionSafetyArmed => Info.ExpansionRefinerySafety && switchesActive;
+		readonly Dictionary<uint, int> yardThreatTick = new();
+		int nextYardScanTick;
+
+		/// <summary>Records the last tick an enemy threatened an own expansion yard (a visible combat unit in range); damage is recorded in RespondToAttack.</summary>
+		void RecordYardThreats(int now)
+		{
+			// The base centre is unknown (0,0) until UpdatedBaseCenter has run: then no yard can be told from the main one.
+			if (now < nextYardScanTick || initialBaseCenter == default)
+				return;
+
+			nextYardScanTick = now + 25;
+			var radius = WDist.FromCells(Info.ExpansionSafetyScanCells);
+			foreach (var yard in ConstructionYardBuildings.Actors)
+			{
+				if (yard.IsDead || !yard.IsInWorld)
+					continue;
+
+				if (!ExpansionSafetyCA.IsExpansionYard((yard.Location - initialBaseCenter).LengthSquared, 28))
+					continue;
+
+				// Fog-honest: only enemy combat units this player can see right now.
+				if (world.FindActorsInCircle(yard.CenterPosition, radius).Any(a => IsEnemyGroundUnit(a) && a.Info.HasTraitInfo<AttackBaseInfo>() && a.CanBeViewedByPlayer(player)))
+					yardThreatTick[yard.ActorID] = now;
+			}
+		}
+
+		/// <summary>
+		/// False when the own expansion yard nearest to <paramref name="target"/> is unsafe. The main base, and a target with no live yard, are never gated.
+		/// </summary>
+		public bool ExpansionRefinerySafe(CPos target)
+		{
+			Actor nearest = null;
+			var best = long.MaxValue;
+			foreach (var yard in ConstructionYardBuildings.Actors)
+			{
+				if (yard.IsDead || !yard.IsInWorld)
+					continue;
+
+				var d = (yard.Location - target).LengthSquared;
+				if (d < best)
+				{
+					best = d;
+					nearest = yard;
+				}
+			}
+
+			if (nearest == null || initialBaseCenter == default || !ExpansionSafetyCA.IsExpansionYard((nearest.Location - initialBaseCenter).LengthSquared, 28))
+				return true;
+
+			return ExpansionSafetyCA.Safe(world.WorldTick, yardThreatTick.TryGetValue(nearest.ActorID, out var t) ? t : -1, Info.ExpansionSafetyQuietTicks);
+		}
+
+		public bool SustainedCashArmed => Info.SustainedCashProduction && switchesActive;
+		public readonly SustainedCashClock SustainedCash = new();
+		public bool CycleProductionArmed => Info.CycleProductionAboveLine && switchesActive;
+		public bool EssentialsLowCashArmed => Info.EssentialsOnlyBelowTierLine && switchesActive;
+		public bool UnlistedOnceArmed => Info.UnlistedBuildingsOnce && switchesActive;
+
 		// E1 observational slice (lead-accepted, observational ONLY): the switch-gated commitment
 		// ledger. Never read by any admission decision — recording and verdict logging only.
 		// Null until the first pass while observing; the lazy holder keeps off-state allocation-free.
@@ -650,6 +767,10 @@ namespace OpenRA.Mods.CA.Traits
 		readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> factoryBuildings;
 		public readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> ProductionBuildings;
 
+		// RATIO-2X-01: the per-player 2x tracker (the 3-tick start record and the first-copy ledger), shared by every queue manager so a
+		// sibling queue cannot pass the same old measure. Pure state, no world access (MobileStaticRatioCA).
+		public readonly MobileStaticRatioCA StaticRatio = new();
+
 		BotLimits botLimits;
 		int queueSweepDisabledFromTick = -1;
 		int lastBotTick = -1;
@@ -798,6 +919,16 @@ namespace OpenRA.Mods.CA.Traits
 		void IBotTick.BotTick(IBot bot)
 		{
 			lastBotTick = world.WorldTick;
+
+			if (ExpansionSafetyArmed)
+				RecordYardThreats(lastBotTick);
+
+			// SUSTAINED-CASH-01: one observation per bot visit, so a dip below the line resets the run at once.
+			if (SustainedCashArmed)
+			{
+				var sustainedLine = botLimits != null && botLimits.Info.MaximiseProductionCashRequirement >= 0 ? botLimits.Info.MaximiseProductionCashRequirement : 0;
+				SustainedCash.Observe(lastBotTick, sustainedLine > 0 && playerResources.GetCashAndResources() > sustainedLine);
+			}
 
 			if (firstTick)
 			{
@@ -1016,6 +1147,10 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (e.Attacker.Owner.RelationshipWith(self.Owner) != PlayerRelationship.Enemy)
 				return;
+
+			// pb_expansion_refinery_safety: record only; an enemy hit on an own yard marks it unsafe.
+			if (ExpansionSafetyArmed && Info.ConstructionYardTypes.Contains(self.Info.Name))
+				yardThreatTick[self.ActorID] = world.WorldTick;
 
 			if (!e.Attacker.Info.HasTraitInfo<ITargetableInfo>())
 				return;

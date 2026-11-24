@@ -573,6 +573,15 @@ namespace OpenRA.Mods.CA.Traits
 
 			var admitted = attempt.Admitted;
 			var roster = admitted.Groups.SelectMany(g => g.Reachable).Select(m => World.GetActorById(m.ActorId)).ToList();
+
+			// BLOB-LAUNCH-01 attack gate (USER 11-24: no attack below WAVE-MIN): the breaker wave holds below BlobLaunch01CA.MinUnits.
+			if (BlobAttackGateHolds(roster.Count))
+			{
+				seat.NextAttemptTick = Math.Max(seat.NextAttemptTick, t + StalemateBreakerCA.NoCandidateCooldown);
+				DiagnosticJobEnd(t, "hold", "blob_min", failures, deferred, attempt.Paths, attempt.ReachChecks, attempt.CandidatesTried,
+					0, admitted.UnreachableUnits, unitsExcludedGroups, 0);
+				return;
+			}
 			if (leases != null && !StalemateLeasePlanCA.TryClaimAll(leases, roster, LeaseOwner, LeaseHeartbeatTicks(),
 					a => StalemateEligible(a, leases), out _))
 			{

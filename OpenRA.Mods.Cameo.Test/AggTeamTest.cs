@@ -302,7 +302,8 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var text = Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCA.cs");
 			Assert.That(text, Does.Contain("void CreateAttackForce(IBot bot, bool aggForce = false)"));
-			Assert.That(text, Does.Contain("if (aggForce || AttackForceEvalCA.ShouldLaunch("));
+			// TEAM-LEAD-01 added the follower's order launch (inert while the feature is off) as the second term.
+			Assert.That(text, Does.Contain("if (aggForce || teamFollowerLaunch || AttackForceEvalCA.ShouldLaunch("));
 			Assert.That(text, Does.Contain("if (aggKeep != null)\n\t\t\t\t\tunitsHangingAroundTheBase.AddRange(aggKeep);"), "the reserve is put back");
 		}
 

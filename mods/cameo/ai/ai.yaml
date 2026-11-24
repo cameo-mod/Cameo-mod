@@ -66,14 +66,15 @@
 	GrantConditionOnBotOwner@inc3f1:
 		Condition: inc3_frans_services
 		Bots: noob, easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
+	# CN-ARM-01 (Opus 11-24): cn2_unit_repair and cn2_garrison_defense are armed for every genericbot tier + personality bot (not classic). cn3_bridge_repair stays fransbot-only until bridges are properly repairable (USER 11-24).
 	# CN2 unit-repair manager + garrison defence: the arm flips these to the genericbot tier list in the
-	# increment A/B (tools/ai/increment_switches.yaml); default grants to fransbot only - inert on master.
+	# increment A/B (tools/ai/increment_switches.yaml); armed for every genericbot tier by CN-ARM-01 (cn2_unit_repair, cn2_garrison_defense).
 	GrantConditionOnBotOwner@cn2unitrepair:
 		Condition: cn2_unit_repair
-		Bots: fransbot
+		Bots: fransbot, noob, easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	GrantConditionOnBotOwner@cn2garrison:
 		Condition: cn2_garrison_defense
-		Bots: fransbot
+		Bots: fransbot, noob, easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	GrantConditionOnBotOwner@cn3deploy:
 		Condition: cn3_deploy
 		Bots: fransbot
@@ -99,9 +100,25 @@
 		Condition: cn3_stealth_squads
 		Bots: fransbot
 
-	# PROD-IDLE G1 (PLAN_03 section 5, PLAN_04 rows 1-2): army_first and parallel_production are no longer
-	# granted. ArmyFirstBotModule mounts on genericbot (all 11 tiers) and ParallelProductionBotModule is removed:
-	# the spend owner's gate + the projected-ratio rule (BotLimits ArmyShareTargetPermille) are the one authority.
+	# AF-1 (AI_ARCHITECTURE §12.20): army-first building gate for genericbot (the spacing advisor needs no condition:
+	# its building gap is live for genericbot, only its re-ranking is switched, by a field).
+	# Same inert-on-master pattern - the switch arm flips Bots: to the genericbot tier list.
+	# DEFENCE-ZERO-FIX (Opus 2026-11-22, user ruling): restored to the 837a13915 grant. The PROD-IDLE G1 mount of
+	# ArmyFirstBotModule on all 11 tiers (364f31ca5) gave every tier bot a building pause vote that held every defence,
+	# radar and tech building; no tier bot may carry a building veto. Army-first for tiers returns only as a redesign
+	# (a unit-side push, never a building veto) with its own design and ablation row.
+	GrantConditionOnBotOwner@armyfirst:
+		Condition: army_first
+		Bots: fransbot
+	# ARMY-FIRST-02 (USER P0 11-23, Opus): the tier bots' army-first voter returns as the count-based redesign (user rule
+	# 11-22 "each available building at least once, then army"): ArmyFirstBotModule@af02 below holds only EXTRA copies
+	# (every first copy passes), defences follow a threat-scaled cap, not the stock vote. This grant is the feature switch:
+	# empty Bots = the DEFENCE-ZERO-FIX state (no tier voter). Classic never gets it (no genericbot).
+	GrantConditionOnBotOwner@armyfirst02:
+		Condition: army_first_02
+		Bots: noob, easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod
+	# PROD-IDLE G1 (PLAN_03 section 5, PLAN_04 rows 1-2): parallel_production is no longer granted and
+	# ParallelProductionBotModule is removed (unchanged by the DEFENCE-ZERO-FIX revert).
 	# The line-of-death fix (unified concave, AI_ARCHITECTURE 12.7a): Rush squads deploy a range-matched
 	# concave arc before the commit, so the wave fires together. The arm flips this to the
 	# genericbot tier list in the increment A/B; default fransbot-only - inert on master.
@@ -190,12 +207,15 @@
 		AttackLivenessMaxNoLaunchTicks: 10000
 		AttackLivenessFirstWaveMaxTicks: 5000
 		TempoMinWaveUnits: 5
+		WaveMinUnits: 0
+		WaveMinValue: 0
 		TeamResponseMaxLeaseTicks: 2000
 		TeamResponseRearmCooldownTicks: 1000
 		TeamResponseLeaseLimit: 1
 		PersonalityReactionDelay: 6000
 		NewProductionCashThreshold: 12000
 		MaximiseProductionCashRequirement: 6000
+		IdleBaseUnitsMaximum: 25
 		BankSaturationCash: 9000
 		AdaptiveCounterWeight: 0
 		CapturerInfantryLimitPct: 0
@@ -220,12 +240,15 @@
 		AttackLivenessMaxNoLaunchTicks: 9500
 		AttackLivenessFirstWaveMaxTicks: 4750
 		TempoMinWaveUnits: 6
+		WaveMinUnits: 2
+		WaveMinValue: 1200
 		TeamResponseMaxLeaseTicks: 1900
 		TeamResponseRearmCooldownTicks: 950
 		TeamResponseLeaseLimit: 1
 		PersonalityReactionDelay: 5500
 		NewProductionCashThreshold: 11000
 		MaximiseProductionCashRequirement: 5500
+		IdleBaseUnitsMaximum: 30
 		BankSaturationCash: 8250
 		AdaptiveCounterWeight: 5
 		CapturerInfantryLimitPct: 1
@@ -250,12 +273,15 @@
 		AttackLivenessMaxNoLaunchTicks: 9000
 		AttackLivenessFirstWaveMaxTicks: 4500
 		TempoMinWaveUnits: 7
+		WaveMinUnits: 5
+		WaveMinValue: 2400
 		TeamResponseMaxLeaseTicks: 1800
 		TeamResponseRearmCooldownTicks: 900
 		TeamResponseLeaseLimit: 1
 		PersonalityReactionDelay: 5000
 		NewProductionCashThreshold: 10000
 		MaximiseProductionCashRequirement: 5000
+		IdleBaseUnitsMaximum: 35
 		BankSaturationCash: 7500
 		AdaptiveCounterWeight: 10
 		CapturerInfantryLimitPct: 2
@@ -280,12 +306,15 @@
 		AttackLivenessMaxNoLaunchTicks: 8500
 		AttackLivenessFirstWaveMaxTicks: 4250
 		TempoMinWaveUnits: 8
+		WaveMinUnits: 7
+		WaveMinValue: 3600
 		TeamResponseMaxLeaseTicks: 1700
 		TeamResponseRearmCooldownTicks: 850
 		TeamResponseLeaseLimit: 1
 		PersonalityReactionDelay: 4500
 		NewProductionCashThreshold: 9000
 		MaximiseProductionCashRequirement: 4500
+		IdleBaseUnitsMaximum: 40
 		BankSaturationCash: 6750
 		AdaptiveCounterWeight: 15
 		CapturerInfantryLimitPct: 3
@@ -310,12 +339,15 @@
 		AttackLivenessMaxNoLaunchTicks: 8000
 		AttackLivenessFirstWaveMaxTicks: 4000
 		TempoMinWaveUnits: 9
+		WaveMinUnits: 10
+		WaveMinValue: 4800
 		TeamResponseMaxLeaseTicks: 1600
 		TeamResponseRearmCooldownTicks: 800
 		TeamResponseLeaseLimit: 1
 		PersonalityReactionDelay: 4000
 		NewProductionCashThreshold: 8000
 		MaximiseProductionCashRequirement: 4000
+		IdleBaseUnitsMaximum: 45
 		BankSaturationCash: 6000
 		AdaptiveCounterWeight: 20
 		CapturerInfantryLimitPct: 4
@@ -340,6 +372,8 @@
 		AttackLivenessMaxNoLaunchTicks: 7500
 		AttackLivenessFirstWaveMaxTicks: 3750
 		TempoMinWaveUnits: 10
+		WaveMinUnits: 12
+		WaveMinValue: 6000
 		TeamResponseMaxLeaseTicks: 1500
 		TeamResponseRearmCooldownTicks: 750
 		TeamResponseLeaseLimit: 1
@@ -347,6 +381,7 @@
 		PersonalityReactionDelay: 3500
 		NewProductionCashThreshold: 7000
 		MaximiseProductionCashRequirement: 3500
+		IdleBaseUnitsMaximum: 50
 		BankSaturationCash: 5250
 		AdaptiveCounterWeight: 25
 		CapturerInfantryLimitPct: 5
@@ -371,6 +406,8 @@
 		AttackLivenessMaxNoLaunchTicks: 7000
 		AttackLivenessFirstWaveMaxTicks: 3500
 		TempoMinWaveUnits: 11
+		WaveMinUnits: 14
+		WaveMinValue: 7200
 		TeamResponseMaxLeaseTicks: 1400
 		TeamResponseRearmCooldownTicks: 700
 		TeamResponseLeaseLimit: 1
@@ -378,6 +415,7 @@
 		PersonalityReactionDelay: 3000
 		NewProductionCashThreshold: 6000
 		MaximiseProductionCashRequirement: 3000
+		IdleBaseUnitsMaximum: 55
 		BankSaturationCash: 4500
 		AdaptiveCounterWeight: 30
 		CapturerInfantryLimitPct: 6
@@ -402,6 +440,8 @@
 		AttackLivenessMaxNoLaunchTicks: 6500
 		AttackLivenessFirstWaveMaxTicks: 3250
 		TempoMinWaveUnits: 12
+		WaveMinUnits: 17
+		WaveMinValue: 8400
 		TeamResponseMaxLeaseTicks: 1300
 		TeamResponseRearmCooldownTicks: 650
 		TeamResponseLeaseLimit: 1
@@ -409,6 +449,7 @@
 		PersonalityReactionDelay: 2500
 		NewProductionCashThreshold: 5000
 		MaximiseProductionCashRequirement: 2500
+		IdleBaseUnitsMaximum: 60
 		BankSaturationCash: 3750
 		AdaptiveCounterWeight: 35
 		CapturerInfantryLimitPct: 7
@@ -433,6 +474,8 @@
 		AttackLivenessMaxNoLaunchTicks: 6000
 		AttackLivenessFirstWaveMaxTicks: 3000
 		TempoMinWaveUnits: 13
+		WaveMinUnits: 19
+		WaveMinValue: 9600
 		TeamResponseMaxLeaseTicks: 1200
 		TeamResponseRearmCooldownTicks: 600
 		TeamResponseLeaseLimit: 1
@@ -440,6 +483,7 @@
 		PersonalityReactionDelay: 2000
 		NewProductionCashThreshold: 4000
 		MaximiseProductionCashRequirement: 2000
+		IdleBaseUnitsMaximum: 65
 		BankSaturationCash: 3000
 		AdaptiveCounterWeight: 40
 		CapturerInfantryLimitPct: 8
@@ -464,6 +508,8 @@
 		AttackLivenessMaxNoLaunchTicks: 5500
 		AttackLivenessFirstWaveMaxTicks: 2750
 		TempoMinWaveUnits: 14
+		WaveMinUnits: 22
+		WaveMinValue: 10800
 		TeamResponseMaxLeaseTicks: 1100
 		TeamResponseRearmCooldownTicks: 550
 		TeamResponseLeaseLimit: 1
@@ -471,6 +517,7 @@
 		PersonalityReactionDelay: 1500
 		NewProductionCashThreshold: 3000
 		MaximiseProductionCashRequirement: 1500
+		IdleBaseUnitsMaximum: 70
 		BankSaturationCash: 2250
 		AdaptiveCounterWeight: 45
 		CapturerInfantryLimitPct: 9
@@ -495,6 +542,8 @@
 		AttackLivenessMaxNoLaunchTicks: 5000
 		AttackLivenessFirstWaveMaxTicks: 2500
 		TempoMinWaveUnits: 15
+		WaveMinUnits: 24
+		WaveMinValue: 12000
 		TeamResponseMaxLeaseTicks: 1000
 		TeamResponseRearmCooldownTicks: 500
 		TeamResponseLeaseLimit: 1
@@ -502,6 +551,7 @@
 		PersonalityReactionDelay: 1000
 		NewProductionCashThreshold: 2000
 		MaximiseProductionCashRequirement: 1000
+		IdleBaseUnitsMaximum: 75
 		BankSaturationCash: 1500
 		AdaptiveCounterWeight: 50
 		CapturerInfantryLimitPct: 10
@@ -3810,6 +3860,9 @@ Player:
 		RequiresCondition: classicbot
 	BaseRepairBotModule:
 		RequiresCondition: genericbot
+		# ARMY-FIRST-02 (USER rule 11-23): repair is always on unless cash + resources < 1000; one toggle per state change.
+		# Row af2_repair_cash; 0 = no floor.
+		RepairMinCash: 1000
 	# CN2 (AI_MASTER_PLAN §3, crystallized-nexus port): the UNIT side of repair - damaged idle units go to a
 	# depot (Repairable), a repair-near building, or within a mobile repairer's aura. BaseRepairBotModule owns
 	# buildings; this only ever orders units, and claims each one (BotLeasePurpose.Repair) so squads cannot
@@ -4230,13 +4283,32 @@ Player:
 	# combat units are below MinArmyUnitsBeforeBuildings with cash above ArmyFirstMinCash (gate off until the switch sets it).
 	# Conyards, refineries, power and the first factory are essential and always pass; the vote is inert until a unit
 	# producer exists, so tech sequencing cannot stall.
-	# PROD-IDLE G1: mounted on genericbot (all 11 tiers). The flat cash-poor vote is subsumed by the spend owner's gate and
-	# the projected-ratio rule, so it is the same no-vote value 0 on every tier; the ratio comes from BotLimits.
+	# `genericbot && army_first`: off on master until the increment A/B arms it (switch group AE).
+	# DEFENCE-ZERO-FIX (Opus 2026-11-22, user ruling): restored to the 837a13915 gate. The PR-3 projected-share vote and the
+	# PR-1 reserve vote stay in the module code, dormant: no tier bot satisfies `army_first` (the grant above is fransbot only),
+	# so no tier bot carries a building pause vote. Do not re-mount this on the tiers; see the grant comment. ARMY-FIRST-02
+	# mounts the count-based redesign as its own instance (@af02, next), not this one.
 	ArmyFirstBotModule:
-		RequiresCondition: genericbot
+		RequiresCondition: genericbot && army_first
+	# ARMY-FIRST-02 (USER P0 11-23): the tier voter. The cash-poor and army-count votes stay off (0, as the PROD-IDLE G1 mount
+	# 364f31ca5); the PR-3 projected-share and PR-1 reserve votes act on EXTRA non-defence copies only:
+	# - FirstCopyPasses: a type with no owned, queued or recently admitted copy is never held (tech chain, radar, the first
+	#   defence of each type, support buildings), so the DEFENCE-ZERO and tech-starvation failures cannot return;
+	# - extra defences leave the stock votes and follow the threat-scaled cap: 3 quiet, up to 3 + 6 at full threat
+	#   intensity; turtle may hold 2x that until tick 27000 (early-mid game only); every personality ramps the army.
+	# Rows: af2_army_first (this instance), af2_first_copy, af2_defence_cap.
+	ArmyFirstBotModule@af02:
+		RequiresCondition: genericbot && army_first_02
 		ArmyReserveLowCash: 0
 		ArmyReserveHighCash: 0
 		MinArmyUnitsBeforeBuildings: 0
+		FirstCopyPasses: true
+		DefenceCapBase: 3
+		DefenceCapPerThreat: 6
+		DefenceThreatSaturationPercent: 300
+		TurtleDefenceCapPercent: 200
+		TurtleDefenceUntilTick: 27000
+		AblationRow: af2_army_first
 	# CN3 (crystallized-nexus DeployBotModule port): unified deploy driving for GrantConditionOnDeploy units -
 	# artillery move-into-range/deploy/retreat-from-dead-zone, stat-deployers entrench when idle+threatened,
 	# support deploys near allies, ability deploys fire once and pack. Squad-held units are skipped entirely
@@ -4295,10 +4367,14 @@ Player:
 	# B2/B6 repair: demand routes through ordinary StartProduction and the base builder's
 	# completed-item PlacePlug — bots buy plugs like players (maintainer ruling); the instant
 	# PlacePlugAI installer is retired. Queue-less plugs (dormant droppod uplink) stay
-	# unreachable. `genericbot && plug_spawn`: off on master until the increment A/B arms it
-	# (group F).
+	# unreachable.
+	# UPGRADE-QUEUE-02 (USER P0, add-ons never idle): the gate is now `genericbot` only, with its own
+	# switch AddonService (default true, ablation row pq_addon_service). The old plug_spawn gate kept
+	# every add-on idle on master. Classic has no genericbot, so Classic is untouched. Zerg lair/hive,
+	# sunken/spore, spire->greater spire, extractor->collector and WC2 castle/fortress entries added or
+	# corrected from each plug's own Plug.Type (castle = keep, fortress = stronghold).
 	PlugSpawnerBotModuleCA:
-		RequiresCondition: genericbot && plug_spawn
+		RequiresCondition: genericbot
 		Plugs:
 			cabal_missilesilo: cabal_core
 			naxis_machinegunbunkeraddon: naxis_naxibunker
@@ -4314,19 +4390,22 @@ Player:
 			ts_gdi_ioncannonuplink: ts_gdi_upgradecenter
 			ts_gdi_powerturbine: ts_gdi_powerplant
 			wc2_humans_cannontower_plug: wc2_humans_humanscouttower, wc2_orcs_orcwatchtower
-			wc2_humans_castle: wc2_humans_townhall
+			wc2_humans_castle: wc2_humans_keep
 			wc2_humans_guardtower_plug: wc2_humans_humanscouttower, wc2_orcs_orcwatchtower
 			wc2_humans_keep: wc2_humans_townhall
 			wc2_orcs_cannontower_plug: wc2_humans_humanscouttower, wc2_orcs_orcwatchtower
-			wc2_orcs_fortress: wc2_orcs_greathall
+			wc2_orcs_fortress: wc2_orcs_stronghold
 			wc2_orcs_guardtower_plug: wc2_humans_humanscouttower, wc2_orcs_orcwatchtower
 			wc2_orcs_stronghold: wc2_orcs_greathall
-			zerg_greaterspire: zerg_spire
-			zerg_hive: zerg_hatchery
+			# Zerg add-ons (BuildingAddons queue). Host names are the Plug.Type of each plug; the module
+			# still queues only where a host's Pluggable accepts the type (AcceptsPlug), so a generous
+			# host list can never queue an unplaceable plug.
 			zerg_lair: zerg_hatchery
-			zerg_sporecolony_defense: zerg_creepcolony
+			zerg_hive: zerg_hatchery, zerg_lair
 			zerg_sunkencolony: zerg_creepcolony
+			zerg_sporecolony_defense: zerg_creepcolony
 			zerg_vespenegascollector: zerg_extractor
+			zerg_greaterspire: zerg_spire
 	BotUnitLeaseRegistry:
 		EnforceAtOrderGate: true
 		RequiresCondition: genericbot
@@ -4660,6 +4739,30 @@ Player:
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
+		# ARTY-01 + DEFEND-ALLY-01 (USER P0, 2026-11-23): artillery micro and allied defence. @classic keeps the defaults (off).
+		ArtyMicroEnabled: true
+		DefendAllyEnabled: true
+		# WAVE-MIN-01 (USER rule, 2026-11-23): attack waves leave the base only at the tier minimum (BotLimits.WaveMinUnits / WaveMinValue). A personality may raise it with WaveMinUnits / WaveMinValue here, never lower it.
+		WaveMinEnabled: true
+		# ARMY-MIX-01 (USER rule, 2026-11-23): attack waves mix all available unit types (>= 3 roles or every available role).
+		WaveMixEnabled: true
+		# TEAM-LEAD-01 (USER rule, 2026-11-23): per team the highest-score bot leads; followers launch only on its order; the team gathers at one rally point and pushes one target together. Needs AggTeamEnabled. @classic keeps the default (off).
+		TeamLeadEnabled: true
+		# TEAM-LEAD-02 (USER P0, V01 timeout RCA): the leader publishes the team push from its own check once the combined blob reaches the WAVE-MIN tier (or any member hits its idle-unit limit), every member forms its wave for the order at once. Needs TeamLeadEnabled.
+		TeamLeadCadenceEnabled: true
+		# TEAM-LEAD-02: after LateEscalationStartTick the team finishes the WEAKEST known enemy seat (fewest known buildings) before it switches. Needs TeamLeadEnabled.
+		TeamLeadFinishWeakestEnabled: true
+		# TEAM-PINCER-01: a team push with a blob of at least twice the WAVE-MIN tier splits into two prongs that stage on opposite sides of the same target and push together. Needs TeamLeadEnabled.
+		TeamLeadPincerEnabled: true
+		# TEAM-BLOB-01: the leader publishes the push after 1500 / 3000 ticks without any order (V02: a tiny blob never reached WAVE-MIN), and a leader re-election hands the open order over instead of cancelling it.
+		TeamLeadFallbackPublishEnabled: true
+		TeamLeadOrderSurviveEnabled: true
+		# TEAM-BLOB-01 push bar (USER rule: bots never trickle): a due team push waits at the rally while the arrived squads are below the WAVE-MIN bars; dissolved after 3000 ticks of hold.
+		TeamLeadPushBarEnabled: true
+		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
+		HarassCapEnabled: true
+		HarassMinEnabled: true
+		TeamLeadRaiderRecallEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -4667,6 +4770,15 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-rush
+		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
+		LateEscalationEnabled: true
+		FinishModeEnabled: true
+		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
+		BlobLeaderOrderOnly: true
+		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
+		BlobLeaderFallbackTicks: 0
+		# BLOB-LAUNCH-01 attack gate: breaker + M13 liveness waves only at the blob minimum (row bl_attack_gate).
+		BlobAttackGate: true
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Rush: fast cheap pressure — skirmisher/anti-infantry heavy, scouts find the economy kills.
@@ -4699,6 +4811,9 @@ Player:
 		AggressionMinDispatchValue: 1000
 		PreferMainTarget: true
 		AirPriorityTags: artillery, harvester
+		# CN-ARM-01 (6g ground target tags, soft preference only): rush squads prefer artillery and production, assault squads production and superweapons.
+		RushPriorityTags: artillery, production
+		AssaultPriorityTags: production, superweapon
 		StageBeforeAssault: true
 		MinimumAttackForceDelay: 400
 		SquadSize: 3
@@ -4775,6 +4890,30 @@ Player:
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
+		# ARTY-01 + DEFEND-ALLY-01 (USER P0, 2026-11-23): artillery micro and allied defence. @classic keeps the defaults (off).
+		ArtyMicroEnabled: true
+		DefendAllyEnabled: true
+		# WAVE-MIN-01 (USER rule, 2026-11-23): attack waves leave the base only at the tier minimum (BotLimits.WaveMinUnits / WaveMinValue). A personality may raise it with WaveMinUnits / WaveMinValue here, never lower it.
+		WaveMinEnabled: true
+		# ARMY-MIX-01 (USER rule, 2026-11-23): attack waves mix all available unit types (>= 3 roles or every available role).
+		WaveMixEnabled: true
+		# TEAM-LEAD-01 (USER rule, 2026-11-23): per team the highest-score bot leads; followers launch only on its order; the team gathers at one rally point and pushes one target together. Needs AggTeamEnabled. @classic keeps the default (off).
+		TeamLeadEnabled: true
+		# TEAM-LEAD-02 (USER P0, V01 timeout RCA): the leader publishes the team push from its own check once the combined blob reaches the WAVE-MIN tier (or any member hits its idle-unit limit), every member forms its wave for the order at once. Needs TeamLeadEnabled.
+		TeamLeadCadenceEnabled: true
+		# TEAM-LEAD-02: after LateEscalationStartTick the team finishes the WEAKEST known enemy seat (fewest known buildings) before it switches. Needs TeamLeadEnabled.
+		TeamLeadFinishWeakestEnabled: true
+		# TEAM-PINCER-01: a team push with a blob of at least twice the WAVE-MIN tier splits into two prongs that stage on opposite sides of the same target and push together. Needs TeamLeadEnabled.
+		TeamLeadPincerEnabled: true
+		# TEAM-BLOB-01: the leader publishes the push after 1500 / 3000 ticks without any order (V02: a tiny blob never reached WAVE-MIN), and a leader re-election hands the open order over instead of cancelling it.
+		TeamLeadFallbackPublishEnabled: true
+		TeamLeadOrderSurviveEnabled: true
+		# TEAM-BLOB-01 push bar (USER rule: bots never trickle): a due team push waits at the rally while the arrived squads are below the WAVE-MIN bars; dissolved after 3000 ticks of hold.
+		TeamLeadPushBarEnabled: true
+		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
+		HarassCapEnabled: true
+		HarassMinEnabled: true
+		TeamLeadRaiderRecallEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -4782,6 +4921,15 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-turtle
+		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
+		LateEscalationEnabled: true
+		FinishModeEnabled: true
+		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
+		BlobLeaderOrderOnly: true
+		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
+		BlobLeaderFallbackTicks: 0
+		# BLOB-LAUNCH-01 attack gate: breaker + M13 liveness waves only at the blob minimum (row bl_attack_gate).
+		BlobAttackGate: true
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Turtle: static-defence posture — artillery and anti-air mass behind the frontline screen.
@@ -4813,6 +4961,9 @@ Player:
 		AggressionMinDispatchValue: 1000
 		PreferMainTarget: true
 		AirPriorityTags: artillery, harvester
+		# CN-ARM-01 (6g ground target tags, soft preference only): rush squads prefer artillery and production, assault squads production and superweapons.
+		RushPriorityTags: artillery, production
+		AssaultPriorityTags: production, superweapon
 		StageBeforeAssault: true
 		MinimumAttackForceDelay: 2500
 		SquadSize: 8
@@ -4886,6 +5037,30 @@ Player:
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
+		# ARTY-01 + DEFEND-ALLY-01 (USER P0, 2026-11-23): artillery micro and allied defence. @classic keeps the defaults (off).
+		ArtyMicroEnabled: true
+		DefendAllyEnabled: true
+		# WAVE-MIN-01 (USER rule, 2026-11-23): attack waves leave the base only at the tier minimum (BotLimits.WaveMinUnits / WaveMinValue). A personality may raise it with WaveMinUnits / WaveMinValue here, never lower it.
+		WaveMinEnabled: true
+		# ARMY-MIX-01 (USER rule, 2026-11-23): attack waves mix all available unit types (>= 3 roles or every available role).
+		WaveMixEnabled: true
+		# TEAM-LEAD-01 (USER rule, 2026-11-23): per team the highest-score bot leads; followers launch only on its order; the team gathers at one rally point and pushes one target together. Needs AggTeamEnabled. @classic keeps the default (off).
+		TeamLeadEnabled: true
+		# TEAM-LEAD-02 (USER P0, V01 timeout RCA): the leader publishes the team push from its own check once the combined blob reaches the WAVE-MIN tier (or any member hits its idle-unit limit), every member forms its wave for the order at once. Needs TeamLeadEnabled.
+		TeamLeadCadenceEnabled: true
+		# TEAM-LEAD-02: after LateEscalationStartTick the team finishes the WEAKEST known enemy seat (fewest known buildings) before it switches. Needs TeamLeadEnabled.
+		TeamLeadFinishWeakestEnabled: true
+		# TEAM-PINCER-01: a team push with a blob of at least twice the WAVE-MIN tier splits into two prongs that stage on opposite sides of the same target and push together. Needs TeamLeadEnabled.
+		TeamLeadPincerEnabled: true
+		# TEAM-BLOB-01: the leader publishes the push after 1500 / 3000 ticks without any order (V02: a tiny blob never reached WAVE-MIN), and a leader re-election hands the open order over instead of cancelling it.
+		TeamLeadFallbackPublishEnabled: true
+		TeamLeadOrderSurviveEnabled: true
+		# TEAM-BLOB-01 push bar (USER rule: bots never trickle): a due team push waits at the rally while the arrived squads are below the WAVE-MIN bars; dissolved after 3000 ticks of hold.
+		TeamLeadPushBarEnabled: true
+		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
+		HarassCapEnabled: true
+		HarassMinEnabled: true
+		TeamLeadRaiderRecallEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -4893,6 +5068,15 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-tech
+		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
+		LateEscalationEnabled: true
+		FinishModeEnabled: true
+		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
+		BlobLeaderOrderOnly: true
+		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
+		BlobLeaderFallbackTicks: 0
+		# BLOB-LAUNCH-01 attack gate: breaker + M13 liveness waves only at the blob minimum (row bl_attack_gate).
+		BlobAttackGate: true
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Tech: quality over quantity — frontline core with the widest air split (gunship/fighter/bomber).
@@ -4926,6 +5110,9 @@ Player:
 		AggressionMinDispatchValue: 1000
 		PreferMainTarget: true
 		AirPriorityTags: artillery, harvester
+		# CN-ARM-01 (6g ground target tags, soft preference only): rush squads prefer artillery and production, assault squads production and superweapons.
+		RushPriorityTags: artillery, production
+		AssaultPriorityTags: production, superweapon
 		StageBeforeAssault: true
 		MinimumAttackForceDelay: 1800
 		SquadSize: 6
@@ -4999,6 +5186,30 @@ Player:
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
+		# ARTY-01 + DEFEND-ALLY-01 (USER P0, 2026-11-23): artillery micro and allied defence. @classic keeps the defaults (off).
+		ArtyMicroEnabled: true
+		DefendAllyEnabled: true
+		# WAVE-MIN-01 (USER rule, 2026-11-23): attack waves leave the base only at the tier minimum (BotLimits.WaveMinUnits / WaveMinValue). A personality may raise it with WaveMinUnits / WaveMinValue here, never lower it.
+		WaveMinEnabled: true
+		# ARMY-MIX-01 (USER rule, 2026-11-23): attack waves mix all available unit types (>= 3 roles or every available role).
+		WaveMixEnabled: true
+		# TEAM-LEAD-01 (USER rule, 2026-11-23): per team the highest-score bot leads; followers launch only on its order; the team gathers at one rally point and pushes one target together. Needs AggTeamEnabled. @classic keeps the default (off).
+		TeamLeadEnabled: true
+		# TEAM-LEAD-02 (USER P0, V01 timeout RCA): the leader publishes the team push from its own check once the combined blob reaches the WAVE-MIN tier (or any member hits its idle-unit limit), every member forms its wave for the order at once. Needs TeamLeadEnabled.
+		TeamLeadCadenceEnabled: true
+		# TEAM-LEAD-02: after LateEscalationStartTick the team finishes the WEAKEST known enemy seat (fewest known buildings) before it switches. Needs TeamLeadEnabled.
+		TeamLeadFinishWeakestEnabled: true
+		# TEAM-PINCER-01: a team push with a blob of at least twice the WAVE-MIN tier splits into two prongs that stage on opposite sides of the same target and push together. Needs TeamLeadEnabled.
+		TeamLeadPincerEnabled: true
+		# TEAM-BLOB-01: the leader publishes the push after 1500 / 3000 ticks without any order (V02: a tiny blob never reached WAVE-MIN), and a leader re-election hands the open order over instead of cancelling it.
+		TeamLeadFallbackPublishEnabled: true
+		TeamLeadOrderSurviveEnabled: true
+		# TEAM-BLOB-01 push bar (USER rule: bots never trickle): a due team push waits at the rally while the arrived squads are below the WAVE-MIN bars; dissolved after 3000 ticks of hold.
+		TeamLeadPushBarEnabled: true
+		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
+		HarassCapEnabled: true
+		HarassMinEnabled: true
+		TeamLeadRaiderRecallEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5006,6 +5217,15 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-expansion
+		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
+		LateEscalationEnabled: true
+		FinishModeEnabled: true
+		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
+		BlobLeaderOrderOnly: true
+		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
+		BlobLeaderFallbackTicks: 0
+		# BLOB-LAUNCH-01 attack gate: breaker + M13 liveness waves only at the blob minimum (row bl_attack_gate).
+		BlobAttackGate: true
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Expansion: spread defence of growing territory — balanced core, extra scouts find the fields.
@@ -5038,6 +5258,9 @@ Player:
 		AggressionMinDispatchValue: 1000
 		PreferMainTarget: true
 		AirPriorityTags: artillery, harvester
+		# CN-ARM-01 (6g ground target tags, soft preference only): rush squads prefer artillery and production, assault squads production and superweapons.
+		RushPriorityTags: artillery, production
+		AssaultPriorityTags: production, superweapon
 		StageBeforeAssault: true
 		MinimumAttackForceDelay: 1200
 		SquadSize: 5
@@ -5112,6 +5335,30 @@ Player:
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
+		# ARTY-01 + DEFEND-ALLY-01 (USER P0, 2026-11-23): artillery micro and allied defence. @classic keeps the defaults (off).
+		ArtyMicroEnabled: true
+		DefendAllyEnabled: true
+		# WAVE-MIN-01 (USER rule, 2026-11-23): attack waves leave the base only at the tier minimum (BotLimits.WaveMinUnits / WaveMinValue). A personality may raise it with WaveMinUnits / WaveMinValue here, never lower it.
+		WaveMinEnabled: true
+		# ARMY-MIX-01 (USER rule, 2026-11-23): attack waves mix all available unit types (>= 3 roles or every available role).
+		WaveMixEnabled: true
+		# TEAM-LEAD-01 (USER rule, 2026-11-23): per team the highest-score bot leads; followers launch only on its order; the team gathers at one rally point and pushes one target together. Needs AggTeamEnabled. @classic keeps the default (off).
+		TeamLeadEnabled: true
+		# TEAM-LEAD-02 (USER P0, V01 timeout RCA): the leader publishes the team push from its own check once the combined blob reaches the WAVE-MIN tier (or any member hits its idle-unit limit), every member forms its wave for the order at once. Needs TeamLeadEnabled.
+		TeamLeadCadenceEnabled: true
+		# TEAM-LEAD-02: after LateEscalationStartTick the team finishes the WEAKEST known enemy seat (fewest known buildings) before it switches. Needs TeamLeadEnabled.
+		TeamLeadFinishWeakestEnabled: true
+		# TEAM-PINCER-01: a team push with a blob of at least twice the WAVE-MIN tier splits into two prongs that stage on opposite sides of the same target and push together. Needs TeamLeadEnabled.
+		TeamLeadPincerEnabled: true
+		# TEAM-BLOB-01: the leader publishes the push after 1500 / 3000 ticks without any order (V02: a tiny blob never reached WAVE-MIN), and a leader re-election hands the open order over instead of cancelling it.
+		TeamLeadFallbackPublishEnabled: true
+		TeamLeadOrderSurviveEnabled: true
+		# TEAM-BLOB-01 push bar (USER rule: bots never trickle): a due team push waits at the rally while the arrived squads are below the WAVE-MIN bars; dissolved after 3000 ticks of hold.
+		TeamLeadPushBarEnabled: true
+		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
+		HarassCapEnabled: true
+		HarassMinEnabled: true
+		TeamLeadRaiderRecallEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5119,6 +5366,15 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-steamroller
+		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
+		LateEscalationEnabled: true
+		FinishModeEnabled: true
+		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
+		BlobLeaderOrderOnly: true
+		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
+		BlobLeaderFallbackTicks: 0
+		# BLOB-LAUNCH-01 attack gate: breaker + M13 liveness waves only at the blob minimum (row bl_attack_gate).
+		BlobAttackGate: true
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Steamroller: massed armour push — frontline wall, artillery second line, AA cover.
@@ -5150,6 +5406,9 @@ Player:
 		AggressionMinDispatchValue: 1000
 		PreferMainTarget: true
 		AirPriorityTags: artillery, harvester
+		# CN-ARM-01 (6g ground target tags, soft preference only): rush squads prefer artillery and production, assault squads production and superweapons.
+		RushPriorityTags: artillery, production
+		AssaultPriorityTags: production, superweapon
 		StageBeforeAssault: true
 		MinimumAttackForceDelay: 2000
 		SquadSize: 12
@@ -5222,6 +5481,31 @@ Player:
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
+		# ARTY-01 + DEFEND-ALLY-01 (USER P0, 2026-11-23): artillery micro and allied defence. @classic keeps the defaults (off).
+		ArtyMicroEnabled: true
+		DefendAllyEnabled: true
+		# WAVE-MIN-01 (USER rule, 2026-11-23): attack waves leave the base only at the tier minimum (BotLimits.WaveMinUnits / WaveMinValue). A personality may raise it with WaveMinUnits / WaveMinValue here, never lower it.
+		WaveMinEnabled: true
+		# ARMY-MIX-01 (USER rule, 2026-11-23): attack waves mix all available unit types (>= 3 roles or every available role).
+		WaveMixEnabled: true
+		# TEAM-LEAD-01 (USER rule, 2026-11-23): per team the highest-score bot leads; followers launch only on its order; the team gathers at one rally point and pushes one target together. Needs AggTeamEnabled. @classic keeps the default (off).
+		TeamLeadEnabled: true
+		# TEAM-LEAD-02 (USER P0, V01 timeout RCA): the leader publishes the team push from its own check once the combined blob reaches the WAVE-MIN tier (or any member hits its idle-unit limit), every member forms its wave for the order at once. Needs TeamLeadEnabled.
+		TeamLeadCadenceEnabled: true
+		# TEAM-LEAD-02: after LateEscalationStartTick the team finishes the WEAKEST known enemy seat (fewest known buildings) before it switches. Needs TeamLeadEnabled.
+		TeamLeadFinishWeakestEnabled: true
+		# TEAM-PINCER-01: a team push with a blob of at least twice the WAVE-MIN tier splits into two prongs that stage on opposite sides of the same target and push together. Needs TeamLeadEnabled.
+		TeamLeadPincerEnabled: true
+		# TEAM-BLOB-01: the leader publishes the push after 1500 / 3000 ticks without any order (V02: a tiny blob never reached WAVE-MIN), and a leader re-election hands the open order over instead of cancelling it.
+		TeamLeadFallbackPublishEnabled: true
+		TeamLeadOrderSurviveEnabled: true
+		# TEAM-BLOB-01 push bar (USER rule: bots never trickle): a due team push waits at the rally while the arrived squads are below the WAVE-MIN bars; dissolved after 3000 ticks of hold.
+		TeamLeadPushBarEnabled: true
+		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
+		HarassCapEnabled: true
+		HarassCapPercent: 40
+		HarassMinEnabled: true
+		TeamLeadRaiderRecallEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5229,6 +5513,15 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-guerrilla
+		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
+		LateEscalationEnabled: true
+		FinishModeEnabled: true
+		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
+		BlobLeaderOrderOnly: true
+		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
+		BlobLeaderFallbackTicks: 0
+		# BLOB-LAUNCH-01 attack gate: breaker + M13 liveness waves only at the blob minimum (row bl_attack_gate).
+		BlobAttackGate: true
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Guerrilla: map control — skirmishers and scouts hold ground, gunships punish exposed targets.
@@ -5261,6 +5554,9 @@ Player:
 		AggressionMinDispatchValue: 1000
 		PreferMainTarget: false
 		AirPriorityTags: artillery, harvester
+		# CN-ARM-01 (6g ground target tags, soft preference only): rush squads prefer artillery and production, assault squads production and superweapons.
+		RushPriorityTags: artillery, production
+		AssaultPriorityTags: production, superweapon
 		StageBeforeAssault: false
 		MinimumAttackForceDelay: 700
 		SquadSize: 3
@@ -5429,6 +5725,24 @@ Player:
 	BaseBuilderBotModuleCA@generic:
 		RequiresCondition: genericbot || classicbot
 		SwitchCondition: genericbot
+		# PROD-BUSY-01: every building/defence producer may start in the same sweep; an idle sweep re-checks after the short delay.
+		# Rows pb_all_building_producers / pb_building_idle_sweep; genericbot only (SwitchCondition above).
+		ServeAllBuildingProducers: true
+		BuildingIdleSweepActive: true
+		# ESSENTIALS-01: below the tier MaximiseProductionCash line only essentials start (row pb_essentials_low_cash); genericbot only.
+		EssentialsOnlyBelowTierLine: true
+		# UPGRADE-PRODUCERS-01: every structure type with no BuildingFractions row is built once (upgrade/research producers, radar, tech centres); row af2_unlisted_once; genericbot only.
+		UnlistedBuildingsOnce: true
+		# PROD-BUSY cycle: above the same line, more production buildings cycled across the types (row pb_cycle_production); genericbot only.
+		CycleProductionAboveLine: true
+		# SUSTAINED-CASH-01: a bank above the tier line for 1500 ticks forces the next building to be production (row pb_sustained_cash_production); genericbot only.
+		SustainedCashProduction: true
+		# pb_expansion_refinery_safety: the expansion refinery goes first only while the new yard is safe; genericbot only.
+		ExpansionRefinerySafety: true
+		# p0-integration-01 (Opus 11-23): RATIO-2X-01 switched ON for the P0 acceptance test (the 2x mobile/static ratio at a
+		# defence start; row army_first_02_ratio). Classic shares this instance but has no IBotMobileStaticValues provider
+		# (MasterAiBotModule is genericbot), so its gate is Inert and records nothing.
+		MobileStaticRatioEnabled: true
 		InititalMinimumRefineryCount: 1
 		AdditionalMinimumRefineryCount: 2
 		RefineriesPerBase: 3
@@ -5635,6 +5949,14 @@ Player:
 		# PROD-IDLE G1: the fair producer service replaces the legacy fill loop for genericbot (SwitchCondition above);
 		# classic keeps the legacy loop byte-identically.
 		FairProducerService: true
+		# PROD-BUSY-01 (USER P0: every queue busy while cash > reserve): every factory of every category served on every pass.
+		# Rows pb_all_factories / pb_all_categories; genericbot only (SwitchCondition above).
+		ServeAllFactories: true
+		ServeAllCategories: true
+		ShareTestNeverIdles: true
+		TieredIdleCap: true
+		# INFANTRY-IDLE-01: an idle infantry queue the role mix / share table left without a pick builds the best buildable unit (row pb_idle_queue_floor).
+		IdleQueueFloor: true
 		IdleBaseUnitsMaximum: 25
 		ProductionMinCashRequirement: 1000
 		MaximiseProductionCashRequirement: 5000

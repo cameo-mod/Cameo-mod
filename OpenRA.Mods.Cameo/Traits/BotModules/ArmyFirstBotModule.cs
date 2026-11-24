@@ -10,6 +10,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
@@ -39,6 +40,44 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		[Desc("Ticks between re-evaluations of the vote.")]
 		public readonly int ScanInterval = 25;
+
+		[Desc("ARMY-FIRST-02 (user rule 11-22: every available building at least once, then army). A building type with no",
+			"owned, queued or recently admitted copy passes every vote of this instance, so the votes only ever hold EXTRA copies.",
+			"Off = the votes as before. Ablation row af2_first_copy.")]
+		public readonly bool FirstCopyPasses = false;
+
+		[Desc("ARMY-FIRST-02: armed static defences (a building with an attack trait) leave the projected-share and reserve votes",
+			"(defences count as army, user 11-22) and follow a threat-scaled cap instead: an extra defence is held while the bot",
+			"already has this many (owned + queued + recently admitted) plus DefenceCapPerThreat x threat intensity. The first",
+			"copy of each defence type passes (FirstCopyPasses); an essential building always passes. -1 = no cap, defences are",
+			"voted like any building. The cap is computed at the first scan (ScanInterval): before it nothing is capped.",
+			"Ablation row af2_defence_cap.")]
+		public readonly int DefenceCapBase = -1;
+
+		[Desc("Extra defences allowed at full threat intensity (IBotThreatAnalysis, the highest of the anti-air, anti-armour and",
+			"anti-infantry intensities, 0..1). Rounded down.")]
+		public readonly int DefenceCapPerThreat = 0;
+
+		[Desc("Saturation of the threat intensity, in percent of the react threshold (300 = intensity 1 at 3x the threshold).")]
+		public readonly int DefenceThreatSaturationPercent = 300;
+
+		[Desc("Turtle may stay heavy on defence early to mid game only (Opus 11-23): while the bot's personality is turtle and the",
+			"game is before TurtleDefenceUntilTick, the cap is scaled by this percent. 100 = no turtle bonus.")]
+		public readonly int TurtleDefenceCapPercent = 100;
+
+		[Desc("End of the turtle defence bonus (world tick).")]
+		public readonly int TurtleDefenceUntilTick = 0;
+
+		[Desc("Ticks an admitted building counts as in flight for the first-copy and defence counts (covers the order latency",
+			"until the next scan sees it queued; a conservative overcount inside the window).")]
+		public readonly int AdmittedHoldTicks = 50;
+
+		[Desc("An admission older than this many ticks at a scan is in that scan's queue count already and is dropped from the",
+			"defence in-flight count (orders resolve within a few ticks; the scan counts the queued item itself).")]
+		public readonly int AdmittedSeenTicks = 10;
+
+		[Desc("ABLATE-01 row that switches this whole instance off (DEV provider only; release = on). Empty = no row.")]
+		public readonly string AblationRow = "";
 	}
 
 	/// <summary>Pure army-first decisions (AI_ARCHITECTURE 12.20), unit-tested without a world.</summary>
@@ -98,6 +137,46 @@ namespace OpenRA.Mods.Cameo.Traits
 			!essential && admission == RecoverySpendPolicyCA.Admission.General
 			&& !RecoverySpendPolicyCA.Admits(SpendCommitmentsCA.Available(cash, committed), cost, 0, 0, 0, false,
 				RecoverySpendPolicyCA.Admission.General, productionReserve);
+
+		/// <summary>ARMY-FIRST-02 core rule: no owned, no queued and no recently admitted copy = the first copy, never held.</summary>
+		public static bool IsFirstCopy(int ownedOrQueued, bool recentlyAdmitted) => ownedOrQueued <= 0 && !recentlyAdmitted;
+
+		/// <summary>Armed static defence: a building with an attack trait (walls and unarmed support are not defences).</summary>
+		public static bool IsDefence(bool isBuilding, bool hasAttack) => isBuilding && hasAttack;
+
+		/// <summary>
+		/// ARMY-FIRST-02 threat-scaled defence cap: base + floor(perThreat x intensity), intensity clamped to 0..1, then scaled by
+		/// turtlePercent while the turtle bonus applies. Negative base = no cap (-1).
+		/// </summary>
+		public static int DefenceCap(int baseCap, int perThreat, double intensity, bool turtleBonus, int turtlePercent)
+		{
+			if (baseCap < 0)
+				return -1;
+
+			var cap = (long)baseCap + (long)Math.Floor(Math.Max(0, perThreat) * Math.Clamp(intensity, 0.0, 1.0));
+			if (turtleBonus)
+				cap = cap * Math.Max(0, turtlePercent) / 100;
+
+			return (int)Math.Min(int.MaxValue, cap);
+		}
+
+		/// <summary>Hold an extra defence while the count is at or over the cap; no cap (negative) never holds.</summary>
+		public static bool DefenceCapHolds(int cap, int defences) => cap >= 0 && defences >= cap;
+
+		/// <summary>
+		/// ARMY-FIRST-02 decision order for one building order. First copies pass (when enabled); defences follow the cap and skip
+		/// the stock votes (when the cap is on); everything else goes to the existing votes (<paramref name="votesHold"/>).
+		/// </summary>
+		public static bool Af02Holds(bool firstCopyOn, bool isFirstCopy, bool capOn, bool isDefence, bool capHolds, bool votesHold)
+		{
+			if (firstCopyOn && isFirstCopy)
+				return false;
+
+			if (capOn && isDefence)
+				return capHolds;
+
+			return votesHold;
+		}
 	}
 
 	/// <summary>
@@ -129,6 +208,18 @@ namespace OpenRA.Mods.Cameo.Traits
 		int lastBotTick;
 		bool scanStarted;
 
+		// ARMY-FIRST-02 state, refreshed with the share scan (owned + queued per type, defences) plus admissions since.
+		AblationLatch ablateInstance; // the instance row (Info.AblationRow)
+		AblationLatch ablateFirstCopy; // af2_first_copy
+		AblationLatch ablateDefenceCap; // af2_defence_cap
+		readonly Dictionary<string, int> typeCounts = new();
+		readonly Dictionary<string, int> admittedAt = new();
+		readonly List<int> admittedDefenceTicks = new();
+		int scannedDefences;
+		int defenceCap = -1;
+		IBotThreatAnalysis threat;
+		BotPersonalityController personality;
+
 		public ArmyFirstBotModule(ArmyFirstBotModuleInfo info, ActorInitializer init)
 			: base(info)
 		{
@@ -144,15 +235,70 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (IsTraitDisabled || playerResources == null)
 				return false;
 
+			if (!string.IsNullOrEmpty(info.AblationRow) && ablateInstance.Off(player, info.AblationRow))
+				return false;
+
+			var firstCopyOn = info.FirstCopyPasses && !ablateFirstCopy.Off(player, AblationIds.Af2FirstCopy);
+			var capOn = info.DefenceCapBase >= 0 && !ablateDefenceCap.Off(player, AblationIds.Af2DefenceCap);
+			if (firstCopyOn || capOn)
+			{
+				var tick = player.World.WorldTick;
+				var isFirstCopy = firstCopyOn && ArmyFirstEval.IsFirstCopy(typeCounts.GetValueOrDefault(building.Name),
+					admittedAt.TryGetValue(building.Name, out var at) && tick - at < info.AdmittedHoldTicks);
+				var isDefence = ArmyFirstEval.IsDefence(building.HasTraitInfo<BuildingInfo>(), building.HasTraitInfo<AttackBaseInfo>());
+				if (firstCopyOn && isFirstCopy || capOn && isDefence)
+				{
+					var capHolds = capOn && isDefence && !essential && ArmyFirstEval.DefenceCapHolds(defenceCap, DefenceCount(tick));
+					var af2Holds = ArmyFirstEval.Af02Holds(firstCopyOn, isFirstCopy, capOn, isDefence, capHolds, false);
+#if CAMEO_DEV_LOGGING
+					CountAf2(building, isFirstCopy && firstCopyOn ? "first_copy" : af2Holds ? "cap_hold" : "cap_admit", tick);
+#endif
+					return af2Holds;
+				}
+			}
+
 			var armyHolds = ArmyFirstEval.ArmyCountHolds(hasUnitProducer, playerResources.GetCashAndResources(), armyUnits,
 				info.MinArmyUnitsBeforeBuildings, info.ArmyFirstMinCash);
-			return ArmyFirstEval.Holds(essential, paused, armyHolds)
+			var holds = ArmyFirstEval.Holds(essential, paused, armyHolds)
 				|| !ablateArmyRatio.Off(player, AblationIds.ArmyRatio)
 					&& ArmyFirstEval.ShareHolds(essential, admission, share, cost, ShareTarget)
 				|| !ablateRecovery.Off(player, AblationIds.Recovery)
 					&& ArmyFirstEval.ReserveHolds(essential, admission, playerResources.GetCashAndResources(), Committed(), cost,
 						ReserveLine());
+#if CAMEO_DEV_LOGGING
+			if (holds)
+				CountShareHold(building, essential, admission, cost);
+#endif
+			return holds;
 		}
+
+#if CAMEO_DEV_LOGGING
+		// DEFENCE-ZERO-FIX F-D (DEV only): share_hold per class and item, so a future arming of this module shows what the
+		// projected-share vote holds (it writes no other trace). Read-only: re-asks the pure vote to attribute the hold; the
+		// base builder asks twice per pick in one tick, so a repeat of the same item in the same tick counts once.
+		readonly Dictionary<string, int> shareHolds = new();
+		int lastShareHoldTick = -1;
+		string lastShareHoldItem;
+
+		void CountShareHold(ActorInfo building, bool essential, RecoverySpendPolicyCA.Admission admission, int cost)
+		{
+			if (ablateArmyRatio.Off(player, AblationIds.ArmyRatio) || !ArmyFirstEval.ShareHolds(essential, admission, share, cost, ShareTarget))
+				return;
+
+			var tick = player.World.WorldTick;
+			if (tick == lastShareHoldTick && building.Name == lastShareHoldItem)
+				return;
+
+			lastShareHoldTick = tick;
+			lastShareHoldItem = building.Name;
+			var key = admission + "/" + building.Name;
+			shareHolds.TryGetValue(key, out var n);
+			shareHolds[key] = ++n;
+			if (n <= 8 || n % 25 == 0)
+				Log.Write("debug", $"AI ({player.ClientIndex}): SHARE-HOLD share_hold class={admission} item={building.Name} n={n} cost={cost}"
+					+ $" A={share.Army} B={share.Buildings} target={ShareTarget} bank={playerResources.GetCashAndResources()} tick={tick}");
+		}
+#endif
 
 		void IBotRequestPauseBuildingProduction.BuildingAdmitted(ActorInfo building, int cost)
 		{
@@ -161,7 +307,68 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			share.Record(ArmyShareSide.Building, cost);
 			recordedThisTick += cost;
+
+			// ARMY-FIRST-02: the admitted order is in flight until a later scan sees it queued; count it meanwhile.
+			if (!info.FirstCopyPasses && info.DefenceCapBase < 0)
+				return;
+
+			var tick = player.World.WorldTick;
+			admittedAt[building.Name] = tick;
+			if (ArmyFirstEval.IsDefence(building.HasTraitInfo<BuildingInfo>(), building.HasTraitInfo<AttackBaseInfo>()))
+				admittedDefenceTicks.Add(tick);
 		}
+
+		// Defences owned or queued at the last scan, plus the ones admitted inside the in-flight window (a conservative
+		// overcount while a scan already sees an admitted item queued: it can only hold one more sweep).
+		int DefenceCount(int tick)
+		{
+			admittedDefenceTicks.RemoveAll(t => tick - t >= info.AdmittedHoldTicks);
+			return scannedDefences + admittedDefenceTicks.Count;
+		}
+
+		int ThreatSaturationScale() => Math.Max(100, info.DefenceThreatSaturationPercent);
+
+		void RefreshDefenceCap(int tick)
+		{
+			if (info.DefenceCapBase < 0)
+				return;
+
+			var intensity = 0.0;
+			if (threat != null)
+			{
+				var saturation = ThreatSaturationScale() / 100f;
+				intensity = Math.Max(threat.GetThreatIntensity(BotThreatRoles.AntiAir, saturation),
+					Math.Max(threat.GetThreatIntensity(BotThreatRoles.AntiArmour, saturation),
+						threat.GetThreatIntensity(BotThreatRoles.AntiInfantry, saturation)));
+			}
+
+			var turtleBonus = tick < info.TurtleDefenceUntilTick && personality?.CurrentPersonality == "turtle";
+			defenceCap = ArmyFirstEval.DefenceCap(info.DefenceCapBase, info.DefenceCapPerThreat, intensity, turtleBonus,
+				info.TurtleDefenceCapPercent);
+		}
+
+#if CAMEO_DEV_LOGGING
+		// ARMY-FIRST-02 (DEV only): first-copy passes and defence-cap holds/admits per item, deduplicated per tick (the base
+		// builder asks twice per pick in one tick). Bounded: the first 8 lines per key, then every 25th.
+		readonly Dictionary<string, int> af2Counts = new();
+		int lastAf2Tick = -1;
+		string lastAf2Item;
+
+		void CountAf2(ActorInfo building, string kind, int tick)
+		{
+			if (tick == lastAf2Tick && building.Name == lastAf2Item)
+				return;
+
+			lastAf2Tick = tick;
+			lastAf2Item = building.Name;
+			var key = kind + "/" + building.Name;
+			af2Counts.TryGetValue(key, out var n);
+			af2Counts[key] = ++n;
+			if (n <= 8 || n % 25 == 0)
+				Log.Write("debug", $"AI ({player.ClientIndex}): AF2 {kind} item={building.Name} n={n} defences={scannedDefences}"
+					+ $"+{admittedDefenceTicks.Count} cap={defenceCap} personality={personality?.CurrentPersonality} tick={tick}");
+		}
+#endif
 
 		// P_eff: the tier's reserve line scaled by the Steamroller lean (PLAN_04 row 4); -1 when the line is unset.
 		int ReserveLine() => botLimits != null
@@ -191,10 +398,20 @@ namespace OpenRA.Mods.Cameo.Traits
 		void RefreshShare(World world, OpenRA.Player owner)
 		{
 			long armyLive = 0, buildingLive = 0, armyInflight = 0, buildingInflight = 0;
+			var af2 = info.FirstCopyPasses || info.DefenceCapBase >= 0;
+			if (af2)
+			{
+				typeCounts.Clear();
+				scannedDefences = 0;
+			}
 
 			foreach (var a in world.ActorsHavingTrait<Building>())
 				if (a.Owner == owner && !a.IsDead && a.IsInWorld)
+				{
 					buildingLive += a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+					if (af2)
+						CountAf2Type(a.Info.Name, a.Info.HasTraitInfo<AttackBaseInfo>());
+				}
 
 			foreach (var a in world.ActorsHavingTrait<AttackBase>())
 				if (a.Owner == owner && !a.IsDead && a.IsInWorld
@@ -216,11 +433,22 @@ namespace OpenRA.Mods.Cameo.Traits
 					if (side == ArmyShareSide.Army)
 						armyInflight += item.TotalCost;
 					else if (side == ArmyShareSide.Building)
+					{
 						buildingInflight += item.TotalCost;
+						if (af2)
+							CountAf2Type(itemInfo.Name, itemInfo.HasTraitInfo<AttackBaseInfo>());
+					}
 				}
 			}
 
 			share.Refresh(armyLive, armyInflight, buildingLive, buildingInflight);
+		}
+
+		void CountAf2Type(string name, bool hasAttack)
+		{
+			typeCounts[name] = typeCounts.GetValueOrDefault(name) + 1;
+			if (hasAttack)
+				scannedDefences++;
 		}
 
 		protected override void Created(Actor self)
@@ -260,6 +488,22 @@ namespace OpenRA.Mods.Cameo.Traits
 			// PR-3: the target is the tier's line; the share snapshot is rebuilt here, once per scan.
 			botLimits = bot.Player.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
 			RefreshShare(world, bot.Player);
+
+			// ARMY-FIRST-02: the cap reads the threat once per scan; in-flight admissions older than the window are dropped.
+			if (info.DefenceCapBase >= 0)
+			{
+				threat ??= bot.Player.PlayerActor.TraitsImplementing<IBotThreatAnalysis>().FirstOrDefault();
+				personality ??= bot.Player.PlayerActor.TraitOrDefault<BotPersonalityController>();
+				RefreshDefenceCap(world.WorldTick);
+			}
+
+			// An admission the scan above already saw queued is counted there; keep only the ones still in flight.
+			var seenBefore = world.WorldTick - info.AdmittedSeenTicks;
+			admittedDefenceTicks.RemoveAll(t => t <= seenBefore);
+
+			if (admittedAt.Count > 0)
+				foreach (var stale in admittedAt.Where(kv => world.WorldTick - kv.Value >= info.AdmittedHoldTicks).Select(kv => kv.Key).ToList())
+					admittedAt.Remove(stale);
 
 			// The vote only exists while at least one unit producer does - otherwise it would block the
 			// very structures that make an army-first policy meaningful (first barracks/war factory, or

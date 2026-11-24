@@ -995,7 +995,9 @@ namespace OpenRA.Mods.Cameo.Test
 			var groups = yaml.Substring(yaml.IndexOf("\ngroups:", StringComparison.Ordinal));
 			var start = groups.IndexOf("\n  CI_refinery_stall_fix:", StringComparison.Ordinal);
 			Assert.That(start, Is.GreaterThan(groups.IndexOf("\n  CH_retreat_rally:", StringComparison.Ordinal)), "the new letter follows CH");
-			var group = groups.Substring(start).TrimEnd();
+			// Bound the group at the next group header (two-space indent): later groups (R2X_mobile_static_ratio follows this one) are not part of it.
+			var next = Regex.Match(groups.Substring(start + 1), @"\n  \S");
+			var group = (next.Success ? groups.Substring(start, 1 + next.Index) : groups.Substring(start)).TrimEnd();
 			Assert.That(group, Does.Contain("ExpansionPlannerBotModule:\n      RefineryFallbackForceAfterTicks: 1500"));
 			Assert.That(Regex.Matches(group, @"\n      \w+:").Count, Is.EqualTo(1), "sets exactly one field");
 			Assert.That(group, Does.Not.Contain("SquadManagerBotModuleCA"));

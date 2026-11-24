@@ -73,6 +73,10 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool itemQueuedThisTick = false;
 
+		// PROD-BUSY-01 (Sonnet MED): cost of the starts this sweep already ordered. Those orders are not paid yet, so with
+		// pb_all_building_producers on the next producer sees the bank net of them (the cash floor and the cost check hold).
+		int orderedCostThisSweep;
+
 		// An empty tolerance list in yaml would make ImmutableArray.Random throw.
 		int RandomTolerance(ImmutableArray<int> values)
 		{
@@ -92,6 +96,7 @@ namespace OpenRA.Mods.CA.Traits
 		// never carry the grant resolve null here and run the legacy ladder bit-identically.
 		BotOverflowPolicy overflowPolicy;
 		AblationLatch ablateOverflow; // ABLATE-01 hook pi_overflow (DEV provider only; release = on)
+		AblationLatch ablateTechChain; // ABLATE-01 hook techchain_exempt (DEV provider only; release = on)
 
 		// Cameo (§12.20): lazy — resolved on first TickQueue, an OR-of-vetoes pause on new building
 		// production. Empty = nothing pauses, upstream-identical.
@@ -100,6 +105,33 @@ namespace OpenRA.Mods.CA.Traits
 		// TF-2: lazy — the unit side's mobile-production reservation. Null = classic (floor 0,
 		// no spend feed, admission unchanged).
 		IBotMobileSpendReserve mobileReserve;
+
+		// RATIO-2X-01: lazy — the situation owner's mobile army value and the defence classification, and the ablation latch of
+		// the increment row. Null provider (classic, no MasterAiBotModule) = the ratio is inert. The live+queued static value is
+		// cached per world tick (the recorded window is added fresh on every read).
+		IBotMobileStaticValues staticValues;
+		bool staticValuesResolved; // a missing provider is cached too: classic runs the rule inert without a lookup per call
+		AblationLatch ablateRatio;
+
+		// PROD-BUSY-01 rows (DEV provider only; release = on).
+		AblationLatch ablateAllProducers, ablateIdleSweep, ablateEssentials, ablateCycle, ablateSustained, ablateSafety, ablateUnlistedOnce;
+		bool UnlistedOnceOn => baseBuilder.UnlistedOnceArmed && !ablateUnlistedOnce.Off(player, AblationIds.Af2UnlistedOnce);
+		readonly Dictionary<string, bool> unlistedKinds = new();
+		string lastCycledProduction;
+
+		// SUSTAINED-FIX-01: the item the SUSTAINED-CASH rung returned in this ChooseBuildingToBuild call (null otherwise). TickQueue rides it at its own cost
+		// floor and in the essential-building class, like a planner want: the bank is floating, so the army/building share vote must not hold it.
+		string sustainedPickName;
+		bool AllProducersOn => baseBuilder.AllBuildingProducersArmed && !ablateAllProducers.Off(player, AblationIds.ProdBusyAllBuildingProducers);
+		bool SustainedActive => baseBuilder.SustainedCashArmed && !ablateSustained.Off(player, AblationIds.SustainedCashProduction)
+			&& !baseBuilder.Info.DefenseQueues.Contains(Category)
+			&& baseBuilder.SustainedCash.Active(world.WorldTick, baseBuilder.Info.SustainedCashTicks);
+		bool SafetyOn => baseBuilder.ExpansionSafetyArmed && !ablateSafety.Off(player, AblationIds.ExpansionRefinerySafety);
+		bool CycleOn => baseBuilder.CycleProductionArmed && !ablateCycle.Off(player, AblationIds.CycleProduction);
+		bool EssentialsOn => baseBuilder.EssentialsLowCashArmed && !ablateEssentials.Off(player, AblationIds.EssentialsLowCash);
+		bool IdleSweepOn => baseBuilder.BuildingIdleSweepArmed && !ablateIdleSweep.Off(player, AblationIds.ProdBusyBuildingIdleSweep);
+		int staticLiveTick = -1;
+		long staticLiveValue;
 
 		// REPLAY-HEALTH-LOGGER (ACK-2, task 01a12023): record-only queue-transition dispatch.
 		// Everything here is lazy — with no observer trait on the PlayerActor the seam is one
@@ -840,6 +872,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			// PERF: Queue only one actor at a time per category
 			itemQueuedThisTick = false;
+			orderedCostThisSweep = 0;
 			var active = false;
 			sweptProducers.Clear();
 			foreach (var queue in AIUtils.FindQueues(player, Category))
@@ -874,7 +907,7 @@ namespace OpenRA.Mods.CA.Traits
 			// Minimum should not be negative as delays in HackyAI could be zero.
 			var randomFactor = BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(0, baseBuilder.Info.StructureProductionRandomBonusDelay);
 
-			var waitTicks = active ? baseBuilder.Info.StructureProductionActiveDelay + randomFactor
+			var waitTicks = ProdBusyCA.ShortSweepDelay(active, IdleSweepOn) ? baseBuilder.Info.StructureProductionActiveDelay + randomFactor
 				: baseBuilder.Info.StructureProductionInactiveDelay + randomFactor;
 
 			// Build-order knobs (12.25): tempo shortens (above 1000) or lengthens the general build interval.
@@ -902,7 +935,10 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				var inflight = new List<(string Item, int Total, int Remaining, bool Essential)>();
 				foreach (var i in queue.AllQueued())
-					inflight.Add((i.Item, i.TotalCost, i.RemainingCost, IsArmyFirstEssential(world.Map.Rules.Actors[i.Item])));
+					// An admitted tech-chain item is queued, so the admission test (not-queued) would book it non-essential. An in-flight
+					// tech-chain item stays essential for the ledger: it was admitted as the first copy.
+					inflight.Add((i.Item, i.TotalCost, i.RemainingCost,
+						IsArmyFirstEssential(world.Map.Rules.Actors[i.Item]) || InTechChainList(i.Item)));
 				mobileReserve.ReconcileBuildingSpend(queue.Actor, inflight);
 			}
 
@@ -959,9 +995,9 @@ namespace OpenRA.Mods.CA.Traits
 				pauseBuilding ??= player.PlayerActor.TraitsImplementing<IBotRequestPauseBuildingProduction>().ToArray();
 				mobileReserve ??= player.PlayerActor.TraitsImplementing<IBotMobileSpendReserve>().FirstEnabledTraitOrDefault();
 				var reserveFloor = mobileReserve?.MobileSpendFloor ?? 0;
-				var cashNow = playerResources.GetCashAndResources();
+				var cashNow = ProdBusyCA.SweepBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep);
 				var isRefinery = baseBuilder.Info.RefineryTypes.Contains(item.Name);
-				var exempt = plannerWant || demandPick.Demand != null;
+				var exempt = plannerWant || demandPick.Demand != null || (sustainedPickName != null && item.Name == sustainedPickName);
 				var cost = queue.GetProductionCost(item);
 				var itemEssential = IsArmyFirstEssential(item);
 
@@ -970,19 +1006,28 @@ namespace OpenRA.Mods.CA.Traits
 				var buildingClass = itemEssential ? RecoverySpendPolicyCA.Admission.OpeningOrEssential
 					: isRefinery || exempt ? RecoverySpendPolicyCA.Admission.EssentialBuilding
 					: RecoverySpendPolicyCA.Admission.General;
+				var queuedBlocks = ProdBusyCA.QueuedThisSweepBlocks(AllProducersOn, itemQueuedThisTick);
 				var nonCashVeto = pauseBuilding.Any(p => p.PausesBuilding(item, itemEssential, buildingClass, cost))
 					|| BaseBuilderQueueEvalCA.MobileSpendBlocks(cashNow, cost, reserveFloor, itemEssential);
 				cashClock.Observe(queue.Actor.ActorID, item.Name,
 					BaseBuilderQueueEvalCA.StarvationEligible(
 						BaseBuilderQueueEvalCA.FloorBlocks(cashNow, minCashRequirement, isRefinery, exempt, cost),
-						cashNow >= cost, itemQueuedThisTick, nonCashVeto),
+						cashNow >= cost, queuedBlocks, nonCashVeto),
 					world.WorldTick);
 				var starved = cashClock.Starved(queue.Actor.ActorID, item.Name, world.WorldTick, baseBuilder.Info.BuildingCashStarvationTicks);
-				if (BaseBuilderQueueEvalCA.BlockedByCash(cashNow, minCashRequirement, isRefinery, exempt, cost, itemQueuedThisTick, starved))
+				if (BaseBuilderQueueEvalCA.BlockedByCash(cashNow, minCashRequirement, isRefinery, exempt, cost, queuedBlocks, starved))
 					return false;
 
 				// Passed the cash gate: an admission (or a later non-cash veto below) ends the run either way.
 				cashClock.Reset(queue.Actor.ActorID);
+
+				// ESSENTIALS-01: below the tier MaximiseProductionCash line only essentials start (side-effect free; the pick retries next sweep).
+				// The sustained pick is exempt from the share/floor votes but NOT from the low-cash hold: a bank that dipped under the tier line holds it.
+				if (EssentialsOn && EssentialsHolds(item, isRefinery, exempt && item.Name != sustainedPickName, cashNow))
+				{
+					pendingDemandPick = default;
+					return false;
+				}
 
 				// Cameo (§12.20): the army-first vote - a provider (ArmyFirstBotModule, the one owner) can hold new
 				// non-essential buildings so cash flows to unit production while it needs to. Construction yards,
@@ -1001,6 +1046,17 @@ namespace OpenRA.Mods.CA.Traits
 						pendingDemandPick = default;
 						return false;
 					}
+				}
+
+				// RATIO-2X-01 (ARMY_FIRST_02_DESIGN_04/05): a static-defence start must keep the mobile army at 2x the static defence
+				// value, unless it is the first copy of its type (O7) or the bank floats with no other way to spend (FLOAT). A hold is
+				// side-effect free (nothing is queued, claimed or cancelled; the pick retries next sweep), so it sits before every claim.
+				// Decided before any admission side effect, recorded only at the emitted order below.
+				var ratioVerdict = RatioGate(item, out var ratioDefence);
+				if (MobileStaticRatioCA.Holds(ratioVerdict))
+				{
+					pendingDemandPick = default;
+					return false;
 				}
 
 				// ECON-A-FIX (R6): the demand's refinery reserves its claim's anchor as the order is
@@ -1060,6 +1116,17 @@ namespace OpenRA.Mods.CA.Traits
 
 				queuedAt[queue.Actor.ActorID] = (item.Name, world.WorldTick);
 
+				// RATIO-2X-01: the admitted defence start is recorded for the next few ticks (the order is not an actor or a queue
+				// item yet) and for the first-copy ledger; exempt starts are counted for the DEV log only.
+				if (ratioDefence)
+				{
+					baseBuilder.StaticRatio.Record(world.WorldTick, item.Name, ValuedCost(item));
+#if CAMEO_DEV_LOGGING
+					if (ratioVerdict == RatioVerdict.ExemptFirst || ratioVerdict == RatioVerdict.ExemptFloat)
+						Log.Write("debug", $"AI ({player.ClientIndex}): RATIO-EXEMPT kind {(ratioVerdict == RatioVerdict.ExemptFirst ? "first" : "float")} start {item.Name} tick {world.WorldTick}");
+#endif
+				}
+
 				// PROD-IDLE PR-3: the admitted building is recorded before the next candidate is tested, so
 				// two admissions in one pass cannot both pass an old share snapshot (PLAN_03 section 3).
 				foreach (var p in pauseBuilding)
@@ -1079,6 +1146,12 @@ namespace OpenRA.Mods.CA.Traits
 
 				baseBuilder.RecordProducerOrder(queue.Actor, item.Name);
 				itemQueuedThisTick = true;
+				orderedCostThisSweep += Math.Max(0, cost);
+
+				// PROD-BUSY-01 (Sonnet FIX): with every producer served in one sweep, a start must count as "being produced" at once, so a
+				// sibling producer of the same sweep cannot pick the same building (each building once, limits, the 2x ratio first copy).
+				if (AllProducersOn)
+					baseBuilder.BuildingsBeingProduced[item.Name] = (baseBuilder.BuildingsBeingProduced.TryGetValue(item.Name, out var inFlight) ? inFlight : 0) + 1;
 				SetBuildingInterval(item.Name);
 
 				// REPLAY-HEALTH-LOGGER (F2/F3): no emit here — the probe records Started on
@@ -1941,6 +2014,153 @@ namespace OpenRA.Mods.CA.Traits
 			return ticks;
 		}
 
+		// BINDING tech chain (11-23, TECHCHAIN-EXEMPT-01): the faction's T2 and T3 gate passes the army-first pause and the
+		// mobile reserve while none is owned or queued. Ablation row techchain_exempt: off = today's army-first gate.
+		// List membership first: off-list names never reach the owned count, which allocates a set per call.
+		bool InTechChainList(string name) =>
+			baseBuilder.Info.TechChainTypes.Contains(name) && !ablateTechChain.Off(player, AblationIds.TechChainExempt);
+
+		bool TechChainExempt(string name) =>
+			InTechChainList(name)
+			&& TechChainExemptCA.Exempt(true,
+				AIUtils.CountBuildingByCommonName(new HashSet<string> { name }, player),
+				baseBuilder.BuildingsBeingProduced.ContainsKey(name));
+
+		// ESSENTIALS-01: the tier line is BotLimits.MaximiseProductionCashRequirement (Hard 3500); no BotLimits or a negative value = no line (inert).
+		int TierLine => botLimits != null && botLimits.Info.MaximiseProductionCashRequirement >= 0 ? botLimits.Info.MaximiseProductionCashRequirement : 0;
+
+		// PROD-BUSY cycle: the candidates are the same cap-filtered, power-resolved production buildings the overflow rung uses, plus the naval yard when
+		// the base has water; the pick is CycleProductionCA (fewest first, then the next type in name order), no random draw.
+		// SUSTAINED-FIX-01: a candidate the later admission votes would hold is dropped HERE (admits), so the pick never returns an item that the
+		// TickQueue vetoes after the rung has already pre-empted the tech chain and the rest of the order: with none left the order falls through.
+		ActorInfo ChooseCycledProduction(IEnumerable<ActorInfo> buildableThings, ActorInfo power, Func<ActorInfo, bool> admits = null)
+		{
+			var candidates = OverflowProductionCandidates(buildableThings, power);
+			if (waterState == WaterCheck.EnoughWater
+				&& AIUtils.IsAreaAvailable<GivesBuildableArea>(world, player, world.Map, baseBuilder.Info.CheckForWaterRadius, baseBuilder.Info.WaterTerrainTypes))
+			{
+				var naval = GetProducibleBuilding(baseBuilder.Info.NavalProductionTypes, buildableThings);
+				if (naval != null)
+				{
+					var producing = baseBuilder.BuildingsBeingProduced.TryGetValue(naval.Name, out var n) ? n : 0;
+					var navalVariants = naval.TraitInfoOrDefault<PlaceBuildingVariantsInfo>()?.Actors ?? [];
+					var navalStanding = playerBuildings.Count(a => a.Info.Name == naval.Name || navalVariants.Contains(a.Info.Name));
+					if (BaseBuilderQueueEvalCA.LimitAdmits(baseBuilder.TryGetBuildingLimit(naval.Name, out var limit), limit,
+							playerBuildings.Count(a => a.Info.Name == naval.Name), producing)
+						&& BaseBuilderQueueEvalCA.OverflowTypeAdmits(navalStanding, producing, ProductionTypeLimit))
+					{
+						var resolved = BaseBuilderQueueEvalCA.PickOrPower(naval, power, HasSufficientPowerForActor);
+						if (resolved != null)
+							candidates.Add(resolved);
+					}
+				}
+			}
+
+			if (admits != null)
+				candidates.RemoveAll(c => !admits(c));
+
+			if (candidates.Count == 0)
+				return null;
+
+			var counted = new List<(string Name, int Count)>(candidates.Count);
+			foreach (var c in candidates)
+				counted.Add((c.Name, playerBuildings.Count(a => a.Info.Name == c.Name)
+					+ (baseBuilder.BuildingsBeingProduced.TryGetValue(c.Name, out var inProd) ? inProd : 0)));
+
+			var index = CycleProductionCA.Pick(counted, lastCycledProduction);
+			if (index < 0)
+				return null;
+
+			lastCycledProduction = candidates[index].Name;
+			return candidates[index];
+		}
+
+		/// <summary>
+		/// SUSTAINED-FIX-01: whether the admission votes TickQueue asks after the pick (the pause votes: army-first, share, reserve; the mobile reserve) would let
+		/// <paramref name="item"/> through as an order of <paramref name="admission"/>. Side-effect-free queries only.
+		/// </summary>
+		bool VotesAdmit(ProductionQueue queue, ActorInfo item, RecoverySpendPolicyCA.Admission admission)
+		{
+			pauseBuilding ??= player.PlayerActor.TraitsImplementing<IBotRequestPauseBuildingProduction>().ToArray();
+			mobileReserve ??= player.PlayerActor.TraitsImplementing<IBotMobileSpendReserve>().FirstEnabledTraitOrDefault();
+			var essential = IsArmyFirstEssential(item);
+			var cost = queue.GetProductionCost(item);
+			return !pauseBuilding.Any(p => p.PausesBuilding(item, essential, admission, cost))
+				&& !BaseBuilderQueueEvalCA.MobileSpendBlocks(playerResources.GetCashAndResources(), cost, mobileReserve?.MobileSpendFloor ?? 0, essential);
+		}
+
+		bool EssentialsHolds(ActorInfo item, bool isRefinery, bool plannerOrDemand, int bank)
+		{
+			var line = TierLine;
+			if (line <= 0 || bank >= line)
+				return false;
+
+			var name = item.Name;
+			return EssentialsLowCashCA.Holds(true, bank, line, !OwnedOrQueued(item), TechChainExempt(name), isRefinery,
+				baseBuilder.Info.PowerTypes.Contains(name) && playerPower != null && playerPower.ExcessPower < minimumExcessPower,
+				item.HasTraitInfo<CashTricklerInfo>(), plannerOrDemand);
+		}
+
+		/// <summary>
+		/// UPGRADE-PRODUCERS-01: whether <paramref name="info"/> is a structure type the each-building-once rule must cover although it has no
+		/// BuildingFractions row: not a wall, defence, anti-air, fake or proxy, and not a type with its own rule (yard, refinery, power, silo). Cached per name.
+		/// </summary>
+		bool UnlistedOnceKind(ActorInfo info)
+		{
+			if (unlistedKinds.TryGetValue(info.Name, out var kind))
+				return kind;
+
+			if (!staticValuesResolved)
+			{
+				staticValues = player.PlayerActor.TraitsImplementing<IBotMobileStaticValues>().FirstOrDefault();
+				staticValuesResolved = true;
+			}
+
+			var b = baseBuilder.Info;
+			var name = info.Name;
+			kind = UnlistedOnceCA.Eligible(
+				inFractions: b.BuildingFractions != null && b.BuildingFractions.ContainsKey(name),
+				isBuilding: info.HasTraitInfo<BuildingInfo>(),
+				wallOrFake: info.HasTraitInfo<LineBuildInfo>() || info.TraitInfos<GivesBuildableAreaInfo>().Any(g => g.AreaTypes.Contains("fake")),
+				hasOwnRule: b.ConstructionYardTypes.Contains(name) || b.RefineryTypes.Contains(name) || b.PowerTypes.Contains(name) || b.SiloTypes.Contains(name),
+				defence: b.DefenseTypes.Contains(name) || b.AntiAirTypes.Contains(name) || (staticValues != null && staticValues.IsStaticDefence(info)),
+				name: name);
+			unlistedKinds[name] = kind;
+			return kind;
+		}
+
+		// UPGRADE-PRODUCERS-01: the cheapest buildable first copy of an unlisted structure type (UnlistedOnceCA.Pick), within the build limits, the naval
+		// water check and the power rule (power instead when the pick would leave power short). Only the building queues, and only once a production building stands.
+		ActorInfo ChooseUnlistedOnce(ProductionQueue queue, IEnumerable<ActorInfo> buildableThings, ActorInfo power)
+		{
+			if (!UnlistedOnceOn || baseBuilder.Info.DefenseQueues.Contains(Category) || !baseBuilder.HasAdequateProductionCount())
+				return null;
+
+			var infos = new List<ActorInfo>();
+			var candidates = new List<(string Name, int Cost)>();
+			foreach (var item in buildableThings)
+			{
+				if (!UnlistedOnceKind(item) || OwnedOrQueued(item))
+					continue;
+
+				if (baseBuilder.TryGetBuildingLimit(item.Name, out var limit) && BaseBuilderQueueEvalCA.LimitReached(0, limit))
+					continue;
+
+				if (baseBuilder.Info.ProductionTypes.Contains(item.Name) && botLimits != null && BaseBuilderQueueEvalCA.LimitReached(0, ProductionTypeLimit))
+					continue;
+
+				if (BaseBuilderQueueEvalCA.NavalBlocked(baseBuilder.Info.NavalProductionTypes.Contains(item.Name), waterState == WaterCheck.NotEnoughWater,
+						() => AIUtils.IsAreaAvailable<GivesBuildableArea>(world, player, world.Map, baseBuilder.Info.CheckForWaterRadius, baseBuilder.Info.WaterTerrainTypes)))
+					continue;
+
+				infos.Add(item);
+				candidates.Add((item.Name, Math.Max(0, queue.GetProductionCost(item))));
+			}
+
+			var index = UnlistedOnceCA.Pick(candidates);
+			return index < 0 ? null : BaseBuilderQueueEvalCA.PickOrPower(infos[index], power, HasSufficientPowerForActor);
+		}
+
 		// Cameo (army-first): buildings that stay allowed while the army-first vote holds
 		// the rest. Construction yards, refineries and power are always essential; the first
 		// production building must pass too — no factory means no army, so blocking it deadlocks.
@@ -1950,6 +2170,14 @@ namespace OpenRA.Mods.CA.Traits
 			if (baseBuilder.Info.ConstructionYardTypes.Contains(name)
 				|| baseBuilder.Info.RefineryTypes.Contains(name)
 				|| baseBuilder.Info.PowerTypes.Contains(name))
+				return true;
+
+			// BINDING tech chain (11-23): the faction's T2 and T3 gate passes the army-first pause and the mobile reserve while none is owned or queued.
+			if (TechChainExempt(name))
+				return true;
+
+			// UPGRADE-PRODUCERS-01: the first copy of a structure type with no fraction row (upgrade/research producers, radar, tech centres) is essential.
+			if (UnlistedOnceOn && UnlistedOnceKind(actorInfo) && !OwnedOrQueued(actorInfo))
 				return true;
 
 			// One queued-but-unplaced factory is enough to break the deadlock — don't let the
@@ -2026,8 +2254,140 @@ namespace OpenRA.Mods.CA.Traits
 			}
 		}
 
+		// RATIO-2X-01 (ARMY_FIRST_02_DESIGN_04/05) ------------------------------------------------------------------------------
+		// The 2x mobile/static ratio at a static-defence start. The pure decision is MobileStaticRatioCA; this is the measure
+		// assembly and the two call sites' shared entry. Read-only: no order, no RNG, no queue state; the only write is the
+		// shared tracker's record at an emitted start (in TickQueue, right after the order is queued).
+
+		bool RatioActive() => baseBuilder.Info.MobileStaticRatioEnabled && !ablateRatio.Off(player, AblationIds.Ratio2x);
+
+		static int ValuedCost(ActorInfo info) => info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+
+		// The type is owned (incl. its placement variants) or in production: the same count the fraction loop uses.
+		bool OwnedOrQueued(ActorInfo info)
+		{
+			var variants = info.TraitInfoOrDefault<PlaceBuildingVariantsInfo>()?.Actors ?? [];
+			return playerBuildings.Any(a => a.Info.Name == info.Name || variants.Contains(a.Info.Name))
+				|| (baseBuilder.BuildingsBeingProduced.TryGetValue(info.Name, out var n) && n > 0);
+		}
+
+		// S: valued cost of the live static defences plus the defence items in ANY building/defence queue (READY-held included),
+		// computed once per world tick; the 3-tick record of admitted starts is added on every read (a stated conservative
+		// double-count window while an order becomes a queue item).
+		long StaticDefenceValue(int now)
+		{
+			if (staticLiveTick != now)
+			{
+				long total = 0;
+				foreach (var a in playerBuildings)
+					if (staticValues.IsStaticDefence(a.Info))
+						total += ValuedCost(a.Info);
+
+				foreach (var category in baseBuilder.Info.BuildingQueues.Concat(baseBuilder.Info.DefenseQueues).Distinct())
+					foreach (var q in AIUtils.FindQueues(player, category))
+						foreach (var queued in q.AllQueued())
+						{
+							var queuedInfo = world.Map.Rules.Actors[queued.Item];
+							if (staticValues.IsStaticDefence(queuedInfo))
+								total += ValuedCost(queuedInfo);
+						}
+
+				staticLiveValue = total;
+				staticLiveTick = now;
+			}
+
+			return staticLiveValue + baseBuilder.StaticRatio.Recorded(now);
+		}
+
+		// IsFloating (USER 11-22, Opus T1): ONE definition shared by the RATIO FLOAT exemption and TECHFIRST-01's float rule: storage at or
+		// above 50% of capacity (alone: money near the cap is wasted), OR every unit queue saturated AND Cash+Resources at the tier's RAW
+		// BankSaturationCash bar (bar 0 = that leg never applies). The two bank legs are cheap ints; the unit side is a cached provider
+		// answer read only when the bank leg holds (MobileStaticRatioCA.IsFloating short-circuits).
+		bool IsFloating()
+		{
+			mobileReserve ??= player.PlayerActor.TraitsImplementing<IBotMobileSpendReserve>().FirstEnabledTraitOrDefault();
+			return MobileStaticRatioCA.IsFloating(
+				MobileStaticRatioCA.StorageFloating(playerResources.Resources, playerResources.ResourceCapacity),
+				MobileStaticRatioCA.BankOverBar(playerResources.GetCashAndResources(), botLimits?.Info.BankSaturationCash ?? 0),
+				mobileReserve);
+		}
+
+		// The verdict for starting `item` now. Inert covers every case the rule does not apply to (switch off, ablated, not a
+		// static defence, no usable measure); `isDefence` says whether the start must be recorded either way.
+		RatioVerdict RatioGate(ActorInfo item, out bool isDefence)
+		{
+			isDefence = false;
+			if (!RatioActive())
+				return RatioVerdict.Inert;
+
+			// Not filtered by IsTraitEnabled: HasSnapshot carries the provider's own enabled state, and a null cached while the
+			// provider was still condition-disabled would otherwise pin the rule off for the whole game.
+			if (!staticValuesResolved)
+			{
+				staticValues = player.PlayerActor.TraitsImplementing<IBotMobileStaticValues>().FirstOrDefault();
+				staticValuesResolved = true;
+			}
+
+			if (staticValues == null || !staticValues.IsStaticDefence(item))
+				return RatioVerdict.Inert;
+
+			isDefence = true;
+			var now = world.WorldTick;
+			if (!MobileStaticRatioCA.MeasureUsable(staticValues.HasSnapshot, staticValues.SnapshotTick, now))
+				return RatioVerdict.Inert;
+
+			var mobile = staticValues.MobileValue;
+			var staticTotal = StaticDefenceValue(now);
+			var cost = ValuedCost(item);
+
+			// The owned/queued count is only needed when the ratio failed (a first copy matters only below the ratio).
+			var verdict = MobileStaticRatioCA.Stage1(true, mobile, staticTotal, cost,
+				!MobileStaticRatioCA.Admits(mobile, staticTotal, cost) && baseBuilder.StaticRatio.IsFirstCopy(item.Name, OwnedOrQueued(item)));
+			if (verdict == RatioVerdict.NeedsFloat)
+				verdict = MobileStaticRatioCA.Float(IsFloating());
+
+#if CAMEO_DEV_LOGGING
+			if (verdict != RatioVerdict.Admit && EconTraceDue("ratio-" + verdict + "-" + item.Name))
+				Log.Write("debug", $"AI ({player.ClientIndex}): RATIO-{verdict} item {item.Name} cost {cost} M {mobile} S {staticTotal} cash {playerResources.Cash} resources {playerResources.Resources} capacity {playerResources.ResourceCapacity} bankBar {botLimits?.Info.BankSaturationCash ?? 0} tick {now}");
+#endif
+			return verdict;
+		}
+
+		// The refinery the economy rung wants (also the expansion refinery of a new yard under the refinery law: HasAdequateRefineryCount is false while an
+		// anchor is claimable), or null. Shared by the economy rung and SUSTAINED-CASH-01 so both pick the same item.
+		ActorInfo ChooseWantedRefinery(ProductionQueue queue, IEnumerable<ActorInfo> buildableThings, ActorInfo power)
+		{
+			if (baseBuilder.HasAdequateRefineryCount())
+				return null;
+
+			// pb_expansion_refinery_safety: a refinery wanted for an expansion yard under threat is dropped from this slot (not held).
+			if (SafetyOn)
+			{
+				var wantedBy = baseBuilder.ExpansionWantsRefinery();
+				var wantedField = wantedBy?.RefineryClaimTarget ?? wantedBy?.ExpansionTarget;
+				if (wantedField != null && !baseBuilder.ExpansionRefinerySafe(wantedField.Value))
+					return null;
+			}
+
+			var refinery = GetProducibleBuilding(baseBuilder.Info.RefineryTypes, buildableThings);
+
+			// RefineryLimit is shared across every faction the player owns, so always allow
+			// a faction's own first refinery through even if that global cap has already
+			// been reached by a different faction's construction yard.
+			if (refinery == null || baseBuilder.HasMaxRefineriesFor(refinery))
+				return null;
+
+			var pick = BaseBuilderQueueEvalCA.PickOrPower(refinery, power, HasSufficientPowerForActor);
+			if (pick != null)
+				AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, pick.Name,
+					pick == refinery ? "refinery" : "would be low power");
+
+			return pick;
+		}
+
 		ActorInfo ChooseBuildingToBuild(ProductionQueue queue)
 		{
+			sustainedPickName = null;
 			var buildableThings = queue.BuildableItems();
 			var availableCash = playerResources.GetCashAndResources();
 
@@ -2049,6 +2409,26 @@ namespace OpenRA.Mods.CA.Traits
 					AIUtils.BotDebug("{0} decided to build {1}: Priority override (low power)", queue.Actor.Owner, power.Name);
 					TraceLowPowerOverride(power);
 					return power;
+			}
+
+			// SUSTAINED-CASH-01 (USER 11-24): the bank has stayed above the tier line for SustainedCashTicks, so the next building is another production
+			// building, cycled fewest-first across the types (power only when it would leave power short: the candidates are power-resolved). Order while
+			// active: low power (above), the EXPANSION REFINERY (external fields are harvested ASAP; same pick as the economy rung), then this pick, above the
+			// opening, the planner wants and the expansion demand. Types at their limit are not candidates; with none left (null) normal building resumes.
+			// The defence queue never reaches it.
+			if (SustainedActive)
+			{
+				var expansionRefinery = ChooseWantedRefinery(queue, buildableThings, power);
+				if (expansionRefinery != null)
+					return expansionRefinery;
+
+				var sustained = ChooseCycledProduction(buildableThings, power, c => VotesAdmit(queue, c, RecoverySpendPolicyCA.Admission.EssentialBuilding));
+				if (sustained != null)
+				{
+					sustainedPickName = sustained.Name;
+					AIUtils.BotDebug("{0} decided to build {1}: Priority override (sustained cash production)", queue.Actor.Owner, sustained.Name);
+					return sustained;
+				}
 			}
 
 			if (openingBarracksPolicyActive && !baseBuilder.HasBuiltOrQueuedBarracks())
@@ -2084,24 +2464,9 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// Next is to build up a strong economy
-			if (!baseBuilder.HasAdequateRefineryCount())
-			{
-				var refinery = GetProducibleBuilding(baseBuilder.Info.RefineryTypes, buildableThings);
-
-				// RefineryLimit is shared across every faction the player owns, so always allow
-				// a faction's own first refinery through even if that global cap has already
-				// been reached by a different faction's construction yard.
-				if (refinery != null && !baseBuilder.HasMaxRefineriesFor(refinery))
-				{
-					var pick = BaseBuilderQueueEvalCA.PickOrPower(refinery, power, HasSufficientPowerForActor);
-					if (pick != null)
-					{
-						AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, pick.Name,
-							pick == refinery ? "refinery" : "would be low power");
-						return pick;
-					}
-				}
-			}
+			var wantedRefinery = ChooseWantedRefinery(queue, buildableThings, power);
+			if (wantedRefinery != null)
+				return wantedRefinery;
 
 			// REF-1 B1/B2 (§12.24 v2): the planner's own wants, after refineries but before the fraction roll —
 			// the due MCV's missing prerequisite, then the cheapest crawl-eligible link building while the crawl
@@ -2190,6 +2555,32 @@ namespace OpenRA.Mods.CA.Traits
 				var demandPick = ChooseExpansionDemandItem(queue, buildableThings);
 				if (demandPick != null)
 					return demandPick;
+			}
+
+			// UPGRADE-PRODUCERS-01 (USER P0): each building once. A structure type with no BuildingFractions row (the upgrade and research producers, radar,
+			// tech centres) is never reached by the fraction roll below, so its first copy is picked here, after every essential, planner and demand rung and
+			// above the production cycling and the bank rungs. Row af2_unlisted_once.
+			var unlisted = ChooseUnlistedOnce(queue, buildableThings, power);
+			if (unlisted != null)
+			{
+				AIUtils.BotDebug("{0} decided to build {1}: Priority override (unlisted building once)", queue.Actor.Owner, unlisted.Name);
+				return unlisted;
+			}
+
+			// PROD-BUSY cycle (USER 11-24): above the tier line cash becomes more units, i.e. one more production building per type in turn.
+			// Below the planner wants, the opening and the expansion demand, which still win, and below the bank-overflow rung (its own, higher line).
+			if (CycleOn)
+			{
+				var cycleLine = TierLine;
+				if (cycleLine > 0 && ProdBusyCA.SweepBank(AllProducersOn, availableCash, orderedCostThisSweep) > cycleLine)
+				{
+					var cycled = ChooseCycledProduction(buildableThings, power, c => VotesAdmit(queue, c, RecoverySpendPolicyCA.Admission.General));
+					if (cycled != null)
+					{
+						AIUtils.BotDebug("{0} decided to build {1}: Priority override (cycled production)", queue.Actor.Owner, cycled.Name);
+						return cycled;
+					}
+				}
 			}
 
 			// BZ_production_scaling: banked cash held over the difficulty line while every unit
@@ -2352,6 +2743,12 @@ namespace OpenRA.Mods.CA.Traits
 						return power;
 					}
 				}
+
+				// RATIO-2X-01: a defence the 2x gate would hold anyway must not take the pick — the rolled share flows to the
+				// remaining entries of this pass instead of the whole sweep being lost to a held defence. Same decision as the
+				// gate in TickQueue (one measure per tick), no state of its own.
+				if (MobileStaticRatioCA.Holds(RatioGate(actor, out _)))
+					continue;
 
 				// Lets build this
 				AIUtils.BotDebug("{0} decided to build {1}: Desired is {2} ({3} / {4}); current is {5} / {4}",

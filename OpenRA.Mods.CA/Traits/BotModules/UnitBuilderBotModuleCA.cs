@@ -71,6 +71,46 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Only queue construction of a new unit when above this requirement.")]
 		public readonly int ProductionMinCashRequirement = 2000;
 
+		[Desc("UPGRADE-QUEUE-01: the upgrade-like queues (UpgradeServiceQueues) get their own service that runs before the cash floor and the K5 reserve, so an",
+			"upgrade, add-on, research or promotion queue with an affordable item is never idle (free items, promotions, always start). Paid items still wait for a unit-production pause vote.",
+			"False = those queues are only visited by the ordinary unit sweep, behind the floor.")]
+		public readonly bool UpgradeService = true;
+
+		[Desc("PROD-BUSY-01 (USER P0): every idle factory of a category is served on every pass (the offer budget is the factory count), not one",
+			"(two while the bank is saturated). Gated by SwitchCondition; row pb_all_factories. False = the old width.")]
+		public readonly bool ServeAllFactories = false;
+
+		[Desc("PROD-BUSY-01 (USER P0): the unit sweep serves every category on every pass while the bank left after this pass's orders is at or",
+			"above ProductionMinCashRequirement; no MaximiseProductionCash break. Gated by SwitchCondition; row pb_all_categories.")]
+		public readonly bool ServeAllCategories = false;
+
+		[Desc("PROD-BUSY-03 (V01 RCA): the proportional-share test never idles a queue. With IdleBaseUnitsMaximum or more units idle at base",
+			"the pick is share-only, and a met mix returned null (no_desire) unless the bank was saturated. On: the share-free fallback",
+			"(votes, limits and the aircraft cap still apply) runs whatever the bank. Gated by SwitchCondition; row pb_idle_cap.")]
+		public readonly bool ShareTestNeverIdles = false;
+
+		[Desc("PROD-BUSY-03b (USER 11-24): the idle-unit limit is the tier's BotLimits.IdleBaseUnitsMaximum (25 Noob .. 75 Cameo God,",
+			"steps of 5) instead of IdleBaseUnitsMaximum here, which stays the fallback. Gated by SwitchCondition; row pb_idle_cap_tiered.")]
+		public readonly bool TieredIdleCap = false;
+
+		[Desc("INFANTRY-IDLE-01 (USER P0, V03: the infantry queues sat 67-75% idle with ~10k banked): an idle queue of IdleQueueFloorQueues that the",
+			"role mix, the share table or a composition left without a pick falls back to the best buildable unit of the queue: highest UnitsToBuild",
+			"weight, then cheapest, then name. Delays, intervals, limits, the capturer cap, the aircraft cap, the cash and reserve gates all still apply.",
+			"Gated by SwitchCondition; row pb_idle_queue_floor.")]
+		public readonly bool IdleQueueFloor = false;
+
+		[Desc("INFANTRY-IDLE-01: the queue types the idle floor serves.")]
+		public readonly string[] IdleQueueFloorQueues = { "Infantry", "RAInfantry", "SCZergInfantry" };
+
+		[Desc("UPGRADE-QUEUE-01: queue types served by the upgrade service. Each one is served on its own: a queue with nothing buildable, or a busy one, never holds back the next.")]
+		public readonly string[] UpgradeServiceQueues = { "Promotions", "Upgrades", "Research", "Addons" };
+
+		[Desc("PROD-BUSY-02 (USER P0: all queues stay busy): the served queue types whose PAID items are NOT held by a unit-production pause vote.",
+			"OpenRA pays progressively, so such an item advances with income next to whatever the vote protects. Promotions are free and never held, so",
+			"they are not listed. Each type has its own ablation row (pb_research_through_pause, pb_upgrade_through_pause, pb_addon_through_pause).",
+			"Empty = every pause vote holds paid upgrade-service items (the UPGRADE-QUEUE-01 rule).")]
+		public readonly string[] UpgradeServiceThroughPause = { "Upgrades", "Research", "Addons" };
+
 		[Desc("Only queue construction of a new unit when above this requirement.",
 			"BotLimits.MaximiseProductionCashRequirement overrides this per difficulty (DESIGN §19.1).")]
 		public readonly int MaximiseProductionCashRequirement = 10000;
@@ -434,13 +474,55 @@ namespace OpenRA.Mods.CA.Traits
 		IBotScaleTargets[] scaleTargets;
 		readonly DerivedUnitWeights derivedUnitWeights = new DerivedUnitWeights();
 
+		// ARMY-MIX-01 (USER P0): per queue type, the wave roles this builder could build at its last pick (tick-stamped), and the tick up to
+		// which a pick for a missing role counts as covering it. Both stay empty while the squad manager's WaveMixEnabled is off.
+		readonly Dictionary<string, (int Tick, HashSet<string> Roles)> waveMixAvailable = [];
+		readonly Dictionary<string, int> waveMixCoveredUntil = new(StringComparer.Ordinal);
+		const int WaveMixAvailableFreshTicks = 600;
+
 		// U1 (service-contract §3): the switch-gated fair-service arm and its per-category
 		// rotation cursor over stable queue keys ("actorID|queueType") — a visit resumes
 		// AFTER the last examined producer instead of always re-walking the head.
 		bool FairService => switchesActive && Info.FairProducerService && !ablateFairProducer.Off(player, AblationIds.FairProducer);
 
 		// ABLATE-01 hooks (DEV-only provider; absent in release = always on): one cached answer per row.
-		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery;
+		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery, ablateUpgradeService;
+
+		// PROD-BUSY-01: one switch and one ablation row each. With both on, every queue is served every pass, so the PR-2 depth horizon
+		// (visitGapTicks = the gap to this bot's next pass) is also the gap to that queue's next service.
+		AblationLatch ablateIdleCap, ablateIdleCapTiered, ablateIdleQueueFloor;
+		bool IdleQueueFloorOn => switchesActive && Info.IdleQueueFloor && !ablateIdleQueueFloor.Off(player, AblationIds.ProdBusyIdleQueueFloor);
+		bool IdleCapOn => switchesActive && Info.ShareTestNeverIdles && !ablateIdleCap.Off(player, AblationIds.ProdBusyIdleCap);
+		bool TieredIdleCapOn => switchesActive && Info.TieredIdleCap && !ablateIdleCapTiered.Off(player, AblationIds.ProdBusyIdleCapTiered);
+
+		/// <summary>PROD-BUSY-03b: this bot's idle-unit limit (the tier value while pb_idle_cap_tiered is on, else IdleBaseUnitsMaximum).</summary>
+		public int IdleUnitsLimit => ProdBusyCA.IdleLimit(TieredIdleCapOn, botLimits?.Info.IdleBaseUnitsMaximum ?? -1, Info.IdleBaseUnitsMaximum);
+
+		/// <summary>PROD-BUSY-03b: idle base units as last reported by the squad manager.</summary>
+		public int IdleUnitCount => idleUnitCount;
+
+		/// <summary>PROD-BUSY-03b: idle base units at or over the limit (TEAM-LEAD forced-push trigger).</summary>
+		public bool IdleAtLimit => idleUnitCount >= IdleUnitsLimit;
+		AblationLatch ablateAllFactories, ablateAllCategories, ablateThroughPauseResearch, ablateThroughPauseUpgrade, ablateThroughPauseAddon;
+		bool AllFactoriesOn => switchesActive && Info.ServeAllFactories && !ablateAllFactories.Off(player, AblationIds.ProdBusyAllFactories);
+		bool AllCategoriesOn => switchesActive && Info.ServeAllCategories && !ablateAllCategories.Off(player, AblationIds.ProdBusyAllCategories);
+
+		// PROD-BUSY-02: a served queue type whose paid items ignore the pause votes (per-type switch + ablation row).
+		bool ServedThroughPause(string queueType)
+		{
+			if (Array.IndexOf(Info.UpgradeServiceThroughPause, queueType) < 0)
+				return false;
+
+			return queueType switch
+			{
+				"Research" => !ablateThroughPauseResearch.Off(player, AblationIds.ProdBusyResearchThroughPause),
+				"Upgrades" => !ablateThroughPauseUpgrade.Off(player, AblationIds.ProdBusyUpgradeThroughPause),
+				"Addons" => !ablateThroughPauseAddon.Off(player, AblationIds.ProdBusyAddonThroughPause),
+				_ => false,
+			};
+		}
+
+		bool UpgradeServiceOn => switchesActive && Info.UpgradeService && !ablateUpgradeService.Off(player, AblationIds.UpgradeService);
 
 		// PR-2 queue depth (fair path only): world ticks between this bot's last two passes. Round-robin makes it long;
 		// a single-slot queue is topped up while its loaded build time is shorter than this gap (QueueDepthCA).
@@ -706,6 +788,11 @@ namespace OpenRA.Mods.CA.Traits
 					activeUnitIntervals.Remove(i.Key);
 			}
 
+			// UPGRADE-QUEUE-01: runs before the pause votes and the cash floor (see ServeUpgradeQueues for what it keeps).
+			// No period and no re-check delay (user rule: no delay): every bot visit looks at every served queue.
+			if (UpgradeServiceOn)
+				ServeUpgradeQueues(bot);
+
 			var baseBuilderPause = requestPause.FirstOrDefault(rp => ReferenceEquals(rp, baseBuilder));
 
 			// PROD-IDLE item-aware cap: under the fair service a cap that says which items it counts stops only those
@@ -801,6 +888,9 @@ namespace OpenRA.Mods.CA.Traits
 					if (++currentQueueIndex >= Info.UnitQueues.Length)
 						currentQueueIndex = 0;
 
+					if (UpgradeServiceOn && Array.IndexOf(Info.UpgradeServiceQueues, Info.UnitQueues[currentQueueIndex]) >= 0)
+						continue;
+
 					if (AIUtils.FindQueues(player, Info.UnitQueues[currentQueueIndex]).Any())
 					{
 						// BV_m13_liveness: re-evaluated per category with the same cash accounting —
@@ -810,11 +900,69 @@ namespace OpenRA.Mods.CA.Traits
 
 						// PERF: We tick only one type of valid queue at a time
 						// if AI gets enough cash, it can fill all of its queues with enough ticks
-						BuildUnit(bot, Info.UnitQueues[currentQueueIndex], idleUnitCount < Info.IdleBaseUnitsMaximum, false, saturated, batch);
+						BuildUnit(bot, Info.UnitQueues[currentQueueIndex], idleUnitCount < IdleUnitsLimit, false, saturated, batch);
 
-						if (ProductionSaturationCA.StopCategorySweep(saturated, playerResources.Cash + playerResources.Resources,
-							BotPersonalityLeads.Scaled(MaximiseProductionCash, cashLean)))
+						// The fair path's batch nets this pass's orders; the legacy path (FairProducerService ablated, DEV only) has no batch,
+						// so its bank never drops during the pass and only the reserve-gated item checks stop spending (Sonnet LOW 2).
+						var bankNow = (long)playerResources.Cash + playerResources.Resources;
+						if (ProdBusyCA.StopCategorySweep(AllCategoriesOn, saturated, bankNow,
+							BotPersonalityLeads.Scaled(MaximiseProductionCash, cashLean), batch?.BankLeft ?? bankNow,
+							BotPersonalityLeads.Scaled(Info.ProductionMinCashRequirement, cashLean)))
 							break;
+					}
+				}
+			}
+		}
+
+		// UPGRADE-QUEUE-01. Every queue of every served type is its own producer: an idle one starts the best buildable item NOW.
+		// Gates it skips: the ProductionMinCashRequirement floor, the K5 army reserve and any bank check (the user rule is no cash floor; OpenRA pays
+		// progressively, so an unfunded item advances with income). Gates it keeps: paid items wait while a unit-production pause vote is up (the base
+		// builder's refinery pause included); FREE items (promotions) start whatever the votes say. Delays, intervals and limits are honoured through
+		// ShouldBuild. An item already in production in ANY queue is not started again (Scrin has a second Upgrades queue).
+		// Choice: UpgradeServiceCA.Choose (pure): free first, then UnitsToBuild weight, then cost, then name; no random draw.
+		void ServeUpgradeQueues(IBot bot)
+		{
+			var inProduction = new HashSet<string>(StringComparer.Ordinal);
+			foreach (var category in Info.UpgradeServiceQueues)
+				foreach (var queue in AIUtils.FindQueues(player, category))
+					foreach (var queued in queue.AllQueued())
+						inProduction.Add(queued.Item);
+
+			var paused = requestPause.Any(rp => rp.IsTraitEnabled() && rp.PauseUnitProduction && rp is not IBotItemAwareUnitCap);
+			foreach (var category in Info.UpgradeServiceQueues)
+			{
+				var heldByPause = UpgradeServiceCA.HeldByPause(paused, ServedThroughPause(category));
+				foreach (var queue in AIUtils.FindQueues(player, category))
+				{
+					var slots = LiveFreeSlots(queue);
+					if (slots <= 0)
+						continue;
+
+					var shares = GetUnitsToBuildForCategory(queue.Info.Type);
+					for (; slots > 0; slots--)
+					{
+						var candidates = new List<UpgradeServiceCA.Candidate>();
+						var infos = new List<ActorInfo>();
+						foreach (var item in queue.BuildableItems())
+						{
+							if (!ShouldBuild(item.Name, true, queue.Info.Type))
+								continue;
+
+							candidates.Add(new UpgradeServiceCA.Candidate(item.Name, queue.GetProductionCost(item),
+								shares != null && shares.TryGetValue(item.Name, out var w) ? Math.Max(w, 0) : -1));
+							infos.Add(item);
+						}
+
+						var index = UpgradeServiceCA.Choose(candidates, inProduction, heldByPause, (int)player.PlayerActor.ActorID);
+						if (index < 0)
+							break; // nothing startable now (all researched, next tier locked, unaffordable); looked at again on the next visit
+
+						var item2 = infos[index];
+						inProduction.Add(item2.Name);
+						SetUnitInterval(item2.Name);
+						bot.QueueOrder(Order.StartProduction(queue.Actor, item2.Name, 1));
+						NotifyStarted(item2.Name, queue.Info.Type);
+						AIUtils.BotDebug("AI: {0} upgrade service starts {1} in {2}.", player, item2.Name, queue.Info.Type);
 					}
 				}
 			}
@@ -901,7 +1049,7 @@ namespace OpenRA.Mods.CA.Traits
 			// cap — three war factories produce in parallel instead of feeding one and idling the rest.
 			// No provider = first free queue only, byte-identical to upstream; classic mounts none.
 			productionWidth ??= player.PlayerActor.TraitsImplementing<IBotProductionWidth>().FirstEnabledTraitOrDefault();
-			var maxQueues = ProductionSaturationCA.QueuesPerCategory(saturated, productionWidth?.MaxQueuesPerCategory ?? 0);
+			var maxQueues = ProdBusyCA.QueuesPerCategory(AllFactoriesOn, saturated, productionWidth?.MaxQueuesPerCategory ?? 0);
 
 			// U1 (service-contract §3): under the switch the category is served by the fair
 			// path — rotation cursor, capability-matched slots, pre-pick admissibility and
@@ -1059,6 +1207,7 @@ namespace OpenRA.Mods.CA.Traits
 						armedInfantryAlive + batch.PendingArmedInfantry < armedInfantryFloor
 						? PickArmedInfantry(queue, shares, skip)
 						: null;
+					var fromIdleFloor = false;
 					var unit = fromFloor ?? (buildRandom
 						? ChooseRandomUnitToBuild(queue, excludeLimited, shares, skip)
 						: ChooseUnitToBuild(queue, excludeLimited, saturated, shares, skip));
@@ -1078,6 +1227,13 @@ namespace OpenRA.Mods.CA.Traits
 						AIUtils.BotDebug("AI: {0} composition {1} has no feasible unit for {2}; falling back to baseline shares",
 							player, activeComposition.Id, queue.Info.Type);
 						continue;
+					}
+
+					// INFANTRY-IDLE-01: an empty queue that the normal pick left idle takes the best buildable unit instead; the admission gates below still apply.
+					if (unit == null && held == 0 && IdleQueueFloorOn && Array.IndexOf(Info.IdleQueueFloorQueues, queue.Info.Type) >= 0)
+					{
+						unit = ChooseIdleFloorUnit(queue, shares, skip);
+						fromIdleFloor = unit != null;
 					}
 
 					if (unit == null)
@@ -1100,7 +1256,7 @@ namespace OpenRA.Mods.CA.Traits
 								observer.UnitProductionSkipped(player, world.WorldTick, name, "combat_floor");
 					}
 
-					if (!ShouldBuild(name, baselineTried, queue.Info.Type))
+					if (!ShouldBuild(name, baselineTried || fromIdleFloor, queue.Info.Type))
 					{
 						Reject();
 						continue;
@@ -1520,6 +1676,65 @@ namespace OpenRA.Mods.CA.Traits
 
 		int IBotMobileSpendReserve.PaidUnitSharePct => mobileReserve.PaidSharePct();
 
+		// RATIO-2X-01 / TECHFIRST-01 float, unit-side leg: the unit side cannot absorb money. Cached for FeedbackTime ticks: the base builder asks
+		// only when the storage leg did not float and the bank is over the tier's bar, so the scan below runs at most once per FeedbackTime ticks.
+		// "Busy and full" is the live slot measure (LiveFreeSlots: parallel slots, or any queued item on a single queue); the PR-2 depth
+		// allowance is not consulted, so a depth queue holding one item reads as full (the looser side; the bank leg of FLOAT still applies).
+		bool unitSideSaturated;
+		int unitSideSaturatedTick = -1;
+
+		bool IBotMobileSpendReserve.UnitSideSaturated
+		{
+			get
+			{
+				var tick = world.WorldTick;
+				if (unitSideSaturatedTick >= 0 && tick >= unitSideSaturatedTick && tick - unitSideSaturatedTick < FeedbackTime)
+					return unitSideSaturated;
+
+				unitSideSaturatedTick = tick;
+				unitSideSaturated = ComputeUnitSideSaturated();
+				return unitSideSaturated;
+			}
+		}
+
+		bool ComputeUnitSideSaturated()
+		{
+			var queues = Info.UnitQueues.SelectMany(c => AIUtils.FindQueues(player, c)).Distinct().ToList();
+
+			// No unit queue at all: units cannot absorb money (O3).
+			if (queues.Count == 0)
+				return true;
+
+			Dictionary<string, int> ownedByName = null;
+			foreach (var queue in queues)
+			{
+				if (!queue.Enabled || LiveFreeSlots(queue) <= 0)
+					continue;
+
+				// A free slot: the queue absorbs money unless the unit caps leave it nothing to build.
+				if (Info.UnitLimits != null && ownedByName == null)
+				{
+					ownedByName = new Dictionary<string, int>(StringComparer.Ordinal);
+					foreach (var a in world.Actors)
+						if (!a.IsDead && a.Owner == player && Info.UnitLimits.ContainsKey(a.Info.Name))
+							ownedByName[a.Info.Name] = ownedByName.TryGetValue(a.Info.Name, out var n) ? n + 1 : 1;
+				}
+
+				if (queue.BuildableItems().Any(b => !CappedOut(b) && !UnitLimitReached(b.Name, ownedByName)))
+					return false;
+			}
+
+			return true;
+		}
+
+		bool UnitLimitReached(string name, Dictionary<string, int> ownedByName)
+		{
+			if (Info.UnitLimits == null || !Info.UnitLimits.TryGetValue(name, out var limit))
+				return false;
+
+			return limit <= 0 || (ownedByName != null && ownedByName.TryGetValue(name, out var owned) && owned >= limit);
+		}
+
 		void IBotMobileSpendReserve.ReconcileUnitSpend(object owner, IReadOnlyList<(string Item, int Total, int Remaining)> items) =>
 			mobileReserve.ReconcileUnits(owner, items);
 
@@ -1590,6 +1805,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (counter != null)
 				return counter;
 
+			var waveMix = ChooseWaveMixRole(buildableThings, unitsToBuildShares, excludeLimited, retrySkip, queue.Info.Type);
+			if (waveMix != null)
+				return waveMix;
+
 			var deficit = ChooseRoleDeficit(buildableThings, unitsToBuildShares, excludeLimited, retrySkip);
 			if (deficit != null)
 				return deficit;
@@ -1650,6 +1869,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (counter != null)
 				return counter;
 
+			var waveMix = ChooseWaveMixRole(buildableThings, unitsToBuildShares, excludeLimited, retrySkip, queue.Info.Type);
+			if (waveMix != null)
+				return waveMix;
+
 			var deficit = ChooseRoleDeficit(buildableThings, unitsToBuildShares, excludeLimited, retrySkip);
 			if (deficit != null)
 				return deficit;
@@ -1669,7 +1892,8 @@ namespace OpenRA.Mods.CA.Traits
 
 			// BV_m13_liveness: with a saturated bank the share test alone must not idle the queue —
 			// one deterministic (no extra RNG) retry that skips only the proportional-share check.
-			if (saturated)
+			// PROD-BUSY-03: with the switch on the same retry runs whatever the bank.
+			if (ProdBusyCA.ShareFallback(IdleCapOn, saturated))
 			{
 				var fallback = ProductionSaturationCA.PickExcludingShare(
 					unitsToBuildShares.OrderBy(kv => kv.Key).Select(kv => kv.Key),
@@ -1684,6 +1908,27 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			return null;
+		}
+
+		// INFANTRY-IDLE-01: the idle queue's last resort. Every item of the queue the normal pick has not already had refused, through ShouldBuild with the
+		// share table ignored (delays, intervals, limits, the capturer cap still count) and the aircraft cap; the best one by IdleQueueFloorCA.Pick.
+		ActorInfo ChooseIdleFloorUnit(ProductionQueue queue, Dictionary<string, int> shares, HashSet<string> skip)
+		{
+			var infos = new List<ActorInfo>();
+			var candidates = new List<(string Name, int Cost, int Weight)>();
+			foreach (var item in queue.BuildableItems())
+			{
+				if (skip.Contains(item.Name) || !ShouldBuild(item.Name, true, queue.Info.Type) || !CanBuildMoreOfAircraft(item))
+					continue;
+
+				var weight = shares != null && shares.TryGetValue(item.Name, out var w) ? w
+					: Info.UnitsToBuild != null && Info.UnitsToBuild.TryGetValue(item.Name, out var baseline) ? baseline : 0;
+				infos.Add(item);
+				candidates.Add((item.Name, Math.Max(0, queue.GetProductionCost(item)), weight));
+			}
+
+			var index = IdleQueueFloorCA.Pick(candidates);
+			return index < 0 ? null : infos[index];
 		}
 
 		int ShareFor(string name, int share)
@@ -1761,6 +2006,57 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			return null;
+		}
+
+		/// <summary>ARMY-MIX-01: the union of the wave roles the builder could build in the last WaveMixAvailableFreshTicks; false when none was reported.</summary>
+		internal bool TryAvailableWaveRoles(int now, out HashSet<string> roles)
+		{
+			roles = [];
+			foreach (var entry in waveMixAvailable.Values)
+				if (now - entry.Tick <= WaveMixAvailableFreshTicks)
+					roles.UnionWith(entry.Roles);
+
+			return roles.Count > 0;
+		}
+
+		// ARMY-MIX-01 (USER P0, 2026-11-23): an assault wave mixes the available roles. When the idle pool lacks a wave role this queue can build,
+		// pick a unit of the best missing role (WHAT to build - the caller already decided to build; this never adds a build). The roles are ordered
+		// by the learned match-up value when a learner is present (4-value hook), else by the fixed wave order; a role stays covered for
+		// WaveMixPickCoverTicks after a pick so parallel queues do not all build it. Counters to the observed enemy keep first refusal.
+		ActorInfo ChooseWaveMixRole(IEnumerable<ActorInfo> buildableThings, Dictionary<string, int> unitsToBuildShares, bool excludeLimited,
+			HashSet<string> retrySkip, string queueType)
+		{
+			var manager = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().FirstEnabledTraitOrDefault();
+			if (manager == null || !manager.WaveMixActive)
+				return null;
+
+			var roles = unitRoles ??= player.PlayerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
+			if (roles == null)
+				return null;
+
+			var options = buildableThings.Where(b => unitsToBuildShares.ContainsKey(b.Name) &&
+				(!excludeLimited || Info.UnitLimits == null || !Info.UnitLimits.ContainsKey(b.Name)) &&
+				(retrySkip == null || !retrySkip.Contains(b.Name)) &&
+				ShouldBuild(b.Name, false) && CanBuildMoreOfAircraft(b)).ToList();
+			var now = world.WorldTick;
+			var queueRoles = WaveMixCA.DistinctRoles(options.Select(o => roles.PrimaryRoleOf(o.Name)));
+			waveMixAvailable[queueType] = (now, queueRoles);
+			if (queueRoles.Count == 0 || !TryAvailableWaveRoles(now, out var available))
+				return null;
+
+			var pool = manager.WaveMixPoolRoles();
+			if (pool.Count >= WaveMixCA.Needed(manager.Info.WaveMixMinRoles, available.Count))
+				return null;
+
+			var learning = player.PlayerActor.TraitsImplementing<IBotMixLearning>().FirstEnabledTraitOrDefault();
+			var missing = WaveMixCA.MissingRoles(queueRoles, pool,
+				role => learning != null && learning.TryRoleValues(role, out var values) ? WaveMixCA.Matchup(values) : 1.0);
+			var pick = WaveMixCA.NextMissing(missing, role => waveMixCoveredUntil.GetValueOrDefault(role), now);
+			if (pick == null)
+				return null;
+
+			waveMixCoveredUntil[pick] = now + manager.Info.WaveMixPickCoverTicks;
+			return options.Where(o => roles.PrimaryRoleOf(o.Name) == pick).ToList().Random(BotRng.For(player, nameof(UnitBuilderBotModuleCA)));
 		}
 
 		// Adaptive counters (DESIGN §19.1): below this tier's share of counter picks, the best counter to the

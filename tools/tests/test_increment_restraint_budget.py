@@ -18,7 +18,7 @@ class RestraintBudgetTests(unittest.TestCase):
     def test_reviewed_catalogue_covers_every_group(self):
         _, groups, _ = switches.load_spec(switches.SPEC)
         classes = switches.load_effect_classes(switches.SPEC, groups)
-        self.assertEqual(Counter(classes.values()), {"restraint": 35, "capability": 27, "neutral": 13})
+        self.assertEqual(Counter(classes.values()), {"restraint": 36, "capability": 27, "neutral": 13})
         self.assertEqual(classes["TF4_turtle_fallback_expiry"], "restraint")
         self.assertEqual(classes["BP_squad_desire"], "restraint")
         self.assertEqual(classes["AE_army_first"], "restraint")
@@ -39,6 +39,9 @@ class RestraintBudgetTests(unittest.TestCase):
         self.assertEqual(classes["CI_refinery_stall_fix"], "capability")
         self.assertEqual(needs.get("CI_refinery_stall_fix", []), [])
         self.assertEqual(groups["CI_refinery_stall_fix"], {"ExpansionPlannerBotModule": {"RefineryFallbackForceAfterTicks": "1500"}})
+        self.assertEqual(classes["R2X_mobile_static_ratio"], "restraint")
+        self.assertEqual(needs.get("R2X_mobile_static_ratio", []), [])
+        self.assertEqual(groups["R2X_mobile_static_ratio"], {"BaseBuilderBotModuleCA": {"MobileStaticRatioEnabled": "true"}})
 
     def test_class_metadata_fails_closed(self):
         for text in ("", "effect_classes:\n  a: wrong\n", "effect_classes:\n  b: neutral\n",

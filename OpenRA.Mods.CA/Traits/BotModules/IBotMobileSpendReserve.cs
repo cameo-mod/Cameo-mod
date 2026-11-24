@@ -40,6 +40,14 @@ namespace OpenRA.Mods.CA.Traits
 		int PaidUnitSharePct { get; }
 
 		/// <summary>
+		/// RATIO-2X-01 / TECHFIRST-01 float, unit-side leg (ARMY_FIRST_02_DESIGN_04 s3, _08): the money really cannot go to units. True when the bot has
+		/// no unit production queue at all, or every unit queue is not enabled, has no free slot (busy and full), or has no buildable
+		/// unit the unit limits and item-aware caps leave open. CACHED per <c>FeedbackTime</c> ticks by the provider (never a per-call
+		/// scan); the caller reads it only when the storage leg did not already float and the bank is over the tier's bar (MobileStaticRatioCA.IsFloating). Default false: no provider, no unit-side float.
+		/// </summary>
+		bool UnitSideSaturated => false;
+
+		/// <summary>
 		/// The unit side's reconcile feed, one call per mobile-producing queue per sweep:
 		/// the queue's in-flight items with total/remaining cost — a LIST so same-name
 		/// duplicates count per instance instead of collapsing (F1). Items an owner stops

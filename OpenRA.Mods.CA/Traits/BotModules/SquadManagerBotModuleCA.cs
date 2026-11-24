@@ -636,6 +636,105 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Cells an artillery squad trails its parent assault squad, measured away from the parent's target.")]
 		public readonly int ArtilleryHangBackCells = 8;
 
+		[Desc("ARTY-01 (USER P0): artillery micro. Each artillery unit targets defences first, then other structures, then units (a unit only when",
+			"no structure is in range or it threatens the artillery); stops at its maximum range minus ArtyRangeMarginCells from the target and",
+			"never walks into a known defence's reach; kites back (a Move, not an AttackMove) from hostile units it outranges; and an escort",
+			"squad is cut from the assault even when the faction has no FireSupportTypes. Off = the pre-ARTY-01 artillery state, byte for byte.")]
+		public readonly bool ArtyMicroEnabled = false;
+
+		[Desc("ARTY-01: cells inside the artillery unit's maximum range it stands off from its target.")]
+		public readonly int ArtyRangeMarginCells = 1;
+
+		[Desc("ARTY-01: cells added to a defence's weapon reach that a firing position must keep clear of.")]
+		public readonly int ArtyDefenceMarginCells = 2;
+
+		[Desc("ARTY-01: cells added to a hostile unit's weapon reach that a kiting artillery unit keeps (the stand-off).")]
+		public readonly int ArtyKiteMarginCells = 2;
+
+		[Desc("ARTY-01: a hostile unit this close (cells) is closing in and counts as a threat to the artillery unit.")]
+		public readonly int ArtyThreatRadiusCells = 8;
+
+		[Desc("ARTY-01: the longest single kite or stand-off step (cells) one order moves an artillery unit.")]
+		public readonly int ArtyMaxStepCells = 6;
+
+		[Desc("ARTY-01: ticks before the same artillery unit gets another micro order (stops order thrash).")]
+		public readonly int ArtyOrderCooldownTicks = 12;
+
+		[Desc("DEFEND-ALLY-01 (USER P0): when an own or allied unit or building within DefendAllyRadiusCells of idle units takes damage, those idle",
+			"pool units and idle squads respond to the nearest visible enemy. Leases are respected. Off = no response, byte for byte.")]
+		public readonly bool DefendAllyEnabled = false;
+
+		[Desc("DEFEND-ALLY-01: radius (cells) around the responders in which an attacked friendly is noticed, and from which they are drafted.")]
+		public readonly int DefendAllyRadiusCells = 25;
+
+		[Desc("DEFEND-ALLY-01: how far (cells) from the attacked friendly the attacker is searched for.")]
+		public readonly int DefendAllyAttackerScanCells = 12;
+
+		[Desc("DEFEND-ALLY-01: ticks between scans for attacked friendlies.")]
+		public readonly int DefendAllyIntervalTicks = 25;
+
+		[Desc("DEFEND-ALLY-01: ticks after a response before the next one is considered.")]
+		public readonly int DefendAllyCooldownTicks = 100;
+
+		[Desc("WAVE-MIN-01 (USER rule, 2026-11-23): an attack wave leaves the base only when the idle pool holds at least BotLimits.WaveMinUnits",
+			"units AND at least BotLimits.WaveMinValue summed unit cost (the difficulty line). Applies only to moving out to attack the enemy:",
+			"base defence, DEFEND-ALLY responses, harvester retaliation, scouts and engineer drops never pass through it. Default off (Classic).")]
+		public readonly bool WaveMinEnabled = false;
+
+		[Desc("WAVE-MIN-01: personality floor for the wave unit count. The applied bar is max(tier line, this): a personality may raise the",
+			"minimum, never lower it. 0 = no floor.")]
+		public readonly int WaveMinUnits = 0;
+
+		[Desc("WAVE-MIN-01: personality floor for the wave summed unit cost (credits). The applied bar is max(tier line, this). 0 = no floor.")]
+		public readonly int WaveMinValue = 0;
+
+		[Desc("ARMY-MIX-01 (USER rule, 2026-11-23): squads mix ALL available unit types, never single-type groups. An attack wave needs at least",
+			"WaveMixMinRoles distinct roles in the idle pool (or every available role when fewer exist); the unit builder picks WHAT to build",
+			"for a missing role (never whether to build) and a wave that still lacks one waits at most WaveMixWaitTicks. Default off (Classic).")]
+		public readonly bool WaveMixEnabled = false;
+
+		[Desc("ARMY-MIX-01: distinct combat roles (frontline, anti_armour, anti_infantry, anti_air, artillery, skirmisher) an attack wave must hold.")]
+		public readonly int WaveMixMinRoles = 3;
+
+		[Desc("ARMY-MIX-01: longest a ready wave waits for a missing role before it goes anyway. 0 = never wait.")]
+		public readonly int WaveMixWaitTicks = 1500;
+
+		[Desc("ARMY-MIX-01: ticks one unit-builder pick for a missing role counts as covering it, so several queues do not all build the same role.")]
+		public readonly int WaveMixPickCoverTicks = 200;
+
+		[Desc("ARTY-02 (USER rule, 2026-11-23), a sub-switch of ArtyMicroEnabled: orphaned artillery (no assault to trail and no escort left)",
+			"disengages with Move orders, away from threats, and joins the nearest friendly attack squad that is not retreating and is reachable by a",
+			"SAFE route (own first, then allied squads when AggTeamEnabled); with none it takes the safest route home and rejoins the pool. Never",
+			"keeps attacking alone. Default off (Classic).")]
+		public readonly bool ArtyOrphanEnabled = false;
+
+		[Desc("ARTY-02: cells around the orphaned artillery scanned for known threats when a route is planned or re-checked.")]
+		public readonly int ArtyEscapeScanCells = 45;
+
+		[Desc("ARTY-02: margin added to a known enemy's weapon range to get the length out to which a route must keep clear (defence reach = range + margin).")]
+		public readonly int ArtyEscapeMarginCells = 2;
+
+		[Desc("ARTY-02: reach of an enemy structure without a weapon (a base counts as a threat zone), in cells.")]
+		public readonly int ArtyEscapeBaseReachCells = 10;
+
+		[Desc("ARTY-02: cost in cells added to a route for every threat whose reach it enters, so a safe detour beats a short unsafe line.")]
+		public readonly int ArtyEscapePenaltyCells = 40;
+
+		[Desc("ARTY-02: friendly attack squads farther than this (cells) are not considered.")]
+		public readonly int ArtyEscapeMaxSquadCells = 60;
+
+		[Desc("ARTY-02: at most this many nearest friendly squads (own, then allied) are costed per plan.")]
+		public readonly int ArtyEscapeMaxCandidates = 4;
+
+		[Desc("ARTY-02: waypoints asked from the threat-aware region router per route.")]
+		public readonly int ArtyEscapeMaxWaypoints = 4;
+
+		[Desc("ARTY-02: the orphan merges into a friendly squad (or rejoins the pool at home) once within this many cells of it.")]
+		public readonly int ArtyEscapeArriveCells = 6;
+
+		[Desc("ARTY-02: ticks between route re-checks on the way (never per tick).")]
+		public readonly int ArtyEscapeRecheckTicks = 50;
+
 		[Desc("UT-1 (AI_DEEP_RESEARCH.md §5.1): the MinimumAttackForceDelay reset scales by the",
 			"master's Turtle<->Rush utility axis (IBotUtilityAxes) — 100 (Rush) x0.6, 50 x1.0,",
 			"0 (Turtle) x1.5. Off, or no enabled provider, keeps the unchanged delay.")]
@@ -1674,6 +1773,8 @@ namespace OpenRA.Mods.CA.Traits
 			minAttackForceDelayTicks = BotRng.For(Player, nameof(SquadManagerBotModuleCA)).Next(0, Info.MinimumAttackForceDelay) +
 				RemainingInitialAttackDelay(initialAttackDelay, World.WorldTick);
 
+			TeamLeadSwitchTakeover();
+
 			// Without this the desired force stays 0/0 and the very first
 			// `idleUnits >= desired` check passes unconditionally — an empty Rush
 			// squad on the first tick the module runs (and after every load).
@@ -1741,6 +1842,9 @@ namespace OpenRA.Mods.CA.Traits
 			// BOTPASSIVE (switch ON only; returns at once while off): the breaker wave is driven before role assignment.
 			StalemateTick(bot);
 			AssignRolesToIdleUnits(bot);
+			// TEAM-LEAD-01 (switch ON only): election, order upkeep and the own pool, once per TeamLeadCheckTicks.
+			if (Info.TeamLeadEnabled)
+				TeamLeadTick(bot);
 			// IMPL02-AGG-TEAM (A5; switch ON only): the home-reserve cap launches what the pool holds above the reserve.
 			if (Info.AggTeamEnabled)
 				AggTeamTick(bot);
@@ -2559,10 +2663,10 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 
 				var name = u.Actor.Info.Name;
-				var guerrilla = Info.GuerrillaTypes.Contains(name) && Info.JoinGuerrilla > 0 ? OpenGuerrillaSquad(bot) : null;
+				var guerrilla = Info.GuerrillaTypes.Contains(name) && Info.JoinGuerrilla > 0 && HarassCapAllows() ? OpenGuerrillaSquad(bot) : null;
 				if (guerrilla != null)
 					guerrilla.Units.Add(u);
-				else if (Info.HarasserTypes.Contains(name))
+				else if (Info.HarasserTypes.Contains(name) && HarassCapAllows())
 					AddToHarassSquad(bot, u);
 				else if (Info.FireSupportTypes.Contains(name) && OpenFireSupportSquad(bot) is { } releasedFs)
 					releasedFs.Units.Add(u);
@@ -3132,8 +3236,24 @@ namespace OpenRA.Mods.CA.Traits
 						if (actionBudget != null && !actionBudget.TryConsumeAttention(s))
 							continue;
 
+						// HARASS-CAP-01 (tl_harass_min): a quiet raid squad below the minimum raid holds, merges or goes to the pool.
+						if (HarassMinHolds(s))
+						{
+							squadCursor = index + 1;
+							continue;
+						}
+
+						// TEAM-LEAD-01 (switch ON, team engaged): the squad joins the leader's order, or - a follower with no order - stands down.
+						if (TeamLeadOn)
+						{
+							if (TeamLeadPrepare(s))
+							{
+								squadCursor = index + 1;
+								continue;
+							}
+						}
 						// IMPL02-AGG-TEAM (A4; switch ON only): an idle squad in range joins an allied or own attack intent.
-						if (Info.AggTeamEnabled)
+						else if (Info.AggTeamEnabled)
 							AggTeamPrepare(s);
 
 						CheckAttemptVerdict(s);
@@ -3164,15 +3284,20 @@ namespace OpenRA.Mods.CA.Traits
 					m13IntentSquad = null;
 				}
 			}
+			// DEFEND-ALLY-01 (switch ON only): idle, staging and gathering units answer an own or allied actor that is under attack nearby.
+			// It runs BEFORE any attack launch (USER 2026-11-23: helping own or allied units always comes first, and ignores the wave minimum).
+			DefendAllyTick(bot);
+
 			var urgentDispatched = Info.AttackLivenessEnabled && TryM13UrgentAttack(bot);
 			if (!urgentDispatched && --minAttackForceDelayTicks <= 0)
 			{
 				// §12.14 PL-1 lead lean composed with the UT-1 TurtleRush axis scale —
 				// two independent multipliers on the same reset; each is neutral (x1.0)
 				// while its own flag is off or its provider absent.
-				minAttackForceDelayTicks = BotPersonalityLeads.Scaled(
+				// STALEMATE-01 late escalation (switch ON only): from the start tick the reset shrinks, so waves leave more often.
+				minAttackForceDelayTicks = LateDelay(BotPersonalityLeads.Scaled(
 					MinAttackDelayResetTicks(Info, utilityAxesProviders),
-					BotPersonalityLeads.Lean(leadProviders, "rush"));
+					BotPersonalityLeads.Lean(leadProviders, "rush")));
 				unitsHangingAroundTheBase.RemoveAll(u => unitCannotBeOrdered(u.Actor));
 				CreateAttackForce(bot);
 			}
@@ -3360,6 +3485,11 @@ namespace OpenRA.Mods.CA.Traits
 				: World.Map.CellContaining(m13CandidateTarget.CenterPosition);
 			roster.RemoveAll(u => !AIUtils.PathExist(u.Actor, targetCell,
 				m13CandidateTarget, BlockedByActor.Immovable));
+
+			// BLOB-LAUNCH-01 attack gate (USER 11-24: no attack below WAVE-MIN): the liveness wave holds below BlobLaunch01CA.MinUnits.
+			if (BlobAttackGateHolds(roster.Count))
+				return false;
+
 			return M13LaunchPolicyCA.TryCommit(true, roster.Count, roster.Sum(u => (long)UnitValue(u.Actor)),
 				Info.MaxIdleUnits, legal, AttackLiveness, () =>
 				{
@@ -3454,7 +3584,9 @@ namespace OpenRA.Mods.CA.Traits
 		SquadCA OpenGuerrillaSquad(IBot bot)
 		{
 			var guerrillas = Squads.Where(s => s.Type == SquadCAType.Guerrilla).ToList();
-			var open = guerrillas.Where(s => s.Units.Count < Info.MaxGuerrillaSize).MinByOrDefault(s => s.Units.Count);
+			var openSquads = guerrillas.Where(s => s.Units.Count < Info.MaxGuerrillaSize);
+			// HARASS-CAP-01 (tl_harass_min): fill the biggest open squad first so a raid reaches its minimum sooner (off = the smallest first, as before).
+			var open = HarassMinOn ? openSquads.MaxByOrDefault(s => s.Units.Count) : openSquads.MinByOrDefault(s => s.Units.Count);
 			if (open != null)
 				return open;
 
@@ -3744,7 +3876,7 @@ namespace OpenRA.Mods.CA.Traits
 					// derived air role, but only when the doctrine is on - flag off
 					// keeps master's air-first order so @classic is unmoved.
 					if (GuerrillaOutranksAir(Info.AirDoctrineEnabled, a.Info.Name, Info.GuerrillaTypes)
-						&& guerrillaRoll && OpenGuerrillaSquad(bot) is { } airGuerrilla)
+						&& guerrillaRoll && HarassCapAllows() && OpenGuerrillaSquad(bot) is { } airGuerrilla)
 					{
 						airGuerrilla.Units.Add(new UnitWposWrapper(a));
 						AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, airGuerrilla.Type);
@@ -3793,12 +3925,12 @@ namespace OpenRA.Mods.CA.Traits
 					fsSquad.Units.Add(new UnitWposWrapper(a));
 					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, fsSquad.Type);
 				}
-				else if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaRoll && OpenGuerrillaSquad(bot) is { } guerrillaForce)
+				else if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaRoll && HarassCapAllows() && OpenGuerrillaSquad(bot) is { } guerrillaForce)
 				{
 					guerrillaForce.Units.Add(new UnitWposWrapper(a));
 					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, guerrillaForce.Type);
 				}
-				else if (Info.HarasserTypes.Contains(a.Info.Name))
+				else if (Info.HarasserTypes.Contains(a.Info.Name) && HarassCapAllows())
 					AddToHarassSquad(bot, new UnitWposWrapper(a));
 				else if (Info.SupportUnitTypes.Contains(a.Info.Name))
 				{
@@ -3824,6 +3956,17 @@ namespace OpenRA.Mods.CA.Traits
 
 		void CreateAttackForce(IBot bot, bool aggForce = false)
 		{
+			// TEAM-LEAD-01 (switch ON, team engaged): a follower forms a wave only for the leader's open order, the leader needs a real
+			// contribution of its own. Both then measure the launch bars on the combined team pool and skip the per-bot mix/staging holds.
+			var teamLaunch = false;
+			if (TeamLeadHoldsLaunch(out teamLaunch))
+				return;
+
+			// BLOB-LAUNCH-01 (USER 11-24, switch ON only): the team leader never forms a wave of its own outside an open team order; it attacks
+			// by publishing the order and joining it, so the whole team moves as one blob (V02: the leader sent its own 1-6 units on the team bar).
+			if (BlobLeaderHolds(teamLaunch))
+				return;
+
 			// Create an attack force when we have enough units around our base.
 			// (don't bother leaving any behind for defense)
 			var idleUnitsValue = 0;
@@ -3879,18 +4022,35 @@ namespace OpenRA.Mods.CA.Traits
 				maxIdleUnits = StalemateBreakerPolicyCA.SteamrollerOverflow(true, maxIdleUnits);
 			}
 			var requiredSize = ApplyForceScale(desiredAttackForceSize, forceScale);
+
+			// STALEMATE-01 r5 (USER 11-24, big blob pushes): the late escalation shortens the attack delay only; it never lowers the launch bar.
 			if (Info.AttackLivenessEnabled)
 				requiredSize = AttackForceEvalCA.RequiredSize(requiredSize, botLimits?.Info.TempoMinWaveUnits ?? 0);
 
 			// CA F2p2 (A5-2): ValueOnlyAttackLaunch drops the unit-count gate when a squad value threshold is configured; MaxIdleUnits still applies.
 			// IMPL02-AGG-TEAM (A5): aggForce is true only from AggTeamTick (switch ON) - the pool above the reserve launches regardless of the ordinary bars.
-			if (aggForce || AttackForceEvalCA.ShouldLaunch(unitsHangingAroundTheBase.Count, maxIdleUnits,
-					idleUnitsValue, requiredValue, requiredSize, Info.ValueOnlyAttackLaunch, Info.SquadValue))
+			// TEAM-LEAD-01: the leader measures the whole team's pool; a follower with an open order contributes whatever it holds (>= TeamLeadJoinMinUnits).
+			// TEAM-LEAD-02: the leader joins its own open order like a follower (the order, not the bars, decides then).
+			var teamFollowerLaunch = teamLaunch && (!TeamLeadIsLeader || (TeamLeadCadenceOn && TeamLeadOpenOrder() != null));
+			var (launchUnits, launchValue) = TeamLeadLaunchPool(unitsHangingAroundTheBase.Count, idleUnitsValue);
+			if (aggForce || teamFollowerLaunch || AttackForceEvalCA.ShouldLaunch(launchUnits, maxIdleUnits,
+					(int)System.Math.Min(int.MaxValue, launchValue), requiredValue, requiredSize, Info.ValueOnlyAttackLaunch, Info.SquadValue))
 			{
+				// WAVE-MIN-01 (switch ON only): moving out to attack needs the tier's unit count AND summed cost; below it the wave stays at
+				// home and the pool keeps growing. Defence, DEFEND-ALLY, retaliation, scouts and drops never come through here.
+				// TEAM-LEAD-01: the leader's tier gate measures the combined team blob; a follower's wave is part of the leader's order.
+				if (!teamFollowerLaunch && WaveBelowMinimum())
+					return;
+
+				// ARMY-MIX-01 (switch ON only): a ready wave waits, bounded by WaveMixWaitTicks, until the pool holds min(3, available) roles;
+				// the unit builder picks the missing role meanwhile. Same exemptions as WAVE-MIN-01 (only moving out to attack comes here).
+				if (!teamLaunch && WaveMixHolds())
+					return;
+
 				// 12.5: squads form to the same mix production builds - an assault
 				// missing a required role stages until the pool covers it, bounded
 				// by StageCompositionTicks, instead of trickling out under-strength.
-				if (!StagedCompositionReady())
+				if (!teamLaunch && !StagedCompositionReady())
 				{
 					if (stageSinceTick < 0)
 						stageSinceTick = World.WorldTick;
@@ -3899,6 +4059,7 @@ namespace OpenRA.Mods.CA.Traits
 				}
 
 				stageSinceTick = -1;
+				var waveLaunchSummary = WaveLaunchSummary();
 				BotMission mission = null;
 				Actor missionTarget = null;
 				FrozenActor missionFrozenTarget = null;
@@ -3925,7 +4086,8 @@ namespace OpenRA.Mods.CA.Traits
 						}
 
 						var heldTicks = World.WorldTick - defendMissionHeldSince;
-						if (AttackForceEvalCA.DefendHoldActive(heldTicks, Info.MissionDefendHoldTicks))
+						// TEAM-LEAD-02: a wave formed for the team's open order is not held for a Defend card (the card is released like a lapsed hold).
+						if (!(teamFollowerLaunch && TeamLeadCadenceOn) && AttackForceEvalCA.DefendHoldActive(heldTicks, Info.MissionDefendHoldTicks))
 						{
 							AIUtils.BotDebug("AI ({0}): holding {1} idle units for Defend mission in region {2} ({3}/{4} ticks)",
 								Player.ClientIndex, unitsHangingAroundTheBase.Count, mission.RegionIndex, heldTicks, Info.MissionDefendHoldTicks);
@@ -4005,6 +4167,7 @@ namespace OpenRA.Mods.CA.Traits
 				// IMPL02-AGG-TEAM (A5): the reserve stays home; put back after the wave is formed.
 				var aggKeep = aggForce ? AggTeamTakeReserve() : Info.AggTeamEnabled ? AggTeamTakeDetached() : null;
 				var attackForce = RegisterNewSquad(bot, SquadCAType.Rush);
+				WaveMixLaunched();
 
 				// 6f: long-range units peel off into an artillery squad that trails
 				// the assault and bombards its target, instead of charging with it.
@@ -4042,7 +4205,12 @@ namespace OpenRA.Mods.CA.Traits
 				// artillery squad and pulls a frontline escort of FireSupportEscortPerArtillery
 				// tanks per artillery unit out of the assault.
 				var fsSquad = Squads.FirstOrDefault(s => s.Type == SquadCAType.FireSupport && s.IsValid);
-				if (fireSupportUnits.Count > 0 && fsSquad == null)
+
+				// ARTY-01 (switch ON only): the artillery is always escorted, also when the faction has no FireSupportTypes - the escort is
+				// cut from the assault below (a third of it at most, FireSupportEscortPerArtillery per artillery unit).
+				var artyEscortFromAssault = ArtyMicroActive && fsSquad == null && artilleryUnits.Count > 0
+					&& AttackForceEvalCA.EscortsNeeded(artilleryUnits.Count, attackForce.Units.Count, Info.FireSupportEscortPerArtillery) > 0;
+				if ((fireSupportUnits.Count > 0 || artyEscortFromAssault) && fsSquad == null)
 					fsSquad = RegisterNewSquad(bot, SquadCAType.FireSupport);
 				if (fsSquad != null)
 				{
@@ -4078,6 +4246,8 @@ namespace OpenRA.Mods.CA.Traits
 					squad.Parent = attackForce.IsValid ? attackForce : squad.Parent;
 
 				AIUtils.BotDebug("AI ({0}): Added {1} units to squad {2}", Player.ClientIndex, attackForce.Units.Count, attackForce.Type);
+				if (waveLaunchSummary != null)
+					DiagnosticSquadEvent(attackForce, "wave_launch", waveLaunchSummary);
 				if (Info.UseSquadPoolFixes)
 				{
 					var dispatchedIds = artilleryUnits.Concat(fireSupportUnits).Concat(assaultUnits)

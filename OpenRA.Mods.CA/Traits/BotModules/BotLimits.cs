@@ -44,6 +44,12 @@ namespace OpenRA.Mods.CA.Traits
 			"bar only; MaxIdleUnits overflow, ValueOnlyAttackLaunch and the liveness deadline path are",
 			"untouched. 0 = off.")]
 		public readonly int TempoMinWaveUnits = 0;
+		[Desc("WAVE-MIN-01 (USER rule, 2026-11-23): an attack wave launches only when the idle pool holds at least this many",
+			"units AND (WaveMinValue) at least that summed unit cost. One line over the 11 tiers, 2.4 units per rank, written",
+			"in every tier; 0 = no limit (noob). Read only when the squad manager's WaveMinEnabled is on. Negative = not written.")]
+		public readonly int WaveMinUnits = -1;
+		[Desc("WAVE-MIN-01: minimum summed unit cost (credits) of the idle pool for an attack wave; 1200 per rank. 0 = no limit.")]
+		public readonly int WaveMinValue = -1;
 		[Desc("M13 non-renewing response expiry from first admission; a delay on the difficulty line.")]
 		public readonly int TeamResponseMaxLeaseTicks = 1500;
 		[Desc("M13 response re-admission cooldown for the same claim episode.")]
@@ -64,6 +70,11 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Cash above which the unit builder fills every unit queue in one pass.",
 			"Overrides UnitBuilderBotModuleCA.MaximiseProductionCashRequirement. Negative: use the module's value.")]
 		public readonly int MaximiseProductionCashRequirement = -1;
+
+		[Desc("PROD-BUSY-03b (USER 11-24): idle base units at which the unit builder stops random picks and the team leader is",
+			"pushed to publish. Read only by a unit builder with TieredIdleCap on (row pb_idle_cap_tiered). Negative: the module's",
+			"IdleBaseUnitsMaximum.")]
+		public readonly int IdleBaseUnitsMaximum = -1;
 
 		[Desc("M13 tempo (BV_m13_liveness): cash+resources at or above this tier bar saturate the bank — the armed",
 			"unit builder stops honouring MaximiseProductionCashRequirement, fills up to two free queues per category",

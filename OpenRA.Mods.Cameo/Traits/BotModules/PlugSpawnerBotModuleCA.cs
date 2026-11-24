@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.CA;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 
@@ -29,6 +30,10 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("Plug production interval per plug type.")]
 		public readonly int Interval = 50;
 
+		[Desc("UPGRADE-QUEUE-02 (add-ons never idle): the add-on service. It is the BuildingAddons producer; the upgrade queue service does not serve it.",
+			"False = the module starts no plugs (ablation row pq_addon_service).")]
+		public readonly bool AddonService = true;
+
 		public override object Create(ActorInitializer init) { return new PlugSpawnerBotModuleCA(init.Self, this); }
 	}
 
@@ -36,16 +41,17 @@ namespace OpenRA.Mods.Cameo.Traits
 	{
 		readonly World world;
 		TechTree techTree;
+		AblationLatch ablateAddonService; // UPGRADE-QUEUE-02 ABLATE hook (DEV-only provider; absent in release = always on)
 
 		// plugActor -> (plug type, host name set, prerequisites, actor info)
 		readonly Dictionary<string, (string Type, HashSet<string> Hosts, string[] Prerequisites, ActorInfo Info)> plugs = new();
-		BotPeriod ticks; // STAGGER-06 E099 F1 K=Interval x0=K
+		// UPGRADE-QUEUE-02: no period. The add-on producer checks on every bot visit, so a finished or newly
+		// available add-on is replaced at once (user rule: no delay). Info.Interval is kept for config compatibility.
 
 		public PlugSpawnerBotModuleCA(Actor self, PlugSpawnerBotModuleCAInfo info)
 			: base(info)
 		{
 			world = self.World;
-			ticks = BotPeriod.F1(world.WorldTick, Info.Interval, Info.Interval);
 		}
 
 		protected override void Created(Actor self)
@@ -81,15 +87,14 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			if (!ticks.TryFire(BotVisitClock.Of(bot)))
+			var player = bot.Player;
+			if (!Info.AddonService || ablateAddonService.Off(player, AblationIds.AddonService))
 				return;
 
-			var player = bot.Player;
-
-			// AR-4 (fleet orders 2026-10-04b): one world scan per interval covers every plug
-			// kind — the old loop enumerated world.Actors once per plug type.
-			var owned = CollectOwnedActors(world.Actors, player);
-			var queues = player.PlayerActor.TraitsImplementing<ProductionQueue>().ToArray();
+			// AR-4 (fleet orders 2026-10-04b): the owned-host scan is lazy and reads only Pluggable actors, and runs
+			// only for a real candidate (not pending, prerequisites met, queue present), so an idle check stays cheap.
+			List<Actor> owned = null;
+			var queues = player.PlayerActor.TraitsImplementing<ProductionQueue>(); // UPGRADE-QUEUE-02 (Sonnet LOW): lazy, no per-visit array
 
 			foreach (var (plugActor, plug) in plugs)
 			{
@@ -109,6 +114,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				if (ItemPending(queues, plugActor))
 					continue;
 
+				owned ??= CollectOwnedActors(world.ActorsHavingTrait<Pluggable>(), player);
 				var hasEligibleHost = owned
 					.Where(x => plug.Hosts.Contains(x.Info.Name))
 					.Any(x => x.TraitsImplementing<Pluggable>().Any(p => p.AcceptsPlug(plug.Type)));
@@ -151,9 +157,5 @@ namespace OpenRA.Mods.Cameo.Traits
 			return owned;
 		}
 
-		protected override void TraitEnabled(Actor self)
-		{
-			ticks = BotPeriod.F1(world.WorldTick, Info.Interval, Info.Interval);
-		}
 	}
 }

@@ -100,7 +100,7 @@ set above.
 | `CNHandicap*Multiplier` (4 files) | REJECTED | Named-tier multipliers = the same cheat class as the vanilla handicap traits |
 | `HeightAdvantageBonus` | OPEN | Range/sight bonus on high ground — not a bot decision; belongs to the combat-systems lane if adopted |
 | Stealth / subterranean / transport states | IDEA (partial) | `StealthDoctrineBotModule` covers doctrine; CN3 row tracks what remains |
-| Wave / pincer coordination | OPEN | Research-flagged; must name the consumer seam (squad coordinator) before porting |
+| Wave / pincer coordination | PORTED IN INTENT (TEAM-PINCER-01, tl_pincer) | Seam: the TEAM-LEAD order (`TeamLeadOrder` prongs, `TeamLeadMaintainOrder` sync release, `TeamLeadGatherStateCA` staging). From `CNWaveStates` + the pincer plan of `CNSquadManagerBotModule` (`TryBuildPincerWavePlans`, `IsWaveStageReady`): two flanks on opposite sides of ONE target, lightest-flank-first sharing of squads, release only when both flanks are in place, a too-light flank collapses to one blob. NOT ported (no region/door graph in this tree): door-based approach choice, the second stage through the passage, `WaveAbortThreatPerUnit`, economy-overflow scaling of the wave cadence. CN cadence (`AttackWaveInterval`, growing min-ready bar, fallback wave) is already covered by TEAM-LEAD-02 (publish cadence, WAVE-MIN tier + late escalation, fallback push) |
 
 ## Fransbot (vendored `OpenRA.Mods.Fransbot`, harvested against V1.29.23; upstream `main` = v1.29.55+4)
 
