@@ -224,6 +224,12 @@ namespace OpenRA.Mods.CA.Traits
 			"defence). Extras wait for the bank to reach the line. Gated by SwitchCondition; row pb_essentials_low_cash.")]
 		public readonly bool EssentialsOnlyBelowTierLine = false;
 
+		[Desc("UPGRADE-PRODUCERS-01 (USER P0, V03: upgrade and research producers such as the GDI communication center were never built, so no upgrade ever",
+			"started): every buildable structure type with NO BuildingFractions row is built once when its prerequisites are met (cheapest first), is an",
+			"army-first essential while none is owned or queued, and passes the low-cash hold as a first copy. Walls, defences, fakes, proxies, construction",
+			"yards, refineries, power plants and silos are excluded (they have their own rules). Gated by SwitchCondition; row af2_unlisted_once.")]
+		public readonly bool UnlistedBuildingsOnce = false;
+
 		[Desc("PROD-BUSY (USER 11-24): while the bank stays above the tier MaximiseProductionCash line the base builder adds production buildings, cycled",
 			"across the types (barracks, war factory, airfield, naval yard with water access, then again), bounded by the build limits and by the failed-",
 			"placement latch; power is added as needed. Gated by SwitchCondition; row pb_cycle_production.")]
@@ -600,6 +606,7 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly SustainedCashClock SustainedCash = new();
 		public bool CycleProductionArmed => Info.CycleProductionAboveLine && switchesActive;
 		public bool EssentialsLowCashArmed => Info.EssentialsOnlyBelowTierLine && switchesActive;
+		public bool UnlistedOnceArmed => Info.UnlistedBuildingsOnce && switchesActive;
 
 		// E1 observational slice (lead-accepted, observational ONLY): the switch-gated commitment
 		// ledger. Never read by any admission decision — recording and verdict logging only.

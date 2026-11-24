@@ -26,5 +26,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		// Building repair pauses below the cash floor and resumes above it (BaseRepairBotModule.RepairMinCash).
 		public const string Af2RepairCash = "af2_repair_cash";
+
+		// UPGRADE-PRODUCERS-01: every buildable structure type without a BuildingFractions row is built once (upgrade/research producers, radar, tech centres).
+		public const string Af2UnlistedOnce = "af2_unlisted_once";
 	}
 }

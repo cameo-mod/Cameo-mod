@@ -114,7 +114,9 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateRatio;
 
 		// PROD-BUSY-01 rows (DEV provider only; release = on).
-		AblationLatch ablateAllProducers, ablateIdleSweep, ablateEssentials, ablateCycle, ablateSustained, ablateSafety;
+		AblationLatch ablateAllProducers, ablateIdleSweep, ablateEssentials, ablateCycle, ablateSustained, ablateSafety, ablateUnlistedOnce;
+		bool UnlistedOnceOn => baseBuilder.UnlistedOnceArmed && !ablateUnlistedOnce.Off(player, AblationIds.Af2UnlistedOnce);
+		readonly Dictionary<string, bool> unlistedKinds = new();
 		string lastCycledProduction;
 
 		// SUSTAINED-FIX-01: the item the SUSTAINED-CASH rung returned in this ChooseBuildingToBuild call (null otherwise). TickQueue rides it at its own cost
@@ -2099,6 +2101,66 @@ namespace OpenRA.Mods.CA.Traits
 				item.HasTraitInfo<CashTricklerInfo>(), plannerOrDemand);
 		}
 
+		/// <summary>
+		/// UPGRADE-PRODUCERS-01: whether <paramref name="info"/> is a structure type the each-building-once rule must cover although it has no
+		/// BuildingFractions row: not a wall, defence, anti-air, fake or proxy, and not a type with its own rule (yard, refinery, power, silo). Cached per name.
+		/// </summary>
+		bool UnlistedOnceKind(ActorInfo info)
+		{
+			if (unlistedKinds.TryGetValue(info.Name, out var kind))
+				return kind;
+
+			if (!staticValuesResolved)
+			{
+				staticValues = player.PlayerActor.TraitsImplementing<IBotMobileStaticValues>().FirstOrDefault();
+				staticValuesResolved = true;
+			}
+
+			var b = baseBuilder.Info;
+			var name = info.Name;
+			kind = UnlistedOnceCA.Eligible(
+				inFractions: b.BuildingFractions != null && b.BuildingFractions.ContainsKey(name),
+				isBuilding: info.HasTraitInfo<BuildingInfo>(),
+				wallOrFake: info.HasTraitInfo<LineBuildInfo>() || info.TraitInfos<GivesBuildableAreaInfo>().Any(g => g.AreaTypes.Contains("fake")),
+				hasOwnRule: b.ConstructionYardTypes.Contains(name) || b.RefineryTypes.Contains(name) || b.PowerTypes.Contains(name) || b.SiloTypes.Contains(name),
+				defence: b.DefenseTypes.Contains(name) || b.AntiAirTypes.Contains(name) || (staticValues != null && staticValues.IsStaticDefence(info)),
+				name: name);
+			unlistedKinds[name] = kind;
+			return kind;
+		}
+
+		// UPGRADE-PRODUCERS-01: the cheapest buildable first copy of an unlisted structure type (UnlistedOnceCA.Pick), within the build limits, the naval
+		// water check and the power rule (power instead when the pick would leave power short). Only the building queues, and only once a production building stands.
+		ActorInfo ChooseUnlistedOnce(ProductionQueue queue, IEnumerable<ActorInfo> buildableThings, ActorInfo power)
+		{
+			if (!UnlistedOnceOn || baseBuilder.Info.DefenseQueues.Contains(Category) || !baseBuilder.HasAdequateProductionCount())
+				return null;
+
+			var infos = new List<ActorInfo>();
+			var candidates = new List<(string Name, int Cost)>();
+			foreach (var item in buildableThings)
+			{
+				if (!UnlistedOnceKind(item) || OwnedOrQueued(item))
+					continue;
+
+				if (baseBuilder.TryGetBuildingLimit(item.Name, out var limit) && BaseBuilderQueueEvalCA.LimitReached(0, limit))
+					continue;
+
+				if (baseBuilder.Info.ProductionTypes.Contains(item.Name) && botLimits != null && BaseBuilderQueueEvalCA.LimitReached(0, ProductionTypeLimit))
+					continue;
+
+				if (BaseBuilderQueueEvalCA.NavalBlocked(baseBuilder.Info.NavalProductionTypes.Contains(item.Name), waterState == WaterCheck.NotEnoughWater,
+						() => AIUtils.IsAreaAvailable<GivesBuildableArea>(world, player, world.Map, baseBuilder.Info.CheckForWaterRadius, baseBuilder.Info.WaterTerrainTypes)))
+					continue;
+
+				infos.Add(item);
+				candidates.Add((item.Name, Math.Max(0, queue.GetProductionCost(item))));
+			}
+
+			var index = UnlistedOnceCA.Pick(candidates);
+			return index < 0 ? null : BaseBuilderQueueEvalCA.PickOrPower(infos[index], power, HasSufficientPowerForActor);
+		}
+
 		// Cameo (army-first): buildings that stay allowed while the army-first vote holds
 		// the rest. Construction yards, refineries and power are always essential; the first
 		// production building must pass too — no factory means no army, so blocking it deadlocks.
@@ -2112,6 +2174,10 @@ namespace OpenRA.Mods.CA.Traits
 
 			// BINDING tech chain (11-23): the faction's T2 and T3 gate passes the army-first pause and the mobile reserve while none is owned or queued.
 			if (TechChainExempt(name))
+				return true;
+
+			// UPGRADE-PRODUCERS-01: the first copy of a structure type with no fraction row (upgrade/research producers, radar, tech centres) is essential.
+			if (UnlistedOnceOn && UnlistedOnceKind(actorInfo) && !OwnedOrQueued(actorInfo))
 				return true;
 
 			// One queued-but-unplaced factory is enough to break the deadlock — don't let the
@@ -2489,6 +2555,16 @@ namespace OpenRA.Mods.CA.Traits
 				var demandPick = ChooseExpansionDemandItem(queue, buildableThings);
 				if (demandPick != null)
 					return demandPick;
+			}
+
+			// UPGRADE-PRODUCERS-01 (USER P0): each building once. A structure type with no BuildingFractions row (the upgrade and research producers, radar,
+			// tech centres) is never reached by the fraction roll below, so its first copy is picked here, after every essential, planner and demand rung and
+			// above the production cycling and the bank rungs. Row af2_unlisted_once.
+			var unlisted = ChooseUnlistedOnce(queue, buildableThings, power);
+			if (unlisted != null)
+			{
+				AIUtils.BotDebug("{0} decided to build {1}: Priority override (unlisted building once)", queue.Actor.Owner, unlisted.Name);
+				return unlisted;
 			}
 
 			// PROD-BUSY cycle (USER 11-24): above the tier line cash becomes more units, i.e. one more production building per type in turn.
