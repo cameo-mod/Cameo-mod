@@ -4747,6 +4747,8 @@ Player:
 		WaveMixEnabled: true
 		# TEAM-LEAD-01 (USER rule, 2026-11-23): per team the highest-score bot leads; followers launch only on its order; the team gathers at one rally point and pushes one target together. Needs AggTeamEnabled. @classic keeps the default (off).
 		TeamLeadEnabled: true
+		# TEAM-LEAD-02 (USER P0, V01 timeout RCA): the leader publishes the team push from its own check once the combined blob reaches the WAVE-MIN tier (or any member hits its idle-unit limit), every member forms its wave for the order at once. Needs TeamLeadEnabled.
+		TeamLeadCadenceEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -4874,6 +4876,8 @@ Player:
 		WaveMixEnabled: true
 		# TEAM-LEAD-01 (USER rule, 2026-11-23): per team the highest-score bot leads; followers launch only on its order; the team gathers at one rally point and pushes one target together. Needs AggTeamEnabled. @classic keeps the default (off).
 		TeamLeadEnabled: true
+		# TEAM-LEAD-02 (USER P0, V01 timeout RCA): the leader publishes the team push from its own check once the combined blob reaches the WAVE-MIN tier (or any member hits its idle-unit limit), every member forms its wave for the order at once. Needs TeamLeadEnabled.
+		TeamLeadCadenceEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -4997,6 +5001,8 @@ Player:
 		WaveMixEnabled: true
 		# TEAM-LEAD-01 (USER rule, 2026-11-23): per team the highest-score bot leads; followers launch only on its order; the team gathers at one rally point and pushes one target together. Needs AggTeamEnabled. @classic keeps the default (off).
 		TeamLeadEnabled: true
+		# TEAM-LEAD-02 (USER P0, V01 timeout RCA): the leader publishes the team push from its own check once the combined blob reaches the WAVE-MIN tier (or any member hits its idle-unit limit), every member forms its wave for the order at once. Needs TeamLeadEnabled.
+		TeamLeadCadenceEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5122,6 +5128,8 @@ Player:
 		WaveMixEnabled: true
 		# TEAM-LEAD-01 (USER rule, 2026-11-23): per team the highest-score bot leads; followers launch only on its order; the team gathers at one rally point and pushes one target together. Needs AggTeamEnabled. @classic keeps the default (off).
 		TeamLeadEnabled: true
+		# TEAM-LEAD-02 (USER P0, V01 timeout RCA): the leader publishes the team push from its own check once the combined blob reaches the WAVE-MIN tier (or any member hits its idle-unit limit), every member forms its wave for the order at once. Needs TeamLeadEnabled.
+		TeamLeadCadenceEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5247,6 +5255,8 @@ Player:
 		WaveMixEnabled: true
 		# TEAM-LEAD-01 (USER rule, 2026-11-23): per team the highest-score bot leads; followers launch only on its order; the team gathers at one rally point and pushes one target together. Needs AggTeamEnabled. @classic keeps the default (off).
 		TeamLeadEnabled: true
+		# TEAM-LEAD-02 (USER P0, V01 timeout RCA): the leader publishes the team push from its own check once the combined blob reaches the WAVE-MIN tier (or any member hits its idle-unit limit), every member forms its wave for the order at once. Needs TeamLeadEnabled.
+		TeamLeadCadenceEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
@@ -5369,6 +5379,8 @@ Player:
 		WaveMixEnabled: true
 		# TEAM-LEAD-01 (USER rule, 2026-11-23): per team the highest-score bot leads; followers launch only on its order; the team gathers at one rally point and pushes one target together. Needs AggTeamEnabled. @classic keeps the default (off).
 		TeamLeadEnabled: true
+		# TEAM-LEAD-02 (USER P0, V01 timeout RCA): the leader publishes the team push from its own check once the combined blob reaches the WAVE-MIN tier (or any member hits its idle-unit limit), every member forms its wave for the order at once. Needs TeamLeadEnabled.
+		TeamLeadCadenceEnabled: true
 		UseSquadOrderDedup: false
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only

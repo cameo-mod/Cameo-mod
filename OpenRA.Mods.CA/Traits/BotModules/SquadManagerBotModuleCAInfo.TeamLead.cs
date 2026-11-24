@@ -61,5 +61,12 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("A published idle-pool count older than this many ticks is ignored in the combined blob. Range 200-600.")]
 		public readonly int TeamLeadPoolMaxAgeTicks = 300;
+
+		[Desc("TEAM-LEAD-02 (release switch; the DEV row is tl_leader_cadence). On: the leader publishes the team push from its own team check, no formed leader squad needed, whenever the combined blob (every member's idle army, quiet squads included) reaches the WAVE-MIN tier, at least as often as the old per-bot attack cadence (the MinimumAttackForceDelay reset, late-escalated) and at the latest every TeamLeadFallbackTicks; every member forms its wave for the open order at once, and a push whose target cannot be resolved attack-moves to the order's position instead of standing down. Off = the TEAM-LEAD-01 behaviour. Needs TeamLeadEnabled.")]
+		public readonly bool TeamLeadCadenceEnabled = false;
+
+		[Desc("TEAM-LEAD-02: the team has no order for this many ticks with a ready blob = the leader publishes now, whatever its own cadence says. Range 600-3000.")]
+		public readonly int TeamLeadFallbackTicks = 1500;
+
 	}
 }

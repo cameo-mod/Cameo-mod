@@ -23,15 +23,21 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		AblationLatch ablateTeamLead;
 		AblationLatch ablateJointHarass;
+		AblationLatch ablateCadence;
 		int teamLeadNextCheck;
 		string teamLeadKey;
 		TeamLeadTeam teamLeadTeam;
 		bool teamLeadEngaged;
 		bool teamLeadIsLeader;
+		int teamLeadJoinedSeq;
 
 		/// <summary>TEAM-LEAD-01 is on for this bot: the Info switch (with the AggTeam code it builds on) and the DEV ablation row.</summary>
 		internal bool TeamLeadActive => Info.TeamLeadEnabled && Info.AggTeamEnabled && !ablateTeamLead.Off(Player, AblationIds.TeamLead);
 
+		// TEAM-LEAD-02 (P0 FIX): the leader publishes the push on cadence (own switch + row).
+		bool TeamLeadCadenceActive => TeamLeadActive && Info.TeamLeadCadenceEnabled && !ablateCadence.Off(Player, AblationIds.TeamLeadCadence);
+
+		internal bool TeamLeadCadenceOn => teamLeadEngaged && TeamLeadCadenceActive;
 		/// <summary>The feature is in force for this bot right now: active, and the team has a leader and at least two living bots.</summary>
 		internal bool TeamLeadOn => teamLeadEngaged && TeamLeadActive;
 
@@ -73,7 +79,7 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>One team pass, at most every TeamLeadCheckTicks per bot: publish the own pool; the first bot of the team to arrive in a window also elects and keeps the order.</summary>
-		void TeamLeadTick()
+		void TeamLeadTick(IBot bot)
 		{
 			if (!TeamLeadActive)
 			{
@@ -94,7 +100,9 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			var team = teamLeadTeam = TeamLeadBoard.For(World, TeamLeadCA.TeamKey(seats));
-			team.Publish(teamLeadKey, unitsHangingAroundTheBase.Count, TeamLeadPoolValue(), now);
+			// TEAM-LEAD-02: the blob is every idle army unit of the member - the pool plus its formed quiet squads, not the pool alone.
+			var (poolUnits, poolValue) = TeamLeadCadenceActive ? TeamLeadBlob() : (unitsHangingAroundTheBase.Count, TeamLeadPoolValue());
+			team.Publish(teamLeadKey, poolUnits, poolValue, now, TeamLeadCadenceActive && TeamLeadIdleAtLimit());
 			if (now >= team.NextEvalTick)
 			{
 				team.NextEvalTick = now + Info.TeamLeadCheckTicks;
@@ -119,6 +127,135 @@ namespace OpenRA.Mods.CA.Traits
 
 			teamLeadEngaged = TeamLeadCA.Engaged(seats, team.Election);
 			teamLeadIsLeader = teamLeadEngaged && team.Election.Leader == teamLeadKey;
+
+			if (!teamLeadEngaged)
+				return;
+
+			// TEAM-LEAD-02: the leader publishes the push from its own team check (no formed squad of its own needed); every member
+			// forms its wave for an open order right away instead of waiting for its own attack-force timer.
+			if (teamLeadIsLeader && TeamLeadCadenceOn)
+				TeamLeadPublish(team, now);
+
+			if (TeamLeadCadenceOn)
+				TeamLeadJoin(bot, now);
+		}
+
+		// The member's idle army: the pool plus the units of its formed quiet wave squads (the squads TeamLeadPrepare joins to an order or dismisses).
+		(int Units, long Value) TeamLeadBlob()
+		{
+			var units = unitsHangingAroundTheBase.Count;
+			var value = TeamLeadPoolValue();
+			foreach (var s in Squads)
+			{
+				if (!TeamLeadWaveSquad(s))
+					continue;
+
+				units += s.Units.Count;
+				value += SquadValueOf(s);
+			}
+
+			return (units, value);
+		}
+
+		// A quiet team-wave squad: Rush, idle, not one of the squads that keep their own job (breaker, M13 liveness) and not defending.
+		bool TeamLeadWaveSquad(SquadCA s) => s.IsValid && s.Type == SquadCAType.Rush && !ReferenceEquals(s, stalemateSquad) && !s.M13Response
+			&& !ReferenceEquals(s, m13IntentSquad) && !ReferenceEquals(s, m13ResponseSquad)
+			&& AggTeamIsQuietState(s.FuzzyStateMachine?.CurrentState) && !AggTeamSquadDefends(s);
+
+		// The member's idle army is at its tier's idle-unit limit (25 Noob .. 75 God, Hard 50): the unit builder stops queuing units there, so an idle
+		// army at the limit is starving production. The unit builder owns the number (IdleAtLimit); the leader pushes at once when any member is at it.
+		UnitBuilderBotModuleCA teamLeadUnitBuilder;
+
+		bool TeamLeadIdleAtLimit()
+		{
+			teamLeadUnitBuilder ??= Player.PlayerActor.TraitsImplementing<UnitBuilderBotModuleCA>().FirstEnabledTraitOrDefault();
+			return teamLeadUnitBuilder?.IdleAtLimit ?? false;
+		}
+
+		// The old per-bot attack cadence: the MinimumAttackForceDelay reset of CreateAttackForce, scaled the same way (late escalation included).
+		int TeamLeadCadenceTicks() => LateDelay(BotPersonalityLeads.Scaled(
+			MinAttackDelayResetTicks(Info, utilityAxesProviders),
+			BotPersonalityLeads.Lean(leadProviders, "rush")));
+
+		// Leader only. No open order, a ready blob (WAVE-MIN tier on the combined blob), cadence due: publish the order now.
+		void TeamLeadPublish(TeamLeadTeam team, int now)
+		{
+			if (now < initialAttackDelay || TeamLeadOpenOrder() != null)
+				return;
+
+			var blob = team.Pool(now, Info.TeamLeadPoolMaxAgeTicks);
+			var (minUnits, minValue) = WaveMinActive ? WaveMinBars() : (0, 0);
+			var ready = TeamLeadCA.BlobReady(blob.Units, blob.Value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue);
+			var interval = TeamLeadCA.PublishInterval(TeamLeadCadenceTicks(), Info.TeamLeadFallbackTicks);
+			if (!TeamLeadCA.OrderDue(false, ready, now, team.LastOrderTick, interval, team.AnyAtCap(now, Info.TeamLeadPoolMaxAgeTicks)))
+				return;
+
+			var home = AggTeamHomePos();
+			if (!TeamLeadPickTarget(home, now, out var target, out var targetId))
+				return;
+
+			var forced = TeamLeadCA.FallbackForced(now, team.LastOrderTick, Info.TeamLeadFallbackTicks);
+			var order = TeamLeadIssue(home, target, targetId, now);
+			AIUtils.BotDebug("AI ({0}): team push published seq {1} at {2}: blob {3}/{4}, target {5}{6}", Player.ClientIndex, order.Seq, now, blob.Units, blob.Value,
+				targetId, forced ? " (fallback)" : "");
+		}
+
+		// Every member (the leader too) forms its wave for the open order at once. Retried each window until the pool actually goes into a squad.
+		void TeamLeadJoin(IBot bot, int now)
+		{
+			var order = TeamLeadOpenOrder();
+			if (order == null || order.Seq == teamLeadJoinedSeq || now < initialAttackDelay)
+				return;
+
+			unitsHangingAroundTheBase.RemoveAll(u => unitCannotBeOrdered(u.Actor));
+			if (unitsHangingAroundTheBase.Count < (teamLeadIsLeader ? Info.TeamLeadLeaderMinUnits : Info.TeamLeadJoinMinUnits))
+				return;
+
+			var before = unitsHangingAroundTheBase.Count;
+			CreateAttackForce(bot);
+			if (unitsHangingAroundTheBase.Count < before)
+				teamLeadJoinedSeq = order.Seq;
+		}
+
+		// Where the order goes, from the leader's own view: the nearest known enemy (the main target's visible actors, any visible enemy,
+		// then a remembered building).
+		bool TeamLeadPickTarget(WPos from, int now, out WPos target, out uint actorId)
+		{
+			target = default;
+			var mainTarget = EffectiveMainTarget();
+			var seen = mainTarget != null ? FindClosestEnemy(World.Map.CellContaining(from), TeamLeadOpenRisk, mainTarget) : null;
+			if (seen == null)
+			{
+				var source = unitsHangingAroundTheBase.Count > 0 ? unitsHangingAroundTheBase[0].Actor : activeUnits.FirstOrDefault(a => !a.IsDead && a.IsInWorld);
+				seen = source != null ? FindClosestEnemy(source) : null;
+			}
+
+			if (seen != null)
+			{
+				target = seen.CenterPosition;
+				actorId = seen.ActorID;
+				return true;
+			}
+
+			if (FoggedScans && FindFrozenEnemyTarget(from, -1) is { } frozen)
+			{
+				target = frozen.CenterPosition;
+				actorId = frozen.ID;
+				return true;
+			}
+
+			actorId = 0;
+			return false;
+		}
+
+		// No risk gate on the leader's pick: the bars of the order are the wave minimum and the gather, not the squad risk gate.
+		const int TeamLeadOpenRisk = 1_000_000_000;
+
+		TeamLeadOrder TeamLeadIssue(WPos from, WPos target, uint targetActorId, int now)
+		{
+			var staged = ArmyStaging?.StagingCellNear(World.Map.CellContaining(from));
+			var rally = staged.HasValue ? World.Map.CenterOfCell(staged.Value) : TeamLeadCA.RallyPoint(from, target, Info.TeamLeadRallyForwardCells);
+			return teamLeadTeam.Issue(teamLeadKey, rally, target, targetActorId, now);
 		}
 
 		// Order upkeep (once per window per team): cancel a stale or orphaned order, release the blob when it is gathered or the window is over.
@@ -129,8 +266,11 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			order.Prune(o => o is SquadCA q && q.IsValid && q.FuzzyStateMachine?.CurrentState is TeamLeadGatherStateCA);
+			// An order published by the leader's team check has no squad yet: the members form theirs on their next check and report from the gather
+			// state one squad pass later, so the no-report grace is longer while TEAM-LEAD-02 publishes (Info switch; the row only changes the publish).
+			var reportGrace = (Info.TeamLeadCadenceEnabled ? 5 : 2) * Info.TeamLeadCheckTicks;
 			if (order.LeaderKey != team.Election.Leader || now - order.IssueTick > Info.TeamLeadOrderMaxTicks
-				|| (order.ReportCount == 0 && now - order.IssueTick > 2 * Info.TeamLeadCheckTicks))
+				|| (order.ReportCount == 0 && now - order.IssueTick > reportGrace))
 			{
 				order.Cancelled = true;
 				return;
@@ -193,9 +333,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// The liveness (M13) response and urgent-attack squads and the breaker squad keep their own job: they are not team waves.
-			if (!TeamLeadOn || s.Type != SquadCAType.Rush || !s.IsValid || ReferenceEquals(s, stalemateSquad) || s.M13Response
-				|| ReferenceEquals(s, m13IntentSquad) || ReferenceEquals(s, m13ResponseSquad)
-				|| !AggTeamIsQuietState(s.FuzzyStateMachine?.CurrentState) || AggTeamSquadDefends(s))
+			if (!TeamLeadOn || !TeamLeadWaveSquad(s))
 				return false;
 
 			var now = World.WorldTick;
@@ -259,10 +397,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (intent == null)
 				return null;
 
-			var from = s.CenterPosition;
-			var staged = ArmyStaging?.StagingCellNear(World.Map.CellContaining(from));
-			var rally = staged.HasValue ? World.Map.CenterOfCell(staged.Value) : TeamLeadCA.RallyPoint(from, intent.Target, Info.TeamLeadRallyForwardCells);
-			var order = teamLeadTeam.Issue(teamLeadKey, rally, intent.Target, intent.TargetActorId, now);
+			var order = TeamLeadIssue(s.CenterPosition, intent.Target, intent.TargetActorId, now);
 			DiagnosticSquadEvent(s, "team_order", reason: "seq=" + order.Seq);
 			return order;
 		}
@@ -291,7 +426,27 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>The blob is released: point the squad at the order's target (same actor for every member, else the nearest visible enemy there).</summary>
-		internal bool TeamLeadResolveTarget(SquadCA squad, TeamLeadOrder order) =>
-			AggTeamResolveTarget(squad, new TeamAttackIntent(order.Target, order.Rally, order.IssueTick, order.PushTick, order.IssueTick, SquadValueOf(squad), order.TargetActorId));
+		internal bool TeamLeadResolveTarget(SquadCA squad, TeamLeadOrder order)
+		{
+			if (AggTeamResolveTarget(squad, new TeamAttackIntent(order.Target, order.Rally, order.IssueTick, order.PushTick, order.IssueTick, SquadValueOf(squad), order.TargetActorId)))
+				return true;
+
+			if (!TeamLeadCadenceOn)
+				return false;
+
+			// TEAM-LEAD-02: the pushed target is not in this bot's view (the leader saw it, this bot has not). The blob still goes: to the remembered
+			// building if this bot has it, else to the order's position; on arrival the squad looks for the next target like a finished hunt.
+			var remembered = order.TargetActorId != 0 ? Player.FrozenActorLayer?.FromID(order.TargetActorId) : null;
+			if (remembered != null && remembered.IsValid && !remembered.Hidden)
+			{
+				squad.Target = Target.FromFrozenActor(remembered);
+				return true;
+			}
+
+			var cell = World.Map.CellContaining(order.Target);
+			squad.Target = Target.FromCell(World, cell);
+			squad.HuntCell = cell;
+			return true;
+		}
 	}
 }

@@ -170,6 +170,34 @@ namespace OpenRA.Mods.CA.Traits
 
 			return (units, value);
 		}
+
+		// ---- TEAM-LEAD-02 (P0 FIX 2026-11-24: V01 was a 60k stalemate, the team hoarded and never pushed) ----
+
+		/// <summary>
+		/// How often the leader must publish a team push while the blob is ready: the old per-bot attack cadence (the MinimumAttackForceDelay
+		/// reset, scaled by late escalation after its start tick), never slower than <paramref name="fallbackTicks"/>. The fallback is the hard
+		/// guarantee: with no order for that long the leader publishes at once, whatever its own cadence or pool says.
+		/// </summary>
+		public static int PublishInterval(int cadenceTicks, int fallbackTicks) =>
+			Math.Max(1, Math.Min(Math.Max(1, cadenceTicks), Math.Max(1, fallbackTicks)));
+
+		/// <summary>The combined blob (every member's idle army, formed quiet squads included) may move out: enough units, and the WAVE-MIN tier when one applies.</summary>
+		public static bool BlobReady(int units, long value, int floorUnits, bool waveMinLimits, int waveMinUnits, int waveMinValue) =>
+			units >= Math.Max(1, floorUnits) && (!waveMinLimits || WaveMinCA.Passes(units, value, waveMinUnits, waveMinValue));
+
+		/// <summary>
+		/// The leader publishes now: no open order, a ready blob, and an interval since the last order (the first order has none to wait for).
+		/// A member whose idle army has reached its tier's idle-unit limit (<paramref name="anyAtCap"/>) does not wait for the interval: its units
+		/// are blocking production, so the push goes at once (the blob must still be ready).
+		/// </summary>
+		public static bool OrderDue(bool orderOpen, bool blobReady, int now, int lastOrderTick, int intervalTicks, bool anyAtCap = false) =>
+			!orderOpen && blobReady && (anyAtCap || lastOrderTick < 0 || now - lastOrderTick >= Math.Max(1, intervalTicks));
+
+
+		/// <summary>The last order is older than the fallback (the push was forced rather than on cadence); for the record only.</summary>
+		public static bool FallbackForced(int now, int lastOrderTick, int fallbackTicks) =>
+			lastOrderTick >= 0 && now - lastOrderTick >= Math.Max(1, fallbackTicks);
+
 	}
 
 	/// <summary>One team order: where the army gathers, what it pushes, and who has reported in. Created by the leader, read by every member.</summary>
@@ -254,7 +282,23 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>The tick of the last order any seat of the team issued (-1 = none yet); with the election and the first attack tick it is the stall clock.</summary>
 		public int LastOrderTick = -1;
 
-		public void Publish(string key, int units, long value, int tick) => pools[key] = (units, value, tick);
+		readonly Dictionary<string, (bool AtCap, int Tick)> caps = new(StringComparer.Ordinal);
+
+		public void Publish(string key, int units, long value, int tick, bool atCap = false)
+		{
+			pools[key] = (units, value, tick);
+			caps[key] = (atCap, tick);
+		}
+
+		/// <summary>Some seat published within <paramref name="maxAgeTicks"/> that its idle army is at the tier's idle-unit limit.</summary>
+		public bool AnyAtCap(int now, int maxAgeTicks)
+		{
+			foreach (var c in caps.Values)
+				if (c.AtCap && now - c.Tick <= maxAgeTicks)
+					return true;
+
+			return false;
+		}
 
 		/// <summary>The idle units a seat published within <paramref name="maxAgeTicks"/>; 0 when stale or never.</summary>
 		public int PoolUnitsOf(string key, int now, int maxAgeTicks) =>

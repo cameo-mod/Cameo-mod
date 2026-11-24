@@ -1842,7 +1842,7 @@ namespace OpenRA.Mods.CA.Traits
 			AssignRolesToIdleUnits(bot);
 			// TEAM-LEAD-01 (switch ON only): election, order upkeep and the own pool, once per TeamLeadCheckTicks.
 			if (Info.TeamLeadEnabled)
-				TeamLeadTick();
+				TeamLeadTick(bot);
 			// IMPL02-AGG-TEAM (A5; switch ON only): the home-reserve cap launches what the pool holds above the reserve.
 			if (Info.AggTeamEnabled)
 				AggTeamTick(bot);
@@ -4012,7 +4012,8 @@ namespace OpenRA.Mods.CA.Traits
 			// CA F2p2 (A5-2): ValueOnlyAttackLaunch drops the unit-count gate when a squad value threshold is configured; MaxIdleUnits still applies.
 			// IMPL02-AGG-TEAM (A5): aggForce is true only from AggTeamTick (switch ON) - the pool above the reserve launches regardless of the ordinary bars.
 			// TEAM-LEAD-01: the leader measures the whole team's pool; a follower with an open order contributes whatever it holds (>= TeamLeadJoinMinUnits).
-			var teamFollowerLaunch = teamLaunch && !TeamLeadIsLeader;
+			// TEAM-LEAD-02: the leader joins its own open order like a follower (the order, not the bars, decides then).
+			var teamFollowerLaunch = teamLaunch && (!TeamLeadIsLeader || (TeamLeadCadenceOn && TeamLeadOpenOrder() != null));
 			var (launchUnits, launchValue) = TeamLeadLaunchPool(unitsHangingAroundTheBase.Count, idleUnitsValue);
 			if (aggForce || teamFollowerLaunch || AttackForceEvalCA.ShouldLaunch(launchUnits, maxIdleUnits,
 					(int)System.Math.Min(int.MaxValue, launchValue), requiredValue, requiredSize, Info.ValueOnlyAttackLaunch, Info.SquadValue))
@@ -4067,7 +4068,8 @@ namespace OpenRA.Mods.CA.Traits
 						}
 
 						var heldTicks = World.WorldTick - defendMissionHeldSince;
-						if (AttackForceEvalCA.DefendHoldActive(heldTicks, Info.MissionDefendHoldTicks))
+						// TEAM-LEAD-02: a wave formed for the team's open order is not held for a Defend card (the card is released like a lapsed hold).
+						if (!(teamFollowerLaunch && TeamLeadCadenceOn) && AttackForceEvalCA.DefendHoldActive(heldTicks, Info.MissionDefendHoldTicks))
 						{
 							AIUtils.BotDebug("AI ({0}): holding {1} idle units for Defend mission in region {2} ({3}/{4} ticks)",
 								Player.ClientIndex, unitsHangingAroundTheBase.Count, mission.RegionIndex, heldTicks, Info.MissionDefendHoldTicks);

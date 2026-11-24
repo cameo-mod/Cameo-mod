@@ -240,7 +240,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheHooksSitInFrontOfTheLaunchAndTheSquadPassAndNowhereElse()
 		{
 			var manager = RepoFile(Bots + "SquadManagerBotModuleCA.cs");
-			Assert.That(manager, Does.Contain("if (Info.TeamLeadEnabled)\n\t\t\t\tTeamLeadTick();").Or.Contain("if (Info.TeamLeadEnabled)\r\n\t\t\t\tTeamLeadTick();"));
+			Assert.That(manager, Does.Contain("if (Info.TeamLeadEnabled)\n\t\t\t\tTeamLeadTick(bot);").Or.Contain("if (Info.TeamLeadEnabled)\r\n\t\t\t\tTeamLeadTick(bot);"));
 
 			var create = manager.IndexOf("void CreateAttackForce(IBot bot, bool aggForce = false)", StringComparison.Ordinal);
 			Assert.That(create, Is.GreaterThan(0));
