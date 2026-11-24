@@ -219,6 +219,16 @@ namespace OpenRA.Mods.CA.Traits
 			"SwitchCondition; row pb_building_idle_sweep.")]
 		public readonly bool BuildingIdleSweepActive = false;
 
+		[Desc("ESSENTIALS-01 (USER 11-24): below the tier MaximiseProductionCash line (BotLimits) the base builder admits only essentials: each available",
+			"building once, tech-chain prerequisites, refineries, power while short, passive-income generators, and planner/demand-driven starts (threat",
+			"defence). Extras wait for the bank to reach the line. Gated by SwitchCondition; row pb_essentials_low_cash.")]
+		public readonly bool EssentialsOnlyBelowTierLine = false;
+
+		[Desc("PROD-BUSY (USER 11-24): while the bank stays above the tier MaximiseProductionCash line the base builder adds production buildings, cycled",
+			"across the types (barracks, war factory, airfield, naval yard with water access, then again), bounded by the build limits and by the failed-",
+			"placement latch; power is added as needed. Gated by SwitchCondition; row pb_cycle_production.")]
+		public readonly bool CycleProductionAboveLine = false;
+
 		[Desc("Radius in cells around a factory scanned for rally points by the AI.")]
 		public readonly int RallyPointScanRadius = 8;
 
@@ -512,6 +522,8 @@ namespace OpenRA.Mods.CA.Traits
 		// PROD-BUSY-01: switch-gated like the arms above (the shared @generic instance serves classic too).
 		public bool AllBuildingProducersArmed => Info.ServeAllBuildingProducers && switchesActive;
 		public bool BuildingIdleSweepArmed => Info.BuildingIdleSweepActive && switchesActive;
+		public bool CycleProductionArmed => Info.CycleProductionAboveLine && switchesActive;
+		public bool EssentialsLowCashArmed => Info.EssentialsOnlyBelowTierLine && switchesActive;
 
 		// E1 observational slice (lead-accepted, observational ONLY): the switch-gated commitment
 		// ledger. Never read by any admission decision — recording and verdict logging only.

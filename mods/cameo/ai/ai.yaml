@@ -5572,6 +5572,10 @@ Player:
 		# Rows pb_all_building_producers / pb_building_idle_sweep; genericbot only (SwitchCondition above).
 		ServeAllBuildingProducers: true
 		BuildingIdleSweepActive: true
+		# ESSENTIALS-01: below the tier MaximiseProductionCash line only essentials start (row pb_essentials_low_cash); genericbot only.
+		EssentialsOnlyBelowTierLine: true
+		# PROD-BUSY cycle: above the same line, more production buildings cycled across the types (row pb_cycle_production); genericbot only.
+		CycleProductionAboveLine: true
 		# p0-integration-01 (Opus 11-23): RATIO-2X-01 switched ON for the P0 acceptance test (the 2x mobile/static ratio at a
 		# defence start; row army_first_02_ratio). Classic shares this instance but has no IBotMobileStaticValues provider
 		# (MasterAiBotModule is genericbot), so its gate is Inert and records nothing.
