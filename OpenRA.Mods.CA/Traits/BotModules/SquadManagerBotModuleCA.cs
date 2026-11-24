@@ -3485,6 +3485,11 @@ namespace OpenRA.Mods.CA.Traits
 				: World.Map.CellContaining(m13CandidateTarget.CenterPosition);
 			roster.RemoveAll(u => !AIUtils.PathExist(u.Actor, targetCell,
 				m13CandidateTarget, BlockedByActor.Immovable));
+
+			// BLOB-LAUNCH-01 attack gate (USER 11-24: no attack below WAVE-MIN): the liveness wave holds below BlobLaunch01CA.MinUnits.
+			if (BlobAttackGateHolds(roster.Count))
+				return false;
+
 			return M13LaunchPolicyCA.TryCommit(true, roster.Count, roster.Sum(u => (long)UnitValue(u.Actor)),
 				Info.MaxIdleUnits, legal, AttackLiveness, () =>
 				{

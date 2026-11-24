@@ -4775,6 +4775,8 @@ Player:
 		BlobLeaderOrderOnly: true
 		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
 		BlobLeaderFallbackTicks: 0
+		# BLOB-LAUNCH-01 attack gate: breaker + M13 liveness waves only at the blob minimum (row bl_attack_gate).
+		BlobAttackGate: true
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Rush: fast cheap pressure — skirmisher/anti-infantry heavy, scouts find the economy kills.
@@ -4922,6 +4924,8 @@ Player:
 		BlobLeaderOrderOnly: true
 		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
 		BlobLeaderFallbackTicks: 0
+		# BLOB-LAUNCH-01 attack gate: breaker + M13 liveness waves only at the blob minimum (row bl_attack_gate).
+		BlobAttackGate: true
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Turtle: static-defence posture — artillery and anti-air mass behind the frontline screen.
@@ -5065,6 +5069,8 @@ Player:
 		BlobLeaderOrderOnly: true
 		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
 		BlobLeaderFallbackTicks: 0
+		# BLOB-LAUNCH-01 attack gate: breaker + M13 liveness waves only at the blob minimum (row bl_attack_gate).
+		BlobAttackGate: true
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Tech: quality over quantity — frontline core with the widest air split (gunship/fighter/bomber).
@@ -5210,6 +5216,8 @@ Player:
 		BlobLeaderOrderOnly: true
 		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
 		BlobLeaderFallbackTicks: 0
+		# BLOB-LAUNCH-01 attack gate: breaker + M13 liveness waves only at the blob minimum (row bl_attack_gate).
+		BlobAttackGate: true
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Expansion: spread defence of growing territory — balanced core, extra scouts find the fields.
@@ -5355,6 +5363,8 @@ Player:
 		BlobLeaderOrderOnly: true
 		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
 		BlobLeaderFallbackTicks: 0
+		# BLOB-LAUNCH-01 attack gate: breaker + M13 liveness waves only at the blob minimum (row bl_attack_gate).
+		BlobAttackGate: true
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Steamroller: massed armour push — frontline wall, artillery second line, AA cover.
@@ -5498,6 +5508,8 @@ Player:
 		BlobLeaderOrderOnly: true
 		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
 		BlobLeaderFallbackTicks: 0
+		# BLOB-LAUNCH-01 attack gate: breaker + M13 liveness waves only at the blob minimum (row bl_attack_gate).
+		BlobAttackGate: true
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Guerrilla: map control — skirmishers and scouts hold ground, gunships punish exposed targets.

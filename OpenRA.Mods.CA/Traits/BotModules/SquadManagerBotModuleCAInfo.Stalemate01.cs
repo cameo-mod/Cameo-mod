@@ -38,6 +38,10 @@ namespace OpenRA.Mods.CA.Traits
 			"outside an open team order; it attacks only by publishing the order and joining it. Off = the leader may launch its own wave.")]
 		public readonly bool BlobLeaderOrderOnly = false;
 
+		[Desc("BLOB-LAUNCH-01 attack gate (USER 11-24, row bl_attack_gate): the stalemate breaker wave and the M13 liveness wave launch only",
+			"at BlobLaunch01CA.MinUnits (WAVE-MIN units, at least half the own idle pool). Defence, ally help, harass and team orders are not here.")]
+		public readonly bool BlobAttackGate = false;
+
 		[Desc("BLOB-LAUNCH-01 safety fallback (Opus 11-24): after this many ticks without any team order, with the team pool at the blob",
 			"minimum (BlobLaunch01CA.MinUnits), the leader may launch its own wave; its squad then issues the team order. 0 = never.")]
 		public readonly int BlobLeaderFallbackTicks = 3000;

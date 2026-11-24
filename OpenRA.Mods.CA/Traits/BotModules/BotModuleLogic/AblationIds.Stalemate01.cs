@@ -19,5 +19,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		// BLOB-LAUNCH-01 (USER 11-24): bl_leader_order_only off = the team leader may form its own wave outside a team order, as before.
 		public const string BlobLeaderOrderOnly = "bl_leader_order_only";
+
+		// bl_attack_gate off = the breaker and M13 liveness waves launch below WAVE-MIN, as before.
+		public const string BlobAttackGate = "bl_attack_gate";
 	}
 }

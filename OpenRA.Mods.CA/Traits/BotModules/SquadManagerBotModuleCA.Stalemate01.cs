@@ -40,6 +40,14 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>BLOB-LAUNCH-01: the leader attacks only through an open team order (row bl_leader_order_only).</summary>
 		internal bool BlobLeaderOrderOnlyActive => Info.BlobLeaderOrderOnly && !ablateBlobLeaderOrderOnly.Off(Player, AblationIds.BlobLeaderOrderOnly);
 
+		AblationLatch ablateBlobAttackGate;
+
+		/// <summary>BLOB-LAUNCH-01 attack gate (row bl_attack_gate): the per-bot attack launches outside CreateAttackForce (stalemate breaker
+		/// wave, M13 liveness wave) hold below BlobLaunch01CA.MinUnits(WAVE-MIN units, own idle pool).</summary>
+		bool BlobAttackGateHolds(int waveUnits) =>
+			Info.BlobAttackGate && !ablateBlobAttackGate.Off(Player, AblationIds.BlobAttackGate)
+				&& BlobLaunch01CA.GateHolds(waveUnits, WaveMinActive ? WaveMinBars().Units : 0, unitsHangingAroundTheBase.Count);
+
 		/// <summary>BLOB-LAUNCH-01: the leader's own CreateAttackForce forms no wave (see BlobLaunch01CA.LeaderHolds; fallback included).</summary>
 		bool BlobLeaderHolds(bool teamLaunch)
 		{

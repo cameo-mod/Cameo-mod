@@ -61,6 +61,37 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void AttackGateHoldsBelowTheBlobMinimum()
+		{
+			Assert.That(BlobLaunch01CA.GateHolds(11, 12, 4), Is.True, "below WAVE-MIN");
+			Assert.That(BlobLaunch01CA.GateHolds(12, 12, 4), Is.False);
+			Assert.That(BlobLaunch01CA.GateHolds(14, 12, 40), Is.True, "below half the idle pool");
+			Assert.That(BlobLaunch01CA.GateHolds(20, 12, 40), Is.False);
+			Assert.That(BlobLaunch01CA.GateHolds(1, 0, 0), Is.False, "no WAVE-MIN and no pool: nothing to hold");
+		}
+
+		[Test]
+		public void BreakerAndLivenessWavesAreGatedUnderTheirOwnRow()
+		{
+			var yaml = Source("packaging/ai.yaml");
+			Assert.That(yaml.Split("\n\t\tBlobAttackGate: true\n").Length - 1, Is.EqualTo(6));
+			Assert.That(AblationSpec.RegistryIds(), Does.Contain("bl_attack_gate"));
+
+			var breaker = Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCA.Stalemate.cs");
+			var gate = breaker.IndexOf("if (BlobAttackGateHolds(roster.Count))", StringComparison.Ordinal);
+			Assert.That(gate, Is.GreaterThan(0));
+			Assert.That(breaker.IndexOf("StalemateLeasePlanCA.TryClaimAll(", gate, StringComparison.Ordinal), Is.GreaterThan(gate), "before any lease is claimed");
+
+			var squad = Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCA.cs");
+			var m13 = squad.IndexOf("if (BlobAttackGateHolds(roster.Count))", StringComparison.Ordinal);
+			Assert.That(m13, Is.GreaterThan(0));
+			Assert.That(squad.IndexOf("return M13LaunchPolicyCA.TryCommit(", m13, StringComparison.Ordinal), Is.GreaterThan(m13));
+
+			var logic = Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCA.Stalemate01.cs");
+			Assert.That(logic, Does.Contain("Info.BlobAttackGate && !ablateBlobAttackGate.Off(Player, AblationIds.BlobAttackGate)"));
+		}
+
+		[Test]
 		public void ArmedOnTheSixPersonalitiesWithItsOwnRowAndGateFirst()
 		{
 			var yaml = Source("packaging/ai.yaml");
