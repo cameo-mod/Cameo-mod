@@ -123,6 +123,14 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("INFANTRY-IDLE-01: the queue types the idle floor serves.")]
 		public readonly string[] IdleQueueFloorQueues = { "Infantry", "RAInfantry", "SCZergInfantry" };
 
+		[Desc("UNIT-MIX-01 (USER 11-24, V05: infantry queue busy 9%, aircraft 5%, mostly tanks): the army keeps a minimum VALUE share per category (the squad manager personality sets",
+			"UnitMixInfantryFloorPct 20 and UnitMixAircraftFloorPct 10). Once the queue exists, a category below its floor is served first on every pass and its idle queue takes the best",
+			"buildable unit; the cash, reserve, limit and aircraft-cap gates still apply and no queue waits. Gated by SwitchCondition; row um_category_floor.")]
+		public readonly bool UnitMixCategoryFloor = false;
+
+		[Desc("UNIT-MIX-01: the queue types that make an airfield (aircraft floor); the infantry floor uses IdleQueueFloorQueues.")]
+		public readonly string[] UnitMixAircraftQueues = { "Aircraft", "RAAircraft" };
+
 		[Desc("UPGRADE-QUEUE-01: queue types served by the upgrade service. Each one is served on its own: a queue with nothing buildable, or a busy one, never holds back the next.")]
 		public readonly string[] UpgradeServiceQueues = { "Promotions", "Upgrades", "Research", "Addons" };
 
@@ -525,7 +533,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		// PROD-BUSY-01: one switch and one ablation row each. With both on, every queue is served every pass, so the PR-2 depth horizon
 		// (visitGapTicks = the gap to this bot's next pass) is also the gap to that queue's next service.
-		AblationLatch ablateIdleCap, ablateIdleCapTiered, ablateIdleQueueFloor;
+		AblationLatch ablateIdleCap, ablateIdleCapTiered, ablateIdleQueueFloor, ablateUnitMix;
 
 		// PROD-FIX-01: one switch and one ablation row each.
 		AblationLatch ablateUnitReserve, ablateRotateStart, ablateSatBatch, ablateIntervalElapsed, ablateNoUnitFloor;
@@ -536,6 +544,58 @@ namespace OpenRA.Mods.CA.Traits
 		bool NoUnitFloorOn => switchesActive && Info.NoUnitFloor && !ablateNoUnitFloor.Off(player, AblationIds.ProdFixNoUnitFloor);
 		int lastIntervalTick = -1;
 		bool IdleQueueFloorOn => switchesActive && Info.IdleQueueFloor && !ablateIdleQueueFloor.Off(player, AblationIds.ProdBusyIdleQueueFloor);
+
+		// UNIT-MIX-01 (um_category_floor): the army keeps a minimum VALUE share in infantry (and aircraft once an airfield exists). The queue types of a category below its floor
+		// are served first on every pass and their idle queue takes the best buildable unit (fair-service pick below). One census per world tick.
+		bool UnitMixOn => switchesActive && Info.UnitMixCategoryFloor && !ablateUnitMix.Off(player, AblationIds.UnitMixCategoryFloor);
+		int unitMixTick = -1;
+		List<string> unitMixDeficitQueues = [];
+		readonly Dictionary<string, UnitMixCategory> unitMixCategoryByName = new(StringComparer.Ordinal);
+
+		UnitMixCategory UnitMixCategoryOf(ActorInfo info)
+		{
+			if (unitMixCategoryByName.TryGetValue(info.Name, out var category))
+				return category;
+
+			// Unarmed units (harvesters, transports), capturers and carrier slaves are not army value.
+			var counts = info.TraitInfos<ArmamentInfo>().Any(arm => arm.WeaponInfo != null) && !info.HasTraitInfo<CapturesInfo>() && !info.HasTraitInfo<CarrierSlaveInfo>();
+			category = !counts ? UnitMixCategory.None
+				: info.HasTraitInfo<AircraftInfo>() ? UnitMixCategory.Aircraft
+				: IsArmedInfantry(info) ? UnitMixCategory.Infantry
+				: info.HasTraitInfo<MobileInfo>() ? UnitMixCategory.Other
+				: UnitMixCategory.None;
+			return unitMixCategoryByName[info.Name] = category;
+		}
+
+		List<string> UnitMixDeficitQueues()
+		{
+			if (unitMixTick == world.WorldTick)
+				return unitMixDeficitQueues;
+
+			unitMixTick = world.WorldTick;
+			unitMixDeficitQueues = [];
+			var infantryQueues = Info.IdleQueueFloorQueues.Where(t => AIUtils.FindQueues(player, t).Any()).ToList();
+			var aircraftQueues = Info.UnitMixAircraftQueues.Where(t => AIUtils.FindQueues(player, t).Any()).ToList();
+			if (infantryQueues.Count == 0 && aircraftQueues.Count == 0)
+				return unitMixDeficitQueues;
+
+			var manager = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().FirstEnabledTraitOrDefault();
+			var census = new Dictionary<UnitMixCategory, long>();
+			foreach (var a in world.ActorsHavingTrait<IPositionable>())
+				if (a.Owner == player && !a.IsDead && a.IsInWorld)
+					UnitMixFloorCA.Add(census, UnitMixCategoryOf(a.Info), a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0);
+
+			// what is already in production counts too, so a queue is not pushed again for units it has on order
+			foreach (var q in world.ActorsHavingTrait<ProductionQueue>().Where(a => a.Owner == player).SelectMany(a => a.TraitsImplementing<ProductionQueue>()))
+				foreach (var item in q.AllQueued())
+					UnitMixFloorCA.Add(census, UnitMixCategoryOf(item.ActorInfo), item.ActorInfo.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0);
+
+			foreach (var category in UnitMixFloorCA.Deficits(census, infantryQueues.Count > 0, manager?.Info.UnitMixInfantryFloorPct ?? 20,
+				aircraftQueues.Count > 0, manager?.Info.UnitMixAircraftFloorPct ?? 10))
+				unitMixDeficitQueues.AddRange(category == UnitMixCategory.Infantry ? infantryQueues : aircraftQueues);
+
+			return unitMixDeficitQueues;
+		}
 		bool IdleCapOn => switchesActive && Info.ShareTestNeverIdles && !ablateIdleCap.Off(player, AblationIds.ProdBusyIdleCap);
 		bool TieredIdleCapOn => switchesActive && Info.TieredIdleCap && !ablateIdleCapTiered.Off(player, AblationIds.ProdBusyIdleCapTiered);
 
@@ -947,6 +1007,12 @@ namespace OpenRA.Mods.CA.Traits
 				// PROD-FIX-01 F-B: pb_rotate_start moves the sweep start on every pass.
 				if (RotateStartOn)
 					currentQueueIndex = ProdBusyCA.RotateStart(currentQueueIndex, Info.UnitQueues.Length);
+
+				// UNIT-MIX-01: a category below its value floor is served first this pass (same batch, same cash and unit rules); the rotation below goes on after it.
+				if (UnitMixOn)
+					foreach (var queueType in UnitMixDeficitQueues().ToList())
+						BuildUnit(bot, queueType, idleUnitCount < IdleUnitsLimit, false,
+							ProductionSaturationCA.Saturated(playerResources.Cash + playerResources.Resources, BankSaturationThreshold), batch);
 
 				for (var i = 0; i < Info.UnitQueues.Length; i++)
 				{
@@ -1376,6 +1442,15 @@ namespace OpenRA.Mods.CA.Traits
 
 					// INFANTRY-IDLE-01: an empty queue that the normal pick left idle takes the best buildable unit instead; the admission gates below still apply.
 					if (unit == null && held == 0 && IdleQueueFloorOn && Array.IndexOf(Info.IdleQueueFloorQueues, queue.Info.Type) >= 0)
+					{
+						unit = ChooseIdleFloorUnit(queue, shares, skip);
+						fromIdleFloor = unit != null;
+						if (logThis)
+							rejectLog.Floor(queue.Info.Type, fromIdleFloor);
+					}
+
+					// UNIT-MIX-01: the same floor pick for a category below its value floor (infantry or aircraft), still behind every admission gate below.
+					if (unit == null && held == 0 && UnitMixOn && UnitMixDeficitQueues().Contains(queue.Info.Type))
 					{
 						unit = ChooseIdleFloorUnit(queue, shares, skip);
 						fromIdleFloor = unit != null;

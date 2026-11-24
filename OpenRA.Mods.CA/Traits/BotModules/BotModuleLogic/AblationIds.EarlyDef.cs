@@ -20,5 +20,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		// TEAM-DEFEND-02: a ready turret is placed at its maximum weapon range from the current attackers of an own or allied base (solo and team), on the defended side.
 		public const string TeamTurretSupport = "tm_ally_turret_support";
+
+		// UNIT-MIX-01: the army keeps a minimum VALUE share in infantry (and aircraft once an airfield exists); below the floor that category's queue is served first and its idle queue takes the best buildable unit.
+		public const string UnitMixCategoryFloor = "um_category_floor";
 	}
 }
