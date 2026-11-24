@@ -82,6 +82,7 @@ namespace OpenRA.Mods.CA.Traits
 	public partial class SquadManagerBotModuleCA
 	{
 		AblationLatch ablateArty;
+		AblationLatch ablateArtyStruct;
 		AblationLatch ablateDefendAlly;
 
 		// DEFEND-ALLY-01: last seen hit points of the friendlies near the responders (rebuilt each scan, so it stays small).
@@ -96,6 +97,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>ARTY-01 is on for this bot: the Info switch and the DEV ablation row (row off = the old artillery state).</summary>
 		internal bool ArtyMicroActive => Info.ArtyMicroEnabled && !ablateArty.Off(Player, AblationIds.ArtyMicro);
+
+		/// <summary>ARTY-TARGET-01: the structure-first sub-switch, only while the micro is on (row arty_struct_first).</summary>
+		internal bool ArtyStructFirstActive => ArtyMicroActive && Info.ArtyStructFirstEnabled && !ablateArtyStruct.Off(Player, AblationIds.ArtyStructFirst);
 
 		bool DefendAllyActive => Info.DefendAllyEnabled && !ablateDefendAlly.Off(Player, AblationIds.DefendAlly);
 

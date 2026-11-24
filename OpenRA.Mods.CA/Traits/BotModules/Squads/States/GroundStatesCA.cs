@@ -2025,6 +2025,16 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				}
 
 				// 4. Nothing visible in range: the squad target (possibly a remembered building) when it is in range, else approach it.
+				// ARTY-TARGET-01: with the structure-first switch a squad target that is a unit is never attacked or approached; the unit holds at its anchor.
+				var targetIsUnit = owner.Target.Type == TargetType.Actor && owner.Target.Actor != null && !owner.Target.Actor.Info.HasTraitInfo<BuildingInfo>();
+				if (!ArtyMicroCA.SquadTargetUsable(manager.ArtyStructFirstActive, targetIsUnit))
+				{
+					if ((anchor - pos).HorizontalLengthSquared > (long)rangeMargin * rangeMargin && manager.TryConsumeMicroActions())
+						owner.Bot.QueueOrder(new Order("Move", unit, Target.FromPos(anchor), false));
+
+					continue;
+				}
+
 				if (!owner.Target.IsValidFor(unit))
 				{
 					LegacyUnitOrder(owner, u, anchor);

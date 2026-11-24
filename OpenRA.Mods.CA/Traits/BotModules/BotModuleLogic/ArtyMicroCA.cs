@@ -91,6 +91,9 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		const int ApproachRetargets = 4;
 
+		/// <summary>ARTY-TARGET-01: with the structure-first switch a squad target that is a unit is never attacked or approached (a unit is picked only as a threat, step 3).</summary>
+		public static bool SquadTargetUsable(bool structFirst, bool targetIsUnit) => !(structFirst && targetIsUnit);
+
 		/// <summary>Index of the candidate to attack from <paramref name="from"/>, or -1 when none is in range.</summary>
 		public static int PickTarget(WPos from, int rangeLen, IReadOnlyList<ArtyCandidate> candidates)
 		{
