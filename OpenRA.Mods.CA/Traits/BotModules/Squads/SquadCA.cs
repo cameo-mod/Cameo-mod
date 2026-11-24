@@ -202,6 +202,13 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		public bool IsTargetValid => IsValid && Target.IsValidFor(Units[0].Actor);
 
+		// STALEMATE-01 finish mode: the hunt cell this squad was last sent to. It only counts while Target is still that terrain cell, so
+		// any later retarget (actor, frozen actor) ends the hunt without clearing it. Not saved: a loaded squad re-picks on its next visit.
+		public CPos? HuntCell;
+
+		public bool IsHunting => HuntCell.HasValue && Target.Type == TargetType.Terrain
+			&& Target.CenterPosition == World.Map.CenterOfCell(HuntCell.Value);
+
 		public bool IsTargetVisible => Target.Actor == null || Target.Actor.CanBeViewedByPlayer(Bot.Player);
 
 		public WPos CenterPosition { get { return Units[0].Actor.CenterPosition; } }

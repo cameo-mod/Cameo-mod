@@ -4741,6 +4741,9 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-rush
+		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
+		LateEscalationEnabled: true
+		FinishModeEnabled: true
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Rush: fast cheap pressure — skirmisher/anti-infantry heavy, scouts find the economy kills.
@@ -4863,6 +4866,9 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-turtle
+		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
+		LateEscalationEnabled: true
+		FinishModeEnabled: true
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Turtle: static-defence posture — artillery and anti-air mass behind the frontline screen.
@@ -4981,6 +4987,9 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-tech
+		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
+		LateEscalationEnabled: true
+		FinishModeEnabled: true
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Tech: quality over quantity — frontline core with the widest air split (gunship/fighter/bomber).
@@ -5101,6 +5110,9 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-expansion
+		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
+		LateEscalationEnabled: true
+		FinishModeEnabled: true
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Expansion: spread defence of growing territory — balanced core, extra scouts find the fields.
@@ -5221,6 +5233,9 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-steamroller
+		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
+		LateEscalationEnabled: true
+		FinishModeEnabled: true
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Steamroller: massed armour push — frontline wall, artillery second line, AA cover.
@@ -5338,6 +5353,9 @@ Player:
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
 		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-guerrilla
+		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
+		LateEscalationEnabled: true
+		FinishModeEnabled: true
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; the unlisted roles share
 		# RoleMixUnnamedTotalPct together (BotLimits line 10 + r). Armed on every tier (UseRoleMix true).
 		# Guerrilla: map control — skirmishers and scouts hold ground, gunships punish exposed targets.

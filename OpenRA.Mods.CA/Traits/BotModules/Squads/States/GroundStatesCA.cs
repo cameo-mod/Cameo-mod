@@ -107,6 +107,19 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				}
 			}
 
+			// STALEMATE-01 finish mode (switch ON only, late game): nothing visible and nothing remembered - hunt the least recently
+			// visited unseen grid cell the leader can reach instead of holding (a seat with no known building must still be found).
+			if (owner.SquadManager.FinishModeActive)
+			{
+				var cell = owner.SquadManager.FinishHuntCell(owner.Units.First().Actor);
+				if (cell != null)
+				{
+					owner.Target = Target.FromCell(owner.World, cell.Value);
+					owner.HuntCell = cell;
+					return true;
+				}
+			}
+
 			return false;
 		}
 	}
@@ -141,7 +154,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			{
 				// A FrozenActor target is itself the point of the attack — nothing
 				// visible nearby doesn't mean nothing is there.
-				if (owner.Target.Type == TargetType.FrozenActor)
+				if (owner.Target.Type == TargetType.FrozenActor || owner.IsHunting)
 					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
 				else
 					Retreat(owner, flee: false, rearm: true, repair: true);
@@ -551,6 +564,15 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// Initialize leader. Optimize pathfinding by using a leader with specific locomotor.
 			if (owner.SquadManager.unitCannotBeOrdered(leader.Actor))
 				leader = GetPathfindLeader(owner, owner.SquadManager.Info.SuggestedGroundLeaderLocomotor);
+
+			// STALEMATE-01 finish mode: a hunt cell reached with nothing found - take the next target (visible, remembered, or the next cell).
+			if (owner.IsHunting && leader.Actor != null && Stalemate01CA.Arrived(
+				(leader.Actor.Location - owner.HuntCell.Value).LengthSquared, owner.SquadManager.Info.FinishHuntArriveCells)
+				&& !FindNewTarget(owner))
+			{
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), false);
+				return;
+			}
 
 			if (!owner.IsTargetValid || !CheckReachability(leader.Actor, owner.World.Map.CellContaining(owner.Target.CenterPosition)))
 			{

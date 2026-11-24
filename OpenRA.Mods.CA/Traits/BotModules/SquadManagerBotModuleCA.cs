@@ -3273,9 +3273,10 @@ namespace OpenRA.Mods.CA.Traits
 				// §12.14 PL-1 lead lean composed with the UT-1 TurtleRush axis scale —
 				// two independent multipliers on the same reset; each is neutral (x1.0)
 				// while its own flag is off or its provider absent.
-				minAttackForceDelayTicks = BotPersonalityLeads.Scaled(
+				// STALEMATE-01 late escalation (switch ON only): from the start tick the reset shrinks, so waves leave more often.
+				minAttackForceDelayTicks = LateDelay(BotPersonalityLeads.Scaled(
 					MinAttackDelayResetTicks(Info, utilityAxesProviders),
-					BotPersonalityLeads.Lean(leadProviders, "rush"));
+					BotPersonalityLeads.Lean(leadProviders, "rush")));
 				unitsHangingAroundTheBase.RemoveAll(u => unitCannotBeOrdered(u.Actor));
 				CreateAttackForce(bot);
 			}
@@ -3982,6 +3983,11 @@ namespace OpenRA.Mods.CA.Traits
 				maxIdleUnits = StalemateBreakerPolicyCA.SteamrollerOverflow(true, maxIdleUnits);
 			}
 			var requiredSize = ApplyForceScale(desiredAttackForceSize, forceScale);
+
+			// STALEMATE-01 late escalation (switch ON only): a lower launch bar for every personality, Turtle included. The tempo floor
+			// below and WAVE-MIN-01 still apply on top.
+			requiredValue = LateBar(requiredValue);
+			requiredSize = LateBar(requiredSize);
 			if (Info.AttackLivenessEnabled)
 				requiredSize = AttackForceEvalCA.RequiredSize(requiredSize, botLimits?.Info.TempoMinWaveUnits ?? 0);
 
