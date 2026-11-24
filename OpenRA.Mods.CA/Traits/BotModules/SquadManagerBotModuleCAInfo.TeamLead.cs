@@ -44,6 +44,12 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("A bot contributes a wave to an order only with at least this many idle units. Range 1-10.")]
 		public readonly int TeamLeadJoinMinUnits = 3;
 
+		[Desc("The leader forms the team wave with at least this many idle units of its own (the launch bars measure the whole team's pool). Range 1-10.")]
+		public readonly int TeamLeadLeaderMinUnits = 1;
+
+		[Desc("A leader that issued no order for this many ticks (counted from its election, the last order and the first attack tick) hands the post to the seat with the largest idle pool, so a leader that cannot form a wave never stalls the team. Range 1500-9000.")]
+		public readonly int TeamLeadStallTicks = 4500;
+
 		[Desc("A follower may still form and send a wave this many ticks after the push. Range 0-1200.")]
 		public readonly int TeamLeadLateJoinTicks = 600;
 

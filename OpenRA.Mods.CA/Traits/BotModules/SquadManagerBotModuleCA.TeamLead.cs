@@ -103,6 +103,17 @@ namespace OpenRA.Mods.CA.Traits
 				if (team.Election.Leader != before)
 					AIUtils.BotDebug("AI ({0}): team leader {1} -> {2} at {3}", Player.ClientIndex, before ?? "none", team.Election.Leader ?? "none", now);
 
+				// A leader that cannot form a wave (no idle units, no known target) must not stall a team of holding followers: after
+				// TeamLeadStallTicks without any order the post goes to the seat with the largest idle pool (the stall window restarts either way).
+				if (team.Election.Leader != null
+					&& TeamLeadCA.Stalled(now, System.Math.Max(System.Math.Max(team.LastOrderTick, team.Election.SinceTick), initialAttackDelay), Info.TeamLeadStallTicks))
+				{
+					team.LastOrderTick = now;
+					team.Election = TeamLeadCA.Handover(seats, team.Election, k => team.PoolUnitsOf(k, now, Info.TeamLeadPoolMaxAgeTicks), now);
+					if (team.Election.Leader != before)
+						AIUtils.BotDebug("AI ({0}): team leader stalled, handed over to {1} at {2}", Player.ClientIndex, team.Election.Leader, now);
+				}
+
 				TeamLeadMaintainOrder(team, now);
 			}
 
@@ -151,7 +162,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (teamLeadIsLeader)
 			{
 				teamLaunch = true;
-				return !TeamLeadCA.LeaderMayLaunch(unitsHangingAroundTheBase.Count, Info.TeamLeadJoinMinUnits);
+				return !TeamLeadCA.LeaderMayLaunch(unitsHangingAroundTheBase.Count, Info.TeamLeadLeaderMinUnits);
 			}
 
 			teamLaunch = true;
@@ -240,7 +251,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		TeamLeadOrder TeamLeadTryIssue(SquadCA s, int now)
 		{
-			if (teamLeadTeam == null || s.Units.Count < Info.TeamLeadJoinMinUnits)
+			// The same bar as the launch hold (TeamLeadLeaderMinUnits), so a leader that may form the team wave can always issue its order.
+			if (teamLeadTeam == null || s.Units.Count < Info.TeamLeadLeaderMinUnits)
 				return null;
 
 			var intent = AggTeamPushIntent(s, now);

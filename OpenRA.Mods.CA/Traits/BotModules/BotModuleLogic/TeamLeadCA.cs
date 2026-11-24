@@ -77,6 +77,34 @@ namespace OpenRA.Mods.CA.Traits
 			return current;
 		}
 
+		/// <summary>The leader has formed no order for <paramref name="stallTicks"/> since <paramref name="sinceTick"/> (the later of its election, the last order and the first attack tick).</summary>
+		public static bool Stalled(int now, int sinceTick, int stallTicks) => now - sinceTick >= Math.Max(1, stallTicks);
+
+		/// <summary>
+		/// A stalled leader hands the post to the living seat with the largest idle pool - but only to one that holds more than the leader does, so
+		/// a handover always moves the command to the bot that can actually form a wave (ties: lower key). No better seat: the leader stays.
+		/// </summary>
+		public static Election Handover(IReadOnlyList<Seat> seats, Election current, Func<string, int> poolUnits, int now)
+		{
+			Seat? best = null;
+			var bestUnits = -1;
+			foreach (var s in seats)
+			{
+				if (!s.Alive || s.Key == current.Leader)
+					continue;
+				var units = poolUnits(s.Key);
+				if (best == null || units > bestUnits || (units == bestUnits && string.CompareOrdinal(s.Key, best.Value.Key) < 0))
+				{
+					best = s;
+					bestUnits = units;
+				}
+			}
+
+			if (best == null || bestUnits <= (current.Leader == null ? 0 : poolUnits(current.Leader)))
+				return current;
+			return new Election(best.Value.Key, now);
+		}
+
 		/// <summary>At least two living seats and a leader: below that the team has nobody to command and every bot plays as before.</summary>
 		public static bool Engaged(IReadOnlyList<Seat> seats, Election election)
 		{
@@ -223,12 +251,22 @@ namespace OpenRA.Mods.CA.Traits
 
 		readonly Dictionary<string, (int Units, long Value, int Tick)> pools = new(StringComparer.Ordinal);
 
+		/// <summary>The tick of the last order any seat of the team issued (-1 = none yet); with the election and the first attack tick it is the stall clock.</summary>
+		public int LastOrderTick = -1;
+
 		public void Publish(string key, int units, long value, int tick) => pools[key] = (units, value, tick);
+
+		/// <summary>The idle units a seat published within <paramref name="maxAgeTicks"/>; 0 when stale or never.</summary>
+		public int PoolUnitsOf(string key, int now, int maxAgeTicks) =>
+			pools.TryGetValue(key, out var p) && now - p.Tick <= maxAgeTicks ? p.Units : 0;
 
 		public (int Units, long Value) Pool(int now, int maxAgeTicks) => TeamLeadCA.TeamPool(pools.Values, now, maxAgeTicks);
 
-		public TeamLeadOrder Issue(string leaderKey, WPos rally, WPos target, uint targetActorId, int now) =>
-			Order = new TeamLeadOrder(++orderSeq, leaderKey, rally, target, targetActorId, now);
+		public TeamLeadOrder Issue(string leaderKey, WPos rally, WPos target, uint targetActorId, int now)
+		{
+			LastOrderTick = now;
+			return Order = new TeamLeadOrder(++orderSeq, leaderKey, rally, target, targetActorId, now);
+		}
 	}
 
 	/// <summary>The per-World table of team states, keyed by <see cref="TeamLeadCA.TeamKey"/>.</summary>

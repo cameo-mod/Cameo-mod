@@ -9,6 +9,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -269,6 +270,52 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(state, Does.Contain("owner.Bot.QueueOrder("));
 			Assert.That(state, Does.Contain("if (!order.Pushed)\n\t\t\t\treturn;").Or.Contain("if (!order.Pushed)\r\n\t\t\t\treturn;"), "nothing attacks before the push");
 			Assert.That(state, Does.Contain("order.Forget(owner)"));
+		}
+
+		// --- no stall: the leader's hold and its order use one bar, and a leader that cannot lead hands over (Code Monkey FIX) ---------------
+
+		[Test]
+		public void TheLeaderFormsTheTeamWaveWithOneIdleUnitOfItsOwn()
+		{
+			Assert.That(TeamLeadCA.LeaderMayLaunch(1, 1), Is.True, "the launch bars read the team pool; the leader only has to bring one unit");
+			Assert.That(TeamLeadCA.LeaderMayLaunch(0, 1), Is.False, "never an empty squad");
+			Assert.That(TeamLeadCA.LeaderMayLaunch(0, 0), Is.False, "a zero bar still needs one unit");
+		}
+
+		[Test]
+		public void AStalledLeaderHandsOverToTheLargestPoolButOnlyToOneThatHoldsMoreThanItself()
+		{
+			Assert.That(TeamLeadCA.Stalled(4500, 0, 4500), Is.True);
+			Assert.That(TeamLeadCA.Stalled(4499, 0, 4500), Is.False);
+
+			var seats = new[] { Seat("a", 900), Seat("b", 100), Seat("c", 50), Seat("d", 10, alive: false) };
+			var current = new TeamLeadCA.Election("a", 0);
+			var pools = new Dictionary<string, int> { ["a"] = 0, ["b"] = 12, ["c"] = 20, ["d"] = 99 };
+
+			Assert.That(TeamLeadCA.Handover(seats, current, k => pools[k], 4500), Is.EqualTo(new TeamLeadCA.Election("c", 4500)),
+				"the largest pool leads; a dead seat never does");
+
+			pools["c"] = 12;
+			Assert.That(TeamLeadCA.Handover(seats, current, k => pools[k], 4500).Leader, Is.EqualTo("b"), "a tie goes to the lower key");
+
+			pools["a"] = 12;
+			Assert.That(TeamLeadCA.Handover(seats, current, k => pools[k], 4500), Is.EqualTo(current), "nobody holds more than the leader: it stays");
+
+			Assert.That(TeamLeadCA.Handover(new[] { Seat("a", 1) }, current, k => 0, 4500), Is.EqualTo(current), "no other seat");
+		}
+
+		[Test]
+		public void TheLeaderHoldAndTheOrderIssueUseTheSameBarAndTheStallHandoverIsWired()
+		{
+			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
+			Assert.That(wiring, Does.Contain("TeamLeadCA.LeaderMayLaunch(unitsHangingAroundTheBase.Count, Info.TeamLeadLeaderMinUnits)"));
+			Assert.That(wiring, Does.Contain("s.Units.Count < Info.TeamLeadLeaderMinUnits"), "an order can always be issued by a leader that may launch");
+			Assert.That(wiring, Does.Contain("TeamLeadCA.Handover(seats, team.Election"));
+			Assert.That(wiring, Does.Contain("initialAttackDelay"), "the stall clock starts with the first attack tick");
+
+			var info = RepoFile(Bots + "SquadManagerBotModuleCAInfo.TeamLead.cs");
+			Assert.That(info, Does.Contain("public readonly int TeamLeadLeaderMinUnits = 1;"));
+			Assert.That(info, Does.Contain("public readonly int TeamLeadStallTicks = 4500;"));
 		}
 
 		// --- joint guerrilla / harass group (second commit) -----------------------------------------------------------------------------
