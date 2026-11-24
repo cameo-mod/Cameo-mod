@@ -1595,7 +1595,14 @@ namespace OpenRA.Mods.CA.Traits
 			if (cachedUnpaidTick != world.WorldTick)
 			{
 				cachedUnpaidTick = world.WorldTick;
-				cachedUnpaid = SpendCommitmentsCA.UnpaidQueued(world, player, UnitReserveExclOn ? Info.UpgradeServiceQueues : null);
+				// PROD-FIX-01 F-A (pb_unit_reserve_excl_upgrades): upgrade-service queue commitments leave the unit figure.
+				// UNIT-MIX-01 (X5): with the floor on, building and defence queue commitments are the base builder's own budget and leave it too.
+				var exclUpgrades = UnitReserveExclOn;
+				var exclBase = UnitMixOn && baseBuilder != null;
+				cachedUnpaid = exclUpgrades || exclBase
+					? SpendCommitmentsCA.UnpaidQueued(world, player, t => (exclUpgrades && System.Array.IndexOf(Info.UpgradeServiceQueues, t) >= 0)
+						|| (exclBase && (baseBuilder.Info.BuildingQueues.Contains(t) || baseBuilder.Info.DefenseQueues.Contains(t))))
+					: SpendCommitmentsCA.UnpaidQueued(world, player);
 			}
 
 			return cachedUnpaid;

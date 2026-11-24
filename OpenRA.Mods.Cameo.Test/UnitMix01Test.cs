@@ -113,5 +113,19 @@ namespace OpenRA.Mods.Cameo.Test
 			foreach (var o in player.Where(n => n.Key.StartsWith("UnitBuilderBotModuleCA", StringComparison.Ordinal) && n.Key != "UnitBuilderBotModuleCA@generic"))
 				Assert.That(o.Value.Nodes.Any(n => n.Key == "UnitMixCategoryFloor"), Is.False, o.Key);
 		}
+
+		[Test]
+		public void TheUnitCashTestIgnoresBuildingAndDefenceQueueCommitmentsOnlyWithTheFloorOn()
+		{
+			// X5: a 4-deep tank queue plus a building in flight made available < 0 and refused every infantry item.
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			Assert.That(u, Does.Contain("var exclBase = UnitMixOn && baseBuilder != null;")); // V07 merge with PROD-FIX-01 F-A (Workhorse): both exclusions in one predicate
+			Assert.That(u, Does.Contain("baseBuilder.Info.BuildingQueues.Contains(t) || baseBuilder.Info.DefenseQueues.Contains(t)"));
+			Assert.That(u, Does.Contain(": SpendCommitmentsCA.UnpaidQueued(world, player);"), "the legacy figure stays when the floor is off");
+
+			var s = Source("mods/CA/Traits/BotModules/BotModuleLogic/SpendCommitmentsCA.cs");
+			Assert.That(s, Does.Contain("public static long UnpaidQueued(World world, Player player) => UnpaidQueued(world, player, null);"));
+			Assert.That(s, Does.Contain("if (exclude != null && exclude(pair.Trait.Info.Type))"));
+		}
 	}
 }

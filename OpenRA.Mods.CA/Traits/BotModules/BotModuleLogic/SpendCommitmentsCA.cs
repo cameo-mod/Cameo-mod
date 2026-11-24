@@ -24,8 +24,8 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>Cash the player's already queued items (every queue: units, buildings, defences) have not paid yet.</summary>
 		public static long UnpaidQueued(World world, Player player) => UnpaidQueued(world, player, null);
 
-		/// <summary>PROD-FIX-01 F-A: as above, leaving out the queues whose type is in <paramref name="excludedTypes"/> (null = none).</summary>
-		public static long UnpaidQueued(World world, Player player, string[] excludedTypes)
+		/// <summary>PROD-FIX-01 F-A / UNIT-MIX-01 (X5): as above, but queues whose type <paramref name="exclude"/> accepts are not counted (null = none).</summary>
+		public static long UnpaidQueued(World world, Player player, Func<string, bool> exclude)
 		{
 			long unpaid = 0;
 			foreach (var pair in world.ActorsWithTrait<ProductionQueue>())
@@ -33,7 +33,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (pair.Actor.Owner != player || pair.Actor.IsDead || !pair.Trait.Enabled)
 					continue;
 
-				if (excludedTypes != null && System.Array.IndexOf(excludedTypes, pair.Trait.Info.Type) >= 0)
+				if (exclude != null && exclude(pair.Trait.Info.Type))
 					continue;
 
 				foreach (var item in pair.Trait.AllQueued())
