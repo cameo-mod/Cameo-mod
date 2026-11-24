@@ -167,7 +167,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(q, Does.Contain("|| (FloorExemptOn && itemEssential);"));
 			Assert.That(q.IndexOf("var itemEssential = IsArmyFirstEssential(item);", StringComparison.Ordinal),
 				Is.LessThan(q.IndexOf("|| (FloorExemptOn && itemEssential);", StringComparison.Ordinal)), "itemEssential is known before exempt");
-			Assert.That(q, Does.Contain("&& (!DefenceFirstCopyOn || DefenceThreatSeen()));"));
+			Assert.That(q, Does.Contain("&& (!DefenceFirstCopyOn || DefenceThreatSeen())"));
 
 			var af = Source("mods/Cameo/Traits/BotModules/ArmyFirstBotModule.cs");
 			Assert.That(af, Does.Contain("if (isFirstCopy && isDefence && info.DefenceFirstCopyCounts && !ablateDefenceFirstCopy.Off(player, AblationIds.Af2DefenceFirstCopy))\n\t\t\t\t\tisFirstCopy = false;"));

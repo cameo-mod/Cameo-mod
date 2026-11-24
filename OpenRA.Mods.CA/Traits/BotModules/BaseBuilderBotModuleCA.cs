@@ -276,6 +276,17 @@ namespace OpenRA.Mods.CA.Traits
 			"SwitchCondition; row af2_defence_first_copy (shared with the ArmyFirstBotModule cap).")]
 		public readonly bool DefenceFirstCopyCounts = false;
 
+		[Desc("EARLY-DEF-01 (USER 11-24): right after the first production building the bot builds a small anti-rush set of ground defences (AntiRushBaseMin at the lowest tier,",
+			"AntiRushBaseMax at the highest). The set is an essential at low cash and exempt from the defence-need gate, the seen-threat rule and the defence cash floor; the AF2 cap",
+			"and RATIO-2X still count it. Gated by SwitchCondition; row bb_antirush_base.")]
+		public readonly bool AntiRushBase = false;
+
+		[Desc("EARLY-DEF-01: the anti-rush set size at the lowest tier.")]
+		public readonly int AntiRushBaseMin = 2;
+
+		[Desc("EARLY-DEF-01: the anti-rush set size at the highest tier.")]
+		public readonly int AntiRushBaseMax = 3;
+
 		[Desc("C-07 / BASE-09 (AUDIT_CONFIG_01): army-first essential buildings (yards, refineries, power, tech chain, first copies, upgrade producers) ride at their own",
 			"cost like a planner want: the building cash floor (BuildingProductionMinCash) does not hold them. Gated by SwitchCondition; row pb_floor_essentials_exempt.")]
 		public readonly bool FloorEssentialsExempt = false;
@@ -741,6 +752,7 @@ namespace OpenRA.Mods.CA.Traits
 		public bool DefenceNeedArmed => Info.DefenceNeedGate && switchesActive;
 		public bool PowerMarginCapArmed => Info.PowerMarginCapEnabled && switchesActive;
 		public bool DefenceFirstCopyArmed => Info.DefenceFirstCopyCounts && switchesActive;
+		public bool AntiRushBaseArmed => Info.AntiRushBase && switchesActive;
 		public bool FloorEssentialsExemptArmed => Info.FloorEssentialsExempt && switchesActive;
 		public bool ReadyWatchdogArmed => Info.ReadyWatchdogAll && switchesActive;
 		public bool NoSpaceBanArmed => Info.NoSpaceBan && switchesActive;

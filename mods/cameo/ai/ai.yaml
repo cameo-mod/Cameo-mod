@@ -5912,6 +5912,10 @@ Player:
 		DefenceFirstCopyCounts: true
 		# pb_floor_essentials_exempt: army-first essential buildings ride at their own cost, the building cash floor does not hold them.
 		FloorEssentialsExempt: true
+		# EARLY-DEF-01 (USER 11-24): bb_antirush_base: 2-3 ground defences (by tier) right after the first production building; an essential at low cash, exempt from the defence-need gate; genericbot only.
+		AntiRushBase: true
+		AntiRushBaseMin: 2
+		AntiRushBaseMax: 3
 		# BASE-FIX-02 (AUDIT_BASE_01): ready_watchdog_all (75 ticks), pb_nospace_ban (3000 ticks), pb_refinery_safety_all_claims; genericbot only.
 		ReadyWatchdogAll: true
 		NoSpaceBan: true

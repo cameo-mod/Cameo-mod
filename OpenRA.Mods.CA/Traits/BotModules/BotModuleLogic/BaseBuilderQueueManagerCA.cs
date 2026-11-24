@@ -145,6 +145,8 @@ namespace OpenRA.Mods.CA.Traits
 		bool SustainedKeepsOn => baseBuilder.SustainedKeepsEssentialsArmed && !ablateSustainedKeeps.Off(player, AblationIds.SustainedKeepsEssentials);
 		bool PrefilterOn => baseBuilder.PrefilterArmed && !ablatePrefilter.Off(player, AblationIds.PrefilterPicks);
 		bool DefenceNeedOn => baseBuilder.DefenceNeedArmed && !ablateDefenceNeed.Off(player, AblationIds.Af2DefenceNeedGate);
+		AblationLatch ablateAntiRush; // EARLY-DEF-01
+		bool AntiRushOn => baseBuilder.AntiRushBaseArmed && !ablateAntiRush.Off(player, AblationIds.AntiRushBase);
 		bool PowerCapOn => baseBuilder.PowerMarginCapArmed && !ablatePowerCap.Off(player, AblationIds.PowerMarginCap);
 		bool UnlistedOnceOn => baseBuilder.UnlistedOnceArmed && !ablateUnlistedOnce.Off(player, AblationIds.Af2UnlistedOnce);
 		AblationLatch ablateRefineryEconomyGate;
@@ -1032,9 +1034,11 @@ namespace OpenRA.Mods.CA.Traits
 				var cashNow = ProdBusyCA.SweepBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep);
 				var isRefinery = baseBuilder.Info.RefineryTypes.Contains(item.Name);
 				var itemEssential = IsArmyFirstEssential(item);
+				var antiRushPick = antiRushPickName != null && item.Name == antiRushPickName; // EARLY-DEF-01
 				// C-07 / BASE-09: an army-first essential rides at its own cost, the building cash floor does not hold it.
 				var exempt = plannerWant || demandPick.Demand != null || (sustainedPickName != null && item.Name == sustainedPickName)
 					|| (openingPickName != null && item.Name == openingPickName)
+					|| antiRushPick
 					|| (FloorExemptOn && itemEssential);
 				var cost = queue.GetProductionCost(item);
 
@@ -1045,7 +1049,7 @@ namespace OpenRA.Mods.CA.Traits
 					: RecoverySpendPolicyCA.Admission.General;
 				var queuedBlocks = ProdBusyCA.QueuedThisSweepBlocks(AllProducersOn, itemQueuedThisTick);
 				var nonCashVeto = pauseBuilding.Any(p => p.PausesBuilding(item, itemEssential, buildingClass, cost))
-					|| BaseBuilderQueueEvalCA.MobileSpendBlocks(cashNow, cost, reserveFloor, itemEssential);
+					|| BaseBuilderQueueEvalCA.MobileSpendBlocks(cashNow, cost, reserveFloor, itemEssential || antiRushPick);
 				cashClock.Observe(queue.Actor.ActorID, item.Name,
 					BaseBuilderQueueEvalCA.StarvationEligible(
 						BaseBuilderQueueEvalCA.FloorBlocks(cashNow, minCashRequirement, isRefinery, exempt, cost),
@@ -1078,7 +1082,7 @@ namespace OpenRA.Mods.CA.Traits
 					// TF-2: the reservation — optional spend (optional defences, crawl links) may
 					// not push cash below the reserved mobile share; essentials keep the old floor.
 					if (BaseBuilderQueueEvalCA.MobileSpendBlocks(playerResources.GetCashAndResources(),
-							queue.GetProductionCost(item), reserveFloor, essential))
+							queue.GetProductionCost(item), reserveFloor, essential || antiRushPick))
 					{
 						pendingDemandPick = default;
 						return false;
@@ -2178,6 +2182,55 @@ namespace OpenRA.Mods.CA.Traits
 			return n;
 		}
 
+		// EARLY-DEF-01 (bb_antirush_base): the anti-rush defence picked in this ChooseBuildingToBuild call (null otherwise). TickQueue treats it as an essential: it rides at its
+		// own cost (no defence cash floor, no low-cash hold, no mobile-spend reserve); the AF2 cap and the RATIO first-copy rule still apply to it.
+		string antiRushPickName;
+
+		// The base set: right after the first production building, 2-3 ground defences (by tier) whatever the threat picture, one type at a time, the least-owned type first.
+		// Only a defence the bank can pay now is picked, so a merged queue never stalls on saving for it. Null = the ladder goes on.
+		ActorInfo ChooseAntiRushBase(ProductionQueue queue, IEnumerable<ActorInfo> buildableThings, ActorInfo power, int availableCash)
+		{
+			if (!AntiRushOn || playerBuildings == null)
+				return null;
+
+			var b = baseBuilder.Info;
+			var have = playerBuildings.Count(a => IsGroundDefence(a.Info));
+			foreach (var kv in baseBuilder.BuildingsBeingProduced)
+				if (world.Map.Rules.Actors.TryGetValue(kv.Key, out var queued) && IsGroundDefence(queued))
+					have += kv.Value;
+
+			var size = AntiRushCA.SetSize(botLimits != null ? botLimits.Info.ArmyShareTargetPermille : -1, b.AntiRushBaseMin, b.AntiRushBaseMax);
+			if (!AntiRushCA.Wants(playerBuildings.Any(a => b.ProductionTypes.Contains(a.Info.Name)), have, size))
+				return null;
+
+			var infos = new List<ActorInfo>();
+			var candidates = new List<(string Name, int Cost, int OwnedOrQueued)>();
+			foreach (var info in buildableThings)
+			{
+				if (!IsGroundDefence(info) || NoSpaceBanned(info.Name) || queue.GetProductionCost(info) > availableCash)
+					continue;
+
+				var count = OwnedOrQueuedCount([info.Name]);
+				if (baseBuilder.TryGetBuildingLimit(info.Name, out var limit) && BaseBuilderQueueEvalCA.LimitReached(count, limit))
+					continue;
+
+				infos.Add(info);
+				candidates.Add((info.Name, ValuedCost(info), count));
+			}
+
+			var index = AntiRushCA.Pick(candidates);
+			if (index < 0)
+				return null;
+
+			var pick = infos[index];
+			var item = BaseBuilderQueueEvalCA.PickOrPower(pick, power, HasSufficientPowerForActor);
+			if (item == pick)
+				antiRushPickName = pick.Name;
+
+			AIUtils.BotDebug("{0} decided to build {1}: Priority override (anti-rush base set {2}/{3})", player, item.Name, have, size);
+			return item;
+		}
+
 		// BASE-02 (opening_standard_order): the standard order's item picked in this ChooseBuildingToBuild call (null otherwise). TickQueue rides it at its own cost
 		// floor like a planner want; its low-cash hold and admission votes are checked BEFORE it is picked (OpeningAdmits), so a held step never shadows the ladder.
 		string openingPickName;
@@ -2649,7 +2702,8 @@ namespace OpenRA.Mods.CA.Traits
 			// The owned/queued count is only needed when the ratio failed (a first copy matters only below the ratio).
 			var verdict = MobileStaticRatioCA.Stage1(true, mobile, staticTotal, cost,
 				!MobileStaticRatioCA.Admits(mobile, staticTotal, cost) && baseBuilder.StaticRatio.IsFirstCopy(item.Name, OwnedOrQueued(item))
-				&& (!DefenceFirstCopyOn || DefenceThreatSeen())); // C-04: the first copy of a defence type is exempt only while a threat is seen
+				&& (!DefenceFirstCopyOn || DefenceThreatSeen())
+				|| (antiRushPickName != null && item.Name == antiRushPickName)); // C-04: the first copy of a defence type is exempt only while a threat is seen; EARLY-DEF-01: the base set is exempt (still recorded below)
 			if (verdict == RatioVerdict.NeedsFloat)
 				verdict = MobileStaticRatioCA.Float(IsFloating());
 
@@ -2780,6 +2834,7 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			sustainedPickName = null;
 			openingPickName = null;
+			antiRushPickName = null;
 			var buildableThings = queue.BuildableItems();
 			var availableCash = playerResources.GetCashAndResources();
 
@@ -2862,6 +2917,11 @@ namespace OpenRA.Mods.CA.Traits
 					}
 				}
 			}
+
+			// EARLY-DEF-01 (USER 11-24): the anti-rush base set comes right after the first production building, above the rest of the opening order.
+			var antiRush = ChooseAntiRushBase(queue, buildableThings, power, availableCash);
+			if (antiRush != null)
+				return antiRush;
 
 			// BASE-02 (AUDIT_BASE_01): power, barracks, refinery, war factory: the next missing opening step outranks the refinery pick for every faction.
 			var openingStep = ChooseOpeningStandard(queue, buildableThings, power);
