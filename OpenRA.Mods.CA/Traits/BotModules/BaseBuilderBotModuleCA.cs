@@ -209,6 +209,16 @@ namespace OpenRA.Mods.CA.Traits
 			+ "unit queue saturated with Cash+Resources at the tier's bank-saturation bar. A held defence waits and is never cancelled. Off by default; the R2X_mobile_static_ratio increment switch turns it on.")]
 		public readonly bool MobileStaticRatioEnabled = false;
 
+		[Desc("PROD-BUSY-01 (USER P0): every building/defence producer of a category may start an item in the same sweep (the old rule: one",
+			"start per category per sweep, so a second construction yard waited). Cash gates are unchanged. Gated by SwitchCondition; row",
+			"pb_all_building_producers.")]
+		public readonly bool ServeAllBuildingProducers = false;
+
+		[Desc("PROD-BUSY-01 (USER P0): a sweep that started nothing re-checks after StructureProductionActiveDelay instead of",
+			"StructureProductionInactiveDelay, so a queue idles at most the short delay once cash or a prerequisite arrives. Gated by",
+			"SwitchCondition; row pb_building_idle_sweep.")]
+		public readonly bool BuildingIdleSweepActive = false;
+
 		[Desc("Radius in cells around a factory scanned for rally points by the AI.")]
 		public readonly int RallyPointScanRadius = 8;
 
@@ -498,6 +508,10 @@ namespace OpenRA.Mods.CA.Traits
 		// BZ_production_scaling: same switch-gate as ExpansionPrebuildEnabled — the shared @generic
 		// instance serves classic too, so the arm is inert there (bit-identical A/B reference).
 		public bool ProductionScalingEnabled => Info.UseProductionScaling && switchesActive;
+
+		// PROD-BUSY-01: switch-gated like the arms above (the shared @generic instance serves classic too).
+		public bool AllBuildingProducersArmed => Info.ServeAllBuildingProducers && switchesActive;
+		public bool BuildingIdleSweepArmed => Info.BuildingIdleSweepActive && switchesActive;
 
 		// E1 observational slice (lead-accepted, observational ONLY): the switch-gated commitment
 		// ledger. Never read by any admission decision — recording and verdict logging only.

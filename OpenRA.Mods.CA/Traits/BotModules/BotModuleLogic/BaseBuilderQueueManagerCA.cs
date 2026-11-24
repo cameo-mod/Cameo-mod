@@ -108,6 +108,11 @@ namespace OpenRA.Mods.CA.Traits
 		IBotMobileStaticValues staticValues;
 		bool staticValuesResolved; // a missing provider is cached too: classic runs the rule inert without a lookup per call
 		AblationLatch ablateRatio;
+
+		// PROD-BUSY-01 rows (DEV provider only; release = on).
+		AblationLatch ablateAllProducers, ablateIdleSweep;
+		bool AllProducersOn => baseBuilder.AllBuildingProducersArmed && !ablateAllProducers.Off(player, AblationIds.ProdBusyAllBuildingProducers);
+		bool IdleSweepOn => baseBuilder.BuildingIdleSweepArmed && !ablateIdleSweep.Off(player, AblationIds.ProdBusyBuildingIdleSweep);
 		int staticLiveTick = -1;
 		long staticLiveValue;
 
@@ -884,7 +889,7 @@ namespace OpenRA.Mods.CA.Traits
 			// Minimum should not be negative as delays in HackyAI could be zero.
 			var randomFactor = BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(0, baseBuilder.Info.StructureProductionRandomBonusDelay);
 
-			var waitTicks = active ? baseBuilder.Info.StructureProductionActiveDelay + randomFactor
+			var waitTicks = ProdBusyCA.ShortSweepDelay(active, IdleSweepOn) ? baseBuilder.Info.StructureProductionActiveDelay + randomFactor
 				: baseBuilder.Info.StructureProductionInactiveDelay + randomFactor;
 
 			// Build-order knobs (12.25): tempo shortens (above 1000) or lengthens the general build interval.
@@ -983,15 +988,16 @@ namespace OpenRA.Mods.CA.Traits
 				var buildingClass = itemEssential ? RecoverySpendPolicyCA.Admission.OpeningOrEssential
 					: isRefinery || exempt ? RecoverySpendPolicyCA.Admission.EssentialBuilding
 					: RecoverySpendPolicyCA.Admission.General;
+				var queuedBlocks = ProdBusyCA.QueuedThisSweepBlocks(AllProducersOn, itemQueuedThisTick);
 				var nonCashVeto = pauseBuilding.Any(p => p.PausesBuilding(item, itemEssential, buildingClass, cost))
 					|| BaseBuilderQueueEvalCA.MobileSpendBlocks(cashNow, cost, reserveFloor, itemEssential);
 				cashClock.Observe(queue.Actor.ActorID, item.Name,
 					BaseBuilderQueueEvalCA.StarvationEligible(
 						BaseBuilderQueueEvalCA.FloorBlocks(cashNow, minCashRequirement, isRefinery, exempt, cost),
-						cashNow >= cost, itemQueuedThisTick, nonCashVeto),
+						cashNow >= cost, queuedBlocks, nonCashVeto),
 					world.WorldTick);
 				var starved = cashClock.Starved(queue.Actor.ActorID, item.Name, world.WorldTick, baseBuilder.Info.BuildingCashStarvationTicks);
-				if (BaseBuilderQueueEvalCA.BlockedByCash(cashNow, minCashRequirement, isRefinery, exempt, cost, itemQueuedThisTick, starved))
+				if (BaseBuilderQueueEvalCA.BlockedByCash(cashNow, minCashRequirement, isRefinery, exempt, cost, queuedBlocks, starved))
 					return false;
 
 				// Passed the cash gate: an admission (or a later non-cash veto below) ends the run either way.

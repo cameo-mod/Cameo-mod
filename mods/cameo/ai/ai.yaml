@@ -5538,6 +5538,10 @@ Player:
 	BaseBuilderBotModuleCA@generic:
 		RequiresCondition: genericbot || classicbot
 		SwitchCondition: genericbot
+		# PROD-BUSY-01: every building/defence producer may start in the same sweep; an idle sweep re-checks after the short delay.
+		# Rows pb_all_building_producers / pb_building_idle_sweep; genericbot only (SwitchCondition above).
+		ServeAllBuildingProducers: true
+		BuildingIdleSweepActive: true
 		# p0-integration-01 (Opus 11-23): RATIO-2X-01 switched ON for the P0 acceptance test (the 2x mobile/static ratio at a
 		# defence start; row army_first_02_ratio). Classic shares this instance but has no IBotMobileStaticValues provider
 		# (MasterAiBotModule is genericbot), so its gate is Inert and records nothing.
@@ -5748,6 +5752,10 @@ Player:
 		# PROD-IDLE G1: the fair producer service replaces the legacy fill loop for genericbot (SwitchCondition above);
 		# classic keeps the legacy loop byte-identically.
 		FairProducerService: true
+		# PROD-BUSY-01 (USER P0: every queue busy while cash > reserve): every factory of every category served on every pass.
+		# Rows pb_all_factories / pb_all_categories; genericbot only (SwitchCondition above).
+		ServeAllFactories: true
+		ServeAllCategories: true
 		IdleBaseUnitsMaximum: 25
 		ProductionMinCashRequirement: 1000
 		MaximiseProductionCashRequirement: 5000

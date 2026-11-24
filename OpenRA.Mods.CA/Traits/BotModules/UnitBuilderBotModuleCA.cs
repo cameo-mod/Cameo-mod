@@ -76,6 +76,14 @@ namespace OpenRA.Mods.CA.Traits
 			"False = those queues are only visited by the ordinary unit sweep, behind the floor.")]
 		public readonly bool UpgradeService = true;
 
+		[Desc("PROD-BUSY-01 (USER P0): every idle factory of a category is served on every pass (the offer budget is the factory count), not one",
+			"(two while the bank is saturated). Gated by SwitchCondition; row pb_all_factories. False = the old width.")]
+		public readonly bool ServeAllFactories = false;
+
+		[Desc("PROD-BUSY-01 (USER P0): the unit sweep serves every category on every pass while the bank left after this pass's orders is at or",
+			"above ProductionMinCashRequirement; no MaximiseProductionCash break. Gated by SwitchCondition; row pb_all_categories.")]
+		public readonly bool ServeAllCategories = false;
+
 		[Desc("UPGRADE-QUEUE-01: queue types served by the upgrade service. Each one is served on its own: a queue with nothing buildable, or a busy one, never holds back the next.")]
 		public readonly string[] UpgradeServiceQueues = { "Promotions", "Upgrades", "Research", "Addons" };
 
@@ -455,6 +463,12 @@ namespace OpenRA.Mods.CA.Traits
 
 		// ABLATE-01 hooks (DEV-only provider; absent in release = always on): one cached answer per row.
 		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery, ablateUpgradeService;
+
+		// PROD-BUSY-01: one switch and one ablation row each. With both on, every queue is served every pass, so the PR-2 depth horizon
+		// (visitGapTicks = the gap to this bot's next pass) is also the gap to that queue's next service.
+		AblationLatch ablateAllFactories, ablateAllCategories;
+		bool AllFactoriesOn => switchesActive && Info.ServeAllFactories && !ablateAllFactories.Off(player, AblationIds.ProdBusyAllFactories);
+		bool AllCategoriesOn => switchesActive && Info.ServeAllCategories && !ablateAllCategories.Off(player, AblationIds.ProdBusyAllCategories);
 
 		bool UpgradeServiceOn => switchesActive && Info.UpgradeService && !ablateUpgradeService.Off(player, AblationIds.UpgradeService);
 
@@ -836,8 +850,10 @@ namespace OpenRA.Mods.CA.Traits
 						// if AI gets enough cash, it can fill all of its queues with enough ticks
 						BuildUnit(bot, Info.UnitQueues[currentQueueIndex], idleUnitCount < Info.IdleBaseUnitsMaximum, false, saturated, batch);
 
-						if (ProductionSaturationCA.StopCategorySweep(saturated, playerResources.Cash + playerResources.Resources,
-							BotPersonalityLeads.Scaled(MaximiseProductionCash, cashLean)))
+						var bankNow = (long)playerResources.Cash + playerResources.Resources;
+						if (ProdBusyCA.StopCategorySweep(AllCategoriesOn, saturated, bankNow,
+							BotPersonalityLeads.Scaled(MaximiseProductionCash, cashLean), batch?.BankLeft ?? bankNow,
+							BotPersonalityLeads.Scaled(Info.ProductionMinCashRequirement, cashLean)))
 							break;
 					}
 				}
@@ -978,7 +994,7 @@ namespace OpenRA.Mods.CA.Traits
 			// cap — three war factories produce in parallel instead of feeding one and idling the rest.
 			// No provider = first free queue only, byte-identical to upstream; classic mounts none.
 			productionWidth ??= player.PlayerActor.TraitsImplementing<IBotProductionWidth>().FirstEnabledTraitOrDefault();
-			var maxQueues = ProductionSaturationCA.QueuesPerCategory(saturated, productionWidth?.MaxQueuesPerCategory ?? 0);
+			var maxQueues = ProdBusyCA.QueuesPerCategory(AllFactoriesOn, saturated, productionWidth?.MaxQueuesPerCategory ?? 0);
 
 			// U1 (service-contract §3): under the switch the category is served by the fair
 			// path — rotation cursor, capability-matched slots, pre-pick admissibility and
