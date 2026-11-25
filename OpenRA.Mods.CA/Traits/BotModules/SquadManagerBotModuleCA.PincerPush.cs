@@ -163,6 +163,9 @@ namespace OpenRA.Mods.CA.Traits
 			var half = new SquadCA(squad.Bot, this, squad.Type, null);
 			half.PriorityTags = PriorityTagsFor(squad.Type);
 			half.FormedTick = World.WorldTick;
+
+			// The same wave as its parent for the liveness accounting (M13), not a new launch: no launch count, no new wave id.
+			half.M13WaveId = squad.M13WaveId;
 			foreach (var u in leaving)
 			{
 				squad.Units.Remove(u);

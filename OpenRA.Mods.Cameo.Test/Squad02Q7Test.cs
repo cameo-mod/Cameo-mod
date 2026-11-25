@@ -321,6 +321,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(split, Does.Contain("if (!order.TakeSplit(squad, out var count, out var toProng) || count <= 0 || squad.Units.Count - count < 1)"), "taken once; the squad keeps at least a unit");
 			Assert.That(split, Does.Contain("squad.Units.OrderByDescending(u => u.Actor.ActorID).Take(count).ToList();"), "a total order, no choice");
 			Assert.That(split, Does.Contain("var half = new SquadCA(squad.Bot, this, squad.Type, null);"), "the same bot, the same kind of squad, no launch counted");
+			Assert.That(split, Does.Contain("half.M13WaveId = squad.M13WaveId;"), "the divided squad stays in its parent's liveness wave (CM FIX)");
 			Assert.That(split, Does.Contain("order.AssignProng(half, toProng, SquadValueOf(half));"));
 			Assert.That(split, Does.Contain("half.FuzzyStateMachine.ChangeState(half, new TeamLeadGatherStateCA(order), false);"));
 			Assert.That(split, Does.Not.Contain("RegisterNewSquad"), "a divided squad is not a new wave launch");
