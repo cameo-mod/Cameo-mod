@@ -871,6 +871,9 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void QueueSample(World world, int tick)
 		{
+			// PROD-SAMPLE-LOG-01 FIX (review nit): the requested dedupe window is one queue sample, so a request that is dropped
+			// without a started or skipped callback logs again at most once per sample.
+			pendingUnitRequests.Clear();
 			lastQueueTick = tick;
 			foreach (var seat in seats.Values)
 			{
@@ -1358,6 +1361,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 
 			writer?.Dispose();
+			// No terminal row, as the players and memory writers write none. Close hands over complete rows only and the shared
+			// drain makes them durable; the file is judged by its records, not by a terminal marker (no reader uses Complete here).
 			unitWriter?.Close(world.WorldTick);
 			unitWriter = null;
 			AiLogWriteQueue.FlushSharedForGameEnd(); // PROD-SAMPLE-LOG-01 FIX: bounded drain, as the memory writer does.
