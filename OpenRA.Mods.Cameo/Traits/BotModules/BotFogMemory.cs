@@ -463,17 +463,38 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return table;
 		}
 
+		// ALLIN-TRIGGER-01 (Opus ruling 2026-11-25, no heuristic): a unit is an MCV when its Transforms.IntoActor resolves to an actor with the construction-yard (BaseBuilding)
+		// trait. Resolved once per actor type against the map rules and cached.
+		readonly Dictionary<ActorInfo, bool> mcvTypes = new();
+
+		bool IsMcvType(ActorInfo actorInfo)
+		{
+			if (mcvTypes.TryGetValue(actorInfo, out var known))
+				return known;
+
+			var transforms = actorInfo.TraitInfoOrDefault<TransformsInfo>();
+			var mcv = transforms?.IntoActor != null && !actorInfo.HasTraitInfo<BuildingInfo>()
+				&& viewer.World.Map.Rules.Actors.TryGetValue(transforms.IntoActor, out var into) && into.HasTraitInfo<BaseBuildingInfo>();
+			mcvTypes[actorInfo] = mcv;
+			return mcv;
+		}
+
 		// Classify with the ActorInfo-static part served from the per-type cache (PERF-F2a). The fields that read the sighting's
 		// target types (Defence, Infantry, Vehicle, Naval) and the sighting itself (ID, location, tick) are set per call, with the
 		// same expressions Classify uses. Switch off: the plain Classify.
 		internal ObservedActor ClassifyObserved(ActorInfo actorInfo, uint actorID, CPos location, BitSet<TargetableType> targetTypes, int tick)
 		{
 			if (!info.UseFogClassifyCache || ablateClassifyCache.Off(viewer, AblationIds.FogClassifyCache))
-				return Classify(actorInfo, actorID, location, targetTypes, tick, info);
+			{
+				var plain = Classify(actorInfo, actorID, location, targetTypes, tick, info);
+				plain.Mcv = IsMcvType(actorInfo);
+				return plain;
+			}
 
 			if (!staticClasses.TryGetValue(actorInfo, out var cached))
 			{
 				var template = Classify(actorInfo, 0, default, default, 0, info);
+				template.Mcv = IsMcvType(actorInfo);
 				cached = new StaticClass { Template = template, HasAttack = actorInfo.HasTraitInfo<AttackBaseInfo>() };
 				staticClasses[actorInfo] = cached;
 			}
@@ -535,8 +556,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				Production = building && actorInfo.HasTraitInfo<ProductionInfo>(),
 				Refinery = building && actorInfo.HasTraitInfo<RefineryInfo>(),
 				Harvester = actorInfo.HasTraitInfo<HarvesterInfo>(),
-				Mcv = !building && !hasAttack && actorInfo.HasTraitInfo<MobileInfo>() && actorInfo.HasTraitInfo<TransformsInfo>()
-					&& !actorInfo.HasTraitInfo<HarvesterInfo>() && !actorInfo.HasTraitInfo<AircraftInfo>(),
 				Aircraft = actorInfo.HasTraitInfo<AircraftInfo>(),
 				ProducesAircraft = building && actorInfo.TraitInfos<ProductionInfo>()
 					.SelectMany(p => p.Produces).Any(info.AircraftQueueNames.Contains),

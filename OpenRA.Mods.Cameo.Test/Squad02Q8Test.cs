@@ -125,6 +125,11 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(late, Does.Contain("&& now >= Info.TeamLeadAllInStartTick"));
 			Assert.That(late, Does.Contain("AllInCA.LateTick(now, Info.ArmyAllInLateTick);"));
 
+			// ALLIN-TRIGGER-01 (Opus ruling): never on the tick alone. The Q4 stagnation signal must also hold, and it is read before the tick.
+			var stagnation = late.IndexOf("&& AllInCA.StalemateSignal(now, teamLeadTeam?.StalemateSignalTick ?? -1, Info.ArmyStalemateSignalTicks)", StringComparison.Ordinal);
+			Assert.That(stagnation, Is.GreaterThan(late.IndexOf("&& now >= Info.TeamLeadAllInStartTick", StringComparison.Ordinal)));
+			Assert.That(stagnation, Is.LessThan(late.IndexOf("AllInCA.LateTick(now, Info.ArmyAllInLateTick);", StringComparison.Ordinal)));
+
 			var info = RepoFile(Bots + "SquadManagerBotModuleCAInfo.Pipeline02.cs");
 			Assert.That(info, Does.Contain("public readonly int ArmyHuntCellHoldTicks = 2250;"));
 		}

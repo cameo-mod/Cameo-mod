@@ -35,7 +35,7 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("CONSOLIDATE-02 Q4 (Opus D4): a stalemate-breaker signal on the team board feeds the leader's all-in trigger for this many ticks. Range 100-6000.")]
 		public readonly int ArmyStalemateSignalTicks = 1500;
 
-		[Desc("CONSOLIDATE-02 Q8 (row sq_all_in_late; Opus ruling: the decisive gate is tick 30000): from this tick every team order is an all-in order (once, no steps). 0 = off.")]
+		[Desc("CONSOLIDATE-02 Q8 (row sq_all_in_late; Opus ruling: the decisive gate is tick 30000): from this tick every team order is an all-in order (once, no steps), but only while the Q4 stagnation signal (no-kill clock, ArmyStalemateSignalTicks) also holds: a fixed tick is only a stagnation fallback (ALLIN-TRIGGER-01, Opus ruling). 0 = off.")]
 		public readonly int ArmyAllInLateTick = 24000;
 
 		[Desc("CONSOLIDATE-02 Q8 (row sq_hunt_one_cell): the team's one hunt cell is kept this long (ticks) unless a bot of the team sees it first; then the next asker picks a new one. Range 300-9000.")]

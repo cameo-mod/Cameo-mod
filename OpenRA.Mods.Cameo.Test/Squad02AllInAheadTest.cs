@@ -431,6 +431,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(info, Does.Contain("public readonly int ArmyAllInLateTick = 24000;"));
 			var late = RepoFile(Bots + "SquadManagerBotModuleCA.AllInFold.cs");
 			Assert.That(late, Does.Contain("internal bool ArmyAllInLateOn(int now) => ArmyLaunchArbiterOn"));
+			Assert.That(late, Does.Contain("&& AllInCA.StalemateSignal(now, teamLeadTeam?.StalemateSignalTick ?? -1, Info.ArmyStalemateSignalTicks)"), "never on the tick alone (Opus ruling): the Q4 stagnation signal must hold too");
+			Assert.That(info, Does.Contain("only while the Q4 stagnation signal"));
 		}
 
 		// --- the master module's observed facts ----------------------------------------------------------------------------------------------------------------------------------
@@ -450,12 +452,18 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void AnMcvIsAMobileDeployerThatIsNoFighterHarvesterOrAircraft()
+		public void AnMcvIsAUnitThatTransformsIntoABaseBuildingActor()
 		{
 			var fog = RepoFile(CameoBots + "BotFogMemory.cs");
 			Assert.That(fog, Does.Contain("Mcv = t.Mcv,"), "the cached template copies it");
-			Assert.That(fog, Does.Contain("Mcv = !building && !hasAttack && actorInfo.HasTraitInfo<MobileInfo>() && actorInfo.HasTraitInfo<TransformsInfo>()"));
-			Assert.That(fog, Does.Contain("&& !actorInfo.HasTraitInfo<HarvesterInfo>() && !actorInfo.HasTraitInfo<AircraftInfo>(),"));
+			Assert.That(fog, Does.Not.Contain("HasTraitInfo<MobileInfo>() && actorInfo.HasTraitInfo<TransformsInfo>()"), "no heuristic");
+			var type = Between(fog, "bool IsMcvType(ActorInfo actorInfo)", "// Classify with the ActorInfo-static part");
+			Assert.That(type, Does.Contain("actorInfo.TraitInfoOrDefault<TransformsInfo>()"));
+			Assert.That(type, Does.Contain("viewer.World.Map.Rules.Actors.TryGetValue(transforms.IntoActor, out var into) && into.HasTraitInfo<BaseBuildingInfo>();"), "the target of the transform carries the yard trait");
+			Assert.That(type, Does.Contain("mcvTypes[actorInfo] = mcv;"), "resolved once per type");
+			var classify = Between(fog, "internal ObservedActor ClassifyObserved(", "internal static ObservedActor Classify(");
+			Assert.That(classify, Does.Contain("plain.Mcv = IsMcvType(actorInfo);"), "the plain path sets it");
+			Assert.That(classify, Does.Contain("template.Mcv = IsMcvType(actorInfo);"), "the cached template sets it");
 		}
 	}
 }
