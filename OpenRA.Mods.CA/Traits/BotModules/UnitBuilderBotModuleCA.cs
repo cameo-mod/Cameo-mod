@@ -599,6 +599,10 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateUnitRoll;
 		bool UnitRollOn => switchesActive && Info.UnitRoll && FairService && !ablateUnitRoll.Off(player, AblationIds.UnitRoll);
 		readonly HashSet<string> rollOrdered = new(StringComparer.Ordinal);
+
+		// UNIT-ALL-01 parameter table: the one place the roll reads its numbers from (fractions, personality bias, ramp, profile strengths, floor); a learner overrides per player through it (LEARN-MULT-01).
+		UnitRollTable rollTable;
+		public UnitRollTable RollParameters => rollTable ??= new UnitRollTable(Info.UnitsToBuild, Info.UnitRollBias, Info.UnitRollBiasLate, Info.UnitRollProfiles, Info.UnitRollFloorPct, Info.UnitRollRampTicks);
 		string rollPersonality = "";
 		bool rollFirst;
 		sealed class RollOpenFirst
@@ -606,6 +610,8 @@ namespace OpenRA.Mods.CA.Traits
 			public string Name;
 			public int Tick;
 			public ProductionItem Item; // bound the first visit after the order shows up in the queue
+			public int NamedBefore; // items of this name already queued when the order was given: the new one is the one after them (bound by the item, not by the name)
+			public ProductionQueue Queue; // for the dead-factory prune
 		}
 
 		const int RollFirstOpenMaxTicks = 3000; // a first build that stays queued this long (held by the pause votes, say) stops blocking the queue's other new types
@@ -938,9 +944,15 @@ namespace OpenRA.Mods.CA.Traits
 #if CAMEO_DEV_LOGGING
 		// UNIT-ALL-01 DEV (Opus 11-25, coverage scorer): one unit_roll.csv row per unit that completes for this bot ("completed" = it enters the world after tick 0, so the starting
 		// units are not counted): tick,seat,ub_unit_built,<type>,,<1 when the type is in UnitsToBuild else 0>. Only the enabled module instance writes. Compiled out of release.
+		readonly HashSet<uint> rollBuiltSeen = [];
+
 		void RollUnitBuilt(Actor a)
 		{
 			if (IsTraitDisabled || world.WorldTick == 0 || a.Owner != player || !a.Info.HasTraitInfo<IPositionableInfo>() || a.Info.HasTraitInfo<BuildingInfo>())
+				return;
+
+			// a unit leaving a transport enters the world a second time: only the first entry of an actor id is a completed unit
+			if (!rollBuiltSeen.Add(a.ActorID))
 				return;
 
 			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},ub_unit_built,{a.Info.Name},,{(Info.UnitsToBuild != null && Info.UnitsToBuild.ContainsKey(a.Info.Name) ? 1 : 0)}");
@@ -1709,11 +1721,12 @@ namespace OpenRA.Mods.CA.Traits
 					}
 
 					SetUnitInterval(name);
+					var namedBefore = paygo ? queue.AllQueued().Count(i => i.Item == name) : 0;
 					bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
 					NotifyStarted(name, queue.Info.Type);
 					counters.Record(unit);
 					if (paygo)
-						rollFirstOpen[queue.Actor.ActorID + "|" + queue.Info.Type] = new RollOpenFirst { Name = name, Tick = world.WorldTick };
+						rollFirstOpen[queue.Actor.ActorID + "|" + queue.Info.Type] = new RollOpenFirst { Name = name, Tick = world.WorldTick, Queue = queue, NamedBefore = namedBefore };
 
 					batch.Reserve(queue, fullCost);
 					if (depthQueue)
@@ -2522,6 +2535,11 @@ namespace OpenRA.Mods.CA.Traits
 			if (table == null || table.Count == 0)
 				return null;
 
+			// a first-build slot of a factory that died or changed hands is dropped, so the dictionary never keeps the key of a gone queue
+			if (rollFirstOpen.Count > 0)
+				foreach (var key in rollFirstOpen.Where(kv => kv.Value.Queue == null || kv.Value.Queue.Actor.IsDead || !kv.Value.Queue.Actor.IsInWorld || kv.Value.Queue.Actor.Owner != player).Select(kv => kv.Key).ToList())
+					rollFirstOpen.Remove(key);
+
 			var items = new List<ActorInfo>();
 			foreach (var a in queue.BuildableItems().OrderBy(b => b.Name, StringComparer.Ordinal))
 			{
@@ -2551,7 +2569,11 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				// open for the rest of the pass that ordered it; afterwards while THAT queued item (not a later copy of the same name) is still in the queue, for at most RollFirstOpenMaxTicks
 				if (open.Item == null && open.Tick != world.WorldTick)
-					open.Item = queue.AllQueued().FirstOrDefault(i => i.Item == open.Name);
+				{
+					var named = queue.AllQueued().Where(i => i.Item == open.Name).ToList();
+					if (named.Count > open.NamedBefore)
+						open.Item = named[named.Count - 1]; // the order appended its item last: older copies of the same name are not this slot's item
+				}
 
 				firstOpen = world.WorldTick - open.Tick <= RollFirstOpenMaxTicks && (open.Tick == world.WorldTick || (open.Item != null && queue.AllQueued().Contains(open.Item)));
 			}
@@ -2595,7 +2617,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				var name = pool[i].Name;
 				var role = roles?.PrimaryRoleOf(name);
-				var bias = UnitRoll.RoleBiasPct(Info.UnitRollBias, Info.UnitRollBiasLate, rollPersonality, role, world.WorldTick, Info.UnitRollRampTicks);
+				var bias = RollParameters.BiasPct(rollPersonality, role, world.WorldTick);
 				if (deficits != null && role != null && deficits.TryGetValue(role, out var deficit))
 					bias = UnitRoll.MulPct(bias, UnitRoll.Scaled(deficit, strength[UnitRoll.RoleDeficit]));
 
@@ -2611,12 +2633,12 @@ namespace OpenRA.Mods.CA.Traits
 				if (opening)
 					bias = UnitRoll.MulPct(bias, UnitRoll.Boost(Info.OpeningDefenseUnitTypes.Contains(name), strength[UnitRoll.Opening]));
 
-				fractions[i] = table[name];
+				fractions[i] = RollParameters.Fraction(name);
 				biases[i] = bias;
 				counterPcts[i] = scores == null ? 100 : UnitRoll.CounterPct(scores[i], best, strength[UnitRoll.Counter]);
 			}
 
-			var weights = UnitRoll.Weights(fractions, biases, counterPcts, Info.UnitRollFloorPct);
+			var weights = UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct);
 			var total = (int)Math.Min(int.MaxValue, UnitRoll.Total(weights));
 			var pick = UnitRoll.Pick(weights, BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(total));
 			RollPickLog(queue.Info.Type, pool, weights, pick, rollFirst);
@@ -2627,7 +2649,7 @@ namespace OpenRA.Mods.CA.Traits
 		readonly AblationLatch[] rollProfileLatches = new AblationLatch[UnitRoll.ProfileNames.Length];
 
 		int RollStrength(int profile) =>
-			Info.UnitRollProfiles != null && Info.UnitRollProfiles.TryGetValue(UnitRoll.ProfileNames[profile], out var s) && s > 0 &&
+			RollParameters.Strength(UnitRoll.ProfileNames[profile]) is var s && s > 0 &&
 			!rollProfileLatches[profile].Off(player, AblationIds.UnitRollProfileRows[profile]) ? s : 0;
 
 		bool RollProfileOn(int profile) => switchesActive && Info.UnitRoll && RollStrength(profile) > 0;

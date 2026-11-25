@@ -147,8 +147,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(body, Does.Contain("ShouldBuildReject(a.Name, true, queue.Info.Type) != null"), "delay, interval, limit, capturer and item-aware caps still apply");
 			Assert.That(body, Does.Not.Contain("GetUnitsToBuildForCategory"), "the derived or composition table never replaces the yaml fractions");
 			Assert.That(body, Does.Not.Contain("ChooseCounter").And.Not.Contain("ChooseWaveMixRole").And.Not.Contain("ChooseRoleDeficit"));
-			Assert.That(body, Does.Contain("fractions[i] = table[name];"));
-			Assert.That(body, Does.Contain("UnitRoll.Weights(fractions, biases, counterPcts, Info.UnitRollFloorPct)"));
+			Assert.That(body, Does.Contain("fractions[i] = RollParameters.Fraction(name);"));
+			Assert.That(body, Does.Contain("UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct)"));
 		}
 
 		// Opus ruling 1: no kept gate may block a listed type forever. The aircraft caps are waived for the FIRST build of a type (both in the candidate filter and after the pick),
@@ -264,7 +264,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
 			Assert.That(u, Does.Contain("var paygo = roll && rollFirst && UnitRoll.FirstAdmits(batch.BankLeft);\n\t\t\t\t\tvar cost = paygo ? 0 : fullCost;"), "only the first-of-each sees cost 0 at the afford and reserve gates");
 			Assert.That(u, Does.Contain("batch.Reserve(queue, fullCost);"), "the order still reserves its full price");
-			Assert.That(u, Does.Contain("rollFirstOpen[queue.Actor.ActorID + \"|\" + queue.Info.Type] = new RollOpenFirst { Name = name, Tick = world.WorldTick };"));
+			Assert.That(u, Does.Contain("rollFirstOpen[queue.Actor.ActorID + \"|\" + queue.Info.Type] = new RollOpenFirst { Name = name, Tick = world.WorldTick, Queue = queue, NamedBefore = namedBefore };"));
 
 			var start = u.IndexOf("ActorInfo ChooseRollUnit(", StringComparison.Ordinal);
 			var body = u.Substring(start, u.IndexOf("int rollDeficitTick", start, StringComparison.Ordinal) - start);
@@ -302,6 +302,101 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		// Opus 11-25 (coverage scorer): one DEV row per completed unit, so "built" is exact and not a count.
+		// Opus 11-25 (user, LEARN-MULT-01): every roll number sits in ONE table the learner can read and override per player.
+		[Test]
+		public void TheParameterTableOwnsEveryRollNumberAndALearnerCanOverrideIt()
+		{
+			var fractions = new Dictionary<string, int> { ["e1"] = 10, ["e3"] = 5 };
+			var early = new Dictionary<string, int> { ["rush.frontline"] = 70 };
+			var late = new Dictionary<string, int> { ["rush.frontline"] = 140 };
+			var strengths = new Dictionary<string, int> { ["counter"] = 200, ["wavemix"] = 0 };
+			var t = new UnitRollTable(fractions, early, late, strengths, 5, 9000);
+
+			Assert.That(t.Fraction("e1"), Is.EqualTo(10));
+			Assert.That(t.Fraction("zzz"), Is.EqualTo(0), "not listed");
+			Assert.That(t.Strength("counter"), Is.EqualTo(200));
+			Assert.That(t.Strength("opening"), Is.EqualTo(0), "absent = off");
+			Assert.That(t.FloorPct, Is.EqualTo(5));
+			Assert.That(t.RampTicks, Is.EqualTo(9000));
+			Assert.That(t.BiasPct("rush", "frontline", 0), Is.EqualTo(70));
+			Assert.That(t.BiasPct("rush", "frontline", 4500), Is.EqualTo(105));
+			Assert.That(t.BiasPct("turtle", "frontline", 0), Is.EqualTo(100));
+
+			// same answers as the pure function the table replaces
+			foreach (var tick in new[] { 0, 1000, 4500, 9000, 99999 })
+				Assert.That(t.BiasPct("rush", "frontline", tick), Is.EqualTo(UnitRoll.RoleBiasPct(early, late, "rush", "frontline", tick, 9000)), "tick " + tick);
+
+			t.Override(UnitRollTable.FractionKey("e1"), 40);
+			t.Override(UnitRollTable.StrengthKey("counter"), 50);
+			t.Override(UnitRollTable.BiasKey("rush", "frontline"), 100);
+			t.Override(UnitRollTable.BiasLateKey("rush", "frontline"), 100);
+			t.Override(UnitRollTable.FloorKey, 12);
+			t.Override(UnitRollTable.RampKey, 0);
+			Assert.That(t.Fraction("e1"), Is.EqualTo(40));
+			Assert.That(t.Fraction("e3"), Is.EqualTo(5), "the other values keep the yaml number");
+			Assert.That(t.Strength("counter"), Is.EqualTo(50));
+			Assert.That(t.FloorPct, Is.EqualTo(12));
+			Assert.That(t.BiasPct("rush", "frontline", 4500), Is.EqualTo(100));
+			Assert.That(t.Overrides, Has.Count.EqualTo(6));
+
+			t.ClearOverrides();
+			Assert.That(t.Fraction("e1"), Is.EqualTo(10), "clearing restores the yaml value");
+			Assert.That(t.BiasPct("rush", "frontline", 4500), Is.EqualTo(105));
+		}
+
+		[Test]
+		public void TheRollReadsItsNumbersOnlyThroughTheTable()
+		{
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			var start = u.IndexOf("ActorInfo ChooseRollUnit(", StringComparison.Ordinal);
+			var body = u.Substring(start, u.IndexOf("int rollDeficitTick", start, StringComparison.Ordinal) - start);
+			foreach (var yaml in new[] { "Info.UnitRollBias", "Info.UnitRollBiasLate", "Info.UnitRollRampTicks", "Info.UnitRollFloorPct", "Info.UnitRollProfiles", "table[" })
+				Assert.That(body, Does.Not.Contain(yaml), yaml + " is read through RollParameters, so a learner override applies");
+
+			Assert.That(u, Does.Contain("RollParameters.Strength(UnitRoll.ProfileNames[profile])"));
+			Assert.That(u, Does.Contain("new UnitRollTable(Info.UnitsToBuild, Info.UnitRollBias, Info.UnitRollBiasLate, Info.UnitRollProfiles, Info.UnitRollFloorPct, Info.UnitRollRampTicks)"));
+		}
+
+		// Opus/Haiku 11-25: DEV rows that show whether every available upgrade / promotion / research / add-on gets researched.
+		[Test]
+		public void TheUpgradeCoverageRowsAreDevOnlyRecordOnlyAndOncePerSeatAndType()
+		{
+			var dev = Source("mods/Cameo.Dev/AiPlayerTelemetryDev.Coverage.cs");
+			Assert.That(dev, Does.Contain("UpgradeQueues = new HashSet<string>(units.SelectMany(u => u.Info.UpgradeServiceQueues)"), "the served queues come from the seat's UnitBuilder");
+			Assert.That(dev, Does.Contain("cov.UpgradeAvailable.TryAdd(name, queue.Info.Type)"), "once per seat and type");
+			Assert.That(dev, Does.Contain("EmitUpgradeRow(seat, \"ub_upgrade_available\", name, queue.Info.Type)"));
+			Assert.That(dev, Does.Contain("cov.UpgradeDone.Add(name)"));
+			Assert.That(dev, Does.Contain("EmitUpgradeRow(seat, \"ub_upgrade_done\", name, queue)"));
+			Assert.That(dev, Does.Contain("world.ActorAdded += UpgradeDoneSafe;"));
+			Assert.That(dev, Does.Contain("Fail(e, \"ub_upgrade_done\")"), "a fault ends the channel, never the game");
+
+			// the row is written only for a type first seen available, so a plain unit or building never writes it
+			var done = dev.IndexOf("void UpgradeDoneSafe(", StringComparison.Ordinal);
+			Assert.That(dev.Substring(done, 900), Does.Contain("cov.UpgradeAvailable.TryGetValue(name, out var queue)"));
+		}
+
+		// Workhorse c5 nits.
+		[Test]
+		public void TheC5NitsAreFixed()
+		{
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+
+			// (1) a unit leaving a transport enters the world twice: only the first entry of an actor id counts as built
+			var built = u.IndexOf("void RollUnitBuilt(Actor a)", StringComparison.Ordinal);
+			Assert.That(u.Substring(built, 1100), Does.Contain("if (!rollBuiltSeen.Add(a.ActorID))"));
+
+			// (2) the slot of a dead or ownerless factory is dropped
+			var start = u.IndexOf("ActorInfo ChooseRollUnit(", StringComparison.Ordinal);
+			var body = u.Substring(start, u.IndexOf("int rollDeficitTick", start, StringComparison.Ordinal) - start);
+			Assert.That(body, Does.Contain("kv.Value.Queue.Actor.IsDead || !kv.Value.Queue.Actor.IsInWorld || kv.Value.Queue.Actor.Owner != player"));
+
+			// (3) the slot binds to the item the order appended, not to the first item of the same name
+			Assert.That(body, Does.Contain("if (named.Count > open.NamedBefore)"));
+			Assert.That(body, Does.Contain("open.Item = named[named.Count - 1];"));
+			Assert.That(body, Does.Not.Contain("FirstOrDefault(i => i.Item == open.Name)"));
+			Assert.That(u, Does.Contain("var namedBefore = paygo ? queue.AllQueued().Count(i => i.Item == name) : 0;"));
+		}
+
 		[Test]
 		public void EveryCompletedUnitWritesAnUbUnitBuiltRowInDevBuildsOnly()
 		{
@@ -309,7 +404,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(u, Does.Contain("#if CAMEO_DEV_LOGGING\n\t\t\tworld.ActorAdded += RollUnitBuilt;\n#endif"));
 			Assert.That(u, Does.Contain("#if CAMEO_DEV_LOGGING\n\t\t\tworld.ActorAdded -= RollUnitBuilt;\n#endif"), "unsubscribed on disposal");
 			var start = u.IndexOf("void RollUnitBuilt(Actor a)", StringComparison.Ordinal);
-			var body = u.Substring(start, 700);
+			var body = u.Substring(start, 1100);
 			Assert.That(body, Does.Contain("IsTraitDisabled"), "only the enabled module instance writes");
 			Assert.That(body, Does.Contain("world.WorldTick == 0"), "the starting units are not completions");
 			Assert.That(body, Does.Contain("a.Owner != player"));

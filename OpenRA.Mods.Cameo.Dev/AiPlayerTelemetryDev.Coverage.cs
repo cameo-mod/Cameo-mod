@@ -37,6 +37,9 @@ namespace OpenRA.Mods.Cameo.Traits
 			public HashSet<string> Buildings;
 			public HashSet<string> Units;
 			public readonly HashSet<string> Available = new(StringComparer.Ordinal);
+			public HashSet<string> UpgradeQueues; // the seat's UnitBuilder UpgradeServiceQueues (Promotions, Upgrades, Research, Addons by default)
+			public readonly Dictionary<string, string> UpgradeAvailable = new(StringComparer.Ordinal); // type -> queue it was first buildable in
+			public readonly HashSet<string> UpgradeDone = new(StringComparer.Ordinal);
 			public string LastRefineryGate;
 			public int LastRefineryGateTick = -1;
 		}
@@ -64,6 +67,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			{
 				Buildings = new HashSet<string>(buildingWeights.Keys, StringComparer.Ordinal),
 				Units = new HashSet<string>(unitWeights.Keys, StringComparer.Ordinal),
+				UpgradeQueues = new HashSet<string>(units.SelectMany(u => u.Info.UpgradeServiceQueues), StringComparer.Ordinal),
 			};
 			coverage[seat.Player] = cov;
 
@@ -97,8 +101,17 @@ namespace OpenRA.Mods.Cameo.Traits
 			writer.TryWrite(b.ToString());
 		}
 
+		bool upgradeDoneHooked;
+
 		void CoveragePoll(World world)
 		{
+			// the world dies with the match, so the handler needs no unsubscribe (the telemetry file itself is not touched for this row)
+			if (!upgradeDoneHooked)
+			{
+				upgradeDoneHooked = true;
+				world.ActorAdded += UpgradeDoneSafe;
+			}
+
 			foreach (var pair in world.ActorsWithTrait<ProductionQueue>())
 			{
 				var queue = pair.Trait;
@@ -113,9 +126,15 @@ namespace OpenRA.Mods.Cameo.Traits
 				if (cov == null)
 					continue;
 
+				var upgradeQueue = cov.UpgradeQueues.Contains(queue.Info.Type);
 				foreach (var item in queue.BuildableItems())
 				{
 					var name = item.Name;
+
+					// UPGRADE-COVERAGE: a promotion / upgrade / research / add-on of a served queue that the seat could research (once per seat and type)
+					if (upgradeQueue && cov.UpgradeAvailable.TryAdd(name, queue.Info.Type))
+						EmitUpgradeRow(seat, "ub_upgrade_available", name, queue.Info.Type);
+
 					var building = cov.Buildings.Contains(name);
 					if (!building && !cov.Units.Contains(name))
 						continue;
@@ -129,6 +148,41 @@ namespace OpenRA.Mods.Cameo.Traits
 					b.Append('}');
 					writer.TryWrite(b.ToString());
 				}
+			}
+		}
+
+		void EmitUpgradeRow(SeatTelemetry seat, string kind, string actor, string queue)
+		{
+			var b = BeginEvent(seat, kind, 1, out _);
+			AiMatchLogWriter.AppendString(b, "actor", actor);
+			AiMatchLogWriter.AppendString(b, "queue", queue);
+			b.Append('}');
+			writer.TryWrite(b.ToString());
+		}
+
+		// A finished upgrade / research / add-on / promotion item is the actor of its own name entering the world for the owner (the ^ResearchedUpgradeTemplate items
+		// become prerequisites by name). Only a type first seen available counts, so a plain unit or building never writes this row.
+		void UpgradeDoneSafe(Actor actor)
+		{
+			if (writer == null || ended)
+				return;
+
+			try
+			{
+				if (actor.Owner == null || actor.Info == null)
+					return;
+
+				var seat = BotSeat(actor.Owner);
+				if (seat == null || !coverage.TryGetValue(seat.Player, out var cov))
+					return;
+
+				var name = actor.Info.Name;
+				if (cov.UpgradeAvailable.TryGetValue(name, out var queue) && cov.UpgradeDone.Add(name))
+					EmitUpgradeRow(seat, "ub_upgrade_done", name, queue);
+			}
+			catch (Exception e)
+			{
+				Fail(e, "ub_upgrade_done");
 			}
 		}
 
