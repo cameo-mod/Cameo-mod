@@ -15,7 +15,7 @@ namespace OpenRA.Mods.CA.Traits
 	/// NO-CANCEL-01 (BS-03 commit 10, designs _17 and _17B): the pure decisions that keep a bot from removing a building that is in production.
 	/// A removal for a choice reason becomes a hold or a finish; only a READY item with proof that no legal cell exists may still be removed
 	/// (a physical impossibility with a full refund, not a choice). Row off = every function answers the legacy way, so the six pre-existing
-	/// sites stay byte-identical; the callers pass the live state, nothing here reads the world. Each call site keeps its existing condition and
+	/// sites stay byte-identical; the callers pass the live state, nothing here reads game state. Each call site keeps its existing condition and
 	/// adds this guard with <c>&amp;&amp;</c>: the guard can only withhold a removal.
 	/// </summary>
 	public static class NoCancelGatesCA

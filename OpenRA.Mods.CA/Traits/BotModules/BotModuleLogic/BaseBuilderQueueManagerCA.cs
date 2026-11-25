@@ -1270,7 +1270,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						// NO-CANCEL-01 (bb_no_cancel, site 3, design _17 2): the building is complete and legal to place, so the limit is a choice, never an
 						// unplaceable proof (proof = false). Row on: no cancel, no hold; it falls through to the normal placement below as an ordinary item
-						// (a paid-for building is never refunded for a limit; if it then has no cell it ends at the saturation site, class (b)). Row off =
+						// (a paid-for building is never refunded for a limit; if it then has no cell it ends at the saturation site, class (b)). Opus ruling: this is intended (binding READY rule, the money is spent); a cap overshoot of at most one per item is accepted, caps stop new STARTS, not placements. Row off =
 						// the block below byte for byte.
 						var noCancelOn = NoCancelRowOn;
 						var limitMayCancel = NoCancelGatesCA.MayCancel(noCancelOn, currentBuilding.Done, false);
