@@ -101,6 +101,8 @@ namespace OpenRA.Mods.CA.Traits
 		// S7: the refinery per field (R4): the same wanted-refinery helper, whose law anchors, per-field cap with loss lock (rf_field_gate), spacing
 		// ref1 -> war factory -> ref2, interval and the first-copy yield (rf_economy_gate) stay as they are. A refinery S2 or S3 already offered and A
 		// refused is skipped by the planner's failed set (no second test).
+		// ChooseWantedRefinery may run twice in one sweep (S2 and S7): its only state is RefineryEconomyHolds' observation clocks (rise on a higher count, first-stood,
+		// yield-since), each written only on a change, so the second call in the same tick moves nothing; the old ladder advanced the same clocks on every sweep and queue.
 		IEnumerable<string> PipelineRefineryStage(ProductionQueue queue, List<ActorInfo> buildable, ActorInfo power)
 		{
 			var refinery = ChooseWantedRefinery(queue, buildable, power);
