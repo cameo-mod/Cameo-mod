@@ -47,6 +47,9 @@ namespace OpenRA.Mods.CA.Traits
 			public RefinerySiteScore Score;
 			public RefineryAnchorClaim? Claim;
 			public int FoundTick;
+
+			// REF-DEMAND-01: the site is legal only at the fallback spacing (its zone's full-spacing pass found none).
+			public bool SpacingFallback;
 		}
 
 		sealed class Episode
@@ -118,6 +121,9 @@ namespace OpenRA.Mods.CA.Traits
 		bool watchStale;
 		MersenneTwister rng;
 
+		// REF-DEMAND-01: the law of the running Pump — the spacing source of every legality check made in it.
+		IBotExpansionTargetProvider pumpLaw;
+
 		public RefinerySiteSearch(BaseBuilderBotModuleCA baseBuilder, World world, Player player, IResourceLayer resourceLayer)
 		{
 			this.baseBuilder = baseBuilder;
@@ -185,6 +191,7 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		public void Pump(IBot bot, IBotExpansionTargetProvider law)
 		{
+			pumpLaw = law;
 			var settings = law?.RefinerySiteSearch ?? default;
 			if (law == null || !settings.Enabled)
 			{
@@ -450,7 +457,17 @@ namespace OpenRA.Mods.CA.Traits
 			if (c.Claim is { } claim && anchorHeldBy.TryGetValue(claim.Anchor, out var holder) && holder != e.Key)
 				return false;
 
-			return LegalCell(e, c.Cell);
+			return LegalCell(e, c.Cell) && SpacingAdmits(c.Cell, c.SpacingFallback);
+		}
+
+		// REF-DEMAND-01 (row ref_demand): the site's friendly-spacing tier; always allowed with the spacing off (no law, classic, switch off).
+		int SpacingTier(CPos cell) =>
+			pumpLaw != null && pumpLaw.RefinerySpacingActive ? pumpLaw.RefinerySiteSpacingTier(cell) : RefineryDemand.SpacingAllowed;
+
+		bool SpacingAdmits(CPos cell, bool fallback)
+		{
+			var tier = SpacingTier(cell);
+			return tier == RefineryDemand.SpacingAllowed || (fallback && tier == RefineryDemand.SpacingFallbackOnly);
 		}
 
 		bool LegalCell(Episode e, CPos cell)
@@ -477,9 +494,9 @@ namespace OpenRA.Mods.CA.Traits
 			return cells;
 		}
 
-		void Offer(Episode e, CPos cell, RefinerySiteScore score, RefineryAnchorClaim? claim, int now)
+		void Offer(Episode e, CPos cell, RefinerySiteScore score, RefineryAnchorClaim? claim, int now, bool spacingFallback = false)
 		{
-			var c = new Candidate { Cell = cell, Score = score, Claim = claim, FoundTick = now };
+			var c = new Candidate { Cell = cell, Score = score, Claim = claim, FoundTick = now, SpacingFallback = spacingFallback };
 			if (RefinerySiteSearchLogic.InsertBest(e.Best, c, x => x.Score, x => x.Cell) < 0)
 				return;
 
@@ -620,6 +637,15 @@ namespace OpenRA.Mods.CA.Traits
 				return true;
 			}
 
+			// REF-DEMAND-01: a cell within the spacing of a friendly refinery is refused; one legal only at the fallback spacing scores after
+			// every full-spacing site of the same claim (gap + 2), so the zone retries at the fallback spacing only when the full one gives none.
+			var spacingTier = SpacingTier(cell);
+			if (spacingTier == RefineryDemand.SpacingRefused)
+			{
+				e.LastIllegal[cell] = now;
+				return true;
+			}
+
 			// The law's gap rule (QM LawRefineryPlacement): gap 0 or 1 only; an anchor with no resource cells is
 			// the plain nearest-placeable case and scores as gap 0.
 			var gap = 0;
@@ -630,7 +656,8 @@ namespace OpenRA.Mods.CA.Traits
 					return true;
 			}
 
-			Offer(e, cell, new RefinerySiteScore(0, tier, gap, d2, cell.X, cell.Y), anchor, now);
+			var relaxed = spacingTier == RefineryDemand.SpacingFallbackOnly;
+			Offer(e, cell, new RefinerySiteScore(0, tier, relaxed ? gap + 2 : gap, d2, cell.X, cell.Y), anchor, now, relaxed);
 			return true;
 		}
 
@@ -646,7 +673,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (outcome != RefineryFallbackOutcome.Site || site is not { } cell)
 				return;
 
-			if (!LegalCell(e, cell))
+			if (!LegalCell(e, cell) || SpacingTier(cell) != RefineryDemand.SpacingAllowed)
 			{
 				e.LastIllegal[cell] = now;
 				return;
@@ -676,7 +703,7 @@ namespace OpenRA.Mods.CA.Traits
 				var p = providers[rng.Next(providers.Count)];
 				var cell = new CPos(p.Center.X + rng.Next(-p.Reach, p.Reach + 1), p.Center.Y + rng.Next(-p.Reach, p.Reach + 1));
 				e.Draws += 3;
-				if (!LegalCell(e, cell))
+				if (!LegalCell(e, cell) || SpacingTier(cell) != RefineryDemand.SpacingAllowed)
 				{
 					e.LastIllegal[cell] = now;
 					continue;

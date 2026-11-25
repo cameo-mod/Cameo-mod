@@ -275,6 +275,33 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("REF-FIELD-02: radius (cells) around a locked field's anchor in which a visible enemy combat actor counts as a threat.")]
 		public readonly int RefineryLostThreatRadiusCells = 10;
 
+		[Desc("REF-DEMAND-01 (Opus ruling + user final spec 2026-11-25, row ref_demand): under FieldCoverage the law's anchors are resource ZONES (every field's",
+			"cells and spreader spots cut into zones of RefineryZoneRadius, built once) and the in-reach set is the DEMAND set — a zone within YardRadiusCells of an",
+			"own construction yard (measured from the yard), reachable by a harvester from that yard (cached connectivity, no path search), not served by an allied",
+			"refinery and holding fewer than RefineryPerZoneCap friendly refineries within RefinerySpacingCells — instead of ReachCells from the building tiles.",
+			"The REF-FIELD-02 cap is RefineryPerZoneCap per zone, and no new law refinery stands within RefinerySpacingCells of a friendly (own or allied)",
+			"refinery (RefinerySpacingFallbackCells when a zone's search finds no site). Off = the anchors and the ReachCells rule, unchanged.")]
+		public readonly bool RefDemand = false;
+
+		[Desc("REF-DEMAND-01: radius (cells) of one resource zone: the greedy cover takes every uncovered point within it of the seed.")]
+		public readonly int RefineryZoneRadius = 10;
+
+		[Desc("REF-DEMAND-01: refineries per zone (the REF-FIELD-02 cap per zone with the switch on); friendly refineries within RefinerySpacingCells count.")]
+		public readonly int RefineryPerZoneCap = 2;
+
+		[Desc("REF-DEMAND-01: no new law refinery within this many cells of a friendly (own or allied) refinery; a friendly refinery this close to a zone",
+			"anchor counts toward the zone's cap.")]
+		public readonly int RefinerySpacingCells = 10;
+
+		[Desc("REF-DEMAND-01: the spacing a zone's site search retries with when the full spacing leaves it no legal site.")]
+		public readonly int RefinerySpacingFallbackCells = 5;
+
+		[Desc("REF-DEMAND-01: a zone adds demand only while one of its points lies within this many cells of an own construction yard.")]
+		public readonly int YardRadiusCells = 15;
+
+		[Desc("REF-DEMAND-01: ticks between two refreshes of the cached yard-to-zone harvester connectivity; a changed yard set refreshes at once.")]
+		public readonly int ReachRefreshTicks = 750;
+
 		[Desc("FE-1: replans an anchor may stay wanted with no refinery gained before it is parked for ParkTicks",
 			"(a claim whose placement keeps failing must not retry forever).")]
 		public readonly int AnchorStuckReplans = 12;
@@ -1021,6 +1048,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var until = tick + Info.AnchorClaimPendingTicks;
 			anchorPendingUntil[anchor] = until;
 			anchorOfferStreaks.Remove(anchor);
+			ZonePendingRecord(anchor);
+			AnchorPendingObserved(anchor, until);
+			RefineryPlacedObserved(anchor, site);
 
 			// ECON-A-FIX (R6): a commit is ground truth — the demand's hold (if any) promoted to the
 			// pending commit; the demand releases its side when the binding unwinds anyway.
@@ -1042,6 +1072,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				anchorPendingUntil[anchors[a]] = until;
 				anchorOfferStreaks.Remove(anchors[a]);
 				anchorReservations.Clear(anchors[a]);
+				ZonePendingRecord(anchors[a]);
+				AnchorPendingObserved(anchors[a], until);
 			}
 		}
 
@@ -1161,6 +1193,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// REF-2 P1a: the widened commit is site-only — pending-cover exactly the anchors this
 			// site's serve radius reaches (CommitRefineryClaim's coverage loop), atomically. No
 			// offered anchor exists: nothing extra is pending-marked, streak-cleared or released.
+			RefineryPlacedObserved(null, site);
 			var until = world.WorldTick + Info.AnchorClaimPendingTicks;
 			var serve = Info.AnchorServeRadiusCells > 0 ? Info.AnchorServeRadiusCells : Info.ClaimRadiusCells;
 			for (var a = 0; a < anchors.Count && a < anchorCoverageVerdict.Length; a++)
@@ -1172,6 +1205,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				anchorPendingUntil[anchors[a]] = until;
 				anchorOfferStreaks.Remove(anchors[a]);
 				anchorReservations.Clear(anchors[a]);
+				ZonePendingRecord(anchors[a]);
+				AnchorPendingObserved(anchors[a], until);
 			}
 		}
 
@@ -1407,7 +1442,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			// REFSCAN sec 3.1: the one shared implementation (same chain, same order, same ∃-dock rule).
 			return BaseBuilderQueueEvalCA.RefinerySiteLegal(world, player, layer, actorInfo, bi, producer,
-				distanceToBaseIsImportant, dockOffsets, valuable, topLeft);
+					distanceToBaseIsImportant, dockOffsets, valuable, topLeft)
+				&& (!RefDemandArmed || SpacingTierAt(topLeft) == RefineryDemand.SpacingAllowed);
 		}
 
 		/// <summary>
@@ -1506,7 +1542,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			var field = anchorFieldIds[i];
 			return RefineryFieldGateCA.Blocks(true, lastRefineryCells.Count,
-				RefineryFieldGateCA.Capped(fieldGateRefineries.GetValueOrDefault(field), Info.RefineryFieldCap),
+				RefineryFieldGateCA.Capped(fieldGateRefineries.GetValueOrDefault(field), RefDemandZones ? RefineryDemand.ZoneCap(Info.RefineryPerZoneCap) : Info.RefineryFieldCap),
 				fieldGateLocked.GetValueOrDefault(field));
 		}
 
@@ -1637,13 +1673,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				i => AnchorBlockedForClaims(i, tick),
 				i => AnchorCommittedForClaims(i, tick),
 				near, out _, out _, out var tiers, out _, out _,
-				RouteRank, CoverageUnknown);
+				RouteRank, CoverageUnknown, DemandOverride);
 			if (order.Count == 0)
 				return null;
 
 			var best = order[0];
 			var fieldId = anchorFieldIds[best];
-			var center = fieldId < fields.Count ? fields[fieldId].Center : anchors[best];
+			var center = ClaimFieldCenter(fieldId, anchors[best]);
 			return new RefineryAnchorClaim(anchors[best], center, fieldId, tiers[best], fieldCellsById[fieldId]);
 		}
 
@@ -2138,6 +2174,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// claim counts as covered, its other spreaders are tier 2. <paramref name="near"/> (the yard of an MCV-requested
 		/// refinery) ranks within each tier by distance to it instead of to our buildings.
 		/// <paramref name="anchorTier"/> returns each claimable anchor's tier (0 for the rest).
+		/// REF-DEMAND-01: <paramref name="demand"/> (null = the old rule) is the zone demand verdict per anchor — it replaces both the
+		/// ReachCells test (in reach = in demand) and the served test (served = the zone's cap is full or an ally serves it).
 		/// </summary>
 		public static List<int> ClaimOrder(
 			IReadOnlyList<CPos> anchorCells, IReadOnlyList<int> anchorField, IReadOnlyList<IReadOnlyCollection<CPos>> fieldCells,
@@ -2146,7 +2184,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			Func<int, bool> blocked, Func<int, bool> committed, CPos? near,
 			out int unservedAnchorsInReach, out int unservedFieldsInReach, out int[] anchorTier,
 			out int claimableAnchorsInReach, out int unservedAnchorsBeyondReach,
-			Func<int, int, long?> routeRank = null, Func<int, bool> coverageUnknown = null)
+			Func<int, int, long?> routeRank = null, Func<int, bool> coverageUnknown = null,
+			Func<int, RefineryDemand.Verdict> demand = null)
 		{
 			unservedAnchorsInReach = 0;
 			unservedFieldsInReach = 0;
@@ -2214,9 +2253,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var served = new bool[n];
 			var unknown = new bool[n];
 			var fieldCovered = new bool[fieldCount];
+			var inDemand = demand == null ? null : new bool[n];
 			for (var a = 0; a < n; a++)
 			{
-				served[a] = assigned[a] >= 0;
+				if (inDemand != null)
+				{
+					var verdict = demand(a);
+					inDemand[a] = RefineryDemand.InReach(verdict);
+					served[a] = RefineryDemand.Covers(verdict);
+				}
+				else
+					served[a] = assigned[a] >= 0;
 				unknown[a] = coverageUnknown != null && coverageUnknown(a);
 				var field = anchorField[a];
 				reachDist[a] = CellsOf(field) is { Count: > 0 }
@@ -2225,7 +2272,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				// REPAIR-B3: an UNKNOWN anchor defers — it is neither served nor claimable nor
 				// backlog until the route oracle resolves it within budget.
-				var inReach = reachDist[a] <= reachCells;
+				var inReach = inDemand != null ? inDemand[a] : reachDist[a] <= reachCells;
 				if (!served[a] && !unknown[a] && inReach)
 					unservedAnchorsInReach++;
 				if (!served[a] && !unknown[a] && !inReach)
@@ -2236,11 +2283,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			// Tier-1 backlog metric: a field in reach with no serving and no pending refinery still waits for its first
 			// one — parked anchors count too (the backlog is honest even while it cannot be claimed right now).
+			Func<int, bool> reachable = inDemand != null ? a => inDemand[a] : a => reachDist[a] <= reachCells;
 			foreach (var kv in anchorsByField)
-				if (!fieldCovered[kv.Key] && kv.Value.Any(a => !served[a] && !unknown[a] && reachDist[a] <= reachCells))
+				if (!fieldCovered[kv.Key] && kv.Value.Any(a => !served[a] && !unknown[a] && reachable(a)))
 					unservedFieldsInReach++;
 
-			Func<int, bool> claimable = a => !served[a] && !unknown[a] && reachDist[a] <= reachCells && (blocked == null || !blocked(a));
+			Func<int, bool> claimable = a => !served[a] && !unknown[a] && reachable(a) && (blocked == null || !blocked(a));
 			for (var a = 0; a < n; a++)
 				if (claimable(a))
 					claimableAnchorsInReach++;
@@ -4030,7 +4078,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				i => AnchorBlockedForClaims(i, tick),
 				i => AnchorCommittedForClaims(i, tick),
 				near, out _, out _, out var tiers, out _, out _,
-				RouteRank, CoverageUnknown);
+				RouteRank, CoverageUnknown, DemandOverride);
 			var oi = 0;
 			while (oi < order.Count)
 			{
@@ -4051,7 +4099,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				anchorOfferStreaks[anchor] = offers;
 				var fieldId = anchorFieldIds[best];
-				var center = fieldId < fields.Count ? fields[fieldId].Center : anchor;
+				var center = ClaimFieldCenter(fieldId, anchor);
 				return new RefineryAnchorClaim(anchor, center, fieldId, tiers[best], fieldCellsById[fieldId]);
 			}
 
@@ -4062,6 +4110,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			anchorParkedUntil[anchor] = (tick + Info.RefineryClaimFailParkTicks, owner);
 			anchorOfferStreaks.Remove(anchor);
+			AnchorParkedObserved(anchor, "claim_fail", tick + Info.RefineryClaimFailParkTicks);
 #if CAMEO_DEV_LOGGING
 			var parked = $"AI ({player.ClientIndex}): REPAIR-B3 parked claim anchor {anchor} for {Info.RefineryClaimFailParkTicks} ticks ({reason}), at tick {tick}";
 			Log.Write("debug", parked);
@@ -4097,16 +4146,28 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				spreaders.Add(tp.Actor.Location);
 			}
 
-			anchors = BuildAnchors(spreaders, fields.Select(f => f.Center), Info.SpreaderFieldRadiusCells);
-			spreaderAnchorCount = spreaders.Distinct().Count();
-			anchorFieldIds = AssignAnchorFields(anchors, spreaderAnchorCount,
-				fields.Select(f => (IReadOnlyCollection<CPos>)f.Cells).ToList(),
-				fields.Select(f => f.Center).ToList(), Info.SpreaderFieldRadiusCells);
+			// REF-DEMAND-01 (row ref_demand): the zones, built once, are the anchors — each zone its own field id and cell set.
+			zonesActive = RefDemandOn && EnsureZoneModel(spreaders);
+			if (zonesActive)
+			{
+				anchors = zoneAnchors;
+				spreaderAnchorCount = 0;
+				anchorFieldIds = zoneFieldIds;
+				fieldCellsById = zoneCellsById;
+			}
+			else
+			{
+				anchors = BuildAnchors(spreaders, fields.Select(f => f.Center), Info.SpreaderFieldRadiusCells);
+				spreaderAnchorCount = spreaders.Distinct().Count();
+				anchorFieldIds = AssignAnchorFields(anchors, spreaderAnchorCount,
+					fields.Select(f => (IReadOnlyCollection<CPos>)f.Cells).ToList(),
+					fields.Select(f => f.Center).ToList(), Info.SpreaderFieldRadiusCells);
 
-			fieldCellsById = new List<IReadOnlyCollection<CPos>>();
-			var maxField = anchorFieldIds.Length == 0 ? -1 : anchorFieldIds.Max();
-			for (var f = 0; f <= maxField; f++)
-				fieldCellsById.Add(f < fields.Count ? fields[f].Cells : (IReadOnlyCollection<CPos>)Array.Empty<CPos>());
+				fieldCellsById = new List<IReadOnlyCollection<CPos>>();
+				var maxField = anchorFieldIds.Length == 0 ? -1 : anchorFieldIds.Max();
+				for (var f = 0; f <= maxField; f++)
+					fieldCellsById.Add(f < fields.Count ? fields[f].Cells : (IReadOnlyCollection<CPos>)Array.Empty<CPos>());
+			}
 
 			// R1: the flush-fields pass is gone — spec §30 forbids same-field inheritance beyond the
 			// radius, so coverage eligibility is the geometric radius alone. RefineryFlushFields stays
@@ -4645,7 +4706,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var kv in anchorPendingUntil.ToList())
 			{
 				var index = anchors.IndexOf(kv.Key);
-				if (PendingCommitCleared(tick, kv.Value, index >= 0 && lastAssigned[index] >= 0))
+				if (PendingCommitCleared(tick, kv.Value, index >= 0 && (RefDemandZones ? ZonePendingLanded(index, kv.Key) : lastAssigned[index] >= 0)))
 					anchorPendingUntil.Remove(kv.Key);
 			}
 
@@ -4668,8 +4729,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				i => AnchorCommittedForClaims(i, tick),
 				null, out unservedInReach, out unservedFieldsInReach, out _,
 				out claimableAnchorsInReach, out unservedBeyondReach,
-				RouteRank, CoverageUnknown);
+				RouteRank, CoverageUnknown, DemandOverride);
 			unclaimedAnchorsInReach = order.Count;
+			RefDemandObserved(tick);
 
 			// A refinery is wanted only while more anchors are claimable than refineries already in flight — never by
 			// comparing totals (a duplicate stacked at home must not spend a forward anchor's quota).
@@ -4690,6 +4752,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				anchorParkedUntil[anchor] = (tick + Info.ParkTicks, null);
 				anchorStuck = (null, 0, refineryCells.Count);
+				AnchorParkedObserved(anchor, "stuck", tick + Info.ParkTicks);
 #if CAMEO_DEV_LOGGING
 				var parked = $"AI ({player.ClientIndex}): REF-1 parked anchor {anchor} for {Info.ParkTicks} ticks: wanted {replans} re-plans with no refinery placed, at tick {tick}";
 				Log.Write("debug", parked);
@@ -4700,7 +4763,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			anchorClaim = anchor;
 			var claimFieldId = anchorFieldIds[order[0]];
-			anchorClaimFieldCenter = claimFieldId < fields.Count ? fields[claimFieldId].Center : anchor;
+			anchorClaimFieldCenter = ClaimFieldCenter(claimFieldId, anchor);
 		}
 
 		void Idle(string reason)
