@@ -34,12 +34,18 @@ namespace OpenRA.Mods.CA.Traits
 			if (baseBuilder.MbEssentialsArmed && EssentialsOn && line > 0 && s.Bank < line)
 				profiles.Add((ModeBias.Essentials, name => IsLowCashEssential(s, name, line)));
 
-			// techchain: a TechChainTypes type is buildable and none of the list is owned or queued yet.
-			if (baseBuilder.MbTechChainArmed && b.TechChainTypes.Count > 0 && buildable.Any(a => b.TechChainTypes.Contains(a.Name)) && OwnedOrQueuedCount(b.TechChainTypes) == 0)
-				profiles.Add((ModeBias.TechChain, name => b.TechChainTypes.Contains(name)));
+			// techchain: a NEW trigger (no source stage copies it; ruling "tech stage -> tech chain", Opus relay of the user design 11-25, and the tech chain is never
+			// blocked, designer rule 11-22): a tech step is open, i.e. a TechChainTypes type is buildable now with no copy owned or in flight (CountOf 0). The members are
+			// those open steps only, so a built step stops being weighted at once (S3's TechCenter role counts the whole list and only during the opening).
+			if (baseBuilder.MbTechChainArmed && b.TechChainTypes.Count > 0)
+			{
+				var openSteps = new HashSet<string>(buildable.Where(a => b.TechChainTypes.Contains(a.Name) && BaseBuildPlanCA.CountOf(s, a.Name) == 0).Select(a => a.Name), StringComparer.Ordinal);
+				if (openSteps.Count > 0)
+					profiles.Add((ModeBias.TechChain, openSteps.Contains));
+			}
 
-			// antirush: the S4 condition (AntiRushCA.Wants); the types are the ground defences.
-			if (baseBuilder.MbAntiRushArmed && AntiRushWantedNow())
+			// antirush: the S4 condition (the S4 set switch, then AntiRushCA.Wants); the types are the ground defences. Without S4 armed there is no anti-rush trigger.
+			if (baseBuilder.MbAntiRushArmed && AntiRushSetOn && AntiRushWantedNow())
 				profiles.Add((ModeBias.AntiRush, name => world.Map.Rules.Actors.TryGetValue(name, out var info) && IsGroundDefence(info)));
 
 			// opening: the S3 condition (OpeningActive); the types are those of the next open role of the standard order.
