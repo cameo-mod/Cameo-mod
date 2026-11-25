@@ -4645,6 +4645,8 @@ Player:
 		# REF-FIELD-02 cap per zone); no new refinery within 10 cells of a friendly (own or allied) one, 5 when a zone has no other site; an allied
 		# refinery serving a zone takes it off the demand. Target on Imminent Destruction: 5 +/- 1 refineries per bot (REF_ZONES_IMMINENT e6220637).
 		RefDemand: true
+		# ECO-TIMING-FLOOR (row eco_timing_floor, HANS_PROFILE_DESIGN_01 row 1, Opus V08G): >= 2 own refineries by tick 3700 and >= 3 by 5000 at Hard (150 ticks per rank, 500-tick lead) when zones are in reach.
+		EcoTimingFloor: true
 		RefineryZoneRadius: 10
 		RefineryPerZoneCap: 2
 		RefinerySecondPerZoneMinCells: 40

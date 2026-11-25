@@ -65,6 +65,37 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		bool RefDemandZones => RefDemandArmed;
 
+		// eco_timing_floor (HANS_PROFILE_DESIGN_01 row 1): while fewer own refineries stand than the time floor wants, every zone's cap is one higher. One value per tick.
+		AblationLatch ablateEcoFloor;
+		bool EcoFloorOn => Info.EcoTimingFloor && RefDemandArmed && !ablateEcoFloor.Off(player, AblationIds.EcoTimingFloor);
+		int ecoLiftTick = -1;
+		int ecoLift;
+
+		/// <summary>A floor tick of this owner: the Hard value moved by EcoFloorStepTicks per rank (easier later, harder earlier); an unranked owner gets the Hard value.</summary>
+		int EcoTick(int hard) => BotDifficultyLadder.Scale(hard + EcoFloorRules.HardRank * Info.EcoFloorStepTicks,
+			hard - (BotDifficultyLadder.Difficulties.Length - 1 - EcoFloorRules.HardRank) * Info.EcoFloorStepTicks, player, hard);
+
+		int EcoFloorLift()
+		{
+			if (!EcoFloorOn)
+				return 0;
+
+			var tick = world.WorldTick;
+			if (ecoLiftTick == tick)
+				return ecoLift;
+
+			ecoLiftTick = tick;
+			var own = 0;
+			FriendlyRefineryCells();
+			for (var r = 0; r < friendlyRefineryOwn.Count; r++)
+				if (friendlyRefineryOwn[r])
+					own++;
+
+			var target = EcoFloorRules.RefineryTarget(tick, EcoTick(Info.EcoFloorRefinery2Tick), EcoTick(Info.EcoFloorRefinery3Tick), Info.EcoFloorLeadTicks);
+			ecoLift = EcoFloorRules.Lifts(true, own, target) ? 1 : 0;
+			return ecoLift;
+		}
+
 		/// <summary>The demand verdict per anchor for ClaimOrder; null = the old ReachCells and served rule.</summary>
 		Func<int, RefineryDemand.Verdict> DemandOverride => RefDemandArmed ? (demandVerdictFunc ??= DemandVerdict) : null;
 
@@ -200,7 +231,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var inRadius = z >= 0 && z < zoneInRadius.Length && zoneInRadius[z];
 				var reachable = z >= 0 && z < zoneReachable.Length && zoneReachable[z];
 				demandCounts[a] = count;
-				demandVerdicts[a] = RefineryDemand.Classify(inRadius, reachable, allied, count, ZoneCapAt(z));
+				demandVerdicts[a] = RefineryDemand.Classify(inRadius, reachable, allied, count, ZoneCapAt(z) + EcoFloorLift());
 			}
 		}
 

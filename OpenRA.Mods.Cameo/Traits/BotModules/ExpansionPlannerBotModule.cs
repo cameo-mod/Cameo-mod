@@ -348,6 +348,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("REF-DEMAND-01: refineries per zone (the REF-FIELD-02 cap per zone with the switch on); friendly refineries within RefinerySpacingCells count.")]
 		public readonly int RefineryPerZoneCap = 2;
 
+		[Desc("ECO-TIMING-FLOOR (row eco_timing_floor, HANS_PROFILE_DESIGN_01 row 1, Opus V08G): at least 2 own refineries by EcoFloorRefinery2Tick and at least 3 by EcoFloorRefinery3Tick (Hard values), once fields",
+			"are in reach: while fewer own refineries stand, the per-zone refinery cap is one higher (it lifts only the cap, never the ally-served, radius or reach verdicts). Needs RefDemand. False = the zone cap as before.")]
+		public readonly bool EcoTimingFloor = false;
+
+		[Desc("eco_timing_floor: the tick (at Hard) by which two own refineries should stand.")]
+		public readonly int EcoFloorRefinery2Tick = 3700;
+
+		[Desc("eco_timing_floor: the tick (at Hard) by which three own refineries should stand.")]
+		public readonly int EcoFloorRefinery3Tick = 5000;
+
+		[Desc("eco_timing_floor: ticks before the floor tick at which the want starts (a refinery needs time to build and place).")]
+		public readonly int EcoFloorLeadTicks = 500;
+
+		[Desc("eco_timing_floor: ticks per ladder rank by which the floor ticks move (easier tiers later, harder earlier; equal steps around the Hard value). 0 = the same ticks on every tier.")]
+		public readonly int EcoFloorStepTicks = 150;
+
 		[Desc("REF-DEMAND-01: a zone with fewer resource cells than this takes 1 refinery; 0 = always RefineryPerZoneCap.")]
 		public readonly int RefinerySecondPerZoneMinCells = 40;
 
@@ -1835,7 +1851,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			var field = anchorFieldIds[i];
 			return RefineryFieldGateCA.Blocks(true, lastRefineryCells.Count,
-				RefineryFieldGateCA.Capped(fieldGateRefineries.GetValueOrDefault(field), RefDemandZones ? ZoneCapAt(field) : Info.RefineryFieldCap),
+				RefineryFieldGateCA.Capped(fieldGateRefineries.GetValueOrDefault(field), RefDemandZones ? ZoneCapAt(field) + EcoFloorLift() : Info.RefineryFieldCap),
 				fieldGateLocked.GetValueOrDefault(field));
 		}
 
