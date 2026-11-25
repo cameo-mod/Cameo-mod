@@ -1206,11 +1206,7 @@ namespace OpenRA.Mods.CA.Traits
 			var order = TeamLeadOpenOrder();
 			// A pushed squad with nothing known to attack may still join an order that is open, but it never issues a new rally from the leader (CM: no re-issue at home).
 			if (order == null && teamLeadIsLeader && !goesOn)
-			{
 				order = TeamLeadTryIssue(s, now);
-				if (order != null)
-					LaunchSourceRecord(s, "L19", "Team", s.Units.Count);
-			}
 
 			if (order != null)
 			{
@@ -1295,6 +1291,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			var order = TeamLeadIssue(from, target, targetId, now);
 			DiagnosticSquadEvent(s, "team_order", reason: "seq=" + order.Seq + " why=leader_squad pincer=" + order.HasProngs + " leader=" + teamLeadKey);
+			LaunchSourceRecord(s, "L19", "Team", s.Units.Count);
 			return order;
 		}
 

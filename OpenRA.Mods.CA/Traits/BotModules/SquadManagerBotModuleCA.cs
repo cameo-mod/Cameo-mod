@@ -4184,8 +4184,8 @@ namespace OpenRA.Mods.CA.Traits
 				// IMPL02-AGG-TEAM (A5): the reserve stays home; put back after the wave is formed.
 				var aggKeep = aggForce ? AggTeamTakeReserve() : Info.AggTeamEnabled ? AggTeamTakeDetached() : null;
 				var attackForce = RegisterNewSquad(bot, SquadCAType.Rush);
-				LaunchSourceRecord(attackForce, aggForce ? "L06" : teamFollowerLaunch ? "L07" : "L01", "Rush", unitsHangingAroundTheBase.Count);
 				WaveMixLaunched();
+				LaunchSourceRecord(attackForce, aggForce ? "L06" : teamFollowerLaunch ? "L07" : "L01", "Rush", unitsHangingAroundTheBase.Count);
 
 				// 6f: long-range units peel off into an artillery squad that trails
 				// the assault and bombards its target, instead of charging with it.
