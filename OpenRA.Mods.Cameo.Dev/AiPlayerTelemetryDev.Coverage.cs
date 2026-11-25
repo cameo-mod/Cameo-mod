@@ -44,6 +44,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			public HashSet<string> Buildings;
 			public HashSet<string> Units;
 			public readonly HashSet<string> Available = new(StringComparer.Ordinal);
+			public UpgradeCompletions[] UpgradeRegistries; // the once-done registries of the seat's UnitBuilder modules (the module decides completion; this file only reads it)
+			public HashSet<string> UpgradeQueues; // the seat's UnitBuilder UpgradeServiceQueues (Promotions, Upgrades, Research, Addons by default)
+			public readonly Dictionary<string, string> UpgradeAvailable = new(StringComparer.Ordinal); // type -> queue it was first buildable in
+			public readonly HashSet<string> UpgradeDone = new(StringComparer.Ordinal);
 			public string LastRefineryGate;
 			public int LastRefineryGateTick = -1;
 			public readonly Dictionary<string, int> LastSkipTick = new(StringComparer.Ordinal);
@@ -72,6 +76,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			{
 				Buildings = new HashSet<string>(buildingWeights.Keys, StringComparer.Ordinal),
 				Units = new HashSet<string>(unitWeights.Keys, StringComparer.Ordinal),
+				UpgradeQueues = new HashSet<string>(units.SelectMany(u => u.Info.UpgradeServiceQueues), StringComparer.Ordinal),
+				UpgradeRegistries = units.Select(u => u.UpgradeRegistry).ToArray(),
 			};
 			coverage[seat.Player] = cov;
 
@@ -121,9 +127,16 @@ namespace OpenRA.Mods.Cameo.Traits
 				if (cov == null)
 					continue;
 
+				UpgradeDoneRows(seat, cov);
+				var upgradeQueue = cov.UpgradeQueues.Contains(queue.Info.Type);
 				foreach (var item in queue.BuildableItems())
 				{
 					var name = item.Name;
+
+					// UPGRADE-COVERAGE: a promotion / upgrade / research / add-on of a served queue that the seat could research (once per seat and type)
+					if (upgradeQueue && cov.UpgradeAvailable.TryAdd(name, queue.Info.Type))
+						EmitUpgradeRow(seat, "ub_upgrade_available", name, queue.Info.Type);
+
 					var building = cov.Buildings.Contains(name);
 					if (!building && !cov.Units.Contains(name))
 						continue;
@@ -137,6 +150,31 @@ namespace OpenRA.Mods.Cameo.Traits
 					b.Append('}');
 					writer.TryWrite(b.ToString());
 				}
+			}
+		}
+
+		void EmitUpgradeRow(SeatTelemetry seat, string kind, string actor, string queue, string source = null)
+		{
+			var b = BeginEvent(seat, kind, 1, out _);
+			AiMatchLogWriter.AppendString(b, "actor", actor);
+			AiMatchLogWriter.AppendString(b, "queue", queue);
+			if (source != null)
+				AiMatchLogWriter.AppendString(b, "upg_done_source", source);
+			b.Append('}');
+			writer.TryWrite(b.ToString());
+		}
+
+		// ub_upgrade_done: once per seat and type, the first poll at which the UnitBuilder's once-done registry holds the type as completed (the module's completion rule: the item left its
+		// queue and the player holds its prerequisite, or it was already held at the first visit). A type is reported only after it was first seen available.
+		void UpgradeDoneRows(SeatTelemetry seat, CoverageSeat cov)
+		{
+			foreach (var pair in cov.UpgradeAvailable)
+			{
+				if (cov.UpgradeDone.Contains(pair.Key) || !cov.UpgradeRegistries.Any(r => r.Completed(pair.Key)))
+					continue;
+
+				cov.UpgradeDone.Add(pair.Key);
+				EmitUpgradeRow(seat, "ub_upgrade_done", pair.Key, pair.Value, cov.UpgradeRegistries.Select(r => r.Source(pair.Key)).FirstOrDefault(x => x != null));
 			}
 		}
 

@@ -17,13 +17,13 @@ namespace OpenRA.Mods.CA.Traits
 	// UPGRADE-QUEUE-01: the pure choice of the upgrade service, so it is testable without a world.
 	public static class UpgradeServiceCA
 	{
-		/// <summary>One buildable item of a queue. Weight is the faction's UnitsToBuild weight, or -1 when the table does not list it.</summary>
-		public readonly record struct Candidate(string Name, int Cost, int Weight);
+		/// <summary>One buildable item of a queue. Weight is the faction's UnitsToBuild weight, or -1 when the table does not list it. Since is the first tick the type was buildable (UpgradeCompletions.Since; 0 = unknown, all equal).</summary>
+		public readonly record struct Candidate(string Name, int Cost, int Weight, int Since = 0);
 
 		/// <summary>
-		/// Index of the item to start, or -1. Free items (cost 0, promotions) are always eligible and rank first. A paid item needs
+		/// Index of the item to start, or -1. Free items (cost 0, promotions) are always eligible. A paid item needs
 		/// no pause vote and no bank (user rule: no cash floor; OpenRA pays progressively). Items in <paramref name="excluded"/> (already in production in any queue)
-		/// are never chosen. Among the eligible: free first, then higher weight, then lower cost, then a seeded stable hash of the name (ties only), then name (ordinal). No random draw.
+		/// are never chosen. Among the eligible: the one buildable longest first (lowest Since, free or paid: fairness, nothing starves behind a heavier weight), then free, then higher weight, then lower cost, then a seeded stable hash of the name (ties only), then name (ordinal). No random draw.
 		/// </summary>
 		public static int Choose(IReadOnlyList<Candidate> items, ISet<string> excluded, bool paused, int tieSeed = 0)
 		{
@@ -50,6 +50,10 @@ namespace OpenRA.Mods.CA.Traits
 
 		static bool Better(Candidate a, Candidate b, int tieSeed)
 		{
+			// oldest-available first, free or paid; free only breaks a tie in Since
+			if (a.Since != b.Since)
+				return a.Since < b.Since;
+
 			var aFree = a.Cost <= 0;
 			var bFree = b.Cost <= 0;
 			if (aFree != bFree)

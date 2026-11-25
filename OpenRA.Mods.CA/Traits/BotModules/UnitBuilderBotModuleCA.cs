@@ -76,6 +76,22 @@ namespace OpenRA.Mods.CA.Traits
 			"False = those queues are only visited by the ordinary unit sweep, behind the floor.")]
 		public readonly bool UpgradeService = true;
 
+		[Desc("UPG-ADDONS: the BuildingAddons queue (the army_* level 2-3 upgrades) is served by the upgrade service when it is listed in UpgradeServiceQueues. False = it is skipped (row upg_building_addons).")]
+		public readonly bool UpgradeBuildingAddons = true;
+
+		[Desc("UPGRADE-COVERAGE: the once-done registry's gameplay effect (row upg_once_registry): a completed type (or a member of a completed symmetric exclusive set) is not offered again, an ordered item stays reserved",
+			"until its order settles, and the oldest-available candidate goes first. The DEV rows ub_upgrade_available / ub_upgrade_done do not depend on it. Ships OFF until it has a PASS.")]
+		public readonly bool UpgradeOnceRegistry = false;
+
+		[Desc("UPGRADE-COVERAGE: ticks an ordered upgrade item may stay unseen in its queue before the order is released (not done) and the item may be offered again.")]
+		public readonly int UpgradePendingTimeout = 300;
+
+		[Desc("ub_capturer_strict (row of the same name): the capturer cap and the armed-infantry denominator count a unit as a capturer only when one of its Captures traits can capture one of CapturerCaptureTypes",
+			"(the Capturable.Types of enemy buildings). Garrison and driver-kill captures never count. False = the old rule: any Captures trait.")]
+		public readonly bool CapturerStrict = false;
+
+		public readonly string[] CapturerCaptureTypes = { "building", "defense", "tech" };
+
 		[Desc("PROD-BUSY-01 (USER P0): every idle factory of a category is served on every pass (the offer budget is the factory count), not one",
 			"(two while the bank is saturated). Gated by SwitchCondition; row pb_all_factories. False = the old width.")]
 		public readonly bool ServeAllFactories = false;
@@ -159,6 +175,14 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("UNIT-ALL-01: game ticks over which UnitRollBias moves to UnitRollBiasLate. 0 = no ramp.")]
 		public readonly int UnitRollRampTicks = 0;
+
+		[Desc("UNIT-ALL-01 first-build boost (a weight multiplier, never a gate): a listed type this bot never built is rolled with this multiplier on top of the table weight; it doubles for every",
+			"UnitRollFirstRampTicks the type stays buildable but unbuilt, up to UnitRollFirstCap, so every available type is built at least once. All three live in the learnable parameter table.")]
+		public readonly int UnitRollFirstBoost = 8;
+
+		public readonly int UnitRollFirstRampTicks = 3000;
+
+		public readonly int UnitRollFirstCap = 64;
 
 		[Desc("UNIT-MIX-01: the queue types that make an airfield (aircraft floor); the infantry floor uses IdleQueueFloorQueues.")]
 		public readonly string[] UnitMixAircraftQueues = { "Aircraft", "RAAircraft" };
@@ -568,7 +592,7 @@ namespace OpenRA.Mods.CA.Traits
 		bool FairService => switchesActive && Info.FairProducerService && !ablateFairProducer.Off(player, AblationIds.FairProducer);
 
 		// ABLATE-01 hooks (DEV-only provider; absent in release = always on): one cached answer per row.
-		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery, ablateUpgradeService;
+		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery, ablateUpgradeService, ablateUpgradeBuildingAddons, ablateUpgradeOnce, ablateCapturerStrict;
 		AblationLatch ablateMcvRebuild, ablateRequestSlot; // MCV-REBUILD-01
 		bool McvRebuildOn => switchesActive && Info.McvRebuildFirst && !ablateMcvRebuild.Off(player, AblationIds.McvRebuildFirst);
 		int RequestDropSweeps => McvRebuildCA.DropLimit(switchesActive && Info.RequestSlotFastDrop && !ablateRequestSlot.Off(player, AblationIds.RequestSlot),
@@ -599,17 +623,16 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateUnitRoll;
 		bool UnitRollOn => switchesActive && Info.UnitRoll && FairService && !ablateUnitRoll.Off(player, AblationIds.UnitRoll);
 		readonly HashSet<string> rollOrdered = new(StringComparer.Ordinal);
+
+		// UNIT-ALL-01 parameter table: the one place the roll reads its numbers from (fractions, personality bias, ramp, profile strengths, floor); a learner overrides per player through it (LEARN-MULT-01).
+		UnitRollTable rollTable;
+		public UnitRollTable RollParameters => rollTable ??= new UnitRollTable(Info.UnitsToBuild, Info.UnitRollBias, Info.UnitRollBiasLate, Info.UnitRollProfiles, Info.UnitRollFloorPct, Info.UnitRollRampTicks,
+				Info.UnitRollFirstBoost, Info.UnitRollFirstRampTicks, Info.UnitRollFirstCap);
 		string rollPersonality = "";
 		bool rollFirst;
-		sealed class RollOpenFirst
-		{
-			public string Name;
-			public int Tick;
-			public ProductionItem Item; // bound the first visit after the order shows up in the queue
-		}
 
-		const int RollFirstOpenMaxTicks = 3000; // a first build that stays queued this long (held by the pause votes, say) stops blocking the queue's other new types
-		readonly Dictionary<string, RollOpenFirst> rollFirstOpen = new(StringComparer.Ordinal);
+		// The first tick each listed type was seen buildable in a roll (the first-build boost escalates with the time it stays unbuilt).
+		readonly Dictionary<string, int> rollAvailableSince = new(StringComparer.Ordinal);
 		bool firstItemRoundPass;
 		readonly Dictionary<string, string> firstRoundSavedCursors = new(StringComparer.Ordinal);
 		int unitMixTick = -1;
@@ -700,6 +723,50 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool UpgradeServiceOn => switchesActive && Info.UpgradeService && !ablateUpgradeService.Off(player, AblationIds.UpgradeService);
 
+		bool UpgradeOnceOn => Info.UpgradeOnceRegistry && !ablateUpgradeOnce.Off(player, AblationIds.UpgradeOnceRegistry);
+
+		// ub_capturer_strict: a capturer for the cap / the armed-infantry denominator (genericbot only through switchesActive; classic keeps the old rule)
+		bool CapturerStrictOn => switchesActive && Info.CapturerStrict && !ablateCapturerStrict.Off(player, AblationIds.CapturerStrict);
+		BitSet<CaptureType> capturerTypes;
+		bool capturerTypesSet;
+		HashSet<string> capturerClassLogged;
+
+		bool IsCapturer(ActorInfo info)
+		{
+			var old = info.HasTraitInfo<CapturesInfo>();
+			if (!old || !CapturerStrictOn)
+				return old;
+
+			if (!capturerTypesSet)
+			{
+				capturerTypes = new BitSet<CaptureType>(Info.CapturerCaptureTypes);
+				capturerTypesSet = true;
+			}
+
+			var strict = CapturerClass.IsStrict(info.TraitInfos<CapturesInfo>().Select(c => c.CaptureTypes), capturerTypes);
+			CapturerClassLog(info.Name, strict);
+			return strict;
+		}
+
+		// ub_capturer_class (DEV, once per type): tick,seat,ub_capturer_class,type,,1 when strict calls it a capturer (the old rule said yes for every type that reaches this row)
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void CapturerClassLog(string name, bool strict)
+		{
+			capturerClassLogged ??= new HashSet<string>(StringComparer.Ordinal);
+			if (capturerClassLogged.Add(name))
+				RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},ub_capturer_class,{name},,{(strict ? 1 : 0)}");
+		}
+
+		// UPG-ADDONS: the BuildingAddons queue is its own toggle (the rest of the service is unchanged by it).
+		bool UpgradeQueueServed(string category) =>
+			category != "BuildingAddons" || (Info.UpgradeBuildingAddons && !ablateUpgradeBuildingAddons.Off(player, AblationIds.UpgradeBuildingAddons));
+
+		// UPGRADE-COVERAGE: the once-done registry of this player's upgrade-like items (fed when the item completes).
+		readonly UpgradeCompletions upgradeDone = new();
+
+		/// <summary>The once-done registry (the DEV coverage rows read it).</summary>
+		public UpgradeCompletions UpgradeRegistry => upgradeDone;
+
 		// PR-2 queue depth (fair path only): world ticks between this bot's last two passes. Round-robin makes it long;
 		// a single-slot queue is topped up while its loaded build time is shorter than this gap (QueueDepthCA).
 		// 0 until two passes were seen, which keeps the old "fill only an empty queue" rule on the first pass.
@@ -779,9 +846,11 @@ namespace OpenRA.Mods.CA.Traits
 		// a weapon. Capture bodies, unarmed medics/mechanics and slaved units never count.
 		static readonly BitSet<TargetableType> InfantryTargetTypes = new("Infantry");
 
-		static bool IsArmedInfantry(ActorInfo info) =>
+		static bool IsArmedInfantry(ActorInfo info) => IsArmedInfantry(info, info.HasTraitInfo<CapturesInfo>());
+
+		static bool IsArmedInfantry(ActorInfo info, bool capturer) =>
 			info.GetAllTargetTypes().Overlaps(InfantryTargetTypes) &&
-			!info.HasTraitInfo<CapturesInfo>() &&
+			!capturer &&
 			!info.HasTraitInfo<CarrierSlaveInfo>() &&
 			info.TraitInfos<ArmamentInfo>().Any(arm => arm.WeaponInfo != null);
 
@@ -805,9 +874,10 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var actor in world.Actors.Where(actor => actor.Owner == player && !actor.IsDead && actor.IsInWorld))
 			{
 				var info = actor.Info;
-				if (info.HasTraitInfo<CapturesInfo>())
+				var capturer = IsCapturer(info);
+				if (capturer)
 					capturerUnitsCached++;
-				else if (IsArmedInfantry(info))
+				else if (IsArmedInfantry(info, capturer))
 					armedInfantryCached++;
 			}
 
@@ -844,7 +914,7 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var group in OpenRA.Mods.Common.AIUtils.FindQueuesByCategory(player))
 				foreach (var q in group)
 					foreach (var item in q.AllQueued())
-						if (world.Map.Rules.Actors.TryGetValue(item.Item, out var queued) && queued.HasTraitInfo<CapturesInfo>())
+						if (world.Map.Rules.Actors.TryGetValue(item.Item, out var queued) && IsCapturer(queued))
 							count++;
 
 			return count;
@@ -935,12 +1005,142 @@ namespace OpenRA.Mods.CA.Traits
 #endif
 		}
 
+		// UPGRADE-COVERAGE completion, decided from AUTHORITATIVE STATE at the service visits (Sol FIX of 425f1fab): every item the service orders is settled (UpgradeCompletions.Settle) against the
+		// prerequisites it REALLY grants (its ITechTreePrerequisiteInfo traits, not its name) held by the player (ITechTreePrerequisite, the tech tree's own source), so an item that finished between two
+		// visits is still found. The init scan finds what is already held (a restored game, a pre-existing completion). An item that grants no prerequisite (condition-only) has no state to read: the
+		// engine has no per-item completion seam we can hook from a bot module, so it is done by APPROXIMATION when it left the queue and is no longer offered (source=approx). Rows carry upg_done_source=grant|approx|init.
+		bool upgradeScanned;
+		int upgradeSettleTick = -1000;
+		readonly Dictionary<string, string[]> upgradeGrants = new(StringComparer.Ordinal);
+
+		HashSet<string> OwnedPrerequisites()
+		{
+			var owned = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+			foreach (var pair in world.ActorsWithTrait<ITechTreePrerequisite>())
+			{
+				if (pair.Actor.Owner != player || !pair.Actor.IsInWorld || pair.Actor.IsDead)
+					continue;
+
+				foreach (var p in pair.Trait.ProvidesPrerequisites)
+					if (p != null)
+						owned.Add(p);
+			}
+
+			return owned;
+		}
+
+		// the prerequisites the item's own traits grant (cached: rules are static)
+		IReadOnlyCollection<string> UpgradeGrantsOf(string name)
+		{
+			if (!upgradeGrants.TryGetValue(name, out var grants))
+			{
+				grants = world.Map.Rules.Actors.TryGetValue(name, out var info)
+					? info.TraitInfos<ITechTreePrerequisiteInfo>().SelectMany(t => t.Prerequisites(info)).Where(p => p != null).Distinct(StringComparer.OrdinalIgnoreCase).ToArray()
+					: [];
+				upgradeGrants[name] = grants;
+			}
+
+			return grants;
+		}
+
+		bool ServedByUpgradeService(ActorInfo a) =>
+			a.TraitInfos<BuildableInfo>().Any(bi => bi.Queue.Any(q => Array.IndexOf(Info.UpgradeServiceQueues, q) >= 0));
+
+		void UpgradeScanOnce()
+		{
+			if (upgradeScanned)
+				return;
+
+			upgradeScanned = true;
+			var owned = OwnedPrerequisites();
+			if (owned.Count == 0)
+				return;
+
+			foreach (var a in world.Map.Rules.Actors.Values)
+				if (ServedByUpgradeService(a) && UpgradeGrantsOf(a.Name).Any(owned.Contains) && upgradeDone.Complete(a.Name, UpgradeCompletions.SourceInit))
+					UpgradeDoneLog(a.Name, UpgradeCompletions.SourceInit);
+		}
+
+		void UpgradeSettle(HashSet<string> inProduction)
+		{
+			// the world scan runs only while an ordered item is unsettled, and at most every 25 ticks
+			if (!upgradeDone.AnyPending || world.WorldTick - upgradeSettleTick < 25)
+				return;
+
+			upgradeSettleTick = world.WorldTick;
+			foreach (var (name, source) in upgradeDone.Settle(world.WorldTick, inProduction, UpgradeGrantsOf, OwnedPrerequisites(), OfferedUpgradeNames, UpgradeQueueAlive, UpgradePrerequisitesHeld, Info.UpgradePendingTimeout))
+				UpgradeDoneLog(name, source);
+
+			foreach (var (name, reason) in upgradeDone.Released)
+				UpgradeReleaseLog(name, reason);
+		}
+
+		// an enabled queue of one of the item's served queue types still exists (a sold or dead producer is not a completion)
+		bool UpgradeQueueAlive(string name)
+		{
+			if (!world.Map.Rules.Actors.TryGetValue(name, out var info))
+				return false;
+
+			foreach (var bi in info.TraitInfos<BuildableInfo>())
+				foreach (var queueType in bi.Queue)
+					if (Array.IndexOf(Info.UpgradeServiceQueues, queueType) >= 0 && AIUtils.FindQueues(player, queueType).Any(q => q.Enabled))
+						return true;
+
+			return false;
+		}
+
+		// every positive prerequisite of the item is still held ("!x" terms are exclusions, "~" only hides a prerequisite): a lost prerequisite stops the offer without a completion
+		bool UpgradePrerequisitesHeld(string name, ISet<string> owned)
+		{
+			if (!world.Map.Rules.Actors.TryGetValue(name, out var info))
+				return false;
+
+			foreach (var bi in info.TraitInfos<BuildableInfo>())
+				foreach (var prerequisite in bi.Prerequisites)
+				{
+					var p = prerequisite.Replace("~", "");
+					if (p.Length > 0 && !p.StartsWith('!') && !owned.Contains(p))
+						return false;
+				}
+
+			return true;
+		}
+
+		HashSet<string> OfferedUpgradeNames()
+		{
+			var offered = new HashSet<string>(StringComparer.Ordinal);
+			foreach (var category in Info.UpgradeServiceQueues)
+				foreach (var queue in AIUtils.FindQueues(player, category))
+					foreach (var item in queue.BuildableItems())
+						offered.Add(item.Name);
+
+			return offered;
+		}
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void UpgradeStartLog(string name, string queueType, int cost) =>
+			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},upg_start,{name},{queueType},{(cost <= 0 ? "free" : "paid")};since={upgradeDone.Since(name)}");
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void UpgradeReleaseLog(string name, string reason) =>
+			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},upg_pending_release,{name},,{reason}");
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void UpgradeDoneLog(string name, string source) =>
+			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},upg_done,{name},,{upgradeDone.DoneCount};upg_done_source={source}");
+
 #if CAMEO_DEV_LOGGING
 		// UNIT-ALL-01 DEV (Opus 11-25, coverage scorer): one unit_roll.csv row per unit that completes for this bot ("completed" = it enters the world after tick 0, so the starting
 		// units are not counted): tick,seat,ub_unit_built,<type>,,<1 when the type is in UnitsToBuild else 0>. Only the enabled module instance writes. Compiled out of release.
+		readonly HashSet<uint> rollBuiltSeen = [];
+
 		void RollUnitBuilt(Actor a)
 		{
 			if (IsTraitDisabled || world.WorldTick == 0 || a.Owner != player || !a.Info.HasTraitInfo<IPositionableInfo>() || a.Info.HasTraitInfo<BuildingInfo>())
+				return;
+
+			// a unit leaving a transport enters the world a second time: only the first entry of an actor id is a completed unit
+			if (!rollBuiltSeen.Add(a.ActorID))
 				return;
 
 			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},ub_unit_built,{a.Info.Name},,{(Info.UnitsToBuild != null && Info.UnitsToBuild.ContainsKey(a.Info.Name) ? 1 : 0)}");
@@ -1273,9 +1473,21 @@ namespace OpenRA.Mods.CA.Traits
 					foreach (var queued in queue.AllQueued())
 						inProduction.Add(queued.Item);
 
+			UpgradeScanOnce();
+			UpgradeSettle(inProduction);
+
+			// an ordered item the queue has not shown yet stays reserved: it is not offered again while its order is outstanding (upg_once_registry)
+			var onceOn = UpgradeOnceOn;
+			if (onceOn)
+				foreach (var pendingName in upgradeDone.PendingNames)
+					inProduction.Add(pendingName);
+
 			var paused = requestPause.Any(rp => rp.IsTraitEnabled() && rp.PauseUnitProduction && rp is not IBotItemAwareUnitCap);
 			foreach (var category in Info.UpgradeServiceQueues)
 			{
+				if (!UpgradeQueueServed(category))
+					continue;
+
 				var heldByPause = UpgradeServiceCA.HeldByPause(paused, ServedThroughPause(category));
 				foreach (var queue in AIUtils.FindQueues(player, category))
 				{
@@ -1293,8 +1505,13 @@ namespace OpenRA.Mods.CA.Traits
 							if (!ShouldBuild(item.Name, true, queue.Info.Type))
 								continue;
 
+							// the once-done registry: first sight of the type stamps its available tick; a completed type (or a member of a completed exclusive set) is not started again
+							upgradeDone.Observe(item.Name, world.WorldTick, item.TraitInfoOrDefault<BuildableInfo>()?.Prerequisites);
+							if (onceOn && upgradeDone.IsDone(item.Name))
+								continue;
+
 							candidates.Add(new UpgradeServiceCA.Candidate(item.Name, queue.GetProductionCost(item),
-								shares != null && shares.TryGetValue(item.Name, out var w) ? Math.Max(w, 0) : -1));
+								shares != null && shares.TryGetValue(item.Name, out var w) ? Math.Max(w, 0) : -1, onceOn ? upgradeDone.Since(item.Name) : 0));
 							infos.Add(item);
 						}
 
@@ -1307,6 +1524,8 @@ namespace OpenRA.Mods.CA.Traits
 						SetUnitInterval(item2.Name);
 						bot.QueueOrder(Order.StartProduction(queue.Actor, item2.Name, 1));
 						NotifyStarted(item2.Name, queue.Info.Type);
+						upgradeDone.Started(item2.Name, world.WorldTick);
+						UpgradeStartLog(item2.Name, queue.Info.Type, queue.GetProductionCost(item2));
 						AIUtils.BotDebug("AI: {0} upgrade service starts {1} in {2}.", player, item2.Name, queue.Info.Type);
 					}
 				}
@@ -1352,6 +1571,8 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (HarvesterTargetOn)
 				HarvesterStarted(name); // HARV-01: every start path ends here, so the cached queued count stays exact between refreshes
+
+			RollStartLog(name, queueType);
 
 			foreach (var observer in UnitObservers)
 				observer.UnitProductionStarted(player, world.WorldTick, name, queueType);
@@ -1542,7 +1763,10 @@ namespace OpenRA.Mods.CA.Traits
 
 				// Item-aware cap reached: a queue that can build nothing the cap leaves uncounted costs no offer and no scan.
 				if (cappedOut.Length > 0 && !queue.BuildableItems().Any(a => !CappedOut(a)))
+				{
+					RollCappedLog(queue.Info.Type);
 					continue;
+				}
 
 				offers--;
 				var skip = new HashSet<string>(StringComparer.Ordinal);
@@ -1696,7 +1920,7 @@ namespace OpenRA.Mods.CA.Traits
 					var fullCost = Math.Max(0, queue.GetProductionCost(unit));
 
 					// UNIT-ALL-01 c3 (Opus 11-25): the FIRST build of a listed type is pay-as-you-go like TECHCHAIN-PAYGO: it does not wait for the full price (OpenRA pays progressively): the afford, reserve and
-					// depth-cash gates below are evaluated at cost 0 for it, so a bank of 0 or the tier reserve can still hold it; ChooseRollUnit lets one first-of-each be open per queue. Everything else keeps the full gates.
+					// depth-cash gates below are evaluated at cost 0 for it, so a bank of 0 or the tier reserve can still hold it; Everything else keeps the full gates.
 					var paygo = roll && rollFirst && UnitRoll.FirstAdmits(batch.BankLeft);
 					var cost = paygo ? 0 : fullCost;
 					if (!batch.Affords(cost) || !ReserveAdmits(batch, cost)
@@ -1712,9 +1936,6 @@ namespace OpenRA.Mods.CA.Traits
 					bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
 					NotifyStarted(name, queue.Info.Type);
 					counters.Record(unit);
-					if (paygo)
-						rollFirstOpen[queue.Actor.ActorID + "|" + queue.Info.Type] = new RollOpenFirst { Name = name, Tick = world.WorldTick };
-
 					batch.Reserve(queue, fullCost);
 					if (depthQueue)
 						loadedTicks += queue.GetBuildTime(unit, BuildableInfo.GetTraitForQueue(unit, queue.Info.Type));
@@ -1725,9 +1946,9 @@ namespace OpenRA.Mods.CA.Traits
 						if (isAirToAir)
 							batch.PendingAirToAir++;
 					}
-					if (armedInfantryFloor > 0 && IsArmedInfantry(unit))
+					if (armedInfantryFloor > 0 && IsArmedInfantry(unit, IsCapturer(unit)))
 						batch.PendingArmedInfantry++;
-					if (unit.HasTraitInfo<CapturesInfo>())
+					if (IsCapturer(unit))
 						batch.PendingCapturers++;
 					if (activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
 						AddToActiveCompositionProducedValue(unit);
@@ -1855,7 +2076,7 @@ namespace OpenRA.Mods.CA.Traits
 		// to ShouldBuild's admit call except for the pending delta.
 		bool CapturerCapAdmitsWithPending(ActorInfo candidate, ProducerServiceBatch batch)
 		{
-			if (!CapturerCapActive(CapturerLimitPct) || !candidate.HasTraitInfo<CapturesInfo>())
+			if (!CapturerCapActive(CapturerLimitPct) || !IsCapturer(candidate))
 				return true;
 
 			CapturerArmyCounts(out var capturerUnits, out var armedInfantryUnits);
@@ -1884,7 +2105,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			var items = queue.BuildableItems();
 			var pickName = UnitProducerServiceCA.CombatValueOrder(items
-				.Where(b => shares.ContainsKey(b.Name) && IsArmedInfantry(b) && !skip.Contains(b.Name))
+				.Where(b => shares.ContainsKey(b.Name) && IsArmedInfantry(b, IsCapturer(b)) && !skip.Contains(b.Name))
 				.Select(b => (b.Name, DerivedUnitStrength(b.Name), Math.Max(1, queue.GetProductionCost(b)))))
 				.FirstOrDefault();
 			return pickName == null ? null : items.First(b => b.Name == pickName);
@@ -1970,9 +2191,9 @@ namespace OpenRA.Mods.CA.Traits
 							if (Info.AirToAirUnits.Contains(name))
 								batch.PendingAirToAir++;
 						}
-						if (IsArmedInfantry(actorInfo))
+						if (IsArmedInfantry(actorInfo, IsCapturer(actorInfo)))
 							batch.PendingArmedInfantry++;
-						if (actorInfo.HasTraitInfo<CapturesInfo>())
+						if (IsCapturer(actorInfo))
 							batch.PendingCapturers++;
 					}
 					return true;
@@ -2212,7 +2433,7 @@ namespace OpenRA.Mods.CA.Traits
 			// before both the ruleset lookup and the army scan — no wasted work.
 			if (CapturerCapActive(CapturerLimitPct) &&
 				world.Map.Rules.Actors.TryGetValue(name, out var candidate) &&
-				candidate.HasTraitInfo<CapturesInfo>())
+				IsCapturer(candidate))
 			{
 				CapturerArmyCounts(out var capturerUnits, out var armedInfantryUnits);
 				if (!CapturerCapAdmits(CapturerLimitPct, capturerUnits, armedInfantryUnits, Info.CapturerMinimumUnits,
@@ -2513,7 +2734,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		// UNIT-ALL-01 (ub_unit_roll): the one fraction roll. Candidates = the UnitsToBuild entries (the merged ai.yaml table, raw fractions) this queue can build now, minus harvesters (their own
 		// target), minus what the hard gates refuse right now (delay, interval, limit, capturer cap, item-aware cap, the aircraft caps - except for the FIRST build of a type, and a UnitLimits entry of
-		// at least 1 admits that first build because nothing is owned yet). A type this bot never ordered is picked first, one at a time; else weight = fraction x personality bias x observed counter
+		// at least 1 admits that first build because nothing is owned yet). One legal pool, no exclusion: a type this bot never ordered carries the FirstBoost weight multiplier (it doubles per UnitRollFirstRampTicks unbuilt, capped); weight = fraction x personality bias x observed counter
 		// demand (x role-mix deficit x learned prior), floored at UnitRollFloorPct of the mean. The counter term reads the OBSERVED enemy memory only (counters.ObserveFogOnly).
 		ActorInfo ChooseRollUnit(ProductionQueue queue, HashSet<string> skip)
 		{
@@ -2523,16 +2744,36 @@ namespace OpenRA.Mods.CA.Traits
 				return null;
 
 			var items = new List<ActorInfo>();
+			rollExcluded.Clear();
 			foreach (var a in queue.BuildableItems().OrderBy(b => b.Name, StringComparer.Ordinal))
 			{
-				if (!table.ContainsKey(a.Name) || skip.Contains(a.Name) || a.HasTraitInfo<HarvesterInfo>())
+				if (!table.ContainsKey(a.Name))
 					continue;
 
-				if (ShouldBuildReject(a.Name, true, queue.Info.Type) != null)
+				if (skip.Contains(a.Name))
+				{
+					RollExclude(a.Name, "skip");
 					continue;
+				}
+
+				if (a.HasTraitInfo<HarvesterInfo>())
+				{
+					RollExclude(a.Name, "harvester");
+					continue;
+				}
+
+				var rejectedBy = ShouldBuildReject(a.Name, true, queue.Info.Type);
+				if (rejectedBy != null)
+				{
+					RollExclude(a.Name, rejectedBy);
+					continue;
+				}
 
 				if (rollOrdered.Contains(a.Name) && !CanBuildMoreOfAircraft(a))
+				{
+					RollExclude(a.Name, "aircraft");
 					continue;
+				}
 
 				items.Add(a);
 			}
@@ -2542,36 +2783,16 @@ namespace OpenRA.Mods.CA.Traits
 			var queueRoles = ReportWaveRoles(queue.Info.Type, items, roles);
 
 			if (items.Count == 0)
+			{
+				RollEmptyLog(queue.Info.Type, rollExcluded.Count > 0 ? "all_excluded" : "none_listed_buildable");
 				return null;
-
-			// c3: at most one first-of-each is open per queue; while it is queued the other never-built types wait (they are not rolled as ordinary picks either).
-			var openKey = queue.Actor.ActorID + "|" + queue.Info.Type;
-			var firstOpen = false;
-			if (rollFirstOpen.TryGetValue(openKey, out var open))
-			{
-				// open for the rest of the pass that ordered it; afterwards while THAT queued item (not a later copy of the same name) is still in the queue, for at most RollFirstOpenMaxTicks
-				if (open.Item == null && open.Tick != world.WorldTick)
-					open.Item = queue.AllQueued().FirstOrDefault(i => i.Item == open.Name);
-
-				firstOpen = world.WorldTick - open.Tick <= RollFirstOpenMaxTicks && (open.Tick == world.WorldTick || (open.Item != null && queue.AllQueued().Contains(open.Item)));
 			}
 
-			if (!firstOpen)
-				rollFirstOpen.Remove(openKey);
-
-			var pool = items.Where(a => !rollOrdered.Contains(a.Name)).ToList();
-			if (firstOpen)
-			{
-				items = items.Where(a => rollOrdered.Contains(a.Name)).ToList();
-				if (items.Count == 0)
-					return null;
-
-				pool = [];
-			}
-
-			rollFirst = pool.Count > 0;
-			if (!rollFirst)
-				pool = items;
+			// One legal pool (user rule: multipliers, never gates): every listed type this queue can build now is in every roll. The first build of a type is a WEIGHT (FirstBoost, escalating
+			// while it stays unbuilt), not an exclusion; the cash protection is the pay-as-you-go progressive payment of that first build.
+			var pool = items;
+			foreach (var a in pool)
+				rollAvailableSince.TryAdd(a.Name, world.WorldTick);
 
 			// The mode bias profiles: each is a strength (0 = switched off or ablated) and a trigger; all of them only multiply.
 			var strength = new int[UnitRoll.ProfileNames.Length];
@@ -2591,11 +2812,14 @@ namespace OpenRA.Mods.CA.Traits
 			var fractions = new int[pool.Count];
 			var biases = new int[pool.Count];
 			var counterPcts = new int[pool.Count];
+			var boosts = new double[pool.Count];
 			for (var i = 0; i < pool.Count; i++)
 			{
 				var name = pool[i].Name;
+				boosts[i] = rollOrdered.Contains(name) ? 1.0
+					: UnitRoll.FirstBoost(RollParameters.FirstBoost, world.WorldTick - rollAvailableSince[name], RollParameters.FirstRampTicks, RollParameters.FirstCap);
 				var role = roles?.PrimaryRoleOf(name);
-				var bias = UnitRoll.RoleBiasPct(Info.UnitRollBias, Info.UnitRollBiasLate, rollPersonality, role, world.WorldTick, Info.UnitRollRampTicks);
+				var bias = RollParameters.BiasPct(rollPersonality, role, world.WorldTick);
 				if (deficits != null && role != null && deficits.TryGetValue(role, out var deficit))
 					bias = UnitRoll.MulPct(bias, UnitRoll.Scaled(deficit, strength[UnitRoll.RoleDeficit]));
 
@@ -2611,15 +2835,16 @@ namespace OpenRA.Mods.CA.Traits
 				if (opening)
 					bias = UnitRoll.MulPct(bias, UnitRoll.Boost(Info.OpeningDefenseUnitTypes.Contains(name), strength[UnitRoll.Opening]));
 
-				fractions[i] = table[name];
+				fractions[i] = RollParameters.Fraction(name);
 				biases[i] = bias;
 				counterPcts[i] = scores == null ? 100 : UnitRoll.CounterPct(scores[i], best, strength[UnitRoll.Counter]);
 			}
 
-			var weights = UnitRoll.Weights(fractions, biases, counterPcts, Info.UnitRollFloorPct);
-			var total = (int)Math.Min(int.MaxValue, UnitRoll.Total(weights));
-			var pick = UnitRoll.Pick(weights, BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(total));
-			RollPickLog(queue.Info.Type, pool, weights, pick, rollFirst);
+			var weights = UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct, boosts);
+			var units = UnitRoll.Quantize(weights); // integer units, sum <= 2^30, relative floor: every candidate owns a drawable interval
+			var pick = UnitRoll.Pick(units, BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(UnitRoll.Sum(units)));
+			rollFirst = !rollOrdered.Contains(pool[pick].Name);
+			RollPickLog(queue.Info.Type, pool, weights, pick, rollFirst, fractions, biases, counterPcts, boosts);
 			return pool[pick];
 		}
 
@@ -2627,7 +2852,7 @@ namespace OpenRA.Mods.CA.Traits
 		readonly AblationLatch[] rollProfileLatches = new AblationLatch[UnitRoll.ProfileNames.Length];
 
 		int RollStrength(int profile) =>
-			Info.UnitRollProfiles != null && Info.UnitRollProfiles.TryGetValue(UnitRoll.ProfileNames[profile], out var s) && s > 0 &&
+			RollParameters.Strength(UnitRoll.ProfileNames[profile]) is var s && s > 0 &&
 			!rollProfileLatches[profile].Off(player, AblationIds.UnitRollProfileRows[profile]) ? s : 0;
 
 		bool RollProfileOn(int profile) => switchesActive && Info.UnitRoll && RollStrength(profile) > 0;
@@ -2711,14 +2936,62 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
-		void RollPickLog(string queueType, List<ActorInfo> pool, long[] weights, int pick, bool first)
+		void RollPickLog(string queueType, List<ActorInfo> pool, double[] weights, int pick, bool first, int[] fractions, int[] biases, int[] counterPcts, double[] boosts)
 		{
+			// pick_id: every pick gets one (logged or not); the start row of the same type quotes it, so a pick with no start row is a dropped pick
+			var pickId = ++rollPickSeq;
+			rollPickIds[pool[pick].Name] = pickId;
+
 			if (!first && rollPickLogTick.TryGetValue(queueType, out var last) && world.WorldTick - last < 250)
 				return;
 
 			rollPickLogTick[queueType] = world.WorldTick;
-			var candidates = string.Join("|", pool.Select((a, i) => a.Name + ":" + weights[i]));
-			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},unit_pick,{pool[pick].Name},{queueType},{(first ? 1 : 0)};{candidates}");
+			var candidates = string.Join("|", pool.Select((a, i) => a.Name + ":" + weights[i].ToString("0.##", System.Globalization.CultureInfo.InvariantCulture)));
+			var seat = Array.IndexOf(world.Players, player);
+			RollLog($"{world.WorldTick},{seat},unit_pick,{pool[pick].Name},{queueType},{(first ? 1 : 0)};{candidates}");
+
+			// ub_pool: the full candidate list with the factors of each weight (fraction, personality x demand x mode bias percent, counter percent, final weight after the floor)
+			var parts = string.Join("|", pool.Select((a, i) => string.Create(System.Globalization.CultureInfo.InvariantCulture, $"{a.Name}:{fractions[i]}:{biases[i]}:{counterPcts[i]}:x{boosts[i]:0.##}:{weights[i]:0.##}")));
+			RollLog($"{world.WorldTick},{seat},ub_pool,{pool[pick].Name},{queueType},{pickId};floor={RollParameters.FloorPct};{parts}");
+		}
+
+		// ub_pool_empty (DEV, record only): one row per queue type per 250 ticks when the roll has no candidate (or the whole queue is capped out before a roll): tick,seat,ub_pool_empty,,queue,reason;
+		// then every listed type the queue could build with its reject reason (skip, harvester, cappedout, delay, interval, limit, capturer, aircraft...). No behaviour is attached to it.
+		readonly List<string> rollExcluded = [];
+		readonly Dictionary<string, int> rollEmptyLogTick = new(StringComparer.Ordinal);
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void RollExclude(string name, string reason) => rollExcluded.Add(name + ":" + reason);
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void RollEmptyLog(string queueType, string reason)
+		{
+			if (rollEmptyLogTick.TryGetValue(queueType, out var last) && world.WorldTick - last < 250)
+				return;
+
+			rollEmptyLogTick[queueType] = world.WorldTick;
+			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},ub_pool_empty,,{queueType},{reason};{string.Join("|", rollExcluded)}");
+		}
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void RollCappedLog(string queueType)
+		{
+			rollExcluded.Clear();
+			foreach (var item in AIUtils.FindQueues(player, queueType).SelectMany(q => q.BuildableItems()).Select(i => i.Name).Distinct(StringComparer.Ordinal).OrderBy(n => n, StringComparer.Ordinal))
+				rollExcluded.Add(item + ":cappedout(" + string.Join("+", cappedOut.Select(c => c.GetType().Name)) + ")");
+
+			RollEmptyLog(queueType, "cappedout");
+		}
+
+		int rollPickSeq;
+		readonly Dictionary<string, int> rollPickIds = new(StringComparer.Ordinal);
+
+		// ub_unit_start: the production order for a type was emitted (every start path ends in NotifyStarted); pick_id is the roll pick it came from (0 = not a roll pick).
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void RollStartLog(string name, string queueType)
+		{
+			rollPickIds.Remove(name, out var pickId);
+			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},ub_unit_start,{name},{queueType},{pickId}");
 		}
 
 		Dictionary<string, int> GetUnitsToBuildForCategory(string queueCategory)

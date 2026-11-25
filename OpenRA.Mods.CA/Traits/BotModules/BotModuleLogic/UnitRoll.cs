@@ -22,7 +22,13 @@ namespace OpenRA.Mods.CA.Traits
 	public static class UnitRoll
 	{
 		/// <summary>The largest weight one candidate may take; keeps the cumulative sum inside an int roll.</summary>
-		public const long WeightCap = 5_000_000;
+		public const double WeightCap = 1e12;
+
+		/// <summary>The sync RNG draws an integer below 2^DrawBits (the deterministic 30-bit draw); the weights are quantized to integers whose sum is at most that.</summary>
+		public const int DrawBits = 30;
+
+		/// <summary>Every candidate keeps at least total / 2^RelativeFloorBits of the weight before quantizing, so a tiny weight next to a huge one still owns a drawable interval.</summary>
+		public const int RelativeFloorBits = 20;
 
 		/// <summary>Percent bias of a role for a personality at a tick: the early value, moving linearly to the late value over rampTicks (late missing = stays early). 100 = neutral.</summary>
 		public static int RoleBiasPct(IReadOnlyDictionary<string, int> early, IReadOnlyDictionary<string, int> late, string personality, string role, int tick, int rampTicks)
@@ -72,47 +78,104 @@ namespace OpenRA.Mods.CA.Traits
 		public static int MulPct(int a, int b) => (int)Math.Clamp((long)a * b / 100, 0, 100_000);
 
 		/// <summary>
-		/// The weight of every candidate: fraction x bias% x counter%, then max(weight, floorPct% of the mean). Always at least 1, so a candidate can never drop out;
-		/// all-zero fractions give equal weights.
+		/// The weight of every candidate, in double: fraction x bias% x counter% x boost, then max(weight, floorPct% of the mean). Always at least 1, so a candidate can never drop out
+		/// (the floor stays positive for every candidate); all-zero fractions give equal weights. boost = the first-build multiplier of a never-built type (null = 1 for all).
 		/// </summary>
-		public static long[] Weights(IReadOnlyList<int> fraction, IReadOnlyList<int> biasPct, IReadOnlyList<int> counterPct, int floorPct)
+		public static double[] Weights(IReadOnlyList<int> fraction, IReadOnlyList<int> biasPct, IReadOnlyList<int> counterPct, int floorPct, IReadOnlyList<double> boost = null)
 		{
 			var n = fraction.Count;
-			var raw = new long[n];
-			long sum = 0;
+			var raw = new double[n];
+			double sum = 0;
 			for (var i = 0; i < n; i++)
 			{
-				raw[i] = Math.Min(WeightCap, (long)Math.Max(0, fraction[i]) * Math.Max(0, biasPct[i]) * Math.Max(0, counterPct[i]) / 100);
+				var b = boost == null || double.IsNaN(boost[i]) || boost[i] < 1 ? 1.0 : Math.Min(boost[i], 1e6);
+				raw[i] = Math.Min(WeightCap, (double)Math.Max(0, fraction[i]) * Math.Max(0, biasPct[i]) * Math.Max(0, counterPct[i]) / 100.0 * b);
 				sum += raw[i];
 			}
 
-			var floor = n == 0 ? 0 : sum / n * Math.Max(0, floorPct) / 100;
+			var floor = n == 0 ? 0 : sum / n * Math.Max(0, floorPct) / 100.0;
 			for (var i = 0; i < n; i++)
-				raw[i] = Math.Max(1, Math.Max(raw[i], floor));
+				raw[i] = Math.Max(1.0, Math.Max(raw[i], floor));
 
 			return raw;
 		}
 
-		public static long Total(IReadOnlyList<long> weights)
+		public static double Total(IReadOnlyList<double> weights)
 		{
-			long total = 0;
+			double total = 0;
 			foreach (var w in weights)
 				total += w;
 
 			return total;
 		}
 
-		/// <summary>The index a roll in [0, Total) lands on; -1 for an empty list.</summary>
-		public static int Pick(IReadOnlyList<long> weights, int roll)
+		/// <summary>
+		/// The weights as integers for the deterministic 30-bit draw: every candidate is first lifted to at least total / 2^RelativeFloorBits (a relative floor), then scaled so the integer sum is at
+		/// most 2^DrawBits, and every candidate gets at least 1 unit. Pure arithmetic, no random draw.
+		/// </summary>
+		public static int[] Quantize(IReadOnlyList<double> weights)
 		{
-			for (var i = 0; i < weights.Count; i++)
+			var n = weights.Count;
+			var units = new int[n];
+			if (n == 0)
+				return units;
+
+			double total = 0;
+			for (var i = 0; i < n; i++)
+				total += double.IsFinite(weights[i]) && weights[i] > 0 ? weights[i] : 0;
+
+			var floor = total / (1 << RelativeFloorBits);
+			var lifted = new double[n];
+			double sum = 0;
+			for (var i = 0; i < n; i++)
 			{
-				roll -= (int)weights[i];
+				lifted[i] = Math.Max(floor, double.IsFinite(weights[i]) && weights[i] > 0 ? weights[i] : 0);
+				sum += lifted[i];
+			}
+
+			if (sum <= 0)
+			{
+				Array.Fill(units, 1);
+				return units;
+			}
+
+			var budget = (1 << DrawBits) - n;
+			for (var i = 0; i < n; i++)
+				units[i] = 1 + (int)Math.Min(budget, Math.Floor(lifted[i] / sum * budget));
+
+			return units;
+		}
+
+		public static int Sum(IReadOnlyList<int> units)
+		{
+			var total = 0;
+			foreach (var u in units)
+				total += u;
+
+			return total;
+		}
+
+		/// <summary>The index a draw in [0, Sum) lands on, walking the integer cumulative sum (no cast, no wrap); the last candidate when the draw reaches the end; -1 for an empty list.</summary>
+		public static int Pick(IReadOnlyList<int> units, int roll)
+		{
+			for (var i = 0; i < units.Count; i++)
+			{
+				roll -= units[i];
 				if (roll < 0)
 					return i;
 			}
 
-			return weights.Count - 1;
+			return units.Count - 1;
+		}
+
+		/// <summary>
+		/// The first-build weight multiplier of a type that is buildable but never built: baseBoost, doubled for every full rampTicks it has stayed unbuilt, capped at cap (never below 1).
+		/// Coverage stays near-certain because the pull grows until the type is built.
+		/// </summary>
+		public static double FirstBoost(int baseBoost, int unbuiltTicks, int rampTicks, int cap)
+		{
+			var steps = rampTicks > 0 ? Math.Clamp(unbuiltTicks / rampTicks, 0, 30) : 0;
+			return Math.Min(Math.Max(1, cap), Math.Max(1, baseBoost) * (double)(1L << steps));
 		}
 
 		/// <summary>Indices of the candidates never ordered before (the first-of-each set).</summary>
