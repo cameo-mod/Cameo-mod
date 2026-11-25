@@ -29,7 +29,7 @@ namespace OpenRA.Mods.CA.Traits
 		/// A listed type with a positive weight is the roll's, never the fallback's (no duplicate).
 		/// </summary>
 		public static bool InSet(CoreOnceInput t) =>
-			t.Name != null && t.Buildable && t.Count <= 0 && !t.OwnRuleStage && (t.Weight < 0 ? t.FirstCopyKind : t.Weight == 0);
+			t.Name != null && t.Buildable && t.Count <= 0 && !t.OwnRuleStage && t.Weight <= 0 && t.FirstCopyKind; // CM: a listed weight-0 wall/defence is no first copy either
 
 		/// <summary>The fallback candidates in order: tech depth (nearest the yard first), then cost, then ordinal name (deterministic).</summary>
 		public static IReadOnlyList<string> Order(IEnumerable<CoreOnceInput> types)

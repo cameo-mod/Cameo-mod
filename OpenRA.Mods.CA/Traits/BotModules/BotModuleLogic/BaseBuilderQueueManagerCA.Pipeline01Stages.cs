@@ -98,7 +98,7 @@ namespace OpenRA.Mods.CA.Traits
 					weight = Math.Max(0, listed);
 
 				var firstCopy = FirstCopyKind(item);
-				if (weight < 0 && !firstCopy)
+				if (!firstCopy)
 					continue;
 
 				inputs.Add(new CoreOnceInput(

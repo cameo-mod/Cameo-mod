@@ -125,7 +125,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheFallbackTakesOnlyWhatTheRollCannotOffer()
 		{
 			// Weight 0 (listed, never rolled into S5) and an unlisted first-copy kind are the fallback's; a positive weight is the roll's.
-			Assert.That(CoreOnceCA.InSet(T("zeroWeight", weight: 0, firstCopy: false)), Is.True);
+			Assert.That(CoreOnceCA.InSet(T("zeroWeight", weight: 0, firstCopy: false)), Is.False, "a listed weight-0 wall or defence is not built once by S5");
 			Assert.That(CoreOnceCA.InSet(T("zeroWeightFirstCopy", weight: 0, firstCopy: true)), Is.True);
 			Assert.That(CoreOnceCA.InSet(T("unlisted", weight: -1, firstCopy: true)), Is.True);
 			Assert.That(CoreOnceCA.InSet(T("positive", weight: 5, firstCopy: true)), Is.False, "no duplicate of the roll");
@@ -387,6 +387,27 @@ namespace OpenRA.Mods.Cameo.Test
 			pick = BaseBuildPlanCA.Plan(s, f, new MersenneTwister(1));
 			Assert.That(pick.Name, Is.EqualTo("core"), "the depth fallback follows the roll");
 			Assert.That(pick.Stage, Is.EqualTo(BaseBuildStage.S5CoreOnce));
+		}
+
+		[Test]
+		public void S5HandsOverToTheS10RollOnceEveryListedTypeIsBuiltOrRefused()
+		{
+			// "a" is built once, "b" is not: S5 offers only b. b refused: the S10 roll offers a (count 1 passes the share), b is not tested again.
+			var s = Snap([W("a", 50), W("b", 50)]);
+			s.Owned = new Dictionary<string, int> { ["a"] = 1 };
+			var f = new FakeFeasibility();
+			f.Infeasible.Add("b");
+			var pick = BaseBuildPlanCA.Plan(s, f, new MersenneTwister(1));
+			Assert.That(pick.Name, Is.EqualTo("a"));
+			Assert.That(pick.Stage, Is.EqualTo(BaseBuildStage.S10Fractions));
+			Assert.That(f.Tested, Is.EqualTo(new[] { "b", "a" }));
+
+			// Every listed type built: S5 offers nothing, the pick is the S10 roll's.
+			s.Owned = new Dictionary<string, int> { ["a"] = 1, ["b"] = 1 };
+			var g = new FakeFeasibility();
+			pick = BaseBuildPlanCA.Plan(s, g, new MersenneTwister(1));
+			Assert.That(pick.Stage, Is.EqualTo(BaseBuildStage.S10Fractions));
+			Assert.That(S5Names(s, 1), Is.Empty);
 		}
 
 		[Test]
