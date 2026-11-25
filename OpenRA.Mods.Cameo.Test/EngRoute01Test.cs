@@ -37,12 +37,42 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var body = SafeRouteBody(Engineer());
 			Assert.That(body, Does.Contain("var limit = budget ? Info.SafeRouteExpansionBudget : 0;"), "no budget when the switch or the row is off: the old unbounded search");
-			Assert.That(body, Does.Contain("evaluations++;\n\t\t\t\t\t\tif (limit > 0 && evaluations > limit)\n\t\t\t\t\t\t\tthrow new RouteBudgetExceeded();"));
+			Assert.That(body, Does.Contain("if (seen.Add(loc))\n\t\t\t\t\t\t\t\tevaluations++;"));
+			Assert.That(body, Does.Contain("if (limit > 0 && evaluations > limit)\n\t\t\t\t\t\t\tthrow new RouteBudgetExceeded();"));
 			Assert.That(body, Does.Contain("catch (RouteBudgetExceeded)"));
 			Assert.That(body, Does.Contain("RouteBudgetOverruns++;"));
 			var catchAt = body.IndexOf("catch (RouteBudgetExceeded)", StringComparison.Ordinal);
 			Assert.That(body.IndexOf("return null;", catchAt, StringComparison.Ordinal), Is.GreaterThan(catchAt), "an overrun counts as unsafe: no route");
 			Assert.That(body, Does.Contain("return Danger(capturer, loc);"), "the real cost is unchanged");
+		}
+
+		// Opus 11-25: the throw never leaves SafeRoute and does not repeat for the same pair.
+		[Test]
+		public void TheOverrunThrowIsCaughtLocallyAndRememberedPerPair()
+		{
+			var e = Engineer();
+			var body = SafeRouteBody(e);
+			var tryAt = body.IndexOf("try\n", StringComparison.Ordinal);
+			var catchAt = body.IndexOf("catch (RouteBudgetExceeded)", StringComparison.Ordinal);
+			Assert.That(tryAt, Is.GreaterThan(0));
+			Assert.That(catchAt, Is.GreaterThan(tryAt), "try and catch both inside SafeRoute");
+			Assert.That(e.Split("throw new RouteBudgetExceeded()").Length - 1, Is.EqualTo(1), "the only throw site");
+			Assert.That(body, Does.Contain("routeOverrunUntil[pair] = world.WorldTick + RouteOverrunMemoryTicks;"));
+			Assert.That(body, Does.Contain("if (budget && routeOverrunUntil.TryGetValue(pair, out var until))"));
+			Assert.That(body.IndexOf("routeOverrunUntil.TryGetValue", StringComparison.Ordinal), Is.LessThan(body.IndexOf("FindPathToTargetCellByPredicate", StringComparison.Ordinal)), "the memory is checked before any search");
+		}
+
+		// CM review d8152f70 (b): a budget refusal must not pull an engineer back mid-route.
+		[Test]
+		public void ABudgetRefusalKeepsTheRouteInRecheckAndCountsDistinctCells()
+		{
+			var e = Engineer();
+			var body = SafeRouteBody(e);
+			Assert.That(body, Does.Contain("RouteRefused = false;"));
+			Assert.That(body.Split("RouteRefused = true;").Length - 1, Is.EqualTo(3), "call cap, overrun memory, overrun");
+			Assert.That(body, Does.Contain("seen.Add(loc)"), "the budget counts distinct cells");
+			Assert.That(e, Does.Contain("if (fresh == null && RouteRefused)"));
+			Assert.That(e.IndexOf("if (fresh == null && RouteRefused)", StringComparison.Ordinal), Is.LessThan(e.IndexOf("Pullbacks++;", StringComparison.Ordinal)), "the refusal returns before the pullback");
 		}
 
 		[Test]
