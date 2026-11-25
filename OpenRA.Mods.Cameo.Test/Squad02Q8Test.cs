@@ -18,7 +18,7 @@ namespace OpenRA.Mods.Cameo.Test
 {
 	/// <summary>
 	/// CONSOLIDATE-02 Q8 (CONSOLIDATE_02_SQUAD_DESIGN.md 4.1 Steps 2-3; rows sq_all_in_late and sq_hunt_one_cell under sq_pipeline_02): the all-in has one input list (cap, huge, won,
-	/// the breaker's stalemate signal of Q4, and the late-escalation step), the breaker stays inert, and the team hunts one unseen cell at a time. The rules are pure; the wiring is pinned.
+	/// the breaker's stalemate signal of Q4, and the late tick), the breaker stays inert, and the team hunts one unseen cell at a time. The rules are pure; the wiring is pinned.
 	/// </summary>
 	[TestFixture]
 	public class Squad02Q8Test
@@ -130,15 +130,15 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void TheLateStepIsTheLastAllInInputAndTheNamedTriggersKeepTheirName()
+		public void TheLateTickIsTheFallbackAllInInputAndTheNamedTriggersKeepTheirName()
 		{
 			var v07 = RepoFile(Bots + "SquadManagerBotModuleCA.V07.cs");
 			var why = Between(v07, "string TeamLeadAllInWhy(", "// Fog-honest, like TeamLeadKnownBuildings");
 			var late = why.IndexOf("if (!atCap && !huge && !won && ArmyAllInLateOn(now))\n\t\t\t\treturn AllInCA.WhyLate;", StringComparison.Ordinal);
 			var named = why.IndexOf("return AllInCA.Why(atCap, huge, won)", StringComparison.Ordinal);
 			Assert.That(late, Is.GreaterThan(0));
-			Assert.That(named, Is.GreaterThan(late), "the named triggers are read after the late step, and never hidden by it (it only answers when none of them fired)");
-			Assert.That(why.IndexOf("var won = false;", StringComparison.Ordinal), Is.LessThan(late), "the late step reads the cap/huge/won results");
+			Assert.That(named, Is.GreaterThan(late), "the named triggers are read after the late tick, and never hidden by it (it only answers when none of them fired)");
+			Assert.That(why.IndexOf("var won = false;", StringComparison.Ordinal), Is.LessThan(late), "the late tick reads the cap/huge/won results");
 			Assert.That(why, Does.Contain("?? (ArmyLaunchArbiterOn && AllInCA.StalemateSignal(now, team.StalemateSignalTick, Info.ArmyStalemateSignalTicks) ? AllInCA.WhyStalemate : null);"),
 				"the Q4 stalemate input is unchanged");
 		}

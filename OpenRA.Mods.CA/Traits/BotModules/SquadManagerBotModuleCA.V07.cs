@@ -77,6 +77,9 @@ namespace OpenRA.Mods.CA.Traits
 			if (!TeamLeadAllInOn)
 				return null;
 
+			// ALLIN-TRIGGER-01 (sq_ahead_deescalate): an all-in order that an ahead trigger started ends when the team is behind (before the early return below, which skips an all-in order).
+			AheadDeescalate(now);
+
 			// An open order that is already all-in, or only gathers at its rally, needs no trigger: no scan for it.
 			if (TeamLeadOpenOrder() is { } open && (open.AllIn || open.GatherOnly))
 				return null;
@@ -101,7 +104,11 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
-			// CONSOLIDATE-02 Q8 (sq_all_in_late): the late-escalation step is the last all-in input; the named triggers above keep their name.
+			// ALLIN-TRIGGER-01 (sq_ahead and one row per trigger): the dynamic all-in, when the team is ahead; the named triggers above keep their name and come first.
+			if (!atCap && !huge && !won && AheadWhy(now) is { } ahead)
+				return ahead;
+
+			// CONSOLIDATE-02 Q8 (sq_all_in_late): the late tick is the fallback all-in input of a game that stays undecided; the triggers above keep their name.
 			if (!atCap && !huge && !won && ArmyAllInLateOn(now))
 				return AllInCA.WhyLate;
 

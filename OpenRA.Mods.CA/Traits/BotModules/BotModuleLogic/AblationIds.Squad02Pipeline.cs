@@ -39,7 +39,7 @@ namespace OpenRA.Mods.CA.Traits
 		// Q7 Step 2 (Pincer): decided at push time on the arrived blob; the arms are balanced by dividing a squad when needed (TeamLeadPincerEnabled is the switch it refines).
 		public const string SqPincerPush = "sq_pincer_push";
 
-		// Q8 Step 2 (all-in): the late-escalation step is one more all-in trigger (cap, idle, won and the stalemate signal are the others).
+		// Q8 Step 2 (all-in): the late tick (ArmyAllInLateTick) is the fallback all-in trigger (cap, idle, won, the stalemate signal and the ahead rows of ALLIN-TRIGGER-01 are the others).
 		public const string SqAllInLate = "sq_all_in_late";
 
 		// Q8 Step 3 (hunt): the team hunts one unseen cell at a time (the board cell), not one per seat.

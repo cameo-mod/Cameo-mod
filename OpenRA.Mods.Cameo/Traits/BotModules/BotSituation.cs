@@ -17,6 +17,8 @@ using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
+using AheadEnemyFacts = OpenRA.Mods.CA.Traits.BotModules.AheadEnemyFacts;
+using IBotAheadFactsProvider = OpenRA.Mods.CA.Traits.BotModules.IBotAheadFactsProvider;
 using IBotStalemateUrgencyProvider = OpenRA.Mods.CA.Traits.BotModules.IBotStalemateUrgencyProvider;
 
 namespace OpenRA.Mods.Cameo.Traits.BotModules
@@ -77,6 +79,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public int BuildingCount;
 		public int ExpansionClusters;
 		public int Harvesters, Refineries;
+
+		// ALLIN-TRIGGER-01: construction yards (base-building structures) and MCV-like deployers the bot sees or remembers of this enemy (observed profile only).
+		public int BaseBuildings, Mcvs;
 		public int HarvesterCount;
 		public int KnownRegions;
 		public int PressureValue;
@@ -604,7 +609,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotEnemyAirIntelProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory, IBotPersonalityLeadProvider, IBotUtilityAxes, IBotDirector, IBotTeamMember, IBotCoalition, IBotStalemateUrgencyProvider, IBotMobileStaticValues
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotEnemyAirIntelProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory, IBotPersonalityLeadProvider, IBotUtilityAxes, IBotDirector, IBotTeamMember, IBotCoalition, IBotStalemateUrgencyProvider, IBotMobileStaticValues, IBotAheadFactsProvider
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
@@ -1874,6 +1879,37 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		long IBotStalemateUrgencyProvider.StalemateAlliedArmy => stalemate?.AlliedArmy ?? 0;
 		long IBotStalemateUrgencyProvider.StalemateEnemyArmy => stalemate?.EnemyArmy ?? 0;
 
+		// ALLIN-TRIGGER-01: the observed enemy facts of the latest snapshot, for the squad manager's ahead triggers. Only when this bot observes through the fog (the profiles are then built from
+		// what it sees or remembers); the omniscient profile fallback is never offered.
+		readonly List<AheadEnemyFacts> aheadFacts = new();
+		BotSituation aheadFactsFrom;
+
+		bool IBotAheadFactsProvider.AheadFactsEnabled => !IsTraitDisabled && Info.UseFoggedObservation && player.Shroud != null && Situation?.Enemies != null;
+
+		IReadOnlyList<AheadEnemyFacts> IBotAheadFactsProvider.AheadEnemies => BuildAheadFacts();
+
+		// The living enemy seats (the scoreboard has not defeated them), by seat id; rebuilt once per snapshot.
+		List<AheadEnemyFacts> BuildAheadFacts()
+		{
+			var situation = Situation;
+			if (situation?.Enemies == null)
+				return null;
+
+			if (!ReferenceEquals(aheadFactsFrom, situation))
+			{
+				aheadFactsFrom = situation;
+				aheadFacts.Clear();
+				foreach (var profile in situation.Enemies.Values)
+					if (profile.Player.WinState == WinState.Undefined)
+						aheadFacts.Add(new AheadEnemyFacts((int)profile.Player.PlayerActor.ActorID, profile.ArmyValue, profile.DefenceValue, profile.BuildingCount,
+							profile.ProductionBuildings, profile.Refineries, Math.Max(profile.Harvesters, profile.HarvesterCount), profile.BaseBuildings, profile.Mcvs));
+
+				aheadFacts.Sort((a, b) => a.Seat.CompareTo(b.Seat));
+			}
+
+			return aheadFacts;
+		}
+
 		internal static List<BotMission> DeriveMissions(
 			RegionMemory regions,
 			OpenRA.Player[] enemies,
@@ -2105,6 +2141,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					profile.BuildingCount++;
 				if (actor.Harvester)
 					profile.Harvesters++;
+				if (actor.Mcv)
+					profile.Mcvs++;
 
 				if (actor.Combat)
 				{
@@ -2142,6 +2180,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						profile.ProductionBuildings++;
 					if (actor.Refinery)
 						profile.Refineries++;
+					if (actor.BaseBuilding)
+						profile.BaseBuildings++;
 				}
 			}
 

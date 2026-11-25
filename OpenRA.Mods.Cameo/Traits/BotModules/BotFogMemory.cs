@@ -271,6 +271,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public bool Production;
 		public bool Refinery;
 		public bool Harvester;
+
+		// ALLIN-TRIGGER-01: a mobile deployer that is no fighter, harvester or aircraft (an MCV-like unit: the enemy can rebuild its yard with it).
+		public bool Mcv;
 		public bool Cloaked;
 		public bool Aircraft;
 
@@ -491,6 +494,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				Production = t.Production,
 				Refinery = t.Refinery,
 				Harvester = t.Harvester,
+				Mcv = t.Mcv,
 				Aircraft = t.Aircraft,
 				ProducesAircraft = t.ProducesAircraft,
 				AntiAir = t.AntiAir,
@@ -531,6 +535,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				Production = building && actorInfo.HasTraitInfo<ProductionInfo>(),
 				Refinery = building && actorInfo.HasTraitInfo<RefineryInfo>(),
 				Harvester = actorInfo.HasTraitInfo<HarvesterInfo>(),
+				Mcv = !building && !hasAttack && actorInfo.HasTraitInfo<MobileInfo>() && actorInfo.HasTraitInfo<TransformsInfo>()
+					&& !actorInfo.HasTraitInfo<HarvesterInfo>() && !actorInfo.HasTraitInfo<AircraftInfo>(),
 				Aircraft = actorInfo.HasTraitInfo<AircraftInfo>(),
 				ProducesAircraft = building && actorInfo.TraitInfos<ProductionInfo>()
 					.SelectMany(p => p.Produces).Any(info.AircraftQueueNames.Contains),
