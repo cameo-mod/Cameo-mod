@@ -1175,27 +1175,42 @@ namespace OpenRA.Mods.CA.Traits
 
 		// UB-SUBSTEP-PERF-01 (DEV only, Opus 11-25): sub-step clock of one BotTick visit. Slots: 0 pick (the unit pick call; it holds slot 1 when the roll is on),
 		// 1 reject (every ShouldBuildReject call), 2 coverage (UpgradeScanOnce + UpgradeSettle), 3 refresh (the queue lists read by the upgrade snapshot and by BuildUnitFairService), 4 visit total.
-		// Every clock read sits inside a [Conditional] helper, so release omits the calls and their Stopwatch reads. The two arrays are plain fields with no behaviour.
+		// The fields and the clock reads exist only under CAMEO_DEV_LOGGING: a release instance allocates nothing, and the [Conditional] helpers keep empty release bodies whose call sites the compiler omits.
+#if CAMEO_DEV_LOGGING
 		readonly long[] ubSubStart = new long[5];
 		readonly long[] ubSubAcc = new long[5];
+#endif
 
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
-		void UbSubStart(int slot) => ubSubStart[slot] = System.Diagnostics.Stopwatch.GetTimestamp();
+		void UbSubStart(int slot)
+		{
+#if CAMEO_DEV_LOGGING
+			ubSubStart[slot] = System.Diagnostics.Stopwatch.GetTimestamp();
+#endif
+		}
 
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
-		void UbSubStop(int slot) => ubSubAcc[slot] += System.Diagnostics.Stopwatch.GetTimestamp() - ubSubStart[slot];
+		void UbSubStop(int slot)
+		{
+#if CAMEO_DEV_LOGGING
+			ubSubAcc[slot] += System.Diagnostics.Stopwatch.GetTimestamp() - ubSubStart[slot];
+#endif
+		}
 
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
 		void UbVisitBegin()
 		{
+#if CAMEO_DEV_LOGGING
 			Array.Clear(ubSubAcc, 0, ubSubAcc.Length);
 			UbSubStart(4);
+#endif
 		}
 
 		// ub_perf (DEV): one row per visit, only when the visit total is at least 5 ms. Fields: total_us, pick_us (contains reject_us when the roll is on), reject_us, coverage_us, refresh_us.
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
 		void UbVisitEnd()
 		{
+#if CAMEO_DEV_LOGGING
 			UbSubStop(4);
 			double Us(int slot) => ubSubAcc[slot] * 1e6 / System.Diagnostics.Stopwatch.Frequency;
 			var total = Us(4);
@@ -1203,6 +1218,7 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},ub_perf,,,total_us={total:0};pick_us={Us(0):0};reject_us={Us(1):0};coverage_us={Us(2):0};refresh_us={Us(3):0}");
+#endif
 		}
 
 		void IBotTick.BotTick(IBot bot)

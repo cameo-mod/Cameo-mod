@@ -33,10 +33,11 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheClockReadsAreOnlyInsideConditionalHelpers()
 		{
 			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
-			Assert.That(u, Does.Contain("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid UbSubStart(int slot) => ubSubStart[slot] = System.Diagnostics.Stopwatch.GetTimestamp();"));
-			Assert.That(u, Does.Contain("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid UbSubStop(int slot) => ubSubAcc[slot] += System.Diagnostics.Stopwatch.GetTimestamp() - ubSubStart[slot];"));
-			Assert.That(u, Does.Contain("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid UbVisitBegin()"));
-			Assert.That(u, Does.Contain("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid UbVisitEnd()"));
+			Assert.That(u, Does.Contain("#if CAMEO_DEV_LOGGING\n\t\treadonly long[] ubSubStart = new long[5];\n\t\treadonly long[] ubSubAcc = new long[5];\n#endif"), "the arrays exist only in DEV: a release instance allocates nothing");
+			Assert.That(u, Does.Contain("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid UbSubStart(int slot)\n\t\t{\n#if CAMEO_DEV_LOGGING\n\t\t\tubSubStart[slot] = System.Diagnostics.Stopwatch.GetTimestamp();\n#endif\n\t\t}"));
+			Assert.That(u, Does.Contain("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid UbSubStop(int slot)\n\t\t{\n#if CAMEO_DEV_LOGGING\n\t\t\tubSubAcc[slot] += System.Diagnostics.Stopwatch.GetTimestamp() - ubSubStart[slot];\n#endif\n\t\t}"));
+			Assert.That(u, Does.Contain("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid UbVisitBegin()\n\t\t{\n#if CAMEO_DEV_LOGGING"));
+			Assert.That(u, Does.Contain("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid UbVisitEnd()\n\t\t{\n#if CAMEO_DEV_LOGGING\n\t\t\tUbSubStop(4);"));
 			Assert.That(CountOf(u, "System.Diagnostics.Stopwatch"), Is.EqualTo(3), "two GetTimestamp reads and one Frequency read, all inside the helpers");
 		}
 
