@@ -132,6 +132,34 @@ namespace OpenRA.Mods.CA.Traits
 			"every other queue has had its first. Gated by SwitchCondition; row ub_first_item_round.")]
 		public readonly bool UnitFirstItemRound = false;
 
+		[Desc("UNIT-ALL-01 (USER 11-25, V07: no Mammoth, OI tank or Duelist ever built): the unit pick is ONE fraction roll over every UnitsToBuild entry the queue can build now (prerequisites met).",
+			"weight = fraction x personality bias x observed-enemy counter demand x role deficit x learned prior, floored at UnitRollFloorPct of the mean weight so every listed type keeps a chance;",
+			"a listed type this bot never ordered is picked first, one at a time. The composition, derived-weight, counter, wave-mix, role-deficit, share-test and idle-floor layers are not consulted.",
+			"Harvesters stay out of the roll (their own target). Needs FairProducerService. Gated by SwitchCondition; row ub_unit_roll.")]
+		public readonly bool UnitRoll = false;
+
+		[Desc("UNIT-ALL-01: the epsilon of the roll: a candidate's weight is at least this percent of the mean candidate weight.")]
+		public readonly int UnitRollFloorPct = 5;
+
+		[Desc("UNIT-ALL-01 mode bias profiles: profile name -> strength percent (0 or absent = off). A profile is a folded layer that multiplies the roll weight only while its existing trigger holds; it never gates.",
+			"composition: units of the active composition, +strength x share/best share. counter: up to +strength for the best answer to the OBSERVED enemy army (the fog memory only).",
+			"wavemix: +strength for units of a wave role the idle pool lacks. roledeficit: the personality RoleMix deficit term, scaled by strength/100.",
+			"opening: +strength for OpeningDefenseUnitTypes while the base builder's opening-defence window holds. learned: the IBotProductionWeight prior, scaled by strength/100.",
+			"Each profile has its own ablation row (ub_roll_<name>); the category floors keep their own row um_category_floor (serve order).")]
+		public readonly Dictionary<string, int> UnitRollProfiles = null;
+
+		[Desc("UNIT-ALL-01: the personality names the bias tables are keyed by; the bot reads its own from the granted personality-<name> condition.")]
+		public readonly string[] UnitRollPersonalities = [];
+
+		[Desc("UNIT-ALL-01: personality bias table. Keys are <personality>.<role> (BotUnitRole names), values percent (100 = neutral). Missing = neutral.")]
+		public readonly Dictionary<string, int> UnitRollBias = null;
+
+		[Desc("UNIT-ALL-01: the same table at UnitRollRampTicks; the bias moves linearly from UnitRollBias to this value (a key missing here stays at its early value).")]
+		public readonly Dictionary<string, int> UnitRollBiasLate = null;
+
+		[Desc("UNIT-ALL-01: game ticks over which UnitRollBias moves to UnitRollBiasLate. 0 = no ramp.")]
+		public readonly int UnitRollRampTicks = 0;
+
 		[Desc("UNIT-MIX-01: the queue types that make an airfield (aircraft floor); the infantry floor uses IdleQueueFloorQueues.")]
 		public readonly string[] UnitMixAircraftQueues = { "Aircraft", "RAAircraft" };
 
@@ -565,6 +593,15 @@ namespace OpenRA.Mods.CA.Traits
 		bool UnitMixOn => switchesActive && Info.UnitMixCategoryFloor && !ablateUnitMix.Off(player, AblationIds.UnitMixCategoryFloor);
 		// CONSOLIDATE-01 C8: firstItemRoundPass is true only while the first-item round of a pass runs (a queue that already holds an item is left for the depth round).
 		bool FirstItemRoundOn => switchesActive && Info.UnitFirstItemRound && FairService && !ablateFirstRound.Off(player, AblationIds.UnitFirstItemRound);
+
+		// UNIT-ALL-01 (ub_unit_roll): one fraction roll over the listed types; see ChooseRollUnit. rollOrdered = the types this bot has ever ordered (first-of-each),
+		// rollPersonality = the granted personality-<name> condition, rollFirst = the pick in hand is a first-of-each pick (the aircraft caps are waived once per type).
+		AblationLatch ablateUnitRoll;
+		bool UnitRollOn => switchesActive && Info.UnitRoll && FairService && !ablateUnitRoll.Off(player, AblationIds.UnitRoll);
+		readonly HashSet<string> rollOrdered = new(StringComparer.Ordinal);
+		string rollPersonality = "";
+		bool rollFirst;
+		readonly Dictionary<string, (string Name, int Tick)> rollFirstOpen = new(StringComparer.Ordinal);
 		bool firstItemRoundPass;
 		readonly Dictionary<string, string> firstRoundSavedCursors = new(StringComparer.Ordinal);
 		int unitMixTick = -1;
@@ -836,6 +873,15 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (Info.SwitchCondition != null)
 				yield return new VariableObserver(SwitchConditionChanged, Info.SwitchCondition.Variables);
+
+			if (Info.UnitRoll && Info.UnitRollPersonalities.Length > 0)
+				yield return new VariableObserver(RollPersonalityChanged, Info.UnitRollPersonalities.Select(p => "personality-" + p));
+		}
+
+		// UNIT-ALL-01: the personality this bot runs, read from its granted personality-<name> condition (first listed name that is granted).
+		void RollPersonalityChanged(Actor self, IReadOnlyDictionary<string, int> conditions)
+		{
+			rollPersonality = UnitRoll.PersonalityOf(Info.UnitRollPersonalities, p => conditions.TryGetValue("personality-" + p, out var granted) && granted > 0);
 		}
 
 		void SwitchConditionChanged(Actor self, IReadOnlyDictionary<string, int> conditions)
@@ -908,7 +954,10 @@ namespace OpenRA.Mods.CA.Traits
 			// must decay the moment its conditions stop holding, not linger until the next build.
 			UpdateMobileReserve();
 
-			if (CounterWeight > 0)
+			// UNIT-ALL-01: the roll's counter term reads the OBSERVED enemy memory only (the composition provider's fog memory); no provider = no observation, never the omniscient sample.
+			if (UnitRollOn)
+				counters.ObserveFogOnly(Info.AdaptiveObservationInterval, compositionProvider);
+			else if (CounterWeight > 0)
 				counters.Observe(Info.AdaptiveObservationInterval, compositionProvider);
 
 			// Decrement any active unit intervals, removing any that reach zero
@@ -961,7 +1010,9 @@ namespace OpenRA.Mods.CA.Traits
 				visitGapTicks = lastPassTick < 0 ? 0 : world.WorldTick - lastPassTick;
 				lastPassTick = world.WorldTick;
 
-				UpdateComposition();
+				// UNIT-ALL-01: compositions are a mode bias profile under the roll: one is selected (and expires) only while the composition profile is on; they never replace the table.
+				if (!UnitRollOn || RollProfileOn(UnitRoll.Composition))
+					UpdateComposition();
 
 				// U1 (Sol F1): one ephemeral reservation batch shared by the external
 				// request scan and every category visit this pass — no call site can
@@ -1273,6 +1324,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		void NotifyStarted(string name, string queueType)
 		{
+			if (switchesActive && Info.UnitRoll)
+				rollOrdered.Add(name); // also while the row is ablated, so a mid-game flip does not re-pick built types
+
 			foreach (var observer in UnitObservers)
 				observer.UnitProductionStarted(player, world.WorldTick, name, queueType);
 		}
@@ -1487,14 +1541,26 @@ namespace OpenRA.Mods.CA.Traits
 					// P4: below the armed-infantry floor this queue prefers the best
 					// admissible armed infantry it can serve — the normal pick only runs
 					// when none is left (a rejected floor pick is retried next-best first).
-					var fromFloor = armedInfantryFloor > 0 &&
+					// UNIT-ALL-01: with ub_unit_roll the pick is the one fraction roll (ChooseRollUnit); the floor, share, counter, wave-mix and role-deficit layers below are not consulted.
+					var roll = UnitRollOn;
+					var fromFloor = !roll && armedInfantryFloor > 0 &&
 						armedInfantryAlive + batch.PendingArmedInfantry < armedInfantryFloor
 						? PickArmedInfantry(queue, shares, skip)
 						: null;
 					var fromIdleFloor = false;
-					var unit = fromFloor ?? (buildRandom
+					var unit = roll ? ChooseRollUnit(queue, skip) : fromFloor ?? (buildRandom
 						? ChooseRandomUnitToBuild(queue, excludeLimited, shares, skip)
 						: ChooseUnitToBuild(queue, excludeLimited, saturated, shares, skip));
+
+					// UNIT-ALL-01: no candidate left for the roll ends this queue's fill; the composition fallback and the two floor picks below belong to the layers the roll replaces.
+					if (roll && unit == null)
+					{
+						// the composition (now only a bias profile) ends with the fill, as it did when the old pick came up empty
+						if (skip.Count == 0 && activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
+							RevertToBaselineComposition();
+
+						break;
+					}
 
 					// §3.3/P4: an active composition that provides no feasible unit for this
 					// category falls back to the declared baseline shares once — then to the
@@ -1590,7 +1656,8 @@ namespace OpenRA.Mods.CA.Traits
 					// path uses — one batch, one headroom, one admission rule.
 					var aircraftPending = UnitProducerServiceCA.PendingAircraftDelta(isAircraft, isAirToAir,
 						Info.MaintainAirSuperiority, batch);
-					if (!CanBuildMoreOfAircraft(unit, aircraftPending))
+					// UNIT-ALL-01: the aircraft caps never block the FIRST build of a listed type (rollFirst is the pick just made above).
+					if (!(roll && rollFirst) && !CanBuildMoreOfAircraft(unit, aircraftPending))
 					{
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, "aircraft");
@@ -1600,7 +1667,12 @@ namespace OpenRA.Mods.CA.Traits
 
 					// Sol F2: an unaffordable pick retries the remaining candidates — the
 					// batch keeps the bank accounting so a cheaper feasible one can land.
-					var cost = Math.Max(0, queue.GetProductionCost(unit));
+					var fullCost = Math.Max(0, queue.GetProductionCost(unit));
+
+					// UNIT-ALL-01 c3 (Opus 11-25): the FIRST build of a listed type is pay-as-you-go like TECHCHAIN-PAYGO: it queues with any bank above 0 (OpenRA pays progressively) instead of
+					// waiting for the full price, so the gates below see cost 0 for it; ChooseRollUnit lets one first-of-each be open per queue. Everything else keeps the full gates.
+					var paygo = roll && rollFirst && UnitRoll.FirstAdmits(batch.BankLeft);
+					var cost = paygo ? 0 : fullCost;
 					if (!batch.Affords(cost) || !ReserveAdmits(batch, cost)
 						|| depthQueue && held > 0 && !QueueDepthCA.CashAdmits(batch.BankLeft, unpaidQueued, cost))
 					{
@@ -1614,7 +1686,10 @@ namespace OpenRA.Mods.CA.Traits
 					bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
 					NotifyStarted(name, queue.Info.Type);
 					counters.Record(unit);
-					batch.Reserve(queue, cost);
+					if (paygo)
+						rollFirstOpen[queue.Actor.ActorID + "|" + queue.Info.Type] = (name, world.WorldTick);
+
+					batch.Reserve(queue, fullCost);
 					if (depthQueue)
 						loadedTicks += queue.GetBuildTime(unit, BuildableInfo.GetTraitForQueue(unit, queue.Info.Type));
 					SpendLimitHeadroom(batch, name);
@@ -2087,7 +2162,8 @@ namespace OpenRA.Mods.CA.Traits
 				return "harvester_cap";
 
 			var unitsToBuildShares = GetUnitsToBuildForCategory(queueCategory);
-			if (!ignoreUnitsToBuild && unitsToBuildShares != null && !unitsToBuildShares.ContainsKey(name))
+			// UNIT-ALL-01: under the roll the candidate set is the listed table itself (ChooseRollUnit), so the derived/composition share table is no membership gate.
+			if (!ignoreUnitsToBuild && !UnitRollOn && unitsToBuildShares != null && !unitsToBuildShares.ContainsKey(name))
 				return "not_in_shares";
 
 			if (Info.UnitDelays != null &&
@@ -2407,6 +2483,214 @@ namespace OpenRA.Mods.CA.Traits
 				ShouldBuild(a.Name, false) && CanBuildMoreOfAircraft(a)), n => owned.GetValueOrDefault(n));
 			counters.LastChoiceAdaptive = choice != null;
 			return choice;
+		}
+
+		// UNIT-ALL-01 (ub_unit_roll): the one fraction roll. Candidates = the UnitsToBuild entries (the merged ai.yaml table, raw fractions) this queue can build now, minus harvesters (their own
+		// target), minus what the hard gates refuse right now (delay, interval, limit, capturer cap, item-aware cap, the aircraft caps - except for the FIRST build of a type, and a UnitLimits entry of
+		// at least 1 admits that first build because nothing is owned yet). A type this bot never ordered is picked first, one at a time; else weight = fraction x personality bias x observed counter
+		// demand (x role-mix deficit x learned prior), floored at UnitRollFloorPct of the mean. The counter term reads the OBSERVED enemy memory only (counters.ObserveFogOnly).
+		ActorInfo ChooseRollUnit(ProductionQueue queue, HashSet<string> skip)
+		{
+			rollFirst = false;
+			var table = Info.UnitsToBuild;
+			if (table == null || table.Count == 0)
+				return null;
+
+			var items = new List<ActorInfo>();
+			foreach (var a in queue.BuildableItems().OrderBy(b => b.Name, StringComparer.Ordinal))
+			{
+				if (!table.ContainsKey(a.Name) || skip.Contains(a.Name) || a.HasTraitInfo<HarvesterInfo>())
+					continue;
+
+				if (ShouldBuildReject(a.Name, true, queue.Info.Type) != null)
+					continue;
+
+				if (rollOrdered.Contains(a.Name) && !CanBuildMoreOfAircraft(a))
+					continue;
+
+				items.Add(a);
+			}
+
+			// The squad manager's wave hold reads what this queue can build, whatever the wavemix profile strength (the profile only multiplies; the hold is the ARMY-MIX-01 row's).
+			var roles = unitRoles ??= player.PlayerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
+			var queueRoles = ReportWaveRoles(queue.Info.Type, items, roles);
+
+			if (items.Count == 0)
+				return null;
+
+			// c3: at most one first-of-each is open per queue; while it is queued the other never-built types wait (they are not rolled as ordinary picks either).
+			var openKey = queue.Actor.ActorID + "|" + queue.Info.Type;
+			var firstOpen = rollFirstOpen.TryGetValue(openKey, out var open) && (open.Tick == world.WorldTick || queue.AllQueued().Any(i => i.Item == open.Name));
+			if (!firstOpen)
+				rollFirstOpen.Remove(openKey);
+
+			var pool = items.Where(a => !rollOrdered.Contains(a.Name)).ToList();
+			if (firstOpen)
+			{
+				items = items.Where(a => rollOrdered.Contains(a.Name)).ToList();
+				if (items.Count == 0)
+					return null;
+
+				pool = [];
+			}
+
+			rollFirst = pool.Count > 0;
+			if (!rollFirst)
+				pool = items;
+
+			// The mode bias profiles: each is a strength (0 = switched off or ablated) and a trigger; all of them only multiply.
+			var strength = new int[UnitRoll.ProfileNames.Length];
+			for (var p = 0; p < strength.Length; p++)
+				strength[p] = RollStrength(p);
+
+			var deficits = strength[UnitRoll.RoleDeficit] > 0 ? RollRoleDeficits(roles) : null;
+			var providers = strength[UnitRoll.Learned] > 0 ? ActiveProductionWeights() : null;
+			var scores = strength[UnitRoll.Counter] > 0 ? pool.Select(a => counters.CounterScore(a)).ToList() : null;
+			var best = scores?.Max() ?? 0;
+			var missingRoles = strength[UnitRoll.WaveMix] > 0 ? RollMissingWaveRoles(queueRoles) : null;
+			var composition = strength[UnitRoll.Composition] > 0 && activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type)
+				? activeComposition.UnitsToBuild : null;
+			var bestShare = composition != null && composition.Count > 0 ? composition.Values.Max() : 0;
+			var opening = strength[UnitRoll.Opening] > 0 && baseBuilder != null && baseBuilder.CanTrainOpeningDefense;
+
+			var fractions = new int[pool.Count];
+			var biases = new int[pool.Count];
+			var counterPcts = new int[pool.Count];
+			for (var i = 0; i < pool.Count; i++)
+			{
+				var name = pool[i].Name;
+				var role = roles?.PrimaryRoleOf(name);
+				var bias = UnitRoll.RoleBiasPct(Info.UnitRollBias, Info.UnitRollBiasLate, rollPersonality, role, world.WorldTick, Info.UnitRollRampTicks);
+				if (deficits != null && role != null && deficits.TryGetValue(role, out var deficit))
+					bias = UnitRoll.MulPct(bias, UnitRoll.Scaled(deficit, strength[UnitRoll.RoleDeficit]));
+
+				if (providers != null && providers.Count > 0)
+					bias = UnitRoll.MulPct(bias, UnitRoll.Scaled(LearnedWeightPercent(pool[i], providers), strength[UnitRoll.Learned]));
+
+				if (missingRoles != null && role != null)
+					bias = UnitRoll.MulPct(bias, UnitRoll.Boost(missingRoles.Contains(role), strength[UnitRoll.WaveMix]));
+
+				if (composition != null && composition.TryGetValue(name, out var compositionShare))
+					bias = UnitRoll.MulPct(bias, UnitRoll.ShareBoost(compositionShare, bestShare, strength[UnitRoll.Composition]));
+
+				if (opening)
+					bias = UnitRoll.MulPct(bias, UnitRoll.Boost(Info.OpeningDefenseUnitTypes.Contains(name), strength[UnitRoll.Opening]));
+
+				fractions[i] = table[name];
+				biases[i] = bias;
+				counterPcts[i] = scores == null ? 100 : UnitRoll.CounterPct(scores[i], best, strength[UnitRoll.Counter]);
+			}
+
+			var weights = UnitRoll.Weights(fractions, biases, counterPcts, Info.UnitRollFloorPct);
+			var total = (int)Math.Min(int.MaxValue, UnitRoll.Total(weights));
+			var pick = UnitRoll.Pick(weights, BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(total));
+			RollPickLog(queue.Info.Type, pool, weights, pick, rollFirst);
+			return pool[pick];
+		}
+
+		// The strength of a mode bias profile (UnitRoll.ProfileNames order): the yaml percent, 0 while the profile is absent from UnitRollProfiles or its ablation row is off.
+		readonly AblationLatch[] rollProfileLatches = new AblationLatch[UnitRoll.ProfileNames.Length];
+
+		int RollStrength(int profile) =>
+			Info.UnitRollProfiles != null && Info.UnitRollProfiles.TryGetValue(UnitRoll.ProfileNames[profile], out var s) && s > 0 &&
+			!rollProfileLatches[profile].Off(player, AblationIds.UnitRollProfileRows[profile]) ? s : 0;
+
+		bool RollProfileOn(int profile) => switchesActive && Info.UnitRoll && RollStrength(profile) > 0;
+
+		// ARMY-MIX-01 hold feed: this queue's buildable wave roles (every candidate the hard gates admit, not only the never-built ones), reported to the squad manager's wave hold exactly as the
+		// old pick did, while the squad manager's wave mix is active. Independent of the wavemix profile. Returns the role set (null when the wave mix is off or no roles provider exists).
+		HashSet<string> ReportWaveRoles(string queueType, List<ActorInfo> items, IBotUnitRoles roles)
+		{
+			var manager = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().FirstEnabledTraitOrDefault();
+			if (manager == null || !manager.WaveMixActive || roles == null)
+				return null;
+
+			var queueRoles = WaveMixCA.DistinctRoles(items.Select(a => roles.PrimaryRoleOf(a.Name)));
+			waveMixAvailable[queueType] = (world.WorldTick, queueRoles);
+			return queueRoles;
+		}
+
+		// wavemix profile trigger (the ARMY-MIX-01 one): the idle pool covers fewer wave roles than needed; the roles it lacks that this queue can build are the boosted ones.
+		HashSet<string> RollMissingWaveRoles(HashSet<string> queueRoles)
+		{
+			var manager = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().FirstEnabledTraitOrDefault();
+			if (queueRoles == null || manager == null || queueRoles.Count == 0 || !TryAvailableWaveRoles(world.WorldTick, out var available))
+				return null;
+
+			var poolRoles = manager.WaveMixPoolRoles();
+			if (poolRoles.Count >= WaveMixCA.Needed(manager.Info.WaveMixMinRoles, available.Count))
+				return null;
+
+			return queueRoles.Where(r => !poolRoles.Contains(r)).ToHashSet(StringComparer.Ordinal);
+		}
+
+		// The role-mix deficit per role in percent (100 neutral): the personality RoleMix target against the live army, one census per world tick.
+		int rollDeficitTick = -1;
+		Dictionary<string, int> rollDeficits = [];
+
+		Dictionary<string, int> RollRoleDeficits(IBotUnitRoles roles)
+		{
+			if (rollDeficitTick == world.WorldTick)
+				return rollDeficits;
+
+			rollDeficitTick = world.WorldTick;
+			rollDeficits = [];
+			var manager = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().FirstEnabledTraitOrDefault();
+			var mix = manager?.Info.UseRoleMix == true && !ablateRoleMix.Off(player, AblationIds.RoleMix) ? manager.Info.RoleMix : null;
+			if (roles == null || mix == null || mix.Count == 0)
+				return rollDeficits;
+
+			var counts = new Dictionary<string, int>(StringComparer.Ordinal);
+			var total = 0;
+			foreach (var a in world.ActorsHavingTrait<IPositionable>())
+			{
+				if (a.IsDead || a.Owner != player)
+					continue;
+
+				var primary = roles.PrimaryRoleOf(a.Info.Name);
+				if (primary == null)
+					continue;
+
+				counts[primary] = counts.GetValueOrDefault(primary) + 1;
+				total++;
+			}
+
+			foreach (var share in DerivedUnitWeights.RoleShares(mix, RoleMixUnnamedPct, roles, Info.UnitsToBuild.ContainsKey))
+				if (share.Value > 0)
+					rollDeficits[share.Key] = UnitRoll.DeficitPct((int)Math.Round(share.Value), (int)(100L * counts.GetValueOrDefault(share.Key) / Math.Max(1, total)));
+
+			return rollDeficits;
+		}
+
+		// UNIT-ALL-01 DEV log (unit_roll.csv; compiled out of release: [Conditional] drops the calls and their arguments). Rows: header, then "unit_pick" = the roll's candidates and weights, at most
+		// one row per queue type per 250 ticks (a first-of-each pick always logs). The listed-set and type-available rows (ub_listed_set, ub_type_available) belong to the DEV players tracker.
+		bool rollLogStarted;
+		readonly Dictionary<string, int> rollPickLogTick = new(StringComparer.Ordinal);
+
+		void RollLog(string row)
+		{
+			var hub = world.WorldActor.TraitOrDefault<CameoLogHub>();
+			if (hub == null || !hub.Sink.Enabled)
+				return;
+
+			hub.Sink.InfantryRejectRow(Array.IndexOf(world.Players, player), "unit_roll.csv", row, world.WorldTick);
+		}
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void RollPickLog(string queueType, List<ActorInfo> pool, long[] weights, int pick, bool first)
+		{
+			if (!first && rollPickLogTick.TryGetValue(queueType, out var last) && world.WorldTick - last < 250)
+				return;
+
+			if (!rollLogStarted)
+			{
+				rollLogStarted = true;
+				RollLog("tick,seat,event,type,queue,detail");
+			}
+
+			rollPickLogTick[queueType] = world.WorldTick;
+			var candidates = string.Join("|", pool.Select((a, i) => a.Name + ":" + weights[i]));
+			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},unit_pick,{pool[pick].Name},{queueType},{(first ? 1 : 0)};{candidates}");
 		}
 
 		Dictionary<string, int> GetUnitsToBuildForCategory(string queueCategory)
