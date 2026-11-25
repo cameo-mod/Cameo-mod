@@ -517,7 +517,7 @@ namespace OpenRA.Mods.CA.Traits
 			watchStale = true;
 		}
 
-		// REF-DEMAND-01: the strict search finished. With no strict site the legal relaxed ones enter Best now; with a strict site they are dropped.
+		// REF-DEMAND-01: the exhaustive strict certificate arrived (the paged scan drained its whole domain; random samples and the visit budget never count). With no strict site the legal relaxed ones enter Best now; with a strict site they are dropped.
 		void PromoteRelaxed(Episode e, int now)
 		{
 			e.StrictDone = true;
@@ -554,8 +554,6 @@ namespace OpenRA.Mods.CA.Traits
 
 				if (e.O3RUnits >= O3RPhaseVisits * settings.SearchVisitUnits)
 				{
-					// The strict search (the claim pass, then one full O-3 : R phase) is over: only now may a relaxed site be used.
-					PromoteRelaxed(e, now);
 					e.InO3R = false;
 					e.Anchors = null;
 					continue;
@@ -700,7 +698,12 @@ namespace OpenRA.Mods.CA.Traits
 			var budget = Math.Min(chunk, settings.OrderBuildUnits);
 			var outcome = law.PollRefineryFallbackSite(e.Producer, e.ItemName, true, budget, deadline, out var site);
 			if (outcome == RefineryFallbackOutcome.Exhausted)
+			{
 				e.FallbackExhausted = true;
+
+				// The exhaustive strict certificate: the paged scan walked its whole domain and found no legal cell at all.
+				PromoteRelaxed(e, now);
+			}
 
 			if (outcome != RefineryFallbackOutcome.Site || site is not { } cell)
 				return;
@@ -713,8 +716,12 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 			}
 
-			Offer(e, cell, new RefinerySiteScore(1, 0, law.RefineryResourceGap(e.ItemName, cell), 0, cell.X, cell.Y), null, now,
-				tier == RefineryDemand.SpacingFallbackOnly);
+			var relaxedSite = tier == RefineryDemand.SpacingFallbackOnly;
+			Offer(e, cell, new RefinerySiteScore(1, 0, law.RefineryResourceGap(e.ItemName, cell), 0, cell.X, cell.Y), null, now, relaxedSite);
+
+			// The scan hands out a fallback-spacing cell only after every strict candidate of its domain is drained: that is the certificate.
+			if (relaxedSite)
+				PromoteRelaxed(e, now);
 		}
 
 		// R: seeded samples — a provider uniformly from the ActorID-ordered list, then a cell uniformly in its

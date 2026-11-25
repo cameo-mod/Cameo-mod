@@ -215,9 +215,13 @@ namespace OpenRA.Mods.Cameo.Test
 				c => c == relaxed || c == strict,
 				c => c == strict);
 
-			var verdict = Drain(new RefineryFallbackScan(50), 8, 2000, () => snapshot, out var site);
-			Assert.That(verdict, Is.EqualTo(RefineryFallbackScan.Verdict.Site));
-			Assert.That(site, Is.EqualTo(strict), "the closer relaxed cell must not outrank a strict one");
+			// The strict cell lies beyond a one-step budget: it is found on a later poll, and no poll before it may hand out the relaxed cell.
+			foreach (var budget in new[] { 1, 8 })
+			{
+				var verdict = Drain(new RefineryFallbackScan(50), budget, 5000, () => snapshot, out var site);
+				Assert.That(verdict, Is.EqualTo(RefineryFallbackScan.Verdict.Site));
+				Assert.That(site, Is.EqualTo(strict), $"budget {budget}: the closer relaxed cell must not outrank a strict one");
+			}
 		}
 
 		// ---- AMEND-A: real pre-charged work in every phase ------------------

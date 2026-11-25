@@ -60,15 +60,15 @@ namespace OpenRA.Mods.CA.Traits
 		public enum RelaxedStep { NotNeeded, Deferred, Promote }
 
 		/// <summary>
-		/// The relaxed-site gate. A relaxed site is used only after the strict (full spacing) search has fully finished with no site; while the strict
-		/// search is still running the relaxed sites are deferred (nothing is placed, the search goes on next tick).
+		/// The relaxed-site gate. A relaxed site is used only after an EXHAUSTIVE strict certificate (the persistent paged scan drained its whole domain with no strict site); while that
+		/// scan is still running (sampling and visit budgets are no certificate) the relaxed sites are deferred (nothing is placed, the search goes on next tick).
 		/// </summary>
-		public static RelaxedStep RelaxedGate(bool strictFinished, int strictSites, int relaxedSites)
+		public static RelaxedStep RelaxedGate(bool strictCertified, int strictSites, int relaxedSites)
 		{
 			if (relaxedSites <= 0 || strictSites > 0)
 				return RelaxedStep.NotNeeded;
 
-			return strictFinished ? RelaxedStep.Promote : RelaxedStep.Deferred;
+			return strictCertified ? RelaxedStep.Promote : RelaxedStep.Deferred;
 		}
 
 		/// <summary>
