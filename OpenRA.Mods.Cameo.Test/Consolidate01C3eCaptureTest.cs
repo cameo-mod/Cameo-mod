@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
+using OpenRA.Mods.Cameo.Dev;
 using OpenRA.Support;
 
 namespace OpenRA.Mods.Cameo.Test

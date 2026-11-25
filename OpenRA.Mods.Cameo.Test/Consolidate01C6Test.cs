@@ -66,7 +66,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Bank = 5000,
 			TierLine = 3500,
 			LowCashCut = true,
-			Owned = new Dictionary<string, int>(),
+			// The listed types are owned once, so S5 (the roll on first copies, c3c) offers none of them and the stage tests reach S8-S10.
+			Owned = fractions.Distinct().ToDictionary(f => f, _ => 1),
 			InFlight = new Dictionary<string, int>(),
 			BuildingCount = 10,
 			Fractions = fractions.Select(f => new KeyValuePair<string, int>(f, 10)).ToArray(),

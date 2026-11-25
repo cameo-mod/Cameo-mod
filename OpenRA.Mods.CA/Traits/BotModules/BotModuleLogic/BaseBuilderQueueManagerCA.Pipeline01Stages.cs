@@ -34,7 +34,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				case BaseBuildStage.S2ExpansionRefinery: return PipelineExpansionStage(queue, buildable, power, law);
 				case BaseBuildStage.S4AntiRush: return PipelineAntiRushStage(queue, buildable);
-				case BaseBuildStage.S5CoreOnce: return PipelineCoreOnceStage(buildable, snapshot);
+				case BaseBuildStage.S5CoreOnce: return PipelineCoreOnceStage(queue, buildable, snapshot);
 				case BaseBuildStage.S6PassiveIncome: return PipelinePassiveIncomeStage(queue, buildable, power, law);
 				case BaseBuildStage.S7RefineryPerField: return PipelineRefineryStage(queue, buildable, power);
 				case BaseBuildStage.S8ProductionCycle: return PipelineProductionCycleStage(buildable);
@@ -83,7 +83,7 @@ namespace OpenRA.Mods.CA.Traits
 		// The pipeline ignores TechChainTypes: the derived depth replaces it. The defence queue gets nothing (S4 and S9 own it). Construction yards and refineries
 		// keep their own stages (S2, S7). A doctrine alternative this player cannot build is not in queue.BuildableItems(), so it is absent here, and
 		// PipelineStageAdmits skips it at no test cost.
-		IEnumerable<string> PipelineCoreOnceStage(List<ActorInfo> buildable, BaseBuildSnapshot snapshot)
+		IEnumerable<string> PipelineCoreOnceStage(ProductionQueue queue, List<ActorInfo> buildable, BaseBuildSnapshot snapshot)
 		{
 			var b = baseBuilder.Info;
 			if (snapshot.DefenceQueue)

@@ -262,6 +262,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void StubStagesReadTheStageSourceLazilyAndInOrder()
 		{
 			var s = Snapshot();
+			s.TierLine = 1; // c6: S8 runs only from a tier line (BaseBuildTiersCA.Open); the bank (5000) is above it
 			var asked = new List<BaseBuildStage>();
 			s.StageSource = stage =>
 			{

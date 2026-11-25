@@ -117,7 +117,7 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void OnceOnlyAnOwnedOrInFlightTypeIsExcluded()
 		{
-			var order = CoreOnceCA.Order([T("none", count: 0), T("owned", count: 1), T("inflightAndOwned", count: 3), T("zero", count: 0, weight: 0, firstCopy: false)]);
+			var order = CoreOnceCA.Order([T("none", count: 0), T("owned", count: 1), T("inflightAndOwned", count: 3), T("zero", count: 0, weight: 0, firstCopy: true)]);
 			Assert.That(order, Is.EquivalentTo(new[] { "none", "zero" }));
 		}
 
@@ -414,7 +414,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheWiringIsPinnedAndTheOldLadderStillRuns()
 		{
 			var stages = Source(StagesFile);
-			Assert.That(stages, Does.Contain("case BaseBuildStage.S5CoreOnce: return PipelineCoreOnceStage(buildable, snapshot);"));
+			Assert.That(stages, Does.Contain("case BaseBuildStage.S5CoreOnce: return PipelineCoreOnceStage(queue, buildable, snapshot);"));
 			Assert.That(stages, Does.Contain("CoreOnceCA.Order(inputs)"));
 			Assert.That(stages, Does.Not.Contain("RoleRank"));
 			Assert.That(stages, Does.Contain("weight = Math.Max(0, listed);"));
@@ -422,7 +422,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var defence = Source(DefenceFile);
 			Assert.That(defence, Does.Contain("case BaseBuildStage.S5CoreOnce:\n"));
 			Assert.That(defence, Does.Contain("return buildableNames.Contains(candidate.Name)"));
-			Assert.That(defence, Does.Contain("!baseBuilder.Info.ConstructionYardTypes.Contains(candidate.Name) && !baseBuilder.Info.RefineryTypes.Contains(candidate.Name);"));
+			Assert.That(defence, Does.Contain("&& !baseBuilder.Info.ConstructionYardTypes.Contains(candidate.Name)").And.Contain("(!baseBuilder.Info.RefineryTypes.Contains(candidate.Name) || (baseBuilder.CaptureUnlockArmed && captureUnlockOffered.Contains(candidate.Name)))"));
 
 			var plan = Source(PlanFile);
 			Assert.That(plan, Does.Contain("case BaseBuildStage.S5CoreOnce: return CoreOnceCandidates(s, rng);"));
