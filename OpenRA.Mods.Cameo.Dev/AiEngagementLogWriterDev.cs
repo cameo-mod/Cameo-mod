@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Text;
 using OpenRA.Graphics;
 using OpenRA.Mods.CA.Traits;
+using OpenRA.Mods.Cameo.Traits.BotModules;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits
@@ -33,7 +34,11 @@ namespace OpenRA.Mods.Cameo.Traits
 			active = world.WorldActor.Trait<CameoLogHub>().Sink.Enabled &&
 				AiMatchLogWriter.Eligible(world.Type, world.IsReplay, world.IsLoadingGameSave, Game.IsHost);
 			if (active)
+			{
 				appender = new AiLogFileAppender(info.FileName, nameof(AiEngagementLogWriterDev));
+				foreach (var player in world.Players)
+					player.PlayerActor.TraitOrDefault<EngagementLogBotModule>()?.PrewarmBalanceMetadataForDevelopmentLog();
+			}
 		}
 
 		public void Append(string line)
