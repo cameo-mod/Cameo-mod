@@ -323,10 +323,25 @@ namespace OpenRA.Mods.CA.Traits
 			else
 			{
 				need = DefendArbiterCA.Need(attack, defence, Info.ArbiterDefendMarginPercent);
+				// Q4d: the pool inside the scan radius is already in `defence` (it is at the scene), so it joins the answer but covers none of `need`; the pick that covers the need
+				// comes from the pool outside the radius (nearest first), the same split as poolValue. Counting an in-radius unit twice stopped the pick short.
+				var outside = new List<UnitWposWrapper>();
+				foreach (var u in draftable)
+				{
+					if ((u.Actor.CenterPosition - at).HorizontalLengthSquared > scanSquared)
+						outside.Add(u);
+					else if (need > 0)
+					{
+						protectSq.Units.Add(u);
+						unitsHangingAroundTheBase.Remove(u);
+						fromPool++;
+					}
+				}
+
 				var pick = DefendArbiterCA.PickNearest(
-					draftable.Select((u, i) => new DefendCandidate(i, UnitValue(u.Actor), (u.Actor.CenterPosition - at).HorizontalLengthSquared)), need);
+					outside.Select((u, i) => new DefendCandidate(i, UnitValue(u.Actor), (u.Actor.CenterPosition - at).HorizontalLengthSquared)), need);
 				foreach (var i in pick)
-					TakeFromPool(draftable[i]);
+					TakeFromPool(outside[i]);
 
 				if (got < need)
 				{
