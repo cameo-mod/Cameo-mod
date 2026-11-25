@@ -10,6 +10,7 @@
 
 using System;
 using System.IO;
+using System.Text.RegularExpressions;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
 
@@ -229,6 +230,16 @@ namespace OpenRA.Mods.Cameo.Test
 			var pipe = RepoFile(Bots + "SquadManagerBotModuleCA.Pipeline02.cs");
 			Assert.That(pipe, Does.Contain("internal bool ArmyLaunchArbiterOn => ArmyPipelineOn && TeamLeadActive && !ablateSqLaunchArbiter.Off(Player, AblationIds.SqLaunchArbiter);"));
 			Assert.That(pipe, Does.Contain("internal bool ArmyOrderEngagedOn => ArmyLaunchArbiterOn && !ablateSqOrderEngaged.Off(Player, AblationIds.SqOrderEngaged);"));
+		}
+
+		[Test]
+		public void TheMasterSwitchIsArmedInTheSixPersonalitiesNeverInClassic()
+		{
+			var yaml = RepoFile("mods/cameo/ai/ai.yaml");
+			var classic = yaml.IndexOf("SquadManagerBotModuleCA@classic:", StringComparison.Ordinal);
+			Assert.That(classic, Is.GreaterThan(0));
+			Assert.That(Regex.Matches(yaml[..classic], "\n\t\tSquadPipeline02Enabled: true").Count, Is.EqualTo(6));
+			Assert.That(yaml[classic..], Does.Not.Contain("SquadPipeline02"), "never in @classic");
 		}
 	}
 }
