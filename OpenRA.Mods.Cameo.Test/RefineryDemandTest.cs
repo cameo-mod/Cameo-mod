@@ -200,7 +200,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var d = Source(PlannerDemand);
 			Assert.That(d, Does.Contain("Func<int, RefineryDemand.Verdict> DemandOverride => RefDemandArmed ? (demandVerdictFunc ??= DemandVerdict) : null;"));
 			Assert.That(d, Does.Contain("bool RefDemandArmed => Info.RefDemand && zonesActive && LawActive;"));
-			Assert.That(d, Does.Contain("pathFinder.PathMightExistForLocomotorBlockedByImmovable(spec.Locomotor, yard, target)"), "the domain check, no path search");
+			Assert.That(d, Does.Contain("pathFinder.PathMightExistForLocomotorBlockedByImmovable(locomotor, from, cell)"), "the domain check, no path search");
 			Assert.That(d, Does.Not.Contain("FindPath"));
 			Assert.That(d, Does.Contain("foreach (var yard in yards)"), "every own yard counts its own radius");
 
@@ -212,7 +212,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var search = Source(Logic + "RefinerySiteSearch.cs");
 			Assert.That(search, Does.Contain("return LegalCell(e, c.Cell) && SpacingAdmits(c.Cell, c.SpacingFallback);"));
 			Assert.That(search, Does.Contain("Offer(e, cell, new RefinerySiteScore(0, tier, relaxed ? gap + 2 : gap, d2, cell.X, cell.Y), anchor, now, relaxed);"));
-			Assert.That(search.Split("|| SpacingTier(cell) != RefineryDemand.SpacingAllowed)").Length - 1, Is.EqualTo(2), "the widened and sampled sites keep the full spacing");
+			Assert.That(search.Split("|| SpacingTier(cell) != RefineryDemand.SpacingAllowed)").Length - 1, Is.EqualTo(1), "the sampled sites keep the full spacing; the widened site may be fallback-spacing (relaxed, deferred)");
 		}
 
 		[Test]
@@ -257,6 +257,74 @@ namespace OpenRA.Mods.Cameo.Test
 
 			Assert.That(AblationIds.RefDemand, Is.EqualTo("ref_demand"));
 			Assert.That(AblationSpec.RegistryIds(), Does.Contain(AblationIds.RefDemand));
+		}
+
+		[Test]
+		public void APartiallyReachableZoneIsAccepted()
+		{
+			// Only the far cell of the zone shares the harvester domain of the yard; the nearest cell does not.
+			var cells = new[] { C(0, 0), C(1, 0), C(50, 50) };
+			Assert.That(RefineryDemand.AnyCellReachable(cells, true, c => c.X > 40), Is.True);
+		}
+
+		[Test]
+		public void AZoneWithNoReachableCellOrNoHarvesterProfileIsRejected()
+		{
+			var cells = new[] { C(0, 0), C(1, 0), C(50, 50) };
+			Assert.That(RefineryDemand.AnyCellReachable(cells, true, c => false), Is.False, "no cell in the domain");
+			Assert.That(RefineryDemand.AnyCellReachable(cells, false, c => true), Is.False, "no harvester profile: never accepted");
+			Assert.That(RefineryDemand.AnyCellReachable(Array.Empty<CPos>(), true, c => true), Is.False, "an empty zone");
+			Assert.That(RefineryDemand.AnyCellReachable(cells, true, null), Is.False, "no domain query");
+		}
+
+		[Test]
+		public void AStrictSearchNotFinishedDefersAndPlacesNoRelaxedSite()
+		{
+			// Two relaxed sites found, no strict site yet, the strict search still running (the deadline hit): deferred, nothing promoted.
+			Assert.That(RefineryDemand.RelaxedGate(false, 0, 2), Is.EqualTo(RefineryDemand.RelaxedStep.Deferred));
+
+			// The deferral also holds the certified cancel back (the Visit condition), and a strict site makes the relaxed ones moot.
+			Assert.That(RefineryDemand.RelaxedGate(false, 1, 2), Is.EqualTo(RefineryDemand.RelaxedStep.NotNeeded));
+
+			// The relaxed list is only ever filled by Offer(..., spacingFallback), never Best.
+			var search = Source("mods/CA/Traits/BotModules/BotModuleLogic/RefinerySiteSearch.cs");
+			Assert.That(search, Does.Contain("InsertBest(e.Relaxed, c, x => x.Score, x => x.Cell);"));
+			Assert.That(search, Does.Contain("PromoteRelaxed(e, now);"));
+		}
+
+		[Test]
+		public void ARelaxedSiteIsAllowedOnlyAfterTheStrictSearchIsExhausted()
+		{
+			Assert.That(RefineryDemand.RelaxedGate(true, 0, 1), Is.EqualTo(RefineryDemand.RelaxedStep.Promote));
+			Assert.That(RefineryDemand.RelaxedGate(true, 0, 0), Is.EqualTo(RefineryDemand.RelaxedStep.NotNeeded), "nothing relaxed to use");
+			Assert.That(RefineryDemand.RelaxedGate(true, 2, 1), Is.EqualTo(RefineryDemand.RelaxedStep.NotNeeded), "a strict site exists");
+		}
+
+		[Test]
+		public void TheDevDemandIsTheGameplayDemand()
+		{
+			var verdicts = new[] { V.Demand, V.Demand, V.ZoneCap, V.Unreachable, V.Demand };
+			var fieldOf = new[] { 0, 1, 2, 3, 4 };
+			var anchors = new[] { C(20, 20), C(40, 20), C(60, 20), C(80, 20), C(100, 20) };
+			var fieldCells = new IReadOnlyCollection<CPos>[]
+			{
+				new[] { C(20, 20) }, new[] { C(40, 20) }, new[] { C(60, 20) }, new[] { C(80, 20) }, new[] { C(100, 20) },
+			};
+
+			// Zone 1's coverage is unknown: gameplay does not count it, so neither may the DEV row.
+			ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells, Array.Empty<CPos>(), new[] { C(10, 20) }, 8, 200, null, null, null,
+				out var unservedInReach, out _, out _, out _, out _,
+				coverageUnknown: i => i == 1, demand: i => verdicts[i]);
+
+			var dev = RefineryDemand.EligibleZones(verdicts.Length, i => verdicts[i], i => i == 1);
+			Assert.That(dev, Is.EqualTo(2));
+			Assert.That(dev, Is.EqualTo(unservedInReach));
+
+			// The remaining cap is its own number and never the demand.
+			Assert.That(RefineryDemand.CapRemaining(V.Demand, 2, 1), Is.EqualTo(1));
+			Assert.That(RefineryDemand.CapRemaining(V.ZoneCap, 2, 2), Is.EqualTo(0));
+			Assert.That(Source("mods/Cameo/Traits/BotModules/ExpansionPlannerBotModule.RefDemand.cs"),
+				Does.Contain("RefineryDemand.EligibleZones(anchors.Count, i => demandVerdicts[i], CoverageUnknown)"));
 		}
 
 		[Test]

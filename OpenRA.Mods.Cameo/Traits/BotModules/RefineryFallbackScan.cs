@@ -401,6 +401,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int rankBest;
 		readonly List<(CPos Cell, int Rank)> candidates = new();
 
+		// REF-DEMAND-01: picks refused by PickLegal (full spacing) but legal for the exhaustion proof (fallback spacing). They are used only once
+		// every strict candidate of the pass is drained, so the proof and the pick agree and a refinery is never held on a relaxed-only cell.
+		readonly List<(CPos Cell, int Rank)> relaxedPicks = new();
+
 		// Pick — resumable argmin under the exact global (rank, X, Y) order
 		int pickScanIndex;
 		int pickBestIndex;
@@ -1213,6 +1217,28 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			site = null;
 			if (candidates.Count == 0)
 			{
+				if (relaxedPicks.Count > 0)
+				{
+					// The strict candidates are exhausted: the best relaxed one (rank, X, Y), revalidated live by the proof's predicate.
+					var best = 0;
+					for (var i = 1; i < relaxedPicks.Count; i++)
+					{
+						var a = relaxedPicks[i];
+						var b = relaxedPicks[best];
+						if (a.Rank < b.Rank || (a.Rank == b.Rank && (a.Cell.X < b.Cell.X || (a.Cell.X == b.Cell.X && a.Cell.Y < b.Cell.Y))))
+							best = i;
+					}
+
+					var relaxed = relaxedPicks[best].Cell;
+					relaxedPicks[best] = relaxedPicks[relaxedPicks.Count - 1];
+					relaxedPicks.RemoveAt(relaxedPicks.Count - 1);
+					if (!snapshot.Legal(relaxed))
+						return PickResult.Continue;
+
+					site = relaxed;
+					return PickResult.Picked;
+				}
+
 				FinishPass(now);
 				return PickResult.Drained;
 			}
@@ -1234,6 +1260,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			var pick = candidates[pickBestIndex].Cell;
+			var pickRank = candidates[pickBestIndex].Rank;
 			candidates[pickBestIndex] = candidates[candidates.Count - 1];
 			candidates.RemoveAt(candidates.Count - 1);
 			pickScanIndex = 0;
@@ -1244,6 +1271,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				site = pick;
 				return PickResult.Picked;
 			}
+
+			if (snapshot.Legal(pick))
+				relaxedPicks.Add((pick, pickRank));
 
 			return PickResult.Continue;
 		}
@@ -1261,6 +1291,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			stale.Clear();
 			staleOverflow = false;
 			candidates.Clear();
+			relaxedPicks.Clear();
 			providerEnum = null;
 			rankEnum = null;
 			rankSort = null;

@@ -22,10 +22,10 @@ namespace OpenRA.Mods.CA.Traits
 		void RefineryZonesBuilt(Player owner, int tick, int zones, int fields, int points, int radius);
 
 		/// <summary>One zone's demand verdict (<see cref="RefineryDemand.Reason"/>, or "zone_gate" when REF-FIELD-02 blocks a demand zone).</summary>
-		void RefineryZoneVerdict(Player owner, int tick, int zone, CPos center, int radius, string reason, int refineries, int demand, int yardDistance);
+		void RefineryZoneVerdict(Player owner, int tick, int zone, CPos center, int radius, string reason, int refineries, int demand, int capRemaining, int yardDistance);
 
-		/// <summary>The per-bot sum of the last anchor update.</summary>
-		void RefineryDemandSummary(Player owner, int tick, int zones, int zonesInDemand, int demand, int ownRefineries, int friendlyRefineries,
+		/// <summary>The per-bot sum of the last anchor update: <paramref name="demand"/> = the eligible zone count (as gameplay counts it), <paramref name="capRemaining"/> = the refineries the demand zones may still take before their caps.</summary>
+		void RefineryDemandSummary(Player owner, int tick, int zones, int zonesInDemand, int demand, int capRemaining, int ownRefineries, int friendlyRefineries,
 			int outOfRadius, int unreachable, int capped, int alliedServed);
 
 		/// <summary>An anchor was parked (<paramref name="reason"/> claim_fail or stuck) until <paramref name="untilTick"/>.</summary>

@@ -80,6 +80,11 @@ namespace OpenRA.Mods.CA.Traits
 			public HashSet<CPos> Zone1;
 			public bool FallbackExhausted;
 
+			// REF-DEMAND-01: sites legal only at the fallback spacing wait here, never in Best, until the strict (full spacing) search has finished
+			// with no site; StrictDone is set at that point and cleared when the next pass starts.
+			public readonly List<Candidate> Relaxed = new();
+			public bool StrictDone;
+
 			// READY timeline (sec 4).
 			public int? ReadyTick;
 			public int? ReadyPrime;
@@ -347,7 +352,8 @@ namespace OpenRA.Mods.CA.Traits
 					units = Math.Max(units, settings.DeadlineVisitUnits);
 					Search(law, settings, e, demand, now, ref units, true);
 					if (!TryPlace(bot, law, settings, e, demand, now, RefineryPlacedVia.DeadlinePhase)
-						&& e.FallbackExhausted && baseBuilder.ManagerFor(e.Queue.Info.Type) is { } qm
+						&& e.FallbackExhausted && RefineryDemand.RelaxedGate(e.StrictDone, e.Best.Count, e.Relaxed.Count) != RefineryDemand.RelaxedStep.Deferred
+						&& baseBuilder.ManagerFor(e.Queue.Info.Type) is { } qm
 						&& qm.EpisodeCertifiedCancel(bot, e.Queue, e.Item))
 					{
 						// Sec 3.6: the only cancel authority, the _08 certificate with two verdicts.
@@ -497,11 +503,33 @@ namespace OpenRA.Mods.CA.Traits
 		void Offer(Episode e, CPos cell, RefinerySiteScore score, RefineryAnchorClaim? claim, int now, bool spacingFallback = false)
 		{
 			var c = new Candidate { Cell = cell, Score = score, Claim = claim, FoundTick = now, SpacingFallback = spacingFallback };
+			if (spacingFallback)
+			{
+				// Deferred: a relaxed site never enters Best before the strict search is exhausted (PromoteRelaxed).
+				RefinerySiteSearchLogic.InsertBest(e.Relaxed, c, x => x.Score, x => x.Cell);
+				return;
+			}
+
 			if (RefinerySiteSearchLogic.InsertBest(e.Best, c, x => x.Score, x => x.Cell) < 0)
 				return;
 
 			e.FirstFind ??= now;
 			watchStale = true;
+		}
+
+		// REF-DEMAND-01: the strict search finished. With no strict site the legal relaxed ones enter Best now; with a strict site they are dropped.
+		void PromoteRelaxed(Episode e, int now)
+		{
+			e.StrictDone = true;
+			if (RefineryDemand.RelaxedGate(true, e.Best.Count, e.Relaxed.Count) == RefineryDemand.RelaxedStep.Promote)
+				foreach (var c in e.Relaxed)
+					if (LegalFor(e, c) && RefinerySiteSearchLogic.InsertBest(e.Best, c, x => x.Score, x => x.Cell) >= 0)
+					{
+						e.FirstFind ??= now;
+						watchStale = true;
+					}
+
+			e.Relaxed.Clear();
 		}
 
 		// Sec 3.3: the cyclic candidate stream — the O-1 + O-2 pass (anchors re-peeked at pass start, each
@@ -526,6 +554,8 @@ namespace OpenRA.Mods.CA.Traits
 
 				if (e.O3RUnits >= O3RPhaseVisits * settings.SearchVisitUnits)
 				{
+					// The strict search (the claim pass, then one full O-3 : R phase) is over: only now may a relaxed site be used.
+					PromoteRelaxed(e, now);
 					e.InO3R = false;
 					e.Anchors = null;
 					continue;
@@ -551,6 +581,8 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				// O-1: the ECON-A R6 claim the demand reserved at admission (tier 0), then O-2 in the ladder's order.
 				e.Anchors = new List<RefineryAnchorClaim>();
+				e.Relaxed.Clear();
+				e.StrictDone = false;
 				CPos? o1 = null;
 				if (demand?.ReservedClaim is { } reserved && law.RefineryAnchorReserved(reserved.Anchor, demand))
 				{
@@ -673,13 +705,16 @@ namespace OpenRA.Mods.CA.Traits
 			if (outcome != RefineryFallbackOutcome.Site || site is not { } cell)
 				return;
 
-			if (!LegalCell(e, cell) || SpacingTier(cell) != RefineryDemand.SpacingAllowed)
+			// The scan hands out a fallback-spacing site only after its strict candidates are drained; it waits in Relaxed like every relaxed site.
+			var tier = SpacingTier(cell);
+			if (!LegalCell(e, cell) || tier == RefineryDemand.SpacingRefused)
 			{
 				e.LastIllegal[cell] = now;
 				return;
 			}
 
-			Offer(e, cell, new RefinerySiteScore(1, 0, law.RefineryResourceGap(e.ItemName, cell), 0, cell.X, cell.Y), null, now);
+			Offer(e, cell, new RefinerySiteScore(1, 0, law.RefineryResourceGap(e.ItemName, cell), 0, cell.X, cell.Y), null, now,
+				tier == RefineryDemand.SpacingFallbackOnly);
 		}
 
 		// R: seeded samples — a provider uniformly from the ActorID-ordered list, then a cell uniformly in its

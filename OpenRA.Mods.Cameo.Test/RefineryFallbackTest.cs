@@ -160,6 +160,66 @@ namespace OpenRA.Mods.Cameo.Test
 			return default;
 		}
 
+		[Test]
+		public void ARefineryIsNeverHeldOnAFallbackOnlyCellOutsideTheClaimAnnulus()
+		{
+			// REF-DEMAND-01: the exhaustion proof counts the cell (fallback spacing), the strict pick refuses it. With no strict cell the scan must
+			// still hand it out (after the strict candidates drained) instead of draining to a hold forever.
+			var relaxedCell = new CPos(3, 3);
+			IReadOnlyList<RefineryFallbackScan.Provider?> providers = new RefineryFallbackScan.Provider?[] { Prov(3, 3, 1) };
+			var cells = RectMap(8, 8).ToList();
+			var (mapIndex, indexCell) = IndexFns(8, 8);
+			Func<IEnumerator<RefineryFallbackScan.CoherenceAtom>> atoms = () => AtomsOf(FixedAtoms());
+			var snapshot = new RefineryFallbackScan.Snapshot(
+				() => providers.GetEnumerator(),
+				() => new[] { relaxedCell }.AsEnumerable().GetEnumerator(),
+				() => cells.GetEnumerator(),
+				Unrestricted,
+				OneTile,
+				atoms,
+				atoms,
+				mapIndex,
+				indexCell,
+				2,
+				c => true,
+				c => c == relaxedCell,
+				c => false);
+
+			var scan = new RefineryFallbackScan(50);
+			var verdict = Drain(scan, 8, 2000, () => snapshot, out var site);
+			Assert.That(verdict, Is.EqualTo(RefineryFallbackScan.Verdict.Site));
+			Assert.That(site, Is.EqualTo(relaxedCell));
+		}
+
+		[Test]
+		public void AStrictCellIsPickedBeforeARelaxedOne()
+		{
+			var strict = new CPos(6, 6);
+			var relaxed = new CPos(3, 3);
+			IReadOnlyList<RefineryFallbackScan.Provider?> providers = new RefineryFallbackScan.Provider?[] { Prov(3, 3, 1) };
+			var cells = RectMap(8, 8).ToList();
+			var (mapIndex, indexCell) = IndexFns(8, 8);
+			Func<IEnumerator<RefineryFallbackScan.CoherenceAtom>> atoms = () => AtomsOf(FixedAtoms());
+			var snapshot = new RefineryFallbackScan.Snapshot(
+				() => providers.GetEnumerator(),
+				() => new[] { relaxed }.AsEnumerable().GetEnumerator(),
+				() => cells.GetEnumerator(),
+				Unrestricted,
+				OneTile,
+				atoms,
+				atoms,
+				mapIndex,
+				indexCell,
+				2,
+				c => true,
+				c => c == relaxed || c == strict,
+				c => c == strict);
+
+			var verdict = Drain(new RefineryFallbackScan(50), 8, 2000, () => snapshot, out var site);
+			Assert.That(verdict, Is.EqualTo(RefineryFallbackScan.Verdict.Site));
+			Assert.That(site, Is.EqualTo(strict), "the closer relaxed cell must not outrank a strict one");
+		}
+
 		// ---- AMEND-A: real pre-charged work in every phase ------------------
 
 		[Test]
