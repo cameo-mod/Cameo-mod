@@ -140,6 +140,13 @@ namespace OpenRA.Mods.CA.Traits
 		// bb_skip, DEV only: the types this walk actually offered (a candidate that reached the stage's admission or feasibility tests) and rejected, with the
 		// offering stage and the reject reason. Null = not collected; only the DEV-only recorder in the queue manager ever sets it.
 		public Dictionary<string, (BaseBuildStage Stage, string Reason)> Offered;
+
+		// S8-STARVE-01 (row bb_s8_rejected_fallthrough, Sol 58ADBC25): true = an S8 candidate that was only offered and then rejected no longer holds S9 and S10 back under
+		// SUSTAINED cash (an admitted S8 still wins first). False = the offer alone holds them, as before.
+		public bool S8RejectedFallthrough;
+
+		// DEV only: how many S8 candidates this walk offered (written only by the compiled-out recorder; always 0 in a release build).
+		public int S8Offers;
 	}
 
 	/// <summary>
@@ -187,12 +194,13 @@ namespace OpenRA.Mods.CA.Traits
 				if (!QueueStageSplit.Allowed(stage, snapshot.QueueSplit, snapshot.DefenceQueue))
 					continue;
 
-				if (!BaseBuildTiersCA.Open(stage, snapshot.TierLine, snapshot.Bank, snapshot.LowCashCut, snapshot.SustainedActive, snapshot.DefenceThreatSeen, cycleOffered))
+				if (!BaseBuildTiersCA.Open(stage, snapshot.TierLine, snapshot.Bank, snapshot.LowCashCut, snapshot.SustainedActive, snapshot.DefenceThreatSeen, BaseBuildTiersCA.CycleHolds(cycleOffered, snapshot.S8RejectedFallthrough)))
 					continue;
 
 				foreach (var candidate in StageCandidates(stage, snapshot, rng))
 				{
 					cycleOffered |= stage == BaseBuildStage.S8ProductionCycle && candidate.Name != null;
+					NoteS8Offer(snapshot, stage, candidate);
 
 					// A type that already failed A this sweep fails again (the state is the same, the reserve only grows with the stage): no second test.
 					if (candidate.Name == null || (failed != null && failed.Contains(candidate.Name)))
@@ -219,6 +227,14 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			return new BaseBuildPick(null, BaseBuildStage.None, null, tests);
+		}
+
+		// S8-STARVE-01, DEV only: counts the S8 offers of a walk (the queue manager reports the fall-through when the pick comes from S9 or S10).
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		static void NoteS8Offer(BaseBuildSnapshot s, BaseBuildStage stage, BaseBuildCandidate candidate)
+		{
+			if (stage == BaseBuildStage.S8ProductionCycle && candidate.Name != null)
+				s.S8Offers++;
 		}
 
 		// bb_skip, DEV only (compiled out of a release build with its arguments): the first rejection of an offered type this walk.

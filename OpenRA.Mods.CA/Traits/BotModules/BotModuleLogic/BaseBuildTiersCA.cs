@@ -40,6 +40,12 @@ namespace OpenRA.Mods.CA.Traits
 			sustainedActive && tierLine > 0 ? SustainedOrder : BaseBuildPlanCA.Stages;
 
 		/// <summary>
+		/// S8-STARVE-01 (row bb_s8_rejected_fallthrough): whether an S8 offer holds S9 and S10 back. Off = any enumerated offer does (the old rule). On = never, a bare
+		/// offer that was rejected falls through; an admitted S8 candidate already returned from the walk, so it still wins first.
+		/// </summary>
+		public static bool CycleHolds(bool cycleOffered, bool rejectedFallthrough) => cycleOffered && !rejectedFallthrough;
+
+		/// <summary>
 		/// Whether the planner walks <paramref name="stage"/> at all.
 		/// <paramref name="lowCashCut"/> = the R9 switch (pb_essentials_low_cash): below L only S1-S7 (and a threat-seen S9) run.
 		/// <paramref name="cycleOffered"/> = S8 offered at least one type this sweep, i.e. the source ENUMERATED one (an exhausted cycle, every type at its limit, lets normal

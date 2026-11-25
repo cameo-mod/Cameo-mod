@@ -56,6 +56,7 @@ namespace OpenRA.Mods.CA.Traits
 			OfferedCollect(snapshot); // bb_skip, DEV only
 			var pick = BaseBuildPlanCA.Plan(snapshot, pipelineFeasibility, BotRng.For(player, nameof(BaseBuilderQueueManagerCA)));
 			SkipsObserved(buildable, snapshot, pick); // bb_skip, DEV only
+			S8FallthroughObserved(snapshot, pick); // bb_s8_rejected_fallthrough, DEV only
 			if (pick.IsNone)
 				return false;
 
@@ -120,6 +121,7 @@ namespace OpenRA.Mods.CA.Traits
 				FractionMilli = FractionMilli,
 				IntervalActive = name => b.BuildingIntervals != null && b.BuildingIntervals.ContainsKey(name) && activeBuildingIntervals.ContainsKey(name),
 				CoreOnceListedOnly = baseBuilder.BuildAllListedArmed,
+				S8RejectedFallthrough = baseBuilder.S8RejectedFallthroughArmed,
 			};
 
 			// c3, c4, c5: S2, S2b, S4, S5, S6, S7, S9 (Pipeline01Stages.cs); S5 reads the counts of this snapshot.
@@ -343,6 +345,31 @@ namespace OpenRA.Mods.CA.Traits
 					o.BuildingSkipped(player, world.WorldTick, kv.Key, Category, offered ? rejection.Stage.ToString() : stage, offered ? "offered_rejected" : "not_offered",
 						offered ? rejection.Reason : walkReason);
 			}
+		}
+
+		// S8-STARVE-01 (row bb_s8_rejected_fallthrough), DEV only: the walk offered S8 types under SUSTAINED cash, none was admitted, and S9 or S10 picked instead (the exact
+		// case the row opens). One debug line per queue and 750 ticks: queue, tick, bank, tier line, S8 offers, the stage and candidate that won. Compiled out of a release build.
+#if CAMEO_DEV_LOGGING
+		int s8FallthroughLogged = -750;
+#endif
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void S8FallthroughObserved(BaseBuildSnapshot s, BaseBuildPick pick)
+		{
+#if CAMEO_DEV_LOGGING
+			if (!s.S8RejectedFallthrough || !s.SustainedActive || s.TierLine <= 0 || s.S8Offers == 0 || pick.IsNone)
+				return;
+
+			if (pick.Stage != BaseBuildStage.S9ExtraDefence && pick.Stage != BaseBuildStage.S10Fractions)
+				return;
+
+			var now = world.WorldTick;
+			if (now - s8FallthroughLogged < 750)
+				return;
+
+			s8FallthroughLogged = now;
+			Log.Write("debug", $"AI ({player.ClientIndex}): BB-S8-FALLTHROUGH queue {Category} tick {now} bank {s.Bank} line {s.TierLine} s8_offers {s.S8Offers} stage {pick.Stage} candidate {pick.Candidate} tests {pick.Tests}");
+#endif
 		}
 
 		// bb_skip, DEV only: arms the per-walk offered-set collector when a recorder is present.

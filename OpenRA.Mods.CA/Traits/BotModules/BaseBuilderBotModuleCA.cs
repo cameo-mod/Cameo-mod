@@ -364,6 +364,11 @@ namespace OpenRA.Mods.CA.Traits
 			"refinery exhaustion, placement saturation, episode certificate). In-progress entries are held or finished instead. Gated by SwitchCondition; row bb_no_cancel (off = the six sites as before).")]
 		public readonly bool BbNoCancel = false;
 
+		[Desc("S8-STARVE-01 (Sol 58ADBC25, Opus V08G): under SUSTAINED cash an S8 (production cycle) type that is only OFFERED and then rejected (stage hold, failed feasibility, refused claim)",
+			"no longer holds S9 (extra defence) and S10 (fractions) back for the sweep; they run through their ordinary checks. An admitted S8 type still wins first, an empty cycle,",
+			"the low-cash cut, the feasibility budget and the S2/S7 refinery stages are unchanged. Gated by SwitchCondition; row bb_s8_rejected_fallthrough (off = the offer alone holds S9 and S10).")]
+		public readonly bool BbS8RejectedFallthrough = false;
+
 		[Desc("BUILD-ALL-B (user ruling 2026-11-25): the base builder never queues a terrain foundation (D2k concrete: a building without health that removes",
 			"itself unconditionally, FoundationExclusion) on any path, listed or not. Concrete use is planned by CONCRETE-PLAN-01 after the playtest.",
 			"Off = as before. Gated by SwitchCondition; row bb_no_foundation.")]
@@ -918,6 +923,8 @@ namespace OpenRA.Mods.CA.Traits
 		public bool BuildAllListedArmed => Info.BbBuildAllListed && switchesActive && !ablateBuildAllListed.Off(player, AblationIds.BbBuildAllListed);
 		AblationLatch ablateNoCancel; // NO-CANCEL-01
 		public bool NoCancelArmed => Info.BbNoCancel && switchesActive && !ablateNoCancel.Off(player, AblationIds.BbNoCancel);
+		AblationLatch ablateS8RejectedFallthrough; // S8-STARVE-01
+		public bool S8RejectedFallthroughArmed => Info.BbS8RejectedFallthrough && switchesActive && !ablateS8RejectedFallthrough.Off(player, AblationIds.BbS8RejectedFallthrough);
 		AblationLatch ablateRefineryIntervalLadder; // REF-INTERVAL-LADDER
 		public bool RefineryIntervalLadderArmed => Info.RefineryIntervalLadder && Info.RefineryEconomyGate && switchesActive && !ablateRefineryIntervalLadder.Off(player, AblationIds.RefineryIntervalLadder);
 
