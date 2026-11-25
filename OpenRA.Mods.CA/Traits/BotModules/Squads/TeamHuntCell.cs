@@ -32,5 +32,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		/// a squad that reached a cell it could not see never gets the same cell again.
 		/// </summary>
 		public static bool Reached(long distSq, int arriveCells) => distSq <= 4L * arriveCells * arriveCells;
+
+		/// <summary>
+		/// Q8b (row sq_hunt_follow): a pushed hunt order moves on: the team's cell is not the order's cell (the board changes its cell only when the old one was explored or its hold ran out),
+		/// and at least <paramref name="minTicks"/> have passed since <paramref name="sinceTick"/> (the push or the last move; a tick in the future or before the push = not yet).
+		/// </summary>
+		public static bool Follow(bool sameCell, int sinceTick, int now, int minTicks) =>
+			!sameCell && sinceTick >= 0 && now >= sinceTick && now - sinceTick >= Math.Max(0, minTicks);
 	}
 }

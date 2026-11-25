@@ -604,6 +604,10 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 			}
 
+			// Q8b (sq_hunt_follow): a pushed hunt order moves on to the team's next hunt cell once the old one is explored (the pick below returns the same cell until then).
+			if (!gone && targetId == 0 && ArmyHuntFollowMoves(order, target, now))
+				return;
+
 			if ((!gone && targetId == 0) || (targetId != 0 && targetId == order.TargetActorId))
 				return;
 
