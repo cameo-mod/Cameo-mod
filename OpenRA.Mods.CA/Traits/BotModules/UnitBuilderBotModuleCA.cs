@@ -601,7 +601,15 @@ namespace OpenRA.Mods.CA.Traits
 		readonly HashSet<string> rollOrdered = new(StringComparer.Ordinal);
 		string rollPersonality = "";
 		bool rollFirst;
-		readonly Dictionary<string, (string Name, int Tick)> rollFirstOpen = new(StringComparer.Ordinal);
+		sealed class RollOpenFirst
+		{
+			public string Name;
+			public int Tick;
+			public ProductionItem Item; // bound the first visit after the order shows up in the queue
+		}
+
+		const int RollFirstOpenMaxTicks = 3000; // a first build that stays queued this long (held by the pause votes, say) stops blocking the queue's other new types
+		readonly Dictionary<string, RollOpenFirst> rollFirstOpen = new(StringComparer.Ordinal);
 		bool firstItemRoundPass;
 		readonly Dictionary<string, string> firstRoundSavedCursors = new(StringComparer.Ordinal);
 		int unitMixTick = -1;
@@ -922,7 +930,22 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			unitsToBuild = new ActorIndex.OwnerAndNames(world, referencedUnitTypes, player);
+#if CAMEO_DEV_LOGGING
+			world.ActorAdded += RollUnitBuilt;
+#endif
 		}
+
+#if CAMEO_DEV_LOGGING
+		// UNIT-ALL-01 DEV (Opus 11-25, coverage scorer): one unit_roll.csv row per unit that completes for this bot ("completed" = it enters the world after tick 0, so the starting
+		// units are not counted): tick,seat,ub_unit_built,<type>,,<1 when the type is in UnitsToBuild else 0>. Only the enabled module instance writes. Compiled out of release.
+		void RollUnitBuilt(Actor a)
+		{
+			if (IsTraitDisabled || world.WorldTick == 0 || a.Owner != player || !a.Info.HasTraitInfo<IPositionableInfo>() || a.Info.HasTraitInfo<BuildingInfo>())
+				return;
+
+			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},ub_unit_built,{a.Info.Name},,{(Info.UnitsToBuild != null && Info.UnitsToBuild.ContainsKey(a.Info.Name) ? 1 : 0)}");
+		}
+#endif
 
 		protected override void TraitEnabled(Actor self)
 		{
@@ -1669,8 +1692,8 @@ namespace OpenRA.Mods.CA.Traits
 					// batch keeps the bank accounting so a cheaper feasible one can land.
 					var fullCost = Math.Max(0, queue.GetProductionCost(unit));
 
-					// UNIT-ALL-01 c3 (Opus 11-25): the FIRST build of a listed type is pay-as-you-go like TECHCHAIN-PAYGO: it queues with any bank above 0 (OpenRA pays progressively) instead of
-					// waiting for the full price, so the gates below see cost 0 for it; ChooseRollUnit lets one first-of-each be open per queue. Everything else keeps the full gates.
+					// UNIT-ALL-01 c3 (Opus 11-25): the FIRST build of a listed type is pay-as-you-go like TECHCHAIN-PAYGO: it does not wait for the full price (OpenRA pays progressively): the afford, reserve and
+					// depth-cash gates below are evaluated at cost 0 for it, so a bank of 0 or the tier reserve can still hold it; ChooseRollUnit lets one first-of-each be open per queue. Everything else keeps the full gates.
 					var paygo = roll && rollFirst && UnitRoll.FirstAdmits(batch.BankLeft);
 					var cost = paygo ? 0 : fullCost;
 					if (!batch.Affords(cost) || !ReserveAdmits(batch, cost)
@@ -1687,7 +1710,7 @@ namespace OpenRA.Mods.CA.Traits
 					NotifyStarted(name, queue.Info.Type);
 					counters.Record(unit);
 					if (paygo)
-						rollFirstOpen[queue.Actor.ActorID + "|" + queue.Info.Type] = (name, world.WorldTick);
+						rollFirstOpen[queue.Actor.ActorID + "|" + queue.Info.Type] = new RollOpenFirst { Name = name, Tick = world.WorldTick };
 
 					batch.Reserve(queue, fullCost);
 					if (depthQueue)
@@ -2520,7 +2543,16 @@ namespace OpenRA.Mods.CA.Traits
 
 			// c3: at most one first-of-each is open per queue; while it is queued the other never-built types wait (they are not rolled as ordinary picks either).
 			var openKey = queue.Actor.ActorID + "|" + queue.Info.Type;
-			var firstOpen = rollFirstOpen.TryGetValue(openKey, out var open) && (open.Tick == world.WorldTick || queue.AllQueued().Any(i => i.Item == open.Name));
+			var firstOpen = false;
+			if (rollFirstOpen.TryGetValue(openKey, out var open))
+			{
+				// open for the rest of the pass that ordered it; afterwards while THAT queued item (not a later copy of the same name) is still in the queue, for at most RollFirstOpenMaxTicks
+				if (open.Item == null && open.Tick != world.WorldTick)
+					open.Item = queue.AllQueued().FirstOrDefault(i => i.Item == open.Name);
+
+				firstOpen = world.WorldTick - open.Tick <= RollFirstOpenMaxTicks && (open.Tick == world.WorldTick || (open.Item != null && queue.AllQueued().Contains(open.Item)));
+			}
+
 			if (!firstOpen)
 				rollFirstOpen.Remove(openKey);
 
@@ -2662,9 +2694,8 @@ namespace OpenRA.Mods.CA.Traits
 			return rollDeficits;
 		}
 
-		// UNIT-ALL-01 DEV log (unit_roll.csv; compiled out of release: [Conditional] drops the calls and their arguments). Rows: header, then "unit_pick" = the roll's candidates and weights, at most
+		// UNIT-ALL-01 DEV log (unit_roll.csv, no header row: all seats append to one file; columns tick,seat,event,type,queue,detail; compiled out of release: [Conditional] drops the calls and their arguments). Rows: "unit_pick" = the roll's candidates and weights, at most
 		// one row per queue type per 250 ticks (a first-of-each pick always logs). The listed-set and type-available rows (ub_listed_set, ub_type_available) belong to the DEV players tracker.
-		bool rollLogStarted;
 		readonly Dictionary<string, int> rollPickLogTick = new(StringComparer.Ordinal);
 
 		void RollLog(string row)
@@ -2681,12 +2712,6 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			if (!first && rollPickLogTick.TryGetValue(queueType, out var last) && world.WorldTick - last < 250)
 				return;
-
-			if (!rollLogStarted)
-			{
-				rollLogStarted = true;
-				RollLog("tick,seat,event,type,queue,detail");
-			}
 
 			rollPickLogTick[queueType] = world.WorldTick;
 			var candidates = string.Join("|", pool.Select((a, i) => a.Name + ":" + weights[i]));
@@ -3106,6 +3131,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		void INotifyActorDisposing.Disposing(Actor self)
 		{
+#if CAMEO_DEV_LOGGING
+			world.ActorAdded -= RollUnitBuilt;
+#endif
 			unitsToBuild?.Dispose();
 		}
 	}

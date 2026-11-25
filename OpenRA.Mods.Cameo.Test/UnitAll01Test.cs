@@ -264,11 +264,12 @@ namespace OpenRA.Mods.Cameo.Test
 			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
 			Assert.That(u, Does.Contain("var paygo = roll && rollFirst && UnitRoll.FirstAdmits(batch.BankLeft);\n\t\t\t\t\tvar cost = paygo ? 0 : fullCost;"), "only the first-of-each sees cost 0 at the afford and reserve gates");
 			Assert.That(u, Does.Contain("batch.Reserve(queue, fullCost);"), "the order still reserves its full price");
-			Assert.That(u, Does.Contain("rollFirstOpen[queue.Actor.ActorID + \"|\" + queue.Info.Type] = (name, world.WorldTick);"));
+			Assert.That(u, Does.Contain("rollFirstOpen[queue.Actor.ActorID + \"|\" + queue.Info.Type] = new RollOpenFirst { Name = name, Tick = world.WorldTick };"));
 
 			var start = u.IndexOf("ActorInfo ChooseRollUnit(", StringComparison.Ordinal);
 			var body = u.Substring(start, u.IndexOf("int rollDeficitTick", start, StringComparison.Ordinal) - start);
-			Assert.That(body, Does.Contain("open.Tick == world.WorldTick || queue.AllQueued().Any(i => i.Item == open.Name)"), "open while queued, and for the rest of the pass that ordered it");
+			Assert.That(body, Does.Contain("open.Tick == world.WorldTick || (open.Item != null && queue.AllQueued().Contains(open.Item))"), "open while THAT queued item is queued, and for the rest of the pass that ordered it");
+			Assert.That(body, Does.Contain("world.WorldTick - open.Tick <= RollFirstOpenMaxTicks"), "bounded in time");
 			Assert.That(body, Does.Contain("items = items.Where(a => rollOrdered.Contains(a.Name)).ToList();"), "while one is open the other never-built types wait; ordinary types still roll");
 			Assert.That(body, Does.Not.Contain("savings"), "no savings hold");
 		}
@@ -298,6 +299,22 @@ namespace OpenRA.Mods.Cameo.Test
 			var body = c.Substring(start, c.IndexOf("public long CounterScore(", start, StringComparison.Ordinal) - start);
 			Assert.That(body, Does.Contain("if (!fogOnly)"));
 			Assert.That(body, Does.Contain("observedEnemyValue.Clear();"));
+		}
+
+		// Opus 11-25 (coverage scorer): one DEV row per completed unit, so "built" is exact and not a count.
+		[Test]
+		public void EveryCompletedUnitWritesAnUbUnitBuiltRowInDevBuildsOnly()
+		{
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			Assert.That(u, Does.Contain("#if CAMEO_DEV_LOGGING\n\t\t\tworld.ActorAdded += RollUnitBuilt;\n#endif"));
+			Assert.That(u, Does.Contain("#if CAMEO_DEV_LOGGING\n\t\t\tworld.ActorAdded -= RollUnitBuilt;\n#endif"), "unsubscribed on disposal");
+			var start = u.IndexOf("void RollUnitBuilt(Actor a)", StringComparison.Ordinal);
+			var body = u.Substring(start, 700);
+			Assert.That(body, Does.Contain("IsTraitDisabled"), "only the enabled module instance writes");
+			Assert.That(body, Does.Contain("world.WorldTick == 0"), "the starting units are not completions");
+			Assert.That(body, Does.Contain("a.Owner != player"));
+			Assert.That(body, Does.Contain("HasTraitInfo<BuildingInfo>()"), "units, not buildings");
+			Assert.That(body, Does.Contain("ub_unit_built,{a.Info.Name},,"), "tick,seat,ub_unit_built,type,,listed");
 		}
 
 		[Test]
