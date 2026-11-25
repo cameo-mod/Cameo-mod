@@ -14,7 +14,7 @@ namespace OpenRA.Mods.CA.Traits
 	public static partial class AblationIds
 	{
 		// HANS-PROFILE-01: the dearest affordable types (the core) of a queue's pool, among the types already built once, get a weight multiplier so that the core holds about half of the roll.
-		// Row off = the roll weights are untouched, as before. A bias only: the floor chance of every type stays.
+		// Row off = the roll weights are untouched, as before. A bias only: only the core's weights change.
 		public const string UnitCoreFocus = "ub_core_focus";
 	}
 }

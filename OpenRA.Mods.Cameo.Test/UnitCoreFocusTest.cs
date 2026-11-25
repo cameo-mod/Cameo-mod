@@ -19,7 +19,7 @@ namespace OpenRA.Mods.Cameo.Test
 	/// <summary>
 	/// HANS-PROFILE-01 row 2 (ub_core_focus). Hans' top 3 unit types are 48 to 64 percent of his unit requests; the build-everything roll spreads over all of them. Once a type has been built
 	/// once, the 3 dearest types of a queue that the bank can pay for (the core) get a weight multiplier so that they hold about the target share of the weight of the types built once.
-	/// A bias only: the floor chance stays, never-built types keep their first-build pull, nothing is removed from the pool.
+	/// A bias only: only the core's weights change; every other weight, never-built types included, stays as the roll made it; nothing is removed from the pool.
 	/// </summary>
 	[TestFixture]
 	public class UnitCoreFocusTest
@@ -86,7 +86,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var core = Mask(9, 0, 1, 2);
 			Assert.That(CoreFocus.SharePct(w, All(9), core), Is.EqualTo(33));
 			Assert.That(CoreFocus.MultiplierPct(w, All(9), core, 50, 800), Is.EqualTo(200));
-			var lifted = CoreFocus.Apply(w, core, 200, 5);
+			var lifted = CoreFocus.Apply(w, core, 200);
 			Assert.That(lifted, Is.EqualTo(new[] { 200.0, 200, 200, 100, 100, 100, 100, 100, 100 }));
 			Assert.That(CoreFocus.SharePct(lifted, All(9), core), Is.EqualTo(50));
 
@@ -105,7 +105,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var settled = Mask(11, 0, 1, 2, 3, 4, 5, 6, 7, 8);
 			var core = Mask(11, 0, 1, 2);
 			Assert.That(CoreFocus.MultiplierPct(w, settled, core, 50, 800), Is.EqualTo(200));
-			var lifted = CoreFocus.Apply(w, core, 200, 5);
+			var lifted = CoreFocus.Apply(w, core, 200);
 			Assert.That(lifted[9], Is.EqualTo(5000.0), "a first-build weight is never touched");
 			Assert.That(lifted[10], Is.EqualTo(5000.0));
 
@@ -136,31 +136,29 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void TheFloorChanceHoldsAfterTheLiftAndAMultiplierOf100OrLessChangesNothing()
+		public void OnlyTheCoreChangesAndAMultiplierOf100OrLessChangesNothing()
 		{
-			// Core x2, then the roll's floor (5% of the new mean) is applied again: the small types are lifted to it, never lowered.
-			var lifted = CoreFocus.Apply(new[] { 1000.0, 10, 1 }, Mask(3, 0), 200, 5);
-			var floor = 2011.0 / 3 * 5 / 100.0;
-			Assert.That(lifted[0], Is.EqualTo(2000.0));
-			Assert.That(lifted[1], Is.EqualTo(floor).Within(1e-9), "the floor chance of every type stays");
-			Assert.That(lifted[2], Is.EqualTo(floor).Within(1e-9));
+			// Core x2: ONLY the core changes. The small types are NOT lifted to a floor of the new mean (CM review of b6e34a887): their weights stay exactly as the roll made them.
+			var lifted = CoreFocus.Apply(new[] { 1000.0, 10, 1 }, Mask(3, 0), 200);
+			Assert.That(lifted, Is.EqualTo(new[] { 2000.0, 10, 1 }));
 
 			// 100 or less: the weights come back as they were, the floor is not re-applied.
-			Assert.That(CoreFocus.Apply(new[] { 1000.0, 10, 1 }, Mask(3, 0), 100, 5), Is.EqualTo(new[] { 1000.0, 10, 1 }));
-			Assert.That(CoreFocus.Apply(new[] { 1000.0, 10, 1 }, Mask(3, 0), 0, 5), Is.EqualTo(new[] { 1000.0, 10, 1 }));
-			Assert.That(CoreFocus.Apply(new[] { 1000.0, 10, 1 }, Mask(3, 0), -50, 5), Is.EqualTo(new[] { 1000.0, 10, 1 }));
-			Assert.That(CoreFocus.Apply(new double[0], new bool[0], 200, 5), Is.Empty);
+			Assert.That(CoreFocus.Apply(new[] { 1000.0, 10, 1 }, Mask(3, 0), 100), Is.EqualTo(new[] { 1000.0, 10, 1 }));
+			Assert.That(CoreFocus.Apply(new[] { 1000.0, 10, 1 }, Mask(3, 0), 0), Is.EqualTo(new[] { 1000.0, 10, 1 }));
+			Assert.That(CoreFocus.Apply(new[] { 1000.0, 10, 1 }, Mask(3, 0), -50), Is.EqualTo(new[] { 1000.0, 10, 1 }));
+			Assert.That(CoreFocus.Apply(new double[0], new bool[0], 200), Is.Empty);
 
 			// The weight cap of the roll holds, and every candidate still owns a drawable interval after the integer quantisation.
-			var capped = CoreFocus.Apply(new[] { 1e12, 1 }, Mask(2, 0), 800, 5);
+			var capped = CoreFocus.Apply(new[] { 1e12, 1 }, Mask(2, 0), 800);
 			Assert.That(capped[0], Is.EqualTo(UnitRoll.WeightCap));
+			Assert.That(capped[1], Is.EqualTo(1.0), "the rest is untouched");
 			var weights = UnitRoll.Weights(new[] { 5, 5, 5, 5, 5, 5, 5, 5, 5 }, Enumerable.Repeat(100, 9).ToArray(), Enumerable.Repeat(100, 9).ToArray(), 5);
-			var focused = CoreFocus.Apply(weights, Mask(9, 0, 1, 2), 800, 5);
+			var focused = CoreFocus.Apply(weights, Mask(9, 0, 1, 2), 800);
 			var units = UnitRoll.Quantize(focused);
 			Assert.That(units.All(u => u >= 1), Is.True, "no candidate drops out of the roll");
 			Assert.That(UnitRoll.Sum(units), Is.LessThanOrEqualTo(1 << UnitRoll.DrawBits));
 			for (var i = 3; i < 9; i++)
-				Assert.That(focused[i], Is.GreaterThanOrEqualTo(weights[i]), "a type outside the core is never lowered");
+				Assert.That(focused[i], Is.EqualTo(weights[i]), "a type outside the core is exactly as the roll made it");
 		}
 
 		[Test]
@@ -226,7 +224,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(part, Does.Contain("CoreFocus.Affordable(price[i], rollBankLeft, Info.CoreFocusBankPct)"));
 			Assert.That(part, Does.Contain("CoreFocus.Core(price, eligible, Info.CoreFocusCount)"));
 			Assert.That(part, Does.Contain("CoreFocus.MultiplierPct(weights, settled, core, Info.CoreFocusSharePct, Info.CoreFocusMaxPct)"));
-			Assert.That(part, Does.Contain("CoreFocus.Apply(weights, core, multiplier, RollParameters.FloorPct)"));
+			Assert.That(part, Does.Contain("CoreFocus.Apply(weights, core, multiplier)"));
 		}
 
 		[Test]
@@ -239,6 +237,13 @@ namespace OpenRA.Mods.Cameo.Test
 			var part = RepoFile(Bots + "UnitBuilderBotModuleCA.CoreFocus.cs");
 			Assert.That(part, Does.Contain("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid CoreFocusLog(string queueType, List<ActorInfo> pool, List<int> core, int multiplier, int shareBefore, int shareAfter)"));
 			Assert.That(part, Does.Contain(",ub_core_focus,,{queueType},{multiplier};core={string.Join(\"|\", names)};{shareBefore};{shareAfter}"));
+
+			// Opus 11-26: the DEV churn count of the core set (changes per 1000 ticks), recorded for every roll that names a set, an empty set included, and compiled out of release.
+			Assert.That(part, Does.Contain("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid CoreFocusChurn(string queueType, List<ActorInfo> pool, List<int> core)"));
+			Assert.That(part, Does.Contain(",ub_core_churn,,{queueType},{state.Changes};{now - state.Start};core={key}"));
+			Assert.That(part, Does.Contain("if (now - state.Start >= 1000)"), "one row per queue type per 1000 ticks");
+			Assert.That(part, Does.Contain("names.Sort(StringComparer.Ordinal);"), "a set, not an order: a price tie that reorders is no change");
+			Assert.That(part, Does.Contain("var picked = CoreFocus.Core(price, eligible, Info.CoreFocusCount);\n\t\t\tCoreFocusChurn(queue.Info.Type, pool, picked);\n\t\t\tif (picked.Count == 0)"), "counted before the empty-set return");
 		}
 	}
 }

@@ -200,7 +200,7 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly int TechLeanBankPct = 30;
 
 		[Desc("HANS-PROFILE-01 (row ub_core_focus; needs UnitRoll): the share (percent of the roll weight of the types this bot has built once) that the CoreFocusCount dearest affordable types of a queue should hold.",
-			"A weight multiplier only (capped by CoreFocusMaxPct; the floor chance of every type stays; never-built types are untouched). 0 = off.")]
+			"A weight multiplier on the core only (capped by CoreFocusMaxPct); every other weight, never-built types included, stays as the roll made it. 0 = off.")]
 		public readonly int CoreFocusSharePct = 0;
 
 		[Desc("HANS-PROFILE-01: how many types form the core of a queue.")]
@@ -3011,7 +3011,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			var weights = UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct, boosts);
 
-			// HANS-PROFILE-01 (ub_core_focus): the dearest affordable types built once get a weight multiplier (a bias; the floor chance stays).
+			// HANS-PROFILE-01 (ub_core_focus): the dearest affordable types built once get a weight multiplier (a bias; every other weight stays as the roll made it).
 			if (CoreFocusOn)
 				weights = FocusCore(queue, pool, weights);
 

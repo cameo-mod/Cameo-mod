@@ -18,7 +18,7 @@ namespace OpenRA.Mods.CA.Traits
 	// HANS-PROFILE-01 row 2 (ub_core_focus; design _out/HANS_PROFILE_DESIGN_01.md, Hans' top 3 unit types are 48 to 64 percent of his requests). After the roll weights are final, the CORE of a
 	// queue (the CoreFocusCount dearest types this bot has built once that the bank can pay for, CoreFocus.Core) gets a weight multiplier so that it holds about CoreFocusSharePct percent of
 	// the weight of the types built once (CoreFocus.MultiplierPct). The set is recomputed on every roll from the pool and the bank, so it follows the tier by itself when a dearer type becomes
-	// buildable or the bank grows; it holds no state. A bias only: the floor chance of every candidate is applied again after the lift, a never-built type keeps its first-build pull untouched.
+	// buildable or the bank grows; it holds no state. A bias only: every weight outside the core stays exactly as the roll made it (a never-built type keeps its first-build pull, the roll's floor is not lowered), nothing leaves the pool.
 	public partial class UnitBuilderBotModuleCA
 	{
 		AblationLatch ablateCoreFocus;
@@ -44,6 +44,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			var picked = CoreFocus.Core(price, eligible, Info.CoreFocusCount);
+			CoreFocusChurn(queue.Info.Type, pool, picked);
 			if (picked.Count == 0)
 				return weights;
 
@@ -55,7 +56,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (multiplier <= 100)
 				return weights;
 
-			var focused = CoreFocus.Apply(weights, core, multiplier, RollParameters.FloorPct);
+			var focused = CoreFocus.Apply(weights, core, multiplier);
 			CoreFocusLog(queue.Info.Type, pool, picked, multiplier, CoreFocus.SharePct(weights, settled, core), CoreFocus.SharePct(focused, settled, core));
 			return focused;
 		}
@@ -76,6 +77,36 @@ namespace OpenRA.Mods.CA.Traits
 				names.Add(pool[i].Name);
 
 			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},ub_core_focus,,{queueType},{multiplier};core={string.Join("|", names)};{shareBefore};{shareAfter}");
+		}
+
+		// Per queue type: the last core set seen (names, sorted), the changes counted in the open window and the tick the window opened.
+		readonly Dictionary<string, (string Key, int Changes, int Start)> coreChurn = new(StringComparer.Ordinal);
+
+		// ub_core_churn (DEV, record only): how often the core set of a queue changes (the set follows the bank and the pool per roll, no hysteresis). One unit_roll.csv row per queue type per 1000 ticks, written by the
+		// first roll after the window has run 1000 ticks: tick,seat,ub_core_churn,,queue,changes;window ticks;core=the set now. Changes per 1000 ticks = changes x 1000 / window ticks. An empty set counts as a set.
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void CoreFocusChurn(string queueType, List<ActorInfo> pool, List<int> core)
+		{
+			var names = new List<string>(core.Count);
+			foreach (var i in core)
+				names.Add(pool[i].Name);
+
+			names.Sort(StringComparer.Ordinal);
+			var key = string.Join("|", names);
+			var now = world.WorldTick;
+			(string Key, int Changes, int Start) state = coreChurn.TryGetValue(queueType, out var seen) ? seen : (null, 0, now);
+			if (state.Key != null && state.Key != key)
+				state.Changes++;
+
+			state.Key = key;
+			if (now - state.Start >= 1000)
+			{
+				RollLog($"{now},{Array.IndexOf(world.Players, player)},ub_core_churn,,{queueType},{state.Changes};{now - state.Start};core={key}");
+				state.Changes = 0;
+				state.Start = now;
+			}
+
+			coreChurn[queueType] = state;
 		}
 	}
 }

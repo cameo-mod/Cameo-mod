@@ -16,15 +16,15 @@ namespace OpenRA.Mods.CA.Traits
 	/// <summary>
 	/// HANS-PROFILE-01 row 2 (ub_core_focus; Hans' top 3 unit types are 48 to 64 percent of his unit requests, the build-everything roll spreads over all of them). Once a type has been built once
 	/// (coverage is done for it), the few dearest types of a queue's pool that the bank can pay for form the CORE. The core's weights are multiplied so that the core holds about the target share
-	/// of the weight of the types built once; the types never built are left alone (their first-build pull keeps coverage), and every candidate keeps the floor chance of the roll.
-	/// A bias only: it never removes a candidate. Pure arithmetic over the numbers it is handed, no game state and no random draw.
+	/// of the weight of the types built once; every other weight is left exactly as the roll made it (the first-build pull of a never-built type keeps coverage, and the roll's own floor chance is
+	/// not lowered, only diluted by the larger total). A bias only: it never removes a candidate. Pure arithmetic over the numbers it is handed, no game state and no random draw.
 	/// </summary>
 	public static class CoreFocus
 	{
 		/// <summary>The target share is clamped below 100 so the multiplier formula always has a rest to compare against.</summary>
 		public const int MaxSharePct = 99;
 
-		/// <summary>The bank bar and the floor are percents of the price or of the mean weight, clamped to [0, 100] like TechLean.</summary>
+		/// <summary>The bank bar is a percent of the price, clamped to [0, 100] like TechLean.</summary>
 		public const int MaxPct = 100;
 
 		/// <summary>True when the bank already holds bankPct percent of a priced candidate (and is above 0): the same funding bar as the tech lean, so the core never names a unit the order gates could not start.</summary>
@@ -105,26 +105,14 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>
-		/// The weights with the core multiplied by multiplierPct/100, then the roll's floor applied again (every candidate at least floorPct percent of the new mean and at least 1), so the
-		/// build-everything floor chance holds after the lift. A multiplier of 100 or less returns the weights unchanged.
+		/// The weights with ONLY the core multiplied by multiplierPct/100 (capped at the roll's weight cap); every other weight, never-built types included, is returned exactly as it came, so no weight
+		/// is ever lowered or lifted off the roll's own floor. A multiplier of 100 or less returns the weights unchanged.
 		/// </summary>
-		public static double[] Apply(IReadOnlyList<double> weights, IReadOnlyList<bool> core, int multiplierPct, int floorPct)
+		public static double[] Apply(IReadOnlyList<double> weights, IReadOnlyList<bool> core, int multiplierPct)
 		{
-			var n = weights.Count;
-			var result = new double[n];
-			double sum = 0;
-			for (var i = 0; i < n; i++)
-			{
+			var result = new double[weights.Count];
+			for (var i = 0; i < result.Length; i++)
 				result[i] = multiplierPct > 100 && core[i] ? Math.Min(UnitRoll.WeightCap, weights[i] * multiplierPct / 100.0) : weights[i];
-				sum += result[i];
-			}
-
-			if (multiplierPct <= 100)
-				return result;
-
-			var floor = n == 0 ? 0 : sum / n * Math.Clamp(floorPct, 0, MaxPct) / 100.0;
-			for (var i = 0; i < n; i++)
-				result[i] = Math.Max(1.0, Math.Max(result[i], floor));
 
 			return result;
 		}
