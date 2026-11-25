@@ -60,7 +60,9 @@ namespace OpenRA.Mods.CA.Traits
 				return false;
 
 			var item = world.Map.Rules.Actors[pick.Name];
+#if CAMEO_DEV_LOGGING
 			AIUtils.BotDebug("{0} decided to build {1}: pipeline {2} (candidate {3}, {4} tests)", queue.Actor.Owner, item.Name, pick.Stage, pick.Candidate, pick.Tests);
+#endif
 			PickObserved(item.Name, pick.Stage, pick.Candidate, snapshot.Bank);
 			AdmitPlanned(bot, queue, item);
 
