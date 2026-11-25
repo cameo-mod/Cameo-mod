@@ -1071,8 +1071,12 @@ namespace OpenRA.Mods.CA.Traits
 
 		void UpgradeSettle(IReadOnlyDictionary<string, string> queuedIn)
 		{
-			// the world scan runs only while an ordered item is unsettled, and at most every 25 ticks
-			if (!upgradeDone.AnyPending || world.WorldTick - upgradeSettleTick < 25)
+			// the seen bit is taken at every visit (the queue was just read); the world scan below runs only while an ordered item is unsettled, and at most every 25 ticks
+			if (!upgradeDone.AnyPending)
+				return;
+
+			upgradeDone.NoteQueued(queuedIn);
+			if (world.WorldTick - upgradeSettleTick < 25)
 				return;
 
 			upgradeSettleTick = world.WorldTick;
@@ -1129,9 +1133,17 @@ namespace OpenRA.Mods.CA.Traits
 		void UpgradeStartLog(string name, string queueType, int cost) =>
 			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},upg_start,{name},{queueType},{(cost <= 0 ? "free" : "paid")};since={upgradeDone.Since(name)}");
 
+		// upg_unseen_timeout (Opus 11-25 ruling, DEV only): an order the queue never showed within PendingTimeout (a never-seen order is never done by approximation); the running count tells the
+		// first armed game whether never-seen orders are real after the seen-at-every-visit fix
+		int upgradeUnseenTimeouts;
+
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
-		void UpgradeReleaseLog(string name, string reason) =>
+		void UpgradeReleaseLog(string name, string reason)
+		{
 			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},upg_pending_release,{name},,{reason}");
+			if (reason == "timeout")
+				RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},upg_unseen_timeout,{name},,{++upgradeUnseenTimeouts}");
+		}
 
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
 		void UpgradeDoneLog(string name, string source) =>

@@ -456,7 +456,7 @@ namespace OpenRA.Mods.Cameo.Test
 			// a cancelled item (grant never held) is dropped once stale, never done
 			var r3 = new UpgradeCompletions();
 			r3.Started("upgrade_cabal", 0);
-			Assert.That(Settle(r3, UpgradeCompletions.PendingMaxTicks + 1, [], grants, []), Is.Empty);
+			Assert.That(Settle(r3, UpgradeCompletions.DefaultPendingTimeoutTicks + 1, [], grants, []), Is.Empty);
 			Assert.That(r3.AnyPending, Is.False);
 			Assert.That(r3.Completed("upgrade_cabal"), Is.False);
 		}
@@ -517,6 +517,44 @@ namespace OpenRA.Mods.Cameo.Test
 			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
 			// V08E re-pin: 1ce52d20 put the reservation behind upg_once_registry (onceOn), as its own pin in TheOnceRegistryHasItsOwnToggleThatShipsOffAndTheDevRowsDoNotDependOnIt states
 			Assert.That(u, Does.Contain("if (onceOn)\n\t\t\t\tforeach (var pendingName in upgradeDone.PendingNames)\n\t\t\t\t\tinProduction.Add(pendingName);"));
+		}
+
+		[Test]
+		public void AQueueGlimpseBetweenTwoSettlesIsAlreadyTheSeenBitBoundToThatQueue()
+		{
+			var grants = new Dictionary<string, string[]>();
+
+			// the queue showed the item at a visit between two 25-tick settles and it finished before the next settle: seen (bound to q1), left, not offered, queue alive: approx
+			var r = new UpgradeCompletions();
+			r.Started("promo_cond", 100);
+			r.NoteQueued(new Dictionary<string, string> { ["promo_cond"] = "q1" });
+			Assert.That(Settle(r, 125, [], grants, [], []), Is.EqualTo(new[] { ("promo_cond", UpgradeCompletions.SourceApprox) }));
+
+			// without the glimpse it is a never-seen order: no approximation, only the timeout
+			var r2 = new UpgradeCompletions();
+			r2.Started("promo_cond", 100);
+			Assert.That(Settle(r2, 125, [], grants, [], []), Is.Empty);
+			Assert.That(r2.Completed("promo_cond"), Is.False);
+
+			// the glimpse binds the exact queue: q1 dead = queue_lost even though another queue lives
+			var r3 = new UpgradeCompletions();
+			r3.Started("promo_cond", 100);
+			r3.NoteQueued(new Dictionary<string, string> { ["promo_cond"] = "q1" });
+			Assert.That(Settle(r3, 125, [], grants, [], [], aliveKey: key => key == "q2"), Is.Empty);
+			Assert.That(r3.Released.Single(), Is.EqualTo(("promo_cond", "queue_lost")));
+
+			// NoteQueued of an item that is not pending changes nothing, and a later glimpse in another queue moves the binding
+			var r4 = new UpgradeCompletions();
+			r4.NoteQueued(new Dictionary<string, string> { ["x"] = "q1" });
+			Assert.That(r4.AnyPending, Is.False);
+			r4.Started("promo_cond", 0);
+			r4.NoteQueued(new Dictionary<string, string> { ["promo_cond"] = "q1" });
+			r4.NoteQueued(new Dictionary<string, string> { ["promo_cond"] = "q2" });
+			Assert.That(Settle(r4, 30, [], grants, [], [], aliveKey: key => key == "q2"), Is.EqualTo(new[] { ("promo_cond", UpgradeCompletions.SourceApprox) }));
+
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			Assert.That(u, Does.Contain("upgradeDone.NoteQueued(queuedIn);\n\t\t\tif (world.WorldTick - upgradeSettleTick < 25)\n\t\t\t\treturn;"), "noted at every visit, before the 25-tick gate");
+			Assert.That(u, Does.Contain("if (reason == \"timeout\")\n\t\t\t\tRollLog($\"{world.WorldTick},{Array.IndexOf(world.Players, player)},upg_unseen_timeout,{name},,{++upgradeUnseenTimeouts}\");"), "DEV counter of never-seen timeouts (Opus ruling: no approximation for them)");
 		}
 
 		[Test]
