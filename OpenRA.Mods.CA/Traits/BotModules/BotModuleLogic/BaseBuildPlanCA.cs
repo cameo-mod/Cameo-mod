@@ -128,6 +128,10 @@ namespace OpenRA.Mods.CA.Traits
 		// BUILD-ALL-B (row bb_build_all_listed): S5 offers only the listed BuildingFractions first copies (the roll); the depth fallback of unlisted
 		// first-copy kinds and listed weight-0 entries is off. False = S5 as before.
 		public bool CoreOnceListedOnly;
+
+		// MODE-BIAS-01: the milli weight multiplier of a type's BuildingFractions entry while a mode bias profile is active (1000 = neutral, composed by ModeBias).
+		// Null = no profile active: the roll is the uniform shuffle and the share cap is unchanged, exactly as before.
+		public Func<string, int> BiasMilli;
 	}
 
 	/// <summary>
@@ -263,6 +267,8 @@ namespace OpenRA.Mods.CA.Traits
 				return false;
 
 			var milli = s.FractionMilli?.Invoke(name) ?? BuildOrderKnob.Neutral;
+			if (s.BiasMilli != null)
+				milli = ModeBias.CombineMilli(milli, s.BiasMilli(name)); // MODE-BIAS-01: max(1, milli x bias / 1000)
 			return BaseBuilderQueueEvalCA.FractionAdmits(CountOf(s, name), fractionPer100, milli, s.BuildingCount);
 		}
 
@@ -314,7 +320,11 @@ namespace OpenRA.Mods.CA.Traits
 			if (s.Fractions == null)
 				yield break;
 
-			foreach (var frac in s.Fractions.OrderBy(kv => kv.Key, StringComparer.Ordinal).Shuffle(rng))
+			// MODE-BIAS-01: with a profile active the order is the weighted one (ModeBias.WeightedOrder, lazy, one draw per entry reached); else the uniform shuffle.
+			IEnumerable<KeyValuePair<string, int>> order = s.BiasMilli != null
+				? ModeBias.WeightedOrder(s.Fractions, s.BiasMilli, rng)
+				: s.Fractions.OrderBy(kv => kv.Key, StringComparer.Ordinal).Shuffle(rng);
+			foreach (var frac in order)
 			{
 				if (stage == BaseBuildStage.S5CoreOnce && (frac.Value <= 0 || CountOf(s, frac.Key) != 0))
 					continue;

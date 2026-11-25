@@ -134,6 +134,9 @@ namespace OpenRA.Mods.CA.Traits
 				s.OpeningSatisfied = (role, required) => openingStepSince.Remove((role, required));
 			}
 
+			// MODE-BIAS-01: null (the old uniform roll) unless an armed profile's trigger holds this tick.
+			s.BiasMilli = ModeBiasFor(buildable, s);
+
 			return s;
 		}
 
