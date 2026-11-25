@@ -86,6 +86,7 @@ namespace OpenRA.Mods.CA.Traits
 		// C4-C6: the tier line L (BotLimits MaximiseProductionCashRequirement, 0 = none), SUSTAINED-CASH active, the threat-seen latch, and the
 		// RATIO-2X inputs (mobile army value and live + queued static defence value; HasArmyValues false = no provider or no usable measure).
 		public int TierLine;
+		public bool LowCashCut; // c6: R9 (pb_essentials_low_cash): below the tier line only S1-S7 run
 		public bool SustainedActive;
 		public bool DefenceThreatSeen;
 		public bool HasArmyValues;
@@ -132,7 +133,8 @@ namespace OpenRA.Mods.CA.Traits
 	/// the snapshot, the injected tests and the given synced random are read, keys are sorted ordinally, and the random is drawn lazily in the S10
 	/// roll only (the same snapshot and seed give the same pick and the same number of draws).
 	/// c2 wires S1 (power), S3 (opening order) and S10 (the fraction roll); S2 and S4-S9 yield only what BaseBuildSnapshot.StageSource offers
-	/// (nothing until C3-C6).
+	/// (nothing until C3-C6). c6: the cash tiers, i.e. the walk order and which stages are open at the bank (BaseBuildTiersCA: the cut below the tier line,
+	/// S8 at the line, the SUSTAINED order).
 	/// </summary>
 	public static class BaseBuildPlanCA
 	{
@@ -160,10 +162,19 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			var tests = 0;
 			HashSet<string> failed = null;
-			foreach (var stage in StageOrder)
+			var cycleOffered = false;
+
+			// c6: the cash tiers. Below the tier line the walk stops after S7 (S9 only with a threat seen), S8 needs the bank at the line, and SUSTAINED cash moves
+			// S8 above S7 and holds S9 and S10 back while the cycle still offers a type (BaseBuildTiersCA).
+			foreach (var stage in BaseBuildTiersCA.Order(snapshot.SustainedActive, snapshot.TierLine))
 			{
+				if (!BaseBuildTiersCA.Open(stage, snapshot.TierLine, snapshot.Bank, snapshot.LowCashCut, snapshot.SustainedActive, snapshot.DefenceThreatSeen, cycleOffered))
+					continue;
+
 				foreach (var candidate in StageCandidates(stage, snapshot, rng))
 				{
+					cycleOffered |= stage == BaseBuildStage.S8ProductionCycle && candidate.Name != null;
+
 					// A type that already failed A this sweep fails again (the state is the same, the reserve only grows with the stage): no second test.
 					if (candidate.Name == null || (failed != null && failed.Contains(candidate.Name)))
 						continue;

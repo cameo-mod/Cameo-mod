@@ -58,6 +58,11 @@ namespace OpenRA.Mods.CA.Traits
 			var item = world.Map.Rules.Actors[pick.Name];
 			AIUtils.BotDebug("{0} decided to build {1}: pipeline {2} (candidate {3}, {4} tests)", queue.Actor.Owner, item.Name, pick.Stage, pick.Candidate, pick.Tests);
 			AdmitPlanned(bot, queue, item);
+
+			// c6: only the admitted S8 candidate moves the cycle (the stage source is a query); the production type tried, also when A5 built the power plant instead.
+			if (pick.Stage == BaseBuildStage.S8ProductionCycle)
+				lastCycledProduction = pick.Candidate;
+
 			return true;
 		}
 
@@ -89,6 +94,7 @@ namespace OpenRA.Mods.CA.Traits
 				Bank = ProdBusyCA.SweepBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep),
 				ProductionCashReserve = botLimits != null ? botLimits.Info.ProductionCashReserve : -1,
 				TierLine = TierLine,
+				LowCashCut = EssentialsOn,
 				SustainedActive = SustainedActive,
 				DefenceThreatSeen = DefenceThreatSeen(),
 				HasArmyValues = armyValues,

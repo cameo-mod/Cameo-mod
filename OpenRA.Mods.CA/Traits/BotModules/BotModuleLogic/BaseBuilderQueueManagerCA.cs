@@ -1774,7 +1774,8 @@ namespace OpenRA.Mods.CA.Traits
 		// through PickOrPower BEFORE the draw: an infeasible candidate contributes the power
 		// fallback (identical to draw-then-substitute), and a set of only infeasible candidates
 		// with no fallback resolves empty — a decline that consumes zero draws (Sol review).
-		List<ActorInfo> OverflowProductionCandidates(IEnumerable<ActorInfo> buildableThings, ActorInfo power)
+		// CONSOLIDATE-01 c6: the staged planner passes resolvePower = false (its A5 swaps the power plant in itself), which returns the production types as they are.
+		List<ActorInfo> OverflowProductionCandidates(IEnumerable<ActorInfo> buildableThings, ActorInfo power, bool resolvePower = true)
 		{
 			playerBuildings ??= player.PlayerActor.World.Actors
 				.Where(a => a.Owner == player.PlayerActor.Owner && !a.Disposed)
@@ -1797,7 +1798,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (!BaseBuilderQueueEvalCA.OverflowTypeAdmits(standingOrVariants, producing, ProductionTypeLimit))
 					continue;
 
-				var resolved = BaseBuilderQueueEvalCA.PickOrPower(actor, power, HasSufficientPowerForActor);
+				var resolved = resolvePower ? BaseBuilderQueueEvalCA.PickOrPower(actor, power, HasSufficientPowerForActor) : actor;
 				if (resolved != null)
 					candidates.Add(resolved);
 			}

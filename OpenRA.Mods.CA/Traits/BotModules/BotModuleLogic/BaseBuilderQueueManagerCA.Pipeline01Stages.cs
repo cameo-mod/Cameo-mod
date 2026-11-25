@@ -37,6 +37,7 @@ namespace OpenRA.Mods.CA.Traits
 				case BaseBuildStage.S5CoreOnce: return PipelineCoreOnceStage(buildable, snapshot);
 				case BaseBuildStage.S6PassiveIncome: return PipelinePassiveIncomeStage(queue, buildable, power, law);
 				case BaseBuildStage.S7RefineryPerField: return PipelineRefineryStage(queue, buildable, power);
+				case BaseBuildStage.S8ProductionCycle: return PipelineProductionCycleStage(buildable);
 				case BaseBuildStage.S9ExtraDefence: return PipelineExtraDefenceStage(buildable);
 				default: return null;
 			}

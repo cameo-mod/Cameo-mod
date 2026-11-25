@@ -192,6 +192,7 @@ namespace OpenRA.Mods.Cameo.Test
 				[BaseBuildStage.S9ExtraDefence] = ["gtwr"],
 				[BaseBuildStage.S8ProductionCycle] = ["tent"],
 			}, "barr");
+			s.TierLine = 3500; // c6: the cycle needs a tier line and the bank (5000) at or above it
 
 			var pick = BaseBuildPlanCA.Plan(s, new FakeFeasibility(), new MersenneTwister(1));
 			Assert.That(pick.Candidate, Is.EqualTo("tent"));
