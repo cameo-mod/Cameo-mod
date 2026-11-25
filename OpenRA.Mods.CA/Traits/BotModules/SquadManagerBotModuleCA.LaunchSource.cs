@@ -9,6 +9,7 @@
 #endregion
 
 using System.Diagnostics;
+using OpenRA.Mods.CA.Traits.BotModules.Squads;
 
 namespace OpenRA.Mods.CA.Traits
 {
