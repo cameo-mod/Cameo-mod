@@ -111,7 +111,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>
 		/// The priority overrides' shared shape: the pick goes through when it does not starve
-		/// power; otherwise a power plant wins instead. No pick means nothing is decided.
+		/// power; otherwise a power plant wins instead. No pick means nothing is decided; null too when the pick starves power and no power plant is buildable now (callers fall through on null).
 		/// </summary>
 		public static T PickOrPower<T>(T pick, T power, Func<T, bool> sufficientPower)
 			where T : class =>

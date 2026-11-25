@@ -250,7 +250,7 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		// A7: the atomic claims of TickQueue (crawl link, front defence), taken only for the candidate the planner is about to admit. A refused
-		// claim holds nothing (TryClaim contract). The demand refinery reservation does not apply: the pipeline makes no demand picks.
+		// claim holds nothing (the claim contract of IBaseBuildFeasibility). The demand refinery reservation does not apply: the pipeline makes no demand picks.
 		bool PipelineTryClaim(ProductionQueue queue, IBotExpansionTargetProvider law, string admitted)
 		{
 			if (law == null)
