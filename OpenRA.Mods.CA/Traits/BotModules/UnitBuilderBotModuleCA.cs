@@ -303,7 +303,7 @@ namespace OpenRA.Mods.CA.Traits
 			"UnitIntervals and UnitDelays. Gated by SwitchCondition; row mcv_rebuild_first.")]
 		public readonly bool McvRebuildFirst = false;
 
-		[Desc("HARV-01: harvesters per refinery in both directions (HarvesterTarget). Below the target (the enabled HarvesterBotModuleCA's HarvestersPerRefinery, at least 2",
+		[Desc("HARV-01: harvesters per refinery in both directions (HarvesterTarget). Below the target (HarvesterTargetPerRefinery, 2 by the binding rule,",
 			"per refinery) with the bank at HarvesterTargetMinCash, a harvester starts first, before the pause votes, cash floor and army mix. At the cap (target +",
 			"HarvesterCapSlackPerRefinery per refinery) no harvester type is built on any path. Gated by SwitchCondition; row hv_harvester_target.")]
 		public readonly bool HvHarvesterTarget = false;
@@ -313,6 +313,12 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("HARV-01: harvesters allowed per refinery above the target before the cap holds.")]
 		public readonly int HarvesterCapSlackPerRefinery = 1;
+
+		[Desc("HARV-01: the harvester target per refinery (never below 2). The binding rule is 2 per refinery and a cap of 3; the harvester module's own HarvestersPerRefinery (3 on generic) does not move it.")]
+		public readonly int HarvesterTargetPerRefinery = 2;
+
+		[Desc("HARV-01: ticks a start may stay out of the queue before a refresh treats it as refused. Until then the cached count stands, so a late order cannot exceed the cap.")]
+		public readonly int HarvesterOrderLatencyTicks = 30;
 
 		[Desc("MCV-REBUILD-01: a failed external build request frees its slot after RequestDropFailedSweepsFast sweeps instead of 250. Gated by SwitchCondition; row pb_request_slot.")]
 		public readonly bool RequestSlotFastDrop = false;

@@ -26,6 +26,13 @@ namespace OpenRA.Mods.CA.Traits
 		public static int Cap(int refineries, int perRefinery, int slackPerRefinery) =>
 			refineries <= 0 ? 0 : Target(refineries, perRefinery) + refineries * Math.Max(0, slackPerRefinery);
 
+		/// <summary>
+		/// The queued harvesters of one type at a refresh (Sol FIX of HARV-01): the queue's own count, unless an order started less than latencyTicks ago is not in the queue yet
+		/// (cachedCount counts it): then the cached count stands until the queue shows it or the window passes (a refused order). A late outgoing order is never forgotten.
+		/// </summary>
+		public static int EffectiveQueued(int queueCount, int cachedCount, int ticksSinceStart, int latencyTicks) =>
+			queueCount >= cachedCount || ticksSinceStart >= Math.Max(0, latencyTicks) ? queueCount : cachedCount;
+
 		/// <summary>A replacement is due: live + queued below the target and the bank at the minimum.</summary>
 		public static bool Due(int live, int queued, int target, int bank, int minBank) => live + queued < target && bank >= Math.Max(0, minBank);
 
