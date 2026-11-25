@@ -124,7 +124,7 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void TheFallbackTakesOnlyWhatTheRollCannotOffer()
 		{
-			// Weight 0 (listed, never rolled into S5) and an unlisted first-copy kind are the fallback's; a positive weight is the roll's.
+			// Weight 0 (listed, never rolled into S5) and an unlisted type are the fallback's only when they are a first-copy kind; a positive weight is the roll's.
 			Assert.That(CoreOnceCA.InSet(T("zeroWeight", weight: 0, firstCopy: false)), Is.False, "a listed weight-0 wall or defence is not built once by S5");
 			Assert.That(CoreOnceCA.InSet(T("zeroWeightFirstCopy", weight: 0, firstCopy: true)), Is.True);
 			Assert.That(CoreOnceCA.InSet(T("unlisted", weight: -1, firstCopy: true)), Is.True);
