@@ -589,11 +589,13 @@ namespace OpenRA.Mods.CA.Traits
 
 			var forced = TeamLeadCA.FallbackForced(now, team.LastOrderTick, Info.TeamLeadFallbackTicks);
 			var order = TeamLeadIssue(home, target, targetId, now);
-			LaunchSourceRecord("L20", "Team", blob.Units);
 			if (why == TeamLeadCA.PublishWhy.Gather)
 				order.MakeGatherOnly();
 			else if (allIn != null)
 				order.MarkAllIn(allIn);
+			// Q1 fix-up (NIT 4): a gather-only order is a rally, not a launch; only attack orders are team launches.
+			if (why != TeamLeadCA.PublishWhy.Gather)
+				LaunchSourceRecord(null, "L20", "Team", blob.Units);
 
 			DiagnosticTeamEvent("team_order", "seq=" + order.Seq + " why=" + why.ToString().ToLowerInvariant() + " blob=" + blob.Units + "/" + blob.Value + " target=" + targetId
 				+ " pincer=" + order.HasProngs + " leader=" + teamLeadKey);
@@ -1103,7 +1105,8 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		// TEAM-BLOB-01 telemetry (DEV only; the writer is null in a release build): one record for a team-level fact (order, push, cancel, handover).
-		void DiagnosticTeamEvent(string evt, string reason)
+		// squadId: a squad-level fact joins that squad's rows (DiagnosticSquadId); null keeps the team row.
+		void DiagnosticTeamEvent(string evt, string reason, string squadId = null)
 		{
 			var w = DiagnosticWriter;
 			if (w == null)
@@ -1111,7 +1114,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			w.TryEnqueueSquadEvent(new BotPassiveSquadEventSnapshot
 			{
-				Tick = World.WorldTick, SquadId = (Info.InstanceName ?? "sq") + "-team", Generation = 1, Event = evt, Reason = reason, LeaseOwner = LeaseOwner
+				Tick = World.WorldTick, SquadId = squadId ?? ((Info.InstanceName ?? "sq") + "-team"), Generation = 1, Event = evt, Reason = reason, LeaseOwner = LeaseOwner
 			});
 		}
 
@@ -1206,7 +1209,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				order = TeamLeadTryIssue(s, now);
 				if (order != null)
-					LaunchSourceRecord("L19", "Team", s.Units.Count);
+					LaunchSourceRecord(s, "L19", "Team", s.Units.Count);
 			}
 
 			if (order != null)

@@ -610,7 +610,7 @@ namespace OpenRA.Mods.CA.Traits
 			var members = admitted.Groups.SelectMany(g => g.Reachable)
 				.Select(m => new StalemateWaveMemberCA(m.ActorId, 1, (int)Math.Min(int.MaxValue, Math.Max(0, m.Value)))).ToList();
 			var wave = new StalemateBreakerWaveCA(t, members, admitted.Timing, n0, v0, admitted.LeaderL, admitted.LeaderId);
-			LaunchSourceRecord("L08", "Breaker", members.Count);
+			LaunchSourceRecord(null, "L08", "Breaker", members.Count);
 			var owner = StalemateOwner;
 			if (!owner.stalemateSeatOwner.TryStart(StalemateManagerName, wave))
 				return;
