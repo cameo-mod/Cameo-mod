@@ -58,8 +58,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (bases.Count == 0 && units.Count == 0)
 				return null;
 
-			var buildingWeights = MergeWeights(bases.Select(b => b.Info.BuildingFractions));
-			var unitWeights = MergeWeights(units.Select(u => u.Info.UnitsToBuild));
+			var buildingWeights = MergeWeights(bases.Select(b => (IReadOnlyDictionary<string, int>)b.Info.BuildingFractions));
+			var unitWeights = MergeWeights(units.Select(u => (IReadOnlyDictionary<string, int>)u.Info.UnitsToBuild));
 			cov = new CoverageSeat
 			{
 				Buildings = new HashSet<string>(buildingWeights.Keys, StringComparer.Ordinal),
@@ -73,7 +73,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		}
 
 		// The largest weight per name over the enabled modules (one generic module per bot in practice).
-		static SortedDictionary<string, int> MergeWeights(IEnumerable<Dictionary<string, int>> tables)
+		static SortedDictionary<string, int> MergeWeights(IEnumerable<IReadOnlyDictionary<string, int>> tables)
 		{
 			var merged = new SortedDictionary<string, int>(StringComparer.Ordinal);
 			foreach (var table in tables)

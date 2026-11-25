@@ -27,16 +27,24 @@ namespace OpenRA.Mods.CA.Traits
 
 		HarvesterBotModuleCA harvesterModule;
 		int harvesterCountTick = -1;
+		int harvesterModuleLookTick = -1;
 		int harvestersLive, harvestersQueued, harvesterTarget, harvesterCap;
 
-		// The counts, at most once per 25 ticks (a start in between is added to harvestersQueued at once).
+		// The counts, at most once per 25 ticks. Between refreshes every start (NotifyStarted -> HarvesterStarted, CM review) is added to
+		// harvestersQueued at once; a completion moves a harvester from queued to live, so the sum stays right; a loss or a cancel only errs high
+		// (the cap holds a little early, never late) until the next refresh.
 		bool RefreshHarvesterCounts()
 		{
-			harvesterModule ??= player.PlayerActor.TraitsImplementing<HarvesterBotModuleCA>().FirstEnabledTraitOrDefault();
+			var now = world.WorldTick;
+			if (harvesterModule == null && (harvesterModuleLookTick < 0 || now - harvesterModuleLookTick >= 25))
+			{
+				harvesterModuleLookTick = now; // a conditional module can arm late: looked up again at most every 25 ticks
+				harvesterModule = player.PlayerActor.TraitsImplementing<HarvesterBotModuleCA>().FirstEnabledTraitOrDefault();
+			}
+
 			if (harvesterModule == null || harvesterModule.Info.HarvesterTypes.Count == 0 || harvesterModule.Info.RefineryTypes.Count == 0)
 				return false;
 
-			var now = world.WorldTick;
 			if (harvesterCountTick >= 0 && now - harvesterCountTick < 25)
 				return true;
 
@@ -53,6 +61,12 @@ namespace OpenRA.Mods.CA.Traits
 			harvesterTarget = HarvesterTarget.Target(refineries, h.HarvestersPerRefinery);
 			harvesterCap = HarvesterTarget.Cap(refineries, h.HarvestersPerRefinery, Info.HarvesterCapSlackPerRefinery);
 			return true;
+		}
+
+		void HarvesterStarted(string name)
+		{
+			if (harvesterModule != null && harvesterCountTick >= 0 && harvesterModule.Info.HarvesterTypes.Contains(name))
+				harvestersQueued++;
 		}
 
 		// ShouldBuildReject: a harvester type at or above the cap. Not a harvester type, or no harvester module = no opinion.
@@ -99,11 +113,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (best == null)
 				return;
 
-			harvestersQueued++;
-			bot.QueueOrder(Order.StartProduction(best.Actor, bestItem.Name, 1));
-			NotifyStarted(bestItem.Name, best.Info.Type);
 			AIUtils.BotDebug("AI: {0} decided to build {1}: harvesters {2}+{3} below target {4} (hv_harvester_target).", player, bestItem.Name,
-				harvestersLive, harvestersQueued - 1, harvesterTarget);
+				harvestersLive, harvestersQueued, harvesterTarget);
+			bot.QueueOrder(Order.StartProduction(best.Actor, bestItem.Name, 1));
+			NotifyStarted(bestItem.Name, best.Info.Type); // counts it in harvestersQueued (HarvesterStarted)
 		}
 	}
 }

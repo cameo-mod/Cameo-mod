@@ -1350,6 +1350,9 @@ namespace OpenRA.Mods.CA.Traits
 			if (switchesActive && Info.UnitRoll)
 				rollOrdered.Add(name); // also while the row is ablated, so a mid-game flip does not re-pick built types
 
+			if (HarvesterTargetOn)
+				HarvesterStarted(name); // HARV-01: every start path ends here, so the cached queued count stays exact between refreshes
+
 			foreach (var observer in UnitObservers)
 				observer.UnitProductionStarted(player, world.WorldTick, name, queueType);
 		}
