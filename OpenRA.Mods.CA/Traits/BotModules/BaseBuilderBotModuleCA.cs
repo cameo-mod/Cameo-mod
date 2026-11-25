@@ -230,6 +230,121 @@ namespace OpenRA.Mods.CA.Traits
 			"yards, refineries, power plants and silos are excluded (they have their own rules). Gated by SwitchCondition; row af2_unlisted_once.")]
 		public readonly bool UnlistedBuildingsOnce = false;
 
+		[Desc("ESSENTIAL-PASS-01 (USER P0, Opus 11-24): the first copy of every building type (not a wall, defence, fake or proxy) and every cash trickler is an",
+			"army-first essential, so neither the projected-share and reserve votes nor the mobile-spend reserve hold it (the low-cash hold already passes it).",
+			"Gated by SwitchCondition; row af2_essential_pass.")]
+		public readonly bool EssentialPassFirstCopies = false;
+
+		[Desc("BASE-02 (USER standard order, a soft guideline): power, barracks, refinery, war factory, refinery, 2nd barracks OR 2nd war factory, radar, airfield, the other 2nd",
+			"production building, tech center, 3rd production buildings, passive income. For every faction each step is mapped through the building role lists and skipped when",
+			"the faction lacks it. The next missing step outranks the wanted-refinery pick, random extras and sustained cash; power is inserted when short; threat defence and an",
+			"expansion yard interrupt it; the planner takes over afterwards. Gated by SwitchCondition; row opening_standard_order.")]
+		public readonly bool OpeningStandardOrder = false;
+
+		[Desc("BASE-02: world ticks after which the standard order stops forcing picks.")]
+		public readonly int OpeningStandardMaxTicks = 20000;
+
+		[Desc("BASE-02: a step that has been the next step for this many ticks without being satisfied is skipped (no claimable refinery, no space): the order never deadlocks.")]
+		public readonly int OpeningStepStuckTicks = 3000;
+
+		[Desc("BASE-02: factions whose 2nd production building is a barracks before the 2nd war factory (every other faction: war factory first).")]
+		public readonly FrozenSet<string> OpeningSecondBarracksFirstFactions = FrozenSet<string>.Empty;
+
+		[Desc("BASE-03 (AUDIT_BASE_01, Opus ruling): while SUSTAINED-CASH is active, the first copy of every building type (the tech chain and each building once)",
+			"still comes BEFORE the sustained production pick. Gated by SwitchCondition; row pb_sustained_keeps_essentials.")]
+		public readonly bool SustainedKeepsEssentials = false;
+
+		[Desc("BASE-05 (AUDIT_BASE_01): the overflow, production-scaling, threshold, naval, silo and radar picks are filtered by the same admission votes TickQueue asks",
+			"BEFORE they are returned, so a held pick never ends the sweep and the lower picks still run. Gated by SwitchCondition; row pb_prefilter_picks.")]
+		public readonly bool PrefilterBuildingPicks = false;
+
+		[Desc("BASE-04 (AUDIT_BASE_01): ground defences from the fraction roll are built only after a threat is seen (an enemy armed unit seen near a construction yard,",
+			"or the threat analysis reports an active threat or a nemesis); threat-driven defence stays. Gated by SwitchCondition; row af2_defence_need_gate.")]
+		public readonly bool DefenceNeedGate = false;
+
+		[Desc("BASE-04: cells around a construction yard in which a seen enemy armed unit counts as a threat.")]
+		public readonly int DefenceNeedRadius = 28;
+
+		[Desc("BASE-13 (AUDIT_BASE_01): caps the growing power margin (MinimumExcessPower + ExcessPowerIncrement per building group) at PowerMarginCap, never below",
+			"MinimumExcessPower, so the low-power rung cannot outrank everything. Gated by SwitchCondition; row pb_power_margin_cap.")]
+		public readonly bool PowerMarginCapEnabled = false;
+
+		[Desc("BASE-13: the cap itself (power units).")]
+		public readonly int PowerMarginCap = 300;
+
+		[Desc("C-04 (AUDIT_CONFIG_01): the first copy of a defence type no longer skips RATIO-2X (mobile army >= 2x static defence) unless a threat is seen. Gated by",
+			"SwitchCondition; row af2_defence_first_copy (shared with the ArmyFirstBotModule cap).")]
+		public readonly bool DefenceFirstCopyCounts = false;
+
+		[Desc("EARLY-DEF-01 (USER 11-24): right after the first production building the bot builds a small anti-rush set of ground defences (AntiRushBaseMin at the lowest tier,",
+			"AntiRushBaseMax at the highest). The set is an essential at low cash and exempt from the defence-need gate, the seen-threat rule and the defence cash floor; the AF2 cap",
+			"and RATIO-2X still count it. Gated by SwitchCondition; row bb_antirush_base.")]
+		public readonly bool AntiRushBase = false;
+
+		[Desc("EARLY-DEF-01: the anti-rush set size at the lowest tier.")]
+		public readonly int AntiRushBaseMin = 2;
+
+		[Desc("EARLY-DEF-01: the anti-rush set size at the highest tier.")]
+		public readonly int AntiRushBaseMax = 3;
+
+		[Desc("TEAM-DEFEND-02 (USER 11-24): while own or allied buildings are attacked, every ready ground turret is placed where it covers the current attackers: as close as possible to",
+			"exactly its maximum weapon range from them, on the defended side, never next to the enemy; the nearest legal in-range cell otherwise; with none the turret is held (the READY",
+			"watchdog places it at a base cell later). Solo (own base attacked) and team (an ally attacked) use the same rule; building next to an ally follows the lobby option through the",
+			"engine placement check. Gated by SwitchCondition; row tm_ally_turret_support.")]
+		public readonly bool TeamTurretSupport = false;
+
+		[Desc("TEAM-DEFEND-02: cells around an own or allied building in which a seen enemy armed unit counts as attacking it.")]
+		public readonly int TurretSupportRadiusCells = 14;
+
+		[Desc("TEAM-DEFEND-02: at least this many seen enemy armed units near one building count as an attack (a lone scout does not pull the turrets).")]
+		public readonly int TurretSupportMinAttackers = 2;
+
+		[Desc("TEAM-DEFEND-02: a turret keeps at least this many cells from the attackers (never next to the enemy), or three fifths of its range when that is smaller.")]
+		public readonly int TurretSupportMinGapCells = 4;
+
+		[Desc("TEAM-DEFEND-02: how often the attack picture is refreshed while a turret waits to be placed.")]
+		public readonly int TurretSupportScanTicks = 25;
+
+		[Desc("C-07 / BASE-09 (AUDIT_CONFIG_01): army-first essential buildings (yards, refineries, power, tech chain, first copies, upgrade producers) ride at their own",
+			"cost like a planner want: the building cash floor (BuildingProductionMinCash) does not hold them. Gated by SwitchCondition; row pb_floor_essentials_exempt.")]
+		public readonly bool FloorEssentialsExempt = false;
+
+		[Desc("BASE-06 (AUDIT_BASE_01): a READY building held for crawl or front/back placement is placed at a base cell after ReadyWatchdogTicks (the old 75-tick watchdog covered only",
+			"refineries). Gated by SwitchCondition; row ready_watchdog_all.")]
+		public readonly bool ReadyWatchdogAll = false;
+
+		[Desc("BASE-06: ticks a READY building may be held before it is placed at a base cell.")]
+		public readonly int ReadyWatchdogTicks = 75;
+
+		[Desc("BASE-07: a type that failed its placement budget is banned from the overflow, cycled, each-once, tech-chain, opening and fraction picks for NoSpaceBanTicks, or until a new base provider appears.",
+			"Gated by SwitchCondition; row pb_nospace_ban.")]
+		public readonly bool NoSpaceBan = false;
+
+		[Desc("BASE-07: how long a no-space ban lasts.")]
+		public readonly int NoSpaceBanTicks = 3000;
+
+		[Desc("BASE-12: the expansion-refinery safety test iterates every wanting claim (the first safe one wins) and also gates the fraction roll's refinery. Needs ExpansionRefinerySafety.",
+			"Gated by SwitchCondition; row pb_refinery_safety_all_claims.")]
+		public readonly bool RefinerySafetyAllClaims = false;
+
+		[Desc("REF-FIELD-02 (USER PRIORITY 11-24, refinery spam; AUDIT_BASE_01 BASE-01): the economy rung's refinery pick waits for the first vehicle",
+			"factory after ref1 (ref1, war factory, ref2), keeps RefineryMinIntervalTicks between refineries once every yard has one, and from the third",
+			"refinery on yields to a pending first copy for at most RefineryEssentialYieldTicks. Gated by SwitchCondition; row rf_economy_gate.")]
+		public readonly bool RefineryEconomyGate = false;
+
+		[Desc("REF-FIELD-02: minimum ticks between two refineries once every construction yard has one.")]
+		public readonly int RefineryMinIntervalTicks = 1500;
+
+		[Desc("REF-FIELD-02: longest a refinery pick yields to a pending first copy before it may go ahead anyway.")]
+		public readonly int RefineryEssentialYieldTicks = 1500;
+
+		[Desc("REF-FIELD-02 c2 (CM FIX, Opus ruling): the war-factory wait before ref2 ends this many ticks after ref1 completed; it also ends at once when",
+			"a vehicle factory type is no-space banned or used up its placement budget (MaximumFailedPlacementAttempts), or none is buildable.")]
+		public readonly int RefineryFactoryWaitTicks = 1500;
+
+		[Desc("REF-FIELD-02: a yard with no own refinery within this many cells skips the refinery economy gate (the expansion refinery is next).")]
+		public readonly int RefineryYardRadiusCells = 14;
+
 		[Desc("PROD-BUSY (USER 11-24): while the bank stays above the tier MaximiseProductionCash line the base builder adds production buildings, cycled",
 			"across the types (barracks, war factory, airfield, naval yard with water access, then again), bounded by the build limits and by the failed-",
 			"placement latch; power is added as needed. Gated by SwitchCondition; row pb_cycle_production.")]
@@ -477,6 +592,47 @@ namespace OpenRA.Mods.CA.Traits
 
 		// Cameo (§12.13, EX-2): a provider whose target field is in reach and unclaimed wants a refinery there, so the
 		// refinery count is not adequate yet, whatever the fixed optimum says: every field in reach gets one.
+		/// <summary>BASE-12: true when at least one provider wants a refinery at a field and none of those fields is safe (a want with no field is not gated).</summary>
+		public bool ExpansionRefineryBlockedByAllUnsafe()
+		{
+			if (expansionTargetProviders == null)
+				return false;
+
+			var safe = new List<bool>();
+			foreach (var provider in expansionTargetProviders)
+			{
+				if (!(provider.WantsRefineryAtExpansionTarget && (provider.ExpansionTarget != null || provider.RefineryLawActive)))
+					continue;
+
+				var field = provider.RefineryClaimTarget ?? provider.ExpansionTarget;
+				safe.Add(field == null || ExpansionRefinerySafe(field.Value));
+			}
+
+			return BaseFix02CA.SafetyBlocksAll(safe);
+		}
+
+		/// <summary>BASE-12: the first wanting provider whose field is safe (or has no field); null when none. The refinery's SITE follows this claim, not the head claim.</summary>
+		public IBotExpansionTargetProvider ExpansionWantsRefinerySafe()
+		{
+			if (expansionTargetProviders == null)
+				return null;
+
+			var wanting = new List<IBotExpansionTargetProvider>();
+			var safe = new List<bool>();
+			foreach (var provider in expansionTargetProviders)
+			{
+				if (!(provider.WantsRefineryAtExpansionTarget && (provider.ExpansionTarget != null || provider.RefineryLawActive)))
+					continue;
+
+				var field = provider.RefineryClaimTarget ?? provider.ExpansionTarget;
+				wanting.Add(provider);
+				safe.Add(field == null || ExpansionRefinerySafe(field.Value));
+			}
+
+			var index = BaseFix02CA.FirstSafe(safe);
+			return index < 0 ? null : wanting[index];
+		}
+
 		public IBotExpansionTargetProvider ExpansionWantsRefinery()
 		{
 			if (expansionTargetProviders == null)
@@ -607,6 +763,82 @@ namespace OpenRA.Mods.CA.Traits
 		public bool CycleProductionArmed => Info.CycleProductionAboveLine && switchesActive;
 		public bool EssentialsLowCashArmed => Info.EssentialsOnlyBelowTierLine && switchesActive;
 		public bool UnlistedOnceArmed => Info.UnlistedBuildingsOnce && switchesActive;
+		public bool EssentialPassArmed => Info.EssentialPassFirstCopies && switchesActive;
+		public bool OpeningStepArmed => Info.OpeningStandardOrder && switchesActive;
+		public bool SustainedKeepsEssentialsArmed => Info.SustainedKeepsEssentials && switchesActive;
+		public bool PrefilterArmed => Info.PrefilterBuildingPicks && switchesActive;
+		public bool DefenceNeedArmed => Info.DefenceNeedGate && switchesActive;
+		public bool PowerMarginCapArmed => Info.PowerMarginCapEnabled && switchesActive;
+		public bool DefenceFirstCopyArmed => Info.DefenceFirstCopyCounts && switchesActive;
+		public bool AntiRushBaseArmed => Info.AntiRushBase && switchesActive;
+		public bool TeamTurretSupportArmed => Info.TeamTurretSupport && switchesActive;
+		public bool FloorEssentialsExemptArmed => Info.FloorEssentialsExempt && switchesActive;
+		public bool ReadyWatchdogArmed => Info.ReadyWatchdogAll && switchesActive;
+		public bool NoSpaceBanArmed => Info.NoSpaceBan && switchesActive;
+		public bool RefinerySafetyAllClaimsArmed => Info.RefinerySafetyAllClaims && switchesActive;
+		public bool RefineryEconomyGateArmed => Info.RefineryEconomyGate && switchesActive;
+
+		// REF-FIELD-02 (row rf_economy_gate): shared by every queue manager of this module. The tick the refinery count (owned + in production)
+		// last rose, the count it rose to, and the tick a pending first copy first made the refinery pick yield (-1 = none).
+		public int RefineryGateLastRiseTick = -1;
+		public int RefineryGateLastCount;
+		public int RefineryGateYieldSince = -1;
+
+		// REF-FIELD-02 c2: the tick the first own refinery stood (-1 = not yet), and whether a vehicle factory type used up its placement budget.
+		public int RefineryGateFirstStoodTick = -1;
+		public bool RefineryGateFactoryPlacementFailed;
+
+		/// <summary>REF-FIELD-02: own refineries standing plus in production.</summary>
+		public int RefineryCountWithQueued()
+		{
+			var n = AIUtils.CountActorByCommonName(RefineryBuildings);
+			if (BuildingsBeingProduced != null)
+				foreach (var r in Info.RefineryTypes)
+					if (BuildingsBeingProduced.TryGetValue(r, out var q))
+						n += q;
+
+			return n;
+		}
+
+		/// <summary>REF-FIELD-02: an own vehicle factory stands or one is in production.</summary>
+		public bool VehicleFactoryOwnedOrQueued()
+		{
+			if (AIUtils.CountActorByCommonName(factoryBuildings) > 0)
+				return true;
+
+			if (BuildingsBeingProduced != null)
+				foreach (var f in Info.VehiclesFactoryTypes)
+					if (BuildingsBeingProduced.TryGetValue(f, out var q) && q > 0)
+						return true;
+
+			return false;
+		}
+
+		/// <summary>REF-FIELD-02: an own construction yard stands with no own refinery within RefineryYardRadiusCells (the expansion refinery is next).</summary>
+		public bool YardWithoutRefinery()
+		{
+			var r2 = (long)Info.RefineryYardRadiusCells * Info.RefineryYardRadiusCells;
+			foreach (var yard in ConstructionYardBuildings.Actors)
+			{
+				if (yard.IsDead || !yard.IsInWorld)
+					continue;
+
+				var served = false;
+				foreach (var refinery in RefineryBuildings.Actors)
+				{
+					if (!refinery.IsDead && refinery.IsInWorld && (refinery.Location - yard.Location).LengthSquared <= r2)
+					{
+						served = true;
+						break;
+					}
+				}
+
+				if (!served)
+					return true;
+			}
+
+			return false;
+		}
 
 		// E1 observational slice (lead-accepted, observational ONLY): the switch-gated commitment
 		// ledger. Never read by any admission decision — recording and verdict logging only.

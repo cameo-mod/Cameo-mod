@@ -194,6 +194,8 @@
 	# Guarded by tools/audit/audit_ai_personalities.py (difficulty_scale_failures).
 	# TIER-01 yaml applied (TABLE_03_R2 079A06F2, SCALE_PLAN_01 section 8)
 	BotLimits@noob:
+		# C-03 (AUDIT_CONFIG_01): barracks before the first refinery on every tier (binding opening order); no tier jump.
+		PrioritizeBarracksBeforeRefinery: true
 		ProductionTypeLimit: 1
 		ConstructionYardLimit: 1
 		RefineryLimit: 1
@@ -227,6 +229,8 @@
 		RoleMixUnnamedTotalPct: 10
 		RequiresCondition: noobbot
 	BotLimits@easiest:
+		# C-03 (AUDIT_CONFIG_01): barracks before the first refinery on every tier (binding opening order); no tier jump.
+		PrioritizeBarracksBeforeRefinery: true
 		ProductionTypeLimit: 2
 		ConstructionYardLimit: 2
 		RefineryLimit: 2
@@ -260,6 +264,8 @@
 		RoleMixUnnamedTotalPct: 11
 		RequiresCondition: easiestbot
 	BotLimits@veryeasy:
+		# C-03 (AUDIT_CONFIG_01): barracks before the first refinery on every tier (binding opening order); no tier jump.
+		PrioritizeBarracksBeforeRefinery: true
 		ProductionTypeLimit: 3
 		ConstructionYardLimit: 3
 		RefineryLimit: 3
@@ -293,6 +299,8 @@
 		RoleMixUnnamedTotalPct: 12
 		RequiresCondition: veryeasybot
 	BotLimits@easy:
+		# C-03 (AUDIT_CONFIG_01): barracks before the first refinery on every tier (binding opening order); no tier jump.
+		PrioritizeBarracksBeforeRefinery: true
 		ProductionTypeLimit: 4
 		ConstructionYardLimit: 4
 		RefineryLimit: 4
@@ -326,6 +334,8 @@
 		RoleMixUnnamedTotalPct: 13
 		RequiresCondition: easybot
 	BotLimits@medium:
+		# C-03 (AUDIT_CONFIG_01): barracks before the first refinery on every tier (binding opening order); no tier jump.
+		PrioritizeBarracksBeforeRefinery: true
 		ProductionTypeLimit: 5
 		ConstructionYardLimit: 5
 		RefineryLimit: 5
@@ -391,7 +401,34 @@
 		ProductionCashReserve: 1800
 		OverflowCash: 8000
 		RoleMixUnnamedTotalPct: 15
-		RequiresCondition: hardbot
+		RequiresCondition: hardbot && !classicbot
+	BotLimits@classic:
+		ProductionTypeLimit: 4
+		ConstructionYardLimit: 4
+		RefineryLimit: 5
+		HarvesterLimit: 15
+		BuildingDelayModifier: 150
+		BuildingIntervalModifier: 150
+		UnitDelayModifier: 150
+		UnitIntervalModifier: 150
+		InitialAttackDelay: 3750
+		AttackLivenessMaxNoLaunchTicks: 7500
+		AttackLivenessFirstWaveMaxTicks: 3750
+		TempoMinWaveUnits: 8
+		TeamResponseMaxLeaseTicks: 1500
+		TeamResponseRearmCooldownTicks: 750
+		TeamResponseLeaseLimit: 1
+		PrioritizeBarracksBeforeRefinery: true
+		PersonalityReactionDelay: 4500
+		NewProductionCashThreshold: 12000
+		MaximiseProductionCashRequirement: 5500
+		BankSaturationCash: 3000
+		AdaptiveCounterWeight: 18
+		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 1200
+		RetreatRatioPct: 50
+		RequiresCondition: classicbot
+
 	BotLimits@veryhard:
 		ProductionTypeLimit: 7
 		ConstructionYardLimit: 7
@@ -4303,6 +4340,8 @@ Player:
 		ArmyReserveHighCash: 0
 		MinArmyUnitsBeforeBuildings: 0
 		FirstCopyPasses: true
+		# C-04: the first copy of a defence type counts toward the cap below (row af2_defence_first_copy).
+		DefenceFirstCopyCounts: true
 		DefenceCapBase: 3
 		DefenceCapPerThreat: 6
 		DefenceThreatSaturationPercent: 300
@@ -4585,6 +4624,9 @@ Player:
 		# REPAIR-B3 (SPEC_2026-10-09 §1): shared coverage — a usable own refinery serves every anchor inside an
 		# inclusive Euclidean radius-10 (the default 0 would fall back to ClaimRadiusCells = 8).
 		AnchorServeRadiusCells: 10
+		# REF-FIELD-02 (USER PRIORITY 11-24, refinery spam; row rf_field_gate): at most 2 refineries per field (total = fields in reach x 2), and a
+		# field where an own refinery was lost stays locked 3000 ticks, then until no enemy was seen there for 1500 ticks. genericbot only (this module).
+		RefineryFieldGate: true
 		# BZ_production_scaling: up to ScalingMcvMaxExtra extra construction MCVs while windowed income
 		# holds over the difficulty line, a far field is free and army parity admits; also parks MCV
 		# site handouts whose deploy annulus holds no placeable cell (MCV-EXPAND-IDLE H1).
@@ -4695,6 +4737,9 @@ Player:
 	# Try to get a MCV from a crate if we don't have one
 	CratePickupBotModule:
 		RequiresCondition: classicbot || genericbot # && nobase no conyard condition defined in player.yaml
+		# CRATE-RESERVE-01 (USER rule): crates within 25 cells of an own or allied yard are left for the MCV chance; others are collected by a cheap idle unit away from threat; no yard and no MCV = hunt every crate. genericbot only (row crate_reserve_mcv).
+		SwitchCondition: genericbot
+		CrateReserveMcv: true
 		ScanForCratesInterval: 300
 		# Omniscient on purpose (DESIGN §19.5): a bot that lost its MCV must find a crate anywhere.
 		CheckTargetsForVisibility: false
@@ -4741,6 +4786,7 @@ Player:
 		SquadMicroEnabled: true
 		# ARTY-01 + DEFEND-ALLY-01 (USER P0, 2026-11-23): artillery micro and allied defence. @classic keeps the defaults (off).
 		ArtyMicroEnabled: true
+		ArtyStructFirstEnabled: true
 		DefendAllyEnabled: true
 		# WAVE-MIN-01 (USER rule, 2026-11-23): attack waves leave the base only at the tier minimum (BotLimits.WaveMinUnits / WaveMinValue). A personality may raise it with WaveMinUnits / WaveMinValue here, never lower it.
 		WaveMinEnabled: true
@@ -4759,7 +4805,25 @@ Player:
 		TeamLeadOrderSurviveEnabled: true
 		# TEAM-BLOB-01 push bar (USER rule: bots never trickle): a due team push waits at the rally while the arrived squads are below the WAVE-MIN bars; dissolved after 3000 ticks of hold.
 		TeamLeadPushBarEnabled: true
-		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
+		TeamLeadGatherHoldEnabled: true
+		TeamLeadGraceHoldEnabled: true
+		TeamLeadRouteAllEnabled: true
+		TeamLeadDefendRespectsOrderEnabled: true
+		TeamLeadBoundedRetargetEnabled: true
+		TeamLeadJoinAtFormEnabled: true
+		TeamLeadBarJoinableEnabled: true
+		TeamLeadJoinMergeEnabled: true
+		TeamLeadGraceRallyEnabled: true
+		TeamLeadGatherRangeEnabled: true
+		TeamLeadHuntViaOrderEnabled: true
+		TeamLeadIssueFloorEnabled: true
+		TeamLeadRallyMidEnabled: true
+		TeamLeadPincerDoubleEnabled: true
+		TeamLeadPincerWideEnabled: true
+		TeamLeadSoloEnabled: true
+		TeamLeadAllInEnabled: true
+		TeamLeadDefendTeamEnabled: true
+		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		HarassMinEnabled: true
 		TeamLeadRaiderRecallEnabled: true
@@ -4838,7 +4902,7 @@ Player:
 		SuggestedGroundLeaderLocomotor: foot, wheeled, tracked, heavytracked
 		SuggestedNavyLeaderLocomotor: naval
 		ExcludeFromSquadsTypes: e6, ra1_engineer, ra2_allies_engineer, ra2_soviets_engineer, yuri_engineer, asianalliance_engineer, latinsyndicate_engineer, steelconsortium_engineer, tsengineer, ts_nod_engineer, engineer, td_gdi_mobileconstructionvehicle, td_nod_mobileconstructionvehicle, ra1_allies_mobileconstructionvehicle, ra1_soviets_mobileconstructionvehicle, japan_japanesemobileconstructionvehicle, ra1_allies_minelayer, japan_corewarfactory, japan_corerefinery, japan_corepowerplant, japan_corebarracks, japan_coreradar, japan_coreairfield, japan_coreservicedepot, japan_coretechcenter, yrslav, yuri_slaveminer, zerg_overlord, ra2_allies_mobileconstructionvehicle, ra2_soviets_mobileconstructionvehicle, yuri_mobileconstructionvehicle, asianalliance_mobileconstructionvehicle, ts_gdi_mobileconstructionvehicle, ts_nod_mobileconstructionvehicle, forgotten_mobileconstructionvehicle, cabal_mobileconstructionvehicle, carryall, carryall.reinforce, ixian_mobileconstructionvehicle, ordos_mobileconstructionvehicle, ra1_allies_raspy, ra2_allies_ra2spy, ra2_allies_chronolegionnaire, ra1_soviets_nukedemotruck, ra1_allies_chronotank, ra1_soviets_madtank, td_gdi_chinooktransport, td_nod_chinooktransport, ra1_allies_chinooktransport, ra1_soviets_hiptransport, ra2_allies_nighthawk, latinsyndicate_hindtransport, asianalliance_shinobi, asianalliance_oiltruck, steelconsortium_consortiummobileconstructionvehicle, latinsyndicate_syndicatemobileconstructionvehicle, naxis_naximobileconstructionvehicle, schwarzermond_naxismobileconstructionvehicle, naxis_slaveoverseer, latinsyndicate_terrorist, latinsyndicate_demolitiontruck, latinsyndicate_nuketruck, futuretech_mobileconstructionvehicle, futuretech_engineer, futuretech_spyfutu, zerg_hatcherydrone, protoss_mobilenexus, terran_mobilecommandcenter, terran_dropship, terran_medivac, protoss_shuttle, wc2_humans_mobileconstructionvehiclehuman, wc2_orcs_mobileconstructionvehicleorc, wc2_humans_demolitionsquad, wc2_orcs_goblinsappers, tkm_mobileconstructionvehicletkm, tkm_engineer, tkm_radartruck, tkmworker, td_gdi_tiberiumharvester, td_nod_tiberiumharvester, td_nod_stealthharvester, ra1_soviets_oretruck, ra1_allies_oretruck, japan_japaneseoretruck, ra2_allies_chronominer, ra2_soviets_warminer, asianalliance_droneminer, ts_gdi_tiberiumharvester, ts_nod_tiberiumharvester, forgotten_tiberiumharvester, cabal_tiberiumharvester, ixian_spiceharvester, steelconsortium_consortiumminer, latinsyndicate_collectiontruck, schwarzermond_noidharvester, naxis_slave, futuretech_prospector, terran_scv, protoss_probe, zerg_drone, wc2_humans_peasant, wc2_orcs_peon, ordos_spiceharvester, tkm_templateharvesterraname, atreides_engineer, corrino_engineer, harkonnen_engineer, atreides_mobileconstructionvehicle, corrino_mobileconstructionvehicle, harkonnen_mobileconstructionvehicle, eden_convec_structure_factory, plymouth_convec_structure_factory
-		ConstructionYardTypes: zerg_lair, zerg_hive
+		ConstructionYardTypes: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_constructionyard, ra1_soviets_constructionyard, japan_japaneseconstructionyard, ra2_soviets_constructionyard, ra2_allies_constructionyard, yuri_constructionyard, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, terran_commandcenter, protoss_nexus, zerg_hatchery, zerg_lair, zerg_hive, ixian_constructionyard, ordos_constructionyard, wc2_humans_townhall, wc2_orcs_greathall, asianalliance_constructionyard, latinsyndicate_syndicateconstructionyard, steelconsortium_consortiumconstructionyard, naxis_constructionyard, schwarzermond_constructionyard, futuretech_constructionyard, tkm_constructionyard
 		NavalUnitsTypes: ra1_soviets_submarine, ra1_soviets_missilesubmarine, ra1_allies_destroyer, ra1_allies_cruiser, ra1_allies_gunboat, japan_japanesespeedboat, japan_japanesecarrier, japan_yamatobattleship, td_nod_attacksubmarine, td_nod_lasercorvette, td_nod_ballisticmissilesubmarine, cncdd, td_gdi_railgunbattleship, td_gdi_missileboat, ra2sqd, ra2dlph, ra2dest, ra2_allies_aegiscruiser, ra2sub, ra2_soviets_seascorpion, ra2dred, ra2carrier, yuri_boomersubmarine, glgunboat, chflameboat, usagunboat, usabattleship, usacarrier, asianalliance_gunb, asianalliance_lsub, asianalliance_quasfrig, asianalliance_karrier, asianalliance_tsun, asianalliance_ksub, latin_triton, latin_sub, naxis_tuboat, naxis_muboat, latin_rammax
 		NavalProductionTypes: ra1_soviets_subpen, ra1_allies_navalyard, japan_japanesenavalyard, cncsyrd, cncspen, yrygyard, ra2gayard, ra2nayard, glsyrd, chsyrd, usasyrd, asianalliance_cgyard, latin_cgyard, naxis_naval
 		AirUnitsTypes: td_gdi_firehawk, ra1_soviets_migattackbomber, ra1_soviets_su57attackbomber, ra1_soviets_supersonicnuclearbomber, ra1_allies_rapierjumpjet, japan_japanesebomber, ra2_allies_harrier, ra2_allies_blackeagle, ra2_soviets_migbomber, asianalliance_phoenix, steelconsortium_twister, steelconsortium_skyhammer, latinsyndicate_mig21, ixian_airdrone, ixian_empbomber, ordos_eyeinthesky, ts_gdi_orcabomber, ts_nod_bansheefighter, cabal_hunterkillermk1, cabal_hunterdronecarrier, cabal_mothership, cabal_overkillgunship, cabal_orbdrone, cabal_cyborgassassin, atreides_ornithopter, atreides_airdrone, atreides_advancedcarryall, harkonnen_carryall, harkonnen_gunship, harkonnen_advancedcarryall, corrino_carryall, corrino_gunship, corrino_advancedcarryall
@@ -4892,6 +4956,7 @@ Player:
 		SquadMicroEnabled: true
 		# ARTY-01 + DEFEND-ALLY-01 (USER P0, 2026-11-23): artillery micro and allied defence. @classic keeps the defaults (off).
 		ArtyMicroEnabled: true
+		ArtyStructFirstEnabled: true
 		DefendAllyEnabled: true
 		# WAVE-MIN-01 (USER rule, 2026-11-23): attack waves leave the base only at the tier minimum (BotLimits.WaveMinUnits / WaveMinValue). A personality may raise it with WaveMinUnits / WaveMinValue here, never lower it.
 		WaveMinEnabled: true
@@ -4910,7 +4975,25 @@ Player:
 		TeamLeadOrderSurviveEnabled: true
 		# TEAM-BLOB-01 push bar (USER rule: bots never trickle): a due team push waits at the rally while the arrived squads are below the WAVE-MIN bars; dissolved after 3000 ticks of hold.
 		TeamLeadPushBarEnabled: true
-		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
+		TeamLeadGatherHoldEnabled: true
+		TeamLeadGraceHoldEnabled: true
+		TeamLeadRouteAllEnabled: true
+		TeamLeadDefendRespectsOrderEnabled: true
+		TeamLeadBoundedRetargetEnabled: true
+		TeamLeadJoinAtFormEnabled: true
+		TeamLeadBarJoinableEnabled: true
+		TeamLeadJoinMergeEnabled: true
+		TeamLeadGraceRallyEnabled: true
+		TeamLeadGatherRangeEnabled: true
+		TeamLeadHuntViaOrderEnabled: true
+		TeamLeadIssueFloorEnabled: true
+		TeamLeadRallyMidEnabled: true
+		TeamLeadPincerDoubleEnabled: true
+		TeamLeadPincerWideEnabled: true
+		TeamLeadSoloEnabled: true
+		TeamLeadAllInEnabled: true
+		TeamLeadDefendTeamEnabled: true
+		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		HarassMinEnabled: true
 		TeamLeadRaiderRecallEnabled: true
@@ -4988,7 +5071,7 @@ Player:
 		SuggestedGroundLeaderLocomotor: foot, wheeled, tracked, heavytracked
 		SuggestedNavyLeaderLocomotor: naval
 		ExcludeFromSquadsTypes: e6, ra1_engineer, ra2_allies_engineer, ra2_soviets_engineer, yuri_engineer, asianalliance_engineer, latinsyndicate_engineer, steelconsortium_engineer, tsengineer, ts_nod_engineer, engineer, td_gdi_mobileconstructionvehicle, td_nod_mobileconstructionvehicle, ra1_allies_mobileconstructionvehicle, ra1_soviets_mobileconstructionvehicle, japan_japanesemobileconstructionvehicle, ra1_allies_minelayer, japan_corewarfactory, japan_corerefinery, japan_corepowerplant, japan_corebarracks, japan_coreradar, japan_coreairfield, japan_coreservicedepot, japan_coretechcenter, yrslav, yuri_slaveminer, zerg_overlord, ra2_allies_mobileconstructionvehicle, ra2_soviets_mobileconstructionvehicle, yuri_mobileconstructionvehicle, asianalliance_mobileconstructionvehicle, ts_gdi_mobileconstructionvehicle, ts_nod_mobileconstructionvehicle, forgotten_mobileconstructionvehicle, cabal_mobileconstructionvehicle, carryall, carryall.reinforce, ixian_mobileconstructionvehicle, ordos_mobileconstructionvehicle, ra1_allies_raspy, ra2_allies_ra2spy, ra2_allies_chronolegionnaire, ra1_soviets_nukedemotruck, ra1_allies_chronotank, ra1_soviets_madtank, td_gdi_chinooktransport, td_nod_chinooktransport, ra1_allies_chinooktransport, ra1_soviets_hiptransport, ra2_allies_nighthawk, latinsyndicate_hindtransport, asianalliance_shinobi, asianalliance_oiltruck, steelconsortium_consortiummobileconstructionvehicle, latinsyndicate_syndicatemobileconstructionvehicle, naxis_naximobileconstructionvehicle, schwarzermond_naxismobileconstructionvehicle, naxis_slaveoverseer, latinsyndicate_terrorist, latinsyndicate_demolitiontruck, latinsyndicate_nuketruck, futuretech_mobileconstructionvehicle, futuretech_engineer, futuretech_spyfutu, zerg_hatcherydrone, protoss_mobilenexus, terran_mobilecommandcenter, terran_dropship, terran_medivac, protoss_shuttle, wc2_humans_mobileconstructionvehiclehuman, wc2_orcs_mobileconstructionvehicleorc, wc2_humans_demolitionsquad, wc2_orcs_goblinsappers, tkm_mobileconstructionvehicletkm, tkm_engineer, tkm_radartruck, tkmworker, td_gdi_tiberiumharvester, td_nod_tiberiumharvester, td_nod_stealthharvester, ra1_soviets_oretruck, ra1_allies_oretruck, japan_japaneseoretruck, ra2_allies_chronominer, ra2_soviets_warminer, asianalliance_droneminer, ts_gdi_tiberiumharvester, ts_nod_tiberiumharvester, forgotten_tiberiumharvester, cabal_tiberiumharvester, ixian_spiceharvester, steelconsortium_consortiumminer, latinsyndicate_collectiontruck, schwarzermond_noidharvester, naxis_slave, futuretech_prospector, terran_scv, protoss_probe, zerg_drone, wc2_humans_peasant, wc2_orcs_peon, ordos_spiceharvester, tkm_templateharvesterraname, atreides_engineer, corrino_engineer, harkonnen_engineer, atreides_mobileconstructionvehicle, corrino_mobileconstructionvehicle, harkonnen_mobileconstructionvehicle, eden_convec_structure_factory, plymouth_convec_structure_factory
-		ConstructionYardTypes: zerg_lair, zerg_hive
+		ConstructionYardTypes: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_constructionyard, ra1_soviets_constructionyard, japan_japaneseconstructionyard, ra2_soviets_constructionyard, ra2_allies_constructionyard, yuri_constructionyard, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, terran_commandcenter, protoss_nexus, zerg_hatchery, zerg_lair, zerg_hive, ixian_constructionyard, ordos_constructionyard, wc2_humans_townhall, wc2_orcs_greathall, asianalliance_constructionyard, latinsyndicate_syndicateconstructionyard, steelconsortium_consortiumconstructionyard, naxis_constructionyard, schwarzermond_constructionyard, futuretech_constructionyard, tkm_constructionyard
 		NavalUnitsTypes: ra1_soviets_submarine, ra1_soviets_missilesubmarine, ra1_allies_destroyer, ra1_allies_cruiser, ra1_allies_gunboat, japan_japanesespeedboat, japan_japanesecarrier, japan_yamatobattleship, td_nod_attacksubmarine, td_nod_lasercorvette, td_nod_ballisticmissilesubmarine, cncdd, td_gdi_railgunbattleship, td_gdi_missileboat, ra2sqd, ra2dlph, ra2dest, ra2_allies_aegiscruiser, ra2sub, ra2_soviets_seascorpion, ra2dred, ra2carrier, yuri_boomersubmarine, glgunboat, chflameboat, usagunboat, usabattleship, usacarrier, asianalliance_gunb, asianalliance_lsub, asianalliance_quasfrig, asianalliance_karrier, asianalliance_tsun, asianalliance_ksub, latin_triton, latin_sub, naxis_tuboat, naxis_muboat, latin_rammax
 		NavalProductionTypes: ra1_soviets_subpen, ra1_allies_navalyard, japan_japanesenavalyard, cncsyrd, cncspen, yrygyard, ra2gayard, ra2nayard, glsyrd, chsyrd, usasyrd, asianalliance_cgyard, latin_cgyard, naxis_naval
 		AirUnitsTypes: td_gdi_firehawk, ra1_soviets_migattackbomber, ra1_soviets_su57attackbomber, ra1_soviets_supersonicnuclearbomber, ra1_allies_rapierjumpjet, japan_japanesebomber, ra2_allies_harrier, ra2_allies_blackeagle, ra2_soviets_migbomber, asianalliance_phoenix, steelconsortium_twister, steelconsortium_skyhammer, latinsyndicate_mig21, ixian_airdrone, ixian_empbomber, ordos_eyeinthesky, ts_gdi_orcabomber, ts_nod_bansheefighter, cabal_hunterkillermk1, cabal_hunterdronecarrier, cabal_mothership, cabal_overkillgunship, cabal_orbdrone, cabal_cyborgassassin, atreides_ornithopter, atreides_airdrone, atreides_advancedcarryall, harkonnen_carryall, harkonnen_gunship, harkonnen_advancedcarryall, corrino_carryall, corrino_gunship, corrino_advancedcarryall
@@ -5039,6 +5122,7 @@ Player:
 		SquadMicroEnabled: true
 		# ARTY-01 + DEFEND-ALLY-01 (USER P0, 2026-11-23): artillery micro and allied defence. @classic keeps the defaults (off).
 		ArtyMicroEnabled: true
+		ArtyStructFirstEnabled: true
 		DefendAllyEnabled: true
 		# WAVE-MIN-01 (USER rule, 2026-11-23): attack waves leave the base only at the tier minimum (BotLimits.WaveMinUnits / WaveMinValue). A personality may raise it with WaveMinUnits / WaveMinValue here, never lower it.
 		WaveMinEnabled: true
@@ -5057,7 +5141,25 @@ Player:
 		TeamLeadOrderSurviveEnabled: true
 		# TEAM-BLOB-01 push bar (USER rule: bots never trickle): a due team push waits at the rally while the arrived squads are below the WAVE-MIN bars; dissolved after 3000 ticks of hold.
 		TeamLeadPushBarEnabled: true
-		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
+		TeamLeadGatherHoldEnabled: true
+		TeamLeadGraceHoldEnabled: true
+		TeamLeadRouteAllEnabled: true
+		TeamLeadDefendRespectsOrderEnabled: true
+		TeamLeadBoundedRetargetEnabled: true
+		TeamLeadJoinAtFormEnabled: true
+		TeamLeadBarJoinableEnabled: true
+		TeamLeadJoinMergeEnabled: true
+		TeamLeadGraceRallyEnabled: true
+		TeamLeadGatherRangeEnabled: true
+		TeamLeadHuntViaOrderEnabled: true
+		TeamLeadIssueFloorEnabled: true
+		TeamLeadRallyMidEnabled: true
+		TeamLeadPincerDoubleEnabled: true
+		TeamLeadPincerWideEnabled: true
+		TeamLeadSoloEnabled: true
+		TeamLeadAllInEnabled: true
+		TeamLeadDefendTeamEnabled: true
+		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		HarassMinEnabled: true
 		TeamLeadRaiderRecallEnabled: true
@@ -5137,7 +5239,7 @@ Player:
 		SuggestedGroundLeaderLocomotor: foot, wheeled, tracked, heavytracked
 		SuggestedNavyLeaderLocomotor: naval
 		ExcludeFromSquadsTypes: e6, ra1_engineer, ra2_allies_engineer, ra2_soviets_engineer, yuri_engineer, asianalliance_engineer, latinsyndicate_engineer, steelconsortium_engineer, tsengineer, ts_nod_engineer, engineer, td_gdi_mobileconstructionvehicle, td_nod_mobileconstructionvehicle, ra1_allies_mobileconstructionvehicle, ra1_soviets_mobileconstructionvehicle, japan_japanesemobileconstructionvehicle, ra1_allies_minelayer, japan_corewarfactory, japan_corerefinery, japan_corepowerplant, japan_corebarracks, japan_coreradar, japan_coreairfield, japan_coreservicedepot, japan_coretechcenter, yrslav, yuri_slaveminer, zerg_overlord, ra2_allies_mobileconstructionvehicle, ra2_soviets_mobileconstructionvehicle, yuri_mobileconstructionvehicle, asianalliance_mobileconstructionvehicle, ts_gdi_mobileconstructionvehicle, ts_nod_mobileconstructionvehicle, forgotten_mobileconstructionvehicle, cabal_mobileconstructionvehicle, carryall, carryall.reinforce, ixian_mobileconstructionvehicle, ordos_mobileconstructionvehicle, ra1_allies_raspy, ra2_allies_ra2spy, ra2_allies_chronolegionnaire, ra1_soviets_nukedemotruck, ra1_allies_chronotank, ra1_soviets_madtank, td_gdi_chinooktransport, td_nod_chinooktransport, ra1_allies_chinooktransport, ra1_soviets_hiptransport, ra2_allies_nighthawk, latinsyndicate_hindtransport, asianalliance_shinobi, asianalliance_oiltruck, steelconsortium_consortiummobileconstructionvehicle, latinsyndicate_syndicatemobileconstructionvehicle, naxis_naximobileconstructionvehicle, schwarzermond_naxismobileconstructionvehicle, naxis_slaveoverseer, latinsyndicate_terrorist, latinsyndicate_demolitiontruck, latinsyndicate_nuketruck, futuretech_mobileconstructionvehicle, futuretech_engineer, futuretech_spyfutu, zerg_hatcherydrone, protoss_mobilenexus, terran_mobilecommandcenter, terran_dropship, terran_medivac, protoss_shuttle, wc2_humans_mobileconstructionvehiclehuman, wc2_orcs_mobileconstructionvehicleorc, wc2_humans_demolitionsquad, wc2_orcs_goblinsappers, tkm_mobileconstructionvehicletkm, tkm_engineer, tkm_radartruck, tkmworker, td_gdi_tiberiumharvester, td_nod_tiberiumharvester, td_nod_stealthharvester, ra1_soviets_oretruck, ra1_allies_oretruck, japan_japaneseoretruck, ra2_allies_chronominer, ra2_soviets_warminer, asianalliance_droneminer, ts_gdi_tiberiumharvester, ts_nod_tiberiumharvester, forgotten_tiberiumharvester, cabal_tiberiumharvester, ixian_spiceharvester, steelconsortium_consortiumminer, latinsyndicate_collectiontruck, schwarzermond_noidharvester, naxis_slave, futuretech_prospector, terran_scv, protoss_probe, zerg_drone, wc2_humans_peasant, wc2_orcs_peon, ordos_spiceharvester, tkm_templateharvesterraname, atreides_engineer, corrino_engineer, harkonnen_engineer, atreides_mobileconstructionvehicle, corrino_mobileconstructionvehicle, harkonnen_mobileconstructionvehicle, eden_convec_structure_factory, plymouth_convec_structure_factory
-		ConstructionYardTypes: zerg_lair, zerg_hive
+		ConstructionYardTypes: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_constructionyard, ra1_soviets_constructionyard, japan_japaneseconstructionyard, ra2_soviets_constructionyard, ra2_allies_constructionyard, yuri_constructionyard, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, terran_commandcenter, protoss_nexus, zerg_hatchery, zerg_lair, zerg_hive, ixian_constructionyard, ordos_constructionyard, wc2_humans_townhall, wc2_orcs_greathall, asianalliance_constructionyard, latinsyndicate_syndicateconstructionyard, steelconsortium_consortiumconstructionyard, naxis_constructionyard, schwarzermond_constructionyard, futuretech_constructionyard, tkm_constructionyard
 		NavalUnitsTypes: ra1_soviets_submarine, ra1_soviets_missilesubmarine, ra1_allies_destroyer, ra1_allies_cruiser, ra1_allies_gunboat, japan_japanesespeedboat, japan_japanesecarrier, japan_yamatobattleship, td_nod_attacksubmarine, td_nod_lasercorvette, td_nod_ballisticmissilesubmarine, cncdd, td_gdi_railgunbattleship, td_gdi_missileboat, ra2sqd, ra2dlph, ra2dest, ra2_allies_aegiscruiser, ra2sub, ra2_soviets_seascorpion, ra2dred, ra2carrier, yuri_boomersubmarine, glgunboat, chflameboat, usagunboat, usabattleship, usacarrier, asianalliance_gunb, asianalliance_lsub, asianalliance_quasfrig, asianalliance_karrier, asianalliance_tsun, asianalliance_ksub, latin_triton, latin_sub, naxis_tuboat, naxis_muboat, latin_rammax
 		NavalProductionTypes: ra1_soviets_subpen, ra1_allies_navalyard, japan_japanesenavalyard, cncsyrd, cncspen, yrygyard, ra2gayard, ra2nayard, glsyrd, chsyrd, usasyrd, asianalliance_cgyard, latin_cgyard, naxis_naval
 		AirUnitsTypes: td_gdi_firehawk, ra1_soviets_migattackbomber, ra1_soviets_su57attackbomber, ra1_soviets_supersonicnuclearbomber, ra1_allies_rapierjumpjet, japan_japanesebomber, ra2_allies_harrier, ra2_allies_blackeagle, ra2_soviets_migbomber, asianalliance_phoenix, steelconsortium_twister, steelconsortium_skyhammer, latinsyndicate_mig21, ixian_airdrone, ixian_empbomber, ordos_eyeinthesky, ts_gdi_orcabomber, ts_nod_bansheefighter, cabal_hunterkillermk1, cabal_hunterdronecarrier, cabal_mothership, cabal_overkillgunship, cabal_orbdrone, cabal_cyborgassassin, atreides_ornithopter, atreides_airdrone, atreides_advancedcarryall, harkonnen_carryall, harkonnen_gunship, harkonnen_advancedcarryall, corrino_carryall, corrino_gunship, corrino_advancedcarryall
@@ -5188,6 +5290,7 @@ Player:
 		SquadMicroEnabled: true
 		# ARTY-01 + DEFEND-ALLY-01 (USER P0, 2026-11-23): artillery micro and allied defence. @classic keeps the defaults (off).
 		ArtyMicroEnabled: true
+		ArtyStructFirstEnabled: true
 		DefendAllyEnabled: true
 		# WAVE-MIN-01 (USER rule, 2026-11-23): attack waves leave the base only at the tier minimum (BotLimits.WaveMinUnits / WaveMinValue). A personality may raise it with WaveMinUnits / WaveMinValue here, never lower it.
 		WaveMinEnabled: true
@@ -5206,7 +5309,25 @@ Player:
 		TeamLeadOrderSurviveEnabled: true
 		# TEAM-BLOB-01 push bar (USER rule: bots never trickle): a due team push waits at the rally while the arrived squads are below the WAVE-MIN bars; dissolved after 3000 ticks of hold.
 		TeamLeadPushBarEnabled: true
-		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
+		TeamLeadGatherHoldEnabled: true
+		TeamLeadGraceHoldEnabled: true
+		TeamLeadRouteAllEnabled: true
+		TeamLeadDefendRespectsOrderEnabled: true
+		TeamLeadBoundedRetargetEnabled: true
+		TeamLeadJoinAtFormEnabled: true
+		TeamLeadBarJoinableEnabled: true
+		TeamLeadJoinMergeEnabled: true
+		TeamLeadGraceRallyEnabled: true
+		TeamLeadGatherRangeEnabled: true
+		TeamLeadHuntViaOrderEnabled: true
+		TeamLeadIssueFloorEnabled: true
+		TeamLeadRallyMidEnabled: true
+		TeamLeadPincerDoubleEnabled: true
+		TeamLeadPincerWideEnabled: true
+		TeamLeadSoloEnabled: true
+		TeamLeadAllInEnabled: true
+		TeamLeadDefendTeamEnabled: true
+		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		HarassMinEnabled: true
 		TeamLeadRaiderRecallEnabled: true
@@ -5285,7 +5406,7 @@ Player:
 		SuggestedGroundLeaderLocomotor: foot, wheeled, tracked, heavytracked
 		SuggestedNavyLeaderLocomotor: naval
 		ExcludeFromSquadsTypes: e6, ra1_engineer, ra2_allies_engineer, ra2_soviets_engineer, yuri_engineer, asianalliance_engineer, latinsyndicate_engineer, steelconsortium_engineer, tsengineer, ts_nod_engineer, engineer, td_gdi_mobileconstructionvehicle, td_nod_mobileconstructionvehicle, ra1_allies_mobileconstructionvehicle, ra1_soviets_mobileconstructionvehicle, japan_japanesemobileconstructionvehicle, ra1_allies_minelayer, japan_corewarfactory, japan_corerefinery, japan_corepowerplant, japan_corebarracks, japan_coreradar, japan_coreairfield, japan_coreservicedepot, japan_coretechcenter, yrslav, yuri_slaveminer, zerg_overlord, ra2_allies_mobileconstructionvehicle, ra2_soviets_mobileconstructionvehicle, yuri_mobileconstructionvehicle, asianalliance_mobileconstructionvehicle, ts_gdi_mobileconstructionvehicle, ts_nod_mobileconstructionvehicle, forgotten_mobileconstructionvehicle, cabal_mobileconstructionvehicle, carryall, carryall.reinforce, ixian_mobileconstructionvehicle, ordos_mobileconstructionvehicle, ra1_allies_raspy, ra2_allies_ra2spy, ra2_allies_chronolegionnaire, ra1_soviets_nukedemotruck, ra1_allies_chronotank, ra1_soviets_madtank, td_gdi_chinooktransport, td_nod_chinooktransport, ra1_allies_chinooktransport, ra1_soviets_hiptransport, ra2_allies_nighthawk, latinsyndicate_hindtransport, asianalliance_shinobi, asianalliance_oiltruck, steelconsortium_consortiummobileconstructionvehicle, latinsyndicate_syndicatemobileconstructionvehicle, naxis_naximobileconstructionvehicle, schwarzermond_naxismobileconstructionvehicle, naxis_slaveoverseer, latinsyndicate_terrorist, latinsyndicate_demolitiontruck, latinsyndicate_nuketruck, futuretech_mobileconstructionvehicle, futuretech_engineer, futuretech_spyfutu, zerg_hatcherydrone, protoss_mobilenexus, terran_mobilecommandcenter, terran_dropship, terran_medivac, protoss_shuttle, wc2_humans_mobileconstructionvehiclehuman, wc2_orcs_mobileconstructionvehicleorc, wc2_humans_demolitionsquad, wc2_orcs_goblinsappers, tkm_mobileconstructionvehicletkm, tkm_engineer, tkm_radartruck, tkmworker, td_gdi_tiberiumharvester, td_nod_tiberiumharvester, td_nod_stealthharvester, ra1_soviets_oretruck, ra1_allies_oretruck, japan_japaneseoretruck, ra2_allies_chronominer, ra2_soviets_warminer, asianalliance_droneminer, ts_gdi_tiberiumharvester, ts_nod_tiberiumharvester, forgotten_tiberiumharvester, cabal_tiberiumharvester, ixian_spiceharvester, steelconsortium_consortiumminer, latinsyndicate_collectiontruck, schwarzermond_noidharvester, naxis_slave, futuretech_prospector, terran_scv, protoss_probe, zerg_drone, wc2_humans_peasant, wc2_orcs_peon, ordos_spiceharvester, tkm_templateharvesterraname, atreides_engineer, corrino_engineer, harkonnen_engineer, atreides_mobileconstructionvehicle, corrino_mobileconstructionvehicle, harkonnen_mobileconstructionvehicle, eden_convec_structure_factory, plymouth_convec_structure_factory
-		ConstructionYardTypes: zerg_lair, zerg_hive
+		ConstructionYardTypes: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_constructionyard, ra1_soviets_constructionyard, japan_japaneseconstructionyard, ra2_soviets_constructionyard, ra2_allies_constructionyard, yuri_constructionyard, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, terran_commandcenter, protoss_nexus, zerg_hatchery, zerg_lair, zerg_hive, ixian_constructionyard, ordos_constructionyard, wc2_humans_townhall, wc2_orcs_greathall, asianalliance_constructionyard, latinsyndicate_syndicateconstructionyard, steelconsortium_consortiumconstructionyard, naxis_constructionyard, schwarzermond_constructionyard, futuretech_constructionyard, tkm_constructionyard
 		NavalUnitsTypes: ra1_soviets_submarine, ra1_soviets_missilesubmarine, ra1_allies_destroyer, ra1_allies_cruiser, ra1_allies_gunboat, japan_japanesespeedboat, japan_japanesecarrier, japan_yamatobattleship, td_nod_attacksubmarine, td_nod_lasercorvette, td_nod_ballisticmissilesubmarine, cncdd, td_gdi_railgunbattleship, td_gdi_missileboat, ra2sqd, ra2dlph, ra2dest, ra2_allies_aegiscruiser, ra2sub, ra2_soviets_seascorpion, ra2dred, ra2carrier, yuri_boomersubmarine, glgunboat, chflameboat, usagunboat, usabattleship, usacarrier, asianalliance_gunb, asianalliance_lsub, asianalliance_quasfrig, asianalliance_karrier, asianalliance_tsun, asianalliance_ksub, latin_triton, latin_sub, naxis_tuboat, naxis_muboat, latin_rammax
 		NavalProductionTypes: ra1_soviets_subpen, ra1_allies_navalyard, japan_japanesenavalyard, cncsyrd, cncspen, yrygyard, ra2gayard, ra2nayard, glsyrd, chsyrd, usasyrd, asianalliance_cgyard, latin_cgyard, naxis_naval
 		AirUnitsTypes: td_gdi_firehawk, ra1_soviets_migattackbomber, ra1_soviets_su57attackbomber, ra1_soviets_supersonicnuclearbomber, ra1_allies_rapierjumpjet, japan_japanesebomber, ra2_allies_harrier, ra2_allies_blackeagle, ra2_soviets_migbomber, asianalliance_phoenix, steelconsortium_twister, steelconsortium_skyhammer, latinsyndicate_mig21, ixian_airdrone, ixian_empbomber, ordos_eyeinthesky, ts_gdi_orcabomber, ts_nod_bansheefighter, cabal_hunterkillermk1, cabal_hunterdronecarrier, cabal_mothership, cabal_overkillgunship, cabal_orbdrone, cabal_cyborgassassin, atreides_ornithopter, atreides_airdrone, atreides_advancedcarryall, harkonnen_carryall, harkonnen_gunship, harkonnen_advancedcarryall, corrino_carryall, corrino_gunship, corrino_advancedcarryall
@@ -5337,6 +5458,7 @@ Player:
 		SquadMicroEnabled: true
 		# ARTY-01 + DEFEND-ALLY-01 (USER P0, 2026-11-23): artillery micro and allied defence. @classic keeps the defaults (off).
 		ArtyMicroEnabled: true
+		ArtyStructFirstEnabled: true
 		DefendAllyEnabled: true
 		# WAVE-MIN-01 (USER rule, 2026-11-23): attack waves leave the base only at the tier minimum (BotLimits.WaveMinUnits / WaveMinValue). A personality may raise it with WaveMinUnits / WaveMinValue here, never lower it.
 		WaveMinEnabled: true
@@ -5355,7 +5477,25 @@ Player:
 		TeamLeadOrderSurviveEnabled: true
 		# TEAM-BLOB-01 push bar (USER rule: bots never trickle): a due team push waits at the rally while the arrived squads are below the WAVE-MIN bars; dissolved after 3000 ticks of hold.
 		TeamLeadPushBarEnabled: true
-		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
+		TeamLeadGatherHoldEnabled: true
+		TeamLeadGraceHoldEnabled: true
+		TeamLeadRouteAllEnabled: true
+		TeamLeadDefendRespectsOrderEnabled: true
+		TeamLeadBoundedRetargetEnabled: true
+		TeamLeadJoinAtFormEnabled: true
+		TeamLeadBarJoinableEnabled: true
+		TeamLeadJoinMergeEnabled: true
+		TeamLeadGraceRallyEnabled: true
+		TeamLeadGatherRangeEnabled: true
+		TeamLeadHuntViaOrderEnabled: true
+		TeamLeadIssueFloorEnabled: true
+		TeamLeadRallyMidEnabled: true
+		TeamLeadPincerDoubleEnabled: true
+		TeamLeadPincerWideEnabled: true
+		TeamLeadSoloEnabled: true
+		TeamLeadAllInEnabled: true
+		TeamLeadDefendTeamEnabled: true
+		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		HarassMinEnabled: true
 		TeamLeadRaiderRecallEnabled: true
@@ -5433,7 +5573,7 @@ Player:
 		SuggestedGroundLeaderLocomotor: foot, wheeled, tracked, heavytracked
 		SuggestedNavyLeaderLocomotor: naval
 		ExcludeFromSquadsTypes: e6, ra1_engineer, ra2_allies_engineer, ra2_soviets_engineer, yuri_engineer, asianalliance_engineer, latinsyndicate_engineer, steelconsortium_engineer, tsengineer, ts_nod_engineer, engineer, td_gdi_mobileconstructionvehicle, td_nod_mobileconstructionvehicle, ra1_allies_mobileconstructionvehicle, ra1_soviets_mobileconstructionvehicle, japan_japanesemobileconstructionvehicle, ra1_allies_minelayer, japan_corewarfactory, japan_corerefinery, japan_corepowerplant, japan_corebarracks, japan_coreradar, japan_coreairfield, japan_coreservicedepot, japan_coretechcenter, yrslav, yuri_slaveminer, zerg_overlord, ra2_allies_mobileconstructionvehicle, ra2_soviets_mobileconstructionvehicle, yuri_mobileconstructionvehicle, asianalliance_mobileconstructionvehicle, ts_gdi_mobileconstructionvehicle, ts_nod_mobileconstructionvehicle, forgotten_mobileconstructionvehicle, cabal_mobileconstructionvehicle, carryall, carryall.reinforce, ixian_mobileconstructionvehicle, ordos_mobileconstructionvehicle, ra1_allies_raspy, ra2_allies_ra2spy, ra2_allies_chronolegionnaire, ra1_soviets_nukedemotruck, ra1_allies_chronotank, ra1_soviets_madtank, td_gdi_chinooktransport, td_nod_chinooktransport, ra1_allies_chinooktransport, ra1_soviets_hiptransport, ra2_allies_nighthawk, latinsyndicate_hindtransport, asianalliance_shinobi, asianalliance_oiltruck, steelconsortium_consortiummobileconstructionvehicle, latinsyndicate_syndicatemobileconstructionvehicle, naxis_naximobileconstructionvehicle, schwarzermond_naxismobileconstructionvehicle, naxis_slaveoverseer, latinsyndicate_terrorist, latinsyndicate_demolitiontruck, latinsyndicate_nuketruck, futuretech_mobileconstructionvehicle, futuretech_engineer, futuretech_spyfutu, zerg_hatcherydrone, protoss_mobilenexus, terran_mobilecommandcenter, terran_dropship, terran_medivac, protoss_shuttle, wc2_humans_mobileconstructionvehiclehuman, wc2_orcs_mobileconstructionvehicleorc, wc2_humans_demolitionsquad, wc2_orcs_goblinsappers, tkm_mobileconstructionvehicletkm, tkm_engineer, tkm_radartruck, tkmworker, td_gdi_tiberiumharvester, td_nod_tiberiumharvester, td_nod_stealthharvester, ra1_soviets_oretruck, ra1_allies_oretruck, japan_japaneseoretruck, ra2_allies_chronominer, ra2_soviets_warminer, asianalliance_droneminer, ts_gdi_tiberiumharvester, ts_nod_tiberiumharvester, forgotten_tiberiumharvester, cabal_tiberiumharvester, ixian_spiceharvester, steelconsortium_consortiumminer, latinsyndicate_collectiontruck, schwarzermond_noidharvester, naxis_slave, futuretech_prospector, terran_scv, protoss_probe, zerg_drone, wc2_humans_peasant, wc2_orcs_peon, ordos_spiceharvester, tkm_templateharvesterraname, atreides_engineer, corrino_engineer, harkonnen_engineer, atreides_mobileconstructionvehicle, corrino_mobileconstructionvehicle, harkonnen_mobileconstructionvehicle, eden_convec_structure_factory, plymouth_convec_structure_factory
-		ConstructionYardTypes: zerg_lair, zerg_hive
+		ConstructionYardTypes: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_constructionyard, ra1_soviets_constructionyard, japan_japaneseconstructionyard, ra2_soviets_constructionyard, ra2_allies_constructionyard, yuri_constructionyard, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, terran_commandcenter, protoss_nexus, zerg_hatchery, zerg_lair, zerg_hive, ixian_constructionyard, ordos_constructionyard, wc2_humans_townhall, wc2_orcs_greathall, asianalliance_constructionyard, latinsyndicate_syndicateconstructionyard, steelconsortium_consortiumconstructionyard, naxis_constructionyard, schwarzermond_constructionyard, futuretech_constructionyard, tkm_constructionyard
 		NavalUnitsTypes: ra1_soviets_submarine, ra1_soviets_missilesubmarine, ra1_allies_destroyer, ra1_allies_cruiser, ra1_allies_gunboat, japan_japanesespeedboat, japan_japanesecarrier, japan_yamatobattleship, td_nod_attacksubmarine, td_nod_lasercorvette, td_nod_ballisticmissilesubmarine, cncdd, td_gdi_railgunbattleship, td_gdi_missileboat, ra2sqd, ra2dlph, ra2dest, ra2_allies_aegiscruiser, ra2sub, ra2_soviets_seascorpion, ra2dred, ra2carrier, yuri_boomersubmarine, glgunboat, chflameboat, usagunboat, usabattleship, usacarrier, asianalliance_gunb, asianalliance_lsub, asianalliance_quasfrig, asianalliance_karrier, asianalliance_tsun, asianalliance_ksub, latin_triton, latin_sub, naxis_tuboat, naxis_muboat, latin_rammax
 		NavalProductionTypes: ra1_soviets_subpen, ra1_allies_navalyard, japan_japanesenavalyard, cncsyrd, cncspen, yrygyard, ra2gayard, ra2nayard, glsyrd, chsyrd, usasyrd, asianalliance_cgyard, latin_cgyard, naxis_naval
 		AirUnitsTypes: td_gdi_firehawk, ra1_soviets_migattackbomber, ra1_soviets_su57attackbomber, ra1_soviets_supersonicnuclearbomber, ra1_allies_rapierjumpjet, japan_japanesebomber, ra2_allies_harrier, ra2_allies_blackeagle, ra2_soviets_migbomber, asianalliance_phoenix, steelconsortium_twister, steelconsortium_skyhammer, latinsyndicate_mig21, ixian_airdrone, ixian_empbomber, ordos_eyeinthesky, ts_gdi_orcabomber, ts_nod_bansheefighter, cabal_hunterkillermk1, cabal_hunterdronecarrier, cabal_mothership, cabal_overkillgunship, cabal_orbdrone, cabal_cyborgassassin, atreides_ornithopter, atreides_airdrone, atreides_advancedcarryall, harkonnen_carryall, harkonnen_gunship, harkonnen_advancedcarryall, corrino_carryall, corrino_gunship, corrino_advancedcarryall
@@ -5483,6 +5623,7 @@ Player:
 		SquadMicroEnabled: true
 		# ARTY-01 + DEFEND-ALLY-01 (USER P0, 2026-11-23): artillery micro and allied defence. @classic keeps the defaults (off).
 		ArtyMicroEnabled: true
+		ArtyStructFirstEnabled: true
 		DefendAllyEnabled: true
 		# WAVE-MIN-01 (USER rule, 2026-11-23): attack waves leave the base only at the tier minimum (BotLimits.WaveMinUnits / WaveMinValue). A personality may raise it with WaveMinUnits / WaveMinValue here, never lower it.
 		WaveMinEnabled: true
@@ -5501,9 +5642,27 @@ Player:
 		TeamLeadOrderSurviveEnabled: true
 		# TEAM-BLOB-01 push bar (USER rule: bots never trickle): a due team push waits at the rally while the arrived squads are below the WAVE-MIN bars; dissolved after 3000 ticks of hold.
 		TeamLeadPushBarEnabled: true
-		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (guerrilla personality 40, others 25), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
+		TeamLeadGatherHoldEnabled: true
+		TeamLeadGraceHoldEnabled: true
+		TeamLeadRouteAllEnabled: true
+		TeamLeadDefendRespectsOrderEnabled: true
+		TeamLeadBoundedRetargetEnabled: true
+		TeamLeadJoinAtFormEnabled: true
+		TeamLeadBarJoinableEnabled: true
+		TeamLeadJoinMergeEnabled: true
+		TeamLeadGraceRallyEnabled: true
+		TeamLeadGatherRangeEnabled: true
+		TeamLeadHuntViaOrderEnabled: true
+		TeamLeadIssueFloorEnabled: true
+		TeamLeadRallyMidEnabled: true
+		TeamLeadPincerDoubleEnabled: true
+		TeamLeadPincerWideEnabled: true
+		TeamLeadSoloEnabled: true
+		TeamLeadAllInEnabled: true
+		TeamLeadDefendTeamEnabled: true
+		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
-		HarassCapPercent: 40
+		HarassCapPercent: 25
 		HarassMinEnabled: true
 		TeamLeadRaiderRecallEnabled: true
 		UseSquadOrderDedup: false
@@ -5581,7 +5740,7 @@ Player:
 		SuggestedGroundLeaderLocomotor: foot, wheeled, tracked, heavytracked
 		SuggestedNavyLeaderLocomotor: naval
 		ExcludeFromSquadsTypes: e6, ra1_engineer, ra2_allies_engineer, ra2_soviets_engineer, yuri_engineer, asianalliance_engineer, latinsyndicate_engineer, steelconsortium_engineer, tsengineer, ts_nod_engineer, engineer, td_gdi_mobileconstructionvehicle, td_nod_mobileconstructionvehicle, ra1_allies_mobileconstructionvehicle, ra1_soviets_mobileconstructionvehicle, japan_japanesemobileconstructionvehicle, ra1_allies_minelayer, japan_corewarfactory, japan_corerefinery, japan_corepowerplant, japan_corebarracks, japan_coreradar, japan_coreairfield, japan_coreservicedepot, japan_coretechcenter, yrslav, yuri_slaveminer, zerg_overlord, ra2_allies_mobileconstructionvehicle, ra2_soviets_mobileconstructionvehicle, yuri_mobileconstructionvehicle, asianalliance_mobileconstructionvehicle, ts_gdi_mobileconstructionvehicle, ts_nod_mobileconstructionvehicle, forgotten_mobileconstructionvehicle, cabal_mobileconstructionvehicle, carryall, carryall.reinforce, ixian_mobileconstructionvehicle, ordos_mobileconstructionvehicle, ra1_allies_raspy, ra2_allies_ra2spy, ra2_allies_chronolegionnaire, ra1_soviets_nukedemotruck, ra1_allies_chronotank, ra1_soviets_madtank, td_gdi_chinooktransport, td_nod_chinooktransport, ra1_allies_chinooktransport, ra1_soviets_hiptransport, ra2_allies_nighthawk, latinsyndicate_hindtransport, asianalliance_shinobi, asianalliance_oiltruck, steelconsortium_consortiummobileconstructionvehicle, latinsyndicate_syndicatemobileconstructionvehicle, naxis_naximobileconstructionvehicle, schwarzermond_naxismobileconstructionvehicle, naxis_slaveoverseer, latinsyndicate_terrorist, latinsyndicate_demolitiontruck, latinsyndicate_nuketruck, futuretech_mobileconstructionvehicle, futuretech_engineer, futuretech_spyfutu, zerg_hatcherydrone, protoss_mobilenexus, terran_mobilecommandcenter, terran_dropship, terran_medivac, protoss_shuttle, wc2_humans_mobileconstructionvehiclehuman, wc2_orcs_mobileconstructionvehicleorc, wc2_humans_demolitionsquad, wc2_orcs_goblinsappers, tkm_mobileconstructionvehicletkm, tkm_engineer, tkm_radartruck, tkmworker, td_gdi_tiberiumharvester, td_nod_tiberiumharvester, td_nod_stealthharvester, ra1_soviets_oretruck, ra1_allies_oretruck, japan_japaneseoretruck, ra2_allies_chronominer, ra2_soviets_warminer, asianalliance_droneminer, ts_gdi_tiberiumharvester, ts_nod_tiberiumharvester, forgotten_tiberiumharvester, cabal_tiberiumharvester, ixian_spiceharvester, steelconsortium_consortiumminer, latinsyndicate_collectiontruck, schwarzermond_noidharvester, naxis_slave, futuretech_prospector, terran_scv, protoss_probe, zerg_drone, wc2_humans_peasant, wc2_orcs_peon, ordos_spiceharvester, tkm_templateharvesterraname, atreides_engineer, corrino_engineer, harkonnen_engineer, atreides_mobileconstructionvehicle, corrino_mobileconstructionvehicle, harkonnen_mobileconstructionvehicle, eden_convec_structure_factory, plymouth_convec_structure_factory
-		ConstructionYardTypes: zerg_lair, zerg_hive
+		ConstructionYardTypes: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_constructionyard, ra1_soviets_constructionyard, japan_japaneseconstructionyard, ra2_soviets_constructionyard, ra2_allies_constructionyard, yuri_constructionyard, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, terran_commandcenter, protoss_nexus, zerg_hatchery, zerg_lair, zerg_hive, ixian_constructionyard, ordos_constructionyard, wc2_humans_townhall, wc2_orcs_greathall, asianalliance_constructionyard, latinsyndicate_syndicateconstructionyard, steelconsortium_consortiumconstructionyard, naxis_constructionyard, schwarzermond_constructionyard, futuretech_constructionyard, tkm_constructionyard
 		NavalUnitsTypes: ra1_soviets_submarine, ra1_soviets_missilesubmarine, ra1_allies_destroyer, ra1_allies_cruiser, ra1_allies_gunboat, japan_japanesespeedboat, japan_japanesecarrier, japan_yamatobattleship, td_nod_attacksubmarine, td_nod_lasercorvette, td_nod_ballisticmissilesubmarine, cncdd, td_gdi_railgunbattleship, td_gdi_missileboat, ra2sqd, ra2dlph, ra2dest, ra2_allies_aegiscruiser, ra2sub, ra2_soviets_seascorpion, ra2dred, ra2carrier, yuri_boomersubmarine, glgunboat, chflameboat, usagunboat, usabattleship, usacarrier, asianalliance_gunb, asianalliance_lsub, asianalliance_quasfrig, asianalliance_karrier, asianalliance_tsun, asianalliance_ksub, latin_triton, latin_sub, naxis_tuboat, naxis_muboat, latin_rammax
 		NavalProductionTypes: ra1_soviets_subpen, ra1_allies_navalyard, japan_japanesenavalyard, cncsyrd, cncspen, yrygyard, ra2gayard, ra2nayard, glsyrd, chsyrd, usasyrd, asianalliance_cgyard, latin_cgyard, naxis_naval
 		AirUnitsTypes: td_gdi_firehawk, ra1_soviets_migattackbomber, ra1_soviets_su57attackbomber, ra1_soviets_supersonicnuclearbomber, ra1_allies_rapierjumpjet, japan_japanesebomber, ra2_allies_harrier, ra2_allies_blackeagle, ra2_soviets_migbomber, asianalliance_phoenix, steelconsortium_twister, steelconsortium_skyhammer, latinsyndicate_mig21, ixian_airdrone, ixian_empbomber, ordos_eyeinthesky, ts_gdi_orcabomber, ts_nod_bansheefighter, cabal_hunterkillermk1, cabal_hunterdronecarrier, cabal_mothership, cabal_overkillgunship, cabal_orbdrone, cabal_cyborgassassin, atreides_ornithopter, atreides_airdrone, atreides_advancedcarryall, harkonnen_carryall, harkonnen_gunship, harkonnen_advancedcarryall, corrino_carryall, corrino_gunship, corrino_advancedcarryall
@@ -5601,6 +5760,8 @@ Player:
 	SquadManagerBotModuleCA@classic:
 		# §12.7b contact-first all-in is genericbot behaviour; classic stays the untouched A/B reference.
 		ContactFirstAllIn: false
+		# PERF-F1: the classic reference bot keeps its per-call enemy scans (the A/B control stays untouched).
+		UseSharedEnemyScan: false
 		RequiresCondition: classicbot
 		# Restored verbatim from the pre-wave @generic node (786bb2f2c era): the
 		# classic reference bot's squad brain — no missions, no personality variants.
@@ -5723,8 +5884,10 @@ Player:
 		# construction yards, defenses, producers
 		EnemyBaseBuildingTypes: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_constructionyard, ra1_soviets_constructionyard, japan_japaneseconstructionyard, ra2_soviets_constructionyard, ra2_allies_constructionyard, yuri_constructionyard, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, terran_commandcenter, protoss_nexus, zerg_hatchery, zerg_lair, zerg_hive, glcommand, chcommand, usacommand, ixian_constructionyard, ordos_constructionyard, ordos_laserturret, ordos_chemturret, wc2_humans_townhall, wc2_orcs_greathall, asianalliance_constructionyard, steelconsortium_consortiumconstructionyard, latinsyndicate_syndicateconstructionyard, naxis_constructionyard, schwarzermond_constructionyard, futuretech_constructionyard, tkm_constructionyard, td_gdi_guardtower, td_gdi_advancedguardtower, td_nod_gunturret, td_nod_laserturret, td_nod_obeliskoflight, ra1_allies_pillbox, ra1_allies_camopillbox, ra1_allies_gunturret, ra1_allies_gapgenerator, ra1_allies_bastionartillerybunker, ra1_soviets_flametower, ra1_soviets_teslacoil, japan_waveforceturret, ra2_allies_pillbox, ra2_allies_prismtower, ra2_allies_grandcannon, ra2_soviets_battlebunker, ra2_soviets_sentrygun, ra2_soviets_flakcannon, ra2_soviets_teslacoil, yuri_gatlingcannon, yuri_tankbunker, asianalliance_sentryflamer, asianalliance_cgpnch, asianalliance_railtower, asianalliance_chaostower, asianalliance_plasmacannon, ixian_machinegunturret, ixian_gunturret, ixian_rocketturret, ixian_stormlasher, steelconsortium_consortiumsentryturret, steelconsortium_quantumcannon, steelconsortium_bfg10000, latinsyndicate_latinsentrygun, latinsyndicate_bunkertower, latinsyndicate_defensebureau, latinsyndicate_smlturret, naxis_rifletower, naxis_flak88, schwarzermond_lasertower, schwarzermond_sturmcannon, futuretech_multiturretsystem, futuretech_frostbiteturret, terran_bunker, zerg_creepcolony, zerg_creepcolony_defense, protoss_photoncannon, wc2_humans_humanscouttower, wc2_humans_sunwell, wc2_orcs_orcwatchtower, tkm_bunker, tkm_tankturretbunker, td_gdi_barracks, td_nod_handofnod, ra1_allies_barracks, ra1_soviets_barracks, ra2_allies_barracks, ra2_soviets_barracks, yuri_barracks, terran_barracks, protoss_gateway, zerg_spawningpool, ts_gdi_barracks, forgotten_barracks, ts_nod_handof, cabal_cyborgfactory, glbarracks, chbarracks, usabarracks, d2k_barracks, ixian_barracks, wc2_humans_barracks, wc2_orcs_barracks, asianalliance_barracks, steelconsortium_steelbarracks, latinsyndicate_combatbarracks, naxis_barracks, schwarzermond_barracks, futuretech_troopgate, td_gdi_weaponsfactory, td_nod_airstrip, ra1_allies_warfactory, ra1_soviets_warfactory, ra1_soviets_largefactory, ra2_allies_warfactory, ra2_soviets_warfactory, yuri_warfactory, terran_weaponsfactory, protoss_roboticsfacility, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_warfactory, forgotten_warfactory, ts_nod_warfactory, cabal_mechfactory, glweap, chweap, usaweap, ixian_advancedheavyfactory, ixian_starport, wc2_humans_gnomishinventor, wc2_orcs_golbinalchemist, asianalliance_warfactory, steelconsortium_consortiumwarfactory, latinsyndicate_syndicatefactory, naxis_warfactory, schwarzermond_warfactory, futuretech_warpgate, td_gdi_helipad, ts_nod_helipad, ts_nod_helipad, forgotten_helipad, ts_gdi_helipad, td_nod_helipad, ra1_allies_helipad, ra1_soviets_airfield, ra1_soviets_largesovietairfield, japan_japaneseairfield, ra2_allies_airforcecommandhq, ra2_soviets_airfield, ixian_hightechfactory, asianalliance_airforcecommand, latinsyndicate_airstation, naxis_airfield, schwarzermond_airfield, futuretech_launchpad, ordos_heavyfactory, ordos_starport, ordos_lightfactory, ordos_barracks, ordos_barracks, tkm_barracks, tkm_warfactory, tkm_airpad, atreides_constructionyard, corrino_constructionyard, harkonnen_constructionyard, atreides_barracks, corrino_barracks, harkonnen_barracks, atreides_lightfactory, corrino_lightfactory, harkonnen_lightfactory, atreides_heavyfactory, corrino_heavyfactory, harkonnen_heavyfactory, atreides_refinery, corrino_refinery, harkonnen_refinery, atreides_outpost, corrino_outpost, harkonnen_outpost, eden_factory_structure, eden_factory_vehicle, eden_factory_consumer, eden_smelter_common, eden_smelter_rare, plymouth_structure_factory, plymouth_factory_vehicle, plymouth_factory_arachnid, plymouth_smelter_common, plymouth_smelter_rare
 	BaseBuilderBotModuleCA@generic:
-		RequiresCondition: genericbot || classicbot
+		RequiresCondition: genericbot
 		SwitchCondition: genericbot
+		# TECH-ALL-01 (Opus 11-24): ONE central tech-chain list for every faction (radar + tech centre). MiniYaml is last-writer-wins on a scalar, so the per-faction pack lines overwrote each other and only one faction kept the tech-chain exemption.
+		TechChainTypes: atreides_outpost, atreides_ixresearchcenter, corrino_outpost, corrino_ixresearchcenter, harkonnen_outpost, harkonnen_ixresearchcenter, ixian_outpost, ixian_ixresearchcenter, ordos_outpost, ordos_ixresearchcenter, ra1_allies_radardome, ra1_allies_techcenter, japan_japaneseradararray, japan_japanesetechcenter, ra1_soviets_radardome, ra1_soviets_techcenter, ra2_allies_airforcecommandhq, ra2_allies_battlelab, ra2_soviets_radar, ra2_soviets_battlelab, yuri_psychicsensor, yuri_battlelab, asianalliance_radar, asianalliance_battlelab, steelconsortium_consortiumradar, steelconsortium_consortiumbattlelab, futuretech_transmissioncenter, futuretech_battlelab, naxis_radar, naxis_techcenter, schwarzermond_radar, schwarzermond_techcenter, latinsyndicate_latinempradar, latinsyndicate_spycenter, tkm_observationvan, tkm_techcenter, protoss_cyberneticscore, protoss_templararchives, terran_starport, terran_sciencefacility, td_gdi_communicationscenter, td_gdi_advancedcommunicationscenter, td_nod_communicationscenter, td_nod_templeofnod, cabal_radar, cabal_techcenter, forgotten_radar, forgotten_church, ts_gdi_radar, ts_gdi_techcenter, ts_nod_radar, ts_nod_techcenter
 		# PROD-BUSY-01: every building/defence producer may start in the same sweep; an idle sweep re-checks after the short delay.
 		# Rows pb_all_building_producers / pb_building_idle_sweep; genericbot only (SwitchCondition above).
 		ServeAllBuildingProducers: true
@@ -5733,6 +5896,37 @@ Player:
 		EssentialsOnlyBelowTierLine: true
 		# UPGRADE-PRODUCERS-01: every structure type with no BuildingFractions row is built once (upgrade/research producers, radar, tech centres); row af2_unlisted_once; genericbot only.
 		UnlistedBuildingsOnce: true
+		# ESSENTIAL-PASS-01: first copies of every building type and cash tricklers pass the army-first and mobile-spend votes; row af2_essential_pass; genericbot only.
+		EssentialPassFirstCopies: true
+		# BASE-FIX-01 (AUDIT_BASE_01, Opus 11-24); every row genericbot only (SwitchCondition above).
+		# opening_standard_order (USER): power, barracks, refinery, war factory, refinery, 2nd production, radar, airfield, 2nd production, tech, 3rd production, passive income;
+		# every faction, a soft order above the refinery pick, random extras and sustained cash.
+		OpeningStandardOrder: true
+		# pb_sustained_keeps_essentials: the tech chain and each building once stay above the sustained production pick.
+		SustainedKeepsEssentials: true
+		# pb_prefilter_picks: the overflow, scaling, threshold, naval, silo and radar picks are vote-filtered before selection.
+		PrefilterBuildingPicks: true
+		# af2_defence_need_gate: ground defences from the roll only after a seen threat.
+		DefenceNeedGate: true
+		# pb_power_margin_cap: the growing power margin stops at 300.
+		PowerMarginCapEnabled: true
+		# af2_defence_first_copy: the first copy of a defence type counts toward RATIO-2X (exempt only while a threat is seen).
+		DefenceFirstCopyCounts: true
+		# pb_floor_essentials_exempt: army-first essential buildings ride at their own cost, the building cash floor does not hold them.
+		FloorEssentialsExempt: true
+		# EARLY-DEF-01 (USER 11-24): bb_antirush_base: 2-3 ground defences (by tier) right after the first production building; an essential at low cash, exempt from the defence-need gate; genericbot only.
+		AntiRushBase: true
+		AntiRushBaseMin: 2
+		AntiRushBaseMax: 3
+		# TEAM-DEFEND-02 (USER 11-24): tm_ally_turret_support: while an own or allied base is attacked every ready ground turret is placed at its max weapon range from the attackers; genericbot only.
+		TeamTurretSupport: true
+		# BASE-FIX-02 (AUDIT_BASE_01): ready_watchdog_all (75 ticks), pb_nospace_ban (3000 ticks), pb_refinery_safety_all_claims; genericbot only.
+		ReadyWatchdogAll: true
+		NoSpaceBan: true
+		RefinerySafetyAllClaims: true
+		# REF-FIELD-02 (row rf_economy_gate): ref1, the first vehicle factory, then ref2; 1500 ticks between refineries; from the third refinery a
+		# pending first copy goes first (at most 1500 ticks); a yard with no refinery skips the gate (expansion refinery). genericbot only.
+		RefineryEconomyGate: true
 		# PROD-BUSY cycle: above the same line, more production buildings cycled across the types (row pb_cycle_production); genericbot only.
 		CycleProductionAboveLine: true
 		# SUSTAINED-CASH-01: a bank above the tier line for 1500 ticks forces the next building to be production (row pb_sustained_cash_production); genericbot only.
@@ -5910,6 +6104,177 @@ Player:
 			#################### BuildingFractions Brayans
 			#################### BuildingFractions TKM
 			# tkm_powerplant: 15
+
+	BaseBuilderBotModuleCA@classic:
+		RequiresCondition: classicbot
+		SwitchCondition: genericbot
+		InititalMinimumRefineryCount: 1
+		AdditionalMinimumRefineryCount: 2
+		RefineriesPerBase: 3
+		MaxExtraRefineries: 3
+		ExpansionTolerate: 1,2
+		ForceExpansionTolerate: 5,6
+		MinimumExcessPower: 100
+		MaximumExcessPower: 1000
+		ExcessPowerIncrement: 10
+		ExcessPowerIncreaseThreshold: 1
+		PlaceDefenseTowardsEnemyChance: 50
+		BaseCrawlChance: 100
+		BaseCrawlRadius: 50
+		MinBaseRadius: 5
+		MaxBaseRadius: 25
+		MinimumDefenseRadius: 10
+		MaximumDefenseRadius: 50
+		MaxResourceCellsToCheck: 5
+		NewProductionCashThreshold: 0
+		# BZ_production_scaling: banked cash held over the difficulty line while every unit queue is busy
+		# (or net income per producer over the line) queues another production building for the
+		# least-provisioned queue type. SwitchCondition-gated — classic keeps today's behaviour.
+		# Enabled for the maintainer's 2026-10-15 combined playtest (BZ).
+		UseProductionScaling: false
+		BuildingProductionMinCashRequirement: 1000
+		DefenseProductionMinCashRequirement: 1500
+		BuildingQueues: Building, RABuilding, BuildingAddons
+		DefenseQueues: Defence, RADefence, BuildingAddons
+		ConstructionYardTypes: zerg_lair, zerg_hive
+		RefineryTypes: wc2_humans_townhall, wc2_orcs_greathall
+		PowerTypes: nuke, nuk2, ra1_powerplant, ra1_advancedpowerplant, japan_waveforcereactor, ra2_soviets_teslareactor, ra2_allies_powerplant, ra2_soviets_nuclearreactor, yuri_bioreactor, terran_supplydepot, protoss_pylon, scbotoverlord, ts_gdi_powerplant, forgotten_crystalpowerextractor, cabal_powerplant, ts_nod_powerplant, ts_nod_advancedpowerplant, chpower, chpower2, usapower, wind_trap, ixian_windtrap, ordos_windtrap, d2k_mini_windtrap, wc2_humans_farm, wc2_orcs_pigfarm, asianalliance_petrolplant, asianalliance_tankreactor, steelconsortium_consortiumpowerplant, latinsyndicate_powerstation, naxis_naxpetrolplant, schwarzermond_hydrogenplant, futuretech_thermalpowerplant, zerg_overlord, tkm_powerplant, atreides_windtrap, corrino_windtrap, harkonnen_windtrap, atreides_constructionyard, corrino_constructionyard, harkonnen_constructionyard, eden_tokamak, eden_solar_array, eden_factory_structure, plymouth_tokamak, plymouth_solararray, plymouth_structure_factory
+		BarracksTypes: td_gdi_barracks, td_nod_handofnod, ra1_allies_barracks, ra1_soviets_barracks, ra2_allies_barracks, ra2_soviets_barracks, yuri_barracks, terran_barracks, protoss_gateway, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_barracks, forgotten_barracks, ts_nod_handof, cabal_cyborgfactory, glbarracks, chbarracks, usabarracks, d2k_barracks, ixian_barracks, ordos_barracks, wc2_humans_barracks, wc2_orcs_barracks, asianalliance_barracks, steelconsortium_steelbarracks, latinsyndicate_combatbarracks, naxis_barracks, schwarzermond_barracks, futuretech_troopgate, tkm_barracks, atreides_barracks, corrino_barracks, harkonnen_barracks, eden_factory_consumer, plymouth_factory_arachnid
+		# Conventional selectable factions; Japan, StarCraft, and Warcraft II use nonstandard economies.
+		BarracksBeforeRefineryFactions: td_gdi, td_nod, ra1_allies, ra1_soviets, ts_gdi, ts_nod, forgotten, cabal, ra2_allies, ra2_soviets, yuri, asianalliance, steelconsortium, latinsyndicate, naxis, schwarzermond, futuretech, ixian, ordos, tkm
+		VehiclesFactoryTypes: td_gdi_weaponsfactory, td_nod_airstrip, ra1_allies_warfactory, ra1_soviets_warfactory, ra1_soviets_largefactory, ra2_allies_warfactory, ra2_soviets_warfactory, yuri_warfactory, terran_weaponsfactory, protoss_roboticsfacility, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_warfactory, forgotten_warfactory, ts_nod_warfactory, cabal_mechfactory, glweap, chweap, usaweap, ixian_advancedheavyfactory, ixian_starport, ordos_heavyfactory, ordos_starport, ordos_lightfactory, wc2_humans_gnomishinventor, wc2_orcs_golbinalchemist, asianalliance_warfactory, steelconsortium_consortiumwarfactory, latinsyndicate_syndicatefactory, naxis_warfactory, schwarzermond_warfactory, futuretech_warpgate, ts_nod_warfactory, cabal_mechfactory, forgotten_warfactory, tkm_warfactory, atreides_lightfactory, corrino_lightfactory, harkonnen_lightfactory, atreides_heavyfactory, corrino_heavyfactory, harkonnen_heavyfactory, eden_factory_vehicle, plymouth_factory_vehicle
+		ProductionTypes: td_gdi_barracks, td_nod_handofnod, ra1_allies_barracks, ra1_soviets_barracks, ra2_allies_barracks, ra2_soviets_barracks, yuri_barracks, terran_barracks, protoss_gateway, zerg_spawningpool, ts_gdi_barracks, forgotten_barracks, ts_nod_handof, cabal_cyborgfactory, glbarracks, chbarracks, usabarracks, d2k_barracks, ixian_barracks, wc2_humans_barracks, wc2_orcs_barracks, asianalliance_barracks, steelconsortium_steelbarracks, latinsyndicate_combatbarracks, naxis_barracks, schwarzermond_barracks, futuretech_troopgate, td_gdi_weaponsfactory, td_nod_airstrip, ra1_allies_warfactory, ra1_soviets_warfactory, ra1_soviets_largefactory, ra2_allies_warfactory, ra2_soviets_warfactory, yuri_warfactory, terran_weaponsfactory, protoss_roboticsfacility, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_warfactory, forgotten_warfactory, ts_nod_warfactory, cabal_mechfactory, glweap, chweap, usaweap, ixian_advancedheavyfactory, ixian_starport, wc2_humans_gnomishinventor, wc2_orcs_golbinalchemist, asianalliance_warfactory, steelconsortium_consortiumwarfactory, latinsyndicate_syndicatefactory, naxis_warfactory, schwarzermond_warfactory, futuretech_warpgate, td_gdi_helipad, ts_nod_helipad, ts_nod_helipad, forgotten_helipad, ts_gdi_helipad, td_nod_helipad, ra1_allies_helipad, ra1_soviets_airfield, ra1_soviets_largesovietairfield, japan_japaneseairfield, ra2_allies_airforcecommandhq, ra2_soviets_airfield, ixian_hightechfactory, asianalliance_airforcecommand, latinsyndicate_airstation, naxis_airfield, schwarzermond_airfield, futuretech_launchpad, ordos_heavyfactory, ordos_starport, ordos_lightfactory, ordos_barracks, ordos_barracks, tkm_barracks, tkm_warfactory, tkm_airpad, atreides_barracks, corrino_barracks, harkonnen_barracks, atreides_lightfactory, corrino_lightfactory, harkonnen_lightfactory, atreides_heavyfactory, corrino_heavyfactory, harkonnen_heavyfactory, atreides_starport, corrino_starport, harkonnen_starport, eden_factory_consumer, eden_factory_vehicle, plymouth_factory_arachnid, plymouth_factory_vehicle
+		NavalProductionTypes: cncsyrd, cncspen, ra1_soviets_subpen, ra1_allies_navalyard, japan_japanesenavalyard, yrygyard, ra2gayard, ra2nayard, asianalliance_cgyard, latin_cgyard, naxis_naval
+		SiloTypes: silo, ra1_oresilo, terran_supplydepot, protoss_pylon, zerg_overlord, d2k_silo, wc2_humans_elvenlumbermill, wc2_orcs_trolllumbermill, tkm_powerplant, atreides_storagesilo, corrino_storagesilo, harkonnen_storagesilo, atreides_refinery, corrino_refinery, harkonnen_refinery, eden_smelter_common, eden_smelter_rare, plymouth_smelter_common, plymouth_smelter_rare, eden_storage_common, plymouth_storage_common
+		AntiAirTypes: td_nod_samsite, td_gdi_skyshield, td_gdi_advancedguardtower, ra1_allies_aagun, ra1_soviets_samsite, ra1_allies_camopillbox, japan_japanesemgnest, ra2_allies_patriotmissilesystem, ra2_soviets_flakcannon, yuri_gatlingcannon, yrngbnkr.bot, ixian_rocketturret, asianalliance_pulsar, asianalliance_hyperionprojector, steelconsortium_antiairquantummissileturret, latinsyndicate_smlturret, latinsyndicate_latinaadefender, naxis_flak88, ordos_laserturret, schwarzermond_lasertower, futuretech_multiturretsystem, terran_missileturret, zerg_creepcolony, zerg_creepcolony_defense, tkm_quadturretbunker, atreides_rocketturret, corrino_rocketturret, harkonnen_rocketturret, harkonnen_autogunturret, eden_gp_laser, plymouth_gp_rpg
+		DefenseTypes: td_gdi_guardtower, td_gdi_advancedguardtower, td_nod_gunturret, td_nod_laserturret, td_nod_obeliskoflight, ra1_allies_pillbox, ra1_allies_camopillbox, ra1_allies_gunturret, ra1_allies_gapgenerator, ra1_allies_bastionartillerybunker, ra1_soviets_flametower, ra1_soviets_teslacoil, japan_waveforceturret, ra2_allies_pillbox, ra2_allies_prismtower, ra2_allies_grandcannon, ra2_soviets_battlebunker, ra2_soviets_sentrygun, ra2_soviets_flakcannon, ra2_soviets_teslacoil, yuri_gatlingcannon, yuri_tankbunker, asianalliance_sentryflamer, asianalliance_cgpnch, asianalliance_railtower, asianalliance_chaostower, asianalliance_plasmacannon, ixian_machinegunturret, ixian_gunturret, ixian_rocketturret, ixian_stormlasher, steelconsortium_consortiumsentryturret, steelconsortium_quantumcannon, steelconsortium_bfg10000, latinsyndicate_latinsentrygun, latinsyndicate_bunkertower, latinsyndicate_defensebureau, latinsyndicate_smlturret, naxis_rifletower, naxis_flak88, schwarzermond_lasertower, schwarzermond_sturmcannon, futuretech_multiturretsystem, futuretech_frostbiteturret, ordos_laserturret, ordos_chemturret, terran_bunker, zerg_creepcolony, zerg_creepcolony_defense, protoss_photoncannon, wc2_humans_humanscouttower, wc2_humans_sunwell, wc2_orcs_orcwatchtower, tkm_bunker, tkm_tankturretbunker, atreides_gunturret, atreides_rocketturret, corrino_gunturret, corrino_rocketturret, harkonnen_autogunturret, harkonnen_flameturret, harkonnen_rocketturret, harkonnen_devastatorturret, eden_gp_emp, eden_gp_laser, eden_gp_railgun, plymouth_gp_microwave, plymouth_gp_rpg, plymouth_gp_stickyfoam
+		FragileTypes: ra1_allies_techcenter, ra1_soviets_techcenter, japan_japanesetechcenter, japan_japaneseshrine, ra1_soviets_missilesilo, ra1_allies_chronosphere, ra1_soviets_ironcurtain, ra1_allies_reinforcementpad, ra2_allies_battlelab, ra2_soviets_battlelab, yuri_battlelab, yuri_lunarcommandcenter, ra2_allies_orepurifier, ra2_soviets_nuclearreactor, ra2_soviets_industrialplant, yuri_cloningvats, ra2_allies_weathercontrolcenter, ra2_allies_chronosphere, ra2_soviets_nuclearmissilesilo, ra2_soviets_ironcurtain, yuri_psychicdominator, yuri_geneticmutator, asianalliance_battlelab, asianalliance_advancedcommunicationcenter, asianalliance_chaosstorminductor, asianalliance_militaryacademy, ixian_ixresearchcenter, ixian_starport, ordos_ixresearchcenter, ordos_starport, ixian_supercomputer, oilb.building, ra2_oilderrick, d2k_spicesifter, steelconsortium_consortiumbattlelab, latinsyndicate_spycenter, latinsyndicate_defensebureau, latinsyndicate_recyclingcenter, latinsyndicate_topolsilo, naxis_academy, naxis_techcenter, naxis_sausagefactory, naxis_beerfactory, naxis_naxirocketsilo, schwarzermond_techcenter, schwarzermond_moondairyfarm, schwarzermond_meteortractionray, futuretech_battlelab, futuretech_hypercore, terran_engineeringbay, terran_academy, terran_armory, terran_sciencefacility, terran_missilesilo, wc2_humans_humangoldmine_bot, wc2_orcs_orcgoldmine_bot, tkm_techcenter, atreides_outpost, corrino_outpost, atreides_hightechfactory, corrino_hightechfactory, harkonnen_hightechfactory, atreides_ixresearchcenter, corrino_ixresearchcenter, harkonnen_ixresearchcenter, atreides_palace, corrino_palace, harkonnen_palace, eden_lab_basic, eden_lab_standard, eden_lab_advanced, eden_spaceport, eden_dirt, plymouth_basic_lab, plymouth_lab_standard, plymouth_lab_advanced, plymouth_spaceport, plymouth_dirt
+		BuildingIntervals:
+		#Refinery
+		#Barracks
+		#Factory
+		#Airfield
+		BuildingDelays:
+		#MCV Unlock
+			### Prevent AI techrush
+			tsgtdept: 4500
+		#Radar Tier
+		#Tech Tier
+			tsnttmpl: 6000
+		#Super Weapons
+			nax2_chrono: 9000
+		BuildingLimits:
+			#################### BuildingLimits CNC
+			cncsyrd: 1
+			cncspen: 1
+			#################### BuildingLimits RA
+			#################### BuildingLimits RA2
+			##################################################
+			##################################################
+			#################### BuildingLimits TS GDI
+			#################### BuildingLimits TS Nod
+			#################### BuildingLimits TS Forgotten
+			#################### BuildingLimits TS CABAL
+			#################### BuildingLimits Asian
+			#################### BuildingLimits Consortium
+			#################### BuildingLimits Syndicate
+			#################### BuildingLimits Naxis
+			#################### BuildingLimits Schwarzer Mond
+			#################### BuildingLimits Future Tech
+			#################### BuildingLimits Dune Universe Ixian
+			#################### BuildingLimits Dune Universe Ordos
+			#################### BuildingLimits Modded RA
+			#evo: 1
+			#tevo: 1
+			##################### BuildingLimits TKM
+			#################### BuildingLimits TERRAN
+			#################### BuildingLimits PROTOSS
+			#################### BuildingLimits ZERG
+			##################### BuildingLimits Warcraft 2 Humans
+			wc2_human_shipyard: 1
+			wc2_human_foundry: 1
+			wc2_human_oil_refinery: 1
+			wc2_human_oil_platform: 1
+			##################### BuildingLimits Warcraft 2 Orcs
+			wc2_orc_shipyard: 1
+			wc2_orc_foundry: 1
+			wc2_orc_oil_refinery: 1
+			wc2_orc_oil_platform: 1
+			#################### BuildingLimits Dawn of the Tomorrow
+			#################### BuildingLimits Brayans
+			#################### BuildingLimits GLA
+			#################### BuildingLimits CHINA
+			#################### BuildingLimits USA
+			#################### BuildingLimits Imperium
+			#################### BuildingLimits Freedom Guard
+			#################### BuildingLimits Togran
+			#################### BuildingLimits Aliens
+			#################### BuildingLimits Terrorist
+			#################### BuildingLimits Descendants
+			##################### BuildingLimits Simcity 2000
+		BuildingFractions:
+			#################### Shared
+			#################### BuildingFractions CNC
+			#nuke: 3
+			cncsyrd: 1
+			cncspen: 1
+			#################### BuildingFractions RA
+			#ra1_powerplant: 3
+			#japan_waveforcereactor: 3
+			#################### BuildingFractions RA2
+			#################### Buildings Allies
+			#ra2_allies_powerplant: 3
+			#################### Buildings Soviets
+			#ra2_soviets_teslareactor: 3
+			#ra2_soviets_nuclearreactor: 3
+			#################### Buildings Yuri
+			#yuri_bioreactor: 3
+			#yryapowr.bot: 3
+			#################### BuildingFractions TS GDI
+			#################### BuildingFractions TS Nod
+			# tsnttmpl: 1
+			# tsntpulsnod: 1
+			#################### BuildingFractions TS Forgotten
+			#################### BuildingFractions TS CABAL
+			#################### Buildings Asian Alliance
+			#asianalliance_petrolplant: 3
+			#################### Buildings Consortium
+			#steelconsortium_consortiumpowerplant: 3
+			#################### Buildings Syndicate
+			#latinsyndicate_powerstation: 3
+			#################### Buildings Naxis
+			# naxis_naxpetrolplant: 1
+			#################### Buildings Schwarzer Mond
+			# schwarzermond_hydrogenplant: 1
+			#################### Buildings Future Tech
+			#futuretech_thermalpowerplant: 3
+			#################### Buildings Ixians
+			#concreteb: 1
+			#################### Buildings Ordos
+			#################### BuildingFractions TERRAN
+			#terran_supplydepot: 10
+			#################### BuildingFractions PROTOSS
+			#protoss_pylon: 15
+			#################### BuildingFractions ZERG
+			##################### BuildingFractions Warcraft 2 Humans
+			wc2_human_shipyard: 1
+			wc2_human_foundry: 1
+			wc2_human_oil_refinery: 1
+			wc2_human_oil_platform: 1
+			##################### BuildingFractions Warcraft 2 Orcs
+			wc2_orc_shipyard: 1
+			wc2_orc_foundry: 1
+			wc2_orc_oil_refinery: 1
+			wc2_orc_oil_platform: 1
+			#################### BuildingFractions Dawn of the Tomorrow
+			#################### BuildingFractions GLA
+			#################### BuildingFractions CHINA
+			#################### BuildingFractions USA
+			#################### BuildingFractions Generals
+			#################### BuildingFractions Dark
+			#################### BuildingFractions Brayans
+			#################### BuildingFractions TKM
+			# tkm_powerplant: 15
 	BotGlobalUnitBudget:
 		# Total combat-unit budget shared across all LIVING bots (cap per bot = budget / living bots).
 		# Keeps total actor count - and the single-thread sim tick - bounded in big AI games, while
@@ -5923,7 +6288,7 @@ Player:
 		GlobalUnitBudget: 900
 		MaxUnitsPerBot: 200
 	UnitBuilderBotModuleCA@generic:
-		RequiresCondition: genericbot || classicbot
+		RequiresCondition: genericbot
 		# S1 (FINDINGS_2026-10-12 §3): the switch gate also arms the capturer ratio — classic
 		# (the A/B control) never sees genericbot, so its engineer spam is untouched there.
 		# S1b (ENGINEER-CAP-10PCT, maintainer 2026-10-12): the line is flat 10 on every tier —
@@ -5949,6 +6314,9 @@ Player:
 		# PROD-IDLE G1: the fair producer service replaces the legacy fill loop for genericbot (SwitchCondition above);
 		# classic keeps the legacy loop byte-identically.
 		FairProducerService: true
+		# MCV-REBUILD-01: no yard + no MCV starts an MCV at once, past every unit gate (row mcv_rebuild_first); a failed external request frees its slot after 25 sweeps (row pb_request_slot). genericbot only.
+		McvRebuildFirst: true
+		RequestSlotFastDrop: true
 		# PROD-BUSY-01 (USER P0: every queue busy while cash > reserve): every factory of every category served on every pass.
 		# Rows pb_all_factories / pb_all_categories; genericbot only (SwitchCondition above).
 		ServeAllFactories: true
@@ -5957,7 +6325,151 @@ Player:
 		TieredIdleCap: true
 		# INFANTRY-IDLE-01: an idle infantry queue the role mix / share table left without a pick builds the best buildable unit (row pb_idle_queue_floor).
 		IdleQueueFloor: true
+		# PROD-FIX-01 (AUDIT_PRODUCTION_01): unit production gates; genericbot only (SwitchCondition above).
+		# Rows pb_unit_reserve_excl_upgrades / pb_rotate_start / pb_sat_batch_consistent / pb_interval_elapsed / pb_no_unit_floor.
+		UnitReserveExclUpgrades: true
+		RotateStart: true
+		SatBatchConsistent: true
+		IntervalElapsed: true
+		NoUnitFloor: true
+		# UNIT-MIX-01 (USER 11-24): um_category_floor: the army keeps >= 20% of its value in infantry and >= 10% in aircraft (airfield present); per personality via the squad manager UnitMixInfantryFloorPct / UnitMixAircraftFloorPct; genericbot only.
+		UnitMixCategoryFloor: true
 		IdleBaseUnitsMaximum: 25
+		ProductionMinCashRequirement: 1000
+		MaximiseProductionCashRequirement: 5000
+		# One immediately buildable basic combat unit for each barracks-first faction.
+		OpeningDefenseUnitTypes: td_gdi_minigunner, td_nod_minigunner, ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry, ts_gdi_lightinfantry, ts_nod_lightinfantry, forgotten_mutant, cabal_cyborginfantry, ra2_allies_gi, ra2_soviets_conscript, yuri_initiate, asianalliance_militia, steelconsortium_clonetrooper, latinsyndicate_latinmilitia, naxis_naxiriflerecruit, schwarzermond_lunarsoldier, futuretech_enforcer, ixian_lightinfantry, ordos_lightinfantry, tkm_rifleman, atreides_lightinfantry, corrino_lightinfantry, harkonnen_lightinfantry, eden_scout, plymouth_scout
+		MaxAircraft: 25
+		MaintainAirSuperiority: true
+		MaxAirSuperiority: 25
+		# A3 (REVIEW_2026-10-17): count enemy air threats from the observed enemy composition
+		# for genericbot — AA sizing stops reading hidden aircraft. Armed by switch group
+		# BW_observed_air_threats; SwitchCondition keeps the shared instance off classic.
+		#ObservedAirThreats: false
+		AirToAirUnits: td_nod_apacheattackhelicopter, td_gdi_orca, td_nod_venom, td_gdi_firehawk, ra1_soviets_yakscoutplane, ra1_soviets_teslayak, ra1_soviets_armoredyak, ra1_soviets_nuclearyak, ra1_soviets_migattackbomber, ra1_soviets_su57attackbomber, ra1_allies_longbow, ra1_allies_rapierjumpjet, japan_zerofighter, ra2_allies_harrier, ra2_soviets_siegechopper, ra2_soviets_migbomber, latinsyndicate_hindtransport, yuri_floatingdisk, ra2_allies_nighthawk, asianalliance_phoenix, asianalliance_pelican, ixian_airdrone, ixian_farasha, steelconsortium_twister, steelconsortium_skyhammer, steelconsortium_cloudbreaker, latinsyndicate_yakovlev, latinsyndicate_mig21, schwarzermond_haunebuii, schwarzermond_haunebuiii, naxis_me262, naxis_bf109, schwarzermond_corruptorpiercer, schwarzermond_haunebuii, schwarzermond_haunebuiii, naxis_me262, schwarzermond_corruptorpiercer, schwarzermond_dieglocke, naxis_bf109, futuretech_twister, futuretech_cryocopter, futuretech_harbingergunship, terran_wraith, terran_sundog, terran_battlecruiser, terran_valkyrie, terran_wyvern, protoss_scout, protoss_epigraph, protoss_carrier, protoss_gladius, protoss_voidray, zerg_mutalisk, zerg_devourer, terran_pythean, terran_phobos, zerg_behemoth, protoss_starshipsovereign, wc2_humans_gryphonrider, wc2_orcs_dragon, atreides_ornithopter, harkonnen_gunship, corrino_gunship
+		AirThreatUnits: td_nod_apacheattackhelicopter, td_gdi_orca, td_nod_venom, td_gdi_firehawk, td_gdi_chinooktransport, td_nod_chinooktransport, ra1_soviets_yakscoutplane, ra1_soviets_teslayak, ra1_soviets_armoredyak, ra1_soviets_nuclearyak, ra1_soviets_migattackbomber, ra1_soviets_su57attackbomber, ra1_soviets_supersonicnuclearbomber, ra1_soviets_hindattackhelicopter, ra1_allies_longbow, ra1_allies_blackhawk, ra1_allies_rapierjumpjet, japan_zerofighter, japan_japanesebomber, ra1_soviets_hiptransport, ra1_allies_chinooktransport, ra2_allies_harrier, ra2_allies_blackeagle, ra2_soviets_siegechopper, ra2_soviets_migbomber, latinsyndicate_hindtransport, ra2_soviets_kirovairship, yuri_floatingdisk, ra2_allies_nighthawk, asianalliance_phoenix, asianalliance_pelican, ixian_airdrone, ixian_farasha, steelconsortium_empressstation, steelconsortium_twister, steelconsortium_skyhammer, steelconsortium_cargoship, steelconsortium_cloudbreaker, latinsyndicate_yakovlev, latinsyndicate_mig21, naxis_transportzeppelin, schwarzermond_spacezeppelin, schwarzermond_haunebuii, schwarzermond_haunebuiii, naxis_me262, naxis_bf109, schwarzermond_corruptorpiercer, schwarzermond_dieglocke, futuretech_twister, futuretech_cryocopter, futuretech_harbingergunship, terran_wraith, terran_sundog, terran_battlecruiser, terran_valkyrie, terran_wyvern, protoss_scout, protoss_epigraph, protoss_carrier, protoss_gladius, protoss_voidray, zerg_mutalisk, zerg_devourer, terran_pythean, terran_phobos, zerg_behemoth, protoss_starshipsovereign, wc2_humans_gryphonrider, wc2_orc_dragonwc2_orc_dragon, atreides_ornithopter, atreides_airdrone, atreides_advancedcarryall, harkonnen_carryall, harkonnen_gunship, harkonnen_advancedcarryall, corrino_carryall, corrino_gunship, corrino_advancedcarryall
+		#UnitBuilderMinCredits: 0
+		UnitQueues: Infantry, RAInfantry, SCZergInfantry, Vehicle, RAVehicle, Starport, Aircraft, RAAircraft, Naval, RANaval, Addons, Upgrades, Research, Promotions
+		UnitDelays:
+		UnitIntervals:
+		UnitsToBuild:
+			#################### UnitsToBuild Naval
+			#################### UnitsToBuild CNC
+			#################### UnitsToBuild TS GDI
+			#################### UnitsToBuild TS Nod
+			#################### UnitsToBuild TS Forgotten
+			RAPT: 3
+			#################### UnitsToBuild CABAL
+			tsprobe: 1
+			#################### UnitsToBuild RA
+			ra1_allies_rifleinfantry: 5
+			ra1_allies_rocketsoldier: 5
+			#################### UnitsToBuild RA2
+			########### Units Allies
+			########### Units Soviets
+			########### Units Yuri
+			########### Units Asian Alliance
+			########### Units Consortium
+			########### Units Syndicate
+			########### Units Naxis
+			########### Naxis Promotion
+			########### Naxis Upgrades
+			# naxis_upgrade_resurrection: 1
+			########### Units Future Tech
+			########### Units Space Naxis
+			########### Space Naxis Upgrades
+			########### Dune Upgrades
+			########### Units Ixians
+			########### Units Ordos
+			########### Units Ordos B
+			########### Upgrades Ordos
+			########### Units Atreides
+			########### Promotions Harkonnen
+			########### Units Harkonnen
+			########### Units Corrino
+			#################### UnitsToBuild Dune Universe
+			#################### UnitsToBuild TERRAN
+			#################### UnitsToBuild PROTOSS
+			#################### UnitsToBuild ZERG
+			##################### UnitsToBuild Warcraft 2 Humans
+			wc2_human_oil_tanker: 1
+			wc2_human_elven_destroyer: 1
+			wc2_human_transport: 1
+			wc2_human_battleship: 1
+			wc2_human_gnomish_submarine: 1
+			wc2_h_str_navyshield: 1
+			wc2_h_str_navyshield2: 1
+			##################### UnitsToBuild Warcraft 2 Orcs
+			wc2_orc_oil_tanker: 1
+			wc2_orc_trolldestroyer: 1
+			wc2_orc_transport: 1
+			wc2_orc_ogre_juggernaught: 1
+			wc2_orc_giant_turtle: 1
+			wc2_o_str_navyshield: 1
+			wc2_o_str_navyshield2: 1
+			#################### UnitsToBuild Dawn of the Tomorrow
+			#################### UnitsToBuild GLA
+			#################### UnitsToBuild CHINA
+			#chhacker: 1
+			#chcrawl: 1
+			#################### UnitsToBuild USA
+			#################### UnitsToBuild GENERALSUPGRADES
+			#################### Generals Promotions
+			#################### TKM Promotions
+			#################### UnitsToBuild Dark Imperium
+			#################### UnitsToBuild FreedomGuard
+			#################### UnitsToBuild Shadowhand
+			#################### UnitsToBuild Xenite
+			#################### UnitsToBuild Dark Togran
+			#################### UnitsToBuild Dark Aliens
+			#################### UnitsToBuild Terrorist
+			#################### UnitsToBuild Descendants
+			#################### UnitsToBuild CNC
+			#################### UnitsToBuild TKM
+		UnitLimits:
+			#################### UnitLimits Naval
+			#################### UnitLimits CNC
+			#################### UnitLimits RA
+			#################### UnitLimits TS
+			#################### UnitLimits ALLIESRA2
+			#################### UnitLimits SOVIETRA2
+			#################### UnitLimits YURI
+			#################### UnitLimits Asian
+			########### Consortium
+			########### Syndicate
+			########### Future Tech
+			#################### UnitLimits Dune Universe
+			#################### UnitLimits GENERALS
+			#################### UnitLimits ALPHA
+			#################### UnitLimits TERRAN
+			#################### UnitLimits PROTOSS
+			#################### UnitLimits ZERG
+			#################### UnitLimits Warcraft 2
+
+	UnitBuilderBotModuleCA@classic:
+		RequiresCondition: classicbot
+		# S1 (FINDINGS_2026-10-12 §3): the switch gate also arms the capturer ratio — classic
+		# (the A/B control) never sees genericbot, so its engineer spam is untouched there.
+		# S1b (ENGINEER-CAP-10PCT, maintainer 2026-10-12): the line is flat 10 on every tier —
+		# CapturerLimitPctCeiling clamps anything higher; the +allowance comes from the
+		# engineer owner's fog-fair KNOWN-target count (IBotCapturerTargetAllowance), and
+		# EngineerCompletionIntervalTicks paces completions on the difficulty line.
+		# CapturerInfantryLimitPct lives on the BotLimits difficulty line; 10 is only the
+		# fallback for a ruleset that ships no BotLimits.
+		# High-cash production fallback enabled for maintainer playtesting, 2026-10-15.
+		# 1 arms the fallback; BotLimits supplies the per-difficulty cash threshold.
+		# Generic-only: classic retains its existing production rules.
+		SwitchCondition: genericbot
+		CapturerInfantryLimitPct: 10
+		CapturerMinimumUnits: 2
+		CapturerAllowanceMax: 4
+		UseCompositions: true
+		# UW-1 (AI_ARCHITECTURE §2.8b item 3): derive the UnitsToBuild weights from the enabled
+		# personality's RoleMix x each unit's Versus-weighted strength. Armed on every tier (PROD-IDLE G1).
+		# Classic is unaffected: it carries no RoleMix and no IBotUnitRoles provider, so the same
+		# @generic instance keeps the yaml table there.
+		UseDerivedUnitWeights: false
+		IdleBaseUnitsMaximum: 50
 		ProductionMinCashRequirement: 1000
 		MaximiseProductionCashRequirement: 5000
 		# One immediately buildable basic combat unit for each barracks-first faction.

@@ -45,5 +45,31 @@ namespace OpenRA.Mods.CA.Traits
 		public const string TeamLeadHarassCap = "tl_harass_cap";
 		public const string TeamLeadHarassMin = "tl_harass_min";
 		public const string TeamLeadRaiderRecall = "tl_raider_recall";
+
+		// TEAM-GATHER-01 (USER order, V04 RCA 2026-11-24): a gathering squad keeps its order on contact (tl_gather_hold; Info TeamLeadGatherHoldEnabled), a held or
+		// extending order is never cancelled for missing reports (tl_grace_hold; Info TeamLeadGraceHoldEnabled), and the liveness (M13) and stalemate-breaker
+		// launches join an open team order instead of launching alone (tl_route_all; Info TeamLeadRouteAllEnabled).
+		public const string TeamLeadGatherHold = "tl_gather_hold";
+		public const string TeamLeadGraceHold = "tl_grace_hold";
+		public const string TeamLeadRouteAll = "tl_route_all";
+
+		// TEAM-GATHER-02 (USER order via Opus, AUDIT_SQUAD_01 / AUDIT_CONFIG_01): ally defence leaves the order's squads alone (tl_defend_respects_order), a squad that lost its
+		// target retargets only around its fight (gt_bounded_retarget), a formed squad joins at once (tl_join_at_form), the push bar and the publish floor count joinable units
+		// (tl_bar_joinable), units merge into the gathering squad (tl_join_merge), a rally order keeps its grace and is not re-published at once (tl_grace_rally), the gather
+		// fight uses the weapon range (tl_gather_range), and the late hunt goes through the order (tl_hunt_via_order). Info switches: TeamLead<Key>Enabled.
+		public const string TeamLeadDefendRespectsOrder = "tl_defend_respects_order";
+		public const string TeamLeadBoundedRetarget = "gt_bounded_retarget";
+		public const string TeamLeadJoinAtForm = "tl_join_at_form";
+		public const string TeamLeadBarJoinable = "tl_bar_joinable";
+		public const string TeamLeadJoinMerge = "tl_join_merge";
+		public const string TeamLeadGraceRally = "tl_grace_rally";
+		public const string TeamLeadGatherRange = "tl_gather_range";
+		public const string TeamLeadHuntViaOrder = "tl_hunt_via_order";
+
+		// TEAM-GATHER-02 c2 (Opus audit FIX): a leader squad below WAVE-MIN issues an order only when the team joinable army reaches WAVE-MIN (tl_issue_floor), the rally lies
+		// between the team bases and the target (tl_rally_mid), and a pincer pushes only with two WAVE-MIN prongs gathered (tl_pincer_double).
+		public const string TeamLeadIssueFloor = "tl_issue_floor";
+		public const string TeamLeadRallyMid = "tl_rally_mid";
+		public const string TeamLeadPincerDouble = "tl_pincer_double";
 	}
 }

@@ -106,7 +106,8 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>At least two living seats and a leader: below that the team has nobody to command and every bot plays as before.</summary>
-		public static bool Engaged(IReadOnlyList<Seat> seats, Election election)
+		/// <param name="minSeats">V07 SOLO-LEAD (tl_solo_lead): 1 = a team of one living bot leads itself; the default 2 is the rule above.</param>
+		public static bool Engaged(IReadOnlyList<Seat> seats, Election election, int minSeats = 2)
 		{
 			if (election.Leader == null)
 				return false;
@@ -114,7 +115,7 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var s in seats)
 				if (s.Alive)
 					alive++;
-			return alive >= 2;
+			return alive >= Math.Max(1, minSeats);
 		}
 
 		/// <summary>The rally point <paramref name="forwardCells"/> from <paramref name="from"/> toward <paramref name="target"/>; never past the target.</summary>
@@ -268,6 +269,61 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>Why the leader publishes: the ready blob (an attack order), or the fallback's rally order (gather only, never an attack).</summary>
 		public enum PublishWhy { None, Ready, Gather }
 
+		/// <summary>TEAM-GATHER-01 tl_gather_hold: before the push a gathering squad keeps its order on contact (it fights what is in range and walks on to the rally).</summary>
+		public static bool GatherHoldsOnContact(bool holdOn, bool pushed) => holdOn && !pushed;
+
+		/// <summary>TEAM-GATHER-01 tl_grace_hold: an order whose push is held (extending) is never cancelled for missing reports; its own dissolve ends it.</summary>
+		public static bool GraceHolds(bool graceHoldOn, bool extending) => graceHoldOn && extending;
+
+		/// <summary>TEAM-GATHER-02 tl_grace_rally: a rally (gather-only) order is never cancelled for missing reports; the order max age ends it.</summary>
+		public static bool RallyGraceHolds(bool graceRallyOn, bool gatherOnly) => graceRallyOn && gatherOnly;
+
+		/// <summary>TEAM-GATHER-02 tl_defend_respects_order: a squad gathering for the open order, or formed less than <paramref name="freshTicks"/> ago, is not free for ally defence.</summary>
+		public static bool SquadKeptForOrder(bool respectsOrder, bool inOrder, int now, int formedTick, int freshTicks) =>
+			respectsOrder && (inOrder || (formedTick >= 0 && now - formedTick < Math.Max(0, freshTicks)));
+
+		/// <summary>TEAM-GATHER-02 tl_join_merge: a rally order is published only when the team idle army reaches the WAVE-MIN bars (the units bar is BlobLaunch01CA.MinUnits).</summary>
+		public static bool RallyFloorPassed(int teamUnits, long teamValue, int needUnits, long needValue) => teamUnits >= Math.Max(1, needUnits) && teamValue >= Math.Max(0, needValue);
+
+		/// <summary>TEAM-GATHER-02 tl_grace_rally: no order is published within <paramref name="holdTicks"/> of a cancel (-1 = none yet).</summary>
+		public static bool RepublishHeld(int now, int cancelTick, int holdTicks) => cancelTick >= 0 && now - cancelTick < Math.Max(0, holdTicks);
+
+		/// <summary>TEAM-GATHER-02 c2 gt_bounded_retarget: a squad of a pushed order, or one at WAVE-MIN size or more, keeps going after its target dies (the next enemy of the focus seat) instead of standing down.</summary>
+		// c4: a pushed remnant below half of WAVE-MIN merges back and re-joins instead of attacking on.
+		public static bool KeepsGoing(bool pushedOrder, int squadUnits, int waveMinUnits) =>
+			(pushedOrder && (waveMinUnits <= 0 || 2 * squadUnits >= waveMinUnits)) || (waveMinUnits > 0 && squadUnits >= waveMinUnits);
+
+		/// <summary>TEAM-GATHER-02 c2 tl_issue_floor: a leader squad issues an order when it reaches the WAVE-MIN bars itself, or when the team joinable army does.</summary>
+		public static bool LeaderMayIssue(int squadUnits, long squadValue, int teamUnits, long teamValue, int waveMinUnits, long waveMinValue) =>
+			(squadUnits >= waveMinUnits && squadValue >= waveMinValue) || (teamUnits >= waveMinUnits && teamValue >= waveMinValue);
+
+		/// <summary>TEAM-GATHER-02 c2 tl_pincer_double: both prongs meet WAVE-MIN only when the gathered blob holds twice the bars.</summary>
+		public static bool PincerGathered(int units, long value, int waveMinUnits, long waveMinValue) => units >= 2 * waveMinUnits && value >= 2 * waveMinValue;
+
+		/// <summary>TEAM-GATHER-02 c3 gt_bounded_retarget: a pushed blob that stands within the scan radius of a valid target is sieging it: the stuck rule (no move for 100 ticks) does not drop it to idle.</summary>
+		/// <remarks>c4: only for <paramref name="maxTicks"/> ticks without a move (nobody may be able to fire at it: cliff, water, wall); after that the blob retargets.</remarks>
+		public static bool SiegeHolds(bool pushedAndKeepsGoing, bool targetValid, long distanceSquared, long scanRadiusSquared, int stuckTicks, int maxTicks) =>
+			pushedAndKeepsGoing && targetValid && distanceSquared <= scanRadiusSquared && stuckTicks <= maxTicks;
+
+		/// <summary>TEAM-GATHER-02 c4: the target that froze a pushed blob is skipped until <paramref name="skipUntil"/>.</summary>
+		public static bool SkipActive(uint skipId, int skipUntil, int now, uint candidateId) => skipId != 0 && now < skipUntil && candidateId == skipId;
+
+		/// <summary>TEAM-GATHER-02 c5: the id of the target that froze a blob: its actor id, else the id of the remembered (frozen) building it was sieging, else 0.</summary>
+		public static uint SkipIdOf(uint actorId, uint frozenId) => actorId != 0 ? actorId : frozenId;
+
+		/// <summary>TEAM-GATHER-02 c5: a pushed idle squad retargets at most once per <paramref name="interval"/> ticks.</summary>
+		public static bool GoOnDue(int now, int lastTick, int interval) => now - lastTick >= Math.Max(1, interval);
+
+		/// <summary>TEAM-GATHER-02 c3 tl_rally_mid: the army staging cell counts for the rally only close to the mid point.</summary>
+		public static bool StagingNearMid(WPos mid, WPos staging, int cells) => (staging - mid).HorizontalLengthSquared <= (long)Math.Max(0, cells) * CellUnits * Math.Max(0, cells) * CellUnits;
+
+		/// <summary>TEAM-GATHER-02 c2 tl_rally_mid: the point <paramref name="percent"/> percent (0-100) of the way from <paramref name="from"/> to <paramref name="to"/>.</summary>
+		public static WPos RallyBetween(WPos from, WPos to, int percent)
+		{
+			var p = Math.Clamp(percent, 0, 100);
+			return new WPos(from.X + (int)((long)(to.X - from.X) * p / 100), from.Y + (int)((long)(to.Y - from.Y) * p / 100), 0);
+		}
+
 		/// <summary>
 		/// The no-order guarantee (USER rule 2026-11-24: bots never trickle in small groups; nothing below WAVE-MIN ever attacks). It is called only when the
 		/// ready path (OrderDue) said no, so the blob is below the WAVE-MIN bars: after <paramref name="sinceOrder"/> ticks without any team order
@@ -413,6 +469,16 @@ namespace OpenRA.Mods.CA.Traits
 			TargetActorId = targetActorId;
 		}
 
+		/// <summary>ALL-IN-01: why the leader marked the order all-in (AllInCA.WhyCap / WhyIdle / WhyWon); null = an ordinary order. Members read it: an all-in order takes every joinable unit.</summary>
+		public string AllInWhy { get; private set; }
+
+		public bool AllIn => AllInWhy != null;
+
+		/// <summary>The all-in push has been recorded (DEV log, once).</summary>
+		public bool AllInPushLogged;
+
+		public void MarkAllIn(string why) => AllInWhy ??= why;
+
 		/// <summary>The tick the blob was released (-1 = still gathering).</summary>
 		public int PushTick = -1;
 
@@ -427,7 +493,7 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>TEAM-BLOB-01: the elected leader changed while the order lived: the new leader takes the order over (it is not cancelled).</summary>
 		public void HandOver(string newLeaderKey) => LeaderKey = newLeaderKey;
 
-		readonly Dictionary<object, (long Value, bool Arrived, int Units)> reports = new();
+		readonly Dictionary<object, (long Value, bool Arrived, int Units, int ArrivedUnits)> reports = new();
 
 		public TeamLeadOrder(int seq, string leaderKey, WPos rally, WPos target, uint targetActorId, int issueTick)
 		{
@@ -449,7 +515,11 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>The tick of the latest squad report (-1 = none yet); the no-report grace of a surviving order counts from it.</summary>
 		public int LastReportTick = -1;
 
-		public void Report(object squad, long value, bool arrived, int units = 0) => reports[squad] = (value, arrived, units);
+		/// <param name="arrivedUnits">TEAM-GATHER-02 c2 (tl_join_merge): the units of the squad that stand at the rally; with it (>= 0) arrival is counted per unit (value pro rata), so units merged in at home do not undo the arrival of the rest. -1 = the squad is arrived as a whole (<paramref name="arrived"/>).</param>
+		public void Report(object squad, long value, bool arrived, int units = 0, int arrivedUnits = -1) => reports[squad] = (value, arrived, units, arrivedUnits);
+
+		static long ArrivedValue(long value, bool arrived, int units, int arrivedUnits) =>
+			arrivedUnits < 0 ? (arrived ? value : 0) : units > 0 ? value * Math.Min(arrivedUnits, units) / units : 0;
 
 		/// <summary>The units and value of the squads that stand at the rally point (the push bar measures these).</summary>
 		public (int Units, long Value) ArrivedTotals()
@@ -458,11 +528,12 @@ namespace OpenRA.Mods.CA.Traits
 			long value = 0;
 			foreach (var r in reports.Values)
 			{
-				if (!r.Arrived)
+				var n = r.ArrivedUnits < 0 ? (r.Arrived ? r.Units : 0) : Math.Min(r.ArrivedUnits, r.Units);
+				if (n <= 0)
 					continue;
 
-				units += r.Units;
-				value += r.Value;
+				units += n;
+				value += ArrivedValue(r.Value, r.Arrived, r.Units, r.ArrivedUnits);
 			}
 
 			return (units, value);
@@ -567,11 +638,21 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 
 				committed += r.Value;
-				if (r.Arrived)
-					arrived += r.Value;
+				arrived += ArrivedValue(r.Value, r.Arrived, r.Units, r.ArrivedUnits);
 			}
 
 			return (committed, arrived);
+		}
+
+		/// <summary>PINCER-02: the units the squads of one prong committed (the per-arm WAVE-MIN gate measures these).</summary>
+		public int ProngUnits(int prong)
+		{
+			var units = 0;
+			foreach (var (squad, r) in reports)
+				if (prongOf.TryGetValue(squad, out var assigned) && assigned.Prong == prong)
+					units += r.Units;
+
+			return units;
 		}
 
 		/// <summary>The first tick a prong was ready is kept; later calls change nothing.</summary>
@@ -588,8 +669,7 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var r in reports.Values)
 			{
 				committed += r.Value;
-				if (r.Arrived)
-					arrived += r.Value;
+				arrived += ArrivedValue(r.Value, r.Arrived, r.Units, r.ArrivedUnits);
 			}
 
 			return (committed, arrived);
@@ -612,6 +692,12 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>The tick of the last order any seat of the team issued (-1 = none yet); with the election and the first attack tick it is the stall clock.</summary>
 		public int LastOrderTick = -1;
+
+		/// <summary>V07 TEAM-DEFEND: the team alarm in force (null = none ever raised; check TeamDefendCA.Active for its age). Host-side, shared by every bot of the team.</summary>
+		public TeamDefendCA.Alarm? DefendAlarm;
+
+		/// <summary>The tick the last order was cancelled (a leader change excepted; -1 = never); tl_grace_rally holds the next publish for a while.</summary>
+		public int LastCancelTick = -1;
 
 		/// <summary>TEAM-LEAD-02 finish-the-weakest focus: the enemy seat (its player-actor id, -1 = none), the tick it was taken, and the cached pick (re-evaluated at most every check window).</summary>
 		public int FocusSeat = -1;

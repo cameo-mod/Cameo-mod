@@ -920,6 +920,8 @@ World:
 	# PLAYTEST-TELEMETRY-V2: record-only per-player samples + event stream for every seat,
 	# cameo-ai-players-*.jsonl (maintainer request 2026-10-12).
 	AiPlayerTelemetry:
+		# PROD-FIX-01 F-E (row tm_idle_reason_order): prerequisite/cap reasons before saturation_stop.
+		IdleReasonGateOrder: true
 	# REPLAY-HEALTH-LOGGER: opt-in economy health capture controller; activates
 	# AiEconomyHealthRecorder on loggable bot seats, emits cameo-ai-economy-health.jsonl
 	# and cameo-ai-economy-raw.jsonl (record-only; activation approved 2026-10-13).

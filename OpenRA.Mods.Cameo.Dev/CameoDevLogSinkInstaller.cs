@@ -32,6 +32,24 @@ namespace OpenRA.Mods.Cameo.Dev
 		public void EngagementEnd(int tick) => worldActor.TraitOrDefault<AiEngagementLogWriterDev>()?.End(tick);
 		public void ContextRow(int playerIndex, string fileName, string row, int tick) => context.Enqueue(playerIndex, fileName, row, tick);
 		public void FlushContext(int playerIndex, int tick) => context.Flush(playerIndex, tick);
+		public void InfantryRejectRow(int playerIndex, string fileName, string row, int tick) =>
+			worldActor.TraitOrDefault<InfantryRejectCsvWriterDev>()?.Enqueue(playerIndex, fileName, row, tick);
+
+		// TECH-LOG-01: tech_log.csv rows go through the same DEV writer (flush every 750 ticks and at game end). Header once per seat.
+		readonly HashSet<int> techHeaderWritten = new();
+
+		public void TechLogEvent(int playerIndex, string faction, int tick, string kind, string type, string reason)
+		{
+			var writer = worldActor.TraitOrDefault<InfantryRejectCsvWriterDev>();
+			if (writer == null || playerIndex < 0 || playerIndex >= worldActor.World.Players.Length)
+				return;
+
+			if (techHeaderWritten.Add(playerIndex))
+				writer.Enqueue(playerIndex, TechLogCA.FileName, TechLogCA.Header, tick);
+
+			var seat = AiMatchLogWriterDev.SeatKey(worldActor.World, worldActor.World.Players[playerIndex]);
+			writer.Enqueue(playerIndex, TechLogCA.FileName, TechLogCA.Row(tick, seat, faction, kind, type, reason), tick);
+		}
 
 		public void MissionRecorded(MissionEvent record)
 		{

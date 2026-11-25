@@ -59,7 +59,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(q, Does.Contain("ChooseCycledProduction(buildableThings, power, c => VotesAdmit(queue, c, RecoverySpendPolicyCA.Admission.EssentialBuilding))"));
 			Assert.That(q, Does.Contain("ChooseCycledProduction(buildableThings, power, c => VotesAdmit(queue, c, RecoverySpendPolicyCA.Admission.General))"));
 			Assert.That(q, Does.Contain("p.PausesBuilding(item, essential, admission, cost)"), "the same pause votes TickQueue asks");
-			Assert.That(q, Does.Contain("EssentialsHolds(item, isRefinery, exempt && item.Name != sustainedPickName, cashNow)"), "the sustained pick is not exempt from the low-cash hold");
+			Assert.That(q, Does.Contain("EssentialsHolds(item, isRefinery, exempt && item.Name != sustainedPickName && item.Name != openingPickName, cashNow)"), "the sustained pick is not exempt from the low-cash hold");
 		}
 
 		[Test]
@@ -69,7 +69,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var choose = q.IndexOf("ActorInfo ChooseBuildingToBuild(ProductionQueue queue)\n\t\t{\n\t\t\tsustainedPickName = null;", StringComparison.Ordinal);
 			Assert.That(choose, Is.GreaterThan(0), "the flag is reset at the top of every choice");
 			Assert.That(q, Does.Contain("sustainedPickName = sustained.Name;"));
-			Assert.That(q, Does.Contain("var exempt = plannerWant || demandPick.Demand != null || (sustainedPickName != null && item.Name == sustainedPickName);"));
+			Assert.That(q, Does.Contain("var exempt = plannerWant || demandPick.Demand != null || (sustainedPickName != null && item.Name == sustainedPickName)"));
 			Assert.That(q.IndexOf("sustainedPickName = sustained.Name;", StringComparison.Ordinal), Is.GreaterThan(choose));
 		}
 	}

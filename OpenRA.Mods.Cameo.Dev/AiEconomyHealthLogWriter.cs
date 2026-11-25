@@ -61,10 +61,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			try
 			{
 				// Enforce the bound before allocating an encoded record. JSON must occupy one line.
-				if (json == null || json.Length > MaximumLineBytes || json.Contains('\n') || json.Contains('\r'))
-					return Fail();
-				var count = Utf8.GetByteCount(json) + 1;
-				if (count > MaximumLineBytes || count > byteLimit - bytes || records >= recordLimit)
+				if (!AiJsonlRowRules.TryCount(json, bytes, records, byteLimit, recordLimit, out var count))
 					return Fail();
 
 				var data = Utf8.GetBytes(json + "\n");

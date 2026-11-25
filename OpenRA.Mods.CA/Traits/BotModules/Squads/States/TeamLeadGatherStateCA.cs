@@ -23,6 +23,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 	{
 		readonly TeamLeadOrder order;
 
+		// TEAM-GATHER-01 (tl_gather_hold): a fight before the push is on (the squad stopped to fight what stands inside its fight range), since when, and the
+		// tick until which contacts are ignored after a stand-off that was given up.
+		bool fighting;
+		int fightSince;
+		int calmUntil;
+
 		public TeamLeadGatherStateCA(TeamLeadOrder order)
 		{
 			this.order = order;
@@ -49,6 +55,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 				owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromCell(owner.World, cell), queued));
 			}
+
+			// TEAM-GATHER-01 (tl_gather_hold): the squad counts in the order from the moment it joins, not one squad pass later.
+			if (manager.TeamLeadGatherHoldOn)
+				manager.TeamLeadReport(owner, order);
 		}
 
 		public void Tick(SquadCA owner)
@@ -63,14 +73,50 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				return;
 			}
 
-			// Contact on the way: fight at the point of contact; the squad leaves the order.
-			var enemy = manager.FindClosestEnemy(owner.Units[0].Actor, WDist.FromCells(manager.Info.AttackScanRadius), owner);
-			if (enemy != null)
+			var now = owner.World.WorldTick;
+			if (TeamLeadCA.GatherHoldsOnContact(manager.TeamLeadGatherHoldOn, order.Pushed))
 			{
-				manager.TeamLeadNoteContact(owner, order);
-				owner.TargetActor = enemy;
-				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackState(), false);
-				return;
+				// TEAM-GATHER-01 (tl_gather_hold): before the push the squad never leaves its order for a fight. It stops where an enemy stands inside its fight
+				// range (idle units fire at what is in weapon range), fights it out, then walks on to the rally. A stand-off nobody can win is dropped after a while.
+				var near = now < calmUntil ? null : manager.FindClosestEnemy(owner.Units[0].Actor, manager.TeamLeadFightRange(owner), owner);
+				if (near != null && fighting && now - fightSince > manager.Info.TeamLeadGatherFightMaxTicks)
+				{
+					calmUntil = now + manager.Info.TeamLeadGatherFightMaxTicks;
+					near = null;
+				}
+
+				if (near != null)
+				{
+					if (!fighting)
+					{
+						fighting = true;
+						fightSince = now;
+						manager.TeamLeadNoteContact(owner, order);
+						foreach (var u in owner.Units)
+							owner.Bot.QueueOrder(new Order("Stop", u.Actor, false));
+					}
+
+					manager.TeamLeadReport(owner, order);
+					return;
+				}
+
+				if (fighting)
+				{
+					fighting = false;
+					Activate(owner);
+				}
+			}
+			else
+			{
+				// Contact on the way: fight at the point of contact; the squad leaves the order.
+				var enemy = manager.FindClosestEnemy(owner.Units[0].Actor, WDist.FromCells(manager.Info.AttackScanRadius), owner);
+				if (enemy != null)
+				{
+					manager.TeamLeadNoteContact(owner, order);
+					owner.TargetActor = enemy;
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackState(), false);
+					return;
+				}
 			}
 
 			manager.TeamLeadReport(owner, order);

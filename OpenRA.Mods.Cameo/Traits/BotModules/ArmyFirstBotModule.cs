@@ -46,6 +46,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			"Off = the votes as before. Ablation row af2_first_copy.")]
 		public readonly bool FirstCopyPasses = false;
 
+		[Desc("C-04 (AUDIT_CONFIG_01): the first copy of a defence type counts toward the threat-scaled DefenceCap instead of skipping it (a first copy still passes while",
+			"the cap has room). Row af2_defence_first_copy.")]
+		public readonly bool DefenceFirstCopyCounts = false;
+
 		[Desc("ARMY-FIRST-02: armed static defences (a building with an attack trait) leave the projected-share and reserve votes",
 			"(defences count as army, user 11-22) and follow a threat-scaled cap instead: an extra defence is held while the bot",
 			"already has this many (owned + queued + recently admitted) plus DefenceCapPerThreat x threat intensity. The first",
@@ -211,6 +215,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		// ARMY-FIRST-02 state, refreshed with the share scan (owned + queued per type, defences) plus admissions since.
 		AblationLatch ablateInstance; // the instance row (Info.AblationRow)
 		AblationLatch ablateFirstCopy; // af2_first_copy
+		AblationLatch ablateDefenceFirstCopy; // af2_defence_first_copy
 		AblationLatch ablateDefenceCap; // af2_defence_cap
 		readonly Dictionary<string, int> typeCounts = new();
 		readonly Dictionary<string, int> admittedAt = new();
@@ -246,6 +251,8 @@ namespace OpenRA.Mods.Cameo.Traits
 				var isFirstCopy = firstCopyOn && ArmyFirstEval.IsFirstCopy(typeCounts.GetValueOrDefault(building.Name),
 					admittedAt.TryGetValue(building.Name, out var at) && tick - at < info.AdmittedHoldTicks);
 				var isDefence = ArmyFirstEval.IsDefence(building.HasTraitInfo<BuildingInfo>(), building.HasTraitInfo<AttackBaseInfo>());
+				if (isFirstCopy && isDefence && info.DefenceFirstCopyCounts && !ablateDefenceFirstCopy.Off(player, AblationIds.Af2DefenceFirstCopy))
+					isFirstCopy = false; // C-04: counted toward the cap below, no longer exempt from it
 				if (firstCopyOn && isFirstCopy || capOn && isDefence)
 				{
 					var capHolds = capOn && isDefence && !essential && ArmyFirstEval.DefenceCapHolds(defenceCap, DefenceCount(tick));

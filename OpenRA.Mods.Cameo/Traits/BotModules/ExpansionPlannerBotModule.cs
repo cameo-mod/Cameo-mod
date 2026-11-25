@@ -255,6 +255,26 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("FE-1: an own refinery within this many cells of an anchor serves it (0 = ClaimRadiusCells).")]
 		public readonly int AnchorServeRadiusCells = 0;
 
+		[Desc("REF-FIELD-02 (USER PRIORITY 11-24, refinery spam): under FieldCoverage, a field takes at most RefineryFieldCap refineries",
+			"(own standing within the serve radius of its anchors + pending commits), and a field where an own refinery was lost is locked",
+			"(RefineryLostLockTicks, then until no enemy was seen there for RefineryLostQuietTicks). Never binds while no own refinery stands. Row rf_field_gate.")]
+		public readonly bool RefineryFieldGate = false;
+
+		[Desc("REF-FIELD-02: refineries per field (the total is at most fields in reach x this).")]
+		public readonly int RefineryFieldCap = 2;
+
+		[Desc("REF-FIELD-02: minimum ticks a field stays locked after an own refinery there was lost.")]
+		public readonly int RefineryLostLockTicks = 3000;
+
+		[Desc("REF-FIELD-02: after the minimum lock, the field stays locked until no enemy combat actor was seen near it for this many ticks.")]
+		public readonly int RefineryLostQuietTicks = 1500;
+
+		[Desc("REF-FIELD-02: a loss older than this many ticks no longer locks its field.")]
+		public readonly int RefineryLostMemoryTicks = 12000;
+
+		[Desc("REF-FIELD-02: radius (cells) around a locked field's anchor in which a visible enemy combat actor counts as a threat.")]
+		public readonly int RefineryLostThreatRadiusCells = 10;
+
 		[Desc("FE-1: replans an anchor may stay wanted with no refinery gained before it is parked for ParkTicks",
 			"(a claim whose placement keeps failing must not retry forever).")]
 		public readonly int AnchorStuckReplans = 12;
@@ -806,6 +826,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly Dictionary<CPos, int> anchorPendingUntil = new();
 		List<CPos> lastRefineryCells = new();
 		List<CPos> lastBuildingTiles = new();
+
+		// REF-FIELD-02 (row rf_field_gate): refinery cells seen at the last anchor update, losses (cell -> tick), the last threat tick per
+		// lost cell, and the per-tick field refinery counts behind the cap.
+		AblationLatch ablateRefineryFieldGate;
+		readonly HashSet<CPos> fieldGateSeenRefineries = new();
+		readonly Dictionary<CPos, int> fieldGateLossTick = new();
+		readonly Dictionary<CPos, int> fieldGateThreatTick = new();
+		readonly Dictionary<int, int> fieldGateRefineries = new();
+		readonly Dictionary<int, bool> fieldGateLocked = new();
+		int fieldGateTick = -1;
+		List<CPos> fieldGateCells;
+		bool RefineryFieldGateOn => Info.RefineryFieldGate && LawActive && !ablateRefineryFieldGate.Off(player, AblationIds.RefineryFieldGate);
 
 		// ECON-A-FIX (R6): anchor holds owned by expansion demands — a demand's refinery takes its anchor
 		// off every other claim while the item is still queued. The table is world-free; the probes below
@@ -1458,7 +1490,91 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var anchor = anchors[i];
 			return (anchorParkedUntil.TryGetValue(anchor, out var park) && tick < park.Until)
 				|| (anchorPendingUntil.TryGetValue(anchor, out var pend) && tick < pend)
-				|| anchorReservations.LiveAt(anchor, tick);
+				|| anchorReservations.LiveAt(anchor, tick)
+				|| FieldGateBlocks(i, tick);
+		}
+
+		// REF-FIELD-02 (row rf_field_gate): the anchor's field is at its refinery cap, or locked after a lost refinery. One block shared by
+		// every claim path (the anchor update, ComputeClaim and the future-tiles claim), so the claimable count and the placement agree.
+		bool FieldGateBlocks(int i, int tick)
+		{
+			if (!RefineryFieldGateOn || i >= anchorFieldIds.Length || lastRefineryCells.Count == 0)
+				return false;
+
+			if (fieldGateTick != tick || !ReferenceEquals(fieldGateCells, lastRefineryCells))
+				FieldGateRefresh(tick);
+
+			var field = anchorFieldIds[i];
+			return RefineryFieldGateCA.Blocks(true, lastRefineryCells.Count,
+				RefineryFieldGateCA.Capped(fieldGateRefineries.GetValueOrDefault(field), Info.RefineryFieldCap),
+				fieldGateLocked.GetValueOrDefault(field));
+		}
+
+		void FieldGateRefresh(int tick)
+		{
+			fieldGateTick = tick;
+			fieldGateCells = lastRefineryCells;
+			fieldGateRefineries.Clear();
+			fieldGateLocked.Clear();
+			var serve = Info.AnchorServeRadiusCells > 0 ? Info.AnchorServeRadiusCells : Info.ClaimRadiusCells;
+			var fieldsOf = new HashSet<int>();
+			foreach (var r in lastRefineryCells)
+			{
+				fieldsOf.Clear();
+				for (var a = 0; a < anchors.Count && a < anchorFieldIds.Length; a++)
+					if (RefineryCoverageOracle.WithinServeRadius(r, anchors[a], serve))
+						fieldsOf.Add(anchorFieldIds[a]);
+
+				foreach (var f in fieldsOf)
+					fieldGateRefineries[f] = fieldGateRefineries.GetValueOrDefault(f) + 1;
+			}
+
+			// A pending commit is a refinery on its way: it counts toward its field's cap until it lands (then it is a standing one).
+			for (var a = 0; a < anchors.Count && a < anchorFieldIds.Length; a++)
+				if (anchorPendingUntil.TryGetValue(anchors[a], out var pend) && tick < pend)
+					fieldGateRefineries[anchorFieldIds[a]] = fieldGateRefineries.GetValueOrDefault(anchorFieldIds[a]) + 1;
+
+			foreach (var kv in fieldGateLossTick)
+			{
+				if (!RefineryFieldGateCA.Locked(tick, kv.Value, fieldGateThreatTick.GetValueOrDefault(kv.Key, -1), Info.RefineryLostLockTicks,
+						Info.RefineryLostQuietTicks, Info.RefineryLostMemoryTicks))
+					continue;
+
+				for (var a = 0; a < anchors.Count && a < anchorFieldIds.Length; a++)
+					if (RefineryCoverageOracle.WithinServeRadius(kv.Key, anchors[a], serve))
+						fieldGateLocked[anchorFieldIds[a]] = true;
+			}
+		}
+
+		// REF-FIELD-02: a refinery cell seen last update and gone now is a loss; a remembered loss whose surroundings hold a visible enemy combat
+		// actor is threatened now (fog-honest: only actors this player can see). Forgotten losses are dropped.
+		void FieldGateTrackLosses(List<CPos> refineryCells, int tick)
+		{
+			if (!RefineryFieldGateOn)
+				return;
+
+			foreach (var c in fieldGateSeenRefineries)
+				if (!refineryCells.Contains(c))
+					fieldGateLossTick[c] = tick;
+
+			fieldGateSeenRefineries.Clear();
+			foreach (var c in refineryCells)
+				fieldGateSeenRefineries.Add(c);
+
+			var radius = WDist.FromCells(Info.RefineryLostThreatRadiusCells);
+			foreach (var c in fieldGateLossTick.Keys.ToList())
+			{
+				if (tick - fieldGateLossTick[c] > Info.RefineryLostMemoryTicks)
+				{
+					fieldGateLossTick.Remove(c);
+					fieldGateThreatTick.Remove(c);
+					continue;
+				}
+
+				if (world.FindActorsInCircle(world.Map.CenterOfCell(c), radius).Any(a => !a.IsDead && a.Owner != null
+						&& a.Owner.RelationshipWith(player) == PlayerRelationship.Enemy && a.Info.HasTraitInfo<AttackBaseInfo>() && a.CanBeViewedByPlayer(player)))
+					fieldGateThreatTick[c] = tick;
+			}
 		}
 
 		bool AnchorCommittedForClaims(int i, int tick)
@@ -4509,6 +4625,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			List<(CPos[] Cells, BitSet<DockType>[] Types, bool[] Enabled)> refineryDocks = null)
 		{
 			EnsureAnchorModel(refineryCells, refineryTiles, buildingTiles, refineryDocks);
+			FieldGateTrackLosses(refineryCells, world.WorldTick);
 
 			anchorClaim = null;
 			anchorClaimFieldCenter = null;

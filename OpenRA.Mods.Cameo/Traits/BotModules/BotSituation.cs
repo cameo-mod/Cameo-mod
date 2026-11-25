@@ -268,6 +268,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"0 keeps the house's own cost, which is none.")]
 		public readonly int GarrisonOccupantValue = 0;
 
+		[Desc("PERF-F2a: BotFogMemory.Observe reads the ActorInfo-static part of a remembered actor (value, building/combat/tech/production flags, aircraft, anti-air, detector) from a per-type cache instead of recomputing it for every sighting. Same record, field for field. False = the old per-sighting Classify.")]
+		public readonly bool UseFogClassifyCache = true;
+
+		[Desc("PERF-F2b: BotSituation.Rebuild reads the frozen-actor layer once per rebuild and hands each enemy its own owner-filtered list (same actors, same order) instead of one full-map FrozenActorsInRegion walk per enemy. False = the old walk per enemy.")]
+		public readonly bool UseSharedFrozenSnapshot = true;
+
 		public readonly int ClusterRadius = 12;
 		public readonly int PressureRadius = 15;
 		public readonly int LossWindowTicks = 750;
@@ -1193,13 +1199,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			var profiles = new Dictionary<OpenRA.Player, EnemyProfile>();
+			var frozenSnapshot = fogged ? fogMemory.SnapshotFrozen(enemies) : null;
 			foreach (var enemy in enemies)
 			{
 				var enemyActors = actorsByOwner.TryGetValue(enemy, out var ownedEnemyActors) ? ownedEnemyActors : Array.Empty<Actor>();
 				EnemyProfile profile;
 				if (fogged)
 				{
-					var visibleHarvesters = fogMemory.Observe(enemy, enemyActors, tick);
+					var visibleHarvesters = fogMemory.Observe(enemy, enemyActors, tick, frozenSnapshot);
 					profile = BuildObservedProfile(enemy, fogMemory.Remembered(enemy), ownBuildings, tick);
 					profile.HarvesterCount = visibleHarvesters;
 					regions.SetRegions(enemy, BuildRegions(regions, fogMemory.Remembered(enemy)));

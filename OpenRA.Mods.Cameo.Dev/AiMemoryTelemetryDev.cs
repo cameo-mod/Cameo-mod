@@ -33,7 +33,7 @@ namespace OpenRA.Mods.Cameo.Traits
 	public sealed class AiMemoryTelemetryDev : IWorldLoaded, ITick, IGameOver, INotifyActorDisposing
 	{
 		int sampleIntervalTicks;
-		AiEconomyHealthLogWriter writer;
+		AiQueuedJsonlWriter writer;
 		Process process;
 		string uid;
 		bool ended;
@@ -59,7 +59,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				var directory = Path.Combine(Platform.SupportDir, "Logs");
 				Directory.CreateDirectory(directory);
 				var key = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(uid))).ToLowerInvariant();
-				writer = new AiEconomyHealthLogWriter(Path.Combine(directory, $"cameo-ai-memory-{key}.jsonl"));
+				writer = new AiQueuedJsonlWriter($"cameo-ai-memory-{key}.jsonl", "memory");
 				process = Process.GetCurrentProcess();
 			}
 			// Fail closed on any setup fault — Process/GC APIs may throw beyond IO
@@ -67,7 +67,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			// prevent a world from loading.
 			catch (Exception e)
 			{
-				writer?.Dispose();
+				writer?.Close(0);
 				writer = null;
 				Log.Write("debug", "Memory telemetry unavailable: " + e.GetType().Name);
 				return;
@@ -97,7 +97,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			catch (Exception e)
 			{
 				ended = true;
-				writer?.Dispose();
+				writer?.Close(world.WorldTick);
 				writer = null;
 				Log.Write("debug", "Memory telemetry terminated after a sampling error: " + e.GetType().Name);
 			}
@@ -179,7 +179,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			b.Append(']');
 			b.Append('}');
-			writer.TryWrite(b.ToString());
+			writer.TryWrite(b.ToString()); writer.Flush(world.WorldTick); // PERF-SPK-01: one non-blocking hand-off per sample
 		}
 
 		void IGameOver.GameOver(World world)
@@ -189,13 +189,13 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			ended = true;
 			Sample(world);
-			writer?.Dispose();
+			writer?.Close(world.WorldTick); writer = null; AiLogWriteQueue.FlushSharedForGameEnd(); // no terminal row here; bounded drain as the siblings do
 		}
 
 		void INotifyActorDisposing.Disposing(Actor self)
 		{
 			ended = true;
-			writer?.Dispose();
+			writer?.Close(self.World.WorldTick); writer = null; // hand-off only, never a drain
 		}
 	}
 }

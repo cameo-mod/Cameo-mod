@@ -74,9 +74,9 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheFirstCopyIsAnArmyFirstEssentialAndPassesTheLowCashHoldAsAFirstCopy()
 		{
 			var q = Source("mods/CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs");
-			Assert.That(q, Does.Contain("if (UnlistedOnceOn && UnlistedOnceKind(actorInfo) && !OwnedOrQueued(actorInfo))\n\t\t\t\treturn true;"));
+			Assert.That(q, Does.Contain("if (UnlistedOnceOn && UnlistedOnceKind(actorInfo) && !NavalNeedsWater(actorInfo) && !OwnedOrQueued(actorInfo))\n\t\t\t\treturn true;"));
 			Assert.That(q, Does.Contain("EssentialsLowCashCA.Holds(true, bank, line, !OwnedOrQueued(item)"), "first copy of any kind passes the low-cash hold");
-			Assert.That(q, Does.Contain("if (!UnlistedOnceOn || baseBuilder.Info.DefenseQueues.Contains(Category) || !baseBuilder.HasAdequateProductionCount())"));
+			Assert.That(q, Does.Contain("if (!(includeListed ? SustainedKeepsOn : UnlistedOnceOn) || baseBuilder.Info.DefenseQueues.Contains(Category) || !baseBuilder.HasAdequateProductionCount())"));
 			Assert.That(q, Does.Contain("BaseBuilderQueueEvalCA.PickOrPower(infos[index], power, HasSufficientPowerForActor)"));
 		}
 

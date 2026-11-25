@@ -47,6 +47,9 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("Cameo-only: how many of the slowest modules to list in each timing report.")]
 		public readonly int ModulePerfReportTop = 8;
 
+		[Desc("Cameo-only, DEV builds: a module call or a whole bot tick over this many milliseconds writes one spike line (seat, module, GC delta). 0 disables.")]
+		public readonly int ModuleSpikeLogMs = 50;
+
 		[Desc("Cap on queued orders. Once full, the oldest deferred order is dropped —",
 			"it refers to the stalest world state. Bounds memory when an action budget",
 			"or lag keeps orders pending longer than producers emit them.")]
@@ -143,6 +146,36 @@ namespace OpenRA.Mods.Cameo.Traits
 		readonly Dictionary<IBotTick, ModuleStat> moduleWindow = [];
 		readonly Dictionary<IBotTick, ModuleStat> moduleTotal = [];
 		int ticksSinceReport;
+
+		// SPIKE-FRANS-01: the cost of the bot tick now running, so a spike line can split it into modules, order drain and the rest.
+		long tickModuleTicks;
+		readonly List<(string Name, long Ticks)> tickModuleCalls = [];
+
+		// A snapshot of the GC counters: a spike line says whether a collection ran inside the timed span (every AI shares the one process).
+		readonly struct GcStamp
+		{
+			readonly long pauseTicks;
+			readonly int gen0;
+			readonly int gen1;
+			readonly int gen2;
+
+			GcStamp(long pauseTicks, int gen0, int gen1, int gen2)
+			{
+				this.pauseTicks = pauseTicks;
+				this.gen0 = gen0;
+				this.gen1 = gen1;
+				this.gen2 = gen2;
+			}
+
+			public static GcStamp Now() => new(GC.GetTotalPauseDuration().Ticks, GC.CollectionCount(0), GC.CollectionCount(1), GC.CollectionCount(2));
+
+			public string Since()
+			{
+				var now = Now();
+				return string.Format(System.Globalization.CultureInfo.InvariantCulture, "gc[g0+{0} g1+{1} g2+{2} pause={3:F1} ms]",
+					now.gen0 - gen0, now.gen1 - gen1, now.gen2 - gen2, TimeSpan.FromTicks(now.pauseTicks - pauseTicks).TotalMilliseconds);
+			}
+		}
 #endif
 
 		// U2: orders whose local routing is observed — see BotOrderDispositionTracker.
@@ -439,6 +472,10 @@ namespace OpenRA.Mods.Cameo.Traits
 				return;
 
 #if CAMEO_DEV_LOGGING
+			var tickGcStart = GcStamp.Now();
+			var tickStart = Stopwatch.GetTimestamp();
+			tickModuleTicks = 0;
+			tickModuleCalls.Clear();
 			defendReactions?.Expire(world.WorldTick);
 			if (defendReactions != null && world.WorldTick % DefendReactionTracker.NearBaseProbeTicks == 0)
 				ProbeEnemyNearBase();
@@ -477,9 +514,14 @@ namespace OpenRA.Mods.Cameo.Traits
 				ticksSinceReport = 0;
 				ReportModuleTiming(false);
 			}
-#endif
 
+			var drainStart = Stopwatch.GetTimestamp();
 			DrainOrders();
+			var tickEnd = Stopwatch.GetTimestamp();
+			ReportTickSpike(tickEnd - tickStart, tickEnd - drainStart, tickGcStart);
+#else
+			DrainOrders();
+#endif
 		}
 
 		// Output metering: every tick, gated or not (D-1).
@@ -548,9 +590,10 @@ namespace OpenRA.Mods.Cameo.Traits
 #if CAMEO_DEV_LOGGING
 					for (var i = 0; i < calls; i++)
 					{
+						var gcStart = GcStamp.Now();
 						var started = Stopwatch.GetTimestamp();
 						t.BotTick(this);
-						RecordModuleCall(t, Stopwatch.GetTimestamp() - started);
+						RecordModuleCall(t, Stopwatch.GetTimestamp() - started, gcStart);
 					}
 #else
 					for (var i = 0; i < calls; i++)
@@ -567,11 +610,38 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		string ModuleLabel(IBotTick t) => issuerOf.TryGetValue(t, out var n) ? n : t.GetType().Name;
 
-		void RecordModuleCall(IBotTick t, long ticks)
+		void RecordModuleCall(IBotTick t, long ticks, GcStamp gcStart)
 		{
 			var over10 = ticks * 1000 >= 10 * Stopwatch.Frequency ? 1 : 0;
 			Bump(moduleWindow, t, ticks, over10);
 			Bump(moduleTotal, t, ticks, over10);
+
+			// SPIKE-FRANS-01: every AI shares one client index and prints the same player name, so the seat is its internal name and actor id.
+			tickModuleTicks += ticks;
+			var label = ModuleLabel(t);
+			tickModuleCalls.Add((label, ticks));
+			if (info.ModuleSpikeLogMs > 0 && ticks * 1000 >= info.ModuleSpikeLogMs * Stopwatch.Frequency)
+				Log.Write("debug", string.Format(System.Globalization.CultureInfo.InvariantCulture,
+					"[BOT-MODULE-SPIKE][WT {0}] seat={1}#{2} module={3} = {4:F1} ms {5}",
+					world.WorldTick, player.InternalName, player.PlayerActor.ActorID, label, Ms(ticks), gcStart.Since()));
+		}
+
+		// One line when a whole bot tick (visit) is slow: the modules' share, the order drain, and the remainder (queue delivery, slot phase,
+		// probes) that the per-module timers never saw, with the three costliest module calls and the GC delta.
+		void ReportTickSpike(long totalTicks, long drainTicks, GcStamp gcStart)
+		{
+			if (info.ModuleSpikeLogMs > 0 && totalTicks * 1000 >= info.ModuleSpikeLogMs * Stopwatch.Frequency)
+			{
+				var worst = string.Join(", ", tickModuleCalls.OrderByDescending(c => c.Ticks).Take(3)
+					.Select(c => string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}={1:F1}ms", c.Name, Ms(c.Ticks))));
+				Log.Write("debug", string.Format(System.Globalization.CultureInfo.InvariantCulture,
+					"[BOT-TICK-SPIKE][WT {0}] seat={1}#{2} mode={3} total={4:F1} ms modules={5:F1} drain={6:F1} other={7:F1} worst: {8} {9}",
+					world.WorldTick, player.InternalName, player.PlayerActor.ActorID, seat == null ? "ungated" : seat.Gated ? "gated" : "n1",
+					Ms(totalTicks), Ms(tickModuleTicks), Ms(drainTicks), Ms(totalTicks - tickModuleTicks - drainTicks), worst, gcStart.Since()));
+			}
+
+			tickModuleTicks = 0;
+			tickModuleCalls.Clear();
 		}
 
 		static void Bump(Dictionary<IBotTick, ModuleStat> map, IBotTick t, long ticks, int over10)
@@ -602,8 +672,9 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			var tick = world.WorldTick;
 			var seatNote = seat == null ? "ungated" : seat.Gated ? "gated" : "n1";
-			var head = string.Format(System.Globalization.CultureInfo.InvariantCulture, "BotModuleTiming player={0} tick={1} mode={2}",
-				player.ClientIndex, tick, seatNote);
+			// seat = the internal name: player= is the client index, shared by every AI of one host (SPIKE-FRANS-01).
+			var head = string.Format(System.Globalization.CultureInfo.InvariantCulture, "BotModuleTiming player={0} tick={1} mode={2} seat={3}",
+				player.ClientIndex, tick, seatNote, player.InternalName);
 
 			if (final)
 			{

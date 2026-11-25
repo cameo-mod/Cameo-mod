@@ -82,6 +82,7 @@ namespace OpenRA.Mods.CA.Traits
 	public partial class SquadManagerBotModuleCA
 	{
 		AblationLatch ablateArty;
+		AblationLatch ablateArtyStruct;
 		AblationLatch ablateDefendAlly;
 
 		// DEFEND-ALLY-01: last seen hit points of the friendlies near the responders (rebuilt each scan, so it stays small).
@@ -97,6 +98,9 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>ARTY-01 is on for this bot: the Info switch and the DEV ablation row (row off = the old artillery state).</summary>
 		internal bool ArtyMicroActive => Info.ArtyMicroEnabled && !ablateArty.Off(Player, AblationIds.ArtyMicro);
 
+		/// <summary>ARTY-TARGET-01: the structure-first sub-switch, only while the micro is on (row arty_struct_first).</summary>
+		internal bool ArtyStructFirstActive => ArtyMicroActive && Info.ArtyStructFirstEnabled && !ablateArtyStruct.Off(Player, AblationIds.ArtyStructFirst);
+
 		bool DefendAllyActive => Info.DefendAllyEnabled && !ablateDefendAlly.Off(Player, AblationIds.DefendAlly);
 
 		// An attack squad that has not moved out yet - idle, or staging/gathering at its rally building - is free to answer a call for
@@ -105,6 +109,9 @@ namespace OpenRA.Mods.CA.Traits
 		static bool IsIdleResponderSquad(SquadCA s) =>
 			s.IsValid && s.Type is SquadCAType.Rush or SquadCAType.Guerrilla
 			&& s.FuzzyStateMachine?.CurrentState is GroundUnitsIdleStateCA or GroundUnitsStageStateCA or TeamLeadGatherStateCA;
+
+		// TEAM-GATHER-02 (tl_defend_respects_order): an idle responder squad that is not gathering for the open order and not freshly formed.
+		bool DefendAllyFreeSquad(SquadCA s) => IsIdleResponderSquad(s) && !TeamLeadKeepsSquad(s);
 
 		void DefendAllyTick(IBot bot)
 		{
@@ -125,7 +132,7 @@ namespace OpenRA.Mods.CA.Traits
 					defendAllyResponders.Add(u.Actor.CenterPosition);
 
 			foreach (var s in Squads)
-				if (IsIdleResponderSquad(s))
+				if (DefendAllyFreeSquad(s))
 					defendAllyResponders.Add(s.CenterPosition);
 
 			if (defendAllyResponders.Count == 0)
@@ -169,6 +176,9 @@ namespace OpenRA.Mods.CA.Traits
 
 			(allyHp, allyHpNext) = (allyHpNext, allyHp);
 			allyHpNext.Clear();
+
+			// V07 tl_defend_team: a serious attack on a friendly raises the team alarm (throttled; free of work with the switch off).
+			TeamDefendScan(now);
 
 			if (defendAllyAttacked.Count == 0 || now < defendAllyNextResponse)
 				return;
@@ -237,7 +247,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			foreach (var s in Squads)
 			{
-				if (s == protectSq || !IsIdleResponderSquad(s) || !DefendAllyCA.InRadius(s.CenterPosition, friendlyPos, radius))
+				if (s == protectSq || !DefendAllyFreeSquad(s) || !DefendAllyCA.InRadius(s.CenterPosition, friendlyPos, radius))
 					continue;
 
 				s.TargetActor = attacker;

@@ -121,6 +121,23 @@ def read_fixture_evidence(script_path, expected_sha256, support_dir, game_uid, p
         return None
 
 
+def raw_sequence_check(rows, game_uid, player):
+    """PERF-SPK-01: each raw recorder's seq is contiguous from 0 per (game_uid, player). A gap, duplicate, foreign schema or a
+    player with zero rows fails closed (the raw stream always carries spend_ledger pulses). Other players' rows are ignored."""
+    expected = 0
+    for row in rows:
+        if not isinstance(row, dict) or row.get("game_uid") != game_uid or row.get("player") != player:
+            continue
+        if type(row.get("schema")) is not int or row["schema"] != 2:
+            raise EvidenceError("unsupported raw schema")
+        if integer(row.get("seq")) != expected:
+            raise EvidenceError("raw sequence missing/duplicate")
+        expected += 1
+    if expected == 0:
+        raise EvidenceError("raw stream has no rows for this player")
+    return expected
+
+
 def analyze(rows, game_uid, player, *, fixture_evidence=None):
     identity(game_uid)
     identity(player)
@@ -378,6 +395,12 @@ def main():
     args = parser.parse_args()
     try:
         rows, receipt = read_jsonl(args.support / "Logs/cameo-ai-economy-health.jsonl")
+        # PERF-SPK-01 decision (a): the raw stream is checked whenever its file exists. Health-only evidence dirs written before
+        # SPK-01 (no raw file) keep their verdict; a raw file that is present must pass the sequence check.
+        raw_path = args.support / "Logs/cameo-ai-economy-raw.jsonl"
+        if raw_path.exists():
+            raw_rows, _ = read_jsonl(raw_path)
+            raw_sequence_check(raw_rows, args.game_uid, args.player)
         evidence = None
         if args.fixture_script is not None or args.fixture_script_sha256 is not None:
             if args.fixture_script is not None and args.fixture_script_sha256 is not None:

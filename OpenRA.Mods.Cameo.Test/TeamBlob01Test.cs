@@ -235,7 +235,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(body.IndexOf("TeamLeadCA.OrderDue(", StringComparison.Ordinal), Is.GreaterThan(0));
 			Assert.That(body.IndexOf("TeamLeadCA.FallbackPublish(", StringComparison.Ordinal), Is.GreaterThan(body.IndexOf("TeamLeadCA.OrderDue(", StringComparison.Ordinal)));
 			Assert.That(body, Does.Contain("if (why == TeamLeadCA.PublishWhy.None && TeamLeadFallbackPublishOn)"));
-			Assert.That(body, Does.Not.Contain("MinUnits(minUnits, blob.Units)"), "no unit bar of its own: the fallback never attacks");
+			// TEAM-GATHER-02 (tl_join_merge): the one use is the rally publish floor (RallyFloorPassed); the fallback itself has no unit bar of its own and never attacks.
+			Assert.That(body.Replace("RallyFloorPassed(blob.Units, blob.Value, BlobLaunch01CA.MinUnits(minUnits, blob.Units), minValue)", ""), Does.Not.Contain("MinUnits(minUnits, blob.Units)"), "only the rally publish floor call uses the unit bar");
 			Assert.That(body.IndexOf("TeamLeadPromoteRally(rally, now);", StringComparison.Ordinal), Is.LessThan(body.IndexOf("if (now < initialAttackDelay || TeamLeadOpenOrder() != null)", StringComparison.Ordinal)), "a rally order is promoted before the open-order guard");
 			Assert.That(body, Does.Contain("if (why == TeamLeadCA.PublishWhy.Gather)\n\t\t\t\torder.MakeGatherOnly();"));
 			Assert.That(body, Does.Contain("BlobLaunch01CA.TicksSinceOrder("));
@@ -274,7 +275,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(body, Does.Contain("order.Prune("), "a rally order still drops squads that left it");
 
 			var join = wiring[wiring.IndexOf("void TeamLeadJoin(", StringComparison.Ordinal)..wiring.IndexOf("bool TeamLeadPickTarget(", StringComparison.Ordinal)];
-			Assert.That(join, Does.Contain("(order.Seq == teamLeadJoinedSeq && !order.GatherOnly && !order.Extending)"), "an attack order is joined once, a rally (or held) order again and again");
+			Assert.That(join, Does.Contain("(!AllInCA.JoinsAgain(order.AllIn, teamLeadJoinedSeq, order.Seq) && !order.GatherOnly && !order.Extending)"), "an attack order is joined once, a rally (or held) order again and again");
 			Assert.That(join, Does.Contain("teamLeadIsLeader && !order.GatherOnly && !order.Extending ? Info.TeamLeadLeaderMinUnits : Info.TeamLeadJoinMinUnits"), "no one-unit rally squads");
 
 			Assert.That(wiring, Does.Contain("void TeamLeadPromoteRally(TeamLeadOrder order, int now)"));
@@ -282,7 +283,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(wiring, Does.Contain("TeamLeadCA.BlobReady(units, value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue)"), "the same bars as the ready path");
 			Assert.That(wiring, Does.Contain("order.Promote(now, target, targetId);"));
 			Assert.That(wiring, Does.Contain("DiagnosticTeamEvent(\"team_promote\""));
-			Assert.That(wiring, Does.Contain("order.Report(squad, SquadValueOf(squad), near * 100 >= squad.Units.Count * Info.TeamLeadArrivePercent, squad.Units.Count);"));
+			Assert.That(wiring, Does.Contain("order.Report(squad, SquadValueOf(squad), near * 100 >= squad.Units.Count * Info.TeamLeadArrivePercent, squad.Units.Count, TeamLeadJoinMergeOn ? near : -1);"));
 		}
 
 		// ---- the push bar: a due push waits while the squads at the rally are below the bar; the hold has a hard cap ----
@@ -462,7 +463,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
 			var start = wiring.IndexOf("void TeamLeadMaintainOrder(", StringComparison.Ordinal);
 			var body = wiring[start..wiring.IndexOf("TeamLeadOrder TeamLeadOpenOrder()", start, StringComparison.Ordinal)];
-			Assert.That(body, Does.Contain("order.FirstReadyTick) && !TeamLeadPushHeld(order, now))"), "the pincer push");
+			Assert.That(body, Does.Contain("order.FirstReadyTick) && !TeamLeadPincerThinCollapse(order, now) && !TeamLeadPushHeld(order, now))"), "the pincer push (a thin pincer collapses first, TEAM-GATHER-02 c2)");
 			Assert.That(body, Does.Contain("committed, arrived, Info.TeamLeadArrivePercent)\n\t\t\t\t&& !TeamLeadPushHeld(order, now))"), "the single-blob push (window and early arrival)");
 			Assert.That(body, Does.Contain(": order.Extending && TeamLeadCA.PushBarDissolve(now, order.PushBarSince, Info.TeamLeadPushBarMaxTicks) ? \"below_bar\""));
 			Assert.That(body, Does.Contain(": !order.GatherOnly && !order.Extending && now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? \"max_age\""), "the hold has its own cap");
@@ -477,7 +478,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(wiring, Does.Contain("order.Open(World.WorldTick, TeamLeadPushBarOn ? 0 : Info.TeamLeadLateJoinTicks)"), "no late joiner follows a push alone");
 
 			var join = wiring[wiring.IndexOf("void TeamLeadJoin(", StringComparison.Ordinal)..wiring.IndexOf("bool TeamLeadPickTarget(", StringComparison.Ordinal)];
-			Assert.That(join, Does.Contain("(order.Seq == teamLeadJoinedSeq && !order.GatherOnly && !order.Extending)"), "a held order keeps merging new groups");
+			Assert.That(join, Does.Contain("(!AllInCA.JoinsAgain(order.AllIn, teamLeadJoinedSeq, order.Seq) && !order.GatherOnly && !order.Extending)"), "a held order keeps merging new groups");
 		}
 
 		[Test]

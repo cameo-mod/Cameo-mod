@@ -106,7 +106,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var src = Queue();
 			Assert.That(src, Does.Contain("bool EssentialsOn => baseBuilder.EssentialsLowCashArmed && !ablateEssentials.Off(player, AblationIds.EssentialsLowCash);"));
-			Assert.That(src, Does.Contain("if (EssentialsOn && EssentialsHolds(item, isRefinery, exempt && item.Name != sustainedPickName, cashNow))"));
+			Assert.That(src, Does.Contain("if (EssentialsOn && EssentialsHolds(item, isRefinery, exempt && item.Name != sustainedPickName && item.Name != openingPickName, cashNow))"));
 			Assert.That(src, Does.Contain("item.HasTraitInfo<CashTricklerInfo>()"), "the same passive-income predicate as BaseFrontBackPlanner.IsPassiveIncome");
 			Assert.That(src, Does.Contain("if (AllProducersOn)\n\t\t\t\t\tbaseBuilder.BuildingsBeingProduced[item.Name] ="), "same-sweep duplicates are blocked");
 		}

@@ -31,6 +31,20 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateFallbackPublish;
 		AblationLatch ablateOrderSurvive;
 		AblationLatch ablatePushBar;
+		AblationLatch ablateGatherHold;
+		AblationLatch ablateGraceHold;
+		AblationLatch ablateRouteAll;
+		AblationLatch ablateDefendRespectsOrder;
+		AblationLatch ablateBoundedRetarget;
+		AblationLatch ablateJoinAtForm;
+		AblationLatch ablateBarJoinable;
+		AblationLatch ablateJoinMerge;
+		AblationLatch ablateGraceRally;
+		AblationLatch ablateGatherRange;
+		AblationLatch ablateHuntViaOrder;
+		AblationLatch ablateIssueFloor;
+		AblationLatch ablateRallyMid;
+		AblationLatch ablatePincerDouble;
 		int teamLeadNextCheck;
 		string teamLeadKey;
 		TeamLeadTeam teamLeadTeam;
@@ -58,6 +72,277 @@ namespace OpenRA.Mods.CA.Traits
 
 		// TEAM-BLOB-01 push bar: no push (window or arrival) while the squads at the rally are below the WAVE-MIN bars; own switch + row.
 		internal bool TeamLeadPushBarOn => TeamLeadOn && Info.TeamLeadPushBarEnabled && !ablatePushBar.Off(Player, AblationIds.TeamLeadPushBar);
+
+		// TEAM-GATHER-01 (V04 RCA): a gathering squad keeps its order on contact, a held order is never cancelled for missing reports, and the M13 / stalemate
+		// launches join an open order; each with its own switch + row.
+		internal bool TeamLeadGatherHoldOn => TeamLeadOn && Info.TeamLeadGatherHoldEnabled && !ablateGatherHold.Off(Player, AblationIds.TeamLeadGatherHold);
+
+		bool TeamLeadGraceHoldOn => TeamLeadOn && Info.TeamLeadGraceHoldEnabled && !ablateGraceHold.Off(Player, AblationIds.TeamLeadGraceHold);
+
+		bool TeamLeadRouteAllOn => TeamLeadOn && Info.TeamLeadRouteAllEnabled && !ablateRouteAll.Off(Player, AblationIds.TeamLeadRouteAll);
+
+		/// <summary>A team order is open and the route-all row is on: the liveness (M13) wave and the stalemate breaker wave hold, their units join the order.</summary>
+		internal bool TeamLeadRoutesLaunch() => TeamLeadRouteAllOn && TeamLeadOpenOrder() != null;
+
+		internal bool TeamLeadDefendRespectsOrderOn => TeamLeadOn && Info.TeamLeadDefendRespectsOrderEnabled && !ablateDefendRespectsOrder.Off(Player, AblationIds.TeamLeadDefendRespectsOrder);
+
+		internal bool TeamLeadBoundedRetargetOn => TeamLeadOn && Info.TeamLeadBoundedRetargetEnabled && !ablateBoundedRetarget.Off(Player, AblationIds.TeamLeadBoundedRetarget);
+
+		bool TeamLeadJoinAtFormOn => TeamLeadOn && Info.TeamLeadJoinAtFormEnabled && !ablateJoinAtForm.Off(Player, AblationIds.TeamLeadJoinAtForm);
+
+		bool TeamLeadBarJoinableOn => TeamLeadOn && Info.TeamLeadBarJoinableEnabled && !ablateBarJoinable.Off(Player, AblationIds.TeamLeadBarJoinable);
+
+		bool TeamLeadJoinMergeOn => TeamLeadOn && Info.TeamLeadJoinMergeEnabled && !ablateJoinMerge.Off(Player, AblationIds.TeamLeadJoinMerge);
+
+		bool TeamLeadGraceRallyOn => TeamLeadOn && Info.TeamLeadGraceRallyEnabled && !ablateGraceRally.Off(Player, AblationIds.TeamLeadGraceRally);
+
+		internal bool TeamLeadGatherRangeOn => TeamLeadOn && Info.TeamLeadGatherRangeEnabled && !ablateGatherRange.Off(Player, AblationIds.TeamLeadGatherRange);
+
+		internal bool TeamLeadHuntViaOrderOn => TeamLeadOn && Info.TeamLeadHuntViaOrderEnabled && !ablateHuntViaOrder.Off(Player, AblationIds.TeamLeadHuntViaOrder);
+
+		bool TeamLeadIssueFloorOn => TeamLeadOn && Info.TeamLeadIssueFloorEnabled && !ablateIssueFloor.Off(Player, AblationIds.TeamLeadIssueFloor);
+
+		bool TeamLeadRallyMidOn => TeamLeadOn && Info.TeamLeadRallyMidEnabled && !ablateRallyMid.Off(Player, AblationIds.TeamLeadRallyMid);
+
+		bool TeamLeadPincerDoubleOn => TeamLeadOn && Info.TeamLeadPincerDoubleEnabled && !ablatePincerDouble.Off(Player, AblationIds.TeamLeadPincerDouble);
+
+		// ---- TEAM-GATHER-02 ----
+
+		// Ally defence leaves a squad that gathers for the open order, or was formed a moment ago (its first team pass has not run), to the order.
+		internal bool TeamLeadKeepsSquad(SquadCA s) => TeamLeadCA.SquadKeptForOrder(TeamLeadDefendRespectsOrderOn,
+			s.FuzzyStateMachine?.CurrentState is TeamLeadGatherStateCA, World.WorldTick, s.FormedTick, Info.TeamLeadFreshSquadTicks);
+
+		// A pool unit that can join a ground wave: live, armed, ground (Mobile), neither artillery nor fire support (those never enter the Rush squad).
+		bool TeamLeadJoinable(UnitWposWrapper u) => !unitCannotBeOrdered(u.Actor) && u.Actor.Info.HasTraitInfo<AttackBaseInfo>() && u.Actor.Info.HasTraitInfo<MobileInfo>()
+			&& !Info.ArtilleryTypes.Contains(u.Actor.Info.Name) && !Info.FireSupportTypes.Contains(u.Actor.Info.Name);
+
+		// This seat's Rush squad that gathers for the open order (the biggest one): new joinable units merge into it.
+		SquadCA TeamLeadGatheringSquad()
+		{
+			SquadCA best = null;
+			foreach (var s in Squads)
+				if (s.IsValid && s.Type == SquadCAType.Rush && s.FuzzyStateMachine?.CurrentState is TeamLeadGatherStateCA && (best == null || s.Units.Count > best.Units.Count))
+					best = s;
+
+			return best;
+		}
+
+		// tl_join_merge: every joinable pool unit walks to the rally inside the seat's gathering squad (no new one-unit squads). False = no gathering squad or nothing to merge.
+		bool TeamLeadMergeIntoGatherSquad(IBot bot, TeamLeadOrder order)
+		{
+			var squad = TeamLeadGatheringSquad();
+			if (squad == null)
+				return false;
+
+			var joinable = unitsHangingAroundTheBase.Where(TeamLeadJoinable).ToList();
+			if (joinable.Count == 0)
+				return false;
+
+			var cell = World.Map.CellContaining(TeamLeadRallyOf(squad, order));
+			foreach (var u in joinable)
+			{
+				squad.Units.Add(u);
+				unitsHangingAroundTheBase.Remove(u);
+				bot.QueueOrder(new Order("Move", u.Actor, Target.FromCell(World, cell), false));
+			}
+
+			ReconcileSquadLeases();
+			foreach (var n in notifyIdleBaseUnits)
+				n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
+
+			DiagnosticSquadEvent(squad, "team_merge", "seq=" + order.Seq + " units=" + joinable.Count);
+			return true;
+		}
+
+		// A team Rush squad: not the stalemate breaker and not the liveness (M13) wave, which keep their own targeting.
+		bool TeamLeadTeamSquad(SquadCA s) => s.Type == SquadCAType.Rush && !s.M13Response
+			&& !ReferenceEquals(s, stalemateSquad) && !ReferenceEquals(s, m13IntentSquad) && !ReferenceEquals(s, m13ResponseSquad);
+
+		// gt_bounded_retarget: a team Rush squad retargets only around its fight. A squad on its own finish hunt keeps it, unless the hunt goes through the order.
+		internal bool TeamLeadBoundsRetarget(SquadCA s) => TeamLeadBoundedRetargetOn && TeamLeadTeamSquad(s) && (!s.IsHunting || TeamLeadHuntViaOrderOn) && !TeamLeadKeepsGoing(s);
+
+		// A squad of a pushed order, or one at WAVE-MIN size or more, is exempt from the bound: the blob keeps going until the focus seat is dead (Opus audit: a bounded pushed
+		// blob went idle after its first cleared area, was dismissed by the closed order, and the leader re-issued a rally at home).
+		internal bool TeamLeadKeepsGoing(SquadCA s) => TeamLeadBoundedRetargetOn && TeamLeadTeamSquad(s)
+			&& TeamLeadCA.KeepsGoing(s.TeamPushSeq > 0, s.Units.Count, WaveMinActive ? WaveMinBars().Units : 0);
+
+		// The seat the pushed blob works on: the finish-the-weakest focus seat, else the owner of the last order target.
+		Player TeamLeadGoOnPlayer()
+		{
+			var focus = TeamLeadFocusPlayer();
+			if (focus != null)
+				return focus;
+
+			var order = teamLeadTeam?.Order;
+			if (order == null || order.Cancelled || order.TargetActorId == 0)
+				return null;
+
+			var targeted = World.GetActorById(order.TargetActorId);
+			return targeted != null && targeted.Owner != null && TeamLeadFocusEnemy(targeted.Owner) ? targeted.Owner : null;
+		}
+
+		// The next target of a squad that keeps going: the nearest visible enemy of the focus seat, else a remembered (fogged) building of that seat, else the nearest
+		// visible enemy anywhere (the old pick), else (no focus seat) any remembered enemy building. False = nothing known at all: the caller stands the squad idle, never flees.
+		internal bool TeamLeadGoOn(SquadCA s, Actor leader)
+		{
+			var seat = TeamLeadGoOnPlayer();
+			// The target that froze this blob (a cliff, water or wall between) is skipped for a while, so the retarget really picks another one.
+			var skip = s.TeamSkipActor != 0 && World.WorldTick < s.TeamSkipUntil ? s.TeamSkipActor : 0u;
+			var pick = skip != 0
+				? TeamLeadNearestEnemyExcept(leader, seat, skip) ?? (seat != null ? TeamLeadNearestEnemyExcept(leader, null, skip) : null)
+				: seat != null ? FindClosestEnemy(leader.Location, SquadValueOf(s), seat, s) : null;
+			if (pick == null && seat != null && FoggedScans && FindFrozenEnemyTarget(leader.CenterPosition, -1, s, seat) is { } frozenSeat && frozenSeat.ID != skip)
+			{
+				s.Target = Target.FromFrozenActor(frozenSeat);
+				return true;
+			}
+
+			if (skip == 0)
+				pick ??= FindClosestEnemy(leader, s);
+			if (pick != null)
+			{
+				s.TargetActor = pick;
+				return true;
+			}
+
+			if (seat == null && FoggedScans && FindFrozenEnemyTarget(leader.CenterPosition, -1, s) is { } frozen && frozen.ID != skip)
+			{
+				s.Target = Target.FromFrozenActor(frozen);
+				return true;
+			}
+
+			return false;
+		}
+
+		// The nearest visible preferred enemy (of <seat>, or any when null) other than <skipId> within TeamLeadSkipSearchCells of the leader: used only while a skip is active (a blob
+		// froze on a target); a bounded circle query through the actor map, never a scan of every actor.
+		Actor TeamLeadNearestEnemyExcept(Actor leader, Player seat, uint skipId) =>
+			World.FindActorsInCircle(leader.CenterPosition, WDist.FromCells(Info.TeamLeadSkipSearchCells))
+				.Where(a => a.ActorID != skipId && (seat == null || a.Owner == seat) && IsPreferredEnemyUnit(a) && IsNotHiddenUnit(a))
+				.ClosestToIgnoringPath(leader.CenterPosition);
+
+		// The stuck rule fired for a squad: a pushed blob skips the target it froze on and takes the next enemy (TeamLeadGoOn), instead of going idle with nothing changed.
+		internal bool TeamLeadStuckRetarget(SquadCA s, Actor leader)
+		{
+			if (!TeamLeadKeepsGoing(s))
+				return false;
+
+			// A blob sieging a fogged building has a frozen target and no TargetActor: skip that building (its id) too.
+			var frozenId = s.Target.Type == TargetType.FrozenActor && s.Target.FrozenActor != null ? s.Target.FrozenActor.ID : 0u;
+			var skipId = TeamLeadCA.SkipIdOf(s.TargetActor?.ActorID ?? 0u, frozenId);
+			if (skipId != 0)
+			{
+				s.TeamSkipActor = skipId;
+				s.TeamSkipUntil = World.WorldTick + Info.TeamLeadSkipTicks;
+			}
+
+			return TeamLeadGoOn(s, leader);
+		}
+
+		// A pushed blob that stands within the scan radius of its valid target is sieging it (it does not move): the attack state stuck rule leaves it alone for at most
+		// TeamLeadSiegeMaxTicks without a move (nobody may be able to fire at it); then TeamLeadStuckRetarget picks another target.
+		internal bool TeamLeadSieging(SquadCA s, int stuckTicks)
+		{
+			if (!s.IsValid || s.TeamPushSeq <= 0 || !s.IsTargetValid || !TeamLeadKeepsGoing(s))
+				return false;
+
+			var scan = (long)WDist.FromCells(Info.AttackScanRadius).Length;
+			return TeamLeadCA.SiegeHolds(true, true, (s.Units[0].Actor.CenterPosition - s.Target.CenterPosition).HorizontalLengthSquared, scan * scan, stuckTicks, Info.TeamLeadSiegeMaxTicks);
+		}
+
+		// tl_pincer_double: a pincer that is due to push with less than twice the WAVE-MIN bars gathered collapses into the single blob (each prong must meet WAVE-MIN).
+		bool TeamLeadPincerThinCollapse(TeamLeadOrder order, int now)
+		{
+			// PINCER-02 (tl_pincer_wide): the gate is read per arm (each arm holds its arm bar) instead of the total of twice the bars.
+			if (TeamLeadPincerWideOn)
+				return TeamLeadPincerArmCollapse(order, now);
+
+			if (!TeamLeadPincerDoubleOn || !WaveMinActive)
+				return false;
+
+			var (minUnits, minValue) = WaveMinBars();
+			var (units, value) = order.CommittedTotals();
+			if (TeamLeadCA.PincerGathered(units, value, minUnits, minValue))
+				return false;
+
+			order.PincerCollapsed = true;
+			DiagnosticTeamEvent("team_pincer_collapse", "seq=" + order.Seq + " why=thin gathered=" + units + "/" + value + " bars=" + minUnits + "/" + minValue + " age=" + (now - order.IssueTick));
+			return true;
+		}
+
+		// tl_rally_mid: the rally between the centroid of the allied bases and the target, snapped to a legal ground cell the leader sample can reach. False = keep the old rally.
+		bool TeamLeadMidRally(WPos target, out WPos rally)
+		{
+			rally = default;
+			var baseOf = new Dictionary<Player, WPos>();
+			foreach (var a in World.ActorsHavingTrait<BaseBuilding>().Where(a => a.IsInWorld && !a.IsDead).OrderBy(a => a.ActorID))
+				baseOf.TryAdd(a.Owner, a.CenterPosition);
+
+			long x = 0;
+			long y = 0;
+			var n = 0;
+			foreach (var p in World.Players)
+			{
+				if (p.NonCombatant || p.WinState != WinState.Undefined || (p != Player && Player.RelationshipWith(p) != PlayerRelationship.Ally))
+					continue;
+
+				WPos at;
+				if (baseOf.TryGetValue(p, out var found))
+					at = found;
+				else if (p.HomeLocation != CPos.Zero)
+					at = World.Map.CenterOfCell(p.HomeLocation);
+				else
+					continue;
+				x += at.X;
+				y += at.Y;
+				n++;
+			}
+
+			if (n == 0)
+				return false;
+
+			var mid = TeamLeadCA.RallyBetween(new WPos((int)(x / n), (int)(y / n), 0), target, Info.TeamLeadRallyMidPercent);
+			var map = World.Map;
+			// TEAM-GATHER-02 c3: the staging cell is the leader own one; it counts only close to the mid point, else the mid point snapped to a legal ground cell is the rally.
+			var staged = ArmyStaging?.StagingCellNear(map.CellContaining(mid));
+			if (staged.HasValue && !TeamLeadCA.StagingNearMid(mid, map.CenterOfCell(staged.Value), Info.TeamLeadRallyMidStagingCells))
+				staged = null;
+			var sample = TeamLeadPincerSample();
+			var mobile = sample?.TraitOrDefault<Mobile>();
+			if (mobile == null)
+			{
+				rally = staged.HasValue ? map.CenterOfCell(staged.Value) : mid;
+				return true;
+			}
+
+			bool Legal(CPos c) => map.Contains(c) && mobile.Locomotor.MovementCostForCell(c) != PathGraph.MovementCostForUnreachableCell;
+			var cell = staged ?? mobile.NearestCell(map.CellContaining(mid), Legal, 1, 5);
+			if (!Legal(cell) || !World.WorldActor.Trait<IPathFinder>().PathExistsForLocomotor(mobile.Locomotor, sample.Location, cell))
+				return false;
+
+			rally = map.CenterOfCell(cell);
+			return true;
+		}
+
+		// tl_hunt_via_order: a team Rush squad does not hunt its own grid cell; the leader's order target is the one hunt cell.
+		internal bool TeamLeadHuntsViaOrder(SquadCA s) => TeamLeadHuntViaOrderOn && TeamLeadTeamSquad(s);
+
+		// The distance in cells inside which a gathering squad stops to fight: the squad's maximum weapon range (tl_gather_range), between the fixed
+		// TeamLeadGatherFightCells and AttackScanRadius; the fixed distance when the row is off.
+		internal WDist TeamLeadFightRange(SquadCA squad)
+		{
+			var fixedRange = WDist.FromCells(Info.TeamLeadGatherFightCells);
+			if (!TeamLeadGatherRangeOn)
+				return fixedRange;
+
+			var max = 0;
+			foreach (var u in squad.Units)
+				foreach (var a in u.Actor.TraitsImplementing<AttackBase>())
+					if (!a.IsTraitDisabled)
+						max = System.Math.Max(max, a.GetMaximumRange().Length);
+
+			return new WDist(System.Math.Clamp(max, fixedRange.Length, System.Math.Max(fixedRange.Length, WDist.FromCells(Info.AttackScanRadius).Length)));
+		}
 
 		bool TeamLeadOrderSurviveOn => TeamLeadOn && Info.TeamLeadOrderSurviveEnabled && !ablateOrderSurvive.Off(Player, AblationIds.TeamLeadOrderSurvive);
 
@@ -97,7 +382,8 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			long value = 0;
 			foreach (var u in unitsHangingAroundTheBase)
-				value += UnitValue(u.Actor);
+				if (!TeamLeadBarJoinableOn || TeamLeadJoinable(u))
+					value += UnitValue(u.Actor);
 			return value;
 		}
 
@@ -163,7 +449,8 @@ namespace OpenRA.Mods.CA.Traits
 				TeamLeadMaintainOrder(team, now);
 			}
 
-			teamLeadEngaged = TeamLeadCA.Engaged(seats, team.Election);
+			teamLeadAliveSeats = seats.Count(q => q.Alive);
+			teamLeadEngaged = TeamLeadCA.Engaged(seats, team.Election, TeamLeadSoloOn ? 1 : 2);
 			teamLeadIsLeader = teamLeadEngaged && team.Election.Leader == teamLeadKey;
 
 			if (!teamLeadEngaged)
@@ -186,7 +473,7 @@ namespace OpenRA.Mods.CA.Traits
 		// The member's idle army: the pool plus the units of its formed quiet wave squads (the squads TeamLeadPrepare joins to an order or dismisses).
 		(int Units, long Value) TeamLeadBlob()
 		{
-			var units = unitsHangingAroundTheBase.Count;
+			var units = TeamLeadBarJoinableOn ? unitsHangingAroundTheBase.Count(TeamLeadJoinable) : unitsHangingAroundTheBase.Count;
 			var value = TeamLeadPoolValue();
 			foreach (var s in Squads)
 			{
@@ -212,7 +499,7 @@ namespace OpenRA.Mods.CA.Traits
 				return AggTeamIsQuietState(state) && !AggTeamSquadDefends(s);
 
 			// A hunting squad (finish mode) has its own job; one in a fight finishes it (see TeamLeadRaiderInContact for the marching ones).
-			return s.Type is SquadCAType.Guerrilla or SquadCAType.Harass && TeamLeadRaiderRecallOn && !s.IsHunting
+			return s.Type is SquadCAType.Guerrilla or SquadCAType.Harass && (TeamLeadRaiderRecallOn || TeamLeadAllInOrderOpen) && !s.IsHunting
 				&& (AggTeamIsQuietState(state) || state is GroundUnitsAttackMoveStateCA) && !AggTeamSquadDefends(s);
 		}
 
@@ -241,6 +528,9 @@ namespace OpenRA.Mods.CA.Traits
 		// Leader only. No open order, a ready blob (WAVE-MIN tier on the combined blob), cadence due: publish the order now.
 		void TeamLeadPublish(TeamLeadTeam team, int now)
 		{
+			// V07 ALL-IN-01 (tl_all_in): the trigger that fired (cap, idle, won) or null; null and free of work with the switch off.
+			var allIn = TeamLeadAllInWhy(team, now);
+
 			// TEAM-BLOB-01: a rally (gather-only) order waits until the squads gathered for it pass the WAVE-MIN bars, then it becomes the attack order.
 			if (TeamLeadOpenOrder() is { GatherOnly: true } rally)
 			{
@@ -248,14 +538,25 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 			}
 
+			// ALL-IN-01: an attack order that is still open turns all-in when the trigger fires; its members then send every unit.
+			if (allIn != null && TeamLeadOpenOrder() is { AllIn: false } open)
+			{
+				open.MarkAllIn(allIn);
+				TeamLeadAllInRecord("all_in_start", open, "why=" + allIn + " upgraded=1");
+			}
+
 			if (now < initialAttackDelay || TeamLeadOpenOrder() != null)
+				return;
+
+			// TEAM-GATHER-02 (tl_grace_rally): no new order right after a cancel (V04: a rally order was re-published every ~500 ticks).
+			if (TeamLeadGraceRallyOn && TeamLeadCA.RepublishHeld(now, team.LastCancelTick, Info.TeamLeadRepublishHoldTicks))
 				return;
 
 			var blob = team.Pool(now, Info.TeamLeadPoolMaxAgeTicks);
 			var (minUnits, minValue) = WaveMinActive ? WaveMinBars() : (0, 0);
 			var ready = TeamLeadCA.BlobReady(blob.Units, blob.Value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue);
 			var interval = TeamLeadCA.PublishInterval(TeamLeadCadenceTicks(), Info.TeamLeadFallbackTicks);
-			var why = TeamLeadCA.OrderDue(false, ready, now, team.LastOrderTick, interval, team.AnyAtCap(now, Info.TeamLeadPoolMaxAgeTicks))
+			var why = TeamLeadCA.OrderDue(false, ready, now, team.LastOrderTick, interval, team.AnyAtCap(now, Info.TeamLeadPoolMaxAgeTicks) || allIn != null)
 				? TeamLeadCA.PublishWhy.Ready
 				: TeamLeadCA.PublishWhy.None;
 			// USER rule (2026-11-24): nothing below WAVE-MIN ever attacks. The ready path above is the only attack publish; when it says no the blob is below the
@@ -263,20 +564,33 @@ namespace OpenRA.Mods.CA.Traits
 			if (why == TeamLeadCA.PublishWhy.None && TeamLeadFallbackPublishOn)
 				why = TeamLeadCA.FallbackPublish(BlobLaunch01CA.TicksSinceOrder(now, team.LastOrderTick, initialAttackDelay), Info.TeamLeadFallbackTicks,
 					blob.Units, Info.TeamLeadJoinMinUnits);
+			// TEAM-GATHER-02 (tl_join_merge): a rally order only for a team army that already reaches WAVE-MIN; below that floor nothing is published and nothing churns.
+			// (The ceil(idle / 2) term of BlobLaunch01CA.MinUnits is always met by the team own count here, so the unit bar of this floor is the WAVE-MIN units.)
+			if (why == TeamLeadCA.PublishWhy.Gather && TeamLeadJoinMergeOn
+				&& !TeamLeadCA.RallyFloorPassed(blob.Units, blob.Value, BlobLaunch01CA.MinUnits(minUnits, blob.Units), minValue))
+				why = TeamLeadCA.PublishWhy.None;
+
 			if (why == TeamLeadCA.PublishWhy.None)
 				return;
 
 			var home = AggTeamHomePos();
-			if (!TeamLeadPickTarget(home, now, out var target, out var targetId))
+			teamLeadAllInPicking = allIn != null && why == TeamLeadCA.PublishWhy.Ready;
+			var picked = TeamLeadPickTarget(home, now, out var target, out var targetId);
+			teamLeadAllInPicking = false;
+			if (!picked)
 				return;
 
 			var forced = TeamLeadCA.FallbackForced(now, team.LastOrderTick, Info.TeamLeadFallbackTicks);
 			var order = TeamLeadIssue(home, target, targetId, now);
 			if (why == TeamLeadCA.PublishWhy.Gather)
 				order.MakeGatherOnly();
+			else if (allIn != null)
+				order.MarkAllIn(allIn);
 
 			DiagnosticTeamEvent("team_order", "seq=" + order.Seq + " why=" + why.ToString().ToLowerInvariant() + " blob=" + blob.Units + "/" + blob.Value + " target=" + targetId
 				+ " pincer=" + order.HasProngs + " leader=" + teamLeadKey);
+			if (order.AllIn)
+				TeamLeadAllInRecord("all_in_start", order, "why=" + order.AllInWhy + " blob=" + blob.Units + "/" + blob.Value + " target=" + targetId + " hunt=" + (targetId == 0 ? 1 : 0));
 			AIUtils.BotDebug("AI ({0}): team push published seq {1} at {2}: blob {3}/{4}, target {5}{6}", Player.ClientIndex, order.Seq, now, blob.Units, blob.Value,
 				targetId, forced ? " (fallback)" : "");
 		}
@@ -304,17 +618,35 @@ namespace OpenRA.Mods.CA.Traits
 		void TeamLeadJoin(IBot bot, int now)
 		{
 			var order = TeamLeadOpenOrder();
-			if (order == null || (order.Seq == teamLeadJoinedSeq && !order.GatherOnly && !order.Extending) || now < initialAttackDelay)
+			if (order == null || (!AllInCA.JoinsAgain(order.AllIn, teamLeadJoinedSeq, order.Seq) && !order.GatherOnly && !order.Extending) || now < initialAttackDelay)
 				return;
 
 			// A rally order takes the new units again and again (they walk to the rally and wait there), but only real groups: no one-unit squads.
 			unitsHangingAroundTheBase.RemoveAll(u => unitCannotBeOrdered(u.Actor));
-			if (unitsHangingAroundTheBase.Count < (teamLeadIsLeader && !order.GatherOnly && !order.Extending ? Info.TeamLeadLeaderMinUnits : Info.TeamLeadJoinMinUnits))
+			// TEAM-GATHER-02 (tl_join_merge): for a rally or held order the joinable units merge into the seat's gathering squad; a new squad forms only from a real group.
+			if (TeamLeadJoinMergeOn && (order.GatherOnly || order.Extending || order.AllIn))
+			{
+				if (TeamLeadMergeIntoGatherSquad(bot, order))
+					return;
+
+				if (unitsHangingAroundTheBase.Count(TeamLeadJoinable) < AllInCA.JoinMinUnits(order.AllIn, Info.TeamLeadJoinMinUnits, Info.TeamLeadAllInJoinMinUnits))
+					return;
+			}
+
+			// An all-in order counts the joinable units only (two artillery pieces would form an empty squad each check).
+			if ((order.AllIn ? unitsHangingAroundTheBase.Count(TeamLeadJoinable) : unitsHangingAroundTheBase.Count)
+				< AllInCA.JoinMinUnits(order.AllIn, teamLeadIsLeader && !order.GatherOnly && !order.Extending ? Info.TeamLeadLeaderMinUnits : Info.TeamLeadJoinMinUnits, Info.TeamLeadAllInJoinMinUnits))
+				return;
+
+			// ALL-IN-01: a pushed all-in order takes a re-join only as a WAVE-MIN group; a smaller one waits in the pool (never a squad that walks to the target alone).
+			if (order.AllIn && order.Pushed && !TeamLeadAllInRejoinGroup())
 				return;
 
 			var before = unitsHangingAroundTheBase.Count;
 			CreateAttackForce(bot);
-			if (unitsHangingAroundTheBase.Count < before)
+			if (order.AllIn && unitsHangingAroundTheBase.Count < before)
+				TeamLeadAllInRecord("all_in_join", order, "sent=" + (before - unitsHangingAroundTheBase.Count) + " left=" + unitsHangingAroundTheBase.Count);
+			if (unitsHangingAroundTheBase.Count < before && (!TeamLeadJoinMergeOn || Squads.Any(q => q.IsValid && q.Type == SquadCAType.Rush && q.FormedTick == now)))
 				teamLeadJoinedSeq = order.Seq;
 		}
 
@@ -347,6 +679,16 @@ namespace OpenRA.Mods.CA.Traits
 				return true;
 			}
 
+			// TEAM-GATHER-02 (tl_hunt_via_order): late game, nothing known: the blob hunts ONE cell, the order target, instead of each squad hunting its own.
+			// ALL-IN-01: an all-in order with no known target hunts too (whatever the finish mode says), and from a ground unit: the first pool unit may be an aircraft with no locomotor.
+			if (((TeamLeadHuntViaOrderOn && FinishModeActive) || teamLeadAllInPicking)
+				&& FinishHuntCell(teamLeadAllInPicking ? TeamLeadHuntSample() : unitsHangingAroundTheBase.Count > 0 ? unitsHangingAroundTheBase[0].Actor : activeUnits.FirstOrDefault(a => !a.IsDead && a.IsInWorld)) is { } hunt)
+			{
+				target = World.Map.CenterOfCell(hunt);
+				actorId = 0;
+				return true;
+			}
+
 			actorId = 0;
 			return false;
 		}
@@ -358,6 +700,9 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			var staged = ArmyStaging?.StagingCellNear(World.Map.CellContaining(from));
 			var rally = staged.HasValue ? World.Map.CenterOfCell(staged.Value) : TeamLeadCA.RallyPoint(from, target, Info.TeamLeadRallyForwardCells);
+			// TEAM-GATHER-02 c2 (tl_rally_mid): not the leader own staging cell; a point toward the target from the allied base centroid, so followers do not walk across the map.
+			if (TeamLeadRallyMidOn && TeamLeadMidRally(target, out var mid))
+				rally = mid;
 			var order = teamLeadTeam.Issue(teamLeadKey, rally, target, targetActorId, now);
 			TeamLeadPincerPlan(order, from, target, now);
 			return order;
@@ -374,8 +719,11 @@ namespace OpenRA.Mods.CA.Traits
 
 			var blob = teamLeadTeam.Pool(now, Info.TeamLeadPoolMaxAgeTicks);
 			var (minUnits, minValue) = WaveMinActive ? WaveMinBars() : (0, 0);
-			if (!TeamLeadCA.PincerBlob(blob.Units, blob.Value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue)
-				|| !TeamLeadCA.PincerTargetFar(from, target, Info.TeamLeadPincerMinTargetCells))
+			var wide = TeamLeadPincerWideOn;
+			var blobOk = wide
+				? PincerWideCA.PincerBlob(blob.Units, blob.Value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue, Info.TeamLeadPincerArmPercent)
+				: TeamLeadCA.PincerBlob(blob.Units, blob.Value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue);
+			if (!blobOk || !TeamLeadCA.PincerTargetFar(from, target, Info.TeamLeadPincerMinTargetCells))
 				return;
 
 			var sample = TeamLeadPincerSample();
@@ -402,8 +750,34 @@ namespace OpenRA.Mods.CA.Traits
 				return null;
 			}
 
-			var first = Stage(-1);
-			var second = Stage(1);
+			CPos? first;
+			CPos? second;
+			if (wide)
+			{
+				// PINCER-02: the first legal PAIR of the fanned-out candidates whose real approach separation is 90-180 degrees (no exact opposite sides).
+				var listA = PincerWideCA.Candidates(from, target, -1, standOff, Info.TeamLeadPincerSpreadDegrees);
+				var listB = PincerWideCA.Candidates(from, target, 1, standOff, Info.TeamLeadPincerSpreadDegrees);
+				WPos? Resolve(List<WPos> list, int i)
+				{
+					var cell = mobile.NearestCell(map.CellContaining(list[i]), Legal, 1, 3);
+					return Legal(cell) && pathFinder.PathExistsForLocomotor(mobile.Locomotor, home, cell) ? map.CenterOfCell(cell) : null;
+				}
+
+				if (PincerWideCA.PickPair(target, listA.Count, i => Resolve(listA, i), listB.Count, i => Resolve(listB, i), Info.TeamLeadPincerMinAngleDegrees,
+					Info.TeamLeadPincerMinSeparationCells, out var pointA, out var pointB, out _))
+				{
+					first = map.CellContaining(pointA);
+					second = map.CellContaining(pointB);
+				}
+				else
+					first = second = null;
+			}
+			else
+			{
+				first = Stage(-1);
+				second = Stage(1);
+			}
+
 			if (first == null || second == null)
 			{
 				AIUtils.BotDebug("AI ({0}): pincer skipped at {1}: no legal staging point on {2}", Player.ClientIndex, now, first == null ? "side A" : "side B");
@@ -419,6 +793,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			order.SetProngs(rally0, rally1);
+			TeamLeadPincerRecord("pincer_planned", order, "blob=" + blob.Units + "/" + blob.Value);
 			AIUtils.BotDebug("AI ({0}): pincer published seq {1} at {2}: blob {3}/{4}, staging {5} / {6}", Player.ClientIndex, order.Seq, now, blob.Units, blob.Value,
 				first.Value, second.Value);
 		}
@@ -585,6 +960,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (order == null || order.Cancelled || order.Pushed)
 				return;
 
+			// A report stays only while its squad is in the gather state (tl_gather_hold keeps a fighting squad in it: the fight is no state change).
 			order.Prune(o => o is SquadCA q && q.IsValid && q.FuzzyStateMachine?.CurrentState is TeamLeadGatherStateCA);
 			// An order published by the leader's team check has no squad yet: the members form theirs on their next check and report from the gather
 			// state one squad pass later, so the no-report grace is longer while TEAM-LEAD-02 publishes (Info switch; the row only changes the publish).
@@ -600,12 +976,16 @@ namespace OpenRA.Mods.CA.Traits
 			var cancel = order.LeaderKey != team.Election.Leader ? "leader_changed"
 				: order.Extending && TeamLeadCA.PushBarDissolve(now, order.PushBarSince, Info.TeamLeadPushBarMaxTicks) ? "below_bar"
 				: !order.GatherOnly && !order.Extending && now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? "max_age"
+				: TeamLeadCA.GraceHolds(TeamLeadGraceHoldOn, order.Extending) ? null
+				: TeamLeadCA.RallyGraceHolds(TeamLeadGraceRallyOn, order.GatherOnly) ? (now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? "max_age" : null)
 				: order.ReportCount == 0 && now - (TeamLeadOrderSurviveOn ? HarassCapCA.NoReportSince(order.IssueTick, order.LastReportTick) : order.IssueTick) > reportGrace ? "no_reports"
 				: null;
 			if (cancel != null)
 			{
 				order.Cancelled = true;
 				order.CancelReason = cancel;
+				if (cancel != "leader_changed")
+					team.LastCancelTick = now;
 				DiagnosticTeamEvent("team_cancel", "seq=" + order.Seq + " why=" + cancel + " age=" + (now - order.IssueTick) + " reports=" + order.ReportCount + " leader=" + order.LeaderKey
 					+ " elected=" + (team.Election.Leader ?? "none"));
 				return;
@@ -634,11 +1014,13 @@ namespace OpenRA.Mods.CA.Traits
 						order.NoteReady(now);
 
 					if (TeamLeadCA.PincerPushDue(now, order.IssueTick, Info.TeamLeadGatherMinTicks, Info.TeamLeadPincerGatherMaxTicks, Info.TeamLeadPincerHoldTicks,
-						ready0, ready1, order.FirstReadyTick) && !TeamLeadPushHeld(order, now))
+						ready0, ready1, order.FirstReadyTick) && !TeamLeadPincerThinCollapse(order, now) && !TeamLeadPushHeld(order, now))
 					{
 						order.PushTick = now;
+						TeamLeadAllInPushRecord(order, now);
 						order.PushReason = ready0 && ready1 ? "pincer_ready" : now - order.IssueTick >= Info.TeamLeadPincerGatherMaxTicks ? "pincer_window" : "pincer_hold";
 						DiagnosticTeamEvent("team_push", "seq=" + order.Seq + " why=" + order.PushReason + " age=" + (now - order.IssueTick) + " prongs=" + committed0 + "/" + committed1);
+						TeamLeadPincerRecord("pincer_fired", order, "why=" + order.PushReason + " prongs=" + order.ProngUnits(0) + "/" + committed0 + "," + order.ProngUnits(1) + "/" + committed1);
 						AIUtils.BotDebug("AI ({0}): pincer seq {1} push at {2}: ready {3}/{4}, prongs {5}/{6}", Player.ClientIndex, order.Seq, now, ready0, ready1, committed0, committed1);
 					}
 
@@ -651,6 +1033,7 @@ namespace OpenRA.Mods.CA.Traits
 				&& !TeamLeadPushHeld(order, now))
 			{
 				order.PushTick = now;
+				TeamLeadAllInPushRecord(order, now);
 				order.PushReason = now - order.IssueTick >= Info.TeamLeadGatherMaxTicks ? "window" : "arrived";
 				DiagnosticTeamEvent("team_push", "seq=" + order.Seq + " why=" + order.PushReason + " age=" + (now - order.IssueTick) + " committed=" + committed + " arrived=" + arrived);
 			}
@@ -675,6 +1058,10 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (!order.Extending)
 				DiagnosticTeamEvent("team_push_hold", "seq=" + order.Seq + " arrived=" + units + "/" + value + " bars=" + needUnits + "/" + minValue + " idle=" + teamIdle + " age=" + (now - order.IssueTick));
+
+			// TEAM-GATHER-01 (tl_grace_hold): a held push counts as life of the order, so the no-report grace cannot run out under it.
+			if (TeamLeadGraceHoldOn)
+				order.LastReportTick = now;
 
 			order.HoldPush(now);
 			return true;
@@ -758,21 +1145,42 @@ namespace OpenRA.Mods.CA.Traits
 			if (!TeamLeadOn || !TeamLeadWaveSquad(s))
 				return false;
 
+			// TEAM-GATHER-02 c3 (gt_bounded_retarget): a squad of a pushed order is not taken back into a team order and its blob is not dismissed (the closed order has no place
+			// for it): it goes on to the next enemy of the focus seat. With nothing known at all it waits idle (the hunt via order), still not dismissed.
+			var goesOn = s.TeamPushSeq > 0 && TeamLeadKeepsGoing(s);
+			if (goesOn)
+			{
+				// Throttled to once per TeamLeadGoOnTicks per squad: with a skip active and nothing visible the pick scans every actor (TeamLeadNearestEnemyExcept), so the cost
+				// is one scan per pushed idle squad per interval, never per tick.
+				if (!TeamLeadCA.GoOnDue(World.WorldTick, s.TeamGoOnTick, Info.TeamLeadGoOnTicks))
+					return false;
+
+				s.TeamGoOnTick = World.WorldTick;
+				if (TeamLeadGoOn(s, s.Units[0].Actor))
+				{
+					DiagnosticSquadEvent(s, "team_goon", reason: "seq=" + s.TeamPushSeq);
+					s.FuzzyStateMachine.ChangeState(s, new GroundUnitsAttackMoveStateCA(), false);
+					return true;
+				}
+			}
+
 			var now = World.WorldTick;
 			var order = TeamLeadOpenOrder();
-			if (order == null && teamLeadIsLeader)
+			// A pushed squad with nothing known to attack may still join an order that is open, but it never issues a new rally from the leader (CM: no re-issue at home).
+			if (order == null && teamLeadIsLeader && !goesOn)
 				order = TeamLeadTryIssue(s, now);
 
 			if (order != null)
 			{
 				DiagnosticSquadEvent(s, "team_join", reason: teamLeadIsLeader ? "leader" : "follower");
+				s.TeamPushSeq = 0;
 				s.FuzzyStateMachine.ChangeState(s, new TeamLeadGatherStateCA(order), false);
 				if (order.HasProngs)
 					DiagnosticSquadEvent(s, "team_prong", reason: "prong=" + order.ProngOrNone(s) + (order.PincerCollapsed ? " collapsed" : ""));
 				return true;
 			}
 
-			if (teamLeadIsLeader)
+			if (teamLeadIsLeader || goesOn)
 				return false;
 
 			DiagnosticSquadEvent(s, "team_hold");
@@ -819,6 +1227,15 @@ namespace OpenRA.Mods.CA.Traits
 			if (teamLeadTeam == null || s.Units.Count < Info.TeamLeadLeaderMinUnits)
 				return null;
 
+			// TEAM-GATHER-02 c2 (tl_issue_floor): a leader squad below WAVE-MIN issues an order only when the team joinable army reaches WAVE-MIN, else nothing is issued.
+			if (TeamLeadIssueFloorOn && WaveMinActive)
+			{
+				var (minUnits, minValue) = WaveMinBars();
+				var pool = teamLeadTeam.Pool(now, Info.TeamLeadPoolMaxAgeTicks);
+				if (!TeamLeadCA.LeaderMayIssue(s.Units.Count, SquadValueOf(s), pool.Units, pool.Value, minUnits, minValue))
+					return null;
+			}
+
 			var from = s.CenterPosition;
 			WPos target;
 			uint targetId;
@@ -847,14 +1264,19 @@ namespace OpenRA.Mods.CA.Traits
 			var radiusSquared = (long)WDist.FromCells(Info.TeamLeadArriveCells).LengthSquared;
 			var rally = TeamLeadRallyOf(squad, order);
 			var near = squad.Units.Count(u => (u.Actor.CenterPosition - rally).HorizontalLengthSquared <= radiusSquared);
-			order.Report(squad, SquadValueOf(squad), near * 100 >= squad.Units.Count * Info.TeamLeadArrivePercent, squad.Units.Count);
+			// TEAM-GATHER-02 c2 (tl_join_merge): arrival per unit, so units merged in at home do not undo the arrival of the units already at the rally.
+			order.Report(squad, SquadValueOf(squad), near * 100 >= squad.Units.Count * Info.TeamLeadArrivePercent, squad.Units.Count, TeamLeadJoinMergeOn ? near : -1);
 			order.LastReportTick = World.WorldTick;
 		}
 
 		// TEAM-BLOB-01 telemetry: a gathering squad fights what it meets (and leaves the order); a pushed one goes for the target.
 		internal void TeamLeadNoteContact(SquadCA squad, TeamLeadOrder order) => DiagnosticSquadEvent(squad, "team_contact", "seq=" + order.Seq + " pushed=" + order.Pushed);
 
-		internal void TeamLeadNoteGo(SquadCA squad, TeamLeadOrder order) => DiagnosticSquadEvent(squad, "team_go", "seq=" + order.Seq + " why=" + order.PushReason);
+		internal void TeamLeadNoteGo(SquadCA squad, TeamLeadOrder order)
+		{
+			squad.TeamPushSeq = order.Seq;
+			DiagnosticSquadEvent(squad, "team_go", "seq=" + order.Seq + " why=" + order.PushReason);
+		}
 
 		/// <summary>The order is gone or the squad cannot follow it: a follower returns its units to the pool, the leader's squad plays on as before.</summary>
 		internal void TeamLeadAbandon(SquadCA squad, string why = null)

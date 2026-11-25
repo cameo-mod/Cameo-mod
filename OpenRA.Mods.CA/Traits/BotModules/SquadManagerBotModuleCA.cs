@@ -422,6 +422,13 @@ namespace OpenRA.Mods.CA.Traits
 			"Off until the increment A/B (switch group J_rolemix_production); a mix without the flag is inert data.")]
 		public readonly bool UseRoleMix = false;
 
+		[Desc("UNIT-MIX-01 (USER 11-24): the minimum percent of the army VALUE this personality keeps in infantry once a barracks exists (the unit builder serves the infantry queue first below it).",
+			"Used only with UnitMixCategoryFloor on the unit builder; row um_category_floor.")]
+		public readonly int UnitMixInfantryFloorPct = 20;
+
+		[Desc("UNIT-MIX-01: the minimum percent of the army VALUE this personality keeps in aircraft once an airfield exists.")]
+		public readonly int UnitMixAircraftFloorPct = 10;
+
 		[Desc("CA-3 (12.5): max ticks a ready attack force waits for the idle pool to cover every role in StageRequiredRoles before launching anyway. 0 disables the composition gate.")]
 		public readonly int StageCompositionTicks = 0;
 
@@ -641,6 +648,12 @@ namespace OpenRA.Mods.CA.Traits
 			"never walks into a known defence's reach; kites back (a Move, not an AttackMove) from hostile units it outranges; and an escort",
 			"squad is cut from the assault even when the faction has no FireSupportTypes. Off = the pre-ARTY-01 artillery state, byte for byte.")]
 		public readonly bool ArtyMicroEnabled = false;
+
+		[Desc("ARTY-TARGET-01 (USER P0): a sub-switch of ArtyMicroEnabled. Artillery attacks a seen or remembered defence first, then another structure, near its anchor (ArtyAssaultScanCells); a unit is attacked only when it threatens the artillery, or when no structure is known. Row arty_struct_first. Off = the ARTY-01 behaviour.")]
+		public readonly bool ArtyStructFirstEnabled = false;
+
+		[Desc("ARTY-TARGET-01 (c2): the radius around an artillery squad's anchor in which the structure-first switch looks for a defence or structure to assault (seen or remembered).")]
+		public readonly int ArtyAssaultScanCells = 40;
 
 		[Desc("ARTY-01: cells inside the artillery unit's maximum range it stands off from its target.")]
 		public readonly int ArtyRangeMarginCells = 1;
@@ -1817,6 +1830,20 @@ namespace OpenRA.Mods.CA.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			// PERF-F1: the shared enemy lists live for exactly this call.
+			BeginEnemyScanPass();
+			try
+			{
+				BotTickBody(bot);
+			}
+			finally
+			{
+				EndEnemyScanPass();
+			}
+		}
+
+		void BotTickBody(IBot bot)
+		{
 			// LC4: the BotLimits cached in TraitEnabled can predate the tier condition (BotLimitsResolver). A corrected
 			// tier also corrects the initial attack delay; it only ever lengthens the wait already scheduled.
 			if (!limitsRechecked)
@@ -1916,13 +1943,11 @@ namespace OpenRA.Mods.CA.Traits
 
 		internal Actor FindClosestEnemy(Actor sourceActor, SquadCA owner = null)
 		{
-			var units = World.Actors.Where(IsPreferredEnemyUnit).ToList();
+			// PERF-F1: the world scan, fog filter and main-target preference come from the per-tick shared list (read only here).
 			var mainTarget = EffectiveMainTarget();
-
-			units = FilterHiddenUnderFog(units, FoggedScans, IsNotHiddenUnit);
-			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
+			var units = EnemyCandidates(mainTarget);
 			units = PreferSquadTargets(units, owner, TagsOf);
-			var visible = units.Where(IsNotHiddenUnit).ToList();
+			var visible = VisibleOfCandidates(units);
 
 			// CA F2p2 (A5-1): visible enemy buildings first; only the already-observed candidates are re-ordered.
 			if (Info.PreferBuildingTargets)
@@ -1947,13 +1972,12 @@ namespace OpenRA.Mods.CA.Traits
 		// candidate fails the gate the squad holds instead of suiciding.
 		internal Actor FindClosestEnemy(Actor sourceActor, int attackerValue, SquadCA owner = null)
 		{
-			var units = World.Actors.Where(IsPreferredEnemyUnit).ToList();
 			var mainTarget = EffectiveMainTarget();
-
-			units = FilterHiddenUnderFog(units, FoggedScans, IsNotHiddenUnit);
-			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
+			var units = EnemyCandidates(mainTarget);
 			units = PreferSquadTargets(units, owner, TagsOf);
-			units.RemoveAll(u => !PassesRiskGate(u.Location, attackerValue));
+
+			// PERF-F1: a new list; the shared one is never modified in place.
+			units = WithoutRiskyTargets(units, attackerValue);
 			var visible = units.Where(IsNotHiddenUnit).ToList();
 
 			var picked = FoggedScans
@@ -1972,9 +1996,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (targetPlayer == null)
 				return null;
 
-			var units = World.Actors
-				.Where(a => a.Owner == targetPlayer && IsPreferredEnemyUnit(a))
-				.ToList();
+			var units = EnemyUnitsOf(targetPlayer);
 
 			units = FilterHiddenUnderFog(units, FoggedScans, IsNotHiddenUnit);
 			units = PreferSquadTargets(units, owner, TagsOf);
@@ -1992,12 +2014,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		internal Actor FindHighValueTarget(WPos pos)
 		{
-			var units = World.Actors.Where(IsHighValueTarget).ToList();
-			if (FoggedScans)
-				units = units.Where(IsNotHiddenUnit).ToList();
-
-			var mainTarget = EffectiveMainTarget();
-			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
+			var units = HighValueCandidates(EffectiveMainTarget());
 			var picked = units.RandomOrDefault(BotRng.For(Player, nameof(SquadManagerBotModuleCA)));
 			CanaryObserved(picked, "find-hv-target");
 			return picked;
@@ -2005,13 +2022,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		internal Actor FindHighValueTarget(WPos pos, int attackerValue)
 		{
-			var units = World.Actors.Where(IsHighValueTarget).ToList();
-			if (FoggedScans)
-				units = units.Where(IsNotHiddenUnit).ToList();
-
-			var mainTarget = EffectiveMainTarget();
-			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
-			units.RemoveAll(u => !PassesRiskGate(u.Location, attackerValue));
+			var units = HighValueCandidates(EffectiveMainTarget());
+			units = WithoutRiskyTargets(units, attackerValue);
 			var picked = units.RandomOrDefault(BotRng.For(Player, nameof(SquadManagerBotModuleCA)));
 			CanaryObserved(picked, "find-hv-target");
 			return picked;
@@ -3087,6 +3099,7 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			var ret = new SquadCA(bot, this, type, target);
 			ret.PriorityTags = PriorityTagsFor(type);
+			ret.FormedTick = World.WorldTick;
 			Squads.Add(ret);
 			if (type is SquadCAType.Rush or SquadCAType.Harass or SquadCAType.Guerrilla
 				or SquadCAType.Air or SquadCAType.Naval or SquadCAType.Fighter
@@ -3288,6 +3301,9 @@ namespace OpenRA.Mods.CA.Traits
 			// It runs BEFORE any attack launch (USER 2026-11-23: helping own or allied units always comes first, and ignores the wave minimum).
 			DefendAllyTick(bot);
 
+			// V07 tl_defend_team: every teammate answers the team alarm of an attacked ally (free of work with the switch off).
+			TeamDefendTick(bot);
+
 			var urgentDispatched = Info.AttackLivenessEnabled && TryM13UrgentAttack(bot);
 			if (!urgentDispatched && --minAttackForceDelayTicks <= 0)
 			{
@@ -3485,6 +3501,11 @@ namespace OpenRA.Mods.CA.Traits
 				: World.Map.CellContaining(m13CandidateTarget.CenterPosition);
 			roster.RemoveAll(u => !AIUtils.PathExist(u.Actor, targetCell,
 				m13CandidateTarget, BlockedByActor.Immovable));
+
+			// TEAM-GATHER-01 (tl_route_all): with a team order open the liveness wave does not launch alone; its units stay in the pool and join the order
+			// (CreateAttackForce, which the caller runs next when nothing was dispatched, forms their squad for it).
+			if (TeamLeadRoutesLaunch())
+				return false;
 
 			// BLOB-LAUNCH-01 attack gate (USER 11-24: no attack below WAVE-MIN): the liveness wave holds below BlobLaunch01CA.MinUnits.
 			if (BlobAttackGateHolds(roster.Count))
@@ -4267,6 +4288,10 @@ namespace OpenRA.Mods.CA.Traits
 					DiagnosticSquadEvent(attackForce, "agg_launch", reason: AggTeamPushActive(World.WorldTick) ? "push" : "excess");
 				}
 
+				// TEAM-GATHER-02 (tl_join_at_form): a wave squad formed while a team order is open joins it now, before ally defence (or anything else) can take it.
+				if (TeamLeadJoinAtFormOn && attackForce.IsValid && TeamLeadOpenOrder() != null)
+					TeamLeadPrepare(attackForce);
+
 				foreach (var n in notifyIdleBaseUnits)
 					n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
 
@@ -4486,6 +4511,9 @@ namespace OpenRA.Mods.CA.Traits
 					n.UpdatedDefenseCenter(e.Attacker.Location);
 
 				ProtectOwn(e.Attacker);
+
+				// V07 tl_defend_team: the victim's own side raises the team alarm even when none of its idle units stands near (throttled; free with the switch off).
+				TeamDefendRaiseOwn(self);
 			}
 		}
 

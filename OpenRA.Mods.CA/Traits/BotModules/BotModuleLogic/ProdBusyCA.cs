@@ -39,5 +39,19 @@ namespace OpenRA.Mods.CA.Traits
 
 		// PROD-BUSY-03b: the idle-unit limit: the tier value while the switch is on and the tier sets one (>= 0), else the module's.
 		public static int IdleLimit(bool tiered, int tierValue, int moduleValue) => tiered && tierValue >= 0 ? tierValue : moduleValue;
+
+		// PROD-FIX-01 F-A: the production reserve P of a unit order; 0 while the switch is on (a negative value is the unset sentinel and stays closed).
+		public static int UnitReserveLine(bool exclUpgrades, int line) => exclUpgrades && line >= 0 ? 0 : line;
+
+		// PROD-FIX-01 F-B: the sweep cursor one step on (the loop pre-increments, so the first category visited moves every pass).
+		public static int RotateStart(int index, int length) => length <= 0 ? 0 : (index + 1) % length;
+
+		// PROD-FIX-01 F-B: the bank the saturation verdict reads: the bank left after this pass's orders when the switch is on and a batch exists.
+		public static long SaturationBank(bool consistent, long liveBank, int? batchBankLeft) =>
+			consistent && batchBankLeft.HasValue ? batchBankLeft.Value : liveBank;
+
+		// PROD-FIX-01 F-D: how much an interval timer drops at this visit: the game ticks since the last visit (at least 1), else one per visit.
+		public static int IntervalStep(bool elapsed, int lastTick, int nowTick) =>
+			elapsed && lastTick >= 0 ? System.Math.Max(1, nowTick - lastTick) : 1;
 	}
 }

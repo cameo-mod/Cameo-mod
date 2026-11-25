@@ -109,7 +109,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			// STALEMATE-01 finish mode (switch ON only, late game): nothing visible and nothing remembered - hunt the least recently
 			// visited unseen grid cell the leader can reach instead of holding (a seat with no known building must still be found).
-			if (owner.SquadManager.FinishModeActive && Stalemate01CA.Hunts(owner.Type))
+			if (owner.SquadManager.FinishModeActive && Stalemate01CA.Hunts(owner.Type) && !owner.SquadManager.TeamLeadHuntsViaOrder(owner))
 			{
 				var cell = owner.SquadManager.FinishHuntCell(owner.Units.First().Actor);
 				if (cell != null)
@@ -570,7 +570,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				(leader.Actor.Location - owner.HuntCell.Value).LengthSquared, owner.SquadManager.Info.FinishHuntArriveCells)
 				&& !FindNewTarget(owner))
 			{
-				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), false);
+				// TEAM-GATHER-02 (tl_hunt_via_order): the blob's hunt cell is reached and nothing is in view: back to idle, where the team pass takes the next order.
+				owner.FuzzyStateMachine.ChangeState(owner, owner.SquadManager.TeamLeadHuntsViaOrder(owner) ? (IState)new GroundUnitsIdleStateCA() : new GroundUnitsFleeStateCA(), false);
 				return;
 			}
 
@@ -587,13 +588,36 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				}
 				else if (owner.Type != SquadCAType.Harass || owner.IsTargetValid)
 				{
-					var targetActor = owner.SquadManager.FindClosestEnemy(leader.Actor, owner);
-					if (targetActor != null)
-						owner.TargetActor = targetActor;
+					// TEAM-GATHER-02 (gt_bounded_retarget): a team Rush squad that lost its target looks for the next enemy only around its fight; with none there it goes back
+					// to idle, where the team pass re-joins the open order or stands it down, instead of marching alone to the nearest enemy anywhere.
+					var bounded = owner.SquadManager.TeamLeadBoundsRetarget(owner);
+					if (owner.SquadManager.TeamLeadKeepsGoing(owner))
+					{
+						// TEAM-GATHER-02 c2/c3: the pushed blob keeps going: the next enemy of the focus seat (a remembered building of it when none is visible). With nothing known at
+						// all it stands idle (the hunt via order / the team pass), it never flees.
+						if (!owner.SquadManager.TeamLeadGoOn(owner, leader.Actor))
+						{
+							owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);
+							return;
+						}
+					}
 					else
 					{
-						owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), false);
-						return;
+						var targetActor = bounded
+							? owner.SquadManager.FindClosestEnemy(leader.Actor, WDist.FromCells(owner.SquadManager.Info.AttackScanRadius), owner)
+							: owner.SquadManager.FindClosestEnemy(leader.Actor, owner);
+						if (targetActor != null)
+							owner.TargetActor = targetActor;
+						else if (bounded)
+						{
+							owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);
+							return;
+						}
+						else
+						{
+							owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), false);
+							return;
+						}
 					}
 				}
 			}
@@ -1301,6 +1325,31 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (!owner.IsValid)
 				return;
 
+			// TEAM-GATHER-02 (gt_bounded_retarget): a team Rush squad whose target is gone fights on only around its leader, else goes back to idle (see the AttackMove state).
+			if (!owner.IsTargetValid && owner.SquadManager.TeamLeadBoundsRetarget(owner))
+			{
+				var near = owner.SquadManager.FindClosestEnemy(owner.Units[0].Actor, WDist.FromCells(owner.SquadManager.Info.AttackScanRadius), owner);
+				if (near != null)
+				{
+					owner.TargetActor = near;
+					return;
+				}
+
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);
+				return;
+			}
+
+			// TEAM-GATHER-02 c2/c3 (gt_bounded_retarget): the pushed blob keeps going: the next enemy of the order focus seat, until that seat is dead.
+			if (!owner.IsTargetValid && owner.SquadManager.TeamLeadKeepsGoing(owner))
+			{
+				if (owner.SquadManager.TeamLeadGoOn(owner, owner.Units[0].Actor))
+					return;
+
+				// Nothing known at all (visible or remembered): stand idle, the team pass or the hunt via order takes over; the blob never flees.
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);
+				return;
+			}
+
 			if (!owner.IsTargetValid && !FindNewTarget(owner))
 			{
 				// CA F2p2 (2bad89a77): rather than fleeing, take an opportunity target near the leader, else resume AttackMove.
@@ -1338,8 +1387,21 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// HACK: Drop back to the idle state if we haven't moved in 2.5 seconds
 			// This works around the squad being stuck trying to attack-move to a location
 			// that they cannot path to, generating expensive pathfinding calls each tick.
-			if (owner.World.WorldTick > lastUpdatedTick + (owner.SquadManager.Info.UseUpstreamStateTweaks ? 100 : 63)) // CA F2p2 (9a68fea15)
+			// TEAM-GATHER-02 c5: a pushed blob in which any unit is actually attacking is not stuck: its stuck clock restarts, so a real siege is not cut off by the siege cap.
+			if (owner.World.WorldTick > lastUpdatedTick + 63 && owner.SquadManager.TeamLeadKeepsGoing(owner) && owner.Units.Any(u => IsAttackingAndTryAttack(u.Actor).IsFiring))
+				lastUpdatedTick = owner.World.WorldTick;
+
+			// TEAM-GATHER-02 c3/c4: a pushed blob sieging its target (inside the scan radius of it) does not move and is not stuck, for at most TeamLeadSiegeMaxTicks; then it
+			// skips that target and takes the next enemy of the focus seat.
+			if (owner.World.WorldTick > lastUpdatedTick + (owner.SquadManager.Info.UseUpstreamStateTweaks ? 100 : 63) // CA F2p2 (9a68fea15)
+				&& !owner.SquadManager.TeamLeadSieging(owner, owner.World.WorldTick - lastUpdatedTick))
 			{
+				if (owner.SquadManager.TeamLeadStuckRetarget(owner, leader))
+				{
+					lastUpdatedTick = owner.World.WorldTick;
+					return;
+				}
+
 				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), true);
 				return;
 			}
@@ -1887,6 +1949,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		readonly List<ArtyCandidate> candidates = [];
 		readonly List<Actor> candidateActors = [];
 		readonly List<ArtyDefence> defences = [];
+		readonly List<ArtyCandidate> structures = []; // ARTY-TARGET-01 (c2): seen or remembered structures near the anchor
+		readonly List<Actor> structureActors = []; // the actor behind each structure, null when only remembered
+		readonly List<ArtyDefence> assaultDefences = []; // the armed ones among structures (their reach covers the firing points)
+		bool structuresGathered; // c3: the structure scan runs at most once per squad per think, shared by its units
 
 		// ARTY-01: each unit decides for itself, at most once per ArtyOrderCooldownTicks. Priority per unit:
 		// kite from a hostile unit it outranges, back off a defence that reaches it, attack the best target in range
@@ -1903,6 +1969,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var threatRadius = WDist.FromCells(info.ArtyThreatRadiusCells).Length;
 			var maxStep = WDist.FromCells(info.ArtyMaxStepCells).Length;
 
+			structuresGathered = false;
 			if (memory.Count > owner.Units.Count * 2 + 8)
 				memory.Clear();
 
@@ -1945,7 +2012,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				}
 
 				// 3. Attack the best target in range.
-				var pick = ArtyMicroCA.PickTarget(pos, rangeLen, candidates);
+				var pick = ArtyMicroCA.PickTarget(pos, rangeLen, candidates, manager.ArtyStructFirstActive);
 				if (pick >= 0)
 				{
 					var target = candidateActors[pick];
@@ -1962,7 +2029,17 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					continue;
 				}
 
-				// 4. Nothing visible in range: the squad target (possibly a remembered building) when it is in range, else approach it.
+				// 4. Nothing in range to shoot now. ARTY-TARGET-01 (c2): with the structure-first switch the artillery aims at structures - a seen or
+				// remembered defence first, then another structure, near its anchor - and a unit squad target is taken only when no structure is known.
+				var targetIsUnit = owner.Target.Type == TargetType.Actor && owner.Target.Actor != null && !owner.Target.Actor.Info.HasTraitInfo<BuildingInfo>();
+				if (manager.ArtyStructFirstActive && (targetIsUnit || !owner.Target.IsValidFor(unit))
+					&& TryStructuralAssault(owner, unit, pos, anchor, rangeLen, rangeMargin, defenceMargin, ref mem))
+				{
+					memory[unit.ActorID] = mem;
+					continue;
+				}
+
+				// The squad target (possibly a remembered building) when it is in range, else approach it.
 				if (!owner.Target.IsValidFor(unit))
 				{
 					LegacyUnitOrder(owner, u, anchor);
@@ -2044,6 +2121,90 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					continue;
 
 				defences.Add(new ArtyDefence(fa.CenterPosition, BotUnitProfiles.Get(rules, fa.Info).MaxRange.Length));
+			}
+		}
+
+		// ARTY-TARGET-01 (c2): the structure-first aim. Attacks the nearest structure in range, or moves to its firing point (stand-off at max range,
+		// never into a known defence's reach). Returns false only when no structure is seen or remembered near the anchor: the caller then falls back.
+		bool TryStructuralAssault(SquadCA owner, Actor unit, WPos pos, WPos anchor, int rangeLen, int rangeMargin, int defenceMargin, ref ArtyMemory mem)
+		{
+			if (!structuresGathered)
+			{
+				GatherStructures(owner, anchor);
+				structuresGathered = true;
+			}
+
+			// c4: a remembered-only structure in range has no live target to fire at, so it is skipped and the next known structure is taken.
+			var pick = ArtyMicroCA.PickStructure(anchor, structures, i => structureActors[i] != null || (structures[i].Pos - pos).HorizontalLengthSquared > (long)rangeLen * rangeLen);
+			if (pick < 0)
+				return false;
+
+			var targetPos = structures[pick].Pos;
+			if ((targetPos - pos).HorizontalLengthSquared <= (long)rangeLen * rangeLen)
+			{
+				var actor = structureActors[pick];
+				if (actor == null)
+					return false; // unreachable after the c4 filter above; kept as a guard
+
+				if (mem.LastAttackId == actor.ActorID && BusyAttack(unit))
+					return true; // already firing at it
+
+				if (owner.SquadManager.TryConsumeMicroActions())
+				{
+					owner.Bot.QueueOrder(new Order("Attack", unit, Target.FromActor(actor), false));
+					mem.LastAttackId = actor.ActorID;
+				}
+
+				return true;
+			}
+
+			var plan = ArtyMicroCA.PlanApproach(pos, targetPos, rangeLen, rangeMargin, assaultDefences, defenceMargin);
+			if (plan.Kind == ArtyApproachKind.Move && owner.SquadManager.TryConsumeMicroActions())
+			{
+				owner.Bot.QueueOrder(new Order("Move", unit, Target.FromPos(plan.Point), false));
+				mem.LastAttackId = 0;
+			}
+
+			return true; // Hold or Blocked: the unit stays where it is
+		}
+
+		// Fills structures (seen enemy buildings and remembered ones) and defences (armed ones among them) within ArtyAssaultScanCells of the anchor. Walls are not targets.
+		void GatherStructures(SquadCA owner, WPos anchor)
+		{
+			structures.Clear();
+			structureActors.Clear();
+			assaultDefences.Clear();
+
+			var manager = owner.SquadManager;
+			var rules = owner.World.Map.Rules;
+			var scanLen = WDist.FromCells(manager.Info.ArtyAssaultScanCells);
+			foreach (var e in owner.World.FindActorsInCircle(anchor, scanLen))
+			{
+				if (!e.Info.HasTraitInfo<BuildingInfo>() || !manager.IsPreferredObservedEnemyUnit(e) || e.GetEnabledTargetTypes().Overlaps(WallTargetType))
+					continue;
+
+				var armed = e.Info.HasTraitInfo<AttackBaseInfo>();
+				structures.Add(new ArtyCandidate(e.ActorID, e.CenterPosition, armed ? ArtyKind.Defence : ArtyKind.Structure, false));
+				structureActors.Add(e);
+				if (armed)
+					assaultDefences.Add(new ArtyDefence(e.CenterPosition, BotUnitProfiles.Get(rules, e.Info).MaxRange.Length));
+			}
+
+			var layer = manager.Player.FrozenActorLayer;
+			if (layer == null)
+				return;
+
+			foreach (var fa in layer.FrozenActorsInCircle(owner.World, anchor, scanLen))
+			{
+				if (!fa.IsValid || fa.Hidden || fa.Owner == null || (fa.Actor != null && fa.Actor.IsInWorld && manager.IsNotHiddenUnit(fa.Actor))
+					|| manager.Player.RelationshipWith(fa.Owner) != PlayerRelationship.Enemy || !fa.Info.HasTraitInfo<BuildingInfo>() || fa.TargetTypes.Overlaps(WallTargetType))
+					continue;
+
+				var armed = fa.Info.HasTraitInfo<AttackBaseInfo>();
+				structures.Add(new ArtyCandidate(0, fa.CenterPosition, armed ? ArtyKind.Defence : ArtyKind.Structure, false));
+				structureActors.Add(null);
+				if (armed)
+					assaultDefences.Add(new ArtyDefence(fa.CenterPosition, BotUnitProfiles.Get(rules, fa.Info).MaxRange.Length));
 			}
 		}
 

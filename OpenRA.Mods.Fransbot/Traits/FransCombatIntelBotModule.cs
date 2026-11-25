@@ -277,6 +277,8 @@ namespace OpenRA.Mods.Common.Traits
 
 		void Refresh()
 		{
+			// SPIKE-FRANS-01: the one full-world scan of the sensor; a call over the spike limit is logged with the seat and the GC delta (DEV only).
+			using var fransPerfScope = FransBotLog.Profile(world, player, "FransCombatIntel.Refresh");
 			var visible = new List<Actor>();
 			var enemies = new List<Actor>();
 			var owned = new List<Actor>();

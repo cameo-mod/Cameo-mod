@@ -46,7 +46,9 @@ namespace OpenRA.Mods.Common.Traits
 		public const string BuildId = "FB-1.29.48-211D3D16F2BF";
 		public const string SourceFingerprint = "FransAirCommanderBotModule.cs=2B55FE560E9B;FransBaseBuilderBotModule.cs=31046C08645E;FransCombatIntelBotModule.cs=AFC796BC0D6E;FransCommandBidBotModule.cs=4FC9147C7437;FransCommanderCoreBotModule.cs=AAA9E2E3361D;FransDefenseCommanderBotModule.cs=3CE547EAABE0;FransEconomicSaturationBotModule.cs=D691F1E25785;FransGeneralBotModule.cs=1B6D83DC4575;FransGroundCommanderBotModule.cs=753AC9699729;FransGroundDefendForcePreservationGuard.cs=682FA494F825;FransGroundTransferBotModule.cs=DED97319453A;FransHarvesterBotModule.cs=FEA42B2A7A87;FransMcvExpansionManagerBotModule.cs=DA260CE420B1;FransMineClusterBotModule.cs=205CE05C1136;FransMinelayerBotModule.cs=E6829A2DC18B;FransRiskModelBotModule.cs=E58583E4E7E3;FransSeaCommanderBotModule.cs=F4DAA52DA3D3;FransSpecOpsCommanderBotModule.cs=D370BB8324F3;FransStrategicMapBotModule.cs=8F3428541228;FransSupplyTruckBotModule.cs=AB42C945CCDF;FransSupportCoordinatorBotModule.cs=DAB05F2ADA8D;FransSupportPowerBotModule.cs=6F310B0C773C;FransTransportCommanderBotModule.cs=348CEE906AEE;FransUnitBuilderBotModule.cs=435C109BE053;RoutineLandNegativeUnionPolicy.cs=CC0A31B7EA8E;fransbot-personalities.yaml=1512B5A93C36";
 
-		const double ImmediateSpikeMilliseconds = 10.0;
+		// SPIKE-FRANS-01: a module/step spike is logged only above this (was 10 ms); DEV only.
+		public const double SpikeLogMilliseconds = 50.0;
+		const double ImmediateSpikeMilliseconds = SpikeLogMilliseconds;
 		const double WorldTickGapMilliseconds = 60.0;
 		const double CountAsSlowMilliseconds = 2.0;
 		const int PerfSummaryIntervalWorldTicks = 250;
@@ -70,12 +72,49 @@ namespace OpenRA.Mods.Common.Traits
 			public readonly Dictionary<string, string> Context = [];
 		}
 
+		/// <summary>
+		/// SPIKE-FRANS-01, DEV only: a snapshot of the GC counters, so a spike line says whether the garbage collector ran inside the
+		/// timed span (collections per generation and the total GC pause). In a release build it is empty and costs nothing.
+		/// </summary>
+		public readonly struct GcMark
+		{
+#if CAMEO_DEV_LOGGING
+			readonly long pauseTicks;
+			readonly int gen0;
+			readonly int gen1;
+			readonly int gen2;
+
+			GcMark(long pauseTicks, int gen0, int gen1, int gen2)
+			{
+				this.pauseTicks = pauseTicks;
+				this.gen0 = gen0;
+				this.gen1 = gen1;
+				this.gen2 = gen2;
+			}
+
+			public static GcMark Now() => new(GC.GetTotalPauseDuration().Ticks, GC.CollectionCount(0), GC.CollectionCount(1), GC.CollectionCount(2));
+
+			/// <summary>Collections and GC pause since the mark, as "gc[g0+a g1+b g2+c pause=X ms]".</summary>
+			public string Since()
+			{
+				var now = Now();
+				return string.Format(System.Globalization.CultureInfo.InvariantCulture, "gc[g0+{0} g1+{1} g2+{2} pause={3:0.0} ms]",
+					now.gen0 - gen0, now.gen1 - gen1, now.gen2 - gen2, TimeSpan.FromTicks(now.pauseTicks - pauseTicks).TotalMilliseconds);
+			}
+#else
+			public static GcMark Now() => default;
+
+			public string Since() => string.Empty;
+#endif
+		}
+
 		public readonly struct PerfScope : IDisposable
 		{
 			readonly World world;
 			readonly Player player;
 			readonly string label;
 			readonly long startTimestamp;
+			readonly GcMark gcMark;
 
 			internal PerfScope(World world, Player player, string label)
 			{
@@ -83,6 +122,7 @@ namespace OpenRA.Mods.Common.Traits
 				this.player = player;
 				this.label = label;
 				startTimestamp = Stopwatch.GetTimestamp();
+				gcMark = GcMark.Now();
 			}
 
 			public void Dispose()
@@ -90,7 +130,7 @@ namespace OpenRA.Mods.Common.Traits
 				if (world == null || label == null)
 					return;
 
-				RecordPerf(world, player, label, Stopwatch.GetTimestamp() - startTimestamp);
+				RecordPerf(world, player, label, Stopwatch.GetTimestamp() - startTimestamp, gcMark);
 			}
 		}
 
@@ -163,10 +203,15 @@ namespace OpenRA.Mods.Common.Traits
 
 		public static PerfScope Profile(World world, Player player, string label)
 		{
+#if CAMEO_DEV_LOGGING
 			return new PerfScope(world, player, label);
+#else
+			// SPIKE-FRANS-01: the profiler is a DEV diagnostic; a release build takes no timestamps and keeps no aggregates.
+			return default;
+#endif
 		}
 
-		static void RecordPerf(World world, Player player, string label, long elapsedTimestampTicks)
+		static void RecordPerf(World world, Player player, string label, long elapsedTimestampTicks, GcMark gcMark)
 		{
 			try
 			{
@@ -189,8 +234,9 @@ namespace OpenRA.Mods.Common.Traits
 				if (elapsedMs >= ImmediateSpikeMilliseconds)
 				{
 #if CAMEO_DEV_LOGGING
+					// SPIKE-FRANS-01: every AI prints as "Hard AI 0 (0)" (one shared client), so the seat is its internal name and actor id.
 					OpenRA.Log.Write("debug",
-						$"[FRANS-PERF-SPIKE][WT {world.WorldTick}] {player} {label} = {elapsedMs:0.00} ms");
+						$"[FRANS-PERF-SPIKE][WT {world.WorldTick}] seat={player?.InternalName}#{player?.PlayerActor?.ActorID} {label} = {elapsedMs:0.00} ms {gcMark.Since()}");
 #endif
 				}
 			}

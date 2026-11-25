@@ -577,9 +577,10 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			// The root cause of the doubled events: one category in both sets means two managers over one queue.
 			var yaml = File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "tools", "tests", "fixtures", "mcv_deploy_ai.yaml")).Replace("\r\n", "\n");
-			var building = yaml.Split('\n').Single(l => l.Trim().StartsWith("BuildingQueues: Building, RABuilding", StringComparison.Ordinal))
+			// CLASSIC-FREEZE-01: the @classic builder copy repeats the same lists; Distinct() + Single() also asserts both copies agree.
+			var building = yaml.Split('\n').Select(l => l.Trim()).Distinct().Single(l => l.Trim().StartsWith("BuildingQueues: Building, RABuilding", StringComparison.Ordinal))
 				.Split(':')[1].Split(',').Select(s => s.Trim()).ToList();
-			var defense = yaml.Split('\n').Single(l => l.Trim().StartsWith("DefenseQueues: Defence, RADefence", StringComparison.Ordinal))
+			var defense = yaml.Split('\n').Select(l => l.Trim()).Distinct().Single(l => l.Trim().StartsWith("DefenseQueues: Defence, RADefence", StringComparison.Ordinal))
 				.Split(':')[1].Split(',').Select(s => s.Trim()).ToList();
 			Assert.That(building, Does.Contain("BuildingAddons"));
 			Assert.That(defense, Does.Contain("BuildingAddons"));

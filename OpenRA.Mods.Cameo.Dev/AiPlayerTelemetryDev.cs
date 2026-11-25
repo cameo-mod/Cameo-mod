@@ -909,7 +909,8 @@ namespace OpenRA.Mods.Cameo.Traits
 						{
 							var names = queue.BuildableItems().Select(bi => bi.Name).ToArray();
 							var capped = false;
-							if (names.Length > 0 && !reserved && !belowFloor && !saturated)
+							var gateOrder = info.IdleReasonGateOrder && !AblationGate.Off(seat.Player, AblationIds.TelemetryIdleReasonOrder);
+							if (names.Length > 0 && !reserved && !belowFloor && (gateOrder || !saturated))
 							{
 								owned ??= CountOwned(seat);
 								queued ??= CountQueued(seat);
@@ -917,7 +918,7 @@ namespace OpenRA.Mods.Cameo.Traits
 							}
 
 							reason = PlayerTelemetryMath.IdleReason(reserved, belowFloor, saturated,
-								names.Length == 0, capped);
+								names.Length == 0, capped, gateOrder);
 							if (reason == "cash_reserved")
 								reservedBy = voters;
 							break;

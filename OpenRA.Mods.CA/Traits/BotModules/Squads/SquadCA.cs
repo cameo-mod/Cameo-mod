@@ -181,6 +181,19 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			}
 		}
 
+		/// <summary>The tick this squad was registered (TEAM-GATHER-02: ally defence leaves a freshly formed squad to its first team pass).</summary>
+		public int FormedTick = -1;
+
+		/// <summary>The sequence of the team order this squad was pushed with (0 = none; TEAM-GATHER-02 c2: a pushed squad keeps going instead of standing down).</summary>
+		public int TeamPushSeq;
+
+		/// <summary>TEAM-GATHER-02 c4: the target that froze this pushed blob (actor id, 0 = none) and the tick until which the next-enemy pick skips it.</summary>
+		public uint TeamSkipActor;
+		public int TeamSkipUntil;
+
+		/// <summary>TEAM-GATHER-02 c5: the tick of this pushed squad last next-enemy pick from TeamLeadPrepare (throttle).</summary>
+		public int TeamGoOnTick;
+
 		public bool IsValid => Units.Count > 0;
 
 		/// <summary>

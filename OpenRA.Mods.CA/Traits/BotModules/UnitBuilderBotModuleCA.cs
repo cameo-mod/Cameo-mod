@@ -99,8 +99,37 @@ namespace OpenRA.Mods.CA.Traits
 			"Gated by SwitchCondition; row pb_idle_queue_floor.")]
 		public readonly bool IdleQueueFloor = false;
 
+		[Desc("PROD-FIX-01 F-A (AUDIT_PRODUCTION_01): the K5 reserve gate of a unit order leaves the unpaid cost of the UpgradeServiceQueues types",
+			"(upgrades, research, add-ons, promotions) out of the spent bank and does not apply the production reserve P, so units keep being",
+			"built at low cash while upgrades run. Gated by SwitchCondition; row pb_unit_reserve_excl_upgrades.")]
+		public readonly bool UnitReserveExclUpgrades = false;
+
+		[Desc("PROD-FIX-01 F-B (AUDIT_PRODUCTION_01): the category sweep start advances one step every pass, so infantry is not always last.",
+			"Gated by SwitchCondition; row pb_rotate_start.")]
+		public readonly bool RotateStart = false;
+
+		[Desc("PROD-FIX-01 F-B: the bank-saturation verdict of every category visit reads the bank left after this pass's orders, the same value the in-fill",
+			"saturation break reads, not the pass-start snapshot. Gated by SwitchCondition; row pb_sat_batch_consistent.")]
+		public readonly bool SatBatchConsistent = false;
+
+		[Desc("PROD-FIX-01 F-D: UnitIntervals count elapsed game ticks (the world tick delta since the last bot visit) instead of bot visits.",
+			"Gated by SwitchCondition; row pb_interval_elapsed.")]
+		public readonly bool IntervalElapsed = false;
+
+		[Desc("PROD-FIX-01 F-F: the pass-level ProductionMinCashRequirement floor no longer ends the unit pass or the category sweep; an affordable unit is",
+			"still built (the batch bank and the reserve gate still apply). Gated by SwitchCondition; row pb_no_unit_floor.")]
+		public readonly bool NoUnitFloor = false;
+
 		[Desc("INFANTRY-IDLE-01: the queue types the idle floor serves.")]
 		public readonly string[] IdleQueueFloorQueues = { "Infantry", "RAInfantry", "SCZergInfantry" };
+
+		[Desc("UNIT-MIX-01 (USER 11-24, V05: infantry queue busy 9%, aircraft 5%, mostly tanks): the army keeps a minimum VALUE share per category (the squad manager personality sets",
+			"UnitMixInfantryFloorPct 20 and UnitMixAircraftFloorPct 10). Once the queue exists, a category below its floor is served first on every pass and its idle queue takes the best",
+			"buildable unit; the cash, reserve, limit and aircraft-cap gates still apply and no queue waits. Gated by SwitchCondition; row um_category_floor.")]
+		public readonly bool UnitMixCategoryFloor = false;
+
+		[Desc("UNIT-MIX-01: the queue types that make an airfield (aircraft floor); the infantry floor uses IdleQueueFloorQueues.")]
+		public readonly string[] UnitMixAircraftQueues = { "Aircraft", "RAAircraft" };
 
 		[Desc("UPGRADE-QUEUE-01: queue types served by the upgrade service. Each one is served on its own: a queue with nothing buildable, or a busy one, never holds back the next.")]
 		public readonly string[] UpgradeServiceQueues = { "Promotions", "Upgrades", "Research", "Addons" };
@@ -213,6 +242,16 @@ namespace OpenRA.Mods.CA.Traits
 			"suppressed — accepted bound of the experimental slice, not repaired",
 			"recovery. Gated by SwitchCondition.")]
 		public readonly bool BuildIntentTracking = false;
+
+		[Desc("MCV-REBUILD-01: no construction yard, no MCV and none queued starts an MCV at once in any queue that can build one, bypassing share, idle cap, cash floor,",
+			"UnitIntervals and UnitDelays. Gated by SwitchCondition; row mcv_rebuild_first.")]
+		public readonly bool McvRebuildFirst = false;
+
+		[Desc("MCV-REBUILD-01: a failed external build request frees its slot after RequestDropFailedSweepsFast sweeps instead of 250. Gated by SwitchCondition; row pb_request_slot.")]
+		public readonly bool RequestSlotFastDrop = false;
+
+		[Desc("MCV-REBUILD-01: failed sweeps after which a waiting external request is dropped when RequestSlotFastDrop is armed.")]
+		public readonly int RequestDropFailedSweepsFast = 25;
 
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
@@ -487,11 +526,76 @@ namespace OpenRA.Mods.CA.Traits
 
 		// ABLATE-01 hooks (DEV-only provider; absent in release = always on): one cached answer per row.
 		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery, ablateUpgradeService;
+		AblationLatch ablateMcvRebuild, ablateRequestSlot; // MCV-REBUILD-01
+		bool McvRebuildOn => switchesActive && Info.McvRebuildFirst && !ablateMcvRebuild.Off(player, AblationIds.McvRebuildFirst);
+		int RequestDropSweeps => McvRebuildCA.DropLimit(switchesActive && Info.RequestSlotFastDrop && !ablateRequestSlot.Off(player, AblationIds.RequestSlot),
+			RequestDropFailedSweeps, Info.RequestDropFailedSweepsFast);
 
 		// PROD-BUSY-01: one switch and one ablation row each. With both on, every queue is served every pass, so the PR-2 depth horizon
 		// (visitGapTicks = the gap to this bot's next pass) is also the gap to that queue's next service.
-		AblationLatch ablateIdleCap, ablateIdleCapTiered, ablateIdleQueueFloor;
+		AblationLatch ablateIdleCap, ablateIdleCapTiered, ablateIdleQueueFloor, ablateUnitMix;
+
+		// PROD-FIX-01: one switch and one ablation row each.
+		AblationLatch ablateUnitReserve, ablateRotateStart, ablateSatBatch, ablateIntervalElapsed, ablateNoUnitFloor;
+		bool UnitReserveExclOn => switchesActive && Info.UnitReserveExclUpgrades && !ablateUnitReserve.Off(player, AblationIds.ProdFixUnitReserveExclUpgrades);
+		bool RotateStartOn => switchesActive && Info.RotateStart && !ablateRotateStart.Off(player, AblationIds.ProdFixRotateStart);
+		bool SatBatchOn => switchesActive && Info.SatBatchConsistent && !ablateSatBatch.Off(player, AblationIds.ProdFixSatBatchConsistent);
+		bool IntervalElapsedOn => switchesActive && Info.IntervalElapsed && !ablateIntervalElapsed.Off(player, AblationIds.ProdFixIntervalElapsed);
+		bool NoUnitFloorOn => switchesActive && Info.NoUnitFloor && !ablateNoUnitFloor.Off(player, AblationIds.ProdFixNoUnitFloor);
+		int lastIntervalTick = -1;
 		bool IdleQueueFloorOn => switchesActive && Info.IdleQueueFloor && !ablateIdleQueueFloor.Off(player, AblationIds.ProdBusyIdleQueueFloor);
+
+		// UNIT-MIX-01 (um_category_floor): the army keeps a minimum VALUE share in infantry (and aircraft once an airfield exists). The queue types of a category below its floor
+		// are served first on every pass and their idle queue takes the best buildable unit (fair-service pick below). One census per world tick.
+		bool UnitMixOn => switchesActive && Info.UnitMixCategoryFloor && !ablateUnitMix.Off(player, AblationIds.UnitMixCategoryFloor);
+		int unitMixTick = -1;
+		List<string> unitMixDeficitQueues = [];
+		readonly Dictionary<string, UnitMixCategory> unitMixCategoryByName = new(StringComparer.Ordinal);
+
+		UnitMixCategory UnitMixCategoryOf(ActorInfo info)
+		{
+			if (unitMixCategoryByName.TryGetValue(info.Name, out var category))
+				return category;
+
+			// Unarmed units (harvesters, transports), capturers and carrier slaves are not army value.
+			var counts = info.TraitInfos<ArmamentInfo>().Any(arm => arm.WeaponInfo != null) && !info.HasTraitInfo<CapturesInfo>() && !info.HasTraitInfo<CarrierSlaveInfo>();
+			category = !counts ? UnitMixCategory.None
+				: info.HasTraitInfo<AircraftInfo>() ? UnitMixCategory.Aircraft
+				: IsArmedInfantry(info) ? UnitMixCategory.Infantry
+				: info.HasTraitInfo<MobileInfo>() ? UnitMixCategory.Other
+				: UnitMixCategory.None;
+			return unitMixCategoryByName[info.Name] = category;
+		}
+
+		List<string> UnitMixDeficitQueues()
+		{
+			if (unitMixTick == world.WorldTick)
+				return unitMixDeficitQueues;
+
+			unitMixTick = world.WorldTick;
+			unitMixDeficitQueues = [];
+			var infantryQueues = Info.IdleQueueFloorQueues.Where(t => AIUtils.FindQueues(player, t).Any()).ToList();
+			var aircraftQueues = Info.UnitMixAircraftQueues.Where(t => AIUtils.FindQueues(player, t).Any()).ToList();
+			if (infantryQueues.Count == 0 && aircraftQueues.Count == 0)
+				return unitMixDeficitQueues;
+
+			var manager = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().FirstEnabledTraitOrDefault();
+			var census = new Dictionary<UnitMixCategory, long>();
+			foreach (var a in world.ActorsHavingTrait<IPositionable>())
+				if (a.Owner == player && !a.IsDead && a.IsInWorld)
+					UnitMixFloorCA.Add(census, UnitMixCategoryOf(a.Info), a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0);
+
+			// what is already in production counts too, so a queue is not pushed again for units it has on order
+			foreach (var q in world.ActorsHavingTrait<ProductionQueue>().Where(a => a.Owner == player).SelectMany(a => a.TraitsImplementing<ProductionQueue>()))
+				foreach (var item in q.AllQueued())
+					UnitMixFloorCA.Add(census, UnitMixCategoryOf(item.ActorInfo), item.ActorInfo.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0);
+
+			foreach (var category in UnitMixFloorCA.Deficits(census, infantryQueues.Count > 0, manager?.Info.UnitMixInfantryFloorPct ?? 20,
+				aircraftQueues.Count > 0, manager?.Info.UnitMixAircraftFloorPct ?? 10))
+				unitMixDeficitQueues.AddRange(category == UnitMixCategory.Infantry ? infantryQueues : aircraftQueues);
+
+			return unitMixDeficitQueues;
+		}
 		bool IdleCapOn => switchesActive && Info.ShareTestNeverIdles && !ablateIdleCap.Off(player, AblationIds.ProdBusyIdleCap);
 		bool TieredIdleCapOn => switchesActive && Info.TieredIdleCap && !ablateIdleCapTiered.Off(player, AblationIds.ProdBusyIdleCapTiered);
 
@@ -503,6 +607,14 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>PROD-BUSY-03b: idle base units at or over the limit (TEAM-LEAD forced-push trigger).</summary>
 		public bool IdleAtLimit => idleUnitCount >= IdleUnitsLimit;
+
+		// INFANTRY-REJECT-LOG-01 (DEV only): why the infantry queues end a pass idle. Compiled in only with CAMEO_DEV_LOGGING (official builds: constant false, nothing fed).
+		readonly InfantryRejectLogCA infantryRejectLog = new();
+#if CAMEO_DEV_LOGGING
+		bool InfantryRejectLogOn => world.WorldActor.TraitOrDefault<CameoLogHub>()?.Sink.Enabled == true;
+#else
+		bool InfantryRejectLogOn => false;
+#endif
 		AblationLatch ablateAllFactories, ablateAllCategories, ablateThroughPauseResearch, ablateThroughPauseUpgrade, ablateThroughPauseAddon;
 		bool AllFactoriesOn => switchesActive && Info.ServeAllFactories && !ablateAllFactories.Off(player, AblationIds.ProdBusyAllFactories);
 		bool AllCategoriesOn => switchesActive && Info.ServeAllCategories && !ablateAllCategories.Off(player, AblationIds.ProdBusyAllCategories);
@@ -781,12 +893,19 @@ namespace OpenRA.Mods.CA.Traits
 				counters.Observe(Info.AdaptiveObservationInterval, compositionProvider);
 
 			// Decrement any active unit intervals, removing any that reach zero
+			// PROD-FIX-01 F-D: pb_interval_elapsed counts the game ticks since the last visit (round-robin visits are many ticks apart).
+			var intervalStep = ProdBusyCA.IntervalStep(IntervalElapsedOn, lastIntervalTick, world.WorldTick);
+			lastIntervalTick = world.WorldTick;
 			foreach (KeyValuePair<string, int> i in activeUnitIntervals.ToList())
 			{
-				activeUnitIntervals[i.Key]--;
+				activeUnitIntervals[i.Key] -= intervalStep;
 				if (activeUnitIntervals[i.Key] <= 0)
 					activeUnitIntervals.Remove(i.Key);
 			}
+
+			// MCV-REBUILD-01: runs first, before the pause votes, the cash floor, the shares and the unit intervals and delays.
+			if (McvRebuildOn)
+				TryRebuildMcv(bot);
 
 			// UPGRADE-QUEUE-01: runs before the pause votes and the cash floor (see ServeUpgradeQueues for what it keeps).
 			// No period and no re-check delay (user rule: no delay): every bot visit looks at every served queue.
@@ -852,7 +971,7 @@ namespace OpenRA.Mods.CA.Traits
 						// visible in the skip telemetry, not silently removed.
 						if (PermanentlyInvalidBuildRequest(intent.Name))
 							buildIntents.Remove(intent);
-						else if (++intent.FailedSweeps >= RequestDropFailedSweeps)
+						else if (++intent.FailedSweeps >= RequestDropSweeps)
 						{
 							foreach (var observer in UnitObservers)
 								observer.UnitProductionSkipped(player, world.WorldTick, intent.Name, "request_dropped");
@@ -880,8 +999,20 @@ namespace OpenRA.Mods.CA.Traits
 				var cashLean = BotPersonalityLeads.Lean(leadProviders, "steamroller");
 
 				// Don't produce if we don't have enough cash
-				if (playerResources.Cash + playerResources.Resources < BotPersonalityLeads.Scaled(Info.ProductionMinCashRequirement, cashLean))
+				// PROD-FIX-01 F-F: pb_no_unit_floor lets an affordable unit through whatever the bank (the batch still gates the spend).
+				var noUnitFloor = NoUnitFloorOn;
+				if (!noUnitFloor && playerResources.Cash + playerResources.Resources < BotPersonalityLeads.Scaled(Info.ProductionMinCashRequirement, cashLean))
 					return;
+
+				// PROD-FIX-01 F-B: pb_rotate_start moves the sweep start on every pass.
+				if (RotateStartOn)
+					currentQueueIndex = ProdBusyCA.RotateStart(currentQueueIndex, Info.UnitQueues.Length);
+
+				// UNIT-MIX-01: a category below its value floor is served first this pass (same batch, same cash and unit rules); the rotation below goes on after it.
+				if (UnitMixOn)
+					foreach (var queueType in UnitMixDeficitQueues().ToList())
+						BuildUnit(bot, queueType, idleUnitCount < IdleUnitsLimit, false,
+							ProductionSaturationCA.Saturated(playerResources.Cash + playerResources.Resources, BankSaturationThreshold), batch);
 
 				for (var i = 0; i < Info.UnitQueues.Length; i++)
 				{
@@ -896,7 +1027,7 @@ namespace OpenRA.Mods.CA.Traits
 						// BV_m13_liveness: re-evaluated per category with the same cash accounting —
 						// while the bank stays at/above the tier bar the MaximiseProductionCash break is skipped.
 						var saturated = ProductionSaturationCA.Saturated(
-							playerResources.Cash + playerResources.Resources, BankSaturationThreshold);
+							ProdBusyCA.SaturationBank(SatBatchOn, (long)playerResources.Cash + playerResources.Resources, batch?.BankLeft), BankSaturationThreshold);
 
 						// PERF: We tick only one type of valid queue at a time
 						// if AI gets enough cash, it can fill all of its queues with enough ticks
@@ -907,7 +1038,7 @@ namespace OpenRA.Mods.CA.Traits
 						var bankNow = (long)playerResources.Cash + playerResources.Resources;
 						if (ProdBusyCA.StopCategorySweep(AllCategoriesOn, saturated, bankNow,
 							BotPersonalityLeads.Scaled(MaximiseProductionCash, cashLean), batch?.BankLeft ?? bankNow,
-							BotPersonalityLeads.Scaled(Info.ProductionMinCashRequirement, cashLean)))
+							noUnitFloor ? 0 : BotPersonalityLeads.Scaled(Info.ProductionMinCashRequirement, cashLean)))
 							break;
 					}
 				}
@@ -920,6 +1051,82 @@ namespace OpenRA.Mods.CA.Traits
 		// builder's refinery pause included); FREE items (promotions) start whatever the votes say. Delays, intervals and limits are honoured through
 		// ShouldBuild. An item already in production in ANY queue is not started again (Scrin has a second Upgrades queue).
 		// Choice: UpgradeServiceCA.Choose (pure): free first, then UnitsToBuild weight, then cost, then name; no random draw.
+		// MCV-REBUILD-01: the engine's MCV module only REQUESTS an MCV, and the request then passes every unit gate (pause votes, cash floor, shares, interval, delay,
+		// queue slot, mobile reserve) before it starts - V04 seats with no yard and 1.6-17k banked never got one. This rule starts the MCV itself.
+		McvExpansionManagerBotModule mcvManager;
+		int mcvNeedCheckTick = -1;
+		bool mcvNeeded;
+		int nextMcvNoQueueLogTick;
+
+		void TryRebuildMcv(IBot bot)
+		{
+			mcvManager ??= player.PlayerActor.TraitsImplementing<McvExpansionManagerBotModule>().FirstEnabledTraitOrDefault();
+			if (mcvManager == null)
+				return;
+
+			var mcvInfo = mcvManager.Info;
+			var types = mcvInfo.ConstructionMcvTypes.Count > 0 ? mcvInfo.ConstructionMcvTypes : mcvInfo.McvTypes;
+			if (types.Count == 0 || mcvInfo.ConstructionYardTypes.Count == 0)
+				return;
+
+			var now = world.WorldTick;
+			var queues = world.ActorsWithTrait<ProductionQueue>().Where(a => a.Actor.Owner == player && a.Trait.Enabled).Select(a => a.Trait).ToArray();
+
+			// The need is recomputed every 25 ticks; while it holds, every visit looks for a free slot so the MCV wins it before the ordinary fill.
+			if (mcvNeedCheckTick < 0 || now - mcvNeedCheckTick >= 25)
+			{
+				mcvNeedCheckTick = now;
+				var yards = world.ActorsHavingTrait<Building>().Count(a => a.Owner == player && !a.IsDead && mcvInfo.ConstructionYardTypes.Contains(a.Info.Name));
+				var mcvs = world.ActorsHavingTrait<Transforms>().Count(a => a.Owner == player && !a.IsDead && types.Contains(a.Info.Name));
+				var queued = queues.Any(q => q.AllQueued().Any(i => types.Contains(i.Item)));
+				mcvNeeded = McvRebuildCA.NeedsMcv(yards, mcvs, queued);
+			}
+
+			if (!mcvNeeded)
+				return;
+
+			ProductionQueue best = null;
+			ActorInfo bestItem = null;
+			var capableButBusy = false;
+			foreach (var queue in queues)
+			{
+				var item = queue.BuildableItems().Where(b => types.Contains(b.Name)).OrderBy(b => queue.GetProductionCost(b)).ThenBy(b => b.Name, StringComparer.Ordinal).FirstOrDefault();
+				if (item == null)
+					continue;
+
+				if (LiveFreeSlots(queue) <= 0)
+				{
+					capableButBusy = true;
+					continue;
+				}
+
+				if (best == null || queue.GetProductionCost(item) < best.GetProductionCost(bestItem))
+				{
+					best = queue;
+					bestItem = item;
+				}
+			}
+
+			if (best == null)
+			{
+#if CAMEO_DEV_LOGGING
+				// DEV: nothing can build an MCV now (no factory, a missing prerequisite or every capable queue busy) - logged once per 1500 ticks.
+				if (now >= nextMcvNoQueueLogTick)
+				{
+					nextMcvNoQueueLogTick = now + 1500;
+					Log.Write("debug", $"AI ({player.ClientIndex}): no yard and no MCV, but {(capableButBusy ? "every queue that can build an MCV is busy" : "no queue can build an MCV")} at tick {now}");
+				}
+#endif
+				return;
+			}
+
+			mcvNeeded = false; // re-evaluated in 25 ticks: by then the order has landed and the MCV counts as queued
+			mcvNeedCheckTick = now;
+			bot.QueueOrder(Order.StartProduction(best.Actor, bestItem.Name, 1));
+			NotifyStarted(bestItem.Name, best.Info.Type);
+			AIUtils.BotDebug("AI: {0} decided to build {1}: yard and MCV are gone (mcv_rebuild_first).", player, bestItem.Name);
+		}
+
 		void ServeUpgradeQueues(IBot bot)
 		{
 			var inProduction = new HashSet<string>(StringComparer.Ordinal);
@@ -1163,10 +1370,14 @@ namespace OpenRA.Mods.CA.Traits
 			if (armedInfantryFloor > 0)
 				CapturerArmyCounts(out _, out armedInfantryAlive);
 
+			// INFANTRY-REJECT-LOG-01: null unless the DEV sink is on; then only the infantry queues are counted.
+			var rejectLog = InfantryRejectLogOn ? infantryRejectLog : null;
+
 			for (var k = 0; k < queues.Count && offers > 0; k++)
 			{
 				var index = (start + k) % queues.Count;
 				var queue = queues[index];
+				var logThis = rejectLog != null && Array.IndexOf(Info.IdleQueueFloorQueues, queue.Info.Type) >= 0;
 
 				// The cursor tracks every examined producer — successful or not — but never
 				// a producer the budget stopped us from reaching; that one stays in rotation.
@@ -1234,10 +1445,25 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						unit = ChooseIdleFloorUnit(queue, shares, skip);
 						fromIdleFloor = unit != null;
+						if (logThis)
+							rejectLog.Floor(queue.Info.Type, fromIdleFloor);
+					}
+
+					// UNIT-MIX-01: the same floor pick for a category below its value floor (infantry or aircraft), still behind every admission gate below.
+					if (unit == null && held == 0 && UnitMixOn && UnitMixDeficitQueues().Contains(queue.Info.Type))
+					{
+						unit = ChooseIdleFloorUnit(queue, shares, skip);
+						fromIdleFloor = unit != null;
+						if (logThis)
+							rejectLog.Floor(queue.Info.Type, fromIdleFloor);
 					}
 
 					if (unit == null)
 					{
+						// INFANTRY-REJECT-LOG-01: an empty pick is counted only when no candidate was refused before it (those are counted as they were refused).
+						if (logThis && skip.Count == 0)
+							rejectLog.Reject(queue.Info.Type, shares != null && shares.Count > 0 ? "share_held" : "no_candidate");
+
 						if (skip.Count == 0 && activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
 							RevertToBaselineComposition();
 
@@ -1256,8 +1482,11 @@ namespace OpenRA.Mods.CA.Traits
 								observer.UnitProductionSkipped(player, world.WorldTick, name, "combat_floor");
 					}
 
-					if (!ShouldBuild(name, baselineTried || fromIdleFloor, queue.Info.Type))
+					var refusedBy = ShouldBuildReject(name, baselineTried || fromIdleFloor, queue.Info.Type);
+					if (refusedBy != null)
 					{
+						if (logThis)
+							rejectLog.Reject(queue.Info.Type, refusedBy);
 						Reject();
 						continue;
 					}
@@ -1267,12 +1496,16 @@ namespace OpenRA.Mods.CA.Traits
 					// spends the headroom the census cannot see.
 					if (!LimitHeadroomAdmits(batch, name))
 					{
+						if (logThis)
+							rejectLog.Reject(queue.Info.Type, "headroom");
 						Reject();
 						continue;
 					}
 
 					if (!CapturerCapAdmitsWithPending(unit, batch))
 					{
+						if (logThis)
+							rejectLog.Reject(queue.Info.Type, "capturer");
 						Reject();
 						continue;
 					}
@@ -1286,6 +1519,8 @@ namespace OpenRA.Mods.CA.Traits
 						Info.MaintainAirSuperiority, batch);
 					if (!CanBuildMoreOfAircraft(unit, aircraftPending))
 					{
+						if (logThis)
+							rejectLog.Reject(queue.Info.Type, "aircraft");
 						Reject();
 						continue;
 					}
@@ -1296,6 +1531,8 @@ namespace OpenRA.Mods.CA.Traits
 					if (!batch.Affords(cost) || !ReserveAdmits(batch, cost)
 						|| depthQueue && held > 0 && !QueueDepthCA.CashAdmits(batch.BankLeft, unpaidQueued, cost))
 					{
+						if (logThis)
+							rejectLog.Reject(queue.Info.Type, "afford_cash");
 						Reject();
 						continue;
 					}
@@ -1320,6 +1557,14 @@ namespace OpenRA.Mods.CA.Traits
 						batch.PendingCapturers++;
 					if (activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
 						AddToActiveCompositionProducedValue(unit);
+				}
+
+				// INFANTRY-REJECT-LOG-01 (DEV only): this queue's pass ended; idle = nothing queued or ordered in it. One aggregated row per period.
+				if (logThis)
+				{
+					rejectLog.Pass(queue.Info.Type, !queue.AllQueued().Any() && batch.PendingOf(queue) == 0);
+					if (rejectLog.TryFlush(queue.Info.Type, world.WorldTick, out var line))
+						world.WorldActor.TraitOrDefault<CameoLogHub>()?.Sink.InfantryRejectRow(Array.IndexOf(world.Players, player), "infantry_reject.csv", line, world.WorldTick);
 				}
 			}
 		}
@@ -1350,7 +1595,14 @@ namespace OpenRA.Mods.CA.Traits
 			if (cachedUnpaidTick != world.WorldTick)
 			{
 				cachedUnpaidTick = world.WorldTick;
-				cachedUnpaid = SpendCommitmentsCA.UnpaidQueued(world, player);
+				// PROD-FIX-01 F-A (pb_unit_reserve_excl_upgrades): upgrade-service queue commitments leave the unit figure.
+				// UNIT-MIX-01 (X5): with the floor on, building and defence queue commitments are the base builder's own budget and leave it too.
+				var exclUpgrades = UnitReserveExclOn;
+				var exclBase = UnitMixOn && baseBuilder != null;
+				cachedUnpaid = exclUpgrades || exclBase
+					? SpendCommitmentsCA.UnpaidQueued(world, player, t => (exclUpgrades && System.Array.IndexOf(Info.UpgradeServiceQueues, t) >= 0)
+						|| (exclBase && (baseBuilder.Info.BuildingQueues.Contains(t) || baseBuilder.Info.DefenseQueues.Contains(t))))
+					: SpendCommitmentsCA.UnpaidQueued(world, player);
 			}
 
 			return cachedUnpaid;
@@ -1392,6 +1644,7 @@ namespace OpenRA.Mods.CA.Traits
 			var line = botLimits != null
 				? RecoverySpendPolicyCA.EffectiveReserve(botLimits.Info.ProductionCashReserve, BotPersonalityLeads.Lean(leadProviders, "steamroller"))
 				: -1;
+			line = ProdBusyCA.UnitReserveLine(UnitReserveExclOn, line);
 			return RecoverySpendPolicyCA.Admits(SpendCommitmentsCA.Available(batch.BankLeft, UnpaidQueuedCost()), cost, 0, 0, 0, false,
 				RecoverySpendPolicyCA.Admission.General, line);
 		}
@@ -1747,29 +2000,34 @@ namespace OpenRA.Mods.CA.Traits
 		void IBotMobileSpendReserve.FlushBuildingSpendOwners(IReadOnlyCollection<object> liveOwners) =>
 			mobileReserve.FlushUnseenBuildings(liveOwners);
 
-		bool ShouldBuild(string name, bool ignoreUnitsToBuild, string queueCategory = null)
+		bool ShouldBuild(string name, bool ignoreUnitsToBuild, string queueCategory = null) =>
+			ShouldBuildReject(name, ignoreUnitsToBuild, queueCategory) == null;
+
+		// INFANTRY-REJECT-LOG-01: the first gate that refuses the candidate, or null when it may be built. The same gates in the same order as
+		// ShouldBuild always ran; the reason names are what the DEV reject log counts.
+		string ShouldBuildReject(string name, bool ignoreUnitsToBuild, string queueCategory)
 		{
 			if (cappedOut.Length > 0 && CappedOut(name))
-				return false;
+				return "cappedout";
 
 			var unitsToBuildShares = GetUnitsToBuildForCategory(queueCategory);
 			if (!ignoreUnitsToBuild && unitsToBuildShares != null && !unitsToBuildShares.ContainsKey(name))
-				return false;
+				return "not_in_shares";
 
 			if (Info.UnitDelays != null &&
 				Info.UnitDelays.ContainsKey(name) &&
 				Info.UnitDelays[name] * unitDelayModifier / 100 > world.WorldTick)
-				return false;
+				return "delay";
 
 			if (Info.UnitIntervals != null &&
 				Info.UnitIntervals.ContainsKey(name) &&
 				activeUnitIntervals.ContainsKey(name))
-				return false;
+				return "interval";
 
 			if (Info.UnitLimits != null &&
 				Info.UnitLimits.ContainsKey(name) &&
 				world.Actors.Count(a => !a.IsDead && a.Owner == player && a.Info.Name == name) >= Info.UnitLimits[name])
-				return false;
+				return "limit";
 
 			// S1/F1: the capturer ratio — counts only while the cap is on AND the candidate
 			// IS a capturer; the off cap (classic: CapturerLimitPct reads 0) short-circuits
@@ -1782,10 +2040,10 @@ namespace OpenRA.Mods.CA.Traits
 				if (!CapturerCapAdmits(CapturerLimitPct, capturerUnits, armedInfantryUnits, Info.CapturerMinimumUnits,
 						Info.CapturerAllowanceMax, CapturerAllowance(), QueuedCapturers(),
 						TicksSinceLastCapturerCompletion(), EngineerCompletionInterval))
-					return false;
+					return "capturer";
 			}
 
-			return true;
+			return null;
 		}
 
 		ActorInfo ChooseRandomUnitToBuild(ProductionQueue queue, bool excludeLimited,
