@@ -2799,7 +2799,7 @@ namespace OpenRA.Mods.CA.Traits
 				// CONSOLIDATE-02 Q6 (sq_target_pick, X14): the raid joins the team's live harass target first, else the remembered building below (the HARASS order, shared target
 				// then remembered); with the row off every far raid went for its own building.
 				if (ArmyTargetPickOn)
-					PickSquadTarget(sq, false, true, TargetTier.SharedHarass | TargetTier.Frozen);
+					PickSquadTarget(sq, false, true, TargetTier.SharedHarass | TargetTier.Frozen, frozenNeedsFog: false);
 				else
 				{
 					var target = FindFrozenEnemyTarget(leader.CenterPosition, SquadValueOf(sq), sq);

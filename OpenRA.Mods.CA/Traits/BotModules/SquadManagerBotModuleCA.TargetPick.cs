@@ -49,9 +49,10 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>
 		/// A squad's own pick: the tiers of its purpose in order, the first that resolves sets the squad's target. <paramref name="tryHighValue"/> is the caller's priority roll
 		/// (a raid only), <paramref name="riskGated"/> applies the 6c pre-commit risk gate of the squad's value, <paramref name="allowed"/> restricts the tiers (DF-4).
+		/// <paramref name="frozenNeedsFog"/>: the remembered-building tier needs fogged scans (the state pick's rule); DF-4 never had that guard and passes false.
 		/// False = nothing known: the squad keeps its target (or none).
 		/// </summary>
-		internal bool PickSquadTarget(SquadCA squad, bool tryHighValue, bool riskGated, TargetTier allowed = TargetTier.All)
+		internal bool PickSquadTarget(SquadCA squad, bool tryHighValue, bool riskGated, TargetTier allowed = TargetTier.All, bool frozenNeedsFog = true)
 		{
 			var source = squad.Units[0].Actor;
 			var from = source.CenterPosition;
@@ -67,7 +68,7 @@ namespace OpenRA.Mods.CA.Traits
 				TargetTier.SharedHarass => TargetSharedHarassFor(squad),
 				TargetTier.HighValue => TargetHighValueFor(squad, from, risk),
 				TargetTier.Visible => TargetVisibleFor(squad, source, risk, structures),
-				TargetTier.Frozen => TargetFrozenFor(squad, from, risk),
+				TargetTier.Frozen => TargetFrozenFor(squad, from, risk, frozenNeedsFog),
 				TargetTier.Hunt => TargetHuntFor(squad, source),
 				_ => false
 			});
@@ -164,10 +165,10 @@ namespace OpenRA.Mods.CA.Traits
 			return true;
 		}
 
-		// The remembered-building fallback exists only under fogged scans (without them every enemy is a candidate of the visible tier).
-		bool TargetFrozenFor(SquadCA squad, WPos from, int risk)
+		// The remembered-building fallback of a state pick exists only under fogged scans (without them every enemy is a candidate of the visible tier); DF-4 reads the layer as it always did.
+		bool TargetFrozenFor(SquadCA squad, WPos from, int risk, bool needsFog)
 		{
-			if (!FoggedScans)
+			if (needsFog && !FoggedScans)
 				return false;
 
 			var frozen = FindFrozenEnemyTarget(from, risk, squad);

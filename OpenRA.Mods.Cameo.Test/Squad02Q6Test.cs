@@ -233,7 +233,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(pick, Does.Contain("TargetTier.SharedHarass => TargetSharedHarassFor(squad),"));
 			Assert.That(pick, Does.Contain("TargetTier.HighValue => TargetHighValueFor(squad, from, risk),"));
 			Assert.That(pick, Does.Contain("TargetTier.Visible => TargetVisibleFor(squad, source, risk, structures),"));
-			Assert.That(pick, Does.Contain("TargetTier.Frozen => TargetFrozenFor(squad, from, risk),"));
+			Assert.That(pick, Does.Contain("TargetTier.Frozen => TargetFrozenFor(squad, from, risk, frozenNeedsFog),"));
+			Assert.That(wiring, Does.Contain("if (needsFog && !FoggedScans)\n\t\t\t\treturn false;"), "a state pick keeps the fog guard of the old 6d fallback; DF-4 passes false and never had it");
 			Assert.That(pick, Does.Contain("TargetTier.Hunt => TargetHuntFor(squad, source),"));
 			Assert.That(pick, Does.Contain("if (!tryHighValue)\n\t\t\t\tallowed &= ~TargetTier.HighValue;"), "a high-value target only after the caller's roll");
 			Assert.That(pick, Does.Contain("var risk = riskGated ? SquadValueOf(squad) : -1;"));
@@ -292,7 +293,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var sm = RepoFile(Bots + "SquadManagerBotModuleCA.cs");
 
 			var df4 = Between(sm, "void ReactWithFastSquads(", "Player EffectiveMainTarget()");
-			Assert.That(df4, Does.Contain("if (ArmyTargetPickOn)\n\t\t\t\t\tPickSquadTarget(sq, false, true, TargetTier.SharedHarass | TargetTier.Frozen);\n\t\t\t\telse\n\t\t\t\t{"),
+			Assert.That(df4, Does.Contain("if (ArmyTargetPickOn)\n\t\t\t\t\tPickSquadTarget(sq, false, true, TargetTier.SharedHarass | TargetTier.Frozen, frozenNeedsFog: false);\n\t\t\t\telse\n\t\t\t\t{"),
 				"X14: the shared harass target, else the remembered building");
 			Assert.That(df4, Does.Contain("var target = FindFrozenEnemyTarget(leader.CenterPosition, SquadValueOf(sq), sq);"), "row off = the old DF-4 pick");
 

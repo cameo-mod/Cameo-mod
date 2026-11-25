@@ -50,7 +50,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		/// <summary>The nearest armed enemy seen around what is defended.</summary>
 		ArmedAttacker = 16,
 
-		/// <summary>Any enemy seen around what is defended, or the one that reported the hit.</summary>
+		/// <summary>The enemy that reported the hit, when the bot sees it (nothing else: an armed enemy seen around what is defended is the ArmedAttacker tier).</summary>
 		Attacker = 32,
 
 		/// <summary>An enemy seen inside the fight radius.</summary>
