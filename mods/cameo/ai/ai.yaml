@@ -4693,6 +4693,12 @@ Player:
 		StealthMaxDefenders: 2
 		RouteRecheckTicks: 100
 		MaxExposedRouteCells: 3
+		# ENG-ROUTE-01 (V08 RCA 8c37f899: one SafeRoute visit took 2549 ms; row er_route_budget): each safe-route search spends at most 2000 path-cost evaluations (overrun = unsafe for this visit),
+		# at most 3 searches run per world tick across the capture ranking, the recheck and the route gate, and a cell's danger value lives 8 ticks.
+		SafeRouteBudget: true
+		SafeRouteExpansionBudget: 2000
+		SafeRouteCallsPerTick: 3
+		DangerCacheTicks: 8
 		TransportChance: 25
 		# ENGDROP (ENGDROP_DESIGN_01, spec 02): drops come from the two-trigger scheduler. Trigger B on the equal-step ladder:
 		# chance 50 + 5 r %, every 525 - 30 r ticks, first due 675 - 60 r ticks after match start (r = 0 noob .. 10 cameogod;
