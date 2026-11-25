@@ -2242,7 +2242,11 @@ namespace OpenRA.Mods.CA.Traits
 				return null;
 
 			var pick = infos[index];
+			// V07 crash fix: PickOrPower returns null when the pick starves power and no power plant is buildable now.
 			var item = BaseBuilderQueueEvalCA.PickOrPower(pick, power, HasSufficientPowerForActor);
+			if (item == null)
+				return null;
+
 			if (item == pick)
 				antiRushPickName = pick.Name;
 
