@@ -176,7 +176,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(planner, Does.Contain("int CrawlMaxDistanceCells() => BotDifficultyLadder.Scale(Info.CrawlMaxDistanceMin, Info.CrawlMaxDistanceMax, player, Info.CrawlMaxDistanceUnranked);"));
 			Assert.That(planner, Does.Contain("bool CrawlTargetStickyOn => Info.CrawlTargetSticky && Info.DriveBaseCrawl && LawActive && !ablateCrawlSticky.Off(player, AblationIds.CrawlTargetSticky);"));
 			Assert.That(planner, Does.Contain("\t\t\tTarget = ChooseTarget(scores);"), "the target choice goes through the row");
-			Assert.That(planner, Does.Contain("if (CrawlTargetStickyOn && wantedLinkBuilding != null && Target != null)\n\t\t\t\t\tcrawlCommitIndex = Target.Value.Index;"), "a crawl is committed when a link is wanted toward it");
+			Assert.That(planner, Does.Contain("if (CrawlTargetStickyOn && wantedLinkBuilding != null && Target != null)\n\t\t\t\t\tCommitCrawl(Target.Value);"), "a crawl is committed when a link is wanted toward it");
 			Assert.That(planner, Does.Contain("if (CrawlAdvanceOnlyOn && !(CrawlTargetStickyOn && crawlCommitIndex == Target.Value.Index)\n\t\t\t\t&& CrawlBeyondCap(Target.Value.Center, CrawlAnchorCells(), CrawlMaxDistanceCells()))"), "a far aim is not started");
 			Assert.That(AblationSpec.RegistryIds(), Does.Contain("crawl_target_sticky"));
 
