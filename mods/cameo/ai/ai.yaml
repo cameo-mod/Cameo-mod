@@ -6452,6 +6452,10 @@ Player:
 			rush.bomber: 140
 			rush.fighter: 130
 		UnitRollRampTicks: 9000
+		# TIER-MIX-01 (Opus 11-25, row ub_tech_lean; V08D: rolled vehicles 1033 -> 1890, built ~950 because every order needs its FULL price in the bank): from UnitRollRampTicks a pick in the top half of its
+		# queue's pool (>= 50% of the dearest type) on an EMPTY queue starts pay-as-you-go once the bank holds 30% of its price; the order still reserves the full price. @generic only (the classic block has no UnitRoll).
+		TechLeanTopPct: 50
+		TechLeanBankPct: 30
 		# CONSOLIDATE-01 C9 (X13): paid Promotions also start while a unit-production pause vote is up (pq_upgrade_service); free items always did.
 		# UPG-ADDONS (Opus 11-25, Haiku check): the army_* lvl2-3 upgrades sit on the BuildingAddons queue, which the upgrade service did not serve. @generic only.
 		UpgradeServiceQueues: Promotions, Upgrades, Research, Addons, BuildingAddons

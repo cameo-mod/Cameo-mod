@@ -184,6 +184,13 @@ namespace OpenRA.Mods.CA.Traits
 
 		public readonly int UnitRollFirstCap = 64;
 
+		[Desc("TIER-MIX-01 (row ub_tech_lean; needs UnitRoll): the dearest part of a queue's pool, in percent of its dearest type, whose LATE picks are admitted pay-as-you-go (the full price is not needed up front,",
+			"like the first build of a type) on an empty queue. 0 = off. Late = from UnitRollRampTicks.")]
+		public readonly int TechLeanTopPct = 0;
+
+		[Desc("TIER-MIX-01: the share of the price (percent) the bank must already hold for a lean pick; the rest is paid progressively as income arrives.")]
+		public readonly int TechLeanBankPct = 30;
+
 		[Desc("UNIT-MIX-01: the queue types that make an airfield (aircraft floor); the infantry floor uses IdleQueueFloorQueues.")]
 		public readonly string[] UnitMixAircraftQueues = { "Aircraft", "RAAircraft" };
 
@@ -636,6 +643,11 @@ namespace OpenRA.Mods.CA.Traits
 				Info.UnitRollFirstBoost, Info.UnitRollFirstRampTicks, Info.UnitRollFirstCap);
 		string rollPersonality = "";
 		bool rollFirst;
+
+		// TIER-MIX-01 (row ub_tech_lean): the dearest price in the pool of the fill in hand (set by ChooseRollUnit, read by the afford gate; stays 0 while the row is off).
+		AblationLatch ablateTechLean;
+		bool TechLeanOn => UnitRollOn && Info.TechLeanTopPct > 0 && !ablateTechLean.Off(player, AblationIds.UnitTechLean);
+		int rollPoolMaxCost;
 
 		// The first tick each listed type was seen buildable in a roll (the first-build boost escalates with the time it stays unbuilt).
 		readonly Dictionary<string, int> rollAvailableSince = new(StringComparer.Ordinal);
@@ -1935,6 +1947,13 @@ namespace OpenRA.Mods.CA.Traits
 					// depth-cash gates below are evaluated at cost 0 for it, so a bank of 0 or the tier reserve can still hold it; Everything else keeps the full gates.
 					var paygo = roll && rollFirst && UnitRoll.FirstAdmits(batch.BankLeft);
 					var cost = paygo ? 0 : fullCost;
+
+					// TIER-MIX-01 (row ub_tech_lean): a late pick from the top of this queue's pool, on an empty queue with a share of its price already in the bank, is pay-as-you-go too; the order
+					// still reserves its full price below, so the rest of the pass sees the whole commitment.
+					var leaned = !paygo && TechLeanOn && TechLean.Admits(fullCost, rollPoolMaxCost, held, world.WorldTick, RollParameters.RampTicks, batch.BankLeft, Info.TechLeanTopPct, Info.TechLeanBankPct);
+					if (leaned)
+						cost = 0;
+
 					if (!batch.Affords(cost) || !ReserveAdmits(batch, cost)
 						|| depthQueue && held > 0 && !QueueDepthCA.CashAdmits(batch.BankLeft, unpaidQueued, cost))
 					{
@@ -1949,6 +1968,8 @@ namespace OpenRA.Mods.CA.Traits
 					NotifyStarted(name, queue.Info.Type);
 					counters.Record(unit);
 					batch.Reserve(queue, fullCost);
+					if (leaned)
+						TechLeanLog(queue.Info.Type, name, fullCost, batch.BankLeft + fullCost, rollPoolMaxCost);
 					if (depthQueue)
 						loadedTicks += queue.GetBuildTime(unit, BuildableInfo.GetTraitForQueue(unit, queue.Info.Type));
 					SpendLimitHeadroom(batch, name);
@@ -2806,6 +2827,16 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var a in pool)
 				rollAvailableSince.TryAdd(a.Name, world.WorldTick);
 
+			// TIER-MIX-01 (ub_tech_lean): the dearest price of this fill's pool, for the afford gate; a re-roll after a refusal keeps the earlier top (the refused pick has left the pool).
+			if (TechLeanOn)
+			{
+				var poolMax = 0;
+				foreach (var a in pool)
+					poolMax = Math.Max(poolMax, queue.GetProductionCost(a));
+
+				rollPoolMaxCost = TechLean.PoolMax(skip.Count, rollPoolMaxCost, poolMax);
+			}
+
 			// The mode bias profiles: each is a strength (0 = switched off or ablated) and a trigger; all of them only multiply.
 			var strength = new int[UnitRoll.ProfileNames.Length];
 			for (var p = 0; p < strength.Length; p++)
@@ -2966,6 +2997,12 @@ namespace OpenRA.Mods.CA.Traits
 			var parts = string.Join("|", pool.Select((a, i) => string.Create(System.Globalization.CultureInfo.InvariantCulture, $"{a.Name}:{fractions[i]}:{biases[i]}:{counterPcts[i]}:x{boosts[i]:0.##}:{weights[i]:0.##}")));
 			RollLog($"{world.WorldTick},{seat},ub_pool,{pool[pick].Name},{queueType},{pickId};floor={RollParameters.FloorPct};{parts}");
 		}
+
+		// ub_tech_lean (DEV, record only): one unit_roll.csv row per order started pay-as-you-go by the tech lean: tick,seat,ub_tech_lean,type,queue,price;bank before the order;dearest price of the pool.
+		// The matching ub_unit_built row (same type, same seat) is the check that the lean item was not left stuck.
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void TechLeanLog(string queueType, string name, int price, int bankBefore, int poolMax) =>
+			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},ub_tech_lean,{name},{queueType},{price};{bankBefore};{poolMax}");
 
 		// ub_pool_empty (DEV, record only): one row per queue type per 250 ticks when the roll has no candidate (or the whole queue is capped out before a roll): tick,seat,ub_pool_empty,,queue,reason;
 		// then every listed type the queue could build with its reject reason (skip, harvester, cappedout, delay, interval, limit, capturer, aircraft...). No behaviour is attached to it.
