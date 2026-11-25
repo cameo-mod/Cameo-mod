@@ -22,10 +22,13 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>
 		/// Q8 (row sq_all_in_late; Opus: the decisive gate is tick 30000): from ArmyAllInLateTick (default 24000) the game is still on and every order is an all-in order, once, no steps.
+		/// ALLIN-TRIGGER-01 (Opus ruling 2026-11-25, USER: a fixed tick is only a stagnation fallback): the tick answers only while the Q4 stagnation signal (the no-kill clock of the stalemate
+		/// breaker) also holds, never on the tick alone; the dynamic ahead triggers come first (TeamLeadAllInWhy).
 		/// Needs the one launcher (the order is the only attack); the all-in itself starts at TeamLeadAllInStartTick at the earliest.
 		/// </summary>
 		internal bool ArmyAllInLateOn(int now) => ArmyLaunchArbiterOn && !ablateSqAllInLate.Off(Player, AblationIds.SqAllInLate)
 			&& now >= Info.TeamLeadAllInStartTick
+			&& AllInCA.StalemateSignal(now, teamLeadTeam?.StalemateSignalTick ?? -1, Info.ArmyStalemateSignalTicks)
 			&& AllInCA.LateTick(now, Info.ArmyAllInLateTick);
 
 		/// <summary>Q8 (row sq_hunt_one_cell): the team hunts one unseen cell at a time (the board cell).</summary>

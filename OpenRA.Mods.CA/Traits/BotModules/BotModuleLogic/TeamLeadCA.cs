@@ -508,6 +508,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		public void MarkAllIn(string why) => AllInWhy ??= why;
 
+		/// <summary>ALLIN-TRIGGER-01: the team is behind again, the all-in ends. The order stays open as an ordinary order (its pushed squads fight on); only its all-in flag goes.</summary>
+		public void ClearAllIn() => AllInWhy = null;
+
 		/// <summary>The tick the blob was released (-1 = still gathering).</summary>
 		public int PushTick = -1;
 
