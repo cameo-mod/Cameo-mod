@@ -178,7 +178,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				Func<int, CPos> indexCell,
 				int readRadius,
 				Func<CPos, bool> inMap,
-				Func<CPos, bool> legal)
+				Func<CPos, bool> legal,
+				Func<CPos, bool> pickLegal = null)
 			{
 				ProviderSource = providerSource;
 				RankCellSource = rankCellSource;
@@ -192,6 +193,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				ReadRadius = readRadius;
 				InMap = inMap;
 				Legal = legal;
+				PickLegal = pickLegal ?? legal;
 			}
 
 			public readonly Func<IEnumerator<Provider?>> ProviderSource;
@@ -206,6 +208,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			public readonly int ReadRadius;
 			public readonly Func<CPos, bool> InMap;
 			public readonly Func<CPos, bool> Legal;
+
+			/// <summary>REF-DEMAND-01: the legality a picked site must pass; <see cref="Legal"/> alone decides the exhaustion proof (default: the same predicate).</summary>
+			public readonly Func<CPos, bool> PickLegal;
 		}
 
 		/// <summary>The per-sweep verdict.</summary>
@@ -1234,7 +1239,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			pickScanIndex = 0;
 			pickBestIndex = -1;
 
-			if (snapshot.Legal(pick))
+			if (snapshot.PickLegal(pick))
 			{
 				site = pick;
 				return PickResult.Picked;

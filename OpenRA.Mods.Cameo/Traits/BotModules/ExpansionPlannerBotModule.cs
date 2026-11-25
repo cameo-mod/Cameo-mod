@@ -289,6 +289,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("REF-DEMAND-01: refineries per zone (the REF-FIELD-02 cap per zone with the switch on); friendly refineries within RefinerySpacingCells count.")]
 		public readonly int RefineryPerZoneCap = 2;
 
+		[Desc("REF-DEMAND-01: a zone with fewer resource cells than this takes 1 refinery; 0 = always RefineryPerZoneCap.")]
+		public readonly int RefinerySecondPerZoneMinCells = 40;
+
 		[Desc("REF-DEMAND-01: no new law refinery within this many cells of a friendly (own or allied) refinery; a friendly refinery this close to a zone",
 			"anchor counts toward the zone's cap.")]
 		public readonly int RefinerySpacingCells = 10;
@@ -1272,7 +1275,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				FallbackIndexCell,
 				readRadius,
 				cell => world.Map.Contains(cell),
-				topLeft => FallbackLegal(actorInfo, bi, producer, distanceToBaseIsImportant, dockOffsets, valuable, layer, topLeft));
+				topLeft => FallbackLegal(actorInfo, bi, producer, distanceToBaseIsImportant, dockOffsets, valuable, layer, topLeft, true),
+				topLeft => FallbackLegal(actorInfo, bi, producer, distanceToBaseIsImportant, dockOffsets, valuable, layer, topLeft, false));
 		}
 
 		/// <summary>
@@ -1438,12 +1442,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// narrowed the declared domain on multi-DockHost items.)
 		/// </summary>
 		bool FallbackLegal(ActorInfo actorInfo, BuildingInfo bi, Actor producer, bool distanceToBaseIsImportant,
-			IReadOnlyList<WVec> dockOffsets, IReadOnlySet<string> valuable, IResourceLayer layer, CPos topLeft)
+			IReadOnlyList<WVec> dockOffsets, IReadOnlySet<string> valuable, IResourceLayer layer, CPos topLeft, bool exhaustionProof)
 		{
+			// REF-DEMAND-01: a site returned must be at the full spacing (SpacingAllowed), but the exhaustion proof counts a fallback-spacing
+			// site (5 to 10 cells from a friendly refinery) as legal, so a held refinery is never cancelled while only those remain.
 			// REFSCAN sec 3.1: the one shared implementation (same chain, same order, same ∃-dock rule).
 			return BaseBuilderQueueEvalCA.RefinerySiteLegal(world, player, layer, actorInfo, bi, producer,
 					distanceToBaseIsImportant, dockOffsets, valuable, topLeft)
-				&& (!RefDemandArmed || SpacingTierAt(topLeft) == RefineryDemand.SpacingAllowed);
+				&& (!RefDemandArmed || (exhaustionProof ? SpacingTierAt(topLeft) != RefineryDemand.SpacingRefused : SpacingTierAt(topLeft) == RefineryDemand.SpacingAllowed));
 		}
 
 		/// <summary>
@@ -1542,7 +1548,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			var field = anchorFieldIds[i];
 			return RefineryFieldGateCA.Blocks(true, lastRefineryCells.Count,
-				RefineryFieldGateCA.Capped(fieldGateRefineries.GetValueOrDefault(field), RefDemandZones ? RefineryDemand.ZoneCap(Info.RefineryPerZoneCap) : Info.RefineryFieldCap),
+				RefineryFieldGateCA.Capped(fieldGateRefineries.GetValueOrDefault(field), RefDemandZones ? ZoneCapAt(field) : Info.RefineryFieldCap),
 				fieldGateLocked.GetValueOrDefault(field));
 		}
 

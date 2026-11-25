@@ -59,6 +59,9 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>The per-zone refinery cap; at least 1 (a zone always takes its first refinery).</summary>
 		public static int ZoneCap(int cap) => Math.Max(1, cap);
 
+		/// <summary>The cap of one zone: 1 when the zone has fewer than <paramref name="secondMinCells"/> resource cells (0 = never), else <see cref="ZoneCap"/>.</summary>
+		public static int ZoneCapFor(int cap, int zoneCells, int secondMinCells) => secondMinCells > 0 && zoneCells < secondMinCells ? 1 : ZoneCap(cap);
+
 		/// <summary>The verdict counts as served for the law's claim order (no claim, no backlog).</summary>
 		public static bool Covers(Verdict v) => v == Verdict.ZoneCap || v == Verdict.AlliedServed;
 
