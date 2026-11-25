@@ -8,6 +8,8 @@
  */
 #endregion
 
+using OpenRA.Mods.CA.Traits.BotModules.Squads;
+
 namespace OpenRA.Mods.CA.Traits
 {
 	// CONSOLIDATE-02 Q9 (design 4.1 Step 5, row sq_states_micro under sq_pipeline_02, needs the one launcher and the target pick): the squad state machines are micro only. For a MAIN squad of
