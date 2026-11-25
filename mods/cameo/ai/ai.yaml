@@ -6476,6 +6476,13 @@ Player:
 		# queue's pool (>= 50% of the dearest type) on an EMPTY queue starts pay-as-you-go once the bank holds 30% of its price; the order still reserves the full price. @generic only (the classic block has no UnitRoll).
 		TechLeanTopPct: 50
 		TechLeanBankPct: 30
+		# HANS-PROFILE-01 row 2 (Opus 11-25, row ub_core_focus; Hans' top 3 unit types are 48-64% of his requests): once a type has been built once, the 3 dearest types of a queue that the bank can pay for (30% of the
+		# price in the bank) get a weight multiplier (at most x8) so that they hold about 50% of the roll weight of the types built once. A bias only: the core's weights alone change (every other weight, never-built types included, stays as the roll made it).
+		# @generic only (the classic block has no UnitRoll).
+		CoreFocusSharePct: 50
+		CoreFocusCount: 3
+		CoreFocusMaxPct: 800
+		CoreFocusBankPct: 30
 		# CONSOLIDATE-01 C9 (X13): paid Promotions also start while a unit-production pause vote is up (pq_upgrade_service); free items always did.
 		# UPG-ADDONS (Opus 11-25, Haiku check): the army_* lvl2-3 upgrades sit on the BuildingAddons queue, which the upgrade service did not serve. @generic only.
 		UpgradeServiceQueues: Promotions, Upgrades, Research, Addons, BuildingAddons

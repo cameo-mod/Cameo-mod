@@ -199,6 +199,19 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("TIER-MIX-01: the share of the price (percent) the bank must already hold for a lean pick; the rest is paid progressively as income arrives.")]
 		public readonly int TechLeanBankPct = 30;
 
+		[Desc("HANS-PROFILE-01 (row ub_core_focus; needs UnitRoll): the share (percent of the roll weight of the types this bot has built once) that the CoreFocusCount dearest affordable types of a queue should hold.",
+			"A weight multiplier on the core only (capped by CoreFocusMaxPct); every other weight, never-built types included, stays as the roll made it. 0 = off.")]
+		public readonly int CoreFocusSharePct = 0;
+
+		[Desc("HANS-PROFILE-01: how many types form the core of a queue.")]
+		public readonly int CoreFocusCount = 3;
+
+		[Desc("HANS-PROFILE-01: the largest weight multiplier of the core, in percent (800 = x8).")]
+		public readonly int CoreFocusMaxPct = 800;
+
+		[Desc("HANS-PROFILE-01: a type is affordable for the core once the bank holds this percent of its price (the same bar as TechLeanBankPct).")]
+		public readonly int CoreFocusBankPct = 30;
+
 		[Desc("UNIT-MIX-01: the queue types that make an airfield (aircraft floor); the infantry floor uses IdleQueueFloorQueues.")]
 		public readonly string[] UnitMixAircraftQueues = { "Aircraft", "RAAircraft" };
 
@@ -1911,6 +1924,9 @@ namespace OpenRA.Mods.CA.Traits
 					if (depthQueue && QueueDepthCA.Covered(held, loadedTicks, visitGapTicks))
 						break;
 
+					// HANS-PROFILE-01 (ub_core_focus): the bank this roll sees, for the core's affordability test (0 while the row is off).
+					rollBankLeft = CoreFocusOn ? batch.BankLeft : 0;
+
 					// P4: below the armed-infantry floor this queue prefers the best
 					// admissible armed infantry it can serve — the normal pick only runs
 					// when none is left (a rejected floor pick is retried next-best first).
@@ -2994,6 +3010,11 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			var weights = UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct, boosts);
+
+			// HANS-PROFILE-01 (ub_core_focus): the dearest affordable types built once get a weight multiplier (a bias; every other weight stays as the roll made it).
+			if (CoreFocusOn)
+				weights = FocusCore(queue, pool, weights);
+
 			var units = UnitRoll.Quantize(weights); // integer units, sum <= 2^30, relative floor: every candidate owns a drawable interval
 			var pick = UnitRoll.Pick(units, BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(UnitRoll.Sum(units)));
 			rollFirst = !rollOrdered.Contains(pool[pick].Name);
