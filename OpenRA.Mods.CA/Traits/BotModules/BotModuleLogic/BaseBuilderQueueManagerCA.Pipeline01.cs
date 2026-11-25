@@ -54,6 +54,7 @@ namespace OpenRA.Mods.CA.Traits
 			pipelineFeasibility ??= new PipelineFeasibility(this);
 			pipelineFeasibility.Begin(queue, buildable, power, law, snapshot);
 			var pick = BaseBuildPlanCA.Plan(snapshot, pipelineFeasibility, BotRng.For(player, nameof(BaseBuilderQueueManagerCA)));
+			SkipsObserved(buildable, snapshot, pick); // bb_skip, DEV only
 			if (pick.IsNone)
 				return false;
 
@@ -94,6 +95,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				WorldTick = now,
 				DefenceQueue = b.DefenseQueues.Contains(Category),
+				QueueSplit = baseBuilder.QueueSplitArmed && SeparateDefenceQueue(),
 				Bank = ProdBusyCA.SweepBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep),
 				ProductionCashReserve = botLimits != null ? botLimits.Info.ProductionCashReserve : -1,
 				TierLine = TierLine,
@@ -327,12 +329,35 @@ namespace OpenRA.Mods.CA.Traits
 				o.BuildingPicked(player, world.WorldTick, actor, stage.ToString(), candidate, bank);
 		}
 
+		// bb_skip (Opus ruling 11-25, Haiku V08C RCA: 17 of 18 missing buildings were never offered), DEV only: every listed BuildingFractions type this queue
+		// can build now with no copy owned or in flight that the walk did not start, with the stage that returned (None = no pick) and why. The observer
+		// rate-limits per type. Compiled out of a release build together with its arguments.
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void SkipsObserved(List<ActorInfo> buildable, BaseBuildSnapshot s, BaseBuildPick pick)
+		{
+			if (PickObservers.Length == 0 || s.Fractions == null)
+				return;
+
+			var names = new HashSet<string>(buildable.Select(a => a.Name), StringComparer.Ordinal);
+			var stage = pick.IsNone ? "None" : pick.Stage.ToString();
+			var reason = pick.IsNone ? "no_pick" : pick.Stage < BaseBuildStage.S5CoreOnce ? "earlier_stage" : pick.Stage == BaseBuildStage.S5CoreOnce ? "other_first_copy"
+				: "not_admitted_s5";
+			foreach (var kv in s.Fractions.OrderBy(kv => kv.Key, StringComparer.Ordinal))
+			{
+				if (kv.Value <= 0 || kv.Key == pick.Name || !names.Contains(kv.Key) || BaseBuildPlanCA.CountOf(s, kv.Key) != 0)
+					continue;
+
+				foreach (var o in PickObservers)
+					o.BuildingSkipped(player, world.WorldTick, kv.Key, Category, stage, reason);
+			}
+		}
+
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
 		void RefineryHeldObserved(string gate)
 		{
 			var refineries = baseBuilder.RefineryCountWithQueued();
 			foreach (var o in PickObservers)
-				o.RefineryHeld(player, world.WorldTick, gate, refineries);
+				o.RefineryHeld(player, world.WorldTick, gate, refineries, Category);
 		}
 
 		// TECHCHAIN-PAYGO-01, DEV only: last pipeline_a6_hold tick per name. Null until the first row, and always null in a release build (its only writer is compiled out).

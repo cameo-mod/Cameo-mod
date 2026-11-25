@@ -46,6 +46,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			public readonly HashSet<string> Available = new(StringComparer.Ordinal);
 			public string LastRefineryGate;
 			public int LastRefineryGateTick = -1;
+			public readonly Dictionary<string, int> LastSkipTick = new(StringComparer.Ordinal);
 		}
 
 		readonly Dictionary<OpenRA.Player, CoverageSeat> coverage = new();
@@ -172,7 +173,37 @@ namespace OpenRA.Mods.Cameo.Traits
 			});
 		}
 
-		void IBotBuildingPickObserver.RefineryHeld(OpenRA.Player owner, int tick, string gate, int refineries)
+		void IBotBuildingPickObserver.BuildingSkipped(OpenRA.Player owner, int tick, string actor, string queue, string stage, string reason)
+		{
+			if (writer == null || ended)
+				return;
+
+			CoverageSeat cov;
+			try
+			{
+				var seat = BotSeat(owner);
+				cov = seat == null ? null : CoverageFor(seat);
+			}
+			catch (Exception e)
+			{
+				Fail(e, "bb_skip");
+				return;
+			}
+
+			if (cov == null || (cov.LastSkipTick.TryGetValue(actor, out var last) && tick - last < RefineryHeldRepeatTicks))
+				return;
+
+			cov.LastSkipTick[actor] = tick;
+			ObserverRow(owner, "bb_skip", b =>
+			{
+				AiMatchLogWriter.AppendString(b, "actor", actor);
+				AiMatchLogWriter.AppendString(b, "queue", queue);
+				AiMatchLogWriter.AppendString(b, "stage", stage);
+				AiMatchLogWriter.AppendString(b, "reason", reason);
+			});
+		}
+
+		void IBotBuildingPickObserver.RefineryHeld(OpenRA.Player owner, int tick, string gate, int refineries, string queue)
 		{
 			if (writer == null || ended)
 				return;
@@ -189,15 +220,17 @@ namespace OpenRA.Mods.Cameo.Traits
 				return;
 			}
 
-			if (cov == null || (cov.LastRefineryGate == gate && cov.LastRefineryGateTick >= 0 && tick - cov.LastRefineryGateTick < RefineryHeldRepeatTicks))
+			var key = gate + "@" + queue;
+			if (cov == null || (cov.LastRefineryGate == key && cov.LastRefineryGateTick >= 0 && tick - cov.LastRefineryGateTick < RefineryHeldRepeatTicks))
 				return;
 
-			cov.LastRefineryGate = gate;
+			cov.LastRefineryGate = key;
 			cov.LastRefineryGateTick = tick;
 			ObserverRow(owner, "bb_refinery_held", b =>
 			{
 				AiMatchLogWriter.AppendString(b, "gate", gate);
 				AiMatchLogWriter.AppendNumber(b, "refineries", refineries);
+				AiMatchLogWriter.AppendString(b, "queue", queue);
 			});
 		}
 

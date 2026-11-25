@@ -56,6 +56,13 @@ namespace OpenRA.Mods.CA.Traits
 				else
 					RefineryHeldObserved(RefineryHoldGate(buildable)); // BUILD-ALL-B, DEV only
 			}
+			else if (ZoneDemandAtS2(law))
+			{
+				// REF-S2-01 (row bb_refinery_s2): unmet refinery zone demand on the building queue, ahead of S3-S5; the helper keeps the law, safety, max and economy gate.
+				var refinery = ChooseWantedRefinery(queue, buildable, power);
+				if (refinery != null)
+					yield return refinery.Name;
+			}
 
 			if (law == null)
 				yield break;

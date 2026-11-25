@@ -132,6 +132,10 @@ namespace OpenRA.Mods.CA.Traits
 		// MODE-BIAS-01: the milli weight multiplier of a type's BuildingFractions entry while a mode bias profile is active (1000 = neutral, composed by ModeBias).
 		// Null = no profile active: the roll is the uniform shuffle and the share cap is unchanged, exactly as before.
 		public Func<string, int> BiasMilli;
+
+		// QUEUE-SPLIT-01 (row bb_queue_split): this player has a defence queue of its own, so the walk keeps to its queue's stages (QueueStageSplit.Allowed).
+		// False = every stage, as before.
+		public bool QueueSplit;
 	}
 
 	/// <summary>
@@ -176,6 +180,9 @@ namespace OpenRA.Mods.CA.Traits
 			// S8 above S7 and holds S9 and S10 back while the cycle still offers a type (BaseBuildTiersCA).
 			foreach (var stage in BaseBuildTiersCA.Order(snapshot.SustainedActive, snapshot.TierLine))
 			{
+				if (!QueueStageSplit.Allowed(stage, snapshot.QueueSplit, snapshot.DefenceQueue))
+					continue;
+
 				if (!BaseBuildTiersCA.Open(stage, snapshot.TierLine, snapshot.Bank, snapshot.LowCashCut, snapshot.SustainedActive, snapshot.DefenceThreatSeen, cycleOffered))
 					continue;
 

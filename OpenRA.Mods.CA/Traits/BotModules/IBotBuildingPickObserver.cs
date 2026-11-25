@@ -24,6 +24,9 @@ namespace OpenRA.Mods.CA.Traits
 		void BuildingA6Held(Player owner, int tick, string actor, string stage, int bank, int cost);
 
 		/// <summary>The wanted-refinery helper returned no refinery; <paramref name="gate"/> names the first gate that held it (the observer rate-limits).</summary>
-		void RefineryHeld(Player owner, int tick, string gate, int refineries);
+		void RefineryHeld(Player owner, int tick, string gate, int refineries, string queue);
+
+		/// <summary>bb_skip: a listed type <paramref name="queue"/> can build, with no copy, was not started; <paramref name="stage"/> returned (the observer rate-limits per type).</summary>
+		void BuildingSkipped(Player owner, int tick, string actor, string queue, string stage, string reason);
 	}
 }

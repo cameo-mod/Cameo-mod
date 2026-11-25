@@ -364,6 +364,16 @@ namespace OpenRA.Mods.CA.Traits
 			"Off = as before. Gated by SwitchCondition; row bb_no_foundation.")]
 		public readonly bool BbNoFoundation = false;
 
+		[Desc("QUEUE-SPLIT-01 (user correction 2026-11-25): with a separate defence queue, the building-queue walk of the staged planner skips the defence-only",
+			"stages (S4 anti-rush, S9 extra defences) and the defence-queue walk runs only S4, S9 and the S10 roll, never the refinery or economy stages.",
+			"A faction whose defences share the building queue keeps today's order. Needs BbPipeline01. Off = as before. Gated by SwitchCondition; row bb_queue_split.")]
+		public readonly bool BbQueueSplit = false;
+
+		[Desc("REF-S2-01 (Opus ruling 2026-11-25, V08C RCA: S7 was rarely reached): with REF-DEMAND active, stage S2 of the building queue also serves unmet refinery",
+			"zone demand through the wanted-refinery helper (its economy gate ref1 -> war factory -> ref2 and interval stay), one refinery in flight per player.",
+			"Off = S2 only for a yard without a refinery. Gated by SwitchCondition; row bb_refinery_s2.")]
+		public readonly bool BbRefineryAtS2 = false;
+
 		[Desc("MODE-BIAS-01 (user ruling 2026-11-25), profile essentials: while the low-cash essentials logic is active (EssentialsOnlyBelowTierLine armed, a tier line, bank under it), the BuildingFractions",
 			"weights of the types that logic does not hold (EssentialsLowCashCA.Holds) are raised by MbEssentialsStrength in the staged planner's roll. Never a gate: every entry keeps a positive weight.",
 			"Needs BbPipeline01. Off = unchanged. Gated by SwitchCondition; row mb_essentials.")]
@@ -890,6 +900,10 @@ namespace OpenRA.Mods.CA.Traits
 		public bool BuildAllListedArmed => Info.BbBuildAllListed && switchesActive && !ablateBuildAllListed.Off(player, AblationIds.BbBuildAllListed);
 		AblationLatch ablateNoFoundation; // BUILD-ALL-B
 		public bool NoFoundationArmed => Info.BbNoFoundation && switchesActive && !ablateNoFoundation.Off(player, AblationIds.BbNoFoundation);
+		AblationLatch ablateQueueSplit; // QUEUE-SPLIT-01
+		public bool QueueSplitArmed => Info.BbQueueSplit && switchesActive && !ablateQueueSplit.Off(player, AblationIds.BbQueueSplit);
+		AblationLatch ablateRefineryAtS2; // REF-S2-01
+		public bool RefineryAtS2Armed => Info.BbRefineryAtS2 && switchesActive && !ablateRefineryAtS2.Off(player, AblationIds.BbRefineryAtS2);
 		AblationLatch ablateMbEssentials; // MODE-BIAS-01
 		public bool MbEssentialsArmed => Info.MbEssentials && switchesActive && !ablateMbEssentials.Off(player, AblationIds.MbEssentials);
 		AblationLatch ablateMbTechChain; // MODE-BIAS-01

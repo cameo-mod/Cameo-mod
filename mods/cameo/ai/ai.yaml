@@ -5974,6 +5974,9 @@ Player:
 		BbBuildAllListed: true
 		# BUILD-ALL-B (row bb_no_foundation, user ruling 11-25): no concrete (terrain foundation) on any base-builder path; CONCRETE-PLAN-01 after the playtest.
 		BbNoFoundation: true
+		# QUEUE-SPLIT-01 + REF-S2-01 (Opus 11-25): defence stages stay on the defence queue; unmet refinery zone demand is served at S2 (rows bb_queue_split, bb_refinery_s2).
+		BbQueueSplit: true
+		BbRefineryAtS2: true
 		# MODE-BIAS-01 (rows mb_essentials, mb_techchain, mb_antirush, mb_opening, user ruling 11-25): the extra building lists also weight the BuildingFractions roll while their trigger holds (never a gate).
 		MbEssentials: true
 		MbTechChain: true
