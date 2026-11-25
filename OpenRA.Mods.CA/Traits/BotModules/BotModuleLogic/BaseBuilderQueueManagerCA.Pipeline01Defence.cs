@@ -82,7 +82,7 @@ namespace OpenRA.Mods.CA.Traits
 				yield return kv.Key;
 		}
 
-		// The stage caps that need the world, per stage: S4 none (D1: RATIO-2X exempt, no need gate; the cap counts the set but never vetoes it), S5 buildable and not a yard or refinery, S9 as above, S10 the old
+		// The stage caps that need the world, per stage: S4 none (D1: RATIO-2X exempt, no need gate; the cap counts the set but never vetoes it), S5 buildable and not a yard or refinery, S8 the admission votes (Pipeline01Cycle.cs), S9 as above plus the admission votes, S10 the old
 		// caps plus the defence cap for a defence (so the cap holds whichever stage reaches it, and after the af02 votes are retired). Other stages: no cap.
 		bool PipelineStageAdmits(ProductionQueue queue, HashSet<string> buildableNames, BaseBuildCandidate candidate)
 		{
@@ -94,8 +94,10 @@ namespace OpenRA.Mods.CA.Traits
 					return buildableNames.Contains(candidate.Name)
 						&& !baseBuilder.Info.ConstructionYardTypes.Contains(candidate.Name)
 						&& (!baseBuilder.Info.RefineryTypes.Contains(candidate.Name) || (baseBuilder.CaptureUnlockArmed && captureUnlockOffered.Contains(candidate.Name))); // CAPTURE-TECH-01: an unlock refinery
+				case BaseBuildStage.S8ProductionCycle:
+					return PipelineCycleAdmits(queue, candidate.Name);
 				case BaseBuildStage.S9ExtraDefence:
-					return PipelineExtraDefenceAdmits(buildableNames, candidate.Name);
+					return PipelineExtraDefenceAdmits(queue, buildableNames, candidate.Name);
 				case BaseBuildStage.S10Fractions:
 					return PipelineFractionCapsAdmit(queue, buildableNames, candidate.Name)
 						&& !(world.Map.Rules.Actors.TryGetValue(candidate.Name, out var info) && IsArmedDefenceInfo(info) && PipelineDefenceCapHolds());
@@ -104,7 +106,8 @@ namespace OpenRA.Mods.CA.Traits
 			}
 		}
 
-		bool PipelineExtraDefenceAdmits(HashSet<string> buildableNames, string name)
+		// The last cap is the admission votes (the pause votes and the mobile spend floor, VotesAdmit), as the old roll's defence picks ran them (class General).
+		bool PipelineExtraDefenceAdmits(ProductionQueue queue, HashSet<string> buildableNames, string name)
 		{
 			if (!buildableNames.Contains(name) || !world.Map.Rules.Actors.TryGetValue(name, out var info) || !IsArmedDefenceInfo(info))
 				return false;
@@ -118,7 +121,8 @@ namespace OpenRA.Mods.CA.Traits
 			if (PipelineDefenceCapHolds())
 				return false;
 
-			return !MobileStaticRatioCA.Holds(RatioGate(info, out _));
+			return !MobileStaticRatioCA.Holds(RatioGate(info, out _))
+				&& VotesAdmit(queue, info, RecoverySpendPolicyCA.Admission.General);
 		}
 
 		static bool IsArmedDefenceInfo(ActorInfo info) => DefenceCapCA.IsArmedDefence(info.HasTraitInfo<BuildingInfo>(), info.HasTraitInfo<AttackBaseInfo>());

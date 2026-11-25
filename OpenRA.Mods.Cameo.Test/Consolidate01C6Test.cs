@@ -32,13 +32,24 @@ namespace OpenRA.Mods.Cameo.Test
 		const string PipelineFile = LogicDir + "BaseBuilderQueueManagerCA.Pipeline01.cs";
 		const string PlanFile = LogicDir + "BaseBuildPlanCA.cs";
 		const string QmFile = LogicDir + "BaseBuilderQueueManagerCA.cs";
+		const string DefenceFile = LogicDir + "BaseBuilderQueueManagerCA.Pipeline01Defence.cs";
+
+		static string Between(string text, string from, string to)
+		{
+			var start = text.IndexOf(from, StringComparison.Ordinal);
+			Assert.That(start, Is.GreaterThanOrEqualTo(0), from);
+			var end = text.IndexOf(to, start + from.Length, StringComparison.Ordinal);
+			Assert.That(end, Is.GreaterThan(start), to);
+			return text[start..end];
+		}
 
 		sealed class FakeFeasibility : IBaseBuildFeasibility
 		{
 			public readonly HashSet<string> Infeasible = new(StringComparer.Ordinal);
+			public readonly HashSet<BaseBuildStage> StagesHeld = new();
 			public readonly List<string> Tested = new();
 
-			public bool StageAdmits(BaseBuildCandidate candidate) => true;
+			public bool StageAdmits(BaseBuildCandidate candidate) => !StagesHeld.Contains(candidate.Stage);
 
 			public bool Feasible(BaseBuildCandidate candidate, out string admitted)
 			{
@@ -336,13 +347,59 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(s8, Does.Contain("foreach (var name in CycleProductionCA.Order(counted, lastCycledProduction))"));
 			Assert.That(s8, Does.Contain("yield return name;"));
 
-			// The code only (the file's comments name what the source does not do).
-			var code = string.Join("\n", cycle.Split('\n').Where(l => !l.TrimStart().StartsWith("//", StringComparison.Ordinal)));
+			// The source code only: not the file's comments (they name what the source does not do), and not the stage cap PipelineCycleAdmits (it IS the votes).
+			var capFrom = cycle.IndexOf("bool PipelineCycleAdmits(", StringComparison.Ordinal);
+			var capTo = cycle.IndexOf("ActorInfo PipelineNavalCycleCandidate(", StringComparison.Ordinal);
+			Assert.That(capFrom, Is.GreaterThan(0));
+			Assert.That(capTo, Is.GreaterThan(capFrom));
+			var code = string.Join("\n", (cycle.Substring(0, capFrom) + cycle.Substring(capTo)).Split('\n').Where(l => !l.TrimStart().StartsWith("//", StringComparison.Ordinal)));
 			foreach (var forbidden in new[] { "lastCycledProduction =", "PickOrPower", "VotesAdmit", "cashClock", "sustainedPickName", "TryClaim", "StaticRatio", "Random", "BotRng", "RatioGate" })
 				Assert.That(code, Does.Not.Contain(forbidden), "the S8 source is a query: " + forbidden);
 
 			Assert.That(cycle, Does.Contain("BaseBuilderQueueEvalCA.LimitAdmits(baseBuilder.TryGetBuildingLimit(naval.Name, out var limit), limit,"));
 			Assert.That(cycle, Does.Contain("BaseBuilderQueueEvalCA.OverflowTypeAdmits(standing, producing, ProductionTypeLimit)"));
+		}
+
+		// A vote-held cycle type is a stage cap: it costs no feasibility test and the walk goes on (to S7 or the roll, as the vote would have held it in the old ladder).
+		[Test]
+		public void AVoteHeldCycleTypeCostsNoTestAndTheWalkGoesOn()
+		{
+			var s = Snapshot(new() { [BaseBuildStage.S8ProductionCycle] = ["tent", "wf"] }, "barr");
+			var f = new FakeFeasibility();
+			f.StagesHeld.Add(BaseBuildStage.S8ProductionCycle);
+
+			var pick = Plan(s, f);
+			Assert.That(pick.Candidate, Is.EqualTo("barr"));
+			Assert.That(pick.Stage, Is.EqualTo(BaseBuildStage.S10Fractions));
+			Assert.That(f.Tested, Is.EqualTo(new[] { "barr" }), "the held cycle types were never tested");
+		}
+
+		// Opus pin (Sonnet's C7 review): the cycle and the extra defences must run the admission votes (the pause votes and the mobile spend floor), as the old ladder did.
+		[Test]
+		public void TheCycleAndTheExtraDefencesRunTheAdmissionVotesAsTheOldLadderDid()
+		{
+			var d = Source(DefenceFile);
+			var admits = Between(d, "bool PipelineStageAdmits(", "bool PipelineExtraDefenceAdmits(");
+			Assert.That(admits, Does.Contain("case BaseBuildStage.S8ProductionCycle:\n\t\t\t\t\treturn PipelineCycleAdmits(queue, candidate.Name);"));
+			Assert.That(admits, Does.Contain("case BaseBuildStage.S9ExtraDefence:\n\t\t\t\t\treturn PipelineExtraDefenceAdmits(queue, buildableNames, candidate.Name);"));
+
+			var cap = Between(Source(CycleFile), "bool PipelineCycleAdmits(", "ActorInfo PipelineNavalCycleCandidate(");
+			Assert.That(cap, Does.Contain("VotesAdmit(queue, info, SustainedActive ? RecoverySpendPolicyCA.Admission.EssentialBuilding : RecoverySpendPolicyCA.Admission.General)"));
+
+			// The classes are the old ladder's: the sustained rung an essential building, the plain cycle General; the extra defence General (a non-essential roll pick).
+			var qm = Source(QmFile);
+			Assert.That(qm, Does.Contain("var sustained = ChooseCycledProduction(buildableThings, power, c => VotesAdmit(queue, c, RecoverySpendPolicyCA.Admission.EssentialBuilding));"));
+			Assert.That(qm, Does.Contain("var cycled = ChooseCycledProduction(buildableThings, power, c => VotesAdmit(queue, c, RecoverySpendPolicyCA.Admission.General));"));
+			Assert.That(Between(d, "bool PipelineExtraDefenceAdmits(", "static bool IsArmedDefenceInfo("),
+				Does.Contain("&& VotesAdmit(queue, info, RecoverySpendPolicyCA.Admission.General);"));
+
+			// VotesAdmit still carries both: the pause votes and the mobile spend floor.
+			var votes = Between(qm, "bool VotesAdmit(", "bool EssentialsHolds(");
+			Assert.That(votes, Does.Contain("p.PausesBuilding(item, essential, admission, cost)"));
+			Assert.That(votes, Does.Contain("BaseBuilderQueueEvalCA.MobileSpendBlocks(playerResources.GetCashAndResources(), cost, mobileReserve?.MobileSpendFloor ?? 0, essential)"));
+
+			// S4 stays exempt (D1: reserve 0, no vote), as the old anti-rush pick was floor-exempt.
+			Assert.That(Between(d, "IEnumerable<string> PipelineAntiRushStage(", "IEnumerable<string> PipelineExtraDefenceStage("), Does.Not.Contain("VotesAdmit"));
 		}
 
 		[Test]

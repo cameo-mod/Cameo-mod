@@ -43,6 +43,12 @@ namespace OpenRA.Mods.CA.Traits
 				yield return name;
 		}
 
+		// The S8 stage cap: the admission votes (the pause votes and the mobile spend floor, VotesAdmit) the old ladder ran on a cycled production pick, in the same class: the
+		// sustained trigger as an essential building (QM sustained rung), the plain cycle as General. A held type costs no feasibility test; the reserve itself is A6.
+		bool PipelineCycleAdmits(ProductionQueue queue, string name) =>
+			world.Map.Rules.Actors.TryGetValue(name, out var info)
+			&& VotesAdmit(queue, info, SustainedActive ? RecoverySpendPolicyCA.Admission.EssentialBuilding : RecoverySpendPolicyCA.Admission.General);
+
 		// The naval yard of ChooseCycledProduction (keep in step with it): only with enough water inside the base perimeter, under its building limit and the production-type cap.
 		ActorInfo PipelineNavalCycleCandidate(List<ActorInfo> buildable)
 		{

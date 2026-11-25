@@ -230,7 +230,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var d = Source(DefenceFile);
 			var admits = Between(d, "bool PipelineStageAdmits(", "bool PipelineExtraDefenceAdmits(");
-			Assert.That(admits, Does.Contain("case BaseBuildStage.S9ExtraDefence:\n\t\t\t\t\treturn PipelineExtraDefenceAdmits(buildableNames, candidate.Name);"));
+			Assert.That(admits, Does.Contain("case BaseBuildStage.S9ExtraDefence:\n\t\t\t\t\treturn PipelineExtraDefenceAdmits(queue, buildableNames, candidate.Name);"));
 			Assert.That(admits, Does.Contain("return PipelineFractionCapsAdmit(queue, buildableNames, candidate.Name)"), "S10 keeps its old caps");
 			Assert.That(admits, Does.Contain("&& IsArmedDefenceInfo(info) && PipelineDefenceCapHolds()"), "and the cap for a defence");
 			Assert.That(admits, Does.Contain("default:\n\t\t\t\t\treturn true;"), "S4 and every other stage: no world cap (D1)");
@@ -279,8 +279,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(caps, Does.Contain("BaseBuilderQueueEvalCA.AirDefenceAdmits(baseBuilder.IsGatedAirDefence(name), baseBuilder.DedicatedAntiAirAllowed)"));
 			Assert.That(caps, Does.Contain("DefenceNeedOn && BaseFix01CA.DefenceNeedHolds(true, IsGroundDefence(info), DefenceThreatSeen())"), "the need gate, extras only");
 			Assert.That(caps, Does.Contain("if (PipelineDefenceCapHolds())"));
-			Assert.That(caps, Does.Contain("return !MobileStaticRatioCA.Holds(RatioGate(info, out _));"), "RATIO-2X with its FLOAT exemption");
-			Assert.That(caps, Does.Not.Contain("VotesAdmit"), "the reserve is A6, the army-share cap is S10 only");
+			Assert.That(caps, Does.Contain("return !MobileStaticRatioCA.Holds(RatioGate(info, out _))\n\t\t\t\t&& VotesAdmit(queue, info, RecoverySpendPolicyCA.Admission.General);"),
+				"RATIO-2X with its FLOAT exemption, then the admission votes (the pause votes and the mobile spend floor, as the old roll's defence picks)");
 
 			Assert.That(d, Does.Contain("bool PipelineDefenceCapHolds() => baseBuilder.DefenceCapArmed && DefenceCapCA.Holds(PipelineDefenceCap(), PipelineArmedDefenceCount());"));
 			Assert.That(d, Does.Contain("DefenceCapCA.Cap(b.DefenceCapBase, b.DefenceCapPerThreat, intensity, turtle, b.TurtleDefenceCapPercent)"));
