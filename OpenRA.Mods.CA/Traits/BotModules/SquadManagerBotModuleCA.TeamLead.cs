@@ -271,6 +271,10 @@ namespace OpenRA.Mods.CA.Traits
 		// tl_pincer_double: a pincer that is due to push with less than twice the WAVE-MIN bars gathered collapses into the single blob (each prong must meet WAVE-MIN).
 		bool TeamLeadPincerThinCollapse(TeamLeadOrder order, int now)
 		{
+			// CONSOLIDATE-02 Q7 (sq_pincer_push): every pincer of the row is gated per arm, whatever the wide switch says (the plan shared the arms out to hold it).
+			if (ArmyPincerPushOn)
+				return TeamLeadPincerArmCollapse(order, now);
+
 			// PINCER-02 (tl_pincer_wide): the gate is read per arm (each arm holds its arm bar) instead of the total of twice the bars.
 			if (TeamLeadPincerWideOn)
 				return TeamLeadPincerArmCollapse(order, now);
@@ -760,6 +764,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (!TeamLeadPincerOn)
 				return;
 
+			// CONSOLIDATE-02 Q7 (sq_pincer_push): the pincer is decided at push time on the blob that arrived (TeamLeadPincerAtPush), not here on the pool at issue.
+			if (ArmyPincerPushOn)
+				return;
+
 			var blob = teamLeadTeam.Pool(now, Info.TeamLeadPoolMaxAgeTicks);
 			var (minUnits, minValue) = WaveMinActive ? WaveMinBars() : (0, 0);
 			var wide = TeamLeadPincerWideOn;
@@ -1088,6 +1096,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (TeamLeadCA.PushDue(now, order.IssueTick, Info.TeamLeadGatherMinTicks, Info.TeamLeadGatherMaxTicks, committed, arrived, Info.TeamLeadArrivePercent)
 				&& !TeamLeadPushHeld(order, now))
 			{
+				// CONSOLIDATE-02 Q7 (sq_pincer_push): the push is due and the push bar passed - an arrived blob that can field two arms becomes a pincer instead of pushing.
+				if (ArmyPincerPushOn && TeamLeadPincerAtPush(order, now))
+					return;
+
 				order.PushTick = now;
 				TeamLeadAllInPushRecord(order, now);
 				order.PushReason = now - order.IssueTick >= Info.TeamLeadGatherMaxTicks ? "window" : "arrived";

@@ -35,5 +35,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		// Q6 Step 3: one target order per purpose (MAIN, HARASS, DEFENCE, LOCAL); the squads' own pick, the leader's pick, DF-4 and the defence squads' target follow it.
 		public const string SqTargetPick = "sq_target_pick";
+
+		// Q7 Step 2 (Pincer): decided at push time on the arrived blob; the arms are balanced by dividing a squad when needed (TeamLeadPincerEnabled is the switch it refines).
+		public const string SqPincerPush = "sq_pincer_push";
 	}
 }
