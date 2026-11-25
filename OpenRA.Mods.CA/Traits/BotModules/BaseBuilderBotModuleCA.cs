@@ -369,6 +369,11 @@ namespace OpenRA.Mods.CA.Traits
 			"the low-cash cut, the feasibility budget and the S2/S7 refinery stages are unchanged. Gated by SwitchCondition; row bb_s8_rejected_fallthrough (off = the offer alone holds S9 and S10).")]
 		public readonly bool BbS8RejectedFallthrough = false;
 
+		[Desc("REF-PREFETCH-FRESH (Sol V08F_CUMREV_SOL_01 finding 2, Opus V08G): a relaxed (fallback spacing) refinery site promoted into the K-list before the building is READY",
+			"is dropped at the READY flip (the candidate stream restarts its pass, so the next relaxed use rests on a current certificate), and a newly found strict site",
+			"outranks any relaxed one whatever the score classes say. Strict sites and an issued order are untouched. Gated by SwitchCondition; row ref_prefetch_fresh (off = as before).")]
+		public readonly bool RefPrefetchFresh = false;
+
 		[Desc("BUILD-ALL-B (user ruling 2026-11-25): the base builder never queues a terrain foundation (D2k concrete: a building without health that removes",
 			"itself unconditionally, FoundationExclusion) on any path, listed or not. Concrete use is planned by CONCRETE-PLAN-01 after the playtest.",
 			"Off = as before. Gated by SwitchCondition; row bb_no_foundation.")]
@@ -925,6 +930,8 @@ namespace OpenRA.Mods.CA.Traits
 		public bool NoCancelArmed => Info.BbNoCancel && switchesActive && !ablateNoCancel.Off(player, AblationIds.BbNoCancel);
 		AblationLatch ablateS8RejectedFallthrough; // S8-STARVE-01
 		public bool S8RejectedFallthroughArmed => Info.BbS8RejectedFallthrough && switchesActive && !ablateS8RejectedFallthrough.Off(player, AblationIds.BbS8RejectedFallthrough);
+		AblationLatch ablateRefPrefetchFresh; // REF-PREFETCH-FRESH
+		public bool RefPrefetchFreshArmed => Info.RefPrefetchFresh && switchesActive && !ablateRefPrefetchFresh.Off(player, AblationIds.RefPrefetchFresh);
 		AblationLatch ablateRefineryIntervalLadder; // REF-INTERVAL-LADDER
 		public bool RefineryIntervalLadderArmed => Info.RefineryIntervalLadder && Info.RefineryEconomyGate && switchesActive && !ablateRefineryIntervalLadder.Off(player, AblationIds.RefineryIntervalLadder);
 

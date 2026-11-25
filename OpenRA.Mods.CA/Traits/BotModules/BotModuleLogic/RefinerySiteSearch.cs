@@ -308,6 +308,7 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					e.ReadyPrime = now;
 					Dev(e, now, "ready", $"tR={e.ReadyTick} hold={(e.DemandHold ? 1 : 0)}");
+					ExpirePrefetchedRelaxed(e, now);
 				}
 			}
 
@@ -503,6 +504,9 @@ namespace OpenRA.Mods.CA.Traits
 		void Offer(Episode e, CPos cell, RefinerySiteScore score, RefineryAnchorClaim? claim, int now, bool spacingFallback = false)
 		{
 			var c = new Candidate { Cell = cell, Score = score, Claim = claim, FoundTick = now, SpacingFallback = spacingFallback };
+			if (!spacingFallback)
+				EvictRelaxedForStrict(e, cell, now);
+
 			if (spacingFallback)
 			{
 				// Deferred: a relaxed site never enters Best before the strict search is exhausted (PromoteRelaxed).
@@ -515,6 +519,42 @@ namespace OpenRA.Mods.CA.Traits
 
 			e.FirstFind ??= now;
 			watchStale = true;
+		}
+
+		// REF-PREFETCH-FRESH (row ref_prefetch_fresh): a relaxed site promoted into Best before READY lives on a certificate that may be stale when the
+		// building is done. At the READY flip every such member is dropped and the candidate stream restarts its pass (the same step the pass end takes), so
+		// a relaxed site is only used again after a certificate drawn from the current board (PromoteRelaxed). Strict members and an issued order stay.
+		void ExpirePrefetchedRelaxed(Episode e, int now)
+		{
+			if (!baseBuilder.RefPrefetchFreshArmed)
+				return;
+
+			var expired = RefinerySiteSearchLogic.TakeRelaxed(e.Best, x => x.SpacingFallback, x => ReferenceEquals(x, e.Outstanding));
+			if (expired.Count == 0)
+				return;
+
+			e.InO3R = false;
+			e.Anchors = null;
+			watchStale = true;
+			Dev(e, now, "relaxed_expired", $"n={expired.Count} first={expired[0].Cell}");
+		}
+
+		// REF-PREFETCH-FRESH: a strict offer outranks every relaxed one, whatever the score classes say (a relaxed claim site is class 0, a strict widened site class 1).
+		// The relaxed members leave Best and wait in Relaxed again; they come back through PromoteRelaxed only when no strict site stands.
+		void EvictRelaxedForStrict(Episode e, CPos cell, int now)
+		{
+			if (!baseBuilder.RefPrefetchFreshArmed || e.Best.Count == 0)
+				return;
+
+			var evicted = RefinerySiteSearchLogic.TakeRelaxed(e.Best, x => x.SpacingFallback, x => ReferenceEquals(x, e.Outstanding));
+			if (evicted.Count == 0)
+				return;
+
+			foreach (var r in evicted)
+				RefinerySiteSearchLogic.InsertBest(e.Relaxed, r, x => x.Score, x => x.Cell);
+
+			watchStale = true;
+			Dev(e, now, "relaxed_outranked", $"n={evicted.Count} strict={cell}");
 		}
 
 		// REF-DEMAND-01: the exhaustive strict certificate arrived (the paged scan drained its whole domain; random samples and the visit budget never count). With no strict site the legal relaxed ones enter Best now; with a strict site they are dropped.
