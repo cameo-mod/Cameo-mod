@@ -148,6 +148,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (!owner.IsValid)
 				return;
 
+			// CONSOLIDATE-02 Q9 (sq_states_micro): the Idle state of a team's MAIN squad holds, it never launches by its own pick (the order sends it).
+			if (owner.SquadManager.ArmyIdleHolds(owner))
+				return;
+
 			// The idle squad is committing to a proactive attack — gate it on the
 			// remembered threat at the target's region (6c). Mid-fight retargets in
 			// GroundUnitsAttackState stay ungated.
@@ -605,6 +609,14 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			{
 				// TEAM-GATHER-02 (tl_hunt_via_order): the blob's hunt cell is reached and nothing is in view: back to idle, where the team pass takes the next order.
 				owner.FuzzyStateMachine.ChangeState(owner, owner.SquadManager.TeamLeadHuntsViaOrder(owner) ? (IState)new GroundUnitsIdleStateCA() : new GroundUnitsFleeStateCA(), false);
+				return;
+			}
+
+			// CONSOLIDATE-02 Q9 (sq_states_micro): a team MAIN squad whose target is gone takes a LOCAL enemy only; with none it reports the target done and stands idle.
+			if (!owner.IsTargetValid && owner.SquadManager.ArmyLocalOnly(owner) && !owner.SquadManager.ArmyLocalPick(owner))
+			{
+				owner.SquadManager.ArmyNoteTargetDone(owner);
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);
 				return;
 			}
 
@@ -1386,6 +1398,18 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				return;
 			}
 
+			// CONSOLIDATE-02 Q9 (sq_states_micro): the same for the fight state, a LOCAL enemy only, else done and idle (the pick below would reach for a far target of its own).
+			if (!owner.IsTargetValid && owner.SquadManager.ArmyLocalOnly(owner))
+			{
+				if (!owner.SquadManager.ArmyLocalPick(owner))
+				{
+					owner.SquadManager.ArmyNoteTargetDone(owner);
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);
+				}
+
+				return;
+			}
+
 			if (!owner.IsTargetValid && !FindNewTarget(owner))
 			{
 				// CA F2p2 (2bad89a77): rather than fleeing, take an opportunity target near the leader, else resume AttackMove.
@@ -1681,6 +1705,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (handoff)
 				return;
 
+			// CONSOLIDATE-02 Q9 (sq_states_micro): the flight reports Fled to the plan (DEV record); the dismissal below is the hand-off of its units to the pool (MAIN).
+			owner.SquadManager.ArmyNoteFled(owner);
 			owner.SquadManager.DismissSquad(owner);
 		}
 	}

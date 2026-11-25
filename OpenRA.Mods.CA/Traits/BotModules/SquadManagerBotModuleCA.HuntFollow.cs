@@ -37,7 +37,9 @@ namespace OpenRA.Mods.CA.Traits
 
 			order.Retarget(target, 0);
 			order.HuntFollowTick = now;
-			DiagnosticTeamEvent("team_hunt_follow", "seq=" + order.Seq + " tseq=" + order.TargetSeq + " cell=" + cell.X + "," + cell.Y);
+			if (DiagnosticWriter != null)
+				DiagnosticTeamEvent("team_hunt_follow", "seq=" + order.Seq + " tseq=" + order.TargetSeq + " cell=" + cell.X + "," + cell.Y);
+
 			return true;
 		}
 	}
