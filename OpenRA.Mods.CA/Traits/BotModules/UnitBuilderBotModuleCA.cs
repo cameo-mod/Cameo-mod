@@ -1026,6 +1026,7 @@ namespace OpenRA.Mods.CA.Traits
 				// four items before infantry has one); round 2 is today's loop and fills the depth. Round 1 restores the rotation cursors, so the pass rotates exactly once.
 				if (FirstItemRoundOn)
 				{
+					var firstRoundStopped = false;
 					var savedIndex = currentQueueIndex;
 					firstRoundSavedCursors.Clear();
 					foreach (var pair in serviceCursorByCategory)
@@ -1034,21 +1035,30 @@ namespace OpenRA.Mods.CA.Traits
 					firstItemRoundPass = true;
 					try
 					{
-						ServeCategories();
+						firstRoundStopped = ServeCategories();
 					}
 					finally
 					{
 						firstItemRoundPass = false;
-						currentQueueIndex = savedIndex;
-						serviceCursorByCategory.Clear();
-						foreach (var pair in firstRoundSavedCursors)
-							serviceCursorByCategory[pair.Key] = pair.Value;
+						// A cash stop in round 1 is a stop for the whole pass: the cursors stay where the sweep ended (the old single loop left them there), so later queues are not starved.
+						if (!firstRoundStopped)
+						{
+							currentQueueIndex = savedIndex;
+							serviceCursorByCategory.Clear();
+							foreach (var pair in firstRoundSavedCursors)
+								serviceCursorByCategory[pair.Key] = pair.Value;
+						}
 					}
+
+					// The cash stop of round 1 (StopCategorySweep) ends the pass: round 2 would call BuildUnit before its own stop check and could spend under the bar.
+					if (firstRoundStopped)
+						return;
 				}
 
 				ServeCategories();
 
-				void ServeCategories()
+				// Returns true when StopCategorySweep ended the sweep (the cash bar), false when every category was served.
+				bool ServeCategories()
 				{
 					for (var i = 0; i < Info.UnitQueues.Length; i++)
 					{
@@ -1075,9 +1085,11 @@ namespace OpenRA.Mods.CA.Traits
 							if (ProdBusyCA.StopCategorySweep(AllCategoriesOn, saturated, bankNow,
 								BotPersonalityLeads.Scaled(MaximiseProductionCash, cashLean), batch?.BankLeft ?? bankNow,
 								noUnitFloor ? 0 : BotPersonalityLeads.Scaled(Info.ProductionMinCashRequirement, cashLean)))
-								break;
+								return true;
 						}
 					}
+
+					return false;
 				}
 			}
 		}

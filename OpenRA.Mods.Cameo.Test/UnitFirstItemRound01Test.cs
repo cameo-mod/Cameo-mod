@@ -27,7 +27,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
 			var round1 = u.IndexOf("if (FirstItemRoundOn)", StringComparison.Ordinal);
-			var round2 = u.IndexOf("\t\t\t\tServeCategories();\n\n\t\t\t\tvoid ServeCategories()", StringComparison.Ordinal);
+			var round2 = u.IndexOf("\t\t\t\tServeCategories();\n\n\t\t\t\t// Returns true when StopCategorySweep", StringComparison.Ordinal);
 			Assert.That(round1, Is.GreaterThan(0));
 			Assert.That(round2, Is.GreaterThan(round1), "round 2 (today's loop) follows round 1");
 
@@ -39,6 +39,30 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(u.IndexOf("UnitMixDeficitQueues().ToList())", StringComparison.Ordinal), Is.LessThan(round1), "the deficit categories are served before both rounds");
 			Assert.That(u, Does.Contain("if (firstItemRoundPass)\n\t\t\t\trejectLog = null;"), "DEV reject rows are written once per queue per pass (round 2)");
 			Assert.That(u, Does.Contain("readonly Dictionary<string, string> firstRoundSavedCursors"), "no per-tick allocation");
+		}
+
+		// CM FIX on bcd15ba9: a cash stop (StopCategorySweep) in round 1 ends the whole pass. Round 2 would call BuildUnit before its own stop check and could spend
+		// under the MaximiseProductionCash bar, and restoring the cursors after a stop would make the next pass start at the same queue and starve the later ones.
+		[Test]
+		public void ACashStopInRoundOneEndsThePassAndKeepsTheCursors()
+		{
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			Assert.That(u, Does.Contain("bool ServeCategories()"), "the sweep reports whether the cash stop ended it");
+			Assert.That(u, Does.Contain("firstRoundStopped = ServeCategories();"));
+			Assert.That(u, Does.Contain("if (firstRoundStopped)
+						return;"), "round 2 is skipped after a round-1 stop");
+
+			var restore = u.IndexOf("if (!firstRoundStopped)
+						{
+							currentQueueIndex = savedIndex;", StringComparison.Ordinal);
+			Assert.That(restore, Is.GreaterThan(0), "the cursors are restored only when round 1 was not stopped");
+
+			var sweep = u.IndexOf("bool ServeCategories()", StringComparison.Ordinal);
+			var body = u.Substring(sweep, u.IndexOf("		// UPGRADE-QUEUE-01.", sweep, StringComparison.Ordinal) - sweep);
+			Assert.That(body, Does.Contain("StopCategorySweep("));
+			Assert.That(body, Does.Contain("return true;"), "the stop returns true");
+			Assert.That(body, Does.Contain("return false;"), "a full sweep returns false");
+			Assert.That(body, Does.Not.Contain("break;"), "no bare break: the stop must reach the caller");
 		}
 
 		[Test]
