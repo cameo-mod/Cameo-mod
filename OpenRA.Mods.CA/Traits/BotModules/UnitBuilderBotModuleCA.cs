@@ -251,6 +251,17 @@ namespace OpenRA.Mods.CA.Traits
 			"UnitIntervals and UnitDelays. Gated by SwitchCondition; row mcv_rebuild_first.")]
 		public readonly bool McvRebuildFirst = false;
 
+		[Desc("HARV-01: harvesters per refinery in both directions (HarvesterTarget). Below the target (the enabled HarvesterBotModuleCA's HarvestersPerRefinery, at least 2",
+			"per refinery) with the bank at HarvesterTargetMinCash, a harvester starts first, before the pause votes, cash floor and army mix. At the cap (target +",
+			"HarvesterCapSlackPerRefinery per refinery) no harvester type is built on any path. Gated by SwitchCondition; row hv_harvester_target.")]
+		public readonly bool HvHarvesterTarget = false;
+
+		[Desc("HARV-01: the bank a priority harvester replacement needs.")]
+		public readonly int HarvesterTargetMinCash = 300;
+
+		[Desc("HARV-01: harvesters allowed per refinery above the target before the cap holds.")]
+		public readonly int HarvesterCapSlackPerRefinery = 1;
+
 		[Desc("MCV-REBUILD-01: a failed external build request frees its slot after RequestDropFailedSweepsFast sweeps instead of 250. Gated by SwitchCondition; row pb_request_slot.")]
 		public readonly bool RequestSlotFastDrop = false;
 
@@ -422,7 +433,7 @@ namespace OpenRA.Mods.CA.Traits
 		}
 	}
 
-	public class UnitBuilderBotModuleCA : ConditionalTrait<UnitBuilderBotModuleCAInfo>, IBotTick, IBotNotifyIdleBaseUnits, IBotRequestUnitProduction, IGameSaveTraitData, IBotAircraftBuilder, INotifyActorDisposing, IBotUnitProductionGateInfo, IBotMobileSpendReserve, IBotOrderDisposition
+	public partial class UnitBuilderBotModuleCA : ConditionalTrait<UnitBuilderBotModuleCAInfo>, IBotTick, IBotNotifyIdleBaseUnits, IBotRequestUnitProduction, IGameSaveTraitData, IBotAircraftBuilder, INotifyActorDisposing, IBotUnitProductionGateInfo, IBotMobileSpendReserve, IBotOrderDisposition
 	{
 		public const int FeedbackTime = 30; // ticks; = a bit over 1s. must be >= netlag.
 
@@ -914,6 +925,10 @@ namespace OpenRA.Mods.CA.Traits
 			// MCV-REBUILD-01: runs first, before the pause votes, the cash floor, the shares and the unit intervals and delays.
 			if (McvRebuildOn)
 				TryRebuildMcv(bot);
+
+			// HARV-01: a harvester below the target starts before the pause votes and the army mix (UnitBuilderBotModuleCA.HarvesterTarget.cs).
+			if (HarvesterTargetOn)
+				TryServeHarvesterTarget(bot);
 
 			// UPGRADE-QUEUE-01: runs before the pause votes and the cash floor (see ServeUpgradeQueues for what it keeps).
 			// No period and no re-check delay (user rule: no delay): every bot visit looks at every served queue.
@@ -2067,6 +2082,9 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			if (cappedOut.Length > 0 && CappedOut(name))
 				return "cappedout";
+
+			if (HarvesterTargetOn && HarvesterOverCap(name))
+				return "harvester_cap";
 
 			var unitsToBuildShares = GetUnitsToBuildForCategory(queueCategory);
 			if (!ignoreUnitsToBuild && unitsToBuildShares != null && !unitsToBuildShares.ContainsKey(name))

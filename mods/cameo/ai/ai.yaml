@@ -6328,6 +6328,8 @@ Player:
 		MaxUnitsPerBot: 200
 	UnitBuilderBotModuleCA@generic:
 		RequiresCondition: genericbot
+		# HARV-01 (row hv_harvester_target, Opus/user 11-25): 2 harvesters per refinery first, at most 3 (V08: 0 on 1 refinery for 12000 ticks; 21 on 1).
+		HvHarvesterTarget: true
 		# S1 (FINDINGS_2026-10-12 §3): the switch gate also arms the capturer ratio — classic
 		# (the A/B control) never sees genericbot, so its engineer spam is untouched there.
 		# S1b (ENGINEER-CAP-10PCT, maintainer 2026-10-12): the line is flat 10 on every tier —
