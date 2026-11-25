@@ -2832,8 +2832,11 @@ namespace OpenRA.Mods.CA.Traits
 
 			var pick = BaseBuilderQueueEvalCA.PickOrPower(refinery, power, HasSufficientPowerForActor);
 			if (pick != null)
+			{
 				AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, pick.Name,
 					pick == refinery ? "refinery" : "would be low power");
+				baseBuilder.RefineryLawProvider()?.RefineryPickOffered(); // ref_park_evaluated_only: the wanted refinery was offered to the pipeline
+			}
 
 			return pick;
 		}

@@ -309,6 +309,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"(a claim whose placement keeps failing must not retry forever).")]
 		public readonly int AnchorStuckReplans = 12;
 
+		[Desc("ref_park_evaluated_only (row of the same name): an anchor wanted for AnchorStuckReplans re-plans is parked only when the building queue OFFERED the refinery in those re-plans.",
+			"A want the stage never reached (queue busy, economy gate holding, an earlier stage taking the slot) is waiting, not failing. Needs RefDemand. False = every re-plan counts, as before.")]
+		public readonly bool RefParkEvaluatedOnly = false;
+
 		[Desc("REPAIR-B3: re-offers of the same uncommitted claim before the anchor is parked for",
 			"RefineryClaimFailParkTicks (a claim whose site search keeps returning null must not churn).")]
 		public readonly int RefineryClaimFailAttempts = 1;
@@ -842,6 +846,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		CPos? anchorClaim;
 		CPos? anchorClaimFieldCenter;
 		(CPos? Anchor, int Replans, int Refineries) anchorStuck = (null, 0, 0);
+
+		// ref_park_evaluated_only: set by the base builder when its stage offered the wanted refinery; read and cleared by the next re-plan.
+		AblationLatch ablateParkEvaluated;
+		bool refineryOfferedSinceReplan;
+		bool ParkEvaluatedOnlyOn => Info.RefParkEvaluatedOnly && RefDemandArmed && !ablateParkEvaluated.Off(player, AblationIds.RefParkEvaluatedOnly);
+
+		void IBotExpansionTargetProvider.RefineryPickOffered() => refineryOfferedSinceReplan = true;
 
 		// REF-1 (§12.24 v2): the field model — connected components of the map's initial valuable resource cells, built
 		// once — the field id of every anchor, the fields' cells indexed by field id (synthetic single-spreader fields
@@ -3729,6 +3740,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
+		/// ref_park_evaluated_only: <see cref="AnchorStuckNext"/>, except that with <paramref name="evaluatedOnly"/> a re-plan in which the building queue did not offer the refinery
+		/// (<paramref name="offered"/> false) is not a failed claim: the count stands (restarts when a refinery was gained, one is in production or the anchor changed) and the anchor is never parked by it.
+		/// Off = AnchorStuckNext exactly. Pure, for the tests.
+		/// </summary>
+		public static (int Replans, bool Park) AnchorStuckEvaluated(bool evaluatedOnly, bool offered, bool sameAnchor, int refineryCount,
+			int previousRefineries, int queued, int previousReplans, int maxReplans)
+		{
+			if (!evaluatedOnly || offered)
+				return AnchorStuckNext(sameAnchor, refineryCount, previousRefineries, queued, previousReplans, maxReplans);
+
+			var progress = refineryCount > previousRefineries || queued > 0;
+			return (sameAnchor && !progress ? previousReplans : 0, false);
+		}
+
+		/// <summary>
 		/// R7: under the anchor law the field claim is always null and the law's want carries through; classic
 		/// claims the best in-reach field and wants a refinery exactly when one exists. Pure, for the tests.
 		/// </summary>
@@ -4751,7 +4777,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var anchor = anchors[order[0]];
 
 			// Loop guard: the same anchor wanted replan after replan with no refinery gained and none in production.
-			var (replans, parkAnchor) = AnchorStuckNext(anchorStuck.Anchor == anchor, refineryCells.Count,
+			var offered = refineryOfferedSinceReplan;
+			refineryOfferedSinceReplan = false;
+			var (replans, parkAnchor) = AnchorStuckEvaluated(ParkEvaluatedOnlyOn, offered, anchorStuck.Anchor == anchor, refineryCells.Count,
 				anchorStuck.Refineries, queued, anchorStuck.Replans, Info.AnchorStuckReplans);
 			anchorStuck = (anchor, replans, refineryCells.Count);
 			if (parkAnchor)
