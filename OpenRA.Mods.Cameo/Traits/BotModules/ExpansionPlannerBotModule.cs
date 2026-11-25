@@ -4141,6 +4141,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		void UpdateCrawlWant((ActorInfo Info, int Cost, int BuildTicks) link, (ActorInfo Info, int Cost, int BuildTicks) defence,
 			List<CPos> buildingTiles, List<CPos> buildingCells, List<(CPos Cell, int Value)> guards, List<(CPos Cell, int Value)> defences)
 		{
+			// crawl_pause_bound (CM FIX of 792de339): the pause clock is carried only through a plan that reaches the pause block at the end of this method; every earlier return
+			// (no link wanted, beyond the crawl cap, ...) leaves it reset, so a pause is always one unbroken run of threat refusals.
+			var pauseCarry = crawlPauseSince;
+			crawlPauseSince = -1;
 			wantedLinkBuilding = null;
 			wantWasMandatory = false;
 			crawlTargetEdge = null;
@@ -4213,10 +4217,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (crawlPauseField != Target.Value.Index)
 				{
 					crawlPauseField = Target.Value.Index;
-					crawlPauseSince = -1;
+					pauseCarry = -1;
 				}
 
-				crawlPauseSince = CrawlPauseStart(!mandatoryPower && !safetyAdmits && safetyThreatRefused, crawlPauseSince, pauseTick);
+				crawlPauseSince = CrawlPauseStart(!mandatoryPower && !safetyAdmits && safetyThreatRefused, pauseCarry, pauseTick);
 				if (CrawlPauseExpired(crawlPauseSince, pauseTick, CrawlMaxPauseTicks()))
 				{
 					crawlParkedUntil[Target.Value.Index] = pauseTick + Info.CrawlPauseParkTicks;

@@ -92,7 +92,10 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(planner, Does.Contain("\t\t\t\t\tCommitCrawl(Target.Value);"), "the commit goes through CommitCrawl");
 			Assert.That(planner, Does.Contain("crawlOwnCells = buildingCells;\n\t\t\tTarget = ChooseTarget(scores);"), "the own cells are set before the choice");
 			Assert.That(Count(planner, "safetyThreatRefused = true;"), Is.EqualTo(2), "uncovered and contested front only; parity, scout and farmed route are not a threat pause");
-			Assert.That(planner, Does.Contain("crawlPauseSince = CrawlPauseStart(!mandatoryPower && !safetyAdmits && safetyThreatRefused, crawlPauseSince, pauseTick);"), "mandatory power never pauses");
+			Assert.That(planner, Does.Contain("crawlPauseSince = CrawlPauseStart(!mandatoryPower && !safetyAdmits && safetyThreatRefused, pauseCarry, pauseTick);"), "mandatory power never pauses");
+			Assert.That(planner, Does.Contain("var pauseCarry = crawlPauseSince;\n\t\t\tcrawlPauseSince = -1;\n\t\t\twantedLinkBuilding = null;"),
+				"the pause clock is reset at the top of UpdateCrawlWant and carried only into the pause block, so an early return (no link wanted, beyond the cap) breaks the run");
+			Assert.That(Count(planner, "crawlPauseSince = -1;"), Is.GreaterThanOrEqualTo(3), "the top reset, the commit reset and the expiry reset");
 			Assert.That(planner, Does.Contain("EscortRequestValue(CrawlPauseBoundOn, threat, link.Cost, CrawlPauseBoundOn ? CrawlEscortValue() : 0)"));
 
 			var node = MiniYaml.FromString(Source("packaging/ai.yaml"), "ai").Single(n => n.Key == "Player").Value.Nodes.Single(n => n.Key == "ExpansionPlannerBotModule");
