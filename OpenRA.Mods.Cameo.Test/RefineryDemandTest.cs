@@ -81,6 +81,11 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(RefineryDemand.Demand(true, true, false, 1, 2), Is.EqualTo(1));
 			Assert.That(RefineryDemand.ZoneCap(0), Is.EqualTo(1), "a zone always takes its first refinery");
 
+			Assert.That(RefineryDemand.ZoneCapFor(2, 26, 40), Is.EqualTo(1), "a small zone takes one refinery");
+			Assert.That(RefineryDemand.ZoneCapFor(2, 40, 40), Is.EqualTo(2));
+			Assert.That(RefineryDemand.ZoneCapFor(2, 3, 0), Is.EqualTo(2), "min 0 = always the cap");
+			Assert.That(RefineryDemand.ZoneCapFor(0, 100, 40), Is.EqualTo(1));
+
 			// Two refineries 10+ apart both count at an anchor between them (spacing 10 measured from the anchor).
 			var anchor = C(50, 50);
 			Assert.That(RefineryDemand.CountWithin(anchor, new[] { C(45, 50), C(56, 50), C(70, 50) }, 10), Is.EqualTo(2));
@@ -184,8 +189,11 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(p, Does.Contain("var inReach = inDemand != null ? inDemand[a] : reachDist[a] <= reachCells;"));
 			Assert.That(p, Does.Contain("served[a] = RefineryDemand.Covers(verdict);"));
 			Assert.That(p, Does.Contain("zonesActive = RefDemandOn && EnsureZoneModel(spreaders);"));
-			Assert.That(p, Does.Contain("RefDemandZones ? RefineryDemand.ZoneCap(Info.RefineryPerZoneCap) : Info.RefineryFieldCap"), "the REF-FIELD-02 cap per zone");
-			Assert.That(p, Does.Contain("&& (!RefDemandArmed || SpacingTierAt(topLeft) == RefineryDemand.SpacingAllowed);"), "the widened fallback keeps the spacing");
+			Assert.That(p, Does.Contain("RefDemandZones ? ZoneCapAt(field) : Info.RefineryFieldCap"), "the REF-FIELD-02 cap per zone");
+			Assert.That(p, Does.Contain("(exhaustionProof ? SpacingTierAt(topLeft) != RefineryDemand.SpacingRefused : SpacingTierAt(topLeft) == RefineryDemand.SpacingAllowed)"), "sites stay at the full spacing; the exhaustion proof counts fallback-spacing sites as legal");
+			Assert.That(p, Does.Contain("FallbackLegal(actorInfo, bi, producer, distanceToBaseIsImportant, dockOffsets, valuable, layer, topLeft, true),"));
+			Assert.That(p, Does.Contain("FallbackLegal(actorInfo, bi, producer, distanceToBaseIsImportant, dockOffsets, valuable, layer, topLeft, false));"));
+			Assert.That(Source("mods/Cameo/Traits/BotModules/RefineryFallbackScan.cs"), Does.Contain("if (snapshot.PickLegal(pick))"), "a picked site passes the strict legality");
 			Assert.That(p.Split("RouteRank, CoverageUnknown, DemandOverride);").Length - 1, Is.EqualTo(3));
 			Assert.That(Source("mods/Cameo/Traits/BotModules/ExpansionPlannerBotModule.RefinerySearch.cs"), Does.Contain("RouteRank, CoverageUnknown, DemandOverride);"));
 
@@ -241,6 +249,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(FieldOrNull(planner, "YardRadiusCells"), Is.EqualTo("15"));
 			Assert.That(FieldOrNull(planner, "RefineryZoneRadius"), Is.EqualTo("10"));
 			Assert.That(FieldOrNull(planner, "RefineryPerZoneCap"), Is.EqualTo("2"));
+			Assert.That(FieldOrNull(planner, "RefinerySecondPerZoneMinCells"), Is.EqualTo("40"));
 			Assert.That(FieldOrNull(planner, "RefinerySpacingCells"), Is.EqualTo("10"));
 			Assert.That(FieldOrNull(planner, "RefinerySpacingFallbackCells"), Is.EqualTo("5"));
 			Assert.That(nodes.Count(n => n.Value.Nodes.Any(c => c.Key == "RefDemand")), Is.EqualTo(1), "no other module arms it");
@@ -257,6 +266,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(info.RefDemand, Is.False);
 			Assert.That(info.RefineryZoneRadius, Is.EqualTo(10));
 			Assert.That(info.RefineryPerZoneCap, Is.EqualTo(2));
+			Assert.That(info.RefinerySecondPerZoneMinCells, Is.EqualTo(40));
 			Assert.That(info.RefinerySpacingCells, Is.EqualTo(10));
 			Assert.That(info.RefinerySpacingFallbackCells, Is.EqualTo(5));
 			Assert.That(info.YardRadiusCells, Is.EqualTo(15));

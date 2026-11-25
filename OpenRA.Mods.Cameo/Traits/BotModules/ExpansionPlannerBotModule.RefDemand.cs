@@ -156,6 +156,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 		}
 
+		/// <summary>The refinery cap of zone <paramref name="z"/>: 1 for a small zone (RefinerySecondPerZoneMinCells), else RefineryPerZoneCap.</summary>
+		int ZoneCapAt(int z) =>
+			RefineryDemand.ZoneCapFor(Info.RefineryPerZoneCap, z >= 0 && z < zoneCellsById.Count ? zoneCellsById[z].Count : 0, Info.RefinerySecondPerZoneMinCells);
+
 		RefineryDemand.Verdict DemandVerdict(int a)
 		{
 			var tick = world.WorldTick;
@@ -196,7 +200,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var inRadius = z >= 0 && z < zoneInRadius.Length && zoneInRadius[z];
 				var reachable = z >= 0 && z < zoneReachable.Length && zoneReachable[z];
 				demandCounts[a] = count;
-				demandVerdicts[a] = RefineryDemand.Classify(inRadius, reachable, allied, count, Info.RefineryPerZoneCap);
+				demandVerdicts[a] = RefineryDemand.Classify(inRadius, reachable, allied, count, ZoneCapAt(z));
 			}
 		}
 
@@ -354,11 +358,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var unreachable = 0;
 			var capped = 0;
 			var allied = 0;
-			var cap = RefineryDemand.ZoneCap(Info.RefineryPerZoneCap);
 			for (var a = 0; a < anchors.Count; a++)
 			{
 				var v = demandVerdicts[a];
 				var z = a < anchorFieldIds.Length ? anchorFieldIds[a] : -1;
+				var cap = ZoneCapAt(z);
 				var reason = RefineryDemand.Reason(v);
 				var want = 0;
 				switch (v)
