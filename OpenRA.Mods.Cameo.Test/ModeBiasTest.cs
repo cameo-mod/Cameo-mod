@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
+using OpenRA.Mods.Common;
 using OpenRA.Mods.Cameo.Dev;
 using OpenRA.Support;
 
