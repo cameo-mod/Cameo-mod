@@ -2668,10 +2668,10 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 
 				var name = u.Actor.Info.Name;
-				var guerrilla = Info.GuerrillaTypes.Contains(name) && Info.JoinGuerrilla > 0 && HarassCapAllows() ? OpenGuerrillaSquad(bot) : null;
+				var guerrilla = Info.GuerrillaTypes.Contains(name) && Info.JoinGuerrilla > 0 && HarassCapAllows(u.Actor) ? OpenGuerrillaSquad(bot) : null;
 				if (guerrilla != null)
 					guerrilla.Units.Add(u);
-				else if (Info.HarasserTypes.Contains(name) && HarassCapAllows())
+				else if (Info.HarasserTypes.Contains(name) && HarassCapAllows(u.Actor))
 					AddToHarassSquad(bot, u);
 				else if (Info.FireSupportTypes.Contains(name) && OpenFireSupportSquad(bot) is { } releasedFs)
 					releasedFs.Units.Add(u);
@@ -3275,6 +3275,9 @@ namespace OpenRA.Mods.CA.Traits
 				activeUnits.RemoveAll(unitCannotBeOrdered);
 				FindNewUnits(bot);
 			}
+
+			// CONSOLIDATE-02 Q2 (switch ON only; returns at once while off): the army plan's Step 1 roles, once per ArmyPlanTicks.
+			ArmyPlanTick();
 
 			if (Info.AttackLivenessEnabled)
 			{
@@ -3890,7 +3893,7 @@ namespace OpenRA.Mods.CA.Traits
 					// derived air role, but only when the doctrine is on - flag off
 					// keeps master's air-first order so @classic is unmoved.
 					if (GuerrillaOutranksAir(Info.AirDoctrineEnabled, a.Info.Name, Info.GuerrillaTypes)
-						&& guerrillaRoll && HarassCapAllows() && OpenGuerrillaSquad(bot) is { } airGuerrilla)
+						&& guerrillaRoll && HarassCapAllows(a) && OpenGuerrillaSquad(bot) is { } airGuerrilla)
 					{
 						airGuerrilla.Units.Add(new UnitWposWrapper(a));
 						AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, airGuerrilla.Type);
@@ -3939,12 +3942,12 @@ namespace OpenRA.Mods.CA.Traits
 					fsSquad.Units.Add(new UnitWposWrapper(a));
 					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, fsSquad.Type);
 				}
-				else if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaRoll && HarassCapAllows() && OpenGuerrillaSquad(bot) is { } guerrillaForce)
+				else if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaRoll && HarassCapAllows(a) && OpenGuerrillaSquad(bot) is { } guerrillaForce)
 				{
 					guerrillaForce.Units.Add(new UnitWposWrapper(a));
 					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, guerrillaForce.Type);
 				}
-				else if (Info.HarasserTypes.Contains(a.Info.Name) && HarassCapAllows())
+				else if (Info.HarasserTypes.Contains(a.Info.Name) && HarassCapAllows(a))
 					AddToHarassSquad(bot, new UnitWposWrapper(a));
 				else if (Info.SupportUnitTypes.Contains(a.Info.Name))
 				{
@@ -4212,8 +4215,9 @@ namespace OpenRA.Mods.CA.Traits
 				}
 
 				// Orphaned artillery squads (e.g. after a load) re-attach to the new assault.
+				// CONSOLIDATE-02 Q2 (sq_roles): under the squad pipeline they take the seat's main squad, never just the newest one.
 				foreach (var squad in Squads.Where(s => s.Type == SquadCAType.Artillery && (s.Parent == null || !s.Parent.IsValid)))
-					squad.Parent = attackForce.IsValid ? attackForce : squad.Parent;
+					squad.Parent = ArmyAttachParent(attackForce) ?? squad.Parent;
 
 				// 12.4a: the fire-support squad protects the artillery - it trails the
 				// artillery squad and pulls a frontline escort of FireSupportEscortPerArtillery
@@ -4257,7 +4261,7 @@ namespace OpenRA.Mods.CA.Traits
 
 				// 6f: support squads trail the newest assault, healing/repairing in its wake.
 				foreach (var squad in Squads.Where(s => s.Type == SquadCAType.Support && (s.Parent == null || !s.Parent.IsValid)))
-					squad.Parent = attackForce.IsValid ? attackForce : squad.Parent;
+					squad.Parent = ArmyAttachParent(attackForce) ?? squad.Parent;
 
 				AIUtils.BotDebug("AI ({0}): Added {1} units to squad {2}", Player.ClientIndex, attackForce.Units.Count, attackForce.Type);
 				if (waveLaunchSummary != null)

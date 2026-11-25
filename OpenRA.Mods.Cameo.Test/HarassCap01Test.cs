@@ -215,11 +215,11 @@ namespace OpenRA.Mods.Cameo.Test
 		public void EveryGuerrillaAndHarassAssignmentAsksTheCapFirstAndTheSwitchesAreGatedByInfoAndRow()
 		{
 			var main = RepoFile(Bots + "SquadManagerBotModuleCA.cs");
-			Assert.That(main, Does.Contain("&& guerrillaRoll && HarassCapAllows() && OpenGuerrillaSquad(bot) is { } airGuerrilla)"));
-			Assert.That(main, Does.Contain("&& guerrillaRoll && HarassCapAllows() && OpenGuerrillaSquad(bot) is { } guerrillaForce)"));
-			Assert.That(main, Does.Contain("else if (Info.HarasserTypes.Contains(a.Info.Name) && HarassCapAllows())"));
-			Assert.That(main, Does.Contain("Info.JoinGuerrilla > 0 && HarassCapAllows() ? OpenGuerrillaSquad(bot) : null;"), "a released defender is capped too");
-			Assert.That(main, Does.Contain("else if (Info.HarasserTypes.Contains(name) && HarassCapAllows())"));
+			Assert.That(main, Does.Contain("&& guerrillaRoll && HarassCapAllows(a) && OpenGuerrillaSquad(bot) is { } airGuerrilla)"));
+			Assert.That(main, Does.Contain("&& guerrillaRoll && HarassCapAllows(a) && OpenGuerrillaSquad(bot) is { } guerrillaForce)"));
+			Assert.That(main, Does.Contain("else if (Info.HarasserTypes.Contains(a.Info.Name) && HarassCapAllows(a))"));
+			Assert.That(main, Does.Contain("Info.JoinGuerrilla > 0 && HarassCapAllows(u.Actor) ? OpenGuerrillaSquad(bot) : null;"), "a released defender is capped too");
+			Assert.That(main, Does.Contain("else if (Info.HarasserTypes.Contains(name) && HarassCapAllows(u.Actor))"));
 			Assert.That(main, Does.Contain("HarassMinOn ? openSquads.MaxByOrDefault(s => s.Units.Count) : openSquads.MinByOrDefault(s => s.Units.Count);"), "off = the smallest first, as before");
 
 			var hold = main.IndexOf("if (HarassMinHolds(s))", StringComparison.Ordinal);

@@ -41,10 +41,14 @@ namespace OpenRA.Mods.CA.Traits
 		/// (support squads aside) plus the candidate; the raiders are the units of its guerrilla and harass squads. A refused unit falls through to the
 		/// next branch of the assignment, which ends in the idle pool = the blob.
 		/// </summary>
-		bool HarassCapAllows()
+		bool HarassCapAllows(Actor candidate = null)
 		{
 			if (!HarassCapOn)
 				return true;
+
+			// CONSOLIDATE-02 Q2 (sq_roles, Opus D5): under the squad pipeline the cap is measured by army VALUE, not by unit count.
+			if (ArmyRolesOn)
+				return HarassCapAllowsByValue(candidate);
 
 			var total = unitsHangingAroundTheBase.Count + 1;
 			var raiders = 0;
