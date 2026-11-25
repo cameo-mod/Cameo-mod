@@ -17,7 +17,7 @@ namespace OpenRA.Mods.CA.Traits
 	/// <summary>
 	/// UNIT-ALL-01 (USER 11-25, V07: no Mammoth, OI tank or Duelist ever built): the unit pick is ONE fraction roll over the ai.yaml UnitsToBuild entries the queue can
 	/// build now. weight = fraction x personality bias x counter demand (x role deficit x learned prior), floored at epsilon x the mean weight so every listed unit keeps a
-	/// chance. A listed type this bot never ordered is picked first, one at a time. World-free integer math: no floats, deterministic on every client.
+	/// chance. A listed type this bot never ordered is picked first, one at a time. The roll itself is world-free integer math (the role-mix shares arrive as doubles and are rounded to whole percent at the edge), deterministic on every client.
 	/// </summary>
 	public static class UnitRoll
 	{

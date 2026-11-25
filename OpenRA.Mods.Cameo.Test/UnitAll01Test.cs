@@ -129,7 +129,7 @@ namespace OpenRA.Mods.Cameo.Test
 			// the roll replaces the layers: the fair loop takes the roll pick and skips the floors; compositions are not selected
 			Assert.That(u, Does.Contain("var unit = roll ? ChooseRollUnit(queue, skip) : fromFloor ?? (buildRandom"));
 			var rollPick = u.IndexOf("var unit = roll ? ChooseRollUnit(queue, skip)", StringComparison.Ordinal);
-			var noCandidate = u.IndexOf("if (roll && unit == null)\n\t\t\t\t\t\tbreak;", rollPick, StringComparison.Ordinal);
+			var noCandidate = u.IndexOf("if (roll && unit == null)\n\t\t\t\t\t{", rollPick, StringComparison.Ordinal);
 			var idleFloor = u.IndexOf("if (unit == null && held == 0 && IdleQueueFloorOn", rollPick, StringComparison.Ordinal);
 			var mixFloor = u.IndexOf("if (unit == null && held == 0 && UnitMixOn", rollPick, StringComparison.Ordinal);
 			Assert.That(noCandidate, Is.GreaterThan(rollPick), "an empty roll ends the queue's fill");
@@ -161,7 +161,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var body = u.Substring(start, u.IndexOf("int rollDeficitTick", start, StringComparison.Ordinal) - start);
 			Assert.That(body, Does.Contain("if (rollOrdered.Contains(a.Name) && !CanBuildMoreOfAircraft(a))"), "the cap filters only types already ordered once");
 			Assert.That(u, Does.Contain("if (!(roll && rollFirst) && !CanBuildMoreOfAircraft(unit, aircraftPending))"), "and the post-pick admission waives it for a first pick");
-			Assert.That(u, Does.Contain("if (UnitRollOn)\n\t\t\t\trollOrdered.Add(name);"), "a type counts as ordered once an order was emitted for it, by any path");
+			Assert.That(u, Does.Contain("if (switchesActive && Info.UnitRoll)\n\t\t\t\trollOrdered.Add(name);"), "a type counts as ordered once an order was emitted for it, by any path, even while the row is ablated");
 
 			// a unit limit of 0 would be a permanent ban on a listed type; the shared yaml carries none for genericbot
 			var generic = MiniYaml.FromString(Source("packaging/ai.yaml"), "ai").Single(n => n.Key == "Player").Value.Nodes
@@ -271,6 +271,33 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(body, Does.Contain("open.Tick == world.WorldTick || queue.AllQueued().Any(i => i.Item == open.Name)"), "open while queued, and for the rest of the pass that ordered it");
 			Assert.That(body, Does.Contain("items = items.Where(a => rollOrdered.Contains(a.Name)).ToList();"), "while one is open the other never-built types wait; ordinary types still roll");
 			Assert.That(body, Does.Not.Contain("savings"), "no savings hold");
+		}
+
+		// Workhorse review of c888455f: the squad manager's wave hold is fed by the roll whatever the wavemix profile strength, and from every candidate the gates admit.
+		[Test]
+		public void TheWaveHoldFeedDoesNotDependOnTheWavemixProfileAndSeesEveryBuildableRole()
+		{
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			var start = u.IndexOf("ActorInfo ChooseRollUnit(", StringComparison.Ordinal);
+			var body = u.Substring(start, u.IndexOf("int rollDeficitTick", start, StringComparison.Ordinal) - start);
+			var report = body.IndexOf("var queueRoles = ReportWaveRoles(queue.Info.Type, items, roles);", StringComparison.Ordinal);
+			var empty = body.IndexOf("if (items.Count == 0)", StringComparison.Ordinal);
+			var firstOpen = body.IndexOf("var firstOpen", StringComparison.Ordinal);
+			Assert.That(report, Is.GreaterThan(0));
+			Assert.That(report, Is.LessThan(empty), "reported even when nothing is buildable");
+			Assert.That(report, Is.LessThan(firstOpen), "reported before the first-of-each narrowing: the whole candidate list, not the never-built pool");
+			Assert.That(body, Does.Contain("strength[UnitRoll.WaveMix] > 0 ? RollMissingWaveRoles(queueRoles) : null"), "the profile only reads the report");
+			Assert.That(u, Does.Contain("waveMixAvailable[queueType] = (world.WorldTick, queueRoles);"));
+		}
+
+		[Test]
+		public void TheFogOnlyObservationDropsAnEarlierOmniscientMemoryOnItsFirstCall()
+		{
+			var c = Source("mods/CA/Traits/BotModules/BotModuleLogic/AdaptiveCounterProduction.cs");
+			var start = c.IndexOf("public void ObserveFogOnly(", StringComparison.Ordinal);
+			var body = c.Substring(start, c.IndexOf("public long CounterScore(", start, StringComparison.Ordinal) - start);
+			Assert.That(body, Does.Contain("if (!fogOnly)"));
+			Assert.That(body, Does.Contain("observedEnemyValue.Clear();"));
 		}
 
 		[Test]

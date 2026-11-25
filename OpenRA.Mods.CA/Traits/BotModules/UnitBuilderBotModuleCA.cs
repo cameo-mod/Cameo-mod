@@ -1309,8 +1309,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		void NotifyStarted(string name, string queueType)
 		{
-			if (UnitRollOn)
-				rollOrdered.Add(name);
+			if (switchesActive && Info.UnitRoll)
+				rollOrdered.Add(name); // also while the row is ablated, so a mid-game flip does not re-pick built types
 
 			foreach (var observer in UnitObservers)
 				observer.UnitProductionStarted(player, world.WorldTick, name, queueType);
@@ -1539,7 +1539,13 @@ namespace OpenRA.Mods.CA.Traits
 
 					// UNIT-ALL-01: no candidate left for the roll ends this queue's fill; the composition fallback and the two floor picks below belong to the layers the roll replaces.
 					if (roll && unit == null)
+					{
+						// the composition (now only a bias profile) ends with the fill, as it did when the old pick came up empty
+						if (skip.Count == 0 && activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
+							RevertToBaselineComposition();
+
 						break;
+					}
 
 					// §3.3/P4: an active composition that provides no feasible unit for this
 					// category falls back to the declared baseline shares once — then to the
@@ -2487,6 +2493,10 @@ namespace OpenRA.Mods.CA.Traits
 				items.Add(a);
 			}
 
+			// The squad manager's wave hold reads what this queue can build, whatever the wavemix profile strength (the profile only multiplies; the hold is the ARMY-MIX-01 row's).
+			var roles = unitRoles ??= player.PlayerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
+			var queueRoles = ReportWaveRoles(queue.Info.Type, items, roles);
+
 			if (items.Count == 0)
 				return null;
 
@@ -2510,8 +2520,6 @@ namespace OpenRA.Mods.CA.Traits
 			if (!rollFirst)
 				pool = items;
 
-			var roles = unitRoles ??= player.PlayerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
-
 			// The mode bias profiles: each is a strength (0 = switched off or ablated) and a trigger; all of them only multiply.
 			var strength = new int[UnitRoll.ProfileNames.Length];
 			for (var p = 0; p < strength.Length; p++)
@@ -2521,7 +2529,7 @@ namespace OpenRA.Mods.CA.Traits
 			var providers = strength[UnitRoll.Learned] > 0 ? ActiveProductionWeights() : null;
 			var scores = strength[UnitRoll.Counter] > 0 ? pool.Select(a => counters.CounterScore(a)).ToList() : null;
 			var best = scores?.Max() ?? 0;
-			var missingRoles = strength[UnitRoll.WaveMix] > 0 ? RollMissingWaveRoles(queue.Info.Type, pool, roles) : null;
+			var missingRoles = strength[UnitRoll.WaveMix] > 0 ? RollMissingWaveRoles(queueRoles) : null;
 			var composition = strength[UnitRoll.Composition] > 0 && activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type)
 				? activeComposition.UnitsToBuild : null;
 			var bestShare = composition != null && composition.Count > 0 ? composition.Values.Max() : 0;
@@ -2571,18 +2579,24 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool RollProfileOn(int profile) => switchesActive && Info.UnitRoll && RollStrength(profile) > 0;
 
-		// wavemix profile trigger (the ARMY-MIX-01 one): the squad manager's wave mix is active and the idle pool covers fewer wave roles than needed; the roles it lacks that this
-		// queue can build are the boosted ones. This queue's buildable roles are also reported to the squad manager's wave hold, exactly as the old pick did.
-		HashSet<string> RollMissingWaveRoles(string queueType, List<ActorInfo> pool, IBotUnitRoles roles)
+		// ARMY-MIX-01 hold feed: this queue's buildable wave roles (every candidate the hard gates admit, not only the never-built ones), reported to the squad manager's wave hold exactly as the
+		// old pick did, while the squad manager's wave mix is active. Independent of the wavemix profile. Returns the role set (null when the wave mix is off or no roles provider exists).
+		HashSet<string> ReportWaveRoles(string queueType, List<ActorInfo> items, IBotUnitRoles roles)
 		{
 			var manager = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().FirstEnabledTraitOrDefault();
 			if (manager == null || !manager.WaveMixActive || roles == null)
 				return null;
 
-			var now = world.WorldTick;
-			var queueRoles = WaveMixCA.DistinctRoles(pool.Select(a => roles.PrimaryRoleOf(a.Name)));
-			waveMixAvailable[queueType] = (now, queueRoles);
-			if (queueRoles.Count == 0 || !TryAvailableWaveRoles(now, out var available))
+			var queueRoles = WaveMixCA.DistinctRoles(items.Select(a => roles.PrimaryRoleOf(a.Name)));
+			waveMixAvailable[queueType] = (world.WorldTick, queueRoles);
+			return queueRoles;
+		}
+
+		// wavemix profile trigger (the ARMY-MIX-01 one): the idle pool covers fewer wave roles than needed; the roles it lacks that this queue can build are the boosted ones.
+		HashSet<string> RollMissingWaveRoles(HashSet<string> queueRoles)
+		{
+			var manager = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().FirstEnabledTraitOrDefault();
+			if (queueRoles == null || manager == null || queueRoles.Count == 0 || !TryAvailableWaveRoles(world.WorldTick, out var available))
 				return null;
 
 			var poolRoles = manager.WaveMixPoolRoles();
@@ -2625,7 +2639,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			foreach (var share in DerivedUnitWeights.RoleShares(mix, RoleMixUnnamedPct, roles, Info.UnitsToBuild.ContainsKey))
 				if (share.Value > 0)
-					rollDeficits[share.Key] = UnitRoll.DeficitPct((int)share.Value, (int)(100L * counts.GetValueOrDefault(share.Key) / Math.Max(1, total)));
+					rollDeficits[share.Key] = UnitRoll.DeficitPct((int)Math.Round(share.Value), (int)(100L * counts.GetValueOrDefault(share.Key) / Math.Max(1, total)));
 
 			return rollDeficits;
 		}
