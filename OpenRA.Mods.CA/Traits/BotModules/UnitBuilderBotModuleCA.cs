@@ -955,11 +955,13 @@ namespace OpenRA.Mods.CA.Traits
 #endif
 		}
 
-		// UPGRADE-COVERAGE completion (authoritative, no event guess): an item is done when it LEFT the served queues (it was in production on the last visit, not now) and the player
-		// now holds the prerequisite it grants (ITechTreePrerequisite, the same state the tech tree reads, so a cancelled item never counts), or when that prerequisite is already held at the
-		// first visit (a restored game or a pre-existing completion). An item that grants only a condition and no prerequisite is not detected (documented: never counted done, never wrongly done).
+		// UPGRADE-COVERAGE completion, decided from AUTHORITATIVE STATE at the service visits (Sol FIX of 425f1fab): every item the service orders is settled (UpgradeCompletions.Settle) against the
+		// prerequisites it REALLY grants (its ITechTreePrerequisiteInfo traits, not its name) held by the player (ITechTreePrerequisite, the tech tree's own source), so an item that finished between two
+		// visits is still found. The init scan finds what is already held (a restored game, a pre-existing completion). An item that grants no prerequisite (condition-only) has no state to read: the
+		// engine has no per-item completion seam we can hook from a bot module, so it is done by APPROXIMATION when it left the queue and is no longer offered (source=approx). Rows carry upg_done_source=grant|approx|init.
 		bool upgradeScanned;
-		readonly HashSet<string> upgradeQueuedLast = new(StringComparer.Ordinal);
+		int upgradeSettleTick = -1000;
+		readonly Dictionary<string, string[]> upgradeGrants = new(StringComparer.Ordinal);
 
 		HashSet<string> OwnedPrerequisites()
 		{
@@ -977,6 +979,20 @@ namespace OpenRA.Mods.CA.Traits
 			return owned;
 		}
 
+		// the prerequisites the item's own traits grant (cached: rules are static)
+		IReadOnlyCollection<string> UpgradeGrantsOf(string name)
+		{
+			if (!upgradeGrants.TryGetValue(name, out var grants))
+			{
+				grants = world.Map.Rules.Actors.TryGetValue(name, out var info)
+					? info.TraitInfos<ITechTreePrerequisiteInfo>().SelectMany(t => t.Prerequisites(info)).Where(p => p != null).Distinct(StringComparer.OrdinalIgnoreCase).ToArray()
+					: [];
+				upgradeGrants[name] = grants;
+			}
+
+			return grants;
+		}
+
 		bool ServedByUpgradeService(ActorInfo a) =>
 			a.TraitInfos<BuildableInfo>().Any(bi => bi.Queue.Any(q => Array.IndexOf(Info.UpgradeServiceQueues, q) >= 0));
 
@@ -991,25 +1007,30 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			foreach (var a in world.Map.Rules.Actors.Values)
-				if (owned.Contains(a.Name) && ServedByUpgradeService(a) && upgradeDone.Complete(a.Name))
-					UpgradeDoneLog(a.Name);
+				if (ServedByUpgradeService(a) && UpgradeGrantsOf(a.Name).Any(owned.Contains) && upgradeDone.Complete(a.Name, UpgradeCompletions.SourceInit))
+					UpgradeDoneLog(a.Name, UpgradeCompletions.SourceInit);
 		}
 
-		void UpgradeCheckCompleted(HashSet<string> inProduction)
+		void UpgradeSettle(HashSet<string> inProduction)
 		{
-			HashSet<string> owned = null;
-			foreach (var name in upgradeQueuedLast)
-			{
-				if (inProduction.Contains(name) || upgradeDone.Completed(name))
-					continue;
+			// the world scan runs only while an ordered item is unsettled, and at most every 25 ticks
+			if (!upgradeDone.AnyPending || world.WorldTick - upgradeSettleTick < 25)
+				return;
 
-				owned ??= OwnedPrerequisites();
-				if (owned.Contains(name) && upgradeDone.Complete(name))
-					UpgradeDoneLog(name);
-			}
+			upgradeSettleTick = world.WorldTick;
+			foreach (var (name, source) in upgradeDone.Settle(world.WorldTick, inProduction, UpgradeGrantsOf, OwnedPrerequisites(), OfferedUpgradeNames))
+				UpgradeDoneLog(name, source);
+		}
 
-			upgradeQueuedLast.Clear();
-			upgradeQueuedLast.UnionWith(inProduction);
+		HashSet<string> OfferedUpgradeNames()
+		{
+			var offered = new HashSet<string>(StringComparer.Ordinal);
+			foreach (var category in Info.UpgradeServiceQueues)
+				foreach (var queue in AIUtils.FindQueues(player, category))
+					foreach (var item in queue.BuildableItems())
+						offered.Add(item.Name);
+
+			return offered;
 		}
 
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
@@ -1017,8 +1038,8 @@ namespace OpenRA.Mods.CA.Traits
 			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},upg_start,{name},{queueType},{(cost <= 0 ? "free" : "paid")};since={upgradeDone.Since(name)}");
 
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
-		void UpgradeDoneLog(string name) =>
-			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},upg_done,{name},,{upgradeDone.DoneCount}");
+		void UpgradeDoneLog(string name, string source) =>
+			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},upg_done,{name},,{upgradeDone.DoneCount};upg_done_source={source}");
 
 #if CAMEO_DEV_LOGGING
 		// UNIT-ALL-01 DEV (Opus 11-25, coverage scorer): one unit_roll.csv row per unit that completes for this bot ("completed" = it enters the world after tick 0, so the starting
@@ -1365,7 +1386,7 @@ namespace OpenRA.Mods.CA.Traits
 						inProduction.Add(queued.Item);
 
 			UpgradeScanOnce();
-			UpgradeCheckCompleted(inProduction);
+			UpgradeSettle(inProduction);
 
 			var paused = requestPause.Any(rp => rp.IsTraitEnabled() && rp.PauseUnitProduction && rp is not IBotItemAwareUnitCap);
 			foreach (var category in Info.UpgradeServiceQueues)
@@ -1409,6 +1430,7 @@ namespace OpenRA.Mods.CA.Traits
 						SetUnitInterval(item2.Name);
 						bot.QueueOrder(Order.StartProduction(queue.Actor, item2.Name, 1));
 						NotifyStarted(item2.Name, queue.Info.Type);
+						upgradeDone.Started(item2.Name, world.WorldTick);
 						UpgradeStartLog(item2.Name, queue.Info.Type, queue.GetProductionCost(item2));
 						AIUtils.BotDebug("AI: {0} upgrade service starts {1} in {2}.", player, item2.Name, queue.Info.Type);
 					}
@@ -1647,7 +1669,10 @@ namespace OpenRA.Mods.CA.Traits
 
 				// Item-aware cap reached: a queue that can build nothing the cap leaves uncounted costs no offer and no scan.
 				if (cappedOut.Length > 0 && !queue.BuildableItems().Any(a => !CappedOut(a)))
+				{
+					RollCappedLog(queue.Info.Type);
 					continue;
+				}
 
 				offers--;
 				var skip = new HashSet<string>(StringComparer.Ordinal);
@@ -2625,16 +2650,36 @@ namespace OpenRA.Mods.CA.Traits
 				return null;
 
 			var items = new List<ActorInfo>();
+			rollExcluded.Clear();
 			foreach (var a in queue.BuildableItems().OrderBy(b => b.Name, StringComparer.Ordinal))
 			{
-				if (!table.ContainsKey(a.Name) || skip.Contains(a.Name) || a.HasTraitInfo<HarvesterInfo>())
+				if (!table.ContainsKey(a.Name))
 					continue;
 
-				if (ShouldBuildReject(a.Name, true, queue.Info.Type) != null)
+				if (skip.Contains(a.Name))
+				{
+					RollExclude(a.Name, "skip");
 					continue;
+				}
+
+				if (a.HasTraitInfo<HarvesterInfo>())
+				{
+					RollExclude(a.Name, "harvester");
+					continue;
+				}
+
+				var rejectedBy = ShouldBuildReject(a.Name, true, queue.Info.Type);
+				if (rejectedBy != null)
+				{
+					RollExclude(a.Name, rejectedBy);
+					continue;
+				}
 
 				if (rollOrdered.Contains(a.Name) && !CanBuildMoreOfAircraft(a))
+				{
+					RollExclude(a.Name, "aircraft");
 					continue;
+				}
 
 				items.Add(a);
 			}
@@ -2644,7 +2689,10 @@ namespace OpenRA.Mods.CA.Traits
 			var queueRoles = ReportWaveRoles(queue.Info.Type, items, roles);
 
 			if (items.Count == 0)
+			{
+				RollEmptyLog(queue.Info.Type, rollExcluded.Count > 0 ? "all_excluded" : "none_listed_buildable");
 				return null;
+			}
 
 			// One legal pool (user rule: multipliers, never gates): every listed type this queue can build now is in every roll. The first build of a type is a WEIGHT (FirstBoost, escalating
 			// while it stays unbuilt), not an exclusion; the cash protection is the pay-as-you-go progressive payment of that first build.
@@ -2811,6 +2859,34 @@ namespace OpenRA.Mods.CA.Traits
 			// ub_pool: the full candidate list with the factors of each weight (fraction, personality x demand x mode bias percent, counter percent, final weight after the floor)
 			var parts = string.Join("|", pool.Select((a, i) => string.Create(System.Globalization.CultureInfo.InvariantCulture, $"{a.Name}:{fractions[i]}:{biases[i]}:{counterPcts[i]}:x{boosts[i]:0.##}:{weights[i]:0.##}")));
 			RollLog($"{world.WorldTick},{seat},ub_pool,{pool[pick].Name},{queueType},{pickId};floor={RollParameters.FloorPct};{parts}");
+		}
+
+		// ub_pool_empty (DEV, record only): one row per queue type per 250 ticks when the roll has no candidate (or the whole queue is capped out before a roll): tick,seat,ub_pool_empty,,queue,reason;
+		// then every listed type the queue could build with its reject reason (skip, harvester, cappedout, delay, interval, limit, capturer, aircraft...). No behaviour is attached to it.
+		readonly List<string> rollExcluded = [];
+		readonly Dictionary<string, int> rollEmptyLogTick = new(StringComparer.Ordinal);
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void RollExclude(string name, string reason) => rollExcluded.Add(name + ":" + reason);
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void RollEmptyLog(string queueType, string reason)
+		{
+			if (rollEmptyLogTick.TryGetValue(queueType, out var last) && world.WorldTick - last < 250)
+				return;
+
+			rollEmptyLogTick[queueType] = world.WorldTick;
+			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},ub_pool_empty,,{queueType},{reason};{string.Join("|", rollExcluded)}");
+		}
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void RollCappedLog(string queueType)
+		{
+			rollExcluded.Clear();
+			foreach (var item in AIUtils.FindQueues(player, queueType).SelectMany(q => q.BuildableItems()).Select(i => i.Name).Distinct(StringComparer.Ordinal).OrderBy(n => n, StringComparer.Ordinal))
+				rollExcluded.Add(item + ":cappedout(" + string.Join("+", cappedOut.Select(c => c.GetType().Name)) + ")");
+
+			RollEmptyLog(queueType, "cappedout");
 		}
 
 		int rollPickSeq;

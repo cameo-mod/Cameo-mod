@@ -145,11 +145,13 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 		}
 
-		void EmitUpgradeRow(SeatTelemetry seat, string kind, string actor, string queue)
+		void EmitUpgradeRow(SeatTelemetry seat, string kind, string actor, string queue, string source = null)
 		{
 			var b = BeginEvent(seat, kind, 1, out _);
 			AiMatchLogWriter.AppendString(b, "actor", actor);
 			AiMatchLogWriter.AppendString(b, "queue", queue);
+			if (source != null)
+				AiMatchLogWriter.AppendString(b, "upg_done_source", source);
 			b.Append('}');
 			writer.TryWrite(b.ToString());
 		}
@@ -164,7 +166,7 @@ namespace OpenRA.Mods.Cameo.Traits
 					continue;
 
 				cov.UpgradeDone.Add(pair.Key);
-				EmitUpgradeRow(seat, "ub_upgrade_done", pair.Key, pair.Value);
+				EmitUpgradeRow(seat, "ub_upgrade_done", pair.Key, pair.Value, cov.UpgradeRegistries.Select(r => r.Source(pair.Key)).FirstOrDefault(x => x != null));
 			}
 		}
 

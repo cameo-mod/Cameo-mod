@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenRA.Mods.CA.Traits
 {
@@ -25,6 +26,74 @@ namespace OpenRA.Mods.CA.Traits
 		readonly Dictionary<string, int> availableSince = new(StringComparer.Ordinal);
 		readonly Dictionary<string, HashSet<string>> blockedBy = new(StringComparer.Ordinal);
 		readonly HashSet<string> done = new(StringComparer.Ordinal);
+		readonly Dictionary<string, string> sources = new(StringComparer.Ordinal);
+		readonly Dictionary<string, (int Tick, bool Seen)> pending = new(StringComparer.Ordinal);
+
+		public const string SourceGrant = "grant";
+		public const string SourceApprox = "approx";
+		public const string SourceInit = "init";
+
+		/// <summary>Staleness: an order that is neither seen completing nor granted after this many ticks is dropped (cancelled, or never accepted by the engine).</summary>
+		public const int PendingMaxTicks = 3000;
+
+		/// <summary>The service ordered the item: it is settled at the next visits against authoritative state, whatever happens between visits.</summary>
+		public void Started(string name, int tick) => pending[name] = (tick, false);
+
+		public bool AnyPending => pending.Count > 0;
+
+		/// <summary>
+		/// Settle the ordered items. Authoritative state decides: an item is done when the player holds a prerequisite it REALLY grants (grantsOf = the prerequisites its traits provide, which need not be
+		/// its name), so an item that was ordered and finished between two visits is still found. An item that grants no prerequisite (condition-only) has no state to read: it is done by approximation
+		/// when it left the queue (seen there, or ordered long enough ago) and is no longer offered, which is the one signal a cancelled item does not give for a non-repeatable item.
+		/// Returns the newly completed (name, source) pairs.
+		/// </summary>
+		public List<(string Name, string Source)> Settle(int tick, ISet<string> inProduction, Func<string, IReadOnlyCollection<string>> grantsOf, ISet<string> owned, Func<ISet<string>> offered)
+		{
+			var result = new List<(string, string)>();
+			if (pending.Count == 0)
+				return result;
+
+			ISet<string> offeredNow = null;
+			foreach (var name in new List<string>(pending.Keys))
+			{
+				var (started, seen) = pending[name];
+				if (inProduction.Contains(name))
+				{
+					pending[name] = (started, true);
+					continue;
+				}
+
+				var grants = grantsOf(name);
+				if (grants.Count > 0)
+				{
+					if (grants.Any(owned.Contains))
+					{
+						pending.Remove(name);
+						if (Complete(name, SourceGrant))
+							result.Add((name, SourceGrant));
+					}
+					else if (tick - started > PendingMaxTicks)
+						pending.Remove(name);
+
+					continue;
+				}
+
+				// condition-only: no prerequisite to read
+				if (seen || tick - started > 100)
+				{
+					offeredNow ??= offered();
+					pending.Remove(name);
+					if (!offeredNow.Contains(name) && Complete(name, SourceApprox))
+						result.Add((name, SourceApprox));
+				}
+				else if (tick - started > PendingMaxTicks)
+					pending.Remove(name);
+			}
+
+			return result;
+		}
+
+		public string Source(string name) => sources.TryGetValue(name, out var source) ? source : null;
 
 		/// <summary>The type is buildable now: remember the first tick it was, and the other items it names with "!X" prerequisites ("!itself" only makes it non-repeatable).</summary>
 		public void Observe(string name, int tick, IEnumerable<string> prerequisites)
@@ -50,7 +119,14 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>The item finished (authoritative completion: the item left its queue and the player now holds the granted prerequisite, or the state was found at init). Returns true on the first completion.</summary>
-		public bool Complete(string name) => done.Add(name);
+		public bool Complete(string name, string source = SourceInit)
+		{
+			if (!done.Add(name))
+				return false;
+
+			sources[name] = source;
+			return true;
+		}
 
 		/// <summary>This type itself completed (not merely a member of a satisfied set).</summary>
 		public bool Completed(string name) => done.Contains(name);

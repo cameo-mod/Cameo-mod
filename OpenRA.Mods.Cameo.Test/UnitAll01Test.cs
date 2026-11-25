@@ -407,31 +407,166 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(r2.IsDone("a_requires_not_b"), Is.False);
 		}
 
+		// Sol FIX of 425f1fab: completion is decided from authoritative state at the service visits, keyed to the REAL grants of the item.
+		static List<(string Name, string Source)> Settle(UpgradeCompletions r, int tick, string[] inProduction, Dictionary<string, string[]> grants, string[] owned, string[] offered = null) =>
+			r.Settle(tick, new HashSet<string>(inProduction), n => grants.TryGetValue(n, out var g) ? g : [], new HashSet<string>(owned), () => new HashSet<string>(offered ?? []));
+
 		[Test]
-		public void PreExistingOrRestoredCompletionsAreFoundByTheInitScanAndAnItemMustLeaveItsQueueToCount()
+		public void AFastItemThatFinishesBetweenTwoVisitsIsStillFoundByItsGrant()
+		{
+			var r = new UpgradeCompletions();
+			var grants = new Dictionary<string, string[]> { ["upgrade_fast"] = ["upgrade_fast"] };
+			r.Started("upgrade_fast", 1000);
+
+			// the item entered and finished between two visits: it was never seen in the queue, the grant is held
+			var done = Settle(r, 1030, [], grants, ["upgrade_fast", "something_else"]);
+			Assert.That(done, Is.EqualTo(new[] { ("upgrade_fast", UpgradeCompletions.SourceGrant) }));
+			Assert.That(r.Completed("upgrade_fast"), Is.True);
+			Assert.That(r.Source("upgrade_fast"), Is.EqualTo("grant"));
+			Assert.That(r.AnyPending, Is.False);
+			Assert.That(Settle(r, 1060, [], grants, ["upgrade_fast"]), Is.Empty, "once");
+		}
+
+		[Test]
+		public void TheGrantIsResolvedFromTheItemsTraitsNotItsName()
+		{
+			var grants = new Dictionary<string, string[]> { ["upgrade_cabal"] = ["tech.cabal", "tech.cabal2"] };
+
+			// holding something named like the item is NOT the grant
+			var r = new UpgradeCompletions();
+			r.Started("upgrade_cabal", 0);
+			Assert.That(Settle(r, 50, [], grants, ["upgrade_cabal"]), Is.Empty, "the name alone proves nothing");
+			Assert.That(r.Completed("upgrade_cabal"), Is.False);
+
+			// holding any real grant is
+			Assert.That(Settle(r, 80, [], grants, ["tech.cabal2"]), Is.EqualTo(new[] { ("upgrade_cabal", "grant") }));
+
+			// still in production: not settled
+			var r2 = new UpgradeCompletions();
+			r2.Started("upgrade_cabal", 0);
+			Assert.That(Settle(r2, 50, ["upgrade_cabal"], grants, ["tech.cabal"]), Is.Empty, "the grant of a running item is not held yet or is another item's");
+			Assert.That(r2.AnyPending, Is.True);
+
+			// a cancelled item (grant never held) is dropped once stale, never done
+			var r3 = new UpgradeCompletions();
+			r3.Started("upgrade_cabal", 0);
+			Assert.That(Settle(r3, UpgradeCompletions.PendingMaxTicks + 1, [], grants, []), Is.Empty);
+			Assert.That(r3.AnyPending, Is.False);
+			Assert.That(r3.Completed("upgrade_cabal"), Is.False);
+		}
+
+		[Test]
+		public void AConditionOnlyItemIsDoneByApproximationOnlyWhenItLeftTheQueueAndIsNoLongerOffered()
+		{
+			var grants = new Dictionary<string, string[]>(); // no prerequisite: condition-only
+
+			// seen in the queue, then gone and not offered any more: approx
+			var r = new UpgradeCompletions();
+			r.Started("promo_cond", 0);
+			Assert.That(Settle(r, 25, ["promo_cond"], grants, [], []), Is.Empty, "still in the queue");
+			Assert.That(Settle(r, 50, [], grants, [], []), Is.EqualTo(new[] { ("promo_cond", UpgradeCompletions.SourceApprox) }));
+			Assert.That(r.Source("promo_cond"), Is.EqualTo("approx"));
+
+			// seen, gone, but still offered (cancelled, or a repeatable): NOT done, and dropped
+			var r2 = new UpgradeCompletions();
+			r2.Started("promo_cond", 0);
+			Settle(r2, 25, ["promo_cond"], grants, [], ["promo_cond"]);
+			Assert.That(Settle(r2, 50, [], grants, [], ["promo_cond"]), Is.Empty);
+			Assert.That(r2.Completed("promo_cond"), Is.False);
+			Assert.That(r2.AnyPending, Is.False);
+
+			// ordered this visit and not queued yet: not judged before it was seen or 100 ticks passed
+			var r3 = new UpgradeCompletions();
+			r3.Started("promo_cond", 1000);
+			Assert.That(Settle(r3, 1010, [], grants, [], []), Is.Empty);
+			Assert.That(r3.AnyPending, Is.True);
+		}
+
+		[Test]
+		public void PreExistingOrRestoredCompletionsAreFoundByTheInitScanOfRealGrants()
 		{
 			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
 
-			// authoritative state: the prerequisite the player holds (ITechTreePrerequisite, the tech tree's own source), scanned once at the first visit: a restored or pre-existing completion is found there
+			// authoritative state: the prerequisites the player holds (ITechTreePrerequisite, the tech tree's own source) against the grants the item's traits provide (ITechTreePrerequisiteInfo)
 			Assert.That(u, Does.Contain("world.ActorsWithTrait<ITechTreePrerequisite>()"));
+			Assert.That(u, Does.Contain("info.TraitInfos<ITechTreePrerequisiteInfo>().SelectMany(t => t.Prerequisites(info))"), "the real grant, not the name");
 			Assert.That(u, Does.Contain("void UpgradeScanOnce()\n\t\t{\n\t\t\tif (upgradeScanned)\n\t\t\t\treturn;"), "once");
-			Assert.That(u, Does.Contain("if (owned.Contains(a.Name) && ServedByUpgradeService(a) && upgradeDone.Complete(a.Name))"));
-			Assert.That(u, Does.Contain("UpgradeScanOnce();\n\t\t\tUpgradeCheckCompleted(inProduction);"), "both run before the service chooses");
-
-			// a completion in play: it was in production on the last visit, is not now, and the prerequisite is held (a cancelled item holds none)
-			Assert.That(u, Does.Contain("if (inProduction.Contains(name) || upgradeDone.Completed(name))"));
-			Assert.That(u, Does.Contain("if (owned.Contains(name) && upgradeDone.Complete(name))"));
+			Assert.That(u, Does.Contain("if (ServedByUpgradeService(a) && UpgradeGrantsOf(a.Name).Any(owned.Contains) && upgradeDone.Complete(a.Name, UpgradeCompletions.SourceInit))"));
+			Assert.That(u, Does.Contain("UpgradeScanOnce();\n\t\t\tUpgradeSettle(inProduction);"), "both run before the service chooses");
+			Assert.That(u, Does.Contain("upgradeDone.Started(item2.Name, world.WorldTick);"), "every ordered item is settled at the later visits");
+			Assert.That(u, Does.Contain("upgradeDone.Settle(world.WorldTick, inProduction, UpgradeGrantsOf, OwnedPrerequisites(), OfferedUpgradeNames)"));
+			Assert.That(u, Does.Contain("upg_done_source={source}"), "the DEV row carries the source");
 
 			// no ActorAdded guess
 			Assert.That(u, Does.Not.Contain("UpgradeCompleted(Actor a)"));
 			Assert.That(u, Does.Not.Contain("world.ActorAdded += UpgradeCompleted"));
 			Assert.That(Source("mods/Cameo.Dev/AiPlayerTelemetryDev.Coverage.cs"), Does.Not.Contain("ActorAdded"), "the DEV row reads the module's registry");
+			Assert.That(Source("mods/Cameo.Dev/AiPlayerTelemetryDev.Coverage.cs"), Does.Contain("AppendString(b, \"upg_done_source\", source)"));
 
 			// the registry itself: a restored completion marks done at once, without ever having been seen buildable
 			var r = new UpgradeCompletions();
 			Assert.That(r.Complete("upgrade_conyard"), Is.True, "found at init");
+			Assert.That(r.Source("upgrade_conyard"), Is.EqualTo("init"));
 			Assert.That(r.IsDone("upgrade_conyard"), Is.True);
 			Assert.That(r.Complete("upgrade_conyard"), Is.False, "once");
+		}
+
+		// Opus 11-25: ub_pool_empty (DEV record only, no behaviour) + the ub_unit_roll OFF path stays the old one (classic byte-identical).
+		[Test]
+		public void TheEmptyPoolRowIsDevOnlyRecordOnlyAndNamesEveryExcludedTypeWithItsReason()
+		{
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			Assert.That(u, Does.Contain("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid RollExclude("));
+			Assert.That(u, Does.Contain("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid RollEmptyLog("));
+			Assert.That(u, Does.Contain("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid RollCappedLog("));
+			Assert.That(u, Does.Contain(",ub_pool_empty,,{queueType},{reason};{string.Join(\"|\", rollExcluded)}"));
+			Assert.That(u, Does.Contain("world.WorldTick - last < 250"), "rate limited per queue");
+			Assert.That(u, Does.Contain("RollExclude(a.Name, rejectedBy);"), "the reject reason of each excluded type");
+			Assert.That(u, Does.Contain("RollEmptyLog(queue.Info.Type, rollExcluded.Count > 0 ? \"all_excluded\" : \"none_listed_buildable\");"));
+			Assert.That(u, Does.Contain("cappedOut.Length > 0 && !queue.BuildableItems().Any(a => !CappedOut(a)))\n\t\t\t\t{\n\t\t\t\t\tRollCappedLog(queue.Info.Type);\n\t\t\t\t\tcontinue;\n\t\t\t\t}"), "the cap skip keeps its continue");
+		}
+
+		[Test]
+		public void WithTheUnitRollOffTheOldChooserRunsAndNoRollTermIsReadOutsideTheRollMethods()
+		{
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+
+			// the old chooser is still the one the fair loop takes when the roll is off
+			Assert.That(u, Does.Contain("var unit = roll ? ChooseRollUnit(queue, skip) : fromFloor ?? (buildRandom"));
+			Assert.That(u, Does.Contain("var roll = UnitRollOn;"));
+			Assert.That(u, Does.Contain("bool UnitRollOn => switchesActive && Info.UnitRoll && FairService && !ablateUnitRoll.Off(player, AblationIds.UnitRoll);"));
+
+			// the roll's own state (table, availability stamps, pick ids, excluded list) is touched only inside the roll methods and DEV log methods
+			string Body(string signature)
+			{
+				var start = u.IndexOf(signature, StringComparison.Ordinal);
+				Assert.That(start, Is.GreaterThan(0), signature);
+				var open = u.IndexOf('{', start);
+				var depth = 0;
+				for (var i = open; i < u.Length; i++)
+				{
+					if (u[i] == '{')
+						depth++;
+					else if (u[i] == '}' && --depth == 0)
+						return u.Substring(start, i - start + 1);
+				}
+
+				return u.Substring(start);
+			}
+
+			var outside = u;
+			foreach (var signature in new[] { "ActorInfo ChooseRollUnit(", "void RollPickLog(", "void RollStartLog(", "void RollEmptyLog(", "void RollCappedLog(", "int RollStrength(int profile)", "void RollExclude(" })
+				outside = outside.Replace(Body(signature), "");
+
+			foreach (var term in new[] { "RollParameters.", "rollAvailableSince[", "rollAvailableSince.", "rollPickIds.", "rollPickSeq", "rollExcluded.", "UnitRoll.Quantize", "UnitRoll.FirstBoost" })
+			{
+				// declarations and the property are the only other mentions
+				var count = outside.Split(new[] { term }, StringSplitOptions.None).Length - 1;
+				Assert.That(count, Is.LessThanOrEqualTo(term == "rollPickSeq" ? 1 : 0), term + " is read only by the roll methods");
+			}
+
+			// NotifyStarted keeps its old body plus the DEV-only call
+			Assert.That(u, Does.Contain("RollStartLog(name, queueType);\n\n\t\t\tforeach (var observer in UnitObservers)"));
 		}
 
 		[Test]
