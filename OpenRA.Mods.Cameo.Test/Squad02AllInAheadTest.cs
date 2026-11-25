@@ -293,10 +293,13 @@ namespace OpenRA.Mods.Cameo.Test
 
 			foreach (var flag in new[]
 			{
-				"ArmyAheadEnabled", "ArmyAheadYardEnabled", "ArmyAheadProductionEnabled", "ArmyAheadEconomyEnabled", "ArmyAheadDefeatEnabled", "ArmyAheadTradeEnabled", "ArmyAheadBattleEnabled",
+				"ArmyAheadYardEnabled", "ArmyAheadProductionEnabled", "ArmyAheadEconomyEnabled", "ArmyAheadDefeatEnabled", "ArmyAheadTradeEnabled", "ArmyAheadBattleEnabled",
 				"ArmyAheadArmyEnabled", "ArmyAheadCounterEnabled", "ArmyAheadSuperEnabled", "ArmyAheadDeescalateEnabled"
 			})
 				Assert.That(info, Does.Contain("public readonly bool " + flag + " = true;"), flag);
+
+			// V08F-FIX-02: the family switch defaults off in code; the six personality blocks with the one launcher set it on.
+			Assert.That(info, Does.Contain("public readonly bool ArmyAheadEnabled = false;"));
 
 			foreach (var number in new[]
 			{
