@@ -87,11 +87,25 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void AnItemInFlightInAnotherQueueDoesNotSuppressTheWaiver()
+		{
+			var fractions = new Dictionary<string, int> { ["tech"] = 10, ["radar"] = 10 };
+			var inQueueB = new[] { "radar" };
+			var inQueueA = Array.Empty<string>();
+			int CountOf(string n) => n == "radar" ? 1 : 0; // the global in-flight map holds radar (queue B)
+			Assert.That(BuildAllListed.FirstCopiesInQueue(inQueueA, fractions, CountOf), Is.EqualTo(0), "queue A sees nothing in flight");
+			Assert.That(BuildAllListed.Waives(BaseBuildStage.S5CoreOnce, 100, BuildAllListed.FirstCopiesInQueue(inQueueA, fractions, CountOf)), Is.True);
+			Assert.That(BuildAllListed.FirstCopiesInQueue(inQueueB, fractions, CountOf), Is.EqualTo(1), "queue B counts its own first copy");
+			Assert.That(BuildAllListed.Waives(BaseBuildStage.S5CoreOnce, 100, BuildAllListed.FirstCopiesInQueue(inQueueB, fractions, CountOf)), Is.False);
+			Assert.That(BuildAllListed.FirstCopiesInQueue(new[] { "radar" }, fractions, n => 3), Is.EqualTo(0), "a type that already stands is a second copy");
+		}
+
+		[Test]
 		public void TheWorldWiringIsBehindTheSwitch()
 		{
 			var p1 = Source(Dir + "BaseBuilderQueueManagerCA.Pipeline01.cs");
 			Assert.That(p1, Does.Contain("CoreOnceListedOnly = baseBuilder.BuildAllListedArmed,"));
-			Assert.That(p1, Does.Contain("var listedWaived = baseBuilder.BuildAllListedArmed && BuildAllListed.Waives(c.Stage, s.Bank, ListedFirstCopiesInFlight(s));"));
+			Assert.That(p1, Does.Contain("var listedWaived = baseBuilder.BuildAllListedArmed && BuildAllListed.Waives(c.Stage, s.Bank, ListedFirstCopiesInFlight(queue, s));"));
 			Assert.That(p1, Does.Contain("&& !(baseBuilder.BuildAllListedArmed && baseBuilder.RefineryCountWithQueued() <= 0))"), "A2: the last refinery is not held by the anchor max");
 
 			var defence = Source(Dir + "BaseBuilderQueueManagerCA.Pipeline01Defence.cs");

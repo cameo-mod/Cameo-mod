@@ -291,11 +291,22 @@ namespace OpenRA.Mods.CA.Traits
 			if (s.IntervalActive != null && s.IntervalActive(name))
 				return false;
 
+			return BaseBuilderQueueEvalCA.FractionAdmits(CountOf(s, name), fractionPer100, CombinedMilli(s, name), s.BuildingCount);
+		}
+
+		/// <summary>The ONE combined weight of a type (milli, 1000 = neutral): the knob milli (personality x demand) times the mode bias milli. Used by the share cap
+		/// (<see cref="FractionStageAdmits"/>) and by the S5 first-copy order (<see cref="CombinedWeight"/>).</summary>
+		public static int CombinedMilli(BaseBuildSnapshot s, string name)
+		{
 			var milli = s.FractionMilli?.Invoke(name) ?? BuildOrderKnob.Neutral;
 			if (s.BiasMilli != null)
 				milli = ModeBias.CombineMilli(milli, s.BiasMilli(name)); // MODE-BIAS-01: max(1, milli x bias / 1000)
-			return BaseBuilderQueueEvalCA.FractionAdmits(CountOf(s, name), fractionPer100, milli, s.BuildingCount);
+			return milli;
 		}
+
+		/// <summary>The S5 order weight of a listed type: base fraction x <see cref="CombinedMilli"/>, floored at 1 (every type keeps a chance) and capped.</summary>
+		public static int CombinedWeight(BaseBuildSnapshot s, string name, int fractionPer100) =>
+			(int)Math.Clamp((long)Math.Max(1, fractionPer100) * CombinedMilli(s, name), 1, 1_000_000);
 
 		static int Lookup(IReadOnlyDictionary<string, int> counts, string name) =>
 			counts != null && counts.TryGetValue(name, out var n) ? n : 0;
@@ -346,7 +357,11 @@ namespace OpenRA.Mods.CA.Traits
 				yield break;
 
 			// MODE-BIAS-01: with a profile active the order is the weighted one (ModeBias.WeightedOrder, lazy, one draw per entry reached); else the uniform shuffle.
-			IEnumerable<KeyValuePair<string, int>> order = s.BiasMilli != null
+			// BUILD-ALL-B (FullStack finding, Opus ruling): the S5 first-copy order uses the same combined weight as the share cap (base x personality x demand x mode).
+			var per100 = stage == BaseBuildStage.S5CoreOnce && (s.BiasMilli != null || s.FractionMilli != null) ? FractionTable(s.Fractions) : null;
+			IEnumerable<KeyValuePair<string, int>> order = per100 != null
+				? ModeBias.WeightedOrder(s.Fractions, name => CombinedWeight(s, name, per100.TryGetValue(name, out var v) ? v : 0), rng)
+				: s.BiasMilli != null
 				? ModeBias.WeightedOrder(s.Fractions, s.BiasMilli, rng)
 				: s.Fractions.OrderBy(kv => kv.Key, StringComparer.Ordinal).Shuffle(rng);
 			foreach (var frac in order)
@@ -357,6 +372,15 @@ namespace OpenRA.Mods.CA.Traits
 				if (FractionStageAdmits(s, frac.Key, frac.Value))
 					yield return new BaseBuildCandidate(frac.Key, stage);
 			}
+		}
+
+		static Dictionary<string, int> FractionTable(IEnumerable<KeyValuePair<string, int>> fractions)
+		{
+			var table = new Dictionary<string, int>(StringComparer.Ordinal);
+			foreach (var kv in fractions)
+				table.TryAdd(kv.Key, kv.Value);
+
+			return table;
 		}
 
 		// S5 (every listed building once): the original roll on first copies with a positive weight, then the depth fallback (StageSource) for the

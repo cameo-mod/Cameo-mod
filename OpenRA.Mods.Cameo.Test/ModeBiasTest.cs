@@ -124,9 +124,27 @@ namespace OpenRA.Mods.Cameo.Test
 				var names = Candidates(s, stage, 11);
 				Assert.That(names.OrderBy(n => n, StringComparer.Ordinal), Is.EqualTo(Names), stage + ": the floor, nothing is gated out");
 
-				var expected = ModeBias.WeightedIndexOrder(new[] { 1000, 1000, 5000, 1000, 1000 }, new MersenneTwister(11)).Select(i => Names[i]).ToList();
+				// S5 weighs by the combined weight (base fraction x milli, BUILD-ALL-B); S10 by the mode bias milli alone.
+				var weights = stage == BaseBuildStage.S5CoreOnce ? new[] { 10000, 10000, 50000, 10000, 10000 } : new[] { 1000, 1000, 5000, 1000, 1000 };
+				var expected = ModeBias.WeightedIndexOrder(weights, new MersenneTwister(11)).Select(i => Names[i]).ToList();
 				Assert.That(names, Is.EqualTo(expected), stage.ToString());
 			}
+		}
+
+		[Test]
+		public void TheS5OrderUsesTheCombinedWeightAHigherWeightGoesFirst()
+		{
+			var s = Snap(null);
+			s.Fractions = new[] { new KeyValuePair<string, int>("low", 10), new KeyValuePair<string, int>("high", 10) };
+			s.FractionMilli = name => name == "high" ? 100000 : 1000; // personality x demand
+			Assert.That(BaseBuildPlanCA.CombinedWeight(s, "high", 10), Is.GreaterThan(BaseBuildPlanCA.CombinedWeight(s, "low", 10)));
+			Assert.That(BaseBuildPlanCA.CombinedWeight(s, "none", 0), Is.EqualTo(1000), "the floor: a base of 0 counts as 1, so the type keeps a chance");
+			var highFirst = 0;
+			for (var seed = 0; seed < 50; seed++)
+				if (Candidates(s, BaseBuildStage.S5CoreOnce, seed)[0] == "high")
+					highFirst++;
+
+			Assert.That(highFirst, Is.GreaterThan(45), "weight 1,000,000 against 10,000 leads in nearly every roll");
 		}
 
 		[Test]

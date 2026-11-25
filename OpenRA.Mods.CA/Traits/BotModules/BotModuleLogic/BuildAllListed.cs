@@ -9,7 +9,9 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenRA.Mods.CA.Traits
 {
@@ -22,6 +24,26 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>A type is a listed first copy: a BuildingFractions entry with a positive weight and none owned (variants counted) or in flight.</summary>
 		public static bool ListedFirstCopy(IReadOnlyDictionary<string, int> fractions, string name, int count) =>
 			name != null && fractions != null && fractions.TryGetValue(name, out var weight) && weight > 0 && count <= 0;
+
+		/// <summary>
+		/// Listed first copies in flight in ONE queue (separate queues never gate each other): <paramref name="queuedItems"/> are that queue's own queued items,
+		/// <paramref name="countOf"/> the standing + in-flight count of a type. A queued type counts when it is listed and none of it stands beyond its queued copies.
+		/// </summary>
+		public static int FirstCopiesInQueue(IEnumerable<string> queuedItems, IReadOnlyDictionary<string, int> fractions, Func<string, int> countOf)
+		{
+			if (fractions == null || queuedItems == null)
+				return 0;
+
+			var n = 0;
+			foreach (var group in queuedItems.GroupBy(i => i, StringComparer.Ordinal))
+			{
+				var queued = group.Count();
+				if (fractions.TryGetValue(group.Key, out var weight) && weight > 0 && countOf(group.Key) - queued <= 0)
+					n += queued;
+			}
+
+			return n;
+		}
 
 		/// <summary>
 		/// True = test A6 is waived for this start: an S5 pick, a bank above 0 and no other listed first copy in flight (one pay-as-you-go start at a

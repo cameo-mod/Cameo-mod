@@ -268,7 +268,7 @@ namespace OpenRA.Mods.CA.Traits
 				// BUILD-ALL-B (bb_build_all_listed): every S5 start (a listed first copy, or the power plant A5 put in its place) rides the same way while no
 				// other listed first copy is in flight, so the high-tech factory no longer needs a place on the TechChainTypes list.
 				var techChainStart = baseBuilder.Info.TechChainTypes.Contains(start.Name);
-				var listedWaived = baseBuilder.BuildAllListedArmed && BuildAllListed.Waives(c.Stage, s.Bank, ListedFirstCopiesInFlight(s));
+				var listedWaived = baseBuilder.BuildAllListedArmed && BuildAllListed.Waives(c.Stage, s.Bank, ListedFirstCopiesInFlight(queue, s));
 				if (!listedWaived && (!techChainStart || !(baseBuilder.TechChainPaygoArmed && TechChainPaygo.Waives(c.Stage, s.Bank, TechChainInFlight()))))
 				{
 					if (techChainStart || c.Stage == BaseBuildStage.S5CoreOnce)
@@ -297,26 +297,10 @@ namespace OpenRA.Mods.CA.Traits
 			return n;
 		}
 
-		// BUILD-ALL-B: listed first copies queued or in production (any producer): in flight, and none of the type (variants counted) stands.
-		// Owned-only on purpose: an in-flight copy of a type that already stands is a second copy, not a first one.
-		int ListedFirstCopiesInFlight(BaseBuildSnapshot s)
-		{
-			var fractions = baseBuilder.Info.BuildingFractions;
-			if (fractions == null)
-				return 0;
-
-			var n = 0;
-			foreach (var kv in baseBuilder.BuildingsBeingProduced)
-			{
-				if (kv.Value <= 0 || !fractions.TryGetValue(kv.Key, out var weight) || weight <= 0)
-					continue;
-
-				if (BaseBuildPlanCA.CountOf(s, kv.Key) - kv.Value <= 0)
-					n += kv.Value;
-			}
-
-			return n;
-		}
+		// BUILD-ALL-B: listed first copies queued or in production in THIS queue only (Opus ruling: separate queues never gate each other), and none of the
+		// type (variants counted) stands. Owned-only on purpose: an in-flight copy of a type that already stands is a second copy, not a first one.
+		int ListedFirstCopiesInFlight(ProductionQueue queue, BaseBuildSnapshot s) =>
+			BuildAllListed.FirstCopiesInQueue(queue.AllQueued().Select(i => i.Item), baseBuilder.Info.BuildingFractions, name => BaseBuildPlanCA.CountOf(s, name));
 
 		// BUILD-ALL-B, DEV only: the admitted start goes to the record-only planner observers (the DEV player telemetry). Compiled out of a release build.
 		IBotBuildingPickObserver[] pickObservers;
