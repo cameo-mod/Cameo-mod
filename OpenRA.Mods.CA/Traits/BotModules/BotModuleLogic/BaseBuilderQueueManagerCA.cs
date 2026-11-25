@@ -22,7 +22,7 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.CA.Traits
 {
-	class BaseBuilderQueueManagerCA
+	partial class BaseBuilderQueueManagerCA
 	{
 		public readonly string Category;
 		public BotCooldown WaitCooldown;
@@ -999,6 +999,12 @@ namespace OpenRA.Mods.CA.Traits
 			if (currentBuilding == null && failCount < baseBuilder.Info.MaximumFailedPlacementAttempts)
 			{
 				pendingDemandPick = default;
+
+				// CONSOLIDATE-01 c2 (bb_pipeline_01): armed, the staged planner picks and admits (BaseBuilderQueueManagerCA.Pipeline01.cs).
+				// Off (and classic): the ladder and vetoes below, unchanged.
+				if (PipelineOn)
+					return TickQueuePlanned(bot, queue);
+
 				var item = ChooseBuildingToBuild(queue);
 				if (item == null)
 				{
@@ -1777,7 +1783,8 @@ namespace OpenRA.Mods.CA.Traits
 		// through PickOrPower BEFORE the draw: an infeasible candidate contributes the power
 		// fallback (identical to draw-then-substitute), and a set of only infeasible candidates
 		// with no fallback resolves empty — a decline that consumes zero draws (Sol review).
-		List<ActorInfo> OverflowProductionCandidates(IEnumerable<ActorInfo> buildableThings, ActorInfo power)
+		// CONSOLIDATE-01 c6: the staged planner passes resolvePower = false (its A5 swaps the power plant in itself), which returns the production types as they are.
+		List<ActorInfo> OverflowProductionCandidates(IEnumerable<ActorInfo> buildableThings, ActorInfo power, bool resolvePower = true)
 		{
 			playerBuildings ??= player.PlayerActor.World.Actors
 				.Where(a => a.Owner == player.PlayerActor.Owner && !a.Disposed)
@@ -1800,7 +1807,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (!BaseBuilderQueueEvalCA.OverflowTypeAdmits(standingOrVariants, producing, ProductionTypeLimit))
 					continue;
 
-				var resolved = BaseBuilderQueueEvalCA.PickOrPower(actor, power, HasSufficientPowerForActor);
+				var resolved = resolvePower ? BaseBuilderQueueEvalCA.PickOrPower(actor, power, HasSufficientPowerForActor) : actor;
 				if (resolved != null)
 					candidates.Add(resolved);
 			}

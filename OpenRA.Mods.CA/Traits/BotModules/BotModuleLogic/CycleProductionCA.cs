@@ -32,6 +32,24 @@ namespace OpenRA.Mods.CA.Traits
 			return best;
 		}
 
+		/// <summary>
+		/// CONSOLIDATE-01 c6 (stage S8): every candidate in the order repeated <see cref="Pick"/> calls take them (the first is exactly the Pick), so the planner
+		/// falls through to the next type of the cycle when the first fails a feasibility test. Pure, no random draw.
+		/// </summary>
+		public static IReadOnlyList<string> Order(IReadOnlyList<(string Name, int Count)> candidates, string lastPicked)
+		{
+			var rest = new List<(string Name, int Count)>(candidates);
+			var names = new List<string>(rest.Count);
+			while (rest.Count > 0)
+			{
+				var index = Pick(rest, lastPicked);
+				names.Add(rest[index].Name);
+				rest.RemoveAt(index);
+			}
+
+			return names;
+		}
+
 		static bool Better((string Name, int Count) a, (string Name, int Count) b, string lastPicked)
 		{
 			if (a.Count != b.Count)

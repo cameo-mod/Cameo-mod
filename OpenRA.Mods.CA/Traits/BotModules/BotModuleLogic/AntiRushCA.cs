@@ -56,5 +56,28 @@ namespace OpenRA.Mods.CA.Traits
 
 			return best;
 		}
+
+		/// <summary>
+		/// CONSOLIDATE-01 c5 (stage S4): the candidates in the order <see cref="Pick"/> takes them (fewest owned or queued copies, then the cheapest, then by name), at most
+		/// <paramref name="max"/> names. The first one is the Pick; the others are what the planner falls through to when the first fails a feasibility test.
+		/// </summary>
+		public static IReadOnlyList<string> Order(IReadOnlyList<(string Name, int Cost, int OwnedOrQueued)> candidates, int max)
+		{
+			var list = new List<(string Name, int Cost, int OwnedOrQueued)>(candidates);
+			list.Sort((a, b) => a.OwnedOrQueued != b.OwnedOrQueued ? a.OwnedOrQueued.CompareTo(b.OwnedOrQueued)
+				: a.Cost != b.Cost ? a.Cost.CompareTo(b.Cost)
+				: string.CompareOrdinal(a.Name, b.Name));
+
+			var names = new List<string>();
+			foreach (var c in list)
+			{
+				if (names.Count >= Math.Max(0, max))
+					break;
+
+				names.Add(c.Name);
+			}
+
+			return names;
+		}
 	}
 }

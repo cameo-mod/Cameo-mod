@@ -45,6 +45,7 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateIssueFloor;
 		AblationLatch ablateRallyMid;
 		AblationLatch ablatePincerDouble;
+		AblationLatch ablateBarArrivedOnly;
 		int teamLeadNextCheck;
 		string teamLeadKey;
 		TeamLeadTeam teamLeadTeam;
@@ -105,6 +106,12 @@ namespace OpenRA.Mods.CA.Traits
 		bool TeamLeadRallyMidOn => TeamLeadOn && Info.TeamLeadRallyMidEnabled && !ablateRallyMid.Off(Player, AblationIds.TeamLeadRallyMid);
 
 		bool TeamLeadPincerDoubleOn => TeamLeadOn && Info.TeamLeadPincerDoubleEnabled && !ablatePincerDouble.Off(Player, AblationIds.TeamLeadPincerDouble);
+
+		// CONSOLIDATE-02 D1: the push bar is the arrived blob against WAVE-MIN and a share of the COMMITTED units, not half of the team idle army; own switch + row.
+		bool TeamLeadBarArrivedOnlyOn => TeamLeadOn && Info.TeamLeadBarArrivedOnlyEnabled && !ablateBarArrivedOnly.Off(Player, AblationIds.TeamLeadBarArrivedOnly);
+
+		// The arrived bar replaces the old unit bar only while WAVE-MIN is active, so the two rows never compound in an ablation run (WAVE-MIN off = the old bar).
+		bool TeamLeadArrivedBarOn => TeamLeadBarArrivedOnlyOn && WaveMinActive;
 
 		// ---- TEAM-GATHER-02 ----
 
@@ -973,6 +980,10 @@ namespace OpenRA.Mods.CA.Traits
 				order.HandOver(team.Election.Leader);
 			}
 
+			// CONSOLIDATE-02 D1 (tl_bar_arrived_only): a held push that reached its timeout goes out when the arrived blob passes WAVE-MIN, instead of being dissolved below.
+			if (order.LeaderKey == team.Election.Leader && !order.GatherOnly && TeamLeadBarTimeoutPush(order, now))
+				return;
+
 			var cancel = order.LeaderKey != team.Election.Leader ? "leader_changed"
 				: order.Extending && TeamLeadCA.PushBarDissolve(now, order.PushBarSince, Info.TeamLeadPushBarMaxTicks) ? "below_bar"
 				: !order.GatherOnly && !order.Extending && now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? "max_age"
@@ -1051,8 +1062,11 @@ namespace OpenRA.Mods.CA.Traits
 			var (minUnits, minValue) = WaveMinActive ? WaveMinBars() : (0, 0);
 
 			// The team's idle army = what waits in the blob plus what the order already holds (gathered or on the way); half of it is the blob launch minimum's second term.
-			var teamIdle = (teamLeadTeam?.Pool(now, Info.TeamLeadPoolMaxAgeTicks).Units ?? 0) + order.CommittedTotals().Units;
-			var needUnits = BlobLaunch01CA.MinUnits(minUnits, teamIdle);
+			// CONSOLIDATE-02 D1 (tl_bar_arrived_only): that term is dropped; the bar is the arrived units against WAVE-MIN and a share of the units COMMITTED to the order
+			// (the squads assigned to it, never the home pool). The idle count stays for the hold record.
+			var committedUnits = order.CommittedTotals().Units;
+			var teamIdle = (teamLeadTeam?.Pool(now, Info.TeamLeadPoolMaxAgeTicks).Units ?? 0) + committedUnits;
+			var needUnits = TeamLeadArrivedBarOn ? TeamLeadCA.ArrivedBarUnits(minUnits, committedUnits, Info.TeamLeadBarArrivedPercent) : BlobLaunch01CA.MinUnits(minUnits, teamIdle);
 			if (TeamLeadCA.PushBarPassed(units, value, Info.TeamLeadJoinMinUnits, needUnits, minValue))
 				return false;
 
@@ -1064,6 +1078,26 @@ namespace OpenRA.Mods.CA.Traits
 				order.LastReportTick = now;
 
 			order.HoldPush(now);
+			return true;
+		}
+
+		// CONSOLIDATE-02 D1 (tl_bar_arrived_only): the gather timeout of the push bar (TeamLeadPushBarMaxTicks after the first hold). The held order pushes the blob that has
+		// arrived when it passes the plain WAVE-MIN bars (a pincer too: its prongs push from where they stand); below WAVE-MIN the cancel below dissolves it as before.
+		bool TeamLeadBarTimeoutPush(TeamLeadOrder order, int now)
+		{
+			if (!TeamLeadArrivedBarOn)
+				return false;
+
+			var (units, value) = order.ArrivedTotals();
+			var (minUnits, minValue) = WaveMinBars();
+			if (!TeamLeadCA.BarTimeoutPush(now, order.PushBarSince, Info.TeamLeadPushBarMaxTicks, units, value, Info.TeamLeadJoinMinUnits, minUnits, minValue))
+				return false;
+
+			order.PushTick = now;
+			TeamLeadAllInPushRecord(order, now);
+			order.PushReason = "bar_timeout";
+			DiagnosticTeamEvent("team_push", "seq=" + order.Seq + " why=" + order.PushReason + " age=" + (now - order.IssueTick) + " committed=" + order.CommittedTotals().Units
+				+ " arrived=" + units + " pincer=" + (order.Pincer ? 1 : 0));
 			return true;
 		}
 

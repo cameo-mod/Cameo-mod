@@ -348,7 +348,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(wiring, Does.Contain("((TeamLeadHuntViaOrderOn && FinishModeActive) || teamLeadAllInPicking)"), "an all-in order with no known target hunts");
 			Assert.That(wiring, Does.Contain("TeamLeadAllInRecord(\"all_in_start\""));
 			Assert.That(wiring, Does.Contain("TeamLeadAllInRecord(\"all_in_join\""));
-			Assert.That(System.Text.RegularExpressions.Regex.Matches(wiring, "TeamLeadAllInPushRecord\\(order, now\\);").Count, Is.EqualTo(2), "both push sites");
+			Assert.That(System.Text.RegularExpressions.Regex.Matches(wiring, "TeamLeadAllInPushRecord\\(order, now\\);").Count, Is.EqualTo(3), "all three push sites (pincer, plain, CONSOLIDATE-02 D1 bar_timeout)");
 			Assert.That(RepoFile(Bots + "BotModuleLogic/TeamLeadCA.cs"), Does.Contain("public static bool Engaged(IReadOnlyList<Seat> seats, Election election, int minSeats = 2)"));
 		}
 

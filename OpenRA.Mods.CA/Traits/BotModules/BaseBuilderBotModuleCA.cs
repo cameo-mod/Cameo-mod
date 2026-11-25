@@ -313,6 +313,53 @@ namespace OpenRA.Mods.CA.Traits
 			"refineries). Gated by SwitchCondition; row ready_watchdog_all.")]
 		public readonly bool ReadyWatchdogAll = false;
 
+		[Desc("CONSOLIDATE-01 c1 (B07/X11): the buildings in flight on every building queue (and their power) are recounted every bot tick whatever the bank.",
+			"Off = the old recount, which ran only at bank >= BuildingProductionMinCashRequirement, so below it the first-copy, limit and refinery counts",
+			"missed buildings already being produced. Gated by SwitchCondition; row bb_recount_in_flight.")]
+		public readonly bool RecountInFlightAlways = false;
+
+		[Desc("CONSOLIDATE-01 c2: master switch of the staged build planner (BaseBuildPlanCA, CONSOLIDATE_01_DESIGN.md 3.1). Armed, each building and defence",
+			"producer starts the first candidate of the ordered stages (c2: S1 power, S3 opening order, S10 fraction roll) that passes the feasibility tests A1-A7;",
+			"a held candidate falls through to the next one, with no veto after the pick, and at most 8 tests per producer per sweep. Off = the old pick ladder",
+			"and its post-pick vetoes, unchanged. Gated by SwitchCondition; row bb_pipeline_01.")]
+		public readonly bool BbPipeline01 = false;
+
+		[Desc("CONSOLIDATE-01 c4 (R8): stage S6 of the staged planner offers the cash-trickler (passive income) buildings up to their BuildingLimits value (a type with no",
+			"limit once) and a silo when storage is nearly full, at reserve 0. Needs BbPipeline01. Off = S6 offers nothing. Gated by SwitchCondition; row bb_passive_income.")]
+		public readonly bool BbPassiveIncome = false;
+
+		[Desc("CONSOLIDATE-01 c5 (R3): stage S4 of the staged planner offers the anti-rush base defence set right after the first production building: ground defences, the type with",
+			"the fewest copies first, then the cheapest, up to AntiRushBaseMin..AntiRushBaseMax by tier (the same set as AntiRushBase), at reserve 0. RATIO-2X never holds the",
+			"set (the start is still recorded); the need gate and the seen-threat rule do not apply; it counts toward the defence cap. Needs BbPipeline01. Off = S4 offers",
+			"nothing. Gated by SwitchCondition; row bb_antirush_set.")]
+		public readonly bool BbAntiRushSet = false;
+
+		[Desc("CONSOLIDATE-01 c5 (R6): stage S9 of the staged planner offers the extra defences (the armed defences of BuildingFractions, in a synced random order) after a threat is",
+			"seen: defence need gate (extras only), the threat-scaled defence cap (DefenceCapBase), RATIO-2X with its FLOAT exemption. Needs BbPipeline01. Off = S9 offers nothing",
+			"and the defences stay in the S10 fraction roll, which carries the same cap. Gated by SwitchCondition; row bb_extra_defence.")]
+		public readonly bool BbExtraDefence = false;
+
+		[Desc("CAPTURE-TECH-01: stage S5 of the staged planner also offers another faction's power plant, silo or refinery (the player owns one of that category, none of the type)",
+			"when it provides a prerequisite the player lacks that gates another building type, so a captured construction yard unlocks its faction's tech. Needs BbPipeline01.",
+			"Off = S5 is unchanged. Gated by SwitchCondition; row cs_capture_unlock.")]
+		public readonly bool CsCaptureUnlock = false;
+
+		[Desc("CONSOLIDATE-01 c5: the threat-scaled defence cap of the staged planner (the ARMY-FIRST-02 cap, DefenceCapCA): a defence is held while the armed defences owned or in",
+			"flight number at least this base plus DefenceCapPerThreat x the threat intensity. -1 = no cap. Row af2_defence_cap (shared with the ArmyFirstBotModule cap).")]
+		public readonly int DefenceCapBase = -1;
+
+		[Desc("CONSOLIDATE-01 c5: extra defences allowed at full threat intensity (IBotThreatAnalysis, the highest of the anti-air, anti-armour and anti-infantry intensities, 0..1). Rounded down.")]
+		public readonly int DefenceCapPerThreat = 0;
+
+		[Desc("CONSOLIDATE-01 c5: saturation of the threat intensity, in percent of the react threshold (300 = intensity 1 at 3x the threshold).")]
+		public readonly int DefenceThreatSaturationPercent = 300;
+
+		[Desc("CONSOLIDATE-01 c5: while the personality is turtle and the game is before TurtleDefenceUntilTick the cap is scaled by this percent. 100 = no turtle bonus.")]
+		public readonly int TurtleDefenceCapPercent = 100;
+
+		[Desc("CONSOLIDATE-01 c5: end of the turtle defence bonus (world tick).")]
+		public readonly int TurtleDefenceUntilTick = 0;
+
 		[Desc("BASE-06: ticks a READY building may be held before it is placed at a base cell.")]
 		public readonly int ReadyWatchdogTicks = 75;
 
@@ -774,6 +821,25 @@ namespace OpenRA.Mods.CA.Traits
 		public bool TeamTurretSupportArmed => Info.TeamTurretSupport && switchesActive;
 		public bool FloorEssentialsExemptArmed => Info.FloorEssentialsExempt && switchesActive;
 		public bool ReadyWatchdogArmed => Info.ReadyWatchdogAll && switchesActive;
+		AblationLatch ablateRecountInFlight; // CONSOLIDATE-01 c1
+		public bool RecountInFlightArmed => Info.RecountInFlightAlways && switchesActive && !ablateRecountInFlight.Off(player, AblationIds.RecountInFlight);
+		AblationLatch ablatePipeline01; // CONSOLIDATE-01 c2
+		public bool Pipeline01Armed => Info.BbPipeline01 && switchesActive && !ablatePipeline01.Off(player, AblationIds.BbPipeline01);
+		// CONSOLIDATE-01 c3: the tech depth of every building type (prerequisite-graph distance from the construction yard), built once on the first S5
+		// sweep by the queue manager and shared by this player's producers (BaseBuilderQueueManagerCA.CoreDepths). Null until then.
+		public IReadOnlyDictionary<string, int> CoreTechDepth;
+		AblationLatch ablatePassiveIncome; // CONSOLIDATE-01 c4
+		public bool PassiveIncomeArmed => Info.BbPassiveIncome && switchesActive && !ablatePassiveIncome.Off(player, AblationIds.BbPassiveIncome);
+		AblationLatch ablateAntiRushSet; // CONSOLIDATE-01 c5
+		AblationLatch ablateExtraDefence;
+		AblationLatch ablateDefenceCap;
+		AblationLatch ablateCaptureUnlock; // CAPTURE-TECH-01
+		public bool CaptureUnlockArmed => Info.CsCaptureUnlock && switchesActive && !ablateCaptureUnlock.Off(player, AblationIds.CsCaptureUnlock);
+		// CAPTURE-TECH-01: provided tokens and gates of every building type, no faction filter; built once on the first S5 sweep with the switch on. Null until then.
+		public CaptureUnlockMapsCA CaptureUnlockMaps;
+		public bool AntiRushSetArmed => Info.BbAntiRushSet && switchesActive && !ablateAntiRushSet.Off(player, AblationIds.BbAntiRushSet);
+		public bool ExtraDefenceArmed => Info.BbExtraDefence && switchesActive && !ablateExtraDefence.Off(player, AblationIds.BbExtraDefence);
+		public bool DefenceCapArmed => Info.DefenceCapBase >= 0 && switchesActive && !ablateDefenceCap.Off(player, AblationIds.Af2DefenceCap);
 		public bool NoSpaceBanArmed => Info.NoSpaceBan && switchesActive;
 		public bool RefinerySafetyAllClaimsArmed => Info.RefinerySafetyAllClaims && switchesActive;
 		public bool RefineryEconomyGateArmed => Info.RefineryEconomyGate && switchesActive;
@@ -1268,7 +1334,8 @@ namespace OpenRA.Mods.CA.Traits
 
 					// Record buildings being produced only when AI can produce,
 					// and record their power only when AI can produce
-					if (playerResources.GetCashAndResources() >= Info.BuildingProductionMinCashRequirement)
+					// CONSOLIDATE-01 c1: armed, the recount runs whatever the bank (InFlightRecountCA.Recounts).
+					if (InFlightRecountCA.Recounts(RecountInFlightArmed, playerResources.GetCashAndResources(), Info.BuildingProductionMinCashRequirement))
 					{
 						foreach (var queue in queues)
 						{
@@ -1277,10 +1344,7 @@ namespace OpenRA.Mods.CA.Traits
 							if (producing == null)
 								continue;
 
-							if (BuildingsBeingProduced.TryGetValue(producing.Item, out var value))
-								BuildingsBeingProduced[producing.Item] = ++value;
-							else
-								BuildingsBeingProduced.Add(producing.Item, 1);
+							InFlightRecountCA.Record(BuildingsBeingProduced, producing.Item);
 
 							// Record the power of the building.
 							ExcessPower += producing.ActorInfo.TraitInfos<PowerInfo>().Where(p => p.EnabledByDefault).Sum(pi => pi.Amount);

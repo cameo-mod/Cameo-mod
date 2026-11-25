@@ -75,7 +75,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		public override object Create(ActorInitializer init) { return new BotPersonalityController(init.Self, this); }
 	}
 
-	public class BotPersonalityController : ConditionalTrait<BotPersonalityControllerInfo>, IResolveOrder
+	public class BotPersonalityController : ConditionalTrait<BotPersonalityControllerInfo>, IResolveOrder, OpenRA.Mods.CA.Traits.IBotCurrentPersonality
 	{
 		int personalityToken = Actor.InvalidConditionToken;
 		string pinnedTo;
