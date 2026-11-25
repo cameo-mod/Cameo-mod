@@ -82,9 +82,10 @@ namespace OpenRA.Mods.Cameo.Test
 			var src = Source(PipelineFile);
 			Assert.That(src, Does.Contain("if (!BaseBuildPlanCA.Affordable(s.Bank, startCost, BaseBuildPlanCA.ReserveFor(c.Stage, s.ProductionCashReserve)))"), "A6 is still the first test");
 			Assert.That(src, Does.Contain("var techChainStart = baseBuilder.Info.TechChainTypes.Contains(start.Name);"));
-			Assert.That(src, Does.Contain("if (!techChainStart || !(baseBuilder.TechChainPaygoArmed && TechChainPaygo.Waives(c.Stage, s.Bank, TechChainInFlight())))"),
+			// BUILD-ALL-B: the listed first-copy waiver (bb_build_all_listed) is tried first; with it off the paygo test is the old one.
+			Assert.That(src, Does.Contain("if (!listedWaived && (!techChainStart || !(baseBuilder.TechChainPaygoArmed && TechChainPaygo.Waives(c.Stage, s.Bank, TechChainInFlight()))))"),
 				"switch off or a non-tech start = the old A6 refusal");
-			Assert.That(src, Does.Contain("if (techChainStart)\n\t\t\t\t\t\tTechChainA6HoldRecord(start.Name, c.Stage, s.Bank, startCost);\n\n\t\t\t\t\treturn false;"));
+			Assert.That(src, Does.Contain("if (techChainStart || c.Stage == BaseBuildStage.S5CoreOnce)\n\t\t\t\t\t\tTechChainA6HoldRecord(start.Name, c.Stage, s.Bank, startCost);\n\n\t\t\t\t\treturn false;"));
 		}
 
 		[Test]

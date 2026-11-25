@@ -353,6 +353,17 @@ namespace OpenRA.Mods.CA.Traits
 			"Needs BbPipeline01. Off = A6 unchanged. Gated by SwitchCondition; row bb_techchain_paygo.")]
 		public readonly bool BbTechChainPaygo = false;
 
+		[Desc("BUILD-ALL-B (user ruling 2026-11-25): stage S5 of the staged planner builds every BuildingFractions entry that is buildable now once, and nothing else:",
+			"no depth fallback of unlisted types (D2k concrete slabs remove themselves, so they never counted as owned and were offered again and again), the refinery",
+			"included (a lost last refinery comes back as a first copy). Every S5 first copy rides with any bank above 0 while no other S5 first copy is in flight,",
+			"instead of the TechChainTypes list. Needs BbPipeline01. Off = S5 and A6 unchanged. Gated by SwitchCondition; row bb_build_all_listed.")]
+		public readonly bool BbBuildAllListed = false;
+
+		[Desc("BUILD-ALL-B (user ruling 2026-11-25): the base builder never queues a terrain foundation (D2k concrete: a building without health that removes",
+			"itself unconditionally, FoundationExclusion) on any path, listed or not. Concrete use is planned by CONCRETE-PLAN-01 after the playtest.",
+			"Off = as before. Gated by SwitchCondition; row bb_no_foundation.")]
+		public readonly bool BbNoFoundation = false;
+
 		[Desc("CONSOLIDATE-01 c5: the threat-scaled defence cap of the staged planner (the ARMY-FIRST-02 cap, DefenceCapCA): a defence is held while the armed defences owned or in",
 			"flight number at least this base plus DefenceCapPerThreat x the threat intensity. -1 = no cap. Row af2_defence_cap (shared with the ArmyFirstBotModule cap).")]
 		public readonly int DefenceCapBase = -1;
@@ -846,6 +857,12 @@ namespace OpenRA.Mods.CA.Traits
 		public bool CaptureUnlockArmed => Info.CsCaptureUnlock && switchesActive && !ablateCaptureUnlock.Off(player, AblationIds.CsCaptureUnlock);
 		AblationLatch ablateTechChainPaygo; // TECHCHAIN-PAYGO-01
 		public bool TechChainPaygoArmed => Info.BbTechChainPaygo && switchesActive && !ablateTechChainPaygo.Off(player, AblationIds.BbTechChainPaygo);
+		AblationLatch ablateBuildAllListed; // BUILD-ALL-B
+		public bool BuildAllListedArmed => Info.BbBuildAllListed && switchesActive && !ablateBuildAllListed.Off(player, AblationIds.BbBuildAllListed);
+		AblationLatch ablateNoFoundation; // BUILD-ALL-B
+		public bool NoFoundationArmed => Info.BbNoFoundation && switchesActive && !ablateNoFoundation.Off(player, AblationIds.BbNoFoundation);
+		// BUILD-ALL-B: whether a type is a terrain foundation, by name, filled on first sight (the traits never change in a game).
+		public readonly Dictionary<string, bool> FoundationTypes = new(StringComparer.Ordinal);
 		// CAPTURE-TECH-01: provided tokens and gates of every building type, no faction filter; built once on the first S5 sweep with the switch on. Null until then.
 		public CaptureUnlockMapsCA CaptureUnlockMaps;
 		public bool AntiRushSetArmed => Info.BbAntiRushSet && switchesActive && !ablateAntiRushSet.Off(player, AblationIds.BbAntiRushSet);

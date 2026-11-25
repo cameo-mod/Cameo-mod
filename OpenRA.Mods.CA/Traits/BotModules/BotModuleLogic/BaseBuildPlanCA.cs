@@ -124,6 +124,10 @@ namespace OpenRA.Mods.CA.Traits
 		public int BuildingCount;
 		public Func<string, int> FractionMilli;
 		public Func<string, bool> IntervalActive;
+
+		// BUILD-ALL-B (row bb_build_all_listed): S5 offers only the listed BuildingFractions first copies (the roll); the depth fallback of unlisted
+		// first-copy kinds and listed weight-0 entries is off. False = S5 as before.
+		public bool CoreOnceListedOnly;
 	}
 
 	/// <summary>
@@ -321,7 +325,7 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		// S5 (every listed building once): the original roll on first copies with a positive weight, then the depth fallback (StageSource) for the
-		// types the roll cannot offer. Nothing on the defence queue (S4 and S9 own it).
+		// types the roll cannot offer (not with CoreOnceListedOnly). Nothing on the defence queue (S4 and S9 own it).
 		static IEnumerable<BaseBuildCandidate> CoreOnceCandidates(BaseBuildSnapshot s, MersenneTwister rng)
 		{
 			if (s.DefenceQueue)
@@ -329,6 +333,10 @@ namespace OpenRA.Mods.CA.Traits
 
 			foreach (var c in RollCandidates(s, rng, BaseBuildStage.S5CoreOnce))
 				yield return c;
+
+			// BUILD-ALL-B: the build-once set is the listed fractions only (user ruling 11-25), so the fallback is not asked at all.
+			if (s.CoreOnceListedOnly)
+				yield break;
 
 			foreach (var c in SourceCandidates(s, BaseBuildStage.S5CoreOnce))
 				yield return c;

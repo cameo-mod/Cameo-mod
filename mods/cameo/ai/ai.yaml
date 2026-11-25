@@ -5953,6 +5953,10 @@ Player:
 		CsCaptureUnlock: true
 		# TECHCHAIN-PAYGO-01 (row bb_techchain_paygo, Opus ruling A 11-25): S3/S5 tech-chain picks start with any bank above 0, one at a time.
 		BbTechChainPaygo: true
+		# BUILD-ALL-B (row bb_build_all_listed, user ruling 11-25): S5 = the buildable BuildingFractions entries once, refinery included, no unlisted fallback; S5 first copies ride with any bank above 0.
+		BbBuildAllListed: true
+		# BUILD-ALL-B (row bb_no_foundation, user ruling 11-25): no concrete (terrain foundation) on any base-builder path; CONCRETE-PLAN-01 after the playtest.
+		BbNoFoundation: true
 		# af2_defence_cap moves from ArmyFirstBotModule@af02 (its grant is emptied in ^AIDifficulties) into the pipeline, same values.
 		DefenceCapBase: 3
 		DefenceCapPerThreat: 6

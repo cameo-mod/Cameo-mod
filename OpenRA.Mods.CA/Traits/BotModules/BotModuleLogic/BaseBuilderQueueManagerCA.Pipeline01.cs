@@ -44,6 +44,8 @@ namespace OpenRA.Mods.CA.Traits
 				return false;
 
 			var buildable = queue.BuildableItems().ToList();
+			if (baseBuilder.NoFoundationArmed)
+				buildable = FoundationExclusion.Without(buildable, baseBuilder.FoundationTypes); // BUILD-ALL-B: no concrete on any stage
 			var power = GetProducibleBuilding(baseBuilder.Info.PowerTypes, buildable,
 				a => a.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault).Sum(p => p.Amount));
 			var law = baseBuilder.RefineryLawProvider();
@@ -57,6 +59,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			var item = world.Map.Rules.Actors[pick.Name];
 			AIUtils.BotDebug("{0} decided to build {1}: pipeline {2} (candidate {3}, {4} tests)", queue.Actor.Owner, item.Name, pick.Stage, pick.Candidate, pick.Tests);
+			PickObserved(item.Name, pick.Stage, pick.Candidate, snapshot.Bank);
 			AdmitPlanned(bot, queue, item);
 
 			// c6: only the admitted S8 candidate moves the cycle (the stage source is a query); the production type tried, also when A5 built the power plant instead.
@@ -113,6 +116,7 @@ namespace OpenRA.Mods.CA.Traits
 				BuildingCount = playerBuildings.Length,
 				FractionMilli = FractionMilli,
 				IntervalActive = name => b.BuildingIntervals != null && b.BuildingIntervals.ContainsKey(name) && activeBuildingIntervals.ContainsKey(name),
+				CoreOnceListedOnly = baseBuilder.BuildAllListedArmed,
 			};
 
 			// c3, c4, c5: S2, S2b, S4, S5, S6, S7, S9 (Pipeline01Stages.cs); S5 reads the counts of this snapshot.
@@ -220,7 +224,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (baseBuilder.TryGetBuildingLimit(name, out var limit) && BaseBuilderQueueEvalCA.LimitReached(count, limit))
 				return false;
 
-			if (baseBuilder.Info.RefineryTypes.Contains(name) && baseBuilder.HasMaxRefineriesFor(info))
+			// BUILD-ALL-B: with no refinery standing or in flight at all, the anchor law's max does not hold the listed first copy (V08: seat_8 lost its
+			// only refinery at tick 5156 and never built another).
+			if (baseBuilder.Info.RefineryTypes.Contains(name) && baseBuilder.HasMaxRefineriesFor(info)
+				&& !(baseBuilder.BuildAllListedArmed && baseBuilder.RefineryCountWithQueued() <= 0))
 				return false;
 
 			if (NavalNeedsWater(info) || NoSpaceBanned(name))
@@ -252,10 +259,13 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				// TECHCHAIN-PAYGO-01 (bb_techchain_paygo): an S3/S5 tech-chain start rides with any bank above 0 while no other tech-chain item is in flight.
 				// Off, or any other start: the full-cost test as before. A held tech-chain start writes the DEV row pipeline_a6_hold.
+				// BUILD-ALL-B (bb_build_all_listed): every S5 start (a listed first copy, or the power plant A5 put in its place) rides the same way while no
+				// other listed first copy is in flight, so the high-tech factory no longer needs a place on the TechChainTypes list.
 				var techChainStart = baseBuilder.Info.TechChainTypes.Contains(start.Name);
-				if (!techChainStart || !(baseBuilder.TechChainPaygoArmed && TechChainPaygo.Waives(c.Stage, s.Bank, TechChainInFlight())))
+				var listedWaived = baseBuilder.BuildAllListedArmed && BuildAllListed.Waives(c.Stage, s.Bank, ListedFirstCopiesInFlight(s));
+				if (!listedWaived && (!techChainStart || !(baseBuilder.TechChainPaygoArmed && TechChainPaygo.Waives(c.Stage, s.Bank, TechChainInFlight()))))
 				{
-					if (techChainStart)
+					if (techChainStart || c.Stage == BaseBuildStage.S5CoreOnce)
 						TechChainA6HoldRecord(start.Name, c.Stage, s.Bank, startCost);
 
 					return false;
@@ -281,6 +291,47 @@ namespace OpenRA.Mods.CA.Traits
 			return n;
 		}
 
+		// BUILD-ALL-B: listed first copies queued or in production (any producer): in flight, and none of the type (variants counted) stands.
+		// Owned-only on purpose: an in-flight copy of a type that already stands is a second copy, not a first one.
+		int ListedFirstCopiesInFlight(BaseBuildSnapshot s)
+		{
+			var fractions = baseBuilder.Info.BuildingFractions;
+			if (fractions == null)
+				return 0;
+
+			var n = 0;
+			foreach (var kv in baseBuilder.BuildingsBeingProduced)
+			{
+				if (kv.Value <= 0 || !fractions.TryGetValue(kv.Key, out var weight) || weight <= 0)
+					continue;
+
+				if (BaseBuildPlanCA.CountOf(s, kv.Key) - kv.Value <= 0)
+					n += kv.Value;
+			}
+
+			return n;
+		}
+
+		// BUILD-ALL-B, DEV only: the admitted start goes to the record-only planner observers (the DEV player telemetry). Compiled out of a release build.
+		IBotBuildingPickObserver[] pickObservers;
+
+		IBotBuildingPickObserver[] PickObservers => pickObservers ??= world.WorldActor.TraitsImplementing<IBotBuildingPickObserver>().ToArray();
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void PickObserved(string actor, BaseBuildStage stage, string candidate, int bank)
+		{
+			foreach (var o in PickObservers)
+				o.BuildingPicked(player, world.WorldTick, actor, stage.ToString(), candidate, bank);
+		}
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void RefineryHeldObserved(string gate)
+		{
+			var refineries = baseBuilder.RefineryCountWithQueued();
+			foreach (var o in PickObservers)
+				o.RefineryHeld(player, world.WorldTick, gate, refineries);
+		}
+
 		// TECHCHAIN-PAYGO-01, DEV only: last pipeline_a6_hold tick per name. Null until the first row, and always null in a release build (its only writer is compiled out).
 		Dictionary<string, int> techChainHoldLogged;
 
@@ -295,6 +346,10 @@ namespace OpenRA.Mods.CA.Traits
 			techChainHoldLogged[name] = now;
 			AIUtils.BotDebug("{0} pipeline_a6_hold name={1} stage={2} bank={3} cost={4} paygo={5} tick={6}",
 				player, name, stage, bank, cost, baseBuilder.TechChainPaygoArmed, now);
+
+			// BUILD-ALL-B: the same row into the DEV telemetry file (BotDebug alone reaches only the in-game chat, so V08 had no such row on disk).
+			foreach (var o in PickObservers)
+				o.BuildingA6Held(player, now, name, stage.ToString(), bank, cost);
 		}
 
 		// A7: the atomic claims of TickQueue (crawl link, front defence), taken only for the candidate the planner is about to admit. A refused

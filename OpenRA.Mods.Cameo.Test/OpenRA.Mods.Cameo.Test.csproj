@@ -44,6 +44,8 @@
           Link="source/mods/Cameo/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../OpenRA.Mods.Cameo.Dev/AiPlayerTelemetryDev.cs"
           Link="source/mods/Cameo.Dev/AiPlayerTelemetryDev.cs" CopyToOutputDirectory="Always" />
+    <None Include="../OpenRA.Mods.Cameo.Dev/AiPlayerTelemetryDev.Coverage.cs"
+          Link="source/mods/Cameo.Dev/AiPlayerTelemetryDev.Coverage.cs" CopyToOutputDirectory="Always" />
     <None Include="MissionBuildLineOracle.cs" Link="source/MissionBuildLineOracle.cs" CopyToOutputDirectory="Always" />
     <None Include="../mods/cameo/mod.yaml" Link="source/packaging/cameo-mod.yaml" CopyToOutputDirectory="Always" />
     <None Include="../mods/cameo/rules/world.yaml" Link="source/packaging/world.yaml" CopyToOutputDirectory="Always" />

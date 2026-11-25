@@ -2915,6 +2915,8 @@ namespace OpenRA.Mods.CA.Traits
 			openingPickName = null;
 			antiRushPickName = null;
 			var buildableThings = queue.BuildableItems();
+			if (baseBuilder.NoFoundationArmed)
+				buildableThings = FoundationExclusion.Without(buildableThings.ToList(), baseBuilder.FoundationTypes); // BUILD-ALL-B: no concrete (UnlistedBuildingsOnce included)
 			if (TechLogOn) // TECH-LOG-01: only a tech-chain type this queue offers, and cannot build yet, has an unmet prerequisite
 			{
 				var techBuildable = buildableThings.Select(b => b.Name).ToHashSet();

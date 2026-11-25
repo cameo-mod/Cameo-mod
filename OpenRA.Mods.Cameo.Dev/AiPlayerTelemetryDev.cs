@@ -31,7 +31,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			new AiPlayerTelemetryDev(init.Self.Info.TraitInfo<AiPlayerTelemetryInfo>());
 	}
 
-	public sealed class AiPlayerTelemetryDev : IWorldLoaded, ITick, IGameOver, INotifyActorDisposing, IBotUnitProductionObserver, IBotFrontierStageObserver
+	public sealed partial class AiPlayerTelemetryDev : IWorldLoaded, ITick, IGameOver, INotifyActorDisposing, IBotUnitProductionObserver, IBotFrontierStageObserver
 	{
 		readonly AiPlayerTelemetryInfo info;
 		readonly Dictionary<uint, BuildingTrack> buildings = new();
@@ -358,6 +358,8 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			try
 			{
+				HarvesterLost(actor); // BUILD-ALL-B (AiPlayerTelemetryDev.Coverage.cs)
+
 				if (IsMobileConyard(actor))
 				{
 					if (TryMatchPendingDeploy(actor.Owner, actor.Location, world.WorldTick, out var deployedYard))
@@ -530,6 +532,9 @@ namespace OpenRA.Mods.Cameo.Traits
 
 				if (tick % info.SampleIntervalTicks == 0)
 					EconomySample(self.World, tick);
+
+				if (tick % CoveragePollTicks == 0)
+					CoveragePoll(self.World); // BUILD-ALL-B (AiPlayerTelemetryDev.Coverage.cs)
 			}
 			// Fail closed: a sampling fault ends the channel, never the game.
 			catch (Exception e)

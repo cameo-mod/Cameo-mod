@@ -91,9 +91,12 @@ namespace OpenRA.Mods.CA.Traits
 				case BaseBuildStage.S5CoreOnce:
 					// No army-share, RATIO or need cap: S5 is never vetoed by later rules. Only a type this player cannot build (a doctrine alternative) or a
 					// type with a stage of its own (yard, refinery) is skipped, at no test cost.
+					// BUILD-ALL-B (bb_build_all_listed): a listed refinery is a first copy like any other entry (S5 offers count 0 only), so a base whose last
+					// refinery died gets one back; S2 and S7 keep the second and later copies.
 					return buildableNames.Contains(candidate.Name)
 						&& !baseBuilder.Info.ConstructionYardTypes.Contains(candidate.Name)
-						&& (!baseBuilder.Info.RefineryTypes.Contains(candidate.Name) || (baseBuilder.CaptureUnlockArmed && captureUnlockOffered.Contains(candidate.Name))); // CAPTURE-TECH-01: an unlock refinery
+						&& (baseBuilder.BuildAllListedArmed
+							|| (!baseBuilder.Info.RefineryTypes.Contains(candidate.Name) || (baseBuilder.CaptureUnlockArmed && captureUnlockOffered.Contains(candidate.Name)))); // CAPTURE-TECH-01: an unlock refinery
 				case BaseBuildStage.S8ProductionCycle:
 					return PipelineCycleAdmits(queue, candidate.Name);
 				case BaseBuildStage.S9ExtraDefence:

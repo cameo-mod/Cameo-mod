@@ -53,6 +53,8 @@ namespace OpenRA.Mods.CA.Traits
 				var refinery = ChooseWantedRefinery(queue, buildable, power);
 				if (refinery != null)
 					yield return refinery.Name;
+				else
+					RefineryHeldObserved(RefineryHoldGate(buildable)); // BUILD-ALL-B, DEV only
 			}
 
 			if (law == null)
@@ -266,6 +268,37 @@ namespace OpenRA.Mods.CA.Traits
 			var refinery = ChooseWantedRefinery(queue, buildable, power);
 			if (refinery != null)
 				yield return refinery.Name;
+			else
+				RefineryHeldObserved(RefineryHoldGate(buildable)); // BUILD-ALL-B, DEV only
+		}
+
+		// BUILD-ALL-B, DEV only (its one caller, RefineryHeldObserved, is compiled out of a release build together with this argument): the first gate of
+		// ChooseWantedRefinery that holds, re-asked with the same queries in the same order. The economy gate is not run again (it moves clocks); its
+		// verdict of the call just made is read instead.
+		string RefineryHoldGate(List<ActorInfo> buildable)
+		{
+			if (baseBuilder.HasAdequateRefineryCount())
+				return "adequate";
+
+			if (SafetyOn && SafetyAllOn && baseBuilder.ExpansionRefineryBlockedByAllUnsafe())
+				return "unsafe_all";
+
+			if (SafetyOn && !SafetyAllOn)
+			{
+				var wantedBy = baseBuilder.ExpansionWantsRefinery();
+				var wantedField = wantedBy?.RefineryClaimTarget ?? wantedBy?.ExpansionTarget;
+				if (wantedField != null && !baseBuilder.ExpansionRefinerySafe(wantedField.Value))
+					return "unsafe_field";
+			}
+
+			var refinery = GetProducibleBuilding(baseBuilder.Info.RefineryTypes, buildable);
+			if (refinery == null)
+				return "not_buildable";
+
+			if (baseBuilder.HasMaxRefineriesFor(refinery))
+				return "max_refineries";
+
+			return RefineryEconomyGateOn ? "economy_" + lastRefineryEconomyVerdict : "power";
 		}
 	}
 }
