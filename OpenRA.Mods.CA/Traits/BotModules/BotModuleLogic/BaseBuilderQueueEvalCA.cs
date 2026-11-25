@@ -105,6 +105,49 @@ namespace OpenRA.Mods.CA.Traits
 		public static bool CrawlHold(BuildingType type, bool lawActive, bool hasCrawlEdge, bool hasExpansionTarget) =>
 			type == BuildingType.BaseCrawl && lawActive && !hasCrawlEdge && !hasExpansionTarget;
 
+		/// <summary>
+		/// crawl_advance_only: the own buildable-area tile nearest the aim (the crawl frontier; ties keep enumeration order, the planner's FrontierAnchor rule), or null when there is none.
+		/// </summary>
+		public static CPos? NearestTile(IReadOnlyList<CPos> tiles, CPos aim)
+		{
+			if (tiles == null || tiles.Count == 0)
+				return null;
+
+			var best = tiles[0];
+			var bestSq = (best - aim).LengthSquared;
+			for (var i = 1; i < tiles.Count; i++)
+			{
+				var sq = (tiles[i] - aim).LengthSquared;
+				if (sq >= bestSq)
+					continue;
+
+				best = tiles[i];
+				bestSq = sq;
+			}
+
+			return best;
+		}
+
+		/// <summary>
+		/// crawl_advance_only: a placement advances the crawl when its footprint is strictly closer to the aim than the frontier (the own buildable-area tiles) is. No frontier evidence
+		/// (no tiles) = no veto. The measure is the planner's own (building tiles to the aim), so the placement and the want agree.
+		/// </summary>
+		public static bool AdvancesFrontier(IEnumerable<CPos> placedTiles, IReadOnlyList<CPos> frontierTiles, CPos aim)
+		{
+			if (frontierTiles == null || frontierTiles.Count == 0)
+				return true;
+
+			var frontier = int.MaxValue;
+			foreach (var t in frontierTiles)
+				frontier = Math.Min(frontier, (t - aim).LengthSquared);
+
+			var placed = int.MaxValue;
+			foreach (var t in placedTiles)
+				placed = Math.Min(placed, (t - aim).LengthSquared);
+
+			return placed < frontier;
+		}
+
 		/// <summary>CB1: the opening's barracks-first policy window for this faction.</summary>
 		public static bool OpeningBarracksPolicy(bool limitsPresent, bool prioritize, bool factionListed, bool completed) =>
 			limitsPresent && prioritize && factionListed && !completed;

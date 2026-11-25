@@ -105,6 +105,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("CS: ticks a loss-farmed target field stays out of the candidates.")]
 		public readonly int LossParkTicks = 7500;
 
+		[Desc("crawl_advance_only (CRAWL-LONG-01, row of the same name): under the refinery law a crawl placement must strictly reduce the distance from our buildable-area frontier to the aim, searched around the frontier;",
+			"a wanted link with no forward cell is placed at a base cell and the crawl target is parked for CrawlNoAdvanceParkTicks, so the want ends instead of firing a power plant every re-plan. Needs DriveBaseCrawl. False = as before.")]
+		public readonly bool CrawlAdvanceOnly = false;
+
+		[Desc("crawl_advance_only: how long the crawl target stays out of the field choice after a wanted link found no forward cell.")]
+		public readonly int CrawlNoAdvanceParkTicks = 3000;
+
 		[Desc("CS: re-plans an unexplored aim may hold the link want while scouts close in. 0 = hold until",
 			"explored without bound (the interest cell keeps drawing scouts either way).")]
 		public readonly int ScoutWaitReplans = 4;
@@ -902,6 +909,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly List<BotProtectionRequest> protectionRequests = new(1);
 		readonly List<CPos> scoutInterestCells = new(1);
 		readonly Dictionary<int, int> crawlParkedUntil = new();
+
+		// crawl_advance_only: the placement asks (CrawlAdvanceOnly), the planner parks the target on a link that found no forward cell.
+		AblationLatch ablateCrawlAdvance;
+		bool CrawlAdvanceOnlyOn => Info.CrawlAdvanceOnly && Info.DriveBaseCrawl && LawActive && !ablateCrawlAdvance.Off(player, AblationIds.CrawlAdvanceOnly);
 		string wantedFrontDefence;
 		CPos? frontDefenceCell;
 		(object Owner, string Item)? frontDefenceClaim;
@@ -1798,6 +1809,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// (null / admit) under classic and the switch-off path.
 		CPos? IBotExpansionTargetProvider.CrawlFrontierAnchor =>
 			LawActive && Info.DriveBaseCrawl && Info.BoundCrawlLinkSupply ? crawlFrontierAnchor : null;
+
+		bool IBotExpansionTargetProvider.CrawlAdvanceOnly => CrawlAdvanceOnlyOn;
+
+		void IBotExpansionTargetProvider.CrawlLinkNoAdvance()
+		{
+			if (!CrawlAdvanceOnlyOn || Target == null)
+				return;
+
+			crawlParkedUntil[Target.Value.Index] = world.WorldTick + Info.CrawlNoAdvanceParkTicks;
+			wantedLinkBuilding = null;
+#if CAMEO_DEV_LOGGING
+			Log.Write("debug", $"AI ({player.ClientIndex}): CRAWL-ADVANCE parked target field {Target.Value.Index} at {Target.Value.Center} for {Info.CrawlNoAdvanceParkTicks} ticks: the link found no forward cell, at tick {world.WorldTick}");
+#endif
+		}
 
 		bool IBotExpansionTargetProvider.TryClaimCrawlLink(object owner, string item, int cost)
 		{
@@ -3256,7 +3281,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				// CRAWL-SAFETY (S3): a route that kept losing links at the same cells is parked —
 				// another frontier gets the crawl until the farm expires.
-				if (Info.UseCrawlSafety && crawlParkedUntil.TryGetValue(i, out var lossUntil) && world.WorldTick < lossUntil)
+				if ((Info.UseCrawlSafety || CrawlAdvanceOnlyOn) && crawlParkedUntil.TryGetValue(i, out var lossUntil) && world.WorldTick < lossUntil)
 					continue;
 
 				// TC-2c: an outranking ally already aims at this field — yield instead of stacking.
