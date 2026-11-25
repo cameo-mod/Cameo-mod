@@ -5998,6 +5998,8 @@ Player:
 		# REF-FIELD-02 (row rf_economy_gate): ref1, the first vehicle factory, then ref2; 1500 ticks between refineries; from the third refinery a
 		# pending first copy goes first (at most 1500 ticks); a yard with no refinery skips the gate (expansion refinery). genericbot only.
 		RefineryEconomyGate: true
+		# REF-INTERVAL-LADDER (row rf_interval_ladder, USER VALUE 2100 - 150 r, BS-03 step 4 port): the refinery interval follows the difficulty ladder (Noob 2250 .. God 750).
+		RefineryIntervalLadder: true
 		# PROD-BUSY cycle: above the same line, more production buildings cycled across the types (row pb_cycle_production); genericbot only.
 		CycleProductionAboveLine: true
 		# SUSTAINED-CASH-01: a bank above the tier line for 1500 ticks forces the next building to be production (row pb_sustained_cash_production); genericbot only.

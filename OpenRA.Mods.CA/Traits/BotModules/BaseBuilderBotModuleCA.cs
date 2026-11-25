@@ -446,6 +446,19 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("REF-FIELD-02: minimum ticks between two refineries once every construction yard has one.")]
 		public readonly int RefineryMinIntervalTicks = 1500;
 
+		[Desc("REF-INTERVAL-LADDER (BS-03 step 4 port, USER VALUE 2100 - 150 r): the minimum ticks between two refineries are read from the difficulty ladder instead of the flat",
+			"RefineryMinIntervalTicks: Noob 2250, Easiest 2100, Hard 1500, God 750 (equal steps). Needs RefineryEconomyGate. Gated by SwitchCondition; row rf_interval_ladder (off = the flat value).")]
+		public readonly bool RefineryIntervalLadder = false;
+
+		[Desc("REF-INTERVAL-LADDER: the interval at the easiest tier.")]
+		public readonly int RefineryMinIntervalEasiest = 2100;
+
+		[Desc("REF-INTERVAL-LADDER: the interval at the hardest tier.")]
+		public readonly int RefineryMinIntervalHardest = 750;
+
+		[Desc("REF-INTERVAL-LADDER: the interval for an owner that is not on the ladder (the hard value).")]
+		public readonly int RefineryMinIntervalUnranked = 1500;
+
 		[Desc("REF-FIELD-02: longest a refinery pick yields to a pending first copy before it may go ahead anyway.")]
 		public readonly int RefineryEssentialYieldTicks = 1500;
 
@@ -905,6 +918,13 @@ namespace OpenRA.Mods.CA.Traits
 		public bool BuildAllListedArmed => Info.BbBuildAllListed && switchesActive && !ablateBuildAllListed.Off(player, AblationIds.BbBuildAllListed);
 		AblationLatch ablateNoCancel; // NO-CANCEL-01
 		public bool NoCancelArmed => Info.BbNoCancel && switchesActive && !ablateNoCancel.Off(player, AblationIds.BbNoCancel);
+		AblationLatch ablateRefineryIntervalLadder; // REF-INTERVAL-LADDER
+		public bool RefineryIntervalLadderArmed => Info.RefineryIntervalLadder && Info.RefineryEconomyGate && switchesActive && !ablateRefineryIntervalLadder.Off(player, AblationIds.RefineryIntervalLadder);
+
+		/// <summary>The refinery interval this owner uses: the ladder value (2100 - 150 r) when the row is armed, else the flat Info value.</summary>
+		public int RefineryMinIntervalEffective => RefineryIntervalLadderArmed
+			? BotDifficultyLadder.Scale(Info.RefineryMinIntervalEasiest, Info.RefineryMinIntervalHardest, player, Info.RefineryMinIntervalUnranked)
+			: Info.RefineryMinIntervalTicks;
 
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
 		public void TraceNoCancel(bool rowOn, string tag, int site, string item, Actor producer)

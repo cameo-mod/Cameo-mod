@@ -2902,7 +2902,7 @@ namespace OpenRA.Mods.CA.Traits
 				baseBuilder.RefineryGateFactoryPlacementFailed, now, baseBuilder.RefineryGateFirstStoodTick, b.RefineryFactoryWaitTicks);
 			var yardWithoutRefinery = count > 0 && baseBuilder.YardWithoutRefinery();
 			var verdict = RefineryFieldGateCA.Economy(true, count, yardWithoutRefinery, factoryBuildable, factoryOwnedOrQueued, factoryWaitReleased, now,
-				baseBuilder.RefineryGateLastRiseTick, b.RefineryMinIntervalTicks, false, -1, b.RefineryEssentialYieldTicks);
+				baseBuilder.RefineryGateLastRiseTick, baseBuilder.RefineryMinIntervalEffective, false, -1, b.RefineryEssentialYieldTicks);
 
 			// The first-copy scan runs only when the earlier steps admit the refinery and two refineries already stand or are queued.
 			if (verdict == RefineryFieldGateCA.EconomyVerdict.Allow && count >= 2)
@@ -2914,7 +2914,7 @@ namespace OpenRA.Mods.CA.Traits
 					baseBuilder.RefineryGateYieldSince = now;
 
 				verdict = RefineryFieldGateCA.Economy(true, count, yardWithoutRefinery, factoryBuildable, factoryOwnedOrQueued, factoryWaitReleased, now,
-					baseBuilder.RefineryGateLastRiseTick, b.RefineryMinIntervalTicks, essential, baseBuilder.RefineryGateYieldSince, b.RefineryEssentialYieldTicks);
+					baseBuilder.RefineryGateLastRiseTick, baseBuilder.RefineryMinIntervalEffective, essential, baseBuilder.RefineryGateYieldSince, b.RefineryEssentialYieldTicks);
 			}
 
 			// CM NIT: logged once per verdict change, not on every call.
