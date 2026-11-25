@@ -32,5 +32,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		// Q5 Step 2 (Joining): the pool joins the gathering squad as a batch (at least the join floor, all on one tick), never a unit that walks to the rally alone.
 		public const string SqGroupedJoin = "sq_grouped_join";
+
+		// Q6 Step 3: one target order per purpose (MAIN, HARASS, DEFENCE, LOCAL); the squads' own pick, the leader's pick, DF-4 and the defence squads' target follow it.
+		public const string SqTargetPick = "sq_target_pick";
 	}
 }

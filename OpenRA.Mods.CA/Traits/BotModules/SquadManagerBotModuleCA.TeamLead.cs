@@ -690,6 +690,10 @@ namespace OpenRA.Mods.CA.Traits
 		// visible actors, any visible enemy, then a remembered building).
 		bool TeamLeadPickTarget(WPos from, int now, out WPos target, out uint actorId)
 		{
+			// CONSOLIDATE-02 Q6 (sq_target_pick): the same tiers in the TargetPick order of the MAIN purpose.
+			if (ArmyTargetPickOn)
+				return TeamLeadPickMain(from, now, out target, out actorId);
+
 			if (TeamLeadFocusTarget(from, now, out target, out actorId))
 				return true;
 
