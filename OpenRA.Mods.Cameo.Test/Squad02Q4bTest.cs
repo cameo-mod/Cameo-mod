@@ -163,6 +163,13 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(own, Does.Contain("protectTarget.Info.HasTraitInfo<AttackBaseInfo>()"));
 			Assert.That(own, Does.Contain("if ((u.Actor.CenterPosition - at).HorizontalLengthSquared > scanSquared)"));
 			Assert.That(own, Does.Contain("var priority = DefendArbiterCA.Own(core, attack, defence + poolValue);"), "the P0 test itself is unchanged");
+
+			// Q4c (CM): the defence is measured on EVERY path (the pool inside the radius is counted nowhere else); the attack only from an attacker the bot sees.
+			var assess = own.IndexOf("ArbiterAssess(at, out var seenAttack, out var defence);", StringComparison.Ordinal);
+			var seen = own.IndexOf("if (protectTarget != null)", StringComparison.Ordinal);
+			Assert.That(assess, Is.GreaterThan(0));
+			Assert.That(seen, Is.GreaterThan(assess), "the assessment runs before, and outside, the seen-attacker branch");
+			Assert.That(own, Does.Contain("attack = seenAttack;"));
 		}
 
 		[Test]

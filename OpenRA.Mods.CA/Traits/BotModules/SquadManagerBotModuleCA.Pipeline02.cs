@@ -278,13 +278,15 @@ namespace OpenRA.Mods.CA.Traits
 			var at = protectTarget != null && protectTarget.IsInWorld ? protectTarget.CenterPosition
 				: victim != null && victim.IsInWorld ? victim.CenterPosition : World.Map.CenterOfCell(initialBaseCenter);
 
+			// Q4c: the defence there is always measured (the pool inside the scan radius is counted nowhere else); the attack only from an attacker the bot sees, so a hidden
+			// attacker stays a blind hit.
 			long attack = 0;
-			long defence = 0;
+			ArbiterAssess(at, out var seenAttack, out var defence);
 			if (protectTarget != null)
 			{
-				ArbiterAssess(at, out attack, out defence);
+				attack = seenAttack;
 
-				// Q4b: a visible armed attacker outside the scan radius (artillery) is still an attack of its own value, not a blind hit.
+				// Q4b: a visible armed attacker the scan did not count (IsPreferredObservedEnemyUnit rejected it) is still an attack of its own value, not a blind hit.
 				if (attack <= 0 && protectTarget.IsInWorld && !protectTarget.IsDead && protectTarget.Info.HasTraitInfo<AttackBaseInfo>())
 					attack = UnitValue(protectTarget);
 			}

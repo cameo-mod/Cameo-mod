@@ -29,7 +29,7 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("CONSOLIDATE-02 Q4 order phases: a pushed order is Done at the latest this many ticks after its push (its squads finish their fights, the next order gathers). Range 1500-30000.")]
 		public readonly int ArmyEngagedMaxTicks = 6000;
 
-		[Desc("CONSOLIDATE-02 Q4b: a persistent order that holds its push below the bar (it never dissolves at TeamLeadPushBarMaxTicks) is closed this many ticks after its first hold, never earlier than TeamLeadPushBarMaxTicks; its squads go back to the pool. Range 3000-30000.")]
+		[Desc("CONSOLIDATE-02 Q4b: a persistent order that holds its push below the bar (it never dissolves at TeamLeadPushBarMaxTicks) is closed this many ticks after its first hold, never earlier than TeamLeadPushBarMaxTicks and at most 30000; its squads go back to the pool.")]
 		public readonly int ArmyGatherMaxTicks = 9000;
 
 		[Desc("CONSOLIDATE-02 Q4 (Opus D4): a stalemate-breaker signal on the team board feeds the leader's all-in trigger for this many ticks. Range 100-6000.")]
