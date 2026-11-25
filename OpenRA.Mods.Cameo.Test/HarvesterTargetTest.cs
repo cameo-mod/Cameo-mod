@@ -84,6 +84,8 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			Assert.That(FieldOrNull(PlayerNode("UnitBuilderBotModuleCA@generic"), "HvHarvesterTarget"), Is.EqualTo("true"));
 			Assert.That(FieldOrNull(PlayerNode("UnitBuilderBotModuleCA@classic"), "HvHarvesterTarget"), Is.Null);
+			Assert.That(FieldOrNull(PlayerNode("UnitBuilderBotModuleCA@generic"), "HarvesterTargetPerRefinery"), Is.EqualTo("3"), "Opus 11-25: target 3 / cap 4 on generic");
+			Assert.That(FieldOrNull(PlayerNode("UnitBuilderBotModuleCA@classic"), "HarvesterTargetPerRefinery"), Is.Null);
 			Assert.That(AblationIds.HvHarvesterTarget, Is.EqualTo("hv_harvester_target"));
 			Assert.That(AblationSpec.RegistryIds(), Does.Contain(AblationIds.HvHarvesterTarget));
 
