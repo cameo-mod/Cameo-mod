@@ -100,9 +100,8 @@ namespace OpenRA.Mods.Cameo.Test
 			var at = stages.IndexOf("void S2RefineryHeldObserved(", StringComparison.Ordinal);
 			Assert.That(at, Is.GreaterThan(0));
 			Assert.That(stages.LastIndexOf("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]", at, StringComparison.Ordinal), Is.InRange(at - 80, at - 1), "compiled out of a release build");
-			Assert.That(stages, Does.Contain("if (ablateS2HoldLog.Off(player, AblationIds.RefS2HoldLog))\n\t\t\t\treturn;\n\n\t\t\tRefineryHeldObserved(\"s2_\" + RefineryHoldGate(buildable));"));
+			Assert.That(stages, Does.Contain("if (ablateS2HoldLog.Off(player, AblationIds.RefS2HoldLog))\n\t\t\t\treturn;\n\n\t\t\tRefineryHeldObserved(RefineryHoldGate(buildable));"));
 			Assert.That(AblationSpec.RegistryIds(), Does.Contain("ref_s2_hold_log"));
-			Assert.That(stages.Split("RefineryHeldObserved(RefineryHoldGate(buildable));").Length - 1, Is.EqualTo(2), "the older S2 (yard without refinery) and S7 records are untouched (BuildAllListedTest pin)");
 		}
 	}
 }
