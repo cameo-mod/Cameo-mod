@@ -364,6 +364,35 @@ namespace OpenRA.Mods.CA.Traits
 			"Off = as before. Gated by SwitchCondition; row bb_no_foundation.")]
 		public readonly bool BbNoFoundation = false;
 
+		[Desc("MODE-BIAS-01 (user ruling 2026-11-25), profile essentials: while the low-cash essentials logic is active (EssentialsOnlyBelowTierLine armed, a tier line, bank under it), the BuildingFractions",
+			"weights of the types that logic does not hold (EssentialsLowCashCA.Holds) are raised by MbEssentialsStrength in the staged planner's roll. Never a gate: every entry keeps a positive weight.",
+			"Needs BbPipeline01. Off = unchanged. Gated by SwitchCondition; row mb_essentials.")]
+		public readonly bool MbEssentials = false;
+
+		[Desc("MODE-BIAS-01, profile techchain: while a TechChainTypes type is buildable and none is owned or queued, those types are raised by MbTechChainStrength. Needs BbPipeline01. Row mb_techchain.")]
+		public readonly bool MbTechChain = false;
+
+		[Desc("MODE-BIAS-01, profile antirush: while the anti-rush base set is wanted (AntiRushCA.Wants), the ground defences are raised by MbAntiRushStrength. Needs BbPipeline01. Row mb_antirush.")]
+		public readonly bool MbAntiRush = false;
+
+		[Desc("MODE-BIAS-01, profile opening: while the opening standard order is active, the types of its next open role are raised by MbOpeningStrength. Needs BbPipeline01. Row mb_opening.")]
+		public readonly bool MbOpening = false;
+
+		[Desc("MODE-BIAS-01: the milli multiplier (1000 = neutral) of each mode bias profile on the weights of its types. Initial values of ModeBiasParams; a learner may override them per player.")]
+		public readonly int MbEssentialsStrength = 2000;
+
+		[Desc("MODE-BIAS-01: see MbEssentialsStrength.")]
+		public readonly int MbTechChainStrength = 2000;
+
+		[Desc("MODE-BIAS-01: see MbEssentialsStrength.")]
+		public readonly int MbAntiRushStrength = 2000;
+
+		[Desc("MODE-BIAS-01: see MbEssentialsStrength.")]
+		public readonly int MbOpeningStrength = 2000;
+
+		[Desc("MODE-BIAS-01: the cap (milli) of the composed multiplier of all active profiles on one type.")]
+		public readonly int MbStrengthCap = 20000;
+
 		[Desc("CONSOLIDATE-01 c5: the threat-scaled defence cap of the staged planner (the ARMY-FIRST-02 cap, DefenceCapCA): a defence is held while the armed defences owned or in",
 			"flight number at least this base plus DefenceCapPerThreat x the threat intensity. -1 = no cap. Row af2_defence_cap (shared with the ArmyFirstBotModule cap).")]
 		public readonly int DefenceCapBase = -1;
@@ -861,6 +890,17 @@ namespace OpenRA.Mods.CA.Traits
 		public bool BuildAllListedArmed => Info.BbBuildAllListed && switchesActive && !ablateBuildAllListed.Off(player, AblationIds.BbBuildAllListed);
 		AblationLatch ablateNoFoundation; // BUILD-ALL-B
 		public bool NoFoundationArmed => Info.BbNoFoundation && switchesActive && !ablateNoFoundation.Off(player, AblationIds.BbNoFoundation);
+		AblationLatch ablateMbEssentials; // MODE-BIAS-01
+		public bool MbEssentialsArmed => Info.MbEssentials && switchesActive && !ablateMbEssentials.Off(player, AblationIds.MbEssentials);
+		AblationLatch ablateMbTechChain; // MODE-BIAS-01
+		public bool MbTechChainArmed => Info.MbTechChain && switchesActive && !ablateMbTechChain.Off(player, AblationIds.MbTechChain);
+		AblationLatch ablateMbAntiRush; // MODE-BIAS-01
+		public bool MbAntiRushArmed => Info.MbAntiRush && switchesActive && !ablateMbAntiRush.Off(player, AblationIds.MbAntiRush);
+		AblationLatch ablateMbOpening; // MODE-BIAS-01
+		public bool MbOpeningArmed => Info.MbOpening && switchesActive && !ablateMbOpening.Off(player, AblationIds.MbOpening);
+		// MODE-BIAS-01: the per-player strengths of the profiles (and the cap), read by the planner only through this table. Initialised from the Info on first use.
+		ModeBiasParams modeBiasValues;
+		public ModeBiasParams ModeBiasValues => modeBiasValues ??= new ModeBiasParams(Info.MbEssentialsStrength, Info.MbTechChainStrength, Info.MbAntiRushStrength, Info.MbOpeningStrength, Info.MbStrengthCap);
 		// BUILD-ALL-B: whether a type is a terrain foundation, by name, filled on first sight (the traits never change in a game).
 		public readonly Dictionary<string, bool> FoundationTypes = new(StringComparer.Ordinal);
 		// CAPTURE-TECH-01: provided tokens and gates of every building type, no faction filter; built once on the first S5 sweep with the switch on. Null until then.
