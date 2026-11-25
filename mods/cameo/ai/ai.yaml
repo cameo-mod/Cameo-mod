@@ -4847,6 +4847,8 @@ Player:
 		RequiresCondition: genericbot && personality-rush
 		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
 		LateEscalationEnabled: true
+		# CONSOLIDATE-02 Q8 (Opus 11-25): the late all-in counts from 9000, so 3 steps of 5000 fire it at 24000 (was 40000, past the 30000 decisive gate).
+		ArmyAllInLateStartTick: 9000
 		FinishModeEnabled: true
 		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
 		BlobLeaderOrderOnly: true
@@ -5019,6 +5021,8 @@ Player:
 		RequiresCondition: genericbot && personality-turtle
 		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
 		LateEscalationEnabled: true
+		# CONSOLIDATE-02 Q8 (Opus 11-25): the late all-in counts from 9000, so 3 steps of 5000 fire it at 24000 (was 40000, past the 30000 decisive gate).
+		ArmyAllInLateStartTick: 9000
 		FinishModeEnabled: true
 		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
 		BlobLeaderOrderOnly: true
@@ -5187,6 +5191,8 @@ Player:
 		RequiresCondition: genericbot && personality-tech
 		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
 		LateEscalationEnabled: true
+		# CONSOLIDATE-02 Q8 (Opus 11-25): the late all-in counts from 9000, so 3 steps of 5000 fire it at 24000 (was 40000, past the 30000 decisive gate).
+		ArmyAllInLateStartTick: 9000
 		FinishModeEnabled: true
 		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
 		BlobLeaderOrderOnly: true
@@ -5357,6 +5363,8 @@ Player:
 		RequiresCondition: genericbot && personality-expansion
 		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
 		LateEscalationEnabled: true
+		# CONSOLIDATE-02 Q8 (Opus 11-25): the late all-in counts from 9000, so 3 steps of 5000 fire it at 24000 (was 40000, past the 30000 decisive gate).
+		ArmyAllInLateStartTick: 9000
 		FinishModeEnabled: true
 		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
 		BlobLeaderOrderOnly: true
@@ -5527,6 +5535,8 @@ Player:
 		RequiresCondition: genericbot && personality-steamroller
 		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
 		LateEscalationEnabled: true
+		# CONSOLIDATE-02 Q8 (Opus 11-25): the late all-in counts from 9000, so 3 steps of 5000 fire it at 24000 (was 40000, past the 30000 decisive gate).
+		ArmyAllInLateStartTick: 9000
 		FinishModeEnabled: true
 		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
 		BlobLeaderOrderOnly: true
@@ -5695,6 +5705,8 @@ Player:
 		RequiresCondition: genericbot && personality-guerrilla
 		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
 		LateEscalationEnabled: true
+		# CONSOLIDATE-02 Q8 (Opus 11-25): the late all-in counts from 9000, so 3 steps of 5000 fire it at 24000 (was 40000, past the 30000 decisive gate).
+		ArmyAllInLateStartTick: 9000
 		FinishModeEnabled: true
 		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
 		BlobLeaderOrderOnly: true

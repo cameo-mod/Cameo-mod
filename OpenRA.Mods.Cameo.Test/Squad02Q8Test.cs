@@ -128,10 +128,13 @@ namespace OpenRA.Mods.Cameo.Test
 			var late = Between(wiring, "internal bool ArmyAllInLateOn(int now)", "/// <summary>Q8 (row sq_hunt_one_cell)");
 			Assert.That(late, Does.Contain("ArmyLaunchArbiterOn && LateEscalationActive && !ablateSqAllInLate.Off(Player, AblationIds.SqAllInLate)"));
 			Assert.That(late, Does.Contain("&& now >= Info.TeamLeadAllInStartTick"));
-			Assert.That(late, Does.Contain("AllInCA.LateStep(now, Info.LateEscalationStartTick, Info.LateEscalationStepTicks, Info.ArmyAllInLateSteps);"));
+			Assert.That(late, Does.Contain("AllInCA.LateStep(now, Info.ArmyAllInLateStartTick >= 0 ? Info.ArmyAllInLateStartTick : Info.LateEscalationStartTick, Info.LateEscalationStepTicks, Info.ArmyAllInLateSteps);"));
 
 			var info = RepoFile(Bots + "SquadManagerBotModuleCAInfo.Pipeline02.cs");
 			Assert.That(info, Does.Contain("public readonly int ArmyAllInLateSteps = 3;"));
+			Assert.That(info, Does.Contain("public readonly int ArmyAllInLateStartTick = -1;"), "-1 = the escalation start, as before");
+			Assert.That(AllInCA.LateStep(24000, 9000, 5000, 3), Is.True, "yaml 9000 + 3 x 5000 = fires at 24000, before the 30000 decisive cut");
+			Assert.That(AllInCA.LateStep(23999, 9000, 5000, 3), Is.False);
 			Assert.That(info, Does.Contain("public readonly int ArmyHuntCellHoldTicks = 2250;"));
 		}
 
