@@ -82,6 +82,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"MinimumCaptureDelay). 0 = off, the default.")]
 		public readonly int RouteRecheckTicks = 0;
 
+		[Desc("ENG-ROUTE-01 (V08 RCA 8c37f899: one SafeRoute visit cost 2549 ms): bound the safe-route search. Each SafeRoute call may spend at most SafeRouteExpansionBudget path-cost evaluations",
+			"(about one per expanded cell); on overrun the search is abandoned and the route counts as unsafe. At most SafeRouteCallsPerTick calls run per world tick across the capture ranking, the",
+			"recheck and the route gate (a deferred call is unsafe for this visit; the next visit tries again), and the danger scan is cached for DangerCacheTicks ticks instead of one.",
+			"Needs MaxExposedRouteCells >= 0. Gated by ablation row er_route_budget. false = the unbounded search.")]
+		public readonly bool SafeRouteBudget = false;
+
+		[Desc("ENG-ROUTE-01: path-cost evaluations one SafeRoute call may spend (0 = unlimited).")]
+		public readonly int SafeRouteExpansionBudget = 2000;
+
+		[Desc("ENG-ROUTE-01: SafeRoute searches per world tick (0 = unlimited).")]
+		public readonly int SafeRouteCallsPerTick = 3;
+
+		[Desc("ENG-ROUTE-01: ticks a cell's danger value is reused (1 = recomputed every tick).")]
+		public readonly int DangerCacheTicks = 8;
+
 		[Desc("Stealth means unguarded (v2): a target that is not escort-eligible (an enemy-base building) is skipped when",
 			"more than this many armed enemy actors stand within EnemyAvoidanceRadius of it. -1 = off, the default.")]
 		public readonly int StealthMaxDefenders = -1;
@@ -291,6 +306,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly OpenRA.Player player;
 		AblationLatch ablateDemandCapturers; // ABLATE-01 hook pi_demand_capturers (DEV provider only; release = on)
 		AblationLatch ablateEngDrop; // ABLATE-01 hook ed_engdrop (DEV provider only; release = on): off = the legacy TransportChance roll
+		AblationLatch ablateRouteBudget; // ABLATE-01 hook er_route_budget (ENG-ROUTE-01; DEV provider only; release = on): off = the unbounded SafeRoute search
+
+		// ENG-ROUTE-01: the bounded safe-route search. routeCalls counts the searches started in world tick routeCallsTick.
+		bool RouteBudgetOn => Info.SafeRouteBudget && Info.MaxExposedRouteCells >= 0 && !ablateRouteBudget.Off(player, AblationIds.EngRouteBudget);
+		int routeCallsTick = -1;
+		int routeCalls;
+
+		/// <summary>ENG-ROUTE-01: SafeRoute searches abandoned at the expansion budget / refused at the per-tick call cap.</summary>
+		public int RouteBudgetOverruns { get; private set; }
+		public int RouteCallsDeferred { get; private set; }
+
+		sealed class RouteBudgetExceeded : Exception
+		{
+		}
 		readonly int maximumCaptureTargetOptions;
 		readonly EngineerJob[] repairJobs;
 		readonly HashSet<string> capturingTypes;
@@ -730,7 +759,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (remaining <= Info.MaxExposedRouteCells)
 				return false;
 
-			var fresh = SafeRoute(a, target);
+			var fresh = SafeRoute(a, target, "recheck");
 			if (fresh != null && ExposedCells(fresh.Select(c => (c, Danger(a, c))), target.Location, Info.ApproachCells) <= Info.MaxExposedRouteCells)
 			{
 				var waypoints = Waypoints(fresh, Info.RouteWaypointSpacing, Info.ApproachCells, target.Location);
@@ -802,7 +831,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				.Take(tries * 2)
 				.Select(t =>
 				{
-					var route = SafeRoute(capturer, t);
+					var route = SafeRoute(capturer, t, "rank");
 					var exposed = route == null ? int.MaxValue / 2 : ExposedCells(route.Select(c => (c, Danger(capturer, c))), t.Location, Info.ApproachCells);
 					return (Target: t, Score: RankScore(t.GetSellValue(), (t.Location - capturer.Location).Length, exposed, Info.ExposureWeight));
 				})
@@ -1441,7 +1470,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (Info.MaxExposedRouteCells < 0)
 				return SafePath(capturer, target).Type != TargetType.Invalid;
 
-			var route = SafeRoute(capturer, target);
+			var route = SafeRoute(capturer, target, "gate");
 			if (route == null)
 				return false;
 
@@ -1490,7 +1519,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// Cached per tick: one evaluation routes several engineers over the same cells.
 		int Danger(Actor capturer, CPos loc)
 		{
-			if (dangerCacheTick != world.WorldTick)
+			// ENG-ROUTE-01: with the budget on a cell's value is reused for DangerCacheTicks ticks (1 = the old per-tick cache; the tick delta is >= 1 whenever the tick changed).
+			if (world.WorldTick - dangerCacheTick >= (RouteBudgetOn ? Math.Max(1, Info.DangerCacheTicks) : 1))
 			{
 				dangerCache.Clear();
 				dangerCacheTick = world.WorldTick;
@@ -1511,12 +1541,34 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return dangerCache[loc] = (int)Math.Min(sum, 1 << 20);
 		}
 
-		/// <summary>The least-exposed path from the engineer to a cell next to the target, source first; null when none.</summary>
-		List<CPos> SafeRoute(Actor capturer, Actor target)
+		/// <summary>The least-exposed path from the engineer to a cell next to the target, source first; null when none (or, with ENG-ROUTE-01 on, when the search was deferred or over budget: unsafe for this visit).</summary>
+		List<CPos> SafeRoute(Actor capturer, Actor target, string caller = "")
 		{
 			var mobile = capturer.TraitOrDefault<Mobile>();
 			if (mobile == null || !mobile.PathFinder.PathExistsForLocomotor(mobile.Locomotor, capturer.Location, target.Location))
 				return null;
+
+			// ENG-ROUTE-01: at most SafeRouteCallsPerTick searches per world tick across the ranking, the recheck and the route gate; a deferred one is unsafe for this visit.
+			var budget = RouteBudgetOn;
+			if (budget && Info.SafeRouteCallsPerTick > 0)
+			{
+				if (routeCallsTick != world.WorldTick)
+				{
+					routeCallsTick = world.WorldTick;
+					routeCalls = 0;
+				}
+
+				if (routeCalls >= Info.SafeRouteCallsPerTick)
+				{
+					RouteCallsDeferred++;
+#if CAMEO_DEV_LOGGING
+					Log.Write("debug", $"AI ({player.ClientIndex}): ENG saferoute caller={caller} deferred (call cap {Info.SafeRouteCallsPerTick}) tick {world.WorldTick}");
+#endif
+					return null;
+				}
+
+				routeCalls++;
+			}
 
 			var footprint = target.OccupiesSpace?.OccupiedCells().Select(c => c.Cell).ToHashSet() ?? [target.Location];
 			var ring = new HashSet<CPos>();
@@ -1529,8 +1581,39 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 							ring.Add(n);
 					}
 
-			var path = mobile.PathFinder.FindPathToTargetCellByPredicate(
-				capturer, [capturer.Location], ring.Contains, BlockedByActor.Stationary, loc => Danger(capturer, loc));
+			// ENG-ROUTE-01: the cost callback is the search's expansion counter; past the budget it throws and the search is abandoned (the engine disposes its pooled state).
+			var evaluations = 0;
+			var limit = budget ? Info.SafeRouteExpansionBudget : 0;
+#if CAMEO_DEV_LOGGING
+			var watch = System.Diagnostics.Stopwatch.StartNew();
+#endif
+			List<CPos> path;
+			try
+			{
+				path = mobile.PathFinder.FindPathToTargetCellByPredicate(
+					capturer, [capturer.Location], ring.Contains, BlockedByActor.Stationary,
+					loc =>
+					{
+						evaluations++;
+						if (limit > 0 && evaluations > limit)
+							throw new RouteBudgetExceeded();
+
+						return Danger(capturer, loc);
+					});
+			}
+			catch (RouteBudgetExceeded)
+			{
+				RouteBudgetOverruns++;
+#if CAMEO_DEV_LOGGING
+				Log.Write("debug", $"AI ({player.ClientIndex}): ENG saferoute caller={caller} OVERRUN {capturer.Info.Name}->{target.Info.Name} evaluations>{limit} ring={ring.Count} {watch.ElapsedMilliseconds} ms tick {world.WorldTick} (overruns {RouteBudgetOverruns}, deferred {RouteCallsDeferred})");
+#endif
+				return null;
+			}
+
+#if CAMEO_DEV_LOGGING
+			if (watch.ElapsedMilliseconds >= 50)
+				Log.Write("debug", $"AI ({player.ClientIndex}): ENG saferoute caller={caller} SLOW {capturer.Info.Name}->{target.Info.Name} evaluations={evaluations} ring={ring.Count} path={path.Count} {watch.ElapsedMilliseconds} ms tick {world.WorldTick}");
+#endif
 			if (path.Count == 0)
 				return null;
 
