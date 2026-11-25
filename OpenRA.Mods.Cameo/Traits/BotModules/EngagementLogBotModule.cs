@@ -117,6 +117,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			world = self.World;
 		}
 
+		// Called by the DEV-only engagement writer before simulation ticks begin. Keeping the
+		// cache fill behind the installed sink prevents the first engagement close from doing
+		// manifest parsing and hashing inside BotTick; release builds retain the inert sink path.
+		#if CAMEO_DEV_LOGGING
+		public void PrewarmBalanceMetadataForDevelopmentLog()
+		{
+			if (world.WorldActor.TraitOrDefault<CameoLogHub>()?.Sink.Enabled == true)
+				_ = Balance();
+		}
+		#endif
+
 		bool Ready()
 		{
 			if (IsTraitDisabled)
