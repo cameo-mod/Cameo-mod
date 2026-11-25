@@ -1210,7 +1210,63 @@ namespace OpenRA.Mods.CA.Traits
 			idleUnitCount = idleUnits.Count;
 		}
 
+		// UB-SUBSTEP-PERF-01 (DEV only, Opus 11-25): sub-step clock of one BotTick visit. Slots: 0 pick (the unit pick call; it holds slot 1 when the roll is on),
+		// 1 reject (every ShouldBuildReject call), 2 coverage (UpgradeScanOnce + UpgradeSettle), 3 refresh (the queue lists read by the upgrade snapshot and by BuildUnitFairService), 4 visit total.
+		// The fields and the clock reads exist only under CAMEO_DEV_LOGGING: a release instance allocates nothing, and the [Conditional] helpers keep empty release bodies whose call sites the compiler omits.
+#if CAMEO_DEV_LOGGING
+		readonly long[] ubSubStart = new long[5];
+		readonly long[] ubSubAcc = new long[5];
+#endif
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void UbSubStart(int slot)
+		{
+#if CAMEO_DEV_LOGGING
+			ubSubStart[slot] = System.Diagnostics.Stopwatch.GetTimestamp();
+#endif
+		}
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void UbSubStop(int slot)
+		{
+#if CAMEO_DEV_LOGGING
+			ubSubAcc[slot] += System.Diagnostics.Stopwatch.GetTimestamp() - ubSubStart[slot];
+#endif
+		}
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void UbVisitBegin()
+		{
+#if CAMEO_DEV_LOGGING
+			Array.Clear(ubSubAcc, 0, ubSubAcc.Length);
+			UbSubStart(4);
+#endif
+		}
+
+		// ub_perf (DEV): one row per visit, only when the visit total is at least 5 ms. Fields: total_us, pick_us (contains reject_us when the roll is on), reject_us, coverage_us, refresh_us.
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void UbVisitEnd()
+		{
+#if CAMEO_DEV_LOGGING
+			UbSubStop(4);
+			double Us(int slot) => ubSubAcc[slot] * 1e6 / System.Diagnostics.Stopwatch.Frequency;
+			var total = Us(4);
+			if (total < 5000.0)
+				return;
+
+			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},ub_perf,,,total_us={total:0};pick_us={Us(0):0};reject_us={Us(1):0};coverage_us={Us(2):0};refresh_us={Us(3):0}");
+#endif
+		}
+
 		void IBotTick.BotTick(IBot bot)
+		{
+			UbVisitBegin();
+			BotTickVisit(bot);
+			UbVisitEnd();
+		}
+
+		// UB-SUBSTEP-PERF-01: the visit body, unchanged, one call deeper than before (the clock wraps the call).
+		void BotTickVisit(IBot bot)
 		{
 			if (firstTick)
 			{
@@ -1514,6 +1570,7 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			var inProduction = new HashSet<string>(StringComparer.Ordinal);
 			var queuedIn = new Dictionary<string, string>(StringComparer.Ordinal); // item name -> key of the exact queue instance holding it
+			UbSubStart(3);
 			foreach (var category in Info.UpgradeServiceQueues)
 				foreach (var queue in AIUtils.FindQueues(player, category))
 					foreach (var queued in queue.AllQueued())
@@ -1521,9 +1578,12 @@ namespace OpenRA.Mods.CA.Traits
 						inProduction.Add(queued.Item);
 						queuedIn[queued.Item] = UpgradeQueueKey(queue);
 					}
+			UbSubStop(3);
 
+			UbSubStart(2);
 			UpgradeScanOnce();
 			UpgradeSettle(queuedIn);
+			UbSubStop(2);
 
 			// an ordered item the queue has not shown yet stays reserved: it is not offered again while its order is outstanding (upg_once_registry)
 			var onceOn = UpgradeOnceOn;
@@ -1753,10 +1813,12 @@ namespace OpenRA.Mods.CA.Traits
 		void BuildUnitFairService(IBot bot, string category, bool buildRandom, bool excludeLimited, bool saturated, int maxQueues,
 			ProducerServiceBatch batch)
 		{
+			UbSubStart(3);
 			var queues = AIUtils.FindQueues(player, category)
 				.OrderBy(q => q.Actor.ActorID)
 				.ThenBy(q => q.Info.Type)
 				.ToList();
+			UbSubStop(3);
 			if (queues.Count == 0)
 				return;
 
@@ -1847,9 +1909,11 @@ namespace OpenRA.Mods.CA.Traits
 						? PickArmedInfantry(queue, shares, skip)
 						: null;
 					var fromIdleFloor = false;
+					UbSubStart(0);
 					var unit = roll ? ChooseRollUnit(queue, skip) : fromFloor ?? (buildRandom
 						? ChooseRandomUnitToBuild(queue, excludeLimited, shares, skip)
 						: ChooseUnitToBuild(queue, excludeLimited, saturated, shares, skip));
+					UbSubStop(0);
 
 					// UNIT-ALL-01: no candidate left for the roll ends this queue's fill; the composition fallback and the two floor picks below belong to the layers the roll replaces.
 					if (roll && unit == null)
@@ -2449,7 +2513,16 @@ namespace OpenRA.Mods.CA.Traits
 
 		// INFANTRY-REJECT-LOG-01: the first gate that refuses the candidate, or null when it may be built. The same gates in the same order as
 		// ShouldBuild always ran; the reason names are what the DEV reject log counts.
+		// UB-SUBSTEP-PERF-01 (DEV timing only): every ShouldBuildReject call is clocked as slot 1; the decision itself is ShouldBuildRejectCore, unchanged.
 		string ShouldBuildReject(string name, bool ignoreUnitsToBuild, string queueCategory)
+		{
+			UbSubStart(1);
+			var rejectedBy = ShouldBuildRejectCore(name, ignoreUnitsToBuild, queueCategory);
+			UbSubStop(1);
+			return rejectedBy;
+		}
+
+		string ShouldBuildRejectCore(string name, bool ignoreUnitsToBuild, string queueCategory)
 		{
 			if (cappedOut.Length > 0 && CappedOut(name))
 				return "cappedout";
