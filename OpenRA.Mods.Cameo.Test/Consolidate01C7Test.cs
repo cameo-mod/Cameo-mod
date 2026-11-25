@@ -76,7 +76,7 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void TheAf02GrantIsEmptyAndTheModuleStaysForFransbot()
+		public void TheAf02GrantIsEmptySoAf02IsInertAndTheBaseModuleStillServesFransbot()
 		{
 			var difficulties = TopLevel().Single(n => n.Key == "^AIDifficulties").Value.Nodes;
 			var grant = difficulties.Single(n => n.Key == "GrantConditionOnBotOwner@armyfirst02");

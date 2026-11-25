@@ -115,7 +115,8 @@
 	# (every first copy passes), defences follow a threat-scaled cap, not the stock vote. This grant is the feature switch:
 	# empty Bots = the DEFENCE-ZERO-FIX state (no tier voter). Classic never gets it (no genericbot).
 	# CONSOLIDATE-01 c7 (V08): emptied. The pipeline (BaseBuilderBotModuleCA@generic BbPipeline01) holds the first copies (S5), the
-	# defence cap (S9) and the share (S10), so no tier bot carries the af02 building vote any more. ArmyFirstBotModule stays for fransbot.
+	# defence cap (S9) and the share (S10), so no tier bot carries the af02 building vote any more. ArmyFirstBotModule@af02 is now inert on
+	# every bot (it needs army_first_02); the base ArmyFirstBotModule (army_first) still serves fransbot.
 	GrantConditionOnBotOwner@armyfirst02:
 		Condition: army_first_02
 		Bots:
