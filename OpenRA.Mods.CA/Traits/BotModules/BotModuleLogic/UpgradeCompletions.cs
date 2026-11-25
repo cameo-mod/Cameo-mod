@@ -36,19 +36,33 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>Staleness: an order that is neither seen completing nor granted after this many ticks is dropped (cancelled, or never accepted by the engine).</summary>
 		public const int PendingMaxTicks = 3000;
 
-		/// <summary>The service ordered the item: it is settled at the next visits against authoritative state, whatever happens between visits.</summary>
-		public void Started(string name, int tick) => pending[name] = (tick, false);
+		/// <summary>PendingTimeout default: an order the queue never showed within this many ticks was not accepted: it is released (not done) and the item may be offered again.</summary>
+		public const int DefaultPendingTimeoutTicks = 300;
+
+		/// <summary>The releases of the last Settle: (name, reason). Reasons: timeout, cancelled_or_lost, left_still_offered, queue_lost, prerequisite_lost.</summary>
+		public List<(string Name, string Reason)> Released { get; } = [];
+
+		/// <summary>The service ordered the item: it is settled at the next visits against authoritative state, whatever happens between visits. A name already pending keeps its first issue tick and Seen bit.</summary>
+		public void Started(string name, int tick) => pending.TryAdd(name, (tick, false));
 
 		public bool AnyPending => pending.Count > 0;
 
+		/// <summary>An order is outstanding for this item: it must not be offered again until it settles or is dropped.</summary>
+		public bool IsPending(string name) => pending.ContainsKey(name);
+
+		public IEnumerable<string> PendingNames => pending.Keys;
+
 		/// <summary>
 		/// Settle the ordered items. Authoritative state decides: an item is done when the player holds a prerequisite it REALLY grants (grantsOf = the prerequisites its traits provide, which need not be
-		/// its name), so an item that was ordered and finished between two visits is still found. An item that grants no prerequisite (condition-only) has no state to read: it is done by approximation
-		/// when it left the queue (seen there, or ordered long enough ago) and is no longer offered, which is the one signal a cancelled item does not give for a non-repeatable item.
+		/// its name), so an item that was ordered and finished between two visits is still found. An item that grants no prerequisite (condition-only) has no state to read: it is done by approximation,
+		/// and only on a CREDIBLE departure: it was seen in a queue, left it, is no longer offered, its queue is still alive and its own prerequisites are still held (a sold producer or a lost
+		/// prerequisite also stop the offer, and must not count as a completion). A never-seen order is never done by approximation: after the PendingTimeout it is released as not accepted.
 		/// Returns the newly completed (name, source) pairs.
 		/// </summary>
-		public List<(string Name, string Source)> Settle(int tick, ISet<string> inProduction, Func<string, IReadOnlyCollection<string>> grantsOf, ISet<string> owned, Func<ISet<string>> offered)
+		public List<(string Name, string Source)> Settle(int tick, ISet<string> inProduction, Func<string, IReadOnlyCollection<string>> grantsOf, ISet<string> owned, Func<ISet<string>> offered,
+			Func<string, bool> queueAlive, Func<string, ISet<string>, bool> prerequisitesHeld, int pendingTimeoutTicks = DefaultPendingTimeoutTicks)
 		{
+			Released.Clear();
 			var result = new List<(string, string)>();
 			if (pending.Count == 0)
 				return result;
@@ -64,30 +78,44 @@ namespace OpenRA.Mods.CA.Traits
 				}
 
 				var grants = grantsOf(name);
-				if (grants.Count > 0)
+				if (grants.Count > 0 && grants.Any(owned.Contains))
 				{
-					if (grants.Any(owned.Contains))
-					{
-						pending.Remove(name);
-						if (Complete(name, SourceGrant))
-							result.Add((name, SourceGrant));
-					}
-					else if (tick - started > PendingMaxTicks)
-						pending.Remove(name);
+					pending.Remove(name);
+					if (Complete(name, SourceGrant))
+						result.Add((name, SourceGrant));
 
 					continue;
 				}
 
-				// condition-only: no prerequisite to read
-				if (seen || tick - started > 100)
+				if (!seen)
 				{
-					offeredNow ??= offered();
-					pending.Remove(name);
-					if (!offeredNow.Contains(name) && Complete(name, SourceApprox))
-						result.Add((name, SourceApprox));
+					// a delayed order keeps the item reserved (not offered again) until the queue shows it, or the grace runs out
+					if (tick - started > pendingTimeoutTicks)
+					{
+						pending.Remove(name);
+						Released.Add((name, "timeout"));
+					}
+
+					continue;
 				}
-				else if (tick - started > PendingMaxTicks)
-					pending.Remove(name);
+
+				// seen, and gone from the queue
+				pending.Remove(name);
+				if (grants.Count > 0)
+				{
+					Released.Add((name, "cancelled_or_lost")); // it grants a prerequisite the player does not hold: cancelled or lost, never done
+					continue;
+				}
+
+				offeredNow ??= offered();
+				if (offeredNow.Contains(name))
+					Released.Add((name, "left_still_offered"));
+				else if (!queueAlive(name))
+					Released.Add((name, "queue_lost"));
+				else if (!prerequisitesHeld(name, owned))
+					Released.Add((name, "prerequisite_lost"));
+				else if (Complete(name, SourceApprox))
+					result.Add((name, SourceApprox));
 			}
 
 			return result;

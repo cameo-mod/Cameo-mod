@@ -79,6 +79,19 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("UPG-ADDONS: the BuildingAddons queue (the army_* level 2-3 upgrades) is served by the upgrade service when it is listed in UpgradeServiceQueues. False = it is skipped (row upg_building_addons).")]
 		public readonly bool UpgradeBuildingAddons = true;
 
+		[Desc("UPGRADE-COVERAGE: the once-done registry's gameplay effect (row upg_once_registry): a completed type (or a member of a completed symmetric exclusive set) is not offered again, an ordered item stays reserved",
+			"until its order settles, and the oldest-available candidate goes first. The DEV rows ub_upgrade_available / ub_upgrade_done do not depend on it. Ships OFF until it has a PASS.")]
+		public readonly bool UpgradeOnceRegistry = false;
+
+		[Desc("UPGRADE-COVERAGE: ticks an ordered upgrade item may stay unseen in its queue before the order is released (not done) and the item may be offered again.")]
+		public readonly int UpgradePendingTimeout = 300;
+
+		[Desc("ub_capturer_strict (row of the same name): the capturer cap and the armed-infantry denominator count a unit as a capturer only when one of its Captures traits can capture one of CapturerCaptureTypes",
+			"(the Capturable.Types of enemy buildings). Garrison and driver-kill captures never count. False = the old rule: any Captures trait.")]
+		public readonly bool CapturerStrict = false;
+
+		public readonly string[] CapturerCaptureTypes = { "building", "defense", "tech" };
+
 		[Desc("PROD-BUSY-01 (USER P0): every idle factory of a category is served on every pass (the offer budget is the factory count), not one",
 			"(two while the bank is saturated). Gated by SwitchCondition; row pb_all_factories. False = the old width.")]
 		public readonly bool ServeAllFactories = false;
@@ -579,7 +592,7 @@ namespace OpenRA.Mods.CA.Traits
 		bool FairService => switchesActive && Info.FairProducerService && !ablateFairProducer.Off(player, AblationIds.FairProducer);
 
 		// ABLATE-01 hooks (DEV-only provider; absent in release = always on): one cached answer per row.
-		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery, ablateUpgradeService, ablateUpgradeBuildingAddons;
+		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery, ablateUpgradeService, ablateUpgradeBuildingAddons, ablateUpgradeOnce, ablateCapturerStrict;
 		AblationLatch ablateMcvRebuild, ablateRequestSlot; // MCV-REBUILD-01
 		bool McvRebuildOn => switchesActive && Info.McvRebuildFirst && !ablateMcvRebuild.Off(player, AblationIds.McvRebuildFirst);
 		int RequestDropSweeps => McvRebuildCA.DropLimit(switchesActive && Info.RequestSlotFastDrop && !ablateRequestSlot.Off(player, AblationIds.RequestSlot),
@@ -710,6 +723,40 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool UpgradeServiceOn => switchesActive && Info.UpgradeService && !ablateUpgradeService.Off(player, AblationIds.UpgradeService);
 
+		bool UpgradeOnceOn => Info.UpgradeOnceRegistry && !ablateUpgradeOnce.Off(player, AblationIds.UpgradeOnceRegistry);
+
+		// ub_capturer_strict: a capturer for the cap / the armed-infantry denominator (genericbot only through switchesActive; classic keeps the old rule)
+		bool CapturerStrictOn => switchesActive && Info.CapturerStrict && !ablateCapturerStrict.Off(player, AblationIds.CapturerStrict);
+		BitSet<CaptureType> capturerTypes;
+		bool capturerTypesSet;
+		HashSet<string> capturerClassLogged;
+
+		bool IsCapturer(ActorInfo info)
+		{
+			var old = info.HasTraitInfo<CapturesInfo>();
+			if (!old || !CapturerStrictOn)
+				return old;
+
+			if (!capturerTypesSet)
+			{
+				capturerTypes = new BitSet<CaptureType>(Info.CapturerCaptureTypes);
+				capturerTypesSet = true;
+			}
+
+			var strict = CapturerClass.IsStrict(info.TraitInfos<CapturesInfo>().Select(c => c.CaptureTypes), capturerTypes);
+			CapturerClassLog(info.Name, strict);
+			return strict;
+		}
+
+		// ub_capturer_class (DEV, once per type): tick,seat,ub_capturer_class,type,,1 when strict calls it a capturer (the old rule said yes for every type that reaches this row)
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void CapturerClassLog(string name, bool strict)
+		{
+			capturerClassLogged ??= new HashSet<string>(StringComparer.Ordinal);
+			if (capturerClassLogged.Add(name))
+				RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},ub_capturer_class,{name},,{(strict ? 1 : 0)}");
+		}
+
 		// UPG-ADDONS: the BuildingAddons queue is its own toggle (the rest of the service is unchanged by it).
 		bool UpgradeQueueServed(string category) =>
 			category != "BuildingAddons" || (Info.UpgradeBuildingAddons && !ablateUpgradeBuildingAddons.Off(player, AblationIds.UpgradeBuildingAddons));
@@ -799,9 +846,11 @@ namespace OpenRA.Mods.CA.Traits
 		// a weapon. Capture bodies, unarmed medics/mechanics and slaved units never count.
 		static readonly BitSet<TargetableType> InfantryTargetTypes = new("Infantry");
 
-		static bool IsArmedInfantry(ActorInfo info) =>
+		static bool IsArmedInfantry(ActorInfo info) => IsArmedInfantry(info, info.HasTraitInfo<CapturesInfo>());
+
+		static bool IsArmedInfantry(ActorInfo info, bool capturer) =>
 			info.GetAllTargetTypes().Overlaps(InfantryTargetTypes) &&
-			!info.HasTraitInfo<CapturesInfo>() &&
+			!capturer &&
 			!info.HasTraitInfo<CarrierSlaveInfo>() &&
 			info.TraitInfos<ArmamentInfo>().Any(arm => arm.WeaponInfo != null);
 
@@ -825,9 +874,10 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var actor in world.Actors.Where(actor => actor.Owner == player && !actor.IsDead && actor.IsInWorld))
 			{
 				var info = actor.Info;
-				if (info.HasTraitInfo<CapturesInfo>())
+				var capturer = IsCapturer(info);
+				if (capturer)
 					capturerUnitsCached++;
-				else if (IsArmedInfantry(info))
+				else if (IsArmedInfantry(info, capturer))
 					armedInfantryCached++;
 			}
 
@@ -864,7 +914,7 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var group in OpenRA.Mods.Common.AIUtils.FindQueuesByCategory(player))
 				foreach (var q in group)
 					foreach (var item in q.AllQueued())
-						if (world.Map.Rules.Actors.TryGetValue(item.Item, out var queued) && queued.HasTraitInfo<CapturesInfo>())
+						if (world.Map.Rules.Actors.TryGetValue(item.Item, out var queued) && IsCapturer(queued))
 							count++;
 
 			return count;
@@ -1018,8 +1068,42 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			upgradeSettleTick = world.WorldTick;
-			foreach (var (name, source) in upgradeDone.Settle(world.WorldTick, inProduction, UpgradeGrantsOf, OwnedPrerequisites(), OfferedUpgradeNames))
+			foreach (var (name, source) in upgradeDone.Settle(world.WorldTick, inProduction, UpgradeGrantsOf, OwnedPrerequisites(), OfferedUpgradeNames, UpgradeQueueAlive, UpgradePrerequisitesHeld, Info.UpgradePendingTimeout))
 				UpgradeDoneLog(name, source);
+
+			foreach (var (name, reason) in upgradeDone.Released)
+				UpgradeReleaseLog(name, reason);
+		}
+
+		// an enabled queue of one of the item's served queue types still exists (a sold or dead producer is not a completion)
+		bool UpgradeQueueAlive(string name)
+		{
+			if (!world.Map.Rules.Actors.TryGetValue(name, out var info))
+				return false;
+
+			foreach (var bi in info.TraitInfos<BuildableInfo>())
+				foreach (var queueType in bi.Queue)
+					if (Array.IndexOf(Info.UpgradeServiceQueues, queueType) >= 0 && AIUtils.FindQueues(player, queueType).Any(q => q.Enabled))
+						return true;
+
+			return false;
+		}
+
+		// every positive prerequisite of the item is still held ("!x" terms are exclusions, "~" only hides a prerequisite): a lost prerequisite stops the offer without a completion
+		bool UpgradePrerequisitesHeld(string name, ISet<string> owned)
+		{
+			if (!world.Map.Rules.Actors.TryGetValue(name, out var info))
+				return false;
+
+			foreach (var bi in info.TraitInfos<BuildableInfo>())
+				foreach (var prerequisite in bi.Prerequisites)
+				{
+					var p = prerequisite.Replace("~", "");
+					if (p.Length > 0 && !p.StartsWith('!') && !owned.Contains(p))
+						return false;
+				}
+
+			return true;
 		}
 
 		HashSet<string> OfferedUpgradeNames()
@@ -1036,6 +1120,10 @@ namespace OpenRA.Mods.CA.Traits
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
 		void UpgradeStartLog(string name, string queueType, int cost) =>
 			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},upg_start,{name},{queueType},{(cost <= 0 ? "free" : "paid")};since={upgradeDone.Since(name)}");
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void UpgradeReleaseLog(string name, string reason) =>
+			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},upg_pending_release,{name},,{reason}");
 
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
 		void UpgradeDoneLog(string name, string source) =>
@@ -1388,6 +1476,12 @@ namespace OpenRA.Mods.CA.Traits
 			UpgradeScanOnce();
 			UpgradeSettle(inProduction);
 
+			// an ordered item the queue has not shown yet stays reserved: it is not offered again while its order is outstanding (upg_once_registry)
+			var onceOn = UpgradeOnceOn;
+			if (onceOn)
+				foreach (var pendingName in upgradeDone.PendingNames)
+					inProduction.Add(pendingName);
+
 			var paused = requestPause.Any(rp => rp.IsTraitEnabled() && rp.PauseUnitProduction && rp is not IBotItemAwareUnitCap);
 			foreach (var category in Info.UpgradeServiceQueues)
 			{
@@ -1413,11 +1507,11 @@ namespace OpenRA.Mods.CA.Traits
 
 							// the once-done registry: first sight of the type stamps its available tick; a completed type (or a member of a completed exclusive set) is not started again
 							upgradeDone.Observe(item.Name, world.WorldTick, item.TraitInfoOrDefault<BuildableInfo>()?.Prerequisites);
-							if (upgradeDone.IsDone(item.Name))
+							if (onceOn && upgradeDone.IsDone(item.Name))
 								continue;
 
 							candidates.Add(new UpgradeServiceCA.Candidate(item.Name, queue.GetProductionCost(item),
-								shares != null && shares.TryGetValue(item.Name, out var w) ? Math.Max(w, 0) : -1, upgradeDone.Since(item.Name)));
+								shares != null && shares.TryGetValue(item.Name, out var w) ? Math.Max(w, 0) : -1, onceOn ? upgradeDone.Since(item.Name) : 0));
 							infos.Add(item);
 						}
 
@@ -1852,9 +1946,9 @@ namespace OpenRA.Mods.CA.Traits
 						if (isAirToAir)
 							batch.PendingAirToAir++;
 					}
-					if (armedInfantryFloor > 0 && IsArmedInfantry(unit))
+					if (armedInfantryFloor > 0 && IsArmedInfantry(unit, IsCapturer(unit)))
 						batch.PendingArmedInfantry++;
-					if (unit.HasTraitInfo<CapturesInfo>())
+					if (IsCapturer(unit))
 						batch.PendingCapturers++;
 					if (activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
 						AddToActiveCompositionProducedValue(unit);
@@ -1982,7 +2076,7 @@ namespace OpenRA.Mods.CA.Traits
 		// to ShouldBuild's admit call except for the pending delta.
 		bool CapturerCapAdmitsWithPending(ActorInfo candidate, ProducerServiceBatch batch)
 		{
-			if (!CapturerCapActive(CapturerLimitPct) || !candidate.HasTraitInfo<CapturesInfo>())
+			if (!CapturerCapActive(CapturerLimitPct) || !IsCapturer(candidate))
 				return true;
 
 			CapturerArmyCounts(out var capturerUnits, out var armedInfantryUnits);
@@ -2011,7 +2105,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			var items = queue.BuildableItems();
 			var pickName = UnitProducerServiceCA.CombatValueOrder(items
-				.Where(b => shares.ContainsKey(b.Name) && IsArmedInfantry(b) && !skip.Contains(b.Name))
+				.Where(b => shares.ContainsKey(b.Name) && IsArmedInfantry(b, IsCapturer(b)) && !skip.Contains(b.Name))
 				.Select(b => (b.Name, DerivedUnitStrength(b.Name), Math.Max(1, queue.GetProductionCost(b)))))
 				.FirstOrDefault();
 			return pickName == null ? null : items.First(b => b.Name == pickName);
@@ -2097,9 +2191,9 @@ namespace OpenRA.Mods.CA.Traits
 							if (Info.AirToAirUnits.Contains(name))
 								batch.PendingAirToAir++;
 						}
-						if (IsArmedInfantry(actorInfo))
+						if (IsArmedInfantry(actorInfo, IsCapturer(actorInfo)))
 							batch.PendingArmedInfantry++;
-						if (actorInfo.HasTraitInfo<CapturesInfo>())
+						if (IsCapturer(actorInfo))
 							batch.PendingCapturers++;
 					}
 					return true;
@@ -2339,7 +2433,7 @@ namespace OpenRA.Mods.CA.Traits
 			// before both the ruleset lookup and the army scan — no wasted work.
 			if (CapturerCapActive(CapturerLimitPct) &&
 				world.Map.Rules.Actors.TryGetValue(name, out var candidate) &&
-				candidate.HasTraitInfo<CapturesInfo>())
+				IsCapturer(candidate))
 			{
 				CapturerArmyCounts(out var capturerUnits, out var armedInfantryUnits);
 				if (!CapturerCapAdmits(CapturerLimitPct, capturerUnits, armedInfantryUnits, Info.CapturerMinimumUnits,

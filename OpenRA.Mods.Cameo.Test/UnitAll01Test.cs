@@ -14,6 +14,8 @@ using System.IO;
 using System.Linq;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
+using OpenRA.Mods.Common.Traits;
+using OpenRA.Primitives;
 
 namespace OpenRA.Mods.Cameo.Test
 {
@@ -408,8 +410,10 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		// Sol FIX of 425f1fab: completion is decided from authoritative state at the service visits, keyed to the REAL grants of the item.
-		static List<(string Name, string Source)> Settle(UpgradeCompletions r, int tick, string[] inProduction, Dictionary<string, string[]> grants, string[] owned, string[] offered = null) =>
-			r.Settle(tick, new HashSet<string>(inProduction), n => grants.TryGetValue(n, out var g) ? g : [], new HashSet<string>(owned), () => new HashSet<string>(offered ?? []));
+		static List<(string Name, string Source)> Settle(UpgradeCompletions r, int tick, string[] inProduction, Dictionary<string, string[]> grants, string[] owned, string[] offered = null,
+			bool queueAlive = true, bool prerequisitesHeld = true) =>
+			r.Settle(tick, new HashSet<string>(inProduction), n => grants.TryGetValue(n, out var g) ? g : [], new HashSet<string>(owned), () => new HashSet<string>(offered ?? []),
+				_ => queueAlive, (_, _) => prerequisitesHeld);
 
 		[Test]
 		public void AFastItemThatFinishesBetweenTwoVisitsIsStillFoundByItsGrant()
@@ -475,11 +479,75 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(r2.Completed("promo_cond"), Is.False);
 			Assert.That(r2.AnyPending, Is.False);
 
-			// ordered this visit and not queued yet: not judged before it was seen or 100 ticks passed
+			// ordered this visit and not queued yet: not judged
 			var r3 = new UpgradeCompletions();
 			r3.Started("promo_cond", 1000);
 			Assert.That(Settle(r3, 1010, [], grants, [], []), Is.Empty);
 			Assert.That(r3.AnyPending, Is.True);
+
+			// a never-seen order is never done by approximation, even long after: it is dropped as not accepted
+			Assert.That(Settle(r3, 1000 + UpgradeCompletions.DefaultPendingTimeoutTicks + 1, [], grants, [], []), Is.Empty);
+			Assert.That(r3.AnyPending, Is.False);
+			Assert.That(r3.Completed("promo_cond"), Is.False);
+		}
+
+		[Test]
+		public void ADelayedOrderStaysReservedAndKeepsItsFirstIssueTickAndSeenBit()
+		{
+			var grants = new Dictionary<string, string[]>();
+			var r = new UpgradeCompletions();
+			r.Started("promo_cond", 100);
+			Assert.That(r.IsPending("promo_cond"), Is.True, "reserved: the service adds pending names to the in-production set, so it is not offered again");
+			Settle(r, 120, [], grants, [], ["promo_cond"]);
+
+			// a second Started (a re-order) must not restart the clock
+			r.Started("promo_cond", 150);
+			Assert.That(Settle(r, 100 + UpgradeCompletions.DefaultPendingTimeoutTicks + 1, [], grants, [], ["promo_cond"]), Is.Empty);
+			Assert.That(r.AnyPending, Is.False, "dropped by the FIRST issue tick, not the restarted one");
+
+			// seen once, a later Started does not clear the Seen bit
+			var r2 = new UpgradeCompletions();
+			r2.Started("promo_cond", 0);
+			Settle(r2, 10, ["promo_cond"], grants, [], []);
+			r2.Started("promo_cond", 20);
+			Assert.That(Settle(r2, 30, [], grants, [], []), Is.EqualTo(new[] { ("promo_cond", UpgradeCompletions.SourceApprox) }), "the Seen bit survived");
+
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			Assert.That(u, Does.Contain("foreach (var pendingName in upgradeDone.PendingNames)\n\t\t\t\tinProduction.Add(pendingName);"));
+		}
+
+		[Test]
+		public void AProducerOrPrerequisiteLossIsNotACompletion()
+		{
+			var grants = new Dictionary<string, string[]>();
+
+			// seen in the queue, then the producer was sold: the offer stops, but it is not a completion
+			var r = new UpgradeCompletions();
+			r.Started("promo_cond", 0);
+			Settle(r, 10, ["promo_cond"], grants, [], []);
+			Assert.That(Settle(r, 40, [], grants, [], [], queueAlive: false), Is.Empty);
+			Assert.That(r.Completed("promo_cond"), Is.False);
+			Assert.That(r.AnyPending, Is.False);
+
+			// a required prerequisite was lost: same
+			var r2 = new UpgradeCompletions();
+			r2.Started("promo_cond", 0);
+			Settle(r2, 10, ["promo_cond"], grants, [], []);
+			Assert.That(Settle(r2, 40, [], grants, [], [], prerequisitesHeld: false), Is.Empty);
+			Assert.That(r2.Completed("promo_cond"), Is.False);
+
+			// a granting item that left the queue without its grant (cancelled or lost) is dropped, never done
+			var granting = new Dictionary<string, string[]> { ["upgrade_x"] = ["tech.x"] };
+			var r3 = new UpgradeCompletions();
+			r3.Started("upgrade_x", 0);
+			Settle(r3, 10, ["upgrade_x"], granting, []);
+			Assert.That(Settle(r3, 40, [], granting, []), Is.Empty);
+			Assert.That(r3.Completed("upgrade_x"), Is.False);
+			Assert.That(r3.AnyPending, Is.False);
+
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			Assert.That(u, Does.Contain("bool UpgradeQueueAlive(string name)"));
+			Assert.That(u, Does.Contain("bool UpgradePrerequisitesHeld(string name, ISet<string> owned)"));
 		}
 
 		[Test]
@@ -494,7 +562,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(u, Does.Contain("if (ServedByUpgradeService(a) && UpgradeGrantsOf(a.Name).Any(owned.Contains) && upgradeDone.Complete(a.Name, UpgradeCompletions.SourceInit))"));
 			Assert.That(u, Does.Contain("UpgradeScanOnce();\n\t\t\tUpgradeSettle(inProduction);"), "both run before the service chooses");
 			Assert.That(u, Does.Contain("upgradeDone.Started(item2.Name, world.WorldTick);"), "every ordered item is settled at the later visits");
-			Assert.That(u, Does.Contain("upgradeDone.Settle(world.WorldTick, inProduction, UpgradeGrantsOf, OwnedPrerequisites(), OfferedUpgradeNames)"));
+			Assert.That(u, Does.Contain("upgradeDone.Settle(world.WorldTick, inProduction, UpgradeGrantsOf, OwnedPrerequisites(), OfferedUpgradeNames, UpgradeQueueAlive, UpgradePrerequisitesHeld)"));
 			Assert.That(u, Does.Contain("upg_done_source={source}"), "the DEV row carries the source");
 
 			// no ActorAdded guess
@@ -509,6 +577,76 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(r.Source("upgrade_conyard"), Is.EqualTo("init"));
 			Assert.That(r.IsDone("upgrade_conyard"), Is.True);
 			Assert.That(r.Complete("upgrade_conyard"), Is.False, "once");
+		}
+
+		// ub_capturer_strict (Opus 11-25, V08E): rifle infantry carry Captures@DRIVER_KILL and a garrison capture; only a building class makes a capturer.
+		static readonly BitSet<CaptureType> BuildingClasses = new("building", "defense", "tech");
+
+		[Test]
+		public void RifleInfantryWithGarrisonAndDriverKillCapturesIsNotACapturerButAnEngineerIs()
+		{
+			var driverKill = new BitSet<CaptureType>("driverless_vehicle", "vehicle");
+			var garrison = new BitSet<CaptureType>("ra2garrison");
+			var engineer = new BitSet<CaptureType>("building", "defense", "tech");
+			var spy = new BitSet<CaptureType>("building");
+			var carBomb = new BitSet<CaptureType>("bombcar");
+			var husk = new BitSet<CaptureType>("husk");
+
+			Assert.That(CapturerClass.IsStrict([driverKill, garrison], BuildingClasses), Is.False, "ra1_allies_rifleinfantry");
+			Assert.That(CapturerClass.IsStrict([carBomb], BuildingClasses), Is.False);
+			Assert.That(CapturerClass.IsStrict([husk, driverKill], BuildingClasses), Is.False);
+			Assert.That(CapturerClass.IsStrict([engineer], BuildingClasses), Is.True, "an engineer");
+			Assert.That(CapturerClass.IsStrict([spy], BuildingClasses), Is.True);
+			Assert.That(CapturerClass.IsStrict([garrison, engineer], BuildingClasses), Is.True, "any one building trait is enough");
+			Assert.That(CapturerClass.IsStrict([], BuildingClasses), Is.False);
+		}
+
+		[Test]
+		public void TheStrictCapturerRuleIsUsedAtEveryCapOrDenominatorSiteAndClassicKeepsTheOldRule()
+		{
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			Assert.That(u, Does.Contain("bool CapturerStrictOn => switchesActive && Info.CapturerStrict && !ablateCapturerStrict.Off(player, AblationIds.CapturerStrict);"));
+			Assert.That(u, Does.Contain("public readonly bool CapturerStrict = false;"), "off by default: classic and every other instance keep the old rule");
+			Assert.That(u, Does.Contain("public readonly string[] CapturerCaptureTypes = { \"building\", \"defense\", \"tech\" };"));
+			Assert.That(u, Does.Contain("var old = info.HasTraitInfo<CapturesInfo>();\n\t\t\tif (!old || !CapturerStrictOn)\n\t\t\t\treturn old;"), "off = exactly the old test");
+
+			// the cap sites and the armed-infantry denominator all ask IsCapturer; no raw CapturesInfo test is left outside the classifier, the static unit-mix category and the static default
+			var withoutClassifier = u.Replace("var old = info.HasTraitInfo<CapturesInfo>();", "").Replace("IsArmedInfantry(info, info.HasTraitInfo<CapturesInfo>())", "")
+				.Replace("!info.HasTraitInfo<CapturesInfo>() && !info.HasTraitInfo<CarrierSlaveInfo>();\n\t\t\tcategory", "");
+			Assert.That(withoutClassifier.Split(new[] { "HasTraitInfo<CapturesInfo>()" }, StringSplitOptions.None).Length - 1, Is.EqualTo(0), "every cap / denominator site goes through IsCapturer");
+			Assert.That(u, Does.Contain("capturerUnitsCached++;"));
+			Assert.That(u, Does.Contain("else if (IsArmedInfantry(info, capturer))"));
+			Assert.That(u, Does.Contain("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid CapturerClassLog("), "the per-type classification row is DEV only and written once");
+			Assert.That(u, Does.Contain(",ub_capturer_class,{name},,{(strict ? 1 : 0)}"));
+
+			Assert.That(Source("mods/CA/Traits/BotModules/BotModuleLogic/AblationIds.Capturer.cs"), Does.Contain("\"ub_capturer_strict\""));
+
+			// armed for genericbot only: the yaml switch sits in the generic module block, not in the classic one
+			var generic = MiniYaml.FromString(Source("packaging/ai.yaml"), "ai").Single(n => n.Key == "Player").Value.Nodes;
+			Assert.That(generic.Single(n => n.Key == "UnitBuilderBotModuleCA@generic").Value.Nodes.Any(n => n.Key == "CapturerStrict" && n.Value.Value == "true"), Is.True);
+			Assert.That(generic.Single(n => n.Key == "UnitBuilderBotModuleCA@classic").Value.Nodes.Any(n => n.Key == "CapturerStrict"), Is.False);
+		}
+
+		[Test]
+		public void TheOnceRegistryHasItsOwnToggleThatShipsOffAndTheDevRowsDoNotDependOnIt()
+		{
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			Assert.That(Source("mods/CA/Traits/BotModules/BotModuleLogic/AblationIds.UpgradeQueue.cs"), Does.Contain("\"upg_once_registry\""));
+			Assert.That(u, Does.Contain("public readonly bool UpgradeOnceRegistry = false;"), "ships OFF until it has a PASS");
+			Assert.That(u, Does.Contain("bool UpgradeOnceOn => Info.UpgradeOnceRegistry && !ablateUpgradeOnce.Off(player, AblationIds.UpgradeOnceRegistry);"));
+
+			// the three gameplay effects sit behind it; the tracking (Observe, Started, Settle) does not
+			Assert.That(u, Does.Contain("if (onceOn && upgradeDone.IsDone(item.Name))"));
+			Assert.That(u, Does.Contain("onceOn ? upgradeDone.Since(item.Name) : 0"));
+			Assert.That(u, Does.Contain("if (onceOn)\n\t\t\t\tforeach (var pendingName in upgradeDone.PendingNames)"));
+			Assert.That(u, Does.Contain("upgradeDone.Observe(item.Name, world.WorldTick, item.TraitInfoOrDefault<BuildableInfo>()?.Prerequisites);"));
+			Assert.That(u, Does.Contain("upgradeDone.Started(item2.Name, world.WorldTick);"));
+			Assert.That(u, Does.Contain("Info.UpgradePendingTimeout))"), "PendingTimeout is yaml");
+			Assert.That(u, Does.Contain("public readonly int UpgradePendingTimeout = 300;"));
+			Assert.That(u, Does.Contain("upg_pending_release,{name},,{reason}"), "every release is logged with its reason");
+
+			var dev = Source("mods/Cameo.Dev/AiPlayerTelemetryDev.Coverage.cs");
+			Assert.That(dev, Does.Not.Contain("UpgradeOnce"), "the DEV coverage rows are independent of the toggle");
 		}
 
 		// Opus 11-25: ub_pool_empty (DEV record only, no behaviour) + the ub_unit_roll OFF path stays the old one (classic byte-identical).

@@ -19,5 +19,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		// UPG-ADDONS: off = the BuildingAddons queue is skipped by the upgrade service (the other served queues are unchanged).
 		public const string UpgradeBuildingAddons = "upg_building_addons";
+
+		// UPGRADE-COVERAGE: off = the once-done registry has no gameplay effect (no re-offer exclusion, no reserved pending orders, no oldest-available ordering); the DEV coverage rows stay on.
+		public const string UpgradeOnceRegistry = "upg_once_registry";
 	}
 }
