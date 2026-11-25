@@ -49,16 +49,13 @@ namespace OpenRA.Mods.Cameo.Test
 			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
 			Assert.That(u, Does.Contain("bool ServeCategories()"), "the sweep reports whether the cash stop ended it");
 			Assert.That(u, Does.Contain("firstRoundStopped = ServeCategories();"));
-			Assert.That(u, Does.Contain("if (firstRoundStopped)
-						return;"), "round 2 is skipped after a round-1 stop");
+			Assert.That(u, Does.Contain("if (firstRoundStopped)\n\t\t\t\t\t\treturn;"), "round 2 is skipped after a round-1 stop");
 
-			var restore = u.IndexOf("if (!firstRoundStopped)
-						{
-							currentQueueIndex = savedIndex;", StringComparison.Ordinal);
+			var restore = u.IndexOf("if (!firstRoundStopped)\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\tcurrentQueueIndex = savedIndex;", StringComparison.Ordinal);
 			Assert.That(restore, Is.GreaterThan(0), "the cursors are restored only when round 1 was not stopped");
 
 			var sweep = u.IndexOf("bool ServeCategories()", StringComparison.Ordinal);
-			var body = u.Substring(sweep, u.IndexOf("		// UPGRADE-QUEUE-01.", sweep, StringComparison.Ordinal) - sweep);
+			var body = u.Substring(sweep, u.IndexOf("\t\t// UPGRADE-QUEUE-01.", sweep, StringComparison.Ordinal) - sweep);
 			Assert.That(body, Does.Contain("StopCategorySweep("));
 			Assert.That(body, Does.Contain("return true;"), "the stop returns true");
 			Assert.That(body, Does.Contain("return false;"), "a full sweep returns false");
