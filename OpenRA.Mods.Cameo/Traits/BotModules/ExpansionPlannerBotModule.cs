@@ -1385,6 +1385,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// An upper bound on one coherence sweep's atom count — scalar/header atoms, one base
 		// atom plus up to three trait atoms per actor, one atom per rank cell — so terminal
 		// polls can always complete a same-tick sweep before touching the domain.
+		// V08F item 9 note (Sol PASS_STATIC b5eb7012): the bound assumes at most 7 trait atoms per actor (GivesBuildableArea +
+		// BaseProvider + Replaceable) beyond its base atom, plus the 64 margin; no invariant enforces that for arbitrary rulesets.
+		// An actor type with more of those traits shrinks the margin, and past it the terminal tier starves again (seen as
+		// refinery_fallback_terminal_poll rows whose work equals the budget). Raise the per-actor factor here if a ruleset needs it.
 		int FallbackSweepBound()
 		{
 			var atoms = 3 + anchors.Count;
