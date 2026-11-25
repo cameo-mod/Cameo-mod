@@ -77,7 +77,7 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly bool UpgradeService = true;
 
 		[Desc("UPG-ADDONS: the BuildingAddons queue (the army_* level 2-3 upgrades) is served by the upgrade service when it is listed in UpgradeServiceQueues. False = it is skipped (row upg_building_addons).")]
-		public readonly bool UpgradeBuildingAddons = true;
+		public readonly bool UpgradeBuildingAddons = false;
 
 		[Desc("UPGRADE-COVERAGE: the once-done registry's gameplay effect (row upg_once_registry): a completed type (or a member of a completed symmetric exclusive set) is not offered again, an ordered item stays reserved",
 			"until its order settles, and the oldest-available candidate goes first. The DEV rows ub_upgrade_available / ub_upgrade_done do not depend on it. Ships OFF until it has a PASS.")]
