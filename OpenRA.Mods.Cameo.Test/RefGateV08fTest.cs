@@ -89,5 +89,20 @@ namespace OpenRA.Mods.Cameo.Test
 			var planner = MiniYaml.FromString(Source("packaging/ai.yaml"), "ai").Single(n => n.Key == "Player").Value.Nodes.Single(n => n.Key == "ExpansionPlannerBotModule");
 			Assert.That(planner.Value.Nodes.Any(n => n.Key == "RefRebuildLost" && n.Value.Value == "true"), Is.True);
 		}
+
+		[Test]
+		public void TheS2ZoneDemandBranchRecordsItsHoldGateInDevOnlyUnderItsOwnRow()
+		{
+			const string Dir = "mods/CA/Traits/BotModules/BotModuleLogic/";
+			var stages = Source(Dir + "BaseBuilderQueueManagerCA.Pipeline01Stages.cs");
+			Assert.That(stages, Does.Contain("\t\t\t\tif (refinery != null)\n\t\t\t\t\tyield return refinery.Name;\n\t\t\t\telse\n\t\t\t\t\tS2RefineryHeldObserved(buildable); // ref_s2_hold_log, DEV only\n\t\t\t}\n\n\t\t\tif (law == null)"),
+				"the log sits in the ZoneDemandAtS2 branch (the one followed by the law == null return)");
+			var at = stages.IndexOf("void S2RefineryHeldObserved(", StringComparison.Ordinal);
+			Assert.That(at, Is.GreaterThan(0));
+			Assert.That(stages.LastIndexOf("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]", at, StringComparison.Ordinal), Is.InRange(at - 80, at - 1), "compiled out of a release build");
+			Assert.That(stages, Does.Contain("if (ablateS2HoldLog.Off(player, AblationIds.RefS2HoldLog))\n\t\t\t\treturn;\n\n\t\t\tRefineryHeldObserved(\"s2_\" + RefineryHoldGate(buildable));"));
+			Assert.That(AblationSpec.RegistryIds(), Does.Contain("ref_s2_hold_log"));
+			Assert.That(stages.Split("RefineryHeldObserved(RefineryHoldGate(buildable));").Length - 1, Is.EqualTo(2), "the older S2 (yard without refinery) and S7 records are untouched (BuildAllListedTest pin)");
+		}
 	}
 }
