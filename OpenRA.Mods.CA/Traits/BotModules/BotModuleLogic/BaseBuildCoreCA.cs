@@ -16,42 +16,22 @@ namespace OpenRA.Mods.CA.Traits
 {
 	// CONSOLIDATE-01 c3 (CONSOLIDATE_01_DESIGN.md 3.1 stage S5, section 4 row C3): the pure parts of "every listed building once". No world, no state, no random.
 
-	/// <summary>One buildable structure type as S5 sees it. Count = owned + in flight; Depth and RoleRank come from <see cref="TechDepthCA"/> and <see cref="CoreOnceCA.RoleRank"/>.</summary>
-	public readonly record struct CoreOnceInput(string Name, bool Buildable, bool InFractions, bool FirstCopyKind, bool OwnRuleStage, int Count, int Depth, int RoleRank, int Cost);
+	/// <summary>One buildable structure type as S5's fallback sees it. Count = owned + in flight; Weight = its BuildingFractions weight, never below 0 (-1 = not listed); Depth comes from <see cref="TechDepthCA"/>.</summary>
+	public readonly record struct CoreOnceInput(string Name, bool Buildable, int Weight, bool FirstCopyKind, bool OwnRuleStage, int Count, int Depth, int Cost);
 
-	/// <summary>S5: the core set (R1, R11) and its order.</summary>
+	/// <summary>S5: the depth fallback of "every listed building once". The first pass is the original BuildingFractions roll (BaseBuildPlanCA.RollCandidates).</summary>
 	public static class CoreOnceCA
 	{
-		/// <summary>The rank of an opening role, in the opening order's own numbering (OpeningRole): Power 1, Barracks 2, Refinery 3, War factory 4, Radar 5, Airfield 6, passive income 8, any other type 100.</summary>
-		public static int RoleRank(bool power, bool barracks, bool refinery, bool warFactory, bool radar, bool airfield, bool trickler)
-		{
-			if (power)
-				return (int)OpeningRole.Power;
-			if (barracks)
-				return (int)OpeningRole.Barracks;
-			if (refinery)
-				return (int)OpeningRole.Refinery;
-			if (warFactory)
-				return (int)OpeningRole.WarFactory;
-			if (radar)
-				return (int)OpeningRole.Radar;
-			if (airfield)
-				return (int)OpeningRole.Airfield;
-			if (trickler)
-				return (int)OpeningRole.PassiveIncome;
-
-			return 100;
-		}
-
 		/// <summary>
-		/// Whether a type is in the S5 set: buildable by this player now (a doctrine alternative the player did not pick is not buildable, so it is simply
-		/// absent, never a missing core building), none owned or in flight, listed in BuildingFractions or a first-copy kind (no wall, defence, proxy), and
-		/// not a type with a stage of its own (construction yard, refinery: S2 and S7 keep their laws).
+		/// Whether a type is in the fallback: buildable by this player now (a doctrine alternative the player did not pick is not buildable, so it is simply
+		/// absent, never a missing core building), none owned or in flight, not a type with a stage of its own (construction yard, refinery: S2 and S7 keep
+		/// their laws), and a type the roll cannot offer: a BuildingFractions entry with weight 0 or less, or a first-copy kind that is not listed at all.
+		/// A listed type with a positive weight is the roll's, never the fallback's (no duplicate).
 		/// </summary>
 		public static bool InSet(CoreOnceInput t) =>
-			t.Name != null && t.Buildable && t.Count <= 0 && !t.OwnRuleStage && (t.InFractions || t.FirstCopyKind);
+			t.Name != null && t.Buildable && t.Count <= 0 && !t.OwnRuleStage && (t.Weight < 0 ? t.FirstCopyKind : t.Weight == 0);
 
-		/// <summary>The S5 candidates in order: tech depth (nearest the yard first), then opening role, then cost, then ordinal name (deterministic).</summary>
+		/// <summary>The fallback candidates in order: tech depth (nearest the yard first), then cost, then ordinal name (deterministic).</summary>
 		public static IReadOnlyList<string> Order(IEnumerable<CoreOnceInput> types)
 		{
 			if (types == null)
@@ -60,7 +40,6 @@ namespace OpenRA.Mods.CA.Traits
 			return types
 				.Where(InSet)
 				.OrderBy(t => t.Depth)
-				.ThenBy(t => t.RoleRank)
 				.ThenBy(t => Math.Max(0, t.Cost))
 				.ThenBy(t => t.Name, StringComparer.Ordinal)
 				.Select(t => t.Name)

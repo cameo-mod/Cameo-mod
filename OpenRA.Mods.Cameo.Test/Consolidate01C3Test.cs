@@ -37,13 +37,33 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		const string StagesFile = "mods/CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.Pipeline01Stages.cs";
+		const string PlanFile = "mods/CA/Traits/BotModules/BotModuleLogic/BaseBuildPlanCA.cs";
+		const string DefenceFile = "mods/CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.Pipeline01Defence.cs";
 		const string PipelineFile = "mods/CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.Pipeline01.cs";
 		const string QmFile = "mods/CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs";
 		const string SovietBuildings = "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml";
 
-		static CoreOnceInput T(string name, int depth = 1, int role = 100, int cost = 1000, int count = 0, bool buildable = true, bool inFractions = true,
-			bool firstCopy = false, bool ownRule = false) =>
-			new(name, buildable, inFractions, firstCopy, ownRule, count, depth, role, cost);
+		// Weight: -1 = not in BuildingFractions. The default is the fallback's: a first-copy kind that is not listed.
+		static CoreOnceInput T(string name, int depth = 1, int cost = 1000, int count = 0, bool buildable = true, int weight = -1,
+			bool firstCopy = true, bool ownRule = false) =>
+			new(name, buildable, weight, firstCopy, ownRule, count, depth, cost);
+
+		static BaseBuildSnapshot Snap(IEnumerable<KeyValuePair<string, int>> fractions, Func<BaseBuildStage, IEnumerable<string>> source = null,
+			int buildingCount = 10, bool defence = false) => new()
+		{
+			Bank = 5000,
+			Owned = new Dictionary<string, int>(),
+			InFlight = new Dictionary<string, int>(),
+			BuildingCount = buildingCount,
+			DefenceQueue = defence,
+			Fractions = fractions?.ToArray(),
+			StageSource = source,
+		};
+
+		static KeyValuePair<string, int> W(string name, int weight) => new(name, weight);
+
+		static List<string> S5Names(BaseBuildSnapshot s, int seed) =>
+			BaseBuildPlanCA.StageCandidates(BaseBuildStage.S5CoreOnce, s, new MersenneTwister(seed)).Select(c => c.Name).ToList();
 
 		static IReadOnlyDictionary<string, IReadOnlyList<string>> Map(params (string Key, string[] Values)[] rows) =>
 			rows.ToDictionary(r => r.Key, r => (IReadOnlyList<string>)r.Values, StringComparer.Ordinal);
@@ -53,7 +73,10 @@ namespace OpenRA.Mods.Cameo.Test
 			public readonly HashSet<string> Infeasible = new(StringComparer.Ordinal);
 			public readonly List<string> Tested = new();
 
-			public bool StageAdmits(BaseBuildCandidate candidate) => true;
+			// The types this player can build (null = all): a doctrine alternative outside it is skipped by the stage caps, at no test cost.
+			public HashSet<string> Buildable;
+
+			public bool StageAdmits(BaseBuildCandidate candidate) => Buildable == null || Buildable.Contains(candidate.Name);
 
 			public bool Feasible(BaseBuildCandidate candidate, out string admitted)
 			{
@@ -66,27 +89,25 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void TheOrderIsDepthThenOpeningRoleThenCostThenName()
+		public void TheFallbackOrderIsDepthThenCostThenName()
 		{
 			var order = CoreOnceCA.Order(
 			[
-				T("deep", depth: 3, role: 1, cost: 100),
-				T("shallowExpensive", depth: 1, role: 100, cost: 900),
-				T("shallowRadar", depth: 1, role: CoreOnceCA.RoleRank(false, false, false, false, true, false, false), cost: 1500),
-				T("shallowBarracks", depth: 1, role: CoreOnceCA.RoleRank(false, true, false, false, false, false, false), cost: 2000),
+				T("deep", depth: 3, cost: 100),
+				T("shallowExpensive", depth: 1, cost: 900),
+				T("shallowCheap", depth: 1, cost: 300),
 				T("b", depth: 2, cost: 500),
 				T("a", depth: 2, cost: 500),
 				T("c", depth: 2, cost: 400),
 			]);
 
-			// depth 1: barracks (role 2), radar (role 5), then the role-less one; depth 2: cheaper first, then the ordinal name; depth 3 last.
-			Assert.That(order, Is.EqualTo(new[] { "shallowBarracks", "shallowRadar", "shallowExpensive", "c", "a", "b", "deep" }));
+			Assert.That(order, Is.EqualTo(new[] { "shallowCheap", "shallowExpensive", "c", "a", "b", "deep" }));
 		}
 
 		[Test]
-		public void TheOrderIsDeterministicWhateverTheInputOrder()
+		public void TheFallbackOrderIsDeterministicWhateverTheInputOrder()
 		{
-			var set = new[] { T("z", 1, 100, 10), T("y", 1, 100, 10), T("x", 2, 100, 10), T("w", 0, 100, 10) };
+			var set = new[] { T("z", 1, 10), T("y", 1, 10), T("x", 2, 10), T("w", 0, 10) };
 			var expected = CoreOnceCA.Order(set);
 			Assert.That(expected, Is.EqualTo(new[] { "w", "y", "z", "x" }));
 			Assert.That(CoreOnceCA.Order(set.Reverse()), Is.EqualTo(expected));
@@ -94,35 +115,24 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void RoleRanksFollowTheOpeningOrderAndAnythingElseComesLast()
-		{
-			Assert.That(CoreOnceCA.RoleRank(true, false, false, false, false, false, false), Is.EqualTo((int)OpeningRole.Power));
-			Assert.That(CoreOnceCA.RoleRank(false, true, false, false, false, false, false), Is.EqualTo((int)OpeningRole.Barracks));
-			Assert.That(CoreOnceCA.RoleRank(false, false, true, false, false, false, false), Is.EqualTo((int)OpeningRole.Refinery));
-			Assert.That(CoreOnceCA.RoleRank(false, false, false, true, false, false, false), Is.EqualTo((int)OpeningRole.WarFactory));
-			Assert.That(CoreOnceCA.RoleRank(false, false, false, false, true, false, false), Is.EqualTo((int)OpeningRole.Radar));
-			Assert.That(CoreOnceCA.RoleRank(false, false, false, false, false, true, false), Is.EqualTo((int)OpeningRole.Airfield));
-			Assert.That(CoreOnceCA.RoleRank(false, false, false, false, false, false, true), Is.EqualTo((int)OpeningRole.PassiveIncome));
-			Assert.That(CoreOnceCA.RoleRank(false, false, false, false, false, false, false), Is.EqualTo(100));
-		}
-
-		[Test]
 		public void OnceOnlyAnOwnedOrInFlightTypeIsExcluded()
 		{
-			var order = CoreOnceCA.Order([T("none", count: 0), T("owned", count: 1), T("inflightAndOwned", count: 3), T("also", count: 0, inFractions: false, firstCopy: true)]);
-			Assert.That(order, Is.EquivalentTo(new[] { "none", "also" }));
+			var order = CoreOnceCA.Order([T("none", count: 0), T("owned", count: 1), T("inflightAndOwned", count: 3), T("zero", count: 0, weight: 0, firstCopy: false)]);
+			Assert.That(order, Is.EquivalentTo(new[] { "none", "zero" }));
 		}
 
 		[Test]
-		public void DefenceWallAndProxyTypesAreInTheSetOnlyThroughBuildingFractions()
+		public void TheFallbackTakesOnlyWhatTheRollCannotOffer()
 		{
-			// FirstCopyKind is false for a defence, wall or proxy (UnlistedOnceCA.Eligible); a BuildingFractions row still lists the type.
-			Assert.That(CoreOnceCA.InSet(T("turret", inFractions: false, firstCopy: false)), Is.False);
-			Assert.That(CoreOnceCA.InSet(T("wall", inFractions: false, firstCopy: false)), Is.False);
-			Assert.That(CoreOnceCA.InSet(T("proxy", inFractions: false, firstCopy: false)), Is.False);
-			Assert.That(CoreOnceCA.InSet(T("turret", inFractions: true, firstCopy: false)), Is.True);
-			Assert.That(CoreOnceCA.InSet(T("lab", inFractions: false, firstCopy: true)), Is.True);
+			// Weight 0 (listed, never rolled into S5) and an unlisted first-copy kind are the fallback's; a positive weight is the roll's.
+			Assert.That(CoreOnceCA.InSet(T("zeroWeight", weight: 0, firstCopy: false)), Is.True);
+			Assert.That(CoreOnceCA.InSet(T("zeroWeightFirstCopy", weight: 0, firstCopy: true)), Is.True);
+			Assert.That(CoreOnceCA.InSet(T("unlisted", weight: -1, firstCopy: true)), Is.True);
+			Assert.That(CoreOnceCA.InSet(T("positive", weight: 5, firstCopy: true)), Is.False, "no duplicate of the roll");
+			Assert.That(CoreOnceCA.InSet(T("positive", weight: 1, firstCopy: false)), Is.False);
 
+			// FirstCopyKind is false for a defence, wall or proxy (UnlistedOnceCA.Eligible): unlisted, they are in no set.
+			Assert.That(CoreOnceCA.InSet(T("turret", weight: -1, firstCopy: false)), Is.False);
 			Assert.That(UnlistedOnceCA.Eligible(false, true, false, false, true, "turret"), Is.False);
 			Assert.That(UnlistedOnceCA.Eligible(false, true, true, false, false, "wall"), Is.False);
 			Assert.That(UnlistedOnceCA.Eligible(false, true, false, false, false, "ra1_proxy_thing"), Is.False);
@@ -130,11 +140,94 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void TypesWithTheirOwnStageAndNamelessTypesAreNotInTheSet()
+		public void TypesWithTheirOwnStageAndNamelessTypesAreNotInTheFallback()
 		{
 			Assert.That(CoreOnceCA.InSet(T("proc", ownRule: true)), Is.False, "construction yard and refinery keep S2 and S7");
 			Assert.That(CoreOnceCA.InSet(T("name", buildable: true)), Is.True);
-			Assert.That(CoreOnceCA.InSet(new CoreOnceInput(null, true, true, true, false, 0, 0, 0, 0)), Is.False);
+			Assert.That(CoreOnceCA.InSet(new CoreOnceInput(null, true, 0, true, false, 0, 0, 0)), Is.False);
+		}
+
+		[Test]
+		public void AnUnbuiltFractionTypeIsAlwaysOfferedByS5WhateverTheBuildingCount()
+		{
+			foreach (var count in new[] { 0, 10, 500 })
+			{
+				foreach (var weight in new[] { 1, 5, 100 })
+				{
+					var s = Snap([W("lab", weight)], buildingCount: count);
+					Assert.That(S5Names(s, 1), Is.EqualTo(new[] { "lab" }), "count " + count + ", weight " + weight);
+				}
+			}
+		}
+
+		[Test]
+		public void TheFractionWeightsDecideS5Eligibility()
+		{
+			var s = Snap([W("rolled", 10), W("zero", 0), W("built", 10)], stage => stage == BaseBuildStage.S5CoreOnce ? CoreOnceCA.Order([T("zero", weight: 0), T("late", depth: 5)]) : null);
+			s.Owned = new Dictionary<string, int> { ["built"] = 1 };
+
+			var names = S5Names(s, 3);
+			Assert.That(names, Is.EqualTo(new[] { "rolled", "zero", "late" }), "the positive weight goes to the roll, weight 0 only to the depth fallback after it");
+			Assert.That(names, Does.Not.Contain("built"), "a type with a first copy is in neither");
+
+			s.InFlight = new Dictionary<string, int> { ["rolled"] = 1 };
+			Assert.That(S5Names(s, 3), Is.EqualTo(new[] { "zero", "late" }), "in flight counts as built");
+		}
+
+		[Test]
+		public void TheDoctrinePairCountsAsOne()
+		{
+			// Both twins are listed; only the one this player can build passes StageAdmits (buildableNames), so exactly one of the pair is picked and,
+			// once it stands, the other is never offered as a missing core building.
+			var pair = new[] { W("ra1_soviets_largefactory", 10), W("ra1_soviets_warfactory", 10) };
+			foreach (var buildable in new[] { "ra1_soviets_largefactory", "ra1_soviets_warfactory" })
+			{
+				var s = Snap(pair);
+				var f = new FakeFeasibility { Buildable = new HashSet<string>(StringComparer.Ordinal) { buildable } };
+				var pick = BaseBuildPlanCA.Plan(s, f, new MersenneTwister(2));
+				Assert.That(pick.Name, Is.EqualTo(buildable));
+				Assert.That(pick.Stage, Is.EqualTo(BaseBuildStage.S5CoreOnce));
+				Assert.That(f.Tested, Is.EqualTo(new[] { buildable }), "the unbuildable twin costs no test");
+
+				s.Owned = new Dictionary<string, int> { [buildable] = 1 };
+				f = new FakeFeasibility { Buildable = new HashSet<string>(StringComparer.Ordinal) { buildable } };
+				Assert.That(BaseBuildPlanCA.Plan(s, f, new MersenneTwister(2)).Stage, Is.Not.EqualTo(BaseBuildStage.S5CoreOnce));
+				Assert.That(f.Tested, Does.Not.Contain(pair.Select(p => p.Key).Single(k => k != buildable)));
+			}
+		}
+
+		[Test]
+		public void S5AndS10DrawFromTheSameRollCode()
+		{
+			var plan = Source(PlanFile);
+			Assert.That(plan, Does.Contain("return RollCandidates(s, rng, BaseBuildStage.S10Fractions);"));
+			Assert.That(plan, Does.Contain("foreach (var c in RollCandidates(s, rng, BaseBuildStage.S5CoreOnce))"));
+			Assert.That(plan, Does.Contain("static IEnumerable<BaseBuildCandidate> RollCandidates(BaseBuildSnapshot s, MersenneTwister rng, BaseBuildStage stage)"));
+			Assert.That(plan, Does.Not.Contain("FractionCandidates"));
+
+			var shuffles = plan.Split(new[] { "s.Fractions.OrderBy" }, StringSplitOptions.None).Length - 1;
+			Assert.That(shuffles, Is.EqualTo(1), "one shuffle of s.Fractions in BaseBuildPlanCA, inside RollCandidates");
+			Assert.That(plan.Split(new[] { ".Shuffle(rng)" }, StringSplitOptions.None).Length - 1, Is.EqualTo(1));
+		}
+
+		[Test]
+		public void S5OffersNothingOnTheDefenceQueue()
+		{
+			var s = Snap([W("lab", 10)], _ => new[] { "fallback" }, defence: true);
+			Assert.That(S5Names(s, 1), Is.Empty);
+			s.DefenceQueue = false;
+			Assert.That(S5Names(s, 1), Is.EqualTo(new[] { "lab", "fallback" }));
+		}
+
+		[Test]
+		public void TheSameSeedGivesTheSameS5Order()
+		{
+			var fractions = Enumerable.Range(0, 12).Select(i => W("b" + i.ToString("D2"), 5 + i)).ToArray();
+			var a = S5Names(Snap(fractions), 77);
+			Assert.That(a, Has.Count.EqualTo(12));
+			Assert.That(S5Names(Snap(fractions), 77), Is.EqualTo(a));
+			Assert.That(S5Names(Snap(fractions.Reverse()), 77), Is.EqualTo(a), "keys are sorted ordinally before the shuffle");
+			Assert.That(a, Is.EquivalentTo(fractions.Select(x => x.Key)));
 		}
 
 		[Test]
@@ -282,20 +375,17 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void TheCoreStageComesBeforeFractionExtras()
+		public void TheRollFirstThenTheFallbackAndBothBeforeTheS10Roll()
 		{
-			var s = new BaseBuildSnapshot
-			{
-				Bank = 5000,
-				Owned = new Dictionary<string, int>(),
-				InFlight = new Dictionary<string, int>(),
-				BuildingCount = 10,
-				Fractions = new[] { new KeyValuePair<string, int>("extra", 50) },
-				StageSource = stage => stage == BaseBuildStage.S5CoreOnce ? new[] { "core" } : null,
-			};
+			var s = Snap([W("extra", 50)], stage => stage == BaseBuildStage.S5CoreOnce ? new[] { "core" } : null);
+			var f = new FakeFeasibility();
+			var pick = BaseBuildPlanCA.Plan(s, f, new MersenneTwister(1));
+			Assert.That(pick.Name, Is.EqualTo("extra"));
+			Assert.That(pick.Stage, Is.EqualTo(BaseBuildStage.S5CoreOnce));
 
-			var pick = BaseBuildPlanCA.Plan(s, new FakeFeasibility(), new MersenneTwister(1));
-			Assert.That(pick.Name, Is.EqualTo("core"));
+			f.Infeasible.Add("extra");
+			pick = BaseBuildPlanCA.Plan(s, f, new MersenneTwister(1));
+			Assert.That(pick.Name, Is.EqualTo("core"), "the depth fallback follows the roll");
 			Assert.That(pick.Stage, Is.EqualTo(BaseBuildStage.S5CoreOnce));
 		}
 
@@ -305,6 +395,18 @@ namespace OpenRA.Mods.Cameo.Test
 			var stages = Source(StagesFile);
 			Assert.That(stages, Does.Contain("case BaseBuildStage.S5CoreOnce: return PipelineCoreOnceStage(buildable, snapshot);"));
 			Assert.That(stages, Does.Contain("CoreOnceCA.Order(inputs)"));
+			Assert.That(stages, Does.Not.Contain("RoleRank"));
+			Assert.That(stages, Does.Contain("weight = Math.Max(0, listed);"));
+
+			var defence = Source(DefenceFile);
+			Assert.That(defence, Does.Contain("case BaseBuildStage.S5CoreOnce:
+"));
+			Assert.That(defence, Does.Contain("return buildableNames.Contains(candidate.Name)"));
+			Assert.That(defence, Does.Contain("!baseBuilder.Info.ConstructionYardTypes.Contains(candidate.Name) && !baseBuilder.Info.RefineryTypes.Contains(candidate.Name);"));
+
+			var plan = Source(PlanFile);
+			Assert.That(plan, Does.Contain("case BaseBuildStage.S5CoreOnce: return CoreOnceCandidates(s, rng);"));
+			Assert.That(plan, Does.Contain("if (stage == BaseBuildStage.S5CoreOnce && (frac.Value <= 0 || CountOf(s, frac.Key) != 0))"));
 			Assert.That(stages, Does.Contain("TechDepthCA.Compute(prereqsOf, providersOf, baseBuilder.Info.ConstructionYardTypes)"));
 			Assert.That(stages, Does.Contain("if (snapshot.DefenceQueue)"), "the defence queue gets no core set");
 			Assert.That(stages, Does.Contain("FirstCopyKind(item)"));

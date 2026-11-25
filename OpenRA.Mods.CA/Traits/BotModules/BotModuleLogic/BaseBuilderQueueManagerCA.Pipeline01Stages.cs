@@ -75,11 +75,13 @@ namespace OpenRA.Mods.CA.Traits
 			return pick == null ? null : BaseBuilderQueueEvalCA.PickOrPower(pick, power, HasSufficientPowerForActor);
 		}
 
-		// S5 (c3): every buildable structure type with owned + in flight = 0 that is in BuildingFractions or a first-copy kind (FirstCopyKind: no wall,
-		// defence, fake or proxy), once per type, ordered by tech depth, opening role, cost, name (CoreOnceCA.Order). Nothing vetoes it later; only step A
-		// applies (BuildingDelays on every stage, X14). The pipeline ignores TechChainTypes: the derived depth replaces it. The defence queue gets nothing
-		// (S4 and S9 own it). Construction yards and refineries keep their own stages (S2, S7). A doctrine alternative this player cannot build is not in
-		// queue.BuildableItems(), so it is absent here rather than a missing core building.
+		// S5 (c3c): every listed building once. The first pass is the ORIGINAL BuildingFractions roll on first copies (BaseBuildPlanCA.RollCandidates: count 0,
+		// weight > 0, the same shuffle as S10), so the fraction weights decide. This method is only the fallback for what the roll cannot offer: buildable types
+		// with owned + in flight = 0 that are a BuildingFractions entry with weight 0, or a first-copy kind (FirstCopyKind: no wall, defence, fake or proxy) that
+		// is not listed. Ordered by tech depth, cost, name (CoreOnceCA.Order). Nothing vetoes S5 later; only step A applies (BuildingDelays on every stage, X14).
+		// The pipeline ignores TechChainTypes: the derived depth replaces it. The defence queue gets nothing (S4 and S9 own it). Construction yards and refineries
+		// keep their own stages (S2, S7). A doctrine alternative this player cannot build is not in queue.BuildableItems(), so it is absent here, and
+		// PipelineStageAdmits skips it at no test cost.
 		IEnumerable<string> PipelineCoreOnceStage(List<ActorInfo> buildable, BaseBuildSnapshot snapshot)
 		{
 			var b = baseBuilder.Info;
@@ -91,23 +93,22 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var item in buildable)
 			{
 				var name = item.Name;
-				var inFractions = b.BuildingFractions != null && b.BuildingFractions.ContainsKey(name);
+				var weight = -1;
+				if (b.BuildingFractions != null && b.BuildingFractions.TryGetValue(name, out var listed))
+					weight = Math.Max(0, listed);
+
 				var firstCopy = FirstCopyKind(item);
-				if (!inFractions && !firstCopy)
+				if (weight < 0 && !firstCopy)
 					continue;
 
-				var airfield = b.ProductionTypes.Contains(name) && !b.BarracksTypes.Contains(name) && !b.VehiclesFactoryTypes.Contains(name)
-					&& !b.NavalProductionTypes.Contains(name);
 				inputs.Add(new CoreOnceInput(
 					name,
 					Buildable: true,
-					inFractions,
+					weight,
 					firstCopy,
 					OwnRuleStage: b.ConstructionYardTypes.Contains(name) || b.RefineryTypes.Contains(name),
 					Count: BaseBuildPlanCA.CountOf(snapshot, name),
 					Depth: depths.TryGetValue(name, out var depth) ? depth : 0,
-					RoleRank: CoreOnceCA.RoleRank(b.PowerTypes.Contains(name), b.BarracksTypes.Contains(name), b.RefineryTypes.Contains(name),
-						b.VehiclesFactoryTypes.Contains(name), IsRadarProvider(item), airfield, item.HasTraitInfo<CashTricklerInfo>()),
 					Cost: queue.GetProductionCost(item)));
 			}
 

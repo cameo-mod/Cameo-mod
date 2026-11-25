@@ -82,12 +82,17 @@ namespace OpenRA.Mods.CA.Traits
 				yield return kv.Key;
 		}
 
-		// The stage caps that need the world, per stage: S4 none (D1: RATIO-2X exempt, no need gate; the cap counts the set but never vetoes it), S9 as above, S10 the old
+		// The stage caps that need the world, per stage: S4 none (D1: RATIO-2X exempt, no need gate; the cap counts the set but never vetoes it), S5 buildable and not a yard or refinery, S9 as above, S10 the old
 		// caps plus the defence cap for a defence (so the cap holds whichever stage reaches it, and after the af02 votes are retired). Other stages: no cap.
 		bool PipelineStageAdmits(ProductionQueue queue, HashSet<string> buildableNames, BaseBuildCandidate candidate)
 		{
 			switch (candidate.Stage)
 			{
+				case BaseBuildStage.S5CoreOnce:
+					// No army-share, RATIO or need cap: S5 is never vetoed by later rules. Only a type this player cannot build (a doctrine alternative) or a
+					// type with a stage of its own (yard, refinery) is skipped, at no test cost.
+					return buildableNames.Contains(candidate.Name)
+						&& !baseBuilder.Info.ConstructionYardTypes.Contains(candidate.Name) && !baseBuilder.Info.RefineryTypes.Contains(candidate.Name);
 				case BaseBuildStage.S9ExtraDefence:
 					return PipelineExtraDefenceAdmits(buildableNames, candidate.Name);
 				case BaseBuildStage.S10Fractions:

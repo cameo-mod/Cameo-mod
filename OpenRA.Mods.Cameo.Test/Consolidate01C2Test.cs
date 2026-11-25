@@ -60,7 +60,8 @@ namespace OpenRA.Mods.Cameo.Test
 		static BaseBuildSnapshot Snapshot(params string[] fractions) => new()
 		{
 			Bank = 5000,
-			Owned = new Dictionary<string, int>(),
+			// Each listed type already stands once: S5 (first copies) offers none of them, so these tests exercise the S10 roll.
+			Owned = fractions.Distinct().ToDictionary(f => f, _ => 1),
 			InFlight = new Dictionary<string, int>(),
 			BuildingCount = 10,
 			Fractions = fractions.Select(f => new KeyValuePair<string, int>(f, 10)).ToArray(),

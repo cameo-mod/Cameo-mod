@@ -194,12 +194,12 @@ namespace OpenRA.Mods.CA.Traits
 				case BaseBuildStage.S2ExpansionRefinery: return ExpansionRefineryCandidates(s);
 				case BaseBuildStage.S3Opening: return OpeningCandidates(s);
 				case BaseBuildStage.S4AntiRush: return AntiRushCandidates(s);
-				case BaseBuildStage.S5CoreOnce: return CoreOnceCandidates(s);
+				case BaseBuildStage.S5CoreOnce: return CoreOnceCandidates(s, rng);
 				case BaseBuildStage.S6PassiveIncome: return PassiveIncomeCandidates(s);
 				case BaseBuildStage.S7RefineryPerField: return RefineryPerFieldCandidates(s);
 				case BaseBuildStage.S8ProductionCycle: return ProductionCycleCandidates(s);
 				case BaseBuildStage.S9ExtraDefence: return ExtraDefenceCandidates(s);
-				case BaseBuildStage.S10Fractions: return FractionCandidates(s, rng);
+				case BaseBuildStage.S10Fractions: return RollCandidates(s, rng, BaseBuildStage.S10Fractions);
 				default: return Enumerable.Empty<BaseBuildCandidate>();
 			}
 		}
@@ -291,24 +291,41 @@ namespace OpenRA.Mods.CA.Traits
 			}
 		}
 
-		// S10 (the original BuildingFractions roll): ordinal key order, shuffled with the synced random (lazily, one draw per entry reached), then
-		// the interval and the fraction share. The world caps (air intel, defence need, refinery safety, RATIO-2X, army share) are StageAdmits.
-		static IEnumerable<BaseBuildCandidate> FractionCandidates(BaseBuildSnapshot s, MersenneTwister rng)
+		// The ONE BuildingFractions roll (S5 and S10): ordinal key order, shuffled with the synced random (lazily, one draw per entry reached), then
+		// the interval and the fraction share. S5 asks it for first copies only (count 0, weight > 0), S10 for every entry that passes. A type with count 0
+		// always passes the share. The world caps (air intel, defence need, refinery safety, RATIO-2X, army share) are StageAdmits.
+		static IEnumerable<BaseBuildCandidate> RollCandidates(BaseBuildSnapshot s, MersenneTwister rng, BaseBuildStage stage)
 		{
 			if (s.Fractions == null)
 				yield break;
 
 			foreach (var frac in s.Fractions.OrderBy(kv => kv.Key, StringComparer.Ordinal).Shuffle(rng))
 			{
+				if (stage == BaseBuildStage.S5CoreOnce && (frac.Value <= 0 || CountOf(s, frac.Key) != 0))
+					continue;
+
 				if (FractionStageAdmits(s, frac.Key, frac.Value))
-					yield return new BaseBuildCandidate(frac.Key, BaseBuildStage.S10Fractions);
+					yield return new BaseBuildCandidate(frac.Key, stage);
 			}
+		}
+
+		// S5 (every listed building once): the original roll on first copies with a positive weight, then the depth fallback (StageSource) for the
+		// types the roll cannot offer. Nothing on the defence queue (S4 and S9 own it).
+		static IEnumerable<BaseBuildCandidate> CoreOnceCandidates(BaseBuildSnapshot s, MersenneTwister rng)
+		{
+			if (s.DefenceQueue)
+				yield break;
+
+			foreach (var c in RollCandidates(s, rng, BaseBuildStage.S5CoreOnce))
+				yield return c;
+
+			foreach (var c in SourceCandidates(s, BaseBuildStage.S5CoreOnce))
+				yield return c;
 		}
 
 		// Stubs, filled by C3-C6 (CONSOLIDATE_01_DESIGN.md section 4). Each yields what the snapshot's StageSource offers for it (nothing in c2).
 		static IEnumerable<BaseBuildCandidate> ExpansionRefineryCandidates(BaseBuildSnapshot s) => SourceCandidates(s, BaseBuildStage.S2ExpansionRefinery); // S2 + S2b planner wants (C4)
 		static IEnumerable<BaseBuildCandidate> AntiRushCandidates(BaseBuildSnapshot s) => SourceCandidates(s, BaseBuildStage.S4AntiRush); // S4 (C5)
-		static IEnumerable<BaseBuildCandidate> CoreOnceCandidates(BaseBuildSnapshot s) => SourceCandidates(s, BaseBuildStage.S5CoreOnce); // S5 (C3)
 		static IEnumerable<BaseBuildCandidate> PassiveIncomeCandidates(BaseBuildSnapshot s) => SourceCandidates(s, BaseBuildStage.S6PassiveIncome); // S6 (C4)
 		static IEnumerable<BaseBuildCandidate> RefineryPerFieldCandidates(BaseBuildSnapshot s) => SourceCandidates(s, BaseBuildStage.S7RefineryPerField); // S7 (C4)
 		static IEnumerable<BaseBuildCandidate> ProductionCycleCandidates(BaseBuildSnapshot s) => SourceCandidates(s, BaseBuildStage.S8ProductionCycle); // S8 (C6)
