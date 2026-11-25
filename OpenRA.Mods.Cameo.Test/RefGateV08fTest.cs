@@ -54,7 +54,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(p, Does.Contain("var offered = refineryOfferedSinceReplan;\n\t\t\trefineryOfferedSinceReplan = false;\n\t\t\tvar (replans, parkAnchor) = AnchorStuckEvaluated(ParkEvaluatedOnlyOn, offered, anchorStuck.Anchor == anchor,"), "read and cleared at every re-plan that reaches the loop guard");
 
 			Assert.That(Source("mods/CA/Traits/BotModules/IBotExpansionTargetProvider.cs"), Does.Contain("void RefineryPickOffered()\n\t\t{\n\t\t}"), "a default member: fakes need no change");
-			Assert.That(Source("mods/CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs"), Does.Contain("baseBuilder.RefineryLawProvider()?.RefineryPickOffered();"), "the pick is the offer");
+			Assert.That(Source("mods/CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs"), Does.Contain("if (pick == refinery)\n\t\t\t\t\tbaseBuilder.RefineryLawProvider()?.RefineryPickOffered();"), "only the refinery itself is the offer; a low-power pick (the power plant) is not");
 			Assert.That(Source("mods/CA/Traits/BotModules/BotModuleLogic/AblationIds.RefGate.cs"), Does.Contain("\"ref_park_evaluated_only\""));
 			Assert.That(AblationSpec.RegistryIds(), Does.Contain("ref_park_evaluated_only"));
 

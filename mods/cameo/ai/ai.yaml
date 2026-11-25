@@ -4642,7 +4642,7 @@ Player:
 		RefinerySpacingFallbackCells: 5
 		YardRadiusCells: 15
 		ReachRefreshTicks: 750
-		# ref_park_evaluated_only (Opus 11-25, REF_PEAK_RCA_01): a want the building queue never offered is waiting, not stuck (V08D: 3000 parked every 6000 ticks on seats 4, 6, 7). @generic only.
+		# ref_park_evaluated_only (Opus 11-25, REF_PEAK_RCA_01): a want the building queue never offered is waiting, not stuck (V08D: 3000 parked every 6000 ticks on seats 4, 6, 7). Generic planner block; RefDemand gates it.
 		RefParkEvaluatedOnly: true
 		# BZ_production_scaling: up to ScalingMcvMaxExtra extra construction MCVs while windowed income
 		# holds over the difficulty line, a far field is free and army parity admits; also parks MCV
