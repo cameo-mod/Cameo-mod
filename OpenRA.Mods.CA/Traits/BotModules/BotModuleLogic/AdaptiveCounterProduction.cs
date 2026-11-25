@@ -99,6 +99,22 @@ namespace OpenRA.Mods.CA.Traits
 			Smooth(observedEnemyValue, sample);
 		}
 
+		/// <summary>
+		/// UNIT-ALL-01: the same sampling and smoothing, but ONLY from the provider's observed memory (fog-honest). No provider, or one that has nothing yet, leaves the memory
+		/// as it is: the omniscient world scan is never used, so the counter term of the unit roll cannot read what the bot has not seen.
+		/// </summary>
+		public void ObserveFogOnly(int interval, IBotEnemyCompositionProvider provider)
+		{
+			if (provider == null || !BotPeriod.CarryDue(ref nextObservation, world.WorldTick, interval))
+				return;
+
+			if (provider.TryGetEnemyComposition(out var sample))
+				Smooth(observedEnemyValue, sample);
+		}
+
+		/// <summary>UNIT-ALL-01: how well the candidate's weapons answer the observed enemy army (the Versus-weighted value of what was seen); 0 when nothing was seen.</summary>
+		public long CounterScore(ActorInfo candidate) => observedEnemyValue.Count == 0 ? 0 : Score(candidate);
+
 		Dictionary<string, int> OmniscientSample()
 		{
 			var sample = new Dictionary<string, int>();

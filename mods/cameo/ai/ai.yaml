@@ -6371,6 +6371,45 @@ Player:
 		UnitMixCategoryFloor: true
 		# CONSOLIDATE-01 C8 (row ub_first_item_round): every unit pass gives each queue its FIRST item (all categories) before any queue takes a second.
 		UnitFirstItemRound: true
+		# UNIT-ALL-01 (USER 11-25, row ub_unit_roll): the unit pick is ONE fraction roll over the listed UnitsToBuild types the queue can build now (the merged root + content-pack list);
+		# weight = fraction x personality bias x observed-enemy counter demand x role-mix deficit, floored at 5% of the mean so every listed type keeps a chance; a type never built is picked first.
+		# The composition, derived-weight, counter, wave-mix, role-deficit, share-test and idle-floor layers are not consulted while it is on. genericbot only (SwitchCondition above).
+		UnitRoll: true
+		UnitRollFloorPct: 5
+		UnitRollCounterGainPct: 200
+		UnitRollPersonalities: rush, turtle, tech, expansion, steamroller, guerrilla
+		# Personality bias, percent (100 = neutral), keys <personality>.<role>. Rush: infantry-heavy early, vehicles and aircraft later (ramp to UnitRollBiasLate over UnitRollRampTicks).
+		UnitRollBias:
+			rush.anti_infantry: 160
+			rush.skirmisher: 150
+			rush.frontline: 70
+			rush.anti_armour: 70
+			rush.artillery: 40
+			rush.gunship: 60
+			rush.bomber: 60
+			rush.fighter: 60
+			steamroller.frontline: 170
+			steamroller.anti_armour: 150
+			steamroller.artillery: 170
+			steamroller.skirmisher: 70
+			steamroller.scout: 60
+			guerrilla.skirmisher: 170
+			guerrilla.scout: 150
+			guerrilla.gunship: 150
+			guerrilla.fighter: 130
+			guerrilla.bomber: 130
+			guerrilla.frontline: 60
+			guerrilla.artillery: 60
+		UnitRollBiasLate:
+			rush.anti_infantry: 100
+			rush.skirmisher: 100
+			rush.frontline: 140
+			rush.anti_armour: 140
+			rush.artillery: 100
+			rush.gunship: 150
+			rush.bomber: 140
+			rush.fighter: 130
+		UnitRollRampTicks: 9000
 		# CONSOLIDATE-01 C9 (X13): paid Promotions also start while a unit-production pause vote is up (pq_upgrade_service); free items always did.
 		UpgradeServiceThroughPause: Upgrades, Research, Addons, Promotions
 		IdleBaseUnitsMaximum: 25
