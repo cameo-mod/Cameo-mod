@@ -235,7 +235,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(stages, Does.Contain("RefineryLawSilo.Wanted(law != null, playerResources.Resources, playerResources.ResourceCapacity, siloInProduction)"));
 			Assert.That(stages, Does.Contain("var refinery = ChooseWantedRefinery(queue, buildable, power);"), "S2 and S7 share the existing wanted-refinery helper");
 
-			Assert.That(Source(PipelineFile), Does.Contain("StageSource = stage => PipelineStageNames(stage, queue, buildable, power, law),"));
+			Assert.That(Source(PipelineFile), Does.Contain("s.StageSource = stage => PipelineStageNames(stage, queue, buildable, power, law, s);"));
 
 			var module = Source("mods/CA/Traits/BotModules/BaseBuilderBotModuleCA.cs");
 			Assert.That(module, Does.Contain("public readonly bool BbPassiveIncome = false;"));

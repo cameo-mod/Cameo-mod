@@ -8,6 +8,7 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.Common.Traits;
@@ -24,11 +25,12 @@ namespace OpenRA.Mods.CA.Traits
 		bool PassiveIncomeOn => baseBuilder.PassiveIncomeArmed;
 
 		IEnumerable<string> PipelineStageNames(BaseBuildStage stage, ProductionQueue queue, List<ActorInfo> buildable, ActorInfo power,
-			IBotExpansionTargetProvider law)
+			IBotExpansionTargetProvider law, BaseBuildSnapshot snapshot)
 		{
 			switch (stage)
 			{
 				case BaseBuildStage.S2ExpansionRefinery: return PipelineExpansionStage(queue, buildable, power, law);
+				case BaseBuildStage.S5CoreOnce: return PipelineCoreOnceStage(buildable, snapshot);
 				case BaseBuildStage.S6PassiveIncome: return PipelinePassiveIncomeStage(queue, buildable, power, law);
 				case BaseBuildStage.S7RefineryPerField: return PipelineRefineryStage(queue, buildable, power);
 				default: return null;
@@ -66,6 +68,81 @@ namespace OpenRA.Mods.CA.Traits
 
 			var pick = GetProducibleBuilding(new HashSet<string> { want }, buildable, a => 0);
 			return pick == null ? null : BaseBuilderQueueEvalCA.PickOrPower(pick, power, HasSufficientPowerForActor);
+		}
+
+		// S5 (c3): every buildable structure type with owned + in flight = 0 that is in BuildingFractions or a first-copy kind (FirstCopyKind: no wall,
+		// defence, fake or proxy), once per type, ordered by tech depth, opening role, cost, name (CoreOnceCA.Order). Nothing vetoes it later; only step A
+		// applies (BuildingDelays on every stage, X14). The pipeline ignores TechChainTypes: the derived depth replaces it. The defence queue gets nothing
+		// (S4 and S9 own it). Construction yards and refineries keep their own stages (S2, S7). A doctrine alternative this player cannot build is not in
+		// queue.BuildableItems(), so it is absent here rather than a missing core building.
+		IEnumerable<string> PipelineCoreOnceStage(List<ActorInfo> buildable, BaseBuildSnapshot snapshot)
+		{
+			var b = baseBuilder.Info;
+			if (snapshot.DefenceQueue)
+				return Array.Empty<string>();
+
+			var depths = CoreDepths();
+			var inputs = new List<CoreOnceInput>(buildable.Count);
+			foreach (var item in buildable)
+			{
+				var name = item.Name;
+				var inFractions = b.BuildingFractions != null && b.BuildingFractions.ContainsKey(name);
+				var firstCopy = FirstCopyKind(item);
+				if (!inFractions && !firstCopy)
+					continue;
+
+				var airfield = b.ProductionTypes.Contains(name) && !b.BarracksTypes.Contains(name) && !b.VehiclesFactoryTypes.Contains(name)
+					&& !b.NavalProductionTypes.Contains(name);
+				inputs.Add(new CoreOnceInput(
+					name,
+					Buildable: true,
+					inFractions,
+					firstCopy,
+					OwnRuleStage: b.ConstructionYardTypes.Contains(name) || b.RefineryTypes.Contains(name),
+					Count: BaseBuildPlanCA.CountOf(snapshot, name),
+					Depth: depths.TryGetValue(name, out var depth) ? depth : 0,
+					RoleRank: CoreOnceCA.RoleRank(b.PowerTypes.Contains(name), b.BarracksTypes.Contains(name), b.RefineryTypes.Contains(name),
+						b.VehiclesFactoryTypes.Contains(name), IsRadarProvider(item), airfield, item.HasTraitInfo<CashTricklerInfo>()),
+					Cost: queue.GetProductionCost(item)));
+			}
+
+			return CoreOnceCA.Order(inputs);
+		}
+
+		// The tech depth of every building type, computed once per player from the rules (not the world): Buildable prerequisites against the
+		// ProvidesPrerequisite traits of the building types this player's faction can get. ~ strips, ! negations add no depth (TechDepthCA.Positive).
+		IReadOnlyDictionary<string, int> CoreDepths()
+		{
+			if (baseBuilder.CoreTechDepth != null)
+				return baseBuilder.CoreTechDepth;
+
+			var faction = player.Faction.InternalName;
+			var prereqsOf = new Dictionary<string, IReadOnlyList<string>>(StringComparer.Ordinal);
+			var providersOf = new Dictionary<string, IReadOnlyList<string>>(StringComparer.Ordinal);
+			foreach (var info in world.Map.Rules.Actors.Values.OrderBy(a => a.Name, StringComparer.Ordinal))
+			{
+				if (!info.HasTraitInfo<BuildingInfo>())
+					continue;
+
+				var raws = new List<string>();
+				foreach (var buildable in info.TraitInfos<BuildableInfo>())
+					raws.AddRange(buildable.Prerequisites);
+
+				prereqsOf[info.Name] = raws;
+				foreach (var provides in info.TraitInfos<ProvidesPrerequisiteInfo>())
+				{
+					if (provides.Factions.Count > 0 && !provides.Factions.Any(f => string.Equals(f, faction, StringComparison.OrdinalIgnoreCase)))
+						continue;
+
+					var key = (provides.Prerequisite ?? info.Name).ToLowerInvariant();
+					if (!providersOf.TryGetValue(key, out var list))
+						providersOf[key] = list = new List<string>();
+
+					((List<string>)list).Add(info.Name);
+				}
+			}
+
+			return baseBuilder.CoreTechDepth = TechDepthCA.Compute(prereqsOf, providersOf, baseBuilder.Info.ConstructionYardTypes);
 		}
 
 		// S6 (row bb_passive_income): the cash tricklers up to their limit (PassiveIncomeCA.Order), then a silo when storage is nearly full

@@ -106,9 +106,11 @@ namespace OpenRA.Mods.CA.Traits
 				Fractions = b.BuildingFractions,
 				BuildingCount = playerBuildings.Length,
 				FractionMilli = FractionMilli,
-				StageSource = stage => PipelineStageNames(stage, queue, buildable, power, law), // c4: S2, S2b, S6, S7 (Pipeline01Stages.cs)
 				IntervalActive = name => b.BuildingIntervals != null && b.BuildingIntervals.ContainsKey(name) && activeBuildingIntervals.ContainsKey(name),
 			};
+
+			// c3, c4: S2, S2b, S5, S6, S7 (Pipeline01Stages.cs); S5 reads the counts of this snapshot.
+			s.StageSource = stage => PipelineStageNames(stage, queue, buildable, power, law, s);
 
 			// S3: the same gate as ChooseOpeningStandard (switch, building queue, before OpeningStandardMaxTicks, one yard, no front defence want).
 			if (OpeningStepOn && !s.DefenceQueue && now < b.OpeningStandardMaxTicks

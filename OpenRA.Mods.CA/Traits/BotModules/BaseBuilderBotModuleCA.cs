@@ -793,6 +793,9 @@ namespace OpenRA.Mods.CA.Traits
 		public bool RecountInFlightArmed => Info.RecountInFlightAlways && switchesActive && !ablateRecountInFlight.Off(player, AblationIds.RecountInFlight);
 		AblationLatch ablatePipeline01; // CONSOLIDATE-01 c2
 		public bool Pipeline01Armed => Info.BbPipeline01 && switchesActive && !ablatePipeline01.Off(player, AblationIds.BbPipeline01);
+		// CONSOLIDATE-01 c3: the tech depth of every building type (prerequisite-graph distance from the construction yard), built once on the first S5
+		// sweep by the queue manager and shared by this player's producers (BaseBuilderQueueManagerCA.CoreDepths). Null until then.
+		public IReadOnlyDictionary<string, int> CoreTechDepth;
 		AblationLatch ablatePassiveIncome; // CONSOLIDATE-01 c4
 		public bool PassiveIncomeArmed => Info.BbPassiveIncome && switchesActive && !ablatePassiveIncome.Off(player, AblationIds.BbPassiveIncome);
 		public bool NoSpaceBanArmed => Info.NoSpaceBan && switchesActive;
