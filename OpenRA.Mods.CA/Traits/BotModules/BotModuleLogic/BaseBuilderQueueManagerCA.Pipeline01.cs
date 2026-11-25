@@ -109,7 +109,7 @@ namespace OpenRA.Mods.CA.Traits
 				IntervalActive = name => b.BuildingIntervals != null && b.BuildingIntervals.ContainsKey(name) && activeBuildingIntervals.ContainsKey(name),
 			};
 
-			// c3, c4: S2, S2b, S5, S6, S7 (Pipeline01Stages.cs); S5 reads the counts of this snapshot.
+			// c3, c4, c5: S2, S2b, S4, S5, S6, S7, S9 (Pipeline01Stages.cs); S5 reads the counts of this snapshot.
 			s.StageSource = stage => PipelineStageNames(stage, queue, buildable, power, law, s);
 
 			// S3: the same gate as ChooseOpeningStandard (switch, building queue, before OpeningStandardMaxTicks, one yard, no front defence want).
@@ -347,8 +347,7 @@ namespace OpenRA.Mods.CA.Traits
 					buildableNames.Add(a.Name);
 			}
 
-			public bool StageAdmits(BaseBuildCandidate candidate) =>
-				candidate.Stage != BaseBuildStage.S10Fractions || qm.PipelineFractionCapsAdmit(queue, buildableNames, candidate.Name);
+			public bool StageAdmits(BaseBuildCandidate candidate) => qm.PipelineStageAdmits(queue, buildableNames, candidate); // c5: S9, S10 (Pipeline01Defence.cs)
 
 			public bool Feasible(BaseBuildCandidate candidate, out string admitted) =>
 				qm.PipelineFeasible(queue, buildableNames, power, snapshot, candidate, out admitted);

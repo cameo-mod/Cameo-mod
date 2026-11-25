@@ -30,9 +30,14 @@ namespace OpenRA.Mods.CA.Traits
 			switch (stage)
 			{
 				case BaseBuildStage.S2ExpansionRefinery: return PipelineExpansionStage(queue, buildable, power, law);
+<<<<<<< HEAD
 				case BaseBuildStage.S5CoreOnce: return PipelineCoreOnceStage(buildable, snapshot);
+=======
+				case BaseBuildStage.S4AntiRush: return PipelineAntiRushStage(queue, buildable);
+>>>>>>> b472da81d (CONSOLIDATE-01 c5 (UNBUILT, UNTESTED, builds closed for V07b): stages S4 anti-rush set and S9 extra defences, threat-scaled defence cap)
 				case BaseBuildStage.S6PassiveIncome: return PipelinePassiveIncomeStage(queue, buildable, power, law);
 				case BaseBuildStage.S7RefineryPerField: return PipelineRefineryStage(queue, buildable, power);
+				case BaseBuildStage.S9ExtraDefence: return PipelineExtraDefenceStage(buildable);
 				default: return null;
 			}
 		}

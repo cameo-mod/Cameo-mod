@@ -328,6 +328,33 @@ namespace OpenRA.Mods.CA.Traits
 			"limit once) and a silo when storage is nearly full, at reserve 0. Needs BbPipeline01. Off = S6 offers nothing. Gated by SwitchCondition; row bb_passive_income.")]
 		public readonly bool BbPassiveIncome = false;
 
+		[Desc("CONSOLIDATE-01 c5 (R3): stage S4 of the staged planner offers the anti-rush base defence set right after the first production building: ground defences, the type with",
+			"the fewest copies first, then the cheapest, up to AntiRushBaseMin..AntiRushBaseMax by tier (the same set as AntiRushBase), at reserve 0. RATIO-2X never holds the",
+			"set (the start is still recorded); the need gate and the seen-threat rule do not apply; it counts toward the defence cap. Needs BbPipeline01. Off = S4 offers",
+			"nothing. Gated by SwitchCondition; row bb_antirush_set.")]
+		public readonly bool BbAntiRushSet = false;
+
+		[Desc("CONSOLIDATE-01 c5 (R6): stage S9 of the staged planner offers the extra defences (the armed defences of BuildingFractions, in a synced random order) after a threat is",
+			"seen: defence need gate (extras only), the threat-scaled defence cap (DefenceCapBase), RATIO-2X with its FLOAT exemption. Needs BbPipeline01. Off = S9 offers nothing",
+			"and the defences stay in the S10 fraction roll, which carries the same cap. Gated by SwitchCondition; row bb_extra_defence.")]
+		public readonly bool BbExtraDefence = false;
+
+		[Desc("CONSOLIDATE-01 c5: the threat-scaled defence cap of the staged planner (the ARMY-FIRST-02 cap, DefenceCapCA): a defence is held while the armed defences owned or in",
+			"flight number at least this base plus DefenceCapPerThreat x the threat intensity. -1 = no cap. Row af2_defence_cap (shared with the ArmyFirstBotModule cap).")]
+		public readonly int DefenceCapBase = -1;
+
+		[Desc("CONSOLIDATE-01 c5: extra defences allowed at full threat intensity (IBotThreatAnalysis, the highest of the anti-air, anti-armour and anti-infantry intensities, 0..1). Rounded down.")]
+		public readonly int DefenceCapPerThreat = 0;
+
+		[Desc("CONSOLIDATE-01 c5: saturation of the threat intensity, in percent of the react threshold (300 = intensity 1 at 3x the threshold).")]
+		public readonly int DefenceThreatSaturationPercent = 300;
+
+		[Desc("CONSOLIDATE-01 c5: while the personality is turtle and the game is before TurtleDefenceUntilTick the cap is scaled by this percent. 100 = no turtle bonus.")]
+		public readonly int TurtleDefenceCapPercent = 100;
+
+		[Desc("CONSOLIDATE-01 c5: end of the turtle defence bonus (world tick).")]
+		public readonly int TurtleDefenceUntilTick = 0;
+
 		[Desc("BASE-06: ticks a READY building may be held before it is placed at a base cell.")]
 		public readonly int ReadyWatchdogTicks = 75;
 
@@ -798,6 +825,12 @@ namespace OpenRA.Mods.CA.Traits
 		public IReadOnlyDictionary<string, int> CoreTechDepth;
 		AblationLatch ablatePassiveIncome; // CONSOLIDATE-01 c4
 		public bool PassiveIncomeArmed => Info.BbPassiveIncome && switchesActive && !ablatePassiveIncome.Off(player, AblationIds.BbPassiveIncome);
+		AblationLatch ablateAntiRushSet; // CONSOLIDATE-01 c5
+		AblationLatch ablateExtraDefence;
+		AblationLatch ablateDefenceCap;
+		public bool AntiRushSetArmed => Info.BbAntiRushSet && switchesActive && !ablateAntiRushSet.Off(player, AblationIds.BbAntiRushSet);
+		public bool ExtraDefenceArmed => Info.BbExtraDefence && switchesActive && !ablateExtraDefence.Off(player, AblationIds.BbExtraDefence);
+		public bool DefenceCapArmed => Info.DefenceCapBase >= 0 && switchesActive && !ablateDefenceCap.Off(player, AblationIds.Af2DefenceCap);
 		public bool NoSpaceBanArmed => Info.NoSpaceBan && switchesActive;
 		public bool RefinerySafetyAllClaimsArmed => Info.RefinerySafetyAllClaims && switchesActive;
 		public bool RefineryEconomyGateArmed => Info.RefineryEconomyGate && switchesActive;
