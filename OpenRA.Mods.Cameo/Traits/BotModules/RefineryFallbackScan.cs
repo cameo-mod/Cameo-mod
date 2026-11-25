@@ -401,9 +401,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int rankBest;
 		readonly List<(CPos Cell, int Rank)> candidates = new();
 
-		// REF-DEMAND-01: picks refused by PickLegal (full spacing) but legal for the exhaustion proof (fallback spacing). They are used only once
+		// REF-DEMAND-01: the best pick refused by PickLegal (full spacing) but legal for the exhaustion proof (fallback spacing). They are used only once
 		// every strict candidate of the pass is drained, so the proof and the pick agree and a refinery is never held on a relaxed-only cell.
-		readonly List<(CPos Cell, int Rank)> relaxedPicks = new();
+		(CPos Cell, int Rank)? relaxedBest;
 
 		// Pick — resumable argmin under the exact global (rank, X, Y) order
 		int pickScanIndex;
@@ -1217,25 +1217,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			site = null;
 			if (candidates.Count == 0)
 			{
-				if (relaxedPicks.Count > 0)
+				// Relaxed only after the strict drain of the TERMINAL tier (a wider tier may still hold a strict site); one live revalidation per step.
+				if (relaxedBest is { } best && TerminalTier)
 				{
-					// The strict candidates are exhausted: the best relaxed one (rank, X, Y), revalidated live by the proof's predicate.
-					var best = 0;
-					for (var i = 1; i < relaxedPicks.Count; i++)
-					{
-						var a = relaxedPicks[i];
-						var b = relaxedPicks[best];
-						if (a.Rank < b.Rank || (a.Rank == b.Rank && (a.Cell.X < b.Cell.X || (a.Cell.X == b.Cell.X && a.Cell.Y < b.Cell.Y))))
-							best = i;
-					}
-
-					var relaxed = relaxedPicks[best].Cell;
-					relaxedPicks[best] = relaxedPicks[relaxedPicks.Count - 1];
-					relaxedPicks.RemoveAt(relaxedPicks.Count - 1);
-					if (!snapshot.Legal(relaxed))
+					relaxedBest = null;
+					if (!snapshot.Legal(best.Cell))
 						return PickResult.Continue;
 
-					site = relaxed;
+					site = best.Cell;
 					return PickResult.Picked;
 				}
 
@@ -1272,8 +1261,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return PickResult.Picked;
 			}
 
-			if (snapshot.Legal(pick))
-				relaxedPicks.Add((pick, pickRank));
+			// The best relaxed pick so far, kept incrementally (O(1) per candidate, the strict order: rank, X, Y).
+			if (snapshot.Legal(pick)
+				&& (relaxedBest is not { } rb || pickRank < rb.Rank
+					|| (pickRank == rb.Rank && (pick.X < rb.Cell.X || (pick.X == rb.Cell.X && pick.Y < rb.Cell.Y)))))
+				relaxedBest = (pick, pickRank);
 
 			return PickResult.Continue;
 		}
@@ -1291,7 +1283,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			stale.Clear();
 			staleOverflow = false;
 			candidates.Clear();
-			relaxedPicks.Clear();
+			relaxedBest = null;
 			providerEnum = null;
 			rankEnum = null;
 			rankSort = null;

@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using NUnit.Framework;
 using OpenRA.Mods.CA;
@@ -222,6 +223,53 @@ namespace OpenRA.Mods.Cameo.Test
 				Assert.That(verdict, Is.EqualTo(RefineryFallbackScan.Verdict.Site));
 				Assert.That(site, Is.EqualTo(strict), $"budget {budget}: the closer relaxed cell must not outrank a strict one");
 			}
+		}
+
+		[Test]
+		public void ARelaxedInnerTierSiteNeverBeatsAStrictSiteInAWiderTier()
+		{
+			var relaxed = new CPos(3, 3);
+			var strict = new CPos(6, 6);
+			IReadOnlyList<RefineryFallbackScan.Provider?> providers = new RefineryFallbackScan.Provider?[] { Prov(3, 3, 1) };
+			var cells = RectMap(8, 8).ToList();
+			var (mapIndex, indexCell) = IndexFns(8, 8);
+			Func<IEnumerator<RefineryFallbackScan.CoherenceAtom>> atoms = () => AtomsOf(FixedAtoms());
+			var snapshot = new RefineryFallbackScan.Snapshot(
+				() => providers.GetEnumerator(),
+				() => new[] { relaxed }.AsEnumerable().GetEnumerator(),
+				() => cells.GetEnumerator(),
+				t => t == 0 ? 1 : int.MaxValue,
+				OneTile,
+				atoms,
+				atoms,
+				mapIndex,
+				indexCell,
+				2,
+				c => true,
+				c => c == relaxed || c == strict,
+				c => c == strict);
+
+			// Tier 0 holds only the relaxed cell: it must widen, not hand the relaxed cell out.
+			var scan = new RefineryFallbackScan(50);
+			var first = Drain(scan, 8, 2000, () => snapshot, out var site);
+			Assert.That(first, Is.EqualTo(RefineryFallbackScan.Verdict.NoSite));
+			Assert.That(site, Is.Null);
+			Assert.That(scan.TerminalTier, Is.False);
+
+			scan.AdvanceTier();
+			var second = Drain(scan, 8, 2000, () => snapshot, out site);
+			Assert.That(second, Is.EqualTo(RefineryFallbackScan.Verdict.Site));
+			Assert.That(site, Is.EqualTo(strict), "the strict site of the wider tier wins over the relaxed inner-tier one");
+		}
+
+		[Test]
+		public void TheRelaxedPickIsBoundedPerStep()
+		{
+			// The relaxed best is one slot updated per candidate: no loop over a relaxed list inside a charged step.
+			var scan = File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "source", "mods/Cameo/Traits/BotModules/RefineryFallbackScan.cs"));
+			Assert.That(scan, Does.Not.Contain("relaxedPicks"));
+			Assert.That(scan, Does.Contain("relaxedBest = (pick, pickRank);"));
+			Assert.That(scan, Does.Contain("if (relaxedBest is { } best && TerminalTier)"));
 		}
 
 		// ---- AMEND-A: real pre-charged work in every phase ------------------
