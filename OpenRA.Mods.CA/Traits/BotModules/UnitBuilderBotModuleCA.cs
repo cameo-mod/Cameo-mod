@@ -1061,30 +1061,32 @@ namespace OpenRA.Mods.CA.Traits
 					UpgradeDoneLog(a.Name, UpgradeCompletions.SourceInit);
 		}
 
-		void UpgradeSettle(HashSet<string> inProduction)
+		static string UpgradeQueueKey(ProductionQueue queue) => queue.Actor.ActorID + "|" + queue.Info.Type;
+
+		void UpgradeSettle(IReadOnlyDictionary<string, string> queuedIn)
 		{
 			// the world scan runs only while an ordered item is unsettled, and at most every 25 ticks
 			if (!upgradeDone.AnyPending || world.WorldTick - upgradeSettleTick < 25)
 				return;
 
 			upgradeSettleTick = world.WorldTick;
-			foreach (var (name, source) in upgradeDone.Settle(world.WorldTick, inProduction, UpgradeGrantsOf, OwnedPrerequisites(), OfferedUpgradeNames, UpgradeQueueAlive, UpgradePrerequisitesHeld, Info.UpgradePendingTimeout))
+			foreach (var (name, source) in upgradeDone.Settle(world.WorldTick, queuedIn, UpgradeGrantsOf, OwnedPrerequisites(), OfferedUpgradeNames, UpgradeQueueAlive, UpgradePrerequisitesHeld, Info.UpgradePendingTimeout))
 				UpgradeDoneLog(name, source);
 
 			foreach (var (name, reason) in upgradeDone.Released)
 				UpgradeReleaseLog(name, reason);
 		}
 
-		// an enabled queue of one of the item's served queue types still exists (a sold or dead producer is not a completion)
-		bool UpgradeQueueAlive(string name)
+		// the EXACT queue instance that showed the item is still there and enabled (another queue of the same category does not stand in for a dead producer)
+		bool UpgradeQueueAlive(string queueKey)
 		{
-			if (!world.Map.Rules.Actors.TryGetValue(name, out var info))
+			if (queueKey == null)
 				return false;
 
-			foreach (var bi in info.TraitInfos<BuildableInfo>())
-				foreach (var queueType in bi.Queue)
-					if (Array.IndexOf(Info.UpgradeServiceQueues, queueType) >= 0 && AIUtils.FindQueues(player, queueType).Any(q => q.Enabled))
-						return true;
+			foreach (var category in Info.UpgradeServiceQueues)
+				foreach (var queue in AIUtils.FindQueues(player, category))
+					if (UpgradeQueueKey(queue) == queueKey)
+						return queue.Enabled && !queue.Actor.IsDead && queue.Actor.IsInWorld && queue.Actor.Owner == player;
 
 			return false;
 		}
@@ -1468,13 +1470,17 @@ namespace OpenRA.Mods.CA.Traits
 		void ServeUpgradeQueues(IBot bot)
 		{
 			var inProduction = new HashSet<string>(StringComparer.Ordinal);
+			var queuedIn = new Dictionary<string, string>(StringComparer.Ordinal); // item name -> key of the exact queue instance holding it
 			foreach (var category in Info.UpgradeServiceQueues)
 				foreach (var queue in AIUtils.FindQueues(player, category))
 					foreach (var queued in queue.AllQueued())
+					{
 						inProduction.Add(queued.Item);
+						queuedIn[queued.Item] = UpgradeQueueKey(queue);
+					}
 
 			UpgradeScanOnce();
-			UpgradeSettle(inProduction);
+			UpgradeSettle(queuedIn);
 
 			// an ordered item the queue has not shown yet stays reserved: it is not offered again while its order is outstanding (upg_once_registry)
 			var onceOn = UpgradeOnceOn;

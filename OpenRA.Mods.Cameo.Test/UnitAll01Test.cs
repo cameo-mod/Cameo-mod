@@ -411,9 +411,9 @@ namespace OpenRA.Mods.Cameo.Test
 
 		// Sol FIX of 425f1fab: completion is decided from authoritative state at the service visits, keyed to the REAL grants of the item.
 		static List<(string Name, string Source)> Settle(UpgradeCompletions r, int tick, string[] inProduction, Dictionary<string, string[]> grants, string[] owned, string[] offered = null,
-			bool queueAlive = true, bool prerequisitesHeld = true) =>
-			r.Settle(tick, new HashSet<string>(inProduction), n => grants.TryGetValue(n, out var g) ? g : [], new HashSet<string>(owned), () => new HashSet<string>(offered ?? []),
-				_ => queueAlive, (_, _) => prerequisitesHeld);
+			bool queueAlive = true, bool prerequisitesHeld = true, string queueKey = "q1", Func<string, bool> aliveKey = null) =>
+			r.Settle(tick, inProduction.ToDictionary(n => n, _ => queueKey), n => grants.TryGetValue(n, out var g) ? g : [], new HashSet<string>(owned), () => new HashSet<string>(offered ?? []),
+				key => aliveKey != null ? aliveKey(key) : queueAlive, (_, _) => prerequisitesHeld);
 
 		[Test]
 		public void AFastItemThatFinishesBetweenTwoVisitsIsStillFoundByItsGrant()
@@ -517,6 +517,31 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TheDeadProducerIsTheExactQueueThatShowedTheItemNotAnyQueueOfTheCategory()
+		{
+			var grants = new Dictionary<string, string[]>();
+
+			// two queues of the same category: the item was seen in q1; q1's producer dies, q2 survives; the item is no longer offered (a producer-specific list): NOT done
+			var r = new UpgradeCompletions();
+			r.Started("promo_cond", 0);
+			Settle(r, 10, ["promo_cond"], grants, [], [], queueKey: "q1");
+			Assert.That(Settle(r, 40, [], grants, [], [], aliveKey: key => key == "q2"), Is.Empty);
+			Assert.That(r.Completed("promo_cond"), Is.False, "q2 being alive proves nothing about the producer that held the item");
+			Assert.That(r.Released.Single(), Is.EqualTo(("promo_cond", "queue_lost")));
+
+			// the same departure with q1 still alive is credible
+			var r2 = new UpgradeCompletions();
+			r2.Started("promo_cond", 0);
+			Settle(r2, 10, ["promo_cond"], grants, [], [], queueKey: "q1");
+			Assert.That(Settle(r2, 40, [], grants, [], [], aliveKey: key => key == "q1"), Is.EqualTo(new[] { ("promo_cond", UpgradeCompletions.SourceApprox) }));
+
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			Assert.That(u, Does.Contain("bool UpgradeQueueAlive(string queueKey)"));
+			Assert.That(u, Does.Contain("if (UpgradeQueueKey(queue) == queueKey)"));
+			Assert.That(u, Does.Contain("queuedIn[queued.Item] = UpgradeQueueKey(queue);"));
+		}
+
+		[Test]
 		public void AProducerOrPrerequisiteLossIsNotACompletion()
 		{
 			var grants = new Dictionary<string, string[]>();
@@ -546,8 +571,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(r3.AnyPending, Is.False);
 
 			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
-			Assert.That(u, Does.Contain("bool UpgradeQueueAlive(string name)"));
-			Assert.That(u, Does.Contain("bool UpgradePrerequisitesHeld(string name, ISet<string> owned)"));
+						Assert.That(u, Does.Contain("bool UpgradePrerequisitesHeld(string name, ISet<string> owned)"));
 		}
 
 		[Test]
@@ -560,9 +584,9 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(u, Does.Contain("info.TraitInfos<ITechTreePrerequisiteInfo>().SelectMany(t => t.Prerequisites(info))"), "the real grant, not the name");
 			Assert.That(u, Does.Contain("void UpgradeScanOnce()\n\t\t{\n\t\t\tif (upgradeScanned)\n\t\t\t\treturn;"), "once");
 			Assert.That(u, Does.Contain("if (ServedByUpgradeService(a) && UpgradeGrantsOf(a.Name).Any(owned.Contains) && upgradeDone.Complete(a.Name, UpgradeCompletions.SourceInit))"));
-			Assert.That(u, Does.Contain("UpgradeScanOnce();\n\t\t\tUpgradeSettle(inProduction);"), "both run before the service chooses");
+			Assert.That(u, Does.Contain("UpgradeScanOnce();\n\t\t\tUpgradeSettle(queuedIn);"), "both run before the service chooses");
 			Assert.That(u, Does.Contain("upgradeDone.Started(item2.Name, world.WorldTick);"), "every ordered item is settled at the later visits");
-			Assert.That(u, Does.Contain("upgradeDone.Settle(world.WorldTick, inProduction, UpgradeGrantsOf, OwnedPrerequisites(), OfferedUpgradeNames, UpgradeQueueAlive, UpgradePrerequisitesHeld)"));
+			Assert.That(u, Does.Contain("upgradeDone.Settle(world.WorldTick, queuedIn, UpgradeGrantsOf, OwnedPrerequisites(), OfferedUpgradeNames, UpgradeQueueAlive, UpgradePrerequisitesHeld)"));
 			Assert.That(u, Does.Contain("upg_done_source={source}"), "the DEV row carries the source");
 
 			// no ActorAdded guess

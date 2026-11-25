@@ -27,7 +27,7 @@ namespace OpenRA.Mods.CA.Traits
 		readonly Dictionary<string, HashSet<string>> blockedBy = new(StringComparer.Ordinal);
 		readonly HashSet<string> done = new(StringComparer.Ordinal);
 		readonly Dictionary<string, string> sources = new(StringComparer.Ordinal);
-		readonly Dictionary<string, (int Tick, bool Seen)> pending = new(StringComparer.Ordinal);
+		readonly Dictionary<string, (int Tick, string Queue)> pending = new(StringComparer.Ordinal); // Queue = the key of the exact queue that last showed the item (null = never seen)
 
 		public const string SourceGrant = "grant";
 		public const string SourceApprox = "approx";
@@ -43,7 +43,7 @@ namespace OpenRA.Mods.CA.Traits
 		public List<(string Name, string Reason)> Released { get; } = [];
 
 		/// <summary>The service ordered the item: it is settled at the next visits against authoritative state, whatever happens between visits. A name already pending keeps its first issue tick and Seen bit.</summary>
-		public void Started(string name, int tick) => pending.TryAdd(name, (tick, false));
+		public void Started(string name, int tick) => pending.TryAdd(name, (tick, null));
 
 		public bool AnyPending => pending.Count > 0;
 
@@ -55,11 +55,11 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>
 		/// Settle the ordered items. Authoritative state decides: an item is done when the player holds a prerequisite it REALLY grants (grantsOf = the prerequisites its traits provide, which need not be
 		/// its name), so an item that was ordered and finished between two visits is still found. An item that grants no prerequisite (condition-only) has no state to read: it is done by approximation,
-		/// and only on a CREDIBLE departure: it was seen in a queue, left it, is no longer offered, its queue is still alive and its own prerequisites are still held (a sold producer or a lost
+		/// and only on a CREDIBLE departure: it was seen in a queue, left it, is no longer offered, the EXACT queue that showed it is still alive (queueAlive gets that queue key, not any queue of the category) and its own prerequisites are still held (a sold producer or a lost
 		/// prerequisite also stop the offer, and must not count as a completion). A never-seen order is never done by approximation: after the PendingTimeout it is released as not accepted.
 		/// Returns the newly completed (name, source) pairs.
 		/// </summary>
-		public List<(string Name, string Source)> Settle(int tick, ISet<string> inProduction, Func<string, IReadOnlyCollection<string>> grantsOf, ISet<string> owned, Func<ISet<string>> offered,
+		public List<(string Name, string Source)> Settle(int tick, IReadOnlyDictionary<string, string> queuedIn, Func<string, IReadOnlyCollection<string>> grantsOf, ISet<string> owned, Func<ISet<string>> offered,
 			Func<string, bool> queueAlive, Func<string, ISet<string>, bool> prerequisitesHeld, int pendingTimeoutTicks = DefaultPendingTimeoutTicks)
 		{
 			Released.Clear();
@@ -70,10 +70,10 @@ namespace OpenRA.Mods.CA.Traits
 			ISet<string> offeredNow = null;
 			foreach (var name in new List<string>(pending.Keys))
 			{
-				var (started, seen) = pending[name];
-				if (inProduction.Contains(name))
+				var (started, seenIn) = pending[name];
+				if (queuedIn.TryGetValue(name, out var queueKey))
 				{
-					pending[name] = (started, true);
+					pending[name] = (started, queueKey);
 					continue;
 				}
 
@@ -87,7 +87,7 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 				}
 
-				if (!seen)
+				if (seenIn == null)
 				{
 					// a delayed order keeps the item reserved (not offered again) until the queue shows it, or the grace runs out
 					if (tick - started > pendingTimeoutTicks)
@@ -110,7 +110,7 @@ namespace OpenRA.Mods.CA.Traits
 				offeredNow ??= offered();
 				if (offeredNow.Contains(name))
 					Released.Add((name, "left_still_offered"));
-				else if (!queueAlive(name))
+				else if (!queueAlive(seenIn))
 					Released.Add((name, "queue_lost"));
 				else if (!prerequisitesHeld(name, owned))
 					Released.Add((name, "prerequisite_lost"));
