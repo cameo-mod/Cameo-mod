@@ -26,7 +26,7 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		internal bool ArmyAllInLateOn(int now) => ArmyLaunchArbiterOn && LateEscalationActive && !ablateSqAllInLate.Off(Player, AblationIds.SqAllInLate)
 			&& now >= Info.TeamLeadAllInStartTick
-			&& AllInCA.LateStep(now, Info.ArmyAllInLateStartTick >= 0 ? Info.ArmyAllInLateStartTick : Info.LateEscalationStartTick, Info.LateEscalationStepTicks, Info.ArmyAllInLateSteps);
+			&& AllInCA.LateStep(now, Info.LateEscalationStartTick, Info.LateEscalationStepTicks, Info.ArmyAllInLateSteps);
 
 		/// <summary>Q8 (row sq_hunt_one_cell): the team hunts one unseen cell at a time (the board cell).</summary>
 		internal bool ArmyHuntOneCellOn => ArmyPipelineOn && !ablateSqHuntOneCell.Off(Player, AblationIds.SqHuntOneCell);
