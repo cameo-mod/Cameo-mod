@@ -17,5 +17,8 @@ namespace OpenRA.Mods.CA.Traits
 		// A crawl placement under the refinery law must strictly reduce the distance from our buildable-area frontier to the aim; a link with no forward cell is placed at a base cell
 		// and parks the crawl target (no random-resource or toward-the-enemy fallback), and the search is anchored on the frontier instead of a (random) yard.
 		public const string CrawlAdvanceOnly = "crawl_advance_only";
+
+		// Once a crawl has started its target stays until it is reached, becomes invalid (taken, dead, out of the field list) or the no-advance park fires; no flip on a re-pick.
+		public const string CrawlTargetSticky = "crawl_target_sticky";
 	}
 }

@@ -112,6 +112,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("crawl_advance_only: how long the crawl target stays out of the field choice after a wanted link found no forward cell.")]
 		public readonly int CrawlNoAdvanceParkTicks = 3000;
 
+		[Desc("crawl_advance_only: the crawl distance cap, in cells from the nearest own construction yard to the target field: CrawlMaxDistanceMin at the easiest tier up to CrawlMaxDistanceMax at the",
+			"hardest, one equal-step line on the difficulty ladder with noob one step below (USER values 11-22: 30 + 5r = Noob 25, Easiest 30, Hard 50, God 75). A crawl whose target is beyond it is not started;",
+			"a field within it is preferred as the crawl target. No own yard = no crawl.")]
+		public readonly int CrawlMaxDistanceMin = 30;
+
+		[Desc("crawl_advance_only: the cap at the hardest tier (see CrawlMaxDistanceMin).")]
+		public readonly int CrawlMaxDistanceMax = 75;
+
+		[Desc("crawl_advance_only: the cap for an owner that is not on the difficulty ladder (hard's value).")]
+		public readonly int CrawlMaxDistanceUnranked = 50;
+
+		[Desc("crawl_target_sticky (CRAWL-LONG-01, row of the same name): once a crawl has started (a link was wanted toward a field) the field stays the target until it is reached, becomes invalid",
+			"(taken, claimed, yielded to an ally, out of the field list) or the crawl_advance_only park fires; a better score elsewhere does not flip it. Needs DriveBaseCrawl. False = the target is re-picked every plan.")]
+		public readonly bool CrawlTargetSticky = false;
+
 		[Desc("CS: re-plans an unexplored aim may hold the link want while scouts close in. 0 = hold until",
 			"explored without bound (the interest cell keeps drawing scouts either way).")]
 		public readonly int ScoutWaitReplans = 4;
@@ -913,6 +928,75 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// crawl_advance_only: the placement asks (CrawlAdvanceOnly), the planner parks the target on a link that found no forward cell.
 		AblationLatch ablateCrawlAdvance;
 		bool CrawlAdvanceOnlyOn => Info.CrawlAdvanceOnly && Info.DriveBaseCrawl && LawActive && !ablateCrawlAdvance.Off(player, AblationIds.CrawlAdvanceOnly);
+
+		// crawl_target_sticky: the field index of the crawl in progress (-1 = none); set when a link is wanted toward it, cleared by ChooseTarget.
+		AblationLatch ablateCrawlSticky;
+		int crawlCommitIndex = -1;
+		bool CrawlTargetStickyOn => Info.CrawlTargetSticky && Info.DriveBaseCrawl && LawActive && !ablateCrawlSticky.Off(player, AblationIds.CrawlTargetSticky);
+
+		int CrawlMaxDistanceCells() => BotDifficultyLadder.Scale(Info.CrawlMaxDistanceMin, Info.CrawlMaxDistanceMax, player, Info.CrawlMaxDistanceUnranked);
+
+		/// <summary>
+		/// crawl_advance_only / crawl_target_sticky: the target field. A committed crawl keeps its field while it still needs links (listed, Hops &gt; 0); otherwise the best-scored field within the
+		/// crawl cap (<paramref name="cap"/> &lt; 0 = no cap; a field already in reach needs no crawl and is never capped), else the best-scored one (the cap then refuses to start a crawl toward it).
+		/// Returns the position in <paramref name="scores"/> (-1 = none); <paramref name="keepCommit"/> = the commit stands. Pure, for the tests.
+		/// </summary>
+		public static int ChooseCrawlTarget(IReadOnlyList<FieldScore> scores, int committed, int cap, IReadOnlyList<CPos> yards, out bool keepCommit)
+		{
+			keepCommit = false;
+			if (scores.Count == 0)
+				return -1;
+
+			if (committed >= 0)
+			{
+				for (var i = 0; i < scores.Count; i++)
+					if (scores[i].Index == committed && scores[i].Hops > 0)
+					{
+						keepCommit = true;
+						return i;
+					}
+			}
+
+			if (cap >= 0)
+			{
+				for (var i = 0; i < scores.Count; i++)
+					if (scores[i].Hops <= 0 || !CrawlBeyondCap(scores[i].Center, yards, cap))
+						return i;
+			}
+
+			return 0;
+		}
+
+		/// <summary>crawl_advance_only: the aim lies beyond the crawl cap of every own yard (or there is no yard). Euclidean cells, as the planner's other distances. Pure, for the tests.</summary>
+		public static bool CrawlBeyondCap(CPos aim, IReadOnlyList<CPos> yards, int cap)
+		{
+			if (yards == null || yards.Count == 0)
+				return true;
+
+			var capSq = (long)cap * cap;
+			foreach (var y in yards)
+				if ((long)(y - aim).LengthSquared <= capSq)
+					return false;
+
+			return true;
+		}
+
+		FieldScore? ChooseTarget(List<FieldScore> scores)
+		{
+			var sticky = CrawlTargetStickyOn;
+			var capped = CrawlAdvanceOnlyOn;
+			if (!sticky && !capped)
+			{
+				crawlCommitIndex = -1;
+				return scores.Count > 0 ? scores[0] : null;
+			}
+
+			var at = ChooseCrawlTarget(scores, sticky ? crawlCommitIndex : -1, capped ? CrawlMaxDistanceCells() : -1, ownYardCells, out var keep);
+			if (!keep)
+				crawlCommitIndex = -1;
+
+			return at >= 0 ? scores[at] : null;
+		}
 		string wantedFrontDefence;
 		CPos? frontDefenceCell;
 		(object Owner, string Item)? frontDefenceClaim;
@@ -3315,7 +3399,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			scores.Sort(CompareFieldScore);
 			LastScores = scores;
 			var previous = Target?.Index;
-			Target = scores.Count > 0 ? scores[0] : null;
+			Target = ChooseTarget(scores);
 			if (Target == null)
 				Idle($"no free field ({fieldIndexCount} map indices, {initialCells.Count} with resources, {owned} already ours)");
 			else
@@ -3329,6 +3413,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				UpdateAnchorClaim(refineryCells, refineryTiles, buildingTiles, refineryDocks);
 				UpdateCrawlWant(crawlLink, defence, buildingTiles, buildingCells, guards, defences);
+				if (CrawlTargetStickyOn && wantedLinkBuilding != null && Target != null)
+					crawlCommitIndex = Target.Value.Index;
 			}
 			else
 			{
@@ -3816,6 +3902,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// TF-1: the ledger survives a want that blinks off — only a different target field
 				// opens a fresh episode, so an off/on flap can never re-open the allowance.
 				frontSafety.ResetCorridor();
+				return;
+			}
+
+			// crawl_advance_only: a crawl whose target lies beyond the crawl cap of every own yard is not started (a committed crawl was admitted when it began).
+			if (CrawlAdvanceOnlyOn && !(CrawlTargetStickyOn && crawlCommitIndex == Target.Value.Index)
+				&& CrawlBeyondCap(Target.Value.Center, ownYardCells, CrawlMaxDistanceCells()))
+			{
+				frontSafety.ResetCorridor();
+				if (lastCrawlRefusal != "beyond crawl cap")
+				{
+					lastCrawlRefusal = "beyond crawl cap";
+#if CAMEO_DEV_LOGGING
+					Log.Write("debug", $"AI ({player.ClientIndex}): CRAWL-ADVANCE not started toward field {Target.Value.Index} at {Target.Value.Center}: beyond the crawl cap {CrawlMaxDistanceCells()} of every own yard, at tick {world.WorldTick}");
+#endif
+				}
+
 				return;
 			}
 

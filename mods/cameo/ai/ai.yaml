@@ -4598,6 +4598,8 @@ Player:
 		DriveBaseCrawl: true
 		# crawl_advance_only (CRAWL-LONG-01, Opus 11-25): every crawl step must strictly reduce the frontier-to-aim distance, else the link goes to a base cell and the target is parked.
 		CrawlAdvanceOnly: true
+		# crawl_target_sticky (CRAWL-LONG-01, Opus 11-25): a started crawl keeps its target until reached, invalid or parked (no flip on a re-pick).
+		CrawlTargetSticky: true
 		# Enabled for the maintainer's 2026-10-15 combined playtest (BY).
 		UseCrawlSafety: true
 		# EX-2: every field in reach gets a refinery, beyond the base builder's fixed optimum.
