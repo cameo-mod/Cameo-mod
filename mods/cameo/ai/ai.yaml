@@ -4630,6 +4630,17 @@ Player:
 		# REF-FIELD-02 (USER PRIORITY 11-24, refinery spam; row rf_field_gate): at most 2 refineries per field (total = fields in reach x 2), and a
 		# field where an own refinery was lost stays locked 3000 ticks, then until no enemy was seen there for 1500 ticks. genericbot only (this module).
 		RefineryFieldGate: true
+		# REF-DEMAND-01 (row ref_demand, Opus ruling + user final spec 11-25): the law's anchors are resource zones (radius 10, built once); a zone
+		# within YardRadiusCells of ANY own yard (expansion yards too) and reachable by a harvester from it asks for refineries up to 2 per zone (the
+		# REF-FIELD-02 cap per zone); no new refinery within 10 cells of a friendly (own or allied) one, 5 when a zone has no other site; an allied
+		# refinery serving a zone takes it off the demand. Target on Imminent Destruction: 5 +/- 1 refineries per bot (REF_ZONES_IMMINENT e6220637).
+		RefDemand: true
+		RefineryZoneRadius: 10
+		RefineryPerZoneCap: 2
+		RefinerySpacingCells: 10
+		RefinerySpacingFallbackCells: 5
+		YardRadiusCells: 15
+		ReachRefreshTicks: 750
 		# BZ_production_scaling: up to ScalingMcvMaxExtra extra construction MCVs while windowed income
 		# holds over the difficulty line, a far field is free and army parity admits; also parks MCV
 		# site handouts whose deploy annulus holds no placeable cell (MCV-EXPAND-IDLE H1).

@@ -46,14 +46,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				i => AnchorBlockedForClaims(i, tick),
 				i => AnchorCommittedForClaims(i, tick),
 				near, out _, out _, out var tiers, out _, out _,
-				RouteRank, CoverageUnknown);
+				RouteRank, CoverageUnknown, DemandOverride);
 
 			var kept = PeekFilter(order, anchors, anchorOfferStreaks, Info.RefineryClaimFailAttempts);
 			var claims = new List<RefineryAnchorClaim>(kept.Count);
 			foreach (var i in kept)
 			{
 				var fieldId = anchorFieldIds[i];
-				var center = fieldId < fields.Count ? fields[fieldId].Center : anchors[i];
+				var center = ClaimFieldCenter(fieldId, anchors[i]);
 				claims.Add(new RefineryAnchorClaim(anchors[i], center, fieldId, tiers[i], fieldCellsById[fieldId]));
 			}
 

@@ -3381,6 +3381,13 @@ namespace OpenRA.Mods.CA.Traits
 
 			CPos? gap1 = null;
 
+			// REF-DEMAND-01 (row ref_demand): with friendly spacing on, a cell within RefinerySpacingCells of a friendly refinery is refused; one
+			// legal only at the fallback spacing is kept aside and used only when the full spacing leaves this claim no site (gap 0, then gap 1).
+			var spacingLaw = baseBuilder.RefineryLawProvider();
+			var spacing = spacingLaw != null && spacingLaw.RefinerySpacingActive;
+			CPos? relaxed0 = null, relaxed1 = null;
+			var rejectedSpacing = 0;
+
 			// FIX-RA-REFINERY diagnostics: tally the per-cell rejection reasons so a failed sweep
 			// emits one bounded line — the reason chain (buildability / too-far / dock-on-resource /
 			// no-exit / gap-illegal) instead of a per-cell dump.
@@ -3403,6 +3410,13 @@ namespace OpenRA.Mods.CA.Traits
 				if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell))
 				{
 					rejectedFar++;
+					continue;
+				}
+
+				var spacingTier = spacing ? spacingLaw.RefinerySiteSpacingTier(cell) : RefineryDemand.SpacingAllowed;
+				if (spacingTier == RefineryDemand.SpacingRefused)
+				{
+					rejectedSpacing++;
 					continue;
 				}
 
@@ -3433,6 +3447,19 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 				}
 
+				if (spacingTier == RefineryDemand.SpacingFallbackOnly)
+				{
+					var relaxedGap = zone0 == null ? 0 : BaseBuilderQueueEvalCA.FootprintGap(bi.Tiles(cell).ToList(), zone0, zone1);
+					if (relaxedGap == 0)
+						relaxed0 ??= cell;
+					else if (relaxedGap == 1)
+						relaxed1 ??= cell;
+					else
+						rejectedGap++;
+
+					continue;
+				}
+
 				if (zone0 == null)
 					return (cell, -1, 0);
 
@@ -3450,7 +3477,14 @@ namespace OpenRA.Mods.CA.Traits
 			if (gap1.HasValue)
 				return (gap1.Value, 1, 0);
 
-			AIUtils.BotDebug($"{player} law refinery {actorType}: no site at anchor {anchor} — {scanned} scanned, {rejectedBuild} unbuildable, {rejectedFar} too-far, {rejectedDockResource} dock-on-resource, {rejectedDockExit} dock-no-exit, {rejectedGap} gap-illegal at tick {world.WorldTick}");
+			// REF-DEMAND-01: the full spacing left no site — the fallback spacing's nearest one (gap 0 first).
+			if (relaxed0.HasValue)
+				return (relaxed0.Value, zone0 == null ? -1 : 0, 0);
+
+			if (relaxed1.HasValue)
+				return (relaxed1.Value, 1, 0);
+
+			AIUtils.BotDebug($"{player} law refinery {actorType}: no site at anchor {anchor} — {scanned} scanned, {rejectedBuild} unbuildable, {rejectedFar} too-far, {rejectedDockResource} dock-on-resource, {rejectedDockExit} dock-no-exit, {rejectedGap} gap-illegal{(spacing ? ", " + rejectedSpacing + " spacing" : "")} at tick {world.WorldTick}");
 			return (null, -1, 0);
 		}
 

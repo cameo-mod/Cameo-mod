@@ -476,6 +476,19 @@ namespace OpenRA.Mods.CA.Traits
 		/// Chebyshev reach (cells) a legal top-left can lie from it. Default: none (no samples drawn).
 		/// </summary>
 		void RefinerySearchProviders(Actor producer, string item, List<(CPos Center, int Reach)> into) { }
+
+		/// <summary>
+		/// REF-DEMAND-01 (row ref_demand): friendly spacing is enforced on law refinery sites. Default false: no provider, classic or the switch off
+		/// keep every placement path unchanged.
+		/// </summary>
+		bool RefinerySpacingActive => false;
+
+		/// <summary>
+		/// REF-DEMAND-01: the spacing tier of a refinery top-left against every friendly (own or allied) refinery —
+		/// <see cref="RefineryDemand.SpacingAllowed"/>, <see cref="RefineryDemand.SpacingFallbackOnly"/> (legal only at the fallback spacing, for a
+		/// zone whose full-spacing search found no site) or <see cref="RefineryDemand.SpacingRefused"/>. Default: allowed.
+		/// </summary>
+		int RefinerySiteSpacingTier(CPos topLeft) => RefineryDemand.SpacingAllowed;
 	}
 
 	/// <summary>
