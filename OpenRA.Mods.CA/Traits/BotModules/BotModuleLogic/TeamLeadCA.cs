@@ -213,6 +213,20 @@ namespace OpenRA.Mods.CA.Traits
 		public static bool PushBarPassed(int units, long value, int floorUnits, int needUnits, long needValue) =>
 			units >= Math.Max(1, Math.Max(floorUnits, needUnits)) && value >= Math.Max(0, needValue);
 
+		/// <summary>
+		/// CONSOLIDATE-02 D1 (tl_bar_arrived_only): the unit bar of the push is the WAVE-MIN units or <paramref name="percent"/> of the units COMMITTED to the order (the squads assigned
+		/// to it and on the way, never the home or production pool), whichever is more, rounded up. A small group never pushes ahead of a big committed blob.
+		/// </summary>
+		public static int ArrivedBarUnits(int waveMinUnits, int committedUnits, int percent) =>
+			Math.Max(Math.Max(0, waveMinUnits), (Math.Max(0, committedUnits) * Math.Clamp(percent, 0, 100) + 99) / 100);
+
+		/// <summary>
+		/// CONSOLIDATE-02 D1: the held push has reached its timeout (<paramref name="maxTicks"/> after the first hold, -1 = never held) and the blob that arrived passes the plain WAVE-MIN bars
+		/// (<see cref="PushBarPassed"/>): it pushes now instead of being dissolved. Below WAVE-MIN the order is still dissolved.
+		/// </summary>
+		public static bool BarTimeoutPush(int now, int since, int maxTicks, int arrivedUnits, long arrivedValue, int floorUnits, int waveMinUnits, long waveMinValue) =>
+			PushBarDissolve(now, since, maxTicks) && PushBarPassed(arrivedUnits, arrivedValue, floorUnits, waveMinUnits, waveMinValue);
+
 		/// <summary>The finish focus is re-evaluated: never yet (<paramref name="lastEval"/> below 0), or a full check window ago.</summary>
 		public static bool FocusDue(int now, int lastEval, int checkTicks) => lastEval < 0 || now - lastEval >= Math.Max(1, checkTicks);
 
