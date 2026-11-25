@@ -265,11 +265,11 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void TheCandidatesAreThePoolAndTheFieldRushSquadsWithoutTheBreakerSquadAndHomeIsADistanceTest()
 		{
-			var cand = Section(Wiring(), "IEnumerable<DetachCandidate> AggTeamDetachCandidates()", "internal DefenceDetachmentPlan AggTeamDefence()");
+			var cand = Section(Wiring(), "IEnumerable<DetachCandidate> AggTeamDetachCandidates(bool quietOnly = false)", "internal DefenceDetachmentPlan AggTeamDefence()");
 			foreach (var guard in new[]
 			{
 				"foreach (var u in unitsHangingAroundTheBase)", "d <= radiusSquared);",
-				"if (s.Type != SquadCAType.Rush || !s.IsValid || ReferenceEquals(s, stalemateSquad))\n\t\t\t\t\tcontinue;\n\t\t\t\tforeach (var u in s.Units)",
+				"if (s.Type != SquadCAType.Rush || !s.IsValid || ReferenceEquals(s, stalemateSquad) || (quietOnly && !AggTeamIsQuietState(s.FuzzyStateMachine?.CurrentState)))\n\t\t\t\t\tcontinue;\n\t\t\t\tforeach (var u in s.Units)",
 				"AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamDefenceHomeRadiusCells))",
 			})
 				Assert.That(cand, Does.Contain(guard), guard);

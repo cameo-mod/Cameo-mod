@@ -19,5 +19,11 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("CONSOLIDATE-02: the army plan runs at most once per this many ticks per bot (Step 1 roles).")]
 		public readonly int ArmyPlanTicks = 100;
+
+		[Desc("CONSOLIDATE-02 Q3 defend arbiter: an own-asset answer (P0/P1) takes units until their value is this percent of the attack the defence there does not cover. Range 100-400.")]
+		public readonly int ArbiterDefendMarginPercent = 150;
+
+		[Desc("CONSOLIDATE-02 Q3 defend arbiter: an attacker the bot cannot see is answered by at most this many pool units (nearest first) when no home guard stands yet, instead of the whole pool. Range 0-12.")]
+		public readonly int ArbiterBlindDraftUnits = 3;
 	}
 }

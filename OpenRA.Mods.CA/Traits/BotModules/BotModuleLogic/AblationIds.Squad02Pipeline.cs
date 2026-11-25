@@ -20,5 +20,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		// Q2 Step 1: one role per unit; the harass cap by VALUE; attached squads follow the seat's main squad.
 		public const string SqRoles = "sq_roles";
+
+		// Q3 Step 4: one defend arbiter (P0-P5); ProtectOwn, DEFEND-ALLY, TEAM-DEFEND and the AggTeam detachment only draft what it allows.
+		public const string SqDefendArbiter = "sq_defend_arbiter";
 	}
 }

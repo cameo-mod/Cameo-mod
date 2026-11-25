@@ -1097,6 +1097,9 @@ namespace OpenRA.Mods.CA.Traits
 		int protectOwnTicks;
 		Actor protectOwnFrom;
 
+		// CONSOLIDATE-02 Q3: the own actor whose hit started this ProtectOwn call (null from the timer path).
+		Actor protectOwnVictim;
+
 		int desiredAttackForceValue;
 		int desiredAttackForceSize;
 		int stageSinceTick = -1;
@@ -2451,7 +2454,8 @@ namespace OpenRA.Mods.CA.Traits
 			else
 				CloseAllyAssist(BotMissionAttemptState.Released, BotMissionReasons.Superseded);
 
-			if (request == null && Info.FastSquadsReactToThreats)
+			// CONSOLIDATE-02 Q3 (sq_defend_arbiter): an escort/preposition answer (P5) is a pool share; the raid squads keep their job (no DF-3 fold, no DF-4 retarget).
+			if (request == null && Info.FastSquadsReactToThreats && !DefendArbiterOn)
 				ReactWithFastSquads(bot, protectSq, rally, threat.Value.EtaTicks);
 		}
 
@@ -4413,7 +4417,12 @@ namespace OpenRA.Mods.CA.Traits
 			if (protectSq == null)
 				protectSq = RegisterNewSquad(bot, SquadCAType.Protection, protectTarget);
 
-			if (!protectSq.IsValid)
+			// CONSOLIDATE-02 Q3 (sq_defend_arbiter): the draft is sized by the arbiter (P0/P1) instead of the whole pool (X7).
+			var victim = protectOwnVictim;
+			protectOwnVictim = null;
+			if (DefendArbiterOn)
+				ArbiterProtectOwn(attacker, protectTarget, victim, protectSq);
+			else if (!protectSq.IsValid)
 			{
 				// Draft from the idle pool only. activeUnits contains both squad members
 				// and hanging units, so a world scan would draft units already assigned
@@ -4507,6 +4516,7 @@ namespace OpenRA.Mods.CA.Traits
 				foreach (var n in notifyPositionsUpdated)
 					n.UpdatedDefenseCenter(e.Attacker.Location);
 
+				protectOwnVictim = self;
 				ProtectOwn(e.Attacker);
 
 				// V07 tl_defend_team: the victim's own side raises the team alarm even when none of its idle units stands near (throttled; free with the switch off).

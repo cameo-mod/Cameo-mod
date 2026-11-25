@@ -9,7 +9,10 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Linq;
 using OpenRA.Mods.CA.Traits.BotModules.Squads;
+using OpenRA.Mods.Common.Traits;
+using OpenRA.Traits;
 
 namespace OpenRA.Mods.CA.Traits
 {
@@ -19,6 +22,7 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		AblationLatch ablatePipeline02;
 		AblationLatch ablateSqRoles;
+		AblationLatch ablateSqDefendArbiter;
 		int armyPlanNextTick;
 		ArmyPlan armyPlan = ArmyPlan.Empty;
 		readonly List<ArmyPlanSquad> armyPlanSquads = new();
@@ -193,6 +197,121 @@ namespace OpenRA.Mods.CA.Traits
 
 			var candidateValue = candidate != null ? UnitValue(candidate) : 0;
 			return ArmyPlanCA.HarassAllowsByValue(raid, raiders, total + candidateValue, candidateValue, Info.HarassCapPercent, HarassMinOn ? Info.HarassMinUnits : 0);
+		}
+
+		// ---- Q3: the defend arbiter (row sq_defend_arbiter) ----
+
+		/// <summary>Q3 (row sq_defend_arbiter): every defence draft goes through DefendArbiterCA (the P0-P5 ladder and the share sizing).</summary>
+		internal bool DefendArbiterOn => ArmyPipelineOn && !ablateSqDefendArbiter.Off(Player, AblationIds.SqDefendArbiter);
+
+		// A construction yard or a production building: a hit on one may let the base fall (P0).
+		static bool ArbiterIsCore(Actor victim) =>
+			victim.Info.HasTraitInfo<BaseBuildingInfo>() || (victim.Info.HasTraitInfo<BuildingInfo>() && victim.Info.HasTraitInfo<ProductionInfo>());
+
+		/// <summary>
+		/// The armed enemies the bot sees around <paramref name="at"/> (the attack) and the armed own and allied actors there (the defence already there, static defences
+		/// included), worth by cost, within DefendAllyAttackerScanCells. Observation only: the enemies are what the bot sees.
+		/// </summary>
+		void ArbiterAssess(WPos at, out long attack, out long defence)
+		{
+			attack = 0;
+			defence = 0;
+			foreach (var e in World.FindActorsInCircle(at, WDist.FromCells(Info.DefendAllyAttackerScanCells)))
+			{
+				if (e.IsDead || !e.IsInWorld || e.Owner == null || e.Info.HasTraitInfo<HuskInfo>() || !e.Info.HasTraitInfo<AttackBaseInfo>())
+					continue;
+
+				if (e.Owner == Player || Player.RelationshipWith(e.Owner) == PlayerRelationship.Ally)
+					defence += UnitValue(e);
+				else if (IsPreferredObservedEnemyUnit(e))
+					attack += UnitValue(e);
+			}
+		}
+
+		/// <summary>
+		/// ProtectOwn under the arbiter: an own priority asset is hit. The answer is sized at ArbiterDefendMarginPercent of the attack the defence there does not cover; the
+		/// pool answers first (nearest to the attack), then the squads the priority may take: P1 the quiet Rush squads, P0 (a core building hit and the base would fall to the
+		/// attack) every Main squad, the gathering and pushed blob included, nearest units first and only the share needed. An attacker the bot cannot see is answered by at most
+		/// ArbiterBlindDraftUnits pool units when no guard stands yet. Raids, attached squads and the air/naval/stealth domains are never taken.
+		/// </summary>
+		void ArbiterProtectOwn(Actor attacker, Actor protectTarget, Actor victim, SquadCA protectSq)
+		{
+			var leases = BotUnitLeases.Of(Player);
+			var draftable = unitsHangingAroundTheBase.Where(u => !unitCannotBeOrdered(u.Actor) && IsDefenderDraftable(u, leases)).ToList();
+			var at = attacker != null && attacker.IsInWorld ? attacker.CenterPosition
+				: victim != null && victim.IsInWorld ? victim.CenterPosition : World.Map.CenterOfCell(initialBaseCenter);
+
+			long attack = 0;
+			long defence = 0;
+			if (protectTarget != null)
+				ArbiterAssess(at, out attack, out defence);
+
+			long poolValue = 0;
+			foreach (var u in draftable)
+				poolValue += UnitValue(u.Actor);
+
+			var core = victim != null && !victim.IsDead && ArbiterIsCore(victim);
+			var priority = DefendArbiterCA.Own(core, attack, defence + poolValue);
+			long need = 0;
+			long got = 0;
+			var fromPool = 0;
+			var fromSquads = 0;
+
+			void TakeFromPool(UnitWposWrapper u)
+			{
+				protectSq.Units.Add(u);
+				unitsHangingAroundTheBase.Remove(u);
+				got += UnitValue(u.Actor);
+				fromPool++;
+			}
+
+			if (attack <= 0)
+			{
+				if (!protectSq.IsValid)
+					foreach (var u in draftable.OrderBy(u => (u.Actor.CenterPosition - at).HorizontalLengthSquared).ThenBy(u => u.Actor.ActorID)
+						.Take(DefendArbiterCA.BlindDraft(draftable.Count, Info.ArbiterBlindDraftUnits)).ToList())
+						TakeFromPool(u);
+			}
+			else
+			{
+				need = DefendArbiterCA.Need(attack, defence, Info.ArbiterDefendMarginPercent);
+				var pick = DefendArbiterCA.PickNearest(
+					draftable.Select((u, i) => new DefendCandidate(i, UnitValue(u.Actor), (u.Actor.CenterPosition - at).HorizontalLengthSquared)), need);
+				foreach (var i in pick)
+					TakeFromPool(draftable[i]);
+
+				if (got < need)
+				{
+					var candidates = new List<(SquadCA Squad, UnitWposWrapper Unit)>();
+					foreach (var s in Squads)
+					{
+						if (ReferenceEquals(s, protectSq) || !s.IsValid || s.Type != SquadCAType.Rush || ReferenceEquals(s, stalemateSquad) || s.M13Response
+							|| !DefendArbiterCA.MayTake(priority, ArmyRole.Main, ArmyHolderOf(s)))
+							continue;
+
+						foreach (var u in s.Units)
+							if (!unitCannotBeOrdered(u.Actor))
+								candidates.Add((s, u));
+					}
+
+					var squadPick = DefendArbiterCA.PickNearest(candidates.Select((c, i) =>
+						new DefendCandidate(i, UnitValue(c.Unit.Actor), (c.Unit.Actor.CenterPosition - at).HorizontalLengthSquared)), need - got);
+					foreach (var i in squadPick)
+					{
+						var (squad, unit) = candidates[i];
+						squad.Units.Remove(unit);
+						protectSq.Units.Add(unit);
+						got += UnitValue(unit.Actor);
+						fromSquads++;
+					}
+				}
+			}
+
+#if CAMEO_DEV_LOGGING
+			if (DiagnosticWriter != null && fromPool + fromSquads > 0)
+				DiagnosticTeamEvent("arbiter_own", "pri=" + priority + " core=" + (core ? 1 : 0) + " attack=" + attack + " defence=" + defence + " pool=" + poolValue
+					+ " need=" + need + " got=" + got + " from_pool=" + fromPool + " from_squads=" + fromSquads);
+#endif
 		}
 	}
 }

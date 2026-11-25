@@ -189,7 +189,8 @@ namespace OpenRA.Mods.CA.Traits
 			return World.Map.CenterOfCell(Player.HomeLocation);
 		}
 
-		IEnumerable<DetachCandidate> AggTeamDetachCandidates()
+		// CONSOLIDATE-02 Q3 (sq_defend_arbiter): quietOnly = the P1 rule, a home threat takes the pool and the quiet squads, never a gathering or pushed blob.
+		IEnumerable<DetachCandidate> AggTeamDetachCandidates(bool quietOnly = false)
 		{
 			var home = AggTeamHomePos();
 			var radius = (long)AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamDefenceHomeRadiusCells)) * AggTeamPolicyCA.CellUnits;
@@ -202,7 +203,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			foreach (var s in Squads)
 			{
-				if (s.Type != SquadCAType.Rush || !s.IsValid || ReferenceEquals(s, stalemateSquad))
+				if (s.Type != SquadCAType.Rush || !s.IsValid || ReferenceEquals(s, stalemateSquad) || (quietOnly && !AggTeamIsQuietState(s.FuzzyStateMachine?.CurrentState)))
 					continue;
 				foreach (var u in s.Units)
 				{
@@ -231,9 +232,14 @@ namespace OpenRA.Mods.CA.Traits
 				return aggDetachPlan = AggRecallAllPlan;
 
 			var net = DefenceDetachment.NetThreat(provider.StalemateHomeThreatValue, provider.StalemateHomeDefenceValue, AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamDefenceSharePercent)));
+
+			// CONSOLIDATE-02 Q3 (sq_defend_arbiter): one rule. P1 (the base holds) sizes the answer from the pool and the quiet squads only, so a raid never dissolves a gathering
+			// or pushed blob (X6); P0 (the base would fall to the threat) may take the field squads too, nearest first and only the share needed. Never a recall of everything.
+			var arbiter = DefendArbiterOn;
+			var falls = arbiter && DefendArbiterCA.Falls(provider.StalemateHomeThreatValue, provider.StalemateHomeDefenceValue + AggTeamHomeValue());
 			var fresh = net > 0
-				? DefenceDetachment.Plan(net, provider.StalemateOwnArmy, AggTeamDetachCandidates(), AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamDefendMarginPercent)),
-					AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamMaxDetachSharePercent)), AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamRecallSharePercent)))
+				? DefenceDetachment.Plan(net, provider.StalemateOwnArmy, AggTeamDetachCandidates(arbiter && !falls), AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamDefendMarginPercent)),
+					falls ? 100 : AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamMaxDetachSharePercent)), arbiter ? 0 : AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamRecallSharePercent)))
 				: DefenceDetachmentPlan.None;
 			var plan = DefenceDetachment.Latch(aggDetachPlan, fresh, provider.StalemateHomeThreat, provider.StalemateHomeLatch);
 			if (plan.IsActive && !aggDetachPlan.IsActive)
