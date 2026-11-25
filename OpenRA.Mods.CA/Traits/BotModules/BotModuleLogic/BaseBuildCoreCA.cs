@@ -109,6 +109,8 @@ namespace OpenRA.Mods.CA.Traits
 				if (roots != null && roots.Contains(name))
 					return depth[name] = 0;
 
+				// A cycle is cut here (-1). A member resolved while its cycle is cut caches the depth found without that edge, so a depth inside a cycle
+				// depends on the traversal order. That order is fixed (ordinal keys in Compute), so the result is deterministic. Cycles are not expected in the rules (not verified).
 				if (!visiting.Add(name))
 					return -1;
 
