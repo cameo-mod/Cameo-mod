@@ -211,6 +211,9 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		public static int PersistentGatherCap(int gatherMaxTicks, int pushBarMaxTicks) => Math.Max(Math.Max(1, pushBarMaxTicks), Math.Min(gatherMaxTicks, 30000));
 
+		/// <summary>CONSOLIDATE-02 Q5: the pool may join the gathering squad: at least <paramref name="floor"/> joinable units (never below 1) are ready as one batch.</summary>
+		public static bool BatchReady(int joinable, int floor) => joinable > 0 && joinable >= Math.Max(1, floor);
+
 		/// <summary>CONSOLIDATE-02 Q4b: the age at which a pushed persistent order is Done, clamped to the documented range 1500-30000 (a yaml 0 can no longer close it on the push tick).</summary>
 		public static int EngagedMaxAge(int configuredTicks) => Math.Clamp(configuredTicks, 1500, 30000);
 

@@ -29,5 +29,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		// Q4: the order stays open through Push and Engaged (leader-updated target, WAVE-MIN reinforcements) until Done.
 		public const string SqOrderEngaged = "sq_order_engaged";
+
+		// Q5 Step 2 (Joining): the pool joins the gathering squad as a batch (at least the join floor, all on one tick), never a unit that walks to the rally alone.
+		public const string SqGroupedJoin = "sq_grouped_join";
 	}
 }

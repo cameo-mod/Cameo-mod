@@ -25,6 +25,7 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateSqDefendArbiter;
 		AblationLatch ablateSqLaunchArbiter;
 		AblationLatch ablateSqOrderEngaged;
+		AblationLatch ablateSqGroupedJoin;
 		int armyPlanNextTick;
 		ArmyPlan armyPlan = ArmyPlan.Empty;
 		readonly List<ArmyPlanSquad> armyPlanSquads = new();
@@ -387,6 +388,13 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>Q4 (row sq_order_engaged): the order stays open through Push and Engaged; the leader re-picks its target for the whole blob; Done closes it.</summary>
 		internal bool ArmyOrderEngagedOn => ArmyLaunchArbiterOn && !ablateSqOrderEngaged.Off(Player, AblationIds.SqOrderEngaged);
+
+		/// <summary>
+		/// Q5 (row sq_grouped_join; needs the one launcher): before the push the pool merges into the seat's gathering squad only as a batch of at least the join floor, every unit
+		/// ordered on the same tick. A unit that was produced a moment ago waits at home for its batch instead of crossing the map alone (X2: median contact of 3). After the push a
+		/// WAVE-MIN group forms a squad of its own (Q4, ArmyReinforce); nothing joins alone.
+		/// </summary>
+		internal bool ArmyGroupedJoinOn => ArmyLaunchArbiterOn && !ablateSqGroupedJoin.Off(Player, AblationIds.SqGroupedJoin);
 
 		/// <summary>The live pushed persistent order this squad was pushed with, or null (none, or the order is done).</summary>
 		TeamLeadOrder ArmyEngagedOrderOf(SquadCA s)

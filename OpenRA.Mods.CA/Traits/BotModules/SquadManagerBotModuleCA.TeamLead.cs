@@ -145,6 +145,11 @@ namespace OpenRA.Mods.CA.Traits
 			if (joinable.Count == 0)
 				return false;
 
+			// CONSOLIDATE-02 Q5 (sq_grouped_join): no unit walks to the rally alone. The pool joins as a batch of at least the join floor (the same floor a new squad needs), all on
+			// this tick; a smaller pool waits at home for its batch (the caller then stops at the same floor).
+			if (ArmyGroupedJoinOn && !TeamLeadCA.BatchReady(joinable.Count, AllInCA.JoinMinUnits(order.AllIn, Info.TeamLeadJoinMinUnits, Info.TeamLeadAllInJoinMinUnits)))
+				return false;
+
 			var cell = World.Map.CellContaining(TeamLeadRallyOf(squad, order));
 			foreach (var u in joinable)
 			{
