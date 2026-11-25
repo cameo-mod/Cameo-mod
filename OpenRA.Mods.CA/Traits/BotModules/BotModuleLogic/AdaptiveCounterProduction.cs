@@ -90,6 +90,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		public void Observe(int interval, IBotEnemyCompositionProvider provider)
 		{
+			// the legacy sampling (which may add the omniscient sample) took over again: the next fog-only call drops what it added
+			fogOnly = false;
+
 			if (!BotPeriod.CarryDue(ref nextObservation, world.WorldTick, interval))
 				return;
 
