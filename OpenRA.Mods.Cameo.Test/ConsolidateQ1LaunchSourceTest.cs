@@ -48,6 +48,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(helper, Does.Contain("using System.Diagnostics;"), "the attribute needs the namespace");
 			Assert.That(helper, Does.Contain("[Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tinternal void LaunchSourceRecord(SquadCA squad, string path, string role, int units)"), "the launch helper is compiled out of release");
 			Assert.That(helper, Does.Contain("[Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tinternal void StageExitRecord(SquadCA squad, string path, string role, int units)"), "the stage-exit helper is compiled out of release");
+			// This count pins exactly the two Q1 helpers. Update it if a third [Conditional] helper is added to this file.
 			Assert.That(CountOf(helper, "[Conditional(\"CAMEO_DEV_LOGGING\")]"), Is.EqualTo(2), "exactly the two helpers carry the attribute");
 			Assert.That(helper, Does.Contain("DiagnosticSquadId(squad)"), "launch rows join the squad rows by the squad id");
 		}
