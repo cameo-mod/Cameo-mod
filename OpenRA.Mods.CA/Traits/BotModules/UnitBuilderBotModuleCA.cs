@@ -92,6 +92,14 @@ namespace OpenRA.Mods.CA.Traits
 
 		public readonly string[] CapturerCaptureTypes = { "building", "defense", "tech" };
 
+		[Desc("ub_capturer_workers (row of the same name): a unit with the Harvester trait (the worker / peasant / militia of the WC2 packs, which also carries a building Captures trait) is invisible to the capturer cap:",
+			"it is neither a capturer nor an armed infantry for the cap's count and denominator. False = today's rule (the worker counts as a capturer).")]
+		public readonly bool CapturerSkipsWorkers = false;
+
+		[Desc("ub_unitmix_capturer (row of the same name): the unit-mix census classifies a unit with the same capturer rule as the cap (IsCapturer, workers out), not with the raw Captures trait.",
+			"The raw test made every infantry with a garrison Captures trait fall in the None category. False = the raw test.")]
+		public readonly bool UnitMixCapturerClass = false;
+
 		[Desc("PROD-BUSY-01 (USER P0): every idle factory of a category is served on every pass (the offer budget is the factory count), not one",
 			"(two while the bank is saturated). Gated by SwitchCondition; row pb_all_factories. False = the old width.")]
 		public readonly bool ServeAllFactories = false;
@@ -598,7 +606,7 @@ namespace OpenRA.Mods.CA.Traits
 		bool FairService => switchesActive && Info.FairProducerService && !ablateFairProducer.Off(player, AblationIds.FairProducer);
 
 		// ABLATE-01 hooks (DEV-only provider; absent in release = always on): one cached answer per row.
-		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery, ablateUpgradeService, ablateUpgradeBuildingAddons, ablateUpgradeOnce, ablateCapturerStrict;
+		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery, ablateUpgradeService, ablateUpgradeBuildingAddons, ablateUpgradeOnce, ablateCapturerStrict, ablateCapturerWorkers, ablateUnitMixCapturer;
 		AblationLatch ablateMcvRebuild, ablateRequestSlot; // MCV-REBUILD-01
 		bool McvRebuildOn => switchesActive && Info.McvRebuildFirst && !ablateMcvRebuild.Off(player, AblationIds.McvRebuildFirst);
 		int RequestDropSweeps => McvRebuildCA.DropLimit(switchesActive && Info.RequestSlotFastDrop && !ablateRequestSlot.Off(player, AblationIds.RequestSlot),
@@ -650,11 +658,12 @@ namespace OpenRA.Mods.CA.Traits
 			if (unitMixCategoryByName.TryGetValue(info.Name, out var category))
 				return category;
 
-			// Unarmed units (harvesters, transports), capturers and carrier slaves are not army value.
-			var counts = info.TraitInfos<ArmamentInfo>().Any(arm => arm.WeaponInfo != null) && !info.HasTraitInfo<CapturesInfo>() && !info.HasTraitInfo<CarrierSlaveInfo>();
+			// Unarmed units (harvesters, transports), capturers and carrier slaves are not army value. ub_unitmix_capturer: the capturer is the cap's own IsCapturer (strict, workers out) instead of the raw Captures trait.
+			var capturer = UnitMixCapturerOn ? IsCapturer(info) || IsWorker(info) : info.HasTraitInfo<CapturesInfo>();
+			var counts = info.TraitInfos<ArmamentInfo>().Any(arm => arm.WeaponInfo != null) && !capturer && !info.HasTraitInfo<CarrierSlaveInfo>();
 			category = !counts ? UnitMixCategory.None
 				: info.HasTraitInfo<AircraftInfo>() ? UnitMixCategory.Aircraft
-				: IsArmedInfantry(info) ? UnitMixCategory.Infantry
+				: IsArmedInfantry(info, capturer) ? UnitMixCategory.Infantry
 				: info.HasTraitInfo<MobileInfo>() ? UnitMixCategory.Other
 				: UnitMixCategory.None;
 			return unitMixCategoryByName[info.Name] = category;
@@ -733,6 +742,14 @@ namespace OpenRA.Mods.CA.Traits
 
 		// ub_capturer_strict: a capturer for the cap / the armed-infantry denominator (genericbot only through switchesActive; classic keeps the old rule)
 		bool CapturerStrictOn => switchesActive && Info.CapturerStrict && !ablateCapturerStrict.Off(player, AblationIds.CapturerStrict);
+
+		// ub_capturer_workers: a Harvester-trait unit is invisible to the capturer cap, both as a capturer and as armed infantry (classic: switchesActive false = the old rule)
+		bool CapturerWorkersOn => switchesActive && Info.CapturerSkipsWorkers && !ablateCapturerWorkers.Off(player, AblationIds.CapturerWorkers);
+		bool IsWorker(ActorInfo info) => CapturerWorkersOn && info.HasTraitInfo<HarvesterInfo>();
+
+		// ub_unitmix_capturer: the unit-mix census asks the cap's own capturer rule
+		bool UnitMixCapturerOn => switchesActive && Info.UnitMixCapturerClass && !ablateUnitMixCapturer.Off(player, AblationIds.UnitMixCapturer);
+
 		BitSet<CaptureType> capturerTypes;
 		bool capturerTypesSet;
 		HashSet<string> capturerClassLogged;
@@ -740,8 +757,11 @@ namespace OpenRA.Mods.CA.Traits
 		bool IsCapturer(ActorInfo info)
 		{
 			var old = info.HasTraitInfo<CapturesInfo>();
-			if (!old || !CapturerStrictOn)
-				return old;
+			if (!old)
+				return false;
+
+			if (!CapturerStrictOn)
+				return CapturerClass.CountsForCap(true, IsWorker(info));
 
 			if (!capturerTypesSet)
 			{
@@ -750,17 +770,19 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			var strict = CapturerClass.IsStrict(info.TraitInfos<CapturesInfo>().Select(c => c.CaptureTypes), capturerTypes);
-			CapturerClassLog(info.Name, strict);
-			return strict;
+			var worker = IsWorker(info);
+			CapturerClassLog(info.Name, strict, worker);
+			return CapturerClass.CountsForCap(strict, worker);
 		}
 
-		// ub_capturer_class (DEV, once per type): tick,seat,ub_capturer_class,type,,1 when strict calls it a capturer (the old rule said yes for every type that reaches this row)
+		// ub_capturer_class (DEV, once per type): tick,seat,ub_capturer_class,type,,1 when strict calls it a capturer (the old rule said yes for every type that reaches this row);
+		// 2 when ub_capturer_workers takes a Harvester-trait unit out of the cap (the militia and the peasant)
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
-		void CapturerClassLog(string name, bool strict)
+		void CapturerClassLog(string name, bool strict, bool worker)
 		{
 			capturerClassLogged ??= new HashSet<string>(StringComparer.Ordinal);
 			if (capturerClassLogged.Add(name))
-				RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},ub_capturer_class,{name},,{(strict ? 1 : 0)}");
+				RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},ub_capturer_class,{name},,{(worker ? 2 : strict ? 1 : 0)}");
 		}
 
 		// UPG-ADDONS: the BuildingAddons queue is its own toggle (the rest of the service is unchanged by it).
@@ -852,13 +874,14 @@ namespace OpenRA.Mods.CA.Traits
 		// a weapon. Capture bodies, unarmed medics/mechanics and slaved units never count.
 		static readonly BitSet<TargetableType> InfantryTargetTypes = new("Infantry");
 
-		static bool IsArmedInfantry(ActorInfo info) => IsArmedInfantry(info, info.HasTraitInfo<CapturesInfo>());
-
 		static bool IsArmedInfantry(ActorInfo info, bool capturer) =>
 			info.GetAllTargetTypes().Overlaps(InfantryTargetTypes) &&
 			!capturer &&
 			!info.HasTraitInfo<CarrierSlaveInfo>() &&
 			info.TraitInfos<ArmamentInfo>().Any(arm => arm.WeaponInfo != null);
+
+		// the cap's armed-infantry test: the capturer rule of IsCapturer, and a worker (ub_capturer_workers) is never one (peasants and militia carry weapons and would inflate the denominator)
+		bool IsArmedInfantryForCap(ActorInfo info) => !IsWorker(info) && IsArmedInfantry(info, IsCapturer(info));
 
 		// Counts are world-state per tick; ShouldBuild may see several capturer
 		// candidates in one queue pass, so scan once and cache.
@@ -880,10 +903,12 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var actor in world.Actors.Where(actor => actor.Owner == player && !actor.IsDead && actor.IsInWorld))
 			{
 				var info = actor.Info;
-				var capturer = IsCapturer(info);
-				if (capturer)
+				if (IsWorker(info))
+					continue;
+
+				if (IsCapturer(info))
 					capturerUnitsCached++;
-				else if (IsArmedInfantry(info, capturer))
+				else if (IsArmedInfantryForCap(info))
 					armedInfantryCached++;
 			}
 
@@ -1958,7 +1983,7 @@ namespace OpenRA.Mods.CA.Traits
 						if (isAirToAir)
 							batch.PendingAirToAir++;
 					}
-					if (armedInfantryFloor > 0 && IsArmedInfantry(unit, IsCapturer(unit)))
+					if (armedInfantryFloor > 0 && IsArmedInfantryForCap(unit))
 						batch.PendingArmedInfantry++;
 					if (IsCapturer(unit))
 						batch.PendingCapturers++;
@@ -2117,7 +2142,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			var items = queue.BuildableItems();
 			var pickName = UnitProducerServiceCA.CombatValueOrder(items
-				.Where(b => shares.ContainsKey(b.Name) && IsArmedInfantry(b, IsCapturer(b)) && !skip.Contains(b.Name))
+				.Where(b => shares.ContainsKey(b.Name) && IsArmedInfantryForCap(b) && !skip.Contains(b.Name))
 				.Select(b => (b.Name, DerivedUnitStrength(b.Name), Math.Max(1, queue.GetProductionCost(b)))))
 				.FirstOrDefault();
 			return pickName == null ? null : items.First(b => b.Name == pickName);
@@ -2203,7 +2228,7 @@ namespace OpenRA.Mods.CA.Traits
 							if (Info.AirToAirUnits.Contains(name))
 								batch.PendingAirToAir++;
 						}
-						if (IsArmedInfantry(actorInfo, IsCapturer(actorInfo)))
+						if (IsArmedInfantryForCap(actorInfo))
 							batch.PendingArmedInfantry++;
 						if (IsCapturer(actorInfo))
 							batch.PendingCapturers++;

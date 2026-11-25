@@ -632,16 +632,16 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(u, Does.Contain("bool CapturerStrictOn => switchesActive && Info.CapturerStrict && !ablateCapturerStrict.Off(player, AblationIds.CapturerStrict);"));
 			Assert.That(u, Does.Contain("public readonly bool CapturerStrict = false;"), "off by default: classic and every other instance keep the old rule");
 			Assert.That(u, Does.Contain("public readonly string[] CapturerCaptureTypes = { \"building\", \"defense\", \"tech\" };"));
-			Assert.That(u, Does.Contain("var old = info.HasTraitInfo<CapturesInfo>();\n\t\t\tif (!old || !CapturerStrictOn)\n\t\t\t\treturn old;"), "off = exactly the old test");
+			Assert.That(u, Does.Contain("var old = info.HasTraitInfo<CapturesInfo>();\n\t\t\tif (!old)\n\t\t\t\treturn false;\n\n\t\t\tif (!CapturerStrictOn)\n\t\t\t\treturn CapturerClass.CountsForCap(true, IsWorker(info));"), "off = exactly the old test");
 
 			// the cap sites and the armed-infantry denominator all ask IsCapturer; no raw CapturesInfo test is left outside the classifier, the static unit-mix category and the static default
 			var withoutClassifier = u.Replace("var old = info.HasTraitInfo<CapturesInfo>();", "").Replace("IsArmedInfantry(info, info.HasTraitInfo<CapturesInfo>())", "")
-				.Replace("!info.HasTraitInfo<CapturesInfo>() && !info.HasTraitInfo<CarrierSlaveInfo>();\n\t\t\tcategory", "");
+				.Replace("UnitMixCapturerOn ? IsCapturer(info) || IsWorker(info) : info.HasTraitInfo<CapturesInfo>();", "");
 			Assert.That(withoutClassifier.Split(new[] { "HasTraitInfo<CapturesInfo>()" }, StringSplitOptions.None).Length - 1, Is.EqualTo(0), "every cap / denominator site goes through IsCapturer");
 			Assert.That(u, Does.Contain("capturerUnitsCached++;"));
-			Assert.That(u, Does.Contain("else if (IsArmedInfantry(info, capturer))"));
+			Assert.That(u, Does.Contain("else if (IsArmedInfantryForCap(info))"));
 			Assert.That(u, Does.Contain("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid CapturerClassLog("), "the per-type classification row is DEV only and written once");
-			Assert.That(u, Does.Contain(",ub_capturer_class,{name},,{(strict ? 1 : 0)}"));
+			Assert.That(u, Does.Contain(",ub_capturer_class,{name},,{(worker ? 2 : strict ? 1 : 0)}"));
 
 			Assert.That(Source("mods/CA/Traits/BotModules/BotModuleLogic/AblationIds.Capturer.cs"), Does.Contain("\"ub_capturer_strict\""));
 
@@ -649,6 +649,59 @@ namespace OpenRA.Mods.Cameo.Test
 			var generic = MiniYaml.FromString(Source("packaging/ai.yaml"), "ai").Single(n => n.Key == "Player").Value.Nodes;
 			Assert.That(generic.Single(n => n.Key == "UnitBuilderBotModuleCA@generic").Value.Nodes.Any(n => n.Key == "CapturerStrict" && n.Value.Value == "true"), Is.True);
 			Assert.That(generic.Single(n => n.Key == "UnitBuilderBotModuleCA@classic").Value.Nodes.Any(n => n.Key == "CapturerStrict"), Is.False);
+		}
+
+		// ub_capturer_workers (Opus 11-25, MILITIA-CAP-01): the Harvester-trait peasant and militia carry a building Captures trait and are invisible to the capturer cap.
+		[Test]
+		public void AWorkerIsNeitherACapturerNorArmedInfantryForTheCapAndOffKeepsTheOldRule()
+		{
+			// pure seam: (capturer by the strict/old rule, worker taken out)
+			Assert.That(CapturerClass.CountsForCap(true, false), Is.True, "an engineer stays a capturer");
+			Assert.That(CapturerClass.CountsForCap(true, true), Is.False, "the militia / peasant: a building Captures trait but a worker");
+			Assert.That(CapturerClass.CountsForCap(false, false), Is.False, "rifle infantry never was one");
+			Assert.That(CapturerClass.CountsForCap(false, true), Is.False);
+
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			Assert.That(u, Does.Contain("public readonly bool CapturerSkipsWorkers = false;"), "off by default: classic and every other instance keep today's rule");
+			Assert.That(u, Does.Contain("bool CapturerWorkersOn => switchesActive && Info.CapturerSkipsWorkers && !ablateCapturerWorkers.Off(player, AblationIds.CapturerWorkers);"));
+			Assert.That(u, Does.Contain("bool IsWorker(ActorInfo info) => CapturerWorkersOn && info.HasTraitInfo<HarvesterInfo>();"), "the switch short-circuits: off costs no trait lookup");
+			Assert.That(u, Does.Contain("return CapturerClass.CountsForCap(strict, worker);"));
+			Assert.That(u, Does.Contain("bool IsArmedInfantryForCap(ActorInfo info) => !IsWorker(info) && IsArmedInfantry(info, IsCapturer(info));"));
+			Assert.That(u, Does.Contain("if (IsWorker(info))\n\t\t\t\t\tcontinue;\n\n\t\t\t\tif (IsCapturer(info))\n\t\t\t\t\tcapturerUnitsCached++;"), "a worker is in neither count");
+
+			// no raw armed-infantry-with-IsCapturer test is left: every cap site (denominator, batch pending, the pick) goes through the worker-aware helper
+			Assert.That(u, Does.Not.Contain("IsArmedInfantry(unit, IsCapturer(unit))"));
+			Assert.That(u, Does.Not.Contain("IsArmedInfantry(actorInfo, IsCapturer(actorInfo))"));
+			Assert.That(u, Does.Not.Contain("IsArmedInfantry(b, IsCapturer(b))"));
+			Assert.That(u, Does.Contain("IsArmedInfantryForCap(b) && !skip.Contains(b.Name)"));
+			Assert.That(u.Split(new[] { "IsArmedInfantryForCap(" }, StringSplitOptions.None).Length - 1, Is.EqualTo(5), "the definition, the denominator, two pending sites, the pick");
+
+			Assert.That(Source("mods/CA/Traits/BotModules/BotModuleLogic/AblationIds.Capturer.cs"), Does.Contain("\"ub_capturer_workers\""));
+			Assert.That(Source("mods/CA/Traits/BotModules/BotModuleLogic/AblationIds.Capturer.cs"), Does.Contain("\"ub_unitmix_capturer\""));
+
+			var generic = MiniYaml.FromString(Source("packaging/ai.yaml"), "ai").Single(n => n.Key == "Player").Value.Nodes;
+			Assert.That(generic.Single(n => n.Key == "UnitBuilderBotModuleCA@generic").Value.Nodes.Any(n => n.Key == "CapturerSkipsWorkers" && n.Value.Value == "true"), Is.True);
+			Assert.That(generic.Single(n => n.Key == "UnitBuilderBotModuleCA@classic").Value.Nodes.Any(n => n.Key == "CapturerSkipsWorkers"), Is.False);
+		}
+
+		// ub_unitmix_capturer: the unit-mix census used the raw Captures trait, so every ^DefaultInfantry (Captures@CAPTURES: ra2garrison) fell in the None category.
+		[Test]
+		public void TheUnitMixCensusUsesTheCapRuleWhenItsOwnRowIsOnAndTheRawTraitOtherwise()
+		{
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			Assert.That(u, Does.Contain("public readonly bool UnitMixCapturerClass = false;"));
+			Assert.That(u, Does.Contain("bool UnitMixCapturerOn => switchesActive && Info.UnitMixCapturerClass && !ablateUnitMixCapturer.Off(player, AblationIds.UnitMixCapturer);"));
+			Assert.That(u, Does.Contain("var capturer = UnitMixCapturerOn ? IsCapturer(info) || IsWorker(info) : info.HasTraitInfo<CapturesInfo>();"), "off = the raw test of before");
+			Assert.That(u, Does.Contain("&& !capturer && !info.HasTraitInfo<CarrierSlaveInfo>();"));
+			Assert.That(u, Does.Contain(": IsArmedInfantry(info, capturer) ? UnitMixCategory.Infantry"));
+
+			// the garrison-only Captures of the default infantry: strict says not a capturer, so the unit is infantry in the census
+			var garrison = new BitSet<CaptureType>("ra2garrison");
+			Assert.That(CapturerClass.CountsForCap(CapturerClass.IsStrict([garrison], BuildingClasses), false), Is.False);
+
+			var generic = MiniYaml.FromString(Source("packaging/ai.yaml"), "ai").Single(n => n.Key == "Player").Value.Nodes;
+			Assert.That(generic.Single(n => n.Key == "UnitBuilderBotModuleCA@generic").Value.Nodes.Any(n => n.Key == "UnitMixCapturerClass" && n.Value.Value == "true"), Is.True);
+			Assert.That(generic.Single(n => n.Key == "UnitBuilderBotModuleCA@classic").Value.Nodes.Any(n => n.Key == "UnitMixCapturerClass"), Is.False);
 		}
 
 		[Test]

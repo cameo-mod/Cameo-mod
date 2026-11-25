@@ -30,5 +30,11 @@ namespace OpenRA.Mods.CA.Traits
 
 			return false;
 		}
+
+		/// <summary>
+		/// ub_capturer_workers (Opus 11-25, MILITIA-CAP-01): a unit counts for the capturer cap when the capturer rule says so and it is not a worker taken out of the cap
+		/// (workerOut = the row is on and the unit carries the Harvester trait: the WC2 peasant and militia, whose Captures trait is a worker's). Off = workerOut false = the rule unchanged.
+		/// </summary>
+		public static bool CountsForCap(bool capturer, bool workerOut) => capturer && !workerOut;
 	}
 }

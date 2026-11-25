@@ -15,5 +15,11 @@ namespace OpenRA.Mods.CA.Traits
 	public static partial class AblationIds
 	{
 		public const string CapturerStrict = "ub_capturer_strict";
+
+		// ub_capturer_workers row (MILITIA-CAP-01). Owner: Sonnet. Off = a Harvester-trait unit with a building Captures trait counts as a capturer for the cap, as today.
+		public const string CapturerWorkers = "ub_capturer_workers";
+
+		// ub_unitmix_capturer row. Owner: Sonnet. Off = the unit-mix census classifies a capturer by the raw Captures trait (garrison infantry fall in None).
+		public const string UnitMixCapturer = "ub_unitmix_capturer";
 	}
 }
