@@ -229,7 +229,7 @@ namespace OpenRA.Mods.CA.Traits
 			return !BuildingStillDelayed(name);
 		}
 
-		// A1-A6, side-effect free. A5: a start that would leave power short builds the power plant instead (the plant passes A1-A4 itself);
+		// A1-A6, side-effect free in a release build (DEV only: TechChainA6HoldRecord writes its rate-limit map techChainHoldLogged). A5: a start that would leave power short builds the power plant instead (the plant passes A1-A4 itself);
 		// with no plant that gives power the candidate goes as the fraction roll did.
 		bool PipelineFeasible(ProductionQueue queue, HashSet<string> buildableNames, ActorInfo power, BaseBuildSnapshot s, BaseBuildCandidate c, out string admitted)
 		{
