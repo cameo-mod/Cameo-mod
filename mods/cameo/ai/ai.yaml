@@ -6461,6 +6461,10 @@ Player:
 		UpgradeServiceQueues: Promotions, Upgrades, Research, Addons, BuildingAddons
 		# ub_capturer_strict (Opus 11-25, V08E): only a unit that can capture a building class counts as a capturer for the cap; garrison and driver-kill captures never do. @generic only.
 		CapturerStrict: true
+		# ub_capturer_workers (Opus 11-25, MILITIA-CAP-01): the Harvester-trait peasant and militia carry a building Captures trait and no longer count under the capturer cap or in its armed-infantry denominator. @generic only.
+		CapturerSkipsWorkers: true
+		# ub_unitmix_capturer: the unit-mix census uses the same capturer rule (garrison-only Captures infantry were classed None). @generic only.
+		UnitMixCapturerClass: true
 		UpgradeServiceThroughPause: Upgrades, Research, Addons, Promotions
 		IdleBaseUnitsMaximum: 25
 		ProductionMinCashRequirement: 1000
