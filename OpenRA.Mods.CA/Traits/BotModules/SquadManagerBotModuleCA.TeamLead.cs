@@ -170,7 +170,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		// A squad of a pushed order, or one at WAVE-MIN size or more, is exempt from the bound: the blob keeps going until the focus seat is dead (Opus audit: a bounded pushed
 		// blob went idle after its first cleared area, was dismissed by the closed order, and the leader re-issued a rally at home).
-		internal bool TeamLeadKeepsGoing(SquadCA s) => TeamLeadBoundedRetargetOn && TeamLeadTeamSquad(s)
+		// CONSOLIDATE-02 Q4 (sq_order_engaged): under the persistent order a pushed squad keeps going while its order lives, whatever its size; never after the order is done.
+		internal bool TeamLeadKeepsGoing(SquadCA s) => ArmyOrderEngagedOn ? ArmyKeepsGoing(s) : TeamLeadBoundedRetargetOn && TeamLeadTeamSquad(s)
 			&& TeamLeadCA.KeepsGoing(s.TeamPushSeq > 0, s.Units.Count, WaveMinActive ? WaveMinBars().Units : 0);
 
 		// The seat the pushed blob works on: the finish-the-weakest focus seat, else the owner of the last order target.
@@ -192,6 +193,11 @@ namespace OpenRA.Mods.CA.Traits
 		// visible enemy anywhere (the old pick), else (no focus seat) any remembered enemy building. False = nothing known at all: the caller stands the squad idle, never flees.
 		internal bool TeamLeadGoOn(SquadCA s, Actor leader)
 		{
+			// CONSOLIDATE-02 Q4 (sq_order_engaged): a squad of the live pushed order takes the order's target (the leader re-picks it for the whole blob, X3); the own pick
+			// below is only the fallback while the order target is gone or is the one this squad froze on.
+			if (ArmyOrderEngagedOn && ArmyEngagedOrderOf(s) is { } engaged && ArmyFollowOrder(s, engaged))
+				return true;
+
 			var seat = TeamLeadGoOnPlayer();
 			// The target that froze this blob (a cliff, water or wall between) is skipped for a while, so the retarget really picks another one.
 			var skip = s.TeamSkipActor != 0 && World.WorldTick < s.TeamSkipUntil ? s.TeamSkipActor : 0u;
@@ -458,6 +464,9 @@ namespace OpenRA.Mods.CA.Traits
 
 			teamLeadAliveSeats = seats.Count(q => q.Alive);
 			teamLeadEngaged = TeamLeadCA.Engaged(seats, team.Election, TeamLeadSoloOn ? 1 : 2);
+			// CONSOLIDATE-02 Q4 (sq_launch_arbiter): the one launcher needs a leader, so a solo bot with no allied bot leads itself.
+			if (!teamLeadEngaged && ArmyLaunchArbiterOn)
+				teamLeadEngaged = TeamLeadCA.Engaged(seats, team.Election, 1);
 			teamLeadIsLeader = teamLeadEngaged && team.Election.Leader == teamLeadKey;
 
 			if (!teamLeadEngaged)
@@ -471,6 +480,10 @@ namespace OpenRA.Mods.CA.Traits
 					TeamLeadFocusTarget(AggTeamHomePos(), now, out _, out _);
 				if (TeamLeadCadenceOn)
 					TeamLeadPublish(team, now);
+
+				// CONSOLIDATE-02 Q4 (sq_order_engaged): the leader re-picks the target of the pushed order when it is gone; every squad of the blob follows it.
+				if (ArmyOrderEngagedOn)
+					ArmyRetargetEngaged(now);
 			}
 
 			if (TeamLeadCadenceOn)
@@ -625,6 +638,14 @@ namespace OpenRA.Mods.CA.Traits
 		void TeamLeadJoin(IBot bot, int now)
 		{
 			var order = TeamLeadOpenOrder();
+
+			// CONSOLIDATE-02 Q4 (Opus D3): after the push a persistent order takes reinforcements only as a WAVE-MIN group (never a unit that walks to the target alone).
+			if (order is { Persistent: true, Pushed: true })
+			{
+				ArmyReinforce(bot, order, now);
+				return;
+			}
+
 			if (order == null || (!AllInCA.JoinsAgain(order.AllIn, teamLeadJoinedSeq, order.Seq) && !order.GatherOnly && !order.Extending) || now < initialAttackDelay)
 				return;
 
@@ -711,6 +732,9 @@ namespace OpenRA.Mods.CA.Traits
 			if (TeamLeadRallyMidOn && TeamLeadMidRally(target, out var mid))
 				rally = mid;
 			var order = teamLeadTeam.Issue(teamLeadKey, rally, target, targetActorId, now);
+			// CONSOLIDATE-02 Q4 (sq_order_engaged): the order stays open through Push and Engaged until the blob is spent (Done).
+			if (ArmyOrderEngagedOn)
+				order.MakePersistent();
 			TeamLeadPincerPlan(order, from, target, now);
 			return order;
 		}
@@ -964,8 +988,16 @@ namespace OpenRA.Mods.CA.Traits
 		void TeamLeadMaintainOrder(TeamLeadTeam team, int now)
 		{
 			var order = team.Order;
-			if (order == null || order.Cancelled || order.Pushed)
+			if (order == null || order.Cancelled)
 				return;
+
+			// CONSOLIDATE-02 Q4 (sq_order_engaged): a persistent pushed order lives on (Push -> Engaged -> Done); any other pushed order is left to its squads as before.
+			if (order.Pushed)
+			{
+				if (order.Persistent)
+					ArmyMaintainEngaged(team, order, now);
+				return;
+			}
 
 			// A report stays only while its squad is in the gather state (tl_gather_hold keeps a fighting squad in it: the fight is no state change).
 			order.Prune(o => o is SquadCA q && q.IsValid && q.FuzzyStateMachine?.CurrentState is TeamLeadGatherStateCA);
@@ -985,7 +1017,7 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			var cancel = order.LeaderKey != team.Election.Leader ? "leader_changed"
-				: order.Extending && TeamLeadCA.PushBarDissolve(now, order.PushBarSince, Info.TeamLeadPushBarMaxTicks) ? "below_bar"
+				: order.Extending && !order.Persistent && TeamLeadCA.PushBarDissolve(now, order.PushBarSince, Info.TeamLeadPushBarMaxTicks) ? "below_bar"
 				: !order.GatherOnly && !order.Extending && now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? "max_age"
 				: TeamLeadCA.GraceHolds(TeamLeadGraceHoldOn, order.Extending) ? null
 				: TeamLeadCA.RallyGraceHolds(TeamLeadGraceRallyOn, order.GatherOnly) ? (now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? "max_age" : null)
@@ -1130,6 +1162,15 @@ namespace OpenRA.Mods.CA.Traits
 		bool TeamLeadHoldsLaunch(out bool teamLaunch)
 		{
 			teamLaunch = false;
+
+			// CONSOLIDATE-02 Q4 (sq_launch_arbiter): the one launcher. No ground wave forms outside the open team order, the leader's included (X4); after the push only a
+			// WAVE-MIN group joins (D3). Before the first team check nothing forms at all.
+			if (ArmyLaunchArbiterOn)
+			{
+				teamLaunch = true;
+				return !TeamLeadOn || !ArmyMayJoin();
+			}
+
 			if (!TeamLeadOn)
 				return false;
 
@@ -1159,9 +1200,14 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		bool TeamLeadPrepare(SquadCA s)
 		{
+			// CONSOLIDATE-02 Q4 (sq_order_engaged): a squad of the pushed order reports what it holds (the order's Done test) and follows the leader's retarget.
+			if (ArmyOrderEngagedOn)
+				ArmyEngagedStep(s);
+
 			// HARASS-CAP-01 (tl_raider_recall): from the late start an idle or marching raider squad joins the open team order (TeamLeadWaveSquad is false
 			// for a raider unless the recall is on); with no order open it raids as before.
-			if (s.IsValid && s.Type is SquadCAType.Guerrilla or SquadCAType.Harass && TeamLeadWaveSquad(s) && TeamLeadOpenOrder() is { } recalled && !TeamLeadRaiderInContact(s))
+			// CONSOLIDATE-02 Q4: a pushed persistent order takes no raider (it would walk to the target alone, D3); the raiders join the next order's rally.
+			if (!ArmyRaidersStayOut() && s.IsValid && s.Type is SquadCAType.Guerrilla or SquadCAType.Harass && TeamLeadWaveSquad(s) && TeamLeadOpenOrder() is { } recalled && !TeamLeadRaiderInContact(s))
 			{
 				DiagnosticSquadEvent(s, "team_join", reason: "raider_recall seq=" + recalled.Seq);
 				s.FuzzyStateMachine.ChangeState(s, new TeamLeadGatherStateCA(recalled), false);
@@ -1178,6 +1224,11 @@ namespace OpenRA.Mods.CA.Traits
 			// The liveness (M13) response and urgent-attack squads and the breaker squad keep their own job: they are not team waves.
 			if (!TeamLeadOn || !TeamLeadWaveSquad(s))
 				return false;
+
+			// CONSOLIDATE-02 Q4 (sq_launch_arbiter): a quiet team squad joins the open order, re-engages the pushed one it belongs to, or goes back to the pool; it never
+			// issues an order of its own (L19) and never launches from its Idle state (L09-L11).
+			if (ArmyLaunchArbiterOn)
+				return ArmyPrepare(s);
 
 			// TEAM-GATHER-02 c3 (gt_bounded_retarget): a squad of a pushed order is not taken back into a team order and its blob is not dismissed (the closed order has no place
 			// for it): it goes on to the next enemy of the focus seat. With nothing known at all it waits idle (the hunt via order), still not dismissed.
@@ -1309,6 +1360,7 @@ namespace OpenRA.Mods.CA.Traits
 		internal void TeamLeadNoteGo(SquadCA squad, TeamLeadOrder order)
 		{
 			squad.TeamPushSeq = order.Seq;
+			squad.TeamTargetSeq = order.TargetSeq;
 			DiagnosticSquadEvent(squad, "team_go", "seq=" + order.Seq + " why=" + order.PushReason);
 		}
 
@@ -1316,7 +1368,9 @@ namespace OpenRA.Mods.CA.Traits
 		internal void TeamLeadAbandon(SquadCA squad, string why = null)
 		{
 			DiagnosticSquadEvent(squad, "team_abandon", why);
-			if (teamLeadIsLeader)
+
+			// CONSOLIDATE-02 Q4 (sq_launch_arbiter): the leader's squad goes back to the pool too; an Idle leader squad would launch alone (X4).
+			if (teamLeadIsLeader && !ArmyLaunchArbiterOn)
 			{
 				squad.FuzzyStateMachine.ChangeState(squad, new GroundUnitsIdleStateCA(), true);
 				return;

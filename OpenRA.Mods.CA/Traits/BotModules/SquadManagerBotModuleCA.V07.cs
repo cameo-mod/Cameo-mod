@@ -101,7 +101,9 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
-			return AllInCA.Why(atCap, huge, won);
+			// CONSOLIDATE-02 Q4 (Opus D4): the stalemate breaker's trigger is one more all-in input (it no longer launches its own wave).
+			return AllInCA.Why(atCap, huge, won)
+				?? (ArmyLaunchArbiterOn && AllInCA.StalemateSignal(now, team.StalemateSignalTick, Info.ArmyStalemateSignalTicks) ? AllInCA.WhyStalemate : null);
 		}
 
 		// Fog-honest, like TeamLeadKnownBuildings: the enemy structures (walls aside) the bot sees now or remembers in its frozen-actor layer, and their summed cost.

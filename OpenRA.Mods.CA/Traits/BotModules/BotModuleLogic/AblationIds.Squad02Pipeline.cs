@@ -23,5 +23,11 @@ namespace OpenRA.Mods.CA.Traits
 
 		// Q3 Step 4: one defend arbiter (P0-P5); ProtectOwn, DEFEND-ALLY, TEAM-DEFEND and the AggTeam detachment only draft what it allows.
 		public const string SqDefendArbiter = "sq_defend_arbiter";
+
+		// Q4 Step 2: the team order is the only ground launcher (per-bot timer, AggTeam A5, breaker wave, leader squad issue and Idle-state launch bypassed).
+		public const string SqLaunchArbiter = "sq_launch_arbiter";
+
+		// Q4: the order stays open through Push and Engaged (leader-updated target, WAVE-MIN reinforcements) until Done.
+		public const string SqOrderEngaged = "sq_order_engaged";
 	}
 }

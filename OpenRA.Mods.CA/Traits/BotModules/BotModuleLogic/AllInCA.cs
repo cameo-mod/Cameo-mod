@@ -27,6 +27,12 @@ namespace OpenRA.Mods.CA.Traits
 		public const string WhyIdle = "idle";
 		public const string WhyWon = "won";
 
+		/// <summary>CONSOLIDATE-02 Q4 (Opus D4): the stalemate breaker's trigger (no-kill clock, urgency) fired; it feeds the all-in instead of launching its own wave.</summary>
+		public const string WhyStalemate = "stalemate";
+
+		/// <summary>The breaker signal is fresh: raised within <paramref name="windowTicks"/> (a negative tick = never raised).</summary>
+		public static bool StalemateSignal(int now, int signalTick, int windowTicks) => signalTick >= 0 && now >= signalTick && now - signalTick <= Math.Max(1, windowTicks);
+
 		/// <summary>The team's idle army is very large: at least <paramref name="threshold"/> units (0 or less = this trigger is off).</summary>
 		public static bool IdleHuge(int blobUnits, int threshold) => threshold > 0 && blobUnits >= threshold;
 

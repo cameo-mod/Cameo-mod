@@ -400,6 +400,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (blocked)
 				return;
 
+			// CONSOLIDATE-02 Q4 (sq_launch_arbiter): the A5 excess launch (L06) and the A3 tiny merge (D07) are no deciders under the one launcher.
+			if (ArmyLaunchArbiterOn)
+				return;
+
 			AggTeamMergeTiny(now);
 
 			unitsHangingAroundTheBase.RemoveAll(u => unitCannotBeOrdered(u.Actor));
@@ -452,6 +456,10 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>A4/A5: an idle Rush squad joins the best live attack intent (allied or own) while the reserve stays covered and home is not threatened.</summary>
 		void AggTeamPrepare(SquadCA s)
 		{
+			// CONSOLIDATE-02 Q4 (sq_launch_arbiter): no A4 rendezvous join (T09) under the one launcher.
+			if (ArmyLaunchArbiterOn)
+				return;
+
 			if (s.Type != SquadCAType.Rush || !s.IsValid || ReferenceEquals(s, stalemateSquad)
 				|| !AggTeamIsQuietState(s.FuzzyStateMachine?.CurrentState) || s.Units.Count < (aggFinishActive ? AggP(nameof(SquadManagerBotModuleCAInfo.AggTeamFinishJoinMinUnits)) : AggP(nameof(SquadManagerBotModuleCAInfo.AggTeamJoinMinUnits))))
 				return;

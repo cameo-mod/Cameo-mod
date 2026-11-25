@@ -3253,6 +3253,13 @@ namespace OpenRA.Mods.CA.Traits
 							continue;
 						}
 
+						// CONSOLIDATE-02 Q4 (sq_launch_arbiter): before the first team check a quiet Rush squad waits; it never launches from its Idle state.
+						if (ArmyLaunchArbiterOn && !TeamLeadOn && s.Type == SquadCAType.Rush && AggTeamIsQuietState(s.FuzzyStateMachine?.CurrentState))
+						{
+							squadCursor = index + 1;
+							continue;
+						}
+
 						// TEAM-LEAD-01 (switch ON, team engaged): the squad joins the leader's order, or - a follower with no order - stands down.
 						if (TeamLeadOn)
 						{
@@ -4053,6 +4060,9 @@ namespace OpenRA.Mods.CA.Traits
 			// TEAM-LEAD-01: the leader measures the whole team's pool; a follower with an open order contributes whatever it holds (>= TeamLeadJoinMinUnits).
 			// TEAM-LEAD-02: the leader joins its own open order like a follower (the order, not the bars, decides then).
 			var teamFollowerLaunch = teamLaunch && (!TeamLeadIsLeader || (TeamLeadCadenceOn && TeamLeadOpenOrder() != null));
+			// CONSOLIDATE-02 Q4 (sq_launch_arbiter): past the hold the wave is part of the open team order (the order, not the per-bot bars, decides).
+			if (ArmyLaunchArbiterOn && teamLaunch)
+				teamFollowerLaunch = true;
 			var (launchUnits, launchValue) = TeamLeadLaunchPool(unitsHangingAroundTheBase.Count, idleUnitsValue);
 			if (aggForce || teamFollowerLaunch || AttackForceEvalCA.ShouldLaunch(launchUnits, maxIdleUnits,
 					(int)System.Math.Min(int.MaxValue, launchValue), requiredValue, requiredSize, Info.ValueOnlyAttackLaunch, Info.SquadValue))

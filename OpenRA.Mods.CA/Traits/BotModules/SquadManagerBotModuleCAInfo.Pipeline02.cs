@@ -25,5 +25,11 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("CONSOLIDATE-02 Q3 defend arbiter: an attacker the bot cannot see is answered by at most this many pool units (nearest first) when no home guard stands yet, instead of the whole pool. Range 0-12.")]
 		public readonly int ArbiterBlindDraftUnits = 3;
+
+		[Desc("CONSOLIDATE-02 Q4 order phases: a pushed order is Done at the latest this many ticks after its push (its squads finish their fights, the next order gathers). Range 1500-30000.")]
+		public readonly int ArmyEngagedMaxTicks = 6000;
+
+		[Desc("CONSOLIDATE-02 Q4 (Opus D4): a stalemate-breaker signal on the team board feeds the leader's all-in trigger for this many ticks. Range 100-6000.")]
+		public readonly int ArmyStalemateSignalTicks = 1500;
 	}
 }
