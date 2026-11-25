@@ -254,6 +254,25 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(u, Does.Contain("manager.WaveMixActive"), "the wavemix profile uses the ARMY-MIX-01 trigger");
 		}
 
+		// c3 (Opus 11-25): an unaffordable first-of-each is pay-as-you-go, like TECHCHAIN-PAYGO: it queues with any bank above 0, at most one open per queue, no savings hold.
+		[Test]
+		public void TheFirstBuildOfATypeQueuesWithAnyBankAndOnlyOneIsOpenPerQueue()
+		{
+			Assert.That(UnitRoll.FirstAdmits(1), Is.True);
+			Assert.That(UnitRoll.FirstAdmits(0), Is.False, "an empty bank still waits");
+
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			Assert.That(u, Does.Contain("var paygo = roll && rollFirst && UnitRoll.FirstAdmits(batch.BankLeft);\n\t\t\t\t\tvar cost = paygo ? 0 : fullCost;"), "only the first-of-each sees cost 0 at the afford and reserve gates");
+			Assert.That(u, Does.Contain("batch.Reserve(queue, fullCost);"), "the order still reserves its full price");
+			Assert.That(u, Does.Contain("rollFirstOpen[queue.Actor.ActorID + \"|\" + queue.Info.Type] = (name, world.WorldTick);"));
+
+			var start = u.IndexOf("ActorInfo ChooseRollUnit(", StringComparison.Ordinal);
+			var body = u.Substring(start, u.IndexOf("int rollDeficitTick", start, StringComparison.Ordinal) - start);
+			Assert.That(body, Does.Contain("open.Tick == world.WorldTick || queue.AllQueued().Any(i => i.Item == open.Name)"), "open while queued, and for the rest of the pass that ordered it");
+			Assert.That(body, Does.Contain("items = items.Where(a => rollOrdered.Contains(a.Name)).ToList();"), "while one is open the other never-built types wait; ordinary types still roll");
+			Assert.That(body, Does.Not.Contain("savings"), "no savings hold");
+		}
+
 		[Test]
 		public void TheProfileStrengthsInYamlNameKnownProfilesAndStayNonNegative()
 		{

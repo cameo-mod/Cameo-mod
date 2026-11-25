@@ -65,6 +65,9 @@ namespace OpenRA.Mods.CA.Traits
 		public static int ShareBoost(int share, int bestShare, int strengthPct) =>
 			share <= 0 || bestShare <= 0 || strengthPct <= 0 ? 100 : 100 + (int)((long)strengthPct * Math.Min(share, bestShare) / bestShare);
 
+		/// <summary>c3, pay-as-you-go: the FIRST build of a listed type queues with any bank above 0 (OpenRA pays progressively), like TECHCHAIN-PAYGO; no savings hold.</summary>
+		public static bool FirstAdmits(int bankLeft) => bankLeft > 0;
+
 		/// <summary>Percent product of two percent terms.</summary>
 		public static int MulPct(int a, int b) => (int)Math.Clamp((long)a * b / 100, 0, 100_000);
 

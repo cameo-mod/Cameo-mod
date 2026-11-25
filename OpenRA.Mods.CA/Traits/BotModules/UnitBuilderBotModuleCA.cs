@@ -590,6 +590,7 @@ namespace OpenRA.Mods.CA.Traits
 		readonly HashSet<string> rollOrdered = new(StringComparer.Ordinal);
 		string rollPersonality = "";
 		bool rollFirst;
+		readonly Dictionary<string, (string Name, int Tick)> rollFirstOpen = new(StringComparer.Ordinal);
 		bool firstItemRoundPass;
 		readonly Dictionary<string, string> firstRoundSavedCursors = new(StringComparer.Ordinal);
 		int unitMixTick = -1;
@@ -1645,7 +1646,12 @@ namespace OpenRA.Mods.CA.Traits
 
 					// Sol F2: an unaffordable pick retries the remaining candidates — the
 					// batch keeps the bank accounting so a cheaper feasible one can land.
-					var cost = Math.Max(0, queue.GetProductionCost(unit));
+					var fullCost = Math.Max(0, queue.GetProductionCost(unit));
+
+					// UNIT-ALL-01 c3 (Opus 11-25): the FIRST build of a listed type is pay-as-you-go like TECHCHAIN-PAYGO: it queues with any bank above 0 (OpenRA pays progressively) instead of
+					// waiting for the full price, so the gates below see cost 0 for it; ChooseRollUnit lets one first-of-each be open per queue. Everything else keeps the full gates.
+					var paygo = roll && rollFirst && UnitRoll.FirstAdmits(batch.BankLeft);
+					var cost = paygo ? 0 : fullCost;
 					if (!batch.Affords(cost) || !ReserveAdmits(batch, cost)
 						|| depthQueue && held > 0 && !QueueDepthCA.CashAdmits(batch.BankLeft, unpaidQueued, cost))
 					{
@@ -1659,7 +1665,10 @@ namespace OpenRA.Mods.CA.Traits
 					bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
 					NotifyStarted(name, queue.Info.Type);
 					counters.Record(unit);
-					batch.Reserve(queue, cost);
+					if (paygo)
+						rollFirstOpen[queue.Actor.ActorID + "|" + queue.Info.Type] = (name, world.WorldTick);
+
+					batch.Reserve(queue, fullCost);
 					if (depthQueue)
 						loadedTicks += queue.GetBuildTime(unit, BuildableInfo.GetTraitForQueue(unit, queue.Info.Type));
 					SpendLimitHeadroom(batch, name);
@@ -2481,7 +2490,22 @@ namespace OpenRA.Mods.CA.Traits
 			if (items.Count == 0)
 				return null;
 
+			// c3: at most one first-of-each is open per queue; while it is queued the other never-built types wait (they are not rolled as ordinary picks either).
+			var openKey = queue.Actor.ActorID + "|" + queue.Info.Type;
+			var firstOpen = rollFirstOpen.TryGetValue(openKey, out var open) && (open.Tick == world.WorldTick || queue.AllQueued().Any(i => i.Item == open.Name));
+			if (!firstOpen)
+				rollFirstOpen.Remove(openKey);
+
 			var pool = items.Where(a => !rollOrdered.Contains(a.Name)).ToList();
+			if (firstOpen)
+			{
+				items = items.Where(a => rollOrdered.Contains(a.Name)).ToList();
+				if (items.Count == 0)
+					return null;
+
+				pool = [];
+			}
+
 			rollFirst = pool.Count > 0;
 			if (!rollFirst)
 				pool = items;
