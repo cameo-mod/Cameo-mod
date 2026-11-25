@@ -47,7 +47,8 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var w = Roll(floor: 10);
 			var raw = Roll(floor: 0);
-			var mean = raw.Sum() / raw.Length;
+			// V08E: the floor is a share of the mean RAW weight (fraction x 100% x 100%) before the lift to 1; raw[7] holds that lift (0 -> 1), so the mean comes from the fractions
+			var mean = Fractions.Sum() * 100.0 / Fractions.Length;
 			Assert.That(w[7], Is.EqualTo(mean * 10 / 100).Within(1e-9), "the zero-fraction orca takes the floor");
 			Assert.That(w[0], Is.EqualTo(raw[0]).Within(1e-9), "a heavy type is untouched");
 			Assert.That(w[4], Is.GreaterThanOrEqualTo(mean * 10 / 100));
@@ -148,7 +149,8 @@ namespace OpenRA.Mods.Cameo.Test
 			var body = u.Substring(start, end - start);
 			Assert.That(body, Does.Contain("var table = Info.UnitsToBuild;"));
 			Assert.That(body, Does.Contain("a.HasTraitInfo<HarvesterInfo>()"), "harvesters are outside the roll (HARV-01)");
-			Assert.That(body, Does.Contain("ShouldBuildReject(a.Name, true, queue.Info.Type) != null"), "delay, interval, limit, capturer and item-aware caps still apply");
+			// V08E re-pin: ded7416c keeps the reject reason for RollExclude; the gate is unchanged
+			Assert.That(body, Does.Contain("var rejectedBy = ShouldBuildReject(a.Name, true, queue.Info.Type);\n\t\t\t\tif (rejectedBy != null)"), "delay, interval, limit, capturer and item-aware caps still apply");
 			Assert.That(body, Does.Not.Contain("GetUnitsToBuildForCategory"), "the derived or composition table never replaces the yaml fractions");
 			Assert.That(body, Does.Not.Contain("ChooseCounter").And.Not.Contain("ChooseWaveMixRole").And.Not.Contain("ChooseRoleDeficit"));
 			Assert.That(body, Does.Contain("fractions[i] = RollParameters.Fraction(name);"));
@@ -513,7 +515,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(Settle(r2, 30, [], grants, [], []), Is.EqualTo(new[] { ("promo_cond", UpgradeCompletions.SourceApprox) }), "the Seen bit survived");
 
 			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
-			Assert.That(u, Does.Contain("foreach (var pendingName in upgradeDone.PendingNames)\n\t\t\t\tinProduction.Add(pendingName);"));
+			// V08E re-pin: 1ce52d20 put the reservation behind upg_once_registry (onceOn), as its own pin in TheOnceRegistryHasItsOwnToggleThatShipsOffAndTheDevRowsDoNotDependOnIt states
+			Assert.That(u, Does.Contain("if (onceOn)\n\t\t\t\tforeach (var pendingName in upgradeDone.PendingNames)\n\t\t\t\t\tinProduction.Add(pendingName);"));
 		}
 
 		[Test]
@@ -704,6 +707,12 @@ namespace OpenRA.Mods.Cameo.Test
 				var start = u.IndexOf(signature, StringComparison.Ordinal);
 				Assert.That(start, Is.GreaterThan(0), signature);
 				var open = u.IndexOf('{', start);
+				// V08E: an expression-bodied member (=> ...;) on the signature line ends at its ';' - it has no braces of its own
+				var arrow = u.IndexOf("=>", start, StringComparison.Ordinal);
+				var eol = u.IndexOf('\n', start);
+				if (arrow >= 0 && arrow < eol && (open < 0 || arrow < open))
+					return u.Substring(start, u.IndexOf(';', arrow) - start + 1);
+
 				var depth = 0;
 				for (var i = open; i < u.Length; i++)
 				{
@@ -760,7 +769,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(u, Does.Contain("public readonly string[] UpgradeServiceQueues = { \"Promotions\", \"Upgrades\", \"Research\", \"Addons\" };"), "every upgrade-like queue type is served");
 			Assert.That(u, Does.Contain("if (!UpgradeQueueServed(category))"), "BuildingAddons only with its toggle");
 			Assert.That(u, Does.Contain("upgradeDone.Observe(item.Name, world.WorldTick, item.TraitInfoOrDefault<BuildableInfo>()?.Prerequisites);"));
-			Assert.That(u, Does.Contain("if (upgradeDone.IsDone(item.Name))\n\t\t\t\t\t\t\t\tcontinue;"), "a done type is not started again");
+			// V08E re-pin: 1ce52d20 gates the once-done skip on upg_once_registry (onceOn)
+			Assert.That(u, Does.Contain("if (onceOn && upgradeDone.IsDone(item.Name))\n\t\t\t\t\t\t\t\tcontinue;"), "a done type is not started again");
 			Assert.That(Source("mods/CA/Traits/BotModules/BotModuleLogic/AblationIds.UpgradeQueue.cs"), Does.Contain("\"upg_building_addons\""));
 			Assert.That(u, Does.Contain("bool UpgradeQueueServed(string category) =>\n\t\t\tcategory != \"BuildingAddons\" || (Info.UpgradeBuildingAddons"));
 
@@ -860,7 +870,8 @@ namespace OpenRA.Mods.Cameo.Test
 				Assert.That(body, Does.Not.Contain(yaml), yaml + " is read through RollParameters, so a learner override applies");
 
 			Assert.That(u, Does.Contain("RollParameters.Strength(UnitRoll.ProfileNames[profile])"));
-			Assert.That(u, Does.Contain("new UnitRollTable(Info.UnitsToBuild, Info.UnitRollBias, Info.UnitRollBiasLate, Info.UnitRollProfiles, Info.UnitRollFloorPct, Info.UnitRollRampTicks)"));
+			// V08E re-pin: 686ca394 added the FirstBoost arguments, still all read from Info
+			Assert.That(u, Does.Contain("new UnitRollTable(Info.UnitsToBuild, Info.UnitRollBias, Info.UnitRollBiasLate, Info.UnitRollProfiles, Info.UnitRollFloorPct, Info.UnitRollRampTicks,\n\t\t\t\tInfo.UnitRollFirstBoost, Info.UnitRollFirstRampTicks, Info.UnitRollFirstCap)"));
 		}
 
 		// Opus/Haiku 11-25: DEV rows that show whether every available upgrade / promotion / research / add-on gets researched.
@@ -872,7 +883,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(dev, Does.Contain("cov.UpgradeAvailable.TryAdd(name, queue.Info.Type)"), "once per seat and type");
 			Assert.That(dev, Does.Contain("EmitUpgradeRow(seat, \"ub_upgrade_available\", name, queue.Info.Type)"));
 			Assert.That(dev, Does.Contain("cov.UpgradeDone.Add(pair.Key)"));
-			Assert.That(dev, Does.Contain("EmitUpgradeRow(seat, \"ub_upgrade_done\", pair.Key, pair.Value)"));
+			// V08E re-pin: ded7416c adds the completing registry's source as the last argument
+			Assert.That(dev, Does.Contain("EmitUpgradeRow(seat, \"ub_upgrade_done\", pair.Key, pair.Value, cov.UpgradeRegistries.Select(r => r.Source(pair.Key)).FirstOrDefault(x => x != null));"));
 			Assert.That(dev, Does.Contain("cov.UpgradeRegistries.Any(r => r.Completed(pair.Key))"), "the module's registry decides completion");
 
 			// the row is written only for a type first seen available, so a plain unit or building never writes it

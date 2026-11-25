@@ -400,7 +400,8 @@ namespace OpenRA.Mods.Cameo.Test
 			}
 
 			var plan = Source(PlanFile);
-			Assert.That(plan, Does.Contain("feasibility.Feasible(candidate, out var admitted) && admitted != null && feasibility.TryClaim(candidate, admitted)"));
+			// V08E re-pin (a3bdd1cd split the test into feasible + the claim, adding the OfferRejected reason; the order and short-circuit are unchanged)
+			Assert.That(plan, Does.Contain("var feasible = feasibility.Feasible(candidate, out var admitted) && admitted != null;\n\t\t\t\t\tif (feasible && feasibility.TryClaim(candidate, admitted))"));
 			Assert.That(plan, Does.Contain(".OrderBy(kv => kv.Key, StringComparer.Ordinal).Shuffle(rng)"));
 		}
 	}
