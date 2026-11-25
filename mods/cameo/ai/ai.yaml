@@ -4642,6 +4642,10 @@ Player:
 		RefinerySpacingFallbackCells: 5
 		YardRadiusCells: 15
 		ReachRefreshTicks: 750
+		# ref_park_evaluated_only (Opus 11-25, REF_PEAK_RCA_01): a want the building queue never offered is waiting, not stuck (V08D: 3000 parked every 6000 ticks on seats 4, 6, 7). Generic planner block; RefDemand gates it.
+		RefParkEvaluatedOnly: true
+		# ref_rebuild_lost (Opus 11-25, REF_PEAK_RCA_01): a lost refinery's record ends when an own refinery stands again in range of the lost cell (V08D seat_7).
+		RefRebuildLost: true
 		# BZ_production_scaling: up to ScalingMcvMaxExtra extra construction MCVs while windowed income
 		# holds over the difficulty line, a far field is free and army parity admits; also parks MCV
 		# site handouts whose deploy annulus holds no placeable cell (MCV-EXPAND-IDLE H1).

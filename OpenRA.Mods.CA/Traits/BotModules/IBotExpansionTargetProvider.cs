@@ -196,6 +196,11 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>EX-2: the target field is in reach and unclaimed, so a refinery should go there next.</summary>
 		bool WantsRefineryAtExpansionTarget { get; }
 
+		/// <summary>ref_park_evaluated_only: the building queue just offered the wanted refinery (the stage ran with a producible refinery and every gate admitted it). The planner counts a stuck re-plan only after such an offer.</summary>
+		void RefineryPickOffered()
+		{
+		}
+
 		/// <summary>EX-2: how close (cells) to the target a refinery must stand to claim the field.</summary>
 		int ExpansionTargetClaimRadius { get; }
 

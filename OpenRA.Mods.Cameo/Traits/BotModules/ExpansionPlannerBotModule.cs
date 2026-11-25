@@ -275,6 +275,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("REF-FIELD-02: radius (cells) around a locked field's anchor in which a visible enemy combat actor counts as a threat.")]
 		public readonly int RefineryLostThreatRadiusCells = 10;
 
+		[Desc("ref_rebuild_lost (row of the same name): a loss record (and its lock) ends as soon as an own refinery stands again within the serve radius of the lost cell,",
+			"instead of lasting until RefineryLostMemoryTicks. The lock time and the quiet check on visible enemy combat actors (static defences included) are unchanged. Needs RefDemand. False = as before.")]
+		public readonly bool RefRebuildLost = false;
+
 		[Desc("REF-DEMAND-01 (Opus ruling + user final spec 2026-11-25, row ref_demand): under FieldCoverage the law's anchors are resource ZONES (every field's",
 			"cells and spreader spots cut into zones of RefineryZoneRadius, built once) and the in-reach set is the DEMAND set — a zone within YardRadiusCells of an",
 			"own construction yard (measured from the yard), reachable by a harvester from that yard (cached connectivity, no path search), not served by an allied",
@@ -308,6 +312,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("FE-1: replans an anchor may stay wanted with no refinery gained before it is parked for ParkTicks",
 			"(a claim whose placement keeps failing must not retry forever).")]
 		public readonly int AnchorStuckReplans = 12;
+
+		[Desc("ref_park_evaluated_only (row of the same name): an anchor wanted for AnchorStuckReplans re-plans is parked only when the building queue OFFERED the refinery in those re-plans.",
+			"A want the stage never reached (queue busy, economy gate holding, an earlier stage taking the slot) is waiting, not failing. Needs RefDemand. False = every re-plan counts, as before.")]
+		public readonly bool RefParkEvaluatedOnly = false;
 
 		[Desc("REPAIR-B3: re-offers of the same uncommitted claim before the anchor is parked for",
 			"RefineryClaimFailParkTicks (a claim whose site search keeps returning null must not churn).")]
@@ -843,6 +851,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		CPos? anchorClaimFieldCenter;
 		(CPos? Anchor, int Replans, int Refineries) anchorStuck = (null, 0, 0);
 
+		// ref_park_evaluated_only: set by the base builder when its stage offered the wanted refinery; read and cleared by the next re-plan.
+		AblationLatch ablateParkEvaluated;
+		bool refineryOfferedSinceReplan;
+		bool ParkEvaluatedOnlyOn => Info.RefParkEvaluatedOnly && RefDemandArmed && !ablateParkEvaluated.Off(player, AblationIds.RefParkEvaluatedOnly);
+
+		void IBotExpansionTargetProvider.RefineryPickOffered() => refineryOfferedSinceReplan = true;
+
 		// REF-1 (§12.24 v2): the field model — connected components of the map's initial valuable resource cells, built
 		// once — the field id of every anchor, the fields' cells indexed by field id (synthetic single-spreader fields
 		// have none), the claimable anchors of the last re-plan in claim order, and the pending commits (a produced
@@ -868,6 +883,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int fieldGateTick = -1;
 		List<CPos> fieldGateCells;
 		bool RefineryFieldGateOn => Info.RefineryFieldGate && LawActive && !ablateRefineryFieldGate.Off(player, AblationIds.RefineryFieldGate);
+
+		// ref_rebuild_lost: a loss record ends when an own refinery stands again within the serve radius of the lost cell (the loss is replaced).
+		AblationLatch ablateRebuildLost;
+		bool RebuildLostOn => Info.RefRebuildLost && RefDemandArmed && !ablateRebuildLost.Off(player, AblationIds.RefRebuildLost);
 
 		// ECON-A-FIX (R6): anchor holds owned by expansion demands — a demand's refinery takes its anchor
 		// off every other claim while the item is still queued. The table is world-free; the probes below
@@ -1620,9 +1639,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (!refineryCells.Contains(c))
 					fieldGateLossTick[c] = tick;
 
+			var appeared = RebuildLostOn && fieldGateLossTick.Count > 0 ? refineryCells.Where(c => !fieldGateSeenRefineries.Contains(c)).ToList() : null;
 			fieldGateSeenRefineries.Clear();
 			foreach (var c in refineryCells)
 				fieldGateSeenRefineries.Add(c);
+
+			if (appeared != null && appeared.Count > 0)
+			{
+				var serve = Info.AnchorServeRadiusCells > 0 ? Info.AnchorServeRadiusCells : Info.ClaimRadiusCells;
+				foreach (var c in ReplacedLosses(fieldGateLossTick, appeared, tick, (r, lost) => RefineryCoverageOracle.WithinServeRadius(r, lost, serve)))
+				{
+					fieldGateLossTick.Remove(c);
+					fieldGateThreatTick.Remove(c);
+				}
+			}
 
 			var radius = WDist.FromCells(Info.RefineryLostThreatRadiusCells);
 			foreach (var c in fieldGateLossTick.Keys.ToList())
@@ -1638,6 +1668,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						&& a.Owner.RelationshipWith(player) == PlayerRelationship.Enemy && a.Info.HasTraitInfo<AttackBaseInfo>() && a.CanBeViewedByPlayer(player)))
 					fieldGateThreatTick[c] = tick;
 			}
+		}
+
+		/// <summary>
+		/// ref_rebuild_lost: the lost cells whose loss is replaced: a refinery in <paramref name="appeared"/> (cells that were not standing at the previous update)
+		/// within serve range of the lost cell, the loss recorded BEFORE <paramref name="now"/> (a refinery that vanishes and another that shows up in the same update is not a replacement).
+		/// Pure, for the tests.
+		/// </summary>
+		public static List<CPos> ReplacedLosses(IReadOnlyDictionary<CPos, int> lossTicks, IReadOnlyCollection<CPos> appeared, int now, Func<CPos, CPos, bool> within)
+		{
+			var replaced = new List<CPos>();
+			foreach (var kv in lossTicks)
+				if (kv.Value < now && appeared.Any(r => within(r, kv.Key)))
+					replaced.Add(kv.Key);
+
+			return replaced;
 		}
 
 		bool AnchorCommittedForClaims(int i, int tick)
@@ -3750,6 +3795,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
+		/// ref_park_evaluated_only: <see cref="AnchorStuckNext"/>, except that with <paramref name="evaluatedOnly"/> a re-plan in which the building queue did not offer the refinery
+		/// (<paramref name="offered"/> false) is not a failed claim: the count stands (restarts when a refinery was gained, one is in production or the anchor changed) and the anchor is never parked by it.
+		/// Off = AnchorStuckNext exactly. Pure, for the tests.
+		/// </summary>
+		public static (int Replans, bool Park) AnchorStuckEvaluated(bool evaluatedOnly, bool offered, bool sameAnchor, int refineryCount,
+			int previousRefineries, int queued, int previousReplans, int maxReplans)
+		{
+			if (!evaluatedOnly || offered)
+				return AnchorStuckNext(sameAnchor, refineryCount, previousRefineries, queued, previousReplans, maxReplans);
+
+			var progress = refineryCount > previousRefineries || queued > 0;
+			return (sameAnchor && !progress ? previousReplans : 0, false);
+		}
+
+		/// <summary>
 		/// R7: under the anchor law the field claim is always null and the law's want carries through; classic
 		/// claims the best in-reach field and wants a refinery exactly when one exists. Pure, for the tests.
 		/// </summary>
@@ -4772,7 +4832,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var anchor = anchors[order[0]];
 
 			// Loop guard: the same anchor wanted replan after replan with no refinery gained and none in production.
-			var (replans, parkAnchor) = AnchorStuckNext(anchorStuck.Anchor == anchor, refineryCells.Count,
+			var offered = refineryOfferedSinceReplan;
+			refineryOfferedSinceReplan = false;
+			var (replans, parkAnchor) = AnchorStuckEvaluated(ParkEvaluatedOnlyOn, offered, anchorStuck.Anchor == anchor, refineryCells.Count,
 				anchorStuck.Refineries, queued, anchorStuck.Replans, Info.AnchorStuckReplans);
 			anchorStuck = (anchor, replans, refineryCells.Count);
 			if (parkAnchor)
