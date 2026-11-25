@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
+using OpenRA.Mods.Cameo.Dev;
 using OpenRA.Support;
 
 namespace OpenRA.Mods.Cameo.Test
@@ -130,9 +131,12 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void OnlyTheGenericBaseBuilderArmsThemAndTheRowsAreRegistered()
 		{
+			// V08D (Opus ruling A 11-25): BbQueueSplit ships OFF until the shared-queue classification fix (BuildingAddons is in both sets); REF-S2 stays armed.
+			Assert.That(FieldOrNull(PlayerNode("BaseBuilderBotModuleCA@generic"), "BbQueueSplit"), Is.EqualTo("false"));
 			foreach (var key in new[] { "BbQueueSplit", "BbRefineryAtS2" })
 			{
-				Assert.That(FieldOrNull(PlayerNode("BaseBuilderBotModuleCA@generic"), key), Is.EqualTo("true"), key);
+				if (key == "BbRefineryAtS2")
+					Assert.That(FieldOrNull(PlayerNode("BaseBuilderBotModuleCA@generic"), key), Is.EqualTo("true"), key);
 				Assert.That(FieldOrNull(PlayerNode("BaseBuilderBotModuleCA@classic"), key), Is.Null, key);
 			}
 
