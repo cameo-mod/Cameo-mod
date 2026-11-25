@@ -131,6 +131,35 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"target choice measure from the nearest of them) and the allied buildable-area buildings join the frontier the crawl closes on the aim from. Needs CrawlAdvanceOnly. False = own yards and own frontier only.")]
 		public readonly bool CrawlAllyAnchor = false;
 
+		[Desc("crawl_sticky_expiry (Opus V08G ruling a): a committed crawl target (CrawlTargetSticky) is released and parked for CrawlStickyExpiryTicks when our buildable-area frontier gets no closer to it for that long,",
+			"for ANY reason (a refused want, a gate, a threat). Needs CrawlTargetSticky and CrawlAdvanceOnly or UseCrawlSafety (the park reads one of them). False = a commit lasts until reached, invalid or parked.")]
+		public readonly bool CrawlStickyExpiry = false;
+
+		[Desc("crawl_sticky_expiry: ticks without frontier progress before the commit is released, and how long the field is then parked.")]
+		public readonly int CrawlStickyExpiryTicks = 3000;
+
+		[Desc("crawl_pause_bound (Opus V08G ruling b, BS-03 c7 semantics): the crawl pauses while the CRAWL-SAFETY gate refuses it for enemy value at the frontier or aim; the pause lasts at most CrawlMaxPause ticks",
+			"(900 + 150 r: Noob 750, Easiest 900, Hard 1500, God 2250), then the target is parked for CrawlPauseParkTicks and the commit released. The escort request is at least CrawlEscortValue (900 + 150 r).",
+			"Mandatory power never pauses. Needs UseCrawlSafety. False = the safety refusals as before, unbounded.")]
+		public readonly bool CrawlPauseBound = false;
+
+		[Desc("crawl_pause_bound: the longest pause at the easiest / hardest tier (equal steps; noob one step below easiest) and for an owner off the ladder.")]
+		public readonly int CrawlMaxPauseEasiest = 900;
+
+		public readonly int CrawlMaxPauseHardest = 2250;
+
+		public readonly int CrawlMaxPauseUnranked = 1500;
+
+		[Desc("crawl_pause_bound: the escort request value floor at the easiest / hardest tier (900 + 150 r) and for an owner off the ladder.")]
+		public readonly int CrawlEscortValueEasiest = 900;
+
+		public readonly int CrawlEscortValueHardest = 2250;
+
+		public readonly int CrawlEscortValueUnranked = 1500;
+
+		[Desc("crawl_pause_bound: how long the target stays parked after its pause ran out.")]
+		public readonly int CrawlPauseParkTicks = 3000;
+
 		[Desc("CS: re-plans an unexplored aim may hold the link want while scouts close in. 0 = hold until",
 			"explored without bound (the interest cell keeps drawing scouts either way).")]
 		public readonly int ScoutWaitReplans = 4;
@@ -1040,6 +1069,86 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return true;
 		}
 
+		// crawl_sticky_expiry / crawl_pause_bound: progress and pause state of the committed crawl.
+		AblationLatch ablateCrawlExpiry;
+		AblationLatch ablateCrawlPause;
+		bool CrawlStickyExpiryOn => CrawlTargetStickyOn && Info.CrawlStickyExpiry && (Info.UseCrawlSafety || CrawlAdvanceOnlyOn) && !ablateCrawlExpiry.Off(player, AblationIds.CrawlStickyExpiry);
+		bool CrawlPauseBoundOn => Info.CrawlPauseBound && Info.UseCrawlSafety && Info.DriveBaseCrawl && LawActive && !ablateCrawlPause.Off(player, AblationIds.CrawlPauseBound);
+		List<CPos> crawlOwnCells = new();
+		int crawlProgressTick;
+		int crawlProgressDist = int.MaxValue;
+		int crawlPauseSince = -1;
+		int crawlPauseField = -1;
+		bool safetyThreatRefused;
+
+		int CrawlMaxPauseTicks() => BotDifficultyLadder.Scale(Info.CrawlMaxPauseEasiest, Info.CrawlMaxPauseHardest, player, Info.CrawlMaxPauseUnranked);
+		int CrawlEscortValue() => BotDifficultyLadder.Scale(Info.CrawlEscortValueEasiest, Info.CrawlEscortValueHardest, player, Info.CrawlEscortValueUnranked);
+
+		/// <summary>crawl_sticky_expiry: the frontier got strictly closer to the aim than ever since the commit. Pure, for the tests.</summary>
+		public static bool CrawlProgressed(int distance, int bestDistance) => distance < bestDistance;
+
+		/// <summary>crawl_sticky_expiry: no progress for <paramref name="ticks"/> (0 = never). Pure, for the tests.</summary>
+		public static bool CrawlStalled(int tick, int lastProgressTick, int ticks) => ticks > 0 && tick - lastProgressTick >= ticks;
+
+		/// <summary>crawl_pause_bound: the pause start tick after this plan (-1 = not paused; an ongoing pause keeps its start). Pure, for the tests.</summary>
+		public static int CrawlPauseStart(bool threatPaused, int pausedSince, int tick) => !threatPaused ? -1 : pausedSince >= 0 ? pausedSince : tick;
+
+		/// <summary>crawl_pause_bound: the pause has lasted <paramref name="maxTicks"/> (0 = unbounded). Pure, for the tests.</summary>
+		public static bool CrawlPauseExpired(int pausedSince, int tick, int maxTicks) => pausedSince >= 0 && maxTicks > 0 && tick - pausedSince >= maxTicks;
+
+		/// <summary>crawl_pause_bound: the escort request value: the larger of the threat and the link cost, and with the row on at least the ladder value. Pure, for the tests.</summary>
+		public static int EscortRequestValue(bool rowOn, int threat, int linkCost, int ladderValue) =>
+			rowOn ? Math.Max(Math.Max(threat, linkCost), ladderValue) : Math.Max(threat, linkCost);
+
+		int CrawlDistanceTo(CPos center)
+		{
+			var best = int.MaxValue;
+			foreach (var c in crawlOwnCells)
+				best = Math.Min(best, (c - center).Length);
+
+			return best;
+		}
+
+		void CommitCrawl(FieldScore f)
+		{
+			if (crawlCommitIndex == f.Index)
+				return;
+
+			crawlCommitIndex = f.Index;
+			crawlProgressTick = world.WorldTick;
+			crawlProgressDist = CrawlDistanceTo(f.Center);
+			crawlPauseSince = -1;
+			crawlPauseField = f.Index;
+		}
+
+		// crawl_sticky_expiry: a commit whose frontier distance did not shrink for CrawlStickyExpiryTicks is released and its field parked (removed from this plan's list too, or the choice would re-pick it).
+		void ExpireStalledCrawl(List<FieldScore> scores)
+		{
+			var idx = crawlCommitIndex;
+			var at = scores.FindIndex(s => s.Index == idx);
+			if (at < 0)
+				return;
+
+			var tick = world.WorldTick;
+			var dist = CrawlDistanceTo(scores[at].Center);
+			if (CrawlProgressed(dist, crawlProgressDist))
+			{
+				crawlProgressDist = dist;
+				crawlProgressTick = tick;
+				return;
+			}
+
+			if (!CrawlStalled(tick, crawlProgressTick, Info.CrawlStickyExpiryTicks))
+				return;
+
+			crawlParkedUntil[idx] = tick + Info.CrawlStickyExpiryTicks;
+			scores.RemoveAt(at);
+			crawlCommitIndex = -1;
+#if CAMEO_DEV_LOGGING
+			Log.Write("debug", $"AI ({player.ClientIndex}): CRAWL-EXPIRY released and parked field {idx} for {Info.CrawlStickyExpiryTicks} ticks: no frontier progress for {tick - crawlProgressTick} ticks (frontier distance {dist}, best {crawlProgressDist}), at tick {tick}");
+#endif
+		}
+
 		FieldScore? ChooseTarget(List<FieldScore> scores)
 		{
 			var sticky = CrawlTargetStickyOn;
@@ -1049,6 +1158,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				crawlCommitIndex = -1;
 				return scores.Count > 0 ? scores[0] : null;
 			}
+
+			if (sticky && CrawlStickyExpiryOn && crawlCommitIndex >= 0)
+				ExpireStalledCrawl(scores);
 
 			var at = ChooseCrawlTarget(scores, sticky ? crawlCommitIndex : -1, capped ? CrawlMaxDistanceCells() : -1, CrawlAnchorCells(), out var keep);
 			if (!keep)
@@ -3486,6 +3598,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			scores.Sort(CompareFieldScore);
 			LastScores = scores;
 			var previous = Target?.Index;
+			crawlOwnCells = buildingCells;
 			Target = ChooseTarget(scores);
 			if (Target == null)
 				Idle($"no free field ({fieldIndexCount} map indices, {initialCells.Count} with resources, {owned} already ours)");
@@ -3501,7 +3614,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				UpdateAnchorClaim(refineryCells, refineryTiles, buildingTiles, refineryDocks);
 				UpdateCrawlWant(crawlLink, defence, buildingTiles, buildingCells, guards, defences);
 				if (CrawlTargetStickyOn && wantedLinkBuilding != null && Target != null)
-					crawlCommitIndex = Target.Value.Index;
+					CommitCrawl(Target.Value);
 			}
 			else
 			{
@@ -4036,6 +4149,32 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var safetyAdmits = !Info.UseCrawlSafety
 				|| UpdateCrawlSafety(link, defence, frontier, buildingCells, guards, defences);
 
+			// crawl_pause_bound (Opus V08G ruling b): a crawl the safety gate keeps refusing for enemy value at the frontier or aim is paused for at most CrawlMaxPauseTicks, then the target
+			// is parked and the commit released. Mandatory power never pauses (the link is wanted anyway); a crawl that is admitted, or refused for another reason, resets the pause.
+			if (CrawlPauseBoundOn)
+			{
+				var pauseTick = world.WorldTick;
+				if (crawlPauseField != Target.Value.Index)
+				{
+					crawlPauseField = Target.Value.Index;
+					crawlPauseSince = -1;
+				}
+
+				crawlPauseSince = CrawlPauseStart(!mandatoryPower && !safetyAdmits && safetyThreatRefused, crawlPauseSince, pauseTick);
+				if (CrawlPauseExpired(crawlPauseSince, pauseTick, CrawlMaxPauseTicks()))
+				{
+					crawlParkedUntil[Target.Value.Index] = pauseTick + Info.CrawlPauseParkTicks;
+					crawlCommitIndex = -1;
+					crawlPauseSince = -1;
+					wantedLinkBuilding = null;
+					frontSafety.ResetCorridor();
+#if CAMEO_DEV_LOGGING
+					Log.Write("debug", $"AI ({player.ClientIndex}): CRAWL-PAUSE ended: target field {Target.Value.Index} parked for {Info.CrawlPauseParkTicks} ticks after a pause of {CrawlMaxPauseTicks()} ticks ({safetyRefusal}), at tick {pauseTick}");
+#endif
+					return;
+				}
+			}
+
 			if (!Info.BoundCrawlLinkSupply)
 			{
 				// REF-1 B1 legacy path: the want rides unbounded (switch-off keeps the traced behaviour);
@@ -4110,6 +4249,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			var tick = world.WorldTick;
 			safetyRefusal = null;
+			safetyThreatRefused = false;
 
 			// (d) the corridor watch — own buildable-area cells near the frontier->aim segment whose
 			// disappearance since the last re-plan is a lost link; a farmed cell parks this target's
@@ -4178,6 +4318,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					{
 						wantedFrontDefence = defence.Info.Name;
 						frontDefenceCell = frontier.Value;
+						safetyThreatRefused = true;
 						return RefuseSafety($"front uncovered ({cover}<{Info.FrontCoverMinValue})");
 					}
 
@@ -4186,7 +4327,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					if (!FrontGuardAdmits(guard, threat, Info.FrontGuardPercent))
 					{
 						protectionRequests.Add(new BotProtectionRequest(frontier.Value,
-							Math.Max(threat, link.Cost), tick + Info.EscortRequestTicks));
+							EscortRequestValue(CrawlPauseBoundOn, threat, link.Cost, CrawlPauseBoundOn ? CrawlEscortValue() : 0), tick + Info.EscortRequestTicks));
+						safetyThreatRefused = true;
 						return RefuseSafety($"front contested (guard {guard} vs {threat})");
 					}
 				}

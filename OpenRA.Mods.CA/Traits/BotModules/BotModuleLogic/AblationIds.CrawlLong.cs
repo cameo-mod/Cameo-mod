@@ -24,5 +24,12 @@ namespace OpenRA.Mods.CA.Traits
 		// BS-03 c9 port (light team crawl, Opus V08G): with the lobby option allybuild on, the visible allied construction yards are crawl anchors next to our own (the cap and the target choice)
 		// and the allied buildable-area buildings are part of the frontier the crawl closes on the aim from. Off = own yards and own frontier only.
 		public const string CrawlAllyAnchor = "crawl_ally_anchor";
+
+		// Opus V08G ruling (a): a committed crawl target is released (and parked) when the own frontier gets no closer to it for CrawlStickyExpiryTicks, for ANY reason. Off = a commit lasts until reached/invalid/parked.
+		public const string CrawlStickyExpiry = "crawl_sticky_expiry";
+
+		// Opus V08G ruling (b), BS-03 c7 semantics: while the safety gate refuses the crawl because enemy value stands at the frontier or aim, the crawl is paused for at most CrawlMaxPauseTicks
+		// (900 + 150 r), then the target is parked and the commit released; the escort request is at least CrawlEscortValue (900 + 150 r). Off = the safety refusals as before, unbounded.
+		public const string CrawlPauseBound = "crawl_pause_bound";
 	}
 }

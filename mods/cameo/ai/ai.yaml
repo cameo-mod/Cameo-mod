@@ -4602,6 +4602,10 @@ Player:
 		CrawlTargetSticky: true
 		# crawl_ally_anchor (BS-03 c9 port, light team crawl, Opus V08G): with allybuild on, allied yards are crawl anchors and allied buildable-area buildings join the crawl frontier.
 		CrawlAllyAnchor: true
+		# crawl_sticky_expiry (Opus V08G ruling a): a committed crawl target is released and parked after 3000 ticks without frontier progress, for any reason.
+		CrawlStickyExpiry: true
+		# crawl_pause_bound (Opus V08G ruling b, BS-03 c7): a crawl paused for enemy value at the frontier is released and parked after 900 + 150 r ticks; the escort request is at least 900 + 150 r.
+		CrawlPauseBound: true
 		# Enabled for the maintainer's 2026-10-15 combined playtest (BY).
 		UseCrawlSafety: true
 		# EX-2: every field in reach gets a refinery, beyond the base builder's fixed optimum.

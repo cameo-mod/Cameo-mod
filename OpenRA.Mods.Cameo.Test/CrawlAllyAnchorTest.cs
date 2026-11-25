@@ -13,6 +13,8 @@ using System.IO;
 using System.Linq;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
+using OpenRA.Mods.Cameo.Dev;
+using OpenRA.Mods.Cameo.Traits.BotModules;
 using OpenRA.Support;
 
 namespace OpenRA.Mods.Cameo.Test
