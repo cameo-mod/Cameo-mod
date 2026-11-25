@@ -341,6 +341,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			return (fieldId, served ? 2 : 1, gap);
 		}
 
+		AblationLatch ablateAnchorFromDemand;
+
 		public ExpansionSnapshot Capture(OpenRA.Player player, IReadOnlyCollection<Actor> ownBuildings)
 		{
 			var world = player.World;
@@ -502,6 +504,18 @@ namespace OpenRA.Mods.Cameo.Traits
 			unservedIds.Sort();
 			snapshot.FieldsInReachUnservedIds = unservedIds.ToArray();
 			snapshot.CoverageMilli = fieldInReach.Count == 0 ? 0 : covered * 1000 / fieldInReach.Count;
+
+			// ref_anchor_from_demand: under REF-DEMAND the law's anchors are zones and its verdicts decide what is in reach, served and wanted; the counters above read the old
+			// reach model, so they said "4-10 fields unserved" while the law answered "adequate" (REF_PEAK_RCA_01). Armed, these counters (and the ids, now zone ids) come from the verdicts.
+			if (planner != null && !ablateAnchorFromDemand.Off(player, AblationIds.RefAnchorFromDemand) && planner.ZoneCountsForLog() is { } zoneCounts)
+			{
+				snapshot.FieldsInReach = zoneCounts.InReach;
+				snapshot.FieldsServed = zoneCounts.Served;
+				snapshot.FieldsInReachUnserved = zoneCounts.InReachUnserved;
+				snapshot.FieldsInReachUnservedIds = zoneCounts.InReachUnservedIds;
+				snapshot.AnchorsInReachUnserved = zoneCounts.AnchorsInReachUnserved;
+				snapshot.CoverageMilli = zoneCounts.CoverageMilli;
+			}
 
 			// The main base: the first construction yard seen (kept for the match); outposts are the yards beyond MainBaseRadiusCells of it.
 			if (mainConyard == null && conyards.Count > 0)

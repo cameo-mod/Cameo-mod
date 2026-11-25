@@ -331,6 +331,67 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return RefineryDemand.CountWithin(anchor, FriendlyRefineryCells(), Info.RefinerySpacingCells) > before;
 		}
 
+		/// <summary>ref_anchor_from_demand: the situation row's zone counters (record-only; counted per zone id).</summary>
+		public readonly struct ZoneLogCounts
+		{
+			public readonly int Zones, InReach, Served, InReachUnserved, AnchorsInReachUnserved, CoverageMilli;
+			public readonly int[] InReachUnservedIds;
+
+			public ZoneLogCounts(int zones, int inReach, int served, int inReachUnserved, int anchorsInReachUnserved, int coverageMilli, int[] inReachUnservedIds)
+			{
+				Zones = zones;
+				InReach = inReach;
+				Served = served;
+				InReachUnserved = inReachUnserved;
+				AnchorsInReachUnserved = anchorsInReachUnserved;
+				CoverageMilli = coverageMilli;
+				InReachUnservedIds = inReachUnservedIds;
+			}
+		}
+
+		/// <summary>
+		/// ref_anchor_from_demand: the REF-DEMAND verdicts as the situation row's counters. Per zone: in reach = in the yard radius and reachable (any verdict); served = an ally's refinery serves it
+		/// or it is at its cap (AlliedServed, ZoneCap); unserved in reach = the Demand verdict (what the law claims); covered = in reach or served. Anchors in reach unserved counts anchors, not zones.
+		/// Pure, for the tests. The first anchor of a zone speaks for the zone.
+		/// </summary>
+		public static ZoneLogCounts CountZones(IReadOnlyList<RefineryDemand.Verdict> verdicts, IReadOnlyList<int> zoneIds, IReadOnlyList<bool> inRadius, IReadOnlyList<bool> reachable)
+		{
+			var seen = new HashSet<int>();
+			var unserved = new List<int>();
+			int zones = 0, inReach = 0, served = 0, covered = 0, anchorsUnserved = 0;
+			for (var a = 0; a < verdicts.Count; a++)
+			{
+				var v = verdicts[a];
+				if (v == RefineryDemand.Verdict.Demand)
+					anchorsUnserved++;
+
+				var z = a < zoneIds.Count ? zoneIds[a] : -1;
+				if (z < 0 || !seen.Add(z))
+					continue;
+
+				zones++;
+				var reach = z < inRadius.Count && inRadius[z] && z < reachable.Count && reachable[z];
+				var isServed = v == RefineryDemand.Verdict.AlliedServed || v == RefineryDemand.Verdict.ZoneCap;
+				if (reach)
+					inReach++;
+				if (isServed)
+					served++;
+				if (reach || isServed)
+					covered++;
+				if (v == RefineryDemand.Verdict.Demand)
+					unserved.Add(z);
+			}
+
+			unserved.Sort();
+			return new ZoneLogCounts(zones, inReach, served, unserved.Count, anchorsUnserved, zones == 0 ? 0 : covered * 1000 / zones, unserved.ToArray());
+		}
+
+		/// <summary>ref_anchor_from_demand: the counters of the last verdicts, or null when REF-DEMAND is not armed or has no verdicts yet. Reads state only (no refresh), so DEV and release decide alike.</summary>
+		public ZoneLogCounts? ZoneCountsForLog() =>
+			RefDemandArmed && anchors.Count > 0 && demandVerdicts.Length == anchors.Count
+				? CountZones(demandVerdicts, anchorFieldIds, zoneInRadius, zoneReachable)
+				: null;
+
 		// ---- DEV only: every call below is compiled out of a release build, arguments included. ----
 		IBotRefineryDemandObserver[] demandObservers;
 
