@@ -4094,7 +4094,7 @@ namespace OpenRA.Mods.CA.Traits
 							? frontierTile
 							: crawlLaw?.CrawlFrontierAnchor ?? baseCenter;
 						var toward = findPos(actorType, distanceToBaseIsImportant, producer, anchor, crawlAim.Value,
-							advanceOnly ? 0 : baseBuilder.Info.MinBaseRadius, baseBuilder.Info.BaseCrawlRadius, bypassAdvisor: crawlLaw != null);
+							advanceOnly && frontierTiles.Count > 0 ? 0 : baseBuilder.Info.MinBaseRadius, baseBuilder.Info.BaseCrawlRadius, bypassAdvisor: crawlLaw != null);
 						if (advanceOnly && !(toward.Location != null && actorInfo.HasTraitInfo<GivesBuildableAreaInfo>()
 							&& BaseBuilderQueueEvalCA.AdvancesFrontier(actorInfo.TraitInfo<BuildingInfo>().Tiles(toward.Location.Value), frontierTiles, crawlAim.Value)))
 						{

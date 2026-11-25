@@ -90,7 +90,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var manager = Source(Dir + "BaseBuilderQueueManagerCA.cs");
 			Assert.That(manager, Does.Contain("var advanceOnly = crawlLaw != null && crawlLaw.CrawlAdvanceOnly;"));
-			Assert.That(manager, Does.Contain("advanceOnly ? 0 : baseBuilder.Info.MinBaseRadius, baseBuilder.Info.BaseCrawlRadius, bypassAdvisor: crawlLaw != null);"));
+			Assert.That(manager, Does.Contain("advanceOnly && frontierTiles.Count > 0 ? 0 : baseBuilder.Info.MinBaseRadius, baseBuilder.Info.BaseCrawlRadius, bypassAdvisor: crawlLaw != null);"));
 			Assert.That(manager, Does.Contain("if (crawlLaw.WantedLinkBuilding == actorType)\n\t\t\t\t\t\t\t\tcrawlLaw.CrawlLinkNoAdvance();"), "only the wanted link parks the target");
 			Assert.That(manager, Does.Contain("actorInfo.HasTraitInfo<GivesBuildableAreaInfo>()"), "a placement that gives no buildable area is no advance");
 
