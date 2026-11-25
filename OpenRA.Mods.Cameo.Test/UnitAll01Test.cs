@@ -765,6 +765,11 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var dev = Source("mods/Cameo.Dev/AiPlayerTelemetryDev.Coverage.cs");
 			Assert.That(dev, Does.Not.Contain("UpgradeOnce"), "the DEV coverage rows are independent of the toggle");
+
+			// V08F (Opus 11-25): armed for genericbot only - the yaml switch sits in the generic block, not in the classic one
+			var players = MiniYaml.FromString(Source("packaging/ai.yaml"), "ai").Single(n => n.Key == "Player").Value.Nodes;
+			Assert.That(players.Single(n => n.Key == "UnitBuilderBotModuleCA@generic").Value.Nodes.Any(n => n.Key == "UpgradeOnceRegistry" && n.Value.Value == "true"), Is.True);
+			Assert.That(players.Single(n => n.Key == "UnitBuilderBotModuleCA@classic").Value.Nodes.Any(n => n.Key == "UpgradeOnceRegistry"), Is.False);
 		}
 
 		// Opus 11-25: ub_pool_empty (DEV record only, no behaviour) + the ub_unit_roll OFF path stays the old one (classic byte-identical).
