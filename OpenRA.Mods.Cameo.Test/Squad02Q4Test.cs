@@ -228,7 +228,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(info, Does.Contain("public readonly int ArmyStalemateSignalTicks = 1500;"));
 
 			var pipe = RepoFile(Bots + "SquadManagerBotModuleCA.Pipeline02.cs");
-			Assert.That(pipe, Does.Contain("internal bool ArmyLaunchArbiterOn => ArmyPipelineOn && TeamLeadActive && !ablateSqLaunchArbiter.Off(Player, AblationIds.SqLaunchArbiter);"));
+			Assert.That(pipe, Does.Contain("internal bool ArmyLaunchArbiterOn => ArmyPipelineOn && TeamLeadCadenceActive && !ablateSqLaunchArbiter.Off(Player, AblationIds.SqLaunchArbiter);"));
 			Assert.That(pipe, Does.Contain("internal bool ArmyOrderEngagedOn => ArmyLaunchArbiterOn && !ablateSqOrderEngaged.Off(Player, AblationIds.SqOrderEngaged);"));
 		}
 

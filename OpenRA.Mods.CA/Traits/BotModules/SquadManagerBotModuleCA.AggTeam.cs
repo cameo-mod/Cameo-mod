@@ -166,11 +166,21 @@ namespace OpenRA.Mods.CA.Traits
 			return value;
 		}
 
-		long AggTeamHomeValue()
+		// atHomeOnly (CONSOLIDATE-02 Q4b, the defend arbiter's "would the base fall" test): the pool counts only inside AggTeamDefenceHomeRadiusCells of home; a unit that a
+		// defence answer left far away is no home defence.
+		long AggTeamHomeValue(bool atHomeOnly = false)
 		{
 			long value = AggTeamQuietSquadValue();
+			var home = atHomeOnly ? AggTeamHomePos() : default;
+			var radius = atHomeOnly ? (long)AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamDefenceHomeRadiusCells)) * AggTeamPolicyCA.CellUnits : 0;
 			foreach (var u in unitsHangingAroundTheBase)
+			{
+				if (atHomeOnly && (long)(u.Actor.CenterPosition - home).HorizontalLengthSquared > radius * radius)
+					continue;
+
 				value += UnitValue(u.Actor);
+			}
+
 			return value;
 		}
 
@@ -236,10 +246,10 @@ namespace OpenRA.Mods.CA.Traits
 			// CONSOLIDATE-02 Q3 (sq_defend_arbiter): one rule. P1 (the base holds) sizes the answer from the pool and the quiet squads only, so a raid never dissolves a gathering
 			// or pushed blob (X6); P0 (the base would fall to the threat) may take the field squads too, nearest first and only the share needed. Never a recall of everything.
 			var arbiter = DefendArbiterOn;
-			var falls = arbiter && DefendArbiterCA.Falls(provider.StalemateHomeThreatValue, provider.StalemateHomeDefenceValue + AggTeamHomeValue());
+			var falls = arbiter && DefendArbiterCA.Falls(provider.StalemateHomeThreatValue, provider.StalemateHomeDefenceValue + AggTeamHomeValue(true));
 			var fresh = net > 0
 				? DefenceDetachment.Plan(net, provider.StalemateOwnArmy, AggTeamDetachCandidates(arbiter && !falls), AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamDefendMarginPercent)),
-					falls ? 100 : AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamMaxDetachSharePercent)), arbiter ? 0 : AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamRecallSharePercent)))
+					falls ? 100 : AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamMaxDetachSharePercent)), ArmyDefendOwnsRecall ? 0 : AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamRecallSharePercent)))
 				: DefenceDetachmentPlan.None;
 			var plan = DefenceDetachment.Latch(aggDetachPlan, fresh, provider.StalemateHomeThreat, provider.StalemateHomeLatch);
 			if (plan.IsActive && !aggDetachPlan.IsActive)

@@ -2454,8 +2454,9 @@ namespace OpenRA.Mods.CA.Traits
 			else
 				CloseAllyAssist(BotMissionAttemptState.Released, BotMissionReasons.Superseded);
 
-			// CONSOLIDATE-02 Q3 (sq_defend_arbiter): an escort/preposition answer (P5) is a pool share; the raid squads keep their job (no DF-3 fold, no DF-4 retarget).
-			if (request == null && Info.FastSquadsReactToThreats && !DefendArbiterOn)
+			// CONSOLIDATE-02 Q3 (sq_defend_arbiter) + Q4b: an escort/preposition answer (P5) is a pool share; the raid squads keep their job (no DF-3 fold, no DF-4 retarget) - once the
+			// one launcher owns the breaker too (ArmyDefendOwnsRecall); with the launcher off the old fast-squad fold stays.
+			if (request == null && Info.FastSquadsReactToThreats && !ArmyDefendOwnsRecall)
 				ReactWithFastSquads(bot, protectSq, rally, threat.Value.EtaTicks);
 		}
 
@@ -2666,6 +2667,18 @@ namespace OpenRA.Mods.CA.Traits
 				ReleaseM13Response(bot, TeamResponseReleaseCA.Cleared);
 				return;
 			}
+			// CONSOLIDATE-02 Q4b (sq_defend_arbiter): a defender released far from home (it answered an ally or a distant hit) walks back to the base before it counts as pool.
+			List<UnitWposWrapper> farFromHome = null;
+			var homePos = default(WPos);
+			long homeRadiusSquared = 0;
+			if (DefendArbiterOn)
+			{
+				farFromHome = new List<UnitWposWrapper>();
+				homePos = AggTeamHomePos();
+				var homeRadius = (long)AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamDefenceHomeRadiusCells)) * AggTeamPolicyCA.CellUnits;
+				homeRadiusSquared = homeRadius * homeRadius;
+			}
+
 			foreach (var u in protectSq.Units.ToList())
 			{
 				if (unitCannotBeOrdered(u.Actor))
@@ -2680,8 +2693,15 @@ namespace OpenRA.Mods.CA.Traits
 				else if (Info.FireSupportTypes.Contains(name) && OpenFireSupportSquad(bot) is { } releasedFs)
 					releasedFs.Units.Add(u);
 				else
+				{
 					unitsHangingAroundTheBase.Add(u);
+					if (farFromHome != null && (long)(u.Actor.CenterPosition - homePos).HorizontalLengthSquared > homeRadiusSquared)
+						farFromHome.Add(u);
+				}
 			}
+
+			if (farFromHome is { Count: > 0 })
+				AggTeamSendHome(bot, farFromHome, World.Map.CellContaining(homePos));
 
 			protectSq.Units.Clear();
 			protectionRally = null;

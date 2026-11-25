@@ -131,6 +131,17 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			return result;
 		}
 
+		/// <summary>
+		/// CONSOLIDATE-02 Q4b (TEAM-DEFEND, Opus D2): the pool value one teammate sends to an ally alarm. The team together sends the attack's worth at the margin, split evenly
+		/// over the <paramref name="answerers"/> (at least 1); a teammate with less than its share sends all it has. 0 = no attack, nothing to send.
+		/// </summary>
+		public static long AllyPoolNeed(long attackValue, int marginPercent, int answerers)
+		{
+			var total = Need(attackValue, 0, marginPercent);
+			var n = Math.Max(1, answerers);
+			return (total + n - 1) / n;
+		}
+
 		/// <summary>An attack the bot cannot see (an attacker in the fog) is answered by at most this many units, nearest first, instead of the whole pool.</summary>
 		public static int BlindDraft(int draftable, int blindUnits) => Math.Clamp(blindUnits, 0, Math.Max(0, draftable));
 	}

@@ -166,7 +166,8 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 
 				s.Parent = want;
-				DiagnosticSquadEvent(s, "army_attach", "parent=" + want.Type + " units=" + want.Units.Count);
+				if (DiagnosticWriter != null)
+					DiagnosticSquadEvent(s, "army_attach", "parent=" + want.Type + " units=" + want.Units.Count);
 			}
 		}
 
@@ -182,6 +183,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			long raid = 0;
 			var raiders = 0;
+			var counted = false;
 			foreach (var q in Squads)
 			{
 				var kind = ArmySquadKindOf(q.Type);
@@ -195,16 +197,48 @@ namespace OpenRA.Mods.CA.Traits
 					raid += value;
 					raiders += q.Units.Count;
 				}
+
+				// The release path asks for a unit that still stands in the home guard: it is already in the total (once, not twice).
+				if (!counted && candidate != null)
+					foreach (var u in q.Units)
+						if (ReferenceEquals(u.Actor, candidate))
+						{
+							counted = true;
+							break;
+						}
 			}
 
 			var candidateValue = candidate != null ? UnitValue(candidate) : 0;
-			return ArmyPlanCA.HarassAllowsByValue(raid, raiders, total + candidateValue, candidateValue, Info.HarassCapPercent, HarassMinOn ? Info.HarassMinUnits : 0);
+			return ArmyPlanCA.HarassAllowsByValue(raid, raiders, counted ? total : total + candidateValue, candidateValue, Info.HarassCapPercent, HarassMinOn ? Info.HarassMinUnits : 0);
 		}
 
 		// ---- Q3: the defend arbiter (row sq_defend_arbiter) ----
 
 		/// <summary>Q3 (row sq_defend_arbiter): every defence draft goes through DefendArbiterCA (the P0-P5 ladder and the share sizing).</summary>
 		internal bool DefendArbiterOn => ArmyPipelineOn && !ablateSqDefendArbiter.Off(Player, AblationIds.SqDefendArbiter);
+
+		/// <summary>
+		/// Q4b: the arbiter replaces the defence RECALL (the recall share, the DF-3/DF-4 fast-squad fold) only together with the one launcher: the stalemate breaker's home gate reads
+		/// AggTeamDefence().RecallAll, and with the launcher off the breaker still launches. The feeders (ProtectOwn, TEAM-DEFEND, DEFEND-ALLY, the quiet-only candidates) stay on
+		/// DefendArbiterOn, so each row remains ablatable on its own.
+		/// </summary>
+		internal bool ArmyDefendOwnsRecall => DefendArbiterOn && ArmyLaunchArbiterOn;
+
+		/// <summary>
+		/// Q4b: the holder as the defend arbiter reads it. A squad in the quiet (Idle) state that the team lead still keeps (freshly formed, or gathering for the open order) or that
+		/// belongs to the live pushed order is not quiet: it answers as the blob does (Gathering / Pushed), so a P1/P3 answer never takes it.
+		/// </summary>
+		ArmyHolder ArmyDefendHolderOf(SquadCA s)
+		{
+			var holder = ArmyHolderOf(s);
+			if (holder != ArmyHolder.Quiet)
+				return holder;
+
+			if (ArmyEngagedOrderOf(s) != null)
+				return ArmyHolder.Pushed;
+
+			return TeamLeadKeepsSquad(s) ? ArmyHolder.Gathering : holder;
+		}
 
 		// A construction yard or a production building: a hit on one may let the base fall (P0).
 		static bool ArbiterIsCore(Actor victim) =>
@@ -240,17 +274,27 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			var leases = BotUnitLeases.Of(Player);
 			var draftable = unitsHangingAroundTheBase.Where(u => !unitCannotBeOrdered(u.Actor) && IsDefenderDraftable(u, leases)).ToList();
-			var at = attacker != null && attacker.IsInWorld ? attacker.CenterPosition
+			// Q4b: the attack point is the attacker the bot SEES (protectTarget is null for a hidden one under fogged scans); a hidden attacker is answered around the victim.
+			var at = protectTarget != null && protectTarget.IsInWorld ? protectTarget.CenterPosition
 				: victim != null && victim.IsInWorld ? victim.CenterPosition : World.Map.CenterOfCell(initialBaseCenter);
 
 			long attack = 0;
 			long defence = 0;
 			if (protectTarget != null)
+			{
 				ArbiterAssess(at, out attack, out defence);
 
+				// Q4b: a visible armed attacker outside the scan radius (artillery) is still an attack of its own value, not a blind hit.
+				if (attack <= 0 && protectTarget.IsInWorld && !protectTarget.IsDead && protectTarget.Info.HasTraitInfo<AttackBaseInfo>())
+					attack = UnitValue(protectTarget);
+			}
+
+			// The pool value OUTSIDE the scan radius: inside it the pool units are already counted in `defence` (Q4b: no double count in the P0 test).
+			var scanSquared = WDist.FromCells(Info.DefendAllyAttackerScanCells).LengthSquared;
 			long poolValue = 0;
 			foreach (var u in draftable)
-				poolValue += UnitValue(u.Actor);
+				if ((u.Actor.CenterPosition - at).HorizontalLengthSquared > scanSquared)
+					poolValue += UnitValue(u.Actor);
 
 			var core = victim != null && !victim.IsDead && ArbiterIsCore(victim);
 			var priority = DefendArbiterCA.Own(core, attack, defence + poolValue);
@@ -288,7 +332,7 @@ namespace OpenRA.Mods.CA.Traits
 					foreach (var s in Squads)
 					{
 						if (ReferenceEquals(s, protectSq) || !s.IsValid || s.Type != SquadCAType.Rush || ReferenceEquals(s, stalemateSquad) || s.M13Response
-							|| !DefendArbiterCA.MayTake(priority, ArmyRole.Main, ArmyHolderOf(s)))
+							|| !DefendArbiterCA.MayTake(priority, ArmyRole.Main, ArmyDefendHolderOf(s)))
 							continue;
 
 						foreach (var u in s.Units)
@@ -319,10 +363,10 @@ namespace OpenRA.Mods.CA.Traits
 		// ---- Q4: the one launcher and the order phases (rows sq_launch_arbiter, sq_order_engaged) ----
 
 		/// <summary>
-		/// Q4 (row sq_launch_arbiter; needs the TEAM-LEAD code): the team order is the only ground launcher. The per-bot attack timer, the AggTeam A5 launch, the stalemate
+		/// Q4 (row sq_launch_arbiter; needs the TEAM-LEAD cadence since Q4b: the leader's publish pass is the only thing that issues an order once the squad issue is bypassed): the team order is the only ground launcher. The per-bot attack timer, the AggTeam A5 launch, the stalemate
 		/// breaker wave, the leader's squad issue and the Idle-state launch are bypassed; a solo bot leads itself.
 		/// </summary>
-		internal bool ArmyLaunchArbiterOn => ArmyPipelineOn && TeamLeadActive && !ablateSqLaunchArbiter.Off(Player, AblationIds.SqLaunchArbiter);
+		internal bool ArmyLaunchArbiterOn => ArmyPipelineOn && TeamLeadCadenceActive && !ablateSqLaunchArbiter.Off(Player, AblationIds.SqLaunchArbiter);
 
 		/// <summary>Q4 (row sq_order_engaged): the order stays open through Push and Engaged; the leader re-picks its target for the whole blob; Done closes it.</summary>
 		internal bool ArmyOrderEngagedOn => ArmyLaunchArbiterOn && !ablateSqOrderEngaged.Off(Player, AblationIds.SqOrderEngaged);
@@ -497,7 +541,7 @@ namespace OpenRA.Mods.CA.Traits
 			var grace = 5 * Info.TeamLeadCheckTicks;
 			var (units, _) = order.EngagedTotals(now, grace);
 			var reason = now - order.PushTick > grace && units == 0 ? "done_spent"
-				: now - order.PushTick > Info.ArmyEngagedMaxTicks ? "done_max_age"
+				: now - order.PushTick > TeamLeadCA.EngagedMaxAge(Info.ArmyEngagedMaxTicks) ? "done_max_age"
 				: null;
 			if (reason != null)
 				ArmyCloseOrder(order, now, reason);

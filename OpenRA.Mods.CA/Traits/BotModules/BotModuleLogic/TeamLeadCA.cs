@@ -206,6 +206,15 @@ namespace OpenRA.Mods.CA.Traits
 		public static bool PushBarDissolve(int now, int since, int maxTicks) => since >= 0 && now - since >= Math.Max(1, maxTicks);
 
 		/// <summary>
+		/// CONSOLIDATE-02 Q4b: the finite cap of a persistent order that holds its push below the bar (it is never dissolved at the push-bar max). It is
+		/// <paramref name="gatherMaxTicks"/> (at most 30000), never shorter than the push-bar max and never below 1 tick.
+		/// </summary>
+		public static int PersistentGatherCap(int gatherMaxTicks, int pushBarMaxTicks) => Math.Max(Math.Max(1, pushBarMaxTicks), Math.Min(gatherMaxTicks, 30000));
+
+		/// <summary>CONSOLIDATE-02 Q4b: the age at which a pushed persistent order is Done, clamped to the documented range 1500-30000 (a yaml 0 can no longer close it on the push tick).</summary>
+		public static int EngagedMaxAge(int configuredTicks) => Math.Clamp(configuredTicks, 1500, 30000);
+
+		/// <summary>
 		/// TEAM-BLOB-01 push bar: the squads standing at the rally (<paramref name="units"/>, <paramref name="value"/>) may advance. The unit bar is the blob launch
 		/// minimum (BlobLaunch01CA.MinUnits: the WAVE-MIN tier or half of the team's idle army, whichever is more), at least the join floor; the value bar is the
 		/// WAVE-MIN value. Both must pass: nothing below WAVE-MIN advances, and neither does a share of a much bigger army.

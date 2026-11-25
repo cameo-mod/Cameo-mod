@@ -158,13 +158,13 @@ namespace OpenRA.Mods.Cameo.Test
 			var own = Between(wiring, "void ArbiterProtectOwn(", "#if CAMEO_DEV_LOGGING");
 			Assert.That(own, Does.Contain("var priority = DefendArbiterCA.Own(core, attack, defence + poolValue);"));
 			Assert.That(own, Does.Contain("need = DefendArbiterCA.Need(attack, defence, Info.ArbiterDefendMarginPercent);"));
-			Assert.That(own, Does.Contain("!DefendArbiterCA.MayTake(priority, ArmyRole.Main, ArmyHolderOf(s))"));
+			Assert.That(own, Does.Contain("!DefendArbiterCA.MayTake(priority, ArmyRole.Main, ArmyDefendHolderOf(s))"));
 			Assert.That(own, Does.Contain("DefendArbiterCA.BlindDraft(draftable.Count, Info.ArbiterBlindDraftUnits)"));
 
 			var sm = RepoFile(Bots + "SquadManagerBotModuleCA.cs");
 			Assert.That(sm, Does.Contain("if (DefendArbiterOn)\n\t\t\t\tArbiterProtectOwn(attacker, protectTarget, victim, protectSq);\n\t\t\telse if (!protectSq.IsValid)"), "off = the old whole-pool draft");
 			Assert.That(sm, Does.Contain("protectOwnVictim = self;\n\t\t\t\tProtectOwn(e.Attacker);"));
-			Assert.That(sm, Does.Contain("if (request == null && Info.FastSquadsReactToThreats && !DefendArbiterOn)"));
+			Assert.That(sm, Does.Contain("if (request == null && Info.FastSquadsReactToThreats && !ArmyDefendOwnsRecall)"));
 
 			var ally = RepoFile(Bots + "SquadManagerBotModuleCA.DefendAlly.cs");
 			Assert.That(ally, Does.Contain("if (DefendArbiterOn && !DefendArbiterCA.MayTake(DefendPriority.P4LocalHit, ArmyRole.Main, ArmyHolderOf(s)))"));
@@ -175,7 +175,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var agg = RepoFile(Bots + "SquadManagerBotModuleCA.AggTeam.cs");
 			Assert.That(agg, Does.Contain("AggTeamDetachCandidates(arbiter && !falls)"), "P1 = pool and quiet squads only");
-			Assert.That(agg, Does.Contain("arbiter ? 0 : AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamRecallSharePercent))"), "never a recall of everything under the arbiter");
+			Assert.That(agg, Does.Contain("ArmyDefendOwnsRecall ? 0 : AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamRecallSharePercent))"), "no recall of everything once the arbiter and the one launcher own it (Q4b)");
 		}
 
 		[Test]

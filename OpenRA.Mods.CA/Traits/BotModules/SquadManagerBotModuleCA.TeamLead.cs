@@ -1018,6 +1018,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			var cancel = order.LeaderKey != team.Election.Leader ? "leader_changed"
 				: order.Extending && !order.Persistent && TeamLeadCA.PushBarDissolve(now, order.PushBarSince, Info.TeamLeadPushBarMaxTicks) ? "below_bar"
+				: order.Extending && order.Persistent && TeamLeadCA.PushBarDissolve(now, order.PushBarSince, TeamLeadCA.PersistentGatherCap(Info.ArmyGatherMaxTicks, Info.TeamLeadPushBarMaxTicks)) ? "gather_cap"
 				: !order.GatherOnly && !order.Extending && now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? "max_age"
 				: TeamLeadCA.GraceHolds(TeamLeadGraceHoldOn, order.Extending) ? null
 				: TeamLeadCA.RallyGraceHolds(TeamLeadGraceRallyOn, order.GatherOnly) ? (now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? "max_age" : null)

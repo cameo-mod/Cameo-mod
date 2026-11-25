@@ -135,6 +135,18 @@ namespace OpenRA.Mods.CA.Traits
 			var leases = BotUnitLeases.Of(Player);
 			var drafted = 0;
 			var draftable = unitsHangingAroundTheBase.Where(u => !unitCannotBeOrdered(u.Actor) && IsDefenderDraftable(u, leases)).ToList();
+
+			// CONSOLIDATE-02 Q4b (X8, Opus D2): every teammate answers, but with its share, not its whole pool: the team together sends the attack's worth at the margin,
+			// split over the answering allies, each taking the units nearest to the attacker first. (The whole pool of every teammate used to walk across the map.)
+			if (arbiter)
+			{
+				var need = DefendArbiterCA.AllyPoolNeed(alarm.AttackValue, Info.ArbiterDefendMarginPercent, teamLeadAliveSeats - 1);
+				var attackerPos = attacker.CenterPosition;
+				var pick = DefendArbiterCA.PickNearest(
+					draftable.Select((u, i) => new DefendCandidate(i, UnitValue(u.Actor), (u.Actor.CenterPosition - attackerPos).HorizontalLengthSquared)), need);
+				draftable = pick.Select(i => draftable[i]).ToList();
+			}
+
 			if (draftable.Count > 0)
 			{
 				home ??= RegisterNewSquad(bot, SquadCAType.Protection, attacker);
@@ -164,7 +176,7 @@ namespace OpenRA.Mods.CA.Traits
 				var free = DefendAllyFreeSquad(s);
 				if (arbiter)
 				{
-					var holder = ArmyHolderOf(s);
+					var holder = ArmyDefendHolderOf(s);
 					if (s.Type != SquadCAType.Rush || ReferenceEquals(s, stalemateSquad) || s.M13Response || !DefendArbiterCA.MayTake(priority, ArmyRole.Main, holder))
 						continue;
 
