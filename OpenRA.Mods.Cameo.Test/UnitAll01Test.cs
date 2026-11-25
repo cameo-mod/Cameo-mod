@@ -551,8 +551,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
 			Assert.That(u, Does.Contain("upgradeDone.NoteQueued(queuedIn);\n\t\t\tif (world.WorldTick - upgradeSettleTick < 25)\n\t\t\t\treturn;"), "noted at every visit, before the 25-tick gate");
-			Assert.That(u, Does.Contain("if (reason == \"timeout\")
-				RollLog($\"{world.WorldTick},{Array.IndexOf(world.Players, player)},upg_unseen_timeout,{name},,{++upgradeUnseenTimeouts}\");"), "DEV counter of never-seen timeouts (Opus ruling: no approximation for them)");
+			Assert.That(u, Does.Contain("if (reason == \"timeout\")\n\t\t\t\tRollLog($\"{world.WorldTick},{Array.IndexOf(world.Players, player)},upg_unseen_timeout,{name},,{++upgradeUnseenTimeouts}\");"), "DEV counter of never-seen timeouts (Opus ruling: no approximation for them)");
 		}
 
 		[Test]
