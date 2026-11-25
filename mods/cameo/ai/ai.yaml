@@ -4600,6 +4600,12 @@ Player:
 		CrawlAdvanceOnly: true
 		# crawl_target_sticky (CRAWL-LONG-01, Opus 11-25): a started crawl keeps its target until reached, invalid or parked (no flip on a re-pick).
 		CrawlTargetSticky: true
+		# crawl_ally_anchor (BS-03 c9 port, light team crawl, Opus V08G): with allybuild on, allied yards are crawl anchors and allied buildable-area buildings join the crawl frontier.
+		CrawlAllyAnchor: true
+		# crawl_sticky_expiry (Opus V08G ruling a): a committed crawl target is released and parked after 3000 ticks without frontier progress, for any reason.
+		CrawlStickyExpiry: true
+		# crawl_pause_bound (Opus V08G ruling b, BS-03 c7): a crawl paused for enemy value at the frontier is released and parked after 900 + 150 r ticks; the escort request is at least 900 + 150 r.
+		CrawlPauseBound: true
 		# Enabled for the maintainer's 2026-10-15 combined playtest (BY).
 		UseCrawlSafety: true
 		# EX-2: every field in reach gets a refinery, beyond the base builder's fixed optimum.
@@ -4639,6 +4645,8 @@ Player:
 		# REF-FIELD-02 cap per zone); no new refinery within 10 cells of a friendly (own or allied) one, 5 when a zone has no other site; an allied
 		# refinery serving a zone takes it off the demand. Target on Imminent Destruction: 5 +/- 1 refineries per bot (REF_ZONES_IMMINENT e6220637).
 		RefDemand: true
+		# ECO-TIMING-FLOOR (row eco_timing_floor, HANS_PROFILE_DESIGN_01 row 1, Opus V08G): >= 2 own refineries by tick 3700 and >= 3 by 5000 at Hard (150 ticks per rank, 500-tick lead) when zones are in reach.
+		EcoTimingFloor: true
 		RefineryZoneRadius: 10
 		RefineryPerZoneCap: 2
 		RefinerySecondPerZoneMinCells: 40
@@ -5981,6 +5989,8 @@ Player:
 		BbTechChainPaygo: true
 		# BUILD-ALL-B (row bb_build_all_listed, user ruling 11-25): S5 = the buildable BuildingFractions entries once, refinery included, no unlisted fallback; S5 first copies ride with any bank above 0.
 		BbBuildAllListed: true
+		# NO-CANCEL-01 (row bb_no_cancel, BS-03 c10 port, Opus V08G): a building in production is never cancelled for a choice; only a READY item with an unplaceable proof may be removed.
+		BbNoCancel: true
 		# BUILD-ALL-B (row bb_no_foundation, user ruling 11-25): no concrete (terrain foundation) on any base-builder path; CONCRETE-PLAN-01 after the playtest.
 		BbNoFoundation: true
 		# QUEUE-SPLIT-01 + REF-S2-01 (Opus 11-25): defence stages stay on the defence queue; unmet refinery zone demand is served at S2 (rows bb_queue_split, bb_refinery_s2).
@@ -6000,6 +6010,8 @@ Player:
 		# REF-FIELD-02 (row rf_economy_gate): ref1, the first vehicle factory, then ref2; 1500 ticks between refineries; from the third refinery a
 		# pending first copy goes first (at most 1500 ticks); a yard with no refinery skips the gate (expansion refinery). genericbot only.
 		RefineryEconomyGate: true
+		# REF-INTERVAL-LADDER (row rf_interval_ladder, USER VALUE 2100 - 150 r, BS-03 step 4 port): the refinery interval follows the difficulty ladder (Noob 2250 .. God 750).
+		RefineryIntervalLadder: true
 		# PROD-BUSY cycle: above the same line, more production buildings cycled across the types (row pb_cycle_production); genericbot only.
 		CycleProductionAboveLine: true
 		# SUSTAINED-CASH-01: a bank above the tier line for 1500 ticks forces the next building to be production (row pb_sustained_cash_production); genericbot only.
