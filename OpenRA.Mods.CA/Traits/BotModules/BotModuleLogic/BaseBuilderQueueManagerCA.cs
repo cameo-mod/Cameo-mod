@@ -4089,9 +4089,28 @@ namespace OpenRA.Mods.CA.Traits
 						// TF-1: the bounded path anchors the search at the frontier cell nearest the
 						// aim — an admitted link must land forward; without a published anchor (legacy,
 						// switch-off) the yard centre stays the search centre as before.
-						var anchor = crawlLaw?.CrawlFrontierAnchor ?? baseCenter;
+						// crawl_advance_only (CRAWL-LONG-01): the search is anchored on the own frontier tile nearest the aim (not on a random yard, whose radius-50 ring capped a long crawl and flipped
+						// between yards) and its best cell must strictly reduce the frontier-to-aim distance. No forward cell: the link is placed at a base cell, the planner parks the target, and
+						// neither the random-resource nor the toward-the-enemy fallback below runs (they put plants "all over the place").
+						var advanceOnly = crawlLaw != null && crawlLaw.CrawlAdvanceOnly;
+						var frontierTiles = advanceOnly ? OwnBuildableAreaTiles() : null;
+						var anchor = advanceOnly && BaseBuilderQueueEvalCA.NearestTile(frontierTiles, crawlAim.Value) is { } frontierTile
+							? frontierTile
+							: crawlLaw?.CrawlFrontierAnchor ?? baseCenter;
 						var toward = findPos(actorType, distanceToBaseIsImportant, producer, anchor, crawlAim.Value,
-							baseBuilder.Info.MinBaseRadius, baseBuilder.Info.BaseCrawlRadius, bypassAdvisor: crawlLaw != null);
+							advanceOnly && frontierTiles.Count > 0 ? 0 : baseBuilder.Info.MinBaseRadius, baseBuilder.Info.BaseCrawlRadius, bypassAdvisor: crawlLaw != null);
+						if (advanceOnly && !(toward.Location != null && actorInfo.HasTraitInfo<GivesBuildableAreaInfo>()
+							&& BaseBuilderQueueEvalCA.AdvancesFrontier(actorInfo.TraitInfo<BuildingInfo>().Tiles(toward.Location.Value), frontierTiles, crawlAim.Value)))
+						{
+							if (crawlLaw.WantedLinkBuilding == actorType)
+								crawlLaw.CrawlLinkNoAdvance();
+#if CAMEO_DEV_LOGGING
+							Log.Write("debug", $"AI ({player.ClientIndex}): CRAWL-ADVANCE {actorType} has no forward cell toward {crawlAim.Value} (best {(toward.Location.HasValue ? toward.Location.Value.ToString() : "none")}, frontier {anchor}) at tick {world.WorldTick}: placed at a base cell");
+#endif
+							return findPos(actorType, distanceToBaseIsImportant, producer, baseCenter, baseCenter, baseBuilder.Info.MinBaseRadius,
+								distanceToBaseIsImportant ? baseBuilder.Info.MaxBaseRadius : world.Map.Grid.MaximumTileSearchRange);
+						}
+
 						if (toward.Location != null)
 						{
 #if CAMEO_DEV_LOGGING
@@ -4136,6 +4155,27 @@ namespace OpenRA.Mods.CA.Traits
 
 			// Can't find a build location
 			return (null, null, 0);
+		}
+
+		// crawl_advance_only: the footprint tiles of our buildable-area buildings, the frontier the crawl closes on the aim from (the planner measures the same set).
+		List<CPos> OwnBuildableAreaTiles()
+		{
+			var tiles = new List<CPos>();
+			if (playerBuildings == null)
+				return tiles;
+
+			foreach (var b in playerBuildings)
+			{
+				if (b.IsDead || !b.Info.HasTraitInfo<GivesBuildableAreaInfo>())
+					continue;
+
+				if (b.Info.TraitInfoOrDefault<BuildingInfo>() is { } info)
+					tiles.AddRange(info.Tiles(b.Location));
+				else
+					tiles.Add(b.Location);
+			}
+
+			return tiles;
 		}
 
 		void SetBuildingInterval(string name)
