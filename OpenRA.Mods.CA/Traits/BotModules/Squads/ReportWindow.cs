@@ -19,7 +19,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 	/// </summary>
 	public static class ReportWindow
 	{
-		/// <summary>The order's join window is still open: fewer than <paramref name="windowTicks"/> ticks (at least 1) since it was issued. No_reports cannot cancel it yet.</summary>
-		public static bool Open(int now, int issueTick, int windowTicks) => now - issueTick < Math.Max(1, windowTicks);
+		/// <summary>
+		/// The order's join window is still open: fewer than <paramref name="windowTicks"/> plus one team pass (<paramref name="passTicks"/>, at least 1) ticks since it was issued.
+		/// No_reports cannot cancel it yet. The pass is part of the window because the upkeep runs once per team pass and its cancel chain runs BEFORE the push test in the same pass:
+		/// the push is first due at the first pass with age >= the gather window (TeamLeadCA.PushDue), which can be up to one pass late, and a cancel in that pass would pre-empt it
+		/// (CM review of 4da39449: with the plain window the cancel fired at age 1500, ahead of the window push).
+		/// </summary>
+		public static bool Open(int now, int issueTick, int windowTicks, int passTicks) => now - issueTick < Math.Max(0, windowTicks) + Math.Max(1, passTicks);
 	}
 }

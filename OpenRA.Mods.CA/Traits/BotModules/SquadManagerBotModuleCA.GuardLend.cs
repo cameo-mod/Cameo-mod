@@ -26,6 +26,13 @@ namespace OpenRA.Mods.CA.Traits
 		// The units the quiet guard would lend now (filled by ArmyGuardPick; reused, never allocated per pass).
 		readonly List<UnitWposWrapper> armyGuardLend = new();
 
+		// The order (Seq) this seat's guard has lent to: ONE lend per order (CM review of 145bed0e: the join pass repeats until the seat has joined, and a share of the CURRENT guard
+		// each pass would drain it to the join floor). The lent units form the seat's squad; if the order is cancelled the squad is dismissed to the pool, which the ally defence drafts
+		// back into the guard. -1 = none yet.
+		int armyGuardLentSeq = -1;
+
+		bool ArmyGuardLentFor(TeamLeadOrder order) => order != null && order.Seq == armyGuardLentSeq;
+
 		/// <summary>PUSHBAR-RCA-01 (row sq_guard_lend; needs the one launcher): a quiet home guard lends its spare units to the open order and they count in the idle army.</summary>
 		internal bool ArmyGuardLendOn => ArmyLaunchArbiterOn && Info.ArmyGuardLendPercent > 0 && !ablateSqGuardLend.Off(Player, AblationIds.SqGuardLend);
 
@@ -59,10 +66,11 @@ namespace OpenRA.Mods.CA.Traits
 			return true;
 		}
 
-		// The member's idle army (TeamLeadBlob) counts what its quiet guard would lend, so the leader can publish the order the join below then fills.
+		// The member's idle army (TeamLeadBlob) counts what its quiet guard would lend, so the leader can publish the order the join below then fills. Once the guard has lent to
+		// the open order nothing more is counted (it lends once; the lent units are in the pool or the squad).
 		void ArmyGuardBlob(ref int units, ref long value)
 		{
-			if (!ArmyGuardLendOn || !ArmyGuardPick(out _))
+			if (!ArmyGuardLendOn || ArmyGuardLentFor(TeamLeadOpenOrder()) || !ArmyGuardPick(out _))
 				return;
 
 			foreach (var u in armyGuardLend)
@@ -76,9 +84,10 @@ namespace OpenRA.Mods.CA.Traits
 		// (a squad that gathers for the order is kept from the ally defence by TeamLeadKeepsSquad).
 		void ArmyGuardLendTo(TeamLeadOrder order)
 		{
-			if (!ArmyGuardLendOn || order.Pushed || !ArmyGuardPick(out var guard))
+			if (!ArmyGuardLendOn || order.Pushed || ArmyGuardLentFor(order) || !ArmyGuardPick(out var guard))
 				return;
 
+			armyGuardLentSeq = order.Seq;
 			foreach (var u in armyGuardLend)
 			{
 				guard.Units.Remove(u);

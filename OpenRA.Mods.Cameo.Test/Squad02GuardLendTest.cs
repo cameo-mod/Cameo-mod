@@ -130,7 +130,9 @@ namespace OpenRA.Mods.Cameo.Test
 			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.GuardLend.cs");
 			var lend = wiring[wiring.IndexOf("void ArmyGuardLendTo(TeamLeadOrder order)", StringComparison.Ordinal)..];
 
-			Assert.That(lend, Does.Contain("if (!ArmyGuardLendOn || order.Pushed || !ArmyGuardPick(out var guard))\n\t\t\t\treturn;"), "an unpushed order only");
+			Assert.That(lend, Does.Contain("if (!ArmyGuardLendOn || order.Pushed || ArmyGuardLentFor(order) || !ArmyGuardPick(out var guard))\n\t\t\t\treturn;"), "an unpushed order only, and one lend per order");
+			Assert.That(lend.IndexOf("armyGuardLentSeq = order.Seq;", StringComparison.Ordinal), Is.GreaterThan(0));
+			Assert.That(lend.IndexOf("armyGuardLentSeq = order.Seq;", StringComparison.Ordinal), Is.LessThan(lend.IndexOf("guard.Units.Remove(u);", StringComparison.Ordinal)), "the order is marked lent before any unit moves");
 			Assert.That(lend.IndexOf("guard.Units.Remove(u);", StringComparison.Ordinal), Is.LessThan(lend.IndexOf("unitsHangingAroundTheBase.Add(u);", StringComparison.Ordinal)));
 			Assert.That(lend, Does.Contain("n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);"));
 			Assert.That(lend, Does.Contain("if (DiagnosticWriter != null)\n\t\t\t\tDiagnosticTeamEvent(\"army_guard_lend\""), "DEV only, no string built in a release build");
@@ -138,8 +140,13 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(lend, Does.Not.Contain("ChangeState"), "the guard's state is untouched");
 
 			var blob = Between(wiring, "void ArmyGuardBlob(ref int units, ref long value)", "// TeamLeadJoin, for an order that has not pushed");
-			Assert.That(blob, Does.Contain("if (!ArmyGuardLendOn || !ArmyGuardPick(out _))\n\t\t\t\treturn;"));
+			Assert.That(blob, Does.Contain("if (!ArmyGuardLendOn || ArmyGuardLentFor(TeamLeadOpenOrder()) || !ArmyGuardPick(out _))\n\t\t\t\treturn;"), "after the lend the open order counts nothing more from the guard");
 			Assert.That(blob, Does.Contain("value += UnitValue(u.Actor);"));
+
+			// CM review of 145bed0e: the join pass repeats until the seat has joined, so a share of the CURRENT guard each pass would drain it. One lend per order Seq.
+			Assert.That(wiring, Does.Contain("int armyGuardLentSeq = -1;"));
+			Assert.That(wiring, Does.Contain("bool ArmyGuardLentFor(TeamLeadOrder order) => order != null && order.Seq == armyGuardLentSeq;"));
+			Assert.That(System.Text.RegularExpressions.Regex.Matches(wiring, "armyGuardLentSeq = ").Count, Is.EqualTo(2), "declared once, set once (in the lend)");
 		}
 
 		[Test]

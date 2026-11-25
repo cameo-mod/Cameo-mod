@@ -21,7 +21,8 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>PUSHBAR-RCA-01 S1 (row sq_report_window; needs the one launcher): an order nobody joined is not cancelled for no reports before its join window is over.</summary>
 		internal bool ArmyReportWindowOn => ArmyLaunchArbiterOn && !ablateSqReportWindow.Off(Player, AblationIds.SqReportWindow);
 
-		// True while the order's join window (TeamLeadGatherMaxTicks from its issue) is open and the row is on: TeamLeadMaintainOrder then keeps an order with no report.
-		bool ArmyReportWindowOpen(TeamLeadOrder order, int now) => ArmyReportWindowOn && ReportWindow.Open(now, order.IssueTick, Info.TeamLeadGatherMaxTicks);
+		// True while the order's join window (TeamLeadGatherMaxTicks from its issue, plus the team pass in which the window push is first due) is open and the row is on:
+		// TeamLeadMaintainOrder then keeps an order with no report, and the window push (a hold below the bar) gets its pass.
+		bool ArmyReportWindowOpen(TeamLeadOrder order, int now) => ArmyReportWindowOn && ReportWindow.Open(now, order.IssueTick, Info.TeamLeadGatherMaxTicks, Info.TeamLeadCheckTicks);
 	}
 }

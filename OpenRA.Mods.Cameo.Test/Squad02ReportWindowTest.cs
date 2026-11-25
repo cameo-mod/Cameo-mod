@@ -37,21 +37,35 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void TheJoinWindowIsOpenForTheWholeGatherWindowAndClosesAtItsEnd()
+		public void TheJoinWindowIsOpenThroughTheWindowAndTheTeamPassWhereThePushIsFirstDue()
 		{
-			Assert.That(ReportWindow.Open(7482, 7482, 1500), Is.True, "the issue tick itself");
-			Assert.That(ReportWindow.Open(7482 + 1499, 7482, 1500), Is.True, "the last tick of the window");
-			Assert.That(ReportWindow.Open(7482 + 1500, 7482, 1500), Is.False, "the window is over: no_reports may cancel (and the window push is due)");
-			Assert.That(ReportWindow.Open(7482 + 9000, 7482, 1500), Is.False);
+			// Window 1500 (TeamLeadGatherMaxTicks) + one team pass 100 (TeamLeadCheckTicks).
+			Assert.That(ReportWindow.Open(7482, 7482, 1500, 100), Is.True, "the issue tick itself");
+			Assert.That(ReportWindow.Open(7482 + 1499, 7482, 1500, 100), Is.True, "the last tick before the window push is due");
+			Assert.That(ReportWindow.Open(7482 + 1500, 7482, 1500, 100), Is.True, "the window push is due: the cancel must not pre-empt it (CM review of 4da39449)");
+			Assert.That(ReportWindow.Open(7482 + 1599, 7482, 1500, 100), Is.True, "the upkeep runs once per team pass: the first pass with the push due can be up to one pass late");
+			Assert.That(ReportWindow.Open(7482 + 1600, 7482, 1500, 100), Is.False, "past the window and its pass: no_reports may cancel");
+			Assert.That(ReportWindow.Open(7482 + 9000, 7482, 1500, 100), Is.False);
 
 			// The two V08D cancels were both inside the window: with the row on neither happens.
-			Assert.That(ReportWindow.Open(8009, 7482, 1500), Is.True, "order 1, age 527");
-			Assert.That(ReportWindow.Open(17377, 16182, 1500), Is.True, "order 2, age 1195");
+			Assert.That(ReportWindow.Open(8009, 7482, 1500, 100), Is.True, "order 1, age 527");
+			Assert.That(ReportWindow.Open(17377, 16182, 1500, 100), Is.True, "order 2, age 1195");
 
-			// A zero or negative window never keeps an order open past its own issue tick (a yaml 0 cannot make an order immortal).
-			Assert.That(ReportWindow.Open(100, 100, 0), Is.True);
-			Assert.That(ReportWindow.Open(101, 100, 0), Is.False);
-			Assert.That(ReportWindow.Open(101, 100, -50), Is.False);
+			// Whenever the push is first due (age 1500 to 1599 at a team pass), the window is still open there: the push test runs, never a no_reports cancel first.
+			for (var age = 1500; age <= 1599; age++)
+			{
+				Assert.That(TeamLeadCA.PushDue(10000 + age, 10000, 300, 1500, 0, 0, 70), Is.True, "age " + age + ": the window push is due even with nothing committed");
+				Assert.That(ReportWindow.Open(10000 + age, 10000, 1500, 100), Is.True, "age " + age);
+			}
+
+			Assert.That(TeamLeadCA.PushDue(10000 + 1499, 10000, 300, 1500, 0, 0, 70), Is.False, "nothing committed and the window not over: not due");
+
+			// A zero or negative window (or pass) never keeps an order open for long (a yaml 0 cannot make an order immortal): the window is at least the one pass.
+			Assert.That(ReportWindow.Open(199, 100, 0, 100), Is.True);
+			Assert.That(ReportWindow.Open(200, 100, 0, 100), Is.False);
+			Assert.That(ReportWindow.Open(200, 100, -50, 100), Is.False);
+			Assert.That(ReportWindow.Open(100, 100, 1500, 0), Is.True);
+			Assert.That(ReportWindow.Open(1601, 100, 1500, 0), Is.False, "a zero pass counts as one tick");
 		}
 
 		[Test]
@@ -63,8 +77,8 @@ namespace OpenRA.Mods.Cameo.Test
 			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.ReportWindow.cs");
 			Assert.That(wiring, Does.Contain("AblationLatch ablateSqReportWindow;"));
 			Assert.That(wiring, Does.Contain("internal bool ArmyReportWindowOn => ArmyLaunchArbiterOn && !ablateSqReportWindow.Off(Player, AblationIds.SqReportWindow);"));
-			Assert.That(wiring, Does.Contain("bool ArmyReportWindowOpen(TeamLeadOrder order, int now) => ArmyReportWindowOn && ReportWindow.Open(now, order.IssueTick, Info.TeamLeadGatherMaxTicks);"),
-				"the window is the order's own gather window, counted from its issue");
+			Assert.That(wiring, Does.Contain("bool ArmyReportWindowOpen(TeamLeadOrder order, int now) => ArmyReportWindowOn && ReportWindow.Open(now, order.IssueTick, Info.TeamLeadGatherMaxTicks, Info.TeamLeadCheckTicks);"),
+				"the window is the order's own gather window plus one team pass, counted from its issue");
 			foreach (var banned in new[] { "Random", "FindActors", "World.Actors", "FindClosestEnemy" })
 				Assert.That(wiring, Does.Not.Contain(banned), banned);
 		}
