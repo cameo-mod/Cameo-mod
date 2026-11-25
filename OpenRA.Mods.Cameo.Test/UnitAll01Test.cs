@@ -57,9 +57,10 @@ namespace OpenRA.Mods.Cameo.Test
 			var w = Roll();
 			var rng = new Random(1234);
 			var hits = new int[Names.Length];
-			var total = UnitRoll.Total(w);
+			var q = UnitRoll.Quantize(w);
+			var sum = UnitRoll.Sum(q);
 			for (var i = 0; i < 40000; i++)
-				hits[UnitRoll.Pick(w, rng.NextDouble() * total)]++;
+				hits[UnitRoll.Pick(q, rng.Next(sum))]++;
 
 			for (var i = 0; i < Names.Length; i++)
 				Assert.That(hits[i], Is.GreaterThan(0), Names[i]);
@@ -79,7 +80,8 @@ namespace OpenRA.Mods.Cameo.Test
 			{
 				var unbuilt = UnitRoll.Unbuilt(Names, built.Contains);
 				var pool = unbuilt.Select(i => w[i]).ToArray();
-				var pick = unbuilt[UnitRoll.Pick(pool, rng.NextDouble() * UnitRoll.Total(pool))];
+				var pq = UnitRoll.Quantize(pool);
+				var pick = unbuilt[UnitRoll.Pick(pq, rng.Next(UnitRoll.Sum(pq)))];
 				built.Add(Names[pick]);
 				steps++;
 			}
@@ -295,26 +297,54 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(boosted[0], Is.EqualTo(plain[0]).Within(1e-9), "a built type keeps its weight");
 		}
 
-		[Test]
-		public void ExtremeWeightsKeepEveryCandidateReachableAndNothingWraps()
+		// Opus 11-25 ruling on Sol's FIX of 686ca394: the deterministic 30-bit draw stays; weights are quantized to integers (sum <= 2^30) with a relative floor of total / 2^20, the draw is an
+		// integer in [0, sum) walked over the cumulative sum. These fixtures use the REAL discrete draw, not a hand-picked double.
+		static void AssertEveryCandidateOwnsAnInterval(double[] weights)
 		{
-			// the last candidate stays reachable next to a huge one (no int cast of a sum, no wrap)
+			var q = UnitRoll.Quantize(weights);
+			Assert.That(q.All(x => x >= 1), Is.True, "every candidate has at least 1 unit");
+			Assert.That(UnitRoll.Sum(q), Is.LessThanOrEqualTo(1 << UnitRoll.DrawBits), "the sum fits the 30-bit draw");
+
+			// exhaustive over the interval boundaries: the first and last draw of every candidate's interval land on it
+			var cumulative = 0;
+			for (var i = 0; i < q.Length; i++)
+			{
+				Assert.That(UnitRoll.Pick(q, cumulative), Is.EqualTo(i), "first draw of candidate " + i);
+				cumulative += q[i];
+				Assert.That(UnitRoll.Pick(q, cumulative - 1), Is.EqualTo(i), "last draw of candidate " + i);
+			}
+		}
+
+		[Test]
+		public void ExtremeWeightsKeepEveryCandidateReachableThroughTheRealDiscreteDraw()
+		{
+			AssertEveryCandidateOwnsAnInterval(new[] { 1e12, 1 });
+			var q = UnitRoll.Quantize(new[] { 1e12, 1 });
+			Assert.That(UnitRoll.Pick(q, UnitRoll.Sum(q) - 1), Is.EqualTo(1), "the last candidate is reachable at the largest draw");
+			Assert.That(q[1], Is.GreaterThanOrEqualTo(1000), "the relative floor (total / 2^20) gives the tail about a thousand units");
+
+			AssertEveryCandidateOwnsAnInterval(new[] { 1.0, 1e12, 1.0, 1e12, 1.0 });
+			AssertEveryCandidateOwnsAnInterval(new[] { 3.0, 1.0, 2.0 });
+
+			// the extreme override path of the table: every number at the maximum, floor 100% and more
 			var w = UnitRoll.Weights(new[] { 1_000_000, 1_000_000, 1 }, new[] { 100_000, 100_000, 100 }, new[] { 100_000, 100_000, 100 }, 1_000_000, new[] { 64.0, 64.0, 64.0 });
-			Assert.That(w.All(x => x > 0 && !double.IsNaN(x) && !double.IsInfinity(x)), Is.True);
-			var total = UnitRoll.Total(w);
-			Assert.That(total, Is.GreaterThan(0));
-			Assert.That(UnitRoll.Pick(w, total - 1e-6), Is.EqualTo(2), "a roll at the very end lands on the last candidate");
-			Assert.That(UnitRoll.Pick(w, 0), Is.EqualTo(0));
-			Assert.That(UnitRoll.Pick(w, total * 2), Is.EqualTo(2), "a roll past the end falls to the last candidate, never an index error");
+			Assert.That(w.All(x => x >= 1 && double.IsFinite(x)), Is.True);
+			AssertEveryCandidateOwnsAnInterval(w);
 
 			// all-zero except the floor: equal, positive
 			var z = UnitRoll.Weights(new[] { 0, 0, 0 }, new[] { 0, 0, 0 }, new[] { 0, 0, 0 }, 0);
 			Assert.That(z, Is.EqualTo(new double[] { 1, 1, 1 }));
-			Assert.That(UnitRoll.Pick(z, 2.5), Is.EqualTo(2));
+			var zq = UnitRoll.Quantize(z);
+			Assert.That(zq.Distinct().Count(), Is.EqualTo(1), "equal weights give equal units");
+			AssertEveryCandidateOwnsAnInterval(z);
 
-			// the uniform draw: the top of the resolution maps below the total
-			var top = (UnitRoll.RollResolution - 1) / (double)UnitRoll.RollResolution * total;
-			Assert.That(UnitRoll.Pick(w, top), Is.InRange(0, 2));
+			// garbage in (NaN, infinity, negative) never removes a candidate
+			AssertEveryCandidateOwnsAnInterval(new[] { double.NaN, double.PositiveInfinity, -5, 2 });
+
+			// the module draws exactly this way
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			Assert.That(u, Does.Contain("var units = UnitRoll.Quantize(weights);"));
+			Assert.That(u, Does.Contain("UnitRoll.Pick(units, BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(UnitRoll.Sum(units)))"));
 		}
 
 		[Test]
@@ -336,9 +366,9 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(new UnitRollTable(new Dictionary<string, int> { ["a"] = -7 }, null, null, null, -1, -1).Fraction("a"), Is.EqualTo(0), "a bad yaml value is clamped too");
 		}
 
-		// UPGRADE-COVERAGE once-done registry (Opus 11-25).
+		// UPGRADE-COVERAGE once-done registry (Opus 11-25; Sol FIX of 686ca394: only symmetric pairs form a set).
 		[Test]
-		public void TheOnceDoneRegistryCountsARepeatableAfterItsFirstCompletionAndAnExclusiveSetOnce()
+		public void TheOnceDoneRegistryCountsARepeatableAfterItsFirstCompletionAndOnlyASymmetricSetOnce()
 		{
 			var r = new UpgradeCompletions();
 			r.Observe("upgrade_a", 100, new[] { "~faction", "!upgrade_a" }); // non-repeatable: only itself
@@ -353,16 +383,59 @@ namespace OpenRA.Mods.Cameo.Test
 
 			Assert.That(r.IsDone("opt_x") || r.IsDone("opt_y"), Is.False);
 			r.Complete("opt_y");
-			Assert.That(r.IsDone("opt_x"), Is.True, "any one option satisfies the whole exclusive set");
-
-			Assert.That(r.Complete("never_seen"), Is.False, "a type never seen buildable (a unit, a building) marks nothing");
-			Assert.That(r.IsDone("never_seen"), Is.False);
+			Assert.That(r.IsDone("opt_x"), Is.True, "any one option satisfies the whole symmetric set");
+			Assert.That(r.Completed("opt_x"), Is.False, "but only the completed member counts as completed itself");
 			Assert.That(r.Since("upgrade_a"), Is.EqualTo(100));
 			Assert.That(r.Since("never_seen"), Is.EqualTo(int.MaxValue));
 		}
 
 		[Test]
-		public void AmongNotDoneCandidatesTheOldestAvailableGoesFirstAfterFreeItems()
+		public void ADirectionalBlockerLinksNothing()
+		{
+			// A requires !B (it is only offered while B is absent) but B stays legal after A: completing A must not mark B done
+			var r = new UpgradeCompletions();
+			r.Observe("a_requires_not_b", 10, new[] { "!b_plain" });
+			r.Observe("b_plain", 10, null);
+			Assert.That(r.Complete("a_requires_not_b"), Is.True);
+			Assert.That(r.IsDone("b_plain"), Is.False, "B is not part of a set with A");
+
+			// the other direction: completing B does not mark A done either (A simply becomes unavailable through its prerequisite)
+			var r2 = new UpgradeCompletions();
+			r2.Observe("a_requires_not_b", 10, new[] { "!b_plain" });
+			r2.Observe("b_plain", 10, null);
+			r2.Complete("b_plain");
+			Assert.That(r2.IsDone("a_requires_not_b"), Is.False);
+		}
+
+		[Test]
+		public void PreExistingOrRestoredCompletionsAreFoundByTheInitScanAndAnItemMustLeaveItsQueueToCount()
+		{
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+
+			// authoritative state: the prerequisite the player holds (ITechTreePrerequisite, the tech tree's own source), scanned once at the first visit: a restored or pre-existing completion is found there
+			Assert.That(u, Does.Contain("world.ActorsWithTrait<ITechTreePrerequisite>()"));
+			Assert.That(u, Does.Contain("void UpgradeScanOnce()\n\t\t{\n\t\t\tif (upgradeScanned)\n\t\t\t\treturn;"), "once");
+			Assert.That(u, Does.Contain("if (owned.Contains(a.Name) && ServedByUpgradeService(a) && upgradeDone.Complete(a.Name))"));
+			Assert.That(u, Does.Contain("UpgradeScanOnce();\n\t\t\tUpgradeCheckCompleted(inProduction);"), "both run before the service chooses");
+
+			// a completion in play: it was in production on the last visit, is not now, and the prerequisite is held (a cancelled item holds none)
+			Assert.That(u, Does.Contain("if (inProduction.Contains(name) || upgradeDone.Completed(name))"));
+			Assert.That(u, Does.Contain("if (owned.Contains(name) && upgradeDone.Complete(name))"));
+
+			// no ActorAdded guess
+			Assert.That(u, Does.Not.Contain("UpgradeCompleted(Actor a)"));
+			Assert.That(u, Does.Not.Contain("world.ActorAdded += UpgradeCompleted"));
+			Assert.That(Source("mods/Cameo.Dev/AiPlayerTelemetryDev.Coverage.cs"), Does.Not.Contain("ActorAdded"), "the DEV row reads the module's registry");
+
+			// the registry itself: a restored completion marks done at once, without ever having been seen buildable
+			var r = new UpgradeCompletions();
+			Assert.That(r.Complete("upgrade_conyard"), Is.True, "found at init");
+			Assert.That(r.IsDone("upgrade_conyard"), Is.True);
+			Assert.That(r.Complete("upgrade_conyard"), Is.False, "once");
+		}
+
+		[Test]
+		public void AmongNotDoneCandidatesTheOldestAvailableGoesFirstFreeOrPaid()
 		{
 			var items = new[]
 			{
@@ -370,9 +443,10 @@ namespace OpenRA.Mods.Cameo.Test
 				new UpgradeServiceCA.Candidate("light_old", 1000, 10, 100),
 				new UpgradeServiceCA.Candidate("free_new", 0, 0, 9000),
 			};
-			Assert.That(UpgradeServiceCA.Choose(items, new HashSet<string>(), false), Is.EqualTo(2), "free first");
-			Assert.That(UpgradeServiceCA.Choose(items, new HashSet<string> { "free_new" }, false), Is.EqualTo(1), "the older one before the heavier weight");
-			Assert.That(UpgradeServiceCA.Choose(new[] { new UpgradeServiceCA.Candidate("a", 1, 5, 10), new UpgradeServiceCA.Candidate("b", 1, 9, 10) }, new HashSet<string>(), false), Is.EqualTo(1), "equal since: the weight decides");
+			Assert.That(UpgradeServiceCA.Choose(items, new HashSet<string>(), false), Is.EqualTo(1), "the oldest paid item goes before a newer free one");
+			Assert.That(UpgradeServiceCA.Choose(items, new HashSet<string> { "light_old" }, false), Is.EqualTo(0), "then the next oldest");
+			Assert.That(UpgradeServiceCA.Choose(new[] { new UpgradeServiceCA.Candidate("paid", 500, 90, 10), new UpgradeServiceCA.Candidate("free", 0, 0, 10) }, new HashSet<string>(), false), Is.EqualTo(1), "free only breaks a tie in Since");
+			Assert.That(UpgradeServiceCA.Choose(new[] { new UpgradeServiceCA.Candidate("a", 1, 5, 10), new UpgradeServiceCA.Candidate("b", 1, 9, 10) }, new HashSet<string>(), false), Is.EqualTo(1), "equal since and cost class: the weight decides");
 		}
 
 		[Test]
@@ -382,6 +456,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var r = new UpgradeCompletions();
 			r.Observe("promotion.elite", 50, null);
 			Assert.That(r.Complete("promotion.elite"), Is.True);
+			Assert.That(r.Completed("promotion.elite"), Is.True);
 			Assert.That(r.IsDone("promotion.elite"), Is.True);
 
 			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
@@ -389,7 +464,6 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(u, Does.Contain("if (!UpgradeQueueServed(category))"), "BuildingAddons only with its toggle");
 			Assert.That(u, Does.Contain("upgradeDone.Observe(item.Name, world.WorldTick, item.TraitInfoOrDefault<BuildableInfo>()?.Prerequisites);"));
 			Assert.That(u, Does.Contain("if (upgradeDone.IsDone(item.Name))\n\t\t\t\t\t\t\t\tcontinue;"), "a done type is not started again");
-			Assert.That(u, Does.Contain("world.ActorAdded += UpgradeCompleted;"));
 			Assert.That(Source("mods/CA/Traits/BotModules/BotModuleLogic/AblationIds.UpgradeQueue.cs"), Does.Contain("\"upg_building_addons\""));
 			Assert.That(u, Does.Contain("bool UpgradeQueueServed(string category) =>\n\t\t\tcategory != \"BuildingAddons\" || (Info.UpgradeBuildingAddons"));
 
@@ -500,14 +574,12 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(dev, Does.Contain("UpgradeQueues = new HashSet<string>(units.SelectMany(u => u.Info.UpgradeServiceQueues)"), "the served queues come from the seat's UnitBuilder");
 			Assert.That(dev, Does.Contain("cov.UpgradeAvailable.TryAdd(name, queue.Info.Type)"), "once per seat and type");
 			Assert.That(dev, Does.Contain("EmitUpgradeRow(seat, \"ub_upgrade_available\", name, queue.Info.Type)"));
-			Assert.That(dev, Does.Contain("cov.UpgradeDone.Add(name)"));
-			Assert.That(dev, Does.Contain("EmitUpgradeRow(seat, \"ub_upgrade_done\", name, queue)"));
-			Assert.That(dev, Does.Contain("world.ActorAdded += UpgradeDoneSafe;"));
-			Assert.That(dev, Does.Contain("Fail(e, \"ub_upgrade_done\")"), "a fault ends the channel, never the game");
+			Assert.That(dev, Does.Contain("cov.UpgradeDone.Add(pair.Key)"));
+			Assert.That(dev, Does.Contain("EmitUpgradeRow(seat, \"ub_upgrade_done\", pair.Key, pair.Value)"));
+			Assert.That(dev, Does.Contain("cov.UpgradeRegistries.Any(r => r.Completed(pair.Key))"), "the module's registry decides completion");
 
 			// the row is written only for a type first seen available, so a plain unit or building never writes it
-			var done = dev.IndexOf("void UpgradeDoneSafe(", StringComparison.Ordinal);
-			Assert.That(dev.Substring(done, 900), Does.Contain("cov.UpgradeAvailable.TryGetValue(name, out var queue)"));
+			Assert.That(dev, Does.Contain("foreach (var pair in cov.UpgradeAvailable)"));
 		}
 
 		// Workhorse c5 nits.

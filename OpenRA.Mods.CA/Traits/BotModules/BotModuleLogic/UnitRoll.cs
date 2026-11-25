@@ -24,8 +24,11 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>The largest weight one candidate may take; keeps the cumulative sum inside an int roll.</summary>
 		public const double WeightCap = 1e12;
 
-		/// <summary>The resolution of the uniform draw: the roll is Next(RollResolution) / RollResolution, scaled by the total weight in double (no int cast of a weight).</summary>
-		public const int RollResolution = 1 << 30;
+		/// <summary>The sync RNG draws an integer below 2^DrawBits (the deterministic 30-bit draw); the weights are quantized to integers whose sum is at most that.</summary>
+		public const int DrawBits = 30;
+
+		/// <summary>Every candidate keeps at least total / 2^RelativeFloorBits of the weight before quantizing, so a tiny weight next to a huge one still owns a drawable interval.</summary>
+		public const int RelativeFloorBits = 20;
 
 		/// <summary>Percent bias of a role for a personality at a tick: the early value, moving linearly to the late value over rampTicks (late missing = stays early). 100 = neutral.</summary>
 		public static int RoleBiasPct(IReadOnlyDictionary<string, int> early, IReadOnlyDictionary<string, int> late, string personality, string role, int tick, int rampTicks)
@@ -106,17 +109,63 @@ namespace OpenRA.Mods.CA.Traits
 			return total;
 		}
 
-		/// <summary>The index a roll in [0, Total) lands on, by cumulative sum in double (no cast, no wrap); the last candidate when the roll reaches the end; -1 for an empty list.</summary>
-		public static int Pick(IReadOnlyList<double> weights, double roll)
+		/// <summary>
+		/// The weights as integers for the deterministic 30-bit draw: every candidate is first lifted to at least total / 2^RelativeFloorBits (a relative floor), then scaled so the integer sum is at
+		/// most 2^DrawBits, and every candidate gets at least 1 unit. Pure arithmetic, no random draw.
+		/// </summary>
+		public static int[] Quantize(IReadOnlyList<double> weights)
 		{
-			for (var i = 0; i < weights.Count; i++)
+			var n = weights.Count;
+			var units = new int[n];
+			if (n == 0)
+				return units;
+
+			double total = 0;
+			for (var i = 0; i < n; i++)
+				total += double.IsFinite(weights[i]) && weights[i] > 0 ? weights[i] : 0;
+
+			var floor = total / (1 << RelativeFloorBits);
+			var lifted = new double[n];
+			double sum = 0;
+			for (var i = 0; i < n; i++)
 			{
-				roll -= weights[i];
+				lifted[i] = Math.Max(floor, double.IsFinite(weights[i]) && weights[i] > 0 ? weights[i] : 0);
+				sum += lifted[i];
+			}
+
+			if (sum <= 0)
+			{
+				Array.Fill(units, 1);
+				return units;
+			}
+
+			var budget = (1 << DrawBits) - n;
+			for (var i = 0; i < n; i++)
+				units[i] = 1 + (int)Math.Min(budget, Math.Floor(lifted[i] / sum * budget));
+
+			return units;
+		}
+
+		public static int Sum(IReadOnlyList<int> units)
+		{
+			var total = 0;
+			foreach (var u in units)
+				total += u;
+
+			return total;
+		}
+
+		/// <summary>The index a draw in [0, Sum) lands on, walking the integer cumulative sum (no cast, no wrap); the last candidate when the draw reaches the end; -1 for an empty list.</summary>
+		public static int Pick(IReadOnlyList<int> units, int roll)
+		{
+			for (var i = 0; i < units.Count; i++)
+			{
+				roll -= units[i];
 				if (roll < 0)
 					return i;
 			}
 
-			return weights.Count - 1;
+			return units.Count - 1;
 		}
 
 		/// <summary>

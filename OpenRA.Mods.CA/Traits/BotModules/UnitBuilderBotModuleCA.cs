@@ -717,6 +717,9 @@ namespace OpenRA.Mods.CA.Traits
 		// UPGRADE-COVERAGE: the once-done registry of this player's upgrade-like items (fed when the item completes).
 		readonly UpgradeCompletions upgradeDone = new();
 
+		/// <summary>The once-done registry (the DEV coverage rows read it).</summary>
+		public UpgradeCompletions UpgradeRegistry => upgradeDone;
+
 		// PR-2 queue depth (fair path only): world ticks between this bot's last two passes. Round-robin makes it long;
 		// a single-slot queue is topped up while its loaded build time is shorter than this gap (QueueDepthCA).
 		// 0 until two passes were seen, which keeps the old "fill only an empty queue" rule on the first pass.
@@ -947,21 +950,66 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			unitsToBuild = new ActorIndex.OwnerAndNames(world, referencedUnitTypes, player);
-			world.ActorAdded += UpgradeCompleted;
 #if CAMEO_DEV_LOGGING
 			world.ActorAdded += RollUnitBuilt;
 #endif
 		}
 
-		// UPGRADE-COVERAGE: the item finished = the actor of its own name enters the world for this player (the ^ResearchedUpgradeTemplate items become prerequisites by name).
-		// Only a type the service has seen buildable is registered, so a unit or building never marks anything. Same event as the DEV row ub_upgrade_done.
-		void UpgradeCompleted(Actor a)
+		// UPGRADE-COVERAGE completion (authoritative, no event guess): an item is done when it LEFT the served queues (it was in production on the last visit, not now) and the player
+		// now holds the prerequisite it grants (ITechTreePrerequisite, the same state the tech tree reads, so a cancelled item never counts), or when that prerequisite is already held at the
+		// first visit (a restored game or a pre-existing completion). An item that grants only a condition and no prerequisite is not detected (documented: never counted done, never wrongly done).
+		bool upgradeScanned;
+		readonly HashSet<string> upgradeQueuedLast = new(StringComparer.Ordinal);
+
+		HashSet<string> OwnedPrerequisites()
 		{
-			if (a.Owner != player || IsTraitDisabled)
+			var owned = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+			foreach (var pair in world.ActorsWithTrait<ITechTreePrerequisite>())
+			{
+				if (pair.Actor.Owner != player || !pair.Actor.IsInWorld || pair.Actor.IsDead)
+					continue;
+
+				foreach (var p in pair.Trait.ProvidesPrerequisites)
+					if (p != null)
+						owned.Add(p);
+			}
+
+			return owned;
+		}
+
+		bool ServedByUpgradeService(ActorInfo a) =>
+			a.TraitInfos<BuildableInfo>().Any(bi => bi.Queue.Any(q => Array.IndexOf(Info.UpgradeServiceQueues, q) >= 0));
+
+		void UpgradeScanOnce()
+		{
+			if (upgradeScanned)
 				return;
 
-			if (upgradeDone.Complete(a.Info.Name))
-				UpgradeDoneLog(a.Info.Name);
+			upgradeScanned = true;
+			var owned = OwnedPrerequisites();
+			if (owned.Count == 0)
+				return;
+
+			foreach (var a in world.Map.Rules.Actors.Values)
+				if (owned.Contains(a.Name) && ServedByUpgradeService(a) && upgradeDone.Complete(a.Name))
+					UpgradeDoneLog(a.Name);
+		}
+
+		void UpgradeCheckCompleted(HashSet<string> inProduction)
+		{
+			HashSet<string> owned = null;
+			foreach (var name in upgradeQueuedLast)
+			{
+				if (inProduction.Contains(name) || upgradeDone.Completed(name))
+					continue;
+
+				owned ??= OwnedPrerequisites();
+				if (owned.Contains(name) && upgradeDone.Complete(name))
+					UpgradeDoneLog(name);
+			}
+
+			upgradeQueuedLast.Clear();
+			upgradeQueuedLast.UnionWith(inProduction);
 		}
 
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
@@ -1315,6 +1363,9 @@ namespace OpenRA.Mods.CA.Traits
 				foreach (var queue in AIUtils.FindQueues(player, category))
 					foreach (var queued in queue.AllQueued())
 						inProduction.Add(queued.Item);
+
+			UpgradeScanOnce();
+			UpgradeCheckCompleted(inProduction);
 
 			var paused = requestPause.Any(rp => rp.IsTraitEnabled() && rp.PauseUnitProduction && rp is not IBotItemAwareUnitCap);
 			foreach (var category in Info.UpgradeServiceQueues)
@@ -2648,8 +2699,8 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			var weights = UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct, boosts);
-			var draw = BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(UnitRoll.RollResolution) / (double)UnitRoll.RollResolution;
-			var pick = UnitRoll.Pick(weights, draw * UnitRoll.Total(weights));
+			var units = UnitRoll.Quantize(weights); // integer units, sum <= 2^30, relative floor: every candidate owns a drawable interval
+			var pick = UnitRoll.Pick(units, BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(UnitRoll.Sum(units)));
 			rollFirst = !rollOrdered.Contains(pool[pick].Name);
 			RollPickLog(queue.Info.Type, pool, weights, pick, rollFirst, fractions, biases, counterPcts, boosts);
 			return pool[pick];
@@ -3186,7 +3237,6 @@ namespace OpenRA.Mods.CA.Traits
 
 		void INotifyActorDisposing.Disposing(Actor self)
 		{
-			world.ActorAdded -= UpgradeCompleted;
 #if CAMEO_DEV_LOGGING
 			world.ActorAdded -= RollUnitBuilt;
 #endif

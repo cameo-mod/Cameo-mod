@@ -21,9 +21,9 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly record struct Candidate(string Name, int Cost, int Weight, int Since = 0);
 
 		/// <summary>
-		/// Index of the item to start, or -1. Free items (cost 0, promotions) are always eligible and rank first. A paid item needs
+		/// Index of the item to start, or -1. Free items (cost 0, promotions) are always eligible. A paid item needs
 		/// no pause vote and no bank (user rule: no cash floor; OpenRA pays progressively). Items in <paramref name="excluded"/> (already in production in any queue)
-		/// are never chosen. Among the eligible: free first, then the one buildable longest (lowest Since: fairness, nothing starves behind a heavier weight), then higher weight, then lower cost, then a seeded stable hash of the name (ties only), then name (ordinal). No random draw.
+		/// are never chosen. Among the eligible: the one buildable longest first (lowest Since, free or paid: fairness, nothing starves behind a heavier weight), then free, then higher weight, then lower cost, then a seeded stable hash of the name (ties only), then name (ordinal). No random draw.
 		/// </summary>
 		public static int Choose(IReadOnlyList<Candidate> items, ISet<string> excluded, bool paused, int tieSeed = 0)
 		{
@@ -50,13 +50,14 @@ namespace OpenRA.Mods.CA.Traits
 
 		static bool Better(Candidate a, Candidate b, int tieSeed)
 		{
+			// oldest-available first, free or paid; free only breaks a tie in Since
+			if (a.Since != b.Since)
+				return a.Since < b.Since;
+
 			var aFree = a.Cost <= 0;
 			var bFree = b.Cost <= 0;
 			if (aFree != bFree)
 				return aFree;
-
-			if (a.Since != b.Since)
-				return a.Since < b.Since;
 
 			if (a.Weight != b.Weight)
 				return a.Weight > b.Weight;
