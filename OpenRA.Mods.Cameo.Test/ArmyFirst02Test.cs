@@ -140,12 +140,13 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void TheSwitchGrantsEveryTierAndNothingElse()
+		public void TheSwitchGrantIsEmptiedByConsolidate01AndNothingElseGrantsIt()
 		{
 			var difficulties = TopLevel().Single(n => n.Key == "^AIDifficulties").Value.Nodes;
 			var grant = difficulties.Single(n => n.Key == "GrantConditionOnBotOwner@armyfirst02");
 			Assert.That(Field(grant, "Condition"), Is.EqualTo("army_first_02"));
-			Assert.That(Field(grant, "Bots").Split(',').Select(b => b.Trim()), Is.EqualTo(Tiers), "the 11 tiers, Noob..Cameo God");
+			// CONSOLIDATE-01 c7: the grant is emptied; the base-build pipeline replaced the af02 vote for the tiers (Consolidate01C7Test).
+			Assert.That(grant.Value.Nodes.Single(n => n.Key == "Bots").Value.Value?.Trim() ?? "", Is.Empty, "no tier bot carries the af02 vote");
 			Assert.That(difficulties.Count(n => n.Value.Nodes.Any(c => c.Key == "Condition" && c.Value.Value.Trim() == "army_first_02")),
 				Is.EqualTo(1), "one grant: classic and the exploit personalities never get it");
 		}

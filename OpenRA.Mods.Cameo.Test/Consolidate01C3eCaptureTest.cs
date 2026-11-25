@@ -174,7 +174,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(module, Does.Contain("public readonly bool CsCaptureUnlock = false;"));
 			Assert.That(module, Does.Contain("public bool CaptureUnlockArmed => Info.CsCaptureUnlock && switchesActive && !ablateCaptureUnlock.Off(player, AblationIds.CsCaptureUnlock);"));
 			Assert.That(new BaseBuilderBotModuleCAInfo().CsCaptureUnlock, Is.False);
-			Assert.That(Source("packaging/ai.yaml"), Does.Not.Contain("CsCaptureUnlock"), "C7 arms it");
+			// C7 arms it in BaseBuilderBotModuleCA@generic only (Consolidate01C7Test).
 		}
 
 		[Test]

@@ -114,9 +114,11 @@
 	# 11-22 "each available building at least once, then army"): ArmyFirstBotModule@af02 below holds only EXTRA copies
 	# (every first copy passes), defences follow a threat-scaled cap, not the stock vote. This grant is the feature switch:
 	# empty Bots = the DEFENCE-ZERO-FIX state (no tier voter). Classic never gets it (no genericbot).
+	# CONSOLIDATE-01 c7 (V08): emptied. The pipeline (BaseBuilderBotModuleCA@generic BbPipeline01) holds the first copies (S5), the
+	# defence cap (S9) and the share (S10), so no tier bot carries the af02 building vote any more. ArmyFirstBotModule stays for fransbot.
 	GrantConditionOnBotOwner@armyfirst02:
 		Condition: army_first_02
-		Bots: noob, easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod
+		Bots:
 	# PROD-IDLE G1 (PLAN_03 section 5, PLAN_04 rows 1-2): parallel_production is no longer granted and
 	# ParallelProductionBotModule is removed (unchanged by the DEFENCE-ZERO-FIX revert).
 	# The line-of-death fix (unified concave, AI_ARCHITECTURE 12.7a): Rush squads deploy a range-matched
@@ -5932,6 +5934,20 @@ Player:
 		RefinerySafetyAllClaims: true
 		# CONSOLIDATE-01 c1 (B07/X11): bb_recount_in_flight - in-flight buildings recounted every tick whatever the bank; genericbot only.
 		RecountInFlightAlways: true
+		# CONSOLIDATE-01 c7 (yaml arm, V08): the base-build pipeline replaces the old pick ladder for the tier bots (rows bb_pipeline_01,
+		# bb_antirush_set, bb_passive_income, bb_extra_defence, cs_capture_unlock); genericbot only (SwitchCondition), @classic unchanged.
+		# S4 N comes from AntiRushBaseMin/Max above on the straight tier line.
+		BbPipeline01: true
+		BbAntiRushSet: true
+		BbPassiveIncome: true
+		BbExtraDefence: true
+		CsCaptureUnlock: true
+		# af2_defence_cap moves from ArmyFirstBotModule@af02 (its grant is emptied in ^AIDifficulties) into the pipeline, same values.
+		DefenceCapBase: 3
+		DefenceCapPerThreat: 6
+		DefenceThreatSaturationPercent: 300
+		TurtleDefenceCapPercent: 200
+		TurtleDefenceUntilTick: 27000
 		# REF-FIELD-02 (row rf_economy_gate): ref1, the first vehicle factory, then ref2; 1500 ticks between refineries; from the third refinery a
 		# pending first copy goes first (at most 1500 ticks); a yard with no refinery skips the gate (expansion refinery). genericbot only.
 		RefineryEconomyGate: true

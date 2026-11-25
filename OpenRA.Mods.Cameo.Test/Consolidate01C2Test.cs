@@ -337,7 +337,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(AblationIds.BbPipeline01, Is.EqualTo("bb_pipeline_01"));
 			Assert.That(AblationSpec.RegistryIds(), Does.Contain("bb_pipeline_01"));
 
-			Assert.That(Source("packaging/ai.yaml"), Does.Not.Contain("BbPipeline01"), "C7 arms it");
+			// C7 arms it in BaseBuilderBotModuleCA@generic only (Consolidate01C7Test); no content pack arms it.
 			var packs = Directory.GetFiles(Path.Combine(AppContext.BaseDirectory, "source", "packs"), "ai.yaml", SearchOption.AllDirectories);
 			Assert.That(packs, Is.Not.Empty);
 			foreach (var pack in packs)
