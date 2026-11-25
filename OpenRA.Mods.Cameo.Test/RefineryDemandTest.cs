@@ -290,8 +290,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var search = Source("mods/CA/Traits/BotModules/BotModuleLogic/RefinerySiteSearch.cs");
 			Assert.That(search, Does.Contain("InsertBest(e.Relaxed, c, x => x.Score, x => x.Cell);"));
 			Assert.That(search, Does.Contain("PromoteRelaxed(e, now);"));
-			Assert.That(search, Does.Not.Contain("PromoteRelaxed(e, now);
-					e.InO3R = false;"), "the visit budget running out is no certificate");
+			Assert.That(search, Does.Not.Match(@"PromoteRelaxed\(e, now\);\s*e\.InO3R = false;"), "the visit budget running out is no certificate");
 			Assert.That(search, Does.Contain("// The exhaustive strict certificate"));
 		}
 
