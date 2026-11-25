@@ -141,8 +141,12 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("UNIT-ALL-01: the epsilon of the roll: a candidate's weight is at least this percent of the mean candidate weight.")]
 		public readonly int UnitRollFloorPct = 5;
 
-		[Desc("UNIT-ALL-01: the counter term adds up to this percent to the candidate that best answers the OBSERVED enemy army (the fog memory only; nothing is read off an enemy actor).")]
-		public readonly int UnitRollCounterGainPct = 200;
+		[Desc("UNIT-ALL-01 mode bias profiles: profile name -> strength percent (0 or absent = off). A profile is a folded layer that multiplies the roll weight only while its existing trigger holds; it never gates.",
+			"composition: units of the active composition, +strength x share/best share. counter: up to +strength for the best answer to the OBSERVED enemy army (the fog memory only).",
+			"wavemix: +strength for units of a wave role the idle pool lacks. roledeficit: the personality RoleMix deficit term, scaled by strength/100.",
+			"opening: +strength for OpeningDefenseUnitTypes while the base builder's opening-defence window holds. learned: the IBotProductionWeight prior, scaled by strength/100.",
+			"Each profile has its own ablation row (ub_roll_<name>); the category floors keep their own row um_category_floor (serve order).")]
+		public readonly Dictionary<string, int> UnitRollProfiles = null;
 
 		[Desc("UNIT-ALL-01: the personality names the bias tables are keyed by; the bot reads its own from the granted personality-<name> condition.")]
 		public readonly string[] UnitRollPersonalities = [];
@@ -990,8 +994,8 @@ namespace OpenRA.Mods.CA.Traits
 				visitGapTicks = lastPassTick < 0 ? 0 : world.WorldTick - lastPassTick;
 				lastPassTick = world.WorldTick;
 
-				// UNIT-ALL-01: compositions are one of the layers the roll replaces; none is ever selected while it is on.
-				if (!UnitRollOn)
+				// UNIT-ALL-01: compositions are a mode bias profile under the roll: one is selected (and expires) only while the composition profile is on; they never replace the table.
+				if (!UnitRollOn || RollProfileOn(UnitRoll.Composition))
 					UpdateComposition();
 
 				// U1 (Sol F1): one ephemeral reservation batch shared by the external
@@ -2483,27 +2487,48 @@ namespace OpenRA.Mods.CA.Traits
 				pool = items;
 
 			var roles = unitRoles ??= player.PlayerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
-			var deficits = RollRoleDeficits(roles);
-			var providers = ActiveProductionWeights();
-			var scores = pool.Select(a => counters.CounterScore(a)).ToList();
-			var best = scores.Max();
+
+			// The mode bias profiles: each is a strength (0 = switched off or ablated) and a trigger; all of them only multiply.
+			var strength = new int[UnitRoll.ProfileNames.Length];
+			for (var p = 0; p < strength.Length; p++)
+				strength[p] = RollStrength(p);
+
+			var deficits = strength[UnitRoll.RoleDeficit] > 0 ? RollRoleDeficits(roles) : null;
+			var providers = strength[UnitRoll.Learned] > 0 ? ActiveProductionWeights() : null;
+			var scores = strength[UnitRoll.Counter] > 0 ? pool.Select(a => counters.CounterScore(a)).ToList() : null;
+			var best = scores?.Max() ?? 0;
+			var missingRoles = strength[UnitRoll.WaveMix] > 0 ? RollMissingWaveRoles(queue.Info.Type, pool, roles) : null;
+			var composition = strength[UnitRoll.Composition] > 0 && activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type)
+				? activeComposition.UnitsToBuild : null;
+			var bestShare = composition != null && composition.Count > 0 ? composition.Values.Max() : 0;
+			var opening = strength[UnitRoll.Opening] > 0 && baseBuilder != null && baseBuilder.CanTrainOpeningDefense;
 
 			var fractions = new int[pool.Count];
 			var biases = new int[pool.Count];
 			var counterPcts = new int[pool.Count];
 			for (var i = 0; i < pool.Count; i++)
 			{
-				var role = roles?.PrimaryRoleOf(pool[i].Name);
+				var name = pool[i].Name;
+				var role = roles?.PrimaryRoleOf(name);
 				var bias = UnitRoll.RoleBiasPct(Info.UnitRollBias, Info.UnitRollBiasLate, rollPersonality, role, world.WorldTick, Info.UnitRollRampTicks);
-				if (role != null && deficits.TryGetValue(role, out var deficit))
-					bias = UnitRoll.MulPct(bias, deficit);
+				if (deficits != null && role != null && deficits.TryGetValue(role, out var deficit))
+					bias = UnitRoll.MulPct(bias, UnitRoll.Scaled(deficit, strength[UnitRoll.RoleDeficit]));
 
-				if (providers.Count > 0)
-					bias = UnitRoll.MulPct(bias, LearnedWeightPercent(pool[i], providers));
+				if (providers != null && providers.Count > 0)
+					bias = UnitRoll.MulPct(bias, UnitRoll.Scaled(LearnedWeightPercent(pool[i], providers), strength[UnitRoll.Learned]));
 
-				fractions[i] = table[pool[i].Name];
+				if (missingRoles != null && role != null)
+					bias = UnitRoll.MulPct(bias, UnitRoll.Boost(missingRoles.Contains(role), strength[UnitRoll.WaveMix]));
+
+				if (composition != null && composition.TryGetValue(name, out var compositionShare))
+					bias = UnitRoll.MulPct(bias, UnitRoll.ShareBoost(compositionShare, bestShare, strength[UnitRoll.Composition]));
+
+				if (opening)
+					bias = UnitRoll.MulPct(bias, UnitRoll.Boost(Info.OpeningDefenseUnitTypes.Contains(name), strength[UnitRoll.Opening]));
+
+				fractions[i] = table[name];
 				biases[i] = bias;
-				counterPcts[i] = UnitRoll.CounterPct(scores[i], best, Info.UnitRollCounterGainPct);
+				counterPcts[i] = scores == null ? 100 : UnitRoll.CounterPct(scores[i], best, strength[UnitRoll.Counter]);
 			}
 
 			var weights = UnitRoll.Weights(fractions, biases, counterPcts, Info.UnitRollFloorPct);
@@ -2511,6 +2536,36 @@ namespace OpenRA.Mods.CA.Traits
 			var pick = UnitRoll.Pick(weights, BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(total));
 			RollPickLog(queue.Info.Type, pool, weights, pick, rollFirst);
 			return pool[pick];
+		}
+
+		// The strength of a mode bias profile (UnitRoll.ProfileNames order): the yaml percent, 0 while the profile is absent from UnitRollProfiles or its ablation row is off.
+		readonly AblationLatch[] rollProfileLatches = new AblationLatch[UnitRoll.ProfileNames.Length];
+
+		int RollStrength(int profile) =>
+			Info.UnitRollProfiles != null && Info.UnitRollProfiles.TryGetValue(UnitRoll.ProfileNames[profile], out var s) && s > 0 &&
+			!rollProfileLatches[profile].Off(player, AblationIds.UnitRollProfileRows[profile]) ? s : 0;
+
+		bool RollProfileOn(int profile) => switchesActive && Info.UnitRoll && RollStrength(profile) > 0;
+
+		// wavemix profile trigger (the ARMY-MIX-01 one): the squad manager's wave mix is active and the idle pool covers fewer wave roles than needed; the roles it lacks that this
+		// queue can build are the boosted ones. This queue's buildable roles are also reported to the squad manager's wave hold, exactly as the old pick did.
+		HashSet<string> RollMissingWaveRoles(string queueType, List<ActorInfo> pool, IBotUnitRoles roles)
+		{
+			var manager = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().FirstEnabledTraitOrDefault();
+			if (manager == null || !manager.WaveMixActive || roles == null)
+				return null;
+
+			var now = world.WorldTick;
+			var queueRoles = WaveMixCA.DistinctRoles(pool.Select(a => roles.PrimaryRoleOf(a.Name)));
+			waveMixAvailable[queueType] = (now, queueRoles);
+			if (queueRoles.Count == 0 || !TryAvailableWaveRoles(now, out var available))
+				return null;
+
+			var poolRoles = manager.WaveMixPoolRoles();
+			if (poolRoles.Count >= WaveMixCA.Needed(manager.Info.WaveMixMinRoles, available.Count))
+				return null;
+
+			return queueRoles.Where(r => !poolRoles.Contains(r)).ToHashSet(StringComparer.Ordinal);
 		}
 
 		// The role-mix deficit per role in percent (100 neutral): the personality RoleMix target against the live army, one census per world tick.

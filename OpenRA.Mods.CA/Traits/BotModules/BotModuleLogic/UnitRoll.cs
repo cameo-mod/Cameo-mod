@@ -47,6 +47,24 @@ namespace OpenRA.Mods.CA.Traits
 		public static int DeficitPct(int targetPct, int actualPct) =>
 			targetPct <= 0 || actualPct >= targetPct ? 100 : 100 + (int)(100L * (targetPct - actualPct) / targetPct);
 
+		/// <summary>
+		/// The mode bias profiles (UNIT-ALL-01 refinement): each folded layer is a named profile, active only while its existing trigger holds. A profile multiplies the weight, never gates,
+		/// and has its own yaml strength (UnitRollProfiles; 0 = off) and ablation row (AblationIds.UnitRollProfileRows, same order).
+		/// </summary>
+		public static readonly string[] ProfileNames = ["composition", "counter", "wavemix", "roledeficit", "opening", "learned"];
+
+		public const int Composition = 0, Counter = 1, WaveMix = 2, RoleDeficit = 3, Opening = 4, Learned = 5;
+
+		/// <summary>A boost profile: 100 + strength while its trigger holds for the candidate, else neutral.</summary>
+		public static int Boost(bool active, int strengthPct) => active && strengthPct > 0 ? 100 + strengthPct : 100;
+
+		/// <summary>A strength-scaled term: 100 + (term - 100) x strength / 100, never below 0 (strength 100 = the term as is).</summary>
+		public static int Scaled(int termPct, int strengthPct) => (int)Math.Max(0, 100 + (long)(termPct - 100) * Math.Max(0, strengthPct) / 100);
+
+		/// <summary>A composition's pull on a unit: 100 + strength x share / best share of that composition (best share 0 = neutral).</summary>
+		public static int ShareBoost(int share, int bestShare, int strengthPct) =>
+			share <= 0 || bestShare <= 0 || strengthPct <= 0 ? 100 : 100 + (int)((long)strengthPct * Math.Min(share, bestShare) / bestShare);
+
 		/// <summary>Percent product of two percent terms.</summary>
 		public static int MulPct(int a, int b) => (int)Math.Clamp((long)a * b / 100, 0, 100_000);
 

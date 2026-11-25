@@ -6376,7 +6376,15 @@ Player:
 		# The composition, derived-weight, counter, wave-mix, role-deficit, share-test and idle-floor layers are not consulted while it is on. genericbot only (SwitchCondition above).
 		UnitRoll: true
 		UnitRollFloorPct: 5
-		UnitRollCounterGainPct: 200
+		# Mode bias profiles = the folded layers (compositions, counter, wave-mix role, role deficit, opening-defence units, learned priors): each multiplies the weight only while its existing trigger holds, never gates.
+		# Value = strength percent (0 = off); every profile has its own ablation row ub_roll_<name>. Learnable later (MODE-LEARN-01): a profile that does not help goes to 0.
+		UnitRollProfiles:
+			composition: 100
+			counter: 200
+			wavemix: 100
+			roledeficit: 100
+			opening: 150
+			learned: 100
 		UnitRollPersonalities: rush, turtle, tech, expansion, steamroller, guerrilla
 		# Personality bias, percent (100 = neutral), keys <personality>.<role>. Rush: infantry-heavy early, vehicles and aircraft later (ramp to UnitRollBiasLate over UnitRollRampTicks).
 		UnitRollBias:

@@ -135,7 +135,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(noCandidate, Is.GreaterThan(rollPick), "an empty roll ends the queue's fill");
 			Assert.That(idleFloor, Is.GreaterThan(noCandidate), "...before the idle floor");
 			Assert.That(mixFloor, Is.GreaterThan(noCandidate), "...and before the category floor");
-			Assert.That(u, Does.Contain("if (!UnitRollOn)\n\t\t\t\t\tUpdateComposition();"));
+			Assert.That(u, Does.Contain("if (!UnitRollOn || RollProfileOn(UnitRoll.Composition))\n\t\t\t\t\tUpdateComposition();"));
 			Assert.That(u, Does.Contain("if (!ignoreUnitsToBuild && !UnitRollOn && unitsToBuildShares != null"), "the roll's candidates are the listed table: no share-membership refusal");
 
 			// the candidate set: the raw UnitsToBuild table, no harvesters, hard gates before the pick
@@ -147,7 +147,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(body, Does.Contain("ShouldBuildReject(a.Name, true, queue.Info.Type) != null"), "delay, interval, limit, capturer and item-aware caps still apply");
 			Assert.That(body, Does.Not.Contain("GetUnitsToBuildForCategory"), "the derived or composition table never replaces the yaml fractions");
 			Assert.That(body, Does.Not.Contain("ChooseCounter").And.Not.Contain("ChooseWaveMixRole").And.Not.Contain("ChooseRoleDeficit"));
-			Assert.That(body, Does.Contain("fractions[i] = table[pool[i].Name];"));
+			Assert.That(body, Does.Contain("fractions[i] = table[name];"));
 			Assert.That(body, Does.Contain("UnitRoll.Weights(fractions, biases, counterPcts, Info.UnitRollFloorPct)"));
 		}
 
@@ -218,6 +218,55 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(generic.Single(n => n.Key == "UnitRoll").Value.Value, Is.EqualTo("true"));
 			foreach (var o in player.Where(n => n.Key.StartsWith("UnitBuilderBotModuleCA", StringComparison.Ordinal) && n.Key != "UnitBuilderBotModuleCA@generic"))
 				Assert.That(o.Value.Nodes.Any(n => n.Key.StartsWith("UnitRoll", StringComparison.Ordinal)), Is.False, o.Key);
+		}
+
+		// USER refinement: the folded layers are mode bias profiles. Each multiplies, never gates; each has its own strength (yaml) and ablation row.
+		[Test]
+		public void EveryProfileIsAMultiplierWithItsOwnRowAndStrengthAndNoneCanZeroACandidate()
+		{
+			Assert.That(UnitRoll.ProfileNames, Is.EqualTo(new[] { "composition", "counter", "wavemix", "roledeficit", "opening", "learned" }));
+			Assert.That(AblationIds.UnitRollProfileRows, Is.EqualTo(new[] { "ub_roll_composition", "ub_roll_counter", "ub_roll_wavemix", "ub_roll_roledeficit", "ub_roll_opening", "ub_roll_learned" }));
+			Assert.That(AblationIds.UnitRollProfileRows.Distinct().Count(), Is.EqualTo(UnitRoll.ProfileNames.Length));
+
+			Assert.That(UnitRoll.Boost(false, 150), Is.EqualTo(100), "trigger not holding: neutral");
+			Assert.That(UnitRoll.Boost(true, 0), Is.EqualTo(100), "strength 0 = off");
+			Assert.That(UnitRoll.Boost(true, 150), Is.EqualTo(250));
+			Assert.That(UnitRoll.Scaled(200, 100), Is.EqualTo(200), "strength 100 = the term as is");
+			Assert.That(UnitRoll.Scaled(200, 50), Is.EqualTo(150));
+			Assert.That(UnitRoll.Scaled(200, 0), Is.EqualTo(100), "strength 0 = neutral");
+			Assert.That(UnitRoll.Scaled(0, 100), Is.EqualTo(0), "a learned prior of 0 stays 0 here; the floor in Weights keeps the unit alive");
+			Assert.That(UnitRoll.ShareBoost(5, 10, 100), Is.EqualTo(150));
+			Assert.That(UnitRoll.ShareBoost(0, 10, 100), Is.EqualTo(100), "not in the composition: neutral");
+			Assert.That(UnitRoll.ShareBoost(5, 0, 100), Is.EqualTo(100));
+
+			// a zero-product candidate still rolls: the floor, not the profiles, decides the minimum
+			var w = UnitRoll.Weights(new[] { 10, 10 }, new[] { 0, 100 }, new[] { 100, 100 }, 5);
+			Assert.That(w[0], Is.GreaterThan(0));
+
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			var start = u.IndexOf("ActorInfo ChooseRollUnit(", StringComparison.Ordinal);
+			var body = u.Substring(start, u.IndexOf("int rollDeficitTick", start, StringComparison.Ordinal) - start);
+			foreach (var profile in new[] { "UnitRoll.RoleDeficit", "UnitRoll.Learned", "UnitRoll.Counter", "UnitRoll.WaveMix", "UnitRoll.Composition", "UnitRoll.Opening" })
+				Assert.That(body, Does.Contain("strength[" + profile + "]"), profile);
+
+			Assert.That(u, Does.Contain("!rollProfileLatches[profile].Off(player, AblationIds.UnitRollProfileRows[profile])"));
+			Assert.That(u, Does.Contain("baseBuilder != null && baseBuilder.CanTrainOpeningDefense"), "the opening profile uses the opening-defence window of the base builder");
+			Assert.That(u, Does.Contain("manager.WaveMixActive"), "the wavemix profile uses the ARMY-MIX-01 trigger");
+		}
+
+		[Test]
+		public void TheProfileStrengthsInYamlNameKnownProfilesAndStayNonNegative()
+		{
+			var generic = MiniYaml.FromString(Source("packaging/ai.yaml"), "ai").Single(n => n.Key == "Player").Value.Nodes
+				.Single(n => n.Key == "UnitBuilderBotModuleCA@generic").Value.Nodes;
+			var profiles = generic.Single(n => n.Key == "UnitRollProfiles").Value.Nodes;
+			foreach (var p in profiles)
+			{
+				Assert.That(UnitRoll.ProfileNames, Does.Contain(p.Key), p.Key);
+				Assert.That(int.Parse(p.Value.Value), Is.GreaterThanOrEqualTo(0), p.Key);
+			}
+
+			Assert.That(profiles.Select(p => p.Key), Is.EquivalentTo(UnitRoll.ProfileNames), "every profile has a strength row");
 		}
 
 		[Test]
