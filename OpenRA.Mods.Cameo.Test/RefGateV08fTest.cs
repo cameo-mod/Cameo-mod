@@ -89,5 +89,58 @@ namespace OpenRA.Mods.Cameo.Test
 			var planner = MiniYaml.FromString(Source("packaging/ai.yaml"), "ai").Single(n => n.Key == "Player").Value.Nodes.Single(n => n.Key == "ExpansionPlannerBotModule");
 			Assert.That(planner.Value.Nodes.Any(n => n.Key == "RefRebuildLost" && n.Value.Value == "true"), Is.True);
 		}
+
+		[Test]
+		public void TheS2ZoneDemandBranchRecordsItsHoldGateInDevOnlyUnderItsOwnRow()
+		{
+			const string Dir = "mods/CA/Traits/BotModules/BotModuleLogic/";
+			var stages = Source(Dir + "BaseBuilderQueueManagerCA.Pipeline01Stages.cs");
+			Assert.That(stages, Does.Contain("\t\t\t\tif (refinery != null)\n\t\t\t\t\tyield return refinery.Name;\n\t\t\t\telse\n\t\t\t\t\tS2RefineryHeldObserved(buildable); // ref_s2_hold_log, DEV only\n\t\t\t}\n\n\t\t\tif (law == null)"),
+				"the log sits in the ZoneDemandAtS2 branch (the one followed by the law == null return)");
+			var at = stages.IndexOf("void S2RefineryHeldObserved(", StringComparison.Ordinal);
+			Assert.That(at, Is.GreaterThan(0));
+			Assert.That(stages.LastIndexOf("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]", at, StringComparison.Ordinal), Is.InRange(at - 80, at - 1), "compiled out of a release build");
+			Assert.That(stages, Does.Contain("if (ablateS2HoldLog.Off(player, AblationIds.RefS2HoldLog))\n\t\t\t\treturn;\n\n\t\t\tRefineryHeldObserved(RefineryHoldGate(buildable));"));
+			Assert.That(AblationSpec.RegistryIds(), Does.Contain("ref_s2_hold_log"));
+		}
+
+		[Test]
+		public void TheSituationCountersCanBeReadFromTheDemandVerdicts()
+		{
+			var v = RefineryDemand.Verdict.Demand;
+			var verdicts = new[]
+			{
+				v, v, RefineryDemand.Verdict.AlliedServed, RefineryDemand.Verdict.ZoneCap, RefineryDemand.Verdict.OutOfRadius, RefineryDemand.Verdict.Unreachable, v
+			};
+
+			// zone ids per anchor: anchors 0 and 6 share zone 5 (the first speaks for the zone, but anchors in reach unserved counts anchors)
+			var zones = new[] { 5, 1, 2, 3, 4, 0, 5 };
+			var inRadius = new[] { false, true, true, true, false, true };
+			var reachable = new[] { false, true, true, true, false, true };
+			var counts = ExpansionPlannerBotModule.CountZones(verdicts, zones, inRadius, reachable);
+
+			Assert.That(counts.Zones, Is.EqualTo(6));
+			Assert.That(counts.InReach, Is.EqualTo(4), "zones 1, 2, 3 and 5: in the yard radius and reachable");
+			Assert.That(counts.Served, Is.EqualTo(2), "an ally serves zone 2, zone 3 is at its cap");
+			Assert.That(counts.InReachUnserved, Is.EqualTo(2), "zones 1 and 5 are Demand (zone 5 counted once although two anchors sit in it)");
+			Assert.That(counts.AnchorsInReachUnserved, Is.EqualTo(3), "anchors 0, 1 and 6 hold a Demand verdict");
+			Assert.That(counts.InReachUnservedIds, Is.EqualTo(new[] { 1, 5 }), "sorted zone ids of the Demand zones");
+			Assert.That(counts.CoverageMilli, Is.EqualTo(4 * 1000 / 6), "zones 1, 2, 3 and 5 are in reach or served");
+
+			var empty = ExpansionPlannerBotModule.CountZones(System.Array.Empty<RefineryDemand.Verdict>(), System.Array.Empty<int>(), System.Array.Empty<bool>(), System.Array.Empty<bool>());
+			Assert.That((empty.Zones, empty.CoverageMilli, empty.InReachUnservedIds.Length), Is.EqualTo((0, 0, 0)));
+		}
+
+		[Test]
+		public void TheSituationRowReadsTheVerdictsOnlyWhenArmedAndNotAblated()
+		{
+			var log = Source("mods/Cameo/Traits/AiLogExpansion.cs");
+			Assert.That(log, Does.Contain("if (planner != null && !ablateAnchorFromDemand.Off(player, AblationIds.RefAnchorFromDemand) && planner.ZoneCountsForLog() is { } zoneCounts)"));
+			Assert.That(log, Does.Contain("snapshot.FieldsInReachUnservedIds = zoneCounts.InReachUnservedIds;"));
+			var p = Source(Planner.Replace("ExpansionPlannerBotModule.cs", "ExpansionPlannerBotModule.RefDemand.cs"));
+			Assert.That(p, Does.Contain("RefDemandArmed && anchors.Count > 0 && demandVerdicts.Length == anchors.Count\n\t\t\t\t? CountZones(demandVerdicts, anchorFieldIds, zoneInRadius, zoneReachable)\n\t\t\t\t: null;"),
+				"no refresh: a read of the last verdicts, null when not armed");
+			Assert.That(AblationSpec.RegistryIds(), Does.Contain("ref_anchor_from_demand"));
+		}
 	}
 }

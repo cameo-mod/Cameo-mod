@@ -62,6 +62,8 @@ namespace OpenRA.Mods.CA.Traits
 				var refinery = ChooseWantedRefinery(queue, buildable, power);
 				if (refinery != null)
 					yield return refinery.Name;
+				else
+					S2RefineryHeldObserved(buildable); // ref_s2_hold_log, DEV only
 			}
 
 			if (law == null)
@@ -306,6 +308,21 @@ namespace OpenRA.Mods.CA.Traits
 				return "max_refineries";
 
 			return RefineryEconomyGateOn ? "economy_" + lastRefineryEconomyVerdict : "power";
+		}
+
+		// ref_s2_hold_log (REF-GATE-V08F, Opus 11-25, REF_PEAK_RCA_01): the S2 zone-demand branch asked for the refinery and got none; record the gate that held it,
+		// as a bb_refinery_held row (the DEV writer dedupes per seat on a gate change or 750 ticks, so S2 and S7 asking in the same pass with the same gate write one row;
+		// an "s2_" prefix would flip the gate on every pass and flood the file, so the stage is not part of the row). DEV only: compiled out of a release build with its
+		// argument. Off (ablated) = no S2 row, as in V08E.
+		AblationLatch ablateS2HoldLog;
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void S2RefineryHeldObserved(List<ActorInfo> buildable)
+		{
+			if (ablateS2HoldLog.Off(player, AblationIds.RefS2HoldLog))
+				return;
+
+			RefineryHeldObserved(RefineryHoldGate(buildable));
 		}
 	}
 }
