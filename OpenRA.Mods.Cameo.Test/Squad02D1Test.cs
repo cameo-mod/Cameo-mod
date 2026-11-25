@@ -141,7 +141,7 @@ namespace OpenRA.Mods.Cameo.Test
 			const string call = "if (order.LeaderKey == team.Election.Leader && !order.GatherOnly && TeamLeadBarTimeoutPush(order, now))\n\t\t\t\treturn;";
 			Assert.That(maintain, Does.Contain(call));
 			Assert.That(maintain.IndexOf(call, StringComparison.Ordinal), Is.LessThan(maintain.IndexOf("var cancel = ", StringComparison.Ordinal)), "before the dissolve");
-			Assert.That(maintain, Does.Contain(": order.Extending && TeamLeadCA.PushBarDissolve(now, order.PushBarSince, Info.TeamLeadPushBarMaxTicks) ? \"below_bar\""), "below WAVE-MIN the order is dissolved as before");
+			Assert.That(maintain, Does.Contain(": order.Extending && !order.Persistent && TeamLeadCA.PushBarDissolve(now, order.PushBarSince, Info.TeamLeadPushBarMaxTicks) ? \"below_bar\""), "below WAVE-MIN the order is dissolved as before (a CONSOLIDATE-02 persistent order keeps gathering)");
 
 			var timeout = Between(wiring, "bool TeamLeadBarTimeoutPush(", "// TEAM-BLOB-01 telemetry");
 			Assert.That(timeout, Does.Contain("if (!TeamLeadArrivedBarOn)\n\t\t\t\treturn false;"), "off = the old dissolve");

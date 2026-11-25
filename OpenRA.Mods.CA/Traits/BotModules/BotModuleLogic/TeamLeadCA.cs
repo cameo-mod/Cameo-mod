@@ -206,6 +206,15 @@ namespace OpenRA.Mods.CA.Traits
 		public static bool PushBarDissolve(int now, int since, int maxTicks) => since >= 0 && now - since >= Math.Max(1, maxTicks);
 
 		/// <summary>
+		/// CONSOLIDATE-02 Q4b: the finite cap of a persistent order that holds its push below the bar (it is never dissolved at the push-bar max). It is
+		/// <paramref name="gatherMaxTicks"/> (at most 30000), never shorter than the push-bar max and never below 1 tick.
+		/// </summary>
+		public static int PersistentGatherCap(int gatherMaxTicks, int pushBarMaxTicks) => Math.Max(Math.Max(1, pushBarMaxTicks), Math.Min(gatherMaxTicks, 30000));
+
+		/// <summary>CONSOLIDATE-02 Q4b: the age at which a pushed persistent order is Done, clamped to the documented range 1500-30000 (a yaml 0 can no longer close it on the push tick).</summary>
+		public static int EngagedMaxAge(int configuredTicks) => Math.Clamp(configuredTicks, 1500, 30000);
+
+		/// <summary>
 		/// TEAM-BLOB-01 push bar: the squads standing at the rally (<paramref name="units"/>, <paramref name="value"/>) may advance. The unit bar is the blob launch
 		/// minimum (BlobLaunch01CA.MinUnits: the WAVE-MIN tier or half of the team's idle army, whichever is more), at least the join floor; the value bar is the
 		/// WAVE-MIN value. Both must pass: nothing below WAVE-MIN advances, and neither does a share of a much bigger army.
@@ -444,6 +453,9 @@ namespace OpenRA.Mods.CA.Traits
 		}
 	}
 
+	/// <summary>CONSOLIDATE-02 Q4: the life of a persistent order. Gather (at the rally) -> Push (released) -> Engaged (a pushed squad is in contact) -> Done (closed).</summary>
+	public enum TeamLeadOrderPhase : byte { Gather, Push, Engaged, Done }
+
 	/// <summary>One team order: where the army gathers, what it pushes, and who has reported in. Created by the leader, read by every member.</summary>
 	public sealed class TeamLeadOrder
 	{
@@ -521,8 +533,74 @@ namespace OpenRA.Mods.CA.Traits
 
 		public bool Pushed => PushTick >= 0;
 
-		/// <summary>Squads may still be formed for it: not cancelled, and either still gathering or pushed no more than <paramref name="lateJoinTicks"/> ago.</summary>
-		public bool Open(int now, int lateJoinTicks) => !Cancelled && (!Pushed || now - PushTick <= lateJoinTicks);
+		/// <summary>Squads may still be formed for it: not cancelled, and either still gathering, persistent (CONSOLIDATE-02 Q4), or pushed no more than <paramref name="lateJoinTicks"/> ago.</summary>
+		public bool Open(int now, int lateJoinTicks) => !Cancelled && (!Pushed || Persistent || now - PushTick <= lateJoinTicks);
+
+		// ---- CONSOLIDATE-02 Q4 (row sq_order_engaged): the order stays open through Push and Engaged until the leader closes it (Done) ----
+
+		/// <summary>The order stays open after the push: its squads keep its target, the leader re-picks the target for all of them, reinforcements join it as WAVE-MIN groups.</summary>
+		public bool Persistent { get; private set; }
+
+		public void MakePersistent() => Persistent = true;
+
+		/// <summary>Bumped by every leader retarget; a pushed squad that still points at an older target is re-pointed.</summary>
+		public int TargetSeq { get; private set; }
+
+		/// <summary>The tick the first pushed squad reported contact (-1 = none yet).</summary>
+		public int EngagedTick = -1;
+
+		public TeamLeadOrderPhase Phase => Cancelled ? TeamLeadOrderPhase.Done : !Pushed ? TeamLeadOrderPhase.Gather
+			: EngagedTick >= 0 ? TeamLeadOrderPhase.Engaged : TeamLeadOrderPhase.Push;
+
+		/// <summary>The leader moves the whole blob to a new target (the old one is gone); the order keeps its rally, its squads and its push.</summary>
+		public void Retarget(WPos target, uint targetActorId)
+		{
+			Target = target;
+			TargetActorId = targetActorId;
+			TargetSeq++;
+		}
+
+		/// <summary>The order is over (its blob is spent, its target side is gone, or it ran too long): it closes like a cancel, with a done_ reason.</summary>
+		public void Close(string reason)
+		{
+			Cancelled = true;
+			CancelReason = reason;
+		}
+
+		readonly Dictionary<object, (int Units, long Value, int Tick)> engaged = new();
+
+		/// <summary>A squad of the pushed order reports what it still holds; <paramref name="inContact"/> marks the order Engaged.</summary>
+		public void ReportEngaged(object squad, int units, long value, int tick, bool inContact)
+		{
+			engaged[squad] = (units, value, tick);
+			if (inContact && EngagedTick < 0)
+				EngagedTick = tick;
+		}
+
+		/// <summary>The units and value of the pushed squads that reported within <paramref name="maxAgeTicks"/>; older reports are dropped.</summary>
+		public (int Units, long Value) EngagedTotals(int now, int maxAgeTicks)
+		{
+			List<object> gone = null;
+			var units = 0;
+			long value = 0;
+			foreach (var (squad, r) in engaged)
+			{
+				if (now - r.Tick > maxAgeTicks || r.Units <= 0)
+				{
+					(gone ??= new List<object>()).Add(squad);
+					continue;
+				}
+
+				units += r.Units;
+				value += r.Value;
+			}
+
+			if (gone != null)
+				foreach (var squad in gone)
+					engaged.Remove(squad);
+
+			return (units, value);
+		}
 
 		public int ReportCount => reports.Count;
 
@@ -712,6 +790,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>The tick the last order was cancelled (a leader change excepted; -1 = never); tl_grace_rally holds the next publish for a while.</summary>
 		public int LastCancelTick = -1;
+
+		/// <summary>CONSOLIDATE-02 Q4 (Opus D4): the last tick a seat's stalemate breaker would have launched (-1 = never); an input of the all-in trigger, never a launch.</summary>
+		public int StalemateSignalTick = -1;
 
 		/// <summary>TEAM-LEAD-02 finish-the-weakest focus: the enemy seat (its player-actor id, -1 = none), the tick it was taken, and the cached pick (re-evaluated at most every check window).</summary>
 		public int FocusSeat = -1;

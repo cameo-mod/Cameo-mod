@@ -250,6 +250,10 @@ namespace OpenRA.Mods.CA.Traits
 				if (s == protectSq || !DefendAllyFreeSquad(s) || !DefendAllyCA.InRadius(s.CenterPosition, friendlyPos, radius))
 					continue;
 
+				// CONSOLIDATE-02 Q3 (sq_defend_arbiter): a local hit (P4) takes pool units in the radius only, never a squad (X9: staging and gathering squads were hijacked).
+				if (DefendArbiterOn && !DefendArbiterCA.MayTake(DefendPriority.P4LocalHit, ArmyRole.Main, ArmyHolderOf(s)))
+					continue;
+
 				s.TargetActor = attacker;
 				s.FuzzyStateMachine.ChangeState(s, new GroundUnitsAttackMoveStateCA(), false);
 				responded = true;

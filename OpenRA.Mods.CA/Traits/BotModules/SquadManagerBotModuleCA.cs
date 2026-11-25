@@ -1104,6 +1104,9 @@ namespace OpenRA.Mods.CA.Traits
 		int protectOwnTicks;
 		Actor protectOwnFrom;
 
+		// CONSOLIDATE-02 Q3: the own actor whose hit started this ProtectOwn call (null from the timer path).
+		Actor protectOwnVictim;
+
 		int desiredAttackForceValue;
 		int desiredAttackForceSize;
 		int stageSinceTick = -1;
@@ -2458,7 +2461,9 @@ namespace OpenRA.Mods.CA.Traits
 			else
 				CloseAllyAssist(BotMissionAttemptState.Released, BotMissionReasons.Superseded);
 
-			if (request == null && Info.FastSquadsReactToThreats)
+			// CONSOLIDATE-02 Q3 (sq_defend_arbiter) + Q4b: an escort/preposition answer (P5) is a pool share; the raid squads keep their job (no DF-3 fold, no DF-4 retarget) - once the
+			// one launcher owns the breaker too (ArmyDefendOwnsRecall); with the launcher off the old fast-squad fold stays.
+			if (request == null && Info.FastSquadsReactToThreats && !ArmyDefendOwnsRecall)
 				ReactWithFastSquads(bot, protectSq, rally, threat.Value.EtaTicks);
 		}
 
@@ -2669,22 +2674,41 @@ namespace OpenRA.Mods.CA.Traits
 				ReleaseM13Response(bot, TeamResponseReleaseCA.Cleared);
 				return;
 			}
+			// CONSOLIDATE-02 Q4b (sq_defend_arbiter): a defender released far from home (it answered an ally or a distant hit) walks back to the base before it counts as pool.
+			List<UnitWposWrapper> farFromHome = null;
+			var homePos = default(WPos);
+			long homeRadiusSquared = 0;
+			if (DefendArbiterOn)
+			{
+				farFromHome = new List<UnitWposWrapper>();
+				homePos = AggTeamHomePos();
+				var homeRadius = (long)AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamDefenceHomeRadiusCells)) * AggTeamPolicyCA.CellUnits;
+				homeRadiusSquared = homeRadius * homeRadius;
+			}
+
 			foreach (var u in protectSq.Units.ToList())
 			{
 				if (unitCannotBeOrdered(u.Actor))
 					continue;
 
 				var name = u.Actor.Info.Name;
-				var guerrilla = Info.GuerrillaTypes.Contains(name) && Info.JoinGuerrilla > 0 && HarassCapAllows() ? OpenGuerrillaSquad(bot) : null;
+				var guerrilla = Info.GuerrillaTypes.Contains(name) && Info.JoinGuerrilla > 0 && HarassCapAllows(u.Actor) ? OpenGuerrillaSquad(bot) : null;
 				if (guerrilla != null)
 					guerrilla.Units.Add(u);
-				else if (Info.HarasserTypes.Contains(name) && HarassCapAllows())
+				else if (Info.HarasserTypes.Contains(name) && HarassCapAllows(u.Actor))
 					AddToHarassSquad(bot, u);
 				else if (Info.FireSupportTypes.Contains(name) && OpenFireSupportSquad(bot) is { } releasedFs)
 					releasedFs.Units.Add(u);
 				else
+				{
 					unitsHangingAroundTheBase.Add(u);
+					if (farFromHome != null && (long)(u.Actor.CenterPosition - homePos).HorizontalLengthSquared > homeRadiusSquared)
+						farFromHome.Add(u);
+				}
 			}
+
+			if (farFromHome is { Count: > 0 })
+				AggTeamSendHome(bot, farFromHome, World.Map.CellContaining(homePos));
 
 			protectSq.Units.Clear();
 			protectionRally = null;
@@ -3256,6 +3280,13 @@ namespace OpenRA.Mods.CA.Traits
 							continue;
 						}
 
+						// CONSOLIDATE-02 Q4 (sq_launch_arbiter): before the first team check a quiet Rush squad waits; it never launches from its Idle state.
+						if (ArmyLaunchArbiterOn && !TeamLeadOn && s.Type == SquadCAType.Rush && AggTeamIsQuietState(s.FuzzyStateMachine?.CurrentState))
+						{
+							squadCursor = index + 1;
+							continue;
+						}
+
 						// TEAM-LEAD-01 (switch ON, team engaged): the squad joins the leader's order, or - a follower with no order - stands down.
 						if (TeamLeadOn)
 						{
@@ -3282,6 +3313,9 @@ namespace OpenRA.Mods.CA.Traits
 				activeUnits.RemoveAll(unitCannotBeOrdered);
 				FindNewUnits(bot);
 			}
+
+			// CONSOLIDATE-02 Q2 (switch ON only; returns at once while off): the army plan's Step 1 roles, once per ArmyPlanTicks.
+			ArmyPlanTick();
 
 			if (Info.AttackLivenessEnabled)
 			{
@@ -3897,7 +3931,7 @@ namespace OpenRA.Mods.CA.Traits
 					// derived air role, but only when the doctrine is on - flag off
 					// keeps master's air-first order so @classic is unmoved.
 					if (GuerrillaOutranksAir(Info.AirDoctrineEnabled, a.Info.Name, Info.GuerrillaTypes)
-						&& guerrillaRoll && HarassCapAllows() && OpenGuerrillaSquad(bot) is { } airGuerrilla)
+						&& guerrillaRoll && HarassCapAllows(a) && OpenGuerrillaSquad(bot) is { } airGuerrilla)
 					{
 						airGuerrilla.Units.Add(new UnitWposWrapper(a));
 						AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, airGuerrilla.Type);
@@ -3946,12 +3980,12 @@ namespace OpenRA.Mods.CA.Traits
 					fsSquad.Units.Add(new UnitWposWrapper(a));
 					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, fsSquad.Type);
 				}
-				else if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaRoll && HarassCapAllows() && OpenGuerrillaSquad(bot) is { } guerrillaForce)
+				else if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaRoll && HarassCapAllows(a) && OpenGuerrillaSquad(bot) is { } guerrillaForce)
 				{
 					guerrillaForce.Units.Add(new UnitWposWrapper(a));
 					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, guerrillaForce.Type);
 				}
-				else if (Info.HarasserTypes.Contains(a.Info.Name) && HarassCapAllows())
+				else if (Info.HarasserTypes.Contains(a.Info.Name) && HarassCapAllows(a))
 					AddToHarassSquad(bot, new UnitWposWrapper(a));
 				else if (Info.SupportUnitTypes.Contains(a.Info.Name))
 				{
@@ -4053,6 +4087,9 @@ namespace OpenRA.Mods.CA.Traits
 			// TEAM-LEAD-01: the leader measures the whole team's pool; a follower with an open order contributes whatever it holds (>= TeamLeadJoinMinUnits).
 			// TEAM-LEAD-02: the leader joins its own open order like a follower (the order, not the bars, decides then).
 			var teamFollowerLaunch = teamLaunch && (!TeamLeadIsLeader || (TeamLeadCadenceOn && TeamLeadOpenOrder() != null));
+			// CONSOLIDATE-02 Q4 (sq_launch_arbiter): past the hold the wave is part of the open team order (the order, not the per-bot bars, decides).
+			if (ArmyLaunchArbiterOn && teamLaunch)
+				teamFollowerLaunch = true;
 			var (launchUnits, launchValue) = TeamLeadLaunchPool(unitsHangingAroundTheBase.Count, idleUnitsValue);
 			if (aggForce || teamFollowerLaunch || AttackForceEvalCA.ShouldLaunch(launchUnits, maxIdleUnits,
 					(int)System.Math.Min(int.MaxValue, launchValue), requiredValue, requiredSize, Info.ValueOnlyAttackLaunch, Info.SquadValue))
@@ -4219,8 +4256,9 @@ namespace OpenRA.Mods.CA.Traits
 				}
 
 				// Orphaned artillery squads (e.g. after a load) re-attach to the new assault.
+				// CONSOLIDATE-02 Q2 (sq_roles): under the squad pipeline they take the seat's main squad, never just the newest one.
 				foreach (var squad in Squads.Where(s => s.Type == SquadCAType.Artillery && (s.Parent == null || !s.Parent.IsValid)))
-					squad.Parent = attackForce.IsValid ? attackForce : squad.Parent;
+					squad.Parent = ArmyAttachParent(attackForce) ?? squad.Parent;
 
 				// 12.4a: the fire-support squad protects the artillery - it trails the
 				// artillery squad and pulls a frontline escort of FireSupportEscortPerArtillery
@@ -4264,7 +4302,7 @@ namespace OpenRA.Mods.CA.Traits
 
 				// 6f: support squads trail the newest assault, healing/repairing in its wake.
 				foreach (var squad in Squads.Where(s => s.Type == SquadCAType.Support && (s.Parent == null || !s.Parent.IsValid)))
-					squad.Parent = attackForce.IsValid ? attackForce : squad.Parent;
+					squad.Parent = ArmyAttachParent(attackForce) ?? squad.Parent;
 
 				AIUtils.BotDebug("AI ({0}): Added {1} units to squad {2}", Player.ClientIndex, attackForce.Units.Count, attackForce.Type);
 				if (waveLaunchSummary != null)
@@ -4416,7 +4454,12 @@ namespace OpenRA.Mods.CA.Traits
 			if (protectSq == null)
 				protectSq = RegisterNewSquad(bot, SquadCAType.Protection, protectTarget);
 
-			if (!protectSq.IsValid)
+			// CONSOLIDATE-02 Q3 (sq_defend_arbiter): the draft is sized by the arbiter (P0/P1) instead of the whole pool (X7).
+			var victim = protectOwnVictim;
+			protectOwnVictim = null;
+			if (DefendArbiterOn)
+				ArbiterProtectOwn(attacker, protectTarget, victim, protectSq);
+			else if (!protectSq.IsValid)
 			{
 				// Draft from the idle pool only. activeUnits contains both squad members
 				// and hanging units, so a world scan would draft units already assigned
@@ -4510,6 +4553,7 @@ namespace OpenRA.Mods.CA.Traits
 				foreach (var n in notifyPositionsUpdated)
 					n.UpdatedDefenseCenter(e.Attacker.Location);
 
+				protectOwnVictim = self;
 				ProtectOwn(e.Attacker);
 
 				// V07 tl_defend_team: the victim's own side raises the team alarm even when none of its idle units stands near (throttled; free with the switch off).

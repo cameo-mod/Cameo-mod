@@ -166,11 +166,21 @@ namespace OpenRA.Mods.CA.Traits
 			return value;
 		}
 
-		long AggTeamHomeValue()
+		// atHomeOnly (CONSOLIDATE-02 Q4b, the defend arbiter's "would the base fall" test): the pool counts only inside AggTeamDefenceHomeRadiusCells of home; a unit that a
+		// defence answer left far away is no home defence.
+		long AggTeamHomeValue(bool atHomeOnly = false)
 		{
 			long value = AggTeamQuietSquadValue();
+			var home = atHomeOnly ? AggTeamHomePos() : default;
+			var radius = atHomeOnly ? (long)AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamDefenceHomeRadiusCells)) * AggTeamPolicyCA.CellUnits : 0;
 			foreach (var u in unitsHangingAroundTheBase)
+			{
+				if (atHomeOnly && (long)(u.Actor.CenterPosition - home).HorizontalLengthSquared > radius * radius)
+					continue;
+
 				value += UnitValue(u.Actor);
+			}
+
 			return value;
 		}
 
@@ -189,7 +199,8 @@ namespace OpenRA.Mods.CA.Traits
 			return World.Map.CenterOfCell(Player.HomeLocation);
 		}
 
-		IEnumerable<DetachCandidate> AggTeamDetachCandidates()
+		// CONSOLIDATE-02 Q3 (sq_defend_arbiter): quietOnly = the P1 rule, a home threat takes the pool and the quiet squads, never a gathering or pushed blob.
+		IEnumerable<DetachCandidate> AggTeamDetachCandidates(bool quietOnly = false)
 		{
 			var home = AggTeamHomePos();
 			var radius = (long)AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamDefenceHomeRadiusCells)) * AggTeamPolicyCA.CellUnits;
@@ -202,7 +213,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			foreach (var s in Squads)
 			{
-				if (s.Type != SquadCAType.Rush || !s.IsValid || ReferenceEquals(s, stalemateSquad))
+				if (s.Type != SquadCAType.Rush || !s.IsValid || ReferenceEquals(s, stalemateSquad) || (quietOnly && !AggTeamIsQuietState(s.FuzzyStateMachine?.CurrentState)))
 					continue;
 				foreach (var u in s.Units)
 				{
@@ -231,9 +242,14 @@ namespace OpenRA.Mods.CA.Traits
 				return aggDetachPlan = AggRecallAllPlan;
 
 			var net = DefenceDetachment.NetThreat(provider.StalemateHomeThreatValue, provider.StalemateHomeDefenceValue, AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamDefenceSharePercent)));
+
+			// CONSOLIDATE-02 Q3 (sq_defend_arbiter): one rule. P1 (the base holds) sizes the answer from the pool and the quiet squads only, so a raid never dissolves a gathering
+			// or pushed blob (X6); P0 (the base would fall to the threat) may take the field squads too, nearest first and only the share needed. Never a recall of everything.
+			var arbiter = DefendArbiterOn;
+			var falls = arbiter && DefendArbiterCA.Falls(provider.StalemateHomeThreatValue, provider.StalemateHomeDefenceValue + AggTeamHomeValue(true));
 			var fresh = net > 0
-				? DefenceDetachment.Plan(net, provider.StalemateOwnArmy, AggTeamDetachCandidates(), AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamDefendMarginPercent)),
-					AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamMaxDetachSharePercent)), AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamRecallSharePercent)))
+				? DefenceDetachment.Plan(net, provider.StalemateOwnArmy, AggTeamDetachCandidates(arbiter && !falls), AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamDefendMarginPercent)),
+					falls ? 100 : AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamMaxDetachSharePercent)), ArmyDefendOwnsRecall ? 0 : AggS(nameof(SquadManagerBotModuleCAInfo.AggTeamRecallSharePercent)))
 				: DefenceDetachmentPlan.None;
 			var plan = DefenceDetachment.Latch(aggDetachPlan, fresh, provider.StalemateHomeThreat, provider.StalemateHomeLatch);
 			if (plan.IsActive && !aggDetachPlan.IsActive)
@@ -394,6 +410,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (blocked)
 				return;
 
+			// CONSOLIDATE-02 Q4 (sq_launch_arbiter): the A5 excess launch (L06) and the A3 tiny merge (D07) are no deciders under the one launcher.
+			if (ArmyLaunchArbiterOn)
+				return;
+
 			AggTeamMergeTiny(now);
 
 			unitsHangingAroundTheBase.RemoveAll(u => unitCannotBeOrdered(u.Actor));
@@ -446,6 +466,10 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>A4/A5: an idle Rush squad joins the best live attack intent (allied or own) while the reserve stays covered and home is not threatened.</summary>
 		void AggTeamPrepare(SquadCA s)
 		{
+			// CONSOLIDATE-02 Q4 (sq_launch_arbiter): no A4 rendezvous join (T09) under the one launcher.
+			if (ArmyLaunchArbiterOn)
+				return;
+
 			if (s.Type != SquadCAType.Rush || !s.IsValid || ReferenceEquals(s, stalemateSquad)
 				|| !AggTeamIsQuietState(s.FuzzyStateMachine?.CurrentState) || s.Units.Count < (aggFinishActive ? AggP(nameof(SquadManagerBotModuleCAInfo.AggTeamFinishJoinMinUnits)) : AggP(nameof(SquadManagerBotModuleCAInfo.AggTeamJoinMinUnits))))
 				return;

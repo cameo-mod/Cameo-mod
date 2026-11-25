@@ -127,10 +127,26 @@ namespace OpenRA.Mods.CA.Traits
 			if (home is { IsValid: true } && home.IsTargetValid && (World.Map.CellContaining(home.Target.CenterPosition) - initialBaseCenter).LengthSquared <= baseRadius)
 				return;
 
-			var wouldDie = TeamDefendCA.WouldDie(alarm.AttackValue, alarm.DefenceValue, Info.TeamLeadDefendTeamDiePercent);
+			// CONSOLIDATE-02 Q3 (sq_defend_arbiter, Opus D2): the ally falls when the attack is worth more than its defence; every teammate answers with its pool, idle squads and
+			// home guard (P3), and the gathering or pushed blob only when the ally would fall (P2).
+			var arbiter = DefendArbiterOn;
+			var priority = DefendArbiterCA.Ally(alarm.AttackValue, alarm.DefenceValue);
+			var wouldDie = arbiter ? priority == DefendPriority.P2AllyFalls : TeamDefendCA.WouldDie(alarm.AttackValue, alarm.DefenceValue, Info.TeamLeadDefendTeamDiePercent);
 			var leases = BotUnitLeases.Of(Player);
 			var drafted = 0;
 			var draftable = unitsHangingAroundTheBase.Where(u => !unitCannotBeOrdered(u.Actor) && IsDefenderDraftable(u, leases)).ToList();
+
+			// CONSOLIDATE-02 Q4b (X8, Opus D2): every teammate answers, but with its share, not its whole pool: the team together sends the attack's worth at the margin,
+			// split over the answering allies, each taking the units nearest to the attacker first. (The whole pool of every teammate used to walk across the map.)
+			if (arbiter)
+			{
+				var need = DefendArbiterCA.AllyPoolNeed(alarm.AttackValue, Info.ArbiterDefendMarginPercent, teamLeadAliveSeats - 1);
+				var attackerPos = attacker.CenterPosition;
+				var pick = DefendArbiterCA.PickNearest(
+					draftable.Select((u, i) => new DefendCandidate(i, UnitValue(u.Actor), (u.Actor.CenterPosition - attackerPos).HorizontalLengthSquared)), need);
+				draftable = pick.Select(i => draftable[i]).ToList();
+			}
+
 			if (draftable.Count > 0)
 			{
 				home ??= RegisterNewSquad(bot, SquadCAType.Protection, attacker);
@@ -158,9 +174,20 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 
 				var free = DefendAllyFreeSquad(s);
-				var blob = !free && s.Type == SquadCAType.Rush && s.TeamPushSeq > 0 && s.FuzzyStateMachine?.CurrentState is GroundUnitsAttackMoveStateCA;
-				if (!TeamDefendCA.SquadResponds(free, blob, wouldDie))
-					continue;
+				if (arbiter)
+				{
+					var holder = ArmyDefendHolderOf(s);
+					if (s.Type != SquadCAType.Rush || ReferenceEquals(s, stalemateSquad) || s.M13Response || !DefendArbiterCA.MayTake(priority, ArmyRole.Main, holder))
+						continue;
+
+					free = holder == ArmyHolder.Quiet;
+				}
+				else
+				{
+					var blob = !free && s.Type == SquadCAType.Rush && s.TeamPushSeq > 0 && s.FuzzyStateMachine?.CurrentState is GroundUnitsAttackMoveStateCA;
+					if (!TeamDefendCA.SquadResponds(free, blob, wouldDie))
+						continue;
+				}
 
 				s.TargetActor = attacker;
 				s.FuzzyStateMachine.ChangeState(s, new GroundUnitsAttackMoveStateCA(), false);

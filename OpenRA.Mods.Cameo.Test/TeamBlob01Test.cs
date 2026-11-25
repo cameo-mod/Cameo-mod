@@ -465,7 +465,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var body = wiring[start..wiring.IndexOf("TeamLeadOrder TeamLeadOpenOrder()", start, StringComparison.Ordinal)];
 			Assert.That(body, Does.Contain("order.FirstReadyTick) && !TeamLeadPincerThinCollapse(order, now) && !TeamLeadPushHeld(order, now))"), "the pincer push (a thin pincer collapses first, TEAM-GATHER-02 c2)");
 			Assert.That(body, Does.Contain("committed, arrived, Info.TeamLeadArrivePercent)\n\t\t\t\t&& !TeamLeadPushHeld(order, now))"), "the single-blob push (window and early arrival)");
-			Assert.That(body, Does.Contain(": order.Extending && TeamLeadCA.PushBarDissolve(now, order.PushBarSince, Info.TeamLeadPushBarMaxTicks) ? \"below_bar\""));
+			Assert.That(body, Does.Contain(": order.Extending && !order.Persistent && TeamLeadCA.PushBarDissolve(now, order.PushBarSince, Info.TeamLeadPushBarMaxTicks) ? \"below_bar\""));
 			Assert.That(body, Does.Contain(": !order.GatherOnly && !order.Extending && now - order.IssueTick > Info.TeamLeadOrderMaxTicks ? \"max_age\""), "the hold has its own cap");
 
 			var held = wiring[wiring.IndexOf("bool TeamLeadPushHeld(", StringComparison.Ordinal)..wiring.IndexOf("void DiagnosticTeamEvent(", StringComparison.Ordinal)];

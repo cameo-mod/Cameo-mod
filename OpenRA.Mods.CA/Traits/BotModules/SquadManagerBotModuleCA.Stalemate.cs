@@ -574,6 +574,17 @@ namespace OpenRA.Mods.CA.Traits
 			var admitted = attempt.Admitted;
 			var roster = admitted.Groups.SelectMany(g => g.Reachable).Select(m => World.GetActorById(m.ActorId)).ToList();
 
+			// CONSOLIDATE-02 Q4 (sq_launch_arbiter, Opus D4): the breaker never launches on its own. The wave it would admit is a signal on the team board, an input of
+			// the leader's all-in trigger (AllInCA.WhyStalemate).
+			if (ArmyLaunchArbiterOn)
+			{
+				ArmyNoteStalemate(t);
+				seat.NextAttemptTick = Math.Max(seat.NextAttemptTick, t + StalemateBreakerCA.NoCandidateCooldown);
+				DiagnosticJobEnd(t, "hold", "all_in_input", failures, deferred, attempt.Paths, attempt.ReachChecks, attempt.CandidatesTried,
+					0, admitted.UnreachableUnits, unitsExcludedGroups, 0);
+				return;
+			}
+
 			// TEAM-GATHER-01 (tl_route_all): with a team order open the breaker wave does not launch alone; its units stay in the pool and join the order.
 			if (TeamLeadRoutesLaunch())
 			{
