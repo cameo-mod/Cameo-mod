@@ -130,7 +130,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			}
 
 			manager.TeamLeadNoteGo(owner, order);
-			owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+			{
+				manager.LaunchSourceRecord("L12", owner.Type.ToString(), owner.Units.Count);
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+			}
 		}
 
 		public void Deactivate(SquadCA owner)

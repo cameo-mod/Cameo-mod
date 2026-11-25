@@ -155,7 +155,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				// A FrozenActor target is itself the point of the attack — nothing
 				// visible nearby doesn't mean nothing is there.
 				if (owner.Target.Type == TargetType.FrozenActor || owner.IsHunting)
-					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+					{
+						owner.SquadManager.LaunchSourceRecord("L09", owner.Type.ToString(), owner.Units.Count);
+						owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+					}
 				else
 					Retreat(owner, flee: false, rearm: true, repair: true);
 
@@ -184,14 +187,23 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				// 6f: assault waves stage before committing so slow units catch
 				// up and the attack arrives as one wave, not a trickle.
 				if (owner.Type == SquadCAType.Rush && owner.SquadManager.Info.StageBeforeAssault)
-					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsStageStateCA(), false);
+					{
+						owner.SquadManager.LaunchSourceRecord("L09", owner.Type.ToString(), owner.Units.Count);
+						owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsStageStateCA(), false);
+					}
 				else
-					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+					{
+						owner.SquadManager.LaunchSourceRecord("L09", owner.Type.ToString(), owner.Units.Count);
+						owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+					}
 			}
 
 			// BOTPASSIVE (switch ON only): the live breaker wave defers this predicted-loss disengagement (guard_bypass).
 			else if (owner.SquadManager.StalemateDefersRetreat(owner, "idle_engage"))
-				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+				{
+					owner.SquadManager.LaunchSourceRecord("L09", owner.Type.ToString(), owner.Units.Count);
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+				}
 			else
 			{
 				owner.SquadManager.NoteRetreatStart(owner, "idle_engage");
@@ -251,9 +263,15 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				regroupSinceTick = -1;
 				manager.AggressionCommit(owner);
 				if (owner.Type == SquadCAType.Rush && info.StageBeforeAssault)
-					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsStageStateCA(), false);
+					{
+						owner.SquadManager.LaunchSourceRecord("L10", owner.Type.ToString(), owner.Units.Count);
+						owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsStageStateCA(), false);
+					}
 				else
-					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+					{
+						owner.SquadManager.LaunchSourceRecord("L10", owner.Type.ToString(), owner.Units.Count);
+						owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+					}
 
 				return;
 			}
@@ -349,7 +367,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			if (buildings.Count == 0 || !owner.IsTargetValid)
 			{
-				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+				{
+					owner.SquadManager.LaunchSourceRecord("L11", owner.Type.ToString(), owner.Units.Count);
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+				}
 				return;
 			}
 
@@ -362,7 +383,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var squadDist = (squadPos - targetPos).LengthSquared;
 			if (buildingDist >= squadDist)
 			{
-				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+				{
+					owner.SquadManager.LaunchSourceRecord("L11", owner.Type.ToString(), owner.Units.Count);
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+				}
 				return;
 			}
 
@@ -401,7 +425,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			if (assembled * 100 >= owner.Units.Count * owner.SquadManager.Info.StageAssemblePercent ||
 				owner.World.WorldTick >= stageDeadlineTick)
-				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+				{
+					owner.SquadManager.LaunchSourceRecord("L11", owner.Type.ToString(), owner.Units.Count);
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+				}
 		}
 
 		public void Deactivate(SquadCA owner) { }
@@ -657,7 +684,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			{
 				owner.TargetActor = enemyActor;
 				if (owner.Type == SquadCAType.Guerrilla)
-					owner.FuzzyStateMachine.ChangeState(owner, new GuerrillaUnitsHitState(), false);
+					{
+						owner.SquadManager.LaunchSourceRecord("L15", owner.Type.ToString(), owner.Units.Count);
+						owner.FuzzyStateMachine.ChangeState(owner, new GuerrillaUnitsHitState(), false);
+					}
 				else
 					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackState(), false);
 				return;
@@ -1668,7 +1698,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (!owner.IsTargetValid && !FindNewTarget(owner, highValueCheck: true, riskCheck: true))
 				return;
 
-			owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), true);
+			{
+				owner.SquadManager.LaunchSourceRecord("L14", owner.Type.ToString(), owner.Units.Count);
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), true);
+			}
 		}
 
 		internal static bool ShouldHarass(int count, int minSize, int roll)

@@ -589,6 +589,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			var forced = TeamLeadCA.FallbackForced(now, team.LastOrderTick, Info.TeamLeadFallbackTicks);
 			var order = TeamLeadIssue(home, target, targetId, now);
+			LaunchSourceRecord("L20", "Team", blob.Units);
 			if (why == TeamLeadCA.PublishWhy.Gather)
 				order.MakeGatherOnly();
 			else if (allIn != null)
@@ -1202,7 +1203,11 @@ namespace OpenRA.Mods.CA.Traits
 			var order = TeamLeadOpenOrder();
 			// A pushed squad with nothing known to attack may still join an order that is open, but it never issues a new rally from the leader (CM: no re-issue at home).
 			if (order == null && teamLeadIsLeader && !goesOn)
+			{
 				order = TeamLeadTryIssue(s, now);
+				if (order != null)
+					LaunchSourceRecord("L19", "Team", s.Units.Count);
+			}
 
 			if (order != null)
 			{

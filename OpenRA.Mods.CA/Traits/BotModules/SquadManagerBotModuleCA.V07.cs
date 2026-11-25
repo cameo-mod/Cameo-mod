@@ -181,6 +181,7 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		// PINCER-02 DEV record (the writer is null in a release build): a pincer was published or released, with the approach angle of its two staging points.
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
 		void TeamLeadPincerRecord(string evt, TeamLeadOrder order, string detail)
 		{
 			if (DiagnosticWriter == null)
