@@ -348,6 +348,11 @@ namespace OpenRA.Mods.CA.Traits
 			"Off = S5 is unchanged. Gated by SwitchCondition; row cs_capture_unlock.")]
 		public readonly bool CsCaptureUnlock = false;
 
+		[Desc("TECHCHAIN-PAYGO-01: stages S3 (the tech-centre opening role) and S5 of the staged planner admit a TechChainTypes pick when the bank is above 0 instead of at",
+			"its full cost (test A6), because the engine pays production as it goes. At most one tech-chain item in flight; every other pick keeps the full-cost test.",
+			"Needs BbPipeline01. Off = A6 unchanged. Gated by SwitchCondition; row bb_techchain_paygo.")]
+		public readonly bool BbTechChainPaygo = false;
+
 		[Desc("CONSOLIDATE-01 c5: the threat-scaled defence cap of the staged planner (the ARMY-FIRST-02 cap, DefenceCapCA): a defence is held while the armed defences owned or in",
 			"flight number at least this base plus DefenceCapPerThreat x the threat intensity. -1 = no cap. Row af2_defence_cap (shared with the ArmyFirstBotModule cap).")]
 		public readonly int DefenceCapBase = -1;
@@ -839,6 +844,8 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateDefenceCap;
 		AblationLatch ablateCaptureUnlock; // CAPTURE-TECH-01
 		public bool CaptureUnlockArmed => Info.CsCaptureUnlock && switchesActive && !ablateCaptureUnlock.Off(player, AblationIds.CsCaptureUnlock);
+		AblationLatch ablateTechChainPaygo; // TECHCHAIN-PAYGO-01
+		public bool TechChainPaygoArmed => Info.BbTechChainPaygo && switchesActive && !ablateTechChainPaygo.Off(player, AblationIds.BbTechChainPaygo);
 		// CAPTURE-TECH-01: provided tokens and gates of every building type, no faction filter; built once on the first S5 sweep with the switch on. Null until then.
 		public CaptureUnlockMapsCA CaptureUnlockMaps;
 		public bool AntiRushSetArmed => Info.BbAntiRushSet && switchesActive && !ablateAntiRushSet.Off(player, AblationIds.BbAntiRushSet);

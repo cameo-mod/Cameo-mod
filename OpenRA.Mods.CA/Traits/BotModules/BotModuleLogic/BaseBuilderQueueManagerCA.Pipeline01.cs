@@ -247,8 +247,20 @@ namespace OpenRA.Mods.CA.Traits
 				start = power;
 			}
 
-			if (!BaseBuildPlanCA.Affordable(s.Bank, queue.GetProductionCost(start), BaseBuildPlanCA.ReserveFor(c.Stage, s.ProductionCashReserve)))
-				return false;
+			var startCost = queue.GetProductionCost(start);
+			if (!BaseBuildPlanCA.Affordable(s.Bank, startCost, BaseBuildPlanCA.ReserveFor(c.Stage, s.ProductionCashReserve)))
+			{
+				// TECHCHAIN-PAYGO-01 (bb_techchain_paygo): an S3/S5 tech-chain start rides with any bank above 0 while no other tech-chain item is in flight.
+				// Off, or any other start: the full-cost test as before. A held tech-chain start writes the DEV row pipeline_a6_hold.
+				var techChainStart = baseBuilder.Info.TechChainTypes.Contains(start.Name);
+				if (!techChainStart || !(baseBuilder.TechChainPaygoArmed && TechChainPaygo.Waives(c.Stage, s.Bank, TechChainInFlight())))
+				{
+					if (techChainStart)
+						TechChainA6HoldRecord(start.Name, c.Stage, s.Bank, startCost);
+
+					return false;
+				}
+			}
 
 			// ECON-A-FIX (R5) exclusivity, a pure query: never duplicate a demand-bound name on this producer.
 			if (baseBuilder.ExpansionPrebuildEnabled && baseBuilder.DemandForQueuedItem(start.Name, queue.Actor) != null)
@@ -256,6 +268,33 @@ namespace OpenRA.Mods.CA.Traits
 
 			admitted = start.Name;
 			return true;
+		}
+
+		// TECHCHAIN-PAYGO-01: tech-chain items queued or in production (any producer), so a pay-as-you-go start never stacks on another one.
+		int TechChainInFlight()
+		{
+			var n = 0;
+			foreach (var kv in baseBuilder.BuildingsBeingProduced)
+				if (kv.Value > 0 && baseBuilder.Info.TechChainTypes.Contains(kv.Key))
+					n += kv.Value;
+
+			return n;
+		}
+
+		// TECHCHAIN-PAYGO-01, DEV only: last pipeline_a6_hold tick per name. Null until the first row, and always null in a release build (its only writer is compiled out).
+		Dictionary<string, int> techChainHoldLogged;
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void TechChainA6HoldRecord(string name, BaseBuildStage stage, int bank, int cost)
+		{
+			techChainHoldLogged ??= new Dictionary<string, int>();
+			var now = world.WorldTick;
+			if (!TechChainPaygo.HoldLogDue(techChainHoldLogged.TryGetValue(name, out var last) ? last : -1, now))
+				return;
+
+			techChainHoldLogged[name] = now;
+			AIUtils.BotDebug("{0} pipeline_a6_hold name={1} stage={2} bank={3} cost={4} paygo={5} tick={6}",
+				player, name, stage, bank, cost, baseBuilder.TechChainPaygoArmed, now);
 		}
 
 		// A7: the atomic claims of TickQueue (crawl link, front defence), taken only for the candidate the planner is about to admit. A refused

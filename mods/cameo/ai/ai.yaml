@@ -5951,6 +5951,8 @@ Player:
 		BbPassiveIncome: true
 		BbExtraDefence: true
 		CsCaptureUnlock: true
+		# TECHCHAIN-PAYGO-01 (row bb_techchain_paygo, Opus ruling A 11-25): S3/S5 tech-chain picks start with any bank above 0, one at a time.
+		BbTechChainPaygo: true
 		# af2_defence_cap moves from ArmyFirstBotModule@af02 (its grant is emptied in ^AIDifficulties) into the pipeline, same values.
 		DefenceCapBase: 3
 		DefenceCapPerThreat: 6
