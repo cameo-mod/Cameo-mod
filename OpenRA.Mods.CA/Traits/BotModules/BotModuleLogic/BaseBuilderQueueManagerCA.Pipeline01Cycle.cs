@@ -29,9 +29,11 @@ namespace OpenRA.Mods.CA.Traits
 
 			var candidates = OverflowProductionCandidates(buildable, null, false);
 			var naval = PipelineNavalCycleCandidate(buildable);
-			if (naval != null)
+			if (naval != null && candidates.All(c => c.Name != naval.Name))
 				candidates.Add(naval);
 
+			// The ranking count is the standing buildings of the exact name plus the type in flight, as ChooseCycledProduction counts it (the variant-aware count is
+			// only the admission test inside OverflowProductionCandidates and PipelineNavalCycleCandidate).
 			var counted = new List<(string Name, int Count)>(candidates.Count);
 			foreach (var c in candidates)
 				counted.Add((c.Name, playerBuildings.Count(a => a.Info.Name == c.Name)

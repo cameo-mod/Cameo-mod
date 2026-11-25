@@ -42,7 +42,9 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>
 		/// Whether the planner walks <paramref name="stage"/> at all.
 		/// <paramref name="lowCashCut"/> = the R9 switch (pb_essentials_low_cash): below L only S1-S7 (and a threat-seen S9) run.
-		/// <paramref name="cycleOffered"/> = S8 offered at least one type this sweep (an exhausted cycle, every type at its limit, lets normal building resume).
+		/// <paramref name="cycleOffered"/> = S8 offered at least one type this sweep, i.e. the source ENUMERATED one (an exhausted cycle, every type at its limit, lets normal
+		/// building resume). Enumerated, not admitted, on purpose: a cycle type that then fails A (reserve, power, delay) still holds S9 and S10 back for that sweep, so
+		/// SUSTAINED cash is saved for the production building instead of leaking into extras.
 		/// </summary>
 		public static bool Open(BaseBuildStage stage, int tierLine, int bank, bool lowCashCut, bool sustainedActive, bool threatSeen, bool cycleOffered)
 		{

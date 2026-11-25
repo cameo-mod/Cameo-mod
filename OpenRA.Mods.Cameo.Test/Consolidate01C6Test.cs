@@ -332,6 +332,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(s8, Does.Contain("if (!(CycleOn || SustainedActive) || playerBuildings == null)\n\t\t\t\tyield break;"), "one stage, two triggers (pb_cycle_production, pb_sustained_cash_production)");
 			Assert.That(s8, Does.Contain("var candidates = OverflowProductionCandidates(buildable, null, false);"), "the production types unresolved: A5 swaps the power plant in");
 			Assert.That(s8, Does.Contain("var naval = PipelineNavalCycleCandidate(buildable);"));
+			Assert.That(s8, Does.Contain("if (naval != null && candidates.All(c => c.Name != naval.Name))"), "a naval type already in the production list is not offered twice");
 			Assert.That(s8, Does.Contain("foreach (var name in CycleProductionCA.Order(counted, lastCycledProduction))"));
 			Assert.That(s8, Does.Contain("yield return name;"));
 
