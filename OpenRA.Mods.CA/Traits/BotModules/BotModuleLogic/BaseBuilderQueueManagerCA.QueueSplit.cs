@@ -7,6 +7,7 @@
  * the License, or (at your option) any later version. For more information,
  * see COPYING.
  */
+#endregion
 
 using System.Linq;
 
