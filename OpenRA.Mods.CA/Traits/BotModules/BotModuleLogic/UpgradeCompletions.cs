@@ -33,9 +33,6 @@ namespace OpenRA.Mods.CA.Traits
 		public const string SourceApprox = "approx";
 		public const string SourceInit = "init";
 
-		/// <summary>Staleness: an order that is neither seen completing nor granted after this many ticks is dropped (cancelled, or never accepted by the engine).</summary>
-		public const int PendingMaxTicks = 3000;
-
 		/// <summary>PendingTimeout default: an order the queue never showed within this many ticks was not accepted: it is released (not done) and the item may be offered again.</summary>
 		public const int DefaultPendingTimeoutTicks = 300;
 
@@ -46,6 +43,20 @@ namespace OpenRA.Mods.CA.Traits
 		public void Started(string name, int tick) => pending.TryAdd(name, (tick, null));
 
 		public bool AnyPending => pending.Count > 0;
+
+		/// <summary>
+		/// The seen bit, at EVERY service visit (cheap: one lookup per pending item), not only at the 25-tick settle: an order the queue showed at any visit is Seen and bound to that exact queue, so an item that
+		/// sits in the queue for fewer than 25 ticks is no longer a never-seen order (which can only time out). Judging (done / released) stays in Settle.
+		/// </summary>
+		public void NoteQueued(IReadOnlyDictionary<string, string> queuedIn)
+		{
+			if (pending.Count == 0)
+				return;
+
+			foreach (var name in new List<string>(pending.Keys))
+				if (queuedIn.TryGetValue(name, out var queueKey))
+					pending[name] = (pending[name].Tick, queueKey);
+		}
 
 		/// <summary>An order is outstanding for this item: it must not be offered again until it settles or is dropped.</summary>
 		public bool IsPending(string name) => pending.ContainsKey(name);

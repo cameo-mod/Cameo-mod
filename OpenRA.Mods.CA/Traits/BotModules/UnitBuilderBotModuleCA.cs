@@ -1071,8 +1071,12 @@ namespace OpenRA.Mods.CA.Traits
 
 		void UpgradeSettle(IReadOnlyDictionary<string, string> queuedIn)
 		{
-			// the world scan runs only while an ordered item is unsettled, and at most every 25 ticks
-			if (!upgradeDone.AnyPending || world.WorldTick - upgradeSettleTick < 25)
+			// the seen bit is taken at every visit (the queue was just read); the world scan below runs only while an ordered item is unsettled, and at most every 25 ticks
+			if (!upgradeDone.AnyPending)
+				return;
+
+			upgradeDone.NoteQueued(queuedIn);
+			if (world.WorldTick - upgradeSettleTick < 25)
 				return;
 
 			upgradeSettleTick = world.WorldTick;
