@@ -420,8 +420,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(stages, Does.Contain("weight = Math.Max(0, listed);"));
 
 			var defence = Source(DefenceFile);
-			Assert.That(defence, Does.Contain("case BaseBuildStage.S5CoreOnce:
-"));
+			Assert.That(defence, Does.Contain("case BaseBuildStage.S5CoreOnce:\n"));
 			Assert.That(defence, Does.Contain("return buildableNames.Contains(candidate.Name)"));
 			Assert.That(defence, Does.Contain("!baseBuilder.Info.ConstructionYardTypes.Contains(candidate.Name) && !baseBuilder.Info.RefineryTypes.Contains(candidate.Name);"));
 
