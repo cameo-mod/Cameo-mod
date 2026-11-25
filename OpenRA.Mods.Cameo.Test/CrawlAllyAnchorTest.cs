@@ -62,6 +62,28 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TheAllyDedupeTraceNamesTheOutrankingAllyAndIsDevOnly()
+		{
+			var field = new WPos(100 * 1024, 100 * 1024, 0);
+			var claims = new[] { (5, new WPos(104 * 1024, 100 * 1024, 0)), (2, new WPos(103 * 1024, 100 * 1024, 0)), (9, new WPos(100 * 1024, 100 * 1024, 0)) };
+
+			// the lower ClientIndex outranks: seat 2 and 5 outrank seat 6, seat 9 does not; the first outranking claim in the list is named
+			Assert.That(ExpansionPlannerBotModule.AllyClaimWinner(field, claims, 6, 10), Is.EqualTo(5));
+			Assert.That(ExpansionPlannerBotModule.AllyClaimWinner(field, claims.Skip(1).ToArray(), 6, 10), Is.EqualTo(2));
+			Assert.That(ExpansionPlannerBotModule.AllyClaimWinner(field, claims, 1, 10), Is.EqualTo(-1), "no ally outranks seat 1");
+			Assert.That(ExpansionPlannerBotModule.AllyClaimWinner(field, claims, 6, 2), Is.EqualTo(-1), "outside the claim radius");
+
+			// agrees with the yield rule itself
+			foreach (var me in new[] { 1, 3, 6, 12 })
+				Assert.That(ExpansionPlannerBotModule.AllyClaimWinner(field, claims, me, 10) >= 0, Is.EqualTo(ExpansionPlannerBotModule.AllyClaimWins(field, claims, me, 10)), "seat " + me);
+
+			var planner = Source("mods/Cameo/Traits/BotModules/ExpansionPlannerBotModule.cs");
+			Assert.That(planner, Does.Contain("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid TraceAllyDedupe("));
+			Assert.That(planner, Does.Contain("CRAWL-ALLY-DEDUPE seat {player.ClientIndex} ally seat {ally} cell {center} field {fieldIndex} tick {tick}"));
+			Assert.That(planner, Does.Contain("{\n\t\t\t\t\tTraceAllyDedupe(i, center, allyClaims);\n\t\t\t\t\tcontinue;\n\t\t\t\t}"), "the yield still continues exactly as before");
+		}
+
+		[Test]
 		public void TheRowIsOffByDefaultNeedsAllybuildAndTheFrontierGainsAlliedTiles()
 		{
 			Assert.That(new ExpansionPlannerBotModuleInfo().CrawlAllyAnchor, Is.False);

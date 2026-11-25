@@ -2803,6 +2803,43 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return false;
 		}
 
+		/// <summary>crawl_ally_dedupe (DEV trace): the client index of the outranking ally whose claim covers <paramref name="field"/>, -1 = none. Same rule as <see cref="AllyClaimWins"/>. Pure, for the tests.</summary>
+		public static int AllyClaimWinner(WPos field, IEnumerable<(int ClientIndex, WPos Claim)> allyClaims, int myClientIndex, int radiusCells)
+		{
+			var radiusW = 1024L * radiusCells;
+			foreach (var (index, claim) in allyClaims)
+				if (index < myClientIndex && (field - claim).HorizontalLengthSquared <= radiusW * radiusW)
+					return index;
+
+			return -1;
+		}
+
+		// crawl_ally_dedupe (DEV only, Opus V08G ruling on CRAWL-ALLY-ANCHOR note 2): when an ally claim (TC-2c) removes a field from the crawl candidates, one debug line per (field, ally)
+		// and 750 ticks: seat, ally seat, cell, tick. Compiled out of every release build; it feeds no decision.
+#if CAMEO_DEV_LOGGING
+		readonly Dictionary<(int Field, int Ally), int> allyDedupeLogged = new();
+#endif
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void TraceAllyDedupe(int fieldIndex, CPos center, IReadOnlyCollection<(int ClientIndex, WPos Claim)> allyClaims)
+		{
+#if CAMEO_DEV_LOGGING
+			if (!Info.DriveBaseCrawl || !LawActive)
+				return;
+
+			var ally = AllyClaimWinner(world.Map.CenterOfCell(center), allyClaims, player.ClientIndex, Info.AllyClaimRadiusCells);
+			if (ally < 0)
+				return;
+
+			var tick = world.WorldTick;
+			if (allyDedupeLogged.TryGetValue((fieldIndex, ally), out var last) && tick - last < 750)
+				return;
+
+			allyDedupeLogged[(fieldIndex, ally)] = tick;
+			Log.Write("debug", $"AI ({player.ClientIndex}): CRAWL-ALLY-DEDUPE seat {player.ClientIndex} ally seat {ally} cell {center} field {fieldIndex} tick {tick}");
+#endif
+		}
+
 		/// <summary>
 		/// TC-3 / BD (§12.18): the Voronoi score percent — a field belongs to the coalition sector
 		/// anchor nearest it (min HorizontalLengthSquared, the same horizontal measure AllyClaimWins
@@ -3569,7 +3606,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				// TC-2c: an outranking ally already aims at this field — yield instead of stacking.
 				if (YieldToAllyClaim(allyClaims, world.Map.CenterOfCell(center), player.ClientIndex, Info.AllyClaimRadiusCells))
+				{
+					TraceAllyDedupe(i, center, allyClaims);
 					continue;
+				}
 
 				var distance = buildingCells.Min(c => (c - center).Length);
 				var hops = Hops(distance, reach, Info.LinkStepCells);
