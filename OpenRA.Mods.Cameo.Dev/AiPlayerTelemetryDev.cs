@@ -52,6 +52,10 @@ namespace OpenRA.Mods.Cameo.Traits
 		Dictionary<string, int> techDepth;
 		HashSet<string> superpowerTokens;
 		AiEconomyHealthLogWriter writer;
+		// PROD-SAMPLE-LOG-01 FIX: unit-queue events on their own queued writer (own file, own cap), never the sync players writer.
+		AiQueuedJsonlWriter unitWriter;
+		// Requested-but-not-started (or skipped) unit requests per seat, DEV only: a repeat request for a pending type emits no row.
+		readonly HashSet<string> pendingUnitRequests = new();
 		World world;
 		string uid;
 		bool ended;
@@ -83,12 +87,15 @@ namespace OpenRA.Mods.Cameo.Traits
 				Directory.CreateDirectory(directory);
 				var key = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(uid))).ToLowerInvariant();
 				writer = new AiEconomyHealthLogWriter(Path.Combine(directory, $"cameo-ai-players-{key}.jsonl"));
+				unitWriter = new AiQueuedJsonlWriter($"cameo-ai-unit-queue-{key}.jsonl", "unit-queue");
 			}
 			// Fail closed on any setup fault — telemetry must never prevent a world from loading.
 			catch (Exception e)
 			{
 				writer?.Dispose();
 				writer = null;
+				unitWriter?.Close(0);
+				unitWriter = null;
 				Log.Write("debug", "Player telemetry unavailable: " + e.GetType().Name);
 				return;
 			}
@@ -325,13 +332,17 @@ namespace OpenRA.Mods.Cameo.Traits
 
 					// An MCV that closes no repack window was produced — completed unit output.
 					if (!repacked && BotSeat(actor.Owner) is { } bot)
+					{
 						Bump(bot.QueueCompleted, "unit");
+						EmitUnitEvent(bot, actor.World.WorldTick, "ready", actor.Info.Name);
+					}
 				}
 				else if (BotSeat(actor.Owner) is { } bot)
 				{
 					// A mobile actor appearing is a completed unit production for the bot-queue
 					// row (transforms land in the building branch's deploy match instead).
 					Bump(bot.QueueCompleted, "unit");
+					EmitUnitEvent(bot, actor.World.WorldTick, "ready", actor.Info.Name);
 				}
 			}
 			catch (Exception e)
@@ -709,7 +720,12 @@ namespace OpenRA.Mods.Cameo.Traits
 			{
 				var seat = BotSeat(owner);
 				if (seat != null)
+				{
 					Bump(seat.QueueRequested, "unit");
+					// PROD-SAMPLE-LOG-01 FIX: the first pending request per type per seat emits a row; repeats while pending do not.
+					if (pendingUnitRequests.Add(seat.Seat + "|" + actor))
+						EmitUnitEvent(seat, tick, "requested", actor);
+				}
 			}
 			catch (Exception e)
 			{
@@ -726,6 +742,8 @@ namespace OpenRA.Mods.Cameo.Traits
 					return;
 
 				Bump(seat.QueueAccepted, "unit");
+				pendingUnitRequests.Remove(seat.Seat + "|" + actor);
+				EmitUnitEvent(seat, tick, "queued", actor);
 				seat.QueueSpend["unit"] = seat.QueueSpend.GetValueOrDefault("unit") + CostOfName(actor);
 
 				// The poll's head-diff would see this order again when the item reaches
@@ -749,6 +767,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			try
 			{
 				var seat = BotSeat(owner);
+				if (seat != null)
+					pendingUnitRequests.Remove(seat.Seat + "|" + actor);
 				if (seat != null && reason != null)
 					Bump(seat.QueueSkipped, reason);
 			}
@@ -851,6 +871,9 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void QueueSample(World world, int tick)
 		{
+			// PROD-SAMPLE-LOG-01 FIX (review nit): the requested dedupe window is one queue sample, so a request that is dropped
+			// without a started or skipped callback logs again at most once per sample.
+			pendingUnitRequests.Clear();
 			lastQueueTick = tick;
 			foreach (var seat in seats.Values)
 			{
@@ -962,6 +985,7 @@ namespace OpenRA.Mods.Cameo.Traits
 					});
 				}
 
+				unitWriter?.Flush(tick); // PROD-SAMPLE-LOG-01 FIX: one non-blocking hand-off of pending unit events per queue sample.
 				EmitQueueRow(seat, tick, cash, spentDelta, rows);
 
 				// The counters are per-window: emitted, then reset for the next interval.
@@ -992,6 +1016,38 @@ namespace OpenRA.Mods.Cameo.Traits
 			return counts;
 		}
 
+		// PROD-SAMPLE-LOG-01 (DEV only, assembly compiled out of release): one row per unit-queue step on the same
+		// cameo-bot-queue stays on the players writer; these rows go to cameo-ai-unit-queue-{key}.jsonl (own cap).
+		// kind = requested | queued | ready. Queue is always "unit" here; building queues are already in cameo-bot-queue.
+		// requested: first pending request per type per seat only. ready: also counts non-produced mobile spawns
+		// (crate units, payouts), the same as the Bump on QueueCompleted; filter by production when analysing.
+		void EmitUnitEvent(SeatTelemetry seat, int tick, string kind, string type)
+		{
+			if (ended || unitWriter == null || seat == null)
+				return;
+
+			var b = new StringBuilder(256);
+			AiMatchLogWriter.AppendObjectStart(b);
+			AiMatchLogWriter.AppendString(b, "schema", "cameo-unit-queue-event", true);
+			AiMatchLogWriter.AppendNumber(b, "version", 1);
+			AiMatchLogWriter.AppendString(b, "game_uid", uid);
+			AiMatchLogWriter.AppendNumber(b, "tick", tick);
+			AiMatchLogWriter.AppendString(b, "seat", seat.Seat);
+			AiMatchLogWriter.AppendString(b, "kind", kind);
+			AiMatchLogWriter.AppendString(b, "queue", "unit");
+			AiMatchLogWriter.AppendString(b, "type", type);
+			b.Append('}');
+			unitWriter.TryWrite(b.ToString());
+		}
+
+		// The configured ProductionCashReserve of the seat's BotLimits (-1 when the seat has none). The effective
+		// reserve can be personality-leaned (RecoverySpendPolicyCA.EffectiveReserve); this is the configured value.
+		static int ReserveOf(OpenRA.Player player)
+		{
+			var limits = player?.PlayerActor?.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
+			return limits == null ? -1 : limits.Info.ProductionCashReserve;
+		}
+
 		void EmitQueueRow(SeatTelemetry seat, int tick, int banked, long spentDelta, List<QueueRow> rows)
 		{
 			var b = new StringBuilder(768);
@@ -1003,6 +1059,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(b, "tick", tick);
 			AiMatchLogWriter.AppendString(b, "seat", seat.Seat);
 			AiMatchLogWriter.AppendNumber(b, "banked", banked);
+			AiMatchLogWriter.AppendNumber(b, "reserve", ReserveOf(seat.Player));
 			AiMatchLogWriter.AppendNumber(b, "spent_delta", spentDelta);
 
 			AppendCategoryMap(b, "requested", seat.QueueRequested);
@@ -1268,6 +1325,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			Unsubscribe();
 			writer?.Dispose();
 			writer = null;
+			unitWriter?.Close(0);
+			unitWriter = null;
 			var frame = e.StackTrace == null ? "unknown" : e.StackTrace.Split('\n')[0].Trim();
 			Log.Write("debug", "Player telemetry terminated after a telemetry error: " + e.GetType().Name
 				+ " site=" + site + " frame=" + frame);
@@ -1302,6 +1361,11 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 
 			writer?.Dispose();
+			// No terminal row, as the players and memory writers write none. Close hands over complete rows only and the shared
+			// drain makes them durable; the file is judged by its records, not by a terminal marker (no reader uses Complete here).
+			unitWriter?.Close(world.WorldTick);
+			unitWriter = null;
+			AiLogWriteQueue.FlushSharedForGameEnd(); // PROD-SAMPLE-LOG-01 FIX: bounded drain, as the memory writer does.
 		}
 
 		void INotifyActorDisposing.Disposing(Actor self)
@@ -1309,6 +1373,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			ended = true;
 			Unsubscribe();
 			writer?.Dispose();
+			unitWriter?.Close(self.World.WorldTick);
+			unitWriter = null;
 		}
 	}
 }

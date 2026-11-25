@@ -3549,6 +3549,7 @@ namespace OpenRA.Mods.CA.Traits
 				Info.MaxIdleUnits, legal, AttackLiveness, () =>
 				{
 					var wave = RegisterNewSquad(bot, SquadCAType.Rush, m13CandidateTarget);
+					LaunchSourceRecord(wave, "L13", "Rush", unitsHangingAroundTheBase.Count);
 					wave.Units.AddRange(roster);
 					foreach (var u in roster)
 						unitsHangingAroundTheBase.Remove(u);
@@ -3917,6 +3918,7 @@ namespace OpenRA.Mods.CA.Traits
 					if (!matchingNavalSquadFound)
 					{
 						var newNavalSquad = RegisterNewSquad(bot, SquadCAType.Naval);
+						LaunchSourceRecord(newNavalSquad, "L16", "Naval", newNavalSquad.Units.Count);
 						newNavalSquad.Units.Add(new UnitWposWrapper(a));
 					}
 				}
@@ -3954,6 +3956,7 @@ namespace OpenRA.Mods.CA.Traits
 						else
 						{
 							var newAirSquad = RegisterNewSquad(bot, squadType);
+							LaunchSourceRecord(newAirSquad, "L16", squadType.ToString(), newAirSquad.Units.Count);
 							newAirSquad.Units.Add(new UnitWposWrapper(a));
 							newAirSquad.NewUnits.Add(a);
 						}
@@ -4226,6 +4229,7 @@ namespace OpenRA.Mods.CA.Traits
 				var aggKeep = aggForce ? AggTeamTakeReserve() : Info.AggTeamEnabled ? AggTeamTakeDetached() : null;
 				var attackForce = RegisterNewSquad(bot, SquadCAType.Rush);
 				WaveMixLaunched();
+				LaunchSourceRecord(attackForce, aggForce ? "L06" : teamFollowerLaunch ? "L07" : "L01", "Rush", unitsHangingAroundTheBase.Count);
 
 				// 6f: long-range units peel off into an artillery squad that trails
 				// the assault and bombards its target, instead of charging with it.
