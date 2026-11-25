@@ -20,8 +20,9 @@ namespace OpenRA.Mods.CA.Traits
 		int separateDefenceQueueTick = -SeparateDefenceQueueRefreshTicks;
 		bool separateDefenceQueue;
 
-		// This player trains its defences on a queue of their own: this manager IS that queue, or one of the DefenseQueues categories exists for the player.
-		// Refreshed every 250 ticks (a queue appears with its producer); a faction whose defences share the building queue has none, so it keeps today's order.
+		// This player owns a dedicated defence queue (in DefenseQueues only) AND a distinct building queue (in BuildingQueues only); a queue in both sets is Shared
+		// (QueueStageSplit.Classify). Refreshed every 250 ticks (a queue appears with its producer); a faction whose defences share the building queue has none,
+		// so it keeps today's order.
 		bool SeparateDefenceQueue()
 		{
 			var now = world.WorldTick;
@@ -30,9 +31,13 @@ namespace OpenRA.Mods.CA.Traits
 
 			separateDefenceQueueTick = now;
 			var b = baseBuilder.Info;
-			separateDefenceQueue = b.DefenseQueues.Contains(Category) || b.DefenseQueues.Any(c => AIUtils.FindQueues(player, c).Any());
+			var owned = b.BuildingQueues.Concat(b.DefenseQueues).Distinct().Where(c => AIUtils.FindQueues(player, c).Any());
+			separateDefenceQueue = QueueStageSplit.SplitActive(owned, b.BuildingQueues, b.DefenseQueues);
 			return separateDefenceQueue;
 		}
+
+		// This manager's queue class (Shared = in both sets: no split for it, and it is a building queue for the S2 zone demand).
+		QueueKind ThisQueueKind => QueueStageSplit.Classify(Category, baseBuilder.Info.BuildingQueues, baseBuilder.Info.DefenseQueues);
 
 		int RefineriesInFlight()
 		{
@@ -45,7 +50,7 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		bool ZoneDemandAtS2(IBotExpansionTargetProvider law) =>
-			QueueStageSplit.ZoneDemandAtS2(baseBuilder.RefineryAtS2Armed, law != null && law.RefinerySpacingActive, baseBuilder.Info.DefenseQueues.Contains(Category),
+			QueueStageSplit.ZoneDemandAtS2(baseBuilder.RefineryAtS2Armed, law != null && law.RefinerySpacingActive, ThisQueueKind == QueueKind.Defence,
 				RefineriesInFlight());
 	}
 }

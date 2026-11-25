@@ -573,17 +573,17 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void TheShippedAiYamlListsBuildingAddonsInBothQueueSets()
+		public void TheGenericAiYamlKeepsBuildingAddonsOutOfBothQueueSets()
 		{
-			// The root cause of the doubled events: one category in both sets means two managers over one queue.
+			// QUEUE-SPLIT-01 (Opus 11-25): BuildingAddons is an upgrade queue, in neither set of @generic (a name in both sets is Shared and pins the legacy walk).
 			var yaml = File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "tools", "tests", "fixtures", "mcv_deploy_ai.yaml")).Replace("\r\n", "\n");
-			// CLASSIC-FREEZE-01: the @classic builder copy repeats the same lists; Distinct() + Single() also asserts both copies agree.
-			var building = yaml.Split('\n').Select(l => l.Trim()).Distinct().Single(l => l.Trim().StartsWith("BuildingQueues: Building, RABuilding", StringComparison.Ordinal))
+			// CLASSIC-FREEZE-01: the frozen @classic copy still lists BuildingAddons in both sets (its split is off); the @generic block comes first.
+			var building = yaml.Split('\n').Select(l => l.Trim()).First(l => l.Trim().StartsWith("BuildingQueues: Building, RABuilding", StringComparison.Ordinal))
 				.Split(':')[1].Split(',').Select(s => s.Trim()).ToList();
-			var defense = yaml.Split('\n').Select(l => l.Trim()).Distinct().Single(l => l.Trim().StartsWith("DefenseQueues: Defence, RADefence", StringComparison.Ordinal))
+			var defense = yaml.Split('\n').Select(l => l.Trim()).First(l => l.Trim().StartsWith("DefenseQueues: Defence, RADefence", StringComparison.Ordinal))
 				.Split(':')[1].Split(',').Select(s => s.Trim()).ToList();
-			Assert.That(building, Does.Contain("BuildingAddons"));
-			Assert.That(defense, Does.Contain("BuildingAddons"));
+			Assert.That(building, Does.Not.Contain("BuildingAddons"));
+			Assert.That(defense, Does.Not.Contain("BuildingAddons"));
 
 			var created = new List<string>();
 			var duplicates = 0;
@@ -594,7 +594,7 @@ namespace OpenRA.Mods.Cameo.Test
 				created.Add(category);
 			}
 
-			Assert.That(duplicates, Is.EqualTo(1), "exactly the BuildingAddons defence slot borrows the building slot's observation");
+			Assert.That(duplicates, Is.EqualTo(0), "no category is listed twice");
 		}
 
 		[Test]

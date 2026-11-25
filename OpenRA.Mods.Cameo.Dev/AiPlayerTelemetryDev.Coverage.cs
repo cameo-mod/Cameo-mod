@@ -173,7 +173,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			});
 		}
 
-		void IBotBuildingPickObserver.BuildingSkipped(OpenRA.Player owner, int tick, string actor, string queue, string stage, string reason)
+		void IBotBuildingPickObserver.BuildingSkipped(OpenRA.Player owner, int tick, string actor, string queue, string stage, string reason, string detail)
 		{
 			if (writer == null || ended)
 				return;
@@ -190,16 +190,19 @@ namespace OpenRA.Mods.Cameo.Traits
 				return;
 			}
 
-			if (cov == null || (cov.LastSkipTick.TryGetValue(actor, out var last) && tick - last < RefineryHeldRepeatTicks))
+			// Per walk, not per actor across walks: one row per (player, queue, type) per 750 ticks (cov is per player).
+			var key = queue + "|" + actor;
+			if (cov == null || (cov.LastSkipTick.TryGetValue(key, out var last) && tick - last < RefineryHeldRepeatTicks))
 				return;
 
-			cov.LastSkipTick[actor] = tick;
+			cov.LastSkipTick[key] = tick;
 			ObserverRow(owner, "bb_skip", b =>
 			{
 				AiMatchLogWriter.AppendString(b, "actor", actor);
 				AiMatchLogWriter.AppendString(b, "queue", queue);
 				AiMatchLogWriter.AppendString(b, "stage", stage);
 				AiMatchLogWriter.AppendString(b, "reason", reason);
+				AiMatchLogWriter.AppendString(b, "detail", detail);
 			});
 		}
 

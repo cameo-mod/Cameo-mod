@@ -5976,7 +5976,7 @@ Player:
 		# BUILD-ALL-B (row bb_no_foundation, user ruling 11-25): no concrete (terrain foundation) on any base-builder path; CONCRETE-PLAN-01 after the playtest.
 		BbNoFoundation: true
 		# QUEUE-SPLIT-01 + REF-S2-01 (Opus 11-25): defence stages stay on the defence queue; unmet refinery zone demand is served at S2 (rows bb_queue_split, bb_refinery_s2).
-		BbQueueSplit: false
+		BbQueueSplit: true
 		BbRefineryAtS2: true
 		# MODE-BIAS-01 (rows mb_essentials, mb_techchain, mb_antirush, mb_opening, user ruling 11-25): the extra building lists also weight the BuildingFractions roll while their trigger holds (never a gate).
 		MbEssentials: true
@@ -6028,8 +6028,8 @@ Player:
 		UseProductionScaling: true
 		BuildingProductionMinCashRequirement: 1500
 		DefenseProductionMinCashRequirement: 2000
-		BuildingQueues: Building, RABuilding, BuildingAddons
-		DefenseQueues: Defence, RADefence, BuildingAddons
+		BuildingQueues: Building, RABuilding
+		DefenseQueues: Defence, RADefence
 		ConstructionYardTypes: zerg_lair, zerg_hive
 		RefineryTypes: wc2_humans_townhall, wc2_orcs_greathall
 		PowerTypes: nuke, nuk2, ra1_powerplant, ra1_advancedpowerplant, japan_waveforcereactor, ra2_soviets_teslareactor, ra2_allies_powerplant, ra2_soviets_nuclearreactor, yuri_bioreactor, terran_supplydepot, protoss_pylon, scbotoverlord, ts_gdi_powerplant, forgotten_crystalpowerextractor, cabal_powerplant, ts_nod_powerplant, ts_nod_advancedpowerplant, chpower, chpower2, usapower, wind_trap, ixian_windtrap, ordos_windtrap, d2k_mini_windtrap, wc2_humans_farm, wc2_orcs_pigfarm, asianalliance_petrolplant, asianalliance_tankreactor, steelconsortium_consortiumpowerplant, latinsyndicate_powerstation, naxis_naxpetrolplant, schwarzermond_hydrogenplant, futuretech_thermalpowerplant, zerg_overlord, tkm_powerplant, atreides_windtrap, corrino_windtrap, harkonnen_windtrap, atreides_constructionyard, corrino_constructionyard, harkonnen_constructionyard, eden_tokamak, eden_solar_array, eden_factory_structure, plymouth_tokamak, plymouth_solararray, plymouth_structure_factory

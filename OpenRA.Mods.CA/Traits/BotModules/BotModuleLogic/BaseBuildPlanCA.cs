@@ -136,6 +136,10 @@ namespace OpenRA.Mods.CA.Traits
 		// QUEUE-SPLIT-01 (row bb_queue_split): this player has a defence queue of its own, so the walk keeps to its queue's stages (QueueStageSplit.Allowed).
 		// False = every stage, as before.
 		public bool QueueSplit;
+
+		// bb_skip, DEV only: the types this walk actually offered (a candidate that reached the stage's admission or feasibility tests) and rejected, with the
+		// offering stage and the reject reason. Null = not collected; only the DEV-only recorder in the queue manager ever sets it.
+		public Dictionary<string, (BaseBuildStage Stage, string Reason)> Offered;
 	}
 
 	/// <summary>
@@ -195,12 +199,18 @@ namespace OpenRA.Mods.CA.Traits
 						continue;
 
 					if (!feasibility.StageAdmits(candidate))
+					{
+						OfferRejected(snapshot, candidate, "stage_not_admitted");
 						continue;
+					}
 
 					// One test = A1-A6 and, only when those pass, the A7 claim (the single step allowed to hold state).
 					tests++;
-					if (feasibility.Feasible(candidate, out var admitted) && admitted != null && feasibility.TryClaim(candidate, admitted))
+					var feasible = feasibility.Feasible(candidate, out var admitted) && admitted != null;
+					if (feasible && feasibility.TryClaim(candidate, admitted))
 						return new BaseBuildPick(admitted, candidate.Stage, candidate.Name, tests);
+
+					OfferRejected(snapshot, candidate, feasible ? "claim_refused" : "infeasible");
 
 					(failed ??= new HashSet<string>(StringComparer.Ordinal)).Add(candidate.Name);
 					if (tests >= MaxFeasibilityTests)
@@ -209,6 +219,14 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			return new BaseBuildPick(null, BaseBuildStage.None, null, tests);
+		}
+
+		// bb_skip, DEV only (compiled out of a release build with its arguments): the first rejection of an offered type this walk.
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		static void OfferRejected(BaseBuildSnapshot s, BaseBuildCandidate candidate, string reason)
+		{
+			if (s.Offered != null && !s.Offered.ContainsKey(candidate.Name))
+				s.Offered[candidate.Name] = (candidate.Stage, reason);
 		}
 
 		/// <summary>The candidates of one stage, lazily, in the stage's own order.</summary>

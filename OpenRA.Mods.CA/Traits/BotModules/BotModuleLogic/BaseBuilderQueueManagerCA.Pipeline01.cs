@@ -53,6 +53,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			pipelineFeasibility ??= new PipelineFeasibility(this);
 			pipelineFeasibility.Begin(queue, buildable, power, law, snapshot);
+			OfferedCollect(snapshot); // bb_skip, DEV only
 			var pick = BaseBuildPlanCA.Plan(snapshot, pipelineFeasibility, BotRng.For(player, nameof(BaseBuilderQueueManagerCA)));
 			SkipsObserved(buildable, snapshot, pick); // bb_skip, DEV only
 			if (pick.IsNone)
@@ -95,7 +96,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				WorldTick = now,
 				DefenceQueue = b.DefenseQueues.Contains(Category),
-				QueueSplit = baseBuilder.QueueSplitArmed && SeparateDefenceQueue(),
+				QueueSplit = baseBuilder.QueueSplitArmed && ThisQueueKind != QueueKind.Shared && SeparateDefenceQueue(),
 				Bank = ProdBusyCA.SweepBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep),
 				ProductionCashReserve = botLimits != null ? botLimits.Info.ProductionCashReserve : -1,
 				TierLine = TierLine,
@@ -330,8 +331,8 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		// bb_skip (Opus ruling 11-25, Haiku V08C RCA: 17 of 18 missing buildings were never offered), DEV only: every listed BuildingFractions type this queue
-		// can build now with no copy owned or in flight that the walk did not start, with the stage that returned (None = no pick) and why. The observer
-		// rate-limits per type. Compiled out of a release build together with its arguments.
+		// can build now with no copy owned or in flight that the walk did not start, as offered_rejected (the stage that offered it, and why it was rejected)
+		// or not_offered (the stage that returned, None = no pick, and why). The observer dedupes per (player, queue, type) and rate-limits. Compiled out of a release build together with its arguments.
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
 		void SkipsObserved(List<ActorInfo> buildable, BaseBuildSnapshot s, BaseBuildPick pick)
 		{
@@ -340,16 +341,32 @@ namespace OpenRA.Mods.CA.Traits
 
 			var names = new HashSet<string>(buildable.Select(a => a.Name), StringComparer.Ordinal);
 			var stage = pick.IsNone ? "None" : pick.Stage.ToString();
-			var reason = pick.IsNone ? "no_pick" : pick.Stage < BaseBuildStage.S5CoreOnce ? "earlier_stage" : pick.Stage == BaseBuildStage.S5CoreOnce ? "other_first_copy"
+			var walkReason = pick.IsNone ? "no_pick" : pick.Stage < BaseBuildStage.S5CoreOnce ? "earlier_stage" : pick.Stage == BaseBuildStage.S5CoreOnce ? "other_first_copy"
 				: "not_admitted_s5";
 			foreach (var kv in s.Fractions.OrderBy(kv => kv.Key, StringComparer.Ordinal))
 			{
 				if (kv.Value <= 0 || kv.Key == pick.Name || !names.Contains(kv.Key) || BaseBuildPlanCA.CountOf(s, kv.Key) != 0)
 					continue;
 
+				// The ACTUAL offered set of this walk: an offered type was rejected (stage = the offering stage); a type no stage offered is not_offered (stage =
+				// the stage that returned, detail = why the walk ended there).
+				var offered = false;
+				(BaseBuildStage Stage, string Reason) rejection = default;
+				if (s.Offered != null)
+					offered = s.Offered.TryGetValue(kv.Key, out rejection);
+
 				foreach (var o in PickObservers)
-					o.BuildingSkipped(player, world.WorldTick, kv.Key, Category, stage, reason);
+					o.BuildingSkipped(player, world.WorldTick, kv.Key, Category, offered ? rejection.Stage.ToString() : stage, offered ? "offered_rejected" : "not_offered",
+						offered ? rejection.Reason : walkReason);
 			}
+		}
+
+		// bb_skip, DEV only: arms the per-walk offered-set collector when a recorder is present.
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void OfferedCollect(BaseBuildSnapshot s)
+		{
+			if (PickObservers.Length > 0)
+				s.Offered = new Dictionary<string, (BaseBuildStage Stage, string Reason)>(StringComparer.Ordinal);
 		}
 
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]

@@ -69,6 +69,39 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(Pick(Snap(true, true)), Is.EqualTo("pillbox"), "split: the defence queue keeps its defence stage");
 		}
 
+		static readonly HashSet<string> BuildingSet = new() { "Building", "RABuilding", "BuildingAddons" };
+		static readonly HashSet<string> DefenceSet = new() { "Defence", "RADefence", "BuildingAddons" };
+
+		[Test]
+		public void AQueueInBothSetsIsSharedAndGivesNoSplit()
+		{
+			Assert.That(QueueStageSplit.Classify("BuildingAddons", BuildingSet, DefenceSet), Is.EqualTo(QueueKind.Shared));
+			Assert.That(QueueStageSplit.Classify("Building", BuildingSet, DefenceSet), Is.EqualTo(QueueKind.Building));
+			Assert.That(QueueStageSplit.Classify("Defence", BuildingSet, DefenceSet), Is.EqualTo(QueueKind.Defence));
+			Assert.That(QueueStageSplit.Classify("Upgrades", BuildingSet, DefenceSet), Is.EqualTo(QueueKind.Other));
+			Assert.That(QueueStageSplit.SplitActive(new[] { "BuildingAddons" }, BuildingSet, DefenceSet), Is.False);
+		}
+
+		[Test]
+		public void ASharedOnlyFactionKeepsTheLegacyWalkWithS4AndS9()
+		{
+			var building = new HashSet<string> { "Building" };
+			var defence = new HashSet<string> { "Building" };
+			Assert.That(QueueStageSplit.Classify("Building", building, defence), Is.EqualTo(QueueKind.Shared));
+			var split = QueueStageSplit.SplitActive(new[] { "Building" }, building, defence);
+			Assert.That(split, Is.False);
+			Assert.That(QueueStageSplit.Allowed(BaseBuildStage.S4AntiRush, split, false), Is.True);
+			Assert.That(QueueStageSplit.Allowed(BaseBuildStage.S9ExtraDefence, split, false), Is.True);
+		}
+
+		[Test]
+		public void ADedicatedFactionSplitsAndBuildingAddonsOwnedWithASharedQueueDoesNot()
+		{
+			Assert.That(QueueStageSplit.SplitActive(new[] { "Building", "Defence" }, BuildingSet, DefenceSet), Is.True, "building + dedicated defence queue");
+			Assert.That(QueueStageSplit.SplitActive(new[] { "Building", "BuildingAddons" }, BuildingSet, DefenceSet), Is.False, "BuildingAddons is Shared, not a defence queue");
+			Assert.That(QueueStageSplit.SplitActive(new[] { "Defence" }, BuildingSet, DefenceSet), Is.False, "no distinct building queue");
+		}
+
 		[Test]
 		public void TheDefenceQueueNeverRunsTheRefineryStages()
 		{
@@ -116,7 +149,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheWiringIsBehindTheSwitches()
 		{
 			Assert.That(Source(Dir + "BaseBuildPlanCA.cs"), Does.Contain("if (!QueueStageSplit.Allowed(stage, snapshot.QueueSplit, snapshot.DefenceQueue))\n\t\t\t\t\tcontinue;"));
-			Assert.That(Source(Dir + "BaseBuilderQueueManagerCA.Pipeline01.cs"), Does.Contain("QueueSplit = baseBuilder.QueueSplitArmed && SeparateDefenceQueue(),"));
+			Assert.That(Source(Dir + "BaseBuilderQueueManagerCA.Pipeline01.cs"), Does.Contain("QueueSplit = baseBuilder.QueueSplitArmed && ThisQueueKind != QueueKind.Shared && SeparateDefenceQueue(),"));
 			Assert.That(Source(Dir + "BaseBuilderQueueManagerCA.Pipeline01.cs"), Does.Contain("o.RefineryHeld(player, world.WorldTick, gate, refineries, Category);"), "the row carries the queue");
 			Assert.That(Source("mods/Cameo.Dev/AiPlayerTelemetryDev.Coverage.cs"), Does.Contain("AiMatchLogWriter.AppendString(b, \"queue\", queue);"));
 
@@ -131,12 +164,10 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void OnlyTheGenericBaseBuilderArmsThemAndTheRowsAreRegistered()
 		{
-			// V08D (Opus ruling A 11-25): BbQueueSplit ships OFF until the shared-queue classification fix (BuildingAddons is in both sets); REF-S2 stays armed.
-			Assert.That(FieldOrNull(PlayerNode("BaseBuilderBotModuleCA@generic"), "BbQueueSplit"), Is.EqualTo("false"));
+			// Opus 11-25: BbQueueSplit is back ON (BuildingAddons left both queue sets; a queue in both sets is Shared and never splits).
 			foreach (var key in new[] { "BbQueueSplit", "BbRefineryAtS2" })
 			{
-				if (key == "BbRefineryAtS2")
-					Assert.That(FieldOrNull(PlayerNode("BaseBuilderBotModuleCA@generic"), key), Is.EqualTo("true"), key);
+				Assert.That(FieldOrNull(PlayerNode("BaseBuilderBotModuleCA@generic"), key), Is.EqualTo("true"), key);
 				Assert.That(FieldOrNull(PlayerNode("BaseBuilderBotModuleCA@classic"), key), Is.Null, key);
 			}
 
