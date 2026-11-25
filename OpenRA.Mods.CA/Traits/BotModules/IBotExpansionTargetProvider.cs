@@ -346,6 +346,17 @@ namespace OpenRA.Mods.CA.Traits
 		CPos? CrawlFrontierAnchor => null;
 
 		/// <summary>
+		/// crawl_advance_only (CRAWL-LONG-01): a crawl placement toward the published aim must strictly reduce the distance from the own buildable-area frontier to the aim,
+		/// searching around the frontier cell; a link with no forward cell is placed at a base cell instead and reported with <see cref="CrawlLinkNoAdvance"/>. False = unchanged.
+		/// </summary>
+		bool CrawlAdvanceOnly => false;
+
+		/// <summary>crawl_advance_only: the wanted link had no cell that advances the frontier; the provider parks the crawl target so the want ends.</summary>
+		void CrawlLinkNoAdvance()
+		{
+		}
+
+		/// <summary>
 		/// TF-1: the atomic admission gate for the published <see cref="WantedLinkBuilding"/>. The
 		/// queue calls it just before its StartProduction order: the first queue through holds the
 		/// pending claim and may proceed; a second queue in the same window is refused — the
