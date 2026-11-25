@@ -6431,6 +6431,8 @@ Player:
 			rush.fighter: 130
 		UnitRollRampTicks: 9000
 		# CONSOLIDATE-01 C9 (X13): paid Promotions also start while a unit-production pause vote is up (pq_upgrade_service); free items always did.
+		# UPG-ADDONS (Opus 11-25, Haiku check): the army_* lvl2-3 upgrades sit on the BuildingAddons queue, which the upgrade service did not serve. @generic only.
+		UpgradeServiceQueues: Promotions, Upgrades, Research, Addons, BuildingAddons
 		UpgradeServiceThroughPause: Upgrades, Research, Addons, Promotions
 		IdleBaseUnitsMaximum: 25
 		ProductionMinCashRequirement: 1000
