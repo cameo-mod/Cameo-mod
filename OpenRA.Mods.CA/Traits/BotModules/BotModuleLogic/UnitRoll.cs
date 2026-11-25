@@ -22,7 +22,10 @@ namespace OpenRA.Mods.CA.Traits
 	public static class UnitRoll
 	{
 		/// <summary>The largest weight one candidate may take; keeps the cumulative sum inside an int roll.</summary>
-		public const long WeightCap = 5_000_000;
+		public const double WeightCap = 1e12;
+
+		/// <summary>The resolution of the uniform draw: the roll is Next(RollResolution) / RollResolution, scaled by the total weight in double (no int cast of a weight).</summary>
+		public const int RollResolution = 1 << 30;
 
 		/// <summary>Percent bias of a role for a personality at a tick: the early value, moving linearly to the late value over rampTicks (late missing = stays early). 100 = neutral.</summary>
 		public static int RoleBiasPct(IReadOnlyDictionary<string, int> early, IReadOnlyDictionary<string, int> late, string personality, string role, int tick, int rampTicks)
@@ -72,47 +75,58 @@ namespace OpenRA.Mods.CA.Traits
 		public static int MulPct(int a, int b) => (int)Math.Clamp((long)a * b / 100, 0, 100_000);
 
 		/// <summary>
-		/// The weight of every candidate: fraction x bias% x counter%, then max(weight, floorPct% of the mean). Always at least 1, so a candidate can never drop out;
-		/// all-zero fractions give equal weights.
+		/// The weight of every candidate, in double: fraction x bias% x counter% x boost, then max(weight, floorPct% of the mean). Always at least 1, so a candidate can never drop out
+		/// (the floor stays positive for every candidate); all-zero fractions give equal weights. boost = the first-build multiplier of a never-built type (null = 1 for all).
 		/// </summary>
-		public static long[] Weights(IReadOnlyList<int> fraction, IReadOnlyList<int> biasPct, IReadOnlyList<int> counterPct, int floorPct)
+		public static double[] Weights(IReadOnlyList<int> fraction, IReadOnlyList<int> biasPct, IReadOnlyList<int> counterPct, int floorPct, IReadOnlyList<double> boost = null)
 		{
 			var n = fraction.Count;
-			var raw = new long[n];
-			long sum = 0;
+			var raw = new double[n];
+			double sum = 0;
 			for (var i = 0; i < n; i++)
 			{
-				raw[i] = Math.Min(WeightCap, (long)Math.Max(0, fraction[i]) * Math.Max(0, biasPct[i]) * Math.Max(0, counterPct[i]) / 100);
+				var b = boost == null || double.IsNaN(boost[i]) || boost[i] < 1 ? 1.0 : Math.Min(boost[i], 1e6);
+				raw[i] = Math.Min(WeightCap, (double)Math.Max(0, fraction[i]) * Math.Max(0, biasPct[i]) * Math.Max(0, counterPct[i]) / 100.0 * b);
 				sum += raw[i];
 			}
 
-			var floor = n == 0 ? 0 : sum / n * Math.Max(0, floorPct) / 100;
+			var floor = n == 0 ? 0 : sum / n * Math.Max(0, floorPct) / 100.0;
 			for (var i = 0; i < n; i++)
-				raw[i] = Math.Max(1, Math.Max(raw[i], floor));
+				raw[i] = Math.Max(1.0, Math.Max(raw[i], floor));
 
 			return raw;
 		}
 
-		public static long Total(IReadOnlyList<long> weights)
+		public static double Total(IReadOnlyList<double> weights)
 		{
-			long total = 0;
+			double total = 0;
 			foreach (var w in weights)
 				total += w;
 
 			return total;
 		}
 
-		/// <summary>The index a roll in [0, Total) lands on; -1 for an empty list.</summary>
-		public static int Pick(IReadOnlyList<long> weights, int roll)
+		/// <summary>The index a roll in [0, Total) lands on, by cumulative sum in double (no cast, no wrap); the last candidate when the roll reaches the end; -1 for an empty list.</summary>
+		public static int Pick(IReadOnlyList<double> weights, double roll)
 		{
 			for (var i = 0; i < weights.Count; i++)
 			{
-				roll -= (int)weights[i];
+				roll -= weights[i];
 				if (roll < 0)
 					return i;
 			}
 
 			return weights.Count - 1;
+		}
+
+		/// <summary>
+		/// The first-build weight multiplier of a type that is buildable but never built: baseBoost, doubled for every full rampTicks it has stayed unbuilt, capped at cap (never below 1).
+		/// Coverage stays near-certain because the pull grows until the type is built.
+		/// </summary>
+		public static double FirstBoost(int baseBoost, int unbuiltTicks, int rampTicks, int cap)
+		{
+			var steps = rampTicks > 0 ? Math.Clamp(unbuiltTicks / rampTicks, 0, 30) : 0;
+			return Math.Min(Math.Max(1, cap), Math.Max(1, baseBoost) * (double)(1L << steps));
 		}
 
 		/// <summary>Indices of the candidates never ordered before (the first-of-each set).</summary>

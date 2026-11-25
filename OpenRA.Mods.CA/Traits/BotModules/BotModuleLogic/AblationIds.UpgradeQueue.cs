@@ -16,5 +16,8 @@ namespace OpenRA.Mods.CA.Traits
 	public static partial class AblationIds
 	{
 		public const string UpgradeService = "pq_upgrade_service";
+
+		// UPG-ADDONS: off = the BuildingAddons queue is skipped by the upgrade service (the other served queues are unchanged).
+		public const string UpgradeBuildingAddons = "upg_building_addons";
 	}
 }

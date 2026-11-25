@@ -76,6 +76,9 @@ namespace OpenRA.Mods.CA.Traits
 			"False = those queues are only visited by the ordinary unit sweep, behind the floor.")]
 		public readonly bool UpgradeService = true;
 
+		[Desc("UPG-ADDONS: the BuildingAddons queue (the army_* level 2-3 upgrades) is served by the upgrade service when it is listed in UpgradeServiceQueues. False = it is skipped (row upg_building_addons).")]
+		public readonly bool UpgradeBuildingAddons = true;
+
 		[Desc("PROD-BUSY-01 (USER P0): every idle factory of a category is served on every pass (the offer budget is the factory count), not one",
 			"(two while the bank is saturated). Gated by SwitchCondition; row pb_all_factories. False = the old width.")]
 		public readonly bool ServeAllFactories = false;
@@ -159,6 +162,14 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("UNIT-ALL-01: game ticks over which UnitRollBias moves to UnitRollBiasLate. 0 = no ramp.")]
 		public readonly int UnitRollRampTicks = 0;
+
+		[Desc("UNIT-ALL-01 first-build boost (a weight multiplier, never a gate): a listed type this bot never built is rolled with this multiplier on top of the table weight; it doubles for every",
+			"UnitRollFirstRampTicks the type stays buildable but unbuilt, up to UnitRollFirstCap, so every available type is built at least once. All three live in the learnable parameter table.")]
+		public readonly int UnitRollFirstBoost = 8;
+
+		public readonly int UnitRollFirstRampTicks = 3000;
+
+		public readonly int UnitRollFirstCap = 64;
 
 		[Desc("UNIT-MIX-01: the queue types that make an airfield (aircraft floor); the infantry floor uses IdleQueueFloorQueues.")]
 		public readonly string[] UnitMixAircraftQueues = { "Aircraft", "RAAircraft" };
@@ -568,7 +579,7 @@ namespace OpenRA.Mods.CA.Traits
 		bool FairService => switchesActive && Info.FairProducerService && !ablateFairProducer.Off(player, AblationIds.FairProducer);
 
 		// ABLATE-01 hooks (DEV-only provider; absent in release = always on): one cached answer per row.
-		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery, ablateUpgradeService;
+		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery, ablateUpgradeService, ablateUpgradeBuildingAddons;
 		AblationLatch ablateMcvRebuild, ablateRequestSlot; // MCV-REBUILD-01
 		bool McvRebuildOn => switchesActive && Info.McvRebuildFirst && !ablateMcvRebuild.Off(player, AblationIds.McvRebuildFirst);
 		int RequestDropSweeps => McvRebuildCA.DropLimit(switchesActive && Info.RequestSlotFastDrop && !ablateRequestSlot.Off(player, AblationIds.RequestSlot),
@@ -602,20 +613,13 @@ namespace OpenRA.Mods.CA.Traits
 
 		// UNIT-ALL-01 parameter table: the one place the roll reads its numbers from (fractions, personality bias, ramp, profile strengths, floor); a learner overrides per player through it (LEARN-MULT-01).
 		UnitRollTable rollTable;
-		public UnitRollTable RollParameters => rollTable ??= new UnitRollTable(Info.UnitsToBuild, Info.UnitRollBias, Info.UnitRollBiasLate, Info.UnitRollProfiles, Info.UnitRollFloorPct, Info.UnitRollRampTicks);
+		public UnitRollTable RollParameters => rollTable ??= new UnitRollTable(Info.UnitsToBuild, Info.UnitRollBias, Info.UnitRollBiasLate, Info.UnitRollProfiles, Info.UnitRollFloorPct, Info.UnitRollRampTicks,
+				Info.UnitRollFirstBoost, Info.UnitRollFirstRampTicks, Info.UnitRollFirstCap);
 		string rollPersonality = "";
 		bool rollFirst;
-		sealed class RollOpenFirst
-		{
-			public string Name;
-			public int Tick;
-			public ProductionItem Item; // bound the first visit after the order shows up in the queue
-			public int NamedBefore; // items of this name already queued when the order was given: the new one is the one after them (bound by the item, not by the name)
-			public ProductionQueue Queue; // for the dead-factory prune
-		}
 
-		const int RollFirstOpenMaxTicks = 3000; // a first build that stays queued this long (held by the pause votes, say) stops blocking the queue's other new types
-		readonly Dictionary<string, RollOpenFirst> rollFirstOpen = new(StringComparer.Ordinal);
+		// The first tick each listed type was seen buildable in a roll (the first-build boost escalates with the time it stays unbuilt).
+		readonly Dictionary<string, int> rollAvailableSince = new(StringComparer.Ordinal);
 		bool firstItemRoundPass;
 		readonly Dictionary<string, string> firstRoundSavedCursors = new(StringComparer.Ordinal);
 		int unitMixTick = -1;
@@ -705,6 +709,13 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		bool UpgradeServiceOn => switchesActive && Info.UpgradeService && !ablateUpgradeService.Off(player, AblationIds.UpgradeService);
+
+		// UPG-ADDONS: the BuildingAddons queue is its own toggle (the rest of the service is unchanged by it).
+		bool UpgradeQueueServed(string category) =>
+			category != "BuildingAddons" || (Info.UpgradeBuildingAddons && !ablateUpgradeBuildingAddons.Off(player, AblationIds.UpgradeBuildingAddons));
+
+		// UPGRADE-COVERAGE: the once-done registry of this player's upgrade-like items (fed when the item completes).
+		readonly UpgradeCompletions upgradeDone = new();
 
 		// PR-2 queue depth (fair path only): world ticks between this bot's last two passes. Round-robin makes it long;
 		// a single-slot queue is topped up while its loaded build time is shorter than this gap (QueueDepthCA).
@@ -936,10 +947,30 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			unitsToBuild = new ActorIndex.OwnerAndNames(world, referencedUnitTypes, player);
+			world.ActorAdded += UpgradeCompleted;
 #if CAMEO_DEV_LOGGING
 			world.ActorAdded += RollUnitBuilt;
 #endif
 		}
+
+		// UPGRADE-COVERAGE: the item finished = the actor of its own name enters the world for this player (the ^ResearchedUpgradeTemplate items become prerequisites by name).
+		// Only a type the service has seen buildable is registered, so a unit or building never marks anything. Same event as the DEV row ub_upgrade_done.
+		void UpgradeCompleted(Actor a)
+		{
+			if (a.Owner != player || IsTraitDisabled)
+				return;
+
+			if (upgradeDone.Complete(a.Info.Name))
+				UpgradeDoneLog(a.Info.Name);
+		}
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void UpgradeStartLog(string name, string queueType, int cost) =>
+			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},upg_start,{name},{queueType},{(cost <= 0 ? "free" : "paid")};since={upgradeDone.Since(name)}");
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void UpgradeDoneLog(string name) =>
+			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},upg_done,{name},,{upgradeDone.DoneCount}");
 
 #if CAMEO_DEV_LOGGING
 		// UNIT-ALL-01 DEV (Opus 11-25, coverage scorer): one unit_roll.csv row per unit that completes for this bot ("completed" = it enters the world after tick 0, so the starting
@@ -1288,6 +1319,9 @@ namespace OpenRA.Mods.CA.Traits
 			var paused = requestPause.Any(rp => rp.IsTraitEnabled() && rp.PauseUnitProduction && rp is not IBotItemAwareUnitCap);
 			foreach (var category in Info.UpgradeServiceQueues)
 			{
+				if (!UpgradeQueueServed(category))
+					continue;
+
 				var heldByPause = UpgradeServiceCA.HeldByPause(paused, ServedThroughPause(category));
 				foreach (var queue in AIUtils.FindQueues(player, category))
 				{
@@ -1305,8 +1339,13 @@ namespace OpenRA.Mods.CA.Traits
 							if (!ShouldBuild(item.Name, true, queue.Info.Type))
 								continue;
 
+							// the once-done registry: first sight of the type stamps its available tick; a completed type (or a member of a completed exclusive set) is not started again
+							upgradeDone.Observe(item.Name, world.WorldTick, item.TraitInfoOrDefault<BuildableInfo>()?.Prerequisites);
+							if (upgradeDone.IsDone(item.Name))
+								continue;
+
 							candidates.Add(new UpgradeServiceCA.Candidate(item.Name, queue.GetProductionCost(item),
-								shares != null && shares.TryGetValue(item.Name, out var w) ? Math.Max(w, 0) : -1));
+								shares != null && shares.TryGetValue(item.Name, out var w) ? Math.Max(w, 0) : -1, upgradeDone.Since(item.Name)));
 							infos.Add(item);
 						}
 
@@ -1319,6 +1358,7 @@ namespace OpenRA.Mods.CA.Traits
 						SetUnitInterval(item2.Name);
 						bot.QueueOrder(Order.StartProduction(queue.Actor, item2.Name, 1));
 						NotifyStarted(item2.Name, queue.Info.Type);
+						UpgradeStartLog(item2.Name, queue.Info.Type, queue.GetProductionCost(item2));
 						AIUtils.BotDebug("AI: {0} upgrade service starts {1} in {2}.", player, item2.Name, queue.Info.Type);
 					}
 				}
@@ -1364,6 +1404,8 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (HarvesterTargetOn)
 				HarvesterStarted(name); // HARV-01: every start path ends here, so the cached queued count stays exact between refreshes
+
+			RollStartLog(name, queueType);
 
 			foreach (var observer in UnitObservers)
 				observer.UnitProductionStarted(player, world.WorldTick, name, queueType);
@@ -1708,7 +1750,7 @@ namespace OpenRA.Mods.CA.Traits
 					var fullCost = Math.Max(0, queue.GetProductionCost(unit));
 
 					// UNIT-ALL-01 c3 (Opus 11-25): the FIRST build of a listed type is pay-as-you-go like TECHCHAIN-PAYGO: it does not wait for the full price (OpenRA pays progressively): the afford, reserve and
-					// depth-cash gates below are evaluated at cost 0 for it, so a bank of 0 or the tier reserve can still hold it; ChooseRollUnit lets one first-of-each be open per queue. Everything else keeps the full gates.
+					// depth-cash gates below are evaluated at cost 0 for it, so a bank of 0 or the tier reserve can still hold it; Everything else keeps the full gates.
 					var paygo = roll && rollFirst && UnitRoll.FirstAdmits(batch.BankLeft);
 					var cost = paygo ? 0 : fullCost;
 					if (!batch.Affords(cost) || !ReserveAdmits(batch, cost)
@@ -1721,13 +1763,9 @@ namespace OpenRA.Mods.CA.Traits
 					}
 
 					SetUnitInterval(name);
-					var namedBefore = paygo ? queue.AllQueued().Count(i => i.Item == name) : 0;
 					bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
 					NotifyStarted(name, queue.Info.Type);
 					counters.Record(unit);
-					if (paygo)
-						rollFirstOpen[queue.Actor.ActorID + "|" + queue.Info.Type] = new RollOpenFirst { Name = name, Tick = world.WorldTick, Queue = queue, NamedBefore = namedBefore };
-
 					batch.Reserve(queue, fullCost);
 					if (depthQueue)
 						loadedTicks += queue.GetBuildTime(unit, BuildableInfo.GetTraitForQueue(unit, queue.Info.Type));
@@ -2526,7 +2564,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		// UNIT-ALL-01 (ub_unit_roll): the one fraction roll. Candidates = the UnitsToBuild entries (the merged ai.yaml table, raw fractions) this queue can build now, minus harvesters (their own
 		// target), minus what the hard gates refuse right now (delay, interval, limit, capturer cap, item-aware cap, the aircraft caps - except for the FIRST build of a type, and a UnitLimits entry of
-		// at least 1 admits that first build because nothing is owned yet). A type this bot never ordered is picked first, one at a time; else weight = fraction x personality bias x observed counter
+		// at least 1 admits that first build because nothing is owned yet). One legal pool, no exclusion: a type this bot never ordered carries the FirstBoost weight multiplier (it doubles per UnitRollFirstRampTicks unbuilt, capped); weight = fraction x personality bias x observed counter
 		// demand (x role-mix deficit x learned prior), floored at UnitRollFloorPct of the mean. The counter term reads the OBSERVED enemy memory only (counters.ObserveFogOnly).
 		ActorInfo ChooseRollUnit(ProductionQueue queue, HashSet<string> skip)
 		{
@@ -2534,11 +2572,6 @@ namespace OpenRA.Mods.CA.Traits
 			var table = Info.UnitsToBuild;
 			if (table == null || table.Count == 0)
 				return null;
-
-			// a first-build slot of a factory that died or changed hands is dropped, so the dictionary never keeps the key of a gone queue
-			if (rollFirstOpen.Count > 0)
-				foreach (var key in rollFirstOpen.Where(kv => kv.Value.Queue == null || kv.Value.Queue.Actor.IsDead || !kv.Value.Queue.Actor.IsInWorld || kv.Value.Queue.Actor.Owner != player).Select(kv => kv.Key).ToList())
-					rollFirstOpen.Remove(key);
 
 			var items = new List<ActorInfo>();
 			foreach (var a in queue.BuildableItems().OrderBy(b => b.Name, StringComparer.Ordinal))
@@ -2562,38 +2595,11 @@ namespace OpenRA.Mods.CA.Traits
 			if (items.Count == 0)
 				return null;
 
-			// c3: at most one first-of-each is open per queue; while it is queued the other never-built types wait (they are not rolled as ordinary picks either).
-			var openKey = queue.Actor.ActorID + "|" + queue.Info.Type;
-			var firstOpen = false;
-			if (rollFirstOpen.TryGetValue(openKey, out var open))
-			{
-				// open for the rest of the pass that ordered it; afterwards while THAT queued item (not a later copy of the same name) is still in the queue, for at most RollFirstOpenMaxTicks
-				if (open.Item == null && open.Tick != world.WorldTick)
-				{
-					var named = queue.AllQueued().Where(i => i.Item == open.Name).ToList();
-					if (named.Count > open.NamedBefore)
-						open.Item = named[named.Count - 1]; // the order appended its item last: older copies of the same name are not this slot's item
-				}
-
-				firstOpen = world.WorldTick - open.Tick <= RollFirstOpenMaxTicks && (open.Tick == world.WorldTick || (open.Item != null && queue.AllQueued().Contains(open.Item)));
-			}
-
-			if (!firstOpen)
-				rollFirstOpen.Remove(openKey);
-
-			var pool = items.Where(a => !rollOrdered.Contains(a.Name)).ToList();
-			if (firstOpen)
-			{
-				items = items.Where(a => rollOrdered.Contains(a.Name)).ToList();
-				if (items.Count == 0)
-					return null;
-
-				pool = [];
-			}
-
-			rollFirst = pool.Count > 0;
-			if (!rollFirst)
-				pool = items;
+			// One legal pool (user rule: multipliers, never gates): every listed type this queue can build now is in every roll. The first build of a type is a WEIGHT (FirstBoost, escalating
+			// while it stays unbuilt), not an exclusion; the cash protection is the pay-as-you-go progressive payment of that first build.
+			var pool = items;
+			foreach (var a in pool)
+				rollAvailableSince.TryAdd(a.Name, world.WorldTick);
 
 			// The mode bias profiles: each is a strength (0 = switched off or ablated) and a trigger; all of them only multiply.
 			var strength = new int[UnitRoll.ProfileNames.Length];
@@ -2613,9 +2619,12 @@ namespace OpenRA.Mods.CA.Traits
 			var fractions = new int[pool.Count];
 			var biases = new int[pool.Count];
 			var counterPcts = new int[pool.Count];
+			var boosts = new double[pool.Count];
 			for (var i = 0; i < pool.Count; i++)
 			{
 				var name = pool[i].Name;
+				boosts[i] = rollOrdered.Contains(name) ? 1.0
+					: UnitRoll.FirstBoost(RollParameters.FirstBoost, world.WorldTick - rollAvailableSince[name], RollParameters.FirstRampTicks, RollParameters.FirstCap);
 				var role = roles?.PrimaryRoleOf(name);
 				var bias = RollParameters.BiasPct(rollPersonality, role, world.WorldTick);
 				if (deficits != null && role != null && deficits.TryGetValue(role, out var deficit))
@@ -2638,10 +2647,11 @@ namespace OpenRA.Mods.CA.Traits
 				counterPcts[i] = scores == null ? 100 : UnitRoll.CounterPct(scores[i], best, strength[UnitRoll.Counter]);
 			}
 
-			var weights = UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct);
-			var total = (int)Math.Min(int.MaxValue, UnitRoll.Total(weights));
-			var pick = UnitRoll.Pick(weights, BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(total));
-			RollPickLog(queue.Info.Type, pool, weights, pick, rollFirst);
+			var weights = UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct, boosts);
+			var draw = BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(UnitRoll.RollResolution) / (double)UnitRoll.RollResolution;
+			var pick = UnitRoll.Pick(weights, draw * UnitRoll.Total(weights));
+			rollFirst = !rollOrdered.Contains(pool[pick].Name);
+			RollPickLog(queue.Info.Type, pool, weights, pick, rollFirst, fractions, biases, counterPcts, boosts);
 			return pool[pick];
 		}
 
@@ -2733,14 +2743,34 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
-		void RollPickLog(string queueType, List<ActorInfo> pool, long[] weights, int pick, bool first)
+		void RollPickLog(string queueType, List<ActorInfo> pool, double[] weights, int pick, bool first, int[] fractions, int[] biases, int[] counterPcts, double[] boosts)
 		{
+			// pick_id: every pick gets one (logged or not); the start row of the same type quotes it, so a pick with no start row is a dropped pick
+			var pickId = ++rollPickSeq;
+			rollPickIds[pool[pick].Name] = pickId;
+
 			if (!first && rollPickLogTick.TryGetValue(queueType, out var last) && world.WorldTick - last < 250)
 				return;
 
 			rollPickLogTick[queueType] = world.WorldTick;
-			var candidates = string.Join("|", pool.Select((a, i) => a.Name + ":" + weights[i]));
-			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},unit_pick,{pool[pick].Name},{queueType},{(first ? 1 : 0)};{candidates}");
+			var candidates = string.Join("|", pool.Select((a, i) => a.Name + ":" + weights[i].ToString("0.##", System.Globalization.CultureInfo.InvariantCulture)));
+			var seat = Array.IndexOf(world.Players, player);
+			RollLog($"{world.WorldTick},{seat},unit_pick,{pool[pick].Name},{queueType},{(first ? 1 : 0)};{candidates}");
+
+			// ub_pool: the full candidate list with the factors of each weight (fraction, personality x demand x mode bias percent, counter percent, final weight after the floor)
+			var parts = string.Join("|", pool.Select((a, i) => string.Create(System.Globalization.CultureInfo.InvariantCulture, $"{a.Name}:{fractions[i]}:{biases[i]}:{counterPcts[i]}:x{boosts[i]:0.##}:{weights[i]:0.##}")));
+			RollLog($"{world.WorldTick},{seat},ub_pool,{pool[pick].Name},{queueType},{pickId};floor={RollParameters.FloorPct};{parts}");
+		}
+
+		int rollPickSeq;
+		readonly Dictionary<string, int> rollPickIds = new(StringComparer.Ordinal);
+
+		// ub_unit_start: the production order for a type was emitted (every start path ends in NotifyStarted); pick_id is the roll pick it came from (0 = not a roll pick).
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void RollStartLog(string name, string queueType)
+		{
+			rollPickIds.Remove(name, out var pickId);
+			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},ub_unit_start,{name},{queueType},{pickId}");
 		}
 
 		Dictionary<string, int> GetUnitsToBuildForCategory(string queueCategory)
@@ -3156,6 +3186,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		void INotifyActorDisposing.Disposing(Actor self)
 		{
+			world.ActorAdded -= UpgradeCompleted;
 #if CAMEO_DEV_LOGGING
 			world.ActorAdded -= RollUnitBuilt;
 #endif

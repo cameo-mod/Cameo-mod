@@ -27,7 +27,7 @@ namespace OpenRA.Mods.Cameo.Test
 		static readonly string[] Names = ["a_rifle", "b_rocket", "c_jeep", "d_tank", "e_mammoth", "f_duelist", "g_artillery", "h_orca"];
 		static readonly int[] Fractions = [40, 30, 20, 15, 1, 1, 5, 0];
 
-		static long[] Roll(int[] bias = null, int[] counter = null, int floor = 5) =>
+		static double[] Roll(int[] bias = null, int[] counter = null, int floor = 5) =>
 			UnitRoll.Weights(Fractions, bias ?? Enumerable.Repeat(100, Names.Length).ToArray(), counter ?? Enumerable.Repeat(100, Names.Length).ToArray(), floor);
 
 		[Test]
@@ -37,7 +37,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(w.All(x => x > 0), Is.True, "floor > 0");
 			var biasZero = Enumerable.Repeat(0, Names.Length).ToArray();
 			Assert.That(Roll(biasZero).All(x => x > 0), Is.True, "even a zero bias leaves weight >= 1");
-			Assert.That(UnitRoll.Weights(new[] { 0, 0 }, new[] { 100, 100 }, new[] { 100, 100 }, 5), Is.EqualTo(new long[] { 1, 1 }), "all-zero fractions roll equally");
+			Assert.That(UnitRoll.Weights(new[] { 0, 0 }, new[] { 100, 100 }, new[] { 100, 100 }, 5), Is.EqualTo(new double[] { 1, 1 }), "all-zero fractions roll equally");
 		}
 
 		[Test]
@@ -46,8 +46,8 @@ namespace OpenRA.Mods.Cameo.Test
 			var w = Roll(floor: 10);
 			var raw = Roll(floor: 0);
 			var mean = raw.Sum() / raw.Length;
-			Assert.That(w[7], Is.EqualTo(mean * 10 / 100), "the zero-fraction orca takes the floor");
-			Assert.That(w[0], Is.EqualTo(raw[0]), "a heavy type is untouched");
+			Assert.That(w[7], Is.EqualTo(mean * 10 / 100).Within(1e-9), "the zero-fraction orca takes the floor");
+			Assert.That(w[0], Is.EqualTo(raw[0]).Within(1e-9), "a heavy type is untouched");
 			Assert.That(w[4], Is.GreaterThanOrEqualTo(mean * 10 / 100));
 		}
 
@@ -57,9 +57,9 @@ namespace OpenRA.Mods.Cameo.Test
 			var w = Roll();
 			var rng = new Random(1234);
 			var hits = new int[Names.Length];
-			var total = (int)UnitRoll.Total(w);
+			var total = UnitRoll.Total(w);
 			for (var i = 0; i < 40000; i++)
-				hits[UnitRoll.Pick(w, rng.Next(total))]++;
+				hits[UnitRoll.Pick(w, rng.NextDouble() * total)]++;
 
 			for (var i = 0; i < Names.Length; i++)
 				Assert.That(hits[i], Is.GreaterThan(0), Names[i]);
@@ -79,7 +79,7 @@ namespace OpenRA.Mods.Cameo.Test
 			{
 				var unbuilt = UnitRoll.Unbuilt(Names, built.Contains);
 				var pool = unbuilt.Select(i => w[i]).ToArray();
-				var pick = unbuilt[UnitRoll.Pick(pool, rng.Next((int)UnitRoll.Total(pool)))];
+				var pick = unbuilt[UnitRoll.Pick(pool, rng.NextDouble() * UnitRoll.Total(pool))];
 				built.Add(Names[pick]);
 				steps++;
 			}
@@ -148,7 +148,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(body, Does.Not.Contain("GetUnitsToBuildForCategory"), "the derived or composition table never replaces the yaml fractions");
 			Assert.That(body, Does.Not.Contain("ChooseCounter").And.Not.Contain("ChooseWaveMixRole").And.Not.Contain("ChooseRoleDeficit"));
 			Assert.That(body, Does.Contain("fractions[i] = RollParameters.Fraction(name);"));
-			Assert.That(body, Does.Contain("UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct)"));
+			Assert.That(body, Does.Contain("UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct, boosts)"));
 		}
 
 		// Opus ruling 1: no kept gate may block a listed type forever. The aircraft caps are waived for the FIRST build of a type (both in the candidate filter and after the pick),
@@ -254,24 +254,159 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(u, Does.Contain("manager.WaveMixActive"), "the wavemix profile uses the ARMY-MIX-01 trigger");
 		}
 
-		// c3 (Opus 11-25): an unaffordable first-of-each is pay-as-you-go, like TECHCHAIN-PAYGO: it queues with any bank above 0, at most one open per queue, no savings hold.
+		// c3 (Opus 11-25): an unaffordable first build is pay-as-you-go, like TECHCHAIN-PAYGO: it queues with any bank above 0, no savings hold. Opus 11-25 (Sol FIX): one legal pool, the
+		// first-build preference is a weight (FirstBoost), not an exclusion; the open-slot machinery is gone.
 		[Test]
-		public void TheFirstBuildOfATypeQueuesWithAnyBankAndOnlyOneIsOpenPerQueue()
+		public void TheFirstBuildOfATypeQueuesWithAnyBankAndIsAWeightNotAnExclusion()
 		{
 			Assert.That(UnitRoll.FirstAdmits(1), Is.True);
 			Assert.That(UnitRoll.FirstAdmits(0), Is.False, "an empty bank still waits");
 
 			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
-			Assert.That(u, Does.Contain("var paygo = roll && rollFirst && UnitRoll.FirstAdmits(batch.BankLeft);\n\t\t\t\t\tvar cost = paygo ? 0 : fullCost;"), "only the first-of-each sees cost 0 at the afford and reserve gates");
+			Assert.That(u, Does.Contain("var paygo = roll && rollFirst && UnitRoll.FirstAdmits(batch.BankLeft);\n\t\t\t\t\tvar cost = paygo ? 0 : fullCost;"), "only the first build sees cost 0 at the afford and reserve gates");
 			Assert.That(u, Does.Contain("batch.Reserve(queue, fullCost);"), "the order still reserves its full price");
-			Assert.That(u, Does.Contain("rollFirstOpen[queue.Actor.ActorID + \"|\" + queue.Info.Type] = new RollOpenFirst { Name = name, Tick = world.WorldTick, Queue = queue, NamedBefore = namedBefore };"));
+			Assert.That(u, Does.Not.Contain("rollFirstOpen").And.Not.Contain("RollOpenFirst"), "no open-slot exclusion any more");
 
 			var start = u.IndexOf("ActorInfo ChooseRollUnit(", StringComparison.Ordinal);
 			var body = u.Substring(start, u.IndexOf("int rollDeficitTick", start, StringComparison.Ordinal) - start);
-			Assert.That(body, Does.Contain("open.Tick == world.WorldTick || (open.Item != null && queue.AllQueued().Contains(open.Item))"), "open while THAT queued item is queued, and for the rest of the pass that ordered it");
-			Assert.That(body, Does.Contain("world.WorldTick - open.Tick <= RollFirstOpenMaxTicks"), "bounded in time");
-			Assert.That(body, Does.Contain("items = items.Where(a => rollOrdered.Contains(a.Name)).ToList();"), "while one is open the other never-built types wait; ordinary types still roll");
+			Assert.That(body, Does.Contain("var pool = items;"), "one legal pool: every listed buildable type is in every roll");
+			Assert.That(body, Does.Not.Contain("items.Where(a => rollOrdered.Contains(a.Name))").And.Not.Contain("!rollOrdered.Contains(a.Name)).ToList()"), "never-built types never exclude or select");
+			Assert.That(body, Does.Contain("UnitRoll.FirstBoost(RollParameters.FirstBoost, world.WorldTick - rollAvailableSince[name], RollParameters.FirstRampTicks, RollParameters.FirstCap)"));
+			Assert.That(body, Does.Contain("rollFirst = !rollOrdered.Contains(pool[pick].Name);"), "a pick is a first build when its type was never ordered");
 			Assert.That(body, Does.Not.Contain("savings"), "no savings hold");
+		}
+
+		// Opus 11-25 rulings on Sol's FIX of 7eccbe9a: the first-build boost escalates, the numerics are double, overrides are validated.
+		[Test]
+		public void TheFirstBuildBoostDoublesPerRampAndStopsAtTheCap()
+		{
+			Assert.That(UnitRoll.FirstBoost(8, 0, 3000, 64), Is.EqualTo(8));
+			Assert.That(UnitRoll.FirstBoost(8, 2999, 3000, 64), Is.EqualTo(8));
+			Assert.That(UnitRoll.FirstBoost(8, 3000, 3000, 64), Is.EqualTo(16));
+			Assert.That(UnitRoll.FirstBoost(8, 9000, 3000, 64), Is.EqualTo(64));
+			Assert.That(UnitRoll.FirstBoost(8, 900000, 3000, 64), Is.EqualTo(64), "capped, no overflow");
+			Assert.That(UnitRoll.FirstBoost(8, 9000, 0, 64), Is.EqualTo(8), "no ramp = the base value");
+			Assert.That(UnitRoll.FirstBoost(0, 0, 3000, 64), Is.EqualTo(1), "never below neutral");
+
+			// an unbuilt zero-fraction type with the boost still rolls, and the boost raises a type that was left behind
+			var plain = UnitRoll.Weights(new[] { 40, 1 }, new[] { 100, 100 }, new[] { 100, 100 }, 5);
+			var boosted = UnitRoll.Weights(new[] { 40, 1 }, new[] { 100, 100 }, new[] { 100, 100 }, 5, new[] { 1.0, 64.0 });
+			Assert.That(boosted[1], Is.GreaterThan(plain[1] * 60));
+			Assert.That(boosted[0], Is.EqualTo(plain[0]).Within(1e-9), "a built type keeps its weight");
+		}
+
+		[Test]
+		public void ExtremeWeightsKeepEveryCandidateReachableAndNothingWraps()
+		{
+			// the last candidate stays reachable next to a huge one (no int cast of a sum, no wrap)
+			var w = UnitRoll.Weights(new[] { 1_000_000, 1_000_000, 1 }, new[] { 100_000, 100_000, 100 }, new[] { 100_000, 100_000, 100 }, 1_000_000, new[] { 64.0, 64.0, 64.0 });
+			Assert.That(w.All(x => x > 0 && !double.IsNaN(x) && !double.IsInfinity(x)), Is.True);
+			var total = UnitRoll.Total(w);
+			Assert.That(total, Is.GreaterThan(0));
+			Assert.That(UnitRoll.Pick(w, total - 1e-6), Is.EqualTo(2), "a roll at the very end lands on the last candidate");
+			Assert.That(UnitRoll.Pick(w, 0), Is.EqualTo(0));
+			Assert.That(UnitRoll.Pick(w, total * 2), Is.EqualTo(2), "a roll past the end falls to the last candidate, never an index error");
+
+			// all-zero except the floor: equal, positive
+			var z = UnitRoll.Weights(new[] { 0, 0, 0 }, new[] { 0, 0, 0 }, new[] { 0, 0, 0 }, 0);
+			Assert.That(z, Is.EqualTo(new double[] { 1, 1, 1 }));
+			Assert.That(UnitRoll.Pick(z, 2.5), Is.EqualTo(2));
+
+			// the uniform draw: the top of the resolution maps below the total
+			var top = (UnitRoll.RollResolution - 1) / (double)UnitRoll.RollResolution * total;
+			Assert.That(UnitRoll.Pick(w, top), Is.InRange(0, 2));
+		}
+
+		[Test]
+		public void TableOverridesAreClampedToZeroAndTheMaximum()
+		{
+			var t = new UnitRollTable(new Dictionary<string, int> { ["a"] = 5 }, null, null, null, 5, 0);
+			t.Override(UnitRollTable.FractionKey("a"), -50);
+			Assert.That(t.Fraction("a"), Is.EqualTo(0), "negative = 0");
+			t.Override(UnitRollTable.FractionKey("a"), int.MaxValue);
+			Assert.That(t.Fraction("a"), Is.EqualTo(UnitRollTable.MaxValue), "clamped to the maximum");
+			t.Override(UnitRollTable.FloorKey, int.MinValue);
+			Assert.That(t.FloorPct, Is.EqualTo(0));
+			t.Override(UnitRollTable.FirstBoostKey, 1_000_000_000);
+			Assert.That(t.FirstBoost, Is.EqualTo(UnitRollTable.MaxValue));
+			t.ClearOverrides();
+			Assert.That(t.FirstBoost, Is.EqualTo(8), "the default table value");
+			Assert.That(t.FirstRampTicks, Is.EqualTo(3000));
+			Assert.That(t.FirstCap, Is.EqualTo(64));
+			Assert.That(new UnitRollTable(new Dictionary<string, int> { ["a"] = -7 }, null, null, null, -1, -1).Fraction("a"), Is.EqualTo(0), "a bad yaml value is clamped too");
+		}
+
+		// UPGRADE-COVERAGE once-done registry (Opus 11-25).
+		[Test]
+		public void TheOnceDoneRegistryCountsARepeatableAfterItsFirstCompletionAndAnExclusiveSetOnce()
+		{
+			var r = new UpgradeCompletions();
+			r.Observe("upgrade_a", 100, new[] { "~faction", "!upgrade_a" }); // non-repeatable: only itself
+			r.Observe("opt_x", 200, new[] { "!opt_y" });
+			r.Observe("opt_y", 250, new[] { "!opt_x" });
+			r.Observe("promo_elite", 300, null);
+
+			Assert.That(r.IsDone("upgrade_a"), Is.False);
+			Assert.That(r.Complete("upgrade_a"), Is.True, "first completion");
+			Assert.That(r.Complete("upgrade_a"), Is.False, "a repeatable counts once");
+			Assert.That(r.IsDone("upgrade_a"), Is.True);
+
+			Assert.That(r.IsDone("opt_x") || r.IsDone("opt_y"), Is.False);
+			r.Complete("opt_y");
+			Assert.That(r.IsDone("opt_x"), Is.True, "any one option satisfies the whole exclusive set");
+
+			Assert.That(r.Complete("never_seen"), Is.False, "a type never seen buildable (a unit, a building) marks nothing");
+			Assert.That(r.IsDone("never_seen"), Is.False);
+			Assert.That(r.Since("upgrade_a"), Is.EqualTo(100));
+			Assert.That(r.Since("never_seen"), Is.EqualTo(int.MaxValue));
+		}
+
+		[Test]
+		public void AmongNotDoneCandidatesTheOldestAvailableGoesFirstAfterFreeItems()
+		{
+			var items = new[]
+			{
+				new UpgradeServiceCA.Candidate("heavy_new", 1000, 90, 5000),
+				new UpgradeServiceCA.Candidate("light_old", 1000, 10, 100),
+				new UpgradeServiceCA.Candidate("free_new", 0, 0, 9000),
+			};
+			Assert.That(UpgradeServiceCA.Choose(items, new HashSet<string>(), false), Is.EqualTo(2), "free first");
+			Assert.That(UpgradeServiceCA.Choose(items, new HashSet<string> { "free_new" }, false), Is.EqualTo(1), "the older one before the heavier weight");
+			Assert.That(UpgradeServiceCA.Choose(new[] { new UpgradeServiceCA.Candidate("a", 1, 5, 10), new UpgradeServiceCA.Candidate("b", 1, 9, 10) }, new HashSet<string>(), false), Is.EqualTo(1), "equal since: the weight decides");
+		}
+
+		[Test]
+		public void APromotionQueueItemReachesDoneThroughTheRegistryAndTheServiceCoversEveryQueueType()
+		{
+			// a promotion is a free item of the Promotions queue: once seen buildable and completed it is done, and is not offered again
+			var r = new UpgradeCompletions();
+			r.Observe("promotion.elite", 50, null);
+			Assert.That(r.Complete("promotion.elite"), Is.True);
+			Assert.That(r.IsDone("promotion.elite"), Is.True);
+
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			Assert.That(u, Does.Contain("public readonly string[] UpgradeServiceQueues = { \"Promotions\", \"Upgrades\", \"Research\", \"Addons\" };"), "every upgrade-like queue type is served");
+			Assert.That(u, Does.Contain("if (!UpgradeQueueServed(category))"), "BuildingAddons only with its toggle");
+			Assert.That(u, Does.Contain("upgradeDone.Observe(item.Name, world.WorldTick, item.TraitInfoOrDefault<BuildableInfo>()?.Prerequisites);"));
+			Assert.That(u, Does.Contain("if (upgradeDone.IsDone(item.Name))\n\t\t\t\t\t\t\t\tcontinue;"), "a done type is not started again");
+			Assert.That(u, Does.Contain("world.ActorAdded += UpgradeCompleted;"));
+			Assert.That(Source("mods/CA/Traits/BotModules/BotModuleLogic/AblationIds.UpgradeQueue.cs"), Does.Contain("\"upg_building_addons\""));
+			Assert.That(u, Does.Contain("bool UpgradeQueueServed(string category) =>\n\t\t\tcategory != \"BuildingAddons\" || (Info.UpgradeBuildingAddons"));
+
+			// the DEV rows carry the queue name for every queue type
+			var dev = Source("mods/Cameo.Dev/AiPlayerTelemetryDev.Coverage.cs");
+			Assert.That(dev, Does.Contain("AppendString(b, \"queue\", queue)"));
+		}
+
+		[Test]
+		public void TheUnitStartAndPoolRowsAreDevOnlyAndCarryThePickId()
+		{
+			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			Assert.That(u, Does.Contain("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid RollStartLog("));
+			Assert.That(u, Does.Contain(",ub_unit_start,{name},{queueType},{pickId}"));
+			Assert.That(u, Does.Contain(",ub_pool,{pool[pick].Name},{queueType},{pickId};floor="));
+			Assert.That(u, Does.Contain("RollStartLog(name, queueType);"), "every start path ends in NotifyStarted");
+			Assert.That(u, Does.Contain("var pickId = ++rollPickSeq;"), "every pick gets an id, logged or not");
 		}
 
 		// Workhorse review of c888455f: the squad manager's wave hold is fed by the roll whatever the wavemix profile strength, and from every candidate the gates admit.
@@ -283,10 +418,10 @@ namespace OpenRA.Mods.Cameo.Test
 			var body = u.Substring(start, u.IndexOf("int rollDeficitTick", start, StringComparison.Ordinal) - start);
 			var report = body.IndexOf("var queueRoles = ReportWaveRoles(queue.Info.Type, items, roles);", StringComparison.Ordinal);
 			var empty = body.IndexOf("if (items.Count == 0)", StringComparison.Ordinal);
-			var firstOpen = body.IndexOf("var firstOpen", StringComparison.Ordinal);
+			var firstOpen = body.IndexOf("var pool = items;", StringComparison.Ordinal);
 			Assert.That(report, Is.GreaterThan(0));
 			Assert.That(report, Is.LessThan(empty), "reported even when nothing is buildable");
-			Assert.That(report, Is.LessThan(firstOpen), "reported before the first-of-each narrowing: the whole candidate list, not the never-built pool");
+			Assert.That(report, Is.LessThan(firstOpen), "reported before the pool is formed: the whole candidate list");
 			Assert.That(body, Does.Contain("strength[UnitRoll.WaveMix] > 0 ? RollMissingWaveRoles(queueRoles) : null"), "the profile only reads the report");
 			Assert.That(u, Does.Contain("waveMixAvailable[queueType] = (world.WorldTick, queueRoles);"));
 		}
@@ -385,16 +520,8 @@ namespace OpenRA.Mods.Cameo.Test
 			var built = u.IndexOf("void RollUnitBuilt(Actor a)", StringComparison.Ordinal);
 			Assert.That(u.Substring(built, 1100), Does.Contain("if (!rollBuiltSeen.Add(a.ActorID))"));
 
-			// (2) the slot of a dead or ownerless factory is dropped
-			var start = u.IndexOf("ActorInfo ChooseRollUnit(", StringComparison.Ordinal);
-			var body = u.Substring(start, u.IndexOf("int rollDeficitTick", start, StringComparison.Ordinal) - start);
-			Assert.That(body, Does.Contain("kv.Value.Queue.Actor.IsDead || !kv.Value.Queue.Actor.IsInWorld || kv.Value.Queue.Actor.Owner != player"));
-
-			// (3) the slot binds to the item the order appended, not to the first item of the same name
-			Assert.That(body, Does.Contain("if (named.Count > open.NamedBefore)"));
-			Assert.That(body, Does.Contain("open.Item = named[named.Count - 1];"));
-			Assert.That(body, Does.Not.Contain("FirstOrDefault(i => i.Item == open.Name)"));
-			Assert.That(u, Does.Contain("var namedBefore = paygo ? queue.AllQueued().Count(i => i.Item == name) : 0;"));
+			// (2)(3) the first-build open slot (dead-factory prune, slot bound by item) is gone: the first build is a weight in one pool
+			Assert.That(u, Does.Not.Contain("rollFirstOpen"));
 		}
 
 		[Test]
