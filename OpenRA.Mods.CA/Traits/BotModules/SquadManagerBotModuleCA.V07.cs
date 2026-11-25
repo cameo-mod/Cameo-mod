@@ -101,6 +101,10 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
+			// CONSOLIDATE-02 Q8 (sq_all_in_late): the late-escalation step is the last all-in input; the named triggers above keep their name.
+			if (!atCap && !huge && !won && ArmyAllInLateOn(now))
+				return AllInCA.WhyLate;
+
 			// CONSOLIDATE-02 Q4 (Opus D4): the stalemate breaker's trigger is one more all-in input (it no longer launches its own wave).
 			return AllInCA.Why(atCap, huge, won)
 				?? (ArmyLaunchArbiterOn && AllInCA.StalemateSignal(now, team.StalemateSignalTick, Info.ArmyStalemateSignalTicks) ? AllInCA.WhyStalemate : null);

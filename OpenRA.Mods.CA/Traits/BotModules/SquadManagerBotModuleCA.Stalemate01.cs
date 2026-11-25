@@ -63,8 +63,12 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>Finish-mode hunt pick for a squad whose leader is <paramref name="leader"/>: null when none is reachable.</summary>
-		internal CPos? FinishHuntCell(Actor leader)
+		internal CPos? FinishHuntCell(Actor leader, bool ownPick = false)
 		{
+			// CONSOLIDATE-02 Q8 (sq_hunt_one_cell): the team hunts one cell; TeamHuntCellFor asks back here for the plain pick (ownPick) when it needs a new cell.
+			if (!ownPick && ArmyHuntOneCellOn)
+				return TeamHuntCellFor(leader);
+
 			var mobile = leader?.TraitOrDefault<Mobile>();
 			if (mobile == null || World.WorldTick < huntRetryAt)
 				return null;

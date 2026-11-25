@@ -43,7 +43,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheFiveWorldScanningFindersNoLongerScanTheWorldThemselves()
 		{
 			var squad = Squad();
-			var finders = Section(squad, "internal Actor FindClosestEnemy(Actor sourceActor, SquadCA owner = null)", "internal int SquadValueOf(");
+			var finders = Section(squad, "internal Actor FindClosestEnemy(Actor sourceActor, SquadCA owner = null, bool preferStructures = false)","internal int SquadValueOf(");
 			Assert.That(finders, Does.Not.Contain("World.Actors"));
 			Assert.That(finders, Does.Contain("EnemyCandidates(mainTarget)"));
 			Assert.That(finders, Does.Contain("EnemyUnitsOf(targetPlayer)"));
@@ -53,7 +53,7 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void NoFinderModifiesAListInPlace()
 		{
-			var finders = Section(Squad(), "internal Actor FindClosestEnemy(Actor sourceActor, SquadCA owner = null)", "internal int SquadValueOf(");
+			var finders = Section(Squad(), "internal Actor FindClosestEnemy(Actor sourceActor, SquadCA owner = null, bool preferStructures = false)", "internal int SquadValueOf(");
 
 			// The location overload owns a fresh list (EnemyUnitsOf returns a new one) and keeps its RemoveAll; the two risk overloads
 			// that can see the shared list use WithoutRiskyTargets, which builds a new list.

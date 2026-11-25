@@ -652,6 +652,7 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			reports.Remove(squad);
 			prongOf.Remove(squad);
+			splitOf.Remove(squad);
 		}
 
 		/// <summary>Drop the reports of squads that no longer take part (the caller says who still does).</summary>
@@ -750,6 +751,54 @@ namespace OpenRA.Mods.CA.Traits
 			return units;
 		}
 
+		// ---- CONSOLIDATE-02 Q7 (row sq_pincer_push): the arms are decided at push time, on the blob that stands at the rally ----
+
+		readonly Dictionary<object, (int Units, int ToProng)> splitOf = new();
+
+		/// <summary>The squads that reported, with what each holds: the blob the arms are shared out from.</summary>
+		public List<(object Squad, int Units, long Value)> Reported()
+		{
+			var list = new List<(object Squad, int Units, long Value)>(reports.Count);
+			foreach (var (squad, r) in reports)
+				list.Add((squad, r.Units, r.Value));
+
+			return list;
+		}
+
+		/// <summary>
+		/// The order becomes a pincer now: two staging points, the gather window restarts (as Promote does), and the push-bar hold is cleared (the blob passed the bar to get here;
+		/// a push that is held again sets it again).
+		/// </summary>
+		public void BeginPincer(int now, WPos rally0, WPos rally1)
+		{
+			SetProngs(rally0, rally1);
+			PincerCollapsed = false;
+			FirstReadyTick = -1;
+			PushBarSince = -1;
+			IssueTick = now;
+		}
+
+		/// <summary>The squad walks to this prong (decided by the arm plan, not by the lighter-first share-out of the first ask).</summary>
+		public void AssignProng(object squad, int prong, long value) => prongOf[squad] = (prong == 0 ? 0 : 1, value);
+
+		/// <summary>The squad gives <paramref name="units"/> of its units to the prong <paramref name="toProng"/> (its own seat executes it).</summary>
+		public void RequestSplit(object squad, int units, int toProng) => splitOf[squad] = (units, toProng == 0 ? 0 : 1);
+
+		/// <summary>The pending division of this squad, once: false = none.</summary>
+		public bool TakeSplit(object squad, out int units, out int toProng)
+		{
+			if (!splitOf.Remove(squad, out var request))
+			{
+				units = 0;
+				toProng = 0;
+				return false;
+			}
+
+			units = request.Units;
+			toProng = request.ToProng;
+			return true;
+		}
+
 		/// <summary>The first tick a prong was ready is kept; later calls change nothing.</summary>
 		public void NoteReady(int now)
 		{
@@ -796,6 +845,10 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>CONSOLIDATE-02 Q4 (Opus D4): the last tick a seat's stalemate breaker would have launched (-1 = never); an input of the all-in trigger, never a launch.</summary>
 		public int StalemateSignalTick = -1;
+
+		/// <summary>CONSOLIDATE-02 Q8 (sq_hunt_one_cell): the one unseen cell the team hunts (null = none yet) and the tick it was taken (-1 = none); see <see cref="OpenRA.Mods.CA.Traits.BotModules.Squads.TeamHuntCell"/>.</summary>
+		public CPos? HuntCell;
+		public int HuntTick = -1;
 
 		/// <summary>TEAM-LEAD-02 finish-the-weakest focus: the enemy seat (its player-actor id, -1 = none), the tick it was taken, and the cached pick (re-evaluated at most every check window).</summary>
 		public int FocusSeat = -1;

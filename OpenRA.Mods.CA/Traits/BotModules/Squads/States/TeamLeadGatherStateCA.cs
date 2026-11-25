@@ -29,6 +29,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		int fightSince;
 		int calmUntil;
 
+		// CONSOLIDATE-02 Q7 (sq_pincer_push): the order was already a pincer when the squad last walked (it walks again once, when the order becomes one under it).
+		bool walkedAsPincer;
+
 		public TeamLeadGatherStateCA(TeamLeadOrder order)
 		{
 			this.order = order;
@@ -36,6 +39,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		public void Activate(SquadCA owner)
 		{
+			walkedAsPincer = order.Pincer;
+
 			// TEAM-PINCER-01: on a pincer the squad gathers at its own prong's staging point (the first ask shares it out), by the threat-aware
 			// route when a router has one; any other order gathers at the one rally point as before.
 			var manager = owner.SquadManager;
@@ -71,6 +76,15 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			{
 				manager.TeamLeadAbandon(owner, !manager.TeamLeadOn ? "not_engaged" : "cancelled:" + (order.CancelReason ?? "unknown"));
 				return;
+			}
+
+			// CONSOLIDATE-02 Q7 (sq_pincer_push): the leader made the order a pincer while this squad gathered at the plain rally. The squad gives the units the arm plan
+			// assigns to the other arm to a new squad of its seat, then walks to its own arm (a squad in a stand-off waits until it is over).
+			if (manager.ArmyPincerPushOn && order.Pincer && !order.Pushed && !fighting)
+			{
+				manager.TeamLeadSplitOff(owner, order);
+				if (!walkedAsPincer)
+					Activate(owner);
 			}
 
 			var now = owner.World.WorldTick;

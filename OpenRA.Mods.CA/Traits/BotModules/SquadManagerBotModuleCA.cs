@@ -1944,7 +1944,8 @@ namespace OpenRA.Mods.CA.Traits
 					stagingOrders.Remove(dead);
 		}
 
-		internal Actor FindClosestEnemy(Actor sourceActor, SquadCA owner = null)
+		// Q6 (sq_target_pick): preferStructures asks for the visible buildings first for this pick (an artillery squad), as the PreferBuildingTargets option does for every pick.
+		internal Actor FindClosestEnemy(Actor sourceActor, SquadCA owner = null, bool preferStructures = false)
 		{
 			// PERF-F1: the world scan, fog filter and main-target preference come from the per-tick shared list (read only here).
 			var mainTarget = EffectiveMainTarget();
@@ -1953,7 +1954,7 @@ namespace OpenRA.Mods.CA.Traits
 			var visible = VisibleOfCandidates(units);
 
 			// CA F2p2 (A5-1): visible enemy buildings first; only the already-observed candidates are re-ordered.
-			if (Info.PreferBuildingTargets)
+			if (Info.PreferBuildingTargets || preferStructures)
 			{
 				var visibleBuildings = visible.Where(IsPreferredEnemyBuilding).ToList();
 				if (visibleBuildings.Count > 0)
@@ -1973,7 +1974,7 @@ namespace OpenRA.Mods.CA.Traits
 		// remembered enemy threat exceeds attackerValue by more than AttackRiskMargin
 		// are skipped — an unknown region (threat 0) never blocks. When every
 		// candidate fails the gate the squad holds instead of suiciding.
-		internal Actor FindClosestEnemy(Actor sourceActor, int attackerValue, SquadCA owner = null)
+		internal Actor FindClosestEnemy(Actor sourceActor, int attackerValue, SquadCA owner = null, bool preferStructures = false)
 		{
 			var mainTarget = EffectiveMainTarget();
 			var units = EnemyCandidates(mainTarget);
@@ -1982,6 +1983,14 @@ namespace OpenRA.Mods.CA.Traits
 			// PERF-F1: a new list; the shared one is never modified in place.
 			units = WithoutRiskyTargets(units, attackerValue);
 			var visible = units.Where(IsNotHiddenUnit).ToList();
+
+			// Q6 (sq_target_pick): only a pick that asks for it (default false = the old risk-gated pick); the already-observed candidates are re-ordered, nothing new is read.
+			if (preferStructures)
+			{
+				var visibleBuildings = visible.Where(IsPreferredEnemyBuilding).ToList();
+				if (visibleBuildings.Count > 0)
+					visible = visibleBuildings;
+			}
 
 			var picked = FoggedScans
 				? AggTeamPickVisible(visible, sourceActor, owner)
@@ -2787,9 +2796,16 @@ namespace OpenRA.Mods.CA.Traits
 				}
 
 				// DF-4: too far to help — hit the enemy's base while its army is out.
-				var target = FindFrozenEnemyTarget(leader.CenterPosition, SquadValueOf(sq), sq);
-				if (target != null)
-					sq.Target = Target.FromFrozenActor(target);
+				// CONSOLIDATE-02 Q6 (sq_target_pick, X14): the raid joins the team's live harass target first, else the remembered building below (the HARASS order, shared target
+				// then remembered); with the row off every far raid went for its own building.
+				if (ArmyTargetPickOn)
+					PickSquadTarget(sq, false, true, TargetTier.SharedHarass | TargetTier.Frozen, frozenNeedsFog: false);
+				else
+				{
+					var target = FindFrozenEnemyTarget(leader.CenterPosition, SquadValueOf(sq), sq);
+					if (target != null)
+						sq.Target = Target.FromFrozenActor(target);
+				}
 			}
 
 			foreach (var gone in fastSquadReactedUntil.Keys.Where(s => !Squads.Contains(s)).ToList())
@@ -4492,8 +4508,15 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
-			if (protectSq.IsValid && !protectSq.IsTargetValid && protectTarget != null)
-				protectSq.TargetActor = protectTarget;
+			if (protectSq.IsValid && !protectSq.IsTargetValid)
+			{
+				// CONSOLIDATE-02 Q6 (sq_target_pick): the nearest armed attacker seen around the victim, else the one that reported the hit if it is seen (row off: the reporter).
+				var defenceTarget = ArmyTargetPickOn
+					? PickDefenceTarget(protectTarget, victim != null && victim.IsInWorld ? victim.CenterPosition : attacker != null ? attacker.CenterPosition : World.Map.CenterOfCell(initialBaseCenter))
+					: protectTarget;
+				if (defenceTarget != null)
+					protectSq.TargetActor = defenceTarget;
+			}
 
 			// LC5: reachable from INotifyDamage between reconcile passes — claim the draft now,
 			// not at the next heartbeat, so nobody leases a fresh defender out from under the

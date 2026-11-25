@@ -69,6 +69,16 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		protected bool FindNewTarget(SquadCA owner, bool highValueCheck = false, bool riskCheck = false)
 		{
+			// CONSOLIDATE-02 Q6 (sq_target_pick): the squad's own pick follows the TargetPick order of its purpose (a raid: the team's shared target, high value, seen, remembered,
+			// hunt; any other ground squad: the finish focus, seen, remembered, hunt). High value is a HARASS tier (design 4.1 Step 3: MAIN has none), so the roll is drawn here,
+			// from the same stream as before, only for a raid; a MAIN squad draws none (a deliberate row-on change: MAIN idle commits stop trying high value, and the stream advances less).
+			if (owner.SquadManager.ArmyTargetPickOn)
+			{
+				var tryHighValue = highValueCheck && SquadManagerBotModuleCA.TargetPurposeOf(owner.Type) == TargetPurpose.Harass
+					&& owner.SquadManager.Info.HighValueTargetPriority > BotRng.For(owner.Bot, nameof(GroundStateBaseCA)).Next(0, 100);
+				return owner.SquadManager.PickSquadTarget(owner, tryHighValue, riskCheck);
+			}
+
 			if (highValueCheck)
 			{
 				var highValueTargetRoll = BotRng.For(owner.Bot, nameof(GroundStateBaseCA)).Next(0, 100);

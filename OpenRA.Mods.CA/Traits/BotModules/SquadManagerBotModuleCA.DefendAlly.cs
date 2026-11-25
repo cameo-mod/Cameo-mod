@@ -239,7 +239,12 @@ namespace OpenRA.Mods.CA.Traits
 					}
 
 					if (protectSq.IsValid && !protectSq.IsTargetValid)
-						protectSq.TargetActor = attacker;
+					{
+						// CONSOLIDATE-02 Q6 (sq_target_pick): the nearest armed attacker seen around the friendly, else the one that hit it (row off: the one that hit it).
+						var defenceTarget = ArmyTargetPickOn ? PickDefenceTarget(attacker, friendlyPos) : attacker;
+						if (defenceTarget != null)
+							protectSq.TargetActor = defenceTarget;
+					}
 
 					responded = true;
 				}
