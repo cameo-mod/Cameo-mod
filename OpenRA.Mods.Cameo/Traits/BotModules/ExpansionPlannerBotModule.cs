@@ -275,6 +275,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("REF-FIELD-02: radius (cells) around a locked field's anchor in which a visible enemy combat actor counts as a threat.")]
 		public readonly int RefineryLostThreatRadiusCells = 10;
 
+		[Desc("ref_rebuild_lost (row of the same name): a loss record (and its lock) ends as soon as an own refinery stands again within the serve radius of the lost cell,",
+			"instead of lasting until RefineryLostMemoryTicks. The lock time and the quiet check on visible enemy combat actors (static defences included) are unchanged. Needs RefDemand. False = as before.")]
+		public readonly bool RefRebuildLost = false;
+
 		[Desc("REF-DEMAND-01 (Opus ruling + user final spec 2026-11-25, row ref_demand): under FieldCoverage the law's anchors are resource ZONES (every field's",
 			"cells and spreader spots cut into zones of RefineryZoneRadius, built once) and the in-reach set is the DEMAND set — a zone within YardRadiusCells of an",
 			"own construction yard (measured from the yard), reachable by a harvester from that yard (cached connectivity, no path search), not served by an allied",
@@ -879,6 +883,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int fieldGateTick = -1;
 		List<CPos> fieldGateCells;
 		bool RefineryFieldGateOn => Info.RefineryFieldGate && LawActive && !ablateRefineryFieldGate.Off(player, AblationIds.RefineryFieldGate);
+
+		// ref_rebuild_lost: a loss record ends when an own refinery stands again within the serve radius of the lost cell (the loss is replaced).
+		AblationLatch ablateRebuildLost;
+		bool RebuildLostOn => Info.RefRebuildLost && RefDemandArmed && !ablateRebuildLost.Off(player, AblationIds.RefRebuildLost);
 
 		// ECON-A-FIX (R6): anchor holds owned by expansion demands — a demand's refinery takes its anchor
 		// off every other claim while the item is still queued. The table is world-free; the probes below
@@ -1610,9 +1618,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (!refineryCells.Contains(c))
 					fieldGateLossTick[c] = tick;
 
+			var appeared = RebuildLostOn && fieldGateLossTick.Count > 0 ? refineryCells.Where(c => !fieldGateSeenRefineries.Contains(c)).ToList() : null;
 			fieldGateSeenRefineries.Clear();
 			foreach (var c in refineryCells)
 				fieldGateSeenRefineries.Add(c);
+
+			if (appeared != null && appeared.Count > 0)
+			{
+				var serve = Info.AnchorServeRadiusCells > 0 ? Info.AnchorServeRadiusCells : Info.ClaimRadiusCells;
+				foreach (var c in ReplacedLosses(fieldGateLossTick, appeared, tick, (r, lost) => RefineryCoverageOracle.WithinServeRadius(r, lost, serve)))
+				{
+					fieldGateLossTick.Remove(c);
+					fieldGateThreatTick.Remove(c);
+				}
+			}
 
 			var radius = WDist.FromCells(Info.RefineryLostThreatRadiusCells);
 			foreach (var c in fieldGateLossTick.Keys.ToList())
@@ -1628,6 +1647,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						&& a.Owner.RelationshipWith(player) == PlayerRelationship.Enemy && a.Info.HasTraitInfo<AttackBaseInfo>() && a.CanBeViewedByPlayer(player)))
 					fieldGateThreatTick[c] = tick;
 			}
+		}
+
+		/// <summary>
+		/// ref_rebuild_lost: the lost cells whose loss is replaced: a refinery in <paramref name="appeared"/> (cells that were not standing at the previous update)
+		/// within serve range of the lost cell, the loss recorded BEFORE <paramref name="now"/> (a refinery that vanishes and another that shows up in the same update is not a replacement).
+		/// Pure, for the tests.
+		/// </summary>
+		public static List<CPos> ReplacedLosses(IReadOnlyDictionary<CPos, int> lossTicks, IReadOnlyCollection<CPos> appeared, int now, Func<CPos, CPos, bool> within)
+		{
+			var replaced = new List<CPos>();
+			foreach (var kv in lossTicks)
+				if (kv.Value < now && appeared.Any(r => within(r, kv.Key)))
+					replaced.Add(kv.Key);
+
+			return replaced;
 		}
 
 		bool AnchorCommittedForClaims(int i, int tick)

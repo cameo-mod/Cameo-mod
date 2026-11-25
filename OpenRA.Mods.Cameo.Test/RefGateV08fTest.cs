@@ -61,5 +61,33 @@ namespace OpenRA.Mods.Cameo.Test
 			var planner = MiniYaml.FromString(Source("packaging/ai.yaml"), "ai").Single(n => n.Key == "Player").Value.Nodes.Single(n => n.Key == "ExpansionPlannerBotModule");
 			Assert.That(planner.Value.Nodes.Any(n => n.Key == "RefParkEvaluatedOnly" && n.Value.Value == "true"), Is.True);
 		}
+
+		[Test]
+		public void ALossEndsWhenARefineryThatWasNotStandingBeforeStandsInRangeOfTheLostCell()
+		{
+			var lost = new CPos(10, 10);
+			var losses = new System.Collections.Generic.Dictionary<CPos, int> { [lost] = 1000 };
+			bool Within(CPos r, CPos l) => System.Math.Abs(r.X - l.X) <= 8 && System.Math.Abs(r.Y - l.Y) <= 8;
+
+			Assert.That(ExpansionPlannerBotModule.ReplacedLosses(losses, new[] { new CPos(14, 12) }, 2000, Within), Is.EqualTo(new[] { lost }), "a new refinery in range replaces the loss");
+			Assert.That(ExpansionPlannerBotModule.ReplacedLosses(losses, new[] { new CPos(10, 10) }, 2000, Within), Is.EqualTo(new[] { lost }), "rebuilt on the same cell");
+			Assert.That(ExpansionPlannerBotModule.ReplacedLosses(losses, new[] { new CPos(40, 40) }, 2000, Within), Is.Empty, "a new refinery out of range does not");
+			Assert.That(ExpansionPlannerBotModule.ReplacedLosses(losses, System.Array.Empty<CPos>(), 2000, Within), Is.Empty, "nothing appeared");
+			Assert.That(ExpansionPlannerBotModule.ReplacedLosses(losses, new[] { new CPos(14, 12) }, 1000, Within), Is.Empty, "one that shows up in the update that recorded the loss is not a replacement");
+		}
+
+		[Test]
+		public void TheRebuildRowShipsOffAndIsArmedForTheGenericPlannerBehindRefDemandOnly()
+		{
+			var p = Source(Planner);
+			Assert.That(p, Does.Contain("public readonly bool RefRebuildLost = false;"), "off by default");
+			Assert.That(p, Does.Contain("bool RebuildLostOn => Info.RefRebuildLost && RefDemandArmed && !ablateRebuildLost.Off(player, AblationIds.RefRebuildLost);"));
+			Assert.That(p, Does.Contain("var appeared = RebuildLostOn && fieldGateLossTick.Count > 0 ? refineryCells.Where(c => !fieldGateSeenRefineries.Contains(c)).ToList() : null;"), "the appeared cells are read before the seen set is replaced");
+			Assert.That(p, Does.Contain("RefineryFieldGateCA.Locked(tick, kv.Value, fieldGateThreatTick.GetValueOrDefault(kv.Key, -1), Info.RefineryLostLockTicks,\n\t\t\t\t\t\tInfo.RefineryLostQuietTicks, Info.RefineryLostMemoryTicks)"), "the lock and the quiet check are unchanged");
+			Assert.That(AblationSpec.RegistryIds(), Does.Contain("ref_rebuild_lost"));
+
+			var planner = MiniYaml.FromString(Source("packaging/ai.yaml"), "ai").Single(n => n.Key == "Player").Value.Nodes.Single(n => n.Key == "ExpansionPlannerBotModule");
+			Assert.That(planner.Value.Nodes.Any(n => n.Key == "RefRebuildLost" && n.Value.Value == "true"), Is.True);
+		}
 	}
 }
