@@ -5977,6 +5977,8 @@ Player:
 		BbTechChainPaygo: true
 		# BUILD-ALL-B (row bb_build_all_listed, user ruling 11-25): S5 = the buildable BuildingFractions entries once, refinery included, no unlisted fallback; S5 first copies ride with any bank above 0.
 		BbBuildAllListed: true
+		# NO-CANCEL-01 (row bb_no_cancel, BS-03 c10 port, Opus V08G): a building in production is never cancelled for a choice; only a READY item with an unplaceable proof may be removed.
+		BbNoCancel: true
 		# BUILD-ALL-B (row bb_no_foundation, user ruling 11-25): no concrete (terrain foundation) on any base-builder path; CONCRETE-PLAN-01 after the playtest.
 		BbNoFoundation: true
 		# QUEUE-SPLIT-01 + REF-S2-01 (Opus 11-25): defence stages stay on the defence queue; unmet refinery zone demand is served at S2 (rows bb_queue_split, bb_refinery_s2).

@@ -359,6 +359,11 @@ namespace OpenRA.Mods.CA.Traits
 			"instead of the TechChainTypes list. Needs BbPipeline01. Off = S5 and A6 unchanged. Gated by SwitchCondition; row bb_build_all_listed.")]
 		public readonly bool BbBuildAllListed = false;
 
+		[Desc("NO-CANCEL-01 (BS-03 c10 port, designs _17/_17B; Opus V08G): a building in production is never cancelled for a choice. A removal site keeps its existing",
+			"condition and adds a guard: only a READY item with proof that no legal cell exists may still be removed (demand unwind, relocation latch, limit reached,",
+			"refinery exhaustion, placement saturation, episode certificate). In-progress entries are held or finished instead. Gated by SwitchCondition; row bb_no_cancel (off = the six sites as before).")]
+		public readonly bool BbNoCancel = false;
+
 		[Desc("BUILD-ALL-B (user ruling 2026-11-25): the base builder never queues a terrain foundation (D2k concrete: a building without health that removes",
 			"itself unconditionally, FoundationExclusion) on any path, listed or not. Concrete use is planned by CONCRETE-PLAN-01 after the playtest.",
 			"Off = as before. Gated by SwitchCondition; row bb_no_foundation.")]
@@ -898,6 +903,17 @@ namespace OpenRA.Mods.CA.Traits
 		public bool TechChainPaygoArmed => Info.BbTechChainPaygo && switchesActive && !ablateTechChainPaygo.Off(player, AblationIds.BbTechChainPaygo);
 		AblationLatch ablateBuildAllListed; // BUILD-ALL-B
 		public bool BuildAllListedArmed => Info.BbBuildAllListed && switchesActive && !ablateBuildAllListed.Off(player, AblationIds.BbBuildAllListed);
+		AblationLatch ablateNoCancel; // NO-CANCEL-01
+		public bool NoCancelArmed => Info.BbNoCancel && switchesActive && !ablateNoCancel.Off(player, AblationIds.BbNoCancel);
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		public void TraceNoCancel(bool rowOn, string tag, int site, string item, Actor producer)
+		{
+#if CAMEO_DEV_LOGGING
+			if (rowOn)
+				Log.Write("debug", $"AI ({player.ClientIndex}): {tag} site={site} item={item} producer={producer.ActorID} tick={world.WorldTick}");
+#endif
+		}
 		AblationLatch ablateNoFoundation; // BUILD-ALL-B
 		public bool NoFoundationArmed => Info.BbNoFoundation && switchesActive && !ablateNoFoundation.Off(player, AblationIds.BbNoFoundation);
 		AblationLatch ablateQueueSplit; // QUEUE-SPLIT-01
@@ -2189,12 +2205,42 @@ namespace OpenRA.Mods.CA.Traits
 			if (disposition != DemandCancelDisposition.Issued)
 				return disposition;
 
+			// NO-CANCEL-01 (row bb_no_cancel, site 1, designs _17/_17B): the certificate proves "no legal cell" only for a READY entry, and it is keyed by
+			// item name, so it can still be current while the single same-name entry is a new one in progress. Row on: only a Done entry (the instance
+			// Order.CancelProduction would remove) may be cancelled; an in-progress one becomes a ProtectionHold (the item stays queued, the demand retires,
+			// the queue layer's placement sweep owns it) before any record or order. Row off = the code below byte for byte.
+			var noCancelOn = NoCancelArmed;
+			var entryDone = false;
+			if (noCancelOn)
+			{
+				foreach (var q in producer.TraitsImplementing<ProductionQueue>())
+				{
+					if (!q.Enabled)
+						continue;
+
+					var bound = BaseBuilderQueueEvalCA.CancelBindTarget(q.AllQueued(), i => i.Item, item, null);
+					if (bound != null)
+					{
+						entryDone = bound.Done;
+						break;
+					}
+				}
+			}
+
+			var gated = NoCancelGatesCA.DemandCancelGate(disposition, noCancelOn, entryDone);
+			if (gated != DemandCancelDisposition.Issued)
+			{
+				TraceNoCancel(noCancelOn, "CANCEL-SUPPRESSED", 1, item, producer);
+				return gated;
+			}
+
 			// REPLAY-HEALTH-LOGGER (F4): register the demand cancel so the owning manager's
 			// probe resolves it as Cancelled/DemandCancel instead of an UNKNOWN removal.
 			if (builders != null)
 				foreach (var b in builders)
 					b?.NoteExternalCancel(producer, item);
 
+			TraceNoCancel(noCancelOn, "CANCEL-UNPLACEABLE", 1, item, producer);
 			bot.QueueOrder(Order.CancelProduction(producer, item, 1));
 			return DemandCancelDisposition.Issued;
 		}
