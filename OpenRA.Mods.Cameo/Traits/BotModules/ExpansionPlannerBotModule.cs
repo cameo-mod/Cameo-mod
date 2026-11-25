@@ -1101,8 +1101,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// <summary>
 		/// REF-2 P1a widened poll, shared by the queue's READY path (<paramref name="cellBudget"/> &lt; 0: the
 		/// per-sweep Info budget, as before) and REFSCAN O-3 (an explicit budget charged to the search visit).
-		/// <paramref name="terminalSweep"/> = add the terminal tier's same-tick coherence sweep bound (always on
-		/// the old path; REFSCAN asks for it only in the deadline phase, where the cancel certificate matters).
+		/// <paramref name="terminalSweep"/> = the caller's deadline phase (REFSCAN). V08F item 9 (Opus 11-25, Sol FIX_STATIC): it no longer
+		/// gates the terminal sweep bound - every terminal-tier poll gets it (see below).
 		/// </summary>
 		RefineryFallbackOutcome PollFallback(Actor producer, string item, bool distanceToBaseIsImportant, int cellBudget,
 			bool terminalSweep, out CPos? site)
@@ -1130,13 +1130,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// the ordinary enumeration budget — the atom count scales with actors and rank
 			// cells, so the terminal budget is sized to cover it (all work stays charged; an
 			// undersized terminal budget would stall the pass into a hold).
+			// V08F item 9: the bound is added on EVERY terminal-tier poll. Gated on terminalSweep (the REFSCAN deadline phase only), a
+			// REFSCAN O-3 poll (<= ChunkUnits 16) could never finish the one-poll sweep of a live map, so the terminal tier - the only
+			// tier that hands out a relaxed (fallback-spacing) site since ff244ccb - never advanced outside the deadline phase.
 			var budget = cellBudget < 0 ? Info.RefineryFallbackScanCellBudget : cellBudget;
-			if (terminalSweep && scan.Tier >= Info.RefineryFallbackTierMaxDist)
+			var terminal = scan.Tier >= Info.RefineryFallbackTierMaxDist;
+			if (terminal)
 				budget += FallbackSweepBound();
 
 			// STALL-FIX-01 (CI, Info.RefineryFallbackForceAfterTicks > 0): a scan deferred this long is forced
 			// to completion in this one poll (the world is frozen inside it, so the sweep and drain cannot
 			// drift); every other branch below, and the cancel rule, are unchanged. Off: ForceDue is false.
+#if CAMEO_DEV_LOGGING
+			var pollStart = terminal ? System.Diagnostics.Stopwatch.GetTimestamp() : 0;
+#endif
 			RefineryFallbackScan.Verdict verdict;
 			if (scan.ForceDue(Info.RefineryFallbackForceAfterTicks, now))
 			{
@@ -1154,6 +1161,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			else
 				verdict = scan.Poll(budget, now,
 					() => FallbackSnapshot(actorInfo, bi, producer, distanceToBaseIsImportant), out site);
+#if CAMEO_DEV_LOGGING
+			// V08F item 9 perf tag: a full sweep per terminal poll may spike; only terminal polls of 5 ms or more are written (the spike rule).
+			if (terminal)
+			{
+				var pollMs = (System.Diagnostics.Stopwatch.GetTimestamp() - pollStart) * 1000.0 / System.Diagnostics.Stopwatch.Frequency;
+				if (pollMs >= 5.0)
+					Log.Write("debug", $"refinery_fallback_terminal_poll player={player.ClientIndex} item={item} producer={producer.ActorID} " +
+						$"tick={now} ms={pollMs:F2} budget={budget} work={scan.LastPollWork} deadline={terminalSweep} verdict={verdict}");
+			}
+#endif
 
 			switch (verdict)
 			{

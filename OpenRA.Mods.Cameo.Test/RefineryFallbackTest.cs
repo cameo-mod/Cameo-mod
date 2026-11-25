@@ -161,6 +161,63 @@ namespace OpenRA.Mods.Cameo.Test
 			return default;
 		}
 
+		/// V08F item 9: the planner's per-poll budget (ExpansionPlannerBotModule.PollFallback) - the caller's chunk, plus the
+		/// coherence sweep bound on EVERY terminal-tier poll. The bound mirrors FallbackSweepBound: an upper bound on the atom
+		/// count plus the planner's 64-unit margin.
+		static int PlannerSweepBound(int atoms) => atoms + 64;
+
+		static RefineryFallbackScan.Verdict DrainLikePlanner(RefineryFallbackScan scan, int chunk, int sweepBound, int maxPolls,
+			Func<RefineryFallbackScan.Snapshot> snapshot, out CPos? site, int now0 = 0)
+		{
+			site = null;
+			for (var i = 0; i < maxPolls; i++)
+			{
+				var budget = chunk + (scan.TerminalTier ? sweepBound : 0);
+				var verdict = scan.Poll(budget, now0 + i, snapshot, out site);
+				Assert.That(scan.LastPollWork, Is.LessThanOrEqualTo(budget),
+					$"poll {i} charged {scan.LastPollWork} units against a budget of {budget}");
+				if (verdict != RefineryFallbackScan.Verdict.Deferred)
+					return verdict;
+			}
+
+			Assert.Fail("the scan did not resolve inside the poll bound");
+			return default;
+		}
+
+		/// True while every one of maxPolls fixed-budget polls stays Deferred (the starvation the planner's sweep bound removes).
+		static bool StaysDeferred(RefineryFallbackScan scan, int budget, int maxPolls, Func<RefineryFallbackScan.Snapshot> snapshot)
+		{
+			for (var i = 0; i < maxPolls; i++)
+				if (scan.Poll(budget, i, snapshot, out _) != RefineryFallbackScan.Verdict.Deferred)
+					return false;
+
+			return true;
+		}
+
+		/// A whole-map terminal snapshot on an 8x8 map: one provider and rank cell at (3,3), one legal cell `site` that the strict
+		/// pick admits, the given coherence atoms.
+		static RefineryFallbackScan.Snapshot WholeMapSnapshot(CPos site, IReadOnlyList<RefineryFallbackScan.CoherenceAtom> atomList)
+		{
+			IReadOnlyList<RefineryFallbackScan.Provider?> providers = new RefineryFallbackScan.Provider?[] { Prov(3, 3, 1) };
+			var cells = RectMap(8, 8).ToList();
+			var (mapIndex, indexCell) = IndexFns(8, 8);
+			Func<IEnumerator<RefineryFallbackScan.CoherenceAtom>> atoms = () => AtomsOf(atomList);
+			return new RefineryFallbackScan.Snapshot(
+				() => providers.GetEnumerator(),
+				() => new[] { new CPos(3, 3) }.AsEnumerable().GetEnumerator(),
+				() => cells.GetEnumerator(),
+				Unrestricted,
+				OneTile,
+				atoms,
+				atoms,
+				mapIndex,
+				indexCell,
+				2,
+				c => true,
+				c => c == site,
+				c => c == site);
+		}
+
 		[Test]
 		public void ARefineryIsNeverHeldOnAFallbackOnlyCellOutsideTheClaimAnnulus()
 		{
@@ -219,10 +276,59 @@ namespace OpenRA.Mods.Cameo.Test
 			// The strict cell lies beyond a one-step budget: it is found on a later poll, and no poll before it may hand out the relaxed cell.
 			foreach (var budget in new[] { 1, 8 })
 			{
-				var verdict = Drain(new RefineryFallbackScan(50), budget, 5000, () => snapshot, out var site);
+				// V08F item 9: polled the way the planner polls (chunk + the sweep bound on terminal-tier polls); a bare budget-1 poll can
+				// never finish the one-poll coherence sweep, see TheTerminalPassResolvesAtBudgetOneOnlyWithThePlannerSweepBound.
+				var verdict = DrainLikePlanner(new RefineryFallbackScan(50), budget, PlannerSweepBound(FixedAtoms().Count), 5000, () => snapshot, out var site);
 				Assert.That(verdict, Is.EqualTo(RefineryFallbackScan.Verdict.Site));
 				Assert.That(site, Is.EqualTo(strict), $"budget {budget}: the closer relaxed cell must not outrank a strict one");
 			}
+		}
+
+		[Test]
+		public void TheTerminalPassResolvesAtBudgetOneOnlyWithThePlannerSweepBound()
+		{
+			// V08F item 9 (Sol FIX_STATIC fixture 1): a stable whole-map terminal pass at a chunk of 1. The coherence sweep must finish
+			// inside one poll and restarts every poll, so a bare budget of 1 never advances; the planner's per-poll sweep bound does.
+			var site = new CPos(6, 6);
+			var snapshot = WholeMapSnapshot(site, FixedAtoms());
+			Assert.That(StaysDeferred(new RefineryFallbackScan(50), 1, 2000, () => snapshot), Is.True, "bare budget 1: the sweep eats the only unit");
+
+			var verdict = DrainLikePlanner(new RefineryFallbackScan(50), 1, PlannerSweepBound(FixedAtoms().Count), 5000, () => snapshot, out var got);
+			Assert.That(verdict, Is.EqualTo(RefineryFallbackScan.Verdict.Site));
+			Assert.That(got, Is.EqualTo(site));
+		}
+
+		[Test]
+		public void ALiveShapedSourceOfMoreThanSixteenAtomsResolvesAtTheOrderChunk()
+		{
+			// V08F item 9 (Sol FIX_STATIC fixture 2): a live-shaped atom source (header atoms, then one atom per actor) larger than
+			// the REFSCAN chunk of 16. Without the bound every 16-unit terminal poll restarts the sweep and starves; with it, it resolves.
+			var atomList = new List<RefineryFallbackScan.CoherenceAtom>
+			{
+				new RefineryFallbackScan.CoherenceAtom(0, 0, 42, 0, null),
+				new RefineryFallbackScan.CoherenceAtom(6, 0, 0, 0, null),
+				new RefineryFallbackScan.CoherenceAtom(7, 0, 0, 0, null),
+			};
+			for (uint id = 1; id <= 40; id++)
+				atomList.Add(new RefineryFallbackScan.CoherenceAtom(1, id, 1, 1, null));
+
+			Assert.That(atomList.Count, Is.GreaterThan(16));
+			var site = new CPos(6, 6);
+			var snapshot = WholeMapSnapshot(site, atomList);
+			Assert.That(StaysDeferred(new RefineryFallbackScan(50), 16, 2000, () => snapshot), Is.True, "bare chunk 16 < one sweep");
+
+			var verdict = DrainLikePlanner(new RefineryFallbackScan(50), 16, PlannerSweepBound(atomList.Count), 5000, () => snapshot, out var got);
+			Assert.That(verdict, Is.EqualTo(RefineryFallbackScan.Verdict.Site));
+			Assert.That(got, Is.EqualTo(site));
+		}
+
+		[Test]
+		public void ThePlannerAddsTheSweepBoundToEveryTerminalTierPoll()
+		{
+			// V08F item 9: the bound no longer waits for the REFSCAN deadline phase (terminalSweep).
+			var p = File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "source", "mods/Cameo/Traits/BotModules/ExpansionPlannerBotModule.cs"));
+			Assert.That(p, Does.Contain("var terminal = scan.Tier >= Info.RefineryFallbackTierMaxDist;\n\t\t\tif (terminal)\n\t\t\t\tbudget += FallbackSweepBound();"));
+			Assert.That(p, Does.Not.Contain("terminalSweep && scan.Tier"));
 		}
 
 		[Test]
