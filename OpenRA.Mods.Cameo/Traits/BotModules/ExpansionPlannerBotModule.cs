@@ -127,6 +127,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"(taken, claimed, yielded to an ally, out of the field list) or the crawl_advance_only park fires; a better score elsewhere does not flip it. Needs DriveBaseCrawl. False = the target is re-picked every plan.")]
 		public readonly bool CrawlTargetSticky = false;
 
+		[Desc("crawl_ally_anchor (BS-03 c9 port, light team crawl): with the lobby option allybuild on, the visible allied construction yards are crawl anchors next to our own yards (the crawl cap and the",
+			"target choice measure from the nearest of them) and the allied buildable-area buildings join the frontier the crawl closes on the aim from. Needs CrawlAdvanceOnly. False = own yards and own frontier only.")]
+		public readonly bool CrawlAllyAnchor = false;
+
 		[Desc("CS: re-plans an unexplored aim may hold the link want while scouts close in. 0 = hold until",
 			"explored without bound (the interest cell keeps drawing scouts either way).")]
 		public readonly int ScoutWaitReplans = 4;
@@ -955,6 +959,42 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		int CrawlMaxDistanceCells() => BotDifficultyLadder.Scale(Info.CrawlMaxDistanceMin, Info.CrawlMaxDistanceMax, player, Info.CrawlMaxDistanceUnranked);
 
+		// crawl_ally_anchor: allied yards as extra cap anchors, only when the lobby allows building next to allied buildings (the engine's AnyGivesBuildableArea rule). The option never changes in a game.
+		AblationLatch ablateCrawlAllyAnchor;
+		bool? allyBuildEnabled;
+		bool CrawlAllyAnchorOn => Info.CrawlAllyAnchor && CrawlAdvanceOnlyOn && !ablateCrawlAllyAnchor.Off(player, AblationIds.CrawlAllyAnchor)
+			&& (allyBuildEnabled ??= world.WorldActor.TraitOrDefault<MapBuildRadius>()?.AllyBuildRadiusEnabled ?? false);
+
+		/// <summary>The yards the crawl cap and the target choice measure from: our own, plus the visible allied ones with the row on. Pure merge, for the tests.</summary>
+		public static IReadOnlyList<CPos> CrawlAnchors(IReadOnlyList<CPos> own, IReadOnlyList<CPos> allied)
+		{
+			if (allied == null || allied.Count == 0)
+				return own;
+
+			var all = new List<CPos>(own.Count + allied.Count);
+			all.AddRange(own);
+			all.AddRange(allied);
+			return all;
+		}
+
+		IReadOnlyList<CPos> CrawlAnchorCells()
+		{
+			if (!CrawlAllyAnchorOn)
+				return ownYardCells;
+
+			List<CPos> allied = null;
+			foreach (var a in world.ActorsHavingTrait<GivesBuildableArea>())
+			{
+				if (a.IsDead || !a.IsInWorld || a.Owner == player || a.Owner.RelationshipWith(player) != PlayerRelationship.Ally
+					|| !a.CanBeViewedByPlayer(player) || !constructionYardTypes.Contains(a.Info.Name))
+					continue;
+
+				(allied ??= new List<CPos>()).Add(a.Location);
+			}
+
+			return CrawlAnchors(ownYardCells, allied);
+		}
+
 		/// <summary>
 		/// crawl_advance_only / crawl_target_sticky: the target field. A committed crawl keeps its field while it still needs links (listed, Hops &gt; 0); otherwise the best-scored field within the
 		/// crawl cap (<paramref name="cap"/> &lt; 0 = no cap; a field already in reach needs no crawl and is never capped), else the best-scored one (the cap then refuses to start a crawl toward it).
@@ -1010,7 +1050,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return scores.Count > 0 ? scores[0] : null;
 			}
 
-			var at = ChooseCrawlTarget(scores, sticky ? crawlCommitIndex : -1, capped ? CrawlMaxDistanceCells() : -1, ownYardCells, out var keep);
+			var at = ChooseCrawlTarget(scores, sticky ? crawlCommitIndex : -1, capped ? CrawlMaxDistanceCells() : -1, CrawlAnchorCells(), out var keep);
 			if (!keep)
 				crawlCommitIndex = -1;
 
@@ -1940,6 +1980,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			LawActive && Info.DriveBaseCrawl && Info.BoundCrawlLinkSupply ? crawlFrontierAnchor : null;
 
 		bool IBotExpansionTargetProvider.CrawlAdvanceOnly => CrawlAdvanceOnlyOn;
+
+		bool IBotExpansionTargetProvider.CrawlAllyAnchor => CrawlAllyAnchorOn;
 
 		void IBotExpansionTargetProvider.CrawlLinkNoAdvance()
 		{
@@ -3967,7 +4009,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			// crawl_advance_only: a crawl whose target lies beyond the crawl cap of every own yard is not started (a committed crawl was admitted when it began).
 			if (CrawlAdvanceOnlyOn && !(CrawlTargetStickyOn && crawlCommitIndex == Target.Value.Index)
-				&& CrawlBeyondCap(Target.Value.Center, ownYardCells, CrawlMaxDistanceCells()))
+				&& CrawlBeyondCap(Target.Value.Center, CrawlAnchorCells(), CrawlMaxDistanceCells()))
 			{
 				frontSafety.ResetCorridor();
 				if (lastCrawlRefusal != "beyond crawl cap")

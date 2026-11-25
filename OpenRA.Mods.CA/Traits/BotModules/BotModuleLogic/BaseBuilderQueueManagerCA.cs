@@ -4134,7 +4134,7 @@ namespace OpenRA.Mods.CA.Traits
 						// between yards) and its best cell must strictly reduce the frontier-to-aim distance. No forward cell: the link is placed at a base cell, the planner parks the target, and
 						// neither the random-resource nor the toward-the-enemy fallback below runs (they put plants "all over the place").
 						var advanceOnly = crawlLaw != null && crawlLaw.CrawlAdvanceOnly;
-						var frontierTiles = advanceOnly ? OwnBuildableAreaTiles() : null;
+						var frontierTiles = advanceOnly ? OwnBuildableAreaTiles(crawlLaw.CrawlAllyAnchor) : null;
 						var anchor = advanceOnly && BaseBuilderQueueEvalCA.NearestTile(frontierTiles, crawlAim.Value) is { } frontierTile
 							? frontierTile
 							: crawlLaw?.CrawlFrontierAnchor ?? baseCenter;
@@ -4199,7 +4199,8 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		// crawl_advance_only: the footprint tiles of our buildable-area buildings, the frontier the crawl closes on the aim from (the planner measures the same set).
-		List<CPos> OwnBuildableAreaTiles()
+		// crawl_ally_anchor (light team crawl): with the row on the visible allied buildable-area buildings join the frontier (the engine lets us build next to them with allybuild on).
+		List<CPos> OwnBuildableAreaTiles(bool withAllied = false)
 		{
 			var tiles = new List<CPos>();
 			if (playerBuildings == null)
@@ -4214,6 +4215,22 @@ namespace OpenRA.Mods.CA.Traits
 					tiles.AddRange(info.Tiles(b.Location));
 				else
 					tiles.Add(b.Location);
+			}
+
+			if (withAllied)
+			{
+				foreach (var b in world.ActorsHavingTrait<GivesBuildableArea>())
+				{
+					// The engine skips an area whose provider allows placement only from itself (AnyGivesBuildableArea: OnlyAllowPlacementFromSelf).
+					if (b.IsDead || !b.IsInWorld || b.Owner == player || b.Owner.RelationshipWith(player) != PlayerRelationship.Ally
+						|| !b.CanBeViewedByPlayer(player) || b.TraitsImplementing<GivesBuildableArea>().All(g => g.Info.OnlyAllowPlacementFromSelf))
+						continue;
+
+					if (b.Info.TraitInfoOrDefault<BuildingInfo>() is { } info)
+						tiles.AddRange(info.Tiles(b.Location));
+					else
+						tiles.Add(b.Location);
+				}
 			}
 
 			return tiles;

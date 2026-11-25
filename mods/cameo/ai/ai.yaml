@@ -4600,6 +4600,8 @@ Player:
 		CrawlAdvanceOnly: true
 		# crawl_target_sticky (CRAWL-LONG-01, Opus 11-25): a started crawl keeps its target until reached, invalid or parked (no flip on a re-pick).
 		CrawlTargetSticky: true
+		# crawl_ally_anchor (BS-03 c9 port, light team crawl, Opus V08G): with allybuild on, allied yards are crawl anchors and allied buildable-area buildings join the crawl frontier.
+		CrawlAllyAnchor: true
 		# Enabled for the maintainer's 2026-10-15 combined playtest (BY).
 		UseCrawlSafety: true
 		# EX-2: every field in reach gets a refinery, beyond the base builder's fixed optimum.

@@ -20,5 +20,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		// Once a crawl has started its target stays until it is reached, becomes invalid (taken, dead, out of the field list) or the no-advance park fires; no flip on a re-pick.
 		public const string CrawlTargetSticky = "crawl_target_sticky";
+
+		// BS-03 c9 port (light team crawl, Opus V08G): with the lobby option allybuild on, the visible allied construction yards are crawl anchors next to our own (the cap and the target choice)
+		// and the allied buildable-area buildings are part of the frontier the crawl closes on the aim from. Off = own yards and own frontier only.
+		public const string CrawlAllyAnchor = "crawl_ally_anchor";
 	}
 }
