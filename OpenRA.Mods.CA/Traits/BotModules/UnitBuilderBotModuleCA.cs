@@ -1950,7 +1950,7 @@ namespace OpenRA.Mods.CA.Traits
 
 					// TIER-MIX-01 (row ub_tech_lean): a late pick from the top of this queue's pool, on an empty queue with a share of its price already in the bank, is pay-as-you-go too; the order
 					// still reserves its full price below, so the rest of the pass sees the whole commitment.
-					var leaned = !paygo && TechLeanOn && TechLean.Admits(fullCost, rollPoolMaxCost, held, world.WorldTick, RollParameters.RampTicks, batch.BankLeft, Info.TechLeanTopPct, Info.TechLeanBankPct);
+					var leaned = roll && !paygo && TechLeanOn && TechLean.Admits(fullCost, rollPoolMaxCost, held, world.WorldTick, RollParameters.RampTicks, batch.BankLeft, Info.TechLeanTopPct, Info.TechLeanBankPct);
 					if (leaned)
 						cost = 0;
 

@@ -138,8 +138,8 @@ namespace OpenRA.Mods.Cameo.Test
 			const string Paygo = "var paygo = roll && rollFirst && UnitRoll.FirstAdmits(batch.BankLeft);\n\t\t\t\t\tvar cost = paygo ? 0 : fullCost;";
 			Assert.That(unit, Does.Contain(Paygo));
 
-			const string Leaned = "var leaned = !paygo && TechLeanOn && TechLean.Admits(fullCost, rollPoolMaxCost, held, world.WorldTick, RollParameters.RampTicks, batch.BankLeft, Info.TechLeanTopPct, Info.TechLeanBankPct);\n\t\t\t\t\tif (leaned)\n\t\t\t\t\t\tcost = 0;";
-			Assert.That(unit, Does.Contain(Leaned), "the lean only ever sets the gate cost to 0, for a pick that is not already a first build");
+			const string Leaned = "var leaned = roll && !paygo && TechLeanOn && TechLean.Admits(fullCost, rollPoolMaxCost, held, world.WorldTick, RollParameters.RampTicks, batch.BankLeft, Info.TechLeanTopPct, Info.TechLeanBankPct);\n\t\t\t\t\tif (leaned)\n\t\t\t\t\t\tcost = 0;";
+			Assert.That(unit, Does.Contain(Leaned), "the lean only ever sets the gate cost to 0, for a ROLL pick (never a floor or random pick: rollPoolMaxCost is the last roll's) that is not already a first build (CM review of b73e77aa)");
 
 			var paygoAt = unit.IndexOf(Paygo, StringComparison.Ordinal);
 			var leanAt = unit.IndexOf(Leaned, StringComparison.Ordinal);
