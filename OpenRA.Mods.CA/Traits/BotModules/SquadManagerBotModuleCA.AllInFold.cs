@@ -14,19 +14,19 @@ using OpenRA.Mods.Common.Traits;
 namespace OpenRA.Mods.CA.Traits
 {
 	// CONSOLIDATE-02 Q8 (design 4.1 Steps 2-3; rows sq_all_in_late and sq_hunt_one_cell under the master switch sq_pipeline_02). The all-in has ONE input list now: the cap, the
-	// huge idle army, nearly won (ALL-IN-01), the stalemate breaker's signal (Q4) and the late-escalation step (here). The breaker never launches a wave (Q4); the late-escalation clock
-	// only paces the cadence (STALEMATE-01) and, from the step below, commits the whole army. The hunt has ONE cell for the team at a time, whoever asks.
+	// huge idle army, nearly won (ALL-IN-01), the stalemate breaker's signal (Q4) and the late tick (here, ArmyAllInLateTick). The breaker never launches a wave (Q4); the late-escalation clock
+	// only paces the cadence (STALEMATE-01) and the late tick commits the whole army. The hunt has ONE cell for the team at a time, whoever asks.
 	public partial class SquadManagerBotModuleCA
 	{
 		AblationLatch ablateSqAllInLate, ablateSqHuntOneCell;
 
 		/// <summary>
-		/// Q8 (row sq_all_in_late): the late-escalation clock has stepped the attack cadence ArmyAllInLateSteps times and the game is still on: every order is an all-in order.
-		/// Needs the one launcher (the order is the only attack) and the late escalation it counts the steps of.
+		/// Q8 (row sq_all_in_late; Opus: the decisive gate is tick 30000): from ArmyAllInLateTick (default 24000) the game is still on and every order is an all-in order, once, no steps.
+		/// Needs the one launcher (the order is the only attack); the all-in itself starts at TeamLeadAllInStartTick at the earliest.
 		/// </summary>
-		internal bool ArmyAllInLateOn(int now) => ArmyLaunchArbiterOn && LateEscalationActive && !ablateSqAllInLate.Off(Player, AblationIds.SqAllInLate)
+		internal bool ArmyAllInLateOn(int now) => ArmyLaunchArbiterOn && !ablateSqAllInLate.Off(Player, AblationIds.SqAllInLate)
 			&& now >= Info.TeamLeadAllInStartTick
-			&& AllInCA.LateStep(now, Info.LateEscalationStartTick, Info.LateEscalationStepTicks, Info.ArmyAllInLateSteps);
+			&& AllInCA.LateTick(now, Info.ArmyAllInLateTick);
 
 		/// <summary>Q8 (row sq_hunt_one_cell): the team hunts one unseen cell at a time (the board cell).</summary>
 		internal bool ArmyHuntOneCellOn => ArmyPipelineOn && !ablateSqHuntOneCell.Off(Player, AblationIds.SqHuntOneCell);

@@ -30,15 +30,11 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>CONSOLIDATE-02 Q4 (Opus D4): the stalemate breaker's trigger (no-kill clock, urgency) fired; it feeds the all-in instead of launching its own wave.</summary>
 		public const string WhyStalemate = "stalemate";
 
-		/// <summary>CONSOLIDATE-02 Q8: the late-escalation clock has stepped the attack delay often enough and the game is still undecided (the all-in trigger of the late steps).</summary>
+		/// <summary>CONSOLIDATE-02 Q8: the game is still undecided at the decisive tick (the all-in trigger of the late game; Opus: the gate is tick 30000, so it is set before it).</summary>
 		public const string WhyLate = "late";
 
-		/// <summary>
-		/// CONSOLIDATE-02 Q8 (design 4.1 Step 2, "late step"): at least <paramref name="steps"/> full late-escalation steps (<paramref name="stepTicks"/> each) have passed since
-		/// <paramref name="startTick"/>. 0 steps, or no step length, = this trigger is off.
-		/// </summary>
-		public static bool LateStep(int now, int startTick, int stepTicks, int steps) =>
-			steps > 0 && stepTicks > 0 && now >= startTick && (now - startTick) / stepTicks >= steps;
+		/// <summary>CONSOLIDATE-02 Q8 (design 4.1 Step 2, "late step"): the decisive tick has come (a tick of 0 or less = this trigger is off). One tick, no steps: it stays on from then.</summary>
+		public static bool LateTick(int now, int tick) => tick > 0 && now >= tick;
 
 		/// <summary>The breaker signal is fresh: raised within <paramref name="windowTicks"/> (a negative tick = never raised).</summary>
 		public static bool StalemateSignal(int now, int signalTick, int windowTicks) => signalTick >= 0 && now >= signalTick && now - signalTick <= Math.Max(1, windowTicks);

@@ -44,37 +44,31 @@ namespace OpenRA.Mods.Cameo.Test
 			return text[start..end];
 		}
 
-		// ---- the late step ----
+		// ---- the late tick (Opus: the decisive gate is tick 30000, so the all-in is set before it; once, no steps) ----
 
 		[Test]
-		public void TheLateStepFiresAfterTheConfiguredNumberOfFullSteps()
+		public void TheLateTickFiresFromTheYamlTickAndStaysOn()
 		{
 			Assert.That(AllInCA.WhyLate, Is.EqualTo("late"));
-			Assert.That(AllInCA.LateStep(39999, 25000, 5000, 3), Is.False, "two full steps");
-			Assert.That(AllInCA.LateStep(40000, 25000, 5000, 3), Is.True, "the third step is complete");
-			Assert.That(AllInCA.LateStep(90000, 25000, 5000, 3), Is.True, "and it stays on");
-			Assert.That(AllInCA.LateStep(24999, 25000, 5000, 3), Is.False, "before the start tick");
-			Assert.That(AllInCA.LateStep(25000, 25000, 5000, 1), Is.False, "no step has passed at the start tick");
-			Assert.That(AllInCA.LateStep(30000, 25000, 5000, 1), Is.True);
+			Assert.That(AllInCA.LateTick(23999, 24000), Is.False);
+			Assert.That(AllInCA.LateTick(24000, 24000), Is.True, "the tick itself");
+			Assert.That(AllInCA.LateTick(90000, 24000), Is.True, "and it stays on");
 		}
 
 		[Test]
-		public void TheLateStepIsOffForNoStepsOrNoStepLength()
+		public void TheLateTickIsOffForNoTick()
 		{
-			Assert.That(AllInCA.LateStep(90000, 25000, 5000, 0), Is.False, "0 steps = off");
-			Assert.That(AllInCA.LateStep(90000, 25000, 5000, -2), Is.False);
-			Assert.That(AllInCA.LateStep(90000, 25000, 0, 3), Is.False, "no step length = no steps (the cadence does not step either)");
-			Assert.That(AllInCA.LateStep(90000, 25000, -5000, 3), Is.False);
+			Assert.That(AllInCA.LateTick(90000, 0), Is.False, "0 = off");
+			Assert.That(AllInCA.LateTick(90000, -5), Is.False);
 		}
 
-		// The default of three steps is the cadence reaching its floor: the same clock (SteppedPercent) that paces the attack delay commits the army.
+		// The default sits before the decisive gate (30000) and after the all-in's own start tick (15000).
 		[Test]
-		public void TheDefaultStepCountIsWhereTheCadenceReachesItsFloor()
+		public void TheDefaultTickIsBeforeTheDecisiveGateAndAfterTheAllInStart()
 		{
-			Assert.That(Stalemate01CA.SteppedPercent(39999, 25000, 50, 5000, 75, 20), Is.EqualTo(27), "two steps: 50 -> 37 -> 27");
-			Assert.That(Stalemate01CA.SteppedPercent(40000, 25000, 50, 5000, 75, 20), Is.EqualTo(20), "three steps: the floor");
-			Assert.That(AllInCA.LateStep(40000, 25000, 5000, 3), Is.True);
-			Assert.That(AllInCA.LateStep(39999, 25000, 5000, 3), Is.False);
+			var info = RepoFile(Bots + "SquadManagerBotModuleCAInfo.Pipeline02.cs");
+			Assert.That(info, Does.Contain("public readonly int ArmyAllInLateTick = 24000;"));
+			Assert.That(RepoFile(Bots + "SquadManagerBotModuleCAInfo.V07.cs"), Does.Contain("public readonly int TeamLeadAllInStartTick = 15000;"));
 		}
 
 		// ---- the one hunt cell ----
@@ -124,14 +118,14 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(wiring, Does.Contain("AblationLatch ablateSqAllInLate, ablateSqHuntOneCell;"));
 			Assert.That(wiring, Does.Contain("internal bool ArmyHuntOneCellOn => ArmyPipelineOn && !ablateSqHuntOneCell.Off(Player, AblationIds.SqHuntOneCell);"));
 
-			// The late step needs the one launcher and the late escalation it counts the steps of, and starts no earlier than the all-in itself.
+			// The late tick needs the one launcher (not the late escalation: its own start, 25000, is later than the decisive tick) and starts no earlier than the all-in itself.
 			var late = Between(wiring, "internal bool ArmyAllInLateOn(int now)", "/// <summary>Q8 (row sq_hunt_one_cell)");
-			Assert.That(late, Does.Contain("ArmyLaunchArbiterOn && LateEscalationActive && !ablateSqAllInLate.Off(Player, AblationIds.SqAllInLate)"));
+			Assert.That(late, Does.Contain("ArmyLaunchArbiterOn && !ablateSqAllInLate.Off(Player, AblationIds.SqAllInLate)"));
+			Assert.That(late, Does.Not.Contain("LateEscalationActive"));
 			Assert.That(late, Does.Contain("&& now >= Info.TeamLeadAllInStartTick"));
-			Assert.That(late, Does.Contain("AllInCA.LateStep(now, Info.LateEscalationStartTick, Info.LateEscalationStepTicks, Info.ArmyAllInLateSteps);"));
+			Assert.That(late, Does.Contain("AllInCA.LateTick(now, Info.ArmyAllInLateTick);"));
 
 			var info = RepoFile(Bots + "SquadManagerBotModuleCAInfo.Pipeline02.cs");
-			Assert.That(info, Does.Contain("public readonly int ArmyAllInLateSteps = 3;"));
 			Assert.That(info, Does.Contain("public readonly int ArmyHuntCellHoldTicks = 2250;"));
 		}
 
