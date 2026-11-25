@@ -24,6 +24,9 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		bool PassiveIncomeOn => baseBuilder.PassiveIncomeArmed;
 
+		// CAPTURE-TECH-01: the types the last S5 sweep offered as capture unlocks (PipelineStageAdmits lets an unlock refinery through).
+		readonly HashSet<string> captureUnlockOffered = new(StringComparer.Ordinal);
+
 		IEnumerable<string> PipelineStageNames(BaseBuildStage stage, ProductionQueue queue, List<ActorInfo> buildable, ActorInfo power,
 			IBotExpansionTargetProvider law, BaseBuildSnapshot snapshot)
 		{
@@ -87,6 +90,9 @@ namespace OpenRA.Mods.CA.Traits
 
 			var depths = CoreDepths();
 			var inputs = new List<CoreOnceInput>(buildable.Count);
+			var captureOn = baseBuilder.CaptureUnlockArmed;
+			captureUnlockOffered.Clear();
+			Dictionary<string, bool> lacksCache = null;
 			foreach (var item in buildable)
 			{
 				var name = item.Name;
@@ -95,21 +101,92 @@ namespace OpenRA.Mods.CA.Traits
 					weight = Math.Max(0, listed);
 
 				var firstCopy = FirstCopyKind(item);
-				if (!firstCopy)
+				var unlock = false;
+				if (!firstCopy && captureOn)
+				{
+					lacksCache ??= new Dictionary<string, bool>(StringComparer.Ordinal);
+					unlock = CaptureUnlockType(item, snapshot, lacksCache);
+					if (unlock)
+						captureUnlockOffered.Add(name);
+				}
+
+				if (!firstCopy && !unlock)
 					continue;
 
 				inputs.Add(new CoreOnceInput(
 					name,
 					Buildable: true,
 					weight,
-					firstCopy,
-					OwnRuleStage: b.ConstructionYardTypes.Contains(name) || b.RefineryTypes.Contains(name),
+					firstCopy || unlock,
+					OwnRuleStage: b.ConstructionYardTypes.Contains(name) || (b.RefineryTypes.Contains(name) && !unlock),
 					Count: BaseBuildPlanCA.CountOf(snapshot, name),
 					Depth: depths.TryGetValue(name, out var depth) ? depth : 0,
 					Cost: queue.GetProductionCost(item)));
 			}
 
 			return CoreOnceCA.Order(inputs);
+		}
+
+		// CAPTURE-TECH-01 (cs_capture_unlock): an unowned power plant, silo or refinery type of another faction that gives a prerequisite this player lacks, which gates
+		// another building type, while the player already owns one of that category (CaptureUnlockCA.IsUnlock). The TechTree is asked only for these candidate
+		// types, once per token per sweep (lacksCache).
+		bool CaptureUnlockType(ActorInfo item, BaseBuildSnapshot snapshot, Dictionary<string, bool> lacksCache)
+		{
+			var b = baseBuilder.Info;
+			var name = item.Name;
+			var category = b.PowerTypes.Contains(name) ? b.PowerTypes : b.SiloTypes.Contains(name) ? b.SiloTypes : b.RefineryTypes.Contains(name) ? b.RefineryTypes : null;
+			if (category == null || BaseBuildPlanCA.CountOf(snapshot, name) > 0)
+				return false;
+
+			var owned = 0;
+			foreach (var other in category)
+				owned += BaseBuildPlanCA.CountOf(snapshot, other);
+
+			if (owned <= 0)
+				return false;
+
+			var maps = CaptureMaps();
+			if (!maps.ProvidedBy.TryGetValue(name, out var provided))
+				return false;
+
+			var tree = player.PlayerActor.TraitOrDefault<TechTree>();
+			if (tree == null)
+				return false;
+
+			return CaptureUnlockCA.IsUnlock(provided,
+				token =>
+				{
+					if (!lacksCache.TryGetValue(token, out var lacks))
+						lacksCache[token] = lacks = !tree.HasPrerequisites(new[] { token });
+
+					return lacks;
+				},
+				token => maps.GatesOther(token, name),
+				owned);
+		}
+
+		// The provided tokens and gates of every building type, no faction filter, once per player (the Buildable prerequisites against every ProvidesPrerequisite).
+		CaptureUnlockMapsCA CaptureMaps()
+		{
+			if (baseBuilder.CaptureUnlockMaps != null)
+				return baseBuilder.CaptureUnlockMaps;
+
+			var prereqsOf = new Dictionary<string, IReadOnlyList<string>>(StringComparer.Ordinal);
+			var providesOf = new Dictionary<string, IReadOnlyList<string>>(StringComparer.Ordinal);
+			foreach (var info in world.Map.Rules.Actors.Values.OrderBy(a => a.Name, StringComparer.Ordinal))
+			{
+				if (!info.HasTraitInfo<BuildingInfo>())
+					continue;
+
+				var raws = new List<string>();
+				foreach (var buildableInfo in info.TraitInfos<BuildableInfo>())
+					raws.AddRange(buildableInfo.Prerequisites);
+
+				prereqsOf[info.Name] = raws;
+				providesOf[info.Name] = info.TraitInfos<ProvidesPrerequisiteInfo>().Select(p => p.Prerequisite ?? info.Name).ToList();
+			}
+
+			return baseBuilder.CaptureUnlockMaps = CaptureUnlockMapsCA.Build(prereqsOf, providesOf);
 		}
 
 		// The tech depth of every building type, computed once per player from the rules (not the world): Buildable prerequisites against the

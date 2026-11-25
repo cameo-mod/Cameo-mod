@@ -47,6 +47,78 @@ namespace OpenRA.Mods.CA.Traits
 		}
 	}
 
+	/// <summary>
+	/// CAPTURE-TECH-01 (switch cs_capture_unlock): the per-player prerequisite maps for the capture rule, built once from the rules with NO faction filter (a captured
+	/// yard builds the other faction's types). ProvidedBy: building type to every lower-case token it provides. Gates: token to the building types needing it positively.
+	/// </summary>
+	public sealed class CaptureUnlockMapsCA
+	{
+		public readonly IReadOnlyDictionary<string, IReadOnlyList<string>> ProvidedBy;
+		public readonly IReadOnlyDictionary<string, HashSet<string>> Gates;
+
+		public CaptureUnlockMapsCA(IReadOnlyDictionary<string, IReadOnlyList<string>> providedBy, IReadOnlyDictionary<string, HashSet<string>> gates)
+		{
+			ProvidedBy = providedBy;
+			Gates = gates;
+		}
+
+		/// <summary>Builds the maps from actor name to raw Buildable prerequisites and actor name to provided tokens (any case). Pure.</summary>
+		public static CaptureUnlockMapsCA Build(IReadOnlyDictionary<string, IReadOnlyList<string>> prereqsOf, IReadOnlyDictionary<string, IReadOnlyList<string>> providesOf)
+		{
+			var providedBy = new Dictionary<string, IReadOnlyList<string>>(StringComparer.Ordinal);
+			if (providesOf != null)
+				foreach (var kv in providesOf)
+					providedBy[kv.Key] = kv.Value.Where(t => !string.IsNullOrWhiteSpace(t)).Select(t => t.Trim().ToLowerInvariant()).Distinct().ToArray();
+
+			var gates = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
+			if (prereqsOf != null)
+			{
+				foreach (var kv in prereqsOf)
+				{
+					if (kv.Value == null)
+						continue;
+
+					foreach (var raw in kv.Value)
+					{
+						var need = TechDepthCA.Positive(raw);
+						if (need == null)
+							continue;
+
+						if (!gates.TryGetValue(need, out var set))
+							gates[need] = set = new HashSet<string>(StringComparer.Ordinal);
+
+						set.Add(kv.Key);
+					}
+				}
+			}
+
+			return new CaptureUnlockMapsCA(providedBy, gates);
+		}
+
+		/// <summary>Whether the token gates at least one building type other than <paramref name="self"/>.</summary>
+		public bool GatesOther(string token, string self) => Gates.TryGetValue(token, out var set) && set.Any(n => n != self);
+	}
+
+	/// <summary>
+	/// CAPTURE-TECH-01: a power plant, silo or refinery type (count 0 and buildable are checked by the caller and CoreOnceCA.InSet) is an UNLOCK when it provides a token
+	/// the player lacks now that gates another building type, and the player already owns a type of the same category (the opening and S1 build the first one, so a
+	/// normal own-faction game is unchanged). Pure: plain inputs only.
+	/// </summary>
+	public static class CaptureUnlockCA
+	{
+		public static bool IsUnlock(IEnumerable<string> provided, Func<string, bool> lacks, Func<string, bool> gatesOther, int categoryOwned)
+		{
+			if (provided == null || lacks == null || gatesOther == null || categoryOwned <= 0)
+				return false;
+
+			foreach (var token in provided)
+				if (gatesOther(token) && lacks(token))
+					return true;
+
+			return false;
+		}
+	}
+
 	/// <summary>The prerequisite graph, as a depth from the construction yard. Built once per player (BaseBuilderBotModuleCA.CoreTechDepth) and read per sweep.</summary>
 	public static class TechDepthCA
 	{

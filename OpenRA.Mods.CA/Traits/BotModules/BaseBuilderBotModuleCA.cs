@@ -339,6 +339,11 @@ namespace OpenRA.Mods.CA.Traits
 			"and the defences stay in the S10 fraction roll, which carries the same cap. Gated by SwitchCondition; row bb_extra_defence.")]
 		public readonly bool BbExtraDefence = false;
 
+		[Desc("CAPTURE-TECH-01: stage S5 of the staged planner also offers another faction's power plant, silo or refinery (the player owns one of that category, none of the type)",
+			"when it provides a prerequisite the player lacks that gates another building type, so a captured construction yard unlocks its faction's tech. Needs BbPipeline01.",
+			"Off = S5 is unchanged. Gated by SwitchCondition; row cs_capture_unlock.")]
+		public readonly bool CsCaptureUnlock = false;
+
 		[Desc("CONSOLIDATE-01 c5: the threat-scaled defence cap of the staged planner (the ARMY-FIRST-02 cap, DefenceCapCA): a defence is held while the armed defences owned or in",
 			"flight number at least this base plus DefenceCapPerThreat x the threat intensity. -1 = no cap. Row af2_defence_cap (shared with the ArmyFirstBotModule cap).")]
 		public readonly int DefenceCapBase = -1;
@@ -828,6 +833,10 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateAntiRushSet; // CONSOLIDATE-01 c5
 		AblationLatch ablateExtraDefence;
 		AblationLatch ablateDefenceCap;
+		AblationLatch ablateCaptureUnlock; // CAPTURE-TECH-01
+		public bool CaptureUnlockArmed => Info.CsCaptureUnlock && switchesActive && !ablateCaptureUnlock.Off(player, AblationIds.CsCaptureUnlock);
+		// CAPTURE-TECH-01: provided tokens and gates of every building type, no faction filter; built once on the first S5 sweep with the switch on. Null until then.
+		public CaptureUnlockMapsCA CaptureUnlockMaps;
 		public bool AntiRushSetArmed => Info.BbAntiRushSet && switchesActive && !ablateAntiRushSet.Off(player, AblationIds.BbAntiRushSet);
 		public bool ExtraDefenceArmed => Info.BbExtraDefence && switchesActive && !ablateExtraDefence.Off(player, AblationIds.BbExtraDefence);
 		public bool DefenceCapArmed => Info.DefenceCapBase >= 0 && switchesActive && !ablateDefenceCap.Off(player, AblationIds.Af2DefenceCap);
