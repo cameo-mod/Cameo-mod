@@ -240,16 +240,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				foreach (var yard in yards)
 				{
 					var d = long.MaxValue;
-					var nearest = yard;
 					foreach (var c in cells)
-					{
-						var dc = RefineryDemand.DistanceSq(c, yard);
-						if (dc < d)
-						{
-							d = dc;
-							nearest = c;
-						}
-					}
+						d = Math.Min(d, RefineryDemand.DistanceSq(c, yard));
 
 					best = Math.Min(best, d);
 					if (!RefineryDemand.Within(d, Info.YardRadiusCells))
@@ -260,7 +252,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						continue;
 
 					if (!zoneReach.TryGetValue((z, yard), out var reach))
-						zoneReach[(z, yard)] = reach = YardReachesZone(yard, nearest);
+						zoneReach[(z, yard)] = reach = YardReachesZone(yard, cells);
 
 					zoneReachable[z] = reach;
 				}
@@ -270,19 +262,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
-		/// The cheap connectivity query only (the abstract-domain lookup the MCV site check uses), for every harvester locomotor: from the yard cell,
-		/// else from the ring three cells around it (a boxed-in top-left), to the zone point nearest the yard, else to a cell next to it (a spreader).
-		/// No path finder or no harvester = reachable (as LC3 fails open).
+		/// The cheap connectivity query only (the abstract-domain lookup the MCV site check uses), for every harvester locomotor: the zone is reachable
+		/// when ANY of its cells is in the same domain as the yard (the yard cell, else the ring three cells around it for a boxed-in top-left; a
+		/// cell's neighbours count for a spreader point). No path search. No path finder or no harvester profile = NOT reachable.
 		/// </summary>
-		bool YardReachesZone(CPos yard, CPos target)
+		bool YardReachesZone(CPos yard, IReadOnlyCollection<CPos> cells)
 		{
 			var specs = HarvesterSpecs();
 			if (pathFinder == null || specs.Length == 0)
-				return true;
+				return false;
 
 			foreach (var spec in specs)
 			{
-				if (pathFinder.PathMightExistForLocomotorBlockedByImmovable(spec.Locomotor, yard, target))
+				var locomotor = spec.Locomotor;
+				if (RefineryDemand.AnyCellReachable(cells, true, c => DomainReaches(locomotor, yard, c, true)))
 					return true;
 
 				for (var dy = -3; dy <= 3; dy++)
@@ -292,19 +285,30 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 							continue;
 
 						var source = new CPos(yard.X + dx, yard.Y + dy);
-						if (world.Map.Contains(source) && pathFinder.PathMightExistForLocomotorBlockedByImmovable(spec.Locomotor, source, target))
-							return true;
-					}
-
-				for (var dy = -1; dy <= 1; dy++)
-					for (var dx = -1; dx <= 1; dx++)
-					{
-						var next = new CPos(target.X + dx, target.Y + dy);
-						if ((dx != 0 || dy != 0) && world.Map.Contains(next)
-							&& pathFinder.PathMightExistForLocomotorBlockedByImmovable(spec.Locomotor, yard, next))
+						if (world.Map.Contains(source) && RefineryDemand.AnyCellReachable(cells, true, c => DomainReaches(locomotor, source, c, false)))
 							return true;
 					}
 			}
+
+			return false;
+		}
+
+		// One domain-index query from <paramref name="from"/> to the cell (and, when asked, to a cell next to it).
+		bool DomainReaches(Locomotor locomotor, CPos from, CPos cell, bool neighbours)
+		{
+			if (pathFinder.PathMightExistForLocomotorBlockedByImmovable(locomotor, from, cell))
+				return true;
+
+			if (!neighbours)
+				return false;
+
+			for (var dy = -1; dy <= 1; dy++)
+				for (var dx = -1; dx <= 1; dx++)
+				{
+					var next = new CPos(cell.X + dx, cell.Y + dy);
+					if ((dx != 0 || dy != 0) && world.Map.Contains(next) && pathFinder.PathMightExistForLocomotorBlockedByImmovable(locomotor, from, next))
+						return true;
+				}
 
 			return false;
 		}
@@ -352,8 +356,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (!RefDemandArmed || DemandObservers.Length == 0 || demandVerdictTick != tick || demandVerdicts.Length != anchors.Count)
 				return;
 
+			// The demand is the eligible zone count, the very counter gameplay uses (ClaimOrder's unserved-in-reach); the cap left is its own field.
 			var inDemand = 0;
-			var demand = 0;
+			var demand = RefineryDemand.EligibleZones(anchors.Count, i => demandVerdicts[i], CoverageUnknown);
+			var capLeft = 0;
 			var outOfRadius = 0;
 			var unreachable = 0;
 			var capped = 0;
@@ -364,13 +370,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var z = a < anchorFieldIds.Length ? anchorFieldIds[a] : -1;
 				var cap = ZoneCapAt(z);
 				var reason = RefineryDemand.Reason(v);
-				var want = 0;
+				var want = RefineryDemand.Eligible(v, CoverageUnknown(a)) ? 1 : 0;
+				var left = RefineryDemand.CapRemaining(v, cap, demandCounts[a]);
 				switch (v)
 				{
 					case RefineryDemand.Verdict.Demand:
 						inDemand++;
-						want = Math.Max(0, cap - demandCounts[a]);
-						demand += want;
+						capLeft += left;
 						if (FieldGateBlocks(a, tick))
 							reason = "zone_gate";
 						break;
@@ -383,7 +389,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var d2 = z >= 0 && z < zoneYardDistSq.Length ? zoneYardDistSq[z] : long.MaxValue;
 				var yardDistance = d2 == long.MaxValue ? -1 : Exts.ISqrt((int)Math.Min(int.MaxValue, d2));
 				foreach (var o in DemandObservers)
-					o.RefineryZoneVerdict(player, tick, z, anchors[a], Info.RefineryZoneRadius, reason, demandCounts[a], want, yardDistance);
+					o.RefineryZoneVerdict(player, tick, z, anchors[a], Info.RefineryZoneRadius, reason, demandCounts[a], want, left, yardDistance);
 			}
 
 			var own = 0;
@@ -392,7 +398,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					own++;
 
 			foreach (var o in DemandObservers)
-				o.RefineryDemandSummary(player, tick, anchors.Count, inDemand, demand, own, friendlyRefineryCells.Count, outOfRadius, unreachable, capped, allied);
+				o.RefineryDemandSummary(player, tick, anchors.Count, inDemand, demand, capLeft, own, friendlyRefineryCells.Count, outOfRadius, unreachable, capped, allied);
 		}
 
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]

@@ -56,6 +56,55 @@ namespace OpenRA.Mods.CA.Traits
 		public static int Demand(bool inRadius, bool reachable, bool alliedServed, int friendlyRefineries, int cap) =>
 			Classify(inRadius, reachable, alliedServed, friendlyRefineries, cap) == Verdict.Demand ? Math.Max(0, ZoneCap(cap) - friendlyRefineries) : 0;
 
+		/// <summary>Whether a zone's relaxed (fallback spacing) sites may be used yet: not needed, deferred until the strict search is exhausted, or promoted.</summary>
+		public enum RelaxedStep { NotNeeded, Deferred, Promote }
+
+		/// <summary>
+		/// The relaxed-site gate. A relaxed site is used only after an EXHAUSTIVE strict certificate (the persistent paged scan drained its whole domain with no strict site); while that
+		/// scan is still running (sampling and visit budgets are no certificate) the relaxed sites are deferred (nothing is placed, the search goes on next tick).
+		/// </summary>
+		public static RelaxedStep RelaxedGate(bool strictCertified, int strictSites, int relaxedSites)
+		{
+			if (relaxedSites <= 0 || strictSites > 0)
+				return RelaxedStep.NotNeeded;
+
+			return strictCertified ? RelaxedStep.Promote : RelaxedStep.Deferred;
+		}
+
+		/// <summary>
+		/// A zone is reachable when ANY of its cells is in the harvester locomotor's domain of the yard (<paramref name="reaches"/> is the cheap domain-index
+		/// query, no path search). Without a harvester profile no zone is accepted.
+		/// </summary>
+		public static bool AnyCellReachable(IEnumerable<CPos> cells, bool hasHarvesterProfile, Func<CPos, bool> reaches)
+		{
+			if (!hasHarvesterProfile || cells == null || reaches == null)
+				return false;
+
+			foreach (var c in cells)
+				if (reaches(c))
+					return true;
+
+			return false;
+		}
+
+		/// <summary>A zone counts as demand for the law (<c>ClaimOrder</c>'s unserved-in-reach count): verdict Demand and its coverage is known.</summary>
+		public static bool Eligible(Verdict v, bool coverageUnknown) => v == Verdict.Demand && !coverageUnknown;
+
+		/// <summary>The eligible zone count of <paramref name="zones"/> zones: the one counter gameplay (<c>ClaimOrder</c>) and the DEV row share.</summary>
+		public static int EligibleZones(int zones, Func<int, Verdict> verdict, Func<int, bool> coverageUnknown)
+		{
+			var n = 0;
+			for (var i = 0; i < zones; i++)
+				if (Eligible(verdict(i), coverageUnknown != null && coverageUnknown(i)))
+					n++;
+
+			return n;
+		}
+
+		/// <summary>The refineries a demand zone may still take before its cap (0 for any other verdict). Reported next to the demand, never as it.</summary>
+		public static int CapRemaining(Verdict v, int cap, int friendlyRefineries) =>
+			v == Verdict.Demand ? Math.Max(0, ZoneCap(cap) - friendlyRefineries) : 0;
+
 		/// <summary>The per-zone refinery cap; at least 1 (a zone always takes its first refinery).</summary>
 		public static int ZoneCap(int cap) => Math.Max(1, cap);
 

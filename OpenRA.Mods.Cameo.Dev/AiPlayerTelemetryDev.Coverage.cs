@@ -262,9 +262,9 @@ namespace OpenRA.Mods.Cameo.Traits
 		}
 
 		void IBotRefineryDemandObserver.RefineryZoneVerdict(OpenRA.Player owner, int tick, int zone, CPos center, int radius, string reason, int refineries,
-			int demand, int yardDistance)
+			int demand, int capRemaining, int yardDistance)
 		{
-			if (!DemandRowDue(owner, zone, "rd_zone", reason + "|" + refineries + "|" + demand, tick))
+			if (!DemandRowDue(owner, zone, "rd_zone", reason + "|" + refineries + "|" + demand + "|" + capRemaining, tick))
 				return;
 
 			ObserverRow(owner, "rd_zone", b =>
@@ -275,14 +275,15 @@ namespace OpenRA.Mods.Cameo.Traits
 				AiMatchLogWriter.AppendString(b, "reason", reason);
 				AiMatchLogWriter.AppendNumber(b, "refineries", refineries);
 				AiMatchLogWriter.AppendNumber(b, "demand", demand);
+				AiMatchLogWriter.AppendNumber(b, "cap_remaining", capRemaining);
 				AiMatchLogWriter.AppendNumber(b, "yard_dist", yardDistance);
 			});
 		}
 
-		void IBotRefineryDemandObserver.RefineryDemandSummary(OpenRA.Player owner, int tick, int zones, int zonesInDemand, int demand, int ownRefineries,
+		void IBotRefineryDemandObserver.RefineryDemandSummary(OpenRA.Player owner, int tick, int zones, int zonesInDemand, int demand, int capRemaining, int ownRefineries,
 			int friendlyRefineries, int outOfRadius, int unreachable, int capped, int alliedServed)
 		{
-			var signature = string.Join("|", zonesInDemand, demand, ownRefineries, friendlyRefineries, outOfRadius, unreachable, capped, alliedServed);
+			var signature = string.Join("|", zonesInDemand, demand, capRemaining, ownRefineries, friendlyRefineries, outOfRadius, unreachable, capped, alliedServed);
 			if (!DemandRowDue(owner, -1, "rd_demand", signature, tick))
 				return;
 
@@ -291,6 +292,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				AiMatchLogWriter.AppendNumber(b, "zones", zones);
 				AiMatchLogWriter.AppendNumber(b, "zones_in_demand", zonesInDemand);
 				AiMatchLogWriter.AppendNumber(b, "demand", demand);
+				AiMatchLogWriter.AppendNumber(b, "cap_remaining", capRemaining);
 				AiMatchLogWriter.AppendNumber(b, "own_refineries", ownRefineries);
 				AiMatchLogWriter.AppendNumber(b, "friendly_refineries", friendlyRefineries);
 				AiMatchLogWriter.AppendNumber(b, "out_of_radius", outOfRadius);
