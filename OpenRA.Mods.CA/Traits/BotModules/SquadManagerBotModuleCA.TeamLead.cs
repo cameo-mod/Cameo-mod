@@ -513,6 +513,9 @@ namespace OpenRA.Mods.CA.Traits
 				value += SquadValueOf(s);
 			}
 
+			// PUSHBAR-RCA-01 (row sq_guard_lend): what the seat's quiet home guard would lend counts in its idle army (no enemy scan, see ArmyGuardPick).
+			ArmyGuardBlob(ref units, ref value);
+
 			return (units, value);
 		}
 
@@ -663,6 +666,8 @@ namespace OpenRA.Mods.CA.Traits
 
 			// A rally order takes the new units again and again (they walk to the rally and wait there), but only real groups: no one-unit squads.
 			unitsHangingAroundTheBase.RemoveAll(u => unitCannotBeOrdered(u.Actor));
+			// PUSHBAR-RCA-01 (row sq_guard_lend): a quiet home guard lends its spare units first, so the pool bars below see them and the squad forms on this pass.
+			ArmyGuardLendTo(order);
 			// TEAM-GATHER-02 (tl_join_merge): for a rally or held order the joinable units merge into the seat's gathering squad; a new squad forms only from a real group.
 			if (TeamLeadJoinMergeOn && (order.GatherOnly || order.Extending || order.AllIn))
 			{
