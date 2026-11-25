@@ -846,6 +846,10 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>CONSOLIDATE-02 Q4 (Opus D4): the last tick a seat's stalemate breaker would have launched (-1 = never); an input of the all-in trigger, never a launch.</summary>
 		public int StalemateSignalTick = -1;
 
+		/// <summary>CONSOLIDATE-02 Q8 (sq_hunt_one_cell): the one unseen cell the team hunts (null = none yet) and the tick it was taken (-1 = none); see <see cref="OpenRA.Mods.CA.Traits.BotModules.Squads.TeamHuntCell"/>.</summary>
+		public CPos? HuntCell;
+		public int HuntTick = -1;
+
 		/// <summary>TEAM-LEAD-02 finish-the-weakest focus: the enemy seat (its player-actor id, -1 = none), the tick it was taken, and the cached pick (re-evaluated at most every check window).</summary>
 		public int FocusSeat = -1;
 		public int FocusSince = -1;

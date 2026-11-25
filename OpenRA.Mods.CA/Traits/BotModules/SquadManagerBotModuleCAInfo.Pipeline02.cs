@@ -34,5 +34,11 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("CONSOLIDATE-02 Q4 (Opus D4): a stalemate-breaker signal on the team board feeds the leader's all-in trigger for this many ticks. Range 100-6000.")]
 		public readonly int ArmyStalemateSignalTicks = 1500;
+
+		[Desc("CONSOLIDATE-02 Q8 (row sq_all_in_late): the all-in trigger fires once this many full LateEscalationStepTicks have passed since LateEscalationStartTick (the game is still undecided after that many escalation steps). 0 = off. Range 0-20.")]
+		public readonly int ArmyAllInLateSteps = 3;
+
+		[Desc("CONSOLIDATE-02 Q8 (row sq_hunt_one_cell): the team's one hunt cell is kept this long (ticks) unless a bot of the team sees it first; then the next asker picks a new one. Range 300-9000.")]
+		public readonly int ArmyHuntCellHoldTicks = 2250;
 	}
 }
