@@ -148,7 +148,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (!owner.IsValid)
 				return;
 
-			// CONSOLIDATE-02 Q9 (sq_states_micro): the Idle state of a team's MAIN squad holds, it never launches by its own pick (the order sends it).
+			// CONSOLIDATE-02 Q9 (sq_states_micro): the Idle state of a team's MAIN squad holds, it never launches by its own pick (the order sends it). Defence in depth: a quiet Rush squad is already
+			// handled before Update (SquadManagerBotModuleCA TeamLeadPrepare/ArmyPrepare, or the pre-team wait); this reaches only a squad that defends (TeamLeadWaveSquad is false for it).
 			if (owner.SquadManager.ArmyIdleHolds(owner))
 				return;
 
@@ -643,6 +644,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 						if (!owner.SquadManager.TeamLeadGoOn(owner, leader.Actor))
 						{
 							owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);
+							owner.SquadManager.ArmyNoteTargetDone(owner);
 							return;
 						}
 					}
@@ -656,6 +658,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 						else if (bounded)
 						{
 							owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);
+							owner.SquadManager.ArmyNoteTargetDone(owner);
 							return;
 						}
 						else
@@ -1384,6 +1387,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				}
 
 				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);
+				owner.SquadManager.ArmyNoteTargetDone(owner);
 				return;
 			}
 
@@ -1395,6 +1399,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 				// Nothing known at all (visible or remembered): stand idle, the team pass or the hunt via order takes over; the blob never flees.
 				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);
+				owner.SquadManager.ArmyNoteTargetDone(owner);
 				return;
 			}
 

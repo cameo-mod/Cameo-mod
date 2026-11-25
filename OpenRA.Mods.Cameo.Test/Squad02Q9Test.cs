@@ -113,7 +113,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var attack = Between(Ground(), "class GroundUnitsAttackState ", "class GroundUnitsSiegeRetreatStateCA");
 			var local = attack.IndexOf("if (!owner.IsTargetValid && owner.SquadManager.ArmyLocalOnly(owner))", StringComparison.Ordinal);
 			var pick = attack.IndexOf("if (!owner.SquadManager.ArmyLocalPick(owner))", StringComparison.Ordinal);
-			var done = attack.IndexOf("owner.SquadManager.ArmyNoteTargetDone(owner);", StringComparison.Ordinal);
+			var done = attack.IndexOf("owner.SquadManager.ArmyNoteTargetDone(owner);", pick, StringComparison.Ordinal);
 			var idle = attack.IndexOf("owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);", done, StringComparison.Ordinal);
 			var older = attack.IndexOf("if (!owner.IsTargetValid && !FindNewTarget(owner))", StringComparison.Ordinal);
 			Assert.That(local, Is.GreaterThanOrEqualTo(0));
@@ -123,6 +123,36 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(older, Is.GreaterThan(idle), "the older far pick (and its flee) stays after the hook");
 			Assert.That(attack, Does.Contain("if (!owner.IsTargetValid && owner.SquadManager.TeamLeadKeepsGoing(owner))"));
 			Assert.That(attack, Does.Contain("if (!owner.IsTargetValid && owner.SquadManager.TeamLeadBoundsRetarget(owner))"));
+		}
+
+		[Test]
+		public void EveryHandOffToIdleOnALostTargetReportsDone()
+		{
+			// The local-only hook, the bounded retarget and the pushed blob's go-on each end in Idle on a lost target; all three report through the one row-gated call (3 per state).
+			var ground = Ground();
+			var move = Between(ground, "class GroundUnitsAttackMoveStateCA", "class GroundUnitsAttackState ");
+			var attack = Between(ground, "class GroundUnitsAttackState ", "class GroundUnitsSiegeRetreatStateCA");
+			Assert.That(System.Text.RegularExpressions.Regex.Matches(move, "ArmyNoteTargetDone\\(owner\\);").Count, Is.EqualTo(3), "AttackMove: local-only, keeps going, bounded");
+			Assert.That(System.Text.RegularExpressions.Regex.Matches(attack, "ArmyNoteTargetDone\\(owner\\);").Count, Is.EqualTo(3), "Attack: bounded, keeps going, local-only");
+			Assert.That(move, Does.Contain("if (!owner.SquadManager.TeamLeadGoOn(owner, leader.Actor))\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\towner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);\n\t\t\t\t\t\t\towner.SquadManager.ArmyNoteTargetDone(owner);\n\t\t\t\t\t\t\treturn;"));
+			Assert.That(move, Does.Contain("else if (bounded)\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\towner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);\n\t\t\t\t\t\t\towner.SquadManager.ArmyNoteTargetDone(owner);\n\t\t\t\t\t\t\treturn;"), "after the unchanged hand-off line (TeamGather02 pins it)");
+			Assert.That(attack, Does.Contain("owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);\n\t\t\t\towner.SquadManager.ArmyNoteTargetDone(owner);\n\t\t\t\treturn;\n\t\t\t}\n\n\t\t\t// TEAM-GATHER-02 c2/c3 (gt_bounded_retarget): the pushed blob keeps going"));
+			Assert.That(attack, Does.Contain("stand idle, the team pass or the hunt via order takes over; the blob never flees.\n\t\t\t\towner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsIdleStateCA(), false);\n\t\t\t\towner.SquadManager.ArmyNoteTargetDone(owner);\n\t\t\t\treturn;"));
+		}
+
+		[Test]
+		public void ASquadInAnAttackStateIsNeverAQuietWaveSquadSoItsHooksRun()
+		{
+			// Reach premise (CM review): ArmyPrepare handles a quiet team squad before Update; a squad in AttackMove/Attack is not quiet, so TeamLeadPrepare returns false and it updates.
+			var team = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
+			Assert.That(team, Does.Contain("if (s.Type == SquadCAType.Rush)\n\t\t\t\treturn AggTeamIsQuietState(state) && !AggTeamSquadDefends(s);"), "a Rush wave squad is a quiet one that does not defend");
+			Assert.That(team, Does.Contain("if (!TeamLeadOn || !TeamLeadWaveSquad(s))\n\t\t\t\treturn false;"), "not a wave squad: TeamLeadPrepare does not take it");
+			Assert.That(RepoFile(Bots + "SquadManagerBotModuleCA.AggTeam.cs"), Does.Contain("internal static bool AggTeamIsQuietState(IState state) => state is GroundUnitsIdleStateCA;"));
+			var module = RepoFile(Bots + "SquadManagerBotModuleCA.cs");
+			var prepare = module.IndexOf("if (TeamLeadPrepare(s))", StringComparison.Ordinal);
+			var update = module.IndexOf("s.Update();", prepare, StringComparison.Ordinal);
+			Assert.That(prepare, Is.GreaterThanOrEqualTo(0));
+			Assert.That(update, Is.GreaterThan(prepare), "a squad the prepare step leaves goes on to its state update");
 		}
 
 		[Test]
@@ -143,7 +173,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.StatesMicro.cs");
 			var done = Between(wiring, "internal void ArmyNoteTargetDone(SquadCA squad)", "/// <summary>Q9 report to the plan (DEV record): the squad's flight");
-			Assert.That(done, Does.Contain("if (DiagnosticWriter != null)\n\t\t\t\tDiagnosticTeamEvent(\"army_target_done\""));
+			Assert.That(done, Does.Contain("if (ArmyStatesMicroOn && TeamLeadTeamSquad(squad) && DiagnosticWriter != null)\n\t\t\t\tDiagnosticTeamEvent(\"army_target_done\""), "row-gated, a team main squad only, writer-guarded");
 			var fled = Between(wiring, "internal void ArmyNoteFled(SquadCA squad)", "\n\t}\n}");
 			Assert.That(fled, Does.Contain("if (ArmyStatesMicroOn && DiagnosticWriter != null)\n\t\t\t\tDiagnosticTeamEvent(\"army_fled\""));
 			foreach (var banned in new[] { "ChangeState", "TargetActor =", "DismissSquad" })
