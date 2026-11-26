@@ -301,7 +301,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			var core = victim != null && !victim.IsDead && ArbiterIsCore(victim);
 			var priority = DefendArbiterCA.Own(core, attack, defence + poolValue);
-			NoteCoreAttack(victim, attack, defence + poolValue);
+			NoteCoreAttack(victim, attack, defence);
 			long need = 0;
 			long got = 0;
 			var fromPool = 0;

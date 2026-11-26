@@ -288,10 +288,12 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var own = RepoFile(Bots + "SquadManagerBotModuleCA.Pipeline02.cs");
 			var protect = own.IndexOf("void ArbiterProtectOwn(", StringComparison.Ordinal);
-			var priority = own.IndexOf("var priority = DefendArbiterCA.Own(core, attack, defence + poolValue);\n\t\t\tNoteCoreAttack(victim, attack, defence + poolValue);\n\t\t\tlong need = 0;", StringComparison.Ordinal);
+			var priority = own.IndexOf("var priority = DefendArbiterCA.Own(core, attack, defence + poolValue);\n\t\t\tNoteCoreAttack(victim, attack, defence);\n\t\t\tlong need = 0;", StringComparison.Ordinal);
 			Assert.That(protect, Is.GreaterThan(0));
-			Assert.That(priority, Is.GreaterThan(protect), "recorded right after the P0 test, with the attack the bot SAW and the defence it measured");
+			Assert.That(priority, Is.GreaterThan(protect), "recorded right after the P0 test, with the attack the bot SAW and the defence AT THE SCENE (inside the scan radius)");
 			Assert.That(Count(own, "NoteCoreAttack("), Is.EqualTo(1));
+			Assert.That(own, Does.Not.Contain("NoteCoreAttack(victim, attack, defence + poolValue)"), "poolValue includes pool units outside the scan radius: it would inflate the R1 threshold (Opus addendum to the b5 fix)");
+			Assert.That(own, Does.Contain("ArbiterAssess(at, out var seenAttack, out var defence);"), "`defence` is the measure inside DefendAllyAttackerScanCells, the pool units inside that radius included");
 			Assert.That(part, Does.Contain("var plan = GuardFloor.Plan(plannedLend, armyGuardLend.Count, allIn);"), "(1) an open all-in plans every joinable unit, not the ordinary share");
 			Assert.That(part, Does.Contain("GuardFloor.Lend(plan, count, floor, Info.TeamLeadJoinMinUnits)"), "only the join minimum applies to the whole guard");
 			Assert.That(part, Does.Not.Contain("GuardFloor.Lend(plannedLend"), "the ordinary share never goes straight to the floor");

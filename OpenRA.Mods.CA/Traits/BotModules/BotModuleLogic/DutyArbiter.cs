@@ -53,7 +53,10 @@ namespace OpenRA.Mods.CA.Traits
 
 		public static int EffectiveRank(DutyClaim claim) => EffectiveRank(claim.Duty, claim.CoreUnderAttack);
 
-		/// <summary>The observed threshold of R1: a force at or above the home defence measured at the scene, and at least 1 so a hit by an attacker nobody saw (value 0) never counts.</summary>
+		/// <summary>
+		/// The observed threshold of R1: a force at or above the home defence AT THE SCENE (the armed own and allied units and defences inside the scan radius, the pool units inside it included, none outside it; Opus
+		/// addendum to the b5 fix), and at least 1 so a hit by an attacker nobody saw (value 0) never counts. A raid the local defence already matches is not the core under attack (Opus accepted this prior).
+		/// </summary>
 		public static long CoreAttackThreshold(long homeDefenceValue) => Math.Max(1, homeDefenceValue);
 
 		/// <summary>
