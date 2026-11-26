@@ -6490,6 +6490,8 @@ Player:
 		# CONSOLIDATE-01 C9 (X13): paid Promotions also start while a unit-production pause vote is up (pq_upgrade_service); free items always did.
 		# UPG-ADDONS (Opus 11-25, Haiku check): the army_* lvl2-3 upgrades sit on the BuildingAddons queue, which the upgrade service did not serve. @generic only.
 		UpgradeServiceQueues: Promotions, Upgrades, Research, Addons, BuildingAddons
+		# CONSOLIDATE-03 P6 (b), row pst_settle_authoritative (Opus ruling P6b): off = the bot's own scan; on = the own TechTree. @generic false until the V08 DEV evidence rules.
+		PstSettleAuthoritative: false
 		# upg_once_registry (Opus 11-25, V08F: ARM): Sol traced the playtest's repeated upgrade starts (x12-16) to the missing pending
 		# reservation with the registry OFF. @generic only; the code default stays false (classic and every other bot unchanged).
 		UpgradeOnceRegistry: true

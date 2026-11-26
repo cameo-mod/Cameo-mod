@@ -86,6 +86,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("UPGRADE-COVERAGE: ticks an ordered upgrade item may stay unseen in its queue before the order is released (not done) and the item may be offered again.")]
 		public readonly int UpgradePendingTimeout = 300;
 
+		[Desc("CONSOLIDATE-03 P6 (b), row pst_settle_authoritative: the upgrade settle reads the owned prerequisites from the player's own TechTree (the engine's owner-only check). False = the bot's own scan (today's behaviour). @generic false.")]
+		public readonly bool PstSettleAuthoritative = false;
+
 		[Desc("ub_capturer_strict (row of the same name): the capturer cap and the armed-infantry denominator count a unit as a capturer only when one of its Captures traits can capture one of CapturerCaptureTypes",
 			"(the Capturable.Types of enemy buildings). Garrison and driver-kill captures never count. False = the old rule: any Captures trait.")]
 		public readonly bool CapturerStrict = false;
@@ -1130,7 +1133,7 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			upgradeSettleTick = world.WorldTick;
-			foreach (var (name, source) in upgradeDone.Settle(world.WorldTick, queuedIn, UpgradeGrantsOf, OwnedPrerequisites(), OfferedUpgradeNames, UpgradeQueueAlive, UpgradePrerequisitesHeld, Info.UpgradePendingTimeout))
+			foreach (var (name, source) in upgradeDone.Settle(world.WorldTick, queuedIn, UpgradeGrantsOf, SettleOwned(), OfferedUpgradeNames, UpgradeQueueAlive, UpgradePrerequisitesHeld, Info.UpgradePendingTimeout))
 				UpgradeDoneLog(name, source);
 
 			foreach (var (name, reason) in upgradeDone.Released)
