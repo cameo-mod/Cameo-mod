@@ -130,6 +130,26 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TheCashLedgerRowIsDevOnlyAndObservesOnly()
+		{
+			var row = Source(Dir + "UnitBuilderBotModuleCA.CashLedgerRow.cs");
+			Assert.That(row, Does.Contain("[Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid CashRefused(ProducerServiceBatch batch, int cost, bool depthTested, long unpaidLatched)"));
+			Assert.That(row, Does.Contain("[Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid CashLedgerRow()"));
+			Assert.That(row, Does.Contain("var cacheDiff = cached - UnitUnpaidScan();"), "Sonnet condition 1: cache vs a fresh scan");
+			Assert.That(row, Does.Not.Contain("QueueOrder"), "observation only");
+			Assert.That(row, Does.Not.Contain("BotRng"), "no random draw");
+
+			var u = Source(Dir + "UnitBuilderBotModuleCA.cs");
+			Assert.That(u, Does.Contain("cachedUnpaid = UnitUnpaidScan();"), "one scan body, cached per world tick as before");
+			Assert.That(u, Does.Contain("CashLedgerRow(); // CONSOLIDATE-03 P2 (b), DEV only"));
+			Assert.That(u, Does.Contain("CashRefused(batch, cost, depthQueue && held > 0, unpaidQueued); // CONSOLIDATE-03 P2 (b), DEV only"));
+
+			var dev = Source("mods/Cameo.Dev/AiPlayerTelemetryDev.Coverage.cs");
+			Assert.That(dev, Does.Contain("ObserverRow(owner, \"cash_ledger\", b =>"));
+			Assert.That(dev, Does.Contain("AiMatchLogWriter.AppendNumber(b, \"unpaid_cache_diff\", unpaidCacheDiff);"));
+		}
+
+		[Test]
 		public void TheFoldSitesReadTheLedger()
 		{
 			var p = Source(Dir + "BotModuleLogic/BaseBuilderQueueManagerCA.Pipeline01.cs");

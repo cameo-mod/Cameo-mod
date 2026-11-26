@@ -219,6 +219,25 @@ namespace OpenRA.Mods.Cameo.Traits
 			});
 		}
 
+		void IBotUnitProductionObserver.CashLedgerObserved(OpenRA.Player owner, int tick, long bank, long unpaidUnit, long unpaidBase, long unpaidUpgrade, int unitReserve,
+			int buildingReserveS8, long over, int refusedAfford, int refusedReserve, int refusedDepth, long unpaidCacheDiff)
+		{
+			ObserverRow(owner, "cash_ledger", b =>
+			{
+				AiMatchLogWriter.AppendNumber(b, "bank", bank);
+				AiMatchLogWriter.AppendNumber(b, "unpaid_unit", unpaidUnit);
+				AiMatchLogWriter.AppendNumber(b, "unpaid_base", unpaidBase);
+				AiMatchLogWriter.AppendNumber(b, "unpaid_upgrade", unpaidUpgrade);
+				AiMatchLogWriter.AppendNumber(b, "reserve_unit", unitReserve);
+				AiMatchLogWriter.AppendNumber(b, "reserve_building_s8", buildingReserveS8);
+				AiMatchLogWriter.AppendNumber(b, "over", over);
+				AiMatchLogWriter.AppendNumber(b, "refused_afford", refusedAfford);
+				AiMatchLogWriter.AppendNumber(b, "refused_reserve", refusedReserve);
+				AiMatchLogWriter.AppendNumber(b, "refused_depth", refusedDepth);
+				AiMatchLogWriter.AppendNumber(b, "unpaid_cache_diff", unpaidCacheDiff);
+			});
+		}
+
 		void IBotBuildingPickObserver.BuildingA6Held(OpenRA.Player owner, int tick, string actor, string stage, int bank, int cost)
 		{
 			ObserverRow(owner, "bb_a6_hold", b =>
