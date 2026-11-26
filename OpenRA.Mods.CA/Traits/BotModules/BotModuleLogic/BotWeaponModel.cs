@@ -234,7 +234,9 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			if (perShot <= 0 || targetHp <= 0)
 				return 1.0;
-			var shots = Math.Ceiling(targetHp / perShot);
+			// FIXTURE-REGEN-02: Math.Round(..., 9) removes float noise before the ceiling, so an exact multiple (200000 / 99999.99999999999)
+			// does not gain a phantom shot. Mirrors tools/balance/weapon_efficiency.py overkill_factor (MT-OVERKILL 36e5722e7).
+			var shots = Math.Ceiling(Math.Round(targetHp / perShot, 9));
 			return targetHp / (shots * perShot);
 		}
 
