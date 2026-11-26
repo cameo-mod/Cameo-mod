@@ -12,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
+using OpenRA.Primitives;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
@@ -28,6 +30,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly record struct ExpansionSite(CPos Center, CPos[] Cells, int Spreaders);
 		readonly record struct ExpansionBid(OpenRA.Player Player, int Deadline, int Limit, CPos[] Sites);
 		readonly record struct ExpansionClaim(OpenRA.Player Player, int Expires, uint? ActorId = null);
+		const string ExpansionSaveKey = "TeamExpansionV1";
+		sealed record SavedClaim(int X, int Y, int Expires, uint? ActorId);
+		sealed record SavedMcv(uint ActorId, SavedCell Site);
+		sealed record SavedCell(int X, int Y)
+		{
+			public CPos ToCell() => new(X, Y);
+		}
+
+		sealed record SavedExpansion(int Epoch, SavedClaim[] Claims, SavedMcv[] Mcvs, SavedCell[] BidSites, int BidDeadline,
+			int BidLimit, SavedCell Pending, int PendingSince, string PendingType, int ForecastTick,
+			int Deadline, long Stock, SavedCell[] Observed);
 
 		sealed class ExpansionRegistry
 		{
@@ -93,7 +106,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int expansionPendingSince;
 		string expansionPendingType;
 		readonly Dictionary<uint, CPos> expansionMcvSites = new();
-		readonly HashSet<uint> expansionPreexistingMcvs = new();
+		CPos[] expansionBidSites = [];
 
 		bool ExpansionAtlasOn => Info.TeamExpandAtlas && !ablateExpansionAtlas.Off(player, AblationIds.TeamExpandAtlas);
 		bool ExpansionForecastOn => ExpansionAtlasOn && Info.TeamExpandForecast && !ablateExpansionForecast.Off(player, AblationIds.TeamExpandForecast);
@@ -190,6 +203,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				registry.Claims.Remove((player, pending));
 				expansionPendingSite = null;
+				expansionPendingType = null;
 			}
 
 			// The map floor consumes site availability; it does not lift legality or create a second MCV order owner.
@@ -208,18 +222,53 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			if (!registry.Bids.ContainsKey(player))
 			{
-				var candidates = atlas.Where(s => !Claimed(s.Center, anchors, Info.ClaimRadiusCells) && !registry.ClaimedByAlly(player, s.Center))
-					.Select(s => (Site: s, Score: (long)s.Cells.Length * Info.TeamExpandStockWeight
-						+ (long)s.Spreaders * Info.TeamExpandRegrowthWeight
-						- (long)NearestOwnBuildingDistance(s.Center) * Info.TeamExpandDistanceWeight
-						- (long)NearestExpansionAnchorDistance(s.Center, anchors) * Info.TeamExpandAnchorDistanceWeight
-						- (long)threatProviders.MergedThreatAt(s.Center) * Info.TeamExpandThreatWeight))
-					.OrderByDescending(s => s.Score).ThenBy(s => s.Site.Center.X).ThenBy(s => s.Site.Center.Y)
-					.Take(Info.TeamExpandBidSites).Select(s => s.Site.Center).ToArray();
+				var candidates = RankExpansionSites(registry, anchors);
+				expansionBidSites = candidates;
 				registry.Bids.Add(player, new ExpansionBid(player, due ? expansionDeadline : int.MaxValue, limit, candidates));
 			}
 
 			return registry.Claims.Any(kv => kv.Value.Player == player && !expansionMcvSites.ContainsValue(kv.Key.Site));
+		}
+
+		CPos[] RankExpansionSites(ExpansionRegistry registry, List<CPos> anchors)
+		{
+			var enemyBases = world.ActorsHavingTrait<GivesBuildableArea>()
+				.Where(a => a.Owner.RelationshipWith(player) == PlayerRelationship.Enemy
+					&& a.IsInWorld && !a.IsDead && a.CanBeViewedByPlayer(player))
+				.Select(a => a.Location).ToArray();
+			var resourceInfo = world.WorldActor.TraitOrDefault<IResourceLayer>()?.Info;
+			var resourceValues = player.PlayerActor.Info.TraitInfoOrDefault<PlayerResourcesInfo>()?.ResourceValues;
+			var authoredValues = new Dictionary<byte, int>();
+			if (resourceInfo != null && resourceValues != null)
+				foreach (var (type, value) in resourceValues)
+					if (resourceInfo.TryGetResourceIndex(type, out var index))
+						authoredValues[index] = Math.Max(authoredValues.GetValueOrDefault(index), value);
+
+			var mapScale = Math.Max(1, MapDiagonalCells());
+			var rankedAnchors = anchors.OrderBy(c => c.X).ThenBy(c => c.Y).ToArray();
+			return PublicExpansionAtlas().Where(s => !Claimed(s.Center, anchors, Info.ClaimRadiusCells) && !registry.ClaimedByAlly(player, s.Center))
+				.Select(s => (Site: s, Score: s.Cells.Sum(c => (long)authoredValues.GetValueOrDefault(world.Map.Resources[c].Type)) * Info.TeamExpandStockWeight
+					+ (long)s.Spreaders * Info.TeamExpandRegrowthWeight
+					- (long)NearestOwnBuildingDistance(s.Center) * Info.TeamExpandDistanceWeight * 100 / mapScale
+					- (long)NearestExpansionAnchorDistance(s.Center, anchors) * Info.TeamExpandAnchorDistanceWeight * 100 / mapScale
+					- (enemyBases.Length == 0 ? 0 : (long)Math.Max(0, Info.ClaimRadiusCells - NearestExpansionAnchorDistance(s.Center, enemyBases))
+						* Info.TeamExpandEnemyProximityWeight)
+					- (long)ExpansionApproachThreat(s.Center, rankedAnchors) * Info.TeamExpandThreatWeight
+					- (long)threatProviders.MergedThreatAt(s.Center) * Info.TeamExpandContestedWeight))
+				.OrderByDescending(s => s.Score).ThenBy(s => s.Site.Center.X).ThenBy(s => s.Site.Center.Y)
+				.Take(Info.TeamExpandBidSites).Select(s => s.Site.Center).ToArray();
+		}
+
+		int ExpansionApproachThreat(CPos site, CPos[] anchors)
+		{
+			if (anchors.Length == 0)
+				return 0;
+
+			var nearest = anchors.MinBy(c => (c - site).LengthSquared);
+			// A bounded corridor proxy based only on the fog-filtered threat cache.
+			var early = new CPos((3 * nearest.X + site.X) / 4, (3 * nearest.Y + site.Y) / 4);
+			var late = new CPos((nearest.X + 3 * site.X) / 4, (nearest.Y + 3 * site.Y) / 4);
+			return Math.Max(threatProviders.MergedThreatAt(early), threatProviders.MergedThreatAt(late));
 		}
 
 		void CommitExpansionRequest(string mcvType)
@@ -230,23 +279,76 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			expansionPendingSite = site.Key.Site;
 			expansionPendingSince = world.WorldTick;
 			expansionPendingType = mcvType;
-			foreach (var a in world.Actors)
-				if (a.Owner == player && constructionMcvTypes.Contains(a.Info.Name))
-					expansionPreexistingMcvs.Add(a.ActorID);
+		}
+
+		void INotifyOtherProduction.UnitProducedByOther(Actor self, Actor producer, Actor produced, string productionType, TypeDictionary init)
+		{
+			if (world.IsLoadingGameSave || expansionPendingSite is not CPos site
+				|| produced.Owner != player || producer.Owner != player || produced.Info.Name != expansionPendingType)
+				return;
+
+			var registry = ExpansionClaims;
+			if (registry.Claims.TryGetValue((player, site), out var claim) && !claim.ActorId.HasValue)
+			{
+				registry.Claims[(player, site)] = claim with { ActorId = produced.ActorID };
+				expansionMcvSites.Add(produced.ActorID, site);
+			}
+
+			expansionPendingSite = null;
+			expansionPendingType = null;
+		}
+
+		List<MiniYamlNode> IGameSaveTraitData.IssueTraitData(Actor self)
+		{
+			if (!ExpansionClaimOn)
+				return null;
+
+			var registry = ExpansionClaims;
+			var claims = registry.Claims.Where(kv => kv.Key.Owner == player)
+				.OrderBy(kv => kv.Key.Site.X).ThenBy(kv => kv.Key.Site.Y)
+				.Select(kv => new SavedClaim(kv.Key.Site.X, kv.Key.Site.Y, kv.Value.Expires, kv.Value.ActorId)).ToArray();
+			var mcvs = expansionMcvSites.OrderBy(kv => kv.Key)
+				.Select(kv => new SavedMcv(kv.Key, new SavedCell(kv.Value.X, kv.Value.Y))).ToArray();
+			registry.Bids.TryGetValue(player, out var bid);
+			var state = new SavedExpansion(registry.Epoch, claims, mcvs, SaveCells(expansionBidSites),
+				bid.Deadline, bid.Limit, expansionPendingSite is CPos pending ? new SavedCell(pending.X, pending.Y) : null,
+				expansionPendingSince, expansionPendingType, expansionForecastTick, expansionDeadline, expansionPreviousStock,
+				SaveCells(expansionObservedCells.OrderBy(c => c.X).ThenBy(c => c.Y)));
+			return [new MiniYamlNode(ExpansionSaveKey, Convert.ToBase64String(JsonSerializer.SerializeToUtf8Bytes(state)))];
+		}
+
+		static SavedCell[] SaveCells(IEnumerable<CPos> cells) => cells.Select(c => new SavedCell(c.X, c.Y)).ToArray();
+
+		void IGameSaveTraitData.ResolveTraitData(Actor self, MiniYaml data)
+		{
+			if (world.IsReplay || data.NodeWithKeyOrDefault(ExpansionSaveKey) is not MiniYamlNode node)
+				return;
+
+			var state = JsonSerializer.Deserialize<SavedExpansion>(Convert.FromBase64String(node.Value.Value));
+			var registry = ExpansionClaims;
+			registry.Epoch = state.Epoch;
+			expansionBidSites = state.BidSites.Select(c => c.ToCell()).ToArray();
+			if (state.BidLimit > 0)
+				registry.Bids[player] = new ExpansionBid(player, state.BidDeadline, state.BidLimit, expansionBidSites);
+
+			foreach (var claim in state.Claims)
+				registry.Claims[(player, new CPos(claim.X, claim.Y))] = new ExpansionClaim(player, claim.Expires, claim.ActorId);
+
+			foreach (var mcv in state.Mcvs)
+				expansionMcvSites[mcv.ActorId] = mcv.Site.ToCell();
+
+			expansionPendingSite = state.Pending?.ToCell();
+			expansionPendingSince = state.PendingSince;
+			expansionPendingType = state.PendingType;
+			expansionForecastTick = state.ForecastTick;
+			expansionDeadline = state.Deadline;
+			expansionPreviousStock = state.Stock;
+			expansionObservedCells.UnionWith(state.Observed.Select(c => c.ToCell()));
 		}
 
 		CPos? TeamClaimedMcvSite(Actor mcv, out bool tracked)
 		{
 			tracked = expansionMcvSites.TryGetValue(mcv.ActorID, out var site);
-			if (!tracked && expansionPendingSite is CPos pending && mcv.Info.Name == expansionPendingType
-				&& !expansionPreexistingMcvs.Contains(mcv.ActorID))
-			{
-				site = pending;
-				expansionMcvSites.Add(mcv.ActorID, site);
-				expansionPendingSite = null;
-				tracked = true;
-			}
-
 			if (!tracked)
 				return null;
 
@@ -273,8 +375,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return alternate.Site;
 			}
 
+			// Re-rank with current anchors and observations before giving up the team lease.
+			var anchors = TeamExpansionAnchors();
+			foreach (var candidate in RankExpansionSites(registry, anchors))
+			{
+				if (registry.ClaimedByAlly(player, candidate) || Claimed(candidate, anchors, Info.ClaimRadiusCells)
+					|| !TeamExpandSiteLegal(mcv, candidate))
+					continue;
+
+				registry.Claims.Remove((player, site));
+				registry.Claims.Add((player, candidate), new ExpansionClaim(player, now, mcv.ActorID));
+				expansionMcvSites[mcv.ActorID] = candidate;
+				return candidate;
+			}
+
 			// Never return another player's claimed site. Prefer an accessible anchor on lease loss.
-			foreach (var anchor in TeamExpansionAnchors().OrderBy(c => (c - mcv.Location).LengthSquared).ThenBy(c => c.X).ThenBy(c => c.Y))
+			foreach (var anchor in anchors.OrderBy(c => (c - mcv.Location).LengthSquared).ThenBy(c => c.X).ThenBy(c => c.Y))
 				if (TeamExpandSiteLegal(mcv, anchor))
 					return anchor;
 

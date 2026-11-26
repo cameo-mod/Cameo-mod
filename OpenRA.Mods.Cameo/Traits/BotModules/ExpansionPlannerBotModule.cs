@@ -249,6 +249,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly int TeamExpandAnchorDistanceWeight = 2;
 		public readonly int TeamExpandDistanceWeight = 4;
 		public readonly int TeamExpandThreatWeight = 1;
+		public readonly int TeamExpandContestedWeight = 1;
+		public readonly int TeamExpandEnemyProximityWeight = 4;
 
 		[Desc("UT-4 (AI_ARCHITECTURE §12.13): the TechRush<->Expansion utility axis scales the appetite —",
 			"an Expansion-leaning personality raises the effective McvTargetCount, a TechRush-leaning one",
@@ -625,7 +627,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 	public partial class ExpansionPlannerBotModule : ConditionalTrait<ExpansionPlannerBotModuleInfo>, IBotTick, IBotExpansionTargetProvider,
 		IBotMcvExpansionSiteProvider, IBotPositionsUpdated, IBotExpansionAssistProvider,
-		IBotProtectionRequestProvider, IBotScoutInterestProvider
+		IBotProtectionRequestProvider, IBotScoutInterestProvider, IGameSaveTraitData, INotifyOtherProduction
 	{
 		public readonly struct FieldScore
 		{
@@ -3121,7 +3123,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			// REF-1 B2: the request rides under the cash reserve — queueing the MCV costs nothing until
 			// production starts, so the standing want must not wait for a re-plan that happens to see cash.
-			if (ExpansionClaimOn && !TryReserveExpansionRequest(active + queued, ref targetCount))
+			if (ExpansionClaimOn && (queued > 0 || !TryReserveExpansionRequest(active, ref targetCount)))
 				return;
 
 			if (!McvDue(ExpansionClaimOn || farFieldFree, active + queued, targetCount))
