@@ -360,7 +360,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (track.Field >= 0)
 					parkedUntil[track.Field] = now + Info.ParkTicks;
 
-				inflightMcvSites.Remove(mcv.ActorID);
+				LeaseObserved((int)McvLeaseEnd.Abort, mcv.ActorID, track.Field, default);
+				mcvLeases.Release(mcv.ActorID);
 #if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): MS-3 MCV {mcv.ActorID} at {mcv.Location} aborted its trip (zone/threat {threat}), field {track.Field} parked, at tick {now}");
 #endif
