@@ -20,7 +20,8 @@ namespace OpenRA.Mods.CA.Traits
 	// CONSOLIDATE-03 P7 phase (a) (design 01 5e100b94 + Opus review): the write-only army duty ledger of this seat, DEV only. Every claim and release of units by a squad-manager duty calls one hook here; the hook records the unit
 	// ids, the duty, the caller method and the reason in the ledger and writes one row to army_duty_trace.csv (own file, no header, all seats append): tick,seat,event,duty,caller,detail with event = claim | release | pool |
 	// lend | heartbeat | counters. [Conditional]: every call and its arguments are removed from a release build, so release adds no state, RNG use or allocation (the ledger field stays null). NOTHING reads the ledger in phase (a): no
-	// decision, order or random draw changes. The pool hash in a row is the order-sensitive digest of the idle pool right AFTER the change (each hook sits directly behind the pool write it records).
+	// decision, order or random draw changes. The pool hash in a row is the order-sensitive digest of the idle pool at the moment the hook runs: right AFTER the change for a hook that sits directly behind the pool write it records, and the pool BEFORE the unit's
+	// new home for the release row at the top of ReleaseDefenders (its to-pool row follows after the pool write). The heartbeat row carries no hash.
 	partial class SquadManagerBotModuleCA
 	{
 		ArmyDutyLedger dutyLedger;
