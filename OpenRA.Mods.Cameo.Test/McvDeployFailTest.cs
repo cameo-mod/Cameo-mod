@@ -1,4 +1,5 @@
 // MCV-DEPLOY-FAIL-01 (RCA a61964a8): pure tests for the per-MCV deploy-failure breaker, and source pins for its wiring in the planner.
+using System;
 using System.IO;
 using NUnit.Framework;
 using DeployBreaker = OpenRA.Mods.Cameo.Traits.BotModules.ExpansionPlannerBotModule.McvDeployFailure;
@@ -68,12 +69,22 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void IsFailureNeedsIdleAliveAndALaterTick()
+		public void IsFailureNeedsIdleAliveAndPastTheGrace()
 		{
 			Assert.That(DeployBreaker.IsFailure(100, 100, true, true), Is.False);
 			Assert.That(DeployBreaker.IsFailure(100, 101, false, true), Is.False);
-			Assert.That(DeployBreaker.IsFailure(100, 101, true, false), Is.False);
-			Assert.That(DeployBreaker.IsFailure(100, 101, true, true), Is.True);
+			Assert.That(DeployBreaker.IsFailure(100, 110, true, false), Is.False);
+			Assert.That(DeployBreaker.IsFailure(100, 110, true, true), Is.True);
+		}
+
+		[Test]
+		public void JustIssuedIdleMcvIsNotAFailureInsideTheGrace()
+		{
+			// The guard pass runs every 25 ticks: a pass right after the handout can see the MCV still idle.
+			Assert.That(DeployBreaker.IsFailure(100, 101, true, true), Is.False);
+			Assert.That(DeployBreaker.IsFailure(100, 105, true, true), Is.False);
+			Assert.That(DeployBreaker.IsFailure(100, 109, true, true), Is.False);
+			Assert.That(DeployBreaker.DeployGraceTicks, Is.EqualTo(10));
 		}
 
 		[Test]

@@ -94,7 +94,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			public static McvDeployFailState OnFailed(McvDeployFailState s) => new McvDeployFailState(s.Failures + 1);
 
-			public static bool IsFailure(int issueTick, int now, bool idle, bool alive) => idle && alive && now > issueTick;
+			/// <summary>
+			/// Ticks after the handout before an idle MCV counts as failed. The guard pass runs every 25 ticks, so a pass
+			/// right after the handout can see the MCV still idle before the order lands; that is not a failure.
+			/// </summary>
+			public const int DeployGraceTicks = 10;
+
+			public static bool IsFailure(int issueTick, int now, bool idle, bool alive) =>
+				idle && alive && now - issueTick >= DeployGraceTicks;
 		}
 
 		const string PMargin = nameof(SquadManagerBotModuleCAInfo.AggTeamMcvDefenceMarginCells);
