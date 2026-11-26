@@ -253,9 +253,9 @@ namespace OpenRA.Mods.CA.Traits
 			"Default false keeps the previous behaviour.")]
 		public readonly bool CountQueuedAircraft = false;
 
-		[Desc("CA F2p2 / DESIGN 19.5: count enemy air threats (for MaintainAirSuperiority) from the observed enemy composition instead of",
-			"scanning every actor in the world. Bots without a fog-observing composition provider (classic) keep the world count.",
-			"Default false keeps the previous behaviour.")]
+		[Desc("CA F2p2 / DESIGN 19.5 / FOG-AIR-01: count enemy air threats (for MaintainAirSuperiority) from the observed enemy composition instead of",
+			"scanning every actor in the world. While it is on, a missing provider or an empty observation counts 0 (nothing seen), never the world count.",
+			"The world count is used only while it is off. Default false keeps the previous behaviour.")]
 		public readonly bool ObservedAirThreats = false;
 
 		[Desc("If MaintainAirSuperiority is true and this is non-zero,",
@@ -540,7 +540,7 @@ namespace OpenRA.Mods.CA.Traits
 		// SwitchCondition result; true when no condition is configured.
 		bool switchesActive;
 		bool CountQueued => Info.CountQueuedAircraft && switchesActive;
-		bool ObservedThreats => Info.ObservedAirThreats && switchesActive;
+		bool ObservedThreats => Info.ObservedAirThreats && switchesActive && !ablateFogAir.Off(player, AblationIds.FogAirObserved);
 
 		UnitComposition activeComposition;
 		int activeCompositionProducedValue;
@@ -628,6 +628,7 @@ namespace OpenRA.Mods.CA.Traits
 		// ABLATE-01 hooks (DEV-only provider; absent in release = always on): one cached answer per row.
 		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery, ablateUpgradeService, ablateUpgradeBuildingAddons, ablateUpgradeOnce, ablateCapturerStrict, ablateCapturerWorkers, ablateUnitMixCapturer;
 		AblationLatch ablateMcvRebuild, ablateRequestSlot; // MCV-REBUILD-01
+		AblationLatch ablateFogAir; // FOG-AIR-01 (row fog_air_observed): off = the legacy world count of enemy aircraft
 		bool McvRebuildOn => switchesActive && Info.McvRebuildFirst && !ablateMcvRebuild.Off(player, AblationIds.McvRebuildFirst);
 		int RequestDropSweeps => McvRebuildCA.DropLimit(switchesActive && Info.RequestSlotFastDrop && !ablateRequestSlot.Off(player, AblationIds.RequestSlot),
 			RequestDropFailedSweeps, Info.RequestDropFailedSweepsFast);
@@ -3468,14 +3469,20 @@ namespace OpenRA.Mods.CA.Traits
 			return result;
 		}
 
-		// CA F2p2 / DESIGN 19.5: with ObservedAirThreats the enemy air threats come from the OBSERVED enemy composition
-		// (fog memory). Without a provider that observes through fog (the classic bot) - or with the switch off - the
-		// legacy omniscient world count stays, so the classic A/B reference is unchanged.
+		// CA F2p2 / DESIGN 19.5 + FOG-AIR-01 (Opus): with ObservedAirThreats the enemy air threats come from the OBSERVED enemy composition
+		// (fog memory) and from nothing else: no provider, or a provider with nothing seen yet, is 0 - never the omniscient world count.
+		// The world count stays reachable only while ObservedThreats is off (the switch off, the ablation row off, or the classic instance,
+		// whose SwitchCondition keeps it off), so the classic A/B reference is unchanged.
 		int EnemyAirThreatCount()
 		{
-			if (ObservedThreats && compositionProvider != null && compositionProvider.TryGetEnemyComposition(out var valueByType))
-				return AirLimits.EstimateObservedThreatCount(valueByType, Info.AirThreatUnits,
-					type => world.Map.Rules.Actors.TryGetValue(type, out var ai) ? ai.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0 : 0);
+			if (ObservedThreats)
+			{
+				if (compositionProvider != null && compositionProvider.TryGetEnemyComposition(out var valueByType))
+					return AirLimits.EstimateObservedThreatCount(valueByType, Info.AirThreatUnits,
+						type => world.Map.Rules.Actors.TryGetValue(type, out var ai) ? ai.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0 : 0);
+
+				return 0;
+			}
 
 			return player.World.Actors.Count(a => a.Owner.RelationshipWith(player) == PlayerRelationship.Enemy && Info.AirThreatUnits.Contains(a.Info.Name));
 		}
