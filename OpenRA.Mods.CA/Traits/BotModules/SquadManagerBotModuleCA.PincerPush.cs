@@ -32,6 +32,11 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>Q7 (row sq_pincer_push): the pincer is decided at push time. Needs the pincer switch (TeamLeadPincerEnabled) as the row it refines.</summary>
 		internal bool ArmyPincerPushOn => ArmyPipelineOn && TeamLeadPincerOn && !ablateSqPincerPush.Off(Player, AblationIds.SqPincerPush);
 
+			AblationLatch ablatePincerArrivedArms; // fix-03
+
+			/// <summary>fix-03 (row pincer_arrived_arms): the arm plan is built from the squads' arrived units and value. Off = the committed totals, as before.</summary>
+			internal bool PincerArrivedArmsOn => Info.PincerArrivedArms && !ablatePincerArrivedArms.Off(Player, AblationIds.PincerArrivedArms);
+
 		/// <summary>
 		/// The leader's push test passed (due, the push bar passed): make the order a pincer instead of pushing, when the arrived blob can field two arms. True = the order is a
 		/// pincer now and does not push this pass; false = nothing changed, the caller pushes the single blob.
@@ -53,7 +58,7 @@ namespace OpenRA.Mods.CA.Traits
 			// The squads that took part, as the arm plan reads them: the key is the actor id of the squad's first unit (a squad owns its units, so it is unique).
 			var squads = new List<ArmSquad>();
 			var byKey = new Dictionary<uint, (object Squad, long Value)>();
-			foreach (var (squad, squadUnits, squadValue) in order.Reported())
+			foreach (var (squad, squadUnits, squadValue) in PincerArrivedArmsOn ? order.ArrivedReported() : order.Reported())
 			{
 				if (squad is not SquadCA q || !q.IsValid)
 					continue;

@@ -758,6 +758,20 @@ namespace OpenRA.Mods.CA.Traits
 
 		readonly Dictionary<object, (int Units, int ToProng)> splitOf = new();
 
+		/// <summary>fix-03 (row pincer_arrived_arms): the squads that stand at the rally point, with the units and value that ARRIVED (a squad with none arrived is skipped). The same count as ArrivedTotals.</summary>
+		public List<(object Squad, int Units, long Value)> ArrivedReported()
+		{
+			var list = new List<(object Squad, int Units, long Value)>(reports.Count);
+			foreach (var (squad, r) in reports)
+			{
+				var n = r.ArrivedUnits < 0 ? (r.Arrived ? r.Units : 0) : Math.Min(r.ArrivedUnits, r.Units);
+				if (n > 0)
+					list.Add((squad, n, ArrivedValue(r.Value, r.Arrived, r.Units, r.ArrivedUnits)));
+			}
+
+			return list;
+		}
+
 		/// <summary>The squads that reported, with what each holds: the blob the arms are shared out from.</summary>
 		public List<(object Squad, int Units, long Value)> Reported()
 		{

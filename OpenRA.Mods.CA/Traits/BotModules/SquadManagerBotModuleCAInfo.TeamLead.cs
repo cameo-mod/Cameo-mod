@@ -185,6 +185,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("TEAM-GATHER-02 c2 (release switch; the DEV row is tl_pincer_double). On: a pincer pushes only when the gathered blob is at least twice the WAVE-MIN units and value (each prong meets WAVE-MIN); a thinner one collapses into the single blob.")]
 		public readonly bool TeamLeadPincerDoubleEnabled = false;
 
+			[Desc("fix-03 (Sol V08F_CUMREV_SOL_02 finding 2; the DEV row is pincer_arrived_arms). On: the pincer arm plan reads each squad's ARRIVED units and value (a squad with none arrived is not an arm), not the committed totals. Off = as before. Gated by the pincer push row.")]
+			public readonly bool PincerArrivedArms = false;
+
 		[Desc("TEAM-BLOB-01 (release switch; the DEV row is tl_order_survive). On: when the elected leader changes while an order lives, the new leader takes the order over instead of cancelling it (the squads gathering for it are not thrown back to the pool). Off = the order is cancelled on a leader change as before.")]
 		public readonly bool TeamLeadOrderSurviveEnabled = false;
 	}
