@@ -4634,6 +4634,9 @@ Player:
 		# map. genericbot-only (this module); classic is untouched. Switch group AJ_field_coverage; ON BY DEFAULT per
 		# the maintainer ruling 2026-10-04 ("refinery coverage is the most important feature right now").
 		FieldCoverage: true
+		# CONSOLIDATE-03 P8 (b) (row mcv_lease_stall_release): a live MCV that has not changed cell for 1500 ticks gives up its field lease and the field is parked (no order issued).
+		McvLeaseStallRelease: true
+		McvLeaseStallTicks: 1500
 		# REPAIR-B3 (SPEC_2026-10-09 §1): shared coverage — a usable own refinery serves every anchor inside an
 		# inclusive Euclidean radius-10 (the default 0 would fall back to ClaimRadiusCells = 8).
 		AnchorServeRadiusCells: 10
