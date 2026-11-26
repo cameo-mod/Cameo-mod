@@ -16,5 +16,7 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		// The unit builder keeps 2-3 harvesters per refinery: a replacement first below the target, none at the cap (Info HvHarvesterTarget). Off = as before.
 		public const string HvHarvesterTarget = "hv_harvester_target";
+
+		public const string UnitCashBlocked = "unit_cash_blocked";
 	}
 }

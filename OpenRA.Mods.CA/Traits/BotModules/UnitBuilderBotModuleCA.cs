@@ -344,6 +344,9 @@ namespace OpenRA.Mods.CA.Traits
 			"HarvesterCapSlackPerRefinery per refinery) no harvester type is built on any path. Gated by SwitchCondition; row hv_harvester_target.")]
 		public readonly bool HvHarvesterTarget = false;
 
+		[Desc("DEV only: observe eligible combat-unit cash admission decisions and effective economy role lists.")]
+		public readonly bool UnitCashBlockedTelemetry = false;
+
 		[Desc("HARV-01: the bank a priority harvester replacement needs.")]
 		public readonly int HarvesterTargetMinCash = 300;
 
@@ -1748,6 +1751,49 @@ namespace OpenRA.Mods.CA.Traits
 
 		int IBotUnitProductionGateInfo.UnitProductionSaturationCash => BankSaturationThreshold;
 
+#if CAMEO_DEV_LOGGING
+		AblationLatch ablateUnitCashBlocked;
+		long unitCashBlocked;
+		long unitCashEligible;
+
+		bool UnitCashBlockedOn =>
+			switchesActive && Info.UnitCashBlockedTelemetry && !ablateUnitCashBlocked.Off(player, AblationIds.UnitCashBlocked);
+
+		(long Blocked, long Eligible)? IBotUnitProductionGateInfo.UnitCashAdmission =>
+			UnitCashBlockedOn ? (unitCashBlocked, unitCashEligible) : null;
+
+		(IEnumerable<string> Harvesters, IEnumerable<string> Refineries)? IBotUnitProductionGateInfo.UnitEconomyRoles
+		{
+			get
+			{
+				if (!UnitCashBlockedOn)
+					return null;
+
+				var module = player.PlayerActor.TraitsImplementing<HarvesterBotModuleCA>().FirstEnabledTraitOrDefault();
+				return module == null ? null : (module.Info.HarvesterTypes, module.Info.RefineryTypes);
+			}
+		}
+#endif
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void ObserveUnitCashAdmission(ActorInfo unit, int cost, bool admitted)
+		{
+#if CAMEO_DEV_LOGGING
+			if (!UnitCashBlockedOn || !unit.HasTraitInfo<AttackBaseInfo>() || unit.HasTraitInfo<HarvesterInfo>())
+				return;
+
+			// A policy reserve or a batch commitment can deny an otherwise affordable unit.
+			// Count only raw cash refusals or actual successful admissions as classified.
+			var cashBlocked = !admitted && cost > playerResources.GetCashAndResources();
+			if (!admitted && !cashBlocked)
+				return;
+
+			unitCashEligible++;
+			if (cashBlocked)
+				unitCashBlocked++;
+#endif
+		}
+
 		string[] IBotUnitProductionGateInfo.UnitProductionReservedBy =>
 			requestPause == null
 				? []
@@ -2102,6 +2148,7 @@ namespace OpenRA.Mods.CA.Traits
 					if (!batch.Affords(cost) || !ReserveAdmits(batch, cost)
 						|| depthQueue && held > 0 && !QueueDepthCA.CashAdmits(batch.BankLeft, unpaidQueued, cost))
 					{
+						ObserveUnitCashAdmission(unit, cost, false);
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, "afford_cash");
 #if CAMEO_DEV_LOGGING
@@ -2113,6 +2160,7 @@ namespace OpenRA.Mods.CA.Traits
 						continue;
 					}
 
+					ObserveUnitCashAdmission(unit, cost, true);
 					SetUnitInterval(name);
 					bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
 					NotifyStarted(name, queue.Info.Type);

@@ -35,6 +35,12 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		int UnitProductionSaturationCash { get; }
 
+		/// <summary>DEV candidate admission evidence. Counts are decisions, not production ticks.</summary>
+		(long Blocked, long Eligible)? UnitCashAdmission => null;
+
+		/// <summary>Effective HARV-01 role membership for joining economy samples to the rules that drive demand.</summary>
+		(System.Collections.Generic.IEnumerable<string> Harvesters, System.Collections.Generic.IEnumerable<string> Refineries)? UnitEconomyRoles => null;
+
 		/// <summary>
 		/// Trait-type names of the reservation voters whose pause requests the module
 		/// currently honors (an enabled <see cref="IBotRequestPauseUnitProduction"/>

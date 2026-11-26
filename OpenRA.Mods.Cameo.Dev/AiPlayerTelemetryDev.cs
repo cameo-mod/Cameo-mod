@@ -1236,6 +1236,20 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(b, "production_buildings", s.Production);
 			AiMatchLogWriter.AppendNumber(b, "tech_tier", seat.TechTier);
 			AiMatchLogWriter.AppendNumber(b, "idle_production_ticks", seat.IdleProductionTicks);
+			var unitGate = GateFor(seat);
+			if (unitGate?.UnitCashAdmission is { } cash)
+			{
+				AiMatchLogWriter.AppendObjectPropertyStart(b, "unit_cash_blocked");
+				AiMatchLogWriter.AppendNumber(b, "blocked_admissions", cash.Blocked, true);
+				AiMatchLogWriter.AppendNumber(b, "classified_admissions", cash.Eligible);
+				b.Append('}');
+			}
+
+			if (unitGate?.UnitEconomyRoles is { } roles)
+			{
+				AiMatchLogWriter.AppendString(b, "harvester_role_types", string.Join(",", roles.Harvesters.OrderBy(x => x, StringComparer.Ordinal)));
+				AiMatchLogWriter.AppendString(b, "refinery_role_types", string.Join(",", roles.Refineries.OrderBy(x => x, StringComparer.Ordinal)));
+			}
 			AiMatchLogWriter.AppendNumber(b, "buildings", s.Buildings);
 			AiMatchLogWriter.AppendNumber(b, "units", s.Units);
 
