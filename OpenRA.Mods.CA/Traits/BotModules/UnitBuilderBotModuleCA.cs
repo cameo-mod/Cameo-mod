@@ -656,6 +656,7 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateTechLean;
 		bool TechLeanOn => UnitRollOn && Info.TechLeanTopPct > 0 && !ablateTechLean.Off(player, AblationIds.UnitTechLean);
 		int rollPoolMaxCost;
+		readonly List<long> rollScores = [];
 
 		// The first tick each listed type was seen buildable in a roll (the first-build boost escalates with the time it stays unbuilt).
 		readonly Dictionary<string, int> rollAvailableSince = new(StringComparer.Ordinal);
@@ -2954,8 +2955,21 @@ namespace OpenRA.Mods.CA.Traits
 
 			var deficits = strength[UnitRoll.RoleDeficit] > 0 ? RollRoleDeficits(roles) : null;
 			var providers = strength[UnitRoll.Learned] > 0 ? ActiveProductionWeights() : null;
-			var scores = strength[UnitRoll.Counter] > 0 ? pool.Select(a => counters.CounterScore(a)).ToList() : null;
-			var best = scores?.Max() ?? 0;
+			// PERF-BOTTICK-01: the same scores in pool order, and their maximum (the pool is not empty here), into a reused list instead of a new one per roll.
+			List<long> scores = null;
+			var best = 0L;
+			if (strength[UnitRoll.Counter] > 0)
+			{
+				scores = rollScores;
+				scores.Clear();
+				best = long.MinValue;
+				foreach (var a in pool)
+				{
+					var score = counters.CounterScore(a);
+					scores.Add(score);
+					best = Math.Max(best, score);
+				}
+			}
 			var missingRoles = strength[UnitRoll.WaveMix] > 0 ? RollMissingWaveRoles(queueRoles) : null;
 			var composition = strength[UnitRoll.Composition] > 0 && activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type)
 				? activeComposition.UnitsToBuild : null;
