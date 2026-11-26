@@ -30,17 +30,83 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly record struct ExpansionSite(CPos Center, CPos[] Cells, int Spreaders);
 		readonly record struct ExpansionBid(OpenRA.Player Player, int Deadline, int Limit, CPos[] Sites);
 		readonly record struct ExpansionClaim(OpenRA.Player Player, int Expires, uint? ActorId = null);
-		const string ExpansionSaveKey = "TeamExpansionV1";
-		sealed record SavedClaim(int X, int Y, int Expires, uint? ActorId);
-		sealed record SavedMcv(uint ActorId, SavedCell Site);
-		sealed record SavedCell(int X, int Y)
+		const string ExpansionSaveKey = "TeamExpansionV2";
+		const int ExpansionSaveVersion = 2;
+		internal sealed record SavedClaim(int X, int Y, int Expires, uint? ActorId);
+		internal sealed record SavedMcv(uint ActorId, SavedCell Site);
+		internal sealed record SavedCell(int X, int Y)
 		{
 			public CPos ToCell() => new(X, Y);
 		}
 
-		sealed record SavedExpansion(int Epoch, SavedClaim[] Claims, SavedMcv[] Mcvs, SavedCell[] BidSites, int BidDeadline,
-			int BidLimit, SavedCell Pending, int PendingSince, string PendingType, int ForecastTick,
-			int Deadline, long Stock, SavedCell[] Observed);
+		/// <summary>
+		/// One expansion MCV request waiting for its unit, in request order (FIFO). ProducerId is the factory the request was issued to
+		/// when the requester knows it (null = unknown). Plain ints so the record round-trips through JSON.
+		/// </summary>
+		internal sealed record PendingExpansion(int X, int Y, int Since, string Type, uint? ProducerId = null)
+		{
+			public CPos Cell() => new(X, Y);
+		}
+
+		// Version 2: the pending request is a FIFO list. Key and version changed with it; the V1 shape never left a draft (every switch default off).
+		internal sealed record SavedExpansion(int Version, int Epoch, SavedClaim[] Claims, SavedMcv[] Mcvs, SavedCell[] BidSites, int BidDeadline,
+			int BidLimit, PendingExpansion[] Pending, int ForecastTick, int Deadline, long Stock, SavedCell[] Observed);
+
+		/// <summary>The save text: base64 of the JSON of one planner's state. A damaged or foreign text decodes to null, never throws.</summary>
+		internal static class ExpansionSave
+		{
+			public static string Encode(SavedExpansion state) => Convert.ToBase64String(JsonSerializer.SerializeToUtf8Bytes(state));
+
+			public static SavedExpansion Decode(string text)
+			{
+				if (string.IsNullOrEmpty(text))
+					return null;
+
+				try
+				{
+					var state = JsonSerializer.Deserialize<SavedExpansion>(Convert.FromBase64String(text));
+					if (state == null || state.Version != ExpansionSaveVersion)
+						return null;
+
+					return state with
+					{
+						Claims = state.Claims ?? [],
+						Mcvs = state.Mcvs ?? [],
+						BidSites = state.BidSites ?? [],
+						Pending = state.Pending ?? [],
+						Observed = state.Observed ?? [],
+					};
+				}
+				catch (Exception e) when (e is FormatException or JsonException or NotSupportedException or ArgumentException)
+				{
+					return null;
+				}
+			}
+		}
+
+		/// <summary>
+		/// FIFO binding of a produced MCV to an expansion request. Only an MCV that answers a request binds: with no live construction yard the
+		/// unit is a recovery or bootstrap MCV and never binds (recovery keeps priority); crate and mission MCVs never raise a production event.
+		/// A request that recorded its factory binds first on that factory; otherwise the oldest request of the same type.
+		/// </summary>
+		internal static class ExpansionRequestBinder
+		{
+			public static int Match(IReadOnlyList<PendingExpansion> pending, string producedType, uint producerId, bool hasLiveYard)
+			{
+				if (!hasLiveYard || producedType == null)
+					return -1;
+
+				for (var i = 0; i < pending.Count; i++)
+					if (pending[i].Type == producedType && pending[i].ProducerId == producerId)
+						return i;
+
+				for (var i = 0; i < pending.Count; i++)
+					if (pending[i].Type == producedType)
+						return i;
+
+				return -1;
+			}
+		}
 
 		sealed class ExpansionRegistry
 		{
@@ -102,9 +168,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int expansionDeadline = int.MaxValue;
 		long expansionPreviousStock;
 		readonly HashSet<CPos> expansionObservedCells = new();
-		CPos? expansionPendingSite;
-		int expansionPendingSince;
-		string expansionPendingType;
+		readonly List<PendingExpansion> expansionPending = new();
 		readonly Dictionary<uint, CPos> expansionMcvSites = new();
 		CPos[] expansionBidSites = [];
 
@@ -199,12 +263,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				registry.Claims.Remove((player, site));
 			}
 
-			if (expansionPendingSite is CPos pending && now - expansionPendingSince >= 8 * TeamExpandEpochTicks)
+			for (var i = expansionPending.Count - 1; i >= 0; i--)
 			{
-				registry.Claims.Remove((player, pending));
-				expansionPendingSite = null;
-				expansionPendingType = null;
+				if (now - expansionPending[i].Since < 8 * TeamExpandEpochTicks)
+					continue;
+
+				registry.Claims.Remove((player, expansionPending[i].Cell()));
+				expansionPending.RemoveAt(i);
 			}
+
+			// Recovery keeps priority: with no live construction yard the MCV module's own recovery owns the next MCV, and no expansion request is raised.
+			if (!HasLiveConstructionYard())
+				return false;
 
 			// The map floor consumes site availability; it does not lift legality or create a second MCV order owner.
 			var seats = Math.Max(1, world.Players.Count(p => p.WinState == WinState.Undefined && p.Playable));
@@ -217,7 +287,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (due)
 				targetCount = Math.Max(targetCount, active + 1);
 
-			if (expansionPendingSite.HasValue || expansionMcvSites.Count >= limit || active >= targetCount)
+			if (expansionPending.Count > 0 || expansionMcvSites.Count >= limit || active >= targetCount)
 				return false;
 
 			if (!registry.Bids.ContainsKey(player))
@@ -227,7 +297,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				registry.Bids.Add(player, new ExpansionBid(player, due ? expansionDeadline : int.MaxValue, limit, candidates));
 			}
 
-			return registry.Claims.Any(kv => kv.Value.Player == player && !expansionMcvSites.ContainsValue(kv.Key.Site));
+			return UnboundClaimSites(registry).Any();
+		}
+
+		IEnumerable<CPos> UnboundClaimSites(ExpansionRegistry registry) =>
+			registry.Claims.Where(kv => kv.Value.Player == player && !expansionMcvSites.ContainsValue(kv.Key.Site)
+					&& !expansionPending.Exists(p => p.Cell() == kv.Key.Site))
+				.Select(kv => kv.Key.Site).OrderBy(c => c.X).ThenBy(c => c.Y);
+
+		bool HasLiveConstructionYard()
+		{
+			foreach (var actor in world.ActorsHavingTrait<GivesBuildableArea>())
+				if (actor.Owner == player && actor.IsInWorld && !actor.IsDead && constructionYardTypes.Contains(actor.Info.Name))
+					return true;
+
+			return false;
 		}
 
 		CPos[] RankExpansionSites(ExpansionRegistry registry, List<CPos> anchors)
@@ -273,34 +357,33 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void CommitExpansionRequest(string mcvType)
 		{
-			var site = ExpansionClaims.Claims.Where(kv => kv.Value.Player == player && !expansionMcvSites.ContainsValue(kv.Key.Site))
-				.OrderBy(kv => kv.Key.Site.X).ThenBy(kv => kv.Key.Site.Y).First();
-
-			expansionPendingSite = site.Key.Site;
-			expansionPendingSince = world.WorldTick;
-			expansionPendingType = mcvType;
+			var site = UnboundClaimSites(ExpansionClaims).First();
+			expansionPending.Add(new PendingExpansion(site.X, site.Y, world.WorldTick, mcvType));
 		}
 
 		void INotifyOtherProduction.UnitProducedByOther(Actor self, Actor producer, Actor produced, string productionType, TypeDictionary init)
 		{
-			if (world.IsLoadingGameSave || expansionPendingSite is not CPos site
-				|| produced.Owner != player || producer.Owner != player || produced.Info.Name != expansionPendingType)
+			if (world.IsLoadingGameSave || expansionPending.Count == 0 || produced.Owner != player || producer.Owner != player)
 				return;
 
+			var index = ExpansionRequestBinder.Match(expansionPending, produced.Info.Name, producer.ActorID, HasLiveConstructionYard());
+			if (index < 0)
+				return;
+
+			var site = expansionPending[index].Cell();
+			expansionPending.RemoveAt(index);
 			var registry = ExpansionClaims;
 			if (registry.Claims.TryGetValue((player, site), out var claim) && !claim.ActorId.HasValue)
 			{
 				registry.Claims[(player, site)] = claim with { ActorId = produced.ActorID };
-				expansionMcvSites.Add(produced.ActorID, site);
+				expansionMcvSites[produced.ActorID] = site;
 			}
-
-			expansionPendingSite = null;
-			expansionPendingType = null;
 		}
 
 		List<MiniYamlNode> IGameSaveTraitData.IssueTraitData(Actor self)
 		{
-			if (!ExpansionClaimOn)
+			// Any of the three switches keeps estimator state, so any of them saves it (the forecast window must not be lost when claims are off).
+			if (!ExpansionAtlasOn)
 				return null;
 
 			var registry = ExpansionClaims;
@@ -310,23 +393,28 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var mcvs = expansionMcvSites.OrderBy(kv => kv.Key)
 				.Select(kv => new SavedMcv(kv.Key, new SavedCell(kv.Value.X, kv.Value.Y))).ToArray();
 			registry.Bids.TryGetValue(player, out var bid);
-			var state = new SavedExpansion(registry.Epoch, claims, mcvs, SaveCells(expansionBidSites),
-				bid.Deadline, bid.Limit, expansionPendingSite is CPos pending ? new SavedCell(pending.X, pending.Y) : null,
-				expansionPendingSince, expansionPendingType, expansionForecastTick, expansionDeadline, expansionPreviousStock,
+			var state = new SavedExpansion(ExpansionSaveVersion, registry.Epoch, claims, mcvs, SaveCells(expansionBidSites),
+				bid.Deadline, bid.Limit, expansionPending.ToArray(), expansionForecastTick, expansionDeadline, expansionPreviousStock,
 				SaveCells(expansionObservedCells.OrderBy(c => c.X).ThenBy(c => c.Y)));
-			return [new MiniYamlNode(ExpansionSaveKey, Convert.ToBase64String(JsonSerializer.SerializeToUtf8Bytes(state)))];
+			return [new MiniYamlNode(ExpansionSaveKey, ExpansionSave.Encode(state))];
 		}
 
 		static SavedCell[] SaveCells(IEnumerable<CPos> cells) => cells.Select(c => new SavedCell(c.X, c.Y)).ToArray();
 
 		void IGameSaveTraitData.ResolveTraitData(Actor self, MiniYaml data)
 		{
-			if (world.IsReplay || data.NodeWithKeyOrDefault(ExpansionSaveKey) is not MiniYamlNode node)
+			if (world.IsReplay || !ExpansionAtlasOn || data.NodeWithKeyOrDefault(ExpansionSaveKey) is not MiniYamlNode node)
 				return;
 
-			var state = JsonSerializer.Deserialize<SavedExpansion>(Convert.FromBase64String(node.Value.Value));
+			// A damaged or other-version text restores nothing: the planner starts clean and re-claims.
+			var state = ExpansionSave.Decode(node.Value.Value);
+			if (state == null)
+				return;
+
 			var registry = ExpansionClaims;
-			registry.Epoch = state.Epoch;
+
+			// The claim generation (epoch) is shared by every planner of the world: never move it backwards.
+			registry.Epoch = Math.Max(registry.Epoch, state.Epoch);
 			expansionBidSites = state.BidSites.Select(c => c.ToCell()).ToArray();
 			if (state.BidLimit > 0)
 				registry.Bids[player] = new ExpansionBid(player, state.BidDeadline, state.BidLimit, expansionBidSites);
@@ -334,15 +422,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var claim in state.Claims)
 				registry.Claims[(player, new CPos(claim.X, claim.Y))] = new ExpansionClaim(player, claim.Expires, claim.ActorId);
 
+			expansionMcvSites.Clear();
 			foreach (var mcv in state.Mcvs)
 				expansionMcvSites[mcv.ActorId] = mcv.Site.ToCell();
 
-			expansionPendingSite = state.Pending?.ToCell();
-			expansionPendingSince = state.PendingSince;
-			expansionPendingType = state.PendingType;
+			expansionPending.Clear();
+			expansionPending.AddRange(state.Pending);
 			expansionForecastTick = state.ForecastTick;
 			expansionDeadline = state.Deadline;
 			expansionPreviousStock = state.Stock;
+			expansionObservedCells.Clear();
 			expansionObservedCells.UnionWith(state.Observed.Select(c => c.ToCell()));
 		}
 
@@ -365,7 +454,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var alternate in registry.Claims.Keys.Where(k => k.Owner == player && k.Site != site && !expansionMcvSites.ContainsValue(k.Site))
 				.OrderBy(k => (k.Site - mcv.Location).LengthSquared).ThenBy(k => k.Site.X).ThenBy(k => k.Site.Y))
 			{
-				if (expansionPendingSite == alternate.Site || !TeamExpandSiteLegal(mcv, alternate.Site))
+				if (expansionPending.Exists(p => p.Cell() == alternate.Site) || !TeamExpandSiteLegal(mcv, alternate.Site))
 					continue;
 
 				expansionMcvSites[mcv.ActorID] = alternate.Site;
