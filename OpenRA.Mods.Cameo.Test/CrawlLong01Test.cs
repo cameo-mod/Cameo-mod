@@ -94,10 +94,13 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(manager, Does.Contain("if (crawlLaw.WantedLinkBuilding == actorType)\n\t\t\t\t\t\t\t\tcrawlLaw.CrawlLinkNoAdvance();"), "only the wanted link parks the target");
 			Assert.That(manager, Does.Contain("actorInfo.HasTraitInfo<GivesBuildableAreaInfo>()"), "a placement that gives no buildable area is no advance");
 
-			// the no-advance branch returns BEFORE the random-resource and toward-the-enemy fallbacks
-			var noAdvance = manager.IndexOf("CRAWL-ADVANCE {actorType} has no forward cell", StringComparison.Ordinal);
-			var randomResource = manager.IndexOf("// Try and place the refinery near a resource field", StringComparison.Ordinal);
-			Assert.That(noAdvance, Is.GreaterThan(0));
+			// the no-advance branch returns BEFORE the random-resource and toward-the-enemy fallbacks of the BaseCrawl case. V08F gate fix: the comment also opens the
+			// fallback of the earlier Refinery case (upstream, since 2024), so both searches start at the BaseCrawl case.
+			var crawlCase = manager.IndexOf("case BuildingType.BaseCrawl:", StringComparison.Ordinal);
+			var noAdvance = manager.IndexOf("CRAWL-ADVANCE {actorType} has no forward cell", crawlCase, StringComparison.Ordinal);
+			var randomResource = manager.IndexOf("// Try and place the refinery near a resource field", crawlCase, StringComparison.Ordinal);
+			Assert.That(crawlCase, Is.GreaterThan(0));
+			Assert.That(noAdvance, Is.GreaterThan(crawlCase));
 			Assert.That(randomResource, Is.GreaterThan(noAdvance), "the fallbacks are unreachable from the no-advance branch");
 
 			var provider = Source("mods/CA/Traits/BotModules/IBotExpansionTargetProvider.cs");
