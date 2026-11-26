@@ -26,6 +26,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		PipelineFeasibility pipelineFeasibility;
 
+		// CONSOLIDATE-03 P1: the capture-unlock lookup of the snapshot, one delegate per manager (captureUnlockOffered is refilled by every S5 source walk).
+		Func<string, bool> captureUnlockOf;
+
 		// Owned (standing) count by actor name, rebuilt once per sweep (playerBuildings is re-read at every sweep start).
 		readonly Dictionary<string, int> pipelineOwned = new();
 		Actor[] pipelineOwnedFor;
@@ -54,9 +57,11 @@ namespace OpenRA.Mods.CA.Traits
 			pipelineFeasibility ??= new PipelineFeasibility(this);
 			pipelineFeasibility.Begin(queue, buildable, power, law, snapshot);
 			OfferedCollect(snapshot); // bb_skip, DEV only
+			RefusalsCollect(snapshot); // bb_decide_row, DEV only
 			var pick = BaseBuildPlanCA.Plan(snapshot, pipelineFeasibility, BotRng.For(player, nameof(BaseBuilderQueueManagerCA)));
 			SkipsObserved(buildable, snapshot, pick); // bb_skip, DEV only
 			S8FallthroughObserved(snapshot, pick); // bb_s8_rejected_fallthrough, DEV only
+			DecideObserved(snapshot, pick); // bb_decide_row, DEV only
 			S8HoldUpdate(snapshot, pick); // bb_s8_cash_hold
 			if (pick.IsNone)
 				return false;
@@ -125,6 +130,8 @@ namespace OpenRA.Mods.CA.Traits
 				IntervalActive = name => b.BuildingIntervals != null && b.BuildingIntervals.ContainsKey(name) && activeBuildingIntervals.ContainsKey(name),
 				CoreOnceListedOnly = baseBuilder.BuildAllListedArmed,
 				S8RejectedFallthrough = baseBuilder.S8RejectedFallthroughArmed,
+				S5CaptureReason = baseBuilder.S5CaptureReasonArmed,
+				CaptureUnlockOf = captureUnlockOf ??= name => captureUnlockOffered.Contains(name), // CONSOLIDATE-03 P1: names the S5 reason; bb_s5_capture_reason filters by it
 				S8CashHold = baseBuilder.S8CashHoldArmed,
 				S8HoldMaxTicks = b.S8HoldMaxTicks,
 				S8HoldMinBankPercent = b.S8HoldMinBankPercent,
@@ -439,6 +446,43 @@ namespace OpenRA.Mods.CA.Traits
 
 			s8FallthroughLogged = now;
 			Log.Write("debug", $"AI ({player.ClientIndex}): BB-S8-FALLTHROUGH queue {Category} tick {now} bank {s.Bank} line {s.TierLine} s8_offers {s.S8Offers} stage {pick.Stage} candidate {pick.Candidate} tests {pick.Tests}");
+#endif
+		}
+
+		// CONSOLIDATE-03 P1 (b), bb_decide_row, DEV only: arms the per-walk refusal list of the arbiter when a recorder is present.
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void RefusalsCollect(BaseBuildSnapshot s)
+		{
+			if (PickObservers.Length > 0)
+				s.Refusals = new List<BuildingRefusal>();
+		}
+
+#if CAMEO_DEV_LOGGING
+		string decideSignature;
+		int decideLogged = -750;
+#endif
+
+		// CONSOLIDATE-03 P1 (b), bb_decide_row (S8_STARVE_01 telemetry ask), DEV only: the walk's winner, its deciding named rule and every refusal, as one bb_decide row per queue
+		// when the decision changes (at most one per 25 ticks) or every 750 ticks while it stays the same. Compiled out of a release build with its arguments.
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void DecideObserved(BaseBuildSnapshot s, BaseBuildPick pick)
+		{
+#if CAMEO_DEV_LOGGING
+			if (s.Refusals == null || PickObservers.Length == 0)
+				return;
+
+			var decider = pick.IsNone ? BuildingRule.None : BuildingPickArbiter.RuleOf(pick.Stage, s, pick.Candidate);
+			var refusals = BuildingPickArbiter.Summary(s.Refusals, 24);
+			var signature = $"{(pick.IsNone ? "-" : pick.Candidate)}|{decider}|{refusals}";
+			var now = world.WorldTick;
+			if (now - decideLogged < (signature == decideSignature ? 750 : 25))
+				return;
+
+			decideSignature = signature;
+			decideLogged = now;
+			foreach (var o in PickObservers)
+				o.BuildingDecided(player, now, Category, s.SustainedActive, s.Bank, s.TierLine, pick.IsNone ? "" : pick.Name, pick.IsNone ? "None" : pick.Stage.ToString(),
+					decider.ToString(), s.S8Offers, s.Refusals.Count, refusals);
 #endif
 		}
 

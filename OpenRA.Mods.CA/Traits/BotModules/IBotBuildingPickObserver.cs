@@ -34,5 +34,9 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>REF2-FIRST-01 (row ref2_verdict): the second-refinery gate's verdict when a radar or 2nd production start was asked for: held_radar, held_prod2 (<paramref name="detail"/> = the
 		/// actor), due, not_due (<paramref name="detail"/> = why) or bound_expired. The observer dedupes on a changed verdict and rate-limits. Default: ignored.</summary>
 		void Ref2Verdict(Player owner, int tick, string verdict, string detail, int refineries, string queue) { }
+
+		/// <summary>CONSOLIDATE-03 P1 bb_decide: one arbiter walk of <paramref name="queue"/>: the start (empty = no pick), its stage and deciding named rule, the S8 offers, and the
+		/// refusals (count and "stage:name:reason" summary). The caller dedupes per queue.</summary>
+		void BuildingDecided(Player owner, int tick, string queue, bool sustained, int bank, int tierLine, string actor, string stage, string decider, int s8Offers, int refusalCount, string refusals);
 	}
 }

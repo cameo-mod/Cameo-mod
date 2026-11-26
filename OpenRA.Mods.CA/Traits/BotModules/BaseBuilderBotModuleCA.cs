@@ -287,6 +287,17 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("EARLY-DEF-01: the anti-rush set size at the highest tier.")]
 		public readonly int AntiRushBaseMax = 3;
 
+		[Desc("CONSOLIDATE-03 P1 (b), row early_def_learn (EARLY_DEF_LEARN_01_DESIGN.md, user 11-26): the anti-rush count = clamp(prior x M(map) x L, 0..EarlyDefCountMax), the prior",
+			"being AntiRushBaseMin..Max on the tier line. M = reference / spawn path (EarlyDefReferencePathCells, 0 = neutral); L = the learned 4-value aggregate (neutral until a learned",
+			"snapshot exists). Needs BbAntiRushSet; gated by SwitchCondition. Off = the prior, as before.")]
+		public readonly bool EarlyDefLearn = false;
+
+		[Desc("early_def_learn: the most early anti-rush defences the learned count may ask for.")]
+		public readonly int EarlyDefCountMax = 4;
+
+		[Desc("early_def_learn: the reference spawn-path length in cells for the map factor M (set from EARLY_RUSH_STATS_01). 0 = M neutral.")]
+		public readonly int EarlyDefReferencePathCells = 0;
+
 		[Desc("TEAM-DEFEND-02 (USER 11-24): while own or allied buildings are attacked, every ready ground turret is placed where it covers the current attackers: as close as possible to",
 			"exactly its maximum weapon range from them, on the defended side, never next to the enemy; the nearest legal in-range cell otherwise; with none the turret is held (the READY",
 			"watchdog places it at a base cell later). Solo (own base attacked) and team (an ally attacked) use the same rule; building next to an ally follows the lobby option through the",
@@ -347,6 +358,10 @@ namespace OpenRA.Mods.CA.Traits
 			"when it provides a prerequisite the player lacks that gates another building type, so a captured construction yard unlocks its faction's tech. Needs BbPipeline01.",
 			"Off = S5 is unchanged. Gated by SwitchCondition; row cs_capture_unlock.")]
 		public readonly bool CsCaptureUnlock = false;
+
+		[Desc("CONSOLIDATE-03 P1 (b), row bb_s5_capture_reason: with listed-only first copies (BbBuildAllListed) S5 still offers the capture-unlock types (CsCaptureUnlock) after the",
+			"listed roll; the tech-depth fallback stays off. Off = S5 stops after the roll, so the capture rule never fires on the staged path. Needs both rows armed; gated by SwitchCondition.")]
+		public readonly bool BbS5CaptureReason = false;
 
 		[Desc("TECHCHAIN-PAYGO-01: stages S3 (the tech-centre opening role) and S5 of the staged planner admit a TechChainTypes pick when the bank is above 0 instead of at",
 			"its full cost (test A6), because the engine pays production as it goes. At most one tech-chain item in flight; every other pick keeps the full-cost test.",
@@ -938,9 +953,13 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablatePassiveIncome; // CONSOLIDATE-01 c4
 		public bool PassiveIncomeArmed => Info.BbPassiveIncome && switchesActive && !ablatePassiveIncome.Off(player, AblationIds.BbPassiveIncome);
 		AblationLatch ablateAntiRushSet; // CONSOLIDATE-01 c5
+		AblationLatch ablateEarlyDefLearn; // CONSOLIDATE-03 P1 (b)
+		public bool EarlyDefLearnArmed => Info.EarlyDefLearn && AntiRushSetArmed && !ablateEarlyDefLearn.Off(player, AblationIds.EarlyDefLearn);
 		AblationLatch ablateExtraDefence;
 		AblationLatch ablateDefenceCap;
 		AblationLatch ablateCaptureUnlock; // CAPTURE-TECH-01
+		AblationLatch ablateS5CaptureReason; // CONSOLIDATE-03 P1 (b)
+		public bool S5CaptureReasonArmed => Info.BbS5CaptureReason && CaptureUnlockArmed && BuildAllListedArmed && !ablateS5CaptureReason.Off(player, AblationIds.BbS5CaptureReason);
 		public bool CaptureUnlockArmed => Info.CsCaptureUnlock && switchesActive && !ablateCaptureUnlock.Off(player, AblationIds.CsCaptureUnlock);
 		AblationLatch ablateTechChainPaygo; // TECHCHAIN-PAYGO-01
 		public bool TechChainPaygoArmed => Info.BbTechChainPaygo && switchesActive && !ablateTechChainPaygo.Off(player, AblationIds.BbTechChainPaygo);

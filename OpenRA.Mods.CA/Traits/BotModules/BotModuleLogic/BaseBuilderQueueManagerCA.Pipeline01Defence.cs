@@ -38,14 +38,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (!AntiRushSetOn || playerBuildings == null)
 				yield break;
 
-			var b = baseBuilder.Info;
-			var have = playerBuildings.Count(a => IsGroundDefence(a.Info));
-			foreach (var kv in baseBuilder.BuildingsBeingProduced)
-				if (world.Map.Rules.Actors.TryGetValue(kv.Key, out var queued) && IsGroundDefence(queued))
-					have += kv.Value;
-
-			var size = AntiRushCA.SetSize(botLimits != null ? botLimits.Info.ArmyShareTargetPermille : -1, b.AntiRushBaseMin, b.AntiRushBaseMax);
-			if (!AntiRushCA.Wants(playerBuildings.Any(a => b.ProductionTypes.Contains(a.Info.Name)), have, size))
+			if (!EarlyDefenceWanted())
 				yield break;
 
 			var bank = ProdBusyCA.SweepBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep);
@@ -64,6 +57,28 @@ namespace OpenRA.Mods.CA.Traits
 
 			foreach (var name in AntiRushCA.Order(candidates, AntiRushStageMaxCandidates))
 				yield return name;
+		}
+
+		// CONSOLIDATE-03 P1 (a): the ONE early-defence test (EarlyDefencePlan), read by S4 above and by the MODE-BIAS antirush profile (AntiRushWantedNow). The ground
+		// defences owned (standing) or queued (in flight) against the plan's count, once a production building stands.
+		bool EarlyDefenceWanted()
+		{
+			if (playerBuildings == null)
+				return false;
+
+			var b = baseBuilder.Info;
+			var have = playerBuildings.Count(a => IsGroundDefence(a.Info));
+			foreach (var kv in baseBuilder.BuildingsBeingProduced)
+				if (world.Map.Rules.Actors.TryGetValue(kv.Key, out var queued) && IsGroundDefence(queued))
+					have += kv.Value;
+
+			var count = EarlyDefencePlan.Count(botLimits != null ? botLimits.Info.ArmyShareTargetPermille : -1, b.AntiRushBaseMin, b.AntiRushBaseMax);
+
+			// P1 (b) early_def_learn: the prior x M(map) x L, clamped. The spawn path is measured in EARLY-DEF-LEARN-01 step 2 (path 0 = M neutral) and L is neutral until a
+			// learned snapshot exists, so today the row returns the prior.
+			if (baseBuilder.EarlyDefLearnArmed)
+				count = EarlyDefencePlan.LearnedCount(count, EarlyDefencePlan.MapMilli(0, b.EarlyDefReferencePathCells), EarlyDefencePlan.Neutral, b.EarlyDefCountMax);
+			return EarlyDefencePlan.Wanted(playerBuildings.Any(a => b.ProductionTypes.Contains(a.Info.Name)), have, count);
 		}
 
 		// S9 (R6): the armed defences of BuildingFractions that this queue can build, ordinal-sorted then shuffled with the synced bot random (lazily, one draw per entry

@@ -5991,6 +5991,9 @@ Player:
 		AntiRushBase: true
 		AntiRushBaseMin: 2
 		AntiRushBaseMax: 3
+		# CONSOLIDATE-03 P1 (b) (row early_def_learn, user 11-26): the anti-rush count = clamp(prior x M(map) x L, 0..4); neutral (= the prior) until EARLY_RUSH_STATS_01 sets the reference path and a learned snapshot exists.
+		EarlyDefLearn: true
+		EarlyDefCountMax: 4
 		# TEAM-DEFEND-02 (USER 11-24): tm_ally_turret_support: while an own or allied base is attacked every ready ground turret is placed at its max weapon range from the attackers; genericbot only.
 		TeamTurretSupport: true
 		# CONSOLIDATE-01 C9 (X6, row ub_refinery_pause_opening): the no-refinery unit-production pause applies only until the first refinery has stood; a bot that loses its refineries keeps building units.
@@ -6017,6 +6020,8 @@ Player:
 		BbNoCancel: true
 		# S8-STARVE-01 (row bb_s8_rejected_fallthrough, Sol 58ADBC25): under SUSTAINED cash a rejected S8 offer no longer holds S9/S10 back; an admitted S8 still wins first.
 		BbS8RejectedFallthrough: true
+		# CONSOLIDATE-03 P1 (b) (row bb_s5_capture_reason): with listed-only first copies S5 still offers the capture-unlock types after the listed roll (cs_capture_unlock was dead on the staged path).
+		BbS5CaptureReason: true
 		# S8-CASH-HOLD (row bb_s8_cash_hold, Opus V08G): an eligible S8 factory that waits only for cash holds the S10 fractions back for at most 750 ticks.
 		BbS8CashHold: true
 		S8HoldMaxTicks: 750
