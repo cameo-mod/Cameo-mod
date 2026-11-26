@@ -363,6 +363,11 @@ namespace OpenRA.Mods.CA.Traits
 			"listed roll; the tech-depth fallback stays off. Off = S5 stops after the roll, so the capture rule never fires on the staged path. Needs both rows armed; gated by SwitchCondition.")]
 		public readonly bool BbS5CaptureReason = false;
 
+		[Desc("CONSOLIDATE-03 P2 (b), row cl_one_reserve: the S8-S10 building reserve (test A6) is the same personality-lean scaled line as the unit reserve",
+			"(RecoverySpendPolicyCA.EffectiveReserve of the tier ProductionCashReserve, the steamroller lean): a trailing lead lowers it, nothing raises it, S1-S7 stay 0.",
+			"Needs BbPipeline01. Off = the unscaled tier reserve. Gated by SwitchCondition.")]
+		public readonly bool CashOneReserve = false;
+
 		[Desc("TECHCHAIN-PAYGO-01: stages S3 (the tech-centre opening role) and S5 of the staged planner admit a TechChainTypes pick when the bank is above 0 instead of at",
 			"its full cost (test A6), because the engine pays production as it goes. At most one tech-chain item in flight; every other pick keeps the full-cost test.",
 			"Needs BbPipeline01. Off = A6 unchanged. Gated by SwitchCondition; row bb_techchain_paygo.")]
@@ -950,6 +955,13 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateDefenceCap;
 		AblationLatch ablateCaptureUnlock; // CAPTURE-TECH-01
 		AblationLatch ablateS5CaptureReason; // CONSOLIDATE-03 P1 (b)
+		AblationLatch ablateCashOneReserve; // CONSOLIDATE-03 P2 (b)
+		public bool CashOneReserveArmed => Info.CashOneReserve && switchesActive && !ablateCashOneReserve.Off(player, AblationIds.ClOneReserve);
+		IBotPersonalityLeadProvider[] reserveLeadProviders;
+
+		// The lean the unit reserve reads (UnitBuilderBotModuleCA.ReserveAdmits): the lowest steamroller lead lean of this player's providers, 1.0 when none answer.
+		public double ReserveLean() =>
+			BotPersonalityLeads.Lean(reserveLeadProviders ??= player.PlayerActor.TraitsImplementing<IBotPersonalityLeadProvider>().ToArray(), "steamroller");
 		public bool S5CaptureReasonArmed => Info.BbS5CaptureReason && CaptureUnlockArmed && BuildAllListedArmed && !ablateS5CaptureReason.Off(player, AblationIds.BbS5CaptureReason);
 		public bool CaptureUnlockArmed => Info.CsCaptureUnlock && switchesActive && !ablateCaptureUnlock.Off(player, AblationIds.CsCaptureUnlock);
 		AblationLatch ablateTechChainPaygo; // TECHCHAIN-PAYGO-01

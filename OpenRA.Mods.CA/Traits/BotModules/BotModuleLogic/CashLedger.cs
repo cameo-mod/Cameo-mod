@@ -37,6 +37,11 @@ namespace OpenRA.Mods.CA.Traits
 		public static int BuildingReserve(BaseBuildStage stage, int productionCashReserve) =>
 			BaseBuildPlanCA.ReserveFor(stage, productionCashReserve);
 
+		/// <summary>P2 (b) cl_one_reserve: the same line with the unit reserve's personality lean (EffectiveReserve). Lean 1.0 (row off, or no trailing lead) =
+		/// the unscaled line exactly; any lean only lowers it; unset (-1) stays unset and reads as 0.</summary>
+		public static int BuildingReserve(BaseBuildStage stage, int productionCashReserve, double lean) =>
+			BaseBuildPlanCA.ReserveFor(stage, RecoverySpendPolicyCA.EffectiveReserve(productionCashReserve, lean));
+
 		/// <summary>A6: the full-price test with the reserve kept. A pay-as-you-go waiver (TechChainPaygo, BuildAllListed) is the caller's next step.</summary>
 		public static CashAdmission AdmitBuilding(int bank, int cost, int reserve) =>
 			BaseBuildPlanCA.Affordable(bank, cost, reserve)

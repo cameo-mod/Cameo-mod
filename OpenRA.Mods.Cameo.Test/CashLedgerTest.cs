@@ -12,6 +12,7 @@ using System;
 using System.IO;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
+using OpenRA.Mods.Cameo.Dev;
 
 namespace OpenRA.Mods.Cameo.Test
 {
@@ -89,11 +90,51 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void OneReserveIsTheOldLineAtNeutralLeanAndOnlyLowersIt()
+		{
+			// P2 (b) cl_one_reserve: lean 1.0 (row off, or no trailing lead) is the unscaled line exactly; S1-S7 stay 0; any lean is <= the unscaled line.
+			foreach (BaseBuildStage stage in Enum.GetValues(typeof(BaseBuildStage)))
+				foreach (var reserve in Reserves)
+				{
+					var old = CashLedger.BuildingReserve(stage, reserve);
+					Assert.That(CashLedger.BuildingReserve(stage, reserve, 1.0), Is.EqualTo(old), $"{stage} {reserve}: neutral lean");
+					foreach (var lean in new[] { 0.0, 0.25, 0.5, 0.99, 2.0 })
+					{
+						var leaned = CashLedger.BuildingReserve(stage, reserve, lean);
+						Assert.That(leaned, Is.InRange(0, Math.Max(0, old)), $"{stage} {reserve} lean {lean}");
+						if (stage < BaseBuildStage.S8ProductionCycle)
+							Assert.That(leaned, Is.EqualTo(0));
+					}
+				}
+
+			Assert.That(CashLedger.BuildingReserve(BaseBuildStage.S10Fractions, 3000, 0.5), Is.EqualTo(1500));
+		}
+
+		[Test]
+		public void TheOneReserveRowIsWiredDefaultOffAndOnInGeneric()
+		{
+			var module = Source(Dir + "BaseBuilderBotModuleCA.cs");
+			Assert.That(module, Does.Contain("public readonly bool CashOneReserve = false;"));
+			Assert.That(module, Does.Contain("public bool CashOneReserveArmed => Info.CashOneReserve && switchesActive && !ablateCashOneReserve.Off(player, AblationIds.ClOneReserve);"));
+			Assert.That(module, Does.Contain("BotPersonalityLeads.Lean(reserveLeadProviders ??= player.PlayerActor.TraitsImplementing<IBotPersonalityLeadProvider>().ToArray(), \"steamroller\");"),
+				"the same lean the unit reserve reads");
+
+			var p = Source(Dir + "BotModuleLogic/BaseBuilderQueueManagerCA.Pipeline01.cs");
+			Assert.That(p, Does.Contain("ReserveLean = baseBuilder.CashOneReserveArmed ? baseBuilder.ReserveLean() : 1.0,"));
+
+			Assert.That(AblationSpec.RegistryIds(), Does.Contain(AblationIds.ClOneReserve));
+			Assert.That(AblationIds.ClOneReserve, Is.EqualTo("cl_one_reserve"));
+
+			var yaml = File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "source", "packaging", "ai.yaml")).Replace("\r\n", "\n");
+			Assert.That(System.Text.RegularExpressions.Regex.Matches(yaml, "\t\tCashOneReserve: true\n").Count, Is.EqualTo(1), "@generic only");
+		}
+
+		[Test]
 		public void TheFoldSitesReadTheLedger()
 		{
 			var p = Source(Dir + "BotModuleLogic/BaseBuilderQueueManagerCA.Pipeline01.cs");
 			Assert.That(p, Does.Contain("Bank = CashLedger.BuildingBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep),"));
-			Assert.That(p, Does.Contain("if (!CashLedger.AdmitBuilding(s.Bank, startCost, CashLedger.BuildingReserve(c.Stage, s.ProductionCashReserve)).Ok)"));
+			Assert.That(p, Does.Contain("if (!CashLedger.AdmitBuilding(s.Bank, startCost, CashLedger.BuildingReserve(c.Stage, s.ProductionCashReserve, s.ReserveLean)).Ok)"));
 
 			var d = Source(Dir + "BotModuleLogic/BaseBuilderQueueManagerCA.Pipeline01Defence.cs");
 			Assert.That(d, Does.Contain("var bank = CashLedger.BuildingBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep);"));
