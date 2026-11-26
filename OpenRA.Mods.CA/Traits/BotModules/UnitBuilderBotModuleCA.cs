@@ -1134,8 +1134,10 @@ namespace OpenRA.Mods.CA.Traits
 				UpgradeDoneLog(name, source);
 
 			foreach (var (name, reason) in upgradeDone.Released)
+			{
 				UpgradeReleaseLog(name, reason);
 				PendingStreamNote("settle_release", name + ":" + reason, world.WorldTick, 0); // CONSOLIDATE-03 P6 DEV hash (Sonnet nit a)
+			}
 		}
 
 		// the EXACT queue instance that showed the item is still there and enabled (another queue of the same category does not stand in for a dead producer)
