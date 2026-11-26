@@ -37,6 +37,34 @@ namespace OpenRA.Mods.CA.Traits
 		readonly Player player;
 		readonly Dictionary<string, int> observedEnemyValue = new();
 		readonly Dictionary<string, WeaponProfile[]> profiles = new();
+
+		// PERF-BOTTICK-01 (pure optimisation, results identical): Score is a function of observedEnemyValue and of the static rules only, and its value is an integer sum.
+		// (1) the per-enemy-type rule reads (target types, default armour, cloak) are cached per type name, because rules do not change in a game;
+		// (2) the score per candidate is cached until observedEnemyValue changes: every write to it bumps observedVersion (Observe, ObserveFogOnly, Load).
+		// No allocation per call after the first score of a type. DEV builds re-check every ScoreShadowEvery-th cached answer against a fresh computation.
+		readonly struct EnemyRules
+		{
+			public readonly BitSet<TargetableType> Targets;
+			public readonly string Armor;
+			public readonly bool Cloaks;
+
+			public EnemyRules(ActorInfo enemy)
+			{
+				Targets = enemy.GetAllTargetTypes();
+				Armor = enemy.TraitInfos<ArmorInfo>().FirstOrDefault(a => a.InstanceName == null && a.EnabledByDefault)?.Type;
+				Cloaks = enemy.HasTraitInfo<CloakInfo>();
+			}
+		}
+
+		readonly Dictionary<string, EnemyRules> enemyRules = new();
+		readonly Dictionary<string, long> scoreCache = new();
+		int observedVersion;
+		int scoreCacheVersion = -1;
+#if CAMEO_DEV_LOGGING
+		const int ScoreShadowEvery = 64;
+		int scoreShadowCount;
+#endif
+
 		int nextObservation;
 		bool fogOnly;
 
@@ -101,6 +129,7 @@ namespace OpenRA.Mods.CA.Traits
 				sample = OmniscientSample();
 
 			Smooth(observedEnemyValue, sample);
+			observedVersion++;
 		}
 
 		/// <summary>
@@ -114,13 +143,17 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				fogOnly = true;
 				observedEnemyValue.Clear();
+				observedVersion++;
 			}
 
 			if (provider == null || !BotPeriod.CarryDue(ref nextObservation, world.WorldTick, interval))
 				return;
 
 			if (provider.TryGetEnemyComposition(out var sample))
+			{
 				Smooth(observedEnemyValue, sample);
+				observedVersion++;
+			}
 		}
 
 		/// <summary>UNIT-ALL-01: how well the candidate's weapons answer the observed enemy army (the Versus-weighted value of what was seen); 0 when nothing was seen.</summary>
@@ -183,6 +216,68 @@ namespace OpenRA.Mods.CA.Traits
 
 		long Score(ActorInfo candidate)
 		{
+			if (scoreCacheVersion != observedVersion)
+			{
+				scoreCache.Clear();
+				scoreCacheVersion = observedVersion;
+			}
+
+			if (scoreCache.TryGetValue(candidate.Name, out var cached))
+			{
+#if CAMEO_DEV_LOGGING
+				if (++scoreShadowCount % ScoreShadowEvery == 0)
+				{
+					var fresh = ScoreFresh(candidate);
+					if (fresh != cached)
+						Log.Write("debug", $"AI ({player.ClientIndex}): PERF-BOTTICK-01 SHADOW-MISMATCH counter-score {candidate.Name} cached {cached} fresh {fresh} version {observedVersion} tick {world.WorldTick}");
+				}
+#endif
+				return cached;
+			}
+
+			return scoreCache[candidate.Name] = ScoreCached(candidate);
+		}
+
+		/// <summary>The same sum as <see cref="ScoreFresh"/>, with the static per-enemy-type rule reads taken from <see cref="enemyRules"/>.</summary>
+		long ScoreCached(ActorInfo candidate)
+		{
+			var weapons = Profile(candidate);
+			if (weapons.Length == 0)
+				return 0;
+
+			var detects = candidate.HasTraitInfo<DetectCloakedInfo>();
+			var score = 0L;
+			foreach (var (type, value) in observedEnemyValue)
+			{
+				if (!enemyRules.TryGetValue(type, out var rules))
+				{
+					if (!world.Map.Rules.Actors.TryGetValue(type, out var enemy))
+						continue;
+
+					enemyRules[type] = rules = new EnemyRules(enemy);
+				}
+
+				var effect = 0;
+				foreach (var w in weapons)
+					if (w.Valid.Overlaps(rules.Targets) && !w.Invalid.Overlaps(rules.Targets))
+						effect = Math.Max(effect, rules.Armor == null ? 100 : w.Versus.GetValueOrDefault(rules.Armor, 100));
+
+				if (effect == 0)
+					continue;
+
+				if (detects && rules.Cloaks)
+					effect *= 2;
+
+				score += (long)value * effect / 100;
+			}
+
+			return score;
+		}
+
+#if CAMEO_DEV_LOGGING
+		/// <summary>The pre-PERF-BOTTICK-01 computation, unchanged: the DEV shadow check's reference (compiled out of Release).</summary>
+		long ScoreFresh(ActorInfo candidate)
+		{
 			var weapons = Profile(candidate);
 			if (weapons.Length == 0)
 				return 0;
@@ -212,6 +307,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			return score;
 		}
+#endif
 
 		WeaponProfile[] Profile(ActorInfo candidate)
 		{
@@ -260,6 +356,8 @@ namespace OpenRA.Mods.CA.Traits
 				observedEnemyValue.Clear();
 				for (var i = 0; i < Math.Min(t.Length, v.Length); i++)
 					observedEnemyValue[t[i]] = v[i];
+
+				observedVersion++;
 			}
 		}
 	}
