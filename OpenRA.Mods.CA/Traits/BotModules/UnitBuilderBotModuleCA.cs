@@ -203,6 +203,9 @@ namespace OpenRA.Mods.CA.Traits
 			"A weight multiplier on the core only (capped by CoreFocusMaxPct); every other weight, never-built types included, stays as the roll made it. 0 = off.")]
 		public readonly int CoreFocusSharePct = 0;
 
+		[Desc("CONSOLIDATE-03 P5 (DEV only, record only): write unit_pick_trace.csv, one row per roll draw, empty roll, post-draw outcome and queue pass (the equivalence trace of the unit pick). Compiled out of release builds; changes no decision.")]
+		public readonly bool UnitPickTrace = false;
+
 		[Desc("HANS-PROFILE-01: how many types form the core of a queue.")]
 		public readonly int CoreFocusCount = 3;
 
@@ -1908,6 +1911,7 @@ namespace OpenRA.Mods.CA.Traits
 				var skip = new HashSet<string>(StringComparer.Ordinal);
 				var shares = GetUnitsToBuildForCategory(queue.Info.Type);
 				var baselineTried = false;
+				PickTraceFillStart(queue);
 
 				while (UnitProducerServiceCA.SlotAvailable(freeSlots, batch.PendingOf(queue)))
 				{
@@ -1946,6 +1950,7 @@ namespace OpenRA.Mods.CA.Traits
 					// UNIT-ALL-01: no candidate left for the roll ends this queue's fill; the composition fallback and the two floor picks below belong to the layers the roll replaces.
 					if (roll && unit == null)
 					{
+						PickTraceNone(queue, skip.Count, held, batch);
 						// the composition (now only a bias profile) ends with the fill, as it did when the old pick came up empty
 						if (skip.Count == 0 && activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
 							RevertToBaselineComposition();
@@ -2017,6 +2022,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, refusedBy);
+						PickTraceRefuse(queue, skip.Count, refusedBy, name, held, -1, -1, batch);
 						Reject();
 						continue;
 					}
@@ -2028,6 +2034,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, "headroom");
+						PickTraceRefuse(queue, skip.Count, "headroom", name, held, -1, -1, batch);
 						Reject();
 						continue;
 					}
@@ -2036,6 +2043,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, "capturer");
+						PickTraceRefuse(queue, skip.Count, "capturer", name, held, -1, -1, batch);
 						Reject();
 						continue;
 					}
@@ -2052,6 +2060,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, "aircraft");
+						PickTraceRefuse(queue, skip.Count, "aircraft", name, held, -1, -1, batch);
 						Reject();
 						continue;
 					}
@@ -2076,10 +2085,12 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, "afford_cash");
+						PickTraceRefuse(queue, skip.Count, "afford_cash", name, held, cost, fullCost, batch);
 						Reject();
 						continue;
 					}
 
+					PickTraceAccept(queue, skip.Count, name, held, cost, fullCost, paygo, leaned, batch);
 					SetUnitInterval(name);
 					bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
 					NotifyStarted(name, queue.Info.Type);
@@ -2103,6 +2114,8 @@ namespace OpenRA.Mods.CA.Traits
 					if (activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
 						AddToActiveCompositionProducedValue(unit);
 				}
+
+				PickTraceFillEnd(queue);
 
 				// INFANTRY-REJECT-LOG-01 (DEV only): this queue's pass ended; idle = nothing queued or ordered in it. One aggregated row per period.
 				if (logThis)
@@ -2943,6 +2956,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (items.Count == 0)
 			{
+				PickTraceEmpty(queue, skip.Count, queueRoles);
 				RollEmptyLog(queue.Info.Type, rollExcluded.Count > 0 ? "all_excluded" : "none_listed_buildable");
 				return null;
 			}
@@ -3019,6 +3033,7 @@ namespace OpenRA.Mods.CA.Traits
 			var pick = UnitRoll.Pick(units, BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(UnitRoll.Sum(units)));
 			rollFirst = !rollOrdered.Contains(pool[pick].Name);
 			RollPickLog(queue.Info.Type, pool, weights, pick, rollFirst, fractions, biases, counterPcts, boosts);
+			PickTraceDraw(queue, pool, units, pick, skip.Count, queueRoles);
 			return pool[pick];
 		}
 
