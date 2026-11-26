@@ -254,6 +254,26 @@ namespace OpenRA.Mods.CA.Traits
 
 			return at;
 		}
+
+		/// <summary>
+		/// REF-PREFETCH-FRESH (row ref_prefetch_fresh, Sol V08F_CUMREV_SOL_01 finding 2): removes from <paramref name="best"/> every member that is a relaxed (fallback spacing)
+		/// site and not <paramref name="keep"/> (an order already issued), in list order, and returns them. A relaxed member is only valid while the exhaustive strict
+		/// certificate that promoted it is current; the caller drops them at the READY flip (the terminal proof) and when a strict site appears.
+		/// </summary>
+		public static List<T> TakeRelaxed<T>(List<T> best, Func<T, bool> isRelaxed, Func<T, bool> keep)
+		{
+			var taken = new List<T>();
+			for (var i = 0; i < best.Count; i++)
+			{
+				if (!isRelaxed(best[i]) || keep(best[i]))
+					continue;
+
+				taken.Add(best[i]);
+				best.RemoveAt(i--);
+			}
+
+			return taken;
+		}
 	}
 
 	/// <summary>

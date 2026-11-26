@@ -425,7 +425,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var plan = Source(PlanFile);
 			Assert.That(plan, Does.Contain("foreach (var stage in BaseBuildTiersCA.Order(snapshot.SustainedActive, snapshot.TierLine))"));
-			Assert.That(plan, Does.Contain("if (!BaseBuildTiersCA.Open(stage, snapshot.TierLine, snapshot.Bank, snapshot.LowCashCut, snapshot.SustainedActive, snapshot.DefenceThreatSeen, cycleOffered))\n\t\t\t\t\tcontinue;"));
+			Assert.That(plan, Does.Contain("if (!BaseBuildTiersCA.Open(stage, snapshot.TierLine, snapshot.Bank, snapshot.LowCashCut, snapshot.SustainedActive, snapshot.DefenceThreatSeen, BaseBuildTiersCA.CycleHolds(cycleOffered, snapshot.S8RejectedFallthrough)))\n\t\t\t\t\tcontinue;"));
 			Assert.That(plan, Does.Contain("cycleOffered |= stage == BaseBuildStage.S8ProductionCycle && candidate.Name != null;"));
 			Assert.That(plan, Does.Contain("public bool LowCashCut;"));
 

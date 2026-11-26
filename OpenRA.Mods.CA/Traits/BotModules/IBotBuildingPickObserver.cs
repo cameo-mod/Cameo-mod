@@ -30,5 +30,13 @@ namespace OpenRA.Mods.CA.Traits
 		/// <paramref name="stage"/>; <paramref name="detail"/> says why it was rejected) or not_offered (<paramref name="stage"/> returned; <paramref name="detail"/> says why).
 		/// The observer dedupes per (player, queue, type) and rate-limits.</summary>
 		void BuildingSkipped(Player owner, int tick, string actor, string queue, string stage, string reason, string detail);
+
+		/// <summary>REF2-FIRST-01 (row ref2_verdict): the second-refinery gate's verdict when a radar or 2nd production start was asked for: held_radar, held_prod2 (<paramref name="detail"/> = the
+		/// actor), due, not_due (<paramref name="detail"/> = why) or bound_expired. The observer dedupes on a changed verdict and rate-limits. Default: ignored.</summary>
+		void Ref2Verdict(Player owner, int tick, string verdict, string detail, int refineries, string queue) { }
+
+		/// <summary>REF-TIER-01 (row ref_tier): the refinery target floor's state: <paramref name="verdict"/> = met, below_target, below_no_anchor (the map caps it) or off; <paramref name="detail"/> = refineries,
+		/// target, personality percent, radar, tech and anchor flags. The observer writes one row per changed (verdict, detail, queue) and never repeats. Default: ignored.</summary>
+		void RefTierVerdict(Player owner, int tick, string verdict, string detail, int target, int refineries, string queue) { }
 	}
 }

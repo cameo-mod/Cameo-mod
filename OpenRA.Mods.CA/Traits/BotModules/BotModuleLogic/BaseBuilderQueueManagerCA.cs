@@ -160,6 +160,11 @@ namespace OpenRA.Mods.CA.Traits
 		bool UnlistedOnceOn => baseBuilder.UnlistedOnceArmed && !ablateUnlistedOnce.Off(player, AblationIds.Af2UnlistedOnce);
 		AblationLatch ablateRefineryEconomyGate;
 		bool RefineryEconomyGateOn => baseBuilder.RefineryEconomyGateArmed && !ablateRefineryEconomyGate.Off(player, AblationIds.RefineryEconomyGate);
+
+		// NO-CANCEL-01 (row bb_no_cancel, designs _17/_17B): the row and its ablation latch live on the base builder (one latch for the demand unwind and
+		// these sites). Every removal site below keeps its existing condition and adds NoCancelGatesCA.MayCancel with &&, so the row can only withhold a
+		// removal; row off = today byte for byte.
+		bool NoCancelRowOn => baseBuilder.NoCancelArmed;
 		readonly Dictionary<string, bool> unlistedKinds = new();
 		string lastCycledProduction;
 
@@ -798,6 +803,7 @@ namespace OpenRA.Mods.CA.Traits
 						if (stuckConyard != null)
 						{
 							baseBuilder.RelocationHoldConyard = stuckConyard;
+							var noCancelOn = NoCancelRowOn;
 							foreach (var queue in stuckConyard.TraitsImplementing<ProductionQueue>())
 							{
 								var latchSnapshot = queue.AllQueued().ToArray();
@@ -816,9 +822,21 @@ namespace OpenRA.Mods.CA.Traits
 										continue;
 									}
 
+									// NO-CANCEL-01 (bb_no_cancel, site 2, design _17 2): the latch tripped because the base keeps offering no cell, which is
+									// proof only for an entry that is waiting for one (READY). Row on: an in-progress or merely queued entry is left to finish
+									// (a Held record instead of the cancel); the nudge to the expansion modules and RelocationHoldConyard below stay as they are.
+									if (!NoCancelGatesCA.MayCancel(noCancelOn, item.Done, true))
+									{
+										EmitQueueTransition(queue, stuckConyard, item, item.Item, QueueCategoryOf(item.Item),
+											BotQueueTransitionKind.Held, BotQueueTransitionReason.RelocationLatch);
+										baseBuilder.TraceNoCancel(noCancelOn, "CANCEL-SUPPRESSED", 2, item.Item, queue.Actor);
+										continue;
+									}
+
 									// The record resolves on the tick the item actually
 									// leaves the queue (F2); queues outside this manager's
 									// category surface as Removed on their own manager.
+									baseBuilder.TraceNoCancel(noCancelOn, "CANCEL-UNPLACEABLE", 2, item.Item, queue.Actor);
 									NotePendingTerminal(queue, item, item.Item, BotQueueTransitionKind.Cancelled,
 										BotQueueTransitionReason.RelocationLatch, BotQueueCancellationClass.Production);
 									bot.QueueOrder(Order.CancelProduction(queue.Actor, item.Item, 1));
@@ -1006,6 +1024,11 @@ namespace OpenRA.Mods.CA.Traits
 					return TickQueuePlanned(bot, queue);
 
 				var item = ChooseBuildingToBuild(queue);
+
+				// REF2-FIRST-01 (rows ref2_before_radar, ref2_before_prod2): a NEW radar or 2nd production start waits while ref2 is due (nothing in flight is cancelled).
+				if (item != null && Ref2Holds(item, ref2Name => queue.BuildableItems().Any(ref2Item => ref2Item.Name == ref2Name)))
+					item = null;
+
 				if (item == null)
 				{
 					cashClock.Reset(queue.Actor.ActorID);
@@ -1250,7 +1273,15 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					if (BaseBuilderQueueEvalCA.LimitReached(AIUtils.CountBuildingByCommonName(new HashSet<string> { currentBuilding.Item }, player), currentLimit))
 					{
-						AIUtils.BotDebug($"{player} has already has enough {currentBuilding.Item}; cancelling production");
+						// NO-CANCEL-01 (bb_no_cancel, site 3, design _17 2): the building is complete and legal to place, so the limit is a choice, never an
+						// unplaceable proof (proof = false). Row on: no cancel, no hold; it falls through to the normal placement below as an ordinary item
+						// (a paid-for building is never refunded for a limit; if it then has no cell it ends at the saturation site, class (b)). Opus ruling: this is intended (binding READY rule, the money is spent); a cap overshoot of at most one per item is accepted, caps stop new STARTS, not placements. Row off =
+						// the block below byte for byte.
+						var noCancelOn = NoCancelRowOn;
+						var limitMayCancel = NoCancelGatesCA.MayCancel(noCancelOn, currentBuilding.Done, false);
+						AIUtils.BotDebug(limitMayCancel
+							? $"{player} has already has enough {currentBuilding.Item}; cancelling production"
+							: $"{player} has already has enough {currentBuilding.Item}; placing the completed building (bb_no_cancel)");
 
 						// E91BA74C/D831BBCB + Sonnet 666ddd0bd default-off fix: the limit
 						// cancel consults protection ONLY while the law is active AND the
@@ -1258,7 +1289,11 @@ namespace OpenRA.Mods.CA.Traits
 						// unconditionally exactly like master. A protected item needs a live
 						// certificate for the settled instance (E3) or it holds and keeps
 						// trying to place.
-						if (!ProtectionApplies(currentBuilding.Item)
+						if (!limitMayCancel)
+						{
+							baseBuilder.TraceNoCancel(noCancelOn, "LIMIT-OVERRIDE", 3, currentBuilding.Item, queue.Actor);
+						}
+						else if (!ProtectionApplies(currentBuilding.Item)
 							|| CertificateAuthorizes(queue, currentBuilding.Item, currentBuilding))
 						{
 							// Master-identical binding (A966ED70 E3 + default-off identity):
@@ -1477,9 +1512,13 @@ namespace OpenRA.Mods.CA.Traits
 							// certificate re-verifies the exact atom sequence against the live
 							// world at the cancel point; any drift (or a no-provider scan that
 							// could never certify) fails closed to the deferred hold.
-							if (CertificateAuthorizes(queue, currentBuilding.Item, currentBuilding))
+							// NO-CANCEL-01 (bb_no_cancel, site 4, class (b)): the certificate is the unplaceable proof; the guard adds the READY read
+							// (row on) and can only withhold the cancel, which then ends in the stale-certificate hold below.
+							if (CertificateAuthorizes(queue, currentBuilding.Item, currentBuilding)
+								&& NoCancelGatesCA.MayCancel(NoCancelRowOn, currentBuilding.Done, true))
 							{
 								AIUtils.BotDebug($"{player} cancels {currentBuilding.Item}: refinery domain exhausted at tick {world.WorldTick}");
+								baseBuilder.TraceNoCancel(NoCancelRowOn, "CANCEL-UNPLACEABLE", 4, currentBuilding.Item, queue.Actor);
 								var cancelTarget = BaseBuilderQueueEvalCA.CancelBindTarget(
 									queue.AllQueued(), i => i.Item, currentBuilding.Item, currentBuilding);
 								NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
@@ -1519,9 +1558,14 @@ namespace OpenRA.Mods.CA.Traits
 						// cancels unconditionally exactly like master. A protected item needs
 						// a live exhaustion certificate or it holds (the latch snapshot and
 						// retry timer still arm, so recovery probes keep running while it waits).
-						if (!ProtectionApplies(currentBuilding.Item)
+						// NO-CANCEL-01 (bb_no_cancel, site 5, class (b)): the failure budget (this many consecutive full searches without a cell) is the
+						// unplaceable proof; the guard adds the READY read (row on) and can only withhold.
+						if ((!ProtectionApplies(currentBuilding.Item)
 							|| CertificateAuthorizes(queue, currentBuilding.Item, currentBuilding))
+							&& NoCancelGatesCA.MayCancel(NoCancelRowOn, currentBuilding.Done, true))
 						{
+							baseBuilder.TraceNoCancel(NoCancelRowOn, "CANCEL-UNPLACEABLE", 5, currentBuilding.Item, queue.Actor);
+
 							// Master-identical binding: CancelProduction removes the LAST
 							// same-name item — record that instance (equal to
 							// currentBuilding under the cert; the twin case resolves
@@ -1679,9 +1723,11 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		internal bool EpisodeCertifiedCancel(IBot bot, ProductionQueue queue, ProductionItem item)
 		{
-			if (!CertificateAuthorizes(queue, item.Item, item))
+			// NO-CANCEL-01 (bb_no_cancel, site 6, class (b)): the certificate is the proof; the guard adds the READY read (row on).
+			if (!CertificateAuthorizes(queue, item.Item, item) || !NoCancelGatesCA.MayCancel(NoCancelRowOn, item.Done, true))
 				return false;
 
+			baseBuilder.TraceNoCancel(NoCancelRowOn, "CANCEL-UNPLACEABLE", 6, item.Item, queue.Actor);
 			AIUtils.BotDebug($"{player} cancels {item.Item}: refinery search domain exhausted at tick {world.WorldTick}");
 			var cancelTarget = BaseBuilderQueueEvalCA.CancelBindTarget(queue.AllQueued(), i => i.Item, item.Item, item);
 			NotePendingTerminal(queue, cancelTarget, item.Item, BotQueueTransitionKind.Cancelled,
@@ -1817,7 +1863,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		// BP-2 (§19.15): a rules-derived radar provider — same two-trait check the Cameo planner runs
 		// (the assemblies cannot share the helper; keep the expression identical).
-		static bool IsRadarProvider(ActorInfo info)
+		internal static bool IsRadarProvider(ActorInfo info)
 		{
 			return info.HasTraitInfo<RangedGpsProviderInfo>() || info.HasTraitInfo<ProvidesRadarInfo>();
 		}
@@ -2861,7 +2907,7 @@ namespace OpenRA.Mods.CA.Traits
 				baseBuilder.RefineryGateFactoryPlacementFailed, now, baseBuilder.RefineryGateFirstStoodTick, b.RefineryFactoryWaitTicks);
 			var yardWithoutRefinery = count > 0 && baseBuilder.YardWithoutRefinery();
 			var verdict = RefineryFieldGateCA.Economy(true, count, yardWithoutRefinery, factoryBuildable, factoryOwnedOrQueued, factoryWaitReleased, now,
-				baseBuilder.RefineryGateLastRiseTick, b.RefineryMinIntervalTicks, false, -1, b.RefineryEssentialYieldTicks);
+				baseBuilder.RefineryGateLastRiseTick, baseBuilder.RefineryMinIntervalEffective, false, -1, b.RefineryEssentialYieldTicks);
 
 			// The first-copy scan runs only when the earlier steps admit the refinery and two refineries already stand or are queued.
 			if (verdict == RefineryFieldGateCA.EconomyVerdict.Allow && count >= 2)
@@ -2873,7 +2919,7 @@ namespace OpenRA.Mods.CA.Traits
 					baseBuilder.RefineryGateYieldSince = now;
 
 				verdict = RefineryFieldGateCA.Economy(true, count, yardWithoutRefinery, factoryBuildable, factoryOwnedOrQueued, factoryWaitReleased, now,
-					baseBuilder.RefineryGateLastRiseTick, b.RefineryMinIntervalTicks, essential, baseBuilder.RefineryGateYieldSince, b.RefineryEssentialYieldTicks);
+					baseBuilder.RefineryGateLastRiseTick, baseBuilder.RefineryMinIntervalEffective, essential, baseBuilder.RefineryGateYieldSince, b.RefineryEssentialYieldTicks);
 			}
 
 			// CM NIT: logged once per verdict change, not on every call.
@@ -2881,8 +2927,23 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				lastRefineryEconomyVerdict = verdict;
 				if (verdict != RefineryFieldGateCA.EconomyVerdict.Allow)
+				{
 					AIUtils.BotDebug("{0} holds the refinery pick: {1} (refineries {2})", queue.Actor.Owner, verdict, count);
+#if CAMEO_DEV_LOGGING
+					// Opus 11-26 (V08G): BotDebug reaches the in-game notification only; this puts the refinery-pick hold into the debug log file (DEV build, once per verdict change).
+					Log.Write("debug", $"AI ({player.ClientIndex}): REF-HOLD refinery pick held {verdict} refineries {count} tick {now} queue {Category}");
+#endif
+				}
 			}
+
+			// REF2-FIRST-01 (row ref2_floor): a due ref2 outranks the interval wait only (the first-war-factory wait stays: ref1, war factory, ref2).
+			if (verdict == RefineryFieldGateCA.EconomyVerdict.WaitInterval && Ref2OutranksInterval(buildableThings, count))
+				return false;
+
+			// REF-TIER-01 (row ref_tier_floor): below the tier target the interval wait is outranked too. The bounded first-copy yield still applies from the 3rd refinery on (tech chain and each building once
+			// win over the floor), the first-war-factory wait was already decided above, and nothing here holds a radar or production start (Ref2Holds is the only hold).
+			if (verdict == RefineryFieldGateCA.EconomyVerdict.WaitInterval && RefTierOutranksInterval(count))
+				return RefTierYieldVerdict(buildableThings, count, now, yardWithoutRefinery, factoryBuildable, factoryOwnedOrQueued, factoryWaitReleased) != RefineryFieldGateCA.EconomyVerdict.Allow;
 
 			return verdict != RefineryFieldGateCA.EconomyVerdict.Allow;
 		}
@@ -4093,7 +4154,7 @@ namespace OpenRA.Mods.CA.Traits
 						// between yards) and its best cell must strictly reduce the frontier-to-aim distance. No forward cell: the link is placed at a base cell, the planner parks the target, and
 						// neither the random-resource nor the toward-the-enemy fallback below runs (they put plants "all over the place").
 						var advanceOnly = crawlLaw != null && crawlLaw.CrawlAdvanceOnly;
-						var frontierTiles = advanceOnly ? OwnBuildableAreaTiles() : null;
+						var frontierTiles = advanceOnly ? OwnBuildableAreaTiles(crawlLaw.CrawlAllyAnchor) : null;
 						var anchor = advanceOnly && BaseBuilderQueueEvalCA.NearestTile(frontierTiles, crawlAim.Value) is { } frontierTile
 							? frontierTile
 							: crawlLaw?.CrawlFrontierAnchor ?? baseCenter;
@@ -4158,7 +4219,8 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		// crawl_advance_only: the footprint tiles of our buildable-area buildings, the frontier the crawl closes on the aim from (the planner measures the same set).
-		List<CPos> OwnBuildableAreaTiles()
+		// crawl_ally_anchor (light team crawl): with the row on the visible allied buildable-area buildings join the frontier (the engine lets us build next to them with allybuild on).
+		List<CPos> OwnBuildableAreaTiles(bool withAllied = false)
 		{
 			var tiles = new List<CPos>();
 			if (playerBuildings == null)
@@ -4173,6 +4235,22 @@ namespace OpenRA.Mods.CA.Traits
 					tiles.AddRange(info.Tiles(b.Location));
 				else
 					tiles.Add(b.Location);
+			}
+
+			if (withAllied)
+			{
+				foreach (var b in world.ActorsHavingTrait<GivesBuildableArea>())
+				{
+					// The engine skips an area whose provider allows placement only from itself (AnyGivesBuildableArea: OnlyAllowPlacementFromSelf).
+					if (b.IsDead || !b.IsInWorld || b.Owner == player || b.Owner.RelationshipWith(player) != PlayerRelationship.Ally
+						|| !b.CanBeViewedByPlayer(player) || b.TraitsImplementing<GivesBuildableArea>().All(g => g.Info.OnlyAllowPlacementFromSelf))
+						continue;
+
+					if (b.Info.TraitInfoOrDefault<BuildingInfo>() is { } info)
+						tiles.AddRange(info.Tiles(b.Location));
+					else
+						tiles.Add(b.Location);
+				}
 			}
 
 			return tiles;

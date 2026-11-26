@@ -199,6 +199,19 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("TIER-MIX-01: the share of the price (percent) the bank must already hold for a lean pick; the rest is paid progressively as income arrives.")]
 		public readonly int TechLeanBankPct = 30;
 
+		[Desc("HANS-PROFILE-01 (row ub_core_focus; needs UnitRoll): the share (percent of the roll weight of the types this bot has built once) that the CoreFocusCount dearest affordable types of a queue should hold.",
+			"A weight multiplier on the core only (capped by CoreFocusMaxPct); every other weight, never-built types included, stays as the roll made it. 0 = off.")]
+		public readonly int CoreFocusSharePct = 0;
+
+		[Desc("HANS-PROFILE-01: how many types form the core of a queue.")]
+		public readonly int CoreFocusCount = 3;
+
+		[Desc("HANS-PROFILE-01: the largest weight multiplier of the core, in percent (800 = x8).")]
+		public readonly int CoreFocusMaxPct = 800;
+
+		[Desc("HANS-PROFILE-01: a type is affordable for the core once the bank holds this percent of its price (the same bar as TechLeanBankPct).")]
+		public readonly int CoreFocusBankPct = 30;
+
 		[Desc("PERF-BOTTICK-01 (row ub_affordable_pool; needs UnitRoll): the roll draws only among the pool members that pass the cash/afford check a pick meets after the roll, with the weights",
 			"of the whole pool; none passes = the queue's fill ends for this visit. Off = the roll over the whole pool, a refused pick re-rolled.")]
 		public readonly bool AffordablePool = false;
@@ -248,9 +261,9 @@ namespace OpenRA.Mods.CA.Traits
 			"Default false keeps the previous behaviour.")]
 		public readonly bool CountQueuedAircraft = false;
 
-		[Desc("CA F2p2 / DESIGN 19.5: count enemy air threats (for MaintainAirSuperiority) from the observed enemy composition instead of",
-			"scanning every actor in the world. Bots without a fog-observing composition provider (classic) keep the world count.",
-			"Default false keeps the previous behaviour.")]
+		[Desc("CA F2p2 / DESIGN 19.5 / FOG-AIR-01: count enemy air threats (for MaintainAirSuperiority) from the observed enemy composition instead of",
+			"scanning every actor in the world. While it is on, a missing provider or an empty observation counts 0 (nothing seen), never the world count.",
+			"The world count is used only while it is off. Default false keeps the previous behaviour.")]
 		public readonly bool ObservedAirThreats = false;
 
 		[Desc("If MaintainAirSuperiority is true and this is non-zero,",
@@ -535,7 +548,7 @@ namespace OpenRA.Mods.CA.Traits
 		// SwitchCondition result; true when no condition is configured.
 		bool switchesActive;
 		bool CountQueued => Info.CountQueuedAircraft && switchesActive;
-		bool ObservedThreats => Info.ObservedAirThreats && switchesActive;
+		bool ObservedThreats => Info.ObservedAirThreats && switchesActive && !ablateFogAir.Off(player, AblationIds.FogAirObserved);
 
 		UnitComposition activeComposition;
 		int activeCompositionProducedValue;
@@ -623,6 +636,7 @@ namespace OpenRA.Mods.CA.Traits
 		// ABLATE-01 hooks (DEV-only provider; absent in release = always on): one cached answer per row.
 		AblationLatch ablateFairProducer, ablateRoleMix, ablateDerivedWeights, ablateQueueDepth, ablateRecovery, ablateUpgradeService, ablateUpgradeBuildingAddons, ablateUpgradeOnce, ablateCapturerStrict, ablateCapturerWorkers, ablateUnitMixCapturer;
 		AblationLatch ablateMcvRebuild, ablateRequestSlot; // MCV-REBUILD-01
+		AblationLatch ablateFogAir; // FOG-AIR-01 (row fog_air_observed): off = the legacy world count of enemy aircraft
 		bool McvRebuildOn => switchesActive && Info.McvRebuildFirst && !ablateMcvRebuild.Off(player, AblationIds.McvRebuildFirst);
 		int RequestDropSweeps => McvRebuildCA.DropLimit(switchesActive && Info.RequestSlotFastDrop && !ablateRequestSlot.Off(player, AblationIds.RequestSlot),
 			RequestDropFailedSweeps, Info.RequestDropFailedSweepsFast);
@@ -1936,6 +1950,9 @@ namespace OpenRA.Mods.CA.Traits
 					if (depthQueue && QueueDepthCA.Covered(held, loadedTicks, visitGapTicks))
 						break;
 
+					// HANS-PROFILE-01 (ub_core_focus): the bank this roll sees, for the core's affordability test (0 while the row is off).
+					rollBankLeft = CoreFocusOn ? batch.BankLeft : 0;
+
 					// P4: below the armed-infantry floor this queue prefers the best
 					// admissible armed infantry it can serve — the normal pick only runs
 					// when none is left (a rejected floor pick is retried next-best first).
@@ -3056,6 +3073,10 @@ namespace OpenRA.Mods.CA.Traits
 
 			var weights = UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct, boosts);
 
+			// HANS-PROFILE-01 (ub_core_focus): the dearest affordable types built once get a weight multiplier (a bias; every other weight stays as the roll made it).
+			if (CoreFocusOn)
+				weights = FocusCore(queue, pool, weights);
+
 			// PERF-BOTTICK-01 (row ub_affordable_pool): draw only among the members that pass the fill's cash/afford check (RollCashAdmits, the same terms as the gate after the pick),
 			// each keeping the weight it has in the whole pool. None passes = this queue's fill ends for the visit. Every other refusal reason is still met after the pick, as before.
 			if (AffordablePoolOn && rollCash.Batch != null)
@@ -3540,14 +3561,20 @@ namespace OpenRA.Mods.CA.Traits
 			return result;
 		}
 
-		// CA F2p2 / DESIGN 19.5: with ObservedAirThreats the enemy air threats come from the OBSERVED enemy composition
-		// (fog memory). Without a provider that observes through fog (the classic bot) - or with the switch off - the
-		// legacy omniscient world count stays, so the classic A/B reference is unchanged.
+		// CA F2p2 / DESIGN 19.5 + FOG-AIR-01 (Opus): with ObservedAirThreats the enemy air threats come from the OBSERVED enemy composition
+		// (fog memory) and from nothing else: no provider, or a provider with nothing seen yet, is 0 - never the omniscient world count.
+		// The world count stays reachable only while ObservedThreats is off (the switch off, the ablation row off, or the classic instance,
+		// whose SwitchCondition keeps it off), so the classic A/B reference is unchanged.
 		int EnemyAirThreatCount()
 		{
-			if (ObservedThreats && compositionProvider != null && compositionProvider.TryGetEnemyComposition(out var valueByType))
-				return AirLimits.EstimateObservedThreatCount(valueByType, Info.AirThreatUnits,
-					type => world.Map.Rules.Actors.TryGetValue(type, out var ai) ? ai.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0 : 0);
+			if (ObservedThreats)
+			{
+				if (compositionProvider != null && compositionProvider.TryGetEnemyComposition(out var valueByType))
+					return AirLimits.EstimateObservedThreatCount(valueByType, Info.AirThreatUnits,
+						type => world.Map.Rules.Actors.TryGetValue(type, out var ai) ? ai.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0 : 0);
+
+				return 0;
+			}
 
 			return player.World.Actors.Count(a => a.Owner.RelationshipWith(player) == PlayerRelationship.Enemy && Info.AirThreatUnits.Contains(a.Info.Name));
 		}

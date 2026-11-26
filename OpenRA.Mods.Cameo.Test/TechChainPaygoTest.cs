@@ -85,7 +85,7 @@ namespace OpenRA.Mods.Cameo.Test
 			// BUILD-ALL-B: the listed first-copy waiver (bb_build_all_listed) is tried first; with it off the paygo test is the old one.
 			Assert.That(src, Does.Contain("if (!listedWaived && (!techChainStart || !(baseBuilder.TechChainPaygoArmed && TechChainPaygo.Waives(c.Stage, s.Bank, TechChainInFlight()))))"),
 				"switch off or a non-tech start = the old A6 refusal");
-			Assert.That(src, Does.Contain("if (techChainStart || c.Stage == BaseBuildStage.S5CoreOnce)\n\t\t\t\t\t\tTechChainA6HoldRecord(start.Name, c.Stage, s.Bank, startCost);\n\n\t\t\t\t\treturn false;"));
+			Assert.That(src, Does.Contain("if (techChainStart || c.Stage == BaseBuildStage.S5CoreOnce)\n\t\t\t\t\t\tTechChainA6HoldRecord(start.Name, c.Stage, s.Bank, startCost);\n\n\t\t\t\t\tcashCost = startCost;\n\t\t\t\t\treturn false;"), "S8-CASH-HOLD: the refused start's cost is reported to the cash hold");
 		}
 
 		[Test]

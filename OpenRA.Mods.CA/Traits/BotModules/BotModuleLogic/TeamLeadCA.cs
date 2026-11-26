@@ -555,6 +555,9 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>The tick the first pushed squad reported contact (-1 = none yet).</summary>
 		public int EngagedTick = -1;
 
+		/// <summary>Q8b (sq_hunt_follow): the tick a hunt order last moved on to the team's next hunt cell (-1 = never).</summary>
+		public int HuntFollowTick = -1;
+
 		public TeamLeadOrderPhase Phase => Cancelled ? TeamLeadOrderPhase.Done : !Pushed ? TeamLeadOrderPhase.Gather
 			: EngagedTick >= 0 ? TeamLeadOrderPhase.Engaged : TeamLeadOrderPhase.Push;
 

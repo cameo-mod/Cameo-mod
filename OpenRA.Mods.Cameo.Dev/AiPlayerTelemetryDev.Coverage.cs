@@ -50,6 +50,9 @@ namespace OpenRA.Mods.Cameo.Traits
 			public readonly HashSet<string> UpgradeDone = new(StringComparer.Ordinal);
 			public string LastRefineryGate;
 			public int LastRefineryGateTick = -1;
+			public string LastRef2Key;
+			public int LastRef2Tick = -1;
+			public string LastRefTierKey;
 			public readonly Dictionary<string, int> LastSkipTick = new(StringComparer.Ordinal);
 		}
 
@@ -270,6 +273,72 @@ namespace OpenRA.Mods.Cameo.Traits
 			ObserverRow(owner, "bb_refinery_held", b =>
 			{
 				AiMatchLogWriter.AppendString(b, "gate", gate);
+				AiMatchLogWriter.AppendNumber(b, "refineries", refineries);
+				AiMatchLogWriter.AppendString(b, "queue", queue);
+			});
+		}
+
+		void IBotBuildingPickObserver.Ref2Verdict(OpenRA.Player owner, int tick, string verdict, string detail, int refineries, string queue)
+		{
+			if (writer == null || ended)
+				return;
+
+			CoverageSeat cov;
+			try
+			{
+				var seat = BotSeat(owner);
+				cov = seat == null ? null : CoverageFor(seat);
+			}
+			catch (Exception e)
+			{
+				Fail(e, "ref2_verdict");
+				return;
+			}
+
+			// One row per changed (verdict, detail, queue), or again after RefineryHeldRepeatTicks.
+			var key = verdict + "|" + detail + "@" + queue;
+			if (cov == null || (cov.LastRef2Key == key && cov.LastRef2Tick >= 0 && tick - cov.LastRef2Tick < RefineryHeldRepeatTicks))
+				return;
+
+			cov.LastRef2Key = key;
+			cov.LastRef2Tick = tick;
+			ObserverRow(owner, "ref2_verdict", b =>
+			{
+				AiMatchLogWriter.AppendString(b, "verdict", verdict);
+				AiMatchLogWriter.AppendString(b, "detail", detail);
+				AiMatchLogWriter.AppendNumber(b, "refineries", refineries);
+				AiMatchLogWriter.AppendString(b, "queue", queue);
+			});
+		}
+
+		void IBotBuildingPickObserver.RefTierVerdict(OpenRA.Player owner, int tick, string verdict, string detail, int target, int refineries, string queue)
+		{
+			if (writer == null || ended)
+				return;
+
+			CoverageSeat cov;
+			try
+			{
+				var seat = BotSeat(owner);
+				cov = seat == null ? null : CoverageFor(seat);
+			}
+			catch (Exception e)
+			{
+				Fail(e, "ref_tier");
+				return;
+			}
+
+			// One row per CHANGED (verdict, detail, queue), never repeated: a map with no claimable field writes its below_no_anchor row once.
+			var key = verdict + "|" + detail + "@" + queue;
+			if (cov == null || cov.LastRefTierKey == key)
+				return;
+
+			cov.LastRefTierKey = key;
+			ObserverRow(owner, "ref_tier", b =>
+			{
+				AiMatchLogWriter.AppendString(b, "verdict", verdict);
+				AiMatchLogWriter.AppendString(b, "detail", detail);
+				AiMatchLogWriter.AppendNumber(b, "target", target);
 				AiMatchLogWriter.AppendNumber(b, "refineries", refineries);
 				AiMatchLogWriter.AppendString(b, "queue", queue);
 			});

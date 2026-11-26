@@ -359,6 +359,32 @@ namespace OpenRA.Mods.CA.Traits
 			"instead of the TechChainTypes list. Needs BbPipeline01. Off = S5 and A6 unchanged. Gated by SwitchCondition; row bb_build_all_listed.")]
 		public readonly bool BbBuildAllListed = false;
 
+		[Desc("NO-CANCEL-01 (BS-03 c10 port, designs _17/_17B; Opus V08G): a building in production is never cancelled for a choice. A removal site keeps its existing",
+			"condition and adds a guard: only a READY item with proof that no legal cell exists may still be removed (demand unwind, relocation latch, limit reached,",
+			"refinery exhaustion, placement saturation, episode certificate). In-progress entries are held or finished instead. Gated by SwitchCondition; row bb_no_cancel (off = the six sites as before).")]
+		public readonly bool BbNoCancel = false;
+
+		[Desc("S8-STARVE-01 (Sol 58ADBC25, Opus V08G): under SUSTAINED cash an S8 (production cycle) type that is only OFFERED and then rejected (stage hold, failed feasibility, refused claim)",
+			"no longer holds S9 (extra defence) and S10 (fractions) back for the sweep; they run through their ordinary checks. An admitted S8 type still wins first, an empty cycle,",
+			"the low-cash cut, the feasibility budget and the S2/S7 refinery stages are unchanged. Gated by SwitchCondition; row bb_s8_rejected_fallthrough (off = the offer alone holds S9 and S10).")]
+		public readonly bool BbS8RejectedFallthrough = false;
+
+		[Desc("S8-CASH-HOLD (Opus V08G ruling, S8_STARVE_01 line 35): with bb_s8_rejected_fallthrough armed, an S8 production type that is eligible (buildable, within its limit, not delayed,",
+			"no power or space refusal, not rejected earlier this walk) and fails ONLY the cash test while the bank is at least S8HoldMinBankPercent of its cost holds back the S10 fractions of the",
+			"building queue for at most S8HoldMaxTicks (reason s8_cash_hold in the DEV rows). S9 defence, units and upgrades are never held. Gated by SwitchCondition; row bb_s8_cash_hold (off = no hold).")]
+		public readonly bool BbS8CashHold = false;
+
+		[Desc("S8-CASH-HOLD: the longest a cash-only S8 hold lasts, in ticks, counted from the first sweep that saw the type blocked. Learnable (DEV training only).")]
+		public readonly int S8HoldMaxTicks = 750;
+
+		[Desc("S8-CASH-HOLD: the hold applies only when the bank is at least this percent of the blocked type's cost (an affordable-soon factory). Learnable (DEV training only).")]
+		public readonly int S8HoldMinBankPercent = 75;
+
+		[Desc("REF-PREFETCH-FRESH (Sol V08F_CUMREV_SOL_01 finding 2, Opus V08G): a relaxed (fallback spacing) refinery site promoted into the K-list before the building is READY",
+			"is dropped at the READY flip (the candidate stream restarts its pass, so the next relaxed use rests on a current certificate), and a newly found strict site",
+			"outranks any relaxed one whatever the score classes say. Strict sites and an issued order are untouched. Gated by SwitchCondition; row ref_prefetch_fresh (off = as before).")]
+		public readonly bool RefPrefetchFresh = false;
+
 		[Desc("BUILD-ALL-B (user ruling 2026-11-25): the base builder never queues a terrain foundation (D2k concrete: a building without health that removes",
 			"itself unconditionally, FoundationExclusion) on any path, listed or not. Concrete use is planned by CONCRETE-PLAN-01 after the playtest.",
 			"Off = as before. Gated by SwitchCondition; row bb_no_foundation.")]
@@ -373,6 +399,41 @@ namespace OpenRA.Mods.CA.Traits
 			"zone demand through the wanted-refinery helper (its economy gate ref1 -> war factory -> ref2 and interval stay), one refinery in flight per player.",
 			"Off = S2 only for a yard without a refinery. Gated by SwitchCondition; row bb_refinery_s2.")]
 		public readonly bool BbRefineryAtS2 = false;
+
+		[Desc("REF2-FIRST-01 (USER BINDING 11-26, Opus): at least 2 refineries early. While fewer than 2 own refineries stand or are in production and a reachable field has room, the second refinery",
+			"(1) lifts the planner's zone cap by one, (2) outranks the refinery interval wait (the first-war-factory wait stays: ref1, war factory, ref2), (3) is placed BEFORE a radar provider",
+			"(TECH personality exempt; row ref2_before_radar) and BEFORE the 2nd or later production building of a role (RUSH personality exempt; row ref2_before_prod2). Never cancels; the hold ends",
+			"when ref2 is queued, after Ref2StallTicks startable without a refinery starting (row ref2_stall_release) or after Ref2FirstBoundTicks. No reachable field under its cap = no hold. Gated by SwitchCondition; rows ref2_before_radar, ref2_before_prod2, ref2_floor, ref2_stall_release.")]
+		public readonly bool Ref2First = false;
+
+		[Desc("REF2-FIRST-01: ticks after ref2 first became due at which the radar / 2nd production hold ends for good (the order never deadlocks).")]
+		public readonly int Ref2FirstBoundTicks = 3000;
+
+		[Desc("REF2-FIRST-01, row ref2_stall_release: ticks ref2 may stay startable (due, and the first-war-factory wait of the refinery economy gate is over) without a refinery starting before the",
+			"radar / 2nd production hold ends for good (the old order runs). The outer Ref2FirstBoundTicks bound stays. Rides the Ref2First switch.")]
+		public readonly int Ref2StallTicks = 750;
+
+		[Desc("REF-TIER-01 (USER BINDING 11-26, Opus): the refinery target is a FLOOR for refinery demand, not a hold: RefTierEarlyTarget early, plus RefTierRadarStep once an own radar provider stands, plus",
+			"RefTierTechStep once an own tech-centre building (TechChainTypes) stands (2 / 4 / 6), scaled by the personality prior (RefTierExpansionPct for expansion, RefTierRushPreRadarPct for rush while no radar",
+			"stands; row ref_tier_personality), rounded and clamped 1..8. While fewer own refineries stand or are in production the planner lifts every zone cap by one and the refinery interval wait is outranked",
+			"(the first-war-factory wait, the bounded first-copy yield and the expansion-refinery rules stay). The map caps it: only reachable fields with room and a claimable anchor are lifted. A lost radar or tech",
+			"centre drops the tier; refineries above the target are never sold. Gated by SwitchCondition; rows ref_tier_floor, ref_tier_personality.")]
+		public readonly bool RefTierFloor = false;
+
+		[Desc("REF-TIER-01: the refinery target before the radar provider stands (the prior the learning can replace).")]
+		public readonly int RefTierEarlyTarget = 2;
+
+		[Desc("REF-TIER-01: refineries added to the target once an own radar provider stands.")]
+		public readonly int RefTierRadarStep = 2;
+
+		[Desc("REF-TIER-01: refineries added to the target once an own tech-centre building stands.")]
+		public readonly int RefTierTechStep = 2;
+
+		[Desc("REF-TIER-01, row ref_tier_personality: the expansion personality's percent of the tier target (125 = x1.25).")]
+		public readonly int RefTierExpansionPct = 125;
+
+		[Desc("REF-TIER-01, row ref_tier_personality: the rush personality's percent of the tier target while no radar provider stands (75 = x0.75; 2 x 0.75 rounds back to 2, the ref2 minimum).")]
+		public readonly int RefTierRushPreRadarPct = 75;
 
 		[Desc("MODE-BIAS-01 (user ruling 2026-11-25), profile essentials: while the low-cash essentials logic is active (EssentialsOnlyBelowTierLine armed, a tier line, bank under it), the BuildingFractions",
 			"weights of the types that logic does not hold (EssentialsLowCashCA.Holds) are raised by MbEssentialsStrength in the staged planner's roll. Never a gate: every entry keeps a positive weight.",
@@ -440,6 +501,19 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("REF-FIELD-02: minimum ticks between two refineries once every construction yard has one.")]
 		public readonly int RefineryMinIntervalTicks = 1500;
+
+		[Desc("REF-INTERVAL-LADDER (BS-03 step 4 port, USER VALUE 2100 - 150 r): the minimum ticks between two refineries are read from the difficulty ladder instead of the flat",
+			"RefineryMinIntervalTicks: Noob 2250, Easiest 2100, Hard 1500, God 750 (equal steps). Needs RefineryEconomyGate. Gated by SwitchCondition; row rf_interval_ladder (off = the flat value).")]
+		public readonly bool RefineryIntervalLadder = false;
+
+		[Desc("REF-INTERVAL-LADDER: the interval at the easiest tier.")]
+		public readonly int RefineryMinIntervalEasiest = 2100;
+
+		[Desc("REF-INTERVAL-LADDER: the interval at the hardest tier.")]
+		public readonly int RefineryMinIntervalHardest = 750;
+
+		[Desc("REF-INTERVAL-LADDER: the interval for an owner that is not on the ladder (the hard value).")]
+		public readonly int RefineryMinIntervalUnranked = 1500;
 
 		[Desc("REF-FIELD-02: longest a refinery pick yields to a pending first copy before it may go ahead anyway.")]
 		public readonly int RefineryEssentialYieldTicks = 1500;
@@ -598,7 +672,7 @@ namespace OpenRA.Mods.CA.Traits
 
 	public class BaseBuilderBotModuleCA : ConditionalTrait<BaseBuilderBotModuleCAInfo>, IGameSaveTraitData,
 		IBotTick, IBotPositionsUpdated, IBotRespondToAttack, IBotRequestPauseUnitProduction, IBotSuggestRefineryProduction, INotifyActorDisposing,
-		IBotPlacementVeto
+		IBotPlacementVeto, IBotRef2First, IBotRefTier
 	{
 		public CPos GetRandomBaseCenter()
 		{
@@ -898,12 +972,118 @@ namespace OpenRA.Mods.CA.Traits
 		public bool TechChainPaygoArmed => Info.BbTechChainPaygo && switchesActive && !ablateTechChainPaygo.Off(player, AblationIds.BbTechChainPaygo);
 		AblationLatch ablateBuildAllListed; // BUILD-ALL-B
 		public bool BuildAllListedArmed => Info.BbBuildAllListed && switchesActive && !ablateBuildAllListed.Off(player, AblationIds.BbBuildAllListed);
+		AblationLatch ablateNoCancel; // NO-CANCEL-01
+		public bool NoCancelArmed => Info.BbNoCancel && switchesActive && !ablateNoCancel.Off(player, AblationIds.BbNoCancel);
+		AblationLatch ablateS8RejectedFallthrough; // S8-STARVE-01
+		public bool S8RejectedFallthroughArmed => Info.BbS8RejectedFallthrough && switchesActive && !ablateS8RejectedFallthrough.Off(player, AblationIds.BbS8RejectedFallthrough);
+		AblationLatch ablateS8CashHold; // S8-CASH-HOLD
+		public bool S8CashHoldArmed => Info.BbS8CashHold && S8RejectedFallthroughArmed && !ablateS8CashHold.Off(player, AblationIds.BbS8CashHold);
+		AblationLatch ablateRefPrefetchFresh; // REF-PREFETCH-FRESH
+		public bool RefPrefetchFreshArmed => Info.RefPrefetchFresh && switchesActive && !ablateRefPrefetchFresh.Off(player, AblationIds.RefPrefetchFresh);
+		AblationLatch ablateRefineryIntervalLadder; // REF-INTERVAL-LADDER
+		public bool RefineryIntervalLadderArmed => Info.RefineryIntervalLadder && Info.RefineryEconomyGate && switchesActive && !ablateRefineryIntervalLadder.Off(player, AblationIds.RefineryIntervalLadder);
+
+		/// <summary>The refinery interval this owner uses: the ladder value (2100 - 150 r) when the row is armed, else the flat Info value.</summary>
+		public int RefineryMinIntervalEffective => RefineryIntervalLadderArmed
+			? BotDifficultyLadder.Scale(Info.RefineryMinIntervalEasiest, Info.RefineryMinIntervalHardest, player, Info.RefineryMinIntervalUnranked)
+			: Info.RefineryMinIntervalTicks;
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		public void TraceNoCancel(bool rowOn, string tag, int site, string item, Actor producer)
+		{
+#if CAMEO_DEV_LOGGING
+			if (rowOn)
+				Log.Write("debug", $"AI ({player.ClientIndex}): {tag} site={site} item={item} producer={producer.ActorID} tick={world.WorldTick}");
+#endif
+		}
 		AblationLatch ablateNoFoundation; // BUILD-ALL-B
 		public bool NoFoundationArmed => Info.BbNoFoundation && switchesActive && !ablateNoFoundation.Off(player, AblationIds.BbNoFoundation);
 		AblationLatch ablateQueueSplit; // QUEUE-SPLIT-01
 		public bool QueueSplitArmed => Info.BbQueueSplit && switchesActive && !ablateQueueSplit.Off(player, AblationIds.BbQueueSplit);
 		AblationLatch ablateRefineryAtS2; // REF-S2-01
 		public bool RefineryAtS2Armed => Info.BbRefineryAtS2 && switchesActive && !ablateRefineryAtS2.Off(player, AblationIds.BbRefineryAtS2);
+		// REF2-FIRST-01: one switch (Info.Ref2First), four rows. State shared by every queue manager of this module: the tick ref2 first became due (-1 = never) and whether the gate
+		// has finished for good (ref2 reached, the stall release fired, or the bound ran out); Ref2StartableSince is the stall clock (-1 = ref2 not startable).
+		AblationLatch ablateRef2Radar;
+		AblationLatch ablateRef2Prod2;
+		AblationLatch ablateRef2Floor;
+		public bool Ref2RadarArmed => Info.Ref2First && switchesActive && !ablateRef2Radar.Off(player, AblationIds.Ref2BeforeRadar);
+		public bool Ref2Prod2Armed => Info.Ref2First && switchesActive && !ablateRef2Prod2.Off(player, AblationIds.Ref2BeforeProd2);
+		public bool Ref2FloorArmed => Info.Ref2First && switchesActive && !ablateRef2Floor.Off(player, AblationIds.Ref2Floor);
+		AblationLatch ablateRef2Stall; // ref2_stall_release: the hold ends when ref2 is startable but no refinery starts within Ref2StallTicks
+		public bool Ref2StallArmed => Info.Ref2First && switchesActive && !ablateRef2Stall.Off(player, AblationIds.Ref2StallRelease);
+		public int Ref2DueSince = -1;
+		public int Ref2StartableSince = -1;
+		BaseBuilderQueueManagerCA ref2Sampler; // the one building manager that evaluates the stall clock (the clock has this single writer)
+		bool ref2SamplerResolved;
+		public bool Ref2Finished;
+
+		// REF-TIER-01: one switch (Info.RefTierFloor), two rows. The target is recomputed every RefTier.RecomputeTicks ticks from the COMPLETED own radar providers and tech-centre buildings (the two indexes exist
+		// only while the switch is on in the yaml), so a lost tier drops it within that many ticks. Nothing here sells or cancels anything.
+		AblationLatch ablateRefTier;
+		AblationLatch ablateRefTierPersonality;
+		public bool RefTierArmed => Info.RefTierFloor && switchesActive && !ablateRefTier.Off(player, AblationIds.RefTierFloor);
+		bool RefTierPersonalityArmed => RefTierArmed && !ablateRefTierPersonality.Off(player, AblationIds.RefTierPersonality);
+		int refTierTick = -1;
+		int refTierValue;
+		IBotCurrentPersonality refTierPersonality;
+		bool refTierPersonalityResolved;
+		BaseBuilderQueueManagerCA refTierObserver; // DEV only: the one building manager that writes the ref_tier record
+		bool refTierObserverResolved;
+
+		public bool RefTierRadarStanding => radarBuildings != null && AIUtils.CountActorByCommonName(radarBuildings) > 0;
+		public bool RefTierTechStanding => techChainBuildings != null && AIUtils.CountActorByCommonName(techChainBuildings) > 0;
+
+		/// <summary>The personality percent of the tier target: the prior table of the Info (the one seam the learned value replaces later).</summary>
+		public int RefTierPersonalityPct(bool radarStanding)
+		{
+			if (!refTierPersonalityResolved)
+			{
+				refTierPersonality = player.PlayerActor.TraitsImplementing<IBotCurrentPersonality>().FirstOrDefault();
+				refTierPersonalityResolved = true;
+			}
+
+			return RefTier.PersonalityPct(RefTierPersonalityArmed, refTierPersonality?.CurrentPersonality, radarStanding, Info.RefTierExpansionPct, Info.RefTierRushPreRadarPct);
+		}
+
+		public int RefTierTarget
+		{
+			get
+			{
+				// Recomputed every RefTier.RecomputeTicks ticks (the two index counts and the personality read are not free, and a tier changes on building time scales).
+				var tick = world.WorldTick;
+				if (refTierTick >= 0 && tick - refTierTick < RefTier.RecomputeTicks)
+					return refTierValue;
+
+				refTierTick = tick;
+				var radar = RefTierRadarStanding;
+				refTierValue = RefTier.Target(
+					RefTier.BaseTarget(Info.RefTierEarlyTarget, Info.RefTierRadarStep, Info.RefTierTechStep, radar, RefTierTechStanding),
+					RefTierPersonalityPct(radar));
+				return refTierValue;
+			}
+		}
+
+		// DEV only (compiled out of a release build with its call): the first building manager writes the ref_tier record, spaced and deduped by its observer.
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void RefTierObserveDev()
+		{
+			if (!RefTierArmed)
+				return;
+
+			if (!refTierObserverResolved)
+			{
+				refTierObserverResolved = true;
+				foreach (var builder in builders)
+					if (builder != null && Info.BuildingQueues.Contains(builder.Category))
+					{
+						refTierObserver = builder;
+						break;
+					}
+			}
+
+			refTierObserver?.RefTierObserve();
+		}
 		AblationLatch ablateMbEssentials; // MODE-BIAS-01
 		public bool MbEssentialsArmed => Info.MbEssentials && switchesActive && !ablateMbEssentials.Off(player, AblationIds.MbEssentials);
 		AblationLatch ablateMbTechChain; // MODE-BIAS-01
@@ -1146,6 +1326,8 @@ namespace OpenRA.Mods.CA.Traits
 		readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> barracksBuildings;
 		readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> factoryBuildings;
 		public readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> ProductionBuildings;
+		readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> radarBuildings; // REF-TIER-01: null unless Info.RefTierFloor
+		readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> techChainBuildings; // REF-TIER-01: null unless Info.RefTierFloor
 
 		// RATIO-2X-01: the per-player 2x tracker (the 3-tick start record and the first-copy ledger), shared by every queue manager so a
 		// sibling queue cannot pass the same old measure. Pure state, no world access (MobileStaticRatioCA).
@@ -1173,6 +1355,13 @@ namespace OpenRA.Mods.CA.Traits
 			barracksBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world, info.BarracksTypes, player);
 			factoryBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world, info.VehiclesFactoryTypes, player);
 			ProductionBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world, info.ProductionTypes, player);
+			if (info.RefTierFloor)
+			{
+				// REF-TIER-01: the radar providers of the ruleset (the same trait test as the opening order's radar role) and the tech-centre types, as indexes of the own completed buildings.
+				radarBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world,
+					world.Map.Rules.Actors.Values.Where(a => a.HasTraitInfo<BuildingInfo>() && BaseBuilderQueueManagerCA.IsRadarProvider(a)).Select(a => a.Name).ToFrozenSet(), player);
+				techChainBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world, info.TechChainTypes, player);
+			}
 			switchesActive = info.SwitchCondition == null;
 		}
 
@@ -1468,6 +1657,27 @@ namespace OpenRA.Mods.CA.Traits
 			// REFSCAN D-5 (sec 2): the search pump and the READY handoff run here, every bot visit, ahead of the
 			// queue managers' rotation and queue-sweep cooldown — the placement path never waits on the queue sweep.
 			refinerySearch?.Pump(bot, RefineryLawProvider());
+
+			// REF2-FIRST-01, row ref2_stall_release (Haiku FIX, Opus ruling): the stall clock is sampled once per bot visit, unconditionally while armed and not finished, independent of the pick-time
+			// callers (a not-startable spell can then never go unseen). Two flag reads on most visits; the sampler itself spaces its evaluations (Ref2First.SampleTicks) and reuses cached values.
+			if (Ref2StallArmed && !Ref2Finished)
+			{
+				if (!ref2SamplerResolved)
+				{
+					ref2SamplerResolved = true;
+					foreach (var builder in builders)
+						if (builder != null && Info.BuildingQueues.Contains(builder.Category))
+						{
+							ref2Sampler = builder;
+							break;
+						}
+				}
+
+				ref2Sampler?.Ref2StallSample();
+			}
+
+			// REF-TIER-01 (DEV only): one record per change of the tier state.
+			RefTierObserveDev();
 
 			builders[currentBuilderIndex].Tick(bot);
 
@@ -2189,12 +2399,42 @@ namespace OpenRA.Mods.CA.Traits
 			if (disposition != DemandCancelDisposition.Issued)
 				return disposition;
 
+			// NO-CANCEL-01 (row bb_no_cancel, site 1, designs _17/_17B): the certificate proves "no legal cell" only for a READY entry, and it is keyed by
+			// item name, so it can still be current while the single same-name entry is a new one in progress. Row on: only a Done entry (the instance
+			// Order.CancelProduction would remove) may be cancelled; an in-progress one becomes a ProtectionHold (the item stays queued, the demand retires,
+			// the queue layer's placement sweep owns it) before any record or order. Row off = the code below byte for byte.
+			var noCancelOn = NoCancelArmed;
+			var entryDone = false;
+			if (noCancelOn)
+			{
+				foreach (var q in producer.TraitsImplementing<ProductionQueue>())
+				{
+					if (!q.Enabled)
+						continue;
+
+					var bound = BaseBuilderQueueEvalCA.CancelBindTarget(q.AllQueued(), i => i.Item, item, null);
+					if (bound != null)
+					{
+						entryDone = bound.Done;
+						break;
+					}
+				}
+			}
+
+			var gated = NoCancelGatesCA.DemandCancelGate(disposition, noCancelOn, entryDone);
+			if (gated != DemandCancelDisposition.Issued)
+			{
+				TraceNoCancel(noCancelOn, "CANCEL-SUPPRESSED", 1, item, producer);
+				return gated;
+			}
+
 			// REPLAY-HEALTH-LOGGER (F4): register the demand cancel so the owning manager's
 			// probe resolves it as Cancelled/DemandCancel instead of an UNKNOWN removal.
 			if (builders != null)
 				foreach (var b in builders)
 					b?.NoteExternalCancel(producer, item);
 
+			TraceNoCancel(noCancelOn, "CANCEL-UNPLACEABLE", 1, item, producer);
 			bot.QueueOrder(Order.CancelProduction(producer, item, 1));
 			return DemandCancelDisposition.Issued;
 		}

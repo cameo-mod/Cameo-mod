@@ -4600,6 +4600,12 @@ Player:
 		CrawlAdvanceOnly: true
 		# crawl_target_sticky (CRAWL-LONG-01, Opus 11-25): a started crawl keeps its target until reached, invalid or parked (no flip on a re-pick).
 		CrawlTargetSticky: true
+		# crawl_ally_anchor (BS-03 c9 port, light team crawl, Opus V08G): with allybuild on, allied yards are crawl anchors and allied buildable-area buildings join the crawl frontier.
+		CrawlAllyAnchor: true
+		# crawl_sticky_expiry (Opus V08G ruling a): a committed crawl target is released and parked after 3000 ticks without frontier progress, for any reason.
+		CrawlStickyExpiry: true
+		# crawl_pause_bound (Opus V08G ruling b, BS-03 c7): a crawl paused for enemy value at the frontier is released and parked after 900 + 150 r ticks; the escort request is at least 900 + 150 r.
+		CrawlPauseBound: true
 		# Enabled for the maintainer's 2026-10-15 combined playtest (BY).
 		UseCrawlSafety: true
 		# EX-2: every field in reach gets a refinery, beyond the base builder's fixed optimum.
@@ -4639,6 +4645,8 @@ Player:
 		# REF-FIELD-02 cap per zone); no new refinery within 10 cells of a friendly (own or allied) one, 5 when a zone has no other site; an allied
 		# refinery serving a zone takes it off the demand. Target on Imminent Destruction: 5 +/- 1 refineries per bot (REF_ZONES_IMMINENT e6220637).
 		RefDemand: true
+		# ECO-TIMING-FLOOR (row eco_timing_floor, HANS_PROFILE_DESIGN_01 row 1, Opus V08G): >= 2 own refineries by tick 3700 and >= 3 by 5000 at Hard (150 ticks per rank, 500-tick lead) when zones are in reach.
+		EcoTimingFloor: true
 		RefineryZoneRadius: 10
 		RefineryPerZoneCap: 2
 		RefinerySecondPerZoneMinCells: 40
@@ -4853,8 +4861,8 @@ Player:
 		TeamLeadRallyMidEnabled: true
 		TeamLeadPincerDoubleEnabled: true
 		TeamLeadPincerWideEnabled: true
-		# fix-03 (row pincer_arrived_arms): arrived-arms pincer plan. FALSE on master (untested); flipped on v08g-int only, so V08G ablates it.
-		PincerArrivedArms: false
+		# fix-03 (row pincer_arrived_arms): arrived-arms pincer plan. ON since V08H: measured on in V08G (P0-V08G-INT-6V6-S100775), Opus ruling; the trait default stays false.
+		PincerArrivedArms: true
 		TeamLeadSoloEnabled: true
 		TeamLeadAllInEnabled: true
 		TeamLeadDefendTeamEnabled: true
@@ -5029,8 +5037,8 @@ Player:
 		TeamLeadRallyMidEnabled: true
 		TeamLeadPincerDoubleEnabled: true
 		TeamLeadPincerWideEnabled: true
-		# fix-03 (row pincer_arrived_arms): arrived-arms pincer plan. FALSE on master (untested); flipped on v08g-int only, so V08G ablates it.
-		PincerArrivedArms: false
+		# fix-03 (row pincer_arrived_arms): arrived-arms pincer plan. ON since V08H: measured on in V08G (P0-V08G-INT-6V6-S100775), Opus ruling; the trait default stays false.
+		PincerArrivedArms: true
 		TeamLeadSoloEnabled: true
 		TeamLeadAllInEnabled: true
 		TeamLeadDefendTeamEnabled: true
@@ -5201,8 +5209,8 @@ Player:
 		TeamLeadRallyMidEnabled: true
 		TeamLeadPincerDoubleEnabled: true
 		TeamLeadPincerWideEnabled: true
-		# fix-03 (row pincer_arrived_arms): arrived-arms pincer plan. FALSE on master (untested); flipped on v08g-int only, so V08G ablates it.
-		PincerArrivedArms: false
+		# fix-03 (row pincer_arrived_arms): arrived-arms pincer plan. ON since V08H: measured on in V08G (P0-V08G-INT-6V6-S100775), Opus ruling; the trait default stays false.
+		PincerArrivedArms: true
 		TeamLeadSoloEnabled: true
 		TeamLeadAllInEnabled: true
 		TeamLeadDefendTeamEnabled: true
@@ -5375,8 +5383,8 @@ Player:
 		TeamLeadRallyMidEnabled: true
 		TeamLeadPincerDoubleEnabled: true
 		TeamLeadPincerWideEnabled: true
-		# fix-03 (row pincer_arrived_arms): arrived-arms pincer plan. FALSE on master (untested); flipped on v08g-int only, so V08G ablates it.
-		PincerArrivedArms: false
+		# fix-03 (row pincer_arrived_arms): arrived-arms pincer plan. ON since V08H: measured on in V08G (P0-V08G-INT-6V6-S100775), Opus ruling; the trait default stays false.
+		PincerArrivedArms: true
 		TeamLeadSoloEnabled: true
 		TeamLeadAllInEnabled: true
 		TeamLeadDefendTeamEnabled: true
@@ -5549,8 +5557,8 @@ Player:
 		TeamLeadRallyMidEnabled: true
 		TeamLeadPincerDoubleEnabled: true
 		TeamLeadPincerWideEnabled: true
-		# fix-03 (row pincer_arrived_arms): arrived-arms pincer plan. FALSE on master (untested); flipped on v08g-int only, so V08G ablates it.
-		PincerArrivedArms: false
+		# fix-03 (row pincer_arrived_arms): arrived-arms pincer plan. ON since V08H: measured on in V08G (P0-V08G-INT-6V6-S100775), Opus ruling; the trait default stays false.
+		PincerArrivedArms: true
 		TeamLeadSoloEnabled: true
 		TeamLeadAllInEnabled: true
 		TeamLeadDefendTeamEnabled: true
@@ -5720,8 +5728,8 @@ Player:
 		TeamLeadRallyMidEnabled: true
 		TeamLeadPincerDoubleEnabled: true
 		TeamLeadPincerWideEnabled: true
-		# fix-03 (row pincer_arrived_arms): arrived-arms pincer plan. FALSE on master (untested); flipped on v08g-int only, so V08G ablates it.
-		PincerArrivedArms: false
+		# fix-03 (row pincer_arrived_arms): arrived-arms pincer plan. ON since V08H: measured on in V08G (P0-V08G-INT-6V6-S100775), Opus ruling; the trait default stays false.
+		PincerArrivedArms: true
 		TeamLeadSoloEnabled: true
 		TeamLeadAllInEnabled: true
 		TeamLeadDefendTeamEnabled: true
@@ -6005,11 +6013,25 @@ Player:
 		BbTechChainPaygo: true
 		# BUILD-ALL-B (row bb_build_all_listed, user ruling 11-25): S5 = the buildable BuildingFractions entries once, refinery included, no unlisted fallback; S5 first copies ride with any bank above 0.
 		BbBuildAllListed: true
+		# NO-CANCEL-01 (row bb_no_cancel, BS-03 c10 port, Opus V08G): a building in production is never cancelled for a choice; only a READY item with an unplaceable proof may be removed.
+		BbNoCancel: true
+		# S8-STARVE-01 (row bb_s8_rejected_fallthrough, Sol 58ADBC25): under SUSTAINED cash a rejected S8 offer no longer holds S9/S10 back; an admitted S8 still wins first.
+		BbS8RejectedFallthrough: true
+		# S8-CASH-HOLD (row bb_s8_cash_hold, Opus V08G): an eligible S8 factory that waits only for cash holds the S10 fractions back for at most 750 ticks.
+		BbS8CashHold: true
+		S8HoldMaxTicks: 750
+		S8HoldMinBankPercent: 75
+		# REF-PREFETCH-FRESH (row ref_prefetch_fresh, Sol V08F_CUMREV_SOL_01 finding 2): prefetched relaxed refinery sites expire at the READY flip; a strict site outranks a relaxed one.
+		RefPrefetchFresh: true
 		# BUILD-ALL-B (row bb_no_foundation, user ruling 11-25): no concrete (terrain foundation) on any base-builder path; CONCRETE-PLAN-01 after the playtest.
 		BbNoFoundation: true
 		# QUEUE-SPLIT-01 + REF-S2-01 (Opus 11-25): defence stages stay on the defence queue; unmet refinery zone demand is served at S2 (rows bb_queue_split, bb_refinery_s2).
 		BbQueueSplit: true
 		BbRefineryAtS2: true
+		# REF2-FIRST-01 (rows ref2_before_radar, ref2_before_prod2, ref2_floor, ref2_stall_release, USER BINDING 11-26): at least 2 refineries early; ref2 before the radar (TECH exempt) and before the 2nd production building of a role (RUSH exempt); the hold ends after Ref2StallTicks (750) startable without a refinery starting.
+		Ref2First: true
+		# REF-TIER-01 (rows ref_tier_floor, ref_tier_personality, USER BINDING 11-26): refinery target floor 2 early / 4 after a radar provider / 6 after a tech centre, scaled by personality (expansion x1.25, rush x0.75 before the radar); a demand floor, not a hold.
+		RefTierFloor: true
 		# MODE-BIAS-01 (rows mb_essentials, mb_techchain, mb_antirush, mb_opening, user ruling 11-25): the extra building lists also weight the BuildingFractions roll while their trigger holds (never a gate).
 		MbEssentials: true
 		MbTechChain: true
@@ -6024,6 +6046,8 @@ Player:
 		# REF-FIELD-02 (row rf_economy_gate): ref1, the first vehicle factory, then ref2; 1500 ticks between refineries; from the third refinery a
 		# pending first copy goes first (at most 1500 ticks); a yard with no refinery skips the gate (expansion refinery). genericbot only.
 		RefineryEconomyGate: true
+		# REF-INTERVAL-LADDER (row rf_interval_ladder, USER VALUE 2100 - 150 r, BS-03 step 4 port): the refinery interval follows the difficulty ladder (Noob 2250 .. God 750).
+		RefineryIntervalLadder: true
 		# PROD-BUSY cycle: above the same line, more production buildings cycled across the types (row pb_cycle_production); genericbot only.
 		CycleProductionAboveLine: true
 		# SUSTAINED-CASH-01: a bank above the tier line for 1500 ticks forces the next building to be production (row pb_sustained_cash_production); genericbot only.
@@ -6488,6 +6512,13 @@ Player:
 		# queue's pool (>= 50% of the dearest type) on an EMPTY queue starts pay-as-you-go once the bank holds 30% of its price; the order still reserves the full price. @generic only (the classic block has no UnitRoll).
 		TechLeanTopPct: 50
 		TechLeanBankPct: 30
+		# HANS-PROFILE-01 row 2 (Opus 11-25, row ub_core_focus; Hans' top 3 unit types are 48-64% of his requests): once a type has been built once, the 3 dearest types of a queue that the bank can pay for (30% of the
+		# price in the bank) get a weight multiplier (at most x8) so that they hold about 50% of the roll weight of the types built once. A bias only: the core's weights alone change (every other weight, never-built types included, stays as the roll made it).
+		# @generic only (the classic block has no UnitRoll).
+		CoreFocusSharePct: 50
+		CoreFocusCount: 3
+		CoreFocusMaxPct: 800
+		CoreFocusBankPct: 30
 		# PERF-BOTTICK-01 FIX 4 (Opus 11-26, row cost_cache_visit): the production cost is memoised for one bot visit (the same integer as the live read; V08F Leg A: 73% of long visits). @generic only.
 		CostCacheVisit: true
 		# CONSOLIDATE-01 C9 (X13): paid Promotions also start while a unit-production pause vote is up (pq_upgrade_service); free items always did.
@@ -6513,10 +6544,10 @@ Player:
 		MaxAircraft: 25
 		MaintainAirSuperiority: true
 		MaxAirSuperiority: 25
-		# A3 (REVIEW_2026-10-17): count enemy air threats from the observed enemy composition
-		# for genericbot — AA sizing stops reading hidden aircraft. Armed by switch group
-		# BW_observed_air_threats; SwitchCondition keeps the shared instance off classic.
-		#ObservedAirThreats: false
+		# FOG-AIR-01 (Opus 11-26, Haiku FOG_RULING_VERIFY_HK_01): enemy air threats for AA sizing come from the OBSERVED enemy composition only;
+		# no provider or nothing seen counts 0, never the world scan. genericbot only (SwitchCondition above); @classic keeps the world count.
+		# Row fog_air_observed (off = the legacy world count). The BW_observed_air_threats switch group arms the same value.
+		ObservedAirThreats: true
 		AirToAirUnits: td_nod_apacheattackhelicopter, td_gdi_orca, td_nod_venom, td_gdi_firehawk, ra1_soviets_yakscoutplane, ra1_soviets_teslayak, ra1_soviets_armoredyak, ra1_soviets_nuclearyak, ra1_soviets_migattackbomber, ra1_soviets_su57attackbomber, ra1_allies_longbow, ra1_allies_rapierjumpjet, japan_zerofighter, ra2_allies_harrier, ra2_soviets_siegechopper, ra2_soviets_migbomber, latinsyndicate_hindtransport, yuri_floatingdisk, ra2_allies_nighthawk, asianalliance_phoenix, asianalliance_pelican, ixian_airdrone, ixian_farasha, steelconsortium_twister, steelconsortium_skyhammer, steelconsortium_cloudbreaker, latinsyndicate_yakovlev, latinsyndicate_mig21, schwarzermond_haunebuii, schwarzermond_haunebuiii, naxis_me262, naxis_bf109, schwarzermond_corruptorpiercer, schwarzermond_haunebuii, schwarzermond_haunebuiii, naxis_me262, schwarzermond_corruptorpiercer, schwarzermond_dieglocke, naxis_bf109, futuretech_twister, futuretech_cryocopter, futuretech_harbingergunship, terran_wraith, terran_sundog, terran_battlecruiser, terran_valkyrie, terran_wyvern, protoss_scout, protoss_epigraph, protoss_carrier, protoss_gladius, protoss_voidray, zerg_mutalisk, zerg_devourer, terran_pythean, terran_phobos, zerg_behemoth, protoss_starshipsovereign, wc2_humans_gryphonrider, wc2_orcs_dragon, atreides_ornithopter, harkonnen_gunship, corrino_gunship
 		AirThreatUnits: td_nod_apacheattackhelicopter, td_gdi_orca, td_nod_venom, td_gdi_firehawk, td_gdi_chinooktransport, td_nod_chinooktransport, ra1_soviets_yakscoutplane, ra1_soviets_teslayak, ra1_soviets_armoredyak, ra1_soviets_nuclearyak, ra1_soviets_migattackbomber, ra1_soviets_su57attackbomber, ra1_soviets_supersonicnuclearbomber, ra1_soviets_hindattackhelicopter, ra1_allies_longbow, ra1_allies_blackhawk, ra1_allies_rapierjumpjet, japan_zerofighter, japan_japanesebomber, ra1_soviets_hiptransport, ra1_allies_chinooktransport, ra2_allies_harrier, ra2_allies_blackeagle, ra2_soviets_siegechopper, ra2_soviets_migbomber, latinsyndicate_hindtransport, ra2_soviets_kirovairship, yuri_floatingdisk, ra2_allies_nighthawk, asianalliance_phoenix, asianalliance_pelican, ixian_airdrone, ixian_farasha, steelconsortium_empressstation, steelconsortium_twister, steelconsortium_skyhammer, steelconsortium_cargoship, steelconsortium_cloudbreaker, latinsyndicate_yakovlev, latinsyndicate_mig21, naxis_transportzeppelin, schwarzermond_spacezeppelin, schwarzermond_haunebuii, schwarzermond_haunebuiii, naxis_me262, naxis_bf109, schwarzermond_corruptorpiercer, schwarzermond_dieglocke, futuretech_twister, futuretech_cryocopter, futuretech_harbingergunship, terran_wraith, terran_sundog, terran_battlecruiser, terran_valkyrie, terran_wyvern, protoss_scout, protoss_epigraph, protoss_carrier, protoss_gladius, protoss_voidray, zerg_mutalisk, zerg_devourer, terran_pythean, terran_phobos, zerg_behemoth, protoss_starshipsovereign, wc2_humans_gryphonrider, wc2_orc_dragonwc2_orc_dragon, atreides_ornithopter, atreides_airdrone, atreides_advancedcarryall, harkonnen_carryall, harkonnen_gunship, harkonnen_advancedcarryall, corrino_carryall, corrino_gunship, corrino_advancedcarryall
 		#UnitBuilderMinCredits: 0

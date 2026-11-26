@@ -65,6 +65,124 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		bool RefDemandZones => RefDemandArmed;
 
+		// eco_timing_floor (HANS_PROFILE_DESIGN_01 row 1): while fewer own refineries stand than the time floor wants, every zone's cap is one higher. One value per tick.
+		AblationLatch ablateEcoFloor;
+		bool EcoFloorOn => Info.EcoTimingFloor && RefDemandArmed && !ablateEcoFloor.Off(player, AblationIds.EcoTimingFloor);
+		int ecoLiftTick = -1;
+		int ecoLift;
+
+		/// <summary>A floor tick of this owner: the Hard value moved by EcoFloorStepTicks per rank (easier later, harder earlier); an unranked owner gets the Hard value.</summary>
+		int EcoTick(int hard) => BotDifficultyLadder.Scale(hard + EcoFloorRules.HardRank * Info.EcoFloorStepTicks,
+			hard - (BotDifficultyLadder.Difficulties.Length - 1 - EcoFloorRules.HardRank) * Info.EcoFloorStepTicks, player, hard);
+
+		// ref2_floor (REF2-FIRST-01, USER BINDING 11-26): while fewer than two own refineries stand or are in production, every zone's cap is one higher, from tick 0, so a reachable field with room is claimable for ref2
+		// even where the law says adequate. The switch lives on the base builder (IBotRef2First); this planner only reads it. One value per tick, 0 when off.
+		IBotRef2First ref2First;
+		bool ref2FirstResolved;
+		int ref2LiftTick = -1;
+		int ref2Lift;
+
+		int Ref2FirstLift()
+		{
+			if (!RefDemandArmed)
+				return 0;
+
+			var tick = world.WorldTick;
+			if (ref2LiftTick == tick)
+				return ref2Lift;
+
+			ref2LiftTick = tick;
+			if (!ref2FirstResolved)
+			{
+				ref2First = player.PlayerActor.TraitsImplementing<IBotRef2First>().FirstOrDefault();
+				ref2FirstResolved = true;
+			}
+
+			ref2Lift = 0;
+			if (ref2First != null && ref2First.Ref2FloorArmed)
+			{
+				OwnRefineriesStandingAndQueued(out var own, out var queued);
+				ref2Lift = Ref2First.LiftsCap(true, own, queued) ? 1 : 0;
+			}
+
+			return ref2Lift;
+		}
+
+		// Own standing refineries plus those in production (the same BuildingsBeingProduced sum UpdateAnchorClaim subtracts from the claimable anchors): with the next one queued a floor's lift drops at once,
+		// or a still-empty second zone would be claimed for one more before it lands (Code Monkey FIX on REF2-FIRST-01; REF-TIER-01 reads the same pair).
+		void OwnRefineriesStandingAndQueued(out int own, out int queued)
+		{
+			own = 0;
+			FriendlyRefineryCells();
+			for (var r = 0; r < friendlyRefineryOwn.Count; r++)
+				if (friendlyRefineryOwn[r])
+					own++;
+
+			queued = 0;
+			var builder = baseBuilders.FirstOrDefault(t => t.IsTraitEnabled());
+			if (builder?.BuildingsBeingProduced != null)
+				foreach (var r in builder.Info.RefineryTypes)
+					if (builder.BuildingsBeingProduced.TryGetValue(r, out var inProduction))
+						queued += inProduction;
+		}
+
+		// ref_tier_floor (REF-TIER-01, USER BINDING 11-26): while fewer own refineries stand or are in production than the tier target (2 early, +2 after a radar provider, +2 after a tech centre, scaled by
+		// personality; the base builder owns the target and the switch, IBotRefTier), every zone's cap is one higher: a floor for refinery demand, never a hold. The lift only makes a field claimable
+		// that the claim gate already accepts (reachable, room under the cap, an anchor), so a map with fewer fields simply stays below the target. One value per tick, 0 when off.
+		IBotRefTier refTier;
+		bool refTierResolved;
+		int refTierLiftTick = -1;
+		int refTierLift;
+
+		int RefTierLift()
+		{
+			if (!RefDemandArmed)
+				return 0;
+
+			var tick = world.WorldTick;
+			if (refTierLiftTick == tick)
+				return refTierLift;
+
+			refTierLiftTick = tick;
+			if (!refTierResolved)
+			{
+				refTier = player.PlayerActor.TraitsImplementing<IBotRefTier>().FirstOrDefault();
+				refTierResolved = true;
+			}
+
+			refTierLift = 0;
+			if (refTier != null && refTier.RefTierArmed)
+			{
+				OwnRefineriesStandingAndQueued(out var own, out var queued);
+				refTierLift = RefTier.LiftsCap(true, own, queued, refTier.RefTierTarget) ? 1 : 0;
+			}
+
+			return refTierLift;
+		}
+
+		int EcoFloorLift() => Math.Max(Math.Max(EcoTimeFloorLift(), Ref2FirstLift()), RefTierLift());
+
+		int EcoTimeFloorLift()
+		{
+			if (!EcoFloorOn)
+				return 0;
+
+			var tick = world.WorldTick;
+			if (ecoLiftTick == tick)
+				return ecoLift;
+
+			ecoLiftTick = tick;
+			var own = 0;
+			FriendlyRefineryCells();
+			for (var r = 0; r < friendlyRefineryOwn.Count; r++)
+				if (friendlyRefineryOwn[r])
+					own++;
+
+			var target = EcoFloorRules.RefineryTarget(tick, EcoTick(Info.EcoFloorRefinery2Tick), EcoTick(Info.EcoFloorRefinery3Tick), Info.EcoFloorLeadTicks);
+			ecoLift = EcoFloorRules.Lifts(true, own, target) ? 1 : 0;
+			return ecoLift;
+		}
+
 		/// <summary>The demand verdict per anchor for ClaimOrder; null = the old ReachCells and served rule.</summary>
 		Func<int, RefineryDemand.Verdict> DemandOverride => RefDemandArmed ? (demandVerdictFunc ??= DemandVerdict) : null;
 
@@ -200,7 +318,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var inRadius = z >= 0 && z < zoneInRadius.Length && zoneInRadius[z];
 				var reachable = z >= 0 && z < zoneReachable.Length && zoneReachable[z];
 				demandCounts[a] = count;
-				demandVerdicts[a] = RefineryDemand.Classify(inRadius, reachable, allied, count, ZoneCapAt(z));
+				demandVerdicts[a] = RefineryDemand.Classify(inRadius, reachable, allied, count, ZoneCapAt(z) + EcoFloorLift());
 			}
 		}
 

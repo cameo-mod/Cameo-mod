@@ -56,6 +56,8 @@ namespace OpenRA.Mods.CA.Traits
 			OfferedCollect(snapshot); // bb_skip, DEV only
 			var pick = BaseBuildPlanCA.Plan(snapshot, pipelineFeasibility, BotRng.For(player, nameof(BaseBuilderQueueManagerCA)));
 			SkipsObserved(buildable, snapshot, pick); // bb_skip, DEV only
+			S8FallthroughObserved(snapshot, pick); // bb_s8_rejected_fallthrough, DEV only
+			S8HoldUpdate(snapshot, pick); // bb_s8_cash_hold
 			if (pick.IsNone)
 				return false;
 
@@ -122,6 +124,12 @@ namespace OpenRA.Mods.CA.Traits
 				FractionMilli = FractionMilli,
 				IntervalActive = name => b.BuildingIntervals != null && b.BuildingIntervals.ContainsKey(name) && activeBuildingIntervals.ContainsKey(name),
 				CoreOnceListedOnly = baseBuilder.BuildAllListedArmed,
+				S8RejectedFallthrough = baseBuilder.S8RejectedFallthroughArmed,
+				S8CashHold = baseBuilder.S8CashHoldArmed,
+				S8HoldMaxTicks = b.S8HoldMaxTicks,
+				S8HoldMinBankPercent = b.S8HoldMinBankPercent,
+				S8HoldName = s8HoldName,
+				S8HoldStart = s8HoldStart,
 			};
 
 			// c3, c4, c5: S2, S2b, S4, S5, S6, S7, S9 (Pipeline01Stages.cs); S5 reads the counts of this snapshot.
@@ -241,14 +249,75 @@ namespace OpenRA.Mods.CA.Traits
 			if (NavalNeedsWater(info) || NoSpaceBanned(name))
 				return false;
 
+			// REF2-FIRST-01 (rows ref2_before_radar, ref2_before_prod2): a NEW radar or 2nd production start is not offered while ref2 is due. Every stage passes here, nothing in flight is cancelled.
+			if (Ref2Holds(info, buildableNames.Contains))
+				return false;
+
 			return !BuildingStillDelayed(name);
 		}
 
+		// S8-CASH-HOLD (row bb_s8_cash_hold): the running hold of this queue manager (the S8 type waiting for cash and the tick the wait was first seen; -1 = none). The state lives
+		// across sweeps so the hold ends after HoldMaxTicks even while the type stays unaffordable; it is cleared as soon as a walk no longer finds an S8 type blocked only by cash or an S8 start is admitted.
+		string s8HoldName;
+		int s8HoldStart = -1;
+
+		void S8HoldUpdate(BaseBuildSnapshot s, BaseBuildPick pick)
+		{
+			if (!s.S8CashHold)
+				return;
+
+			var blocked = pick.Stage == BaseBuildStage.S8ProductionCycle ? null : s.S8CashBlocked;
+			if (blocked == null)
+			{
+				s8HoldName = null;
+				s8HoldStart = -1;
+				return;
+			}
+
+			if (blocked != s8HoldName || s8HoldStart < 0)
+			{
+				s8HoldName = blocked;
+				s8HoldStart = s.WorldTick;
+			}
+
+			S8HoldObserved(s, blocked, pick);
+		}
+
+		// DEV only, one line per queue and 750 ticks: the type waiting for cash, the bank, the hold age and whether the hold still blocks S10 (reason s8_cash_hold).
+#if CAMEO_DEV_LOGGING
+		int s8HoldLogged = -750;
+#endif
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void S8HoldObserved(BaseBuildSnapshot s, string blocked, BaseBuildPick pick)
+		{
+#if CAMEO_DEV_LOGGING
+			if (s.WorldTick - s8HoldLogged < 750)
+				return;
+
+			s8HoldLogged = s.WorldTick;
+			Log.Write("debug", $"AI ({player.ClientIndex}): BB-S8-HOLD queue {Category} tick {s.WorldTick} reason s8_cash_hold type {blocked} bank {s.Bank} age {s.WorldTick - s8HoldStart} max {s.S8HoldMaxTicks} active {BaseBuildPlanCA.S8CashHoldActive(s)} stage {pick.Stage}");
+#endif
+		}
+
+		bool PipelineFeasible(ProductionQueue queue, HashSet<string> buildableNames, ActorInfo power, BaseBuildSnapshot s, BaseBuildCandidate c, out string admitted) =>
+			PipelineFeasibleCore(queue, buildableNames, power, s, c, out admitted, out _);
+
+		// S8-CASH-HOLD: A1-A5 pass and only the A6 cash test fails (cost > 0), and the bank is at least minBankPercent percent of that cost.
+		bool PipelineCashOnly(ProductionQueue queue, HashSet<string> buildableNames, ActorInfo power, BaseBuildSnapshot s, BaseBuildCandidate c, int minBankPercent)
+		{
+			if (PipelineFeasibleCore(queue, buildableNames, power, s, c, out _, out var cashCost))
+				return false;
+
+			return cashCost > 0 && (long)s.Bank * 100 >= (long)cashCost * minBankPercent;
+		}
+
 		// A1-A6, side-effect free in a release build (DEV only: TechChainA6HoldRecord writes its rate-limit map techChainHoldLogged). A5: a start that would leave power short builds the power plant instead (the plant passes A1-A4 itself);
-		// with no plant that gives power the candidate goes as the fraction roll did.
-		bool PipelineFeasible(ProductionQueue queue, HashSet<string> buildableNames, ActorInfo power, BaseBuildSnapshot s, BaseBuildCandidate c, out string admitted)
+		// with no plant that gives power the candidate goes as the fraction roll did. cashCost > 0 = the start failed ONLY the A6 cash test, at that cost.
+		bool PipelineFeasibleCore(ProductionQueue queue, HashSet<string> buildableNames, ActorInfo power, BaseBuildSnapshot s, BaseBuildCandidate c, out string admitted, out int cashCost)
 		{
 			admitted = null;
+			cashCost = 0;
 			if (!world.Map.Rules.Actors.TryGetValue(c.Name, out var info) || !PipelineBasicFeasible(buildableNames, s, info))
 				return false;
 
@@ -276,6 +345,7 @@ namespace OpenRA.Mods.CA.Traits
 					if (techChainStart || c.Stage == BaseBuildStage.S5CoreOnce)
 						TechChainA6HoldRecord(start.Name, c.Stage, s.Bank, startCost);
 
+					cashCost = startCost;
 					return false;
 				}
 			}
@@ -345,6 +415,31 @@ namespace OpenRA.Mods.CA.Traits
 					o.BuildingSkipped(player, world.WorldTick, kv.Key, Category, offered ? rejection.Stage.ToString() : stage, offered ? "offered_rejected" : "not_offered",
 						offered ? rejection.Reason : walkReason);
 			}
+		}
+
+		// S8-STARVE-01 (row bb_s8_rejected_fallthrough), DEV only: the walk offered S8 types under SUSTAINED cash, none was admitted, and S9 or S10 picked instead (the exact
+		// case the row opens). One debug line per queue and 750 ticks: queue, tick, bank, tier line, S8 offers, the stage and candidate that won. Compiled out of a release build.
+#if CAMEO_DEV_LOGGING
+		int s8FallthroughLogged = -750;
+#endif
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void S8FallthroughObserved(BaseBuildSnapshot s, BaseBuildPick pick)
+		{
+#if CAMEO_DEV_LOGGING
+			if (!s.S8RejectedFallthrough || !s.SustainedActive || s.TierLine <= 0 || s.S8Offers == 0 || pick.IsNone)
+				return;
+
+			if (pick.Stage != BaseBuildStage.S9ExtraDefence && pick.Stage != BaseBuildStage.S10Fractions)
+				return;
+
+			var now = world.WorldTick;
+			if (now - s8FallthroughLogged < 750)
+				return;
+
+			s8FallthroughLogged = now;
+			Log.Write("debug", $"AI ({player.ClientIndex}): BB-S8-FALLTHROUGH queue {Category} tick {now} bank {s.Bank} line {s.TierLine} s8_offers {s.S8Offers} stage {pick.Stage} candidate {pick.Candidate} tests {pick.Tests}");
+#endif
 		}
 
 		// bb_skip, DEV only: arms the per-walk offered-set collector when a recorder is present.
@@ -484,6 +579,9 @@ namespace OpenRA.Mods.CA.Traits
 				qm.PipelineFeasible(queue, buildableNames, power, snapshot, candidate, out admitted);
 
 			public bool TryClaim(BaseBuildCandidate candidate, string admitted) => qm.PipelineTryClaim(queue, law, admitted);
+
+			public bool CashOnlyBlocked(BaseBuildCandidate candidate, int minBankPercent) =>
+				qm.PipelineCashOnly(queue, buildableNames, power, snapshot, candidate, minBankPercent);
 		}
 	}
 }

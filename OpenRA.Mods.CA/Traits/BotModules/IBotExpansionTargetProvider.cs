@@ -351,6 +351,9 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		bool CrawlAdvanceOnly => false;
 
+		/// <summary>crawl_ally_anchor (light team crawl): the visible allied buildable-area buildings are part of the crawl frontier (allybuild is on). False = own frontier only.</summary>
+		bool CrawlAllyAnchor => false;
+
 		/// <summary>crawl_advance_only: the wanted link had no cell that advances the frontier; the provider parks the crawl target so the want ends.</summary>
 		void CrawlLinkNoAdvance()
 		{
