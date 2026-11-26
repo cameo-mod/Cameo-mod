@@ -35,7 +35,15 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(AblationIds.CostCacheVisit, Is.EqualTo("cost_cache_visit"));
 			Assert.That(u, Does.Contain("public readonly bool CostCacheVisit = false;"));
 			Assert.That(u, Does.Contain("bool CostCacheOn => switchesActive && Info.CostCacheVisit && !ablateCostCache.Off(player, AblationIds.CostCacheVisit);"));
-			Assert.That(Source("packaging/ai.yaml"), Does.Not.Contain("CostCacheVisit:"), "no yaml arms it in this commit");
+			// the gate commit arms it in the @generic unit builder only (Opus 11-26: the push candidate = exact commits + FIX 4 armed)
+			var yaml = Source("packaging/ai.yaml");
+			Assert.That(yaml.Split("CostCacheVisit: true").Length - 1, Is.EqualTo(1));
+			var generic = yaml.IndexOf("\tUnitBuilderBotModuleCA@generic:", StringComparison.Ordinal);
+			var armed = yaml.IndexOf("\t\tCostCacheVisit: true", StringComparison.Ordinal);
+			var next = generic + 1 + Regex.Match(yaml.Substring(generic + 1), "\n\t[^\t\n]").Index;
+			Assert.That(generic, Is.GreaterThan(0));
+			Assert.That(armed, Is.GreaterThan(generic), "inside the @generic block");
+			Assert.That(armed, Is.LessThan(next), "before the next trait block");
 		}
 
 		[Test]
