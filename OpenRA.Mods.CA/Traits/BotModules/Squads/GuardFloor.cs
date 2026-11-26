@@ -17,8 +17,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 	/// CONSOLIDATE-03 P7 (b), row sq_guard_floor (design 01 R4 "guard minimum", Opus review change 2). The home guard (R4) declares a minimum: guard-lend lends only the units above it. The minimum is a LEARNED number, not a
 	/// constant: the personality prior comes from the yaml (turtle high, rush and steamroller low) and a learner overrides it per player under the keys below (the same contract as UnitRollTable, one table per module
 	/// instance, so every own personality keeps its own table; the 4-value aggregation of global, own faction, enemy faction and observed enemy style is the learner's job, LEARN-MULT-01). During an open all-in the
-	/// floor is 0, unless the own core is under attack (R1, enforced); the all-in adds no lend share of its own here (Opus ruling on 1f77a1c1e: any 90 percent share elsewhere stays the all-in's learnable input and
-	/// the floor adds no hold on top). The lend-return tick is a learnable input of the same table. Pure: no world access, no RNG.
+	/// WHOLE quiet guard may go (Opus second read of 8b1235d2b): a quiet guard is R7 and the all-in claims R4-R7, so the plan is every joinable unit and the floor is 0, with no 90 percent constant and no ordinary share
+	/// (neither would be a hold). The one exception is the own core under attack (R1, enforced): the learned floor then holds and only the units above it go. The lend-return tick is a learnable input of the same
+	/// table. Pure: no world access, no RNG.
 	/// </summary>
 	public static class GuardFloor
 	{
@@ -32,6 +33,13 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		/// <summary>The floor in units: 0 while an all-in is open (the dynamic all-in rule), unless the floor is enforced because the own core is under attack (R1); the percent floor otherwise.</summary>
 		public static int FloorUnits(int guardUnits, int floorPct, bool allInOpen, bool ownBaseDefenceEnforced) =>
 			allInOpen && !ownBaseDefenceEnforced ? 0 : Units(guardUnits, floorPct);
+
+		/// <summary>
+		/// The lend the floor narrows: the ordinary share, except during an open all-in, when the plan is every joinable unit (the all-in claims a quiet guard whole; the floor below decides what stays: 0, or the learned
+		/// floor while the core is under attack). Never more than the joinable units, which are the only ones a lend can name.
+		/// </summary>
+		public static int Plan(int ordinaryShare, int joinableUnits, bool allInOpen) =>
+			allInOpen ? Math.Max(0, joinableUnits) : ordinaryShare;
 
 		/// <summary>The core still counts as under attack for the hold window after the last observed hit (lastHitTick below 0 = never hit).</summary>
 		public static bool CoreAttackRecent(int now, int lastHitTick) => lastHitTick >= 0 && now - lastHitTick <= CoreAttackHoldTicks;

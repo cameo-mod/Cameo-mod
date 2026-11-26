@@ -99,23 +99,60 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void AnOpenAllInOnlyDropsTheFloorAndAddsNoLendShareOfItsOwn()
+		public void AnOpenAllInLendsTheWholeQuietGuardUnlessTheCoreIsUnderAttack()
 		{
-			// Opus ruling on 1f77a1c1e: during an open all-in the floor is 0, NOT a 90 percent lend. Guard 4, join minimum 3: the ordinary 50 percent share is 2 (< 3), so the plain lend is 0 ...
+			// Opus second read of 8b1235d2b: during an open all-in "floor 0" means the WHOLE quiet guard may go (a quiet guard is R7, the all-in claims R4-R7): no 90 percent constant, no ordinary share (that would hold units back)
+			var planned = GuardLend.Units(20, 20, 50, 3);
+			Assert.That(planned, Is.EqualTo(10), "the ordinary share");
+
+			// all-in + core not under attack = all units
+			var plan = GuardFloor.Plan(planned, 20, true);
+			Assert.That(plan, Is.EqualTo(20));
+			Assert.That(GuardFloor.Lend(plan, 20, GuardFloor.FloorUnits(20, 60, true, false), 3), Is.EqualTo(20), "every unit of the guard");
+
+			// all-in + core under attack = count - floor (the learned floor holds: 60 percent of 20 = 12)
+			Assert.That(GuardFloor.Lend(plan, 20, GuardFloor.FloorUnits(20, 60, true, true), 3), Is.EqualTo(8), "count - floor");
+
+			// no all-in: the ordinary share, narrowed by the floor, as before (the plan is the ordinary share)
+			Assert.That(GuardFloor.Plan(planned, 20, false), Is.EqualTo(planned));
+			Assert.That(GuardFloor.Lend(GuardFloor.Plan(planned, 20, false), 20, GuardFloor.FloorUnits(20, 60, false, false), 3), Is.EqualTo(8), "outside an all-in the floor of 12 holds 12 of 20");
+			Assert.That(GuardFloor.Lend(GuardFloor.Plan(planned, 20, false), 20, GuardFloor.FloorUnits(20, 0, false, false), 3), Is.EqualTo(10), "no floor: the ordinary share");
+		}
+
+		[Test]
+		public void AnAllInEvaluatesTheWholeGuardEvenWhenTheOrdinaryShareMissesTheJoinMinimum()
+		{
+			// guard 4, join minimum 3: the ordinary 50 percent share is 2 (< 3), so the plain lend is 0 ...
 			var plain = GuardLend.Units(4, 4, 50, 3);
 			Assert.That(plain, Is.EqualTo(0));
+			Assert.That(GuardFloor.Lend(GuardFloor.Plan(plain, 4, false), 4, GuardFloor.FloorUnits(4, 60, false, false), 3), Is.EqualTo(0), "outside an all-in a planned zero stays zero");
 
-			// ... and it stays 0 under an open all-in: the floor row never turns a planned zero into a lend (any 90 percent share elsewhere is the all-in's own learnable input)
-			Assert.That(GuardFloor.Lend(plain, 4, GuardFloor.FloorUnits(4, 60, true, false), 3), Is.EqualTo(0));
-			Assert.That(GuardFloor.Lend(plain, 4, GuardFloor.FloorUnits(4, 0, false, false), 3), Is.EqualTo(0));
+			// ... under an open all-in the whole guard (4) meets the join minimum and goes, so the wiring asks the row BEFORE it rejects the zero (Sol FIX_STATIC on db515678, now with Opus' whole-guard rule)
+			Assert.That(GuardFloor.Lend(GuardFloor.Plan(plain, 4, true), 4, GuardFloor.FloorUnits(4, 60, true, false), 3), Is.EqualTo(4));
 
-			// a planned lend passes in full once the floor is 0 (guard 20, plan 10 of the ordinary share): the all-in frees the units the floor would hold, nothing more
-			var planned = GuardLend.Units(20, 20, 50, 3);
-			Assert.That(GuardFloor.Lend(planned, 20, GuardFloor.FloorUnits(20, 60, true, false), 3), Is.EqualTo(planned));
-			Assert.That(GuardFloor.Lend(planned, 20, GuardFloor.FloorUnits(20, 60, false, false), 3), Is.EqualTo(8), "outside an all-in the floor of 12 holds 12 of 20");
+			// the join minimum still applies: a guard below it lends nothing even in an all-in
+			Assert.That(GuardFloor.Lend(GuardFloor.Plan(0, 2, true), 2, GuardFloor.FloorUnits(2, 60, true, false), 3), Is.EqualTo(0));
+		}
 
-			// an own core under attack enforces the floor even during the all-in (the guard stays; only the units above the floor can go)
-			Assert.That(GuardFloor.Lend(planned, 20, GuardFloor.FloorUnits(20, 60, true, true), 3), Is.EqualTo(8));
+		[Test]
+		public void TheAllInNeverLendsMoreThanTheJoinableUnitsOrTheUnitsAboveTheFloor()
+		{
+			// the lend names units out of the joinable list, so it can never exceed it (the wiring cuts the list to the lend); and it never digs into an enforced floor
+			for (var guard = 0; guard <= 30; guard++)
+				for (var joinable = 0; joinable <= guard; joinable++)
+					foreach (var enforced in new[] { false, true })
+					{
+						var floor = GuardFloor.FloorUnits(guard, 60, true, enforced);
+						var lend = GuardFloor.Lend(GuardFloor.Plan(0, joinable, true), guard, floor, 3);
+						var label = "guard " + guard + " joinable " + joinable + " enforced " + enforced;
+						Assert.That(lend, Is.LessThanOrEqualTo(joinable), label);
+						Assert.That(guard - lend, Is.GreaterThanOrEqualTo(floor), label);
+						Assert.That(lend == 0 || lend >= 3, Is.True, label);
+						if (!enforced && joinable >= 3)
+							Assert.That(lend, Is.EqualTo(joinable), "not enforced: every joinable unit goes, " + label);
+					}
+
+			Assert.That(GuardFloor.Plan(7, -3, true), Is.EqualTo(0), "nothing joinable, nothing planned");
 		}
 
 		[Test]
@@ -234,7 +271,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(part, Does.Contain("var floor = GuardFloor.FloorUnits(count, GuardFloorParameters.FloorPct, allIn, enforced);"), "the floor is the learned percent; 0 during an all-in unless the core is under attack");
 			Assert.That(part, Does.Not.Contain("allIn, false)"), "the own-base flag is no longer hard-coded false");
 
-			// (1) no all-in lend share of its own: the row never recomputes a lend and never reads the lend share
+			// (1) no 90 percent constant and no ordinary share under an all-in: the row never recomputes a lend from the lend share; the plan is the joinable count
 			Assert.That(part, Does.Not.Contain("AllInLendPercent"));
 			Assert.That(part, Does.Not.Contain("GuardLend.Units("), "the planned lend is the ordinary share, only narrowed");
 			Assert.That(part, Does.Not.Contain("plannedLend ="), "the planned lend is never reassigned");
@@ -255,7 +292,9 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(protect, Is.GreaterThan(0));
 			Assert.That(priority, Is.GreaterThan(protect), "recorded right after the P0 test, with the attack the bot SAW and the defence it measured");
 			Assert.That(Count(own, "NoteCoreAttack("), Is.EqualTo(1));
-			Assert.That(part, Does.Contain("GuardFloor.Lend(plannedLend, count, floor, Info.TeamLeadJoinMinUnits)"));
+			Assert.That(part, Does.Contain("var plan = GuardFloor.Plan(plannedLend, armyGuardLend.Count, allIn);"), "(1) an open all-in plans every joinable unit, not the ordinary share");
+			Assert.That(part, Does.Contain("GuardFloor.Lend(plan, count, floor, Info.TeamLeadJoinMinUnits)"), "only the join minimum applies to the whole guard");
+			Assert.That(part, Does.Not.Contain("GuardFloor.Lend(plannedLend"), "the ordinary share never goes straight to the floor");
 
 			// nothing but the lend count changes: no unit moves, no state, no order, no draw
 			foreach (var banned in new[] { "guard.Units.Remove", "unitsHangingAroundTheBase", "QueueOrder", "ChangeState", "DismissSquad", "Random" })

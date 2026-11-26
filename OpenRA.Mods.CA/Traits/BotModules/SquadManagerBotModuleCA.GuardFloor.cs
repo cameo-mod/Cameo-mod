@@ -15,9 +15,9 @@ namespace OpenRA.Mods.CA.Traits
 {
 	// CONSOLIDATE-03 P7 (b), row sq_guard_floor (design 01 R4 guard minimum, Opus review change 2). With the row on the quiet home guard keeps a learned minimum: ArmyGuardPick hands the planned lend (the lend share) to
 	// GuardFloorLend, which lets only the units above the floor go. The floor is a percent of the guard from the personality prior in the yaml (turtle high, rush and steamroller low), overridable per player through
-	// GuardFloorParameters (the learner's table; the 4-value aggregation is its job). While an all-in order is open the floor is 0, and nothing else changes: the row adds no lend share of its own (Opus ruling on 1f77a1c1e;
-	// any 90 percent share elsewhere stays the all-in's learnable input, the floor adds no hold on top). The one exception is an own core under attack: the floor is then enforced, computed from the R1 condition
-	// (CoreUnderAttackNow, see NoteCoreAttack), not assumed. The lend-return window is a key of the same table; its use at the return path comes after the baseline counters (the cancelled order already hands the units back).
+	// GuardFloorParameters (the learner's table; the 4-value aggregation is its job). While an all-in order is open the WHOLE quiet guard may go (Opus second read of 8b1235d2b: a quiet guard is R7, the all-in claims R4-R7): the plan is every
+	// joinable unit and the floor is 0, with no 90 percent constant and no ordinary share, neither would be a hold; only the join minimum applies. The one exception is an own core under attack: the learned floor is then
+	// enforced and only the units above it go, computed from the R1 condition (CoreUnderAttackNow, see NoteCoreAttack), not assumed. The lend-return window is a key of the same table; its use at the return path comes after the baseline counters (the cancelled order already hands the units back).
 	public partial class SquadManagerBotModuleCA
 	{
 		AblationLatch ablateGuardFloor;
@@ -53,18 +53,19 @@ namespace OpenRA.Mods.CA.Traits
 				coreAttackTick = World.WorldTick;
 		}
 
-		/// <summary>The units the quiet guard lends once it keeps its floor (the planned lend, narrowed; it never adds). Under an open all-in the floor is 0 unless the own core is under attack (R1).</summary>
+		/// <summary>The units the quiet guard lends once it keeps its floor. Outside an all-in: the planned lend (the ordinary share), narrowed by the floor, never added to. Under an open all-in: every joinable unit above the floor, which is 0 unless the own core is under attack (R1).</summary>
 		int GuardFloorLend(SquadCA guard, int plannedLend)
 		{
 			var count = guard.Units.Count;
 			var allIn = TeamLeadOpenOrder() is { AllIn: true };
 			var enforced = CoreUnderAttackNow;
+			var plan = GuardFloor.Plan(plannedLend, armyGuardLend.Count, allIn);
 			var floor = GuardFloor.FloorUnits(count, GuardFloorParameters.FloorPct, allIn, enforced);
-			var lend = GuardFloor.Lend(plannedLend, count, floor, Info.TeamLeadJoinMinUnits);
+			var lend = GuardFloor.Lend(plan, count, floor, Info.TeamLeadJoinMinUnits);
 			if (DiagnosticWriter != null && World.WorldTick - guardFloorLogTick >= 250)
 			{
 				guardFloorLogTick = World.WorldTick;
-				DiagnosticTeamEvent("sq_guard_floor", "guard=" + count + " floor=" + floor + " pct=" + GuardFloorParameters.FloorPct + " all_in=" + (allIn ? 1 : 0) + " core_attack=" + (enforced ? 1 : 0) + " planned=" + plannedLend + " lend=" + lend);
+				DiagnosticTeamEvent("sq_guard_floor", "guard=" + count + " floor=" + floor + " pct=" + GuardFloorParameters.FloorPct + " all_in=" + (allIn ? 1 : 0) + " core_attack=" + (enforced ? 1 : 0) + " planned=" + plannedLend + " plan=" + plan + " lend=" + lend);
 			}
 
 			return lend;

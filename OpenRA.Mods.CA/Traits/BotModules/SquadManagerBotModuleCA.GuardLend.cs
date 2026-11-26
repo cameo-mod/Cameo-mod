@@ -58,8 +58,8 @@ namespace OpenRA.Mods.CA.Traits
 
 			var lend = GuardLend.Units(guard.Units.Count, armyGuardLend.Count, Info.ArmyGuardLendPercent, Info.TeamLeadJoinMinUnits);
 
-			// CONSOLIDATE-03 P7 (b) row sq_guard_floor: the guard keeps its learned minimum (0 during an open all-in unless the own core is under attack); only the units above it can be lent. The row only narrows the
-			// ordinary share, so a planned zero stays zero and it adds no all-in lend share of its own (Opus ruling on 1f77a1c1e).
+			// CONSOLIDATE-03 P7 (b) row sq_guard_floor: the guard keeps its learned minimum and only the units above it can be lent. Outside an all-in the row only narrows the ordinary share. During an open all-in the whole
+			// quiet guard may go (floor 0 unless the own core is under attack), so the row is asked before a zero is rejected: the ordinary share may miss the join minimum while the whole guard meets it.
 			if (GuardFloorOn)
 				lend = GuardFloorLend(guard, lend);
 
