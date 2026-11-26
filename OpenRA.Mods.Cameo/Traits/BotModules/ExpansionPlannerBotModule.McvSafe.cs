@@ -71,41 +71,28 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		public enum McvHandoutKind { None, Field, Base }
 
-		public enum McvDeployPhase { Fields, Base, Hold }
+		public enum McvDeployPhase { Fields, Base }
 
 		public readonly struct McvDeployFailState
 		{
 			public readonly int Failures;
-			public readonly int HoldUntil;
 
-			public McvDeployFailState(int failures, int holdUntil)
+			public McvDeployFailState(int failures)
 			{
 				Failures = failures;
-				HoldUntil = holdUntil;
 			}
 		}
 
-		/// <summary>MCV-DEPLOY-FAIL-01 (pure): the per-MCV breaker. Field handouts until McvMaxFailedDeploys failures, one base try, then a hold.</summary>
+		/// <summary>
+		/// MCV-DEPLOY-FAIL-01 (pure): the per-MCV breaker. Fields are handed out until McvMaxFailedDeploys failures; at exactly that count
+		/// one base try is made; after it the planner returns to fields (F1 has parked each failed field). No hold.
+		/// </summary>
 		public static class McvDeployFailure
 		{
-			public static McvDeployFailState Expire(McvDeployFailState s, int now) =>
-				s.HoldUntil != 0 && now >= s.HoldUntil ? new McvDeployFailState(0, 0) : s;
+			public static McvDeployPhase Decide(McvDeployFailState s, int maxFailed) =>
+				maxFailed > 0 && s.Failures == maxFailed ? McvDeployPhase.Base : McvDeployPhase.Fields;
 
-			public static McvDeployPhase Decide(McvDeployFailState s, int now, int maxFailed)
-			{
-				if (maxFailed <= 0)
-					return McvDeployPhase.Fields;
-
-				if (s.HoldUntil > now)
-					return McvDeployPhase.Hold;
-
-				return s.Failures >= maxFailed ? McvDeployPhase.Base : McvDeployPhase.Fields;
-			}
-
-			public static McvDeployFailState OnFailed(McvDeployFailState s, McvHandoutKind kind, int now, int holdTicks) =>
-				kind == McvHandoutKind.Base
-					? new McvDeployFailState(s.Failures + 1, now + holdTicks)
-					: new McvDeployFailState(s.Failures + 1, 0);
+			public static McvDeployFailState OnFailed(McvDeployFailState s) => new McvDeployFailState(s.Failures + 1);
 
 			public static bool IsFailure(int issueTick, int now, bool idle, bool alive) => idle && alive && now > issueTick;
 		}
@@ -484,7 +471,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			mcvPending.Remove(mcv.ActorID);
 			mcvDeployFailState.TryGetValue(mcv.ActorID, out var known);
-			var state = McvDeployFailure.OnFailed(known, pending.Kind, now, Info.McvFailHoldTicks);
+			var state = McvDeployFailure.OnFailed(known);
 			mcvDeployFailState[mcv.ActorID] = state;
 			if (pending.Kind == McvHandoutKind.Field && pending.Field >= 0)
 				parkedUntil[pending.Field] = now + Info.DeployFailParkTicks;
@@ -495,7 +482,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var into = transformInfo == null ? null : world.Map.Rules.Actors[transformInfo.IntoActor];
 			var buildingInfo = into?.TraitInfoOrDefault<BuildingInfo>();
 			var canPlace = into != null && buildingInfo != null && world.CanPlaceBuilding(mcv.Location + transformInfo.Offset, into, buildingInfo, mcv);
-			Log.Write("debug", $"AI ({player.ClientIndex}): mcv_deploy_fail mcv={mcv.ActorID} cell={mcv.Location} kind={pending.Kind} field={pending.Field} field_centre={pending.Center} move_result={mobile?.MoveResult} can_place={canPlace} source=planner_handout failures={state.Failures} hold_until={state.HoldUntil} tick={now}");
+			Log.Write("debug", $"AI ({player.ClientIndex}): mcv_deploy_fail mcv={mcv.ActorID} cell={mcv.Location} kind={pending.Kind} field={pending.Field} field_centre={pending.Center} move_result={mobile?.MoveResult} can_place={canPlace} order_source=unknown attempt=move+deploy_pair failures={state.Failures} tick={now}");
 #endif
 		}
 

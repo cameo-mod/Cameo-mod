@@ -4,7 +4,6 @@ using NUnit.Framework;
 using DeployBreaker = OpenRA.Mods.Cameo.Traits.BotModules.ExpansionPlannerBotModule.McvDeployFailure;
 using DeployPhase = OpenRA.Mods.Cameo.Traits.BotModules.ExpansionPlannerBotModule.McvDeployPhase;
 using DeployState = OpenRA.Mods.Cameo.Traits.BotModules.ExpansionPlannerBotModule.McvDeployFailState;
-using HandoutKind = OpenRA.Mods.Cameo.Traits.BotModules.ExpansionPlannerBotModule.McvHandoutKind;
 
 namespace OpenRA.Mods.Cameo.Test
 {
@@ -21,7 +20,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var s = default(DeployState);
 			for (var i = 0; i < count; i++)
-				s = DeployBreaker.OnFailed(s, HandoutKind.Field, 100 + i, 1500);
+				s = DeployBreaker.OnFailed(s);
 
 			return s;
 		}
@@ -29,7 +28,7 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void FreshMcvHandsOutFields()
 		{
-			Assert.That(DeployBreaker.Decide(default(DeployState), 0, 6), Is.EqualTo(DeployPhase.Fields));
+			Assert.That(DeployBreaker.Decide(default(DeployState), 6), Is.EqualTo(DeployPhase.Fields));
 		}
 
 		[Test]
@@ -37,50 +36,35 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var s = FailFields(5);
 			Assert.That(s.Failures, Is.EqualTo(5));
-			Assert.That(DeployBreaker.Decide(s, 200, 6), Is.EqualTo(DeployPhase.Fields));
+			Assert.That(DeployBreaker.Decide(s, 6), Is.EqualTo(DeployPhase.Fields));
 		}
 
 		[Test]
-		public void SixthFieldFailureSendsOneBaseTry()
+		public void MaxFailureCountSendsOneBaseTry()
 		{
-			Assert.That(DeployBreaker.Decide(FailFields(6), 200, 6), Is.EqualTo(DeployPhase.Base));
+			Assert.That(DeployBreaker.Decide(FailFields(6), 6), Is.EqualTo(DeployPhase.Base));
 		}
 
 		[Test]
-		public void BaseFailureHoldsForHoldTicks()
+		public void AfterTheBaseTryFieldsResume()
 		{
-			var s = DeployBreaker.OnFailed(FailFields(6), HandoutKind.Base, 1000, 1500);
-			Assert.That(s.HoldUntil, Is.EqualTo(2500));
-			Assert.That(DeployBreaker.Decide(s, 1001, 6), Is.EqualTo(DeployPhase.Hold));
-			Assert.That(DeployBreaker.Decide(s, 2499, 6), Is.EqualTo(DeployPhase.Hold));
+			var s = DeployBreaker.OnFailed(FailFields(6));
+			Assert.That(s.Failures, Is.EqualTo(7));
+			Assert.That(DeployBreaker.Decide(s, 6), Is.EqualTo(DeployPhase.Fields));
 		}
 
 		[Test]
-		public void HoldExpiryResetsToFields()
+		public void BaseTryIsNotRepeatedWhileFailuresKeepGrowing()
 		{
-			var held = DeployBreaker.OnFailed(FailFields(6), HandoutKind.Base, 1000, 1500);
-			var stillHeld = DeployBreaker.Expire(held, 2499);
-			Assert.That(stillHeld.Failures, Is.EqualTo(7));
-			Assert.That(stillHeld.HoldUntil, Is.EqualTo(2500));
-
-			var expired = DeployBreaker.Expire(held, 2500);
-			Assert.That(expired.Failures, Is.EqualTo(0));
-			Assert.That(expired.HoldUntil, Is.EqualTo(0));
-			Assert.That(DeployBreaker.Decide(expired, 2500, 6), Is.EqualTo(DeployPhase.Fields));
-		}
-
-		[Test]
-		public void FieldFailureNeverHolds()
-		{
-			var s = DeployBreaker.OnFailed(default(DeployState), HandoutKind.Field, 1000, 1500);
-			Assert.That(s.Failures, Is.EqualTo(1));
-			Assert.That(s.HoldUntil, Is.EqualTo(0));
+			Assert.That(DeployBreaker.Decide(FailFields(8), 6), Is.EqualTo(DeployPhase.Fields));
+			Assert.That(DeployBreaker.Decide(FailFields(9), 6), Is.EqualTo(DeployPhase.Fields));
 		}
 
 		[Test]
 		public void DisabledBreakerAlwaysHandsOutFields()
 		{
-			Assert.That(DeployBreaker.Decide(new DeployState(99, 0), 0, 0), Is.EqualTo(DeployPhase.Fields));
+			Assert.That(DeployBreaker.Decide(new DeployState(6), 0), Is.EqualTo(DeployPhase.Fields));
+			Assert.That(DeployBreaker.Decide(new DeployState(99), 0), Is.EqualTo(DeployPhase.Fields));
 		}
 
 		[Test]
@@ -99,7 +83,13 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(planner, Does.Contain("public readonly bool McvDeployFailPark = false;"));
 			Assert.That(planner, Does.Contain("public readonly int DeployFailParkTicks = 600;"));
 			Assert.That(planner, Does.Contain("public readonly int McvMaxFailedDeploys = 6;"));
-			Assert.That(planner, Does.Contain("public readonly int McvFailHoldTicks = 1500;"));
+		}
+
+		[Test]
+		public void SourcePinNoHoldIsLeft()
+		{
+			Assert.That(Planner(), Does.Not.Contain("McvFailHoldTicks"));
+			Assert.That(Safe(), Does.Not.Contain("HoldUntil"));
 		}
 
 		[Test]
@@ -107,12 +97,12 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var planner = Planner();
 			Assert.That(planner, Does.Contain("AblationIds.McvDeployFailPark"));
-			Assert.That(planner, Does.Contain("McvDeployFailure.Decide(failState, tick, Info.McvMaxFailedDeploys)"));
+			Assert.That(planner, Does.Contain("McvDeployFailure.Decide(known, Info.McvMaxFailedDeploys) == McvDeployPhase.Base"));
 			Assert.That(planner, Does.Contain("NoteMcvHandout(mcv, McvHandoutKind.Field, s.Index, s.Center, tick);"));
 		}
 
 		[Test]
-		public void SourcePinGuardCallsDeployFailedOnlyOnIdleMcvs()
+		public void SourcePinGuardCallsDeployFailedOnIdleMcvs()
 		{
 			var safe = Safe();
 			Assert.That(safe, Does.Contain("McvDeployFailed(mcv, now);"));
@@ -127,7 +117,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(safe, Does.Contain("mcv_deploy_fail"));
 			Assert.That(safe, Does.Contain("move_result="));
 			Assert.That(safe, Does.Contain("can_place="));
-			Assert.That(safe, Does.Contain("source=planner_handout"));
+			Assert.That(safe, Does.Contain("order_source=unknown"));
 		}
 	}
 }

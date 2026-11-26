@@ -219,10 +219,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("MCV-DEPLOY-FAIL-01: failed handouts since an MCV last became a yard before the planner sends it to the base once.")]
 		public readonly int McvMaxFailedDeploys = 6;
 
-		[Desc("MCV-DEPLOY-FAIL-01: ticks no field is handed to an MCV whose base fallback also failed. The engine module then picks",
-			"its own site (the planner cannot stop the engine re-issuing an idle MCV, so this is not a true hold; see the RCA).")]
-		public readonly int McvFailHoldTicks = 1500;
-
 		[Desc("Greedy expansion: the planner requests construction-MCV production itself while a free field beyond the",
 			"building line's reach (McvMinHops) exists, instead of waiting for the MCV module's high cash trigger.",
 			"The engine module still decides where to send it (EX-3) and placement/dedup is unchanged.")]
@@ -3326,13 +3322,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// MCV-DEPLOY-FAIL-01: per-MCV breaker. Only with the switch on and McvSafe armed (the handout records come from the guard pass).
 			if (McvDeployFailParkOn && safe != null)
 			{
-				var failState = McvDeployFailure.Expire(mcvDeployFailState.TryGetValue(mcv.ActorID, out var known) ? known : default, tick);
-				mcvDeployFailState[mcv.ActorID] = failState;
-				var phase = McvDeployFailure.Decide(failState, tick, Info.McvMaxFailedDeploys);
-				if (phase == McvDeployPhase.Hold)
-					return null;
-
-				if (phase == McvDeployPhase.Base)
+				mcvDeployFailState.TryGetValue(mcv.ActorID, out var known);
+				if (McvDeployFailure.Decide(known, Info.McvMaxFailedDeploys) == McvDeployPhase.Base)
 				{
 					var baseSite = McvSafeFallback(safe, mcv);
 					if (baseSite is CPos baseCell)
