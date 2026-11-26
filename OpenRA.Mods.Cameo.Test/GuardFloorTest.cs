@@ -81,14 +81,10 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void AnAllInLendsUpToTheMostAGuardEverLendsAndTheFloorNeverRaisesTheLend()
+		public void TheFloorNeverRaisesTheLend()
 		{
-			Assert.That(GuardFloor.AllInLendPercent, Is.EqualTo(GuardLend.MaxPercent));
 			var planned = GuardLend.Units(20, 20, 50, 3);
 			Assert.That(planned, Is.EqualTo(10));
-			var allIn = GuardLend.Units(20, 20, GuardFloor.AllInLendPercent, 3);
-			Assert.That(allIn, Is.EqualTo(18), "90 percent of 20");
-			Assert.That(GuardFloor.Lend(allIn, 20, GuardFloor.FloorUnits(20, 60, true, false), 3), Is.EqualTo(18));
 			Assert.That(GuardFloor.Lend(planned, 20, GuardFloor.FloorUnits(20, 60, false, false), 3), Is.LessThanOrEqualTo(planned), "narrows, never adds");
 
 			// for every guard size and floor the floor row never lends more than the plain lend share
@@ -103,20 +99,33 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void AnAllInShareIsEvaluatedEvenWhenTheOrdinaryShareMissesTheJoinMinimum()
+		public void AnOpenAllInOnlyDropsTheFloorAndAddsNoLendShareOfItsOwn()
 		{
-			// guard 4, join minimum 3: the ordinary 50 percent share is 2 (< 3), so the plain lend is 0 ...
+			// Opus ruling on 1f77a1c1e: during an open all-in the floor is 0, NOT a 90 percent lend. Guard 4, join minimum 3: the ordinary 50 percent share is 2 (< 3), so the plain lend is 0 ...
 			var plain = GuardLend.Units(4, 4, 50, 3);
 			Assert.That(plain, Is.EqualTo(0));
 
-			// ... but the open all-in share (90 percent) is 3, and with the all-in floor of 0 the floor row lends all 3. The wiring therefore must ask the row BEFORE rejecting the zero.
-			var allIn = GuardLend.Units(4, 4, GuardFloor.AllInLendPercent, 3);
-			Assert.That(allIn, Is.EqualTo(3));
-			Assert.That(GuardFloor.Lend(allIn, 4, GuardFloor.FloorUnits(4, 60, true, false), 3), Is.EqualTo(3));
-
-			// without an all-in the zero stays a zero: a planned 0 never becomes a lend, with or without a floor
+			// ... and it stays 0 under an open all-in: the floor row never turns a planned zero into a lend (any 90 percent share elsewhere is the all-in's own learnable input)
+			Assert.That(GuardFloor.Lend(plain, 4, GuardFloor.FloorUnits(4, 60, true, false), 3), Is.EqualTo(0));
 			Assert.That(GuardFloor.Lend(plain, 4, GuardFloor.FloorUnits(4, 0, false, false), 3), Is.EqualTo(0));
-			Assert.That(GuardFloor.Lend(plain, 4, GuardFloor.FloorUnits(4, 60, false, false), 3), Is.EqualTo(0));
+
+			// a planned lend passes in full once the floor is 0 (guard 20, plan 10 of the ordinary share): the all-in frees the units the floor would hold, nothing more
+			var planned = GuardLend.Units(20, 20, 50, 3);
+			Assert.That(GuardFloor.Lend(planned, 20, GuardFloor.FloorUnits(20, 60, true, false), 3), Is.EqualTo(planned));
+			Assert.That(GuardFloor.Lend(planned, 20, GuardFloor.FloorUnits(20, 60, false, false), 3), Is.EqualTo(8), "outside an all-in the floor of 12 holds 12 of 20");
+
+			// an own core under attack enforces the floor even during the all-in (the guard stays; only the units above the floor can go)
+			Assert.That(GuardFloor.Lend(planned, 20, GuardFloor.FloorUnits(20, 60, true, true), 3), Is.EqualTo(8));
+		}
+
+		[Test]
+		public void TheCoreCountsAsUnderAttackForTheHoldWindowAfterTheLastObservedHit()
+		{
+			Assert.That(GuardFloor.CoreAttackRecent(1000, -1), Is.False, "never hit");
+			Assert.That(GuardFloor.CoreAttackRecent(1000, 1000), Is.True, "hit this very tick");
+			Assert.That(GuardFloor.CoreAttackRecent(1000 + GuardFloor.CoreAttackHoldTicks, 1000), Is.True, "inclusive at the end of the window");
+			Assert.That(GuardFloor.CoreAttackRecent(1001 + GuardFloor.CoreAttackHoldTicks, 1000), Is.False, "the window has run");
+			Assert.That(GuardFloor.CoreAttackRecent(0, 0), Is.True, "tick 0 is a valid hit tick");
 		}
 
 		[Test]
@@ -210,16 +219,50 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(cut, Is.GreaterThan(empty), "the list is cut to the narrowed lend");
 			Assert.That(Count(wiring, "GuardFloorLend("), Is.EqualTo(1));
 
+			// the own-base-defence flag of the floor is hard-coded false because the floor is reached only by a QUIET guard (Haiku review of 1f77a1c1e): the quiet test and the state test stay above the floor
+			var quiet = wiring.IndexOf("if (!GuardLend.Quiet(", StringComparison.Ordinal);
+			var state = wiring.IndexOf("is not (UnitsForProtectionIdleState or UnitsForProtectionAttackState)", StringComparison.Ordinal);
+			Assert.That(state, Is.GreaterThan(0));
+			Assert.That(quiet, Is.GreaterThan(state));
+			Assert.That(floor, Is.GreaterThan(quiet), "the floor row is never reached by a guard that is fighting, holding a rally, answering a request or facing a threat");
 			var part = RepoFile(Bots + "SquadManagerBotModuleCA.GuardFloor.cs");
 			Assert.That(part, Does.Contain("AblationLatch ablateGuardFloor;"));
 			Assert.That(part, Does.Contain("internal bool GuardFloorOn => ArmyGuardLendOn && Info.GuardFloorEnabled && !ablateGuardFloor.Off(Player, AblationIds.SqGuardFloor);"), "needs guard-lend");
 			Assert.That(part, Does.Contain("guardFloorTable ??= new GuardFloorTable(Info.GuardFloorPercent, Info.GuardFloorReturnTicks)"), "the prior is the yaml; a learner overrides the table");
 			Assert.That(part, Does.Contain("var allIn = TeamLeadOpenOrder() is { AllIn: true };"));
-			Assert.That(part, Does.Contain("var floor = GuardFloor.FloorUnits(count, GuardFloorParameters.FloorPct, allIn, false);"), "the floor is the learned percent; 0 during an all-in");
+			Assert.That(part, Does.Contain("var enforced = CoreUnderAttackNow;"), "(2) computed, not assumed");
+			Assert.That(part, Does.Contain("var floor = GuardFloor.FloorUnits(count, GuardFloorParameters.FloorPct, allIn, enforced);"), "the floor is the learned percent; 0 during an all-in unless the core is under attack");
+			Assert.That(part, Does.Not.Contain("allIn, false)"), "the own-base flag is no longer hard-coded false");
+
+			// (1) no all-in lend share of its own: the row never recomputes a lend and never reads the lend share
+			Assert.That(part, Does.Not.Contain("AllInLendPercent"));
+			Assert.That(part, Does.Not.Contain("GuardLend.Units("), "the planned lend is the ordinary share, only narrowed");
+			Assert.That(part, Does.Not.Contain("plannedLend ="), "the planned lend is never reassigned");
+			Assert.That(RepoFile(Bots + "Squads/GuardFloor.cs"), Does.Not.Contain("AllInLendPercent"));
+
+			// (2) the R1 condition is computed from observed values where the own-base answer measures it, supplied through the one pure definition
+			Assert.That(part, Does.Contain("internal bool CoreUnderAttackNow => GuardFloor.CoreAttackRecent(World.WorldTick, coreAttackTick);"));
+			Assert.That(part, Does.Contain("void NoteCoreAttack(Actor victim, long observedAttack, long homeDefence)"));
+			Assert.That(part, Does.Contain("if (DutyArbiter.CoreUnderAttack(yard, production, refinery, observedAttack, homeDefence))\n\t\t\t\tcoreAttackTick = World.WorldTick;"));
+			Assert.That(part, Does.Contain("var yard = victim.Info.HasTraitInfo<BaseBuildingInfo>();"));
+			Assert.That(part, Does.Contain("var production = victim.Info.HasTraitInfo<BuildingInfo>() && victim.Info.HasTraitInfo<ProductionInfo>();"));
+			Assert.That(part, Does.Contain("var refinery = victim.Info.HasTraitInfo<RefineryInfo>();"));
+			Assert.That(part, Does.Contain("if (!GuardFloorOn || victim == null || victim.IsDead)\n\t\t\t\treturn;"), "off = nothing recorded");
+
+			var own = RepoFile(Bots + "SquadManagerBotModuleCA.Pipeline02.cs");
+			var protect = own.IndexOf("void ArbiterProtectOwn(", StringComparison.Ordinal);
+			var priority = own.IndexOf("var priority = DefendArbiterCA.Own(core, attack, defence + poolValue);\n\t\t\tNoteCoreAttack(victim, attack, defence + poolValue);\n\t\t\tlong need = 0;", StringComparison.Ordinal);
+			Assert.That(protect, Is.GreaterThan(0));
+			Assert.That(priority, Is.GreaterThan(protect), "recorded right after the P0 test, with the attack the bot SAW and the defence it measured");
+			Assert.That(Count(own, "NoteCoreAttack("), Is.EqualTo(1));
 			Assert.That(part, Does.Contain("GuardFloor.Lend(plannedLend, count, floor, Info.TeamLeadJoinMinUnits)"));
 
 			// nothing but the lend count changes: no unit moves, no state, no order, no draw
 			foreach (var banned in new[] { "guard.Units.Remove", "unitsHangingAroundTheBase", "QueueOrder", "ChangeState", "DismissSquad", "Random" })
+				Assert.That(part, Does.Not.Contain(banned), banned);
+
+			// (3) no unseen-actor reads: the same scan as the guard-lend wiring (Squad02GuardLendTest), on the row's own partial; the R1 input is the attack value the answer already measured from what the bot sees
+			foreach (var banned in new[] { "FindClosestEnemy", "FindActorsInCircle", "FindActorsInBox", "World.Actors", "ActorsWithTrait", "FrozenActorLayer", "Random" })
 				Assert.That(part, Does.Not.Contain(banned), banned);
 		}
 
@@ -227,7 +270,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheSeamIsWorldFreeAndTheGuardLendPinsStillHold()
 		{
 			var seam = RepoFile(Bots + "Squads/GuardFloor.cs");
-			foreach (var banned in new[] { "Random", "World", "Actor", "Player", "FindActors" })
+			foreach (var banned in new[] { "Random", "World", "Actor", "Player", "FindActors", "FindClosestEnemy", "FrozenActorLayer", "ActorsWithTrait" })
 				Assert.That(seam, Does.Not.Contain(banned), banned);
 
 			// the existing guard-lend wiring text is untouched: the share line, the quiet test, the banned scans

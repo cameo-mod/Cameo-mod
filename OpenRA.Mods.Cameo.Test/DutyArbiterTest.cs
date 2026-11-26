@@ -112,6 +112,32 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TheCoreIsUnderAttackWhenAYardProductionOrRefineryIsHitByAnObservedForceAtOrAboveTheHomeDefence()
+		{
+			// each of the three core kinds counts, with an observed force at or above the home defence measured at the scene
+			Assert.That(DutyArbiter.CoreUnderAttack(true, false, false, 900, 800), Is.True, "yard");
+			Assert.That(DutyArbiter.CoreUnderAttack(false, true, false, 900, 800), Is.True, "production");
+			Assert.That(DutyArbiter.CoreUnderAttack(false, false, true, 900, 800), Is.True, "refinery");
+			Assert.That(DutyArbiter.CoreUnderAttack(true, false, false, 800, 800), Is.True, "at the threshold counts (at or above)");
+
+			// no core building hit, or a force below the home defence: not the core under attack
+			Assert.That(DutyArbiter.CoreUnderAttack(false, false, false, 5000, 800), Is.False, "a hit on a non-core building is R3 at most");
+			Assert.That(DutyArbiter.CoreUnderAttack(true, true, true, 799, 800), Is.False, "the home defence holds");
+
+			// an attacker nobody saw has value 0: it never counts, whatever the defence (the threshold is at least 1)
+			Assert.That(DutyArbiter.CoreAttackThreshold(0), Is.EqualTo(1));
+			Assert.That(DutyArbiter.CoreAttackThreshold(-50), Is.EqualTo(1));
+			Assert.That(DutyArbiter.CoreAttackThreshold(800), Is.EqualTo(800));
+			Assert.That(DutyArbiter.CoreUnderAttack(true, true, true, 0, 0), Is.False, "a blind hit is not an observed force");
+			Assert.That(DutyArbiter.CoreUnderAttack(true, false, false, 1, 0), Is.True, "any observed force against an empty home defence");
+
+			// the flag feeds the holder side of the gate: the computed value makes the own-base holder R1
+			var holder = C(ArmyDuty.OwnBaseDefend, 2, DutyArbiter.CoreUnderAttack(false, true, false, 900, 800));
+			Assert.That(DutyArbiter.EffectiveRank(holder), Is.EqualTo(1));
+			Assert.That(DutyArbiter.MayTake(C(ArmyDuty.AllyDefend, 5), holder), Is.False);
+		}
+
+		[Test]
 		public void TheAllInClaimsEverythingFromRankFourDownAndNeverFromRankOneToThree()
 		{
 			foreach (var holder in new[] { ArmyDuty.GuardLend, ArmyDuty.TeamPush, ArmyDuty.PincerArm, ArmyDuty.AllIn, ArmyDuty.Stalemate, ArmyDuty.AttackLiveness, ArmyDuty.StandaloneAttack, ArmyDuty.Raid, ArmyDuty.Idle, ArmyDuty.None })
@@ -163,7 +189,8 @@ namespace OpenRA.Mods.Cameo.Test
 			foreach (var banned in new[] { "Random", "World", "Actor ", "Player", "FindActors", "Squad" })
 				Assert.That(seam, Does.Not.Contain(banned), banned);
 
-			// no squad-manager file calls it yet: the rows wait for the baseline counters
+			// no squad-manager file calls the gate yet: the rank rows wait for the baseline counters. The one use is the pure R1 definition, which the guard floor row computes its enforced flag from
+			// (Opus ruling on 1f77a1c1e); the rank gate, the all-in rule and the ETA / risk eligibility stay unwired.
 			var root = new DirectoryInfo(AppContext.BaseDirectory);
 			while (root != null && !File.Exists(Path.Combine(root.FullName, "mod.config")))
 				root = root.Parent;
@@ -172,7 +199,13 @@ namespace OpenRA.Mods.Cameo.Test
 			var files = Directory.GetFiles(Path.Combine(root.FullName, "OpenRA.Mods.CA", "Traits", "BotModules"), "SquadManagerBotModuleCA*.cs");
 			Assert.That(files, Is.Not.Empty);
 			foreach (var file in files)
-				Assert.That(File.ReadAllText(file), Does.Not.Contain("DutyArbiter."), file);
+			{
+				var text = File.ReadAllText(file).Replace("\r\n", "\n");
+				var uses = text.Split(new[] { "DutyArbiter." }, StringSplitOptions.None).Length - 1;
+				var core = text.Split(new[] { "DutyArbiter.CoreUnderAttack(" }, StringSplitOptions.None).Length - 1;
+				Assert.That(uses, Is.EqualTo(core), "only the R1 definition may be used: " + file);
+				Assert.That(core, Is.EqualTo(Path.GetFileName(file) == "SquadManagerBotModuleCA.GuardFloor.cs" ? 1 : 0), file);
+			}
 		}
 	}
 }

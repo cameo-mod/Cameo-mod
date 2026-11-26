@@ -17,20 +17,24 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 	/// CONSOLIDATE-03 P7 (b), row sq_guard_floor (design 01 R4 "guard minimum", Opus review change 2). The home guard (R4) declares a minimum: guard-lend lends only the units above it. The minimum is a LEARNED number, not a
 	/// constant: the personality prior comes from the yaml (turtle high, rush and steamroller low) and a learner overrides it per player under the keys below (the same contract as UnitRollTable, one table per module
 	/// instance, so every own personality keeps its own table; the 4-value aggregation of global, own faction, enemy faction and observed enemy style is the learner's job, LEARN-MULT-01). During an open all-in the
-	/// floor is 0, unless it is being enforced for an own-base defence (R1/R3). The lend-return tick is a learnable input of the same table. Pure: no world access, no RNG.
+	/// floor is 0, unless the own core is under attack (R1, enforced); the all-in adds no lend share of its own here (Opus ruling on 1f77a1c1e: any 90 percent share elsewhere stays the all-in's learnable input and
+	/// the floor adds no hold on top). The lend-return tick is a learnable input of the same table. Pure: no world access, no RNG.
 	/// </summary>
 	public static class GuardFloor
 	{
-		/// <summary>An open all-in commits the army: the guard may lend up to the most a guard ever lends.</summary>
-		public const int AllInLendPercent = GuardLend.MaxPercent;
+		/// <summary>How long after the last observed hit on the core it still counts as under attack (the quiet guard is picked again every pass; the flag must not flicker between two hits).</summary>
+		public const int CoreAttackHoldTicks = 500;
 
 		/// <summary>The guard units kept at home: floorPct percent of the guard, rounded up (never more than the guard).</summary>
 		public static int Units(int guardUnits, int floorPct) =>
 			guardUnits <= 0 ? 0 : (int)Math.Min(guardUnits, (((long)guardUnits * Math.Clamp(floorPct, 0, 100)) + 99) / 100);
 
-		/// <summary>The floor in units: 0 while an all-in is open (the dynamic all-in rule), unless the floor is enforced for an own-base defence (R1/R3); the percent floor otherwise.</summary>
+		/// <summary>The floor in units: 0 while an all-in is open (the dynamic all-in rule), unless the floor is enforced because the own core is under attack (R1); the percent floor otherwise.</summary>
 		public static int FloorUnits(int guardUnits, int floorPct, bool allInOpen, bool ownBaseDefenceEnforced) =>
 			allInOpen && !ownBaseDefenceEnforced ? 0 : Units(guardUnits, floorPct);
+
+		/// <summary>The core still counts as under attack for the hold window after the last observed hit (lastHitTick below 0 = never hit).</summary>
+		public static bool CoreAttackRecent(int now, int lastHitTick) => lastHitTick >= 0 && now - lastHitTick <= CoreAttackHoldTicks;
 
 		/// <summary>
 		/// The units a guard lends once it keeps its floor: the planned lend, never more than the units above the floor, and only as a batch of at least the join floor (a squad needs it), like GuardLend.Units. 0 = nothing.

@@ -53,6 +53,16 @@ namespace OpenRA.Mods.CA.Traits
 
 		public static int EffectiveRank(DutyClaim claim) => EffectiveRank(claim.Duty, claim.CoreUnderAttack);
 
+		/// <summary>The observed threshold of R1: a force at or above the home defence measured at the scene, and at least 1 so a hit by an attacker nobody saw (value 0) never counts.</summary>
+		public static long CoreAttackThreshold(long homeDefenceValue) => Math.Max(1, homeDefenceValue);
+
+		/// <summary>
+		/// R1 "own core under attack", computed (Opus ruling on 1f77a1c1e): the yard, a production building or a refinery is hit by an observed force at or above <see cref="CoreAttackThreshold"/>. The caller supplies it
+		/// holder-side as DutyClaim.CoreUnderAttack. Observed values only: the attacker value is what the bot saw.
+		/// </summary>
+		public static bool CoreUnderAttack(bool yardHit, bool productionHit, bool refineryHit, long observedAttackerValue, long homeDefenceValue) =>
+			ArmyDutyLedger.IsCoreUnderAttack(yardHit, productionHit, refineryHit, observedAttackerValue, CoreAttackThreshold(homeDefenceValue));
+
 		/// <summary>The all-in claim rule (Opus change 3): it claims everything at R4-R7, including the other team orders it replaces, and never a unit held at R1-R3 (an active core defence is R1).</summary>
 		public static bool AllInMayTake(DutyClaim holder) => holder.Duty == ArmyDuty.None || EffectiveRank(holder) >= AllInHighestTakenRank;
 
