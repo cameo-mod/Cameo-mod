@@ -150,16 +150,24 @@ end
 Tick = function ()
 	if Penta.HasNoRequiredUnits() then
 		Penta.MarkFailedObjective(PlayerOneObjective)
-		Penta.MarkFailedObjective(PlayerOneClear)
+		if PlayerOneClear then
+			Penta.MarkFailedObjective(PlayerOneClear)
+		end
 	end
 
 	if Shade.HasNoRequiredUnits() then
 		Shade.MarkFailedObjective(PlayerTwoObjective)
-		Shade.MarkFailedObjective(PlayerTwoClear)
+		if PlayerTwoClear then
+			Shade.MarkFailedObjective(PlayerTwoClear)
+		end
 	end
 
 	if NitroIdle.HasNoRequiredUnits() and NitroActive.HasNoRequiredUnits() then
-		Penta.MarkCompletedObjective(PlayerOneClear)
-		Shade.MarkCompletedObjective(PlayerTwoClear)
+		if PlayerOneClear then
+			Penta.MarkCompletedObjective(PlayerOneClear)
+		end
+		if PlayerTwoClear then
+			Shade.MarkCompletedObjective(PlayerTwoClear)
+		end
 	end
 end
