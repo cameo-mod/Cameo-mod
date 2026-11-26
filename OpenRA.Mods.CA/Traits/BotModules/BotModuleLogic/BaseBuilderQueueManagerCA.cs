@@ -1894,7 +1894,7 @@ namespace OpenRA.Mods.CA.Traits
 		bool HasSufficientPowerForActor(ActorInfo actorInfo)
 		{
 			var candidatePower = actorInfo.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault).Sum(p => p.Amount);
-			var excess = PowerArbiter.Effective(playerPower?.ExcessPower ?? 0, 0, false);
+			var excess = PowerArbiter.Effective(playerPower?.ExcessPower ?? 0, baseBuilder.InFlightPower, baseBuilder.PwInflightAdmitArmed);
 			var floor = ScaledBaseMinimumExcessPower();
 			var powerOk = PowerArbiter.Admits(playerPower != null, candidatePower, excess, floor);
 			PowerObserved(PowerArbiter.SiteAdmit, excess, floor, candidatePower, !powerOk);

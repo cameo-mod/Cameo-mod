@@ -5995,6 +5995,9 @@ Player:
 		BbS8RejectedFallthrough: true
 		# REF-PREFETCH-FRESH (row ref_prefetch_fresh, Sol V08F_CUMREV_SOL_01 finding 2): prefetched relaxed refinery sites expire at the READY flip; a strict site outranks a relaxed one.
 		RefPrefetchFresh: true
+		# CONSOLIDATE-03 P4 (rows pw_inflight_emergency, pw_inflight_admit): the power picks count the plants already in production.
+		PwInflightEmergency: true
+		PwInflightAdmit: true
 		# BUILD-ALL-B (row bb_no_foundation, user ruling 11-25): no concrete (terrain foundation) on any base-builder path; CONCRETE-PLAN-01 after the playtest.
 		BbNoFoundation: true
 		# QUEUE-SPLIT-01 + REF-S2-01 (Opus 11-25): defence stages stay on the defence queue; unmet refinery zone demand is served at S2 (rows bb_queue_split, bb_refinery_s2).

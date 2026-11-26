@@ -32,7 +32,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		// The surplus the emergency picks (S1, the legacy override) read: pw_inflight_emergency adds the plants in production.
 		internal int EmergencyExcess() =>
-			PowerArbiter.Effective(playerPower?.ExcessPower ?? 0, 0, false); // the in-flight forecast arrives with the P4 rows (commit b)
+			PowerArbiter.Effective(playerPower?.ExcessPower ?? 0, baseBuilder.InFlightPower, baseBuilder.PwInflightEmergencyArmed);
 
 		bool PowerShortEmergency(int site)
 		{
@@ -81,7 +81,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			powerStreamLogged = now;
 			powerStreamAtLog = powerStreamCount;
-			Log.Write("debug", $"AI ({player.ClientIndex}): BB-POWER-STREAM queue {Category} tick {now} n {powerStreamCount} hash {powerStream:x16} site {site} excess {excess} required {required} amount {amount} short {verdict}");
+			Log.Write("debug", $"AI ({player.ClientIndex}): BB-POWER-STREAM queue {Category} tick {now} n {powerStreamCount} hash {powerStream:x16} site {site} excess {excess} required {required} amount {amount} short {verdict} inflight {baseBuilder.InFlightPower} em {baseBuilder.PwInflightEmergencyArmed} ad {baseBuilder.PwInflightAdmitArmed}");
 #endif
 		}
 	}
