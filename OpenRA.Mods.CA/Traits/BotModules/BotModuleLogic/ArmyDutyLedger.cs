@@ -50,6 +50,12 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>R5: the M13 attack-liveness wave.</summary>
 		AttackLiveness,
 
+		/// <summary>
+		/// R6 (Sol FIX_STATIC on 12ecf07f): an ordinary attack wave formed with NO team order open (a standalone launch: the per-bot attack timer, the aggression-team forced launch). It is not a team order, so it ranks
+		/// with the raid below every team order; a wave formed for an open order is TeamPush / AllIn.
+		/// </summary>
+		StandaloneAttack,
+
 		/// <summary>R6: raid / harass (the harass cap).</summary>
 		Raid,
 
@@ -112,6 +118,7 @@ namespace OpenRA.Mods.CA.Traits
 			ArmyDuty.AllIn => 5,
 			ArmyDuty.Stalemate => 5,
 			ArmyDuty.AttackLiveness => 5,
+			ArmyDuty.StandaloneAttack => 6,
 			ArmyDuty.Raid => 6,
 			ArmyDuty.Idle => 7,
 			_ => 0,
@@ -123,6 +130,13 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		public static bool IsCoreUnderAttack(bool yardHit, bool productionHit, bool refineryHit, long observedAttackerValue, long observedThreshold) =>
 			(yardHit || productionHit || refineryHit) && observedAttackerValue >= observedThreshold;
+
+		/// <summary>
+		/// The duty of a freshly formed attack wave (Sol FIX_STATIC): a wave formed while a team order is open belongs to it (AllIn when the order is an all-in, TeamPush otherwise); with no team order open it is a
+		/// standalone attack and never labelled as a team order.
+		/// </summary>
+		public static ArmyDuty WaveDuty(bool teamOrderOpen, bool orderIsAllIn) =>
+			!teamOrderOpen ? ArmyDuty.StandaloneAttack : orderIsAllIn ? ArmyDuty.AllIn : ArmyDuty.TeamPush;
 
 		public bool TryGet(uint unit, out Entry entry) => byUnit.TryGetValue(unit, out entry);
 
@@ -232,6 +246,13 @@ namespace OpenRA.Mods.CA.Traits
 		public static string ReleaseDetail(string caller, string reason, IReadOnlyDictionary<ArmyDuty, int> previous, IEnumerable<uint> ids, string poolHash) =>
 			string.Create(CultureInfo.InvariantCulture,
 				$"caller={caller};reason={reason};prev={DutyHistogram(previous)};units={IdList(ids)};pool={poolHash}");
+
+		/// <summary>
+		/// The FINAL pincer split row (Sol FIX_STATIC / Opus): the plan-time arm claim of the squad that was to be divided is only provisional ("_provisional_split_pending"); this row is the actual reassignment
+		/// of the units that left it for the other arm (moved) and of those that stayed (kept), marked final.
+		/// </summary>
+		public static string SplitDetail(int seq, int toArm, IEnumerable<uint> moved, IEnumerable<uint> kept, string poolHash) =>
+			string.Create(CultureInfo.InvariantCulture, $"final=1;seq={seq};to_arm={toArm};moved={IdList(moved)};kept={IdList(kept)};pool={poolHash}");
 
 		/// <summary>The baseline counters of design 01 section 4(a) as one detail (no time-to-first-defender here: that needs the threat start, a (b) input).</summary>
 		public string CountersDetail() => string.Create(CultureInfo.InvariantCulture,

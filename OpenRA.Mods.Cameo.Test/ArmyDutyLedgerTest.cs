@@ -28,7 +28,7 @@ namespace OpenRA.Mods.Cameo.Test
 		static readonly ArmyDuty[] All =
 		[
 			ArmyDuty.OwnBaseDefend, ArmyDuty.AllyDefend, ArmyDuty.GuardLend, ArmyDuty.TeamPush, ArmyDuty.PincerArm,
-			ArmyDuty.AllIn, ArmyDuty.Stalemate, ArmyDuty.AttackLiveness, ArmyDuty.Raid, ArmyDuty.Idle,
+			ArmyDuty.AllIn, ArmyDuty.Stalemate, ArmyDuty.AttackLiveness, ArmyDuty.StandaloneAttack, ArmyDuty.Raid, ArmyDuty.Idle,
 		];
 
 		[Test]
@@ -43,9 +43,24 @@ namespace OpenRA.Mods.Cameo.Test
 
 			Assert.That(ArmyDutyLedger.Rank(ArmyDuty.Stalemate), Is.EqualTo(5), "Opus change 1: the stalemate breaker is an attack order (R5), not R7");
 			Assert.That(ArmyDutyLedger.Rank(ArmyDuty.Raid), Is.EqualTo(6));
+			Assert.That(ArmyDutyLedger.Rank(ArmyDuty.StandaloneAttack), Is.EqualTo(6), "Sol FIX_STATIC: a wave with no team order open is not a team order, so it ranks with the raid, below every team order");
+			Assert.That(ArmyDutyLedger.Rank(ArmyDuty.StandaloneAttack), Is.GreaterThan(ArmyDutyLedger.Rank(ArmyDuty.TeamPush)));
 			Assert.That(ArmyDutyLedger.Rank(ArmyDuty.Idle), Is.EqualTo(7), "only idle, reserve and preposition stay at R7");
 			foreach (var duty in All)
 				Assert.That(ArmyDutyLedger.Rank(duty), Is.InRange(2, 7), duty.ToString());
+		}
+
+		[Test]
+		public void AFreshWaveIsATeamOrderOnlyWhenOneIsOpenAndAStandaloneAttackOtherwise()
+		{
+			Assert.That(ArmyDutyLedger.WaveDuty(false, false), Is.EqualTo(ArmyDuty.StandaloneAttack), "no team order open: a standalone attack, never a team order");
+			Assert.That(ArmyDutyLedger.WaveDuty(false, true), Is.EqualTo(ArmyDuty.StandaloneAttack), "an all-in flag without an open order is not an order");
+			Assert.That(ArmyDutyLedger.WaveDuty(true, false), Is.EqualTo(ArmyDuty.TeamPush));
+			Assert.That(ArmyDutyLedger.WaveDuty(true, true), Is.EqualTo(ArmyDuty.AllIn));
+
+			var ledger = new ArmyDutyLedger();
+			ledger.Claim(1, ArmyDuty.TeamPush, 0, "p", "TeamLeadMergeIntoGatherSquad");
+			Assert.That(ledger.Claim(1, ArmyDuty.StandaloneAttack, 10, "wave_launch", "CreateAttackForce").Kind, Is.EqualTo(ArmyDutyLedger.ClaimKind.TakeEqualOrHigher), "a standalone wave taking a unit of a team order is a violation of the rank order");
 		}
 
 		[Test]
@@ -175,6 +190,10 @@ namespace OpenRA.Mods.Cameo.Test
 			var release = ArmyDutyLedger.ReleaseDetail("ReleaseDefenders", "defence_over", new Dictionary<ArmyDuty, int> { [ArmyDuty.OwnBaseDefend] = 3, [ArmyDuty.AllyDefend] = 1 }, new uint[] { 9, 2 }, "0badf00d");
 			Assert.That(release, Is.EqualTo("caller=ReleaseDefenders;reason=defence_over;prev=OwnBaseDefend:3|AllyDefend:1;units=2|9;pool=0badf00d"));
 			Assert.That(claim + release, Does.Not.Contain(","));
+
+			var split = ArmyDutyLedger.SplitDetail(7, 1, new uint[] { 30, 4 }, new uint[] { 9, 2, 5 }, "0badf00d");
+			Assert.That(split, Is.EqualTo("final=1;seq=7;to_arm=1;moved=4|30;kept=2|5|9;pool=0badf00d"), "the split row is marked final: the plan-time claim is only provisional");
+			Assert.That(split, Does.Not.Contain(","));
 		}
 
 		const string Bots = "OpenRA.Mods.CA/Traits/BotModules/";
@@ -204,7 +223,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var partial = RepoFile(Bots + "SquadManagerBotModuleCA.DutyLedger.cs");
 			var hooks = partial.Split('\n').Count(l => l.TrimStart().StartsWith("void Ledger", StringComparison.Ordinal));
-			Assert.That(hooks, Is.EqualTo(8), "claim x2, release x2, to-pool x2, lend, heartbeat");
+			Assert.That(hooks, Is.EqualTo(9), "claim x2, release x2, to-pool x2, lend, split, heartbeat");
 			Assert.That(partial.Split(new[] { "[Conditional(\"CAMEO_DEV_LOGGING\")]" }, StringSplitOptions.None).Length - 1, Is.EqualTo(hooks), "every hook is [Conditional]: the call and its arguments are gone from release");
 
 			var dir = new DirectoryInfo(AppContext.BaseDirectory);
@@ -246,7 +265,8 @@ namespace OpenRA.Mods.Cameo.Test
 				("SquadManagerBotModuleCA.cs", "unitsHangingAroundTheBase.Add(new UnitWposWrapper(actor));", "LedgerToPool(nameof(ReturnToIdlePool)"),
 				("SquadManagerBotModuleCA.cs", "unitsHangingAroundTheBase.Add(new UnitWposWrapper(a));", "LedgerToPool(nameof(FindNewUnits)"),
 				("SquadManagerBotModuleCA.cs", "unitsHangingAroundTheBase.Remove(u);", "LedgerClaim(ArmyDuty.AttackLiveness, nameof(TryM13UrgentAttack)"),
-				("SquadManagerBotModuleCA.cs", "unitsHangingAroundTheBase.Clear();", "LedgerClaim(TeamLeadOpenOrder() is { AllIn: true } ? ArmyDuty.AllIn : ArmyDuty.TeamPush, nameof(CreateAttackForce)"),
+				("SquadManagerBotModuleCA.cs", "unitsHangingAroundTheBase.Clear();", "LedgerClaim(WaveDuty(TeamLeadOpenOrder()), nameof(CreateAttackForce)"),
+				("SquadManagerBotModuleCA.PincerPush.cs", "order.AssignProng(half, toProng, SquadValueOf(half));", "LedgerSplit(nameof(TeamLeadSplitOff), order.Seq, toProng, half.Units, squad.Units);"),
 				("SquadManagerBotModuleCA.cs", "activeUnits.Remove(u.Actor);", "LedgerHeartbeat(\"pool_claimed_by_other\""),
 			};
 
@@ -256,6 +276,21 @@ namespace OpenRA.Mods.Cameo.Test
 				var holds = Follows(text, write, hook) || text.Contains(hook, StringComparison.Ordinal) && Precedes(text, hook, write);
 				Assert.That(holds, Is.True, file + ": " + hook + " behind " + write);
 			}
+		}
+
+		[Test]
+		public void AWaveIsLabelledByTheOpenOrderAndAPincerSplitIsProvisionalUntilItHappens()
+		{
+			var sm = RepoFile(Bots + "SquadManagerBotModuleCA.cs");
+			Assert.That(sm, Does.Not.Contain("is { AllIn: true } ? ArmyDuty.AllIn : ArmyDuty.TeamPush"), "Sol FIX_STATIC: no unconditional TeamPush label for an ordinary wave");
+			Assert.That(RepoFile(Bots + "SquadManagerBotModuleCA.DutyLedger.cs"), Does.Contain("static ArmyDuty WaveDuty(TeamLeadOrder openOrder) => ArmyDutyLedger.WaveDuty(openOrder != null, openOrder != null && openOrder.AllIn);"),
+				"a wave is a team order only while one is open");
+			Assert.That(RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs"), Does.Contain("LedgerClaim(order.AllIn ? ArmyDuty.AllIn : ArmyDuty.TeamPush, nameof(TeamLeadMergeIntoGatherSquad)"), "the gather merge always has its order in hand");
+
+			var pincer = RepoFile(Bots + "SquadManagerBotModuleCA.PincerPush.cs");
+			Assert.That(pincer, Does.Contain("\"_provisional_split_pending\" : \"_final\""), "the squad the plan divides is provisional, every other arm claim is final");
+			Assert.That(pincer, Does.Contain("plan.Split is { } pending && pending.Key == place.Key"));
+			Assert.That(pincer, Does.Contain("LedgerSplit(nameof(TeamLeadSplitOff), order.Seq, toProng, half.Units, squad.Units);"), "the real reassignment is its own final event");
 		}
 
 		// A hook that sits right before the write it records (heartbeat: the unit is released from the ledger as the pool drops it).

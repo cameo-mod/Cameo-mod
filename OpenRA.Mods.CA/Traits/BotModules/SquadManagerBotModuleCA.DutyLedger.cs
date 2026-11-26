@@ -19,7 +19,7 @@ namespace OpenRA.Mods.CA.Traits
 {
 	// CONSOLIDATE-03 P7 phase (a) (design 01 5e100b94 + Opus review): the write-only army duty ledger of this seat, DEV only. Every claim and release of units by a squad-manager duty calls one hook here; the hook records the unit
 	// ids, the duty, the caller method and the reason in the ledger and writes one row to army_duty_trace.csv (own file, no header, all seats append): tick,seat,event,duty,caller,detail with event = claim | release | pool |
-	// lend | heartbeat | counters. [Conditional]: every call and its arguments are removed from a release build, so release adds no state, RNG use or allocation (the ledger field stays null). NOTHING reads the ledger in phase (a): no
+	// lend | split | heartbeat | counters. [Conditional]: every call and its arguments are removed from a release build, so release adds no state, RNG use or allocation (the ledger field stays null). NOTHING reads the ledger in phase (a): no
 	// decision, order or random draw changes. The pool hash in a row is the order-sensitive digest of the idle pool at the moment the hook runs: right AFTER the change for a hook that sits directly behind the pool write it records, and the pool BEFORE the unit's
 	// new home for the release row at the top of ReleaseDefenders (its to-pool row follows after the pool write). The heartbeat row carries no hash.
 	partial class SquadManagerBotModuleCA
@@ -165,6 +165,29 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			DutyWrite("lend", ArmyDuty.GuardLend.ToString(), caller, ArmyDutyLedger.ClaimDetail(ArmyDuty.GuardLend, caller, reason, kinds, displaced, steals, 0, ids, DutyPoolHash()));
+			DutyCounters();
+		}
+
+		// The duty of an attack wave that was just formed (Sol FIX_STATIC on 12ecf07f): the open team order it belongs to (AllIn or TeamPush), or StandaloneAttack when no team order is open. Only ever called from a hook's arguments.
+		static ArmyDuty WaveDuty(TeamLeadOrder openOrder) => ArmyDutyLedger.WaveDuty(openOrder != null, openOrder != null && openOrder.AllIn);
+
+		// The pincer split that really happened (TeamLeadSplitOff): the units that left for the other arm and the units that stayed, both final. The plan-time claim of that squad (PincerPush) is only provisional.
+		[Conditional("CAMEO_DEV_LOGGING")]
+		void LedgerSplit(string caller, int seq, int toArm, IEnumerable<UnitWposWrapper> moved, IEnumerable<UnitWposWrapper> kept)
+		{
+			if (!Info.ArmyDutyTrace)
+				return;
+
+			dutyLedger ??= new ArmyDutyLedger();
+			var movedIds = moved.Where(u => u.Actor != null).Select(u => u.Actor.ActorID).ToList();
+			var keptIds = kept.Where(u => u.Actor != null).Select(u => u.Actor.ActorID).ToList();
+			foreach (var id in movedIds)
+				dutyLedger.Claim(id, ArmyDuty.PincerArm, World.WorldTick, "split_arm" + toArm + "_final", caller);
+
+			foreach (var id in keptIds)
+				dutyLedger.Claim(id, ArmyDuty.PincerArm, World.WorldTick, "split_remainder_final", caller);
+
+			DutyWrite("split", ArmyDuty.PincerArm.ToString(), caller, ArmyDutyLedger.SplitDetail(seq, toArm, movedIds, keptIds, DutyPoolHash()));
 			DutyCounters();
 		}
 

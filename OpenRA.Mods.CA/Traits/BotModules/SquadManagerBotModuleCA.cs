@@ -4360,7 +4360,7 @@ namespace OpenRA.Mods.CA.Traits
 				}
 				else
 					unitsHangingAroundTheBase.Clear();
-				LedgerClaim(TeamLeadOpenOrder() is { AllIn: true } ? ArmyDuty.AllIn : ArmyDuty.TeamPush, nameof(CreateAttackForce),
+				LedgerClaim(WaveDuty(TeamLeadOpenOrder()), nameof(CreateAttackForce),
 					aggForce ? "agg_launch" : teamFollowerLaunch ? "team_follower_wave" : "wave_launch", artilleryUnits.Concat(fireSupportUnits).Concat(assaultUnits));
 				if (aggKeep != null)
 					unitsHangingAroundTheBase.AddRange(aggKeep);
