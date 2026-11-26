@@ -26,14 +26,15 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>
 		/// A remembered enemy building (frozen-layer record) is a fallback target when no preferred enemy is in sight: the record is valid, its ghost is shown
-		/// (the spot is fogged now), it is not hidden by a visibility modifier, its owner is an enemy, and it is a building that is not a husk.
+		/// (the spot is fogged now), it is not hidden by a visibility modifier, its owner is an enemy, and it is a building that is not a husk. A record whose footprint
+		/// lies wholly in shroud (<c>FrozenActor.Shrouded</c>: no footprint cell explored) is not a memory of the place and never counts (Haiku review, FOG-FROZEN-01 rule).
 		/// </summary>
-		public static bool RememberedCandidate(bool valid, bool ghostShown, bool hidden, bool enemyOwner, bool building, bool husk) =>
-			valid && ghostShown && !hidden && enemyOwner && building && !husk;
+		public static bool RememberedCandidate(bool valid, bool ghostShown, bool hidden, bool enemyOwner, bool building, bool husk, bool shrouded) =>
+			valid && ghostShown && !hidden && !shrouded && enemyOwner && building && !husk;
 
-		/// <summary>A remembered enemy record counts for the nearby-enemy test of a mine site when it is valid, shown as a ghost, not hidden and owned by an enemy.</summary>
-		public static bool RememberedEnemyNearby(bool valid, bool ghostShown, bool hidden, bool enemyOwner) =>
-			valid && ghostShown && !hidden && enemyOwner;
+		/// <summary>A remembered enemy record counts for the nearby-enemy test of a mine site when it is valid, shown as a ghost, not hidden, not wholly in shroud and owned by an enemy.</summary>
+		public static bool RememberedEnemyNearby(bool valid, bool ghostShown, bool hidden, bool enemyOwner, bool shrouded) =>
+			valid && ghostShown && !hidden && !shrouded && enemyOwner;
 
 		/// <summary>
 		/// An attack on our actor starts the conflict-site logic when its attacker is an enemy and, if the attacker is in sight, also passes the preferred-unit test.

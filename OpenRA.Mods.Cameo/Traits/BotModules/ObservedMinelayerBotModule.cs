@@ -311,7 +311,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			foreach (var at in world.ActorsWithTrait<Minelayer>())
 			{
 				var a = at.Actor;
-				if (a == null || a.IsDead || !a.IsInWorld || a.Owner != player || !a.IsIdle)
+				if (a == null || a.Owner != player || a.IsDead || !a.IsInWorld || !a.IsIdle)
 					continue;
 
 				idleMinelayers.Add(a);
@@ -336,7 +336,7 @@ namespace OpenRA.Mods.Cameo.Traits
 					if (!enemyOwner)
 						continue;
 
-					if (ObservedMine.RememberedCandidate(fa.IsValid, fa.Visible, fa.Hidden, enemyOwner, fa.Info.HasTraitInfo<BuildingInfo>(), fa.Info.HasTraitInfo<HuskInfo>()))
+					if (ObservedMine.RememberedCandidate(fa.IsValid, fa.Visible, fa.Hidden, enemyOwner, fa.Info.HasTraitInfo<BuildingInfo>(), fa.Info.HasTraitInfo<HuskInfo>(), fa.Shrouded))
 						observedCells.Add(world.Map.CellContaining(fa.CenterPosition));
 				}
 			}
@@ -391,7 +391,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				foreach (var fa in frozenLayer.FrozenActorsInCircle(world, pos, dist))
 				{
 					var enemyOwner = fa.Owner != null && player.RelationshipWith(fa.Owner) == PlayerRelationship.Enemy;
-					if (!ObservedMine.RememberedEnemyNearby(fa.IsValid, fa.Visible, fa.Hidden, enemyOwner))
+					if (!ObservedMine.RememberedEnemyNearby(fa.IsValid, fa.Visible, fa.Hidden, enemyOwner, fa.Shrouded))
 						continue;
 
 					hasEnemyActor = true;

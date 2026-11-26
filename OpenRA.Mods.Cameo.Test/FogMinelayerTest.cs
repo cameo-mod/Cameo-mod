@@ -67,22 +67,26 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void ARememberedBuildingNeedsAValidShownUnhiddenEnemyBuildingThatIsNoHusk()
 		{
-			for (var n = 0; n < 64; n++)
+			for (var n = 0; n < 128; n++)
 			{
-				var b = Bits(n, 6);
-				var expected = b[0] && b[1] && !b[2] && b[3] && b[4] && !b[5];
-				Assert.That(ObservedMine.RememberedCandidate(b[0], b[1], b[2], b[3], b[4], b[5]), Is.EqualTo(expected), "mask " + n);
+				var b = Bits(n, 7);
+				var expected = b[0] && b[1] && !b[2] && b[3] && b[4] && !b[5] && !b[6];
+				Assert.That(ObservedMine.RememberedCandidate(b[0], b[1], b[2], b[3], b[4], b[5], b[6]), Is.EqualTo(expected), "mask " + n);
 			}
+
+			Assert.That(ObservedMine.RememberedCandidate(true, true, false, true, true, false, true), Is.False, "a record wholly in shroud is no memory of the place");
 		}
 
 		[Test]
 		public void ARememberedEnemyCountsNearbyOnlyWhenValidShownUnhiddenAndEnemyOwned()
 		{
-			for (var n = 0; n < 16; n++)
+			for (var n = 0; n < 32; n++)
 			{
-				var b = Bits(n, 4);
-				Assert.That(ObservedMine.RememberedEnemyNearby(b[0], b[1], b[2], b[3]), Is.EqualTo(b[0] && b[1] && !b[2] && b[3]), "mask " + n);
+				var b = Bits(n, 5);
+				Assert.That(ObservedMine.RememberedEnemyNearby(b[0], b[1], b[2], b[3], b[4]), Is.EqualTo(b[0] && b[1] && !b[2] && b[3] && !b[4]), "mask " + n);
 			}
+
+			Assert.That(ObservedMine.RememberedEnemyNearby(true, true, false, true, true), Is.False, "a record wholly in shroud never counts as an enemy nearby");
 		}
 
 		[Test]
@@ -141,14 +145,14 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(Count(src, "world.FindActorsInCircle"), Is.EqualTo(1));
 			Assert.That(src, Does.Contain("else if (relationship == PlayerRelationship.Enemy && actor.CanBeViewedByPlayer(player))"));
 			Assert.That(src, Does.Contain("frozenLayer.FrozenActorsInCircle(world, pos, dist)"));
-			Assert.That(src, Does.Contain("ObservedMine.RememberedEnemyNearby(fa.IsValid, fa.Visible, fa.Hidden, enemyOwner)"));
+			Assert.That(src, Does.Contain("ObservedMine.RememberedEnemyNearby(fa.IsValid, fa.Visible, fa.Hidden, enemyOwner, fa.Shrouded)"));
 
 			// own minelayers only
 			Assert.That(Count(src, "world.ActorsWithTrait<Minelayer>()"), Is.EqualTo(1));
 			Assert.That(src, Does.Contain("a.Owner != player"));
 
 			// remembered buildings come from the frozen layer's record, never from the live actor behind it
-			Assert.That(src, Does.Contain("ObservedMine.RememberedCandidate(fa.IsValid, fa.Visible, fa.Hidden, enemyOwner, fa.Info.HasTraitInfo<BuildingInfo>(), fa.Info.HasTraitInfo<HuskInfo>())"));
+			Assert.That(src, Does.Contain("ObservedMine.RememberedCandidate(fa.IsValid, fa.Visible, fa.Hidden, enemyOwner, fa.Info.HasTraitInfo<BuildingInfo>(), fa.Info.HasTraitInfo<HuskInfo>(), fa.Shrouded)"));
 			Assert.That(src, Does.Contain("world.Map.CellContaining(fa.CenterPosition)"));
 			Assert.That(src, Does.Not.Contain("fa.Actor"));
 			Assert.That(src, Does.Not.Contain("FrozenActor.Actor"));
