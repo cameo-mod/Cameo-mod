@@ -41,7 +41,7 @@ namespace OpenRA.Mods.CA.Traits
 		// PERF-BOTTICK-01 (pure optimisation, results identical): Score is a function of observedEnemyValue and of the static rules only, and its value is an integer sum.
 		// (1) the per-enemy-type rule reads (target types, default armour, cloak) are cached per type name, because rules do not change in a game;
 		// (2) the score per candidate is cached until observedEnemyValue changes: every write to it bumps observedVersion (Observe, ObserveFogOnly, Load).
-		// No allocation per call after the first score of a type. DEV builds re-check every ScoreShadowEvery-th cached answer against a fresh computation.
+		// No allocation per call after the first score of a type. DEV builds re-check every 64th cached answer against a fresh computation.
 		readonly struct EnemyRules
 		{
 			public readonly BitSet<TargetableType> Targets;

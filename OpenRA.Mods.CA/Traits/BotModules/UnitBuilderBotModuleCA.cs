@@ -3026,8 +3026,6 @@ namespace OpenRA.Mods.CA.Traits
 				counterPcts[i] = scores == null ? 100 : UnitRoll.CounterPct(scores[i], best, strength[UnitRoll.Counter]);
 			}
 
-			var weights = UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct, boosts);
-
 			// ub_affordable_pool: the cash/afford gate the fill meets after the pick ("afford_cash"), term for term, for the candidate as if it were the pick: the first build of a type is pay-as-you-go
 			// (rollFirst), a tech-lean pick is too, then bank, reserve and depth cash. A local function (no delegate) keeps the roll terms inside the roll method and allocates nothing.
 			bool RollCashAdmits(ActorInfo a)
@@ -3042,6 +3040,8 @@ namespace OpenRA.Mods.CA.Traits
 				return batch.Affords(cost) && ReserveAdmits(batch, cost)
 					&& !(rollCash.DepthQueue && rollCash.Held > 0 && !QueueDepthCA.CashAdmits(batch.BankLeft, rollCash.UnpaidQueued, cost));
 			}
+
+			var weights = UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct, boosts);
 
 			// PERF-BOTTICK-01 (row ub_affordable_pool): draw only among the members that pass the fill's cash/afford check (RollCashAdmits, the same terms as the gate after the pick),
 			// each keeping the weight it has in the whole pool. None passes = this queue's fill ends for the visit. Every other refusal reason is still met after the pick, as before.
