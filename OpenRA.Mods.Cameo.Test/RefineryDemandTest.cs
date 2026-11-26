@@ -189,7 +189,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(p, Does.Contain("var inReach = inDemand != null ? inDemand[a] : reachDist[a] <= reachCells;"));
 			Assert.That(p, Does.Contain("served[a] = RefineryDemand.Covers(verdict);"));
 			Assert.That(p, Does.Contain("zonesActive = RefDemandOn && EnsureZoneModel(spreaders);"));
-			Assert.That(p, Does.Contain("RefDemandZones ? ZoneCapAt(field) : Info.RefineryFieldCap"), "the REF-FIELD-02 cap per zone");
+			Assert.That(p, Does.Contain("RefDemandZones ? ZoneCapAt(field) + EcoFloorLift() : Info.RefineryFieldCap"), "the REF-FIELD-02 cap per zone (ECO-TIMING-FLOOR adds its lift, 0 when off)");
 			Assert.That(p, Does.Contain("(exhaustionProof ? SpacingTierAt(topLeft) != RefineryDemand.SpacingRefused : SpacingTierAt(topLeft) == RefineryDemand.SpacingAllowed)"), "sites stay at the full spacing; the exhaustion proof counts fallback-spacing sites as legal");
 			Assert.That(p, Does.Contain("FallbackLegal(actorInfo, bi, producer, distanceToBaseIsImportant, dockOffsets, valuable, layer, topLeft, true),"));
 			Assert.That(p, Does.Contain("FallbackLegal(actorInfo, bi, producer, distanceToBaseIsImportant, dockOffsets, valuable, layer, topLeft, false));"));
