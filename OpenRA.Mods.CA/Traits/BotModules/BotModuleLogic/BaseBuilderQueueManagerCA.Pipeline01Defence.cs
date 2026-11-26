@@ -73,6 +73,11 @@ namespace OpenRA.Mods.CA.Traits
 					have += kv.Value;
 
 			var count = EarlyDefencePlan.Count(botLimits != null ? botLimits.Info.ArmyShareTargetPermille : -1, b.AntiRushBaseMin, b.AntiRushBaseMax);
+
+			// P1 (b) early_def_learn: the prior x M(map) x L, clamped. The spawn path is measured in EARLY-DEF-LEARN-01 step 2 (path 0 = M neutral) and L is neutral until a
+			// learned snapshot exists, so today the row returns the prior.
+			if (baseBuilder.EarlyDefLearnArmed)
+				count = EarlyDefencePlan.LearnedCount(count, EarlyDefencePlan.MapMilli(0, b.EarlyDefReferencePathCells), EarlyDefencePlan.Neutral, b.EarlyDefCountMax);
 			return EarlyDefencePlan.Wanted(playerBuildings.Any(a => b.ProductionTypes.Contains(a.Info.Name)), have, count);
 		}
 

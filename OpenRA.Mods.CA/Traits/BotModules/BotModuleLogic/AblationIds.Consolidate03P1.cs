@@ -16,5 +16,8 @@ namespace OpenRA.Mods.CA.Traits
 		// With listed-only first copies (bb_build_all_listed) S5 still offers the capture-unlock types after the listed roll (Info BbS5CaptureReason). Off = S5 stops
 		// after the roll, so cs_capture_unlock never fires on the staged path, as before.
 		public const string BbS5CaptureReason = "bb_s5_capture_reason";
+
+		// The early anti-rush count = clamp(prior x M(map) x L) (Info EarlyDefLearn). Off = the prior AntiRushBaseMin..Max, as before.
+		public const string EarlyDefLearn = "early_def_learn";
 	}
 }
