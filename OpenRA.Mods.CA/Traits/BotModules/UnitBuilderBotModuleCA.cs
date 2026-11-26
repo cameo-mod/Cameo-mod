@@ -203,6 +203,9 @@ namespace OpenRA.Mods.CA.Traits
 			"A weight multiplier on the core only (capped by CoreFocusMaxPct); every other weight, never-built types included, stays as the roll made it. 0 = off.")]
 		public readonly int CoreFocusSharePct = 0;
 
+		[Desc("CONSOLIDATE-03 P5 (DEV only, record only): write unit_pick_trace.csv, one row per roll draw, empty roll, post-draw outcome and queue pass (the equivalence trace of the unit pick). The calls are compiled out of release builds; changes no decision.")]
+		public readonly bool UnitPickTrace = false;
+
 		[Desc("HANS-PROFILE-01: how many types form the core of a queue.")]
 		public readonly int CoreFocusCount = 3;
 
@@ -211,6 +214,14 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("HANS-PROFILE-01: a type is affordable for the core once the bank holds this percent of its price (the same bar as TechLeanBankPct).")]
 		public readonly int CoreFocusBankPct = 30;
+
+		[Desc("CONSOLIDATE-03 P5 (row ub_admit_one; needs the core focus): the core also reads the fill's admission forecast (paygo, tech lean, full price, then the afford, reserve and depth-cash gates), so a type the gates would refuse right now",
+			"is not lifted and then re-rolled to a cheaper unit. Off in code, on in the generic block.")]
+		public readonly bool UnitAdmitOne = false;
+
+		[Desc("CONSOLIDATE-03 P5 (row ub_gates_up; needs the unit roll): the in-pass limit headroom, the capturer cap with the batch's pending capturers and the aircraft caps with the batch's pending aircraft are asked before the draw,",
+			"so a type they refuse is not in the pool, the floors, the core or the draw bound (not distribution-equal: the RNG stream changes). Off in code, on in the generic block.")]
+		public readonly bool UnitGatesUp = false;
 
 		[Desc("UNIT-MIX-01: the queue types that make an airfield (aircraft floor); the infantry floor uses IdleQueueFloorQueues.")]
 		public readonly string[] UnitMixAircraftQueues = { "Aircraft", "RAAircraft" };
@@ -661,9 +672,15 @@ namespace OpenRA.Mods.CA.Traits
 		// UNIT-ALL-01 parameter table: the one place the roll reads its numbers from (fractions, personality bias, ramp, profile strengths, floor); a learner overrides per player through it (LEARN-MULT-01).
 		UnitRollTable rollTable;
 		public UnitRollTable RollParameters => rollTable ??= new UnitRollTable(Info.UnitsToBuild, Info.UnitRollBias, Info.UnitRollBiasLate, Info.UnitRollProfiles, Info.UnitRollFloorPct, Info.UnitRollRampTicks,
-				Info.UnitRollFirstBoost, Info.UnitRollFirstRampTicks, Info.UnitRollFirstCap);
+				Info.UnitRollFirstBoost, Info.UnitRollFirstRampTicks, Info.UnitRollFirstCap,
+				Info.CoreFocusSharePct, Info.CoreFocusCount, Info.CoreFocusMaxPct, Info.CoreFocusBankPct, Info.TechLeanTopPct, Info.TechLeanBankPct);
 		string rollPersonality = "";
 		bool rollFirst;
+
+		// P5 a3: the roll's one draw (this module's RNG stream, one Next(bound) call) handed to the pick arbiter; created once, no allocation per roll.
+		Func<int, int> rollDraw;
+
+		Func<int, int> RollDraw => rollDraw ??= n => BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(n);
 
 		// TIER-MIX-01 (row ub_tech_lean): the dearest price in the pool of the fill in hand (set by ChooseRollUnit, read by the afford gate; stays 0 while the row is off).
 		AblationLatch ablateTechLean;
@@ -1909,6 +1926,7 @@ namespace OpenRA.Mods.CA.Traits
 				var skip = new HashSet<string>(StringComparer.Ordinal);
 				var shares = GetUnitsToBuildForCategory(queue.Info.Type);
 				var baselineTried = false;
+				PickTraceFillStart(queue);
 
 				while (UnitProducerServiceCA.SlotAvailable(freeSlots, batch.PendingOf(queue)))
 				{
@@ -1927,6 +1945,8 @@ namespace OpenRA.Mods.CA.Traits
 
 					// HANS-PROFILE-01 (ub_core_focus): the bank this roll sees, for the core's affordability test (0 while the row is off).
 					rollBankLeft = CoreFocusOn ? batch.BankLeft : 0;
+					rollAdmit = AdmitOneOn ? new RollAdmitInputs(batch, held, depthQueue, unpaidQueued) : null;
+					rollGateBatch = GatesUpOn ? batch : null;
 
 					// P4: below the armed-infantry floor this queue prefers the best
 					// admissible armed infantry it can serve — the normal pick only runs
@@ -1947,6 +1967,7 @@ namespace OpenRA.Mods.CA.Traits
 					// UNIT-ALL-01: no candidate left for the roll ends this queue's fill; the composition fallback and the two floor picks below belong to the layers the roll replaces.
 					if (roll && unit == null)
 					{
+						PickTraceNone(queue, skip.Count, held, batch);
 						// the composition (now only a bias profile) ends with the fill, as it did when the old pick came up empty
 						if (skip.Count == 0 && activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
 							RevertToBaselineComposition();
@@ -2018,6 +2039,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, refusedBy);
+						PickTraceRefuse(queue, skip.Count, refusedBy, name, held, -1, -1, batch);
 						Reject();
 						continue;
 					}
@@ -2029,6 +2051,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, "headroom");
+						PickTraceRefuse(queue, skip.Count, "headroom", name, held, -1, -1, batch);
 						Reject();
 						continue;
 					}
@@ -2037,6 +2060,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, "capturer");
+						PickTraceRefuse(queue, skip.Count, "capturer", name, held, -1, -1, batch);
 						Reject();
 						continue;
 					}
@@ -2053,6 +2077,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, "aircraft");
+						PickTraceRefuse(queue, skip.Count, "aircraft", name, held, -1, -1, batch);
 						Reject();
 						continue;
 					}
@@ -2061,16 +2086,15 @@ namespace OpenRA.Mods.CA.Traits
 					// batch keeps the bank accounting so a cheaper feasible one can land.
 					var fullCost = Math.Max(0, queue.GetProductionCost(unit));
 
+					// P5 a4: the admission list is ONE function (UnitPickArbiter.Admit), the same two steps in the same order:
 					// UNIT-ALL-01 c3 (Opus 11-25): the FIRST build of a listed type is pay-as-you-go like TECHCHAIN-PAYGO: it does not wait for the full price (OpenRA pays progressively): the afford, reserve and
 					// depth-cash gates below are evaluated at cost 0 for it, so a bank of 0 or the tier reserve can still hold it; Everything else keeps the full gates.
-					var paygo = roll && rollFirst && UnitRoll.FirstAdmits(batch.BankLeft);
-					var cost = paygo ? 0 : fullCost;
-
 					// TIER-MIX-01 (row ub_tech_lean): a late pick from the top of this queue's pool, on an empty queue with a share of its price already in the bank, is pay-as-you-go too; the order
 					// still reserves its full price below, so the rest of the pass sees the whole commitment.
-					var leaned = roll && !paygo && TechLeanOn && TechLean.Admits(fullCost, rollPoolMaxCost, held, world.WorldTick, RollParameters.RampTicks, batch.BankLeft, Info.TechLeanTopPct, Info.TechLeanBankPct);
-					if (leaned)
-						cost = 0;
+					var admission = UnitPickArbiter.Admit(roll, rollFirst, batch.BankLeft, fullCost, TechLeanOn, rollPoolMaxCost, held, world.WorldTick, RollParameters.TechLeanStartTicks, RollParameters.TechLeanTopPct, RollParameters.TechLeanBankPct);
+					var paygo = admission.Paygo;
+					var leaned = admission.Leaned;
+					var cost = admission.GateCost;
 
 					if (!batch.Affords(cost) || !ReserveAdmits(batch, cost)
 						|| depthQueue && held > 0 && !CashLedger.UnitDepthAdmits(batch.BankLeft, unpaidQueued, cost))
@@ -2078,10 +2102,12 @@ namespace OpenRA.Mods.CA.Traits
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, "afford_cash");
 						CashRefused(batch, cost, depthQueue && held > 0, unpaidQueued); // CONSOLIDATE-03 P2 (b), DEV only
+						PickTraceRefuse(queue, skip.Count, "afford_cash", name, held, cost, fullCost, batch);
 						Reject();
 						continue;
 					}
 
+					PickTraceAccept(queue, skip.Count, name, held, cost, fullCost, paygo, leaned, batch);
 					SetUnitInterval(name);
 					bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
 					NotifyStarted(name, queue.Info.Type);
@@ -2105,6 +2131,8 @@ namespace OpenRA.Mods.CA.Traits
 					if (activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
 						AddToActiveCompositionProducedValue(unit);
 				}
+
+				PickTraceFillEnd(queue);
 
 				// INFANTRY-REJECT-LOG-01 (DEV only): this queue's pass ended; idle = nothing queued or ordered in it. One aggregated row per period.
 				if (logThis)
@@ -2905,12 +2933,14 @@ namespace OpenRA.Mods.CA.Traits
 		ActorInfo ChooseRollUnit(ProductionQueue queue, HashSet<string> skip)
 		{
 			rollFirst = false;
+			PickTraceRollStart();
 			var table = Info.UnitsToBuild;
 			if (table == null || table.Count == 0)
 				return null;
 
 			var items = new List<ActorInfo>();
 			rollExcluded.Clear();
+			rollGated.Clear();
 			foreach (var a in queue.BuildableItems().OrderBy(b => b.Name, StringComparer.Ordinal))
 			{
 				if (!table.ContainsKey(a.Name))
@@ -2941,8 +2971,14 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 				}
 
+				// P5 (b) row ub_gates_up: the batch gates (headroom, capturer with pending, aircraft with pending) before the draw; nothing here while the row is off (no batch handed over).
+				if (GatesUpRemoves(a))
+					continue;
+
 				items.Add(a);
 			}
+
+			GatesUpLog(queue.Info.Type);
 
 			// The squad manager's wave hold reads what this queue can build, whatever the wavemix profile strength (the profile only multiplies; the hold is the ARMY-MIX-01 row's).
 			var roles = unitRoles ??= player.PlayerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
@@ -2950,7 +2986,9 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (items.Count == 0)
 			{
+				PickTraceEmpty(queue, skip.Count, queueRoles);
 				RollEmptyLog(queue.Info.Type, rollExcluded.Count > 0 ? "all_excluded" : "none_listed_buildable");
+				GatesUpMarkRefused(skip);
 				return null;
 			}
 
@@ -2995,37 +3033,41 @@ namespace OpenRA.Mods.CA.Traits
 				boosts[i] = rollOrdered.Contains(name) ? 1.0
 					: UnitRoll.FirstBoost(RollParameters.FirstBoost, world.WorldTick - rollAvailableSince[name], RollParameters.FirstRampTicks, RollParameters.FirstCap);
 				var role = roles?.PrimaryRoleOf(name);
-				var bias = RollParameters.BiasPct(rollPersonality, role, world.WorldTick);
+				// the profile terms (a null term = the profile does not apply to this candidate); UnitPickArbiter.ComposeBias multiplies them in the fixed R2 order
+				int? deficitTerm = null, learnedTerm = null, waveMixTerm = null, compositionTerm = null, openingTerm = null;
 				if (deficits != null && role != null && deficits.TryGetValue(role, out var deficit))
-					bias = UnitRoll.MulPct(bias, UnitRoll.Scaled(deficit, strength[UnitRoll.RoleDeficit]));
+					deficitTerm = UnitRoll.Scaled(deficit, strength[UnitRoll.RoleDeficit]);
 
 				if (providers != null && providers.Count > 0)
-					bias = UnitRoll.MulPct(bias, UnitRoll.Scaled(LearnedWeightPercent(pool[i], providers), strength[UnitRoll.Learned]));
+					learnedTerm = UnitRoll.Scaled(LearnedWeightPercent(pool[i], providers), strength[UnitRoll.Learned]);
 
 				if (missingRoles != null && role != null)
-					bias = UnitRoll.MulPct(bias, UnitRoll.Boost(missingRoles.Contains(role), strength[UnitRoll.WaveMix]));
+					waveMixTerm = UnitRoll.Boost(missingRoles.Contains(role), strength[UnitRoll.WaveMix]);
 
 				if (composition != null && composition.TryGetValue(name, out var compositionShare))
-					bias = UnitRoll.MulPct(bias, UnitRoll.ShareBoost(compositionShare, bestShare, strength[UnitRoll.Composition]));
+					compositionTerm = UnitRoll.ShareBoost(compositionShare, bestShare, strength[UnitRoll.Composition]);
 
 				if (opening)
-					bias = UnitRoll.MulPct(bias, UnitRoll.Boost(Info.OpeningDefenseUnitTypes.Contains(name), strength[UnitRoll.Opening]));
+					openingTerm = UnitRoll.Boost(Info.OpeningDefenseUnitTypes.Contains(name), strength[UnitRoll.Opening]);
 
 				fractions[i] = RollParameters.Fraction(name);
-				biases[i] = bias;
+				biases[i] = UnitPickArbiter.ComposeBias(RollParameters.BiasPct(rollPersonality, role, world.WorldTick), deficitTerm, learnedTerm, waveMixTerm, compositionTerm, openingTerm);
 				counterPcts[i] = scores == null ? 100 : UnitRoll.CounterPct(scores[i], best, strength[UnitRoll.Counter]);
 			}
 
-			var weights = UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct, boosts);
-
-			// HANS-PROFILE-01 (ub_core_focus): the dearest affordable types built once get a weight multiplier (a bias; every other weight stays as the roll made it).
+			// HANS-PROFILE-01 (ub_core_focus): the dearest affordable types built once get a weight multiplier (a bias; every other weight stays as the roll made it); the arbiter applies it as the last step on the weights.
+			Func<double[], double[]> coreLift = null;
 			if (CoreFocusOn)
-				weights = FocusCore(queue, pool, weights);
+				coreLift = w => FocusCore(queue, pool, w);
 
-			var units = UnitRoll.Quantize(weights); // integer units, sum <= 2^30, relative floor: every candidate owns a drawable interval
-			var pick = UnitRoll.Pick(units, BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(UnitRoll.Sum(units)));
+			// R2 weights (floor, then the core lift) and R3 the one draw: the arbiter owns the order and the integer draw; the draw is this module's own RNG stream, exactly one Next call
+			var decision = UnitPickArbiter.Decide(fractions, biases, counterPcts, RollParameters.FloorPct, boosts, coreLift, RollDraw);
+			var weights = decision.Weights;
+			var units = decision.Units;
+			var pick = decision.Pick;
 			rollFirst = !rollOrdered.Contains(pool[pick].Name);
 			RollPickLog(queue.Info.Type, pool, weights, pick, rollFirst, fractions, biases, counterPcts, boosts);
+			PickTraceDraw(queue, pool, units, pick, skip.Count, queueRoles);
 			return pool[pick];
 		}
 
