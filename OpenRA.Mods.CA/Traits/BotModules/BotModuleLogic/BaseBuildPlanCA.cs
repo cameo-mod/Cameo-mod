@@ -163,6 +163,10 @@ namespace OpenRA.Mods.CA.Traits
 
 		// DEV only: how many S8 candidates this walk offered (written only by the compiled-out recorder; always 0 in a release build).
 		public int S8Offers;
+
+		// CONSOLIDATE-03 P1 (a): whether an S5 first copy that is no listed BuildingFractions entry is a capture unlock (cs_capture_unlock) rather than a tech-depth
+		// first copy. Read only to NAME the deciding rule (BuildingPickArbiter.RuleOf), never to pick. Null = tech depth.
+		public Func<string, bool> CaptureUnlockOf;
 	}
 
 	/// <summary>
@@ -197,7 +201,15 @@ namespace OpenRA.Mods.CA.Traits
 		public static IReadOnlyList<BaseBuildStage> Stages => StageOrder;
 
 		/// <summary>The first candidate, over the ordered stages, that passes its stage caps and A1-A7. None after K failed tests or when every stage is exhausted.</summary>
-		public static BaseBuildPick Plan(BaseBuildSnapshot snapshot, IBaseBuildFeasibility feasibility, MersenneTwister rng)
+		public static BaseBuildPick Plan(BaseBuildSnapshot snapshot, IBaseBuildFeasibility feasibility, MersenneTwister rng) => Plan(snapshot, feasibility, rng, null);
+
+		/// <summary>
+		/// CONSOLIDATE-03 P1 (a): the walk of <see cref="BuildingPickArbiter.Decide"/>. <paramref name="refusals"/> null = exactly the walk above (a release build passes null);
+		/// non-null = every refusal of this walk is appended in walk order: a closed stage (queue split, S8 cash hold, tier cut, cycle hold), a refused candidate (stage cap,
+		/// infeasible, S8 cash only, claim refused, already failed this sweep) and the K stop. Recording reads only pure functions of the snapshot: the walk, its tests and its
+		/// random draws are the same either way.
+		/// </summary>
+		public static BaseBuildPick Plan(BaseBuildSnapshot snapshot, IBaseBuildFeasibility feasibility, MersenneTwister rng, List<BuildingRefusal> refusals)
 		{
 			var tests = 0;
 			HashSet<string> failed = null;
@@ -207,6 +219,9 @@ namespace OpenRA.Mods.CA.Traits
 			// S8 above S7 and holds S9 and S10 back while the cycle still offers a type (BaseBuildTiersCA).
 			foreach (var stage in BaseBuildTiersCA.Order(snapshot.SustainedActive, snapshot.TierLine))
 			{
+				if (refusals != null)
+					BuildingPickArbiter.NoteClosed(refusals, stage, snapshot, cycleOffered);
+
 				if (!QueueStageSplit.Allowed(stage, snapshot.QueueSplit, snapshot.DefenceQueue))
 					continue;
 
@@ -223,11 +238,17 @@ namespace OpenRA.Mods.CA.Traits
 
 					// A type that already failed A this sweep fails again (the state is the same, the reserve only grows with the stage): no second test.
 					if (candidate.Name == null || (failed != null && failed.Contains(candidate.Name)))
+					{
+						if (candidate.Name != null)
+							BuildingPickArbiter.Refuse(refusals, snapshot, candidate, BuildingReason.AlreadyFailed);
+
 						continue;
+					}
 
 					if (!feasibility.StageAdmits(candidate))
 					{
 						OfferRejected(snapshot, candidate, "stage_not_admitted");
+						BuildingPickArbiter.Refuse(refusals, snapshot, candidate, BuildingReason.StageCap);
 						continue;
 					}
 
@@ -244,10 +265,14 @@ namespace OpenRA.Mods.CA.Traits
 						snapshot.S8CashBlocked = candidate.Name;
 
 					OfferRejected(snapshot, candidate, cashHold ? "s8_cash_hold" : feasible ? "claim_refused" : "infeasible");
+					BuildingPickArbiter.Refuse(refusals, snapshot, candidate, cashHold ? BuildingReason.S8CashOnly : feasible ? BuildingReason.ClaimRefused : BuildingReason.Infeasible);
 
 					(failed ??= new HashSet<string>(StringComparer.Ordinal)).Add(candidate.Name);
 					if (tests >= MaxFeasibilityTests)
+					{
+						refusals?.Add(new BuildingRefusal(null, stage, BuildingReason.TestCap, BuildingPickArbiter.RuleOf(stage, snapshot, null)));
 						return new BaseBuildPick(null, BaseBuildStage.None, null, tests);
+					}
 				}
 			}
 

@@ -245,8 +245,11 @@ namespace OpenRA.Mods.Cameo.Test
 			var s4 = Between(d, "IEnumerable<string> PipelineAntiRushStage(", "IEnumerable<string> PipelineExtraDefenceStage(");
 
 			Assert.That(s4, Does.Contain("if (!AntiRushSetOn || playerBuildings == null)\n\t\t\t\tyield break;"));
-			Assert.That(s4, Does.Contain("AntiRushCA.SetSize(botLimits != null ? botLimits.Info.ArmyShareTargetPermille : -1, b.AntiRushBaseMin, b.AntiRushBaseMax)"));
-			Assert.That(s4, Does.Contain("AntiRushCA.Wants(playerBuildings.Any(a => b.ProductionTypes.Contains(a.Info.Name)), have, size)"));
+			// CONSOLIDATE-03 P1 (a): the set size and the wanting test moved into the ONE early-defence test EarlyDefenceWanted (EarlyDefencePlan = AntiRushCA, unchanged).
+			Assert.That(s4, Does.Contain("if (!EarlyDefenceWanted())
+				yield break;"));
+			Assert.That(s4, Does.Contain("EarlyDefencePlan.Count(botLimits != null ? botLimits.Info.ArmyShareTargetPermille : -1, b.AntiRushBaseMin, b.AntiRushBaseMax)"));
+			Assert.That(s4, Does.Contain("EarlyDefencePlan.Wanted(playerBuildings.Any(a => b.ProductionTypes.Contains(a.Info.Name)), have, count)"));
 			Assert.That(s4, Does.Contain("var bank = ProdBusyCA.SweepBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep);"));
 			Assert.That(s4, Does.Contain("queue.GetProductionCost(info) > bank"), "only a set member the bank pays now: the K bound is not spent on unaffordable types");
 			Assert.That(s4, Does.Contain("AntiRushCA.Order(candidates, AntiRushStageMaxCandidates)"));
