@@ -212,6 +212,10 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("HANS-PROFILE-01: a type is affordable for the core once the bank holds this percent of its price (the same bar as TechLeanBankPct).")]
 		public readonly int CoreFocusBankPct = 30;
 
+		[Desc("PERF-BOTTICK-01 (row ub_affordable_pool; needs UnitRoll): the roll draws only among the pool members that pass the cash/afford check a pick meets after the roll, with the weights",
+			"of the whole pool; none passes = the queue's fill ends for this visit. Off = the roll over the whole pool, a refused pick re-rolled.")]
+		public readonly bool AffordablePool = false;
+
 		[Desc("UNIT-MIX-01: the queue types that make an airfield (aircraft floor); the infantry floor uses IdleQueueFloorQueues.")]
 		public readonly string[] UnitMixAircraftQueues = { "Aircraft", "RAAircraft" };
 
@@ -669,6 +673,14 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateTechLean;
 		bool TechLeanOn => UnitRollOn && Info.TechLeanTopPct > 0 && !ablateTechLean.Off(player, AblationIds.UnitTechLean);
 		int rollPoolMaxCost;
+		readonly List<long> rollScores = [];
+
+		// PERF-BOTTICK-01 (row ub_affordable_pool): the fill's cash state for the roll's afford filter, set just before each pick; rollNoneAffordable = the last roll found no member that passes.
+		readonly record struct RollCash(ProducerServiceBatch Batch, int Held, bool DepthQueue, long UnpaidQueued);
+		AblationLatch ablateAffordablePool;
+		bool AffordablePoolOn => UnitRollOn && Info.AffordablePool && !ablateAffordablePool.Off(player, AblationIds.UnitAffordablePool);
+		RollCash rollCash;
+		bool rollNoneAffordable;
 
 		// The first tick each listed type was seen buildable in a roll (the first-build boost escalates with the time it stays unbuilt).
 		readonly Dictionary<string, int> rollAvailableSince = new(StringComparer.Ordinal);
@@ -1937,6 +1949,7 @@ namespace OpenRA.Mods.CA.Traits
 						? PickArmedInfantry(queue, shares, skip)
 						: null;
 					var fromIdleFloor = false;
+					rollCash = new RollCash(batch, held, depthQueue, unpaidQueued);
 					UbSubStart(0);
 					var unit = roll ? ChooseRollUnit(queue, skip) : fromFloor ?? (buildRandom
 						? ChooseRandomUnitToBuild(queue, excludeLimited, shares, skip)
@@ -1947,7 +1960,8 @@ namespace OpenRA.Mods.CA.Traits
 					if (roll && unit == null)
 					{
 						// the composition (now only a bias profile) ends with the fill, as it did when the old pick came up empty
-						if (skip.Count == 0 && activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
+						// ub_affordable_pool: nothing affordable is not an empty composition (refusing every member one by one, as the row-off path does, leaves skip non-empty too)
+						if (skip.Count == 0 && !rollNoneAffordable && activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
 							RevertToBaselineComposition();
 
 						break;
@@ -2076,6 +2090,11 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, "afford_cash");
+#if CAMEO_DEV_LOGGING
+						// ub_affordable_pool: the roll admitted only members that pass this gate, so a refusal here means the two copies of the terms disagree
+						if (roll && AffordablePoolOn)
+							Log.Write("debug", $"AI ({player.ClientIndex}): PERF-BOTTICK-01 AFFORD-POOL-DIVERGE {name} queue {queue.Info.Type} bank {batch.BankLeft} cost {cost} tick {world.WorldTick}");
+#endif
 						Reject();
 						continue;
 					}
@@ -2898,6 +2917,7 @@ namespace OpenRA.Mods.CA.Traits
 		ActorInfo ChooseRollUnit(ProductionQueue queue, HashSet<string> skip)
 		{
 			rollFirst = false;
+			rollNoneAffordable = false;
 			var table = Info.UnitsToBuild;
 			if (table == null || table.Count == 0)
 				return null;
@@ -2970,8 +2990,21 @@ namespace OpenRA.Mods.CA.Traits
 
 			var deficits = strength[UnitRoll.RoleDeficit] > 0 ? RollRoleDeficits(roles) : null;
 			var providers = strength[UnitRoll.Learned] > 0 ? ActiveProductionWeights() : null;
-			var scores = strength[UnitRoll.Counter] > 0 ? pool.Select(a => counters.CounterScore(a)).ToList() : null;
-			var best = scores?.Max() ?? 0;
+			// PERF-BOTTICK-01: the same scores in pool order, and their maximum (the pool is not empty here), into a reused list instead of a new one per roll.
+			List<long> scores = null;
+			var best = 0L;
+			if (strength[UnitRoll.Counter] > 0)
+			{
+				scores = rollScores;
+				scores.Clear();
+				best = long.MinValue;
+				foreach (var a in pool)
+				{
+					var score = counters.CounterScore(a);
+					scores.Add(score);
+					best = Math.Max(best, score);
+				}
+			}
 			var missingRoles = strength[UnitRoll.WaveMix] > 0 ? RollMissingWaveRoles(queueRoles) : null;
 			var composition = strength[UnitRoll.Composition] > 0 && activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type)
 				? activeComposition.UnitsToBuild : null;
@@ -3009,11 +3042,57 @@ namespace OpenRA.Mods.CA.Traits
 				counterPcts[i] = scores == null ? 100 : UnitRoll.CounterPct(scores[i], best, strength[UnitRoll.Counter]);
 			}
 
+			// ub_affordable_pool: the cash/afford gate the fill meets after the pick ("afford_cash"), term for term, for the candidate as if it were the pick: the first build of a type is pay-as-you-go
+			// (rollFirst), a tech-lean pick is too, then bank, reserve and depth cash. A local function (no delegate) keeps the roll terms inside the roll method and allocates nothing.
+			bool RollCashAdmits(ActorInfo a)
+			{
+				var batch = rollCash.Batch;
+				var fullCost = Math.Max(0, queue.GetProductionCost(a));
+				var paygo = !rollOrdered.Contains(a.Name) && UnitRoll.FirstAdmits(batch.BankLeft);
+				var cost = paygo ? 0 : fullCost;
+				if (!paygo && TechLeanOn && TechLean.Admits(fullCost, rollPoolMaxCost, rollCash.Held, world.WorldTick, RollParameters.RampTicks, batch.BankLeft, Info.TechLeanTopPct, Info.TechLeanBankPct))
+					cost = 0;
+
+				return batch.Affords(cost) && ReserveAdmits(batch, cost)
+					&& !(rollCash.DepthQueue && rollCash.Held > 0 && !QueueDepthCA.CashAdmits(batch.BankLeft, rollCash.UnpaidQueued, cost));
+			}
+
 			var weights = UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct, boosts);
 
 			// HANS-PROFILE-01 (ub_core_focus): the dearest affordable types built once get a weight multiplier (a bias; every other weight stays as the roll made it).
 			if (CoreFocusOn)
 				weights = FocusCore(queue, pool, weights);
+
+			// PERF-BOTTICK-01 (row ub_affordable_pool): draw only among the members that pass the fill's cash/afford check (RollCashAdmits, the same terms as the gate after the pick),
+			// each keeping the weight it has in the whole pool. None passes = this queue's fill ends for the visit. Every other refusal reason is still met after the pick, as before.
+			if (AffordablePoolOn && rollCash.Batch != null)
+			{
+				var keep = new bool[pool.Count];
+				for (var i = 0; i < pool.Count; i++)
+				{
+					keep[i] = RollCashAdmits(pool[i]);
+					if (!keep[i])
+						RollExclude(pool[i].Name, "afford_pool");
+				}
+
+				var kept = AffordablePool.Count(keep);
+				if (kept == 0)
+				{
+					rollNoneAffordable = true;
+					RollEmptyLog(queue.Info.Type, "none_affordable");
+					return null;
+				}
+
+				if (kept < pool.Count)
+				{
+					pool = AffordablePool.Keep(pool, keep, kept).ToList();
+					weights = AffordablePool.Keep(weights, keep, kept);
+					fractions = AffordablePool.Keep(fractions, keep, kept);
+					biases = AffordablePool.Keep(biases, keep, kept);
+					counterPcts = AffordablePool.Keep(counterPcts, keep, kept);
+					boosts = AffordablePool.Keep(boosts, keep, kept);
+				}
+			}
 
 			var units = UnitRoll.Quantize(weights); // integer units, sum <= 2^30, relative floor: every candidate owns a drawable interval
 			var pick = UnitRoll.Pick(units, BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(UnitRoll.Sum(units)));
