@@ -72,7 +72,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>The ladder tier of a player (null for a human or an unranked bot).</summary>
-		public static int? RankFor(Player owner) => owner != null && owner.IsBot ? RankForBotType(owner.BotType) : null;
+		public static int? RankFor(OpenRA.Player owner) => owner != null && owner.IsBot ? RankForBotType(owner.BotType) : null;
 
 		/// <summary>
 		/// Parses "minTick:tier:desired" entries (tier = a ladder bot type, e.g. "0:easiest:2", "12000:hard:3").
