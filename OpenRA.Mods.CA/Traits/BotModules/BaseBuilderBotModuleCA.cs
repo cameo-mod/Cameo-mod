@@ -992,6 +992,8 @@ namespace OpenRA.Mods.CA.Traits
 		public bool Ref2StallArmed => Info.Ref2First && switchesActive && !ablateRef2Stall.Off(player, AblationIds.Ref2StallRelease);
 		public int Ref2DueSince = -1;
 		public int Ref2StartableSince = -1;
+		BaseBuilderQueueManagerCA ref2Sampler; // the one building manager that evaluates the stall clock (the clock has this single writer)
+		bool ref2SamplerResolved;
 		public bool Ref2Finished;
 		AblationLatch ablateMbEssentials; // MODE-BIAS-01
 		public bool MbEssentialsArmed => Info.MbEssentials && switchesActive && !ablateMbEssentials.Off(player, AblationIds.MbEssentials);
@@ -1557,6 +1559,24 @@ namespace OpenRA.Mods.CA.Traits
 			// REFSCAN D-5 (sec 2): the search pump and the READY handoff run here, every bot visit, ahead of the
 			// queue managers' rotation and queue-sweep cooldown — the placement path never waits on the queue sweep.
 			refinerySearch?.Pump(bot, RefineryLawProvider());
+
+			// REF2-FIRST-01, row ref2_stall_release (Haiku FIX, Opus ruling): the stall clock is sampled once per bot visit, unconditionally while armed and not finished, independent of the pick-time
+			// callers (a not-startable spell can then never go unseen). Two flag reads on most visits; the sampler itself spaces its evaluations (Ref2First.SampleTicks) and reuses cached values.
+			if (Ref2StallArmed && !Ref2Finished)
+			{
+				if (!ref2SamplerResolved)
+				{
+					ref2SamplerResolved = true;
+					foreach (var builder in builders)
+						if (builder != null && Info.BuildingQueues.Contains(builder.Category))
+						{
+							ref2Sampler = builder;
+							break;
+						}
+				}
+
+				ref2Sampler?.Ref2StallSample();
+			}
 
 			builders[currentBuilderIndex].Tick(bot);
 

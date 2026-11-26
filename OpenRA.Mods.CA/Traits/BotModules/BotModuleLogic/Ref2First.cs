@@ -48,6 +48,16 @@ namespace OpenRA.Mods.CA.Traits
 		public static bool Startable(bool due, bool factoryBuildable, bool factoryOwnedOrQueued, bool factoryWaitReleased) =>
 			due && !(factoryBuildable && !factoryOwnedOrQueued && !factoryWaitReleased);
 
+		/// <summary>Ticks between two stall-clock samples (the sample runs once per bot visit at most, and an evaluation only every this many ticks): the clock error stays under this against a 750-tick stall.</summary>
+		public const int SampleTicks = 50;
+
+		/// <summary>
+		/// The stall-clock sample runs while the row is armed and the gate has not finished, from the start of the game (so the clock begins when ref2 really becomes startable, not when a radar or
+		/// production pick first asks). A game in which ref2 was never due within the bound is left to the pick-time path (the sample stops; a later due re-enters it through <paramref name="dueSince"/>).
+		/// </summary>
+		public static bool SampleWindow(bool armed, bool finished, int dueSince, int now, int boundTicks) =>
+			armed && !finished && (dueSince >= 0 || now < boundTicks);
+
 		/// <summary>The startable clock: the tick ref2 became startable (kept while it stays startable), negative = not startable (consecutive startable ticks only; the outer bound never resets).</summary>
 		public static int StartableSince(int since, bool startable, int now) => !startable ? -1 : since >= 0 ? since : now;
 

@@ -119,11 +119,76 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TheStallClockIsSampledOncePerBotVisitSoANotStartableSpellIsNeverUnseen()
+		{
+			Assert.That(Ref2First.SampleWindow(true, false, -1, 0, 3000), Is.True, "from the start of the game: the clock begins when ref2 really becomes startable");
+			Assert.That(Ref2First.SampleWindow(true, false, -1, 2999, 3000), Is.True);
+			Assert.That(Ref2First.SampleWindow(true, false, -1, 3000, 3000), Is.False, "never due within the bound: left to the pick-time path");
+			Assert.That(Ref2First.SampleWindow(true, false, 1200, 5000, 3000), Is.True, "due once: the sample keeps running until the gate finishes");
+			Assert.That(Ref2First.SampleWindow(true, true, 1200, 1300, 3000), Is.False, "finished for good");
+			Assert.That(Ref2First.SampleWindow(false, false, 1200, 1300, 3000), Is.False, "row off (switch or ablation): the sample never runs");
+			Assert.That(Ref2First.SampleTicks, Is.EqualTo(50));
+			Assert.That(Ref2First.SampleTicks, Is.LessThan(new BaseBuilderBotModuleCAInfo().Ref2StallTicks / 10), "the clock error is a small part of the stall");
+
+			// the walk at the sample cadence (Haiku's gap case): startable from 600, lost at the sample of 650 and back at 700. The sampled clock restarts at 700 and releases at 1500, not at 1351
+			// (an unsampled spell would have left the old clock running)
+			var since = -1;
+			var released = -1;
+			for (var now = 0; now <= 3000 && released < 0; now += Ref2First.SampleTicks)
+			{
+				since = Ref2First.StartableSince(since, now >= 600 && now != 650, now);
+				if (Ref2First.StallExpired(since, now, 750))
+					released = now;
+			}
+
+			Assert.That(released, Is.EqualTo(1500), "700 + 750 < 1500 (the first sample past the stall)");
+		}
+
+		[Test]
+		public void TheStallSampleIsCalledEveryBotVisitFromTheModuleSingleWriterAndCheap()
+		{
+			var bb = Source("mods/CA/Traits/BotModules/BaseBuilderBotModuleCA.cs");
+			var r2 = Source(Dir + "BaseBuilderQueueManagerCA.Ref2First.cs");
+
+			// the call site: the module's BotTick, every bot visit, ahead of the manager rotation, flags only before the sampler
+			var armed = bb.IndexOf("if (Ref2StallArmed && !Ref2Finished)", StringComparison.Ordinal);
+			var tick = bb.IndexOf("builders[currentBuilderIndex].Tick(bot);", StringComparison.Ordinal);
+			var sample = bb.IndexOf("ref2Sampler?.Ref2StallSample();", StringComparison.Ordinal);
+			Assert.That(armed, Is.GreaterThan(0));
+			Assert.That(sample, Is.GreaterThan(armed));
+			Assert.That(tick, Is.GreaterThan(sample), "ahead of the queue managers' rotation and their sweep cooldown");
+			Assert.That(bb, Does.Contain("Info.BuildingQueues.Contains(builder.Category)"), "one building manager is the sampler");
+
+			// the sampler: window, spacing, union of the building queues, flag sampleStall = true
+			Assert.That(r2, Does.Contain("public void Ref2StallSample()"));
+			Assert.That(r2, Does.Contain("Ref2First.SampleWindow(baseBuilder.Ref2StallArmed, baseBuilder.Ref2Finished, baseBuilder.Ref2DueSince, now, baseBuilder.Info.Ref2FirstBoundTicks)"));
+			Assert.That(r2, Does.Contain("ref2NextSample = now + Ref2First.SampleTicks;"));
+			Assert.That(r2, Does.Contain("ComputeRef2Due(ref2SampleBuildable, now, true);"));
+			Assert.That(r2, Does.Contain("ref2SampleBuildable ??= Ref2BuildableInAnyQueue;"), "one cached delegate");
+
+			// the pick-time path never writes the clock: the single writer is the sampler
+			Assert.That(r2, Does.Contain("ref2DueValue = ComputeRef2Due(buildable, now, false);"));
+			Assert.That(r2.Split("baseBuilder.Ref2StartableSince = ").Length - 1, Is.EqualTo(1), "one write site, inside the sampleStall block");
+			Assert.That(r2, Does.Contain("if (sampleStall && baseBuilder.Ref2StallArmed)"));
+
+			// cheap: no LINQ, no list or set allocation in the sampler, its buildable union or the stall block
+			var from = r2.IndexOf("public void Ref2StallSample()", StringComparison.Ordinal);
+			var to = r2.IndexOf("bool ComputeRef2Due(", StringComparison.Ordinal);
+			var stallFrom = r2.IndexOf("if (sampleStall && baseBuilder.Ref2StallArmed)", StringComparison.Ordinal);
+			var stallTo = r2.IndexOf("Ref2Observed(due ? \"due\"", StringComparison.Ordinal);
+			Assert.That(to, Is.GreaterThan(from));
+			Assert.That(stallTo, Is.GreaterThan(stallFrom));
+			foreach (var region in new[] { r2.Substring(from, to - from), r2.Substring(stallFrom, stallTo - stallFrom) })
+				foreach (var banned in new[] { ".Any(", ".Where(", ".Select(", ".ToList(", ".ToArray(", ".ToHashSet(", ".Concat(", ".Count(", "new List<", "new HashSet<", "new Dictionary<" })
+					Assert.That(region, Does.Not.Contain(banned), banned);
+		}
+
+		[Test]
 		public void TheStallReleaseIsWiredAfterTheBoundAndBeforeTheDueVerdictAndEndsTheGateForGood()
 		{
 			var r2 = Source(Dir + "BaseBuilderQueueManagerCA.Ref2First.cs");
 			var bound = r2.IndexOf("Ref2First.BoundExpired(baseBuilder.Ref2DueSince, now, b.Ref2FirstBoundTicks)", StringComparison.Ordinal);
-			var armed = r2.IndexOf("if (baseBuilder.Ref2StallArmed)", StringComparison.Ordinal);
+			var armed = r2.IndexOf("if (sampleStall && baseBuilder.Ref2StallArmed)", StringComparison.Ordinal);
 			var due = r2.IndexOf("Ref2Observed(due ? \"due\" : \"not_due\"", StringComparison.Ordinal);
 			Assert.That(bound, Is.GreaterThan(0));
 			Assert.That(armed, Is.GreaterThan(bound), "the outer bound is checked first");
@@ -139,7 +204,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(block, Does.Not.Contain("Cancel"), "nothing is cancelled");
 
 			// the same war-factory inputs as the economy gate
-			Assert.That(block, Does.Contain("var factoryWaitReleased = RefineryFieldGateCA.FactoryWaitReleased(b.VehiclesFactoryTypes.Any(NoSpaceBanned),"));
+			Assert.That(block, Does.Contain("var factoryWaitReleased = RefineryFieldGateCA.FactoryWaitReleased(factoryBanned,"));
 			Assert.That(block, Does.Contain("baseBuilder.RefineryGateFactoryPlacementFailed, now, baseBuilder.RefineryGateFirstStoodTick, b.RefineryFactoryWaitTicks);"));
 
 			// the DEV detail names the downstream blocker: the last refinery-pick economy verdict, the claimable anchors, standing and queued refineries, the war-factory state

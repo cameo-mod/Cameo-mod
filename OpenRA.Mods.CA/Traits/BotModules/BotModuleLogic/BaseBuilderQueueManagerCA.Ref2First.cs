@@ -35,11 +35,43 @@ namespace OpenRA.Mods.CA.Traits
 				return ref2DueValue;
 
 			ref2DueTick = now;
-			ref2DueValue = ComputeRef2Due(buildable, now);
+			ref2DueValue = ComputeRef2Due(buildable, now, false);
 			return ref2DueValue;
 		}
 
-		bool ComputeRef2Due(Func<string, bool> buildable, int now)
+		// Row ref2_stall_release, the stall clock sample (Haiku FIX on 7611e2cb4, Opus ruling): once per bot visit, ahead of the queue managers' rotation, while the row is armed and the gate has not
+		// finished (Ref2First.SampleWindow). Single writer of the clock: the module's BotTick calls it on one building manager; the pick-time evaluations (Ref2Due) never touch the clock. Cheap by
+		// construction: two flag reads and one tick compare on most visits, one evaluation per Ref2First.SampleTicks ticks, loops over frozen sets instead of LINQ, one cached delegate.
+		int ref2NextSample;
+		Func<string, bool> ref2SampleBuildable;
+
+		public void Ref2StallSample()
+		{
+			var now = world.WorldTick;
+			if (now < ref2NextSample)
+				return;
+
+			if (!Ref2First.SampleWindow(baseBuilder.Ref2StallArmed, baseBuilder.Ref2Finished, baseBuilder.Ref2DueSince, now, baseBuilder.Info.Ref2FirstBoundTicks))
+				return;
+
+			ref2NextSample = now + Ref2First.SampleTicks;
+			ref2SampleBuildable ??= Ref2BuildableInAnyQueue;
+			ComputeRef2Due(ref2SampleBuildable, now, true);
+		}
+
+		// The sample asks the whole building side, not one queue: a refinery buildable in any building queue of the module counts (the pick-time path keeps its per-queue view).
+		bool Ref2BuildableInAnyQueue(string name)
+		{
+			foreach (var category in baseBuilder.Info.BuildingQueues)
+				foreach (var queue in AIUtils.FindQueues(player, category))
+					foreach (var item in queue.BuildableItems())
+						if (item.Name == name)
+							return true;
+
+			return false;
+		}
+
+		bool ComputeRef2Due(Func<string, bool> buildable, int now, bool sampleStall)
 		{
 			if (!Ref2AnyArmed)
 				return false;
@@ -86,13 +118,22 @@ namespace OpenRA.Mods.CA.Traits
 				baseBuilder.Ref2DueSince = now;
 
 			// Row ref2_stall_release (Opus 11-26): ref2 is startable (due, and the first-war-factory wait is over) but no refinery has started within Ref2StallTicks: the downstream blocker is
-			// not ours to wait for (claim, site, spacing, reach, a refinery-pick gate or cash), so the hold ends for good and the old order runs. The clock is consecutive startable ticks; the
-			// 3000-tick bound above stays the outer cap. A refinery that starts makes the count reach two before this point, so the gate finishes through the two_refineries branch instead.
-			if (baseBuilder.Ref2StallArmed)
+			// not ours to wait for (claim, site, spacing, reach, a refinery-pick gate or cash), so the hold ends for good and the old order runs. The clock is consecutive startable SAMPLES (one per
+			// Ref2First.SampleTicks ticks from Ref2StallSample, never from the pick-time path, so a not-startable spell cannot go unseen); the 3000-tick bound above stays the outer cap. A refinery
+			// that starts makes the count reach two before this point, so the gate finishes through the two_refineries branch instead.
+			if (sampleStall && baseBuilder.Ref2StallArmed)
 			{
-				var factoryBuildable = b.VehiclesFactoryTypes.Any(buildable);
+				var factoryBuildable = false;
+				var factoryBanned = false;
+				foreach (var factory in b.VehiclesFactoryTypes)
+				{
+					factoryBuildable |= buildable(factory);
+					if (!factoryBanned)
+						factoryBanned = NoSpaceBanned(factory);
+				}
+
 				var factoryOwnedOrQueued = baseBuilder.VehicleFactoryOwnedOrQueued();
-				var factoryWaitReleased = RefineryFieldGateCA.FactoryWaitReleased(b.VehiclesFactoryTypes.Any(NoSpaceBanned),
+				var factoryWaitReleased = RefineryFieldGateCA.FactoryWaitReleased(factoryBanned,
 					baseBuilder.RefineryGateFactoryPlacementFailed, now, baseBuilder.RefineryGateFirstStoodTick, b.RefineryFactoryWaitTicks);
 				var startable = Ref2First.Startable(due, factoryBuildable, factoryOwnedOrQueued, factoryWaitReleased);
 				baseBuilder.Ref2StartableSince = Ref2First.StartableSince(baseBuilder.Ref2StartableSince, startable, now);
