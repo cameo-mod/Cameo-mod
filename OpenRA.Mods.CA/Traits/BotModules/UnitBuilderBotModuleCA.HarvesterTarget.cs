@@ -26,10 +26,27 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateHarvesterTarget; // HARV-01
 		bool HarvesterTargetOn => switchesActive && Info.HvHarvesterTarget && !ablateHarvesterTarget.Off(player, AblationIds.HvHarvesterTarget);
 
+		// CONSOLIDATE-03 P9 (b), row hv_module_counts_queued: the module may count the queued harvesters. Needs the target rule's counts (HarvesterTargetOn).
+		AblationLatch ablateModuleCountsQueued;
+		bool ModuleCountsQueuedOn => Info.HvModuleCountsQueued && HarvesterTargetOn && !ablateModuleCountsQueued.Off(player, AblationIds.HvModuleCountsQueued);
+
+		bool IBotHarvesterCounts.TryGetQueued(out int queued)
+		{
+			queued = 0;
+			if (IsTraitDisabled || !ModuleCountsQueuedOn || !RefreshHarvesterCounts())
+				return false;
+
+			queued = harvestersQueued;
+			return true;
+		}
+
 		HarvesterBotModuleCA harvesterModule;
 		int harvesterCountTick = -1;
 		int harvesterModuleLookTick = -1;
 		int harvestersLive, harvestersQueued, harvesterTarget, harvesterCap;
+#if CAMEO_DEV_LOGGING
+		int harvesterRefineries;
+#endif
 
 		// Per harvester type: the queued count we believe in (queue count plus starts the queue has not shown yet) and the tick of its last start. A refresh keeps the cached count while a start
 		// younger than HarvesterOrderLatencyTicks is not in the queue yet, so a late outgoing order cannot be forgotten and the cap holds (Sol FIX of HARV-01).
@@ -76,6 +93,9 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// the target is the yaml per-refinery number (2 by the binding rule), not the harvester module's own HarvestersPerRefinery (3 on generic): target 2 / cap 3 per refinery
+#if CAMEO_DEV_LOGGING
+			harvesterRefineries = refineries;
+#endif
 			harvesterTarget = HarvesterTarget.Target(refineries, Info.HarvesterTargetPerRefinery);
 			harvesterCap = HarvesterTarget.Cap(refineries, Info.HarvesterTargetPerRefinery, Info.HarvesterCapSlackPerRefinery);
 			return true;
@@ -97,7 +117,22 @@ namespace OpenRA.Mods.CA.Traits
 			if (!RefreshHarvesterCounts() || !harvesterModule.Info.HarvesterTypes.Contains(name))
 				return false;
 
-			return HarvesterTarget.OverCap(harvestersLive, harvestersQueued, harvesterCap);
+			var over = HarvesterPlan.OverCap(harvestersLive, harvestersQueued, harvesterCap);
+			HarvesterObserved(HarvesterPlan.SiteCap, harvesterCap, HarvesterPlan.CapVerdict(over));
+			return over;
+		}
+
+#if CAMEO_DEV_LOGGING
+		readonly HarvesterStream harvesterStream = new();
+#endif
+
+		// CONSOLIDATE-03 P9 (a), DEV only: the equivalence hash of the unit builder's harvester decisions (HV-PLAN-STREAM, sites 2 and 3). need = the target (site 2) or the cap (site 3).
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void HarvesterObserved(int site, int need, HarvesterVerdict verdict)
+		{
+#if CAMEO_DEV_LOGGING
+			harvesterStream.Observe(world.WorldTick, player.ClientIndex, site, harvestersLive, harvestersQueued, harvesterRefineries, need, (int)verdict);
+#endif
 		}
 
 		int harvesterServeTick = -1;
@@ -110,8 +145,12 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			harvesterServeTick = now;
-			if (!RefreshHarvesterCounts()
-				|| !HarvesterTarget.Due(harvestersLive, harvestersQueued, harvesterTarget, playerResources.GetCashAndResources(), Info.HarvesterTargetMinCash))
+			if (!RefreshHarvesterCounts())
+				return;
+
+			var due = HarvesterPlan.TargetDue(harvestersLive, harvestersQueued, harvesterTarget, playerResources.GetCashAndResources(), Info.HarvesterTargetMinCash);
+			HarvesterObserved(HarvesterPlan.SiteTarget, harvesterTarget, HarvesterPlan.TargetVerdict(due));
+			if (!due)
 				return;
 
 			var types = harvesterModule.Info.HarvesterTypes;

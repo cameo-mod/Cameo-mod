@@ -6453,6 +6453,8 @@ Player:
 		RequiresCondition: genericbot
 		# HARV-01 (row hv_harvester_target, Opus/user 11-25): 2 harvesters per refinery first, at most 3 (V08: 0 on 1 refinery for 12000 ticks; 21 on 1).
 		HvHarvesterTarget: true
+		# CONSOLIDATE-03 P9 (b) (row hv_module_counts_queued): the harvester module counts a harvester already in the factory as present (no repeat request behind it).
+		HvModuleCountsQueued: true
 		# HARV-01 (Opus 11-25): target 3 / cap 4 per refinery on generic (the user found too few harvesters); the code default stays 2.
 		HarvesterTargetPerRefinery: 3
 		# S1 (FINDINGS_2026-10-12 §3): the switch gate also arms the capturer ratio — classic
