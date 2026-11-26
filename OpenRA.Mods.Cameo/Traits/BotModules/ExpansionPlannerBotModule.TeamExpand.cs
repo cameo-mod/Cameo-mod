@@ -42,6 +42,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// <summary>
 		/// One expansion MCV request waiting for its unit, in request order (FIFO). ProducerId is the factory the request was issued to
 		/// when the requester knows it (null = unknown). Plain ints so the record round-trips through JSON.
+		/// RESERVED: ProducerId is never filled today. IBotRequestUnitProduction carries no producer/lane info, so every request binds by
+		/// the FIFO fallback (oldest of the same type). It stays reserved until ENG-MCV-DEFER-01 (deferred engine MCV work) gives lane info.
 		/// </summary>
 		internal sealed record PendingExpansion(int X, int Y, int Since, string Type, uint? ProducerId = null)
 		{
