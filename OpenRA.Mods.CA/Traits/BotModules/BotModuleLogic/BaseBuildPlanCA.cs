@@ -171,6 +171,10 @@ namespace OpenRA.Mods.CA.Traits
 		// CONSOLIDATE-03 P1 (b), row bb_s5_capture_reason: with CoreOnceListedOnly, S5 still asks its source after the listed roll, and offers only the capture unlocks
 		// (CaptureUnlockOf). False = S5 stops after the roll, as before.
 		public bool S5CaptureReason;
+
+		// CONSOLIDATE-03 P1 (b), bb_decide_row, DEV only: the refusal list the 3-arg Plan fills (BuildingPickArbiter). Null = not collected; only the DEV-only collector in the
+		// queue manager ever sets it, so a release walk records nothing.
+		public List<BuildingRefusal> Refusals;
 	}
 
 	/// <summary>
@@ -205,7 +209,7 @@ namespace OpenRA.Mods.CA.Traits
 		public static IReadOnlyList<BaseBuildStage> Stages => StageOrder;
 
 		/// <summary>The first candidate, over the ordered stages, that passes its stage caps and A1-A7. None after K failed tests or when every stage is exhausted.</summary>
-		public static BaseBuildPick Plan(BaseBuildSnapshot snapshot, IBaseBuildFeasibility feasibility, MersenneTwister rng) => Plan(snapshot, feasibility, rng, null);
+		public static BaseBuildPick Plan(BaseBuildSnapshot snapshot, IBaseBuildFeasibility feasibility, MersenneTwister rng) => Plan(snapshot, feasibility, rng, snapshot.Refusals);
 
 		/// <summary>
 		/// CONSOLIDATE-03 P1 (a): the walk of <see cref="BuildingPickArbiter.Decide"/>. <paramref name="refusals"/> null = exactly the walk above (a release build passes null);

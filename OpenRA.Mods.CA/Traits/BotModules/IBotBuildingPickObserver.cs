@@ -30,5 +30,9 @@ namespace OpenRA.Mods.CA.Traits
 		/// <paramref name="stage"/>; <paramref name="detail"/> says why it was rejected) or not_offered (<paramref name="stage"/> returned; <paramref name="detail"/> says why).
 		/// The observer dedupes per (player, queue, type) and rate-limits.</summary>
 		void BuildingSkipped(Player owner, int tick, string actor, string queue, string stage, string reason, string detail);
+
+		/// <summary>CONSOLIDATE-03 P1 bb_decide: one arbiter walk of <paramref name="queue"/>: the start (empty = no pick), its stage and deciding named rule, the S8 offers, and the
+		/// refusals (count and "stage:name:reason" summary). The caller dedupes per queue.</summary>
+		void BuildingDecided(Player owner, int tick, string queue, bool sustained, int bank, int tierLine, string actor, string stage, string decider, int s8Offers, int refusalCount, string refusals);
 	}
 }

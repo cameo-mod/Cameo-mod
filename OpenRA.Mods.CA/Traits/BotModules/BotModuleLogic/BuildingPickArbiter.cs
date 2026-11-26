@@ -154,6 +154,28 @@ namespace OpenRA.Mods.CA.Traits
 			refusals.Add(new BuildingRefusal(null, stage, reason, RuleOf(stage, s, null)));
 		}
 
+		/// <summary>DEV rows: the first <paramref name="max"/> refusals as "stage:name:reason" joined by ';' (name '-' for a closed stage), then "+n" for the rest.</summary>
+		public static string Summary(IReadOnlyList<BuildingRefusal> refusals, int max)
+		{
+			if (refusals == null || refusals.Count == 0)
+				return "";
+
+			var b = new System.Text.StringBuilder();
+			for (var i = 0; i < refusals.Count && i < max; i++)
+			{
+				var r = refusals[i];
+				if (i > 0)
+					b.Append(';');
+
+				b.Append(r.Stage).Append(':').Append(r.Name ?? "-").Append(':').Append(r.Reason);
+			}
+
+			if (refusals.Count > max)
+				b.Append(";+").Append(refusals.Count - max);
+
+			return b.ToString();
+		}
+
 		/// <summary>Records a refused candidate. No-op when <paramref name="refusals"/> is null (release).</summary>
 		public static void Refuse(List<BuildingRefusal> refusals, BaseBuildSnapshot s, BaseBuildCandidate candidate, BuildingReason reason)
 		{

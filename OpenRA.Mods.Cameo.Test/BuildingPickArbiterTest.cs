@@ -238,10 +238,54 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TheThreeArgumentPlanFillsTheSnapshotListOnlyWhenOneIsSet()
+		{
+			var f = new FakeFeasibility();
+			f.Infeasible.Add("tent");
+			var s = Snapshot(Sources((BaseBuildStage.S7RefineryPerField, new[] { "tent" })));
+			var pick = BaseBuildPlanCA.Plan(s, f, new MersenneTwister(1));
+			Assert.That(s.Refusals, Is.Null, "release: nothing is collected");
+
+			s = Snapshot(Sources((BaseBuildStage.S7RefineryPerField, new[] { "tent" })));
+			s.Refusals = new List<BuildingRefusal>();
+			Assert.That(BaseBuildPlanCA.Plan(s, new FakeFeasibility { Infeasible = { "tent" } }, new MersenneTwister(1)), Is.EqualTo(pick), "the same pick with the DEV list");
+			Assert.That(s.Refusals, Does.Contain(new BuildingRefusal("tent", BaseBuildStage.S7RefineryPerField, BuildingReason.Infeasible, BuildingRule.RefineryPerField)));
+		}
+
+		[Test]
+		public void TheSummaryListsStageNameAndReasonThenTheRest()
+		{
+			Assert.That(BuildingPickArbiter.Summary(null, 3), Is.EqualTo(""));
+			var refusals = new List<BuildingRefusal>
+			{
+				new("tent", BaseBuildStage.S8ProductionCycle, BuildingReason.Infeasible, BuildingRule.ProductionCycle),
+				new(null, BaseBuildStage.S9ExtraDefence, BuildingReason.CycleHold, BuildingRule.ScaledDefence),
+				new(null, BaseBuildStage.S10Fractions, BuildingReason.CycleHold, BuildingRule.Fractions),
+			};
+			Assert.That(BuildingPickArbiter.Summary(refusals, 3), Is.EqualTo("S8ProductionCycle:tent:Infeasible;S9ExtraDefence:-:CycleHold;S10Fractions:-:CycleHold"));
+			Assert.That(BuildingPickArbiter.Summary(refusals, 1), Is.EqualTo("S8ProductionCycle:tent:Infeasible;+2"));
+		}
+
+		[Test]
+		public void TheDecideRowIsDevOnlyAndDeduped()
+		{
+			var p1 = Source(Dir + "BaseBuilderQueueManagerCA.Pipeline01.cs");
+			Assert.That(p1, Does.Contain("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid RefusalsCollect(BaseBuildSnapshot s)"));
+			Assert.That(p1, Does.Contain("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid DecideObserved(BaseBuildSnapshot s, BaseBuildPick pick)"));
+			Assert.That(p1, Does.Contain("RefusalsCollect(snapshot); // bb_decide_row, DEV only"));
+			Assert.That(p1, Does.Contain("DecideObserved(snapshot, pick); // bb_decide_row, DEV only"));
+			Assert.That(p1, Does.Contain("if (now - decideLogged < (signature == decideSignature ? 750 : 25))"), "a changed decision at most every 25 ticks, an unchanged one every 750");
+			Assert.That(p1.Split("s.Refusals = ").Length - 1, Is.EqualTo(1), "the list is set only by the DEV collector");
+
+			var dev = Source("mods/Cameo.Dev/AiPlayerTelemetryDev.Coverage.cs");
+			Assert.That(dev, Does.Contain("ObserverRow(owner, \"bb_decide\", b =>"));
+		}
+
+		[Test]
 		public void TheReleasePathRecordsNothingAndOneTestFeedsS4AndModeBias()
 		{
 			var plan = Source(Dir + "BaseBuildPlanCA.cs");
-			Assert.That(plan, Does.Contain("public static BaseBuildPick Plan(BaseBuildSnapshot snapshot, IBaseBuildFeasibility feasibility, MersenneTwister rng) => Plan(snapshot, feasibility, rng, null);"));
+			Assert.That(plan, Does.Contain("public static BaseBuildPick Plan(BaseBuildSnapshot snapshot, IBaseBuildFeasibility feasibility, MersenneTwister rng) => Plan(snapshot, feasibility, rng, snapshot.Refusals);"), "P1 (b): the DEV list rides on the snapshot, null in release");
 			Assert.That(plan, Does.Contain("if (refusals != null)\n\t\t\t\t\tBuildingPickArbiter.NoteClosed(refusals, stage, snapshot, cycleOffered);"));
 
 			var arbiter = Source(Dir + "BuildingPickArbiter.cs");
