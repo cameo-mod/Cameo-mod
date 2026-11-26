@@ -2838,8 +2838,10 @@ namespace OpenRA.Mods.CA.Traits
 		// anchor is claimable), or null. Shared by the economy rung and SUSTAINED-CASH-01 so both pick the same item.
 		ActorInfo ChooseWantedRefinery(ProductionQueue queue, IEnumerable<ActorInfo> buildableThings, ActorInfo power)
 		{
-			if (baseBuilder.HasAdequateRefineryCount())
-				return null;
+			// CONSOLIDATE-03 P3: the chain below is the one refinery-want verdict (RefineryWant / RefineryGate); every exit records the gate that held through RefineryHeld.
+			var adequacy = baseBuilder.AdequateReason();
+			if (adequacy != RefineryAdequacy.Inadequate)
+				return RefineryHeld(RefineryWant.ToGate(adequacy));
 
 			// pb_expansion_refinery_safety: a refinery wanted for an expansion yard under threat is dropped from this slot (not held).
 			if (SafetyOn)
@@ -2848,30 +2850,34 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					// BASE-12: only when every wanting claim is unsafe is the slot dropped; a safe claim behind an unsafe head claim still goes.
 					if (baseBuilder.ExpansionRefineryBlockedByAllUnsafe())
-						return null;
+						return RefineryHeld(RefineryGate.UnsafeAll);
 				}
 				else
 				{
 					var wantedBy = baseBuilder.ExpansionWantsRefinery();
 					var wantedField = wantedBy?.RefineryClaimTarget ?? wantedBy?.ExpansionTarget;
 					if (wantedField != null && !baseBuilder.ExpansionRefinerySafe(wantedField.Value))
-						return null;
+						return RefineryHeld(RefineryGate.UnsafeField);
 				}
 			}
 
 			var refinery = GetProducibleBuilding(baseBuilder.Info.RefineryTypes, buildableThings);
+			if (refinery == null)
+				return RefineryHeld(RefineryGate.NotBuildable);
 
 			// RefineryLimit is shared across every faction the player owns, so always allow
 			// a faction's own first refinery through even if that global cap has already
 			// been reached by a different faction's construction yard.
-			if (refinery == null || baseBuilder.HasMaxRefineriesFor(refinery))
-				return null;
+			if (baseBuilder.HasMaxRefineriesFor(refinery))
+				return RefineryHeld(RefineryGate.MaxRefineries);
 
 			// REF-FIELD-02 (row rf_economy_gate): ref1, the first vehicle factory, then ref2; the interval; the bounded first-copy yield.
 			if (RefineryEconomyGateOn && RefineryEconomyHolds(queue, buildableThings))
-				return null;
+				return RefineryHeld(RefineryGate.Economy);
 
 			var pick = BaseBuilderQueueEvalCA.PickOrPower(refinery, power, HasSufficientPowerForActor);
+			lastRefineryGate = RefineryGate.None;
+			RefineryWantObserved(RefineryGate.None, pick != null);
 			if (pick != null)
 			{
 				AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, pick.Name,

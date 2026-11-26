@@ -1803,14 +1803,25 @@ namespace OpenRA.Mods.CA.Traits
 
 		// Require at least one refinery, unless we can't build it. REF-1 (§12.24 v2): under the refinery law the
 		// count is irrelevant — adequate iff no anchor is claimable (unclaimed <= in-flight ends the want).
-		public bool HasAdequateRefineryCount() =>
-			Info.RefineryTypes.Count == 0 ||
-			(RefineryLawProvider() != null
+		public bool HasAdequateRefineryCount() => AdequateReason() != RefineryAdequacy.Inadequate;
+
+		// CONSOLIDATE-03 P3: the first true sub-condition of the old HasAdequateRefineryCount, evaluated in the same short-circuit order (the law provider and ExpansionWantsRefinery are read in the same order).
+		public RefineryAdequacy AdequateReason()
+		{
+			if (Info.RefineryTypes.Count == 0)
+				return RefineryAdequacy.NoTypes;
+
+			if (RefineryLawProvider() != null
 				? ExpansionWantsRefinery() == null
 				: AIUtils.CountActorByCommonName(RefineryBuildings) >= OptimalRefineryCount()
-					&& ExpansionWantsRefinery() == null) ||
-			AIUtils.CountActorByCommonName(powerBuildings) == 0 ||
-			AIUtils.CountActorByCommonName(ConstructionYardBuildings) == 0;
+					&& ExpansionWantsRefinery() == null)
+				return RefineryAdequacy.Met;
+
+			if (AIUtils.CountActorByCommonName(powerBuildings) == 0)
+				return RefineryAdequacy.NoPowerPlant;
+
+			return AIUtils.CountActorByCommonName(ConstructionYardBuildings) == 0 ? RefineryAdequacy.NoYard : RefineryAdequacy.Inadequate;
+		}
 
 		int OptimalRefineryCount() =>
 			AIUtils.CountActorByCommonName(ProductionBuildings) > 0
