@@ -39,6 +39,9 @@ namespace OpenRA.Mods.CA.Traits
 		// Q7 Step 2 (Pincer): decided at push time on the arrived blob; the arms are balanced by dividing a squad when needed (TeamLeadPincerEnabled is the switch it refines).
 		public const string SqPincerPush = "sq_pincer_push";
 
+		// fix-03 (Sol V08F_CUMREV_SOL_02 finding 2): the pincer arm plan reads the squads' arrived units and value. Off = the committed totals, as before.
+		public const string PincerArrivedArms = "pincer_arrived_arms";
+
 		// Q8 Step 2 (all-in): the late tick (ArmyAllInLateTick) is the fallback all-in trigger (cap, idle, won, the stalemate signal and the ahead rows of ALLIN-TRIGGER-01 are the others).
 		public const string SqAllInLate = "sq_all_in_late";
 
