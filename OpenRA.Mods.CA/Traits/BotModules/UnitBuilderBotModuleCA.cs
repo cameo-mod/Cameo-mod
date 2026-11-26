@@ -3190,7 +3190,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			// ub_pool: the full candidate list with the factors of each weight (fraction, personality x demand x mode bias percent, counter percent, final weight after the floor)
 			var parts = string.Join("|", pool.Select((a, i) => string.Create(System.Globalization.CultureInfo.InvariantCulture, $"{a.Name}:{fractions[i]}:{biases[i]}:{counterPcts[i]}:x{boosts[i]:0.##}:{weights[i]:0.##}")));
-			RollLog($"{world.WorldTick},{seat},ub_pool,{pool[pick].Name},{queueType},{pickId};floor={RollParameters.FloorPct};{parts}");
+			RollLog($"{world.WorldTick},{seat},ub_pool,{pool[pick].Name},{queueType},{pickId};floor={RollParameters.FloorPct};first={(first ? 1 : 0)};{parts}");
 		}
 
 		// ub_tech_lean (DEV, record only): one unit_roll.csv row per order started pay-as-you-go by the tech lean: tick,seat,ub_tech_lean,type,queue,price;bank before the order;dearest price of the pool.
