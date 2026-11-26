@@ -5636,3 +5636,192 @@ ra2_josh:
 		Tick: 80
 	icon:
 		Filename: invisibleitem.shp
+^RA2Animal_Zoo:
+	Defaults:
+		Filename: ra2_mumy.shp
+		Offset: 0, 0
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 8
+		Facings: 8
+		Tick: 120
+	die:
+		Start: 230
+		Length: 15
+		Tick: 120
+	shoot:
+		Start: 136
+		Length: 8
+		Facings: 8
+	die4:
+		Filename: invisibleitem.shp
+	die5:
+		Filename: invisibleitem.shp
+	die6:
+		Filename: invisibleitem.shp
+	die7:
+		Filename: invisibleitem.shp
+	die8:
+		Filename: invisibleitem.shp
+	die9:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: invisibleitem.shp
+
+zoo_bighorn_m:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_bighorn_m.shp
+		Offset: 0, 0
+zoo_bighorn_y:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_bighorn_y.shp
+		Offset: 0, 0
+zoo_bighorn_f:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_bighorn_f.shp
+		Offset: 0, 0
+zoo_bison_m:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_bison_m.shp
+		Offset: 0, 0
+zoo_bison_y:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_bison_y.shp
+		Offset: 0, 0
+zoo_blackbr_m:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_blackbr_m.shp
+		Offset: 0, 0
+zoo_blackbr_y:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_blackbr_y.shp
+		Offset: 0, 0
+zoo_grizzly_m:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_grizzly_m.shp
+		Offset: 0, 0
+zoo_grizzly_y:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_grizzly_y.shp
+		Offset: 0, 0
+
+zoo_brhino_m:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_brhino_m.shp
+		Offset: 0, 0
+zoo_brhino_y:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_brhino_y.shp
+		Offset: 0, 0
+
+zoo_hippo_m:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_hippo_m.shp
+		Offset: 0, 0
+zoo_hippo_y:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_hippo_y.shp
+		Offset: 0, 0
+
+zoo_afrbuf_m:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_afrbuf_m.shp
+		Offset: 0, 0
+zoo_afrbuf_y:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_afrbuf_y.shp
+		Offset: 0, 0
+
+zoo_arcwolf_m:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_arcwolf_m.shp
+		Offset: 0, 0
+zoo_arcwolf_y:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_arcwolf_y.shp
+		Offset: 0, 0
+
+zoo_graywolf_m:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_graywolf_m.shp
+		Offset: 0, 0
+zoo_graywolf_y:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_graywolf_y.shp
+		Offset: 0, 0
+
+zoo_baboon_m:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_baboon_m.shp
+		Offset: 0, 0
+zoo_baboon_y:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_baboon_y.shp
+		Offset: 0, 0
+
+zoo_cheetah_m:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_cheetah_m.shp
+		Offset: 0, 0
+zoo_cheetah_y:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_cheetah_y.shp
+		Offset: 0, 0
+
+zoo_elephant_m:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_elephant_m.shp
+		Offset: 0, 0
+zoo_elephant_y:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_elephant_y.shp
+		Offset: 0, 0
+
+zoo_gazelle_m:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_gazelle_m.shp
+		Offset: 0, 0
+zoo_gazelle_y:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_gazelle_y.shp
+		Offset: 0, 0
+
+zoo_giraffe_m:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_giraffe_m.shp
+		Offset: 0, 0
+zoo_giraffe_y:
+	Inherits: ^RA2Animal_Zoo
+	Defaults:
+		Filename: zoo_giraffe_y.shp
+		Offset: 0, 0

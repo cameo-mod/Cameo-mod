@@ -772,24 +772,77 @@ BearVoice:
 		Select: gbeasela, gbeaselb
 		Move: gbeamova, gbeamovb, gbeamovc
 		Attack: gbeaatta, gbeaattb
+		Action: gbeaatta, gbeaattb
 		Feedback: gbeafeaa, gbeafeab
 		Die: gbeadiea, gbeadieb
 CowVoice:
 	DefaultVariant: .wav
 	Voices:
-		Select: gcowsela, gcowselb, gcowselc
-		Move: gcowmova, gcowmovb
+		Select: gcowsela, gcowselb, gcowselc, cowselect2, cowselect1
+		Move: gcowmova, gcowmovb, cowmove1, cowmove2
+		Attack: gcowmova, gcowmovb, cowmove1, cowmove2
+		Action: gcowmova, gcowmovb, cowmove1, cowmove2
 		Feedback: gcowsela, gcowselb, gcowselc
-		Die: gcowdiea
+		Die: gcowdiea, cowdeath
+
+SheepGoatVoice:
+	DefaultVariant: .wav
+	Voices:
+		Select: goatselect, sheep_select
+		Move: goatacknowledge, sheep_move, goat_move1, goat_move2
+		Attack: goatacknowledge, sheep_move, goat_move1, goat_move2
+		Feedback: goatacknowledge, sheep_move, goat_move1, goat_move2
+		Action: goatacknowledge, sheep_move, goat_move1, goat_move2
+		Die: goatacknowledge
+
 MummyVoice:
 	DefaultVariant: .wav
 	Voices:
 		Select: gmumsela, gmumselb, gmumselc
 		Move: gmummova, gmummovd
 		Attack: gmumatta, gmumattb, gmumattc
+		Action: gmumatta, gmumattb, gmumattc
 		Die: gmumdiea, gmumdieb, gmumdiec, gmumdied
 		Zapped: igenzapa
 		Burned: ienadia
 		Melted: igenmela, igenmelb, igenmelc
 	
-        
+CamelVoice:
+	DefaultVariant: .wav
+	Voices:
+		Select: camel1
+		Move: camel2
+		Attack: camel2
+		Action: camel2
+		Feedback: camel_death2, camel_death1
+		Die: camel_death2, camel_death1
+
+ElephantVoice:
+	DefaultVariant: .wav
+	Voices:
+		Select: elephant, elephantgrunt1, elephantgrunt2
+		Move: elephant_move
+		Attack: elephant_move
+		Action: elephant_move
+		Feedback: elephant_move
+		Die: elephantdeath
+
+BigcatVoice:
+	DefaultVariant: .wav
+	Voices:
+		Select: lion_idle1, lion_idle2, stigerroar, pinky_sight
+		Move: lion_attack1, lion_attack2, pinky_attack
+		Attack: lion_attack1, lion_attack2, pinky_attack
+		Action: lion_attack1, lion_attack2, pinky_attack
+		Feedback: lion_attack1, lion_attack2, pinky_attack
+		Die: lion_attack1, lion_attack2, stigerdie, pinky_death
+
+HippoVoice:
+	DefaultVariant: .wav
+	Voices:
+		Select: hippogrunt1, hippogrunt2
+		Move: hippogrunt1, hippogrunt2
+		Attack: hippogrunt1, hippogrunt2
+		Action: hippogrunt1, hippogrunt2
+		Feedback: hippogrunt1, hippogrunt2
+		Die: shippodie, hippodie

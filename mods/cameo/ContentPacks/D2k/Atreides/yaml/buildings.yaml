@@ -93,43 +93,18 @@ atreides_barracks:
 		Range: 1c512, 2c768
 
 atreides_lightfactory:
-	Inherits: ^D2KBuilding
-	Inherits@UPGRADEABLE: ^D2kUpgradeable
-	Inherits@D2KSprite: ^D2KPaletteRender
-	Inherits@shape: ^2x2Shape
+	Inherits: ^LightFactory
+	Tooltip:
+		Name: Atreides Light Factory
+	RenderSprites:
+		Image: atreides_light
 	Buildable:
 		Factions: atreides
 		Prerequisites: ~atreides_constructionyard, atreides_refinery
-		Description: Produces light vehicles.
+		Description: template_factory.description
 		IconPalette: d2kunit
-	Tooltip:
-		Name: Atreides Light Factory
-	Building:
-		Footprint: xx xx ==
-		Dimensions: 2,3
-		LocalCenterOffset: 0,-512,0
-	RallyPoint:
-	Exit@1:
-		SpawnOffset: 352,576,0
-		ExitCell: 0,2
-	Exit@2:
-		SpawnOffset: 512,480,0
-		ExitCell: 1,2
-	RenderSprites:
-		Image: atreides_light
 	ProvidesPrerequisite@vehicle_production:
 		Prerequisite: atreides_light_vehicle_production
-	ProvidesPrerequisite@light:
-		Prerequisite: atreides_light
-	ProvidesPrerequisite@factionlight:
-		Prerequisite: atreides_lightfactory
-	GrantConditionOnPrerequisite@UPGRADEABLE:
-		Prerequisites: atreides_upgrade_light
-	DamageMultiplier@upgrade_light:
-		RequiresCondition: upgrade_light
-		Modifier: 75
-	ActorStatValues:
-		Upgrades: atreides_upgrade_light
 
 atreides_heavyfactory:
 	Inherits: ^HeavyFactory
@@ -175,27 +150,46 @@ atreides_repairpad:
 
 atreides_outpost:
 	Inherits: ^D2KBuilding
+	Inherits@radar: ^RadarBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
-	Inherits@shape: ^2x2Shape
+	Inherits@shape: ^3x3Shape
 	Buildable:
 		Factions: atreides
-		Prerequisites: ~atreides_constructionyard, atreides_refinery, atreides_barracks
-		Description: Provides radar and reveals terrain.
+		Prerequisites: ~atreides_constructionyard, atreides_refinery
+		Description: Expands buildable area and provides radar.
 		IconPalette: d2kunit
 	Tooltip:
 		Name: Atreides Outpost
 	Building:
-		Footprint: xx xx ==
-		Dimensions: 2,3
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
 		Image: atreides_outpost
+	WithIdleOverlay@DISH:
+		RequiresCondition: !build-incomplete && !severe-damaged
+		Sequence: idle-dish
+		PauseOnCondition: disabled
+		# Offset: -30,-60,0
+	GrantConditionOnDamageState@STOPDISH:
+		Condition: severe-damaged
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 5, 9
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
 	ProvidesPrerequisite@outpost:
-		Prerequisite: outpost
-	DetectCloaked:
-		Range: 5c0
-	RevealsShroud:
-		Range: 8c0
+		Prerequisite: outpost.d2k
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	ProvidesPrerequisite@atreides_outpost:
+		Prerequisite: atreides_outpost
 
 atreides_hightechfactory:
 	Inherits: ^D2KBuilding
@@ -349,9 +343,81 @@ atreides_palace:
 	Production@Fremen:
 		Produces: Fremen
 
-atreides_gunturret:
-	Inherits: ^D2KBuilding
+atreides_machinegun_tower:
+	Inherits: ^D2KDefense
+	Inherits@exp: ^D2KGainsExperienceRABuilding
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@muzzleglow: ^MuzzleGlowCannon
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^1x1Shape
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Inherits@Barrel: ^D2K_ReinforcedBarrel
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Tooltip:
+		Name: Atreides Machinegun Post
+	Valued:
+		Cost: 1200
+	Buildable:
+		Queue: Defence, RADefence
+		Prerequisites: ~atreides_constructionyard, atreides_barracks
+		BuildPaletteOrder: 575
+		Description: Guard Tower.
+		IconPalette: d2kunit
+	Health:
+		HP: 125000
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithSpriteBody:
+		Name: make
+		Sequence: invisible
+	WithMakeAnimation:
+		Condition: build-incomplete
+		BodyNames: make
+	Turreted:
+		TurnSpeed: 16
+		InitialFacing: 2048
+	Armament:
+		Weapon: HMG
+		LocalOffset: 700,0,512
+	Replacement:
+		ReplaceableTypes: Tower
+	WithWallSpriteBody:
+		RequiresCondition: !build-incomplete
+	WithSpriteTurret:
+		Palette: player_rgba
+		IsPlayerPalette: true
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 2, 4
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	RenderSprites:
+		Image: atreides_machinegun_tower
+	Power:
+		Amount: -50
+	RevealsShroud:
+		Range: 7979
+	ActorStatValues:
+		Upgrades:
+	-WithMuzzleGlow:
+
+atreides_gunturret:
+	Inherits: ^D2KDefense
+	Inherits@exp: ^D2KGainsExperienceRABuilding
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@detect: ^GenericAllDetector
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@shape: ^1x1Shape
 	Buildable:
 		Factions: atreides
@@ -373,28 +439,70 @@ atreides_gunturret:
 	Turreted:
 		TurnSpeed: 80
 	WithSpriteTurret:
+	-WithDeathAnimation:
 
 atreides_rocketturret:
-	Inherits: ^D2KBuilding
+	Inherits: ^D2KDefense
+	Inherits@exp: ^D2KGainsExperienceRABuilding
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@detect: ^GenericAllDetector
+	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@shape: ^1x1Shape
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@HeavyMissiles: ^D2K_HeavyMissilesUpgrade
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Armor:
+		Type: Concrete
 	Buildable:
-		Factions: atreides
-		Prerequisites: ~atreides_constructionyard, atreides_barracks
-		Description: Anti-vehicle rocket turret.
+		Queue: Defence, RADefence
+		Prerequisites: ~atreides_constructionyard, atreides_outpost
+		BuildPaletteOrder: 610
+		Description: actor_harkonnen_rocketturret.description
 		IconPalette: d2kunit
+	Valued:
+		Cost: 1500
 	Tooltip:
 		Name: Atreides Rocket Turret
-	Building:
-		Footprint: x =
-		Dimensions: 1,2
-		LocalCenterOffset: 0,-512,0
-	RenderSprites:
-		Image: atreides_rocket_turret
-	Armament:
+	Health:
+		HP: 150000
+	BodyOrientation:
+		QuantizedFacings: 32
+	Armament@PRIMARY:
 		Weapon: D2K_TowerMissile
-	AttackTurreted:
-		FacingTolerance: 0
+		LocalOffset: 256,384,768, 256,-384,768
 	Turreted:
-		TurnSpeed: 80
+		TurnSpeed: 32
+		InitialFacing: 2048
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithWallSpriteBody:
+		RequiresCondition: !build-incomplete
 	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	WithSpriteBody:
+		Name: make
+		Sequence: invisible
+	WithMakeAnimation:
+		Condition: build-incomplete
+		BodyNames: make
+	Replacement:
+		ReplaceableTypes: Tower
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 3, 5
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	Power:
+		Amount: -75
+	RevealsShroud:
+		Range: 10684
+	DetectCloaked:
+		Range: 5342
+	RenderSprites:
+		Image: atreides_missile_tower
