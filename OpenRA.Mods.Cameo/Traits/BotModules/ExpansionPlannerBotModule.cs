@@ -3490,6 +3490,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			SlowCallBegin();
+			BotTickVisit(bot);
+			SlowCallEnd();
+		}
+
+		// PERF-UB-PICK-01 item 4: the BotTick body, unchanged, one call deeper (the DEV slow-call guard of ExpansionPlannerBotModule.SlowCall.cs wraps the call).
+		void BotTickVisit(IBot bot)
+		{
 			// LC4 (AI_REVIEW_FRANSOTTO P1c): TraitEnabled may run before the resource map's own condition is granted in
 			// the same batch, so a null / disabled cache is re-resolved here instead of idling for the whole match.
 			if (resourceMap == null || !resourceMap.IsTraitEnabled())
@@ -3504,6 +3512,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			// MCV-SAFE-01 (CG only): en-route guard and loss memory for the expansion MCVs.
 			McvSafeTick(bot);
+			SlowCallMark(SlowMarkMcvSafe);
 
 			income.Enqueue((world.WorldTick, resources.Earned));
 			while (income.Count > 1 && world.WorldTick - income.Peek().Tick > Info.IncomeWindowTicks)
@@ -3514,6 +3523,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// the tail of the anchor list for ReplanTicks at a time.
 			if (Info.FieldCoverage && Info.DriveRefineries)
 				CoverageTick();
+			SlowCallMark(SlowMarkCoverage);
 
 			if (!ReplanDue(bot))
 				return;
@@ -3539,6 +3549,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		void Replan(IBot bot)
 		{
 			var (refinery, link, crawlLink, defence, queues) = CheapestBuildables();
+			SlowCallMark(SlowMarkBuildables);
 
 			// REF-1 B3 (§12.24 v2): a transiently unbuildable refinery (prerequisite missing, queue disabled)
 			// must not silence the planner — the estimate only feeds field scoring's payback term, so the last
@@ -3631,6 +3642,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					guards.Add((a.Location, a.Info.TraitInfos<ValuedInfo>().FirstOrDefault()?.Cost ?? 0));
 			}
 
+			SlowCallMark(SlowMarkActors);
 			if (buildingCells.Count == 0)
 			{
 				Idle("no own building gives buildable area");
@@ -3782,6 +3794,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				scores.Add(new FieldScore(i, center, value, hops, payback, threat, score, Safety(threat, guardValue)));
 			}
 
+			SlowCallMark(SlowMarkFields);
 			scores.Sort(CompareFieldScore);
 			LastScores = scores;
 			ObserveExpansionDepletion(refineryCells);
@@ -3792,6 +3805,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				Idle($"no free field ({fieldIndexCount} map indices, {initialCells.Count} with resources, {owned} already ours)");
 			else
 				lastIdleReason = null;
+			SlowCallMark(SlowMarkTarget);
 
 			// EX-2/EX-2c: want a refinery at the best free field already in reach — any in-reach field counts,
 			// not only the crawl target, so an outpost yard claims its local field right away (EX-2c). Park a
@@ -3854,8 +3868,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			// Greedy expansion: ask for the next construction MCV right away; the engine module would wait for its
 			// high cash trigger first. LastScores is this tick's fresh list, so a freed field is seen immediately.
+			SlowCallMark(SlowMarkClaims);
 			if (Info.DriveMcvRequests)
 				RequestMcv(bot);
+			SlowCallMark(SlowMarkMcv);
 
 			// CB_frontier_observe (P3a): the read-only shadow advances on this pass — a re-plan that returned
 			// early never reached the field evidence, and the shadow's counters simply wait for the next one.

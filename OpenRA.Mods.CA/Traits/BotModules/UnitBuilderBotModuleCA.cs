@@ -1313,10 +1313,12 @@ namespace OpenRA.Mods.CA.Traits
 #if CAMEO_DEV_LOGGING
 			Array.Clear(ubSubAcc, 0, ubSubAcc.Length);
 			UbSubStart(4);
+			UbPickCountReset();
 #endif
 		}
 
-		// ub_perf (DEV): one row per visit, only when the visit total is at least 5 ms. Fields: total_us, pick_us (contains reject_us when the roll is on), reject_us, coverage_us, refresh_us.
+		// ub_perf (DEV): one row per visit, only when the visit total is at least 5 ms. Fields: total_us, pick_us (contains reject_us when the roll is on), reject_us, coverage_us, refresh_us,
+		// then PERF-UB-PICK-01's roll counters (UbPickCounts: rolls, picks, examined, pool, examined_per_pick).
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
 		void UbVisitEnd()
 		{
@@ -1327,7 +1329,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (total < 5000.0)
 				return;
 
-			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},ub_perf,,,total_us={total:0};pick_us={Us(0):0};reject_us={Us(1):0};coverage_us={Us(2):0};refresh_us={Us(3):0}");
+			RollLog($"{world.WorldTick},{Array.IndexOf(world.Players, player)},ub_perf,,,total_us={total:0};pick_us={Us(0):0};reject_us={Us(1):0};coverage_us={Us(2):0};refresh_us={Us(3):0}{UbPickCounts()}");
 #endif
 		}
 
@@ -2055,6 +2057,7 @@ namespace OpenRA.Mods.CA.Traits
 						? ChooseRandomUnitToBuild(queue, excludeLimited, shares, skip)
 						: ChooseUnitToBuild(queue, excludeLimited, saturated, shares, skip));
 					UbSubStop(0);
+					UbRollDone(roll, unit != null);
 
 					// UNIT-ALL-01: no candidate left for the roll ends this queue's fill; the composition fallback and the two floor picks below belong to the layers the roll replaces.
 					if (roll && unit == null)
@@ -3102,6 +3105,9 @@ namespace OpenRA.Mods.CA.Traits
 			var pool = items;
 			foreach (var a in pool)
 				rollAvailableSince.TryAdd(a.Name, world.WorldTick);
+
+			// PERF-UB-PICK-01 (DEV counter): rollExcluded holds every exclusion of this roll (filled only under CAMEO_DEV_LOGGING, as this call is).
+			UbRollPool(pool.Count + rollExcluded.Count, pool.Count);
 
 			// TIER-MIX-01 (ub_tech_lean): the dearest price of this fill's pool, for the afford gate; a re-roll after a refusal keeps the earlier top (the refused pick has left the pool).
 			if (TechLeanOn)

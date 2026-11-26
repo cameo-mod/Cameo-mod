@@ -46,7 +46,9 @@ namespace OpenRA.Mods.CA.Traits
 			admitOneRemoved.Clear();
 			for (var i = 0; i < n; i++)
 			{
-				price[i] = queue.GetProductionCost(pool[i]);
+				// PERF-UB-PICK-01: through the visit cost cache (Cost, row cost_cache_visit; the same integer as the live read). The live call here priced the whole pool
+				// on every roll, and a refused pick re-rolls, so a low-cash fill paid about pool x pool live GetProductionCost calls (V08G Multi4: 98% of the visit in the pick).
+				price[i] = Cost(queue, pool[i]);
 				settled[i] = rollOrdered.Contains(pool[i].Name);
 				eligible[i] = settled[i] && CoreFocus.Affordable(price[i], rollBankLeft, RollParameters.CoreFocusBankPct);
 

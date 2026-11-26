@@ -229,7 +229,7 @@ namespace OpenRA.Mods.Cameo.Test
 			// The helper reads the same ordering the first-build boost reads, the queue's own price, and the yaml values.
 			var part = RepoFile(Bots + "UnitBuilderBotModuleCA.CoreFocus.cs");
 			Assert.That(part, Does.Contain("settled[i] = rollOrdered.Contains(pool[i].Name);"));
-			Assert.That(part, Does.Contain("price[i] = queue.GetProductionCost(pool[i]);"));
+			Assert.That(part, Does.Contain("price[i] = Cost(queue, pool[i]);"), "PERF-UB-PICK-01: the price comes through the visit cost cache");
 			Assert.That(part, Does.Contain("CoreFocus.Affordable(price[i], rollBankLeft, RollParameters.CoreFocusBankPct)"));
 			Assert.That(part, Does.Contain("CoreFocus.Core(price, eligible, RollParameters.CoreFocusCount)"));
 			Assert.That(part, Does.Contain("CoreFocus.MultiplierPct(weights, settled, core, RollParameters.CoreFocusSharePct, RollParameters.CoreFocusMaxPct)"));
