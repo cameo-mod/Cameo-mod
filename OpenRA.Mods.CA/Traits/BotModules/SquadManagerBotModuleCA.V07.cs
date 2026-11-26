@@ -104,16 +104,18 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
+			var gate = new AllInGate(now, atCap, huge, won, blob.Units, blob.Value);
+
 			// ALLIN-TRIGGER-01 (sq_ahead and one row per trigger): the dynamic all-in, when the team is ahead; the named triggers above keep their name and come first.
-			if (!atCap && !huge && !won && AheadWhy(now) is { } ahead)
+			if (gate.Open && AheadWhy(now) is { } ahead)
 				return AllInReturn(now, ahead);
 
 			// CONSOLIDATE-02 Q8 (sq_all_in_late): the late tick is the fallback all-in input of a game that stays undecided; the triggers above keep their name.
-			if (!atCap && !huge && !won && ArmyAllInLateOn(now))
+			if (gate.Open && ArmyAllInLateOn(now))
 				return AllInReturn(now, AllInCA.WhyLate);
 
 			// CONSOLIDATE-02 Q4 (Opus D4): the stalemate breaker's trigger is one more all-in input (it no longer launches its own wave).
-			return AllInReturn(now, AllInCA.Why(atCap, huge, won)
+			return AllInReturn(now, AllInCA.Why(gate.AtCap, gate.Huge, gate.Won)
 				?? (ArmyLaunchArbiterOn && AllInCA.StalemateSignal(now, team.StalemateSignalTick, Info.ArmyStalemateSignalTicks) ? AllInCA.WhyStalemate : null));
 		}
 

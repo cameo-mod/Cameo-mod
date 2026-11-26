@@ -26,7 +26,8 @@ namespace OpenRA.Mods.Cameo.Test
 			var v07 = Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCA.V07.cs");
 			Assert.That(v07, Does.Contain("return AllInReturn(now, ahead);"));
 			Assert.That(v07, Does.Contain("return AllInReturn(now, AllInCA.WhyLate);"));
-			Assert.That(v07, Does.Contain("return AllInReturn(now, AllInCA.Why(atCap, huge, won)"));
+			Assert.That(v07, Does.Contain("return AllInReturn(now, AllInCA.Why(gate.AtCap, gate.Huge, gate.Won)"));
+			Assert.That(v07, Does.Contain("var gate = new AllInGate(now, atCap, huge, won, blob.Units, blob.Value);"));
 			// Both explicit null exits (not enabled; open order that is all-in or gathers) go through the recorder: exactly two.
 			Assert.That(v07.Split(new[] { "return AllInReturn(now, null);" }, StringSplitOptions.None).Length - 1, Is.EqualTo(2));
 			Assert.That(v07, Does.Not.Contain("return ahead;"), "a bare decision return would skip the recorder");

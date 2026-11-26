@@ -21,6 +21,13 @@ namespace OpenRA.Mods.CA.Traits
 		int allInDecideCount;
 		int allInDecideRowNext;
 
+		// AllInSnapshot, the top-level part (Opus ruling P10): the values TeamLeadAllInWhy reads once per call, after the cap, huge and won tests. Open = no cap, not huge, not won:
+		// the ahead and late triggers ask only then (the same gate as before, now one value).
+		internal readonly record struct AllInGate(int Now, bool AtCap, bool Huge, bool Won, int BlobUnits, long BlobValue)
+		{
+			public bool Open => !AtCap && !Huge && !Won;
+		}
+
 		// Hands a decision back unchanged (release and DEV alike). A null decision means no all-in is asked this tick.
 		string AllInReturn(int now, string why)
 		{
