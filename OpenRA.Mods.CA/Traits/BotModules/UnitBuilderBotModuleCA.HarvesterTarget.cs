@@ -26,6 +26,20 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateHarvesterTarget; // HARV-01
 		bool HarvesterTargetOn => switchesActive && Info.HvHarvesterTarget && !ablateHarvesterTarget.Off(player, AblationIds.HvHarvesterTarget);
 
+		// CONSOLIDATE-03 P9 (b), row hv_module_counts_queued: the module may count the queued harvesters. Needs the target rule's counts (HarvesterTargetOn).
+		AblationLatch ablateModuleCountsQueued;
+		bool ModuleCountsQueuedOn => Info.HvModuleCountsQueued && HarvesterTargetOn && !ablateModuleCountsQueued.Off(player, AblationIds.HvModuleCountsQueued);
+
+		bool IBotHarvesterCounts.TryGetQueued(out int queued)
+		{
+			queued = 0;
+			if (IsTraitDisabled || !ModuleCountsQueuedOn || !RefreshHarvesterCounts())
+				return false;
+
+			queued = harvestersQueued;
+			return true;
+		}
+
 		HarvesterBotModuleCA harvesterModule;
 		int harvesterCountTick = -1;
 		int harvesterModuleLookTick = -1;

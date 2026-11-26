@@ -152,6 +152,7 @@ namespace OpenRA.Mods.CA.Traits
 		IResourceLayer resourceLayer;
 		ResourceClaimLayer claimLayer;
 		IBotRequestUnitProduction[] requestUnitProduction;
+		IBotHarvesterCounts[] harvesterCounts;
 		ResourceMapBotModule resourceMapModule;
 
 		BotCooldown scanForLowEffectHarvestersCooldown;
@@ -186,6 +187,7 @@ namespace OpenRA.Mods.CA.Traits
 		protected override void Created(Actor self)
 		{
 			requestUnitProduction = self.Owner.PlayerActor.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
+			harvesterCounts = self.Owner.PlayerActor.TraitsImplementing<IBotHarvesterCounts>().ToArray();
 		}
 
 		protected override void TraitEnabled(Actor self)
@@ -370,10 +372,20 @@ namespace OpenRA.Mods.CA.Traits
 				}
 				else
 				{
-					// CONSOLIDATE-03 P9 (a): the ONE comparison (HarvesterPlan); queued = 0 and countQueued off = the old formula.
+					// CONSOLIDATE-03 P9 (a): the ONE comparison (HarvesterPlan). (b) hv_module_counts_queued: the unit builder's queued harvesters count as present;
+					// no answer (row off, no builder) = countQueued false = the old formula.
 					var refineryCount = AIUtils.CountActorByCommonName(refineries);
-					harvCountTooLow = HarvesterPlan.ModuleTooLow(numHarvesters, 0, refineryCount, Info.HarvestersPerRefinery, Info.AdditionalHarvesters, false);
-					HarvesterObserved(numHarvesters, 0, refineryCount, HarvesterPlan.ModuleNeed(refineryCount, Info.HarvestersPerRefinery, Info.AdditionalHarvesters), HarvesterPlan.ModuleVerdict(harvCountTooLow));
+					var queuedHarvesters = 0;
+					var countQueued = false;
+					foreach (var counts in harvesterCounts)
+						if (counts.TryGetQueued(out queuedHarvesters))
+						{
+							countQueued = true;
+							break;
+						}
+
+					harvCountTooLow = HarvesterPlan.ModuleTooLow(numHarvesters, queuedHarvesters, refineryCount, Info.HarvestersPerRefinery, Info.AdditionalHarvesters, countQueued);
+					HarvesterObserved(numHarvesters, queuedHarvesters, refineryCount, HarvesterPlan.ModuleNeed(refineryCount, Info.HarvestersPerRefinery, Info.AdditionalHarvesters), HarvesterPlan.ModuleVerdict(harvCountTooLow));
 				}
 
 				if (harvCountTooLow)

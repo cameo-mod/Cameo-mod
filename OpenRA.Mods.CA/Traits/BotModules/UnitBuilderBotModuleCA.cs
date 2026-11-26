@@ -336,6 +336,10 @@ namespace OpenRA.Mods.CA.Traits
 			"HarvesterCapSlackPerRefinery per refinery) no harvester type is built on any path. Gated by SwitchCondition; row hv_harvester_target.")]
 		public readonly bool HvHarvesterTarget = false;
 
+		[Desc("CONSOLIDATE-03 P9 (b): HarvesterBotModuleCA's harvester need counts the harvesters already in a production queue (this builder's cached queued count) next to the live ones,",
+			"so a harvester in the factory satisfies it and no second one is requested behind it. Needs HvHarvesterTarget (the count exists only then). Gated by SwitchCondition; row hv_module_counts_queued.")]
+		public readonly bool HvModuleCountsQueued = false;
+
 		[Desc("HARV-01: the bank a priority harvester replacement needs.")]
 		public readonly int HarvesterTargetMinCash = 300;
 
@@ -519,7 +523,7 @@ namespace OpenRA.Mods.CA.Traits
 		}
 	}
 
-	public partial class UnitBuilderBotModuleCA : ConditionalTrait<UnitBuilderBotModuleCAInfo>, IBotTick, IBotNotifyIdleBaseUnits, IBotRequestUnitProduction, IGameSaveTraitData, IBotAircraftBuilder, INotifyActorDisposing, IBotUnitProductionGateInfo, IBotMobileSpendReserve, IBotOrderDisposition
+	public partial class UnitBuilderBotModuleCA : ConditionalTrait<UnitBuilderBotModuleCAInfo>, IBotTick, IBotNotifyIdleBaseUnits, IBotRequestUnitProduction, IGameSaveTraitData, IBotAircraftBuilder, INotifyActorDisposing, IBotUnitProductionGateInfo, IBotMobileSpendReserve, IBotOrderDisposition, IBotHarvesterCounts
 	{
 		public const int FeedbackTime = 30; // ticks; = a bit over 1s. must be >= netlag.
 

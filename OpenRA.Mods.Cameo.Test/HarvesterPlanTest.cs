@@ -48,6 +48,28 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void QueuedModuleCountHasItsOwnDefaultOffSwitchAndAblation()
+		{
+			var info = Source(Dir + "UnitBuilderBotModuleCA.cs");
+			Assert.That(info, Does.Contain("public readonly bool HvModuleCountsQueued = false;"));
+
+			var unitBuilder = Source(Dir + "UnitBuilderBotModuleCA.HarvesterTarget.cs");
+			Assert.That(unitBuilder, Does.Contain("bool ModuleCountsQueuedOn => Info.HvModuleCountsQueued && HarvesterTargetOn"));
+			Assert.That(unitBuilder, Does.Contain("ablateModuleCountsQueued.Off(player, AblationIds.HvModuleCountsQueued)"));
+			Assert.That(unitBuilder, Does.Contain("bool IBotHarvesterCounts.TryGetQueued(out int queued)"));
+
+			var ids = Source(Dir + "BotModuleLogic/AblationIds.HarvesterPlan.cs");
+			Assert.That(ids, Does.Contain("HvModuleCountsQueued = \"hv_module_counts_queued\""));
+
+			var module = Source(Dir + "HarvesterBotModuleCA.cs");
+			Assert.That(module, Does.Contain("TraitsImplementing<IBotHarvesterCounts>()"));
+			Assert.That(module, Does.Contain("counts.TryGetQueued(out queuedHarvesters)"));
+
+			var yaml = Source("packaging/ai.yaml");
+			Assert.That(yaml, Does.Contain("HvModuleCountsQueued: true"));
+		}
+
+		[Test]
 		public void TargetAndCapAreHarvesterTargets()
 		{
 			for (var live = 0; live <= 8; live++)
