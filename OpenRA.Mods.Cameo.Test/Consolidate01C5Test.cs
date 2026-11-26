@@ -246,8 +246,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			Assert.That(s4, Does.Contain("if (!AntiRushSetOn || playerBuildings == null)\n\t\t\t\tyield break;"));
 			// CONSOLIDATE-03 P1 (a): the set size and the wanting test moved into the ONE early-defence test EarlyDefenceWanted (EarlyDefencePlan = AntiRushCA, unchanged).
-			Assert.That(s4, Does.Contain("if (!EarlyDefenceWanted())
-				yield break;"));
+			Assert.That(s4, Does.Contain("if (!EarlyDefenceWanted())\n\t\t\t\tyield break;"));
 			Assert.That(s4, Does.Contain("EarlyDefencePlan.Count(botLimits != null ? botLimits.Info.ArmyShareTargetPermille : -1, b.AntiRushBaseMin, b.AntiRushBaseMax)"));
 			Assert.That(s4, Does.Contain("EarlyDefencePlan.Wanted(playerBuildings.Any(a => b.ProductionTypes.Contains(a.Info.Name)), have, count)"));
 			Assert.That(s4, Does.Contain("var bank = ProdBusyCA.SweepBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep);"));
