@@ -33,7 +33,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			var held = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 			if (techTree == null)
-				return held;
+				return OwnedPrerequisites();
 
 			foreach (var name in upgradeDone.PendingNames)
 			{
