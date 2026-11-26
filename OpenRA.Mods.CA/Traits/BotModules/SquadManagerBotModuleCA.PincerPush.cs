@@ -86,7 +86,9 @@ namespace OpenRA.Mods.CA.Traits
 
 			TeamLeadPincerRecord("pincer_planned", order, "at=push arrived=" + units + "/" + value + " arms=" + plan.Units0 + "/" + plan.Value0 + "," + plan.Units1 + "/" + plan.Value1
 				+ " split=" + (plan.Split?.Units ?? 0));
+			#if CAMEO_DEV_LOGGING
 			AIUtils.BotDebug("AI ({0}): pincer at push seq {1} at {2}: arrived {3}/{4}, arms {5}/{6}", Player.ClientIndex, order.Seq, now, units, value, plan.Units0, plan.Units1);
+#endif
 			return true;
 		}
 
