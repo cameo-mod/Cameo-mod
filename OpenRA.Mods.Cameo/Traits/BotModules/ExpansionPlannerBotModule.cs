@@ -1213,7 +1213,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		AblationLatch ablateMcvLeaseStall;
 		bool McvLeaseStallOn => Info.McvLeaseStallRelease && Info.FieldCoverage && !ablateMcvLeaseStall.Off(player, AblationIds.McvLeaseStallRelease);
 
-		// CONSOLIDATE-03 P8 (a): the ONE record of "this MCV is heading for this field" (replaces the bare inflightMcvSites map).
+		// CONSOLIDATE-03 P8 (a): the ONE record of "this MCV is heading for this field" (replaces the bare per-MCV site map).
 		readonly McvLeaseBook mcvLeases = new();
 #if CAMEO_DEV_LOGGING
 		readonly McvLeaseStream mcvLeaseStream = new();
