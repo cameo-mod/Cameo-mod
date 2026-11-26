@@ -30,6 +30,26 @@ namespace OpenRA.Mods.Cameo.Test
 
 		static string FieldOrNull(MiniYamlNode node, string key) => node.Value.Nodes.SingleOrDefault(n => n.Key == key)?.Value.Value?.Trim();
 
+		[TestCase(800, true, false, false, TestName = "UnitCashDecision_FullCostAdmitted")]
+		[TestCase(800, false, true, true, TestName = "UnitCashDecision_BatchBankDenied")]
+		[TestCase(800, false, false, null, TestName = "UnitCashDecision_ReserveOrDepthUnclassified")]
+		[TestCase(0, true, false, null, TestName = "UnitCashDecision_PayGoUnclassified")]
+		public void UnitCashDecisionsClassifyOnlyActualAffordability(int cost, bool admitted, bool affordFail, bool? blocked)
+		{
+			Assert.That(UnitBuilderBotModuleCA.UnitCashDecision(cost, admitted, affordFail), Is.EqualTo(blocked));
+		}
+
+		[Test]
+		public void UnitCashTelemetryIsGenericAndDevOnly()
+		{
+			Assert.That(new UnitBuilderBotModuleCAInfo().UnitCashBlockedTelemetry, Is.False);
+			Assert.That(FieldOrNull(PlayerNode("UnitBuilderBotModuleCA@generic"), "UnitCashBlockedTelemetry"), Is.EqualTo("true"));
+			Assert.That(FieldOrNull(PlayerNode("UnitBuilderBotModuleCA@classic"), "UnitCashBlockedTelemetry"), Is.Null);
+
+			var ub = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
+			Assert.That(ub, Does.Contain("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid ObserveUnitCashAdmission").And
+				.Contain("ObserveUnitCashAdmission(unit, cost, false, !batch.Affords(cost));"));
+		}
 		[Test]
 		public void TheTargetIsAtLeastTwoPerRefineryAndNoneWithoutOne()
 		{

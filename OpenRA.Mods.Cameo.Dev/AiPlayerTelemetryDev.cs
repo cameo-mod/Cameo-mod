@@ -1240,8 +1240,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (unitGate?.UnitCashAdmission is { } cash)
 			{
 				AiMatchLogWriter.AppendObjectPropertyStart(b, "unit_cash_blocked");
-				AiMatchLogWriter.AppendNumber(b, "blocked_admissions", cash.Blocked, true);
-				AiMatchLogWriter.AppendNumber(b, "classified_admissions", cash.Eligible);
+				AiMatchLogWriter.AppendNumber(b, "blocked_decisions", cash.Blocked, true);
+				AiMatchLogWriter.AppendNumber(b, "classified_decisions", cash.Eligible);
 				b.Append('}');
 			}
 

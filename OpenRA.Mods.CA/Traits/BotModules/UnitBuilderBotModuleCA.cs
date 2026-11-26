@@ -1775,21 +1775,28 @@ namespace OpenRA.Mods.CA.Traits
 		}
 #endif
 
+		/// <summary>Classify a full-cost admission attempt. Null is unobserved for the cash decision ratio.</summary>
+		public static bool? UnitCashDecision(int cost, bool admitted, bool affordFail)
+		{
+			if (cost <= 0 || (!admitted && !affordFail))
+				return null;
+
+			return !admitted;
+		}
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
-		void ObserveUnitCashAdmission(ActorInfo unit, int cost, bool admitted)
+		void ObserveUnitCashAdmission(ActorInfo unit, int cost, bool admitted, bool affordFail)
 		{
 #if CAMEO_DEV_LOGGING
 			if (!UnitCashBlockedOn || !unit.HasTraitInfo<AttackBaseInfo>() || unit.HasTraitInfo<HarvesterInfo>())
 				return;
 
-			// A policy reserve or a batch commitment can deny an otherwise affordable unit.
-			// Count only raw cash refusals or actual successful admissions as classified.
-			var cashBlocked = !admitted && cost > playerResources.GetCashAndResources();
-			if (!admitted && !cashBlocked)
+			// The spend batch includes earlier commitments. Reserve/depth-only refusals and
+			// pay-as-you-go decisions supply no classified cash evidence here.
+			if (UnitCashDecision(cost, admitted, affordFail) is not bool blocked)
 				return;
 
 			unitCashEligible++;
-			if (cashBlocked)
+			if (blocked)
 				unitCashBlocked++;
 #endif
 		}
@@ -2148,7 +2155,7 @@ namespace OpenRA.Mods.CA.Traits
 					if (!batch.Affords(cost) || !ReserveAdmits(batch, cost)
 						|| depthQueue && held > 0 && !QueueDepthCA.CashAdmits(batch.BankLeft, unpaidQueued, cost))
 					{
-						ObserveUnitCashAdmission(unit, cost, false);
+						ObserveUnitCashAdmission(unit, cost, false, !batch.Affords(cost));
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, "afford_cash");
 #if CAMEO_DEV_LOGGING
@@ -2160,7 +2167,7 @@ namespace OpenRA.Mods.CA.Traits
 						continue;
 					}
 
-					ObserveUnitCashAdmission(unit, cost, true);
+					ObserveUnitCashAdmission(unit, cost, true, false);
 					SetUnitInterval(name);
 					bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
 					NotifyStarted(name, queue.Info.Type);
