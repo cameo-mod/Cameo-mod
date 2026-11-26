@@ -6490,6 +6490,9 @@ Player:
 		# CONSOLIDATE-03 P5 (b) row ub_admit_one: the core focus asks the fill's admission list (paygo, tech lean, full price, afford, reserve, depth cash) before it names a type, so the core never lifts a pick
 		# that the fill then refuses and re-rolls to a cheaper unit (the next-dearest admissible type takes its place). Narrows the eligible set only. @generic only; the code default stays false (classic and every other bot unchanged).
 		UnitAdmitOne: true
+		# CONSOLIDATE-03 P5 (b) row ub_gates_up: the in-pass limit headroom, the capturer cap (pending capturers) and the aircraft caps (pending aircraft) are asked before the draw, so a type they refuse is not in the pool,
+		# the floors, the core or the draw bound. NOT distribution-equal (the RNG stream changes). @generic only; the code default stays false (classic and every other bot unchanged).
+		UnitGatesUp: true
 		# CONSOLIDATE-03 P5 (a): DEV-only unit pick equivalence trace (unit_pick_trace.csv); compiled out of release, record only. @generic only.
 		UnitPickTrace: true
 		# CONSOLIDATE-01 C9 (X13): paid Promotions also start while a unit-production pause vote is up (pq_upgrade_service); free items always did.

@@ -219,6 +219,10 @@ namespace OpenRA.Mods.CA.Traits
 			"is not lifted and then re-rolled to a cheaper unit. Off in code, on in the generic block.")]
 		public readonly bool UnitAdmitOne = false;
 
+		[Desc("CONSOLIDATE-03 P5 (row ub_gates_up; needs the unit roll): the in-pass limit headroom, the capturer cap with the batch's pending capturers and the aircraft caps with the batch's pending aircraft are asked before the draw,",
+			"so a type they refuse is not in the pool, the floors, the core or the draw bound (not distribution-equal: the RNG stream changes). Off in code, on in the generic block.")]
+		public readonly bool UnitGatesUp = false;
+
 		[Desc("UNIT-MIX-01: the queue types that make an airfield (aircraft floor); the infantry floor uses IdleQueueFloorQueues.")]
 		public readonly string[] UnitMixAircraftQueues = { "Aircraft", "RAAircraft" };
 
@@ -1941,6 +1945,7 @@ namespace OpenRA.Mods.CA.Traits
 					// HANS-PROFILE-01 (ub_core_focus): the bank this roll sees, for the core's affordability test (0 while the row is off).
 					rollBankLeft = CoreFocusOn ? batch.BankLeft : 0;
 					rollAdmit = AdmitOneOn ? new RollAdmitInputs(batch, held, depthQueue, unpaidQueued) : null;
+					rollGateBatch = GatesUpOn ? batch : null;
 
 					// P4: below the armed-infantry floor this queue prefers the best
 					// admissible armed infantry it can serve — the normal pick only runs
@@ -2928,6 +2933,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			var items = new List<ActorInfo>();
 			rollExcluded.Clear();
+			rollGated.Clear();
 			foreach (var a in queue.BuildableItems().OrderBy(b => b.Name, StringComparer.Ordinal))
 			{
 				if (!table.ContainsKey(a.Name))
@@ -2958,8 +2964,14 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 				}
 
+				// P5 (b) row ub_gates_up: the batch gates (headroom, capturer with pending, aircraft with pending) before the draw; nothing here while the row is off (no batch handed over).
+				if (GatesUpRemoves(a))
+					continue;
+
 				items.Add(a);
 			}
+
+			GatesUpLog(queue.Info.Type);
 
 			// The squad manager's wave hold reads what this queue can build, whatever the wavemix profile strength (the profile only multiplies; the hold is the ARMY-MIX-01 row's).
 			var roles = unitRoles ??= player.PlayerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
@@ -2969,6 +2981,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				PickTraceEmpty(queue, skip.Count, queueRoles);
 				RollEmptyLog(queue.Info.Type, rollExcluded.Count > 0 ? "all_excluded" : "none_listed_buildable");
+				GatesUpMarkRefused(skip);
 				return null;
 			}
 
