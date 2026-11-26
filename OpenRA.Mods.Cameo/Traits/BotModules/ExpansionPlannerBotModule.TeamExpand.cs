@@ -25,7 +25,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		const int TeamExpandAtlasZoneRadius = 10;
 		static readonly ConditionalWeakTable<World, ExpansionRegistry> ExpansionRegistries = new();
 
-		readonly record struct ExpansionSite(CPos Center, CPos[] Cells);
+		readonly record struct ExpansionSite(CPos Center, CPos[] Cells, int Spreaders);
 		readonly record struct ExpansionBid(OpenRA.Player Player, int Deadline, int Limit, CPos[] Sites);
 		readonly record struct ExpansionClaim(OpenRA.Player Player, int Expires, uint? ActorId = null);
 
@@ -107,9 +107,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return registry.Atlas;
 
 			// Map.Resources is the authored layer. The live resource layer is read only for visible cells.
-			registry.Atlas = ResourceFields(world.Map.AllCells.Where(c => world.Map.Resources[c].Type != 0))
+			var spreaders = world.Map.ActorDefinitions
+				.Where(d => resourceMap != null && resourceMap.Info.ResourceCreatorTypes.Contains(d.Value.Value))
+				.Select(d => new ActorReference(d.Value.Value, d.Value).Get<LocationInit>().Value)
+				.Where(c => world.Map.Contains(c))
+				.ToHashSet();
+			var authored = world.Map.AllCells.Where(c => world.Map.Resources[c].Type != 0).Concat(spreaders);
+			registry.Atlas = ResourceFields(authored)
 				.SelectMany(cells => RefineryDemand.Zones(cells, TeamExpandAtlasZoneRadius))
-				.Select(cells => new ExpansionSite(RefineryDemand.ZoneAnchor(cells), cells.ToArray()))
+				.Select(cells => new ExpansionSite(RefineryDemand.ZoneAnchor(cells), cells.ToArray(), cells.Count(spreaders.Contains)))
 				.ToArray();
 			return registry.Atlas;
 		}
@@ -204,7 +210,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				var candidates = atlas.Where(s => !Claimed(s.Center, anchors, Info.ClaimRadiusCells) && !registry.ClaimedByAlly(player, s.Center))
 					.Select(s => (Site: s, Score: (long)s.Cells.Length * Info.TeamExpandStockWeight
+						+ (long)s.Spreaders * Info.TeamExpandRegrowthWeight
 						- (long)NearestOwnBuildingDistance(s.Center) * Info.TeamExpandDistanceWeight
+						- (long)NearestExpansionAnchorDistance(s.Center, anchors) * Info.TeamExpandAnchorDistanceWeight
 						- (long)threatProviders.MergedThreatAt(s.Center) * Info.TeamExpandThreatWeight))
 					.OrderByDescending(s => s.Score).ThenBy(s => s.Site.Center.X).ThenBy(s => s.Site.Center.Y)
 					.Take(Info.TeamExpandBidSites).Select(s => s.Site.Center).ToArray();
@@ -272,6 +280,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			TeamExpandFallback(mcv);
 			return null;
+		}
+
+		static int NearestExpansionAnchorDistance(CPos site, IReadOnlyList<CPos> anchors)
+		{
+			var distance = int.MaxValue;
+			foreach (var anchor in anchors)
+				distance = Math.Min(distance, (anchor - site).Length);
+
+			return distance == int.MaxValue ? 0 : distance;
 		}
 
 		long TeamExpansionLead(CPos site) =>

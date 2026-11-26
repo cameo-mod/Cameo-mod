@@ -245,6 +245,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly int TeamExpandRefineryBuildTicks = 750;
 		public readonly int TeamExpandSafetyMarginTicks = 750;
 		public readonly int TeamExpandStockWeight = 16;
+		public readonly int TeamExpandRegrowthWeight = 32;
+		public readonly int TeamExpandAnchorDistanceWeight = 2;
 		public readonly int TeamExpandDistanceWeight = 4;
 		public readonly int TeamExpandThreatWeight = 1;
 
