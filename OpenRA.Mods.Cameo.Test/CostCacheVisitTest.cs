@@ -16,9 +16,9 @@ using OpenRA.Mods.CA.Traits;
 
 namespace OpenRA.Mods.Cameo.Test
 {
-	// PERF-BOTTICK-01 FIX 4 (row cost_cache_tick, Opus 11-26): the unit builder reads every production cost through a cache that lives for one bot visit only. Off = live reads.
+	// PERF-BOTTICK-01 FIX 4 (row cost_cache_visit, Opus 11-26): the unit builder reads every production cost through a cache that lives for one bot visit only. Off = live reads.
 	[TestFixture]
-	public sealed class CostCacheTickTest
+	public sealed class CostCacheVisitTest
 	{
 		const string Unit = "mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs";
 		const string Harvest = "mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.HarvesterTarget.cs";
@@ -32,10 +32,10 @@ namespace OpenRA.Mods.Cameo.Test
 		public void OffInCodeAndUnarmedInTheYaml()
 		{
 			var u = Source(Unit);
-			Assert.That(AblationIds.CostCacheTick, Is.EqualTo("cost_cache_tick"));
-			Assert.That(u, Does.Contain("public readonly bool CostCacheTick = false;"));
-			Assert.That(u, Does.Contain("bool CostCacheOn => switchesActive && Info.CostCacheTick && !ablateCostCache.Off(player, AblationIds.CostCacheTick);"));
-			Assert.That(Source("packaging/ai.yaml"), Does.Not.Contain("CostCacheTick:"), "no yaml arms it in this commit");
+			Assert.That(AblationIds.CostCacheVisit, Is.EqualTo("cost_cache_visit"));
+			Assert.That(u, Does.Contain("public readonly bool CostCacheVisit = false;"));
+			Assert.That(u, Does.Contain("bool CostCacheOn => switchesActive && Info.CostCacheVisit && !ablateCostCache.Off(player, AblationIds.CostCacheVisit);"));
+			Assert.That(Source("packaging/ai.yaml"), Does.Not.Contain("CostCacheVisit:"), "no yaml arms it in this commit");
 		}
 
 		[Test]

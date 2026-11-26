@@ -15,6 +15,6 @@ namespace OpenRA.Mods.CA.Traits
 	public static partial class AblationIds
 	{
 		// PERF-BOTTICK-01 FIX 4: the unit builder memoises ProductionQueue.GetProductionCost for one bot visit (ProductionCostCache). Row off = every call reads the cost live, as before.
-		public const string CostCacheTick = "cost_cache_tick";
+		public const string CostCacheVisit = "cost_cache_visit";
 	}
 }
