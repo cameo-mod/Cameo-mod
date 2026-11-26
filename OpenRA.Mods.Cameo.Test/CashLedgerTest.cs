@@ -103,6 +103,11 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(u, Does.Contain("return CashLedger.UnitReserveAdmits(batch.BankLeft, UnpaidQueuedCost(), cost, line);"));
 			Assert.That(u, Does.Contain("|| depthQueue && held > 0 && !CashLedger.UnitDepthAdmits(batch.BankLeft, unpaidQueued, cost))"));
 
+			// Sonnet note 1 on 72f4359a: the legacy and essentials sweeps read the same ledger bank, so the ledger is the one owner of the building bank.
+			var m = Source(Dir + "BotModuleLogic/BaseBuilderQueueManagerCA.cs");
+			Assert.That(m, Does.Not.Contain("ProdBusyCA.SweepBank("));
+			Assert.That(System.Text.RegularExpressions.Regex.Matches(m, @"CashLedger\.BuildingBank\(").Count, Is.EqualTo(3));
+
 			var ledger = Source(Dir + "BotModuleLogic/CashLedger.cs");
 			Assert.That(ledger, Does.Not.Contain("GetCashAndResources"), "the ledger snapshots nothing: the caller passes the live bank (Sonnet condition 1)");
 		}
