@@ -413,6 +413,28 @@ namespace OpenRA.Mods.CA.Traits
 			"radar / 2nd production hold ends for good (the old order runs). The outer Ref2FirstBoundTicks bound stays. Rides the Ref2First switch.")]
 		public readonly int Ref2StallTicks = 750;
 
+		[Desc("REF-TIER-01 (USER BINDING 11-26, Opus): the refinery target is a FLOOR for refinery demand, not a hold: RefTierEarlyTarget early, plus RefTierRadarStep once an own radar provider stands, plus",
+			"RefTierTechStep once an own tech-centre building (TechChainTypes) stands (2 / 4 / 6), scaled by the personality prior (RefTierExpansionPct for expansion, RefTierRushPreRadarPct for rush while no radar",
+			"stands; row ref_tier_personality), rounded and clamped 1..8. While fewer own refineries stand or are in production the planner lifts every zone cap by one and the refinery interval wait is outranked",
+			"(the first-war-factory wait, the bounded first-copy yield and the expansion-refinery rules stay). The map caps it: only reachable fields with room and a claimable anchor are lifted. A lost radar or tech",
+			"centre drops the tier; refineries above the target are never sold. Gated by SwitchCondition; rows ref_tier_floor, ref_tier_personality.")]
+		public readonly bool RefTierFloor = false;
+
+		[Desc("REF-TIER-01: the refinery target before the radar provider stands (the prior the learning can replace).")]
+		public readonly int RefTierEarlyTarget = 2;
+
+		[Desc("REF-TIER-01: refineries added to the target once an own radar provider stands.")]
+		public readonly int RefTierRadarStep = 2;
+
+		[Desc("REF-TIER-01: refineries added to the target once an own tech-centre building stands.")]
+		public readonly int RefTierTechStep = 2;
+
+		[Desc("REF-TIER-01, row ref_tier_personality: the expansion personality's percent of the tier target (125 = x1.25).")]
+		public readonly int RefTierExpansionPct = 125;
+
+		[Desc("REF-TIER-01, row ref_tier_personality: the rush personality's percent of the tier target while no radar provider stands (75 = x0.75; 2 x 0.75 rounds back to 2, the ref2 minimum).")]
+		public readonly int RefTierRushPreRadarPct = 75;
+
 		[Desc("MODE-BIAS-01 (user ruling 2026-11-25), profile essentials: while the low-cash essentials logic is active (EssentialsOnlyBelowTierLine armed, a tier line, bank under it), the BuildingFractions",
 			"weights of the types that logic does not hold (EssentialsLowCashCA.Holds) are raised by MbEssentialsStrength in the staged planner's roll. Never a gate: every entry keeps a positive weight.",
 			"Needs BbPipeline01. Off = unchanged. Gated by SwitchCondition; row mb_essentials.")]
@@ -650,7 +672,7 @@ namespace OpenRA.Mods.CA.Traits
 
 	public class BaseBuilderBotModuleCA : ConditionalTrait<BaseBuilderBotModuleCAInfo>, IGameSaveTraitData,
 		IBotTick, IBotPositionsUpdated, IBotRespondToAttack, IBotRequestPauseUnitProduction, IBotSuggestRefineryProduction, INotifyActorDisposing,
-		IBotPlacementVeto, IBotRef2First
+		IBotPlacementVeto, IBotRef2First, IBotRefTier
 	{
 		public CPos GetRandomBaseCenter()
 		{
@@ -995,6 +1017,73 @@ namespace OpenRA.Mods.CA.Traits
 		BaseBuilderQueueManagerCA ref2Sampler; // the one building manager that evaluates the stall clock (the clock has this single writer)
 		bool ref2SamplerResolved;
 		public bool Ref2Finished;
+
+		// REF-TIER-01: one switch (Info.RefTierFloor), two rows. The target is recomputed every RefTier.RecomputeTicks ticks from the COMPLETED own radar providers and tech-centre buildings (the two indexes exist
+		// only while the switch is on in the yaml), so a lost tier drops it within that many ticks. Nothing here sells or cancels anything.
+		AblationLatch ablateRefTier;
+		AblationLatch ablateRefTierPersonality;
+		public bool RefTierArmed => Info.RefTierFloor && switchesActive && !ablateRefTier.Off(player, AblationIds.RefTierFloor);
+		bool RefTierPersonalityArmed => RefTierArmed && !ablateRefTierPersonality.Off(player, AblationIds.RefTierPersonality);
+		int refTierTick = -1;
+		int refTierValue;
+		IBotCurrentPersonality refTierPersonality;
+		bool refTierPersonalityResolved;
+		BaseBuilderQueueManagerCA refTierObserver; // DEV only: the one building manager that writes the ref_tier record
+		bool refTierObserverResolved;
+
+		public bool RefTierRadarStanding => radarBuildings != null && AIUtils.CountActorByCommonName(radarBuildings) > 0;
+		public bool RefTierTechStanding => techChainBuildings != null && AIUtils.CountActorByCommonName(techChainBuildings) > 0;
+
+		/// <summary>The personality percent of the tier target: the prior table of the Info (the one seam the learned value replaces later).</summary>
+		public int RefTierPersonalityPct(bool radarStanding)
+		{
+			if (!refTierPersonalityResolved)
+			{
+				refTierPersonality = player.PlayerActor.TraitsImplementing<IBotCurrentPersonality>().FirstOrDefault();
+				refTierPersonalityResolved = true;
+			}
+
+			return RefTier.PersonalityPct(RefTierPersonalityArmed, refTierPersonality?.CurrentPersonality, radarStanding, Info.RefTierExpansionPct, Info.RefTierRushPreRadarPct);
+		}
+
+		public int RefTierTarget
+		{
+			get
+			{
+				// Recomputed every RefTier.RecomputeTicks ticks (the two index counts and the personality read are not free, and a tier changes on building time scales).
+				var tick = world.WorldTick;
+				if (refTierTick >= 0 && tick - refTierTick < RefTier.RecomputeTicks)
+					return refTierValue;
+
+				refTierTick = tick;
+				var radar = RefTierRadarStanding;
+				refTierValue = RefTier.Target(
+					RefTier.BaseTarget(Info.RefTierEarlyTarget, Info.RefTierRadarStep, Info.RefTierTechStep, radar, RefTierTechStanding),
+					RefTierPersonalityPct(radar));
+				return refTierValue;
+			}
+		}
+
+		// DEV only (compiled out of a release build with its call): the first building manager writes the ref_tier record, spaced and deduped by its observer.
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void RefTierObserveDev()
+		{
+			if (!RefTierArmed)
+				return;
+
+			if (!refTierObserverResolved)
+			{
+				refTierObserverResolved = true;
+				foreach (var builder in builders)
+					if (builder != null && Info.BuildingQueues.Contains(builder.Category))
+					{
+						refTierObserver = builder;
+						break;
+					}
+			}
+
+			refTierObserver?.RefTierObserve();
+		}
 		AblationLatch ablateMbEssentials; // MODE-BIAS-01
 		public bool MbEssentialsArmed => Info.MbEssentials && switchesActive && !ablateMbEssentials.Off(player, AblationIds.MbEssentials);
 		AblationLatch ablateMbTechChain; // MODE-BIAS-01
@@ -1237,6 +1326,8 @@ namespace OpenRA.Mods.CA.Traits
 		readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> barracksBuildings;
 		readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> factoryBuildings;
 		public readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> ProductionBuildings;
+		readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> radarBuildings; // REF-TIER-01: null unless Info.RefTierFloor
+		readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> techChainBuildings; // REF-TIER-01: null unless Info.RefTierFloor
 
 		// RATIO-2X-01: the per-player 2x tracker (the 3-tick start record and the first-copy ledger), shared by every queue manager so a
 		// sibling queue cannot pass the same old measure. Pure state, no world access (MobileStaticRatioCA).
@@ -1264,6 +1355,13 @@ namespace OpenRA.Mods.CA.Traits
 			barracksBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world, info.BarracksTypes, player);
 			factoryBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world, info.VehiclesFactoryTypes, player);
 			ProductionBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world, info.ProductionTypes, player);
+			if (info.RefTierFloor)
+			{
+				// REF-TIER-01: the radar providers of the ruleset (the same trait test as the opening order's radar role) and the tech-centre types, as indexes of the own completed buildings.
+				radarBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world,
+					world.Map.Rules.Actors.Values.Where(a => a.HasTraitInfo<BuildingInfo>() && BaseBuilderQueueManagerCA.IsRadarProvider(a)).Select(a => a.Name).ToFrozenSet(), player);
+				techChainBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world, info.TechChainTypes, player);
+			}
 			switchesActive = info.SwitchCondition == null;
 		}
 
@@ -1577,6 +1675,9 @@ namespace OpenRA.Mods.CA.Traits
 
 				ref2Sampler?.Ref2StallSample();
 			}
+
+			// REF-TIER-01 (DEV only): one record per change of the tier state.
+			RefTierObserveDev();
 
 			builders[currentBuilderIndex].Tick(bot);
 

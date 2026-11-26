@@ -101,28 +101,66 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			ref2Lift = 0;
 			if (ref2First != null && ref2First.Ref2FloorArmed)
 			{
-				var own = 0;
-				FriendlyRefineryCells();
-				for (var r = 0; r < friendlyRefineryOwn.Count; r++)
-					if (friendlyRefineryOwn[r])
-						own++;
-
-				// Own standing plus in production (the same BuildingsBeingProduced sum UpdateAnchorClaim subtracts from the claimable anchors): with ref2 queued the lift drops at once,
-				// or a still-empty second zone would be claimed for a 3rd refinery before ref2 lands (Code Monkey FIX).
-				var queued = 0;
-				var builder = baseBuilders.FirstOrDefault(t => t.IsTraitEnabled());
-				if (builder?.BuildingsBeingProduced != null)
-					foreach (var r in builder.Info.RefineryTypes)
-						if (builder.BuildingsBeingProduced.TryGetValue(r, out var inProduction))
-							queued += inProduction;
-
+				OwnRefineriesStandingAndQueued(out var own, out var queued);
 				ref2Lift = Ref2First.LiftsCap(true, own, queued) ? 1 : 0;
 			}
 
 			return ref2Lift;
 		}
 
-		int EcoFloorLift() => Math.Max(EcoTimeFloorLift(), Ref2FirstLift());
+		// Own standing refineries plus those in production (the same BuildingsBeingProduced sum UpdateAnchorClaim subtracts from the claimable anchors): with the next one queued a floor's lift drops at once,
+		// or a still-empty second zone would be claimed for one more before it lands (Code Monkey FIX on REF2-FIRST-01; REF-TIER-01 reads the same pair).
+		void OwnRefineriesStandingAndQueued(out int own, out int queued)
+		{
+			own = 0;
+			FriendlyRefineryCells();
+			for (var r = 0; r < friendlyRefineryOwn.Count; r++)
+				if (friendlyRefineryOwn[r])
+					own++;
+
+			queued = 0;
+			var builder = baseBuilders.FirstOrDefault(t => t.IsTraitEnabled());
+			if (builder?.BuildingsBeingProduced != null)
+				foreach (var r in builder.Info.RefineryTypes)
+					if (builder.BuildingsBeingProduced.TryGetValue(r, out var inProduction))
+						queued += inProduction;
+		}
+
+		// ref_tier_floor (REF-TIER-01, USER BINDING 11-26): while fewer own refineries stand or are in production than the tier target (2 early, +2 after a radar provider, +2 after a tech centre, scaled by
+		// personality; the base builder owns the target and the switch, IBotRefTier), every zone's cap is one higher: a floor for refinery demand, never a hold. The lift only makes a field claimable
+		// that the claim gate already accepts (reachable, room under the cap, an anchor), so a map with fewer fields simply stays below the target. One value per tick, 0 when off.
+		IBotRefTier refTier;
+		bool refTierResolved;
+		int refTierLiftTick = -1;
+		int refTierLift;
+
+		int RefTierLift()
+		{
+			if (!RefDemandArmed)
+				return 0;
+
+			var tick = world.WorldTick;
+			if (refTierLiftTick == tick)
+				return refTierLift;
+
+			refTierLiftTick = tick;
+			if (!refTierResolved)
+			{
+				refTier = player.PlayerActor.TraitsImplementing<IBotRefTier>().FirstOrDefault();
+				refTierResolved = true;
+			}
+
+			refTierLift = 0;
+			if (refTier != null && refTier.RefTierArmed)
+			{
+				OwnRefineriesStandingAndQueued(out var own, out var queued);
+				refTierLift = RefTier.LiftsCap(true, own, queued, refTier.RefTierTarget) ? 1 : 0;
+			}
+
+			return refTierLift;
+		}
+
+		int EcoFloorLift() => Math.Max(Math.Max(EcoTimeFloorLift(), Ref2FirstLift()), RefTierLift());
 
 		int EcoTimeFloorLift()
 		{

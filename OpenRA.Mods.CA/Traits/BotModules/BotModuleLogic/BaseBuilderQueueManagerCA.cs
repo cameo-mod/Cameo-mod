@@ -1863,7 +1863,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		// BP-2 (§19.15): a rules-derived radar provider — same two-trait check the Cameo planner runs
 		// (the assemblies cannot share the helper; keep the expression identical).
-		static bool IsRadarProvider(ActorInfo info)
+		internal static bool IsRadarProvider(ActorInfo info)
 		{
 			return info.HasTraitInfo<RangedGpsProviderInfo>() || info.HasTraitInfo<ProvidesRadarInfo>();
 		}
@@ -2939,6 +2939,11 @@ namespace OpenRA.Mods.CA.Traits
 			// REF2-FIRST-01 (row ref2_floor): a due ref2 outranks the interval wait only (the first-war-factory wait stays: ref1, war factory, ref2).
 			if (verdict == RefineryFieldGateCA.EconomyVerdict.WaitInterval && Ref2OutranksInterval(buildableThings, count))
 				return false;
+
+			// REF-TIER-01 (row ref_tier_floor): below the tier target the interval wait is outranked too. The bounded first-copy yield still applies from the 3rd refinery on (tech chain and each building once
+			// win over the floor), the first-war-factory wait was already decided above, and nothing here holds a radar or production start (Ref2Holds is the only hold).
+			if (verdict == RefineryFieldGateCA.EconomyVerdict.WaitInterval && RefTier.OutranksIntervalWait(baseBuilder.RefTierArmed, count, baseBuilder.RefTierTarget))
+				return RefTierYieldVerdict(buildableThings, count, now, yardWithoutRefinery, factoryBuildable, factoryOwnedOrQueued, factoryWaitReleased) != RefineryFieldGateCA.EconomyVerdict.Allow;
 
 			return verdict != RefineryFieldGateCA.EconomyVerdict.Allow;
 		}
