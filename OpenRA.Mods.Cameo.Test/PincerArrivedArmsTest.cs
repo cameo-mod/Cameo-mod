@@ -39,7 +39,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var info = Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCAInfo.TeamLead.cs");
 			Assert.That(info, Does.Contain("public readonly bool PincerArrivedArms = false;"));
 
-			var yaml = Source("mods/cameo/ai/ai.yaml");
+			var yaml = Source("packaging/ai.yaml");
 			// v08g-int flips the six launcher blocks on so the V08G game ablates it (master ships it off, untested).
 			Assert.That(System.Text.RegularExpressions.Regex.Matches(yaml, "\t\tPincerArrivedArms: true\n").Count, Is.EqualTo(6), "the six launcher blocks");
 			Assert.That(yaml, Does.Not.Contain("PincerArrivedArms: false"));
