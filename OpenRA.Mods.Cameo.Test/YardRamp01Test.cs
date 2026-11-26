@@ -36,12 +36,39 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(YardRamp.RankForBotType("easiest"), Is.EqualTo(0));
 			Assert.That(YardRamp.RankForBotType("HARD"), Is.EqualTo(4), "case-insensitive like the ladder");
 			Assert.That(YardRamp.RankForBotType("cameogod"), Is.EqualTo(BotDifficultyLadder.Difficulties.Length - 1));
-			Assert.That(YardRamp.RankForBotType("classic"), Is.Null, "the A/B reference is never ramped");
-			Assert.That(YardRamp.RankForBotType("fransbot"), Is.Null);
-			Assert.That(YardRamp.RankForBotType("exploit_rush"), Is.Null);
+			Assert.That(YardRamp.RankForBotType("custom_bot"), Is.Null, "an unlisted type has no tier");
 			Assert.That(YardRamp.RankForBotType(""), Is.Null);
 			Assert.That(YardRamp.RankForBotType(null), Is.Null);
 			Assert.That(YardRamp.RankFor(null), Is.Null);
+		}
+
+		[Test]
+		public void ClassicIsNeverRampedAlthoughTheLadderAliasesItToHard()
+		{
+			Assert.That(BotDifficultyLadder.DefaultAliases["classic"], Is.EqualTo("hard"), "the alias exists");
+			Assert.That(YardRamp.RankForBotType("classic"), Is.Null, "the A/B reference is never ramped");
+			Assert.That(YardRamp.RankForBotType("Classic"), Is.Null);
+			Assert.That(YardRamp.Floor(int.MaxValue, YardRamp.RankForBotType("classic"), YardRamp.Parse(Table, out _)), Is.EqualTo(0));
+		}
+
+		[Test]
+		public void FransbotIsNeverRampedWhileFrozen()
+		{
+			Assert.That(BotDifficultyLadder.DefaultAliases["fransbot"], Is.EqualTo("hard"), "the alias exists");
+			Assert.That(YardRamp.RankForBotType("fransbot"), Is.Null, "frozen until RETIRE-FRANSBOT-01");
+			Assert.That(YardRamp.Floor(int.MaxValue, YardRamp.RankForBotType("fransbot"), YardRamp.Parse(Table, out _)), Is.EqualTo(0));
+		}
+
+		[TestCase("exploit_rush")]
+		[TestCase("exploit_turtle")]
+		[TestCase("exploit_guerrilla")]
+		[TestCase("EXPLOIT_RUSH")]
+		public void ExploitBotsFollowTheirHardAlias(string botType)
+		{
+			Assert.That(YardRamp.RankForBotType(botType), Is.EqualTo(YardRamp.RankForBotType("hard")), "one straight ladder");
+			var rows = YardRamp.Parse(Table, out _);
+			Assert.That(YardRamp.Floor(12000, YardRamp.RankForBotType(botType), rows), Is.EqualTo(YardRamp.Floor(12000, 4, rows)));
+			Assert.That(YardRamp.Floor(12000, YardRamp.RankForBotType(botType), rows), Is.EqualTo(3));
 		}
 
 		[Test]

@@ -196,8 +196,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		[Desc("RM-03 (row rm03_yard_ramp, design RM_03_YARD_RAMP_DESIGN_02 49BFE42A): raise the construction-yard target to the demand floor of",
 			"YardRampRows at the bot's elapsed world tick and own difficulty tier. A floor, combined once with the scale-target / utility result:",
-			"it never lowers the target, never multiplies personality again, and McvDue's free-far-field and pipeline gates still apply. An unranked",
-			"bot (classic, fransbot, exploit_*) or a malformed table gets floor 0. Needs DriveMcvRequests. False = the target of the base tip.")]
+			"it never lowers the target, never multiplies personality again, and McvDue's free-far-field and pipeline gates still apply. Ladder aliases (exploit_*)",
+			"take their alias's tier; classic, fransbot, an unlisted type or a malformed table get floor 0. Needs DriveMcvRequests. False = the target of the base tip.")]
 		public readonly bool UseRampedYardDemand = false;
 
 		[Desc("RM-03: the ramp table, entries \"minTick:tier:desired\" (tier = a ladder bot type, noob..cameogod; desired 0..16). The floor is the largest",

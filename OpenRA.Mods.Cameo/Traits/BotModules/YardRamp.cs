@@ -29,6 +29,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// <summary>Upper bound on a row's desired yard count; a larger value rejects the table.</summary>
 		public const int MaxDesired = 16;
 
+		/// <summary>Bot types that never ramp, aliased or not (Opus 11-26): classic (A/B reference) and fransbot (frozen).</summary>
+		public static readonly string[] UnrampedBotTypes = { "classic", "fransbot" };
+
 		public readonly struct Row
 		{
 			public readonly int MinTick;
@@ -45,13 +48,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		/// <summary>
 		/// The ladder tier of a bot type: noob = NoobRank (-1), the canonical ladder = its index (easiest 0 ..
-		/// cameogod 9). Null for an empty or unlisted type (classic, fransbot, exploit_* and any custom type: the
-		/// ramp is fail-safe off for them, like BotDifficultyLadder.Scale's unranked path without aliases).
+		/// cameogod 9). A ladder alias (BotDifficultyLadder.DefaultAliases: the exploit_* league bots play as hard)
+		/// takes its alias's tier, one straight ladder (Opus 11-26). Null, so floor 0, for the unramped types
+		/// (classic = the A/B reference; fransbot = frozen until RETIRE-FRANSBOT-01) and any empty or unlisted type.
 		/// </summary>
 		public static int? RankForBotType(string botType)
 		{
 			if (string.IsNullOrEmpty(botType))
 				return null;
+
+			foreach (var unramped in UnrampedBotTypes)
+				if (string.Equals(botType, unramped, StringComparison.OrdinalIgnoreCase))
+					return null;
+
+			if (BotDifficultyLadder.DefaultAliases.TryGetValue(botType, out var alias))
+				botType = alias;
 
 			if (string.Equals(botType, BotDifficultyLadder.NoobBotType, StringComparison.OrdinalIgnoreCase))
 				return BotDifficultyLadder.NoobRank;
