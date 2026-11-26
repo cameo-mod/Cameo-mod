@@ -26,20 +26,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		static readonly ConditionalWeakTable<World, ExpansionRegistry> ExpansionRegistries = new();
 
 		readonly record struct ExpansionSite(CPos Center, CPos[] Cells);
-		readonly record struct ExpansionBid(Player Player, int Deadline, int Limit, CPos[] Sites);
-		readonly record struct ExpansionClaim(Player Player, int Expires);
+		readonly record struct ExpansionBid(OpenRA.Player Player, int Deadline, int Limit, CPos[] Sites);
+		readonly record struct ExpansionClaim(OpenRA.Player Player, int Expires, uint? ActorId = null);
 
 		sealed class ExpansionRegistry
 		{
 			public ExpansionSite[] Atlas;
-			public readonly Dictionary<(Player Owner, CPos Site), ExpansionClaim> Claims = new();
-			public readonly Dictionary<Player, ExpansionBid> Bids = new();
+			public readonly Dictionary<(OpenRA.Player Owner, CPos Site), ExpansionClaim> Claims = new();
+			public readonly Dictionary<OpenRA.Player, ExpansionBid> Bids = new();
 			public int Epoch = -1;
 
-			public bool ClaimedByAlly(Player player, CPos site) =>
+			public bool ClaimedByAlly(OpenRA.Player player, CPos site) =>
 				Claims.Keys.Any(k => k.Site == site && (k.Owner == player || k.Owner.IsAlliedWith(player)));
 
-			public void Advance(int now)
+			public void Advance(World world, int now)
 			{
 				var epoch = now / TeamExpandEpochTicks;
 				if (epoch == Epoch)
@@ -48,8 +48,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var previousEpoch = Epoch;
 				Epoch = epoch;
 				foreach (var (site, claim) in Claims.ToArray())
-					if (claim.Expires <= now || claim.Player.WinState != WinState.Undefined)
+				{
+					var holder = claim.ActorId is uint id ? world.GetActorById(id) : null;
+					var expired = claim.ActorId.HasValue
+						? holder == null || holder.IsDead || !holder.IsInWorld || holder.Owner != claim.Player
+						: claim.Expires <= now;
+					if (expired || claim.Player.WinState != WinState.Undefined)
 						Claims.Remove(site);
+				}
 
 				if (previousEpoch + 1 == epoch)
 					foreach (var bid in Bids.Values.OrderBy(b => b.Deadline).ThenBy(b => b.Player.ClientIndex).ThenBy(b => b.Player.InternalName, StringComparer.Ordinal))
@@ -85,6 +91,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly HashSet<CPos> expansionObservedCells = new();
 		CPos? expansionPendingSite;
 		int expansionPendingSince;
+		string expansionPendingType;
 		readonly Dictionary<uint, CPos> expansionMcvSites = new();
 		readonly HashSet<uint> expansionPreexistingMcvs = new();
 
@@ -157,7 +164,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			var now = world.WorldTick;
 			var registry = ExpansionClaims;
-			registry.Advance(now);
+			registry.Advance(world, now);
 			var atlas = PublicExpansionAtlas();
 			var anchors = TeamExpansionAnchors();
 			var limit = MapDiagonalCells() >= Info.TeamExpandLargeMapDiagonal ? Info.TeamExpandLargeClaims : Info.TeamExpandSmallClaims;
@@ -207,13 +214,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return registry.Claims.Any(kv => kv.Value.Player == player && !expansionMcvSites.ContainsValue(kv.Key.Site));
 		}
 
-		void CommitExpansionRequest()
+		void CommitExpansionRequest(string mcvType)
 		{
 			var site = ExpansionClaims.Claims.Where(kv => kv.Value.Player == player && !expansionMcvSites.ContainsValue(kv.Key.Site))
 				.OrderBy(kv => kv.Key.Site.X).ThenBy(kv => kv.Key.Site.Y).First();
 
 			expansionPendingSite = site.Key.Site;
 			expansionPendingSince = world.WorldTick;
+			expansionPendingType = mcvType;
 			foreach (var a in world.Actors)
 				if (a.Owner == player && constructionMcvTypes.Contains(a.Info.Name))
 					expansionPreexistingMcvs.Add(a.ActorID);
@@ -222,7 +230,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		CPos? TeamClaimedMcvSite(Actor mcv, out bool tracked)
 		{
 			tracked = expansionMcvSites.TryGetValue(mcv.ActorID, out var site);
-			if (!tracked && expansionPendingSite is CPos pending && !expansionPreexistingMcvs.Contains(mcv.ActorID))
+			if (!tracked && expansionPendingSite is CPos pending && mcv.Info.Name == expansionPendingType
+				&& !expansionPreexistingMcvs.Contains(mcv.ActorID))
 			{
 				site = pending;
 				expansionMcvSites.Add(mcv.ActorID, site);
@@ -235,10 +244,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			var registry = ExpansionClaims;
 			var now = world.WorldTick;
-			registry.Advance(now);
+			registry.Advance(world, now);
 			if (registry.Claims.TryGetValue((player, site), out var claim) && TeamExpandSiteLegal(mcv, site))
 			{
-				registry.Claims[(player, site)] = claim with { Expires = now + 8 * TeamExpandEpochTicks };
+				registry.Claims[(player, site)] = claim with { ActorId = mcv.ActorID };
 				return site;
 			}
 
@@ -250,6 +259,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					continue;
 
 				expansionMcvSites[mcv.ActorID] = alternate.Site;
+				var alternateClaim = registry.Claims[alternate];
+				registry.Claims[alternate] = alternateClaim with { ActorId = mcv.ActorID };
 				registry.Claims.Remove((player, site));
 				return alternate.Site;
 			}

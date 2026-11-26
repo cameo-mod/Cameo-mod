@@ -3155,7 +3155,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			if (ExpansionClaimOn)
-				CommitExpansionRequest();
+				CommitExpansionRequest(mcvType);
 
 			unitBuilder.RequestUnitProduction(bot, mcvType);
 #if CAMEO_DEV_LOGGING
