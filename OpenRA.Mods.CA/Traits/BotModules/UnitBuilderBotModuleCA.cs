@@ -3028,6 +3028,21 @@ namespace OpenRA.Mods.CA.Traits
 
 			var weights = UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct, boosts);
 
+			// ub_affordable_pool: the cash/afford gate the fill meets after the pick ("afford_cash"), term for term, for the candidate as if it were the pick: the first build of a type is pay-as-you-go
+			// (rollFirst), a tech-lean pick is too, then bank, reserve and depth cash. A local function (no delegate) keeps the roll terms inside the roll method and allocates nothing.
+			bool RollCashAdmits(ActorInfo a)
+			{
+				var batch = rollCash.Batch;
+				var fullCost = Math.Max(0, queue.GetProductionCost(a));
+				var paygo = !rollOrdered.Contains(a.Name) && UnitRoll.FirstAdmits(batch.BankLeft);
+				var cost = paygo ? 0 : fullCost;
+				if (!paygo && TechLeanOn && TechLean.Admits(fullCost, rollPoolMaxCost, rollCash.Held, world.WorldTick, RollParameters.RampTicks, batch.BankLeft, Info.TechLeanTopPct, Info.TechLeanBankPct))
+					cost = 0;
+
+				return batch.Affords(cost) && ReserveAdmits(batch, cost)
+					&& !(rollCash.DepthQueue && rollCash.Held > 0 && !QueueDepthCA.CashAdmits(batch.BankLeft, rollCash.UnpaidQueued, cost));
+			}
+
 			// PERF-BOTTICK-01 (row ub_affordable_pool): draw only among the members that pass the fill's cash/afford check (RollCashAdmits, the same terms as the gate after the pick),
 			// each keeping the weight it has in the whole pool. None passes = this queue's fill ends for the visit. Every other refusal reason is still met after the pick, as before.
 			if (AffordablePoolOn && rollCash.Batch != null)
@@ -3064,21 +3079,6 @@ namespace OpenRA.Mods.CA.Traits
 			rollFirst = !rollOrdered.Contains(pool[pick].Name);
 			RollPickLog(queue.Info.Type, pool, weights, pick, rollFirst, fractions, biases, counterPcts, boosts);
 			return pool[pick];
-
-			// ub_affordable_pool: the cash/afford gate the fill meets after the pick ("afford_cash"), term for term, for the candidate as if it were the pick: the first build of a type is pay-as-you-go
-			// (rollFirst), a tech-lean pick is too, then bank, reserve and depth cash. A local function (no delegate) keeps the roll terms inside the roll method and allocates nothing.
-			bool RollCashAdmits(ActorInfo a)
-			{
-				var batch = rollCash.Batch;
-				var fullCost = Math.Max(0, queue.GetProductionCost(a));
-				var paygo = !rollOrdered.Contains(a.Name) && UnitRoll.FirstAdmits(batch.BankLeft);
-				var cost = paygo ? 0 : fullCost;
-				if (!paygo && TechLeanOn && TechLean.Admits(fullCost, rollPoolMaxCost, rollCash.Held, world.WorldTick, RollParameters.RampTicks, batch.BankLeft, Info.TechLeanTopPct, Info.TechLeanBankPct))
-					cost = 0;
-
-				return batch.Affords(cost) && ReserveAdmits(batch, cost)
-					&& !(rollCash.DepthQueue && rollCash.Held > 0 && !QueueDepthCA.CashAdmits(batch.BankLeft, rollCash.UnpaidQueued, cost));
-			}
 		}
 
 		// The strength of a mode bias profile (UnitRoll.ProfileNames order): the yaml percent, 0 while the profile is absent from UnitRollProfiles or its ablation row is off.
