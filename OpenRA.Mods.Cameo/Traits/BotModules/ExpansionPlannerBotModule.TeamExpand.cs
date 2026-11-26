@@ -110,6 +110,25 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 		}
 
+		/// <summary>
+		/// When a pending expansion request is real. The production request is a void intent call, so its success is read from the builder's
+		/// books afterwards: a request that did not land is never committed, and one whose intent has vanished with nothing queued is
+		/// dropped after one epoch instead of blocking new requests for the full timeout.
+		/// </summary>
+		internal static class ExpansionRequestPolicy
+		{
+			public static bool ShouldCommit(int requestedCountAfterCall) => requestedCountAfterCall > 0;
+
+			public static bool Orphaned(int ageTicks, bool intentLive, bool inProduction) =>
+				ageTicks >= TeamExpandEpochTicks && !intentLive && !inProduction;
+		}
+
+		bool ExpansionRequestLive(IBot bot, string type) =>
+			unitBuilders.Any(b => b.RequestedProductionCount(bot, type) > 0);
+
+		bool ExpansionRequestInProduction(string type) =>
+			world.ActorsWithTrait<ProductionQueue>().Any(a => a.Actor.Owner == player && a.Trait.AllQueued().Any(i => i.Item == type));
+
 		sealed class ExpansionRegistry
 		{
 			public ExpansionSite[] Atlas;
@@ -245,7 +264,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			expansionObservedCells.UnionWith(observations);
 		}
 
-		bool TryReserveExpansionRequest(int active, ref int targetCount)
+		bool TryReserveExpansionRequest(IBot bot, int active, ref int targetCount)
 		{
 			var now = world.WorldTick;
 			var registry = ExpansionClaims;
@@ -267,7 +286,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			for (var i = expansionPending.Count - 1; i >= 0; i--)
 			{
-				if (now - expansionPending[i].Since < 8 * TeamExpandEpochTicks)
+				var age = now - expansionPending[i].Since;
+				var timedOut = age >= 8 * TeamExpandEpochTicks;
+				if (!timedOut && !ExpansionRequestPolicy.Orphaned(age, ExpansionRequestLive(bot, expansionPending[i].Type), ExpansionRequestInProduction(expansionPending[i].Type)))
 					continue;
 
 				registry.Claims.Remove((player, expansionPending[i].Cell()));

@@ -3123,7 +3123,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			// REF-1 B2: the request rides under the cash reserve — queueing the MCV costs nothing until
 			// production starts, so the standing want must not wait for a re-plan that happens to see cash.
-			if (ExpansionClaimOn && (queued > 0 || !TryReserveExpansionRequest(active, ref targetCount)))
+			if (ExpansionClaimOn && (queued > 0 || !TryReserveExpansionRequest(bot, active, ref targetCount)))
 				return;
 
 			if (!McvDue(ExpansionClaimOn || farFieldFree, active + queued, targetCount))
@@ -3158,10 +3158,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (unitBuilder.RequestedProductionCount(bot, mcvType) > 0)
 				return;
 
-			if (ExpansionClaimOn)
-				CommitExpansionRequest(mcvType);
-
 			unitBuilder.RequestUnitProduction(bot, mcvType);
+
+			// The claim is committed only when the request is on the builder's books; a request that did not land books nothing.
+			if (ExpansionClaimOn && ExpansionRequestPolicy.ShouldCommit(unitBuilder.RequestedProductionCount(bot, mcvType)))
+				CommitExpansionRequest(mcvType);
 #if CAMEO_DEV_LOGGING
 			if (YardRampOn)
 				Log.Write("debug", $"AI ({player.ClientIndex}): RM-03 ramp floor {rampFloor} vs target {preRampTarget} / cover {coverFloor}: "

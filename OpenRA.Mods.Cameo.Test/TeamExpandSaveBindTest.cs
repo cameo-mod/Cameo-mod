@@ -111,6 +111,34 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void ARequestThatDidNotLandIsNeverCommitted()
+		{
+			Assert.That(ExpansionPlannerBotModule.ExpansionRequestPolicy.ShouldCommit(0), Is.False, "not on the builder's books: no pending entry");
+			Assert.That(ExpansionPlannerBotModule.ExpansionRequestPolicy.ShouldCommit(1), Is.True);
+		}
+
+		[Test]
+		public void APendingRequestWithNoIntentAndNothingQueuedIsDroppedAfterOneEpoch()
+		{
+			Assert.That(ExpansionPlannerBotModule.ExpansionRequestPolicy.Orphaned(249, false, false), Is.False, "grace: the intent may still be turning into a queue item");
+			Assert.That(ExpansionPlannerBotModule.ExpansionRequestPolicy.Orphaned(250, false, false), Is.True);
+			Assert.That(ExpansionPlannerBotModule.ExpansionRequestPolicy.Orphaned(2000, true, false), Is.False, "intent still live");
+			Assert.That(ExpansionPlannerBotModule.ExpansionRequestPolicy.Orphaned(2000, false, true), Is.False, "being built");
+		}
+
+		[Test]
+		public void TheClaimIsCommittedOnlyAfterTheProductionRequestAndOnlyWhenItLanded()
+		{
+			var planner = File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "source", "mods/Cameo/Traits/BotModules/ExpansionPlannerBotModule.cs")).Replace("\r\n", "\n");
+			var request = planner.IndexOf("unitBuilder.RequestUnitProduction(bot, mcvType);", StringComparison.Ordinal);
+			var commit = planner.IndexOf("CommitExpansionRequest(mcvType);", StringComparison.Ordinal);
+			Assert.That(request, Is.GreaterThan(0));
+			Assert.That(commit, Is.GreaterThan(request), "request first, commit after");
+			Assert.That(planner, Does.Contain("ExpansionClaimOn && ExpansionRequestPolicy.ShouldCommit(unitBuilder.RequestedProductionCount(bot, mcvType))"));
+			Assert.That(Source(), Does.Contain("ExpansionRequestPolicy.Orphaned(age,"));
+		}
+
+		[Test]
 		public void TheWiringSavesOnAnySwitchBindsOnlyThroughTheBinderAndRaisesNoRequestWithoutAYard()
 		{
 			var code = Source();
