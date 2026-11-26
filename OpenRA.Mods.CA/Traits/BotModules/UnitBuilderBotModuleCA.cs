@@ -216,9 +216,9 @@ namespace OpenRA.Mods.CA.Traits
 			"of the whole pool; none passes = the queue's fill ends for this visit. Off = the roll over the whole pool, a refused pick re-rolled.")]
 		public readonly bool AffordablePool = false;
 
-		[Desc("PERF-BOTTICK-01 FIX 4 (row cost_cache_tick): memoise ProductionQueue.GetProductionCost for one bot visit, per (queue actor, queue type, actor type). The same integer as the live call,",
+		[Desc("PERF-BOTTICK-01 FIX 4 (row cost_cache_visit): memoise ProductionQueue.GetProductionCost for one bot visit, per (queue actor, queue type, actor type). The same integer as the live call,",
 			"so no decision changes. Off = every call reads the cost live.")]
-		public readonly bool CostCacheTick = false;
+		public readonly bool CostCacheVisit = false;
 
 		[Desc("UNIT-MIX-01: the queue types that make an airfield (aircraft floor); the infantry floor uses IdleQueueFloorQueues.")]
 		public readonly string[] UnitMixAircraftQueues = { "Aircraft", "RAAircraft" };
@@ -1299,10 +1299,10 @@ namespace OpenRA.Mods.CA.Traits
 #endif
 		}
 
-		// PERF-BOTTICK-01 FIX 4 (row cost_cache_tick): the production cost memoised for this visit only (ProductionCostCache); every cost read of the module goes through Cost().
+		// PERF-BOTTICK-01 FIX 4 (row cost_cache_visit): the production cost memoised for this visit only (ProductionCostCache); every cost read of the module goes through Cost().
 		readonly ProductionCostCache costCache = new();
 		AblationLatch ablateCostCache;
-		bool CostCacheOn => switchesActive && Info.CostCacheTick && !ablateCostCache.Off(player, AblationIds.CostCacheTick);
+		bool CostCacheOn => switchesActive && Info.CostCacheVisit && !ablateCostCache.Off(player, AblationIds.CostCacheVisit);
 
 		int Cost(ProductionQueue queue, ActorInfo unit) => costCache.Get(queue, unit);
 
