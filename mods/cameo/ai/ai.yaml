@@ -4853,6 +4853,8 @@ Player:
 		TeamLeadGraceRallyEnabled: true
 		TeamLeadBarArrivedOnlyEnabled: true
 		SquadPipeline02Enabled: true
+		# V08F-FIX-02: ALLIN family switch, code default false; on wherever the one launcher is on (behaviour unchanged).
+		ArmyAheadEnabled: true
 		TeamLeadGatherRangeEnabled: true
 		TeamLeadHuntViaOrderEnabled: true
 		TeamLeadIssueFloorEnabled: true
@@ -5025,6 +5027,8 @@ Player:
 		TeamLeadGraceRallyEnabled: true
 		TeamLeadBarArrivedOnlyEnabled: true
 		SquadPipeline02Enabled: true
+		# V08F-FIX-02: ALLIN family switch, code default false; on wherever the one launcher is on (behaviour unchanged).
+		ArmyAheadEnabled: true
 		TeamLeadGatherRangeEnabled: true
 		TeamLeadHuntViaOrderEnabled: true
 		TeamLeadIssueFloorEnabled: true
@@ -5193,6 +5197,8 @@ Player:
 		TeamLeadGraceRallyEnabled: true
 		TeamLeadBarArrivedOnlyEnabled: true
 		SquadPipeline02Enabled: true
+		# V08F-FIX-02: ALLIN family switch, code default false; on wherever the one launcher is on (behaviour unchanged).
+		ArmyAheadEnabled: true
 		TeamLeadGatherRangeEnabled: true
 		TeamLeadHuntViaOrderEnabled: true
 		TeamLeadIssueFloorEnabled: true
@@ -5363,6 +5369,8 @@ Player:
 		TeamLeadGraceRallyEnabled: true
 		TeamLeadBarArrivedOnlyEnabled: true
 		SquadPipeline02Enabled: true
+		# V08F-FIX-02: ALLIN family switch, code default false; on wherever the one launcher is on (behaviour unchanged).
+		ArmyAheadEnabled: true
 		TeamLeadGatherRangeEnabled: true
 		TeamLeadHuntViaOrderEnabled: true
 		TeamLeadIssueFloorEnabled: true
@@ -5533,6 +5541,8 @@ Player:
 		TeamLeadGraceRallyEnabled: true
 		TeamLeadBarArrivedOnlyEnabled: true
 		SquadPipeline02Enabled: true
+		# V08F-FIX-02: ALLIN family switch, code default false; on wherever the one launcher is on (behaviour unchanged).
+		ArmyAheadEnabled: true
 		TeamLeadGatherRangeEnabled: true
 		TeamLeadHuntViaOrderEnabled: true
 		TeamLeadIssueFloorEnabled: true
@@ -5700,6 +5710,8 @@ Player:
 		TeamLeadGraceRallyEnabled: true
 		TeamLeadBarArrivedOnlyEnabled: true
 		SquadPipeline02Enabled: true
+		# V08F-FIX-02: ALLIN family switch, code default false; on wherever the one launcher is on (behaviour unchanged).
+		ArmyAheadEnabled: true
 		TeamLeadGatherRangeEnabled: true
 		TeamLeadHuntViaOrderEnabled: true
 		TeamLeadIssueFloorEnabled: true
@@ -6494,6 +6506,8 @@ Player:
 		# CONSOLIDATE-01 C9 (X13): paid Promotions also start while a unit-production pause vote is up (pq_upgrade_service); free items always did.
 		# UPG-ADDONS (Opus 11-25, Haiku check): the army_* lvl2-3 upgrades sit on the BuildingAddons queue, which the upgrade service did not serve. @generic only.
 		UpgradeServiceQueues: Promotions, Upgrades, Research, Addons, BuildingAddons
+		# UPG-ADDONS-DEFAULT (V08F-FIX-01): the code default is false; @generic sets it true so the army_* lvl2-3 upgrades stay served. Classic does not list BuildingAddons, so it is unchanged.
+		UpgradeBuildingAddons: true
 		# upg_once_registry (Opus 11-25, V08F: ARM): Sol traced the playtest's repeated upgrade starts (x12-16) to the missing pending
 		# reservation with the registry OFF. @generic only; the code default stays false (classic and every other bot unchanged).
 		UpgradeOnceRegistry: true

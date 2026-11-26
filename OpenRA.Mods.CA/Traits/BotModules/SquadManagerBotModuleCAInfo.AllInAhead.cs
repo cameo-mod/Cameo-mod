@@ -14,8 +14,8 @@ namespace OpenRA.Mods.CA.Traits
 	// Observation only. Every threshold is a yaml number so the learning (LEARN-MULT-01) can move it later.
 	public partial class SquadManagerBotModuleCAInfo
 	{
-		[Desc("ALLIN-TRIGGER-01 family switch (release; the DEV row is sq_ahead). On (needs SquadPipeline02Enabled): the team leader marks its order ALL-IN when the team is ahead (the triggers below) and ends it again when the observed ratio drops.")]
-		public readonly bool ArmyAheadEnabled = true;
+		[Desc("ALLIN-TRIGGER-01 family switch (code default off; the six personality blocks set it on) (release; the DEV row is sq_ahead). On (needs SquadPipeline02Enabled): the team leader marks its order ALL-IN when the team is ahead (the triggers below) and ends it again when the observed ratio drops.")]
+		public readonly bool ArmyAheadEnabled = false;
 
 		[Desc("ALLIN-TRIGGER-01: no ahead trigger fires before this tick (the first skirmishes decide nothing).")]
 		public readonly int ArmyAheadStartTick = 6000;
