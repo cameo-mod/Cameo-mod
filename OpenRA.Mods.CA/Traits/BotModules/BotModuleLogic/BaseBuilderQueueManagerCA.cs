@@ -2927,7 +2927,13 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				lastRefineryEconomyVerdict = verdict;
 				if (verdict != RefineryFieldGateCA.EconomyVerdict.Allow)
+				{
 					AIUtils.BotDebug("{0} holds the refinery pick: {1} (refineries {2})", queue.Actor.Owner, verdict, count);
+#if CAMEO_DEV_LOGGING
+					// Opus 11-26 (V08G): BotDebug reaches the in-game notification only; this puts the refinery-pick hold into the debug log file (DEV build, once per verdict change).
+					Log.Write("debug", $"AI ({player.ClientIndex}): REF-HOLD refinery pick held {verdict} refineries {count} tick {now} queue {Category}");
+#endif
+				}
 			}
 
 			// REF2-FIRST-01 (row ref2_floor): a due ref2 outranks the interval wait only (the first-war-factory wait stays: ref1, war factory, ref2).

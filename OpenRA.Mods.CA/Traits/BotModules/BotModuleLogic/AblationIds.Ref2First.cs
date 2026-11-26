@@ -21,5 +21,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		// ref2_floor off = no zone cap lift for the second refinery and no interval outrank, as before (the time floor eco_timing_floor is unchanged).
 		public const string Ref2Floor = "ref2_floor";
+
+		// ref2_stall_release off = a hold for ref2 that cannot start is only ended by the outer bound Ref2FirstBoundTicks (3000), as in the first REF2-FIRST-01 merge.
+		public const string Ref2StallRelease = "ref2_stall_release";
 	}
 }

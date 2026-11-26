@@ -85,6 +85,29 @@ namespace OpenRA.Mods.CA.Traits
 			if (due && baseBuilder.Ref2DueSince < 0)
 				baseBuilder.Ref2DueSince = now;
 
+			// Row ref2_stall_release (Opus 11-26): ref2 is startable (due, and the first-war-factory wait is over) but no refinery has started within Ref2StallTicks: the downstream blocker is
+			// not ours to wait for (claim, site, spacing, reach, a refinery-pick gate or cash), so the hold ends for good and the old order runs. The clock is consecutive startable ticks; the
+			// 3000-tick bound above stays the outer cap. A refinery that starts makes the count reach two before this point, so the gate finishes through the two_refineries branch instead.
+			if (baseBuilder.Ref2StallArmed)
+			{
+				var factoryBuildable = b.VehiclesFactoryTypes.Any(buildable);
+				var factoryOwnedOrQueued = baseBuilder.VehicleFactoryOwnedOrQueued();
+				var factoryWaitReleased = RefineryFieldGateCA.FactoryWaitReleased(b.VehiclesFactoryTypes.Any(NoSpaceBanned),
+					baseBuilder.RefineryGateFactoryPlacementFailed, now, baseBuilder.RefineryGateFirstStoodTick, b.RefineryFactoryWaitTicks);
+				var startable = Ref2First.Startable(due, factoryBuildable, factoryOwnedOrQueued, factoryWaitReleased);
+				baseBuilder.Ref2StartableSince = Ref2First.StartableSince(baseBuilder.Ref2StartableSince, startable, now);
+				if (Ref2First.StallExpired(baseBuilder.Ref2StartableSince, now, b.Ref2StallTicks))
+				{
+					baseBuilder.Ref2Finished = true;
+
+					// DEV only (the argument is compiled out with the call): the verdict of the downstream blocker the V08G game must name.
+					Ref2Observed("stall_released",
+						$"startable_since_{baseBuilder.Ref2StartableSince}|due_since_{baseBuilder.Ref2DueSince}|eco_{lastRefineryEconomyVerdict}|anchors_{law?.UnclaimedAnchorsInReach}|standing_{AIUtils.CountActorByCommonName(baseBuilder.RefineryBuildings)}|queued_{count - AIUtils.CountActorByCommonName(baseBuilder.RefineryBuildings)}|factory_{(factoryOwnedOrQueued ? "owned" : factoryWaitReleased ? "released" : "none")}",
+						count);
+					return false;
+				}
+			}
+
 			Ref2Observed(due ? "due" : "not_due", due ? "ref2_wanted" : refinery == null ? "refinery_not_buildable" : maxed ? "refinery_max" : "no_field_with_room", count);
 			return due;
 		}

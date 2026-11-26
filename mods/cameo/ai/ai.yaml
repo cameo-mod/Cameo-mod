@@ -6028,7 +6028,7 @@ Player:
 		# QUEUE-SPLIT-01 + REF-S2-01 (Opus 11-25): defence stages stay on the defence queue; unmet refinery zone demand is served at S2 (rows bb_queue_split, bb_refinery_s2).
 		BbQueueSplit: true
 		BbRefineryAtS2: true
-		# REF2-FIRST-01 (rows ref2_before_radar, ref2_before_prod2, ref2_floor, USER BINDING 11-26): at least 2 refineries early; ref2 before the radar (TECH exempt) and before the 2nd production building of a role (RUSH exempt).
+		# REF2-FIRST-01 (rows ref2_before_radar, ref2_before_prod2, ref2_floor, ref2_stall_release, USER BINDING 11-26): at least 2 refineries early; ref2 before the radar (TECH exempt) and before the 2nd production building of a role (RUSH exempt); the hold ends after Ref2StallTicks (750) startable without a refinery starting.
 		Ref2First: true
 		# MODE-BIAS-01 (rows mb_essentials, mb_techchain, mb_antirush, mb_opening, user ruling 11-25): the extra building lists also weight the BuildingFractions roll while their trigger holds (never a gate).
 		MbEssentials: true

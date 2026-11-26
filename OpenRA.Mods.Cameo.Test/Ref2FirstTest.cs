@@ -17,8 +17,8 @@ using OpenRA.Mods.Cameo.Dev;
 
 namespace OpenRA.Mods.Cameo.Test
 {
-	// REF2-FIRST-01 (USER BINDING 11-26, Opus rulings; one switch Ref2First, rows ref2_before_radar, ref2_before_prod2, ref2_floor): the pure decisions, the two personality exemptions,
-	// the skip when no reachable field has room, the bound, and the wiring pins (off = identical).
+	// REF2-FIRST-01 (USER BINDING 11-26, Opus rulings; one switch Ref2First, rows ref2_before_radar, ref2_before_prod2, ref2_floor, ref2_stall_release): the pure decisions, the two personality
+	// exemptions, the skip when no reachable field has room (and when there is no law provider), the bound, the stall release, and the wiring pins (off = identical).
 	[TestFixture]
 	public sealed class Ref2FirstTest
 	{
@@ -56,6 +56,114 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(Ref2First.BoundExpired(-1, 99999, 3000), Is.False, "never due");
 			Assert.That(Ref2First.BoundExpired(1000, 4000, 3000), Is.False, "exactly the bound");
 			Assert.That(Ref2First.BoundExpired(1000, 4001, 3000), Is.True);
+		}
+
+		[Test]
+		public void Ref2IsStartableOnlyOnceTheWarFactoryWaitIsOverAndMirrorsTheEconomyGatesWaitFactoryRung()
+		{
+			Assert.That(Ref2First.Startable(true, true, false, false), Is.False, "ref1, war factory, THEN ref2: the order itself says wait for the war factory");
+			Assert.That(Ref2First.Startable(true, true, true, false), Is.True, "a war factory stands or is in production");
+			Assert.That(Ref2First.Startable(true, true, false, true), Is.True, "the war-factory wait was released (banned, placement failed, or the wait ran out)");
+			Assert.That(Ref2First.Startable(true, false, false, false), Is.True, "no vehicle factory buildable: the wait never applies");
+			Assert.That(Ref2First.Startable(false, false, true, true), Is.False, "not due");
+
+			// one truth table with the economy gate: startable iff its WaitFactory rung does not hold a refinery (one refinery stands, no interval pending, nothing essential pending)
+			foreach (var buildable in new[] { false, true })
+				foreach (var owned in new[] { false, true })
+					foreach (var released in new[] { false, true })
+					{
+						var verdict = RefineryFieldGateCA.Economy(true, 1, false, buildable, owned, released, 1000, -1, 1500, false, -1, 1500);
+						Assert.That(Ref2First.Startable(true, buildable, owned, released), Is.EqualTo(verdict != RefineryFieldGateCA.EconomyVerdict.WaitFactory),
+							"buildable " + buildable + " owned " + owned + " released " + released);
+					}
+		}
+
+		[Test]
+		public void TheStallClockRunsOnConsecutiveStartableTicksAndReleasesAfterTheStallTicks()
+		{
+			Assert.That(Ref2First.StartableSince(-1, true, 600), Is.EqualTo(600), "starts the clock");
+			Assert.That(Ref2First.StartableSince(600, true, 900), Is.EqualTo(600), "kept while it stays startable");
+			Assert.That(Ref2First.StartableSince(600, false, 900), Is.EqualTo(-1), "not startable (not due, or the war-factory wait is back): the clock stops");
+			Assert.That(Ref2First.StartableSince(-1, false, 900), Is.EqualTo(-1));
+
+			Assert.That(Ref2First.StallExpired(-1, 99999, 750), Is.False, "never startable: no stall, only the outer bound can end the hold");
+			Assert.That(Ref2First.StallExpired(600, 1350, 750), Is.False, "exactly 750 ticks");
+			Assert.That(Ref2First.StallExpired(600, 1351, 750), Is.True);
+
+			// the walk of the gate: startable from 600, no refinery starts, the hold lifts at 1351; a gap in startable restarts the clock
+			var since = -1;
+			var released = -1;
+			for (var now = 0; now <= 3000 && released < 0; now++)
+			{
+				since = Ref2First.StartableSince(since, now >= 600, now);
+				if (Ref2First.StallExpired(since, now, 750))
+					released = now;
+			}
+
+			Assert.That(released, Is.EqualTo(1351));
+			since = -1;
+			released = -1;
+			for (var now = 0; now <= 4000 && released < 0; now++)
+			{
+				since = Ref2First.StartableSince(since, now >= 600 && now != 1000, now);
+				if (Ref2First.StallExpired(since, now, 750))
+					released = now;
+			}
+
+			Assert.That(released, Is.EqualTo(1752), "one tick not startable at 1000 restarts the clock at 1001: 1001 + 750 < 1752");
+
+			// the stall is sooner than the outer bound, and the outer bound is untouched
+			Assert.That(new BaseBuilderBotModuleCAInfo().Ref2StallTicks, Is.EqualTo(750));
+			Assert.That(new BaseBuilderBotModuleCAInfo().Ref2StallTicks, Is.LessThan(new BaseBuilderBotModuleCAInfo().Ref2FirstBoundTicks));
+			Assert.That(Ref2First.BoundExpired(600, 3601, 3000), Is.True, "the 3000-tick bound is still the outer cap");
+		}
+
+		[Test]
+		public void TheStallReleaseIsWiredAfterTheBoundAndBeforeTheDueVerdictAndEndsTheGateForGood()
+		{
+			var r2 = Source(Dir + "BaseBuilderQueueManagerCA.Ref2First.cs");
+			var bound = r2.IndexOf("Ref2First.BoundExpired(baseBuilder.Ref2DueSince, now, b.Ref2FirstBoundTicks)", StringComparison.Ordinal);
+			var armed = r2.IndexOf("if (baseBuilder.Ref2StallArmed)", StringComparison.Ordinal);
+			var due = r2.IndexOf("Ref2Observed(due ? \"due\" : \"not_due\"", StringComparison.Ordinal);
+			Assert.That(bound, Is.GreaterThan(0));
+			Assert.That(armed, Is.GreaterThan(bound), "the outer bound is checked first");
+			Assert.That(due, Is.GreaterThan(armed), "the stall release is decided before the due verdict is returned");
+
+			var block = r2.Substring(armed, due - armed);
+			Assert.That(block, Does.Contain("Ref2First.Startable(due, factoryBuildable, factoryOwnedOrQueued, factoryWaitReleased)"));
+			Assert.That(block, Does.Contain("baseBuilder.Ref2StartableSince = Ref2First.StartableSince(baseBuilder.Ref2StartableSince, startable, now);"));
+			Assert.That(block, Does.Contain("Ref2First.StallExpired(baseBuilder.Ref2StartableSince, now, b.Ref2StallTicks)"));
+			Assert.That(block, Does.Contain("baseBuilder.Ref2Finished = true;"), "the gate finishes for good: the hold lifts and the old order runs");
+			Assert.That(block, Does.Contain("return false;"));
+			Assert.That(block, Does.Contain("Ref2Observed(\"stall_released\","));
+			Assert.That(block, Does.Not.Contain("Cancel"), "nothing is cancelled");
+
+			// the same war-factory inputs as the economy gate
+			Assert.That(block, Does.Contain("var factoryWaitReleased = RefineryFieldGateCA.FactoryWaitReleased(b.VehiclesFactoryTypes.Any(NoSpaceBanned),"));
+			Assert.That(block, Does.Contain("baseBuilder.RefineryGateFactoryPlacementFailed, now, baseBuilder.RefineryGateFirstStoodTick, b.RefineryFactoryWaitTicks);"));
+
+			// the DEV detail names the downstream blocker: the last refinery-pick economy verdict, the claimable anchors, standing and queued refineries, the war-factory state
+			foreach (var part in new[] { "startable_since_", "due_since_", "eco_{lastRefineryEconomyVerdict}", "anchors_{law?.UnclaimedAnchorsInReach}", "standing_", "queued_", "factory_" })
+				Assert.That(block, Does.Contain(part), part);
+		}
+
+		[Test]
+		public void TheRefineryPickHoldReachesTheDebugLogFileInTheDevBuildOnly()
+		{
+			var qm = Source(Dir + "BaseBuilderQueueManagerCA.cs");
+			var at = qm.IndexOf("REF-HOLD refinery pick held", StringComparison.Ordinal);
+			Assert.That(at, Is.GreaterThan(0));
+			Assert.That(qm.LastIndexOf("#if CAMEO_DEV_LOGGING", at, StringComparison.Ordinal), Is.InRange(at - 400, at - 1), "inside a DEV-only region");
+			Assert.That(qm.IndexOf("#endif", at, StringComparison.Ordinal), Is.InRange(at, at + 200), "the region closes right after the line");
+			Assert.That(qm, Does.Contain("AIUtils.BotDebug(\"{0} holds the refinery pick: {1} (refineries {2})\", queue.Actor.Owner, verdict, count);"), "the notification line stays");
+
+			// the two other V08G blockers the game must name already log in the DEV build: the structured bb_refinery_held row (gate + economy verdict) and the REF-1 park line (debug log)
+			Assert.That(Source(Dir + "BaseBuilderQueueManagerCA.Pipeline01Stages.cs"), Does.Contain("return RefineryEconomyGateOn ? \"economy_\" + lastRefineryEconomyVerdict : \"power\";"));
+			var planner = Source("mods/Cameo/Traits/BotModules/ExpansionPlannerBotModule.cs");
+			var park = planner.IndexOf("REF-1 parked anchor", StringComparison.Ordinal);
+			Assert.That(park, Is.GreaterThan(0));
+			Assert.That(planner.LastIndexOf("#if CAMEO_DEV_LOGGING", park, StringComparison.Ordinal), Is.InRange(park - 300, park - 1));
+			Assert.That(planner.IndexOf("Log.Write(\"debug\", parked);", park, StringComparison.Ordinal), Is.GreaterThan(park));
 		}
 
 		[Test]
@@ -133,7 +241,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var at = r2.IndexOf("void Ref2Observed(", StringComparison.Ordinal);
 			Assert.That(at, Is.GreaterThan(0));
 			Assert.That(r2.LastIndexOf("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]", at, StringComparison.Ordinal), Is.InRange(at - 80, at - 1), "compiled out of a release build");
-			foreach (var verdict in new[] { "\"held_radar\"", "\"held_prod2\"", "\"bound_expired\"", "\"not_due\"", "\"due\"" })
+			foreach (var verdict in new[] { "\"held_radar\"", "\"held_prod2\"", "\"bound_expired\"", "\"stall_released\"", "\"not_due\"", "\"due\"" })
 				Assert.That(r2, Does.Contain(verdict), verdict);
 			foreach (var why in new[] { "\"two_refineries\"", "\"finished\"", "\"refinery_not_buildable\"", "\"refinery_max\"", "\"no_field_with_room\"" })
 				Assert.That(r2, Does.Contain(why), why);
@@ -159,7 +267,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(AblationIds.Ref2BeforeRadar, Is.EqualTo("ref2_before_radar"));
 			Assert.That(AblationIds.Ref2BeforeProd2, Is.EqualTo("ref2_before_prod2"));
 			Assert.That(AblationIds.Ref2Floor, Is.EqualTo("ref2_floor"));
-			foreach (var id in new[] { "ref2_before_radar", "ref2_before_prod2", "ref2_floor" })
+			Assert.That(AblationIds.Ref2StallRelease, Is.EqualTo("ref2_stall_release"));
+			foreach (var id in new[] { "ref2_before_radar", "ref2_before_prod2", "ref2_floor", "ref2_stall_release" })
 				Assert.That(AblationSpec.RegistryIds(), Does.Contain(id));
 
 			// off = identical: every armed property needs the switch, and the planner lift is 0 without it
@@ -167,6 +276,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(bb, Does.Contain("public bool Ref2RadarArmed => Info.Ref2First && switchesActive && !ablateRef2Radar.Off(player, AblationIds.Ref2BeforeRadar);"));
 			Assert.That(bb, Does.Contain("public bool Ref2Prod2Armed => Info.Ref2First && switchesActive && !ablateRef2Prod2.Off(player, AblationIds.Ref2BeforeProd2);"));
 			Assert.That(bb, Does.Contain("public bool Ref2FloorArmed => Info.Ref2First && switchesActive && !ablateRef2Floor.Off(player, AblationIds.Ref2Floor);"));
+			Assert.That(bb, Does.Contain("public bool Ref2StallArmed => Info.Ref2First && switchesActive && !ablateRef2Stall.Off(player, AblationIds.Ref2StallRelease);"), "the stall row rides the same switch and the same latch pattern");
+			Assert.That(bb, Does.Contain("public int Ref2StartableSince = -1;"));
 		}
 	}
 }

@@ -40,6 +40,23 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>The bound ran out: ref2 has been due for more than <paramref name="boundTicks"/> ticks (dueSince negative = never due).</summary>
 		public static bool BoundExpired(int dueSince, int now, int boundTicks) => dueSince >= 0 && now - dueSince > boundTicks;
 
+		/// <summary>
+		/// Row ref2_stall_release: ref2 is startable now = it is due and the first-war-factory wait of the economy gate (ref1, war factory, THEN ref2) is not what holds the refinery: a vehicle
+		/// factory type is not buildable at all, one is owned or in production, or the wait was released (<see cref="RefineryFieldGateCA.FactoryWaitReleased"/>). Mirrors the WaitFactory
+		/// condition of <see cref="RefineryFieldGateCA.Economy"/>; the clock must not run while the order itself says wait for the war factory.
+		/// </summary>
+		public static bool Startable(bool due, bool factoryBuildable, bool factoryOwnedOrQueued, bool factoryWaitReleased) =>
+			due && !(factoryBuildable && !factoryOwnedOrQueued && !factoryWaitReleased);
+
+		/// <summary>The startable clock: the tick ref2 became startable (kept while it stays startable), negative = not startable (consecutive startable ticks only; the outer bound never resets).</summary>
+		public static int StartableSince(int since, bool startable, int now) => !startable ? -1 : since >= 0 ? since : now;
+
+		/// <summary>
+		/// Row ref2_stall_release: ref2 has been startable for more than <paramref name="stallTicks"/> ticks without a refinery starting (the count of owned plus queued stays under
+		/// <see cref="RefineryTarget"/> while due), so the hold for it ends (the gate finishes and the old order runs). <paramref name="startableSince"/> negative = not startable.
+		/// </summary>
+		public static bool StallExpired(int startableSince, int now, int stallTicks) => startableSince >= 0 && now - startableSince > stallTicks;
+
 		/// <summary>Row ref2_before_radar: a radar provider is held while ref2 is due, except for the TECH personality.</summary>
 		public static bool HoldsRadar(bool due, bool isRadarProvider, string personality) =>
 			due && isRadarProvider && !IsPersonality(personality, TechPersonality);
