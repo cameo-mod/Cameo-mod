@@ -74,7 +74,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var own = Between(RepoFile(Bots + "SquadManagerBotModuleCA.Pipeline02.cs"), "void ArbiterProtectOwn(", "// ---- Q4: the one launcher");
 
 			Assert.That(own, Does.Contain("var outside = new List<UnitWposWrapper>();"));
-			Assert.That(own, Does.Contain("if ((u.Actor.CenterPosition - at).HorizontalLengthSquared > scanSquared)\n\t\t\t\t\t\toutside.Add(u);\n\t\t\t\t\telse if (need > 0)\n\t\t\t\t\t{\n\t\t\t\t\t\tprotectSq.Units.Add(u);\n\t\t\t\t\t\tunitsHangingAroundTheBase.Remove(u);\n\t\t\t\t\t\tfromPool++;\n\t\t\t\t\t}"),
+			Assert.That(own, Does.Contain("if ((u.Actor.CenterPosition - at).HorizontalLengthSquared > scanSquared)\n\t\t\t\t\t\toutside.Add(u);\n\t\t\t\t\telse if (need > 0)\n\t\t\t\t\t{\n\t\t\t\t\t\tprotectSq.Units.Add(u);\n\t\t\t\t\t\tunitsHangingAroundTheBase.Remove(u);\n\t\t\t\t\t\tLedgerClaim(ArmyDuty.OwnBaseDefend, nameof(ArbiterProtectOwn), \"own_pool_in_radius\", new[] { u });\n\t\t\t\t\t\tfromPool++;\n\t\t\t\t\t}"),
 				"the in-radius pool joins the answer (need > 0) but its value never reaches `got`");
 			Assert.That(own, Does.Contain("outside.Select((u, i) => new DefendCandidate(i, UnitValue(u.Actor), (u.Actor.CenterPosition - at).HorizontalLengthSquared)), need);"));
 			Assert.That(own, Does.Contain("foreach (var i in pick)\n\t\t\t\t\tTakeFromPool(outside[i]);"));

@@ -158,6 +158,8 @@ namespace OpenRA.Mods.CA.Traits
 				bot.QueueOrder(new Order("Move", u.Actor, Target.FromCell(World, cell), false));
 			}
 
+			LedgerClaim(order.AllIn ? ArmyDuty.AllIn : ArmyDuty.TeamPush, nameof(TeamLeadMergeIntoGatherSquad), "gather_merge_seq" + order.Seq, joinable);
+
 			ReconcileSquadLeases();
 			foreach (var n in notifyIdleBaseUnits)
 				n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
