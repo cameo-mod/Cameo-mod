@@ -113,6 +113,25 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TheDevVerdictRowIsDevOnlyDedupedAndTheObserverMemberHasADefault()
+		{
+			var r2 = Source(Dir + "BaseBuilderQueueManagerCA.Ref2First.cs");
+			var at = r2.IndexOf("void Ref2Observed(", StringComparison.Ordinal);
+			Assert.That(at, Is.GreaterThan(0));
+			Assert.That(r2.LastIndexOf("[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]", at, StringComparison.Ordinal), Is.InRange(at - 80, at - 1), "compiled out of a release build");
+			foreach (var verdict in new[] { "\"held_radar\"", "\"held_prod2\"", "\"bound_expired\"", "\"not_due\"", "\"due\"" })
+				Assert.That(r2, Does.Contain(verdict), verdict);
+			foreach (var why in new[] { "\"two_refineries\"", "\"finished\"", "\"refinery_not_buildable\"", "\"refinery_max\"", "\"no_field_with_room\"" })
+				Assert.That(r2, Does.Contain(why), why);
+
+			Assert.That(Source("mods/CA/Traits/BotModules/IBotBuildingPickObserver.cs"), Does.Contain("void Ref2Verdict(Player owner, int tick, string verdict, string detail, int refineries, string queue) { }"),
+				"a default member: an observer without the row keeps compiling");
+			var dev = Source("mods/Cameo.Dev/AiPlayerTelemetryDev.Coverage.cs");
+			Assert.That(dev, Does.Contain("ObserverRow(owner, \"ref2_verdict\""));
+			Assert.That(dev, Does.Contain("cov.LastRef2Key == key && cov.LastRef2Tick >= 0 && tick - cov.LastRef2Tick < RefineryHeldRepeatTicks"), "one row per changed verdict, or again after 750 ticks");
+		}
+
+		[Test]
 		public void OffByDefaultArmedForTheGenericBaseBuilderOnlyAndTheRowsAreRegistered()
 		{
 			Assert.That(new BaseBuilderBotModuleCAInfo().Ref2First, Is.False, "default false in code");

@@ -41,14 +41,28 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool ComputeRef2Due(Func<string, bool> buildable, int now)
 		{
-			if (!Ref2AnyArmed || baseBuilder.Ref2Finished)
+			if (!Ref2AnyArmed)
 				return false;
 
 			var b = baseBuilder.Info;
 			var count = baseBuilder.RefineryCountWithQueued();
-			if (count >= Ref2First.RefineryTarget || Ref2First.BoundExpired(baseBuilder.Ref2DueSince, now, b.Ref2FirstBoundTicks))
+			if (baseBuilder.Ref2Finished)
+			{
+				Ref2Observed("not_due", "finished", count);
+				return false;
+			}
+
+			if (count >= Ref2First.RefineryTarget)
 			{
 				baseBuilder.Ref2Finished = true;
+				Ref2Observed("not_due", "two_refineries", count);
+				return false;
+			}
+
+			if (Ref2First.BoundExpired(baseBuilder.Ref2DueSince, now, b.Ref2FirstBoundTicks))
+			{
+				baseBuilder.Ref2Finished = true;
+				Ref2Observed("bound_expired", "since_" + baseBuilder.Ref2DueSince, count);
 				return false;
 			}
 
@@ -65,11 +79,21 @@ namespace OpenRA.Mods.CA.Traits
 			// The law counts the claimable anchors (the planner's cap lift makes a field with room claimable); without a law the old placement search has no field verdict, so only buildable + max apply.
 			var law = baseBuilder.RefineryLawProvider();
 			var fieldUnderCap = law == null || law.UnclaimedAnchorsInReach > 0;
-			var due = Ref2First.Due(true, false, count, refinery != null, refinery != null && baseBuilder.HasMaxRefineriesFor(refinery), fieldUnderCap);
+			var maxed = refinery != null && baseBuilder.HasMaxRefineriesFor(refinery);
+			var due = Ref2First.Due(true, false, count, refinery != null, maxed, fieldUnderCap);
 			if (due && baseBuilder.Ref2DueSince < 0)
 				baseBuilder.Ref2DueSince = now;
 
+			Ref2Observed(due ? "due" : "not_due", due ? "ref2_wanted" : refinery == null ? "refinery_not_buildable" : maxed ? "refinery_max" : "no_field_with_room", count);
 			return due;
+		}
+
+		// REF2-FIRST-01 (row ref2_verdict), DEV only: compiled out of a release build together with its arguments; the observer dedupes. Nothing reads anything back.
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void Ref2Observed(string verdict, string detail, int refineries)
+		{
+			foreach (var o in PickObservers)
+				o.Ref2Verdict(player, world.WorldTick, verdict, detail, refineries, Category);
 		}
 
 		string Ref2Personality()
@@ -116,8 +140,12 @@ namespace OpenRA.Mods.CA.Traits
 				return false;
 
 			var personality = Ref2Personality();
-			return Ref2First.HoldsRadar(due, isRadar, personality)
-				|| Ref2First.HoldsSecondProduction(due, isProduction, isProduction ? Ref2RoleCount(info.Name) : 0, personality);
+			var heldRadar = Ref2First.HoldsRadar(due, isRadar, personality);
+			var heldProd2 = !heldRadar && Ref2First.HoldsSecondProduction(due, isProduction, isProduction ? Ref2RoleCount(info.Name) : 0, personality);
+			if (heldRadar || heldProd2)
+				Ref2Observed(heldRadar ? "held_radar" : "held_prod2", info.Name, baseBuilder.RefineryCountWithQueued());
+
+			return heldRadar || heldProd2;
 		}
 
 		// Row ref2_floor: a due ref2 passes the economy gate's interval wait (the first-war-factory wait and the first-copy yield are untouched; the yield applies from the third refinery on).
