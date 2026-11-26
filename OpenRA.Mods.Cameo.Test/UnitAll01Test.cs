@@ -836,9 +836,9 @@ namespace OpenRA.Mods.Cameo.Test
 			foreach (var signature in new[] { "ActorInfo ChooseRollUnit(", "void RollPickLog(", "void RollStartLog(", "void RollEmptyLog(", "void RollCappedLog(", "int RollStrength(int profile)", "void RollExclude(" })
 				outside = outside.Replace(Body(signature), "");
 
-			// TIER-MIX-01 (b73e77aa) reads the ramp tick through the table on the ONE line of the fill that calls TechLean.Admits; P5 a2 adds the techlean.top|bank inputs to that line (R4, the admission predicate): that line is
-			// the single read allowed outside the roll methods (the pin had no allowance for it, the lean line was added after the pin).
-			outside = string.Join("\n", outside.Split('\n').Where(l => !l.Contains("TechLean.Admits(")));
+			// TIER-MIX-01 (b73e77aa) reads the ramp tick through the table on the ONE line of the fill that decides the admission; P5 a2 adds the techlean.top|bank inputs and P5 (b) the techlean.start input to that line (R4, the
+			// admission predicate; since a4 it is the UnitPickArbiter.Admit call): that line is the single read allowed outside the roll methods (the pin had no allowance for it, the lean line was added after the pin).
+			outside = string.Join("\n", outside.Split('\n').Where(l => !l.Contains("UnitPickArbiter.Admit(")));
 
 			foreach (var term in new[] { "RollParameters.", "rollAvailableSince[", "rollAvailableSince.", "rollPickIds.", "rollPickSeq", "rollExcluded.", "UnitRoll.Quantize", "UnitRoll.FirstBoost" })
 			{

@@ -18,7 +18,7 @@ namespace OpenRA.Mods.CA.Traits
 	/// UNIT-ALL-01 parameter table (user 11-25, LEARN-MULT-01 later): every number the unit roll multiplies lives here and nowhere else: the base fraction of each listed type, the personality
 	/// bias (early and late), the ramp, the mode-profile strengths (the demand multipliers) and the floor. The yaml fills it; a learner reads any value and overrides it per player (one
 	/// table per module instance) under a stable key, without touching the yaml or the roll. Keys: fraction.UNIT, bias.PERSONALITY.ROLE, biaslate.PERSONALITY.ROLE,
-	/// strength.PROFILE, floor, ramp, firstboost|firstramp|firstcap, corefocus.share|count|max|bank (R2 only), techlean.top|bank (R4 admission only). An override replaces the yaml value; clearing it restores the yaml value.
+	/// strength.PROFILE, floor, ramp, firstboost|firstramp|firstcap, corefocus.share|count|max|bank (R2 only), techlean.top|bank|start (R4 admission only; start = the ramp unless overridden). An override replaces the yaml value; clearing it restores the yaml value.
 	/// </summary>
 	public sealed class UnitRollTable
 	{
@@ -36,6 +36,10 @@ namespace OpenRA.Mods.CA.Traits
 		public const string CoreBankKey = "corefocus.bank";
 		public const string TechTopKey = "techlean.top";
 		public const string TechBankKey = "techlean.bank";
+
+		// CONSOLIDATE-03 P5 (b) (addendum 3, row ub_ramp_split as a table key, no switch): the tick from which the tech lean may admit a late pick, apart from the ramp of the personality bias. With no override it IS the ramp
+		// (the same number, read through the property so a ramp override still moves it: behaviour equal to before the split); a learner (LEARN-MULT-01, DEV only) may set it by itself. Read by R4 only.
+		public const string TechStartKey = "techlean.start";
 
 		/// <summary>Every value, yaml or learned override, is clamped to [0, MaxValue]: the table never holds a negative or runaway number.</summary>
 		public const int MaxValue = 1_000_000;
@@ -124,6 +128,9 @@ namespace OpenRA.Mods.CA.Traits
 		public int TechLeanTopPct => Clamp(overrides.TryGetValue(TechTopKey, out var v) ? v : techTop);
 
 		public int TechLeanBankPct => Clamp(overrides.TryGetValue(TechBankKey, out var v) ? v : techBank);
+
+		/// <summary>The tick from which the tech lean admits (R4 only). Prior = the ramp tick (the same number); a learner override of techlean.start separates the two.</summary>
+		public int TechLeanStartTicks => Clamp(overrides.TryGetValue(TechStartKey, out var v) ? v : RampTicks);
 
 		/// <summary>Percent bias of a role for a personality at a tick (same rule as UnitRoll.RoleBiasPct); 100 = neutral.</summary>
 		public int BiasPct(string personality, string role, int tick)

@@ -2080,7 +2080,7 @@ namespace OpenRA.Mods.CA.Traits
 					// depth-cash gates below are evaluated at cost 0 for it, so a bank of 0 or the tier reserve can still hold it; Everything else keeps the full gates.
 					// TIER-MIX-01 (row ub_tech_lean): a late pick from the top of this queue's pool, on an empty queue with a share of its price already in the bank, is pay-as-you-go too; the order
 					// still reserves its full price below, so the rest of the pass sees the whole commitment.
-					var admission = UnitPickArbiter.Admit(roll, rollFirst, batch.BankLeft, fullCost, TechLeanOn, rollPoolMaxCost, held, world.WorldTick, RollParameters.RampTicks, RollParameters.TechLeanTopPct, RollParameters.TechLeanBankPct);
+					var admission = UnitPickArbiter.Admit(roll, rollFirst, batch.BankLeft, fullCost, TechLeanOn, rollPoolMaxCost, held, world.WorldTick, RollParameters.TechLeanStartTicks, RollParameters.TechLeanTopPct, RollParameters.TechLeanBankPct);
 					var paygo = admission.Paygo;
 					var leaned = admission.Leaned;
 					var cost = admission.GateCost;

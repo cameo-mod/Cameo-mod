@@ -144,7 +144,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(arbiter.IndexOf(Leaned, StringComparison.Ordinal), Is.GreaterThan(arbiter.IndexOf(Paygo, StringComparison.Ordinal)), "the first-build test comes before the lean");
 
 			// The module hands it the same inputs, once, before the afford gate reads the cost.
-			const string Call = "var admission = UnitPickArbiter.Admit(roll, rollFirst, batch.BankLeft, fullCost, TechLeanOn, rollPoolMaxCost, held, world.WorldTick, RollParameters.RampTicks, RollParameters.TechLeanTopPct, RollParameters.TechLeanBankPct);\n\t\t\t\t\tvar paygo = admission.Paygo;\n\t\t\t\t\tvar leaned = admission.Leaned;\n\t\t\t\t\tvar cost = admission.GateCost;";
+			const string Call = "var admission = UnitPickArbiter.Admit(roll, rollFirst, batch.BankLeft, fullCost, TechLeanOn, rollPoolMaxCost, held, world.WorldTick, RollParameters.TechLeanStartTicks, RollParameters.TechLeanTopPct, RollParameters.TechLeanBankPct);\n\t\t\t\t\tvar paygo = admission.Paygo;\n\t\t\t\t\tvar leaned = admission.Leaned;\n\t\t\t\t\tvar cost = admission.GateCost;";
 			Assert.That(unit, Does.Contain(Call));
 			Assert.That(unit.Split(new[] { "UnitPickArbiter.Admit(" }, StringSplitOptions.None).Length - 1, Is.EqualTo(1), "one admission call site");
 

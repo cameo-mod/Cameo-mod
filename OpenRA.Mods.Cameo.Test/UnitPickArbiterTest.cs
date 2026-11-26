@@ -351,6 +351,29 @@ namespace OpenRA.Mods.Cameo.Test
 				Is.EqualTo(("corefocus.share", "corefocus.count", "corefocus.max", "corefocus.bank", "techlean.top", "techlean.bank")), "the key names are the learner's stable contract (addendum 1)");
 		}
 
+		// P5 (b), addendum 3 item 3 (row ub_ramp_split as a table key, no switch): the lean's late start is its own key with the ramp as its prior.
+		[Test]
+		public void TheTechLeanStartIsTheRampUnlessALearnerSetsItAndTheBiasRampIsUntouched()
+		{
+			Assert.That(UnitRollTable.TechStartKey, Is.EqualTo("techlean.start"), "the key name is the learner's stable contract");
+			var bias = new Dictionary<string, int> { ["p.role"] = 100 };
+			var late = new Dictionary<string, int> { ["p.role"] = 200 };
+			var t = new UnitRollTable(null, bias, late, null, 5, 1000, 8, 3000, 64, 50, 3, 800, 30, 50, 30);
+
+			Assert.That(t.TechLeanStartTicks, Is.EqualTo(1000), "prior = the ramp: the same number, so behaviour is equal to before the split");
+			t.Override(UnitRollTable.RampKey, 4000);
+			Assert.That(t.TechLeanStartTicks, Is.EqualTo(4000), "a ramp override still moves the lean start, exactly as the single shared number did");
+
+			t.Override(UnitRollTable.TechStartKey, 2500);
+			Assert.That((t.TechLeanStartTicks, t.RampTicks), Is.EqualTo((2500, 4000)), "a learner can now separate the two");
+			Assert.That(t.BiasPct("p", "role", 2000), Is.EqualTo(150), "the personality bias ramp reads the ramp only (100 -> 200 over 4000 ticks, halfway at 2000)");
+
+			t.ClearOverride(UnitRollTable.TechStartKey);
+			Assert.That(t.TechLeanStartTicks, Is.EqualTo(4000), "clearing restores the prior");
+			t.Override(UnitRollTable.TechStartKey, -4);
+			Assert.That(t.TechLeanStartTicks, Is.EqualTo(0), "clamped like every key");
+		}
+
 		[Test]
 		public void CoreFocusIsReadByTheWeightsStepAndTechLeanByTheAdmissionStepOnly()
 		{
@@ -370,7 +393,9 @@ namespace OpenRA.Mods.Cameo.Test
 			// R4: the lean predicate reads techlean.* through the table, on the admission line only
 			Assert.That(Count(u, "RollParameters.TechLeanTopPct"), Is.EqualTo(1));
 			Assert.That(Count(u, "RollParameters.TechLeanBankPct"), Is.EqualTo(1));
-			Assert.That(u, Does.Contain("TechLean.Admits(fullCost, rollPoolMaxCost, held, world.WorldTick, RollParameters.RampTicks, batch.BankLeft, RollParameters.TechLeanTopPct, RollParameters.TechLeanBankPct)"));
+			Assert.That(Count(u, "RollParameters.TechLeanStartTicks"), Is.EqualTo(1), "techlean.start is read on the admission line only (the ramp of the personality bias stays in the table's BiasPct)");
+			Assert.That(u, Does.Contain("UnitPickArbiter.Admit(roll, rollFirst, batch.BankLeft, fullCost, TechLeanOn, rollPoolMaxCost, held, world.WorldTick, RollParameters.TechLeanStartTicks, RollParameters.TechLeanTopPct, RollParameters.TechLeanBankPct)"));
+			Assert.That(u, Does.Not.Contain("RollParameters.RampTicks"), "the lean no longer reads the ramp directly");
 
 			// the row switches stay on the yaml (a learned 0 cannot switch the row off), and no other read of the six Info values is left
 			Assert.That(core, Does.Contain("bool CoreFocusOn => UnitRollOn && Info.CoreFocusSharePct > 0"));
