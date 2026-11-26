@@ -825,6 +825,10 @@ namespace OpenRA.Mods.Cameo.Test
 			foreach (var signature in new[] { "ActorInfo ChooseRollUnit(", "void RollPickLog(", "void RollStartLog(", "void RollEmptyLog(", "void RollCappedLog(", "int RollStrength(int profile)", "void RollExclude(" })
 				outside = outside.Replace(Body(signature), "");
 
+			// TIER-MIX-01 (b73e77aa) reads the ramp tick through the table on the ONE line of the fill that calls TechLean.Admits; P5 a2 adds the techlean.top|bank inputs to that line (R4, the admission predicate): that line is
+			// the single read allowed outside the roll methods (the pin had no allowance for it, the lean line was added after the pin).
+			outside = string.Join("\n", outside.Split('\n').Where(l => !l.Contains("TechLean.Admits(")));
+
 			foreach (var term in new[] { "RollParameters.", "rollAvailableSince[", "rollAvailableSince.", "rollPickIds.", "rollPickSeq", "rollExcluded.", "UnitRoll.Quantize", "UnitRoll.FirstBoost" })
 			{
 				// declarations and the property are the only other mentions
@@ -967,7 +971,8 @@ namespace OpenRA.Mods.Cameo.Test
 
 			Assert.That(u, Does.Contain("RollParameters.Strength(UnitRoll.ProfileNames[profile])"));
 			// V08E re-pin: 686ca394 added the FirstBoost arguments, still all read from Info
-			Assert.That(u, Does.Contain("new UnitRollTable(Info.UnitsToBuild, Info.UnitRollBias, Info.UnitRollBiasLate, Info.UnitRollProfiles, Info.UnitRollFloorPct, Info.UnitRollRampTicks,\n\t\t\t\tInfo.UnitRollFirstBoost, Info.UnitRollFirstRampTicks, Info.UnitRollFirstCap)"));
+			Assert.That(u, Does.Contain("new UnitRollTable(Info.UnitsToBuild, Info.UnitRollBias, Info.UnitRollBiasLate, Info.UnitRollProfiles, Info.UnitRollFloorPct, Info.UnitRollRampTicks,\n\t\t\t\tInfo.UnitRollFirstBoost, Info.UnitRollFirstRampTicks, Info.UnitRollFirstCap,
+				Info.CoreFocusSharePct, Info.CoreFocusCount, Info.CoreFocusMaxPct, Info.CoreFocusBankPct, Info.TechLeanTopPct, Info.TechLeanBankPct)"));
 		}
 
 		// Opus/Haiku 11-25: DEV rows that show whether every available upgrade / promotion / research / add-on gets researched.

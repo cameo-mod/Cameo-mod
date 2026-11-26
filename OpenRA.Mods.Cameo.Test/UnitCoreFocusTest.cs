@@ -221,9 +221,9 @@ namespace OpenRA.Mods.Cameo.Test
 			var part = RepoFile(Bots + "UnitBuilderBotModuleCA.CoreFocus.cs");
 			Assert.That(part, Does.Contain("settled[i] = rollOrdered.Contains(pool[i].Name);"));
 			Assert.That(part, Does.Contain("price[i] = queue.GetProductionCost(pool[i]);"));
-			Assert.That(part, Does.Contain("CoreFocus.Affordable(price[i], rollBankLeft, Info.CoreFocusBankPct)"));
-			Assert.That(part, Does.Contain("CoreFocus.Core(price, eligible, Info.CoreFocusCount)"));
-			Assert.That(part, Does.Contain("CoreFocus.MultiplierPct(weights, settled, core, Info.CoreFocusSharePct, Info.CoreFocusMaxPct)"));
+			Assert.That(part, Does.Contain("CoreFocus.Affordable(price[i], rollBankLeft, RollParameters.CoreFocusBankPct)"));
+			Assert.That(part, Does.Contain("CoreFocus.Core(price, eligible, RollParameters.CoreFocusCount)"));
+			Assert.That(part, Does.Contain("CoreFocus.MultiplierPct(weights, settled, core, RollParameters.CoreFocusSharePct, RollParameters.CoreFocusMaxPct)"));
 			Assert.That(part, Does.Contain("CoreFocus.Apply(weights, core, multiplier)"));
 		}
 
@@ -243,7 +243,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(part, Does.Contain(",ub_core_churn,,{queueType},{state.Changes};{now - state.Start};core={key}"));
 			Assert.That(part, Does.Contain("if (now - state.Start >= 1000)"), "one row per queue type per 1000 ticks");
 			Assert.That(part, Does.Contain("names.Sort(StringComparer.Ordinal);"), "a set, not an order: a price tie that reorders is no change");
-			Assert.That(part, Does.Contain("var picked = CoreFocus.Core(price, eligible, Info.CoreFocusCount);\n\t\t\tCoreFocusChurn(queue.Info.Type, pool, picked);\n\t\t\tif (picked.Count == 0)"), "counted before the empty-set return");
+			Assert.That(part, Does.Contain("var picked = CoreFocus.Core(price, eligible, RollParameters.CoreFocusCount);\n\t\t\tCoreFocusChurn(queue.Info.Type, pool, picked);\n\t\t\tif (picked.Count == 0)"), "counted before the empty-set return");
 		}
 	}
 }

@@ -40,10 +40,10 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				price[i] = queue.GetProductionCost(pool[i]);
 				settled[i] = rollOrdered.Contains(pool[i].Name);
-				eligible[i] = settled[i] && CoreFocus.Affordable(price[i], rollBankLeft, Info.CoreFocusBankPct);
+				eligible[i] = settled[i] && CoreFocus.Affordable(price[i], rollBankLeft, RollParameters.CoreFocusBankPct);
 			}
 
-			var picked = CoreFocus.Core(price, eligible, Info.CoreFocusCount);
+			var picked = CoreFocus.Core(price, eligible, RollParameters.CoreFocusCount);
 			CoreFocusChurn(queue.Info.Type, pool, picked);
 			if (picked.Count == 0)
 				return weights;
@@ -52,7 +52,7 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var i in picked)
 				core[i] = true;
 
-			var multiplier = CoreFocus.MultiplierPct(weights, settled, core, Info.CoreFocusSharePct, Info.CoreFocusMaxPct);
+			var multiplier = CoreFocus.MultiplierPct(weights, settled, core, RollParameters.CoreFocusSharePct, RollParameters.CoreFocusMaxPct);
 			if (multiplier <= 100)
 				return weights;
 

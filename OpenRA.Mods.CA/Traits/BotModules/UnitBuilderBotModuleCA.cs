@@ -664,7 +664,8 @@ namespace OpenRA.Mods.CA.Traits
 		// UNIT-ALL-01 parameter table: the one place the roll reads its numbers from (fractions, personality bias, ramp, profile strengths, floor); a learner overrides per player through it (LEARN-MULT-01).
 		UnitRollTable rollTable;
 		public UnitRollTable RollParameters => rollTable ??= new UnitRollTable(Info.UnitsToBuild, Info.UnitRollBias, Info.UnitRollBiasLate, Info.UnitRollProfiles, Info.UnitRollFloorPct, Info.UnitRollRampTicks,
-				Info.UnitRollFirstBoost, Info.UnitRollFirstRampTicks, Info.UnitRollFirstCap);
+				Info.UnitRollFirstBoost, Info.UnitRollFirstRampTicks, Info.UnitRollFirstCap,
+				Info.CoreFocusSharePct, Info.CoreFocusCount, Info.CoreFocusMaxPct, Info.CoreFocusBankPct, Info.TechLeanTopPct, Info.TechLeanBankPct);
 		string rollPersonality = "";
 		bool rollFirst;
 
@@ -2076,7 +2077,7 @@ namespace OpenRA.Mods.CA.Traits
 
 					// TIER-MIX-01 (row ub_tech_lean): a late pick from the top of this queue's pool, on an empty queue with a share of its price already in the bank, is pay-as-you-go too; the order
 					// still reserves its full price below, so the rest of the pass sees the whole commitment.
-					var leaned = roll && !paygo && TechLeanOn && TechLean.Admits(fullCost, rollPoolMaxCost, held, world.WorldTick, RollParameters.RampTicks, batch.BankLeft, Info.TechLeanTopPct, Info.TechLeanBankPct);
+					var leaned = roll && !paygo && TechLeanOn && TechLean.Admits(fullCost, rollPoolMaxCost, held, world.WorldTick, RollParameters.RampTicks, batch.BankLeft, RollParameters.TechLeanTopPct, RollParameters.TechLeanBankPct);
 					if (leaned)
 						cost = 0;
 

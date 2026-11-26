@@ -158,6 +158,76 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(u.IndexOf("PickTraceFillEnd(queue);", StringComparison.Ordinal), Is.LessThan(u.IndexOf("INFANTRY-REJECT-LOG-01 (DEV only): this queue's pass ended", StringComparison.Ordinal)));
 		}
 
+		// P5 a2 (addendum 1, user ruling 11-26): the tech-up demand multipliers are named table inputs; the prior = the Hans / yaml values, so phase (a) equality holds (N2: priors only, map and stage factor 1).
+		[Test]
+		public void TheCoreFocusAndTechLeanKeysDefaultToTheInfoDefaultsAndTheYamlValuesArePassedThrough()
+		{
+			// no arguments = the Info defaults (CoreFocusSharePct 0, Count 3, MaxPct 800, BankPct 30; TechLeanTopPct 0, BankPct 30)
+			var t = new UnitRollTable(null, null, null, null, 5, 0);
+			Assert.That((t.CoreFocusSharePct, t.CoreFocusCount, t.CoreFocusMaxPct, t.CoreFocusBankPct, t.TechLeanTopPct, t.TechLeanBankPct), Is.EqualTo((0, 3, 800, 30, 0, 30)));
+
+			// the shipped Hans values: core share 50, count 3, cap x8, bank 30; lean 50 / 30
+			var hans = new UnitRollTable(null, null, null, null, 5, 0, 8, 3000, 64, 50, 3, 800, 30, 50, 30);
+			Assert.That((hans.CoreFocusSharePct, hans.CoreFocusCount, hans.CoreFocusMaxPct, hans.CoreFocusBankPct, hans.TechLeanTopPct, hans.TechLeanBankPct), Is.EqualTo((50, 3, 800, 30, 50, 30)));
+			Assert.That(hans.FirstBoost, Is.EqualTo(8), "the older arguments keep their meaning");
+
+			var yaml = RepoFile("mods/cameo/ai/ai.yaml");
+			foreach (var line in new[] { "\t\tCoreFocusSharePct: 50\n", "\t\tCoreFocusCount: 3\n", "\t\tCoreFocusMaxPct: 800\n", "\t\tCoreFocusBankPct: 30\n", "\t\tTechLeanTopPct: 50\n", "\t\tTechLeanBankPct: 30\n" })
+				Assert.That(yaml, Does.Contain(line), "the prior values this test pins are the @generic yaml values: " + line.Trim());
+		}
+
+		[Test]
+		public void ALearnerOverrideReplacesAPriorAndClearingRestoresIt()
+		{
+			var t = new UnitRollTable(null, null, null, null, 5, 0, 8, 3000, 64, 50, 3, 800, 30, 50, 30);
+			foreach (var (key, prior) in new[] { (UnitRollTable.CoreShareKey, 50), (UnitRollTable.CoreCountKey, 3), (UnitRollTable.CoreMaxKey, 800), (UnitRollTable.CoreBankKey, 30), (UnitRollTable.TechTopKey, 50), (UnitRollTable.TechBankKey, 30) })
+			{
+				t.Override(key, prior + 7);
+				Assert.That(t.Overrides[key], Is.EqualTo(prior + 7), key);
+				t.ClearOverride(key);
+				Assert.That(t.Overrides.ContainsKey(key), Is.False, key);
+			}
+
+			t.Override(UnitRollTable.CoreShareKey, -9);
+			Assert.That(t.CoreFocusSharePct, Is.EqualTo(0), "a bad learned value is clamped like every other key");
+			t.Override(UnitRollTable.TechTopKey, 70);
+			Assert.That(t.TechLeanTopPct, Is.EqualTo(70));
+			t.ClearOverrides();
+			Assert.That((t.CoreFocusSharePct, t.TechLeanTopPct), Is.EqualTo((50, 50)));
+			Assert.That((UnitRollTable.CoreShareKey, UnitRollTable.CoreCountKey, UnitRollTable.CoreMaxKey, UnitRollTable.CoreBankKey, UnitRollTable.TechTopKey, UnitRollTable.TechBankKey),
+				Is.EqualTo(("corefocus.share", "corefocus.count", "corefocus.max", "corefocus.bank", "techlean.top", "techlean.bank")), "the key names are the learner's stable contract (addendum 1)");
+		}
+
+		[Test]
+		public void CoreFocusIsReadByTheWeightsStepAndTechLeanByTheAdmissionStepOnly()
+		{
+			var u = RepoFile(Bots + "UnitBuilderBotModuleCA.cs");
+			var core = RepoFile(Bots + "UnitBuilderBotModuleCA.CoreFocus.cs");
+
+			// the module builds the table from the Info values (the prior)
+			Assert.That(u, Does.Contain("Info.CoreFocusSharePct, Info.CoreFocusCount, Info.CoreFocusMaxPct, Info.CoreFocusBankPct, Info.TechLeanTopPct, Info.TechLeanBankPct);"));
+
+			// R2: the core lift reads corefocus.* through the table, in the CoreFocus partial only
+			Assert.That(core, Does.Contain("RollParameters.CoreFocusBankPct"));
+			Assert.That(core, Does.Contain("RollParameters.CoreFocusCount"));
+			Assert.That(core, Does.Contain("RollParameters.CoreFocusSharePct, RollParameters.CoreFocusMaxPct"));
+			Assert.That(core, Does.Not.Contain("RollParameters.TechLean"), "N1: techlean.* is not a weight input");
+			Assert.That(u, Does.Not.Contain("RollParameters.CoreFocus"), "N1: corefocus.* is read by the core lift only");
+
+			// R4: the lean predicate reads techlean.* through the table, on the admission line only
+			Assert.That(Count(u, "RollParameters.TechLeanTopPct"), Is.EqualTo(1));
+			Assert.That(Count(u, "RollParameters.TechLeanBankPct"), Is.EqualTo(1));
+			Assert.That(u, Does.Contain("TechLean.Admits(fullCost, rollPoolMaxCost, held, world.WorldTick, RollParameters.RampTicks, batch.BankLeft, RollParameters.TechLeanTopPct, RollParameters.TechLeanBankPct)"));
+
+			// the row switches stay on the yaml (a learned 0 cannot switch the row off), and no other read of the six Info values is left
+			Assert.That(core, Does.Contain("bool CoreFocusOn => UnitRollOn && Info.CoreFocusSharePct > 0"));
+			Assert.That(u, Does.Contain("bool TechLeanOn => UnitRollOn && Info.TechLeanTopPct > 0"));
+			Assert.That(core, Does.Not.Contain("Info.CoreFocusCount"));
+			Assert.That(core, Does.Not.Contain("Info.CoreFocusMaxPct"));
+			Assert.That(core, Does.Not.Contain("Info.CoreFocusBankPct"));
+			Assert.That(u, Does.Not.Contain("Info.TechLeanBankPct,"), "only the table construction passes it on, as the last argument");
+		}
+
 		[Test]
 		public void TheSwitchIsOffInCodeAndOnInTheGenericBlock()
 		{

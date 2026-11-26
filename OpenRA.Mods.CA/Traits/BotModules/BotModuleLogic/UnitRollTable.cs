@@ -18,7 +18,7 @@ namespace OpenRA.Mods.CA.Traits
 	/// UNIT-ALL-01 parameter table (user 11-25, LEARN-MULT-01 later): every number the unit roll multiplies lives here and nowhere else: the base fraction of each listed type, the personality
 	/// bias (early and late), the ramp, the mode-profile strengths (the demand multipliers) and the floor. The yaml fills it; a learner reads any value and overrides it per player (one
 	/// table per module instance) under a stable key, without touching the yaml or the roll. Keys: fraction.UNIT, bias.PERSONALITY.ROLE, biaslate.PERSONALITY.ROLE,
-	/// strength.PROFILE, floor, ramp. An override replaces the yaml value; clearing it restores the yaml value.
+	/// strength.PROFILE, floor, ramp, firstboost|firstramp|firstcap, corefocus.share|count|max|bank (R2 only), techlean.top|bank (R4 admission only). An override replaces the yaml value; clearing it restores the yaml value.
 	/// </summary>
 	public sealed class UnitRollTable
 	{
@@ -27,6 +27,15 @@ namespace OpenRA.Mods.CA.Traits
 		public const string FirstBoostKey = "firstboost";
 		public const string FirstRampKey = "firstramp";
 		public const string FirstCapKey = "firstcap";
+
+		// CONSOLIDATE-03 P5 a2 (addendum 1, user ruling 11-26): the tech-up demand multipliers become named inputs of the table. corefocus.* is read by the roll's weights step (R2, the core lift) ONLY;
+		// techlean.* by the admission step (R4, the lean predicate) ONLY. The values are the yaml (Hans) values = the PRIOR; a learner override (LEARN-MULT-01, DEV only) replaces them; a release reads the accepted snapshot.
+		public const string CoreShareKey = "corefocus.share";
+		public const string CoreCountKey = "corefocus.count";
+		public const string CoreMaxKey = "corefocus.max";
+		public const string CoreBankKey = "corefocus.bank";
+		public const string TechTopKey = "techlean.top";
+		public const string TechBankKey = "techlean.bank";
 
 		/// <summary>Every value, yaml or learned override, is clamped to [0, MaxValue]: the table never holds a negative or runaway number.</summary>
 		public const int MaxValue = 1_000_000;
@@ -40,11 +49,24 @@ namespace OpenRA.Mods.CA.Traits
 		readonly int firstBoost;
 		readonly int firstRampTicks;
 		readonly int firstCap;
+		readonly int coreShare;
+		readonly int coreCount;
+		readonly int coreMax;
+		readonly int coreBank;
+		readonly int techTop;
+		readonly int techBank;
 		readonly Dictionary<string, int> overrides = new(StringComparer.Ordinal);
 
 		public UnitRollTable(IReadOnlyDictionary<string, int> fractions, IReadOnlyDictionary<string, int> bias, IReadOnlyDictionary<string, int> biasLate,
-			IReadOnlyDictionary<string, int> strengths, int floorPct, int rampTicks, int firstBoost = 8, int firstRampTicks = 3000, int firstCap = 64)
+			IReadOnlyDictionary<string, int> strengths, int floorPct, int rampTicks, int firstBoost = 8, int firstRampTicks = 3000, int firstCap = 64,
+			int coreShare = 0, int coreCount = 3, int coreMax = 800, int coreBank = 30, int techTop = 0, int techBank = 30)
 		{
+			this.coreShare = coreShare;
+			this.coreCount = coreCount;
+			this.coreMax = coreMax;
+			this.coreBank = coreBank;
+			this.techTop = techTop;
+			this.techBank = techBank;
 			this.fractions = fractions;
 			this.bias = bias;
 			this.biasLate = biasLate;
@@ -88,6 +110,20 @@ namespace OpenRA.Mods.CA.Traits
 		public int FirstRampTicks => Clamp(overrides.TryGetValue(FirstRampKey, out var v) ? v : firstRampTicks);
 
 		public int FirstCap => Clamp(overrides.TryGetValue(FirstCapKey, out var v) ? v : firstCap);
+
+		/// <summary>The core lift's inputs (R2 only): the target share (percent of the weight of the types issued once), how many types form the core, the multiplier cap (percent), the bank share the core must be affordable with. Prior = the yaml values.</summary>
+		public int CoreFocusSharePct => Clamp(overrides.TryGetValue(CoreShareKey, out var v) ? v : coreShare);
+
+		public int CoreFocusCount => Clamp(overrides.TryGetValue(CoreCountKey, out var v) ? v : coreCount);
+
+		public int CoreFocusMaxPct => Clamp(overrides.TryGetValue(CoreMaxKey, out var v) ? v : coreMax);
+
+		public int CoreFocusBankPct => Clamp(overrides.TryGetValue(CoreBankKey, out var v) ? v : coreBank);
+
+		/// <summary>The tech lean's inputs (R4 only, the admission predicate): the top share of the pool's dearest price a pick must reach, and the bank share it must be covered by. Prior = the yaml values.</summary>
+		public int TechLeanTopPct => Clamp(overrides.TryGetValue(TechTopKey, out var v) ? v : techTop);
+
+		public int TechLeanBankPct => Clamp(overrides.TryGetValue(TechBankKey, out var v) ? v : techBank);
 
 		/// <summary>Percent bias of a role for a personality at a tick (same rule as UnitRoll.RoleBiasPct); 100 = neutral.</summary>
 		public int BiasPct(string personality, string role, int tick)
