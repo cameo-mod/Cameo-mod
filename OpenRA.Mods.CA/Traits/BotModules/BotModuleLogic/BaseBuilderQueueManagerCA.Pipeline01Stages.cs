@@ -281,34 +281,10 @@ namespace OpenRA.Mods.CA.Traits
 				RefineryHeldObserved(RefineryHoldGate(buildable)); // BUILD-ALL-B, DEV only
 		}
 
-		// BUILD-ALL-B, DEV only (its one caller, RefineryHeldObserved, is compiled out of a release build together with this argument): the first gate of
-		// ChooseWantedRefinery that holds, re-asked with the same queries in the same order. The economy gate is not run again (it moves clocks); its
-		// verdict of the call just made is read instead.
-		string RefineryHoldGate(List<ActorInfo> buildable)
-		{
-			if (baseBuilder.HasAdequateRefineryCount())
-				return "adequate";
-
-			if (SafetyOn && SafetyAllOn && baseBuilder.ExpansionRefineryBlockedByAllUnsafe())
-				return "unsafe_all";
-
-			if (SafetyOn && !SafetyAllOn)
-			{
-				var wantedBy = baseBuilder.ExpansionWantsRefinery();
-				var wantedField = wantedBy?.RefineryClaimTarget ?? wantedBy?.ExpansionTarget;
-				if (wantedField != null && !baseBuilder.ExpansionRefinerySafe(wantedField.Value))
-					return "unsafe_field";
-			}
-
-			var refinery = GetProducibleBuilding(baseBuilder.Info.RefineryTypes, buildable);
-			if (refinery == null)
-				return "not_buildable";
-
-			if (baseBuilder.HasMaxRefineriesFor(refinery))
-				return "max_refineries";
-
-			return RefineryEconomyGateOn ? "economy_" + lastRefineryEconomyVerdict : "power";
-		}
+		// BUILD-ALL-B, DEV only (its one caller, RefineryHeldObserved, is compiled out of a release build together with this argument): the gate of the ChooseWantedRefinery call just made
+		// (CONSOLIDATE-03 P3: recorded by that call, no longer a second copy of the chain). The economy verdict of that call is read from lastRefineryEconomyVerdict.
+		string RefineryHoldGate(List<ActorInfo> buildable) =>
+			RefineryWant.Label(lastRefineryGate, RefineryEconomyGateOn, lastRefineryEconomyVerdict.ToString());
 
 		// ref_s2_hold_log (REF-GATE-V08F, Opus 11-25, REF_PEAK_RCA_01): the S2 zone-demand branch asked for the refinery and got none; record the gate that held it,
 		// as a bb_refinery_held row (the DEV writer dedupes per seat on a gate change or 750 ticks, so S2 and S7 asking in the same pass with the same gate write one row;
