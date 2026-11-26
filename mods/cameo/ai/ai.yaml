@@ -5940,8 +5940,17 @@ Player:
 		RequiresCondition: genericbot
 		ValidTransportOwner: AlliedBot
 		ScanTick: 799
+	# FOG-MINELAYER-01 (Opus 11-26 BINDING no-omniscience): the engine module reads hidden enemies four ways, so it runs for classicbot only; genericbot gets the module that knows only what the bot observes (row fog_minelayer).
 	MinelayerBotModule:
-		RequiresCondition: genericbot || classicbot
+		RequiresCondition: classicbot
+		MinelayingActorTypes: ra1_allies_minelayer
+		IgnoredEnemyTargetTypes: Structure, Defense, Air, Obstacle
+		UseEnemyLocationTargetTypes: Structure, Defense
+		AwayFromAlliedTargetTypes: Structure, Defense
+		AwayFromEnemyTargetTypes: Structure, Defense
+	ObservedMinelayerBotModule:
+		RequiresCondition: genericbot
+		FogMinelayer: true
 		MinelayingActorTypes: ra1_allies_minelayer
 		IgnoredEnemyTargetTypes: Structure, Defense, Air, Obstacle
 		UseEnemyLocationTargetTypes: Structure, Defense
