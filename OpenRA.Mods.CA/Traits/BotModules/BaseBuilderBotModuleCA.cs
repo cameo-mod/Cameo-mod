@@ -348,6 +348,10 @@ namespace OpenRA.Mods.CA.Traits
 			"Off = S5 is unchanged. Gated by SwitchCondition; row cs_capture_unlock.")]
 		public readonly bool CsCaptureUnlock = false;
 
+		[Desc("CONSOLIDATE-03 P1 (b), row bb_s5_capture_reason: with listed-only first copies (BbBuildAllListed) S5 still offers the capture-unlock types (CsCaptureUnlock) after the",
+			"listed roll; the tech-depth fallback stays off. Off = S5 stops after the roll, so the capture rule never fires on the staged path. Needs both rows armed; gated by SwitchCondition.")]
+		public readonly bool BbS5CaptureReason = false;
+
 		[Desc("TECHCHAIN-PAYGO-01: stages S3 (the tech-centre opening role) and S5 of the staged planner admit a TechChainTypes pick when the bank is above 0 instead of at",
 			"its full cost (test A6), because the engine pays production as it goes. At most one tech-chain item in flight; every other pick keeps the full-cost test.",
 			"Needs BbPipeline01. Off = A6 unchanged. Gated by SwitchCondition; row bb_techchain_paygo.")]
@@ -932,6 +936,8 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateExtraDefence;
 		AblationLatch ablateDefenceCap;
 		AblationLatch ablateCaptureUnlock; // CAPTURE-TECH-01
+		AblationLatch ablateS5CaptureReason; // CONSOLIDATE-03 P1 (b)
+		public bool S5CaptureReasonArmed => Info.BbS5CaptureReason && CaptureUnlockArmed && BuildAllListedArmed && !ablateS5CaptureReason.Off(player, AblationIds.BbS5CaptureReason);
 		public bool CaptureUnlockArmed => Info.CsCaptureUnlock && switchesActive && !ablateCaptureUnlock.Off(player, AblationIds.CsCaptureUnlock);
 		AblationLatch ablateTechChainPaygo; // TECHCHAIN-PAYGO-01
 		public bool TechChainPaygoArmed => Info.BbTechChainPaygo && switchesActive && !ablateTechChainPaygo.Off(player, AblationIds.BbTechChainPaygo);

@@ -167,6 +167,10 @@ namespace OpenRA.Mods.CA.Traits
 		// CONSOLIDATE-03 P1 (a): whether an S5 first copy that is no listed BuildingFractions entry is a capture unlock (cs_capture_unlock) rather than a tech-depth
 		// first copy. Read only to NAME the deciding rule (BuildingPickArbiter.RuleOf), never to pick. Null = tech depth.
 		public Func<string, bool> CaptureUnlockOf;
+
+		// CONSOLIDATE-03 P1 (b), row bb_s5_capture_reason: with CoreOnceListedOnly, S5 still asks its source after the listed roll, and offers only the capture unlocks
+		// (CaptureUnlockOf). False = S5 stops after the roll, as before.
+		public bool S5CaptureReason;
 	}
 
 	/// <summary>
@@ -465,8 +469,18 @@ namespace OpenRA.Mods.CA.Traits
 				yield return c;
 
 			// BUILD-ALL-B: the build-once set is the listed fractions only (user ruling 11-25), so the fallback is not asked at all.
+			// CONSOLIDATE-03 P1 (b) (bb_s5_capture_reason): except for the capture unlocks, the next reason in order (listed > capture_unlock > tech_depth).
 			if (s.CoreOnceListedOnly)
+			{
+				if (!s.S5CaptureReason || s.CaptureUnlockOf == null)
+					yield break;
+
+				foreach (var c in SourceCandidates(s, BaseBuildStage.S5CoreOnce))
+					if (s.CaptureUnlockOf(c.Name))
+						yield return c;
+
 				yield break;
+			}
 
 			foreach (var c in SourceCandidates(s, BaseBuildStage.S5CoreOnce))
 				yield return c;

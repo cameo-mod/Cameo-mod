@@ -26,6 +26,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		PipelineFeasibility pipelineFeasibility;
 
+		// CONSOLIDATE-03 P1: the capture-unlock lookup of the snapshot, one delegate per manager (captureUnlockOffered is refilled by every S5 source walk).
+		Func<string, bool> captureUnlockOf;
+
 		// Owned (standing) count by actor name, rebuilt once per sweep (playerBuildings is re-read at every sweep start).
 		readonly Dictionary<string, int> pipelineOwned = new();
 		Actor[] pipelineOwnedFor;
@@ -125,6 +128,8 @@ namespace OpenRA.Mods.CA.Traits
 				IntervalActive = name => b.BuildingIntervals != null && b.BuildingIntervals.ContainsKey(name) && activeBuildingIntervals.ContainsKey(name),
 				CoreOnceListedOnly = baseBuilder.BuildAllListedArmed,
 				S8RejectedFallthrough = baseBuilder.S8RejectedFallthroughArmed,
+				S5CaptureReason = baseBuilder.S5CaptureReasonArmed,
+				CaptureUnlockOf = captureUnlockOf ??= name => captureUnlockOffered.Contains(name), // CONSOLIDATE-03 P1: names the S5 reason; bb_s5_capture_reason filters by it
 				S8CashHold = baseBuilder.S8CashHoldArmed,
 				S8HoldMaxTicks = b.S8HoldMaxTicks,
 				S8HoldMinBankPercent = b.S8HoldMinBankPercent,
