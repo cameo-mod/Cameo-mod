@@ -36,12 +36,22 @@ namespace OpenRA.Mods.CA.Traits
 			var price = new int[n];
 			var settled = new bool[n];
 			var eligible = new bool[n];
+			admitOneRemoved.Clear();
 			for (var i = 0; i < n; i++)
 			{
 				price[i] = queue.GetProductionCost(pool[i]);
 				settled[i] = rollOrdered.Contains(pool[i].Name);
 				eligible[i] = settled[i] && CoreFocus.Affordable(price[i], rollBankLeft, RollParameters.CoreFocusBankPct);
+
+				// P5 (b) row ub_admit_one: a type the fill's admission would refuse right now is not eligible for the core (narrows the eligible set only; the fill hands the forecast over while the row is on).
+				if (rollAdmit != null && eligible[i] && !R4Forecast(price[i]))
+				{
+					eligible[i] = false;
+					admitOneRemoved.Add(i);
+				}
 			}
+
+			AdmitOneLog(queue.Info.Type, pool, admitOneRemoved);
 
 			var picked = CoreFocus.Core(price, eligible, RollParameters.CoreFocusCount);
 			CoreFocusChurn(queue.Info.Type, pool, picked);

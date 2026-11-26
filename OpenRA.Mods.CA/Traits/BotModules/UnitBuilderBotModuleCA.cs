@@ -215,6 +215,10 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("HANS-PROFILE-01: a type is affordable for the core once the bank holds this percent of its price (the same bar as TechLeanBankPct).")]
 		public readonly int CoreFocusBankPct = 30;
 
+		[Desc("CONSOLIDATE-03 P5 (row ub_admit_one; needs the core focus): the core also reads the fill's admission forecast (paygo, tech lean, full price, then the afford, reserve and depth-cash gates), so a type the gates would refuse right now",
+			"is not lifted and then re-rolled to a cheaper unit. Off in code, on in the generic block.")]
+		public readonly bool UnitAdmitOne = false;
+
 		[Desc("UNIT-MIX-01: the queue types that make an airfield (aircraft floor); the infantry floor uses IdleQueueFloorQueues.")]
 		public readonly string[] UnitMixAircraftQueues = { "Aircraft", "RAAircraft" };
 
@@ -1936,6 +1940,7 @@ namespace OpenRA.Mods.CA.Traits
 
 					// HANS-PROFILE-01 (ub_core_focus): the bank this roll sees, for the core's affordability test (0 while the row is off).
 					rollBankLeft = CoreFocusOn ? batch.BankLeft : 0;
+					rollAdmit = AdmitOneOn ? new RollAdmitInputs(batch, held, depthQueue, unpaidQueued) : null;
 
 					// P4: below the armed-infantry floor this queue prefers the best
 					// admissible armed infantry it can serve — the normal pick only runs
