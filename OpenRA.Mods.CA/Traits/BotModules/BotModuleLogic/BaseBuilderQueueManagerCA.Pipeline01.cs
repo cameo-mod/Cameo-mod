@@ -106,7 +106,7 @@ namespace OpenRA.Mods.CA.Traits
 				WorldTick = now,
 				DefenceQueue = b.DefenseQueues.Contains(Category),
 				QueueSplit = baseBuilder.QueueSplitArmed && ThisQueueKind != QueueKind.Shared && SeparateDefenceQueue(),
-				Bank = ProdBusyCA.SweepBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep),
+				Bank = CashLedger.BuildingBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep),
 				ProductionCashReserve = botLimits != null ? botLimits.Info.ProductionCashReserve : -1,
 				TierLine = TierLine,
 				LowCashCut = EssentialsOn,
@@ -335,7 +335,8 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			var startCost = queue.GetProductionCost(start);
-			if (!BaseBuildPlanCA.Affordable(s.Bank, startCost, BaseBuildPlanCA.ReserveFor(c.Stage, s.ProductionCashReserve)))
+			// CONSOLIDATE-03 P2 (a): A6 is the cash ledger's building admission (the same test, CashLedger.AdmitBuilding).
+			if (!CashLedger.AdmitBuilding(s.Bank, startCost, CashLedger.BuildingReserve(c.Stage, s.ProductionCashReserve)).Ok)
 			{
 				// TECHCHAIN-PAYGO-01 (bb_techchain_paygo): an S3/S5 tech-chain start rides with any bank above 0 while no other tech-chain item is in flight.
 				// Off, or any other start: the full-cost test as before. A held tech-chain start writes the DEV row pipeline_a6_hold.
