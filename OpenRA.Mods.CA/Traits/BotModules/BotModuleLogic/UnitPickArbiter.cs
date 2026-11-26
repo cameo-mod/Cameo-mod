@@ -39,7 +39,7 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>One draw of the roll (Addendum 2 gaps A and B: the quantized integer bins, the hidden state the pick reads or writes).</summary>
 		public readonly record struct DrawTrace(
 			int Ordinal, int Fill, int Attempt, uint Producer, string Queue, int PoolCount, string Bins, long Bound,
-			int Raw, int RngTotal, string Pick, bool First, int PoolMax, int BankLeft, string Excluded, string Roles, int AvailCount, string AvailDigest, string Rule);
+			int Raw, int RngTotal, string Pick, bool First, int PoolMaxBefore, int PoolMax, int BankLeft, string Excluded, string Roles, int AvailCount, string AvailDigest, string AvailNew, string Rule);
 
 		/// <summary>One empty roll: no candidate left after the legal set (design 02 R1).</summary>
 		public readonly record struct EmptyTrace(int Fill, int Attempt, uint Producer, string Queue, string Excluded, string Roles, int RngTotal, string Rule);
@@ -54,7 +54,7 @@ namespace OpenRA.Mods.CA.Traits
 			name != null && headroom.TryGetValue(name, out var h) ? h.ToString(CultureInfo.InvariantCulture) : "na";
 
 		/// <summary>One fill (a queue pass) ended: the RNG state, the order count.</summary>
-		public readonly record struct FillEndTrace(int Fill, uint Producer, string Queue, int Orders, int RngTotal, int RngLast);
+		public readonly record struct FillEndTrace(int Fill, uint Producer, int Orders, int RngTotal, int RngLast);
 
 		/// <summary>The ordered (name, integer unit) list the draw used, "name:units|name:units"; lossless (Addendum 2 gap B).</summary>
 		public static string Bins(IReadOnlyList<string> names, IReadOnlyList<int> units)
@@ -92,7 +92,7 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		public static string DrawDetail(in DrawTrace d) => string.Create(CultureInfo.InvariantCulture,
-			$"ord={d.Ordinal};fill={d.Fill};att={d.Attempt};prod={d.Producer};n={d.PoolCount};bins={d.Bins};bound={d.Bound};raw={d.Raw};tot={d.RngTotal};first={(d.First ? 1 : 0)};pm={d.PoolMax};bank={d.BankLeft};excl={d.Excluded};roles={d.Roles};avail={d.AvailCount}/{d.AvailDigest};rule={d.Rule}");
+			$"ord={d.Ordinal};fill={d.Fill};att={d.Attempt};prod={d.Producer};n={d.PoolCount};bins={d.Bins};bound={d.Bound};raw={d.Raw};tot={d.RngTotal};first={(d.First ? 1 : 0)};pmb={d.PoolMaxBefore};pm={d.PoolMax};bank={d.BankLeft};excl={d.Excluded};roles={d.Roles};avail={d.AvailCount}/{d.AvailDigest};availnew={d.AvailNew};rule={d.Rule}");
 
 		public static string EmptyDetail(in EmptyTrace e) => string.Create(CultureInfo.InvariantCulture,
 			$"fill={e.Fill};att={e.Attempt};prod={e.Producer};excl={e.Excluded};roles={e.Roles};tot={e.RngTotal};rule={e.Rule}");

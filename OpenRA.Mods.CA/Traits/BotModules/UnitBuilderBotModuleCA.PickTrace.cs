@@ -17,10 +17,11 @@ using OpenRA.Support;
 
 namespace OpenRA.Mods.CA.Traits
 {
-	// CONSOLIDATE-03 P5 step (a) (design 02 4c19e5f9 + addendum 2): the DEV equivalence trace of the unit pick, unit_pick_trace.csv (own file, no header, all seats append; compiled out of release: [Conditional] drops the calls
-	// and their arguments). Record only: no behaviour, no new random draw (the RNG's own draw counter and last raw value are READ, never advanced), nothing here is read by a decision. Rows, columns tick,seat,event,type,queue,detail:
+	// CONSOLIDATE-03 P5 step (a) (design 02 4c19e5f9 + addendum 2): the DEV equivalence trace of the unit pick, unit_pick_trace.csv (own file, no header, all seats append; the CALLS are compiled out of release: [Conditional] drops
+	// them and their arguments; the method bodies, the file name text and the Info switch stay in the binary, as with RollLog). Record only: no behaviour, no new random draw (the RNG's own draw counter and last raw value are READ, never advanced), nothing here is read by a decision. Rows, columns tick,seat,event,type,queue,detail:
 	//   ub_fill_start  a queue pass begins (producer actor id, the RNG draw counter).
-	//   ub_draw        one roll that drew: the integer bins (UnitRoll.Quantize), the bound, the raw RNG value, the RNG draw counter, the legal-set refusals, the wave roles reported, rollPoolMaxCost, rollBankLeft, the first-copy flag, rollAvailableSince.
+	//   ub_draw        one roll that drew: the integer bins (UnitRoll.Quantize), the bound, the raw RNG value, the RNG draw counter, the legal-set refusals, the wave roles reported, rollPoolMaxCost before (pmb) and after (pm), rollBankLeft,
+	//                  the first-copy flag, rollAvailableSince (count/digest, and availnew = the first-sighting writes of this roll).
 	//   ub_empty       a roll with no candidate left (the all-excluded or none-listed fill).
 	//   ub_fill        the outcome after a draw or a null roll: accept (order started, order sequence) or refuse (the post-draw gate), the deciding rule, the batch bank / reserved / left, the cap headroom, the gate cost and the full price.
 	//   ub_fill_end    the pass ended: orders emitted, the RNG draw counter and last raw value.
@@ -44,6 +45,27 @@ namespace OpenRA.Mods.CA.Traits
 
 		MersenneTwister PickTraceRng() => BotRng.For(player, nameof(UnitBuilderBotModuleCA));
 
+		// The state the roll starts from (addendum 2 gap A): the pool max kept from the earlier roll (before) and the names already in rollAvailableSince (so the first-sighting writes of this roll show as availnew=name@tick).
+		int pickTracePoolMaxBefore;
+		HashSet<string> pickTraceAvailBefore;
+
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void PickTraceRollStart()
+		{
+			if (!Info.UnitPickTrace)
+				return;
+
+			pickTracePoolMaxBefore = rollPoolMaxCost;
+			pickTraceAvailBefore = new HashSet<string>(rollAvailableSince.Keys, StringComparer.Ordinal);
+		}
+
+		string PickTraceAvailNew()
+		{
+			var added = rollAvailableSince.Where(kv => pickTraceAvailBefore == null || !pickTraceAvailBefore.Contains(kv.Key)).OrderBy(kv => kv.Key, StringComparer.Ordinal)
+				.Select(kv => kv.Key + "@" + kv.Value).ToList();
+			return added.Count == 0 ? "-" : string.Join("|", added);
+		}
+
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
 		void PickTraceFillStart(ProductionQueue queue)
 		{
@@ -62,7 +84,7 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			PickTraceWrite("ub_empty", "", queue.Info.Type, UnitPickArbiter.EmptyDetail(new UnitPickArbiter.EmptyTrace(
-				pickTraceFill, refused, queue.Actor.ActorID, PickTraceExcluded(rollExcluded), PickTraceRoles(queueRoles), PickTraceRng().TotalCount, UnitPickArbiter.RuleEmptyPool)));
+				pickTraceFill, refused, queue.Actor.ActorID, queue.Info.Type, PickTraceExcluded(rollExcluded), PickTraceRoles(queueRoles), PickTraceRng().TotalCount, UnitPickArbiter.RuleEmptyPool)));
 		}
 
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
@@ -75,8 +97,8 @@ namespace OpenRA.Mods.CA.Traits
 			var avail = UnitPickArbiter.Avail(rollAvailableSince);
 			PickTraceWrite("ub_draw", pool[pick].Name, queue.Info.Type, UnitPickArbiter.DrawDetail(new UnitPickArbiter.DrawTrace(
 				++pickTraceDraw, pickTraceFill, refused, queue.Actor.ActorID, queue.Info.Type, pool.Count,
-				UnitPickArbiter.Bins(pool.Select(a => a.Name).ToList(), units), UnitRoll.Sum(units), rng.Last, rng.TotalCount, pool[pick].Name, rollFirst, rollPoolMaxCost, rollBankLeft,
-				PickTraceExcluded(rollExcluded), PickTraceRoles(queueRoles), rollAvailableSince.Count, UnitPickArbiter.Digest(avail), UnitPickArbiter.RuleDraw)));
+				UnitPickArbiter.Bins(pool.Select(a => a.Name).ToList(), units), UnitRoll.Sum(units), rng.Last, rng.TotalCount, pool[pick].Name, rollFirst, pickTracePoolMaxBefore, rollPoolMaxCost, rollBankLeft,
+				PickTraceExcluded(rollExcluded), PickTraceRoles(queueRoles), rollAvailableSince.Count, UnitPickArbiter.Digest(avail), PickTraceAvailNew(), UnitPickArbiter.RuleDraw)));
 		}
 
 		// A null roll that ends the fill (no candidate left): the fill row with result none.

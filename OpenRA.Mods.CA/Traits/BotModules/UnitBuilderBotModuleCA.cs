@@ -203,7 +203,7 @@ namespace OpenRA.Mods.CA.Traits
 			"A weight multiplier on the core only (capped by CoreFocusMaxPct); every other weight, never-built types included, stays as the roll made it. 0 = off.")]
 		public readonly int CoreFocusSharePct = 0;
 
-		[Desc("CONSOLIDATE-03 P5 (DEV only, record only): write unit_pick_trace.csv, one row per roll draw, empty roll, post-draw outcome and queue pass (the equivalence trace of the unit pick). Compiled out of release builds; changes no decision.")]
+		[Desc("CONSOLIDATE-03 P5 (DEV only, record only): write unit_pick_trace.csv, one row per roll draw, empty roll, post-draw outcome and queue pass (the equivalence trace of the unit pick). The calls are compiled out of release builds; changes no decision.")]
 		public readonly bool UnitPickTrace = false;
 
 		[Desc("HANS-PROFILE-01: how many types form the core of a queue.")]
@@ -2911,6 +2911,7 @@ namespace OpenRA.Mods.CA.Traits
 		ActorInfo ChooseRollUnit(ProductionQueue queue, HashSet<string> skip)
 		{
 			rollFirst = false;
+			PickTraceRollStart();
 			var table = Info.UnitsToBuild;
 			if (table == null || table.Count == 0)
 				return null;

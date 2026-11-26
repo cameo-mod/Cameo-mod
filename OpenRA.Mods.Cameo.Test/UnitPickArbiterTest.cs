@@ -65,9 +65,9 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void TheRowFormatsAreFixedAndCarryNoComma()
 		{
-			var draw = new UnitPickArbiter.DrawTrace(7, 3, 1, 42, "Vehicle", 2, "a:3|b:5", 8, 123456, 99, "b", true, 1500, 800, "c:limit", "ground|air", 2, "deadbeef", UnitPickArbiter.RuleDraw);
+			var draw = new UnitPickArbiter.DrawTrace(7, 3, 1, 42, "Vehicle", 2, "a:3|b:5", 8, 123456, 99, "b", true, 900, 1500, 800, "c:limit", "ground|air", 2, "deadbeef", "b@4000", UnitPickArbiter.RuleDraw);
 			Assert.That(UnitPickArbiter.DrawDetail(draw),
-				Is.EqualTo("ord=7;fill=3;att=1;prod=42;n=2;bins=a:3|b:5;bound=8;raw=123456;tot=99;first=1;pm=1500;bank=800;excl=c:limit;roles=ground|air;avail=2/deadbeef;rule=R3_draw"));
+				Is.EqualTo("ord=7;fill=3;att=1;prod=42;n=2;bins=a:3|b:5;bound=8;raw=123456;tot=99;first=1;pmb=900;pm=1500;bank=800;excl=c:limit;roles=ground|air;avail=2/deadbeef;availnew=b@4000;rule=R3_draw"));
 
 			var empty = new UnitPickArbiter.EmptyTrace(3, 0, 42, "Vehicle", "-", "-", 99, UnitPickArbiter.RuleEmptyPool);
 			Assert.That(UnitPickArbiter.EmptyDetail(empty), Is.EqualTo("fill=3;att=0;prod=42;excl=-;roles=-;tot=99;rule=R1_empty"));
@@ -105,9 +105,9 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var part = RepoFile(Bots + "UnitBuilderBotModuleCA.PickTrace.cs");
 			var hooks = Count(part, "\t\tvoid PickTrace") - Count(part, "\t\tvoid PickTraceWrite(") - Count(part, "\t\tvoid PickTraceFillRow(");
-			Assert.That(hooks, Is.EqualTo(7), "fill start, empty, draw, none, refuse, accept, fill end");
-			Assert.That(Count(part, "[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid PickTrace"), Is.EqualTo(7), "every hook is compiled out of release");
-			Assert.That(Count(part, "if (!Info.UnitPickTrace)\n\t\t\t\treturn;"), Is.EqualTo(7), "and every hook is off while the switch is off");
+			Assert.That(hooks, Is.EqualTo(8), "roll start, fill start, empty, draw, none, refuse, accept, fill end");
+			Assert.That(Count(part, "[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]\n\t\tvoid PickTrace"), Is.EqualTo(8), "every hook call is compiled out of release");
+			Assert.That(Count(part, "if (!Info.UnitPickTrace)\n\t\t\t\treturn;"), Is.EqualTo(8), "and every hook is off while the switch is off");
 
 			foreach (var advance in new[] { ".Next(", ".NextFloat(", ".NextUint(", ".NextUlong(", ".PickWeighted(", ".ShuffleInPlace(" })
 				Assert.That(part, Does.Not.Contain(advance), "the trace never advances the RNG stream (" + advance + ")");
@@ -135,6 +135,12 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(log, Is.GreaterThan(first));
 			Assert.That(trace, Is.GreaterThan(log), "the draw row reads the final first-copy flag, after the pick");
 			Assert.That(ret, Is.GreaterThan(trace));
+
+			// the roll-start hook captures the pool max and the known names BEFORE the roll writes either
+			var rollStart = body.IndexOf("rollFirst = false;\n\t\t\tPickTraceRollStart();\n\t\t\tvar table = Info.UnitsToBuild;", StringComparison.Ordinal);
+			Assert.That(rollStart, Is.GreaterThan(0));
+			Assert.That(rollStart, Is.LessThan(body.IndexOf("rollAvailableSince.TryAdd(", StringComparison.Ordinal)));
+			Assert.That(rollStart, Is.LessThan(body.IndexOf("rollPoolMaxCost = TechLean.PoolMax(", StringComparison.Ordinal)));
 
 			// the empty row comes after the wave roles are reported and before the empty log
 			var empty = body.IndexOf("PickTraceEmpty(queue, skip.Count, queueRoles);", StringComparison.Ordinal);
