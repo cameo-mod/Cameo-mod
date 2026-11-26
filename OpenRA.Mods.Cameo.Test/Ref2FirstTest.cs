@@ -40,6 +40,17 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TheCapLiftDropsAsSoonAsRef2IsInProductionSoNoThirdRefineryIsClaimed()
+		{
+			Assert.That(Ref2First.LiftsCap(true, 0, 0), Is.True);
+			Assert.That(Ref2First.LiftsCap(true, 1, 0), Is.True, "ref1 stands, ref2 not yet ordered: the lift opens the second claim");
+			Assert.That(Ref2First.LiftsCap(true, 1, 1), Is.False, "ref2 queued (the in-flight window): lift off, claimable anchors cannot exceed the refineries in flight");
+			Assert.That(Ref2First.LiftsCap(true, 0, 2), Is.False, "two in production at the start");
+			Assert.That(Ref2First.LiftsCap(true, 2, 0), Is.False, "two stand");
+			Assert.That(Ref2First.LiftsCap(false, 0, 0), Is.False, "row off: no lift");
+		}
+
+		[Test]
 		public void TheBoundEndsTheHoldSoTheOrderNeverDeadlocks()
 		{
 			Assert.That(Ref2First.BoundExpired(-1, 99999, 3000), Is.False, "never due");
@@ -109,8 +120,8 @@ namespace OpenRA.Mods.Cameo.Test
 			var rd = Source("mods/Cameo/Traits/BotModules/ExpansionPlannerBotModule.RefDemand.cs");
 			Assert.That(rd, Does.Contain("int EcoFloorLift() => Math.Max(EcoTimeFloorLift(), Ref2FirstLift());"));
 			Assert.That(rd, Does.Contain("ref2First != null && ref2First.Ref2FloorArmed"));
-			Assert.That(rd, Does.Contain("ref2Lift = own < Ref2First.RefineryTarget ? 1 : 0;"));
-			Assert.That(rd, Does.Contain("own += inProduction;"), "own standing PLUS in production: with ref2 queued the lift drops, so no 3rd claim opens before ref2 lands");
+			Assert.That(rd, Does.Contain("ref2Lift = Ref2First.LiftsCap(true, own, queued) ? 1 : 0;"));
+			Assert.That(rd, Does.Contain("queued += inProduction;"), "own standing PLUS in production: with ref2 queued the lift drops, so no 3rd claim opens before ref2 lands");
 			Assert.That(rd, Does.Contain("foreach (var r in builder.Info.RefineryTypes)"));
 		}
 

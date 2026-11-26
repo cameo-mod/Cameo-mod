@@ -31,6 +31,12 @@ namespace OpenRA.Mods.CA.Traits
 		public static bool Due(bool armed, bool finished, int refineriesOwnedOrQueued, bool refineryBuildable, bool refineryMaxed, bool fieldUnderCap) =>
 			armed && !finished && refineriesOwnedOrQueued < RefineryTarget && refineryBuildable && !refineryMaxed && fieldUnderCap;
 
+		/// <summary>
+		/// The planner's zone-cap lift: +1 while fewer than <see cref="RefineryTarget"/> refineries stand OR are in production. In production counts, matching the claim gate
+		/// (claimable anchors must exceed the refineries in flight): with ref2 queued the lift drops, so no 3rd refinery is claimed before ref2 lands.
+		/// </summary>
+		public static bool LiftsCap(bool armed, int ownStanding, int inProduction) => armed && ownStanding + inProduction < RefineryTarget;
+
 		/// <summary>The bound ran out: ref2 has been due for more than <paramref name="boundTicks"/> ticks (dueSince negative = never due).</summary>
 		public static bool BoundExpired(int dueSince, int now, int boundTicks) => dueSince >= 0 && now - dueSince > boundTicks;
 

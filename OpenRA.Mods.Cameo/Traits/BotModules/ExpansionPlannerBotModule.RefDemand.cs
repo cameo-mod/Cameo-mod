@@ -109,13 +109,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				// Own standing plus in production (the same BuildingsBeingProduced sum UpdateAnchorClaim subtracts from the claimable anchors): with ref2 queued the lift drops at once,
 				// or a still-empty second zone would be claimed for a 3rd refinery before ref2 lands (Code Monkey FIX).
+				var queued = 0;
 				var builder = baseBuilders.FirstOrDefault(t => t.IsTraitEnabled());
 				if (builder?.BuildingsBeingProduced != null)
 					foreach (var r in builder.Info.RefineryTypes)
 						if (builder.BuildingsBeingProduced.TryGetValue(r, out var inProduction))
-							own += inProduction;
+							queued += inProduction;
 
-				ref2Lift = own < Ref2First.RefineryTarget ? 1 : 0;
+				ref2Lift = Ref2First.LiftsCap(true, own, queued) ? 1 : 0;
 			}
 
 			return ref2Lift;
