@@ -110,6 +110,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(rd, Does.Contain("int EcoFloorLift() => Math.Max(EcoTimeFloorLift(), Ref2FirstLift());"));
 			Assert.That(rd, Does.Contain("ref2First != null && ref2First.Ref2FloorArmed"));
 			Assert.That(rd, Does.Contain("ref2Lift = own < Ref2First.RefineryTarget ? 1 : 0;"));
+			Assert.That(rd, Does.Contain("own += inProduction;"), "own standing PLUS in production: with ref2 queued the lift drops, so no 3rd claim opens before ref2 lands");
+			Assert.That(rd, Does.Contain("foreach (var r in builder.Info.RefineryTypes)"));
 		}
 
 		[Test]

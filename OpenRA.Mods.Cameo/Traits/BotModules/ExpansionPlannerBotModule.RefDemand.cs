@@ -75,7 +75,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int EcoTick(int hard) => BotDifficultyLadder.Scale(hard + EcoFloorRules.HardRank * Info.EcoFloorStepTicks,
 			hard - (BotDifficultyLadder.Difficulties.Length - 1 - EcoFloorRules.HardRank) * Info.EcoFloorStepTicks, player, hard);
 
-		// ref2_floor (REF2-FIRST-01, USER BINDING 11-26): while fewer than two own refineries stand, every zone's cap is one higher, from tick 0, so a reachable field with room is claimable for ref2
+		// ref2_floor (REF2-FIRST-01, USER BINDING 11-26): while fewer than two own refineries stand or are in production, every zone's cap is one higher, from tick 0, so a reachable field with room is claimable for ref2
 		// even where the law says adequate. The switch lives on the base builder (IBotRef2First); this planner only reads it. One value per tick, 0 when off.
 		IBotRef2First ref2First;
 		bool ref2FirstResolved;
@@ -106,6 +106,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				for (var r = 0; r < friendlyRefineryOwn.Count; r++)
 					if (friendlyRefineryOwn[r])
 						own++;
+
+				// Own standing plus in production (the same BuildingsBeingProduced sum UpdateAnchorClaim subtracts from the claimable anchors): with ref2 queued the lift drops at once,
+				// or a still-empty second zone would be claimed for a 3rd refinery before ref2 lands (Code Monkey FIX).
+				var builder = baseBuilders.FirstOrDefault(t => t.IsTraitEnabled());
+				if (builder?.BuildingsBeingProduced != null)
+					foreach (var r in builder.Info.RefineryTypes)
+						if (builder.BuildingsBeingProduced.TryGetValue(r, out var inProduction))
+							own += inProduction;
 
 				ref2Lift = own < Ref2First.RefineryTarget ? 1 : 0;
 			}
