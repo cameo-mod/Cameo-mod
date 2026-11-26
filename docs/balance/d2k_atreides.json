@@ -446,13 +446,13 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "Wood"
+     "v": "Steel"
     },
     "buildable": false,
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Building",
+     "subtype": "AdvancedDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -469,7 +469,18 @@
      "~atreides_constructionyard",
      "atreides_barracks"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -645,9 +656,17 @@
    "atreides_lightfactory": {
     "armor": {
      "src": "inherited",
-     "v": "Wood"
+     "v": "Concrete"
     },
-    "buildable": false,
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
     "design": {
      "class_anchor": null,
      "special": null,
@@ -657,7 +676,7 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "40000"
+     "v": "200000"
     },
     "integrity_pct": {
      "src": "inherited",
@@ -667,6 +686,10 @@
     "prerequisites": [
      "~atreides_constructionyard",
      "atreides_refinery"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
     ],
     "shield_flat": {
      "src": "inherited",
@@ -682,36 +705,84 @@
     },
     "sight": {
      "src": "inherited",
-     "v": "5c0"
+     "v": "8000"
     }
    },
-   "atreides_outpost": {
+   "atreides_machinegun_tower": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "3072",
+      "reloaddelay": "20",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Light",
+       "^d2k_shared_hmg"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "HMG",
+      "weapon_class_source": "template"
+     }
+    ],
     "armor": {
      "src": "inherited",
-     "v": "Wood"
+     "v": "Concrete"
     },
-    "buildable": false,
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Atreides/yaml/buildings.yaml#Valued.Cost",
+     "v": "1200"
+    },
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Building",
+     "subtype": "BasicDefense",
      "tech_tier": null,
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
-     "v": "40000"
+     "src": "mods/cameo/ContentPacks/D2k/Atreides/yaml/buildings.yaml#Health.HP",
+     "v": "125000"
     },
     "integrity_pct": {
      "src": "inherited",
      "v": "100"
     },
-    "name": "Atreides Outpost",
+    "name": "Atreides Machinegun Post",
     "prerequisites": [
      "~atreides_constructionyard",
-     "atreides_refinery",
      "atreides_barracks"
     ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -726,7 +797,62 @@
     },
     "sight": {
      "src": "mods/cameo/ContentPacks/D2k/Atreides/yaml/buildings.yaml#RevealsShroud.Range",
-     "v": "8c0"
+     "v": "7979"
+    }
+   },
+   "atreides_outpost": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Atreides Outpost",
+    "prerequisites": [
+     "~atreides_constructionyard",
+     "atreides_refinery"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
     }
    },
    "atreides_palace": {
@@ -904,7 +1030,7 @@
       "pricing": true,
       "range": "10684",
       "reloaddelay": "42",
-      "slot": "Armament",
+      "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^D2KMissile",
        "^d2k_shared_d2k_towermissile"
@@ -917,20 +1043,24 @@
      }
     ],
     "armor": {
-     "src": "inherited",
-     "v": "Wood"
+     "src": "mods/cameo/ContentPacks/D2k/Atreides/yaml/buildings.yaml#Armor.Type",
+     "v": "Concrete"
     },
-    "buildable": false,
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Atreides/yaml/buildings.yaml#Valued.Cost",
+     "v": "1500"
+    },
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Building",
+     "subtype": "AdvancedDefense",
      "tech_tier": null,
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
-     "v": "40000"
+     "src": "mods/cameo/ContentPacks/D2k/Atreides/yaml/buildings.yaml#Health.HP",
+     "v": "150000"
     },
     "integrity_pct": {
      "src": "inherited",
@@ -939,9 +1069,24 @@
     "name": "Atreides Rocket Turret",
     "prerequisites": [
      "~atreides_constructionyard",
-     "atreides_barracks"
+     "atreides_outpost"
     ],
-    "resolved_firepower_modifiers": [],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
     "shield_flat": {
      "src": "inherited",
      "v": "0"
@@ -955,8 +1100,8 @@
      "v": "100"
     },
     "sight": {
-     "src": "inherited",
-     "v": "5c0"
+     "src": "mods/cameo/ContentPacks/D2k/Atreides/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "10684"
     }
    },
    "atreides_starport": {
@@ -2598,7 +2743,7 @@
     "name": "actor_atreides_sandbike.name",
     "prerequisites": [
      "~atreides_vehicle_production",
-     "~atreides_light"
+     "~atreides_light_vehicle_production"
     ],
     "queue": [
      "Vehicle",
@@ -2955,6 +3100,107 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "9"
+    }
+   },
+   "atreides_trike": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "3072",
+      "reloaddelay": "20",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Light",
+       "^d2k_shared_hmg"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "HMG",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Scout"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml#Valued.Cost",
+     "v": "300"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ScoutVehicle",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml#Health.HP",
+     "v": "30000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Atreides Trike",
+    "prerequisites": [
+     "~atreides_vehicle_production",
+     "~atreides_light_vehicle_production"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle",
+     "Starport"
+    ],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
+    "self_heal_step": {
+     "src": "inherited",
+     "v": "10"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "90"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "24"
     }
    }
   }
