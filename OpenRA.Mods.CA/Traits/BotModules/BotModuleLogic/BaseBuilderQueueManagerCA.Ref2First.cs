@@ -76,9 +76,10 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
-			// The law counts the claimable anchors (the planner's cap lift makes a field with room claimable); without a law the old placement search has no field verdict, so only buildable + max apply.
+			// The law counts the claimable anchors (the planner's cap lift makes a field with room claimable). Without a law provider there is no field verdict and no planner cap lift either,
+			// so nothing can be claimed for ref2: no field = not due (Haiku FIX on REF2-FIRST-01; a hold for a refinery that cannot be placed would only delay the radar and the 2nd production).
 			var law = baseBuilder.RefineryLawProvider();
-			var fieldUnderCap = law == null || law.UnclaimedAnchorsInReach > 0;
+			var fieldUnderCap = law != null && law.UnclaimedAnchorsInReach > 0;
 			var maxed = refinery != null && baseBuilder.HasMaxRefineriesFor(refinery);
 			var due = Ref2First.Due(true, false, count, refinery != null, maxed, fieldUnderCap);
 			if (due && baseBuilder.Ref2DueSince < 0)

@@ -114,7 +114,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(r2, Does.Contain("baseBuilder.Ref2Prod2Armed && baseBuilder.Info.ProductionTypes.Contains(info.Name)"));
 			Assert.That(r2, Does.Not.Contain("Cancel"), "the gate never cancels");
 			Assert.That(r2, Does.Contain("Ref2First.BoundExpired(baseBuilder.Ref2DueSince, now, b.Ref2FirstBoundTicks)"));
-			Assert.That(r2, Does.Contain("var fieldUnderCap = law == null || law.UnclaimedAnchorsInReach > 0;"), "no reachable field with room = skip");
+			Assert.That(r2, Does.Contain("var fieldUnderCap = law != null && law.UnclaimedAnchorsInReach > 0;"), "no reachable field with room = skip");
+			Assert.That(r2, Does.Not.Contain("law == null ||"), "no law provider = no field verdict and no planner lift: ref2 is not due, nothing is held for it");
 
 			// the planner lifts the zone cap by one while fewer than two own refineries stand; the time floor stays as it is
 			var rd = Source("mods/Cameo/Traits/BotModules/ExpansionPlannerBotModule.RefDemand.cs");
