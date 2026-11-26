@@ -174,11 +174,11 @@ namespace OpenRA.Mods.Cameo.Test
 			var scale = planner.IndexOf("if (scaleTargetProviders.TryTarget(\"conyard\", out var scaledYards))", StringComparison.Ordinal);
 			var ramp = planner.IndexOf("rampFloor = YardRamp.Floor(", StringComparison.Ordinal);
 			var cover = planner.IndexOf("coverFloor = active + inflightCap;", StringComparison.Ordinal);
-			var due = planner.IndexOf("if (!McvDue(farFieldFree, active + queued, targetCount))", StringComparison.Ordinal);
+			var due = planner.IndexOf("if (!McvDue(ExpansionClaimOn || farFieldFree, active + queued, targetCount))", StringComparison.Ordinal);
 			Assert.That(scale, Is.GreaterThan(0));
 			Assert.That(ramp, Is.GreaterThan(scale));
 			Assert.That(cover, Is.GreaterThan(ramp));
-			Assert.That(due, Is.GreaterThan(cover), "the free-far-field gate still applies to the ramped target");
+			Assert.That(due, Is.GreaterThan(cover), "the free-far-field gate (or the TEAM-EXPAND claim switch) still applies to the ramped target");
 			Assert.That(planner.Substring(ramp, cover - ramp), Does.Not.Contain("EffectiveMcvTargetCount"), "no second personality multiplier");
 
 			Assert.That(AblationIds.YardRamp, Is.EqualTo("rm03_yard_ramp"));
