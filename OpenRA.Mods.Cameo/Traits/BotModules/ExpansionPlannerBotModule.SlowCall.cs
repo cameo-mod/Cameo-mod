@@ -73,17 +73,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (slowMarks[i] == 0)
 					continue;
 
-				parts.Append($" {SlowMarkNames[i]}={Ms(last, slowMarks[i]):F1}");
+				parts.Append($" {SlowMarkNames[i]}=").Append(Ms(last, slowMarks[i]).ToString("F1", System.Globalization.CultureInfo.InvariantCulture));
 				last = slowMarks[i];
 			}
 
-			parts.Append($" rest={Ms(last, end):F1}");
+			parts.Append(" rest=").Append(Ms(last, end).ToString("F1", System.Globalization.CultureInfo.InvariantCulture));
 			var actors = 0;
 			foreach (var a in world.Actors)
 				if (a.Owner == player)
 					actors++;
 
-			Log.Write("debug", $"EXP-SLOW-01 player={player.ClientIndex} tick={world.WorldTick} ms={total:F1} replan={slowReplan}{parts} " +
+			Log.Write("debug", $"EXP-SLOW-01 player={player.ClientIndex} tick={world.WorldTick} ms={total.ToString("F1", System.Globalization.CultureInfo.InvariantCulture)} replan={slowReplan}{parts} " +
 				$"scores={LastScores?.Count ?? -1} own_actors={actors}");
 #endif
 		}

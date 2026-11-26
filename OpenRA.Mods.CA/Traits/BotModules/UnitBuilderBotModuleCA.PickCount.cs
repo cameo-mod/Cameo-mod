@@ -14,7 +14,7 @@ namespace OpenRA.Mods.CA.Traits
 	// PERF-UB-PICK-01 (Opus 11-26, DEV only): how much work the unit roll does per pick, appended to the ub_perf row (UbVisitEnd) of the visit.
 	// rolls = ChooseRollUnit calls of the visit, picks = the rolls that returned a unit (a refused pick re-rolls, so rolls >= picks),
 	// examined = the listed buildable types the rolls looked at (the legal pool plus every exclusion, the skip set included), pool = the legal pool sizes summed,
-	// examined_per_pick = examined / picks (examined when no roll picked). Counters only: nothing here is read by a decision, and a release build has no fields and no calls.
+	// examined_per_pick = examined / picks (examined when no roll picked; invariant culture, so the comma-separated row keeps its columns). Counters only: nothing here is read by a decision, and a release build has no fields and no calls.
 	public partial class UnitBuilderBotModuleCA
 	{
 #if CAMEO_DEV_LOGGING
@@ -55,7 +55,8 @@ namespace OpenRA.Mods.CA.Traits
 
 #if CAMEO_DEV_LOGGING
 		string UbPickCounts() =>
-			$";rolls={ubRolls};picks={ubPicks};examined={ubExamined};pool={ubPooled};examined_per_pick={(ubPicks > 0 ? (double)ubExamined / ubPicks : ubExamined):0.0}";
+			$";rolls={ubRolls};picks={ubPicks};examined={ubExamined};pool={ubPooled};examined_per_pick=" +
+			(ubPicks > 0 ? (double)ubExamined / ubPicks : ubExamined).ToString("0.0", System.Globalization.CultureInfo.InvariantCulture);
 #endif
 	}
 }

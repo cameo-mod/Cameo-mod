@@ -60,6 +60,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var release = ReleaseView(part);
 			Assert.That(release, Does.Not.Contain("int ubRolls"), "a release instance has no counter fields");
 			Assert.That(release, Does.Not.Contain("UbPickCounts()"));
+			Assert.That(part, Does.Contain(".ToString(\"0.0\", System.Globalization.CultureInfo.InvariantCulture)"), "the comma-separated row keeps its columns on a comma-decimal host");
 			Assert.That(CountOf(part, "[System.Diagnostics.Conditional(\"CAMEO_DEV_LOGGING\")]"), Is.EqualTo(3), "reset, pool and done are [Conditional]");
 
 			var u = Source(Unit);
@@ -93,7 +94,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(release, Does.Not.Contain("slowMarks = new"), "and allocates nothing");
 			Assert.That(guard, Does.Contain("const double SlowCallMs = 250.0;"));
 			Assert.That(guard, Does.Contain("if (total < SlowCallMs)\n\t\t\t\treturn;"), "only calls of 250 ms or more write a line");
-			Assert.That(guard, Does.Contain("Log.Write(\"debug\", $\"EXP-SLOW-01 player={player.ClientIndex} tick={world.WorldTick} ms={total:F1}"));
+			Assert.That(guard, Does.Contain("Log.Write(\"debug\", $\"EXP-SLOW-01 player={player.ClientIndex} tick={world.WorldTick} ms={total.ToString(\"F1\", System.Globalization.CultureInfo.InvariantCulture)}"));
+			Assert.That(CountOf(guard, "CultureInfo.InvariantCulture"), Is.EqualTo(3), "every decimal in the line is culture-invariant");
 		}
 	}
 }
