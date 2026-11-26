@@ -252,7 +252,7 @@ namespace OpenRA.Mods.CA.Traits
 			return scoreCache[candidate.Name] = ScoreCached(candidate);
 		}
 
-		/// <summary>The same sum as the old computation (ScoreFresh, DEV only), with the static per-enemy-type rule reads taken from the enemyRules cache.</summary>
+		/// <summary>The same sum as the old computation (kept below as the DEV-only shadow reference), with the static per-enemy-type rule reads taken from the enemyRules cache.</summary>
 		long ScoreCached(ActorInfo candidate)
 		{
 			var weapons = Profile(candidate);
