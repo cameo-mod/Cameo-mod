@@ -209,6 +209,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"back forever. 0 disables.")]
 		public readonly int McvMaxSiteHandouts = 3;
 
+		[Desc("MCV-DEPLOY-FAIL-01 switch (ablation row mcv_deploy_fail_park): a field handed to an idle MCV whose deploy silently",
+			"failed is parked for DeployFailParkTicks, and the per-MCV failed-handout breaker runs. Off = the pre-fix handout rules.")]
+		public readonly bool McvDeployFailPark = false;
+
+		[Desc("MCV-DEPLOY-FAIL-01: ticks a field whose handed-out deploy failed is left out of the candidates.")]
+		public readonly int DeployFailParkTicks = 600;
+
+		[Desc("MCV-DEPLOY-FAIL-01: failed handouts since an MCV last became a yard before the planner sends it to the base once.")]
+		public readonly int McvMaxFailedDeploys = 6;
+
+		[Desc("MCV-DEPLOY-FAIL-01: ticks no field is handed to an MCV whose base fallback also failed. The engine module then picks",
+			"its own site (the planner cannot stop the engine re-issuing an idle MCV, so this is not a true hold; see the RCA).")]
+		public readonly int McvFailHoldTicks = 1500;
+
 		[Desc("Greedy expansion: the planner requests construction-MCV production itself while a free field beyond the",
 			"building line's reach (McvMinHops) exists, instead of waiting for the MCV module's high cash trigger.",
 			"The engine module still decides where to send it (EX-3) and placement/dedup is unchanged.")]
@@ -1053,6 +1067,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		AblationLatch ablateCrawlSticky;
 		int crawlCommitIndex = -1;
 		bool CrawlTargetStickyOn => Info.CrawlTargetSticky && Info.DriveBaseCrawl && LawActive && !ablateCrawlSticky.Off(player, AblationIds.CrawlTargetSticky);
+
+		// MCV-DEPLOY-FAIL-01 (ablation row mcv_deploy_fail_park): the switch and its ablation latch.
+		AblationLatch ablateMcvDeployFail;
+		bool McvDeployFailParkOn => Info.McvDeployFailPark && !ablateMcvDeployFail.Off(player, AblationIds.McvDeployFailPark);
 
 		int CrawlMaxDistanceCells() => BotDifficultyLadder.Scale(Info.CrawlMaxDistanceMin, Info.CrawlMaxDistanceMax, player, Info.CrawlMaxDistanceUnranked);
 
@@ -3305,6 +3323,25 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				weight = f => (baseWeight?.Invoke(f) ?? 1.0) * McvSafeSiteFactor(safe, f);
 			}
 
+			// MCV-DEPLOY-FAIL-01: per-MCV breaker. Only with the switch on and McvSafe armed (the handout records come from the guard pass).
+			if (McvDeployFailParkOn && safe != null)
+			{
+				var failState = McvDeployFailure.Expire(mcvDeployFailState.TryGetValue(mcv.ActorID, out var known) ? known : default, tick);
+				mcvDeployFailState[mcv.ActorID] = failState;
+				var phase = McvDeployFailure.Decide(failState, tick, Info.McvMaxFailedDeploys);
+				if (phase == McvDeployPhase.Hold)
+					return null;
+
+				if (phase == McvDeployPhase.Base)
+				{
+					var baseSite = McvSafeFallback(safe, mcv);
+					if (baseSite is CPos baseCell)
+						NoteMcvHandout(mcv, McvHandoutKind.Base, -1, baseCell, tick);
+
+					return baseSite;
+				}
+			}
+
 			// At most one park per request: a parked field falls out and the next best is offered (CG: a field with no safe route is refused for this MCV and the next is tried).
 			for (var attempt = 0; attempt < (safe != null ? 3 : 2); attempt++)
 			{
@@ -3343,6 +3380,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 #if CAMEO_DEV_LOGGING
 				Log.Write("debug", $"AI ({player.ClientIndex}): EX-3 MCV {mcv.Info.Name} at {mcv.Location} sent to field {s.Index} at {s.Center}: value {s.Value}, hops {s.Hops}, safety {s.Safety:F2}, hand-out {mcvHandout.Count}{(safe != null ? McvSafeZoneNote(safe, mcv, s) : string.Empty)} at tick {tick}");
 #endif
+				if (McvDeployFailParkOn && safe != null)
+					NoteMcvHandout(mcv, McvHandoutKind.Field, s.Index, s.Center, tick);
+
 				LastMcvSite = s.Center;
 				return s.Center;
 			}

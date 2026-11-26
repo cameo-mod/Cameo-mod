@@ -56,6 +56,60 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly Dictionary<uint, McvTrack> mcvTracks = new();
 		readonly Dictionary<string, int> mcvWeaponRangeCache = new();
 
+		// MCV-DEPLOY-FAIL-01 (RCA a61964a8): the engine re-issues an idle MCV every ScanForNewMcvInterval and its queued Transform ends
+		// silently when the cell is not placeable, so an idle MCV that was handed a site is one failed handout. The guard pass counts it.
+		readonly Dictionary<uint, McvPendingHandout> mcvPending = new();
+		readonly Dictionary<uint, McvDeployFailState> mcvDeployFailState = new();
+
+		sealed class McvPendingHandout
+		{
+			public McvHandoutKind Kind;
+			public int Field;
+			public CPos Center;
+			public int IssueTick;
+		}
+
+		public enum McvHandoutKind { None, Field, Base }
+
+		public enum McvDeployPhase { Fields, Base, Hold }
+
+		public readonly struct McvDeployFailState
+		{
+			public readonly int Failures;
+			public readonly int HoldUntil;
+
+			public McvDeployFailState(int failures, int holdUntil)
+			{
+				Failures = failures;
+				HoldUntil = holdUntil;
+			}
+		}
+
+		/// <summary>MCV-DEPLOY-FAIL-01 (pure): the per-MCV breaker. Field handouts until McvMaxFailedDeploys failures, one base try, then a hold.</summary>
+		public static class McvDeployFailure
+		{
+			public static McvDeployFailState Expire(McvDeployFailState s, int now) =>
+				s.HoldUntil != 0 && now >= s.HoldUntil ? new McvDeployFailState(0, 0) : s;
+
+			public static McvDeployPhase Decide(McvDeployFailState s, int now, int maxFailed)
+			{
+				if (maxFailed <= 0)
+					return McvDeployPhase.Fields;
+
+				if (s.HoldUntil > now)
+					return McvDeployPhase.Hold;
+
+				return s.Failures >= maxFailed ? McvDeployPhase.Base : McvDeployPhase.Fields;
+			}
+
+			public static McvDeployFailState OnFailed(McvDeployFailState s, McvHandoutKind kind, int now, int holdTicks) =>
+				kind == McvHandoutKind.Base
+					? new McvDeployFailState(s.Failures + 1, now + holdTicks)
+					: new McvDeployFailState(s.Failures + 1, 0);
+
+			public static bool IsFailure(int issueTick, int now, bool idle, bool alive) => idle && alive && now > issueTick;
+		}
+
 		const string PMargin = nameof(SquadManagerBotModuleCAInfo.AggTeamMcvDefenceMarginCells);
 
 		/// <summary>The context for one MCV request, or null when MCV-SAFE is off (CG off or no enabled squad manager).</summary>
@@ -341,6 +395,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (mcv.IsIdle)
 				{
 					track.TripStart = null;
+					if (McvDeployFailParkOn)
+						McvDeployFailed(mcv, now);
+
 					continue;
 				}
 
@@ -374,6 +431,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				var track = mcvTracks[id];
 				mcvTracks.Remove(id);
+				mcvPending.Remove(id);
+				mcvDeployFailState.Remove(id);
 				McvSafeVanished(policy, track, now);
 			}
 		}
@@ -405,6 +464,39 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			Log.Write("debug", $"AI ({player.ClientIndex}): MS-5 MCV {mcv.ActorID} at {mcv.Location} aborted: moves to the base {baseCenter.Value} ({route?.Count ?? 0} waypoints) at tick {now}");
 #endif
 			return true;
+		}
+
+		/// <summary>MCV-DEPLOY-FAIL-01: the planner handed this MCV a site (a field, or the base on the breaker's base try).</summary>
+		void NoteMcvHandout(Actor mcv, McvHandoutKind kind, int field, CPos center, int now)
+		{
+			mcvPending[mcv.ActorID] = new McvPendingHandout { Kind = kind, Field = field, Center = center, IssueTick = now };
+		}
+
+		/// <summary>
+		/// MCV-DEPLOY-FAIL-01: an idle MCV that was handed a site and is still in the world has not deployed, so that handout failed.
+		/// The field is parked for DeployFailParkTicks and the per-MCV breaker counts the failure. Called from the guard's idle branch only.
+		/// </summary>
+		void McvDeployFailed(Actor mcv, int now)
+		{
+			if (!mcvPending.TryGetValue(mcv.ActorID, out var pending)
+				|| !McvDeployFailure.IsFailure(pending.IssueTick, now, mcv.IsIdle, !mcv.IsDead && mcv.IsInWorld))
+				return;
+
+			mcvPending.Remove(mcv.ActorID);
+			mcvDeployFailState.TryGetValue(mcv.ActorID, out var known);
+			var state = McvDeployFailure.OnFailed(known, pending.Kind, now, Info.McvFailHoldTicks);
+			mcvDeployFailState[mcv.ActorID] = state;
+			if (pending.Kind == McvHandoutKind.Field && pending.Field >= 0)
+				parkedUntil[pending.Field] = now + Info.DeployFailParkTicks;
+
+#if CAMEO_DEV_LOGGING
+			var mobile = mcv.TraitOrDefault<Mobile>();
+			var transformInfo = mcv.Info.TraitInfoOrDefault<TransformsInfo>();
+			var into = transformInfo == null ? null : world.Map.Rules.Actors[transformInfo.IntoActor];
+			var buildingInfo = into?.TraitInfoOrDefault<BuildingInfo>();
+			var canPlace = into != null && buildingInfo != null && world.CanPlaceBuilding(mcv.Location + transformInfo.Offset, into, buildingInfo, mcv);
+			Log.Write("debug", $"AI ({player.ClientIndex}): mcv_deploy_fail mcv={mcv.ActorID} cell={mcv.Location} kind={pending.Kind} field={pending.Field} field_centre={pending.Center} move_result={mobile?.MoveResult} can_place={canPlace} source=planner_handout failures={state.Failures} hold_until={state.HoldUntil} tick={now}");
+#endif
 		}
 
 		/// <summary>An MCV left the world: a deploy leaves an own yard/refinery beside it, a kill does not (a loaded MCV is alive and not a loss).</summary>

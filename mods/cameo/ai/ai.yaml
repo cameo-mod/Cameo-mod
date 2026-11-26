@@ -4634,6 +4634,9 @@ Player:
 		DriveRefineries: true
 		# EX-3: an MCV founds its base at the best far field (value x safety / distance); the MCV module decides when.
 		DriveMcvSite: true
+		# MCV-DEPLOY-FAIL-01 (ablation row mcv_deploy_fail_park): park the field of a silently failed MCV deploy and run the per-MCV breaker.
+		# This block is genericbot-gated, so it reaches every non-classic bot (the six personalities and the tier bots); classic has no planner.
+		McvDeployFailPark: true
 		# Greedy expansion: while a far field is free, request construction-MCV production ourselves
 		# (engine module alone waits for its 4000-cash trigger first — too late to be a menace).
 		DriveMcvRequests: true
