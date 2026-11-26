@@ -45,7 +45,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheVisitRowIsOncePerBotTickAndOnlyAtFiveMilliseconds()
 		{
 			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
-			Assert.That(u, Does.Contain("void IBotTick.BotTick(IBot bot)\n\t\t{\n\t\t\tUbVisitBegin();\n\t\t\tBotTickVisit(bot);\n\t\t\tUbVisitEnd();\n\t\t}"), "one visit = one BotTick call, the body moved unchanged to BotTickVisit");
+			Assert.That(u, Does.Contain("void IBotTick.BotTick(IBot bot)\n\t\t{\n\t\t\tUbVisitBegin();\n\t\t\tcostCache.BeginVisit(CostCacheOn);\n\t\t\tBotTickVisit(bot);\n\t\t\tcostCache.EndVisit();\n\t\t\tUbVisitEnd();\n\t\t}"), "one visit = one BotTick call, the body moved unchanged to BotTickVisit");
 			Assert.That(u, Does.Contain("if (total < 5000.0)\n\t\t\t\treturn;"), "a visit under 5 ms writes no row");
 			Assert.That(u, Does.Contain("ub_perf,,,total_us={total:0};pick_us={Us(0):0};reject_us={Us(1):0};coverage_us={Us(2):0};refresh_us={Us(3):0}"), "the row carries the four sub-steps");
 		}

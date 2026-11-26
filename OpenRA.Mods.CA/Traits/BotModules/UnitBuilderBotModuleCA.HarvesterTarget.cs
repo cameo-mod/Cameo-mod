@@ -124,8 +124,8 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 
 				var item = queue.BuildableItems().Where(b => types.Contains(b.Name))
-					.OrderBy(b => queue.GetProductionCost(b)).ThenBy(b => b.Name, StringComparer.Ordinal).FirstOrDefault();
-				if (item != null && (best == null || queue.GetProductionCost(item) < best.GetProductionCost(bestItem)))
+					.OrderBy(b => Cost(queue, b)).ThenBy(b => b.Name, StringComparer.Ordinal).FirstOrDefault();
+				if (item != null && (best == null || Cost(queue, item) < Cost(best, bestItem)))
 				{
 					best = queue;
 					bestItem = item;

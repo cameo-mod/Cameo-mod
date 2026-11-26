@@ -176,7 +176,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(pool, Is.GreaterThan(0));
 			Assert.That(lean, Is.GreaterThan(pool), "after the pool is formed");
 			Assert.That(strength, Is.GreaterThan(lean));
-			Assert.That(body, Does.Contain("poolMax = Math.Max(poolMax, queue.GetProductionCost(a));"));
+			Assert.That(body, Does.Contain("poolMax = Math.Max(poolMax, Cost(queue, a));"), "the cost read goes through the visit cost cache (PERF-BOTTICK-01 FIX 4; the same integer)");
 			Assert.That(body, Does.Contain("rollPoolMaxCost = TechLean.PoolMax(skip.Count, rollPoolMaxCost, poolMax);"), "skip.Count = what this fill has refused so far");
 
 			// The older c3 pins on the same method still hold.

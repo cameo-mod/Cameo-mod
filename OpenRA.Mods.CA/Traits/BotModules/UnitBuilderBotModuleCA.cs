@@ -203,6 +203,10 @@ namespace OpenRA.Mods.CA.Traits
 			"of the whole pool; none passes = the queue's fill ends for this visit. Off = the roll over the whole pool, a refused pick re-rolled.")]
 		public readonly bool AffordablePool = false;
 
+		[Desc("PERF-BOTTICK-01 FIX 4 (row cost_cache_tick): memoise ProductionQueue.GetProductionCost for one bot visit, per (queue actor, queue type, actor type). The same integer as the live call,",
+			"so no decision changes. Off = every call reads the cost live.")]
+		public readonly bool CostCacheTick = false;
+
 		[Desc("UNIT-MIX-01: the queue types that make an airfield (aircraft floor); the infantry floor uses IdleQueueFloorQueues.")]
 		public readonly string[] UnitMixAircraftQueues = { "Aircraft", "RAAircraft" };
 
@@ -1282,10 +1286,19 @@ namespace OpenRA.Mods.CA.Traits
 #endif
 		}
 
+		// PERF-BOTTICK-01 FIX 4 (row cost_cache_tick): the production cost memoised for this visit only (ProductionCostCache); every cost read of the module goes through Cost().
+		readonly ProductionCostCache costCache = new();
+		AblationLatch ablateCostCache;
+		bool CostCacheOn => switchesActive && Info.CostCacheTick && !ablateCostCache.Off(player, AblationIds.CostCacheTick);
+
+		int Cost(ProductionQueue queue, ActorInfo unit) => costCache.Get(queue, unit);
+
 		void IBotTick.BotTick(IBot bot)
 		{
 			UbVisitBegin();
+			costCache.BeginVisit(CostCacheOn);
 			BotTickVisit(bot);
+			costCache.EndVisit();
 			UbVisitEnd();
 		}
 
@@ -1553,7 +1566,7 @@ namespace OpenRA.Mods.CA.Traits
 			var capableButBusy = false;
 			foreach (var queue in queues)
 			{
-				var item = queue.BuildableItems().Where(b => types.Contains(b.Name)).OrderBy(b => queue.GetProductionCost(b)).ThenBy(b => b.Name, StringComparer.Ordinal).FirstOrDefault();
+				var item = queue.BuildableItems().Where(b => types.Contains(b.Name)).OrderBy(b => Cost(queue, b)).ThenBy(b => b.Name, StringComparer.Ordinal).FirstOrDefault();
 				if (item == null)
 					continue;
 
@@ -1563,7 +1576,7 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 				}
 
-				if (best == null || queue.GetProductionCost(item) < best.GetProductionCost(bestItem))
+				if (best == null || Cost(queue, item) < Cost(best, bestItem))
 				{
 					best = queue;
 					bestItem = item;
@@ -1643,7 +1656,7 @@ namespace OpenRA.Mods.CA.Traits
 							if (onceOn && upgradeDone.IsDone(item.Name))
 								continue;
 
-							candidates.Add(new UpgradeServiceCA.Candidate(item.Name, queue.GetProductionCost(item),
+							candidates.Add(new UpgradeServiceCA.Candidate(item.Name, Cost(queue, item),
 								shares != null && shares.TryGetValue(item.Name, out var w) ? Math.Max(w, 0) : -1, onceOn ? upgradeDone.Since(item.Name) : 0));
 							infos.Add(item);
 						}
@@ -1658,7 +1671,7 @@ namespace OpenRA.Mods.CA.Traits
 						bot.QueueOrder(Order.StartProduction(queue.Actor, item2.Name, 1));
 						NotifyStarted(item2.Name, queue.Info.Type);
 						upgradeDone.Started(item2.Name, world.WorldTick);
-						UpgradeStartLog(item2.Name, queue.Info.Type, queue.GetProductionCost(item2));
+						UpgradeStartLog(item2.Name, queue.Info.Type, Cost(queue, item2));
 						AIUtils.BotDebug("AI: {0} upgrade service starts {1} in {2}.", player, item2.Name, queue.Info.Type);
 					}
 				}
@@ -1680,7 +1693,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (unit == null)
 					continue;
 
-				var cost = queue.GetProductionCost(unit);
+				var cost = Cost(queue, unit);
 				if (playerResources.GetCashAndResources() < cost || !baseBuilder.TryCommitOpeningDefenseCost(cost))
 					return;
 
@@ -2056,7 +2069,7 @@ namespace OpenRA.Mods.CA.Traits
 
 					// Sol F2: an unaffordable pick retries the remaining candidates — the
 					// batch keeps the bank accounting so a cheaper feasible one can land.
-					var fullCost = Math.Max(0, queue.GetProductionCost(unit));
+					var fullCost = Math.Max(0, Cost(queue, unit));
 
 					// UNIT-ALL-01 c3 (Opus 11-25): the FIRST build of a listed type is pay-as-you-go like TECHCHAIN-PAYGO: it does not wait for the full price (OpenRA pays progressively): the afford, reserve and
 					// depth-cash gates below are evaluated at cost 0 for it, so a bank of 0 or the tier reserve can still hold it; Everything else keeps the full gates.
@@ -2259,7 +2272,7 @@ namespace OpenRA.Mods.CA.Traits
 			var items = queue.BuildableItems();
 			var pickName = UnitProducerServiceCA.CombatValueOrder(items
 				.Where(b => shares.ContainsKey(b.Name) && IsArmedInfantryForCap(b) && !skip.Contains(b.Name))
-				.Select(b => (b.Name, DerivedUnitStrength(b.Name), Math.Max(1, queue.GetProductionCost(b)))))
+				.Select(b => (b.Name, DerivedUnitStrength(b.Name), Math.Max(1, Cost(queue, b)))))
 				.FirstOrDefault();
 			return pickName == null ? null : items.First(b => b.Name == pickName);
 		}
@@ -2301,8 +2314,8 @@ namespace OpenRA.Mods.CA.Traits
 						.Where(q => q.BuildableItems().Any(b => b.Name == name))
 						.FirstOrDefault(q =>
 							batch.SlotsFree(q, LiveFreeSlots(q)) > 0 &&
-							batch.Affords(q.GetProductionCost(actorInfo)) &&
-							ReserveAdmits(batch, q.GetProductionCost(actorInfo)));
+							batch.Affords(Cost(q, actorInfo)) &&
+							ReserveAdmits(batch, Cost(q, actorInfo)));
 				}
 				else
 				{
@@ -2336,7 +2349,7 @@ namespace OpenRA.Mods.CA.Traits
 					AIUtils.BotDebug("AI: {0} decided to build {1} (external request)", queue.Actor.Owner, name);
 					if (FairService)
 					{
-						batch.Reserve(queue, queue.GetProductionCost(actorInfo));
+						batch.Reserve(queue, Cost(queue, actorInfo));
 						SpendLimitHeadroom(batch, name);
 						if (actorInfo.HasTraitInfo<AircraftInfo>())
 						{
@@ -2743,7 +2756,7 @@ namespace OpenRA.Mods.CA.Traits
 				var weight = shares != null && shares.TryGetValue(item.Name, out var w) ? w
 					: Info.UnitsToBuild != null && Info.UnitsToBuild.TryGetValue(item.Name, out var baseline) ? baseline : 0;
 				infos.Add(item);
-				candidates.Add((item.Name, Math.Max(0, queue.GetProductionCost(item)), weight));
+				candidates.Add((item.Name, Math.Max(0, Cost(queue, item)), weight));
 			}
 
 			var index = IdleQueueFloorCA.Pick(candidates);
@@ -2962,7 +2975,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				var poolMax = 0;
 				foreach (var a in pool)
-					poolMax = Math.Max(poolMax, queue.GetProductionCost(a));
+					poolMax = Math.Max(poolMax, Cost(queue, a));
 
 				rollPoolMaxCost = TechLean.PoolMax(skip.Count, rollPoolMaxCost, poolMax);
 			}
@@ -3031,7 +3044,7 @@ namespace OpenRA.Mods.CA.Traits
 			bool RollCashAdmits(ActorInfo a)
 			{
 				var batch = rollCash.Batch;
-				var fullCost = Math.Max(0, queue.GetProductionCost(a));
+				var fullCost = Math.Max(0, Cost(queue, a));
 				var paygo = !rollOrdered.Contains(a.Name) && UnitRoll.FirstAdmits(batch.BankLeft);
 				var cost = paygo ? 0 : fullCost;
 				if (!paygo && TechLeanOn && TechLean.Admits(fullCost, rollPoolMaxCost, rollCash.Held, world.WorldTick, RollParameters.RampTicks, batch.BankLeft, Info.TechLeanTopPct, Info.TechLeanBankPct))
