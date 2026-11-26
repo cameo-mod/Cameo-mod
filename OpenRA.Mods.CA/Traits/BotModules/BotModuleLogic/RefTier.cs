@@ -58,8 +58,12 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>The planner's zone-cap lift: +1 while fewer than the target refineries stand or are in production (in production counts, as for ref2: with the next one queued the lift drops).</summary>
 		public static bool LiftsCap(bool armed, int ownStanding, int inProduction, int target) => armed && ownStanding + inProduction < target;
 
-		/// <summary>Below the target the economy gate's interval wait is outranked (the first-war-factory wait, the first-copy yield and the expansion-refinery rules are not).</summary>
-		public static bool OutranksIntervalWait(bool armed, int refineriesOwnedOrQueued, int target) => armed && refineriesOwnedOrQueued < target;
+		/// <summary>
+		/// Below the target the economy gate's interval wait is outranked (the first-war-factory wait, the first-copy yield and the expansion-refinery rules are not), and only while a field can be claimed
+		/// (<paramref name="fieldUnderCap"/>: a law provider reports an unclaimed anchor in reach, the same term as <see cref="Ref2First.Due"/>). Without one the normal interval applies: a bot with no
+		/// field must not prefer a refinery it cannot place (that loops READY / placement failures).
+		/// </summary>
+		public static bool OutranksIntervalWait(bool armed, int refineriesOwnedOrQueued, int target, bool fieldUnderCap) => armed && fieldUnderCap && refineriesOwnedOrQueued < target;
 
 		/// <summary>DEV verdict: off, met (at or above the target), below_target (a claimable anchor exists) or below_no_anchor (below the target but no field can be claimed: the map caps it, nothing is held).</summary>
 		public static string Reason(bool armed, int refineriesOwnedOrQueued, int target, int unclaimedAnchors) =>

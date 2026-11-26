@@ -17,6 +17,18 @@ namespace OpenRA.Mods.CA.Traits
 	// planner lifts the zone caps (ExpansionPlannerBotModule.RefTierLift, which reads IBotRefTier); this file holds the queue manager's part: the interval outrank and the DEV verdict record.
 	partial class BaseBuilderQueueManagerCA
 	{
+		// Opus 11-26: the outrank needs a claimable field, the same fieldUnderCap term as ref2's Due (a law provider with an unclaimed anchor in reach). A bot below the target with no field keeps the normal
+		// interval, or it would prefer a refinery it cannot place. The pure decision is RefTier.OutranksIntervalWait.
+		bool RefTierOutranksInterval(int count)
+		{
+			if (!baseBuilder.RefTierArmed)
+				return false;
+
+			var law = baseBuilder.RefineryLawProvider();
+			var fieldUnderCap = law != null && law.UnclaimedAnchorsInReach > 0;
+			return RefTier.OutranksIntervalWait(true, count, baseBuilder.RefTierTarget, fieldUnderCap);
+		}
+
 		// The economy gate's verdict with its interval wait outranked: the rungs before it (the first-war-factory wait) were decided by the caller, the one after it is the bounded first-copy yield, which
 		// only exists from the 3rd refinery on (the gate's own rule: the yield never applies below the ref2 minimum of two). The yield clock is the gate's own (RefineryGateYieldSince).
 		RefineryFieldGateCA.EconomyVerdict RefTierYieldVerdict(IEnumerable<ActorInfo> buildableThings, int count, int now, bool yardWithoutRefinery, bool factoryBuildable,

@@ -69,9 +69,10 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(RefTier.LiftsCap(true, 5, 0, 4), Is.False, "above the target: nothing is sold, nothing is lifted");
 			Assert.That(RefTier.LiftsCap(false, 0, 0, 4), Is.False, "row off");
 
-			Assert.That(RefTier.OutranksIntervalWait(true, 3, 6), Is.True);
-			Assert.That(RefTier.OutranksIntervalWait(true, 6, 6), Is.False);
-			Assert.That(RefTier.OutranksIntervalWait(false, 0, 6), Is.False);
+			Assert.That(RefTier.OutranksIntervalWait(true, 3, 6, true), Is.True, "below the target with a claimable field");
+			Assert.That(RefTier.OutranksIntervalWait(true, 3, 6, false), Is.False, "below the target with 0 anchors (Opus 11-26): the normal interval applies, no refinery is preferred that cannot be placed");
+			Assert.That(RefTier.OutranksIntervalWait(true, 6, 6, true), Is.False);
+			Assert.That(RefTier.OutranksIntervalWait(false, 0, 6, true), Is.False);
 		}
 
 		[Test]
@@ -109,7 +110,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var qm = Source(Dir + "BaseBuilderQueueManagerCA.cs");
 			var ref2 = qm.IndexOf("Ref2OutranksInterval(buildableThings, count))\n\t\t\t\treturn false;", StringComparison.Ordinal);
-			var tier = qm.IndexOf("RefTier.OutranksIntervalWait(baseBuilder.RefTierArmed, count, baseBuilder.RefTierTarget))", StringComparison.Ordinal);
+			var tier = qm.IndexOf("RefTierOutranksInterval(count))", StringComparison.Ordinal);
 			var ret = qm.IndexOf("return verdict != RefineryFieldGateCA.EconomyVerdict.Allow;", tier, StringComparison.Ordinal);
 			Assert.That(ref2, Is.GreaterThan(0));
 			Assert.That(tier, Is.GreaterThan(ref2), "after the ref2 outrank, before the plain verdict");
@@ -117,6 +118,14 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(qm.Substring(tier - 80, 80), Does.Contain("verdict == RefineryFieldGateCA.EconomyVerdict.WaitInterval"), "only the interval wait is outranked (WaitFactory and YieldEssential come back unchanged)");
 
 			var rt = Source(Dir + "BaseBuilderQueueManagerCA.RefTier.cs");
+			// the outrank needs a claimable field: the same fieldUnderCap term as Ref2First.Due (law != null && an unclaimed anchor in reach)
+			Assert.That(rt, Does.Contain("var fieldUnderCap = law != null && law.UnclaimedAnchorsInReach > 0;"));
+			Assert.That(rt, Does.Contain("return RefTier.OutranksIntervalWait(true, count, baseBuilder.RefTierTarget, fieldUnderCap);"));
+			Assert.That(rt, Does.Contain("if (!baseBuilder.RefTierArmed)\n\t\t\t\treturn false;"));
+			Assert.That(rt, Does.Not.Contain("law == null ||"), "no law provider = no field verdict: no outrank");
+			Assert.That(qm.Split("RefTierOutranksInterval(").Length - 1, Is.EqualTo(1), "one call site in the economy gate");
+			Assert.That(Source(Dir + "BaseBuilderQueueManagerCA.Ref2First.cs"), Does.Contain("var fieldUnderCap = law != null && law.UnclaimedAnchorsInReach > 0;"), "the term ref2's Due uses");
+
 			Assert.That(rt, Does.Contain("var essential = count >= 2 && EssentialFirstCopyPending(buildableThings);"), "the yield never applies below the ref2 minimum of two");
 			Assert.That(rt, Does.Contain("baseBuilder.RefineryGateLastRiseTick, 0, essential, baseBuilder.RefineryGateYieldSince, baseBuilder.Info.RefineryEssentialYieldTicks);"), "the gate's own bounded yield clock, interval 0");
 			Assert.That(rt, Does.Not.Contain("Cancel"));
@@ -151,7 +160,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var ref2 = Source(Dir + "BaseBuilderQueueManagerCA.Ref2First.cs");
 			Assert.That(ref2, Does.Not.Contain("RefTier"));
 			var rt = Source(Dir + "BaseBuilderQueueManagerCA.RefTier.cs");
-			Assert.That(rt.Split("return").Length - 1, Is.EqualTo(3), "the yield verdict, and the two early outs of the DEV record: nothing else returns a hold");
+			Assert.That(rt.Split("return").Length - 1, Is.EqualTo(5), "the outrank (off, decision), the yield verdict, and the two early outs of the DEV record: nothing else returns a hold");
 		}
 
 		[Test]

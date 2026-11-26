@@ -2942,7 +2942,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			// REF-TIER-01 (row ref_tier_floor): below the tier target the interval wait is outranked too. The bounded first-copy yield still applies from the 3rd refinery on (tech chain and each building once
 			// win over the floor), the first-war-factory wait was already decided above, and nothing here holds a radar or production start (Ref2Holds is the only hold).
-			if (verdict == RefineryFieldGateCA.EconomyVerdict.WaitInterval && RefTier.OutranksIntervalWait(baseBuilder.RefTierArmed, count, baseBuilder.RefTierTarget))
+			if (verdict == RefineryFieldGateCA.EconomyVerdict.WaitInterval && RefTierOutranksInterval(count))
 				return RefTierYieldVerdict(buildableThings, count, now, yardWithoutRefinery, factoryBuildable, factoryOwnedOrQueued, factoryWaitReleased) != RefineryFieldGateCA.EconomyVerdict.Allow;
 
 			return verdict != RefineryFieldGateCA.EconomyVerdict.Allow;
