@@ -38,7 +38,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var info = Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCAInfo.TeamLead.cs");
 			Assert.That(info, Does.Contain("public readonly bool PincerArrivedArms = false;"));
 
-			var yaml = Source("mods/cameo/ai/ai.yaml");
+			var yaml = Source("packaging/ai.yaml");
 			Assert.That(yaml, Does.Not.Contain("PincerArrivedArms: true"), "master ships with the row off (untested)");
 			Assert.That(yaml, Does.Contain("PincerArrivedArms: false"));
 		}
