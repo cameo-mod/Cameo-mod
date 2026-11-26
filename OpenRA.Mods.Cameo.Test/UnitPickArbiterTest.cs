@@ -351,6 +351,47 @@ namespace OpenRA.Mods.Cameo.Test
 				Is.EqualTo(("corefocus.share", "corefocus.count", "corefocus.max", "corefocus.bank", "techlean.top", "techlean.bank")), "the key names are the learner's stable contract (addendum 1)");
 		}
 
+		// P5 (b), addendum 3 item 6 (N3, Haiku): a table multiplier (the core lift, the only one the table feeds into the weights) may never touch a type that was not issued yet: its weight after the table step equals its weight
+		// before it, so the first-build pull of a never-issued type and the mean floor stay as the roll made them. It also never lowers any weight (a lift only), and stays inside its cap, for every corefocus.* value.
+		[Test]
+		public void TheTableStepNeverChangesAnUnissuedWeightNorLowersAnyWeightForEveryCoreFocusValue()
+		{
+			var weights = new[] { 40.0, 10.0, 25.0, 1.0, 900.0, 5.0 };
+			var settled = new[] { true, true, false, true, true, false };
+			var prices = new[] { 100, 300, 500, 700, 1200, 60 };
+			var steps = 0;
+			foreach (var share in new[] { -5, 0, 30, 50, 99, 400 })
+			foreach (var max in new[] { 0, 100, 250, 800, 1_000_000 })
+			foreach (var count in new[] { 0, 1, 3, 9 })
+			foreach (var bankPct in new[] { 0, 30, 100 })
+			foreach (var bank in new[] { 0, 90, 400, 5000 })
+			{
+				var eligible = settled.Select((s, i) => s && CoreFocus.Affordable(prices[i], bank, bankPct)).ToArray();
+				var core = new bool[weights.Length];
+				foreach (var i in CoreFocus.Core(prices, eligible, count))
+					core[i] = true;
+
+				var multiplier = CoreFocus.MultiplierPct(weights, settled, core, share, max);
+				var after = CoreFocus.Apply(weights, core, multiplier);
+				var label = $"share={share} max={max} count={count} bankPct={bankPct} bank={bank}";
+				Assert.That(multiplier, Is.InRange(100, Math.Max(100, max)), label);
+				for (var i = 0; i < weights.Length; i++)
+				{
+					if (!settled[i])
+						Assert.That(after[i], Is.EqualTo(weights[i]), "an unissued type keeps its weight: " + label + " i=" + i);
+
+					if (!core[i])
+						Assert.That(after[i], Is.EqualTo(weights[i]), "only the core moves: " + label + " i=" + i);
+
+					Assert.That(after[i], Is.GreaterThanOrEqualTo(weights[i]), "a lift never lowers a weight: " + label + " i=" + i);
+				}
+
+				steps++;
+			}
+
+			Assert.That(steps, Is.EqualTo(6 * 5 * 4 * 3 * 4));
+		}
+
 		// P5 (b), addendum 3 item 3 (row ub_ramp_split as a table key, no switch): the lean's late start is its own key with the ramp as its prior.
 		[Test]
 		public void TheTechLeanStartIsTheRampUnlessALearnerSetsItAndTheBiasRampIsUntouched()
