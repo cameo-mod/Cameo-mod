@@ -40,10 +40,11 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void UnitCashTelemetryIsGenericAndDevOnly()
+		public void UnitCashTelemetryShipsOffAndIsDevOnly()
 		{
 			Assert.That(new UnitBuilderBotModuleCAInfo().UnitCashBlockedTelemetry, Is.False);
-			Assert.That(FieldOrNull(PlayerNode("UnitBuilderBotModuleCA@generic"), "UnitCashBlockedTelemetry"), Is.EqualTo("true"));
+			// V08H (Opus 11-26): the switch ships OFF; no ai.yaml block arms it yet.
+			Assert.That(FieldOrNull(PlayerNode("UnitBuilderBotModuleCA@generic"), "UnitCashBlockedTelemetry"), Is.Null);
 			Assert.That(FieldOrNull(PlayerNode("UnitBuilderBotModuleCA@classic"), "UnitCashBlockedTelemetry"), Is.Null);
 
 			var ub = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
