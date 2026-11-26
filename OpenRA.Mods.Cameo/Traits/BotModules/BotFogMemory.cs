@@ -362,6 +362,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					if (!fa.IsValid || fa.Owner != enemy || table.ContainsKey(fa.ID))
 						continue;
 
+					if (FrozenUnrememberable(fa.Hidden, fa.Shrouded, info.SkipHiddenShroudedFrozen))
+						continue;
+
 					var record = ClassifyObserved(fa.Info, fa.ID, viewer.World.Map.CellContaining(fa.CenterPosition), fa.TargetTypes, tick);
 					record.Cloaked = fa.Info.HasTraitInfo<CloakInfo>();
 					table[fa.ID] = record;
@@ -391,6 +394,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return visibleHarvesters;
 		}
 
+		/// <summary>FOG-FROZEN-01 (pure): true when a frozen actor must not be remembered. Hidden (a visibility modifier hides the
+		/// backing actor) and Shrouded (no footprint cell explored yet) are skipped while the switch is on; off = the old walk.</summary>
+		public static bool FrozenUnrememberable(bool hidden, bool shrouded, bool skipHiddenShrouded) =>
+			skipHiddenShrouded && (hidden || shrouded);
+
 		/// <summary>One read of the frozen-actor layer for a whole rebuild, split by owner (PERF-F2b). Null when the switch is off or
 		/// the viewer has no layer, so Observe falls back to its own walk.</summary>
 		public FrozenSnapshot SnapshotFrozen(ICollection<OpenRA.Player> enemies)
@@ -405,6 +413,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var fa in frozen.FrozenActorsInRegion(viewer.World.Map.AllCells))
 			{
 				if (!fa.IsValid)
+					continue;
+
+				if (FrozenUnrememberable(fa.Hidden, fa.Shrouded, info.SkipHiddenShroudedFrozen))
 					continue;
 
 				var owner = fa.Owner;
