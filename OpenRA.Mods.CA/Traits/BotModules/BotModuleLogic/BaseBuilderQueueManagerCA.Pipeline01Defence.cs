@@ -41,7 +41,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (!EarlyDefenceWanted())
 				yield break;
 
-			var bank = ProdBusyCA.SweepBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep);
+			var bank = CashLedger.BuildingBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep);
 			var candidates = new List<(string Name, int Cost, int OwnedOrQueued)>();
 			foreach (var info in buildable)
 			{

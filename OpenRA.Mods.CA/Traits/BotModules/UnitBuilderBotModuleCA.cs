@@ -1368,6 +1368,7 @@ namespace OpenRA.Mods.CA.Traits
 				// oversubscribe a slot, cash or headroom another site already claimed.
 				// Discarded when the pass ends; nothing durable. Flag off never allocates.
 				var batch = FairService ? new ProducerServiceBatch(playerResources.GetCashAndResources()) : null;
+				CashLedgerRow(); // CONSOLIDATE-03 P2 (b), DEV only
 
 				if (FairService && buildIntents.HasWaiting)
 				{
@@ -2072,10 +2073,11 @@ namespace OpenRA.Mods.CA.Traits
 						cost = 0;
 
 					if (!batch.Affords(cost) || !ReserveAdmits(batch, cost)
-						|| depthQueue && held > 0 && !QueueDepthCA.CashAdmits(batch.BankLeft, unpaidQueued, cost))
+						|| depthQueue && held > 0 && !CashLedger.UnitDepthAdmits(batch.BankLeft, unpaidQueued, cost))
 					{
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, "afford_cash");
+						CashRefused(batch, cost, depthQueue && held > 0, unpaidQueued); // CONSOLIDATE-03 P2 (b), DEV only
 						Reject();
 						continue;
 					}
@@ -2140,17 +2142,23 @@ namespace OpenRA.Mods.CA.Traits
 			if (cachedUnpaidTick != world.WorldTick)
 			{
 				cachedUnpaidTick = world.WorldTick;
-				// PROD-FIX-01 F-A (pb_unit_reserve_excl_upgrades): upgrade-service queue commitments leave the unit figure.
-				// UNIT-MIX-01 (X5): with the floor on, building and defence queue commitments are the base builder's own budget and leave it too.
-				var exclUpgrades = UnitReserveExclOn;
-				var exclBase = UnitMixOn && baseBuilder != null;
-				cachedUnpaid = exclUpgrades || exclBase
-					? SpendCommitmentsCA.UnpaidQueued(world, player, t => (exclUpgrades && System.Array.IndexOf(Info.UpgradeServiceQueues, t) >= 0)
-						|| (exclBase && (baseBuilder.Info.BuildingQueues.Contains(t) || baseBuilder.Info.DefenseQueues.Contains(t))))
-					: SpendCommitmentsCA.UnpaidQueued(world, player);
+				cachedUnpaid = UnitUnpaidScan();
 			}
 
 			return cachedUnpaid;
+		}
+
+		// The scan behind the per-tick figure (CONSOLIDATE-03 P2: one body, also read uncached by the DEV cash_ledger row's unpaid_cache_diff).
+		long UnitUnpaidScan()
+		{
+			// PROD-FIX-01 F-A (pb_unit_reserve_excl_upgrades): upgrade-service queue commitments leave the unit figure.
+			// UNIT-MIX-01 (X5): with the floor on, building and defence queue commitments are the base builder's own budget and leave it too.
+			var exclUpgrades = UnitReserveExclOn;
+			var exclBase = UnitMixOn && baseBuilder != null;
+			return exclUpgrades || exclBase
+				? SpendCommitmentsCA.UnpaidQueued(world, player, t => (exclUpgrades && System.Array.IndexOf(Info.UpgradeServiceQueues, t) >= 0)
+					|| (exclBase && (baseBuilder.Info.BuildingQueues.Contains(t) || baseBuilder.Info.DefenseQueues.Contains(t))))
+				: SpendCommitmentsCA.UnpaidQueued(world, player);
 		}
 
 		int cachedUnpaidTick = -1;
@@ -2186,12 +2194,11 @@ namespace OpenRA.Mods.CA.Traits
 			if (ablateRecovery.Off(player, AblationIds.Recovery))
 				return true;
 
+			// CONSOLIDATE-03 P2 (a): the reserve line and the gate are the cash ledger's unit admission (the same numbers). No bot limits = -1, closed.
 			var line = botLimits != null
-				? RecoverySpendPolicyCA.EffectiveReserve(botLimits.Info.ProductionCashReserve, BotPersonalityLeads.Lean(leadProviders, "steamroller"))
+				? CashLedger.UnitReserve(botLimits.Info.ProductionCashReserve, BotPersonalityLeads.Lean(leadProviders, "steamroller"), UnitReserveExclOn)
 				: -1;
-			line = ProdBusyCA.UnitReserveLine(UnitReserveExclOn, line);
-			return RecoverySpendPolicyCA.Admits(SpendCommitmentsCA.Available(batch.BankLeft, UnpaidQueuedCost()), cost, 0, 0, 0, false,
-				RecoverySpendPolicyCA.Admission.General, line);
+			return CashLedger.UnitReserveAdmits(batch.BankLeft, UnpaidQueuedCost(), cost, line);
 		}
 
 		// U1: per-name cap headroom shared across the batch — UnitLimits counts only

@@ -1071,7 +1071,7 @@ namespace OpenRA.Mods.CA.Traits
 				pauseBuilding ??= player.PlayerActor.TraitsImplementing<IBotRequestPauseBuildingProduction>().ToArray();
 				mobileReserve ??= player.PlayerActor.TraitsImplementing<IBotMobileSpendReserve>().FirstEnabledTraitOrDefault();
 				var reserveFloor = mobileReserve?.MobileSpendFloor ?? 0;
-				var cashNow = ProdBusyCA.SweepBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep);
+				var cashNow = CashLedger.BuildingBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep);
 				var isRefinery = baseBuilder.Info.RefineryTypes.Contains(item.Name);
 				var itemEssential = IsArmyFirstEssential(item);
 				var antiRushPick = antiRushPickName != null && item.Name == antiRushPickName; // EARLY-DEF-01
@@ -2363,7 +2363,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool OpeningAdmits(ProductionQueue queue, ActorInfo item) =>
 			VotesAdmit(queue, item, RecoverySpendPolicyCA.Admission.General)
-			&& !(EssentialsOn && EssentialsHolds(item, false, false, ProdBusyCA.SweepBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep)));
+			&& !(EssentialsOn && EssentialsHolds(item, false, false, CashLedger.BuildingBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep)));
 
 		// The cheapest building of <types> the faction can build now: within its limits, its production-type limit and its delay; first copies only when asked.
 		ActorInfo OpeningCheapest(ProductionQueue queue, IEnumerable<ActorInfo> buildable, Func<ActorInfo, bool> inRole, bool firstCopyOnly)
@@ -3182,7 +3182,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (CycleOn)
 			{
 				var cycleLine = TierLine;
-				if (cycleLine > 0 && ProdBusyCA.SweepBank(AllProducersOn, availableCash, orderedCostThisSweep) > cycleLine)
+				if (cycleLine > 0 && CashLedger.BuildingBank(AllProducersOn, availableCash, orderedCostThisSweep) > cycleLine)
 				{
 					var cycled = ChooseCycledProduction(buildableThings, power, c => VotesAdmit(queue, c, RecoverySpendPolicyCA.Admission.General));
 					if (cycled != null)

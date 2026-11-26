@@ -433,7 +433,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var p = Source(PipelineFile);
 			Assert.That(p, Does.Contain("TierLine = TierLine,\n\t\t\t\tLowCashCut = EssentialsOn,\n\t\t\t\tSustainedActive = SustainedActive,"));
-			Assert.That(p, Does.Contain("BaseBuildPlanCA.ReserveFor(c.Stage, s.ProductionCashReserve)"), "A6: reserve 0 for S1-S7, the tier reserve for S8-S10");
+			Assert.That(p, Does.Contain("CashLedger.BuildingReserve(c.Stage, s.ProductionCashReserve, s.ReserveLean)"), "A6: reserve 0 for S1-S7, the tier reserve for S8-S10 (P2 (a): the ledger line = ReserveFor)");
 			Assert.That(p, Does.Contain("ProductionCashReserve = botLimits != null ? botLimits.Info.ProductionCashReserve : -1,"));
 		}
 

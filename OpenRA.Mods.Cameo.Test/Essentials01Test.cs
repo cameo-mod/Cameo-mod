@@ -95,7 +95,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var src = Queue();
 			Assert.That(src, Does.Contain("bool CycleOn => baseBuilder.CycleProductionArmed && !ablateCycle.Off(player, AblationIds.CycleProduction);"));
-			Assert.That(src, Does.Contain("ProdBusyCA.SweepBank(AllProducersOn, availableCash, orderedCostThisSweep) > cycleLine"));
+			Assert.That(src, Does.Contain("CashLedger.BuildingBank(AllProducersOn, availableCash, orderedCostThisSweep) > cycleLine"));
 			var from = src.IndexOf("ActorInfo ChooseCycledProduction(", StringComparison.Ordinal);
 			var to = src.IndexOf("bool EssentialsHolds(", from, StringComparison.Ordinal);
 			Assert.That(src.Substring(from, to - from), Does.Not.Contain("Random"));

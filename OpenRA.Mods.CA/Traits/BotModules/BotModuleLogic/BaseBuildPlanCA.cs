@@ -89,6 +89,9 @@ namespace OpenRA.Mods.CA.Traits
 		public int Bank;
 		public int ProductionCashReserve = -1;
 
+		// CONSOLIDATE-03 P2 (b) cl_one_reserve: the personality lean applied to the S8-S10 reserve (1.0 = the unscaled tier line, row off).
+		public double ReserveLean = 1.0;
+
 		// C4-C6: the tier line L (BotLimits MaximiseProductionCashRequirement, 0 = none), SUSTAINED-CASH active, the threat-seen latch, and the
 		// RATIO-2X inputs (mobile army value and live + queued static defence value; HasArmyValues false = no provider or no usable measure).
 		public int TierLine;
