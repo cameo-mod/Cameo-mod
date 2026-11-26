@@ -6519,6 +6519,8 @@ Player:
 		CoreFocusCount: 3
 		CoreFocusMaxPct: 800
 		CoreFocusBankPct: 30
+		# PERF-BOTTICK-01 FIX 4 (Opus 11-26, row cost_cache_visit): the production cost is memoised for one bot visit (the same integer as the live read; V08F Leg A: 73% of long visits). @generic only.
+		CostCacheVisit: true
 		# CONSOLIDATE-01 C9 (X13): paid Promotions also start while a unit-production pause vote is up (pq_upgrade_service); free items always did.
 		# UPG-ADDONS (Opus 11-25, Haiku check): the army_* lvl2-3 upgrades sit on the BuildingAddons queue, which the upgrade service did not serve. @generic only.
 		UpgradeServiceQueues: Promotions, Upgrades, Research, Addons, BuildingAddons
