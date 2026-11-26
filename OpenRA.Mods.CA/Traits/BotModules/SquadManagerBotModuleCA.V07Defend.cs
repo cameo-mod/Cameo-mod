@@ -136,9 +136,12 @@ namespace OpenRA.Mods.CA.Traits
 			var drafted = 0;
 			var draftable = unitsHangingAroundTheBase.Where(u => !unitCannotBeOrdered(u.Actor) && IsDefenderDraftable(u, leases)).ToList();
 
+			// CONSOLIDATE-03 P7 (b) row sq_defend_one: the one ally-defend rule: the pool units inside the ally-defence radius of the victim, the DEFEND-ALLY draft limit, one response cooldown with the local scan.
 			// CONSOLIDATE-02 Q4b (X8, Opus D2): every teammate answers, but with its share, not its whole pool: the team together sends the attack's worth at the margin,
 			// split over the answering allies, each taking the units nearest to the attacker first. (The whole pool of every teammate used to walk across the map.)
-			if (arbiter)
+			if (DefendOneOn)
+				draftable = DefendOnePick(draftable, alarm, now);
+			else if (arbiter)
 			{
 				var need = DefendArbiterCA.AllyPoolNeed(alarm.AttackValue, Info.ArbiterDefendMarginPercent, teamLeadAliveSeats - 1);
 				var attackerPos = attacker.CenterPosition;

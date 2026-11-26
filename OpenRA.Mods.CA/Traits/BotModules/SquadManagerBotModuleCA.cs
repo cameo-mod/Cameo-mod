@@ -74,6 +74,10 @@ namespace OpenRA.Mods.CA.Traits
 			"The calls are compiled out of release builds; nothing reads the ledger and no decision, random draw or order changes. Off in classic.")]
 		public readonly bool ArmyDutyTrace = false;
 
+		[Desc("CONSOLIDATE-03 P7 (b) (row sq_defend_one; needs DefendAllyEnabled and TeamLeadDefendTeamEnabled): ONE ally-defend rule. The team alarm drafts only the pool units inside the DefendAllyRadiusCells of the attacked friendly (nearest first, the",
+			"DEFEND-ALLY draft limit) and shares the response cooldown with the local scan, so one attack is answered by one draft. Off in code and classic.")]
+		public readonly bool DefendOneEnabled = false;
+
 		[Desc("M13 bounded team-response and attack-liveness consumer. Default off; classic excluded by the increment applier.")]
 		public readonly bool AttackLivenessEnabled = false;
 
