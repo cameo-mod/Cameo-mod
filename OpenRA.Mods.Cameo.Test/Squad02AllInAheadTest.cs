@@ -378,8 +378,9 @@ namespace OpenRA.Mods.Cameo.Test
 			var fire = Between(wiring, "string AheadWhy(int now)", "void AheadDeescalate(int now)");
 			Assert.That(fire, Does.Contain("if (!ArmyAheadOn || now < Info.ArmyAheadStartTick)"));
 			Assert.That(fire, Does.Contain("AheadBehind(v, Info.ArmyAheadResumePercent)"));
-			Assert.That(fire, Does.Contain("if (!AheadTriggerOn(trigger))"));
-			Assert.That(fire.IndexOf("AheadScan(now);", StringComparison.Ordinal), Is.LessThan(fire.IndexOf("AheadPick(v, AheadTriggerOn, aheadDefeatsHandled)", StringComparison.Ordinal)));
+			Assert.That(fire, Does.Contain("if (!on(trigger))"));
+			Assert.That(fire, Does.Contain("AheadPick(v, Info, AheadTriggerOn, aheadDefeatsHandled)"), "the enables are handed over as one delegate");
+			Assert.That(fire.IndexOf("AheadScan(now);", StringComparison.Ordinal), Is.LessThan(fire.IndexOf("AheadPick(v, Info, AheadTriggerOn, aheadDefeatsHandled)", StringComparison.Ordinal)));
 			Assert.That(fire, Does.Contain("aheadDefeatsHandled = v.Defeated;"), "a defeat is answered once");
 		}
 

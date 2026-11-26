@@ -47,17 +47,20 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheAheadPickWritesNothingAndTakesTheDefeatCountIn()
 		{
 			var ahead = Source("mods/CA/Traits/BotModules/SquadManagerBotModuleCA.AllInAhead.cs");
-			Assert.That(ahead, Does.Contain("long AheadFired(AheadTrigger trigger, AheadView v, int defeatsHandled) => trigger switch"));
+			Assert.That(ahead, Does.Contain("static long AheadFired(AheadTrigger trigger, AheadView v, int defeatsHandled, SquadManagerBotModuleCAInfo info) => trigger switch"));
 			Assert.That(ahead, Does.Contain("AllInAhead.Defeat(v.Defeated, defeatsHandled, "));
 			var start = ahead.IndexOf("(int Index, long Ratio) AheadPick(", StringComparison.Ordinal);
 			Assert.That(start, Is.GreaterThan(0));
 			var end = ahead.IndexOf("\n\t\t}", start, StringComparison.Ordinal) + 4;
 			var body = ahead.Substring(start, end - start);
-			Assert.That(body, Does.Contain("AheadFired(trigger, v, defeatsHandled)"));
+			Assert.That(body, Does.Contain("AheadFired(trigger, v, defeatsHandled, info)"));
 			Assert.That(body, Does.Not.Contain("aheadLastFired"), "the pick writes no latch");
 			Assert.That(body, Does.Not.Contain("aheadDefeatsHandled"), "the pick writes no defeat count");
 			Assert.That(body, Does.Not.Contain("AheadRecord("), "the pick records nothing");
 			Assert.That(ahead, Does.Contain("aheadDefeatsHandled = v.Defeated;"), "the defeat write stays in AheadWhy, on the branch that fired");
+			var fired = ahead.Substring(ahead.IndexOf("static long AheadFired(", StringComparison.Ordinal));
+			fired = fired.Substring(0, fired.IndexOf("\n\t\t};", StringComparison.Ordinal));
+			Assert.That(fired, Does.Not.Contain("Info."), "the thresholds come in as the info argument, not from the instance");
 		}
 
 		[Test]
