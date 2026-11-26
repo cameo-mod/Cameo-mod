@@ -6540,6 +6540,8 @@ Player:
 		UpgradeServiceQueues: Promotions, Upgrades, Research, Addons, BuildingAddons
 		# UPG-ADDONS-DEFAULT (V08F-FIX-01): the code default is false; @generic sets it true so the army_* lvl2-3 upgrades stay served. Classic does not list BuildingAddons, so it is unchanged.
 		UpgradeBuildingAddons: true
+		# CONSOLIDATE-03 P6 (b), row pst_settle_authoritative (Opus ruling P6b): off = the bot's own scan; on = the own TechTree. @generic false until the V08 DEV evidence rules.
+		PstSettleAuthoritative: false
 		# upg_once_registry (Opus 11-25, V08F: ARM): Sol traced the playtest's repeated upgrade starts (x12-16) to the missing pending
 		# reservation with the registry OFF. @generic only; the code default stays false (classic and every other bot unchanged).
 		UpgradeOnceRegistry: true

@@ -86,6 +86,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("UPGRADE-COVERAGE: ticks an ordered upgrade item may stay unseen in its queue before the order is released (not done) and the item may be offered again.")]
 		public readonly int UpgradePendingTimeout = 300;
 
+		[Desc("CONSOLIDATE-03 P6 (b), row pst_settle_authoritative: the upgrade settle reads the owned prerequisites from the player's own TechTree (the engine's owner-only check). False = the bot's own scan (today's behaviour). @generic false.")]
+		public readonly bool PstSettleAuthoritative = false;
+
 		[Desc("ub_capturer_strict (row of the same name): the capturer cap and the armed-infantry denominator count a unit as a capturer only when one of its Captures traits can capture one of CapturerCaptureTypes",
 			"(the Capturable.Types of enemy buildings). Garrison and driver-kill captures never count. False = the old rule: any Captures trait.")]
 		public readonly bool CapturerStrict = false;
@@ -1147,11 +1150,14 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			upgradeSettleTick = world.WorldTick;
-			foreach (var (name, source) in upgradeDone.Settle(world.WorldTick, queuedIn, UpgradeGrantsOf, OwnedPrerequisites(), OfferedUpgradeNames, UpgradeQueueAlive, UpgradePrerequisitesHeld, Info.UpgradePendingTimeout))
+			foreach (var (name, source) in upgradeDone.Settle(world.WorldTick, queuedIn, UpgradeGrantsOf, SettleOwned(), OfferedUpgradeNames, UpgradeQueueAlive, UpgradePrerequisitesHeld, Info.UpgradePendingTimeout))
 				UpgradeDoneLog(name, source);
 
 			foreach (var (name, reason) in upgradeDone.Released)
+			{
 				UpgradeReleaseLog(name, reason);
+				PendingStreamNote("settle_release", name + ":" + reason, world.WorldTick, 0); // CONSOLIDATE-03 P6 DEV hash (Sonnet nit a)
+			}
 		}
 
 		// the EXACT queue instance that showed the item is still there and enabled (another queue of the same category does not stand in for a dead producer)
@@ -1677,6 +1683,7 @@ namespace OpenRA.Mods.CA.Traits
 						bot.QueueOrder(Order.StartProduction(queue.Actor, item2.Name, 1));
 						NotifyStarted(item2.Name, queue.Info.Type);
 						upgradeDone.Started(item2.Name, world.WorldTick);
+						PendingStreamNote("upg_start", item2.Name, world.WorldTick, 0); // CONSOLIDATE-03 P6 DEV hash
 						UpgradeStartLog(item2.Name, queue.Info.Type, queue.GetProductionCost(item2));
 						AIUtils.BotDebug("AI: {0} upgrade service starts {1} in {2}.", player, item2.Name, queue.Info.Type);
 					}
@@ -2061,6 +2068,7 @@ namespace OpenRA.Mods.CA.Traits
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, "capturer");
 						PickTraceRefuse(queue, skip.Count, "capturer", name, held, -1, -1, batch);
+						PendingStreamNote("refuse_capturer", unit.Name, world.WorldTick, 0); // CONSOLIDATE-03 P6 DEV hash
 						Reject();
 						continue;
 					}
@@ -2078,6 +2086,7 @@ namespace OpenRA.Mods.CA.Traits
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, "aircraft");
 						PickTraceRefuse(queue, skip.Count, "aircraft", name, held, -1, -1, batch);
+						PendingStreamNote("refuse_aircraft", unit.Name, world.WorldTick, 0); // CONSOLIDATE-03 P6 DEV hash
 						Reject();
 						continue;
 					}
@@ -2113,6 +2122,7 @@ namespace OpenRA.Mods.CA.Traits
 					NotifyStarted(name, queue.Info.Type);
 					counters.Record(unit);
 					batch.Reserve(queue, fullCost);
+					PendingStreamNote("unit_emit", name, world.WorldTick, fullCost); // CONSOLIDATE-03 P6 DEV hash
 					if (leaned)
 						TechLeanLog(queue.Info.Type, name, fullCost, batch.BankLeft + fullCost, rollPoolMaxCost);
 					if (depthQueue)
@@ -2369,6 +2379,7 @@ namespace OpenRA.Mods.CA.Traits
 					if (FairService)
 					{
 						batch.Reserve(queue, queue.GetProductionCost(actorInfo));
+						PendingStreamNote("unit_emit", actorInfo.Name, world.WorldTick, queue.GetProductionCost(actorInfo)); // CONSOLIDATE-03 P6 DEV hash
 						SpendLimitHeadroom(batch, name);
 						if (actorInfo.HasTraitInfo<AircraftInfo>())
 						{
