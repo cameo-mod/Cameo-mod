@@ -246,6 +246,7 @@ d2k_spicesifter:
 wall:
 	Inherits@spriteactor: ^SpriteActor
 	Inherits@D2KSprite: ^D2KPaletteRender
+	-WithDeathAnimation:
 	Interactable:
 	CombatDebugOverlay:
 	FrozenUnderFog:

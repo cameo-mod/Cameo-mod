@@ -174,7 +174,7 @@ Tick = function ()
 		Penta.MarkFailedObjective(PlayerOneObjective)
 	end
 
-	if NitroIdle.HasNoRequiredUnits() and NitroActive.HasNoRequiredUnits() then
+	if PlayerOneClear and NitroIdle.HasNoRequiredUnits() and NitroActive.HasNoRequiredUnits() then
 		Penta.MarkCompletedObjective(PlayerOneClear)
 	end
 

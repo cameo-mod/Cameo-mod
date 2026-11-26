@@ -129,6 +129,7 @@ atreides_heavyfactory:
 atreides_repairpad:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
+	-WithDeathAnimation:
 	Inherits@shape: ^2x2Shape
 	Buildable:
 		Factions: atreides
@@ -195,6 +196,7 @@ atreides_hightechfactory:
 	Inherits: ^D2KBuilding
 	Inherits@hpad: ^IsAircraftFactory
 	Inherits@D2KSprite: ^D2KPaletteRender
+	-WithDeathAnimation:
 	Inherits@shape: ^3x2Shape
 	Buildable:
 		Factions: atreides
@@ -228,6 +230,7 @@ atreides_hightechfactory:
 atreides_ixresearchcenter:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
+	-WithDeathAnimation:
 	Inherits@shape: ^2x2Shape
 	Buildable:
 		Factions: atreides
@@ -249,6 +252,7 @@ atreides_ixresearchcenter:
 atreides_starport:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
+	-WithDeathAnimation:
 	Inherits@shape: ^3x2Shape
 	Buildable:
 		Factions: atreides
@@ -269,6 +273,7 @@ atreides_starport:
 atreides_palace:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
+	-WithDeathAnimation:
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@shape: ^2x2Shape
 	Buildable:

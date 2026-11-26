@@ -108,6 +108,7 @@ corrino_lightfactory:
 	Inherits: ^D2KBuilding
 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 	Inherits@D2KSprite: ^D2KPaletteRender
+	-WithDeathAnimation:
 	Inherits@shape: ^2x2Shape
 	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Buildable:
@@ -139,6 +140,7 @@ corrino_lightfactory:
 corrino_repairpad:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
+	-WithDeathAnimation:
 	Inherits@shape: ^2x2Shape
 	Buildable:
 		Prerequisites: ~corrino_heavyfactory
@@ -160,6 +162,7 @@ corrino_repairpad:
 corrino_outpost:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
+	-WithDeathAnimation:
 	Inherits@shape: ^2x2Shape
 	Buildable:
 		Prerequisites: ~corrino_constructionyard, corrino_refinery, corrino_barracks
@@ -184,6 +187,7 @@ corrino_hightechfactory:
 	Inherits: ^D2KBuilding
 	Inherits@hpad: ^IsAircraftFactory
 	Inherits@D2KSprite: ^D2KPaletteRender
+	-WithDeathAnimation:
 	Inherits@shape: ^3x2Shape
 	Buildable:
 		Prerequisites: ~corrino_heavyfactory
@@ -216,6 +220,7 @@ corrino_hightechfactory:
 corrino_ixresearchcenter:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
+	-WithDeathAnimation:
 	Inherits@shape: ^2x2Shape
 	Buildable:
 		Queue: Building, RABuilding
@@ -236,6 +241,7 @@ corrino_ixresearchcenter:
 corrino_starport:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
+	-WithDeathAnimation:
 	Inherits@shape: ^3x2Shape
 	Buildable:
 		Prerequisites: ~hightech.corrino, ~research_centre
@@ -255,6 +261,7 @@ corrino_starport:
 corrino_palace:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
+	-WithDeathAnimation:
 	Inherits@shape: ^2x2Shape
 	Buildable:
 		Prerequisites: ~hightech.corrino, ~research_centre
@@ -274,6 +281,7 @@ corrino_palace:
 corrino_gunturret:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
+	-WithDeathAnimation:
 	Inherits@shape: ^1x1Shape
 	Buildable:
 		Prerequisites: ~corrino_constructionyard, corrino_barracks
@@ -298,6 +306,7 @@ corrino_gunturret:
 corrino_rocketturret:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
+	-WithDeathAnimation:
 	Inherits@shape: ^1x1Shape
 	Buildable:
 		Prerequisites: ~corrino_constructionyard, corrino_barracks

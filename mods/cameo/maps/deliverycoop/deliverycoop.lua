@@ -64,7 +64,7 @@ end
 	
 	Trigger.OnEnteredProximityTrigger(ConTruck2.CenterPosition, WDist.New(3*1024), function(a, id)
 		if a.Owner == GDI2 then
-			ConTruck.Owner = GDI2
+			ConTruck2.Owner = GDI2
 			Trigger.RemoveProximityTrigger(id)
 		end
 	end)
