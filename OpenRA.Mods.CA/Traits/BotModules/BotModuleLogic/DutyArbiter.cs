@@ -18,7 +18,7 @@ namespace OpenRA.Mods.CA.Traits
 	/// <summary>
 	/// CONSOLIDATE-03 P7 (b), the pure policy seam of the rank rows (design 01 section 3, Opus review changes 3 and 5): rank gate, all-in claim rule with its refusal list, own-base rank (R1 or R3), and the observed-only
 	/// ETA / risk eligibility. NOT wired into a decision yet: rows sq_rank_enforce, sq_all_in_ledger and sq_eta_risk wait for the baseline counters of phase (a) (Opus: run the baseline for one game before arming any
-	/// (b) row), because the violations they remove are exactly what those counters measure. Pure, engine-free: no world access, no RNG, so each rule is unit-testable and the wiring afterwards is a few lines.
+	/// (b) row), because the violations they remove are exactly what those counters measure. A claim carries its identity (squad or order) and its core flag, so the equal-rank ban holds between two claims of the same duty. Pure, engine-free: no world access, no RNG, so each rule is unit-testable and the wiring afterwards is a few lines.
 	/// </summary>
 	public static class DutyArbiter
 	{
@@ -26,28 +26,40 @@ namespace OpenRA.Mods.CA.Traits
 		public const int AllInHighestTakenRank = 4;
 
 		/// <summary>
-		/// The rank gate: a claim may take a unit from a holder only when its rank is strictly higher (a smaller number); equal ranks never take from each other. No holder, or the same duty (a refresh), is not a take.
-		/// <paramref name="coreUnderAttack"/> ranks an own-base claim R1 instead of R3 (ArmyDutyLedger.IsCoreUnderAttack); a holder's own-base duty is R3.
+		/// One claim on a unit: the duty, the identity of the claim (the squad id, or the order Seq for a team order; 0 for the idle pool) and whether this claim is the active defence of a core under attack
+		/// (ArmyDutyLedger.IsCoreUnderAttack; only an own-base claim can be core, which ranks it R1 instead of R3). Two claims are the SAME claim only when the duty and the identity both match: a different squad or a
+		/// different order with the same duty is another claim of equal rank (Sol FIX_STATIC on db515678).
 		/// </summary>
-		public static bool MayTake(ArmyDuty claimant, ArmyDuty holder, bool coreUnderAttack = false)
+		public readonly record struct DutyClaim(ArmyDuty Duty, long Identity, bool CoreUnderAttack = false);
+
+		/// <summary>
+		/// The rank gate: a claim may take a unit from a holder only when its effective rank is strictly higher (a smaller number); equal ranks never take from each other, also for the same duty of another squad or order.
+		/// No holder, or the same claim refreshing itself (same duty and same identity), is not a take. The rank of BOTH sides is the effective rank, so an active core defence holds at R1 and an ally call (R2) cannot take it.
+		/// </summary>
+		public static bool MayTake(DutyClaim claimant, DutyClaim holder)
 		{
-			if (holder == ArmyDuty.None || claimant == holder)
+			if (holder.Duty == ArmyDuty.None)
 				return true;
 
-			return EffectiveRank(claimant, coreUnderAttack) < ArmyDutyLedger.Rank(holder);
+			if (claimant.Duty == holder.Duty && claimant.Identity == holder.Identity)
+				return true;
+
+			return EffectiveRank(claimant) < EffectiveRank(holder);
 		}
 
 		/// <summary>The rank of a claim: the ledger rank, except that an own-base defence of a core under attack is R1.</summary>
 		public static int EffectiveRank(ArmyDuty duty, bool coreUnderAttack) =>
 			duty == ArmyDuty.OwnBaseDefend && coreUnderAttack ? 1 : ArmyDutyLedger.Rank(duty);
 
-		/// <summary>The all-in claim rule (Opus change 3): it claims everything at R4-R7, including the other team orders it replaces, and never a unit held at R1-R3.</summary>
-		public static bool AllInMayTake(ArmyDuty holder) => holder == ArmyDuty.None || ArmyDutyLedger.Rank(holder) >= AllInHighestTakenRank;
+		public static int EffectiveRank(DutyClaim claim) => EffectiveRank(claim.Duty, claim.CoreUnderAttack);
 
-		/// <summary>The units an all-in must leave alone, each with the rank that holds it (the refusal the sq_all_in_ledger row logs): "unit:R2". Sorted by unit id.</summary>
-		public static List<string> AllInRefusals(IEnumerable<(uint Unit, ArmyDuty Holder)> units) =>
+		/// <summary>The all-in claim rule (Opus change 3): it claims everything at R4-R7, including the other team orders it replaces, and never a unit held at R1-R3 (an active core defence is R1).</summary>
+		public static bool AllInMayTake(DutyClaim holder) => holder.Duty == ArmyDuty.None || EffectiveRank(holder) >= AllInHighestTakenRank;
+
+		/// <summary>The units an all-in must leave alone, each with the effective rank that holds it (the refusal the sq_all_in_ledger row logs): "unit:R2", "unit:R1" for an active core defence. Sorted by unit id.</summary>
+		public static List<string> AllInRefusals(IEnumerable<(uint Unit, DutyClaim Holder)> units) =>
 			units.Where(u => !AllInMayTake(u.Holder)).OrderBy(u => u.Unit)
-				.Select(u => u.Unit + ":R" + ArmyDutyLedger.Rank(u.Holder)).ToList();
+				.Select(u => u.Unit + ":R" + EffectiveRank(u.Holder)).ToList();
 
 		/// <summary>A threat as the planner may read it (Opus change 5): it must be SEEN now or REMEMBERED (scout memory with fading certainty). A threat that is neither is an unseen actor and is never an input.</summary>
 		public readonly record struct ObservedThreat(uint Id, long Value, bool Visible, bool Remembered);

@@ -58,8 +58,9 @@ namespace OpenRA.Mods.CA.Traits
 
 			var lend = GuardLend.Units(guard.Units.Count, armyGuardLend.Count, Info.ArmyGuardLendPercent, Info.TeamLeadJoinMinUnits);
 
-			// CONSOLIDATE-03 P7 (b) row sq_guard_floor: the guard keeps its learned minimum (0 during an open all-in); only the units above it can be lent.
-			if (lend > 0 && GuardFloorOn)
+			// CONSOLIDATE-03 P7 (b) row sq_guard_floor: the guard keeps its learned minimum (0 during an open all-in); only the units above it can be lent. Asked before a zero is rejected: the open all-in share
+			// is evaluated even when the ordinary share misses the join minimum (Sol FIX_STATIC on db515678).
+			if (GuardFloorOn)
 				lend = GuardFloorLend(guard, lend);
 
 			if (lend <= 0)

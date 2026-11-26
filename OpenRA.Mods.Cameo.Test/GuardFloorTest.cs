@@ -103,6 +103,23 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void AnAllInShareIsEvaluatedEvenWhenTheOrdinaryShareMissesTheJoinMinimum()
+		{
+			// guard 4, join minimum 3: the ordinary 50 percent share is 2 (< 3), so the plain lend is 0 ...
+			var plain = GuardLend.Units(4, 4, 50, 3);
+			Assert.That(plain, Is.EqualTo(0));
+
+			// ... but the open all-in share (90 percent) is 3, and with the all-in floor of 0 the floor row lends all 3. The wiring therefore must ask the row BEFORE rejecting the zero.
+			var allIn = GuardLend.Units(4, 4, GuardFloor.AllInLendPercent, 3);
+			Assert.That(allIn, Is.EqualTo(3));
+			Assert.That(GuardFloor.Lend(allIn, 4, GuardFloor.FloorUnits(4, 60, true, false), 3), Is.EqualTo(3));
+
+			// without an all-in the zero stays a zero: a planned 0 never becomes a lend, with or without a floor
+			Assert.That(GuardFloor.Lend(plain, 4, GuardFloor.FloorUnits(4, 0, false, false), 3), Is.EqualTo(0));
+			Assert.That(GuardFloor.Lend(plain, 4, GuardFloor.FloorUnits(4, 60, false, false), 3), Is.EqualTo(0));
+		}
+
+		[Test]
 		public void TheReturnWindowIsDueOnceItHasRun()
 		{
 			Assert.That(GuardFloor.ReturnDue(3100, 100, 3000), Is.True);
@@ -183,8 +200,9 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.GuardLend.cs");
 			var share = wiring.IndexOf("var lend = GuardLend.Units(guard.Units.Count, armyGuardLend.Count, Info.ArmyGuardLendPercent, Info.TeamLeadJoinMinUnits);", StringComparison.Ordinal);
-			var floor = wiring.IndexOf("if (lend > 0 && GuardFloorOn)\n\t\t\t\tlend = GuardFloorLend(guard, lend);", StringComparison.Ordinal);
+			var floor = wiring.IndexOf("if (GuardFloorOn)\n\t\t\t\tlend = GuardFloorLend(guard, lend);", StringComparison.Ordinal);
 			var empty = wiring.IndexOf("if (lend <= 0)", StringComparison.Ordinal);
+			Assert.That(wiring, Does.Not.Contain("lend > 0 && GuardFloorOn"), "asked before a zero is rejected: an open all-in share is evaluated although the ordinary share misses the join minimum (Sol FIX_STATIC on db515678)");
 			var cut = wiring.IndexOf("armyGuardLend.RemoveRange(lend, armyGuardLend.Count - lend);", StringComparison.Ordinal);
 			Assert.That(share, Is.GreaterThan(0));
 			Assert.That(floor, Is.GreaterThan(share), "after the share, so the row can only narrow it");
