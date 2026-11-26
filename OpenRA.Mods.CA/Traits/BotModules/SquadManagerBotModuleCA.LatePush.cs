@@ -37,6 +37,7 @@ namespace OpenRA.Mods.CA.Traits
 		// The seat before one join: the pool, the guard and the guard's clauses. Diffed against the seat after the join to name the units that went.
 		sealed class LatePushJoinContext
 		{
+			public TeamLeadOrder Order;
 			public LatePushGuardView Guard;
 			public readonly HashSet<Actor> Before = new();
 			public readonly HashSet<Actor> GuardBefore = new();
@@ -72,6 +73,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			view.Exists = true;
 			view.State = guard.FuzzyStateMachine?.CurrentState?.GetType().Name;
+			view.TargetValid = guard.IsTargetValid;
 			var baseRadius = (long)Info.MaxBaseRadius * Info.MaxBaseRadius;
 			foreach (var u in guard.Units)
 			{
@@ -88,15 +90,14 @@ namespace OpenRA.Mods.CA.Traits
 			}
 		}
 
-		// Which clause of the guard-lend predicate stands (the same inputs as ArmyGuardPick). The clauses do not depend on the guard's units, so a join reads them after the pass and only
-		// when units actually went (a join pass that sends nothing never pays for the request lookup).
+		// Which clauses of the guard-lend predicate stand (the same inputs as ArmyGuardPick). TargetValid was read with the guard's units, before any lend (it depends on the guard's first
+		// unit and on the guard being non-empty). The rest read the rally, the requests, the threat providers and the quiet timer, which ArmyGuardLendTo and the join never write (checked
+		// by reading both), so a join reads them after the pass and only when units went: a pass that sends nothing never pays for the request lookup.
 		void LatePushGuardClauses(LatePushGuardView view)
 		{
-			var guard = GetSquadOfType(SquadCAType.Protection);
-			if (guard == null || !guard.IsValid)
+			if (!view.Exists)
 				return;
 
-			view.TargetValid = guard.IsTargetValid;
 			view.Rally = TryGetProtectionRally(out _);
 			view.Request = SelectProtectionRequest() != null;
 			if (threatPredictionProviders != null)
@@ -141,16 +142,12 @@ namespace OpenRA.Mods.CA.Traits
 			});
 		}
 
-		// Called around TeamLeadJoin (before the pool is trimmed, the guard lends and the pool joins); null without a writer (a release build never gets here), without an open order, for a
-		// pushed persistent order (its reinforcement has its own rows) and when nothing could go (no pooled unit and no guard unit). The join pass repeats until the seat has joined, so this
-		// stays one cheap walk over pool and guard: the guard's clauses are read in LatePushJoinEnd, only if units went. A unit the seat cannot order is skipped (TeamLeadJoin drops it).
-		LatePushJoinContext LatePushJoinBegin()
+		// Called around a join pass (TeamLeadJoin's call site, ArmyReinforce) with the order the pass serves, before the pool is trimmed, the guard lends and the pool joins; null without a
+		// writer (a release build never gets here) or an order, and when nothing could go (no pooled unit and no guard unit). The join pass repeats until the seat has joined, so this stays
+		// one cheap walk over pool and guard: the guard's clauses are read in LatePushJoinEnd, only if units went. A unit the seat cannot order is skipped (TeamLeadJoin drops it).
+		LatePushJoinContext LatePushJoinBegin(TeamLeadOrder order)
 		{
-			if (DiagnosticWriter == null)
-				return null;
-
-			var order = TeamLeadOpenOrder();
-			if (order == null || order is { Persistent: true, Pushed: true })
+			if (DiagnosticWriter == null || order == null)
 				return null;
 
 			var guard = GetSquadOfType(SquadCAType.Protection);
@@ -158,7 +155,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (unitsHangingAroundTheBase.Count == 0 && (!guardValid || guard.Units.Count == 0))
 				return null;
 
-			var ctx = new LatePushJoinContext { Guard = new LatePushGuardView() };
+			var ctx = new LatePushJoinContext { Order = order, Guard = new LatePushGuardView() };
 			LatePushGuardUnits(ctx.Guard);
 			foreach (var u in unitsHangingAroundTheBase)
 			{

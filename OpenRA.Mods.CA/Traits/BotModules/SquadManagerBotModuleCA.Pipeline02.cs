@@ -540,7 +540,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			var before = unitsHangingAroundTheBase.Count;
 #if CAMEO_DEV_LOGGING
-			var latePushJoin = LatePushJoinBegin();
+			var latePushJoin = LatePushJoinBegin(order);
 #endif
 			CreateAttackForce(bot);
 #if CAMEO_DEV_LOGGING

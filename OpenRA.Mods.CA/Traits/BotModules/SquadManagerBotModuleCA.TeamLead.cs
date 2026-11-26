@@ -496,13 +496,15 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 #if CAMEO_DEV_LOGGING
-			// LATEPUSH-01 P0 (DEV only, read only): the seat before and after the join pass. Around the call, so the text of TeamLeadJoin itself is the release text.
-			var latePushJoin = TeamLeadCadenceOn ? LatePushJoinBegin() : null;
+			// LATEPUSH-01 P0 (DEV only, read only): the seat before and after the join pass. Around the call, so the text of TeamLeadJoin itself is the release text. A pushed persistent
+			// order is reinforced inside TeamLeadJoin (ArmyReinforce writes its own rows), so it gets no second row here.
+			var latePushOrder = TeamLeadOpenOrder();
+			var latePushJoin = TeamLeadCadenceOn && latePushOrder is not { Persistent: true, Pushed: true } ? LatePushJoinBegin(latePushOrder) : null;
 #endif
 			if (TeamLeadCadenceOn)
 				TeamLeadJoin(bot, now);
 #if CAMEO_DEV_LOGGING
-			LatePushJoinEnd(latePushJoin, TeamLeadOpenOrder(), "join");
+			LatePushJoinEnd(latePushJoin, latePushJoin?.Order, "join");
 #endif
 		}
 
