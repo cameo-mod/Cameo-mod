@@ -292,7 +292,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			// the planner lifts the zone cap by one while fewer than two own refineries stand; the time floor stays as it is
 			var rd = Source("mods/Cameo/Traits/BotModules/ExpansionPlannerBotModule.RefDemand.cs");
-			Assert.That(rd, Does.Contain("int EcoFloorLift() => Math.Max(EcoTimeFloorLift(), Ref2FirstLift());"));
+			Assert.That(rd, Does.Contain("int EcoFloorLift() => Math.Max(Math.Max(EcoTimeFloorLift(), Ref2FirstLift()), RefTierLift());"), "REF-TIER-01 adds its own floor to the maximum");
 			Assert.That(rd, Does.Contain("ref2First != null && ref2First.Ref2FloorArmed"));
 			Assert.That(rd, Does.Contain("ref2Lift = Ref2First.LiftsCap(true, own, queued) ? 1 : 0;"));
 			Assert.That(rd, Does.Contain("queued += inProduction;"), "own standing PLUS in production: with ref2 queued the lift drops, so no 3rd claim opens before ref2 lands");
