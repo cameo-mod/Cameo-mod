@@ -379,7 +379,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(fire, Does.Contain("if (!ArmyAheadOn || now < Info.ArmyAheadStartTick)"));
 			Assert.That(fire, Does.Contain("AheadBehind(v, Info.ArmyAheadResumePercent)"));
 			Assert.That(fire, Does.Contain("if (!AheadTriggerOn(trigger))"));
-			Assert.That(fire.IndexOf("AheadScan(now);", StringComparison.Ordinal), Is.LessThan(fire.IndexOf("AheadFired(trigger, v)", StringComparison.Ordinal)));
+			Assert.That(fire.IndexOf("AheadScan(now);", StringComparison.Ordinal), Is.LessThan(fire.IndexOf("AheadPick(v, AheadTriggerOn, aheadDefeatsHandled)", StringComparison.Ordinal)));
 			Assert.That(fire, Does.Contain("aheadDefeatsHandled = v.Defeated;"), "a defeat is answered once");
 		}
 
