@@ -67,6 +67,12 @@ namespace OpenRA.Mods.CA.Traits
 		/// False = refused: nothing is held and the planner falls through to the next candidate.
 		/// </summary>
 		bool TryClaim(BaseBuildCandidate candidate, string admitted);
+
+		/// <summary>
+		/// S8-CASH-HOLD (row bb_s8_cash_hold): the candidate that just failed A1-A6 failed ONLY the cash test (it is buildable, within its limit, not delayed, no power or space refusal)
+		/// and the bank is at least <paramref name="minBankPercent"/> percent of its cost: an eligible factory the bank reaches soon. No side effect. Default false.
+		/// </summary>
+		bool CashOnlyBlocked(BaseBuildCandidate candidate, int minBankPercent) => false;
 	}
 
 	/// <summary>
@@ -145,6 +151,16 @@ namespace OpenRA.Mods.CA.Traits
 		// SUSTAINED cash (an admitted S8 still wins first). False = the offer alone holds them, as before.
 		public bool S8RejectedFallthrough;
 
+		// S8-CASH-HOLD (row bb_s8_cash_hold, Opus V08G ruling, S8_STARVE_01 line 35): while an eligible, affordable-soon S8 factory waits only for cash, the S10 fractions of THIS
+		// (building) queue are held back for at most S8HoldMaxTicks. S9 (defence), units and upgrades are never held. S8HoldName/S8HoldStart carry the running hold of the
+		// previous sweeps (start -1 = none); S8CashBlocked is written by the planner (the blocked type). False/0 = no hold, as before.
+		public bool S8CashHold;
+		public int S8HoldMaxTicks;
+		public int S8HoldMinBankPercent;
+		public string S8HoldName;
+		public int S8HoldStart = -1;
+		public string S8CashBlocked;
+
 		// DEV only: how many S8 candidates this walk offered (written only by the compiled-out recorder; always 0 in a release build).
 		public int S8Offers;
 	}
@@ -194,6 +210,9 @@ namespace OpenRA.Mods.CA.Traits
 				if (!QueueStageSplit.Allowed(stage, snapshot.QueueSplit, snapshot.DefenceQueue))
 					continue;
 
+				if (stage == BaseBuildStage.S10Fractions && S8CashHoldActive(snapshot))
+					continue;
+
 				if (!BaseBuildTiersCA.Open(stage, snapshot.TierLine, snapshot.Bank, snapshot.LowCashCut, snapshot.SustainedActive, snapshot.DefenceThreatSeen, BaseBuildTiersCA.CycleHolds(cycleOffered, snapshot.S8RejectedFallthrough)))
 					continue;
 
@@ -218,7 +237,13 @@ namespace OpenRA.Mods.CA.Traits
 					if (feasible && feasibility.TryClaim(candidate, admitted))
 						return new BaseBuildPick(admitted, candidate.Stage, candidate.Name, tests);
 
-					OfferRejected(snapshot, candidate, feasible ? "claim_refused" : "infeasible");
+					// S8-CASH-HOLD: the first S8 factory that failed only the cash test, while the row is armed, owns the hold (reason s8_cash_hold in the DEV rows).
+					var cashHold = !feasible && stage == BaseBuildStage.S8ProductionCycle && snapshot.S8CashHold && snapshot.S8CashBlocked == null
+						&& !snapshot.DefenceQueue && feasibility.CashOnlyBlocked(candidate, snapshot.S8HoldMinBankPercent);
+					if (cashHold)
+						snapshot.S8CashBlocked = candidate.Name;
+
+					OfferRejected(snapshot, candidate, cashHold ? "s8_cash_hold" : feasible ? "claim_refused" : "infeasible");
 
 					(failed ??= new HashSet<string>(StringComparer.Ordinal)).Add(candidate.Name);
 					if (tests >= MaxFeasibilityTests)
@@ -228,6 +253,11 @@ namespace OpenRA.Mods.CA.Traits
 
 			return new BaseBuildPick(null, BaseBuildStage.None, null, tests);
 		}
+
+		/// <summary>S8-CASH-HOLD: a cash-blocked S8 factory was seen this walk and its hold (counted from the first sweep that saw this type blocked) is younger than S8HoldMaxTicks.</summary>
+		public static bool S8CashHoldActive(BaseBuildSnapshot s) =>
+			s.S8CashHold && s.S8CashBlocked != null && !s.DefenceQueue
+			&& (s.S8HoldName != s.S8CashBlocked || s.S8HoldStart < 0 || s.WorldTick - s.S8HoldStart < s.S8HoldMaxTicks);
 
 		// S8-STARVE-01, DEV only: counts the S8 offers of a walk (the queue manager reports the fall-through when the pick comes from S9 or S10).
 		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]

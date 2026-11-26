@@ -15,5 +15,8 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		// A rejected S8 offer no longer holds S9 and S10 back under SUSTAINED cash (Info BbS8RejectedFallthrough). Off = the offer alone holds them, as before.
 		public const string BbS8RejectedFallthrough = "bb_s8_rejected_fallthrough";
+
+		// An eligible S8 factory that waits only for cash holds the S10 fractions back for a bounded time (Info BbS8CashHold). Off = no hold.
+		public const string BbS8CashHold = "bb_s8_cash_hold";
 	}
 }

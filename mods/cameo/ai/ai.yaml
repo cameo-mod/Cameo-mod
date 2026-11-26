@@ -5993,6 +5993,10 @@ Player:
 		BbNoCancel: true
 		# S8-STARVE-01 (row bb_s8_rejected_fallthrough, Sol 58ADBC25): under SUSTAINED cash a rejected S8 offer no longer holds S9/S10 back; an admitted S8 still wins first.
 		BbS8RejectedFallthrough: true
+		# S8-CASH-HOLD (row bb_s8_cash_hold, Opus V08G): an eligible S8 factory that waits only for cash holds the S10 fractions back for at most 750 ticks.
+		BbS8CashHold: true
+		S8HoldMaxTicks: 750
+		S8HoldMinBankPercent: 75
 		# REF-PREFETCH-FRESH (row ref_prefetch_fresh, Sol V08F_CUMREV_SOL_01 finding 2): prefetched relaxed refinery sites expire at the READY flip; a strict site outranks a relaxed one.
 		RefPrefetchFresh: true
 		# BUILD-ALL-B (row bb_no_foundation, user ruling 11-25): no concrete (terrain foundation) on any base-builder path; CONCRETE-PLAN-01 after the playtest.

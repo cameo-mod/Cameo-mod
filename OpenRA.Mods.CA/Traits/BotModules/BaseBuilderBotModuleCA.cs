@@ -369,6 +369,17 @@ namespace OpenRA.Mods.CA.Traits
 			"the low-cash cut, the feasibility budget and the S2/S7 refinery stages are unchanged. Gated by SwitchCondition; row bb_s8_rejected_fallthrough (off = the offer alone holds S9 and S10).")]
 		public readonly bool BbS8RejectedFallthrough = false;
 
+		[Desc("S8-CASH-HOLD (Opus V08G ruling, S8_STARVE_01 line 35): with bb_s8_rejected_fallthrough armed, an S8 production type that is eligible (buildable, within its limit, not delayed,",
+			"no power or space refusal, not rejected earlier this walk) and fails ONLY the cash test while the bank is at least S8HoldMinBankPercent of its cost holds back the S10 fractions of the",
+			"building queue for at most S8HoldMaxTicks (reason s8_cash_hold in the DEV rows). S9 defence, units and upgrades are never held. Gated by SwitchCondition; row bb_s8_cash_hold (off = no hold).")]
+		public readonly bool BbS8CashHold = false;
+
+		[Desc("S8-CASH-HOLD: the longest a cash-only S8 hold lasts, in ticks, counted from the first sweep that saw the type blocked. Learnable (DEV training only).")]
+		public readonly int S8HoldMaxTicks = 750;
+
+		[Desc("S8-CASH-HOLD: the hold applies only when the bank is at least this percent of the blocked type's cost (an affordable-soon factory). Learnable (DEV training only).")]
+		public readonly int S8HoldMinBankPercent = 75;
+
 		[Desc("REF-PREFETCH-FRESH (Sol V08F_CUMREV_SOL_01 finding 2, Opus V08G): a relaxed (fallback spacing) refinery site promoted into the K-list before the building is READY",
 			"is dropped at the READY flip (the candidate stream restarts its pass, so the next relaxed use rests on a current certificate), and a newly found strict site",
 			"outranks any relaxed one whatever the score classes say. Strict sites and an issued order are untouched. Gated by SwitchCondition; row ref_prefetch_fresh (off = as before).")]
@@ -930,6 +941,8 @@ namespace OpenRA.Mods.CA.Traits
 		public bool NoCancelArmed => Info.BbNoCancel && switchesActive && !ablateNoCancel.Off(player, AblationIds.BbNoCancel);
 		AblationLatch ablateS8RejectedFallthrough; // S8-STARVE-01
 		public bool S8RejectedFallthroughArmed => Info.BbS8RejectedFallthrough && switchesActive && !ablateS8RejectedFallthrough.Off(player, AblationIds.BbS8RejectedFallthrough);
+		AblationLatch ablateS8CashHold; // S8-CASH-HOLD
+		public bool S8CashHoldArmed => Info.BbS8CashHold && S8RejectedFallthroughArmed && !ablateS8CashHold.Off(player, AblationIds.BbS8CashHold);
 		AblationLatch ablateRefPrefetchFresh; // REF-PREFETCH-FRESH
 		public bool RefPrefetchFreshArmed => Info.RefPrefetchFresh && switchesActive && !ablateRefPrefetchFresh.Off(player, AblationIds.RefPrefetchFresh);
 		AblationLatch ablateRefineryIntervalLadder; // REF-INTERVAL-LADDER

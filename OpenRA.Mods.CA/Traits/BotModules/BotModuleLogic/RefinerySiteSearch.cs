@@ -865,6 +865,7 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		// Sec 8: the per-event DEV record (DEV build only; the official build carries no dev logging).
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
 		void Dev(Episode e, int now, string evt, string fields)
 		{
 #if CAMEO_DEV_LOGGING
