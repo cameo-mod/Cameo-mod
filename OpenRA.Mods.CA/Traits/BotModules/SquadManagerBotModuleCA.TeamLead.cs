@@ -495,8 +495,15 @@ namespace OpenRA.Mods.CA.Traits
 					ArmyRetargetEngaged(now);
 			}
 
+#if CAMEO_DEV_LOGGING
+			// LATEPUSH-01 P0 (DEV only, read only): the seat before and after the join pass. Around the call, so the text of TeamLeadJoin itself is the release text.
+			var latePushJoin = TeamLeadCadenceOn ? LatePushJoinBegin() : null;
+#endif
 			if (TeamLeadCadenceOn)
 				TeamLeadJoin(bot, now);
+#if CAMEO_DEV_LOGGING
+			LatePushJoinEnd(latePushJoin, TeamLeadOpenOrder(), "join");
+#endif
 		}
 
 		// The member's idle army: the pool plus the units of its formed quiet wave squads (the squads TeamLeadPrepare joins to an order or dismisses).
@@ -670,22 +677,13 @@ namespace OpenRA.Mods.CA.Traits
 
 			// A rally order takes the new units again and again (they walk to the rally and wait there), but only real groups: no one-unit squads.
 			unitsHangingAroundTheBase.RemoveAll(u => unitCannotBeOrdered(u.Actor));
-#if CAMEO_DEV_LOGGING
-			// LATEPUSH-01 P0 (DEV only): the seat before the guard lends and the pool joins (read only).
-			var latePushJoin = LatePushJoinBegin();
-#endif
 			// PUSHBAR-RCA-01 (row sq_guard_lend): a quiet home guard lends its spare units first, so the pool bars below see them and the squad forms on this pass.
 			ArmyGuardLendTo(order);
 			// TEAM-GATHER-02 (tl_join_merge): for a rally or held order the joinable units merge into the seat's gathering squad; a new squad forms only from a real group.
 			if (TeamLeadJoinMergeOn && (order.GatherOnly || order.Extending || order.AllIn))
 			{
 				if (TeamLeadMergeIntoGatherSquad(bot, order))
-				{
-#if CAMEO_DEV_LOGGING
-					LatePushJoinEnd(latePushJoin, order, "join");
-#endif
 					return;
-				}
 
 				if (unitsHangingAroundTheBase.Count(TeamLeadJoinable) < AllInCA.JoinMinUnits(order.AllIn, Info.TeamLeadJoinMinUnits, Info.TeamLeadAllInJoinMinUnits))
 					return;
@@ -702,9 +700,6 @@ namespace OpenRA.Mods.CA.Traits
 
 			var before = unitsHangingAroundTheBase.Count;
 			CreateAttackForce(bot);
-#if CAMEO_DEV_LOGGING
-			LatePushJoinEnd(latePushJoin, order, "join");
-#endif
 			if (order.AllIn && unitsHangingAroundTheBase.Count < before)
 				TeamLeadAllInRecord("all_in_join", order, "sent=" + (before - unitsHangingAroundTheBase.Count) + " left=" + unitsHangingAroundTheBase.Count);
 			if (unitsHangingAroundTheBase.Count < before && (!TeamLeadJoinMergeOn || Squads.Any(q => q.IsValid && q.Type == SquadCAType.Rush && q.FormedTick == now)))

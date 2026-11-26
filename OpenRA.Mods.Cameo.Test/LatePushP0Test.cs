@@ -209,6 +209,29 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TheJoinPassReadsOneCheapWalkAndTheClausesOnlyWhenUnitsWent()
+		{
+			var text = RepoFile(Bots + "SquadManagerBotModuleCA.LatePush.cs");
+			var begin = text[text.IndexOf("LatePushJoinContext LatePushJoinBegin()", StringComparison.Ordinal)..text.IndexOf("void LatePushJoinEnd(", StringComparison.Ordinal)];
+			Assert.That(begin, Does.Contain("unitsHangingAroundTheBase.Count == 0 && (!guardValid || guard.Units.Count == 0)"), "nothing pooled and no guard unit: no context");
+			Assert.That(begin, Does.Not.Contain("LatePushGuardNow()"), "the begin must not read the clauses (request lookup, threat providers) on every join pass");
+			Assert.That(begin, Does.Not.Contain("SelectProtectionRequest"));
+			Assert.That(begin, Does.Contain("LatePushGuardUnits(ctx.Guard);"));
+			Assert.That(begin, Does.Contain("order is { Persistent: true, Pushed: true }"), "a pushed persistent order reinforces with its own rows; no second row from the join");
+			Assert.That(begin, Does.Contain("unitCannotBeOrdered(u.Actor)"), "a unit TeamLeadJoin drops from the pool must not count as sent");
+
+			// The hooks sit around the call; TeamLeadJoin itself keeps the release text (its source pins in the squad tests stay valid).
+			var lead = RepoFile(Bots + "SquadManagerBotModuleCA.TeamLead.cs");
+			var joinBody = lead[lead.IndexOf("void TeamLeadJoin(IBot bot, int now)", StringComparison.Ordinal)..lead.IndexOf("// Where the order goes, from the leader's own view", StringComparison.Ordinal)];
+			Assert.That(joinBody, Does.Not.Contain("LatePush"));
+			Assert.That(joinBody, Does.Not.Contain("CAMEO_DEV_LOGGING"));
+
+			var end = text[text.IndexOf("void LatePushJoinEnd(", StringComparison.Ordinal)..text.IndexOf("void LatePushOutcomeTick()", StringComparison.Ordinal)];
+			var clauses = end.IndexOf("LatePushGuardClauses(g);", StringComparison.Ordinal);
+			Assert.That(clauses, Is.GreaterThan(end.IndexOf("if (sent.Count == 0)", StringComparison.Ordinal)), "the clauses are read only after the no-units-went return");
+		}
+
+		[Test]
 		public void ArmyPlanRowAppendsTheGuardFields()
 		{
 			var plan = RepoFile(Bots + "SquadManagerBotModuleCA.Pipeline02.cs");

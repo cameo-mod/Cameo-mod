@@ -11,7 +11,8 @@
 // LATEPUSH-01 P0 (LATEPUSH_01_DESIGN.md 4 D6, Opus-approved first piece): DEV-only evidence rows, no behaviour. The whole file exists only in a CAMEO_DEV_LOGGING build; a release
 // build has neither these methods nor their call sites nor the record name. Every method reads state and never writes it (no RNG, no order, no squad or pool change), so a DEV
 // game plays exactly like the same game without the rows. Rows go through the existing passive writer (DiagnosticWriter -> sink -> AiLogWriteQueue); there is no per-tick scan:
-// the guard view is read at an order event, at an army_plan pass (every ArmyPlanTicks) and for the two fixed outcome horizons of an assignment.
+// the guard view is read at an order event, at an army_plan pass (every ArmyPlanTicks) and for the two fixed outcome horizons of an assignment. The join pass repeats until the seat has
+// joined, so JoinBegin is one cheap walk over pool and guard (nothing at all when both are empty) and the guard's lend clauses are read only after a pass that sent units (CM review FIX).
 #if CAMEO_DEV_LOGGING
 using System.Collections.Generic;
 using OpenRA.Mods.CA.Traits.BotModules;
@@ -57,25 +58,20 @@ namespace OpenRA.Mods.CA.Traits
 		LatePushGuardView LatePushGuardNow()
 		{
 			var view = new LatePushGuardView();
+			LatePushGuardUnits(view);
+			LatePushGuardClauses(view);
+			return view;
+		}
+
+		// The guard squad's size and where its units stand (home base or away from it). Cheap: one walk over the guard, no enemy or request lookup.
+		void LatePushGuardUnits(LatePushGuardView view)
+		{
 			var guard = GetSquadOfType(SquadCAType.Protection);
 			if (guard == null || !guard.IsValid)
-				return view;
+				return;
 
 			view.Exists = true;
 			view.State = guard.FuzzyStateMachine?.CurrentState?.GetType().Name;
-			view.TargetValid = guard.IsTargetValid;
-			view.Rally = TryGetProtectionRally(out _);
-			view.Request = SelectProtectionRequest() != null;
-			if (threatPredictionProviders != null)
-				foreach (var p in threatPredictionProviders)
-				{
-					view.Perceived |= p.PerceivedBaseThreat;
-					view.Predicted += p.PredictedThreats.Count;
-				}
-
-			view.Quiet = GuardLend.Quiet(view.TargetValid, view.Rally, view.Request, view.Perceived || view.Predicted > 0);
-			view.QuietTicks = protectionQuietSinceTick < 0 ? -1 : World.WorldTick - protectionQuietSinceTick;
-
 			var baseRadius = (long)Info.MaxBaseRadius * Info.MaxBaseRadius;
 			foreach (var u in guard.Units)
 			{
@@ -90,8 +86,28 @@ namespace OpenRA.Mods.CA.Traits
 				else if (TeamLeadJoinable(u))
 					view.Joinable++;
 			}
+		}
 
-			return view;
+		// Which clause of the guard-lend predicate stands (the same inputs as ArmyGuardPick). The clauses do not depend on the guard's units, so a join reads them after the pass and only
+		// when units actually went (a join pass that sends nothing never pays for the request lookup).
+		void LatePushGuardClauses(LatePushGuardView view)
+		{
+			var guard = GetSquadOfType(SquadCAType.Protection);
+			if (guard == null || !guard.IsValid)
+				return;
+
+			view.TargetValid = guard.IsTargetValid;
+			view.Rally = TryGetProtectionRally(out _);
+			view.Request = SelectProtectionRequest() != null;
+			if (threatPredictionProviders != null)
+				foreach (var p in threatPredictionProviders)
+				{
+					view.Perceived |= p.PerceivedBaseThreat;
+					view.Predicted += p.PredictedThreats.Count;
+				}
+
+			view.Quiet = GuardLend.Quiet(view.TargetValid, view.Rally, view.Request, view.Perceived || view.Predicted > 0);
+			view.QuietTicks = protectionQuietSinceTick < 0 ? -1 : World.WorldTick - protectionQuietSinceTick;
 		}
 
 		// Three fields appended to the army_plan row: the guard's size, how many of its units stand away from the own base (H2), which lend clauses stand (H1) and how long it has been quiet.
@@ -125,16 +141,28 @@ namespace OpenRA.Mods.CA.Traits
 			});
 		}
 
-		// Called before the seat's guard lends and its pool joins; null without a writer (a release build never gets here).
+		// Called around TeamLeadJoin (before the pool is trimmed, the guard lends and the pool joins); null without a writer (a release build never gets here), without an open order, for a
+		// pushed persistent order (its reinforcement has its own rows) and when nothing could go (no pooled unit and no guard unit). The join pass repeats until the seat has joined, so this
+		// stays one cheap walk over pool and guard: the guard's clauses are read in LatePushJoinEnd, only if units went. A unit the seat cannot order is skipped (TeamLeadJoin drops it).
 		LatePushJoinContext LatePushJoinBegin()
 		{
 			if (DiagnosticWriter == null)
 				return null;
 
-			var ctx = new LatePushJoinContext { Guard = LatePushGuardNow() };
+			var order = TeamLeadOpenOrder();
+			if (order == null || order is { Persistent: true, Pushed: true })
+				return null;
+
+			var guard = GetSquadOfType(SquadCAType.Protection);
+			var guardValid = guard != null && guard.IsValid;
+			if (unitsHangingAroundTheBase.Count == 0 && (!guardValid || guard.Units.Count == 0))
+				return null;
+
+			var ctx = new LatePushJoinContext { Guard = new LatePushGuardView() };
+			LatePushGuardUnits(ctx.Guard);
 			foreach (var u in unitsHangingAroundTheBase)
 			{
-				if (u.Actor == null)
+				if (u.Actor == null || unitCannotBeOrdered(u.Actor))
 					continue;
 
 				ctx.Before.Add(u.Actor);
@@ -142,10 +170,9 @@ namespace OpenRA.Mods.CA.Traits
 				ctx.FreeValue += UnitValue(u.Actor);
 			}
 
-			var guard = GetSquadOfType(SquadCAType.Protection);
-			if (guard != null && guard.IsValid)
+			if (guardValid)
 				foreach (var u in guard.Units)
-					if (u.Actor != null)
+					if (u.Actor != null && !unitCannotBeOrdered(u.Actor))
 					{
 						ctx.GuardBefore.Add(u.Actor);
 						ctx.Before.Add(u.Actor);
@@ -191,6 +218,7 @@ namespace OpenRA.Mods.CA.Traits
 					lent++;
 
 			var g = ctx.Guard;
+			LatePushGuardClauses(g);
 			var scanned = aheadScanTick >= 0;
 			var v = aheadView;
 			w.TryEnqueueAttackAssign(new BotPassiveAttackAssignSnapshot
