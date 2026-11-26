@@ -219,7 +219,7 @@ def overkill_factor(per_shot: float, target_hp: float | None = None) -> float:
     if per_shot <= 0 or target_hp <= 0:
         return 1.0
     # round() removes float noise: an exact multiple (200000 / 99999.99999999999) must not
-    # ceil up to one extra shot. Mirrors BotWeaponModel.OverkillFactor, which gets the exact value.
+    # ceil up to one extra shot. BotWeaponModel.OverkillFactor applies the same Math.Round(..., 9) (FIXTURE-REGEN-02).
     shots = math.ceil(round(target_hp / per_shot, 9))
     return target_hp / (shots * per_shot)
 
