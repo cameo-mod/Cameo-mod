@@ -1659,6 +1659,7 @@ namespace OpenRA.Mods.CA.Traits
 						bot.QueueOrder(Order.StartProduction(queue.Actor, item2.Name, 1));
 						NotifyStarted(item2.Name, queue.Info.Type);
 						upgradeDone.Started(item2.Name, world.WorldTick);
+						PendingStreamNote("upg_start", item2.Name, world.WorldTick, 0); // CONSOLIDATE-03 P6 DEV hash
 						UpgradeStartLog(item2.Name, queue.Info.Type, queue.GetProductionCost(item2));
 						AIUtils.BotDebug("AI: {0} upgrade service starts {1} in {2}.", player, item2.Name, queue.Info.Type);
 					}
@@ -2036,6 +2037,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, "capturer");
+						PendingStreamNote("refuse_capturer", unit.Name, world.WorldTick, 0); // CONSOLIDATE-03 P6 DEV hash
 						Reject();
 						continue;
 					}
@@ -2052,6 +2054,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, "aircraft");
+						PendingStreamNote("refuse_aircraft", unit.Name, world.WorldTick, 0); // CONSOLIDATE-03 P6 DEV hash
 						Reject();
 						continue;
 					}
@@ -2085,6 +2088,7 @@ namespace OpenRA.Mods.CA.Traits
 					NotifyStarted(name, queue.Info.Type);
 					counters.Record(unit);
 					batch.Reserve(queue, fullCost);
+					PendingStreamNote("unit_emit", name, world.WorldTick, fullCost); // CONSOLIDATE-03 P6 DEV hash
 					if (leaned)
 						TechLeanLog(queue.Info.Type, name, fullCost, batch.BankLeft + fullCost, rollPoolMaxCost);
 					if (depthQueue)
@@ -2334,6 +2338,7 @@ namespace OpenRA.Mods.CA.Traits
 					if (FairService)
 					{
 						batch.Reserve(queue, queue.GetProductionCost(actorInfo));
+						PendingStreamNote("unit_emit", actorInfo.Name, world.WorldTick, queue.GetProductionCost(actorInfo)); // CONSOLIDATE-03 P6 DEV hash
 						SpendLimitHeadroom(batch, name);
 						if (actorInfo.HasTraitInfo<AircraftInfo>())
 						{

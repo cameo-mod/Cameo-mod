@@ -115,7 +115,7 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>Nominal cost of every order emitted in this batch.</summary>
 		public int ReservedCash;
 
-		readonly Dictionary<object, int> pending = new();
+		readonly PendingStarts<object> pending = new(); // CONSOLIDATE-03 P6: the registry of this pass (lifetime: this batch)
 
 		/// <summary>Per-name cap headroom computed lazily per unit (live census minus
 		/// the limit on first sight), shared by every call site in the batch.</summary>
@@ -134,15 +134,15 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>Live free slots minus what this batch already emitted to that producer —
 		/// keyed by queue instance, so same-actor/same-type siblings reserve independently.</summary>
 		public int SlotsFree(object queue, int liveFreeSlots) =>
-			liveFreeSlots - pending.GetValueOrDefault(queue);
+			liveFreeSlots - pending.CountOf(queue);
 
-		public int PendingOf(object queue) => pending.GetValueOrDefault(queue);
+		public int PendingOf(object queue) => pending.CountOf(queue);
 
 		/// <summary>Record an emitted order: spends bank and one producer slot.</summary>
 		public void Reserve(object queue, int cost)
 		{
 			ReservedCash += Math.Max(0, cost);
-			pending[queue] = PendingOf(queue) + 1;
+			pending.Increment(queue);
 		}
 	}
 }

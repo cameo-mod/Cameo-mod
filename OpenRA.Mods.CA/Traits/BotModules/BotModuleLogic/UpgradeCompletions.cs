@@ -27,7 +27,7 @@ namespace OpenRA.Mods.CA.Traits
 		readonly Dictionary<string, HashSet<string>> blockedBy = new(StringComparer.Ordinal);
 		readonly HashSet<string> done = new(StringComparer.Ordinal);
 		readonly Dictionary<string, string> sources = new(StringComparer.Ordinal);
-		readonly Dictionary<string, (int Tick, string Queue)> pending = new(StringComparer.Ordinal); // Queue = the key of the exact queue that last showed the item (null = never seen)
+		readonly PendingStarts<string> pending = new(); // CONSOLIDATE-03 P6: the registry of pending starts (lifetime: this ledger) // Queue = the key of the exact queue that last showed the item (null = never seen)
 
 		public const string SourceGrant = "grant";
 		public const string SourceApprox = "approx";
@@ -40,7 +40,7 @@ namespace OpenRA.Mods.CA.Traits
 		public List<(string Name, string Reason)> Released { get; } = [];
 
 		/// <summary>The service ordered the item: it is settled at the next visits against authoritative state, whatever happens between visits. A name already pending keeps its first issue tick and Seen bit.</summary>
-		public void Started(string name, int tick) => pending.TryAdd(name, (tick, null));
+		public void Started(string name, int tick) => pending.TryStart(name, tick);
 
 		public bool AnyPending => pending.Count > 0;
 
@@ -53,15 +53,15 @@ namespace OpenRA.Mods.CA.Traits
 			if (pending.Count == 0)
 				return;
 
-			foreach (var name in new List<string>(pending.Keys))
+			foreach (var name in pending.Keys())
 				if (queuedIn.TryGetValue(name, out var queueKey))
-					pending[name] = (pending[name].Tick, queueKey);
+					pending.SetQueue(name, queueKey);
 		}
 
 		/// <summary>An order is outstanding for this item: it must not be offered again until it settles or is dropped.</summary>
-		public bool IsPending(string name) => pending.ContainsKey(name);
+		public bool IsPending(string name) => pending.Contains(name);
 
-		public IEnumerable<string> PendingNames => pending.Keys;
+		public IEnumerable<string> PendingNames => pending.Keys();
 
 		/// <summary>
 		/// Settle the ordered items. Authoritative state decides: an item is done when the player holds a prerequisite it REALLY grants (grantsOf = the prerequisites its traits provide, which need not be
@@ -79,12 +79,14 @@ namespace OpenRA.Mods.CA.Traits
 				return result;
 
 			ISet<string> offeredNow = null;
-			foreach (var name in new List<string>(pending.Keys))
+			foreach (var name in pending.Keys())
 			{
-				var (started, seenIn) = pending[name];
+				pending.TryGet(name, out var entry);
+				var started = entry.Tick;
+				var seenIn = entry.Queue;
 				if (queuedIn.TryGetValue(name, out var queueKey))
 				{
-					pending[name] = (started, queueKey);
+					pending.SetQueue(name, queueKey);
 					continue;
 				}
 
