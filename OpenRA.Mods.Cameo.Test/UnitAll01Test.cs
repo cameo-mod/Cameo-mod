@@ -271,7 +271,12 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(UnitRoll.FirstAdmits(0), Is.False, "an empty bank still waits");
 
 			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
-			Assert.That(u, Does.Contain("var paygo = roll && rollFirst && UnitRoll.FirstAdmits(batch.BankLeft);\n\t\t\t\t\tvar cost = paygo ? 0 : fullCost;"), "only the first build sees cost 0 at the afford and reserve gates");
+			// (P5 a4: the admission list moved into the pick arbiter, UnitPickArbiter.Admit: the same first-build test, the same cost 0, the module hands it the same inputs)
+			var arbiter = Source("mods/CA/Traits/BotModules/BotModuleLogic/UnitPickArbiter.cs");
+			Assert.That(arbiter, Does.Contain("var paygo = roll && first && UnitRoll.FirstAdmits(bankLeft);"), "only the first build sees cost 0 at the afford and reserve gates");
+			Assert.That(arbiter, Does.Contain("return new Admission(paygo || leaned ? 0 : fullCost, paygo, leaned, AdmitRule(paygo, leaned));"));
+			Assert.That(u, Does.Contain("var admission = UnitPickArbiter.Admit(roll, rollFirst, batch.BankLeft, fullCost,"));
+			Assert.That(u, Does.Contain("var cost = admission.GateCost;"));
 			Assert.That(u, Does.Contain("batch.Reserve(queue, fullCost);"), "the order still reserves its full price");
 			Assert.That(u, Does.Not.Contain("rollFirstOpen").And.Not.Contain("RollOpenFirst"), "no open-slot exclusion any more");
 

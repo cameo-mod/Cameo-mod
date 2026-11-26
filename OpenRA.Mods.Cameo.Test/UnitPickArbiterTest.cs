@@ -101,6 +101,62 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(UnitPickArbiter.AdmitRule(false, false), Is.EqualTo(UnitPickArbiter.RuleAdmitFull));
 		}
 
+		// The old inline admission of the fill loop (before step a4), kept here as the reference the pure function must equal.
+		static (int Cost, bool Paygo, bool Leaned) OldAdmission(bool roll, bool first, int bankLeft, int fullCost, bool leanOn, int poolMax, int held, int tick, int start, int top, int bank)
+		{
+			var paygo = roll && first && UnitRoll.FirstAdmits(bankLeft);
+			var cost = paygo ? 0 : fullCost;
+			var leaned = roll && !paygo && leanOn && TechLean.Admits(fullCost, poolMax, held, tick, start, bankLeft, top, bank);
+			if (leaned)
+				cost = 0;
+
+			return (cost, paygo, leaned);
+		}
+
+		[Test]
+		public void AdmitEqualsTheOldInlineAdmissionOverTheWholeInputGrid()
+		{
+			var checkedCount = 0;
+			foreach (var roll in new[] { false, true })
+			foreach (var first in new[] { false, true })
+			foreach (var bankLeft in new[] { -5, 0, 1, 40, 150, 10_000 })
+			foreach (var fullCost in new[] { 0, 100, 500, 1500 })
+			foreach (var leanOn in new[] { false, true })
+			foreach (var poolMax in new[] { 0, 500, 1500 })
+			foreach (var held in new[] { 0, 1 })
+			foreach (var tick in new[] { 0, 6000 })
+			foreach (var top in new[] { 0, 50, 100 })
+			foreach (var bankPct in new[] { 0, 30, 100 })
+			{
+				var admission = UnitPickArbiter.Admit(roll, first, bankLeft, fullCost, leanOn, poolMax, held, tick, 3000, top, bankPct);
+				var old = OldAdmission(roll, first, bankLeft, fullCost, leanOn, poolMax, held, tick, 3000, top, bankPct);
+				Assert.That((admission.GateCost, admission.Paygo, admission.Leaned), Is.EqualTo(old), $"roll={roll} first={first} bank={bankLeft} full={fullCost} lean={leanOn} max={poolMax} held={held} tick={tick} top={top} bankPct={bankPct}");
+				Assert.That(admission.Rule, Is.EqualTo(UnitPickArbiter.AdmitRule(old.Paygo, old.Leaned)));
+				checkedCount++;
+			}
+
+			Assert.That(checkedCount, Is.EqualTo(2 * 2 * 6 * 4 * 2 * 3 * 2 * 2 * 3 * 3));
+		}
+
+		[Test]
+		public void AdmitOnlyEverLowersTheGateCostToZeroAndANonRollPickAlwaysPaysTheFullPrice()
+		{
+			var firstBuild = UnitPickArbiter.Admit(true, true, 1, 700, true, 700, 0, 9000, 3000, 50, 30);
+			Assert.That((firstBuild.GateCost, firstBuild.Paygo, firstBuild.Leaned, firstBuild.Rule), Is.EqualTo((0, true, false, UnitPickArbiter.RuleAdmitPaygo)), "pay-as-you-go comes first and the lean is then not asked");
+
+			var emptyBank = UnitPickArbiter.Admit(true, true, 0, 700, false, 700, 0, 9000, 3000, 50, 30);
+			Assert.That((emptyBank.GateCost, emptyBank.Rule), Is.EqualTo((700, UnitPickArbiter.RuleAdmitFull)), "an empty bank still waits");
+
+			var lean = UnitPickArbiter.Admit(true, false, 300, 700, true, 700, 0, 9000, 3000, 50, 30);
+			Assert.That((lean.GateCost, lean.Leaned, lean.Rule), Is.EqualTo((0, true, UnitPickArbiter.RuleAdmitLean)), "a late top pick with 30 percent of its price in the bank on an empty queue");
+
+			var floorPick = UnitPickArbiter.Admit(false, true, 10_000, 700, true, 700, 0, 9000, 3000, 50, 30);
+			Assert.That((floorPick.GateCost, floorPick.Paygo, floorPick.Leaned), Is.EqualTo((700, false, false)), "a floor or random pick is never a roll pick: full price");
+
+			var early = UnitPickArbiter.Admit(true, false, 300, 700, true, 700, 0, 100, 3000, 50, 30);
+			Assert.That(early.GateCost, Is.EqualTo(700), "before the lean start tick");
+		}
+
 		[Test]
 		public void TheTraceHooksAreDevOnlyAndOnlyReadTheRng()
 		{

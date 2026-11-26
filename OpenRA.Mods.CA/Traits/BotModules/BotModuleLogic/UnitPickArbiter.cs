@@ -151,5 +151,20 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>The "admission" rule name of an order that was accepted, in the old subreason order: pay-as-you-go first build, then the tech lean, then the full price.</summary>
 		public static string AdmitRule(bool paygo, bool leaned) => paygo ? RuleAdmitPaygo : leaned ? RuleAdmitLean : RuleAdmitFull;
+
+		/// <summary>The admission of one picked unit: the cost the afford, reserve and depth gates read (0 = pay-as-you-go), which rule decided it, and the two flags the module logs.</summary>
+		public readonly record struct Admission(int GateCost, bool Paygo, bool Leaned, string Rule);
+
+		/// <summary>
+		/// R4 (step a4): the one admission list, in the old order. (1) UNIT-ALL-01 c3: the FIRST build of a listed type (a roll pick that was never ordered) is pay-as-you-go while the bank is above 0, so the gates read
+		/// cost 0. (2) TIER-MIX-01 (row ub_tech_lean): a late pick from the top of the queue's pool, on an empty queue with a share of its price in the bank, is pay-as-you-go too. (3) Everything else reads the full price.
+		/// The order itself still reserves the FULL price (the module does that after the gates). Pure: same inputs, same answer, nothing read from the game.
+		/// </summary>
+		public static Admission Admit(bool roll, bool first, int bankLeft, int fullCost, bool leanOn, int poolMaxCost, int held, int tick, int leanStartTick, int leanTopPct, int leanBankPct)
+		{
+			var paygo = roll && first && UnitRoll.FirstAdmits(bankLeft);
+			var leaned = roll && !paygo && leanOn && TechLean.Admits(fullCost, poolMaxCost, held, tick, leanStartTick, bankLeft, leanTopPct, leanBankPct);
+			return new Admission(paygo || leaned ? 0 : fullCost, paygo, leaned, AdmitRule(paygo, leaned));
+		}
 	}
 }
