@@ -249,6 +249,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (NavalNeedsWater(info) || NoSpaceBanned(name))
 				return false;
 
+			// REF2-FIRST-01 (rows ref2_before_radar, ref2_before_prod2): a NEW radar or 2nd production start is not offered while ref2 is due. Every stage passes here, nothing in flight is cancelled.
+			if (Ref2Holds(info, buildableNames.Contains))
+				return false;
+
 			return !BuildingStillDelayed(name);
 		}
 

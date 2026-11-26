@@ -1024,6 +1024,11 @@ namespace OpenRA.Mods.CA.Traits
 					return TickQueuePlanned(bot, queue);
 
 				var item = ChooseBuildingToBuild(queue);
+
+				// REF2-FIRST-01 (rows ref2_before_radar, ref2_before_prod2): a NEW radar or 2nd production start waits while ref2 is due (nothing in flight is cancelled).
+				if (item != null && Ref2Holds(item, ref2Name => queue.BuildableItems().Any(ref2Item => ref2Item.Name == ref2Name)))
+					item = null;
+
 				if (item == null)
 				{
 					cashClock.Reset(queue.Actor.ActorID);
@@ -2924,6 +2929,10 @@ namespace OpenRA.Mods.CA.Traits
 				if (verdict != RefineryFieldGateCA.EconomyVerdict.Allow)
 					AIUtils.BotDebug("{0} holds the refinery pick: {1} (refineries {2})", queue.Actor.Owner, verdict, count);
 			}
+
+			// REF2-FIRST-01 (row ref2_floor): a due ref2 outranks the interval wait only (the first-war-factory wait stays: ref1, war factory, ref2).
+			if (verdict == RefineryFieldGateCA.EconomyVerdict.WaitInterval && Ref2OutranksInterval(buildableThings, count))
+				return false;
 
 			return verdict != RefineryFieldGateCA.EconomyVerdict.Allow;
 		}

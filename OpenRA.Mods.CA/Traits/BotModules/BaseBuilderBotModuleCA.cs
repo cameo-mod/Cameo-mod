@@ -400,6 +400,15 @@ namespace OpenRA.Mods.CA.Traits
 			"Off = S2 only for a yard without a refinery. Gated by SwitchCondition; row bb_refinery_s2.")]
 		public readonly bool BbRefineryAtS2 = false;
 
+		[Desc("REF2-FIRST-01 (USER BINDING 11-26, Opus): at least 2 refineries early. While fewer than 2 own refineries stand or are in production and a reachable field has room, the second refinery",
+			"(1) lifts the planner's zone cap by one, (2) outranks the refinery interval wait (the first-war-factory wait stays: ref1, war factory, ref2), (3) is placed BEFORE a radar provider",
+			"(TECH personality exempt; row ref2_before_radar) and BEFORE the 2nd or later production building of a role (RUSH personality exempt; row ref2_before_prod2). Never cancels; the hold ends",
+			"when ref2 is queued or after Ref2FirstBoundTicks. No reachable field under its cap = no hold. Gated by SwitchCondition; rows ref2_before_radar, ref2_before_prod2, ref2_floor.")]
+		public readonly bool Ref2First = false;
+
+		[Desc("REF2-FIRST-01: ticks after ref2 first became due at which the radar / 2nd production hold ends for good (the order never deadlocks).")]
+		public readonly int Ref2FirstBoundTicks = 3000;
+
 		[Desc("MODE-BIAS-01 (user ruling 2026-11-25), profile essentials: while the low-cash essentials logic is active (EssentialsOnlyBelowTierLine armed, a tier line, bank under it), the BuildingFractions",
 			"weights of the types that logic does not hold (EssentialsLowCashCA.Holds) are raised by MbEssentialsStrength in the staged planner's roll. Never a gate: every entry keeps a positive weight.",
 			"Needs BbPipeline01. Off = unchanged. Gated by SwitchCondition; row mb_essentials.")]
@@ -637,7 +646,7 @@ namespace OpenRA.Mods.CA.Traits
 
 	public class BaseBuilderBotModuleCA : ConditionalTrait<BaseBuilderBotModuleCAInfo>, IGameSaveTraitData,
 		IBotTick, IBotPositionsUpdated, IBotRespondToAttack, IBotRequestPauseUnitProduction, IBotSuggestRefineryProduction, INotifyActorDisposing,
-		IBotPlacementVeto
+		IBotPlacementVeto, IBotRef2First
 	{
 		public CPos GetRandomBaseCenter()
 		{
@@ -967,6 +976,16 @@ namespace OpenRA.Mods.CA.Traits
 		public bool QueueSplitArmed => Info.BbQueueSplit && switchesActive && !ablateQueueSplit.Off(player, AblationIds.BbQueueSplit);
 		AblationLatch ablateRefineryAtS2; // REF-S2-01
 		public bool RefineryAtS2Armed => Info.BbRefineryAtS2 && switchesActive && !ablateRefineryAtS2.Off(player, AblationIds.BbRefineryAtS2);
+		// REF2-FIRST-01: one switch (Info.Ref2First), three rows. State shared by every queue manager of this module: the tick ref2 first became due (-1 = never) and whether the gate
+		// has finished for good (ref2 reached, or the bound ran out).
+		AblationLatch ablateRef2Radar;
+		AblationLatch ablateRef2Prod2;
+		AblationLatch ablateRef2Floor;
+		public bool Ref2RadarArmed => Info.Ref2First && switchesActive && !ablateRef2Radar.Off(player, AblationIds.Ref2BeforeRadar);
+		public bool Ref2Prod2Armed => Info.Ref2First && switchesActive && !ablateRef2Prod2.Off(player, AblationIds.Ref2BeforeProd2);
+		public bool Ref2FloorArmed => Info.Ref2First && switchesActive && !ablateRef2Floor.Off(player, AblationIds.Ref2Floor);
+		public int Ref2DueSince = -1;
+		public bool Ref2Finished;
 		AblationLatch ablateMbEssentials; // MODE-BIAS-01
 		public bool MbEssentialsArmed => Info.MbEssentials && switchesActive && !ablateMbEssentials.Off(player, AblationIds.MbEssentials);
 		AblationLatch ablateMbTechChain; // MODE-BIAS-01

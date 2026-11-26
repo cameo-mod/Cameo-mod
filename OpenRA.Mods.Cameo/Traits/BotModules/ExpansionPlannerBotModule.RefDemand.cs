@@ -75,7 +75,47 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int EcoTick(int hard) => BotDifficultyLadder.Scale(hard + EcoFloorRules.HardRank * Info.EcoFloorStepTicks,
 			hard - (BotDifficultyLadder.Difficulties.Length - 1 - EcoFloorRules.HardRank) * Info.EcoFloorStepTicks, player, hard);
 
-		int EcoFloorLift()
+		// ref2_floor (REF2-FIRST-01, USER BINDING 11-26): while fewer than two own refineries stand, every zone's cap is one higher, from tick 0, so a reachable field with room is claimable for ref2
+		// even where the law says adequate. The switch lives on the base builder (IBotRef2First); this planner only reads it. One value per tick, 0 when off.
+		IBotRef2First ref2First;
+		bool ref2FirstResolved;
+		int ref2LiftTick = -1;
+		int ref2Lift;
+
+		int Ref2FirstLift()
+		{
+			if (!RefDemandArmed)
+				return 0;
+
+			var tick = world.WorldTick;
+			if (ref2LiftTick == tick)
+				return ref2Lift;
+
+			ref2LiftTick = tick;
+			if (!ref2FirstResolved)
+			{
+				ref2First = player.PlayerActor.TraitsImplementing<IBotRef2First>().FirstOrDefault();
+				ref2FirstResolved = true;
+			}
+
+			ref2Lift = 0;
+			if (ref2First != null && ref2First.Ref2FloorArmed)
+			{
+				var own = 0;
+				FriendlyRefineryCells();
+				for (var r = 0; r < friendlyRefineryOwn.Count; r++)
+					if (friendlyRefineryOwn[r])
+						own++;
+
+				ref2Lift = own < Ref2First.RefineryTarget ? 1 : 0;
+			}
+
+			return ref2Lift;
+		}
+
+		int EcoFloorLift() => Math.Max(EcoTimeFloorLift(), Ref2FirstLift());
+
+		int EcoTimeFloorLift()
 		{
 			if (!EcoFloorOn)
 				return 0;
