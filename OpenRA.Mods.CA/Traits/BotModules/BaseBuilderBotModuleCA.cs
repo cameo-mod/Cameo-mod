@@ -405,6 +405,14 @@ namespace OpenRA.Mods.CA.Traits
 			"outranks any relaxed one whatever the score classes say. Strict sites and an issued order are untouched. Gated by SwitchCondition; row ref_prefetch_fresh (off = as before).")]
 		public readonly bool RefPrefetchFresh = false;
 
+		[Desc("CONSOLIDATE-03 P4 (PowerArbiter): the emergency power picks (stage S1 and the legacy low-power override) count the power of the plants already in production, so no second",
+			"emergency plant is chosen while one is in flight. Gated by SwitchCondition; row pw_inflight_emergency (off = the raw surplus, as before).")]
+		public readonly bool PwInflightEmergency = false;
+
+		[Desc("CONSOLIDATE-03 P4 (PowerArbiter): a building is admitted by the power test when the plants in production cover its draw. Gated by SwitchCondition;",
+			"row pw_inflight_admit (off = the raw surplus, as before).")]
+		public readonly bool PwInflightAdmit = false;
+
 		[Desc("BUILD-ALL-B (user ruling 2026-11-25): the base builder never queues a terrain foundation (D2k concrete: a building without health that removes",
 			"itself unconditionally, FoundationExclusion) on any path, listed or not. Concrete use is planned by CONCRETE-PLAN-01 after the playtest.",
 			"Off = as before. Gated by SwitchCondition; row bb_no_foundation.")]
@@ -983,6 +991,9 @@ namespace OpenRA.Mods.CA.Traits
 		public bool S8RejectedFallthroughArmed => Info.BbS8RejectedFallthrough && switchesActive && !ablateS8RejectedFallthrough.Off(player, AblationIds.BbS8RejectedFallthrough);
 		AblationLatch ablateS8CashHold; // S8-CASH-HOLD
 		public bool S8CashHoldArmed => Info.BbS8CashHold && S8RejectedFallthroughArmed && !ablateS8CashHold.Off(player, AblationIds.BbS8CashHold);
+		AblationLatch ablatePwInflightEmergency, ablatePwInflightAdmit; // CONSOLIDATE-03 P4
+		public bool PwInflightEmergencyArmed => Info.PwInflightEmergency && switchesActive && !ablatePwInflightEmergency.Off(player, AblationIds.PwInflightEmergency);
+		public bool PwInflightAdmitArmed => Info.PwInflightAdmit && switchesActive && !ablatePwInflightAdmit.Off(player, AblationIds.PwInflightAdmit);
 		AblationLatch ablateRefPrefetchFresh; // REF-PREFETCH-FRESH
 		public bool RefPrefetchFreshArmed => Info.RefPrefetchFresh && switchesActive && !ablateRefPrefetchFresh.Off(player, AblationIds.RefPrefetchFresh);
 		AblationLatch ablateRefineryIntervalLadder; // REF-INTERVAL-LADDER
@@ -1274,6 +1285,9 @@ namespace OpenRA.Mods.CA.Traits
 		public PowerManager PlayerPower { get; private set; }
 		public int ExcessPower { get; private set; }
 
+		// CONSOLIDATE-03 P4: the power of the plants in production (the part of ExcessPower added by the queue loop), read by PowerArbiter.Effective when the rows are armed.
+		public int InFlightPower { get; private set; }
+
 		public BaseBuilderBotModuleCA(Actor self, BaseBuilderBotModuleCAInfo info)
 			: base(info)
 		{
@@ -1525,6 +1539,7 @@ namespace OpenRA.Mods.CA.Traits
 			// if AI gets enough cash, it can fill all of its queues with enough ticks
 			var findQueue = false;
 			ExcessPower = PlayerPower != null ? PlayerPower.ExcessPower : 0;
+			InFlightPower = 0;
 			for (int i = 0, builderIndex = currentBuilderIndex; i < builders.Length; i++)
 			{
 				if (++builderIndex >= builders.Length)
@@ -1554,7 +1569,9 @@ namespace OpenRA.Mods.CA.Traits
 							InFlightRecountCA.Record(BuildingsBeingProduced, producing.Item);
 
 							// Record the power of the building.
-							ExcessPower += producing.ActorInfo.TraitInfos<PowerInfo>().Where(p => p.EnabledByDefault).Sum(pi => pi.Amount);
+							var producingPower = producing.ActorInfo.TraitInfos<PowerInfo>().Where(p => p.EnabledByDefault).Sum(pi => pi.Amount);
+							ExcessPower += producingPower;
+							InFlightPower += producingPower;
 						}
 					}
 				}

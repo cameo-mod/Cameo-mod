@@ -80,7 +80,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			var b = baseBuilder.Info;
 			return !EssentialsLowCashCA.Holds(true, s.Bank, line, BaseBuildPlanCA.CountOf(s, name) == 0, TechChainExempt(name), b.RefineryTypes.Contains(name),
-				b.PowerTypes.Contains(name) && playerPower != null && playerPower.ExcessPower < minimumExcessPower,
+				b.PowerTypes.Contains(name) && PowerShortRaw(PowerArbiter.SiteModeBias),
 				info.HasTraitInfo<CashTricklerInfo>(), false);
 		}
 

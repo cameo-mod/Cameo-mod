@@ -80,7 +80,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						var power = (queue, item, RecoverySpendPolicyCA.EssentialLane.Power, ordinal);
 						powerCandidates.Add(power);
-						if (!powerCovered || powerManager != null && powerManager.ExcessPower < minimumExcessPower)
+						if (!powerCovered || PowerArbiter.Short(powerManager != null, powerManager?.ExcessPower ?? 0, minimumExcessPower))
 							candidates.Add(power);
 					}
 					if (!refineryCovered && info.RefineryTypes.Contains(item.Name))
@@ -93,8 +93,8 @@ namespace OpenRA.Mods.CA.Traits
 			var pick = candidates.OrderBy(c => c.Lane).ThenBy(c => c.Queue.Actor.ActorID).ThenBy(c => c.Ordinal)
 				.ThenBy(c => c.Item.Name, StringComparer.Ordinal).FirstOrDefault();
 			if (pick.Queue != null && pick.Lane != RecoverySpendPolicyCA.EssentialLane.Power && powerManager != null
-				&& (long)powerManager.ExcessPower + pick.Item.TraitInfos<PowerInfo>().Where(p => p.EnabledByDefault)
-					.Sum(p => p.Amount) < minimumExcessPower)
+				&& !PowerArbiter.Admits(true, pick.Item.TraitInfos<PowerInfo>().Where(p => p.EnabledByDefault)
+					.Sum(p => p.Amount), powerManager.ExcessPower, minimumExcessPower))
 			{
 				// An already queued source covers the prerequisite; do not duplicate it.
 				if (powerQueued)

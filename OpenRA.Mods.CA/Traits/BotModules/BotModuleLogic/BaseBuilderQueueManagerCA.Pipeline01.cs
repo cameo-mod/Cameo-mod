@@ -118,7 +118,7 @@ namespace OpenRA.Mods.CA.Traits
 				StaticDefenceValue = armyValues ? StaticDefenceValue(now) : 0,
 				Buildable = buildable.Select(a => a.Name).ToList(),
 				HasPowerManager = playerPower != null,
-				ExcessPower = playerPower?.ExcessPower ?? 0,
+				ExcessPower = EmergencyExcess(),
 				PowerMargin = minimumExcessPower,
 				PowerType = power?.Name,
 				PowerTypeAmount = power == null ? 0 : power.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault).Sum(p => p.Amount),

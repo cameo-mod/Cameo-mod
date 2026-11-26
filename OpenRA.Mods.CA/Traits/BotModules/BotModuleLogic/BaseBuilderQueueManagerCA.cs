@@ -923,14 +923,9 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			playerBuildings = world.ActorsHavingTrait<Building>().Where(a => a.Owner == player).ToArray();
-			var excessPowerBonus = baseBuilder.Info.ExcessPowerIncrement * (playerBuildings.Count() / baseBuilder.Info.ExcessPowerIncreaseThreshold.Clamp(1, int.MaxValue));
-			minimumExcessPower = (baseBuilder.Info.MinimumExcessPower + excessPowerBonus).Clamp(baseBuilder.Info.MinimumExcessPower, baseBuilder.Info.MaximumExcessPower);
-			minimumExcessPower = BaseFix01CA.CapPowerMargin(PowerCapOn, minimumExcessPower, baseBuilder.Info.MinimumExcessPower, baseBuilder.Info.PowerMarginCap);
-
-			// Build-order knobs (12.25): power_margin scales the surplus target (no provider = unchanged).
-			var knobs = baseBuilder.BuildOrderKnobs;
-			if (knobs != null)
-				minimumExcessPower = BotBuildOrderKnobs.Scale(minimumExcessPower, knobs.KnobMilli(BuildOrderKnob.PowerMargin));
+			// CONSOLIDATE-03 P4: the required margin comes from PowerArbiter (growth by building group, BASE-13 cap, then the build-order power_margin knob, 12.25; no provider = unchanged).
+			minimumExcessPower = PowerArbiter.Required(baseBuilder.Info.MinimumExcessPower, baseBuilder.Info.MaximumExcessPower, baseBuilder.Info.ExcessPowerIncrement,
+				baseBuilder.Info.ExcessPowerIncreaseThreshold, playerBuildings.Count(), PowerCapOn, baseBuilder.Info.PowerMarginCap, BuildOrderPowerMilli());
 
 			// BP-2 (§19.15): the advisor's radar power reserve — one Refresh-priced read per queue tick.
 			radarPowerMargin = FrontBackAdvisor()?.RadarPowerMargin ?? 0;
@@ -1903,8 +1898,11 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool HasSufficientPowerForActor(ActorInfo actorInfo)
 		{
-			var powerOk = playerPower == null || (actorInfo.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault)
-				.Sum(p => p.Amount) + playerPower.ExcessPower) >= ScaledBaseMinimumExcessPower();
+			var candidatePower = actorInfo.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault).Sum(p => p.Amount);
+			var excess = PowerArbiter.Effective(playerPower?.ExcessPower ?? 0, baseBuilder.InFlightPower, baseBuilder.PwInflightAdmitArmed);
+			var floor = ScaledBaseMinimumExcessPower();
+			var powerOk = PowerArbiter.Admits(playerPower != null, candidatePower, excess, floor);
+			PowerObserved(PowerArbiter.SiteAdmit, excess, floor, candidatePower, !powerOk);
 			if (!powerOk)
 				TechReject(actorInfo.Name, "power");
 
@@ -1916,10 +1914,7 @@ namespace OpenRA.Mods.CA.Traits
 		// radar's drain is held back so an owned or planned provider is never built blind.
 		int ScaledBaseMinimumExcessPower()
 		{
-			var knobs = baseBuilder.BuildOrderKnobs;
-			var floor = knobs == null ? baseBuilder.Info.MinimumExcessPower
-				: BotBuildOrderKnobs.Scale(baseBuilder.Info.MinimumExcessPower, knobs.KnobMilli(BuildOrderKnob.PowerMargin));
-			return floor + radarPowerMargin;
+			return PowerArbiter.Floor(baseBuilder.Info.MinimumExcessPower, BuildOrderPowerMilli(), radarPowerMargin);
 		}
 
 		// Build-order knobs (12.25): the milli multiplier of a building's fraction by its rules-derived category (1000 = none).
@@ -2270,7 +2265,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			var name = item.Name;
 			return EssentialsLowCashCA.Holds(true, bank, line, !OwnedOrQueued(item), TechChainExempt(name), isRefinery,
-				baseBuilder.Info.PowerTypes.Contains(name) && playerPower != null && playerPower.ExcessPower < minimumExcessPower,
+				baseBuilder.Info.PowerTypes.Contains(name) && PowerShortRaw(PowerArbiter.SiteEssential),
 				item.HasTraitInfo<CashTricklerInfo>(), plannerOrDemand);
 		}
 
@@ -2998,7 +2993,7 @@ namespace OpenRA.Mods.CA.Traits
 				return null;
 
 			// First priority is to get out of a low power situation
-			if (playerPower != null && playerPower.ExcessPower < minimumExcessPower && power != null && power.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault).Sum(p => p.Amount) > 0)
+			if (PowerShortEmergency(PowerArbiter.SiteOverride) && power != null && power.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault).Sum(p => p.Amount) > 0)
 			{
 					AIUtils.BotDebug("{0} decided to build {1}: Priority override (low power)", queue.Actor.Owner, power.Name);
 					TraceLowPowerOverride(power);
