@@ -27,7 +27,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(v07, Does.Contain("return AllInReturn(now, ahead);"));
 			Assert.That(v07, Does.Contain("return AllInReturn(now, AllInCA.WhyLate);"));
 			Assert.That(v07, Does.Contain("return AllInReturn(now, AllInCA.Why(atCap, huge, won)"));
-			Assert.That(v07, Does.Contain("return AllInReturn(now, null);"));
+			// Both explicit null exits (not enabled; open order that is all-in or gathers) go through the recorder: exactly two.
+			Assert.That(v07.Split(new[] { "return AllInReturn(now, null);" }, StringSplitOptions.None).Length - 1, Is.EqualTo(2));
 			Assert.That(v07, Does.Not.Contain("return ahead;"), "a bare decision return would skip the recorder");
 			Assert.That(v07, Does.Not.Contain("return AllInCA.WhyLate;"));
 		}

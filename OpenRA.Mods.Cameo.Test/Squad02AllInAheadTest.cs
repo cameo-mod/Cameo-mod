@@ -357,9 +357,9 @@ namespace OpenRA.Mods.Cameo.Test
 			var off = why.IndexOf("if (!TeamLeadAllInOn)", StringComparison.Ordinal);
 			var de = why.IndexOf("AheadDeescalate(now);", StringComparison.Ordinal);
 			var early = why.IndexOf("if (TeamLeadOpenOrder() is { } open && (open.AllIn || open.GatherOnly))", StringComparison.Ordinal);
-			var ahead = why.IndexOf("if (!atCap && !huge && !won && AheadWhy(now) is { } ahead)\n\t\t\t\treturn ahead;", StringComparison.Ordinal);
-			var late = why.IndexOf("if (!atCap && !huge && !won && ArmyAllInLateOn(now))\n\t\t\t\treturn AllInCA.WhyLate;", StringComparison.Ordinal);
-			var named = why.IndexOf("return AllInCA.Why(atCap, huge, won)", StringComparison.Ordinal);
+			var ahead = why.IndexOf("if (!atCap && !huge && !won && AheadWhy(now) is { } ahead)\n\t\t\t\treturn AllInReturn(now, ahead);", StringComparison.Ordinal);
+			var late = why.IndexOf("if (!atCap && !huge && !won && ArmyAllInLateOn(now))\n\t\t\t\treturn AllInReturn(now, AllInCA.WhyLate);", StringComparison.Ordinal);
+			var named = why.IndexOf("return AllInReturn(now, AllInCA.Why(atCap, huge, won)", StringComparison.Ordinal);
 			Assert.That(off, Is.GreaterThanOrEqualTo(0));
 			Assert.That(de, Is.GreaterThan(off), "after the switch");
 			Assert.That(early, Is.GreaterThan(de), "the de-escalation runs before the early return that skips an all-in order");
