@@ -194,6 +194,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"lowers it. Needs DriveMcvRequests. genericbot-only module, so classic is unaffected.")]
 		public readonly bool UseUtilityExpansionAppetite = false;
 
+		[Desc("RM-03 (row rm03_yard_ramp, design RM_03_YARD_RAMP_DESIGN_02 49BFE42A): raise the construction-yard target to the demand floor of",
+			"YardRampRows at the bot's elapsed world tick and own difficulty tier. A floor, combined once with the scale-target / utility result:",
+			"it never lowers the target, never multiplies personality again, and McvDue's free-far-field and pipeline gates still apply. An unranked",
+			"bot (classic, fransbot, exploit_*) or a malformed table gets floor 0. Needs DriveMcvRequests. False = the target of the base tip.")]
+		public readonly bool UseRampedYardDemand = false;
+
+		[Desc("RM-03: the ramp table, entries \"minTick:tier:desired\" (tier = a ladder bot type, noob..cameogod; desired 0..16). The floor is the largest",
+			"desired over the rows whose tick and tier bounds are met, so it is monotone in both. One bad entry rejects the whole table. Values need",
+			"designer/Opus approval; empty = floor 0.")]
+		public readonly string[] YardRampRows = Array.Empty<string>();
+
 		[Desc("UT-4: at the full Expansion pole the effective McvTargetCount grows by this many.")]
 		public readonly int ExpansionAxisBonusMcvs = 2;
 
@@ -1086,6 +1097,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		IBotRequestUnitProduction[] unitBuilders;
 		IBotUtilityAxes[] utilityAxesProviders;
 		IBotScaleTargets[] scaleTargetProviders;
+
+		// RM-03 (row rm03_yard_ramp): the parsed ramp table (empty when off or malformed) and its latch.
+		IReadOnlyList<YardRamp.Row> yardRampRows = Array.Empty<YardRamp.Row>();
+		AblationLatch ablateYardRamp;
+		bool YardRampOn => Info.UseRampedYardDemand && !IsTraitDisabled && !ablateYardRamp.Off(player, AblationIds.YardRamp);
 
 		public ExpansionPlannerBotModule(Actor self, ExpansionPlannerBotModuleInfo info)
 			: base(info)
@@ -2057,6 +2073,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			unitBuilders = self.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
 			utilityAxesProviders = self.TraitsImplementing<IBotUtilityAxes>().ToArray();
 			scaleTargetProviders = self.TraitsImplementing<IBotScaleTargets>().ToArray();
+			if (Info.UseRampedYardDemand)
+			{
+				yardRampRows = YardRamp.Parse(Info.YardRampRows, out var rampError);
+#if CAMEO_DEV_LOGGING
+				if (rampError != null)
+					Log.Write("debug", $"AI ({self.Owner.ClientIndex}): RM-03 YardRampRows rejected at entry '{rampError}': ramp floor 0");
+#endif
+			}
 		}
 
 		/// <summary>
@@ -2817,6 +2841,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				targetCount = EffectiveMcvTargetCount(Info.McvTargetCount, axis, Info.ExpansionAxisBonusMcvs, Info.TechRushAxisMinusMcvs);
 			}
 
+			// RM-03 (row rm03_yard_ramp): the elapsed-tick x own-tier demand floor, applied once to the scale/utility result above (that
+			// result already carries personality; the floor adds none). Max only: the ramp can raise the target, never cap it.
+			var rampFloor = 0;
+			var preRampTarget = targetCount;
+			if (YardRampOn)
+			{
+				rampFloor = YardRamp.Floor(world.WorldTick, YardRamp.RankFor(player), yardRampRows);
+				if (rampFloor > targetCount)
+					targetCount = rampFloor;
+			}
+
+			var coverFloor = 0;
+
 			// EX-4: cover the whole map. The flat McvTargetCount ceiling is what made the stack stop at one
 			// expansion — active yards count against it, so three yards meant "never request again". With
 			// CoverAllFields the target becomes "as many active construction assets as exist, plus a bounded
@@ -2828,7 +2865,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var freeFarFields = LastScores.Count(f => f.Hops >= Info.McvMinHops
 					&& !(parkedUntil.TryGetValue(f.Index, out var until) && tick < until));
 				var inflightCap = Math.Min(Math.Max(freeFarFields, 1), Math.Max(1, Info.CoverAllFieldsMaxInflight));
-				targetCount = Math.Max(targetCount, active + inflightCap);
+				coverFloor = active + inflightCap;
+				targetCount = Math.Max(targetCount, coverFloor);
 			}
 
 			// BZ_production_scaling: while windowed income holds over the difficulty line and the
@@ -2882,6 +2920,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			unitBuilder.RequestUnitProduction(bot, mcvType);
 #if CAMEO_DEV_LOGGING
+			if (YardRampOn)
+				Log.Write("debug", $"AI ({player.ClientIndex}): RM-03 ramp floor {rampFloor} vs target {preRampTarget} / cover {coverFloor}: "
+					+ (YardRamp.Material(rampFloor, preRampTarget, coverFloor) ? "material" : "immaterial") + $" at tick {world.WorldTick}");
+
 			var line = $"AI ({player.ClientIndex}): greedy MCV request {mcvType}: {active} active yards/MCVs, {queued} queued, cash {resources.GetCashAndResources()}, at tick {world.WorldTick}";
 			Log.Write("debug", line);
 			OpenRA.Mods.CA.AIUtils.BotDebug(line);
