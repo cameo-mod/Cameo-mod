@@ -75,14 +75,14 @@ namespace OpenRA.Mods.CA.Traits
 		string TeamLeadAllInWhy(TeamLeadTeam team, int now)
 		{
 			if (!TeamLeadAllInOn)
-				return null;
+				return AllInReturn(now, null);
 
 			// ALLIN-TRIGGER-01 (sq_ahead_deescalate): an all-in order that an ahead trigger started ends when the team is behind (before the early return below, which skips an all-in order).
 			AheadDeescalate(now);
 
 			// An open order that is already all-in, or only gathers at its rally, needs no trigger: no scan for it.
 			if (TeamLeadOpenOrder() is { } open && (open.AllIn || open.GatherOnly))
-				return null;
+				return AllInReturn(now, null);
 
 			var blob = team.Pool(now, Info.TeamLeadPoolMaxAgeTicks);
 			var atCap = team.AnyAtCap(now, Info.TeamLeadPoolMaxAgeTicks);
@@ -106,15 +106,15 @@ namespace OpenRA.Mods.CA.Traits
 
 			// ALLIN-TRIGGER-01 (sq_ahead and one row per trigger): the dynamic all-in, when the team is ahead; the named triggers above keep their name and come first.
 			if (!atCap && !huge && !won && AheadWhy(now) is { } ahead)
-				return ahead;
+				return AllInReturn(now, ahead);
 
 			// CONSOLIDATE-02 Q8 (sq_all_in_late): the late tick is the fallback all-in input of a game that stays undecided; the triggers above keep their name.
 			if (!atCap && !huge && !won && ArmyAllInLateOn(now))
-				return AllInCA.WhyLate;
+				return AllInReturn(now, AllInCA.WhyLate);
 
 			// CONSOLIDATE-02 Q4 (Opus D4): the stalemate breaker's trigger is one more all-in input (it no longer launches its own wave).
-			return AllInCA.Why(atCap, huge, won)
-				?? (ArmyLaunchArbiterOn && AllInCA.StalemateSignal(now, team.StalemateSignalTick, Info.ArmyStalemateSignalTicks) ? AllInCA.WhyStalemate : null);
+			return AllInReturn(now, AllInCA.Why(atCap, huge, won)
+				?? (ArmyLaunchArbiterOn && AllInCA.StalemateSignal(now, team.StalemateSignalTick, Info.ArmyStalemateSignalTicks) ? AllInCA.WhyStalemate : null));
 		}
 
 		// Fog-honest, like TeamLeadKnownBuildings: the enemy structures (walls aside) the bot sees now or remembers in its frozen-actor layer, and their summed cost.
