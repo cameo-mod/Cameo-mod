@@ -58,6 +58,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		readonly Dictionary<string, EnemyRules> enemyRules = new();
 		readonly Dictionary<string, long> scoreCache = new();
+		readonly List<ActorInfo> chooseBuffer = new();
 		int observedVersion;
 		int scoreCacheVersion = -1;
 #if CAMEO_DEV_LOGGING
@@ -189,9 +190,22 @@ namespace OpenRA.Mods.CA.Traits
 			if (observedEnemyValue.Count == 0)
 				return null;
 
+			// PERF-BOTTICK-01: the same order as OrderBy(Name, Ordinal) without its per-call buffers. The source is enumerated once, fully, before the sort (as OrderBy does), and the
+			// insertion sort is stable (equal names keep their source order, as OrderBy's stable sort does).
+			var sorted = chooseBuffer;
+			sorted.Clear();
+			foreach (var candidate in candidates)
+			{
+				var at = sorted.Count;
+				while (at > 0 && string.CompareOrdinal(sorted[at - 1].Name, candidate.Name) > 0)
+					at--;
+
+				sorted.Insert(at, candidate);
+			}
+
 			ActorInfo best = null;
 			var bestScore = 0L;
-			foreach (var candidate in candidates.OrderBy(c => c.Name, StringComparer.Ordinal))
+			foreach (var candidate in sorted)
 			{
 				var score = Score(candidate) / (1 + owned(candidate.Name));
 				if (score > bestScore)
@@ -238,7 +252,7 @@ namespace OpenRA.Mods.CA.Traits
 			return scoreCache[candidate.Name] = ScoreCached(candidate);
 		}
 
-		/// <summary>The same sum as <see cref="ScoreFresh"/>, with the static per-enemy-type rule reads taken from <see cref="enemyRules"/>.</summary>
+		/// <summary>The same sum as the old computation (ScoreFresh, DEV only), with the static per-enemy-type rule reads taken from the enemyRules cache.</summary>
 		long ScoreCached(ActorInfo candidate)
 		{
 			var weapons = Profile(candidate);
