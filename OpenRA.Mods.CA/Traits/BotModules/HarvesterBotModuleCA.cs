@@ -311,6 +311,19 @@ namespace OpenRA.Mods.CA.Traits
 				harvestersNeedingOrders.Push(h.Value);
 		}
 
+#if CAMEO_DEV_LOGGING
+		readonly HarvesterStream harvesterStream = new();
+#endif
+
+		// CONSOLIDATE-03 P9 (a), DEV only: the equivalence hash of the module's harvester-need decision (HV-PLAN-STREAM, site 1).
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void HarvesterObserved(int live, int queued, int refineries, int need, HarvesterVerdict verdict)
+		{
+#if CAMEO_DEV_LOGGING
+			harvesterStream.Observe(world.WorldTick, player.ClientIndex, HarvesterPlan.SiteModule, live, queued, refineries, need, (int)verdict);
+#endif
+		}
+
 		protected void ProduceHarvesters(IBot bot)
 		{
 			// Less harvesters than refineries - build a new harvester
@@ -357,7 +370,10 @@ namespace OpenRA.Mods.CA.Traits
 				}
 				else
 				{
-					harvCountTooLow = numHarvesters < AIUtils.CountActorByCommonName(refineries) * Info.HarvestersPerRefinery + Info.AdditionalHarvesters;
+					// CONSOLIDATE-03 P9 (a): the ONE comparison (HarvesterPlan); queued = 0 and countQueued off = the old formula.
+					var refineryCount = AIUtils.CountActorByCommonName(refineries);
+					harvCountTooLow = HarvesterPlan.ModuleTooLow(numHarvesters, 0, refineryCount, Info.HarvestersPerRefinery, Info.AdditionalHarvesters, false);
+					HarvesterObserved(numHarvesters, 0, refineryCount, HarvesterPlan.ModuleNeed(refineryCount, Info.HarvestersPerRefinery, Info.AdditionalHarvesters), HarvesterPlan.ModuleVerdict(harvCountTooLow));
 				}
 
 				if (harvCountTooLow)
