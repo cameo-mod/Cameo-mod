@@ -57,6 +57,11 @@ namespace OpenRA.Mods.CA.Traits
 					armyGuardLend.Add(u);
 
 			var lend = GuardLend.Units(guard.Units.Count, armyGuardLend.Count, Info.ArmyGuardLendPercent, Info.TeamLeadJoinMinUnits);
+
+			// CONSOLIDATE-03 P7 (b) row sq_guard_floor: the guard keeps its learned minimum (0 during an open all-in); only the units above it can be lent.
+			if (lend > 0 && GuardFloorOn)
+				lend = GuardFloorLend(guard, lend);
+
 			if (lend <= 0)
 			{
 				armyGuardLend.Clear();
