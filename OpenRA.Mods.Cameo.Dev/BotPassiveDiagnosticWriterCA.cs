@@ -350,6 +350,65 @@ namespace OpenRA.Mods.CA.Traits.BotModules
 			}));
 		}
 
+		// LATEPUSH-01 P0: one assignment fact (order / join / reinforce / outcome). A null member is not written, so a row carries only what its phase knows.
+		public bool TryEnqueueAttackAssign(in BotPassiveAttackAssignSnapshot snapshot)
+		{
+			var s = snapshot;
+			return s == null ? Reject() : TryEnqueue(seq => SerializeCommon("attack_assign", s.Tick, seq, writer =>
+			{
+				writer.WriteString("phase", s.Phase);
+				writer.WriteNumber("order_seq", s.OrderSeq);
+				if (s.Why != null)
+					writer.WriteString("why", s.Why);
+				writer.WriteBoolean("all_in", s.AllIn);
+				WriteOptionalNumber(writer, "blob_units", s.BlobUnits);
+				WriteOptionalNumber(writer, "blob_value", s.BlobValue);
+				WriteOptionalNumber(writer, "bar_units", s.BarUnits);
+				WriteOptionalNumber(writer, "bar_value", s.BarValue);
+				WriteOptionalNumber(writer, "free_units", s.FreeUnits);
+				WriteOptionalNumber(writer, "free_value", s.FreeValue);
+				WriteOptionalNumber(writer, "guard_units", s.GuardUnits);
+				WriteOptionalNumber(writer, "guard_value", s.GuardValue);
+				WriteOptionalNumber(writer, "guard_joinable", s.GuardJoinable);
+				WriteOptionalNumber(writer, "guard_far", s.GuardFar);
+				if (s.GuardState != null)
+					writer.WriteString("guard_state", s.GuardState);
+				WriteOptionalBool(writer, "clause_target_valid", s.ClauseTargetValid);
+				WriteOptionalBool(writer, "clause_rally", s.ClauseRally);
+				WriteOptionalBool(writer, "clause_request", s.ClauseRequest);
+				WriteOptionalBool(writer, "clause_perceived", s.ClausePerceived);
+				WriteOptionalNumber(writer, "clause_predicted", s.ClausePredicted);
+				WriteOptionalBool(writer, "guard_quiet", s.GuardQuiet);
+				WriteOptionalNumber(writer, "quiet_ticks", s.QuietTicks);
+				WriteOptionalBool(writer, "lend_on", s.LendOn);
+				WriteOptionalNumber(writer, "lent", s.Lent);
+				WriteOptionalNumber(writer, "sent_units", s.SentUnits);
+				WriteOptionalNumber(writer, "sent_value", s.SentValue);
+				WriteOptionalNumber(writer, "alive_units", s.AliveUnits);
+				WriteOptionalNumber(writer, "alive_value", s.AliveValue);
+				WriteOptionalNumber(writer, "idle_home_units", s.IdleHomeUnits);
+				WriteOptionalNumber(writer, "guard_now_units", s.GuardNowUnits);
+				WriteOptionalNumber(writer, "own_army", s.OwnArmy);
+				WriteOptionalNumber(writer, "enemy_army", s.EnemyArmy);
+				WriteOptionalNumber(writer, "enemy_defence", s.EnemyDefence);
+				WriteOptionalNumber(writer, "enemy_buildings", s.EnemyBuildings);
+				WriteOptionalNumber(writer, "scan_tick", s.ScanTick);
+				WriteOptionalBool(writer, "army_known", s.ArmyKnown);
+			}));
+		}
+
+		static void WriteOptionalNumber(Utf8JsonWriter writer, string name, long? value)
+		{
+			if (value.HasValue)
+				writer.WriteNumber(name, value.Value);
+		}
+
+		static void WriteOptionalBool(Utf8JsonWriter writer, string name, bool? value)
+		{
+			if (value.HasValue)
+				writer.WriteBoolean(name, value.Value);
+		}
+
 		public bool TryEnqueueDispatchCheck(in BotPassiveDispatchCheckSnapshot snapshot)
 		{
 			var s = snapshot;

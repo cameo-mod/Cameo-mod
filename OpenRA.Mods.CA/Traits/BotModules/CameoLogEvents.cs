@@ -156,6 +156,64 @@ namespace OpenRA.Mods.CA.Traits.BotModules
 		public string TargetCell { get; init; }
 	}
 
+	/// <summary>
+	/// LATEPUSH-01 P0 (DEV only): one row per attack assignment fact. Phase "order" = the leader published a team order (team blob, WAVE-MIN bars, observed enemy view);
+	/// "join" / "reinforce" = a seat's pool went into the order (units sent, the home guard and its lend clauses at that moment); "out600" / "out1500" = the same units
+	/// that many ticks later (alive, value alive, idle at home); "closed" = the order was no longer open when the outcome was read. A null member is not written.
+	/// </summary>
+	public sealed class BotPassiveAttackAssignSnapshot
+	{
+		public int Tick { get; init; }
+		public string Phase { get; init; }
+		public int OrderSeq { get; init; }
+
+		/// <summary>The all-in trigger name ("ahead_army", "late", ...) or null for an ordinary order.</summary>
+		public string Why { get; init; }
+		public bool AllIn { get; init; }
+
+		// order row (leader)
+		public int? BlobUnits { get; init; }
+		public long? BlobValue { get; init; }
+		public int? BarUnits { get; init; }
+		public long? BarValue { get; init; }
+
+		// seat row: what the seat held before the join
+		public int? FreeUnits { get; init; }
+		public long? FreeValue { get; init; }
+		public int? GuardUnits { get; init; }
+		public long? GuardValue { get; init; }
+		public int? GuardJoinable { get; init; }
+		public int? GuardFar { get; init; }
+		public string GuardState { get; init; }
+		public bool? ClauseTargetValid { get; init; }
+		public bool? ClauseRally { get; init; }
+		public bool? ClauseRequest { get; init; }
+		public bool? ClausePerceived { get; init; }
+		public int? ClausePredicted { get; init; }
+		public bool? GuardQuiet { get; init; }
+		public int? QuietTicks { get; init; }
+		public bool? LendOn { get; init; }
+		public int? Lent { get; init; }
+
+		// the units that went
+		public int? SentUnits { get; init; }
+		public long? SentValue { get; init; }
+
+		// outcome rows
+		public int? AliveUnits { get; init; }
+		public long? AliveValue { get; init; }
+		public int? IdleHomeUnits { get; init; }
+		public int? GuardNowUnits { get; init; }
+
+		// observed enemy view of the last AheadScan (null = never scanned by this seat); only what the bot sees or remembers
+		public long? OwnArmy { get; init; }
+		public long? EnemyArmy { get; init; }
+		public long? EnemyDefence { get; init; }
+		public int? EnemyBuildings { get; init; }
+		public int? ScanTick { get; init; }
+		public bool? ArmyKnown { get; init; }
+	}
+
 	public sealed class BotPassiveDispatchCheckSnapshot
 	{
 		public int Tick { get; init; }

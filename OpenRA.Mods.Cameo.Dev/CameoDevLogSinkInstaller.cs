@@ -81,6 +81,7 @@ namespace OpenRA.Mods.Cameo.Dev
 		BotPassiveDiagnosticWriter Writer(int playerIndex) => passive.GetValueOrDefault(playerIndex);
 		public void PassiveSquadEvent(int playerIndex, BotPassiveSquadEventSnapshot s) => Writer(playerIndex)?.TryEnqueueSquadEvent(s);
 		public void PassiveAttackCommit(int playerIndex, BotPassiveAttackCommitSnapshot s) => Writer(playerIndex)?.TryEnqueueAttackCommit(s);
+		public void PassiveAttackAssign(int playerIndex, BotPassiveAttackAssignSnapshot s) => Writer(playerIndex)?.TryEnqueueAttackAssign(s);
 		public void PassiveDispatchCheck(int playerIndex, BotPassiveDispatchCheckSnapshot s) => Writer(playerIndex)?.TryEnqueueDispatchCheck(s);
 		public void PassiveJobEnd(int playerIndex, BotPassiveJobEndSnapshot s) => Writer(playerIndex)?.TryEnqueueJobEnd(s);
 		public void PassiveWaveStart(int playerIndex, BotPassiveWaveStartSnapshot s) => Writer(playerIndex)?.TryEnqueueWaveStart(s);
