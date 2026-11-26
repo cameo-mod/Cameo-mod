@@ -683,6 +683,7 @@ namespace OpenRA.Mods.CA.Traits
 				foreach (var s in Squads)
 					s.Units.RemoveAll(u => u.Actor == a);
 				squad.Units.Add(new UnitWposWrapper(a));
+				LedgerClaim(ArmyDuty.Stalemate, nameof(StalemateCreateSquad), "breaker_wave", new[] { a });
 				if (!activeUnits.Contains(a))
 					activeUnits.Add(a);
 			}

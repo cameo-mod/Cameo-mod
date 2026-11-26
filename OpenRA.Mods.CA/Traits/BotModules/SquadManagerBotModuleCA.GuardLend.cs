@@ -93,6 +93,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				guard.Units.Remove(u);
 				unitsHangingAroundTheBase.Add(u);
+				LedgerLend(nameof(ArmyGuardLendTo), "guard_lend_to_order", new[] { u.Actor });
 			}
 
 			foreach (var n in notifyIdleBaseUnits)

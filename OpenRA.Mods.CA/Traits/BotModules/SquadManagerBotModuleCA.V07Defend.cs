@@ -154,6 +154,7 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					home.Units.Add(u);
 					unitsHangingAroundTheBase.Remove(u);
+					LedgerClaim(ArmyDuty.AllyDefend, nameof(TeamDefendTick), "team_defend_pool", new[] { u });
 				}
 
 				drafted = draftable.Count;

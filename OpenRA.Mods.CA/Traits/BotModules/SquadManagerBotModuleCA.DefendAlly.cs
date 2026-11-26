@@ -236,6 +236,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						protectSq.Units.Add(draftable[i]);
 						unitsHangingAroundTheBase.Remove(draftable[i]);
+						LedgerClaim(ArmyDuty.AllyDefend, nameof(DefendAllyRespond), "ally_attacked_pool", new[] { draftable[i] });
 					}
 
 					if (protectSq.IsValid && !protectSq.IsTargetValid)

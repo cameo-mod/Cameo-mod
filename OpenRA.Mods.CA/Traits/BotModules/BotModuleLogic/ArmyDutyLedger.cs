@@ -97,6 +97,7 @@ namespace OpenRA.Mods.CA.Traits
 		public int Violations { get; private set; }
 		public int DraftBacks { get; private set; }
 		public int HeartbeatDoubles { get; private set; }
+		public int Pruned { get; private set; }
 
 		public int Count => byUnit.Count;
 
@@ -173,6 +174,32 @@ namespace OpenRA.Mods.CA.Traits
 			return byUnit.Remove(unit, out previous);
 		}
 
+		/// <summary>
+		/// A unit goes back to the idle pool (R7): its old duty ends and it holds Idle since this tick. This is a hand-back, not a take: it is never a steal or a violation. Returns false when it had no entry.
+		/// </summary>
+		public bool ToPool(uint unit, int tick, string reason, string caller, out Entry previous)
+		{
+			Releases++;
+			Claims++;
+			var had = byUnit.TryGetValue(unit, out previous);
+			byUnit[unit] = new Entry(ArmyDuty.Idle, tick, reason, caller);
+			return had;
+		}
+
+		/// <summary>Drops the entries of units the predicate calls gone (dead, out of the world), so the held count and later claims are not distorted by a stale entry. Returns how many were dropped.</summary>
+		public int Prune(Func<uint, bool> gone)
+		{
+			var dropped = byUnit.Keys.Where(gone).ToList();
+			foreach (var id in dropped)
+			{
+				byUnit.Remove(id);
+				lentAt.Remove(id);
+			}
+
+			Pruned += dropped.Count;
+			return dropped.Count;
+		}
+
 		/// <summary>A guard-lend: the unit leaves the home guard for the pool; a later defend claim inside <see cref="LendWindowTicks"/> is a draft-back.</summary>
 		public void NoteLend(uint unit, int tick) => lentAt[unit] = tick;
 
@@ -192,18 +219,22 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>The sorted unit ids as "1|2|3" ('|' separated: the CSV detail column never holds a comma).</summary>
 		public static string IdList(IEnumerable<uint> ids) => string.Join("|", ids.OrderBy(i => i).Select(i => i.ToString(CultureInfo.InvariantCulture)));
 
-		/// <summary>One trace detail for a claim batch: the duty, its rank, the caller, the reason, the kind histogram, the sorted ids and the pool-order digest.</summary>
-		public static string ClaimDetail(ArmyDuty duty, string caller, string reason, IReadOnlyDictionary<ClaimKind, int> kinds, int steals, int draftBacks, IEnumerable<uint> ids, string poolHash) =>
+		/// <summary>The previous duties as "Raid:3|Idle:1" (sorted by duty; "-" when empty): the offline analysis classifies a violation by the duty pair, not by the count.</summary>
+		public static string DutyHistogram(IReadOnlyDictionary<ArmyDuty, int> duties) =>
+			duties.Count == 0 ? "-" : string.Join("|", duties.OrderBy(kv => kv.Key).Select(kv => kv.Key + ":" + kv.Value.ToString(CultureInfo.InvariantCulture)));
+
+		/// <summary>One trace detail for a claim batch: the duty, its rank, the caller, the reason, the kind histogram, the displaced duties, the sorted ids and the pool-order digest.</summary>
+		public static string ClaimDetail(ArmyDuty duty, string caller, string reason, IReadOnlyDictionary<ClaimKind, int> kinds, IReadOnlyDictionary<ArmyDuty, int> displaced, int steals, int draftBacks, IEnumerable<uint> ids, string poolHash) =>
 			string.Create(CultureInfo.InvariantCulture,
-				$"duty={duty};rank={Rank(duty)};caller={caller};reason={reason};new={kinds.GetValueOrDefault(ClaimKind.New)};same={kinds.GetValueOrDefault(ClaimKind.Same)};take={kinds.GetValueOrDefault(ClaimKind.TakeLower)};viol={kinds.GetValueOrDefault(ClaimKind.TakeEqualOrHigher)};steals={steals};draftbacks={draftBacks};units={IdList(ids)};pool={poolHash}");
+				$"duty={duty};rank={Rank(duty)};caller={caller};reason={reason};new={kinds.GetValueOrDefault(ClaimKind.New)};same={kinds.GetValueOrDefault(ClaimKind.Same)};take={kinds.GetValueOrDefault(ClaimKind.TakeLower)};viol={kinds.GetValueOrDefault(ClaimKind.TakeEqualOrHigher)};from={DutyHistogram(displaced)};steals={steals};draftbacks={draftBacks};units={IdList(ids)};pool={poolHash}");
 
 		/// <summary>One trace detail for a release batch: the caller, the reason, the previous duties (histogram by duty name), the sorted ids and the pool-order digest.</summary>
 		public static string ReleaseDetail(string caller, string reason, IReadOnlyDictionary<ArmyDuty, int> previous, IEnumerable<uint> ids, string poolHash) =>
 			string.Create(CultureInfo.InvariantCulture,
-				$"caller={caller};reason={reason};prev={string.Join("|", previous.OrderBy(kv => kv.Key).Select(kv => kv.Key + ":" + kv.Value))};units={IdList(ids)};pool={poolHash}");
+				$"caller={caller};reason={reason};prev={DutyHistogram(previous)};units={IdList(ids)};pool={poolHash}");
 
 		/// <summary>The baseline counters of design 01 section 4(a) as one detail (no time-to-first-defender here: that needs the threat start, a (b) input).</summary>
 		public string CountersDetail() => string.Create(CultureInfo.InvariantCulture,
-			$"claims={Claims};releases={Releases};steals={Steals};violations={Violations};draftbacks={DraftBacks};heartbeat_doubles={HeartbeatDoubles};held={Count}");
+			$"claims={Claims};releases={Releases};steals={Steals};violations={Violations};draftbacks={DraftBacks};heartbeat_doubles={HeartbeatDoubles};pruned={Pruned};held={Count}");
 	}
 }

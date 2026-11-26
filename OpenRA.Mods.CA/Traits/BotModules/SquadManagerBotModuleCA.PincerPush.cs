@@ -79,7 +79,10 @@ namespace OpenRA.Mods.CA.Traits
 
 			order.BeginPincer(now, rally0, rally1);
 			foreach (var place in plan.Places)
+			{
 				order.AssignProng(byKey[place.Key].Squad, place.Arm, byKey[place.Key].Value);
+				LedgerClaim(ArmyDuty.PincerArm, nameof(TeamLeadPincerAtPush), "arm" + place.Arm + "_seq" + order.Seq, (byKey[place.Key].Squad as SquadCA)?.Units ?? new List<UnitWposWrapper>());
+			}
 
 			if (plan.Split is { } split)
 				order.RequestSplit(byKey[split.Key].Squad, split.Units, split.ToArm);

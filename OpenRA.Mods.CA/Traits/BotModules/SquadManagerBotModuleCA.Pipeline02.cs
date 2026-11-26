@@ -310,6 +310,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				protectSq.Units.Add(u);
 				unitsHangingAroundTheBase.Remove(u);
+				LedgerClaim(ArmyDuty.OwnBaseDefend, nameof(ArbiterProtectOwn), "own_pool_pick", new[] { u });
 				got += UnitValue(u.Actor);
 				fromPool++;
 			}
@@ -335,6 +336,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						protectSq.Units.Add(u);
 						unitsHangingAroundTheBase.Remove(u);
+						LedgerClaim(ArmyDuty.OwnBaseDefend, nameof(ArbiterProtectOwn), "own_pool_in_radius", new[] { u });
 						fromPool++;
 					}
 				}
@@ -365,6 +367,7 @@ namespace OpenRA.Mods.CA.Traits
 						var (squad, unit) = candidates[i];
 						squad.Units.Remove(unit);
 						protectSq.Units.Add(unit);
+						LedgerClaim(ArmyDuty.OwnBaseDefend, nameof(ArbiterProtectOwn), "own_squad_pick", new[] { unit });
 						got += UnitValue(unit.Actor);
 						fromSquads++;
 					}
