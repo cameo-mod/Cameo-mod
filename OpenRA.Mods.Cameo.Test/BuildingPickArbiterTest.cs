@@ -18,8 +18,9 @@ using OpenRA.Support;
 
 namespace OpenRA.Mods.Cameo.Test
 {
-	// CONSOLIDATE-03 P1 (a) (CONSOLIDATE_03_P1_DESIGN_01.md): the ONE building-pick arbiter. Equivalence first: recording the refusals changes neither the pick, nor the tests
-	// run, nor the random draws. Then every refusal names its reason and rule, and the early-defence plan is the prior (AntiRushCA) exactly.
+	// CONSOLIDATE-03 P1 (a) (CONSOLIDATE_03_P1_DESIGN_01.md): the ONE building-pick arbiter. Wrapper agreement first: recording the refusals changes neither the pick, nor
+	// the tests run, nor the random draws of the SAME refactored Plan. This is not the old-vs-new parity gate (Opus ruling 11-26: OLD build vs NEW build, same
+	// seed, replay order stream via order_stream_diff.py plus the sync hash). Then every refusal names its reason and rule, and the early-defence plan is the prior (AntiRushCA) exactly.
 	[TestFixture]
 	public sealed class BuildingPickArbiterTest
 	{
@@ -68,7 +69,7 @@ namespace OpenRA.Mods.Cameo.Test
 		static Dictionary<BaseBuildStage, string[]> Sources(params (BaseBuildStage Stage, string[] Names)[] entries) => entries.ToDictionary(e => e.Stage, e => e.Names);
 
 		[Test]
-		public void RecordingTheRefusalsChangesNeitherThePickNorTheTestsNorTheDraws()
+		public void WrapperAgreementRecordingTheRefusalsChangesNeitherThePickNorTheTestsNorTheDraws()
 		{
 			var grid = new List<(Dictionary<BaseBuildStage, string[]> Sources, bool Sustained, bool Fallthrough, int Bank, string[] Infeasible)>
 			{

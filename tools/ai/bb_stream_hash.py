@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""CONSOLIDATE-03 P1 (a): the building order-stream hash (CONSOLIDATE_03_P1_DESIGN_01.md, equivalence point).
+"""CONSOLIDATE-03 P1 (a): the building order-stream hash (CONSOLIDATE_03_P1_DESIGN_01.md). A DIAGNOSTIC, not the parity gate (Opus ruling 11-26):
+the gate is OLD build vs NEW build, same seed, the full replay order stream identical (order_stream_diff.py) plus the sync hash. This hash omits
+the producer/queue identity and the random draws of no-pick walks; use it to find WHERE a building stream first differs.
 
 Reads the DEV player-event logs (cameo-ai-players-*.jsonl) of a game and hashes, per seat, the ordered bb_pick rows: every admitted building start of
 the staged planner (tick, actor, stage, candidate, bank). bb_pick is written for every start and is not rate-limited, and builds before P1 already
