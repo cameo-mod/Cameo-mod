@@ -825,6 +825,12 @@ namespace OpenRA.Mods.Cameo.Test
 			foreach (var signature in new[] { "ActorInfo ChooseRollUnit(", "void RollPickLog(", "void RollStartLog(", "void RollEmptyLog(", "void RollCappedLog(", "int RollStrength(int profile)", "void RollExclude(" })
 				outside = outside.Replace(Body(signature), "");
 
+			// V08F gate fix, TIER-MIX-01 (row ub_tech_lean): the one roll term read outside the roll methods is the ramp of the tech-lean admission, and it sits behind
+			// `roll &&`, so with the roll off it is never evaluated and the old chooser runs unchanged.
+			const string TechLeanRamp = "var leaned = roll && !paygo && TechLeanOn && TechLean.Admits(fullCost, rollPoolMaxCost, held, world.WorldTick, RollParameters.RampTicks,";
+			Assert.That(outside, Does.Contain(TechLeanRamp), "the tech-lean ramp is read only behind the roll switch");
+			outside = outside.Replace(TechLeanRamp, "");
+
 			foreach (var term in new[] { "RollParameters.", "rollAvailableSince[", "rollAvailableSince.", "rollPickIds.", "rollPickSeq", "rollExcluded.", "UnitRoll.Quantize", "UnitRoll.FirstBoost" })
 			{
 				// declarations and the property are the only other mentions
