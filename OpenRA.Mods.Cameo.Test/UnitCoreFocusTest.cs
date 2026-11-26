@@ -198,14 +198,21 @@ namespace OpenRA.Mods.Cameo.Test
 			var start = unit.IndexOf("ActorInfo ChooseRollUnit(", StringComparison.Ordinal);
 			var body = unit.Substring(start, unit.IndexOf("int rollDeficitTick", start, StringComparison.Ordinal) - start);
 
-			var weights = body.IndexOf("var weights = UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct, boosts);", StringComparison.Ordinal);
-			var lift = body.IndexOf("if (CoreFocusOn)\n\t\t\t\tweights = FocusCore(queue, pool, weights);", StringComparison.Ordinal);
-			var quantize = body.IndexOf("var units = UnitRoll.Quantize(weights);", StringComparison.Ordinal);
-			var log = body.IndexOf("RollPickLog(queue.Info.Type, pool, weights, pick,", StringComparison.Ordinal);
+			// P5 a3: the order of the steps lives in the pick arbiter (weights, then the core lift as the LAST step on them, then the integer units); the roll hands it the lift
+			var arbiter = RepoFile(Bots + "BotModuleLogic/UnitPickArbiter.cs");
+			var weights = arbiter.IndexOf("var weights = UnitRoll.Weights(fractions, biases, counterPcts, floorPct, boosts);", StringComparison.Ordinal);
+			var lift = arbiter.IndexOf("if (coreLift != null)\n\t\t\t\tweights = coreLift(weights);", StringComparison.Ordinal);
+			var quantize = arbiter.IndexOf("var units = UnitRoll.Quantize(weights);", StringComparison.Ordinal);
 			Assert.That(weights, Is.GreaterThan(0));
 			Assert.That(lift, Is.GreaterThan(weights), "after the roll's own weights (floor, boosts, counters, profiles)");
 			Assert.That(quantize, Is.GreaterThan(lift), "before the integer draw");
-			Assert.That(log, Is.GreaterThan(quantize), "the pick log shows the weights the draw used");
+
+			var armed = body.IndexOf("if (CoreFocusOn)\n\t\t\t\tcoreLift = w => FocusCore(queue, pool, w);", StringComparison.Ordinal);
+			var decide = body.IndexOf("UnitPickArbiter.Decide(fractions, biases, counterPcts, RollParameters.FloorPct, boosts, coreLift,", StringComparison.Ordinal);
+			var log = body.IndexOf("RollPickLog(queue.Info.Type, pool, weights, pick,", StringComparison.Ordinal);
+			Assert.That(armed, Is.GreaterThan(0), "the lift is armed only while the row is on");
+			Assert.That(decide, Is.GreaterThan(armed));
+			Assert.That(log, Is.GreaterThan(decide), "the pick log shows the weights the draw used");
 			Assert.That(body, Does.Not.Contain("rollOrdered.Add"), "ordering coverage is not touched here");
 
 			// The call and the signature the older pins read stay as they were.

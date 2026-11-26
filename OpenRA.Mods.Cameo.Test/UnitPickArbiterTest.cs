@@ -16,6 +16,7 @@ using System.Linq;
 using NUnit.Framework;
 using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
+using OpenRA.Support;
 
 namespace OpenRA.Mods.Cameo.Test
 {
@@ -125,7 +126,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var body = u.Substring(start, u.IndexOf("int rollDeficitTick", start, StringComparison.Ordinal) - start);
 
 			// the draw lines the older pins read are as before; the trace comes after them
-			var pick = body.IndexOf("var pick = UnitRoll.Pick(units, BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(UnitRoll.Sum(units)));", StringComparison.Ordinal);
+			var pick = body.IndexOf("var pick = decision.Pick;", StringComparison.Ordinal); // P5 a3: the draw itself is the arbiter's one call
 			var first = body.IndexOf("rollFirst = !rollOrdered.Contains(pool[pick].Name);", StringComparison.Ordinal);
 			var log = body.IndexOf("RollPickLog(queue.Info.Type, pool, weights, pick,", StringComparison.Ordinal);
 			var trace = body.IndexOf("PickTraceDraw(queue, pool, units, pick, skip.Count, queueRoles);", StringComparison.Ordinal);
@@ -156,6 +157,102 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(u, Does.Contain("PickTraceAccept(queue, skip.Count, name, held, cost, fullCost, paygo, leaned, batch);\n\t\t\t\t\tSetUnitInterval(name);\n\t\t\t\t\tbot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));"));
 			Assert.That(u.IndexOf("PickTraceFillEnd(queue);", StringComparison.Ordinal), Is.GreaterThan(u.IndexOf("PickTraceAccept(", StringComparison.Ordinal)));
 			Assert.That(u.IndexOf("PickTraceFillEnd(queue);", StringComparison.Ordinal), Is.LessThan(u.IndexOf("INFANTRY-REJECT-LOG-01 (DEV only): this queue's pass ended", StringComparison.Ordinal)));
+		}
+
+		// P5 a3: the R2/R3 steps moved into the arbiter; the old inline steps are replayed here on the same seed, so the picks and the RNG draw count must be identical.
+		[Test]
+		public void DecideMakesTheSamePicksAndTheSameRngCallsAsTheOldInlineSteps()
+		{
+			var fractions = new[] { 5, 3, 1, 8 };
+			var biases = new[] { 100, 150, 80, 100 };
+			var counter = new[] { 100, 100, 120, 100 };
+			var boosts = new[] { 1.0, 1.0, 8.0, 1.0 };
+			var oldRng = new MersenneTwister(100775);
+			var newRng = new MersenneTwister(100775);
+			for (var i = 0; i < 500; i++)
+			{
+				var units = UnitRoll.Quantize(UnitRoll.Weights(fractions, biases, counter, 5, boosts));
+				var oldPick = UnitRoll.Pick(units, oldRng.Next(UnitRoll.Sum(units)));
+				var decision = UnitPickArbiter.Decide(fractions, biases, counter, 5, boosts, null, newRng.Next);
+				Assert.That(decision.Pick, Is.EqualTo(oldPick), "draw " + i);
+				Assert.That(decision.Bound, Is.EqualTo(UnitRoll.Sum(units)));
+				Assert.That(decision.Units, Is.EqualTo(units));
+				Assert.That(newRng.TotalCount, Is.EqualTo(oldRng.TotalCount), "exactly one RNG call per roll, as before");
+				Assert.That(newRng.Last, Is.EqualTo(oldRng.Last));
+			}
+		}
+
+		[Test]
+		public void TheCoreLiftIsTheLastStepOnTheWeightsAndTheDrawIsCalledOnceWithTheBound()
+		{
+			var fractions = new[] { 5, 3, 1 };
+			var biases = new[] { 100, 100, 100 };
+			var counter = new[] { 100, 100, 100 };
+			var plain = UnitRoll.Weights(fractions, biases, counter, 5, null);
+			double[] seen = null;
+			var lifts = 0;
+			var draws = 0;
+			var bound = -1;
+			var decision = UnitPickArbiter.Decide(fractions, biases, counter, 5, null,
+				w =>
+				{
+					lifts++;
+					seen = (double[])w.Clone();
+					var lifted = (double[])w.Clone();
+					lifted[2] *= 100;
+					return lifted;
+				},
+				n =>
+				{
+					draws++;
+					bound = n;
+					return n - 1; // the last draw: the last candidate, which owns the end of the interval
+				});
+
+			Assert.That(seen, Is.EqualTo(plain), "the lift sees the roll's own weights (floor applied), nothing else came before it");
+			Assert.That(lifts, Is.EqualTo(1));
+			Assert.That(draws, Is.EqualTo(1));
+			Assert.That(bound, Is.EqualTo(UnitRoll.Sum(decision.Units)));
+			Assert.That(decision.Weights[2], Is.EqualTo(plain[2] * 100), "the draw used the lifted weights");
+			Assert.That(decision.Pick, Is.EqualTo(2));
+			Assert.That(decision.Rule, Is.EqualTo(UnitPickArbiter.RuleDraw));
+		}
+
+		[Test]
+		public void ComposeBiasMultipliesThePresentTermsInTheFixedOrderAndSkipsTheAbsentOnes()
+		{
+			Assert.That(UnitPickArbiter.ComposeBias(130, null, null, null, null, null), Is.EqualTo(130));
+			var terms = new int?[] { null, 0, 50, 100, 250, 100_000 };
+			foreach (var d in terms)
+				foreach (var l in terms)
+					foreach (var w in terms)
+						foreach (var c in terms)
+							foreach (var o in terms)
+							{
+								var old = 130;
+								if (d.HasValue)
+									old = UnitRoll.MulPct(old, d.Value);
+								if (l.HasValue)
+									old = UnitRoll.MulPct(old, l.Value);
+								if (w.HasValue)
+									old = UnitRoll.MulPct(old, w.Value);
+								if (c.HasValue)
+									old = UnitRoll.MulPct(old, c.Value);
+								if (o.HasValue)
+									old = UnitRoll.MulPct(old, o.Value);
+
+								Assert.That(UnitPickArbiter.ComposeBias(130, d, l, w, c, o), Is.EqualTo(old), $"{d} {l} {w} {c} {o}");
+							}
+
+			// the module hands over the terms in that order and computes none of the products itself
+			var u = RepoFile(Bots + "UnitBuilderBotModuleCA.cs");
+			Assert.That(u, Does.Contain("biases[i] = UnitPickArbiter.ComposeBias(RollParameters.BiasPct(rollPersonality, role, world.WorldTick), deficitTerm, learnedTerm, waveMixTerm, compositionTerm, openingTerm);"));
+			var start = u.IndexOf("ActorInfo ChooseRollUnit(", StringComparison.Ordinal);
+			var body = u.Substring(start, u.IndexOf("int rollDeficitTick", start, StringComparison.Ordinal) - start);
+			Assert.That(body, Does.Not.Contain("UnitRoll.MulPct("), "the multiply steps are the arbiter's");
+			Assert.That(body, Does.Not.Contain("UnitRoll.Quantize("));
+			Assert.That(body, Does.Not.Contain("UnitRoll.Pick("));
+			Assert.That(body, Does.Not.Contain(".Next("), "ChooseRollUnit holds no random call of its own: the draw is the arbiter's one call");
 		}
 
 		// P5 a2 (addendum 1, user ruling 11-26): the tech-up demand multipliers are named table inputs; the prior = the Hans / yaml values, so phase (a) equality holds (N2: priors only, map and stage factor 1).

@@ -155,12 +155,14 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(unit, Does.Contain("var held = queuedItems + batch.PendingOf(queue);"), "held = what the queue holds plus this pass's orders into it");
 
 			// The weights are untouched: no lean term between the weights and the pick.
-			var weights = unit.IndexOf("var weights = UnitRoll.Weights(", StringComparison.Ordinal);
-			var pick = unit.IndexOf("var pick = UnitRoll.Pick(", StringComparison.Ordinal);
+			// (P5 a3: the weights and the pick moved into the pick arbiter; the same check on its text, and the roll hands it the same arrays)
+			var arbiter = RepoFile(Bots + "BotModuleLogic/UnitPickArbiter.cs");
+			var weights = arbiter.IndexOf("var weights = UnitRoll.Weights(", StringComparison.Ordinal);
+			var pick = arbiter.IndexOf("var pick = UnitRoll.Pick(", StringComparison.Ordinal);
 			Assert.That(weights, Is.GreaterThan(0));
 			Assert.That(pick, Is.GreaterThan(weights));
-			Assert.That(unit.Substring(weights, pick - weights), Does.Not.Contain("TechLean"));
-			Assert.That(unit, Does.Contain("UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct, boosts)"));
+			Assert.That(arbiter.Substring(weights, pick - weights), Does.Not.Contain("TechLean"));
+			Assert.That(unit, Does.Contain("UnitPickArbiter.Decide(fractions, biases, counterPcts, RollParameters.FloorPct, boosts, coreLift,"));
 		}
 
 		[Test]

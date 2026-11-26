@@ -32,6 +32,52 @@ namespace OpenRA.Mods.CA.Traits
 		public const string RuleAdmitFull = "R4_full";
 		public const string RuleNoPick = "R3_none";
 
+		/// <summary>The decision of one roll: the picked index, the integer units and the final weights the draw used, the draw bound, the deciding rule.</summary>
+		public readonly record struct PickDecision(int Pick, int[] Units, double[] Weights, int Bound, string Rule);
+
+		/// <summary>
+		/// R2, one candidate's bias in the FIXED order (design 02 section 3): the personality bias times the role-mix deficit, the learned prior, the wave-mix, the composition and the opening term, each applied
+		/// only when present (null = the profile does not apply to this candidate). Same multiply-and-clamp steps, same order as the roll always had (UnitRoll.MulPct).
+		/// </summary>
+		public static int ComposeBias(int baseBias, int? deficit, int? learned, int? waveMix, int? composition, int? opening)
+		{
+			var bias = baseBias;
+			if (deficit.HasValue)
+				bias = UnitRoll.MulPct(bias, deficit.Value);
+
+			if (learned.HasValue)
+				bias = UnitRoll.MulPct(bias, learned.Value);
+
+			if (waveMix.HasValue)
+				bias = UnitRoll.MulPct(bias, waveMix.Value);
+
+			if (composition.HasValue)
+				bias = UnitRoll.MulPct(bias, composition.Value);
+
+			if (opening.HasValue)
+				bias = UnitRoll.MulPct(bias, opening.Value);
+
+			return bias;
+		}
+
+		/// <summary>
+		/// R2 + R3 of the unit pick: the weights (fraction x bias x counter x first boost, then the mean floor), then the core lift as the LAST step on the weights (null = the row is off), then the integer
+		/// units (UnitRoll.Quantize: relative floor, every candidate owns a drawable interval), then the ONE draw (<paramref name="draw"/> is the module's own RNG stream, called exactly once with the
+		/// bound) and the pick. No other random call, no game state.
+		/// </summary>
+		public static PickDecision Decide(IReadOnlyList<int> fractions, IReadOnlyList<int> biases, IReadOnlyList<int> counterPcts, int floorPct, IReadOnlyList<double> boosts,
+			Func<double[], double[]> coreLift, Func<int, int> draw)
+		{
+			var weights = UnitRoll.Weights(fractions, biases, counterPcts, floorPct, boosts);
+			if (coreLift != null)
+				weights = coreLift(weights);
+
+			var units = UnitRoll.Quantize(weights); // integer units, sum <= 2^30, relative floor: every candidate owns a drawable interval
+			var bound = UnitRoll.Sum(units);
+			var pick = UnitRoll.Pick(units, draw(bound));
+			return new PickDecision(pick, units, weights, bound, RuleDraw);
+		}
+
 		public const string ResultAccept = "accept";
 		public const string ResultRefuse = "refuse";
 		public const string ResultNone = "none";

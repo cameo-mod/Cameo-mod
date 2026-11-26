@@ -154,7 +154,9 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(body, Does.Not.Contain("GetUnitsToBuildForCategory"), "the derived or composition table never replaces the yaml fractions");
 			Assert.That(body, Does.Not.Contain("ChooseCounter").And.Not.Contain("ChooseWaveMixRole").And.Not.Contain("ChooseRoleDeficit"));
 			Assert.That(body, Does.Contain("fractions[i] = RollParameters.Fraction(name);"));
-			Assert.That(body, Does.Contain("UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct, boosts)"));
+			// P5 a3: the weights step moved into the pick arbiter (R2, then the draw R3); the roll hands it the same four arrays and the floor
+			Assert.That(body, Does.Contain("UnitPickArbiter.Decide(fractions, biases, counterPcts, RollParameters.FloorPct, boosts, coreLift,"));
+			Assert.That(Source("mods/CA/Traits/BotModules/BotModuleLogic/UnitPickArbiter.cs"), Does.Contain("var weights = UnitRoll.Weights(fractions, biases, counterPcts, floorPct, boosts);"));
 		}
 
 		// Opus ruling 1: no kept gate may block a listed type forever. The aircraft caps are waived for the FIRST build of a type (both in the candidate filter and after the pick),
@@ -347,8 +349,12 @@ namespace OpenRA.Mods.Cameo.Test
 
 			// the module draws exactly this way
 			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
-			Assert.That(u, Does.Contain("var units = UnitRoll.Quantize(weights);"));
-			Assert.That(u, Does.Contain("UnitRoll.Pick(units, BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(UnitRoll.Sum(units)))"));
+			// P5 a3: the quantize and the one draw live in the pick arbiter; the draw is still this module's own stream, exactly one Next(bound)
+			var arbiter = Source("mods/CA/Traits/BotModules/BotModuleLogic/UnitPickArbiter.cs");
+			Assert.That(arbiter, Does.Contain("var units = UnitRoll.Quantize(weights);"));
+			Assert.That(arbiter, Does.Contain("var pick = UnitRoll.Pick(units, draw(bound));"));
+			Assert.That(arbiter.Split(new[] { "draw(" }, StringSplitOptions.None).Length - 1, Is.EqualTo(1), "one draw call, no other");
+			Assert.That(u, Does.Contain("Func<int, int> RollDraw => rollDraw ??= n => BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(n);"));
 		}
 
 		[Test]

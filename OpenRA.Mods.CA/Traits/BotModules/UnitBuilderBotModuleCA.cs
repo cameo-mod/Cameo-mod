@@ -669,6 +669,11 @@ namespace OpenRA.Mods.CA.Traits
 		string rollPersonality = "";
 		bool rollFirst;
 
+		// P5 a3: the roll's one draw (this module's RNG stream, one Next(bound) call) handed to the pick arbiter; created once, no allocation per roll.
+		Func<int, int> rollDraw;
+
+		Func<int, int> RollDraw => rollDraw ??= n => BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(n);
+
 		// TIER-MIX-01 (row ub_tech_lean): the dearest price in the pool of the fill in hand (set by ChooseRollUnit, read by the afford gate; stays 0 while the row is off).
 		AblationLatch ablateTechLean;
 		bool TechLeanOn => UnitRollOn && Info.TechLeanTopPct > 0 && !ablateTechLean.Off(player, AblationIds.UnitTechLean);
@@ -3004,35 +3009,38 @@ namespace OpenRA.Mods.CA.Traits
 				boosts[i] = rollOrdered.Contains(name) ? 1.0
 					: UnitRoll.FirstBoost(RollParameters.FirstBoost, world.WorldTick - rollAvailableSince[name], RollParameters.FirstRampTicks, RollParameters.FirstCap);
 				var role = roles?.PrimaryRoleOf(name);
-				var bias = RollParameters.BiasPct(rollPersonality, role, world.WorldTick);
+				// the profile terms (a null term = the profile does not apply to this candidate); UnitPickArbiter.ComposeBias multiplies them in the fixed R2 order
+				int? deficitTerm = null, learnedTerm = null, waveMixTerm = null, compositionTerm = null, openingTerm = null;
 				if (deficits != null && role != null && deficits.TryGetValue(role, out var deficit))
-					bias = UnitRoll.MulPct(bias, UnitRoll.Scaled(deficit, strength[UnitRoll.RoleDeficit]));
+					deficitTerm = UnitRoll.Scaled(deficit, strength[UnitRoll.RoleDeficit]);
 
 				if (providers != null && providers.Count > 0)
-					bias = UnitRoll.MulPct(bias, UnitRoll.Scaled(LearnedWeightPercent(pool[i], providers), strength[UnitRoll.Learned]));
+					learnedTerm = UnitRoll.Scaled(LearnedWeightPercent(pool[i], providers), strength[UnitRoll.Learned]);
 
 				if (missingRoles != null && role != null)
-					bias = UnitRoll.MulPct(bias, UnitRoll.Boost(missingRoles.Contains(role), strength[UnitRoll.WaveMix]));
+					waveMixTerm = UnitRoll.Boost(missingRoles.Contains(role), strength[UnitRoll.WaveMix]);
 
 				if (composition != null && composition.TryGetValue(name, out var compositionShare))
-					bias = UnitRoll.MulPct(bias, UnitRoll.ShareBoost(compositionShare, bestShare, strength[UnitRoll.Composition]));
+					compositionTerm = UnitRoll.ShareBoost(compositionShare, bestShare, strength[UnitRoll.Composition]);
 
 				if (opening)
-					bias = UnitRoll.MulPct(bias, UnitRoll.Boost(Info.OpeningDefenseUnitTypes.Contains(name), strength[UnitRoll.Opening]));
+					openingTerm = UnitRoll.Boost(Info.OpeningDefenseUnitTypes.Contains(name), strength[UnitRoll.Opening]);
 
 				fractions[i] = RollParameters.Fraction(name);
-				biases[i] = bias;
+				biases[i] = UnitPickArbiter.ComposeBias(RollParameters.BiasPct(rollPersonality, role, world.WorldTick), deficitTerm, learnedTerm, waveMixTerm, compositionTerm, openingTerm);
 				counterPcts[i] = scores == null ? 100 : UnitRoll.CounterPct(scores[i], best, strength[UnitRoll.Counter]);
 			}
 
-			var weights = UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct, boosts);
-
-			// HANS-PROFILE-01 (ub_core_focus): the dearest affordable types built once get a weight multiplier (a bias; every other weight stays as the roll made it).
+			// HANS-PROFILE-01 (ub_core_focus): the dearest affordable types built once get a weight multiplier (a bias; every other weight stays as the roll made it); the arbiter applies it as the last step on the weights.
+			Func<double[], double[]> coreLift = null;
 			if (CoreFocusOn)
-				weights = FocusCore(queue, pool, weights);
+				coreLift = w => FocusCore(queue, pool, w);
 
-			var units = UnitRoll.Quantize(weights); // integer units, sum <= 2^30, relative floor: every candidate owns a drawable interval
-			var pick = UnitRoll.Pick(units, BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(UnitRoll.Sum(units)));
+			// R2 weights (floor, then the core lift) and R3 the one draw: the arbiter owns the order and the integer draw; the draw is this module's own RNG stream, exactly one Next call
+			var decision = UnitPickArbiter.Decide(fractions, biases, counterPcts, RollParameters.FloorPct, boosts, coreLift, RollDraw);
+			var weights = decision.Weights;
+			var units = decision.Units;
+			var pick = decision.Pick;
 			rollFirst = !rollOrdered.Contains(pool[pick].Name);
 			RollPickLog(queue.Info.Type, pool, weights, pick, rollFirst, fractions, biases, counterPcts, boosts);
 			PickTraceDraw(queue, pool, units, pick, skip.Count, queueRoles);
