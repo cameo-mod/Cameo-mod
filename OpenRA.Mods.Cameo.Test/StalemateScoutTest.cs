@@ -57,19 +57,23 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void NoKnownTargetScoutsWhenAStaleRegionCanBeWalkedTo()
 		{
-			Assert.That(StalemateScoutCA.Classify(false, true, 1), Is.EqualTo(StalemateScoutCA.Verdict.Scout));
-			Assert.That(StalemateScoutCA.Classify(false, true, 16), Is.EqualTo(StalemateScoutCA.Verdict.Scout), "after several refused centres the next one still scouts");
+			Assert.That(StalemateScoutCA.Classify(false, true, 1, false), Is.EqualTo(StalemateScoutCA.Verdict.Scout));
+			Assert.That(StalemateScoutCA.Classify(false, true, 16, false), Is.EqualTo(StalemateScoutCA.Verdict.Scout), "after several refused centres the next one still scouts");
 			Assert.That(StalemateScoutCA.Excused(StalemateScoutCA.Verdict.Scout), Is.False, "a push that scouts is not excused from anything, it is working");
 		}
 
 		[Test]
 		public void OnlyAnUnreachableTargetIsTheException()
 		{
-			var verdict = StalemateScoutCA.Classify(false, false, 5);
-			Assert.That(verdict, Is.EqualTo(StalemateScoutCA.Verdict.Unreachable), "stale regions exist and none can be walked to");
+			var verdict = StalemateScoutCA.Classify(false, false, 5, true);
+			Assert.That(verdict, Is.EqualTo(StalemateScoutCA.Verdict.Unreachable), "every stale region was offered and none can be walked to");
 			Assert.That(StalemateScoutCA.Excused(verdict), Is.True);
 
-			var explored = StalemateScoutCA.Classify(false, false, 0);
+			var capped = StalemateScoutCA.Classify(false, false, 16, false);
+			Assert.That(capped, Is.EqualTo(StalemateScoutCA.Verdict.Capped), "the scan stopped at its cap with stale regions left: not proven unreachable");
+			Assert.That(StalemateScoutCA.Excused(capped), Is.False);
+
+			var explored = StalemateScoutCA.Classify(false, false, 0, true);
 			Assert.That(explored, Is.EqualTo(StalemateScoutCA.Verdict.Explored), "nothing stale left: not a reason to idle");
 			Assert.That(StalemateScoutCA.Excused(explored), Is.False);
 			Assert.That(StalemateScoutCA.Excused(StalemateScoutCA.Verdict.Attack), Is.False);
@@ -80,7 +84,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			foreach (var found in new[] { true, false })
 				foreach (var checks in new[] { 0, 1, 16 })
-					Assert.That(StalemateScoutCA.Classify(true, found, checks), Is.EqualTo(StalemateScoutCA.Verdict.Attack));
+					Assert.That(StalemateScoutCA.Classify(true, found, checks, found), Is.EqualTo(StalemateScoutCA.Verdict.Attack));
 
 			// The target tiers of the leader come before any hunt, so a target the bot sees or remembers is always taken before a cell is scouted.
 			var order = TargetPick.Order(TargetPurpose.Main);
@@ -108,9 +112,6 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(StalemateScoutCA.Rejected(-1, 5000), Is.False, "never refused");
 			Assert.That(StalemateScoutCA.Rejected(1000, 1000 + StalemateScoutCA.RejectHoldTicks - 1), Is.True);
 			Assert.That(StalemateScoutCA.Rejected(1000, 1000 + StalemateScoutCA.RejectHoldTicks), Is.False);
-			Assert.That(StalemateScoutCA.Reached(true, 1_000_000, 4), Is.True, "seen is reached");
-			Assert.That(StalemateScoutCA.Reached(false, 16, 4), Is.True);
-			Assert.That(StalemateScoutCA.Reached(false, 17, 4), Is.False);
 		}
 
 		// ---- the tactical-map side: the scout module offers stale regions, best first ----
@@ -122,9 +123,10 @@ namespace OpenRA.Mods.Cameo.Test
 			var stale = new Dictionary<int, int> { { 3, 5000 }, { 9, 9000 }, { 20, 2000 } };
 			var offered = new List<CPos>();
 
-			var found = ScoutBotModule.PickScoutCell(regions, new CPos(0, 0), 16, c => { offered.Add(c); return false; }, i => stale.GetValueOrDefault(i), i => 0, i => 0, out _, out var checks);
+			var found = ScoutBotModule.PickScoutCell(regions, new CPos(0, 0), 16, c => { offered.Add(c); return false; }, i => stale.GetValueOrDefault(i), i => 0, i => 0, out _, out var checks, out var exhausted);
 
 			Assert.That(found, Is.False);
+			Assert.That(exhausted, Is.True, "every stale region was offered");
 			Assert.That(checks, Is.EqualTo(3), "only the three stale regions are offered; every seen or fresh region is skipped");
 			Assert.That(offered[0], Is.EqualTo(regions.CenterOf(9)), "the stalest first");
 			Assert.That(offered.Select(regions.IndexOf).ToList(), Is.EquivalentTo(new[] { 3, 9, 20 }));
@@ -137,7 +139,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var stale = new Dictionary<int, int> { { 3, 5000 }, { 9, 9000 }, { 20, 2000 } };
 			var unreachable = regions.CenterOf(9);
 
-			var found = ScoutBotModule.PickScoutCell(regions, new CPos(0, 0), 16, c => c != unreachable, i => stale.GetValueOrDefault(i), i => 0, i => 0, out var cell, out var checks);
+			var found = ScoutBotModule.PickScoutCell(regions, new CPos(0, 0), 16, c => c != unreachable, i => stale.GetValueOrDefault(i), i => 0, i => 0, out var cell, out var checks, out _);
 
 			Assert.That(found, Is.True);
 			Assert.That(checks, Is.EqualTo(2));
@@ -150,15 +152,23 @@ namespace OpenRA.Mods.Cameo.Test
 			var regions = new RegionMemory(new CPos(0, 0), new CPos(63, 63), 8);
 			var all = Enumerable.Range(0, regions.CellCount).ToDictionary(i => i, i => 1000 + i);
 
-			var bounded = ScoutBotModule.PickScoutCell(regions, new CPos(0, 0), 4, _ => false, i => all[i], i => 0, i => 0, out _, out var checks);
+			var bounded = ScoutBotModule.PickScoutCell(regions, new CPos(0, 0), 4, _ => false, i => all[i], i => 0, i => 0, out _, out var checks, out var boundedExhausted);
 			Assert.That(bounded, Is.False);
 			Assert.That(checks, Is.EqualTo(4), "never more than maxChecks centres are offered (one path query each)");
+			Assert.That(boundedExhausted, Is.False, "the cap stopped the scan, stale regions are left");
 
-			var none = ScoutBotModule.PickScoutCell(regions, new CPos(0, 0), 16, _ => true, i => 0, i => 0, i => 0, out _, out var noneChecks);
+			// A cap that equals the number of stale regions still proves them all refused.
+			var few = new Dictionary<int, int> { { 3, 5000 }, { 9, 9000 } };
+			ScoutBotModule.PickScoutCell(regions, new CPos(0, 0), 2, _ => false, i => few.GetValueOrDefault(i), i => 0, i => 0, out _, out var fewChecks, out var fewExhausted);
+			Assert.That(fewChecks, Is.EqualTo(2));
+			Assert.That(fewExhausted, Is.True, "the cap was met exactly and nothing stale is left unoffered");
+
+			var none = ScoutBotModule.PickScoutCell(regions, new CPos(0, 0), 16, _ => true, i => 0, i => 0, i => 0, out _, out var noneChecks, out var noneExhausted);
 			Assert.That(none, Is.False);
 			Assert.That(noneChecks, Is.EqualTo(0), "nothing stale = nothing to scout (Explored), distinct from stale regions that cannot be reached (Unreachable)");
-			Assert.That(StalemateScoutCA.Classify(false, bounded, checks), Is.EqualTo(StalemateScoutCA.Verdict.Unreachable));
-			Assert.That(StalemateScoutCA.Classify(false, none, noneChecks), Is.EqualTo(StalemateScoutCA.Verdict.Explored));
+			Assert.That(StalemateScoutCA.Classify(false, bounded, checks, boundedExhausted), Is.EqualTo(StalemateScoutCA.Verdict.Capped));
+			Assert.That(StalemateScoutCA.Classify(false, false, fewChecks, fewExhausted), Is.EqualTo(StalemateScoutCA.Verdict.Unreachable));
+			Assert.That(StalemateScoutCA.Classify(false, none, noneChecks, noneExhausted), Is.EqualTo(StalemateScoutCA.Verdict.Explored));
 		}
 
 		// ---- the wiring: row off = the old text; fog-safe; one row, off everywhere ----

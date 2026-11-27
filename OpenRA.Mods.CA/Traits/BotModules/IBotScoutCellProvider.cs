@@ -23,8 +23,9 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		/// <summary>
 		/// Offers up to <paramref name="maxChecks"/> stale region centres, best first, to <paramref name="acceptable"/> and returns the first it accepts.
-		/// <paramref name="checks"/> is how many centres were offered (0 = no stale region at all, so nothing to scout).
+		/// <paramref name="checks"/> is how many centres were offered (0 = no stale region at all, so nothing to scout); <paramref name="exhausted"/> is true when no stale region was left unoffered
+		/// (false = the scan stopped at maxChecks with regions still to try).
 		/// </summary>
-		bool TryPickScoutCell(CPos from, int maxChecks, Func<CPos, bool> acceptable, out CPos cell, out int checks);
+		bool TryPickScoutCell(CPos from, int maxChecks, Func<CPos, bool> acceptable, out CPos cell, out int checks, out bool exhausted);
 	}
 }

@@ -23,8 +23,11 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			/// <summary>No target known, a reachable unscouted or stale region was found: the push scouts it.</summary>
 			Scout,
 
-			/// <summary>No target known, stale regions exist but none can be walked to: the one excused case.</summary>
+			/// <summary>No target known, stale regions exist and EVERY one of them was offered and refused as unwalkable: the one excused case.</summary>
 			Unreachable,
+
+			/// <summary>No target known, the scan stopped at its check cap with stale regions still unoffered: not excused, the next pick goes on.</summary>
+			Capped,
 
 			/// <summary>No target known and no region left to scout (everything currently seen or fresh): not excused, the push keeps retrying.</summary>
 			Explored,
@@ -33,8 +36,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		/// <summary>After a region centre was refused as unwalkable, it is not asked again for this long.</summary>
 		public const int RejectHoldTicks = 3000;
 
-		/// <summary>The decision for a ready push. <paramref name="regionsChecked"/> is how many stale regions the scout pick had to try.</summary>
-		public static Verdict Classify(bool targetKnown, bool scoutCellFound, int regionsChecked)
+		/// <summary>The decision for a ready push. <paramref name="regionsChecked"/> is how many stale regions the scout pick offered; <paramref name="exhausted"/> is true when no stale region was left unoffered.</summary>
+		public static Verdict Classify(bool targetKnown, bool scoutCellFound, int regionsChecked, bool exhausted)
 		{
 			if (targetKnown)
 				return Verdict.Attack;
@@ -42,7 +45,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (scoutCellFound)
 				return Verdict.Scout;
 
-			return regionsChecked > 0 ? Verdict.Unreachable : Verdict.Explored;
+			if (regionsChecked <= 0)
+				return Verdict.Explored;
+
+			return exhausted ? Verdict.Unreachable : Verdict.Capped;
 		}
 
 		/// <summary>Only an unreachable target excuses a push that does not attack.</summary>
@@ -53,8 +59,5 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		/// <summary>A refused region centre is skipped while its refusal is younger than <see cref="RejectHoldTicks"/>.</summary>
 		public static bool Rejected(int rejectedTick, int now) => rejectedTick >= 0 && now - rejectedTick < RejectHoldTicks;
-
-		/// <summary>The scouted cell counts as reached once the bot sees it or its leader stands within the arrive distance (DEV evidence only).</summary>
-		public static bool Reached(bool visible, long distSq, int arriveCells) => visible || distSq <= (long)arriveCells * arriveCells;
 	}
 }

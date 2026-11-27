@@ -26,6 +26,7 @@ namespace OpenRA.Mods.CA.Traits
 		IBotScoutCellProvider[] scoutCellProviders;
 		readonly Dictionary<CPos, int> scoutRejected = new();
 		int scoutLastChecks;
+		bool scoutLastExhausted;
 		string scoutLastSource = "none";
 		CPos? scoutHuntCell;
 		int scoutHuntTick = -1;
@@ -41,6 +42,7 @@ namespace OpenRA.Mods.CA.Traits
 		CPos? StalemateScoutCell(Actor leader, Mobile mobile)
 		{
 			scoutLastChecks = 0;
+			scoutLastExhausted = false;
 			scoutLastSource = "none";
 			scoutCellProviders ??= Player.PlayerActor.TraitsImplementing<IBotScoutCellProvider>().ToArray();
 			var map = World.Map;
@@ -70,8 +72,9 @@ namespace OpenRA.Mods.CA.Traits
 				if (!provider.IsTraitEnabled())
 					continue;
 
-				var found = provider.TryPickScoutCell(from, Info.FinishHuntMaxChecks, Accept, out _, out var checks);
+				var found = provider.TryPickScoutCell(from, Info.FinishHuntMaxChecks, Accept, out _, out var checks, out var exhausted);
 				scoutLastChecks = System.Math.Max(scoutLastChecks, checks);
+				scoutLastExhausted |= exhausted;
 				if (!found)
 					continue;
 
@@ -90,7 +93,7 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			scoutIdleLogTick = now;
-			var verdict = StalemateScoutCA.Classify(false, false, scoutLastChecks);
+			var verdict = StalemateScoutCA.Classify(false, false, scoutLastChecks, scoutLastExhausted);
 			StalemateScoutRecord("scout_idle", TeamLeadOpenOrder(), "verdict=" + verdict.ToString().ToLowerInvariant() + " excused=" + (StalemateScoutCA.Excused(verdict) ? 1 : 0)
 				+ " allin=" + (allIn ? 1 : 0) + " blob=" + blobUnits + "/" + blobValue + " checked=" + scoutLastChecks);
 		}

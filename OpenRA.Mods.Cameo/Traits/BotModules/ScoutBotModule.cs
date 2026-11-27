@@ -576,10 +576,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		// STALEMATE-SCOUT-01 (row ss_scout_push): the stale regions of the tactical map, best first, for a push that is ready with no known target. Same scoring as the scouts
 		// (staleness, interest, danger, distance); only the bot's own region memory is read. The caller decides which centre it can walk to.
-		bool IBotScoutCellProvider.TryPickScoutCell(CPos from, int maxChecks, Func<CPos, bool> acceptable, out CPos cell, out int checks)
+		bool IBotScoutCellProvider.TryPickScoutCell(CPos from, int maxChecks, Func<CPos, bool> acceptable, out CPos cell, out int checks, out bool exhausted)
 		{
 			cell = default;
 			checks = 0;
+			exhausted = false;
 			var regions = player.PlayerActor.TraitOrDefault<MasterAiBotModule>()?.Situation?.Regions;
 			if (regions == null)
 				return false;
@@ -591,22 +592,30 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var interestRegions = ProviderInterestRegions(regions);
 			var influence = player.PlayerActor.TraitOrDefault<MasterAiBotModule>()?.Situation?.Influence;
 			if (LayersMatch(regions, influence))
-				return PickScoutCell(regions, from, maxChecks, acceptable, i => influence.Staleness[i], i => influence.Interest[i] + ProviderInterest(interestRegions, i), i => influence.ThreatGround[i], out cell, out checks);
+				return PickScoutCell(regions, from, maxChecks, acceptable, i => influence.Staleness[i], i => influence.Interest[i] + ProviderInterest(interestRegions, i), i => influence.ThreatGround[i], out cell, out checks, out exhausted);
 
-			return PickScoutCell(regions, from, maxChecks, acceptable, i => Staleness(regions, i, tick), i => Interest(regions, i) + ProviderInterest(interestRegions, i), DangerAt, out cell, out checks);
+			return PickScoutCell(regions, from, maxChecks, acceptable, i => Staleness(regions, i, tick), i => Interest(regions, i) + ProviderInterest(interestRegions, i), DangerAt, out cell, out checks, out exhausted);
 		}
 
-		/// <summary>The stale regions in score order, each centre offered to <paramref name="acceptable"/> until one is taken or maxChecks centres were offered. Fully seen regions are never offered.</summary>
+		/// <summary>The stale regions in score order, each centre offered to <paramref name="acceptable"/> until one is taken or maxChecks centres were offered. Fully seen regions are never offered.
+		/// <paramref name="exhausted"/>: the stale regions ran out (every one was offered and refused); false when the cap stopped the scan with regions left.</summary>
 		internal static bool PickScoutCell(RegionMemory regions, CPos from, int maxChecks, Func<CPos, bool> acceptable,
-			Func<int, int> staleness, Func<int, int> interest, Func<int, int> danger, out CPos cell, out int checks)
+			Func<int, int> staleness, Func<int, int> interest, Func<int, int> danger, out CPos cell, out int checks, out bool exhausted)
 		{
 			cell = default;
 			checks = 0;
+			exhausted = false;
 			var offered = new HashSet<int>();
-			while (checks < maxChecks)
+			while (true)
 			{
 				var region = PickScoutRegion(regions, from, offered, staleness, interest, danger);
 				if (region < 0)
+				{
+					exhausted = true;
+					return false;
+				}
+
+				if (checks >= maxChecks)
 					return false;
 
 				offered.Add(region);
@@ -618,8 +627,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					return true;
 				}
 			}
-
-			return false;
 		}
 
 		internal static int PickScoutRegion(RegionMemory regions, CPos from, IReadOnlySet<int> taken,
