@@ -99,6 +99,15 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			owner.SquadManager.ShouldReleaseDefenders(false);
 
+			// TEAM-DEFEND-02 (row tm_defend_two_tier): the alarm's attacker is unseen, so T2 gave the squad a TERRAIN target (Target.Actor is null). Nothing below may read TargetActor then: the squad walks to the cell with an
+			// attack-move, and T2 clears the target (-> the quiet release above) once the leader stands there with no attacker in sight. Before the row existed no code gave this squad a terrain target, so no old path reaches this branch.
+			if (closestEnemy == null && owner.TargetActor == null && owner.Target.Type == TargetType.Terrain)
+			{
+				var cell = owner.World.Map.CellContaining(owner.Target.CenterPosition);
+				QueueDeduped(owner, "AttackMove", SquadOrderKey.ForCell("AttackMove", cell), Target.FromCell(owner.World, cell), owner.Units.Select(u => u.Actor));
+				return;
+			}
+
 			// DF-2 lure: out beyond the rally point and losing alone -> fall back under the own defences.
 			var wantsLure = holding && closestEnemy != null && owner.SquadManager.Info.UseCombatPredictor
 				&& (leader.Location - rally).LengthSquared > owner.SquadManager.Info.LureRallyRadiusCells * owner.SquadManager.Info.LureRallyRadiusCells

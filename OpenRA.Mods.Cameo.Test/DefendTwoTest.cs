@@ -150,22 +150,46 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void TheLedgerIsWipedOnceOnANewVictimNeverOnASameVictimRefreshAndOnAnInactiveAlarm()
+		public void OnANewVictimOnlyTheCommitsAreWipedOnceTheSpareStaysAndAnInactiveAlarmClearsTheCommits()
 		{
 			var team = new TeamLeadTeam();
 			team.BindDefendLedger("A");
 			team.PublishDefendSpare("s1", 500, 10);
+			team.PublishDefendCommit("s1", 300, 10);
 			team.BindDefendLedger("A");
-			Assert.That(team.DefendSumsExcept("s2", 20, 100).Spare, Is.EqualTo(500), "a same-victim re-raise keeps the entries (the units still marching stay committed)");
+			Assert.That(team.DefendSumsExcept("s2", 20, 100), Is.EqualTo((500L, 300L)), "a same-victim re-raise keeps both (the units still marching stay committed)");
 
 			team.BindDefendLedger("B");
-			Assert.That(team.DefendSumsExcept("s2", 20, 100).Spare, Is.EqualTo(0), "the first seat to see the new victim wipes the ledger");
-			team.PublishDefendSpare("s1", 400, 25);
+			Assert.That(team.DefendSumsExcept("s2", 20, 100), Is.EqualTo((500L, 0L)), "the first seat to see the new victim wipes the commits; the spare is a property of the seat and stays");
+			team.PublishDefendCommit("s1", 200, 25);
 			team.BindDefendLedger("B");
-			Assert.That(team.DefendSumsExcept("s2", 30, 100).Spare, Is.EqualTo(400), "the seats after it find the victim bound already and do not wipe what the first one published");
+			Assert.That(team.DefendSumsExcept("s2", 30, 100), Is.EqualTo((500L, 200L)), "the seats after it find the victim bound already and do not wipe what the first one published");
 
 			team.ClearDefendLedger();
-			Assert.That(team.DefendSumsExcept("s2", 30, 100), Is.EqualTo((0L, 0L)), "an inactive alarm clears");
+			Assert.That(team.DefendSumsExcept("s2", 30, 100), Is.EqualTo((500L, 0L)), "an inactive alarm clears the commits");
+			Assert.That(team.DefendSumsExcept("s2", 200, 100), Is.EqualTo((0L, 0L)), "the spare only ages out");
+		}
+
+		[Test]
+		public void AWarmLedgerSplitsTheFirstRoundOfANewVictimBySpareInsteadOfFirstComeAndAColdOneIsFirstCome()
+		{
+			var team = new TeamLeadTeam();
+			team.BindDefendLedger("A");
+			foreach (var seat in new[] { "s0", "s1", "s2" })
+			{
+				team.PublishDefendSpare(seat, 400, 50);
+				team.PublishDefendCommit(seat, 300, 50);
+			}
+
+			team.BindDefendLedger("B");
+			var others = team.DefendSumsExcept("s0", 60, DefendTwo.LedgerMaxAgeTicks);
+			Assert.That(others, Is.EqualTo((800L, 0L)), "the peers' spare is still there, their commits for the old victim are gone");
+			Assert.That(DefendTwo.Quota(600, others.Commit, 400, others.Spare + 400), Is.EqualTo(200), "600 x 400 / 1200: a share, not the whole 400 first-come");
+
+			var cold = new TeamLeadTeam();
+			cold.BindDefendLedger("B");
+			var none = cold.DefendSumsExcept("s0", 60, DefendTwo.LedgerMaxAgeTicks);
+			Assert.That(DefendTwo.Quota(600, none.Commit, 400, none.Spare + 400), Is.EqualTo(400), "a cold ledger (no peer published): the first seat takes min(spare, need)");
 		}
 
 		// ---- commit ----
@@ -330,6 +354,30 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(part, Does.Contain("var arrived = (home.Units[0].Actor.CenterPosition - home.Target.CenterPosition).HorizontalLengthSquared <= DefendTwoScanSquared();"));
 			Assert.That(part, Does.Contain("DefendTwoMaintain(home, alarm, false);"), "the inactive alarm releases too");
 			Assert.That(part, Does.Contain("home.Target.Type != TargetType.Terrain"), "only the terrain target T2 set is cleared; an actor target ends through the state's own validity test");
+		}
+
+		[Test]
+		public void ATerrainTargetNeverReachesATargetActorReadInTheProtectionStateAndTheReleaseGuardIsPinned()
+		{
+			// No harness in this repo can run a squad state (it needs a live World, Actors and the squad manager), so the branch is pinned by source: it sits after the quiet/release path and before the first TargetActor dereference.
+			var state = RepoFile(Bots + "Squads/States/ProtectionStatesCA.cs");
+			var quiet = state.IndexOf("if (closestEnemy == null && (!owner.IsTargetValid || !owner.IsTargetVisible))", StringComparison.Ordinal);
+			var branch = state.IndexOf("if (closestEnemy == null && owner.TargetActor == null && owner.Target.Type == TargetType.Terrain)", StringComparison.Ordinal);
+			var canAttack = state.IndexOf("CanAttackTarget(u.Actor, owner.TargetActor)", StringComparison.Ordinal);
+			var read = state.IndexOf("owner.TargetActor.CenterPosition", StringComparison.Ordinal);
+			Assert.That(quiet, Is.GreaterThan(0));
+			Assert.That(branch, Is.GreaterThan(quiet), "the quiet release path stays first");
+			Assert.That(branch, Is.LessThan(canAttack));
+			Assert.That(branch, Is.LessThan(read));
+
+			var open = state.IndexOf('{', branch);
+			var body = state[open..state.IndexOf("return;", open, StringComparison.Ordinal)];
+			Assert.That(body, Does.Contain("QueueDeduped(owner, \"AttackMove\", SquadOrderKey.ForCell(\"AttackMove\", cell), Target.FromCell(owner.World, cell), owner.Units.Select(u => u.Actor));"));
+			Assert.That(body, Does.Not.Contain("TargetActor"), "the terrain branch reads no actor target");
+
+			// F3: the squad is valid (at least one unit) before any Units[0] read of the release test
+			Assert.That(RepoFile(Bots + "Squads/SquadCA.cs"), Does.Contain("public bool IsValid => Units.Count > 0;"));
+			Assert.That(RepoFile(Bots + "SquadManagerBotModuleCA.DefendTwo.cs"), Does.Contain("if (!defendTwoHome || home is not { IsValid: true } || home.Target.Type != TargetType.Terrain)\n\t\t\t\treturn;"));
 		}
 
 		[Test]

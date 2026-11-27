@@ -19,8 +19,9 @@ namespace OpenRA.Mods.CA.Traits
 {
 	// TEAM-DEFEND-02 (row tm_defend_two_tier; design pending/TEAM_DEFEND_02_DESIGN_01.md, user-approved two-tier ally defence). T1 (the local 25-cell response, DefendAllyRespond) is NOT touched. This file is T2: the answer to the team alarm.
 	// Every ally answers with no radius; the team sends the presence margin x the SEEN attack minus the defence already there, split by the spare value each seat published (a team ledger, TeamLeadTeam.DefendSpare/DefendCommit); a pushed blob keeps
-	// its order unless the ally would die; the existing Protection-squad release returns the defenders when the threat is over. Fog-safe: nothing of an unseen attacker is read (the alarm carries its position, a blind alarm only the damaged
-	// location). With the row off none of this runs and TeamDefendTick is byte-identical to before.
+	// its order unless the ally would die; the existing Protection-squad release returns the defenders when the threat is over. Fog-safe: an unseen actor never counts as an attacker and its position and liveness are never used (the
+	// assessment reads an actor's owner and type only to classify it; the visibility test decides whether it counts; the alarm carries the attacker position the team already saw, a blind alarm only the damaged location). The allied defence
+	// value around the victim is team-shared knowledge and is not visibility-gated. With the row off none of this runs and TeamDefendTick is byte-identical to before.
 	public partial class SquadManagerBotModuleCA
 	{
 		AblationLatch ablateTeamDefendTwo;

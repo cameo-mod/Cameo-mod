@@ -861,7 +861,7 @@ namespace OpenRA.Mods.CA.Traits
 		public TeamDefendCA.Alarm? DefendAlarm;
 
 		// TEAM-DEFEND-02 (row tm_defend_two_tier): what each answering seat could send to the alarm (spare) and what it has on its way (commit), the latest per seat key with the publish tick. Values and ticks only: no actor reference.
-		// A seat publishes its spare before it computes its quota and its commit after it sends; entries older than DefendTwo.LedgerMaxAgeTicks are ignored. Cleared only when the alarm's victim changes or the alarm is over (never on a same-victim refresh).
+		// A seat publishes its spare before it computes its quota and its commit after it sends; entries older than DefendTwo.LedgerMaxAgeTicks are ignored. The commits are cleared only when the alarm's victim changes or the alarm is over (never on a same-victim refresh); the spare entries only age out.
 		readonly Dictionary<string, (long Value, int Tick)> defendSpare = new(StringComparer.Ordinal);
 		readonly Dictionary<string, (long Value, int Tick)> defendCommit = new(StringComparer.Ordinal);
 
@@ -888,21 +888,23 @@ namespace OpenRA.Mods.CA.Traits
 		string defendLedgerVictim;
 
 		/// <summary>
-		/// Every answering seat calls this at the start of a pass with the alarm's victim: the ledger is wiped ONCE when the victim changes (the first seat to see the new victim does it, the rest find it bound already), never on a
-		/// same-victim refresh. A per-seat check would let each seat wipe the entries the earlier seats of the same round had just published.
+		/// Every answering seat calls this at the start of a pass with the alarm's victim: the COMMITS are wiped ONCE when the victim changes (the first seat to see the new victim does it, the rest find it bound already), never on a
+		/// same-victim refresh. A per-seat check would let each seat wipe the entries the earlier seats of the same round had just published. The SPARE entries are not wiped: spare is a property of the seat (what it could send, whatever the
+		/// victim), age-bounded by <see cref="DefendTwo.Fresh"/>, and keeping it lets the first seat of the new victim split by the others' spare instead of taking the whole need first-come. Only a cold ledger (no peer published within the
+		/// age bound) makes the first round first-come.
 		/// </summary>
 		public void BindDefendLedger(string victimKey)
 		{
 			if (string.Equals(defendLedgerVictim, victimKey, StringComparison.Ordinal))
 				return;
 
-			ClearDefendLedger();
+			defendCommit.Clear();
 			defendLedgerVictim = victimKey;
 		}
 
+		/// <summary>The alarm is over: the commits and the victim binding go (nobody is on the way any more); the age-bounded spare entries stay.</summary>
 		public void ClearDefendLedger()
 		{
-			defendSpare.Clear();
 			defendCommit.Clear();
 			defendLedgerVictim = null;
 		}
