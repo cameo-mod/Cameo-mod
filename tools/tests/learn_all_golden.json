@@ -1,0 +1,664 @@
+{
+ "comment": "LEARN-ALL-02 golden vectors. Authored from tools/ai/fit_learn_all.py and replayed by BOTH tools/tests/test_learn_all_fitter.py and OpenRA.Mods.Cameo.Test/LearnAllGoldenTest.cs so the python fitter and the C# core cannot drift. Regenerate only with a reviewed change of the step contract.",
+ "geomean": [
+  {
+   "values": [
+    1000,
+    1000
+   ],
+   "expect": 1000
+  },
+  {
+   "values": [
+    500,
+    2000
+   ],
+   "expect": 1000
+  },
+  {
+   "values": [
+    1000,
+    1200,
+    800
+   ],
+   "expect": 986
+  },
+  {
+   "values": [
+    1000,
+    1000,
+    1000,
+    2000
+   ],
+   "expect": 1189
+  },
+  {
+   "values": [
+    500,
+    1000,
+    2000,
+    4000
+   ],
+   "expect": 1414
+  },
+  {
+   "values": [
+    20000,
+    20000,
+    20000,
+    20000,
+    20000,
+    20000,
+    20000,
+    20000,
+    20000,
+    20000,
+    20000
+   ],
+   "expect": 20000
+  },
+  {
+   "values": [
+    50,
+    50,
+    50
+   ],
+   "expect": 50
+  },
+  {
+   "values": [
+    1,
+    1,
+    1
+   ],
+   "expect": 50
+  },
+  {
+   "values": [
+    999999,
+    50
+   ],
+   "expect": 1000
+  },
+  {
+   "values": [
+    1234,
+    4321,
+    777
+   ],
+   "expect": 1606
+  },
+  {
+   "values": [
+    1000,
+    4000
+   ],
+   "expect": 2000
+  }
+ ],
+ "resolve": [
+  {
+   "g": 1000,
+   "f": 1000,
+   "e": 1000,
+   "s": 1000,
+   "expect": 1000
+  },
+  {
+   "g": 1000,
+   "f": 1000,
+   "e": 1000,
+   "s": 2000,
+   "expect": 1189
+  },
+  {
+   "g": 1000,
+   "f": 1200,
+   "e": 800,
+   "s": 0,
+   "expect": 986
+  },
+  {
+   "g": 1000,
+   "f": 1200,
+   "e": 800,
+   "s": -5,
+   "expect": 986
+  },
+  {
+   "g": 500,
+   "f": 1000,
+   "e": 2000,
+   "s": 4000,
+   "expect": 1414
+  },
+  {
+   "g": 1000,
+   "f": 1000,
+   "e": 1000,
+   "s": 16000,
+   "expect": 2000
+  },
+  {
+   "g": 1500,
+   "f": 700,
+   "e": 1100,
+   "s": 900,
+   "expect": 1010
+  },
+  {
+   "g": 20000,
+   "f": 20000,
+   "e": 20000,
+   "s": 20000,
+   "expect": 20000
+  },
+  {
+   "g": 50,
+   "f": 50,
+   "e": 50,
+   "s": 50,
+   "expect": 50
+  }
+ ],
+ "team_enemy": [
+  {
+   "per": [
+    1000,
+    4000
+   ],
+   "main": 2000,
+   "expect": 2000
+  },
+  {
+   "per": [
+    1000,
+    4000
+   ],
+   "main": 1000,
+   "expect": 1414
+  },
+  {
+   "per": [
+    800
+   ],
+   "main": 800,
+   "expect": 800
+  },
+  {
+   "per": [],
+   "main": 1500,
+   "expect": 1500
+  },
+  {
+   "per": [
+    20000,
+    20000,
+    20000,
+    20000,
+    20000,
+    20000,
+    20000,
+    20000,
+    20000,
+    20000,
+    20000
+   ],
+   "main": 20000,
+   "expect": 20000
+  },
+  {
+   "per": [
+    700,
+    900,
+    1300
+   ],
+   "main": 1100,
+   "expect": 1015
+  }
+ ],
+ "step": [
+  {
+   "current": 1000,
+   "signal": 1.0,
+   "expect": 1041
+  },
+  {
+   "current": 1000,
+   "signal": -1.0,
+   "expect": 961
+  },
+  {
+   "current": 1000,
+   "signal": 5.0,
+   "expect": 1041
+  },
+  {
+   "current": 1000,
+   "signal": 0.5,
+   "expect": 1020
+  },
+  {
+   "current": 1000,
+   "signal": 0.0,
+   "expect": 1000
+  },
+  {
+   "current": 20000,
+   "signal": 1.0,
+   "expect": 20000
+  },
+  {
+   "current": 50,
+   "signal": -1.0,
+   "expect": 50
+  },
+  {
+   "current": 1234,
+   "signal": null,
+   "expect": 1234
+  },
+  {
+   "current": 1234,
+   "signal": "nan",
+   "expect": 1234
+  },
+  {
+   "current": 1234,
+   "signal": "inf",
+   "expect": 1234
+  },
+  {
+   "current": 1500,
+   "signal": 0.25,
+   "expect": 1515
+  },
+  {
+   "current": 777,
+   "signal": -0.7,
+   "expect": 756
+  },
+  {
+   "current": 3000,
+   "signal": 0.99,
+   "expect": 3121
+  },
+  {
+   "current": 10,
+   "signal": null,
+   "expect": 50
+  }
+ ],
+ "games": [
+  {
+   "name": "one_game_new_personality",
+   "applications": [
+    {
+     "game_id": "g1",
+     "personality": "rush",
+     "knob": "wave_role.frontline",
+     "own": "gdi",
+     "enemies": [
+      {
+       "faction": "nod",
+       "style": "boom",
+       "weight": 1
+      },
+      {
+       "faction": "allies",
+       "style": null,
+       "weight": 2
+      }
+     ],
+     "signal": 1.0
+    }
+   ],
+   "changed": [
+    true
+   ],
+   "expect_text": "BotLearnAll:\n\tVersion: 1\n\tApplied:\n\t\tg1|any|wave_role.frontline:\n\t\tg1|rush|wave_role.frontline:\n\tKnob@any__wave_role.frontline:\n\t\tGlobal: 1041\n\t\tOwn@gdi: 1041\n\t\tEnemy@allies: 1027\n\t\tEnemy@nod: 1013\n\t\tStyle@boom: 1013\n\tKnob@rush__wave_role.frontline:\n\t\tGlobal: 1041\n\t\tOwn@gdi: 1041\n\t\tEnemy@allies: 1027\n\t\tEnemy@nod: 1013\n\t\tStyle@boom: 1013\n"
+  },
+  {
+   "name": "two_personalities_share_global_start",
+   "applications": [
+    {
+     "game_id": "g1",
+     "personality": "rush",
+     "knob": "k",
+     "own": "gdi",
+     "enemies": [
+      {
+       "faction": "nod",
+       "style": null,
+       "weight": 1
+      }
+     ],
+     "signal": 1.0
+    },
+    {
+     "game_id": "g2",
+     "personality": "turtle",
+     "knob": "k",
+     "own": "gdi",
+     "enemies": [
+      {
+       "faction": "nod",
+       "style": null,
+       "weight": 1
+      }
+     ],
+     "signal": -1.0
+    }
+   ],
+   "changed": [
+    true,
+    true
+   ],
+   "expect_text": "BotLearnAll:\n\tVersion: 1\n\tApplied:\n\t\tg1|any|k:\n\t\tg1|rush|k:\n\t\tg2|any|k:\n\t\tg2|turtle|k:\n\tKnob@any__k:\n\t\tGlobal: 1000\n\t\tOwn@gdi: 1000\n\t\tEnemy@nod: 1000\n\tKnob@rush__k:\n\t\tGlobal: 1041\n\t\tOwn@gdi: 1041\n\t\tEnemy@nod: 1041\n\tKnob@turtle__k:\n\t\tGlobal: 1000\n\t\tOwn@gdi: 1000\n\t\tEnemy@nod: 1000\n"
+  },
+  {
+   "name": "ten_games_drift_then_no_evidence",
+   "applications": [
+    {
+     "game_id": "g0",
+     "personality": "rush",
+     "knob": "k",
+     "own": "gdi",
+     "enemies": [
+      {
+       "faction": "nod",
+       "style": "boom",
+       "weight": 1
+      }
+     ],
+     "signal": 1.0
+    },
+    {
+     "game_id": "g1",
+     "personality": "rush",
+     "knob": "k",
+     "own": "gdi",
+     "enemies": [
+      {
+       "faction": "nod",
+       "style": "boom",
+       "weight": 1
+      }
+     ],
+     "signal": 1.0
+    },
+    {
+     "game_id": "g2",
+     "personality": "rush",
+     "knob": "k",
+     "own": "gdi",
+     "enemies": [
+      {
+       "faction": "nod",
+       "style": "boom",
+       "weight": 1
+      }
+     ],
+     "signal": 1.0
+    },
+    {
+     "game_id": "g3",
+     "personality": "rush",
+     "knob": "k",
+     "own": "gdi",
+     "enemies": [
+      {
+       "faction": "nod",
+       "style": "boom",
+       "weight": 1
+      }
+     ],
+     "signal": 1.0
+    },
+    {
+     "game_id": "g4",
+     "personality": "rush",
+     "knob": "k",
+     "own": "gdi",
+     "enemies": [
+      {
+       "faction": "nod",
+       "style": "boom",
+       "weight": 1
+      }
+     ],
+     "signal": 1.0
+    },
+    {
+     "game_id": "g5",
+     "personality": "rush",
+     "knob": "k",
+     "own": "gdi",
+     "enemies": [
+      {
+       "faction": "nod",
+       "style": "boom",
+       "weight": 1
+      }
+     ],
+     "signal": 1.0
+    },
+    {
+     "game_id": "g6",
+     "personality": "rush",
+     "knob": "k",
+     "own": "gdi",
+     "enemies": [
+      {
+       "faction": "nod",
+       "style": "boom",
+       "weight": 1
+      }
+     ],
+     "signal": 1.0
+    },
+    {
+     "game_id": "g7",
+     "personality": "rush",
+     "knob": "k",
+     "own": "gdi",
+     "enemies": [
+      {
+       "faction": "nod",
+       "style": "boom",
+       "weight": 1
+      }
+     ],
+     "signal": 1.0
+    },
+    {
+     "game_id": "g8",
+     "personality": "rush",
+     "knob": "k",
+     "own": "gdi",
+     "enemies": [
+      {
+       "faction": "nod",
+       "style": "boom",
+       "weight": 1
+      }
+     ],
+     "signal": 1.0
+    },
+    {
+     "game_id": "g9",
+     "personality": "rush",
+     "knob": "k",
+     "own": "gdi",
+     "enemies": [
+      {
+       "faction": "nod",
+       "style": "boom",
+       "weight": 1
+      }
+     ],
+     "signal": 1.0
+    },
+    {
+     "game_id": "g10",
+     "personality": "rush",
+     "knob": "k",
+     "own": "gdi",
+     "enemies": [
+      {
+       "faction": "nod",
+       "style": null,
+       "weight": 1
+      }
+     ],
+     "signal": null
+    },
+    {
+     "game_id": "g11",
+     "personality": "rush",
+     "knob": "k",
+     "own": "gdi",
+     "enemies": [
+      {
+       "faction": "nod",
+       "style": null,
+       "weight": 1
+      }
+     ],
+     "signal": -1.0
+    }
+   ],
+   "changed": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true
+   ],
+   "expect_text": "BotLearnAll:\n\tVersion: 1\n\tApplied:\n\t\tg0|any|k:\n\t\tg0|rush|k:\n\t\tg11|any|k:\n\t\tg11|rush|k:\n\t\tg1|any|k:\n\t\tg1|rush|k:\n\t\tg2|any|k:\n\t\tg2|rush|k:\n\t\tg3|any|k:\n\t\tg3|rush|k:\n\t\tg4|any|k:\n\t\tg4|rush|k:\n\t\tg5|any|k:\n\t\tg5|rush|k:\n\t\tg6|any|k:\n\t\tg6|rush|k:\n\t\tg7|any|k:\n\t\tg7|rush|k:\n\t\tg8|any|k:\n\t\tg8|rush|k:\n\t\tg9|any|k:\n\t\tg9|rush|k:\n\tKnob@any__k:\n\t\tGlobal: 1433\n\t\tOwn@gdi: 1433\n\t\tEnemy@nod: 1433\n\t\tStyle@boom: 1491\n\tKnob@rush__k:\n\t\tGlobal: 1433\n\t\tOwn@gdi: 1433\n\t\tEnemy@nod: 1433\n\t\tStyle@boom: 1491\n"
+  },
+  {
+   "name": "idempotent_and_multi_enemy",
+   "applications": [
+    {
+     "game_id": "g1",
+     "personality": "rush",
+     "knob": "k",
+     "own": "gdi",
+     "enemies": [
+      {
+       "faction": "soviet",
+       "style": null,
+       "weight": 1
+      },
+      {
+       "faction": "soviet",
+       "style": null,
+       "weight": 1
+      },
+      {
+       "faction": "allies",
+       "style": "turtle",
+       "weight": 2
+      }
+     ],
+     "signal": 0.6
+    },
+    {
+     "game_id": "g1",
+     "personality": "rush",
+     "knob": "k",
+     "own": "gdi",
+     "enemies": [
+      {
+       "faction": "soviet",
+       "style": null,
+       "weight": 1
+      },
+      {
+       "faction": "soviet",
+       "style": null,
+       "weight": 1
+      },
+      {
+       "faction": "allies",
+       "style": "turtle",
+       "weight": 2
+      }
+     ],
+     "signal": 0.6
+    },
+    {
+     "game_id": "g2",
+     "personality": "rush",
+     "knob": "k2",
+     "own": "allies",
+     "enemies": [
+      {
+       "faction": "soviet",
+       "style": "boom",
+       "weight": 1
+      },
+      {
+       "faction": "nod",
+       "style": "boom",
+       "weight": 3
+      }
+     ],
+     "signal": -0.35
+    }
+   ],
+   "changed": [
+    true,
+    false,
+    true
+   ],
+   "expect_text": "BotLearnAll:\n\tVersion: 1\n\tApplied:\n\t\tg1|any|k:\n\t\tg1|rush|k:\n\t\tg2|any|k2:\n\t\tg2|rush|k2:\n\tKnob@any__k:\n\t\tGlobal: 1024\n\t\tOwn@gdi: 1024\n\t\tEnemy@allies: 1012\n\t\tEnemy@soviet: 1012\n\t\tStyle@turtle: 1012\n\tKnob@any__k2:\n\t\tGlobal: 986\n\t\tOwn@allies: 986\n\t\tEnemy@nod: 990\n\t\tEnemy@soviet: 997\n\t\tStyle@boom: 986\n\tKnob@rush__k:\n\t\tGlobal: 1024\n\t\tOwn@gdi: 1024\n\t\tEnemy@allies: 1012\n\t\tEnemy@soviet: 1012\n\t\tStyle@turtle: 1012\n\tKnob@rush__k2:\n\t\tGlobal: 986\n\t\tOwn@allies: 986\n\t\tEnemy@nod: 990\n\t\tEnemy@soviet: 997\n\t\tStyle@boom: 986\n"
+  },
+  {
+   "name": "global_personality_any_only",
+   "applications": [
+    {
+     "game_id": "g1",
+     "personality": "any",
+     "knob": "k",
+     "own": "gdi",
+     "enemies": [
+      {
+       "faction": "nod",
+       "style": null,
+       "weight": 1
+      }
+     ],
+     "signal": 0.8
+    },
+    {
+     "game_id": "g2",
+     "personality": "",
+     "knob": "k",
+     "own": "gdi",
+     "enemies": [
+      {
+       "faction": "allies",
+       "style": null,
+       "weight": 1
+      }
+     ],
+     "signal": 0.8
+    }
+   ],
+   "changed": [
+    true,
+    true
+   ],
+   "expect_text": "BotLearnAll:\n\tVersion: 1\n\tApplied:\n\t\tg1|any|k:\n\t\tg2|any|k:\n\tKnob@any__k:\n\t\tGlobal: 1067\n\t\tOwn@gdi: 1067\n\t\tEnemy@allies: 1067\n\t\tEnemy@nod: 1033\n"
+  }
+ ]
+}
