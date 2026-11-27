@@ -313,6 +313,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly Dictionary<ActorInfo, StaticClass> staticClasses = new();
 		AblationLatch ablateClassifyCache;
 		AblationLatch ablateFrozenSnapshot;
+		AblationLatch ablateFrozenSkip;
 
 		sealed class StaticClass
 		{
@@ -354,12 +355,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (frozen != null)
 			{
 				// PERF-F2b: the snapshot lists, per owner, exactly the actors the full walk yields for that owner, in walk order.
+				var skipFrozen = info.SkipHiddenShroudedFrozen && !ablateFrozenSkip.Off(viewer, AblationIds.FogFrozenSkip);
 				IEnumerable<FrozenActor> frozenActors = frozenSnapshot != null && frozenSnapshot.Serves(viewer)
 					? frozenSnapshot.Of(enemy)
 					: frozen.FrozenActorsInRegion(viewer.World.Map.AllCells);
 				foreach (var fa in frozenActors)
 				{
 					if (!fa.IsValid || fa.Owner != enemy || table.ContainsKey(fa.ID))
+						continue;
+
+					if (FrozenUnrememberable(fa.Hidden, fa.Shrouded, skipFrozen))
 						continue;
 
 					var record = ClassifyObserved(fa.Info, fa.ID, viewer.World.Map.CellContaining(fa.CenterPosition), fa.TargetTypes, tick);
@@ -391,6 +396,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return visibleHarvesters;
 		}
 
+		/// <summary>FOG-FROZEN-01 (pure): true when a frozen actor must not be remembered. Hidden (a visibility modifier hides the
+		/// backing actor) and Shrouded (no footprint cell explored yet) are skipped while the switch is on; off = the old walk.</summary>
+		public static bool FrozenUnrememberable(bool hidden, bool shrouded, bool skipHiddenShrouded) =>
+			skipHiddenShrouded && (hidden || shrouded);
+
 		/// <summary>One read of the frozen-actor layer for a whole rebuild, split by owner (PERF-F2b). Null when the switch is off or
 		/// the viewer has no layer, so Observe falls back to its own walk.</summary>
 		public FrozenSnapshot SnapshotFrozen(ICollection<OpenRA.Player> enemies)
@@ -401,10 +411,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				|| ablateFrozenSnapshot.Off(viewer, AblationIds.FogFrozenSnapshot))
 				return null;
 
+			var skipFrozen = info.SkipHiddenShroudedFrozen && !ablateFrozenSkip.Off(viewer, AblationIds.FogFrozenSkip);
 			var byOwner = new Dictionary<OpenRA.Player, List<FrozenActor>>();
 			foreach (var fa in frozen.FrozenActorsInRegion(viewer.World.Map.AllCells))
 			{
 				if (!fa.IsValid)
+					continue;
+
+				if (FrozenUnrememberable(fa.Hidden, fa.Shrouded, skipFrozen))
 					continue;
 
 				var owner = fa.Owner;

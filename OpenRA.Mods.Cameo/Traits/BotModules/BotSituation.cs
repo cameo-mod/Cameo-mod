@@ -279,6 +279,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("PERF-F2b: BotSituation.Rebuild reads the frozen-actor layer once per rebuild and hands each enemy its own owner-filtered list (same actors, same order) instead of one full-map FrozenActorsInRegion walk per enemy. False = the old walk per enemy.")]
 		public readonly bool UseSharedFrozenSnapshot = true;
 
+		[Desc("FOG-FROZEN-01: BotFogMemory remembers a frozen actor only if it is not Hidden (a visibility modifier hides the backing actor) and not Shrouded (no footprint cell explored yet). Both the per-owner walk and the shared snapshot apply it. False = the old walk, which also remembers those actors.")]
+		public readonly bool SkipHiddenShroudedFrozen = true;
+
 		public readonly int ClusterRadius = 12;
 		public readonly int PressureRadius = 15;
 		public readonly int LossWindowTicks = 750;
