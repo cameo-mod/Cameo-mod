@@ -1208,8 +1208,9 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var bi in info.TraitInfos<BuildableInfo>())
 				foreach (var prerequisite in bi.Prerequisites)
 				{
-					var p = prerequisite.Replace("~", "");
-					if (p.Length > 0 && !p.StartsWith('!') && !owned.Contains(p))
+					// CONSOL-DUP-04: the one positive-token rule (TechDepthCA.Positive); owned is case-insensitive. Pinned equal to the old rule on every shipped token (ConsolDup04PrerequisiteTest).
+					var need = TechDepthCA.Positive(prerequisite);
+					if (need != null && !owned.Contains(need))
 						return false;
 				}
 
