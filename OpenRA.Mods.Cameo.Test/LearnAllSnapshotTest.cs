@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
+using OpenRA.Mods.Cameo.Dev;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 
 namespace OpenRA.Mods.Cameo.Test
@@ -28,8 +29,8 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var table = new LearnTable();
 			var enemies = new EnemyObservation[] { new("nod", "boom"), new("allies", null, 2) };
-			table.ApplyGame("g1", "rush", "wave_role.frontline", "gdi", enemies, 1.0);
-			table.ApplyGame("g2", "turtle", "wave_role.antiair", "gdi", [new("nod", null)], -1.0);
+			LearnAllTrainer.ApplyGame(table, "g1", "wave_role.frontline", [new SeatObservation("rush", "gdi", enemies, "nod", 1.0)]);
+			LearnAllTrainer.ApplyGame(table, "g2", "wave_role.antiair", [new SeatObservation("turtle", "gdi", [new EnemyObservation("nod", null)], "nod", -1.0)]);
 			return table;
 		}
 
@@ -37,9 +38,9 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheSnapshotTextRoundTripsEveryField()
 		{
 			var table = Sample();
-			var text = LearnAllSnapshot.Write(table);
+			var text = LearnAllSnapshotWriter.Write(table);
 			var back = LearnAllSnapshot.ParseText(text);
-			Assert.That(LearnAllSnapshot.Write(back), Is.EqualTo(text), "write -> parse -> write is stable");
+			Assert.That(LearnAllSnapshotWriter.Write(back), Is.EqualTo(text), "write -> parse -> write is stable");
 			Assert.That(back.AppliedGames, Is.EqualTo(table.AppliedGames));
 			var a = table.Find("rush", "wave_role.frontline");
 			var b = back.Find("rush", "wave_role.frontline");
@@ -54,12 +55,12 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void TheWriterIsDeterministicAndSorted()
 		{
-			var text = LearnAllSnapshot.Write(Sample());
-			Assert.That(LearnAllSnapshot.Write(Sample()), Is.EqualTo(text));
+			var text = LearnAllSnapshotWriter.Write(Sample());
+			Assert.That(LearnAllSnapshotWriter.Write(Sample()), Is.EqualTo(text));
 			Assert.That(text, Does.StartWith("BotLearnAll:\n\tVersion: 1\n"));
 			Assert.That(text.IndexOf("Knob@any__wave_role.antiair", StringComparison.Ordinal), Is.LessThan(text.IndexOf("Knob@any__wave_role.frontline", StringComparison.Ordinal)));
 			Assert.That(text.IndexOf("Knob@any__", StringComparison.Ordinal), Is.LessThan(text.IndexOf("Knob@rush__", StringComparison.Ordinal)));
-			Assert.That(LearnAllSnapshot.Write(Sample(), includeApplied: false), Does.Not.Contain("Applied"), "the release copy carries no bookkeeping");
+			Assert.That(LearnAllSnapshotWriter.Write(Sample(), includeApplied: false), Does.Not.Contain("Applied"), "the release copy carries no bookkeeping");
 		}
 
 		[Test]

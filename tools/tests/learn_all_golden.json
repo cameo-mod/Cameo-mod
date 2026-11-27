@@ -1,5 +1,5 @@
 {
- "comment": "LEARN-ALL-02 golden vectors. Authored from tools/ai/fit_learn_all.py and replayed by BOTH tools/tests/test_learn_all_fitter.py and OpenRA.Mods.Cameo.Test/LearnAllGoldenTest.cs so the python fitter and the C# core cannot drift. Regenerate only with a reviewed change of the step contract.",
+ "comment": "LEARN-ALL-02 golden vectors. Authored from tools/ai/fit_learn_all.py and replayed by BOTH tools/tests/test_learn_all_fitter.py and OpenRA.Mods.Cameo.Test/LearnAllGoldenTest.cs (against OpenRA.Mods.Cameo.Dev/LearnAllTrainer.cs) so the python fitter and the C# core cannot drift. Regenerate only with a reviewed change of the step contract.",
  "geomean": [
   {
    "values": [
@@ -291,26 +291,31 @@
  ],
  "games": [
   {
-   "name": "one_game_new_personality",
+   "name": "one_seat_new_personality",
    "applications": [
     {
      "game_id": "g1",
-     "personality": "rush",
      "knob": "wave_role.frontline",
-     "own": "gdi",
-     "enemies": [
+     "seats": [
       {
-       "faction": "nod",
-       "style": "boom",
-       "weight": 1
-      },
-      {
-       "faction": "allies",
-       "style": null,
-       "weight": 2
+       "personality": "rush",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": "boom",
+         "weight": 1
+        },
+        {
+         "faction": "allies",
+         "style": null,
+         "weight": 2
+        }
+       ],
+       "main_target": "nod",
+       "signal": 1.0
       }
-     ],
-     "signal": 1.0
+     ]
     }
    ],
    "changed": [
@@ -323,31 +328,41 @@
    "applications": [
     {
      "game_id": "g1",
-     "personality": "rush",
      "knob": "k",
-     "own": "gdi",
-     "enemies": [
+     "seats": [
       {
-       "faction": "nod",
-       "style": null,
-       "weight": 1
+       "personality": "rush",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": null,
+         "weight": 1
+        }
+       ],
+       "main_target": "nod",
+       "signal": 1.0
       }
-     ],
-     "signal": 1.0
+     ]
     },
     {
      "game_id": "g2",
-     "personality": "turtle",
      "knob": "k",
-     "own": "gdi",
-     "enemies": [
+     "seats": [
       {
-       "faction": "nod",
-       "style": null,
-       "weight": 1
+       "personality": "turtle",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": null,
+         "weight": 1
+        }
+       ],
+       "main_target": "nod",
+       "signal": -1.0
       }
-     ],
-     "signal": -1.0
+     ]
     }
    ],
    "changed": [
@@ -361,171 +376,231 @@
    "applications": [
     {
      "game_id": "g0",
-     "personality": "rush",
      "knob": "k",
-     "own": "gdi",
-     "enemies": [
+     "seats": [
       {
-       "faction": "nod",
-       "style": "boom",
-       "weight": 1
+       "personality": "rush",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": "boom",
+         "weight": 1
+        }
+       ],
+       "main_target": "nod",
+       "signal": 1.0
       }
-     ],
-     "signal": 1.0
+     ]
     },
     {
      "game_id": "g1",
-     "personality": "rush",
      "knob": "k",
-     "own": "gdi",
-     "enemies": [
+     "seats": [
       {
-       "faction": "nod",
-       "style": "boom",
-       "weight": 1
+       "personality": "rush",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": "boom",
+         "weight": 1
+        }
+       ],
+       "main_target": "nod",
+       "signal": 1.0
       }
-     ],
-     "signal": 1.0
+     ]
     },
     {
      "game_id": "g2",
-     "personality": "rush",
      "knob": "k",
-     "own": "gdi",
-     "enemies": [
+     "seats": [
       {
-       "faction": "nod",
-       "style": "boom",
-       "weight": 1
+       "personality": "rush",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": "boom",
+         "weight": 1
+        }
+       ],
+       "main_target": "nod",
+       "signal": 1.0
       }
-     ],
-     "signal": 1.0
+     ]
     },
     {
      "game_id": "g3",
-     "personality": "rush",
      "knob": "k",
-     "own": "gdi",
-     "enemies": [
+     "seats": [
       {
-       "faction": "nod",
-       "style": "boom",
-       "weight": 1
+       "personality": "rush",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": "boom",
+         "weight": 1
+        }
+       ],
+       "main_target": "nod",
+       "signal": 1.0
       }
-     ],
-     "signal": 1.0
+     ]
     },
     {
      "game_id": "g4",
-     "personality": "rush",
      "knob": "k",
-     "own": "gdi",
-     "enemies": [
+     "seats": [
       {
-       "faction": "nod",
-       "style": "boom",
-       "weight": 1
+       "personality": "rush",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": "boom",
+         "weight": 1
+        }
+       ],
+       "main_target": "nod",
+       "signal": 1.0
       }
-     ],
-     "signal": 1.0
+     ]
     },
     {
      "game_id": "g5",
-     "personality": "rush",
      "knob": "k",
-     "own": "gdi",
-     "enemies": [
+     "seats": [
       {
-       "faction": "nod",
-       "style": "boom",
-       "weight": 1
+       "personality": "rush",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": "boom",
+         "weight": 1
+        }
+       ],
+       "main_target": "nod",
+       "signal": 1.0
       }
-     ],
-     "signal": 1.0
+     ]
     },
     {
      "game_id": "g6",
-     "personality": "rush",
      "knob": "k",
-     "own": "gdi",
-     "enemies": [
+     "seats": [
       {
-       "faction": "nod",
-       "style": "boom",
-       "weight": 1
+       "personality": "rush",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": "boom",
+         "weight": 1
+        }
+       ],
+       "main_target": "nod",
+       "signal": 1.0
       }
-     ],
-     "signal": 1.0
+     ]
     },
     {
      "game_id": "g7",
-     "personality": "rush",
      "knob": "k",
-     "own": "gdi",
-     "enemies": [
+     "seats": [
       {
-       "faction": "nod",
-       "style": "boom",
-       "weight": 1
+       "personality": "rush",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": "boom",
+         "weight": 1
+        }
+       ],
+       "main_target": "nod",
+       "signal": 1.0
       }
-     ],
-     "signal": 1.0
+     ]
     },
     {
      "game_id": "g8",
-     "personality": "rush",
      "knob": "k",
-     "own": "gdi",
-     "enemies": [
+     "seats": [
       {
-       "faction": "nod",
-       "style": "boom",
-       "weight": 1
+       "personality": "rush",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": "boom",
+         "weight": 1
+        }
+       ],
+       "main_target": "nod",
+       "signal": 1.0
       }
-     ],
-     "signal": 1.0
+     ]
     },
     {
      "game_id": "g9",
-     "personality": "rush",
      "knob": "k",
-     "own": "gdi",
-     "enemies": [
+     "seats": [
       {
-       "faction": "nod",
-       "style": "boom",
-       "weight": 1
+       "personality": "rush",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": "boom",
+         "weight": 1
+        }
+       ],
+       "main_target": "nod",
+       "signal": 1.0
       }
-     ],
-     "signal": 1.0
+     ]
     },
     {
      "game_id": "g10",
-     "personality": "rush",
      "knob": "k",
-     "own": "gdi",
-     "enemies": [
+     "seats": [
       {
-       "faction": "nod",
-       "style": null,
-       "weight": 1
+       "personality": "rush",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": null,
+         "weight": 1
+        }
+       ],
+       "main_target": "nod",
+       "signal": null
       }
-     ],
-     "signal": null
+     ]
     },
     {
      "game_id": "g11",
-     "personality": "rush",
      "knob": "k",
-     "own": "gdi",
-     "enemies": [
+     "seats": [
       {
-       "faction": "nod",
-       "style": null,
-       "weight": 1
+       "personality": "rush",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": null,
+         "weight": 1
+        }
+       ],
+       "main_target": "nod",
+       "signal": -1.0
       }
-     ],
-     "signal": -1.0
+     ]
     }
    ],
    "changed": [
@@ -549,70 +624,85 @@
    "applications": [
     {
      "game_id": "g1",
-     "personality": "rush",
      "knob": "k",
-     "own": "gdi",
-     "enemies": [
+     "seats": [
       {
-       "faction": "soviet",
-       "style": null,
-       "weight": 1
-      },
-      {
-       "faction": "soviet",
-       "style": null,
-       "weight": 1
-      },
-      {
-       "faction": "allies",
-       "style": "turtle",
-       "weight": 2
+       "personality": "rush",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "soviet",
+         "style": null,
+         "weight": 1
+        },
+        {
+         "faction": "soviet",
+         "style": null,
+         "weight": 1
+        },
+        {
+         "faction": "allies",
+         "style": "turtle",
+         "weight": 2
+        }
+       ],
+       "main_target": "allies",
+       "signal": 0.6
       }
-     ],
-     "signal": 0.6
+     ]
     },
     {
      "game_id": "g1",
-     "personality": "rush",
      "knob": "k",
-     "own": "gdi",
-     "enemies": [
+     "seats": [
       {
-       "faction": "soviet",
-       "style": null,
-       "weight": 1
-      },
-      {
-       "faction": "soviet",
-       "style": null,
-       "weight": 1
-      },
-      {
-       "faction": "allies",
-       "style": "turtle",
-       "weight": 2
+       "personality": "rush",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "soviet",
+         "style": null,
+         "weight": 1
+        },
+        {
+         "faction": "soviet",
+         "style": null,
+         "weight": 1
+        },
+        {
+         "faction": "allies",
+         "style": "turtle",
+         "weight": 2
+        }
+       ],
+       "main_target": "allies",
+       "signal": 0.6
       }
-     ],
-     "signal": 0.6
+     ]
     },
     {
      "game_id": "g2",
-     "personality": "rush",
      "knob": "k2",
-     "own": "allies",
-     "enemies": [
+     "seats": [
       {
-       "faction": "soviet",
-       "style": "boom",
-       "weight": 1
-      },
-      {
-       "faction": "nod",
-       "style": "boom",
-       "weight": 3
+       "personality": "rush",
+       "own": "allies",
+       "enemies": [
+        {
+         "faction": "soviet",
+         "style": "boom",
+         "weight": 1
+        },
+        {
+         "faction": "nod",
+         "style": "boom",
+         "weight": 3
+        }
+       ],
+       "main_target": "nod",
+       "signal": -0.35
       }
-     ],
-     "signal": -0.35
+     ]
     }
    ],
    "changed": [
@@ -627,31 +717,41 @@
    "applications": [
     {
      "game_id": "g1",
-     "personality": "any",
      "knob": "k",
-     "own": "gdi",
-     "enemies": [
+     "seats": [
       {
-       "faction": "nod",
-       "style": null,
-       "weight": 1
+       "personality": "any",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": null,
+         "weight": 1
+        }
+       ],
+       "main_target": "nod",
+       "signal": 0.8
       }
-     ],
-     "signal": 0.8
+     ]
     },
     {
      "game_id": "g2",
-     "personality": "",
      "knob": "k",
-     "own": "gdi",
-     "enemies": [
+     "seats": [
       {
-       "faction": "allies",
-       "style": null,
-       "weight": 1
+       "personality": null,
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "allies",
+         "style": null,
+         "weight": 1
+        }
+       ],
+       "main_target": "allies",
+       "signal": 0.8
       }
-     ],
-     "signal": 0.8
+     ]
     }
    ],
    "changed": [
@@ -659,6 +759,243 @@
     true
    ],
    "expect_text": "BotLearnAll:\n\tVersion: 1\n\tApplied:\n\t\tg1|any|k:\n\t\tg2|any|k:\n\tKnob@any__k:\n\t\tGlobal: 1067\n\t\tOwn@gdi: 1067\n\t\tEnemy@allies: 1067\n\t\tEnemy@nod: 1033\n"
+  },
+  {
+   "name": "team_game_all_seats_in_one_step",
+   "applications": [
+    {
+     "game_id": "g1",
+     "knob": "k",
+     "seats": [
+      {
+       "personality": "rush",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": "boom",
+         "weight": 1
+        },
+        {
+         "faction": "allies",
+         "style": "turtle",
+         "weight": 1
+        }
+       ],
+       "main_target": "nod",
+       "signal": 1.0
+      },
+      {
+       "personality": "turtle",
+       "own": "allies",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": "boom",
+         "weight": 1
+        },
+        {
+         "faction": "allies",
+         "style": "turtle",
+         "weight": 1
+        }
+       ],
+       "main_target": "allies",
+       "signal": -0.5
+      },
+      {
+       "personality": "rush",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": "boom",
+         "weight": 1
+        },
+        {
+         "faction": "allies",
+         "style": "turtle",
+         "weight": 1
+        }
+       ],
+       "main_target": "allies",
+       "signal": 0.25
+      },
+      {
+       "personality": "rush",
+       "own": "soviet",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": "boom",
+         "weight": 1
+        }
+       ],
+       "main_target": "nod",
+       "signal": null
+      }
+     ]
+    }
+   ],
+   "changed": [
+    true
+   ],
+   "expect_text": "BotLearnAll:\n\tVersion: 1\n\tApplied:\n\t\tg1|any|k:\n\t\tg1|rush|k:\n\t\tg1|turtle|k:\n\tKnob@any__k:\n\t\tGlobal: 1010\n\t\tOwn@allies: 980\n\t\tOwn@gdi: 1025\n\t\tEnemy@allies: 1005\n\t\tEnemy@nod: 1005\n\t\tStyle@boom: 1005\n\t\tStyle@turtle: 1005\n\tKnob@rush__k:\n\t\tGlobal: 1025\n\t\tOwn@gdi: 1025\n\t\tEnemy@allies: 1013\n\t\tEnemy@nod: 1013\n\t\tStyle@boom: 1013\n\t\tStyle@turtle: 1013\n\tKnob@turtle__k:\n\t\tGlobal: 980\n\t\tOwn@allies: 980\n\t\tEnemy@allies: 990\n\t\tEnemy@nod: 990\n\t\tStyle@boom: 990\n\t\tStyle@turtle: 990\n"
+  },
+  {
+   "name": "seat_order_does_not_matter",
+   "applications": [
+    {
+     "game_id": "g1",
+     "knob": "k",
+     "seats": [
+      {
+       "personality": "rush",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": "boom",
+         "weight": 1
+        }
+       ],
+       "main_target": "nod",
+       "signal": 0.3
+      },
+      {
+       "personality": "rush",
+       "own": "allies",
+       "enemies": [
+        {
+         "faction": "soviet",
+         "style": "rush",
+         "weight": 1
+        }
+       ],
+       "main_target": "soviet",
+       "signal": -0.7
+      },
+      {
+       "personality": "turtle",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": "boom",
+         "weight": 1
+        },
+        {
+         "faction": "soviet",
+         "style": "rush",
+         "weight": 2
+        }
+       ],
+       "main_target": "soviet",
+       "signal": 0.9
+      }
+     ]
+    }
+   ],
+   "changed": [
+    true
+   ],
+   "expect_text": "BotLearnAll:\n\tVersion: 1\n\tApplied:\n\t\tg1|any|k:\n\t\tg1|rush|k:\n\t\tg1|turtle|k:\n\tKnob@any__k:\n\t\tGlobal: 1007\n\t\tOwn@allies: 972\n\t\tOwn@gdi: 1024\n\t\tEnemy@nod: 1012\n\t\tEnemy@soviet: 998\n\t\tStyle@boom: 1012\n\t\tStyle@rush: 998\n\tKnob@rush__k:\n\t\tGlobal: 992\n\t\tOwn@allies: 972\n\t\tOwn@gdi: 1012\n\t\tEnemy@nod: 1012\n\t\tEnemy@soviet: 972\n\t\tStyle@boom: 1012\n\t\tStyle@rush: 972\n\tKnob@turtle__k:\n\t\tGlobal: 1037\n\t\tOwn@gdi: 1037\n\t\tEnemy@nod: 1012\n\t\tEnemy@soviet: 1024\n\t\tStyle@boom: 1012\n\t\tStyle@rush: 1024\n"
+  },
+  {
+   "name": "style_seed_uses_pre_step_team_enemy",
+   "applications": [
+    {
+     "game_id": "g1",
+     "knob": "k",
+     "seats": [
+      {
+       "personality": "any",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": null,
+         "weight": 1
+        },
+        {
+         "faction": "allies",
+         "style": null,
+         "weight": 1
+        }
+       ],
+       "main_target": "nod",
+       "signal": 1.0
+      }
+     ]
+    },
+    {
+     "game_id": "g2",
+     "knob": "k",
+     "seats": [
+      {
+       "personality": "any",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": null,
+         "weight": 1
+        },
+        {
+         "faction": "allies",
+         "style": null,
+         "weight": 1
+        }
+       ],
+       "main_target": "allies",
+       "signal": -1.0
+      }
+     ]
+    },
+    {
+     "game_id": "g3",
+     "knob": "k",
+     "seats": [
+      {
+       "personality": "any",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": "boom",
+         "weight": 1
+        },
+        {
+         "faction": "allies",
+         "style": "boom",
+         "weight": 1
+        }
+       ],
+       "main_target": "allies",
+       "signal": 0.0
+      },
+      {
+       "personality": "any",
+       "own": "allies",
+       "enemies": [
+        {
+         "faction": "nod",
+         "style": "boom",
+         "weight": 1
+        }
+       ],
+       "main_target": null,
+       "signal": 0.0
+      }
+     ]
+    }
+   ],
+   "changed": [
+    true,
+    true,
+    true
+   ],
+   "expect_text": "BotLearnAll:\n\tVersion: 1\n\tApplied:\n\t\tg1|any|k:\n\t\tg2|any|k:\n\t\tg3|any|k:\n\tKnob@any__k:\n\t\tGlobal: 1000\n\t\tOwn@allies: 1000\n\t\tOwn@gdi: 1000\n\t\tEnemy@allies: 1000\n\t\tEnemy@nod: 1000\n\t\tStyle@boom: 1000\n"
   }
  ]
 }

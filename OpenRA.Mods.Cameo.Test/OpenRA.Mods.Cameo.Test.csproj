@@ -20,6 +20,7 @@
     <Compile Include="../OpenRA.Mods.Cameo.Dev/AiLogWriteQueue.cs" Link="Dev/AiLogWriteQueue.cs" />
     <Compile Include="../OpenRA.Mods.Cameo.Dev/InsuranceRowBudget.cs" Link="Dev/InsuranceRowBudget.cs" />
     <Compile Include="../OpenRA.Mods.Cameo.Dev/DevCashBonus.cs" Link="Dev/DevCashBonus.cs" />
+    <Compile Include="../OpenRA.Mods.Cameo.Dev/LearnAllTrainer.cs" Link="Dev/LearnAllTrainer.cs" />
     <!-- DEV-only pure class: guarded out of the release Cameo assembly, compiled into the test assembly only when the Cameo assembly does not have it. -->
     <Compile Include="../OpenRA.Mods.Cameo/Traits/DefendReactionTracker.cs" Link="Dev/DefendReactionTracker.cs" Condition="'$(CameoDevLogging)' != 'true'" />
     <ProjectReference Include="../OpenRA.Mods.Cameo.Unified/OpenRA.Mods.Cameo.Unified.csproj" />

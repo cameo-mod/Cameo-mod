@@ -11,16 +11,22 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
+using OpenRA.Mods.Cameo.Dev;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 
 namespace OpenRA.Mods.Cameo.Test
 {
 	// LEARN-ALL-02 P1a: the integer contract (G x F_own x E_eff x S_obs)^(1/4), the exact three-axis fallback, the bounded log step,
-	// no-evidence = keep, never reset, per-personality tables that start from the global values, one step per game (idempotent).
+	// no-evidence = keep, never reset, per-personality tables that start from the global values, one step per game (idempotent), every seat
+	// of a game combined in that one step. The step/trainer lives in OpenRA.Mods.Cameo.Dev (DEV build only); this fixture drives it.
 	[TestFixture]
 	public sealed class LearnAllCoreTest
 	{
-		static IReadOnlyList<EnemyObservation> One(string faction, string style = null) => [new(faction, style)];
+		static SeatObservation Seat(string personality, string own, string enemy, string style, string main, double? signal) =>
+			new(personality, own, [new EnemyObservation(enemy, style)], main, signal);
+
+		static IReadOnlyList<SeatObservation> One(string personality, string own, string enemy, double? signal, string style = null) =>
+			[Seat(personality, own, enemy, style, enemy, signal)];
 
 		[Test]
 		public void TheDecisionValueIsTheFourthRootOfTheFourAxes()
@@ -80,13 +86,13 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(LearnAllStep.Next(1234, double.PositiveInfinity), Is.EqualTo(1234));
 
 			var table = new LearnTable();
-			Assert.That(table.Apply("g1", "rush", "k", "allies", One("soviet"), 1.0), Is.True);
+			Assert.That(LearnAllTrainer.ApplyGame(table, "g1", "k", One("rush", "allies", "soviet", 1.0)), Is.True);
 			var kept = table.Resolve("rush", "k", "allies", ["soviet"], "soviet", null);
-			Assert.That(table.Apply("g2", "rush", "k", "allies", One("soviet"), null), Is.False);
-			Assert.That(table.Apply("g2", "rush", "k", "allies", One("soviet"), double.NaN), Is.False);
+			Assert.That(LearnAllTrainer.ApplyGame(table, "g2", "k", One("rush", "allies", "soviet", null)), Is.False);
+			Assert.That(LearnAllTrainer.ApplyGame(table, "g2", "k", One("rush", "allies", "soviet", double.NaN)), Is.False);
 			Assert.That(table.Resolve("rush", "k", "allies", ["soviet"], "soviet", null), Is.EqualTo(kept));
 			Assert.That(table.AppliedGames, Does.Not.Contain("g2|rush|k"), "a no-evidence call does not consume the game id");
-			Assert.That(table.Apply("g2", "rush", "k", "allies", One("soviet"), 1.0), Is.True, "evidence later in the same game still counts once");
+			Assert.That(LearnAllTrainer.ApplyGame(table, "g2", "k", One("rush", "allies", "soviet", 1.0)), Is.True, "evidence later in the same game still counts once");
 		}
 
 		[Test]
@@ -101,7 +107,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void OneGameStepsEveryAxisOnceAndNewKeysStartFromTheirPrior()
 		{
 			var table = new LearnTable();
-			Assert.That(table.Apply("g1", "any", "k", "allies", One("soviet", "boom"), 1.0), Is.True);
+			Assert.That(LearnAllTrainer.ApplyGame(table, "g1", "k", One("any", "allies", "soviet", 1.0, "boom")), Is.True);
 			var axes = table.Find("any", "k");
 			Assert.That(axes.Global, Is.EqualTo(1041));
 			Assert.That(axes.Own("allies"), Is.EqualTo(1041), "F_own started at G (1000) and took one step");
@@ -117,8 +123,30 @@ namespace OpenRA.Mods.Cameo.Test
 			axes.Global = 1000;
 			axes.OwnFaction["allies"] = 1200;
 			axes.EnemyFaction["soviet"] = 800;
-			Assert.That(table.Apply("g1", "any", "k", "allies", One("soviet", "boom"), 0.0), Is.True);
+			Assert.That(LearnAllTrainer.ApplyGame(table, "g1", "k", One("any", "allies", "soviet", 0.0, "boom")), Is.True);
 			Assert.That(table.Find("any", "k").Style["boom"], Is.EqualTo(986), "seed (1000 x 1200 x 800)^(1/3), zero signal = the seed itself");
+		}
+
+		[Test]
+		public void TheStyleSeedIsThePreStepTeamEnemyWithTheActualMainTarget()
+		{
+			static LearnTable Preset()
+			{
+				var t = new LearnTable();
+				var a = t.Install("any", "k");
+				a.EnemyFaction["nod"] = 1000;
+				a.EnemyFaction["allies"] = 4000;
+				return t;
+			}
+
+			EnemyObservation[] both = [new("nod", "boom"), new("allies", "boom")];
+			var onNod = Preset();
+			LearnAllTrainer.ApplyGame(onNod, "g1", "k", [new SeatObservation("any", "gdi", both, "nod", 0.0)]);
+			Assert.That(onNod.Find("any", "k").Style["boom"], Is.EqualTo(LearnAllMath.GeoMean(1000, 1000, 1414)), "E_eff = geo(geo(1000, 4000), nod 1000) = 1414");
+
+			var onAllies = Preset();
+			LearnAllTrainer.ApplyGame(onAllies, "g1", "k", [new SeatObservation("any", "gdi", both, "allies", 0.0)]);
+			Assert.That(onAllies.Find("any", "k").Style["boom"], Is.EqualTo(LearnAllMath.GeoMean(1000, 1000, 2828)), "the seed follows the main target the decision used");
 		}
 
 		[Test]
@@ -126,7 +154,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var table = new LearnTable();
 			var enemies = new EnemyObservation[] { new("soviet", null, 1), new("soviet", null, 1), new("allies", null, 2) };
-			Assert.That(table.Apply("g1", "any", "k", "gdi", enemies, 1.0), Is.True);
+			Assert.That(LearnAllTrainer.ApplyGame(table, "g1", "k", [new SeatObservation("any", "gdi", enemies, "allies", 1.0)]), Is.True);
 			var axes = table.Find("any", "k");
 			Assert.That(axes.Enemy("soviet"), Is.EqualTo(1020), "half the budget: exp(0.04 x 0.5)");
 			Assert.That(axes.Enemy("allies"), Is.EqualTo(1020));
@@ -134,14 +162,43 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void EverySeatOfAGameCountsInOneStepNotOnlyTheFirst()
+		{
+			var table = new LearnTable();
+			var seats = new[] { Seat("rush", "gdi", "nod", null, "nod", 1.0), Seat("turtle", "allies", "nod", null, "nod", -1.0), Seat("rush", "gdi", "nod", null, "nod", 1.0) };
+			Assert.That(LearnAllTrainer.ApplyGame(table, "g1", "k", seats), Is.True);
+			Assert.That(table.Find("rush", "k").Global, Is.EqualTo(1041), "both rush seats agree: one step, not two");
+			Assert.That(table.Find("turtle", "k").Global, Is.EqualTo(961), "the second personality is not dropped by a first-seat game key");
+			Assert.That(table.Find("any", "k").Global, Is.EqualTo(1013), "global = mean(+1, -1, +1) = 1/3: 1000 x exp(0.04/3)");
+			Assert.That(table.Find("any", "k").Own("gdi"), Is.EqualTo(1041));
+			Assert.That(table.Find("any", "k").Own("allies"), Is.EqualTo(961));
+			Assert.That(table.AppliedGames, Is.EquivalentTo(new[] { "g1|any|k", "g1|rush|k", "g1|turtle|k" }));
+		}
+
+		[Test]
+		public void TheSeatOrderAndANoEvidenceSeatDoNotChangeTheResult()
+		{
+			var a = Seat("rush", "gdi", "nod", "boom", "nod", 0.3);
+			var b = Seat("rush", "allies", "soviet", "rush", "soviet", -0.7);
+			var c = Seat("turtle", "gdi", "nod", "boom", "nod", 0.9);
+			var dead = Seat("rush", "soviet", "nod", null, "nod", double.NaN);
+
+			var t1 = new LearnTable();
+			LearnAllTrainer.ApplyGame(t1, "g1", "k", [a, b, c]);
+			var t2 = new LearnTable();
+			LearnAllTrainer.ApplyGame(t2, "g1", "k", [c, dead, b, a]);
+			Assert.That(LearnAllSnapshotWriter.Write(t2), Is.EqualTo(LearnAllSnapshotWriter.Write(t1)));
+		}
+
+		[Test]
 		public void ANewPersonalityStartsFromTheGlobalValuesAsTheyWereBeforeThatGame()
 		{
 			var table = new LearnTable();
-			Assert.That(table.ApplyGame("g1", "rush", "k", "gdi", One("nod"), 1.0), Is.True);
+			Assert.That(LearnAllTrainer.ApplyGame(table, "g1", "k", One("rush", "gdi", "nod", 1.0)), Is.True);
 			Assert.That(table.Find("any", "k").Global, Is.EqualTo(1041));
 			Assert.That(table.Find("rush", "k").Global, Is.EqualTo(1041));
 
-			Assert.That(table.ApplyGame("g2", "turtle", "k", "gdi", One("nod"), -1.0), Is.True);
+			Assert.That(LearnAllTrainer.ApplyGame(table, "g2", "k", One("turtle", "gdi", "nod", -1.0)), Is.True);
 			Assert.That(table.Find("turtle", "k").Global, Is.EqualTo(1000), "turtle copied the global 1041, then stepped down once (not 1000 -> 961)");
 			Assert.That(table.Find("any", "k").Global, Is.EqualTo(1000), "the global moved once as well");
 			Assert.That(table.Find("rush", "k").Global, Is.EqualTo(1041), "another personality's table is untouched");
@@ -151,7 +208,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void APersonalityWithoutATableReadsTheGlobalOne()
 		{
 			var table = new LearnTable();
-			table.ApplyGame("g1", "rush", "k", "gdi", One("nod"), 1.0);
+			LearnAllTrainer.ApplyGame(table, "g1", "k", One("rush", "gdi", "nod", 1.0));
 			Assert.That(table.Resolve("never_seen", "k", "gdi", ["nod"], "nod", null), Is.EqualTo(table.Resolve("any", "k", "gdi", ["nod"], "nod", null)));
 		}
 
@@ -159,9 +216,9 @@ namespace OpenRA.Mods.Cameo.Test
 		public void AGameIsAppliedOnlyOnce()
 		{
 			var table = new LearnTable();
-			Assert.That(table.ApplyGame("g1", "rush", "k", "gdi", One("nod"), 1.0), Is.True);
+			Assert.That(LearnAllTrainer.ApplyGame(table, "g1", "k", One("rush", "gdi", "nod", 1.0)), Is.True);
 			var once = table.Resolve("rush", "k", "gdi", ["nod"], "nod", null);
-			Assert.That(table.ApplyGame("g1", "rush", "k", "gdi", One("nod"), 1.0), Is.False, "same game id again = skipped");
+			Assert.That(LearnAllTrainer.ApplyGame(table, "g1", "k", One("rush", "gdi", "nod", 1.0)), Is.False, "same game id again = skipped");
 			Assert.That(table.Resolve("rush", "k", "gdi", ["nod"], "nod", null), Is.EqualTo(once));
 		}
 
@@ -170,18 +227,18 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var table = new LearnTable();
 			for (var i = 0; i < 10; i++)
-				Assert.That(table.ApplyGame("g" + i, "rush", "k", "gdi", One("nod"), 1.0), Is.True);
+				Assert.That(LearnAllTrainer.ApplyGame(table, "g" + i, "k", One("rush", "gdi", "nod", 1.0)), Is.True);
 
 			var learned = table.Find("rush", "k").Global;
 			Assert.That(learned, Is.GreaterThan(1400), "ten small steps accumulate");
 
 			// A game with no evidence for the knob (the balance changed, nothing was exposed) leaves everything as it is.
-			table.ApplyGame("g10", "rush", "k", "gdi", One("nod"), null);
+			LearnAllTrainer.ApplyGame(table, "g10", "k", One("rush", "gdi", "nod", null));
 			Assert.That(table.Find("rush", "k").Global, Is.EqualTo(learned));
 
 			// There is no API that sets a table back to 1000 or pulls it toward G; the only mutation of a value is a bounded step.
 			var after = table.Find("rush", "k").Global;
-			table.ApplyGame("g11", "rush", "k", "gdi", One("nod"), -1.0);
+			LearnAllTrainer.ApplyGame(table, "g11", "k", One("rush", "gdi", "nod", -1.0));
 			Assert.That(Math.Abs(table.Find("rush", "k").Global - after), Is.LessThanOrEqualTo(after * 0.0834), "one game moves a value by at most exp(0.08) - 1");
 		}
 
@@ -197,14 +254,18 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void TheReleaseReadsOnlyAndTheStepCodeLivesInTheDevHalf()
+		public void TheReleaseSourcesReadOnlyAndHoldNoTrainingOrWriteCode()
 		{
-			// The pure core has no world, file or clock access; the writer path (P1c) is the only place a table is stepped.
-			var code = System.IO.File.ReadAllText(System.IO.Path.Combine(AppContext.BaseDirectory, "source", "mods/Cameo/Traits/BotModules/LearnAll/LearnAllMath.cs")).Replace("\r\n", "\n");
-			Assert.That(code, Does.Not.Contain("System.IO"));
-			Assert.That(code, Does.Not.Contain("DateTime"));
-			Assert.That(code, Does.Not.Contain("Random"));
-			Assert.That(code, Does.Not.Contain("Clear()"), "no reset path");
+			// The pure core has no world, file or clock access; the step / trainer / snapshot writer live only in OpenRA.Mods.Cameo.Dev (built with CameoDevLogging=true).
+			foreach (var file in new[] { "LearnAllMath.cs", "LearnAllSnapshot.cs", "LearnAllBotModule.cs" })
+			{
+				var code = System.IO.File.ReadAllText(System.IO.Path.Combine(AppContext.BaseDirectory, "source", "mods/Cameo/Traits/BotModules/LearnAll", file)).Replace("\r\n", "\n");
+				foreach (var banned in new[] { "LearnAllStep", "LearnAllTrainer", "ApplyGame", "Rate =", "MaxLogStep", "Math.Exp", "Write(", "Clear()", "DateTime", "Random" })
+					Assert.That(code, Does.Not.Contain(banned), file + " must not contain " + banned);
+			}
+
+			var math = System.IO.File.ReadAllText(System.IO.Path.Combine(AppContext.BaseDirectory, "source", "mods/Cameo/Traits/BotModules/LearnAll/LearnAllMath.cs"));
+			Assert.That(math, Does.Not.Contain("System.IO"));
 		}
 	}
 }

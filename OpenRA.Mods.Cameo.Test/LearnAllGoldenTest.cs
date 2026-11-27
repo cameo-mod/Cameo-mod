@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using NUnit.Framework;
+using OpenRA.Mods.Cameo.Dev;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 
 namespace OpenRA.Mods.Cameo.Test
@@ -59,25 +60,44 @@ namespace OpenRA.Mods.Cameo.Test
 				Assert.That(LearnAllStep.Next(v.GetProperty("current").GetInt32(), Signal(v.GetProperty("signal"))), Is.EqualTo(v.GetProperty("expect").GetInt32()), v.ToString());
 		}
 
+		static string Str(JsonElement e) => e.ValueKind == JsonValueKind.Null ? null : e.GetString();
+
+		static List<SeatObservation> Seats(JsonElement application) =>
+			application.GetProperty("seats").EnumerateArray().Select(s => new SeatObservation(Str(s.GetProperty("personality")), Str(s.GetProperty("own")),
+				s.GetProperty("enemies").EnumerateArray().Select(e => new EnemyObservation(Str(e.GetProperty("faction")), Str(e.GetProperty("style")), e.GetProperty("weight").GetInt32())).ToList(),
+				Str(s.GetProperty("main_target")), Signal(s.GetProperty("signal")))).ToList();
+
+		static (LearnTable Table, List<bool> Changed) Replay(JsonElement game, bool reverseSeats)
+		{
+			var table = new LearnTable();
+			var changed = new List<bool>();
+			foreach (var a in game.GetProperty("applications").EnumerateArray())
+			{
+				var seats = Seats(a);
+				if (reverseSeats)
+					seats.Reverse();
+				changed.Add(LearnAllTrainer.ApplyGame(table, a.GetProperty("game_id").GetString(), a.GetProperty("knob").GetString(), seats));
+			}
+
+			return (table, changed);
+		}
+
 		[Test]
 		public void WholeGameSequencesProduceTheSameSnapshotText()
 		{
 			foreach (var g in Golden().GetProperty("games").EnumerateArray())
 			{
-				var table = new LearnTable();
-				var changed = new List<bool>();
-				foreach (var a in g.GetProperty("applications").EnumerateArray())
-				{
-					var enemies = a.GetProperty("enemies").EnumerateArray()
-						.Select(e => new EnemyObservation(e.GetProperty("faction").GetString(),
-							e.GetProperty("style").ValueKind == JsonValueKind.Null ? null : e.GetProperty("style").GetString(), e.GetProperty("weight").GetInt32())).ToArray();
-					changed.Add(table.ApplyGame(a.GetProperty("game_id").GetString(), a.GetProperty("personality").GetString(), a.GetProperty("knob").GetString(),
-						a.GetProperty("own").GetString(), enemies, Signal(a.GetProperty("signal"))));
-				}
-
+				var (table, changed) = Replay(g, false);
 				Assert.That(changed, Is.EqualTo(g.GetProperty("changed").EnumerateArray().Select(x => x.GetBoolean()).ToList()), g.GetProperty("name").GetString());
-				Assert.That(LearnAllSnapshot.Write(table), Is.EqualTo(g.GetProperty("expect_text").GetString()), g.GetProperty("name").GetString());
+				Assert.That(LearnAllSnapshotWriter.Write(table), Is.EqualTo(g.GetProperty("expect_text").GetString()), g.GetProperty("name").GetString());
 			}
+		}
+
+		[Test]
+		public void TheSeatOrderOfAGameDoesNotChangeTheSnapshot()
+		{
+			foreach (var g in Golden().GetProperty("games").EnumerateArray())
+				Assert.That(LearnAllSnapshotWriter.Write(Replay(g, true).Table), Is.EqualTo(g.GetProperty("expect_text").GetString()), g.GetProperty("name").GetString());
 		}
 	}
 }

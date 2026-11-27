@@ -1,28 +1,34 @@
 #!/usr/bin/env python3
 """LEARN-ALL-02 P1c: the DEV fitter. ONE bounded learning step per DEV bot game, applied in game order, never in a batch.
 
-This is the python mirror of OpenRA.Mods.Cameo/Traits/BotModules/LearnAll/LearnAllMath.cs (LearnAllStep, LearnTable.Apply/ApplyGame). The two are kept
-identical by tools/tests/learn_all_golden.json, which both test suites replay (tools/tests/test_learn_all_fitter.py and LearnAllGoldenTest.cs).
+This is the python mirror of the DEV half of the learner, OpenRA.Mods.Cameo.Dev/LearnAllTrainer.cs (LearnAllStep, LearnAllTrainer.ApplyGame) and of the read
+side in OpenRA.Mods.Cameo/Traits/BotModules/LearnAll/LearnAllMath.cs. They are kept identical by tools/tests/learn_all_golden.json, which both test suites replay
+(tools/tests/test_learn_all_fitter.py and LearnAllGoldenTest.cs). The release build has no training code: it only reads the snapshot this writes.
 
 Learning contract (DESIGNER RULE, 2026-11-14 / 2026-11-19): every learned value is the geometric mean (G x F_own x E_eff x S_obs)^(1/4) of four
 always-learning full-scale estimates; after EVERY bot game each takes a small bounded log-space step; nothing is ever reset or pulled toward G;
 every own personality keeps its own table, a new personality starts from the global ("any") values; a knob with no evidence keeps its estimate.
 Training exists only in DEV: the release build reads the committed snapshot (mods/cameo/ai/learned/learn_all.yaml) and never runs this.
 
-Input (one game, from the DEV exposure writer, JSON lines, one record per (bot player, game)):
-  {"game_id": "<stable id>", "seq": <int game order>, "personality": "rush", "own_faction": "gdi",
+Input (one game, from the DEV exposure writer, JSON lines, one record per (bot seat, game)):
+  {"game_id": "<[A-Za-z0-9_.-]+>", "seq": <int game order, the same on every record of the game>, "seat": "<unique per game>", "personality": "rush",
+   "own_faction": "gdi", "main_target": "nod" | null,
    "enemies": [{"faction": "nod", "style": "boom" | null, "weight": 1}],
    "knobs": [{"knob": "wave_role.frontline", "signal": 0.4 | null}]}
-`signal` is the game's signed, bounded outcome in [-1, 1] (null = no evidence for that knob: the previous estimate is kept).
+`signal` is the game's signed, bounded outcome in [-1, 1] (null = no evidence for that knob: the previous estimate is kept). `main_target` is the
+faction the decision actually used as the main target. ALL seats of the game are combined in ONE step per axis per table (every personality present,
+then the global "any" table); a style seeds from the pre-step team enemy value (per-seat enemy factions + the main target).
 
 Pipeline use (post-game plan step, after EVERY DEV game): python tools/ai/fit_learn_all.py --exposures <game_dir>/learn_all_exposure.jsonl
-Guards: a record whose (game, personality, knob) was already applied is skipped (idempotent); an invocation with records of more than one game is
-refused (no manual batch); a game whose `seq` is not above the snapshot's LastSeq is refused (game order).
+Guards (exit codes): 3 = records of more than one game (no manual batch); 5 = invalid records (a missing, non-integer or mixed `seq`, a bad or missing
+game_id, a duplicate or missing `seat`, a game already applied under another seq); 4 = `seq` not above the snapshot's LastSeq (game order; LastSeq never
+decreases). A (game, personality, knob) that was already applied is skipped (idempotent).
 """
 import argparse
 import json
 import math
 import os
+import re
 import sys
 
 ONE = 1000
@@ -113,6 +119,8 @@ class Table:
     def __init__(self):
         self.personalities = {}
         self.applied = set()
+        self.games = {}  # game id -> seq (python-only bookkeeping, the C# reader ignores it)
+        self.last_seq = None
 
     def find(self, personality, knob):
         if knob is None:
@@ -133,78 +141,127 @@ class Table:
         s = axes.style.get(style, 0) if style is not None else 0
         return resolve(axes.global_, axes.get_own(own_faction), enemy_eff, s)
 
-    def _ensure(self, personality, knob):
-        table = self.personalities.setdefault(personality, {})
-        if knob in table:
-            return table[knob]
-        any_axes = self.personalities.get(ANY, {}).get(knob)
-        table[knob] = any_axes.clone() if any_axes is not None else Axes()
-        return table[knob]
-
-    @staticmethod
-    def _applied_key(game_id, personality, knob):
-        return "%s|%s|%s" % (game_id, personality if personality is not None else ANY, knob)
-
-    def apply(self, game_id, personality, knob, own_faction, enemies, signal):
-        """enemies: list of (faction, style, weight). Mirrors LearnTable.Apply."""
-        if game_id is None or knob is None:
-            return False
-        if signal is None or isinstance(signal, bool) or not isinstance(signal, (int, float)) or math.isnan(signal) or math.isinf(signal):
-            return False
-        key = self._applied_key(game_id, personality, knob)
-        if key in self.applied:
-            return False
-        s = float(signal)
-        axes = self._ensure(personality if personality is not None else ANY, knob)
-        pre = axes.clone()
-        axes.global_ = step_next(pre.global_, s)
-        if own_faction is not None:
-            axes.own[own_faction] = step_next(pre.get_own(own_faction), s)
-        if enemies:
-            total = 0
-            for (_f, _s, w) in enemies:
-                total += max(0, w)
-            if total > 0:
-                share, style_share = {}, {}
-                for (faction, style, w) in enemies:
-                    if w <= 0:
-                        continue
-                    part = float(w) / total
-                    if faction is not None:
-                        share[faction] = share.get(faction, 0.0) + part
-                    if style is not None:
-                        style_share[style] = style_share.get(style, 0.0) + part
-                for faction in sorted(share):
-                    axes.enemy[faction] = step_next(pre.get_enemy(faction), s * share[faction])
-                main = _main_faction(enemies)
-                for style in sorted(style_share):
-                    seed = pre.style[style] if style in pre.style else seed_style(pre.global_, pre.get_own(own_faction), pre.get_enemy(main))
-                    axes.style[style] = step_next(seed, s * style_share[style])
-        self.applied.add(key)
-        return True
-
-    def apply_game(self, game_id, personality, knob, own_faction, enemies, signal):
-        changed = False
-        if personality and personality != ANY:
-            changed |= self.apply(game_id, personality, knob, own_faction, enemies, signal)
-        changed |= self.apply(game_id, ANY, knob, own_faction, enemies, signal)
-        return changed
+    def is_applied(self, key):
+        return key in self.applied
 
 
-def _main_faction(enemies):
-    best, weight = None, -(2 ** 31)
-    for (faction, _style, w) in enemies:
-        if w > weight:
-            weight, best = w, faction
-    return best
+SCALE = 10 ** 9
+
+
+def _q(x):
+    """1e-9 quantization, symmetric half away from zero (mirrors LearnAllTrainer.Q), so seat sums are exact integers and order-free."""
+    sign = (x > 0) - (x < 0)
+    return sign * int(math.floor(abs(x) * SCALE + 0.5))
+
+
+def _finite(signal):
+    return isinstance(signal, (int, float)) and not isinstance(signal, bool) and not math.isnan(signal) and not math.isinf(signal)
+
+
+class Seat:
+    """One bot seat's view of one game for one knob (mirrors SeatObservation)."""
+
+    def __init__(self, personality, own_faction, enemies, main_target, signal):
+        self.personality = personality or None
+        self.own_faction = own_faction
+        self.enemies = list(enemies)  # [(faction, style, weight)]
+        self.main_target = main_target
+        self.signal = signal
+
+
+def _seat_enemy_eff(pre, enemies, main_target):
+    per = [pre.get_enemy(f) for (f, _s, _w) in enemies]
+    main = pre.get_enemy(main_target) if main_target is not None else geo_mean(per)
+    if not per:
+        return main if main_target is not None else pre.global_
+    return team_enemy(per, main)
+
+
+def _add(mapping, key, contribution):
+    s, n = mapping.get(key, (0, 0))
+    mapping[key] = (s + _q(contribution), n + 1)
+
+
+def _mean(pair):
+    return pair[0] / (pair[1] * SCALE)
+
+
+def _step_table(table, personality, knob, seats):
+    existing = table.personalities.get(personality, {}).get(knob)
+    if existing is not None:
+        pre = existing.clone()
+    elif personality != ANY and knob in table.personalities.get(ANY, {}):
+        pre = table.personalities[ANY][knob].clone()
+    else:
+        pre = Axes()
+    axes = existing if existing is not None else table.personalities.setdefault(personality, {}).setdefault(knob, pre.clone())
+
+    global_sum = 0
+    own_map, enemy_map, style_map, style_seeds = {}, {}, {}, {}
+    for seat in seats:
+        s = float(seat.signal)
+        global_sum += _q(s)
+        if seat.own_faction is not None:
+            _add(own_map, seat.own_faction, s)
+        enemies = [e for e in seat.enemies if e[2] > 0]
+        total = sum(e[2] for e in enemies)
+        if total == 0:
+            continue
+        share, style_share = {}, {}
+        for (faction, style, w) in enemies:
+            part = float(w) / total
+            if faction is not None:
+                share[faction] = share.get(faction, 0.0) + part
+            if style is not None:
+                style_share[style] = style_share.get(style, 0.0) + part
+        for faction in share:
+            _add(enemy_map, faction, s * share[faction])
+        if style_share:
+            seed = seed_style(pre.global_, pre.get_own(seat.own_faction), _seat_enemy_eff(pre, enemies, seat.main_target))
+            for style in style_share:
+                _add(style_map, style, s * style_share[style])
+                style_seeds.setdefault(style, []).append(seed)
+
+    axes.global_ = step_next(pre.global_, global_sum / (len(seats) * SCALE))
+    for k in sorted(own_map):
+        axes.own[k] = step_next(pre.get_own(k), _mean(own_map[k]))
+    for k in sorted(enemy_map):
+        axes.enemy[k] = step_next(pre.get_enemy(k), _mean(enemy_map[k]))
+    for k in sorted(style_map):
+        current = pre.style[k] if k in pre.style else geo_mean(style_seeds[k])
+        axes.style[k] = step_next(current, _mean(style_map[k]))
+
+
+def apply_game(table, game_id, knob, seats):
+    """Mirrors LearnAllTrainer.ApplyGame: all eligible seats of the game combined, one step per axis per table (each personality present, then 'any')."""
+    if game_id is None or knob is None or not seats:
+        return False
+    valid = [s for s in seats if _finite(s.signal)]
+    if not valid:
+        return False
+    targets = sorted({s.personality for s in valid if s.personality and s.personality != ANY}) + [ANY]
+    changed = False
+    for target in targets:
+        key = "%s|%s|%s" % (game_id, target, knob)
+        if table.is_applied(key):
+            continue
+        group = valid if target == ANY else [s for s in valid if s.personality == target]
+        _step_table(table, target, knob, group)
+        table.applied.add(key)
+        changed = True
+    return changed
 
 
 # ---------------------------------------------------------------- snapshot text (mirrors LearnAllSnapshot.Write / Parse)
 
-def write_text(table, include_applied=True, last_seq=None):
+def write_text(table, include_applied=True):
     out = [ROOT + ":\n", "\tVersion: %d\n" % VERSION]
-    if last_seq is not None:
-        out.append("\tLastSeq: %d\n" % last_seq)
+    if table.last_seq is not None:
+        out.append("\tLastSeq: %d\n" % table.last_seq)
+    if include_applied and table.games:
+        out.append("\tGames:\n")
+        for game in sorted(table.games):
+            out.append("\t\t%s: %d\n" % (game, table.games[game]))
     if include_applied and table.applied:
         out.append("\tApplied:\n")
         for key in sorted(table.applied):
@@ -224,13 +281,13 @@ def write_text(table, include_applied=True, last_seq=None):
 
 
 def parse_text(text):
-    """Returns (table, last_seq). A damaged / foreign / other-version text is an empty table (never zero)."""
-    table, last_seq = Table(), None
+    """Returns the table (table.last_seq / table.games carry the python bookkeeping). A damaged / foreign / other-version text is an empty table (never zero)."""
+    table = Table()
     if not text or not text.strip():
-        return table, last_seq
+        return table
     lines = [ln.rstrip("\r\n") for ln in text.split("\n") if ln.strip() and not ln.lstrip().startswith("#")]
     if not lines or lines[0].strip() != ROOT + ":":
-        return table, last_seq
+        return table
     entries, current = [], None
     for ln in lines[1:]:
         depth = len(ln) - len(ln.lstrip("\t"))
@@ -248,13 +305,20 @@ def parse_text(text):
             except ValueError:
                 version = None
     if version != VERSION:
-        return Table(), None
+        return Table()
     for head, children in entries:
         if head.startswith("LastSeq:"):
             try:
-                last_seq = int(head.split(":", 1)[1].strip())
+                table.last_seq = int(head.split(":", 1)[1].strip())
             except ValueError:
-                last_seq = None
+                table.last_seq = None
+        elif head == "Games:":
+            for c in children:
+                name, _, value = c.rpartition(":")
+                try:
+                    table.games[name.strip()] = int(value.strip())
+                except ValueError:
+                    continue
         elif head == "Applied:":
             for c in children:
                 table.applied.add(c[:-1] if c.endswith(":") else c)
@@ -281,7 +345,7 @@ def parse_text(text):
                     axes.enemy[name[6:]] = v
                 elif name.startswith("Style@"):
                     axes.style[name[6:]] = v
-    return table, last_seq
+    return table
 
 
 # ---------------------------------------------------------------- pipeline
@@ -301,14 +365,48 @@ def load_records(paths):
     return records
 
 
-def apply_records(table, records):
-    """Applies every record of ONE game. Returns the number of (personality, knob) steps taken."""
-    steps = 0
+GAME_ID = re.compile(r"^[A-Za-z0-9_.\-]+$")
+
+
+def _is_int(value):
+    return isinstance(value, int) and not isinstance(value, bool)
+
+
+def check_records(records):
+    """Strict validation of ONE game's records. Returns (game_id, seq, error); error is None or (exit code, message)."""
+    ids = {r.get("game_id") for r in records}
+    if len(ids) != 1:
+        return None, None, (3, "refused: %d games in one invocation (one step per game, never a batch): %s" % (len(ids), ", ".join(sorted(map(str, ids)))))
+    game = next(iter(ids))
+    if not isinstance(game, str) or not GAME_ID.match(game):
+        return None, None, (5, "refused: game_id %r is missing or not [A-Za-z0-9_.-]+" % (game,))
+    seqs = {r["seq"] if _is_int(r.get("seq")) and r["seq"] >= 0 else None for r in records}
+    if None in seqs or len(seqs) != 1:
+        return game, None, (5, "refused: game %s has a missing, non-integer, negative or mixed seq (every record needs the same integer seq)" % game)
+    seats = [r.get("seat") for r in records]
+    if any(not isinstance(x, str) or not x for x in seats) or len(set(seats)) != len(seats):
+        return game, None, (5, "refused: game %s has a missing or duplicate seat id" % game)
+    return game, next(iter(seqs)), None
+
+
+def seats_by_knob(records):
+    """Groups the records of one game by knob into Seat lists (every seat of the game, in one step)."""
+    result = {}
     for rec in records:
         enemies = [(e.get("faction"), e.get("style"), int(e.get("weight", 1))) for e in rec.get("enemies", [])]
         for k in rec.get("knobs", []):
-            if table.apply_game(str(rec["game_id"]), rec.get("personality") or None, k["knob"], rec.get("own_faction"), enemies, k.get("signal")):
-                steps += 1
+            result.setdefault(k["knob"], []).append(Seat(rec.get("personality"), rec.get("own_faction"), enemies, rec.get("main_target"), k.get("signal")))
+    return result
+
+
+def apply_records(table, game, records):
+    """Applies every knob of ONE (validated) game. Returns the number of (personality, knob) steps taken."""
+    steps = 0
+    grouped = seats_by_knob(records)
+    for knob in sorted(grouped):
+        before = len(table.applied)
+        if apply_game(table, game, knob, grouped[knob]):
+            steps += len(table.applied) - before
     return steps
 
 
@@ -320,30 +418,34 @@ def main(argv=None):
     args = ap.parse_args(argv)
 
     records = load_records(args.exposures)
-    games = {str(r["game_id"]) for r in records}
-    if len(games) > 1:
-        print("refused: %d games in one invocation (one step per game, never a batch): %s" % (len(games), ", ".join(sorted(games))), file=sys.stderr)
-        return 3
-    if not games:
+    if not records:
         print("no exposure records: nothing to apply", file=sys.stderr)
         return 0
 
+    game, seq, error = check_records(records)
+    if error is not None:
+        print(error[1], file=sys.stderr)
+        return error[0]
+
     path = os.path.normpath(args.snapshot)
     text = open(path, "r", encoding="utf-8").read() if os.path.exists(path) else ""
-    table, last_seq = parse_text(text)
-    seqs = {r.get("seq") for r in records}
-    seq = max((s for s in seqs if isinstance(s, int)), default=None)
-    game = next(iter(games))
-    already = any(k.startswith(game + "|") for k in table.applied)
-    if seq is not None and last_seq is not None and seq <= last_seq and not already:
-        print("refused: game seq %d is not above the snapshot's LastSeq %d (games are applied in order)" % (seq, last_seq), file=sys.stderr)
+    table = parse_text(text)
+    known = table.games.get(game)
+    already = known is not None or any(k.startswith(game + "|") for k in table.applied)
+    if known is not None and known != seq:
+        print("refused: game %s was applied with seq %d, now seq %d" % (game, known, seq), file=sys.stderr)
+        return 5
+    if not already and table.last_seq is not None and seq <= table.last_seq:
+        print("refused: game seq %d is not above the snapshot's LastSeq %d (games are applied in order)" % (seq, table.last_seq), file=sys.stderr)
         return 4
 
-    steps = apply_records(table, records)
+    steps = apply_records(table, game, records)
     if steps == 0:
         print("game %s: nothing to apply (already applied or no evidence); snapshot unchanged" % game)
         return 0
-    new_text = write_text(table, True, seq if seq is not None else last_seq)
+    table.games[game] = seq
+    table.last_seq = seq if table.last_seq is None else max(table.last_seq, seq)
+    new_text = write_text(table)
     if args.dry_run:
         sys.stdout.write(new_text)
         return 0

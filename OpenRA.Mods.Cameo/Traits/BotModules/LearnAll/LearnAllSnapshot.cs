@@ -13,7 +13,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 
 namespace OpenRA.Mods.Cameo.Traits.BotModules
 {
@@ -89,36 +88,5 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		public static LearnTable ParseText(string text, string name = "learn_all") =>
 			Parse(string.IsNullOrWhiteSpace(text) ? null : MiniYaml.FromString(text, name));
-
-		/// <summary>The deterministic text of a table: sorted personalities, knobs and keys, tabs, "\n", invariant integers. Writing the same table twice gives the same bytes.</summary>
-		public static string Write(LearnTable table, bool includeApplied = true)
-		{
-			var sb = new StringBuilder();
-			sb.Append(Root).Append(":\n");
-			sb.Append("\tVersion: ").Append(Version.ToString(CultureInfo.InvariantCulture)).Append('\n');
-			if (includeApplied && table.AppliedGames.Count > 0)
-			{
-				sb.Append("\tApplied:\n");
-				foreach (var key in table.AppliedGames)
-					sb.Append("\t\t").Append(key).Append(":\n");
-			}
-
-			foreach (var (personality, knobs) in table.Personalities)
-			{
-				foreach (var (knob, axes) in knobs)
-				{
-					sb.Append('\t').Append(KnobPrefix).Append(personality).Append(Separator).Append(knob).Append(":\n");
-					sb.Append("\t\tGlobal: ").Append(axes.Global.ToString(CultureInfo.InvariantCulture)).Append('\n');
-					foreach (var kv in axes.OwnFaction)
-						sb.Append("\t\tOwn@").Append(kv.Key).Append(": ").Append(kv.Value.ToString(CultureInfo.InvariantCulture)).Append('\n');
-					foreach (var kv in axes.EnemyFaction)
-						sb.Append("\t\tEnemy@").Append(kv.Key).Append(": ").Append(kv.Value.ToString(CultureInfo.InvariantCulture)).Append('\n');
-					foreach (var kv in axes.Style)
-						sb.Append("\t\tStyle@").Append(kv.Key).Append(": ").Append(kv.Value.ToString(CultureInfo.InvariantCulture)).Append('\n');
-				}
-			}
-
-			return sb.ToString();
-		}
 	}
 }
