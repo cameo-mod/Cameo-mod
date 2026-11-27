@@ -174,8 +174,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				return false;
 
 			var randomSquadUnit = squad.Units.Random(squad.Random);
-			var dangerRadius = squad.SquadManager.Info.DangerScanRadius;
-			var units = squad.World.FindActorsInCircle(randomSquadUnit.Actor.CenterPosition, WDist.FromCells(dangerRadius)).ToList();
+			var units = NearbyCombatantsCA.Scan(squad, randomSquadUnit.Actor.CenterPosition);
 
 			// If there are any own buildings within the DangerRadius, don't flee
 			// PERF: Avoid LINQ
@@ -183,7 +182,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				if ((u.Owner == squad.Bot.Player && u.Info.HasTraitInfo<BuildingInfo>()))
 					return false;
 
-			var enemyAroundUnit = units.Where(unit => squad.SquadManager.IsPreferredObservedEnemyUnit(unit) && unit.Info.HasTraitInfo<AttackBaseInfo>()).ToList();
+			var enemyAroundUnit = NearbyCombatantsCA.Combatants(squad, units);
 			if (enemyAroundUnit.Count == 0)
 				return false;
 
@@ -198,10 +197,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				return false;
 
 			var squadUnit = squad.Units[0].Actor;
-			var dangerRadius = squad.SquadManager.Info.DangerScanRadius;
-			var units = squad.World.FindActorsInCircle(squadUnit.CenterPosition, WDist.FromCells(dangerRadius)).ToList();
-
-			var enemyAroundUnit = units.Where(unit => squad.SquadManager.IsPreferredObservedEnemyUnit(unit) && unit.Info.HasTraitInfo<AttackBaseInfo>()).ToList();
+			var units = NearbyCombatantsCA.Scan(squad, squadUnit.CenterPosition);
+			var enemyAroundUnit = NearbyCombatantsCA.Combatants(squad, units);
 			if (enemyAroundUnit.Count == 0)
 				return false;
 
@@ -419,5 +416,33 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			}
 		}
 
+	}
+
+	// A single visit-scoped spatial scan shared by both retreat predicates. The
+	// original world enumeration is retained and combatants are selected in that
+	// same order; callers keep their distinct origin and building-veto policies.
+	internal static class NearbyCombatantsCA
+	{
+		internal static List<Actor> Scan(SquadCA squad, WPos center)
+		{
+			var radius = WDist.FromCells(squad.SquadManager.Info.DangerScanRadius);
+			return squad.World.FindActorsInCircle(center, radius).ToList();
+		}
+
+		internal static List<Actor> Combatants(SquadCA squad, IEnumerable<Actor> nearby)
+		{
+			return FilterInCandidateOrder(nearby,
+				unit => squad.SquadManager.IsPreferredObservedEnemyUnit(unit) && unit.Info.HasTraitInfo<AttackBaseInfo>());
+		}
+
+		internal static List<T> FilterInCandidateOrder<T>(IEnumerable<T> candidates, Func<T, bool> isCombatant)
+		{
+			var result = new List<T>();
+			foreach (var candidate in candidates)
+				if (isCombatant(candidate))
+					result.Add(candidate);
+
+			return result;
+		}
 	}
 }
