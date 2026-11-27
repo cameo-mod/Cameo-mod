@@ -22,19 +22,42 @@ namespace OpenRA.Mods.CA.Traits
 		// income is assumed, so the clock keeps running (the guarantee never silently stops).
 		bool FirstDueHasIncome() => !RefreshHarvesterCounts() || harvestersLive > 0;
 
-		// One advance per roll visit: every never-ordered type of the pool is credited the time since its last advance (capped by FirstCopyDue.MaxStepTicks), unless the economy is dead.
-		void AdvanceFirstCopyClocks(List<ActorInfo> pool)
+		// A never-ordered type is tracked from its first sighting in a roll pool (its clock starts then). The clocks of every tracked type are then advanced by a SWEEP: from every bot visit
+		// (at most every FirstCopySweepTicks, so the gap between samples stays far below FirstCopyDue.MaxStepTicks even while a queue is busy and the roll does not run) and at every roll. A sweep credits each
+		// tracked, still never-ordered type the time since its last advance (capped by MaxStepTicks), unless the economy is dead; a type that has been ordered is dropped.
+		const int FirstCopySweepTicks = 25;
+		int rollDueSweepTick = -1;
+		readonly List<string> rollDueNames = [];
+
+		void TrackFirstCopyClocks(List<ActorInfo> pool)
 		{
 			var now = world.WorldTick;
-			var alive = FirstCopyDue.Alive(playerResources.GetCashAndResources(), RollParameters.FirstDueCash, FirstDueHasIncome());
 			foreach (var a in pool)
-			{
-				if (rollOrdered.Contains(a.Name))
-					continue;
+				if (!rollOrdered.Contains(a.Name) && rollDueAt.TryAdd(a.Name, now))
+					rollDueCredit[a.Name] = 0;
+		}
 
-				var previous = rollDueAt.TryGetValue(a.Name, out var at) ? at : -1;
-				rollDueCredit[a.Name] = rollDueCredit.GetValueOrDefault(a.Name) + FirstCopyDue.Step(previous, now, alive);
-				rollDueAt[a.Name] = now;
+		void SweepFirstCopyClocks(bool force)
+		{
+			var now = world.WorldTick;
+			if (rollDueAt.Count == 0 || (!force && rollDueSweepTick >= 0 && now - rollDueSweepTick < FirstCopySweepTicks))
+				return;
+
+			rollDueSweepTick = now;
+			var alive = FirstCopyDue.Alive(playerResources.GetCashAndResources(), RollParameters.FirstDueCash, FirstDueHasIncome());
+			rollDueNames.Clear();
+			rollDueNames.AddRange(rollDueAt.Keys);
+			foreach (var name in rollDueNames)
+			{
+				if (rollOrdered.Contains(name))
+				{
+					rollDueAt.Remove(name);
+					rollDueCredit.Remove(name);
+					continue;
+				}
+
+				rollDueCredit[name] = rollDueCredit.GetValueOrDefault(name) + FirstCopyDue.Step(rollDueAt[name], now, alive);
+				rollDueAt[name] = now;
 			}
 		}
 

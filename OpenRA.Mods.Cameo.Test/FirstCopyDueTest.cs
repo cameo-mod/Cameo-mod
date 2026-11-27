@@ -114,7 +114,9 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(roll, Is.GreaterThan(0));
 			var body = unit[roll..];
 
-			Assert.That(body, Does.Contain("if (FirstCopyDueOn)\n\t\t\t\tAdvanceFirstCopyClocks(pool);"), "the clocks move only while the row is on");
+			Assert.That(body, Does.Contain("if (FirstCopyDueOn)\n\t\t\t{\n\t\t\t\tTrackFirstCopyClocks(pool);\n\t\t\t\tSweepFirstCopyClocks(true);\n\t\t\t}"), "the clocks move only while the row is on");
+			Assert.That(unit, Does.Contain("if (FirstCopyDueOn)\n\t\t\t\tSweepFirstCopyClocks(false);\n\n\t\t\t// TF-2:"), "every bot visit samples the clocks, before any pause return (the roll alone visits too rarely)");
+			Assert.That(unit, Does.Not.Contain("rollDueIncome"), "no dead fields");
 
 			const string Draw = "var pick = decision.Pick;";
 			var draw = body.IndexOf(Draw, StringComparison.Ordinal);
@@ -129,6 +131,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(half, Does.Contain("bool FirstDueHasIncome() => !RefreshHarvesterCounts() || harvestersLive > 0;"), "income = a live harvester; no harvester module = assumed");
 			Assert.That(half, Does.Contain("FirstCopyDue.Alive(playerResources.GetCashAndResources(), RollParameters.FirstDueCash, FirstDueHasIncome())"));
 			Assert.That(half, Does.Not.Contain("Random").And.Not.Contain("BotRng"), "no random number in the due service");
+			Assert.That(half, Does.Contain("const int FirstCopySweepTicks = 25;").And.Contain("FirstCopyDue.Step(rollDueAt[name], now, alive)"), "a sweep credits the time since the last advance");
 		}
 	}
 }

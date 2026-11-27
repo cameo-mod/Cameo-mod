@@ -725,8 +725,6 @@ namespace OpenRA.Mods.CA.Traits
 		bool FirstCopyDueOn => UnitRollOn && Info.FirstCopyDue && !ablateFirstCopyDue.Off(player, AblationIds.UnitFirstCopyDue);
 		readonly Dictionary<string, long> rollDueCredit = new(StringComparer.Ordinal);
 		readonly Dictionary<string, int> rollDueAt = new(StringComparer.Ordinal);
-		int rollDueIncomeTick = -1;
-		bool rollDueIncome;
 
 		// PERF-BOTTICK-01 (row ub_affordable_pool): the fill's cash state for the roll's afford filter, set just before each pick; rollNoneAffordable = the last roll found no member that passes.
 		readonly record struct RollCash(ProducerServiceBatch Batch, int Held, bool DepthQueue, long UnpaidQueued);
@@ -1378,6 +1376,10 @@ namespace OpenRA.Mods.CA.Traits
 				RefreshDifficultyTraits();
 				firstTick = false;
 			}
+
+			// FIRST-COPY-DUE-01: the due clocks are sampled on every bot visit, also while a queue is busy or production is paused (the roll alone would visit too rarely).
+			if (FirstCopyDueOn)
+				SweepFirstCopyClocks(false);
 
 			// TF-2: keep the reservation live even while unit production is paused — the floor
 			// must decay the moment its conditions stop holding, not linger until the next build.
@@ -3138,7 +3140,10 @@ namespace OpenRA.Mods.CA.Traits
 
 			// FIRST-COPY-DUE-01 (ub_first_copy_due): the due clocks of the never-ordered types move with the time this pool has been seen (only while the row is on).
 			if (FirstCopyDueOn)
-				AdvanceFirstCopyClocks(pool);
+			{
+				TrackFirstCopyClocks(pool);
+				SweepFirstCopyClocks(true);
+			}
 
 			// TIER-MIX-01 (ub_tech_lean): the dearest price of this fill's pool, for the afford gate; a re-roll after a refusal keeps the earlier top (the refused pick has left the pool).
 			if (TechLeanOn)
