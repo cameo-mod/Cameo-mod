@@ -3581,7 +3581,7 @@ namespace OpenRA.Mods.Common.Traits
 			return found;
 		}
 
-		static int GetTargetValue(Actor actor) => Math.Max(1, actor?.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 1);
+		static int GetTargetValue(Actor actor) => actor == null ? 1 : FransCommanderCoreBotModule.PositiveActorValue(actor);
 
 		int GetDefendedAssetPriority(Actor owned)
 		{

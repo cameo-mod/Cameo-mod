@@ -621,9 +621,12 @@ namespace OpenRA.Mods.Common.Traits
 			return (mission.SiteIntel.Actors ?? Array.Empty<FransSiteIntelActor>()).Any(a => a.ActorId == actor.ActorID);
 		}
 
+		// CONSOL-DUP-04: the one positive cost floor for a non-null actor. The null policy stays with each caller's own wrapper (this service: 0; the General's GetTargetValue: 1).
+		internal static int PositiveActorValue(Actor actor) => Math.Max(1, actor.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 1);
+
 		public int GetActorValue(Actor actor)
 		{
-			return actor == null ? 0 : Math.Max(1, actor.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 1);
+			return actor == null ? 0 : PositiveActorValue(actor);
 		}
 
 		public int EstimateReconEtaTicks(Actor subject, CPos targetCell) => EstimateMoveEtaTicks(subject, targetCell);

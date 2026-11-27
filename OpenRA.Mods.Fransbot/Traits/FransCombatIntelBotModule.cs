@@ -557,7 +557,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		int GetCombatValue(Actor actor)
 		{
-			var value = Math.Max(1, actor.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 1);
+			var value = FransCommanderCoreBotModule.PositiveActorValue(actor);
 			if (!actor.Info.HasTraitInfo<BuildingInfo>())
 				return value;
 

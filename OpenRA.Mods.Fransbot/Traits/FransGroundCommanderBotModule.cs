@@ -4328,7 +4328,7 @@ namespace OpenRA.Mods.Common.Traits
 			return GetGroundTacticalGroupValue(infantryValue, infantryCount, otherValue);
 		}
 
-		static int GetCombatValue(Actor actor) => Math.Max(1, actor.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 1);
+		static int GetCombatValue(Actor actor) => FransCommanderCoreBotModule.PositiveActorValue(actor);
 
 		void ResetActiveMission()
 		{
