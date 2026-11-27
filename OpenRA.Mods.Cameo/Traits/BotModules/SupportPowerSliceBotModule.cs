@@ -23,6 +23,7 @@ namespace OpenRA.Mods.Cameo.Traits
 	[TraitLocation(SystemActors.Player)]
 	[Desc("SUPPORTPOWER-SLICE-01 (row sp_slice, default off): the bot's support power target scan, a bounded number of candidates per bot tick.",
 		"While it is active it grants ActiveCondition, which the yaml uses to switch the engine's SupportPowerBotASModule instances off.",
+		"Waits are counted in world ticks, and a scan that runs over several ticks orders a target only if it is still legal, affordable and attractive at the end.",
 		"It has no decisions of its own: it uses the Decisions of every SupportPowerBotASModule declared on the player actor (so it must require a condition under which all of them apply).")]
 	public class SupportPowerSliceBotModuleInfo : ConditionalTraitInfo, Requires<SupportPowerManagerInfo>
 	{
@@ -114,12 +115,16 @@ namespace OpenRA.Mods.Cameo.Traits
 					continue;
 				}
 
-				// A recent attempt (no target, no money, or an order just issued): wait, as the engine module does. World ticks, not calls, so a gated bot needs no replay.
+				// A recent attempt (no target, no money, or an order just issued): wait. The wait is in world ticks. The engine module counts calls, and ModularBot replays it
+				// Clock.Elapsed times per gated visit (EngineReplay), so its wait is world ticks as well; this module is not in that list and must not be.
 				if (nextScanTick.TryGetValue(sp, out var at) && now < at)
 					continue;
 
 				if (!running.TryGetValue(sp, out var run))
 				{
+					if (!unlimited && budget <= 0)
+						continue;
+
 					if (sp.Info.Cost != 0 && playerResource.Cash + playerResource.Resources < sp.Info.Cost)
 					{
 						nextScanTick[sp] = now + decision.GetNextScanTime(random);
@@ -146,8 +151,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				running.Remove(sp);
 
 				// A scan that took more than one tick scored its best a while ago: the place must still be worth it now. A one-tick scan is the engine's loop and needs no second look.
-				var found = run.Scan.HasBest &&
-					(run.Scan.StartTick == now || decision.GetAttractiveness(run.BestPos, player) >= decision.MinimumAttractiveness);
+				var found = run.Scan.HasBest && (run.Scan.StartTick == now || StillWorthIt(sp, run, decision));
 				ScanLog(sp, run, found);
 				if (!found)
 				{
@@ -179,6 +183,13 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			stale.Clear();
 		}
+
+		// The end of a scan that ran over several ticks (Haiku review F1): the best actor must still be a legal candidate, the power must still be affordable,
+		// and the place it was scored at must still reach the minimum. None of this can change inside one tick, so the one-tick scan skips it.
+		bool StillWorthIt(SupportPowerInstance sp, Running run, SupportPowerDecisionAS decision) =>
+			Legal(run.Scan.Best, decision) &&
+			(sp.Info.Cost == 0 || playerResource.Cash + playerResource.Resources >= sp.Info.Cost) &&
+			decision.GetAttractiveness(run.BestPos, player) >= decision.MinimumAttractiveness;
 
 		// The engine module's candidate rule (FindAttackLocationToSupportPower), unchanged: nothing is a candidate here that is not one there.
 		bool Legal(Actor x, SupportPowerDecisionAS decision) =>

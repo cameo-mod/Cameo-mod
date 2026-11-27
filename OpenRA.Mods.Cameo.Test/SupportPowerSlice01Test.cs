@@ -152,7 +152,10 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(m, Does.Contain("a => Legal(a, decision),\n\t\t\t\t\ta => decision.GetAttractiveness(a.CenterPosition, player),\n\t\t\t\t\tdecision.MinimumAttractiveness,"));
 
 			// a scan that ran over several ticks is checked once more at its end; a one-tick scan is not (it is the engine's loop)
-			Assert.That(m, Does.Contain("(run.Scan.StartTick == now || decision.GetAttractiveness(run.BestPos, player) >= decision.MinimumAttractiveness);"));
+			Assert.That(m, Does.Contain("var found = run.Scan.HasBest && (run.Scan.StartTick == now || StillWorthIt(sp, run, decision));"));
+			Assert.That(m, Does.Contain("Legal(run.Scan.Best, decision) &&\n\t\t\t(sp.Info.Cost == 0 || playerResource.Cash + playerResource.Resources >= sp.Info.Cost) &&\n\t\t\tdecision.GetAttractiveness(run.BestPos, player) >= decision.MinimumAttractiveness;"),
+				"still a legal candidate, still affordable, still attractive");
+			Assert.That(Source("mods/Cameo/Traits/ModularBot.cs"), Does.Not.Contain("\"SupportPowerSliceBotModule\""), "world-tick waits: never in the EngineReplay list");
 
 			// the same order, the same waits
 			Assert.That(m, Does.Contain("new Order(sp.Key, supportPowerManager.Self, Target.FromCell(world, world.Map.CellContaining(run.BestPos)), false)\n\t\t\t\t\t{ SuppressVisualFeedback = true, ExtraData = uint.MaxValue });"));
