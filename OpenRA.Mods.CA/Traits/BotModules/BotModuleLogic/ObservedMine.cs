@@ -27,7 +27,7 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>
 		/// A remembered enemy building (frozen-layer record) is a fallback target when no preferred enemy is in sight: the record is valid, its ghost is shown
 		/// (the spot is fogged now), it is not hidden by a visibility modifier, its owner is an enemy, and it is a building that is not a husk. A record whose footprint
-		/// lies wholly in shroud (<c>FrozenActor.Shrouded</c>: no footprint cell explored) is not a memory of the place and never counts (Haiku review, FOG-FROZEN-01 rule).
+		/// lies wholly in shroud (<c>FrozenActor.Shrouded</c>: no footprint cell explored) is not a memory of the place and never counts (the FOG-FROZEN-01 rule).
 		/// </summary>
 		public static bool RememberedCandidate(bool valid, bool ghostShown, bool hidden, bool enemyOwner, bool building, bool husk, bool shrouded) =>
 			valid && ghostShown && !hidden && !shrouded && enemyOwner && building && !husk;
