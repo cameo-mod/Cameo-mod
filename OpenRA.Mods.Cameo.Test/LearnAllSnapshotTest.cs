@@ -102,7 +102,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(LearnAllSnapshot.ParseText(committed).Personalities, Is.Empty);
 
 			var ai = Fixture("mcv_deploy_ai.yaml");
-			Assert.That(ai, Does.Contain("\tGrantConditionOnBotOwner@learnall:\n\t\tCondition: learn_all\n\t\tBots: fransbot\n"), "armed for fransbot only = inert on master");
+			Assert.That(ai, Does.Contain("\tGrantConditionOnBotOwner@learnall:\n\t\tCondition: learn_all\n\t\tBots:\n"), "an empty Bots list = inert on master, the arm sets it; no fransbot grant");
+			Assert.That(ai, Does.Not.Contain("Condition: learn_all\n\t\tBots: fransbot"));
 			Assert.That(ai, Does.Contain("\tLearnAllBotModule:\n\t\tRequiresCondition: genericbot && learn_all\n"));
 			Assert.That(new LearnAllBotModuleInfo().LearnedFile, Is.EqualTo("ai/learned/learn_all.yaml"));
 		}
