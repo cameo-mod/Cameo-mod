@@ -24,6 +24,7 @@ geomean(the aggregate of all enemy players, counted per player, the main target 
 factions + the main target). A 1v1 game behaves exactly as before.
 
 Pipeline use (post-game plan step, after EVERY DEV game): python tools/ai/fit_learn_all.py --exposures <game_dir>/learn_all_exposure.jsonl
+  (ONE run per game: every exposure file of that game, e.g. learn_all_exposure.jsonl AND unit_effect_exposure.jsonl, goes in the same --exposures list; a later run for the same game with a new knob is refused, exit 7)
 Guards (exit codes): 3 = records of more than one game (no manual batch); 5 = invalid records (a missing, non-integer or mixed `seq`, a bad or missing
 game_id, a duplicate or missing `seat`, a game already applied under another seq, a malformed main_target_style or enemy weight); 4 = `seq` not above the
 snapshot's LastSeq (game order; LastSeq never decreases); 6 = the EXISTING snapshot is not a valid snapshot (bad root/version/entry, empty or truncated file):
@@ -394,37 +395,69 @@ def parse_text_strict(text):
             raise SnapshotError("%s is not an integer: %r" % (what, text_value))
 
     table, versions = Table(), []
+    singles, knob_keys = set(), set()
+
+    def once(name):
+        # Ambiguous persisted state is refused, never normalised: a repeated singleton header would silently overwrite the first.
+        if name in singles:
+            raise SnapshotError("duplicate %s block" % name)
+        singles.add(name)
+
     for head, children in entries:
         if head.startswith("Version:"):
+            if children:
+                raise SnapshotError("Version has children")
             versions.append(to_int(head.split(":", 1)[1], "Version"))
         elif head.startswith("LastSeq:"):
+            once("LastSeq")
+            if children:
+                raise SnapshotError("LastSeq has children")
             seq = to_int(head.split(":", 1)[1], "LastSeq")
             if seq < 0:
                 raise SnapshotError("LastSeq is negative")
             table.last_seq = seq
         elif head == "Games:":
+            once("Games")
             for c in children:
                 name, sep, value = c.rpartition(":")
                 if not sep or not name.strip():
                     raise SnapshotError("malformed Games entry: %r" % c)
-                table.games[name.strip()] = to_int(value, "Games entry " + name)
+                name = name.strip()
+                if not GAME_ID.match(name):
+                    raise SnapshotError("Games entry %r is not a game id" % name)
+                if name in table.games:
+                    raise SnapshotError("duplicate Games entry %r" % name)
+                game_seq = to_int(value, "Games entry " + name)
+                if game_seq < 0:
+                    raise SnapshotError("Games entry %r has a negative sequence" % name)
+                table.games[name] = game_seq
         elif head == "Applied:":
+            once("Applied")
             for c in children:
                 if not c.endswith(":") or c.count("|") != 2 or not c[:-1].strip():
                     raise SnapshotError("malformed Applied entry: %r" % c)
+                if c[:-1] in table.applied:
+                    raise SnapshotError("duplicate Applied entry %r" % c)
                 table.applied.add(c[:-1])
         elif head.startswith("Knob@") and head.endswith(":"):
             key = head[len("Knob@"):-1]
             split = key.find("__")
             if split <= 0 or split + 2 >= len(key):
                 raise SnapshotError("malformed knob key: %r" % head)
+            if key in knob_keys:
+                raise SnapshotError("duplicate knob block %r" % head)
+            knob_keys.add(key)
             axes = table.personalities.setdefault(key[:split], {}).setdefault(key[split + 2:], Axes())
             seen_global = False
+            seen_fields = set()
             for c in children:
                 name, sep, value = c.partition(":")
                 v = to_int(value, "knob value " + name) if sep else None
                 if v is None or not STORE_MIN <= v <= STORE_MAX:
                     raise SnapshotError("knob value missing or outside the store domain %d..%d: %r" % (STORE_MIN, STORE_MAX, c))
+                if name in seen_fields:
+                    raise SnapshotError("duplicate axis field %r in %s" % (name, head))
+                seen_fields.add(name)
                 if name == "Global":
                     axes.global_, seen_global = v, True
                 elif name.startswith("Own@") and len(name) > 4:
@@ -441,6 +474,15 @@ def parse_text_strict(text):
             raise SnapshotError("unknown top-level entry: %r" % head)
     if versions != [VERSION]:
         raise SnapshotError("Version must appear exactly once and be %d (found %r)" % (VERSION, versions))
+    # Sequence state must be consistent: games are applied in order, so LastSeq is exactly the largest game sequence; applied keys belong to a recorded game.
+    if table.games:
+        if table.last_seq is None or table.last_seq != max(table.games.values()):
+            raise SnapshotError("LastSeq %r is not the largest Games sequence %d" % (table.last_seq, max(table.games.values())))
+        stray = sorted({k.split("|", 1)[0] for k in table.applied} - set(table.games))
+        if stray:
+            raise SnapshotError("Applied entries of games with no Games sequence: %s" % ", ".join(stray))
+    elif table.last_seq is not None:
+        raise SnapshotError("LastSeq is present but no game has a recorded sequence")
     return table
 
 

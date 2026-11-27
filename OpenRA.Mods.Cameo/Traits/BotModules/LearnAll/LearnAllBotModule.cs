@@ -46,6 +46,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly OpenRA.Player player;
 		IBotCurrentPersonality[] personalityProviders;
 		IBotObservedMainTargetStyle[] styleProviders;
+		IBotMainTargetProvider[] mainTargetProviders;
+		string mainStyle;
 		LearnTable table;
 		string[] enemies = Array.Empty<string>();
 		string mainTarget = "";
@@ -77,8 +79,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			// S_obs: the observed style of the main target owner when a classifier provides one and the table has learned it; unseen, unknown or no provider = 0 = the exact
 			// three-axis result (null never fabricates a style, and nothing here reads an enemy's personality or true label).
-			var style = ObservedStyle();
-			var styleValue = style != null && axes.Style.TryGetValue(style, out var learnedStyle) ? learnedStyle / 1000.0 : 0.0;
+			var styleValue = mainStyle != null && axes.Style.TryGetValue(mainStyle, out var learnedStyle) ? learnedStyle / 1000.0 : 0.0;
 			values = new MixRoleValues(axes.Global / 1000.0, axes.Own(ownFaction) / 1000.0, enemyEff / 1000.0, styleValue);
 			return true;
 		}
@@ -96,7 +97,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			table ??= Load();
 			Refresh();
 			var personality = Personality();
-			return TryResolve(table, personality, knob, ownFaction, enemies, mainTarget, ObservedStyle(), out permille);
+			return TryResolve(table, personality, knob, ownFaction, enemies, mainTarget, mainStyle, out permille);
+		}
+
+		/// <summary>The public faction of the bot's authoritative main target, or "" when no provider names one (no target, a Random pick). Pure over its inputs so a test can drive the live path.</summary>
+		internal static string MainTargetFaction(IEnumerable<IBotMainTargetProvider> providers, Func<OpenRA.Player, string> publicFaction)
+		{
+			if (providers != null)
+				foreach (var provider in providers)
+				{
+					var target = provider.MainTarget;
+					if (target != null)
+						return publicFaction(target) ?? "";
+				}
+
+			return "";
 		}
 
 		/// <summary>The observed-style bucket of the main target owner from the B4 classifier (observation only), or null = unseen / no provider.</summary>
@@ -140,7 +155,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			refreshedAt = tick;
 			ownFaction = player.Faction?.InternalName ?? "";
-			mainTarget = PlanBanditBotModule.EnemyFactionOf(world, player);
+			// The main target and its observed style are read together, in the same refresh generation, so the faction and the style always describe the same target.
+			// No synthesized fallback: with no authoritative main target (or a Random pick) the main target is "" = no target, and the all-enemy aggregate applies, exactly as the
+			// trainer's seed does (LearnKnobAxes.EnemyEff). PlanBandit's dominant-faction fallback is NOT used here (Sol 02 finding 1).
+			mainTarget = MainTargetFaction(mainTargetProviders ??= player.PlayerActor.TraitsImplementing<IBotMainTargetProvider>().ToArray(), BotFactionView.PublicFactionOf);
+			mainStyle = mainTarget.Length > 0 ? ObservedStyle() : null;
 			enemies = world.Players
 				.Where(p => p != player && !p.NonCombatant && !p.Spectating && player.RelationshipWith(p) == PlayerRelationship.Enemy)
 				.Select(BotFactionView.PublicFactionOf)

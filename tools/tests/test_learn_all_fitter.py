@@ -215,7 +215,8 @@ class SnapshotSafety(unittest.TestCase):
         self.assertEqual(f.parse_text_strict(self.read().decode("utf-8")).last_seq, 1)
 
     def test_an_existing_invalid_snapshot_is_refused_and_left_byte_identical(self):
-        good = "BotLearnAll:\n\tVersion: 1\n\tLastSeq: 3\n\tApplied:\n\t\tg0|any|wave_role.frontline:\n\tKnob@any__wave_role.frontline:\n\t\tGlobal: 1041\n"
+        good = "BotLearnAll:\n\tVersion: 1\n\tLastSeq: 3\n\tGames:\n\t\tg0: 3\n\tApplied:\n\t\tg0|any|wave_role.frontline:\n\tKnob@any__wave_role.frontline:\n\t\tGlobal: 1041\n"
+        f.parse_text_strict(good)  # the reference text itself is valid
         bad_texts = {
             "empty": "",
             "whitespace": "  \n",
@@ -232,6 +233,21 @@ class SnapshotSafety(unittest.TestCase):
             "unknown top entry": good + "\tMystery: 1\n",
             "negative lastseq": good.replace("LastSeq: 3", "LastSeq: -3"),
             "bad indentation": good.replace("\t\tGlobal", "\t\t\tGlobal"),
+            # FIX-3 (Sol 02 finding 2): ambiguous persisted state is refused, never normalised
+            "duplicate lastseq": good + "\tLastSeq: 3\n",
+            "duplicate games block": good + "\tGames:\n\t\tg0: 3\n",
+            "duplicate games entry": good.replace("\t\tg0: 3\n", "\t\tg0: 3\n\t\tg0: 3\n"),
+            "negative game sequence": good.replace("g0: 3", "g0: -1").replace("LastSeq: 3", "LastSeq: 0"),
+            "lastseq is not the largest game sequence": good.replace("LastSeq: 3", "LastSeq: 2"),
+            "lastseq without games": good.replace("\tGames:\n\t\tg0: 3\n", ""),
+            "applied game without a games entry": good.replace("g0|any", "g7|any"),
+            "duplicate applied block": good + "\tApplied:\n\t\tg0|any|k2:\n",
+            "duplicate applied entry": good.replace("\t\tg0|any|wave_role.frontline:\n", "\t\tg0|any|wave_role.frontline:\n\t\tg0|any|wave_role.frontline:\n"),
+            "duplicate knob block": good + "\tKnob@any__wave_role.frontline:\n\t\tGlobal: 1200\n",
+            "duplicate global": good.replace("\t\tGlobal: 1041\n", "\t\tGlobal: 1041\n\t\tGlobal: 1200\n"),
+            "duplicate own axis": good + "\t\tOwn@gdi: 1100\n\t\tOwn@gdi: 1200\n",
+            "duplicate style axis": good + "\t\tStyle@boom: 1100\n\t\tStyle@boom: 1200\n",
+            "children under a scalar header": good.replace("\tLastSeq: 3\n", "\tLastSeq: 3\n\t\tx: 1\n"),
         }
         for name, text in bad_texts.items():
             self.write(text)
