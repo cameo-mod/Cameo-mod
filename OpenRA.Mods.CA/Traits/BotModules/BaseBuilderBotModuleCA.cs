@@ -2108,7 +2108,7 @@ namespace OpenRA.Mods.CA.Traits
 				// Custom maps may start with opening structures already present instead of producing them.
 				if (openingPowerCommittedCost == 0)
 					openingPowerCommittedCost = powerBuildings.Actors.Where(a => !a.IsDead)
-					.Sum(a => ProductionCost(queue, a.Info));
+						.Sum(a => ProductionCost(queue, a.Info));
 
 				if (!openingBarracksCostCommitted)
 				{
