@@ -25,10 +25,17 @@ factions + the main target). A 1v1 game behaves exactly as before.
 
 Pipeline use (post-game plan step, after EVERY DEV game): python tools/ai/fit_learn_all.py --exposures <game_dir>/learn_all_exposure.jsonl
 Guards (exit codes): 3 = records of more than one game (no manual batch); 5 = invalid records (a missing, non-integer or mixed `seq`, a bad or missing
-game_id, a duplicate or missing `seat`, a game already applied under another seq); 4 = `seq` not above the snapshot's LastSeq (game order; LastSeq never
-decreases). A (game, personality, knob) that was already applied is skipped (idempotent).
+game_id, a duplicate or missing `seat`, a game already applied under another seq, a malformed main_target_style or enemy weight); 4 = `seq` not above the
+snapshot's LastSeq (game order; LastSeq never decreases); 6 = the EXISTING snapshot is not a valid snapshot (bad root/version/entry, empty or truncated file):
+the fitter NEVER replaces it with a fresh table (never reset), it refuses the step, leaves the bytes untouched and logs the refusal; 7 = the game is already closed
+but the records would apply a (personality, knob) it never applied (chronological order: a closed game can only be replayed exactly, never extended).
+A (game, personality, knob) that was already applied is skipped (idempotent). A MISSING snapshot file is the one first-use case (empty table).
+The write is atomic (temp file + fsync + replace) after the new text re-parses to the same table; the prior snapshot is kept as learn_all.before.<game>.yaml and every
+refusal / write is appended to learn_all_fit.log, both next to the exposure file (the DEV game folder). Enemy `weight` = number of enemy players that entry stands for
+(per-player counting, 1..64): the E_eff seed expands it, exactly as the runtime reader sees one entry per player. No main target = Enemy(null) = the global value, as the runtime.
 """
 import argparse
+import datetime
 import json
 import math
 import os
@@ -175,11 +182,13 @@ class Seat:
 
 
 def _seat_enemy_eff(pre, enemies, main_target):
-    per = [pre.get_enemy(f) for (f, _w) in enemies]
-    main = pre.get_enemy(main_target) if main_target is not None else geo_mean(per)
-    if not per:
-        return main if main_target is not None else pre.global_
-    return team_enemy(per, main)
+    """E_eff of one seat from the pre-step axes, exactly as the runtime reader sees it: one entry PER PLAYER (an entry with weight w stands for w players), and the
+    main target's value, where no main target (None / unknown faction) is the global value (LearnTable.Resolve: axes.Enemy(null))."""
+    per = []
+    for (f, w) in enemies:
+        per.extend([pre.get_enemy(f)] * w)
+    main = pre.get_enemy(main_target)
+    return main if not per else team_enemy(per, main)
 
 
 def _add(mapping, key, contribution):
@@ -350,6 +359,86 @@ def parse_text(text):
     return table
 
 
+class SnapshotError(Exception):
+    """The existing snapshot is not a valid snapshot: the step is refused and the file is left untouched (never reset)."""
+
+
+def parse_text_strict(text):
+    """Strict parse for the FITTER (the release reader keeps its lenient, never-zero parser). Any anomaly raises SnapshotError instead of being dropped."""
+    if text is None or not text.strip():
+        raise SnapshotError("the snapshot file is empty")
+    lines = [ln.rstrip("\r") for ln in text.split("\n") if ln.strip() and not ln.lstrip().startswith("#")]
+    if lines[0] != ROOT + ":":
+        raise SnapshotError("the snapshot root is not %s:" % ROOT)
+    entries, current = [], None
+    for ln in lines[1:]:
+        depth = len(ln) - len(ln.lstrip("\t"))
+        body = ln.strip()
+        if depth == 1:
+            current = (body, [])
+            entries.append(current)
+        elif depth == 2 and current is not None:
+            current[1].append(body)
+        else:
+            raise SnapshotError("unexpected line depth %d: %r" % (depth, ln))
+
+    def to_int(text_value, what):
+        try:
+            return int(text_value.strip())
+        except ValueError:
+            raise SnapshotError("%s is not an integer: %r" % (what, text_value))
+
+    table, versions = Table(), []
+    for head, children in entries:
+        if head.startswith("Version:"):
+            versions.append(to_int(head.split(":", 1)[1], "Version"))
+        elif head.startswith("LastSeq:"):
+            seq = to_int(head.split(":", 1)[1], "LastSeq")
+            if seq < 0:
+                raise SnapshotError("LastSeq is negative")
+            table.last_seq = seq
+        elif head == "Games:":
+            for c in children:
+                name, sep, value = c.rpartition(":")
+                if not sep or not name.strip():
+                    raise SnapshotError("malformed Games entry: %r" % c)
+                table.games[name.strip()] = to_int(value, "Games entry " + name)
+        elif head == "Applied:":
+            for c in children:
+                if not c.endswith(":") or c.count("|") != 2 or not c[:-1].strip():
+                    raise SnapshotError("malformed Applied entry: %r" % c)
+                table.applied.add(c[:-1])
+        elif head.startswith("Knob@") and head.endswith(":"):
+            key = head[len("Knob@"):-1]
+            split = key.find("__")
+            if split <= 0 or split + 2 >= len(key):
+                raise SnapshotError("malformed knob key: %r" % head)
+            axes = table.personalities.setdefault(key[:split], {}).setdefault(key[split + 2:], Axes())
+            seen_global = False
+            for c in children:
+                name, sep, value = c.partition(":")
+                v = to_int(value, "knob value " + name) if sep else None
+                if v is None or not STORE_MIN <= v <= STORE_MAX:
+                    raise SnapshotError("knob value missing or outside the store domain %d..%d: %r" % (STORE_MIN, STORE_MAX, c))
+                if name == "Global":
+                    axes.global_, seen_global = v, True
+                elif name.startswith("Own@") and len(name) > 4:
+                    axes.own[name[4:]] = v
+                elif name.startswith("Enemy@") and len(name) > 6:
+                    axes.enemy[name[6:]] = v
+                elif name.startswith("Style@") and len(name) > 6:
+                    axes.style[name[6:]] = v
+                else:
+                    raise SnapshotError("unknown knob field: %r" % c)
+            if not seen_global:
+                raise SnapshotError("knob %s has no Global value" % head)
+        else:
+            raise SnapshotError("unknown top-level entry: %r" % head)
+    if versions != [VERSION]:
+        raise SnapshotError("Version must appear exactly once and be %d (found %r)" % (VERSION, versions))
+    return table
+
+
 # ---------------------------------------------------------------- pipeline
 
 def load_records(paths):
@@ -368,6 +457,7 @@ def load_records(paths):
 
 
 GAME_ID = re.compile(r"^[A-Za-z0-9_.\-]+\Z")
+MAX_ENEMY_WEIGHT = 64
 
 
 def _is_int(value):
@@ -389,6 +479,11 @@ def check_records(records):
     if any(not isinstance(x, str) or not x for x in seats) or len(set(seats)) != len(seats):
         return game, None, (5, "refused: game %s has a missing or duplicate seat id" % game)
     for r in records:
+        enemies = r.get("enemies", [])
+        for e in enemies if isinstance(enemies, list) else [None]:
+            w = e.get("weight", 1) if isinstance(e, dict) else None
+            if not _is_int(w) or not 1 <= w <= MAX_ENEMY_WEIGHT:
+                return game, None, (5, "refused: game %s seat %s has an enemy entry that is not an object with a weight 1..%d (the players it stands for)" % (game, r.get("seat"), MAX_ENEMY_WEIGHT))
         mts = r.get("main_target_style")
         if mts is not None and (not isinstance(mts, str) or not GAME_ID.match(mts)):
             return game, None, (5, "refused: game %s seat %s has a main_target_style %r that is not null or [A-Za-z0-9_.-]+ (it becomes a Style@ key)" % (game, r.get("seat"), mts))
@@ -403,6 +498,18 @@ def seats_by_knob(records):
         for k in rec.get("knobs", []):
             result.setdefault(k["knob"], []).append(Seat(rec.get("personality"), rec.get("own_faction"), enemies, rec.get("main_target"), rec.get("main_target_style"), k.get("signal")))
     return result
+
+
+def actionable_keys(game, records):
+    """The (game|personality|knob) keys apply_records WOULD apply for these records (a knob needs at least one finite signal; every distinct personality + 'any')."""
+    keys = set()
+    for knob, seats in seats_by_knob(records).items():
+        valid = [x for x in seats if _finite(x.signal)]
+        if not valid:
+            continue
+        for target in {x.personality for x in valid if x.personality and x.personality != ANY} | {ANY}:
+            keys.add("%s|%s|%s" % (game, target, knob))
+    return keys
 
 
 def apply_records(table, game, records):
@@ -434,16 +541,38 @@ def main(argv=None):
         return error[0]
 
     path = os.path.normpath(args.snapshot)
-    text = open(path, "r", encoding="utf-8").read() if os.path.exists(path) else ""
-    table = parse_text(text)
+    folder = os.path.dirname(os.path.abspath(args.exposures[0]))
+    log_path = os.path.join(folder, "learn_all_fit.log")
+
+    def log(line):
+        with open(log_path, "a", encoding="utf-8", newline="\n") as handle:
+            handle.write("%s\t%s\t%s\n" % (datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), game, line))
+
+    def refuse(code, message):
+        print(message, file=sys.stderr)
+        log("REFUSED exit=%d %s" % (code, message))
+        return code
+
+    # A missing snapshot is the one first-use case. An EXISTING one must be a fully valid snapshot: never reset, never silently repaired.
+    if os.path.exists(path):
+        old_text = open(path, "r", encoding="utf-8").read()
+        try:
+            table = parse_text_strict(old_text)
+        except SnapshotError as exc:
+            return refuse(6, "refused: the existing snapshot %s is not valid (%s); it was left untouched, no step was applied" % (path, exc))
+    else:
+        old_text, table = None, Table()
+
     known = table.games.get(game)
     already = known is not None or any(k.startswith(game + "|") for k in table.applied)
     if known is not None and known != seq:
-        print("refused: game %s was applied with seq %d, now seq %d" % (game, known, seq), file=sys.stderr)
-        return 5
+        return refuse(5, "refused: game %s was applied with seq %d, now seq %d" % (game, known, seq))
     if not already and table.last_seq is not None and seq <= table.last_seq:
-        print("refused: game seq %d is not above the snapshot's LastSeq %d (games are applied in order)" % (seq, table.last_seq), file=sys.stderr)
-        return 4
+        return refuse(4, "refused: game seq %d is not above the snapshot's LastSeq %d (games are applied in order)" % (seq, table.last_seq))
+    if already:
+        extra = sorted(actionable_keys(game, records) - table.applied)
+        if extra:
+            return refuse(7, "refused: game %s is already closed; it would newly apply %s (a closed game can only be replayed exactly, never extended)" % (game, ", ".join(extra)))
 
     steps = apply_records(table, game, records)
     if steps == 0:
@@ -455,10 +584,24 @@ def main(argv=None):
     if args.dry_run:
         sys.stdout.write(new_text)
         return 0
+    try:
+        if write_text(parse_text_strict(new_text)) != new_text:
+            raise SnapshotError("the new snapshot does not re-parse to the same table")
+    except SnapshotError as exc:
+        return refuse(6, "refused: the new snapshot failed its own validation (%s); the accepted snapshot was left untouched" % exc)
+    if old_text is not None:
+        with open(os.path.join(folder, "learn_all.before.%s.yaml" % game), "w", encoding="utf-8", newline="\n") as handle:
+            handle.write(old_text)
     tmp = path + ".tmp"
-    with open(tmp, "w", encoding="utf-8", newline="\n") as handle:
-        handle.write(new_text)
-    os.replace(tmp, path)
+    try:
+        with open(tmp, "w", encoding="utf-8", newline="\n") as handle:
+            handle.write(new_text)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(tmp, path)
+    except OSError as exc:
+        return refuse(6, "refused: the snapshot could not be written (%s); the accepted snapshot was left untouched" % exc)
+    log("APPLIED seq=%d steps=%d snapshot=%s" % (seq, steps, path))
     print("game %s: %d steps applied -> %s" % (game, steps, path))
     return 0
 

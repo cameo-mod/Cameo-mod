@@ -149,6 +149,45 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(onAllies.Find("any", "k").Style["boom"], Is.EqualTo(LearnAllMath.GeoMean(1000, 1000, 2828)), "the seed follows the main target the decision used");
 		}
 
+		static LearnTable PresetNodAllies(int nod, int allies)
+		{
+			var t = new LearnTable();
+			var a = t.Install("any", "k");
+			a.EnemyFaction["nod"] = nod;
+			a.EnemyFaction["allies"] = allies;
+			return t;
+		}
+
+		[Test]
+		public void TheStyleSeedCountsEveryEnemyPlayerNotEveryEntry()
+		{
+			// Terra 66B4FF2E finding 2: an entry with weight w is w players (the runtime reader is handed one faction per player).
+			var weighted = PresetNodAllies(1000, 16000);
+			LearnAllTrainer.ApplyGame(weighted, "g1", "k", [new SeatObservation("any", "gdi", [new EnemyObservation("nod", 3), new EnemyObservation("allies", 1)], "nod", "boom", 0.0)]);
+			Assert.That(weighted.Find("any", "k").Style["boom"], Is.EqualTo(LearnAllMath.GeoMean(1000, 1000, 1414)), "players nod, nod, nod, allies: geo = 2000, with the main target nod 1000 = 1414");
+
+			var perPlayer = PresetNodAllies(1000, 16000);
+			EnemyObservation[] four = [new("nod"), new("nod"), new("nod"), new("allies")];
+			LearnAllTrainer.ApplyGame(perPlayer, "g1", "k", [new SeatObservation("any", "gdi", four, "nod", "boom", 0.0)]);
+			Assert.That(perPlayer.Find("any", "k").Style["boom"], Is.EqualTo(weighted.Find("any", "k").Style["boom"]), "weights and per-player entries seed the same value");
+			Assert.That(weighted.Find("any", "k").Style["boom"],
+				Is.EqualTo(weighted.Resolve("any", "k", "gdi", ["nod", "nod", "nod", "allies"], "nod", null)).Within(1), "the seed is the decision value the runtime had one line earlier (no jump)");
+		}
+
+		[Test]
+		public void ANullMainTargetIsTheGlobalValueExactlyLikeTheRuntimeReader()
+		{
+			// Terra 66B4FF2E open item: the trainer's no-target seed must equal what LearnTable.Resolve (Enemy(null) = Global) returned for the decision.
+			var table = PresetNodAllies(1000, 16000);
+			EnemyObservation[] enemies = [new("nod", 3), new("allies", 1)];
+			LearnAllTrainer.ApplyGame(table, "g1", "k", [new SeatObservation("any", "gdi", enemies, null, "turtle", 0.0)]);
+			Assert.That(table.Find("any", "k").Style["turtle"], Is.EqualTo(LearnAllMath.GeoMean(1000, 1000, 1414)), "E_eff = geo(players 2000, Global 1000), never the mean of the seats");
+			Assert.That(LearnAllTrainer.SeatEnemyEff(table.Find("any", "k"), [new EnemyObservation("nod", 3), new EnemyObservation("allies", 1)], null), Is.EqualTo(1414));
+			Assert.That(LearnAllTrainer.SeatEnemyEff(table.Find("any", "k"), [new EnemyObservation("nod", 3), new EnemyObservation("allies", 1)], "unknown_faction"), Is.EqualTo(1414), "an unknown faction is the global value too");
+			Assert.That(LearnAllTrainer.SeatEnemyEff(table.Find("any", "k"), [], null), Is.EqualTo(table.Find("any", "k").Global));
+			Assert.That(LearnAllTrainer.SeatEnemyEff(table.Find("any", "k"), [new EnemyObservation("nod", 1000)], "nod"), Is.EqualTo(1000), "a huge weight is clamped, not looped");
+		}
+
 		[Test]
 		public void TheUpdateBudgetIsDividedAcrossEnemySeatsByWeight()
 		{

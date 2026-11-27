@@ -178,12 +178,25 @@ namespace OpenRA.Mods.Cameo.Dev
 			}
 		}
 
-		/// <summary>The enemy value of one seat's match-up: TeamEnemy(per observed enemy seat, main target), all from the pre-step axes. No main target = the mean of the seats.</summary>
-		internal static int SeatEnemyEff(LearnKnobAxes pre, List<EnemyObservation> enemies, string mainTarget)
+		/// <summary>The most enemy players one entry may stand for (the python fitter refuses a larger weight): a team game has far fewer.</summary>
+		const int MaxEnemyWeight = 64;
+
+		/// <summary>
+		/// The enemy value of one seat's match-up, exactly as the runtime reader (LearnTable.Resolve) sees it, from the pre-step axes: ONE entry PER PLAYER (an observation with
+		/// weight w stands for w players, so it is counted w times) combined with the main target's value; no main target (null or an unknown faction) = Enemy(null) = the
+		/// global value, never a mean of the seats. Terra 66B4FF2E findings 2 and the no-target parity item.
+		/// </summary>
+		public static int SeatEnemyEff(LearnKnobAxes pre, List<EnemyObservation> enemies, string mainTarget)
 		{
-			var per = enemies.Select(e => pre.Enemy(e.Faction)).ToArray();
-			var main = mainTarget != null ? pre.Enemy(mainTarget) : LearnAllMath.GeoMean(per);
-			return per.Length == 0 ? (mainTarget != null ? main : pre.Global) : LearnAllMath.TeamEnemy(per, main);
+			var per = new List<int>();
+			foreach (var e in enemies)
+			{
+				for (var i = 0; i < Math.Min(e.Weight, MaxEnemyWeight); i++)
+					per.Add(pre.Enemy(e.Faction));
+			}
+
+			var main = pre.Enemy(mainTarget);
+			return per.Count == 0 ? main : LearnAllMath.TeamEnemy(per.ToArray(), main);
 		}
 
 		static void Copy(LearnKnobAxes from, LearnKnobAxes to)

@@ -117,6 +117,149 @@ class GoldenReplay(unittest.TestCase):
         self.assertEqual(t.personalities["any"]["k"].style["turtle"], 961)
 
 
+class PerPlayerSeed(unittest.TestCase):
+    """Terra 66B4FF2E finding 2 + no-target parity: the V3 seed counts PLAYERS (an entry with weight w is w players) and no main target = the global value."""
+
+    def preset(self, nod, allies):
+        t = f.Table()
+        axes = t.personalities.setdefault("any", {}).setdefault("k", f.Axes())
+        axes.enemy["nod"] = nod
+        axes.enemy["allies"] = allies
+        return t
+
+    def test_a_weighted_entry_counts_once_per_player(self):
+        # A (nod) weight 3 = 1000, B (allies) weight 1 = 16000, main = A: all-player geomean = (1000^3 x 16000)^(1/4) = 2000, E_eff = geo(2000, 1000) = 1414.
+        t = self.preset(1000, 16000)
+        f.apply_game(t, "g1", "k", [f.Seat("any", "gdi", [("nod", 3), ("allies", 1)], "nod", "boom", 0.0)])
+        self.assertEqual(t.personalities["any"]["k"].style["boom"], f.geo_mean([1000, 1000, 1414]), "per-player counting, not one entry per record (that would be 4000 -> E_eff 2000)")
+
+    def test_the_same_players_as_separate_entries_give_the_same_seed(self):
+        a, b = self.preset(1000, 16000), self.preset(1000, 16000)
+        f.apply_game(a, "g1", "k", [f.Seat("any", "gdi", [("nod", 3), ("allies", 1)], "nod", "boom", 0.0)])
+        f.apply_game(b, "g1", "k", [f.Seat("any", "gdi", [("nod", 1), ("nod", 1), ("nod", 1), ("allies", 1)], "nod", "boom", 0.0)])
+        self.assertEqual(a.personalities["any"]["k"].style, b.personalities["any"]["k"].style)
+
+    def test_no_main_target_uses_the_global_value_like_the_runtime(self):
+        t = self.preset(1000, 4000)
+        f.apply_game(t, "g1", "k", [f.Seat("any", "gdi", [("nod", 1), ("allies", 1)], None, "boom", 0.0)])
+        axes = t.personalities["any"]["k"]
+        runtime = f.team_enemy([1000, 4000], axes.global_)
+        self.assertEqual(f._seat_enemy_eff(self.preset(1000, 4000).personalities["any"]["k"], [("nod", 1), ("allies", 1)], None), runtime)
+        self.assertEqual(axes.style["boom"], f.seed_style(1000, 1000, runtime))
+
+    def test_the_resolve_of_the_seeding_game_matches_the_seed_the_trainer_used(self):
+        # The point of the fix: the pre-step decision value (runtime Resolve with style unseen) equals the decision value right after a zero-signal seeding step.
+        t = self.preset(1000, 16000)
+        before = t.resolve("any", "k", "gdi", ["nod", "nod", "nod", "allies"], "nod", None)
+        f.apply_game(t, "g1", "k", [f.Seat("any", "gdi", [("nod", 3), ("allies", 1)], "nod", "boom", 0.0)])
+        after = t.resolve("any", "k", "gdi", ["nod", "nod", "nod", "allies"], "nod", "boom")
+        self.assertLessEqual(abs(after - before), 1, "a fresh style must not make the decision jump")
+
+
+class SnapshotSafety(unittest.TestCase):
+    """Terra 66B4FF2E findings 1 and 4: an existing invalid snapshot is never reset; a closed game is never extended; the write is atomic."""
+
+    def setUp(self):
+        self.dir = tempfile.TemporaryDirectory()
+        self.snap = os.path.join(self.dir.name, "learn_all.yaml")
+
+    def tearDown(self):
+        self.dir.cleanup()
+
+    def record(self, game, seq, knob="wave_role.frontline", signal=1.0, seat="s1"):
+        return {"game_id": game, "seq": seq, "seat": seat, "personality": "rush", "own_faction": "gdi", "main_target": "nod", "main_target_style": "boom",
+                "enemies": [{"faction": "nod", "weight": 1}], "knobs": [{"knob": knob, "signal": signal}]}
+
+    def exposure(self, game, seq, **kw):
+        path = os.path.join(self.dir.name, "exp_%s_%s.jsonl" % (game, kw.get("knob", "k")))
+        open(path, "w", encoding="utf-8").write(json.dumps(self.record(game, seq, **kw)) + "\n")
+        return path
+
+    def run_fit(self, path):
+        return f.main(["--exposures", path, "--snapshot", self.snap])
+
+    def write(self, text):
+        open(self.snap, "w", encoding="utf-8", newline="\n").write(text)
+
+    def read(self):
+        return open(self.snap, "rb").read()
+
+    def test_a_missing_snapshot_is_the_only_first_use(self):
+        self.assertEqual(self.run_fit(self.exposure("g1", 1)), 0)
+        self.assertEqual(f.parse_text_strict(self.read().decode("utf-8")).last_seq, 1)
+
+    def test_an_existing_invalid_snapshot_is_refused_and_left_byte_identical(self):
+        good = "BotLearnAll:\n\tVersion: 1\n\tLastSeq: 3\n\tApplied:\n\t\tg0|any|wave_role.frontline:\n\tKnob@any__wave_role.frontline:\n\t\tGlobal: 1041\n"
+        bad_texts = {
+            "empty": "",
+            "whitespace": "  \n",
+            "wrong root": good.replace("BotLearnAll:", "SomethingElse:"),
+            "other version": good.replace("Version: 1", "Version: 2"),
+            "no version": good.replace("\tVersion: 1\n", ""),
+            "bad version": good.replace("Version: 1", "Version: x"),
+            "truncated value": good.replace("Global: 1041", "Global:"),
+            "value outside the store": good.replace("Global: 1041", "Global: 99999"),
+            "zero value": good.replace("Global: 1041", "Global: 0"),
+            "knob without global": good.replace("\t\tGlobal: 1041\n", "\t\tOwn@gdi: 1100\n"),
+            "unknown field": good + "\t\tBogus: 5\n",
+            "malformed applied": good.replace("g0|any|wave_role.frontline:", "g0"),
+            "unknown top entry": good + "\tMystery: 1\n",
+            "negative lastseq": good.replace("LastSeq: 3", "LastSeq: -3"),
+            "bad indentation": good.replace("\t\tGlobal", "\t\t\tGlobal"),
+        }
+        for name, text in bad_texts.items():
+            self.write(text)
+            before = self.read()
+            self.assertEqual(self.run_fit(self.exposure("g9", 9)), 6, name)
+            self.assertEqual(self.read(), before, name + ": the bytes must not change")
+        log = open(os.path.join(self.dir.name, "learn_all_fit.log"), encoding="utf-8").read()
+        self.assertEqual(log.count("REFUSED exit=6"), len(bad_texts), "every refusal is logged next to the exposure file")
+
+    def test_the_prior_snapshot_is_kept_and_the_write_is_atomic(self):
+        self.assertEqual(self.run_fit(self.exposure("g1", 1)), 0)
+        first = self.read()
+        self.assertEqual(self.run_fit(self.exposure("g2", 2)), 0)
+        self.assertEqual(open(os.path.join(self.dir.name, "learn_all.before.g2.yaml"), "rb").read(), first, "the accepted snapshot before the step is preserved")
+        self.assertFalse(os.path.exists(self.snap + ".tmp"))
+
+    def test_an_interrupted_write_leaves_the_accepted_snapshot_untouched(self):
+        self.assertEqual(self.run_fit(self.exposure("g1", 1)), 0)
+        before = self.read()
+        real = f.os.replace
+        try:
+            def boom(src, dst):
+                raise OSError("simulated crash before the rename")
+            f.os.replace = boom
+            self.assertEqual(self.run_fit(self.exposure("g2", 2)), 6)
+        finally:
+            f.os.replace = real
+        self.assertEqual(self.read(), before)
+        self.assertEqual(f.parse_text_strict(before.decode("utf-8")).last_seq, 1)
+
+    def test_a_closed_game_cannot_be_extended_with_a_new_knob(self):
+        self.assertEqual(self.run_fit(self.exposure("g1", 1, knob="a")), 0)
+        self.assertEqual(self.run_fit(self.exposure("g2", 2, knob="a")), 0)
+        before = self.read()
+        self.assertEqual(self.run_fit(self.exposure("g1", 1, knob="b")), 7, "old game, new knob, after a newer game")
+        self.assertEqual(self.read(), before)
+
+    def test_an_exact_replay_of_a_closed_game_is_a_no_op(self):
+        self.assertEqual(self.run_fit(self.exposure("g1", 1, knob="a")), 0)
+        self.assertEqual(self.run_fit(self.exposure("g2", 2, knob="a")), 0)
+        before = self.read()
+        self.assertEqual(self.run_fit(self.exposure("g1", 1, knob="a")), 0)
+        self.assertEqual(self.read(), before)
+
+    def test_an_enemy_weight_outside_one_to_sixty_four_is_refused(self):
+        for weight in (0, -1, 65, 1.5, "2"):
+            rec = self.record("g1", 1)
+            rec["enemies"][0]["weight"] = weight
+            path = os.path.join(self.dir.name, "w.jsonl")
+            open(path, "w", encoding="utf-8").write(json.dumps(rec) + "\n")
+            self.assertEqual(self.run_fit(path), 5, repr(weight))
+        self.assertFalse(os.path.exists(self.snap), "nothing was written")
+
+
 class Pipeline(unittest.TestCase):
     def setUp(self):
         self.dir = tempfile.TemporaryDirectory()

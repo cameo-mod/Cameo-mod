@@ -983,6 +983,95 @@
     true
    ],
    "expect_text": "BotLearnAll:\n\tVersion: 1\n\tApplied:\n\t\tg1|any|k:\n\t\tg2|any|k:\n\t\tg3|any|k:\n\tKnob@any__k:\n\t\tGlobal: 1000\n\t\tOwn@allies: 1000\n\t\tOwn@gdi: 1000\n\t\tEnemy@allies: 1000\n\t\tEnemy@nod: 1000\n\t\tStyle@boom: 1000\n"
+  },
+  {
+   "name": "per_player_weights_and_no_target",
+   "applications": [
+    {
+     "game_id": "g1",
+     "knob": "k",
+     "seats": [
+      {
+       "personality": "any",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "weight": 1
+        }
+       ],
+       "main_target": "nod",
+       "main_target_style": null,
+       "signal": 1.0
+      }
+     ]
+    },
+    {
+     "game_id": "g2",
+     "knob": "k",
+     "seats": [
+      {
+       "personality": "any",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "allies",
+         "weight": 1
+        }
+       ],
+       "main_target": "allies",
+       "main_target_style": null,
+       "signal": -1.0
+      }
+     ]
+    },
+    {
+     "game_id": "g3",
+     "knob": "k",
+     "seats": [
+      {
+       "personality": "any",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "weight": 3
+        },
+        {
+         "faction": "allies",
+         "weight": 1
+        }
+       ],
+       "main_target": "nod",
+       "main_target_style": "boom",
+       "signal": 0.5
+      },
+      {
+       "personality": "any",
+       "own": "gdi",
+       "enemies": [
+        {
+         "faction": "nod",
+         "weight": 3
+        },
+        {
+         "faction": "allies",
+         "weight": 1
+        }
+       ],
+       "main_target": null,
+       "main_target_style": "turtle",
+       "signal": 0.5
+      }
+     ]
+    }
+   ],
+   "expect_text": "BotLearnAll:\n\tVersion: 1\n\tApplied:\n\t\tg1|any|k:\n\t\tg2|any|k:\n\t\tg3|any|k:\n\tKnob@any__k:\n\t\tGlobal: 1020\n\t\tOwn@gdi: 1020\n\t\tEnemy@allies: 1005\n\t\tEnemy@nod: 1057\n\t\tStyle@boom: 1032\n\t\tStyle@turtle: 1025\n",
+   "changed": [
+    true,
+    true,
+    true
+   ]
   }
  ]
 }

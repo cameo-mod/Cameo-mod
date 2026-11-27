@@ -143,6 +143,43 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TheObservedStyleOfTheMainTargetIsTheFourthAxisAndAnUnseenOrUnknownOneIsTheThreeAxisResult()
+		{
+			var table = LearnAllSnapshot.ParseText("BotLearnAll:\n\tVersion: 1\n\tKnob@any__raid.k:\n\t\tGlobal: 1200\n\t\tOwn@gdi: 900\n\t\tEnemy@nod: 1500\n\t\tStyle@boom: 2000\n");
+			string[] enemies = ["nod"];
+			Assert.That(LearnAllBotModule.TryResolve(table, "any", "raid.k", "gdi", enemies, "nod", "boom", out var four), Is.True);
+			Assert.That(four, Is.EqualTo(table.Resolve("any", "raid.k", "gdi", enemies, "nod", "boom")), "parity with LearnTable.Resolve (four axes)");
+			Assert.That(four, Is.EqualTo(LearnAllMath.Resolve(1200, 900, 1500, 2000)));
+
+			var three = table.Resolve("any", "raid.k", "gdi", enemies, "nod", null);
+			Assert.That(three, Is.EqualTo(LearnAllMath.Resolve(1200, 900, 1500, 0)));
+			Assert.That(four, Is.Not.EqualTo(three));
+			foreach (var unseen in new[] { null, "", "never_learned" })
+			{
+				Assert.That(LearnAllBotModule.TryResolve(table, "any", "raid.k", "gdi", enemies, "nod", unseen, out var v), Is.True, "style " + unseen);
+				Assert.That(v, Is.EqualTo(three), "unseen / unknown style = V3, no fabricated style");
+			}
+
+			Assert.That(LearnAllBotModule.TryResolve(table, "any", "raid.k", "gdi", enemies, "nod", out var sixArg), Is.True);
+			Assert.That(sixArg, Is.EqualTo(three), "the old six-argument seam is the three-axis result");
+			Assert.That(LearnAllBotModule.TryResolve(table, "any", "no.such.knob", "gdi", enemies, "nod", "boom", out _), Is.False, "an unknown knob stays false with a style");
+		}
+
+		[Test]
+		public void TheStyleProviderSeamIsObservationOnlyAndBothConsumersReadIt()
+		{
+			var seam = Source("mods/CA/Traits/BotModules/IBotObservedMainTargetStyle.cs");
+			Assert.That(seam, Does.Contain("string ObservedStyle { get; }"));
+			Assert.That(seam, Does.Contain("OBSERVATION ONLY"));
+			Assert.That(typeof(OpenRA.Mods.CA.Traits.IBotObservedMainTargetStyle).Assembly, Is.SameAs(typeof(OpenRA.Mods.CA.Traits.IBotLearnedKnobs).Assembly));
+
+			var code = Source("mods/Cameo/Traits/BotModules/LearnAll/LearnAllBotModule.cs");
+			Assert.That(code, Does.Contain("TraitsImplementing<IBotObservedMainTargetStyle>().FirstEnabledTraitOrDefault()?.ObservedStyle"));
+			Assert.That(code, Does.Contain("mainTarget, ObservedStyle(), out permille)"), "TryResolvePermille reads the style");
+			Assert.That(code, Does.Contain("axes.Style.TryGetValue(style, out var learnedStyle) ? learnedStyle / 1000.0 : 0.0"), "TryRoleValues reads it; unknown = 0 = V3");
+		}
+
+		[Test]
 		public void TheProviderIsTheOnlyNewSeamAndItAnswersNothingWhenOffAblatedOrUnlearned()
 		{
 			var code = Source("mods/Cameo/Traits/BotModules/LearnAll/LearnAllBotModule.cs");
