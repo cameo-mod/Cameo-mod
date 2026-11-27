@@ -222,6 +222,36 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"The engine module's own count/cash gates still apply to its requests on top of this.")]
 		public readonly int McvTargetCount = 3;
 
+		[Desc("TEAM-EXPAND P1: build the public authored map atlas.")]
+		public readonly bool TeamExpandAtlas = false;
+
+		[Desc("TEAM-EXPAND P1: estimate depletion from observed stock at served fields.")]
+		public readonly bool TeamExpandForecast = false;
+
+		[Desc("TEAM-EXPAND P1: reserve a team site before requesting a construction MCV.")]
+		public readonly bool TeamExpandClaim = false;
+
+		[Desc("TEAM-EXPAND P1: raise the yard target from public site capacity and active player count.")]
+		public readonly bool TeamExpandCapacityFloor = false;
+
+		public readonly int TeamExpandLargeMapDiagonal = 180;
+		public readonly int TeamExpandSmallClaims = 1;
+		public readonly int TeamExpandLargeClaims = 2;
+		public readonly int TeamExpandMaxExtraYards = 4;
+		public readonly int TeamExpandBidSites = 8;
+		public readonly int TeamExpandMcvBuildTicks = 875;
+		public readonly int TeamExpandTravelTicksPerCell = 12;
+		public readonly int TeamExpandDeployTicks = 100;
+		public readonly int TeamExpandRefineryBuildTicks = 750;
+		public readonly int TeamExpandSafetyMarginTicks = 750;
+		public readonly int TeamExpandStockWeight = 16;
+		public readonly int TeamExpandRegrowthWeight = 32;
+		public readonly int TeamExpandAnchorDistanceWeight = 2;
+		public readonly int TeamExpandDistanceWeight = 4;
+		public readonly int TeamExpandThreatWeight = 1;
+		public readonly int TeamExpandContestedWeight = 1;
+		public readonly int TeamExpandEnemyProximityWeight = 4;
+
 		[Desc("UT-4 (AI_ARCHITECTURE §12.13): the TechRush<->Expansion utility axis scales the appetite —",
 			"an Expansion-leaning personality raises the effective McvTargetCount, a TechRush-leaning one",
 			"lowers it. Needs DriveMcvRequests. genericbot-only module, so classic is unaffected.")]
@@ -605,7 +635,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 	public partial class ExpansionPlannerBotModule : ConditionalTrait<ExpansionPlannerBotModuleInfo>, IBotTick, IBotExpansionTargetProvider,
 		IBotMcvExpansionSiteProvider, IBotPositionsUpdated, IBotExpansionAssistProvider,
-		IBotProtectionRequestProvider, IBotScoutInterestProvider
+		IBotProtectionRequestProvider, IBotScoutInterestProvider, IGameSaveTraitData, INotifyOtherProduction
 	{
 		public readonly struct FieldScore
 		{
@@ -3120,7 +3150,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			// REF-1 B2: the request rides under the cash reserve — queueing the MCV costs nothing until
 			// production starts, so the standing want must not wait for a re-plan that happens to see cash.
-			if (!McvDue(farFieldFree, active + queued, targetCount))
+			if (ExpansionClaimOn && (queued > 0 || !TryReserveExpansionRequest(bot, active, ref targetCount)))
+				return;
+
+			if (!McvDue(ExpansionClaimOn || farFieldFree, active + queued, targetCount))
 				return;
 
 			var unitBuilder = unitBuilders.FirstEnabledTraitOrDefault();
@@ -3153,6 +3186,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			unitBuilder.RequestUnitProduction(bot, mcvType);
+
+			// The claim is committed only when the request is on the builder's books; a request that did not land books nothing.
+			if (ExpansionClaimOn && ExpansionRequestPolicy.ShouldCommit(unitBuilder.RequestedProductionCount(bot, mcvType)))
+				CommitExpansionRequest(mcvType);
 #if CAMEO_DEV_LOGGING
 			if (YardRampOn)
 				Log.Write("debug", $"AI ({player.ClientIndex}): RM-03 ramp floor {rampFloor} vs target {preRampTarget} / cover {coverFloor}: "
@@ -3181,6 +3218,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			if (!Info.DriveMcvSite)
 				return null;
+
+			if (ExpansionClaimOn && RoleOf(mcv.Info) == McvRole.Expansion)
+			{
+				var site = TeamClaimedMcvSite(mcv, out var tracked);
+				if (tracked)
+					return site;
+			}
 
 			var tick = world.WorldTick;
 			var locomotor = mcv.TraitOrDefault<Mobile>()?.Locomotor;
@@ -3740,6 +3784,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			scores.Sort(CompareFieldScore);
 			LastScores = scores;
+			ObserveExpansionDepletion(refineryCells);
 			var previous = Target?.Index;
 			crawlOwnCells = buildingCells;
 			Target = ChooseTarget(scores);
