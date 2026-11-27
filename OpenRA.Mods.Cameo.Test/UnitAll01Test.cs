@@ -154,7 +154,9 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(body, Does.Not.Contain("GetUnitsToBuildForCategory"), "the derived or composition table never replaces the yaml fractions");
 			Assert.That(body, Does.Not.Contain("ChooseCounter").And.Not.Contain("ChooseWaveMixRole").And.Not.Contain("ChooseRoleDeficit"));
 			Assert.That(body, Does.Contain("fractions[i] = RollParameters.Fraction(name);"));
-			Assert.That(body, Does.Contain("UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct, boosts)"));
+			// P5 a3: the weights step moved into the pick arbiter (R2, then the draw R3); the roll hands it the same four arrays and the floor
+			Assert.That(body, Does.Contain("UnitPickArbiter.Decide(fractions, biases, counterPcts, RollParameters.FloorPct, boosts, coreLift,"));
+			Assert.That(Source("mods/CA/Traits/BotModules/BotModuleLogic/UnitPickArbiter.cs"), Does.Contain("var weights = UnitRoll.Weights(fractions, biases, counterPcts, floorPct, boosts);"));
 		}
 
 		// Opus ruling 1: no kept gate may block a listed type forever. The aircraft caps are waived for the FIRST build of a type (both in the candidate filter and after the pick),
@@ -269,7 +271,12 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(UnitRoll.FirstAdmits(0), Is.False, "an empty bank still waits");
 
 			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
-			Assert.That(u, Does.Contain("var paygo = roll && rollFirst && UnitRoll.FirstAdmits(batch.BankLeft);\n\t\t\t\t\tvar cost = paygo ? 0 : fullCost;"), "only the first build sees cost 0 at the afford and reserve gates");
+			// (P5 a4: the admission list moved into the pick arbiter, UnitPickArbiter.Admit: the same first-build test, the same cost 0, the module hands it the same inputs)
+			var arbiter = Source("mods/CA/Traits/BotModules/BotModuleLogic/UnitPickArbiter.cs");
+			Assert.That(arbiter, Does.Contain("var paygo = roll && first && UnitRoll.FirstAdmits(bankLeft);"), "only the first build sees cost 0 at the afford and reserve gates");
+			Assert.That(arbiter, Does.Contain("return new Admission(paygo || leaned ? 0 : fullCost, paygo, leaned, AdmitRule(paygo, leaned));"));
+			Assert.That(u, Does.Contain("var admission = UnitPickArbiter.Admit(roll, rollFirst, batch.BankLeft, fullCost,"));
+			Assert.That(u, Does.Contain("var cost = admission.GateCost;"));
 			Assert.That(u, Does.Contain("batch.Reserve(queue, fullCost);"), "the order still reserves its full price");
 			Assert.That(u, Does.Not.Contain("rollFirstOpen").And.Not.Contain("RollOpenFirst"), "no open-slot exclusion any more");
 
@@ -347,8 +354,12 @@ namespace OpenRA.Mods.Cameo.Test
 
 			// the module draws exactly this way
 			var u = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
-			Assert.That(u, Does.Contain("var units = UnitRoll.Quantize(weights);"));
-			Assert.That(u, Does.Contain("UnitRoll.Pick(units, BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(UnitRoll.Sum(units)))"));
+			// P5 a3: the quantize and the one draw live in the pick arbiter; the draw is still this module's own stream, exactly one Next(bound)
+			var arbiter = Source("mods/CA/Traits/BotModules/BotModuleLogic/UnitPickArbiter.cs");
+			Assert.That(arbiter, Does.Contain("var units = UnitRoll.Quantize(weights);"));
+			Assert.That(arbiter, Does.Contain("var pick = UnitRoll.Pick(units, draw(bound));"));
+			Assert.That(arbiter.Split(new[] { "draw(" }, StringSplitOptions.None).Length - 1, Is.EqualTo(1), "one draw call, no other");
+			Assert.That(u, Does.Contain("Func<int, int> RollDraw => rollDraw ??= n => BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(n);"));
 		}
 
 		[Test]
@@ -825,11 +836,9 @@ namespace OpenRA.Mods.Cameo.Test
 			foreach (var signature in new[] { "ActorInfo ChooseRollUnit(", "void RollPickLog(", "void RollStartLog(", "void RollEmptyLog(", "void RollCappedLog(", "int RollStrength(int profile)", "void RollExclude(" })
 				outside = outside.Replace(Body(signature), "");
 
-			// V08F gate fix, TIER-MIX-01 (row ub_tech_lean): the one roll term read outside the roll methods is the ramp of the tech-lean admission, and it sits behind
-			// `roll &&`, so with the roll off it is never evaluated and the old chooser runs unchanged.
-			const string TechLeanRamp = "var leaned = roll && !paygo && TechLeanOn && TechLean.Admits(fullCost, rollPoolMaxCost, held, world.WorldTick, RollParameters.RampTicks,";
-			Assert.That(outside, Does.Contain(TechLeanRamp), "the tech-lean ramp is read only behind the roll switch");
-			outside = outside.Replace(TechLeanRamp, "");
+			// TIER-MIX-01 (b73e77aa) reads the ramp tick through the table on the ONE line of the fill that decides the admission; P5 a2 adds the techlean.top|bank inputs and P5 (b) the techlean.start input to that line (R4, the
+			// admission predicate; since a4 it is the UnitPickArbiter.Admit call): that line is the single read allowed outside the roll methods (the pin had no allowance for it, the lean line was added after the pin).
+			outside = string.Join("\n", outside.Split('\n').Where(l => !l.Contains("UnitPickArbiter.Admit(")));
 
 			foreach (var term in new[] { "RollParameters.", "rollAvailableSince[", "rollAvailableSince.", "rollPickIds.", "rollPickSeq", "rollExcluded.", "UnitRoll.Quantize", "UnitRoll.FirstBoost" })
 			{
@@ -973,7 +982,8 @@ namespace OpenRA.Mods.Cameo.Test
 
 			Assert.That(u, Does.Contain("RollParameters.Strength(UnitRoll.ProfileNames[profile])"));
 			// V08E re-pin: 686ca394 added the FirstBoost arguments, still all read from Info
-			Assert.That(u, Does.Contain("new UnitRollTable(Info.UnitsToBuild, Info.UnitRollBias, Info.UnitRollBiasLate, Info.UnitRollProfiles, Info.UnitRollFloorPct, Info.UnitRollRampTicks,\n\t\t\t\tInfo.UnitRollFirstBoost, Info.UnitRollFirstRampTicks, Info.UnitRollFirstCap)"));
+			Assert.That(u, Does.Contain("new UnitRollTable(Info.UnitsToBuild, Info.UnitRollBias, Info.UnitRollBiasLate, Info.UnitRollProfiles, Info.UnitRollFloorPct, Info.UnitRollRampTicks,\n\t\t\t\tInfo.UnitRollFirstBoost, Info.UnitRollFirstRampTicks, Info.UnitRollFirstCap,
+				Info.CoreFocusSharePct, Info.CoreFocusCount, Info.CoreFocusMaxPct, Info.CoreFocusBankPct, Info.TechLeanTopPct, Info.TechLeanBankPct)"));
 		}
 
 		// Opus/Haiku 11-25: DEV rows that show whether every available upgrade / promotion / research / add-on gets researched.

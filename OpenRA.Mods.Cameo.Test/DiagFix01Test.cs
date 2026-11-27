@@ -136,7 +136,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var park = tick.IndexOf("parkedUntil[track.Field] = now + Info.ParkTicks;", StringComparison.Ordinal);
 			Assert.That(home, Is.GreaterThanOrEqualTo(0), "the Stop is only the fallback of the move home");
 			Assert.That(park, Is.GreaterThan(home), "the field is still parked");
-			Assert.That(tick, Does.Contain("inflightMcvSites.Remove(mcv.ActorID);").And.Contain("MS-3 MCV"));
+			Assert.That(tick, Does.Contain("mcvLeases.Release(mcv.ActorID);").And.Contain("MS-3 MCV"));
 
 			var abort = Section(Safe(), "bool McvSafeAbortHome(", "void McvSafeVanished(");
 			Assert.That(abort, Does.Contain("if (!baseCenter.HasValue)\n\t\t\t\treturn false;"));

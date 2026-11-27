@@ -80,25 +80,13 @@ namespace OpenRA.Mods.CA.Traits
 
 			var b = baseBuilder.Info;
 			return !EssentialsLowCashCA.Holds(true, s.Bank, line, BaseBuildPlanCA.CountOf(s, name) == 0, TechChainExempt(name), b.RefineryTypes.Contains(name),
-				b.PowerTypes.Contains(name) && playerPower != null && playerPower.ExcessPower < minimumExcessPower,
+				b.PowerTypes.Contains(name) && PowerShortRaw(PowerArbiter.SiteModeBias),
 				info.HasTraitInfo<CashTricklerInfo>(), false);
 		}
 
 		// The same wanting test as PipelineAntiRushStage (production standing, fewer ground defences owned or queued than the tier's set size).
-		bool AntiRushWantedNow()
-		{
-			if (playerBuildings == null)
-				return false;
-
-			var b = baseBuilder.Info;
-			var have = playerBuildings.Count(a => IsGroundDefence(a.Info));
-			foreach (var kv in baseBuilder.BuildingsBeingProduced)
-				if (world.Map.Rules.Actors.TryGetValue(kv.Key, out var queued) && IsGroundDefence(queued))
-					have += kv.Value;
-
-			var size = AntiRushCA.SetSize(botLimits != null ? botLimits.Info.ArmyShareTargetPermille : -1, b.AntiRushBaseMin, b.AntiRushBaseMax);
-			return AntiRushCA.Wants(playerBuildings.Any(a => b.ProductionTypes.Contains(a.Info.Name)), have, size);
-		}
+		// CONSOLIDATE-03 P1 (a): S4's own early-defence test (Pipeline01Defence.cs EarlyDefenceWanted), no second copy of the set size.
+		bool AntiRushWantedNow() => EarlyDefenceWanted();
 
 		// The buildable types of the next open role of the opening order (S3's role to types mapping and counts, without S3's picks: the wanted-refinery rung and the
 		// stuck ledger have side effects, so a role is open here when its count is short and it has a buildable type). Null = no open role.

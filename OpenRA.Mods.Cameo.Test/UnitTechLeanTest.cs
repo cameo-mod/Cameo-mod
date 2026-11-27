@@ -134,33 +134,39 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var unit = RepoFile(Bots + "UnitBuilderBotModuleCA.cs");
 
-			// The first-build pay-as-you-go keeps its exact older text (UnitAll01Test pin), the lean line comes after it.
-			const string Paygo = "var paygo = roll && rollFirst && UnitRoll.FirstAdmits(batch.BankLeft);\n\t\t\t\t\tvar cost = paygo ? 0 : fullCost;";
-			Assert.That(unit, Does.Contain(Paygo));
+			// P5 a4: the admission list is ONE pure function in the pick arbiter (UnitPickArbiter.Admit); the first-build pay-as-you-go keeps its exact older text there (UnitAll01Test pin), the lean line comes after it.
+			var arbiter = RepoFile(Bots + "BotModuleLogic/UnitPickArbiter.cs");
+			const string Paygo = "var paygo = roll && first && UnitRoll.FirstAdmits(bankLeft);";
+			Assert.That(arbiter, Does.Contain(Paygo));
 
-			const string Leaned = "var leaned = roll && !paygo && TechLeanOn && TechLean.Admits(fullCost, rollPoolMaxCost, held, world.WorldTick, RollParameters.RampTicks, batch.BankLeft, Info.TechLeanTopPct, Info.TechLeanBankPct);\n\t\t\t\t\tif (leaned)\n\t\t\t\t\t\tcost = 0;";
-			Assert.That(unit, Does.Contain(Leaned), "the lean only ever sets the gate cost to 0, for a ROLL pick (never a floor or random pick: rollPoolMaxCost is the last roll's) that is not already a first build (CM review of b73e77aa)");
+			const string Leaned = "var leaned = roll && !paygo && leanOn && TechLean.Admits(fullCost, poolMaxCost, held, tick, leanStartTick, bankLeft, leanTopPct, leanBankPct);";
+			Assert.That(arbiter, Does.Contain(Leaned), "the lean only ever sets the gate cost to 0, for a ROLL pick (never a floor or random pick: rollPoolMaxCost is the last roll's) that is not already a first build (CM review of b73e77aa)");
+			Assert.That(arbiter.IndexOf(Leaned, StringComparison.Ordinal), Is.GreaterThan(arbiter.IndexOf(Paygo, StringComparison.Ordinal)), "the first-build test comes before the lean");
 
-			var paygoAt = unit.IndexOf(Paygo, StringComparison.Ordinal);
-			var leanAt = unit.IndexOf(Leaned, StringComparison.Ordinal);
+			// The module hands it the same inputs, once, before the afford gate reads the cost.
+			const string Call = "var admission = UnitPickArbiter.Admit(roll, rollFirst, batch.BankLeft, fullCost, TechLeanOn, rollPoolMaxCost, held, world.WorldTick, RollParameters.TechLeanStartTicks, RollParameters.TechLeanTopPct, RollParameters.TechLeanBankPct);\n\t\t\t\t\tvar paygo = admission.Paygo;\n\t\t\t\t\tvar leaned = admission.Leaned;\n\t\t\t\t\tvar cost = admission.GateCost;";
+			Assert.That(unit, Does.Contain(Call));
+			Assert.That(unit.Split(new[] { "UnitPickArbiter.Admit(" }, StringSplitOptions.None).Length - 1, Is.EqualTo(1), "one admission call site");
+
+			var admitAt = unit.IndexOf(Call, StringComparison.Ordinal);
 			var affordAt = unit.IndexOf("if (!batch.Affords(cost) || !ReserveAdmits(batch, cost)", StringComparison.Ordinal);
 			var reserveAt = unit.IndexOf("batch.Reserve(queue, fullCost);", StringComparison.Ordinal);
 			var logAt = unit.IndexOf("TechLeanLog(queue.Info.Type, name, fullCost, batch.BankLeft + fullCost, rollPoolMaxCost);", StringComparison.Ordinal);
-			Assert.That(paygoAt, Is.GreaterThan(0));
-			Assert.That(leanAt, Is.GreaterThan(paygoAt));
-			Assert.That(affordAt, Is.GreaterThan(leanAt), "the lean is decided before the afford, reserve and depth gates read the cost");
+			Assert.That(admitAt, Is.GreaterThan(0));
+			Assert.That(affordAt, Is.GreaterThan(admitAt), "the lean is decided before the afford, reserve and depth gates read the cost");
 			Assert.That(reserveAt, Is.GreaterThan(affordAt));
 			Assert.That(logAt, Is.GreaterThan(reserveAt), "the DEV row is written only for an order that was started, after the full price is reserved");
 			Assert.That(unit, Does.Contain("batch.Reserve(queue, fullCost);\n\t\t\t\t\tif (leaned)\n\t\t\t\t\t\tTechLeanLog("), "the order still reserves its FULL price");
 			Assert.That(unit, Does.Contain("var held = queuedItems + batch.PendingOf(queue);"), "held = what the queue holds plus this pass's orders into it");
 
 			// The weights are untouched: no lean term between the weights and the pick.
-			var weights = unit.IndexOf("var weights = UnitRoll.Weights(", StringComparison.Ordinal);
-			var pick = unit.IndexOf("var pick = UnitRoll.Pick(", StringComparison.Ordinal);
+			// (P5 a3: the weights and the pick moved into the pick arbiter; the same check on its text, and the roll hands it the same arrays)
+			var weights = arbiter.IndexOf("var weights = UnitRoll.Weights(", StringComparison.Ordinal);
+			var pick = arbiter.IndexOf("var pick = UnitRoll.Pick(", StringComparison.Ordinal);
 			Assert.That(weights, Is.GreaterThan(0));
 			Assert.That(pick, Is.GreaterThan(weights));
-			Assert.That(unit.Substring(weights, pick - weights), Does.Not.Contain("TechLean"));
-			Assert.That(unit, Does.Contain("UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct, boosts)"));
+			Assert.That(arbiter.Substring(weights, pick - weights), Does.Not.Contain("TechLean"));
+			Assert.That(unit, Does.Contain("UnitPickArbiter.Decide(fractions, biases, counterPcts, RollParameters.FloorPct, boosts, coreLift,"));
 		}
 
 		[Test]

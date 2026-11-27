@@ -203,6 +203,44 @@ namespace OpenRA.Mods.Cameo.Traits
 			});
 		}
 
+		// CONSOLIDATE-03 P1 bb_decide: the building-pick arbiter's decision (deduped per queue by the caller).
+		void IBotBuildingPickObserver.BuildingDecided(OpenRA.Player owner, int tick, string queue, bool sustained, int bank, int tierLine, string actor, string stage, string decider,
+			int s8Offers, int refusalCount, string refusals)
+		{
+			ObserverRow(owner, "bb_decide", b =>
+			{
+				AiMatchLogWriter.AppendString(b, "queue", queue);
+				AiMatchLogWriter.AppendNumber(b, "sustained", sustained ? 1 : 0);
+				AiMatchLogWriter.AppendNumber(b, "bank", bank);
+				AiMatchLogWriter.AppendNumber(b, "line", tierLine);
+				AiMatchLogWriter.AppendString(b, "actor", actor);
+				AiMatchLogWriter.AppendString(b, "stage", stage);
+				AiMatchLogWriter.AppendString(b, "decider", decider);
+				AiMatchLogWriter.AppendNumber(b, "s8_offers", s8Offers);
+				AiMatchLogWriter.AppendNumber(b, "refusals", refusalCount);
+				AiMatchLogWriter.AppendString(b, "refused", refusals);
+			});
+		}
+
+		void IBotUnitProductionObserver.CashLedgerObserved(OpenRA.Player owner, int tick, long bank, long unpaidUnit, long unpaidBase, long unpaidUpgrade, int unitReserve,
+			int buildingReserveS8, long over, int refusedAfford, int refusedReserve, int refusedDepth, long unpaidCacheDiff)
+		{
+			ObserverRow(owner, "cash_ledger", b =>
+			{
+				AiMatchLogWriter.AppendNumber(b, "bank", bank);
+				AiMatchLogWriter.AppendNumber(b, "unpaid_unit", unpaidUnit);
+				AiMatchLogWriter.AppendNumber(b, "unpaid_base", unpaidBase);
+				AiMatchLogWriter.AppendNumber(b, "unpaid_upgrade", unpaidUpgrade);
+				AiMatchLogWriter.AppendNumber(b, "reserve_unit", unitReserve);
+				AiMatchLogWriter.AppendNumber(b, "reserve_building_s8", buildingReserveS8);
+				AiMatchLogWriter.AppendNumber(b, "over", over);
+				AiMatchLogWriter.AppendNumber(b, "refused_afford", refusedAfford);
+				AiMatchLogWriter.AppendNumber(b, "refused_reserve", refusedReserve);
+				AiMatchLogWriter.AppendNumber(b, "refused_depth", refusedDepth);
+				AiMatchLogWriter.AppendNumber(b, "unpaid_cache_diff", unpaidCacheDiff);
+			});
+		}
+
 		void IBotBuildingPickObserver.BuildingA6Held(OpenRA.Player owner, int tick, string actor, string stage, int bank, int cost)
 		{
 			ObserverRow(owner, "bb_a6_hold", b =>

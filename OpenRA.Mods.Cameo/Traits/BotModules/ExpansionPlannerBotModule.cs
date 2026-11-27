@@ -310,6 +310,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"unplaceable; never more; no home fallback). Needs DriveRefineries.")]
 		public readonly bool FieldCoverage = false;
 
+		[Desc("CONSOLIDATE-03 P8 (b), row mcv_lease_stall_release: an MCV lease (McvLeaseBook) whose MCV has not changed cell for McvLeaseStallTicks ends: the lease is released and its field",
+			"parked for ParkTicks (as an McvSafe abort does), so a stuck or deploy-pending MCV no longer holds its field in the avoid list and the claim filter for the whole game. No order is",
+			"issued (the engine MCV manager stays the only owner of MCV orders). Needs FieldCoverage. Off = a live MCV holds its lease until it is gone.")]
+		public readonly bool McvLeaseStallRelease = false;
+
+		[Desc("mcv_lease_stall_release: ticks without a cell change after which the lease of a live MCV ends.")]
+		public readonly int McvLeaseStallTicks = 1500;
+
 		[Desc("REF-1: ticks an anchor stays pending after a produced refinery was committed to it — covers the window",
 			"between the placement order and the building landing so a second refinery cannot claim the same anchor.")]
 		public readonly int AnchorClaimPendingTicks = 2000;
@@ -1211,7 +1219,26 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// anchor at once (a contested anchor recycles fast). Null owner = a provider-side park
 		// (offer-streak, stuck-anchor) with no failing demand.
 		readonly Dictionary<CPos, (int Until, object Owner)> anchorParkedUntil = new();
-		readonly Dictionary<uint, CPos> inflightMcvSites = new();
+
+		// CONSOLIDATE-03 P8 (b), row mcv_lease_stall_release.
+		AblationLatch ablateMcvLeaseStall;
+		bool McvLeaseStallOn => Info.McvLeaseStallRelease && Info.FieldCoverage && !ablateMcvLeaseStall.Off(player, AblationIds.McvLeaseStallRelease);
+
+		// CONSOLIDATE-03 P8 (a): the ONE record of "this MCV is heading for this field" (replaces the bare per-MCV site map).
+		readonly McvLeaseBook mcvLeases = new();
+#if CAMEO_DEV_LOGGING
+		readonly McvLeaseStream mcvLeaseStream = new();
+#endif
+
+		// P8 (a), DEV only: the equivalence hash of the lease events (EX-LEASE-STREAM). kind 0 = grant, else a McvLeaseEnd.
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void LeaseObserved(int kind, uint id, int field, CPos center)
+		{
+#if CAMEO_DEV_LOGGING
+			mcvLeaseStream.Observe(world.WorldTick, player.ClientIndex, kind, id, field, center);
+#endif
+		}
+
 		List<CPos> ownBuildingCells = new();
 		List<CPos> ownYardCells = new();
 
@@ -3217,9 +3244,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (Target is FieldScore crawl)
 					avoid.Add(crawl.Center);
 
-				foreach (var kv in inflightMcvSites)
-					if (kv.Key != mcv.ActorID)
-						avoid.Add(kv.Value);
+				mcvLeases.AddCentersExcept(mcv.ActorID, avoid);
 
 				var diagonal = MapDiagonalCells();
 				weight = f => SeparationFactor(f.Center, origin, avoid, Info.CrawlSeparationDegrees, Info.MinSeparationFactor, Info.MinBearingDistanceCells)
@@ -3260,7 +3285,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				}
 
 				if (Info.FieldCoverage)
-					inflightMcvSites[mcv.ActorID] = s.Center;
+				{
+					mcvLeases.Grant(mcv.ActorID, s.Index, s.Center, mcv.Location, tick);
+					LeaseObserved(0, mcv.ActorID, s.Index, s.Center);
+				}
 
 				if (safe != null)
 					McvSafeIssue(mcv, s.Index, safeRoute);
@@ -3571,11 +3599,28 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				ownYardCells = yardCells;
 
 				// An MCV that is gone (deployed into a yard, or dead) no longer holds its site.
-				foreach (var id in inflightMcvSites.Keys.ToArray())
+				foreach (var id in mcvLeases.Ids())
 				{
 					var heading = world.GetActorById(id);
 					if (SiteHolderGone(heading != null, heading?.IsDead ?? false, heading?.IsInWorld ?? false, heading?.Owner == player))
-						inflightMcvSites.Remove(id);
+					{
+						LeaseObserved((int)McvLeaseEnd.HolderGone, id, mcvLeases.FieldOf(id), default);
+						mcvLeases.Release(id);
+					}
+					else if (McvLeaseStallOn)
+					{
+						// P8 (b): a live MCV that has not changed cell for McvLeaseStallTicks gives its lease up and its field is parked (no order).
+						var leaseNow = world.WorldTick;
+						mcvLeases.Note(id, heading.Location, leaseNow);
+						if (mcvLeases.Stalled(id, leaseNow, Info.McvLeaseStallTicks))
+						{
+							var stalledField = mcvLeases.FieldOf(id);
+							LeaseObserved((int)McvLeaseEnd.Stall, id, stalledField, heading.Location);
+							mcvLeases.Release(id);
+							if (stalledField >= 0)
+								parkedUntil[stalledField] = leaseNow + Info.ParkTicks;
+						}
+					}
 				}
 			}
 
@@ -3687,7 +3732,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						player.InternalName ?? "#" + player.ClientIndex, Info.CoalitionForeignSectorPercent) : (int?)null,
 					Info.FieldCoverage ? SpreadFactor(allBuildingCells.Count > 0 ? allBuildingCells.Min(c => (c - center).Length) : distance,
 						diagonalCells, Info.SpreadBonus) : (double?)null,
-					Info.FieldCoverage && inflightMcvSites.Count > 0 && TakenByMcvSite(center, inflightMcvSites.Values, Info.ClaimRadiusCells)
+					Info.FieldCoverage && mcvLeases.Count > 0 && TakenByMcvSite(center, mcvLeases.Centers(), Info.ClaimRadiusCells)
 						? Info.MinSeparationFactor : (double?)null);
 
 				scores.Add(new FieldScore(i, center, value, hops, payback, threat, score, Safety(threat, guardValue)));

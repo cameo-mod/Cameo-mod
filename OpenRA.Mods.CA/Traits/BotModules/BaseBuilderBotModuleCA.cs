@@ -287,6 +287,17 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("EARLY-DEF-01: the anti-rush set size at the highest tier.")]
 		public readonly int AntiRushBaseMax = 3;
 
+		[Desc("CONSOLIDATE-03 P1 (b), row early_def_learn (EARLY_DEF_LEARN_01_DESIGN.md, user 11-26): the anti-rush count = clamp(prior x M(map) x L, 0..EarlyDefCountMax), the prior",
+			"being AntiRushBaseMin..Max on the tier line. M = reference / spawn path (EarlyDefReferencePathCells, 0 = neutral); L = the learned 4-value aggregate (neutral until a learned",
+			"snapshot exists). Needs BbAntiRushSet; gated by SwitchCondition. Off = the prior, as before.")]
+		public readonly bool EarlyDefLearn = false;
+
+		[Desc("early_def_learn: the most early anti-rush defences the learned count may ask for.")]
+		public readonly int EarlyDefCountMax = 4;
+
+		[Desc("early_def_learn: the reference spawn-path length in cells for the map factor M (set from EARLY_RUSH_STATS_01). 0 = M neutral.")]
+		public readonly int EarlyDefReferencePathCells = 0;
+
 		[Desc("TEAM-DEFEND-02 (USER 11-24): while own or allied buildings are attacked, every ready ground turret is placed where it covers the current attackers: as close as possible to",
 			"exactly its maximum weapon range from them, on the defended side, never next to the enemy; the nearest legal in-range cell otherwise; with none the turret is held (the READY",
 			"watchdog places it at a base cell later). Solo (own base attacked) and team (an ally attacked) use the same rule; building next to an ally follows the lobby option through the",
@@ -348,6 +359,15 @@ namespace OpenRA.Mods.CA.Traits
 			"Off = S5 is unchanged. Gated by SwitchCondition; row cs_capture_unlock.")]
 		public readonly bool CsCaptureUnlock = false;
 
+		[Desc("CONSOLIDATE-03 P1 (b), row bb_s5_capture_reason: with listed-only first copies (BbBuildAllListed) S5 still offers the capture-unlock types (CsCaptureUnlock) after the",
+			"listed roll; the tech-depth fallback stays off. Off = S5 stops after the roll, so the capture rule never fires on the staged path. Needs both rows armed; gated by SwitchCondition.")]
+		public readonly bool BbS5CaptureReason = false;
+
+		[Desc("CONSOLIDATE-03 P2 (b), row cl_one_reserve: the S8-S10 building reserve (test A6) is the same personality-lean scaled line as the unit reserve",
+			"(RecoverySpendPolicyCA.EffectiveReserve of the tier ProductionCashReserve, the steamroller lean): a trailing lead lowers it, nothing raises it, S1-S7 stay 0.",
+			"Needs BbPipeline01. Off = the unscaled tier reserve. Gated by SwitchCondition.")]
+		public readonly bool CashOneReserve = false;
+
 		[Desc("TECHCHAIN-PAYGO-01: stages S3 (the tech-centre opening role) and S5 of the staged planner admit a TechChainTypes pick when the bank is above 0 instead of at",
 			"its full cost (test A6), because the engine pays production as it goes. At most one tech-chain item in flight; every other pick keeps the full-cost test.",
 			"Needs BbPipeline01. Off = A6 unchanged. Gated by SwitchCondition; row bb_techchain_paygo.")]
@@ -384,6 +404,14 @@ namespace OpenRA.Mods.CA.Traits
 			"is dropped at the READY flip (the candidate stream restarts its pass, so the next relaxed use rests on a current certificate), and a newly found strict site",
 			"outranks any relaxed one whatever the score classes say. Strict sites and an issued order are untouched. Gated by SwitchCondition; row ref_prefetch_fresh (off = as before).")]
 		public readonly bool RefPrefetchFresh = false;
+
+		[Desc("CONSOLIDATE-03 P4 (PowerArbiter): the emergency power picks (stage S1 and the legacy low-power override) count the power of the plants already in production, so no second",
+			"emergency plant is chosen while one is in flight. Gated by SwitchCondition; row pw_inflight_emergency (off = the raw surplus, as before).")]
+		public readonly bool PwInflightEmergency = false;
+
+		[Desc("CONSOLIDATE-03 P4 (PowerArbiter): a building is admitted by the power test when the plants in production cover its draw. Gated by SwitchCondition;",
+			"row pw_inflight_admit (off = the raw surplus, as before).")]
+		public readonly bool PwInflightAdmit = false;
 
 		[Desc("BUILD-ALL-B (user ruling 2026-11-25): the base builder never queues a terrain foundation (D2k concrete: a building without health that removes",
 			"itself unconditionally, FoundationExclusion) on any path, listed or not. Concrete use is planned by CONCRETE-PLAN-01 after the playtest.",
@@ -964,9 +992,20 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablatePassiveIncome; // CONSOLIDATE-01 c4
 		public bool PassiveIncomeArmed => Info.BbPassiveIncome && switchesActive && !ablatePassiveIncome.Off(player, AblationIds.BbPassiveIncome);
 		AblationLatch ablateAntiRushSet; // CONSOLIDATE-01 c5
+		AblationLatch ablateEarlyDefLearn; // CONSOLIDATE-03 P1 (b)
+		public bool EarlyDefLearnArmed => Info.EarlyDefLearn && AntiRushSetArmed && !ablateEarlyDefLearn.Off(player, AblationIds.EarlyDefLearn);
 		AblationLatch ablateExtraDefence;
 		AblationLatch ablateDefenceCap;
 		AblationLatch ablateCaptureUnlock; // CAPTURE-TECH-01
+		AblationLatch ablateS5CaptureReason; // CONSOLIDATE-03 P1 (b)
+		AblationLatch ablateCashOneReserve; // CONSOLIDATE-03 P2 (b)
+		public bool CashOneReserveArmed => Info.CashOneReserve && switchesActive && !ablateCashOneReserve.Off(player, AblationIds.ClOneReserve);
+		IBotPersonalityLeadProvider[] reserveLeadProviders;
+
+		// The lean the unit reserve reads (UnitBuilderBotModuleCA.ReserveAdmits): the lowest steamroller lead lean of this player's providers, 1.0 when none answer.
+		public double ReserveLean() =>
+			BotPersonalityLeads.Lean(reserveLeadProviders ??= player.PlayerActor.TraitsImplementing<IBotPersonalityLeadProvider>().ToArray(), "steamroller");
+		public bool S5CaptureReasonArmed => Info.BbS5CaptureReason && CaptureUnlockArmed && BuildAllListedArmed && !ablateS5CaptureReason.Off(player, AblationIds.BbS5CaptureReason);
 		public bool CaptureUnlockArmed => Info.CsCaptureUnlock && switchesActive && !ablateCaptureUnlock.Off(player, AblationIds.CsCaptureUnlock);
 		AblationLatch ablateTechChainPaygo; // TECHCHAIN-PAYGO-01
 		public bool TechChainPaygoArmed => Info.BbTechChainPaygo && switchesActive && !ablateTechChainPaygo.Off(player, AblationIds.BbTechChainPaygo);
@@ -978,6 +1017,9 @@ namespace OpenRA.Mods.CA.Traits
 		public bool S8RejectedFallthroughArmed => Info.BbS8RejectedFallthrough && switchesActive && !ablateS8RejectedFallthrough.Off(player, AblationIds.BbS8RejectedFallthrough);
 		AblationLatch ablateS8CashHold; // S8-CASH-HOLD
 		public bool S8CashHoldArmed => Info.BbS8CashHold && S8RejectedFallthroughArmed && !ablateS8CashHold.Off(player, AblationIds.BbS8CashHold);
+		AblationLatch ablatePwInflightEmergency, ablatePwInflightAdmit; // CONSOLIDATE-03 P4
+		public bool PwInflightEmergencyArmed => Info.PwInflightEmergency && switchesActive && !ablatePwInflightEmergency.Off(player, AblationIds.PwInflightEmergency);
+		public bool PwInflightAdmitArmed => Info.PwInflightAdmit && switchesActive && !ablatePwInflightAdmit.Off(player, AblationIds.PwInflightAdmit);
 		AblationLatch ablateRefPrefetchFresh; // REF-PREFETCH-FRESH
 		public bool RefPrefetchFreshArmed => Info.RefPrefetchFresh && switchesActive && !ablateRefPrefetchFresh.Off(player, AblationIds.RefPrefetchFresh);
 		AblationLatch ablateRefineryIntervalLadder; // REF-INTERVAL-LADDER
@@ -1343,6 +1385,9 @@ namespace OpenRA.Mods.CA.Traits
 		public PowerManager PlayerPower { get; private set; }
 		public int ExcessPower { get; private set; }
 
+		// CONSOLIDATE-03 P4: the power of the plants in production (the part of ExcessPower added by the queue loop), read by PowerArbiter.Effective when the rows are armed.
+		public int InFlightPower { get; private set; }
+
 		public BaseBuilderBotModuleCA(Actor self, BaseBuilderBotModuleCAInfo info)
 			: base(info)
 		{
@@ -1601,6 +1646,7 @@ namespace OpenRA.Mods.CA.Traits
 			// if AI gets enough cash, it can fill all of its queues with enough ticks
 			var findQueue = false;
 			ExcessPower = PlayerPower != null ? PlayerPower.ExcessPower : 0;
+			InFlightPower = 0;
 			for (int i = 0, builderIndex = currentBuilderIndex; i < builders.Length; i++)
 			{
 				if (++builderIndex >= builders.Length)
@@ -1630,7 +1676,9 @@ namespace OpenRA.Mods.CA.Traits
 							InFlightRecountCA.Record(BuildingsBeingProduced, producing.Item);
 
 							// Record the power of the building.
-							ExcessPower += producing.ActorInfo.TraitInfos<PowerInfo>().Where(p => p.EnabledByDefault).Sum(pi => pi.Amount);
+							var producingPower = producing.ActorInfo.TraitInfos<PowerInfo>().Where(p => p.EnabledByDefault).Sum(pi => pi.Amount);
+							ExcessPower += producingPower;
+							InFlightPower += producingPower;
 						}
 					}
 				}
@@ -1963,14 +2011,25 @@ namespace OpenRA.Mods.CA.Traits
 
 		// Require at least one refinery, unless we can't build it. REF-1 (§12.24 v2): under the refinery law the
 		// count is irrelevant — adequate iff no anchor is claimable (unclaimed <= in-flight ends the want).
-		public bool HasAdequateRefineryCount() =>
-			Info.RefineryTypes.Count == 0 ||
-			(RefineryLawProvider() != null
+		public bool HasAdequateRefineryCount() => AdequateReason() != RefineryAdequacy.Inadequate;
+
+		// CONSOLIDATE-03 P3: the first true sub-condition of the old HasAdequateRefineryCount, evaluated in the same short-circuit order (the law provider and ExpansionWantsRefinery are read in the same order).
+		public RefineryAdequacy AdequateReason()
+		{
+			if (Info.RefineryTypes.Count == 0)
+				return RefineryAdequacy.NoTypes;
+
+			if (RefineryLawProvider() != null
 				? ExpansionWantsRefinery() == null
 				: AIUtils.CountActorByCommonName(RefineryBuildings) >= OptimalRefineryCount()
-					&& ExpansionWantsRefinery() == null) ||
-			AIUtils.CountActorByCommonName(powerBuildings) == 0 ||
-			AIUtils.CountActorByCommonName(ConstructionYardBuildings) == 0;
+					&& ExpansionWantsRefinery() == null)
+				return RefineryAdequacy.Met;
+
+			if (AIUtils.CountActorByCommonName(powerBuildings) == 0)
+				return RefineryAdequacy.NoPowerPlant;
+
+			return AIUtils.CountActorByCommonName(ConstructionYardBuildings) == 0 ? RefineryAdequacy.NoYard : RefineryAdequacy.Inadequate;
+		}
 
 		int OptimalRefineryCount() =>
 			AIUtils.CountActorByCommonName(ProductionBuildings) > 0

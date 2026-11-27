@@ -57,6 +57,12 @@ namespace OpenRA.Mods.CA.Traits
 					armyGuardLend.Add(u);
 
 			var lend = GuardLend.Units(guard.Units.Count, armyGuardLend.Count, Info.ArmyGuardLendPercent, Info.TeamLeadJoinMinUnits);
+
+			// CONSOLIDATE-03 P7 (b) row sq_guard_floor: the guard keeps its learned minimum and only the units above it can be lent. Outside an all-in the row only narrows the ordinary share. During an open all-in the whole
+			// quiet guard may go (floor 0 unless the own core is under attack), so the row is asked before a zero is rejected: the ordinary share may miss the join minimum while the whole guard meets it.
+			if (GuardFloorOn)
+				lend = GuardFloorLend(guard, lend);
+
 			if (lend <= 0)
 			{
 				armyGuardLend.Clear();
@@ -93,6 +99,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				guard.Units.Remove(u);
 				unitsHangingAroundTheBase.Add(u);
+				LedgerLend(nameof(ArmyGuardLendTo), "guard_lend_to_order", new[] { u.Actor });
 			}
 
 			foreach (var n in notifyIdleBaseUnits)

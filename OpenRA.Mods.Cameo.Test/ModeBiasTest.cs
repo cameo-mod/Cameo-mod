@@ -224,7 +224,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(wiring, Does.Contain("!EssentialsLowCashCA.Holds(true, s.Bank, line,"), "the low-cash hold's type set");
 			Assert.That(wiring, Does.Contain("b.TechChainTypes.Contains(a.Name) && BaseBuildPlanCA.CountOf(s, a.Name) == 0"), "techchain = the open tech steps only");
 			Assert.That(wiring, Does.Contain("if (baseBuilder.MbAntiRushArmed && AntiRushSetOn && AntiRushWantedNow())"), "no anti-rush bias without the S4 set");
-			Assert.That(wiring, Does.Contain("return AntiRushCA.Wants(playerBuildings.Any(a => b.ProductionTypes.Contains(a.Info.Name)), have, size);"), "S4's wanting test");
+			Assert.That(wiring, Does.Contain("bool AntiRushWantedNow() => EarlyDefenceWanted();"), "S4's wanting test (CONSOLIDATE-03 P1 (a): the one early-defence test)");
 			Assert.That(wiring, Does.Contain("if (baseBuilder.MbOpeningArmed && s.OpeningActive)"));
 			Assert.That(wiring, Does.Contain("return values.Compose(ids);"));
 			Assert.That(wiring, Does.Contain("if (profiles.Count == 0)\n\t\t\t\treturn null;"), "null while no trigger holds");

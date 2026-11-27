@@ -4634,6 +4634,9 @@ Player:
 		# map. genericbot-only (this module); classic is untouched. Switch group AJ_field_coverage; ON BY DEFAULT per
 		# the maintainer ruling 2026-10-04 ("refinery coverage is the most important feature right now").
 		FieldCoverage: true
+		# CONSOLIDATE-03 P8 (b) (row mcv_lease_stall_release): a live MCV that has not changed cell for 1500 ticks gives up its field lease and the field is parked (no order issued).
+		McvLeaseStallRelease: true
+		McvLeaseStallTicks: 1500
 		# REPAIR-B3 (SPEC_2026-10-09 §1): shared coverage — a usable own refinery serves every anchor inside an
 		# inclusive Euclidean radius-10 (the default 0 would fall back to ClaimRadiusCells = 8).
 		AnchorServeRadiusCells: 10
@@ -4866,8 +4869,13 @@ Player:
 		TeamLeadSoloEnabled: true
 		TeamLeadAllInEnabled: true
 		TeamLeadDefendTeamEnabled: true
+		DefendOneEnabled: true
+		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
+		GuardFloorEnabled: true
+		GuardFloorPercent: 20
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
+		ArmyDutyTrace: true
 		HarassMinEnabled: true
 		TeamLeadRaiderRecallEnabled: true
 		UseSquadOrderDedup: false
@@ -5042,8 +5050,13 @@ Player:
 		TeamLeadSoloEnabled: true
 		TeamLeadAllInEnabled: true
 		TeamLeadDefendTeamEnabled: true
+		DefendOneEnabled: true
+		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
+		GuardFloorEnabled: true
+		GuardFloorPercent: 60
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
+		ArmyDutyTrace: true
 		HarassMinEnabled: true
 		TeamLeadRaiderRecallEnabled: true
 		UseSquadOrderDedup: false
@@ -5214,8 +5227,13 @@ Player:
 		TeamLeadSoloEnabled: true
 		TeamLeadAllInEnabled: true
 		TeamLeadDefendTeamEnabled: true
+		DefendOneEnabled: true
+		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
+		GuardFloorEnabled: true
+		GuardFloorPercent: 40
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
+		ArmyDutyTrace: true
 		HarassMinEnabled: true
 		TeamLeadRaiderRecallEnabled: true
 		UseSquadOrderDedup: false
@@ -5388,8 +5406,13 @@ Player:
 		TeamLeadSoloEnabled: true
 		TeamLeadAllInEnabled: true
 		TeamLeadDefendTeamEnabled: true
+		DefendOneEnabled: true
+		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
+		GuardFloorEnabled: true
+		GuardFloorPercent: 40
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
+		ArmyDutyTrace: true
 		HarassMinEnabled: true
 		TeamLeadRaiderRecallEnabled: true
 		UseSquadOrderDedup: false
@@ -5562,8 +5585,13 @@ Player:
 		TeamLeadSoloEnabled: true
 		TeamLeadAllInEnabled: true
 		TeamLeadDefendTeamEnabled: true
+		DefendOneEnabled: true
+		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
+		GuardFloorEnabled: true
+		GuardFloorPercent: 20
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
+		ArmyDutyTrace: true
 		HarassMinEnabled: true
 		TeamLeadRaiderRecallEnabled: true
 		UseSquadOrderDedup: false
@@ -5733,8 +5761,13 @@ Player:
 		TeamLeadSoloEnabled: true
 		TeamLeadAllInEnabled: true
 		TeamLeadDefendTeamEnabled: true
+		DefendOneEnabled: true
+		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
+		GuardFloorEnabled: true
+		GuardFloorPercent: 30
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
+		ArmyDutyTrace: true
 		HarassCapPercent: 25
 		HarassMinEnabled: true
 		TeamLeadRaiderRecallEnabled: true
@@ -5991,6 +6024,9 @@ Player:
 		AntiRushBase: true
 		AntiRushBaseMin: 2
 		AntiRushBaseMax: 3
+		# CONSOLIDATE-03 P1 (b) (row early_def_learn, user 11-26): the anti-rush count = clamp(prior x M(map) x L, 0..4); neutral (= the prior) until EARLY_RUSH_STATS_01 sets the reference path and a learned snapshot exists.
+		EarlyDefLearn: true
+		EarlyDefCountMax: 4
 		# TEAM-DEFEND-02 (USER 11-24): tm_ally_turret_support: while an own or allied base is attacked every ready ground turret is placed at its max weapon range from the attackers; genericbot only.
 		TeamTurretSupport: true
 		# CONSOLIDATE-01 C9 (X6, row ub_refinery_pause_opening): the no-refinery unit-production pause applies only until the first refinery has stood; a bot that loses its refineries keeps building units.
@@ -6017,12 +6053,19 @@ Player:
 		BbNoCancel: true
 		# S8-STARVE-01 (row bb_s8_rejected_fallthrough, Sol 58ADBC25): under SUSTAINED cash a rejected S8 offer no longer holds S9/S10 back; an admitted S8 still wins first.
 		BbS8RejectedFallthrough: true
+		# CONSOLIDATE-03 P1 (b) (row bb_s5_capture_reason): with listed-only first copies S5 still offers the capture-unlock types after the listed roll (cs_capture_unlock was dead on the staged path).
+		BbS5CaptureReason: true
+		# CONSOLIDATE-03 P2 (b) (row cl_one_reserve): the S8-S10 building reserve uses the unit reserve's personality lean (one reserve line per tier; it only lowers).
+		CashOneReserve: true
 		# S8-CASH-HOLD (row bb_s8_cash_hold, Opus V08G): an eligible S8 factory that waits only for cash holds the S10 fractions back for at most 750 ticks.
 		BbS8CashHold: true
 		S8HoldMaxTicks: 750
 		S8HoldMinBankPercent: 75
 		# REF-PREFETCH-FRESH (row ref_prefetch_fresh, Sol V08F_CUMREV_SOL_01 finding 2): prefetched relaxed refinery sites expire at the READY flip; a strict site outranks a relaxed one.
 		RefPrefetchFresh: true
+		# CONSOLIDATE-03 P4 (rows pw_inflight_emergency, pw_inflight_admit): the power picks count the plants already in production.
+		PwInflightEmergency: true
+		PwInflightAdmit: true
 		# BUILD-ALL-B (row bb_no_foundation, user ruling 11-25): no concrete (terrain foundation) on any base-builder path; CONCRETE-PLAN-01 after the playtest.
 		BbNoFoundation: true
 		# QUEUE-SPLIT-01 + REF-S2-01 (Opus 11-25): defence stages stay on the defence queue; unmet refinery zone demand is served at S2 (rows bb_queue_split, bb_refinery_s2).
@@ -6412,6 +6455,8 @@ Player:
 		RequiresCondition: genericbot
 		# HARV-01 (row hv_harvester_target, Opus/user 11-25): 2 harvesters per refinery first, at most 3 (V08: 0 on 1 refinery for 12000 ticks; 21 on 1).
 		HvHarvesterTarget: true
+		# CONSOLIDATE-03 P9 (b) (row hv_module_counts_queued): the harvester module counts a harvester already in the factory as present (no repeat request behind it).
+		HvModuleCountsQueued: true
 		# HARV-01 (Opus 11-25): target 3 / cap 4 per refinery on generic (the user found too few harvesters); the code default stays 2.
 		HarvesterTargetPerRefinery: 3
 		# S1 (FINDINGS_2026-10-12 §3): the switch gate also arms the capturer ratio — classic
@@ -6521,11 +6566,21 @@ Player:
 		CoreFocusBankPct: 30
 		# PERF-BOTTICK-01 FIX 4 (Opus 11-26, row cost_cache_visit): the production cost is memoised for one bot visit (the same integer as the live read; V08F Leg A: 73% of long visits). @generic only.
 		CostCacheVisit: true
+		# CONSOLIDATE-03 P5 (b) row ub_admit_one: the core focus asks the fill's admission list (paygo, tech lean, full price, afford, reserve, depth cash) before it names a type, so the core never lifts a pick
+		# that the fill then refuses and re-rolls to a cheaper unit (the next-dearest admissible type takes its place). Narrows the eligible set only. @generic only; the code default stays false (classic and every other bot unchanged).
+		UnitAdmitOne: true
+		# CONSOLIDATE-03 P5 (b) row ub_gates_up: the in-pass limit headroom, the capturer cap (pending capturers) and the aircraft caps (pending aircraft) are asked before the draw, so a type they refuse is not in the pool,
+		# the floors, the core or the draw bound. NOT distribution-equal (the RNG stream changes). @generic only; the code default stays false (classic and every other bot unchanged).
+		UnitGatesUp: true
+		# CONSOLIDATE-03 P5 (a): DEV-only unit pick equivalence trace (unit_pick_trace.csv); compiled out of release, record only. @generic only.
+		UnitPickTrace: true
 		# CONSOLIDATE-01 C9 (X13): paid Promotions also start while a unit-production pause vote is up (pq_upgrade_service); free items always did.
 		# UPG-ADDONS (Opus 11-25, Haiku check): the army_* lvl2-3 upgrades sit on the BuildingAddons queue, which the upgrade service did not serve. @generic only.
 		UpgradeServiceQueues: Promotions, Upgrades, Research, Addons, BuildingAddons
 		# UPG-ADDONS-DEFAULT (V08F-FIX-01): the code default is false; @generic sets it true so the army_* lvl2-3 upgrades stay served. Classic does not list BuildingAddons, so it is unchanged.
 		UpgradeBuildingAddons: true
+		# CONSOLIDATE-03 P6 (b), row pst_settle_authoritative (Opus ruling P6b): off = the bot's own scan; on = the own TechTree. @generic false until the V08 DEV evidence rules.
+		PstSettleAuthoritative: false
 		# upg_once_registry (Opus 11-25, V08F: ARM): Sol traced the playtest's repeated upgrade starts (x12-16) to the missing pending
 		# reservation with the registry OFF. @generic only; the code default stays false (classic and every other bot unchanged).
 		UpgradeOnceRegistry: true

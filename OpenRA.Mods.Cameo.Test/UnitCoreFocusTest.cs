@@ -198,14 +198,21 @@ namespace OpenRA.Mods.Cameo.Test
 			var start = unit.IndexOf("ActorInfo ChooseRollUnit(", StringComparison.Ordinal);
 			var body = unit.Substring(start, unit.IndexOf("int rollDeficitTick", start, StringComparison.Ordinal) - start);
 
-			var weights = body.IndexOf("var weights = UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct, boosts);", StringComparison.Ordinal);
-			var lift = body.IndexOf("if (CoreFocusOn)\n\t\t\t\tweights = FocusCore(queue, pool, weights);", StringComparison.Ordinal);
-			var quantize = body.IndexOf("var units = UnitRoll.Quantize(weights);", StringComparison.Ordinal);
-			var log = body.IndexOf("RollPickLog(queue.Info.Type, pool, weights, pick,", StringComparison.Ordinal);
+			// P5 a3: the order of the steps lives in the pick arbiter (weights, then the core lift as the LAST step on them, then the integer units); the roll hands it the lift
+			var arbiter = RepoFile(Bots + "BotModuleLogic/UnitPickArbiter.cs");
+			var weights = arbiter.IndexOf("var weights = UnitRoll.Weights(fractions, biases, counterPcts, floorPct, boosts);", StringComparison.Ordinal);
+			var lift = arbiter.IndexOf("if (coreLift != null)\n\t\t\t\tweights = coreLift(weights);", StringComparison.Ordinal);
+			var quantize = arbiter.IndexOf("var units = UnitRoll.Quantize(weights);", StringComparison.Ordinal);
 			Assert.That(weights, Is.GreaterThan(0));
 			Assert.That(lift, Is.GreaterThan(weights), "after the roll's own weights (floor, boosts, counters, profiles)");
 			Assert.That(quantize, Is.GreaterThan(lift), "before the integer draw");
-			Assert.That(log, Is.GreaterThan(quantize), "the pick log shows the weights the draw used");
+
+			var armed = body.IndexOf("if (CoreFocusOn)\n\t\t\t\tcoreLift = w => FocusCore(queue, pool, w);", StringComparison.Ordinal);
+			var decide = body.IndexOf("UnitPickArbiter.Decide(fractions, biases, counterPcts, RollParameters.FloorPct, boosts, coreLift,", StringComparison.Ordinal);
+			var log = body.IndexOf("RollPickLog(queue.Info.Type, pool, weights, pick,", StringComparison.Ordinal);
+			Assert.That(armed, Is.GreaterThan(0), "the lift is armed only while the row is on");
+			Assert.That(decide, Is.GreaterThan(armed));
+			Assert.That(log, Is.GreaterThan(decide), "the pick log shows the weights the draw used");
 			Assert.That(body, Does.Not.Contain("rollOrdered.Add"), "ordering coverage is not touched here");
 
 			// The call and the signature the older pins read stay as they were.
@@ -221,9 +228,9 @@ namespace OpenRA.Mods.Cameo.Test
 			var part = RepoFile(Bots + "UnitBuilderBotModuleCA.CoreFocus.cs");
 			Assert.That(part, Does.Contain("settled[i] = rollOrdered.Contains(pool[i].Name);"));
 			Assert.That(part, Does.Contain("price[i] = queue.GetProductionCost(pool[i]);"));
-			Assert.That(part, Does.Contain("CoreFocus.Affordable(price[i], rollBankLeft, Info.CoreFocusBankPct)"));
-			Assert.That(part, Does.Contain("CoreFocus.Core(price, eligible, Info.CoreFocusCount)"));
-			Assert.That(part, Does.Contain("CoreFocus.MultiplierPct(weights, settled, core, Info.CoreFocusSharePct, Info.CoreFocusMaxPct)"));
+			Assert.That(part, Does.Contain("CoreFocus.Affordable(price[i], rollBankLeft, RollParameters.CoreFocusBankPct)"));
+			Assert.That(part, Does.Contain("CoreFocus.Core(price, eligible, RollParameters.CoreFocusCount)"));
+			Assert.That(part, Does.Contain("CoreFocus.MultiplierPct(weights, settled, core, RollParameters.CoreFocusSharePct, RollParameters.CoreFocusMaxPct)"));
 			Assert.That(part, Does.Contain("CoreFocus.Apply(weights, core, multiplier)"));
 		}
 
@@ -243,7 +250,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(part, Does.Contain(",ub_core_churn,,{queueType},{state.Changes};{now - state.Start};core={key}"));
 			Assert.That(part, Does.Contain("if (now - state.Start >= 1000)"), "one row per queue type per 1000 ticks");
 			Assert.That(part, Does.Contain("names.Sort(StringComparer.Ordinal);"), "a set, not an order: a price tie that reorders is no change");
-			Assert.That(part, Does.Contain("var picked = CoreFocus.Core(price, eligible, Info.CoreFocusCount);\n\t\t\tCoreFocusChurn(queue.Info.Type, pool, picked);\n\t\t\tif (picked.Count == 0)"), "counted before the empty-set return");
+			Assert.That(part, Does.Contain("var picked = CoreFocus.Core(price, eligible, RollParameters.CoreFocusCount);\n\t\t\tCoreFocusChurn(queue.Info.Type, pool, picked);\n\t\t\tif (picked.Count == 0)"), "counted before the empty-set return");
 		}
 	}
 }

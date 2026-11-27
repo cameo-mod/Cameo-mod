@@ -303,6 +303,7 @@ namespace OpenRA.Mods.CA.Traits
 						unitsHangingAroundTheBase.Add(u);
 					}
 
+					LedgerToPool(nameof(AggTeamApplyDetachment), "agg_detach_to_home", released);
 					AggTeamSendHome(bot, released, homeCell);
 				}
 			}

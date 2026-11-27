@@ -178,23 +178,23 @@ namespace OpenRA.Mods.CA.Traits
 			v.ArmyKnown && v.FactsKnown && v.EnemyArmy > 0 ? AllInAhead.RatioPct(v.OwnArmy, v.EnemyArmy) : AllInAhead.RatioPct(v.ExchangeKills, v.ExchangeLosses);
 
 		// The ratio of a trigger that fires (percent; -1 = it does not fire now).
-		long AheadFired(AheadTrigger trigger, AheadView v) => trigger switch
+		static long AheadFired(AheadTrigger trigger, AheadView v, int defeatsHandled, SquadManagerBotModuleCAInfo info) => trigger switch
 		{
-			AheadTrigger.Yard => v.FactsKnown && AllInAhead.Majority(v.YardDead, v.LivingEnemies, Info.ArmyAheadMajorityPercent)
+			AheadTrigger.Yard => v.FactsKnown && AllInAhead.Majority(v.YardDead, v.LivingEnemies, info.ArmyAheadMajorityPercent)
 				? AllInAhead.RatioPct(v.YardDead, v.LivingEnemies) : -1,
-			AheadTrigger.Production => v.FactsKnown && AllInAhead.Majority(v.ProductionDead, v.LivingEnemies, Info.ArmyAheadMajorityPercent)
+			AheadTrigger.Production => v.FactsKnown && AllInAhead.Majority(v.ProductionDead, v.LivingEnemies, info.ArmyAheadMajorityPercent)
 				? AllInAhead.RatioPct(v.ProductionDead, v.LivingEnemies) : -1,
-			AheadTrigger.Economy => v.FactsKnown && AllInAhead.Majority(v.EconomyDead, v.LivingEnemies, Info.ArmyAheadMajorityPercent)
+			AheadTrigger.Economy => v.FactsKnown && AllInAhead.Majority(v.EconomyDead, v.LivingEnemies, info.ArmyAheadMajorityPercent)
 				? AllInAhead.RatioPct(v.EconomyDead, v.LivingEnemies) : -1,
-			AheadTrigger.Defeat => AllInAhead.Defeat(v.Defeated, aheadDefeatsHandled, v.TeamSeats, v.EnemySeats, v.OwnArmy, v.EnemyArmy, Info.ArmyAheadDefeatArmyPercent)
+			AheadTrigger.Defeat => AllInAhead.Defeat(v.Defeated, defeatsHandled, v.TeamSeats, v.EnemySeats, v.OwnArmy, v.EnemyArmy, info.ArmyAheadDefeatArmyPercent)
 				? AllInAhead.RatioPct(v.TeamSeats, v.EnemySeats) : -1,
-			AheadTrigger.Trade => AllInAhead.Trade(v.Kills, v.Losses, Info.ArmyAheadTradeMinKills, Info.ArmyAheadTradePercent)
+			AheadTrigger.Trade => AllInAhead.Trade(v.Kills, v.Losses, info.ArmyAheadTradeMinKills, info.ArmyAheadTradePercent)
 				? AllInAhead.RatioPct(v.Kills, v.Losses) : -1,
-			AheadTrigger.Battle => AllInAhead.Battle(v.BattleKills, v.BattleLosses, Info.ArmyAheadBattleMinKills, Info.ArmyAheadBattlePercent, v.OwnArmy)
+			AheadTrigger.Battle => AllInAhead.Battle(v.BattleKills, v.BattleLosses, info.ArmyAheadBattleMinKills, info.ArmyAheadBattlePercent, v.OwnArmy)
 				? AllInAhead.RatioPct(v.BattleKills, v.BattleLosses) : -1,
-			AheadTrigger.Army => v.ArmyKnown && v.FactsKnown && AllInAhead.Army(v.OwnArmy, v.EnemyArmy, v.EnemyDefence, Info.ArmyAheadArmyPercent)
+			AheadTrigger.Army => v.ArmyKnown && v.FactsKnown && AllInAhead.Army(v.OwnArmy, v.EnemyArmy, v.EnemyDefence, info.ArmyAheadArmyPercent)
 				? AllInAhead.RatioPct(v.OwnArmy, v.EnemyArmy + v.EnemyDefence) : -1,
-			AheadTrigger.Counter => v.ArmyKnown && v.FactsKnown && AllInAhead.Counter(v.AllyAttacked, v.HomeThreat, v.OwnArmy, v.EnemyDefence, v.EnemyBuildings, Info.ArmyAheadCounterPercent)
+			AheadTrigger.Counter => v.ArmyKnown && v.FactsKnown && AllInAhead.Counter(v.AllyAttacked, v.HomeThreat, v.OwnArmy, v.EnemyDefence, v.EnemyBuildings, info.ArmyAheadCounterPercent)
 				? AllInAhead.RatioPct(v.OwnArmy, v.EnemyDefence) : -1,
 			AheadTrigger.Super => v.SuperReady ? AheadObservedRatio(v) : -1,
 			_ => -1
@@ -217,31 +217,44 @@ namespace OpenRA.Mods.CA.Traits
 				return null;
 			}
 
+			var pick = AheadPick(v, Info, AheadTriggerOn, aheadDefeatsHandled);
+			if (pick.Index < 0)
+			{
+				aheadLastFired = -1;
+				return null;
+			}
+
+			var trigger = (AheadTrigger)pick.Index;
+
+			// A defeat is answered once: the next one fires again. Written here, on the branch that fired, only.
+			if (trigger == AheadTrigger.Defeat)
+				aheadDefeatsHandled = v.Defeated;
+
+			if (aheadLastFired != pick.Index)
+			{
+				aheadLastFired = pick.Index;
+				AheadRecord("all_in_ahead", AllInAhead.Why(trigger), pick.Ratio, now);
+			}
+
+			return AllInAhead.Why(trigger);
+		}
+
+		// The ahead trigger that fires now, in AheadTrigger order: a read of the scan, the enables (the function passed in) and the defeat count passed in.
+		// Writes nothing: the latch and defeat writes stay in AheadWhy, on the branch that fired. Index -1 = none.
+		static (int Index, long Ratio) AheadPick(AheadView v, SquadManagerBotModuleCAInfo info, Func<AheadTrigger, bool> on, int defeatsHandled)
+		{
 			for (var i = 0; i <= (int)AheadTrigger.Super; i++)
 			{
 				var trigger = (AheadTrigger)i;
-				if (!AheadTriggerOn(trigger))
+				if (!on(trigger))
 					continue;
 
-				var ratio = AheadFired(trigger, v);
-				if (ratio < 0)
-					continue;
-
-				// A defeat is answered once: the next one fires again.
-				if (trigger == AheadTrigger.Defeat)
-					aheadDefeatsHandled = v.Defeated;
-
-				if (aheadLastFired != i)
-				{
-					aheadLastFired = i;
-					AheadRecord("all_in_ahead", AllInAhead.Why(trigger), ratio, now);
-				}
-
-				return AllInAhead.Why(trigger);
+				var ratio = AheadFired(trigger, v, defeatsHandled, info);
+				if (ratio >= 0)
+					return (i, ratio);
 			}
 
-			aheadLastFired = -1;
-			return null;
+			return (-1, -1);
 		}
 
 		/// <summary>

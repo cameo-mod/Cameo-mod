@@ -38,5 +38,9 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>REF-TIER-01 (row ref_tier): the refinery target floor's state: <paramref name="verdict"/> = met, below_target, below_no_anchor (the map caps it) or off; <paramref name="detail"/> = refineries,
 		/// target, personality percent, radar, tech and anchor flags. The observer writes one row per changed (verdict, detail, queue) and never repeats. Default: ignored.</summary>
 		void RefTierVerdict(Player owner, int tick, string verdict, string detail, int target, int refineries, string queue) { }
+
+		/// <summary>CONSOLIDATE-03 P1 bb_decide: one arbiter walk of <paramref name="queue"/>: the start (empty = no pick), its stage and deciding named rule, the S8 offers, and the
+		/// refusals (count and "stage:name:reason" summary). The caller dedupes per queue.</summary>
+		void BuildingDecided(Player owner, int tick, string queue, bool sustained, int bank, int tierLine, string actor, string stage, string decider, int s8Offers, int refusalCount, string refusals);
 	}
 }

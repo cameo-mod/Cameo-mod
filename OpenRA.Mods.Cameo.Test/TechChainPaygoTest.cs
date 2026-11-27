@@ -80,7 +80,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheWaiverIsOnlyReachedWhenTheFullCostTestFailsForAnArmedTechChainStart()
 		{
 			var src = Source(PipelineFile);
-			Assert.That(src, Does.Contain("if (!BaseBuildPlanCA.Affordable(s.Bank, startCost, BaseBuildPlanCA.ReserveFor(c.Stage, s.ProductionCashReserve)))"), "A6 is still the first test");
+			Assert.That(src, Does.Contain("if (!CashLedger.AdmitBuilding(s.Bank, startCost, CashLedger.BuildingReserve(c.Stage, s.ProductionCashReserve, s.ReserveLean)).Ok)"), "A6 is still the first test (P2 (a): the ledger admission = Affordable)");
 			Assert.That(src, Does.Contain("var techChainStart = baseBuilder.Info.TechChainTypes.Contains(start.Name);"));
 			// BUILD-ALL-B: the listed first-copy waiver (bb_build_all_listed) is tried first; with it off the paygo test is the old one.
 			Assert.That(src, Does.Contain("if (!listedWaived && (!techChainStart || !(baseBuilder.TechChainPaygoArmed && TechChainPaygo.Waives(c.Stage, s.Bank, TechChainInFlight()))))"),

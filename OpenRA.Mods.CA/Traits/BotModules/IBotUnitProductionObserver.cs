@@ -38,5 +38,11 @@ namespace OpenRA.Mods.CA.Traits
 		/// the telemetry poll, not this seam.
 		/// </summary>
 		void UnitProductionSkipped(Player owner, int tick, string actor, string reason);
+
+		/// <summary>
+		/// CONSOLIDATE-03 P2 (b), DEV row cash_ledger: the cash ledger's view at most every 250 ticks (observation only; the classes stay independent).
+		/// </summary>
+		void CashLedgerObserved(Player owner, int tick, long bank, long unpaidUnit, long unpaidBase, long unpaidUpgrade, int unitReserve, int buildingReserveS8,
+			long over, int refusedAfford, int refusedReserve, int refusedDepth, long unpaidCacheDiff);
 	}
 }

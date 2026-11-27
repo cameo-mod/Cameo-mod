@@ -84,7 +84,12 @@ namespace OpenRA.Mods.CA.Traits
 
 			order.BeginPincer(now, rally0, rally1);
 			foreach (var place in plan.Places)
+			{
+				// The squad the plan divides holds only a PROVISIONAL arm here: the units that really change arm are logged by TeamLeadSplitOff (event split, final). Every other squad's arm is final.
 				order.AssignProng(byKey[place.Key].Squad, place.Arm, byKey[place.Key].Value);
+				LedgerClaim(ArmyDuty.PincerArm, nameof(TeamLeadPincerAtPush), "arm" + place.Arm + (plan.Split is { } pending && pending.Key == place.Key ? "_provisional_split_pending" : "_final") + "_seq" + order.Seq,
+					(byKey[place.Key].Squad as SquadCA)?.Units ?? new List<UnitWposWrapper>());
+			}
 
 			if (plan.Split is { } split)
 				order.RequestSplit(byKey[split.Key].Squad, split.Units, split.ToArm);
@@ -181,6 +186,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			Squads.Add(half);
 			order.AssignProng(half, toProng, SquadValueOf(half));
+			LedgerSplit(nameof(TeamLeadSplitOff), order.Seq, toProng, half.Units, squad.Units);
 			DiagnosticSquadEvent(half, "formed", "pincer_split seq=" + order.Seq + " units=" + count + " prong=" + toProng);
 			half.FuzzyStateMachine.ChangeState(half, new TeamLeadGatherStateCA(order), false);
 		}

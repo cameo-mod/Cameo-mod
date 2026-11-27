@@ -86,6 +86,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("UPGRADE-COVERAGE: ticks an ordered upgrade item may stay unseen in its queue before the order is released (not done) and the item may be offered again.")]
 		public readonly int UpgradePendingTimeout = 300;
 
+		[Desc("CONSOLIDATE-03 P6 (b), row pst_settle_authoritative: the upgrade settle reads the owned prerequisites from the player's own TechTree (the engine's owner-only check). False = the bot's own scan (today's behaviour). @generic false.")]
+		public readonly bool PstSettleAuthoritative = false;
+
 		[Desc("ub_capturer_strict (row of the same name): the capturer cap and the armed-infantry denominator count a unit as a capturer only when one of its Captures traits can capture one of CapturerCaptureTypes",
 			"(the Capturable.Types of enemy buildings). Garrison and driver-kill captures never count. False = the old rule: any Captures trait.")]
 		public readonly bool CapturerStrict = false;
@@ -203,6 +206,9 @@ namespace OpenRA.Mods.CA.Traits
 			"A weight multiplier on the core only (capped by CoreFocusMaxPct); every other weight, never-built types included, stays as the roll made it. 0 = off.")]
 		public readonly int CoreFocusSharePct = 0;
 
+		[Desc("CONSOLIDATE-03 P5 (DEV only, record only): write unit_pick_trace.csv, one row per roll draw, empty roll, post-draw outcome and queue pass (the equivalence trace of the unit pick). The calls are compiled out of release builds; changes no decision.")]
+		public readonly bool UnitPickTrace = false;
+
 		[Desc("HANS-PROFILE-01: how many types form the core of a queue.")]
 		public readonly int CoreFocusCount = 3;
 
@@ -219,6 +225,14 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("PERF-BOTTICK-01 FIX 4 (row cost_cache_visit): memoise ProductionQueue.GetProductionCost for one bot visit, per (queue actor, queue type, actor type). The same integer as the live call,",
 			"so no decision changes. Off = every call reads the cost live.")]
 		public readonly bool CostCacheVisit = false;
+
+		[Desc("CONSOLIDATE-03 P5 (row ub_admit_one; needs the core focus): the core also reads the fill's admission forecast (paygo, tech lean, full price, then the afford, reserve and depth-cash gates), so a type the gates would refuse right now",
+			"is not lifted and then re-rolled to a cheaper unit. Off in code, on in the generic block.")]
+		public readonly bool UnitAdmitOne = false;
+
+		[Desc("CONSOLIDATE-03 P5 (row ub_gates_up; needs the unit roll): the in-pass limit headroom, the capturer cap with the batch's pending capturers and the aircraft caps with the batch's pending aircraft are asked before the draw,",
+			"so a type they refuse is not in the pool, the floors, the core or the draw bound (not distribution-equal: the RNG stream changes). Off in code, on in the generic block.")]
+		public readonly bool UnitGatesUp = false;
 
 		[Desc("UNIT-MIX-01: the queue types that make an airfield (aircraft floor); the infantry floor uses IdleQueueFloorQueues.")]
 		public readonly string[] UnitMixAircraftQueues = { "Aircraft", "RAAircraft" };
@@ -346,6 +360,10 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("DEV only: observe eligible combat-unit cash admission decisions and effective economy role lists.")]
 		public readonly bool UnitCashBlockedTelemetry = false;
+
+		[Desc("CONSOLIDATE-03 P9 (b): HarvesterBotModuleCA's harvester need counts the harvesters already in a production queue (this builder's cached queued count) next to the live ones,",
+			"so a harvester in the factory satisfies it and no second one is requested behind it. Needs HvHarvesterTarget (the count exists only then). Gated by SwitchCondition; row hv_module_counts_queued.")]
+		public readonly bool HvModuleCountsQueued = false;
 
 		[Desc("HARV-01: the bank a priority harvester replacement needs.")]
 		public readonly int HarvesterTargetMinCash = 300;
@@ -530,7 +548,7 @@ namespace OpenRA.Mods.CA.Traits
 		}
 	}
 
-	public partial class UnitBuilderBotModuleCA : ConditionalTrait<UnitBuilderBotModuleCAInfo>, IBotTick, IBotNotifyIdleBaseUnits, IBotRequestUnitProduction, IGameSaveTraitData, IBotAircraftBuilder, INotifyActorDisposing, IBotUnitProductionGateInfo, IBotMobileSpendReserve, IBotOrderDisposition
+	public partial class UnitBuilderBotModuleCA : ConditionalTrait<UnitBuilderBotModuleCAInfo>, IBotTick, IBotNotifyIdleBaseUnits, IBotRequestUnitProduction, IGameSaveTraitData, IBotAircraftBuilder, INotifyActorDisposing, IBotUnitProductionGateInfo, IBotMobileSpendReserve, IBotOrderDisposition, IBotHarvesterCounts
 	{
 		public const int FeedbackTime = 30; // ticks; = a bit over 1s. must be >= netlag.
 
@@ -673,9 +691,15 @@ namespace OpenRA.Mods.CA.Traits
 		// UNIT-ALL-01 parameter table: the one place the roll reads its numbers from (fractions, personality bias, ramp, profile strengths, floor); a learner overrides per player through it (LEARN-MULT-01).
 		UnitRollTable rollTable;
 		public UnitRollTable RollParameters => rollTable ??= new UnitRollTable(Info.UnitsToBuild, Info.UnitRollBias, Info.UnitRollBiasLate, Info.UnitRollProfiles, Info.UnitRollFloorPct, Info.UnitRollRampTicks,
-				Info.UnitRollFirstBoost, Info.UnitRollFirstRampTicks, Info.UnitRollFirstCap);
+				Info.UnitRollFirstBoost, Info.UnitRollFirstRampTicks, Info.UnitRollFirstCap,
+				Info.CoreFocusSharePct, Info.CoreFocusCount, Info.CoreFocusMaxPct, Info.CoreFocusBankPct, Info.TechLeanTopPct, Info.TechLeanBankPct);
 		string rollPersonality = "";
 		bool rollFirst;
+
+		// P5 a3: the roll's one draw (this module's RNG stream, one Next(bound) call) handed to the pick arbiter; created once, no allocation per roll.
+		Func<int, int> rollDraw;
+
+		Func<int, int> RollDraw => rollDraw ??= n => BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(n);
 
 		// TIER-MIX-01 (row ub_tech_lean): the dearest price in the pool of the fill in hand (set by ChooseRollUnit, read by the afford gate; stays 0 while the row is off).
 		AblationLatch ablateTechLean;
@@ -1150,11 +1174,14 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			upgradeSettleTick = world.WorldTick;
-			foreach (var (name, source) in upgradeDone.Settle(world.WorldTick, queuedIn, UpgradeGrantsOf, OwnedPrerequisites(), OfferedUpgradeNames, UpgradeQueueAlive, UpgradePrerequisitesHeld, Info.UpgradePendingTimeout))
+			foreach (var (name, source) in upgradeDone.Settle(world.WorldTick, queuedIn, UpgradeGrantsOf, SettleOwned(), OfferedUpgradeNames, UpgradeQueueAlive, UpgradePrerequisitesHeld, Info.UpgradePendingTimeout))
 				UpgradeDoneLog(name, source);
 
 			foreach (var (name, reason) in upgradeDone.Released)
+			{
 				UpgradeReleaseLog(name, reason);
+				PendingStreamNote("settle_release", name + ":" + reason, world.WorldTick, 0); // CONSOLIDATE-03 P6 DEV hash (Sonnet nit a)
+			}
 		}
 
 		// the EXACT queue instance that showed the item is still there and enabled (another queue of the same category does not stand in for a dead producer)
@@ -1397,6 +1424,7 @@ namespace OpenRA.Mods.CA.Traits
 				// oversubscribe a slot, cash or headroom another site already claimed.
 				// Discarded when the pass ends; nothing durable. Flag off never allocates.
 				var batch = FairService ? new ProducerServiceBatch(playerResources.GetCashAndResources()) : null;
+				CashLedgerRow(); // CONSOLIDATE-03 P2 (b), DEV only
 
 				if (FairService && buildIntents.HasWaiting)
 				{
@@ -1688,6 +1716,7 @@ namespace OpenRA.Mods.CA.Traits
 						bot.QueueOrder(Order.StartProduction(queue.Actor, item2.Name, 1));
 						NotifyStarted(item2.Name, queue.Info.Type);
 						upgradeDone.Started(item2.Name, world.WorldTick);
+						PendingStreamNote("upg_start", item2.Name, world.WorldTick, 0); // CONSOLIDATE-03 P6 DEV hash
 						UpgradeStartLog(item2.Name, queue.Info.Type, Cost(queue, item2));
 						AIUtils.BotDebug("AI: {0} upgrade service starts {1} in {2}.", player, item2.Name, queue.Info.Type);
 					}
@@ -1987,6 +2016,7 @@ namespace OpenRA.Mods.CA.Traits
 				var skip = new HashSet<string>(StringComparer.Ordinal);
 				var shares = GetUnitsToBuildForCategory(queue.Info.Type);
 				var baselineTried = false;
+				PickTraceFillStart(queue);
 
 				while (UnitProducerServiceCA.SlotAvailable(freeSlots, batch.PendingOf(queue)))
 				{
@@ -2005,6 +2035,8 @@ namespace OpenRA.Mods.CA.Traits
 
 					// HANS-PROFILE-01 (ub_core_focus): the bank this roll sees, for the core's affordability test (0 while the row is off).
 					rollBankLeft = CoreFocusOn ? batch.BankLeft : 0;
+					rollAdmit = AdmitOneOn ? new RollAdmitInputs(batch, held, depthQueue, unpaidQueued) : null;
+					rollGateBatch = GatesUpOn ? batch : null;
 
 					// P4: below the armed-infantry floor this queue prefers the best
 					// admissible armed infantry it can serve — the normal pick only runs
@@ -2026,6 +2058,7 @@ namespace OpenRA.Mods.CA.Traits
 					// UNIT-ALL-01: no candidate left for the roll ends this queue's fill; the composition fallback and the two floor picks below belong to the layers the roll replaces.
 					if (roll && unit == null)
 					{
+						PickTraceNone(queue, skip.Count, held, batch);
 						// the composition (now only a bias profile) ends with the fill, as it did when the old pick came up empty
 						// ub_affordable_pool: nothing affordable is not an empty composition (refusing every member one by one, as the row-off path does, leaves skip non-empty too)
 						if (skip.Count == 0 && !rollNoneAffordable && activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
@@ -2098,6 +2131,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, refusedBy);
+						PickTraceRefuse(queue, skip.Count, refusedBy, name, held, -1, -1, batch);
 						Reject();
 						continue;
 					}
@@ -2109,6 +2143,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, "headroom");
+						PickTraceRefuse(queue, skip.Count, "headroom", name, held, -1, -1, batch);
 						Reject();
 						continue;
 					}
@@ -2117,6 +2152,8 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, "capturer");
+						PickTraceRefuse(queue, skip.Count, "capturer", name, held, -1, -1, batch);
+						PendingStreamNote("refuse_capturer", unit.Name, world.WorldTick, 0); // CONSOLIDATE-03 P6 DEV hash
 						Reject();
 						continue;
 					}
@@ -2133,6 +2170,8 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						if (logThis)
 							rejectLog.Reject(queue.Info.Type, "aircraft");
+						PickTraceRefuse(queue, skip.Count, "aircraft", name, held, -1, -1, batch);
+						PendingStreamNote("refuse_aircraft", unit.Name, world.WorldTick, 0); // CONSOLIDATE-03 P6 DEV hash
 						Reject();
 						continue;
 					}
@@ -2141,19 +2180,18 @@ namespace OpenRA.Mods.CA.Traits
 					// batch keeps the bank accounting so a cheaper feasible one can land.
 					var fullCost = Math.Max(0, Cost(queue, unit));
 
+					// P5 a4: the admission list is ONE function (UnitPickArbiter.Admit), the same two steps in the same order:
 					// UNIT-ALL-01 c3 (Opus 11-25): the FIRST build of a listed type is pay-as-you-go like TECHCHAIN-PAYGO: it does not wait for the full price (OpenRA pays progressively): the afford, reserve and
 					// depth-cash gates below are evaluated at cost 0 for it, so a bank of 0 or the tier reserve can still hold it; Everything else keeps the full gates.
-					var paygo = roll && rollFirst && UnitRoll.FirstAdmits(batch.BankLeft);
-					var cost = paygo ? 0 : fullCost;
-
 					// TIER-MIX-01 (row ub_tech_lean): a late pick from the top of this queue's pool, on an empty queue with a share of its price already in the bank, is pay-as-you-go too; the order
 					// still reserves its full price below, so the rest of the pass sees the whole commitment.
-					var leaned = roll && !paygo && TechLeanOn && TechLean.Admits(fullCost, rollPoolMaxCost, held, world.WorldTick, RollParameters.RampTicks, batch.BankLeft, Info.TechLeanTopPct, Info.TechLeanBankPct);
-					if (leaned)
-						cost = 0;
+					var admission = UnitPickArbiter.Admit(roll, rollFirst, batch.BankLeft, fullCost, TechLeanOn, rollPoolMaxCost, held, world.WorldTick, RollParameters.TechLeanStartTicks, RollParameters.TechLeanTopPct, RollParameters.TechLeanBankPct);
+					var paygo = admission.Paygo;
+					var leaned = admission.Leaned;
+					var cost = admission.GateCost;
 
 					if (!batch.Affords(cost) || !ReserveAdmits(batch, cost)
-						|| depthQueue && held > 0 && !QueueDepthCA.CashAdmits(batch.BankLeft, unpaidQueued, cost))
+						|| depthQueue && held > 0 && !CashLedger.UnitDepthAdmits(batch.BankLeft, unpaidQueued, cost))
 					{
 						ObserveUnitCashAdmission(unit, cost, false, !batch.Affords(cost));
 						if (logThis)
@@ -2163,16 +2201,20 @@ namespace OpenRA.Mods.CA.Traits
 						if (roll && AffordablePoolOn)
 							Log.Write("debug", $"AI ({player.ClientIndex}): PERF-BOTTICK-01 AFFORD-POOL-DIVERGE {name} queue {queue.Info.Type} bank {batch.BankLeft} cost {cost} tick {world.WorldTick}");
 #endif
+						CashRefused(batch, cost, depthQueue && held > 0, unpaidQueued); // CONSOLIDATE-03 P2 (b), DEV only
+						PickTraceRefuse(queue, skip.Count, "afford_cash", name, held, cost, fullCost, batch);
 						Reject();
 						continue;
 					}
 
 					ObserveUnitCashAdmission(unit, cost, true, false);
+					PickTraceAccept(queue, skip.Count, name, held, cost, fullCost, paygo, leaned, batch);
 					SetUnitInterval(name);
 					bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
 					NotifyStarted(name, queue.Info.Type);
 					counters.Record(unit);
 					batch.Reserve(queue, fullCost);
+					PendingStreamNote("unit_emit", name, world.WorldTick, fullCost); // CONSOLIDATE-03 P6 DEV hash
 					if (leaned)
 						TechLeanLog(queue.Info.Type, name, fullCost, batch.BankLeft + fullCost, rollPoolMaxCost);
 					if (depthQueue)
@@ -2191,6 +2233,8 @@ namespace OpenRA.Mods.CA.Traits
 					if (activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
 						AddToActiveCompositionProducedValue(unit);
 				}
+
+				PickTraceFillEnd(queue);
 
 				// INFANTRY-REJECT-LOG-01 (DEV only): this queue's pass ended; idle = nothing queued or ordered in it. One aggregated row per period.
 				if (logThis)
@@ -2228,17 +2272,23 @@ namespace OpenRA.Mods.CA.Traits
 			if (cachedUnpaidTick != world.WorldTick)
 			{
 				cachedUnpaidTick = world.WorldTick;
-				// PROD-FIX-01 F-A (pb_unit_reserve_excl_upgrades): upgrade-service queue commitments leave the unit figure.
-				// UNIT-MIX-01 (X5): with the floor on, building and defence queue commitments are the base builder's own budget and leave it too.
-				var exclUpgrades = UnitReserveExclOn;
-				var exclBase = UnitMixOn && baseBuilder != null;
-				cachedUnpaid = exclUpgrades || exclBase
-					? SpendCommitmentsCA.UnpaidQueued(world, player, t => (exclUpgrades && System.Array.IndexOf(Info.UpgradeServiceQueues, t) >= 0)
-						|| (exclBase && (baseBuilder.Info.BuildingQueues.Contains(t) || baseBuilder.Info.DefenseQueues.Contains(t))))
-					: SpendCommitmentsCA.UnpaidQueued(world, player);
+				cachedUnpaid = UnitUnpaidScan();
 			}
 
 			return cachedUnpaid;
+		}
+
+		// The scan behind the per-tick figure (CONSOLIDATE-03 P2: one body, also read uncached by the DEV cash_ledger row's unpaid_cache_diff).
+		long UnitUnpaidScan()
+		{
+			// PROD-FIX-01 F-A (pb_unit_reserve_excl_upgrades): upgrade-service queue commitments leave the unit figure.
+			// UNIT-MIX-01 (X5): with the floor on, building and defence queue commitments are the base builder's own budget and leave it too.
+			var exclUpgrades = UnitReserveExclOn;
+			var exclBase = UnitMixOn && baseBuilder != null;
+			return exclUpgrades || exclBase
+				? SpendCommitmentsCA.UnpaidQueued(world, player, t => (exclUpgrades && System.Array.IndexOf(Info.UpgradeServiceQueues, t) >= 0)
+					|| (exclBase && (baseBuilder.Info.BuildingQueues.Contains(t) || baseBuilder.Info.DefenseQueues.Contains(t))))
+				: SpendCommitmentsCA.UnpaidQueued(world, player);
 		}
 
 		int cachedUnpaidTick = -1;
@@ -2274,12 +2324,11 @@ namespace OpenRA.Mods.CA.Traits
 			if (ablateRecovery.Off(player, AblationIds.Recovery))
 				return true;
 
+			// CONSOLIDATE-03 P2 (a): the reserve line and the gate are the cash ledger's unit admission (the same numbers). No bot limits = -1, closed.
 			var line = botLimits != null
-				? RecoverySpendPolicyCA.EffectiveReserve(botLimits.Info.ProductionCashReserve, BotPersonalityLeads.Lean(leadProviders, "steamroller"))
+				? CashLedger.UnitReserve(botLimits.Info.ProductionCashReserve, BotPersonalityLeads.Lean(leadProviders, "steamroller"), UnitReserveExclOn)
 				: -1;
-			line = ProdBusyCA.UnitReserveLine(UnitReserveExclOn, line);
-			return RecoverySpendPolicyCA.Admits(SpendCommitmentsCA.Available(batch.BankLeft, UnpaidQueuedCost()), cost, 0, 0, 0, false,
-				RecoverySpendPolicyCA.Admission.General, line);
+			return CashLedger.UnitReserveAdmits(batch.BankLeft, UnpaidQueuedCost(), cost, line);
 		}
 
 		// U1: per-name cap headroom shared across the batch — UnitLimits counts only
@@ -2422,6 +2471,7 @@ namespace OpenRA.Mods.CA.Traits
 					if (FairService)
 					{
 						batch.Reserve(queue, Cost(queue, actorInfo));
+						PendingStreamNote("unit_emit", actorInfo.Name, world.WorldTick, Cost(queue, actorInfo)); // CONSOLIDATE-03 P6 DEV hash
 						SpendLimitHeadroom(batch, name);
 						if (actorInfo.HasTraitInfo<AircraftInfo>())
 						{
@@ -2987,12 +3037,14 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			rollFirst = false;
 			rollNoneAffordable = false;
+			PickTraceRollStart();
 			var table = Info.UnitsToBuild;
 			if (table == null || table.Count == 0)
 				return null;
 
 			var items = new List<ActorInfo>();
 			rollExcluded.Clear();
+			rollGated.Clear();
 			foreach (var a in queue.BuildableItems().OrderBy(b => b.Name, StringComparer.Ordinal))
 			{
 				if (!table.ContainsKey(a.Name))
@@ -3023,8 +3075,14 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 				}
 
+				// P5 (b) row ub_gates_up: the batch gates (headroom, capturer with pending, aircraft with pending) before the draw; nothing here while the row is off (no batch handed over).
+				if (GatesUpRemoves(a))
+					continue;
+
 				items.Add(a);
 			}
+
+			GatesUpLog(queue.Info.Type);
 
 			// The squad manager's wave hold reads what this queue can build, whatever the wavemix profile strength (the profile only multiplies; the hold is the ARMY-MIX-01 row's).
 			var roles = unitRoles ??= player.PlayerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
@@ -3032,7 +3090,9 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (items.Count == 0)
 			{
+				PickTraceEmpty(queue, skip.Count, queueRoles);
 				RollEmptyLog(queue.Info.Type, rollExcluded.Count > 0 ? "all_excluded" : "none_listed_buildable");
+				GatesUpMarkRefused(skip);
 				return null;
 			}
 
@@ -3090,50 +3150,49 @@ namespace OpenRA.Mods.CA.Traits
 				boosts[i] = rollOrdered.Contains(name) ? 1.0
 					: UnitRoll.FirstBoost(RollParameters.FirstBoost, world.WorldTick - rollAvailableSince[name], RollParameters.FirstRampTicks, RollParameters.FirstCap);
 				var role = roles?.PrimaryRoleOf(name);
-				var bias = RollParameters.BiasPct(rollPersonality, role, world.WorldTick);
+				// the profile terms (a null term = the profile does not apply to this candidate); UnitPickArbiter.ComposeBias multiplies them in the fixed R2 order
+				int? deficitTerm = null, learnedTerm = null, waveMixTerm = null, compositionTerm = null, openingTerm = null;
 				if (deficits != null && role != null && deficits.TryGetValue(role, out var deficit))
-					bias = UnitRoll.MulPct(bias, UnitRoll.Scaled(deficit, strength[UnitRoll.RoleDeficit]));
+					deficitTerm = UnitRoll.Scaled(deficit, strength[UnitRoll.RoleDeficit]);
 
 				if (providers != null && providers.Count > 0)
-					bias = UnitRoll.MulPct(bias, UnitRoll.Scaled(LearnedWeightPercent(pool[i], providers), strength[UnitRoll.Learned]));
+					learnedTerm = UnitRoll.Scaled(LearnedWeightPercent(pool[i], providers), strength[UnitRoll.Learned]);
 
 				if (missingRoles != null && role != null)
-					bias = UnitRoll.MulPct(bias, UnitRoll.Boost(missingRoles.Contains(role), strength[UnitRoll.WaveMix]));
+					waveMixTerm = UnitRoll.Boost(missingRoles.Contains(role), strength[UnitRoll.WaveMix]);
 
 				if (composition != null && composition.TryGetValue(name, out var compositionShare))
-					bias = UnitRoll.MulPct(bias, UnitRoll.ShareBoost(compositionShare, bestShare, strength[UnitRoll.Composition]));
+					compositionTerm = UnitRoll.ShareBoost(compositionShare, bestShare, strength[UnitRoll.Composition]);
 
 				if (opening)
-					bias = UnitRoll.MulPct(bias, UnitRoll.Boost(Info.OpeningDefenseUnitTypes.Contains(name), strength[UnitRoll.Opening]));
+					openingTerm = UnitRoll.Boost(Info.OpeningDefenseUnitTypes.Contains(name), strength[UnitRoll.Opening]);
 
 				fractions[i] = RollParameters.Fraction(name);
-				biases[i] = bias;
+				biases[i] = UnitPickArbiter.ComposeBias(RollParameters.BiasPct(rollPersonality, role, world.WorldTick), deficitTerm, learnedTerm, waveMixTerm, compositionTerm, openingTerm);
 				counterPcts[i] = scores == null ? 100 : UnitRoll.CounterPct(scores[i], best, strength[UnitRoll.Counter]);
 			}
 
-			// ub_affordable_pool: the cash/afford gate the fill meets after the pick ("afford_cash"), term for term, for the candidate as if it were the pick: the first build of a type is pay-as-you-go
-			// (rollFirst), a tech-lean pick is too, then bank, reserve and depth cash. A local function (no delegate) keeps the roll terms inside the roll method and allocates nothing.
+			// ub_affordable_pool (keep mask, V08H): the cash/afford gate the fill meets after the pick ("afford_cash"), term for term as the P5 fill loop writes it: UnitPickArbiter.Admit
+			// (paygo for a type never ordered, tech lean), then bank, reserve and CashLedger.UnitDepthAdmits. A local function (no delegate) keeps the terms inside the roll method and allocates nothing.
 			bool RollCashAdmits(ActorInfo a)
 			{
 				var batch = rollCash.Batch;
 				var fullCost = Math.Max(0, Cost(queue, a));
-				var paygo = !rollOrdered.Contains(a.Name) && UnitRoll.FirstAdmits(batch.BankLeft);
-				var cost = paygo ? 0 : fullCost;
-				if (!paygo && TechLeanOn && TechLean.Admits(fullCost, rollPoolMaxCost, rollCash.Held, world.WorldTick, RollParameters.RampTicks, batch.BankLeft, Info.TechLeanTopPct, Info.TechLeanBankPct))
-					cost = 0;
-
+				var admission = UnitPickArbiter.Admit(true, !rollOrdered.Contains(a.Name), batch.BankLeft, fullCost, TechLeanOn, rollPoolMaxCost, rollCash.Held, world.WorldTick,
+					RollParameters.TechLeanStartTicks, RollParameters.TechLeanTopPct, RollParameters.TechLeanBankPct);
+				var cost = admission.GateCost;
 				return batch.Affords(cost) && ReserveAdmits(batch, cost)
-					&& !(rollCash.DepthQueue && rollCash.Held > 0 && !QueueDepthCA.CashAdmits(batch.BankLeft, rollCash.UnpaidQueued, cost));
+					&& !(rollCash.DepthQueue && rollCash.Held > 0 && !CashLedger.UnitDepthAdmits(batch.BankLeft, rollCash.UnpaidQueued, cost));
 			}
 
-			var weights = UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct, boosts);
-
-			// HANS-PROFILE-01 (ub_core_focus): the dearest affordable types built once get a weight multiplier (a bias; every other weight stays as the roll made it).
+			// HANS-PROFILE-01 (ub_core_focus): the dearest affordable types built once get a weight multiplier (a bias; every other weight stays as the roll made it); the arbiter applies it as the last step on the weights.
+			Func<double[], double[]> coreLift = null;
 			if (CoreFocusOn)
-				weights = FocusCore(queue, pool, weights);
+				coreLift = w => FocusCore(queue, pool, w);
 
-			// PERF-BOTTICK-01 (row ub_affordable_pool): draw only among the members that pass the fill's cash/afford check (RollCashAdmits, the same terms as the gate after the pick),
-			// each keeping the weight it has in the whole pool. None passes = this queue's fill ends for the visit. Every other refusal reason is still met after the pick, as before.
+			// PERF-BOTTICK-01 (row ub_affordable_pool, default off) as a keep mask on the arbiter's inputs (V08H join with CONSOLIDATE-03 P5): only the members that pass the fill's
+			// cash/afford check (RollCashAdmits) enter R2/R3. None passes = this queue's fill ends for the visit. With the row off nothing here runs and the draw is P5's exactly.
+			// Note for review: the floor and the core lift are computed over the kept members (the pre-P5 row kept whole-pool weights); the row ships off.
 			if (AffordablePoolOn && rollCash.Batch != null)
 			{
 				var keep = new bool[pool.Count];
@@ -3155,7 +3214,6 @@ namespace OpenRA.Mods.CA.Traits
 				if (kept < pool.Count)
 				{
 					pool = AffordablePool.Keep(pool, keep, kept).ToList();
-					weights = AffordablePool.Keep(weights, keep, kept);
 					fractions = AffordablePool.Keep(fractions, keep, kept);
 					biases = AffordablePool.Keep(biases, keep, kept);
 					counterPcts = AffordablePool.Keep(counterPcts, keep, kept);
@@ -3163,10 +3221,14 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
-			var units = UnitRoll.Quantize(weights); // integer units, sum <= 2^30, relative floor: every candidate owns a drawable interval
-			var pick = UnitRoll.Pick(units, BotRng.For(player, nameof(UnitBuilderBotModuleCA)).Next(UnitRoll.Sum(units)));
+			// R2 weights (floor, then the core lift) and R3 the one draw: the arbiter owns the order and the integer draw; the draw is this module's own RNG stream, exactly one Next call
+			var decision = UnitPickArbiter.Decide(fractions, biases, counterPcts, RollParameters.FloorPct, boosts, coreLift, RollDraw);
+			var weights = decision.Weights;
+			var units = decision.Units;
+			var pick = decision.Pick;
 			rollFirst = !rollOrdered.Contains(pool[pick].Name);
 			RollPickLog(queue.Info.Type, pool, weights, pick, rollFirst, fractions, biases, counterPcts, boosts);
+			PickTraceDraw(queue, pool, units, pick, skip.Count, queueRoles);
 			return pool[pick];
 		}
 
@@ -3274,7 +3336,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			// ub_pool: the full candidate list with the factors of each weight (fraction, personality x demand x mode bias percent, counter percent, final weight after the floor)
 			var parts = string.Join("|", pool.Select((a, i) => string.Create(System.Globalization.CultureInfo.InvariantCulture, $"{a.Name}:{fractions[i]}:{biases[i]}:{counterPcts[i]}:x{boosts[i]:0.##}:{weights[i]:0.##}")));
-			RollLog($"{world.WorldTick},{seat},ub_pool,{pool[pick].Name},{queueType},{pickId};floor={RollParameters.FloorPct};{parts}");
+			RollLog($"{world.WorldTick},{seat},ub_pool,{pool[pick].Name},{queueType},{pickId};floor={RollParameters.FloorPct};first={(first ? 1 : 0)};{parts}");
 		}
 
 		// ub_tech_lean (DEV, record only): one unit_roll.csv row per order started pay-as-you-go by the tech lean: tick,seat,ub_tech_lean,type,queue,price;bank before the order;dearest price of the pool.

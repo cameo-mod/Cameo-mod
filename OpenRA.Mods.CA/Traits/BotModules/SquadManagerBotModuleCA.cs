@@ -70,6 +70,14 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Maximum number of units AI can have idle.")]
 		public readonly int MaxIdleUnits = 36;
 
+		[Desc("CONSOLIDATE-03 P7 (a) (DEV only, record only): write army_duty_trace.csv, one row per claim and release of units by a squad-manager duty (the write-only army duty ledger) plus a counters row every 5000 ticks.",
+			"The calls are compiled out of release builds; nothing reads the ledger and no decision, random draw or order changes. Off in classic.")]
+		public readonly bool ArmyDutyTrace = false;
+
+		[Desc("CONSOLIDATE-03 P7 (b) (row sq_defend_one; needs DefendAllyEnabled and TeamLeadDefendTeamEnabled): ONE ally-defend rule. The team alarm drafts only the pool units inside the DefendAllyRadiusCells of the attacked friendly (nearest first, the",
+			"DEFEND-ALLY draft limit) and shares the response cooldown with the local scan, so one attack is answered by one draft. Off in code and classic.")]
+		public readonly bool DefendOneEnabled = false;
+
 		[Desc("M13 bounded team-response and attack-liveness consumer. Default off; classic excluded by the increment applier.")]
 		public readonly bool AttackLivenessEnabled = false;
 
@@ -2431,6 +2439,7 @@ namespace OpenRA.Mods.CA.Traits
 				var u = draftable[i];
 				protectSq.Units.Add(u);
 				unitsHangingAroundTheBase.Remove(u);
+				LedgerClaim(ArmyDuty.OwnBaseDefend, nameof(PrepositionDefenceTick), m13ResponseSquad == protectSq ? "m13_response" : "protect_request", new[] { u });
 			}
 
 			if (!protectSq.IsValid)
@@ -2669,6 +2678,7 @@ namespace OpenRA.Mods.CA.Traits
 			var squad = Squads.FirstOrDefault(s => s.Type == SquadCAType.Harass && s.Units.Any(u => u.Actor.Info.Name == unit.Actor.Info.Name))
 				?? RegisterNewSquad(bot, SquadCAType.Harass);
 			squad.Units.Add(unit);
+			LedgerClaim(ArmyDuty.Raid, nameof(AddToHarassSquad), "harass_squad", new[] { unit });
 		}
 
 		/// <summary>
@@ -2701,9 +2711,13 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 
 				var name = u.Actor.Info.Name;
+				LedgerRelease(nameof(ReleaseDefenders), "defence_over", new[] { u });
 				var guerrilla = Info.GuerrillaTypes.Contains(name) && Info.JoinGuerrilla > 0 && HarassCapAllows(u.Actor) ? OpenGuerrillaSquad(bot) : null;
 				if (guerrilla != null)
+				{
 					guerrilla.Units.Add(u);
+					LedgerClaim(ArmyDuty.Raid, nameof(ReleaseDefenders), "guerrilla_squad", new[] { u });
+				}
 				else if (Info.HarasserTypes.Contains(name) && HarassCapAllows(u.Actor))
 					AddToHarassSquad(bot, u);
 				else if (Info.FireSupportTypes.Contains(name) && OpenFireSupportSquad(bot) is { } releasedFs)
@@ -2711,6 +2725,7 @@ namespace OpenRA.Mods.CA.Traits
 				else
 				{
 					unitsHangingAroundTheBase.Add(u);
+					LedgerToPool(nameof(ReleaseDefenders), "defender_to_pool", new[] { u });
 					if (farFromHome != null && (long)(u.Actor.CenterPosition - homePos).HorizontalLengthSquared > homeRadiusSquared)
 						farFromHome.Add(u);
 				}
@@ -3003,6 +3018,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (u.Actor == null || !BotUnitLeases.IsClaimedByOther(leases, u.Actor, LeaseOwner))
 					return false;
 
+				LedgerHeartbeat("pool_claimed_by_other", u.Actor);
 				activeUnits.Remove(u.Actor);
 				return true;
 			});
@@ -3030,6 +3046,7 @@ namespace OpenRA.Mods.CA.Traits
 						// the other module releases.
 						squad.Units.Remove(u);
 						activeUnits.Remove(a);
+						LedgerHeartbeat("squad_handed_off", a);
 						handedOff = true;
 					}
 				}
@@ -3176,6 +3193,7 @@ namespace OpenRA.Mods.CA.Traits
 				CloseSecurePush(BotMissionAttemptState.Released, BotMissionReasons.Superseded);
 
 			unitsHangingAroundTheBase.AddRange(squad.Units);
+			LedgerToPool(nameof(DismissSquad), "squad_dismissed_" + squad.Type, squad.Units);
 
 			squad.Units.Clear();
 		}
@@ -3190,6 +3208,7 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			unitsHangingAroundTheBase.Add(new UnitWposWrapper(actor));
+			LedgerToPool(nameof(ReturnToIdlePool), "squad_kicked_unit", new[] { actor });
 		}
 
 		int UnitValue(Actor actor)
@@ -3480,7 +3499,10 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					bot?.QueueOrder(new Order("Stop", u.Actor, false));
 					if (!unitsHangingAroundTheBase.Any(p => p.Actor == u.Actor))
+					{
 						unitsHangingAroundTheBase.Add(u);
+						LedgerToPool(nameof(ReleaseM13Response), "m13_response_released", new[] { u });
+					}
 				}
 				leases?.Release(u.Actor, LeaseOwner);
 				claimedBySquads.Remove(u.Actor);
@@ -3569,6 +3591,7 @@ namespace OpenRA.Mods.CA.Traits
 					wave.Units.AddRange(roster);
 					foreach (var u in roster)
 						unitsHangingAroundTheBase.Remove(u);
+					LedgerClaim(ArmyDuty.AttackLiveness, nameof(TryM13UrgentAttack), "m13_urgent_wave", roster);
 					wave.FuzzyStateMachine.ChangeState(wave, new GroundUnitsAttackMoveStateCA(), false);
 					if (M13LaunchPolicyCA.TryMarkDispatchIntent(AttackLiveness, wave.M13WaveId))
 					{
@@ -4018,7 +4041,10 @@ namespace OpenRA.Mods.CA.Traits
 					supportSquad.Units.Add(new UnitWposWrapper(a));
 				}
 				else if (a.Info.HasTraitInfo<AttackBaseInfo>())
+				{
 					unitsHangingAroundTheBase.Add(new UnitWposWrapper(a));
+					LedgerToPool(nameof(FindNewUnits), "new_unit", new[] { a });
+				}
 
 				activeUnits.Add(a);
 			}
@@ -4338,6 +4364,8 @@ namespace OpenRA.Mods.CA.Traits
 				}
 				else
 					unitsHangingAroundTheBase.Clear();
+				LedgerClaim(WaveDuty(TeamLeadOpenOrder()), nameof(CreateAttackForce),
+					aggForce ? "agg_launch" : teamFollowerLaunch ? "team_follower_wave" : "wave_launch", artilleryUnits.Concat(fireSupportUnits).Concat(assaultUnits));
 				if (aggKeep != null)
 					unitsHangingAroundTheBase.AddRange(aggKeep);
 				if (aggForce)
@@ -4505,6 +4533,7 @@ namespace OpenRA.Mods.CA.Traits
 					var u = draftable[i];
 					protectSq.Units.Add(u);
 					unitsHangingAroundTheBase.Remove(u);
+					LedgerClaim(ArmyDuty.OwnBaseDefend, nameof(ProtectOwn), "own_attacked_pool", new[] { u });
 				}
 			}
 

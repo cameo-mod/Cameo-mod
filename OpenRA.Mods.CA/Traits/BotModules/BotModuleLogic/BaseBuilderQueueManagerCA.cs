@@ -923,14 +923,9 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			playerBuildings = world.ActorsHavingTrait<Building>().Where(a => a.Owner == player).ToArray();
-			var excessPowerBonus = baseBuilder.Info.ExcessPowerIncrement * (playerBuildings.Count() / baseBuilder.Info.ExcessPowerIncreaseThreshold.Clamp(1, int.MaxValue));
-			minimumExcessPower = (baseBuilder.Info.MinimumExcessPower + excessPowerBonus).Clamp(baseBuilder.Info.MinimumExcessPower, baseBuilder.Info.MaximumExcessPower);
-			minimumExcessPower = BaseFix01CA.CapPowerMargin(PowerCapOn, minimumExcessPower, baseBuilder.Info.MinimumExcessPower, baseBuilder.Info.PowerMarginCap);
-
-			// Build-order knobs (12.25): power_margin scales the surplus target (no provider = unchanged).
-			var knobs = baseBuilder.BuildOrderKnobs;
-			if (knobs != null)
-				minimumExcessPower = BotBuildOrderKnobs.Scale(minimumExcessPower, knobs.KnobMilli(BuildOrderKnob.PowerMargin));
+			// CONSOLIDATE-03 P4: the required margin comes from PowerArbiter (growth by building group, BASE-13 cap, then the build-order power_margin knob, 12.25; no provider = unchanged).
+			minimumExcessPower = PowerArbiter.Required(baseBuilder.Info.MinimumExcessPower, baseBuilder.Info.MaximumExcessPower, baseBuilder.Info.ExcessPowerIncrement,
+				baseBuilder.Info.ExcessPowerIncreaseThreshold, playerBuildings.Count(), PowerCapOn, baseBuilder.Info.PowerMarginCap, BuildOrderPowerMilli());
 
 			// BP-2 (§19.15): the advisor's radar power reserve — one Refresh-priced read per queue tick.
 			radarPowerMargin = FrontBackAdvisor()?.RadarPowerMargin ?? 0;
@@ -1071,7 +1066,7 @@ namespace OpenRA.Mods.CA.Traits
 				pauseBuilding ??= player.PlayerActor.TraitsImplementing<IBotRequestPauseBuildingProduction>().ToArray();
 				mobileReserve ??= player.PlayerActor.TraitsImplementing<IBotMobileSpendReserve>().FirstEnabledTraitOrDefault();
 				var reserveFloor = mobileReserve?.MobileSpendFloor ?? 0;
-				var cashNow = ProdBusyCA.SweepBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep);
+				var cashNow = CashLedger.BuildingBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep);
 				var isRefinery = baseBuilder.Info.RefineryTypes.Contains(item.Name);
 				var itemEssential = IsArmyFirstEssential(item);
 				var antiRushPick = antiRushPickName != null && item.Name == antiRushPickName; // EARLY-DEF-01
@@ -1903,8 +1898,11 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool HasSufficientPowerForActor(ActorInfo actorInfo)
 		{
-			var powerOk = playerPower == null || (actorInfo.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault)
-				.Sum(p => p.Amount) + playerPower.ExcessPower) >= ScaledBaseMinimumExcessPower();
+			var candidatePower = actorInfo.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault).Sum(p => p.Amount);
+			var excess = PowerArbiter.Effective(playerPower?.ExcessPower ?? 0, baseBuilder.InFlightPower, baseBuilder.PwInflightAdmitArmed);
+			var floor = ScaledBaseMinimumExcessPower();
+			var powerOk = PowerArbiter.Admits(playerPower != null, candidatePower, excess, floor);
+			PowerObserved(PowerArbiter.SiteAdmit, excess, floor, candidatePower, !powerOk);
 			if (!powerOk)
 				TechReject(actorInfo.Name, "power");
 
@@ -1916,10 +1914,7 @@ namespace OpenRA.Mods.CA.Traits
 		// radar's drain is held back so an owned or planned provider is never built blind.
 		int ScaledBaseMinimumExcessPower()
 		{
-			var knobs = baseBuilder.BuildOrderKnobs;
-			var floor = knobs == null ? baseBuilder.Info.MinimumExcessPower
-				: BotBuildOrderKnobs.Scale(baseBuilder.Info.MinimumExcessPower, knobs.KnobMilli(BuildOrderKnob.PowerMargin));
-			return floor + radarPowerMargin;
+			return PowerArbiter.Floor(baseBuilder.Info.MinimumExcessPower, BuildOrderPowerMilli(), radarPowerMargin);
 		}
 
 		// Build-order knobs (12.25): the milli multiplier of a building's fraction by its rules-derived category (1000 = none).
@@ -2270,7 +2265,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			var name = item.Name;
 			return EssentialsLowCashCA.Holds(true, bank, line, !OwnedOrQueued(item), TechChainExempt(name), isRefinery,
-				baseBuilder.Info.PowerTypes.Contains(name) && playerPower != null && playerPower.ExcessPower < minimumExcessPower,
+				baseBuilder.Info.PowerTypes.Contains(name) && PowerShortRaw(PowerArbiter.SiteEssential),
 				item.HasTraitInfo<CashTricklerInfo>(), plannerOrDemand);
 		}
 
@@ -2363,7 +2358,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool OpeningAdmits(ProductionQueue queue, ActorInfo item) =>
 			VotesAdmit(queue, item, RecoverySpendPolicyCA.Admission.General)
-			&& !(EssentialsOn && EssentialsHolds(item, false, false, ProdBusyCA.SweepBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep)));
+			&& !(EssentialsOn && EssentialsHolds(item, false, false, CashLedger.BuildingBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep)));
 
 		// The cheapest building of <types> the faction can build now: within its limits, its production-type limit and its delay; first copies only when asked.
 		ActorInfo OpeningCheapest(ProductionQueue queue, IEnumerable<ActorInfo> buildable, Func<ActorInfo, bool> inRole, bool firstCopyOnly)
@@ -2843,8 +2838,10 @@ namespace OpenRA.Mods.CA.Traits
 		// anchor is claimable), or null. Shared by the economy rung and SUSTAINED-CASH-01 so both pick the same item.
 		ActorInfo ChooseWantedRefinery(ProductionQueue queue, IEnumerable<ActorInfo> buildableThings, ActorInfo power)
 		{
-			if (baseBuilder.HasAdequateRefineryCount())
-				return null;
+			// CONSOLIDATE-03 P3: the chain below is the one refinery-want verdict (RefineryWant / RefineryGate); every exit records the gate that held through RefineryHeld.
+			var adequacy = baseBuilder.AdequateReason();
+			if (adequacy != RefineryAdequacy.Inadequate)
+				return RefineryHeld(RefineryWant.ToGate(adequacy));
 
 			// pb_expansion_refinery_safety: a refinery wanted for an expansion yard under threat is dropped from this slot (not held).
 			if (SafetyOn)
@@ -2853,30 +2850,34 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					// BASE-12: only when every wanting claim is unsafe is the slot dropped; a safe claim behind an unsafe head claim still goes.
 					if (baseBuilder.ExpansionRefineryBlockedByAllUnsafe())
-						return null;
+						return RefineryHeld(RefineryGate.UnsafeAll);
 				}
 				else
 				{
 					var wantedBy = baseBuilder.ExpansionWantsRefinery();
 					var wantedField = wantedBy?.RefineryClaimTarget ?? wantedBy?.ExpansionTarget;
 					if (wantedField != null && !baseBuilder.ExpansionRefinerySafe(wantedField.Value))
-						return null;
+						return RefineryHeld(RefineryGate.UnsafeField);
 				}
 			}
 
 			var refinery = GetProducibleBuilding(baseBuilder.Info.RefineryTypes, buildableThings);
+			if (refinery == null)
+				return RefineryHeld(RefineryGate.NotBuildable);
 
 			// RefineryLimit is shared across every faction the player owns, so always allow
 			// a faction's own first refinery through even if that global cap has already
 			// been reached by a different faction's construction yard.
-			if (refinery == null || baseBuilder.HasMaxRefineriesFor(refinery))
-				return null;
+			if (baseBuilder.HasMaxRefineriesFor(refinery))
+				return RefineryHeld(RefineryGate.MaxRefineries);
 
 			// REF-FIELD-02 (row rf_economy_gate): ref1, the first vehicle factory, then ref2; the interval; the bounded first-copy yield.
 			if (RefineryEconomyGateOn && RefineryEconomyHolds(queue, buildableThings))
-				return null;
+				return RefineryHeld(RefineryGate.Economy);
 
 			var pick = BaseBuilderQueueEvalCA.PickOrPower(refinery, power, HasSufficientPowerForActor);
+			lastRefineryGate = RefineryGate.None;
+			RefineryWantObserved(RefineryGate.None, pick != null);
 			if (pick != null)
 			{
 				AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, pick.Name,
@@ -3003,7 +3004,7 @@ namespace OpenRA.Mods.CA.Traits
 				return null;
 
 			// First priority is to get out of a low power situation
-			if (playerPower != null && playerPower.ExcessPower < minimumExcessPower && power != null && power.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault).Sum(p => p.Amount) > 0)
+			if (PowerShortEmergency(PowerArbiter.SiteOverride) && power != null && power.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault).Sum(p => p.Amount) > 0)
 			{
 					AIUtils.BotDebug("{0} decided to build {1}: Priority override (low power)", queue.Actor.Owner, power.Name);
 					TraceLowPowerOverride(power);
@@ -3193,7 +3194,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (CycleOn)
 			{
 				var cycleLine = TierLine;
-				if (cycleLine > 0 && ProdBusyCA.SweepBank(AllProducersOn, availableCash, orderedCostThisSweep) > cycleLine)
+				if (cycleLine > 0 && CashLedger.BuildingBank(AllProducersOn, availableCash, orderedCostThisSweep) > cycleLine)
 				{
 					var cycled = ChooseCycledProduction(buildableThings, power, c => VotesAdmit(queue, c, RecoverySpendPolicyCA.Admission.General));
 					if (cycled != null)

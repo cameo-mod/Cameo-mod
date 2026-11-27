@@ -152,6 +152,7 @@ namespace OpenRA.Mods.CA.Traits
 		IResourceLayer resourceLayer;
 		ResourceClaimLayer claimLayer;
 		IBotRequestUnitProduction[] requestUnitProduction;
+		IBotHarvesterCounts[] harvesterCounts;
 		ResourceMapBotModule resourceMapModule;
 
 		BotCooldown scanForLowEffectHarvestersCooldown;
@@ -186,6 +187,7 @@ namespace OpenRA.Mods.CA.Traits
 		protected override void Created(Actor self)
 		{
 			requestUnitProduction = self.Owner.PlayerActor.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
+			harvesterCounts = self.Owner.PlayerActor.TraitsImplementing<IBotHarvesterCounts>().ToArray();
 		}
 
 		protected override void TraitEnabled(Actor self)
@@ -311,6 +313,19 @@ namespace OpenRA.Mods.CA.Traits
 				harvestersNeedingOrders.Push(h.Value);
 		}
 
+#if CAMEO_DEV_LOGGING
+		readonly HarvesterStream harvesterStream = new();
+#endif
+
+		// CONSOLIDATE-03 P9 (a), DEV only: the equivalence hash of the module's harvester-need decision (HV-PLAN-STREAM, site 1).
+		[System.Diagnostics.Conditional("CAMEO_DEV_LOGGING")]
+		void HarvesterObserved(int live, int queued, int refineries, int need, HarvesterVerdict verdict)
+		{
+#if CAMEO_DEV_LOGGING
+			harvesterStream.Observe(world.WorldTick, player.ClientIndex, HarvesterPlan.SiteModule, live, queued, refineries, need, (int)verdict);
+#endif
+		}
+
 		protected void ProduceHarvesters(IBot bot)
 		{
 			// Less harvesters than refineries - build a new harvester
@@ -357,7 +372,20 @@ namespace OpenRA.Mods.CA.Traits
 				}
 				else
 				{
-					harvCountTooLow = numHarvesters < AIUtils.CountActorByCommonName(refineries) * Info.HarvestersPerRefinery + Info.AdditionalHarvesters;
+					// CONSOLIDATE-03 P9 (a): the ONE comparison (HarvesterPlan). (b) hv_module_counts_queued: the unit builder's queued harvesters count as present;
+					// no answer (row off, no builder) = countQueued false = the old formula.
+					var refineryCount = AIUtils.CountActorByCommonName(refineries);
+					var queuedHarvesters = 0;
+					var countQueued = false;
+					foreach (var counts in harvesterCounts)
+						if (counts.TryGetQueued(out queuedHarvesters))
+						{
+							countQueued = true;
+							break;
+						}
+
+					harvCountTooLow = HarvesterPlan.ModuleTooLow(numHarvesters, queuedHarvesters, refineryCount, Info.HarvestersPerRefinery, Info.AdditionalHarvesters, countQueued);
+					HarvesterObserved(numHarvesters, queuedHarvesters, refineryCount, HarvesterPlan.ModuleNeed(refineryCount, Info.HarvestersPerRefinery, Info.AdditionalHarvesters), HarvesterPlan.ModuleVerdict(harvCountTooLow));
 				}
 
 				if (harvCountTooLow)
