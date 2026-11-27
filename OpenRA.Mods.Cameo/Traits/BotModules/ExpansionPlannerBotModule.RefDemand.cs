@@ -82,13 +82,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		bool IBotExpansionTargetProvider.RefineryLearnActive => RefLearnArmed;
-		int IBotExpansionTargetProvider.RefineryLearnTierTarget(int tier, int prior)
+		// The learned BASE tier target (user D4: each knob starts at the baseline 2/4/6, not at the computed target). The caller keeps the personality percent and the clamp on top of it.
+		int IBotExpansionTargetProvider.RefineryLearnTierBase(int tier)
 		{
-			if (!RefLearnArmed)
-				return prior;
-
-			var baseline = Math.Clamp(tier, 1, 3) * 2;
-			return RefineryLearn.Resolve(RefineryKnobs, $"refinery.target_t{tier}", prior, baseline - 2, baseline + 2);
+			tier = Math.Clamp(tier, 1, 3);
+			var baseline = tier * 2;
+			return RefineryLearn.Resolve(RefineryKnobs, $"refinery.target_t{tier}", baseline, baseline - 2, baseline + 2);
 		}
 
 		int refineryLearnTick = -1;
@@ -242,7 +241,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		int SpacingTierAt(CPos topLeft)
 		{
-			if (RefLearnArmed && NearestZone(topLeft) is var z && z >= 0 && ZoneStandingCount(z) >= LearnedZoneCap)
+			// The same cap the classification and the field gate use (small-zone rule and ECO-TIMING-FLOOR lift included), or a site would be offered that the spacing then refuses.
+			if (RefLearnArmed && NearestZone(topLeft) is var z && z >= 0 && ZoneStandingCount(z) >= ZoneCapAt(z) + EcoFloorLift())
 				return RefineryDemand.SpacingRefused;
 
 			return RefineryDemand.SpacingTier(topLeft, FriendlyRefineryCells(), ActiveSpacing, ActiveFallbackSpacing);
@@ -262,6 +262,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		int ZoneStandingCount(int zone)
 		{
+			// No zone model yet (before BuildZones) = nothing stands in any zone.
+			if (zoneAnchors == null || zoneAnchors.Count == 0)
+				return 0;
+
 			var tick = world.WorldTick;
 			if (zoneStandingTick != tick || zoneStanding.Length != zoneAnchors.Count)
 			{
@@ -357,8 +361,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>The refinery cap of zone <paramref name="z"/>: 1 for a small zone (RefinerySecondPerZoneMinCells), else RefineryPerZoneCap.</summary>
-		int ZoneCapAt(int z) => RefLearnArmed ? LearnedZoneCap :
-			RefineryDemand.ZoneCapFor(Info.RefineryPerZoneCap, z >= 0 && z < zoneCellsById.Count ? zoneCellsById[z].Count : 0, Info.RefinerySecondPerZoneMinCells);
+		int ZoneCapAt(int z) =>
+			RefineryDemand.ZoneCapFor(RefLearnArmed ? LearnedZoneCap : Info.RefineryPerZoneCap, z >= 0 && z < zoneCellsById.Count ? zoneCellsById[z].Count : 0, Info.RefinerySecondPerZoneMinCells); // the small-zone cap of 1 survives arming (safety rule)
 
 		RefineryDemand.Verdict DemandVerdict(int a)
 		{

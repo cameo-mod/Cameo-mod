@@ -324,9 +324,11 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		int UnclaimedAnchorsInReach => 0;
 
-		/// <summary>REF-LEARN-01: the enabled provider resolves a bounded tier prior; absent providers keep the original path.</summary>
+		/// <summary>REF-LEARN-01: the provider is armed. Absent or off keeps the original tier target path.</summary>
 		bool RefineryLearnActive => false;
-		int RefineryLearnTierTarget(int tier, int prior) => prior;
+
+		/// <summary>REF-LEARN-01: the learned BASE tier target (tier 1 = basic, 2 = radar, 3 = tech centre), starting at the 2/4/6 baseline, bounded to +-2. The caller applies the personality percent and the clamp on top.</summary>
+		int RefineryLearnTierBase(int tier) => tier * 2;
 
 		/// <summary>
 		/// REF-1 B1 (§12.24 v2): the name of the cheapest crawl-eligible building the planner wants produced while

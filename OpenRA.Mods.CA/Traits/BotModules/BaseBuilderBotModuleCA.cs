@@ -1161,12 +1161,13 @@ namespace OpenRA.Mods.CA.Traits
 
 				refTierTick = tick;
 				var radar = RefTierRadarStanding;
-				refTierValue = RefTier.Target(
-					RefTier.BaseTarget(Info.RefTierEarlyTarget, Info.RefTierRadarStep, Info.RefTierTechStep, radar, RefTierTechStanding),
-					RefTierPersonalityPct(radar));
 				var refineryLaw = RefineryLawProvider();
-				if (refineryLaw != null && refineryLaw.RefineryLearnActive)
-					refTierValue = refineryLaw.RefineryLearnTierTarget(RefTierTechStanding ? 3 : radar ? 2 : 1, refTierValue);
+
+				// REF-LEARN-01: the learned value replaces the BASE tier target only; the personality percent and the clamp stay on top of it.
+				var tierBase = refineryLaw != null && refineryLaw.RefineryLearnActive
+					? refineryLaw.RefineryLearnTierBase(RefTierTechStanding ? 3 : radar ? 2 : 1)
+					: RefTier.BaseTarget(Info.RefTierEarlyTarget, Info.RefTierRadarStep, Info.RefTierTechStep, radar, RefTierTechStanding);
+				refTierValue = RefTier.Target(tierBase, RefTierPersonalityPct(radar));
 				return refTierValue;
 			}
 		}

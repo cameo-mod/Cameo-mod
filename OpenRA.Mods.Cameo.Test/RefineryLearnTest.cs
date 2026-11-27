@@ -119,11 +119,25 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheLearnedCapReplacesTheStaticCapButKeepsTheEcoFloorAndTheRowIsOffAndAblatable()
 		{
 			var rd = Source("mods/Cameo/Traits/BotModules/ExpansionPlannerBotModule.RefDemand.cs");
-			Assert.That(rd, Does.Contain("int ZoneCapAt(int z) => RefLearnArmed ? LearnedZoneCap :"));
+			Assert.That(rd, Does.Contain("RefineryDemand.ZoneCapFor(RefLearnArmed ? LearnedZoneCap : Info.RefineryPerZoneCap,"), "armed or not, the small-zone cap of 1 goes through ZoneCapFor (safety rule kept)");
+			Assert.That(rd, Does.Contain("ZoneStandingCount(z) >= ZoneCapAt(z) + EcoFloorLift()"), "the spacing refusal uses the cap the classification and the field gate use, lift included (CM FIX 2)");
+			var standing = rd.Substring(rd.IndexOf("int ZoneStandingCount(int zone)", System.StringComparison.Ordinal));
+			Assert.That(standing.IndexOf("zoneAnchors == null", System.StringComparison.Ordinal), Is.InRange(0, standing.IndexOf("zoneAnchors.Count", System.StringComparison.Ordinal) - 1), "ZoneStandingCount guards a missing zone model before reading it (CM FIX 1)");
+			Assert.That(Source("mods/Cameo/Traits/BotModules/ExpansionPlannerBotModule.RefDemand.cs"), Does.Contain("RefineryLearnTierBase(int tier)").And.Contain("tier * 2"), "the tier prior is the 2/4/6 baseline (user D4)");
+			var bb = Source("mods/CA/Traits/BotModules/BaseBuilderBotModuleCA.cs");
+			Assert.That(bb, Does.Contain("refineryLaw.RefineryLearnTierBase(RefTierTechStanding ? 3 : radar ? 2 : 1)").And.Contain("refTierValue = RefTier.Target(tierBase, RefTierPersonalityPct(radar));"), "the learned value replaces the BASE only; the personality percent and the clamp stay on top");
 			Assert.That(rd, Does.Contain("bool RefLearnArmed => Info.RefLearn && RefDemandArmed && !ablateRefLearn.Off(player, AblationIds.RefLearn);"));
 			Assert.That(rd, Does.Contain("ZoneCapAt(z) + EcoFloorLift()"), "the ECO-TIMING-FLOOR lift stays on top of the learned cap");
 			Assert.That(Source("mods/Cameo/Traits/BotModules/ExpansionPlannerBotModule.cs"), Does.Contain("ZoneCapAt(field) + EcoFloorLift()"));
 			Assert.That(Source("packaging/ai.yaml"), Does.Contain("RefLearn: false"), "off until the A/B arms it");
+		}
+
+		[Test]
+		public void ASmallZoneKeepsItsCapOfOneWhateverIsLearned()
+		{
+			Assert.That(RefineryDemand.ZoneCapFor(3, 10, 40), Is.EqualTo(1), "fewer cells than RefinerySecondPerZoneMinCells = cap 1, learned or not");
+			Assert.That(RefineryDemand.ZoneCapFor(3, 80, 40), Is.EqualTo(3), "a big zone takes the learned cap");
+			Assert.That(RefineryDemand.ZoneCapFor(1, 80, 40), Is.EqualTo(1));
 		}
 
 		[Test]

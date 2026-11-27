@@ -584,6 +584,7 @@ learnables:
     refinery.zone_cap:
         rank: 41
         name: Refinery cap per resource zone
+        small_zone_rule: cap_1_kept_when_armed
         owner: ExpansionPlannerBotModule.RefDemand.cs:ExpansionPlannerBotModule
         bounds: min=1,max=3,safety_floor=1,unit=refineries
         prior: 2
@@ -614,6 +615,7 @@ learnables:
     refinery.target_t1:
         rank: 43
         name: Basic tier refinery target
+        prior_source: baseline_2_4_6_not_computed_target
         owner: BaseBuilderBotModuleCA.cs:BaseBuilderBotModuleCA
         bounds: min=0,max=4,safety_floor=0,unit=refineries
         prior: 2
@@ -628,6 +630,7 @@ learnables:
     refinery.target_t2:
         rank: 44
         name: Radar tier refinery target
+        prior_source: baseline_2_4_6_not_computed_target
         owner: BaseBuilderBotModuleCA.cs:BaseBuilderBotModuleCA
         bounds: min=2,max=6,safety_floor=2,unit=refineries
         prior: 4
@@ -642,6 +645,7 @@ learnables:
     refinery.target_t3:
         rank: 45
         name: Tech centre tier refinery target
+        prior_source: baseline_2_4_6_not_computed_target
         owner: BaseBuilderBotModuleCA.cs:BaseBuilderBotModuleCA
         bounds: min=4,max=8,safety_floor=4,unit=refineries
         prior: 6
