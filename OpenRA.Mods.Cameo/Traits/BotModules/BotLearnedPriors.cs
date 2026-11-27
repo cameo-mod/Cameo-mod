@@ -120,15 +120,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			loaded = true;
 			var fs = Game.ModData.DefaultFileSystem;
-			var priorsPath = LearnedFilePath.Resolve(Info.PriorsFile);
-			if (!fs.Exists(priorsPath))
+			var priorsPath = LearnedYaml.ExistingPath(fs, Info.PriorsFile);
+			if (priorsPath == null)
 			{
 				Log.Write("debug", $"AI {player.InternalName}: LEARNED priors: no priors ({Info.PriorsFile} missing), everything neutral");
 				return;
 			}
 
-			using (var stream = fs.Open(priorsPath))
-				priors = ArsenalPriors.Parse(MiniYaml.FromStream(stream, Info.PriorsFile));
+			// Open and parse errors propagate (this loader never caught them).
+			priors = ArsenalPriors.Parse(LearnedYaml.Parse(fs, priorsPath, Info.PriorsFile));
 
 #if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI {player.InternalName}: LEARNED priors: {priors.PairCount} pairs, {priors.TypeCount} types");

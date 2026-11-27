@@ -214,8 +214,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			loaded = true;
 			var fs = Game.ModData.DefaultFileSystem;
-			var priorsPath = LearnedFilePath.Resolve(Info.PriorsFile);
-			if (!fs.Exists(priorsPath))
+			var priorsPath = LearnedYaml.ExistingPath(fs, Info.PriorsFile);
+			if (priorsPath == null)
 			{
 				priorsState = "none";
 				Log.Write("debug", $"AI {player.InternalName}: TIER1 priors: none ({Info.PriorsFile} missing), neutral");
@@ -224,8 +224,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			try
 			{
-				using (var stream = fs.Open(priorsPath))
-					priors = BotEngagementPriors.Parse(MiniYaml.FromStream(stream, Info.PriorsFile));
+				priors = BotEngagementPriors.Parse(LearnedYaml.Parse(fs, priorsPath, Info.PriorsFile));
 
 				priorsState = "fitted";
 #if CAMEO_DEV_LOGGING
