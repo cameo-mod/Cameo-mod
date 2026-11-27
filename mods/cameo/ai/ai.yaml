@@ -142,6 +142,11 @@
 	GrantConditionOnBotOwner@buildorderknobs:
 		Condition: build_order_knobs
 		Bots: fransbot
+	# LEARN-ALL-02 P1b: the accepted learned snapshot (global x own faction x enemy faction x observed style, per own personality) feeds the
+	# IBotMixLearning provider. Default fransbot-only: inert on master, armed by the A/B increment (switch group AK_learn_all, added with the arm).
+	GrantConditionOnBotOwner@learnall:
+		Condition: learn_all
+		Bots: fransbot
 	# Army staging (DESIGN 19.12, AI_ARCHITECTURE 12.29): the idle army waits at the front with the defences, split by threatened side.
 	# The arm sets Bots (switch group AM_army_staging); empty by default - inert on master.
 	GrantConditionOnBotOwner@armystaging:
@@ -4142,6 +4147,11 @@ Player:
 	# `genericbot && context_features`: off on master until the increment A/B arms it (switch group BX_context_providers).
 	ContextFeatureProviderBotModule:
 		RequiresCondition: genericbot && context_features
+	# `genericbot && learn_all`: off on master until the increment A/B arms it. Reads ai/learned/learn_all.yaml once at match start; never fits or writes.
+	LearnAllBotModule:
+		RequiresCondition: genericbot && learn_all
+		LearnedFile: ai/learned/learn_all.yaml
+		RefreshTicks: 250
 	# `genericbot && build_order_knobs`: off on master until the increment A/B arms it (switch group AK_build_order_knobs).
 	BuildOrderKnobsBotModule:
 		RequiresCondition: genericbot && build_order_knobs
