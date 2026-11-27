@@ -1581,7 +1581,9 @@ namespace OpenRA.Mods.CA.Traits
 		McvExpansionManagerBotModule mcvManager;
 		int mcvNeedCheckTick = -1;
 		bool mcvNeeded;
+#if CAMEO_DEV_LOGGING
 		int nextMcvNoQueueLogTick;
+#endif
 
 		void TryRebuildMcv(IBot bot)
 		{
@@ -1612,7 +1614,9 @@ namespace OpenRA.Mods.CA.Traits
 
 			ProductionQueue best = null;
 			ActorInfo bestItem = null;
+#if CAMEO_DEV_LOGGING
 			var capableButBusy = false;
+#endif
 			foreach (var queue in queues)
 			{
 				var item = queue.BuildableItems().Where(b => types.Contains(b.Name)).OrderBy(b => Cost(queue, b)).ThenBy(b => b.Name, StringComparer.Ordinal).FirstOrDefault();
@@ -1621,7 +1625,9 @@ namespace OpenRA.Mods.CA.Traits
 
 				if (LiveFreeSlots(queue) <= 0)
 				{
+#if CAMEO_DEV_LOGGING
 					capableButBusy = true;
+#endif
 					continue;
 				}
 
