@@ -208,25 +208,28 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					var regularTargetPriority = BotRng.For(owner.Bot, nameof(AirStateBaseCA)).Next(0, 100);
 
 					if (owner.SquadManager.Info.AirToAirPriority > regularTargetPriority)
-					{
-						target = owner.World.Actors.Where(a => owner.SquadManager.IsPreferredEnemyAircraft(a) &&
-							owner.SquadManager.IsNotHiddenUnit(a) &&
-							a.IsTargetableBy(leader) &&
-							owner.SquadManager.Info.BigAirThreats.Contains(a.Info.Name))
-							.ClosestToIgnoringPath(pos);
-					}
+						target = FindClosestAirTarget(owner, leader, pos, bigThreatsOnly: true);
 				}
 
 				if (target != null)
 					return target;
 
-				target = owner.World.Actors.Where(a => owner.SquadManager.IsPreferredEnemyAircraft(a) &&
-					owner.SquadManager.IsNotHiddenUnit(a) &&
-					a.IsTargetableBy(leader))
-					.ClosestToIgnoringPath(pos);
+				target = FindClosestAirTarget(owner, leader, pos, bigThreatsOnly: false);
 			}
 
 			return target;
+		}
+
+		// Both passes consume the engine's actor enumeration in order and use the
+		// same nearest-target selector. The tag predicate remains last, as it was
+		// in the big-threat-first branch.
+		static Actor FindClosestAirTarget(SquadCA owner, Actor leader, WPos pos, bool bigThreatsOnly)
+		{
+			return owner.World.Actors.Where(a => owner.SquadManager.IsPreferredEnemyAircraft(a) &&
+				owner.SquadManager.IsNotHiddenUnit(a) &&
+				a.IsTargetableBy(leader) &&
+				(!bigThreatsOnly || owner.SquadManager.Info.BigAirThreats.Contains(a.Info.Name)))
+				.ClosestToIgnoringPath(pos);
 		}
 
 		protected static Actor FindDefenselessTarget(SquadCA owner)
