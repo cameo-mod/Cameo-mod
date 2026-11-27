@@ -185,9 +185,9 @@ namespace OpenRA.Mods.Cameo.Test
 			var classic = yaml.IndexOf("SquadManagerBotModuleCA@classic:", StringComparison.Ordinal);
 			Assert.That(classic, Is.GreaterThan(0));
 			Assert.That(yaml[classic..], Does.Not.Contain("StalemateScout"), "classic untouched");
-			Assert.That(Count(yaml[..classic], "\n\t\tStalemateScoutEnabled: false\n"), Is.EqualTo(6));
+			Assert.That(Count(yaml[..classic], "\n\t\tStalemateScoutEnabled: true\n"), Is.EqualTo(6));
 			Assert.That(Count(yaml[..classic], "\n\t\tStalemateScoutStartTick: 0\n"), Is.EqualTo(6));
-			Assert.That(Regex.IsMatch(yaml, "StalemateScoutEnabled: true"), Is.False, "ships OFF until its A/B passes");
+			Assert.That(Regex.IsMatch(yaml[classic..], "StalemateScoutEnabled: true"), Is.False, "classic never armed (the playtest B1 ARM arms the six personality blocks)");
 
 			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.StalemateScout.cs");
 			Assert.That(wiring, Does.Contain("internal bool StalemateScoutOn => ArmyLaunchArbiterOn && Info.StalemateScoutEnabled && !ablateSsScoutPush.Off(Player, AblationIds.SsScoutPush);"));
