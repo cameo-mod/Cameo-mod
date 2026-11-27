@@ -525,7 +525,10 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// PUSHBAR-RCA-01 (row sq_guard_lend): what the seat's quiet home guard would lend counts in its idle army (no enemy scan, see ArmyGuardPick).
+			// LATEPUSH-01 P1: the free army before the lend, and after it the seat's eligible army (free plus the guard units above the floor) next to the blob; both no-ops with the rows off.
+			LatePushBlobBegin(units, value);
 			ArmyGuardBlob(ref units, ref value);
+			LatePushBlobEnd();
 
 			return (units, value);
 		}
@@ -597,7 +600,9 @@ namespace OpenRA.Mods.CA.Traits
 
 			var blob = team.Pool(now, Info.TeamLeadPoolMaxAgeTicks);
 			var (minUnits, minValue) = WaveMinActive ? WaveMinBars() : (0, 0);
-			var ready = TeamLeadCA.BlobReady(blob.Units, blob.Value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue);
+			// LATEPUSH-01 P1 (row lp_age_min): the ordinary ready test needs the age-scaled bars (an open all-in keeps WAVE-MIN); the rally floor below stays on the WAVE-MIN bars, and the promotion of the rally uses the age-scaled ones.
+			var (barUnits, barValue) = WaveMinActive ? LatePushBars(team, now, allIn != null) : (0, 0);
+			var ready = TeamLeadCA.BlobReady(blob.Units, blob.Value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(barUnits, barValue), barUnits, barValue);
 			var interval = TeamLeadCA.PublishInterval(TeamLeadCadenceTicks(), Info.TeamLeadFallbackTicks);
 			var why = TeamLeadCA.OrderDue(false, ready, now, team.LastOrderTick, interval, team.AnyAtCap(now, Info.TeamLeadPoolMaxAgeTicks) || allIn != null)
 				? TeamLeadCA.PublishWhy.Ready
@@ -623,6 +628,8 @@ namespace OpenRA.Mods.CA.Traits
 			if (!picked)
 				return;
 
+			// LATEPUSH-01 P1 (design 02 D-3): the map context of the next bar reads this pick (the bar of this very order was needed before the target was known).
+			team.NoteTarget(target, now);
 			var forced = TeamLeadCA.FallbackForced(now, team.LastOrderTick, Info.TeamLeadFallbackTicks);
 			var order = TeamLeadIssue(home, target, targetId, now);
 			if (why == TeamLeadCA.PublishWhy.Gather)
@@ -637,7 +644,7 @@ namespace OpenRA.Mods.CA.Traits
 				+ " pincer=" + order.HasProngs + " leader=" + teamLeadKey);
 #if CAMEO_DEV_LOGGING
 			// LATEPUSH-01 P0 (DEV only): the order row of the assignment evidence.
-			LatePushOrderRow(order, blob.Units, blob.Value, minUnits, minValue);
+			LatePushOrderRow(order, blob.Units, blob.Value, barUnits, barValue);
 #endif
 			if (order.AllIn)
 				TeamLeadAllInRecord("all_in_start", order, "why=" + order.AllInWhy + " blob=" + blob.Units + "/" + blob.Value + " target=" + targetId + " hunt=" + (targetId == 0 ? 1 : 0));
@@ -650,7 +657,8 @@ namespace OpenRA.Mods.CA.Traits
 		void TeamLeadPromoteRally(TeamLeadOrder order, int now)
 		{
 			var (units, value) = order.CommittedTotals();
-			var (minUnits, minValue) = WaveMinActive ? WaveMinBars() : (0, 0);
+			// LATEPUSH-01 P1 (row lp_age_min): the promotion bars are the age-scaled ones (WAVE-MIN with the row off, or for an all-in order).
+			var (minUnits, minValue) = WaveMinActive ? LatePushBars(teamLeadTeam, now, order.AllIn) : (0, 0);
 			if (!TeamLeadCA.BlobReady(units, value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue))
 				return;
 
@@ -660,6 +668,7 @@ namespace OpenRA.Mods.CA.Traits
 				targetId = order.TargetActorId;
 			}
 
+			teamLeadTeam?.NoteTarget(target, now);
 			order.Promote(now, target, targetId);
 			DiagnosticTeamEvent("team_promote", "seq=" + order.Seq + " committed=" + units + "/" + value + " target=" + targetId + " leader=" + teamLeadKey);
 		}

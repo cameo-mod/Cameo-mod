@@ -90,7 +90,8 @@ namespace OpenRA.Mods.CA.Traits
 			var won = false;
 			if (!atCap && !huge && now >= Info.TeamLeadAllInStartTick)
 			{
-				var (minUnits, minValue) = WaveMinActive ? WaveMinBars() : (0, 0);
+				// LATEPUSH-01 P1 (row lp_age_min): the nearly-won scan runs for a blob that could publish an ordinary order, so it asks the same age-scaled bars as the ready test.
+				var (minUnits, minValue) = WaveMinActive ? LatePushBars(team, now, false) : (0, 0);
 				if (TeamLeadCA.BlobReady(blob.Units, blob.Value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(minUnits, minValue), minUnits, minValue))
 				{
 					// Throttled: the scan walks every building and every frozen actor of the map, so the last result is reused for TeamLeadAllInScanIntervalTicks.

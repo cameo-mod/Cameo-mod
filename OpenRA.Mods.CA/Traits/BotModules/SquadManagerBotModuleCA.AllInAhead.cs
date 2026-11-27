@@ -151,6 +151,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			v.AllyAttacked = TeamBlackboard.Collect(Player).DefendRequests > 0;
 			v.SuperReady = AheadSuperReady();
+			LatePushNoteRatio(v, now);
 			v.Scanned = true;
 		}
 
