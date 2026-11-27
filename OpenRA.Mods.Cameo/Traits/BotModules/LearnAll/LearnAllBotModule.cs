@@ -47,6 +47,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		IBotCurrentPersonality[] personalityProviders;
 		IBotObservedMainTargetStyle[] styleProviders;
 		IBotMainTargetProvider[] mainTargetProviders;
+		string lastMainTarget = "";
+		string lastMainStyle;
 		LearnTable table;
 		string[] enemies = Array.Empty<string>();
 		string ownFaction = "";
@@ -98,6 +100,33 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var personality = Personality();
 			var (mainTarget, mainStyle) = ReadMainTarget();
 			return TryResolve(table, personality, knob, ownFaction, enemies, mainTarget, mainStyle, out permille);
+		}
+
+		/// <summary>
+		/// The seat's learning context for the DEV exposure writer: the same player-level facts the decision path reads (own faction, one public faction per enemy PLAYER, the authoritative main target
+		/// and its observed style, the current personality). Works whether or not the module is enabled (training is independent of the read switch). The main target is the LAST authoritative one
+		/// of the game (it may have died by the end); "" = never had one. Never an enemy's personality or true faction.
+		/// </summary>
+		public LearnSeatContext SeatContext()
+		{
+			// Called by the DEV writer at game over only: the match is decided, so refreshing the decision cache here cannot change any decision.
+			ObserveMainTarget();
+			Refresh();
+			return new LearnSeatContext(ownFaction, enemies, lastMainTarget, lastMainStyle, Personality());
+		}
+
+		/// <summary>
+		/// Record-only look at the authoritative main target and its observed style for the DEV writer's tick. It reads the live providers through ReadMainTarget (the same read the decision
+		/// path makes, which caches nothing) and touches NONE of the decision-path state (no refresh phase, no cached faction or enemies), so a game with the writer on decides exactly as one with it off.
+		/// </summary>
+		public void ObserveMainTarget()
+		{
+			var (target, style) = ReadMainTarget();
+			if (target.Length == 0)
+				return;
+
+			lastMainTarget = target;
+			lastMainStyle = style;
 		}
 
 		(string Faction, string Style) ReadMainTarget()
@@ -160,6 +189,29 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				.Where(p => p != player && !p.NonCombatant && !p.Spectating && player.RelationshipWith(p) == PlayerRelationship.Enemy)
 				.Select(BotFactionView.PublicFactionOf)
 				.ToArray();
+		}
+	}
+}
+
+
+namespace OpenRA.Mods.Cameo.Traits.BotModules
+{
+	/// <summary>The player-level context of one bot seat that a learning exposure record carries. Factions are public names ("" = hidden or unpicked); no actor, no enemy personality.</summary>
+	public readonly struct LearnSeatContext
+	{
+		public readonly string OwnFaction;
+		public readonly IReadOnlyList<string> Enemies;
+		public readonly string MainTarget;
+		public readonly string MainTargetStyle;
+		public readonly string Personality;
+
+		public LearnSeatContext(string ownFaction, IReadOnlyList<string> enemies, string mainTarget, string mainTargetStyle, string personality)
+		{
+			OwnFaction = ownFaction;
+			Enemies = enemies;
+			MainTarget = mainTarget;
+			MainTargetStyle = mainTargetStyle;
+			Personality = personality;
 		}
 	}
 }

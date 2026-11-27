@@ -21,6 +21,7 @@
     <Compile Include="../OpenRA.Mods.Cameo.Dev/InsuranceRowBudget.cs" Link="Dev/InsuranceRowBudget.cs" />
     <Compile Include="../OpenRA.Mods.Cameo.Dev/DevCashBonus.cs" Link="Dev/DevCashBonus.cs" />
     <Compile Include="../OpenRA.Mods.Cameo.Dev/LearnAllTrainer.cs" Link="Dev/LearnAllTrainer.cs" />
+    <Compile Include="../OpenRA.Mods.Cameo.Dev/LearnAllExposure.cs" Link="Dev/LearnAllExposure.cs" />
     <!-- DEV-only pure class: guarded out of the release Cameo assembly, compiled into the test assembly only when the Cameo assembly does not have it. -->
     <Compile Include="../OpenRA.Mods.Cameo/Traits/DefendReactionTracker.cs" Link="Dev/DefendReactionTracker.cs" Condition="'$(CameoDevLogging)' != 'true'" />
     <ProjectReference Include="../OpenRA.Mods.Cameo.Unified/OpenRA.Mods.Cameo.Unified.csproj" />
@@ -47,6 +48,9 @@
           Link="source/mods/Cameo.Dev/AiPlayerTelemetryDev.cs" CopyToOutputDirectory="Always" />
     <None Include="../OpenRA.Mods.Cameo.Dev/AiPlayerTelemetryDev.Coverage.cs"
           Link="source/mods/Cameo.Dev/AiPlayerTelemetryDev.Coverage.cs" CopyToOutputDirectory="Always" />
+    <None Include="../OpenRA.Mods.Cameo.Dev/LearnAllExposureWriterDev.cs"
+          Link="source/mods/Cameo.Dev/LearnAllExposureWriterDev.cs" CopyToOutputDirectory="Always" />
+    <None Include="../mods/cameo/rules/dev/logging.yaml" Link="source/packaging/dev-logging.yaml" CopyToOutputDirectory="Always" />
     <None Include="MissionBuildLineOracle.cs" Link="source/MissionBuildLineOracle.cs" CopyToOutputDirectory="Always" />
     <None Include="../mods/cameo/mod.yaml" Link="source/packaging/cameo-mod.yaml" CopyToOutputDirectory="Always" />
     <None Include="../mods/cameo/rules/world.yaml" Link="source/packaging/world.yaml" CopyToOutputDirectory="Always" />

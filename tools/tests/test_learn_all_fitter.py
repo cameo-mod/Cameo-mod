@@ -406,5 +406,28 @@ class Pipeline(unittest.TestCase):
         self.assertEqual(self.read(), before)
 
 
+# The exact line OpenRA.Mods.Cameo.Dev.LearnAllExposure.Record writes for the fixture of LearnAllExposureTest.GoldenLine (same literal in both tests).
+WRITER_GOLDEN_LINE = ('{"game_id":"g1","seq":1700000000,"seat":"seat_2","personality":"rush","own_faction":"gdi","main_target":"nod","main_target_style":"boom",'
+                      '"enemies":[{"faction":"nod","weight":2},{"faction":null,"weight":1}],"knobs":[{"knob":"wave_role.frontline","signal":0.4},{"knob":"refinery.spacing","signal":null}]}')
+
+
+class ExposureWriterFormat(unittest.TestCase):
+    """P1c-2: the C# DEV writer and this fitter agree on the record format, byte for byte."""
+
+    def test_the_writer_line_is_a_valid_record_and_steps_only_the_knob_with_a_signal(self):
+        rec = json.loads(WRITER_GOLDEN_LINE)
+        game, seq, error = f.check_records([rec])
+        self.assertIsNone(error)
+        self.assertEqual((game, seq), ("g1", 1700000000))
+        table = f.Table()
+        self.assertEqual(f.apply_records(table, game, [rec]), 2, "any + rush tables, one knob with evidence; the null-signal knob takes no step")
+        self.assertIn("wave_role.frontline", table.personalities["rush"])
+        self.assertNotIn("refinery.spacing", table.personalities.get("rush", {}))
+        axes = table.personalities["rush"]["wave_role.frontline"]
+        self.assertIn("nod", axes.enemy)
+        self.assertIn("boom", axes.style)
+        self.assertEqual(sorted(axes.enemy), ["nod"], "the Random (null-faction) enemy takes no faction step")
+
+
 if __name__ == "__main__":
     unittest.main()
