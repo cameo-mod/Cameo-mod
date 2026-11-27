@@ -168,10 +168,10 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheEngineModuleIsSwitchedOffOnlyThroughTheModYamlAndTheYamlDoesNotArmTheSwitch()
 		{
 			var y = Source("packaging/ai.yaml");
-			Assert.That(y, Does.Contain("\tSupportPowerSliceBotModule:\n\t\tRequiresCondition: genericbot\n\tSupportPowerBotASModule:\n\t\tRequiresCondition: (genericbot || classicbot) && !sp-slice\n\t\tDecisions:"),
+			Assert.That(y, Does.Contain("\tSupportPowerSliceBotModule:\n\t\tRequiresCondition: genericbot\n\t\tSliceEnabled: true\n\tSupportPowerBotASModule:\n\t\tRequiresCondition: (genericbot || classicbot) && !sp-slice\n\t\tDecisions:"),
 				"the classic bot never has the slice module, so its engine module is as before; the decisions stay where they were");
 			Assert.That(y, Does.Contain("\tSupportPowerBotASModule@wc2:\n\t\tRequiresCondition: genericbot && !sp-slice\n"));
-			Assert.That(y, Does.Not.Contain("SliceEnabled"), "arming is a separate, reviewed yaml change (Wave B2)");
+			Assert.That(y.Split("SliceEnabled: true").Length - 1, Is.EqualTo(1), "armed once, in the genericbot-only SupportPowerSliceBotModule block (playtest B2 ARM)");
 			Assert.That(typeof(SupportPowerSliceBotModuleInfo).GetField("ActiveCondition").GetValue(Activator.CreateInstance(typeof(SupportPowerSliceBotModuleInfo))), Is.EqualTo("sp-slice"));
 		}
 	}

@@ -916,6 +916,7 @@ Player:
 		RequiresCondition: genericbot || classicbot
 	SupportPowerSliceBotModule:
 		RequiresCondition: genericbot
+		SliceEnabled: true
 	SupportPowerBotASModule:
 		RequiresCondition: (genericbot || classicbot) && !sp-slice
 		Decisions:
