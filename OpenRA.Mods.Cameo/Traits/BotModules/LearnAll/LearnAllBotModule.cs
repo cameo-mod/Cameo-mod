@@ -40,7 +40,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public override object Create(ActorInitializer init) { return new LearnAllBotModule(init.Self, this); }
 	}
 
-	public class LearnAllBotModule : ConditionalTrait<LearnAllBotModuleInfo>, IBotMixLearning
+	public class LearnAllBotModule : ConditionalTrait<LearnAllBotModuleInfo>, IBotMixLearning, IBotLearnedKnobs
 	{
 		readonly World world;
 		readonly OpenRA.Player player;
@@ -86,6 +86,33 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			// No observed style on this branch yet (B4 supplies it through TryRoleMatchup): S_obs is unseen = 0, so the three-axis result applies exactly.
 			values = new MixRoleValues(axes.Global / 1000.0, axes.Own(ownFaction) / 1000.0, enemyEff / 1000.0, 0.0);
+			return true;
+		}
+
+		/// <summary>
+		/// The generic read seam (IBotLearnedKnobs): the decision value of any stored knob in this match-up, in per-mille. False when the module is off or ablated, the knob is empty or
+		/// not in the snapshot: the consumer then uses its prior. The unseen observed style (B4) resolves as the exact three-axis result.
+		/// </summary>
+		bool IBotLearnedKnobs.TryResolvePermille(string knob, out int permille)
+		{
+			permille = LearnAllMath.One;
+			if (IsTraitDisabled || string.IsNullOrEmpty(knob) || ablateLearnAll.Off(player, AblationIds.LearnAll))
+				return false;
+
+			table ??= Load();
+			Refresh();
+			var personality = player.PlayerActor.TraitsImplementing<IBotCurrentPersonality>().FirstEnabledTraitOrDefault()?.CurrentPersonality;
+			return TryResolve(table, personality, knob, ownFaction, enemies, mainTarget, out permille);
+		}
+
+		/// <summary>The pure half of the read seam: false for an empty table argument or a knob the table does not hold, else exactly LearnTable.Resolve (style unseen).</summary>
+		public static bool TryResolve(LearnTable learned, string personality, string knob, string ownFaction, IReadOnlyList<string> enemyFactions, string mainTargetFaction, out int permille)
+		{
+			permille = LearnAllMath.One;
+			if (learned == null || string.IsNullOrEmpty(knob) || learned.Find(personality, knob) == null)
+				return false;
+
+			permille = learned.Resolve(personality, knob, ownFaction, enemyFactions, mainTargetFaction, null);
 			return true;
 		}
 

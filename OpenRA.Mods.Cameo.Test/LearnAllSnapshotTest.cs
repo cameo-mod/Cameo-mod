@@ -110,6 +110,39 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TheGenericReadSeamLivesInTheCaAssemblyAndSwitchOffIsNeutral()
+		{
+			Assert.That(typeof(OpenRA.Mods.CA.Traits.IBotLearnedKnobs).Assembly, Is.SameAs(typeof(OpenRA.Mods.CA.Traits.IBotMixLearning).Assembly), "visible to the squad manager");
+
+			var code = Source("mods/Cameo/Traits/BotModules/LearnAll/LearnAllBotModule.cs");
+			Assert.That(code, Does.Contain("class LearnAllBotModule : ConditionalTrait<LearnAllBotModuleInfo>, IBotMixLearning, IBotLearnedKnobs"));
+			Assert.That(code, Does.Contain("if (IsTraitDisabled || string.IsNullOrEmpty(knob) || ablateLearnAll.Off(player, AblationIds.LearnAll))\n\t\t\t\treturn false;"), "off, ablated or empty = false: the consumer keeps its prior");
+			Assert.That(Fixture("mcv_deploy_ai.yaml"), Does.Contain("\tGrantConditionOnBotOwner@learnall:\n\t\tCondition: learn_all\n\t\tBots:\n"), "the module is off by default");
+		}
+
+		[Test]
+		public void TheGenericReadSeamResolvesExactlyLikeTheTableAndRefusesAnUnknownKnob()
+		{
+			var table = LearnAllSnapshot.ParseText("BotLearnAll:\n\tVersion: 1\n\tKnob@any__raid.k:\n\t\tGlobal: 1200\n\t\tOwn@gdi: 900\n\t\tEnemy@nod: 1500\n\t\tEnemy@allies: 700\n\t\tStyle@boom: 1100\n\tKnob@rush__raid.k:\n\t\tGlobal: 1300\n");
+			string[] enemies = ["nod", "allies"];
+			foreach (var personality in new[] { "any", "rush", "turtle", null })
+			{
+				Assert.That(LearnAllBotModule.TryResolve(table, personality, "raid.k", "gdi", enemies, "nod", out var v), Is.True, personality);
+				Assert.That(v, Is.EqualTo(table.Resolve(personality, "raid.k", "gdi", enemies, "nod", null)), "parity with LearnTable.Resolve, personality " + personality);
+			}
+
+			Assert.That(LearnAllBotModule.TryResolve(table, "any", "raid.k", "gdi", [], "", out var noEnemies), Is.True);
+			Assert.That(noEnemies, Is.EqualTo(table.Resolve("any", "raid.k", "gdi", [], "", null)));
+
+			Assert.That(LearnAllBotModule.TryResolve(table, "any", "no.such.knob", "gdi", enemies, "nod", out var unknown), Is.False, "unknown knob");
+			Assert.That(unknown, Is.EqualTo(1000), "neutral out value");
+			Assert.That(LearnAllBotModule.TryResolve(table, "any", "", "gdi", enemies, "nod", out _), Is.False);
+			Assert.That(LearnAllBotModule.TryResolve(table, "any", null, "gdi", enemies, "nod", out _), Is.False);
+			Assert.That(LearnAllBotModule.TryResolve(null, "any", "raid.k", "gdi", enemies, "nod", out _), Is.False);
+			Assert.That(LearnAllBotModule.TryResolve(new LearnTable(), "any", "raid.k", "gdi", enemies, "nod", out _), Is.False, "nothing learned = false, not 1000");
+		}
+
+		[Test]
 		public void TheProviderIsTheOnlyNewSeamAndItAnswersNothingWhenOffAblatedOrUnlearned()
 		{
 			var code = Source("mods/Cameo/Traits/BotModules/LearnAll/LearnAllBotModule.cs");
