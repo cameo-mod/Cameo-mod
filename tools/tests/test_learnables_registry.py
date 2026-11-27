@@ -274,6 +274,20 @@ class LearnabilityRegistryTests(unittest.TestCase):
                         assert_values_in_bounds(self, [node.value], bounds["engage_margin_pct"], node.key)
                     else:
                         self.fail(f"unrecognized fight-learning field {node.key}")
+            elif schema == "learn_all_v1":
+                root = next(node for node in file_nodes if node.key == "BotLearnAll")
+                for node in root.children:
+                    if node.key == "Version":
+                        assert_values_in_bounds(self, [node.value], bounds["version"], node.key)
+                    elif node.key == "Applied":
+                        self.assertTrue(all(not game.value.strip() for game in node.children), "Applied lists game ids only")
+                    elif node.key.startswith("Knob@"):
+                        for leaf in numeric_leaves(node):
+                            if not leaf.key.startswith(("Own@", "Enemy@", "Style@")) and leaf.key != "Global":
+                                self.fail(f"unrecognized learn-all field {leaf.key}")
+                            assert_values_in_bounds(self, [leaf.value], bounds["estimate_permille"], leaf.key)
+                    else:
+                        self.fail(f"unrecognized learn-all field {node.key}")
             else:
                 self.fail(f"unknown artifact schema {schema}")
 

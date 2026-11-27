@@ -87,10 +87,17 @@ learnables:
         credit_metric: composition_delta_to_value_traded
         method: capped_prototype_smoothing
         scope_keys: faction,matchup,map_feature_vector,squad_type,phase
-        fitter: tools/ai/fit_unit_mix.py (planned)
+        fitter: tools/ai/fit_learn_all.py
         sample_floor: 100 effective episodes
         switch: unscheduled
-        state: planned
+        state: wired_inert_empty_snapshot
+        activation_note: LEARN-ALL-02 holds the four-axis (global, own faction, enemy faction, observed style) permille tables for every learned knob, wave_role.<role> first (the unit-mix role weights). LearnAllBotModule is off by default (empty Bots list of GrantConditionOnBotOwner@learnall) and the committed snapshot is empty = neutral 1000; release reads it only, DEV trains it one step per game. Other knobs (unit_effect, fogmem, raid) register their own rows when armed.
+        artifact:
+            path: mods/cameo/ai/learned/learn_all.yaml
+            schema: learn_all_v1
+            storage_bounds:
+                version: 1..1
+                estimate_permille: 50..20000
     opening_build:
         rank: 5
         name: Opening build
