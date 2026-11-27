@@ -4873,6 +4873,15 @@ Player:
 		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
 		GuardFloorEnabled: true
 		GuardFloorPercent: 20
+		# LATEPUSH-01 P1 (rows lp_age_min and lp_commit; design 01 D1 and D2): the leader's team bar is the WAVE-MIN bar x (1 + tick / LatePushAgeTicks) x map context x the learned multiplier L (prior below, per personality), capped at LatePushCapPercent of what the team can send; an order commits a growing share of the eligible army. lp_commit needs the guard floor above.
+		LatePushAgeMinEnabled: true
+		LatePushCommitEnabled: true
+		LatePushAgeTicks: 30000
+		LatePushCapPercent: 60
+		LatePushCommitBasePercent: 30
+		LatePushCommitCapPercent: 85
+		LatePushMapRefCells: 64
+		LatePushPersonalityPercent: 85
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		ArmyDutyTrace: true
@@ -5054,6 +5063,15 @@ Player:
 		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
 		GuardFloorEnabled: true
 		GuardFloorPercent: 60
+		# LATEPUSH-01 P1 (rows lp_age_min and lp_commit; design 01 D1 and D2): the leader's team bar is the WAVE-MIN bar x (1 + tick / LatePushAgeTicks) x map context x the learned multiplier L (prior below, per personality), capped at LatePushCapPercent of what the team can send; an order commits a growing share of the eligible army. lp_commit needs the guard floor above.
+		LatePushAgeMinEnabled: true
+		LatePushCommitEnabled: true
+		LatePushAgeTicks: 30000
+		LatePushCapPercent: 60
+		LatePushCommitBasePercent: 30
+		LatePushCommitCapPercent: 85
+		LatePushMapRefCells: 64
+		LatePushPersonalityPercent: 120
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		ArmyDutyTrace: true
@@ -5231,6 +5249,15 @@ Player:
 		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
 		GuardFloorEnabled: true
 		GuardFloorPercent: 40
+		# LATEPUSH-01 P1 (rows lp_age_min and lp_commit; design 01 D1 and D2): the leader's team bar is the WAVE-MIN bar x (1 + tick / LatePushAgeTicks) x map context x the learned multiplier L (prior below, per personality), capped at LatePushCapPercent of what the team can send; an order commits a growing share of the eligible army. lp_commit needs the guard floor above.
+		LatePushAgeMinEnabled: true
+		LatePushCommitEnabled: true
+		LatePushAgeTicks: 30000
+		LatePushCapPercent: 60
+		LatePushCommitBasePercent: 30
+		LatePushCommitCapPercent: 85
+		LatePushMapRefCells: 64
+		LatePushPersonalityPercent: 100
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		ArmyDutyTrace: true
@@ -5410,6 +5437,15 @@ Player:
 		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
 		GuardFloorEnabled: true
 		GuardFloorPercent: 40
+		# LATEPUSH-01 P1 (rows lp_age_min and lp_commit; design 01 D1 and D2): the leader's team bar is the WAVE-MIN bar x (1 + tick / LatePushAgeTicks) x map context x the learned multiplier L (prior below, per personality), capped at LatePushCapPercent of what the team can send; an order commits a growing share of the eligible army. lp_commit needs the guard floor above.
+		LatePushAgeMinEnabled: true
+		LatePushCommitEnabled: true
+		LatePushAgeTicks: 30000
+		LatePushCapPercent: 60
+		LatePushCommitBasePercent: 30
+		LatePushCommitCapPercent: 85
+		LatePushMapRefCells: 64
+		LatePushPersonalityPercent: 100
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		ArmyDutyTrace: true
@@ -5589,6 +5625,15 @@ Player:
 		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
 		GuardFloorEnabled: true
 		GuardFloorPercent: 20
+		# LATEPUSH-01 P1 (rows lp_age_min and lp_commit; design 01 D1 and D2): the leader's team bar is the WAVE-MIN bar x (1 + tick / LatePushAgeTicks) x map context x the learned multiplier L (prior below, per personality), capped at LatePushCapPercent of what the team can send; an order commits a growing share of the eligible army. lp_commit needs the guard floor above.
+		LatePushAgeMinEnabled: true
+		LatePushCommitEnabled: true
+		LatePushAgeTicks: 30000
+		LatePushCapPercent: 60
+		LatePushCommitBasePercent: 30
+		LatePushCommitCapPercent: 85
+		LatePushMapRefCells: 64
+		LatePushPersonalityPercent: 110
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		ArmyDutyTrace: true
@@ -5765,6 +5810,15 @@ Player:
 		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
 		GuardFloorEnabled: true
 		GuardFloorPercent: 30
+		# LATEPUSH-01 P1 (rows lp_age_min and lp_commit; design 01 D1 and D2): the leader's team bar is the WAVE-MIN bar x (1 + tick / LatePushAgeTicks) x map context x the learned multiplier L (prior below, per personality), capped at LatePushCapPercent of what the team can send; an order commits a growing share of the eligible army. lp_commit needs the guard floor above.
+		LatePushAgeMinEnabled: true
+		LatePushCommitEnabled: true
+		LatePushAgeTicks: 30000
+		LatePushCapPercent: 60
+		LatePushCommitBasePercent: 30
+		LatePushCommitCapPercent: 85
+		LatePushMapRefCells: 64
+		LatePushPersonalityPercent: 85
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		ArmyDutyTrace: true

@@ -880,11 +880,44 @@ namespace OpenRA.Mods.CA.Traits
 
 		readonly Dictionary<string, (bool AtCap, int Tick)> caps = new(StringComparer.Ordinal);
 
+		// LATEPUSH-01 P1 (design 02 D-2): what each seat could send, the free units plus its guard units above the floor. A seat that does not publish a figure of its own is eligible with what it published as its blob.
+		readonly Dictionary<string, (int Units, long Value, int Tick)> eligible = new(StringComparer.Ordinal);
+
+		/// <summary>LATEPUSH-01 P1 (design 02 D-3): the leader's last picked target and the tick it was picked (-1 = none yet); the map context of the age-scaled bar reads its distance, a target the bar needed before the pick cannot exist.</summary>
+		public WPos LastTarget;
+		public int LastTargetTick = -1;
+
+		int aheadRatioPercent = 100;
+		int aheadRatioTick = -1;
+
 		public void Publish(string key, int units, long value, int tick, bool atCap = false)
 		{
 			pools[key] = (units, value, tick);
+			eligible[key] = (units, value, tick);
 			caps[key] = (atCap, tick);
 		}
+
+		/// <summary>LATEPUSH-01 P1: the seat's eligible army (design 01 D2, E_i), published right after its blob in the same check.</summary>
+		public void PublishEligible(string key, int units, long value, int tick) => eligible[key] = (units, value, tick);
+
+		/// <summary>The team's eligible army: the sum over the seats that reported within <paramref name="maxAgeTicks"/>, with the same staleness rule as <see cref="Pool"/>.</summary>
+		public (int Units, long Value) Eligible(int now, int maxAgeTicks) => TeamLeadCA.TeamPool(eligible.Values, now, maxAgeTicks);
+
+		public void NoteTarget(WPos target, int tick)
+		{
+			LastTarget = target;
+			LastTargetTick = tick;
+		}
+
+		/// <summary>LATEPUSH-01 P1: the leader's last observed own/enemy army ratio in percent (its AheadScan; 100 = unknown), for the seats' commit fraction.</summary>
+		public void NoteAheadRatio(int percent, int tick)
+		{
+			aheadRatioPercent = percent;
+			aheadRatioTick = tick;
+		}
+
+		/// <summary>The observed army ratio in percent when the leader scanned within <paramref name="maxAgeTicks"/>, else 100 (unknown: the commit share follows time alone).</summary>
+		public int AheadRatio(int now, int maxAgeTicks) => aheadRatioTick >= 0 && now - aheadRatioTick <= maxAgeTicks ? aheadRatioPercent : 100;
 
 		/// <summary>Some seat published within <paramref name="maxAgeTicks"/> that its idle army is at the tier's idle-unit limit.</summary>
 		public bool AnyAtCap(int now, int maxAgeTicks)
