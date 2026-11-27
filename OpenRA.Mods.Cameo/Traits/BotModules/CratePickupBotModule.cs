@@ -307,6 +307,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			var candidates = new List<(CPos Cell, bool Threatened)>();
 			foreach (var cell in crateMemory.Keys)
 			{
+				// TODO(learned knob crate.reserve_radius, prior 25, clamp 15..40): wire through the LA02 seam in one integration commit when LA02 lands on the train.
 				var reserved = yardCells.Any(y => CrateReserveCA.Reserved((cell - y).Length, FogEngCrateGate.ClampReserveRadius(Info.ReserveYardRadiusCells)));
 				if (reserved)
 					reservedCrateCells.Add(cell);
