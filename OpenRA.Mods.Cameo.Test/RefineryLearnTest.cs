@@ -129,7 +129,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(rd, Does.Contain("bool RefLearnArmed => Info.RefLearn && RefDemandArmed && !ablateRefLearn.Off(player, AblationIds.RefLearn);"));
 			Assert.That(rd, Does.Contain("ZoneCapAt(z) + EcoFloorLift()"), "the ECO-TIMING-FLOOR lift stays on top of the learned cap");
 			Assert.That(Source("mods/Cameo/Traits/BotModules/ExpansionPlannerBotModule.cs"), Does.Contain("ZoneCapAt(field) + EcoFloorLift()"));
-			Assert.That(Source("packaging/ai.yaml"), Does.Contain("RefLearn: false"), "off until the A/B arms it");
+			Assert.That(Source("packaging/ai.yaml"), Does.Contain("RefLearn: true"), "armed by the playtest B2 ARM (generic only)");
 		}
 
 		[Test]

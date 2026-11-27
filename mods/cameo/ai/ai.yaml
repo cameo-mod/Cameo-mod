@@ -4672,7 +4672,7 @@ Player:
 		RefineryZoneRadius: 10
 		RefineryPerZoneCap: 2
 		# REF-LEARN-01 stays off until its ablation and integration gates pass; off preserves the previous decisions.
-		RefLearn: false
+		RefLearn: true
 		RefinerySecondPerZoneMinCells: 40
 		RefinerySpacingCells: 10
 		RefinerySpacingFallbackCells: 5
