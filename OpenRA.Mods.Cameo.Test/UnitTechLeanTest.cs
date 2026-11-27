@@ -156,7 +156,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(affordAt, Is.GreaterThan(admitAt), "the lean is decided before the afford, reserve and depth gates read the cost");
 			Assert.That(reserveAt, Is.GreaterThan(affordAt));
 			Assert.That(logAt, Is.GreaterThan(reserveAt), "the DEV row is written only for an order that was started, after the full price is reserved");
-			Assert.That(unit, Does.Contain("batch.Reserve(queue, fullCost);\n\t\t\t\t\tif (leaned)\n\t\t\t\t\t\tTechLeanLog("), "the order still reserves its FULL price");
+			Assert.That(unit, Does.Contain("batch.Reserve(queue, fullCost);\n\t\t\t\t\tPendingStreamNote(\"unit_emit\", name, world.WorldTick, fullCost); // CONSOLIDATE-03 P6 DEV hash\n\t\t\t\t\tif (leaned)\n\t\t\t\t\t\tTechLeanLog("), "the order still reserves its FULL price");
 			Assert.That(unit, Does.Contain("var held = queuedItems + batch.PendingOf(queue);"), "held = what the queue holds plus this pass's orders into it");
 
 			// The weights are untouched: no lean term between the weights and the pick.
