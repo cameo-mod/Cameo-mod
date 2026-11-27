@@ -75,7 +75,7 @@ namespace OpenRA.Mods.CA.Traits
 				return null;
 
 			var actor = World.GetActorById(id);
-			if (actor == null || !actor.IsInWorld || !actor.CanBeViewedByPlayer(Player))
+			if (actor == null || !actor.CanBeViewedByPlayer(Player) || !actor.IsInWorld)
 				return null;
 
 			if (actor.IsDead || actor.Owner == null || Player.RelationshipWith(actor.Owner) != PlayerRelationship.Enemy)
@@ -169,7 +169,7 @@ namespace OpenRA.Mods.CA.Traits
 			var radius = WDist.FromCells(RaidValue(RaidKey.DefenceRadius));
 			foreach (var a in World.FindActorsInCircle(World.Map.CenterOfCell(cell), radius))
 			{
-				if (!a.IsInWorld || !a.CanBeViewedByPlayer(Player))
+				if (!a.CanBeViewedByPlayer(Player) || !a.IsInWorld)
 					continue;
 
 				if (a.IsDead || a.Owner == null || Player.RelationshipWith(a.Owner) != PlayerRelationship.Enemy || !a.Info.HasTraitInfo<AttackBaseInfo>())

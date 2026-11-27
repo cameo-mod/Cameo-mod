@@ -996,7 +996,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					var frozen = layer?.FromID(seen.ActorID);
 					var snapshotValid = frozen != null && frozen.IsValid && !BotFogMemory.FrozenUnrememberable(frozen.Hidden, frozen.Shrouded, true);
 					var live = player.World.GetActorById(seen.ActorID);
-					var inView = live != null && live.IsInWorld && live.CanBeViewedByPlayer(player) && !live.IsDead;
+					var inView = live != null && live.CanBeViewedByPlayer(player) && live.IsInWorld && !live.IsDead;
 					if (snapshotValid || inView)
 						yield return new BotObservedEnemy(seen.ActorID, seen.Location, seen.LastSeenTick, false, true, enemy);
 				}

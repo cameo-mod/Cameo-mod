@@ -119,7 +119,7 @@ namespace OpenRA.Mods.Cameo.Test
 			// A refinery counts from a valid frozen snapshot that is neither Hidden nor Shrouded (always on, not tied to the master module's switch) or while the building is in view.
 			Assert.That(method, Does.Contain("!BotFogMemory.FrozenUnrememberable(frozen.Hidden, frozen.Shrouded, true)"));
 			Assert.That(method, Does.Contain("frozen != null && frozen.IsValid"));
-			Assert.That(method, Does.Contain("live.CanBeViewedByPlayer(player)"));
+			Assert.That(method, Does.Contain("live != null && live.CanBeViewedByPlayer(player) && live.IsInWorld && !live.IsDead"), "visibility before every other read of the live actor");
 			Assert.That(method, Does.Contain("if (IsTraitDisabled || fogMemory == null)"));
 			Assert.That(method, Does.Not.Contain("SkipHiddenShroudedFrozen"), "the skip does not depend on the master module's switch");
 		}
@@ -133,7 +133,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(Count(text, "GetActorById("), Is.EqualTo(1));
 			var resolver = Between(text, "internal Actor RaidTargetResolve(uint id)", "List<BotObservedEnemy> RaidObservedEconomy()");
 			Assert.That(resolver, Does.Contain("World.GetActorById(id)"));
-			Assert.That(resolver, Does.Contain("if (actor == null || !actor.IsInWorld || !actor.CanBeViewedByPlayer(Player))"));
+			Assert.That(resolver, Does.Contain("if (actor == null || !actor.CanBeViewedByPlayer(Player) || !actor.IsInWorld)"));
 			Assert.That(resolver.IndexOf("CanBeViewedByPlayer", StringComparison.Ordinal), Is.LessThan(resolver.IndexOf("actor.Owner", StringComparison.Ordinal)), "visibility first");
 			Assert.That(resolver.IndexOf("CanBeViewedByPlayer", StringComparison.Ordinal), Is.LessThan(resolver.IndexOf("actor.IsDead", StringComparison.Ordinal)));
 
@@ -142,6 +142,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(text, Does.Not.Contain("ActorsHavingTrait"));
 			Assert.That(text, Does.Not.Contain("FrozenActorLayer"), "the frozen layer is read by the provider, with its Hidden/Shrouded skip");
 			var defence = Between(text, "internal long RaidRequired(CPos cell, int targetValue)", "internal RaidRoutePlan RaidPlanRoute(");
+			Assert.That(defence, Does.Contain("if (!a.CanBeViewedByPlayer(Player) || !a.IsInWorld)"), "visibility is the first read of a circle result");
 			Assert.That(defence.IndexOf("CanBeViewedByPlayer", StringComparison.Ordinal), Is.LessThan(defence.IndexOf("a.Owner", StringComparison.Ordinal)), "the circle query result is filtered by visibility first");
 			Assert.That(defence.IndexOf("CanBeViewedByPlayer", StringComparison.Ordinal), Is.LessThan(defence.IndexOf("Cost", StringComparison.Ordinal)));
 		}
