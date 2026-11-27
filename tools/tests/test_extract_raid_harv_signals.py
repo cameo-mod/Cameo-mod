@@ -215,12 +215,12 @@ class Attribution(unittest.TestCase):
         rows = [waypoint(raid="r1", tick=10, player="e1", style="boom"), waypoint(raid="r2", tick=20, player="e2", style="turtle")]
         (rec,), _ = x.build_records(with_seats(rows), 1)
         self.assertEqual((rec["main_target"], rec["main_target_style"]), ("nod", "boom"))
-        self.assertEqual([e["style"] for e in rec["enemies"]], ["boom", None], "the other enemy's style is not blended in")
+        self.assertEqual([sorted(e) for e in rec["enemies"]], [["faction", "weight"]] * 2, "the other enemy's style is not blended in: no enemy entry carries a style")
 
     def test_an_unseen_style_is_null_everywhere(self):
         (rec,), _ = x.build_records(with_seats([waypoint(player="e1", style=None)]), 1)
         self.assertEqual((rec["main_target"], rec["main_target_style"]), ("nod", None))
-        self.assertEqual([e["style"] for e in rec["enemies"]], [None, None])
+        self.assertEqual([sorted(e) for e in rec["enemies"]], [["faction", "weight"]] * 2)
 
     def test_the_main_target_is_the_owner_with_the_most_raids_then_the_earliest_then_the_player_id(self):
         rows = [waypoint(raid="a", tick=10, player="e1"), waypoint(raid="b", tick=50, player="e2", style=None), waypoint(raid="c", tick=60, player="e2", style=None)]
@@ -343,7 +343,7 @@ class Cli(unittest.TestCase):
 
 
 class FitterCompatibility(unittest.TestCase):
-    """The records are the exposure format of tools/ai/fit_learn_all.py (LA02 79329cc1): this runs against the real fitter file, never skips."""
+    """The records are the exposure format of tools/ai/fit_learn_all.py (LA02 8d7fa6f4): this runs against the real fitter file, never skips."""
 
     def records(self, index):
         game = GOLDEN["games"][index]
@@ -357,7 +357,7 @@ class FitterCompatibility(unittest.TestCase):
         self.assertEqual(sorted(grouped), sorted(x.KEYS))
         seat = grouped["raid.lost_recon"][0]
         self.assertEqual((seat.personality, seat.own_faction, seat.main_target), ("rush", "gdi", "nod"))
-        self.assertEqual(seat.enemies, [("nod", "boom", 1), ("nod", None, 1), ("allies", None, 1), ("gdi", None, 1)])
+        self.assertEqual(seat.enemies, [("nod", 1), ("nod", 1), ("allies", 1), ("gdi", 1)])
 
     def test_one_game_takes_one_bounded_step_on_the_signal_over_300(self):
         game, records = self.records(0)
@@ -368,7 +368,8 @@ class FitterCompatibility(unittest.TestCase):
         self.assertEqual(axes.own["gdi"], axes.global_)
         self.assertEqual(sorted(axes.enemy), ["allies", "gdi", "nod"], "every enemy player's faction takes a step, nod twice as a share")
         self.assertEqual(sorted(axes.style), ["boom"], "only the main target owner's observed style is learned; the other enemy's style is never read")
-        self.assertLess(abs(axes.style["boom"] - 1000), abs(axes.global_ - 1000), "the style step is the fitter's per-player share of the signal")
+        self.assertEqual(axes.style["boom"], axes.global_, "the whole S step goes to the main target owner's observed style (from the same seed 1000 it equals the global step)")
+        self.assertEqual(records[0]["main_target_style"], "boom")
 
     def test_a_knob_without_a_sample_is_left_alone(self):
         game, records = self.records(1)
@@ -388,8 +389,8 @@ class FitterCompatibility(unittest.TestCase):
 
     def test_the_raid_seats_do_not_collide_with_a_wave_role_exposure_of_the_same_game(self):
         game, records = self.records(0)
-        wave = {"game_id": "g1", "seq": 12, "seat": "bot1", "personality": "rush", "own_faction": "gdi", "main_target": "nod",
-                "enemies": [{"faction": "nod", "style": "boom", "weight": 1}], "knobs": [{"knob": "wave_role.frontline", "signal": 0.4}]}
+        wave = {"game_id": "g1", "seq": 12, "seat": "bot1", "personality": "rush", "own_faction": "gdi", "main_target": "nod", "main_target_style": "boom",
+                "enemies": [{"faction": "nod", "weight": 1}], "knobs": [{"knob": "wave_role.frontline", "signal": 0.4}]}
         self.assertEqual(fit.check_records([wave] + records), ("g1", 12, None))
 
 

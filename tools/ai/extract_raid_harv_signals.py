@@ -60,14 +60,14 @@ Attribution (DESIGNER RULE: every learned value is G x F_own x E_eff x S_obs; de
   * main target = the target owner (player) with the most raids that contributed a counted sample (ties: the owner whose first counted sample is earliest, then the player id).
     `main_target` is its faction.
   * S_obs = the observed style of the main target owner ONLY. It is the `target_style` of that owner's latest counted raid (null = unseen, which the fitter reads as the exact
-    three-axis value). No other enemy's style is emitted: in the `enemies` list only the main target owner's entry carries a style. `main_target_style` repeats that style as a
-    plain field of the record (the fitter at LA02 79329cc1 reads the style from the `enemies` entry and ignores the extra field).
+    three-axis value). No other enemy's style is emitted. The style is the plain top-level field `main_target_style` of the record (the fitter at LA02 8d7fa6f4 gives the WHOLE S step
+    to it, never split by enemy weight); the `enemies` entries carry faction and weight only.
   * A raid whose rows all fail the counting rules (an ineligible refresh, a raid that did not kill, ...) is not a sample and does not make its owner the main target.
   * One record per seat that produced evidence. The seat id is prefixed `raid:` so it cannot collide with the seats of the wave-role exposure file of the same game.
 
-Output (the fitter's exposure format at LA02 79329cc1, one JSON line per seat):
+Output (the fitter's exposure format at LA02 8d7fa6f4, one JSON line per seat):
   {"game_id": g, "seq": <game order>, "seat": "raid:<seat>", "personality": p, "own_faction": f, "main_target": faction | null, "main_target_style": style | null,
-   "enemies": [{"faction": ..., "style": ... | null, "weight": 1}], "knobs": [{"knob": "raid.lost_recon", "signal": 0.4 | null}, ... nine, in RaidKey order]}
+   "enemies": [{"faction": ..., "weight": 1}], "knobs": [{"knob": "raid.lost_recon", "signal": 0.4 | null}, ... nine, in RaidKey order]}
 
 Pipeline use (post-game step, after EVERY DEV game, in game order, with the same --seq as the wave-role exposure of that game):
   python tools/ai/extract_raid_harv_signals.py --rows <game_dir>/<dev log>.jsonl --seq <n> --out <game_dir>/raid_harv_exposure.jsonl
@@ -489,7 +489,7 @@ def _attribution(seat, rows, enemy_factions, warnings):
         if len({style for _, _, style in owner_raids}) > 1:
             warnings.append("seat %s: the raids against %s report different observed styles; the latest counted raid's style is used" % (seat, main_player))
 
-    enemies = [{"faction": enemy_factions[p], "style": main_style if p == main_player else None, "weight": 1} for p in sorted(enemy_factions)]
+    enemies = [{"faction": enemy_factions[p], "weight": 1} for p in sorted(enemy_factions)]
     return enemies, (enemy_factions[main_player] if main_player is not None else None), main_style
 
 

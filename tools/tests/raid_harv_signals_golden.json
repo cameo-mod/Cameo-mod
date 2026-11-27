@@ -158,10 +158,10 @@
     {
      "game_id": "g1", "seq": 12, "seat": "raid:bot1", "personality": "rush", "own_faction": "gdi", "main_target": "nod", "main_target_style": "boom",
      "enemies": [
-      {"faction": "nod", "style": "boom", "weight": 1},
-      {"faction": "nod", "style": null, "weight": 1},
-      {"faction": "allies", "style": null, "weight": 1},
-      {"faction": "gdi", "style": null, "weight": 1}
+      {"faction": "nod", "weight": 1},
+      {"faction": "nod", "weight": 1},
+      {"faction": "allies", "weight": 1},
+      {"faction": "gdi", "weight": 1}
      ],
      "knobs": [
       {"knob": "raid.lost_recon", "signal_permille": -108},
@@ -194,7 +194,7 @@
    "expect_records": [
     {
      "game_id": "g2", "seq": 3, "seat": "raid:a", "personality": "turtle", "own_faction": "nod", "main_target": "gdi", "main_target_style": "rush",
-     "enemies": [{"faction": "gdi", "style": "rush", "weight": 1}, {"faction": "allies", "style": null, "weight": 1}],
+     "enemies": [{"faction": "gdi", "weight": 1}, {"faction": "allies", "weight": 1}],
      "knobs": [
       {"knob": "raid.lost_recon", "signal_permille": null},
       {"knob": "raid.move_refresh", "signal_permille": null},
@@ -209,7 +209,7 @@
     },
     {
      "game_id": "g2", "seq": 3, "seat": "raid:c", "personality": null, "own_faction": null, "main_target": "gdi", "main_target_style": null,
-     "enemies": [{"faction": "gdi", "style": null, "weight": 1}],
+     "enemies": [{"faction": "gdi", "weight": 1}],
      "knobs": [
       {"knob": "raid.lost_recon", "signal_permille": null},
       {"knob": "raid.move_refresh", "signal_permille": null},
@@ -236,7 +236,7 @@
    "expect_records": [
     {
      "game_id": "g3", "seq": 40, "seat": "raid:c1", "personality": "guerilla", "own_faction": "allies", "main_target": "gdi", "main_target_style": "rush",
-     "enemies": [{"faction": "nod", "style": null, "weight": 1}, {"faction": "gdi", "style": "rush", "weight": 1}, {"faction": "gdi", "style": null, "weight": 1}],
+     "enemies": [{"faction": "nod", "weight": 1}, {"faction": "gdi", "weight": 1}, {"faction": "gdi", "weight": 1}],
      "knobs": [
       {"knob": "raid.lost_recon", "signal_permille": null},
       {"knob": "raid.move_refresh", "signal_permille": null},
@@ -263,7 +263,7 @@
    "expect_records": [
     {
      "game_id": "g4", "seq": 5, "seat": "raid:m", "personality": "tech", "own_faction": "gdi", "main_target": "nod", "main_target_style": "boom",
-     "enemies": [{"faction": "nod", "style": "boom", "weight": 1}],
+     "enemies": [{"faction": "nod", "weight": 1}],
      "knobs": [
       {"knob": "raid.lost_recon", "signal_permille": null},
       {"knob": "raid.move_refresh", "signal_permille": null},
