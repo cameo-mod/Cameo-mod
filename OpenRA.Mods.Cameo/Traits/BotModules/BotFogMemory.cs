@@ -313,6 +313,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly Dictionary<ActorInfo, StaticClass> staticClasses = new();
 		AblationLatch ablateClassifyCache;
 		AblationLatch ablateFrozenSnapshot;
+		AblationLatch ablateFrozenSkip;
 
 		sealed class StaticClass
 		{
@@ -354,6 +355,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (frozen != null)
 			{
 				// PERF-F2b: the snapshot lists, per owner, exactly the actors the full walk yields for that owner, in walk order.
+				var skipFrozen = info.SkipHiddenShroudedFrozen && !ablateFrozenSkip.Off(viewer, AblationIds.FogFrozenSkip);
 				IEnumerable<FrozenActor> frozenActors = frozenSnapshot != null && frozenSnapshot.Serves(viewer)
 					? frozenSnapshot.Of(enemy)
 					: frozen.FrozenActorsInRegion(viewer.World.Map.AllCells);
@@ -362,7 +364,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					if (!fa.IsValid || fa.Owner != enemy || table.ContainsKey(fa.ID))
 						continue;
 
-					if (FrozenUnrememberable(fa.Hidden, fa.Shrouded, info.SkipHiddenShroudedFrozen))
+					if (FrozenUnrememberable(fa.Hidden, fa.Shrouded, skipFrozen))
 						continue;
 
 					var record = ClassifyObserved(fa.Info, fa.ID, viewer.World.Map.CellContaining(fa.CenterPosition), fa.TargetTypes, tick);
@@ -409,13 +411,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				|| ablateFrozenSnapshot.Off(viewer, AblationIds.FogFrozenSnapshot))
 				return null;
 
+			var skipFrozen = info.SkipHiddenShroudedFrozen && !ablateFrozenSkip.Off(viewer, AblationIds.FogFrozenSkip);
 			var byOwner = new Dictionary<OpenRA.Player, List<FrozenActor>>();
 			foreach (var fa in frozen.FrozenActorsInRegion(viewer.World.Map.AllCells))
 			{
 				if (!fa.IsValid)
 					continue;
 
-				if (FrozenUnrememberable(fa.Hidden, fa.Shrouded, info.SkipHiddenShroudedFrozen))
+				if (FrozenUnrememberable(fa.Hidden, fa.Shrouded, skipFrozen))
 					continue;
 
 				var owner = fa.Owner;
