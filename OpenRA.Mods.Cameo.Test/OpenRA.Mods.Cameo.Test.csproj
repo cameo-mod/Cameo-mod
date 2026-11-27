@@ -100,6 +100,10 @@
     <None Include="../tools/tests/fixtures/cannonap_continuous_fixture.json"
           Link="tools/tests/fixtures/cannonap_continuous_fixture.json"
           CopyToOutputDirectory="Always" />
+    <!-- RAID-HARV-01 P3: golden vectors shared by the python signal extractor and RaidHarvSignalsGoldenTest. -->
+    <None Include="../tools/tests/raid_harv_signals_golden.json"
+          Link="tools/tests/fixtures/raid_harv_signals_golden.json"
+          CopyToOutputDirectory="Always" />
     <!-- SW-cap wiring fixtures: the real host yaml files scanned by
          SuperweaponPlugLimitYamlTest to pin the four global-swlimit providers. -->
     <None Include="../mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml"

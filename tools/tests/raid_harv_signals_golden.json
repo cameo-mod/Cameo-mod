@@ -1,0 +1,242 @@
+{
+ "comment": "RAID-HARV-01 P3 golden vectors. Hand-derived from OpenRA.Mods.CA/Traits/BotModules/Squads/RaidHarvSignals.cs (C# integer division truncates toward zero, relative errors are clipped BEFORE they are averaged) and replayed by BOTH tools/tests/test_extract_raid_harv_signals.py (python extractor) and OpenRA.Mods.Cameo.Test/RaidHarvSignalsGoldenTest.cs (the C# signal functions), so the two cannot drift. `signals` entries are {in, expect}: expect null = no sample, otherwise the error in permille. `games` replay whole raid_harv_signal row sets through the extractor into LEARN-ALL-02 exposure records (python only; knobs carry `signal_permille`, the fitter signal is permille / 300). Regenerate only with a reviewed change of the signal contract.",
+ "constants": {
+  "error_clip": 300,
+  "categorical": 200,
+  "refresh_settle_ticks": 25,
+  "late_drift_cells": 3,
+  "wasted_drift_cells": 1
+ },
+ "keys": [
+  "raid.lost_recon",
+  "raid.move_refresh",
+  "raid.req_margin",
+  "raid.recon_radius",
+  "raid.incident_loss",
+  "raid.incident_window",
+  "raid.incident_decay",
+  "raid.waypoint_spacing",
+  "raid.defence_radius"
+ ],
+ "signals": {
+  "lost_recon": [
+   {"name": "median of three, relative to the current", "in": {"current": 400, "reacquire": [200, 300, 250], "exhausted": 0}, "expect": -220},
+   {"name": "every budget used up", "in": {"current": 400, "reacquire": [], "exhausted": 2}, "expect": -200},
+   {"name": "one reacquire (clipped) and one exhausted", "in": {"current": 400, "reacquire": [200], "exhausted": 1}, "expect": -250},
+   {"name": "slow reacquires clip up", "in": {"current": 400, "reacquire": [800, 1000, 900], "exhausted": 0}, "expect": 300},
+   {"name": "no episode", "in": {"current": 400, "reacquire": [], "exhausted": 0}, "expect": null},
+   {"name": "undefined denominator", "in": {"current": 0, "reacquire": [100], "exhausted": 0}, "expect": null},
+   {"name": "even median truncates, relative error truncates toward zero", "in": {"current": 400, "reacquire": [260, 261], "exhausted": 0}, "expect": -187},
+   {"name": "the mean truncates toward zero", "in": {"current": 400, "reacquire": [260], "exhausted": 2}, "expect": -195}
+  ],
+  "move_refresh": [
+   {"name": "no eligible refresh", "in": {"drifts": []}, "expect": null},
+   {"name": "late share 75 percent", "in": {"drifts": [5, 4, 3, 1]}, "expect": -200},
+   {"name": "wasted share 80 percent", "in": {"drifts": [0, 1, 1, 1, 3]}, "expect": 200},
+   {"name": "neither share decides", "in": {"drifts": [2, 2, 5, 0]}, "expect": 0},
+   {"name": "exactly 50 percent late is not over 50", "in": {"drifts": [3, 1]}, "expect": 0},
+   {"name": "exactly 50 percent late, 50 percent wasted", "in": {"drifts": [4, 4, 1, 1]}, "expect": 0},
+   {"name": "exactly 60 percent wasted is not over 60", "in": {"drifts": [1, 1, 1, 3, 2]}, "expect": 0},
+   {"name": "one late refresh", "in": {"drifts": [3]}, "expect": -200},
+   {"name": "one wasted refresh", "in": {"drifts": [1]}, "expect": 200}
+  ],
+  "req_margin": [
+   {"name": "no resolved raid", "in": {"results": []}, "expect": null},
+   {"name": "a raid that did not kill is not a sample", "in": {"results": [[false, 900]]}, "expect": null},
+   {"name": "over 60 percent lost", "in": {"results": [[true, 700]]}, "expect": 200},
+   {"name": "under 30 percent lost", "in": {"results": [[true, 100]]}, "expect": -200},
+   {"name": "exactly 600 is not over 60", "in": {"results": [[true, 600]]}, "expect": 0},
+   {"name": "exactly 300 is not under 30", "in": {"results": [[true, 300]]}, "expect": 0},
+   {"name": "mixed with one unkilled raid", "in": {"results": [[true, 700], [true, 100], [true, 450], [false, 800]]}, "expect": 0},
+   {"name": "mean 133.3 truncates", "in": {"results": [[true, 700], [true, 700], [true, 450]]}, "expect": 133},
+   {"name": "mean -133.3 truncates toward zero", "in": {"results": [[true, 100], [true, 100], [true, 450]]}, "expect": -133}
+  ],
+  "recon_radius": [
+   {"name": "no episode", "in": {"current": 8, "distances": [], "exhausted_far_seen": 0}, "expect": null},
+   {"name": "undefined denominator", "in": {"current": 0, "distances": [6], "exhausted_far_seen": 0}, "expect": null},
+   {"name": "median 7 gives target 8", "in": {"current": 8, "distances": [6, 7, 8], "exhausted_far_seen": 0}, "expect": 0},
+   {"name": "far-seen after the budget", "in": {"current": 8, "distances": [], "exhausted_far_seen": 1}, "expect": 200},
+   {"name": "far reacquire clips up", "in": {"current": 8, "distances": [12], "exhausted_far_seen": 0}, "expect": 300},
+   {"name": "near reacquire clips down", "in": {"current": 8, "distances": [4], "exhausted_far_seen": 0}, "expect": -300},
+   {"name": "target 10 against 8", "in": {"current": 8, "distances": [8], "exhausted_far_seen": 0}, "expect": 250},
+   {"name": "one reacquire and one far-seen", "in": {"current": 8, "distances": [8], "exhausted_far_seen": 1}, "expect": 225},
+   {"name": "relative error truncates toward zero", "in": {"current": 9, "distances": [7], "exhausted_far_seen": 0}, "expect": -111},
+   {"name": "positive relative error truncates", "in": {"current": 9, "distances": [8], "exhausted_far_seen": 0}, "expect": 111}
+  ],
+  "incident_loss": [
+   {"name": "no retreat", "in": {"retreats": []}, "expect": null},
+   {"name": "neither observed", "in": {"retreats": [[false, false]]}, "expect": null},
+   {"name": "lost half = too loose", "in": {"retreats": [[true, false]]}, "expect": -200},
+   {"name": "clean re-strike = too tight", "in": {"retreats": [[false, true]]}, "expect": 200},
+   {"name": "lost half wins over a clean re-strike", "in": {"retreats": [[true, true]]}, "expect": -200},
+   {"name": "balanced, one empty retreat ignored", "in": {"retreats": [[true, false], [false, true], [false, false]]}, "expect": 0},
+   {"name": "mean -66.7 truncates toward zero", "in": {"retreats": [[true, false], [true, false], [false, true]]}, "expect": -66}
+  ],
+  "incident_window": [
+   {"name": "no lost raid", "in": {"current": 300, "spans": []}, "expect": null},
+   {"name": "undefined denominator", "in": {"current": 0, "spans": [100]}, "expect": null},
+   {"name": "target equals current", "in": {"current": 300, "spans": [200, 200, 200]}, "expect": 0},
+   {"name": "short span clips down", "in": {"current": 300, "spans": [100]}, "expect": -300},
+   {"name": "span 250 gives target 375", "in": {"current": 300, "spans": [250]}, "expect": 250},
+   {"name": "positive error truncates", "in": {"current": 300, "spans": [201]}, "expect": 3},
+   {"name": "negative error truncates toward zero", "in": {"current": 300, "spans": [199]}, "expect": -6},
+   {"name": "even median truncates", "in": {"current": 300, "spans": [100, 201]}, "expect": -250}
+  ],
+  "incident_decay": [
+   {"name": "no incident cell", "in": {"cells": []}, "expect": null},
+   {"name": "neither observed", "in": {"cells": [[false, false]]}, "expect": null},
+   {"name": "re-incident = decay too short", "in": {"cells": [[true, false]]}, "expect": 200},
+   {"name": "passed clean = decay too long", "in": {"cells": [[false, true]]}, "expect": -200},
+   {"name": "re-incident wins over a clean pass", "in": {"cells": [[true, true]]}, "expect": 200},
+   {"name": "mean 66.7 truncates", "in": {"cells": [[true, false], [true, false], [false, true]]}, "expect": 66},
+   {"name": "mean -66.7 truncates toward zero", "in": {"cells": [[false, true], [false, true], [true, false]]}, "expect": -66}
+  ],
+  "waypoint_spacing": [
+   {"name": "no leg", "in": {"legs": []}, "expect": null},
+   {"name": "every leg inside the lane = up", "in": {"legs": [false, false]}, "expect": 200},
+   {"name": "any leg left the lane = down", "in": {"legs": [false, true]}, "expect": -200},
+   {"name": "one leg left", "in": {"legs": [true]}, "expect": -200},
+   {"name": "one leg inside", "in": {"legs": [false]}, "expect": 200}
+  ],
+  "defence_radius": [
+   {"name": "no raid with losses", "in": {"outside": []}, "expect": null},
+   {"name": "an outside defender took part", "in": {"outside": [true]}, "expect": 200},
+   {"name": "none took part", "in": {"outside": [false]}, "expect": -200},
+   {"name": "mean 66.7 truncates", "in": {"outside": [true, true, false]}, "expect": 66},
+   {"name": "mean -66.7 truncates toward zero", "in": {"outside": [true, false, false]}, "expect": -66},
+   {"name": "balanced", "in": {"outside": [true, false]}, "expect": 0}
+  ]
+ },
+ "refresh_eligibility": [
+  {"visible_prev": true, "visible_now": true, "phase": "Travel", "since_change": 25, "eligible": true},
+  {"visible_prev": true, "visible_now": true, "phase": "Strike", "since_change": 1000, "eligible": true},
+  {"visible_prev": true, "visible_now": true, "phase": "Travel", "since_change": 24, "eligible": false},
+  {"visible_prev": true, "visible_now": true, "phase": "Strike", "since_change": 0, "eligible": false},
+  {"visible_prev": false, "visible_now": true, "phase": "Travel", "since_change": 100, "eligible": false},
+  {"visible_prev": true, "visible_now": false, "phase": "Travel", "since_change": 100, "eligible": false},
+  {"visible_prev": true, "visible_now": true, "phase": "Retreat", "since_change": 100, "eligible": false},
+  {"visible_prev": true, "visible_now": true, "phase": "LostRecon", "since_change": 100, "eligible": false}
+ ],
+ "games": [
+  {
+   "name": "one seat, three raids, all nine keys",
+   "seq": 12,
+   "rows": [
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1000, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.lost_recon", "kind": "reacquired", "ticks": 250, "current": 400},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1000, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.recon_radius", "kind": "reacquired", "distance": 7, "current": 8},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1010, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.waypoint_spacing", "left_lane": false},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1020, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.waypoint_spacing", "left_lane": false},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1100, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.move_refresh", "drift": 4, "visible_prev": true, "visible_now": true, "phase": "Travel", "since_change": 30},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1225, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.move_refresh", "drift": 3, "visible_prev": true, "visible_now": true, "phase": "Strike", "since_change": 125},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1350, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.move_refresh", "drift": 0, "visible_prev": true, "visible_now": true, "phase": "Strike", "since_change": 50},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1375, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.move_refresh", "drift": 9, "visible_prev": true, "visible_now": false, "phase": "Strike", "since_change": 75},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1400, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.move_refresh", "drift": 9, "visible_prev": true, "visible_now": true, "phase": "Travel", "since_change": 24},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1425, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.move_refresh", "drift": 9, "visible_prev": true, "visible_now": true, "phase": "Retreat", "since_change": 100},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1500, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.lost_recon", "kind": "reacquired", "ticks": 350, "current": 400},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1600, "raid_id": "r2", "target_faction": "nod", "target_style": "boom", "key": "raid.recon_radius", "kind": "exhausted", "far_seen": false, "current": 8},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1700, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.incident_window", "span_ticks": 100, "current": 300},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1800, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.incident_loss", "lost_half_within_600": true, "restrike_clean": false},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1850, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.incident_loss", "lost_half_within_600": true, "restrike_clean": false},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1900, "raid_id": "r2", "target_faction": "nod", "target_style": "boom", "key": "raid.incident_loss", "lost_half_within_600": false, "restrike_clean": true},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2000, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.req_margin", "killed": true, "loss_permille": 700},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2000, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.defence_radius", "outside_defender_took_part": true},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2050, "raid_id": "r2", "target_faction": "nod", "target_style": "boom", "key": "raid.incident_loss", "lost_half_within_600": false, "restrike_clean": false},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2100, "raid_id": "r2", "target_faction": "nod", "target_style": "boom", "key": "raid.req_margin", "killed": true, "loss_permille": 450},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2300, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.incident_decay", "reincident_within_1500": true, "passed_clean_before_decay": false},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2350, "raid_id": "r2", "target_faction": "nod", "target_style": "boom", "key": "raid.incident_decay", "reincident_within_1500": true, "passed_clean_before_decay": false},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2410, "raid_id": "r3", "target_faction": "allies", "target_style": null, "key": "raid.waypoint_spacing", "left_lane": true},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2500, "raid_id": "r3", "target_faction": "allies", "target_style": null, "key": "raid.incident_window", "span_ticks": 201, "current": 300},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2600, "raid_id": "r3", "target_faction": "allies", "target_style": null, "key": "raid.lost_recon", "kind": "exhausted", "current": 400},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2600, "raid_id": "r3", "target_faction": "allies", "target_style": null, "key": "raid.recon_radius", "kind": "exhausted", "far_seen": true, "current": 8},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2650, "raid_id": "r3", "target_faction": "allies", "target_style": null, "key": "raid.defence_radius", "outside_defender_took_part": false},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2700, "raid_id": "r3", "target_faction": "allies", "target_style": null, "key": "raid.req_margin", "killed": false, "loss_permille": 900},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2700, "raid_id": "r3", "target_faction": "allies", "target_style": null, "key": "raid.incident_decay", "reincident_within_1500": false, "passed_clean_before_decay": true}
+   ],
+   "expect_records": [
+    {
+     "game_id": "g1", "seq": 12, "seat": "raid:bot1", "personality": "rush", "own_faction": "gdi", "main_target": "nod",
+     "enemies": [{"faction": "allies", "style": null, "weight": 1}, {"faction": "nod", "style": "boom", "weight": 2}],
+     "knobs": [
+      {"knob": "raid.lost_recon", "signal_permille": -108},
+      {"knob": "raid.move_refresh", "signal_permille": -200},
+      {"knob": "raid.req_margin", "signal_permille": 100},
+      {"knob": "raid.recon_radius", "signal_permille": 100},
+      {"knob": "raid.incident_loss", "signal_permille": -66},
+      {"knob": "raid.incident_window", "signal_permille": -250},
+      {"knob": "raid.incident_decay", "signal_permille": 66},
+      {"knob": "raid.waypoint_spacing", "signal_permille": -200},
+      {"knob": "raid.defence_radius", "signal_permille": 0}
+     ]
+    }
+   ]
+  },
+  {
+   "name": "three seats: partial evidence, no evidence, unknown target owner",
+   "seq": 3,
+   "rows": [
+    {"event": "raid_harv_signal", "game_id": "g2", "seat": "a", "personality": "turtle", "own_faction": "nod", "tick": 800, "raid_id": "a1", "target_faction": "gdi", "target_style": "rush", "key": "raid.move_refresh", "drift": 5, "visible_prev": true, "visible_now": true, "phase": "Travel", "since_change": 10},
+    {"event": "raid_harv_signal", "game_id": "g2", "seat": "a", "personality": "turtle", "own_faction": "nod", "tick": 900, "raid_id": "a1", "target_faction": "gdi", "target_style": "rush", "key": "raid.req_margin", "killed": true, "loss_permille": 100},
+    {"event": "raid_harv_signal", "game_id": "g2", "seat": "b", "personality": "rush", "own_faction": "gdi", "tick": 700, "raid_id": "b1", "target_faction": "nod", "target_style": "boom", "key": "raid.req_margin", "killed": false, "loss_permille": 800},
+    {"event": "raid_harv_signal", "game_id": "g2", "seat": "b", "personality": "rush", "own_faction": "gdi", "tick": 750, "raid_id": "b1", "target_faction": "nod", "target_style": "boom", "key": "raid.move_refresh", "drift": 0, "visible_prev": true, "visible_now": false, "phase": "Travel", "since_change": 90},
+    {"event": "raid_harv_signal", "game_id": "g2", "seat": "c", "personality": null, "own_faction": null, "tick": 600, "raid_id": "c1", "target_faction": null, "target_style": null, "key": "raid.waypoint_spacing", "left_lane": true}
+   ],
+   "expect_records": [
+    {
+     "game_id": "g2", "seq": 3, "seat": "raid:a", "personality": "turtle", "own_faction": "nod", "main_target": "gdi",
+     "enemies": [{"faction": "gdi", "style": "rush", "weight": 1}],
+     "knobs": [
+      {"knob": "raid.lost_recon", "signal_permille": null},
+      {"knob": "raid.move_refresh", "signal_permille": null},
+      {"knob": "raid.req_margin", "signal_permille": -200},
+      {"knob": "raid.recon_radius", "signal_permille": null},
+      {"knob": "raid.incident_loss", "signal_permille": null},
+      {"knob": "raid.incident_window", "signal_permille": null},
+      {"knob": "raid.incident_decay", "signal_permille": null},
+      {"knob": "raid.waypoint_spacing", "signal_permille": null},
+      {"knob": "raid.defence_radius", "signal_permille": null}
+     ]
+    },
+    {
+     "game_id": "g2", "seq": 3, "seat": "raid:c", "personality": null, "own_faction": null, "main_target": null,
+     "enemies": [],
+     "knobs": [
+      {"knob": "raid.lost_recon", "signal_permille": null},
+      {"knob": "raid.move_refresh", "signal_permille": null},
+      {"knob": "raid.req_margin", "signal_permille": null},
+      {"knob": "raid.recon_radius", "signal_permille": null},
+      {"knob": "raid.incident_loss", "signal_permille": null},
+      {"knob": "raid.incident_window", "signal_permille": null},
+      {"knob": "raid.incident_decay", "signal_permille": null},
+      {"knob": "raid.waypoint_spacing", "signal_permille": -200},
+      {"knob": "raid.defence_radius", "signal_permille": null}
+     ]
+    }
+   ]
+  },
+  {
+   "name": "main target tie: the faction whose first counted sample is earliest",
+   "seq": 40,
+   "rows": [
+    {"event": "raid_harv_signal", "game_id": "g3", "seat": "c1", "personality": "guerilla", "own_faction": "allies", "tick": 500, "raid_id": "ra", "target_faction": "nod", "target_style": "boom", "key": "raid.waypoint_spacing", "left_lane": false},
+    {"event": "raid_harv_signal", "game_id": "g3", "seat": "c1", "personality": "guerilla", "own_faction": "allies", "tick": 300, "raid_id": "rb", "target_faction": "gdi", "target_style": null, "key": "raid.waypoint_spacing", "left_lane": false}
+   ],
+   "expect_records": [
+    {
+     "game_id": "g3", "seq": 40, "seat": "raid:c1", "personality": "guerilla", "own_faction": "allies", "main_target": "gdi",
+     "enemies": [{"faction": "gdi", "style": null, "weight": 1}, {"faction": "nod", "style": "boom", "weight": 1}],
+     "knobs": [
+      {"knob": "raid.lost_recon", "signal_permille": null},
+      {"knob": "raid.move_refresh", "signal_permille": null},
+      {"knob": "raid.req_margin", "signal_permille": null},
+      {"knob": "raid.recon_radius", "signal_permille": null},
+      {"knob": "raid.incident_loss", "signal_permille": null},
+      {"knob": "raid.incident_window", "signal_permille": null},
+      {"knob": "raid.incident_decay", "signal_permille": null},
+      {"knob": "raid.waypoint_spacing", "signal_permille": 200},
+      {"knob": "raid.defence_radius", "signal_permille": null}
+     ]
+    }
+   ]
+  }
+ ]
+}
