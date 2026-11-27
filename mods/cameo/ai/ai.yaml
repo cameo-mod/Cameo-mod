@@ -50,10 +50,12 @@
 	# ENG-T (#694, DESIGN §22): arms Fransbot's capture-transport service as the genericbot
 	# IBotCaptureTransportProvider. Inert by itself — EngineerBotModule only requests a run when
 	# TransportChance > 0 (default 0). Classic is excluded: the A/B reference stays untouched.
-	# DISARMED by default (Claude, 2026-10-01): FransTransportCommanderBotModule touches actors DIRECTLY (15 CancelActivity/
-	# QueueActivity sites). A bot runs on the host only and must act through orders, so in a multiplayer game this would
-	# desync. Inert `Bots: fransbot` (that type arms it anyway) until its sites are orders; the increment A/B re-arms it
-	# for genericbot through tools/ai/increment_switches.yaml (single-player harness: no desync possible).
+	# DISARMED by default (Claude, 2026-10-01): the module used to touch actors DIRECTLY (15 CancelActivity/QueueActivity
+	# sites), which would desync a multiplayer game because a bot runs on the host only. That is fixed (ENGT-ORDERS, checked
+	# 2026-11-27): the module has no direct activity call left and every one of its 18 actor commands is a bot.QueueOrder
+	# inside BotIssuer.IssueAs (pinned in EngtOrdersTest). The grant stays inert `Bots: fransbot` (that type arms it anyway)
+	# until the tier grant is ruled on and proven in a DEV game; the increment A/B re-arms it for genericbot through
+	# tools/ai/increment_switches.yaml.
 	GrantConditionOnBotOwner@engttransport:
 		Condition: engt-transport
 		Bots: fransbot
