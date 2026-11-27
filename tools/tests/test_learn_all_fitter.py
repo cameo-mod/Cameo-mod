@@ -247,6 +247,7 @@ class SnapshotSafety(unittest.TestCase):
             "duplicate global": good.replace("\t\tGlobal: 1041\n", "\t\tGlobal: 1041\n\t\tGlobal: 1200\n"),
             "duplicate own axis": good + "\t\tOwn@gdi: 1100\n\t\tOwn@gdi: 1200\n",
             "duplicate style axis": good + "\t\tStyle@boom: 1100\n\t\tStyle@boom: 1200\n",
+            "applied-only snapshot (no games sequence)": "BotLearnAll:\n\tVersion: 1\n\tApplied:\n\t\tg0|any|wave_role.frontline:\n\tKnob@any__wave_role.frontline:\n\t\tGlobal: 1041\n",
             "children under a scalar header": good.replace("\tLastSeq: 3\n", "\tLastSeq: 3\n\t\tx: 1\n"),
         }
         for name, text in bad_texts.items():

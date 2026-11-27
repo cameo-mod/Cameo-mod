@@ -475,12 +475,13 @@ def parse_text_strict(text):
     if versions != [VERSION]:
         raise SnapshotError("Version must appear exactly once and be %d (found %r)" % (VERSION, versions))
     # Sequence state must be consistent: games are applied in order, so LastSeq is exactly the largest game sequence; applied keys belong to a recorded game.
+    stray = sorted({k.split("|", 1)[0] for k in table.applied} - set(table.games))
+    if stray:
+        # Also for an Applied-only snapshot: an applied key of a game with no recorded sequence would make a later run misjudge that game as open or closed.
+        raise SnapshotError("Applied entries of games with no Games sequence: %s" % ", ".join(stray))
     if table.games:
         if table.last_seq is None or table.last_seq != max(table.games.values()):
             raise SnapshotError("LastSeq %r is not the largest Games sequence %d" % (table.last_seq, max(table.games.values())))
-        stray = sorted({k.split("|", 1)[0] for k in table.applied} - set(table.games))
-        if stray:
-            raise SnapshotError("Applied entries of games with no Games sequence: %s" % ", ".join(stray))
     elif table.last_seq is not None:
         raise SnapshotError("LastSeq is present but no game has a recorded sequence")
     return table

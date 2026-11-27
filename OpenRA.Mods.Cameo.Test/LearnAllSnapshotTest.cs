@@ -197,13 +197,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(LearnAllBotModule.MainTargetFaction([new FakeTarget(token)], _ => null), Is.EqualTo(""), "a Random/hidden pick = no target");
 
 			// The live path end to end: three NOD seats at 1000 and one Allies seat at 16000, no target: the aggregate 2000 (trainer value), not geo(2000, dominant NOD 1000) = 1414.
-			var table = LearnAllSnapshot.ParseText("BotLearnAll:
-	Version: 1
-	Knob@any__raid.k:
-		Global: 1000
-		Enemy@nod: 1000
-		Enemy@allies: 16000
-");
+			var table = LearnAllSnapshot.ParseText("BotLearnAll:\n\tVersion: 1\n\tKnob@any__raid.k:\n\t\tGlobal: 1000\n\t\tEnemy@nod: 1000\n\t\tEnemy@allies: 16000\n");
 			string[] players = ["nod", "nod", "nod", "allies"];
 			var none = LearnAllBotModule.MainTargetFaction([new FakeTarget(null)], _ => "nod");
 			Assert.That(LearnAllBotModule.TryResolve(table, "any", "raid.k", "gdi", players, none, out var live), Is.True);
