@@ -55,6 +55,10 @@ namespace OpenRA.Mods.CA.Traits
 		public int Incidents;
 		public int Reacquired;
 		public bool KillObserved;
+#if CAMEO_DEV_LOGGING
+		/// <summary>DEV only: the raid's log snapshot (target owner and style taken at the pick, running observations). Never read by the raid itself.</summary>
+		public RaidLog Log;
+#endif
 	}
 
 	// RAID-HARV-01 P2b (row raid_harv): the launch decision, the squads' raid steps and the release. The call sites are four lines in existing files (TargetPick: the shared-target tier and the top of TargetHighValueFor; the idle states:
@@ -278,6 +282,9 @@ namespace OpenRA.Mods.CA.Traits
 			};
 
 			run.Seq = run.Intent.Seq;
+#if CAMEO_DEV_LOGGING
+			RaidLogStart(run, plan, cand, target, now);
+#endif
 			squad.TargetActor = target;
 			RaidIssueMoves(squad, plan.Waypoints, false);
 			squad.FuzzyStateMachine.ChangeState(squad, new RaidHarvState(run), false);
@@ -366,15 +373,25 @@ namespace OpenRA.Mods.CA.Traits
 			else if (squad.Target.Type == TargetType.Actor)
 				squad.Target = Target.FromCell(World, run.LastSeenCell);
 
+#if CAMEO_DEV_LOGGING
+			RaidLogRefresh(run, actor, now);
+#endif
+
 			// An incident: the squad lost the learned share of its value inside the learned window.
 			if (run.Phase != RaidPhase.Retreat && now >= run.NextCheckTick)
 			{
 				run.NextCheckTick = now + 5;
 				var value = SquadValueOf(squad);
+#if CAMEO_DEV_LOGGING
+				RaidLogCheck(run, leadCell, value, now);
+#endif
 				if (now - run.WindowStartTick > RaidValue(RaidKey.IncidentWindow))
 				{
 					run.WindowStartTick = now;
 					run.WindowStartValue = value;
+#if CAMEO_DEV_LOGGING
+					RaidLogWindowReset(run, value);
+#endif
 				}
 				else if (RaidRecon.IncidentTriggered(run.WindowStartValue, value, RaidValue(RaidKey.IncidentLoss)))
 				{
@@ -593,6 +610,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		void RaidIncident(SquadCA squad, RaidRun run, CPos at, int now, string reason, bool remember = true)
 		{
+#if CAMEO_DEV_LOGGING
+			RaidLogIncident(squad, run, at, now, reason);
+#endif
 			if (remember)
 				raidIncidents.Add(at, now);
 
@@ -638,6 +658,9 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			RaidRow(squad, "raid_harv_recon", run.Phase + "->" + next + " by " + ev + " seen=" + run.LastSeenCell);
+#if CAMEO_DEV_LOGGING
+			RaidLogPhase(run, ev, next, now);
+#endif
 			run.Phase = next;
 			run.PhaseTick = now;
 			run.LastOrderTick = -1;
@@ -651,6 +674,9 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			var actors = RaidMovers(squad).ToArray();
 			var lost = Math.Max(0, run.StartValue - SquadValueOf(squad));
+#if CAMEO_DEV_LOGGING
+			RaidLogRelease(run, lost, now);
+#endif
 			RaidRow(squad, "raid_harv_result", reason + " kill=" + run.KillObserved + " lost=" + lost + " incidents=" + run.Incidents + " reacquired=" + run.Reacquired + " ticks=" + (now - run.StartTick));
 
 			run.Intent.Release(

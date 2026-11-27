@@ -40,6 +40,9 @@ namespace OpenRA.Mods.CA.Traits
 		void PassiveHealth(int playerIndex, BotPassiveHealthSnapshot snapshot);
 		void PassivePositions(int playerIndex, int tick, IReadOnlyList<BotPassiveUnitPositionSnapshot> roster, int expectedCount, string checksum);
 		void CompletePassive(int playerIndex, int tick);
+
+		/// <summary>RAID-HARV-01 P3: one raid_harv_seat / raid_harv_signal row (a finished json line, value only). Callers exist only in the DEV build (#if CAMEO_DEV_LOGGING); the release sink ignores it.</summary>
+		void RaidHarvRow(string row, int tick);
 	}
 
 	/// <summary>The release default: no logger is installed.</summary>
@@ -71,6 +74,7 @@ namespace OpenRA.Mods.CA.Traits
 		public void PassiveHealth(int playerIndex, BotPassiveHealthSnapshot snapshot) { }
 		public void PassivePositions(int playerIndex, int tick, IReadOnlyList<BotPassiveUnitPositionSnapshot> roster, int expectedCount, string checksum) { }
 		public void CompletePassive(int playerIndex, int tick) { }
+		public void RaidHarvRow(string row, int tick) { }
 	}
 
 	// A value-only diagnostic channel: it never holds a player, actor, world or writer.

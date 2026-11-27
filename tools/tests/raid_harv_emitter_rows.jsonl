@@ -1,0 +1,12 @@
+{"event":"raid_harv_seat","game_id":"g1","seat":"seatA","personality":"rush","own_faction":"gdi","enemies":[{"player":"e1","faction":"nod"},{"player":"e2","faction":"gdi"}]}
+{"event":"raid_harv_signal","game_id":"g1","seat":"seatA","tick":1000,"raid_id":"seatA-1","target_player":"e1","target_style":"boom","key":"raid.lost_recon","kind":"reacquired","ticks":120,"current":300}
+{"event":"raid_harv_signal","game_id":"g1","seat":"seatA","tick":1010,"raid_id":"seatA-1","target_player":"e1","target_style":"boom","key":"raid.recon_radius","kind":"reacquired","distance":8,"current":6}
+{"event":"raid_harv_signal","game_id":"g1","seat":"seatA","tick":1020,"raid_id":"seatA-1","target_player":"e1","target_style":"boom","key":"raid.move_refresh","drift":3,"visible_prev":true,"visible_now":true,"phase":"Travel","since_change":80}
+{"event":"raid_harv_signal","game_id":"g1","seat":"seatA","tick":1030,"raid_id":"seatA-1","target_player":"e1","target_style":"boom","key":"raid.req_margin","killed":true,"loss_permille":250}
+{"event":"raid_harv_signal","game_id":"g1","seat":"seatA","tick":1040,"raid_id":"seatA-1","target_player":"e1","target_style":"boom","key":"raid.incident_window","span_ticks":10,"current":40}
+{"event":"raid_harv_signal","game_id":"g1","seat":"seatA","tick":1050,"raid_id":"seatA-1","target_player":"e1","target_style":"boom","key":"raid.waypoint_spacing","left_lane":false}
+{"event":"raid_harv_signal","game_id":"g1","seat":"seatA","tick":2000,"raid_id":"seatA-2","target_player":"e2","target_style":null,"key":"raid.lost_recon","kind":"exhausted","current":300}
+{"event":"raid_harv_signal","game_id":"g1","seat":"seatA","tick":2010,"raid_id":"seatA-2","target_player":"e2","target_style":null,"key":"raid.recon_radius","kind":"exhausted","far_seen":true,"current":6}
+{"event":"raid_harv_signal","game_id":"g1","seat":"seatA","tick":2020,"raid_id":"seatA-2","target_player":"e2","target_style":null,"key":"raid.incident_loss","lost_half_within_600":true,"restrike_clean":false}
+{"event":"raid_harv_signal","game_id":"g1","seat":"seatA","tick":2030,"raid_id":"seatA-2","target_player":"e2","target_style":null,"key":"raid.incident_decay","reincident_within_1500":false,"passed_clean_before_decay":true}
+{"event":"raid_harv_signal","game_id":"g1","seat":"seatA","tick":2040,"raid_id":"seatA-2","target_player":"e2","target_style":null,"key":"raid.defence_radius","outside_defender_took_part":true}

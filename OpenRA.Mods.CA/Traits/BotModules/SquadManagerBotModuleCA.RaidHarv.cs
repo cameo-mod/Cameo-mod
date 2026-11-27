@@ -26,6 +26,10 @@ namespace OpenRA.Mods.CA.Traits
 		public int EtaTicks;
 		public List<CPos> Waypoints = new();
 		public List<CPos> ScoutAim = new();
+#if CAMEO_DEV_LOGGING
+		/// <summary>DEV only (raid.waypoint_spacing): the whole explored lane the waypoints were cut from, start first (every waypoint is a cell of it).</summary>
+		public List<CPos> Lane = new();
+#endif
 	}
 
 	/// <summary>The target a raid pick resolved to: a harvester this bot sees NOW (id, cell, value).</summary>
@@ -259,6 +263,9 @@ namespace OpenRA.Mods.CA.Traits
 			plan.Ok = true;
 			plan.EtaTicks = eta;
 			plan.Waypoints = waypoints;
+#if CAMEO_DEV_LOGGING
+			plan.Lane = travel;
+#endif
 			return plan;
 		}
 

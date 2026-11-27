@@ -1858,6 +1858,11 @@ namespace OpenRA.Mods.CA.Traits
 
 		void BotTickBody(IBot bot)
 		{
+#if CAMEO_DEV_LOGGING
+			// RAID-HARV-01 P3 (DEV only): the post-release raid watches, once per 25 ticks and only while one is open.
+			RaidLogPass();
+#endif
+
 			// LC4: the BotLimits cached in TraitEnabled can predate the tier condition (BotLimitsResolver). A corrected
 			// tier also corrects the initial attack delay; it only ever lengthens the wait already scheduled.
 			if (!limitsRechecked)

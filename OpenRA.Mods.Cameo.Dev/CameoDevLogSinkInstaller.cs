@@ -92,6 +92,9 @@ namespace OpenRA.Mods.Cameo.Dev
 		public void PassivePositions(int playerIndex, int tick, IReadOnlyList<BotPassiveUnitPositionSnapshot> roster, int expectedCount, string checksum) =>
 			Writer(playerIndex)?.TryEnqueueUnitPosition(tick, roster, expectedCount, checksum);
 		public void CompletePassive(int playerIndex, int tick) => Writer(playerIndex)?.Complete(tick);
+
+		// RAID-HARV-01 P3: the raid rows go to the DEV writer trait (admission and a batch append only).
+		public void RaidHarvRow(string row, int tick) => worldActor.TraitOrDefault<RaidHarvLogWriterDev>()?.Write(row);
 	}
 
 	[TraitLocation(SystemActors.World)]

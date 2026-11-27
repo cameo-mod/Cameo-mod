@@ -394,5 +394,39 @@ class FitterCompatibility(unittest.TestCase):
         self.assertEqual(fit.check_records([wave] + records), ("g1", 12, None))
 
 
+class EmitterRows(unittest.TestCase):
+    """tools/tests/raid_harv_emitter_rows.jsonl holds the exact lines the C# row builders write (RaidHarvEmitterRowsTest rebuilds every line byte for byte). The extractor must accept them as they are."""
+
+    def rows(self):
+        rows, malformed = x.load_rows([os.path.join(HERE, "raid_harv_emitter_rows.jsonl")])
+        self.assertEqual(malformed, 0)
+        return rows
+
+    def test_every_emitted_line_validates(self):
+        rows = self.rows()
+        self.assertEqual(len(rows), 12)
+        self.assertEqual(sum(1 for r in rows if r["event"] == x.SEAT_EVENT), 1)
+        for n, r in enumerate(rows):
+            if r["event"] == x.SEAT_EVENT:
+                self.assertEqual(sorted(x.parse_seat_row(r, "line %d" % n)["enemies"]), ["e1", "e2"])
+            else:
+                self.assertTrue(x.parse_row(r, "line %d" % n)["counts"] in (True, False))
+
+    def test_all_nine_keys_are_emitted(self):
+        rows = [r for r in self.rows() if r["event"] == x.EVENT]
+        self.assertEqual(sorted({r["key"] for r in rows}), sorted(GOLDEN["keys"]))
+
+    def test_the_emitted_game_becomes_one_valid_exposure_record_of_the_seat(self):
+        records, warnings = x.build_records(self.rows(), 3)
+        self.assertEqual(warnings, [])
+        self.assertEqual(len(records), 1)
+        record = records[0]
+        self.assertEqual((record["game_id"], record["seq"], record["seat"], record["personality"], record["own_faction"]), ("g1", 3, "raid:seatA", "rush", "gdi"), "the raid seat key is namespaced so it cannot collide with a wave-role exposure of the same seat")
+        self.assertEqual((record["main_target"], record["main_target_style"]), ("nod", "boom"), "e1 has the earliest counted sample of the two one-raid owners")
+        self.assertEqual([k["knob"] for k in record["knobs"]], list(GOLDEN["keys"]))
+        self.assertEqual(sorted(e["faction"] for e in record["enemies"]), ["gdi", "nod"])
+        fit.check_records(records)
+
+
 if __name__ == "__main__":
     unittest.main()

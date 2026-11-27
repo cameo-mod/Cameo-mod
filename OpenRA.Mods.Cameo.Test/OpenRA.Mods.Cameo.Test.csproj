@@ -104,6 +104,10 @@
     <None Include="../tools/tests/raid_harv_signals_golden.json"
           Link="tools/tests/fixtures/raid_harv_signals_golden.json"
           CopyToOutputDirectory="Always" />
+    <!-- RAID-HARV-01 P3 emitter: the exact lines of the C# row builders (RaidHarvEmitterRowsTest) and the python extractor test. -->
+    <None Include="../tools/tests/raid_harv_emitter_rows.jsonl"
+          Link="tools/tests/fixtures/raid_harv_emitter_rows.jsonl"
+          CopyToOutputDirectory="Always" />
     <!-- SW-cap wiring fixtures: the real host yaml files scanned by
          SuperweaponPlugLimitYamlTest to pin the four global-swlimit providers. -->
     <None Include="../mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml"
