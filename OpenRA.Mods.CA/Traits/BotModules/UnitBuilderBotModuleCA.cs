@@ -218,8 +218,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("HANS-PROFILE-01: a type is affordable for the core once the bank holds this percent of its price (the same bar as TechLeanBankPct).")]
 		public readonly int CoreFocusBankPct = 30;
 
-		[Desc("PERF-BOTTICK-01 (row ub_affordable_pool; needs UnitRoll): the roll draws only among the pool members that pass the cash/afford check a pick meets after the roll, with the weights",
-			"of the whole pool; none passes = the queue's fill ends for this visit. Off = the roll over the whole pool, a refused pick re-rolled.")]
+		[Desc("PERF-BOTTICK-01 (row ub_affordable_pool; needs UnitRoll): the roll draws only among the pool members that pass the cash/afford check a pick meets after the roll. The mask cuts the",
+			"roll inputs before UnitPickArbiter.Decide, so the floor and the core lift are computed over the kept members; none passes = the queue's fill ends for this visit.",
+			"Off = the roll over the whole pool, a refused pick re-rolled.")]
 		public readonly bool AffordablePool = false;
 
 		[Desc("PERF-BOTTICK-01 FIX 4 (row cost_cache_visit): memoise ProductionQueue.GetProductionCost for one bot visit, per (queue actor, queue type, actor type). The same integer as the live call,",
@@ -3186,9 +3187,8 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// HANS-PROFILE-01 (ub_core_focus): the dearest affordable types built once get a weight multiplier (a bias; every other weight stays as the roll made it); the arbiter applies it as the last step on the weights.
-			Func<double[], double[]> coreLift = null;
-			if (CoreFocusOn)
-				coreLift = w => FocusCore(queue, pool, w);
+			// The lift reads the queue and the (kept) pool from rollLiftQueue/rollLiftPool, set just before the draw, through one cached delegate: no closure per roll.
+			var coreLift = CoreFocusOn ? coreLiftCached ??= RollCoreLift : null;
 
 			// PERF-BOTTICK-01 (row ub_affordable_pool, default off) as a keep mask on the arbiter's inputs (V08H join with CONSOLIDATE-03 P5): only the members that pass the fill's
 			// cash/afford check (RollCashAdmits) enter R2/R3. None passes = this queue's fill ends for the visit. With the row off nothing here runs and the draw is P5's exactly.
@@ -3222,7 +3222,11 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// R2 weights (floor, then the core lift) and R3 the one draw: the arbiter owns the order and the integer draw; the draw is this module's own RNG stream, exactly one Next call
+			rollLiftQueue = queue;
+			rollLiftPool = pool;
 			var decision = UnitPickArbiter.Decide(fractions, biases, counterPcts, RollParameters.FloorPct, boosts, coreLift, RollDraw);
+			rollLiftQueue = null;
+			rollLiftPool = null;
 			var weights = decision.Weights;
 			var units = decision.Units;
 			var pick = decision.Pick;

@@ -31,7 +31,7 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void TheKeptMembersCarryTheirWholePoolWeightsInPoolOrder()
+		public void TheKeptMembersKeepTheirValuesInPoolOrder()
 		{
 			var weights = new[] { 12.5, 3.0, 40.25, 7.0, 0.5 };
 			var keep = new[] { true, false, true, false, true };
@@ -68,7 +68,7 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void TheFilterUsesTheWholePoolWeightsAndTheSameCashTermsAsTheGateAfterThePick()
+		public void TheMaskCutsTheArbiterInputsWithTheSameCashTermsAsTheGateAfterThePick()
 		{
 			var u = Source(Unit);
 			var body = RollBody(u);

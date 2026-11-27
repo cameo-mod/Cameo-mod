@@ -207,7 +207,9 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(lift, Is.GreaterThan(weights), "after the roll's own weights (floor, boosts, counters, profiles)");
 			Assert.That(quantize, Is.GreaterThan(lift), "before the integer draw");
 
-			var armed = body.IndexOf("if (CoreFocusOn)\n\t\t\t\tcoreLift = w => FocusCore(queue, pool, w);", StringComparison.Ordinal);
+			var armed = body.IndexOf("var coreLift = CoreFocusOn ? coreLiftCached ??= RollCoreLift : null;", StringComparison.Ordinal);
+			Assert.That(body, Does.Contain("rollLiftQueue = queue;\n\t\t\trollLiftPool = pool;\n\t\t\tvar decision = UnitPickArbiter.Decide("), "the lift sees the pool the draw uses (after the keep mask)");
+			Assert.That(RepoFile(Bots + "UnitBuilderBotModuleCA.CoreFocus.cs"), Does.Contain("double[] RollCoreLift(double[] weights) => FocusCore(rollLiftQueue, rollLiftPool, weights);"));
 			var decide = body.IndexOf("UnitPickArbiter.Decide(fractions, biases, counterPcts, RollParameters.FloorPct, boosts, coreLift,", StringComparison.Ordinal);
 			var log = body.IndexOf("RollPickLog(queue.Info.Type, pool, weights, pick,", StringComparison.Ordinal);
 			Assert.That(armed, Is.GreaterThan(0), "the lift is armed only while the row is on");

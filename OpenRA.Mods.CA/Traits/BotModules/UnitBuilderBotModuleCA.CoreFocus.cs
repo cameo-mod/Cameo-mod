@@ -29,6 +29,13 @@ namespace OpenRA.Mods.CA.Traits
 		// The bank this fill's roll sees (set by the pass before ChooseRollUnit, 0 while the row is off): the core only names units the bank can start.
 		int rollBankLeft;
 
+		// The queue and the pool of the roll in progress (set by ChooseRollUnit around UnitPickArbiter.Decide only, null otherwise) and the one delegate the arbiter calls for the lift.
+		ProductionQueue rollLiftQueue;
+		List<ActorInfo> rollLiftPool;
+		Func<double[], double[]> coreLiftCached;
+
+		double[] RollCoreLift(double[] weights) => FocusCore(rollLiftQueue, rollLiftPool, weights);
+
 		/// <summary>The weights with the core lifted (a new array), or the same array when the row finds nothing to do.</summary>
 		double[] FocusCore(ProductionQueue queue, List<ActorInfo> pool, double[] weights)
 		{
