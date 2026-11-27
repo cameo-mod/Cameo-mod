@@ -989,6 +989,8 @@ namespace OpenRA.Mods.CA.Traits
 		// CONSOLIDATE-01 c3: the tech depth of every building type (prerequisite-graph distance from the construction yard), built once on the first S5
 		// sweep by the queue manager and shared by this player's producers (BaseBuilderQueueManagerCA.CoreDepths). Null until then.
 		public IReadOnlyDictionary<string, int> CoreTechDepth;
+		BaseBuilderRuleMetadataCA ruleMetadata;
+		internal BaseBuilderRuleMetadataCA RuleMetadata => ruleMetadata ??= BaseBuilderRuleMetadataCA.Capture(world.Map.Rules);
 		AblationLatch ablatePassiveIncome; // CONSOLIDATE-01 c4
 		public bool PassiveIncomeArmed => Info.BbPassiveIncome && switchesActive && !ablatePassiveIncome.Off(player, AblationIds.BbPassiveIncome);
 		AblationLatch ablateAntiRushSet; // CONSOLIDATE-01 c5

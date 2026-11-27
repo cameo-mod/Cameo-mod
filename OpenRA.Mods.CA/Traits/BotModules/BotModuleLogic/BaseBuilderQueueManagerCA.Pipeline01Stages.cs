@@ -183,22 +183,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (baseBuilder.CaptureUnlockMaps != null)
 				return baseBuilder.CaptureUnlockMaps;
 
-			var prereqsOf = new Dictionary<string, IReadOnlyList<string>>(StringComparer.Ordinal);
-			var providesOf = new Dictionary<string, IReadOnlyList<string>>(StringComparer.Ordinal);
-			foreach (var info in world.Map.Rules.Actors.Values.OrderBy(a => a.Name, StringComparer.Ordinal))
-			{
-				if (!info.HasTraitInfo<BuildingInfo>())
-					continue;
-
-				var raws = new List<string>();
-				foreach (var buildableInfo in info.TraitInfos<BuildableInfo>())
-					raws.AddRange(buildableInfo.Prerequisites);
-
-				prereqsOf[info.Name] = raws;
-				providesOf[info.Name] = info.TraitInfos<ProvidesPrerequisiteInfo>().Select(p => p.Prerequisite ?? info.Name).ToList();
-			}
-
-			return baseBuilder.CaptureUnlockMaps = CaptureUnlockMapsCA.Build(prereqsOf, providesOf);
+			return baseBuilder.CaptureUnlockMaps = baseBuilder.RuleMetadata.CaptureMaps();
 		}
 
 		// The tech depth of every building type, computed once per player from the rules (not the world): Buildable prerequisites against the
@@ -208,33 +193,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (baseBuilder.CoreTechDepth != null)
 				return baseBuilder.CoreTechDepth;
 
-			var faction = player.Faction.InternalName;
-			var prereqsOf = new Dictionary<string, IReadOnlyList<string>>(StringComparer.Ordinal);
-			var providersOf = new Dictionary<string, IReadOnlyList<string>>(StringComparer.Ordinal);
-			foreach (var info in world.Map.Rules.Actors.Values.OrderBy(a => a.Name, StringComparer.Ordinal))
-			{
-				if (!info.HasTraitInfo<BuildingInfo>())
-					continue;
-
-				var raws = new List<string>();
-				foreach (var buildable in info.TraitInfos<BuildableInfo>())
-					raws.AddRange(buildable.Prerequisites);
-
-				prereqsOf[info.Name] = raws;
-				foreach (var provides in info.TraitInfos<ProvidesPrerequisiteInfo>())
-				{
-					if (provides.Factions.Count > 0 && !provides.Factions.Any(f => string.Equals(f, faction, StringComparison.OrdinalIgnoreCase)))
-						continue;
-
-					var key = (provides.Prerequisite ?? info.Name).ToLowerInvariant();
-					if (!providersOf.TryGetValue(key, out var list))
-						providersOf[key] = list = new List<string>();
-
-					((List<string>)list).Add(info.Name);
-				}
-			}
-
-			return baseBuilder.CoreTechDepth = TechDepthCA.Compute(prereqsOf, providersOf, baseBuilder.Info.ConstructionYardTypes);
+			return baseBuilder.CoreTechDepth = baseBuilder.RuleMetadata.CoreDepths(player.Faction.InternalName, baseBuilder.Info.ConstructionYardTypes);
 		}
 
 		// S6 (row bb_passive_income): the cash tricklers up to their limit (PassiveIncomeCA.Order), then a silo when storage is nearly full
