@@ -53,7 +53,6 @@ DEFAULT_NET_INTERVAL = 3          # used only when the replay states no NetFrame
 HARD_PLUS = ("hard", "veryhard", "brutal", "challenger", "unbeatable", "cameogod")
 
 # Tier-2 markers. handofnod and airstrip are Nod's barracks and war factory (production, not tier 2).
-TIER2_MARKERS = ("radar", "dome", "comm", "techcenter", "techcentre", "research")
 RADAR_COMMS_MARKERS = ("radar", "dome", "comm")
 PRODUCTION_MARKERS = ("barracks", "factory", "handofnod", "airstrip")
 REFINERY_MARKERS = ("refinery",)
@@ -68,7 +67,8 @@ POWER_EXACT = ("nuke",)
 NON_DEFENCE_MARKERS = (("chronosphere", "gapgenerator", "ironcurtain", "temple", "silo", "storage",
                         "palace", "stealthgenerator", "supercomputer", "weathercontrolcenter",
                         "upgradecenter", "spaceport")
-                       + TIER2_MARKERS + PRODUCTION_MARKERS + REFINERY_MARKERS + POWER_MARKERS)
+                       + RADAR_COMMS_MARKERS + ("techcenter", "techcentre", "research")
+                       + PRODUCTION_MARKERS + REFINERY_MARKERS + POWER_MARKERS)
 
 # Defence categories (reported separately; only walls are kept out of the HOLD count).
 WALL_MARKERS = ("wall", "fenc", "barrier", "concrete", "sbag", "brik")
@@ -361,11 +361,22 @@ def load_rules(rules_root, info=None):
 
     queues = collections.defaultdict(set)    # key (incl. ^templates) -> Queue values
     inherits = collections.defaultdict(set)  # key -> template names
+    semantic_radars = set()
+    semantic_centres = set()
+    strategic = set()
+    role_fields = {
+        "SemanticRadarTypes": semantic_radars,
+        "SemanticTechCentreTypes": semantic_centres,
+        "SemanticSuperweaponTypes": strategic,
+    }
     for path in files:
         with open(path, encoding="utf-8", errors="replace") as f:
             lines = f.read().splitlines()
         for name, body in _blocks(lines):
             for line in body:
+                field, _, value = line.strip().partition(":")
+                if field in role_fields:
+                    role_fields[field].update(n.strip() for n in value.split("#", 1)[0].split(",") if n.strip())
                 q = _QUEUE.match(line)
                 if q:
                     queues[name].add(q.group(1).strip().lower())
@@ -398,6 +409,12 @@ def load_rules(rules_root, info=None):
             defences.add(name)
         elif is_building or (is_defence and _has(name, NON_DEFENCE_MARKERS)):
             buildings.add(name)
+    if info is not None:
+        info.update({
+            "semantic_radar_types": sorted(semantic_radars),
+            "semantic_tech_centre_types": sorted(semantic_centres),
+            "semantic_superweapon_types": sorted(strategic),
+        })
     return defences, buildings
 
 
@@ -427,7 +444,7 @@ def _first(frames):
     return min(frames) if frames else None
 
 
-def _seat_row(subject, faction, items, defences, buildings):
+def _seat_row(subject, faction, items, defences, buildings, radar_types, tech_centres, superweapons):
     names = [n for _f, n in items]
     split = {"defence": 0, "aa": 0, "wall_gate": 0}
     for _f, n in items:
@@ -435,8 +452,9 @@ def _seat_row(subject, faction, items, defences, buildings):
             split[_category(n)] += 1
     # Walls and gates are reported in defence_split but are not defences for the HOLD rule.
     def_frames = [f for f, n in items if n in defences and _category(n) != "wall_gate"]
-    radar_frames = [f for f, n in items if _has(n, RADAR_COMMS_MARKERS) and n not in defences]
-    t2_frames = [f for f, n in items if _has(n, TIER2_MARKERS) and n not in defences]
+    radar_frames = [f for f, n in items if n in radar_types]
+    tech_frames = [f for f, n in items if n in tech_centres]
+    superweapon_frames = [f for f, n in items if n in superweapons]
     available = sorted(n for n in buildings if faction_of(n) == faction)
     placed = {n for n in names if n in buildings and faction_of(n) == faction}
     coverage = round(len(placed) / len(available), 4) if available else 0.0
@@ -447,8 +465,11 @@ def _seat_row(subject, faction, items, defences, buildings):
         "defence_split": split,
         "first_defence_tick": _first(def_frames),
         "first_radar_comms_tick": _first(radar_frames),
-        "tier2_first_tick": _first(t2_frames),
-        "tier": "tier2" if t2_frames else "tier1",
+        "tier2_first_tick": _first(radar_frames),
+        "tier3_first_tick": _first(tech_frames),
+        "superweapon_first_tick": _first(superweapon_frames),
+        "radar_supported": any(faction_of(name) == faction for name in radar_types) or bool(radar_frames),
+        "tier": "tier3" if tech_frames else "tier2" if radar_frames else "tier1",
         "building_types_placed": len(placed),
         "building_types_available": len(available),
         "coverage": coverage,
@@ -469,6 +490,8 @@ def _sha256(path):
 def analyse(replay_path, rules_root=_DEFAULT_RULES, matches_path=None):
     rules_info = {}
     defences, buildings = load_rules(rules_root, rules_info)
+    roles = tuple(set(rules_info[key]) for key in (
+        "semantic_radar_types", "semantic_tech_centre_types", "semantic_superweapon_types"))
     stream = read_stream(replay_path)
     interval = stream["interval"]
     if stream["final_tick"] is not None:
@@ -488,7 +511,7 @@ def analyse(replay_path, rules_root=_DEFAULT_RULES, matches_path=None):
         items = by_subject[subject]
         votes = [faction_of(n) for _f, n in items if faction_of(n) in known]
         faction = collections.Counter(votes).most_common(1)[0][0] if votes else "unknown"
-        seats.append(_seat_row(subject, faction, items, defences, buildings))
+        seats.append(_seat_row(subject, faction, items, defences, buildings, *roles))
 
     reconcile = []
     bot_types = []
@@ -497,7 +520,7 @@ def analyse(replay_path, rules_root=_DEFAULT_RULES, matches_path=None):
         meta_f = collections.Counter(s["faction"] for s in meta)
         for faction, n in (meta_f - replay_f).items():
             for _ in range(n):
-                row = _seat_row(None, faction, [], defences, buildings)
+                row = _seat_row(None, faction, [], defences, buildings, *roles)
                 row["source"] = "metadata seat with no placements"
                 seats.append(row)
         if len(meta) != len(by_subject):
@@ -536,12 +559,13 @@ def analyse(replay_path, rules_root=_DEFAULT_RULES, matches_path=None):
         "metadata_seats": len(meta) if meta else None,
         "reconciliation": reconcile,
         "rules": rules_info,
+        "semantic_tier_schema": 1,
         "seats": seats,
         "constants": {
             "min_ticks": MIN_TICKS,
             "tier2_check_min_ticks": TIER2_CHECK_MIN_TICKS,
             "hard_plus": list(HARD_PLUS),
-            "tier2_markers": list(TIER2_MARKERS),
+            "tier2_role": "semantic_radar_types",
             "non_defence_markers": list(NON_DEFENCE_MARKERS),
             "wall_markers": list(WALL_MARKERS),
             "aa_markers": list(AA_MARKERS),
@@ -558,6 +582,8 @@ def evaluate(report, tier2_deadline=None, coverage_min=None):
     TIER2_CHECK_MIN_TICKS is an advisory, not a HOLD."""
     if report["eligibility"] != "ELIGIBLE":
         return "NOT_ELIGIBLE", [], []
+    if tier2_deadline is not None and report.get("semantic_tier_schema") == 1 and not report["rules"]["semantic_radar_types"]:
+        return "NOT_ELIGIBLE", [], ["semantic radar catalog missing; tier-2 deadline cannot be evaluated"]
     reasons = []
     advisories = []
     t2_enforced = report["last_tick"] >= TIER2_CHECK_MIN_TICKS
@@ -566,7 +592,9 @@ def evaluate(report, tier2_deadline=None, coverage_min=None):
         tag = "seat {} ({})".format(ident, seat["faction"])
         if seat["defences"] == 0:
             reasons.append(tag + " placed 0 defences")
-        if tier2_deadline is not None:
+        if tier2_deadline is not None and not seat.get("radar_supported", True):
+            advisories.append(tag + " radar milestone unavailable in the semantic catalog")
+        elif tier2_deadline is not None:
             t2 = seat["tier2_first_tick"]
             if t2 is None or t2 > tier2_deadline:
                 msg = "{} no tier-2 building by tick {}".format(tag, tier2_deadline)

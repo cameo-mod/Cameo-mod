@@ -1148,8 +1148,13 @@ namespace OpenRA.Mods.Cameo.Traits
 					= seat.Sample.ArmyNaval = seat.Sample.ArmyDefence = 0;
 				seat.Sample.UnitTypes.Clear();
 				seat.TechTier = 0;
+				seat.SemanticTier = 0;
+				seat.SuperweaponOwned = false;
 			}
 
+			var techRoles = world.Map.Rules.Actors.TryGetValue("player", out var playerRules)
+				? playerRules.TraitInfos<BaseBuilderBotModuleCAInfo>().FirstOrDefault(info => info.SemanticTechCentreTypes.Count != 0)
+				: null;
 			foreach (var actor in world.Actors)
 			{
 				if (!actor.IsInWorld || actor.IsDead || actor.Owner == null)
@@ -1165,6 +1170,12 @@ namespace OpenRA.Mods.Cameo.Traits
 				{
 					s.Buildings++;
 					seat.TechTier = Math.Max(seat.TechTier, techDepth.GetValueOrDefault(name, 0));
+					if (techRoles != null)
+					{
+						var role = SemanticTechTier.Classify(techRoles, actor.Info);
+						seat.SemanticTier = Math.Max(seat.SemanticTier, role.Tier);
+						seat.SuperweaponOwned |= role.Superweapon;
+					}
 					if (tagMap.TryGetValue(name, out var tags))
 					{
 						if (tags.Contains(BotTargetTags.Refinery))
@@ -1237,6 +1248,9 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(b, "mcv_deploys", seat.ExpansionDeploys);
 			AiMatchLogWriter.AppendNumber(b, "production_buildings", s.Production);
 			AiMatchLogWriter.AppendNumber(b, "tech_tier", seat.TechTier);
+			AiMatchLogWriter.AppendNumber(b, "tech_depth", seat.TechTier);
+			AiMatchLogWriter.AppendNumber(b, "tier", seat.SemanticTier);
+			AiMatchLogWriter.AppendNumber(b, "superweapon_owned", seat.SuperweaponOwned ? 1 : 0);
 			AiMatchLogWriter.AppendNumber(b, "idle_production_ticks", seat.IdleProductionTicks);
 			var unitGate = GateFor(seat);
 			if (unitGate?.UnitCashAdmission is { } cash)

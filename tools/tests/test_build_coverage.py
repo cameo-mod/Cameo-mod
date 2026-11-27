@@ -90,6 +90,11 @@ def _matches(game_dir, seats, game_uid=GAME_UID):
 
 
 RULES_YAML = """\
+Player:
+	BaseBuilderBotModuleCA:
+		SemanticRadarTypes: td_gdi_radardome, ra1_allies_radardome
+		SemanticTechCentreTypes: td_gdi_advancedcommunicationscenter
+		SemanticSuperweaponTypes: ra1_soviets_missilesilo
 ^BaseBuilding:
 	Buildable:
 		Queue: Building
@@ -156,14 +161,20 @@ class RulesTests(unittest.TestCase):
         self.assertIn("ra1_oresilo", buildings)
 
     def test_td_power_plant_named_nuke_counts_as_power(self):
-        row = bc._seat_row(4, "td_nod", [(100, "nuke"), (200, "td_nod_tiberiumrefinery")], set(), set())
+        row = bc._seat_row(4, "td_nod", [(100, "nuke"), (200, "td_nod_tiberiumrefinery")], set(), set(), set(), set(), set())
         self.assertEqual(row["power"], 1)
 
-    def test_tier2_markers_exclude_production(self):
-        self.assertFalse(bc._has("td_nod_handofnod", bc.TIER2_MARKERS))
-        self.assertFalse(bc._has("td_nod_airstrip", bc.TIER2_MARKERS))
-        self.assertTrue(bc._has("td_gdi_radardome", bc.TIER2_MARKERS))
-        self.assertTrue(bc._has("ra1_allies_barracks", bc.PRODUCTION_MARKERS))
+    def test_tier_three_does_not_satisfy_the_radar_guard(self):
+        row = bc._seat_row(4, "td_gdi", [(100, "td_gdi_advancedcommunicationscenter")],
+                           set(), set(), {"td_gdi_radardome"}, {"td_gdi_advancedcommunicationscenter"}, set())
+        self.assertIsNone(row["tier2_first_tick"])
+        self.assertEqual(row["tier3_first_tick"], 100)
+        self.assertTrue(row["radar_supported"])
+        self.assertEqual(row["tier"], "tier3")
+        row = bc._seat_row(4, "other", [(200, "td_gdi_radardome")],
+                           set(), set(), {"td_gdi_radardome"}, set(), set())
+        self.assertEqual(row["tier2_first_tick"], 200)
+        self.assertTrue(row["radar_supported"])
 
     def test_defence_category_by_name(self):
         self.assertEqual(bc._category("td_gdi_concretewall"), "wall_gate")

@@ -66,6 +66,18 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("BINDING tech chain (11-23): this faction's T2 and T3 gate buildings. Exempt from the army-first pause and the mobile reserve while none of them is owned or queued. Empty = no exemption.")]
 		public readonly FrozenSet<string> TechChainTypes = FrozenSet<string>.Empty;
 
+		[Desc("Rank the unlisted first-copy fallback by semantic tech tiers.")]
+		public readonly bool SemanticTechTiers = false;
+
+		[ActorReference]
+		public readonly FrozenSet<string> SemanticRadarTypes = FrozenSet<string>.Empty;
+
+		[ActorReference]
+		public readonly FrozenSet<string> SemanticTechCentreTypes = FrozenSet<string>.Empty;
+
+		[ActorReference]
+		public readonly FrozenSet<string> SemanticSuperweaponTypes = FrozenSet<string>.Empty;
+
 		[Desc("Tells the AI what building types are considered silos (resource storage).")]
 		public readonly FrozenSet<string> SiloTypes = FrozenSet<string>.Empty;
 
@@ -1017,6 +1029,7 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateDefenceCap;
 		AblationLatch ablateCaptureUnlock; // CAPTURE-TECH-01
 		AblationLatch ablateS5CaptureReason; // CONSOLIDATE-03 P1 (b)
+		AblationLatch ablateSemanticTechTiers;
 		AblationLatch ablateCashOneReserve; // CONSOLIDATE-03 P2 (b)
 		public bool CashOneReserveArmed => Info.CashOneReserve && switchesActive && !ablateCashOneReserve.Off(player, AblationIds.ClOneReserve);
 		IBotPersonalityLeadProvider[] reserveLeadProviders;
@@ -1026,6 +1039,7 @@ namespace OpenRA.Mods.CA.Traits
 			BotPersonalityLeads.Lean(reserveLeadProviders ??= player.PlayerActor.TraitsImplementing<IBotPersonalityLeadProvider>().ToArray(), "steamroller");
 		public bool S5CaptureReasonArmed => Info.BbS5CaptureReason && CaptureUnlockArmed && BuildAllListedArmed && !ablateS5CaptureReason.Off(player, AblationIds.BbS5CaptureReason);
 		public bool CaptureUnlockArmed => Info.CsCaptureUnlock && switchesActive && !ablateCaptureUnlock.Off(player, AblationIds.CsCaptureUnlock);
+		public bool SemanticTechTiersArmed => Info.SemanticTechTiers && switchesActive && !ablateSemanticTechTiers.Off(player, AblationIds.SemanticTechTiers);
 		AblationLatch ablateTechChainPaygo; // TECHCHAIN-PAYGO-01
 		public bool TechChainPaygoArmed => Info.BbTechChainPaygo && switchesActive && !ablateTechChainPaygo.Off(player, AblationIds.BbTechChainPaygo);
 		AblationLatch ablateBuildAllListed; // BUILD-ALL-B

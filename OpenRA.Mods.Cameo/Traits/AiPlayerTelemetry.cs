@@ -390,6 +390,8 @@ namespace OpenRA.Mods.Cameo.Traits
 		public int EventSeq;
 		public int IdleProductionTicks;
 		public int TechTier;
+		public int SemanticTier;
+		public bool SuperweaponOwned;
 		public readonly SeatSample Sample = new();
 		public readonly Dictionary<uint, CPos> Units = new();
 		public readonly Dictionary<uint, (double Home, double Enemy)> Dists = new();

@@ -100,7 +100,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (snapshot.DefenceQueue)
 				return Array.Empty<string>();
 
-			var depths = CoreDepths();
+			var depths = baseBuilder.SemanticTechTiersArmed ? null : CoreDepths();
 			var inputs = new List<CoreOnceInput>(buildable.Count);
 			var captureOn = baseBuilder.CaptureUnlockArmed;
 			captureUnlockOffered.Clear();
@@ -132,7 +132,8 @@ namespace OpenRA.Mods.CA.Traits
 					firstCopy || unlock,
 					OwnRuleStage: b.ConstructionYardTypes.Contains(name) || (b.RefineryTypes.Contains(name) && !unlock),
 					Count: BaseBuildPlanCA.CountOf(snapshot, name),
-					Depth: depths.TryGetValue(name, out var depth) ? depth : 0,
+					Depth: depths == null ? SemanticTechTier.Classify(b, item).FirstCopyOrder
+						: depths.TryGetValue(name, out var depth) ? depth : 0,
 					Cost: baseBuilder.ProductionCost(queue, item)));
 			}
 
