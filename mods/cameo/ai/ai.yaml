@@ -4648,8 +4648,8 @@ Player:
 		CoverAllFieldsMaxInflight: 3
 		McvRequestReserve: 1000
 		McvTargetCount: 4
-		# FE-1 (AI_ARCHITECTURE 12.24, DESIGN 19.1b): one refinery per anchor (resource spreader or spreaderless field),
-		# placed next to it, never more than anchors; MCV site and crawl target in different directions, spread over the
+		# FE-1 (AI_ARCHITECTURE 12.24, DESIGN 19.1b): legacy anchor coverage; REF-LEARN-01 supersedes its one-per-anchor limit
+		# with learned resource-zone caps when enabled; MCV site and crawl target in different directions, spread over the
 		# map. genericbot-only (this module); classic is untouched. Switch group AJ_field_coverage; ON BY DEFAULT per
 		# the maintainer ruling 2026-10-04 ("refinery coverage is the most important feature right now").
 		FieldCoverage: true
@@ -4671,6 +4671,8 @@ Player:
 		EcoTimingFloor: true
 		RefineryZoneRadius: 10
 		RefineryPerZoneCap: 2
+		# REF-LEARN-01 stays off until its ablation and integration gates pass; off preserves the previous decisions.
+		RefLearn: false
 		RefinerySecondPerZoneMinCells: 40
 		RefinerySpacingCells: 10
 		RefinerySpacingFallbackCells: 5

@@ -63,6 +63,53 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		bool RefDemandArmed => Info.RefDemand && zonesActive && LawActive;
 
+		AblationLatch ablateRefLearn;
+		bool RefLearnArmed => Info.RefLearn && RefDemandArmed && !ablateRefLearn.Off(player, AblationIds.RefLearn);
+		IBotLearnedKnobs refineryKnobs;
+		bool refineryKnobsResolved;
+		IBotLearnedKnobs RefineryKnobs
+		{
+			get
+			{
+				if (!refineryKnobsResolved)
+				{
+					refineryKnobs = player.PlayerActor.TraitsImplementing<IBotLearnedKnobs>().FirstOrDefault();
+					refineryKnobsResolved = true;
+				}
+
+				return refineryKnobs;
+			}
+		}
+
+		bool IBotExpansionTargetProvider.RefineryLearnActive => RefLearnArmed;
+		int IBotExpansionTargetProvider.RefineryLearnTierTarget(int tier, int prior)
+		{
+			if (!RefLearnArmed)
+				return prior;
+
+			var baseline = Math.Clamp(tier, 1, 3) * 2;
+			return RefineryLearn.Resolve(RefineryKnobs, $"refinery.target_t{tier}", prior, baseline - 2, baseline + 2);
+		}
+
+		int refineryLearnTick = -1;
+		int refineryLearnCap = 2;
+		int refineryLearnSpacing = 10;
+		void RefreshRefineryLearn()
+		{
+			var tick = world.WorldTick;
+			if (refineryLearnTick >= 0 && tick - refineryLearnTick < RefTier.RecomputeTicks)
+				return;
+
+			refineryLearnTick = tick;
+			refineryLearnCap = RefineryLearn.Resolve(RefineryKnobs, "refinery.zone_cap", 2, 1, 3);
+			refineryLearnSpacing = RefineryLearn.Resolve(RefineryKnobs, "refinery.spacing", 10, 6, 14);
+		}
+
+		int LearnedZoneCap { get { RefreshRefineryLearn(); return refineryLearnCap; } }
+		int LearnedSpacing { get { RefreshRefineryLearn(); return refineryLearnSpacing; } }
+		int ActiveSpacing => RefLearnArmed ? LearnedSpacing : Info.RefinerySpacingCells;
+		int ActiveFallbackSpacing => RefLearnArmed ? RefineryLearn.RelaxedSpacing(LearnedSpacing) : Info.RefinerySpacingFallbackCells;
+
 		bool RefDemandZones => RefDemandArmed;
 
 		// eco_timing_floor (HANS_PROFILE_DESIGN_01 row 1): while fewer own refineries stand than the time floor wants, every zone's cap is one higher. One value per tick.
@@ -189,12 +236,47 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// <summary>A claim's field centre: the zone anchor with the switch on, else the field model's centre as before.</summary>
 		CPos ClaimFieldCenter(int fieldId, CPos anchor) => zonesActive ? anchor : fieldId < fields.Count ? fields[fieldId].Center : anchor;
 
-		bool IBotExpansionTargetProvider.RefinerySpacingActive => RefDemandArmed && Info.RefinerySpacingCells > 0;
+		bool IBotExpansionTargetProvider.RefinerySpacingActive => RefDemandArmed && ActiveSpacing > 0;
 
 		int IBotExpansionTargetProvider.RefinerySiteSpacingTier(CPos topLeft) => RefDemandArmed ? SpacingTierAt(topLeft) : RefineryDemand.SpacingAllowed;
 
-		int SpacingTierAt(CPos topLeft) =>
-			RefineryDemand.SpacingTier(topLeft, FriendlyRefineryCells(), Info.RefinerySpacingCells, Info.RefinerySpacingFallbackCells);
+		int SpacingTierAt(CPos topLeft)
+		{
+			if (RefLearnArmed && NearestZone(topLeft) is var z && z >= 0 && ZoneStandingCount(z) >= LearnedZoneCap)
+				return RefineryDemand.SpacingRefused;
+
+			return RefineryDemand.SpacingTier(topLeft, FriendlyRefineryCells(), ActiveSpacing, ActiveFallbackSpacing);
+		}
+
+		// Assign each friendly refinery to the nearest resource-zone anchor, with deterministic index ties.
+		// Cache the counts per tick so a paged placement search never scans all refineries per candidate.
+		int zoneStandingTick = -1;
+		int[] zoneStanding = Array.Empty<int>();
+		int NearestZone(CPos cell)
+		{
+			if (zoneAnchors == null || zoneAnchors.Count == 0)
+				return -1;
+
+			return RefineryLearn.NearestZone(cell, zoneAnchors);
+		}
+
+		int ZoneStandingCount(int zone)
+		{
+			var tick = world.WorldTick;
+			if (zoneStandingTick != tick || zoneStanding.Length != zoneAnchors.Count)
+			{
+				zoneStandingTick = tick;
+				zoneStanding = new int[zoneAnchors.Count];
+				foreach (var cell in FriendlyRefineryCells())
+				{
+					var z = NearestZone(cell);
+					if (z >= 0)
+						zoneStanding[z]++;
+				}
+			}
+
+			return zone >= 0 && zone < zoneStanding.Length ? zoneStanding[zone] : 0;
+		}
 
 		/// <summary>
 		/// Builds the zones once: every field's cells plus the spreaders that belong to it (the FE-1 field assignment), then the spreaders of no
@@ -275,7 +357,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>The refinery cap of zone <paramref name="z"/>: 1 for a small zone (RefinerySecondPerZoneMinCells), else RefineryPerZoneCap.</summary>
-		int ZoneCapAt(int z) =>
+		int ZoneCapAt(int z) => RefLearnArmed ? LearnedZoneCap :
 			RefineryDemand.ZoneCapFor(Info.RefineryPerZoneCap, z >= 0 && z < zoneCellsById.Count ? zoneCellsById[z].Count : 0, Info.RefinerySecondPerZoneMinCells);
 
 		RefineryDemand.Verdict DemandVerdict(int a)
@@ -310,11 +392,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					if (!friendlyRefineryOwn[r] && RefineryDemand.Within(d2, serve))
 						allied = true;
 
-					if (RefineryDemand.Covered(d2, Info.RefinerySpacingCells))
+					if (RefineryDemand.Covered(d2, ActiveSpacing))
 						count++;
 				}
 
 				var z = a < anchorFieldIds.Length ? anchorFieldIds[a] : -1;
+				if (RefLearnArmed)
+				{
+					count = ZoneStandingCount(z);
+					allied = false;
+				}
 				var inRadius = z >= 0 && z < zoneInRadius.Length && zoneInRadius[z];
 				var reachable = z >= 0 && z < zoneReachable.Length && zoneReachable[z];
 				demandCounts[a] = count;
@@ -437,7 +524,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (!RefDemandArmed)
 				return;
 
-			zonePendingBase[anchor] = RefineryDemand.CountWithin(anchor, FriendlyRefineryCells(), Info.RefinerySpacingCells);
+			zonePendingBase[anchor] = RefLearnArmed ? ZoneStandingCount(NearestZone(anchor)) : RefineryDemand.CountWithin(anchor, FriendlyRefineryCells(), ActiveSpacing);
 		}
 
 		/// <summary>The committed refinery landed: more friendly refineries stand at the zone than at the commit (no record = the route-served test).</summary>
@@ -446,7 +533,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (!zonePendingBase.TryGetValue(anchor, out var before))
 				return lastAssigned[index] >= 0;
 
-			return RefineryDemand.CountWithin(anchor, FriendlyRefineryCells(), Info.RefinerySpacingCells) > before;
+			return (RefLearnArmed ? ZoneStandingCount(NearestZone(anchor)) : RefineryDemand.CountWithin(anchor, FriendlyRefineryCells(), ActiveSpacing)) > before;
 		}
 
 		/// <summary>ref_anchor_from_demand: the situation row's zone counters (record-only; counted per zone id).</summary>
@@ -607,7 +694,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var nearest = RefineryDemand.NearestSq(site, friendly);
 			var cells = nearest == long.MaxValue ? -1 : Exts.ISqrt((int)Math.Min(int.MaxValue, nearest));
 			var fallback = RefDemandArmed
-				&& RefineryDemand.SpacingTier(site, friendly, Info.RefinerySpacingCells, Info.RefinerySpacingFallbackCells) == RefineryDemand.SpacingFallbackOnly;
+				&& RefineryDemand.SpacingTier(site, friendly, ActiveSpacing, ActiveFallbackSpacing) == RefineryDemand.SpacingFallbackOnly;
 			foreach (var o in DemandObservers)
 				o.RefineryPlaced(player, world.WorldTick, anchor.HasValue ? ZoneOf(anchor.Value) : -1, anchor ?? site, site, fallback, cells);
 		}

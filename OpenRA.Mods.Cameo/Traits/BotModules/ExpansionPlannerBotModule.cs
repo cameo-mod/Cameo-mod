@@ -331,8 +331,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly bool BaseVehiclesAtBase = true;
 
 		[Desc("REF-1 (AI_ARCHITECTURE §12.24 v2, DESIGN §19.1b; switch group AJ_field_coverage, default-on ruling",
-			"2026-10-04): one refinery per ANCHOR (a resource spreader, or the centre of a field that has none), bound",
-			"1:1 — a refinery is allowed only while a specific anchor in building reach is unclaimed (unserved, not",
+			"2026-10-04): legacy anchor coverage. REF-LEARN-01 replaces the one-per-anchor rule with a learned zone cap.",
+			"With REF-LEARN-01 off, a refinery needs a specific anchor in building reach to be unclaimed (unserved, not",
 			"parked, not pending), never by comparing totals. Anchors are grouped into FIELDS (8-connected components",
 			"of the map's valuable resource cells): the first anchor of every unserved field in reach claims first,",
 			"extra spreaders of covered fields only when no field is still waiting. Placement is the placeable cell",
@@ -390,6 +390,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"The REF-FIELD-02 cap is RefineryPerZoneCap per zone, and no new law refinery stands within RefinerySpacingCells of a friendly (own or allied)",
 			"refinery (RefinerySpacingFallbackCells when a zone's search finds no site). Off = the anchors and the ReachCells rule, unchanged.")]
 		public readonly bool RefDemand = false;
+
+		[Desc("REF-LEARN-01: learned refinery zone cap, spacing and tier targets; use priors without a learned provider. Default off; ablation row ref_learn.")]
+		public readonly bool RefLearn = false;
 
 		[Desc("REF-DEMAND-01: radius (cells) of one resource zone: the greedy cover takes every uncovered point within it of the seed.")]
 		public readonly int RefineryZoneRadius = 10;
@@ -1556,8 +1559,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			return producer != null
 				&& fallbackScans.TryGetValue((producer.ActorID, item), out var scan)
-				&& scan.CancelCertificateCurrent(RefinerySiteSearchLogic.CancelRequiresTwoVerdicts(
-					Info.RefineryCancelRequiresTwoVerdicts, Info.RefineryFallbackForceAfterTicks));
+				&& scan.CancelCertificateCurrent(RefineryLearn.RequireTwoVerdicts(RefLearnArmed, RefinerySiteSearchLogic.CancelRequiresTwoVerdicts(
+					Info.RefineryCancelRequiresTwoVerdicts, Info.RefineryFallbackForceAfterTicks)));
 		}
 
 		void IBotExpansionTargetProvider.RefinerySiteCommitted(CPos site)
@@ -2031,7 +2034,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		bool AnchorTaken(CPos anchor, int tick)
 		{
 			var i = anchors.IndexOf(anchor);
-			return (i >= 0 && lastAssigned[i] >= 0)
+			return (i >= 0 && (RefLearnArmed ? RefineryDemand.Covers(DemandVerdict(i)) : lastAssigned[i] >= 0))
 				|| (anchorParkedUntil.TryGetValue(anchor, out var park) && tick < park.Until)
 				|| (anchorPendingUntil.TryGetValue(anchor, out var pend) && tick < pend);
 		}
@@ -2047,7 +2050,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		bool AnchorTakenForOwner(CPos anchor, int tick, object owner)
 		{
 			var i = anchors.IndexOf(anchor);
-			return (i >= 0 && lastAssigned[i] >= 0)
+			return (i >= 0 && (RefLearnArmed ? RefineryDemand.Covers(DemandVerdict(i)) : lastAssigned[i] >= 0))
 				|| (anchorPendingUntil.TryGetValue(anchor, out var pend) && tick < pend)
 				|| (anchorParkedUntil.TryGetValue(anchor, out var park) && tick < park.Until
 					&& (park.Owner == null || ReferenceEquals(park.Owner, owner)));
@@ -2059,7 +2062,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		bool AnchorServedOrPending(CPos anchor, int tick)
 		{
 			var i = anchors.IndexOf(anchor);
-			return (i >= 0 && lastAssigned[i] >= 0)
+			return (i >= 0 && (RefLearnArmed ? RefineryDemand.Covers(DemandVerdict(i)) : lastAssigned[i] >= 0))
 				|| (anchorPendingUntil.TryGetValue(anchor, out var pend) && tick < pend);
 		}
 
@@ -3722,7 +3725,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				lawClaims = LawActive;
 				if (lawClaims && fieldIndexCount > 0)
 					for (var a = 0; a < this.anchors.Count; a++)
-						if (lastAssigned[a] < 0)
+						if (RefLearnArmed ? !RefineryDemand.Covers(DemandVerdict(a)) : lastAssigned[a] < 0)
 							(unservedAnchorIndices ??= new HashSet<ResourceIndice>())
 								.Add(resourceMap.FindClosestIndiceFromCPos(this.anchors[a]));
 			}

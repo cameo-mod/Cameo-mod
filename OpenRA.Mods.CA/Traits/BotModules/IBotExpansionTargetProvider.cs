@@ -324,6 +324,10 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		int UnclaimedAnchorsInReach => 0;
 
+		/// <summary>REF-LEARN-01: the enabled provider resolves a bounded tier prior; absent providers keep the original path.</summary>
+		bool RefineryLearnActive => false;
+		int RefineryLearnTierTarget(int tier, int prior) => prior;
+
 		/// <summary>
 		/// REF-1 B1 (§12.24 v2): the name of the cheapest crawl-eligible building the planner wants produced while
 		/// the crawl target's field sits beyond reach and no anchor is claimable — the crawl's own supply, instead of

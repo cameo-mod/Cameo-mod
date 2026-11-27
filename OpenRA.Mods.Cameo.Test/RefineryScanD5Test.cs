@@ -302,6 +302,11 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(scan.CancelCertificateCurrent(treatment), Is.False, "TREATMENT: one Exhausted with a current certificate holds");
 			Assert.That(scan.CancelCertificateCurrent(control), Is.EqualTo(scan.CancelCertificateCurrent(Bound)), "CONTROL is today's gate");
 			Assert.That(scan.CancelCertificateCurrent(false), Is.True, "a gate derived from the force knob alone would cancel here");
+			Assert.That(scan.CancelCertificateCurrent(RefineryLearn.RequireTwoVerdicts(true, treatment)), Is.True,
+				"REF-LEARN: a current exhaustive certificate permits cancellation on the first verdict");
+			RefineryLearnTest.AssertEngineCancellationRefunds();
+			Assert.That(scan.CancelCertificateCurrent(RefineryLearn.RequireTwoVerdicts(false, treatment)), Is.False,
+				"REF-LEARN off: the existing two-verdict gate remains");
 
 			Assert.That(Force(scan, w, 1000 + Epoch), Is.EqualTo(RefineryFallbackScan.Verdict.Exhausted));
 			Assert.That(scan.CancelCertificateCurrent(treatment), Is.True, "the second verdict one relist epoch later cancels");

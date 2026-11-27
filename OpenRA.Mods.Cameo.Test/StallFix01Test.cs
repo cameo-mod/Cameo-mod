@@ -782,8 +782,8 @@ namespace OpenRA.Mods.Cameo.Test
 			var p = Planner();
 			var arm = Section(p, "bool IBotExpansionTargetProvider.RefineryFallbackCertificateCurrent", "void IBotExpansionTargetProvider.RefinerySiteCommitted");
 			// REFSCAN sec 3.6 (F1): the gate now reads its own knob OR the force bound (requireTwo), never the force alone.
-			Assert.That(arm, Does.Contain("scan.CancelCertificateCurrent(RefinerySiteSearchLogic.CancelRequiresTwoVerdicts(\n"
-				+ "\t\t\t\t\tInfo.RefineryCancelRequiresTwoVerdicts, Info.RefineryFallbackForceAfterTicks))"));
+			Assert.That(arm, Does.Contain("scan.CancelCertificateCurrent(RefineryLearn.RequireTwoVerdicts(RefLearnArmed, RefinerySiteSearchLogic.CancelRequiresTwoVerdicts(\n"
+				+ "\t\t\t\t\tInfo.RefineryCancelRequiresTwoVerdicts, Info.RefineryFallbackForceAfterTicks)))"));
 			Assert.That(arm, Does.Not.Contain("scan.CertificateCurrent()"));
 			Assert.That(Manager(), Does.Not.Contain("CancelCertificateCurrent"));
 			Assert.That(Manager(), Does.Contain("law.RefineryFallbackCertificateCurrent(queue.Actor, itemName)"));

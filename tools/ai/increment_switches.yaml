@@ -402,3 +402,6 @@ groups:
   R2X_mobile_static_ratio:           # RATIO-2X-01 standalone first increment. Off = MobileStaticRatioEnabled false = the army-first gate as before, no record, no line. Needs the situation owner's snapshot (MasterAiBotModule); a bot without one runs the rule inert (never holds). Classic carries no snapshot
     BaseBuilderBotModuleCA:
       MobileStaticRatioEnabled: true
+  ref_learn:                         # REF-LEARN-01; off retains the previous refinery decisions
+    ExpansionPlannerBotModule:
+      RefLearn: true

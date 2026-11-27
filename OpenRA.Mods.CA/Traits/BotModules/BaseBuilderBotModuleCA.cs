@@ -1164,6 +1164,9 @@ namespace OpenRA.Mods.CA.Traits
 				refTierValue = RefTier.Target(
 					RefTier.BaseTarget(Info.RefTierEarlyTarget, Info.RefTierRadarStep, Info.RefTierTechStep, radar, RefTierTechStanding),
 					RefTierPersonalityPct(radar));
+				var refineryLaw = RefineryLawProvider();
+				if (refineryLaw != null && refineryLaw.RefineryLearnActive)
+					refTierValue = refineryLaw.RefineryLearnTierTarget(RefTierTechStanding ? 3 : radar ? 2 : 1, refTierValue);
 				return refTierValue;
 			}
 		}

@@ -581,3 +581,75 @@ learnables:
         sample_floor: 200 effective draws per model
         switch: unscheduled
         state: planned_policy_safety_floor
+    refinery.zone_cap:
+        rank: 41
+        name: Refinery cap per resource zone
+        owner: ExpansionPlannerBotModule.RefDemand.cs:ExpansionPlannerBotModule
+        bounds: min=1,max=3,safety_floor=1,unit=refineries
+        prior: 2
+        feature_schema: E.outcome,S.income,phase
+        credit_metric: income_and_outcome
+        scope_keys: faction,matchup,phase
+        sample_floor: 1 game
+        method: learn_all_v1_four_value_geometric_mean
+        fitter: tools/ai/fit_learn_all.py
+        switch: ref_learn
+        state: wired_inert_without_provider
+    refinery.spacing:
+        rank: 42
+        name: Refinery strict spacing
+        owner: ExpansionPlannerBotModule.RefDemand.cs:ExpansionPlannerBotModule
+        bounds: min=6,max=14,safety_floor=6,unit=cells
+        prior: 10
+        relaxed_prior: 5
+        relaxed_rule: max(1,strict_minus_5)
+        feature_schema: E.outcome,S.income,phase
+        credit_metric: income_and_outcome
+        scope_keys: faction,matchup,phase
+        sample_floor: 1 game
+        method: learn_all_v1_four_value_geometric_mean
+        fitter: tools/ai/fit_learn_all.py
+        switch: ref_learn
+        state: wired_inert_without_provider
+    refinery.target_t1:
+        rank: 43
+        name: Basic tier refinery target
+        owner: BaseBuilderBotModuleCA.cs:BaseBuilderBotModuleCA
+        bounds: min=0,max=4,safety_floor=0,unit=refineries
+        prior: 2
+        feature_schema: E.outcome,S.income,phase
+        credit_metric: income_and_outcome
+        scope_keys: faction,matchup,phase
+        sample_floor: 1 game
+        method: learn_all_v1_four_value_geometric_mean
+        fitter: tools/ai/fit_learn_all.py
+        switch: ref_learn
+        state: wired_inert_without_provider
+    refinery.target_t2:
+        rank: 44
+        name: Radar tier refinery target
+        owner: BaseBuilderBotModuleCA.cs:BaseBuilderBotModuleCA
+        bounds: min=2,max=6,safety_floor=2,unit=refineries
+        prior: 4
+        feature_schema: E.outcome,S.income,phase
+        credit_metric: income_and_outcome
+        scope_keys: faction,matchup,phase
+        sample_floor: 1 game
+        method: learn_all_v1_four_value_geometric_mean
+        fitter: tools/ai/fit_learn_all.py
+        switch: ref_learn
+        state: wired_inert_without_provider
+    refinery.target_t3:
+        rank: 45
+        name: Tech centre tier refinery target
+        owner: BaseBuilderBotModuleCA.cs:BaseBuilderBotModuleCA
+        bounds: min=4,max=8,safety_floor=4,unit=refineries
+        prior: 6
+        feature_schema: E.outcome,S.income,phase
+        credit_metric: income_and_outcome
+        scope_keys: faction,matchup,phase
+        sample_floor: 1 game
+        method: learn_all_v1_four_value_geometric_mean
+        fitter: tools/ai/fit_learn_all.py
+        switch: ref_learn
+        state: wired_inert_without_provider

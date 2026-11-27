@@ -95,12 +95,12 @@ def registry_data() -> tuple[list[miniyaml.Node], dict[str, tuple[str, miniyaml.
 
 
 class LearnabilityRegistryTests(unittest.TestCase):
-    def test_registry_has_forty_complete_bounded_rows_and_known_switches(self):
+    def test_registry_has_complete_bounded_rows_and_known_switches(self):
         records, _ = registry_data()
-        self.assertEqual(len(records), 40)
+        self.assertEqual(len(records), 45)
         ranks = []
         switch_text = (ROOT / "tools" / "ai" / "increment_switches.yaml").read_text(encoding="utf-8")
-        known_switches = set(re.findall(r"(?m)^  ([A-Z]{2}_[a-z0-9_]+):", switch_text))
+        known_switches = set(re.findall(r"(?m)^  ([A-Z]{2}_[a-z0-9_]+|ref_learn):", switch_text))
 
         required_fields = (
             "rank", "name", "owner", "bounds", "feature_schema",
@@ -129,7 +129,7 @@ class LearnabilityRegistryTests(unittest.TestCase):
             self.assertTrue(switch == "unscheduled" or switch in known_switches,
                             f"{entry.key} refers to unknown switch {switch}")
 
-        self.assertEqual(sorted(ranks), list(range(1, 41)))
+        self.assertEqual(sorted(ranks), list(range(1, 46)))
 
     def test_wired_learnables_require_existing_artifacts(self):
         records, _ = registry_data()
