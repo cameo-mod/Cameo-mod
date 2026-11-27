@@ -6599,6 +6599,8 @@ Player:
 		# weight = fraction x personality bias x observed-enemy counter demand x role-mix deficit, floored at 5% of the mean so every listed type keeps a chance; a type never built is picked first.
 		# The composition, derived-weight, counter, wave-mix, role-deficit, share-test and idle-floor layers are not consulted while it is on. genericbot only (SwitchCondition above).
 		UnitRoll: true
+		# FIRST-COPY-DUE-01 ARM (playtest B1, 11-27): every listed unit type gets a first-copy deadline (generic bots only; classic untouched); thresholds stay at their code priors (3000 ticks, cash floor 0).
+		FirstCopyDue: true
 		UnitRollFloorPct: 5
 		# Mode bias profiles = the folded layers (compositions, counter, wave-mix role, role deficit, opening-defence units, learned priors): each multiplies the weight only while its existing trigger holds, never gates.
 		# Value = strength percent (0 = off); every profile has its own ablation row ub_roll_<name>. Learnable later (MODE-LEARN-01): a profile that does not help goes to 0.

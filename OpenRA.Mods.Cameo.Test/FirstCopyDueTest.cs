@@ -103,7 +103,13 @@ namespace OpenRA.Mods.Cameo.Test
 
 			// The old weight-only boost stays exactly as it was: the due service sits on top of it.
 			Assert.That(unit, Does.Contain("UnitRoll.FirstBoost(RollParameters.FirstBoost, world.WorldTick - rollAvailableSince[name], RollParameters.FirstRampTicks, RollParameters.FirstCap)"));
-			Assert.That(RepoFile("mods/cameo/ai/ai.yaml"), Does.Not.Contain("FirstCopyDue:"), "nothing arms the switch yet (user D3: OFF by default)");
+			// B1 ARM (playtest night 11-27): armed in the generic UnitBuilder block only; classic untouched; the code default stays off.
+			var yaml = RepoFile("mods/cameo/ai/ai.yaml");
+			var armed = yaml.IndexOf("\n\t\tFirstCopyDue: true", StringComparison.Ordinal);
+			Assert.That(yaml.Split("\n\t\tFirstCopyDue: true").Length - 1, Is.EqualTo(1), "armed exactly once");
+			Assert.That(armed, Is.GreaterThan(yaml.IndexOf("	UnitBuilderBotModuleCA@generic:", StringComparison.Ordinal)));
+			Assert.That(armed, Is.LessThan(yaml.IndexOf("	UnitBuilderBotModuleCA@classic:", StringComparison.Ordinal)));
+			Assert.That(yaml, Does.Not.Contain("UnitRollFirstDueTicks:").And.Not.Contain("UnitRollFirstDueCash:"), "the thresholds stay at their code priors");
 		}
 
 		[Test]
