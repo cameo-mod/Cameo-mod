@@ -232,6 +232,26 @@ namespace OpenRA.Mods.Cameo.Traits
 		}
 
 		/// <summary>
+		/// Telemetry label for an idle queue whose pause votes are all the global unit budget.
+		/// The unit cap votes through the same pause seam as a cash reservation, so IdleReason
+		/// reports it as cash_reserved; this names it by its real source. Any other voter (for
+		/// example the base builder's refinery hold) keeps cash_reserved, because that label is
+		/// true for it. Only the label changes: the gate decision and IdleReason are untouched.
+		/// </summary>
+		public static string RelabelUnitCapHold(string reason, string[] voters)
+		{
+			if (reason != "cash_reserved" || voters == null || voters.Length == 0)
+				return reason;
+			foreach (var voter in voters)
+			{
+				if (voter != nameof(BotGlobalUnitBudget))
+					return reason;
+			}
+
+			return "unit_cap";
+		}
+
+		/// <summary>
 		/// Spend category of a produced item: defence types and the defence tag map to
 		/// defence, refinery types/tag to economy, fragile (crawl/link family) types to
 		/// crawl_link, every other building to tech. Unit-queue items are always unit.

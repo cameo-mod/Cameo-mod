@@ -143,6 +143,26 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void UnitCapVoteIsRelabelledOnlyWhenTheCapIsTheSoleVoter()
+		{
+			// The raw gate decision is unchanged: a cap vote still reads as a reservation in IdleReason.
+			Assert.That(PlayerTelemetryMath.IdleReason(true, false, false, false, true), Is.EqualTo("cash_reserved"));
+
+			// A pure unit-cap vote is named by its source.
+			Assert.That(PlayerTelemetryMath.RelabelUnitCapHold("cash_reserved", new[] { "BotGlobalUnitBudget" }), Is.EqualTo("unit_cap"));
+
+			// Any other voter keeps the real cash-reservation label, even alongside the cap.
+			Assert.That(PlayerTelemetryMath.RelabelUnitCapHold("cash_reserved", new[] { "BaseBuilderBotModuleCA", "BotGlobalUnitBudget" }), Is.EqualTo("cash_reserved"));
+			Assert.That(PlayerTelemetryMath.RelabelUnitCapHold("cash_reserved", new[] { "BaseBuilderBotModuleCA" }), Is.EqualTo("cash_reserved"));
+
+			// No voter, null voters, or any other reason is never relabelled.
+			Assert.That(PlayerTelemetryMath.RelabelUnitCapHold("cash_reserved", Array.Empty<string>()), Is.EqualTo("cash_reserved"));
+			Assert.That(PlayerTelemetryMath.RelabelUnitCapHold("cash_reserved", null), Is.EqualTo("cash_reserved"));
+			Assert.That(PlayerTelemetryMath.RelabelUnitCapHold("no_cash", new[] { "BotGlobalUnitBudget" }), Is.EqualTo("no_cash"));
+			Assert.That(PlayerTelemetryMath.RelabelUnitCapHold("unit_cap", new[] { "BotGlobalUnitBudget" }), Is.EqualTo("unit_cap"));
+		}
+
+		[Test]
 		public void BuildingCategoryMapsTheSpecBuckets()
 		{
 			Assert.That(PlayerTelemetryMath.BuildingCategory(true, false, false), Is.EqualTo("defence"));

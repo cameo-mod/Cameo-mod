@@ -945,10 +945,12 @@ namespace OpenRA.Mods.Cameo.Traits
 								capped = UnitCapped(seat, names, owned, queued, gate);
 							}
 
-							reason = PlayerTelemetryMath.IdleReason(reserved, belowFloor, saturated,
+							var gateReason = PlayerTelemetryMath.IdleReason(reserved, belowFloor, saturated,
 								names.Length == 0, capped, gateOrder);
-							if (reason == "cash_reserved")
+							if (gateReason == "cash_reserved")
 								reservedBy = voters;
+							// The unit-cap vote rides the cash_reserved pause seam; name it by its source.
+							reason = PlayerTelemetryMath.RelabelUnitCapHold(gateReason, voters);
 							break;
 						}
 					}
