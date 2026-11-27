@@ -73,6 +73,37 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"(e.g. an unexplored crawl aim). Publishing grants no vision — a scout still has to fly there.")]
 		public readonly int ProviderInterestBonus = 4000;
 
+		[Desc("RM-01 SCOUT-FRONTIER-01 (ablation row scout_frontier): the target pick adds a frontier-gain term (stale value in the",
+			"scout's vision reach that no other scout covers), a heading bias, a revisit guard and a per-sector cap. Off = the",
+			"original pick, bit-identical.")]
+		public readonly bool ScoutFrontierEnabled = false;
+
+		[Desc("RM-01: permille of the reach gain added to a region's base value.")]
+		public readonly int FrontierWeightPermille = 500;
+
+		[Desc("RM-01: neighbour hops walked for the vision reach (1-2).")]
+		public readonly int FrontierReachHops = 1;
+
+		[Desc("RM-01: heading multiplier (permille) when the move continues / reverses the scout's heading.")]
+		public readonly int FrontierHeadingForward = 1250;
+
+		public readonly int FrontierHeadingBack = 750;
+
+		[Desc("RM-01: a region whose last visit gave no sight has its positive score divided by this until it is seen.")]
+		public readonly int FrontierRevisitDivisor = 2;
+
+		[Desc("RM-01: ticks an unroutable target (scout idle sooner than this after the order, no new sight) is skipped.")]
+		public readonly int FrontierUnroutableRetryTicks = 100;
+
+		[Desc("RM-01: grid-backed index space only: regions within this many hops of another scout's target are skipped.")]
+		public readonly int FrontierSectorCapRadius = 1;
+
+		[Desc("RM-01: the gain is evaluated only for this many best regions by the base score (bounded cost per pick).")]
+		public readonly int FrontierPrefilter = 32;
+
+		[Desc("RM-01: vision radius in cells used when a scout has no RevealsShroud.")]
+		public readonly int FrontierDefaultVisionCells = 6;
+
 		[Desc("PL-2 (§12.14): extra scout cap added while the guerrilla lead trails, scaled by the",
 			"deficit — behind on map control means leaning on scouts, the lead's driver. Inert unless",
 			"UsePersonalityLeads is armed and the running personality is guerrilla.")]
@@ -191,6 +222,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var taken = new HashSet<int>(scoutTargets.Values.Select(t => t.Region));
 			ClaimScouts(bot);
 
+			var frontierOn = ScoutFrontierOn;
+			if (frontierOn)
+				PruneFrontierState();
+
 			foreach (var scout in scouts.ToArray())
 			{
 				var actor = scout.Actor;
@@ -202,13 +237,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						continue;
 				}
 
-				var region = ChooseScoutTarget(regions, actor.Location, tick, taken);
+				if (frontierOn)
+					NoteFrontierVisit(regions, actor, tick);
+
+				var region = ChooseScoutTarget(regions, actor, tick, taken);
 				if (region < 0)
 				{
 					// No unassigned stale region: return ownership to the shared pool.
 					ReturnScoutToIdlePool(scout, scouts, scoutTargets, idlePool);
 					continue;
 				}
+
+				if (frontierOn)
+					NoteFrontierAssignment(regions, actor, region, tick);
 
 				taken.Add(region);
 				scoutTargets[actor] = (region, tick);
@@ -339,8 +380,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return false;
 		}
 
-		int ChooseScoutTarget(RegionMemory regions, CPos from, int tick, HashSet<int> taken)
+		int ChooseScoutTarget(RegionMemory regions, Actor scout, int tick, HashSet<int> taken)
 		{
+			var from = scout.Location;
 			// IM-1 (AI_DEEP_RESEARCH §3.3): when the master snapshot publishes the influence
 			// layers, they are the interest/danger/staleness source — threat_ground answers
 			// the danger callback — instead of re-deriving per-index values from ByEnemy.
@@ -351,11 +393,146 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			var influence = player.PlayerActor.TraitOrDefault<MasterAiBotModule>()?.Situation?.Influence;
 			if (LayersMatch(regions, influence))
+			{
+				if (ScoutFrontierOn)
+					return PickFrontier(regions, scout, from, tick, taken,
+						i => influence.Staleness[i], i => influence.Interest[i] + ProviderInterest(interestRegions, i), i => influence.ThreatGround[i]);
+
 				return PickScoutRegion(regions, from, taken,
 					i => influence.Staleness[i], i => influence.Interest[i] + ProviderInterest(interestRegions, i), i => influence.ThreatGround[i]);
+			}
+
+			if (ScoutFrontierOn)
+				return PickFrontier(regions, scout, from, tick, taken,
+					i => Staleness(regions, i, tick), i => Interest(regions, i) + ProviderInterest(interestRegions, i), DangerAt);
 
 			return PickScoutRegion(regions, from, taken,
 				i => Staleness(regions, i, tick), i => Interest(regions, i) + ProviderInterest(interestRegions, i), DangerAt);
+		}
+
+		// ---- RM-01 SCOUT-FRONTIER-01 (design d33605f3) ----
+		// Fog: every input is the bot's own knowledge (published staleness/interest/danger, region geometry, its own scouts' targets,
+		// headings and RevealsShroud range). No enemy actor, player trait, WinState or order stream is read here.
+		AblationLatch ablateScoutFrontier;
+		bool ScoutFrontierOn => Info.ScoutFrontierEnabled && !ablateScoutFrontier.Off(player, AblationIds.ScoutFrontier);
+
+		readonly ScoutFrontierGain frontier = new();
+		readonly ScoutFrontierMemory frontierMemory = new();
+		readonly FrontierField frontierField = new();
+		readonly Dictionary<Actor, FrontierScoutState> frontierState = new();
+
+		readonly struct FrontierScoutState
+		{
+			public readonly int Region;
+			public readonly long StaleAtAssign;
+			public readonly int AssignedTick;
+			public readonly CVec Heading;
+
+			public FrontierScoutState(int region, long staleAtAssign, int assignedTick, CVec heading)
+			{
+				Region = region;
+				StaleAtAssign = staleAtAssign;
+				AssignedTick = assignedTick;
+				Heading = heading;
+			}
+		}
+
+		sealed class FrontierField : IScoutFrontierField
+		{
+			public RegionMemory Regions;
+			public Func<int, int> StaleFn;
+			public Func<int, int> InterestFn;
+			public Func<int, int> DangerFn;
+
+			public int Count => Regions.CellCount;
+			public bool GridBacked => !Regions.ZoneBacked;
+			public long Stale(int i) => StaleFn(i);
+
+			public long Value(int i)
+			{
+				var stale = StaleFn(i);
+				return stale <= 0 ? 0 : (long)stale * (1000 + InterestFn(i));
+			}
+
+			public long Danger(int i) => DangerFn(i);
+			public IReadOnlyList<int> Neighbors(int i) => Regions.NeighborsOf(i);
+			public CPos Center(int i) => Regions.CenterOf(i);
+		}
+
+		ScoutFrontierGain.Tunables FrontierTunables(Actor scout) => new(
+			Info.FrontierWeightPermille, Math.Clamp(Info.FrontierReachHops, 1, 2), VisionCells(scout),
+			Info.FrontierHeadingForward, Info.FrontierHeadingBack, Info.FrontierRevisitDivisor,
+			Info.FrontierSectorCapRadius, Info.FrontierPrefilter);
+
+		// The scout's own vision radius in whole cells (own RevealsShroud trait; the widest enabled one).
+		int VisionCells(Actor scout)
+		{
+			var range = 0;
+			foreach (var reveals in scout.TraitsImplementing<RevealsShroud>())
+				if (!reveals.IsTraitDisabled)
+					range = Math.Max(range, reveals.Range.Length);
+
+			return range > 0 ? Math.Max(1, range / 1024) : Math.Max(1, Info.FrontierDefaultVisionCells);
+		}
+
+		int PickFrontier(RegionMemory regions, Actor scout, CPos from, int tick, HashSet<int> taken,
+			Func<int, int> staleness, Func<int, int> interest, Func<int, int> danger)
+		{
+			frontierField.Regions = regions;
+			frontierField.StaleFn = staleness;
+			frontierField.InterestFn = interest;
+			frontierField.DangerFn = danger;
+
+			var tunables = FrontierTunables(scout);
+			frontier.BeginCover(regions.CellCount, tunables.Prefilter);
+			foreach (var other in taken)
+				frontier.Cover(frontierField, other, tunables);
+
+			var hasHeading = frontierState.TryGetValue(scout, out var state) && state.Heading != CVec.Zero;
+			var region = frontier.Pick(frontierField, from, hasHeading, hasHeading ? state.Heading : CVec.Zero, taken, frontierMemory, tick, tunables);
+
+#if CAMEO_DEV_LOGGING
+			Log.Write("debug", $"AI ({player.ClientIndex}): scout_frontier scout={scout.ActorID} region={region} gain={frontier.LastGain} heading_permille={frontier.LastHeading} revisit_halved={frontier.LastHalved} candidates={frontier.LastScanned} memory={frontierMemory.Count} tick={tick}");
+#endif
+			frontierField.StaleFn = frontierField.InterestFn = frontierField.DangerFn = null;
+			frontierField.Regions = null;
+			return region;
+		}
+
+		long StaleOf(RegionMemory regions, int index, int tick)
+		{
+			var influence = player.PlayerActor.TraitOrDefault<MasterAiBotModule>()?.Situation?.Influence;
+			return LayersMatch(regions, influence) ? influence.Staleness[index] : Staleness(regions, index, tick);
+		}
+
+		// The scout is idle or due a retarget: did the last visit give sight of its target? (revisit guard + unroutable cooldown)
+		void NoteFrontierVisit(RegionMemory regions, Actor scout, int tick)
+		{
+			if (!frontierState.TryGetValue(scout, out var state) || state.Region < 0 || state.Region >= regions.CellCount)
+				return;
+
+			frontierMemory.RecordVisit(state.Region, state.StaleAtAssign, StaleOf(regions, state.Region, tick),
+				tick - state.AssignedTick, tick, Info.FrontierUnroutableRetryTicks);
+		}
+
+		void NoteFrontierAssignment(RegionMemory regions, Actor scout, int region, int tick)
+		{
+			frontierState[scout] = new FrontierScoutState(region, StaleOf(regions, region, tick), tick, regions.CenterOf(region) - scout.Location);
+		}
+
+		void PruneFrontierState()
+		{
+			if (frontierState.Count == 0)
+				return;
+
+			List<Actor> gone = null;
+			foreach (var scout in frontierState.Keys)
+				if (!scoutTargets.ContainsKey(scout))
+					(gone ??= new List<Actor>()).Add(scout);
+
+			if (gone != null)
+				foreach (var scout in gone)
+					frontierState.Remove(scout);
 		}
 
 		/// <summary>
@@ -456,6 +633,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			dangerByRegion.Clear();
 			enemySpawnRegions = null;
 			scoutTargets.Clear();
+			frontierState.Clear();
+			frontierMemory.Clear();
 		}
 
 		int Staleness(RegionMemory regions, int index, int tick)
