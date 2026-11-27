@@ -146,7 +146,7 @@ namespace OpenRA.Mods.Cameo.Test
 			// The module hands it the same inputs, once, before the afford gate reads the cost.
 			const string Call = "var admission = UnitPickArbiter.Admit(roll, rollFirst, batch.BankLeft, fullCost, TechLeanOn, rollPoolMaxCost, held, world.WorldTick, RollParameters.TechLeanStartTicks, RollParameters.TechLeanTopPct, RollParameters.TechLeanBankPct);\n\t\t\t\t\tvar paygo = admission.Paygo;\n\t\t\t\t\tvar leaned = admission.Leaned;\n\t\t\t\t\tvar cost = admission.GateCost;";
 			Assert.That(unit, Does.Contain(Call));
-			Assert.That(unit.Split(new[] { "UnitPickArbiter.Admit(" }, StringSplitOptions.None).Length - 1, Is.EqualTo(1), "one admission call site");
+			Assert.That(unit.Split(new[] { "UnitPickArbiter.Admit(" }, StringSplitOptions.None).Length - 1, Is.EqualTo(2), "the fill and RollCashAdmits (ub_affordable_pool keep mask, V08H join)");
 
 			var admitAt = unit.IndexOf(Call, StringComparison.Ordinal);
 			var affordAt = unit.IndexOf("if (!batch.Affords(cost) || !ReserveAdmits(batch, cost)", StringComparison.Ordinal);

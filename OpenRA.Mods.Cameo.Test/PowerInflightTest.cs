@@ -34,11 +34,11 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void APlantInProductionAnswersTheShortageOnlyWhenTheRowIsOn()
 		{
-			// excess -20 against a margin of 100, a 100 power plant in production
-			Assert.That(PowerArbiter.Short(true, PowerArbiter.Effective(-20, 100, false), 100), Is.True, "off: a second emergency plant is picked");
-			Assert.That(PowerArbiter.Short(true, PowerArbiter.Effective(-20, 100, true), 100), Is.False, "on: the plant in flight covers it");
-			Assert.That(PowerArbiter.Short(true, PowerArbiter.Effective(-20, 0, true), 100), Is.True, "on, nothing in flight: still short");
-			Assert.That(PowerArbiter.Short(true, PowerArbiter.Effective(-20, 50, true), 100), Is.True, "on: a plant in flight that does not cover it keeps the emergency");
+			// excess -20 against a margin of 50, a 100 power plant in production (V08H join: the margin was 100, under which -20 + 100 = 80 is still short)
+			Assert.That(PowerArbiter.Short(true, PowerArbiter.Effective(-20, 100, false), 50), Is.True, "off: a second emergency plant is picked");
+			Assert.That(PowerArbiter.Short(true, PowerArbiter.Effective(-20, 100, true), 50), Is.False, "on: the plant in flight covers it");
+			Assert.That(PowerArbiter.Short(true, PowerArbiter.Effective(-20, 0, true), 50), Is.True, "on, nothing in flight: still short");
+			Assert.That(PowerArbiter.Short(true, PowerArbiter.Effective(-20, 50, true), 50), Is.True, "on: a plant in flight that does not cover it keeps the emergency");
 		}
 
 		[Test]

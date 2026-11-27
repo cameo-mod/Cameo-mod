@@ -190,7 +190,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(stalemate, Does.Contain("DiagnosticJobEnd(t, \"hold\", \"all_in_input\""));
 
 			var v07 = RepoFile(Bots + "SquadManagerBotModuleCA.V07.cs");
-			Assert.That(v07, Does.Contain("?? (ArmyLaunchArbiterOn && AllInCA.StalemateSignal(now, team.StalemateSignalTick, Info.ArmyStalemateSignalTicks) ? AllInCA.WhyStalemate : null);"));
+			Assert.That(v07, Does.Contain("?? (ArmyLaunchArbiterOn && AllInCA.StalemateSignal(now, team.StalemateSignalTick, Info.ArmyStalemateSignalTicks) ? AllInCA.WhyStalemate : null));"));
 
 			var sm = RepoFile(Bots + "SquadManagerBotModuleCA.cs");
 			Assert.That(sm, Does.Contain("if (ArmyLaunchArbiterOn && !TeamLeadOn && s.Type == SquadCAType.Rush && AggTeamIsQuietState(s.FuzzyStateMachine?.CurrentState))"));

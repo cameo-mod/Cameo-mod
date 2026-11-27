@@ -88,7 +88,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var body = q.Substring(from, to - from);
 			Assert.That(body, Does.Contain("if (SafetyOn)"));
 			Assert.That(body, Does.Contain("!baseBuilder.ExpansionRefinerySafe(wantedField.Value)"));
-			Assert.That(body, Does.Contain("return null;"), "dropped from the slot, not held");
+			Assert.That(body, Does.Contain("return RefineryHeld(RefineryGate.UnsafeField);"), "dropped from the slot, not held (RefineryHeld records the gate and returns null)");
 			Assert.That(q, Does.Contain("bool SafetyOn => baseBuilder.ExpansionSafetyArmed && !ablateSafety.Off(player, AblationIds.ExpansionRefinerySafety);"));
 		}
 

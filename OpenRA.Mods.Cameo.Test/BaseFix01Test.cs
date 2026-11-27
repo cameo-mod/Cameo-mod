@@ -157,7 +157,8 @@ namespace OpenRA.Mods.Cameo.Test
 			var q = Queue();
 			Assert.That(q, Does.Contain("BaseFix01CA.DefenceNeedHolds(true, IsGroundDefence(defenceCandidate), DefenceThreatSeen())"));
 			Assert.That(q, Does.Contain("if (b.AntiAirTypes.Contains(info.Name))\n\t\t\t\treturn false;"), "anti-air has its own intel gate");
-			Assert.That(q, Does.Contain("BaseFix01CA.CapPowerMargin(PowerCapOn, minimumExcessPower"));
+			Assert.That(q, Does.Contain("PowerCapOn, baseBuilder.Info.PowerMarginCap, BuildOrderPowerMilli());"));
+			Assert.That(Source("mods/CA/Traits/BotModules/BotModuleLogic/PowerArbiter.cs"), Does.Contain("BaseFix01CA.CapPowerMargin(capOn, margin, min, cap);"));
 		}
 
 		[Test]

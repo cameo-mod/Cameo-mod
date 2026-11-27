@@ -31,7 +31,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var unitBuilder = Source("mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs");
 			Assert.That(unitBuilder, Does.Contain("public readonly bool PstSettleAuthoritative = false;"));
 
-			var yaml = Source("mods/cameo/ai/ai.yaml");
+			var yaml = Source("packaging/ai.yaml");
 			Assert.That(yaml, Does.Contain("PstSettleAuthoritative: false"));
 			Assert.That(yaml, Does.Not.Contain("PstSettleAuthoritative: true"), "master ships with the row off (untested)");
 		}

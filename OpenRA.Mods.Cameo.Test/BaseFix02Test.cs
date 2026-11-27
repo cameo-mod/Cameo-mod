@@ -94,7 +94,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var q = Queue();
 			Assert.That(q, Does.Contain("if (SafetyOn && SafetyAllOn && baseBuilder.Info.RefineryTypes.Contains(name) && baseBuilder.ExpansionRefineryBlockedByAllUnsafe())"));
-			Assert.That(q, Does.Contain("if (baseBuilder.ExpansionRefineryBlockedByAllUnsafe())\n\t\t\t\t\t\treturn null;"));
+			Assert.That(q, Does.Contain("if (baseBuilder.ExpansionRefineryBlockedByAllUnsafe())\n\t\t\t\t\t\treturn RefineryHeld(RefineryGate.UnsafeAll);"));
 			Assert.That(q, Does.Not.Contain("RefineryHoldCap"), "Opus ruling: no cancel of a completed refinery outside the exhaustion certificate (REF-2 P1a)");
 		}
 

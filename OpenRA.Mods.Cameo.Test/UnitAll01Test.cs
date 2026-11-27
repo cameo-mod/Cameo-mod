@@ -638,7 +638,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(u, Does.Contain("if (ServedByUpgradeService(a) && UpgradeGrantsOf(a.Name).Any(owned.Contains) && upgradeDone.Complete(a.Name, UpgradeCompletions.SourceInit))"));
 			Assert.That(u, Does.Contain("UpgradeScanOnce();\n\t\t\tUpgradeSettle(queuedIn);"), "both run before the service chooses");
 			Assert.That(u, Does.Contain("upgradeDone.Started(item2.Name, world.WorldTick);"), "every ordered item is settled at the later visits");
-			Assert.That(u, Does.Contain("upgradeDone.Settle(world.WorldTick, queuedIn, UpgradeGrantsOf, OwnedPrerequisites(), OfferedUpgradeNames, UpgradeQueueAlive, UpgradePrerequisitesHeld, Info.UpgradePendingTimeout)"));
+			Assert.That(u, Does.Contain("upgradeDone.Settle(world.WorldTick, queuedIn, UpgradeGrantsOf, SettleOwned(), OfferedUpgradeNames, UpgradeQueueAlive, UpgradePrerequisitesHeld, Info.UpgradePendingTimeout)"));
 			Assert.That(u, Does.Contain("upg_done_source={source}"), "the DEV row carries the source");
 
 			// no ActorAdded guess

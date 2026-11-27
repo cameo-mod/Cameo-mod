@@ -144,7 +144,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(late, Is.GreaterThan(0));
 			Assert.That(named, Is.GreaterThan(late), "the named triggers are read after the late tick, and never hidden by it (it only answers when none of them fired)");
 			Assert.That(why.IndexOf("var won = false;", StringComparison.Ordinal), Is.LessThan(late), "the late tick reads the cap/huge/won results");
-			Assert.That(why, Does.Contain("?? (ArmyLaunchArbiterOn && AllInCA.StalemateSignal(now, team.StalemateSignalTick, Info.ArmyStalemateSignalTicks) ? AllInCA.WhyStalemate : null);"),
+			Assert.That(why, Does.Contain("?? (ArmyLaunchArbiterOn && AllInCA.StalemateSignal(now, team.StalemateSignalTick, Info.ArmyStalemateSignalTicks) ? AllInCA.WhyStalemate : null));"),
 				"the Q4 stalemate input is unchanged");
 		}
 

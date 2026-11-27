@@ -367,7 +367,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(late, Is.GreaterThan(ahead), "the late tick is only the fallback");
 			Assert.That(named, Is.GreaterThan(late));
 			Assert.That(why.IndexOf("var won = false;", StringComparison.Ordinal), Is.LessThan(ahead), "the cap, idle and nearly-won results come first");
-			Assert.That(why, Does.Contain("?? (ArmyLaunchArbiterOn && AllInCA.StalemateSignal(now, team.StalemateSignalTick, Info.ArmyStalemateSignalTicks) ? AllInCA.WhyStalemate : null);"),
+			Assert.That(why, Does.Contain("?? (ArmyLaunchArbiterOn && AllInCA.StalemateSignal(now, team.StalemateSignalTick, Info.ArmyStalemateSignalTicks) ? AllInCA.WhyStalemate : null));"),
 				"the Q4 stalemate input is unchanged");
 		}
 
@@ -407,7 +407,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var record = Between(wiring, "void AheadRecord(string evt, string trigger, long ratio, int now)", "\n\t}\n}");
 			Assert.That(record, Does.Contain("if (DiagnosticWriter == null)"));
 			Assert.That(record, Does.Contain("\"trigger=\" + trigger + \" ratio=\" + ratio + \" tick=\" + now"));
-			Assert.That(wiring, Does.Contain("AheadRecord(\"all_in_ahead\", AllInAhead.Why(trigger), ratio, now);"));
+			Assert.That(wiring, Does.Contain("AheadRecord(\"all_in_ahead\", AllInAhead.Why(trigger), pick.Ratio, now);"));
 			Assert.That(wiring, Does.Contain("AheadRecord(\"all_in_ahead_end\", open.AllInWhy, AheadObservedRatio(v), now);"));
 		}
 

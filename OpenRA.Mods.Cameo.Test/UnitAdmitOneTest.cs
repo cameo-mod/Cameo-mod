@@ -92,8 +92,8 @@ namespace OpenRA.Mods.Cameo.Test
 			var part = RepoFile(Bots + "UnitBuilderBotModuleCA.AdmitOne.cs");
 
 			// the fill: ONE Admit call (a4) and then the three gate terms
-			Assert.That(Count(unit, "UnitPickArbiter.Admit("), Is.EqualTo(1));
-			Assert.That(unit, Does.Contain("if (!batch.Affords(cost) || !ReserveAdmits(batch, cost)\n\t\t\t\t\t\t|| depthQueue && held > 0 && !QueueDepthCA.CashAdmits(batch.BankLeft, unpaidQueued, cost))"));
+			Assert.That(Count(unit, "UnitPickArbiter.Admit("), Is.EqualTo(2), "the fill and RollCashAdmits (ub_affordable_pool keep mask, V08H join)");
+			Assert.That(unit, Does.Contain("if (!batch.Affords(cost) || !ReserveAdmits(batch, cost)\n\t\t\t\t\t\t|| depthQueue && held > 0 && !CashLedger.UnitDepthAdmits(batch.BankLeft, unpaidQueued, cost))"));
 
 			// the forecast: the same pure function (a settled pick is a roll and never the first build) and the same three terms, with the same inputs
 			Assert.That(Count(part, "UnitPickArbiter.Admit("), Is.EqualTo(1));

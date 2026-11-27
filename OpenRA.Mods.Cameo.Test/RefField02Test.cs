@@ -137,7 +137,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheEconomyGateRunsInsideTheWantedRefineryPickAfterTheCaps()
 		{
 			var s = Source("mods/CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs");
-			var caps = s.IndexOf("if (refinery == null || baseBuilder.HasMaxRefineriesFor(refinery))", StringComparison.Ordinal);
+			var caps = s.IndexOf("if (baseBuilder.HasMaxRefineriesFor(refinery))", StringComparison.Ordinal);
 			var gate = s.IndexOf("if (RefineryEconomyGateOn && RefineryEconomyHolds(queue, buildableThings))", StringComparison.Ordinal);
 			var pick = s.IndexOf("var pick = BaseBuilderQueueEvalCA.PickOrPower(refinery, power, HasSufficientPowerForActor);", StringComparison.Ordinal);
 			Assert.That(caps, Is.GreaterThan(0));

@@ -126,8 +126,8 @@ namespace OpenRA.Mods.Cameo.Test
 			var stages = Source(Dir + "BaseBuilderQueueManagerCA.Pipeline01Stages.cs");
 			Assert.That(stages.Split("RefineryHeldObserved(RefineryHoldGate(buildable));").Length - 1, Is.EqualTo(3), "S2 (yard without refinery), S2 zone demand (ref_s2_hold_log, REF-GATE-V08F) and S7 record the holding gate");
 			foreach (var gate in new[] { "adequate", "unsafe_all", "unsafe_field", "not_buildable", "max_refineries" })
-				Assert.That(stages, Does.Contain("return \"" + gate), gate);
-			Assert.That(stages, Does.Contain("? \"economy_\" + lastRefineryEconomyVerdict"), "the economy verdict of the call just made");
+				Assert.That(Source(Dir + "RefineryWant.cs"), Does.Contain("=> \"" + gate + "\""), gate);
+			Assert.That(Source(Dir + "RefineryWant.cs"), Does.Contain("? \"economy_\" + economyVerdict : \"power\""), "the economy verdict of the call just made");
 		}
 
 		[Test]

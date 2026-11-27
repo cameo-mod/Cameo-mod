@@ -66,7 +66,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(bb, Does.Not.Contain("if (playerResources.GetCashAndResources() >= Info.BuildingProductionMinCashRequirement)"));
 			var block = bb.Substring(bb.IndexOf("if (InFlightRecountCA.Recounts(", StringComparison.Ordinal), 900);
 			Assert.That(block, Does.Contain("InFlightRecountCA.Record(BuildingsBeingProduced, producing.Item);"));
-			Assert.That(block, Does.Contain("ExcessPower += producing.ActorInfo.TraitInfos<PowerInfo>()"), "in-flight power is counted under the same gate");
+			Assert.That(block, Does.Contain("var producingPower = producing.ActorInfo.TraitInfos<PowerInfo>()"), "in-flight power is counted under the same gate");
+			Assert.That(block, Does.Contain("ExcessPower += producingPower;"));
 			Assert.That(bb, Does.Contain("Info.RecountInFlightAlways && switchesActive && !ablateRecountInFlight.Off(player, AblationIds.RecountInFlight)"));
 		}
 

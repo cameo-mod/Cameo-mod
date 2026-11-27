@@ -328,9 +328,9 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(v07, Does.Contain("internal bool TeamLeadAllInOn => TeamLeadOn && Info.TeamLeadAllInEnabled && !ablateAllIn.Off(Player, AblationIds.TeamLeadAllIn);"));
 			Assert.That(v07, Does.Contain("bool TeamLeadSoloOn => TeamLeadActive && Info.TeamLeadSoloEnabled && !ablateSoloLead.Off(Player, AblationIds.TeamLeadSoloLead);"));
 			Assert.That(v07, Does.Contain("internal bool TeamLeadAllInOrderOpen => TeamLeadOpenOrder() is { AllIn: true };"));
-			Assert.That(v07, Does.Contain("if (!TeamLeadAllInOn)\n\t\t\t\treturn null;"), "free of work with the switch off");
+			Assert.That(v07, Does.Contain("if (!TeamLeadAllInOn)\n\t\t\t\treturn AllInReturn(now, null);"), "free of work with the switch off");
 			Assert.That(v07, Does.Contain("TeamLeadPincerSample() ?? activeUnits.FirstOrDefault(a => !a.IsDead && a.IsInWorld && a.TraitOrDefault<Mobile>() != null)"), "the hunt starts from a ground unit");
-			Assert.That(v07, Does.Contain("if (TeamLeadOpenOrder() is { } open && (open.AllIn || open.GatherOnly))\n\t\t\t\treturn null;"), "no nearly-won scan for an order that needs no trigger");
+			Assert.That(v07, Does.Contain("if (TeamLeadOpenOrder() is { } open && (open.AllIn || open.GatherOnly))\n\t\t\t\treturn AllInReturn(now, null);"), "no nearly-won scan for an order that needs no trigger");
 			Assert.That(v07, Does.Contain("\"all_in_push\""));
 			Assert.That(v07, Does.Contain("idle_home="));
 

@@ -194,7 +194,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(ret, Is.GreaterThan(trace));
 
 			// the roll-start hook captures the pool max and the known names BEFORE the roll writes either
-			var rollStart = body.IndexOf("rollFirst = false;\n\t\t\tPickTraceRollStart();\n\t\t\tvar table = Info.UnitsToBuild;", StringComparison.Ordinal);
+			var rollStart = body.IndexOf("rollFirst = false;\n\t\t\trollNoneAffordable = false;\n\t\t\tPickTraceRollStart();\n\t\t\tvar table = Info.UnitsToBuild;", StringComparison.Ordinal);
 			Assert.That(rollStart, Is.GreaterThan(0));
 			Assert.That(rollStart, Is.LessThan(body.IndexOf("rollAvailableSince.TryAdd(", StringComparison.Ordinal)));
 			Assert.That(rollStart, Is.LessThan(body.IndexOf("rollPoolMaxCost = TechLean.PoolMax(", StringComparison.Ordinal)));
@@ -432,9 +432,9 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(u, Does.Not.Contain("RollParameters.CoreFocus"), "N1: corefocus.* is read by the core lift only");
 
 			// R4: the lean predicate reads techlean.* through the table, on the admission line only
-			Assert.That(Count(u, "RollParameters.TechLeanTopPct"), Is.EqualTo(1));
-			Assert.That(Count(u, "RollParameters.TechLeanBankPct"), Is.EqualTo(1));
-			Assert.That(Count(u, "RollParameters.TechLeanStartTicks"), Is.EqualTo(1), "techlean.start is read on the admission line only (the ramp of the personality bias stays in the table's BiasPct)");
+			Assert.That(Count(u, "RollParameters.TechLeanTopPct"), Is.EqualTo(2), "the admission line and RollCashAdmits (ub_affordable_pool keep mask, V08H join)");
+			Assert.That(Count(u, "RollParameters.TechLeanBankPct"), Is.EqualTo(2), "the admission line and RollCashAdmits (ub_affordable_pool keep mask, V08H join)");
+			Assert.That(Count(u, "RollParameters.TechLeanStartTicks"), Is.EqualTo(2), "techlean.start is read on the admission line and in RollCashAdmits (V08H keep mask) only (the ramp of the personality bias stays in the table's BiasPct)");
 			Assert.That(u, Does.Contain("UnitPickArbiter.Admit(roll, rollFirst, batch.BankLeft, fullCost, TechLeanOn, rollPoolMaxCost, held, world.WorldTick, RollParameters.TechLeanStartTicks, RollParameters.TechLeanTopPct, RollParameters.TechLeanBankPct)"));
 			Assert.That(u, Does.Not.Contain("RollParameters.RampTicks"), "the lean no longer reads the ramp directly");
 

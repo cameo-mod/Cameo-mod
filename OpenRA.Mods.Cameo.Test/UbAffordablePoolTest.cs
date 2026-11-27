@@ -72,23 +72,22 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var u = Source(Unit);
 			var body = RollBody(u);
-			var weightsAt = body.IndexOf("var weights = UnitRoll.Weights(fractions, biases, counterPcts, RollParameters.FloorPct, boosts);", StringComparison.Ordinal);
+			// V08H join (keep mask on the CONSOLIDATE-03 P5 arbiter): the inputs are built for the whole pool, the mask cuts them, then UnitPickArbiter.Decide weighs and draws the kept members.
+			var inputsAt = body.IndexOf("var fractions = new int[pool.Count];", StringComparison.Ordinal);
 			var filterAt = body.IndexOf("if (AffordablePoolOn && rollCash.Batch != null)", StringComparison.Ordinal);
-			var quantizeAt = body.IndexOf("var units = UnitRoll.Quantize(weights);", StringComparison.Ordinal);
-			Assert.That(weightsAt, Is.GreaterThan(0));
-			Assert.That(filterAt, Is.GreaterThan(weightsAt), "the weights (floor, counter and share maxima) come from the whole pool");
-			Assert.That(quantizeAt, Is.GreaterThan(filterAt), "the draw is over the kept members");
-			foreach (var array in new[] { "pool", "weights", "fractions", "biases", "counterPcts", "boosts" })
+			var decideAt = body.IndexOf("var decision = UnitPickArbiter.Decide(fractions, biases, counterPcts, RollParameters.FloorPct, boosts, coreLift, RollDraw);", StringComparison.Ordinal);
+			Assert.That(inputsAt, Is.GreaterThan(0));
+			Assert.That(filterAt, Is.GreaterThan(inputsAt), "the inputs are built for the whole pool");
+			Assert.That(decideAt, Is.GreaterThan(filterAt), "the arbiter weighs and draws over the kept members");
+			foreach (var array in new[] { "pool", "fractions", "biases", "counterPcts", "boosts" })
 				Assert.That(body, Does.Contain($"{array} = AffordablePool.Keep({array}, keep, kept)"), array + " is cut the same way, so the pick log stays aligned");
 
-			// the filter's terms are the gate's terms: pay-as-you-go first build, tech lean, bank, reserve, depth cash
-			Assert.That(u, Does.Contain("var paygo = roll && rollFirst && UnitRoll.FirstAdmits(batch.BankLeft);"));
+			// the filter's terms are the gate's terms (P5 admission list: pay-as-you-go first build, tech lean; then bank, reserve, depth cash through the P2 ledger)
+			Assert.That(u, Does.Contain("var admission = UnitPickArbiter.Admit(roll, rollFirst, batch.BankLeft, fullCost, TechLeanOn, rollPoolMaxCost, held, world.WorldTick, RollParameters.TechLeanStartTicks, RollParameters.TechLeanTopPct, RollParameters.TechLeanBankPct);"));
 			Assert.That(body, Does.Contain("rollFirst = !rollOrdered.Contains(pool[pick].Name);"));
-			Assert.That(body, Does.Contain("var paygo = !rollOrdered.Contains(a.Name) && UnitRoll.FirstAdmits(batch.BankLeft);"));
-			Assert.That(u, Does.Contain("var leaned = roll && !paygo && TechLeanOn && TechLean.Admits(fullCost, rollPoolMaxCost, held, world.WorldTick, RollParameters.RampTicks, batch.BankLeft, Info.TechLeanTopPct, Info.TechLeanBankPct);"));
-			Assert.That(body, Does.Contain("if (!paygo && TechLeanOn && TechLean.Admits(fullCost, rollPoolMaxCost, rollCash.Held, world.WorldTick, RollParameters.RampTicks, batch.BankLeft, Info.TechLeanTopPct, Info.TechLeanBankPct))"));
-			Assert.That(u, Does.Contain("if (!batch.Affords(cost) || !ReserveAdmits(batch, cost)\n\t\t\t\t\t\t|| depthQueue && held > 0 && !QueueDepthCA.CashAdmits(batch.BankLeft, unpaidQueued, cost))"));
-			Assert.That(body, Does.Contain("return batch.Affords(cost) && ReserveAdmits(batch, cost)\n\t\t\t\t\t&& !(rollCash.DepthQueue && rollCash.Held > 0 && !QueueDepthCA.CashAdmits(batch.BankLeft, rollCash.UnpaidQueued, cost));"));
+			Assert.That(body, Does.Contain("var admission = UnitPickArbiter.Admit(true, !rollOrdered.Contains(a.Name), batch.BankLeft, fullCost, TechLeanOn, rollPoolMaxCost, rollCash.Held, world.WorldTick,\n\t\t\t\t\tRollParameters.TechLeanStartTicks, RollParameters.TechLeanTopPct, RollParameters.TechLeanBankPct);"));
+			Assert.That(u, Does.Contain("if (!batch.Affords(cost) || !ReserveAdmits(batch, cost)\n\t\t\t\t\t\t|| depthQueue && held > 0 && !CashLedger.UnitDepthAdmits(batch.BankLeft, unpaidQueued, cost))"));
+			Assert.That(body, Does.Contain("return batch.Affords(cost) && ReserveAdmits(batch, cost)\n\t\t\t\t\t&& !(rollCash.DepthQueue && rollCash.Held > 0 && !CashLedger.UnitDepthAdmits(batch.BankLeft, rollCash.UnpaidQueued, cost));"));
 			Assert.That(u, Does.Contain("rollCash = new RollCash(batch, held, depthQueue, unpaidQueued);\n\t\t\t\t\tUbSubStart(0);"), "the cash state of this very pick");
 		}
 

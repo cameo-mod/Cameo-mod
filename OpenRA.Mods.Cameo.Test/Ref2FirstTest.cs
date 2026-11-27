@@ -223,7 +223,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(qm, Does.Contain("AIUtils.BotDebug(\"{0} holds the refinery pick: {1} (refineries {2})\", queue.Actor.Owner, verdict, count);"), "the notification line stays");
 
 			// the two other V08G blockers the game must name already log in the DEV build: the structured bb_refinery_held row (gate + economy verdict) and the REF-1 park line (debug log)
-			Assert.That(Source(Dir + "BaseBuilderQueueManagerCA.Pipeline01Stages.cs"), Does.Contain("return RefineryEconomyGateOn ? \"economy_\" + lastRefineryEconomyVerdict : \"power\";"));
+			Assert.That(Source(Dir + "RefineryWant.cs"), Does.Contain("_ => economyGateOn ? \"economy_\" + economyVerdict : \"power\","));
 			var planner = Source("mods/Cameo/Traits/BotModules/ExpansionPlannerBotModule.cs");
 			var park = planner.IndexOf("REF-1 parked anchor", StringComparison.Ordinal);
 			Assert.That(park, Is.GreaterThan(0));
