@@ -181,7 +181,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var player = MiniYaml.FromString(Source("packaging/ai.yaml"), "ai").Single(n => n.Key == "Player").Value.Nodes;
 			var generic = player.Single(n => n.Key == "BaseBuilderBotModuleCA@generic").Value.Nodes;
-			Assert.That(generic.Single(n => n.Key == "TurretNoHold").Value.Value, Is.EqualTo("false"), "off until the A/B arms it");
+			Assert.That(generic.Single(n => n.Key == "TurretNoHold").Value.Value, Is.EqualTo("true"), "armed by the playtest B2 ARM (generic only)");
 			foreach (var o in player.Where(n => n.Key.StartsWith("BaseBuilderBotModuleCA", StringComparison.Ordinal) && n.Key != "BaseBuilderBotModuleCA@generic"))
 				Assert.That(o.Value.Nodes.Any(n => n.Key == "TurretNoHold"), Is.False, o.Key);
 		}
