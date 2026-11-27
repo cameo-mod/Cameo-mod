@@ -400,6 +400,15 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("S8-CASH-HOLD: the longest a cash-only S8 hold lasts, in ticks, counted from the first sweep that saw the type blocked. Learnable (DEV training only).")]
 		public readonly int S8HoldMaxTicks = 750;
 
+		[Desc("CASH-LIVENESS-01 (row cl_cap_spend; user D6, Opus 11-27): while this bot is at its unit-count cap (an IBotItemAwareUnitCap votes PauseUnitProduction,",
+			"e.g. BotGlobalUnitBudget) with at least CapSpareCash banked, the S8-S10 building reserve is 0 (it keeps cash for units, which the cap stops) and the S9",
+			"extra-defence need gate is waived. The AF2 defence cap, RATIO-2X and the admission votes still apply; upgrades never wait for the cap. Gated by",
+			"SwitchCondition. Off in code.")]
+		public readonly bool CashLivenessCapSpend = false;
+
+		[Desc("CASH-LIVENESS-01: the bank (cash + resources) a capped bot needs before the cap spend applies. Learnable (DEV training only); clamped 0..20000.")]
+		public readonly int CapSpareCash = 1000;
+
 		[Desc("S8-CASH-HOLD: the hold applies only when the bank is at least this percent of the blocked type's cost (an affordable-soon factory). Learnable (DEV training only).")]
 		public readonly int S8HoldMinBankPercent = 75;
 
@@ -1026,6 +1035,35 @@ namespace OpenRA.Mods.CA.Traits
 		public bool S8RejectedFallthroughArmed => Info.BbS8RejectedFallthrough && switchesActive && !ablateS8RejectedFallthrough.Off(player, AblationIds.BbS8RejectedFallthrough);
 		AblationLatch ablateS8CashHold; // S8-CASH-HOLD
 		public bool S8CashHoldArmed => Info.BbS8CashHold && S8RejectedFallthroughArmed && !ablateS8CashHold.Off(player, AblationIds.BbS8CashHold);
+		AblationLatch ablateCapSpend; // CASH-LIVENESS-01
+		public bool CapSpendArmed => Info.CashLivenessCapSpend && switchesActive && !ablateCapSpend.Off(player, AblationIds.ClCapSpend);
+		IBotRequestPauseUnitProduction[] unitCapVotes;
+		int capSpareTick = -1;
+		bool capSpare;
+
+		/// <summary>CASH-LIVENESS-01 (cl_cap_spend): this bot is at its unit-count cap with spare cash. Once per tick; false with the row off.</summary>
+		public bool UnitCapSpare()
+		{
+			if (!CapSpendArmed)
+				return false;
+
+			var now = world.WorldTick;
+			if (now == capSpareTick)
+				return capSpare;
+
+			capSpareTick = now;
+			unitCapVotes ??= player.PlayerActor.TraitsImplementing<IBotRequestPauseUnitProduction>().Where(v => v is IBotItemAwareUnitCap).ToArray();
+			var holds = false;
+			foreach (var v in unitCapVotes)
+				if (v.IsTraitEnabled() && v.PauseUnitProduction)
+				{
+					holds = true;
+					break;
+				}
+
+			return capSpare = CashLiveness.CapSpare(holds, playerResources.GetCashAndResources(), Info.CapSpareCash);
+		}
+
 		AblationLatch ablatePwInflightEmergency, ablatePwInflightAdmit; // CONSOLIDATE-03 P4
 		public bool PwInflightEmergencyArmed => Info.PwInflightEmergency && switchesActive && !ablatePwInflightEmergency.Off(player, AblationIds.PwInflightEmergency);
 		public bool PwInflightAdmitArmed => Info.PwInflightAdmit && switchesActive && !ablatePwInflightAdmit.Off(player, AblationIds.PwInflightAdmit);

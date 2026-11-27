@@ -133,7 +133,8 @@ namespace OpenRA.Mods.CA.Traits
 			if (!BaseBuilderQueueEvalCA.AirDefenceAdmits(baseBuilder.IsGatedAirDefence(name), baseBuilder.DedicatedAntiAirAllowed))
 				return false;
 
-			if (DefenceNeedOn && BaseFix01CA.DefenceNeedHolds(true, IsGroundDefence(info), DefenceThreatSeen()))
+			// CASH-LIVENESS-01 (cl_cap_spend): at the unit cap with spare cash the need gate is waived; the cap, the ratio and the votes below still apply.
+			if (DefenceNeedOn && BaseFix01CA.DefenceNeedHolds(true, IsGroundDefence(info), DefenceThreatSeen()) && !baseBuilder.UnitCapSpare())
 				return false;
 
 			if (PipelineDefenceCapHolds())

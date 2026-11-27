@@ -80,6 +80,9 @@ namespace OpenRA.Mods.CA.Traits
 			// ALLIN-TRIGGER-01 (sq_ahead_deescalate): an all-in order that an ahead trigger started ends when the team is behind (before the early return below, which skips an all-in order).
 			AheadDeescalate(now);
 
+			// CASH-LIVENESS-01 (cl_cap_allin): sampled at every team check, before the early return below, so the cap clock sees every check.
+			var capWhy = CapAllInWhy(now);
+
 			// An open order that is already all-in, or only gathers at its rally, needs no trigger: no scan for it.
 			if (TeamLeadOpenOrder() is { } open && (open.AllIn || open.GatherOnly))
 				return AllInReturn(now, null);
@@ -110,6 +113,10 @@ namespace OpenRA.Mods.CA.Traits
 			// ALLIN-TRIGGER-01 (sq_ahead and one row per trigger): the dynamic all-in, when the team is ahead; the named triggers above keep their name and come first.
 			if (gate.Open && AheadWhy(now) is { } ahead)
 				return AllInReturn(now, ahead);
+
+			// CASH-LIVENESS-01 (cl_cap_allin): a team seat held at its unit cap for CapAllInTicks; after the ahead triggers, before the late fallback.
+			if (gate.Open && capWhy != null)
+				return AllInReturn(now, capWhy);
 
 			// CONSOLIDATE-02 Q8 (sq_all_in_late): the late tick is the fallback all-in input of a game that stays undecided; the triggers above keep their name.
 			if (gate.Open && ArmyAllInLateOn(now))

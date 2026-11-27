@@ -140,6 +140,10 @@ namespace OpenRA.Mods.CA.Traits
 				S8HoldStart = s8HoldStart,
 			};
 
+			// CASH-LIVENESS-01 (cl_cap_spend): at the unit cap with spare cash the reserve that keeps cash for units is 0.
+			if (baseBuilder.UnitCapSpare())
+				s.ProductionCashReserve = 0;
+
 			// c3, c4, c5: S2, S2b, S4, S5, S6, S7, S9 (Pipeline01Stages.cs); S5 reads the counts of this snapshot.
 			s.StageSource = stage => PipelineStageNames(stage, queue, buildable, power, law, s);
 
