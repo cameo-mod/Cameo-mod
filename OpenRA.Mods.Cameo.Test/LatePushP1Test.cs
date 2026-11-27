@@ -322,7 +322,9 @@ namespace OpenRA.Mods.Cameo.Test
 			var publish = Between(lead, "void TeamLeadPublish(TeamLeadTeam team, int now)", "void TeamLeadPromoteRally(TeamLeadOrder order, int now)");
 			Assert.That(publish, Does.Contain("var (minUnits, minValue) = WaveMinActive ? WaveMinBars() : (0, 0);"), "the rally floor stays on WAVE-MIN");
 			Assert.That(publish, Does.Contain("var (barUnits, barValue) = WaveMinActive ? LatePushBars(team, now, allIn != null) : (0, 0);"), "an open all-in keeps WAVE-MIN (P2 owns the all-in publish)");
-			Assert.That(publish, Does.Contain("var ready = TeamLeadCA.BlobReady(blob.Units, blob.Value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(barUnits, barValue), barUnits, barValue);"));
+			// P2 (lp_all_in_publish) tests the eligible army for an open all-in trigger through readyBlob; any other publish still tests the blob.
+			Assert.That(publish, Does.Contain("var readyBlob = allIn != null ? LatePushAllInBlob(team, now, blob) : blob;"));
+			Assert.That(publish, Does.Contain("var ready = TeamLeadCA.BlobReady(readyBlob.Units, readyBlob.Value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(barUnits, barValue), barUnits, barValue);"));
 			Assert.That(publish, Does.Contain("!TeamLeadCA.RallyFloorPassed(blob.Units, blob.Value, BlobLaunch01CA.MinUnits(minUnits, blob.Units), minValue))"), "the old rally floor text is untouched");
 			Assert.That(publish.IndexOf("if (!picked)\n\t\t\t\treturn;\n\n\t\t\t// LATEPUSH-01 P1 (design 02 D-3)", StringComparison.Ordinal), Is.GreaterThan(0));
 			Assert.That(publish, Does.Contain("team.NoteTarget(target, now);"), "the last picked target feeds the map context (D-3)");
@@ -359,8 +361,10 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(bars, Does.Contain("var mu = LatePush.Bar(bars.Units, now, Info.LatePushAgeTicks, k, l);"));
 			Assert.That(bars, Does.Contain("var mv = LatePush.Bar(bars.Value, now, Info.LatePushAgeTicks, k, l);"));
 			Assert.That(bars, Does.Contain("var l = LatePushParameters.LearnedPercent;"), "L is the one learned multiplier (R-C)");
-			Assert.That(bars, Does.Contain("LatePush.EffectiveBar(mu, bars.Units, Info.LatePushCapPercent, eligible.Units)"));
-			Assert.That(bars, Does.Contain("LatePush.EffectiveBar(mv, bars.Value, Info.LatePushCapPercent, eligible.Value)"));
+			// P2 (lp_army_cap): the cap is LatePushArmyCapNow() in permille (the fixed P1 percent x 10 with the row off, the learned share with it on).
+			Assert.That(bars, Does.Contain("var cap = LatePushArmyCapNow();"));
+			Assert.That(bars, Does.Contain("LatePush.EffectiveBarPermille(mu, bars.Units, cap, eligible.Units)"));
+			Assert.That(bars, Does.Contain("LatePush.EffectiveBarPermille(mv, bars.Value, cap, eligible.Value)"));
 
 			// R-C: no second multiplier from the existing aggression values.
 			foreach (var banned in new[] { "MaxIdleUnits", "SquadValue", "AggTeamReserve", "MinimumAttackForceDelay", "Personality", "PersonalityPercent" })

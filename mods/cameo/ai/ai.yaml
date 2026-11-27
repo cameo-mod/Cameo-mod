@@ -4919,6 +4919,14 @@ Player:
 		LatePushCommitCapPercent: 85
 		LatePushMapRefCells: 64
 		LatePushPersonalityPercent: 85
+		# LATEPUSH-01 P2 (rows lp_army_cap, lp_all_in_publish, lp_reinforce, lp_handover; design 01 D3 to D5, user decision audit A6): the age-scaled bar is capped at the learned share of the eligible army (prior 800 permille, knob latepush.army_cap); an open all-in publishes on the eligible army; a pushed order is reinforced once per seat; a personality switch hands the pushed squads to the order. All rows are OFF until their A/B passes.
+		LatePushArmyCapEnabled: false
+		LatePushArmyCapPermille: 800
+		LatePushAllInPublishEnabled: false
+		LatePushReinforceEnabled: false
+		LatePushReinforceBelowPercent: 60
+		LatePushReinforceMinRatioPercent: 100
+		LatePushHandoverEnabled: false
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		ArmyDutyTrace: true
@@ -5111,6 +5119,14 @@ Player:
 		LatePushCommitCapPercent: 85
 		LatePushMapRefCells: 64
 		LatePushPersonalityPercent: 120
+		# LATEPUSH-01 P2 (rows lp_army_cap, lp_all_in_publish, lp_reinforce, lp_handover; design 01 D3 to D5, user decision audit A6): the age-scaled bar is capped at the learned share of the eligible army (prior 800 permille, knob latepush.army_cap); an open all-in publishes on the eligible army; a pushed order is reinforced once per seat; a personality switch hands the pushed squads to the order. All rows are OFF until their A/B passes.
+		LatePushArmyCapEnabled: false
+		LatePushArmyCapPermille: 800
+		LatePushAllInPublishEnabled: false
+		LatePushReinforceEnabled: false
+		LatePushReinforceBelowPercent: 60
+		LatePushReinforceMinRatioPercent: 100
+		LatePushHandoverEnabled: false
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		ArmyDutyTrace: true
@@ -5299,6 +5315,14 @@ Player:
 		LatePushCommitCapPercent: 85
 		LatePushMapRefCells: 64
 		LatePushPersonalityPercent: 100
+		# LATEPUSH-01 P2 (rows lp_army_cap, lp_all_in_publish, lp_reinforce, lp_handover; design 01 D3 to D5, user decision audit A6): the age-scaled bar is capped at the learned share of the eligible army (prior 800 permille, knob latepush.army_cap); an open all-in publishes on the eligible army; a pushed order is reinforced once per seat; a personality switch hands the pushed squads to the order. All rows are OFF until their A/B passes.
+		LatePushArmyCapEnabled: false
+		LatePushArmyCapPermille: 800
+		LatePushAllInPublishEnabled: false
+		LatePushReinforceEnabled: false
+		LatePushReinforceBelowPercent: 60
+		LatePushReinforceMinRatioPercent: 100
+		LatePushHandoverEnabled: false
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		ArmyDutyTrace: true
@@ -5489,6 +5513,14 @@ Player:
 		LatePushCommitCapPercent: 85
 		LatePushMapRefCells: 64
 		LatePushPersonalityPercent: 100
+		# LATEPUSH-01 P2 (rows lp_army_cap, lp_all_in_publish, lp_reinforce, lp_handover; design 01 D3 to D5, user decision audit A6): the age-scaled bar is capped at the learned share of the eligible army (prior 800 permille, knob latepush.army_cap); an open all-in publishes on the eligible army; a pushed order is reinforced once per seat; a personality switch hands the pushed squads to the order. All rows are OFF until their A/B passes.
+		LatePushArmyCapEnabled: false
+		LatePushArmyCapPermille: 800
+		LatePushAllInPublishEnabled: false
+		LatePushReinforceEnabled: false
+		LatePushReinforceBelowPercent: 60
+		LatePushReinforceMinRatioPercent: 100
+		LatePushHandoverEnabled: false
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		ArmyDutyTrace: true
@@ -5679,6 +5711,14 @@ Player:
 		LatePushCommitCapPercent: 85
 		LatePushMapRefCells: 64
 		LatePushPersonalityPercent: 110
+		# LATEPUSH-01 P2 (rows lp_army_cap, lp_all_in_publish, lp_reinforce, lp_handover; design 01 D3 to D5, user decision audit A6): the age-scaled bar is capped at the learned share of the eligible army (prior 800 permille, knob latepush.army_cap); an open all-in publishes on the eligible army; a pushed order is reinforced once per seat; a personality switch hands the pushed squads to the order. All rows are OFF until their A/B passes.
+		LatePushArmyCapEnabled: false
+		LatePushArmyCapPermille: 800
+		LatePushAllInPublishEnabled: false
+		LatePushReinforceEnabled: false
+		LatePushReinforceBelowPercent: 60
+		LatePushReinforceMinRatioPercent: 100
+		LatePushHandoverEnabled: false
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		ArmyDutyTrace: true
@@ -5866,6 +5906,14 @@ Player:
 		LatePushCommitCapPercent: 85
 		LatePushMapRefCells: 64
 		LatePushPersonalityPercent: 85
+		# LATEPUSH-01 P2 (rows lp_army_cap, lp_all_in_publish, lp_reinforce, lp_handover; design 01 D3 to D5, user decision audit A6): the age-scaled bar is capped at the learned share of the eligible army (prior 800 permille, knob latepush.army_cap); an open all-in publishes on the eligible army; a pushed order is reinforced once per seat; a personality switch hands the pushed squads to the order. All rows are OFF until their A/B passes.
+		LatePushArmyCapEnabled: false
+		LatePushArmyCapPermille: 800
+		LatePushAllInPublishEnabled: false
+		LatePushReinforceEnabled: false
+		LatePushReinforceBelowPercent: 60
+		LatePushReinforceMinRatioPercent: 100
+		LatePushHandoverEnabled: false
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		ArmyDutyTrace: true

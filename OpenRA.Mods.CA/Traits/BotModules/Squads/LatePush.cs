@@ -86,6 +86,44 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			return Math.Clamp(time + (int)((100L - time) * ahead / span), 0, 100);
 		}
 
+		/// <summary>The clamp of the learned army cap (knob latepush.army_cap), permille of the team's eligible army: 0.5 to 1.0 (user decision, audit A6).</summary>
+		public const int ArmyCapMin = 500;
+		public const int ArmyCapMax = 1000;
+
+		/// <summary>The prior of the learned army cap, permille (user decision: 80 percent, not 60).</summary>
+		public const int ArmyCapPrior = 800;
+
+		/// <summary>
+		/// LATEPUSH-01 P2 (row lp_army_cap): the same bar as <see cref="EffectiveBar"/> with the cap in permille (the learned share). With a cap of 10 x the percent it is the same number as EffectiveBar, so the row off
+		/// keeps the P1 bar exactly.
+		/// </summary>
+		public static int EffectiveBarPermille(int bar, int waveMin, int capPermille, long eligible)
+		{
+			var floor = Math.Max(0, waveMin);
+			if (eligible <= 0)
+				return floor;
+
+			var cap = (int)Math.Min(int.MaxValue, (Math.Clamp(capPermille, 0, 1000) * Math.Max(0, eligible) + 999) / 1000);
+			return Math.Max(floor, Math.Min(bar, cap));
+		}
+
+		/// <summary>
+		/// LATEPUSH-01 P2 (row lp_all_in_publish, design 01 D3): the all-in publish is ready when the team can send, as one claim (100 percent of what the seats report as eligible), the WAVE-MIN floor; the ordinary blob count is never
+		/// less than the claim. No age factor, no cap: the age-scaled minimum is for ordinary pushes.
+		/// </summary>
+		public static (int Units, long Value) AllInClaim(int blobUnits, long blobValue, int eligibleUnits, long eligibleValue) =>
+			(Math.Max(blobUnits, eligibleUnits), Math.Max(blobValue, eligibleValue));
+
+		/// <summary>
+		/// LATEPUSH-01 P2 (row lp_reinforce, design 01 D5): the ONE reinforcement of an order is due when the seat's pushed squads hold less than belowPercent of what they committed and the team is not behind (the observed
+		/// army ratio is at least minRatioPercent; an unseen enemy reads 100, so only an observed deficit holds it back).
+		/// </summary>
+		public static bool ReinforceDue(int alive, int committed, int belowPercent, int ratioPercent, int minRatioPercent) =>
+			committed > 0 && alive * 100L < committed * (long)Math.Max(0, belowPercent) && ratioPercent >= minRatioPercent;
+
+		/// <summary>The size of the one reinforcement group: what the squads lost, from the joinable pool, never negative.</summary>
+		public static int ReinforceSend(int committed, int alive, int joinablePool) => Math.Max(0, Math.Min(joinablePool, committed - alive));
+
 		/// <summary>The eligible army of a seat: the free units plus the guard units above the floor.</summary>
 		public static int Eligible(int freeUnits, int guardSpareUnits) => Math.Max(0, freeUnits) + Math.Max(0, guardSpareUnits);
 
@@ -115,15 +153,18 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		public const string LearnedKey = "latepush.l";
 		public const string CommitKey = "latepush.lcommit";
 		public const string MapRefKey = "latepush.kref";
+		public const string ArmyCapKey = "latepush.army_cap";
 
 		readonly int learnedPrior;
 		readonly int mapRefPrior;
+		readonly int armyCapPrior;
 		readonly Dictionary<string, int> overrides = new(StringComparer.Ordinal);
 
-		public LatePushTable(int learnedPrior, int mapRefPrior)
+		public LatePushTable(int learnedPrior, int mapRefPrior, int armyCapPrior = LatePush.ArmyCapPrior)
 		{
 			this.learnedPrior = learnedPrior;
 			this.mapRefPrior = mapRefPrior;
+			this.armyCapPrior = armyCapPrior;
 		}
 
 		/// <summary>The learner's overrides, by key (read only).</summary>
@@ -143,5 +184,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		/// <summary>The K_map reference distance, cells, [MapRefMin, MapRefMax].</summary>
 		public int MapRefCells => Math.Clamp(overrides.TryGetValue(MapRefKey, out var v) ? v : mapRefPrior, LatePush.MapRefMin, LatePush.MapRefMax);
+
+		/// <summary>The learned army cap (latepush.army_cap), permille of the eligible army, [ArmyCapMin, ArmyCapMax]; the prior is 800.</summary>
+		public int ArmyCapPermille => Math.Clamp(overrides.TryGetValue(ArmyCapKey, out var v) ? v : armyCapPrior, LatePush.ArmyCapMin, LatePush.ArmyCapMax);
 	}
 }

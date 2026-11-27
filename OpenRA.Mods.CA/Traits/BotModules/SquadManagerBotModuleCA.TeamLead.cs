@@ -602,7 +602,9 @@ namespace OpenRA.Mods.CA.Traits
 			var (minUnits, minValue) = WaveMinActive ? WaveMinBars() : (0, 0);
 			// LATEPUSH-01 P1 (row lp_age_min): the ordinary ready test needs the age-scaled bars (an open all-in keeps WAVE-MIN); the rally floor below stays on the WAVE-MIN bars, and the promotion of the rally uses the age-scaled ones.
 			var (barUnits, barValue) = WaveMinActive ? LatePushBars(team, now, allIn != null) : (0, 0);
-			var ready = TeamLeadCA.BlobReady(blob.Units, blob.Value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(barUnits, barValue), barUnits, barValue);
+			// LATEPUSH-01 P2 (row lp_all_in_publish): an open all-in trigger tests what the team can send (WAVE-MIN bars); every other publish tests the blob.
+			var readyBlob = allIn != null ? LatePushAllInBlob(team, now, blob) : blob;
+			var ready = TeamLeadCA.BlobReady(readyBlob.Units, readyBlob.Value, Info.TeamLeadJoinMinUnits, WaveMinCA.Limits(barUnits, barValue), barUnits, barValue);
 			var interval = TeamLeadCA.PublishInterval(TeamLeadCadenceTicks(), Info.TeamLeadFallbackTicks);
 			var why = TeamLeadCA.OrderDue(false, ready, now, team.LastOrderTick, interval, team.AnyAtCap(now, Info.TeamLeadPoolMaxAgeTicks) || allIn != null)
 				? TeamLeadCA.PublishWhy.Ready

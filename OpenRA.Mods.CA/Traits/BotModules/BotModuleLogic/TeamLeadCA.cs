@@ -654,6 +654,37 @@ namespace OpenRA.Mods.CA.Traits
 			return (units, value);
 		}
 
+		// ---- LATEPUSH-01 P2 (design 01 D4b and D5): kept on the order, which outlives a personality switch of a seat's module ----
+
+		/// <summary>Row lp_reinforce: the one reinforcement of a seat for this order. Committed = the peak of the units its pushed squads held before the send; Sent = spent (never rearmed); HoldUntil = no check before this tick.</summary>
+		public sealed class ReinforceKey
+		{
+			public int Committed;
+			public bool Sent;
+			public int HoldUntil = -1;
+		}
+
+		readonly Dictionary<string, ReinforceKey> reinforceKeys = new(StringComparer.Ordinal);
+		readonly Dictionary<string, List<uint>> handovers = new(StringComparer.Ordinal);
+
+		/// <summary>The seat's reinforcement key for this order (created on first use).</summary>
+		public ReinforceKey ReinforceKeyOf(string seat)
+		{
+			if (!reinforceKeys.TryGetValue(seat, out var key))
+				reinforceKeys[seat] = key = new ReinforceKey();
+
+			return key;
+		}
+
+		/// <summary>Row lp_handover: a disabled module hands the unit ids of its pushed squads to the order under the seat's key.</summary>
+		public void RecordHandover(string seat, List<uint> unitIds) => handovers[seat] = unitIds;
+
+		public bool HasHandover(string seat) => handovers.ContainsKey(seat);
+
+		public bool TryGetHandover(string seat, out List<uint> unitIds) => handovers.TryGetValue(seat, out unitIds);
+
+		public void ClearHandover(string seat) => handovers.Remove(seat);
+
 		public void Forget(object squad)
 		{
 			reports.Remove(squad);

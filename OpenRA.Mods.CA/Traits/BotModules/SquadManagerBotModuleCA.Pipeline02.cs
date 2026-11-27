@@ -538,6 +538,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (now < initialAttackDelay)
 				return;
 
+			// LATEPUSH-01 P2 (rows lp_handover, lp_reinforce): a handed-over group re-joins at once; with lp_reinforce on the order is reinforced once per seat, as one group. Both false with their rows off.
+			if (LatePushHandover(bot, order, now) || LatePushReinforce(bot, order, now))
+				return;
+
 			unitsHangingAroundTheBase.RemoveAll(u => unitCannotBeOrdered(u.Actor));
 			if (!TeamLeadAllInRejoinGroup())
 				return;

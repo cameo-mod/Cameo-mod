@@ -1813,6 +1813,9 @@ namespace OpenRA.Mods.CA.Traits
 			defendMissionHeldSince = -1;
 			defendMissionExhaustedRegions.Clear();
 
+			// LATEPUSH-01 P2 (row lp_handover): before the squads go, the open pushed order learns which units were part of it (no-op with the row off).
+			LatePushHandoverRecord();
+
 			// BOTPASSIVE: a live breaker wave outlives the manager; the next enabled manager re-forms its squad.
 			stalemateSquad = null;
 			foreach (var squad in Squads)

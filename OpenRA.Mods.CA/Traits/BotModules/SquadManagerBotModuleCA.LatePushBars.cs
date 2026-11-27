@@ -43,10 +43,11 @@ namespace OpenRA.Mods.CA.Traits
 		internal bool LatePushCommitOn => LatePushCommitRequested && GuardFloorOn;
 
 		// Either row needs the seat's eligible army (the cap of the bar and the base of the share).
-		bool LatePushOn => LatePushAgeMinOn || LatePushCommitOn;
+		// LATEPUSH-01 P2: the all-in publish needs the eligible figure as well.
+		bool LatePushOn => LatePushAgeMinOn || LatePushCommitOn || LatePushAllInPublishOn;
 
 		/// <summary>The learnable numbers of the late push of this seat (prior = the yaml): the learner overrides them under the LatePushTable keys.</summary>
-		internal LatePushTable LatePushParameters => latePushTable ??= new LatePushTable(Info.LatePushPersonalityPercent, Info.LatePushMapRefCells);
+		internal LatePushTable LatePushParameters => latePushTable ??= new LatePushTable(Info.LatePushPersonalityPercent, Info.LatePushMapRefCells, Info.LatePushArmyCapPermille);
 
 		// TeamLeadBlob, before the guard's lend is added: the seat's free army (pool plus quiet wave squads) and the guard's spare cleared. Also the one place the inert state of lp_commit is said (DEV only, once).
 		void LatePushBlobBegin(int freeUnits, long freeValue)
@@ -87,6 +88,10 @@ namespace OpenRA.Mods.CA.Traits
 			latePushSpareValue = 0;
 			for (var i = 0; i < spare; i++)
 				latePushSpareValue += UnitValue(armyGuardLend[i].Actor);
+
+			// LATEPUSH-01 P2 (row lp_all_in_publish): an open all-in claims every guard unit above the floor (the lend contract below still narrows it).
+			if (LatePushAllInPublishOn && TeamLeadOpenOrder() is { AllIn: true })
+				return LatePushAllInClaim(spare);
 
 			if (!LatePushCommitOn || TeamLeadOpenOrder() is { AllIn: true })
 				return ordinaryLend;
@@ -181,13 +186,15 @@ namespace OpenRA.Mods.CA.Traits
 			var mu = LatePush.Bar(bars.Units, now, Info.LatePushAgeTicks, k, l);
 			var mv = LatePush.Bar(bars.Value, now, Info.LatePushAgeTicks, k, l);
 			var eligible = team.Eligible(now, Info.TeamLeadPoolMaxAgeTicks);
-			var units = LatePush.EffectiveBar(mu, bars.Units, Info.LatePushCapPercent, eligible.Units);
-			var value = LatePush.EffectiveBar(mv, bars.Value, Info.LatePushCapPercent, eligible.Value);
+			// LATEPUSH-01 P2 (row lp_army_cap): the cap is the learned share of the eligible army (prior 800 permille); with the row off it is the fixed P1 percent, the same number as before.
+			var cap = LatePushArmyCapNow();
+			var units = LatePush.EffectiveBarPermille(mu, bars.Units, cap, eligible.Units);
+			var value = LatePush.EffectiveBarPermille(mv, bars.Value, cap, eligible.Value);
 			if (DiagnosticWriter != null && now - latePushBarLogTick >= 500)
 			{
 				latePushBarLogTick = now;
 				DiagnosticTeamEvent("lp_age_min", "tick=" + now + " base=" + bars.Units + "/" + bars.Value + " age=" + LatePush.AgePermille(now, Info.LatePushAgeTicks) + " k=" + k + " kcells=" + cells
-					+ " l=" + l + " m=" + mu + "/" + mv + " elig=" + eligible.Units + "/" + eligible.Value + " cap=" + Info.LatePushCapPercent + " bar=" + units + "/" + value);
+					+ " l=" + l + " m=" + mu + "/" + mv + " elig=" + eligible.Units + "/" + eligible.Value + " cap=" + cap + " bar=" + units + "/" + value);
 			}
 
 			return (units, value);
