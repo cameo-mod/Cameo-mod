@@ -292,7 +292,8 @@ namespace OpenRA.Mods.Cameo.Test
 			var classic = yaml.IndexOf("SquadManagerBotModuleCA@classic:", StringComparison.Ordinal);
 			Assert.That(classic, Is.GreaterThan(0));
 			Assert.That(yaml[classic..], Does.Not.Contain("LatePush"), "classic untouched");
-			foreach (var key in new[] { "LatePushAgeMinEnabled: true", "LatePushCommitEnabled: true", "LatePushAgeTicks: 30000", "LatePushCapPercent: 60", "LatePushCommitBasePercent: 30", "LatePushCommitCapPercent: 85", "LatePushMapRefCells: 64" })
+			// Both rows ship OFF in every block until their A/B passes (Opus, 2026-11-27); the A/B arm turns them on.
+			foreach (var key in new[] { "LatePushAgeMinEnabled: false", "LatePushCommitEnabled: false", "LatePushAgeTicks: 30000", "LatePushCapPercent: 60", "LatePushCommitBasePercent: 30", "LatePushCommitCapPercent: 85", "LatePushMapRefCells: 64" })
 				Assert.That(Count(yaml[..classic], "\n\t\t" + key + "\n"), Is.EqualTo(6), key);
 
 			// L's prior per personality: rush and guerrilla 85, tech and expansion 100, steamroller 110, turtle 120 (design 01 D1).
@@ -310,6 +311,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(Prior("steamroller"), Is.EqualTo(110));
 			Assert.That(Prior("turtle"), Is.EqualTo(120));
 			Assert.That(Count(yaml, "LatePushPersonalityPercent:"), Is.EqualTo(6));
+			Assert.That(yaml, Does.Not.Contain("LatePushAgeMinEnabled: true"), "default OFF until the A/B passes");
+			Assert.That(yaml, Does.Not.Contain("LatePushCommitEnabled: true"), "default OFF until the A/B passes");
 		}
 
 		[Test]

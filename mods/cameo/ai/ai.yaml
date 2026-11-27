@@ -4873,9 +4873,9 @@ Player:
 		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
 		GuardFloorEnabled: true
 		GuardFloorPercent: 20
-		# LATEPUSH-01 P1 (rows lp_age_min and lp_commit; design 01 D1 and D2): the leader's team bar is the WAVE-MIN bar x (1 + tick / LatePushAgeTicks) x map context x the learned multiplier L (prior below, per personality), capped at LatePushCapPercent of what the team can send; an order commits a growing share of the eligible army. lp_commit needs the guard floor above.
-		LatePushAgeMinEnabled: true
-		LatePushCommitEnabled: true
+		# LATEPUSH-01 P1 (rows lp_age_min and lp_commit; design 01 D1 and D2): the leader's team bar is the WAVE-MIN bar x (1 + tick / LatePushAgeTicks) x map context x the learned multiplier L (prior below, per personality), capped at LatePushCapPercent of what the team can send; an order commits a growing share of the eligible army. lp_commit needs the guard floor above. Both rows are OFF until their A/B passes (the A/B arm turns them on).
+		LatePushAgeMinEnabled: false
+		LatePushCommitEnabled: false
 		LatePushAgeTicks: 30000
 		LatePushCapPercent: 60
 		LatePushCommitBasePercent: 30
@@ -5063,9 +5063,9 @@ Player:
 		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
 		GuardFloorEnabled: true
 		GuardFloorPercent: 60
-		# LATEPUSH-01 P1 (rows lp_age_min and lp_commit; design 01 D1 and D2): the leader's team bar is the WAVE-MIN bar x (1 + tick / LatePushAgeTicks) x map context x the learned multiplier L (prior below, per personality), capped at LatePushCapPercent of what the team can send; an order commits a growing share of the eligible army. lp_commit needs the guard floor above.
-		LatePushAgeMinEnabled: true
-		LatePushCommitEnabled: true
+		# LATEPUSH-01 P1 (rows lp_age_min and lp_commit; design 01 D1 and D2): the leader's team bar is the WAVE-MIN bar x (1 + tick / LatePushAgeTicks) x map context x the learned multiplier L (prior below, per personality), capped at LatePushCapPercent of what the team can send; an order commits a growing share of the eligible army. lp_commit needs the guard floor above. Both rows are OFF until their A/B passes (the A/B arm turns them on).
+		LatePushAgeMinEnabled: false
+		LatePushCommitEnabled: false
 		LatePushAgeTicks: 30000
 		LatePushCapPercent: 60
 		LatePushCommitBasePercent: 30
@@ -5249,9 +5249,9 @@ Player:
 		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
 		GuardFloorEnabled: true
 		GuardFloorPercent: 40
-		# LATEPUSH-01 P1 (rows lp_age_min and lp_commit; design 01 D1 and D2): the leader's team bar is the WAVE-MIN bar x (1 + tick / LatePushAgeTicks) x map context x the learned multiplier L (prior below, per personality), capped at LatePushCapPercent of what the team can send; an order commits a growing share of the eligible army. lp_commit needs the guard floor above.
-		LatePushAgeMinEnabled: true
-		LatePushCommitEnabled: true
+		# LATEPUSH-01 P1 (rows lp_age_min and lp_commit; design 01 D1 and D2): the leader's team bar is the WAVE-MIN bar x (1 + tick / LatePushAgeTicks) x map context x the learned multiplier L (prior below, per personality), capped at LatePushCapPercent of what the team can send; an order commits a growing share of the eligible army. lp_commit needs the guard floor above. Both rows are OFF until their A/B passes (the A/B arm turns them on).
+		LatePushAgeMinEnabled: false
+		LatePushCommitEnabled: false
 		LatePushAgeTicks: 30000
 		LatePushCapPercent: 60
 		LatePushCommitBasePercent: 30
@@ -5437,9 +5437,9 @@ Player:
 		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
 		GuardFloorEnabled: true
 		GuardFloorPercent: 40
-		# LATEPUSH-01 P1 (rows lp_age_min and lp_commit; design 01 D1 and D2): the leader's team bar is the WAVE-MIN bar x (1 + tick / LatePushAgeTicks) x map context x the learned multiplier L (prior below, per personality), capped at LatePushCapPercent of what the team can send; an order commits a growing share of the eligible army. lp_commit needs the guard floor above.
-		LatePushAgeMinEnabled: true
-		LatePushCommitEnabled: true
+		# LATEPUSH-01 P1 (rows lp_age_min and lp_commit; design 01 D1 and D2): the leader's team bar is the WAVE-MIN bar x (1 + tick / LatePushAgeTicks) x map context x the learned multiplier L (prior below, per personality), capped at LatePushCapPercent of what the team can send; an order commits a growing share of the eligible army. lp_commit needs the guard floor above. Both rows are OFF until their A/B passes (the A/B arm turns them on).
+		LatePushAgeMinEnabled: false
+		LatePushCommitEnabled: false
 		LatePushAgeTicks: 30000
 		LatePushCapPercent: 60
 		LatePushCommitBasePercent: 30
@@ -5625,9 +5625,9 @@ Player:
 		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
 		GuardFloorEnabled: true
 		GuardFloorPercent: 20
-		# LATEPUSH-01 P1 (rows lp_age_min and lp_commit; design 01 D1 and D2): the leader's team bar is the WAVE-MIN bar x (1 + tick / LatePushAgeTicks) x map context x the learned multiplier L (prior below, per personality), capped at LatePushCapPercent of what the team can send; an order commits a growing share of the eligible army. lp_commit needs the guard floor above.
-		LatePushAgeMinEnabled: true
-		LatePushCommitEnabled: true
+		# LATEPUSH-01 P1 (rows lp_age_min and lp_commit; design 01 D1 and D2): the leader's team bar is the WAVE-MIN bar x (1 + tick / LatePushAgeTicks) x map context x the learned multiplier L (prior below, per personality), capped at LatePushCapPercent of what the team can send; an order commits a growing share of the eligible army. lp_commit needs the guard floor above. Both rows are OFF until their A/B passes (the A/B arm turns them on).
+		LatePushAgeMinEnabled: false
+		LatePushCommitEnabled: false
 		LatePushAgeTicks: 30000
 		LatePushCapPercent: 60
 		LatePushCommitBasePercent: 30
@@ -5810,9 +5810,9 @@ Player:
 		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
 		GuardFloorEnabled: true
 		GuardFloorPercent: 30
-		# LATEPUSH-01 P1 (rows lp_age_min and lp_commit; design 01 D1 and D2): the leader's team bar is the WAVE-MIN bar x (1 + tick / LatePushAgeTicks) x map context x the learned multiplier L (prior below, per personality), capped at LatePushCapPercent of what the team can send; an order commits a growing share of the eligible army. lp_commit needs the guard floor above.
-		LatePushAgeMinEnabled: true
-		LatePushCommitEnabled: true
+		# LATEPUSH-01 P1 (rows lp_age_min and lp_commit; design 01 D1 and D2): the leader's team bar is the WAVE-MIN bar x (1 + tick / LatePushAgeTicks) x map context x the learned multiplier L (prior below, per personality), capped at LatePushCapPercent of what the team can send; an order commits a growing share of the eligible army. lp_commit needs the guard floor above. Both rows are OFF until their A/B passes (the A/B arm turns them on).
+		LatePushAgeMinEnabled: false
+		LatePushCommitEnabled: false
 		LatePushAgeTicks: 30000
 		LatePushCapPercent: 60
 		LatePushCommitBasePercent: 30
