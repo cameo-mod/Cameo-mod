@@ -657,3 +657,17 @@ learnables:
         fitter: tools/ai/fit_learn_all.py
         switch: ref_learn
         state: wired_inert_without_provider
+    defence_ratio:
+        rank: 41
+        name: Defence ratio per personality (RATIO-2X factor, DEF-RATIO-PERS-01)
+        owner: BaseBuilderBotModuleCA.cs:BaseBuilderBotModuleCA; BotModuleLogic/DefenceRatioPersonality.cs:DefenceRatioPersonality
+        knob: defence.ratio
+        bounds: min=750,max=3000,safety_floor=750,unit=permille
+        feature_schema: S.mobile_army_value,S.static_defence_value,E.seen_threat,personality,map_features
+        credit_metric: defence_losses_per_army_value_residual
+        method: shrinkage_prior_regression
+        scope_keys: faction,personality,map_feature_vector
+        fitter: tools/ai/tune_defence_ratio.py (planned)
+        sample_floor: 150 effective games per personality
+        switch: DefRatioPersonality
+        state: planned

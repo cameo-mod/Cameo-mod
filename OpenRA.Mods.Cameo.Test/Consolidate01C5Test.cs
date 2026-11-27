@@ -248,14 +248,14 @@ namespace OpenRA.Mods.Cameo.Test
 			// CONSOLIDATE-03 P1 (a): the set size and the wanting test moved into the ONE early-defence test EarlyDefenceWanted (EarlyDefencePlan = AntiRushCA, unchanged).
 			Assert.That(s4, Does.Contain("if (!EarlyDefenceWanted())\n\t\t\t\tyield break;"));
 			Assert.That(s4, Does.Contain("EarlyDefencePlan.Count(botLimits != null ? botLimits.Info.ArmyShareTargetPermille : -1, b.AntiRushBaseMin, b.AntiRushBaseMax)"));
-			Assert.That(s4, Does.Contain("EarlyDefencePlan.Wanted(playerBuildings.Any(a => b.ProductionTypes.Contains(a.Info.Name)), have, count)"));
+			Assert.That(s4, Does.Contain("EarlyDefencePlan.Wanted(hasProduction, EarlyDefenceHave(), EarlyDefenceCount())"));
 			Assert.That(s4, Does.Contain("var bank = CashLedger.BuildingBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep);"), "CONSOLIDATE-03 P2 (a): the ledger bank = SweepBank");
 			Assert.That(s4, Does.Contain("baseBuilder.ProductionCost(queue, info) > bank"), "only a set member the bank pays now: the K bound is not spent on unaffordable types");
 			Assert.That(s4, Does.Contain("AntiRushCA.Order(candidates, AntiRushStageMaxCandidates)"));
 			Assert.That(d, Does.Contain("const int AntiRushStageMaxCandidates = 3;"));
 
 			Assert.That(s4, Does.Not.Contain("PickOrPower"), "no PickOrPower result to dereference (V07 NRE); A5 swaps the power plant and is null-safe");
-			Assert.That(s4, Does.Not.Contain("RatioGate"), "D1: RATIO-2X never vetoes the set");
+			Assert.That(s4, Does.Contain("!EarlyDefenceWaiverNow() && MobileStaticRatioCA.Holds(RatioGate(info, out _))"), "DEF-RATIO-PERS-01 / A4: RATIO-2X applies to the set only after the early-defence waiver ends");
 			Assert.That(s4, Does.Not.Contain("DefenceNeedHolds"), "no need gate");
 			Assert.That(s4, Does.Not.Contain("DefenceThreatSeen"), "no seen-threat rule");
 			Assert.That(s4, Does.Not.Contain("antiRushPickName"), "no exemption marker on the pipeline path");

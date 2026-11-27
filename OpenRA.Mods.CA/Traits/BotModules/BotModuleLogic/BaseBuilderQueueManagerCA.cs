@@ -2823,10 +2823,11 @@ namespace OpenRA.Mods.CA.Traits
 			var cost = ValuedCost(item);
 
 			// The owned/queued count is only needed when the ratio failed (a first copy matters only below the ratio).
+			var ratio = baseBuilder.DefRatioPermille(); // DEF-RATIO-PERS-01: this personality's factor (2000 unless the switch is on)
 			var verdict = MobileStaticRatioCA.Stage1(true, mobile, staticTotal, cost,
-				(!MobileStaticRatioCA.Admits(mobile, staticTotal, cost) && baseBuilder.StaticRatio.IsFirstCopy(item.Name, OwnedOrQueued(item))
+				(!MobileStaticRatioCA.Admits(mobile, staticTotal, cost, ratio) && baseBuilder.StaticRatio.IsFirstCopy(item.Name, OwnedOrQueued(item))
 				&& (!DefenceFirstCopyOn || DefenceThreatSeen()))
-				|| (antiRushPickName != null && item.Name == antiRushPickName)); // C-04: the first copy of a defence type is exempt only while a threat is seen; EARLY-DEF-01: the base set is exempt (still recorded below)
+				|| (antiRushPickName != null && item.Name == antiRushPickName && EarlyDefenceWaiverNow()), ratio); // C-04: the first copy of a defence type is exempt only while a threat is seen; EARLY-DEF-01: the base set is exempt (still recorded below)
 			if (verdict == RatioVerdict.NeedsFloat)
 				verdict = MobileStaticRatioCA.Float(IsFloating());
 

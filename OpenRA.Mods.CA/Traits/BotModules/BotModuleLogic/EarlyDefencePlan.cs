@@ -66,5 +66,17 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>Whether the set is wanted now: a production building stands and fewer ground defences than <paramref name="count"/> are owned or queued (AntiRushCA.Wants).</summary>
 		public static bool Wanted(bool hasProduction, int groundDefencesOwnedOrQueued, int count) => AntiRushCA.Wants(hasProduction, groundDefencesOwnedOrQueued, count);
+
+		/// <summary>
+		/// DEF-RATIO-PERS-01 with audit A4 (user 11-26 P07; Orchestrator 11-27): the ONE early-defence waiver. While it holds, an S4 start is exempt from RATIO-2X.
+		/// It ends when the early count is built (<paramref name="have"/> at or above <paramref name="count"/>) OR when <paramref name="waiverTicks"/> have passed since the
+		/// first production building stood (<paramref name="firstProductionTick"/>, -1 = none yet). The AF2 cap and the per-type limits are not part of the waiver.
+		/// </summary>
+		public static bool WaiverActive(int have, int count, int firstProductionTick, int now, int waiverTicks)
+		{
+			var countExhausted = have >= count;
+			var tickExhausted = firstProductionTick >= 0 && now - firstProductionTick >= Math.Max(0, waiverTicks);
+			return !(countExhausted || tickExhausted);
+		}
 	}
 }

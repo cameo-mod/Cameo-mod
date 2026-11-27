@@ -50,6 +50,9 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>The ratio: mobile >= Ratio x static. Fixed at every tier (ladder values: none).</summary>
 		public const int Ratio = 2;
 
+		/// <summary>The same ratio in permille (2000 = 2.0): the code default; a personality may set its own (DEF-RATIO-PERS-01).</summary>
+		public const int RatioPermille = 2000;
+
 		/// <summary>A recorded start counts toward S for this many ticks (order-latency cover and the same-sweep guard).</summary>
 		public const int RecordTicks = 3;
 
@@ -107,18 +110,28 @@ namespace OpenRA.Mods.CA.Traits
 		/// The ratio test: <c>mobile &gt;= 2 x (staticTotal + cost)</c>. Negative inputs clamp to 0. Saturating: a value too large to
 		/// multiply is never admitted (it cannot arise from real costs; the guard keeps the function total).
 		/// </summary>
-		public static bool Admits(long mobile, long staticTotal, long cost)
+		public static bool Admits(long mobile, long staticTotal, long cost) => Admits(mobile, staticTotal, cost, RatioPermille);
+
+		/// <summary>
+		/// DEF-RATIO-PERS-01: the same test at a per-personality ratio in permille (2000 = 2.0). A ratio of 0 or less imposes no requirement.
+		/// Saturating as above: a need too large to multiply is never admitted.
+		/// </summary>
+		public static bool Admits(long mobile, long staticTotal, long cost, int ratioPermille)
 		{
+			if (ratioPermille <= 0)
+				return true;
+
 			var need = Math.Max(0, staticTotal);
 			var add = Math.Max(0, cost);
 			if (need > long.MaxValue - add)
 				return false;
 
 			need += add;
-			if (need > long.MaxValue / Ratio)
+			if (need > long.MaxValue / ratioPermille)
 				return false;
 
-			return mobile >= Ratio * need;
+			var required = (long)ratioPermille * need;
+			return mobile > long.MaxValue / 1000 || mobile * 1000 >= required;
 		}
 
 		/// <summary>
@@ -148,12 +161,16 @@ namespace OpenRA.Mods.CA.Traits
 		/// exempt start is always a start BELOW the ratio); first copy of the type = ExemptFirst; otherwise NeedsFloat, and the caller
 		/// completes with <see cref="Float"/> only then (the float test is computed lazily).
 		/// </summary>
-		public static RatioVerdict Stage1(bool measured, long mobile, long staticTotal, long cost, bool firstCopyOfType)
+		public static RatioVerdict Stage1(bool measured, long mobile, long staticTotal, long cost, bool firstCopyOfType) =>
+			Stage1(measured, mobile, staticTotal, cost, firstCopyOfType, RatioPermille);
+
+		/// <summary>DEF-RATIO-PERS-01: <see cref="Stage1(bool, long, long, long, bool)"/> at a per-personality ratio in permille.</summary>
+		public static RatioVerdict Stage1(bool measured, long mobile, long staticTotal, long cost, bool firstCopyOfType, int ratioPermille)
 		{
 			if (!measured)
 				return RatioVerdict.Inert;
 
-			if (Admits(mobile, staticTotal, cost))
+			if (Admits(mobile, staticTotal, cost, ratioPermille))
 				return RatioVerdict.Admit;
 
 			return firstCopyOfType ? RatioVerdict.ExemptFirst : RatioVerdict.NeedsFloat;
@@ -163,9 +180,13 @@ namespace OpenRA.Mods.CA.Traits
 		public static RatioVerdict Float(bool floatNow) => floatNow ? RatioVerdict.ExemptFloat : RatioVerdict.Hold;
 
 		/// <summary>The whole decision for callers and tests that have every input at hand.</summary>
-		public static RatioVerdict Decide(bool measured, long mobile, long staticTotal, long cost, bool firstCopyOfType, bool isFloating)
+		public static RatioVerdict Decide(bool measured, long mobile, long staticTotal, long cost, bool firstCopyOfType, bool isFloating) =>
+			Decide(measured, mobile, staticTotal, cost, firstCopyOfType, isFloating, RatioPermille);
+
+		/// <summary>DEF-RATIO-PERS-01: <see cref="Decide(bool, long, long, long, bool, bool)"/> at a per-personality ratio in permille.</summary>
+		public static RatioVerdict Decide(bool measured, long mobile, long staticTotal, long cost, bool firstCopyOfType, bool isFloating, int ratioPermille)
 		{
-			var v = Stage1(measured, mobile, staticTotal, cost, firstCopyOfType);
+			var v = Stage1(measured, mobile, staticTotal, cost, firstCopyOfType, ratioPermille);
 			return v == RatioVerdict.NeedsFloat ? Float(isFloating) : v;
 		}
 

@@ -52,6 +52,10 @@ namespace OpenRA.Mods.CA.Traits
 				if (baseBuilder.TryGetBuildingLimit(info.Name, out var limit) && BaseBuilderQueueEvalCA.LimitReached(count, limit))
 					continue;
 
+				// DEF-RATIO-PERS-01 / audit A4: while the waiver holds the start is exempt from RATIO-2X; once it ends the ratio applies to S4 too.
+				if (!EarlyDefenceWaiverNow() && MobileStaticRatioCA.Holds(RatioGate(info, out _)))
+					continue;
+
 				candidates.Add((info.Name, ValuedCost(info), count));
 			}
 
@@ -67,18 +71,44 @@ namespace OpenRA.Mods.CA.Traits
 				return false;
 
 			var b = baseBuilder.Info;
+			var hasProduction = playerBuildings.Any(a => b.ProductionTypes.Contains(a.Info.Name));
+			if (hasProduction && baseBuilder.EarlyFirstProductionTick < 0)
+				baseBuilder.EarlyFirstProductionTick = world.WorldTick;
+
+			return EarlyDefencePlan.Wanted(hasProduction, EarlyDefenceHave(), EarlyDefenceCount());
+		}
+
+		// The ground defences owned (standing) or queued (in flight): the count the S4 test and the waiver both read.
+		int EarlyDefenceHave()
+		{
 			var have = playerBuildings.Count(a => IsGroundDefence(a.Info));
 			foreach (var kv in baseBuilder.BuildingsBeingProduced)
 				if (world.Map.Rules.Actors.TryGetValue(kv.Key, out var queued) && IsGroundDefence(queued))
 					have += kv.Value;
 
-			var count = EarlyDefencePlan.Count(botLimits != null ? botLimits.Info.ArmyShareTargetPermille : -1, b.AntiRushBaseMin, b.AntiRushBaseMax);
+			return have;
+		}
 
-			// P1 (b) early_def_learn: the prior x M(map) x L, clamped. The spawn path is measured in EARLY-DEF-LEARN-01 step 2 (path 0 = M neutral) and L is neutral until a
-			// learned snapshot exists, so today the row returns the prior.
+		// The early-defence count: the prior, times M(map) and L when early_def_learn is armed (neutral until a learned snapshot exists).
+		int EarlyDefenceCount()
+		{
+			var b = baseBuilder.Info;
+			var count = EarlyDefencePlan.Count(botLimits != null ? botLimits.Info.ArmyShareTargetPermille : -1, b.AntiRushBaseMin, b.AntiRushBaseMax);
 			if (baseBuilder.EarlyDefLearnArmed)
 				count = EarlyDefencePlan.LearnedCount(count, EarlyDefencePlan.MapMilli(0, b.EarlyDefReferencePathCells), EarlyDefencePlan.Neutral, b.EarlyDefCountMax);
-			return EarlyDefencePlan.Wanted(playerBuildings.Any(a => b.ProductionTypes.Contains(a.Info.Name)), have, count);
+
+			return count;
+		}
+
+		// DEF-RATIO-PERS-01 / audit A4: the early-defence waiver. S4 starts are RATIO-2X exempt while it holds; it ends when the early count is built or the
+		// waiver ticks have passed since the first production building stood (EarlyDefencePlan.WaiverActive).
+		bool EarlyDefenceWaiverNow()
+		{
+			if (playerBuildings == null)
+				return false;
+
+			return EarlyDefencePlan.WaiverActive(EarlyDefenceHave(), EarlyDefenceCount(), baseBuilder.EarlyFirstProductionTick,
+				world.WorldTick, baseBuilder.Info.EarlyDefWaiverTicks);
 		}
 
 		// S9 (R6): the armed defences of BuildingFractions that this queue can build, ordinal-sorted then shuffled with the synced bot random (lazily, one draw per entry
@@ -112,6 +142,9 @@ namespace OpenRA.Mods.CA.Traits
 						&& !baseBuilder.Info.ConstructionYardTypes.Contains(candidate.Name)
 						&& (baseBuilder.BuildAllListedArmed
 							|| (!baseBuilder.Info.RefineryTypes.Contains(candidate.Name) || (baseBuilder.CaptureUnlockArmed && captureUnlockOffered.Contains(candidate.Name)))); // CAPTURE-TECH-01: an unlock refinery
+				// DEF-RATIO-PERS-01 / audit A4: S4 is held by the AF2 defence cap throughout (the per-type limits are checked in its candidate filter); the RATIO-2X exemption is the waiver.
+				case BaseBuildStage.S4AntiRush:
+					return !PipelineDefenceCapHolds();
 				case BaseBuildStage.S8ProductionCycle:
 					return PipelineCycleAdmits(queue, candidate.Name);
 				case BaseBuildStage.S9ExtraDefence:

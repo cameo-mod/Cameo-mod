@@ -6142,6 +6142,9 @@ Player:
 		# CONSOLIDATE-03 P1 (b) (row early_def_learn, user 11-26): the anti-rush count = clamp(prior x M(map) x L, 0..4); neutral (= the prior) until EARLY_RUSH_STATS_01 sets the reference path and a learned snapshot exists.
 		EarlyDefLearn: true
 		EarlyDefCountMax: 4
+		# DEF-RATIO-PERS-01 / audit A4 (user 11-26 P07; Orchestrator 11-27): the early-defence waiver (S4 exempt from RATIO-2X) ends when the early count is built OR
+		# this many ticks after the first production building stands. Prior 3000 (the existing start-offset cap); the B3 timing prior is not located in the fleet docs.
+		EarlyDefWaiverTicks: 3000
 		# TEAM-DEFEND-02 (USER 11-24): tm_ally_turret_support: while an own or allied base is attacked every ready ground turret is placed at its max weapon range from the attackers; genericbot only.
 		TeamTurretSupport: true
 		# TURRET-NOHOLD-01 (row turret_no_hold, OFF until the A/B arms it): a READY ground turret is never held; no in-range support cell = the attacked building's legal cluster, then the own base; genericbot only.
@@ -6220,6 +6223,15 @@ Player:
 		# defence start; row army_first_02_ratio). Classic shares this instance but has no IBotMobileStaticValues provider
 		# (MasterAiBotModule is genericbot), so its gate is Inert and records nothing.
 		MobileStaticRatioEnabled: true
+		# DEF-RATIO-PERS-01 (rulebook amendment 3, user 11-27): RATIO-2X factor per personality, permille (2000 = 2.0). These are the priors; the learned
+		# defence.ratio replaces them once LA02 lands. Classic and every other personality stay at the code default 2000. Off = DefRatioPersonality false.
+		DefRatioPersonality: true
+		DefRatioRush: 2000
+		DefRatioGuerrilla: 1750
+		DefRatioSteamroller: 1500
+		DefRatioExpansion: 1500
+		DefRatioTech: 1250
+		DefRatioTurtle: 1000
 		InititalMinimumRefineryCount: 1
 		AdditionalMinimumRefineryCount: 2
 		RefineriesPerBase: 3

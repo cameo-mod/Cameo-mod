@@ -224,6 +224,30 @@ namespace OpenRA.Mods.CA.Traits
 			+ "unit queue saturated with Cash+Resources at the tier's bank-saturation bar. A held defence waits and is never cancelled. Off by default; the R2X_mobile_static_ratio increment switch turns it on.")]
 		public readonly bool MobileStaticRatioEnabled = false;
 
+		[Desc("DEF-RATIO-PERS-01 (rulebook amendment 3, user 11-27): the RATIO-2X factor per personality (learned later as defence.ratio; these are the priors). Off = 2000 for every personality.")]
+		public readonly bool DefRatioPersonality = false;
+
+		[Desc("DEF-RATIO-PERS-01: the rush personality's RATIO-2X factor in permille (2000 = 2.0). Code default 2000.")]
+		public readonly int DefRatioRush = 2000;
+
+		[Desc("DEF-RATIO-PERS-01: the guerrilla personality's RATIO-2X factor in permille. Code default 2000.")]
+		public readonly int DefRatioGuerrilla = 2000;
+
+		[Desc("DEF-RATIO-PERS-01: the steamroller personality's RATIO-2X factor in permille. Code default 2000.")]
+		public readonly int DefRatioSteamroller = 2000;
+
+		[Desc("DEF-RATIO-PERS-01: the expansion personality's RATIO-2X factor in permille. Code default 2000.")]
+		public readonly int DefRatioExpansion = 2000;
+
+		[Desc("DEF-RATIO-PERS-01: the tech personality's RATIO-2X factor in permille. Code default 2000.")]
+		public readonly int DefRatioTech = 2000;
+
+		[Desc("DEF-RATIO-PERS-01: the turtle personality's RATIO-2X factor in permille. Code default 2000.")]
+		public readonly int DefRatioTurtle = 2000;
+
+		[Desc("DEF-RATIO-PERS-01 / audit A4: the early-defence waiver ends this many ticks after the first production building stands (or when the early count is built). Prior 3000 (the existing MaxStartOffsetTicks); the B3 timing prior is not located in the fleet docs.")]
+		public readonly int EarlyDefWaiverTicks = 3000;
+
 		[Desc("PROD-BUSY-01 (USER P0): every building/defence producer of a category may start an item in the same sweep (the old rule: one",
 			"start per category per sweep, so a second construction yard waited). Cash gates are unchanged. Gated by SwitchCondition; row",
 			"pb_all_building_producers.")]
@@ -1154,6 +1178,29 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			return RefTier.PersonalityPct(RefTierPersonalityArmed, refTierPersonality?.CurrentPersonality, radarStanding, Info.RefTierExpansionPct, Info.RefTierRushPreRadarPct);
+		}
+
+		// DEF-RATIO-PERS-01: the RATIO-2X factor of this bot's personality, in permille. The yaml values are the priors; the learned defence.ratio replaces
+		// them once LA02 lands (hasLearned false until then). Switch off or ablated = 2000 for every personality.
+		AblationLatch ablateDefRatioPersonality;
+		IBotCurrentPersonality defRatioPersonality;
+		bool defRatioPersonalityResolved;
+
+		// DEF-RATIO-PERS-01 / audit A4: the world tick the first production building stood (-1 = none yet). The early-defence waiver's tick leg reads it.
+		public int EarlyFirstProductionTick = -1;
+
+		public int DefRatioPermille()
+		{
+			if (!defRatioPersonalityResolved)
+			{
+				defRatioPersonality = player.PlayerActor.TraitsImplementing<IBotCurrentPersonality>().FirstOrDefault();
+				defRatioPersonalityResolved = true;
+			}
+
+			var armed = Info.DefRatioPersonality && !ablateDefRatioPersonality.Off(player, AblationIds.DefRatioPersonality);
+			var prior = DefenceRatioPersonality.PriorFor(defRatioPersonality?.CurrentPersonality,
+				Info.DefRatioRush, Info.DefRatioGuerrilla, Info.DefRatioSteamroller, Info.DefRatioExpansion, Info.DefRatioTech, Info.DefRatioTurtle);
+			return DefenceRatioPersonality.Resolve(armed, prior, false, 0);
 		}
 
 		public int RefTierTarget
