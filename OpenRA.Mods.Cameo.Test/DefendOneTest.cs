@@ -89,7 +89,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var yaml = RepoFile("mods/cameo/ai/ai.yaml");
 			var classic = yaml.IndexOf("SquadManagerBotModuleCA@classic:", StringComparison.Ordinal);
 			Assert.That(classic, Is.GreaterThan(0));
-			Assert.That(Count(yaml[..classic], "\n\t\tDefendOneEnabled: true\n"), Is.EqualTo(6), "the six blocks that carry both ally-defend switches");
+			Assert.That(Count(yaml[..classic], "\n\t\tDefendOneEnabled: false\n"), Is.EqualTo(6), "the six blocks that carry both ally-defend switches: disarmed, the TEAM-DEFEND-02 two-tier defence supersedes it (Opus 11-27, ablation A1)");
 			Assert.That(yaml[classic..], Does.Not.Contain("DefendOneEnabled"), "classic untouched");
 			Assert.That(Count(yaml, "DefendOneEnabled:"), Is.EqualTo(6));
 		}
