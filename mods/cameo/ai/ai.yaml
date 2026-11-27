@@ -914,8 +914,10 @@ Player:
 		RequiresCondition: !noobbot && !easiestbot && !veryeasybot && !easybot && !mediumbot && !hardbot
 	PowerDownBotModule:
 		RequiresCondition: genericbot || classicbot
+	SupportPowerSliceBotModule:
+		RequiresCondition: genericbot
 	SupportPowerBotASModule:
-		RequiresCondition: genericbot || classicbot
+		RequiresCondition: (genericbot || classicbot) && !sp-slice
 		Decisions:
 			AirstrikePower@mininuke:
 				OrderName: Parachuted Mininuke
@@ -3767,7 +3769,7 @@ Player:
 					TargetMetric: Value
 					CheckRadius: 7c0
 	SupportPowerBotASModule@wc2:
-		RequiresCondition: genericbot
+		RequiresCondition: genericbot && !sp-slice
 		Decisions:
 			wc2_holyvision:
 				OrderName: wc2_holyvision
