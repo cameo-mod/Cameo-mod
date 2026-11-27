@@ -255,6 +255,25 @@ class LearnabilityRegistryTests(unittest.TestCase):
                         )
                     elif node.key not in {"LedgerHash", "Schema"}:
                         self.fail(f"unrecognized engagement-prior field {node.key}")
+            elif schema == "fight_learning_v1":
+                root = next(node for node in file_nodes if node.key == "BotFightLearning")
+                for node in root.children:
+                    if node.key == "Schema":
+                        assert_values_in_bounds(self, [node.value], bounds["schema_version"], node.key)
+                    elif node.key in {"CalibrationMinimumSamples", "ThresholdMinimumSamples"}:
+                        assert_values_in_bounds(self, [node.value], bounds["minimum_samples"], node.key)
+                    elif node.key.startswith("Evidence@"):
+                        assert_values_in_bounds(self, [node.value], bounds["evidence_count"], node.key)
+                    elif node.key.startswith("CalibrationMilli@"):
+                        assert_values_in_bounds(self, [node.value], bounds["calibration_milli"], node.key)
+                    elif node.key.startswith("EffectiveValueMilli@"):
+                        assert_values_in_bounds(self, [node.value], bounds["effective_value_milli"], node.key)
+                    elif node.key.startswith("RetreatMultPct@"):
+                        assert_values_in_bounds(self, [node.value], bounds["retreat_mult_pct"], node.key)
+                    elif node.key.startswith("EngageMarginPct@"):
+                        assert_values_in_bounds(self, [node.value], bounds["engage_margin_pct"], node.key)
+                    else:
+                        self.fail(f"unrecognized fight-learning field {node.key}")
             else:
                 self.fail(f"unknown artifact schema {schema}")
 
