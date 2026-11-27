@@ -49,7 +49,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(FirstCopyDue.Step(100, 160, false), Is.EqualTo(0), "a dead economy credits nothing");
 			Assert.That(FirstCopyDue.Step(-1, 160, true), Is.EqualTo(0), "a new clock starts at its first sighting");
 			Assert.That(FirstCopyDue.Step(160, 160, true), Is.EqualTo(0), "a re-roll on the same tick adds nothing");
-			Assert.That(FirstCopyDue.Step(0, 100000, true), Is.EqualTo(FirstCopyDue.MaxStepTicks), "a gap while the type was held out by a hard gate is not credited");
+			Assert.That(FirstCopyDue.Step(0, 100000, true), Is.EqualTo(FirstCopyDue.MaxStepTicks), "a gap in which the bot was not visited at all is not credited; a hard gate does not pause the clock (user D3: only no cash AND no income does)");
 		}
 
 		[Test]

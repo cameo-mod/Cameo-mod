@@ -22,7 +22,11 @@ namespace OpenRA.Mods.CA.Traits
 	/// </summary>
 	public static class FirstCopyDue
 	{
-		/// <summary>One visit that advances a clock is credited at most this many ticks: a type that was not eligible between two visits (a hard gate held it out) is not credited for the gap.</summary>
+		/// <summary>
+		/// One advance credits at most this many ticks. The clock is WALL time since the type was first seen buildable (user D3: it pauses only with no cash and no income; a hard gate such as a limit,
+		/// a delay or a lost prerequisite does not pause it, the same wall time the old first-copy boost uses). The sweep samples every bot visit, so the cap only bounds a gap in which the bot
+		/// was not visited at all (for example its module was switched off), and that gap is not credited.
+		/// </summary>
 		public const int MaxStepTicks = 250;
 
 		/// <summary>The clock moves while the player has any cash (bank above the learned floor) or any income. Both missing = the economy is dead and the deadline waits.</summary>

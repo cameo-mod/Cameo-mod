@@ -25,6 +25,8 @@ namespace OpenRA.Mods.CA.Traits
 		// A never-ordered type is tracked from its first sighting in a roll pool (its clock starts then). The clocks of every tracked type are then advanced by a SWEEP: from every bot visit
 		// (at most every FirstCopySweepTicks, so the gap between samples stays far below FirstCopyDue.MaxStepTicks even while a queue is busy and the roll does not run) and at every roll. A sweep credits each
 		// tracked, still never-ordered type the time since its last advance (capped by MaxStepTicks), unless the economy is dead; a type that has been ordered is dropped.
+		// The clock is WALL time since the first sighting (user D3: it pauses only with no cash AND no income). A type that a hard gate (limit, delay, power-down, lost prerequisite) holds out of
+		// the pool keeps its clock running, so on re-entry it is due at once: the same wall time the old first-copy boost uses, and the forced pick still goes through every normal gate.
 		const int FirstCopySweepTicks = 25;
 		int rollDueSweepTick = -1;
 		readonly List<string> rollDueNames = [];
