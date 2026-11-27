@@ -613,7 +613,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotEnemyAirIntelProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory, IBotPersonalityLeadProvider, IBotUtilityAxes, IBotDirector, IBotTeamMember, IBotCoalition, IBotStalemateUrgencyProvider, IBotMobileStaticValues, IBotAheadFactsProvider
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotEnemyAirIntelProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotObservedEnemyProvider, IBotSiegeFailureMemory, IBotPersonalityLeadProvider, IBotUtilityAxes, IBotDirector, IBotTeamMember, IBotCoalition, IBotStalemateUrgencyProvider, IBotMobileStaticValues, IBotAheadFactsProvider
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
@@ -964,6 +964,41 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					var value = seen.Value > 0 ? seen.Value : seen.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
 
 					yield return new BotRememberedDefence(seen.Location, value, (maxRange + 1023) / 1024, seen.LastSeenTick, enemy, seen.Info);
+				}
+			}
+		}
+
+		// RAID-HARV-01 design 02 R1: the enemy economy as this bot has OBSERVED it, for the squad manager's harvester raid (the assemblies stay apart, so a read-only seam like the defences above). Harvesters are visible-only sightings
+		// (the table records a unit only while the viewer can see it) with their last cell and tick; a refinery counts only from a valid frozen snapshot that is neither Hidden nor Shrouded (the skip is applied here on every read, whatever the
+		// master module's SkipHiddenShroudedFrozen switch says), or while the building itself is in view. Empty when nothing was observed, never a claim that no economy exists.
+		IEnumerable<BotObservedEnemy> IBotObservedEnemyProvider.ObservedEnemyEconomy()
+		{
+			if (IsTraitDisabled || fogMemory == null)
+				yield break;
+
+			var layer = player.FrozenActorLayer;
+			foreach (var enemy in player.World.Players)
+			{
+				if (enemy == player || enemy.NonCombatant || player.RelationshipWith(enemy) != PlayerRelationship.Enemy)
+					continue;
+
+				foreach (var seen in fogMemory.Remembered(enemy))
+				{
+					if (seen.Harvester && !seen.Building)
+					{
+						yield return new BotObservedEnemy(seen.ActorID, seen.Location, seen.LastSeenTick, true, false, enemy);
+						continue;
+					}
+
+					if (!seen.Refinery || !seen.Building)
+						continue;
+
+					var frozen = layer?.FromID(seen.ActorID);
+					var snapshotValid = frozen != null && frozen.IsValid && !BotFogMemory.FrozenUnrememberable(frozen.Hidden, frozen.Shrouded, true);
+					var live = player.World.GetActorById(seen.ActorID);
+					var inView = live != null && live.IsInWorld && live.CanBeViewedByPlayer(player) && !live.IsDead;
+					if (snapshotValid || inView)
+						yield return new BotObservedEnemy(seen.ActorID, seen.Location, seen.LastSeenTick, false, true, enemy);
 				}
 			}
 		}

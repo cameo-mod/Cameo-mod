@@ -967,6 +967,22 @@ namespace OpenRA.Mods.CA.Traits
 		public WPos LastTarget;
 		public int LastTargetTick = -1;
 
+		// RAID-HARV-01 P2 (delta 02 section 3): what each seat published as route-ready for ONE target (the latest per seat), and the one open proposal. The leader alone turns a proposal into the joint assignment (HarassTargetId/HarassTick);
+		// no member writes it. Nothing here holds an actor reference that anyone dereferences without its own visibility check.
+		readonly Dictionary<int, OpenRA.Mods.CA.Traits.BotModules.Squads.RaidContribution> raidRoutes = new();
+
+		/// <summary>The open raid proposal (null = none); a newer proposal replaces it only when the old one is stale or from the same proposer.</summary>
+		public OpenRA.Mods.CA.Traits.BotModules.Squads.RaidProposal? RaidProposal;
+
+		/// <summary>A seat publishes its route-ready offer for one target (replacing its previous one).</summary>
+		public void PublishRaidRoute(OpenRA.Mods.CA.Traits.BotModules.Squads.RaidContribution contribution) => raidRoutes[contribution.SeatKey] = contribution;
+
+		/// <summary>A seat retracts its offer (route lost, gate failed, value changed, raid released).</summary>
+		public void RetractRaidRoute(int seatKey) => raidRoutes.Remove(seatKey);
+
+		/// <summary>The published offers (a copy, so the caller may iterate while seats publish).</summary>
+		public List<OpenRA.Mods.CA.Traits.BotModules.Squads.RaidContribution> RaidRoutes() => new(raidRoutes.Values);
+
 		int aheadRatioPercent = 100;
 		int aheadRatioTick = -1;
 

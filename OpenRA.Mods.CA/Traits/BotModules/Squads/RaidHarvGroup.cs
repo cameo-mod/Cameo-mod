@@ -32,6 +32,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 	public readonly record struct RaidContribution(int SeatKey, uint TargetId, int Value, int Units, int EtaTicks, int Tick);
 
 	/// <summary>
+	/// A seat's proposal of a raid target to the team leader (delta 02 section 3). It carries the target's id as a name to compare and the PROPOSER's last observation (cell and tick) as a hint, never a reference the leader dereferences: the
+	/// leader approves by comparing the routed value for that id with the requirement, and every member resolves the actor through its own visibility check before it reads anything of it.
+	/// </summary>
+	public readonly record struct RaidProposal(int ProposerSeat, uint TargetId, int Req, CPos LastSeenCell, int LastSeenTick, int Tick);
+
+	/// <summary>
 	/// RAID-HARV-01 delta 02 section 3 (design 02 R3): the fail-closed allied branch and the routed, committed group value. With an active ally the ONLY launches are a valid team-leader joint assignment (Join) or a proposal the leader may
 	/// approve (Propose); Solo exists only without active allies. The sufficiency measure is the ROUTED value of the fresh contributions for THIS target, not the fresh total raid value of the seats.
 	/// </summary>
@@ -86,6 +92,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			return assignmentApproved ? RaidLaunch.Join : RaidLaunch.Propose;
 		}
+
+		/// <summary>A proposal is fresh when it exists, is not from the future and is at most <paramref name="maxAgeTicks"/> old.</summary>
+		public static bool ProposalFresh(RaidProposal? proposal, int now, int maxAgeTicks) => proposal is { } p && p.Tick <= now && now - p.Tick <= maxAgeTicks;
 
 		/// <summary>The team leader's approval of a proposal (Propose to Join): a fresh proposal whose routed value reaches the requirement. Only the leader writes the assignment; a member never does.</summary>
 		public static bool LeaderApproves(bool isLeader, bool proposalFresh, long routedValue, int req) => isLeader && proposalFresh && req > 0 && routedValue >= req;
