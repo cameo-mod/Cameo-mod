@@ -28,6 +28,45 @@ from miniyaml import Ruleset  # noqa: E402
 ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
 OUT = ROOT / "mods" / "cameo" / "ai" / "fransbot_lists.yaml"
 
+# FRANS-PRUNE-01: only the LIVE (module, field) pairs are emitted. This is the trim committed in 5bf65aea4
+# (43-line LIVE file). Every field a live Fransbot Info class reads is in this set; the pin test
+# FransGroundCommanderParityTest.EveryLiveReaderKeyIsEmitted proves it. Dormant fields are dropped, not emitted.
+LIVE_FIELDS = {
+    ("FransCombatIntelBotModule", "StaticGroundDefenseTypes"),
+    ("FransCommanderCoreBotModule", "ReconActorOpportunityCostPercent"),
+    ("FransEconomicSaturationBotModule", "BuildingQueueCategories"),
+    ("FransEconomicSaturationBotModule", "ProductionQueueCategories"),
+    ("FransGeneralBotModule", "AirTypes"),
+    ("FransGeneralBotModule", "ExcludedGroundTypes"),
+    ("FransGeneralBotModule", "NavalTypes"),
+    ("FransGeneralBotModule", "CommandTargetTypes"),
+    ("FransGeneralBotModule", "EconomyTargetTypes"),
+    ("FransGeneralBotModule", "ProductionTargetTypes"),
+    ("FransGeneralBotModule", "RaidEligibleMobileTargetTypes"),
+    ("FransGeneralBotModule", "SecureAlliedClaimStructureTypes"),
+    ("FransGeneralBotModule", "SuperweaponTargetTypes"),
+    ("FransGeneralBotModule", "SupportAssetTypes"),
+    ("FransGeneralBotModule", "TechTargetTypes"),
+    ("FransGeneralBotModule", "TransportLossActorTypes"),
+    ("FransMineClusterBotModule", "ResourceCreatorTypes"),
+    ("FransRiskModelBotModule", "AircraftSoftAntiAirThreatTypes"),
+    ("FransStrategicMapBotModule", "BeachTerrainTypes"),
+    ("FransStrategicMapBotModule", "EnemyConstructionTypes"),
+    ("FransStrategicMapBotModule", "EnemyDefenseTypes"),
+    ("FransStrategicMapBotModule", "EnemyEconomyTypes"),
+    ("FransStrategicMapBotModule", "EnemyProductionTypes"),
+    ("FransStrategicMapBotModule", "EnemyStrategicTypes"),
+    ("FransStrategicMapBotModule", "HelicopterProductionTypes"),
+    ("FransStrategicMapBotModule", "InfantryProductionTypes"),
+    ("FransStrategicMapBotModule", "NavalProductionTypes"),
+    ("FransStrategicMapBotModule", "PlaneProductionTypes"),
+    ("FransStrategicMapBotModule", "PrimaryBaseTypes"),
+    ("FransStrategicMapBotModule", "RefineryTypes"),
+    ("FransStrategicMapBotModule", "ResourceCreatorTypes"),
+    ("FransStrategicMapBotModule", "StrategicObjectiveTypes"),
+    ("FransStrategicMapBotModule", "VehicleProductionTypes"),
+}
+
 NAVAL_LOCOMOTORS = {"naval", "lcraft", "amphibius", "swimsuit"}
 LAND_LOCOMOTORS = {"foot", "tracked", "wheeled", "heavytracked", "heavywheeled",
                    "lighttracked", "chem", "subterranean"}
@@ -145,6 +184,7 @@ class Ctx:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true", help="verify the file matches a fresh generate")
+    ap.add_argument("--stdout", action="store_true", help="print the fresh generate to stdout; write nothing (used by the audit)")
     args = ap.parse_args()
 
     rs = Ruleset(str(ROOT))
@@ -464,24 +504,12 @@ def main():
     put("FransGeneralBotModule", "ProductionTargetTypes", is_producer)
     put("FransGeneralBotModule", "TechTargetTypes", is_tech)
 
-    # Ground commanders run as parallel bid capacities: each BidderKey owns one
-    # committed mission, so fransbot.yaml wires six named instances
-    # (@ground1..@ground6) mirroring upstream's @ground1-10 personalities file.
-    # Every instance needs the same list fields — emit them per instance name.
-    GROUND_COMMANDER_INSTANCES = [f"FransGroundCommanderBotModule@ground{i}"
-                                  for i in range(1, 7)]
-    for ground_module in GROUND_COMMANDER_INSTANCES:
-        put(ground_module, "StandbyTrafficStructureTypes",
-            is_refinery | is_producer)
-        put(ground_module, "ExcludedGroundTypes",
-            is_harvester | is_mcv | is_ground_transport)
-        put(ground_module, "RaidExcludedInfantryTypes", is_capture | is_engineer)
-        put(ground_module, "ReconEligibleGroundTypes", is_cheap_fast_ground)
-        put(ground_module, "RaidEligibleMobileTargetTypes", is_combat_ground)
-        put(ground_module, "RaidStaticDefenseBreakerTypes", is_artillery)
-        put(ground_module, "RaidStaticDefenseAlwaysAllowedTypes", set())
-        put(ground_module, "NavalTypes", is_naval)
-        put(ground_module, "AirTypes", is_air)
+    # FRANS-PRUNE-01 delta: the Ground Commander (@ground1..@ground6) is removed. Its only live-classification lists (the ground-combat
+    # classification the General now answers) are emitted on FransGeneralBotModule; the other per-instance Ground Commander fields
+    # have no module left to receive them.
+    put("FransGeneralBotModule", "ExcludedGroundTypes", is_harvester | is_mcv | is_ground_transport)
+    put("FransGeneralBotModule", "NavalTypes", is_naval)
+    put("FransGeneralBotModule", "AirTypes", is_air)
 
     put("FransGroundTransferBotModule", "LandingCraftTypes", is_landing_craft)
     put("FransGroundTransferBotModule", "SourceBaseAnchorTypes", is_conyard)
@@ -561,6 +589,11 @@ def main():
     put("FransUnitBuilderBotModule", "GroundVehicleArtilleryTypes", is_artillery)
     put("FransUnitBuilderBotModule", "IntelGatedMinelayerTypes", is_minelayer)
 
+    # FRANS-PRUNE-01: emit LIVE pairs only; a module with no live field is dropped entirely.
+    F = {mod: {fname: vals for fname, vals in fields.items() if (mod, fname) in LIVE_FIELDS}
+         for mod, fields in F.items()}
+    F = {mod: fields for mod, fields in F.items() if fields}
+
     # miniyaml csv sets parse as one comma-separated value under the field key.
     lines = ["# GENERATED by tools/ai/gen_fransbot_lists.py — do not hand-edit.",
              "# Union actor-id lists derived from traits across the resolved ruleset;",
@@ -582,6 +615,11 @@ def main():
             else:
                 lines.append(f"\t\t{fname}: " + ", ".join(vals) if vals else f"\t\t{fname}:")
     text = "\n".join(lines) + "\n"
+
+    if args.stdout:
+        # Raw LF bytes: text-mode stdout would turn \n into CRLF on Windows and make the digest platform-dependent.
+        sys.stdout.buffer.write(text.encode("utf8"))
+        return 0
 
     if args.check:
         existing = OUT.read_text(encoding="utf8") if OUT.exists() else ""
