@@ -687,8 +687,8 @@ namespace OpenRA.Mods.Cameo.Test
 
 			Assert.That(Count(yaml, "RaidHarvEnabled: true"), Is.EqualTo(0), "no row ships true until the A/B passes");
 
-			// P1 wires nothing: the existing target pick, the harass cap and the team lead do not mention the raid yet (P2 replaces this pin with the single call site and the publish).
-			foreach (var file in new[] { "SquadManagerBotModuleCA.TargetPick.cs", "SquadManagerBotModuleCA.HarassCap.cs", "SquadManagerBotModuleCA.TeamLead.cs", "SquadManagerBotModuleCA.cs", "SquadManagerBotModuleCA.EnemyScan.cs" })
+			// The raid never touches the harass cap, the main squad-manager file or the enemy scan (the call sites of P2b are in the target pick, the two idle states and the leader's check, pinned in RaidHarvP2bTest).
+			foreach (var file in new[] { "SquadManagerBotModuleCA.HarassCap.cs", "SquadManagerBotModuleCA.cs", "SquadManagerBotModuleCA.EnemyScan.cs" })
 				Assert.That(RepoFile(Bots + file), Does.Not.Contain("RaidHarv"), file);
 		}
 	}

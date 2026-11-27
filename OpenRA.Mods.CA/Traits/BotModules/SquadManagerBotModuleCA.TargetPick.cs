@@ -119,6 +119,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (shared == null)
 				return false;
 
+			// RAID-HARV-01: a shared harvester is the raid's to launch (package, explored route, risk gate); it never gets the old direct order. Row off: the line below this one is the old path.
+			if (RaidHarvOn && RaidIsHarvester(shared))
+				return TryRaidHarvPick(squad, true);
+
 			squad.TargetActor = shared;
 			return true;
 		}
@@ -147,6 +151,10 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool TargetHighValueFor(SquadCA squad, WPos from, int risk)
 		{
+			// RAID-HARV-01: the harvester raid first (row raid_harv); false = the old high-value path below, unchanged (row off: never entered).
+			if (RaidHarvOn && TryRaidHarvPick(squad, false))
+				return true;
+
 			var target = risk >= 0 ? FindHighValueTarget(from, risk) : FindHighValueTarget(from);
 			if (target == null)
 				return false;

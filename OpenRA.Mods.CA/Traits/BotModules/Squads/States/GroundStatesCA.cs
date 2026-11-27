@@ -159,6 +159,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (!owner.IsTargetValid && !FindNewTarget(owner, true, riskCheck: true))
 				return;
 
+			// RAID-HARV-01: the pick put this squad on a harvester raid (its state changed); nothing more to launch from here.
+			if (owner.SquadManager.RaidHarvLaunched(owner))
+				return;
+
 			if (owner.SquadManager.unitCannotBeOrdered(leader))
 				leader = GetPathfindLeader(owner, owner.SquadManager.Info.SuggestedGroundLeaderLocomotor).Actor;
 
@@ -1733,6 +1737,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// High-value targets first (harvester lines, expansions), through the
 			// 6c risk gate — a harasser raid still should not suicide.
 			if (!owner.IsTargetValid && !FindNewTarget(owner, highValueCheck: true, riskCheck: true))
+				return;
+
+			// RAID-HARV-01: the pick put this squad on a harvester raid (its state changed); nothing more to launch from here.
+			if (owner.SquadManager.RaidHarvLaunched(owner))
 				return;
 
 			owner.SquadManager.LaunchSourceRecord(owner, "L14", owner.Type.ToString(), owner.Units.Count);

@@ -487,6 +487,9 @@ namespace OpenRA.Mods.CA.Traits
 			// needed); every member forms its wave for an open order right away instead of waiting for its own attack-force timer.
 			if (teamLeadIsLeader)
 			{
+				// RAID-HARV-01: the leader approves a seat's proposed harvester raid once the routed values reach its requirement (row off: returns at once).
+				RaidLeaderPass(team, now);
+
 				if (TeamLeadFinishWeakestOn)
 					TeamLeadFocusTarget(AggTeamHomePos(), now, out _, out _);
 				if (TeamLeadCadenceOn)
@@ -1348,7 +1351,8 @@ namespace OpenRA.Mods.CA.Traits
 				var shared = World.GetActorById(team.HarassTargetId);
 				if (shared != null && !shared.IsDead && shared.IsInWorld)
 				{
-					if (IsPreferredObservedEnemyUnit(shared))
+					// RAID-HARV-01: a shared harvester is not handed out as a direct target; the raid's pick launches it (row off: the first condition is false and this is the old line).
+					if (IsPreferredObservedEnemyUnit(shared) && !(RaidHarvOn && RaidIsHarvester(shared)))
 						s.TargetActor = shared;
 					return;
 				}

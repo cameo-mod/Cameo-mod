@@ -112,6 +112,20 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			return order;
 		}
 
+		/// <summary>The octant (0 to 7, east = 0, clockwise on the map) of an offset from a centre, integer only: the lost-target recon keeps one probe cell per octant of its ring. The opposite offset is four octants away.</summary>
+		public static int Octant(int dx, int dy)
+		{
+			var ax = Math.Abs(dx);
+			var ay = Math.Abs(dy);
+			if (ay * 2 <= ax)
+				return dx > 0 ? 0 : 4;
+
+			if (ax * 2 <= ay)
+				return dy > 0 ? 2 : 6;
+
+			return dx > 0 ? (dy > 0 ? 1 : 7) : (dy > 0 ? 3 : 5);
+		}
+
 		/// <summary>The cell nearest to <paramref name="target"/> by squared distance (ties by X, then Y).</summary>
 		public static CPos? NearestToTarget(IEnumerable<CPos> cells, CPos target)
 		{

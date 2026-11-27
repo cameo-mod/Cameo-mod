@@ -204,8 +204,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(text, Does.Contain("public partial class SquadManagerBotModuleCA : IBotScoutInterestProvider"));
 			Assert.That(text, Does.Contain("IReadOnlyList<CPos> IBotScoutInterestProvider.ScoutInterestCells"));
 
-			// P2a has no call sites: the existing launch, pick and team-lead files still do not mention the raid (P2b adds the hooks and replaces this pin).
-			foreach (var file in new[] { "SquadManagerBotModuleCA.TargetPick.cs", "SquadManagerBotModuleCA.HarassCap.cs", "SquadManagerBotModuleCA.TeamLead.cs", "SquadManagerBotModuleCA.cs", "SquadManagerBotModuleCA.EnemyScan.cs" })
+			// The harass cap, the main file and the enemy scan stay free of the raid (the call sites are pinned in RaidHarvP2bTest).
+			foreach (var file in new[] { "SquadManagerBotModuleCA.HarassCap.cs", "SquadManagerBotModuleCA.cs", "SquadManagerBotModuleCA.EnemyScan.cs" })
 				Assert.That(RepoFile(Bots + file), Does.Not.Contain("RaidHarv"), file);
 		}
 	}
