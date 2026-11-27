@@ -15,7 +15,7 @@ using OpenRA.Mods.CA.Traits;
 namespace OpenRA.Mods.Cameo.Test
 {
 	// DEF-RATIO-PERS-01 (rulebook amendment 3, user 11-27) and audit A4 (the early-defence waiver): the per-personality RATIO-2X factor, its off row,
-	// the clamp, and the waiver boundaries. Pure state, no world.
+	// the clamp, and the waiver boundaries (rulebook line 50: the ratio starts only after BOTH legs expire). Pure state, no world.
 	[TestFixture]
 	public class DefenceRatioPersonalityTest
 	{
@@ -83,35 +83,48 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void TheWaiverHoldsWhileBothLegsAreOpen()
+		public void TheWaiverHoldsWhileEitherLegIsOpen()
 		{
-			Assert.That(EarlyDefencePlan.WaiverActive(have: 1, count: 3, firstProductionTick: 100, now: 100 + 2999, waiverTicks: 3000), Is.True);
+			// Rulebook line 50 (approved): the ratio starts only after BOTH waivers expire.
+			Assert.That(EarlyDefencePlan.WaiverActive(have: 1, count: 3, firstProductionTick: 100, now: 100 + 2999, waiverTicks: 3000), Is.True, "both legs open");
+			Assert.That(EarlyDefencePlan.WaiverActive(have: 3, count: 3, firstProductionTick: 100, now: 100 + 2999, waiverTicks: 3000), Is.True, "tick leg open alone");
+			Assert.That(EarlyDefencePlan.WaiverActive(have: 1, count: 3, firstProductionTick: 100, now: 100 + 3000, waiverTicks: 3000), Is.True, "count leg open alone");
 		}
 
 		[Test]
-		public void TheWaiverEndsWhenTheEarlyCountIsBuilt()
+		public void TheWaiverEndsOnlyWhenBothLegsAreExhausted()
 		{
-			Assert.That(EarlyDefencePlan.WaiverActive(have: 2, count: 2, firstProductionTick: 100, now: 150, waiverTicks: 3000), Is.False, "have equals count");
-			Assert.That(EarlyDefencePlan.WaiverActive(have: 1, count: 2, firstProductionTick: 100, now: 150, waiverTicks: 3000), Is.True, "one short");
+			Assert.That(EarlyDefencePlan.WaiverActive(have: 2, count: 2, firstProductionTick: 100, now: 150, waiverTicks: 3000), Is.True, "count met, tick still open");
+			Assert.That(EarlyDefencePlan.WaiverActive(have: 2, count: 2, firstProductionTick: 100, now: 100 + 3000, waiverTicks: 3000), Is.False, "both exhausted at the tick boundary");
+			Assert.That(EarlyDefencePlan.WaiverActive(have: 2, count: 2, firstProductionTick: 100, now: 100 + 3500, waiverTicks: 3000), Is.False, "both exhausted, later");
 		}
 
 		[Test]
-		public void TheWaiverEndsOnTheTickBoundary()
+		public void TheCountBoundaryIsExactlyTheLearnedCount()
 		{
-			Assert.That(EarlyDefencePlan.WaiverActive(have: 0, count: 3, firstProductionTick: 100, now: 100 + 3000, waiverTicks: 3000), Is.False, "exactly the waiver ticks");
-			Assert.That(EarlyDefencePlan.WaiverActive(have: 0, count: 3, firstProductionTick: 100, now: 100 + 2999, waiverTicks: 3000), Is.True, "one tick short");
+			Assert.That(EarlyDefencePlan.WaiverActive(have: 2, count: 3, firstProductionTick: 100, now: 100 + 3000, waiverTicks: 3000), Is.True, "one short, tick closed");
+			Assert.That(EarlyDefencePlan.WaiverActive(have: 3, count: 3, firstProductionTick: 100, now: 100 + 3000, waiverTicks: 3000), Is.False, "exactly the count, tick closed");
+		}
+
+		[Test]
+		public void TheTickBoundaryIsExactlyTheWaiverTicks()
+		{
+			Assert.That(EarlyDefencePlan.WaiverActive(have: 3, count: 3, firstProductionTick: 100, now: 100 + 3000, waiverTicks: 3000), Is.False, "exactly the waiver ticks");
+			Assert.That(EarlyDefencePlan.WaiverActive(have: 3, count: 3, firstProductionTick: 100, now: 100 + 2999, waiverTicks: 3000), Is.True, "one tick short");
 		}
 
 		[Test]
 		public void WithNoProductionStandingThereIsNoTickLeg()
 		{
-			Assert.That(EarlyDefencePlan.WaiverActive(have: 0, count: 3, firstProductionTick: -1, now: 999999, waiverTicks: 3000), Is.True);
+			Assert.That(EarlyDefencePlan.WaiverActive(have: 0, count: 3, firstProductionTick: -1, now: 999999, waiverTicks: 3000), Is.True, "count leg open");
+			Assert.That(EarlyDefencePlan.WaiverActive(have: 3, count: 3, firstProductionTick: -1, now: 999999, waiverTicks: 3000), Is.False, "no tick clock and count met");
 		}
 
 		[Test]
-		public void AZeroWaiverWindowEndsAtOnce()
+		public void AZeroWaiverWindowLeavesOnlyTheCountLeg()
 		{
-			Assert.That(EarlyDefencePlan.WaiverActive(have: 0, count: 3, firstProductionTick: 100, now: 100, waiverTicks: 0), Is.False);
+			Assert.That(EarlyDefencePlan.WaiverActive(have: 3, count: 3, firstProductionTick: 100, now: 100, waiverTicks: 0), Is.False, "zero window, count met");
+			Assert.That(EarlyDefencePlan.WaiverActive(have: 0, count: 3, firstProductionTick: 100, now: 100, waiverTicks: 0), Is.True, "zero window, count open");
 		}
 	}
 }

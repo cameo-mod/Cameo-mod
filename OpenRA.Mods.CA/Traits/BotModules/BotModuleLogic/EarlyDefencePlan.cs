@@ -69,14 +69,14 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>
 		/// DEF-RATIO-PERS-01 with audit A4 (user 11-26 P07; Orchestrator 11-27): the ONE early-defence waiver. While it holds, an S4 start is exempt from RATIO-2X.
-		/// It ends when the early count is built (<paramref name="have"/> at or above <paramref name="count"/>) OR when <paramref name="waiverTicks"/> have passed since the
+		/// It holds while EITHER leg is open (rulebook line 50, Orchestrator ruling (b)): the count leg while <paramref name="have"/> is below <paramref name="count"/>, and the tick leg while fewer than <paramref name="waiverTicks"/> have passed since the
 		/// first production building stood (<paramref name="firstProductionTick"/>, -1 = none yet). The AF2 cap and the per-type limits are not part of the waiver.
 		/// </summary>
 		public static bool WaiverActive(int have, int count, int firstProductionTick, int now, int waiverTicks)
 		{
-			var countExhausted = have >= count;
-			var tickExhausted = firstProductionTick >= 0 && now - firstProductionTick >= Math.Max(0, waiverTicks);
-			return !(countExhausted || tickExhausted);
+			var countOpen = have < count;
+			var tickOpen = firstProductionTick >= 0 && now - firstProductionTick < Math.Max(0, waiverTicks);
+			return countOpen || tickOpen; // TODO(B3): the 3000-tick waiver prior is a placeholder until the B3 timing value is located. TODO: map size and nearest-opponent distance as learned context (LA02 integration).
 		}
 	}
 }
