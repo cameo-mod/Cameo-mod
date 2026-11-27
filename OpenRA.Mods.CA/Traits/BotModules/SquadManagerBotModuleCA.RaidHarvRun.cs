@@ -218,12 +218,15 @@ namespace OpenRA.Mods.CA.Traits
 				var ownValue = members.Sum(m => m.Value);
 				var ownUnits = members.Sum(m => RaidMovers(m.Squad).Count);
 				var ownReady = ownUnits >= Info.HarassMinUnits;
-				if (team != null && jointOn)
+				switch (RaidHarvGroup.PickSideSlot(team != null && jointOn, RaidSeatHasRunningJointRaid(), ownReady))
 				{
-					if (ownReady)
+					case RaidSlotAction.Publish:
 						RaidPublishRoute(team, cand.TargetId, ownValue, ownUnits, members.Max(m => m.Plan.EtaTicks), now);
-					else
+						break;
+
+					case RaidSlotAction.Retract:
 						team.RetractRaidRoute(RaidSeatKey);
+						break;
 				}
 
 				var routed = team != null ? RaidHarvGroup.RoutedValue(team.RaidRoutes(), cand.TargetId, now, Info.TeamLeadHarassTicks, Info.HarassMinUnits) : 0;
@@ -433,6 +436,16 @@ namespace OpenRA.Mods.CA.Traits
 
 					break;
 			}
+		}
+
+		/// <summary>True while a squad of this seat is on a joint raid whose intent is still current: the seat's offer slot then belongs to its heartbeat (CM F2).</summary>
+		bool RaidSeatHasRunningJointRaid()
+		{
+			foreach (var s in Squads)
+				if (s.FuzzyStateMachine?.CurrentState is RaidHarvState st && st.Run.Joint && st.Run.Intent.Valid)
+					return true;
+
+			return false;
 		}
 
 		/// <summary>

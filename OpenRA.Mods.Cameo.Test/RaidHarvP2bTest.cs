@@ -219,6 +219,69 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(Flat(release), Does.Contain("if (team.HarassTargetId != run.TargetId || !TeamLeadCA.HarassLive(now, team.HarassTick, Info.TeamLeadHarassTicks)) return RaidEvent.AssignmentLost;"));
 		}
 
+		// CM F2: the seat has ONE offer slot per team record. While a joint raid runs, the heartbeat is the only writer; an idle squad of the same seat picking the same (or another) target must not change the routed value the re-approval reads.
+		[Test]
+		public void AnIdleSquadPickingAnAlreadyRaidedTargetNeverOverwritesTheRunningRaidsSlot()
+		{
+			const int Freshness = 1500;
+			const int MinUnits = 3;
+			var team = new TeamLeadTeam { HarassTargetId = 77, HarassTick = 1000, RaidApprovedTarget = 77, RaidApprovedReq = 900 };
+
+			// The running joint raid of seat 1: its heartbeat (value 1200, 4 actors) is well above the approved requirement.
+			team.PublishRaidRoute(new RaidContribution(1, 77, 1200, 4, 300, 1100));
+			Assert.That(RaidHarvGroup.RoutedValue(team.RaidRoutes(), 77, 1150, Freshness, MinUnits), Is.EqualTo(1200));
+
+			// An idle squad of the same seat (value 300, 2 actors: below the join minimum) picks the target through the shared tier. Whatever its readiness, the pick touches nothing.
+			foreach (var ownReady in new[] { false, true })
+			{
+				var action = RaidHarvGroup.PickSideSlot(jointTeam: true, seatHasRunningJointRaid: true, ownContributionReady: ownReady);
+				Assert.That(action, Is.EqualTo(RaidSlotAction.None), "ownReady=" + ownReady);
+				ApplySlot(team, action, new RaidContribution(1, 77, 300, 2, 100, 1150));
+			}
+
+			var routed = RaidHarvGroup.RoutedValue(team.RaidRoutes(), 77, 1200, Freshness, MinUnits);
+			Assert.That(routed, Is.EqualTo(1200), "the heartbeat value stands");
+			Assert.That(team.RaidRoutes().Count, Is.EqualTo(1));
+			Assert.That(RaidHarvGroup.LeaderRefreshes(true, team.RaidApprovedTarget, team.HarassTargetId, true, routed, team.RaidApprovedReq), Is.True, "the leader still refreshes: the sufficient group does not lapse");
+
+			// Another target picked by the same seat while it raids: still no write (the slot is the running raid's).
+			ApplySlot(team, RaidHarvGroup.PickSideSlot(true, true, true), new RaidContribution(1, 88, 5000, 6, 100, 1160));
+			Assert.That(team.RaidRoutes().Single().TargetId, Is.EqualTo(77u));
+
+			// Contrast, the failure the guard prevents: without a running raid the same pick retracts or publishes the seat's slot.
+			Assert.That(RaidHarvGroup.PickSideSlot(true, false, false), Is.EqualTo(RaidSlotAction.Retract));
+			Assert.That(RaidHarvGroup.PickSideSlot(true, false, true), Is.EqualTo(RaidSlotAction.Publish));
+			var unguarded = new TeamLeadTeam { HarassTargetId = 77, HarassTick = 1000, RaidApprovedTarget = 77, RaidApprovedReq = 900 };
+			unguarded.PublishRaidRoute(new RaidContribution(1, 77, 1200, 4, 300, 1100));
+			ApplySlot(unguarded, RaidHarvGroup.PickSideSlot(true, false, false), new RaidContribution(1, 77, 300, 2, 100, 1150));
+			Assert.That(RaidHarvGroup.LeaderRefreshes(true, 77, 77, true, RaidHarvGroup.RoutedValue(unguarded.RaidRoutes(), 77, 1200, Freshness, MinUnits), 900), Is.False, "unguarded, the sufficient group would lapse");
+
+			// No joint team: the pick never touches a slot.
+			Assert.That(RaidHarvGroup.PickSideSlot(false, false, true), Is.EqualTo(RaidSlotAction.None));
+			Assert.That(RaidHarvGroup.PickSideSlot(false, false, false), Is.EqualTo(RaidSlotAction.None));
+
+			// Source: the evaluation asks the pure rule (with the running-raid fact) and does nothing else to the slot; the heartbeat is the other writer, so there are exactly two publish sites.
+			var run = RepoFile(Bots + "SquadManagerBotModuleCA.RaidHarvRun.cs");
+			Assert.That(Flat(run), Does.Contain("switch (RaidHarvGroup.PickSideSlot(team != null && jointOn, RaidSeatHasRunningJointRaid(), ownReady))"));
+			Assert.That(Count(run, "RaidPublishRoute("), Is.EqualTo(2), "the pick's Publish case and the heartbeat");
+			Assert.That(Count(run, "RetractRaidRoute("), Is.EqualTo(2), "the pick's Retract case and the release of the seat's last raid squad");
+			Assert.That(Flat(run), Does.Contain("if (s.FuzzyStateMachine?.CurrentState is RaidHarvState st && st.Run.Joint && st.Run.Intent.Valid) return true;"));
+		}
+
+		static void ApplySlot(TeamLeadTeam team, RaidSlotAction action, RaidContribution offer)
+		{
+			switch (action)
+			{
+				case RaidSlotAction.Publish:
+					team.PublishRaidRoute(offer);
+					break;
+
+				case RaidSlotAction.Retract:
+					team.RetractRaidRoute(offer.SeatKey);
+					break;
+			}
+		}
+
 		[Test]
 		public void TheRaidStateHoldsTheRunAndHandsEveryTickToTheManager()
 		{

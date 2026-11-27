@@ -28,6 +28,14 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		Hold,
 	}
 
+	/// <summary>What a pick does to its seat's single offer slot in the team record.</summary>
+	public enum RaidSlotAction
+	{
+		None,
+		Publish,
+		Retract,
+	}
+
 	/// <summary>One seat's route-ready offer for ONE target: published only after the seat's own explored-only route search to that target succeeded and its waypoint risk gate passed with the offered value.</summary>
 	public readonly record struct RaidContribution(int SeatKey, uint TargetId, int Value, int Units, int EtaTicks, int Tick);
 
@@ -95,6 +103,18 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		/// <summary>A proposal is fresh when it exists, is not from the future and is at most <paramref name="maxAgeTicks"/> old.</summary>
 		public static bool ProposalFresh(RaidProposal? proposal, int now, int maxAgeTicks) => proposal is { } p && p.Tick <= now && now - p.Tick <= maxAgeTicks;
+
+		/// <summary>
+		/// The pick side's use of the seat's ONE offer slot (CM F2). While the seat has a running joint raid the slot belongs to the raid's heartbeat, the single writer: a pick, for any target, neither publishes nor retracts, so an idle squad can never
+		/// lower the routed value the leader's re-approval reads. Without a running raid a joint-team pick publishes its offer when it is route-ready and retracts it otherwise; without a joint team it does nothing.
+		/// </summary>
+		public static RaidSlotAction PickSideSlot(bool jointTeam, bool seatHasRunningJointRaid, bool ownContributionReady)
+		{
+			if (!jointTeam || seatHasRunningJointRaid)
+				return RaidSlotAction.None;
+
+			return ownContributionReady ? RaidSlotAction.Publish : RaidSlotAction.Retract;
+		}
 
 		/// <summary>
 		/// The leader's re-approval of a live raid (Opus ruling 3 of P2b): before the joint assignment lapses (TeamLeadHarassTicks), the leader writes its tick again while it is the leader, the assignment is the very target it approved, that
