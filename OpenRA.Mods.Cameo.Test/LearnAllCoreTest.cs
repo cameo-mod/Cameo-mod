@@ -23,7 +23,7 @@ namespace OpenRA.Mods.Cameo.Test
 	public sealed class LearnAllCoreTest
 	{
 		static SeatObservation Seat(string personality, string own, string enemy, string style, string main, double? signal) =>
-			new(personality, own, [new EnemyObservation(enemy, style)], main, signal);
+			new(personality, own, [new EnemyObservation(enemy)], main, style, signal);
 
 		static IReadOnlyList<SeatObservation> One(string personality, string own, string enemy, double? signal, string style = null) =>
 			[Seat(personality, own, enemy, style, enemy, signal)];
@@ -139,13 +139,13 @@ namespace OpenRA.Mods.Cameo.Test
 				return t;
 			}
 
-			EnemyObservation[] both = [new("nod", "boom"), new("allies", "boom")];
+			EnemyObservation[] both = [new("nod"), new("allies")];
 			var onNod = Preset();
-			LearnAllTrainer.ApplyGame(onNod, "g1", "k", [new SeatObservation("any", "gdi", both, "nod", 0.0)]);
+			LearnAllTrainer.ApplyGame(onNod, "g1", "k", [new SeatObservation("any", "gdi", both, "nod", "boom", 0.0)]);
 			Assert.That(onNod.Find("any", "k").Style["boom"], Is.EqualTo(LearnAllMath.GeoMean(1000, 1000, 1414)), "E_eff = geo(geo(1000, 4000), nod 1000) = 1414");
 
 			var onAllies = Preset();
-			LearnAllTrainer.ApplyGame(onAllies, "g1", "k", [new SeatObservation("any", "gdi", both, "allies", 0.0)]);
+			LearnAllTrainer.ApplyGame(onAllies, "g1", "k", [new SeatObservation("any", "gdi", both, "allies", "boom", 0.0)]);
 			Assert.That(onAllies.Find("any", "k").Style["boom"], Is.EqualTo(LearnAllMath.GeoMean(1000, 1000, 2828)), "the seed follows the main target the decision used");
 		}
 
@@ -153,12 +153,44 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheUpdateBudgetIsDividedAcrossEnemySeatsByWeight()
 		{
 			var table = new LearnTable();
-			var enemies = new EnemyObservation[] { new("soviet", null, 1), new("soviet", null, 1), new("allies", null, 2) };
-			Assert.That(LearnAllTrainer.ApplyGame(table, "g1", "k", [new SeatObservation("any", "gdi", enemies, "allies", 1.0)]), Is.True);
+			var enemies = new EnemyObservation[] { new("soviet", 1), new("soviet", 1), new("allies", 2) };
+			Assert.That(LearnAllTrainer.ApplyGame(table, "g1", "k", [new SeatObservation("any", "gdi", enemies, "allies", null, 1.0)]), Is.True);
 			var axes = table.Find("any", "k");
 			Assert.That(axes.Enemy("soviet"), Is.EqualTo(1020), "half the budget: exp(0.04 x 0.5)");
 			Assert.That(axes.Enemy("allies"), Is.EqualTo(1020));
 			Assert.That(axes.Global, Is.EqualTo(1041), "G and F_own take the whole signal");
+		}
+
+		[Test]
+		public void ATeamGameGivesTheWholeStyleStepToTheMainTargetOwnerOnly()
+		{
+			// Orchestrator ruling 2026-11-27: S_obs = the main target owner's observed style, the FULL step, never split by enemy weight.
+			var table = new LearnTable();
+			var enemies = new EnemyObservation[] { new("soviet", 1), new("soviet", 1), new("allies", 2) };
+			Assert.That(LearnAllTrainer.ApplyGame(table, "g1", "k", [new SeatObservation("any", "gdi", enemies, "allies", "boom", 1.0)]), Is.True);
+			var axes = table.Find("any", "k");
+			Assert.That(axes.Style["boom"], Is.EqualTo(1041), "the whole +1 step: exp(0.04)");
+			Assert.That(axes.Style.Keys, Is.EquivalentTo(new[] { "boom" }), "no other style: the other enemies' styles are never read");
+			Assert.That(axes.Enemy("soviet"), Is.EqualTo(1020), "E_eff inputs are unchanged: split by player count");
+			Assert.That(axes.Enemy("allies"), Is.EqualTo(1020));
+		}
+
+		[Test]
+		public void AnUnseenMainTargetStyleTakesNoStyleStep()
+		{
+			var table = new LearnTable();
+			Assert.That(LearnAllTrainer.ApplyGame(table, "g1", "k", [new SeatObservation("any", "gdi", [new EnemyObservation("nod"), new EnemyObservation("allies")], "nod", null, 1.0)]), Is.True);
+			Assert.That(table.Find("any", "k").Style, Is.Empty, "unseen = no S evidence; the decision value stays the three-axis result");
+		}
+
+		[Test]
+		public void SeatsThatSawDifferentMainTargetStylesEachStepTheirOwnStyle()
+		{
+			var table = new LearnTable();
+			EnemyObservation[] enemies = [new("nod"), new("allies")];
+			LearnAllTrainer.ApplyGame(table, "g1", "k", [new SeatObservation("rush", "gdi", enemies, "nod", "boom", 1.0), new SeatObservation("turtle", "allies", enemies, "allies", "turtle", -1.0)]);
+			Assert.That(table.Find("any", "k").Style["boom"], Is.EqualTo(1041));
+			Assert.That(table.Find("any", "k").Style["turtle"], Is.EqualTo(961));
 		}
 
 		[Test]

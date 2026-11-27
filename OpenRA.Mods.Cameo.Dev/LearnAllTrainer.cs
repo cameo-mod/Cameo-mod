@@ -44,14 +44,16 @@ namespace OpenRA.Mods.Cameo.Dev
 		}
 	}
 
-	/// <summary>One enemy seat of a game: the faction it played, the observed-style bucket the bot read from it (null = none qualified) and its weight (per-player counting).</summary>
-	public readonly record struct EnemyObservation(string Faction, string Style, int Weight = 1);
+	/// <summary>One enemy seat of a game: the faction it played and its weight (per-player counting). The observed style is NOT per enemy: see <see cref="SeatObservation.MainTargetStyle"/>.</summary>
+	public readonly record struct EnemyObservation(string Faction, int Weight = 1);
 
 	/// <summary>
 	/// One bot seat's view of one game for one knob: its personality, own faction, the enemy seats it observed, the AUTHORITATIVE main-target faction
-	/// (the input the decision used, not derived from the seats) and the game's bounded signed outcome for the knob (null = no evidence).
+	/// (the input the decision used, not derived from the seats), the observed-style bucket the bot read from the MAIN TARGET owner (null = unseen) and the
+	/// game's bounded signed outcome for the knob (null = no evidence). Orchestrator ruling 2026-11-27: S_obs in a team game is the main target owner's observed
+	/// style ONLY and takes the WHOLE step (never split by enemy weight); unseen = the three-axis result. E_eff is unchanged (all enemy players per player + the main target).
 	/// </summary>
-	public readonly record struct SeatObservation(string Personality, string OwnFaction, IReadOnlyList<EnemyObservation> Enemies, string MainTarget, double? Signal);
+	public readonly record struct SeatObservation(string Personality, string OwnFaction, IReadOnlyList<EnemyObservation> Enemies, string MainTarget, string MainTargetStyle, double? Signal);
 
 	public static class LearnAllTrainer
 	{
@@ -143,31 +145,24 @@ namespace OpenRA.Mods.Cameo.Dev
 					continue;
 
 				var share = new SortedDictionary<string, double>(StringComparer.Ordinal);
-				var styleShare = new SortedDictionary<string, double>(StringComparer.Ordinal);
 				foreach (var e in enemies)
 				{
-					var part = (double)e.Weight / total;
 					if (e.Faction != null)
-						share[e.Faction] = share.GetValueOrDefault(e.Faction) + part;
-					if (e.Style != null)
-						styleShare[e.Style] = styleShare.GetValueOrDefault(e.Style) + part;
+						share[e.Faction] = share.GetValueOrDefault(e.Faction) + (double)e.Weight / total;
 				}
 
 				foreach (var kv in share)
 					Add(enemyMap, kv.Key, s * kv.Value);
 
-				if (styleShare.Count > 0)
+				if (seat.MainTargetStyle != null)
 				{
-					// The style seed is the prior three-axis result of THIS seat's match-up, from the pre-step axes: the team enemy value over the seats it observed
-					// and its authoritative main target.
+					// The WHOLE style step goes to the main target owner's observed style. The seed is the prior three-axis result of THIS seat's match-up, from the
+					// pre-step axes: the team enemy value over the seats it observed and its authoritative main target.
 					var seed = LearnAllMath.SeedStyle(pre.Global, pre.Own(seat.OwnFaction), SeatEnemyEff(pre, enemies, seat.MainTarget));
-					foreach (var kv in styleShare)
-					{
-						Add(styleMap, kv.Key, s * kv.Value);
-						if (!styleSeeds.TryGetValue(kv.Key, out var list))
-							styleSeeds[kv.Key] = list = [];
-						list.Add(seed);
-					}
+					Add(styleMap, seat.MainTargetStyle, s);
+					if (!styleSeeds.TryGetValue(seat.MainTargetStyle, out var list))
+						styleSeeds[seat.MainTargetStyle] = list = [];
+					list.Add(seed);
 				}
 			}
 

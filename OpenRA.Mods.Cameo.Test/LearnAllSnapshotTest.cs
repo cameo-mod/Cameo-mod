@@ -28,9 +28,9 @@ namespace OpenRA.Mods.Cameo.Test
 		static LearnTable Sample()
 		{
 			var table = new LearnTable();
-			var enemies = new EnemyObservation[] { new("nod", "boom"), new("allies", null, 2) };
-			LearnAllTrainer.ApplyGame(table, "g1", "wave_role.frontline", [new SeatObservation("rush", "gdi", enemies, "nod", 1.0)]);
-			LearnAllTrainer.ApplyGame(table, "g2", "wave_role.antiair", [new SeatObservation("turtle", "gdi", [new EnemyObservation("nod", null)], "nod", -1.0)]);
+			var enemies = new EnemyObservation[] { new("nod"), new("allies", 2) };
+			LearnAllTrainer.ApplyGame(table, "g1", "wave_role.frontline", [new SeatObservation("rush", "gdi", enemies, "nod", "boom", 1.0)]);
+			LearnAllTrainer.ApplyGame(table, "g2", "wave_role.antiair", [new SeatObservation("turtle", "gdi", [new EnemyObservation("nod")], "nod", null, -1.0)]);
 			return table;
 		}
 

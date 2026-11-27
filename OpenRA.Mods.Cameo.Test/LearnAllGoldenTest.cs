@@ -64,8 +64,8 @@ namespace OpenRA.Mods.Cameo.Test
 
 		static List<SeatObservation> Seats(JsonElement application) =>
 			application.GetProperty("seats").EnumerateArray().Select(s => new SeatObservation(Str(s.GetProperty("personality")), Str(s.GetProperty("own")),
-				s.GetProperty("enemies").EnumerateArray().Select(e => new EnemyObservation(Str(e.GetProperty("faction")), Str(e.GetProperty("style")), e.GetProperty("weight").GetInt32())).ToList(),
-				Str(s.GetProperty("main_target")), Signal(s.GetProperty("signal")))).ToList();
+				s.GetProperty("enemies").EnumerateArray().Select(e => new EnemyObservation(Str(e.GetProperty("faction")), e.GetProperty("weight").GetInt32())).ToList(),
+				Str(s.GetProperty("main_target")), Str(s.GetProperty("main_target_style")), Signal(s.GetProperty("signal")))).ToList();
 
 		static (LearnTable Table, List<bool> Changed) Replay(JsonElement game, bool reverseSeats)
 		{

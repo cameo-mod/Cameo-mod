@@ -13,11 +13,15 @@ Training exists only in DEV: the release build reads the committed snapshot (mod
 Input (one game, from the DEV exposure writer, JSON lines, one record per (bot seat, game)):
   {"game_id": "<[A-Za-z0-9_.-]+>", "seq": <int game order, the same on every record of the game>, "seat": "<unique per game>", "personality": "rush",
    "own_faction": "gdi", "main_target": "nod" | null,
-   "enemies": [{"faction": "nod", "style": "boom" | null, "weight": 1}],
+   "main_target_style": "boom" | null,
+   "enemies": [{"faction": "nod", "weight": 1}],
    "knobs": [{"knob": "wave_role.frontline", "signal": 0.4 | null}]}
 `signal` is the game's signed, bounded outcome in [-1, 1] (null = no evidence for that knob: the previous estimate is kept). `main_target` is the
 faction the decision actually used as the main target. ALL seats of the game are combined in ONE step per axis per table (every personality present,
-then the global "any" table); a style seeds from the pre-step team enemy value (per-seat enemy factions + the main target).
+then the global "any" table). OBSERVED STYLE (Orchestrator ruling 2026-11-27): S_obs is the style the bot observed on the MAIN TARGET owner ONLY, and it takes the
+WHOLE step (never split by enemy weight); `main_target_style` null = unseen = no S step and the decision value is the three-axis result. E_eff is unchanged:
+geomean(the aggregate of all enemy players, counted per player, the main target faction). A style seeds from the pre-step team enemy value (per-seat enemy
+factions + the main target). A 1v1 game behaves exactly as before.
 
 Pipeline use (post-game plan step, after EVERY DEV game): python tools/ai/fit_learn_all.py --exposures <game_dir>/learn_all_exposure.jsonl
 Guards (exit codes): 3 = records of more than one game (no manual batch); 5 = invalid records (a missing, non-integer or mixed `seq`, a bad or missing
@@ -161,16 +165,17 @@ def _finite(signal):
 class Seat:
     """One bot seat's view of one game for one knob (mirrors SeatObservation)."""
 
-    def __init__(self, personality, own_faction, enemies, main_target, signal):
+    def __init__(self, personality, own_faction, enemies, main_target, main_target_style, signal):
         self.personality = personality or None
         self.own_faction = own_faction
-        self.enemies = list(enemies)  # [(faction, style, weight)]
+        self.enemies = list(enemies)  # [(faction, weight)]
         self.main_target = main_target
+        self.main_target_style = main_target_style
         self.signal = signal
 
 
 def _seat_enemy_eff(pre, enemies, main_target):
-    per = [pre.get_enemy(f) for (f, _s, _w) in enemies]
+    per = [pre.get_enemy(f) for (f, _w) in enemies]
     main = pre.get_enemy(main_target) if main_target is not None else geo_mean(per)
     if not per:
         return main if main_target is not None else pre.global_
@@ -203,24 +208,21 @@ def _step_table(table, personality, knob, seats):
         global_sum += _q(s)
         if seat.own_faction is not None:
             _add(own_map, seat.own_faction, s)
-        enemies = [e for e in seat.enemies if e[2] > 0]
-        total = sum(e[2] for e in enemies)
+        enemies = [e for e in seat.enemies if e[1] > 0]
+        total = sum(e[1] for e in enemies)
         if total == 0:
             continue
-        share, style_share = {}, {}
-        for (faction, style, w) in enemies:
-            part = float(w) / total
+        share = {}
+        for (faction, w) in enemies:
             if faction is not None:
-                share[faction] = share.get(faction, 0.0) + part
-            if style is not None:
-                style_share[style] = style_share.get(style, 0.0) + part
+                share[faction] = share.get(faction, 0.0) + float(w) / total
         for faction in share:
             _add(enemy_map, faction, s * share[faction])
-        if style_share:
+        if seat.main_target_style is not None:
+            # The WHOLE step goes to the main target owner's observed style (not split by weight); the seed is this seat's pre-step team enemy value.
             seed = seed_style(pre.global_, pre.get_own(seat.own_faction), _seat_enemy_eff(pre, enemies, seat.main_target))
-            for style in style_share:
-                _add(style_map, style, s * style_share[style])
-                style_seeds.setdefault(style, []).append(seed)
+            _add(style_map, seat.main_target_style, s)
+            style_seeds.setdefault(seat.main_target_style, []).append(seed)
 
     axes.global_ = step_next(pre.global_, global_sum / (len(seats) * SCALE))
     for k in sorted(own_map):
@@ -386,6 +388,10 @@ def check_records(records):
     seats = [r.get("seat") for r in records]
     if any(not isinstance(x, str) or not x for x in seats) or len(set(seats)) != len(seats):
         return game, None, (5, "refused: game %s has a missing or duplicate seat id" % game)
+    for r in records:
+        mts = r.get("main_target_style")
+        if mts is not None and (not isinstance(mts, str) or not GAME_ID.match(mts)):
+            return game, None, (5, "refused: game %s seat %s has a main_target_style %r that is not null or [A-Za-z0-9_.-]+ (it becomes a Style@ key)" % (game, r.get("seat"), mts))
     return game, next(iter(seqs)), None
 
 
@@ -393,9 +399,9 @@ def seats_by_knob(records):
     """Groups the records of one game by knob into Seat lists (every seat of the game, in one step)."""
     result = {}
     for rec in records:
-        enemies = [(e.get("faction"), e.get("style"), int(e.get("weight", 1))) for e in rec.get("enemies", [])]
+        enemies = [(e.get("faction"), int(e.get("weight", 1))) for e in rec.get("enemies", [])]
         for k in rec.get("knobs", []):
-            result.setdefault(k["knob"], []).append(Seat(rec.get("personality"), rec.get("own_faction"), enemies, rec.get("main_target"), k.get("signal")))
+            result.setdefault(k["knob"], []).append(Seat(rec.get("personality"), rec.get("own_faction"), enemies, rec.get("main_target"), rec.get("main_target_style"), k.get("signal")))
     return result
 
 

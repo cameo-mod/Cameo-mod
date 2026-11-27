@@ -17,7 +17,7 @@ def sig(x):
 
 
 def seats_of(application, reverse=False):
-    seats = [f.Seat(s["personality"], s["own"], [(e["faction"], e["style"], e["weight"]) for e in s["enemies"]], s["main_target"], s["signal"])
+    seats = [f.Seat(s["personality"], s["own"], [(e["faction"], e["weight"]) for e in s["enemies"]], s["main_target"], s["main_target_style"], s["signal"])
              for s in application["seats"]]
     return list(reversed(seats)) if reverse else seats
 
@@ -61,8 +61,8 @@ class GoldenReplay(unittest.TestCase):
 
     def test_every_seat_counts_not_only_the_first(self):
         t = f.Table()
-        a = f.Seat("rush", "gdi", [("nod", None, 1)], "nod", 1.0)
-        b = f.Seat("rush", "allies", [("nod", None, 1)], "nod", -1.0)
+        a = f.Seat("rush", "gdi", [("nod", 1)], "nod", None, 1.0)
+        b = f.Seat("rush", "allies", [("nod", 1)], "nod", None, -1.0)
         self.assertTrue(f.apply_game(t, "g1", "k", [a, b]))
         axes = t.personalities["rush"]["k"]
         self.assertEqual(axes.global_, 1000, "+1 and -1 average out: the second seat was not dropped")
@@ -75,7 +75,7 @@ class GoldenReplay(unittest.TestCase):
         axes = t.personalities.setdefault("any", {}).setdefault("k", f.Axes())
         axes.enemy["nod"] = 1000
         axes.enemy["allies"] = 4000
-        main_nod = f.Seat("any", "gdi", [("nod", "boom", 1), ("allies", "boom", 1)], "nod", 0.0)
+        main_nod = f.Seat("any", "gdi", [("nod", 1), ("allies", 1)], "nod", "boom", 0.0)
         f.apply_game(t, "g1", "k", [main_nod])
         # E_eff = geo(geo(1000, 4000) = 2000, main nod = 1000) = 1414; seed = geo(1000, 1000, 1414) = 1122
         self.assertEqual(t.personalities["any"]["k"].style["boom"], f.geo_mean([1000, 1000, 1414]))
@@ -83,8 +83,38 @@ class GoldenReplay(unittest.TestCase):
         axes2 = t2.personalities.setdefault("any", {}).setdefault("k", f.Axes())
         axes2.enemy["nod"] = 1000
         axes2.enemy["allies"] = 4000
-        f.apply_game(t2, "g1", "k", [f.Seat("any", "gdi", [("nod", "boom", 1), ("allies", "boom", 1)], "allies", 0.0)])
+        f.apply_game(t2, "g1", "k", [f.Seat("any", "gdi", [("nod", 1), ("allies", 1)], "allies", "boom", 0.0)])
         self.assertEqual(t2.personalities["any"]["k"].style["boom"], f.geo_mean([1000, 1000, 2828]), "main target allies: the seed moves with it")
+
+    def test_a_team_game_gives_the_whole_style_step_to_the_main_target_owner_only(self):
+        # 3 enemy seats (2 soviet, 1 allies); the bot observed boom on the main target (allies). The S step is the FULL step, not split by weight.
+        t = f.Table()
+        f.apply_game(t, "g1", "k", [f.Seat("any", "gdi", [("soviet", 1), ("soviet", 1), ("allies", 2)], "allies", "boom", 1.0)])
+        axes = t.personalities["any"]["k"]
+        self.assertEqual(axes.style["boom"], 1041, "the whole +1 step: exp(0.04)")
+        self.assertEqual(list(axes.style), ["boom"], "no other style exists: the other enemies' styles are never read")
+        self.assertEqual(axes.enemy["soviet"], 1020, "E is still split by player count (half the budget)")
+        self.assertEqual(axes.enemy["allies"], 1020)
+
+    def test_an_unseen_main_target_style_takes_no_s_step_and_stays_the_three_axis_result(self):
+        t = f.Table()
+        f.apply_game(t, "g1", "k", [f.Seat("any", "gdi", [("nod", 1), ("allies", 1)], "nod", None, 1.0)])
+        axes = t.personalities["any"]["k"]
+        self.assertEqual(axes.style, {}, "unseen = no S evidence")
+        self.assertEqual(f.resolve(axes.global_, axes.get_own("gdi"), axes.get_enemy("nod"), 0), f.resolve(axes.global_, axes.get_own("gdi"), axes.get_enemy("nod"), axes.style.get("boom", 0)))
+
+    def test_one_vs_one_is_the_same_as_before(self):
+        t = f.Table()
+        f.apply_game(t, "g1", "k", [f.Seat("any", "allies", [("soviet", 1)], "soviet", "boom", 1.0)])
+        self.assertEqual(t.personalities["any"]["k"].style["boom"], 1041)
+
+    def test_seats_that_saw_different_main_target_styles_each_step_their_own_style(self):
+        t = f.Table()
+        a = f.Seat("rush", "gdi", [("nod", 1), ("allies", 1)], "nod", "boom", 1.0)
+        b = f.Seat("turtle", "allies", [("nod", 1), ("allies", 1)], "allies", "turtle", -1.0)
+        f.apply_game(t, "g1", "k", [a, b])
+        self.assertEqual(t.personalities["any"]["k"].style["boom"], 1041)
+        self.assertEqual(t.personalities["any"]["k"].style["turtle"], 961)
 
 
 class Pipeline(unittest.TestCase):
@@ -97,8 +127,8 @@ class Pipeline(unittest.TestCase):
         self.dir.cleanup()
 
     def record(self, game, seq, seat="s1", signal=1.0, personality="rush"):
-        return {"game_id": game, "seq": seq, "seat": seat, "personality": personality, "own_faction": "gdi", "main_target": "nod",
-                "enemies": [{"faction": "nod", "style": "boom", "weight": 1}], "knobs": [{"knob": "wave_role.frontline", "signal": signal}]}
+        return {"game_id": game, "seq": seq, "seat": seat, "personality": personality, "own_faction": "gdi", "main_target": "nod", "main_target_style": "boom",
+                "enemies": [{"faction": "nod", "weight": 1}], "knobs": [{"knob": "wave_role.frontline", "signal": signal}]}
 
     def exposure(self, game, seq, signal=1.0, name=None, records=None):
         path = os.path.join(self.dir.name, "exp_%s.jsonl" % (name or game))
@@ -111,6 +141,12 @@ class Pipeline(unittest.TestCase):
 
     def read(self):
         return open(self.snap, encoding="utf-8").read()
+
+    def test_a_malformed_main_target_style_is_refused(self):
+        bad = self.record("g1", 1)
+        bad["main_target_style"] = "boom now"
+        self.assertEqual(self.run_fit(self.exposure("g1", 1, records=[bad])), 5)
+        self.assertEqual(f.parse_text(self.read()).personalities, {}, "nothing was applied")
 
     def test_one_step_per_game_in_order(self):
         self.assertEqual(self.run_fit(self.exposure("g1", 1)), 0)
