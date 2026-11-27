@@ -286,6 +286,19 @@ namespace OpenRA.Mods.CA.Traits
 			if (!RaidHarvOn || !teamLeadIsLeader)
 				return;
 
+			// An approval belongs to the assignment it created: once that assignment lapsed or another target replaced it, the approval is gone. While it is live and the fresh contributions still reach the approved requirement, the
+			// leader keeps the raid alive before it lapses (re-approval); otherwise it lapses and every member releases.
+			var live = TeamLeadCA.HarassLive(now, team.HarassTick, Info.TeamLeadHarassTicks) && team.HarassTargetId != 0;
+			if (team.RaidApprovedTarget != 0 && (!live || team.HarassTargetId != team.RaidApprovedTarget))
+			{
+				team.RaidApprovedTarget = 0;
+				team.RaidApprovedReq = 0;
+			}
+
+			if (RaidHarvGroup.LeaderRefreshes(teamLeadIsLeader, team.RaidApprovedTarget, team.HarassTargetId, live,
+				RaidHarvGroup.RoutedValue(team.RaidRoutes(), team.RaidApprovedTarget, now, Info.TeamLeadHarassTicks, Info.HarassMinUnits), team.RaidApprovedReq))
+				team.HarassTick = now;
+
 			if (!RaidHarvGroup.ProposalFresh(team.RaidProposal, now, Info.TeamLeadHarassTicks))
 			{
 				team.RaidProposal = null;
@@ -301,6 +314,8 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				team.HarassTargetId = proposal.TargetId;
 				team.HarassTick = now;
+				team.RaidApprovedTarget = proposal.TargetId;
+				team.RaidApprovedReq = proposal.Req;
 			}
 
 			team.RaidProposal = null;

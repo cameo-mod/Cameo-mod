@@ -96,6 +96,14 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		/// <summary>A proposal is fresh when it exists, is not from the future and is at most <paramref name="maxAgeTicks"/> old.</summary>
 		public static bool ProposalFresh(RaidProposal? proposal, int now, int maxAgeTicks) => proposal is { } p && p.Tick <= now && now - p.Tick <= maxAgeTicks;
 
+		/// <summary>
+		/// The leader's re-approval of a live raid (Opus ruling 3 of P2b): before the joint assignment lapses (TeamLeadHarassTicks), the leader writes its tick again while it is the leader, the assignment is the very target it approved, that
+		/// assignment is still live, and the fresh contributions for the target (the running raids' heartbeats and the route-ready offers) still reach the requirement it approved. It compares ids and values only; a lapse without a refresh
+		/// releases the raids (Seq bump, Stop, normal state).
+		/// </summary>
+		public static bool LeaderRefreshes(bool isLeader, uint approvedTarget, uint assignedTarget, bool assignmentLive, long routedValue, int approvedReq) =>
+			isLeader && approvedTarget != 0 && approvedTarget == assignedTarget && assignmentLive && approvedReq > 0 && routedValue >= approvedReq;
+
 		/// <summary>The team leader's approval of a proposal (Propose to Join): a fresh proposal whose routed value reaches the requirement. Only the leader writes the assignment; a member never does.</summary>
 		public static bool LeaderApproves(bool isLeader, bool proposalFresh, long routedValue, int req) => isLeader && proposalFresh && req > 0 && routedValue >= req;
 	}

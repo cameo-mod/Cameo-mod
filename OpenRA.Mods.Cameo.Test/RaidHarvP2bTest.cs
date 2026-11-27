@@ -9,9 +9,12 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.CA.Traits.BotModules.Squads;
 
 namespace OpenRA.Mods.Cameo.Test
@@ -25,15 +28,17 @@ namespace OpenRA.Mods.Cameo.Test
 	{
 		const string Bots = "OpenRA.Mods.CA/Traits/BotModules/";
 
-		static string RepoFile(string relative)
+		static string RepoRoot()
 		{
 			var dir = new DirectoryInfo(AppContext.BaseDirectory);
 			while (dir != null && !File.Exists(Path.Combine(dir.FullName, "mod.config")))
 				dir = dir.Parent;
 
 			Assert.That(dir, Is.Not.Null, "repository root (mod.config) not found above " + AppContext.BaseDirectory);
-			return File.ReadAllText(Path.Combine(dir.FullName, relative)).Replace("\r\n", "\n");
+			return dir.FullName;
 		}
+
+		static string RepoFile(string relative) => File.ReadAllText(Path.Combine(RepoRoot(), relative)).Replace("\r\n", "\n");
 
 		static string Flat(string text) => Regex.Replace(text, @"\s+", " ");
 
@@ -98,6 +103,122 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(Count(team, "RaidHarv"), Is.EqualTo(Count(team, "RaidHarvOn")), "no other raid-module name in the team-lead file than the row switch");
 		}
 
+		// Opus ruling 1 (P2b): both pick sites go through the SAME gate function, row off returns the old path at both sites, and exactly these two sites exist, no third.
+		[Test]
+		public void TheGateFunctionHasExactlyTwoCallersAndEachIsBehindTheRowSwitch()
+		{
+			var hits = new List<string>();
+			foreach (var project in new[] { "OpenRA.Mods.CA", "OpenRA.Mods.Cameo" })
+				foreach (var file in Directory.EnumerateFiles(Path.Combine(RepoRoot(), project), "*.cs", SearchOption.AllDirectories))
+				{
+					var n = Count(File.ReadAllText(file), "TryRaidHarvPick(");
+					if (n > 0)
+						hits.Add(Path.GetFileName(file) + ":" + n);
+				}
+
+			hits.Sort(StringComparer.Ordinal);
+			Assert.That(hits, Is.EqualTo(new[] { "SquadManagerBotModuleCA.RaidHarvRun.cs:1", "SquadManagerBotModuleCA.TargetPick.cs:2" }), "the definition and the two call sites");
+
+			var pick = Flat(RepoFile(Bots + "SquadManagerBotModuleCA.TargetPick.cs"));
+			Assert.That(Count(pick, "if (RaidHarvOn && TryRaidHarvPick(squad, false)) return true;"), Is.EqualTo(1), "site 1 (the top of the high-value tier): the row switch is the first operand");
+			Assert.That(Count(pick, "if (RaidHarvOn && RaidIsHarvester(shared)) return TryRaidHarvPick(squad, true);"), Is.EqualTo(1), "site 2 (the shared tier): the row switch is the first operand");
+
+			// Row off: the gate function is never entered, so both sites fall through to their old lines (pinned in TheFourCallSitesAreGuardedAndLeaveTheOldLinesAsTheyWere).
+			Assert.That(RepoFile(Bots + "SquadManagerBotModuleCA.RaidHarv.cs"), Does.Contain("internal bool RaidHarvOn => Info.RaidHarvEnabled && !ablateRaidHarv.Off(Player, AblationIds.RaidHarv);"));
+			Assert.That(RepoFile("OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCAInfo.RaidHarv.cs"), Does.Contain("RaidHarvEnabled = false;"));
+		}
+
+		// Opus ruling 2 (P2b): no defer-on-propose. A pending proposal keeps the proposer's normal harass behaviour and produces ZERO raid orders; the fail-closed Hold still applies to the raid.
+		[Test]
+		public void APendingProposalProducesNoRaidOrderAndTheProposerFallsBackToItsNormalBehaviour()
+		{
+			// The pure decision: with an active ally and no approved assignment the answer is Propose, which is neither a launch nor an order.
+			Assert.That(RaidHarvGroup.Decide(true, true, false, 5000, 900, true), Is.EqualTo(RaidLaunch.Propose));
+			Assert.That(RaidHarvGroup.Decide(true, true, false, 5000, 900, true), Is.Not.AnyOf(RaidLaunch.Solo, RaidLaunch.Join));
+			Assert.That(RaidHarvGroup.Decide(true, true, true, 5000, 900, true), Is.EqualTo(RaidLaunch.Join), "only the leader's approval turns it into a launch");
+
+			// Source: everything the evaluation does BEFORE the launch gate issues no order, changes no state and starts no run; Propose returns false to the pick (the old path runs).
+			var run = RepoFile(Bots + "SquadManagerBotModuleCA.RaidHarvRun.cs");
+			var before = Between(run, "bool RaidEvaluate(SquadCA picker, RaidCandidate cand, int now)", "if (decision is not (RaidLaunch.Solo or RaidLaunch.Join))");
+			foreach (var forbidden in new[] { "QueueOrder", "RaidIssueMoves(", "RaidStart(", "ChangeState(", "new Order(", "RaidRelease(", "TargetActor =" })
+				Assert.That(before, Does.Not.Contain(forbidden), forbidden);
+
+			Assert.That(before, Does.Contain("RaidProposeTarget("));
+			Assert.That(Flat(run), Does.Contain("if (decision is not (RaidLaunch.Solo or RaidLaunch.Join)) return false;"), "Propose and Hold return false: the caller's old path runs");
+
+			// The helpers of the P2a file (offer, proposal, leader pass, scout request) issue no order either.
+			var p2a = RepoFile(Bots + "SquadManagerBotModuleCA.RaidHarv.cs");
+			foreach (var forbidden in new[] { "QueueOrder", "new Order(", "ChangeState(", "RaidIssueMoves(" })
+				Assert.That(p2a, Does.Not.Contain(forbidden), forbidden);
+		}
+
+		// Opus ruling 3 (P2b): a Join lasts TeamLeadHarassTicks (the existing freshness constant); on expiry without re-approval the release sequence runs; the leader may re-approve a live raid in its pass BEFORE expiry.
+		[Test]
+		public void AJoinLastsTheHarassFreshnessAndTheLeaderMayReapproveALiveRaidBeforeItLapses()
+		{
+			// The pure rule: every input must hold (brute force over all combinations against the stated formula).
+			foreach (var leader in new[] { false, true })
+				foreach (var approved in new uint[] { 0, 77 })
+					foreach (var assigned in new uint[] { 0, 77, 88 })
+						foreach (var live in new[] { false, true })
+							foreach (var routed in new long[] { 0, 899, 900, 5000 })
+								foreach (var req in new[] { 0, 900 })
+								{
+									var expected = leader && approved != 0 && approved == assigned && live && req > 0 && routed >= req;
+									Assert.That(RaidHarvGroup.LeaderRefreshes(leader, approved, assigned, live, routed, req), Is.EqualTo(expected), $"{leader} {approved} {assigned} {live} {routed} {req}");
+								}
+
+			// Timeline with the real team record and the pure rules: approved at tick 0 (req 900, freshness 1500); a seat's heartbeat at every leader pass until tick 500; the leader passes every 100 ticks.
+			const int Freshness = 1500;
+			var team = new TeamLeadTeam { HarassTargetId = 77, HarassTick = 0, RaidApprovedTarget = 77, RaidApprovedReq = 900 };
+			var lastRefresh = 0;
+			for (var now = 100; now <= 4000; now += 100)
+			{
+				if (now <= 500)
+					team.PublishRaidRoute(new RaidContribution(1, 77, 1000, 3, 300, now));
+
+				var live = TeamLeadCA.HarassLive(now, team.HarassTick, Freshness) && team.HarassTargetId != 0;
+				var routed = RaidHarvGroup.RoutedValue(team.RaidRoutes(), team.RaidApprovedTarget, now, Freshness, 3);
+				if (RaidHarvGroup.LeaderRefreshes(true, team.RaidApprovedTarget, team.HarassTargetId, live, routed, team.RaidApprovedReq))
+				{
+					team.HarassTick = now;
+					lastRefresh = now;
+				}
+			}
+
+			// The last heartbeat (tick 500) keeps the contributions fresh until tick 2000 (500 + 1500): the leader refreshes through its pass at 2000 and not after.
+			Assert.That(lastRefresh, Is.EqualTo(2000));
+			Assert.That(TeamLeadCA.HarassLive(3500, team.HarassTick, Freshness), Is.True, "still live exactly TeamLeadHarassTicks after the last refresh");
+			Assert.That(TeamLeadCA.HarassLive(3501, team.HarassTick, Freshness), Is.False, "lapses without a re-approval: every joint raid then meets AssignmentLost and releases");
+
+			// Without any re-approval the assignment lasts exactly TeamLeadHarassTicks.
+			Assert.That(TeamLeadCA.HarassLive(1500, 0, Freshness), Is.True);
+			Assert.That(TeamLeadCA.HarassLive(1501, 0, Freshness), Is.False);
+
+			// Source: the leader pass refreshes only through the pure rule (ids and values, no actor), the approval records target and requirement, a lapsed or replaced assignment clears the approval, and the members' heartbeat publishes the running raid's numbers.
+			var p2a = RepoFile(Bots + "SquadManagerBotModuleCA.RaidHarv.cs");
+			var leaderPass = Between(p2a, "void RaidLeaderPass(TeamLeadTeam team, int now)", "// ---- the scout request");
+			Assert.That(Flat(leaderPass), Does.Contain("if (RaidHarvGroup.LeaderRefreshes(teamLeadIsLeader, team.RaidApprovedTarget, team.HarassTargetId, live, RaidHarvGroup.RoutedValue(team.RaidRoutes(), team.RaidApprovedTarget, now, Info.TeamLeadHarassTicks, Info.HarassMinUnits), team.RaidApprovedReq)) team.HarassTick = now;"));
+			Assert.That(Flat(leaderPass), Does.Contain("if (team.RaidApprovedTarget != 0 && (!live || team.HarassTargetId != team.RaidApprovedTarget)) { team.RaidApprovedTarget = 0; team.RaidApprovedReq = 0; }"));
+			Assert.That(leaderPass, Does.Contain("team.RaidApprovedTarget = proposal.TargetId;"));
+			Assert.That(leaderPass, Does.Contain("team.RaidApprovedReq = proposal.Req;"));
+			Assert.That(Count(leaderPass, "team.HarassTick = now;"), Is.EqualTo(2), "the refresh and the approval: the only two writers of the tick in the raid module");
+			Assert.That(leaderPass, Does.Not.Contain("GetActorById"));
+			Assert.That(leaderPass, Does.Not.Contain("RaidTargetResolve"));
+
+			var run = RepoFile(Bots + "SquadManagerBotModuleCA.RaidHarvRun.cs");
+			Assert.That(Flat(run), Does.Contain("if (run.Joint) RaidHeartbeat(run, now);"));
+			var beat = Between(run, "void RaidHeartbeat(RaidRun run, int now)", "bool RaidOrderDue(");
+			Assert.That(beat, Does.Contain("st.Run.Phase == RaidPhase.Retreat"), "retreating squads contribute nothing");
+			Assert.That(beat, Does.Contain("RaidPublishRoute(team, run.TargetId, value, units, eta, now);"));
+			Assert.That(beat, Does.Not.Contain("HarassTick"), "a member never writes the assignment");
+			Assert.That(beat, Does.Not.Contain("GetActorById"));
+
+			// The lapse itself is the existing release path: the assignment-lost event for a joint raid, then Seq bump, Stop, normal state (pinned in TheReleaseBumpsTheSequenceThenStopsThenReturnsToTheNormalState).
+			var release = Between(run, "RaidEvent? RaidReleaseEvent(RaidRun run, int now)", "/// <summary>One tick of a raid squad");
+			Assert.That(Flat(release), Does.Contain("if (team.HarassTargetId != run.TargetId || !TeamLeadCA.HarassLive(now, team.HarassTick, Info.TeamLeadHarassTicks)) return RaidEvent.AssignmentLost;"));
+		}
+
 		[Test]
 		public void TheRaidStateHoldsTheRunAndHandsEveryTickToTheManager()
 		{
@@ -154,7 +275,11 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(Flat(run), Does.Contain("else if (squad.Target.Type == TargetType.Actor) squad.Target = Target.FromCell(World, run.LastSeenCell);"));
 
 			// A kill counts only when the squad's player watched the cell where the target was last seen.
-			Assert.That(run, Does.Contain("var killed = run.LastActor is { IsDead: true } && Player.Shroud.IsVisible(run.LastSeenCell);"));
+			Assert.That(run, Does.Contain("var killed = Player.Shroud.IsVisible(run.LastSeenCell) && run.LastActor is { IsDead: true };"), "the cell's visibility is tested before the stale actor is read (CM F1)");
+
+			// Counts of the raid's actors (join minimum, offers, heartbeat) skip dead units until the manager prunes them (CM N1).
+			Assert.That(run, Does.Not.Contain(".Units.Count"), "alive counts only: RaidMovers(s).Count");
+			Assert.That(Count(run, "RaidMovers("), Is.GreaterThanOrEqualTo(8));
 
 			// The probe ring is a flood over explored, terrain-legal cells.
 			Assert.That(Flat(run), Does.Contain("RaidRoute.FloodExplored(lead.Location, x => Explored(x) && Legal(x), 600)"));

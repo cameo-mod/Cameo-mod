@@ -65,6 +65,7 @@ namespace OpenRA.Mods.CA.Traits
 		const int RaidEvalTicks = 25;
 
 		int raidNextEvalTick;
+		int raidNextBeatTick;
 		bool raidInertLogged;
 
 		// ---- helpers ------------------------------------------------------------------------------------------------------------------
@@ -73,7 +74,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		static List<Actor> RaidMovers(SquadCA squad)
 		{
-			var list = new List<Actor>(squad.Units.Count);
+			var list = new List<Actor>();
 			foreach (var u in squad.Units)
 				if (!u.Actor.IsDead && u.Actor.IsInWorld)
 					list.Add(u.Actor);
@@ -201,7 +202,7 @@ namespace OpenRA.Mods.CA.Traits
 				// Solo: the smallest ETA-ordered prefix of the route-ready squads that reaches the requirement and the join minimum (no half raid).
 				var offers = new List<RaidOffer>(plans.Count);
 				for (var i = 0; i < plans.Count; i++)
-					offers.Add(new RaidOffer(i, plans[i].Value, plans[i].Squad.Units.Count, plans[i].Plan.EtaTicks));
+					offers.Add(new RaidOffer(i, plans[i].Value, RaidMovers(plans[i].Squad).Count, plans[i].Plan.EtaTicks));
 
 				var ready = RaidHarvPackage.TrySelect(offers, req, Info.HarassMinUnits, out var package);
 				if (ready)
@@ -215,7 +216,7 @@ namespace OpenRA.Mods.CA.Traits
 				// With an active ally only the team leader's joint assignment launches: this seat offers everything it has routed for THIS target, the leader approves a proposal once the routed values reach the requirement.
 				members = plans;
 				var ownValue = members.Sum(m => m.Value);
-				var ownUnits = members.Sum(m => m.Squad.Units.Count);
+				var ownUnits = members.Sum(m => RaidMovers(m.Squad).Count);
 				var ownReady = ownUnits >= Info.HarassMinUnits;
 				if (team != null && jointOn)
 				{
@@ -318,7 +319,7 @@ namespace OpenRA.Mods.CA.Traits
 			var actors = 0;
 			foreach (var s in Squads)
 				if (s.FuzzyStateMachine?.CurrentState is RaidHarvState st && st.Run.TargetId == run.TargetId)
-					actors += s.Units.Count;
+					actors += RaidMovers(s).Count;
 
 			return actors < Info.HarassMinUnits ? RaidEvent.ValueBelowMin : null;
 		}
@@ -339,6 +340,9 @@ namespace OpenRA.Mods.CA.Traits
 				RaidAdvance(squad, run, ev.Value, now);
 				return;
 			}
+
+			if (run.Joint)
+				RaidHeartbeat(run, now);
 
 			var movers = RaidMovers(squad);
 			if (movers.Count == 0)
@@ -391,7 +395,7 @@ namespace OpenRA.Mods.CA.Traits
 				case RaidPhase.Strike:
 					if (actor == null)
 					{
-						var killed = run.LastActor is { IsDead: true } && Player.Shroud.IsVisible(run.LastSeenCell);
+						var killed = Player.Shroud.IsVisible(run.LastSeenCell) && run.LastActor is { IsDead: true };
 						RaidAdvance(squad, run, RaidEvent.TargetLost, now);
 						if (killed)
 						{
@@ -429,6 +433,34 @@ namespace OpenRA.Mods.CA.Traits
 
 					break;
 			}
+		}
+
+		/// <summary>
+		/// A running joint raid keeps this seat's contribution for its target fresh (once per move-refresh): what the raiding squads are worth now, in actors and value. The leader's re-approval reads only these numbers, so the assignment
+		/// outlives TeamLeadHarassTicks exactly as long as the group is still sufficient; retreating squads count nothing.
+		/// </summary>
+		void RaidHeartbeat(RaidRun run, int now)
+		{
+			var team = teamLeadTeam;
+			if (team == null || now < raidNextBeatTick)
+				return;
+
+			raidNextBeatTick = now + RaidValue(RaidKey.MoveRefresh);
+			var value = 0;
+			var units = 0;
+			var eta = 0;
+			foreach (var s in Squads)
+			{
+				if (s.FuzzyStateMachine?.CurrentState is not RaidHarvState st || st.Run.TargetId != run.TargetId || st.Run.Phase == RaidPhase.Retreat)
+					continue;
+
+				value += SquadValueOf(s);
+				units += RaidMovers(s).Count;
+				eta = Math.Max(eta, st.Run.EtaTicks);
+			}
+
+			if (units > 0)
+				RaidPublishRoute(team, run.TargetId, value, units, eta, now);
 		}
 
 		bool RaidOrderDue(RaidRun run, int now) => run.LastOrderTick < 0 || now - run.LastOrderTick >= RaidValue(RaidKey.MoveRefresh);

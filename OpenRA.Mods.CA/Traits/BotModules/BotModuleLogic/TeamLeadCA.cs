@@ -974,6 +974,10 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>The open raid proposal (null = none); a newer proposal replaces it only when the old one is stale or from the same proposer.</summary>
 		public OpenRA.Mods.CA.Traits.BotModules.Squads.RaidProposal? RaidProposal;
 
+		/// <summary>The target and requirement of the raid the leader approved (0 = none). The leader keeps that assignment alive only while fresh contributions for exactly this target still reach the requirement; an id and a number, never an actor.</summary>
+		public uint RaidApprovedTarget;
+		public int RaidApprovedReq;
+
 		/// <summary>A seat publishes its route-ready offer for one target (replacing its previous one).</summary>
 		public void PublishRaidRoute(OpenRA.Mods.CA.Traits.BotModules.Squads.RaidContribution contribution) => raidRoutes[contribution.SeatKey] = contribution;
 
