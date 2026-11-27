@@ -30,6 +30,9 @@ namespace OpenRA.Mods.CA.Traits
 	[Desc("Manages AI base construction.")]
 	public class BaseBuilderBotModuleCAInfo : ConditionalTraitInfo, NotBefore<ResourceMapBotModuleInfo>, NotBefore<IResourceLayerInfo>
 	{
+		[Desc("Memoises production costs for one BaseBuilder visit when enabled.")]
+		public readonly bool CostCacheVisit = false;
+
 		[Desc("Tells the AI what building types are considered construction yards.")]
 		public readonly FrozenSet<string> ConstructionYardTypes = FrozenSet<string>.Empty;
 
@@ -986,6 +989,8 @@ namespace OpenRA.Mods.CA.Traits
 		public bool ReadyWatchdogArmed => Info.ReadyWatchdogAll && switchesActive;
 		AblationLatch ablateRecountInFlight; // CONSOLIDATE-01 c1
 		public bool RecountInFlightArmed => Info.RecountInFlightAlways && switchesActive && !ablateRecountInFlight.Off(player, AblationIds.RecountInFlight);
+		AblationLatch ablateCostCacheVisit;
+		public bool CostCacheOn => switchesActive && Info.CostCacheVisit && !ablateCostCacheVisit.Off(player, AblationIds.CostCacheVisit);
 		AblationLatch ablatePipeline01; // CONSOLIDATE-01 c2
 		public bool Pipeline01Armed => Info.BbPipeline01 && switchesActive && !ablatePipeline01.Off(player, AblationIds.BbPipeline01);
 		// CONSOLIDATE-01 c3: the tech depth of every building type (prerequisite-graph distance from the construction yard), built once on the first S5
@@ -1548,7 +1553,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			costCache.BeginVisit(true);
+			costCache.BeginVisit(CostCacheOn);
 			try
 			{
 				BotTickVisit(bot);

@@ -33,18 +33,27 @@ namespace OpenRA.Mods.Cameo.Test
 		public void OffInCodeAndUnarmedInTheYaml()
 		{
 			var u = Source(Unit);
+			var b = Source(BaseBuilder);
 			Assert.That(AblationIds.CostCacheVisit, Is.EqualTo("cost_cache_visit"));
 			Assert.That(u, Does.Contain("public readonly bool CostCacheVisit = false;"));
 			Assert.That(u, Does.Contain("bool CostCacheOn => switchesActive && Info.CostCacheVisit && !ablateCostCache.Off(player, AblationIds.CostCacheVisit);"));
-			// the gate commit arms it in the @generic unit builder only (Opus 11-26: the push candidate = exact commits + FIX 4 armed)
+			Assert.That(b, Does.Contain("public readonly bool CostCacheVisit = false;"));
+			Assert.That(b, Does.Contain("bool CostCacheOn => switchesActive && Info.CostCacheVisit && !ablateCostCacheVisit.Off(player, AblationIds.CostCacheVisit);"));
+			// Both production-cost owners use the same row and ablation; @generic enables both.
 			var yaml = Source("packaging/ai.yaml");
-			Assert.That(yaml.Split("CostCacheVisit: true").Length - 1, Is.EqualTo(1));
+			Assert.That(yaml.Split("CostCacheVisit: true").Length - 1, Is.EqualTo(2));
 			var generic = yaml.IndexOf("\tUnitBuilderBotModuleCA@generic:", StringComparison.Ordinal);
-			var armed = yaml.IndexOf("\t\tCostCacheVisit: true", StringComparison.Ordinal);
+			var armed = yaml.IndexOf("\t\tCostCacheVisit: true", generic, StringComparison.Ordinal);
 			var next = generic + 1 + Regex.Match(yaml.Substring(generic + 1), "\n\t[^\t\n]").Index;
 			Assert.That(generic, Is.GreaterThan(0));
 			Assert.That(armed, Is.GreaterThan(generic), "inside the @generic block");
 			Assert.That(armed, Is.LessThan(next), "before the next trait block");
+			var baseGeneric = yaml.IndexOf("\tBaseBuilderBotModuleCA@generic:", StringComparison.Ordinal);
+			var baseArmed = yaml.IndexOf("\t\tCostCacheVisit: true", baseGeneric, StringComparison.Ordinal);
+			var baseNext = baseGeneric + 1 + Regex.Match(yaml.Substring(baseGeneric + 1), "\n\t[^\t\n]").Index;
+			Assert.That(baseGeneric, Is.GreaterThan(0));
+			Assert.That(baseArmed, Is.GreaterThan(baseGeneric), "inside BaseBuilder @generic block");
+			Assert.That(baseArmed, Is.LessThan(baseNext), "before the next trait block");
 		}
 
 		[Test]
@@ -68,7 +77,8 @@ namespace OpenRA.Mods.Cameo.Test
 		public void BaseBuilderCacheBeginsAndEndsAroundEachModuleVisit()
 		{
 			var baseBuilder = Source(BaseBuilder);
-			Assert.That(baseBuilder, Does.Contain("void IBotTick.BotTick(IBot bot)\n\t\t{\n\t\t\tcostCache.BeginVisit(true);\n\t\t\ttry\n\t\t\t{\n\t\t\t\tBotTickVisit(bot);\n\t\t\t}\n\t\t\tfinally\n\t\t\t{\n\t\t\t\tcostCache.EndVisit();\n\t\t\t}\n\t\t}"));
+			Assert.That(baseBuilder, Does.Contain("void IBotTick.BotTick(IBot bot)\n\t\t{\n\t\t\tcostCache.BeginVisit(CostCacheOn);\n\t\t\ttry\n\t\t\t{\n\t\t\t\tBotTickVisit(bot);\n\t\t\t}\n\t\t\tfinally\n\t\t\t{\n\t\t\t\tcostCache.EndVisit();\n\t\t\t}\n\t\t}"));
+			Assert.That(baseBuilder, Does.Not.Contain("costCache.BeginVisit(true)"), "the cache row gates BaseBuilder too");
 			Assert.That(baseBuilder, Does.Contain("internal int ProductionCost(ProductionQueue queue, ActorInfo actorInfo) => costCache.Get(queue, actorInfo);"));
 			Assert.That(baseBuilder, Does.Not.Contain("GetProductionCost("));
 
