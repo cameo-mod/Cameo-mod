@@ -5,6 +5,7 @@ using NUnit.Framework;
 using DeployBreaker = OpenRA.Mods.Cameo.Traits.BotModules.ExpansionPlannerBotModule.McvDeployFailure;
 using DeployPhase = OpenRA.Mods.Cameo.Traits.BotModules.ExpansionPlannerBotModule.McvDeployPhase;
 using DeployState = OpenRA.Mods.Cameo.Traits.BotModules.ExpansionPlannerBotModule.McvDeployFailState;
+using McvKind = OpenRA.Mods.Cameo.Traits.BotModules.ExpansionPlannerBotModule.McvHandoutKind;
 
 namespace OpenRA.Mods.Cameo.Test
 {
@@ -73,18 +74,41 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			Assert.That(DeployBreaker.IsFailure(100, 100, true, true), Is.False);
 			Assert.That(DeployBreaker.IsFailure(100, 101, false, true), Is.False);
-			Assert.That(DeployBreaker.IsFailure(100, 110, true, false), Is.False);
-			Assert.That(DeployBreaker.IsFailure(100, 110, true, true), Is.True);
+			Assert.That(DeployBreaker.IsFailure(100, 130, true, false), Is.False);
+			Assert.That(DeployBreaker.IsFailure(100, 130, true, true), Is.True);
 		}
 
 		[Test]
 		public void JustIssuedIdleMcvIsNotAFailureInsideTheGrace()
 		{
-			// The guard pass runs every 25 ticks: a pass right after the handout can see the MCV still idle.
+			// A bot order is not executed until its order latency has passed (FeedbackTime = 30 "must be >= netlag"): a pass inside that window can see the MCV still idle.
 			Assert.That(DeployBreaker.IsFailure(100, 101, true, true), Is.False);
-			Assert.That(DeployBreaker.IsFailure(100, 105, true, true), Is.False);
-			Assert.That(DeployBreaker.IsFailure(100, 109, true, true), Is.False);
-			Assert.That(DeployBreaker.DeployGraceTicks, Is.EqualTo(10));
+			Assert.That(DeployBreaker.IsFailure(100, 115, true, true), Is.False);
+			Assert.That(DeployBreaker.IsFailure(100, 129, true, true), Is.False);
+			Assert.That(DeployBreaker.DeployGraceTicks, Is.EqualTo(30));
+		}
+
+		[Test]
+		public void TheEnginesReissueOfTheSameSiteKeepsTheFirstHandoutTick()
+		{
+			// The engine re-asks an idle MCV every 20 ticks, which is inside the 30-tick grace: a re-issue that restarted the clock would hide every failure.
+			Assert.That(DeployBreaker.SameHandout(McvKind.Field, 4, McvKind.Field, 4), Is.True);
+			Assert.That(DeployBreaker.SameHandout(McvKind.Field, 4, McvKind.Field, 5), Is.False, "another field is a new handout");
+			Assert.That(DeployBreaker.SameHandout(McvKind.Field, -1, McvKind.Base, -1), Is.False, "a base try is a new handout");
+			Assert.That(DeployBreaker.SameHandout(McvKind.Base, -1, McvKind.Base, -1), Is.True);
+			Assert.That(Safe(), Does.Contain("McvDeployFailure.SameHandout(held.Kind, held.Field, kind, field))\n\t\t\t\treturn;"));
+		}
+
+		[Test]
+		public void TheBreakerNeverStarvesAnMcvWhenThereIsNoBaseSite()
+		{
+			// Sonnet FIX A: at the max count with no base fallback the field loop goes on (a failure there counts, the breaker leaves Base).
+			var planner = Planner();
+			Assert.That(planner, Does.Contain("== McvDeployPhase.Base && McvSafeFallback(safe, mcv) is CPos baseCell)"));
+			Assert.That(planner, Does.Not.Contain("return baseSite;"));
+			var s = FailFields(6);
+			Assert.That(DeployBreaker.Decide(s, 6), Is.EqualTo(DeployPhase.Base));
+			Assert.That(DeployBreaker.Decide(DeployBreaker.OnFailed(s), 6), Is.EqualTo(DeployPhase.Fields), "one more failed field handout and the base phase is over");
 		}
 
 		[Test]

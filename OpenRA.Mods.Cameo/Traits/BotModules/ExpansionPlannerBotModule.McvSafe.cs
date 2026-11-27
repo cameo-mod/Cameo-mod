@@ -95,10 +95,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			public static McvDeployFailState OnFailed(McvDeployFailState s) => new McvDeployFailState(s.Failures + 1);
 
 			/// <summary>
-			/// Ticks after the handout before an idle MCV counts as failed. The guard pass runs every 25 ticks, so a pass
-			/// right after the handout can see the MCV still idle before the order lands; that is not a failure.
+			/// Ticks after the FIRST handout of a site before an idle MCV counts as failed. A bot order is not executed until its order latency has passed
+			/// (the repo's own bound: FeedbackTime = 30 "must be >= netlag"), so a guard pass inside that window can see the MCV idle before the order has started;
+			/// that is not a failure (Sonnet FIX B). The clock is NOT restarted by the engine's re-issue of the same site (see SameHandout), otherwise its 20-tick
+			/// re-issue would keep an idle MCV inside the grace forever.
 			/// </summary>
-			public const int DeployGraceTicks = 10;
+			public const int DeployGraceTicks = 30;
+
+			/// <summary>A re-issue of the site an MCV already holds keeps the first handout (and its tick); a different site is a new handout.</summary>
+			public static bool SameHandout(McvHandoutKind heldKind, int heldField, McvHandoutKind kind, int field) => heldKind == kind && heldField == field;
 
 			public static bool IsFailure(int issueTick, int now, bool idle, bool alive) =>
 				idle && alive && now - issueTick >= DeployGraceTicks;
@@ -463,6 +468,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// <summary>MCV-DEPLOY-FAIL-01: the planner handed this MCV a site (a field, or the base on the breaker's base try).</summary>
 		void NoteMcvHandout(Actor mcv, McvHandoutKind kind, int field, CPos center, int now)
 		{
+			// The engine re-issues an idle MCV every ScanForNewMcvInterval (20) and asks for the site again: the same site keeps its first tick, so the grace runs from the first order.
+			if (mcvPending.TryGetValue(mcv.ActorID, out var held) && McvDeployFailure.SameHandout(held.Kind, held.Field, kind, field))
+				return;
+
 			mcvPending[mcv.ActorID] = new McvPendingHandout { Kind = kind, Field = field, Center = center, IssueTick = now };
 		}
 
@@ -486,7 +495,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 #if CAMEO_DEV_LOGGING
 			var mobile = mcv.TraitOrDefault<Mobile>();
 			var transformInfo = mcv.Info.TraitInfoOrDefault<TransformsInfo>();
-			var into = transformInfo == null ? null : world.Map.Rules.Actors[transformInfo.IntoActor];
+			var into = transformInfo != null && world.Map.Rules.Actors.TryGetValue(transformInfo.IntoActor, out var intoInfo) ? intoInfo : null;
 			var buildingInfo = into?.TraitInfoOrDefault<BuildingInfo>();
 			var canPlace = into != null && buildingInfo != null && world.CanPlaceBuilding(mcv.Location + transformInfo.Offset, into, buildingInfo, mcv);
 			Log.Write("debug", $"AI ({player.ClientIndex}): mcv_deploy_fail mcv={mcv.ActorID} cell={mcv.Location} kind={pending.Kind} field={pending.Field} field_centre={pending.Center} move_result={mobile?.MoveResult} can_place={canPlace} order_source=unknown attempt=move+deploy_pair failures={state.Failures} tick={now}");

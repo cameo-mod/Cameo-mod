@@ -210,7 +210,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly int McvMaxSiteHandouts = 3;
 
 		[Desc("MCV-DEPLOY-FAIL-01 switch (ablation row mcv_deploy_fail_park): a field handed to an idle MCV whose deploy silently",
-			"failed is parked for DeployFailParkTicks, and the per-MCV failed-handout breaker runs. Off = the pre-fix handout rules.")]
+			"failed is parked for DeployFailParkTicks, and the per-MCV failed-handout breaker runs. Needs MCV-SAFE armed (the handouts are recorded by its guard pass); without it nothing is recorded and nothing changes. Off = the pre-fix handout rules.")]
 		public readonly bool McvDeployFailPark = false;
 
 		[Desc("MCV-DEPLOY-FAIL-01: ticks a field whose handed-out deploy failed is left out of the candidates.")]
@@ -3323,13 +3323,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (McvDeployFailParkOn && safe != null)
 			{
 				mcvDeployFailState.TryGetValue(mcv.ActorID, out var known);
-				if (McvDeployFailure.Decide(known, Info.McvMaxFailedDeploys) == McvDeployPhase.Base)
+				// The base try is only taken when there is a base site; with none (fallback off, no base centre, not an expansion MCV) the field loop below goes on,
+				// so a failure there still counts and the breaker leaves Base (Sonnet FIX A: it must never starve an MCV).
+				if (McvDeployFailure.Decide(known, Info.McvMaxFailedDeploys) == McvDeployPhase.Base && McvSafeFallback(safe, mcv) is CPos baseCell)
 				{
-					var baseSite = McvSafeFallback(safe, mcv);
-					if (baseSite is CPos baseCell)
-						NoteMcvHandout(mcv, McvHandoutKind.Base, -1, baseCell, tick);
-
-					return baseSite;
+					NoteMcvHandout(mcv, McvHandoutKind.Base, -1, baseCell, tick);
+					return baseCell;
 				}
 			}
 
