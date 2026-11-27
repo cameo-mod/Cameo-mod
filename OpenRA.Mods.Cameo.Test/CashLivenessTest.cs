@@ -155,11 +155,12 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheStaleReleaseNeverReleasesACapAndBothClocksRunEveryVisit()
 		{
 			var part = RepoFile(Bots + "UnitBuilderBotModuleCA.CashLiveness.cs");
-			Assert.That(part, Does.Contain("bool StaleReleaseOn => Info.CashLivenessStaleRelease && !ablateStaleRelease.Off(player, AblationIds.ClStaleRelease);"));
-			Assert.That(part, Does.Contain("var capInHold = held && !FairService && requestPause.Any(rp => !ReferenceEquals(rp, baseBuilderPause) && rp is IBotItemAwareUnitCap"));
+			Assert.That(part, Does.Contain("bool StaleReleaseOn => switchesActive && Info.CashLivenessStaleRelease && !ablateStaleRelease.Off(player, AblationIds.ClStaleRelease);"));
+			Assert.That(part, Does.Contain("if (!ReferenceEquals(rp, baseBuilderPause) && rp is IBotItemAwareUnitCap && rp.IsTraitEnabled() && rp.PauseUnitProduction)"));
+			Assert.That(Count(part, "=>"), Is.EqualTo(1), "only the StaleReleaseOn property: no closure on the visit path");
 			Assert.That(part, Does.Contain("CashLiveness.Released(ref voteHoldSince, held && !capInHold, world.WorldTick,"), "a cap in the hold stops the clock");
 			Assert.That(part, Does.Contain("CashLiveness.Released(ref refineryHoldSince, held, world.WorldTick,"));
-			Assert.That(Count(part, "return released && StaleReleaseOn;"), Is.EqualTo(2), "the clock runs before the switch is read");
+			Assert.That(Count(part, "if (!StaleReleaseOn)\n\t\t\t\treturn false;"), Is.EqualTo(2), "row off: no clock and no work (Opus 11-27)");
 
 			var ub = RepoFile(Bots + "UnitBuilderBotModuleCA.cs");
 			var gate = Between(ub, "var held = requestPause.Any(", "var clock = BotVisitClock.Of(bot);");

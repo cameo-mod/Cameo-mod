@@ -407,6 +407,7 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly bool CashLivenessCapSpend = false;
 
 		[Desc("CASH-LIVENESS-01: the bank (cash + resources) a capped bot needs before the cap spend applies. Learnable (DEV training only); clamped 0..20000.")]
+		// TODO(LA02 integration, after the playtest): learnables row, prior 1000, clamp 0..20000, switch cl_cap_spend.
 		public readonly int CapSpareCash = 1000;
 
 		[Desc("S8-CASH-HOLD: the hold applies only when the bank is at least this percent of the blocked type's cost (an affordable-soon factory). Learnable (DEV training only).")]

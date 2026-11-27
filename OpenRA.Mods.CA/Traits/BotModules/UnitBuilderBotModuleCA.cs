@@ -247,15 +247,17 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly bool UnitGatesUp = false;
 
 		[Desc("CASH-LIVENESS-01 (row cl_stale_release; user D6, Opus 11-27): a unit-production pause vote that has held for StaleHoldMaxTicks while the bank holds",
-			"StaleHoldSpareCash is released (the base builder's refinery pause and every other vote, each with its own clock). A cap (IBotItemAwareUnitCap, e.g.",
+			"StaleHoldSpareCash is released (the base builder's refinery pause on its own clock, every other vote on one shared clock). A cap (IBotItemAwareUnitCap, e.g.",
 			"BotGlobalUnitBudget) is a live state and is never released. Off in code.")]
 		public readonly bool CashLivenessStaleRelease = false;
 
 		[Desc("CASH-LIVENESS-01: the age at which a unit pause vote counts as stale, in ticks (750 = 30 s). Learnable (DEV training only); clamped 75..7500.")]
+		// TODO(LA02 integration, after the playtest): learnables row, prior 750, clamp 75..7500, switch cl_stale_release.
 		public readonly int StaleHoldMaxTicks = 750;
 
 		[Desc("CASH-LIVENESS-01: the bank (cash + resources) a stale vote needs before it is released; above a refinery's price, so a bot saving for its refinery",
 			"is not released into spending the savings. Learnable (DEV training only); clamped 0..20000.")]
+		// TODO(LA02 integration, after the playtest): learnables row, prior 3000, clamp 0..20000, switch cl_stale_release.
 		public readonly int StaleHoldSpareCash = 3000;
 
 		[Desc("UNIT-MIX-01: the queue types that make an airfield (aircraft floor); the infantry floor uses IdleQueueFloorQueues.")]

@@ -8,7 +8,6 @@
  */
 #endregion
 
-using System.Linq;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 
@@ -22,26 +21,38 @@ namespace OpenRA.Mods.CA.Traits
 		int voteHoldSince = -1;
 		int refineryHoldSince = -1;
 
-		bool StaleReleaseOn => Info.CashLivenessStaleRelease && !ablateStaleRelease.Off(player, AblationIds.ClStaleRelease);
+		bool StaleReleaseOn => switchesActive && Info.CashLivenessStaleRelease && !ablateStaleRelease.Off(player, AblationIds.ClStaleRelease);
 
-		/// <summary>The general pause votes (every vote but the base builder's): released when stale. Both clocks run on every visit, with the row on or off.</summary>
+		/// <summary>The general pause votes (every vote but the base builder's, one clock for the set): released when stale. Row off = no clock, no work
+		/// (Opus 11-27); a row turned on later starts its clock at the next visit.</summary>
 		bool StaleVoteReleased(bool held, IBotRequestPauseUnitProduction baseBuilderPause)
 		{
+			if (!StaleReleaseOn)
+				return false;
+
 			// Under the fair service the caps are not part of `held` (they stop only the items they count); under the legacy service they are.
-			var capInHold = held && !FairService && requestPause.Any(rp => !ReferenceEquals(rp, baseBuilderPause) && rp is IBotItemAwareUnitCap
-				&& rp.IsTraitEnabled() && rp.PauseUnitProduction);
-			var released = CashLiveness.Released(ref voteHoldSince, held && !capInHold, world.WorldTick, Info.StaleHoldMaxTicks,
+			var capInHold = false;
+			if (held && !FairService)
+				foreach (var rp in requestPause)
+					if (!ReferenceEquals(rp, baseBuilderPause) && rp is IBotItemAwareUnitCap && rp.IsTraitEnabled() && rp.PauseUnitProduction)
+					{
+						capInHold = true;
+						break;
+					}
+
+			return CashLiveness.Released(ref voteHoldSince, held && !capInHold, world.WorldTick, Info.StaleHoldMaxTicks,
 				playerResources.GetCashAndResources(), Info.StaleHoldSpareCash);
-			return released && StaleReleaseOn;
 		}
 
 		/// <summary>The base builder's refinery pause: released when stale (a bot that banks StaleHoldSpareCash for StaleHoldMaxTicks and still has no
 		/// refinery is not getting one by holding its units).</summary>
 		bool StaleRefineryReleased(bool held)
 		{
-			var released = CashLiveness.Released(ref refineryHoldSince, held, world.WorldTick, Info.StaleHoldMaxTicks,
+			if (!StaleReleaseOn)
+				return false;
+
+			return CashLiveness.Released(ref refineryHoldSince, held, world.WorldTick, Info.StaleHoldMaxTicks,
 				playerResources.GetCashAndResources(), Info.StaleHoldSpareCash);
-			return released && StaleReleaseOn;
 		}
 	}
 }

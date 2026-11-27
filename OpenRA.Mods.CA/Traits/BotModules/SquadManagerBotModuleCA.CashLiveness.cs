@@ -23,6 +23,7 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly bool CashLivenessCapAllInEnabled = false;
 
 		[Desc("CASH-LIVENESS-01: how long a team seat stays at its unit cap before the budget_cap all-in fires, in ticks (1500 = 60 s). Learnable (DEV training only); clamped 375..7500.")]
+		// TODO(LA02 integration, after the playtest): learnables row, prior 1500, clamp 375..7500, switch cl_cap_allin.
 		public readonly int CapAllInTicks = 1500;
 	}
 
