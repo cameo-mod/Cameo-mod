@@ -4889,6 +4889,7 @@ Player:
 		TeamLeadAllInEnabled: true
 		TeamLeadDefendTeamEnabled: true
 		DefendOneEnabled: false
+		CashLivenessCapAllInEnabled: true
 		TeamDefendTwoTierEnabled: true
 		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
 		GuardFloorEnabled: true
@@ -5080,6 +5081,7 @@ Player:
 		TeamLeadAllInEnabled: true
 		TeamLeadDefendTeamEnabled: true
 		DefendOneEnabled: false
+		CashLivenessCapAllInEnabled: true
 		TeamDefendTwoTierEnabled: true
 		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
 		GuardFloorEnabled: true
@@ -5267,6 +5269,7 @@ Player:
 		TeamLeadAllInEnabled: true
 		TeamLeadDefendTeamEnabled: true
 		DefendOneEnabled: false
+		CashLivenessCapAllInEnabled: true
 		TeamDefendTwoTierEnabled: true
 		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
 		GuardFloorEnabled: true
@@ -5456,6 +5459,7 @@ Player:
 		TeamLeadAllInEnabled: true
 		TeamLeadDefendTeamEnabled: true
 		DefendOneEnabled: false
+		CashLivenessCapAllInEnabled: true
 		TeamDefendTwoTierEnabled: true
 		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
 		GuardFloorEnabled: true
@@ -5645,6 +5649,7 @@ Player:
 		TeamLeadAllInEnabled: true
 		TeamLeadDefendTeamEnabled: true
 		DefendOneEnabled: false
+		CashLivenessCapAllInEnabled: true
 		TeamDefendTwoTierEnabled: true
 		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
 		GuardFloorEnabled: true
@@ -5831,6 +5836,7 @@ Player:
 		TeamLeadAllInEnabled: true
 		TeamLeadDefendTeamEnabled: true
 		DefendOneEnabled: false
+		CashLivenessCapAllInEnabled: true
 		TeamDefendTwoTierEnabled: true
 		# CONSOLIDATE-03 P7 (b) row sq_guard_floor: the home guard keeps this percent of its units at home (personality prior, learnable) and guard-lend lends only the units above it; 0 during an open all-in.
 		GuardFloorEnabled: true
@@ -6146,6 +6152,8 @@ Player:
 		BbS5CaptureReason: true
 		# CONSOLIDATE-03 P2 (b) (row cl_one_reserve): the S8-S10 building reserve uses the unit reserve's personality lean (one reserve line per tier; it only lowers).
 		CashOneReserve: true
+		# CASH-LIVENESS-01 (row cl_cap_spend, B2 ARM 11-27): at the unit cap with spare cash the unit reserve is 0 and the S9 need gate is waived (caps hold).
+		CashLivenessCapSpend: true
 		# S8-CASH-HOLD (row bb_s8_cash_hold, Opus V08G): an eligible S8 factory that waits only for cash holds the S10 fractions back for at most 750 ticks.
 		BbS8CashHold: true
 		S8HoldMaxTicks: 750
@@ -6663,6 +6671,8 @@ Player:
 		# CONSOLIDATE-03 P5 (b) row ub_gates_up: the in-pass limit headroom, the capturer cap (pending capturers) and the aircraft caps (pending aircraft) are asked before the draw, so a type they refuse is not in the pool,
 		# the floors, the core or the draw bound. NOT distribution-equal (the RNG stream changes). @generic only; the code default stays false (classic and every other bot unchanged).
 		UnitGatesUp: true
+		# CASH-LIVENESS-01 (row cl_stale_release, B2 ARM 11-27): a non-cap unit pause vote held 750 ticks with 3000 banked is released.
+		CashLivenessStaleRelease: true
 		# CONSOLIDATE-03 P5 (a): DEV-only unit pick equivalence trace (unit_pick_trace.csv); compiled out of release, record only. @generic only.
 		UnitPickTrace: true
 		# CONSOLIDATE-01 C9 (X13): paid Promotions also start while a unit-production pause vote is up (pq_upgrade_service); free items always did.

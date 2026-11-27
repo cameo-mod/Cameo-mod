@@ -130,7 +130,7 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void EverySwitchIsOffInCodeAndNoYamlArmsIt()
+		public void EverySwitchIsOffInCodeAndTheYamlArmsTheGenericBotsOnly()
 		{
 			Assert.That(RepoFile(Bots + "UnitBuilderBotModuleCA.cs"), Does.Contain("public readonly bool CashLivenessStaleRelease = false;"));
 			Assert.That(RepoFile(Bots + "UnitBuilderBotModuleCA.cs"), Does.Contain("public readonly int StaleHoldMaxTicks = 750;"));
@@ -144,9 +144,17 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(new BaseBuilderBotModuleCAInfo().CashLivenessCapSpend, Is.False);
 			Assert.That(new SquadManagerBotModuleCAInfo().CashLivenessCapAllInEnabled, Is.False);
 
+			// B2 ARM (playtest night 11-27): armed in the generic blocks and the six personality squad blocks; classic untouched; thresholds at their priors.
 			var yaml = RepoFile("mods/cameo/ai/ai.yaml");
-			foreach (var key in new[] { "CashLiveness", "StaleHoldMaxTicks", "StaleHoldSpareCash", "CapSpareCash", "CapAllInTicks" })
-				Assert.That(yaml, Does.Not.Contain(key), key + ": not armed or tuned in yaml (the A/B arms it)");
+			var classic = yaml.IndexOf("\tSquadManagerBotModuleCA@classic:", StringComparison.Ordinal);
+			Assert.That(Count(yaml, "\n\t\tCashLivenessCapSpend: true\n"), Is.EqualTo(1));
+			Assert.That(Count(yaml, "\n\t\tCashLivenessStaleRelease: true\n"), Is.EqualTo(1));
+			Assert.That(Count(yaml[..classic], "\n\t\tCashLivenessCapAllInEnabled: true\n"), Is.EqualTo(6));
+			Assert.That(Count(yaml, "CashLiveness"), Is.EqualTo(8), "no other arming");
+			Assert.That(yaml.IndexOf("CashLivenessCapSpend", StringComparison.Ordinal), Is.LessThan(yaml.IndexOf("\tBaseBuilderBotModuleCA@classic:", StringComparison.Ordinal)));
+			Assert.That(yaml.IndexOf("CashLivenessStaleRelease", StringComparison.Ordinal), Is.LessThan(yaml.IndexOf("\tUnitBuilderBotModuleCA@classic:", StringComparison.Ordinal)));
+			foreach (var key in new[] { "StaleHoldMaxTicks", "StaleHoldSpareCash", "CapSpareCash", "CapAllInTicks" })
+				Assert.That(yaml, Does.Not.Contain(key), key + ": the prior stays in code");
 		}
 
 		// --- wiring --------------------------------------------------------------------------------------------------------------------------
