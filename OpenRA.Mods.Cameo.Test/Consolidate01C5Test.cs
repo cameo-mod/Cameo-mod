@@ -233,8 +233,8 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(admits, Does.Contain("case BaseBuildStage.S9ExtraDefence:\n\t\t\t\t\treturn PipelineExtraDefenceAdmits(queue, buildableNames, candidate.Name);"));
 			Assert.That(admits, Does.Contain("return PipelineFractionCapsAdmit(queue, buildableNames, candidate.Name)"), "S10 keeps its old caps");
 			Assert.That(admits, Does.Contain("&& IsArmedDefenceInfo(info) && PipelineDefenceCapHolds()"), "and the cap for a defence");
-			Assert.That(admits, Does.Contain("default:\n\t\t\t\t\treturn true;"), "S4 and every other stage: no world cap (D1)");
-			Assert.That(admits, Does.Not.Contain("S4AntiRush"), "no S4 case: RATIO-2X, need gate and cap never veto the set");
+			Assert.That(admits, Does.Contain("default:\n\t\t\t\t\treturn true;"), "every other stage: no world cap (D1)");
+			Assert.That(admits, Does.Contain("case BaseBuildStage.S4AntiRush:\n\t\t\t\t\treturn !PipelineDefenceCapHolds();"), "S4 holds to the AF2 defence cap (A4: other caps still apply)");
 		}
 
 		// D1 + the V07 crash requirement: the S4 source holds nothing back, claims nothing and never dereferences a PickOrPower result.

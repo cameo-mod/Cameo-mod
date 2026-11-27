@@ -77,7 +77,7 @@ namespace OpenRA.Mods.Cameo.Test
 				Is.LessThan(q.IndexOf("var openingStep = ChooseOpeningStandard(", StringComparison.Ordinal)), "right after the first production building, above the opening order");
 			Assert.That(q, Does.Contain("\t\t\t\t\t|| antiRushPick\n"), "floor exempt");
 			Assert.That(q, Does.Contain("MobileSpendBlocks(cashNow, cost, reserveFloor, itemEssential || antiRushPick)"), "mobile-spend reserve exempt");
-			Assert.That(q, Does.Contain("|| (antiRushPickName != null && item.Name == antiRushPickName)); // C-04"), "RATIO first-copy exemption");
+			Assert.That(q, Does.Contain("|| (antiRushPickName != null && item.Name == antiRushPickName && EarlyDefenceWaiverNow())"), "RATIO first-copy exemption, only while the A4 waiver holds");
 
 			// the extras keep both gates: the roll still holds ground defences before a threat is seen
 			Assert.That(q, Does.Contain("BaseFix01CA.DefenceNeedHolds(true, IsGroundDefence(defenceCandidate), DefenceThreatSeen())"));
