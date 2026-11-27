@@ -22,6 +22,7 @@ namespace OpenRA.Mods.Cameo.Test
 	{
 		const string Unit = "mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs";
 		const string Harvest = "mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.HarvesterTarget.cs";
+		const string BaseBuilder = "mods/CA/Traits/BotModules/BaseBuilderBotModuleCA.cs";
 		const string Cache = "mods/CA/Traits/BotModules/BotModuleLogic/ProductionCostCache.cs";
 
 		static string Source(string file) => File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "source", file)).Replace("\r\n", "\n");
@@ -61,6 +62,28 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(c, Does.Contain("if (!active)\n\t\t\t\treturn queue.GetProductionCost(unit);"), "off or outside a visit = the live call");
 			Assert.That(c, Does.Contain("var key = (queue.Actor.ActorID, queue.Info.Type, unit.Name);"));
 			Assert.That(c, Does.Contain("return costs[key] = queue.GetProductionCost(unit);"), "a miss stores the live value");
+		}
+
+		[Test]
+		public void BaseBuilderCacheBeginsAndEndsAroundEachModuleVisit()
+		{
+			var baseBuilder = Source(BaseBuilder);
+			Assert.That(baseBuilder, Does.Contain("void IBotTick.BotTick(IBot bot)\n\t\t{\n\t\t\tcostCache.BeginVisit(true);\n\t\t\ttry\n\t\t\t{\n\t\t\t\tBotTickVisit(bot);\n\t\t\t}\n\t\t\tfinally\n\t\t\t{\n\t\t\t\tcostCache.EndVisit();\n\t\t\t}\n\t\t}"));
+			Assert.That(baseBuilder, Does.Contain("internal int ProductionCost(ProductionQueue queue, ActorInfo actorInfo) => costCache.Get(queue, actorInfo);"));
+			Assert.That(baseBuilder, Does.Not.Contain("GetProductionCost("));
+
+			foreach (var file in new[]
+			{
+				"mods/CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs",
+				"mods/CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.Pipeline01.cs",
+				"mods/CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.Pipeline01Defence.cs",
+				"mods/CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.Pipeline01Stages.cs"
+			})
+			{
+				var source = Source(file);
+				Assert.That(source, Does.Not.Contain("GetProductionCost("), file + " uses the visit-scoped BaseBuilder owner");
+				Assert.That(source, Does.Contain("baseBuilder.ProductionCost("), file + " routes costs through the cache");
+			}
 		}
 
 		[Test]

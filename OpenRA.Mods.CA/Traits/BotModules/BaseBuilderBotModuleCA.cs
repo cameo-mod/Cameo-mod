@@ -774,6 +774,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		readonly World world;
 		readonly Player player;
+		readonly ProductionCostCache costCache = new();
+		internal int ProductionCost(ProductionQueue queue, ActorInfo actorInfo) => costCache.Get(queue, actorInfo);
 		PlayerResources playerResources;
 		IResourceLayer resourceLayer;
 		IPathFinder pathFinder;
@@ -1546,6 +1548,19 @@ namespace OpenRA.Mods.CA.Traits
 
 		void IBotTick.BotTick(IBot bot)
 		{
+			costCache.BeginVisit(true);
+			try
+			{
+				BotTickVisit(bot);
+			}
+			finally
+			{
+				costCache.EndVisit();
+			}
+		}
+
+		void BotTickVisit(IBot bot)
+		{
 			lastBotTick = world.WorldTick;
 
 			if (ExpansionSafetyArmed)
@@ -2075,7 +2090,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (!UsesBarracksFirstOpening || openingRefineryCostCommitted)
 				return;
 
-			var cost = queue.GetProductionCost(actorInfo);
+			var cost = ProductionCost(queue, actorInfo);
 			if (Info.PowerTypes.Contains(actorInfo.Name))
 				openingPowerCommittedCost += cost;
 			else if (Info.BarracksTypes.Contains(actorInfo.Name) && !openingBarracksCostCommitted)
@@ -2088,14 +2103,14 @@ namespace OpenRA.Mods.CA.Traits
 				// Custom maps may start with opening structures already present instead of producing them.
 				if (openingPowerCommittedCost == 0)
 					openingPowerCommittedCost = powerBuildings.Actors.Where(a => !a.IsDead)
-						.Sum(a => queue.GetProductionCost(a.Info));
+					.Sum(a => ProductionCost(queue, a.Info));
 
 				if (!openingBarracksCostCommitted)
 				{
 					var barracks = barracksBuildings.Actors.OrderBy(a => a.ActorID).FirstOrDefault(a => !a.IsDead);
 					if (barracks != null)
 					{
-						openingBarracksCommittedCost = queue.GetProductionCost(barracks.Info);
+						openingBarracksCommittedCost = ProductionCost(queue, barracks.Info);
 						openingBarracksCostCommitted = true;
 					}
 				}
@@ -2802,7 +2817,7 @@ namespace OpenRA.Mods.CA.Traits
 						if (!queue.BuildableItems().Any(b => b.Name == name))
 							continue;
 
-						var itemCost = queue.GetProductionCost(info);
+						var itemCost = ProductionCost(queue, info);
 						cost = cost == null ? itemCost : Math.Min(cost.Value, itemCost);
 					}
 				}

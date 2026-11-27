@@ -45,7 +45,7 @@ namespace OpenRA.Mods.CA.Traits
 			var candidates = new List<(string Name, int Cost, int OwnedOrQueued)>();
 			foreach (var info in buildable)
 			{
-				if (!IsGroundDefence(info) || NoSpaceBanned(info.Name) || queue.GetProductionCost(info) > bank)
+				if (!IsGroundDefence(info) || NoSpaceBanned(info.Name) || baseBuilder.ProductionCost(queue, info) > bank)
 					continue;
 
 				var count = OwnedOrQueuedCount([info.Name]);

@@ -1076,7 +1076,7 @@ namespace OpenRA.Mods.CA.Traits
 					|| (openingPickName != null && item.Name == openingPickName)
 					|| antiRushPick
 					|| (FloorExemptOn && itemEssential);
-				var cost = queue.GetProductionCost(item);
+				var cost = baseBuilder.ProductionCost(queue, item);
 
 				// PROD-IDLE_PLAN_03 section 2.3 class of this building order: K1/K2 essentials, K4 other
 				// essential buildings (extra refineries, planner and demand wants), K6 everything else.
@@ -1118,7 +1118,7 @@ namespace OpenRA.Mods.CA.Traits
 					// TF-2: the reservation — optional spend (optional defences, crawl links) may
 					// not push cash below the reserved mobile share; essentials keep the old floor.
 					if (BaseBuilderQueueEvalCA.MobileSpendBlocks(playerResources.GetCashAndResources(),
-							queue.GetProductionCost(item), reserveFloor, essential || antiRushPick))
+							baseBuilder.ProductionCost(queue, item), reserveFloor, essential || antiRushPick))
 					{
 						pendingDemandPick = default;
 						return false;
@@ -1157,7 +1157,7 @@ namespace OpenRA.Mods.CA.Traits
 				// here (the published want alone admits nothing). The claim becomes paid only when the
 				// item is seen in this producer's queue; an intent that never arrives drops uncharged.
 				if (lawWants != null && item.Name == lawWants.WantedLinkBuilding
-					&& !lawWants.TryClaimCrawlLink(queue.Actor, item.Name, queue.GetProductionCost(item)))
+					&& !lawWants.TryClaimCrawlLink(queue.Actor, item.Name, baseBuilder.ProductionCost(queue, item)))
 				{
 					pendingDemandPick = default;
 					return false;
@@ -1166,7 +1166,7 @@ namespace OpenRA.Mods.CA.Traits
 				// CRAWL-SAFETY (S3): the front defence is claimed atomically at admission like the
 				// crawl link — one defence in flight at the frontier, never two queues at once.
 				if (lawWants != null && item.Name == lawWants.WantedFrontDefence
-					&& !lawWants.TryClaimFrontDefence(queue.Actor, item.Name, queue.GetProductionCost(item)))
+					&& !lawWants.TryClaimFrontDefence(queue.Actor, item.Name, baseBuilder.ProductionCost(queue, item)))
 				{
 					pendingDemandPick = default;
 					return false;
@@ -2249,7 +2249,7 @@ namespace OpenRA.Mods.CA.Traits
 			pauseBuilding ??= player.PlayerActor.TraitsImplementing<IBotRequestPauseBuildingProduction>().ToArray();
 			mobileReserve ??= player.PlayerActor.TraitsImplementing<IBotMobileSpendReserve>().FirstEnabledTraitOrDefault();
 			var essential = IsArmyFirstEssential(item);
-			var cost = queue.GetProductionCost(item);
+			var cost = baseBuilder.ProductionCost(queue, item);
 			var admitted = !pauseBuilding.Any(p => p.PausesBuilding(item, essential, admission, cost))
 				&& !BaseBuilderQueueEvalCA.MobileSpendBlocks(playerResources.GetCashAndResources(), cost, mobileReserve?.MobileSpendFloor ?? 0, essential);
 			if (!admitted)
@@ -2324,7 +2324,7 @@ namespace OpenRA.Mods.CA.Traits
 			var candidates = new List<(string Name, int Cost, int OwnedOrQueued)>();
 			foreach (var info in buildableThings)
 			{
-				if (!IsGroundDefence(info) || NoSpaceBanned(info.Name) || queue.GetProductionCost(info) > availableCash)
+				if (!IsGroundDefence(info) || NoSpaceBanned(info.Name) || baseBuilder.ProductionCost(queue, info) > availableCash)
 					continue;
 
 				var count = OwnedOrQueuedCount([info.Name]);
@@ -2382,7 +2382,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (NavalNeedsWater(item))
 					continue;
 
-				var cost = Math.Max(0, queue.GetProductionCost(item));
+				var cost = Math.Max(0, baseBuilder.ProductionCost(queue, item));
 				if (best == null || cost < bestCost || (cost == bestCost && string.CompareOrdinal(item.Name, best.Name) < 0))
 				{
 					best = item;
@@ -2625,7 +2625,7 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 
 				infos.Add(item);
-				candidates.Add((item.Name, Math.Max(0, queue.GetProductionCost(item))));
+				candidates.Add((item.Name, Math.Max(0, baseBuilder.ProductionCost(queue, item))));
 			}
 
 			var index = UnlistedOnceCA.Pick(candidates);
@@ -3045,7 +3045,7 @@ namespace OpenRA.Mods.CA.Traits
 				// Finish the opening power plant before starting the barracks.
 				if (!baseBuilder.HasCompletedPowerPlant())
 				{
-					if (!baseBuilder.HasQueuedPowerPlant() && power != null && queue.GetProductionCost(power) <= availableCash)
+					if (!baseBuilder.HasQueuedPowerPlant() && power != null && baseBuilder.ProductionCost(queue, power) <= availableCash)
 					{
 						AIUtils.BotDebug("{0} decided to build {1}: Priority override (opening power)", queue.Actor.Owner, power.Name);
 						return power;
@@ -3055,7 +3055,7 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					var barracks = GetProducibleBuilding(baseBuilder.Info.BarracksTypes, buildableThings);
 
-					if (barracks != null && queue.GetProductionCost(barracks) <= availableCash)
+					if (barracks != null && baseBuilder.ProductionCost(queue, barracks) <= availableCash)
 					{
 						if (HasSufficientPowerForActor(barracks))
 						{
@@ -3063,7 +3063,7 @@ namespace OpenRA.Mods.CA.Traits
 							return barracks;
 						}
 
-						if (power != null && queue.GetProductionCost(power) <= availableCash)
+						if (power != null && baseBuilder.ProductionCost(queue, power) <= availableCash)
 						{
 							AIUtils.BotDebug("{0} decided to build {1}: Priority override (opening barracks would cause low power)", queue.Actor.Owner, power.Name);
 							return power;

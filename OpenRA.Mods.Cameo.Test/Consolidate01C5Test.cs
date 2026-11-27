@@ -250,7 +250,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(s4, Does.Contain("EarlyDefencePlan.Count(botLimits != null ? botLimits.Info.ArmyShareTargetPermille : -1, b.AntiRushBaseMin, b.AntiRushBaseMax)"));
 			Assert.That(s4, Does.Contain("EarlyDefencePlan.Wanted(playerBuildings.Any(a => b.ProductionTypes.Contains(a.Info.Name)), have, count)"));
 			Assert.That(s4, Does.Contain("var bank = CashLedger.BuildingBank(AllProducersOn, playerResources.GetCashAndResources(), orderedCostThisSweep);"), "CONSOLIDATE-03 P2 (a): the ledger bank = SweepBank");
-			Assert.That(s4, Does.Contain("queue.GetProductionCost(info) > bank"), "only a set member the bank pays now: the K bound is not spent on unaffordable types");
+			Assert.That(s4, Does.Contain("baseBuilder.ProductionCost(queue, info) > bank"), "only a set member the bank pays now: the K bound is not spent on unaffordable types");
 			Assert.That(s4, Does.Contain("AntiRushCA.Order(candidates, AntiRushStageMaxCandidates)"));
 			Assert.That(d, Does.Contain("const int AntiRushStageMaxCandidates = 3;"));
 

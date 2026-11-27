@@ -339,7 +339,7 @@ namespace OpenRA.Mods.CA.Traits
 				start = power;
 			}
 
-			var startCost = queue.GetProductionCost(start);
+			var startCost = baseBuilder.ProductionCost(queue, start);
 			// CONSOLIDATE-03 P2 (a): A6 is the cash ledger's building admission (the same test, CashLedger.AdmitBuilding).
 			if (!CashLedger.AdmitBuilding(s.Bank, startCost, CashLedger.BuildingReserve(c.Stage, s.ProductionCashReserve, s.ReserveLean)).Ok)
 			{
@@ -532,10 +532,10 @@ namespace OpenRA.Mods.CA.Traits
 				return true;
 
 			var info = world.Map.Rules.Actors[admitted];
-			if (admitted == law.WantedLinkBuilding && !law.TryClaimCrawlLink(queue.Actor, admitted, queue.GetProductionCost(info)))
+			if (admitted == law.WantedLinkBuilding && !law.TryClaimCrawlLink(queue.Actor, admitted, baseBuilder.ProductionCost(queue, info)))
 				return false;
 
-			return admitted != law.WantedFrontDefence || law.TryClaimFrontDefence(queue.Actor, admitted, queue.GetProductionCost(info));
+			return admitted != law.WantedFrontDefence || law.TryClaimFrontDefence(queue.Actor, admitted, baseBuilder.ProductionCost(queue, info));
 		}
 
 		// RATIO-2X-01: whether an admitted start is a static defence the tracker records (RatioGate's isDefence, without a verdict).
@@ -558,7 +558,7 @@ namespace OpenRA.Mods.CA.Traits
 		void AdmitPlanned(IBot bot, ProductionQueue queue, ActorInfo item)
 		{
 			pauseBuilding ??= player.PlayerActor.TraitsImplementing<IBotRequestPauseBuildingProduction>().ToArray();
-			var cost = queue.GetProductionCost(item);
+			var cost = baseBuilder.ProductionCost(queue, item);
 			var ratioDefence = PipelineRatioRecords(item);
 
 			baseBuilder.RecordOpeningStructureQueued(queue, item);

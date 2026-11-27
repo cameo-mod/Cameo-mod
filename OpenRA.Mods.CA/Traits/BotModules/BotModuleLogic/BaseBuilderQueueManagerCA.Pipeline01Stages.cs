@@ -133,7 +133,7 @@ namespace OpenRA.Mods.CA.Traits
 					OwnRuleStage: b.ConstructionYardTypes.Contains(name) || (b.RefineryTypes.Contains(name) && !unlock),
 					Count: BaseBuildPlanCA.CountOf(snapshot, name),
 					Depth: depths.TryGetValue(name, out var depth) ? depth : 0,
-					Cost: queue.GetProductionCost(item)));
+					Cost: baseBuilder.ProductionCost(queue, item)));
 			}
 
 			return CoreOnceCA.Order(inputs);
@@ -209,7 +209,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (!info.HasTraitInfo<CashTricklerInfo>())
 					continue;
 
-				tricklers.Add((info.Name, queue.GetProductionCost(info), OwnedOrQueuedCount([info.Name]),
+				tricklers.Add((info.Name, baseBuilder.ProductionCost(queue, info), OwnedOrQueuedCount([info.Name]),
 					baseBuilder.TryGetBuildingLimit(info.Name, out var limit) ? limit : -1));
 			}
 

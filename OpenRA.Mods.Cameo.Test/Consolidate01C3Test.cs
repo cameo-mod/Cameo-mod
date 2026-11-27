@@ -427,7 +427,9 @@ namespace OpenRA.Mods.Cameo.Test
 			var plan = Source(PlanFile);
 			Assert.That(plan, Does.Contain("case BaseBuildStage.S5CoreOnce: return CoreOnceCandidates(s, rng);"));
 			Assert.That(plan, Does.Contain("if (stage == BaseBuildStage.S5CoreOnce && (frac.Value <= 0 || CountOf(s, frac.Key) != 0))"));
-			Assert.That(stages, Does.Contain("TechDepthCA.Compute(prereqsOf, providersOf, baseBuilder.Info.ConstructionYardTypes)"));
+			Assert.That(stages, Does.Contain("baseBuilder.RuleMetadata.CoreDepths(player.Faction.InternalName, baseBuilder.Info.ConstructionYardTypes)"));
+			var metadata = Source("mods/CA/Traits/BotModules/BotModuleLogic/BaseBuilderRuleMetadataCA.cs");
+			Assert.That(metadata, Does.Contain("TechDepthCA.Compute(prereqsOf, providersOf, constructionYardTypes)"));
 			Assert.That(stages, Does.Contain("if (snapshot.DefenceQueue)"), "the defence queue gets no core set");
 			Assert.That(stages, Does.Contain("FirstCopyKind(item)"));
 			Assert.That(stages, Does.Not.Contain("TechChainTypes.Contains"), "the pipeline reads no TechChainTypes; the derived depth replaces it");

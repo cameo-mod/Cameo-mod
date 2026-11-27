@@ -31,7 +31,11 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(stages, Does.Contain("baseBuilder.CaptureUnlockMaps = baseBuilder.RuleMetadata.CaptureMaps();"));
 			Assert.That(stages, Does.Contain("baseBuilder.RuleMetadata.CoreDepths(player.Faction.InternalName, baseBuilder.Info.ConstructionYardTypes)"));
 			Assert.That(stages, Does.Not.Contain("world.Map.Rules.Actors.Values"));
-			Assert.That(Regex.Matches(snapshot, "OrderBy\\(a => a.Name").Count, Is.EqualTo(1));
+			var captureStart = snapshot.IndexOf("internal static BaseBuilderRuleMetadataCA Capture(", StringComparison.Ordinal);
+			var recordsStart = snapshot.IndexOf("internal static BaseBuilderRuleMetadataCA FromRecords(", captureStart, StringComparison.Ordinal);
+			Assert.That(captureStart, Is.GreaterThanOrEqualTo(0));
+			Assert.That(recordsStart, Is.GreaterThan(captureStart));
+			Assert.That(Regex.Matches(snapshot.Substring(captureStart, recordsStart - captureStart), "OrderBy\\(a => a.Name").Count, Is.EqualTo(1));
 		}
 
 		[Test]
