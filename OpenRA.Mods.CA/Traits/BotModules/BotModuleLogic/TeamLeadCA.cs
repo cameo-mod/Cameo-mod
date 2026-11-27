@@ -860,6 +860,53 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>V07 TEAM-DEFEND: the team alarm in force (null = none ever raised; check TeamDefendCA.Active for its age). Host-side, shared by every bot of the team.</summary>
 		public TeamDefendCA.Alarm? DefendAlarm;
 
+		// TEAM-DEFEND-02 (row tm_defend_two_tier): what each answering seat could send to the alarm (spare) and what it has on its way (commit), the latest per seat key with the publish tick. Values and ticks only: no actor reference.
+		// A seat publishes its spare before it computes its quota and its commit after it sends; entries older than DefendTwo.LedgerMaxAgeTicks are ignored. Cleared only when the alarm's victim changes or the alarm is over (never on a same-victim refresh).
+		readonly Dictionary<string, (long Value, int Tick)> defendSpare = new(StringComparer.Ordinal);
+		readonly Dictionary<string, (long Value, int Tick)> defendCommit = new(StringComparer.Ordinal);
+
+		public void PublishDefendSpare(string seatKey, long value, int tick) => defendSpare[seatKey] = (value, tick);
+
+		public void PublishDefendCommit(string seatKey, long value, int tick) => defendCommit[seatKey] = (value, tick);
+
+		/// <summary>The fresh spare and commit of every seat except <paramref name="exceptSeatKey"/> (the caller adds its own live figures).</summary>
+		public (long Spare, long Commit) DefendSumsExcept(string exceptSeatKey, int now, int maxAgeTicks)
+		{
+			long spare = 0;
+			long commit = 0;
+			foreach (var kv in defendSpare)
+				if (!string.Equals(kv.Key, exceptSeatKey, StringComparison.Ordinal) && DefendTwo.Fresh(now, kv.Value.Tick, maxAgeTicks))
+					spare += kv.Value.Value;
+
+			foreach (var kv in defendCommit)
+				if (!string.Equals(kv.Key, exceptSeatKey, StringComparison.Ordinal) && DefendTwo.Fresh(now, kv.Value.Tick, maxAgeTicks))
+					commit += kv.Value.Value;
+
+			return (spare, commit);
+		}
+
+		string defendLedgerVictim;
+
+		/// <summary>
+		/// Every answering seat calls this at the start of a pass with the alarm's victim: the ledger is wiped ONCE when the victim changes (the first seat to see the new victim does it, the rest find it bound already), never on a
+		/// same-victim refresh. A per-seat check would let each seat wipe the entries the earlier seats of the same round had just published.
+		/// </summary>
+		public void BindDefendLedger(string victimKey)
+		{
+			if (string.Equals(defendLedgerVictim, victimKey, StringComparison.Ordinal))
+				return;
+
+			ClearDefendLedger();
+			defendLedgerVictim = victimKey;
+		}
+
+		public void ClearDefendLedger()
+		{
+			defendSpare.Clear();
+			defendCommit.Clear();
+			defendLedgerVictim = null;
+		}
+
 		/// <summary>The tick the last order was cancelled (a leader change excepted; -1 = never); tl_grace_rally holds the next publish for a while.</summary>
 		public int LastCancelTick = -1;
 

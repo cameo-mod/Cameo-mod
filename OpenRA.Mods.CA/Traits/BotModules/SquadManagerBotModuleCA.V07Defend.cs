@@ -64,6 +64,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (team == null || victim == null || victim.IsDead || !victim.IsInWorld || victim.Owner == null)
 				return false;
 
+			var two = TeamDefendTwoOn;
 			var scan = WDist.FromCells(Info.DefendAllyAttackerScanCells);
 			teamDefendEnemies.Clear();
 			teamDefendEnemyActors.Clear();
@@ -80,7 +81,7 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 				}
 
-				if (!IsPreferredObservedEnemyUnit(e))
+				if (!TeamDefendCountsAttacker(e, two))
 					continue;
 
 				attack += UnitValue(e);
@@ -89,12 +90,18 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			var pick = DefendAllyCA.NearestAttacker(victim.CenterPosition, teamDefendEnemies, scan.Length);
-			if (pick < 0 || !TeamDefendCA.Serious(attack, Info.TeamLeadDefendTeamMinAttackValue))
+
+			// TEAM-DEFEND-02 A2 (row tm_defend_two_tier): a damaged base asset alarms at any attack size, and when no attacker is seen it raises a blind alarm at the damaged location. Off: baseAsset is false and both tests are the old ones.
+			var baseAsset = two && TeamDefendBaseAsset(victim);
+			if (pick < 0)
+				return baseAsset && TeamDefendRaiseBlind(team, victim, defence, now);
+
+			if (!TeamDefendCA.Serious(attack, baseAsset ? 1 : Info.TeamLeadDefendTeamMinAttackValue))
 				return false;
 
 			var attacker = teamDefendEnemyActors[pick];
 			var alarm = new TeamDefendCA.Alarm(now, TeamLeadKeyOf(victim.Owner), victim.ActorID, victim.CenterPosition, attacker.ActorID, attacker.CenterPosition, attack, defence);
-			if (TeamDefendCA.Replaces(team.DefendAlarm, alarm, now, Info.TeamLeadDefendTeamAlarmTicks))
+			if (two ? DefendTwo.Replaces(team.DefendAlarm, alarm, now, Info.TeamLeadDefendTeamAlarmTicks) : TeamDefendCA.Replaces(team.DefendAlarm, alarm, now, Info.TeamLeadDefendTeamAlarmTicks))
 			{
 				team.DefendAlarm = alarm;
 				if (DiagnosticWriter != null)
@@ -111,6 +118,13 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			if (!TeamDefendOn || teamLeadTeam?.DefendAlarm is not { } alarm)
 				return;
+
+			// TEAM-DEFEND-02 (row tm_defend_two_tier, design pending/TEAM_DEFEND_02_DESIGN_01.md): the two-tier T2 answer replaces everything below (own file DefendTwo). Row off or ablated: the code below runs unchanged.
+			if (TeamDefendTwoOn)
+			{
+				TeamDefendTwoTick(bot);
+				return;
+			}
 
 			var now = World.WorldTick;
 			if (!TeamDefendCA.Active(now, alarm.Tick, Info.TeamLeadDefendTeamAlarmTicks) || now < teamDefendNextSend || alarm.VictimKey == teamLeadKey)
