@@ -1,5 +1,5 @@
 {
- "comment": "RAID-HARV-01 P3 golden vectors. Hand-derived from OpenRA.Mods.CA/Traits/BotModules/Squads/RaidHarvSignals.cs (C# integer division truncates toward zero, relative errors are clipped BEFORE they are averaged) and replayed by BOTH tools/tests/test_extract_raid_harv_signals.py (python extractor) and OpenRA.Mods.Cameo.Test/RaidHarvSignalsGoldenTest.cs (the C# signal functions), so the two cannot drift. `signals` entries are {in, expect}: expect null = no sample, otherwise the error in permille. `games` replay whole raid_harv_signal row sets through the extractor into LEARN-ALL-02 exposure records (python only; knobs carry `signal_permille`, the fitter signal is permille / 300). Regenerate only with a reviewed change of the signal contract.",
+ "comment": "RAID-HARV-01 P3 golden vectors. Hand-derived from OpenRA.Mods.CA/Traits/BotModules/Squads/RaidHarvSignals.cs (C# integer division truncates toward zero, relative errors are clipped BEFORE they are averaged) and replayed by BOTH tools/tests/test_extract_raid_harv_signals.py (python extractor) and OpenRA.Mods.Cameo.Test/RaidHarvSignalsGoldenTest.cs (the C# signal functions), so the two cannot drift. `signals` entries are {in, expect}: expect null = no sample, otherwise the error in permille. `games` replay whole raid_harv_seat + raid_harv_signal row sets through the extractor into LEARN-ALL-02 exposure records (python only; knobs carry `signal_permille`, the fitter signal is permille / 300; enemies = EVERY enemy player of the seat row, one entry per player with weight 1; the observed style is emitted for the main target owner's entry only). Regenerate only with a reviewed change of the signal contract.",
  "constants": {
   "error_clip": 300,
   "categorical": 200,
@@ -119,43 +119,50 @@
  ],
  "games": [
   {
-   "name": "one seat, three raids, all nine keys",
+   "name": "one seat, four enemy players, three raids at three owners, all nine keys",
    "seq": 12,
+   "expect_warnings": 0,
    "rows": [
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1000, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.lost_recon", "kind": "reacquired", "ticks": 250, "current": 400},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1000, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.recon_radius", "kind": "reacquired", "distance": 7, "current": 8},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1010, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.waypoint_spacing", "left_lane": false},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1020, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.waypoint_spacing", "left_lane": false},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1100, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.move_refresh", "drift": 4, "visible_prev": true, "visible_now": true, "phase": "Travel", "since_change": 30},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1225, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.move_refresh", "drift": 3, "visible_prev": true, "visible_now": true, "phase": "Strike", "since_change": 125},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1350, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.move_refresh", "drift": 0, "visible_prev": true, "visible_now": true, "phase": "Strike", "since_change": 50},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1375, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.move_refresh", "drift": 9, "visible_prev": true, "visible_now": false, "phase": "Strike", "since_change": 75},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1400, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.move_refresh", "drift": 9, "visible_prev": true, "visible_now": true, "phase": "Travel", "since_change": 24},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1425, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.move_refresh", "drift": 9, "visible_prev": true, "visible_now": true, "phase": "Retreat", "since_change": 100},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1500, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.lost_recon", "kind": "reacquired", "ticks": 350, "current": 400},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1600, "raid_id": "r2", "target_faction": "nod", "target_style": "boom", "key": "raid.recon_radius", "kind": "exhausted", "far_seen": false, "current": 8},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1700, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.incident_window", "span_ticks": 100, "current": 300},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1800, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.incident_loss", "lost_half_within_600": true, "restrike_clean": false},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1850, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.incident_loss", "lost_half_within_600": true, "restrike_clean": false},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 1900, "raid_id": "r2", "target_faction": "nod", "target_style": "boom", "key": "raid.incident_loss", "lost_half_within_600": false, "restrike_clean": true},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2000, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.req_margin", "killed": true, "loss_permille": 700},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2000, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.defence_radius", "outside_defender_took_part": true},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2050, "raid_id": "r2", "target_faction": "nod", "target_style": "boom", "key": "raid.incident_loss", "lost_half_within_600": false, "restrike_clean": false},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2100, "raid_id": "r2", "target_faction": "nod", "target_style": "boom", "key": "raid.req_margin", "killed": true, "loss_permille": 450},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2300, "raid_id": "r1", "target_faction": "nod", "target_style": "boom", "key": "raid.incident_decay", "reincident_within_1500": true, "passed_clean_before_decay": false},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2350, "raid_id": "r2", "target_faction": "nod", "target_style": "boom", "key": "raid.incident_decay", "reincident_within_1500": true, "passed_clean_before_decay": false},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2410, "raid_id": "r3", "target_faction": "allies", "target_style": null, "key": "raid.waypoint_spacing", "left_lane": true},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2500, "raid_id": "r3", "target_faction": "allies", "target_style": null, "key": "raid.incident_window", "span_ticks": 201, "current": 300},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2600, "raid_id": "r3", "target_faction": "allies", "target_style": null, "key": "raid.lost_recon", "kind": "exhausted", "current": 400},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2600, "raid_id": "r3", "target_faction": "allies", "target_style": null, "key": "raid.recon_radius", "kind": "exhausted", "far_seen": true, "current": 8},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2650, "raid_id": "r3", "target_faction": "allies", "target_style": null, "key": "raid.defence_radius", "outside_defender_took_part": false},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2700, "raid_id": "r3", "target_faction": "allies", "target_style": null, "key": "raid.req_margin", "killed": false, "loss_permille": 900},
-    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "tick": 2700, "raid_id": "r3", "target_faction": "allies", "target_style": null, "key": "raid.incident_decay", "reincident_within_1500": false, "passed_clean_before_decay": true}
+    {"event": "raid_harv_seat", "game_id": "g1", "seat": "bot1", "personality": "rush", "own_faction": "gdi", "enemies": [{"player": "e1", "faction": "nod"}, {"player": "e2", "faction": "nod"}, {"player": "e3", "faction": "allies"}, {"player": "e4", "faction": "gdi"}]},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 1000, "raid_id": "r1", "target_player": "e1", "target_style": "boom", "key": "raid.lost_recon", "kind": "reacquired", "ticks": 250, "current": 400},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 1000, "raid_id": "r1", "target_player": "e1", "target_style": "boom", "key": "raid.recon_radius", "kind": "reacquired", "distance": 7, "current": 8},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 1010, "raid_id": "r1", "target_player": "e1", "target_style": "boom", "key": "raid.waypoint_spacing", "left_lane": false},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 1020, "raid_id": "r1", "target_player": "e1", "target_style": "boom", "key": "raid.waypoint_spacing", "left_lane": false},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 1100, "raid_id": "r1", "target_player": "e1", "target_style": "boom", "key": "raid.move_refresh", "drift": 4, "visible_prev": true, "visible_now": true, "phase": "Travel", "since_change": 30},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 1225, "raid_id": "r1", "target_player": "e1", "target_style": "boom", "key": "raid.move_refresh", "drift": 3, "visible_prev": true, "visible_now": true, "phase": "Strike", "since_change": 125},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 1350, "raid_id": "r1", "target_player": "e1", "target_style": "boom", "key": "raid.move_refresh", "drift": 0, "visible_prev": true, "visible_now": true, "phase": "Strike", "since_change": 50},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 1375, "raid_id": "r1", "target_player": "e1", "target_style": "boom", "key": "raid.move_refresh", "drift": 9, "visible_prev": true, "visible_now": false, "phase": "Strike", "since_change": 75},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 1400, "raid_id": "r1", "target_player": "e1", "target_style": "boom", "key": "raid.move_refresh", "drift": 9, "visible_prev": true, "visible_now": true, "phase": "Travel", "since_change": 24},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 1425, "raid_id": "r1", "target_player": "e1", "target_style": "boom", "key": "raid.move_refresh", "drift": 9, "visible_prev": true, "visible_now": true, "phase": "Retreat", "since_change": 100},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 1500, "raid_id": "r1", "target_player": "e1", "target_style": "boom", "key": "raid.lost_recon", "kind": "reacquired", "ticks": 350, "current": 400},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 1600, "raid_id": "r2", "target_player": "e2", "target_style": "turtle", "key": "raid.recon_radius", "kind": "exhausted", "far_seen": false, "current": 8},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 1700, "raid_id": "r1", "target_player": "e1", "target_style": "boom", "key": "raid.incident_window", "span_ticks": 100, "current": 300},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 1800, "raid_id": "r1", "target_player": "e1", "target_style": "boom", "key": "raid.incident_loss", "lost_half_within_600": true, "restrike_clean": false},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 1850, "raid_id": "r1", "target_player": "e1", "target_style": "boom", "key": "raid.incident_loss", "lost_half_within_600": true, "restrike_clean": false},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 1900, "raid_id": "r2", "target_player": "e2", "target_style": "turtle", "key": "raid.incident_loss", "lost_half_within_600": false, "restrike_clean": true},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 2000, "raid_id": "r1", "target_player": "e1", "target_style": "boom", "key": "raid.req_margin", "killed": true, "loss_permille": 700},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 2000, "raid_id": "r1", "target_player": "e1", "target_style": "boom", "key": "raid.defence_radius", "outside_defender_took_part": true},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 2050, "raid_id": "r2", "target_player": "e2", "target_style": "turtle", "key": "raid.incident_loss", "lost_half_within_600": false, "restrike_clean": false},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 2100, "raid_id": "r2", "target_player": "e2", "target_style": "turtle", "key": "raid.req_margin", "killed": true, "loss_permille": 450},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 2300, "raid_id": "r1", "target_player": "e1", "target_style": "boom", "key": "raid.incident_decay", "reincident_within_1500": true, "passed_clean_before_decay": false},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 2350, "raid_id": "r2", "target_player": "e2", "target_style": "turtle", "key": "raid.incident_decay", "reincident_within_1500": true, "passed_clean_before_decay": false},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 2410, "raid_id": "r3", "target_player": "e3", "target_style": null, "key": "raid.waypoint_spacing", "left_lane": true},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 2500, "raid_id": "r3", "target_player": "e3", "target_style": null, "key": "raid.incident_window", "span_ticks": 201, "current": 300},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 2600, "raid_id": "r3", "target_player": "e3", "target_style": null, "key": "raid.lost_recon", "kind": "exhausted", "current": 400},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 2600, "raid_id": "r3", "target_player": "e3", "target_style": null, "key": "raid.recon_radius", "kind": "exhausted", "far_seen": true, "current": 8},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 2650, "raid_id": "r3", "target_player": "e3", "target_style": null, "key": "raid.defence_radius", "outside_defender_took_part": false},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 2700, "raid_id": "r3", "target_player": "e3", "target_style": null, "key": "raid.req_margin", "killed": false, "loss_permille": 900},
+    {"event": "raid_harv_signal", "game_id": "g1", "seat": "bot1", "tick": 2700, "raid_id": "r3", "target_player": "e3", "target_style": null, "key": "raid.incident_decay", "reincident_within_1500": false, "passed_clean_before_decay": true}
    ],
    "expect_records": [
     {
-     "game_id": "g1", "seq": 12, "seat": "raid:bot1", "personality": "rush", "own_faction": "gdi", "main_target": "nod",
-     "enemies": [{"faction": "allies", "style": null, "weight": 1}, {"faction": "nod", "style": "boom", "weight": 2}],
+     "game_id": "g1", "seq": 12, "seat": "raid:bot1", "personality": "rush", "own_faction": "gdi", "main_target": "nod", "main_target_style": "boom",
+     "enemies": [
+      {"faction": "nod", "style": "boom", "weight": 1},
+      {"faction": "nod", "style": null, "weight": 1},
+      {"faction": "allies", "style": null, "weight": 1},
+      {"faction": "gdi", "style": null, "weight": 1}
+     ],
      "knobs": [
       {"knob": "raid.lost_recon", "signal_permille": -108},
       {"knob": "raid.move_refresh", "signal_permille": -200},
@@ -171,19 +178,23 @@
    ]
   },
   {
-   "name": "three seats: partial evidence, no evidence, unknown target owner",
+   "name": "three seats: partial evidence, no evidence, a seat without personality or faction",
    "seq": 3,
+   "expect_warnings": 0,
    "rows": [
-    {"event": "raid_harv_signal", "game_id": "g2", "seat": "a", "personality": "turtle", "own_faction": "nod", "tick": 800, "raid_id": "a1", "target_faction": "gdi", "target_style": "rush", "key": "raid.move_refresh", "drift": 5, "visible_prev": true, "visible_now": true, "phase": "Travel", "since_change": 10},
-    {"event": "raid_harv_signal", "game_id": "g2", "seat": "a", "personality": "turtle", "own_faction": "nod", "tick": 900, "raid_id": "a1", "target_faction": "gdi", "target_style": "rush", "key": "raid.req_margin", "killed": true, "loss_permille": 100},
-    {"event": "raid_harv_signal", "game_id": "g2", "seat": "b", "personality": "rush", "own_faction": "gdi", "tick": 700, "raid_id": "b1", "target_faction": "nod", "target_style": "boom", "key": "raid.req_margin", "killed": false, "loss_permille": 800},
-    {"event": "raid_harv_signal", "game_id": "g2", "seat": "b", "personality": "rush", "own_faction": "gdi", "tick": 750, "raid_id": "b1", "target_faction": "nod", "target_style": "boom", "key": "raid.move_refresh", "drift": 0, "visible_prev": true, "visible_now": false, "phase": "Travel", "since_change": 90},
-    {"event": "raid_harv_signal", "game_id": "g2", "seat": "c", "personality": null, "own_faction": null, "tick": 600, "raid_id": "c1", "target_faction": null, "target_style": null, "key": "raid.waypoint_spacing", "left_lane": true}
+    {"event": "raid_harv_seat", "game_id": "g2", "seat": "a", "personality": "turtle", "own_faction": "nod", "enemies": [{"player": "p1", "faction": "gdi"}, {"player": "p2", "faction": "allies"}]},
+    {"event": "raid_harv_seat", "game_id": "g2", "seat": "b", "personality": "rush", "own_faction": "gdi", "enemies": [{"player": "p1", "faction": "nod"}]},
+    {"event": "raid_harv_seat", "game_id": "g2", "seat": "c", "personality": null, "own_faction": null, "enemies": [{"player": "x", "faction": "gdi"}]},
+    {"event": "raid_harv_signal", "game_id": "g2", "seat": "a", "tick": 800, "raid_id": "a1", "target_player": "p1", "target_style": "rush", "key": "raid.move_refresh", "drift": 5, "visible_prev": true, "visible_now": true, "phase": "Travel", "since_change": 10},
+    {"event": "raid_harv_signal", "game_id": "g2", "seat": "a", "tick": 900, "raid_id": "a1", "target_player": "p1", "target_style": "rush", "key": "raid.req_margin", "killed": true, "loss_permille": 100},
+    {"event": "raid_harv_signal", "game_id": "g2", "seat": "b", "tick": 700, "raid_id": "b1", "target_player": "p1", "target_style": "boom", "key": "raid.req_margin", "killed": false, "loss_permille": 800},
+    {"event": "raid_harv_signal", "game_id": "g2", "seat": "b", "tick": 750, "raid_id": "b1", "target_player": "p1", "target_style": "boom", "key": "raid.move_refresh", "drift": 0, "visible_prev": true, "visible_now": false, "phase": "Travel", "since_change": 90},
+    {"event": "raid_harv_signal", "game_id": "g2", "seat": "c", "tick": 600, "raid_id": "c1", "target_player": "x", "target_style": null, "key": "raid.waypoint_spacing", "left_lane": true}
    ],
    "expect_records": [
     {
-     "game_id": "g2", "seq": 3, "seat": "raid:a", "personality": "turtle", "own_faction": "nod", "main_target": "gdi",
-     "enemies": [{"faction": "gdi", "style": "rush", "weight": 1}],
+     "game_id": "g2", "seq": 3, "seat": "raid:a", "personality": "turtle", "own_faction": "nod", "main_target": "gdi", "main_target_style": "rush",
+     "enemies": [{"faction": "gdi", "style": "rush", "weight": 1}, {"faction": "allies", "style": null, "weight": 1}],
      "knobs": [
       {"knob": "raid.lost_recon", "signal_permille": null},
       {"knob": "raid.move_refresh", "signal_permille": null},
@@ -197,8 +208,8 @@
      ]
     },
     {
-     "game_id": "g2", "seq": 3, "seat": "raid:c", "personality": null, "own_faction": null, "main_target": null,
-     "enemies": [],
+     "game_id": "g2", "seq": 3, "seat": "raid:c", "personality": null, "own_faction": null, "main_target": "gdi", "main_target_style": null,
+     "enemies": [{"faction": "gdi", "style": null, "weight": 1}],
      "knobs": [
       {"knob": "raid.lost_recon", "signal_permille": null},
       {"knob": "raid.move_refresh", "signal_permille": null},
@@ -214,16 +225,45 @@
    ]
   },
   {
-   "name": "main target tie: the faction whose first counted sample is earliest",
+   "name": "main target tie: the owner whose first counted sample is earliest; only its style is emitted, a never-raided enemy player stays in the list",
    "seq": 40,
+   "expect_warnings": 0,
    "rows": [
-    {"event": "raid_harv_signal", "game_id": "g3", "seat": "c1", "personality": "guerilla", "own_faction": "allies", "tick": 500, "raid_id": "ra", "target_faction": "nod", "target_style": "boom", "key": "raid.waypoint_spacing", "left_lane": false},
-    {"event": "raid_harv_signal", "game_id": "g3", "seat": "c1", "personality": "guerilla", "own_faction": "allies", "tick": 300, "raid_id": "rb", "target_faction": "gdi", "target_style": null, "key": "raid.waypoint_spacing", "left_lane": false}
+    {"event": "raid_harv_signal", "game_id": "g3", "seat": "c1", "tick": 500, "raid_id": "ra", "target_player": "pa", "target_style": "boom", "key": "raid.waypoint_spacing", "left_lane": false},
+    {"event": "raid_harv_seat", "game_id": "g3", "seat": "c1", "personality": "guerilla", "own_faction": "allies", "enemies": [{"player": "pa", "faction": "nod"}, {"player": "pb", "faction": "gdi"}, {"player": "pc", "faction": "gdi"}]},
+    {"event": "raid_harv_signal", "game_id": "g3", "seat": "c1", "tick": 300, "raid_id": "rb", "target_player": "pb", "target_style": "rush", "key": "raid.waypoint_spacing", "left_lane": false}
    ],
    "expect_records": [
     {
-     "game_id": "g3", "seq": 40, "seat": "raid:c1", "personality": "guerilla", "own_faction": "allies", "main_target": "gdi",
-     "enemies": [{"faction": "gdi", "style": null, "weight": 1}, {"faction": "nod", "style": "boom", "weight": 1}],
+     "game_id": "g3", "seq": 40, "seat": "raid:c1", "personality": "guerilla", "own_faction": "allies", "main_target": "gdi", "main_target_style": "rush",
+     "enemies": [{"faction": "nod", "style": null, "weight": 1}, {"faction": "gdi", "style": "rush", "weight": 1}, {"faction": "gdi", "style": null, "weight": 1}],
+     "knobs": [
+      {"knob": "raid.lost_recon", "signal_permille": null},
+      {"knob": "raid.move_refresh", "signal_permille": null},
+      {"knob": "raid.req_margin", "signal_permille": null},
+      {"knob": "raid.recon_radius", "signal_permille": null},
+      {"knob": "raid.incident_loss", "signal_permille": null},
+      {"knob": "raid.incident_window", "signal_permille": null},
+      {"knob": "raid.incident_decay", "signal_permille": null},
+      {"knob": "raid.waypoint_spacing", "signal_permille": 200},
+      {"knob": "raid.defence_radius", "signal_permille": null}
+     ]
+    }
+   ]
+  },
+  {
+   "name": "the observed style changes in mid-raid: the pick's style is kept, the game is not refused, one warning",
+   "seq": 5,
+   "expect_warnings": 1,
+   "rows": [
+    {"event": "raid_harv_seat", "game_id": "g4", "seat": "m", "personality": "tech", "own_faction": "gdi", "enemies": [{"player": "q1", "faction": "nod"}]},
+    {"event": "raid_harv_signal", "game_id": "g4", "seat": "m", "tick": 100, "raid_id": "m1", "target_player": "q1", "target_style": "boom", "key": "raid.waypoint_spacing", "left_lane": false},
+    {"event": "raid_harv_signal", "game_id": "g4", "seat": "m", "tick": 200, "raid_id": "m1", "target_player": "q1", "target_style": null, "key": "raid.waypoint_spacing", "left_lane": false}
+   ],
+   "expect_records": [
+    {
+     "game_id": "g4", "seq": 5, "seat": "raid:m", "personality": "tech", "own_faction": "gdi", "main_target": "nod", "main_target_style": "boom",
+     "enemies": [{"faction": "nod", "style": "boom", "weight": 1}],
      "knobs": [
       {"knob": "raid.lost_recon", "signal_permille": null},
       {"knob": "raid.move_refresh", "signal_permille": null},

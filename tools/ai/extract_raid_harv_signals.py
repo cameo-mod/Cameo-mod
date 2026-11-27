@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""RAID-HARV-01 P3: the DEV extractor of the nine raid signals. One bot game's `raid_harv_signal` rows in, the exposure records of the shared LEARN-ALL-02 fitter out.
+"""RAID-HARV-01 P3: the DEV extractor of the nine raid signals. One bot game's raid rows in, the exposure records of the shared LEARN-ALL-02 fitter out.
 
 The learner is the shared LEARN-ALL-02 core (tools/ai/fit_learn_all.py): it owns the step (log space, rate 0.04, cap 0.08), the 4-value aggregate and the snapshot. This
-script owns ONLY the meaning of one raid game: which observations count, the denominator and clip of each key, and the attribution to the target owner's faction and observed
-style. It contains no step arithmetic, no aggregate, no root. It is the python mirror of OpenRA.Mods.CA/Traits/BotModules/Squads/RaidHarvSignals.cs (the nine signal
-functions) and the two are kept identical by tools/tests/raid_harv_signals_golden.json, which test_extract_raid_harv_signals.py and RaidHarvSignalsGoldenTest.cs both replay.
-Training exists only in DEV: an official build writes no rows and runs no fitter.
+script owns ONLY the meaning of one raid game: which observations count, the denominator and clip of each key, and the attribution to the enemy players' factions and to the
+observed style of the main target owner. It contains no step arithmetic, no aggregate, no root. It is the python mirror of
+OpenRA.Mods.CA/Traits/BotModules/Squads/RaidHarvSignals.cs (the nine signal functions) and the two are kept identical by tools/tests/raid_harv_signals_golden.json, which
+test_extract_raid_harv_signals.py and RaidHarvSignalsGoldenTest.cs both replay. Training exists only in DEV: an official build writes no rows and runs no fitter.
 
 Signal. Each key reads ONLY what the bot observed (own squads, visible targets). The result is a relative error in permille, clipped to +-300 (categorical signals are +-200);
 the fitter signal is that error / 300, in [-1, 1]. No sample = null (the fitter keeps the previous estimate; an undefined denominator is never read as zero):
@@ -29,9 +29,19 @@ the fitter signal is that error / 300, in [-1, 1]. No sample = null (the fitter 
 Averages are integer means truncated toward zero (C# integer division), the relative errors are clipped BEFORE they are averaged with the categorical samples, exactly as
 RaidHarvSignals does.
 
-Input (DEV log, JSON lines, one row per sample, never per tick; every other line of the file is ignored):
-  {"event": "raid_harv_signal", "game_id": "<[A-Za-z0-9_.-]+>", "seat": "<bot seat>", "personality": "rush" | null, "own_faction": "gdi" | null, "tick": 1500,
-   "raid_id": "<unique per seat and game>", "target_faction": "nod" | null, "target_style": "boom" | null, "key": "raid.lost_recon", <payload>}
+Input (DEV log, JSON lines; every other line of the file is ignored). Two row kinds, every row of a game has the same game_id:
+
+  raid_harv_seat: ONE row per bot seat per game (the roster the seat plays against; written at game start or end).
+  {"event": "raid_harv_seat", "game_id": "<[A-Za-z0-9_.-]+>", "seat": "<bot seat>", "personality": "rush" | null, "own_faction": "gdi" | null,
+   "enemies": [{"player": "<player id>", "faction": "nod"}, ...]}
+  `enemies` lists EVERY enemy player of the game (every combatant that is not on the seat's team), one entry per player, whether or not a raid ever met it.
+
+  raid_harv_signal: one row per sample, never per tick.
+  {"event": "raid_harv_signal", "game_id": ..., "seat": ..., "tick": 1500, "raid_id": "<unique per seat and game>", "target_player": "<an enemy player id of the seat row>",
+   "target_style": "boom" | null, "key": "raid.lost_recon", <payload>}
+  `target_player` is the owner of the raid's target, `target_style` the style the observation classifier reported for that owner AT THE PICK (null = unseen). The emitter snapshots
+  both at the pick and repeats them on every row of the raid for the raid's life; a later row that disagrees only warns (the earliest row of the raid wins), it never refuses the game. A bot never reads
+  an enemy's personality or any internal state; the style is only what the classifier observed, and the same classifier works against human players.
   payload by key:
     raid.lost_recon        "kind": "reacquired" (+ "ticks": N) | "exhausted";  "current": the key value in force, whole ticks (>= 1)
     raid.recon_radius      "kind": "reacquired" (+ "distance": d cells) | "exhausted" (+ "far_seen": bool);  "current": whole cells (>= 1)
@@ -43,17 +53,21 @@ Input (DEV log, JSON lines, one row per sample, never per tick; every other line
     raid.incident_decay    "reincident_within_1500": bool, "passed_clean_before_decay": bool  (re-incident wins; neither = not a sample)
     raid.waypoint_spacing  "left_lane": bool
     raid.defence_radius    "outside_defender_took_part": bool
-  `target_faction` / `target_style` are the target owner's faction and OBSERVED style at the pick (null = unseen: the fitter then takes the exact three-axis value). A bot never
-  reads an enemy's personality or any internal state; the style is whatever the observation classifier reported.
 
-Attribution (design 02 delta 02 section 1): one record per seat that produced evidence; the seat's `enemies` are the target owners of the raids that contributed at least one
-counted sample, one entry per (faction, observed style) weighted by the number of such raids, so the game's update budget is divided across the raid's target owners. A raid without a
-target faction contributes to the global and own-faction axes only. `main_target` = the faction with the most such raids (ties: the faction whose first counted sample is earliest,
-then alphabetical). The seat id is prefixed `raid:` so it cannot collide with the seats of the wave-role exposure file of the same game.
+Attribution (DESIGNER RULE: every learned value is G x F_own x E_eff x S_obs; design 02 delta 02 with the Opus rulings of 2026-11-27):
+  * enemies = EVERY enemy player of the seat row, one entry per player with weight 1 (counted per player, never weighted by raids). The fitter turns them into the per-faction
+    enemy shares and E_eff = geomean(aggregate of all enemy players' factions, main target faction).
+  * main target = the target owner (player) with the most raids that contributed a counted sample (ties: the owner whose first counted sample is earliest, then the player id).
+    `main_target` is its faction.
+  * S_obs = the observed style of the main target owner ONLY. It is the `target_style` of that owner's latest counted raid (null = unseen, which the fitter reads as the exact
+    three-axis value). No other enemy's style is emitted: in the `enemies` list only the main target owner's entry carries a style. `main_target_style` repeats that style as a
+    plain field of the record (the fitter at LA02 79329cc1 reads the style from the `enemies` entry and ignores the extra field).
+  * A raid whose rows all fail the counting rules (an ineligible refresh, a raid that did not kill, ...) is not a sample and does not make its owner the main target.
+  * One record per seat that produced evidence. The seat id is prefixed `raid:` so it cannot collide with the seats of the wave-role exposure file of the same game.
 
-Output (the fitter's exposure format, one JSON line per seat):
-  {"game_id": g, "seq": <game order>, "seat": "raid:<seat>", "personality": p, "own_faction": f, "main_target": faction | null,
-   "enemies": [{"faction": ..., "style": ... | null, "weight": n}], "knobs": [{"knob": "raid.lost_recon", "signal": 0.4 | null}, ... nine, in RaidKey order]}
+Output (the fitter's exposure format at LA02 79329cc1, one JSON line per seat):
+  {"game_id": g, "seq": <game order>, "seat": "raid:<seat>", "personality": p, "own_faction": f, "main_target": faction | null, "main_target_style": style | null,
+   "enemies": [{"faction": ..., "style": ... | null, "weight": 1}], "knobs": [{"knob": "raid.lost_recon", "signal": 0.4 | null}, ... nine, in RaidKey order]}
 
 Pipeline use (post-game step, after EVERY DEV game, in game order, with the same --seq as the wave-role exposure of that game):
   python tools/ai/extract_raid_harv_signals.py --rows <game_dir>/<dev log>.jsonl --seq <n> --out <game_dir>/raid_harv_exposure.jsonl
@@ -67,6 +81,8 @@ import re
 import sys
 
 EVENT = "raid_harv_signal"
+SEAT_EVENT = "raid_harv_seat"
+EVENTS = (EVENT, SEAT_EVENT)
 SEAT_PREFIX = "raid:"
 
 # The declared parameters. Mirrors of RaidHarvKeys / RaidHarvSignals (pinned by the golden file).
@@ -369,15 +385,38 @@ def parse_row(row, where):
         "key": key,
         "game_id": _need_str(row, "game_id", where),
         "seat": _need_str(row, "seat", where),
-        "personality": _opt_str(row, "personality", where),
-        "own_faction": _opt_str(row, "own_faction", where),
         "tick": _need_int(row, "tick", where),
         "raid_id": _need_str(row, "raid_id", where),
-        "target_faction": _opt_str(row, "target_faction", where),
+        "target_player": _need_str(row, "target_player", where),
         "target_style": _opt_str(row, "target_style", where),
     }
     parsed.update(PAYLOAD[key](row, where))
     return parsed
+
+
+def parse_seat_row(row, where):
+    """Validates one raid_harv_seat row: the seat, its personality and faction, and EVERY enemy player (player id -> faction)."""
+    enemies = row.get("enemies")
+    if not isinstance(enemies, list):
+        _fail("%s: 'enemies' must be a list of {player, faction} (got %r)" % (where, enemies))
+
+    players = {}
+    for n, entry in enumerate(enemies):
+        here = "%s enemies[%d]" % (where, n)
+        if not isinstance(entry, dict):
+            _fail("%s: must be an object {player, faction} (got %r)" % (here, entry))
+        player = _need_str(entry, "player", here)
+        if player in players:
+            _fail("%s: duplicate enemy player %r" % (here, player))
+        players[player] = _need_str(entry, "faction", here)
+
+    return {
+        "game_id": _need_str(row, "game_id", where),
+        "seat": _need_str(row, "seat", where),
+        "personality": _opt_str(row, "personality", where),
+        "own_faction": _opt_str(row, "own_faction", where),
+        "enemies": players,
+    }
 
 
 # ---------------------------------------------------------------- one seat's nine errors
@@ -390,7 +429,7 @@ def _current(rows, key, warnings):
 
 
 def seat_errors(rows, warnings):
-    """rows: the parsed rows of ONE seat, ordered by tick. Returns {key: error permille or None}. Only rows that count (eligible / killed / far-seen / observed) are read."""
+    """rows: the parsed signal rows of ONE seat, ordered by tick. Returns {key: error permille or None}. Only rows that count (eligible / killed / far-seen / observed) are read."""
     counted = {key: [r for r in rows if r["key"] == key and r["counts"]] for key in KEYS}
     errors = {}
 
@@ -416,57 +455,80 @@ def seat_errors(rows, warnings):
     return errors
 
 
-def _attribution(rows):
-    """The target owners of the raids that contributed at least one counted sample: (enemies, main_target)."""
-    attrs = {}
-    first_counted = {}
+def _attribution(seat, rows, enemy_factions, warnings):
+    """
+    The enemies and the main target of one seat. rows: the seat's parsed signal rows ordered by tick; enemy_factions: {player id: faction} of the seat row.
+    Returns (enemies, main_target, main_target_style): EVERY enemy player once with weight 1, the main target owner's faction, and the observed style of that owner only.
+    """
+    raids = {}
     for r in rows:
-        owner = (r["target_faction"], r["target_style"])
-        if attrs.setdefault(r["raid_id"], owner) != owner:
-            _fail("seat %s raid %s: rows disagree on the target owner (%r vs %r)" % (r["seat"], r["raid_id"], attrs[r["raid_id"]], owner))
-        if r["counts"] and r["raid_id"] not in first_counted:
-            first_counted[r["raid_id"]] = r["tick"]
+        # The emitter snapshots the owner and the observed style AT THE PICK and repeats them on every row of the raid, so a style change in mid-raid cannot reach the rows.
+        # A row that still disagrees (an older writer) never refuses the game: the earliest row of the raid names its owner and style, the rest only warn.
+        owner = (r["target_player"], r["target_style"])
+        info = raids.get(r["raid_id"])
+        if info is None:
+            if owner[0] not in enemy_factions:
+                _fail("seat %s raid %s: target player %r is not an enemy player of the seat row" % (seat, r["raid_id"], owner[0]))
+            info = raids[r["raid_id"]] = {"owner": owner, "first": None, "warned": False}
+        elif info["owner"] != owner and not info["warned"]:
+            info["warned"] = True
+            warnings.append("seat %s raid %s: later rows report %r instead of the pick's %r; the pick's owner and style are used" % (seat, r["raid_id"], owner, info["owner"]))
+        if r["counts"] and info["first"] is None:
+            info["first"] = r["tick"]
 
-    tally = {}
-    by_faction = {}
-    for raid_id, tick in first_counted.items():
-        faction, style = attrs[raid_id]
-        if faction is None:
-            continue
-        tally[(faction, style)] = tally.get((faction, style), 0) + 1
-        count, earliest = by_faction.get(faction, (0, tick))
-        by_faction[faction] = (count + 1, min(earliest, tick))
+    by_owner = {}
+    for raid_id, info in raids.items():
+        if info["first"] is not None:
+            by_owner.setdefault(info["owner"][0], []).append((info["first"], raid_id, info["owner"][1]))
 
-    enemies = [{"faction": f, "style": s, "weight": n} for (f, s), n in sorted(tally.items(), key=lambda item: (item[0][0], item[0][1] or ""))]
-    main = min(by_faction, key=lambda f: (-by_faction[f][0], by_faction[f][1], f)) if by_faction else None
-    return enemies, main
+    main_player = min(by_owner, key=lambda p: (-len(by_owner[p]), min(first for first, _, _ in by_owner[p]), p)) if by_owner else None
+    main_style = None
+    if main_player is not None:
+        owner_raids = sorted(by_owner[main_player])
+        main_style = owner_raids[-1][2]
+        if len({style for _, _, style in owner_raids}) > 1:
+            warnings.append("seat %s: the raids against %s report different observed styles; the latest counted raid's style is used" % (seat, main_player))
+
+    enemies = [{"faction": enemy_factions[p], "style": main_style if p == main_player else None, "weight": 1} for p in sorted(enemy_factions)]
+    return enemies, (enemy_factions[main_player] if main_player is not None else None), main_style
 
 
 # ---------------------------------------------------------------- one game
 
 def select_rows(raw_rows, game_id=None):
-    """The raid_harv_signal rows (optionally of one game) out of any parsed JSON lines."""
-    rows = [r for r in raw_rows if isinstance(r, dict) and r.get("event") == EVENT]
+    """The raid_harv_seat / raid_harv_signal rows (optionally of one game) out of any parsed JSON lines."""
+    rows = [r for r in raw_rows if isinstance(r, dict) and r.get("event") in EVENTS]
     if game_id is not None:
         rows = [r for r in rows if r.get("game_id") == game_id]
     return rows
 
 
 def build_records(rows, seq):
-    """The exposure records (fitter input) of ONE game's raid_harv_signal rows. Returns (records, warnings); raises ExtractError (3 = more than one game, 5 = invalid rows)."""
+    """The exposure records (fitter input) of ONE game's raid rows. Returns (records, warnings); raises ExtractError (3 = more than one game, 5 = invalid rows)."""
     if not _is_int(seq) or seq < 0:
         _fail("seq must be a non-negative integer (got %r)" % (seq,))
 
-    parsed = []
+    signals = []
+    contexts = {}
+    games = set()
     for index, row in enumerate(rows):
-        p = parse_row(row, "row %d" % index)
-        p["index"] = index
-        parsed.append(p)
+        where = "row %d" % index
+        event = row.get("event")
+        if event == EVENT:
+            p = parse_row(row, where)
+            p["index"] = index
+            signals.append(p)
+            games.add(p["game_id"])
+        elif event == SEAT_EVENT:
+            c = parse_seat_row(row, where)
+            if c["seat"] in contexts:
+                _fail("%s: a second raid_harv_seat row for seat %s" % (where, c["seat"]))
+            contexts[c["seat"]] = c
+            games.add(c["game_id"])
 
-    if not parsed:
+    if not games:
         return [], []
 
-    games = {p["game_id"] for p in parsed}
     if len(games) != 1:
         raise ExtractError(3, "refused: %d games in one invocation (one step per game, never a batch): %s" % (len(games), ", ".join(sorted(games))))
 
@@ -475,29 +537,29 @@ def build_records(rows, seq):
         _fail("game_id %r is not [A-Za-z0-9_.-]+" % (game,))
 
     seats = {}
-    for p in sorted(parsed, key=lambda r: (r["tick"], r["index"])):
+    for p in sorted(signals, key=lambda r: (r["tick"], r["index"])):
         seats.setdefault(p["seat"], []).append(p)
 
     warnings = []
     records = []
     for seat in sorted(seats):
-        rows_of_seat = seats[seat]
-        for field in ("personality", "own_faction"):
-            if len({r[field] for r in rows_of_seat}) > 1:
-                _fail("seat %s: rows disagree on %s" % (seat, field))
+        context = contexts.get(seat)
+        if context is None:
+            _fail("seat %s has raid_harv_signal rows but no raid_harv_seat row (the roster of enemy players)" % seat)
 
-        errors = seat_errors(rows_of_seat, warnings)
+        errors = seat_errors(seats[seat], warnings)
         if all(error is None for error in errors.values()):
             continue
 
-        enemies, main_target = _attribution(rows_of_seat)
+        enemies, main_target, main_style = _attribution(seat, seats[seat], context["enemies"], warnings)
         records.append({
             "game_id": game,
             "seq": seq,
             "seat": SEAT_PREFIX + seat,
-            "personality": rows_of_seat[0]["personality"],
-            "own_faction": rows_of_seat[0]["own_faction"],
+            "personality": context["personality"],
+            "own_faction": context["own_faction"],
             "main_target": main_target,
+            "main_target_style": main_style,
             "enemies": enemies,
             "knobs": [{"knob": key, "signal": None if errors[key] is None else errors[key] / ERROR_CLIP} for key in KEYS],
         })
@@ -508,14 +570,14 @@ def build_records(rows, seq):
 # ---------------------------------------------------------------- pipeline
 
 def load_rows(paths):
-    """The raid_harv_signal lines of the DEV logs (any other line is skipped without being parsed). Returns (rows, malformed line count)."""
+    """The raid_harv_* lines of the DEV logs (any other line is skipped without being parsed). Returns (rows, malformed line count)."""
     rows = []
     malformed = 0
     for path in paths:
         with open(path, "r", encoding="utf-8") as handle:
             for line in handle:
                 line = line.strip()
-                if not line or EVENT not in line:
+                if not line or not any(event in line for event in EVENTS):
                     continue
                 try:
                     rows.append(json.loads(line))
@@ -526,7 +588,7 @@ def load_rows(paths):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("--rows", nargs="+", required=True, help="DEV log JSONL file(s) of ONE game holding the raid_harv_signal rows (other lines are ignored)")
+    ap.add_argument("--rows", nargs="+", required=True, help="DEV log JSONL file(s) of ONE game holding the raid_harv_seat and raid_harv_signal rows (other lines are ignored)")
     ap.add_argument("--seq", type=int, required=True, help="the game order, the same value as on the wave-role exposure of this game")
     ap.add_argument("--game-id", default=None, help="keep only the rows of this game (required when the files mix games)")
     ap.add_argument("--out", default=None, help="the exposure JSONL to write (default: stdout)")
@@ -534,7 +596,7 @@ def main(argv=None):
 
     raw, malformed = load_rows(args.rows)
     if malformed:
-        print("warning: skipped %d malformed %s line(s)" % (malformed, EVENT), file=sys.stderr)
+        print("warning: skipped %d malformed raid_harv line(s)" % malformed, file=sys.stderr)
 
     try:
         records, warnings = build_records(select_rows(raw, args.game_id), args.seq)
