@@ -4930,6 +4930,17 @@ Player:
 		LatePushReinforceBelowPercent: 60
 		LatePushReinforceMinRatioPercent: 100
 		LatePushHandoverEnabled: true
+		# RAID-HARV-01 P1 (row raid_harv; design 01 D7, design 02, deltas 01 and 02): the native harvester raid. OFF until its A/B passes; the keys below are the PRIORS of the nine learned raid numbers (4-value rule, DEV only).
+		RaidHarvEnabled: false
+		RaidHarvLostReconTicks: 400
+		RaidHarvMoveRefreshTicks: 125
+		RaidHarvReqMarginPercent: 150
+		RaidHarvReconRadiusCells: 8
+		RaidHarvIncidentLossPercent: 25
+		RaidHarvIncidentWindowTicks: 300
+		RaidHarvIncidentDecayTicks: 3000
+		RaidHarvWaypointSpacingCells: 8
+		RaidHarvDefenceRadiusCells: 6
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		ArmyDutyTrace: true
@@ -5133,6 +5144,17 @@ Player:
 		LatePushReinforceBelowPercent: 60
 		LatePushReinforceMinRatioPercent: 100
 		LatePushHandoverEnabled: true
+		# RAID-HARV-01 P1 (row raid_harv; design 01 D7, design 02, deltas 01 and 02): the native harvester raid. OFF until its A/B passes; the keys below are the PRIORS of the nine learned raid numbers (4-value rule, DEV only).
+		RaidHarvEnabled: false
+		RaidHarvLostReconTicks: 400
+		RaidHarvMoveRefreshTicks: 125
+		RaidHarvReqMarginPercent: 150
+		RaidHarvReconRadiusCells: 8
+		RaidHarvIncidentLossPercent: 25
+		RaidHarvIncidentWindowTicks: 300
+		RaidHarvIncidentDecayTicks: 3000
+		RaidHarvWaypointSpacingCells: 8
+		RaidHarvDefenceRadiusCells: 6
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		ArmyDutyTrace: true
@@ -5332,6 +5354,17 @@ Player:
 		LatePushReinforceBelowPercent: 60
 		LatePushReinforceMinRatioPercent: 100
 		LatePushHandoverEnabled: true
+		# RAID-HARV-01 P1 (row raid_harv; design 01 D7, design 02, deltas 01 and 02): the native harvester raid. OFF until its A/B passes; the keys below are the PRIORS of the nine learned raid numbers (4-value rule, DEV only).
+		RaidHarvEnabled: false
+		RaidHarvLostReconTicks: 400
+		RaidHarvMoveRefreshTicks: 125
+		RaidHarvReqMarginPercent: 150
+		RaidHarvReconRadiusCells: 8
+		RaidHarvIncidentLossPercent: 25
+		RaidHarvIncidentWindowTicks: 300
+		RaidHarvIncidentDecayTicks: 3000
+		RaidHarvWaypointSpacingCells: 8
+		RaidHarvDefenceRadiusCells: 6
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		ArmyDutyTrace: true
@@ -5533,6 +5566,17 @@ Player:
 		LatePushReinforceBelowPercent: 60
 		LatePushReinforceMinRatioPercent: 100
 		LatePushHandoverEnabled: true
+		# RAID-HARV-01 P1 (row raid_harv; design 01 D7, design 02, deltas 01 and 02): the native harvester raid. OFF until its A/B passes; the keys below are the PRIORS of the nine learned raid numbers (4-value rule, DEV only).
+		RaidHarvEnabled: false
+		RaidHarvLostReconTicks: 400
+		RaidHarvMoveRefreshTicks: 125
+		RaidHarvReqMarginPercent: 150
+		RaidHarvReconRadiusCells: 8
+		RaidHarvIncidentLossPercent: 25
+		RaidHarvIncidentWindowTicks: 300
+		RaidHarvIncidentDecayTicks: 3000
+		RaidHarvWaypointSpacingCells: 8
+		RaidHarvDefenceRadiusCells: 6
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		ArmyDutyTrace: true
@@ -5734,6 +5778,17 @@ Player:
 		LatePushReinforceBelowPercent: 60
 		LatePushReinforceMinRatioPercent: 100
 		LatePushHandoverEnabled: true
+		# RAID-HARV-01 P1 (row raid_harv; design 01 D7, design 02, deltas 01 and 02): the native harvester raid. OFF until its A/B passes; the keys below are the PRIORS of the nine learned raid numbers (4-value rule, DEV only).
+		RaidHarvEnabled: false
+		RaidHarvLostReconTicks: 400
+		RaidHarvMoveRefreshTicks: 125
+		RaidHarvReqMarginPercent: 150
+		RaidHarvReconRadiusCells: 8
+		RaidHarvIncidentLossPercent: 25
+		RaidHarvIncidentWindowTicks: 300
+		RaidHarvIncidentDecayTicks: 3000
+		RaidHarvWaypointSpacingCells: 8
+		RaidHarvDefenceRadiusCells: 6
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		ArmyDutyTrace: true
@@ -5932,6 +5987,17 @@ Player:
 		LatePushReinforceBelowPercent: 60
 		LatePushReinforceMinRatioPercent: 100
 		LatePushHandoverEnabled: true
+		# RAID-HARV-01 P1 (row raid_harv; design 01 D7, design 02, deltas 01 and 02): the native harvester raid. OFF until its A/B passes; the keys below are the PRIORS of the nine learned raid numbers (4-value rule, DEV only).
+		RaidHarvEnabled: false
+		RaidHarvLostReconTicks: 400
+		RaidHarvMoveRefreshTicks: 125
+		RaidHarvReqMarginPercent: 150
+		RaidHarvReconRadiusCells: 8
+		RaidHarvIncidentLossPercent: 25
+		RaidHarvIncidentWindowTicks: 300
+		RaidHarvIncidentDecayTicks: 3000
+		RaidHarvWaypointSpacingCells: 8
+		RaidHarvDefenceRadiusCells: 6
 		# HARASS-CAP-01 (USER P0, V02 RCA): raiders (guerrilla/harass squads) hold at most HarassCapPercent of a seat's combat units (25 for every personality, the guerrilla too: USER 25% rule, TEAM-GATHER-02), the rest go to the blob; a raid launches with at least 3 units; from the late start the raiders join the blob and the open team order.
 		HarassCapEnabled: true
 		ArmyDutyTrace: true
