@@ -174,7 +174,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(typeof(OpenRA.Mods.CA.Traits.IBotObservedMainTargetStyle).Assembly, Is.SameAs(typeof(OpenRA.Mods.CA.Traits.IBotLearnedKnobs).Assembly));
 
 			var code = Source("mods/Cameo/Traits/BotModules/LearnAll/LearnAllBotModule.cs");
-			Assert.That(code, Does.Contain("TraitsImplementing<IBotObservedMainTargetStyle>().FirstEnabledTraitOrDefault()?.ObservedStyle"));
+			Assert.That(code, Does.Contain("TraitsImplementing<IBotObservedMainTargetStyle>().ToArray()).FirstEnabledTraitOrDefault()?.ObservedStyle"));
 			Assert.That(code, Does.Contain("mainTarget, ObservedStyle(), out permille)"), "TryResolvePermille reads the style");
 			Assert.That(code, Does.Contain("axes.Style.TryGetValue(style, out var learnedStyle) ? learnedStyle / 1000.0 : 0.0"), "TryRoleValues reads it; unknown = 0 = V3");
 		}

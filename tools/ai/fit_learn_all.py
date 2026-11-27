@@ -32,7 +32,7 @@ but the records would apply a (personality, knob) it never applied (chronologica
 A (game, personality, knob) that was already applied is skipped (idempotent). A MISSING snapshot file is the one first-use case (empty table).
 The write is atomic (temp file + fsync + replace) after the new text re-parses to the same table; the prior snapshot is kept as learn_all.before.<game>.yaml and every
 refusal / write is appended to learn_all_fit.log, both next to the exposure file (the DEV game folder). Enemy `weight` = number of enemy players that entry stands for
-(per-player counting, 1..64): the E_eff seed expands it, exactly as the runtime reader sees one entry per player. No main target = Enemy(null) = the global value, as the runtime.
+(per-player counting, 1..64): the E_eff seed expands it, exactly as the runtime reader sees one entry per player. No main target (null, empty or a Random pick) = the all-enemy aggregate alone (never a pull toward global; no enemies either = global), as the runtime.
 """
 import argparse
 import datetime
@@ -144,11 +144,13 @@ class Table:
         axes = self.find(personality, knob)
         if axes is None:
             return ONE
-        main = axes.get_enemy(main_target)
+        # Mirror of LearnKnobAxes.EnemyEff: no main target (None / empty = Random) is the all-enemy aggregate alone; no enemies either = global.
+        has_main = bool(main_target)
         if not enemies:
-            enemy_eff = main
+            enemy_eff = axes.get_enemy(main_target) if has_main else axes.global_
         else:
-            enemy_eff = team_enemy([axes.get_enemy(x) for x in enemies], main)
+            per = [axes.get_enemy(x) for x in enemies]
+            enemy_eff = team_enemy(per, axes.get_enemy(main_target)) if has_main else geo_mean(per)
         s = axes.style.get(style, 0) if style is not None else 0
         return resolve(axes.global_, axes.get_own(own_faction), enemy_eff, s)
 
@@ -183,10 +185,13 @@ class Seat:
 
 def _seat_enemy_eff(pre, enemies, main_target):
     """E_eff of one seat from the pre-step axes, exactly as the runtime reader sees it: one entry PER PLAYER (an entry with weight w stands for w players), and the
-    main target's value, where no main target (None / unknown faction) is the global value (LearnTable.Resolve: axes.Enemy(null))."""
+    main target's value (LearnKnobAxes.EnemyEff). NO main target (None / empty = a Random pick) is the all-enemy aggregate alone, never a pull toward global; no
+    enemies and no main target = the global value. A real faction the table has not learned reads as the global value."""
     per = []
     for (f, w) in enemies:
         per.extend([pre.get_enemy(f)] * w)
+    if not main_target:
+        return geo_mean(per) if per else pre.global_
     main = pre.get_enemy(main_target)
     return main if not per else team_enemy(per, main)
 
@@ -484,6 +489,9 @@ def check_records(records):
             w = e.get("weight", 1) if isinstance(e, dict) else None
             if not _is_int(w) or not 1 <= w <= MAX_ENEMY_WEIGHT:
                 return game, None, (5, "refused: game %s seat %s has an enemy entry that is not an object with a weight 1..%d (the players it stands for)" % (game, r.get("seat"), MAX_ENEMY_WEIGHT))
+        pers = r.get("personality")
+        if pers is not None and (not isinstance(pers, str) or "__" in pers):
+            return game, None, (5, "refused: game %s seat %s has a personality %r that is not a string without '__' (the snapshot key is personality__knob)" % (game, r.get("seat"), pers))
         mts = r.get("main_target_style")
         if mts is not None and (not isinstance(mts, str) or not GAME_ID.match(mts)):
             return game, None, (5, "refused: game %s seat %s has a main_target_style %r that is not null or [A-Za-z0-9_.-]+ (it becomes a Style@ key)" % (game, r.get("seat"), mts))

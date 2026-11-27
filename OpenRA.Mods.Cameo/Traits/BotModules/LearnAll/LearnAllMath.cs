@@ -106,6 +106,24 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public int Own(string faction) => faction != null && OwnFaction.TryGetValue(faction, out var v) ? v : Global;
 		public int Enemy(string faction) => faction != null && EnemyFaction.TryGetValue(faction, out var v) ? v : Global;
 
+		/// <summary>
+		/// The enemy value E_eff of one match-up, the ONE owner for the runtime reader and the DEV trainer (Opus 2026-11-27, no pull toward global): one entry per enemy
+		/// PLAYER and the main target. With a main target it is TeamEnemy(per player, main); with NO main target (null, empty, or a Random pick, whose public faction is "")
+		/// it is the all-enemy aggregate alone; with no enemies either it is the global value. A real faction the table has not learned yet reads as the global value (new values start at G).
+		/// </summary>
+		public int EnemyEff(IReadOnlyList<string> enemies, string mainTarget)
+		{
+			var hasMain = !string.IsNullOrEmpty(mainTarget);
+			if (enemies == null || enemies.Count == 0)
+				return hasMain ? Enemy(mainTarget) : Global;
+
+			var per = new int[enemies.Count];
+			for (var i = 0; i < per.Length; i++)
+				per[i] = Enemy(enemies[i]);
+
+			return hasMain ? LearnAllMath.TeamEnemy(per, Enemy(mainTarget)) : LearnAllMath.GeoMean(per);
+		}
+
 		public LearnKnobAxes Clone()
 		{
 			var c = new LearnKnobAxes { Global = Global };
@@ -160,19 +178,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (axes == null)
 				return LearnAllMath.One;
 
-			var main = axes.Enemy(mainTargetFaction);
-			int enemyEff;
-			if (enemies == null || enemies.Count == 0)
-				enemyEff = main;
-			else
-			{
-				var per = new int[enemies.Count];
-				for (var i = 0; i < per.Length; i++)
-					per[i] = axes.Enemy(enemies[i]);
-
-				enemyEff = LearnAllMath.TeamEnemy(per, main);
-			}
-
+			var enemyEff = axes.EnemyEff(enemies, mainTargetFaction);
 			var s = style != null && axes.Style.TryGetValue(style, out var sv) ? sv : 0;
 			return LearnAllMath.Resolve(axes.Global, axes.Own(ownFaction), enemyEff, s);
 		}

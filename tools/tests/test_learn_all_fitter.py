@@ -118,7 +118,7 @@ class GoldenReplay(unittest.TestCase):
 
 
 class PerPlayerSeed(unittest.TestCase):
-    """Terra 66B4FF2E finding 2 + no-target parity: the V3 seed counts PLAYERS (an entry with weight w is w players) and no main target = the global value."""
+    """Terra 66B4FF2E finding 2 + no-target parity: the V3 seed counts PLAYERS (an entry with weight w is w players) and no main target = the all-enemy aggregate."""
 
     def preset(self, nod, allies):
         t = f.Table()
@@ -139,13 +139,27 @@ class PerPlayerSeed(unittest.TestCase):
         f.apply_game(b, "g1", "k", [f.Seat("any", "gdi", [("nod", 1), ("nod", 1), ("nod", 1), ("allies", 1)], "nod", "boom", 0.0)])
         self.assertEqual(a.personalities["any"]["k"].style, b.personalities["any"]["k"].style)
 
-    def test_no_main_target_uses_the_global_value_like_the_runtime(self):
-        t = self.preset(1000, 4000)
-        f.apply_game(t, "g1", "k", [f.Seat("any", "gdi", [("nod", 1), ("allies", 1)], None, "boom", 0.0)])
+    def test_no_main_target_is_the_all_enemy_aggregate_not_a_pull_toward_global(self):
+        # Opus 2026-11-27 (Workhorse F1): no main target (None or "" = a Random pick) = the aggregate of the enemy players alone; the old convention geo(aggregate, G) pulled toward global.
+        t = self.preset(1000, 16000)
         axes = t.personalities["any"]["k"]
-        runtime = f.team_enemy([1000, 4000], axes.global_)
-        self.assertEqual(f._seat_enemy_eff(self.preset(1000, 4000).personalities["any"]["k"], [("nod", 1), ("allies", 1)], None), runtime)
-        self.assertEqual(axes.style["boom"], f.seed_style(1000, 1000, runtime))
+        axes.global_ = 500
+        enemies = [("nod", 3), ("allies", 1)]
+        for main in (None, ""):
+            self.assertEqual(f._seat_enemy_eff(axes, enemies, main), 2000, "(1000^3 x 16000)^(1/4), global 500 not involved: " + repr(main))
+            self.assertEqual(t.resolve("any", "k", "gdi", ["nod", "nod", "nod", "allies"], main, None), f.resolve(500, 500, 2000, 0), "release reader = trainer: " + repr(main))
+        self.assertEqual(f._seat_enemy_eff(axes, [], None), 500, "no enemies and no main target = the global value")
+        self.assertEqual(f._seat_enemy_eff(axes, [], "nod"), 1000, "no enemies, a main target = its value")
+        self.assertEqual(f._seat_enemy_eff(axes, enemies, "unlearned"), f.team_enemy([1000, 1000, 1000, 16000], 500), "a real faction not learned yet reads as the global value")
+
+    def test_the_seed_of_a_no_target_seat_equals_the_runtime_decision_value(self):
+        for main in (None, ""):
+            t = self.preset(1000, 4000)
+            before = t.resolve("any", "k", "gdi", ["nod", "allies"], main, None)
+            f.apply_game(t, "g1", "k", [f.Seat("any", "gdi", [("nod", 1), ("allies", 1)], main, "boom", 0.0)])
+            after = t.resolve("any", "k", "gdi", ["nod", "allies"], main, "boom")
+            self.assertLessEqual(abs(after - before), 1, "no jump for main=" + repr(main))
+            self.assertEqual(t.personalities["any"]["k"].style["boom"], f.seed_style(1000, 1000, 2000))
 
     def test_the_resolve_of_the_seeding_game_matches_the_seed_the_trainer_used(self):
         # The point of the fix: the pre-step decision value (runtime Resolve with style unseen) equals the decision value right after a zero-signal seeding step.
@@ -154,6 +168,18 @@ class PerPlayerSeed(unittest.TestCase):
         f.apply_game(t, "g1", "k", [f.Seat("any", "gdi", [("nod", 3), ("allies", 1)], "nod", "boom", 0.0)])
         after = t.resolve("any", "k", "gdi", ["nod", "nod", "nod", "allies"], "nod", "boom")
         self.assertLessEqual(abs(after - before), 1, "a fresh style must not make the decision jump")
+
+
+class PersonalityKey(unittest.TestCase):
+    """Workhorse F6: the snapshot key is personality__knob, so a personality containing '__' is refused (exit 5), never mis-parsed."""
+
+    def test_a_personality_with_the_separator_is_refused(self):
+        rec = {"game_id": "g1", "seq": 1, "seat": "s1", "personality": "ru__sh", "own_faction": "gdi", "main_target": "nod", "main_target_style": None,
+               "enemies": [{"faction": "nod", "weight": 1}], "knobs": [{"knob": "k", "signal": 1.0}]}
+        game, seq, error = f.check_records([rec])
+        self.assertEqual(error[0], 5)
+        rec["personality"] = "rush"
+        self.assertIsNone(f.check_records([rec])[2])
 
 
 class SnapshotSafety(unittest.TestCase):

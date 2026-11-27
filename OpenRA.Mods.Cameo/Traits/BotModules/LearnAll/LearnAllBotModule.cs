@@ -44,6 +44,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	{
 		readonly World world;
 		readonly OpenRA.Player player;
+		IBotCurrentPersonality[] personalityProviders;
+		IBotObservedMainTargetStyle[] styleProviders;
 		LearnTable table;
 		string[] enemies = Array.Empty<string>();
 		string mainTarget = "";
@@ -66,23 +68,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			table ??= Load();
 			Refresh();
-			var personality = player.PlayerActor.TraitsImplementing<IBotCurrentPersonality>().FirstEnabledTraitOrDefault()?.CurrentPersonality;
+			var personality = Personality();
 			var axes = table.Find(personality, LearnAllKnobs.WaveRole(role));
 			if (axes == null)
 				return false;
 
-			var main = axes.Enemy(mainTarget);
-			int enemyEff;
-			if (enemies.Length == 0)
-				enemyEff = main;
-			else
-			{
-				var per = new int[enemies.Length];
-				for (var i = 0; i < per.Length; i++)
-					per[i] = axes.Enemy(enemies[i]);
-
-				enemyEff = LearnAllMath.TeamEnemy(per, main);
-			}
+			var enemyEff = axes.EnemyEff(enemies, mainTarget);
 
 			// S_obs: the observed style of the main target owner when a classifier provides one and the table has learned it; unseen, unknown or no provider = 0 = the exact
 			// three-axis result (null never fabricates a style, and nothing here reads an enemy's personality or true label).
@@ -104,12 +95,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			table ??= Load();
 			Refresh();
-			var personality = player.PlayerActor.TraitsImplementing<IBotCurrentPersonality>().FirstEnabledTraitOrDefault()?.CurrentPersonality;
+			var personality = Personality();
 			return TryResolve(table, personality, knob, ownFaction, enemies, mainTarget, ObservedStyle(), out permille);
 		}
 
 		/// <summary>The observed-style bucket of the main target owner from the B4 classifier (observation only), or null = unseen / no provider.</summary>
-		string ObservedStyle() => player.PlayerActor.TraitsImplementing<IBotObservedMainTargetStyle>().FirstEnabledTraitOrDefault()?.ObservedStyle;
+		string ObservedStyle() => (styleProviders ??= player.PlayerActor.TraitsImplementing<IBotObservedMainTargetStyle>().ToArray()).FirstEnabledTraitOrDefault()?.ObservedStyle;
+
+		// The providers are resolved once (the player actor's traits never change): the reads run per knob per decision, so no enumeration allocates per call (Workhorse F3).
+		string Personality() => (personalityProviders ??= player.PlayerActor.TraitsImplementing<IBotCurrentPersonality>().ToArray()).FirstEnabledTraitOrDefault()?.CurrentPersonality;
 
 		/// <summary>The pure half of the read seam: false for an empty table argument or a knob the table does not hold, else exactly LearnTable.Resolve (style unseen).</summary>
 		public static bool TryResolve(LearnTable learned, string personality, string knob, string ownFaction, IReadOnlyList<string> enemyFactions, string mainTargetFaction, out int permille) =>

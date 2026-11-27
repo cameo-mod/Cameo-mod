@@ -175,17 +175,47 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void ANullMainTargetIsTheGlobalValueExactlyLikeTheRuntimeReader()
+		public void NoMainTargetIsTheAllEnemyAggregateNotAPullTowardGlobalAndTrainerEqualsReleaseReader()
 		{
-			// Terra 66B4FF2E open item: the trainer's no-target seed must equal what LearnTable.Resolve (Enemy(null) = Global) returned for the decision.
+			// Opus 2026-11-27 (Workhorse F1): no main target (null, empty, a Random pick) = the aggregate of the enemy players alone, in LearnTable.Resolve, TryRoleValues (both through
+			// LearnKnobAxes.EnemyEff) and the trainer seed. Global is 500 here so a pull toward it would show.
 			var table = PresetNodAllies(1000, 16000);
+			table.Find("any", "k").Global = 500;
+			var axes = table.Find("any", "k");
+			string[] players = ["nod", "nod", "nod", "allies"];
 			EnemyObservation[] enemies = [new("nod", 3), new("allies", 1)];
-			LearnAllTrainer.ApplyGame(table, "g1", "k", [new SeatObservation("any", "gdi", enemies, null, "turtle", 0.0)]);
-			Assert.That(table.Find("any", "k").Style["turtle"], Is.EqualTo(LearnAllMath.GeoMean(1000, 1000, 1414)), "E_eff = geo(players 2000, Global 1000), never the mean of the seats");
-			Assert.That(LearnAllTrainer.SeatEnemyEff(table.Find("any", "k"), [new EnemyObservation("nod", 3), new EnemyObservation("allies", 1)], null), Is.EqualTo(1414));
-			Assert.That(LearnAllTrainer.SeatEnemyEff(table.Find("any", "k"), [new EnemyObservation("nod", 3), new EnemyObservation("allies", 1)], "unknown_faction"), Is.EqualTo(1414), "an unknown faction is the global value too");
-			Assert.That(LearnAllTrainer.SeatEnemyEff(table.Find("any", "k"), [], null), Is.EqualTo(table.Find("any", "k").Global));
-			Assert.That(LearnAllTrainer.SeatEnemyEff(table.Find("any", "k"), [new EnemyObservation("nod", 1000)], "nod"), Is.EqualTo(1000), "a huge weight is clamped, not looped");
+			foreach (var main in new string[] { null, "" })
+			{
+				Assert.That(axes.EnemyEff(players, main), Is.EqualTo(2000), "(1000^3 x 16000)^(1/4): the aggregate alone, main '" + main + "'");
+				Assert.That(LearnAllTrainer.SeatEnemyEff(axes, [.. enemies], main), Is.EqualTo(2000), "trainer = release reader");
+				Assert.That(table.Resolve("any", "k", "gdi", players, main, null), Is.EqualTo(LearnAllMath.Resolve(500, 500, 2000, 0)));
+			}
+
+			Assert.That(axes.EnemyEff([], null), Is.EqualTo(500), "no enemies and no main target = the global value");
+			Assert.That(axes.EnemyEff([], "nod"), Is.EqualTo(1000), "no enemies, a main target = its value");
+			Assert.That(axes.EnemyEff(null, ""), Is.EqualTo(500));
+			Assert.That(axes.EnemyEff(players, "unlearned"), Is.EqualTo(LearnAllMath.TeamEnemy([1000, 1000, 1000, 16000], 500)), "a real faction not learned yet reads as the global value (new values start at G)");
+			Assert.That(LearnAllTrainer.SeatEnemyEff(axes, [], null), Is.EqualTo(500));
+			Assert.That(LearnAllTrainer.SeatEnemyEff(axes, [new EnemyObservation("nod", 1000)], "nod"), Is.EqualTo(1000), "a huge weight is clamped, not looped");
+
+			// Train / release parity: the seed of a fresh style equals the decision value the runtime had one line earlier.
+			foreach (var main in new string[] { null, "" })
+			{
+				var t = PresetNodAllies(1000, 4000);
+				var before = t.Resolve("any", "k", "gdi", ["nod", "allies"], main, null);
+				LearnAllTrainer.ApplyGame(t, "g1", "k", [new SeatObservation("any", "gdi", [new EnemyObservation("nod"), new EnemyObservation("allies")], main, "turtle", 0.0)]);
+				Assert.That(t.Find("any", "k").Style["turtle"], Is.EqualTo(LearnAllMath.GeoMean(1000, 1000, 2000)));
+				Assert.That(Math.Abs(t.Resolve("any", "k", "gdi", ["nod", "allies"], main, "turtle") - before), Is.LessThanOrEqualTo(1), "no jump, main '" + main + "'");
+			}
+		}
+
+		[Test]
+		public void APersonalityContainingTheKeySeparatorIsRefused()
+		{
+			var table = new LearnTable();
+			Assert.That(LearnAllTrainer.ApplyGame(table, "g1", "k", One("ru__sh", "gdi", "nod", 1.0)), Is.False, "personality__knob would mis-parse");
+			Assert.That(table.Personalities, Is.Empty);
+			Assert.That(LearnAllTrainer.ApplyGame(table, "g1", "k", One("rush", "gdi", "nod", 1.0)), Is.True);
 		}
 
 		[Test]
