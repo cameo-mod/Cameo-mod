@@ -68,7 +68,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var helperStart = src.IndexOf("static Actor FindClosestAirTarget", System.StringComparison.Ordinal);
 			var helperEnd = src.IndexOf("protected static Actor FindDefenselessTarget", helperStart, System.StringComparison.Ordinal);
 			var helper = src.Substring(helperStart, helperEnd - helperStart);
-			Assert.That(helper.IndexOf("IsTargetableBy(leader)", System.StringComparison.Ordinal), Is.LessThan(helper.IndexOf("bigThreatsOnly))", System.StringComparison.Ordinal)));
+			Assert.That(helper.IndexOf("IsTargetableBy(leader)", System.StringComparison.Ordinal), Is.LessThan(helper.IndexOf("(!bigThreatsOnly ||", System.StringComparison.Ordinal)));
 			Assert.That(helper, Does.Contain("owner.World.Actors.Where(").And.Contain(".ClosestToIgnoringPath(pos);"));
 		}
 	}
