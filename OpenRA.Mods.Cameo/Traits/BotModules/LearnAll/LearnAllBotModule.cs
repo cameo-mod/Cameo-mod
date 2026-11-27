@@ -47,10 +47,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		IBotCurrentPersonality[] personalityProviders;
 		IBotObservedMainTargetStyle[] styleProviders;
 		IBotMainTargetProvider[] mainTargetProviders;
-		string mainStyle;
 		LearnTable table;
 		string[] enemies = Array.Empty<string>();
-		string mainTarget = "";
 		string ownFaction = "";
 		int refreshedAt = int.MinValue;
 		AblationLatch ablateLearnAll;
@@ -75,6 +73,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (axes == null)
 				return false;
 
+			var (mainTarget, mainStyle) = ReadMainTarget();
 			var enemyEff = axes.EnemyEff(enemies, mainTarget);
 
 			// S_obs: the observed style of the main target owner when a classifier provides one and the table has learned it; unseen, unknown or no provider = 0 = the exact
@@ -97,25 +96,27 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			table ??= Load();
 			Refresh();
 			var personality = Personality();
+			var (mainTarget, mainStyle) = ReadMainTarget();
 			return TryResolve(table, personality, knob, ownFaction, enemies, mainTarget, mainStyle, out permille);
 		}
 
-		/// <summary>The public faction of the bot's authoritative main target, or "" when no provider names one (no target, a Random pick). Pure over its inputs so a test can drive the live path.</summary>
-		internal static string MainTargetFaction(IEnumerable<IBotMainTargetProvider> providers, Func<OpenRA.Player, string> publicFaction)
+		(string Faction, string Style) ReadMainTarget()
 		{
-			if (providers != null)
-				foreach (var provider in providers)
-				{
-					var target = provider.MainTarget;
-					if (target != null)
-						return publicFaction(target) ?? "";
-				}
-
-			return "";
+			mainTargetProviders ??= player.PlayerActor.TraitsImplementing<IBotMainTargetProvider>().ToArray();
+			styleProviders ??= player.PlayerActor.TraitsImplementing<IBotObservedMainTargetStyle>().ToArray();
+			var styleProvider = styleProviders.FirstEnabledTraitOrDefault();
+			return MainTargetContext(mainTargetProviders, BotFactionView.PublicFactionOf, styleProvider);
 		}
 
-		/// <summary>The observed-style bucket of the main target owner from the B4 classifier (observation only), or null = unseen / no provider.</summary>
-		string ObservedStyle() => (styleProviders ??= player.PlayerActor.TraitsImplementing<IBotObservedMainTargetStyle>().ToArray()).FirstEnabledTraitOrDefault()?.ObservedStyle;
+		internal static (string Faction, string Style) MainTargetContext(IBotMainTargetProvider[] providers,
+			Func<OpenRA.Player, string> publicFaction, IBotObservedMainTargetStyle styleProvider)
+		{
+			foreach (var provider in providers)
+				if (provider.MainTarget is OpenRA.Player target)
+					return (publicFaction(target) ?? "", styleProvider?.ObservedStyleOf(target));
+
+			return ("", null);
+		}
 
 		// The providers are resolved once (the player actor's traits never change): the reads run per knob per decision, so no enumeration allocates per call (Workhorse F3).
 		string Personality() => (personalityProviders ??= player.PlayerActor.TraitsImplementing<IBotCurrentPersonality>().ToArray()).FirstEnabledTraitOrDefault()?.CurrentPersonality;
@@ -155,11 +156,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			refreshedAt = tick;
 			ownFaction = player.Faction?.InternalName ?? "";
-			// The main target and its observed style are read together, in the same refresh generation, so the faction and the style always describe the same target.
-			// No synthesized fallback: with no authoritative main target (or a Random pick) the main target is "" = no target, and the all-enemy aggregate applies, exactly as the
-			// trainer's seed does (LearnKnobAxes.EnemyEff). PlanBandit's dominant-faction fallback is NOT used here (Sol 02 finding 1).
-			mainTarget = MainTargetFaction(mainTargetProviders ??= player.PlayerActor.TraitsImplementing<IBotMainTargetProvider>().ToArray(), BotFactionView.PublicFactionOf);
-			mainStyle = mainTarget.Length > 0 ? ObservedStyle() : null;
 			enemies = world.Players
 				.Where(p => p != player && !p.NonCombatant && !p.Spectating && player.RelationshipWith(p) == PlayerRelationship.Enemy)
 				.Select(BotFactionView.PublicFactionOf)

@@ -169,12 +169,12 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TheStyleProviderSeamIsObservationOnlyAndBothConsumersReadIt()
 		{
 			var seam = Source("mods/CA/Traits/BotModules/IBotObservedMainTargetStyle.cs");
-			Assert.That(seam, Does.Contain("string ObservedStyle { get; }"));
+			Assert.That(seam, Does.Contain("string ObservedStyleOf(OpenRA.Player target);"));
 			Assert.That(seam, Does.Contain("OBSERVATION ONLY"));
 			Assert.That(typeof(OpenRA.Mods.CA.Traits.IBotObservedMainTargetStyle).Assembly, Is.SameAs(typeof(OpenRA.Mods.CA.Traits.IBotLearnedKnobs).Assembly));
 
 			var code = Source("mods/Cameo/Traits/BotModules/LearnAll/LearnAllBotModule.cs");
-			Assert.That(code, Does.Contain("TraitsImplementing<IBotObservedMainTargetStyle>().ToArray()).FirstEnabledTraitOrDefault()?.ObservedStyle"));
+			Assert.That(code, Does.Contain("styleProvider?.ObservedStyleOf(target)"));
 			Assert.That(code, Does.Contain("mainTarget, mainStyle, out permille)"), "TryResolvePermille reads the style");
 			Assert.That(code, Does.Contain("axes.Style.TryGetValue(mainStyle, out var learnedStyle) ? learnedStyle / 1000.0 : 0.0"), "TryRoleValues reads it; unknown = 0 = V3");
 		}
@@ -184,22 +184,26 @@ namespace OpenRA.Mods.Cameo.Test
 			public OpenRA.Player MainTarget => target;
 		}
 
+		sealed class FakeTargetStyle(OpenRA.Player first) : OpenRA.Mods.CA.Traits.IBotObservedMainTargetStyle
+		{
+			public string ObservedStyleOf(OpenRA.Player target) => target == first ? "rush" : "tech";
+		}
+
 		[Test]
 		public void TheLiveMainTargetIsTheAuthoritativeOneOrNoneAndNeverADominantFactionFallback()
 		{
 			// Sol 02 finding 1: the module's live main-target path (MainTargetFaction, used by Refresh for BOTH readers) must give "" when no provider names a target, so the
 			// all-enemy aggregate applies exactly like the trainer; PlanBandit's dominant-faction fallback must not be used.
 			var token = (OpenRA.Player)System.Runtime.CompilerServices.RuntimeHelpers.GetUninitializedObject(typeof(OpenRA.Player));
-			Assert.That(LearnAllBotModule.MainTargetFaction(null, _ => "nod"), Is.EqualTo(""));
-			Assert.That(LearnAllBotModule.MainTargetFaction([], _ => "nod"), Is.EqualTo(""));
-			Assert.That(LearnAllBotModule.MainTargetFaction([new FakeTarget(null)], _ => "nod"), Is.EqualTo(""), "a provider with no target = no target");
-			Assert.That(LearnAllBotModule.MainTargetFaction([new FakeTarget(null), new FakeTarget(token)], _ => "nod"), Is.EqualTo("nod"), "the first non-null target");
-			Assert.That(LearnAllBotModule.MainTargetFaction([new FakeTarget(token)], _ => null), Is.EqualTo(""), "a Random/hidden pick = no target");
+			Assert.That(LearnAllBotModule.MainTargetContext([], _ => "nod", null).Faction, Is.EqualTo(""));
+			Assert.That(LearnAllBotModule.MainTargetContext([new FakeTarget(null)], _ => "nod", null).Faction, Is.EqualTo(""), "a provider with no target = no target");
+			Assert.That(LearnAllBotModule.MainTargetContext([new FakeTarget(null), new FakeTarget(token)], _ => "nod", null).Faction, Is.EqualTo("nod"), "the first non-null target");
+			Assert.That(LearnAllBotModule.MainTargetContext([new FakeTarget(token)], _ => null, null).Faction, Is.EqualTo(""), "a Random/hidden pick = no target");
 
 			// The live path end to end: three NOD seats at 1000 and one Allies seat at 16000, no target: the aggregate 2000 (trainer value), not geo(2000, dominant NOD 1000) = 1414.
 			var table = LearnAllSnapshot.ParseText("BotLearnAll:\n\tVersion: 1\n\tKnob@any__raid.k:\n\t\tGlobal: 1000\n\t\tEnemy@nod: 1000\n\t\tEnemy@allies: 16000\n");
 			string[] players = ["nod", "nod", "nod", "allies"];
-			var none = LearnAllBotModule.MainTargetFaction([new FakeTarget(null)], _ => "nod");
+			var none = LearnAllBotModule.MainTargetContext([new FakeTarget(null)], _ => "nod", null).Faction;
 			Assert.That(LearnAllBotModule.TryResolve(table, "any", "raid.k", "gdi", players, none, out var live), Is.True);
 			Assert.That(live, Is.EqualTo(LearnAllMath.Resolve(1000, 1000, 2000, 0)), "no target = the all-enemy aggregate");
 			var trained = LearnAllTrainer.SeatEnemyEff(table.Find("any", "raid.k"), [new EnemyObservation("nod", 3), new EnemyObservation("allies", 1)], none);
@@ -207,7 +211,19 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var code = Source("mods/Cameo/Traits/BotModules/LearnAll/LearnAllBotModule.cs");
 			Assert.That(code, Does.Not.Contain("EnemyFactionOf"), "no dominant-faction fallback in the module");
-			Assert.That(code, Does.Contain("mainStyle = mainTarget.Length > 0 ? ObservedStyle() : null;"), "faction and style are read in the same refresh generation");
+			Assert.That(code, Does.Contain("return (publicFaction(target) ?? \"\", styleProvider?.ObservedStyleOf(target));"), "faction and style are read in the same refresh generation");
+		}
+
+		[Test]
+		public void StyleUsesTheSamePlayerEvenWhenThePublicFactionIsUnknownOrUnchanged()
+		{
+			var first = (OpenRA.Player)System.Runtime.CompilerServices.RuntimeHelpers.GetUninitializedObject(typeof(OpenRA.Player));
+			var second = (OpenRA.Player)System.Runtime.CompilerServices.RuntimeHelpers.GetUninitializedObject(typeof(OpenRA.Player));
+			var styles = new FakeTargetStyle(first);
+			Assert.That(LearnAllBotModule.MainTargetContext([new FakeTarget(first)], _ => "nod", styles), Is.EqualTo(("nod", "rush")));
+			Assert.That(LearnAllBotModule.MainTargetContext([new FakeTarget(second)], _ => "nod", styles), Is.EqualTo(("nod", "tech")));
+			Assert.That(LearnAllBotModule.MainTargetContext([new FakeTarget(second)], _ => "", styles), Is.EqualTo(("", "tech")));
+			Assert.That(LearnAllBotModule.MainTargetContext([], _ => "nod", styles), Is.EqualTo(("", (string)null)));
 		}
 
 		[Test]

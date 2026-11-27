@@ -19,6 +19,6 @@ namespace OpenRA.Mods.CA.Traits
 	/// </summary>
 	public interface IBotObservedMainTargetStyle
 	{
-		string ObservedStyle { get; }
+		string ObservedStyleOf(OpenRA.Player target);
 	}
 }
