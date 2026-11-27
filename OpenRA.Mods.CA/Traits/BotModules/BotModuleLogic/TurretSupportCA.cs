@@ -121,6 +121,41 @@ namespace OpenRA.Mods.CA.Traits
 			return best;
 		}
 
+		/// <summary>
+		/// TURRET-NOHOLD-01 (Sol FIX): <see cref="Pick"/> over the cells that are NOT masked (a refinery search's reservation), returning the index in the ORIGINAL list or -1. A masked best cell
+		/// gives way to the next usable one; with every cell masked the answer is -1 (the normal placement runs). Deterministic: the same mask gives the same index on every call.
+		/// </summary>
+		public static int PickUnmasked(IReadOnlyList<(long X, long Y)> legal, Func<int, bool> masked, (long X, long Y) attackers, (long X, long Y) anchor, long rangeLen, long minSafe)
+		{
+			var (kept, map) = Unmasked(legal, masked);
+			var index = Pick(kept, attackers, anchor, rangeLen, minSafe);
+			return index < 0 ? -1 : map[index];
+		}
+
+		/// <summary>TURRET-NOHOLD-01 (Sol FIX): <see cref="FallbackPick"/> over the cells that are not masked; the index in the ORIGINAL list or -1.</summary>
+		public static int FallbackPickUnmasked(IReadOnlyList<(long X, long Y)> legal, Func<int, bool> masked, (long X, long Y) attackers, (long X, long Y) anchor, long minSafe)
+		{
+			var (kept, map) = Unmasked(legal, masked);
+			var index = FallbackPick(kept, attackers, anchor, minSafe);
+			return index < 0 ? -1 : map[index];
+		}
+
+		static (List<(long X, long Y)> Kept, List<int> Map) Unmasked(IReadOnlyList<(long X, long Y)> legal, Func<int, bool> masked)
+		{
+			var kept = new List<(long X, long Y)>(legal.Count);
+			var map = new List<int>(legal.Count);
+			for (var i = 0; i < legal.Count; i++)
+			{
+				if (masked(i))
+					continue;
+
+				kept.Add(legal[i]);
+				map.Add(i);
+			}
+
+			return (kept, map);
+		}
+
 		static long Dist2((long X, long Y) a, (long X, long Y) b)
 		{
 			var dx = a.X - b.X;

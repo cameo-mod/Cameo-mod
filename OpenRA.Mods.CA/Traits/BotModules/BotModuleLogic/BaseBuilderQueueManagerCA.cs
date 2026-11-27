@@ -3823,7 +3823,11 @@ namespace OpenRA.Mods.CA.Traits
 			var positions = legal.Select(cell => { var c = world.Map.CenterOfCell(cell); return ((long)c.X, (long)c.Y); }).ToList();
 
 			var minSafe = TurretSupportCA.MinSafe(range, WDist.FromCells(baseBuilder.Info.TurretSupportMinGapCells).Length);
-			var index = TurretSupportCA.Pick(positions, (focus.Attackers.X, focus.Attackers.Y), (focus.Anchor.X, focus.Anchor.Y), range, minSafe);
+			// TURRET-NOHOLD-01 (Sol FIX): armed, a cell a refinery search has reserved (PlacementMasked) never wins: the support cell skips the normal placement, so a masked winner would be nulled at the
+			// final mask check with no second try. The next usable cell wins instead; with every cell masked the search finds none and the normal placement runs. Row off = the plain Pick, unchanged.
+			var index = TurretNoHoldOn
+				? TurretSupportCA.PickUnmasked(positions, i => baseBuilder.PlacementMasked(actorInfo.Name, legal[i]), (focus.Attackers.X, focus.Attackers.Y), (focus.Anchor.X, focus.Anchor.Y), range, minSafe)
+				: TurretSupportCA.Pick(positions, (focus.Attackers.X, focus.Attackers.Y), (focus.Anchor.X, focus.Anchor.Y), range, minSafe);
 			if (index >= 0)
 				return (legal[index], false);
 
@@ -3834,7 +3838,7 @@ namespace OpenRA.Mods.CA.Traits
 			// (the same engine placement check, so the lobby ally option still applies; never closer than the safe gap). With none the normal own-base placement runs: (null, false), no watchdog wait.
 			var cluster = AdvisorLegalCells(actorInfo, true, producer, world.Map.CellContaining(focus.Anchor)).ToList();
 			var clusterPositions = cluster.Select(cell => { var c = world.Map.CenterOfCell(cell); return ((long)c.X, (long)c.Y); }).ToList();
-			var fallback = TurretSupportCA.FallbackPick(clusterPositions, (focus.Attackers.X, focus.Attackers.Y), (focus.Anchor.X, focus.Anchor.Y), minSafe);
+			var fallback = TurretSupportCA.FallbackPickUnmasked(clusterPositions, i => baseBuilder.PlacementMasked(actorInfo.Name, cluster[i]), (focus.Attackers.X, focus.Attackers.Y), (focus.Anchor.X, focus.Anchor.Y), minSafe);
 			return (fallback >= 0 ? (CPos?)cluster[fallback] : null, false);
 		}
 

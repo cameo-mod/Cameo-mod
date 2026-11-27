@@ -87,6 +87,59 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(TurretSupportCA.FallbackPick(legal, (0, 0), (0, -12 * Cell), MinSafe), Is.EqualTo(1), "nearer the anchor; of two equal cells the lower index");
 		}
 
+		// Sol FIX 923e10bb: a cell reserved by a refinery search (PlacementMasked) never wins an armed support search. The support cell skips the normal placement, so a masked winner used to
+		// be nulled at the final mask check with no second try.
+		static Func<int, bool> Masked(params int[] indices)
+		{
+			var set = new HashSet<int>(indices);
+			return set.Contains;
+		}
+
+		[Test]
+		public void TheBestCellIsMaskedAndTheNextUsableCellWins()
+		{
+			var legal = Row(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
+			var attackers = (10 * Cell, 0L);
+			Assert.That(TurretSupportCA.PickUnmasked(legal, Masked(), attackers, (0, 0), Range, MinSafe), Is.EqualTo(4), "nothing masked = the plain Pick (x = 4, exactly the range)");
+			Assert.That(TurretSupportCA.PickUnmasked(legal, Masked(4), attackers, (0, 0), Range, MinSafe), Is.EqualTo(5), "the best is masked: the next usable cell, as an ORIGINAL index");
+			Assert.That(TurretSupportCA.PickUnmasked(legal, Masked(4, 5), attackers, (0, 0), Range, MinSafe), Is.EqualTo(6));
+
+			// The fallback cluster: the same rule.
+			var cluster = Row(0, 2, 4, 6, 8);
+			var far = (20 * Cell, 0L);
+			Assert.That(TurretSupportCA.FallbackPickUnmasked(cluster, Masked(), far, (0, 0), MinSafe), Is.EqualTo(4));
+			Assert.That(TurretSupportCA.FallbackPickUnmasked(cluster, Masked(4), far, (0, 0), MinSafe), Is.EqualTo(3));
+		}
+
+		[Test]
+		public void EveryCellMaskedFallsBackToTheNormalPlacement()
+		{
+			var legal = Row(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+			Assert.That(TurretSupportCA.PickUnmasked(legal, _ => true, (10 * Cell, 0), (0, 0), Range, MinSafe), Is.EqualTo(-1), "no in-range cell left: the armed caller goes on to the fallback cluster");
+			Assert.That(TurretSupportCA.FallbackPickUnmasked(legal, _ => true, (10 * Cell, 0), (0, 0), MinSafe), Is.EqualTo(-1), "nothing left there either: (null, false) = the normal own-base placement, no hold");
+			Assert.That(TurretSupportCA.FallbackPickUnmasked(new List<(long X, long Y)>(), _ => false, (10 * Cell, 0), (0, 0), MinSafe), Is.EqualTo(-1));
+		}
+
+		[Test]
+		public void AStableReservationGivesTheSamePickEveryTimeAndLiftingItRestoresTheBest()
+		{
+			var legal = Row(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
+			var attackers = (10 * Cell, 0L);
+			for (var i = 0; i < 5; i++)
+				Assert.That(TurretSupportCA.PickUnmasked(legal, Masked(4), attackers, (0, 0), Range, MinSafe), Is.EqualTo(5), "the same reservation, the same cell on every pass");
+
+			// A reservation on a cell that would not have won changes nothing.
+			Assert.That(TurretSupportCA.PickUnmasked(legal, Masked(0, 1, 12), attackers, (0, 0), Range, MinSafe), Is.EqualTo(4));
+
+			// The mask is read in the ORIGINAL numbering however many cells before it are masked.
+			var seen = new List<int>();
+			TurretSupportCA.PickUnmasked(legal, i => { seen.Add(i); return i == 4; }, attackers, (0, 0), Range, MinSafe);
+			Assert.That(seen, Is.EqualTo(Enumerable.Range(0, legal.Count).ToList()), "each cell asked once, in order");
+
+			// The reservation ends: the best cell is back.
+			Assert.That(TurretSupportCA.PickUnmasked(legal, Masked(), attackers, (0, 0), Range, MinSafe), Is.EqualTo(4));
+		}
+
 		[Test]
 		public void TheOldHoldTextIsKeptWhenTheRowIsOffAndTheFallbackNeverHolds()
 		{
@@ -95,7 +148,9 @@ namespace OpenRA.Mods.Cameo.Test
 			chooser = chooser.Substring(0, chooser.IndexOf("// TURRET-NOHOLD-01: a READY ground turret skips", StringComparison.Ordinal));
 
 			Assert.That(chooser, Does.Contain("if (index >= 0) return (legal[index], false); if (!TurretNoHoldOn) return (null, true);"), "row off = the old hold");
-			Assert.That(chooser, Does.Contain("var fallback = TurretSupportCA.FallbackPick(clusterPositions, (focus.Attackers.X, focus.Attackers.Y), (focus.Anchor.X, focus.Anchor.Y), minSafe);"));
+			Assert.That(chooser, Does.Contain("var fallback = TurretSupportCA.FallbackPickUnmasked(clusterPositions, i => baseBuilder.PlacementMasked(actorInfo.Name, cluster[i]), (focus.Attackers.X, focus.Attackers.Y), (focus.Anchor.X, focus.Anchor.Y), minSafe);"));
+			Assert.That(chooser, Does.Contain("var index = TurretNoHoldOn ? TurretSupportCA.PickUnmasked(positions, i => baseBuilder.PlacementMasked(actorInfo.Name, legal[i]), (focus.Attackers.X, focus.Attackers.Y), (focus.Anchor.X, focus.Anchor.Y), range, minSafe) : TurretSupportCA.Pick(positions, (focus.Attackers.X, focus.Attackers.Y), (focus.Anchor.X, focus.Anchor.Y), range, minSafe);"),
+				"armed: masked cells never win; off: the plain Pick");
 			Assert.That(chooser, Does.Contain("return (fallback >= 0 ? (CPos?)cluster[fallback] : null, false);"), "row on = a cell or the normal placement, never a hold");
 			Assert.That(chooser, Does.Contain("AdvisorLegalCells(actorInfo, true, producer, world.Map.CellContaining(focus.Anchor))"), "the same engine placement check around the attacked building");
 			Assert.That(Count(chooser, ", true);"), Is.EqualTo(1), "exactly one hold return (the row-off one)");
