@@ -44,6 +44,9 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("Should visibility (Shroud, Fog, Cloak, etc) be considered when searching for Crates?")]
 		public readonly bool CheckTargetsForVisibility = true;
 
+		[Desc("FOG-ENGCRATE-01: genericbot crates are those seen now or remembered in the frozen layer, whatever CheckTargetsForVisibility says. Gated by SwitchCondition. Row fog_engcrate.")]
+		public readonly bool FogEngCrate = false;
+
 		[Desc("LC2 (AI_REVIEW_FRANSOTTO P1b): a crate stays reserved for its collector at most this many ticks.",
 			"-1 = never released (the old behaviour: a crate whose collector died or gave up stayed reserved forever).")]
 		public readonly int ReservationTimeoutTicks = 1500;
@@ -96,6 +99,8 @@ namespace OpenRA.Mods.Cameo.Traits
 		// CRATE-RESERVE-01
 		bool switchesActive;
 		AblationLatch ablateReserve;
+		AblationLatch ablateFogEngCrate; // FOG-ENGCRATE-01 hook fog_engcrate
+		bool FogOn => Info.FogEngCrate && switchesActive && !ablateFogEngCrate.Off(player, AblationIds.FogEngCrate);
 		readonly HashSet<CPos> reservedCrateCells = [];
 		bool ReserveOn => Info.CrateReserveMcv && switchesActive && !ablateReserve.Off(player, AblationIds.CrateReserveMcv);
 
@@ -162,8 +167,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (crates.Count < 1)
 				return;
 
-			if (Info.CheckTargetsForVisibility)
-				crates.RemoveAll(c => !c.CanBeViewedByPlayer(player));
+			if (FogOn || Info.CheckTargetsForVisibility)
+				crates.RemoveAll(c => !(FogOn ? FogEngCrateGate.Admits(player, c) : c.CanBeViewedByPlayer(player)));
 
 			// LC1: an idle unit may still belong to a scout, a beacon response or a capture — never take a claimed one.
 			var leases = BotUnitLeases.Of(player);
@@ -302,7 +307,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			var candidates = new List<(CPos Cell, bool Threatened)>();
 			foreach (var cell in crateMemory.Keys)
 			{
-				var reserved = yardCells.Any(y => CrateReserveCA.Reserved((cell - y).Length, Info.ReserveYardRadiusCells));
+				var reserved = yardCells.Any(y => CrateReserveCA.Reserved((cell - y).Length, FogEngCrateGate.ClampReserveRadius(Info.ReserveYardRadiusCells)));
 				if (reserved)
 					reservedCrateCells.Add(cell);
 

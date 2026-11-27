@@ -129,6 +129,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Consider visibility (shroud, fog, cloak) when choosing capture targets. DESIGN §19.5 allows false for this module.")]
 		public readonly bool CheckCaptureTargetsForVisibility = true;
 
+		[Desc("FOG-ENGCRATE-01: generic-bot capture and bridge-hut targets are those seen now or remembered in the frozen layer, whatever the Check*ForVisibility flags say. Row fog_engcrate.")]
+		public readonly bool FogEngCrate = false;
+
 		[Desc("Player relationships whose actors capturers target.")]
 		public readonly PlayerRelationship CapturableRelationships = PlayerRelationship.Enemy | PlayerRelationship.Neutral;
 
@@ -304,6 +307,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		readonly World world;
 		readonly OpenRA.Player player;
+		AblationLatch ablateFogEngCrate; // FOG-ENGCRATE-01 hook fog_engcrate (off = the omniscient scans)
 		AblationLatch ablateDemandCapturers; // ABLATE-01 hook pi_demand_capturers (DEV provider only; release = on)
 		AblationLatch ablateEngDrop; // ABLATE-01 hook ed_engdrop (DEV provider only; release = on): off = the legacy TransportChance roll
 		AblationLatch ablateRouteBudget; // ABLATE-01 hook er_route_budget (ENG-ROUTE-01; DEV provider only; release = on): off = the unbounded SafeRoute search
@@ -826,10 +830,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public static double RankScore(int value, int distanceCells, int exposedCells, int exposureWeight) =>
 			(double)Math.Max(0, value) / (1 + Math.Max(0, distanceCells) + (long)Math.Max(0, exposureWeight) * Math.Max(0, exposedCells));
 
+		// FOG-ENGCRATE-01: generic-bot capture and bridge-hut scans read the fog. Off = the Check*ForVisibility flags, as before.
+		bool FogOn => Info.FogEngCrate && !ablateFogEngCrate.Off(player, AblationIds.FogEngCrate);
+		bool CaptureFilter => FogOn || Info.CheckCaptureTargetsForVisibility;
+		bool CaptureVisible(Actor a) => FogOn ? FogEngCrateGate.Admits(player, a) : a.CanBeViewedByPlayer(player);
+
 		int GuardingEnemies(Actor capturer, Actor target) =>
 			world.FindActorsInCircle(target.CenterPosition, Info.EnemyAvoidanceRadius)
 				.Count(u => !u.IsDead && u.IsInWorld && player.RelationshipWith(u.Owner) == PlayerRelationship.Enemy
-					&& (!Info.CheckCaptureTargetsForVisibility || u.CanBeViewedByPlayer(player))
+					&& (!CaptureFilter || CaptureVisible(u))
 					&& u.Info.HasTraitInfo<AttackBaseInfo>() && capturer.IsTargetableBy(u));
 
 		/// <summary>Orders the try-candidates by RankScore over the nearest CaptureTargetTries x 2 (the rest are dropped).</summary>
@@ -869,8 +878,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var targets = world.Actors.Where(a => !a.IsDead && a.IsInWorld
 				&& Info.CapturableRelationships.HasRelationship(player.RelationshipWith(a.Owner))
 				&& a.TraitOrDefault<CaptureManager>() != null);
-			if (Info.CheckCaptureTargetsForVisibility)
-				targets = targets.Where(a => a.CanBeViewedByPlayer(player));
+			if (CaptureFilter)
+				targets = targets.Where(a => CaptureVisible(a));
 			if (capturableTypes.Count > 0)
 				targets = targets.Where(t => capturableTypes.Contains(t.Info.Name.ToLowerInvariant()));
 
@@ -1049,8 +1058,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					&& priorityCapturableTypes.Contains(a.Info.Name.ToLowerInvariant()));
 
 				// DESIGN §19.5: the engineer owner's fog exception.
-				if (Info.CheckCaptureTargetsForVisibility)
-					priorityTargets = priorityTargets.Where(a => a.CanBeViewedByPlayer(player));
+				if (CaptureFilter)
+					priorityTargets = priorityTargets.Where(a => CaptureVisible(a));
 
 				var candidates = priorityTargets.Where(t => !TargetFull(t) && !Dormant(t) && !ClaimedByOutrankingAlly(t)).OrderBy(ShardTier).ThenBy(a => (a.CenterPosition - baseCenter).LengthSquared).ToList();
 				ConsiderEscort(candidates);
@@ -1081,8 +1090,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var remaining = capturers.Skip(next).ToList();
 
 			var options = world.Actors.Where(a => a.Owner == randPlayer && !a.IsDead && a.IsInWorld);
-			if (Info.CheckCaptureTargetsForVisibility)
-				options = options.Where(a => a.CanBeViewedByPlayer(player));
+			if (CaptureFilter)
+				options = options.Where(a => CaptureVisible(a));
 
 			var capturable = options
 				.Where(target =>
@@ -1227,7 +1236,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			return world.ActorsHavingTrait<CaptureManager>()
 				.Where(t => !t.IsDead && t.IsInWorld && t.Owner != null && Info.CapturableRelationships.HasRelationship(player.RelationshipWith(t.Owner))
-					&& (!Info.CheckCaptureTargetsForVisibility || t.CanBeViewedByPlayer(player))
+					&& (!CaptureFilter || CaptureVisible(t))
 					&& !EscortEligible(t) && !TargetFull(t) && !Dormant(t)
 					&& (capturableTypes.Count == 0 || capturableTypes.Contains(t.Info.Name.ToLowerInvariant()))
 					&& (claimsAhead == null || !claimsAhead.Contains(world.Map.CenterOfCell(t.Location)))
@@ -1542,7 +1551,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var sum = 0L;
 			foreach (var u in world.FindActorsInCircle(center, Info.EnemyAvoidanceRadius))
 				if (!u.IsDead && capturer.Owner.RelationshipWith(u.Owner) == PlayerRelationship.Enemy
-					&& (!Info.CheckCaptureTargetsForVisibility || u.CanBeViewedByPlayer(player))
+					&& (!CaptureFilter || CaptureVisible(u))
 					&& u.Info.HasTraitInfo<AttackBaseInfo>() && capturer.IsTargetableBy(u))
 					sum += Math.Max(0, Info.EnemyAvoidanceRadius.Length - (center - u.CenterPosition).Length);
 
@@ -1676,7 +1685,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				capturer, new[] { capturer.Location }, loc => true, BlockedByActor.Stationary,
 				loc => world.FindActorsInCircle(world.Map.CenterOfCell(loc), Info.EnemyAvoidanceRadius)
 					.Where(u => !u.IsDead && capturer.Owner.RelationshipWith(u.Owner) == PlayerRelationship.Enemy
-						&& (!Info.CheckCaptureTargetsForVisibility || u.CanBeViewedByPlayer(player)) && capturer.IsTargetableBy(u))
+						&& (!CaptureFilter || CaptureVisible(u)) && capturer.IsTargetableBy(u))
 					.Sum(u => Math.Max(WDist.Zero.Length, Info.EnemyAvoidanceRadius.Length - (world.Map.CenterOfCell(loc) - u.CenterPosition).Length)));
 
 			return path.Count == 0 ? Target.Invalid : Target.FromActor(target);
@@ -1703,8 +1712,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				.Where(at => Info.RepairableHutActorTypes.Contains(at.Actor.Info.Name) && at.Trait.BridgeDamageState >= DamageState.Dead)
 				.Select(at => at.Actor));
 
-			if (Info.CheckRepairTargetsForVisibility)
-				huts.RemoveAll(h => !h.CanBeViewedByPlayer(player));
+			if (FogOn || Info.CheckRepairTargetsForVisibility)
+				huts.RemoveAll(h => !(FogOn ? FogEngCrateGate.Admits(player, h) : h.CanBeViewedByPlayer(player)));
 
 			SendOneRepairer(bot, leases, repairers, huts, EngineerJob.RepairBridge, "RepairBridge");
 		}
