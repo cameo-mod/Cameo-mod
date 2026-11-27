@@ -95,7 +95,7 @@ namespace OpenRA.Mods.CA.Traits
 				var p = armyPlan;
 				DiagnosticTeamEvent("army_plan", "main=" + p.MainUnits + "/" + p.MainValue + " harass=" + p.HarassUnits + "/" + p.HarassValue + " cap=" + (p.HarassCapValue == long.MaxValue ? -1 : p.HarassCapValue)
 					+ " attached=" + p.AttachedUnits + "/" + p.AttachedValue + " defence=" + p.DefenceUnits + "/" + p.DefenceValue + " other=" + p.OtherUnits
-					+ " demoted=" + p.DemotedSmall + "," + p.DemotedOverCap + " main_squad=" + p.MainSquadKey);
+					+ " demoted=" + p.DemotedSmall + "," + p.DemotedOverCap + " main_squad=" + p.MainSquadKey + LatePushPlanFields());
 			}
 #endif
 		}
@@ -543,7 +543,13 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			var before = unitsHangingAroundTheBase.Count;
+#if CAMEO_DEV_LOGGING
+			var latePushJoin = LatePushJoinBegin(order);
+#endif
 			CreateAttackForce(bot);
+#if CAMEO_DEV_LOGGING
+			LatePushJoinEnd(latePushJoin, order, "reinforce");
+#endif
 			if (unitsHangingAroundTheBase.Count < before)
 				DiagnosticTeamEvent("army_reinforce", "seq=" + order.Seq + " sent=" + (before - unitsHangingAroundTheBase.Count) + " left=" + unitsHangingAroundTheBase.Count
 					+ " phase=" + order.Phase);

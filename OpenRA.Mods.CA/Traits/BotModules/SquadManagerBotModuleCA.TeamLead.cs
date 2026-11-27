@@ -497,8 +497,17 @@ namespace OpenRA.Mods.CA.Traits
 					ArmyRetargetEngaged(now);
 			}
 
+#if CAMEO_DEV_LOGGING
+			// LATEPUSH-01 P0 (DEV only, read only): the seat before and after the join pass. Around the call, so the text of TeamLeadJoin itself is the release text. A pushed persistent
+			// order is reinforced inside TeamLeadJoin (ArmyReinforce writes its own rows), so it gets no second row here.
+			var latePushOrder = TeamLeadOpenOrder();
+			var latePushJoin = TeamLeadCadenceOn && latePushOrder is not { Persistent: true, Pushed: true } ? LatePushJoinBegin(latePushOrder) : null;
+#endif
 			if (TeamLeadCadenceOn)
 				TeamLeadJoin(bot, now);
+#if CAMEO_DEV_LOGGING
+			LatePushJoinEnd(latePushJoin, latePushJoin?.Order, "join");
+#endif
 		}
 
 		// The member's idle army: the pool plus the units of its formed quiet wave squads (the squads TeamLeadPrepare joins to an order or dismisses).
@@ -626,6 +635,10 @@ namespace OpenRA.Mods.CA.Traits
 
 			DiagnosticTeamEvent("team_order", "seq=" + order.Seq + " why=" + why.ToString().ToLowerInvariant() + " blob=" + blob.Units + "/" + blob.Value + " target=" + targetId
 				+ " pincer=" + order.HasProngs + " leader=" + teamLeadKey);
+#if CAMEO_DEV_LOGGING
+			// LATEPUSH-01 P0 (DEV only): the order row of the assignment evidence.
+			LatePushOrderRow(order, blob.Units, blob.Value, minUnits, minValue);
+#endif
 			if (order.AllIn)
 				TeamLeadAllInRecord("all_in_start", order, "why=" + order.AllInWhy + " blob=" + blob.Units + "/" + blob.Value + " target=" + targetId + " hunt=" + (targetId == 0 ? 1 : 0));
 			AIUtils.BotDebug("AI ({0}): team push published seq {1} at {2}: blob {3}/{4}, target {5}{6}", Player.ClientIndex, order.Seq, now, blob.Units, blob.Value,

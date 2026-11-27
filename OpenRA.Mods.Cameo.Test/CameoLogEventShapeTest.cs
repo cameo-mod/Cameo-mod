@@ -17,7 +17,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			typeof(MissionEvent), typeof(PlayerIdentity), typeof(CellXY),
 			typeof(BotPassiveSquadEventSnapshot), typeof(BotPassiveUnitPositionSnapshot),
-			typeof(BotPassiveAttackCommitSnapshot), typeof(BotPassiveDispatchCheckSnapshot),
+			typeof(BotPassiveAttackCommitSnapshot), typeof(BotPassiveAttackAssignSnapshot), typeof(BotPassiveDispatchCheckSnapshot),
 			typeof(BotPassiveCandidateFailure), typeof(BotPassiveJobEndSnapshot), typeof(BotPassiveWaveGroup),
 			typeof(BotPassiveWaveStartSnapshot), typeof(BotPassiveWaveSampleSnapshot),
 			typeof(BotPassiveRallyEndSnapshot), typeof(BotPassiveWaveExitSnapshot), typeof(BotPassiveHealthSnapshot),

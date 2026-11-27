@@ -1251,6 +1251,11 @@ namespace OpenRA.Mods.CA.Traits
 			if (w == null)
 				return;
 
+#if CAMEO_DEV_LOGGING
+			// LATEPUSH-01 P0 (DEV only): the outcome rows of the assignments that went (a no-op while none is pending).
+			LatePushOutcomeTick();
+#endif
+
 			if (World.IsGameOver || Player.WinState != WinState.Undefined)
 			{
 				w.Complete(t);

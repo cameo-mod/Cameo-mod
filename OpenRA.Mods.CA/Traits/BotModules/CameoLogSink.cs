@@ -30,6 +30,7 @@ namespace OpenRA.Mods.CA.Traits
 		void BeginPassive(int playerIndex, bool enabled, string gameUid, string seat, string botType, int tick);
 		void PassiveSquadEvent(int playerIndex, BotPassiveSquadEventSnapshot snapshot);
 		void PassiveAttackCommit(int playerIndex, BotPassiveAttackCommitSnapshot snapshot);
+		void PassiveAttackAssign(int playerIndex, BotPassiveAttackAssignSnapshot snapshot);
 		void PassiveDispatchCheck(int playerIndex, BotPassiveDispatchCheckSnapshot snapshot);
 		void PassiveJobEnd(int playerIndex, BotPassiveJobEndSnapshot snapshot);
 		void PassiveWaveStart(int playerIndex, BotPassiveWaveStartSnapshot snapshot);
@@ -60,6 +61,7 @@ namespace OpenRA.Mods.CA.Traits
 		public void BeginPassive(int playerIndex, bool enabled, string gameUid, string seat, string botType, int tick) { }
 		public void PassiveSquadEvent(int playerIndex, BotPassiveSquadEventSnapshot snapshot) { }
 		public void PassiveAttackCommit(int playerIndex, BotPassiveAttackCommitSnapshot snapshot) { }
+		public void PassiveAttackAssign(int playerIndex, BotPassiveAttackAssignSnapshot snapshot) { }
 		public void PassiveDispatchCheck(int playerIndex, BotPassiveDispatchCheckSnapshot snapshot) { }
 		public void PassiveJobEnd(int playerIndex, BotPassiveJobEndSnapshot snapshot) { }
 		public void PassiveWaveStart(int playerIndex, BotPassiveWaveStartSnapshot snapshot) { }
@@ -94,6 +96,7 @@ namespace OpenRA.Mods.CA.Traits
 			+ y.ToString(System.Globalization.CultureInfo.InvariantCulture);
 		public void TryEnqueueSquadEvent(BotPassiveSquadEventSnapshot s) => sink.PassiveSquadEvent(playerIndex, s);
 		public void TryEnqueueAttackCommit(BotPassiveAttackCommitSnapshot s) => sink.PassiveAttackCommit(playerIndex, s);
+		public void TryEnqueueAttackAssign(BotPassiveAttackAssignSnapshot s) => sink.PassiveAttackAssign(playerIndex, s);
 		public void TryEnqueueDispatchCheck(BotPassiveDispatchCheckSnapshot s) => sink.PassiveDispatchCheck(playerIndex, s);
 		public void TryEnqueueJobEnd(BotPassiveJobEndSnapshot s) => sink.PassiveJobEnd(playerIndex, s);
 		public void TryEnqueueWaveStart(BotPassiveWaveStartSnapshot s) => sink.PassiveWaveStart(playerIndex, s);
