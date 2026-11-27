@@ -153,12 +153,12 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(yaml[classic..], Does.Not.Contain("LatePush"), "classic untouched");
 			foreach (var key in new[]
 			{
-				"LatePushArmyCapEnabled: false", "LatePushArmyCapPermille: 800", "LatePushAllInPublishEnabled: false", "LatePushReinforceEnabled: false",
-				"LatePushReinforceBelowPercent: 60", "LatePushReinforceMinRatioPercent: 100", "LatePushHandoverEnabled: false"
+				"LatePushArmyCapEnabled: true", "LatePushArmyCapPermille: 800", "LatePushAllInPublishEnabled: true", "LatePushReinforceEnabled: true",
+				"LatePushReinforceBelowPercent: 60", "LatePushReinforceMinRatioPercent: 100", "LatePushHandoverEnabled: true"
 			})
 				Assert.That(Count(yaml[..classic], "\n\t\t" + key + "\n"), Is.EqualTo(6), key);
 
-			Assert.That(Regex.IsMatch(yaml, "LatePush\\w*Enabled: true"), Is.False, "every row ships OFF until its A/B passes");
+			Assert.That(Regex.IsMatch(yaml[classic..], "LatePush\\w*Enabled: true"), Is.False, "classic never armed (the playtest B1 ARM arms the six personality blocks)");
 			Assert.That(RepoFile(Bots + "SquadManagerBotModuleCA.LatePushP2.cs"), Does.Contain("internal bool LatePushArmyCapOn => LatePushAgeMinOn && Info.LatePushArmyCapEnabled && !ablateLpArmyCap.Off(Player, AblationIds.LpArmyCap);"));
 			Assert.That(RepoFile(Bots + "SquadManagerBotModuleCA.LatePushP2.cs"), Does.Contain("internal bool LatePushAllInPublishOn => ArmyLaunchArbiterOn && TeamLeadAllInOn && Info.LatePushAllInPublishEnabled && !ablateLpAllInPublish.Off(Player, AblationIds.LpAllInPublish);"));
 			Assert.That(RepoFile(Bots + "SquadManagerBotModuleCA.LatePushP2.cs"), Does.Contain("internal bool LatePushReinforceOn => ArmyLaunchArbiterOn && Info.LatePushReinforceEnabled && !ablateLpReinforce.Off(Player, AblationIds.LpReinforce);"));
