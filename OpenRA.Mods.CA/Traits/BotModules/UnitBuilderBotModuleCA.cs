@@ -202,6 +202,17 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("TIER-MIX-01: the share of the price (percent) the bank must already hold for a lean pick; the rest is paid progressively as income arrives.")]
 		public readonly int TechLeanBankPct = 30;
 
+		[Desc("FIRST-COPY-DUE-01 (row ub_first_copy_due; needs UnitRoll; RULES_AUDIT_04 A5): a real first-copy deadline. A listed type this bot never ordered is picked BEFORE the roll once its due clock passes",
+			"UnitRollFirstDueTicks; the type overdue longest goes first, a tie goes to the cheaper type. Pay-as-you-go: a bank below the full price does not stop the start while income exists; the clock only pauses",
+			"with no cash (bank at or below UnitRollFirstDueCash) AND no income. OFF by default (the weight-only first-copy boost stays); the yaml arms it.")]
+		public readonly bool FirstCopyDue = false;
+
+		[Desc("FIRST-COPY-DUE-01: credited ticks until a never-ordered type is due. Prior 3000 = about two minutes. Lives in the learnable parameter table (UnitRollTable key firstdue).")]
+		public readonly int UnitRollFirstDueTicks = 3000;
+
+		[Desc("FIRST-COPY-DUE-01: the bank at or below which the player counts as having no cash. Prior 0. Lives in the learnable parameter table (UnitRollTable key firstduecash).")]
+		public readonly int UnitRollFirstDueCash = 0;
+
 		[Desc("HANS-PROFILE-01 (row ub_core_focus; needs UnitRoll): the share (percent of the roll weight of the types this bot has built once) that the CoreFocusCount dearest affordable types of a queue should hold.",
 			"A weight multiplier on the core only (capped by CoreFocusMaxPct); every other weight, never-built types included, stays as the roll made it. 0 = off.")]
 		public readonly int CoreFocusSharePct = 0;
@@ -693,7 +704,8 @@ namespace OpenRA.Mods.CA.Traits
 		UnitRollTable rollTable;
 		public UnitRollTable RollParameters => rollTable ??= new UnitRollTable(Info.UnitsToBuild, Info.UnitRollBias, Info.UnitRollBiasLate, Info.UnitRollProfiles, Info.UnitRollFloorPct, Info.UnitRollRampTicks,
 				Info.UnitRollFirstBoost, Info.UnitRollFirstRampTicks, Info.UnitRollFirstCap,
-				Info.CoreFocusSharePct, Info.CoreFocusCount, Info.CoreFocusMaxPct, Info.CoreFocusBankPct, Info.TechLeanTopPct, Info.TechLeanBankPct);
+				Info.CoreFocusSharePct, Info.CoreFocusCount, Info.CoreFocusMaxPct, Info.CoreFocusBankPct, Info.TechLeanTopPct, Info.TechLeanBankPct,
+				Info.UnitRollFirstDueTicks, Info.UnitRollFirstDueCash);
 		string rollPersonality = "";
 		bool rollFirst;
 
@@ -707,6 +719,14 @@ namespace OpenRA.Mods.CA.Traits
 		bool TechLeanOn => UnitRollOn && Info.TechLeanTopPct > 0 && !ablateTechLean.Off(player, AblationIds.UnitTechLean);
 		int rollPoolMaxCost;
 		readonly List<long> rollScores = [];
+
+		// FIRST-COPY-DUE-01 (row ub_first_copy_due): per never-ordered type, the credited ticks of its due clock and the tick of the last advance. Both only move while the row is on.
+		AblationLatch ablateFirstCopyDue;
+		bool FirstCopyDueOn => UnitRollOn && Info.FirstCopyDue && !ablateFirstCopyDue.Off(player, AblationIds.UnitFirstCopyDue);
+		readonly Dictionary<string, long> rollDueCredit = new(StringComparer.Ordinal);
+		readonly Dictionary<string, int> rollDueAt = new(StringComparer.Ordinal);
+		int rollDueIncomeTick = -1;
+		bool rollDueIncome;
 
 		// PERF-BOTTICK-01 (row ub_affordable_pool): the fill's cash state for the roll's afford filter, set just before each pick; rollNoneAffordable = the last roll found no member that passes.
 		readonly record struct RollCash(ProducerServiceBatch Batch, int Held, bool DepthQueue, long UnpaidQueued);
@@ -3116,6 +3136,10 @@ namespace OpenRA.Mods.CA.Traits
 			// PERF-UB-PICK-01 (DEV counter): rollExcluded holds every exclusion of this roll (filled only under CAMEO_DEV_LOGGING, as this call is).
 			UbRollPool(pool.Count + rollExcluded.Count, pool.Count);
 
+			// FIRST-COPY-DUE-01 (ub_first_copy_due): the due clocks of the never-ordered types move with the time this pool has been seen (only while the row is on).
+			if (FirstCopyDueOn)
+				AdvanceFirstCopyClocks(pool);
+
 			// TIER-MIX-01 (ub_tech_lean): the dearest price of this fill's pool, for the afford gate; a re-roll after a refusal keeps the earlier top (the refused pick has left the pool).
 			if (TechLeanOn)
 			{
@@ -3243,6 +3267,19 @@ namespace OpenRA.Mods.CA.Traits
 			var weights = decision.Weights;
 			var units = decision.Units;
 			var pick = decision.Pick;
+
+			// FIRST-COPY-DUE-01 (ub_first_copy_due): a never-ordered type past its deadline goes first (the draw above is still taken, so the random stream is the same with the row on or off).
+			// The pool is already cash-filtered by ub_affordable_pool when that row is on; otherwise a refused pick is skipped and the next due type is tried at the re-roll.
+			if (FirstCopyDueOn)
+			{
+				var dueIndex = FirstCopyDuePick(queue, pool, out var overdueBy, out var dueCount);
+				if (dueIndex >= 0)
+				{
+					pick = dueIndex;
+					FirstCopyDueLog(queue.Info.Type, pool[pick].Name, overdueBy, Math.Max(0, Cost(queue, pool[pick])), dueCount);
+				}
+			}
+
 			rollFirst = !rollOrdered.Contains(pool[pick].Name);
 			RollPickLog(queue.Info.Type, pool, weights, pick, rollFirst, fractions, biases, counterPcts, boosts);
 			PickTraceDraw(queue, pool, units, pick, skip.Count, queueRoles);

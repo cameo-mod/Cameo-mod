@@ -982,7 +982,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			Assert.That(u, Does.Contain("RollParameters.Strength(UnitRoll.ProfileNames[profile])"));
 			// V08E re-pin: 686ca394 added the FirstBoost arguments, still all read from Info
-			Assert.That(u, Does.Contain("new UnitRollTable(Info.UnitsToBuild, Info.UnitRollBias, Info.UnitRollBiasLate, Info.UnitRollProfiles, Info.UnitRollFloorPct, Info.UnitRollRampTicks,\n\t\t\t\tInfo.UnitRollFirstBoost, Info.UnitRollFirstRampTicks, Info.UnitRollFirstCap,\n\t\t\t\tInfo.CoreFocusSharePct, Info.CoreFocusCount, Info.CoreFocusMaxPct, Info.CoreFocusBankPct, Info.TechLeanTopPct, Info.TechLeanBankPct)"));
+			Assert.That(u, Does.Contain("new UnitRollTable(Info.UnitsToBuild, Info.UnitRollBias, Info.UnitRollBiasLate, Info.UnitRollProfiles, Info.UnitRollFloorPct, Info.UnitRollRampTicks,\n\t\t\t\tInfo.UnitRollFirstBoost, Info.UnitRollFirstRampTicks, Info.UnitRollFirstCap,\n\t\t\t\tInfo.CoreFocusSharePct, Info.CoreFocusCount, Info.CoreFocusMaxPct, Info.CoreFocusBankPct, Info.TechLeanTopPct, Info.TechLeanBankPct,\n\t\t\t\tInfo.UnitRollFirstDueTicks, Info.UnitRollFirstDueCash)"));
 		}
 
 		// Opus/Haiku 11-25: DEV rows that show whether every available upgrade / promotion / research / add-on gets researched.

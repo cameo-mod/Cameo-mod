@@ -422,7 +422,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var core = RepoFile(Bots + "UnitBuilderBotModuleCA.CoreFocus.cs");
 
 			// the module builds the table from the Info values (the prior)
-			Assert.That(u, Does.Contain("Info.CoreFocusSharePct, Info.CoreFocusCount, Info.CoreFocusMaxPct, Info.CoreFocusBankPct, Info.TechLeanTopPct, Info.TechLeanBankPct);"));
+			Assert.That(u, Does.Contain("Info.CoreFocusSharePct, Info.CoreFocusCount, Info.CoreFocusMaxPct, Info.CoreFocusBankPct, Info.TechLeanTopPct, Info.TechLeanBankPct,"));
 
 			// R2: the core lift reads corefocus.* through the table, in the CoreFocus partial only
 			Assert.That(core, Does.Contain("RollParameters.CoreFocusBankPct"));
@@ -444,7 +444,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(core, Does.Not.Contain("Info.CoreFocusCount"));
 			Assert.That(core, Does.Not.Contain("Info.CoreFocusMaxPct"));
 			Assert.That(core, Does.Not.Contain("Info.CoreFocusBankPct"));
-			Assert.That(u, Does.Not.Contain("Info.TechLeanBankPct,"), "only the table construction passes it on, as the last argument");
+			Assert.That(Count(u, "Info.TechLeanBankPct"), Is.EqualTo(1), "only the table construction passes it on (the FIRST-COPY-DUE-01 arguments follow it)");
 		}
 
 		[Test]

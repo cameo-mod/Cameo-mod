@@ -27,6 +27,8 @@ namespace OpenRA.Mods.CA.Traits
 		public const string FirstBoostKey = "firstboost";
 		public const string FirstRampKey = "firstramp";
 		public const string FirstCapKey = "firstcap";
+		public const string FirstDueKey = "firstdue";
+		public const string FirstDueCashKey = "firstduecash";
 
 		// CONSOLIDATE-03 P5 a2 (addendum 1, user ruling 11-26): the tech-up demand multipliers become named inputs of the table. corefocus.* is read by the roll's weights step (R2, the core lift) ONLY;
 		// techlean.* by the admission step (R4, the lean predicate) ONLY. The values are the yaml (Hans) values = the PRIOR; a learner override (LEARN-MULT-01, DEV only) replaces them; a release reads the accepted snapshot.
@@ -59,11 +61,13 @@ namespace OpenRA.Mods.CA.Traits
 		readonly int coreBank;
 		readonly int techTop;
 		readonly int techBank;
+		readonly int firstDueTicks;
+		readonly int firstDueCash;
 		readonly Dictionary<string, int> overrides = new(StringComparer.Ordinal);
 
 		public UnitRollTable(IReadOnlyDictionary<string, int> fractions, IReadOnlyDictionary<string, int> bias, IReadOnlyDictionary<string, int> biasLate,
 			IReadOnlyDictionary<string, int> strengths, int floorPct, int rampTicks, int firstBoost = 8, int firstRampTicks = 3000, int firstCap = 64,
-			int coreShare = 0, int coreCount = 3, int coreMax = 800, int coreBank = 30, int techTop = 0, int techBank = 30)
+			int coreShare = 0, int coreCount = 3, int coreMax = 800, int coreBank = 30, int techTop = 0, int techBank = 30, int firstDueTicks = 3000, int firstDueCash = 0)
 		{
 			this.coreShare = coreShare;
 			this.coreCount = coreCount;
@@ -71,6 +75,8 @@ namespace OpenRA.Mods.CA.Traits
 			this.coreBank = coreBank;
 			this.techTop = techTop;
 			this.techBank = techBank;
+			this.firstDueTicks = firstDueTicks;
+			this.firstDueCash = firstDueCash;
 			this.fractions = fractions;
 			this.bias = bias;
 			this.biasLate = biasLate;
@@ -131,6 +137,12 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>The tick from which the tech lean admits (R4 only). Prior = the ramp tick (the same number); a learner override of techlean.start separates the two.</summary>
 		public int TechLeanStartTicks => Clamp(overrides.TryGetValue(TechStartKey, out var v) ? v : RampTicks);
+
+		/// <summary>FIRST-COPY-DUE-01 (learned, prior 3000 = two minutes at 25 ticks per second): the credited ticks after which a never-ordered type is due. 0 = no deadline.</summary>
+		public int FirstDueTicks => Clamp(overrides.TryGetValue(FirstDueKey, out var v) ? v : firstDueTicks);
+
+		/// <summary>FIRST-COPY-DUE-01 (learned, prior 0): the bank at or below which the player counts as having no cash (the due clock pauses only then AND without income).</summary>
+		public int FirstDueCash => Clamp(overrides.TryGetValue(FirstDueCashKey, out var v) ? v : firstDueCash);
 
 		/// <summary>Percent bias of a role for a personality at a tick (same rule as UnitRoll.RoleBiasPct); 100 = neutral.</summary>
 		public int BiasPct(string personality, string role, int tick)
