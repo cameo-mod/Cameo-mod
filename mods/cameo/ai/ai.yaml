@@ -6130,6 +6130,8 @@ Player:
 		EarlyDefCountMax: 4
 		# TEAM-DEFEND-02 (USER 11-24): tm_ally_turret_support: while an own or allied base is attacked every ready ground turret is placed at its max weapon range from the attackers; genericbot only.
 		TeamTurretSupport: true
+		# TURRET-NOHOLD-01 (row turret_no_hold, OFF until the A/B arms it): a READY ground turret is never held; no in-range support cell = the attacked building's legal cluster, then the own base; genericbot only.
+		TurretNoHold: false
 		# CONSOLIDATE-01 C9 (X6, row ub_refinery_pause_opening): the no-refinery unit-production pause applies only until the first refinery has stood; a bot that loses its refineries keeps building units.
 		RefineryPauseOpeningOnly: true
 		# BASE-FIX-02 (AUDIT_BASE_01): ready_watchdog_all (75 ticks), pb_nospace_ban (3000 ticks), pb_refinery_safety_all_claims; genericbot only.

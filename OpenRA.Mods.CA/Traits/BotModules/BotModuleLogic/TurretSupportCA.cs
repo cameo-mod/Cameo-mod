@@ -94,6 +94,33 @@ namespace OpenRA.Mods.CA.Traits
 			return -1;
 		}
 
+		/// <summary>
+		/// TURRET-NOHOLD-01: index of the fallback cell when <see cref="Pick"/> found none inside the weapon range, or -1 when no legal cell is usable. Any legal cell not closer to the attackers
+		/// than <paramref name="minSafe"/> qualifies; the one nearest the attackers wins (the closest approach the safe gap allows), then the one nearer the defended anchor, then the lower index.
+		/// </summary>
+		public static int FallbackPick(IReadOnlyList<(long X, long Y)> legal, (long X, long Y) attackers, (long X, long Y) anchor, long minSafe)
+		{
+			var best = -1;
+			var bestAtt = long.MaxValue;
+			var bestAnchor = long.MaxValue;
+			for (var i = 0; i < legal.Count; i++)
+			{
+				var dAtt = Dist2(legal[i], attackers);
+				if (dAtt < minSafe * minSafe)
+					continue;
+
+				var dAnchor = Dist2(legal[i], anchor);
+				if (dAtt < bestAtt || (dAtt == bestAtt && dAnchor < bestAnchor))
+				{
+					best = i;
+					bestAtt = dAtt;
+					bestAnchor = dAnchor;
+				}
+			}
+
+			return best;
+		}
+
 		static long Dist2((long X, long Y) a, (long X, long Y) b)
 		{
 			var dx = a.X - b.X;

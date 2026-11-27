@@ -154,6 +154,8 @@ namespace OpenRA.Mods.CA.Traits
 		bool DefenceNeedOn => baseBuilder.DefenceNeedArmed && !ablateDefenceNeed.Off(player, AblationIds.Af2DefenceNeedGate);
 		AblationLatch ablateTurretSupport; // TEAM-DEFEND-02
 		bool TurretSupportOn => baseBuilder.TeamTurretSupportArmed && !ablateTurretSupport.Off(player, AblationIds.TeamTurretSupport);
+		AblationLatch ablateTurretNoHold; // TURRET-NOHOLD-01
+		bool TurretNoHoldOn => baseBuilder.TurretNoHoldArmed && !ablateTurretNoHold.Off(player, AblationIds.TurretNoHold);
 		AblationLatch ablateAntiRush; // EARLY-DEF-01
 		bool AntiRushOn => baseBuilder.AntiRushBaseArmed && !ablateAntiRush.Off(player, AblationIds.AntiRushBase);
 		bool PowerCapOn => baseBuilder.PowerMarginCapArmed && !ablatePowerCap.Off(player, AblationIds.PowerMarginCap);
@@ -3820,10 +3822,24 @@ namespace OpenRA.Mods.CA.Traits
 				.Where(cell => (world.Map.CenterOfCell(cell) - focus.Attackers).HorizontalLengthSquared <= (long)range * range).ToList();
 			var positions = legal.Select(cell => { var c = world.Map.CenterOfCell(cell); return ((long)c.X, (long)c.Y); }).ToList();
 
-			var index = TurretSupportCA.Pick(positions, (focus.Attackers.X, focus.Attackers.Y), (focus.Anchor.X, focus.Anchor.Y), range,
-				TurretSupportCA.MinSafe(range, WDist.FromCells(baseBuilder.Info.TurretSupportMinGapCells).Length));
-			return index >= 0 ? (legal[index], false) : (null, true);
+			var minSafe = TurretSupportCA.MinSafe(range, WDist.FromCells(baseBuilder.Info.TurretSupportMinGapCells).Length);
+			var index = TurretSupportCA.Pick(positions, (focus.Attackers.X, focus.Attackers.Y), (focus.Anchor.X, focus.Anchor.Y), range, minSafe);
+			if (index >= 0)
+				return (legal[index], false);
+
+			if (!TurretNoHoldOn)
+				return (null, true);
+
+			// TURRET-NOHOLD-01 (turret_no_hold): never hold a READY turret. No legal cell inside the weapon range: take the legal cell of the attacked building's cluster nearest the attackers
+			// (the same engine placement check, so the lobby ally option still applies; never closer than the safe gap). With none the normal own-base placement runs: (null, false), no watchdog wait.
+			var cluster = AdvisorLegalCells(actorInfo, true, producer, world.Map.CellContaining(focus.Anchor)).ToList();
+			var clusterPositions = cluster.Select(cell => { var c = world.Map.CenterOfCell(cell); return ((long)c.X, (long)c.Y); }).ToList();
+			var fallback = TurretSupportCA.FallbackPick(clusterPositions, (focus.Attackers.X, focus.Attackers.Y), (focus.Anchor.X, focus.Anchor.Y), minSafe);
+			return (fallback >= 0 ? (CPos?)cluster[fallback] : null, false);
 		}
+
+		// TURRET-NOHOLD-01: a READY ground turret skips the front/back advisor's hold (it falls through to the defence advisor and the classic outpost scan).
+		bool TurretNoHoldSkipsHold(ActorInfo actorInfo) => TurretNoHoldOn && actorInfo.HasTraitInfo<AttackBaseInfo>() && IsGroundDefence(actorInfo);
 
 		// The variant an advisor-claimed placement uses: findPos's non-facing random draw, 0 otherwise
 		// (a front-side facing is the advisor's to encode later; the default facing is honest today).
@@ -3900,7 +3916,7 @@ namespace OpenRA.Mods.CA.Traits
 							var pick = demandFrontBack.ChooseCell(FrontBackClass.Defence, actorInfo, outpost,
 								AdvisorLegalCells(actorInfo, distanceToBaseIsImportant, producer, outpost));
 							lastFrontBackPick = pick;
-							if (pick.Hold)
+							if (pick.Hold && !TurretNoHoldSkipsHold(actorInfo))
 							{
 								frontBackHold = true;
 								return (null, null, 0);

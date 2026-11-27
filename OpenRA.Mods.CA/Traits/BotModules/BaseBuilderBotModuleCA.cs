@@ -319,6 +319,11 @@ namespace OpenRA.Mods.CA.Traits
 			"engine placement check. Gated by SwitchCondition; row tm_ally_turret_support.")]
 		public readonly bool TeamTurretSupport = false;
 
+		[Desc("TURRET-NOHOLD-01 (row turret_no_hold, needs TeamTurretSupport for the support-cell case): a READY ground turret is never held. With no legal cell inside its weapon range it takes the",
+			"legal cell of the attacked building's cluster nearest the attackers (never closer than the safe gap), and with none the normal own-base placement runs; the front/back advisor's",
+			"hold is skipped for a turret at an outpost. Off = the old hold (the turret waits for the READY watchdog). Gated by SwitchCondition.")]
+		public readonly bool TurretNoHold = false;
+
 		[Desc("CONSOLIDATE-01 C9 (P7, X6): the unit-production pause for a missing refinery applies only until the first refinery has ever stood (the opening). After that a bot that loses",
 			"its refineries keeps building units, because that is exactly when it needs them. Gated by SwitchCondition; row ub_refinery_pause_opening.")]
 		public readonly bool RefineryPauseOpeningOnly = false;
@@ -1007,6 +1012,7 @@ namespace OpenRA.Mods.CA.Traits
 		public bool DefenceFirstCopyArmed => Info.DefenceFirstCopyCounts && switchesActive;
 		public bool AntiRushBaseArmed => Info.AntiRushBase && switchesActive;
 		public bool TeamTurretSupportArmed => Info.TeamTurretSupport && switchesActive;
+		public bool TurretNoHoldArmed => Info.TurretNoHold && switchesActive;
 		public bool FloorEssentialsExemptArmed => Info.FloorEssentialsExempt && switchesActive;
 		public bool ReadyWatchdogArmed => Info.ReadyWatchdogAll && switchesActive;
 		AblationLatch ablateRecountInFlight; // CONSOLIDATE-01 c1
