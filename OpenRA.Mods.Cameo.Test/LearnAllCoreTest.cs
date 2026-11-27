@@ -223,6 +223,17 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void AGameIdOutsideTheKeyCharsetIsRefusedLikeThePythonFitter()
+		{
+			var table = new LearnTable();
+			foreach (var bad in new[] { "", "g 1", "g:1", "g|1", "g\n1", "g1\n", "g/1" })
+				Assert.That(LearnAllTrainer.ApplyGame(table, bad, "k", One("rush", "gdi", "nod", 1.0)), Is.False, "game id '" + bad + "'");
+
+			Assert.That(table.Personalities, Is.Empty, "a refused id changes nothing");
+			Assert.That(LearnAllTrainer.ApplyGame(table, "g-1.a_B", "k", One("rush", "gdi", "nod", 1.0)), Is.True);
+		}
+
+		[Test]
 		public void EstimatesNeverResetAndDriftGameByGame()
 		{
 			var table = new LearnTable();

@@ -365,7 +365,7 @@ def load_records(paths):
     return records
 
 
-GAME_ID = re.compile(r"^[A-Za-z0-9_.\-]+$")
+GAME_ID = re.compile(r"^[A-Za-z0-9_.\-]+\Z")
 
 
 def _is_int(value):

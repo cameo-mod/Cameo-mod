@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 
 namespace OpenRA.Mods.Cameo.Dev
@@ -56,6 +57,9 @@ namespace OpenRA.Mods.Cameo.Dev
 	{
 		const double Scale = 1e9;
 
+		/// <summary>A game id is part of a MiniYaml key (game|personality|knob): the same charset as tools/ai/fit_learn_all.py (GAME_ID).</summary>
+		static readonly Regex GameIdPattern = new("^[A-Za-z0-9_.\\-]+\\z", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
 		/// <summary>
 		/// One game closes for one knob: ALL eligible bot seats of the game are combined deterministically, then every table takes exactly one step per axis.
 		/// Targets: each distinct personality present (its own table, a new one starts from the global values as they were BEFORE this game), then the
@@ -65,7 +69,7 @@ namespace OpenRA.Mods.Cameo.Dev
 		/// </summary>
 		public static bool ApplyGame(LearnTable table, string gameId, string knob, IReadOnlyList<SeatObservation> seats)
 		{
-			if (gameId == null || knob == null || seats == null)
+			if (gameId == null || !GameIdPattern.IsMatch(gameId) || knob == null || seats == null)
 				return false;
 
 			var valid = seats.Where(s => s.Signal is double d && !double.IsNaN(d) && !double.IsInfinity(d)).ToList();
