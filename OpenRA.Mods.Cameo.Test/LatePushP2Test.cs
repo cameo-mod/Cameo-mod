@@ -266,7 +266,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			// The group launch: the pool is set aside around the launch and put back; nothing is scanned.
 			var group = Between(p2, "int LatePushSendGroup(IBot bot, int send, HashSet<uint> only)", "// ---- lp_reinforce (design 01 D5) ----");
-			Assert.That(group, Does.Contain("unitsHangingAroundTheBase.AddRange(aside);"));
+			Assert.That(group, Does.Contain("stay.UnionWith(aside);"));
 			Assert.That(group, Does.Contain("var sent = keep.Count - unitsHangingAroundTheBase.Count;"));
 			foreach (var banned in new[] { "FindClosestEnemy", "FindActorsInCircle", "World.Actors", "ActorsWithTrait", "FrozenActorLayer", "Random", "IBotCurrentPersonality", "Trait<", "TraitsImplementing" })
 				Assert.That(p2, Does.Not.Contain(banned), "no scan, no RNG, no enemy state: " + banned);

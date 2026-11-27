@@ -73,6 +73,7 @@ namespace OpenRA.Mods.CA.Traits
 		// exactly the group. Returns how many units left the pool.
 		int LatePushSendGroup(IBot bot, int send, HashSet<uint> only)
 		{
+			var original = new List<UnitWposWrapper>(unitsHangingAroundTheBase);
 			var keep = new List<UnitWposWrapper>(send);
 			var aside = new List<UnitWposWrapper>();
 			foreach (var u in unitsHangingAroundTheBase)
@@ -90,7 +91,15 @@ namespace OpenRA.Mods.CA.Traits
 			unitsHangingAroundTheBase.AddRange(keep);
 			CreateAttackForce(bot);
 			var sent = keep.Count - unitsHangingAroundTheBase.Count;
-			unitsHangingAroundTheBase.AddRange(aside);
+			// The pool goes back in its original arrival order (the first-N joinable pick reads it).
+			var stay = new HashSet<UnitWposWrapper>(unitsHangingAroundTheBase);
+			stay.UnionWith(aside);
+			unitsHangingAroundTheBase.Clear();
+			foreach (var u in original)
+				if (stay.Remove(u))
+					unitsHangingAroundTheBase.Add(u);
+
+			unitsHangingAroundTheBase.AddRange(stay);
 			foreach (var n in notifyIdleBaseUnits)
 				n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
 
