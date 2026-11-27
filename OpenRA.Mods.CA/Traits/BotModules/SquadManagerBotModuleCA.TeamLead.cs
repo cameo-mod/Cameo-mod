@@ -627,6 +627,7 @@ namespace OpenRA.Mods.CA.Traits
 			teamLeadAllInPicking = allIn != null && why == TeamLeadCA.PublishWhy.Ready;
 			var picked = TeamLeadPickTarget(home, now, out var target, out var targetId);
 			teamLeadAllInPicking = false;
+			StalemateScoutIdle(picked, now, allIn != null, blob.Units, blob.Value);
 			if (!picked)
 				return;
 
@@ -634,6 +635,7 @@ namespace OpenRA.Mods.CA.Traits
 			team.NoteTarget(target, now);
 			var forced = TeamLeadCA.FallbackForced(now, team.LastOrderTick, Info.TeamLeadFallbackTicks);
 			var order = TeamLeadIssue(home, target, targetId, now);
+			StalemateScoutPublished(order, targetId, target, now);
 			if (why == TeamLeadCA.PublishWhy.Gather)
 				order.MakeGatherOnly();
 			else if (allIn != null)
@@ -756,8 +758,9 @@ namespace OpenRA.Mods.CA.Traits
 
 			// TEAM-GATHER-02 (tl_hunt_via_order): late game, nothing known: the blob hunts ONE cell, the order target, instead of each squad hunting its own.
 			// ALL-IN-01: an all-in order with no known target hunts too (whatever the finish mode says), and from a ground unit: the first pool unit may be an aircraft with no locomotor.
-			if (((TeamLeadHuntViaOrderOn && FinishModeActive) || teamLeadAllInPicking)
-				&& FinishHuntCell(teamLeadAllInPicking ? TeamLeadHuntSample() : unitsHangingAroundTheBase.Count > 0 ? unitsHangingAroundTheBase[0].Actor : activeUnits.FirstOrDefault(a => !a.IsDead && a.IsInWorld)) is { } hunt)
+			// STALEMATE-SCOUT-01 (row ss_scout_push): a ready push with no known target hunts too (StalemateScoutHunts), from a ground unit.
+			if (((TeamLeadHuntViaOrderOn && FinishModeActive) || teamLeadAllInPicking || StalemateScoutHunts)
+				&& FinishHuntCell(teamLeadAllInPicking || StalemateScoutHunts ? TeamLeadHuntSample() : unitsHangingAroundTheBase.Count > 0 ? unitsHangingAroundTheBase[0].Actor : activeUnits.FirstOrDefault(a => !a.IsDead && a.IsInWorld)) is { } hunt)
 			{
 				target = World.Map.CenterOfCell(hunt);
 				actorId = 0;

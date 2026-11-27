@@ -345,7 +345,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(wiring, Does.Contain("AllInCA.JoinMinUnits(order.AllIn, Info.TeamLeadJoinMinUnits, Info.TeamLeadAllInJoinMinUnits)"));
 			Assert.That(wiring, Does.Contain("(order.AllIn ? unitsHangingAroundTheBase.Count(TeamLeadJoinable) : unitsHangingAroundTheBase.Count)"), "an all-in order counts joinable units only");
 			Assert.That(wiring, Does.Contain("(TeamLeadRaiderRecallOn || TeamLeadAllInOrderOpen)"), "raiders join an all-in order whatever the clock");
-			Assert.That(wiring, Does.Contain("((TeamLeadHuntViaOrderOn && FinishModeActive) || teamLeadAllInPicking)"), "an all-in order with no known target hunts");
+			Assert.That(wiring, Does.Contain("((TeamLeadHuntViaOrderOn && FinishModeActive) || teamLeadAllInPicking || StalemateScoutHunts)"), "an all-in order with no known target hunts");
 			Assert.That(wiring, Does.Contain("TeamLeadAllInRecord(\"all_in_start\""));
 			Assert.That(wiring, Does.Contain("TeamLeadAllInRecord(\"all_in_join\""));
 			Assert.That(System.Text.RegularExpressions.Regex.Matches(wiring, "TeamLeadAllInPushRecord\\(order, now\\);").Count, Is.EqualTo(3), "all three push sites (pincer, plain, CONSOLIDATE-02 D1 bar_timeout)");

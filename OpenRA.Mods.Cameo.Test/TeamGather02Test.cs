@@ -305,7 +305,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(wiring, Does.Contain("System.Math.Clamp(max, fixedRange.Length, System.Math.Max(fixedRange.Length, WDist.FromCells(Info.AttackScanRadius).Length))"));
 
 			// Late hunt: the order target is the one hunt cell (actor id 0 = a position, which TeamLeadResolveTarget turns into the squads' HuntCell).
-			Assert.That(wiring, Does.Contain("if (((TeamLeadHuntViaOrderOn && FinishModeActive) || teamLeadAllInPicking)"));
+			Assert.That(wiring, Does.Contain("if (((TeamLeadHuntViaOrderOn && FinishModeActive) || teamLeadAllInPicking || StalemateScoutHunts)"));
 			Assert.That(wiring, Does.Contain("target = World.Map.CenterOfCell(hunt);\n\t\t\t\tactorId = 0;\n\t\t\t\treturn true;"));
 			Assert.That(RepoFile(Bots + "Squads/States/GroundStatesCA.cs"), Does.Contain("Stalemate01CA.Hunts(owner.Type) && !owner.SquadManager.TeamLeadHuntsViaOrder(owner))"));
 		}

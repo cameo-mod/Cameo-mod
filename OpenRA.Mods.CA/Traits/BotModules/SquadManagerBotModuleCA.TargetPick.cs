@@ -203,7 +203,7 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			var picked = default(WPos);
 			var pickedId = 0u;
-			var hunts = (TeamLeadHuntViaOrderOn && FinishModeActive) || teamLeadAllInPicking;
+			var hunts = (TeamLeadHuntViaOrderOn && FinishModeActive) || teamLeadAllInPicking || StalemateScoutHunts;
 			var allowed = hunts ? TargetTier.All : TargetTier.All & ~TargetTier.Hunt;
 			var tier = TargetPick.Resolve(TargetPick.Order(TargetPurpose.Main, allowed), t =>
 			{
@@ -243,7 +243,7 @@ namespace OpenRA.Mods.CA.Traits
 					case TargetTier.Hunt:
 					{
 						// An all-in order hunts from a ground unit: the first pool unit may be an aircraft with no locomotor.
-						var huntSource = teamLeadAllInPicking ? TeamLeadHuntSample()
+						var huntSource = teamLeadAllInPicking || StalemateScoutHunts ? TeamLeadHuntSample()
 							: unitsHangingAroundTheBase.Count > 0 ? unitsHangingAroundTheBase[0].Actor : activeUnits.FirstOrDefault(a => !a.IsDead && a.IsInWorld);
 						if (FinishHuntCell(huntSource) is not { } hunt)
 							return false;

@@ -113,7 +113,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	}
 
 	public class ScoutBotModule : ConditionalTrait<ScoutBotModuleInfo>, IBotTick, IBotEnabled,
-		IBotNotifyIdleBaseUnits, IBotRespondToAttack, IBotRegionThreatProvider
+		IBotNotifyIdleBaseUnits, IBotRespondToAttack, IBotRegionThreatProvider, IBotScoutCellProvider
 	{
 		readonly World world;
 		readonly OpenRA.Player player;
@@ -572,6 +572,54 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		static bool LayersMatch(RegionMemory regions, IBotInfluenceMap influence)
 		{
 			return influence != null && influence.MatchesIndexSpace(regions);
+		}
+
+		// STALEMATE-SCOUT-01 (row ss_scout_push): the stale regions of the tactical map, best first, for a push that is ready with no known target. Same scoring as the scouts
+		// (staleness, interest, danger, distance); only the bot's own region memory is read. The caller decides which centre it can walk to.
+		bool IBotScoutCellProvider.TryPickScoutCell(CPos from, int maxChecks, Func<CPos, bool> acceptable, out CPos cell, out int checks)
+		{
+			cell = default;
+			checks = 0;
+			var regions = player.PlayerActor.TraitOrDefault<MasterAiBotModule>()?.Situation?.Regions;
+			if (regions == null)
+				return false;
+
+			if (RegionSpaceChanged(regions))
+				DropRegionCaches();
+
+			var tick = world.WorldTick;
+			var interestRegions = ProviderInterestRegions(regions);
+			var influence = player.PlayerActor.TraitOrDefault<MasterAiBotModule>()?.Situation?.Influence;
+			if (LayersMatch(regions, influence))
+				return PickScoutCell(regions, from, maxChecks, acceptable, i => influence.Staleness[i], i => influence.Interest[i] + ProviderInterest(interestRegions, i), i => influence.ThreatGround[i], out cell, out checks);
+
+			return PickScoutCell(regions, from, maxChecks, acceptable, i => Staleness(regions, i, tick), i => Interest(regions, i) + ProviderInterest(interestRegions, i), DangerAt, out cell, out checks);
+		}
+
+		/// <summary>The stale regions in score order, each centre offered to <paramref name="acceptable"/> until one is taken or maxChecks centres were offered. Fully seen regions are never offered.</summary>
+		internal static bool PickScoutCell(RegionMemory regions, CPos from, int maxChecks, Func<CPos, bool> acceptable,
+			Func<int, int> staleness, Func<int, int> interest, Func<int, int> danger, out CPos cell, out int checks)
+		{
+			cell = default;
+			checks = 0;
+			var offered = new HashSet<int>();
+			while (checks < maxChecks)
+			{
+				var region = PickScoutRegion(regions, from, offered, staleness, interest, danger);
+				if (region < 0)
+					return false;
+
+				offered.Add(region);
+				checks++;
+				var center = regions.CenterOf(region);
+				if (acceptable(center))
+				{
+					cell = center;
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 		internal static int PickScoutRegion(RegionMemory regions, CPos from, IReadOnlySet<int> taken,

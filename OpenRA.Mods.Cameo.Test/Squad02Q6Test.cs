@@ -278,13 +278,13 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var wiring = RepoFile(Bots + "SquadManagerBotModuleCA.TargetPick.cs");
 			var main = Between(wiring, "bool TeamLeadPickMain(", "/// A defence squad's target (DEFENCE)");
-			Assert.That(main, Does.Contain("var hunts = (TeamLeadHuntViaOrderOn && FinishModeActive) || teamLeadAllInPicking;"), "the same hunt rule as before");
+			Assert.That(main, Does.Contain("var hunts = (TeamLeadHuntViaOrderOn && FinishModeActive) || teamLeadAllInPicking || StalemateScoutHunts;"), "the same hunt rule as before");
 			Assert.That(main, Does.Contain("var allowed = hunts ? TargetTier.All : TargetTier.All & ~TargetTier.Hunt;"));
 			Assert.That(main, Does.Contain("TargetPick.Resolve(TargetPick.Order(TargetPurpose.Main, allowed), t =>"));
 			Assert.That(main, Does.Contain("return TeamLeadFocusTarget(from, now, out picked, out pickedId);"));
 			Assert.That(main, Does.Contain("var seen = mainTarget != null ? FindClosestEnemy(World.Map.CellContaining(from), TeamLeadOpenRisk, mainTarget) : null;"), "no risk gate on the leader's pick");
 			Assert.That(main, Does.Contain("if (!FoggedScans || FindFrozenEnemyTarget(from, -1) is not { } frozen)"));
-			Assert.That(main, Does.Contain("var huntSource = teamLeadAllInPicking ? TeamLeadHuntSample()"), "an all-in hunts from a ground unit");
+			Assert.That(main, Does.Contain("var huntSource = teamLeadAllInPicking || StalemateScoutHunts ? TeamLeadHuntSample()"), "an all-in hunts from a ground unit");
 		}
 
 		[Test]

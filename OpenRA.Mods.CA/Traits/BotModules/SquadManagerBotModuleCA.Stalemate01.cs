@@ -73,6 +73,10 @@ namespace OpenRA.Mods.CA.Traits
 			if (mobile == null || World.WorldTick < huntRetryAt)
 				return null;
 
+			// STALEMATE-SCOUT-01 (row ss_scout_push): the stale regions of the tactical map first; the plain grid below stays the fallback.
+			if (StalemateScoutOn && StalemateScoutCell(leader, mobile) is { } scouted)
+				return scouted;
+
 			if (huntCells == null)
 			{
 				huntCells = new List<CPos>();

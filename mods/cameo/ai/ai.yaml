@@ -4942,6 +4942,9 @@ Player:
 		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
 		LateEscalationEnabled: true
 		FinishModeEnabled: true
+		# STALEMATE-SCOUT-01 (USER D5 on audit A7; row ss_scout_push, OFF until its A/B): a ready push with no known target scouts the stale regions of the tactical map, then attacks; only an unreachable target excuses it.
+		StalemateScoutEnabled: false
+		StalemateScoutStartTick: 0
 		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
 		BlobLeaderOrderOnly: true
 		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
@@ -5142,6 +5145,9 @@ Player:
 		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
 		LateEscalationEnabled: true
 		FinishModeEnabled: true
+		# STALEMATE-SCOUT-01 (USER D5 on audit A7; row ss_scout_push, OFF until its A/B): a ready push with no known target scouts the stale regions of the tactical map, then attacks; only an unreachable target excuses it.
+		StalemateScoutEnabled: false
+		StalemateScoutStartTick: 0
 		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
 		BlobLeaderOrderOnly: true
 		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
@@ -5338,6 +5344,9 @@ Player:
 		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
 		LateEscalationEnabled: true
 		FinishModeEnabled: true
+		# STALEMATE-SCOUT-01 (USER D5 on audit A7; row ss_scout_push, OFF until its A/B): a ready push with no known target scouts the stale regions of the tactical map, then attacks; only an unreachable target excuses it.
+		StalemateScoutEnabled: false
+		StalemateScoutStartTick: 0
 		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
 		BlobLeaderOrderOnly: true
 		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
@@ -5536,6 +5545,9 @@ Player:
 		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
 		LateEscalationEnabled: true
 		FinishModeEnabled: true
+		# STALEMATE-SCOUT-01 (USER D5 on audit A7; row ss_scout_push, OFF until its A/B): a ready push with no known target scouts the stale regions of the tactical map, then attacks; only an unreachable target excuses it.
+		StalemateScoutEnabled: false
+		StalemateScoutStartTick: 0
 		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
 		BlobLeaderOrderOnly: true
 		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
@@ -5734,6 +5746,9 @@ Player:
 		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
 		LateEscalationEnabled: true
 		FinishModeEnabled: true
+		# STALEMATE-SCOUT-01 (USER D5 on audit A7; row ss_scout_push, OFF until its A/B): a ready push with no known target scouts the stale regions of the tactical map, then attacks; only an unreachable target excuses it.
+		StalemateScoutEnabled: false
+		StalemateScoutStartTick: 0
 		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
 		BlobLeaderOrderOnly: true
 		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
@@ -5930,6 +5945,9 @@ Player:
 		# STALEMATE-01 (USER: no stalemates): late escalation + finish-mode hunt from tick 25000; rows st_late_escalation / st_finish_mode.
 		LateEscalationEnabled: true
 		FinishModeEnabled: true
+		# STALEMATE-SCOUT-01 (USER D5 on audit A7; row ss_scout_push, OFF until its A/B): a ready push with no known target scouts the stale regions of the tactical map, then attacks; only an unreachable target excuses it.
+		StalemateScoutEnabled: false
+		StalemateScoutStartTick: 0
 		# BLOB-LAUNCH-01 (USER 11-24): the team leader attacks only through a team order (row bl_leader_order_only).
 		BlobLeaderOrderOnly: true
 		# Single no-order fallback = TEAM-BLOB-01 tl_fallback_publish (Frontrunner); this one is off.
