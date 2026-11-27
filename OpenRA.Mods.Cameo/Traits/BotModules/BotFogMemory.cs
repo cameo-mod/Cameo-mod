@@ -428,7 +428,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				foreach (var targetable in apparent.TraitInfos<ITargetableInfo>())
 					types = types.Union(targetable.GetTargetTypes());
 
-				template = FogStyleAdapter.Project(ClassifyObserved(apparent, 0, default, types, 0));
+				var shown = ClassifyObserved(apparent, 0, default, types, 0);
+
+				// B4-C2: the apparent type's own cloak, never the true actor's (the record's Cloaked above is the true type and is not read here).
+				shown.Cloaked = apparent.HasTraitInfo<CloakInfo>();
+				template = FogStyleAdapter.Project(shown);
 				styleTypes.Add(apparent, template);
 			}
 

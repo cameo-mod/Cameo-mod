@@ -93,17 +93,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				}
 			}
 
-			// The kept set in recency order: an insertion sort (at most 128 records, allocation-free; Span.Sort with a comparison allocates).
-			if (truncated)
-				for (var i = 1; i < count; i++)
-				{
-					var item = buffer[i];
-					var j = i - 1;
-					for (; j >= 0 && Newer(item, buffer[j]); j--)
-						buffer[j + 1] = buffer[j];
+			// The kept set in recency order, whether or not the cap was hit (B4-C2: below the cap the order used to be the memory's enumeration order,
+			// so the tracker and the features saw a dictionary order): an insertion sort (at most 128 records, allocation-free; Span.Sort with a comparison allocates).
+			for (var i = 1; i < count; i++)
+			{
+				var item = buffer[i];
+				var j = i - 1;
+				for (; j >= 0 && Newer(item, buffer[j]); j--)
+					buffer[j + 1] = buffer[j];
 
-					buffer[j + 1] = item;
-				}
+				buffer[j + 1] = item;
+			}
 
 			return count;
 		}

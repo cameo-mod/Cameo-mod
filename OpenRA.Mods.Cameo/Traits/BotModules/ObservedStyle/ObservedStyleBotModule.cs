@@ -28,7 +28,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public override object Create(ActorInitializer init) => new ObservedStyleBotModule(init.Self, this);
 	}
 
-	public sealed class ObservedStyleBotModule : ConditionalTrait<ObservedStyleBotModuleInfo>, IBotTick, IBotObservedMainTargetStyle, IBotObservedStyle
+	public sealed partial class ObservedStyleBotModule : ConditionalTrait<ObservedStyleBotModuleInfo>, IBotTick, IBotObservedMainTargetStyle, IBotObservedStyle
 	{
 		const int Interval = 75;
 		const int MaxObservations = 128;
@@ -119,6 +119,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return apparentTooltips.TryGetValue(actor.TooltipInfo, out var info) && info != null ? PublicImage(info) : null;
 		}
 
+		/// <summary>B4-C2: the DEV row hook. Declared here and implemented only in ObservedStyleBotModule.Dev.cs (DEV build); with no implementation the compiler removes the call,
+		/// so a release build runs the same inference with no row code at all. The hook reads the finished classification and writes nothing back.</summary>
+		partial void StyleRow(OpenRA.Player enemy, int now, int remembered, StyleClassifier classifier);
+
 		OpenRA.Player MainTarget() => ((IBotMainTargetProvider)master)?.MainTarget;
 
 		bool IsEnemy(OpenRA.Player player) => player != null && !player.NonCombatant && !player.Spectating
@@ -200,6 +204,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			state.Tracker.Update(observations, System.Runtime.InteropServices.CollectionsMarshal.AsSpan(yards), now);
 			StyleFeatures.Extract(observations, now, state.Tracker, features);
 			state.Classifier.Update(features, observations, state.Tracker, now);
+			StyleRow(enemy, now, count, state.Classifier);
 			if (!isTarget || newest <= generationTick)
 				return count;
 
