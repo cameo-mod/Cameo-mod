@@ -1,3 +1,14 @@
+#region Copyright & License Information
+/*
+ * Copyright (c) The OpenRA Combined Arms Developers (see CREDITS).
+ * This file is part of OpenRA Combined Arms, which is free software.
+ * It is made available to you under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3 of
+ * the License, or (at your option) any later version. For more information,
+ * see COPYING.
+ */
+#endregion
+
 using NUnit.Framework;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 
@@ -6,6 +17,24 @@ namespace OpenRA.Mods.Cameo.Test
 	[TestFixture]
 	public class ObservedStyleQualificationTest
 	{
+		[Test]
+		public void DisguiseProjectionUsesTheApparentOwnerAndType()
+		{
+			var enemy = (OpenRA.Player)System.Runtime.CompilerServices.RuntimeHelpers.GetUninitializedObject(typeof(OpenRA.Player));
+			var neutral = (OpenRA.Player)System.Runtime.CompilerServices.RuntimeHelpers.GetUninitializedObject(typeof(OpenRA.Player));
+			var apparent = (ActorInfo)System.Runtime.CompilerServices.RuntimeHelpers.GetUninitializedObject(typeof(ActorInfo));
+			Assert.That(ObservedStyleBotModule.EffectiveAppearance(enemy, enemy, apparent), Is.SameAs(apparent));
+			Assert.That(ObservedStyleBotModule.EffectiveAppearance(enemy, neutral, apparent), Is.Null);
+			Assert.That(ObservedStyleBotModule.EffectiveAppearance(enemy, enemy, null), Is.Null);
+
+			var common = new FogStyleActor { TypeName = "apparent-tank", ActorId = 42, Vehicle = true, Value = 700 };
+			var first = new FogStyleActor[1];
+			var second = new FogStyleActor[1];
+			Assert.That(FogStyleAdapter.Copy([new ObservedActor { Harvester = true, Value = 2000, StyleAppearance = common }], first), Is.EqualTo(1));
+			Assert.That(FogStyleAdapter.Copy([new ObservedActor { Aircraft = true, Value = 500, StyleAppearance = common }], second), Is.EqualTo(1));
+			Assert.That(first[0], Is.EqualTo(second[0]));
+		}
+
 		[Test]
 		public void RepeatedGenerationCannotQualifyAndTargetSwitchResetsIt()
 		{

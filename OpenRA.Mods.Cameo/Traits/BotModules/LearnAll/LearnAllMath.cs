@@ -108,7 +108,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		/// <summary>
 		/// The enemy value E_eff of one match-up, the ONE owner for the runtime reader and the DEV trainer (Opus 2026-11-27, no pull toward global): one entry per enemy
-		/// PLAYER and the main target. With a main target it is TeamEnemy(per player, main); with NO main target (null, empty, or a Random pick, whose public faction is "")
+		/// PLAYER and the main target. With a main target it is TeamEnemy(per player, main); with NO main target (null, empty, or a random-faction pick, whose public faction is "")
 		/// it is the all-enemy aggregate alone; with no enemies either it is the global value. A real faction the table has not learned yet reads as the global value (new values start at G).
 		/// </summary>
 		public int EnemyEff(IReadOnlyList<string> enemies, string mainTarget)

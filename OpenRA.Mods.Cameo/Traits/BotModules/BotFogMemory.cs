@@ -257,6 +257,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	/// </summary>
 	internal sealed class ObservedActor
 	{
+		internal FogStyleActor? StyleAppearance;
 		// The type, for consumers that reason per unit type (adaptive counter-production).
 		public ActorInfo Info;
 		public uint ActorID;
@@ -314,6 +315,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		AblationLatch ablateClassifyCache;
 		AblationLatch ablateFrozenSnapshot;
 		AblationLatch ablateFrozenSkip;
+		ObservedStyleBotModule styleObserver;
+		bool styleObserverResolved;
+		readonly Dictionary<ActorInfo, FogStyleActor> styleTypes = new();
 
 		sealed class StaticClass
 		{
@@ -335,6 +339,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// </summary>
 		public int Observe(OpenRA.Player enemy, IEnumerable<Actor> enemyActors, int tick, FrozenSnapshot frozenSnapshot = null)
 		{
+			if (!styleObserverResolved)
+			{
+				styleObserver = viewer.PlayerActor.TraitOrDefault<ObservedStyleBotModule>();
+				styleObserverResolved = true;
+			}
+			var recordStyle = styleObserver?.CollectAppearance == true;
 			var table = Table(enemy);
 			var visibleIds = new HashSet<uint>();
 			var visibleHarvesters = 0;
@@ -346,6 +356,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				visibleIds.Add(actor.ActorID);
 				var record = ClassifyObserved(actor.Info, actor.ActorID, actor.Location, actor.GetEnabledTargetTypes(), tick);
 				record.Cloaked = actor.Info.HasTraitInfo<CloakInfo>();
+				if (recordStyle)
+				{
+					var apparent = styleObserver.ApparentInfo(actor, enemy);
+					if (apparent != null)
+					{
+						record.StyleAppearance = StyleAppearance(apparent, actor.ActorID, actor.Location, tick);
+					}
+				}
 				table[actor.ActorID] = record;
 				if (record.Harvester)
 					visibleHarvesters++;
@@ -369,6 +387,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 					var record = ClassifyObserved(fa.Info, fa.ID, viewer.World.Map.CellContaining(fa.CenterPosition), fa.TargetTypes, tick);
 					record.Cloaked = fa.Info.HasTraitInfo<CloakInfo>();
+					if (recordStyle && !fa.Hidden && !fa.Shrouded && styleObserver.ApparentInfo(fa, enemy) is ActorInfo apparent)
+						record.StyleAppearance = StyleAppearance(apparent, fa.ID, record.Location, tick);
 					table[fa.ID] = record;
 				}
 			}
@@ -400,6 +420,23 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// backing actor) and Shrouded (no footprint cell explored yet) are skipped while the switch is on; off = the old walk.</summary>
 		public static bool FrozenUnrememberable(bool hidden, bool shrouded, bool skipHiddenShrouded) =>
 			skipHiddenShrouded && (hidden || shrouded);
+		FogStyleActor StyleAppearance(ActorInfo apparent, uint id, CPos cell, int tick)
+		{
+			if (!styleTypes.TryGetValue(apparent, out var template))
+			{
+				var types = default(BitSet<TargetableType>);
+				foreach (var targetable in apparent.TraitInfos<ITargetableInfo>())
+					types = types.Union(targetable.GetTargetTypes());
+
+				template = FogStyleAdapter.Project(ClassifyObserved(apparent, 0, default, types, 0));
+				styleTypes.Add(apparent, template);
+			}
+
+			template.ActorId = id;
+			template.Cell = cell;
+			template.LastSeenTick = tick;
+			return template;
+		}
 
 		/// <summary>One read of the frozen-actor layer for a whole rebuild, split by owner (PERF-F2b). Null when the switch is off or
 		/// the viewer has no layer, so Observe falls back to its own walk.</summary>

@@ -119,6 +119,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// place every snapshot. Null when UseInfluenceLayers is off.
 		public IBotInfluenceMap Influence;
 		internal int OwnArmyValue, OwnDefenceValue, OwnBuildings, OwnHarvesters;
+		internal Actor[] OwnBuildingSnapshot;
 		internal int OwnKillsCostWindow, OwnDeathsCostWindow;
 		internal int SquadCount, SquadUnitCount;
 
@@ -1650,6 +1651,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				OwnArmyValue = ownArmy,
 				OwnDefenceValue = ownDefence,
 				OwnBuildings = ownBuildings.Length,
+				OwnBuildingSnapshot = ownBuildings,
 				OwnHarvesters = ownHarvesters,
 				OwnKillsCostWindow = KillsCostWindow,
 				OwnDeathsCostWindow = DeathsCostWindow,

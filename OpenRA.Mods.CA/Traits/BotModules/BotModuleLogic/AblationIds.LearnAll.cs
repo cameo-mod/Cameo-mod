@@ -15,5 +15,6 @@ namespace OpenRA.Mods.CA.Traits
 	public static partial class AblationIds
 	{
 		public const string LearnAll = "learn_all";
+		public const string ObservedStyleProvider = "obs_style_provider";
 	}
 }
