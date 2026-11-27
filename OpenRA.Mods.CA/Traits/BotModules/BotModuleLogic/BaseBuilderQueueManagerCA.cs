@@ -971,6 +971,7 @@ namespace OpenRA.Mods.CA.Traits
 				: baseBuilder.Info.StructureProductionInactiveDelay + randomFactor;
 
 			// Build-order knobs (12.25): tempo shortens (above 1000) or lengthens the general build interval.
+			var knobs = baseBuilder.BuildOrderKnobs;
 			if (knobs != null)
 				waitTicks = DivideByKnob(waitTicks, knobs.KnobMilli(BuildOrderKnob.Tempo));
 
