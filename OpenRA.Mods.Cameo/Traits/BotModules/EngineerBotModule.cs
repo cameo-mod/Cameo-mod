@@ -132,6 +132,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("FOG-ENGCRATE-01: generic-bot capture and bridge-hut targets are those seen now or remembered in the frozen layer, whatever the Check*ForVisibility flags say. Row fog_engcrate.")]
 		public readonly bool FogEngCrate = false;
 
+		[Desc("FOG-REMEMBER-01: with FogEngCrate on, an unseen candidate or defender is judged by its frozen record (owner, validity, capture eligibility) instead of the live actor. Off = the FOG-ENGCRATE scans: only seen or remembered actors are admitted, read live. Row fog_remember.")]
+		public readonly bool FogRemember = false;
+
 		[Desc("Player relationships whose actors capturers target.")]
 		public readonly PlayerRelationship CapturableRelationships = PlayerRelationship.Enemy | PlayerRelationship.Neutral;
 
@@ -308,6 +311,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly World world;
 		readonly OpenRA.Player player;
 		AblationLatch ablateFogEngCrate; // FOG-ENGCRATE-01 hook fog_engcrate (off = the omniscient scans)
+		AblationLatch ablateFogRemember; // FOG-REMEMBER-01 hook fog_remember (off = the FOG-ENGCRATE scans: live owner and dead flag, seen or remembered actors only)
 		AblationLatch ablateDemandCapturers; // ABLATE-01 hook pi_demand_capturers (DEV provider only; release = on)
 		AblationLatch ablateEngDrop; // ABLATE-01 hook ed_engdrop (DEV provider only; release = on): off = the legacy TransportChance roll
 		AblationLatch ablateRouteBudget; // ABLATE-01 hook er_route_budget (ENG-ROUTE-01; DEV provider only; release = on): off = the unbounded SafeRoute search
@@ -832,11 +836,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		// FOG-ENGCRATE-01: generic-bot capture and bridge-hut scans read the fog. Off = the Check*ForVisibility flags, as before.
 		bool FogOn => Info.FogEngCrate && !ablateFogEngCrate.Off(player, AblationIds.FogEngCrate);
+		// FOG-REMEMBER-01: the frozen-record reads (Read, CanCapture) need FogOn and their own switch; Judge keeps the FOG-ENGCRATE admission while only FogOn is on.
+		bool RememberOn => FogOn && Info.FogRemember && !ablateFogRemember.Off(player, AblationIds.FogRemember);
 		// FOG-REMEMBER-01: one judgment reads the world once per actor. Read: alive, and the owner the bot judges it by. A seen actor is read
 		// live; an unseen one only through its frozen record (no record = not alive, fail closed). No fog (row off) = the live reads, as before.
 		bool Read(Actor a, out OpenRA.Player owner)
 		{
-			if (FogOn && !a.CanBeViewedByPlayer(player))
+			if (RememberOn && !a.CanBeViewedByPlayer(player))
 			{
 				owner = FogEngCrateGate.RememberedOwner(player, a);
 				return FogEngCrateGate.RememberedAlive(player, a);
@@ -856,6 +862,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return false;
 			}
 
+			if (FogOn && !RememberOn && !FogEngCrateGate.Admits(player, a))
+			{
+				owner = null;
+				return false;
+			}
+
 			return Read(a, out owner);
 		}
 
@@ -863,7 +875,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// target, so an unseen (remembered) target is judged by its frozen record instead: CanTarget(FrozenActor, ...). Seen, or row off = the live check.
 		bool CanCapture(CaptureManager captor, Actor target, CaptureManager targetCapture)
 		{
-			if (FogOn && !target.CanBeViewedByPlayer(player))
+			if (RememberOn && !target.CanBeViewedByPlayer(player))
 			{
 				var frozen = player.FrozenActorLayer?.FromID(target.ActorID);
 				return frozen != null && (captor.CanTarget(frozen, false) || captor.CanTarget(frozen, true));

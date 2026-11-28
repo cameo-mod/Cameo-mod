@@ -101,7 +101,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var engineer = RepoFile(EngineerPath);
 			Assert.That(engineer, Does.Contain("bool Read(Actor a, out OpenRA.Player owner)"),
 				"Read: alive and the owner the bot judges by, from one judgment");
-			Assert.That(engineer, Does.Contain("if (FogOn && !a.CanBeViewedByPlayer(player))"),
+			Assert.That(engineer, Does.Contain("if (RememberOn && !a.CanBeViewedByPlayer(player))"),
 				"Read asks the fog once, and only with the row on; row off = the live reads");
 			Assert.That(engineer, Does.Contain("owner = FogEngCrateGate.RememberedOwner(player, a);"));
 			Assert.That(engineer, Does.Contain("return FogEngCrateGate.RememberedAlive(player, a);"));
@@ -186,6 +186,21 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(engineer, Does.Not.Contain("capturer.Trait.CanTarget(captureManager)"), "no live CanTarget on a candidate");
 			Assert.That(engineer, Does.Not.Contain("tp.Trait.CanTarget(captureManager)"));
 			Assert.That(engineer, Does.Not.Contain("c.TraitOrDefault<CaptureManager>().CanTarget("));
+		}
+
+		[Test]
+		public void TheRememberRowIsItsOwnSwitchAndRowOffKeepsTheEngCrateAdmission()
+		{
+			// FOG-REMEMBER-01 row fog_remember: OFF in code, armed in the generic engineer block only (the ARM commit). Row off with the fog on = the
+			// FOG-ENGCRATE scans (seen or remembered actors only, read live); row on = the frozen-record reads in Read and CanCapture.
+			Assert.That(AblationIds.FogRemember, Is.EqualTo("fog_remember"));
+			var engineer = RepoFile(EngineerPath);
+			Assert.That(engineer, Does.Contain("public readonly bool FogRemember = false;"));
+			Assert.That(engineer, Does.Contain("bool RememberOn => FogOn && Info.FogRemember && !ablateFogRemember.Off(player, AblationIds.FogRemember);"));
+			Assert.That(engineer, Does.Contain("if (FogOn && !RememberOn && !FogEngCrateGate.Admits(player, a))"),
+				"row off with the fog on: the FOG-ENGCRATE admission, then the live reads");
+			Assert.That(engineer, Does.Contain("if (RememberOn && !target.CanBeViewedByPlayer(player))"), "capture eligibility from the frozen record only with the row on");
+			Assert.That(engineer.Split("if (RememberOn && !").Length - 1, Is.EqualTo(2), "only Read and CanCapture read a frozen record");
 		}
 
 		[Test]
