@@ -95,6 +95,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"takes on, so the team defends where it is attacked most, also at an ally's base. 0 = own lanes only. Needs LaneDefences.")]
 		public readonly int LaneAllySharePercent = 0;
 
+		[Desc("DEF-LANES-01 P2 prior (learnable def_lanes.spread): the team spread. Each defence the team already placed on an ally's lane adds this",
+			"(permille) to the divisor of that lane's weight when another ally picks a lane to help. 0 = no spread.")]
+		public readonly int LaneSpreadPermille = 500;
+
 		public override object Create(ActorInitializer init) { return new DefenseCoveragePlanner(init.Self, this); }
 	}
 
@@ -492,7 +496,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			if (lane >= 0)
+			{
 				laneSplit.NotePlacement(true);
+				(laneAlly?.Lanes ?? lanes).NotePlaced(lane);
+			}
 			else if (laneHot)
 				laneSplit.NotePlacement(false);
 

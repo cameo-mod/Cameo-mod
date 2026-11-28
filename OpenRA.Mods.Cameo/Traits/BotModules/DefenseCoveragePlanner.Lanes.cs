@@ -35,7 +35,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		IBotLearnedKnobs laneKnobs;
 		bool laneKnobsResolved;
 		int laneKnobTick = int.MinValue;
-		int laneBaseBump, laneGainAttack, laneGainStrength, laneDecay, laneShare, laneAllyShare;
+		int laneBaseBump, laneGainAttack, laneGainStrength, laneDecay, laneShare, laneAllyShare, laneSpread;
 
 		bool LanesArmed => Info.LaneDefences && Info.Enabled && !IsTraitDisabled && !ablateLanes.Off(player, AblationIds.DefLanes);
 
@@ -62,6 +62,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			laneDecay = RefineryLearn.Resolve(laneKnobs, "def_lanes.decay", Info.LaneDecayPermille, 10, 500);
 			laneShare = RefineryLearn.Resolve(laneKnobs, "def_lanes.split", Info.LaneSharePercent, 0, 100);
 			laneAllyShare = RefineryLearn.Resolve(laneKnobs, "def_lanes.ally_share", Info.LaneAllySharePercent, 0, 100);
+			laneSpread = RefineryLearn.Resolve(laneKnobs, "def_lanes.spread", Info.LaneSpreadPermille, 0, 2000);
 			if (laneMember != null)
 				laneMember.DecayPermille = laneDecay;
 
@@ -90,7 +91,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		void JoinLaneBoard()
 		{
 			var home = player.HomeLocation;
-			laneMember = laneBoard.Join(player.InternalName, lanes, home.X, home.Y, laneDecay, Info.LaneDecayIntervalTicks);
+			laneMember = laneBoard.Join(player.InternalName, lanes, home.X, home.Y, laneDecay, Info.LaneDecayIntervalTicks, () => player.WinState == WinState.Lost);
 		}
 
 		void IBotRespondToAttack.RespondToAttack(IBot bot, Actor self, AttackInfo e)
@@ -176,12 +177,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				ownWeight = lane >= 0 ? lanes.Weight(lane) : 0;
 			}
 
-			// P2: an ally's lane that outweighs our own after the ally share takes the placement, at the ally's base.
+			// P2: an ally's lane that outweighs our own after the ally share takes the placement, at the ally's base. The ally's lanes count by
+			// their effective weight (the team spread), so the defences already placed there send the next helper to another lane.
 			var allyHot = false;
 			if (LaneTeamArmed)
 			{
 				laneBoard.Decay(tick);
-				if (laneBoard.HeaviestAlly(player.InternalName, out var member, out var allyLane, out var allyWeight))
+				if (laneBoard.HeaviestAlly(player.InternalName, laneSpread, out var member, out var allyLane, out var allyWeight))
 				{
 					allyHot = true;
 					if (!skipAllyLane && DefenseLanes.AllyLaneWins(ownWeight, allyWeight, laneAllyShare))

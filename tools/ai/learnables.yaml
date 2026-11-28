@@ -761,3 +761,18 @@ learnables:
         sample_floor: 1 game
         switch: unscheduled
         state: wired_inert_without_provider
+    def_lanes.spread:
+        rank: 53
+        name: Team spread per defence already placed on an ally lane (DEF-LANES-01, P2, ablation row def_lanes_team)
+        owner: OpenRA.Mods.Cameo/Traits/BotModules/DefenseCoveragePlanner.cs:DefenseCoveragePlanner; DefenseLanes.cs:DefenseLanes
+        knob: LaneSpreadPermille
+        bounds: min=0,max=2000,safety_floor=0,unit=permille
+        prior: 500
+        feature_schema: S.static_defence_value,S.building_losses,E.seen_threat,lane_attack_weight,personality
+        credit_metric: building_losses_per_defence_value_residual
+        scope_keys: faction,matchup,doctrine
+        method: learn_all_v1_four_value_geometric_mean
+        fitter: tools/ai/fit_learn_all.py
+        sample_floor: 1 game
+        switch: unscheduled
+        state: wired_inert_without_provider

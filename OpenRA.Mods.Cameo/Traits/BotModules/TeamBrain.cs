@@ -91,6 +91,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			public DefenseLanes Lanes;
 			public int HomeX, HomeY;
 			public int DecayPermille, DecayIntervalTicks;
+
+			/// <summary>True once the member is out of the game (defeated). Null = never. The board drops such a member on its next decay.</summary>
+			public Func<bool> Gone;
 		}
 
 		readonly List<Member> members = new();
@@ -98,11 +101,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public IReadOnlyList<Member> Members => members;
 
 		/// <summary>Lists a member's lane memory; a member that joins again replaces its earlier entry in place.</summary>
-		public Member Join(string key, DefenseLanes lanes, int homeX, int homeY, int decayPermille, int decayIntervalTicks)
+		public Member Join(string key, DefenseLanes lanes, int homeX, int homeY, int decayPermille, int decayIntervalTicks, Func<bool> gone = null)
 		{
 			var member = new Member
 			{
-				Key = key, Lanes = lanes, HomeX = homeX, HomeY = homeY, DecayPermille = decayPermille, DecayIntervalTicks = decayIntervalTicks
+				Key = key, Lanes = lanes, HomeX = homeX, HomeY = homeY, DecayPermille = decayPermille, DecayIntervalTicks = decayIntervalTicks, Gone = gone
 			};
 
 			for (var i = 0; i < members.Count; i++)
@@ -125,15 +128,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			members.RemoveAll(m => string.Equals(m.Key, key, StringComparison.Ordinal));
 		}
 
-		/// <summary>Applies each member's own decay up to <paramref name="tick"/>.</summary>
+		/// <summary>Drops the members that are out of the game, then applies each remaining member's own decay up to <paramref name="tick"/>.</summary>
 		public void Decay(int tick)
 		{
+			members.RemoveAll(m => m.Gone != null && m.Gone());
 			foreach (var m in members)
 				m.Lanes.Decay(tick, m.DecayPermille, m.DecayIntervalTicks);
 		}
 
-		/// <summary>The heaviest lane of any member but <paramref name="selfKey"/> (the lowest key on a tie). False when no ally lane holds weight.</summary>
-		public bool HeaviestAlly(string selfKey, out Member member, out int lane, out int weight)
+		/// <summary>
+		/// The heaviest lane of any member but <paramref name="selfKey"/> (the lowest key, then the lowest lane, on a tie), by its effective weight:
+		/// the defences the team already placed on a lane lower it (<see cref="DefenseLanes.EffectiveWeight"/>), so allies spread over the team's
+		/// lanes instead of piling onto one. False when no ally lane holds weight.
+		/// </summary>
+		public bool HeaviestAlly(string selfKey, int spreadPermille, out Member member, out int lane, out int weight)
 		{
 			member = null;
 			lane = -1;
@@ -143,12 +151,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (string.Equals(m.Key, selfKey, StringComparison.Ordinal))
 					continue;
 
-				var h = m.Lanes.Heaviest();
-				if (h >= 0 && m.Lanes.Weight(h) > weight)
+				for (var b = 0; b < m.Lanes.Buckets; b++)
 				{
-					weight = m.Lanes.Weight(h);
-					lane = h;
-					member = m;
+					var w = m.Lanes.EffectiveWeight(b, spreadPermille);
+					if (w > weight)
+					{
+						weight = w;
+						lane = b;
+						member = m;
+					}
 				}
 			}
 

@@ -167,7 +167,7 @@ namespace OpenRA.Mods.Cameo.Test
 			board.Join("A", a, 10, 10, 100, 750);
 			board.Join("B", b, 50, 10, 100, 750);
 			board.Join("C", c, 90, 10, 100, 750);
-			Assert.That(board.HeaviestAlly("A", out _, out _, out _), Is.False);
+			Assert.That(board.HeaviestAlly("A", 0, out _, out _, out _), Is.False);
 			Assert.That(board.MaxAllyTotal("A"), Is.EqualTo(0));
 
 			a.Hit(1, 0, 0, 900, 0, 250, 1000);
@@ -176,13 +176,13 @@ namespace OpenRA.Mods.Cameo.Test
 			c.Hit(6, 0, 0, 100, 0, 250, 1000);
 
 			// A never reads itself; C holds the heaviest ally lane and the largest ally total.
-			Assert.That(board.HeaviestAlly("A", out var member, out var lane, out var weight), Is.True);
+			Assert.That(board.HeaviestAlly("A", 0, out var member, out var lane, out var weight), Is.True);
 			Assert.That(member.Key, Is.EqualTo("C"));
 			Assert.That(member.HomeX, Is.EqualTo(90));
 			Assert.That(lane, Is.EqualTo(5));
 			Assert.That(weight, Is.EqualTo(400));
 			Assert.That(board.MaxAllyTotal("A"), Is.EqualTo(500));
-			Assert.That(board.HeaviestAlly("C", out member, out _, out weight), Is.True);
+			Assert.That(board.HeaviestAlly("C", 0, out member, out _, out weight), Is.True);
 			Assert.That(member.Key, Is.EqualTo("A"));
 			Assert.That(weight, Is.EqualTo(900));
 
@@ -190,13 +190,13 @@ namespace OpenRA.Mods.Cameo.Test
 			board.Decay(750);
 			Assert.That(c.Weight(5), Is.EqualTo(360));
 			board.Leave("C");
-			Assert.That(board.HeaviestAlly("A", out member, out _, out _), Is.True);
+			Assert.That(board.HeaviestAlly("A", 0, out member, out _, out _), Is.True);
 			Assert.That(member.Key, Is.EqualTo("B"));
 
 			// Joining again replaces the entry in place.
 			board.Join("B", new DefenseLanes(8), 50, 10, 100, 750);
 			Assert.That(board.Members.Count, Is.EqualTo(2));
-			Assert.That(board.HeaviestAlly("A", out _, out _, out _), Is.False);
+			Assert.That(board.HeaviestAlly("A", 0, out _, out _, out _), Is.False);
 		}
 
 		[Test]
@@ -214,9 +214,65 @@ namespace OpenRA.Mods.Cameo.Test
 				}
 
 				Assert.That(string.Join(",", System.Linq.Enumerable.Select(board.Members, m => m.Key)), Is.EqualTo("A,B,C"));
-				Assert.That(board.HeaviestAlly("A", out var member, out _, out _), Is.True);
+				Assert.That(board.HeaviestAlly("A", 0, out var member, out _, out _), Is.True);
 				Assert.That(member.Key, Is.EqualTo("B"));
 			}
+		}
+
+		[Test]
+		public void DefeatedMembersLeaveTheBoard()
+		{
+			var board = new TeamLaneBoard();
+			var lost = false;
+			var b = new DefenseLanes(8);
+			b.Hit(2, 0, 0, 300, 0, 250, 1000);
+			board.Join("A", new DefenseLanes(8), 0, 0, 100, 750);
+			board.Join("B", b, 50, 10, 100, 750, () => lost);
+			board.Decay(0);
+			Assert.That(board.HeaviestAlly("A", 0, out _, out _, out _), Is.True);
+			Assert.That(board.MaxAllyTotal("A"), Is.EqualTo(300));
+
+			lost = true;
+			board.Decay(1);
+			Assert.That(board.Members.Count, Is.EqualTo(1));
+			Assert.That(board.HeaviestAlly("A", 0, out _, out _, out _), Is.False);
+			Assert.That(board.MaxAllyTotal("A"), Is.EqualTo(0));
+		}
+
+		[Test]
+		public void TheTeamSpreadsOverTheLanes()
+		{
+			var board = new TeamLaneBoard();
+			var b = new DefenseLanes(8);
+			b.Hit(2, 0, 0, 600, 0, 250, 1000);
+			b.Hit(5, 0, 0, 500, 0, 250, 1000);
+			board.Join("A", new DefenseLanes(8), 0, 0, 100, 750);
+			board.Join("B", b, 50, 10, 100, 750);
+
+			// Nothing placed yet: the heaviest lane. The owner's own defence on it counts too, so the first helper goes to the other lane.
+			Assert.That(board.HeaviestAlly("A", 500, out _, out var lane, out var weight), Is.True);
+			Assert.That(lane, Is.EqualTo(2));
+			Assert.That(weight, Is.EqualTo(600));
+			b.NotePlaced(2);
+			Assert.That(b.EffectiveWeight(2, 500), Is.EqualTo(400));
+			Assert.That(board.HeaviestAlly("A", 500, out _, out lane, out weight), Is.True);
+			Assert.That(lane, Is.EqualTo(5));
+			Assert.That(weight, Is.EqualTo(500));
+			b.NotePlaced(5);
+			Assert.That(board.HeaviestAlly("A", 500, out _, out lane, out _), Is.True);
+			Assert.That(lane, Is.EqualTo(2));
+
+			// Spread 0 = the raw weights.
+			Assert.That(board.HeaviestAlly("A", 0, out _, out lane, out weight), Is.True);
+			Assert.That(lane, Is.EqualTo(2));
+			Assert.That(weight, Is.EqualTo(600));
+
+			// A cold lane takes no count, and a lane that goes cold forgets its count.
+			b.NotePlaced(7);
+			Assert.That(b.Placed(7), Is.EqualTo(0));
+			b.Decay(750 * 200, 100, 750);
+			Assert.That(b.Placed(2), Is.EqualTo(0));
+			Assert.That(b.Placed(5), Is.EqualTo(0));
 		}
 
 		[Test]
@@ -240,6 +296,8 @@ namespace OpenRA.Mods.Cameo.Test
 			lanes.Hit(6, 120, 25000, 50, 10, 250, 1000);
 			split.NotePlacement(true);
 			split.NotePlacement(false);
+			lanes.NotePlaced(6);
+			lanes.NotePlaced(6);
 			var text = SavedLanes.Encode(lanes.Save(split));
 
 			var loaded = new DefenseLanes(8);
@@ -248,6 +306,8 @@ namespace OpenRA.Mods.Cameo.Test
 			for (var i = 0; i < 8; i++)
 				Assert.That(loaded.Weight(i), Is.EqualTo(lanes.Weight(i)));
 
+			Assert.That(loaded.Placed(6), Is.EqualTo(2));
+			Assert.That(loaded.Placed(3), Is.EqualTo(0));
 			Assert.That(loadedSplit.Hot, Is.True);
 			Assert.That(loadedSplit.LanePlaced, Is.EqualTo(1));
 			Assert.That(loadedSplit.CoveragePlaced, Is.EqualTo(1));

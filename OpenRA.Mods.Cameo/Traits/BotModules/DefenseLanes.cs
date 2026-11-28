@@ -26,6 +26,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly int[] weight;
 		readonly int[] lastAttackTick;
 		readonly int[] damageCarry;
+
+		// Defences the team placed on each lane (by the owner or by an ally) while the lane holds weight; a lane that goes cold starts again at 0.
+		readonly int[] placed;
 		int lastDecayTick;
 
 		public DefenseLanes(int buckets)
@@ -34,6 +37,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			weight = new int[buckets];
 			lastAttackTick = new int[buckets];
 			damageCarry = new int[buckets];
+			placed = new int[buckets];
 			for (var i = 0; i < buckets; i++)
 				lastAttackTick[i] = int.MinValue / 2;
 		}
@@ -41,6 +45,24 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public int Buckets => weight.Length;
 
 		public int Weight(int bucket) => weight[bucket];
+
+		public int Placed(int bucket) => placed[bucket];
+
+		/// <summary>One defence was placed on the lane (by the owner or by an ally).</summary>
+		public void NotePlaced(int bucket)
+		{
+			if (bucket >= 0 && bucket < placed.Length && weight[bucket] > 0)
+				placed[bucket]++;
+		}
+
+		/// <summary>
+		/// The team spread: the weight of a lane as an ally sees it, lowered by the defences already placed there. Each placed defence adds
+		/// <paramref name="spreadPermille"/> to the divisor (500 = the weight is divided by 1.5, 2, 2.5 ...). 0 = no spread.
+		/// </summary>
+		public int EffectiveWeight(int bucket, int spreadPermille)
+		{
+			return (int)((long)weight[bucket] * 1000 / (1000 + (long)placed[bucket] * Math.Max(0, spreadPermille)));
+		}
 
 		/// <summary>The bearing bucket of the offset (dx, dy); bucket 0 is centred on +X and the buckets run toward +Y. A zero offset is bucket 0.</summary>
 		public static int Bucket(int dx, int dy, int buckets)
@@ -88,8 +110,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			lastDecayTick += steps * intervalTicks;
 			var keep = Math.Clamp(1000 - decayPermille, 0, 1000);
 			for (var i = 0; i < weight.Length; i++)
+			{
 				for (var s = 0; s < steps && weight[i] > 0; s++)
 					weight[i] = weight[i] * keep / 1000;
+
+				if (weight[i] <= 0)
+					placed[i] = 0;
+			}
 		}
 
 		/// <summary>
@@ -115,6 +142,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			weight[bucket] = (int)Math.Clamp(w, 0, Math.Max(0, maxWeight));
+			if (weight[bucket] <= 0)
+				placed[bucket] = 0;
 		}
 
 		/// <summary>The lane with the most weight (the lowest bucket on a tie); -1 when every lane is at 0.</summary>
@@ -145,13 +174,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public SavedLanes Save(LaneSplit split)
 		{
 			return new SavedLanes(SavedLanes.CurrentVersion, (int[])weight.Clone(), (int[])lastAttackTick.Clone(), (int[])damageCarry.Clone(),
-				lastDecayTick, split.Hot, split.LanePlaced, split.CoveragePlaced);
+				(int[])placed.Clone(), lastDecayTick, split.Hot, split.LanePlaced, split.CoveragePlaced);
 		}
 
 		/// <summary>Restores a save made with the same bucket count. False (and nothing changed) for any other shape.</summary>
 		public bool Restore(SavedLanes state, LaneSplit split)
 		{
-			if (state == null || state.Weight.Length != weight.Length || state.LastAttack.Length != weight.Length || state.Carry.Length != weight.Length)
+			if (state == null || state.Weight.Length != weight.Length || state.LastAttack.Length != weight.Length || state.Carry.Length != weight.Length
+				|| state.Placed.Length != weight.Length)
 				return false;
 
 			for (var i = 0; i < weight.Length; i++)
@@ -159,6 +189,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				weight[i] = Math.Max(0, state.Weight[i]);
 				lastAttackTick[i] = state.LastAttack[i];
 				damageCarry[i] = Math.Clamp(state.Carry[i], 0, DamagePerStep - 1);
+				placed[i] = weight[i] > 0 ? Math.Max(0, state.Placed[i]) : 0;
 			}
 
 			lastDecayTick = state.LastDecay;
@@ -237,10 +268,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	}
 
 	/// <summary>One bot's lane memory in a save game. Plain ints so the record round-trips through JSON.</summary>
-	public sealed record SavedLanes(int Version, int[] Weight, int[] LastAttack, int[] Carry, int LastDecay, bool Hot, int LanePlaced, int CoveragePlaced)
+	public sealed record SavedLanes(int Version, int[] Weight, int[] LastAttack, int[] Carry, int[] Placed, int LastDecay, bool Hot, int LanePlaced,
+		int CoveragePlaced)
 	{
-		public const int CurrentVersion = 1;
-		public const string SaveKey = "DefenseLanesV1";
+		// Version 2: the per-lane placed counts joined. Key and version changed with it; the V1 shape never left a branch.
+		public const int CurrentVersion = 2;
+		public const string SaveKey = "DefenseLanesV2";
 
 		/// <summary>The save text: base64 of the JSON.</summary>
 		public static string Encode(SavedLanes state) => Convert.ToBase64String(JsonSerializer.SerializeToUtf8Bytes(state));
@@ -254,7 +287,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			try
 			{
 				var state = JsonSerializer.Deserialize<SavedLanes>(Convert.FromBase64String(text));
-				if (state == null || state.Version != CurrentVersion || state.Weight == null || state.LastAttack == null || state.Carry == null)
+				if (state == null || state.Version != CurrentVersion || state.Weight == null || state.LastAttack == null || state.Carry == null || state.Placed == null)
 					return null;
 
 				return state;
