@@ -4715,6 +4715,8 @@ Player:
 		LaneGainPerStrength: 10
 		LaneDecayPermille: 100
 		LaneSharePercent: 50
+		# P2: allied bots share the lane memory; this share of an ally's lane weight and budget is taken on (row def_lanes_team).
+		LaneAllySharePercent: 50
 		# DEF-3: cluster own buildings into fronts; the defence annulus centres on the most
 		# uncovered front instead of the randomly-picked yard — towers follow expansions.
 		# Switch group Z_def3_remote_outpost_coverage; off on master until the increment A/B.
