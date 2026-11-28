@@ -6712,6 +6712,8 @@ Player:
 		UnitRoll: true
 		# FIRST-COPY-DUE-01 ARM (playtest B1, 11-27): every listed unit type gets a first-copy deadline (generic bots only; classic untouched); thresholds stay at their code priors (3000 ticks, cash floor 0).
 		FirstCopyDue: true
+		# PERF-BOTTICK-01 ARM (W3/wave M, 11-28): the unit roll draws only among members that pass the same cash and afford terms the fill meets after the pick (generic bots only; classic untouched; needs UnitRoll above). Off = ablation row ub_affordable_pool.
+		AffordablePool: true
 		UnitRollFloorPct: 5
 		# Mode bias profiles = the folded layers (compositions, counter, wave-mix role, role deficit, opening-defence units, learned priors): each multiplies the weight only while its existing trigger holds, never gates.
 		# Value = strength percent (0 = off); every profile has its own ablation row ub_roll_<name>. Learnable later (MODE-LEARN-01): a profile that does not help goes to 0.

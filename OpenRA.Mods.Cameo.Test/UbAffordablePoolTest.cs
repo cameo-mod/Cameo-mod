@@ -92,13 +92,21 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void OffInCodeAndUnarmedInTheYamlSoOffIsTodaysRoll()
+		public void OffInCodeAndArmedOnlyInTheGenericYamlBlockSoOffIsTodaysRoll()
 		{
 			var u = Source(Unit);
 			Assert.That(AblationIds.UnitAffordablePool, Is.EqualTo("ub_affordable_pool"));
 			Assert.That(u, Does.Contain("public readonly bool AffordablePool = false;"), "off in code");
 			Assert.That(u, Does.Contain("bool AffordablePoolOn => UnitRollOn && Info.AffordablePool && !ablateAffordablePool.Off(player, AblationIds.UnitAffordablePool);"), "needs the roll, the switch and the row");
-			Assert.That(Source("packaging/ai.yaml"), Does.Not.Contain("AffordablePool:"), "no yaml arms it in this commit");
+			// W3 ARM (wave M, 11-28): armed in UnitBuilderBotModuleCA@generic only; the classic block is untouched. Off = the ablation row ub_affordable_pool.
+			var yaml = Source("packaging/ai.yaml");
+			var generic = yaml.IndexOf("\tUnitBuilderBotModuleCA@generic:\n", StringComparison.Ordinal);
+			var classic = yaml.IndexOf("\tUnitBuilderBotModuleCA@classic:\n", StringComparison.Ordinal);
+			Assert.That(generic, Is.GreaterThanOrEqualTo(0));
+			Assert.That(classic, Is.GreaterThan(generic));
+			Assert.That(yaml.Split("AffordablePool:").Length - 1, Is.EqualTo(1), "one arm line in the whole file");
+			Assert.That(yaml.Substring(generic, classic - generic), Does.Contain("\n\t\tAffordablePool: true\n"), "armed in the generic block");
+			Assert.That(yaml.Substring(classic), Does.Not.Contain("AffordablePool"), "classic untouched");
 
 			// off: the filter block is the only reader, and the composition guard reads a flag only the filter sets
 			Assert.That(u.Split("AffordablePoolOn").Length - 1, Is.EqualTo(3), "the property, the filter and the DEV divergence log");
