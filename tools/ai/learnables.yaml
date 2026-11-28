@@ -671,3 +671,78 @@ learnables:
         sample_floor: 150 effective games per personality
         switch: DefRatioPersonality
         state: planned
+    def_lanes.base_bump:
+        rank: 46
+        name: Lane defence budget base bump (DEF-LANES-01, ablation row def_lanes)
+        owner: OpenRA.Mods.Cameo/Traits/BotModules/DefenseCoveragePlanner.cs:DefenseCoveragePlanner; DefenseLanes.cs:DefenseLanes
+        knob: LaneBaseBumpPermille
+        bounds: min=0,max=500,safety_floor=0,unit=permille
+        prior: 100
+        feature_schema: S.static_defence_value,S.building_losses,E.seen_threat,lane_attack_weight,personality
+        credit_metric: building_losses_per_defence_value_residual
+        scope_keys: faction,matchup,personality
+        method: learn_all_v1_four_value_geometric_mean
+        fitter: tools/ai/fit_learn_all.py (planned)
+        sample_floor: 1 game
+        switch: unscheduled
+        state: planned_yaml_prior_only
+    def_lanes.gain_attack:
+        rank: 47
+        name: Lane weight per new attack (DEF-LANES-01, ablation row def_lanes)
+        owner: OpenRA.Mods.Cameo/Traits/BotModules/DefenseCoveragePlanner.cs:DefenseCoveragePlanner; DefenseLanes.cs:DefenseLanes
+        knob: LaneGainPerAttack
+        bounds: min=0,max=300,safety_floor=0,unit=permille
+        prior: 50
+        feature_schema: S.static_defence_value,S.building_losses,E.seen_threat,lane_attack_weight,personality
+        credit_metric: building_losses_per_defence_value_residual
+        scope_keys: faction,matchup,personality
+        method: learn_all_v1_four_value_geometric_mean
+        fitter: tools/ai/fit_learn_all.py (planned)
+        sample_floor: 1 game
+        switch: unscheduled
+        state: planned_yaml_prior_only
+    def_lanes.gain_strength:
+        rank: 48
+        name: Lane weight per 10000 damage taken (DEF-LANES-01, ablation row def_lanes)
+        owner: OpenRA.Mods.Cameo/Traits/BotModules/DefenseCoveragePlanner.cs:DefenseCoveragePlanner; DefenseLanes.cs:DefenseLanes
+        knob: LaneGainPerStrength
+        bounds: min=0,max=100,safety_floor=0,unit=permille
+        prior: 10
+        feature_schema: S.static_defence_value,S.building_losses,E.seen_threat,lane_attack_weight,personality
+        credit_metric: building_losses_per_defence_value_residual
+        scope_keys: faction,matchup,personality
+        method: learn_all_v1_four_value_geometric_mean
+        fitter: tools/ai/fit_learn_all.py (planned)
+        sample_floor: 1 game
+        switch: unscheduled
+        state: planned_yaml_prior_only
+    def_lanes.decay:
+        rank: 49
+        name: Lane weight decay per 750 ticks (DEF-LANES-01, ablation row def_lanes)
+        owner: OpenRA.Mods.Cameo/Traits/BotModules/DefenseCoveragePlanner.cs:DefenseCoveragePlanner; DefenseLanes.cs:DefenseLanes
+        knob: LaneDecayPermille
+        bounds: min=10,max=500,safety_floor=10,unit=permille
+        prior: 100
+        feature_schema: S.static_defence_value,S.building_losses,E.seen_threat,lane_attack_weight,personality
+        credit_metric: building_losses_per_defence_value_residual
+        scope_keys: faction,matchup,personality
+        method: learn_all_v1_four_value_geometric_mean
+        fitter: tools/ai/fit_learn_all.py (planned)
+        sample_floor: 1 game
+        switch: unscheduled
+        state: planned_yaml_prior_only
+    def_lanes.split:
+        rank: 50
+        name: Coverage / lane placement split (lane share) (DEF-LANES-01, ablation row def_lanes)
+        owner: OpenRA.Mods.Cameo/Traits/BotModules/DefenseCoveragePlanner.cs:DefenseCoveragePlanner; DefenseLanes.cs:DefenseLanes
+        knob: LaneSharePercent
+        bounds: min=0,max=100,safety_floor=0,unit=percent
+        prior: 50
+        feature_schema: S.static_defence_value,S.building_losses,E.seen_threat,lane_attack_weight,personality
+        credit_metric: building_losses_per_defence_value_residual
+        scope_keys: faction,matchup,personality
+        method: learn_all_v1_four_value_geometric_mean
+        fitter: tools/ai/fit_learn_all.py (planned)
+        sample_floor: 1 game
+        switch: unscheduled
+        state: planned_yaml_prior_only

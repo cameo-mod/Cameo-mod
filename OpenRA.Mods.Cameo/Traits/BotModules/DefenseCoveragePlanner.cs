@@ -56,10 +56,46 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Search annulus (cells) when no base builder is found.")]
 		public readonly int MaximumRadius = 20;
 
+		[Desc("DEF-LANES-01: remember the lanes (bearing buckets from the base) own buildings are attacked from, raise the defence budget",
+			"with that memory and put the extra defences at the base edge on the heaviest lane. False = no memory, no budget, no lane placement.")]
+		public readonly bool LaneDefences = false;
+
+		[Desc("DEF-LANES-01: bearing buckets around the base.")]
+		public readonly int LaneBuckets = 8;
+
+		[Desc("DEF-LANES-01 prior (learnable def_lanes.base_bump): extra defence budget, permille, while any lane holds weight.")]
+		public readonly int LaneBaseBumpPermille = 100;
+
+		[Desc("DEF-LANES-01 prior (learnable def_lanes.gain_attack): lane weight (budget permille) per new attack on the lane.")]
+		public readonly int LaneGainPerAttack = 50;
+
+		[Desc("DEF-LANES-01 prior (learnable def_lanes.gain_strength): lane weight (budget permille) per 10000 damage taken from the lane.")]
+		public readonly int LaneGainPerStrength = 10;
+
+		[Desc("DEF-LANES-01 prior (learnable def_lanes.decay): permille of each lane's weight lost per LaneDecayIntervalTicks.")]
+		public readonly int LaneDecayPermille = 100;
+
+		[Desc("DEF-LANES-01: ticks per decay step.")]
+		public readonly int LaneDecayIntervalTicks = 750;
+
+		[Desc("DEF-LANES-01 prior (learnable def_lanes.split): share (percent) of the defences placed while a lane holds weight that go to the lane;",
+			"the rest follow the coverage rule.")]
+		public readonly int LaneSharePercent = 50;
+
+		[Desc("DEF-LANES-01: hits on a lane closer together than this many ticks count as one attack.")]
+		public readonly int LaneAttackWindowTicks = 250;
+
+		[Desc("DEF-LANES-01: cap of one lane's weight and of the whole extra budget, permille.")]
+		public readonly int LaneMaxExtraPermille = 1000;
+
+		[Desc("DEF-LANES-01: score per percent (-100..100) of how well a cell lies on the heaviest lane, for a lane placement.")]
+		public readonly int LaneThreatWeight = 2000;
+
 		public override object Create(ActorInitializer init) { return new DefenseCoveragePlanner(init.Self, this); }
 	}
 
-	public class DefenseCoveragePlanner : ConditionalTrait<DefenseCoveragePlannerInfo>, IBotDefensePlacementAdvisor, INotifyActorDisposing
+	public class DefenseCoveragePlanner : ConditionalTrait<DefenseCoveragePlannerInfo>, IBotDefensePlacementAdvisor, INotifyActorDisposing,
+		IBotRespondToAttack, IBotDefenceLaneBudget
 	{
 		// Coverage dominates (maintainer: "the whole base should always be covered"): one newly covered base cell (1000)
 		// outweighs the full edge + enemy-side bonus (EdgeWeight 30 + ThreatWeight 40, x100 = 7000) only from 8 cells on,
@@ -99,6 +135,45 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		bool IBotDefensePlacementAdvisor.IsActive => !IsTraitDisabled && Info.Enabled;
+
+		// --- DEF-LANES-01: lane memory (damage events only) ---
+
+		AblationLatch ablateLanes;
+		DefenseLanes lanes;
+		int lanePlaced, coveragePlaced;
+
+		bool LanesArmed => Info.LaneDefences && Info.Enabled && !IsTraitDisabled && !ablateLanes.Off(player, AblationIds.DefLanes);
+
+		void IBotRespondToAttack.RespondToAttack(IBot bot, Actor self, AttackInfo e)
+		{
+			if (!Info.LaneDefences || !LanesArmed)
+				return;
+
+			var attacker = e.Attacker;
+			if (attacker == null || attacker.Disposed || !attacker.IsInWorld || self.Owner != player || !self.IsInWorld
+				|| e.Damage.Value <= 0 || player.RelationshipWith(attacker.Owner) != PlayerRelationship.Enemy
+				|| !self.Info.HasTraitInfo<BuildingInfo>())
+				return;
+
+			lanes ??= new DefenseLanes(Info.LaneBuckets);
+			var tick = world.WorldTick;
+			lanes.Decay(tick, Info.LaneDecayPermille, Info.LaneDecayIntervalTicks);
+			var offset = world.Map.CellContaining(attacker.CenterPosition) - player.HomeLocation;
+			lanes.Hit(DefenseLanes.Bucket(offset.X, offset.Y, lanes.Buckets), tick, e.Damage.Value,
+				Info.LaneGainPerAttack, Info.LaneGainPerStrength, Info.LaneAttackWindowTicks, Info.LaneMaxExtraPermille);
+		}
+
+		int IBotDefenceLaneBudget.ExtraDefencePermille
+		{
+			get
+			{
+				if (lanes == null || !LanesArmed)
+					return 0;
+
+				lanes.Decay(world.WorldTick, Info.LaneDecayPermille, Info.LaneDecayIntervalTicks);
+				return DefenseLanes.ExtraPermille(lanes.Total(), Info.LaneBaseBumpPermille, Info.LaneMaxExtraPermille);
+			}
+		}
 
 		// --- world-free helpers (tested) ---
 
@@ -380,6 +455,23 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// The quota picks the ring; an empty ring falls back to the other rather than to nothing.
 			var wantPerimeter = PlacePerimeter(perimeter, interior, Info.PerimeterSharePercent);
 			var threat = ThreatCell();
+			var threatWeight = Info.ThreatWeight;
+
+			// DEF-LANES-01 (layer 2): while a lane holds weight, its share of the placements goes to the base edge on the heaviest lane.
+			var lane = -1;
+			if (lanes != null && LanesArmed)
+			{
+				lanes.Decay(world.WorldTick, Info.LaneDecayPermille, Info.LaneDecayIntervalTicks);
+				var heaviest = lanes.Heaviest();
+				if (heaviest >= 0 && DefenseLanes.LaneTurn(lanePlaced, coveragePlaced, Info.LaneSharePercent))
+				{
+					lane = heaviest;
+					var (dx, dy) = DefenseLanes.Direction(lane, lanes.Buckets, Math.Max(1, maxRadius));
+					threat = baseCenter + new CVec(dx, dy);
+					threatWeight = Info.LaneThreatWeight;
+					wantPerimeter = true;
+				}
+			}
 			CPos? best = null;
 			var bestScore = int.MinValue;
 			int bestNew = 0, bestEdge = 0, bestThreat = 0;
@@ -401,7 +493,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				// Inside, only the coverage of the base counts; on the perimeter the edge and threat bias stay.
 				var t = wantPerimeter ? ThreatAlignment(cell, baseCenter, threat) : 0;
-				var score = Score(n, wantPerimeter ? edge : 0, t, Info.EdgeWeight, Info.ThreatWeight);
+				var score = Score(n, wantPerimeter ? edge : 0, t, Info.EdgeWeight, threatWeight);
 				if ((onWanted && !bestOnWanted) || score > bestScore)
 				{
 					bestScore = score;
@@ -416,7 +508,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (best == null)
 				return null;
 
+			if (lane >= 0)
+				lanePlaced++;
+			else if (lanes != null && lanes.Heaviest() >= 0)
+				coveragePlaced++;
+
 #if CAMEO_DEV_LOGGING
+			if (lane >= 0)
+				Log.Write("debug", $"AI ({player.ClientIndex}): DEF-LANES lane {lane}/{lanes.Buckets} weight {lanes.Weight(lane)} total {lanes.Total()} " +
+					$"(lane placed {lanePlaced}, coverage placed {coveragePlaced}) at tick {world.WorldTick}");
 			Log.Write("debug", $"AI ({player.ClientIndex}): DEFENSE PLACE {defense.Name} at {best.Value}: covers {bestNew} new base cells " +
 				$"(roles {string.Join("+", roles)}), {(wantPerimeter ? "perimeter" : "interior")} ({perimeter} out / {interior} in), edge {bestEdge}, threat {bestThreat}" +
 				(bestNew == 0 ? " [no new coverage: redundant edge/threat cell]" : "") + $" at tick {world.WorldTick}");

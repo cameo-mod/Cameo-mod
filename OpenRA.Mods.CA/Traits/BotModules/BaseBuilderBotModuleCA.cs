@@ -1185,6 +1185,7 @@ namespace OpenRA.Mods.CA.Traits
 		AblationLatch ablateDefRatioPersonality;
 		IBotCurrentPersonality defRatioPersonality;
 		bool defRatioPersonalityResolved;
+		IBotDefenceLaneBudget[] defLaneBudgets;
 
 		// DEF-RATIO-PERS-01 / audit A4: the world tick the first production building stood (-1 = none yet). The early-defence waiver's tick leg reads it.
 		public int EarlyFirstProductionTick = -1;
@@ -1200,7 +1201,14 @@ namespace OpenRA.Mods.CA.Traits
 			var armed = Info.DefRatioPersonality && !ablateDefRatioPersonality.Off(player, AblationIds.DefRatioPersonality);
 			var prior = DefenceRatioPersonality.PriorFor(defRatioPersonality?.CurrentPersonality,
 				Info.DefRatioRush, Info.DefRatioGuerrilla, Info.DefRatioSteamroller, Info.DefRatioExpansion, Info.DefRatioTech, Info.DefRatioTurtle);
-			return DefenceRatioPersonality.Resolve(armed, prior, false, 0);
+			var factor = DefenceRatioPersonality.Resolve(armed, prior, false, 0);
+
+			// DEF-LANES-01: remembered attack lanes raise the defence budget (a provider that is off returns 0 = the factor unchanged).
+			defLaneBudgets ??= player.PlayerActor.TraitsImplementing<IBotDefenceLaneBudget>().ToArray();
+			foreach (var b in defLaneBudgets)
+				factor = DefenceLaneBudget.Apply(factor, b.ExtraDefencePermille);
+
+			return factor;
 		}
 
 		public int RefTierTarget
