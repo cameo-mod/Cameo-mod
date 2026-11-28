@@ -680,12 +680,13 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(yaml[classic..], Does.Not.Contain("RaidHarv"), "classic untouched");
 			foreach (var key in new[]
 			{
-				"RaidHarvEnabled: false", "RaidHarvLostReconTicks: 400", "RaidHarvMoveRefreshTicks: 125", "RaidHarvReqMarginPercent: 150", "RaidHarvReconRadiusCells: 8",
+				"RaidHarvEnabled: true", "RaidHarvLostReconTicks: 400", "RaidHarvMoveRefreshTicks: 125", "RaidHarvReqMarginPercent: 150", "RaidHarvReconRadiusCells: 8",
 				"RaidHarvIncidentLossPercent: 25", "RaidHarvIncidentWindowTicks: 300", "RaidHarvIncidentDecayTicks: 3000", "RaidHarvWaypointSpacingCells: 8", "RaidHarvDefenceRadiusCells: 6",
 			})
 				Assert.That(Count(yaml[..classic], "\n\t\t" + key + "\n"), Is.EqualTo(6), key);
 
-			Assert.That(Count(yaml, "RaidHarvEnabled: true"), Is.EqualTo(0), "no row ships true until the A/B passes");
+			Assert.That(Count(yaml, "RaidHarvEnabled: true"), Is.EqualTo(6), "armed by the playtest B3 ARM: the six personality blocks only, classic untouched (asserted above), off in code");
+			Assert.That(Count(yaml, "RaidHarvEnabled: false"), Is.EqualTo(0));
 
 			// The raid never touches the harass cap, the main squad-manager file or the enemy scan (the call sites of P2b are in the target pick, the two idle states and the leader's check, pinned in RaidHarvP2bTest).
 			foreach (var file in new[] { "SquadManagerBotModuleCA.HarassCap.cs", "SquadManagerBotModuleCA.cs", "SquadManagerBotModuleCA.EnemyScan.cs" })
