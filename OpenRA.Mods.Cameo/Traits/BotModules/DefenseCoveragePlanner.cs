@@ -11,7 +11,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -99,8 +98,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public override object Create(ActorInitializer init) { return new DefenseCoveragePlanner(init.Self, this); }
 	}
 
-	public class DefenseCoveragePlanner : ConditionalTrait<DefenseCoveragePlannerInfo>, IBotDefensePlacementAdvisor, INotifyActorDisposing,
-		IBotRespondToAttack, IBotDefenceLaneBudget
+	public partial class DefenseCoveragePlanner : ConditionalTrait<DefenseCoveragePlannerInfo>, IBotDefensePlacementAdvisor, INotifyActorDisposing
 	{
 		// Coverage dominates (maintainer: "the whole base should always be covered"): one newly covered base cell (1000)
 		// outweighs the full edge + enemy-side bonus (EdgeWeight 30 + ThreatWeight 40, x100 = 7000) only from 8 cells on,
@@ -135,92 +133,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void INotifyActorDisposing.Disposing(Actor self)
 		{
-			if (lanes != null && LaneTeams.TryGetValue(world, out var team))
-				team.Remove(this);
-
+			LeaveLaneBoard();
 			world.ActorAdded -= Added;
 			world.ActorRemoved -= Removed;
 		}
 
 		bool IBotDefensePlacementAdvisor.IsActive => !IsTraitDisabled && Info.Enabled;
-
-		// --- DEF-LANES-01: lane memory (damage events only) ---
-
-		AblationLatch ablateLanes;
-		DefenseLanes lanes;
-		int lanePlaced, coveragePlaced;
-
-		bool LanesArmed => Info.LaneDefences && Info.Enabled && !IsTraitDisabled && !ablateLanes.Off(player, AblationIds.DefLanes);
-
-		// DEF-LANES-01 P2: the team-shared registry. Every armed planner with a lane memory is listed per world (in the order of its first hit);
-		// allied planners read each other's lanes. Allies share what they see, so nothing here is hidden from the reader.
-		static readonly ConditionalWeakTable<World, List<DefenseCoveragePlanner>> LaneTeams = new();
-		AblationLatch ablateLaneTeam;
-		bool skipAllyLane;
-
-		bool LaneTeamArmed => Info.LaneAllySharePercent > 0 && LanesArmed && !ablateLaneTeam.Off(player, AblationIds.DefLanesTeam);
-
-		int OwnLaneExtra()
-		{
-			if (lanes == null || !LanesArmed)
-				return 0;
-
-			lanes.Decay(world.WorldTick, Info.LaneDecayPermille, Info.LaneDecayIntervalTicks);
-			return DefenseLanes.ExtraPermille(lanes.Total(), Info.LaneBaseBumpPermille, Info.LaneMaxExtraPermille);
-		}
-
-		IEnumerable<DefenseCoveragePlanner> AlliedLanePlanners()
-		{
-			if (!LaneTeams.TryGetValue(world, out var team))
-				yield break;
-
-			foreach (var p in team)
-				if (p != this && p.lanes != null && p.player != player && player.IsAlliedWith(p.player) && p.LanesArmed)
-					yield return p;
-		}
-
-		void IBotRespondToAttack.RespondToAttack(IBot bot, Actor self, AttackInfo e)
-		{
-			if (!Info.LaneDefences || !LanesArmed)
-				return;
-
-			var attacker = e.Attacker;
-			if (attacker == null || attacker.Disposed || !attacker.IsInWorld || self.Owner != player || !self.IsInWorld
-				|| e.Damage.Value <= 0 || player.RelationshipWith(attacker.Owner) != PlayerRelationship.Enemy
-				|| !self.Info.HasTraitInfo<BuildingInfo>() || !attacker.CanBeViewedByPlayer(player)) // observed attackers only
-				return;
-
-			if (lanes == null)
-			{
-				lanes = new DefenseLanes(Info.LaneBuckets);
-				LaneTeams.GetOrCreateValue(world).Add(this);
-			}
-
-			var tick = world.WorldTick;
-			lanes.Decay(tick, Info.LaneDecayPermille, Info.LaneDecayIntervalTicks);
-			var offset = world.Map.CellContaining(attacker.CenterPosition) - player.HomeLocation;
-			lanes.Hit(DefenseLanes.Bucket(offset.X, offset.Y, lanes.Buckets), tick, e.Damage.Value,
-				Info.LaneGainPerAttack, Info.LaneGainPerStrength, Info.LaneAttackWindowTicks, Info.LaneMaxExtraPermille);
-		}
-
-		int IBotDefenceLaneBudget.ExtraDefencePermille
-		{
-			get
-			{
-				if (!Info.LaneDefences || !LanesArmed)
-					return 0;
-
-				var own = OwnLaneExtra();
-				if (!LaneTeamArmed)
-					return own;
-
-				var ally = 0;
-				foreach (var p in AlliedLanePlanners())
-					ally = Math.Max(ally, p.OwnLaneExtra());
-
-				return DefenseLanes.TeamExtra(own, ally, Info.LaneAllySharePercent, Info.LaneMaxExtraPermille);
-			}
-		}
 
 		// --- world-free helpers (tested) ---
 
@@ -505,64 +423,24 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var threat = ThreatCell();
 			var threatWeight = Info.ThreatWeight;
 
-			// DEF-LANES-01 (layer 2): while a lane holds weight, its share of the placements goes to the base edge on the heaviest lane.
-			var lane = -1;
-			var laneHot = false;
-			DefenseCoveragePlanner laneAlly = null;
-			if (Info.LaneDefences && LanesArmed)
+			// DEF-LANES-01 (layer 2): while a lane of ours or of an ally holds weight, its share of the placements goes to the edge of that base
+			// on the heaviest lane (DefenseCoveragePlanner.Lanes.cs).
+			var lane = PickLane(out var laneAlly, out var laneHot);
+			if (lane >= 0)
 			{
-				var ownWeight = 0;
-				if (lanes != null)
+				if (laneAlly != null)
 				{
-					lanes.Decay(world.WorldTick, Info.LaneDecayPermille, Info.LaneDecayIntervalTicks);
-					lane = lanes.Heaviest();
-					ownWeight = lane >= 0 ? lanes.Weight(lane) : 0;
+					baseCenter = new CPos(laneAlly.HomeX, laneAlly.HomeY);
+					cells = world.Map.FindTilesInAnnulus(baseCenter, minRadius, maxRadius).ToArray();
+					stride = Math.Max(1, (cells.Length + Info.MaxCandidates - 1) / Math.Max(1, Info.MaxCandidates));
 				}
 
-				// P2: an ally's lane that outweighs our own (after the ally share) takes the placement, at the ally's base.
-				if (!skipAllyLane && LaneTeamArmed)
-				{
-					var allyWeight = 0;
-					var allyLane = -1;
-					foreach (var p in AlliedLanePlanners())
-					{
-						p.lanes.Decay(world.WorldTick, p.Info.LaneDecayPermille, p.Info.LaneDecayIntervalTicks);
-						var h = p.lanes.Heaviest();
-						if (h >= 0 && p.lanes.Weight(h) > allyWeight)
-						{
-							allyWeight = p.lanes.Weight(h);
-							allyLane = h;
-							laneAlly = p;
-						}
-					}
-
-					if (laneAlly != null && DefenseLanes.AllyLaneWins(ownWeight, allyWeight, Info.LaneAllySharePercent))
-						lane = allyLane;
-					else
-						laneAlly = null;
-				}
-
-				laneHot = lane >= 0;
-				if (laneHot && DefenseLanes.LaneTurn(lanePlaced, coveragePlaced, Info.LaneSharePercent))
-				{
-					if (laneAlly != null)
-					{
-						baseCenter = laneAlly.player.HomeLocation;
-						cells = world.Map.FindTilesInAnnulus(baseCenter, minRadius, maxRadius).ToArray();
-						stride = Math.Max(1, (cells.Length + Info.MaxCandidates - 1) / Math.Max(1, Info.MaxCandidates));
-					}
-
-					var (dx, dy) = DefenseLanes.Direction(lane, (laneAlly ?? this).lanes.Buckets, Math.Max(1, maxRadius));
-					threat = baseCenter + new CVec(dx, dy);
-					threatWeight = Info.LaneThreatWeight;
-					wantPerimeter = true;
-				}
-				else
-				{
-					lane = -1;
-					laneAlly = null;
-				}
+				var (dx, dy) = DefenseLanes.Direction(lane, (laneAlly?.Lanes ?? lanes).Buckets, Math.Max(1, maxRadius));
+				threat = baseCenter + new CVec(dx, dy);
+				threatWeight = Info.LaneThreatWeight;
+				wantPerimeter = true;
 			}
+
 			CPos? best = null;
 			var bestScore = int.MinValue;
 			int bestNew = 0, bestEdge = 0, bestThreat = 0;
@@ -614,15 +492,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			if (lane >= 0)
-				lanePlaced++;
+				laneSplit.NotePlacement(true);
 			else if (laneHot)
-				coveragePlaced++;
+				laneSplit.NotePlacement(false);
 
 #if CAMEO_DEV_LOGGING
 			if (lane >= 0)
-				Log.Write("debug", $"AI ({player.ClientIndex}): DEF-LANES lane {lane}/{(laneAlly ?? this).lanes.Buckets} weight {(laneAlly ?? this).lanes.Weight(lane)} " +
-					$"total {(laneAlly ?? this).lanes.Total()} {(laneAlly != null ? "at ally " + laneAlly.player.ClientIndex : "own")} " +
-					$"(lane placed {lanePlaced}, coverage placed {coveragePlaced}) at tick {world.WorldTick}");
+				Log.Write("debug", $"AI ({player.ClientIndex}): DEF-LANES lane {lane} weight {(laneAlly?.Lanes ?? lanes).Weight(lane)} " +
+					$"total {(laneAlly?.Lanes ?? lanes).Total()} {(laneAlly != null ? "at ally " + laneAlly.Key : "own")} " +
+					$"(episode: lane placed {laneSplit.LanePlaced}, coverage placed {laneSplit.CoveragePlaced}) at tick {world.WorldTick}");
 			Log.Write("debug", $"AI ({player.ClientIndex}): DEFENSE PLACE {defense.Name} at {best.Value}: covers {bestNew} new base cells " +
 				$"(roles {string.Join("+", roles)}), {(wantPerimeter ? "perimeter" : "interior")} ({perimeter} out / {interior} in), edge {bestEdge}, threat {bestThreat}" +
 				(bestNew == 0 ? " [no new coverage: redundant edge/threat cell]" : "") + $" at tick {world.WorldTick}");

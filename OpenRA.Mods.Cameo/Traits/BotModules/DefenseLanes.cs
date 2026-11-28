@@ -9,6 +9,7 @@
 #endregion
 
 using System;
+using System.Text.Json;
 
 namespace OpenRA.Mods.Cameo.Traits.BotModules
 {
@@ -50,6 +51,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var turn = Math.Atan2(dy, dx) / (2 * Math.PI); // -0.5 .. 0.5
 			var b = (int)Math.Floor(turn * buckets + 0.5);
 			return ((b % buckets) + buckets) % buckets;
+		}
+
+		/// <summary>
+		/// The lane of one hit. Observed only: the bearing of the attacker when the bot can see it, else the bearing of the building that was hit
+		/// (offsets from the base centre). -1 when neither gives a bearing (an unseen attacker hitting the building on the base centre).
+		/// </summary>
+		public static int OriginBucket(bool attackerSeen, int attackerDx, int attackerDy, int buildingDx, int buildingDy, int buckets)
+		{
+			if (attackerSeen)
+				return Bucket(attackerDx, attackerDy, buckets);
+
+			return buildingDx == 0 && buildingDy == 0 ? -1 : Bucket(buildingDx, buildingDy, buckets);
 		}
 
 		/// <summary>The offset, <paramref name="radius"/> cells long, of the centre bearing of a bucket.</summary>
@@ -128,6 +141,31 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return (int)Math.Min(int.MaxValue, t);
 		}
 
+		/// <summary>The whole memory with the split of its episode, as plain values for a save.</summary>
+		public SavedLanes Save(LaneSplit split)
+		{
+			return new SavedLanes(SavedLanes.CurrentVersion, (int[])weight.Clone(), (int[])lastAttackTick.Clone(), (int[])damageCarry.Clone(),
+				lastDecayTick, split.Hot, split.LanePlaced, split.CoveragePlaced);
+		}
+
+		/// <summary>Restores a save made with the same bucket count. False (and nothing changed) for any other shape.</summary>
+		public bool Restore(SavedLanes state, LaneSplit split)
+		{
+			if (state == null || state.Weight.Length != weight.Length || state.LastAttack.Length != weight.Length || state.Carry.Length != weight.Length)
+				return false;
+
+			for (var i = 0; i < weight.Length; i++)
+			{
+				weight[i] = Math.Max(0, state.Weight[i]);
+				lastAttackTick[i] = state.LastAttack[i];
+				damageCarry[i] = Math.Clamp(state.Carry[i], 0, DamagePerStep - 1);
+			}
+
+			lastDecayTick = state.LastDecay;
+			split.Restore(state.Hot, state.LanePlaced, state.CoveragePlaced);
+			return true;
+		}
+
 		/// <summary>The extra defence budget in permille: 0 with no lane weight, else the base bump plus the summed weight, capped.</summary>
 		public static int ExtraPermille(int totalWeight, int baseBump, int maxExtra)
 		{
@@ -153,6 +191,78 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public static bool LaneTurn(int lanePlaced, int coveragePlaced, int laneSharePercent)
 		{
 			return lanePlaced * 100 < laneSharePercent * (lanePlaced + coveragePlaced + 1);
+		}
+	}
+
+	/// <summary>
+	/// DEF-LANES-01: the coverage/lane split of one episode. An episode starts when a lane turns hot after a quiet time; its counts start at 0,
+	/// so an old episode's placements never owe or pre-pay the split of a new one. World-free (tested).
+	/// </summary>
+	public sealed class LaneSplit
+	{
+		bool hot;
+
+		public bool Hot => hot;
+		public int LanePlaced { get; private set; }
+		public int CoveragePlaced { get; private set; }
+
+		/// <summary>Reports whether any lane holds weight now; cold to hot starts a new episode.</summary>
+		public void Observe(bool nowHot)
+		{
+			if (nowHot && !hot)
+			{
+				LanePlaced = 0;
+				CoveragePlaced = 0;
+			}
+
+			hot = nowHot;
+		}
+
+		public bool LaneTurn(int laneSharePercent) => DefenseLanes.LaneTurn(LanePlaced, CoveragePlaced, laneSharePercent);
+
+		public void Restore(bool wasHot, int lanePlaced, int coveragePlaced)
+		{
+			hot = wasHot;
+			LanePlaced = Math.Max(0, lanePlaced);
+			CoveragePlaced = Math.Max(0, coveragePlaced);
+		}
+
+		public void NotePlacement(bool onLane)
+		{
+			if (onLane)
+				LanePlaced++;
+			else
+				CoveragePlaced++;
+		}
+	}
+
+	/// <summary>One bot's lane memory in a save game. Plain ints so the record round-trips through JSON.</summary>
+	public sealed record SavedLanes(int Version, int[] Weight, int[] LastAttack, int[] Carry, int LastDecay, bool Hot, int LanePlaced, int CoveragePlaced)
+	{
+		public const int CurrentVersion = 1;
+		public const string SaveKey = "DefenseLanesV1";
+
+		/// <summary>The save text: base64 of the JSON.</summary>
+		public static string Encode(SavedLanes state) => Convert.ToBase64String(JsonSerializer.SerializeToUtf8Bytes(state));
+
+		/// <summary>A damaged, foreign or other-version text decodes to null, never throws.</summary>
+		public static SavedLanes Decode(string text)
+		{
+			if (string.IsNullOrEmpty(text))
+				return null;
+
+			try
+			{
+				var state = JsonSerializer.Deserialize<SavedLanes>(Convert.FromBase64String(text));
+				if (state == null || state.Version != CurrentVersion || state.Weight == null || state.LastAttack == null || state.Carry == null)
+					return null;
+
+				return state;
+			}
+			catch (Exception e) when (e is FormatException or JsonException or NotSupportedException)
+			{
+				return null;
+			}
 		}
 	}
 }
