@@ -4711,6 +4711,11 @@ Player:
 		# uncovered front instead of the randomly-picked yard — towers follow expansions.
 		# Switch group Z_def3_remote_outpost_coverage; off on master until the increment A/B.
 		CoverRemoteOutposts: false
+		# DEF-PLACE-RETRY-01 (DEF-LANES P3a): the planner only chooses among cells that also pass the base builder's reservation mask, and a
+		# cell that was chosen and not built on is skipped for a while (250 ticks, doubling per repeat; prior of the learnable
+		# def_place.reject_base). Row def_place_retry.
+		PlaceRetryMemory: true
+		PlaceRejectBaseTicks: 250
 	# BP-1 (DESIGN 19.15, BP-SPEC rev 2): the front/back placement owner. One radar per defended front,
 	# strictly behind that front's defence line and spread for NEW approach coverage (union scoring, overlap
 	# is waste); ground/naval production at the front (air-only producers exempt); tech/superweapon/passive-
