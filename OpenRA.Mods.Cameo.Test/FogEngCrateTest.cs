@@ -204,6 +204,27 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TheRememberArmIsTheGenericEngineerBlockOnly()
+		{
+			var yaml = RepoFile(YamlPath);
+			Assert.That(yaml.Split("FogRemember: true").Length - 1, Is.EqualTo(1), "the engineer block only");
+
+			var start = yaml.IndexOf("\n\tEngineerBotModule:", StringComparison.Ordinal);
+			Assert.That(start, Is.GreaterThan(0));
+			var next = System.Text.RegularExpressions.Regex.Match(yaml.Substring(start + 2), "\n\t[^\t\n]");
+			var block = yaml.Substring(start, next.Success ? next.Index + 2 : yaml.Length - start);
+			Assert.That(block, Does.Contain("RequiresCondition: genericbot"));
+			Assert.That(block, Does.Contain("\t\tFogEngCrate: true\n\t\t# FOG-REMEMBER-01"));
+			Assert.That(block, Does.Contain("\t\tFogRemember: true"));
+
+			var classicStart = yaml.IndexOf("\tCaptureManagerBotModuleCA:", StringComparison.Ordinal);
+			Assert.That(classicStart, Is.GreaterThan(0));
+			var classicNext = System.Text.RegularExpressions.Regex.Match(yaml.Substring(classicStart + 1), "\n\t[^\t\n]");
+			var classicBlock = yaml.Substring(classicStart, classicNext.Success ? classicNext.Index + 1 : yaml.Length - classicStart);
+			Assert.That(classicBlock, Does.Not.Contain("FogRemember"));
+		}
+
+		[Test]
 		public void EngineerGatesEveryOmniscientScanBehindTheSwitch()
 		{
 			var engineer = RepoFile(EngineerPath);

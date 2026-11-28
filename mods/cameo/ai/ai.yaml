@@ -4805,6 +4805,8 @@ Player:
 		CheckRepairTargetsForVisibility: false
 		# FOG-ENGCRATE-01 (Opus 11-27): genericbot engineers take capture and bridge-hut targets seen now or remembered; row fog_engcrate.
 		FogEngCrate: true
+		# FOG-REMEMBER-01 (Orchestrator GO 11-28): genericbot engineers judge an unseen candidate or defender by its frozen record; row fog_remember. Classic untouched.
+		FogRemember: true
 	# Try to get a MCV from a crate if we don't have one
 	CratePickupBotModule:
 		RequiresCondition: classicbot || genericbot # && nobase no conyard condition defined in player.yaml
