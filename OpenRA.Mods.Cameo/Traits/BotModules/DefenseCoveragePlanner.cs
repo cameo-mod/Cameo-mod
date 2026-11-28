@@ -56,10 +56,25 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Search annulus (cells) when no base builder is found.")]
 		public readonly int MaximumRadius = 20;
 
+		[Desc("DEF-PLACE-RETRY-01 (row def_place_retry): remember defence cells that were chosen and then not built on, skip them for a while,",
+			"and only choose among cells that also pass the base builder's reservation mask. False = no memory, no mask filter.")]
+		public readonly bool PlaceRetryMemory = false;
+
+		[Desc("DEF-PLACE-RETRY-01: a queue that asks again for the same type sooner than this many ticks after its place order is waiting for",
+			"that order, not rejected.")]
+		public readonly int PlaceRetryGraceTicks = 5;
+
+		[Desc("DEF-PLACE-RETRY-01 prior (learnable def_place.reject_base): ticks a cell is skipped after its first rejection; the time doubles",
+			"with every further rejection of the same cell.")]
+		public readonly int PlaceRejectBaseTicks = 250;
+
+		[Desc("DEF-PLACE-RETRY-01: cap of the skip time, and how long a cell must stay quiet before its rejections are forgotten.")]
+		public readonly int PlaceRejectMaxTicks = 6000;
+
 		public override object Create(ActorInitializer init) { return new DefenseCoveragePlanner(init.Self, this); }
 	}
 
-	public class DefenseCoveragePlanner : ConditionalTrait<DefenseCoveragePlannerInfo>, IBotDefensePlacementAdvisor, INotifyActorDisposing
+	public partial class DefenseCoveragePlanner : ConditionalTrait<DefenseCoveragePlannerInfo>, IBotDefensePlacementAdvisor, INotifyActorDisposing
 	{
 		// Coverage dominates (maintainer: "the whole base should always be covered"): one newly covered base cell (1000)
 		// outweighs the full edge + enemy-side bonus (EdgeWeight 30 + ThreatWeight 40, x100 = 7000) only from 8 cells on,
@@ -87,7 +102,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		void Added(Actor a)
 		{
 			if (a.Owner == player && a.Info.HasTraitInfo<BuildingInfo>())
+			{
 				buildings.Add(a);
+				ConfirmPlaced(a); // DEF-PLACE-RETRY-01: a confirmed placement (no-op while the switch is off)
+			}
 		}
 
 		void Removed(Actor a) { buildings.Remove(a); }
@@ -286,6 +304,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		CPos? IBotDefensePlacementAdvisor.ChooseDefenseCell(ActorInfo defense, bool antiAir, CPos baseCenter, Func<CPos, bool> canPlace)
 		{
+			canPlace = WithoutRejected(defense, canPlace); // DEF-PLACE-RETRY-01: the same delegate while the switch is off or nothing is rejected
 			var range = MaxRangeCells(defense);
 			if (range <= 0)
 				return null;
