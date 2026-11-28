@@ -4637,6 +4637,11 @@ Player:
 		# Greedy expansion: while a far field is free, request construction-MCV production ourselves
 		# (engine module alone waits for its 4000-cash trigger first — too late to be a menace).
 		DriveMcvRequests: true
+		# TEAM-EXPAND P1 ARM (wave M, 11-28): public site atlas, depletion forecast, team claim registry and capacity floor (this block is genericbot only; classic has no planner block). Ablation ids team_expand_atlas, team_expand_forecast, team_expand_claim, team_expand_capacity_floor. The forecast needs the atlas; the claim needs the atlas and DriveMcvSite above.
+		TeamExpandAtlas: true
+		TeamExpandForecast: true
+		TeamExpandClaim: true
+		TeamExpandCapacityFloor: true
 		# UT-4: TechRush<->Expansion axis scales the MCV appetite (switch group U). Off until the
 		# increment A/B arms it.
 		UseUtilityExpansionAppetite: false
