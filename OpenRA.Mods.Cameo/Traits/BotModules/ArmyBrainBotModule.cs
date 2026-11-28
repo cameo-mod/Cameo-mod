@@ -53,8 +53,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Prior (learnable army.range.free_fire_cap_ticks): the longest unanswered fire a range advantage is counted for.")]
 		public readonly int FreeFireCapTicks = 250;
 
+		[Desc("Prior (learnable army.unanswered_ticks): how long a type the other side cannot hit at all (aircraft over an army without anti-air)",
+			"fires on what is left of it after the fight.")]
+		public readonly int UnansweredTicks = 250;
+
 		[Desc("Perf bound, not a behaviour knob: only the most valuable enemy types and own types, this many each, enter the fight model.")]
 		public readonly int MaxTypesPerSide = 12;
+
+		[Desc("Perf bound, not a behaviour knob: the most gains computed in one roll call. Until a type's gain of this interval is computed, its",
+			"gain of the interval before is used; a pool with a type that has no gain at all yet stays neutral (100) for that call.")]
+		public readonly int MaxNewGainsPerCall = 6;
 
 		[Desc("Priors (learnables army.slot.front_q / back_q / fast_q): the percentiles of HP per cost, range and speed over all unit types of the",
 			"ruleset that cut the formation slots. S1 only reports the slots (DEV).")]
@@ -80,6 +88,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly List<(BotUnitProfile Unit, double Count)> enemy = [];
 		readonly List<(BotUnitProfile Unit, double Count)> own = [];
 		readonly Dictionary<string, double> gainByType = new(StringComparer.Ordinal);
+		readonly Dictionary<string, double> lastGainByType = new(StringComparer.Ordinal);
 		readonly List<double> gains = [];
 		ArmyPairCache pairs;
 		double baseNet;
@@ -96,6 +105,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotFormulaCounter.FormulaCounterPercents(IReadOnlyList<ActorInfo> pool, int[] percents)
 		{
+#if CAMEO_DEV_LOGGING
+			// DEV proof of the perf budget (no call of 5 ms or more): every call of 1 ms or more is logged with what it computed.
+			var started = System.Diagnostics.Stopwatch.GetTimestamp();
+			var cachedBefore = gainByType.Count;
+			var refreshedAt = builtTick;
+			Compute(pool, percents);
+			var ms = System.Diagnostics.Stopwatch.GetElapsedTime(started).TotalMilliseconds;
+			if (ms >= 1.0)
+				Log.Write("debug", $"AI {player.InternalName}: ARMY-BRAIN S1 call {ms:0.00} ms at tick {world.WorldTick}: pool {pool.Count}, " +
+					$"refresh {(refreshedAt != builtTick ? "yes" : "no")}, new gains {gainByType.Count - (refreshedAt != builtTick ? 0 : cachedBefore)}, " +
+					$"enemy types {enemy.Count}, own types {own.Count}");
+		}
+
+		void Compute(IReadOnlyList<ActorInfo> pool, int[] percents)
+		{
+#endif
 			Refresh();
 			if (enemy.Count == 0)
 			{
@@ -105,17 +130,35 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 			}
 
+			// At most MaxNewGainsPerCall model runs per call, so a refresh is spread over the next rolls instead of one burst.
 			gains.Clear();
+			var budget = Math.Max(1, Info.MaxNewGainsPerCall);
+			var unknown = false;
 			foreach (var candidate in pool)
 			{
 				if (!gainByType.TryGetValue(candidate.Name, out var gain))
 				{
-					gain = ArmyFightModel.Gain(BotUnitProfiles.Get(world.Map.Rules, candidate), own, enemy, baseNet,
-						Info.StepCost, Info.StepMaxCount, Info.FreeFireCapTicks, pairs);
-					gainByType[candidate.Name] = gain;
+					if (budget > 0)
+					{
+						budget--;
+						gain = ArmyFightModel.Gain(BotUnitProfiles.Get(world.Map.Rules, candidate), own, enemy, baseNet,
+							Info.StepCost, Info.StepMaxCount, Info.FreeFireCapTicks, pairs, Info.UnansweredTicks);
+						gainByType[candidate.Name] = gain;
+					}
+					else if (!lastGainByType.TryGetValue(candidate.Name, out gain))
+						unknown = true;
 				}
 
 				gains.Add(gain);
+			}
+
+			if (unknown)
+			{
+				// A rank over a half-known pool would be wrong: neutral now, the next calls fill the rest.
+				for (var i = 0; i < pool.Count; i++)
+					percents[i] = 100;
+
+				return;
 			}
 
 			ArmyFightModel.Multipliers(gains, Info.FormulaGainPercent, Info.FormulaMinPercent, Info.FormulaMaxPercent, Info.FormulaBandPermille, percents);
@@ -141,6 +184,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			var rules = world.Map.Rules;
+			foreach (var (type, gain) in gainByType)
+				lastGainByType[type] = gain;
+
 			gainByType.Clear();
 			enemy.Clear();
 			own.Clear();
@@ -171,7 +217,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			Trim(enemy, Info.MaxTypesPerSide);
 			Trim(own, Info.MaxTypesPerSide);
-			baseNet = enemy.Count == 0 ? 0 : ArmyFightModel.Evaluate(own, enemy, Info.FreeFireCapTicks, pairs).Net;
+			baseNet = enemy.Count == 0 ? 0 : ArmyFightModel.Evaluate(own, enemy, Info.FreeFireCapTicks, pairs, Info.UnansweredTicks).Net;
 #if CAMEO_DEV_LOGGING
 			Log.Write("debug", $"AI {player.InternalName}: ARMY-BRAIN S1 refresh at tick {tick}: enemy types {enemy.Count} " +
 				$"(value {enemy.Sum(e => e.Count * e.Unit.Cost):0}), own types {own.Count} (value {own.Sum(o => o.Count * o.Unit.Cost):0}), net {baseNet:0}");

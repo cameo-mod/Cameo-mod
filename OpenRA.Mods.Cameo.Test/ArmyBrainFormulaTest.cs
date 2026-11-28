@@ -86,21 +86,55 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void WhatIsLeftUnderAnAttackerItCannotHitIsLost()
+		public void UnansweredFireScalesWithTheAttackerThatCannotBeHit()
 		{
-			// The tanks beat the enemy tanks, but the armed helicopters they cannot shoot at finish them.
 			var tank = Unit("tank", 800, 400, 5, 5, 64);
 			var enemyTank = Unit("etank", 800, 400, 5, 5, 64);
 			var gunship = Unit("heli", 1200, 200, 6, 5, 120, Ground, Air, true);
-			var outcome = ArmyFightModel.Evaluate(Side((tank, 6)), Side((enemyTank, 2), (gunship, 1)), 0);
-			Assert.That(outcome.Destroyed, Is.EqualTo(2 * 800).Within(1e-6), "the helicopter survives");
-			Assert.That(outcome.Lost, Is.EqualTo(6 * 800).Within(1e-6));
 
-			// An anti-air escort that can hit the helicopter changes that.
+			// One remembered helicopter among enemy tanks costs a few tanks, not the army (Sonnet FIX on the first draft).
+			var alone = ArmyFightModel.Evaluate(Side((tank, 30)), Side((enemyTank, 10)), 0, null, 250);
+			var one = ArmyFightModel.Evaluate(Side((tank, 30)), Side((enemyTank, 10), (gunship, 1)), 0, null, 250);
+			Assert.That(one.Destroyed, Is.EqualTo(10 * 800).Within(1e-6), "the helicopter survives");
+			Assert.That(one.Lost - alone.Lost, Is.EqualTo(6 * 250 / 400.0 * 800).Within(1e-6), "1 x 6 damage x 250 ticks = 3.75 tanks");
+			Assert.That(one.Lost, Is.LessThan(30 * 800 / 3.0), "most tanks survive");
+
+			// Thirty helicopters over ten tanks: everything is lost.
+			var many = ArmyFightModel.Evaluate(Side((tank, 10)), Side((gunship, 30)), 0, null, 250);
+			Assert.That(many.Lost, Is.EqualTo(10 * 800).Within(1e-6));
+			Assert.That(many.Destroyed, Is.EqualTo(0));
+
+			// Horizon 0 switches the phase off; a negative horizon is the free-fire cap.
+			var none = ArmyFightModel.Evaluate(Side((tank, 30)), Side((enemyTank, 10), (gunship, 1)), 0, null, 0);
+			Assert.That(none.Lost, Is.EqualTo(alone.Lost).Within(1e-6));
+		}
+
+		[Test]
+		public void AnEscortThatCanHitTheAttackerBringsItIntoTheFight()
+		{
+			var tank = Unit("tank", 800, 400, 5, 5, 64);
+			var enemyTank = Unit("etank", 800, 400, 5, 5, 64);
+			var gunship = Unit("heli", 1200, 200, 6, 5, 120, Ground, Air, true);
 			var antiAir = Unit("aa", 800, 300, 6, 6, 60, Air);
-			var escorted = ArmyFightModel.Evaluate(Side((tank, 6), (antiAir, 2)), Side((enemyTank, 2), (gunship, 1)), 0);
+			var escorted = ArmyFightModel.Evaluate(Side((tank, 6), (antiAir, 2)), Side((enemyTank, 2), (gunship, 1)), 0, null, 250);
 			Assert.That(escorted.Destroyed, Is.EqualTo(2 * 800 + 1200).Within(1e-6));
-			Assert.That(escorted.Lost, Is.LessThan(6 * 800));
+		}
+
+		[Test]
+		public void TheGainOfAntiAirRisesWithTheAircraftSeen()
+		{
+			var tank = Unit("tank", 800, 400, 5, 5, 64);
+			var gunship = Unit("heli", 1200, 200, 6, 5, 120, Ground, Air, true);
+			var antiAir = Unit("aa", 800, 300, 6, 6, 60, Air);
+			var own = Side((tank, 10));
+			double GainAgainst(int helicopters)
+			{
+				var enemy = Side((gunship, helicopters));
+				return ArmyFightModel.Gain(antiAir, own, enemy, ArmyFightModel.Evaluate(own, enemy, 0, null, 250).Net, 2000, 8, 0, null, 250);
+			}
+
+			Assert.That(GainAgainst(1), Is.GreaterThan(0));
+			Assert.That(GainAgainst(5), Is.GreaterThan(GainAgainst(1)));
 		}
 
 		[Test]
@@ -272,6 +306,171 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(a.Classify(population[4]), Is.EqualTo(ArmySlot.Fast));
 			Assert.That(a.Classify(population[5]), Is.EqualTo(ArmySlot.Support));
 			Assert.That(a.Classify(population[6]), Is.EqualTo(ArmySlot.Air));
+		}
+
+		sealed class FakeFormula : IBotFormulaCounter
+		{
+			public bool Active;
+			public int Calls;
+			public int[] Result = [];
+
+			public bool IsActive => Active;
+
+			public void FormulaCounterPercents(IReadOnlyList<ActorInfo> pool, int[] percents)
+			{
+				Calls++;
+				for (var i = 0; i < pool.Count; i++)
+					percents[i] = Result[i];
+			}
+		}
+
+		static readonly ActorInfo[] Pool = [new ActorInfo("rifle"), new ActorInfo("rocket"), new ActorInfo("tank"), new ActorInfo("arty")];
+
+		// The classic counter term, as ChooseRollUnit writes it on master.
+		static int[] ClassicCounterPercents(long[] scores, int strength)
+		{
+			var best = scores.Max();
+			return scores.Select(s => UnitRoll.CounterPct(s, best, strength)).ToArray();
+		}
+
+		[Test]
+		public void OffMeansTheClassicCounterTermAndTheSamePicks()
+		{
+			long[] scores = [1200, 0, 5400, 2700];
+			var classic = ClassicCounterPercents(scores, 200);
+			int[] fractions = [40, 20, 30, 10];
+			int[] biases = [100, 150, 100, 80];
+			double[] boosts = [1.0, 1.0, 2.5, 1.0];
+
+			// No provider, an empty list and a provider that is off all resolve to null, and the off provider is never asked.
+			var off = new FakeFormula { Active = false, Result = [1, 1, 1, 1] };
+			Assert.That(FormulaCounters.Active(null), Is.Null);
+			Assert.That(FormulaCounters.Active([]), Is.Null);
+			Assert.That(FormulaCounters.Active([off]), Is.Null);
+
+			var percents = (int[])classic.Clone();
+			FormulaCounters.Apply(FormulaCounters.Active([off]), Pool, percents, _ => false);
+			Assert.That(percents, Is.EqualTo(classic), "counterPcts untouched");
+			Assert.That(off.Calls, Is.EqualTo(0));
+
+			// The same picks over the whole draw range (1001 evenly spaced draws and the last one), floor included.
+			var reference = UnitPickArbiter.Decide(fractions, biases, classic, 5, boosts, w => w, _ => 0);
+			for (var step = 0; step <= 1001; step++)
+			{
+				var d = step > 1000 ? reference.Bound - 1 : (int)((long)reference.Bound * step / 1001);
+				var a = UnitPickArbiter.Decide(fractions, biases, classic, 5, boosts, w => w, _ => d);
+				var b = UnitPickArbiter.Decide(fractions, biases, percents, 5, boosts, w => w, _ => d);
+				Assert.That(b.Pick, Is.EqualTo(a.Pick));
+				Assert.That(b.Units, Is.EqualTo(a.Units));
+				Assert.That(b.Bound, Is.EqualTo(a.Bound));
+			}
+		}
+
+		[Test]
+		public void TheRollHookIsTheOnlyUseAndKeepsTheClassicLines()
+		{
+			// Source pin: the classic counter lines of ChooseRollUnit are still there, the formula is resolved once and applied once, and the
+			// counter profile strength gates both kinds of counter term.
+			var text = System.IO.File.ReadAllText(System.IO.Path.Combine(System.AppContext.BaseDirectory, "source", "mods/CA/Traits/BotModules/UnitBuilderBotModuleCA.cs"));
+			Assert.That(text, Does.Contain("counterPcts[i] = scores == null ? 100 : UnitRoll.CounterPct(scores[i], best, strength[UnitRoll.Counter]);"));
+			Assert.That(text, Does.Contain("var formula = strength[UnitRoll.Counter] > 0 ? FormulaCounters.Active(formulaCounters) : null;"));
+			Assert.That(text, Does.Contain("if (formula == null && strength[UnitRoll.Counter] > 0)"));
+			Assert.That(text, Does.Contain("FormulaCounters.Apply(formula, pool, counterPcts, rollOrdered.Contains);"));
+			Assert.That(text.Split("FormulaCounters.Apply(").Length - 1, Is.EqualTo(1));
+			Assert.That(text.IndexOf("FormulaCounters.Apply(", System.StringComparison.Ordinal),
+				Is.LessThan(text.IndexOf("counterPcts = AffordablePool.Keep(counterPcts, keep, kept);", System.StringComparison.Ordinal)), "before the keep mask");
+		}
+
+		[Test]
+		public void OnReplacesTheCounterTermAndNeverLowersAnUnorderedType()
+		{
+			var on = new FakeFormula { Active = true, Result = [50, 60, 160, 100] };
+			var off = new FakeFormula { Active = false };
+			Assert.That(FormulaCounters.Active([off, on]), Is.SameAs(on), "the first ACTIVE provider");
+
+			var percents = new[] { 300, 100, 100, 250 };
+			var ordered = new HashSet<string> { "rifle", "tank", "arty" };
+			FormulaCounters.Apply(on, Pool, percents, ordered.Contains);
+			Assert.That(percents, Is.EqualTo(new[] { 50, 100, 160, 100 }), "replaced, not multiplied; the never-ordered rocket stays at 100");
+			Assert.That(on.Calls, Is.EqualTo(1));
+		}
+
+		[Test]
+		public void TheFloorKeepsEveryChanceAboveZeroUnderTheLowestMultiplier()
+		{
+			// The lowest multiplier on every other candidate and the highest on one: the arbiter still gives each a share.
+			int[] fractions = [40, 20, 30, 10];
+			int[] biases = [100, 100, 100, 100];
+			double[] boosts = [1.0, 1.0, 1.0, 1.0];
+			var decision = UnitPickArbiter.Decide(fractions, biases, [50, 50, 300, 50], 5, boosts, w => w, _ => 0);
+			Assert.That(decision.Units, Is.All.GreaterThan(0));
+		}
+
+		// Micro-benchmark (Orchestrator 11-28): the cost of the formula counter at the module's bound of 12 types per side. Run by name:
+		//   dotnet test ... --filter "FullyQualifiedName~ArmyBrainFormulaTest.Benchmark"
+		// It prints the numbers and fails only on the hard gate (the median of one call under 5 ms).
+		[Test]
+		public void BenchmarkOfOneRefreshAtTwelveTypesPerSide()
+		{
+			const int Types = 12, Candidates = 30, PerCall = 6, Bots = 12, Interval = 250, Cap = 250;
+			var versus = new Dictionary<string, int> { { "None", 100 }, { "Light", 70 }, { "Heavy", 35 } };
+			BotUnitProfile Make(string name, int k, bool air)
+			{
+				var hits = k % 4 == 0 ? new BitSet<TargetableType>("Ground", "Air") : k % 7 == 0 ? Air : Ground;
+				var weapons = new[]
+				{
+					new BotWeaponProfile(2 + k % 5, WDist.FromCells(4 + k % 6), hits, None, versus),
+					new BotWeaponProfile(1 + k % 3, WDist.FromCells(3 + k % 4), Ground, None, versus),
+				};
+				return new BotUnitProfile(name, 300 + 150 * (k % 11), 150 + 90 * (k % 9), k % 3 == 0 ? "Heavy" : "Light", k % 5 == 0 ? 0 : 40 + 10 * (k % 8),
+					air, false, air ? Air : Ground, weapons);
+			}
+
+			var ownTypes = Enumerable.Range(0, Types).Select(k => Make("own" + k, k + 1, k % 6 == 5)).ToArray();
+			var enemyTypes = Enumerable.Range(0, Types).Select(k => Make("enemy" + k, k + 3, k % 5 == 4)).ToArray();
+			var candidates = ownTypes.Concat(Enumerable.Range(0, Candidates - Types).Select(k => Make("cand" + k, k + 20, k % 6 == 5))).ToArray();
+			var own = ownTypes.Select((u, k) => (u, (double)(2 + k % 4))).ToList();
+			var enemy = enemyTypes.Select((u, k) => (u, 1.5 + k % 5)).ToList();
+			var percents = new int[Candidates];
+			var gains = new double[Candidates];
+
+			// One roll call right after a refresh: the base fight plus `newGains` model runs (the module's bound is 6 per call), then the rank.
+			double Call(ArmyPairCache cache, int newGains)
+			{
+				var watch = System.Diagnostics.Stopwatch.StartNew();
+				var baseNet = ArmyFightModel.Evaluate(own, enemy, Cap, cache, Cap).Net;
+				for (var c = 0; c < newGains; c++)
+					gains[c] = ArmyFightModel.Gain(candidates[c], own, enemy, baseNet, 2000, 8, Cap, cache, Cap);
+
+				ArmyFightModel.Multipliers(gains, 60, 50, 300, 250, percents);
+				watch.Stop();
+				return watch.Elapsed.TotalMilliseconds;
+			}
+
+			double[] Sorted(int n, System.Func<double> run) => Enumerable.Range(0, n).Select(_ => run()).OrderBy(x => x).ToArray();
+
+			// Warm the JIT. cold = a new pair cache (the first calls of a game), warm = every later call.
+			for (var i = 0; i < 30; i++)
+				Call(new ArmyPairCache(Cap), Candidates);
+
+			var shared = new ArmyPairCache(Cap);
+			Call(shared, Candidates);
+			var warmCall = Sorted(300, () => Call(shared, PerCall));
+			var coldCall = Sorted(100, () => Call(new ArmyPairCache(Cap), PerCall));
+			var warmAll = Sorted(200, () => Call(shared, Candidates));
+			var coldAll = Sorted(50, () => Call(new ArmyPairCache(Cap), Candidates));
+
+			static string Line(string name, double[] x) => $"  {name}: median {x[x.Length / 2]:0.000} ms, p99 {x[x.Length * 99 / 100]:0.000} ms, max {x[^1]:0.000} ms (n={x.Length})";
+			TestContext.Out.WriteLine($"ARMY-BRAIN S1 benchmark: {Types} types per side, synthetic two-weapon profiles.");
+			TestContext.Out.WriteLine(Line($"one call, {PerCall} new gains, warm pair cache", warmCall));
+			TestContext.Out.WriteLine(Line($"one call, {PerCall} new gains, COLD pair cache", coldCall));
+			TestContext.Out.WriteLine(Line($"all {Candidates} gains in one call, warm (not possible in the module: bound {PerCall})", warmAll));
+			TestContext.Out.WriteLine(Line($"all {Candidates} gains in one call, COLD (not possible in the module)", coldAll));
+			var perInterval = warmAll[warmAll.Length / 2];
+			TestContext.Out.WriteLine($"  mean per tick at {Bots} bots, all {Candidates} gains once per bot per {Interval} ticks: {perInterval * Bots / Interval:0.0000} ms");
+			Assert.That(percents.Min(), Is.GreaterThan(0));
+			Assert.That(warmCall[warmCall.Length / 2], Is.LessThan(5.0), "the 5 ms spike gate for one call (median; the machine may be busy)");
+			Assert.That(coldCall[coldCall.Length / 2], Is.LessThan(5.0), "the 5 ms spike gate for one cold call (median)");
 		}
 
 		[Test]

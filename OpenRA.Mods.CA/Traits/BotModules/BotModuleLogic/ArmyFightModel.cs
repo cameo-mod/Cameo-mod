@@ -19,7 +19,8 @@ namespace OpenRA.Mods.CA.Traits
 	/// BotCombatPredictor (which is not changed) and adds two terms:
 	/// 1. can-target: a unit spreads its damage only over the enemy types it may hit, and deals none when it can hit nothing;
 	/// 2. range: a unit that outranges a target fires unanswered while the target closes the gap (capped; a target that cannot move gives
-	///    the cap).
+	///    the cap);
+	/// 3. a type the other side cannot hit at all fires on the survivors for a fixed time, in proportion to its count and damage.
 	/// Pure and bot-side (unsynced), from type profiles only. No learning.
 	/// </summary>
 	/// <summary>
@@ -90,11 +91,16 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>
-		/// One fight of <paramref name="own"/> against <paramref name="enemy"/>: a free-fire phase from the range advantages, then the
-		/// square law on what is left. Counts may be fractional (an enemy mix is given by value).
+		/// One fight of <paramref name="own"/> against <paramref name="enemy"/>, in three phases. Counts may be fractional (an enemy mix is
+		/// given by value).
+		/// 1. Free fire from the range advantages (capped by <paramref name="freeFireCapTicks"/>).
+		/// 2. The square law between the units that can be hit by the other side.
+		/// 3. Unanswered fire: a type the other side cannot hit at all fires on what is left for <paramref name="unansweredTicks"/>
+		///    (negative = the free-fire cap). It scales with the count and the damage of that type: one helicopter costs a tank army a
+		///    little, thirty cost it everything.
 		/// </summary>
 		public static Outcome Evaluate(IReadOnlyList<(BotUnitProfile Unit, double Count)> own, IReadOnlyList<(BotUnitProfile Unit, double Count)> enemy,
-			int freeFireCapTicks, ArmyPairCache cache = null)
+			int freeFireCapTicks, ArmyPairCache cache = null, int unansweredTicks = -1)
 		{
 			if (own.Count == 0 || enemy.Count == 0)
 				return default;
@@ -106,20 +112,20 @@ namespace OpenRA.Mods.CA.Traits
 			for (var j = 0; j < enemy.Count; j++)
 				enemyLeft[j] = Math.Max(0, enemy[j].Count);
 
-			// Phase 1: unanswered fire. Both sides fire from the starting counts.
+			// Phase 1: free fire. Both sides fire from the starting counts.
 			var enemyHit = new double[enemy.Count];
 			var ownHit = new double[own.Count];
-			Spread(own, ownLeft, enemy, enemyLeft, freeFireCapTicks, enemyHit, cache);
-			Spread(enemy, enemyLeft, own, ownLeft, freeFireCapTicks, ownHit, cache);
+			Spread(own, ownLeft, enemy, enemyLeft, null, true, -1, freeFireCapTicks, enemyHit, cache);
+			Spread(enemy, enemyLeft, own, ownLeft, null, true, -1, freeFireCapTicks, ownHit, cache);
 			Remove(enemy, enemyLeft, enemyHit);
 			Remove(own, ownLeft, ownHit);
 
 			// Phase 2: the square law on aggregates, each side's damage spread over what it can hit. Only the types the other side can hit
-			// take part with their hit points: a type nobody can hit is not destroyed by the square law.
+			// take part: a type nobody can hit is not destroyed by the square law, and it fires in phase 3 instead.
 			var ownReachable = Reachable(enemy, enemyLeft, own, ownLeft, cache);
 			var enemyReachable = Reachable(own, ownLeft, enemy, enemyLeft, cache);
-			var ownDamage = Spread(own, ownLeft, enemy, enemyLeft, -1, null, cache);
-			var enemyDamage = Spread(enemy, enemyLeft, own, ownLeft, -1, null, cache);
+			var ownDamage = Spread(own, ownLeft, enemy, enemyLeft, ownReachable, true, 0, 0, null, cache);
+			var enemyDamage = Spread(enemy, enemyLeft, own, ownLeft, enemyReachable, true, 0, 0, null, cache);
 			var prediction = BotCombatPredictor.Predict(ownDamage, Hp(own, ownLeft, ownReachable), enemyDamage, Hp(enemy, enemyLeft, enemyReachable));
 			for (var i = 0; i < own.Count; i++)
 				if (ownReachable[i])
@@ -128,15 +134,23 @@ namespace OpenRA.Mods.CA.Traits
 				if (enemyReachable[j])
 					enemyLeft[j] *= prediction.EnemySurvivingFraction;
 
-			// Phase 3: what is left facing an attacker it could never hit is lost to it (tanks under helicopters).
-			var ownDoomed = Doomed(own, ownLeft, enemy, enemyLeft, enemyReachable, cache);
-			var enemyDoomed = Doomed(enemy, enemyLeft, own, ownLeft, ownReachable, cache);
+			// Phase 3: unanswered fire of the types that could not be hit, on what is left, for a fixed time.
+			var horizon = unansweredTicks < 0 ? freeFireCapTicks : unansweredTicks;
+			if (horizon > 0)
+			{
+				Array.Clear(enemyHit);
+				Array.Clear(ownHit);
+				Spread(own, ownLeft, enemy, enemyLeft, ownReachable, false, horizon, 0, enemyHit, cache);
+				Spread(enemy, enemyLeft, own, ownLeft, enemyReachable, false, horizon, 0, ownHit, cache);
+				Remove(enemy, enemyLeft, enemyHit);
+				Remove(own, ownLeft, ownHit);
+			}
 
 			double destroyed = 0, lost = 0;
 			for (var j = 0; j < enemy.Count; j++)
-				destroyed += (Math.Max(0, enemy[j].Count) - (enemyDoomed[j] ? 0 : enemyLeft[j])) * enemy[j].Unit.Cost;
+				destroyed += (Math.Max(0, enemy[j].Count) - enemyLeft[j]) * enemy[j].Unit.Cost;
 			for (var i = 0; i < own.Count; i++)
-				lost += (Math.Max(0, own[i].Count) - (ownDoomed[i] ? 0 : ownLeft[i])) * own[i].Unit.Cost;
+				lost += (Math.Max(0, own[i].Count) - ownLeft[i]) * own[i].Unit.Cost;
 
 			return new Outcome(destroyed, lost);
 		}
@@ -161,23 +175,6 @@ namespace OpenRA.Mods.CA.Traits
 			return reachable;
 		}
 
-		// Per victim type: an attacker type that the victims' side could not hit is still there and can hit it.
-		static bool[] Doomed(IReadOnlyList<(BotUnitProfile Unit, double Count)> victims, double[] victimsLeft,
-			IReadOnlyList<(BotUnitProfile Unit, double Count)> attackers, double[] attackersLeft, bool[] attackersReachable, ArmyPairCache cache)
-		{
-			var doomed = new bool[victims.Count];
-			for (var i = 0; i < victims.Count; i++)
-			{
-				if (victimsLeft[i] <= 0)
-					continue;
-
-				for (var j = 0; j < attackers.Count && !doomed[i]; j++)
-					doomed[i] = attackersLeft[j] > 0 && !attackersReachable[j] && Damage(attackers[j].Unit, victims[i].Unit, cache) > 0;
-			}
-
-			return doomed;
-		}
-
 		static double Hp(IReadOnlyList<(BotUnitProfile Unit, double Count)> side, double[] left, bool[] counted)
 		{
 			var total = 0.0;
@@ -188,17 +185,21 @@ namespace OpenRA.Mods.CA.Traits
 			return total;
 		}
 
-		// Damage of the attackers, each one's damage spread by HP share over the targets it can hit. capTicks >= 0: the free-fire phase, the
-		// damage per target (hit points) goes into `hit` and the return value is unused. capTicks < 0: returns the damage per tick.
+		// Damage of the attackers, each one's damage spread by HP share over the targets it can hit. Only the attackers whose `include`
+		// entry equals `includeValue` fire (include null = all).
+		// hit == null: returns the damage per tick. hit != null: adds the hit points taken per target; over `ticks` when that is >= 0, else
+		// over each pair's free-fire time (capped by capTicks).
 		static double Spread(IReadOnlyList<(BotUnitProfile Unit, double Count)> attackers, double[] attackersLeft,
-			IReadOnlyList<(BotUnitProfile Unit, double Count)> targets, double[] targetsLeft, int capTicks, double[] hit, ArmyPairCache cache)
+			IReadOnlyList<(BotUnitProfile Unit, double Count)> targets, double[] targetsLeft, bool[] include, bool includeValue,
+			double ticks, int capTicks, double[] hit, ArmyPairCache cache)
 		{
 			var total = 0.0;
+			var freeFire = hit != null && ticks < 0;
 			var perTick = new double[targets.Count];
 			var free = new double[targets.Count];
 			for (var i = 0; i < attackers.Count; i++)
 			{
-				if (attackersLeft[i] <= 0)
+				if (attackersLeft[i] <= 0 || (include != null && include[i] != includeValue))
 					continue;
 
 				var reachable = 0.0;
@@ -213,7 +214,7 @@ namespace OpenRA.Mods.CA.Traits
 					else
 					{
 						perTick[j] = attackers[i].Unit.DamagePerTickAgainst(targets[j].Unit);
-						free[j] = capTicks >= 0 && perTick[j] > 0 ? FreeFireTicks(attackers[i].Unit, targets[j].Unit, capTicks) : 0;
+						free[j] = freeFire && perTick[j] > 0 ? FreeFireTicks(attackers[i].Unit, targets[j].Unit, capTicks) : 0;
 					}
 
 					if (perTick[j] > 0)
@@ -229,10 +230,10 @@ namespace OpenRA.Mods.CA.Traits
 						continue;
 
 					var damage = attackersLeft[i] * perTick[j] * targetsLeft[j] * targets[j].Unit.Hp / reachable;
-					if (capTicks < 0)
+					if (hit == null)
 						total += damage;
 					else
-						hit[j] += damage * free[j];
+						hit[j] += damage * (freeFire ? free[j] : ticks);
 				}
 			}
 
@@ -263,7 +264,7 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		public static double Gain(BotUnitProfile candidate, IReadOnlyList<(BotUnitProfile Unit, double Count)> own,
 			IReadOnlyList<(BotUnitProfile Unit, double Count)> enemy, double baseNet, int stepCost, int maxCount, int freeFireCapTicks,
-			ArmyPairCache cache = null)
+			ArmyPairCache cache = null, int unansweredTicks = -1)
 		{
 			if (candidate.Cost <= 0)
 				return 0;
@@ -285,7 +286,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (!merged)
 				with.Add((candidate, n));
 
-			return (Evaluate(with, enemy, freeFireCapTicks, cache).Net - baseNet) / ((double)n * candidate.Cost);
+			return (Evaluate(with, enemy, freeFireCapTicks, cache, unansweredTicks).Net - baseNet) / ((double)n * candidate.Cost);
 		}
 
 		/// <summary>

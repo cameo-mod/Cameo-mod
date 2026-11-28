@@ -31,6 +31,37 @@ namespace OpenRA.Mods.CA.Traits
 		void FormulaCounterPercents(IReadOnlyList<ActorInfo> pool, int[] percents);
 	}
 
+	/// <summary>The roll side of the formula counter, apart from the roll so that "off = the classic counter term" is testable.</summary>
+	public static class FormulaCounters
+	{
+		/// <summary>The first active provider, or null: no provider, the switch off, the trait disabled or the row ablated.</summary>
+		public static IBotFormulaCounter Active(IReadOnlyList<IBotFormulaCounter> providers)
+		{
+			if (providers != null)
+				foreach (var p in providers)
+					if (p.IsActive)
+						return p;
+
+			return null;
+		}
+
+		/// <summary>
+		/// With no active provider (<paramref name="formula"/> null) the percents are left exactly as the classic counter term wrote them.
+		/// With one, they are replaced, indexed by the pool; a type the bot has never ordered (<paramref name="ordered"/> false) is never
+		/// lowered below 100, so first copies and newly unlocked types keep their chance.
+		/// </summary>
+		public static void Apply(IBotFormulaCounter formula, IReadOnlyList<ActorInfo> pool, int[] percents, System.Func<string, bool> ordered)
+		{
+			if (formula == null)
+				return;
+
+			formula.FormulaCounterPercents(pool, percents);
+			for (var i = 0; i < pool.Count; i++)
+				if (!ordered(pool[i].Name))
+					percents[i] = System.Math.Max(100, percents[i]);
+		}
+	}
+
 	public static partial class AblationIds
 	{
 		// ARMY-BRAIN-01 S1 row. Owner: Fable. Off = the classic counter term (UnitRoll.CounterPct) drives the roll.

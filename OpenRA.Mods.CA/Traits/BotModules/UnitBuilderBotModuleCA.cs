@@ -3190,13 +3190,8 @@ namespace OpenRA.Mods.CA.Traits
 			// PERF-BOTTICK-01: the same scores in pool order, and their maximum (the pool is not empty here), into a reused list instead of a new one per roll.
 			// ARMY-BRAIN-01 S1: an active formula counter REPLACES the classic counter term (never both: the enemy would count twice).
 			formulaCounters ??= player.PlayerActor.TraitsImplementing<IBotFormulaCounter>().ToArray();
-			IBotFormulaCounter formula = null;
-			foreach (var f in formulaCounters)
-				if (f.IsActive)
-				{
-					formula = f;
-					break;
-				}
+			// The counter profile still gates it: strength 0 (the profile off or row ub_roll_counter ablated) = no counter term of either kind.
+			var formula = strength[UnitRoll.Counter] > 0 ? FormulaCounters.Active(formulaCounters) : null;
 
 			List<long> scores = null;
 			var best = 0L;
@@ -3250,15 +3245,10 @@ namespace OpenRA.Mods.CA.Traits
 				counterPcts[i] = scores == null ? 100 : UnitRoll.CounterPct(scores[i], best, strength[UnitRoll.Counter]);
 			}
 
-			if (formula != null)
-			{
-				// Indexed by pool[i], before the affordable-pool keep mask below. A type this bot has never ordered is never lowered (first copies
-				// and the tech-up rule): the formula may raise it, not reduce it. The floor is applied by UnitPickArbiter after every multiplier.
-				formula.FormulaCounterPercents(pool, counterPcts);
-				for (var i = 0; i < pool.Count; i++)
-					if (!rollOrdered.Contains(pool[i].Name))
-						counterPcts[i] = Math.Max(100, counterPcts[i]);
-			}
+			// Indexed by pool[i], before the affordable-pool keep mask below. A type this bot has never ordered is never lowered (first copies and
+			// the tech-up rule): the formula may raise it, not reduce it. The floor is applied by UnitPickArbiter after every multiplier.
+			// formula == null: a no-op, counterPcts stay the classic term (pinned by ArmyBrainFormulaTest).
+			FormulaCounters.Apply(formula, pool, counterPcts, rollOrdered.Contains);
 
 			// ub_affordable_pool (keep mask, V08H): the cash/afford gate the fill meets after the pick ("afford_cash"), term for term as the P5 fill loop writes it: UnitPickArbiter.Admit
 			// (paygo for a type never ordered, tech lean), then bank, reserve and CashLedger.UnitDepthAdmits. A local function (no delegate) keeps the terms inside the roll method and allocates nothing.
