@@ -763,7 +763,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		bool Recheck(IBot bot, IBotUnitLeases leases, Actor a, Assignment job, int tick)
 		{
 			var target = job.Target;
-			if (target == null || target.IsDead || !target.IsInWorld || job.Job != EngineerJob.Capture)
+			if (target == null || !Read(target, out _) || job.Job != EngineerJob.Capture)
 				return false;
 
 			var remaining = RemainingExposure(job.Route, a.Location, target.Location, Info.ApproachCells, c => Danger(a, c));
@@ -832,14 +832,50 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		// FOG-ENGCRATE-01: generic-bot capture and bridge-hut scans read the fog. Off = the Check*ForVisibility flags, as before.
 		bool FogOn => Info.FogEngCrate && !ablateFogEngCrate.Off(player, AblationIds.FogEngCrate);
-		bool CaptureFilter => FogOn || Info.CheckCaptureTargetsForVisibility;
-		bool CaptureVisible(Actor a) => FogOn ? FogEngCrateGate.Admits(player, a) : a.CanBeViewedByPlayer(player);
+		// FOG-REMEMBER-01: one judgment reads the world once per actor. Read: alive, and the owner the bot judges it by. A seen actor is read
+		// live; an unseen one only through its frozen record (no record = not alive, fail closed). No fog (row off) = the live reads, as before.
+		bool Read(Actor a, out OpenRA.Player owner)
+		{
+			if (FogOn && !a.CanBeViewedByPlayer(player))
+			{
+				owner = FogEngCrateGate.RememberedOwner(player, a);
+				return FogEngCrateGate.RememberedAlive(player, a);
+			}
+
+			owner = a.Owner;
+			return !a.IsDead && a.IsInWorld;
+		}
+
+		// Scan admission (the old capture-filter gate) in one call: with the fog row on it is Read; with only the Check*ForVisibility flag a seen
+		// actor is also required. Cheap static pre-filters belong in the caller, before this call.
+		bool Judge(Actor a, out OpenRA.Player owner)
+		{
+			if (!FogOn && Info.CheckCaptureTargetsForVisibility && !a.CanBeViewedByPlayer(player))
+			{
+				owner = null;
+				return false;
+			}
+
+			return Read(a, out owner);
+		}
+
+		// FOG-REMEMBER-01 (Sol FIX): capture eligibility of a candidate. CaptureManager.CanTarget(CaptureManager) reads the LIVE owner through the
+		// target, so an unseen (remembered) target is judged by its frozen record instead: CanTarget(FrozenActor, ...). Seen, or row off = the live check.
+		bool CanCapture(CaptureManager captor, Actor target, CaptureManager targetCapture)
+		{
+			if (FogOn && !target.CanBeViewedByPlayer(player))
+			{
+				var frozen = player.FrozenActorLayer?.FromID(target.ActorID);
+				return frozen != null && (captor.CanTarget(frozen, false) || captor.CanTarget(frozen, true));
+			}
+
+			return captor.CanTarget(targetCapture);
+		}
 
 		int GuardingEnemies(Actor capturer, Actor target) =>
 			world.FindActorsInCircle(target.CenterPosition, Info.EnemyAvoidanceRadius)
-				.Count(u => !u.IsDead && u.IsInWorld && player.RelationshipWith(u.Owner) == PlayerRelationship.Enemy
-					&& (!CaptureFilter || CaptureVisible(u))
-					&& u.Info.HasTraitInfo<AttackBaseInfo>() && capturer.IsTargetableBy(u));
+				.Count(u => u.Info.HasTraitInfo<AttackBaseInfo>() && Judge(u, out var judged)
+					&& player.RelationshipWith(judged) == PlayerRelationship.Enemy && capturer.IsTargetableBy(u));
 
 		/// <summary>Orders the try-candidates by RankScore over the nearest CaptureTargetTries x 2 (the rest are dropped).</summary>
 		List<Actor> RankBySafety(Actor capturer, IEnumerable<Actor> candidates)
@@ -875,11 +911,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (liveCapturers >= Math.Max(0, Info.MaximumDemandCapturers))
 				return;
 
-			var targets = world.Actors.Where(a => !a.IsDead && a.IsInWorld
-				&& Info.CapturableRelationships.HasRelationship(player.RelationshipWith(a.Owner))
-				&& a.TraitOrDefault<CaptureManager>() != null);
-			if (CaptureFilter)
-				targets = targets.Where(a => CaptureVisible(a));
+			var targets = world.Actors.Where(a => a.TraitOrDefault<CaptureManager>() != null
+				&& Judge(a, out var judged)
+				&& Info.CapturableRelationships.HasRelationship(player.RelationshipWith(judged)));
 			if (capturableTypes.Count > 0)
 				targets = targets.Where(t => capturableTypes.Contains(t.Info.Name.ToLowerInvariant()));
 
@@ -1054,12 +1088,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (CaptureRules.UsesPriorityPass(BotRng.For(player, nameof(EngineerBotModule)).Next(100), Info.PriorityCaptureChance))
 			{
 				var priorityTargets = world.Actors.Where(a =>
-					!a.IsDead && a.IsInWorld && Info.CapturableRelationships.HasRelationship(player.RelationshipWith(a.Owner))
-					&& priorityCapturableTypes.Contains(a.Info.Name.ToLowerInvariant()));
+					priorityCapturableTypes.Contains(a.Info.Name.ToLowerInvariant()) && Judge(a, out var judged)
+						&& Info.CapturableRelationships.HasRelationship(player.RelationshipWith(judged)));
 
 				// DESIGN §19.5: the engineer owner's fog exception.
-				if (CaptureFilter)
-					priorityTargets = priorityTargets.Where(a => CaptureVisible(a));
 
 				var candidates = priorityTargets.Where(t => !TargetFull(t) && !Dormant(t) && !ClaimedByOutrankingAlly(t)).OrderBy(ShardTier).ThenBy(a => (a.CenterPosition - baseCenter).LengthSquared).ToList();
 				ConsiderEscort(candidates);
@@ -1072,7 +1104,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					var capturer = capturers[next];
 					var target = ordered[i];
 					var captureManager = target.TraitOrDefault<CaptureManager>();
-					if (captureManager != null && capturer.Trait.CanTarget(captureManager) && TryRoute(capturer.Actor, target, out var waypoints, out var fullRoute)
+					if (captureManager != null && CanCapture(capturer.Trait, target, captureManager) && TryRoute(capturer.Actor, target, out var waypoints, out var fullRoute)
 						&& Assign(bot, leases, capturer.Actor, EngineerJob.Capture, new Order("CaptureActor", capturer.Actor, Target.FromActor(target), true), target, waypoints, fullRoute))
 						next++;
 				}
@@ -1089,15 +1121,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var randPlayer = randPlayers.Random(BotRng.For(player, nameof(EngineerBotModule)));
 			var remaining = capturers.Skip(next).ToList();
 
-			var options = world.Actors.Where(a => a.Owner == randPlayer && !a.IsDead && a.IsInWorld);
-			if (CaptureFilter)
-				options = options.Where(a => CaptureVisible(a));
+			var options = world.Actors.Where(a => Judge(a, out var judged) && judged == randPlayer);
 
 			var capturable = options
 				.Where(target =>
 				{
 					var captureManager = target.TraitOrDefault<CaptureManager>();
-					return captureManager != null && remaining.Any(tp => tp.Trait.CanTarget(captureManager));
+					return captureManager != null && remaining.Any(tp => CanCapture(tp.Trait, target, captureManager));
 				})
 				.OrderBy(ShardTier).ThenByDescending(target => target.GetSellValue())
 				.Take(maximumCaptureTargetOptions);
@@ -1235,12 +1265,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				claimsAhead = TeamBlackboard.ClaimsAheadOf(TeamBlackboard.CollectBroadcasts(player), player.InternalName);
 
 			return world.ActorsHavingTrait<CaptureManager>()
-				.Where(t => !t.IsDead && t.IsInWorld && t.Owner != null && Info.CapturableRelationships.HasRelationship(player.RelationshipWith(t.Owner))
-					&& (!CaptureFilter || CaptureVisible(t))
-					&& !EscortEligible(t) && !TargetFull(t) && !Dormant(t)
+				.Where(t => Judge(t, out var judged)
+						&& Info.CapturableRelationships.HasRelationship(player.RelationshipWith(judged))
+						&& !EscortEligible(t, judged) && !TargetFull(t) && !Dormant(t)
 					&& (capturableTypes.Count == 0 || capturableTypes.Contains(t.Info.Name.ToLowerInvariant()))
 					&& (claimsAhead == null || !claimsAhead.Contains(world.Map.CenterOfCell(t.Location)))
-					&& (capturers == null || capturers.Any(c => c.TraitOrDefault<CaptureManager>().CanTarget(t.TraitOrDefault<CaptureManager>()))))
+					&& (capturers == null || capturers.Any(c => CanCapture(c.TraitOrDefault<CaptureManager>(), t, t.TraitOrDefault<CaptureManager>()))))
 				.OrderBy(t => t.ActorID)
 				.ToList();
 		}
@@ -1355,8 +1385,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					continue;
 
 				string reason = null;
-				if (job.Target.IsDead || !job.Target.IsInWorld || job.Target.Owner == null
-					|| !Info.CapturableRelationships.HasRelationship(player.RelationshipWith(job.Target.Owner)))
+				if (!Read(job.Target, out var jobOwner) || jobOwner == null
+					|| !Info.CapturableRelationships.HasRelationship(player.RelationshipWith(jobOwner)))
 					reason = "target_gone";
 				else if (DropArea(job.Target, job.RouteSamples ?? []).ThreatValue > 0)
 					reason = "evidence_contradicted";
@@ -1550,9 +1580,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var center = world.Map.CenterOfCell(loc);
 			var sum = 0L;
 			foreach (var u in world.FindActorsInCircle(center, Info.EnemyAvoidanceRadius))
-				if (!u.IsDead && capturer.Owner.RelationshipWith(u.Owner) == PlayerRelationship.Enemy
-					&& (!CaptureFilter || CaptureVisible(u))
-					&& u.Info.HasTraitInfo<AttackBaseInfo>() && capturer.IsTargetableBy(u))
+				if (u.Info.HasTraitInfo<AttackBaseInfo>() && Judge(u, out var judged)
+						&& capturer.Owner.RelationshipWith(judged) == PlayerRelationship.Enemy && capturer.IsTargetableBy(u))
 					sum += Math.Max(0, Info.EnemyAvoidanceRadius.Length - (center - u.CenterPosition).Length);
 
 			// Bounded so a long route through a crowded base cannot overflow the path cost.
@@ -1684,8 +1713,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var path = mobile.PathFinder.FindPathToTargetCellByPredicate(
 				capturer, new[] { capturer.Location }, loc => true, BlockedByActor.Stationary,
 				loc => world.FindActorsInCircle(world.Map.CenterOfCell(loc), Info.EnemyAvoidanceRadius)
-					.Where(u => !u.IsDead && capturer.Owner.RelationshipWith(u.Owner) == PlayerRelationship.Enemy
-						&& (!CaptureFilter || CaptureVisible(u)) && capturer.IsTargetableBy(u))
+					.Where(u => Judge(u, out var judged) && capturer.Owner.RelationshipWith(judged) == PlayerRelationship.Enemy && capturer.IsTargetableBy(u))
 					.Sum(u => Math.Max(WDist.Zero.Length, Info.EnemyAvoidanceRadius.Length - (world.Map.CenterOfCell(loc) - u.CenterPosition).Length)));
 
 			return path.Count == 0 ? Target.Invalid : Target.FromActor(target);
@@ -1779,10 +1807,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		static int CostOf(Actor a) => a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
 
 		// DESIGN §19.5: the engineer owner is omniscient as a whole (maintainer 2026-09-30) — these scans see through fog.
+		// FOG-REMEMBER-01: the defenders are read through Read, like GuardingEnemies. Row off = the live owner and dead flag, exactly as before;
+		// row on = an unseen defender counts only through its frozen record.
 		int DefenceValue(Actor target) =>
 			world.FindActorsInCircle(target.CenterPosition, Info.EnemyAvoidanceRadius)
-				.Where(u => !u.IsDead && u.IsInWorld && player.RelationshipWith(u.Owner) == PlayerRelationship.Enemy
-					&& u.Info.HasTraitInfo<AttackBaseInfo>())
+				.Where(u => u.Info.HasTraitInfo<AttackBaseInfo>() && Read(u, out var judged)
+					&& player.RelationshipWith(judged) == PlayerRelationship.Enemy)
 				.Sum(CostOf);
 
 		int OwnArmedValueNear(Actor target) =>
@@ -1798,8 +1828,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// </summary>
 		public static bool EscortEligible(bool enemyOwned, bool priorityType) => priorityType || !enemyOwned;
 
-		bool EscortEligible(Actor target) =>
-			EscortEligible(player.RelationshipWith(target.Owner) == PlayerRelationship.Enemy,
+		bool EscortEligible(Actor target) => Read(target, out var owner) && EscortEligible(target, owner);
+
+		bool EscortEligible(Actor target, OpenRA.Player owner) =>
+			EscortEligible(player.RelationshipWith(owner) == PlayerRelationship.Enemy,
 				priorityCapturableTypes.Contains(target.Info.Name.ToLowerInvariant()));
 
 		/// <summary>True when a defended tech target may not be attempted yet: escorts on, defenders present, and no
@@ -1858,7 +1890,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			var t = escort.Target;
-			if (t.IsDead || !t.IsInWorld || t.Owner == player)
+			if (!Read(t, out var escortOwner) || escortOwner == player)
 			{
 				BotMissionLog.Write(new BotMissionRecord
 				{
@@ -1889,7 +1921,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		/// <summary>The escort seam: one standing guard request at the escorted target while its mission lives.</summary>
 		IReadOnlyList<BotProtectionRequest> IBotProtectionRequestProvider.ProtectionRequests =>
-			escort == null || escort.Target.IsDead || !escort.Target.IsInWorld
+			escort == null || !Read(escort.Target, out _)
 				? []
 				: [new BotProtectionRequest(escort.Target.Location, EscortRequestValue(escort.DefenceValue, EscortRequestFloor()), world.WorldTick + Info.EscortRequestTicks, escort.Episode)];
 
@@ -1980,8 +2012,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				escort = null;
 
 			var target = job.Target;
-			var targetGone = target == null || target.IsDead || !target.IsInWorld;
-			var (state, reason) = CaptureVerdict(!targetGone && target.Owner == player, check == EngineerCheck.Stuck,
+			OpenRA.Player targetOwner = null;
+			var targetGone = target == null || !Read(target, out targetOwner);
+			var (state, reason) = CaptureVerdict(!targetGone && targetOwner == player, check == EngineerCheck.Stuck,
 				engineer.IsDead, targetGone);
 
 							// A voluntary retreat (RouteRecheckTicks): released, outmatched; it does not feed the dormant shelf.

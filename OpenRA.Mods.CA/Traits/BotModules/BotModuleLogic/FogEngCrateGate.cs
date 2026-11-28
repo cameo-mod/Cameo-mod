@@ -31,6 +31,14 @@ namespace OpenRA.Mods.CA.Traits
 		public static bool Remembered(OpenRA.Player player, Actor actor) =>
 			player.FrozenActorLayer != null && player.FrozenActorLayer.FromID(actor.ActorID) != null;
 
+		/// <summary>FOG-REMEMBER-01: the owner a remembered actor is judged by, its last sighting in the frozen layer. Null = no record (fail closed).</summary>
+		public static OpenRA.Player RememberedOwner(OpenRA.Player player, Actor actor) =>
+			player.FrozenActorLayer?.FromID(actor.ActorID)?.Owner;
+
+		/// <summary>FOG-REMEMBER-01: a remembered actor counts alive only while its frozen record is valid (an owner is recorded). No record = not alive (fail closed).</summary>
+		public static bool RememberedAlive(OpenRA.Player player, Actor actor) =>
+			player.FrozenActorLayer?.FromID(actor.ActorID) is { IsValid: true };
+
 		/// <summary>Seen now, or remembered in the frozen layer.</summary>
 		public static bool Admits(OpenRA.Player player, Actor actor) =>
 			Admits(actor.CanBeViewedByPlayer(player), Remembered(player, actor));
