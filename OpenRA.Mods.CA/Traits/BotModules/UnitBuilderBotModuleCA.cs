@@ -661,6 +661,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		readonly AdaptiveCounterProduction counters;
 		IBotEnemyCompositionProvider compositionProvider;
+		IBotFormulaCounter[] formulaCounters; // ARMY-BRAIN-01 S1 (row ab_formula): an active provider replaces the counter term of the roll
 		IBotPersonalityLeadProvider[] leadProviders;
 		IBotUnitRoles unitRoles;
 
@@ -3187,9 +3188,19 @@ namespace OpenRA.Mods.CA.Traits
 			var deficits = strength[UnitRoll.RoleDeficit] > 0 ? RollRoleDeficits(roles) : null;
 			var providers = strength[UnitRoll.Learned] > 0 ? ActiveProductionWeights() : null;
 			// PERF-BOTTICK-01: the same scores in pool order, and their maximum (the pool is not empty here), into a reused list instead of a new one per roll.
+			// ARMY-BRAIN-01 S1: an active formula counter REPLACES the classic counter term (never both: the enemy would count twice).
+			formulaCounters ??= player.PlayerActor.TraitsImplementing<IBotFormulaCounter>().ToArray();
+			IBotFormulaCounter formula = null;
+			foreach (var f in formulaCounters)
+				if (f.IsActive)
+				{
+					formula = f;
+					break;
+				}
+
 			List<long> scores = null;
 			var best = 0L;
-			if (strength[UnitRoll.Counter] > 0)
+			if (formula == null && strength[UnitRoll.Counter] > 0)
 			{
 				scores = rollScores;
 				scores.Clear();
@@ -3237,6 +3248,16 @@ namespace OpenRA.Mods.CA.Traits
 				fractions[i] = RollParameters.Fraction(name);
 				biases[i] = UnitPickArbiter.ComposeBias(RollParameters.BiasPct(rollPersonality, role, world.WorldTick), deficitTerm, learnedTerm, waveMixTerm, compositionTerm, openingTerm);
 				counterPcts[i] = scores == null ? 100 : UnitRoll.CounterPct(scores[i], best, strength[UnitRoll.Counter]);
+			}
+
+			if (formula != null)
+			{
+				// Indexed by pool[i], before the affordable-pool keep mask below. A type this bot has never ordered is never lowered (first copies
+				// and the tech-up rule): the formula may raise it, not reduce it. The floor is applied by UnitPickArbiter after every multiplier.
+				formula.FormulaCounterPercents(pool, counterPcts);
+				for (var i = 0; i < pool.Count; i++)
+					if (!rollOrdered.Contains(pool[i].Name))
+						counterPcts[i] = Math.Max(100, counterPcts[i]);
 			}
 
 			// ub_affordable_pool (keep mask, V08H): the cash/afford gate the fill meets after the pick ("afford_cash"), term for term as the P5 fill loop writes it: UnitPickArbiter.Admit
