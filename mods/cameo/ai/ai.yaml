@@ -4704,6 +4704,19 @@ Player:
 		UseFrontierObservation: true
 	# Whole-base defence cover: each defence goes where its range covers the most uncovered base, outer edge and
 	# enemy side first (genericbot only; classic, sharing BaseBuilderBotModuleCA@generic, gets no advisor). Off until Enabled.
+	# ARMY-BRAIN-01 S1 (user 11-28, design ARMY_BRAIN_DESIGN_02): the formula counter. From unit stats it ranks the unit types by their gain per cost
+	# against the enemy units and defences seen and remembered; the result replaces the counter term of the unit roll (the roll floor stays).
+	# Row ab_formula (off = the classic counter term). Generic bot only; the values are the priors of the learnables army.*.
+	ArmyBrainBotModule:
+		RequiresCondition: genericbot
+		ArmyBrainFormula: true
+		FormulaGainPercent: 60
+		FormulaMinPercent: 50
+		FormulaMaxPercent: 300
+		FormulaBandPermille: 250
+		StepCost: 2000
+		StepMaxCount: 8
+		FreeFireCapTicks: 250
 	DefenseCoveragePlanner:
 		Enabled: true
 		RequiresCondition: genericbot
