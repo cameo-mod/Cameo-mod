@@ -376,6 +376,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(text, Does.Contain("var formula = strength[UnitRoll.Counter] > 0 ? FormulaCounters.Active(formulaCounters) : null;"));
 			Assert.That(text, Does.Contain("if (formula == null && strength[UnitRoll.Counter] > 0)"));
 			Assert.That(text, Does.Contain("FormulaCounters.Apply(formula, pool, counterPcts, rollOrdered.Contains);"));
+			Assert.That(text, Does.Contain("if (formula != null)"), "no delegate allocation on the off path");
 			Assert.That(text.Split("FormulaCounters.Apply(").Length - 1, Is.EqualTo(1));
 			Assert.That(text.IndexOf("FormulaCounters.Apply(", System.StringComparison.Ordinal),
 				Is.LessThan(text.IndexOf("counterPcts = AffordablePool.Keep(counterPcts, keep, kept);", System.StringComparison.Ordinal)), "before the keep mask");

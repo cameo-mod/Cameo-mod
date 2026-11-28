@@ -3247,8 +3247,10 @@ namespace OpenRA.Mods.CA.Traits
 
 			// Indexed by pool[i], before the affordable-pool keep mask below. A type this bot has never ordered is never lowered (first copies and
 			// the tech-up rule): the formula may raise it, not reduce it. The floor is applied by UnitPickArbiter after every multiplier.
-			// formula == null: a no-op, counterPcts stay the classic term (pinned by ArmyBrainFormulaTest).
-			FormulaCounters.Apply(formula, pool, counterPcts, rollOrdered.Contains);
+			// formula == null: nothing runs and nothing is allocated (the delegate below is only made when a formula is active); counterPcts stay
+			// the classic term (pinned by ArmyBrainFormulaTest).
+			if (formula != null)
+				FormulaCounters.Apply(formula, pool, counterPcts, rollOrdered.Contains);
 
 			// ub_affordable_pool (keep mask, V08H): the cash/afford gate the fill meets after the pick ("afford_cash"), term for term as the P5 fill loop writes it: UnitPickArbiter.Admit
 			// (paygo for a type never ordered, tech lean), then bank, reserve and CashLedger.UnitDepthAdmits. A local function (no delegate) keeps the terms inside the roll method and allocates nothing.

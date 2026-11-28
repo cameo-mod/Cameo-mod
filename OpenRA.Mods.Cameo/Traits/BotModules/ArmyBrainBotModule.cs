@@ -184,6 +184,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			var rules = world.Map.Rules;
+			// Exactly the interval before: an older gain is never a stand-in (Sonnet note 1).
+			lastGainByType.Clear();
 			foreach (var (type, gain) in gainByType)
 				lastGainByType[type] = gain;
 
