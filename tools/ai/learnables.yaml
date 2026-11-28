@@ -746,3 +746,18 @@ learnables:
         sample_floor: 1 game
         switch: unscheduled
         state: planned_yaml_prior_only
+    def_lanes.ally_share:
+        rank: 51
+        name: Ally share of lane weight and lane budget (DEF-LANES-01, P2, ablation row def_lanes_team)
+        owner: OpenRA.Mods.Cameo/Traits/BotModules/DefenseCoveragePlanner.cs:DefenseCoveragePlanner; DefenseLanes.cs:DefenseLanes
+        knob: LaneAllySharePercent
+        bounds: min=0,max=100,safety_floor=0,unit=percent
+        prior: 50
+        feature_schema: S.static_defence_value,S.building_losses,E.seen_threat,lane_attack_weight,personality
+        credit_metric: building_losses_per_defence_value_residual
+        scope_keys: faction,matchup,personality
+        method: learn_all_v1_four_value_geometric_mean
+        fitter: tools/ai/fit_learn_all.py (planned)
+        sample_floor: 1 game
+        switch: unscheduled
+        state: planned_yaml_prior_only

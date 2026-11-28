@@ -137,6 +137,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return (int)Math.Clamp((long)baseBump + totalWeight, 0, Math.Max(0, maxExtra));
 		}
 
+		/// <summary>P2: the team budget. The own extra plus the ally share of the hardest-hit ally's extra, capped.</summary>
+		public static int TeamExtra(int ownExtra, int allyExtra, int allySharePercent, int maxExtra)
+		{
+			return (int)Math.Clamp(ownExtra + (long)Math.Max(0, allyExtra) * Math.Max(0, allySharePercent) / 100, 0, Math.Max(0, maxExtra));
+		}
+
+		/// <summary>P2: an ally's lane takes the placement when its weight, after the ally share, is above our own heaviest lane.</summary>
+		public static bool AllyLaneWins(int ownWeight, int allyWeight, int allySharePercent)
+		{
+			return (long)allyWeight * Math.Max(0, allySharePercent) / 100 > ownWeight;
+		}
+
 		/// <summary>The L1/L2 split: true when the next defence belongs on the lane (the lane share is below its target).</summary>
 		public static bool LaneTurn(int lanePlaced, int coveragePlaced, int laneSharePercent)
 		{

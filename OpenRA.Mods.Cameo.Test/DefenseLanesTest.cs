@@ -100,5 +100,18 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(DefenseLanes.LaneTurn(0, 5, 0), Is.False);
 			Assert.That(DefenseLanes.LaneTurn(5, 0, 100), Is.True);
 		}
+
+		[Test]
+		public void TeamShare()
+		{
+			// Share 0 = own lanes only.
+			Assert.That(DefenseLanes.TeamExtra(150, 800, 0, 1000), Is.EqualTo(150));
+			Assert.That(DefenseLanes.TeamExtra(0, 800, 50, 1000), Is.EqualTo(400));
+			Assert.That(DefenseLanes.TeamExtra(700, 800, 50, 1000), Is.EqualTo(1000));
+			Assert.That(DefenseLanes.AllyLaneWins(0, 100, 0), Is.False);
+			Assert.That(DefenseLanes.AllyLaneWins(0, 100, 50), Is.True);
+			Assert.That(DefenseLanes.AllyLaneWins(50, 100, 50), Is.False);
+			Assert.That(DefenseLanes.AllyLaneWins(49, 100, 50), Is.True);
+		}
 	}
 }

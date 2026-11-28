@@ -25,6 +25,9 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		// DEF-LANES-01 row. Owner: Fable. Off = no lane memory, no extra budget, no lane placement.
 		public const string DefLanes = "def_lanes";
+
+		// DEF-LANES-01 P2 row. Off = own lanes only (no ally budget share, no placement at an ally's base).
+		public const string DefLanesTeam = "def_lanes_team";
 	}
 
 	public static class DefenceLaneBudget
