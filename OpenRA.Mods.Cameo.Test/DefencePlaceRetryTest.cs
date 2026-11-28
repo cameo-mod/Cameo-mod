@@ -20,79 +20,37 @@ namespace OpenRA.Mods.Cameo.Test
 	[TestFixture]
 	public class DefencePlaceRetryTest
 	{
-		const int Grace = 5, Base = 250, Max = 6000;
+		const int Base = 250, Max = 6000;
 		static readonly CPos A = new(18, 21);
 		static readonly CPos B = new(19, 21);
 
 		static string Source(string file) => File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "source", file));
 
 		[Test]
-		public void AnOrderThatProducedNoBuildingRejectsItsCellOnTheNextAttempt()
+		public void TheMaskRejectsAtOnceAndOnlyThatCellAndType()
 		{
 			var cells = new RejectedCells();
-			Assert.That(cells.Begin(9, "tower", 1171, Grace, Base, Max), Is.Null, "nothing pending");
-			cells.Issue(9, "tower", A, 1171);
-			Assert.That(cells.IsRejected("tower", A, 1172), Is.False, "an issued order is not a rejection");
-
-			// The same queue asks again 48 ticks later (the tick-1219 repeat of seed 100775): the cell is rejected for 250 ticks.
-			Assert.That(cells.Begin(9, "tower", 1219, Grace, Base, Max), Is.EqualTo(A));
-			Assert.That(cells.IsRejected("tower", A, 1219), Is.True);
-			Assert.That(cells.IsRejected("tower", A, 1219 + Base - 1), Is.True);
-			Assert.That(cells.IsRejected("tower", A, 1219 + Base), Is.False, "offered again after the time");
-			Assert.That(cells.IsRejected("tower", B, 1219), Is.False, "other cells stay open");
-			Assert.That(cells.IsRejected("sam", A, 1219), Is.False, "per type");
-			Assert.That(cells.PendingCount, Is.EqualTo(0));
+			Assert.That(cells.IsRejected("tower", A, 500), Is.False);
+			Assert.That(cells.Reject("tower", A, 500, Base, Max), Is.EqualTo(Base));
+			Assert.That(cells.IsRejected("tower", A, 500), Is.True);
+			Assert.That(cells.IsRejected("tower", A, 500 + Base - 1), Is.True);
+			Assert.That(cells.IsRejected("tower", A, 500 + Base), Is.False, "offered again after the time");
+			Assert.That(cells.IsRejected("tower", B, 500), Is.False, "other cells stay open");
+			Assert.That(cells.IsRejected("sam", A, 500), Is.False, "per type");
 		}
 
 		[Test]
-		public void AskingAgainInsideTheGraceTimeIsPendingNotARejection()
+		public void ABuildingOnTheCellForgetsItsRejection()
 		{
 			var cells = new RejectedCells();
-			cells.Issue(9, "tower", A, 100);
-			Assert.That(cells.Begin(9, "tower", 100 + Grace - 1, Grace, Base, Max), Is.Null);
-			Assert.That(cells.IsRejected("tower", A, 104), Is.False);
-			Assert.That(cells.PendingCount, Is.EqualTo(1), "still pending");
-		}
-
-		[Test]
-		public void AnotherQueueOrAnotherTypeIsNotARejection()
-		{
-			var cells = new RejectedCells();
-			cells.Issue(9, "tower", A, 100);
-			Assert.That(cells.Begin(10, "tower", 200, Grace, Base, Max), Is.Null, "another production queue");
-			Assert.That(cells.Begin(9, "sam", 200, Grace, Base, Max), Is.Null, "another type");
-			Assert.That(cells.IsRejected("tower", A, 200), Is.False);
-		}
-
-		[Test]
-		public void AConfirmedBuildingClearsThePendingOrderAndTheStrikes()
-		{
-			var cells = new RejectedCells();
-			cells.Issue(9, "tower", A, 100);
-			cells.Confirm("tower", A);
-			Assert.That(cells.PendingCount, Is.EqualTo(0));
-			Assert.That(cells.Begin(9, "tower", 200, Grace, Base, Max), Is.Null, "the next tower of the same queue is a new attempt");
-
-			// A rejected cell that later does get its building is forgotten.
 			cells.Reject("tower", B, 300, Base, Max);
-			Assert.That(cells.IsRejected("tower", B, 301), Is.True);
+			cells.Confirm("sam", B);
+			cells.Confirm("tower", A);
+			Assert.That(cells.IsRejected("tower", B, 301), Is.True, "another type or another cell confirms nothing");
 			cells.Confirm("tower", B);
 			Assert.That(cells.IsRejected("tower", B, 301), Is.False);
 			Assert.That(cells.RejectedCount, Is.EqualTo(0));
-
-			// A building of another type or on another cell confirms nothing.
-			cells.Issue(9, "tower", A, 400);
-			cells.Confirm("sam", A);
-			cells.Confirm("tower", B);
-			Assert.That(cells.PendingCount, Is.EqualTo(1));
-		}
-
-		[Test]
-		public void TheMaskRejectsAtOnce()
-		{
-			var cells = new RejectedCells();
-			Assert.That(cells.Reject("tower", A, 500, Base, Max), Is.EqualTo(Base));
-			Assert.That(cells.IsRejected("tower", A, 500), Is.True);
+			Assert.That(cells.Reject("tower", B, 400, Base, Max), Is.EqualTo(Base), "its strikes are gone too");
 		}
 
 		[TestCase(1, 250)]
@@ -140,10 +98,27 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void OffMeansNoCallAndTheGivenCheck()
+		public void ARepeatedRequestIsNeverARejection()
 		{
-			// Source pins. The switch is off in code; a planner that does not track is never called by the base builder; and with the
-			// switch off, or nothing rejected, ChooseDefenseCell keeps the very delegate it was given.
+			// Sol/Sonnet FIX: the only rejection is the builder's own refusal (the mask at the emission point). Nothing is keyed by a producer,
+			// no order is tracked as pending, and no time-delayed same-type request strikes a cell.
+			var memory = Source("mods/Cameo/Traits/BotModules/RejectedCells.cs");
+			Assert.That(memory, Does.Not.Contain("pending"));
+			Assert.That(memory, Does.Not.Contain("Producer"));
+
+			var contract = Source("mods/CA/Traits/BotModules/IBotDefensePlacementFeedback.cs");
+			Assert.That(contract, Does.Not.Contain("BeginAttempt"));
+			Assert.That(contract, Does.Not.Contain("AttemptIssued"));
+
+			var retry = Source("mods/Cameo/Traits/BotModules/DefenseCoveragePlanner.Retry.cs");
+			Assert.That(retry.Split("rejectedCells.Reject(").Length - 1, Is.EqualTo(1), "one rejection site: AttemptMasked");
+		}
+
+		[Test]
+		public void OffMeansNoCallNoMaskAndTheGivenCheck()
+		{
+			// Source pins. The switch is off in code; a planner that does not track is never called by the base builder and its candidates are
+			// not mask-filtered; and with the switch off, or nothing rejected, ChooseDefenseCell keeps the very delegate it was given.
 			var planner = Source("mods/Cameo/Traits/BotModules/DefenseCoveragePlanner.cs");
 			Assert.That(planner, Does.Contain("public readonly bool PlaceRetryMemory = false;"));
 			Assert.That(planner, Does.Contain("canPlace = WithoutRejected(defense, canPlace);"));
@@ -157,7 +132,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(builder, Does.Contain("var tracks = advisor is IBotDefensePlacementFeedback feedback && feedback.TracksAttempts;"));
 			Assert.That(builder, Does.Contain("&& (!tracks || !baseBuilder.PlacementMasked(actorInfo.Name, cell)));"));
 			Assert.That(builder, Does.Contain("return advisor is IBotDefensePlacementFeedback feedback && feedback.TracksAttempts ? feedback : null;"));
-			Assert.That(builder.Split("DefencePlacementFeedback()?.").Length - 1, Is.EqualTo(2), "one masked call, one issued call");
+			Assert.That(builder.Split("DefencePlacementFeedback()?.").Length - 1, Is.EqualTo(1), "one call: the masked refusal");
 
 			// The failure budget and the cancel it leads to are untouched (the READY guard of NO-CANCEL-01 still stands in front of site 5).
 			Assert.That(builder, Does.Contain("else if (++failCount >= baseBuilder.Info.MaximumFailedPlacementAttempts)"));

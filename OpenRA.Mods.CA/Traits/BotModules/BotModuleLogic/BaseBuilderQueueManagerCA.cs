@@ -1487,7 +1487,8 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					AIUtils.BotDebug($"{player} {currentBuilding.Item} at {location.Value}: reserved by a refinery search at tick {world.WorldTick}");
 
-					// DEF-PLACE-RETRY-01: an explicit rejection of the advised cell (only an advised defence reaches the call).
+					// DEF-PLACE-RETRY-01: the authoritative refusal of the advised cell (only an advised defence reaches the call, and the
+					// advisor is looked up only here, on the rare refusal).
 					if (advisedDefense != null || demandAdvisedDefense)
 						DefencePlacementFeedback()?.AttemptMasked(queue.Actor.ActorID, currentBuilding.Item, location.Value);
 
@@ -1610,10 +1611,6 @@ namespace OpenRA.Mods.CA.Traits
 					failCount = 0;
 					readyHoldSince.Remove(queue.Actor.ActorID);
 					NotifyPlacement(currentBuilding.Item, location.Value, queue.Actor.ActorID, orderString, type, advisedDefense != null || demandAdvisedDefense, lastFrontBackPick);
-
-					// DEF-PLACE-RETRY-01: the order for an advised defence cell is out; the advisor confirms it when the building appears.
-					if (advisedDefense != null || demandAdvisedDefense)
-						DefencePlacementFeedback()?.AttemptIssued(queue.Actor.ActorID, currentBuilding.Item, location.Value);
 
 					// REPLAY-HEALTH-LOGGER (F2): the place order is in flight — the intent
 					// emits as PlacementOrdered now; Placed resolves only on actor-lifecycle
@@ -3706,11 +3703,9 @@ namespace OpenRA.Mods.CA.Traits
 
 			var baseCenter = baseCenterOverride ?? baseBuilder.GetBaseCenterForActor(actorInfo);
 
-			// DEF-PLACE-RETRY-01 (row def_place_retry): a tracking advisor is told that an attempt starts, and its candidate cells also pass the
-			// reservation mask the emission point applies (REFSCAN F2), so it cannot choose a cell that is refused there. Not tracking = as before.
+			// DEF-PLACE-RETRY-01 (row def_place_retry): the candidate cells of a tracking advisor also pass the reservation mask the emission
+			// point applies (REFSCAN F2), so it cannot choose a cell that is refused there. Not tracking = the mask is not asked.
 			var tracks = advisor is IBotDefensePlacementFeedback feedback && feedback.TracksAttempts;
-			if (tracks && producer != null)
-				((IBotDefensePlacementFeedback)advisor).BeginAttempt(producer.ActorID, actorInfo.Name);
 
 			// The advisor's candidate cells get the same spacing rule as findPos defenses.
 			var gap = BuildingGapRule.Resolve(player.PlayerActor.TraitsImplementing<IBotPlacementAdvisor>().FirstOrDefault(a => a.IsActive), true);

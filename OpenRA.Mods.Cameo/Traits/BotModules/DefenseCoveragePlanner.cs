@@ -56,13 +56,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Search annulus (cells) when no base builder is found.")]
 		public readonly int MaximumRadius = 20;
 
-		[Desc("DEF-PLACE-RETRY-01 (row def_place_retry): remember defence cells that were chosen and then not built on, skip them for a while,",
-			"and only choose among cells that also pass the base builder's reservation mask. False = no memory, no mask filter.")]
+		[Desc("DEF-PLACE-RETRY-01 (row def_place_retry): only choose among cells that also pass the base builder's reservation mask, and skip",
+			"a cell for a while after that mask refused it at the emission point. False = no mask filter, no memory.")]
 		public readonly bool PlaceRetryMemory = false;
-
-		[Desc("DEF-PLACE-RETRY-01: a queue that asks again for the same type sooner than this many ticks after its place order is waiting for",
-			"that order, not rejected.")]
-		public readonly int PlaceRetryGraceTicks = 5;
 
 		[Desc("DEF-PLACE-RETRY-01 prior (learnable def_place.reject_base): ticks a cell is skipped after its first rejection; the time doubles",
 			"with every further rejection of the same cell.")]
